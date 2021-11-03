@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { Column } from '../../components/column/Column';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTablePageDemo extends Component {
 
@@ -48,25 +48,22 @@ export class TreeTablePageDemo extends Component {
     render() {
         return (
             <div>
-                <TreeTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Page</h1>
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Page</span></h1>
                         <p>Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
+                    <AppDemoActions github="treetable/TreeTablePageDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
-                    <TreeTable value={this.state.nodes} paginator={true} rows={10}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <TreeTable value={this.state.nodes} paginator rows={10}>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size"></Column>
+                            <Column field="type" header="Type"></Column>
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTablePageDemoDoc />
@@ -130,11 +127,13 @@ export class TreeTablePageDemo extends Component {
     render() {
         return (
             <div>
-                <TreeTable value={this.state.nodes} paginator={true} rows={10}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <TreeTable value={this.state.nodes} paginator rows={10}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
             </div>
         )
     }
@@ -181,13 +180,15 @@ const TreeTablePageDemo = () => {
 
     return (
         <div>
-            <TreeTable value={nodes} paginator={true} rows={10}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <TreeTable value={nodes} paginator rows={10}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
-    )
+    );
 }
                 `
             },
@@ -199,7 +200,7 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 
 const TreeTablePageDemo = () => {
-    const [nodes, setNodes] = useState<any>([]);
+    const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
         let files = [];
@@ -231,13 +232,73 @@ const TreeTablePageDemo = () => {
 
     return (
         <div>
-            <TreeTable value={nodes} paginator={true} rows={10}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <TreeTable value={nodes} paginator rows={10}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
-    )
+    );
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+
+const TreeTablePageDemo = () => {
+    const [nodes, setNodes] = useState([]);
+
+    useEffect(() => {
+        let files = [];
+        for (let i = 0; i < 50; i++) {
+            let node = {
+                key: i,
+                data: {
+                    name: 'Item ' + i,
+                    size: Math.floor(Math.random() * 1000) + 1 + 'kb',
+                    type: 'Type ' + i
+                },
+                children: [
+                    {
+                        key: i + ' - 0',
+                        data: {
+                            name: 'Item ' + i + ' - 0',
+                            size: Math.floor(Math.random() * 1000) + 1 + 'kb',
+                            type: 'Type ' + i
+                        }
+                    }
+                ]
+            };
+
+            files.push(node);
+        }
+
+        setNodes(files);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <TreeTable value={nodes} paginator rows={10}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
+        </div>
+    );
 }
                 `
             }
@@ -250,16 +311,10 @@ const TreeTablePageDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TreeTablePageDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'TreeTablePageDemo', sources: this.sources })
                     }
                 </TabView>
             </div>

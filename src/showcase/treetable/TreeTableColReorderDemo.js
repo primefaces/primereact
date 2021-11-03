@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
+import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableColReorderDemo extends Component {
 
@@ -24,25 +24,22 @@ export class TreeTableColReorderDemo extends Component {
     render() {
         return (
             <div>
-                <TreeTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Column Reorder</h1>
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Column Reorder</span></h1>
                         <p>Order of the columns can be changed using drag and drop.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
+                    <AppDemoActions github="treetable/TreeTableColReorderDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
-                    <TreeTable value={this.state.nodes} reorderableColumns>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <TreeTable value={this.state.nodes} reorderableColumns>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size"></Column>
+                            <Column field="type" header="Type"></Column>
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableColReorderDemoDoc />
@@ -76,17 +73,19 @@ export class TreeTableColReorderDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <TreeTable value={this.state.nodes} reorderableColumns>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size"></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <TreeTable value={this.state.nodes} reorderableColumns>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
             </div>
         )
     }
@@ -111,11 +110,13 @@ const TreeTableColReorderDemo = () => {
 
     return (
         <div>
-            <TreeTable value={nodes} reorderableColumns>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <TreeTable value={nodes} reorderableColumns>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
     )
 }
@@ -139,11 +140,49 @@ const TreeTableColReorderDemo = () => {
 
     return (
         <div>
-            <TreeTable value={nodes} reorderableColumns>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size"></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <TreeTable value={nodes} reorderableColumns>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
+        </div>
+    )
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+
+const TreeTableColReorderDemo = () => {
+    const [nodes, setNodes] = useState([]);
+    const nodeservice = new NodeService();
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <TreeTable value={nodes} reorderableColumns>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size"></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
     )
 }
@@ -158,16 +197,10 @@ const TreeTableColReorderDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TreeTableColReorderDemo" sources={[key, value]} service="NodeService" data="treetablenodes" />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'TreeTableColReorderDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })
                     }
                 </TabView>
             </div>

@@ -1,38 +1,20 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {InputText} from '../inputtext/InputText';
-import {Checkbox} from '../checkbox/Checkbox';
+import React, { Component } from 'react';
+import { InputText } from '../inputtext/InputText';
+import { Checkbox } from '../checkbox/Checkbox';
+import { Ripple } from '../ripple/Ripple';
+import { ObjectUtils } from '../utils/Utils';
 
 export class MultiSelectHeader extends Component {
 
-    static defaultProps = {
-        filter: false,
-        filterValue: null,
-        filterPlaceholder: null,
-        onFilter: null,
-        onClose: null,
-        onToggleAll: null,
-        allChecked: false
-    }
+    constructor(props) {
+        super(props);
 
-    static propTypes = {
-        filter: PropTypes.bool,
-        filterValue: PropTypes.string,
-        filterPlaceholder: PropTypes.string,
-        allChecked: PropTypes.bool,
-        onFilter: PropTypes.func,
-        onClose: PropTypes.func,
-        onToggleAll: PropTypes.func
-    }
-
-    constructor() {
-        super();
         this.onFilter = this.onFilter.bind(this);
-        this.onToggleAll = this.onToggleAll.bind(this);
+        this.onSelectAll = this.onSelectAll.bind(this);
     }
 
     onFilter(event) {
-        if(this.props.onFilter) {
+        if (this.props.onFilter) {
             this.props.onFilter({
                 originalEvent: event,
                 query: event.target.value
@@ -40,11 +22,11 @@ export class MultiSelectHeader extends Component {
         }
     }
 
-    onToggleAll(event) {
-        if(this.props.onToggleAll) {
-            this.props.onToggleAll({
+    onSelectAll(event) {
+        if (this.props.onSelectAll) {
+            this.props.onSelectAll({
                 originalEvent: event,
-                checked: this.props.allChecked
+                checked: this.props.selectAll
             });
         }
     }
@@ -54,27 +36,50 @@ export class MultiSelectHeader extends Component {
             return (
                 <div className="p-multiselect-filter-container">
                     <InputText type="text" role="textbox" value={this.props.filterValue} onChange={this.onFilter}
-                                className="p-inputtext p-component" placeholder={this.props.filterPlaceholder}/>
+                        className="p-multiselect-filter" placeholder={this.props.filterPlaceholder} />
                     <span className="p-multiselect-filter-icon pi pi-search"></span>
                 </div>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     render() {
-        let filterElement = this.renderFilterElement();
-
-        return (
-                <div className="p-multiselect-header">
-                    <Checkbox checked={this.props.allChecked} onChange={this.onToggleAll} role="checkbox" aria-checked={this.props.allChecked}/>
-                    {filterElement}
-                    <button type="button" className="p-multiselect-close p-link" onClick={this.props.onClose}>
-                        <span className="p-multiselect-close-icon pi pi-times"></span>
-                    </button>
-                </div>
+        const filterElement = this.renderFilterElement();
+        const checkboxElement = this.props.showSelectAll && <Checkbox checked={this.props.selectAll} onChange={this.onSelectAll} role="checkbox" aria-checked={this.props.selectAll} />;
+        const closeElement = (
+            <button type="button" className="p-multiselect-close p-link" onClick={this.props.onClose}>
+                <span className="p-multiselect-close-icon pi pi-times"></span>
+                <Ripple />
+            </button>
         );
+        const element = (
+            <div className="p-multiselect-header">
+                {checkboxElement}
+                {filterElement}
+                {closeElement}
+            </div>
+        );
+
+        if (this.props.template) {
+            const defaultOptions = {
+                className: 'p-multiselect-header',
+                checkboxElement,
+                checked: this.props.selectAll,
+                onChange: this.onSelectAll,
+                filterElement,
+                closeElement,
+                closeElementClassName: 'p-multiselect-close p-link',
+                closeIconClassName: 'p-multiselect-close-icon pi pi-times',
+                onCloseClick: this.props.onClose,
+                element,
+                props: this.props
+            }
+
+            return ObjectUtils.getJSXElement(this.props.template, defaultOptions);
+        }
+
+        return element;
     }
 }

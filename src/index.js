@@ -9,7 +9,9 @@ import { HashRouter } from 'react-router-dom';
 ReactDOM.render(
     <HashRouter>
         <ScrollToTop>
-            <App></App>
+            <React.StrictMode>
+                <App></App>
+            </React.StrictMode>
         </ScrollToTop>
     </HashRouter>,
     document.getElementById('root')

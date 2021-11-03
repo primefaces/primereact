@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
+import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
 import { MultiSelect } from '../../components/multiselect/MultiSelect';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableColTogglerDemo extends Component {
 
@@ -53,24 +53,21 @@ export class TreeTableColTogglerDemo extends Component {
 
         return (
             <div>
-                <TreeTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Column Toggler</h1>
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Column Toggler</span></h1>
                         <p>MultiSelect component can be used to implement column toggler functionality.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
+                    <AppDemoActions github="treetable/TreeTableColTogglerDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
-                    <TreeTable value={this.state.nodes} header={header}>
-                        <Column key="name" field="name" header="Name" expander />
-                        {columns}
-                    </TreeTable>
+                    <div className="card">
+                        <TreeTable value={this.state.nodes} header={header}>
+                            <Column key="name" field="name" header="Name" expander />
+                            {columns}
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableColTogglerDemoDoc />
@@ -99,13 +96,13 @@ export class TreeTableColTogglerDemo extends Component {
     constructor(props) {
         super(props);
         let columns = [
-            {field: 'size', header: 'Size'},
-            {field: 'type', header: 'Type'}
+            { field: 'size', header: 'Size' },
+            { field: 'type', header: 'Type' }
         ];
 
         this.colOptions = [];
         for (let col of columns) {
-            this.colOptions.push({label: col.header, value: col});
+            this.colOptions.push({ label: col.header, value: col });
         }
 
         this.state = {
@@ -118,18 +115,18 @@ export class TreeTableColTogglerDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     onColumnToggle(event) {
-        this.setState({cols: event.value});
+        this.setState({ cols: event.value });
     }
 
     render() {
         const header = (
-            <div style={{textAlign:'left'}}>
+            <div style={{ textAlign: 'left' }}>
                 <MultiSelect value={this.state.cols} options={this.colOptions} onChange={this.onColumnToggle}
-                        style={{width:'250px'}}/>
+                    style={{ width: '250px' }} />
             </div>
         );
 
@@ -139,10 +136,12 @@ export class TreeTableColTogglerDemo extends Component {
 
         return (
             <div>
-                <TreeTable value={this.state.nodes} header={header}>
-                    <Column key="name" field="name" header="Name" expander />
-                    {columns}
-                </TreeTable>
+                <div className="card">
+                    <TreeTable value={this.state.nodes} header={header}>
+                        <Column key="name" field="name" header="Name" expander />
+                        {columns}
+                    </TreeTable>
+                </div>
             </div>
         )
     }
@@ -160,17 +159,18 @@ import { MultiSelect } from 'primereact/multiselect';
 
 const TreeTableColTogglerDemo = () => {
     let columns = [
-        {field: 'size', header: 'Size'},
-        {field: 'type', header: 'Type'}
+        { field: 'size', header: 'Size' },
+        { field: 'type', header: 'Type' }
     ];
 
     let colOptions = [];
     for (let col of columns) {
-        colOptions.push({label: col.header, value: col});
+        colOptions.push({ label: col.header, value: col });
     }
 
     const [nodes, setNodes] = useState([]);
     const [cols, setCols] = useState(columns);
+
     const nodeservice = new NodeService();
 
     useEffect(() => {
@@ -182,24 +182,26 @@ const TreeTableColTogglerDemo = () => {
     }
 
     const header = (
-        <div style={{textAlign:'left'}}>
+        <div style={{ textAlign: 'left' }}>
             <MultiSelect value={cols} options={colOptions} onChange={onColumnToggle}
-                    style={{width:'250px'}}/>
+                style={{ width: '250px' }} />
         </div>
     );
 
-    const activeColumns = cols.map((col, i) => {
+    const _columns = cols.map((col, i) => {
         return <Column key={col.field} field={col.field} header={col.header} />;
     });
 
     return (
         <div>
-            <TreeTable value={nodes} header={header}>
-                <Column key="name" field="name" header="Name" expander />
-                {activeColumns}
-            </TreeTable>
+            <div className="card">
+                <TreeTable value={nodes} header={header}>
+                    <Column key="name" field="name" header="Name" expander />
+                    {_columns}
+                </TreeTable>
+            </div>
         </div>
-    )
+    );
 }
                 `
             },
@@ -214,46 +216,113 @@ import { MultiSelect } from 'primereact/multiselect';
 
 const TreeTableColTogglerDemo = () => {
     let columns = [
-        {field: 'size', header: 'Size'},
-        {field: 'type', header: 'Type'}
+        { field: 'size', header: 'Size' },
+        { field: 'type', header: 'Type' }
     ];
 
     let colOptions = [];
     for (let col of columns) {
-        colOptions.push({label: col.header, value: col});
+        colOptions.push({ label: col.header, value: col });
     }
 
     const [nodes, setNodes] = useState([]);
     const [cols, setCols] = useState(columns);
+
     const nodeservice = new NodeService();
 
     useEffect(() => {
         nodeservice.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const onColumnToggle = (event: any) => {
+    const onColumnToggle = (event) => {
         setCols(event.value);
     }
 
     const header = (
-        <div style={{textAlign:'left'}}>
+        <div style={{ textAlign: 'left' }}>
             <MultiSelect value={cols} options={colOptions} onChange={onColumnToggle}
-                    style={{width:'250px'}}/>
+                style={{ width: '250px' }} />
         </div>
     );
 
-    const activeColumns = cols.map((col: any, i: number) => {
+    const _columns = cols.map((col, i) => {
         return <Column key={col.field} field={col.field} header={col.header} />;
     });
 
     return (
         <div>
-            <TreeTable value={nodes} header={header}>
-                <Column key="name" field="name" header="Name" expander />
-                {activeColumns}
-            </TreeTable>
+            <div className="card">
+                <TreeTable value={nodes} header={header}>
+                    <Column key="name" field="name" header="Name" expander />
+                    {_columns}
+                </TreeTable>
+            </div>
         </div>
-    )
+    );
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>
+        <script src="https://unpkg.com/primereact/multiselect/multiselect.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+const { MultiSelect } = primereact.multiselect;
+
+const TreeTableColTogglerDemo = () => {
+    let columns = [
+        { field: 'size', header: 'Size' },
+        { field: 'type', header: 'Type' }
+    ];
+
+    let colOptions = [];
+    for (let col of columns) {
+        colOptions.push({ label: col.header, value: col });
+    }
+
+    const [nodes, setNodes] = useState([]);
+    const [cols, setCols] = useState(columns);
+
+    const nodeservice = new NodeService();
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onColumnToggle = (event) => {
+        setCols(event.value);
+    }
+
+    const header = (
+        <div style={{ textAlign: 'left' }}>
+            <MultiSelect value={cols} options={colOptions} onChange={onColumnToggle}
+                style={{ width: '250px' }} />
+        </div>
+    );
+
+    const _columns = cols.map((col, i) => {
+        return <Column key={col.field} field={col.field} header={col.header} />;
+    });
+
+    return (
+        <div>
+            <div className="card">
+                <TreeTable value={nodes} header={header}>
+                    <Column key="name" field="name" header="Name" expander />
+                    {_columns}
+                </TreeTable>
+            </div>
+        </div>
+    );
 }
                 `
             }
@@ -266,16 +335,10 @@ const TreeTableColTogglerDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TreeTableColTogglerDemo" sources={[key, value]} service="NodeService" data="treetablenodes" />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'TreeTableColTogglerDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })
                     }
                 </TabView>
             </div>

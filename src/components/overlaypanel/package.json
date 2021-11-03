@@ -1,0 +1,6 @@
+{
+    "main": "./overlaypanel.cjs.js",
+    "module": "./overlaypanel.esm.js",
+    "unpkg": "./overlaypanel.min.js",
+    "types": "./overlaypanel.d.ts"
+}

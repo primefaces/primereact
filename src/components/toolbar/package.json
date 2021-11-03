@@ -1,0 +1,6 @@
+{
+    "main": "./toolbar.cjs.js",
+    "module": "./toolbar.esm.js",
+    "unpkg": "./toolbar.min.js",
+    "types": "./toolbar.d.ts"
+}

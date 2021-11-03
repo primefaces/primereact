@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class DialogDoc extends Component {
 
@@ -14,20 +14,21 @@ export class DialogDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Dialog} from 'primereact/dialog';
-import {Button} from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import './DialogDemo.css';
 
 export class DialogDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             displayBasic: false,
             displayBasic2: false,
-            displayBlockScroll: false,
             displayModal: false,
             displayMaximizable: false,
             displayPosition: false,
+            displayResponsive: false,
             position: 'center'
         };
 
@@ -59,8 +60,8 @@ export class DialogDemo extends Component {
     renderFooter(name) {
         return (
             <div>
-                <Button label="Yes" icon="pi pi-check" onClick={() => this.onHide(name)} />
-                <Button label="No" icon="pi pi-times" onClick={() => this.onHide(name)} className="p-button-secondary"/>
+                <Button label="No" icon="pi pi-times" onClick={() => this.onHide(name)} className="p-button-text" />
+                <Button label="Yes" icon="pi pi-check" onClick={() => this.onHide(name)} autoFocus />
             </div>
         );
     }
@@ -68,86 +69,100 @@ export class DialogDemo extends Component {
     render() {
         return (
             <div className="dialog-demo">
-                <h3>Basic</h3>
-                <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayBasic')} />
-                <Dialog header="Godfather I" visible={this.state.displayBasic} style={{width: '50vw'}} onHide={() => this.onHide('displayBasic')} footer={this.renderFooter('displayBasic')}>
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                        kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </Dialog>
+                <div className="card">
+                    <h5>Basic</h5>
+                    <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayBasic')} />
+                    <Dialog header="Header" visible={this.state.displayBasic} style={{ width: '50vw' }} footer={this.renderFooter('displayBasic')} onHide={() => this.onHide('displayBasic')}>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </Dialog>
 
-                <Button label="Long Content" icon="pi pi-external-link" onClick={() => this.onClick('displayBasic2')} />
-                <Dialog header="Godfather Casting" visible={this.state.displayBasic2} style={{width: '50vw'}} onHide={() => this.onHide('displayBasic2')} blockScroll footer={this.renderFooter('displayBasic2')}>
-                    Puzo was first to show interest in having Marlon Brando portray Don Vito Corleone by sending a letter to Brando in which he stated Brando was the "only actor who can play the Godfather." Despite Puzo's wishes, the executives at Paramount were against having Brando, partly due to the poor performance of his recent films and also his short temper. Coppola favored Brando or Laurence Olivier for the role, but Olivier's agent refused the role claiming Olivier was sick; however, Olivier went on to star in Sleuth later that year. The studio mainly pushed for Ernest Borgnine to receive the part. Other considerations were George C. Scott, Richard Conte, Anthony Quinn, and Orson Welles.
-                    <br/><br/>
-                    After months of debate between Coppola and Paramount over Brando, the two finalists for the role were Borgnine and Brando, the latter of whom Paramount president Stanley Jaffe required to perform a screen test. Coppola did not want to offend Brando and stated that he needed to test equipment in order to set up the screen test at Brando's California residence. For make-up, Brando stuck cotton balls in his cheeks, put shoe polish in his hair to darken it, and rolled his collar. Coppola placed Brando's audition tape in the middle of the videos of the audition tapes as the Paramount executives watched them. The executives were impressed with Brando's efforts and allowed Coppola to cast Brando for the role if Brando accepted a lower salary and put up a bond to ensure he would not cause any delays in production. Brando earned $1.6 million from a net participation deal.
-                    <br/><br/>
-                    From the start of production, Coppola wanted Robert Duvall to play the part of Tom Hagen. After screen testing several other actors, Coppola eventually got his wish and Duvall was awarded the part of Tom Hagen. Al Martino, a then famed singer in nightclubs, was notified of the character Johnny Fontane by a friend who read the eponymous novel and felt Martino represented the character of Johnny Fontane. Martino then contacted producer Albert S. Ruddy, who gave him the part. However, Martino was stripped of the part after Coppola became director and then awarded the role to singer Vic Damone. According to Martino, after being stripped of the role, he went to Russell Bufalino, his godfather and a crime boss, who then orchestrated the publication of various news articles that claimed Coppola was unaware of Ruddy giving Martino the part. Damone eventually dropped the role because he did not want to provoke the mob, in addition to being paid too little. Ultimately, the part of Johnny Fontane was given to Martino.
-                    <br/><br/>
-                    Robert De Niro originally was given the part of Paulie Gatto. A spot in The Gang That Couldn't Shoot Straight opened up after Al Pacino quit the project in favor of The Godfather, which led De Niro to audition for the role and leave The Godfather after receiving the part. After De Niro quit, Johnny Martino was given the role of Gatto. Coppola cast Diane Keaton for the role of Kay Adams due to her reputation for being eccentric. John Cazale was given the part of Fredo Corleone after Coppola saw him perform in an Off Broadway production. Gianni Russo was given the role of Carlo Rizzi after he was asked to perform a screen test in which he acted out the fight between Rizzi and Connie.
-                    <br/><br/>
-                    Nearing the start of filming on March 29, Michael Corleone had yet to be cast. Paramount executives wanted a popular actor, either Warren Beatty or Robert Redford. Producer Robert Evans wanted Ryan O'Neal to receive the role in part due to his recent success in Love Story. Pacino was Coppola's favorite for the role as he could picture him roaming the Sicilian countryside, and wanted an unknown actor who looked like an Italian-American. However, Paramount executives found Pacino to be too short to play Michael. Dustin Hoffman, Martin Sheen, and James Caan also auditioned. Caan was well received by the Paramount executives and was given the part of Michael initially, while the role of Sonny Corleone was awarded to Carmine Caridi. Coppola still pushed for Pacino to play Michael after the fact and Evans eventually conceded, allowing Pacino to have the role of Michael as long as Caan played Sonny. Evans preferred Caan over Caridi because Caan was seven inches shorter than Caridi, which was much closer to Pacino's height. Despite agreeing to play Michael Corleone, Pacino was contracted to star in MGM's The Gang That Couldn't Shoot Straight, but the two studios agreed on a settlement and Pacino was signed by Paramount three weeks before shooting began.
-                    <br/><br/>
-                    Coppola gave several roles in the film to family members. He gave his sister, Talia Shire, the role of Connie Corleone. His daughter Sofia played Michael Francis Rizzi, Connie's and Carlo's newborn son. Carmine Coppola, his father, appeared in the film as an extra playing a piano during a scene. Coppola's wife, mother, and two sons all appeared as extras in the picture. Several smaller roles, like Luca Brasi, were cast after the filming had started.
-                    <br/><br/>
-                </Dialog>
+                    <Button label="Long Content" icon="pi pi-external-link" onClick={() => this.onClick('displayBasic2')} />
+                    <Dialog header="Header" visible={this.state.displayBasic2} style={{ width: '50vw' }} footer={this.renderFooter('displayBasic2')} onHide={() => this.onHide('displayBasic2')}>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <br />
+                        <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                        qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam,
+                        quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                        vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                        <br />
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                        similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+                        cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
+                        eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                        <br />
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <br />
+                        <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                        qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam,
+                        quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                        vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                        <br />
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                        similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+                        cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
+                    eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                        <br />
+                    </Dialog>
 
-                <h3>BlockScroll</h3>
-                <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayBlockScroll')} />
-                <Dialog header="Godfather I" visible={this.state.displayBlockScroll} style={{width: '50vw'}} onHide={() => this.onHide('displayBlockScroll')} blockScroll
-                    footer={this.renderFooter('displayBlockScroll')}>
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                        kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </Dialog>
+                    <h5>Without Modal</h5>
+                    <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayModal')} />
+                    <Dialog header="Header" visible={this.state.displayModal} modal={false} style={{ width: '50vw' }} footer={this.renderFooter('displayModal')} onHide={() => this.onHide('displayModal')}>
+                        <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </Dialog>
 
-                <h3>Without Modal</h3>
-                <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayModal')} />
-                <Dialog header="Godfather I" visible={this.state.displayModal} style={{width: '50vw'}} onHide={() => this.onHide('displayModal')} modal={false}
-                    footer={this.renderFooter('displayModal')}>
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                        kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </Dialog>
+                    <h5>Responsive</h5>
+                    <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayResponsive')} />
+                    <Dialog header="Header" visible={this.state.displayResponsive} onHide={() => this.onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={this.renderFooter('displayResponsive')}>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </Dialog>
 
-                <h3>Maximizable</h3>
-                <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayMaximizable')} />
-                <Dialog header="Godfather I" visible={this.state.displayMaximizable} style={{width: '50vw'}} onHide={() => this.onHide('displayMaximizable')} maximizable blockScroll
-                    footer={this.renderFooter('displayMaximizable')}>
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </Dialog>
+                    <h5>Maximizable</h5>
+                    <Button label="Show" icon="pi pi-external-link" onClick={() => this.onClick('displayMaximizable')} />
+                    <Dialog header="Header" visible={this.state.displayMaximizable} maximizable modal style={{ width: '50vw' }} footer={this.renderFooter('displayMaximizable')} onHide={() => this.onHide('displayMaximizable')}>
+                        <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </Dialog>
 
-                <h3>Position</h3>
-                <div className="p-grid p-dir-col">
-                    <div className="p-col">
-                        <Button label="Left" icon="pi pi-arrow-right" onClick={() => this.onClick('displayPosition', 'left')} className="p-button-warning" />
-                        <Button label="Right" icon="pi pi-arrow-left" onClick={() => this.onClick('displayPosition', 'right')} className="p-button-warning" />
+                    <h5>Position</h5>
+                    <div className="p-grid p-dir-col">
+                        <div className="p-col">
+                            <Button label="Left" icon="pi pi-arrow-right" onClick={() => this.onClick('displayPosition', 'left')} className="p-button-warning" />
+                            <Button label="Right" icon="pi pi-arrow-left" onClick={() => this.onClick('displayPosition', 'right')} className="p-button-warning" />
+                        </div>
+                        <div className="p-col">
+                            <Button label="Top" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'top')} className="p-button-warning" />
+                            <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'top-left')} className="p-button-warning" />
+                            <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'top-right')} className="p-button-warning" />
+                        </div>
+                        <div className="p-col">
+                            <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottom')} className="p-button-warning" />
+                            <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottom-left')} className="p-button-warning" />
+                            <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottom-right')} className="p-button-warning" />
+                        </div>
                     </div>
-                    <div className="p-col">
-                        <Button label="Top" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'top')} className="p-button-warning" />
-                        <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'topleft')} className="p-button-warning" />
-                        <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => this.onClick('displayPosition', 'topright')} className="p-button-warning" />
-                    </div>
-                    <div className="p-col">
-                        <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottom')} className="p-button-warning" />
-                        <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottomleft')} className="p-button-warning" />
-                        <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => this.onClick('displayPosition', 'bottomright')} className="p-button-warning" />
-                    </div>
+
+                    <Dialog header="Header" visible={this.state.displayPosition} position={this.state.position} modal style={{ width: '50vw' }} footer={this.renderFooter('displayPosition')} onHide={() => this.onHide('displayPosition')}
+                        draggable={false} resizable={false}>
+                        <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </Dialog>
                 </div>
-
-                <Dialog header="Godfather I" visible={this.state.displayPosition} style={{width: '50vw'}} onHide={() => this.onHide('displayPosition')}
-                    position={this.state.position} blockScroll footer={this.renderFooter('displayPosition')}>
-                    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                        kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-                </Dialog>
             </div>
         )
     }
@@ -158,121 +173,145 @@ export class DialogDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {Dialog} from 'primereact/dialog';
-import {Button} from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import './DialogDemo.css';
 
 const DialogDemo = () => {
     const [displayBasic, setDisplayBasic] = useState(false);
     const [displayBasic2, setDisplayBasic2] = useState(false);
-    const [displayBlockScroll, setDisplayBlockScroll] = useState(false);
     const [displayModal, setDisplayModal] = useState(false);
     const [displayMaximizable, setDisplayMaximizable] = useState(false);
     const [displayPosition, setDisplayPosition] = useState(false);
+    const [displayResponsive, setDisplayResponsive] = useState(false);
     const [position, setPosition] = useState('center');
 
-    const onClick = (stateMethod, position = '') => {
-        stateMethod(true);
+    const dialogFuncMap = {
+        'displayBasic': setDisplayBasic,
+        'displayBasic2': setDisplayBasic2,
+        'displayModal': setDisplayModal,
+        'displayMaximizable': setDisplayMaximizable,
+        'displayPosition': setDisplayPosition,
+        'displayResponsive': setDisplayResponsive
+    }
+
+    const onClick = (name, position) => {
+        dialogFuncMap[\`\${name}\`](true);
 
         if (position) {
             setPosition(position);
         }
     }
 
-    const onHide = (stateMethod) => {
-        stateMethod(false);
+    const onHide = (name) => {
+        dialogFuncMap[\`\${name}\`](false);
     }
 
-    const renderFooter = (stateMethod) => {
+    const renderFooter = (name) => {
         return (
             <div>
-                <Button label="Yes" icon="pi pi-check" onClick={() => onHide(stateMethod)} />
-                <Button label="No" icon="pi pi-times" onClick={() => onHide(stateMethod)} className="p-button-secondary"/>
+                <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />
+                <Button label="Yes" icon="pi pi-check" onClick={() => onHide(name)} autoFocus />
             </div>
         );
     }
 
     return (
         <div className="dialog-demo">
-            <h3>Basic</h3>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayBasic)} />
-            <Dialog header="Godfather I" visible={displayBasic} style={{width: '50vw'}} onHide={() => onHide(setDisplayBasic)} footer={renderFooter(setDisplayBasic)}>
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-            </Dialog>
+            <div className="card">
+                <h5>Basic</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayBasic')} />
+                <Dialog header="Header" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => onHide('displayBasic')}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
 
-            <Button label="Long Content" icon="pi pi-external-link" onClick={() => onClick(setDisplayBasic2)} />
-            <Dialog header="Godfather Casting" visible={displayBasic2} style={{width: '50vw'}} onHide={() => onHide(setDisplayBasic2)} blockScroll footer={renderFooter(setDisplayBasic2)}>
-                Puzo was first to show interest in having Marlon Brando portray Don Vito Corleone by sending a letter to Brando in which he stated Brando was the "only actor who can play the Godfather." Despite Puzo's wishes, the executives at Paramount were against having Brando, partly due to the poor performance of his recent films and also his short temper. Coppola favored Brando or Laurence Olivier for the role, but Olivier's agent refused the role claiming Olivier was sick; however, Olivier went on to star in Sleuth later that year. The studio mainly pushed for Ernest Borgnine to receive the part. Other considerations were George C. Scott, Richard Conte, Anthony Quinn, and Orson Welles.
-                <br/><br/>
-                After months of debate between Coppola and Paramount over Brando, the two finalists for the role were Borgnine and Brando, the latter of whom Paramount president Stanley Jaffe required to perform a screen test. Coppola did not want to offend Brando and stated that he needed to test equipment in order to set up the screen test at Brando's California residence. For make-up, Brando stuck cotton balls in his cheeks, put shoe polish in his hair to darken it, and rolled his collar. Coppola placed Brando's audition tape in the middle of the videos of the audition tapes as the Paramount executives watched them. The executives were impressed with Brando's efforts and allowed Coppola to cast Brando for the role if Brando accepted a lower salary and put up a bond to ensure he would not cause any delays in production. Brando earned $1.6 million from a net participation deal.
-                <br/><br/>
-                From the start of production, Coppola wanted Robert Duvall to play the part of Tom Hagen. After screen testing several other actors, Coppola eventually got his wish and Duvall was awarded the part of Tom Hagen. Al Martino, a then famed singer in nightclubs, was notified of the character Johnny Fontane by a friend who read the eponymous novel and felt Martino represented the character of Johnny Fontane. Martino then contacted producer Albert S. Ruddy, who gave him the part. However, Martino was stripped of the part after Coppola became director and then awarded the role to singer Vic Damone. According to Martino, after being stripped of the role, he went to Russell Bufalino, his godfather and a crime boss, who then orchestrated the publication of various news articles that claimed Coppola was unaware of Ruddy giving Martino the part. Damone eventually dropped the role because he did not want to provoke the mob, in addition to being paid too little. Ultimately, the part of Johnny Fontane was given to Martino.
-                <br/><br/>
-                Robert De Niro originally was given the part of Paulie Gatto. A spot in The Gang That Couldn't Shoot Straight opened up after Al Pacino quit the project in favor of The Godfather, which led De Niro to audition for the role and leave The Godfather after receiving the part. After De Niro quit, Johnny Martino was given the role of Gatto. Coppola cast Diane Keaton for the role of Kay Adams due to her reputation for being eccentric. John Cazale was given the part of Fredo Corleone after Coppola saw him perform in an Off Broadway production. Gianni Russo was given the role of Carlo Rizzi after he was asked to perform a screen test in which he acted out the fight between Rizzi and Connie.
-                <br/><br/>
-                Nearing the start of filming on March 29, Michael Corleone had yet to be cast. Paramount executives wanted a popular actor, either Warren Beatty or Robert Redford. Producer Robert Evans wanted Ryan O'Neal to receive the role in part due to his recent success in Love Story. Pacino was Coppola's favorite for the role as he could picture him roaming the Sicilian countryside, and wanted an unknown actor who looked like an Italian-American. However, Paramount executives found Pacino to be too short to play Michael. Dustin Hoffman, Martin Sheen, and James Caan also auditioned. Caan was well received by the Paramount executives and was given the part of Michael initially, while the role of Sonny Corleone was awarded to Carmine Caridi. Coppola still pushed for Pacino to play Michael after the fact and Evans eventually conceded, allowing Pacino to have the role of Michael as long as Caan played Sonny. Evans preferred Caan over Caridi because Caan was seven inches shorter than Caridi, which was much closer to Pacino's height. Despite agreeing to play Michael Corleone, Pacino was contracted to star in MGM's The Gang That Couldn't Shoot Straight, but the two studios agreed on a settlement and Pacino was signed by Paramount three weeks before shooting began.
-                <br/><br/>
-                Coppola gave several roles in the film to family members. He gave his sister, Talia Shire, the role of Connie Corleone. His daughter Sofia played Michael Francis Rizzi, Connie's and Carlo's newborn son. Carmine Coppola, his father, appeared in the film as an extra playing a piano during a scene. Coppola's wife, mother, and two sons all appeared as extras in the picture. Several smaller roles, like Luca Brasi, were cast after the filming had started.
-                <br/><br/>
-            </Dialog>
+                <Button label="Long Content" icon="pi pi-external-link" onClick={() => onClick('displayBasic2')} />
+                <Dialog header="Header" visible={displayBasic2} style={{ width: '50vw' }} footer={renderFooter('displayBasic2')} onHide={() => onHide('displayBasic2')}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <br />
+                    <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam,
+                    quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                    vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                    <br />
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                    similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+                    cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
+                    eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                    <br />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <br />
+                    <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam,
+                    quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                    vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                    <br />
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                    similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+                    cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
+                eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                    <br />
+                </Dialog>
 
-            <h3>BlockScroll</h3>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayBlockScroll)} />
-            <Dialog header="Godfather I" visible={displayBlockScroll} style={{width: '50vw'}} onHide={() => onHide(setDisplayBlockScroll)} blockScroll
-                footer={renderFooter(setDisplayBlockScroll)}>
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-            </Dialog>
+                <h5>Without Modal</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayModal')} />
+                <Dialog header="Header" visible={displayModal} modal={false} style={{ width: '50vw' }} footer={renderFooter('displayModal')} onHide={() => onHide('displayModal')}>
+                    <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
 
-            <h3>Without Modal</h3>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayModal)} />
-            <Dialog header="Godfather I" visible={displayModal} style={{width: '50vw'}} onHide={() => onHide(setDisplayModal)} modal={false}
-                footer={renderFooter(setDisplayModal)}>
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-            </Dialog>
+                <h5>Responsive</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
+                <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={renderFooter('displayResponsive')}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
 
-            <h3>Maximizable</h3>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayMaximizable)} />
-            <Dialog header="Godfather I" visible={displayMaximizable} style={{width: '50vw'}} onHide={() => onHide(setDisplayMaximizable)} maximizable blockScroll
-                footer={renderFooter(setDisplayMaximizable)}>
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-            </Dialog>
+                <h5>Maximizable</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayMaximizable')} />
+                <Dialog header="Header" visible={displayMaximizable} maximizable modal style={{ width: '50vw' }} footer={renderFooter('displayMaximizable')} onHide={() => onHide('displayMaximizable')}>
+                    <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
 
-            <h3>Position</h3>
-            <div className="p-grid p-dir-col">
-                <div className="p-col">
-                    <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick(setDisplayPosition, 'left')} className="p-button-warning" />
-                    <Button label="Right" icon="pi pi-arrow-left" onClick={() => onClick(setDisplayPosition, 'right')} className="p-button-warning" />
+                <h5>Position</h5>
+                <div className="p-grid p-dir-col">
+                    <div className="p-col">
+                        <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick('displayPosition', 'left')} className="p-button-warning" />
+                        <Button label="Right" icon="pi pi-arrow-left" onClick={() => onClick('displayPosition', 'right')} className="p-button-warning" />
+                    </div>
+                    <div className="p-col">
+                        <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top')} className="p-button-warning" />
+                        <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top-left')} className="p-button-warning" />
+                        <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top-right')} className="p-button-warning" />
+                    </div>
+                    <div className="p-col">
+                        <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom')} className="p-button-warning" />
+                        <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom-left')} className="p-button-warning" />
+                        <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom-right')} className="p-button-warning" />
+                    </div>
                 </div>
-                <div className="p-col">
-                    <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'top')} className="p-button-warning" />
-                    <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'topleft')} className="p-button-warning" />
-                    <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'topright')} className="p-button-warning" />
-                </div>
-                <div className="p-col">
-                    <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottom')} className="p-button-warning" />
-                    <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottomleft')} className="p-button-warning" />
-                    <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottomright')} className="p-button-warning" />
-                </div>
+
+                <Dialog header="Header" visible={displayPosition} position={position} modal style={{ width: '50vw' }} footer={renderFooter('displayPosition')} onHide={() => onHide('displayPosition')}
+                    draggable={false} resizable={false}>
+                    <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
             </div>
-
-            <Dialog header="Godfather I" visible={displayPosition} style={{width: '50vw'}} onHide={() => onHide(setDisplayPosition)}
-                position={position} blockScroll footer={renderFooter(setDisplayPosition)}>
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-            </Dialog>
         </div>
     )
 }
@@ -282,121 +321,299 @@ const DialogDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {Dialog} from 'primereact/dialog';
-import {Button} from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import './DialogDemo.css';
 
 const DialogDemo = () => {
     const [displayBasic, setDisplayBasic] = useState(false);
     const [displayBasic2, setDisplayBasic2] = useState(false);
-    const [displayBlockScroll, setDisplayBlockScroll] = useState(false);
     const [displayModal, setDisplayModal] = useState(false);
     const [displayMaximizable, setDisplayMaximizable] = useState(false);
     const [displayPosition, setDisplayPosition] = useState(false);
+    const [displayResponsive, setDisplayResponsive] = useState(false);
     const [position, setPosition] = useState('center');
 
-    const onClick = (stateMethod: any, position: string = '') => {
-        stateMethod(true);
+    const dialogFuncMap = {
+        'displayBasic': setDisplayBasic,
+        'displayBasic2': setDisplayBasic2,
+        'displayModal': setDisplayModal,
+        'displayMaximizable': setDisplayMaximizable,
+        'displayPosition': setDisplayPosition,
+        'displayResponsive': setDisplayResponsive
+    }
+
+    const onClick = (name, position) => {
+        dialogFuncMap[\`\${name}\`](true);
 
         if (position) {
             setPosition(position);
         }
     }
 
-    const onHide = (stateMethod: any) => {
-        stateMethod(false);
+    const onHide = (name) => {
+        dialogFuncMap[\`\${name}\`](false);
     }
 
-    const renderFooter = (stateMethod: any) => {
+    const renderFooter = (name) => {
         return (
             <div>
-                <Button label="Yes" icon="pi pi-check" onClick={() => onHide(stateMethod)} />
-                <Button label="No" icon="pi pi-times" onClick={() => onHide(stateMethod)} className="p-button-secondary"/>
+                <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />
+                <Button label="Yes" icon="pi pi-check" onClick={() => onHide(name)} autoFocus />
             </div>
         );
     }
 
     return (
         <div className="dialog-demo">
-            <h3>Basic</h3>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayBasic)} />
-            <Dialog header="Godfather I" visible={displayBasic} style={{width: '50vw'}} onHide={() => onHide(setDisplayBasic)} footer={renderFooter(setDisplayBasic)}>
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-            </Dialog>
+            <div className="card">
+                <h5>Basic</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayBasic')} />
+                <Dialog header="Header" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => onHide('displayBasic')}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
 
-            <Button label="Long Content" icon="pi pi-external-link" onClick={() => onClick(setDisplayBasic2)} />
-            <Dialog header="Godfather Casting" visible={displayBasic2} style={{width: '50vw'}} onHide={() => onHide(setDisplayBasic2)} blockScroll footer={renderFooter(setDisplayBasic2)}>
-                Puzo was first to show interest in having Marlon Brando portray Don Vito Corleone by sending a letter to Brando in which he stated Brando was the "only actor who can play the Godfather." Despite Puzo's wishes, the executives at Paramount were against having Brando, partly due to the poor performance of his recent films and also his short temper. Coppola favored Brando or Laurence Olivier for the role, but Olivier's agent refused the role claiming Olivier was sick; however, Olivier went on to star in Sleuth later that year. The studio mainly pushed for Ernest Borgnine to receive the part. Other considerations were George C. Scott, Richard Conte, Anthony Quinn, and Orson Welles.
-                <br/><br/>
-                After months of debate between Coppola and Paramount over Brando, the two finalists for the role were Borgnine and Brando, the latter of whom Paramount president Stanley Jaffe required to perform a screen test. Coppola did not want to offend Brando and stated that he needed to test equipment in order to set up the screen test at Brando's California residence. For make-up, Brando stuck cotton balls in his cheeks, put shoe polish in his hair to darken it, and rolled his collar. Coppola placed Brando's audition tape in the middle of the videos of the audition tapes as the Paramount executives watched them. The executives were impressed with Brando's efforts and allowed Coppola to cast Brando for the role if Brando accepted a lower salary and put up a bond to ensure he would not cause any delays in production. Brando earned $1.6 million from a net participation deal.
-                <br/><br/>
-                From the start of production, Coppola wanted Robert Duvall to play the part of Tom Hagen. After screen testing several other actors, Coppola eventually got his wish and Duvall was awarded the part of Tom Hagen. Al Martino, a then famed singer in nightclubs, was notified of the character Johnny Fontane by a friend who read the eponymous novel and felt Martino represented the character of Johnny Fontane. Martino then contacted producer Albert S. Ruddy, who gave him the part. However, Martino was stripped of the part after Coppola became director and then awarded the role to singer Vic Damone. According to Martino, after being stripped of the role, he went to Russell Bufalino, his godfather and a crime boss, who then orchestrated the publication of various news articles that claimed Coppola was unaware of Ruddy giving Martino the part. Damone eventually dropped the role because he did not want to provoke the mob, in addition to being paid too little. Ultimately, the part of Johnny Fontane was given to Martino.
-                <br/><br/>
-                Robert De Niro originally was given the part of Paulie Gatto. A spot in The Gang That Couldn't Shoot Straight opened up after Al Pacino quit the project in favor of The Godfather, which led De Niro to audition for the role and leave The Godfather after receiving the part. After De Niro quit, Johnny Martino was given the role of Gatto. Coppola cast Diane Keaton for the role of Kay Adams due to her reputation for being eccentric. John Cazale was given the part of Fredo Corleone after Coppola saw him perform in an Off Broadway production. Gianni Russo was given the role of Carlo Rizzi after he was asked to perform a screen test in which he acted out the fight between Rizzi and Connie.
-                <br/><br/>
-                Nearing the start of filming on March 29, Michael Corleone had yet to be cast. Paramount executives wanted a popular actor, either Warren Beatty or Robert Redford. Producer Robert Evans wanted Ryan O'Neal to receive the role in part due to his recent success in Love Story. Pacino was Coppola's favorite for the role as he could picture him roaming the Sicilian countryside, and wanted an unknown actor who looked like an Italian-American. However, Paramount executives found Pacino to be too short to play Michael. Dustin Hoffman, Martin Sheen, and James Caan also auditioned. Caan was well received by the Paramount executives and was given the part of Michael initially, while the role of Sonny Corleone was awarded to Carmine Caridi. Coppola still pushed for Pacino to play Michael after the fact and Evans eventually conceded, allowing Pacino to have the role of Michael as long as Caan played Sonny. Evans preferred Caan over Caridi because Caan was seven inches shorter than Caridi, which was much closer to Pacino's height. Despite agreeing to play Michael Corleone, Pacino was contracted to star in MGM's The Gang That Couldn't Shoot Straight, but the two studios agreed on a settlement and Pacino was signed by Paramount three weeks before shooting began.
-                <br/><br/>
-                Coppola gave several roles in the film to family members. He gave his sister, Talia Shire, the role of Connie Corleone. His daughter Sofia played Michael Francis Rizzi, Connie's and Carlo's newborn son. Carmine Coppola, his father, appeared in the film as an extra playing a piano during a scene. Coppola's wife, mother, and two sons all appeared as extras in the picture. Several smaller roles, like Luca Brasi, were cast after the filming had started.
-                <br/><br/>
-            </Dialog>
+                <Button label="Long Content" icon="pi pi-external-link" onClick={() => onClick('displayBasic2')} />
+                <Dialog header="Header" visible={displayBasic2} style={{ width: '50vw' }} footer={renderFooter('displayBasic2')} onHide={() => onHide('displayBasic2')}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <br />
+                    <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam,
+                    quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                    vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                    <br />
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                    similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+                    cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
+                    eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                    <br />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <br />
+                    <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam,
+                    quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                    vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                    <br />
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                    similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+                    cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
+                eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                    <br />
+                </Dialog>
 
-            <h3>BlockScroll</h3>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayBlockScroll)} />
-            <Dialog header="Godfather I" visible={displayBlockScroll} style={{width: '50vw'}} onHide={() => onHide(setDisplayBlockScroll)} blockScroll
-                footer={renderFooter(setDisplayBlockScroll)}>
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-            </Dialog>
+                <h5>Without Modal</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayModal')} />
+                <Dialog header="Header" visible={displayModal} modal={false} style={{ width: '50vw' }} footer={renderFooter('displayModal')} onHide={() => onHide('displayModal')}>
+                    <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
 
-            <h3>Without Modal</h3>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayModal)} />
-            <Dialog header="Godfather I" visible={displayModal} style={{width: '50vw'}} onHide={() => onHide(setDisplayModal)} modal={false}
-                footer={renderFooter(setDisplayModal)}>
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-            </Dialog>
+                <h5>Responsive</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
+                <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={renderFooter('displayResponsive')}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
 
-            <h3>Maximizable</h3>
-            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick(setDisplayMaximizable)} />
-            <Dialog header="Godfather I" visible={displayMaximizable} style={{width: '50vw'}} onHide={() => onHide(setDisplayMaximizable)} maximizable blockScroll
-                footer={renderFooter(setDisplayMaximizable)}>
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-            </Dialog>
+                <h5>Maximizable</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayMaximizable')} />
+                <Dialog header="Header" visible={displayMaximizable} maximizable modal style={{ width: '50vw' }} footer={renderFooter('displayMaximizable')} onHide={() => onHide('displayMaximizable')}>
+                    <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
 
-            <h3>Position</h3>
-            <div className="p-grid p-dir-col">
-                <div className="p-col">
-                    <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick(setDisplayPosition, 'left')} className="p-button-warning" />
-                    <Button label="Right" icon="pi pi-arrow-left" onClick={() => onClick(setDisplayPosition, 'right')} className="p-button-warning" />
+                <h5>Position</h5>
+                <div className="p-grid p-dir-col">
+                    <div className="p-col">
+                        <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick('displayPosition', 'left')} className="p-button-warning" />
+                        <Button label="Right" icon="pi pi-arrow-left" onClick={() => onClick('displayPosition', 'right')} className="p-button-warning" />
+                    </div>
+                    <div className="p-col">
+                        <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top')} className="p-button-warning" />
+                        <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top-left')} className="p-button-warning" />
+                        <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top-right')} className="p-button-warning" />
+                    </div>
+                    <div className="p-col">
+                        <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom')} className="p-button-warning" />
+                        <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom-left')} className="p-button-warning" />
+                        <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom-right')} className="p-button-warning" />
+                    </div>
                 </div>
-                <div className="p-col">
-                    <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'top')} className="p-button-warning" />
-                    <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'topleft')} className="p-button-warning" />
-                    <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => onClick(setDisplayPosition, 'topright')} className="p-button-warning" />
-                </div>
-                <div className="p-col">
-                    <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottom')} className="p-button-warning" />
-                    <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottomleft')} className="p-button-warning" />
-                    <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => onClick(setDisplayPosition, 'bottomright')} className="p-button-warning" />
-                </div>
+
+                <Dialog header="Header" visible={displayPosition} position={position} modal style={{ width: '50vw' }} footer={renderFooter('displayPosition')} onHide={() => onHide('displayPosition')}
+                    draggable={false} resizable={false}>
+                    <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
             </div>
+        </div>
+    )
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./DialogDemo.css" />
 
-            <Dialog header="Godfather I" visible={displayPosition} style={{width: '50vw'}} onHide={() => onHide(setDisplayPosition)}
-                position={position} blockScroll footer={renderFooter(setDisplayPosition)}>
-                <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-                    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.</p>
-            </Dialog>
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/dialog/dialog.min.js"></script>
+        <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Dialog } = primereact.dialog;
+const { Button } = primereact.button;
+
+const DialogDemo = () => {
+    const [displayBasic, setDisplayBasic] = useState(false);
+    const [displayBasic2, setDisplayBasic2] = useState(false);
+    const [displayModal, setDisplayModal] = useState(false);
+    const [displayMaximizable, setDisplayMaximizable] = useState(false);
+    const [displayPosition, setDisplayPosition] = useState(false);
+    const [displayResponsive, setDisplayResponsive] = useState(false);
+    const [position, setPosition] = useState('center');
+
+    const dialogFuncMap = {
+        'displayBasic': setDisplayBasic,
+        'displayBasic2': setDisplayBasic2,
+        'displayModal': setDisplayModal,
+        'displayMaximizable': setDisplayMaximizable,
+        'displayPosition': setDisplayPosition,
+        'displayResponsive': setDisplayResponsive
+    }
+
+    const onClick = (name, position) => {
+        dialogFuncMap[\`\${name}\`](true);
+
+        if (position) {
+            setPosition(position);
+        }
+    }
+
+    const onHide = (name) => {
+        dialogFuncMap[\`\${name}\`](false);
+    }
+
+    const renderFooter = (name) => {
+        return (
+            <div>
+                <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />
+                <Button label="Yes" icon="pi pi-check" onClick={() => onHide(name)} autoFocus />
+            </div>
+        );
+    }
+
+    return (
+        <div className="dialog-demo">
+            <div className="card">
+                <h5>Basic</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayBasic')} />
+                <Dialog header="Header" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => onHide('displayBasic')}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
+
+                <Button label="Long Content" icon="pi pi-external-link" onClick={() => onClick('displayBasic2')} />
+                <Dialog header="Header" visible={displayBasic2} style={{ width: '50vw' }} footer={renderFooter('displayBasic2')} onHide={() => onHide('displayBasic2')}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <br />
+                    <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam,
+                    quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                    vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                    <br />
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                    similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+                    cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
+                    eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                    <br />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <br />
+                    <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam,
+                    quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                    vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                    <br />
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                    similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+                    cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
+                eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                    <br />
+                </Dialog>
+
+                <h5>Without Modal</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayModal')} />
+                <Dialog header="Header" visible={displayModal} modal={false} style={{ width: '50vw' }} footer={renderFooter('displayModal')} onHide={() => onHide('displayModal')}>
+                    <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
+
+                <h5>Responsive</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
+                <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={renderFooter('displayResponsive')}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
+
+                <h5>Maximizable</h5>
+                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayMaximizable')} />
+                <Dialog header="Header" visible={displayMaximizable} maximizable modal style={{ width: '50vw' }} footer={renderFooter('displayMaximizable')} onHide={() => onHide('displayMaximizable')}>
+                    <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
+
+                <h5>Position</h5>
+                <div className="p-grid p-dir-col">
+                    <div className="p-col">
+                        <Button label="Left" icon="pi pi-arrow-right" onClick={() => onClick('displayPosition', 'left')} className="p-button-warning" />
+                        <Button label="Right" icon="pi pi-arrow-left" onClick={() => onClick('displayPosition', 'right')} className="p-button-warning" />
+                    </div>
+                    <div className="p-col">
+                        <Button label="Top" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top')} className="p-button-warning" />
+                        <Button label="TopLeft" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top-left')} className="p-button-warning" />
+                        <Button label="TopRight" icon="pi pi-arrow-down" onClick={() => onClick('displayPosition', 'top-right')} className="p-button-warning" />
+                    </div>
+                    <div className="p-col">
+                        <Button label="Bottom" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom')} className="p-button-warning" />
+                        <Button label="BottomLeft" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom-left')} className="p-button-warning" />
+                        <Button label="BottomRight" icon="pi pi-arrow-up" onClick={() => onClick('displayPosition', 'bottom-right')} className="p-button-warning" />
+                    </div>
+                </div>
+
+                <Dialog header="Header" visible={displayPosition} position={position} modal style={{ width: '50vw' }} footer={renderFooter('displayPosition')} onHide={() => onHide('displayPosition')}
+                    draggable={false} resizable={false}>
+                    <p className="p-m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </Dialog>
+            </div>
         </div>
     )
 }
@@ -405,15 +622,23 @@ const DialogDemo = () => {
         }
 
         this.extFiles = {
-            'index.css': `
-.dialog-demo > .p-button, .dialog-demo .p-grid .p-button {
-    margin: 0.5em 0.5em 0.5em 0;
-    width: 140px;
+            'demo/DialogDemo.css': {
+                content: `
+.dialog-demo .p-button {
+    margin: 0 .5rem 0 0;
+    min-width: 10rem;
 }
-.dialog-demo .p-dialog .p-dialog-content {
+
+.dialog-demo p {
+    margin: 0;
     line-height: 1.5;
 }
-            `
+
+.dialog-demo .p-dialog .p-button {
+    min-width: 6rem;
+}
+                `
+            }
         }
     }
 
@@ -423,42 +648,40 @@ const DialogDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
-                            {`
-import {Dialog} from 'primereact/dialog';
-
+                        <h5>Import</h5>
+<CodeHighlight lang="js">
+{`
+import { Dialog } from 'primereact/dialog';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Dialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Dialog header="Godfather I" visible={this.state.visible} style={{width: '50vw'}} modal={true} onHide={() => this.setState({visible: false})}>
-    The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family,
-    kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family.
+<CodeHighlight>
+{`
+<Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayBasic')} />
+
+<Dialog header="Header" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => onHide('displayBasic')}>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </Dialog>
-
-<Button label="Show" icon="pi pi-info-circle" onClick={(e) => this.setState({visible: true})} />
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Header and Footer</h3>
-                        <p>Header and Footer sections are defined using properties with the same name that accept simple strings or JSX for custom content. In addition <i>iconsTemplate</i> property enables
+                        <h5>Header and Footer</h5>
+                        <p>Header and Footer sections are defined using properties with the same name that accept simple strings or JSX for custom content. In addition <i>icons</i> property enables
             adding more icons at the header section.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
+<CodeHighlight>
+{`
 const footer = (
     <div>
-        <Button label="Yes" icon="pi pi-check" onClick={this.onHide} />
-        <Button label="No" icon="pi pi-times" onClick={this.onHide} />
+        <Button label="Yes" icon="pi pi-check" onClick={onHide} />
+        <Button label="No" icon="pi pi-times" onClick={onHide} />
     </div>
 );
 
@@ -468,17 +691,28 @@ const myIcon = (
     </button>
 )
 
-<Dialog header="Header Text" footer={footer} iconsTemplate={myIcon} visible={this.state.visible} style={{width: '50vw'}} modal={true} onHide={this.onHide}>
+<Dialog header="Header Text" footer={footer} icons={myIcon} visible={visible} style={{width: '50vw'}} modal onHide={onHide}>
     Content
 </Dialog>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Dynamic Content</h3>
+                        <h5>Responsive</h5>
+                        <p>Dialog width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 50vw and below 961px, width would be 75vw and finally below 641px width becomes
+                            100%. The value of <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.</p>
+
+<CodeHighlight>
+{`
+<Dialog visible={visible} onHide={onHide} breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '50vw'}}>
+    Content
+</Dialog>
+`}
+</CodeHighlight>
+
+                        <h5>Dynamic Content</h5>
                         <p>Dynamic content may move the dialog boundaries outside of the viewport. Common solution is defining max-height via <i>contentStyle</i> so longer content displays a scrollbar.</p>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -518,7 +752,7 @@ const myIcon = (
                                         <td>position</td>
                                         <td>string</td>
                                         <td>center</td>
-                                        <td>Position of the dialog, options are "center", "top", "bottom", "left", "right", "topleft", "topright", "bottomleft" or "bottomright".</td>
+                                        <td>Position of the dialog, options are "center", "top", "bottom", "left", "right", "top-left", "top-right", "bottom-left" or "bottom-right".</td>
                                     </tr>
                                     <tr>
                                         <td>modal</td>
@@ -527,22 +761,58 @@ const myIcon = (
                                         <td>Defines if background should be blocked when dialog is displayed.</td>
                                     </tr>
                                     <tr>
+                                        <td>resizable</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Enables resizing of the content.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>draggable</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Enables dragging to change the position using header.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>minX</td>
+                                        <td>number</td>
+                                        <td>0</td>
+                                        <td>Minimum value for the left coordinate of dialog in dragging.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>minY</td>
+                                        <td>number</td>
+                                        <td>0</td>
+                                        <td>Minimum value for the top coordinate of dialog in dragging.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>keepInViewport</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Keeps dialog in the viewport.</td>
+                                    </tr>
+                                    <tr>
                                         <td>contentStyle</td>
                                         <td>object</td>
                                         <td>null</td>
                                         <td>Style of the content section.</td>
                                     </tr>
                                     <tr>
+                                        <td>contentClassName</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the content section.</td>
+                                    </tr>
+                                    <tr>
                                         <td>closeOnEscape</td>
                                         <td>boolean</td>
                                         <td>true</td>
-                                        <td>Specifices if pressing escape key should hide the dialog.</td>
+                                        <td>Specifies if pressing escape key should hide the dialog.</td>
                                     </tr>
                                     <tr>
                                         <td>dismissableMask</td>
                                         <td>boolean</td>
                                         <td>false</td>
-                                        <td>Specifices if clicking the modal background should hide the dialog.</td>
+                                        <td>Specifies if clicking the modal background should hide the dialog.</td>
                                     </tr>
                                     <tr>
                                         <td>rtl</td>
@@ -582,9 +852,9 @@ const myIcon = (
                                     </tr>
                                     <tr>
                                         <td>appendTo</td>
-                                        <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>DOM element | string</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                                     </tr>
                                     <tr>
                                         <td>baseZIndex</td>
@@ -605,8 +875,8 @@ const myIcon = (
                                         <td>Whether background scroll should be blocked when dialog is visible.</td>
                                     </tr>
                                     <tr>
-                                        <td>iconsTemplate</td>
-                                        <td>Element</td>
+                                        <td>icons</td>
+                                        <td>any</td>
                                         <td>null</td>
                                         <td>Custom icons template for the header.</td>
                                     </tr>
@@ -628,11 +898,23 @@ const myIcon = (
                                         <td>false</td>
                                         <td>When enabled, the dialog is initially displayed full screen.</td>
                                     </tr>
+                                    <tr>
+                                        <td>breakpoints</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Object literal to define widths per screen size.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -656,15 +938,55 @@ const myIcon = (
                                     <tr>
                                         <td>onMaximize</td>
                                         <td>event.originalEvent: Browser event  <br />
-                                event.maximized: Whether to show the dialog or not on fullscreen.
-                            </td>
+                                            event.maximized: Whether to show the dialog or not on fullscreen.
+                                        </td>
                                         <td>Callback to invoke when toggle maximize icon is clicked.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onDragStart</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when dialog dragging is initiated.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onDrag</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when dragging dialog.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onDragEnd</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when dialog dragging is completed.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onResizeStart</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when dialog resizing is initiated.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onResize</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke while resizing dialog.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onResizeEnd</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when dialog resizing is completed.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onMaskClick</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when the mask is clicked.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onClick</td>
+                                        <td>event: Browser event</td>
+                                        <td>Callback to invoke when dialog is clicked.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -702,20 +1024,14 @@ const myIcon = (
                                 </tbody>
                             </table>
 
-                            <h3>Dependencies</h3>
+                            <h5>Dependencies</h5>
                             <p>None.</p>
                         </div>
 
                     </TabPanel>
 
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DialogDemo" sources={[key, value]} extFiles={this.extFiles} />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'DialogDemo', sources: this.sources, extFiles: this.extFiles })
                     }
                 </TabView>
             </div>

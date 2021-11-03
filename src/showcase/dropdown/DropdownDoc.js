@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class DropdownDoc extends Component {
 
@@ -13,88 +13,207 @@ export class DropdownDoc extends Component {
             'class': {
                 tabName: 'Class Source',
                 content: `
-import React, {Component} from 'react';
-import {Dropdown} from 'primereact/dropdown';
+import React, { Component } from 'react';
+import { Dropdown } from 'primereact/dropdown';
+import { Skeleton } from 'primereact/skeleton';
+import './DropdownDemo.css';
 
 export class DropdownDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            city: null,
-            car: null,
-            car2: 'BMW'
+            lazyItems: [],
+            lazyLoading: false,
+            selectedCity1: null,
+            selectedCity2: null,
+            selectedCountry: null,
+            selectedGroupedCity: null,
+            selectedItem: null,
+            selectedItem2: null
         };
 
         this.cities = [
-            {name: 'New York', code: 'NY'},
-            {name: 'Rome', code: 'RM'},
-            {name: 'London', code: 'LDN'},
-            {name: 'Istanbul', code: 'IST'},
-            {name: 'Paris', code: 'PRS'}
+            { name: 'New York', code: 'NY' },
+            { name: 'Rome', code: 'RM' },
+            { name: 'London', code: 'LDN' },
+            { name: 'Istanbul', code: 'IST' },
+            { name: 'Paris', code: 'PRS' }
         ];
 
-        this.cars = [
-            {label: 'Audi', value: 'Audi'},
-            {label: 'BMW', value: 'BMW'},
-            {label: 'Fiat', value: 'Fiat'},
-            {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
-            {label: 'Mercedes', value: 'Mercedes'},
-            {label: 'Renault', value: 'Renault'},
-            {label: 'VW', value: 'VW'},
-            {label: 'Volvo', value: 'Volvo'}
+        this.countries = [
+            { name: 'Australia', code: 'AU' },
+            { name: 'Brazil', code: 'BR' },
+            { name: 'China', code: 'CN' },
+            { name: 'Egypt', code: 'EG' },
+            { name: 'France', code: 'FR' },
+            { name: 'Germany', code: 'DE' },
+            { name: 'India', code: 'IN' },
+            { name: 'Japan', code: 'JP' },
+            { name: 'Spain', code: 'ES' },
+            { name: 'United States', code: 'US' }
         ];
+
+        this.groupedCities = [
+            {
+                label: 'Germany', code: 'DE',
+                items: [
+                    { label: 'Berlin', value: 'Berlin' },
+                    { label: 'Frankfurt', value: 'Frankfurt' },
+                    { label: 'Hamburg', value: 'Hamburg' },
+                    { label: 'Munich', value: 'Munich' }
+                ]
+            },
+            {
+                label: 'USA', code: 'US',
+                items: [
+                    { label: 'Chicago', value: 'Chicago' },
+                    { label: 'Los Angeles', value: 'Los Angeles' },
+                    { label: 'New York', value: 'New York' },
+                    { label: 'San Francisco', value: 'San Francisco' }
+                ]
+            },
+            {
+                label: 'Japan', code: 'JP',
+                items: [
+                    { label: 'Kyoto', value: 'Kyoto' },
+                    { label: 'Osaka', value: 'Osaka' },
+                    { label: 'Tokyo', value: 'Tokyo' },
+                    { label: 'Yokohama', value: 'Yokohama' }
+                ]
+            }
+        ];
+
+        this.items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
         this.onCityChange = this.onCityChange.bind(this);
-        this.onCarChange = this.onCarChange.bind(this);
-        this.onCarChange2 = this.onCarChange2.bind(this);
+        this.onCityChange2 = this.onCityChange2.bind(this);
+        this.onCountryChange = this.onCountryChange.bind(this);
+        this.onGroupedCityChange = this.onGroupedCityChange.bind(this);
+        this.onItemChange = this.onItemChange.bind(this);
+        this.onLazyItemChange = this.onLazyItemChange.bind(this);
+        this.onLazyLoad = this.onLazyLoad.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({
+            lazyItems: Array.from({ length: 100000 }),
+            lazyLoading: false
+        });
     }
 
     onCityChange(e) {
-        this.setState({city: e.value});
+        this.setState({ selectedCity1: e.value });
     }
 
-    onCarChange(e) {
-        this.setState({car: e.value});
+    onCityChange2(e) {
+        this.setState({ selectedCity2: e.value });
     }
 
-    onCarChange2(e) {
-        this.setState({car2: e.value});
+    onCountryChange(e) {
+        this.setState({ selectedCountry: e.value });
     }
 
-    carTemplate(option) {
-        if(!option.value) {
-            return option.label;
+    onGroupedCityChange(e) {
+        this.setState({ selectedGroupedCity: e.value });
+    }
+
+    onItemChange(e) {
+        this.setState({ selectedItem: e.value });
+    }
+
+    onLazyItemChange(e) {
+        this.setState({ selectedItem2: e.value });
+    }
+
+    onLazyLoad(event) {
+        this.setState({ lazyLoading: true });
+
+        if (this.loadLazyTimeout) {
+            clearTimeout(this.loadLazyTimeout);
         }
-        else {
-            let logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
+        //imitate delay of a backend call
+        this.loadLazyTimeout = setTimeout(() => {
+            const { first, last } = event;
+            const lazyItems = [...this.state.lazyItems];
+
+            for (let i = first; i < last; i++) {
+                lazyItems[i] = { label: \`Item #\${i}\`, value: i };
+            }
+
+            this.setState({
+                lazyItems,
+                lazyLoading: false
+            });
+        }, Math.random() * 1000 + 250);
+    }
+
+    selectedCountryTemplate(option, props) {
+        if (option) {
             return (
-                <div className="p-clearfix">
-                    <img alt={option.label} src={logoPath} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
-                    <span style={{float:'right',margin:'.5em .25em 0 0'}}>{option.label}</span>
+                <div className="country-item country-item-value">
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <div>{option.name}</div>
                 </div>
             );
         }
+
+        return (
+            <span>
+                {props.placeholder}
+            </span>
+        );
+    }
+
+    countryOptionTemplate(option) {
+        return (
+            <div className="country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.name}</div>
+            </div>
+        );
+    }
+
+    groupedItemTemplate(option) {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.label} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
     }
 
     render() {
         return (
-            <div>
-                <h3>Basic</h3>
-                <Dropdown value={this.state.city} options={this.cities} onChange={this.onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
-                <div style={{marginTop: '.5em'}}>{this.state.city ? 'Selected City: ' + this.state.city.name : 'No city selected'}</div>
+            <div className="dropdown-demo">
+                <div className="card">
+                    <h5>Basic</h5>
+                    <Dropdown value={this.state.selectedCity1} options={this.cities} onChange={this.onCityChange} optionLabel="name" placeholder="Select a City" />
 
-                <h3>Editable</h3>
-                <Dropdown value={this.state.car} options={this.cars} onChange={this.onCarChange} style={{width: '12em'}}
-                            editable={true} placeholder="Select a Brand" />
-                <div style={{marginTop: '.5em'}}>{this.state.car ? 'Selected Car: ' + this.state.car : 'No car selected'}</div>
+                    <h5>Editable</h5>
+                    <Dropdown value={this.state.selectedCity2} options={this.cities} onChange={this.onCityChange2} optionLabel="name" editable />
 
-                <h3>Advanced</h3>
-                <Dropdown value={this.state.car2} options={this.cars} onChange={this.onCarChange2} itemTemplate={this.carTemplate}  style={{width: '12em'}}
-                            filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
-                <div style={{marginTop: '.5em'}}>{this.state.car2 ? 'Selected Car: ' + this.state.car2 : 'No car selected'}</div>
+                    <h5>Grouped</h5>
+                    <Dropdown value={this.state.selectedGroupedCity} options={this.groupedCities} onChange={this.onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                        optionGroupTemplate={this.groupedItemTemplate} />
+
+                    <h5>Advanced with Templating, Filtering and Clear Icon</h5>
+                    <Dropdown value={this.state.selectedCountry} options={this.countries} onChange={this.onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
+                        valueTemplate={this.selectedCountryTemplate} itemTemplate={this.countryOptionTemplate} />
+
+                    <h5>Virtual Scroll (100000 Items)</h5>
+                    <Dropdown value={this.state.selectedItem} options={this.items} onChange={this.onItemChange} virtualScrollerOptions={{ itemSize: 31 }} placeholder="Select Item"/>
+
+                    <h5>Virtual Scroll (100000 Items) and Lazy</h5>
+                    <Dropdown value={this.state.selectedItem2} options={this.state.lazyItems} onChange={this.onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 31, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
+                        return (
+                            <div className="p-d-flex p-ai-center p-p-2" style={{ height: '31px' }}>
+                                <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
+                            </div>
+                        )}
+                    }} placeholder="Select Item"/>
+                </div>
             </div>
         );
     }
@@ -104,76 +223,191 @@ export class DropdownDemo extends Component {
             'hooks': {
                 tabName: 'Hooks Source',
                 content: `
-import React, { useState } from 'react';
-import {Dropdown} from 'primereact/dropdown';
+import React, { useState, useEffect, useRef } from 'react';
+import { Dropdown } from 'primereact/dropdown';
+import { Skeleton } from 'primereact/skeleton';
+import './DropdownDemo.css';
 
 const DropdownDemo = () => {
-    const [city, setCity] = useState(null);
-    const [car, setCar] = useState(null);
-    const [car2, setCar2] = useState('BMW');
 
-    let cities = [
-        {name: 'New York', code: 'NY'},
-        {name: 'Rome', code: 'RM'},
-        {name: 'London', code: 'LDN'},
-        {name: 'Istanbul', code: 'IST'},
-        {name: 'Paris', code: 'PRS'}
+    const [lazyItems, setLazyItems] = useState([]);
+    const [lazyLoading, setLazyLoading] = useState(false);
+    const [selectedCity1, setSelectedCity1] = useState(null);
+    const [selectedCity2, setSelectedCity2] = useState(null);
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedItem2, setSelectedItem2] = useState(null);
+
+    let loadLazyTimeout = useRef(null);
+
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
     ];
-    let cars = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
+
+    const countries = [
+        { name: 'Australia', code: 'AU' },
+        { name: 'Brazil', code: 'BR' },
+        { name: 'China', code: 'CN' },
+        { name: 'Egypt', code: 'EG' },
+        { name: 'France', code: 'FR' },
+        { name: 'Germany', code: 'DE' },
+        { name: 'India', code: 'IN' },
+        { name: 'Japan', code: 'JP' },
+        { name: 'Spain', code: 'ES' },
+        { name: 'United States', code: 'US' }
     ];
+
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
+        }
+    ];
+
+    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
+
+    useEffect(() => {
+        setLazyItems(Array.from({ length: 100000 }));
+        setLazyLoading(false);
+    },[]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onCityChange = (e) => {
-        setCity(e.value);
-    };
+        setSelectedCity1(e.value);
+    }
 
-    const onCarChange = (e) => {
-        setCar(e.value);
-    };
+    const onCityChange2 = (e) => {
+        setSelectedCity2(e.value);
+    }
 
-    const onCarChange2 = (e) => {
-        setCar2(e.value);
-    };
+    const onCountryChange = (e) => {
+        setSelectedCountry(e.value);
+    }
 
-    const carTemplate = (option) => {
-        if(!option.value) {
-            return option.label;
+    const onGroupedCityChange = (e) => {
+        setSelectedGroupedCity(e.value);
+    }
+
+    const onItemChange = (e) => {
+        setSelectedItem(e.value);
+    }
+
+    const onLazyItemChange = (e) => {
+        setSelectedItem2(e.value)
+    }
+
+    const onLazyLoad = (event) => {
+        setLazyLoading(true);
+
+        if (loadLazyTimeout) {
+            clearTimeout(loadLazyTimeout);
         }
-        else {
-            let logoPath = 'showcase/demo/images/car/' + option.label + '.png';
 
+        //imitate delay of a backend call
+        loadLazyTimeout = setTimeout(() => {
+            const { first, last } = event;
+            const _lazyItems = [...lazyItems];
+
+            for (let i = first; i < last; i++) {
+                _lazyItems[i] = { label: \`Item #\${i}\`, value: i };
+            }
+
+            setLazyItems(_lazyItems);
+            setLazyLoading(false);
+        }, Math.random() * 1000 + 250);
+    }
+
+    const selectedCountryTemplate = (option, props) => {
+        if (option) {
             return (
-                <div className="p-clearfix">
-                    <img alt={option.label} src={logoPath} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
-                    <span style={{float:'right',margin:'.5em .25em 0 0'}}>{option.label}</span>
+                <div className="country-item country-item-value">
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <div>{option.name}</div>
                 </div>
             );
         }
-    };
+
+        return (
+            <span>
+                {props.placeholder}
+            </span>
+        );
+    }
+
+    const countryOptionTemplate = (option) => {
+        return (
+            <div className="country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.name}</div>
+            </div>
+        );
+    }
+
+    const groupedItemTemplate = (option) => {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.label} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
 
     return (
-        <div>
-            <h3>Basic</h3>
-            <Dropdown value={city} options={cities} onChange={onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
-            <div style={{marginTop: '.5em'}}>{city ? 'Selected City: ' + city.name : 'No city selected'}</div>
+        <div className="dropdown-demo">
+            <div className="card">
+                <h5>Basic</h5>
+                <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
 
-            <h3>Editable</h3>
-            <Dropdown value={car} options={cars} onChange={onCarChange} style={{width: '12em'}}
-                        editable={true} placeholder="Select a Brand" />
-            <div style={{marginTop: '.5em'}}>{car ? 'Selected Car: ' + car : 'No car selected'}</div>
+                <h5>Editable</h5>
+                <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
 
-            <h3>Advanced</h3>
-            <Dropdown value={car2} options={cars} onChange={onCarChange2} itemTemplate={carTemplate}  style={{width: '12em'}}
-                        filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
-            <div style={{marginTop: '.5em'}}>{car2 ? 'Selected Car: ' + car2 : 'No car selected'}</div>
+                <h5>Grouped</h5>
+                <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                    optionGroupTemplate={groupedItemTemplate} />
+
+                <h5>Advanced with Templating, Filtering and Clear Icon</h5>
+                <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
+                    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+
+                <h5>Virtual Scroll (100000 Items)</h5>
+                <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 31 }} placeholder="Select Item"/>
+
+                <h5>Virtual Scroll (100000 Items) and Lazy</h5>
+                <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 31, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                    return (
+                        <div className="p-d-flex p-ai-center p-p-2" style={{ height: '31px' }}>
+                            <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
+                        </div>
+                    )}
+                }} placeholder="Select Item"/>
+            </div>
         </div>
     );
 }
@@ -182,78 +416,407 @@ const DropdownDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState } from 'react';
-import {Dropdown} from 'primereact/dropdown';
+import React, { useState, useEffect, useRef } from 'react';
+import { Dropdown } from 'primereact/dropdown';
+import { Skeleton } from 'primereact/skeleton';
+import './DropdownDemo.css';
 
 const DropdownDemo = () => {
-    const [city, setCity] = useState<any>(null);
-    const [car, setCar] = useState<string | null>(null);
-    const [car2, setCar2] = useState<string>('BMW');
 
-    let cities = [
-        {name: 'New York', code: 'NY'},
-        {name: 'Rome', code: 'RM'},
-        {name: 'London', code: 'LDN'},
-        {name: 'Istanbul', code: 'IST'},
-        {name: 'Paris', code: 'PRS'}
-    ];
-    let cars = [
-        {label: 'Audi', value: 'Audi'},
-        {label: 'BMW', value: 'BMW'},
-        {label: 'Fiat', value: 'Fiat'},
-        {label: 'Honda', value: 'Honda'},
-        {label: 'Jaguar', value: 'Jaguar'},
-        {label: 'Mercedes', value: 'Mercedes'},
-        {label: 'Renault', value: 'Renault'},
-        {label: 'VW', value: 'VW'},
-        {label: 'Volvo', value: 'Volvo'}
+    const [lazyItems, setLazyItems] = useState<any>([]);
+    const [lazyLoading, setLazyLoading] = useState<any>(false);
+    const [selectedCity1, setSelectedCity1] = useState<any>(null);
+    const [selectedCity2, setSelectedCity2] = useState<any>(null);
+    const [selectedCountry, setSelectedCountry] = useState<any>(null);
+    const [selectedGroupedCity, setSelectedGroupedCity] = useState<any>(null);
+    const [selectedItem, setSelectedItem] = useState<any>(null);
+    const [selectedItem2, setSelectedItem2] = useState<any>(null);
+
+    let loadLazyTimeout = useRef(null);
+
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
     ];
 
-    const onCityChange = (e: { value: any }) => {
-        setCity(e.value);
-    };
+    const countries = [
+        { name: 'Australia', code: 'AU' },
+        { name: 'Brazil', code: 'BR' },
+        { name: 'China', code: 'CN' },
+        { name: 'Egypt', code: 'EG' },
+        { name: 'France', code: 'FR' },
+        { name: 'Germany', code: 'DE' },
+        { name: 'India', code: 'IN' },
+        { name: 'Japan', code: 'JP' },
+        { name: 'Spain', code: 'ES' },
+        { name: 'United States', code: 'US' }
+    ];
 
-    const onCarChange = (e: { value: any }) => {
-        setCar(e.value);
-    };
-
-    const onCarChange2 = (e: { value: any }) => {
-        setCar2(e.value);
-    };
-
-    const carTemplate = (option: any) => {
-        if(!option.value) {
-            return option.label;
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
         }
-        else {
-            let logoPath = 'showcase/demo/images/car/' + option.label + '.png';
+    ];
 
+    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
+
+    useEffect(() => {
+        setLazyItems(Array.from({ length: 100000 }));
+        setLazyLoading(false);
+    },[]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onCityChange = (e: { value: any}) => {
+        setSelectedCity1(e.value);
+    }
+
+    const onCityChange2 = (e: {value: any} ) => {
+        setSelectedCity2(e.value);
+    }
+
+    const onCountryChange = (e: {value: any}) => {
+        setSelectedCountry(e.value);
+    }
+
+    onGroupedCityChange(e: {value: any}) {
+        setSelectedGroupedCity(e.value);
+    }
+
+    const onItemChange = (e: {value: any}) => {
+        setSelectedItem(e.value);
+    }
+
+    const onLazyItemChange = (e: {value: any}) => {
+        setSelectedItem2(e.value)
+    }
+
+    const onLazyLoad = (event) => {
+        setLazyLoading(true);
+
+        if (loadLazyTimeout) {
+            clearTimeout(loadLazyTimeout);
+        }
+
+        //imitate delay of a backend call
+        loadLazyTimeout = setTimeout(() => {
+            const { first, last } = event;
+            const _lazyItems = [...lazyItems];
+
+            for (let i = first; i < last; i++) {
+                _lazyItems[i] = { label: \`Item #\${i}\`, value: i };
+            }
+
+            setLazyItems(_lazyItems);
+            setLazyLoading(false);
+        }, Math.random() * 1000 + 250);
+    }
+
+    const selectedCountryTemplate = (option: { name: string, code: string }, props: { placeholder: string }) => {
+        if (option) {
             return (
-                <div className="p-clearfix">
-                    <img alt={option.label} src={logoPath} srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
-                    <span style={{float:'right',margin:'.5em .25em 0 0'}}>{option.label}</span>
+                <div className="country-item country-item-value">
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <div>{option.name}</div>
                 </div>
             );
         }
-    };
+
+        return (
+            <span>
+                {props.placeholder}
+            </span>
+        );
+    }
+
+    const countryOptionTemplate = (option: any) => {
+        return (
+            <div className="country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.name}</div>
+            </div>
+        );
+    }
+
+    const groupedItemTemplate = (option: any) => {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.label} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
 
     return (
+        <div className="dropdown-demo">
+            <div className="card">
+                <h5>Basic</h5>
+                <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+
+                <h5>Editable</h5>
+                <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
+
+                <h5>Grouped</h5>
+                <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                    optionGroupTemplate={groupedItemTemplate} />
+
+                <h5>Advanced with Templating, Filtering and Clear Icon</h5>
+                <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
+                    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+
+                <h5>Virtual Scroll (100000 Items)</h5>
+                <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 31 }} placeholder="Select Item"/>
+
+                <h5>Virtual Scroll (100000 Items) and Lazy</h5>
+                <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 31, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                    return (
+                        <div className="p-d-flex p-ai-center p-p-2" style={{ height: '31px' }}>
+                            <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
+                        </div>
+                    )}
+                }} placeholder="Select Item"/>
+            </div>
         <div>
-            <h3>Basic</h3>
-            <Dropdown value={city} options={cities} onChange={onCityChange} placeholder="Select a City" optionLabel="name" style={{width: '12em'}}/>
-            <div style={{marginTop: '.5em'}}>{city ? 'Selected City: ' + city.name : 'No city selected'}</div>
+    );
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./DropdownDemo.css" />
 
-            <h3>Editable</h3>
-            <Dropdown value={car} options={cars} onChange={onCarChange} style={{width: '12em'}}
-                        editable={true} placeholder="Select a Brand" />
-            <div style={{marginTop: '.5em'}}>{car ? 'Selected Car: ' + car : 'No car selected'}</div>
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
+        <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
+        <script src="https://unpkg.com/primereact/skeleton/skeleton.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { Dropdown } = primereact.dropdown;
+const { Skeleton } = primereact.skeleton;
 
-            <h3>Advanced</h3>
-            <Dropdown value={car2} options={cars} onChange={onCarChange2} itemTemplate={carTemplate}  style={{width: '12em'}}
-                        filter={true} filterPlaceholder="Select Car" filterBy="label,value" showClear={true}/>
-            <div style={{marginTop: '.5em'}}>{car2 ? 'Selected Car: ' + car2 : 'No car selected'}</div>
+const DropdownDemo = () => {
+
+    const [lazyItems, setLazyItems] = useState([]);
+    const [lazyLoading, setLazyLoading] = useState(false);
+    const [selectedCity1, setSelectedCity1] = useState(null);
+    const [selectedCity2, setSelectedCity2] = useState(null);
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedItem2, setSelectedItem2] = useState(null);
+
+    let loadLazyTimeout = useRef(null);
+
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ];
+
+    const countries = [
+        { name: 'Australia', code: 'AU' },
+        { name: 'Brazil', code: 'BR' },
+        { name: 'China', code: 'CN' },
+        { name: 'Egypt', code: 'EG' },
+        { name: 'France', code: 'FR' },
+        { name: 'Germany', code: 'DE' },
+        { name: 'India', code: 'IN' },
+        { name: 'Japan', code: 'JP' },
+        { name: 'Spain', code: 'ES' },
+        { name: 'United States', code: 'US' }
+    ];
+
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
+        }
+    ];
+
+    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
+
+    useEffect(() => {
+        setLazyItems(Array.from({ length: 100000 }));
+        setLazyLoading(false);
+    },[]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onCityChange = (e) => {
+        setSelectedCity1(e.value);
+    }
+
+    const onCityChange2 = (e) => {
+        setSelectedCity2(e.value);
+    }
+
+    const onCountryChange = (e) => {
+        setSelectedCountry(e.value);
+    }
+
+    const onGroupedCityChange = (e) => {
+        setSelectedGroupedCity(e.value);
+    }
+
+    const onItemChange = (e) => {
+        setSelectedItem(e.value);
+    }
+
+    const onLazyItemChange = (e) => {
+        setSelectedItem2(e.value)
+    }
+
+    const onLazyLoad = (event) => {
+        setLazyLoading(true);
+
+        if (loadLazyTimeout) {
+            clearTimeout(loadLazyTimeout);
+        }
+
+        //imitate delay of a backend call
+        loadLazyTimeout = setTimeout(() => {
+            const { first, last } = event;
+            const _lazyItems = [...lazyItems];
+
+            for (let i = first; i < last; i++) {
+                _lazyItems[i] = { label: \`Item #\${i}\`, value: i };
+            }
+
+            setLazyItems(_lazyItems);
+            setLazyLoading(false);
+        }, Math.random() * 1000 + 250);
+    }
+
+    const selectedCountryTemplate = (option, props) => {
+        if (option) {
+            return (
+                <div className="country-item country-item-value">
+                    <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                    <div>{option.name}</div>
+                </div>
+            );
+        }
+
+        return (
+            <span>
+                {props.placeholder}
+            </span>
+        );
+    }
+
+    const countryOptionTemplate = (option) => {
+        return (
+            <div className="country-item">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.name}</div>
+            </div>
+        );
+    }
+
+    const groupedItemTemplate = (option) => {
+        return (
+            <div className="p-d-flex p-ai-center country-item">
+                <img alt={option.label} src="showcase/demo/images/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.label}</div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="dropdown-demo">
+            <div className="card">
+                <h5>Basic</h5>
+                <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+
+                <h5>Editable</h5>
+                <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
+
+                <h5>Grouped</h5>
+                <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                    optionGroupTemplate={groupedItemTemplate} />
+
+                <h5>Advanced with Templating, Filtering and Clear Icon</h5>
+                <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
+                    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+
+                <h5>Virtual Scroll (100000 Items)</h5>
+                <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 31 }} placeholder="Select Item"/>
+
+                <h5>Virtual Scroll (100000 Items) and Lazy</h5>
+                <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 31, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                    return (
+                        <div className="p-d-flex p-ai-center p-p-2" style={{ height: '31px' }}>
+                            <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
+                        </div>
+                    )}
+                }} placeholder="Select Item"/>
+            </div>
         </div>
     );
+}
+                `
+            }
+        }
+
+        this.extFiles = {
+            'demo/DropdownDemo.css': {
+                content: `
+.dropdown-demo .p-dropdown {
+    width: 14rem;
+}
+
+.dropdown-demo .country-item-value img.flag {
+    width: 17px;
 }
                 `
             }
@@ -266,26 +829,25 @@ const DropdownDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
-                            {`
-import {Dropdown} from 'primereact/dropdown';
-
+                        <h5>Import</h5>
+<CodeHighlight lang="js">
+{`
+import { Dropdown } from 'primereact/dropdown';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>SelectButton is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
                         of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
                         whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. In addition,
                         options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.</p>
 
                         <p><b>Options as SelectItems</b></p>
-                        <CodeHighlight className="language-javascript">
-                            {`
+<CodeHighlight lang="js">
+{`
 const citySelectItems = [
     {label: 'New York', value: 'NY'},
     {label: 'Rome', value: 'RM'},
@@ -293,20 +855,18 @@ const citySelectItems = [
     {label: 'Istanbul', value: 'IST'},
     {label: 'Paris', value: 'PRS'}
 ];
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Dropdown value={this.state.city} options={citySelectItems} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
-
+<CodeHighlight>
+{`
+<Dropdown value={city} options={citySelectItems} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <p><b>Options as any type</b></p>
-                        <CodeHighlight className="language-javascript">
-                            {`
+<CodeHighlight lang="js">
+{`
 const cities = [
     {name: 'New York', code: 'NY'},
     {name: 'Rome', code: 'RM'},
@@ -314,65 +874,113 @@ const cities = [
     {name: 'Istanbul', code: 'IST'},
     {name: 'Paris', code: 'PRS'}
 ];
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Dropdown optionLabel="name" value={this.state.city} options={cities} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
-<Dropdown optionLabel="name" optionValue="code" value={this.state.city} options={cities} onChange={(e) => {this.setState({city: e.value})}} placeholder="Select a City"/>
-
+<CodeHighlight>
+{`
+<Dropdown optionLabel="name" value={city} options={cities} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
+<Dropdown optionLabel="name" optionValue="code" value={city} options={cities} onChange={(e) => setCity(e.value)} placeholder="Select a City"/>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
                         <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
 
-                        <h3>Placeholder</h3>
+                        <h5>Placeholder</h5>
                         <p>Common pattern is providing an empty option as the placeholder when using native selects, however Dropdown has built-in support using the placeholder option so it is suggested to use it instead of creating an empty option.</p>
 
-                        <h3>Filtering</h3>
+                        <h5>Filtering</h5>
                         <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
                             label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
                             to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Dropdown value={this.state.car} options={cars} onChange={(e) => {this.setState({city: e.value})}} filter={true} filterPlaceholder="Select Car" filterBy="label,value" placeholder="Select a Car"/>
-
+<CodeHighlight>
+{`
+<Dropdown value={selectedCountry} options={countries} onChange={(e) => setSelectedCountry(e.value)} optionLabel="name" filter showClear filterBy="name"
+    placeholder="Select a Country" itemTemplate={countryOptionTemplate} />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Custom Content</h3>
+                        <h5>Custom Content</h5>
                         <p>Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Dropdown value={this.state.car} options={cars} onChange={(e) => {this.setState({city: e.value})}} itemTemplate={this.carTemplate} placeholder="Select a Car"/>
-
+<CodeHighlight>
+{`
+<Dropdown value={selectedCountry} options={countries} onChange={(e) => setSelectedCountry(e.value)} optionLabel="name" placeholder="Select a Country"
+    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight className="language-javascript">
-                            {`
-carTemplate(option) {
-    if (!option.value) {
-        return option.label;
-    }
-    else {
-        const logoPath = 'showcase/demo/images/car/' + option.label + '.png';
-
+<CodeHighlight lang="js">
+{`
+const selectedCountryTemplate = (option, props) => {
+    if (option) {
         return (
-            <div className="p-clearfix">
-                <img alt={option.label} src={logoPath} style={{display:'inline-block',margin:'5px 0 0 5px'}} width="24"/>
-                <span style={{float:'right', margin:'.5em .25em 0 0'}}>{option.label}</span>
+            <div className="country-item country-item-value">
+                <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+                <div>{option.name}</div>
             </div>
         );
     }
+
+    return (
+        <span>
+            {props.placeholder}
+        </span>
+    );
 }
 
+const countryOptionTemplate = (option) => {
+    return (
+        <div className="country-item">
+            <img alt={option.name} src="showcase/demo/images/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
+            <div>{option.name}</div>
+        </div>
+    );
+}
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>SelectItem API</h3>
+                        <h5>Grouping</h5>
+                        <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
+<CodeHighlight>
+{`
+const groupedCities = [
+    {
+        label: 'Germany', code: 'DE',
+        items: [
+            { label: 'Berlin', value: 'Berlin' },
+            { label: 'Frankfurt', value: 'Frankfurt' },
+            { label: 'Hamburg', value: 'Hamburg' },
+            { label: 'Munich', value: 'Munich' }
+        ]
+    },
+    {
+        label: 'USA', code: 'US',
+        items: [
+            { label: 'Chicago', value: 'Chicago' },
+            { label: 'Los Angeles', value: 'Los Angeles' },
+            { label: 'New York', value: 'New York' },
+            { label: 'San Francisco', value: 'San Francisco' }
+        ]
+    },
+    {
+        label: 'Japan', code: 'JP',
+        items: [
+            { label: 'Kyoto', value: 'Kyoto' },
+            { label: 'Osaka', value: 'Osaka' },
+            { label: 'Tokyo', value: 'Tokyo' },
+            { label: 'Yokohama', value: 'Yokohama' }
+        ]
+    }
+];
+`}
+</CodeHighlight>
+
+<CodeHighlight>
+{`
+<Dropdown value={selectedGroupedCity} options={groupedCities} onChange={e => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" />
+`}
+</CodeHighlight>
+                        <h5>SelectItem API</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -418,7 +1026,7 @@ carTemplate(option) {
                             </table>
                         </div>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -467,10 +1075,40 @@ carTemplate(option) {
                                         <td>Name of the value field of an option when arbitrary objects are used as options instead of SelectItems.</td>
                                     </tr>
                                     <tr>
-                                        <td>itemTemplate</td>
-                                        <td>function</td>
+                                        <td>optionDisabled</td>
+                                        <td>function | string</td>
                                         <td>null</td>
-                                        <td>Function that gets the option and returns the content.</td>
+                                        <td>Property name or getter function to use as the disabled flag of an option, defaults to false when not defined.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupLabel</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Property name or getter function to use as the label of an option group.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupChildren</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Property name or getter function that refers to the children options of option group.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>valueTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>The template of selected item.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>itemTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>The template of items.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>optionGroupTemplate</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of an option group item.</td>
                                     </tr>
                                     <tr>
                                         <td>style</td>
@@ -521,6 +1159,24 @@ carTemplate(option) {
                                         <td>Locale to use in filtering. The default locale is the host environment's current locale.</td>
                                     </tr>
                                     <tr>
+                                        <td>emptyMessage</td>
+                                        <td>string</td>
+                                        <td>No results found</td>
+                                        <td>Text to display when there are no options available.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>emptyFilterMessage</td>
+                                        <td>any</td>
+                                        <td>No results found</td>
+                                        <td>Template to display when filtering does not return any results.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>resetFilterOnHide</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Clears the filter value when hiding the dropdown.</td>
+                                    </tr>
+                                    <tr>
                                         <td>editable</td>
                                         <td>boolean</td>
                                         <td>false</td>
@@ -546,9 +1202,9 @@ carTemplate(option) {
                                     </tr>
                                     <tr>
                                         <td>appendTo</td>
-                                        <td>DOM element</td>
-                                        <td>null</td>
-                                        <td>DOM element instance where the dialog should be mounted.</td>
+                                        <td>DOM element | string</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                                     </tr>
                                     <tr>
                                         <td>tabIndex</td>
@@ -569,6 +1225,12 @@ carTemplate(option) {
                                         <td>When the panel is opened, it specifies that the filter input should focus automatically.</td>
                                     </tr>
                                     <tr>
+                                        <td>showFilterClear</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, a clear icon is displayed to clear the filtered value.</td>
+                                    </tr>
+                                    <tr>
                                         <td>panelClassName</td>
                                         <td>string</td>
                                         <td>null</td>
@@ -576,7 +1238,7 @@ carTemplate(option) {
                                     </tr>
                                     <tr>
                                         <td>panelStyle</td>
-                                        <td>string</td>
+                                        <td>object</td>
                                         <td>null</td>
                                         <td>Inline style of the overlay panel element.</td>
                                     </tr>
@@ -628,11 +1290,35 @@ carTemplate(option) {
                                         <td>null</td>
                                         <td>Contains the element IDs of labels.</td>
                                     </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>dropdownIcon</td>
+                                        <td>string</td>
+                                        <td>pi pi-chevron-down</td>
+                                        <td>Icon class of the dropdown icon.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>showOnFocus</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, overlay panel will be visible with input focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>virtualScrollerOptions</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Whether to use the virtualScroller feature. The properties of <Link to="virtualscroller">VirtualScroller</Link> component can be used like an object in it.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -673,7 +1359,7 @@ carTemplate(option) {
                             </table>
                         </div>
 
-                        <h3>Methods</h3>
+                        <h5>Methods</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -694,11 +1380,21 @@ carTemplate(option) {
                                         <td>-</td>
                                         <td>Reset the options filter.</td>
                                     </tr>
+                                    <tr>
+                                        <td>onShow</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel becomes visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>onHide</td>
+                                        <td>-</td>
+                                        <td>Callback to invoke when overlay panel becomes hidden.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -753,18 +1449,12 @@ carTemplate(option) {
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DropdownDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'DropdownDemo', sources: this.sources, extFiles: this.extFiles })
                     }
                 </TabView>
             </div>

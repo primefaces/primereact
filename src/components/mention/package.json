@@ -1,0 +1,6 @@
+{
+    "main": "./mention.cjs.js",
+    "module": "./mention.esm.js",
+    "unpkg": "./mention.min.js",
+    "types": "./mention.d.ts"
+}

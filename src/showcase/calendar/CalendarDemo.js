@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import AppDemoActions from '../../AppDemoActions';
 import { Calendar } from '../../components/calendar/Calendar';
-import AppContentContext from '../../AppContentContext';
+import { Dropdown } from '../../components/dropdown/Dropdown';
 import { CalendarDoc } from './CalendarDoc';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import { addLocale } from '../../components/api/Locale';
 
 export class CalendarDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         let today = new Date();
         let month = today.getMonth();
@@ -31,8 +34,12 @@ export class CalendarDemo extends Component {
             date12: null,
             date13: null,
             date14: null,
+            date15: null,
+            date16: null,
+            date17: null,
             dates1: null,
-            dates2: null
+            dates2: null,
+            visible: false
         };
 
         this.minDate = new Date();
@@ -46,110 +53,139 @@ export class CalendarDemo extends Component {
         this.invalidDates = [today];
 
         this.dateTemplate = this.dateTemplate.bind(this);
+        this.monthNavigatorTemplate = this.monthNavigatorTemplate.bind(this);
+        this.yearNavigatorTemplate = this.yearNavigatorTemplate.bind(this);
+        this.onVisibleChange = this.onVisibleChange.bind(this);
+
+        addLocale('es', {
+            firstDayOfWeek: 1,
+            dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+            dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+            dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+            monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+            monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+            today: 'Hoy',
+            clear: 'Claro'
+        });
     }
 
     dateTemplate(date) {
         if (date.day > 10 && date.day < 15) {
             return (
-                <div style={{ backgroundColor: '#1dcbb3', color: '#ffffff', fontWeight: 'bold', borderRadius: '50%', width: '2em', height: '2em', lineHeight: '2em', padding: 0 }}>{date.day}</div>
+                <strong style={{ textDecoration: 'line-through' }}>{date.day}</strong>
             );
         }
-        else {
-            return date.day;
-        }
+
+        return date.day;
+    }
+
+    monthNavigatorTemplate(e) {
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} style={{ lineHeight: 1 }} />;
+    }
+
+    yearNavigatorTemplate(e) {
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="p-ml-2" style={{ lineHeight: 1 }} />;
+    }
+
+    onVisibleChange(e) {
+        this.setState((prevState) => ({
+            visible: e.type === 'dateselect' || !prevState.visible
+        }), e.callback);
     }
 
     render() {
-        const es = {
-            firstDayOfWeek: 1,
-            dayNames: ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
-            dayNamesShort: ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"],
-            dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
-            monthNames: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-            monthNamesShort: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
-            today: "Hoy",
-            clear: "Claro"
-        };
-
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="calendar">
                         <h1>Calendar</h1>
                         <p>Calendar is a form component to work with dates.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("calendar")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
+                    <AppDemoActions github="calendar/CalendarDemo.js"/>
                 </div>
 
-                <div className="content-section implementation inputgrid-demo">
-                    <div className="p-grid p-fluid">
-                        <div className="p-col-12 p-md-4">
-                            <h3>Basic</h3>
-                            <Calendar value={this.state.date1} onChange={(e) => this.setState({ date1: e.value })} />
+                <div className="content-section implementation">
+                    <div className="card">
+                        <h5>Popup</h5>
+                        <div className="p-fluid p-grid p-formgrid">
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="basic">Basic</label>
+                                <Calendar id="basic" value={this.state.date1} onChange={(e) => this.setState({ date1: e.value })} />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="icon">Icon</label>
+                                <Calendar id="icon" value={this.state.date2} onChange={(e) => this.setState({ date2: e.value })} showIcon />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="spanish">Spanish</label>
+                                <Calendar id="spanish" value={this.state.date3} onChange={(e) => this.setState({ date3: e.value })} locale="es" dateFormat="dd/mm/yy" />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="minmax">MinMax</label>
+                                <Calendar id="minmax" value={this.state.date4} onChange={(e) => this.setState({ date4: e.value })} minDate={this.minDate} maxDate={this.maxDate} readOnlyInput />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="disableddays">Disabled Days</label>
+                                <Calendar id="disableddays" value={this.state.date5} onChange={(e) => this.setState({ date5: e.value })} disabledDates={this.invalidDates} disabledDays={[0, 6]} readOnlyInput />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="navigators">Navigators</label>
+                                <Calendar id="navigators" value={this.state.date6} onChange={(e) => this.setState({ date6: e.value })} monthNavigator yearNavigator yearRange="2010:2030" />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="multiple">Multiple</label>
+                                <Calendar id="multiple" value={this.state.dates1} onChange={(e) => this.setState({ dates1: e.value })} selectionMode="multiple" readOnlyInput />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="range">Range</label>
+                                <Calendar id="range" value={this.state.dates2} onChange={(e) => this.setState({ dates2: e.value })} selectionMode="range" readOnlyInput />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="buttonbar">Button Bar</label>
+                                <Calendar id="buttonbar" value={this.state.date7} onChange={(e) => this.setState({ date7: e.value })} showButtonBar />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="time24">Time / 24h</label>
+                                <Calendar id="time24" value={this.state.date8} onChange={(e) => this.setState({ date8: e.value })} showTime showSeconds />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="time12">Time / 12h</label>
+                                <Calendar id="time12" value={this.state.date9} onChange={(e) => this.setState({ date9: e.value })} timeOnly hourFormat="12" />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="monthpicker">Month Picker</label>
+                                <Calendar id="monthpicker" value={this.state.date10} onChange={(e) => this.setState({ date10: e.value })} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030" />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="multiplemonths">Multiple Months</label>
+                                <Calendar id="multiplemonths" value={this.state.date11} onChange={(e) => this.setState({ date11: e.value })} numberOfMonths={3} />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="datetemplate">Date Template</label>
+                                <Calendar id="datetemplate" value={this.state.date12} onChange={(e) => this.setState({ date12: e.value })} dateTemplate={this.dateTemplate} />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="touchUI">TouchUI</label>
+                                <Calendar id="touchUI" value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="mask">Mask</label>
+                                <Calendar id="mask" value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} mask="99/99/9999"/>
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="controlled">Visibility Control</label>
+                                <Calendar id="controlled" value={this.state.date15} onChange={(e) => this.setState({ date15: e.value })} visible={this.state.visible} onVisibleChange={this.onVisibleChange} />
+                            </div>
+                            <div className="p-field p-col-12 p-md-4">
+                                <label htmlFor="navigatorstemplate">Navigators Template</label>
+                                <Calendar id="navigatorstemplate" value={this.state.date16} onChange={(e) => this.setState({ date16: e.value })} monthNavigator yearNavigator yearRange="2010:2030"
+                                    monthNavigatorTemplate={this.monthNavigatorTemplate} yearNavigatorTemplate={this.yearNavigatorTemplate} />
+                            </div>
                         </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Spanish</h3>
-                            <Calendar value={this.state.date2} onChange={(e) => this.setState({ date2: e.value })} locale={es} dateFormat="dd/mm/yy" />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Icon</h3>
-                            <Calendar value={this.state.date3} onChange={(e) => this.setState({ date3: e.value })} showIcon={true} />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Min-Max</h3>
-                            <Calendar value={this.state.date4} onChange={(e) => this.setState({ date4: e.value })} minDate={this.minDate} maxDate={this.maxDate} readOnlyInput={true} />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Disabled Days</h3>
-                            <Calendar value={this.state.date5} onChange={(e) => this.setState({ date5: e.value })} disabledDates={this.invalidDates} disabledDays={[0, 6]} readOnlyInput={true} />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Navigators</h3>
-                            <Calendar value={this.state.date6} onChange={(e) => this.setState({ date6: e.value })} monthNavigator={true} yearNavigator={true} yearRange="2010:2030" />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Multiple Selection</h3>
-                            <Calendar value={this.state.dates1} onChange={(e) => this.setState({ dates1: e.value })} selectionMode="multiple" readOnlyInput={true} />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Range Selection</h3>
-                            <Calendar value={this.state.dates2} onChange={(e) => this.setState({ dates2: e.value })} selectionMode="range" readOnlyInput={true} />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Button Bar</h3>
-                            <Calendar value={this.state.date7} onChange={(e) => this.setState({ date7: e.value })} showButtonBar={true} />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Time / 24h</h3>
-                            <Calendar value={this.state.date8} onChange={(e) => this.setState({ date8: e.value })} showTime={true} showSeconds={true} />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Time Only / 12h</h3>
-                            <Calendar value={this.state.date9} onChange={(e) => this.setState({ date9: e.value })} timeOnly={true} hourFormat="12" />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Date Template</h3>
-                            <Calendar value={this.state.date10} onChange={(e) => this.setState({ date10: e.value })} dateTemplate={this.dateTemplate} />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Multiple Months</h3>
-                            <Calendar value={this.state.date11} onChange={(e) => this.setState({ date11: e.value })} numberOfMonths={3} />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Month/Year Picker</h3>
-                            <Calendar value={this.state.date12} onChange={(e) => this.setState({ date12: e.value })} view="month" dateFormat="mm/yy" yearNavigator={true} yearRange="2010:2030" />
-                        </div>
-                        <div className="p-col-12 p-md-4">
-                            <h3>Touch UI</h3>
-                            <Calendar value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI={true} />
-                        </div>
-                    </div>
 
-                    <h3>Inline</h3>
-                    <Calendar value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} inline={true} showWeek={true} />
+                        <h5>Inline</h5>
+                        <Calendar value={this.state.date17} onChange={(e) => this.setState({ date17: e.value })} inline showWeek />
+                    </div>
                 </div>
 
                 <CalendarDoc></CalendarDoc>

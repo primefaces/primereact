@@ -1,0 +1,159 @@
+.button-demo {
+    .p-button {
+        margin-right: .5rem;
+    }
+
+    .p-buttonset {
+        .p-button {
+            margin-right: 0;
+        }
+    }
+
+    .template {
+        .p-button {
+            i {
+                line-height: 2.25rem;
+            }
+
+            @mixin button-bg($defaultColor, $hoverColor) {
+                background: linear-gradient(to left, $defaultColor 50%, $hoverColor 50%);
+                background-size: 200% 100%;
+                background-position: right bottom;
+                transition: background-position .5s ease-out;
+
+                &:hover {
+                    background-position: left bottom;
+                }
+            }
+
+            &.google {
+                @include button-bg(var(--purple-600), var(--purple-700));
+                color: #ffffff;
+                border-color: var(--purple-700);
+
+                i {
+                    background-color: var(--purple-700);
+                }
+
+                &:focus {
+                    box-shadow: 0 0 0 1px var(--purple-400);
+                }
+            }
+
+            &.youtube {
+                @include button-bg(var(--pink-600), var(--pink-700));
+                color: #ffffff;
+                border-color: var(--pink-700);
+
+                i {
+                    background-color: var(--pink-700);
+                }
+
+                &:focus {
+                    box-shadow: 0 0 0 1px var(--pink-400);
+                }
+            }
+
+            &.vimeo {
+                @include button-bg(var(--green-200), var(--green-300));
+                color: #000000;
+                border-color: var(--green-300);
+
+                i {
+                    background-color: var(--green-300);
+                }
+
+                &:focus {
+                    box-shadow: 0 0 0 1px var(--green-400);
+                }
+            }
+
+            &.facebook {
+                @include button-bg(var(--indigo-600), var(--indigo-700));
+                color: #ffffff;
+                border-color: var(--indigo-700);
+
+                i {
+                    background-color: var(--indigo-700);
+                }
+
+                &:focus {
+                    box-shadow: 0 0 0 1px var(--indigo-400);
+                }
+            }
+
+            &.twitter {
+                @include button-bg(var(--blue-400), var(--blue-500));
+                color: #ffffff;
+                border-color: var(--blue-500);
+
+                i {
+                    background-color: var(--blue-500);
+                }
+
+                &:focus {
+                    box-shadow: 0 0 0 1px var(--blue-200);
+                }
+            }
+
+            &.slack {
+                @include button-bg(var(--orange-400), var(--orange-500));
+                color: #ffffff;
+                border-color: var(--orange-500);
+
+                i {
+                    background-color: var(--orange-500);
+                }
+
+                &:focus {
+                    box-shadow: 0 0 0 1px var(--orange-200);
+                }
+            }
+
+            &.amazon {
+                @include button-bg(var(--yellow-400), var(--yellow-500));
+                color: #000000;
+                border-color: var(--yellow-500);
+
+                i {
+                    background-color: var(--yellow-500);
+                }
+
+                &:focus {
+                    box-shadow: 0 0 0 1px var(--yellow-200);
+                }
+            }
+
+            &.discord {
+                @include button-bg(var(--bluegray-700), var(--bluegray-800));
+                color: #ffffff;
+                border-color: var(--bluegray-800);
+
+                i {
+                    background-color: var(--bluegray-800);
+                }
+
+                &:focus {
+                    box-shadow: 0 0 0 1px var(--bluegray-500);
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 960px) {
+        .p-button {
+            margin-bottom: .5rem;
+
+            &:not(.p-button-icon-only) {
+                display: flex;
+                width: 100%;
+            }
+        }
+
+        .p-buttonset {
+            .p-button {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

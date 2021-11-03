@@ -1,165 +1,241 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {InputText} from '../../components/inputtext/InputText';
-import {Dropdown} from '../../components/dropdown/Dropdown';
-import {Growl} from '../../components/growl/Growl';
-import {CarService} from '../service/CarService';
-import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import { InputText } from '../../components/inputtext/InputText';
+import { InputNumber } from '../../components/inputnumber/InputNumber';
+import { Dropdown } from '../../components/dropdown/Dropdown';
+import { Button } from '../../components/button/Button';
+import { Toast } from '../../components/toast/Toast';
+import { ProductService } from '../service/ProductService';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
+import './DataTableDemo.scss';
 
 export class DataTableEditDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars1: [],
-            cars2: []
+            products1: null,
+            products2: null,
+            products3: null,
+            products4: null,
+            editingRows: {}
         };
-        this.clonedCars = {};
-        this.carservice = new CarService();
 
-        this.vinEditor = this.vinEditor.bind(this);
-        this.yearEditor = this.yearEditor.bind(this);
-        this.brandEditor = this.brandEditor.bind(this);
-        this.colorEditor = this.colorEditor.bind(this);
-        this.requiredValidator = this.requiredValidator.bind(this);
+        this.columns = [
+            { field: 'code', header: 'Code' },
+            { field: 'name', header: 'Name' },
+            { field: 'quantity', header: 'Quantity' },
+            { field: 'price', header: 'Price' }
+        ];
 
-        this.editorForRowEditing = this.editorForRowEditing.bind(this);
-        this.onRowEditorValidator = this.onRowEditorValidator.bind(this);
-        this.onRowEditInit = this.onRowEditInit.bind(this);
-        this.onRowEditSave = this.onRowEditSave.bind(this);
-        this.onRowEditCancel = this.onRowEditCancel.bind(this);
+        this.statuses = [
+            { label: 'In Stock', value: 'INSTOCK' },
+            { label: 'Low Stock', value: 'LOWSTOCK' },
+            { label: 'Out of Stock', value: 'OUTOFSTOCK' }
+        ];
+
+        this.productService = new ProductService();
+
+        this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
+        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
+        this.onCellEditComplete = this.onCellEditComplete.bind(this);
+        this.onRowEditComplete1 = this.onRowEditComplete1.bind(this);
+        this.onRowEditComplete2 = this.onRowEditComplete2.bind(this);
+        this.onRowEditChange = this.onRowEditChange.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars1: data, cars2: data}));
+        this.fetchProductData('products1');
+        this.fetchProductData('products2');
+        this.fetchProductData('products3');
+        this.fetchProductData('products4');
     }
 
-    /* Cell Editing */
-    onEditorValueChange(props, value) {
-        let updatedCars = [...props.value];
-        updatedCars[props.rowIndex][props.field] = value;
-        this.setState({cars1: updatedCars});
+    fetchProductData(productStateKey) {
+        this.productService.getProductsSmall().then(data => this.setState({ [`${productStateKey}`]: data }));
     }
 
-    inputTextEditor(props, field) {
-        return <InputText type="text" value={props.rowData[field]} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
+    isPositiveInteger(val) {
+        let str = String(val);
+        str = str.trim();
+        if (!str) {
+            return false;
+        }
+        str = str.replace(/^0+/, "") || "0";
+        let n = Math.floor(Number(str));
+        return n !== Infinity && String(n) === str && n >= 0;
     }
 
-    vinEditor(props) {
-        return this.inputTextEditor(props, 'vin');
+    getStatusLabel(status) {
+        switch (status) {
+            case 'INSTOCK':
+                return 'In Stock';
+
+            case 'LOWSTOCK':
+                return 'Low Stock';
+
+            case 'OUTOFSTOCK':
+                return 'Out of Stock';
+
+            default:
+                return 'NA';
+        }
     }
 
-    yearEditor(props) {
-        return this.inputTextEditor(props, 'year');
+    onCellEditComplete(e) {
+        let { rowData, newValue, field, originalEvent: event } = e;
+
+        switch (field) {
+            case 'quantity':
+            case 'price':
+                if (this.isPositiveInteger(newValue))
+                    rowData[field] = newValue;
+                else
+                    event.preventDefault();
+                break;
+
+            default:
+                if (newValue.trim().length > 0)
+                    rowData[field] = newValue;
+                else
+                    event.preventDefault();
+                break;
+        }
     }
 
-    brandEditor(props) {
-        let brands = [
-            {label: 'Audi', value: 'Audi'},
-            {label: 'BMW', value: 'BMW'},
-            {label: 'Fiat', value: 'Fiat'},
-            {label: 'Ford', value: 'Ford'},
-            {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
-            {label: 'Mercedes', value: 'Mercedes'},
-            {label: 'Renault', value: 'Renault'},
-            {label: 'VW', value: 'VW'},
-            {label: 'Volvo', value: 'Volvo'}
-        ];
+    onRowEditComplete1(e) {
+        let products2 = [...this.state.products2];
+        let { newData, index } = e;
 
+        products2[index] = newData;
+
+        this.setState({ products2 });
+    }
+
+    onRowEditComplete2(e) {
+        let products3 = [...this.state.products3];
+        let { newData, index } = e;
+
+        products3[index] = newData;
+
+        this.setState({ products3 });
+    }
+
+    onRowEditChange(e) {
+        this.setState({ editingRows: e.data });
+    }
+
+    setActiveRowIndex(index) {
+        let editingRows = { ...this.state.editingRows, ...{ [`${this.state.products3[index].id}`]: true } };
+        this.setState({ editingRows });
+    }
+
+    cellEditor(options) {
+        if (options.field === 'price')
+            return this.priceEditor(options);
+        else
+            return this.textEditor(options);
+    }
+
+    textEditor(options) {
+        return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+    }
+
+    statusEditor(options) {
         return (
-            <Dropdown value={props.value[props.rowIndex].brand} options={brands}
-                    onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} placeholder="Select a City"/>
+            <Dropdown value={options.value} options={this.statuses} optionLabel="label" optionValue="value"
+                onChange={(e) => options.editorCallback(e.value)} placeholder="Select a Status"
+                itemTemplate={(option) => {
+                    return <span className={`product-badge status-${option.value.toLowerCase()}`}>{option.label}</span>
+                }} />
         );
     }
 
-    colorEditor(props) {
-        return this.inputTextEditor(props, 'color');
+    priceEditor(options) {
+        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />
     }
 
-    requiredValidator(props) {
-        let value = props.rowData[props.field];
-        return value && value.length > 0;
+    statusBodyTemplate(rowData) {
+        return this.getStatusLabel(rowData.inventoryStatus);
     }
 
-    /* Row Editing */
-    onEditorValueChangeForRowEditing(props, value) {
-        let updatedCars = [...props.value];
-        updatedCars[props.rowIndex][props.field] = value;
-        this.setState({cars2: updatedCars});
-    }
-
-    editorForRowEditing(props, field) {
-        return <InputText type="text" value={props.rowData[field]} onChange={(e) => this.onEditorValueChangeForRowEditing(props, e.target.value)} />;
-    }
-
-    onRowEditorValidator(rowData) {
-        let value = rowData['brand'];
-        return value.length > 0;
-    }
-
-    onRowEditInit(event) {
-        this.clonedCars[event.data.vin] = {...event.data};
-    }
-
-    onRowEditSave(event) {
-        if (this.onRowEditorValidator(event.data)) {
-            delete this.clonedCars[event.data.vin];
-            this.growl.show({severity: 'success', summary: 'Success', detail: 'Car is updated'});
-        }
-        else {
-            this.growl.show({severity: 'error', summary: 'Error', detail: 'Brand is required'});
-        }
-    }
-
-    onRowEditCancel(event) {
-        let cars = [...this.state.cars2];
-        cars[event.index] = this.clonedCars[event.data.vin];
-        delete this.clonedCars[event.data.vin];
-        this.setState({
-            cars2: cars
-        })
+    priceBodyTemplate(rowData) {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rowData.price);
     }
 
     render() {
         return (
             <div>
-                <DataTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable - Edit</h1>
+                    <AppInlineHeader changelogText="dataTable">
+                        <h1>DataTable <span>Edit</span></h1>
                         <p>Cell and Row editing provides a rapid and user friendly way to manipulate data.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableEditDemo.js" />
                 </div>
 
-                <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el} />
+                <div className="content-section implementation datatable-editing-demo">
+                    <Toast ref={(el) => this.toast = el} />
 
-                    <h3>Cell Editing</h3>
-                    <DataTable value={this.state.cars1}>
-                        <Column field="vin" header="Vin" editor={this.vinEditor} editorValidator={this.requiredValidator} style={{height: '3.5em'}}/>
-                        <Column field="year" header="Year" editor={this.yearEditor} style={{height: '3.5em'}}/>
-                        <Column field="brand" header="Brand" editor={this.brandEditor} style={{height: '3.5em'}}/>
-                        <Column field="color" header="Color" editor={this.colorEditor} style={{height: '3.5em'}}/>
-                    </DataTable>
+                    <div className="card p-fluid">
+                        <h5>Cell Editing</h5>
+                        <p>Validations, dynamic columns and reverting values with the escape key.</p>
+                        <DataTable value={this.state.products1} editMode="cell" className="editable-cells-table" responsiveLayout="scroll">
+                            {
+                                this.columns.map(({ field, header }) => {
+                                    return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && this.priceBodyTemplate}
+                                        editor={(options) => this.cellEditor(options)} onCellEditComplete={this.onCellEditComplete} />
+                                })
+                            }
+                        </DataTable>
+                    </div>
 
-                    <h3>Row Editing</h3>
-                    <DataTable value={this.state.cars2} editMode="row" rowEditorValidator={this.onRowEditorValidator} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel}>
-                        <Column field="vin" header="Vin" style={{height: '3.5em'}}/>
-                        <Column field="year" header="Year" editor={(props) => this.editorForRowEditing(props, 'year')} style={{height: '3.5em'}}/>
-                        <Column field="brand" header="Brand" editor={(props) => this.editorForRowEditing(props, 'brand')} style={{height: '3.5em'}}/>
-                        <Column field="color" header="Color" editor={(props) => this.editorForRowEditing(props, 'color')} style={{height: '3.5em'}}/>
-                        <Column rowEditor={true} style={{'width': '70px', 'textAlign': 'center'}}></Column>
-                    </DataTable>
+                    <div className="card p-fluid">
+                        <h5>Row Editing</h5>
+                        <DataTable value={this.state.products2} editMode="row" dataKey="id" onRowEditComplete={this.onRowEditComplete1} responsiveLayout="scroll">
+                            <Column field="code" header="Code" editor={(options) => this.textEditor(options)} style={{ width: '20%' }}></Column>
+                            <Column field="name" header="Name" editor={(options) => this.textEditor(options)} style={{ width: '20%' }}></Column>
+                            <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} editor={(options) => this.statusEditor(options)} style={{ width: '20%' }}></Column>
+                            <Column field="price" header="Price" body={this.priceBodyTemplate} editor={(options) => this.priceEditor(options)} style={{ width: '20%' }}></Column>
+                            <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                        </DataTable>
+                    </div>
+
+                    <div className="card">
+                        <h5>Programmatic</h5>
+                        <div className="p-pt-2 p-pb-4">
+                            <Button onClick={() => this.setActiveRowIndex(0)} className="p-button-text" label="Activate 1st" />
+                            <Button onClick={() => this.setActiveRowIndex(2)} className="p-button-text" label="Activate 3rd" />
+                            <Button onClick={() => this.setActiveRowIndex(4)} className="p-button-text" label="Activate 5th" />
+                        </div>
+
+                        <div className="p-fluid">
+                            <DataTable value={this.state.products3} editMode="row" dataKey="id" editingRows={this.state.editingRows} onRowEditChange={this.onRowEditChange} onRowEditComplete={this.onRowEditComplete2} responsiveLayout="scroll">
+                                <Column field="code" header="Code" editor={(options) => this.textEditor(options)} style={{ width: '20%' }}></Column>
+                                <Column field="name" header="Name" editor={(options) => this.textEditor(options)} style={{ width: '20%' }}></Column>
+                                <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} editor={(options) => this.statusEditor(options)} style={{ width: '20%' }}></Column>
+                                <Column field="price" header="Price" body={this.priceBodyTemplate} editor={(options) => this.priceEditor(options)} style={{ width: '20%' }}></Column>
+                                <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                            </DataTable>
+                        </div>
+                    </div>
+
+                    <div className="card p-fluid">
+                        <h5>Cell Editing with Sorting and Filter</h5>
+                        <DataTable value={this.state.products4} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+                            {
+                                this.columns.map(({ field, header }) => {
+                                    return <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && this.priceBodyTemplate}
+                                        editor={(options) => this.cellEditor(options)} onCellEditComplete={this.onCellEditComplete} />
+                                })
+                            }
+                        </DataTable>
+                    </div>
                 </div>
 
                 <DataTableEditDemoDoc></DataTableEditDemoDoc>
@@ -178,149 +254,230 @@ export class DataTableEditDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {InputText} from 'primereact/inputtext';
-import {Dropdown} from 'primereact/dropdown';
-import {Growl} from 'primereact/growl';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
+import { Dropdown } from 'primereact/dropdown';
+import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
+import { ProductService } from '../service/ProductService';
+import './DataTableDemo.css';
 
 export class DataTableEditDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
-            cars1: [],
-            cars2: []
+            products1: null,
+            products2: null,
+            products3: null,
+            products4: null,
+            editingRows: {}
         };
-        this.clonedCars = {};
-        this.carservice = new CarService();
 
-        this.vinEditor = this.vinEditor.bind(this);
-        this.yearEditor = this.yearEditor.bind(this);
-        this.brandEditor = this.brandEditor.bind(this);
-        this.colorEditor = this.colorEditor.bind(this);
-        this.requiredValidator = this.requiredValidator.bind(this);
+        this.columns = [
+            { field: 'code', header: 'Code' },
+            { field: 'name', header: 'Name' },
+            { field: 'quantity', header: 'Quantity' },
+            { field: 'price', header: 'Price' }
+        ];
 
-        this.editorForRowEditing = this.editorForRowEditing.bind(this);
-        this.onRowEditorValidator = this.onRowEditorValidator.bind(this);
-        this.onRowEditInit = this.onRowEditInit.bind(this);
-        this.onRowEditSave = this.onRowEditSave.bind(this);
-        this.onRowEditCancel = this.onRowEditCancel.bind(this);
+        this.statuses = [
+            { label: 'In Stock', value: 'INSTOCK' },
+            { label: 'Low Stock', value: 'LOWSTOCK' },
+            { label: 'Out of Stock', value: 'OUTOFSTOCK' }
+        ];
+
+        this.productService = new ProductService();
+
+        this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
+        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
+        this.onCellEditComplete = this.onCellEditComplete.bind(this);
+        this.onRowEditComplete1 = this.onRowEditComplete1.bind(this);
+        this.onRowEditComplete2 = this.onRowEditComplete2.bind(this);
+        this.onRowEditChange = this.onRowEditChange.bind(this);
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars1: data, cars2: data}));
+        this.fetchProductData('products1');
+        this.fetchProductData('products2');
+        this.fetchProductData('products3');
+        this.fetchProductData('products4');
     }
 
-    /* Cell Editing */
-    onEditorValueChange(props, value) {
-        let updatedCars = [...props.value];
-        updatedCars[props.rowIndex][props.field] = value;
-        this.setState({cars1: updatedCars});
+    fetchProductData(productStateKey) {
+        this.productService.getProductsSmall().then(data => this.setState({ [\`\${productStateKey}\`]: data }));
     }
 
-    inputTextEditor(props, field) {
-        return <InputText type="text" value={props.rowData[field]} onChange={(e) => this.onEditorValueChange(props, e.target.value)} />;
+    isPositiveInteger(val) {
+        let str = String(val);
+        str = str.trim();
+        if (!str) {
+            return false;
+        }
+        str = str.replace(/^0+/, "") || "0";
+        let n = Math.floor(Number(str));
+        return n !== Infinity && String(n) === str && n >= 0;
     }
 
-    vinEditor(props) {
-        return this.inputTextEditor(props, 'vin');
+    getStatusLabel(status) {
+        switch (status) {
+            case 'INSTOCK':
+                return 'In Stock';
+
+            case 'LOWSTOCK':
+                return 'Low Stock';
+
+            case 'OUTOFSTOCK':
+                return 'Out of Stock';
+
+            default:
+                return 'NA';
+        }
     }
 
-    yearEditor(props) {
-        return this.inputTextEditor(props, 'year');
+    onCellEditComplete(e) {
+        let { rowData, newValue, field, originalEvent: event } = e;
+
+        switch (field) {
+            case 'quantity':
+            case 'price':
+                if (this.isPositiveInteger(newValue))
+                    rowData[field] = newValue;
+                else
+                    event.preventDefault();
+                break;
+
+            default:
+                if (newValue.trim().length > 0)
+                    rowData[field] = newValue;
+                else
+                    event.preventDefault();
+                break;
+        }
     }
 
-    brandEditor(props) {
-        let brands = [
-            {label: 'Audi', value: 'Audi'},
-            {label: 'BMW', value: 'BMW'},
-            {label: 'Fiat', value: 'Fiat'},
-            {label: 'Ford', value: 'Ford'},
-            {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
-            {label: 'Mercedes', value: 'Mercedes'},
-            {label: 'Renault', value: 'Renault'},
-            {label: 'VW', value: 'VW'},
-            {label: 'Volvo', value: 'Volvo'}
-        ];
+    onRowEditComplete1(e) {
+        let products2 = [...this.state.products2];
+        let { newData, index } = e;
 
+        products2[index] = newData;
+
+        this.setState({ products2 });
+    }
+
+    onRowEditComplete2(e) {
+        let products3 = [...this.state.products3];
+        let { newData, index } = e;
+
+        products3[index] = newData;
+
+        this.setState({ products3 });
+    }
+
+    onRowEditChange(e) {
+        this.setState({ editingRows: e.data });
+    }
+
+    setActiveRowIndex(index) {
+        let editingRows = { ...this.state.editingRows, ...{ [\`\${this.state.products3[index].id}\`]: true } };
+        this.setState({ editingRows });
+    }
+
+    cellEditor(options) {
+        if (options.field === 'price')
+            return this.priceEditor(options);
+        else
+            return this.textEditor(options);
+    }
+
+    textEditor(options) {
+        return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+    }
+
+    statusEditor(options) {
         return (
-            <Dropdown value={props.value[props.rowIndex].brand} options={brands}
-                    onChange={(e) => this.onEditorValueChange(props, e.value)} style={{width:'100%'}} placeholder="Select a City"/>
+            <Dropdown value={options.value} options={this.statuses} optionLabel="label" optionValue="value"
+                onChange={(e) => options.editorCallback(e.value)} placeholder="Select a Status"
+                itemTemplate={(option) => {
+                    return <span className={\`product-badge status-\${option.value.toLowerCase()}\`}>{option.label}</span>
+                }} />
         );
     }
 
-    colorEditor(props) {
-        return this.inputTextEditor(props, 'color');
+    priceEditor(options) {
+        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />
     }
 
-    requiredValidator(props) {
-        let value = props.rowData[props.field];
-        return value && value.length > 0;
+    statusBodyTemplate(rowData) {
+        return this.getStatusLabel(rowData.inventoryStatus);
     }
 
-    /* Row Editing */
-    onEditorValueChangeForRowEditing(props, value) {
-        let updatedCars = [...props.value];
-        updatedCars[props.rowIndex][props.field] = value;
-        this.setState({cars2: updatedCars});
-    }
-
-    editorForRowEditing(props, field) {
-        return <InputText type="text" value={props.rowData[field]} onChange={(e) => this.onEditorValueChangeForRowEditing(props, e.target.value)} />;
-    }
-
-    onRowEditorValidator(rowData) {
-        let value = rowData['brand'];
-        return value.length > 0;
-    }
-
-    onRowEditInit(event) {
-        this.clonedCars[event.data.vin] = {...event.data};
-    }
-
-    onRowEditSave(event) {
-        if (this.onRowEditorValidator(event.data)) {
-            delete this.clonedCars[event.data.vin];
-            this.growl.show({severity: 'success', summary: 'Success', detail: 'Car is updated'});
-        }
-        else {
-            this.growl.show({severity: 'error', summary: 'Error', detail: 'Brand is required'});
-        }
-    }
-
-    onRowEditCancel(event) {
-        let cars = [...this.state.cars2];
-        cars[event.index] = this.clonedCars[event.data.vin];
-        delete this.clonedCars[event.data.vin];
-        this.setState({
-            cars2: cars
-        })
+    priceBodyTemplate(rowData) {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rowData.price);
     }
 
     render() {
         return (
-            <div>
-                <Growl ref={(el) => this.growl = el} />
+            <div className="datatable-editing-demo">
+                <Toast ref={(el) => this.toast = el} />
 
-                <h3>Cell Editing</h3>
-                <DataTable value={this.state.cars1}>
-                    <Column field="vin" header="Vin" editor={this.vinEditor} editorValidator={this.requiredValidator} style={{height: '3.5em'}}/>
-                    <Column field="year" header="Year" editor={this.yearEditor} style={{height: '3.5em'}}/>
-                    <Column field="brand" header="Brand" editor={this.brandEditor} style={{height: '3.5em'}}/>
-                    <Column field="color" header="Color" editor={this.colorEditor} style={{height: '3.5em'}}/>
-                </DataTable>
+                <div className="card p-fluid">
+                    <h5>Cell Editing</h5>
+                    <p>Validations, dynamic columns and reverting values with the escape key.</p>
+                    <DataTable value={this.state.products1} editMode="cell" className="editable-cells-table" responsiveLayout="scroll">
+                        {
+                            this.columns.map(({ field, header }) => {
+                                return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && this.priceBodyTemplate}
+                                    editor={(options) => this.cellEditor(options)} onCellEditComplete={this.onCellEditComplete} />
+                            })
+                        }
+                    </DataTable>
+                </div>
 
-                <h3>Row Editing</h3>
-                <DataTable value={this.state.cars2} editMode="row" rowEditorValidator={this.onRowEditorValidator} onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel}>
-                    <Column field="vin" header="Vin" style={{height: '3.5em'}}/>
-                    <Column field="year" header="Year" editor={(props) => this.editorForRowEditing(props, 'year')} style={{height: '3.5em'}}/>
-                    <Column field="brand" header="Brand" editor={(props) => this.editorForRowEditing(props, 'brand')} style={{height: '3.5em'}}/>
-                    <Column field="color" header="Color" editor={(props) => this.editorForRowEditing(props, 'color')} style={{height: '3.5em'}}/>
-                    <Column rowEditor={true} style={{'width': '70px', 'textAlign': 'center'}}></Column>
-                </DataTable>
+                <div className="card p-fluid">
+                    <h5>Row Editing</h5>
+                    <DataTable value={this.state.products2} editMode="row" dataKey="id" onRowEditComplete={this.onRowEditComplete1} responsiveLayout="scroll">
+                        <Column field="code" header="Code" editor={(options) => this.textEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="name" header="Name" editor={(options) => this.textEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} editor={(options) => this.statusEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="price" header="Price" body={this.priceBodyTemplate} editor={(options) => this.priceEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                    </DataTable>
+                </div>
+
+                <div className="card">
+                    <h5>Programmatic</h5>
+                    <div className="p-pt-2 p-pb-4">
+                        <Button onClick={() => this.setActiveRowIndex(0)} className="p-button-text" label="Activate 1st" />
+                        <Button onClick={() => this.setActiveRowIndex(2)} className="p-button-text" label="Activate 3rd" />
+                        <Button onClick={() => this.setActiveRowIndex(4)} className="p-button-text" label="Activate 5th" />
+                    </div>
+
+                    <div className="p-fluid">
+                        <DataTable value={this.state.products3} editMode="row" dataKey="id" editingRows={this.state.editingRows} onRowEditChange={this.onRowEditChange} onRowEditComplete={this.onRowEditComplete2} responsiveLayout="scroll">
+                            <Column field="code" header="Code" editor={(options) => this.textEditor(options)} style={{ width: '20%' }}></Column>
+                            <Column field="name" header="Name" editor={(options) => this.textEditor(options)} style={{ width: '20%' }}></Column>
+                            <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} editor={(options) => this.statusEditor(options)} style={{ width: '20%' }}></Column>
+                            <Column field="price" header="Price" body={this.priceBodyTemplate} editor={(options) => this.priceEditor(options)} style={{ width: '20%' }}></Column>
+                            <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                        </DataTable>
+                    </div>
+                </div>
+
+                <div className="card p-fluid">
+                    <h5>Cell Editing with Sorting and Filter</h5>
+                    <DataTable value={this.state.products4} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+                        {
+                            this.columns.map(({ field, header }) => {
+                                return <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && this.priceBodyTemplate}
+                                    editor={(options) => this.cellEditor(options)} onCellEditComplete={this.onCellEditComplete} />
+                            })
+                        }
+                    </DataTable>
+                </div>
             </div>
         );
     }
@@ -331,134 +488,223 @@ export class DataTableEditDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {InputText} from 'primereact/inputtext';
-import {Dropdown} from 'primereact/dropdown';
-import {Growl} from 'primereact/growl';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
+import { Dropdown } from 'primereact/dropdown';
+import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
+import { ProductService } from '../service/ProductService';
+import './DataTableDemo.css';
 
 const DataTableEditDemo = () => {
-    const [cars1, setCars1] = useState([]);
-    const [cars2, setCars2] = useState([]);
+    const [products1, setProducts1] = useState(null);
+    const [products2, setProducts2] = useState(null);
+    const [products3, setProducts3] = useState(null);
+    const [products4, setProducts4] = useState(null);
+    const [editingRows, setEditingRows] = useState({});
+    const toast = useRef(null);
 
-    const carservice = new CarService();
-    let clonedCars = {};
-    let growl = useRef(null);
+    const columns = [
+        { field: 'code', header: 'Code' },
+        { field: 'name', header: 'Name' },
+        { field: 'quantity', header: 'Quantity' },
+        { field: 'price', header: 'Price' }
+    ];
+
+    const statuses = [
+        { label: 'In Stock', value: 'INSTOCK' },
+        { label: 'Low Stock', value: 'LOWSTOCK' },
+        { label: 'Out of Stock', value: 'OUTOFSTOCK' }
+    ];
+
+    const dataTableFuncMap = {
+        'products1': setProducts1,
+        'products2': setProducts2,
+        'products3': setProducts3,
+        'products4': setProducts4
+    };
+
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => {
-            setCars1(data);
-            setCars2(data);
-        });
+        fetchProductData('products1');
+        fetchProductData('products2');
+        fetchProductData('products3');
+        fetchProductData('products4');
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+    const fetchProductData = (productStateKey) => {
+        productService.getProductsSmall().then(data => dataTableFuncMap[\`\${productStateKey}\`](data));
+    }
 
-    /* Cell Editing */
-    const onEditorValueChange = (props, value) => {
-        let updatedCars = [...props.value];
-        updatedCars[props.rowIndex][props.field] = value;
-        setCars1(updatedCars);
-    };
-
-    const inputTextEditor = (props, field) => {
-        return <InputText type="text" value={props.rowData[field]} onChange={(e) => onEditorValueChange(props, e.target.value)} />;
-    };
-
-    const vinEditor = (props) => {
-        return inputTextEditor(props, 'vin');
-    };
-
-    const yearEditor = (props) => {
-        return inputTextEditor(props, 'year');
-    };
-
-    const brandEditor = (props) => {
-        let brands = [
-            {label: 'Audi', value: 'Audi'},
-            {label: 'BMW', value: 'BMW'},
-            {label: 'Fiat', value: 'Fiat'},
-            {label: 'Ford', value: 'Ford'},
-            {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
-            {label: 'Mercedes', value: 'Mercedes'},
-            {label: 'Renault', value: 'Renault'},
-            {label: 'VW', value: 'VW'},
-            {label: 'Volvo', value: 'Volvo'}
-        ];
-
-        return (
-            <Dropdown value={props.value[props.rowIndex].brand} options={brands}
-                    onChange={(e) => onEditorValueChange(props, e.value)} style={{width:'100%'}} placeholder="Select a City"/>
-        );
-    };
-
-    const colorEditor = (props) => {
-        return inputTextEditor(props, 'color');
-    };
-
-    const requiredValidator = (props) => {
-        let value = props.rowData[props.field];
-        return value && value.length > 0;
-    };
-
-    /* Row Editing */
-    const onEditorValueChangeForRowEditing = (props, value) => {
-        let updatedCars = [...props.value];
-        updatedCars[props.rowIndex][props.field] = value;
-        setCars2(updatedCars);
-    };
-
-    const editorForRowEditing = (props, field) => {
-        return <InputText type="text" value={props.rowData[field]} onChange={(e) => onEditorValueChangeForRowEditing(props, e.target.value)} />;
-    };
-
-    const onRowEditorValidator = (rowData) => {
-        let value = rowData['brand'];
-        return value.length > 0;
-    };
-
-    const onRowEditInit = (event) => {
-        clonedCars[event.data.vin] = {...event.data};
-    };
-
-    const onRowEditSave = (event) => {
-        if (onRowEditorValidator(event.data)) {
-            delete clonedCars[event.data.vin];
-            growl.current.show({severity: 'success', summary: 'Success', detail: 'Car is updated'});
+    const isPositiveInteger = (val) => {
+        let str = String(val);
+        str = str.trim();
+        if (!str) {
+            return false;
         }
-        else {
-            growl.current.show({severity: 'error', summary: 'Error', detail: 'Brand is required'});
+        str = str.replace(/^0+/, "") || "0";
+        let n = Math.floor(Number(str));
+        return n !== Infinity && String(n) === str && n >= 0;
+    }
+
+    const getStatusLabel = (status) => {
+        switch (status) {
+            case 'INSTOCK':
+                return 'In Stock';
+
+            case 'LOWSTOCK':
+                return 'Low Stock';
+
+            case 'OUTOFSTOCK':
+                return 'Out of Stock';
+
+            default:
+                return 'NA';
         }
     }
 
-    const onRowEditCancel = (event) => {
-        let cars = [...cars2];
-        cars[event.index] = clonedCars[event.data.vin];
-        delete clonedCars[event.data.vin];
-        setCars2(cars);
-    };
+    const onCellEditComplete = (e) => {
+        let { rowData, newValue, field, originalEvent: event } = e;
+
+        switch (field) {
+            case 'quantity':
+            case 'price':
+                if (isPositiveInteger(newValue))
+                    rowData[field] = newValue;
+                else
+                    event.preventDefault();
+                break;
+
+            default:
+                if (newValue.trim().length > 0)
+                    rowData[field] = newValue;
+                else
+                    event.preventDefault();
+                break;
+        }
+    }
+
+    const onRowEditComplete1 = (e) => {
+        let _products2 = [...products2];
+        let { newData, index } = e;
+
+        _products2[index] = newData;
+
+        setProducts2(_products2);
+    }
+
+    const onRowEditComplete2 = (e) => {
+        let _products3 = [...products3];
+        let { newData, index } = e;
+
+        _products3[index] = newData;
+
+        setProducts3(_products3);
+    }
+
+    const onRowEditChange = (e) => {
+        setEditingRows(e.data);
+    }
+
+    const setActiveRowIndex = (index) => {
+        let _editingRows = { ...editingRows, ...{ [\`\${products3[index].id}\`]: true } };
+        setEditingRows(_editingRows);
+    }
+
+    const cellEditor = (options) => {
+        if (options.field === 'price')
+            return priceEditor(options);
+        else
+            return textEditor(options);
+    }
+
+    const textEditor = (options) => {
+        return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+    }
+
+    const statusEditor = (options) => {
+        return (
+            <Dropdown value={options.value} options={statuses} optionLabel="label" optionValue="value"
+                onChange={(e) => options.editorCallback(e.value)} placeholder="Select a Status"
+                itemTemplate={(option) => {
+                    return <span className={\`product-badge status-\${option.value.toLowerCase()}\`}>{option.label}</span>
+                }} />
+        );
+    }
+
+    const priceEditor = (options) => {
+        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />
+    }
+
+    const statusBodyTemplate = (rowData) => {
+        return getStatusLabel(rowData.inventoryStatus);
+    }
+
+    const priceBodyTemplate = (rowData) => {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rowData.price);
+    }
 
     return (
-        <div>
-            <Growl ref={growl} />
+        <div className="datatable-editing-demo">
+            <Toast ref={toast} />
 
-            <h3>Cell Editing</h3>
-            <DataTable value={cars1}>
-                <Column field="vin" header="Vin" editor={vinEditor} editorValidator={requiredValidator} style={{height: '3.5em'}}/>
-                <Column field="year" header="Year" editor={yearEditor} style={{height: '3.5em'}}/>
-                <Column field="brand" header="Brand" editor={brandEditor} style={{height: '3.5em'}}/>
-                <Column field="color" header="Color" editor={colorEditor} style={{height: '3.5em'}}/>
-            </DataTable>
+            <div className="card p-fluid">
+                <h5>Cell Editing</h5>
+                <p>Validations, dynamic columns and reverting values with the escape key.</p>
+                <DataTable value={products1} editMode="cell" className="editable-cells-table" responsiveLayout="scroll">
+                    {
+                        columns.map(({ field, header }) => {
+                            return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate}
+                                editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
+                        })
+                    }
+                </DataTable>
+            </div>
 
-            <h3>Row Editing</h3>
-            <DataTable value={cars2} editMode="row" rowEditorValidator={onRowEditorValidator} onRowEditInit={onRowEditInit} onRowEditSave={onRowEditSave} onRowEditCancel={onRowEditCancel}>
-                <Column field="vin" header="Vin" style={{height: '3.5em'}}/>
-                <Column field="year" header="Year" editor={(props) => editorForRowEditing(props, 'year')} style={{height: '3.5em'}}/>
-                <Column field="brand" header="Brand" editor={(props) => editorForRowEditing(props, 'brand')} style={{height: '3.5em'}}/>
-                <Column field="color" header="Color" editor={(props) => editorForRowEditing(props, 'color')} style={{height: '3.5em'}}/>
-                <Column rowEditor={true} style={{'width': '70px', 'textAlign': 'center'}}></Column>
-            </DataTable>
+            <div className="card p-fluid">
+                <h5>Row Editing</h5>
+                <DataTable value={products2} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete1} responsiveLayout="scroll">
+                    <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                    <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                    <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
+                    <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Programmatic</h5>
+                <div className="p-pt-2 p-pb-4">
+                    <Button onClick={() => setActiveRowIndex(0)} className="p-button-text" label="Activate 1st" />
+                    <Button onClick={() => setActiveRowIndex(2)} className="p-button-text" label="Activate 3rd" />
+                    <Button onClick={() => setActiveRowIndex(4)} className="p-button-text" label="Activate 5th" />
+                </div>
+
+                <div className="p-fluid">
+                    <DataTable value={products3} editMode="row" dataKey="id" editingRows={editingRows} onRowEditChange={onRowEditChange} onRowEditComplete={onRowEditComplete2} responsiveLayout="scroll">
+                        <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                    </DataTable>
+                </div>
+            </div>
+
+            <div className="card p-fluid">
+                <h5>Cell Editing with Sorting and Filter</h5>
+                <DataTable value={products4} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+                    {
+                        columns.map(({ field, header }) => {
+                            return <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate}
+                                editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
+                        })
+                    }
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -468,137 +714,474 @@ const DataTableEditDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {InputText} from 'primereact/inputtext';
-import {Dropdown} from 'primereact/dropdown';
-import {Growl} from 'primereact/growl';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
+import { Dropdown } from 'primereact/dropdown';
+import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
+import { ProductService } from '../service/ProductService';
+import './DataTableDemo.css';
 
 const DataTableEditDemo = () => {
-    const [cars1, setCars1] = useState([]);
-    const [cars2, setCars2] = useState([]);
+    const [products1, setProducts1] = useState(null);
+    const [products2, setProducts2] = useState(null);
+    const [products3, setProducts3] = useState(null);
+    const [products4, setProducts4] = useState(null);
+    const [editingRows, setEditingRows] = useState({});
+    const toast = useRef(null);
 
-    const carservice = new CarService();
-    let clonedCars: any = {};
-    let growl = useRef<any>(null);
+    const columns = [
+        { field: 'code', header: 'Code' },
+        { field: 'name', header: 'Name' },
+        { field: 'quantity', header: 'Quantity' },
+        { field: 'price', header: 'Price' }
+    ];
+
+    const statuses = [
+        { label: 'In Stock', value: 'INSTOCK' },
+        { label: 'Low Stock', value: 'LOWSTOCK' },
+        { label: 'Out of Stock', value: 'OUTOFSTOCK' }
+    ];
+
+    const dataTableFuncMap = {
+        'products1': setProducts1,
+        'products2': setProducts2,
+        'products3': setProducts3,
+        'products4': setProducts4
+    };
+
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => {
-            setCars1(data);
-            setCars2(data);
-        });
+        fetchProductData('products1');
+        fetchProductData('products2');
+        fetchProductData('products3');
+        fetchProductData('products4');
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    /* Cell Editing */
-    const onEditorValueChange = (props: any, value: any) => {
-        let updatedCars: any = [...props.value];
-        updatedCars[props.rowIndex][props.field] = value;
-        setCars1(updatedCars);
-    };
+    const fetchProductData = (productStateKey) => {
+        productService.getProductsSmall().then(data => dataTableFuncMap[\`\${productStateKey}\`](data));
+    }
 
-    const inputTextEditor = (props: any, field: string) => {
-        return <InputText type="text" value={props.rowData[field]} onChange={(e) => onEditorValueChange(props, e.target.value)} />;
-    };
-
-    const vinEditor = (props: any) => {
-        return inputTextEditor(props, 'vin');
-    };
-
-    const yearEditor = (props: any) => {
-        return inputTextEditor(props, 'year');
-    };
-
-    const brandEditor = (props: any) => {
-        let brands = [
-            {label: 'Audi', value: 'Audi'},
-            {label: 'BMW', value: 'BMW'},
-            {label: 'Fiat', value: 'Fiat'},
-            {label: 'Ford', value: 'Ford'},
-            {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
-            {label: 'Mercedes', value: 'Mercedes'},
-            {label: 'Renault', value: 'Renault'},
-            {label: 'VW', value: 'VW'},
-            {label: 'Volvo', value: 'Volvo'}
-        ];
-
-        return (
-            <Dropdown value={props.value[props.rowIndex].brand} options={brands}
-                    onChange={(e) => onEditorValueChange(props, e.value)} style={{width:'100%'}} placeholder="Select a City"/>
-        );
-    };
-
-    const colorEditor = (props: any) => {
-        return inputTextEditor(props, 'color');
-    };
-
-    const requiredValidator = (props: any) => {
-        let value: any = props.rowData[props.field];
-        return value && value.length > 0;
-    };
-
-    /* Row Editing */
-    const onEditorValueChangeForRowEditing = (props: any, value: any) => {
-        let updatedCars: any = [...props.value];
-        updatedCars[props.rowIndex][props.field] = value;
-        setCars2(updatedCars);
-    };
-
-    const editorForRowEditing = (props: any, field: string) => {
-        return <InputText type="text" value={props.rowData[field]} onChange={(e) => onEditorValueChangeForRowEditing(props, e.target.value)} />;
-    };
-
-    const onRowEditorValidator = (rowData: any) => {
-        let value = rowData['brand'];
-        return value.length > 0;
-    };
-
-    const onRowEditInit = (event: any) => {
-        clonedCars[event.data.vin] = {...event.data};
-    };
-
-    const onRowEditSave = (event: any) => {
-        if (onRowEditorValidator(event.data)) {
-            delete clonedCars[event.data.vin];
-            growl.current.show({severity: 'success', summary: 'Success', detail: 'Car is updated'});
+    const isPositiveInteger = (val) => {
+        let str = String(val);
+        str = str.trim();
+        if (!str) {
+            return false;
         }
-        else {
-            growl.current.show({severity: 'error', summary: 'Error', detail: 'Brand is required'});
+        str = str.replace(/^0+/, "") || "0";
+        let n = Math.floor(Number(str));
+        return n !== Infinity && String(n) === str && n >= 0;
+    }
+
+    const getStatusLabel = (status) => {
+        switch (status) {
+            case 'INSTOCK':
+                return 'In Stock';
+
+            case 'LOWSTOCK':
+                return 'Low Stock';
+
+            case 'OUTOFSTOCK':
+                return 'Out of Stock';
+
+            default:
+                return 'NA';
         }
     }
 
-    const onRowEditCancel = (event: any) => {
-        let cars: any = [...cars2];
-        cars[event.index] = clonedCars[event.data.vin];
-        delete clonedCars[event.data.vin];
-        setCars2(cars);
-    };
+    const onCellEditComplete = (e) => {
+        let { rowData, newValue, field, originalEvent: event } = e;
+
+        switch (field) {
+            case 'quantity':
+            case 'price':
+                if (isPositiveInteger(newValue))
+                    rowData[field] = newValue;
+                else
+                    event.preventDefault();
+                break;
+
+            default:
+                if (newValue.trim().length > 0)
+                    rowData[field] = newValue;
+                else
+                    event.preventDefault();
+                break;
+        }
+    }
+
+    const onRowEditComplete1 = (e) => {
+        let _products2 = [...products2];
+        let { newData, index } = e;
+
+        _products2[index] = newData;
+
+        setProducts2(_products2);
+    }
+
+    const onRowEditComplete2 = (e) => {
+        let _products3 = [...products3];
+        let { newData, index } = e;
+
+        _products3[index] = newData;
+
+        setProducts3(_products3);
+    }
+
+    const onRowEditChange = (e) => {
+        setEditingRows(e.data);
+    }
+
+    const setActiveRowIndex = (index) => {
+        let _editingRows = { ...editingRows, ...{ [\`\${products3[index].id}\`]: true } };
+        setEditingRows(_editingRows);
+    }
+
+    const cellEditor = (options) => {
+        if (options.field === 'price')
+            return priceEditor(options);
+        else
+            return textEditor(options);
+    }
+
+    const textEditor = (options) => {
+        return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+    }
+
+    const statusEditor = (options) => {
+        return (
+            <Dropdown value={options.value} options={statuses} optionLabel="label" optionValue="value"
+                onChange={(e) => options.editorCallback(e.value)} placeholder="Select a Status"
+                itemTemplate={(option) => {
+                    return <span className={\`product-badge status-\${option.value.toLowerCase()}\`}>{option.label}</span>
+                }} />
+        );
+    }
+
+    const priceEditor = (options) => {
+        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />
+    }
+
+    const statusBodyTemplate = (rowData) => {
+        return getStatusLabel(rowData.inventoryStatus);
+    }
+
+    const priceBodyTemplate = (rowData) => {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rowData.price);
+    }
 
     return (
-        <div>
-            <Growl ref={growl} />
+        <div className="datatable-editing-demo">
+            <Toast ref={toast} />
 
-            <h3>Cell Editing</h3>
-            <DataTable value={cars1}>
-                <Column field="vin" header="Vin" editor={vinEditor} editorValidator={requiredValidator} style={{height: '3.5em'}}/>
-                <Column field="year" header="Year" editor={yearEditor} style={{height: '3.5em'}}/>
-                <Column field="brand" header="Brand" editor={brandEditor} style={{height: '3.5em'}}/>
-                <Column field="color" header="Color" editor={colorEditor} style={{height: '3.5em'}}/>
-            </DataTable>
+            <div className="card p-fluid">
+                <h5>Cell Editing</h5>
+                <p>Validations, dynamic columns and reverting values with the escape key.</p>
+                <DataTable value={products1} editMode="cell" className="editable-cells-table" responsiveLayout="scroll">
+                    {
+                        columns.map(({ field, header }) => {
+                            return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate}
+                                editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
+                        })
+                    }
+                </DataTable>
+            </div>
 
-            <h3>Row Editing</h3>
-            <DataTable value={cars2} editMode="row" rowEditorValidator={onRowEditorValidator} onRowEditInit={onRowEditInit} onRowEditSave={onRowEditSave} onRowEditCancel={onRowEditCancel}>
-                <Column field="vin" header="Vin" style={{height: '3.5em'}}/>
-                <Column field="year" header="Year" editor={(props) => editorForRowEditing(props, 'year')} style={{height: '3.5em'}}/>
-                <Column field="brand" header="Brand" editor={(props) => editorForRowEditing(props, 'brand')} style={{height: '3.5em'}}/>
-                <Column field="color" header="Color" editor={(props) => editorForRowEditing(props, 'color')} style={{height: '3.5em'}}/>
-                <Column rowEditor={true} style={{'width': '70px', 'textAlign': 'center'}}></Column>
-            </DataTable>
+            <div className="card p-fluid">
+                <h5>Row Editing</h5>
+                <DataTable value={products2} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete1} responsiveLayout="scroll">
+                    <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                    <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                    <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
+                    <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Programmatic</h5>
+                <div className="p-pt-2 p-pb-4">
+                    <Button onClick={() => setActiveRowIndex(0)} className="p-button-text" label="Activate 1st" />
+                    <Button onClick={() => setActiveRowIndex(2)} className="p-button-text" label="Activate 3rd" />
+                    <Button onClick={() => setActiveRowIndex(4)} className="p-button-text" label="Activate 5th" />
+                </div>
+
+                <div className="p-fluid">
+                    <DataTable value={products3} editMode="row" dataKey="id" editingRows={editingRows} onRowEditChange={onRowEditChange} onRowEditComplete={onRowEditComplete2} responsiveLayout="scroll">
+                        <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                    </DataTable>
+                </div>
+            </div>
+
+            <div className="card p-fluid">
+                <h5>Cell Editing with Sorting and Filter</h5>
+                <DataTable value={products4} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+                    {
+                        columns.map(({ field, header }) => {
+                            return <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate}
+                                editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
+                        })
+                    }
+                </DataTable>
+            </div>
         </div>
     );
 }
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <link rel="stylesheet" href="./DataTableDemo.css" />
+        <script src="./ProductService.js"></script>
 
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
+        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
+        <script src="https://unpkg.com/primereact/inputnumber/inputnumber.min.js"></script>
+        <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
+        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
+        <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { Column } = primereact.column;
+const { DataTable } = primereact.datatable;
+const { InputText } = primereact.inputtext;
+const { InputNumber } = primereact.inputnumber;
+const { Dropdown } = primereact.dropdown;
+const { Button } = primereact.button;
+const { Toast } = primereact.toast;
+
+const DataTableEditDemo = () => {
+    const [products1, setProducts1] = useState(null);
+    const [products2, setProducts2] = useState(null);
+    const [products3, setProducts3] = useState(null);
+    const [products4, setProducts4] = useState(null);
+    const [editingRows, setEditingRows] = useState({});
+    const toast = useRef(null);
+
+    const columns = [
+        { field: 'code', header: 'Code' },
+        { field: 'name', header: 'Name' },
+        { field: 'quantity', header: 'Quantity' },
+        { field: 'price', header: 'Price' }
+    ];
+
+    const statuses = [
+        { label: 'In Stock', value: 'INSTOCK' },
+        { label: 'Low Stock', value: 'LOWSTOCK' },
+        { label: 'Out of Stock', value: 'OUTOFSTOCK' }
+    ];
+
+    const dataTableFuncMap = {
+        'products1': setProducts1,
+        'products2': setProducts2,
+        'products3': setProducts3,
+        'products4': setProducts4
+    };
+
+    const productService = new ProductService();
+
+    useEffect(() => {
+        fetchProductData('products1');
+        fetchProductData('products2');
+        fetchProductData('products3');
+        fetchProductData('products4');
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const fetchProductData = (productStateKey) => {
+        productService.getProductsSmall().then(data => dataTableFuncMap[\`\${productStateKey}\`](data));
+    }
+
+    const isPositiveInteger = (val) => {
+        let str = String(val);
+        str = str.trim();
+        if (!str) {
+            return false;
+        }
+        str = str.replace(/^0+/, "") || "0";
+        let n = Math.floor(Number(str));
+        return n !== Infinity && String(n) === str && n >= 0;
+    }
+
+    const getStatusLabel = (status) => {
+        switch (status) {
+            case 'INSTOCK':
+                return 'In Stock';
+
+            case 'LOWSTOCK':
+                return 'Low Stock';
+
+            case 'OUTOFSTOCK':
+                return 'Out of Stock';
+
+            default:
+                return 'NA';
+        }
+    }
+
+    const onCellEditComplete = (e) => {
+        let { rowData, newValue, field, originalEvent: event } = e;
+
+        switch (field) {
+            case 'quantity':
+            case 'price':
+                if (isPositiveInteger(newValue))
+                    rowData[field] = newValue;
+                else
+                    event.preventDefault();
+                break;
+
+            default:
+                if (newValue.trim().length > 0)
+                    rowData[field] = newValue;
+                else
+                    event.preventDefault();
+                break;
+        }
+    }
+
+    const onRowEditComplete1 = (e) => {
+        let _products2 = [...products2];
+        let { newData, index } = e;
+
+        _products2[index] = newData;
+
+        setProducts2(_products2);
+    }
+
+    const onRowEditComplete2 = (e) => {
+        let _products3 = [...products3];
+        let { newData, index } = e;
+
+        _products3[index] = newData;
+
+        setProducts3(_products3);
+    }
+
+    const onRowEditChange = (e) => {
+        setEditingRows(e.data);
+    }
+
+    const setActiveRowIndex = (index) => {
+        let _editingRows = { ...editingRows, ...{ [\`\${products3[index].id}\`]: true } };
+        setEditingRows(_editingRows);
+    }
+
+    const cellEditor = (options) => {
+        if (options.field === 'price')
+            return priceEditor(options);
+        else
+            return textEditor(options);
+    }
+
+    const textEditor = (options) => {
+        return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+    }
+
+    const statusEditor = (options) => {
+        return (
+            <Dropdown value={options.value} options={statuses} optionLabel="label" optionValue="value"
+                onChange={(e) => options.editorCallback(e.value)} placeholder="Select a Status"
+                itemTemplate={(option) => {
+                    return <span className={\`product-badge status-\${option.value.toLowerCase()}\`}>{option.label}</span>
+                }} />
+        );
+    }
+
+    const priceEditor = (options) => {
+        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />
+    }
+
+    const statusBodyTemplate = (rowData) => {
+        return getStatusLabel(rowData.inventoryStatus);
+    }
+
+    const priceBodyTemplate = (rowData) => {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rowData.price);
+    }
+
+    return (
+        <div className="datatable-editing-demo">
+            <Toast ref={toast} />
+
+            <div className="card p-fluid">
+                <h5>Cell Editing</h5>
+                <p>Validations, dynamic columns and reverting values with the escape key.</p>
+                <DataTable value={products1} editMode="cell" className="editable-cells-table" responsiveLayout="scroll">
+                    {
+                        columns.map(({ field, header }) => {
+                            return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate}
+                                editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
+                        })
+                    }
+                </DataTable>
+            </div>
+
+            <div className="card p-fluid">
+                <h5>Row Editing</h5>
+                <DataTable value={products2} editMode="row" dataKey="id" onRowEditComplete={onRowEditComplete1} responsiveLayout="scroll">
+                    <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                    <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                    <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
+                    <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Programmatic</h5>
+                <div className="p-pt-2 p-pb-4">
+                    <Button onClick={() => setActiveRowIndex(0)} className="p-button-text" label="Activate 1st" />
+                    <Button onClick={() => setActiveRowIndex(2)} className="p-button-text" label="Activate 3rd" />
+                    <Button onClick={() => setActiveRowIndex(4)} className="p-button-text" label="Activate 5th" />
+                </div>
+
+                <div className="p-fluid">
+                    <DataTable value={products3} editMode="row" dataKey="id" editingRows={editingRows} onRowEditChange={onRowEditChange} onRowEditComplete={onRowEditComplete2} responsiveLayout="scroll">
+                        <Column field="code" header="Code" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="name" header="Name" editor={(options) => textEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column field="price" header="Price" body={priceBodyTemplate} editor={(options) => priceEditor(options)} style={{ width: '20%' }}></Column>
+                        <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
+                    </DataTable>
+                </div>
+            </div>
+
+            <div className="card p-fluid">
+                <h5>Cell Editing with Sorting and Filter</h5>
+                <DataTable value={products4} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
+                    {
+                        columns.map(({ field, header }) => {
+                            return <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate}
+                                editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
+                        })
+                    }
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            }
+        };
+
+        this.extFiles = {
+            'demo/DataTableDemo.css': {
+                content: `
+.datatable-editing-demo .editable-cells-table td.p-cell-editing {
+    padding-top: 0;
+    padding-bottom: 0;
+}
                 `
             }
         }
@@ -610,16 +1193,10 @@ const DataTableEditDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DataTableEditDemo" sources={[key, value]} service="CarService" data="cars-small" />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'DataTableEditDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
                     }
                 </TabView>
             </div>

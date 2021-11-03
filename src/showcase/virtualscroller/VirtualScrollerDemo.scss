@@ -1,0 +1,32 @@
+.virtualscroller-demo {
+	.scroll-item {
+		display: flex;
+		align-items: center;
+	}
+
+	.custom-scroll-item {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.odd {
+		background-color: var(--surface-b);
+	}
+
+	.p-virtualscroller {
+		height: 200px;
+		width: 200px;
+		border: 1px solid var(--surface-d);
+	}
+
+	.p-horizontal-scroll {
+		.p-virtualscroller-content {
+			display: flex;
+			flex-direction: row;
+		}
+
+		.scroll-item {
+			writing-mode: vertical-lr;
+		}
+	}
+}

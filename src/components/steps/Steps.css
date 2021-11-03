@@ -1,56 +1,47 @@
-.p-steps ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
+.p-steps {
+    position: relative;
 }
 
-.p-steps .p-steps-item {
-    width: 100%;
-    box-sizing: border-box;
+.p-steps ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+}
+
+.p-steps-item {
     position: relative;
     display: flex;
     justify-content: center;
+    flex: 1 1 auto;
 }
 
-.p-steps.p-steps-readonly .p-steps-item,
-.p-steps .p-steps-item.p-disabled {
-    cursor: auto;
-    pointer-events: none;
-}
-
-.p-steps .p-steps-item .p-menuitem-link {
-    text-decoration: none;
-    padding: 1em;
+.p-steps-item .p-menuitem-link {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
+    text-decoration: none;
 }
 
-.p-steps .p-steps-item.p-steps-current .p-menuitem-link,
-.p-steps .p-steps-item.p-disabled .p-menuitem-link {
+.p-steps.p-steps-readonly .p-steps-item {
+    cursor: auto;
+}
+
+.p-steps-item.p-steps-current .p-menuitem-link {
     cursor: default;
 }
 
-.p-steps .p-steps-number {
-    font-size: 2em;
-    display: block;
-}
-
-.p-steps .p-steps-title {
-    display: block;
+.p-steps-title {
     white-space: nowrap;
 }
 
-/* Responsive */
-@media (max-width: 40em) {
-    .p-steps ul {
-        flex-wrap: wrap;
-    }
+.p-steps-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .p-steps .p-steps-item .p-menuitem-link {
-        padding: 0.5em;
-    }
+.p-steps-title {
+    display: block;
 }

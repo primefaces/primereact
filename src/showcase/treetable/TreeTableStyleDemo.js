@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { TreeTable } from '../../components/treetable/TreeTable';
-import { Column } from "../../components/column/Column";
+import { Column } from '../../components/column/Column';
 import { NodeService } from '../service/NodeService';
-import { TreeTableSubmenu } from '../../showcase/treetable/TreeTableSubmenu';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeTableStyleDemo extends Component {
 
@@ -37,26 +37,23 @@ export class TreeTableStyleDemo extends Component {
     render() {
         return (
             <div>
-                <TreeTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable - Styling</h1>
+                    <AppInlineHeader changelogText="treeTable">
+                        <h1>TreeTable <span>Styling</span></h1>
                         <p>Particular rows and cells can be styled based on data.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("treeTable")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
+                    <AppDemoActions github="treetable/TreeTableStyleDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
-                    <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
-                    <TreeTable value={this.state.nodes} rowClassName={this.rowClassName}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size" body={this.sizeTemplate}></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
+                    <div className="card">
+                        <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
+                        <TreeTable value={this.state.nodes} rowClassName={this.rowClassName}>
+                            <Column field="name" header="Name" expander></Column>
+                            <Column field="size" header="Size" body={this.sizeTemplate}></Column>
+                            <Column field="type" header="Type"></Column>
+                        </TreeTable>
+                    </div>
                 </div>
 
                 <TreeTableStyleDemoDoc />
@@ -92,29 +89,31 @@ export class TreeTableStyleDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
+        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
     }
 
     sizeTemplate(node) {
         let size = node.data.size;
         let fontWeight = parseInt(size, 10) > 75 ? 'bold' : 'normal';
 
-        return <span style={{fontWeight: fontWeight}}>{size}</span>;
+        return <span style={{ fontWeight: fontWeight }}>{size}</span>;
     }
 
     rowClassName(node) {
-        return {'p-highlight' : (node.children && node.children.length === 3)};
+        return { 'p-highlight': (node.children && node.children.length === 3) };
     }
 
     render() {
         return (
             <div>
-                <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
-                <TreeTable value={this.state.nodes} rowClassName={this.rowClassName}>
-                    <Column field="name" header="Name" expander></Column>
-                    <Column field="size" header="Size" body={this.sizeTemplate}></Column>
-                    <Column field="type" header="Type"></Column>
-                </TreeTable>
+                <div className="card">
+                    <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
+                    <TreeTable value={this.state.nodes} rowClassName={this.rowClassName}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size" body={this.sizeTemplate}></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
             </div>
         )
     }
@@ -141,23 +140,25 @@ const TreeTableStyleDemo = () => {
         let size = node.data.size;
         let fontWeight = parseInt(size, 10) > 75 ? 'bold' : 'normal';
 
-        return <span style={{fontWeight: fontWeight}}>{size}</span>;
-    };
+        return <span style={{ fontWeight: fontWeight }}>{size}</span>;
+    }
 
     const rowClassName = (node) => {
-        return {'p-highlight' : (node.children && node.children.length === 3)};
-    };
+        return { 'p-highlight': (node.children && node.children.length === 3) };
+    }
 
     return (
         <div>
-            <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
-            <TreeTable value={nodes} rowClassName={rowClassName}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size" body={sizeTemplate}></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
+                <TreeTable value={nodes} rowClassName={rowClassName}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size" body={sizeTemplate}></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
-    )
+    );
 }
                 `
             },
@@ -170,34 +171,84 @@ import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 
 const TreeTableStyleDemo = () => {
-    const [nodes, setNodes] = useState<any>([]);
+    const [nodes, setNodes] = useState([]);
     const nodeservice = new NodeService();
 
     useEffect(() => {
         nodeservice.getTreeTableNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const sizeTemplate = (node: any) => {
+    const sizeTemplate = (node) => {
         let size = node.data.size;
-        let fontWeight: any = parseInt(size, 10) > 75 ? 'bold' : 'normal';
+        let fontWeight = parseInt(size, 10) > 75 ? 'bold' : 'normal';
 
-        return <span style={{fontWeight: fontWeight}}>{size}</span>;
-    };
+        return <span style={{ fontWeight: fontWeight }}>{size}</span>;
+    }
 
-    const rowClassName = (node: any) => {
-        return {'p-highlight' : (node.children && node.children.length === 3)};
-    };
+    const rowClassName = (node) => {
+        return { 'p-highlight': (node.children && node.children.length === 3) };
+    }
 
     return (
         <div>
-            <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
-            <TreeTable value={nodes} rowClassName={rowClassName}>
-                <Column field="name" header="Name" expander></Column>
-                <Column field="size" header="Size" body={sizeTemplate}></Column>
-                <Column field="type" header="Type"></Column>
-            </TreeTable>
+            <div className="card">
+                <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
+                <TreeTable value={nodes} rowClassName={rowClassName}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size" body={sizeTemplate}></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
         </div>
-    )
+    );
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Column } = primereact.column;
+const { TreeTable } = primereact.treetable;
+
+const TreeTableStyleDemo = () => {
+    const [nodes, setNodes] = useState([]);
+    const nodeservice = new NodeService();
+
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const sizeTemplate = (node) => {
+        let size = node.data.size;
+        let fontWeight = parseInt(size, 10) > 75 ? 'bold' : 'normal';
+
+        return <span style={{ fontWeight: fontWeight }}>{size}</span>;
+    }
+
+    const rowClassName = (node) => {
+        return { 'p-highlight': (node.children && node.children.length === 3) };
+    }
+
+    return (
+        <div>
+            <div className="card">
+                <p>This treetable highlights cells with a bolder font weight whose size value is greater than 75kb and highlights rows who has at 3 child rows.</p>
+                <TreeTable value={nodes} rowClassName={rowClassName}>
+                    <Column field="name" header="Name" expander></Column>
+                    <Column field="size" header="Size" body={sizeTemplate}></Column>
+                    <Column field="type" header="Type"></Column>
+                </TreeTable>
+            </div>
+        </div>
+    );
 }
                 `
             }
@@ -210,16 +261,10 @@ const TreeTableStyleDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TreeTableStyleDemo" sources={[key, value]} service="NodeService" data="treetablenodes" />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'TreeTableStyleDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })
                     }
                 </TabView>
             </div>

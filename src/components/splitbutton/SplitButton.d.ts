@@ -1,21 +1,31 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/TooltipOptions';
+import { MenuItem } from '../menuitem';
+import TooltipOptions from '../tooltip/tooltipoptions';
 
-interface SplitButtonProps {
+type SplitButtonButtonTemplateType = React.ReactNode | ((props: SplitButtonProps) => React.ReactNode);
+
+type SplitButtonAppendToType = 'self' | HTMLElement | undefined | null;
+
+export interface SplitButtonProps {
     id?: string;
     label?: string;
     icon?: string;
-    model?: any[];
+    model?: MenuItem[];
     disabled?: boolean;
     style?: object;
     className?: string;
     menuStyle?: object;
     menuClassName?: string;
-    tabIndex?: string;
-    appendTo?: HTMLElement;
-    tooltip?: any;
+    tabIndex?: number;
+    appendTo?: SplitButtonAppendToType;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    onClick?(event: Event): void;
+    buttonTemplate?: SplitButtonButtonTemplateType;
+    transitionOptions?: object;
+    dropdownIcon?: string;
+    onClick?(event: React.MouseEvent<HTMLElement>): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
-export class SplitButton extends React.Component<SplitButtonProps,any> {}
+export declare class SplitButton extends React.Component<SplitButtonProps, any> { }

@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
+import { TabView } from '../../components/tabview/TabView';
 import { Chart } from '../../components/chart/Chart';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import AppContentContext from '../../AppContentContext';
+import AppDemoActions from '../../AppDemoActions';
 
 export class RadarChartDemo extends Component {
 
-    render() {
-        const data = {
+    constructor(props) {
+        super(props);
+
+        this.chartData = {
             labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
             datasets: [
                 {
@@ -33,21 +37,76 @@ export class RadarChartDemo extends Component {
             ]
         };
 
+        this.lightOptions = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
+            scales: {
+                r: {
+                    pointLabels: {
+                        color: '#495057',
+                    },
+                    grid: {
+                        color: '#ebedef',
+                    },
+                    angleLines: {
+                        color: '#ebedef'
+                    }
+                }
+            }
+        };
+
+        this.darkOptions = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ebedef'
+                    }
+                }
+            },
+            scales: {
+                r: {
+                    pointLabels: {
+                        color: '#ebedef',
+                    },
+                    grid: {
+                        color: 'rgba(255,255,255,0.2)',
+                    },
+                    angleLines: {
+                        color: 'rgba(255,255,255,0.2)'
+                    }
+                }
+            }
+        };
+    }
+
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="chart">
                         <h1>RadarChart</h1>
                         <p>A radar chart is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same point.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("chart")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
+                    <AppDemoActions github="chart/RadarChartDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
-                    <Chart type="radar" data={data} />
+                    <div className="card p-d-flex p-jc-center">
+                        <AppContentContext.Consumer>
+                            {
+                                context => {
+                                    let options = context.darkTheme ? this.darkOptions : this.lightOptions;
+
+                                    return <Chart type="radar" data={this.chartData} options={options} style={{ position: 'relative', width: '40%' }} />
+                                }
+                            }
+                        </AppContentContext.Consumer>
+                    </div>
                 </div>
 
                 <RadarChartDemoDoc></RadarChartDemoDoc>
@@ -66,12 +125,14 @@ export class RadarChartDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 export class RadarChartDemo extends Component {
 
-    render() {
-        const data = {
+    constructor(props) {
+        super(props);
+
+        this.chartData = {
             labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
             datasets: [
                 {
@@ -97,9 +158,34 @@ export class RadarChartDemo extends Component {
             ]
         };
 
+        this.lightOptions = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
+            scales: {
+                r: {
+                    pointLabels: {
+                        color: '#495057',
+                    },
+                    grid: {
+                        color: '#ebedef',
+                    },
+                    angleLines: {
+                        color: '#ebedef'
+                    }
+                }
+            }
+        };
+    }
+
+    render() {
         return (
-            <div>
-                <Chart type="radar" data={data} />
+            <div className="card p-d-flex p-jc-center">
+                <Chart type="radar" data={this.chartData} options={this.lightOptions} style={{ position: 'relative', width: '40%' }} />
             </div>
         )
     }
@@ -110,10 +196,10 @@ export class RadarChartDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 const RadarChartDemo = () => {
-    const data = {
+    const chartData = {
         labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
         datasets: [
             {
@@ -139,11 +225,34 @@ const RadarChartDemo = () => {
         ]
     };
 
+    const lightOptions = {
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
+            }
+        },
+        scales: {
+            r: {
+                pointLabels: {
+                    color: '#495057',
+                },
+                grid: {
+                    color: '#ebedef',
+                },
+                angleLines: {
+                    color: '#ebedef'
+                }
+            }
+        }
+    };
+
     return (
-        <div>
-            <Chart type="radar" data={data} />
+        <div className="card p-d-flex p-jc-center">
+            <Chart type="radar" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
-    )
+    );
 }
                 `
             },
@@ -151,10 +260,10 @@ const RadarChartDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 const RadarChartDemo = () => {
-    const data = {
+    const chartData = {
         labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
         datasets: [
             {
@@ -180,11 +289,34 @@ const RadarChartDemo = () => {
         ]
     };
 
+    const lightOptions = {
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
+            }
+        },
+        scales: {
+            r: {
+                pointLabels: {
+                    color: '#495057',
+                },
+                grid: {
+                    color: '#ebedef',
+                },
+                angleLines: {
+                    color: '#ebedef'
+                }
+            }
+        }
+    };
+
     return (
-        <div>
-            <Chart type="radar" data={data} />
+        <div className="card p-d-flex p-jc-center">
+            <Chart type="radar" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
-    )
+    );
 }
                 `
             }
@@ -197,16 +329,10 @@ const RadarChartDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="RadarChartDemo" sources={[key, value]} dependencies={{ 'chart.js': '2.7.3' }} />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'RadarChartDemo', sources: this.sources, dependencies: { 'chart.js': '3.3.2' } })
                     }
                 </TabView>
             </div>

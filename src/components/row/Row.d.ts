@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-interface RowProps {
+export interface RowProps {
     style?: object;
     className?: string;
 }
 
-export class Row extends React.Component<RowProps,any> {}
+export declare class Row extends React.Component<RowProps, any> { }

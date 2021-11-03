@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import ObjectUtils from '../utils/ObjectUtils';
-import {SelectButtonItem} from './SelectButtonItem';
-import Tooltip from "../tooltip/Tooltip";
+import { ObjectUtils, classNames } from '../utils/Utils';
+import { SelectButtonItem } from './SelectButtonItem';
+import { tip } from '../tooltip/Tooltip';
 
 export class SelectButton extends Component {
 
@@ -13,9 +12,11 @@ export class SelectButton extends Component {
         options: null,
         optionLabel: null,
         optionValue: null,
+        optionDisabled: null,
         tabIndex: null,
-        multiple: null,
-        disabled: null,
+        multiple: false,
+        unselectable: true,
+        disabled: false,
         style: null,
         className: null,
         dataKey: null,
@@ -32,8 +33,10 @@ export class SelectButton extends Component {
         options: PropTypes.array,
         optionLabel: PropTypes.string,
         optionValue: PropTypes.string,
-        tabIndex: PropTypes.string,
+        optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+        tabIndex: PropTypes.number,
         multiple: PropTypes.bool,
+        unselectable: PropTypes.bool,
         disabled: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -47,46 +50,20 @@ export class SelectButton extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+
         this.onOptionClick = this.onOptionClick.bind(this);
     }
 
-    componentDidMount() {
-        if (this.props.tooltip) {
-            this.renderTooltip();
-        }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
-            if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
-            else
-                this.renderTooltip();
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
-        }
-    }
-
-    renderTooltip() {
-        this.tooltip = new Tooltip({
-            target: this.element,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
-    }
-
     onOptionClick(event) {
-        if (this.props.disabled) {
+        if (this.props.disabled || this.isOptionDisabled(event.option)) {
             return;
         }
 
         let selected = this.isSelected(event.option);
+        if (selected && !this.props.unselectable) {
+            return;
+        }
+
         let optionValue = this.getOptionValue(event.option);
         let newValue;
 
@@ -109,8 +86,8 @@ export class SelectButton extends Component {
             this.props.onChange({
                 originalEvent: event.originalEvent,
                 value: newValue,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
                     name: this.props.name,
                     id: this.props.id,
@@ -121,11 +98,19 @@ export class SelectButton extends Component {
     }
 
     getOptionLabel(option) {
-        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : (option['label'] !== undefined ? option['label'] : option);
+        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : (option && option['label'] !== undefined ? option['label'] : option);
     }
 
     getOptionValue(option) {
-        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option['value'] !== undefined ? option['value'] : option);
+        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option && option['value'] !== undefined ? option['value'] : option);
+    }
+
+    isOptionDisabled(option) {
+        if (this.props.optionDisabled) {
+            return ObjectUtils.isFunction(this.props.optionDisabled) ? this.props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, this.props.optionDisabled);
+        }
+
+        return (option && option['disabled'] !== undefined ? option['disabled'] : false);
     }
 
     isSelected(option) {
@@ -149,29 +134,58 @@ export class SelectButton extends Component {
         return selected;
     }
 
-    renderItems() {
-        if (this.props.options && this.props.options.length) {
-            return this.props.options.map((option, index) => {
-                let optionLabel = this.getOptionLabel(option);
-
-                return <SelectButtonItem key={optionLabel} label={optionLabel} className={option.className} option={option} onClick={this.onOptionClick} template={this.props.itemTemplate}
-                            selected={this.isSelected(option)} tabIndex={this.props.tabIndex} disabled={this.props.disabled} ariaLabelledBy={this.props.ariaLabelledBy}/>;
-            });
-        }
-        else {
-            return null;
+    componentDidMount() {
+        if (this.props.tooltip) {
+            this.renderTooltip();
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
+            if (this.tooltip)
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
+            else
+                this.renderTooltip();
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
+    }
+
+    renderTooltip() {
+        this.tooltip = tip({
+            target: this.element,
+            content: this.props.tooltip,
+            options: this.props.tooltipOptions
+        });
+    }
+
+    renderItems() {
+        if (this.props.options && this.props.options.length) {
+            return this.props.options.map((option, index) => {
+                const isDisabled = this.props.disabled || this.isOptionDisabled(option);
+                const optionLabel = this.getOptionLabel(option);
+                const tabIndex = isDisabled ? null : 0;
+
+                return <SelectButtonItem key={`${optionLabel}_${index}`} label={optionLabel} className={option.className} option={option} onClick={this.onOptionClick} template={this.props.itemTemplate}
+                    selected={this.isSelected(option)} tabIndex={tabIndex} disabled={isDisabled} ariaLabelledBy={this.props.ariaLabelledBy} />;
+            });
+        }
+
+        return null;
+    }
+
     render() {
-        let className = classNames('p-selectbutton p-buttonset p-component p-buttonset-3', this.props.className);
+        let className = classNames('p-selectbutton p-buttonset p-component', this.props.className);
         let items = this.renderItems();
 
         return (
-            <div id={this.props.id} ref={(el) => this.element = el} role="group">
-                <div className={className} style={this.props.style}>
-                    {items}
-                </div>
+            <div id={this.props.id} ref={(el) => this.element = el} className={className} style={this.props.style} role="group">
+                {items}
             </div>
         );
     }

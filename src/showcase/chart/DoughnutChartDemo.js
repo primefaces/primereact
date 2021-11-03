@@ -1,14 +1,18 @@
-import React, {Component} from 'react';
-import {TabView, TabPanel} from '../../components/tabview/TabView';
+import React, { Component } from 'react';
+import { TabView } from '../../components/tabview/TabView';
+import { Chart } from '../../components/chart/Chart';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
 import AppContentContext from '../../AppContentContext';
-import {Chart} from '../../components/chart/Chart';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DoughnutChartDemo extends Component {
 
-    render() {
-        const data = {
-            labels: ['A','B','C'],
+    constructor(props) {
+        super(props);
+
+        this.chartData = {
+            labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [300, 50, 100],
@@ -23,23 +27,52 @@ export class DoughnutChartDemo extends Component {
                         "#FFCE56"
                     ]
                 }]
-            };
+        };
 
+        this.lightOptions = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            }
+        };
+
+        this.darkOptions = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ebedef'
+                    }
+                }
+            }
+        };
+    }
+
+    render() {
         return (
             <div>
                 <div className="content-section introduction">
-                    <div className="feature-intro">
+                    <AppInlineHeader changelogText="chart">
                         <h1>DoughnutChart</h1>
                         <p>A doughnut chart is a variant of the pie chart, with a blank center allowing for additional information about the data as a whole to be included.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("chart")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
+                    <AppDemoActions github="chart/DoughnutChartDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
-                    <Chart type="doughnut" data={data} />
+                    <div className="card p-d-flex p-jc-center">
+                        <AppContentContext.Consumer>
+                            {
+                                context => {
+                                    let options = context.darkTheme ? this.darkOptions : this.lightOptions;
+
+                                    return <Chart type="doughnut" data={this.chartData} options={options} style={{ position: 'relative', width: '40%' }} />
+                                }
+                            }
+                        </AppContentContext.Consumer>
+                    </div>
                 </div>
 
                 <DoughnutChartDemoDoc></DoughnutChartDemoDoc>
@@ -58,13 +91,15 @@ export class DoughnutChartDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 export class DoughnutChartDemo extends Component {
 
-    render() {
-        const data = {
-            labels: ['A','B','C'],
+    constructor(props) {
+        super(props);
+
+        this.chartData = {
+            labels: ['A', 'B', 'C'],
             datasets: [
                 {
                     data: [300, 50, 100],
@@ -79,11 +114,23 @@ export class DoughnutChartDemo extends Component {
                         "#FFCE56"
                     ]
                 }]
-            };
+        };
 
+        this.lightOptions = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            }
+        };
+    }
+
+    render() {
         return (
-            <div>
-                <Chart type="doughnut" data={data} />
+            <div className="card p-d-flex p-jc-center">
+                <Chart type="doughnut" data={this.chartData} options={this.lightOptions} style={{ position: 'relative', width: '40%' }} />
             </div>
         )
     }
@@ -94,11 +141,11 @@ export class DoughnutChartDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 const DoughnutChartDemo = () => {
-    const data = {
-        labels: ['A','B','C'],
+    const chartData = {
+        labels: ['A', 'B', 'C'],
         datasets: [
             {
                 data: [300, 50, 100],
@@ -113,11 +160,21 @@ const DoughnutChartDemo = () => {
                     "#FFCE56"
                 ]
             }]
-        };
+    };
+
+    const lightOptions = {
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
+            }
+        }
+    };
 
     return (
-        <div>
-            <Chart type="doughnut" data={data} />
+        <div className="card p-d-flex p-jc-center">
+            <Chart type="doughnut" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
     )
 }
@@ -127,11 +184,11 @@ const DoughnutChartDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React from 'react';
-import {Chart} from 'primereact/chart';
+import { Chart } from 'primereact/chart';
 
 const DoughnutChartDemo = () => {
-    const data = {
-        labels: ['A','B','C'],
+    const chartData = {
+        labels: ['A', 'B', 'C'],
         datasets: [
             {
                 data: [300, 50, 100],
@@ -146,11 +203,21 @@ const DoughnutChartDemo = () => {
                     "#FFCE56"
                 ]
             }]
-        };
+    };
+
+    const lightOptions = {
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
+            }
+        }
+    };
 
     return (
-        <div>
-            <Chart type="doughnut" data={data} />
+        <div className="card p-d-flex p-jc-center">
+            <Chart type="doughnut" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
     )
 }
@@ -165,16 +232,10 @@ const DoughnutChartDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DoughnutChartDemo" sources={[key, value]} dependencies={{'chart.js': '2.7.3'}} />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'DoughnutChartDemo', sources: this.sources, dependencies: { 'chart.js': '3.3.2' } })
                     }
                 </TabView>
             </div>

@@ -1,24 +1,24 @@
-import React, {Component} from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import Tooltip from "../tooltip/Tooltip";
-import DomHandler from '../utils/DomHandler';
-import ObjectUtils from '../utils/ObjectUtils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { tip } from '../tooltip/Tooltip';
 
-export class InputTextarea extends Component {
+class InputTextareaComponent extends Component {
 
     static defaultProps = {
         autoResize: false,
-        onInput: null,
         tooltip: null,
-        tooltipOptions: null
+        tooltipOptions: null,
+        onInput: null,
+        forwardRef: null
     };
 
     static propTypes = {
         autoResize: PropTypes.bool,
-        onInput: PropTypes.func,
         tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object
+        tooltipOptions: PropTypes.object,
+        onInput: PropTypes.func,
+        forwardRef: PropTypes.any
     };
 
     constructor(props) {
@@ -27,6 +27,8 @@ export class InputTextarea extends Component {
         this.onBlur = this.onBlur.bind(this);
         this.onKeyUp = this.onKeyUp.bind(this);
         this.onInput = this.onInput.bind(this);
+
+        this.elementRef = createRef(this.props.forwardRef);
     }
 
     onFocus(e) {
@@ -64,62 +66,83 @@ export class InputTextarea extends Component {
             this.resize();
         }
 
-        if (!this.props.onChange) {
-            if (e.target.value.length > 0)
-                DomHandler.addClass(e.target, 'p-filled');
-            else
-                DomHandler.removeClass(e.target, 'p-filled');
-        }
+        if (e.target.value.length > 0)
+            DomHandler.addClass(e.target, 'p-filled');
+        else
+            DomHandler.removeClass(e.target, 'p-filled');
 
         if (this.props.onInput) {
             this.props.onInput(e);
         }
     }
 
-    resize() {
-        if (DomHandler.isVisible(this.element)) {
+    resize(initial) {
+        const inputEl = this.elementRef && this.elementRef.current;
+
+        if (inputEl && DomHandler.isVisible(inputEl)) {
             if (!this.cachedScrollHeight) {
-                this.cachedScrollHeight = this.element.scrollHeight;
-                this.element.style.overflow = "hidden";
+                this.cachedScrollHeight = inputEl.scrollHeight;
+                inputEl.style.overflow = "hidden";
             }
 
-            if (this.cachedScrollHeight !== this.element.scrollHeight) {
-                this.element.style.height = ''
-                this.element.style.height = this.element.scrollHeight + 'px';
+            if (this.cachedScrollHeight !== inputEl.scrollHeight || initial) {
+                inputEl.style.height = ''
+                inputEl.style.height = inputEl.scrollHeight + 'px';
 
-                if (parseFloat(this.element.style.height) >= parseFloat(this.element.style.maxHeight)) {
-                    this.element.style.overflowY = "scroll";
-                    this.element.style.height = this.element.style.maxHeight;
+                if (parseFloat(inputEl.style.height) >= parseFloat(inputEl.style.maxHeight)) {
+                    inputEl.style.overflowY = "scroll";
+                    inputEl.style.height = inputEl.style.maxHeight;
                 }
                 else {
-                    this.element.style.overflow = "hidden";
+                    inputEl.style.overflow = "hidden";
                 }
 
-                this.cachedScrollHeight = this.element.scrollHeight;
+                this.cachedScrollHeight = inputEl.scrollHeight;
+            }
+        }
+    }
+
+    isFilled() {
+        return (this.props.value != null && this.props.value.toString().length > 0) ||
+            (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0) ||
+            (this.elementRef && this.elementRef.current && this.elementRef.current.value.toString().length > 0);
+    }
+
+    updateForwardRef() {
+        let ref = this.props.forwardRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.elementRef.current);
+            }
+            else {
+                ref.current = this.elementRef.current;
             }
         }
     }
 
     componentDidMount() {
+        this.updateForwardRef();
+
         if (this.props.tooltip) {
             this.renderTooltip();
         }
 
         if (this.props.autoResize) {
-            this.resize();
+            this.resize(true);
         }
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
 
         if (this.props.autoResize) {
-            this.resize();
+            this.resize(true);
         }
     }
 
@@ -131,25 +154,27 @@ export class InputTextarea extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
-            target: this.element,
+        this.tooltip = tip({
+            target: this.elementRef.current,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
     }
 
     render() {
-        const className = classNames('p-inputtext p-inputtextarea p-component', this.props.className, {
+        const className = classNames('p-inputtextarea p-inputtext p-component', {
             'p-disabled': this.props.disabled,
-            'p-filled': (this.props.value != null && this.props.value.toString().length > 0) || (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0),
+            'p-filled': this.isFilled(),
             'p-inputtextarea-resizable': this.props.autoResize
-        });
+        }, this.props.className);
 
-        let textareaProps = ObjectUtils.findDiffKeys(this.props, InputTextarea.defaultProps);
+        let textareaProps = ObjectUtils.findDiffKeys(this.props, InputTextareaComponent.defaultProps);
 
         return (
-            <textarea {...textareaProps} className={className} ref={input => this.element = input}
+            <textarea ref={this.elementRef} {...textareaProps} className={className}
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyUp} onInput={this.onInput}></textarea>
         );
     }
 }
+
+export const InputTextarea = React.forwardRef((props, ref) => <InputTextareaComponent forwardRef={ref} {...props} />);

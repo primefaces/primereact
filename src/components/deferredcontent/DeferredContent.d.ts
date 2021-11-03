@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-interface DeferredContentProps {
-    onLoad?(event: Event): void;
+export interface DeferredContentProps {
+    onLoad?(event: React.SyntheticEvent): void;
 }
 
-export class DeferredContent extends React.Component<DeferredContentProps,any> {}
+export declare class DeferredContent extends React.Component<DeferredContentProps, any> { }

@@ -1,0 +1,5 @@
+{
+    "main": "./csstransition.cjs.js",
+    "module": "./csstransition.esm.js",
+    "unpkg": "./csstransition.min.js"
+}

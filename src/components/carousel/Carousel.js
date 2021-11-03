@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import UniqueComponentId from '../utils/UniqueComponentId';
-import DomHandler from '../utils/DomHandler';
+import { DomHandler, classNames, UniqueComponentId } from '../utils/Utils';
+import { Ripple } from '../ripple/Ripple';
 
 class CarouselItem extends Component {
 
@@ -60,7 +59,7 @@ export class Carousel extends Component {
         verticalViewPortHeight: "300px",
         contentClassName: null,
         containerClassName: null,
-        dotsContainerClassName: null,
+        indicatorsContentClassName: null,
         onPageChange: null
     }
 
@@ -82,7 +81,7 @@ export class Carousel extends Component {
         verticalViewPortHeight: PropTypes.string,
         contentClassName: PropTypes.string,
         containerClassName: PropTypes.string,
-        dotsContainerClassName: PropTypes.string,
+        indicatorsContentClassName: PropTypes.string,
         onPageChange: PropTypes.func
     };
 
@@ -108,13 +107,12 @@ export class Carousel extends Component {
         this.onTouchStart = this.onTouchStart.bind(this);
         this.onTouchMove = this.onTouchMove.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
-        this.totalDots = 0;
+        this.totalIndicators = 0;
         this.remainingItems = 0;
         this.allowAutoplay = !!this.props.autoplayInterval;
         this.circular = this.props.circular || this.allowAutoplay;
+        this.attributeSelector = UniqueComponentId();
         this.swipeThreshold = 20;
-
-        this.id = this.props.id || UniqueComponentId();
     }
 
     step(dir, page) {
@@ -141,15 +139,15 @@ export class Carousel extends Component {
             page = Math.abs(Math.floor(originalShiftedItems / this.state.numScroll));
         }
 
-        if (isCircular && this.state.page === (this.totalDots - 1) && dir === -1) {
+        if (isCircular && this.state.page === (this.totalIndicators - 1) && dir === -1) {
             totalShiftedItems = -1 * (this.props.value.length + this.state.numVisible);
             page = 0;
         }
         else if (isCircular && this.state.page === 0 && dir === 1) {
             totalShiftedItems = 0;
-            page = (this.totalDots - 1);
+            page = (this.totalIndicators - 1);
         }
-        else if (page === (this.totalDots - 1) && this.remainingItems > 0) {
+        else if (page === (this.totalIndicators - 1) && this.remainingItems > 0) {
             totalShiftedItems += ((this.remainingItems * -1) - (this.state.numScroll * dir));
             this.isRemainingItemsAdded = true;
         }
@@ -247,7 +245,7 @@ export class Carousel extends Component {
     }
 
     navForward(e, page) {
-        if (this.circular || this.getPage() < (this.totalDots - 1)) {
+        if (this.circular || this.getPage() < (this.totalIndicators - 1)) {
             this.step(-1, page);
         }
 
@@ -273,7 +271,7 @@ export class Carousel extends Component {
             DomHandler.addClass(this.itemsContainer, 'p-items-hidden');
             this.itemsContainer.style.transition = '';
 
-            if ((this.state.page === 0 || this.state.page === (this.totalDots - 1)) && this.isCircular()) {
+            if ((this.state.page === 0 || this.state.page === (this.totalIndicators - 1)) && this.isCircular()) {
                 this.changePosition(this.state.totalShiftedItems);
             }
         }
@@ -345,7 +343,7 @@ export class Carousel extends Component {
         return this.props.onPageChange ? this.props.page : this.state.page;
     }
 
-    getTotalDots() {
+    getTotalIndicators() {
         return this.props.value ? Math.ceil((this.props.value.length - this.state.numVisible) / this.state.numScroll) + 1 : 0;
     }
 
@@ -355,7 +353,7 @@ export class Carousel extends Component {
 
     startAutoplay() {
         this.interval = setInterval(() => {
-            if(this.state.page === (this.totalDots - 1)) {
+            if(this.state.page === (this.totalIndicators - 1)) {
                 this.step(-1, 0);
             }
             else {
@@ -374,12 +372,11 @@ export class Carousel extends Component {
     createStyle() {
         if (!this.carouselStyle) {
             this.carouselStyle = document.createElement('style');
-            this.carouselStyle.type = 'text/css';
             document.body.appendChild(this.carouselStyle);
         }
 
         let innerHTML = `
-            #${this.id} .p-carousel-item {
+            .p-carousel[${this.attributeSelector}] .p-carousel-item {
                 flex: 1 0 ${ (100/ this.state.numVisible) }%
             }
         `;
@@ -410,7 +407,7 @@ export class Carousel extends Component {
 
                 innerHTML += `
                     @media screen and (max-width: ${res.breakpoint}) {
-                        #${this.id} .p-carousel-item {
+                        .p-carousel[${this.attributeSelector}] .p-carousel-item {
                             flex: 1 0 ${ (100/ res.numVisible) }%
                         }
                     }
@@ -428,6 +425,10 @@ export class Carousel extends Component {
     }
 
     componentDidMount() {
+        if (this.container) {
+            this.container.setAttribute(this.attributeSelector, '');
+        }
+
         this.createStyle();
         this.calculatePosition();
         this.changePosition(this.state.totalShiftedItems);
@@ -446,12 +447,12 @@ export class Carousel extends Component {
             this.stopAutoplay();
         }
 
-        if (prevState.numScroll !== this.state.numScroll || prevState.numVisible !== this.state.numVisible || prevProps.value.length !== this.props.value.length) {
+        if (prevState.numScroll !== this.state.numScroll || prevState.numVisible !== this.state.numVisible || (this.props.value && prevProps.value && prevProps.value.length !== this.props.value.length)) {
             this.remainingItems = (this.props.value.length - this.state.numVisible) % this.state.numScroll;
 
             let page = this.getPage();
-            if (this.totalDots !== 0 && page >= this.totalDots) {
-                page = this.totalDots - 1;
+            if (this.totalIndicators !== 0 && page >= this.totalIndicators) {
+                page = this.totalIndicators - 1;
 
                 if (this.props.onPageChange) {
                     this.props.onPageChange({
@@ -472,7 +473,7 @@ export class Carousel extends Component {
                 totalShiftedItems -= this.state.numVisible;
             }
 
-            if (page === (this.totalDots - 1) && this.remainingItems > 0) {
+            if (page === (this.totalIndicators - 1) && this.remainingItems > 0) {
                 totalShiftedItems += (-1 * this.remainingItems) + this.state.numScroll;
                 this.isRemainingItemsAdded = true;
             }
@@ -508,6 +509,15 @@ export class Carousel extends Component {
                 });
                 stateChanged = true;
             }
+        }
+
+        if (prevProps.page !== this.props.page) {
+            if (this.props.page > prevProps.page && this.props.page <= (this.totalIndicators - 1)) {
+				this.step(-1, this.props.page);
+			}
+			else if (this.props.page < prevProps.page) {
+				this.step(1, this.props.page);
+			}
         }
 
         if (!stateChanged && this.isAutoplay()) {
@@ -564,11 +574,11 @@ export class Carousel extends Component {
                         });
 
             return (
-                <React.Fragment>
+                <>
                     {clonedItemsForStarting}
                     {items}
                     {clonedItemsForFinishing}
-                </React.Fragment>
+                </>
             );
         }
     }
@@ -615,8 +625,8 @@ export class Carousel extends Component {
     }
 
     renderBackwardNavigator() {
-        let isDisabled = (!this.circular || this.props.value.length < this.state.numVisible) && this.getPage() === 0;
-        let buttonClassName = classNames('p-carousel-prev p-button', {
+        let isDisabled = (!this.circular || (this.props.value && this.props.value.length < this.state.numVisible)) && this.getPage() === 0;
+        let buttonClassName = classNames('p-carousel-prev p-link', {
             'p-disabled': isDisabled
         }),
         iconClassName = classNames('p-carousel-prev-icon pi', {
@@ -627,13 +637,14 @@ export class Carousel extends Component {
         return (
             <button type="button" className={buttonClassName} onClick={this.navBackward} disabled={isDisabled}>
                 <span className={iconClassName}></span>
+                <Ripple />
             </button>
         );
     }
 
     renderForwardNavigator() {
-        let isDisabled = (!this.circular || this.props.value.length < this.state.numVisible) && (this.getPage() === (this.totalDots - 1) || this.totalDots === 0);
-        let buttonClassName = classNames('p-carousel-next p-button', {
+        let isDisabled = (!this.circular || (this.props.value && this.props.value.length < this.state.numVisible)) && (this.getPage() === (this.totalIndicators - 1) || this.totalIndicators === 0);
+        let buttonClassName = classNames('p-carousel-next p-link', {
             'p-disabled': isDisabled
         }),
         iconClassName = classNames('p-carousel-next-icon pi', {
@@ -644,40 +655,37 @@ export class Carousel extends Component {
         return (
             <button type="button" className={buttonClassName} onClick={this.navForward} disabled={isDisabled}>
                 <span className={iconClassName}></span>
+                <Ripple />
             </button>
         );
     }
 
-    renderDot(index) {
+    renderIndicator(index) {
         let isActive = this.getPage() === index,
-        dotItemClassName = classNames('p-carousel-dot-item', {
+        indicatorItemClassName = classNames('p-carousel-indicator', {
             'p-highlight': isActive
-        }),
-        iconClassName = classNames('p-carousel-dot-icon pi', {
-            'pi-circle-on': isActive,
-            'pi-circle-off': !isActive
         });
 
         return (
-            <li className={dotItemClassName} key={'p-carousel-dot-' + index}>
+            <li className={indicatorItemClassName} key={'p-carousel-indicator-' + index}>
                 <button type="button" className="p-link" onClick={(e) => this.onDotClick(e, index)}>
-                    <span className={iconClassName}></span>
+                    <Ripple />
                 </button>
             </li>
         );
     }
 
-    renderDots() {
-        const dotsContainerClassName = classNames('p-carousel-dots-container p-reset', this.props.dotsContainerClassName);
-        let dots = [];
+    renderIndicators() {
+        const indicatorsContentClassName = classNames('p-carousel-indicators p-reset', this.props.indicatorsContentClassName);
+        let indicators = [];
 
-        for (let i = 0; i < this.totalDots; i++) {
-            dots.push(this.renderDot(i));
+        for (let i = 0; i < this.totalIndicators; i++) {
+            indicators.push(this.renderIndicator(i));
         }
 
         return (
-            <ul className={dotsContainerClassName}>
-                {dots}
+            <ul className={indicatorsContentClassName}>
+                {indicators}
             </ul>
         );
     }
@@ -689,18 +697,18 @@ export class Carousel extends Component {
         }, this.props.className);
         const contentClassName = classNames('p-carousel-content', this.props.contentClassName);
 
-        this.totalDots = this.getTotalDots();
+        this.totalIndicators = this.getTotalIndicators();
         const content = this.renderContent();
-        const dots = this.renderDots();
+        const indicators = this.renderIndicators();
         const header = this.renderHeader();
         const footer = this.renderFooter();
 
         return (
-            <div id={this.id} className={className} style={this.props.style}>
+            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style}>
                 {header}
                 <div className={contentClassName}>
                     {content}
-                    {dots}
+                    {indicators}
                 </div>
                 {footer}
             </div>

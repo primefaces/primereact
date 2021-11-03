@@ -1,50 +1,47 @@
 import React, { Component } from 'react';
-import {DataTable} from '../../components/datatable/DataTable';
-import {Column} from '../../components/column/Column';
-import {CarService} from '../service/CarService';
-import {DataTableSubmenu} from '../../showcase/datatable/DataTableSubmenu';
-import {TabView,TabPanel} from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { DataTable } from '../../components/datatable/DataTable';
+import { Column } from '../../components/column/Column';
+import { ProductService } from '../service/ProductService';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class DataTableBasicDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            cars: []
+            products: []
         };
 
-        this.carservice = new CarService();
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
         return (
             <div>
-                <DataTableSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable - Basic</h1>
-                        <p>DataTable requires a collection to display along with column components for the representation of the data.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("dataTable")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    <AppInlineHeader changelogText="dataTable">
+                        <h1>DataTable <span>Basic</span></h1>
+				        <p>DataTable requires a collection to display along with column components for the representation of the data.</p>
+                    </AppInlineHeader>
+                    <AppDemoActions github="datatable/DataTableBasicDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
-                    <DataTable value={this.state.cars}>
-                        <Column field="vin" header="Vin" />
-                        <Column field="year" header="Year" />
-                        <Column field="brand" header="Brand" />
-                        <Column field="color" header="Color" />
-                    </DataTable>
+                    <div className="card">
+                        <DataTable value={this.state.products} responsiveLayout="scroll">
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </div>
                 </div>
 
                 <DataTableBasicDemoDoc></DataTableBasicDemoDoc>
@@ -63,34 +60,36 @@ export class DataTableBasicDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { ProductService } from '../service/ProductService';
 
 export class DataTableBasicDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            cars: []
+            products: []
         };
 
-        this.carservice = new CarService();
+        this.productService = new ProductService();
     }
 
     componentDidMount() {
-        this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
     }
 
     render() {
         return (
             <div>
-                <DataTable value={this.state.cars}>
-                    <Column field="vin" header="Vin" />
-                    <Column field="year" header="Year" />
-                    <Column field="brand" header="Brand" />
-                    <Column field="color" header="Color" />
-                </DataTable>
+                <div className="card">
+                    <DataTable value={this.state.products} responsiveLayout="scroll">
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
             </div>
         );
     }
@@ -101,26 +100,28 @@ export class DataTableBasicDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { ProductService } from '../service/ProductService';
 
 const DataTableBasicDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div>
-            <DataTable value={cars}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+            <div className="card">
+                <DataTable value={products} responsiveLayout="scroll">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -130,26 +131,65 @@ const DataTableBasicDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {CarService} from '../service/CarService';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { ProductService } from '../service/ProductService';
 
 const DataTableBasicDemo = () => {
-    const [cars, setCars] = useState([]);
-    const carservice = new CarService();
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
 
     useEffect(() => {
-        carservice.getCarsSmall().then(data => setCars(data));
+        productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div>
-            <DataTable value={cars}>
-                <Column field="vin" header="Vin" />
-                <Column field="year" header="Year" />
-                <Column field="brand" header="Brand" />
-                <Column field="color" header="Color" />
-            </DataTable>
+            <div className="card">
+                <DataTable value={products} responsiveLayout="scroll">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./ProductService.js"></script>
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
+        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { DataTable } = primereact.datatable;
+const { Column } = primereact.column;
+
+const DataTableBasicDemo = () => {
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
+
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <DataTable value={products} responsiveLayout="scroll">
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -164,16 +204,10 @@ const DataTableBasicDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="DataTableBasicDemo" sources={[key, value]} service="CarService" data="cars-small" />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'DataTableBasicDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })
                     }
                 </TabView>
             </div>

@@ -1,8 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import UniqueComponentId from '../utils/UniqueComponentId';
-import { CSSTransition } from 'react-transition-group';
+import { classNames, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { CSSTransition } from '../csstransition/CSSTransition';
 
 export class AccordionTab extends Component {
 
@@ -11,6 +10,7 @@ export class AccordionTab extends Component {
         disabled: false,
         headerStyle: null,
         headerClassName: null,
+        headerTemplate: null,
         contentStyle: null,
         contentClassName: null
     }
@@ -20,6 +20,7 @@ export class AccordionTab extends Component {
         disabled: PropTypes.bool,
         headerStyle: PropTypes.object,
         headerClassName: PropTypes.string,
+        headerTemplate: PropTypes.any,
         contentStyle: PropTypes.object,
         contentClassName: PropTypes.string
     }
@@ -33,6 +34,9 @@ export class Accordion extends Component {
         className: null,
         style: null,
         multiple: false,
+        expandIcon: 'pi pi-chevron-right',
+        collapseIcon: 'pi pi-chevron-down',
+        transitionOptions: null,
         onTabOpen: null,
         onTabClose: null,
         onTabChange: null
@@ -44,6 +48,9 @@ export class Accordion extends Component {
         className: PropTypes.string,
         style: PropTypes.object,
         multiple: PropTypes.bool,
+        expandIcon: PropTypes.string,
+        collapseIcon: PropTypes.string,
+        transitionOptions: PropTypes.object,
         onTabOpen: PropTypes.func,
         onTabClose: PropTypes.func,
         onTabChange: PropTypes.func
@@ -51,14 +58,19 @@ export class Accordion extends Component {
 
     constructor(props) {
         super(props);
+        let state = {
+            id: this.props.id
+        };
+
         if (!this.props.onTabChange) {
-            this.state = {
+            state = {
+                ...state,
                 activeIndex: props.activeIndex
             };
         }
 
+        this.state = state;
         this.contentWrappers = [];
-        this.id = this.props.id || UniqueComponentId();
     }
 
     onTabHeaderClick(event, tab, index) {
@@ -66,9 +78,9 @@ export class Accordion extends Component {
             const selected = this.isSelected(index);
             let newActiveIndex = null;
 
-            if(this.props.multiple) {
+            if (this.props.multiple) {
                 let indexes = (this.props.onTabChange ? this.props.activeIndex : this.state.activeIndex) || [];
-                if(selected)
+                if (selected)
                     indexes = indexes.filter(i => i !== index);
                 else
                     indexes = [...indexes, index];
@@ -80,8 +92,8 @@ export class Accordion extends Component {
             }
 
             let callback = selected ? this.props.onTabClose : this.props.onTabOpen;
-            if(callback) {
-                callback({originalEvent: event, index: index});
+            if (callback) {
+                callback({ originalEvent: event, index: index });
             }
 
             if (this.props.onTabChange) {
@@ -106,29 +118,38 @@ export class Accordion extends Component {
         return this.props.multiple ? (activeIndex && activeIndex.indexOf(index) >= 0) : activeIndex === index;
     }
 
+    componentDidMount() {
+        if (!this.state.id) {
+            this.setState({ id: UniqueComponentId() });
+        }
+    }
+
     renderTabHeader(tab, selected, index) {
-        const tabHeaderClass = classNames(tab.props.headerClassName, 'p-accordion-header', {'p-highlight': selected, 'p-disabled': tab.props.disabled});
-        const id = this.id + '_header_' + index;
-        const ariaControls = this.id + '_content_' + index;
+        const tabHeaderClass = classNames('p-accordion-header', { 'p-highlight': selected, 'p-disabled': tab.props.disabled }, tab.props.headerClassName);
+        const iconClassName = classNames('p-accordion-toggle-icon', { [`${this.props.expandIcon}`]: !selected, [`${this.props.collapseIcon}`]: selected });
+        const id = this.state.id + '_header_' + index;
+        const ariaControls = this.state.id + '_content_' + index;
         const tabIndex = tab.props.disabled ? -1 : null;
+        const header = tab.props.headerTemplate ? ObjectUtils.getJSXElement(tab.props.headerTemplate, tab.props) : <span className="p-accordion-header-text">{tab.props.header}</span>;
 
         return (
             <div className={tabHeaderClass} style={tab.props.headerStyle}>
-                <a href={'#' + ariaControls} id={id} aria-controls={ariaControls} role="tab" aria-expanded={selected} onClick={(event) => this.onTabHeaderClick(event, tab, index)} tabIndex={tabIndex}>
-                    <span className={classNames('p-accordion-toggle-icon pi pi-fw', { 'pi-caret-right': !selected, 'pi-caret-down': selected })}></span>
-                    <span className="p-accordion-header-text">{tab.props.header}</span>
+                <a href={'#' + ariaControls} id={id} className="p-accordion-header-link" aria-controls={ariaControls} role="tab" aria-expanded={selected} onClick={(event) => this.onTabHeaderClick(event, tab, index)} tabIndex={tabIndex}>
+                    <span className={iconClassName}></span>
+                    {header}
                 </a>
             </div>
         );
     }
 
     renderTabContent(tab, selected, index) {
-        const className = classNames(tab.props.contentClassName, 'p-toggleable-content', {'p-toggleable-content-collapsed': !selected});
-        const id = this.id + '_content_' + index;
+        const className = classNames('p-toggleable-content', tab.props.contentClassName);
+        const id = this.state.id + '_content_' + index;
+        const toggleableContentRef = React.createRef();
 
         return (
-            <CSSTransition classNames="p-toggleable-content" timeout={{enter: 400, exit: 250}} in={selected}>
-                <div id={id} className={className} style={tab.props.contentStyle} role="region" aria-labelledby={this.id + '_header_' +index}>
+            <CSSTransition nodeRef={toggleableContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={selected} unmountOnExit options={this.props.transitionOptions}>
+                <div ref={toggleableContentRef} id={id} className={className} style={tab.props.contentStyle} role="region" aria-labelledby={this.state.id + '_header_' + index}>
                     <div className="p-accordion-content">
                         {tab.props.children}
                     </div>
@@ -141,9 +162,12 @@ export class Accordion extends Component {
         const selected = this.isSelected(index);
         const tabHeader = this.renderTabHeader(tab, selected, index);
         const tabContent = this.renderTabContent(tab, selected, index);
+        const tabClassName = classNames('p-accordion-tab', {
+            'p-accordion-tab-active': selected
+        });
 
         return (
-            <div key={tab.props.header} className="p-accordion-tab">
+            <div key={tab.props.header} className={tabClassName}>
                 {tabHeader}
                 {tabContent}
             </div>
@@ -153,17 +177,19 @@ export class Accordion extends Component {
     renderTabs() {
         return (
             React.Children.map(this.props.children, (tab, index) => {
-                return this.renderTab(tab, index);
+                if (tab && tab.type === AccordionTab) {
+                    return this.renderTab(tab, index);
+                }
             })
         )
     }
 
     render() {
-        const className = classNames('p-accordion p-component p-reset', this.props.className);
+        const className = classNames('p-accordion p-component', this.props.className);
         const tabs = this.renderTabs();
 
         return (
-            <div ref={(el) => this.container = el} id={this.id} className={className} style={this.props.style}>
+            <div ref={(el) => this.container = el} id={this.state.id} className={className} style={this.props.style}>
                 {tabs}
             </div>
         );

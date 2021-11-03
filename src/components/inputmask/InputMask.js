@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import DomHandler from '../utils/DomHandler';
+import { DomHandler, classNames } from '../utils/Utils';
 import { InputText } from '../inputtext/InputText';
-import Tooltip from "../tooltip/Tooltip";
+import { tip } from '../tooltip/Tooltip';
 
 export class InputMask extends Component {
 
     static defaultProps = {
         id: null,
+        inputRef: null,
         value: null,
         type: 'text',
         mask: null,
@@ -20,20 +20,23 @@ export class InputMask extends Component {
         placeholder: null,
         size: null,
         maxlength: null,
-        tabindex: null,
+        tabIndex: null,
         disabled: false,
-        readonly: false,
+        readOnly: false,
         name: null,
         required: false,
         tooltip: null,
         tooltipOptions: null,
         ariaLabelledBy: null,
         onComplete: null,
-        onChange: null
+        onChange: null,
+        onFocus: null,
+        onBlur: null
     }
 
     static propTypes = {
         id: PropTypes.string,
+        inputRef: PropTypes.any,
         value: PropTypes.string,
         type: PropTypes.string,
         mask: PropTypes.string,
@@ -45,16 +48,18 @@ export class InputMask extends Component {
         placeholder: PropTypes.string,
         size: PropTypes.number,
         maxlength: PropTypes.number,
-        tabindex: PropTypes.number,
+        tabIndex: PropTypes.number,
         disabled: PropTypes.bool,
-        readonly: PropTypes.bool,
+        readOnly: PropTypes.bool,
         name: PropTypes.string,
         required: PropTypes.bool,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
         onComplete: PropTypes.func,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func
     }
 
     constructor(props) {
@@ -66,23 +71,26 @@ export class InputMask extends Component {
         this.onKeyPress = this.onKeyPress.bind(this);
         this.onInput = this.onInput.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+
+        this.inputRef = createRef(this.props.inputRef);
     }
 
     caret(first, last) {
         let range, begin, end;
+        let inputEl = this.inputRef && this.inputRef.current;
 
-        if (!this.input.offsetParent || this.input !== document.activeElement) {
+        if (!inputEl || !inputEl.offsetParent || inputEl !== document.activeElement) {
             return;
         }
 
         if (typeof first === 'number') {
             begin = first;
             end = (typeof last === 'number') ? last : begin;
-            if (this.input.setSelectionRange) {
-                this.input.setSelectionRange(begin, end);
+            if (inputEl.setSelectionRange) {
+                inputEl.setSelectionRange(begin, end);
             }
-            else if (this.input['createTextRange']) {
-                range = this.input['createTextRange']();
+            else if (inputEl['createTextRange']) {
+                range = inputEl['createTextRange']();
                 range.collapse(true);
                 range.moveEnd('character', end);
                 range.moveStart('character', begin);
@@ -90,9 +98,9 @@ export class InputMask extends Component {
             }
         }
         else {
-            if (this.input.setSelectionRange) {
-                begin = this.input.selectionStart;
-                end = this.input.selectionEnd;
+            if (inputEl.setSelectionRange) {
+                begin = inputEl.selectionStart;
+                end = inputEl.selectionEnd;
             }
             else if (document['selection'] && document['selection'].createRange) {
                 range = document['selection'].createRange();
@@ -122,7 +130,7 @@ export class InputMask extends Component {
     }
 
     getValue() {
-        return this.props.unmask ? this.getUnmaskedValue() : this.input && this.input.value;
+        return this.props.unmask ? this.getUnmaskedValue() : this.inputRef && this.inputRef.current && this.inputRef.current.value;
     }
 
     seekNext(pos) {
@@ -176,8 +184,8 @@ export class InputMask extends Component {
     }
 
     handleAndroidInput(e) {
-        var curVal = this.input.value;
-        var pos = this.caret();
+        let curVal = this.inputRef.current.value;
+        let pos = this.caret();
         if (this.oldVal && this.oldVal.length && this.oldVal.length > curVal.length) {
             // a deletion or backspace happened
             this.checkVal(true);
@@ -210,15 +218,19 @@ export class InputMask extends Component {
         this.updateModel(e);
         this.updateFilledState();
 
-        if (this.input.value !== this.focusText) {
+        if (this.props.onBlur) {
+            this.props.onBlur(e);
+        }
+
+        if (this.inputRef.current.value !== this.focusText) {
             let event = document.createEvent('HTMLEvents');
             event.initEvent('change', true, false);
-            this.input.dispatchEvent(event);
+            this.inputRef.current.dispatchEvent(event);
         }
     }
 
     onKeyDown(e) {
-        if (this.props.readonly) {
+        if (this.props.readOnly) {
             return;
         }
 
@@ -227,7 +239,7 @@ export class InputMask extends Component {
             begin,
             end;
         let iPhone = /iphone/i.test(DomHandler.getUserAgent());
-        this.oldVal = this.input.value;
+        this.oldVal = this.inputRef.current.value;
 
         //backspace, delete, and escape get special treatment
         if (k === 8 || k === 46 || (iPhone && k === 127)) {
@@ -250,7 +262,7 @@ export class InputMask extends Component {
             this.onBlur(e);
             this.updateModel(e);
         } else if (k === 27) { // escape
-            this.input.value = this.focusText;
+            this.inputRef.current.value = this.focusText;
             this.caret(0, this.checkVal());
             this.updateModel(e);
             e.preventDefault();
@@ -258,11 +270,11 @@ export class InputMask extends Component {
     }
 
     onKeyPress(e) {
-        if (this.props.readonly) {
+        if (this.props.readOnly) {
             return;
         }
 
-        var k = e.which || e.keyCode,
+        let k = e.which || e.keyCode,
             pos = this.caret(),
             p,
             c,
@@ -325,13 +337,13 @@ export class InputMask extends Component {
     }
 
     writeBuffer() {
-        this.input.value = this.buffer.join('');
+        this.inputRef.current.value = this.buffer.join('');
     }
 
     checkVal(allow) {
         this.isValueChecked = true;
         //try to place characters where they belong
-        let test = this.input.value,
+        let test = this.inputRef.current.value,
             lastMatch = -1,
             i,
             c,
@@ -367,7 +379,7 @@ export class InputMask extends Component {
             if (this.props.autoClear || this.buffer.join('') === this.defaultBuffer) {
                 // Invalid value. Remove it and replace it with the
                 // mask, which is the default behavior.
-                if (this.input.value) this.input.value = '';
+                if (this.inputRef.current.value) this.inputRef.current.value = '';
                 this.clearBuffer(0, this.len);
             } else {
                 // Invalid value, but we opt to show the value to the
@@ -376,13 +388,13 @@ export class InputMask extends Component {
             }
         } else {
             this.writeBuffer();
-            this.input.value = this.input.value.substring(0, lastMatch + 1);
+            this.inputRef.current.value = this.inputRef.current.value.substring(0, lastMatch + 1);
         }
         return (this.partialPosition ? i : this.firstNonMaskPos);
     }
 
-    onFocus(event) {
-        if (this.props.readonly) {
+    onFocus(e) {
+        if (this.props.readOnly) {
             return;
         }
 
@@ -391,12 +403,12 @@ export class InputMask extends Component {
         clearTimeout(this.caretTimeoutId);
         let pos;
 
-        this.focusText = this.input.value;
+        this.focusText = this.inputRef.current.value;
 
         pos = this.checkVal();
 
         this.caretTimeoutId = setTimeout(() => {
-            if (this.input !== document.activeElement) {
+            if (this.inputRef.current !== document.activeElement) {
                 return;
             }
             this.writeBuffer();
@@ -407,6 +419,10 @@ export class InputMask extends Component {
             }
             this.updateFilledState();
         }, 10);
+
+        if (this.props.onFocus) {
+            this.props.onFocus(e);
+        }
     }
 
     onInput(event) {
@@ -417,11 +433,11 @@ export class InputMask extends Component {
     }
 
     handleInputChange(e) {
-        if (this.props.readonly) {
+        if (this.props.readOnly) {
             return;
         }
 
-        var pos = this.checkVal(true);
+        let pos = this.checkVal(true);
         this.caret(pos);
         this.updateModel(e);
         if (this.props.onComplete && this.isCompleted()) {
@@ -446,7 +462,7 @@ export class InputMask extends Component {
 
     updateModel(e) {
         if (this.props.onChange) {
-            var val = this.props.unmask ? this.getUnmaskedValue() : e && e.target.value;
+            let val = this.props.unmask ? this.getUnmaskedValue() : e && e.target.value;
             this.props.onChange({
                 originalEvent: e,
                 value: (this.defaultBuffer !== val) ? val : '',
@@ -462,90 +478,111 @@ export class InputMask extends Component {
     }
 
     updateFilledState() {
-        if (this.input && this.input.value && this.input.value.length > 0)
-            DomHandler.addClass(this.input, 'p-filled');
+        if (this.inputRef && this.inputRef.current && this.inputRef.current.value && this.inputRef.current.value.length > 0)
+            DomHandler.addClass(this.inputRef.current, 'p-filled');
         else
-            DomHandler.removeClass(this.input, 'p-filled');
+            DomHandler.removeClass(this.inputRef.current, 'p-filled');
     }
 
-    updateValue() {
-        if (this.input) {
+    updateValue(allow) {
+        let pos;
+
+        if (this.inputRef && this.inputRef.current) {
             if (this.props.value == null) {
-                this.input.value = '';
+                this.inputRef.current.value = '';
             }
             else {
-                this.input.value = this.props.value;
-                this.checkVal();
+                this.inputRef.current.value = this.props.value;
+                pos = this.checkVal(allow);
 
                 setTimeout(() => {
-                    if(this.input) {
+                    if(this.inputRef && this.inputRef.current) {
                         this.writeBuffer();
-                        this.checkVal();
+                        return this.checkVal(allow);
                     }
                 }, 10);
             }
 
-            this.focusText = this.input.value;
+            this.focusText = this.inputRef.current.value;
         }
 
         this.updateFilledState();
+
+        return pos;
     }
 
     isValueUpdated() {
         return this.props.unmask ?
                         (this.props.value !== this.getUnmaskedValue()) :
-                        (this.defaultBuffer !== this.input.value && this.input.value !== this.props.value);
+                        (this.defaultBuffer !== this.inputRef.current.value && this.inputRef.current.value !== this.props.value);
     }
 
     init() {
-        this.tests = [];
-        this.partialPosition = this.props.mask.length;
-        this.len = this.props.mask.length;
-        this.firstNonMaskPos = null;
-        this.defs = {
-            '9': '[0-9]',
-            'a': '[A-Za-z]',
-            '*': '[A-Za-z0-9]'
-        };
+        if (this.props.mask) {
+            this.tests = [];
+            this.partialPosition = this.props.mask.length;
+            this.len = this.props.mask.length;
+            this.firstNonMaskPos = null;
+            this.defs = {
+                '9': '[0-9]',
+                'a': '[A-Za-z]',
+                '*': '[A-Za-z0-9]'
+            };
 
-        let ua = DomHandler.getUserAgent();
-        this.androidChrome = /chrome/i.test(ua) && /android/i.test(ua);
+            let ua = DomHandler.getUserAgent();
+            this.androidChrome = /chrome/i.test(ua) && /android/i.test(ua);
 
-        let maskTokens = this.props.mask.split('');
-        for (let i = 0; i < maskTokens.length; i++) {
-            let c = maskTokens[i];
-            if (c === '?') {
-                this.len--;
-                this.partialPosition = i;
+            let maskTokens = this.props.mask.split('');
+            for (let i = 0; i < maskTokens.length; i++) {
+                let c = maskTokens[i];
+                if (c === '?') {
+                    this.len--;
+                    this.partialPosition = i;
+                }
+                else if (this.defs[c]) {
+                    this.tests.push(new RegExp(this.defs[c]));
+                    if (this.firstNonMaskPos === null) {
+                        this.firstNonMaskPos = this.tests.length - 1;
+                    }
+                    if (i < this.partialPosition) {
+                        this.lastRequiredNonMaskPos = this.tests.length - 1;
+                    }
+                }
+                else {
+                    this.tests.push(null);
+                }
             }
-            else if (this.defs[c]) {
-                this.tests.push(new RegExp(this.defs[c]));
-                if (this.firstNonMaskPos === null) {
-                    this.firstNonMaskPos = this.tests.length - 1;
+
+            this.buffer = [];
+            for (let i = 0; i < maskTokens.length; i++) {
+                let c = maskTokens[i];
+                if (c !== '?') {
+                    if (this.defs[c])
+                        this.buffer.push(this.getPlaceholder(i));
+                    else
+                        this.buffer.push(c);
                 }
-                if (i < this.partialPosition) {
-                    this.lastRequiredNonMaskPos = this.tests.length - 1;
-                }
+            }
+            this.defaultBuffer = this.buffer.join('');
+        }
+    }
+
+    updateInputRef() {
+        let ref = this.props.inputRef;
+
+        if (ref) {
+            if (typeof ref === 'function') {
+                ref(this.inputRef.current);
             }
             else {
-                this.tests.push(null);
+                ref.current = this.inputRef.current;
             }
         }
-
-        this.buffer = [];
-        for (let i = 0; i < maskTokens.length; i++) {
-            let c = maskTokens[i];
-            if (c !== '?') {
-                if (this.defs[c])
-                    this.buffer.push(this.getPlaceholder(i));
-                else
-                    this.buffer.push(c);
-            }
-        }
-        this.defaultBuffer = this.buffer.join('');
     }
 
     componentDidMount() {
+        this.updateInputRef();
+
         this.init();
         this.updateValue();
 
@@ -555,9 +592,9 @@ export class InputMask extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip) {
+        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
             if (this.tooltip)
-                this.tooltip.updateContent(this.props.tooltip);
+                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
             else
                 this.renderTooltip();
         }
@@ -568,7 +605,7 @@ export class InputMask extends Component {
 
         if (prevProps.mask !== this.props.mask) {
             this.init();
-            this.updateValue();
+            this.caret(this.updateValue(true));
             this.updateModel();
         }
     }
@@ -581,17 +618,18 @@ export class InputMask extends Component {
     }
 
     renderTooltip() {
-        this.tooltip = new Tooltip({
-            target: this.input,
+        this.tooltip = tip({
+            target: this.inputRef.current,
             content: this.props.tooltip,
             options: this.props.tooltipOptions
         });
     }
 
     render() {
+        let inputMaskClassName = classNames('p-inputmask', this.props.className);
         return (
-            <InputText id={this.props.id} ref={(el) => this.input = ReactDOM.findDOMNode(el)} type={this.props.type} name={this.props.name} style={this.props.style} className={this.props.className} placeholder={this.props.placeholder}
-                size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabindex} disabled={this.props.disabled} readOnly={this.props.readonly}
+            <InputText id={this.props.id} ref={this.inputRef} type={this.props.type} name={this.props.name} style={this.props.style} className={inputMaskClassName} placeholder={this.props.placeholder}
+                size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabIndex} disabled={this.props.disabled} readOnly={this.props.readOnly}
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} onKeyPress={this.onKeyPress}
                 onInput={this.onInput} onPaste={this.handleInputChange} required={this.props.required} aria-labelledby={this.props.ariaLabelledBy} />
         );

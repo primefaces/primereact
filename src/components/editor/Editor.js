@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import Quill from "quill";
-import 'quill/dist/quill.snow.css';
-import 'quill/dist/quill.bubble.css';
+import { classNames } from '../utils/Utils';
 
 export class Editor extends Component {
 
@@ -19,7 +16,8 @@ export class Editor extends Component {
         theme: 'snow',
         headerTemplate: null,
         onTextChange: null,
-		onSelectionChange: null
+        onSelectionChange: null,
+        onLoad: null
     };
 
     static propTypes = {
@@ -34,57 +32,70 @@ export class Editor extends Component {
         theme: PropTypes.string,
         headerTemplate: PropTypes.any,
         onTextChange: PropTypes.func,
-		onSelectionChange: PropTypes.func
+        onSelectionChange: PropTypes.func,
+        onLoad: PropTypes.func
     };
 
+    getQuill() {
+        return this.quill;
+    }
+
     componentDidMount() {
-        this.quill = new Quill(this.editorElement, {
-            modules: {
-                toolbar: this.toolbarElement,
-                ...this.props.modules
-            },
-            placeholder: this.props.placeholder,
-            readOnly: this.props.readOnly,
-            theme: this.props.theme,
-            formats: this.props.formats
-        });
+        import('quill').then((module) => {
+            if (module && module.default) {
+                this.quill = new module.default(this.editorElement, {
+                    modules: {
+                        toolbar: this.toolbarElement,
+                        ...this.props.modules
+                    },
+                    placeholder: this.props.placeholder,
+                    readOnly: this.props.readOnly,
+                    theme: this.props.theme,
+                    formats: this.props.formats
+                });
 
-        if (this.props.value) {
-            this.quill.pasteHTML(this.props.value);
-        }
+                if (this.props.value) {
+                    this.quill.setContents(this.quill.clipboard.convert(this.props.value));
+                }
 
-        this.quill.on('text-change', (delta, source) => {
-            let html = this.editorElement.children[0].innerHTML;
-            let text = this.quill.getText();
-            if (html === '<p><br></p>') {
-                html = null;
-            }
+                this.quill.on('text-change', (delta, source) => {
+                    let html = this.editorElement.children[0].innerHTML;
+                    let text = this.quill.getText();
+                    if (html === '<p><br></p>') {
+                        html = null;
+                    }
 
-            if (this.props.onTextChange) {
-                this.props.onTextChange({
-                    htmlValue: html,
-                    textValue: text,
-                    delta: delta,
-                    source: source
+                    if (this.props.onTextChange) {
+                        this.props.onTextChange({
+                            htmlValue: html,
+                            textValue: text,
+                            delta: delta,
+                            source: source
+                        });
+                    }
+                });
+
+                this.quill.on('selection-change', (range, oldRange, source) => {
+                    if (this.props.onSelectionChange) {
+                        this.props.onSelectionChange({
+                            range: range,
+                            oldRange: oldRange,
+                            source: source
+                        });
+                    }
                 });
             }
-        });
-
-        this.quill.on('selection-change', (range, oldRange, source) => {
-            if(this.props.onSelectionChange) {
-                this.props.onSelectionChange({
-                    range: range,
-                    oldRange: oldRange,
-                    source: source
-                });
+        }).then(() => {
+            if (this.quill && this.quill.getModule('toolbar')) {
+                this.props.onLoad && this.props.onLoad(this.quill);
             }
-        });
+        })
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.value !== prevProps.value && this.quill && !this.quill.hasFocus()) {
-            if(this.props.value)
-                this.quill.pasteHTML(this.props.value);
+            if (this.props.value)
+                this.quill.setContents(this.quill.clipboard.convert(this.props.value));
             else
                 this.quill.setText('');
         }
@@ -106,9 +117,9 @@ export class Editor extends Component {
                 <div ref={el => this.toolbarElement = el} className="p-editor-toolbar">
                     <span className="ql-formats">
                         <select className="ql-header" defaultValue="0">
-                          <option value="1">Heading</option>
-                          <option value="2">Subheading</option>
-                          <option value="0">Normal</option>
+                            <option value="1">Heading</option>
+                            <option value="2">Subheading</option>
+                            <option value="0">Normal</option>
                         </select>
                         <select className="ql-font">
                             <option ></option>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import DomHandler from '../utils/DomHandler';
+import { DomHandler, classNames, UniqueComponentId } from '../utils/Utils';
+import { Ripple } from '../ripple/Ripple';
 
 class GalleriaThumbnailItem extends Component {
 
@@ -89,6 +89,8 @@ export class GalleriaThumbnails extends Component {
         this.onTouchMove = this.onTouchMove.bind(this);
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onItemClick = this.onItemClick.bind(this);
+
+        this.attributeSelector = UniqueComponentId();
     }
 
     step(dir) {
@@ -194,8 +196,8 @@ export class GalleriaThumbnails extends Component {
         }
     }
 
-    onTransitionEnd() {
-        if (this.itemsContainer) {
+    onTransitionEnd(e) {
+        if (this.itemsContainer && e.propertyName === 'transform') {
             DomHandler.addClass(this.itemsContainer, 'p-items-hidden');
             this.itemsContainer.style.transition = '';
         }
@@ -243,12 +245,11 @@ export class GalleriaThumbnails extends Component {
     createStyle() {
         if (!this.thumbnailsStyle) {
             this.thumbnailsStyle = document.createElement('style');
-            this.thumbnailsStyle.type = 'text/css';
             document.body.appendChild(this.thumbnailsStyle);
         }
 
         let innerHTML = `
-            #${this.props.containerId} .p-galleria-thumbnail-item {
+            .p-galleria-thumbnail-items[${this.attributeSelector}] .p-galleria-thumbnail-item {
                 flex: 1 0 ${ (100/ this.state.numVisible) }%
             }
         `;
@@ -279,7 +280,7 @@ export class GalleriaThumbnails extends Component {
 
                 innerHTML += `
                     @media screen and (max-width: ${res.breakpoint}) {
-                        #${this.props.containerId} .p-galleria-thumbnail-item {
+                        .p-galleria-thumbnail-items[${this.attributeSelector}] .p-galleria-thumbnail-item {
                             flex: 1 0 ${ (100/ res.numVisible) }%
                         }
                     }
@@ -331,6 +332,10 @@ export class GalleriaThumbnails extends Component {
     }
 
     componentDidMount() {
+        if (this.itemsContainer) {
+            this.itemsContainer.setAttribute(this.attributeSelector, '');
+        }
+
         this.createStyle();
         this.calculatePosition();
 
@@ -378,7 +383,7 @@ export class GalleriaThumbnails extends Component {
     }
 
     renderItems() {
-        let items = this.props.value.map((item, index) => {
+        return this.props.value.map((item, index) => {
                         let firstIndex = this.state.totalShiftedItems * -1,
                         lastIndex = firstIndex + this.state.numVisible - 1,
                         isActive = firstIndex <= index && lastIndex >= index,
@@ -389,18 +394,12 @@ export class GalleriaThumbnails extends Component {
                         return <GalleriaThumbnailItem key={index} index={index} template={this.props.itemTemplate} item={item} active={isActive} start={start} end={end}
                             onItemClick={this.onItemClick} current={current}/>
                     });
-
-        return (
-            <React.Fragment>
-                { items }
-            </React.Fragment>
-        );
     }
 
     renderBackwardNavigator() {
-        if (this.props.showThumbnailNavButtons) {
+        if (this.props.showThumbnailNavigators) {
             let isDisabled = (!this.props.circular && this.props.activeItemIndex === 0) || (this.props.value.length <= this.state.numVisible);
-            let buttonClassName = classNames('p-galleria-thumbnail-prev p-button', {
+            let buttonClassName = classNames('p-galleria-thumbnail-prev p-link', {
                 'p-disabled': isDisabled
             }),
             iconClassName = classNames('p-galleria-thumbnail-prev-icon pi', {
@@ -411,6 +410,7 @@ export class GalleriaThumbnails extends Component {
             return (
                 <button className={buttonClassName} onClick={this.navBackward} disabled={isDisabled}>
                     <span className={iconClassName}></span>
+                    <Ripple />
                 </button>
             );
         }
@@ -419,9 +419,9 @@ export class GalleriaThumbnails extends Component {
     }
 
     renderForwardNavigator() {
-        if (this.props.showThumbnailNavButtons) {
+        if (this.props.showThumbnailNavigators) {
             let isDisabled = (!this.props.circular && this.props.activeItemIndex === (this.props.value.length - 1)) || (this.props.value.length <= this.state.numVisible);
-            let buttonClassName = classNames('p-galleria-thumbnail-next p-button', {
+            let buttonClassName = classNames('p-galleria-thumbnail-next p-link', {
                 'p-disabled': isDisabled
             }),
             iconClassName = classNames('p-galleria-thumbnail-next-icon pi', {
@@ -432,6 +432,7 @@ export class GalleriaThumbnails extends Component {
             return (
                 <button className={buttonClassName} onClick={this.navForward} disabled={isDisabled}>
                     <span className={iconClassName}></span>
+                    <Ripple />
                 </button>
             );
         }
@@ -448,8 +449,8 @@ export class GalleriaThumbnails extends Component {
         return (
             <div className="p-galleria-thumbnail-container">
                 { backwardNavigator }
-                <div className="p-galleria-thumbnail-items-content" style={{'height': height}}>
-                    <div ref={(el) => this.itemsContainer = el} className="p-galleria-thumbnail-items-container" onTransitionEnd={this.onTransitionEnd}
+                <div className="p-galleria-thumbnail-items-container" style={{'height': height}}>
+                    <div ref={(el) => this.itemsContainer = el} className="p-galleria-thumbnail-items" onTransitionEnd={this.onTransitionEnd}
                         onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove} onTouchEnd={this.onTouchEnd}>
                         { items }
                     </div>
@@ -463,7 +464,7 @@ export class GalleriaThumbnails extends Component {
         const content = this.renderContent();
 
         return (
-            <div className="p-galleria-thumbnail-content">
+            <div className="p-galleria-thumbnail-wrapper">
                 { content }
             </div>
         );

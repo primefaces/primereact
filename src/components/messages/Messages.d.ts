@@ -1,8 +1,12 @@
 import * as React from 'react';
 
-interface Message {
+type MessagesSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
+
+type MessagesMessageType = MessagesMessage | MessagesMessage[];
+
+export interface MessagesMessage {
     id?: string;
-    severity?: 'success' | 'info' | 'warn' | 'error',
+    severity?: MessagesSeverityType;
     summary?: React.ReactNode;
     detail?: React.ReactNode;
     closable?: boolean;
@@ -10,16 +14,17 @@ interface Message {
     life?: number;
 }
 
-interface MessagesProps {
+export interface MessagesProps {
     id?: string;
     className?: string;
     style?: object;
-    onRemove?(message: Message): void;
-    onClick?(message: Message): void;
+    transitionOptions?: object;
+    onRemove?(message: MessagesMessage): void;
+    onClick?(message: MessagesMessage): void;
 }
 
-export class Messages extends React.Component<MessagesProps, any> {
-    public show(message: Message | Message[]): void;
+export declare class Messages extends React.Component<MessagesProps, any> {
+    public show(message: MessagesMessageType): void;
     public clear(): void;
-    public replace(message: Message | Message[]): void;
+    public replace(message: MessagesMessageType): void;
 }

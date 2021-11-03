@@ -1,49 +1,45 @@
 import React, { Component } from 'react';
 import { Tree } from '../../components/tree/Tree';
 import { NodeService } from '../service/NodeService';
-import { TreeSubmenu } from './TreeSubmenu';
-import { TabView, TabPanel } from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeFilterDemo extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            nodes1: null,
-            nodes2: null
+            nodes: null
         };
 
         this.nodeService = new NodeService();
     }
 
     componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({ nodes1: data, nodes2: data }));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <TreeSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree - Filter</h1>
+                    <AppInlineHeader changelogText="tree">
+                        <h1>Tree <span>Filter</span></h1>
                         <p>Filtering updates the node based on the constraints.</p>
-
-                        <AppContentContext.Consumer>
-                            {context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button>}
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
+                    <AppDemoActions github="tree/TreeFilterDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
-                    <h3 className="first">Lenient Filter Mode</h3>
-                    <Tree value={this.state.nodes1} filter={true} />
+                    <div className="card">
+                        <h5>Lenient Filter</h5>
+                        <Tree value={this.state.nodes} filter filterMode="lenient"></Tree>
 
-                    <h3>Strict Filter Mode</h3>
-                    <Tree value={this.state.nodes2} filter={true} filterMode="strict" />
+                        <h5>Strict Filter</h5>
+                        <Tree value={this.state.nodes} filter filterMode="strict"></Tree>
+                    </div>
                 </div>
 
                 <TreeFilterDemoDoc />
@@ -62,33 +58,34 @@ export class TreeFilterDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Tree} from 'primereact/tree';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { NodeService } from '../service/NodeService';
 
 export class TreeFilterDemo extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            nodes1: null,
-            nodes2: null
+            nodes: null
         };
 
         this.nodeService = new NodeService();
     }
 
     componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes1: data, nodes2: data}));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <h3 className="first">Lenient Filter Mode</h3>
-                <Tree value={this.state.nodes1} filter={true} />
+                <div className="card">
+                    <h5>Lenient Filter</h5>
+                    <Tree value={this.state.nodes} filter filterMode="lenient"></Tree>
 
-                <h3>Strict Filter Mode</h3>
-                <Tree value={this.state.nodes2} filter={true} filterMode="strict" />
+                    <h5>Strict Filter</h5>
+                    <Tree value={this.state.nodes} filter filterMode="strict"></Tree>
+                </div>
             </div>
         )
     }
@@ -99,28 +96,26 @@ export class TreeFilterDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect } from 'react';
-import {Tree} from 'primereact/tree';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { NodeService } from '../service/NodeService';
 
 const TreeFilterDemo = () => {
-    const [nodes1, setNodes1] = useState(null);
-    const [nodes2, setNodes2] = useState(null);
+    const [nodes, setNodes] = useState(null);
     const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => {
-            setNodes1(data);
-            setNodes2(data);
-        });
+        nodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div>
-            <h3 className="first">Lenient Filter Mode</h3>
-            <Tree value={nodes1} filter={true} />
+            <div className="card">
+                <h5>Lenient Filter</h5>
+                <Tree value={nodes} filter filterMode="lenient"></Tree>
 
-            <h3>Strict Filter Mode</h3>
-            <Tree value={nodes2} filter={true} filterMode="strict" />
+                <h5>Strict Filter</h5>
+                <Tree value={nodes} filter filterMode="strict"></Tree>
+            </div>
         </div>
     )
 }
@@ -148,10 +143,44 @@ const TreeFilterDemo = () => {
     return (
         <div>
             <h3 className="first">Lenient Filter Mode</h3>
-            <Tree value={nodes1} filter={true} />
+            <Tree value={nodes1} filter />
 
             <h3>Strict Filter Mode</h3>
-            <Tree value={nodes2} filter={true} filterMode="strict" />
+            <Tree value={nodes2} filter filterMode="strict" />
+        </div>
+    )
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>`,
+                content: `
+const { useEffect, useState } = React;
+const { Tree } = primereact.tree;
+
+const TreeFilterDemo = () => {
+    const [nodes, setNodes] = useState(null);
+    const nodeService = new NodeService();
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <div className="card">
+                <h5>Lenient Filter</h5>
+                <Tree value={nodes} filter filterMode="lenient"></Tree>
+
+                <h5>Strict Filter</h5>
+                <Tree value={nodes} filter filterMode="strict"></Tree>
+            </div>
         </div>
     )
 }
@@ -166,16 +195,10 @@ const TreeFilterDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TreeFilterDemo" sources={[key, value]} service="NodeService" data="treenodes" />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'TreeFilterDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })
                     }
                 </TabView>
             </div>

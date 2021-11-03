@@ -1,11 +1,17 @@
 import * as React from 'react';
-import {MenuItem} from '../menuitem/MenuItem';
+import { MenuItem } from '../menuitem';
 
-interface MenubarProps {
+type MenubarStartTemplate = React.ReactNode | ((props: MenubarProps) => React.ReactNode);
+
+type MenubarEndTemplate = React.ReactNode | ((props: MenubarProps) => React.ReactNode);
+
+export interface MenubarProps {
     id?: string;
     model?: MenuItem[];
     style?: object;
     className?: string;
+    start?: MenubarStartTemplate;
+    end?: MenubarEndTemplate;
 }
 
-export class Menubar extends React.Component<MenubarProps,any> {}
+export declare class Menubar extends React.Component<MenubarProps, any> { }

@@ -1,18 +1,35 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/TooltipOptions';
+import TooltipOptions from '../tooltip/tooltipoptions';
 
-export interface LocaleSettings {
-    firstDayOfWeek?: number;
-    dayNames: string[];
-    dayNamesShort: string[];
-    dayNamesMin: string[];
-    monthNames: string[];
-    monthNamesShort: string[];
-    today: string;
-    clear: string;
+type CalendarAppendToType = 'self' | HTMLElement | undefined | null;
+
+type CalendarVisibleType = 'outside' | 'dateselect' | undefined | null;
+
+interface CalendarChangeTargetOptions {
+    name: string;
+    id: string;
+    value: Date | Date[] | undefined | null;
 }
 
-export interface DateMetaData {
+interface CalendarChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: Date | Date[] | undefined;
+    stopPropagation(): void;
+    preventDefault(): void;
+    target: CalendarChangeTargetOptions;
+}
+
+interface CalendarViewChangeParams {
+    originalEvent: React.SyntheticEvent;
+    value: Date;
+}
+
+interface CalendarSelectParams {
+    originalEvent: React.SyntheticEvent;
+    value: Date | Date[];
+}
+
+interface CalendarDateTemplateParams {
     day: number;
     month: number;
     year: number;
@@ -21,10 +38,36 @@ export interface DateMetaData {
     selectable: boolean;
 }
 
-interface CalendarProps {
+interface CalendarVisibleChangeParams {
+    visible: boolean;
+    type: CalendarVisibleType;
+    callback?(): void;
+}
+
+interface CalendarNavigatorTemplateChangeParams {
+    event: React.SyntheticEvent;
+    value: string | number | undefined | null;
+}
+interface CalendarNavigatorTemplateParams {
+    onChange(e: CalendarNavigatorTemplateChangeParams): void;
+    className: string;
+    value: string | number | undefined | null;
+    names: any[];
+    options: any[];
+    element: React.ReactNode;
+    props: any;
+}
+
+interface CalendarMonthNavigatorTemplateParams extends CalendarNavigatorTemplateParams {}
+
+interface CalendarYearNavigatorTemplateParams extends CalendarNavigatorTemplateParams {}
+
+export interface CalendarProps {
     id?: string;
+    inputRef?: React.Ref<HTMLInputElement>;
     name?: string;
-    value?: Date|Date[];
+    value?: Date | Date[];
+    visible?: boolean;
     viewDate?: Date;
     style?: object;
     className?: string;
@@ -36,8 +79,9 @@ interface CalendarProps {
     required?: boolean;
     readOnlyInput?: boolean;
     keepInvalid?: boolean;
+    mask?: string;
     disabled?: boolean;
-    tabIndex?: string;
+    tabIndex?: number;
     placeholder?: string;
     showIcon?: boolean;
     icon?: string;
@@ -57,12 +101,13 @@ interface CalendarProps {
     shortYearCutoff?: string;
     hideOnDateTimeSelect?: boolean;
     showWeek?: boolean;
-    locale?: LocaleSettings;
+    locale?: string;
     dateFormat?: string;
     panelStyle?: object;
     panelClassName?: string;
     monthNavigator?: boolean;
     yearNavigator?: boolean;
+    yearRange?: string;
     disabledDates?: Date[];
     disabledDays?: number[];
     minDate?: Date;
@@ -75,22 +120,27 @@ interface CalendarProps {
     clearButtonClassName?: string;
     autoZIndex?: boolean;
     baseZIndex?: number;
-    appendTo?: any;
-    tooltip?: any;
+    appendTo?: CalendarAppendToType;
+    tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    yearRange?: string;
-    dateTemplate?(dateMeta:DateMetaData): React.ReactNode;
+    transitionOptions?: object;
+    dateTemplate?(e: CalendarDateTemplateParams): React.ReactNode;
     headerTemplate?(): React.ReactNode;
     footerTemplate?(): React.ReactNode;
-    onFocus?(event: Event): void;
-    onBlur?(event: Event): void;
-    onInput?(event: Event): void;
-    onSelect?(e: {originalEvent: Event, value: Date}): void;
-    onChange?(e: {originalEvent: Event, value: Date|Date[], target: {name: string, id: string, value: Date|Date[]}}): void;
-    onTodayButtonClick?(event: Event): void;
-    onClearButtonClick?(event: Event): void;
-    onViewDateChange?(e: {originalEvent: Event, value: Date}): void;
+    monthNavigatorTemplate?(e: CalendarMonthNavigatorTemplateParams): React.ReactNode;
+    yearNavigatorTemplate?(e: CalendarYearNavigatorTemplateParams): React.ReactNode;
+    onVisibleChange?(e: CalendarVisibleChangeParams): void;
+    onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
+    onInput?(event: React.FormEvent<HTMLInputElement>): void;
+    onSelect?(e: CalendarSelectParams): void;
+    onChange?(e: CalendarChangeParams): void;
+    onViewDateChange?(e: CalendarViewChangeParams): void;
+    onTodayButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
+    onClearButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
-export class Calendar extends React.Component<CalendarProps,any> {}
+export declare class Calendar extends React.Component<CalendarProps, any> { }

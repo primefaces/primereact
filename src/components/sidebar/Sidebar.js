@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import DomHandler from '../utils/DomHandler';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { CSSTransition } from '../csstransition/CSSTransition';
+import { Ripple } from '../ripple/Ripple';
+import { Portal } from '../portal/Portal';
 
 export class Sidebar extends Component {
 
@@ -18,8 +20,10 @@ export class Sidebar extends Component {
         showCloseIcon: true,
         ariaCloseLabel: 'close',
         closeOnEscape: true,
-        iconsTemplate: null,
+        icons: null,
         modal: true,
+        appendTo: null,
+        transitionOptions: null,
         onShow: null,
         onHide: null
     };
@@ -37,53 +41,39 @@ export class Sidebar extends Component {
         showCloseIcon: PropTypes.bool,
         ariaCloseLabel: PropTypes.string,
         closeOnEscape: PropTypes.bool,
-        iconsTemplate: PropTypes.func,
+        icons: PropTypes.any,
         modal: PropTypes.bool,
+        appendTo: PropTypes.any,
+        transitionOptions: PropTypes.object,
         onShow: PropTypes.func,
         onHide: PropTypes.func.isRequired
     };
 
     constructor(props) {
         super(props);
+
         this.onCloseClick = this.onCloseClick.bind(this);
+        this.onEnter = this.onEnter.bind(this);
+        this.onEntered = this.onEntered.bind(this);
+        this.onExit = this.onExit.bind(this);
+        this.onExited = this.onExited.bind(this);
+
+        this.sidebarRef = React.createRef();
     }
 
-    componentDidMount() {
-        if (this.props.visible) {
-            this.onShow();
-        }
+    onCloseClick(event) {
+        this.props.onHide();
+        event.preventDefault();
     }
 
-    componentWillUnmount() {
-        this.unbindMaskClickListener();
-        this.disableModality();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.visible !== this.props.visible) {
-            if (this.props.visible)
-                this.onShow();
-            else
-                this.onHide();
-        }
-
-        if (this.mask && prevProps.dismissable !== this.props.dismissable) {
-            if (this.props.dismissable) {
-                this.bindMaskClickListener();
-            }
-            else {
-                this.unbindMaskClickListener();
-            }
-        }
-    }
-
-    onShow() {
-        this.container.style.zIndex = String(this.props.baseZIndex + DomHandler.generateZIndex());
-
+    onEnter() {
+        ZIndexUtils.set('modal', this.sidebarRef.current, this.props.baseZIndex);
         if (this.props.modal) {
             this.enableModality();
         }
+    }
 
+    onEntered() {
         if (this.props.closeOnEscape) {
             this.bindDocumentEscapeListener();
         }
@@ -92,17 +82,28 @@ export class Sidebar extends Component {
             this.closeIcon.focus();
         }
 
-        if (this.props.onShow) {
-            this.props.onShow();
+        this.props.onShow && this.props.onShow();
+    }
+
+    onExit() {
+        this.unbindMaskClickListener();
+        this.unbindDocumentEscapeListener();
+
+        if (this.props.modal) {
+            this.disableModality();
         }
+    }
+
+    onExited() {
+        ZIndexUtils.clear(this.sidebarRef.current);
     }
 
     enableModality() {
         if (!this.mask) {
             this.mask = document.createElement('div');
-            this.mask.style.zIndex = String(parseInt(this.container.style.zIndex, 10) - 1);
-            let maskClassName = 'p-component-overlay p-sidebar-mask';
-            if(this.props.blockScroll) {
+            this.mask.style.zIndex = String(ZIndexUtils.get(this.sidebarRef.current) - 1);
+            let maskClassName = 'p-component-overlay p-component-overlay p-component-overlay-enter';
+            if (this.props.blockScroll) {
                 maskClassName += ' p-sidebar-mask-scrollblocker';
             }
             DomHandler.addMultipleClasses(this.mask, maskClassName);
@@ -121,46 +122,26 @@ export class Sidebar extends Component {
 
     disableModality() {
         if (this.mask) {
-            this.unbindMaskClickListener();
-            document.body.removeChild(this.mask);
-
-            if (this.props.blockScroll) {
-                let bodyChildren = document.body.children;
-                let hasBlockerMasks;
-                for (let i = 0; i < bodyChildren.length; i++) {
-                    let bodyChild = bodyChildren[i];
-                    if (DomHandler.hasClass(bodyChild, 'p-sidebar-mask-scrollblocker')) {
-                        hasBlockerMasks = true;
-                        break;
-                    }
-                }
-
-                if (!hasBlockerMasks) {
-                    DomHandler.removeClass(document.body, 'p-overflow-hidden');
-                }
-            }
-            this.mask = null;
+            DomHandler.addClass(this.mask, 'p-component-overlay-leave');
+            this.mask.addEventListener('animationend', () => {
+                this.destroyModal();
+            });
         }
     }
 
-    onCloseClick(event) {
-        this.props.onHide();
-        event.preventDefault();
-    }
-
-    onHide() {
-        this.unbindMaskClickListener();
-        this.unbindDocumentEscapeListener();
-
-        if (this.props.modal) {
-            this.disableModality();
+    destroyModal() {
+        if (this.mask) {
+            this.unbindMaskClickListener();
+            document.body.removeChild(this.mask);
+            DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            this.mask = null;
         }
     }
 
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
             if (event.which === 27) {
-                if (parseInt(this.container.style.zIndex, 10) === (DomHandler.getCurrentZIndex() + this.props.baseZIndex)) {
+                if (ZIndexUtils.get(this.sidebarRef.current) === ZIndexUtils.getCurrent('modal')) {
                     this.onCloseClick(event);
                 }
             }
@@ -191,40 +172,75 @@ export class Sidebar extends Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (this.mask && prevProps.dismissable !== this.props.dismissable) {
+            if (this.props.dismissable) {
+                this.bindMaskClickListener();
+            }
+            else {
+                this.unbindMaskClickListener();
+            }
+        }
+    }
+
+    componentWillUnmount() {
+        this.unbindMaskClickListener();
+        this.disableModality();
+
+        ZIndexUtils.clear(this.sidebarRef.current);
+    }
+
     renderCloseIcon() {
         if (this.props.showCloseIcon) {
             return (
-                <button type="button" ref={el => this.closeIcon = el} className="p-sidebar-close p-link" onClick={this.onCloseClick} aria-label={this.props.ariaCloseLabel}>
-                    <span className="p-sidebar-close-icon pi pi-times"/>
+                <button type="button" ref={el => this.closeIcon = el} className="p-sidebar-close p-sidebar-icon p-link" onClick={this.onCloseClick} aria-label={this.props.ariaCloseLabel}>
+                    <span className="p-sidebar-close-icon pi pi-times" />
+                    <Ripple />
                 </button>
             );
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
-    renderIconsTemplate() {
-        if (this.props.iconsTemplate) {
-            return this.props.iconsTemplate(this);
+    renderIcons() {
+        if (this.props.icons) {
+            return ObjectUtils.getJSXElement(this.props.icons, this.props);
         }
-        else {
-            return null;
-        }
+
+        return null;
+    }
+
+    renderElement() {
+        const className = classNames('p-sidebar p-component', this.props.className, 'p-sidebar-' + this.props.position,
+            { 'p-sidebar-active': this.props.visible, 'p-sidebar-full': this.props.fullScreen });
+        const closeIcon = this.renderCloseIcon();
+        const icons = this.renderIcons();
+
+        const transitionTimeout = {
+            enter: this.props.fullScreen ? 400 : 300,
+            exit: this.props.fullScreen ? 400 : 300
+        };
+
+        return (
+            <CSSTransition nodeRef={this.sidebarRef} classNames="p-sidebar" in={this.props.visible} timeout={transitionTimeout} options={this.props.transitionOptions}
+                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
+                <div ref={this.sidebarRef} id={this.props.id} className={className} style={this.props.style} role="complementary">
+                    <div className="p-sidebar-header">
+                        {icons}
+                        {closeIcon}
+                    </div>
+                    <div className="p-sidebar-content">
+                        {this.props.children}
+                    </div>
+                </div>
+            </CSSTransition>
+        );
     }
 
     render() {
-        const className = classNames('p-sidebar p-component', this.props.className, 'p-sidebar-' + this.props.position,
-                                       {'p-sidebar-active': this.props.visible, 'p-sidebar-full': this.props.fullScreen});
-        const closeIcon = this.renderCloseIcon();
-        const iconsTemplate = this.renderIconsTemplate();
+        let element = this.renderElement();
 
-        return (
-            <div ref={(el) => this.container=el} id={this.props.id} className={className} style={this.props.style} role="complementary">
-                {closeIcon}
-                {iconsTemplate}
-                {this.props.children}
-            </div>
-        );
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }

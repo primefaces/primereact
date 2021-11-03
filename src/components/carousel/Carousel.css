@@ -1,92 +1,69 @@
 .p-carousel {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .p-carousel-content {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    overflow: auto;
-    padding: 0 .5em;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
 }
 
 .p-carousel-prev,
 .p-carousel-next {
-    align-self: center;
-    text-align: center;
-    flex-grow: 0;
+	align-self: center;
+	flex-grow: 0;
     flex-shrink: 0;
-    width: 2.5em;
-    height: 2.5em;
-}
-
-.p-carousel-prev span,
-.p-carousel-next span {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    position: relative;
 }
 
 .p-carousel-container {
-    display: flex;
-    flex-direction: row;
-    padding: 0 .1em;
+	display: flex;
+	flex-direction: row;
 }
 
 .p-carousel-items-content {
-    overflow: hidden;
+	overflow: hidden;
     width: 100%;
-}
-
-.p-carousel-header,
-.p-carousel-footer {
-    padding: 0 .5em;
-    z-index: 1;
 }
 
 .p-carousel-items-container {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 
-.p-carousel-items-container .p-carousel-item {
-    width: 100%;
-    box-sizing: border-box;
-    overflow: auto;
+.p-carousel-indicators {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 
-.p-carousel-dots-container {
+.p-carousel-indicator > button {
     display: flex;
-    flex-direction: row;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    margin: .5em;
 }
 
 /* Vertical */
 .p-carousel-vertical .p-carousel-container {
-    flex-direction: column;
-    width: 100%;
+	flex-direction: column;
 }
 
 .p-carousel-vertical .p-carousel-items-container {
-    flex-direction: column;
-    height: 100%;
-}
-
-.p-carousel-vertical .p-carousel-dots-container {
-    margin: .75em 0;
+	flex-direction: column;
+	height: 100%;
 }
 
 /* Keyboard Support */
 .p-items-hidden .p-carousel-item {
-    visibility: hidden;
+	visibility: hidden;
 }
 
 .p-items-hidden .p-carousel-item.p-carousel-item-active {
-    visibility: visible;
+	visibility: visible;
 }

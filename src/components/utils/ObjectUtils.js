@@ -1,7 +1,7 @@
 export default class ObjectUtils {
 
     static equals(obj1, obj2, field) {
-        if(field && obj1 && typeof obj1 === 'object' && obj2 && typeof obj2 === 'object')
+        if (field && obj1 && typeof obj1 === 'object' && obj2 && typeof obj2 === 'object')
             return (this.resolveFieldData(obj1, field) === this.resolveFieldData(obj2, field));
         else
             return this.deepEquals(obj1, obj2);
@@ -11,7 +11,7 @@ export default class ObjectUtils {
         if (a === b) return true;
 
         if (a && b && typeof a == 'object' && typeof b == 'object') {
-            var arrA = Array.isArray(a)
+            let arrA = Array.isArray(a)
                 , arrB = Array.isArray(b)
                 , i
                 , length
@@ -27,17 +27,17 @@ export default class ObjectUtils {
 
             if (arrA !== arrB) return false;
 
-            var dateA = a instanceof Date
+            let dateA = a instanceof Date
                 , dateB = b instanceof Date;
             if (dateA !== dateB) return false;
             if (dateA && dateB) return a.getTime() === b.getTime();
 
-            var regexpA = a instanceof RegExp
+            let regexpA = a instanceof RegExp
                 , regexpB = b instanceof RegExp;
             if (regexpA !== regexpB) return false;
             if (regexpA && regexpB) return a.toString() === b.toString();
 
-            var keys = Object.keys(a);
+            let keys = Object.keys(a);
             length = keys.length;
 
             if (length !== Object.keys(b).length)
@@ -59,7 +59,7 @@ export default class ObjectUtils {
     }
 
     static resolveFieldData(data, field) {
-        if(data && field) {
+        if (data && Object.keys(data).length && field) {
             if (this.isFunction(field)) {
                 return field(data);
             }
@@ -111,23 +111,28 @@ export default class ObjectUtils {
         }
     }
 
-    static findIndexInList(value, list) {
-        let index = -1;
-
-        if(list) {
-            for(let i = 0; i < list.length; i++) {
-                if(list[i] === value) {
-                    index = i;
-                    break;
-                }
-            }
+    static findIndexInList(value, list, dataKey) {
+        if (list) {
+            return dataKey ? list.findIndex(item => this.equals(item, value, dataKey)) : list.findIndex(item => item === value);
         }
 
-        return index;
+        return -1;
     }
 
     static getJSXElement(obj, ...params) {
         return this.isFunction(obj) ? obj(...params) : obj;
+    }
+
+    static getPropValue(obj, ...params) {
+        return this.isFunction(obj) ? obj(...params) : obj;
+    }
+
+    static getRefElement(ref) {
+        if (ref) {
+            return typeof ref === 'object' && ref.hasOwnProperty('current') ? ref.current : ref;
+        }
+
+        return null;
     }
 
     static removeAccents(str) {
@@ -157,5 +162,17 @@ export default class ObjectUtils {
         }
 
         return str;
+    }
+
+    static isEmpty(value) {
+        return (
+            value === null || value === undefined || value === '' ||
+            (Array.isArray(value) && value.length === 0) ||
+            (!(value instanceof Date) && typeof value === 'object' && Object.keys(value).length === 0)
+        );
+    }
+
+    static isNotEmpty(value) {
+        return !this.isEmpty(value);
     }
 }

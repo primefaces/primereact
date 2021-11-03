@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class ContextMenuDoc extends Component {
 
@@ -14,7 +14,7 @@ export class ContextMenuDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {ContextMenu} from 'primereact/contextmenu';
+import { ContextMenu } from 'primereact/contextmenu';
 
 export class ContextMenuDemo extends Component {
 
@@ -23,132 +23,132 @@ export class ContextMenuDemo extends Component {
 
         this.items = [
             {
-               label:'File',
-               icon:'pi pi-fw pi-file',
-               items:[
-                  {
-                     label:'New',
-                     icon:'pi pi-fw pi-plus',
-                     items:[
-                        {
-                           label:'Bookmark',
-                           icon:'pi pi-fw pi-bookmark'
-                        },
-                        {
-                           label:'Video',
-                           icon:'pi pi-fw pi-video'
-                        },
+                label: 'File',
+                icon: 'pi pi-fw pi-file',
+                items: [
+                    {
+                        label: 'New',
+                        icon: 'pi pi-fw pi-plus',
+                        items: [
+                            {
+                                label: 'Bookmark',
+                                icon: 'pi pi-fw pi-bookmark'
+                            },
+                            {
+                                label: 'Video',
+                                icon: 'pi pi-fw pi-video'
+                            },
 
-                     ]
-                  },
-                  {
-                     label:'Delete',
-                     icon:'pi pi-fw pi-trash'
-                  },
-                  {
-                     separator:true
-                  },
-                  {
-                     label:'Export',
-                     icon:'pi pi-fw pi-external-link'
-                  }
-               ]
+                        ]
+                    },
+                    {
+                        label: 'Delete',
+                        icon: 'pi pi-fw pi-trash'
+                    },
+                    {
+                        separator: true
+                    },
+                    {
+                        label: 'Export',
+                        icon: 'pi pi-fw pi-external-link'
+                    }
+                ]
             },
             {
-               label:'Edit',
-               icon:'pi pi-fw pi-pencil',
-               items:[
-                  {
-                     label:'Left',
-                     icon:'pi pi-fw pi-align-left'
-                  },
-                  {
-                     label:'Right',
-                     icon:'pi pi-fw pi-align-right'
-                  },
-                  {
-                     label:'Center',
-                     icon:'pi pi-fw pi-align-center'
-                  },
-                  {
-                     label:'Justify',
-                     icon:'pi pi-fw pi-align-justify'
-                  },
+                label: 'Edit',
+                icon: 'pi pi-fw pi-pencil',
+                items: [
+                    {
+                        label: 'Left',
+                        icon: 'pi pi-fw pi-align-left'
+                    },
+                    {
+                        label: 'Right',
+                        icon: 'pi pi-fw pi-align-right'
+                    },
+                    {
+                        label: 'Center',
+                        icon: 'pi pi-fw pi-align-center'
+                    },
+                    {
+                        label: 'Justify',
+                        icon: 'pi pi-fw pi-align-justify'
+                    },
 
-               ]
+                ]
             },
             {
-               label:'Users',
-               icon:'pi pi-fw pi-user',
-               items:[
-                  {
-                     label:'New',
-                     icon:'pi pi-fw pi-user-plus',
+                label: 'Users',
+                icon: 'pi pi-fw pi-user',
+                items: [
+                    {
+                        label: 'New',
+                        icon: 'pi pi-fw pi-user-plus',
 
-                  },
-                  {
-                     label:'Delete',
-                     icon:'pi pi-fw pi-user-minus',
+                    },
+                    {
+                        label: 'Delete',
+                        icon: 'pi pi-fw pi-user-minus',
 
-                  },
-                  {
-                     label:'Search',
-                     icon:'pi pi-fw pi-users',
-                     items:[
-                        {
-                           label:'Filter',
-                           icon:'pi pi-fw pi-filter',
-                           items:[
-                              {
-                                 label:'Print',
-                                 icon:'pi pi-fw pi-print'
-                              }
-                           ]
-                        },
-                        {
-                           icon:'pi pi-fw pi-bars',
-                           label:'List'
-                        }
-                     ]
-                  }
-               ]
+                    },
+                    {
+                        label: 'Search',
+                        icon: 'pi pi-fw pi-users',
+                        items: [
+                            {
+                                label: 'Filter',
+                                icon: 'pi pi-fw pi-filter',
+                                items: [
+                                    {
+                                        label: 'Print',
+                                        icon: 'pi pi-fw pi-print'
+                                    }
+                                ]
+                            },
+                            {
+                                icon: 'pi pi-fw pi-bars',
+                                label: 'List'
+                            }
+                        ]
+                    }
+                ]
             },
             {
-               label:'Events',
-               icon:'pi pi-fw pi-calendar',
-               items:[
-                  {
-                     label:'Edit',
-                     icon:'pi pi-fw pi-pencil',
-                     items:[
-                        {
-                           label:'Save',
-                           icon:'pi pi-fw pi-calendar-plus'
-                        },
-                        {
-                           label:'Delete',
-                           icon:'pi pi-fw pi-calendar-minus'
-                        }
-                     ]
-                  },
-                  {
-                     label:'Archieve',
-                     icon:'pi pi-fw pi-calendar-times',
-                     items:[
-                        {
-                           label:'Remove',
-                           icon:'pi pi-fw pi-calendar-minus'
-                        }
-                     ]
-                  }
-               ]
+                label: 'Events',
+                icon: 'pi pi-fw pi-calendar',
+                items: [
+                    {
+                        label: 'Edit',
+                        icon: 'pi pi-fw pi-pencil',
+                        items: [
+                            {
+                                label: 'Save',
+                                icon: 'pi pi-fw pi-calendar-plus'
+                            },
+                            {
+                                label: 'Delete',
+                                icon: 'pi pi-fw pi-calendar-minus'
+                            }
+                        ]
+                    },
+                    {
+                        label: 'Archieve',
+                        icon: 'pi pi-fw pi-calendar-times',
+                        items: [
+                            {
+                                label: 'Remove',
+                                icon: 'pi pi-fw pi-calendar-minus'
+                            }
+                        ]
+                    }
+                ]
             },
             {
-               separator:true
+                separator: true
             },
             {
-               label:'Quit',
-               icon:'pi pi-fw pi-power-off'
+                label: 'Quit',
+                icon: 'pi pi-fw pi-power-off'
             }
         ];
     }
@@ -156,9 +156,11 @@ export class ContextMenuDemo extends Component {
     render() {
         return (
             <div>
-                <ContextMenu model={this.items} ref={el => this.cm = el}></ContextMenu>
+                <div className="card">
+                    <ContextMenu model={this.items} ref={el => this.cm = el}></ContextMenu>
 
-                <img src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)} aria-haspopup={true}/>
+                    <img src="showcase/demo/images/nature/nature3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Logo" onContextMenu={(e) => this.cm.show(e)} aria-haspopup />
+                </div>
             </div>
         );
     }
@@ -169,147 +171,148 @@ export class ContextMenuDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useRef } from 'react';
-import {ContextMenu} from 'primereact/contextmenu';
+import { ContextMenu } from 'primereact/contextmenu';
 
 const ContextMenuDemo = () => {
-    let cm = useRef(null);
-
+    const cm = useRef(null);
     const items = [
         {
-            label:'File',
-            icon:'pi pi-fw pi-file',
-            items:[
+            label: 'File',
+            icon: 'pi pi-fw pi-file',
+            items: [
                 {
-                    label:'New',
-                    icon:'pi pi-fw pi-plus',
-                    items:[
-                    {
-                        label:'Bookmark',
-                        icon:'pi pi-fw pi-bookmark'
-                    },
-                    {
-                        label:'Video',
-                        icon:'pi pi-fw pi-video'
-                    },
+                    label: 'New',
+                    icon: 'pi pi-fw pi-plus',
+                    items: [
+                        {
+                            label: 'Bookmark',
+                            icon: 'pi pi-fw pi-bookmark'
+                        },
+                        {
+                            label: 'Video',
+                            icon: 'pi pi-fw pi-video'
+                        },
 
                     ]
                 },
                 {
-                    label:'Delete',
-                    icon:'pi pi-fw pi-trash'
+                    label: 'Delete',
+                    icon: 'pi pi-fw pi-trash'
                 },
                 {
-                    separator:true
+                    separator: true
                 },
                 {
-                    label:'Export',
-                    icon:'pi pi-fw pi-external-link'
+                    label: 'Export',
+                    icon: 'pi pi-fw pi-external-link'
                 }
             ]
         },
         {
-            label:'Edit',
-            icon:'pi pi-fw pi-pencil',
-            items:[
+            label: 'Edit',
+            icon: 'pi pi-fw pi-pencil',
+            items: [
                 {
-                    label:'Left',
-                    icon:'pi pi-fw pi-align-left'
+                    label: 'Left',
+                    icon: 'pi pi-fw pi-align-left'
                 },
                 {
-                    label:'Right',
-                    icon:'pi pi-fw pi-align-right'
+                    label: 'Right',
+                    icon: 'pi pi-fw pi-align-right'
                 },
                 {
-                    label:'Center',
-                    icon:'pi pi-fw pi-align-center'
+                    label: 'Center',
+                    icon: 'pi pi-fw pi-align-center'
                 },
                 {
-                    label:'Justify',
-                    icon:'pi pi-fw pi-align-justify'
+                    label: 'Justify',
+                    icon: 'pi pi-fw pi-align-justify'
                 },
 
             ]
         },
         {
-            label:'Users',
-            icon:'pi pi-fw pi-user',
-            items:[
+            label: 'Users',
+            icon: 'pi pi-fw pi-user',
+            items: [
                 {
-                    label:'New',
-                    icon:'pi pi-fw pi-user-plus',
+                    label: 'New',
+                    icon: 'pi pi-fw pi-user-plus',
 
                 },
                 {
-                    label:'Delete',
-                    icon:'pi pi-fw pi-user-minus',
+                    label: 'Delete',
+                    icon: 'pi pi-fw pi-user-minus',
 
                 },
                 {
-                    label:'Search',
-                    icon:'pi pi-fw pi-users',
-                    items:[
-                    {
-                        label:'Filter',
-                        icon:'pi pi-fw pi-filter',
-                        items:[
-                            {
-                                label:'Print',
-                                icon:'pi pi-fw pi-print'
-                            }
-                        ]
-                    },
-                    {
-                        icon:'pi pi-fw pi-bars',
-                        label:'List'
-                    }
-                    ]
-                }
-            ]
-        },
-        {
-            label:'Events',
-            icon:'pi pi-fw pi-calendar',
-            items:[
-                {
-                    label:'Edit',
-                    icon:'pi pi-fw pi-pencil',
-                    items:[
-                    {
-                        label:'Save',
-                        icon:'pi pi-fw pi-calendar-plus'
-                    },
-                    {
-                        label:'Delete',
-                        icon:'pi pi-fw pi-calendar-minus'
-                    }
-                    ]
-                },
-                {
-                    label:'Archieve',
-                    icon:'pi pi-fw pi-calendar-times',
-                    items:[
-                    {
-                        label:'Remove',
-                        icon:'pi pi-fw pi-calendar-minus'
-                    }
+                    label: 'Search',
+                    icon: 'pi pi-fw pi-users',
+                    items: [
+                        {
+                            label: 'Filter',
+                            icon: 'pi pi-fw pi-filter',
+                            items: [
+                                {
+                                    label: 'Print',
+                                    icon: 'pi pi-fw pi-print'
+                                }
+                            ]
+                        },
+                        {
+                            icon: 'pi pi-fw pi-bars',
+                            label: 'List'
+                        }
                     ]
                 }
             ]
         },
         {
-            separator:true
+            label: 'Events',
+            icon: 'pi pi-fw pi-calendar',
+            items: [
+                {
+                    label: 'Edit',
+                    icon: 'pi pi-fw pi-pencil',
+                    items: [
+                        {
+                            label: 'Save',
+                            icon: 'pi pi-fw pi-calendar-plus'
+                        },
+                        {
+                            label: 'Delete',
+                            icon: 'pi pi-fw pi-calendar-minus'
+                        }
+                    ]
+                },
+                {
+                    label: 'Archieve',
+                    icon: 'pi pi-fw pi-calendar-times',
+                    items: [
+                        {
+                            label: 'Remove',
+                            icon: 'pi pi-fw pi-calendar-minus'
+                        }
+                    ]
+                }
+            ]
         },
         {
-            label:'Quit',
-            icon:'pi pi-fw pi-power-off'
+            separator: true
+        },
+        {
+            label: 'Quit',
+            icon: 'pi pi-fw pi-power-off'
         }
     ];
 
     return (
         <div>
-            <ContextMenu model={items} ref={cm}></ContextMenu>
+            <div className="card">
+                <ContextMenu model={items} ref={cm}></ContextMenu>
 
-            <img src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)} aria-haspopup={true}/>
+                <img src="showcase/demo/images/nature/nature3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Logo" onContextMenu={(e) => cm.current.show(e)} aria-haspopup />
+            </div>
         </div>
     );
 }
@@ -319,147 +322,303 @@ const ContextMenuDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useRef } from 'react';
-import {ContextMenu} from 'primereact/contextmenu';
+import { ContextMenu } from 'primereact/contextmenu';
 
 const ContextMenuDemo = () => {
-    let cm = useRef<any>(null);
-
+    const cm = useRef(null);
     const items = [
         {
-            label:'File',
-            icon:'pi pi-fw pi-file',
-            items:[
+            label: 'File',
+            icon: 'pi pi-fw pi-file',
+            items: [
                 {
-                    label:'New',
-                    icon:'pi pi-fw pi-plus',
-                    items:[
-                    {
-                        label:'Bookmark',
-                        icon:'pi pi-fw pi-bookmark'
-                    },
-                    {
-                        label:'Video',
-                        icon:'pi pi-fw pi-video'
-                    },
+                    label: 'New',
+                    icon: 'pi pi-fw pi-plus',
+                    items: [
+                        {
+                            label: 'Bookmark',
+                            icon: 'pi pi-fw pi-bookmark'
+                        },
+                        {
+                            label: 'Video',
+                            icon: 'pi pi-fw pi-video'
+                        },
 
                     ]
                 },
                 {
-                    label:'Delete',
-                    icon:'pi pi-fw pi-trash'
+                    label: 'Delete',
+                    icon: 'pi pi-fw pi-trash'
                 },
                 {
-                    separator:true
+                    separator: true
                 },
                 {
-                    label:'Export',
-                    icon:'pi pi-fw pi-external-link'
+                    label: 'Export',
+                    icon: 'pi pi-fw pi-external-link'
                 }
             ]
         },
         {
-            label:'Edit',
-            icon:'pi pi-fw pi-pencil',
-            items:[
+            label: 'Edit',
+            icon: 'pi pi-fw pi-pencil',
+            items: [
                 {
-                    label:'Left',
-                    icon:'pi pi-fw pi-align-left'
+                    label: 'Left',
+                    icon: 'pi pi-fw pi-align-left'
                 },
                 {
-                    label:'Right',
-                    icon:'pi pi-fw pi-align-right'
+                    label: 'Right',
+                    icon: 'pi pi-fw pi-align-right'
                 },
                 {
-                    label:'Center',
-                    icon:'pi pi-fw pi-align-center'
+                    label: 'Center',
+                    icon: 'pi pi-fw pi-align-center'
                 },
                 {
-                    label:'Justify',
-                    icon:'pi pi-fw pi-align-justify'
+                    label: 'Justify',
+                    icon: 'pi pi-fw pi-align-justify'
                 },
 
             ]
         },
         {
-            label:'Users',
-            icon:'pi pi-fw pi-user',
-            items:[
+            label: 'Users',
+            icon: 'pi pi-fw pi-user',
+            items: [
                 {
-                    label:'New',
-                    icon:'pi pi-fw pi-user-plus',
+                    label: 'New',
+                    icon: 'pi pi-fw pi-user-plus',
 
                 },
                 {
-                    label:'Delete',
-                    icon:'pi pi-fw pi-user-minus',
+                    label: 'Delete',
+                    icon: 'pi pi-fw pi-user-minus',
 
                 },
                 {
-                    label:'Search',
-                    icon:'pi pi-fw pi-users',
-                    items:[
-                    {
-                        label:'Filter',
-                        icon:'pi pi-fw pi-filter',
-                        items:[
-                            {
-                                label:'Print',
-                                icon:'pi pi-fw pi-print'
-                            }
-                        ]
-                    },
-                    {
-                        icon:'pi pi-fw pi-bars',
-                        label:'List'
-                    }
-                    ]
-                }
-            ]
-        },
-        {
-            label:'Events',
-            icon:'pi pi-fw pi-calendar',
-            items:[
-                {
-                    label:'Edit',
-                    icon:'pi pi-fw pi-pencil',
-                    items:[
-                    {
-                        label:'Save',
-                        icon:'pi pi-fw pi-calendar-plus'
-                    },
-                    {
-                        label:'Delete',
-                        icon:'pi pi-fw pi-calendar-minus'
-                    }
-                    ]
-                },
-                {
-                    label:'Archieve',
-                    icon:'pi pi-fw pi-calendar-times',
-                    items:[
-                    {
-                        label:'Remove',
-                        icon:'pi pi-fw pi-calendar-minus'
-                    }
+                    label: 'Search',
+                    icon: 'pi pi-fw pi-users',
+                    items: [
+                        {
+                            label: 'Filter',
+                            icon: 'pi pi-fw pi-filter',
+                            items: [
+                                {
+                                    label: 'Print',
+                                    icon: 'pi pi-fw pi-print'
+                                }
+                            ]
+                        },
+                        {
+                            icon: 'pi pi-fw pi-bars',
+                            label: 'List'
+                        }
                     ]
                 }
             ]
         },
         {
-            separator:true
+            label: 'Events',
+            icon: 'pi pi-fw pi-calendar',
+            items: [
+                {
+                    label: 'Edit',
+                    icon: 'pi pi-fw pi-pencil',
+                    items: [
+                        {
+                            label: 'Save',
+                            icon: 'pi pi-fw pi-calendar-plus'
+                        },
+                        {
+                            label: 'Delete',
+                            icon: 'pi pi-fw pi-calendar-minus'
+                        }
+                    ]
+                },
+                {
+                    label: 'Archieve',
+                    icon: 'pi pi-fw pi-calendar-times',
+                    items: [
+                        {
+                            label: 'Remove',
+                            icon: 'pi pi-fw pi-calendar-minus'
+                        }
+                    ]
+                }
+            ]
         },
         {
-            label:'Quit',
-            icon:'pi pi-fw pi-power-off'
+            separator: true
+        },
+        {
+            label: 'Quit',
+            icon: 'pi pi-fw pi-power-off'
         }
     ];
 
     return (
         <div>
-            <ContextMenu model={items} ref={cm}></ContextMenu>
+            <div className="card">
+                <ContextMenu model={items} ref={cm}></ContextMenu>
 
-            <img src="showcase/images/logo.png" srcSet="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)} aria-haspopup={true}/>
+                <img src="showcase/demo/images/nature/nature3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Logo" onContextMenu={(e) => cm.current.show(e)} aria-haspopup />
+            </div>
+        </div>
+    );
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/contextmenu/contextmenu.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { ContextMenu } = primereact.contextmenu;
+
+const ContextMenuDemo = () => {
+    const cm = useRef(null);
+    const items = [
+        {
+            label: 'File',
+            icon: 'pi pi-fw pi-file',
+            items: [
+                {
+                    label: 'New',
+                    icon: 'pi pi-fw pi-plus',
+                    items: [
+                        {
+                            label: 'Bookmark',
+                            icon: 'pi pi-fw pi-bookmark'
+                        },
+                        {
+                            label: 'Video',
+                            icon: 'pi pi-fw pi-video'
+                        },
+
+                    ]
+                },
+                {
+                    label: 'Delete',
+                    icon: 'pi pi-fw pi-trash'
+                },
+                {
+                    separator: true
+                },
+                {
+                    label: 'Export',
+                    icon: 'pi pi-fw pi-external-link'
+                }
+            ]
+        },
+        {
+            label: 'Edit',
+            icon: 'pi pi-fw pi-pencil',
+            items: [
+                {
+                    label: 'Left',
+                    icon: 'pi pi-fw pi-align-left'
+                },
+                {
+                    label: 'Right',
+                    icon: 'pi pi-fw pi-align-right'
+                },
+                {
+                    label: 'Center',
+                    icon: 'pi pi-fw pi-align-center'
+                },
+                {
+                    label: 'Justify',
+                    icon: 'pi pi-fw pi-align-justify'
+                },
+
+            ]
+        },
+        {
+            label: 'Users',
+            icon: 'pi pi-fw pi-user',
+            items: [
+                {
+                    label: 'New',
+                    icon: 'pi pi-fw pi-user-plus',
+
+                },
+                {
+                    label: 'Delete',
+                    icon: 'pi pi-fw pi-user-minus',
+
+                },
+                {
+                    label: 'Search',
+                    icon: 'pi pi-fw pi-users',
+                    items: [
+                        {
+                            label: 'Filter',
+                            icon: 'pi pi-fw pi-filter',
+                            items: [
+                                {
+                                    label: 'Print',
+                                    icon: 'pi pi-fw pi-print'
+                                }
+                            ]
+                        },
+                        {
+                            icon: 'pi pi-fw pi-bars',
+                            label: 'List'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            label: 'Events',
+            icon: 'pi pi-fw pi-calendar',
+            items: [
+                {
+                    label: 'Edit',
+                    icon: 'pi pi-fw pi-pencil',
+                    items: [
+                        {
+                            label: 'Save',
+                            icon: 'pi pi-fw pi-calendar-plus'
+                        },
+                        {
+                            label: 'Delete',
+                            icon: 'pi pi-fw pi-calendar-minus'
+                        }
+                    ]
+                },
+                {
+                    label: 'Archieve',
+                    icon: 'pi pi-fw pi-calendar-times',
+                    items: [
+                        {
+                            label: 'Remove',
+                            icon: 'pi pi-fw pi-calendar-minus'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            separator: true
+        },
+        {
+            label: 'Quit',
+            icon: 'pi pi-fw pi-power-off'
+        }
+    ];
+
+    return (
+        <div>
+            <div className="card">
+                <ContextMenu model={items} ref={cm}></ContextMenu>
+
+                <img src="showcase/demo/images/nature/nature3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Logo" onContextMenu={(e) => cm.current.show(e)} aria-haspopup />
+            </div>
         </div>
     );
 }
@@ -474,23 +633,23 @@ const ContextMenuDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
-                            {`
-import {ContextMenu} from 'primereact/contextmenu';
-
-`}</CodeHighlight>
-                        <h3>MenuItem API</h3>
+                        <h5>Import</h5>
+<CodeHighlight lang="js">
+{`
+import { ContextMenu } from 'primereact/contextmenu';
+`}
+</CodeHighlight>
+                        <h5>MenuItem API</h5>
                         <p>ContextMenu uses the common menu item api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Menu requires a collection of menuitems as its model.</p>
-                        <CodeHighlight className="language-javascript">
-                            {`
-const items:[
+<CodeHighlight lang="js">
+{`
+const items = [
     {
        label:'File',
        icon:'pi pi-fw pi-file',
@@ -621,43 +780,39 @@ const items:[
        icon:'pi pi-fw pi-power-off'
     }
  ];
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
+<CodeHighlight>
+{`
 <ContextMenu model={items}/>
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Document Menu</h3>
+                        <h5>Document Menu</h5>
                         <p>Setting global property attaches the context menu to the document.
                         </p>
 
 
-                        <CodeHighlight className="language-jsx">
-                            {`
-<ContextMenu global={true} model={items}/>
-
+<CodeHighlight>
+{`
+<ContextMenu global model={items}/>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Element Menu</h3>
+                        <h5>Element Menu</h5>
                         <p>ContextMenu is attached to a custom element manually using the reference and calling the show(event) method.</p>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
-<ContextMenu model={this.state.imageItems} ref={el => this.cm = el}></ContextMenu>
-<img src="showcase/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => this.cm.show(e)}/>
-
+<CodeHighlight>
+{`
+<ContextMenu model={imageItems} ref={cm}></ContextMenu>
+<img src="showcase/images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)}/>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
 
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -713,15 +868,21 @@ const items:[
                                     </tr>
                                     <tr>
                                         <td>appendTo</td>
-                                        <td>Dom Element</td>
+                                        <td>DOM element | string</td>
+                                        <td>document.body</td>
+                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>transitionOptions</td>
+                                        <td>object</td>
                                         <td>null</td>
-                                        <td>DOM element instance where the menu should be mounted.</td>
+                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <h3>Methods</h3>
+                        <h5>Methods</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -746,7 +907,7 @@ const items:[
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -771,7 +932,7 @@ const items:[
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -810,18 +971,12 @@ const items:[
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="ContextMenuDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'ContextMenuDemo', sources: this.sources })
                     }
                 </TabView>
             </div>

@@ -1,0 +1,23 @@
+.treetable-responsive-demo {
+    .sm-visible {
+        display: none;
+    }
+
+    @media screen and (max-width: 40em) {
+        .sm-invisible {
+            display: none;
+        }
+
+        .sm-visible {
+            display: inline;
+            margin-right: .5rem;
+        }
+    }
+}
+
+.treetable-editing-demo {
+    .p-treetable .p-treetable-tbody > tr > td.p-cell-editing {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}

@@ -1,40 +1,54 @@
 import * as React from 'react';
 
-interface GalleriaProps {
+type GalleriaPositionType = 'top' | 'bottom' | 'left' | 'right';
+
+interface GalleriaResponsiveOptions {
+    breakpoint: string;
+    numVisible: number;
+}
+
+interface GalleriaItemChangeParams {
+    index: number;
+}
+
+export interface GalleriaProps {
     id?: string;
     value?: any[];
     activeIndex?: number;
     fullScreen?: boolean;
-    previewItemTemplate?: any;
-    thumbnailItemTemplate?: any;
-    indicatorItemTemplate?: any;
+    item?(item: any): React.ReactNode;
+    thumbnail?(item: any): React.ReactNode;
+    indicator?(index: number): React.ReactNode;
     className?: string;
     style?: object;
-    header?: any;
-    footer?: any;
+    header?: React.ReactNode;
+    footer?: React.ReactNode;
     numVisible?: number;
-    responsiveOptions?: any;
-    showPreviewNavButtons?: boolean;
-    showThumbnailNavButtons?: boolean;
-    showNavButtonsOnPreviewHover?: boolean;
-    changePreviewOnIndicatorHover?: boolean;
+    responsiveOptions?: GalleriaResponsiveOptions[];
+    showItemNavigators?: boolean;
+    showThumbnailNavigators?: boolean;
+    showItemNavigatorsOnHover?: boolean;
+    changeItemOnIndicatorHover?: boolean;
     circular?: boolean;
     autoPlay?: boolean;
     transitionInterval?: number;
-    captionTemplate?: any;
+    caption?(item: any): React.ReactNode;
     showThumbnails?: boolean;
-    thumbnailsPosition?: string;
+    thumbnailsPosition?: GalleriaPositionType;
     showIndicators?: boolean;
-    showIndicatorsOnPreview?: boolean;
-    indicatorsPosition?: string;
+    showIndicatorsOnItem?: boolean;
+    indicatorsPosition?: GalleriaPositionType;
     baseZIndex?: number;
-    onItemChange?(e: {index: number}): void;
+    transitionOptions?: object;
+    onItemChange?(e: GalleriaItemChangeParams): void;
+    onShow?(): void;
+    onHide?(): void;
 }
 
-export class Galleria extends React.Component<GalleriaProps,any> {
-    public show():void;
-    public hide():void;
-    public isAutoPlayActive():boolean;
-    public startSlideShow():void;
-    public stopSlideShow():void;
+export declare class Galleria extends React.Component<GalleriaProps, any> {
+    public show(): void;
+    public hide(): void;
+    public isAutoPlayActive(): boolean;
+    public startSlideShow(): void;
+    public stopSlideShow(): void;
 }

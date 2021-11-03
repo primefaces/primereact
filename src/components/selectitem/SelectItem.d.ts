@@ -1,6 +1,6 @@
 export interface SelectItem {
     label?: string;
-    value: any;
+    value?: any;
     className?: string;
     icon?: string;
     title?: string;

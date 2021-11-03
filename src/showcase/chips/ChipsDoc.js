@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { TabView, TabPanel } from '../../components/tabview/TabView';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 
 export class ChipsDoc extends Component {
 
@@ -13,13 +13,13 @@ export class ChipsDoc extends Component {
             'class': {
                 tabName: 'Class Source',
                 content: `
-import React, {Component} from 'react';
-import {Chips} from 'primereact/chips';
+import React, { Component } from 'react';
+import { Chips } from 'primereact/chips';
 
 export class ChipsDemo extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             values1: [],
             values2: [],
@@ -31,22 +31,24 @@ export class ChipsDemo extends Component {
         return (
             <div>
                 <span>{item} - (active) </span>
-                <i className="pi pi-user-plus" style={{fontSize: '14px'}}></i>
+                <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
             </div>
         );
     }
 
     render() {
         return (
-            <div className="p-fluid">
-                <h3>Basic</h3>
-                <Chips value={this.state.values1} onChange={(e) => this.setState({values1: e.value})}></Chips>
+            <div>
+                <div className="card p-fluid">
+                    <h5>Basic</h5>
+                    <Chips value={this.state.values1} onChange={(e) => this.setState({ values1: e.value })} />
 
-                <h3>Comma Separator</h3>
-                <Chips value={this.state.values2} onChange={(e) => this.setState({values2: e.value})} separator=','></Chips>
+                    <h5>Comma Separator</h5>
+                    <Chips value={this.state.values2} onChange={(e) => this.setState({ values2: e.value })} separator="," />
 
-                <h3>Template</h3>
-                <Chips value={this.state.values3} onChange={(e) => this.setState({values3: e.value})} max={5} itemTemplate={this.customChip}></Chips>
+                    <h5>Template</h5>
+                    <Chips value={this.state.values3} onChange={(e) => this.setState({ values3: e.value })} max={5} itemTemplate={this.customChip}></Chips>
+                </div>
             </div>
         )
     }
@@ -57,7 +59,7 @@ export class ChipsDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState } from 'react';
-import {Chips} from 'primereact/chips';
+import { Chips } from 'primereact/chips';
 
 const ChipsDemo = () => {
     const [values1, setValues1] = useState([]);
@@ -68,21 +70,23 @@ const ChipsDemo = () => {
         return (
             <div>
                 <span>{item} - (active) </span>
-                <i className="pi pi-user-plus" style={{fontSize: '14px'}}></i>
+                <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
             </div>
         );
     }
 
     return (
-        <div className="p-fluid">
-            <h3>Basic</h3>
-            <Chips value={values1} onChange={(e) => setValues1(e.value)}></Chips>
+        <div>
+            <div className="card p-fluid">
+                <h5>Basic</h5>
+                <Chips value={values1} onChange={(e) => setValues1(e.value)} />
 
-            <h3>Comma Separator</h3>
-            <Chips value={values2} onChange={(e) => setValues2(e.value)} separator=','></Chips>
+                <h5>Comma Separator</h5>
+                <Chips value={values2} onChange={(e) => setValues2(e.value)} separator="," />
 
-            <h3>Template</h3>
-            <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
+                <h5>Template</h5>
+                <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
+            </div>
         </div>
     )
 }
@@ -92,32 +96,75 @@ const ChipsDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState } from 'react';
-import {Chips} from 'primereact/chips';
+import { Chips } from 'primereact/chips';
+
+const ChipsDemo = () => {
+    const [values1, setValues1] = useState<any>([]);
+    const [values2, setValues2] = useState<any>([]);
+    const [values3, setValues3] = useState<any>([]);
+
+    const customChip = (item: any) => {
+        return (
+            <div>
+                <span>{item} - (active) </span>
+                <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
+            </div>
+        );
+    }
+
+    return (
+        <div>
+            <div className="card p-fluid">
+                <h5>Basic</h5>
+                <Chips value={values1} onChange={(e) => setValues1(e.value)} />
+
+                <h5>Comma Separator</h5>
+                <Chips value={values2} onChange={(e) => setValues2(e.value)} separator="," />
+
+                <h5>Template</h5>
+                <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
+            </div>
+        </div>
+    )
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/chips/chips.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { Chips } = primereact.chips;
 
 const ChipsDemo = () => {
     const [values1, setValues1] = useState([]);
     const [values2, setValues2] = useState([]);
     const [values3, setValues3] = useState([]);
 
-    const customChip = (item: string) => {
+    const customChip = (item) => {
         return (
             <div>
                 <span>{item} - (active) </span>
-                <i className="pi pi-user-plus" style={{fontSize: '14px'}}></i>
+                <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
             </div>
         );
     }
 
     return (
-        <div className="p-fluid">
-            <h3>Basic</h3>
-            <Chips value={values1} onChange={(e) => setValues1(e.value)}></Chips>
+        <div>
+            <div className="card p-fluid">
+                <h5>Basic</h5>
+                <Chips value={values1} onChange={(e) => setValues1(e.value)} />
 
-            <h3>Comma Separator</h3>
-            <Chips value={values2} onChange={(e) => setValues2(e.value)} separator=','></Chips>
+                <h5>Comma Separator</h5>
+                <Chips value={values2} onChange={(e) => setValues2(e.value)} separator="," />
 
-            <h3>Template</h3>
-            <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
+                <h5>Template</h5>
+                <Chips value={values3} onChange={(e) => setValues3(e.value)} max={5} itemTemplate={customChip}></Chips>
+            </div>
         </div>
     )
 }
@@ -132,37 +179,34 @@ const ChipsDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h3>Import</h3>
-                        <CodeHighlight className="language-javascript">
-                            {`
+                        <h5>Import</h5>
+<CodeHighlight lang="js">
+{`
 import {Chips} from 'primereact/chips';
-
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Getting Started</h3>
+                        <h5>Getting Started</h5>
                         <p>Chips requires an array as its <i>value</i> and <i>onChange</i> callback to update the model.</p>
 
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Chips value={this.state.value} onChange={(e) => this.setState({value: e.value})}></Chips>
-
+<CodeHighlight>
+{`
+<Chips value={value} onChange={(e) => setValue(e.value)}></Chips>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Custom Content</h3>
+                        <h5>Custom Content</h5>
                         <p>A chip is customized using <i>itemTemplate</i> function where value is passed to return JSX.</p>
-                        <CodeHighlight className="language-jsx">
-                            {`
-<Chips value={this.state.value} onChange={(e) => this.setState({value: e.value})} itemTemplate={this.customChip}></Chips>
-
+<CodeHighlight>
+{`
+<Chips value={value} onChange={(e) => setValue(e.value)} itemTemplate={customChip}></Chips>
 `}
-                        </CodeHighlight>
-                        <CodeHighlight className="language-javascript">
-                            {`
+</CodeHighlight>
+<CodeHighlight lang="js">
+{`
 customChip(item) {
     return (
         <div>
@@ -173,9 +217,9 @@ customChip(item) {
 }
 
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h3>Properties</h3>
+                        <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -275,7 +319,7 @@ customChip(item) {
                             </table>
                         </div>
 
-                        <h3>Events</h3>
+                        <h5>Events</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -318,7 +362,7 @@ customChip(item) {
                             </table>
                         </div>
 
-                        <h3>Styling</h3>
+                        <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -353,18 +397,12 @@ customChip(item) {
                             </table>
                         </div>
 
-                        <h3>Dependencies</h3>
+                        <h5>Dependencies</h5>
                         <p>None.</p>
                     </TabPanel>
 
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="ChipsDemo" sources={[key, value]} />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'ChipsDemo', sources: this.sources })
                     }
                 </TabView>
             </div>

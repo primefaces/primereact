@@ -1,297 +1,546 @@
-import DomHandler from '../utils/DomHandler';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import { DomHandler, classNames, ConnectedOverlayScrollHandler, ZIndexUtils } from '../utils/Utils';
+import { Portal } from '../portal/Portal';
 
-export default class Tooltip  {
+export function tip(props) {
+    let appendTo = props.appendTo || document.body;
+
+    let tooltipWrapper = document.createDocumentFragment();
+    DomHandler.appendChild(tooltipWrapper, appendTo);
+
+    props = {...props, ...props.options};
+
+    let tooltipEl = React.createElement(Tooltip, props);
+    ReactDOM.render(tooltipEl, tooltipWrapper);
+
+    let updateTooltip = (newProps) => {
+        props = { ...props, ...newProps };
+        ReactDOM.render(React.cloneElement(tooltipEl, props), tooltipWrapper);
+    };
+
+    return {
+        destroy: () => {
+            ReactDOM.unmountComponentAtNode(tooltipWrapper);
+        },
+        updateContent: (newContent) => {
+            console.warn("The 'updateContent' method has been deprecated on Tooltip. Use update(newProps) method.");
+            updateTooltip({ content: newContent });
+        },
+        update: (newProps) => {
+            updateTooltip(newProps);
+        }
+    }
+}
+
+export class Tooltip extends Component {
+
+    static defaultProps = {
+        id: null,
+        target: null,
+        content: null,
+        disabled: false,
+        className: null,
+        style: null,
+        appendTo: null,
+        position: 'right',
+        my: null,
+        at: null,
+        event: null,
+        showEvent: 'mouseenter',
+        hideEvent: 'mouseleave',
+        autoZIndex: true,
+        baseZIndex: 0,
+        mouseTrack: false,
+        mouseTrackTop: 5,
+        mouseTrackLeft: 5,
+        showDelay: 0,
+        updateDelay: 0,
+        hideDelay: 0,
+        autoHide: true,
+        onBeforeShow: null,
+        onBeforeHide: null,
+        onShow: null,
+        onHide: null
+    }
+
+    static propTypes = {
+        id: PropTypes.string,
+        target: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.array]),
+        content: PropTypes.string,
+        disabled: PropTypes.bool,
+        className: PropTypes.string,
+        style: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+        position: PropTypes.string,
+        my: PropTypes.string,
+        at: PropTypes.string,
+        event: PropTypes.string,
+        showEvent: PropTypes.string,
+        hideEvent: PropTypes.string,
+        autoZIndex: PropTypes.bool,
+        baseZIndex: PropTypes.number,
+        mouseTrack: PropTypes.bool,
+        mouseTrackTop: PropTypes.number,
+        mouseTrackLeft: PropTypes.number,
+        showDelay: PropTypes.number,
+        updateDelay: PropTypes.number,
+        hideDelay: PropTypes.number,
+        autoHide: PropTypes.bool,
+        onBeforeShow: PropTypes.func,
+        onBeforeHide: PropTypes.func,
+        onShow: PropTypes.func,
+        onHide: PropTypes.func
+    }
 
     constructor(props) {
-        this.target = props.target;
-        this.targetContainer = props.targetContainer;
-        this.content = props.content;
-        this.options = props.options || {};
-        this.options.event = this.options.event || 'hover';
-        this.options.position = this.options.position || 'right';
+        super(props);
 
-        this.bindEvents();
+        this.state = {
+            visible: false,
+            position: this.props.position
+        };
+
+        this.show = this.show.bind(this);
+        this.hide = this.hide.bind(this);
+        this.onMouseEnter = this.onMouseEnter.bind(this);
+        this.onMouseLeave = this.onMouseLeave.bind(this);
     }
 
-    bindEvents() {
-        if (this.options.event === 'hover') {
-            this.mouseEnterListener = this.onMouseEnter.bind(this);
-            this.mouseLeaveListener = this.onMouseLeave.bind(this);
-            this.clickListener = this.onClick.bind(this);
-            this.target.addEventListener('mouseenter', this.mouseEnterListener);
-            this.target.addEventListener('mouseleave', this.mouseLeaveListener);
-            this.target.addEventListener('click', this.clickListener);
+    isTargetContentEmpty(target) {
+        return !(this.props.content || this.getTargetOption(target, 'tooltip'));
+    }
+
+    isContentEmpty(target) {
+        return !(this.props.content || this.getTargetOption(target, 'tooltip') || this.props.children);
+    }
+
+    isMouseTrack(target) {
+        return this.getTargetOption(target, 'mousetrack') || this.props.mouseTrack;
+    }
+
+    isDisabled(target) {
+        return this.getTargetOption(target, 'disabled') === 'true' || this.hasTargetOption(target, 'disabled') || this.props.disabled;
+    }
+
+    isAutoHide() {
+        return this.getTargetOption(this.currentTarget, 'autohide') || this.props.autoHide;
+    }
+
+    getTargetOption(target, option) {
+        if (this.hasTargetOption(target, `data-pr-${option}`)) {
+            return target.getAttribute(`data-pr-${option}`);
         }
-        else if (this.options.event === 'focus') {
-            this.focusListener = this.onFocus.bind(this);
-            this.blurListener = this.onBlur.bind(this);
-            this.target.addEventListener('focus', this.focusListener);
-            this.target.addEventListener('blur', this.blurListener);
+
+        return null;
+    }
+
+    hasTargetOption(target, option) {
+        return target && target.hasAttribute(option);
+    }
+
+    getEvents(target) {
+        let showEvent = this.getTargetOption(target, 'showevent') || this.props.showEvent;
+        let hideEvent = this.getTargetOption(target, 'hideevent') || this.props.hideEvent;
+
+        if (this.isMouseTrack(target)) {
+            showEvent = 'mousemove';
+            hideEvent = 'mouseleave';
+        }
+        else {
+            let event = this.getTargetOption(target, 'event') || this.props.event;
+            if (event === 'focus') {
+                showEvent = 'focus';
+                hideEvent = 'blur';
+            }
+        }
+
+        return { showEvent, hideEvent };
+    }
+
+    getPosition(target) {
+        return this.getTargetOption(target, 'position') || this.state.position;
+    }
+
+    getMouseTrackPosition(target) {
+        let top = this.getTargetOption(target, 'mousetracktop') || this.props.mouseTrackTop;
+        let left = this.getTargetOption(target, 'mousetrackleft') || this.props.mouseTrackLeft;
+
+        return { top, left };
+    }
+
+    updateText(target, callback) {
+        if (this.tooltipTextEl) {
+            let content = this.getTargetOption(target, 'tooltip') || this.props.content;
+
+            if (content) {
+                this.tooltipTextEl.innerHTML = ''; // remove children
+                this.tooltipTextEl.appendChild(document.createTextNode(content));
+                callback();
+            }
+            else if (this.props.children) {
+                callback();
+            }
         }
     }
 
-    unbindEvents() {
-        if (this.options.event === 'hover') {
-            this.target.removeEventListener('mouseenter', this.mouseEnterListener);
-            this.target.removeEventListener('mouseleave', this.mouseLeaveListener);
-            this.target.removeEventListener('click', this.clickListener);
-        }
-        else if (this.options.event === 'focus') {
-            this.target.removeEventListener('focus', this.focusListener);
-            this.target.removeEventListener('blur', this.blurListener);
+    show(e) {
+        this.currentTarget = e.currentTarget;
+
+        if (this.isContentEmpty(this.currentTarget) || this.isDisabled(this.currentTarget)) {
+            return;
         }
 
-        this.unbindDocumentResizeListener();
+        const updateTooltipState = () => {
+            this.updateText(this.currentTarget, () => {
+                if (this.props.autoZIndex && !ZIndexUtils.get(this.containerEl)) {
+                    ZIndexUtils.set('tooltip', this.containerEl, this.props.baseZIndex);
+                }
+
+                this.containerEl.style.left = '';
+                this.containerEl.style.top = '';
+
+                if (this.isMouseTrack(this.currentTarget) && !this.containerSize) {
+                    this.containerSize = {
+                        width: DomHandler.getOuterWidth(this.containerEl),
+                        height: DomHandler.getOuterHeight(this.containerEl)
+                    };
+                }
+
+                this.align(this.currentTarget, { x: e.pageX, y: e.pageY });
+            });
+        }
+
+        if (this.state.visible) {
+            this.applyDelay('updateDelay', updateTooltipState);
+        }
+        else {
+            this.sendCallback(this.props.onBeforeShow, { originalEvent: e, target: this.currentTarget });
+            this.applyDelay('showDelay', () => {
+                this.setState({
+                    visible: true,
+                    position: this.getPosition(this.currentTarget)
+                }, () => {
+                    updateTooltipState();
+                    this.sendCallback(this.props.onShow, { originalEvent: e, target: this.currentTarget });
+                });
+
+                this.bindDocumentResizeListener();
+                this.bindScrollListener();
+
+                DomHandler.addClass(this.currentTarget, this.getTargetOption(this.currentTarget, 'classname'));
+            });
+        }
+    }
+
+    hide(e) {
+        this.clearTimeouts();
+
+        if (this.state.visible) {
+            DomHandler.removeClass(this.currentTarget, this.getTargetOption(this.currentTarget, 'classname'));
+
+            this.sendCallback(this.props.onBeforeHide, { originalEvent: e, target: this.currentTarget });
+            this.applyDelay('hideDelay', () => {
+                ZIndexUtils.clear(this.containerEl);
+                DomHandler.removeClass(this.containerEl, 'p-tooltip-active');
+
+                if (!this.isAutoHide() && this.allowHide === false) {
+                    return;
+                }
+
+                this.setState({
+                    visible: false,
+                    position: this.props.position
+                }, () => {
+                    if (this.tooltipTextEl) {
+                        ReactDOM.unmountComponentAtNode(this.tooltipTextEl);
+                    }
+
+                    this.unbindDocumentResizeListener();
+                    this.unbindScrollListener();
+                    this.currentTarget = null;
+                    this.scrollHandler = null;
+                    this.containerSize = null;
+                    this.allowHide = true;
+                    this.sendCallback(this.props.onHide, { originalEvent: e, target: this.currentTarget });
+                });
+            });
+        }
+    }
+
+    align(target, coordinate) {
+        let left = 0, top = 0;
+
+        if (this.isMouseTrack(target) && coordinate) {
+            const containerSize = {
+                width: DomHandler.getOuterWidth(this.containerEl),
+                height: DomHandler.getOuterHeight(this.containerEl)
+            };
+
+            left = coordinate.x;
+            top = coordinate.y;
+
+            let { top: mouseTrackTop, left: mouseTrackLeft } = this.getMouseTrackPosition(target);
+
+            switch (this.state.position) {
+                case 'left':
+                    left -= (containerSize.width + mouseTrackLeft);
+                    top -= (containerSize.height / 2) - mouseTrackTop;
+                    break;
+                case 'right':
+                    left += mouseTrackLeft;
+                    top -= (containerSize.height / 2) - mouseTrackTop;
+                    break;
+                case 'top':
+                    left -= (containerSize.width / 2) - mouseTrackLeft;
+                    top -= (containerSize.height + mouseTrackTop);
+                    break;
+                case 'bottom':
+                    left -= (containerSize.width / 2) - mouseTrackLeft;
+                    top += mouseTrackTop;
+                    break;
+                default:
+                    break;
+            }
+
+            if (left <= 0 || this.containerSize.width > containerSize.width) {
+                this.containerEl.style.left = '0px';
+                this.containerEl.style.right = window.innerWidth - containerSize.width - left + 'px';
+            }
+            else {
+                this.containerEl.style.right = '';
+                this.containerEl.style.left = left + 'px';
+            }
+
+            this.containerEl.style.top = top + 'px';
+            DomHandler.addClass(this.containerEl, 'p-tooltip-active');
+        }
+        else {
+            const pos = DomHandler.findCollisionPosition(this.state.position);
+            const my = (this.getTargetOption(target, 'my') || this.props.my || pos.my);
+            const at = (this.getTargetOption(target, 'at') || this.props.at || pos.at);
+
+            this.containerEl.style.padding = '0px';
+
+            DomHandler.flipfitCollision(this.containerEl, target, my, at, (currentPosition) => {
+                const { x: atX, y:atY } = currentPosition.at;
+                const { x: myX } = currentPosition.my;
+                const position = this.props.at ? (atX !== 'center' && atX !== myX ? atX : atY) : currentPosition.at[`${pos.axis}`];
+
+                this.containerEl.style.padding = '';
+
+                this.setState({
+                    position
+                }, () => {
+                    this.updateContainerPosition();
+                    DomHandler.addClass(this.containerEl, 'p-tooltip-active')
+                });
+            });
+        }
+    }
+
+    updateContainerPosition() {
+        if (this.containerEl) {
+            const style = getComputedStyle(this.containerEl);
+
+            if (this.state.position === 'left')
+                this.containerEl.style.left = (parseFloat(style.left) - (parseFloat(style.paddingLeft) * 2)) + 'px';
+            else if (this.state.position === 'top')
+                this.containerEl.style.top = (parseFloat(style.top) - (parseFloat(style.paddingTop) * 2)) + 'px';
+        }
     }
 
     onMouseEnter() {
-        if (!this.container && !this.showTimeout) {
-            this.activate();
-        }
-    }
-    
-    onMouseLeave() {
-        this.deactivate();
-    }
-    
-    onFocus() {
-        this.activate();
-    }
-    
-    onBlur() {
-        this.deactivate();
-    }
-  
-    onClick() {
-        this.deactivate();
-    }
-
-    activate() {
-        this.clearHideTimeout();
-
-        if (this.options.showDelay)
-            this.showTimeout = setTimeout(() => { this.show() }, this.options.showDelay);
-        else
-            this.show();
-    }
-
-    deactivate() {
-        this.clearShowTimeout();
-
-        if (this.options.hideDelay)
-            this.hideTimeout = setTimeout(() => { this.hide() }, this.options.hideDelay);
-        else
-            this.hide();
-    }
-
-    clearShowTimeout() {
-        if (this.showTimeout) {
-            clearTimeout(this.showTimeout);
-            this.showTimeout = null;
+        if (!this.isAutoHide()) {
+            this.allowHide = false;
         }
     }
 
-    clearHideTimeout() {
-        if (this.hideTimeout) {
-            clearTimeout(this.hideTimeout);
-            this.hideTimeout = null;
+    onMouseLeave(e) {
+        if (!this.isAutoHide()) {
+            this.allowHide = true;
+            this.hide(e);
+        }
+    }
+
+    bindDocumentResizeListener() {
+        this.documentResizeListener = (e) => {
+            if (!DomHandler.isAndroid()) {
+                this.hide(e);
+            }
+        };
+
+        window.addEventListener('resize', this.documentResizeListener);
+    }
+
+    unbindDocumentResizeListener() {
+        if (this.documentResizeListener) {
+            window.removeEventListener('resize', this.documentResizeListener);
+            this.documentResizeListener = null;
+        }
+    }
+
+    bindScrollListener() {
+        if (!this.scrollHandler) {
+            this.scrollHandler = new ConnectedOverlayScrollHandler(this.currentTarget, (e) => {
+                if (this.state.visible) {
+                    this.hide(e);
+                }
+            });
+        }
+
+        this.scrollHandler.bindScrollListener();
+    }
+
+    unbindScrollListener() {
+        if (this.scrollHandler) {
+            this.scrollHandler.unbindScrollListener();
+        }
+    }
+
+    bindTargetEvent(target) {
+        if (target) {
+            const { showEvent, hideEvent } = this.getEvents(target);
+            target.addEventListener(showEvent, this.show);
+            target.addEventListener(hideEvent, this.hide);
+        }
+    }
+
+    unbindTargetEvent(target) {
+        if (target) {
+            const { showEvent, hideEvent } = this.getEvents(target);
+            target.removeEventListener(showEvent, this.show);
+            target.removeEventListener(hideEvent, this.hide);
+        }
+    }
+
+    applyDelay(delayProp, callback) {
+        this.clearTimeouts();
+
+        const delay = this.getTargetOption(this.currentTarget, delayProp.toLowerCase()) || this.props[delayProp];
+        if (!!delay) {
+            this[`${delayProp}Timeout`] = setTimeout(() => callback(), delay);
+        }
+        else {
+            callback();
+        }
+    }
+
+    sendCallback(callback, ...params) {
+        if (callback) {
+            callback(...params);
         }
     }
 
     clearTimeouts() {
-        this.clearShowTimeout();
-        this.clearHideTimeout();
+        clearTimeout(this.showDelayTimeout);
+        clearTimeout(this.updateDelayTimeout);
+        clearTimeout(this.hideDelayTimeout);
     }
 
-    updateContent(content) {
-        this.content = content;
+    updateTargetEvents(target) {
+        this.unloadTargetEvents(target);
+        this.loadTargetEvents(target);
     }
 
-    show() {
-        if (!this.content) {
-            return;
+    loadTargetEvents(target) {
+        this.setTargetEventOperations(target || this.props.target, 'bindTargetEvent');
+    }
+
+    unloadTargetEvents(target) {
+        this.setTargetEventOperations(target || this.props.target, 'unbindTargetEvent');
+    }
+
+    setTargetEventOperations(target, operation) {
+        if (target) {
+            if (DomHandler.isElement(target)) {
+                this[operation](target);
+            }
+            else {
+                const setEvent = (target) => {
+                    let element = DomHandler.find(document, target);
+                    element.forEach((el) => {
+                        this[operation](el);
+                    });
+                }
+
+                if (target instanceof Array) {
+                    target.forEach(t => {
+                        setEvent(t);
+                    });
+                }
+                else {
+                    setEvent(target);
+                }
+            }
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.target) {
+            this.loadTargetEvents();
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.target !== this.props.target) {
+            this.unloadTargetEvents(prevProps.target);
+            this.loadTargetEvents();
         }
 
-        this.create();
-        this.align();
-        DomHandler.fadeIn(this.container, 250);
-        this.container.style.zIndex = ++DomHandler.zindex;
+        if (this.state.visible) {
+            if (prevProps.content !== this.props.content) {
+                this.applyDelay('updateDelay', () => {
+                    this.updateText(this.currentTarget, () => {
+                        this.align(this.currentTarget);
+                    });
+                });
+            }
 
-        this.bindDocumentResizeListener();
-    }
-
-    hide() {
-        this.remove();
-    }
-
-    create() {
-        this.container = document.createElement('div');
-
-        let tooltipArrow = document.createElement('div');
-        tooltipArrow.className = 'p-tooltip-arrow';
-        this.container.appendChild(tooltipArrow);
-
-        this.tooltipText = document.createElement('div');
-        this.tooltipText.className = 'p-tooltip-text';
-
-        //todo: JSX support
-        this.tooltipText.innerHTML = this.content;
-
-        this.container.appendChild(this.tooltipText);
-        document.body.appendChild(this.container);
-
-        this.container.style.display = 'inline-block';
-    }
-
-    remove() {
-        if (this.container && this.container.parentElement) {
-            document.body.removeChild(this.container);
+            if (this.currentTarget && this.isDisabled(this.currentTarget)) {
+                this.hide();
+            }
         }
+    }
 
-        this.unbindDocumentResizeListener();
+    componentWillUnmount() {
         this.clearTimeouts();
-        this.container = null;
-    }
+        this.unbindDocumentResizeListener();
+        this.unloadTargetEvents();
 
-    align() {
-        switch (this.options.position) {
-            case 'top':
-                this.alignTop();
-                if (this.isOutOfBounds()) {
-                    this.alignBottom();
-                }
-                break;
-
-            case 'bottom':
-                this.alignBottom();
-                if (this.isOutOfBounds()) {
-                    this.alignTop();
-                }
-                break;
-
-            case 'left':
-                this.alignLeft();
-                if (this.isOutOfBounds()) {
-                    this.alignRight();
-
-                    if (this.isOutOfBounds()) {
-                        this.alignTop();
-
-                        if (this.isOutOfBounds()) {
-                            this.alignBottom();
-                        }
-                    }
-                }
-                break;
-
-            case 'right':
-                this.alignRight();
-                if (this.isOutOfBounds()) {
-                    this.alignLeft();
-
-                    if (this.isOutOfBounds()) {
-                        this.alignTop();
-
-                        if (this.isOutOfBounds()) {
-                            this.alignBottom();
-                        }
-                    }
-                }
-                break;
-
-            default:
-                throw new Error('Invalid position:' + this.options.position);
+        if (this.scrollHandler) {
+            this.scrollHandler.destroy();
+            this.scrollHandler = null;
         }
+
+        ZIndexUtils.clear(this.containerEl);
     }
 
-    getHostOffset() {
-        let target = this.targetContainer || this.target;
-        let offset = target.getBoundingClientRect();
-        let targetLeft = offset.left + DomHandler.getWindowScrollLeft();
-        let targetTop = offset.top + DomHandler.getWindowScrollTop();
-    
-        return { left: targetLeft, top: targetTop };
+    renderElement() {
+        const tooltipClassName = classNames('p-tooltip p-component', {
+            [`p-tooltip-${this.state.position}`]: true
+        }, this.props.className);
+        const isTargetContentEmpty = this.isTargetContentEmpty(this.currentTarget);
+
+        return (
+            <div id={this.props.id} ref={(el) => this.containerEl = el} className={tooltipClassName} style={this.props.style} role="tooltip" aria-hidden={this.state.visible}
+                onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
+                <div className="p-tooltip-arrow"></div>
+                <div ref={(el) => this.tooltipTextEl = el} className="p-tooltip-text">
+                    {isTargetContentEmpty && this.props.children}
+                </div>
+            </div>
+        );
     }
 
-    alignRight() {
-        this.preAlign('right');
-        let target = this.targetContainer || this.target;
-        let hostOffset = this.getHostOffset();
-        let left = hostOffset.left + DomHandler.getOuterWidth(target);
-        let top = hostOffset.top + (DomHandler.getOuterHeight(target) - DomHandler.getOuterHeight(this.container)) / 2;
-        this.container.style.left = left + 'px';
-        this.container.style.top = top + 'px';
-    }
+    render() {
+        if (this.state.visible) {
+            const element = this.renderElement();
 
-    alignLeft() {
-        this.preAlign('left');
-        let target = this.targetContainer || this.target;
-        let hostOffset = this.getHostOffset();
-        let left = hostOffset.left - DomHandler.getOuterWidth(this.container);
-        let top = hostOffset.top + (DomHandler.getOuterHeight(target) - DomHandler.getOuterHeight(this.container)) / 2;
-        this.container.style.left = left + 'px';
-        this.container.style.top = top + 'px';
-    }
-
-    alignTop() {
-        this.preAlign('top');
-        let target = this.targetContainer || this.target;
-        let hostOffset = this.getHostOffset();
-        let left = hostOffset.left + (DomHandler.getOuterWidth(target) - DomHandler.getOuterWidth(this.container)) / 2;
-        let top = hostOffset.top - DomHandler.getOuterHeight(this.container);
-        this.container.style.left = left + 'px';
-        this.container.style.top = top + 'px';
-    }
-
-    alignBottom() {
-        this.preAlign('bottom');
-        let target = this.targetContainer || this.target;
-        let hostOffset = this.getHostOffset();
-        let left = hostOffset.left + (DomHandler.getOuterWidth(target) - DomHandler.getOuterWidth(this.container)) / 2;
-        let top = hostOffset.top + DomHandler.getOuterHeight(target);
-        this.container.style.left = left + 'px';
-        this.container.style.top = top + 'px';
-    }
-
-    preAlign(position) {
-        this.container.style.left = -999 + 'px';
-        this.container.style.top = -999 + 'px';
-
-        let defaultClassName = 'p-tooltip p-component p-tooltip-' + position;
-        this.container.className = this.options.className ? defaultClassName + ' ' + this.options.className : defaultClassName;
-    }
-
-    isOutOfBounds() {
-        let offset = this.container.getBoundingClientRect();
-        let targetTop = offset.top;
-        let targetLeft = offset.left;
-        let width = DomHandler.getOuterWidth(this.container);
-        let height = DomHandler.getOuterHeight(this.container);
-        let viewport = DomHandler.getViewport();
-
-        return (targetLeft + width > viewport.width) || (targetLeft < 0) || (targetTop < 0) || (targetTop + height > viewport.height);
-    }
-
-    bindDocumentResizeListener() {
-        this.resizeListener = this.onWindowResize.bind(this);
-        window.addEventListener('resize', this.resizeListener);
-    }
-
-    unbindDocumentResizeListener() {
-        if (this.resizeListener) {
-            window.removeEventListener('resize', this.resizeListener);
-            this.resizeListener = null;
+            return <Portal element={element} appendTo={this.props.appendTo} visible />;
         }
-    }
 
-    onWindowResize() {
-        this.hide();
+        return null;
     }
-
-    destroy() {
-        this.unbindEvents();
-        this.remove();
-        this.target = null;
-        this.targetContainer = null;
-    }
- }
+}

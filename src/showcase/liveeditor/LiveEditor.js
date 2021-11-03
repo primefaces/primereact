@@ -1,141 +1,402 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
+import React from 'react';
 import { services, data } from './LiveEditorData';
 import { CodeHighlight } from '../codehighlight/CodeHighlight';
+import { TabPanel } from '../../components/tabview/TabView';
+import * as pkg from '../../../package.json';
 
-export class LiveEditor extends Component {
+const vPrimeReact = '^6.5.0'; // latest
 
-    static defaultProps = {
-        name: null,
-        sources: null,
-        service: null,
-        data: null,
-        dependencies: null,
-        extFiles: null,
-        activeButtonIndex: 0,
-        editorType: 'codesandbox'
-    };
+let currentProps = {};
 
-    static propTypes = {
-        name: PropTypes.string,
-        sources: PropTypes.array,
-        service: PropTypes.string,
-        data: PropTypes.string,
-        dependencies: PropTypes.object,
-        extFiles: PropTypes.object,
-        activeButtonIndex: PropTypes.number,
-        editorType: PropTypes.string
-    };
+const contents = (name, content, imports) => ({
+    'js': `import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.css';
+import 'primeflex/primeflex.css';
+import '../../index.css';
+import ReactDOM from 'react-dom';
+${content}
+const rootElement = document.getElementById("root");
+ReactDOM.render(<${name} />, rootElement);`,
 
-    constructor(props) {
-        super(props);
+    'browser': `
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>${name}</title>
 
-        this.state = {
-            sandbox_id: null,
-            showCodeHighlight: false
+        <!-- PrimeReact -->
+        <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/themes/saga-blue/theme.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/primereact.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primeflex@2.0.0/primeflex.min.css" />
+
+        <!-- Dependencies -->
+        <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="https://unpkg.com/react-transition-group@4.4.2/dist/react-transition-group.js"></script>
+
+        <!-- Demo -->${imports}
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+${content}
+const rootElement = document.getElementById("root");
+ReactDOM.render(<${name} />, rootElement);
+
+        </script>
+    </body>
+</html>
+`
+});
+
+export const useLiveEditorTabs = (props) => {
+    currentProps = props;
+
+    const liveEditor = useLiveEditor();
+
+    let extFiles = props.extFiles && Object.entries(props.extFiles).map(([key, value], i) => {
+        if (key === 'index.css') {
+            return null;
         }
+
+        const lang = key.indexOf('.css') !== -1 ? 'css' : 'js';
+        return (
+            <CodeHighlight key={`${key}_${i}`} lang={lang}>
+{`
+/* ${key.replace('demo/', '')} */
+`}
+                {value.content}
+            </CodeHighlight>
+        )
+    });
+
+    let tabs = Object.entries(props.sources).map(([key, value]) => {
+        const { content: _c, imports: _i } = value;
+        const content = key === 'browser' ? contents(props.name, _c, _i).browser : _c;
+
+        return (
+            <TabPanel key={key} header={value.tabName}>
+                {/* eslint-disable */}
+                <a style={{ color: 'var(--primary-color)', cursor: 'pointer' }} className="p-d-inline-block p-mb-1" onClick={() => liveEditor.postSandboxParameters(key)}>
+                    <span>Edit in CodeSandbox</span>
+                </a>
+                {/* eslint-enable */}
+                <CodeHighlight lang="js">
+                    {content}
+                </CodeHighlight>
+
+                {extFiles}
+            </TabPanel>
+        );
+    });
+
+    if (props.service) {
+        const serviceArr = props.service.replace(/\s/g,'').split(',');
+        serviceArr.forEach((s, i) => {
+            tabs.push(
+                <TabPanel key={`${s}_${i}`} header={`${s}.js`}>
+                    <CodeHighlight lang="js">
+                        {services[s]}
+                    </CodeHighlight>
+                    <span className="liveEditorHelperText">* This code is different for the 'Browser Source'.</span>
+                </TabPanel>
+            )
+        });
     }
 
-    postSandboxParameters(parameters) {
-        fetch('https://codesandbox.io/api/v1/sandboxes/define?json=1', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(parameters)
-        })
-        .then(response => response.json())
-        .then(data => this.setState({ sandbox_id: data.sandbox_id }))
-        .catch(() => this.setState({ showCodeHighlight: true }));
+    if (props.data) {
+        const dataArr = props.data.replace(/\s/g,'').split(',');
+        dataArr.forEach((d, i) => {
+            tabs.push(
+                <TabPanel key={`${d}_${i}`} header={`${d}.json`}>
+                    <CodeHighlight lang="js" style={{ maxHeight: '500px' }}>
+                        {data[d]}
+                    </CodeHighlight>
+                </TabPanel>
+            )
+        });
     }
 
-    createSandboxParameters(nameWithExt, files, extDependencies) {
-        let extFiles = !!this.props.extFiles ? {...this.props.extFiles} : {};
-        let extIndexCSS = extFiles['index.css'] || '';
-        delete extFiles['index.css'];
+    return tabs;
+}
 
-        const dependencies = require('../../../package.json') ? require('../../../package.json').devDependencies : {};
+export const useLiveEditor = () => {
+    const props = currentProps;
+
+    const createSandboxParameters = (nameWithExt, files, extDependencies, sourceType, rootPath) => {
+        let isBrowser = sourceType === 'browser';
+        let _extFiles = !!props.extFiles ? { ...props.extFiles } : {};
+        let extIndexCSS = _extFiles['index.css'] || '';
+        delete _extFiles['index.css'];
+
+        let extFiles = {};
+        Object.entries(_extFiles).forEach(([k, v]) => extFiles[`${rootPath}${k}`] = v);
+
+        const dependencies = pkg ? pkg.devDependencies : {};
 
         return {
             files: {
                 'package.json': {
                     content: {
-                        main: `src/demo/${nameWithExt}`,
-                        dependencies: {
+                        main: `${rootPath}demo/${nameWithExt}`,
+                        dependencies: isBrowser ? {} : {
                             ...extDependencies,
                             'react': dependencies['react'],
                             'react-dom': dependencies['react-dom'],
                             'react-transition-group': dependencies['react-transition-group'],
-                            'classnames': dependencies['classnames'],
-                            'axios': dependencies['axios'],
-                            'primereact': 'latest',
+                            'primereact': vPrimeReact, // latest
                             'primeflex': dependencies['primeflex'],
                             'primeicons': dependencies['primeicons']
                         }
                     }
                 },
+                'index.html': {
+                    content: isBrowser ? `<meta http-equiv="refresh" content="0;url=demo/${nameWithExt}" />` :
+                    `<div id="root"></div>
+
+                    <!-- Added to show icons in the editor -->
+                    <link rel="stylesheet" href="https://unpkg.com/primeicons@${dependencies['primeicons'].replace(/[\^|~]/gi, '')}/primeicons.css">`
+                },
                 'index.css': {
                     content: `
+html {
+    font-size: 14px;
+}
+
 body {
-    padding: .5em;
-    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
     font-weight: normal;
-    color: #333333;
+    color: #495057;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: 14px;
+    padding: .5em;
     margin-bottom: 50px;
 }
-.center-demo {
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 1.5rem 0 1rem 0;
+    font-family: inherit;
+    font-weight: 600;
+    line-height: 1.2;
+    color: inherit;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+p {
+    line-height: 1.5;
+    margin: 0 0 1rem 0;
+}
+
+.card {
+    margin-bottom: 2rem;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: rgba(165, 165, 165, 0.1)
+    }
+    50% {
+        background-color: rgba(165, 165, 165, 0.3)
+    }
+    100% {
+        background-color: rgba(165, 165, 165, 0.1)
+    }
+}
+
+.customer-badge {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+}
+
+.customer-badge.status-qualified {
+    background-color: #C8E6C9;
+    color: #256029;
+}
+
+.customer-badge.status-unqualified {
+    background-color: #FFCDD2;
+    color: #C63737;
+}
+
+.customer-badge.status-negotiation {
+    background-color: #FEEDAF;
+    color: #8A5340;
+}
+
+.customer-badge.status-new {
+    background-color: #B3E5FC;
+    color: #23547B;
+}
+
+.customer-badge.status-renewal {
+    background-color: #ECCFFF;
+    color: #694382;
+}
+
+.customer-badge.status-proposal {
+    background-color: #FFD8B2;
+    color: #805B36;
+}
+
+.product-badge {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+}
+
+.product-badge.status-instock {
+    background: #C8E6C9;
+    color: #256029;
+}
+
+.product-badge.status-outofstock {
+    background: #FFCDD2;
+    color: #C63737;
+}
+
+.product-badge.status-lowstock {
+    background: #FEEDAF;
+    color: #8A5340;
+}
+
+.order-badge {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+}
+
+.order-badge.order-delivered {
+    background: #C8E6C9;
+    color: #256029;
+}
+
+.order-badge.order-cancelled {
+    background: #FFCDD2;
+    color: #C63737;
+}
+
+.order-badge.order-pending {
+    background: #FEEDAF;
+    color: #8A5340;
+}
+
+.order-badge.order-returned {
+    background: #ECCFFF;
+    color: #694382;
+}
+
+.image-text {
+    vertical-align: middle;
+    margin-left: .5rem;
+}
+
+.p-multiselect-representative-option {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.p-multiselect-representative-option img {
+    vertical-align: middle;
+    width: 24px;
+}
+
+.p-multiselect-representative-option span {
+    margin-top: .125rem;
+}
+
+.p-column-filter {
+    width: 100%;
+}
+
+.country-item {
     display: flex;
-    flex-direction: column;
     align-items: center;
 }
-.p-col-d {
-    display: table-cell;
+
+.country-item img.flag {
+    width: 18px;
+    margin-right: .5rem;
 }
-.p-col-m {
-    display: none;
+
+.flag {
+    vertical-align: middle;
 }
-@media screen and (max-width: 1024px) {
-    .p-col-d {
-        display: none;
-    }
-    .p-col-m {
-        display: inline-block;
-    }
+
+span.flag {
+    width:44px;
+    height:30px;
+    display:inline-block;
+}
+
+img.flag {
+    width:30px
 }
 ${extIndexCSS}
                     `,
                 },
                 ...files,
-                ...extFiles,
-                'index.html': {
-                    content: `
-<div id="root"></div>
-
-<!-- Added to show icons in the editor -->
-<link rel="stylesheet" href="https://unpkg.com/primeicons@${dependencies['primeicons'].replace(/[\^|~]/gi, '')}/primeicons.css">
-                  `
-                }
+                ...extFiles
             }
         }
-    }
+    };
 
-    getSandboxParameters() {
-        let name = this.props.name;
+    const getSandboxParameters = (sourceType) => {
+        let { name, sources, dependencies } = props;
         let extension = '.js';
-        let extDependencies = this.props.dependencies || {};
-        let [sourceType, sourceValue] = this.props.sources;
+        let serviceExtension = extension;
+        let extDependencies = dependencies || {};
+        let { content, imports } = sources[sourceType];
+        let { browser, js } = contents(name, content, `\n        <link rel="stylesheet" href="../index.css" />${imports}`);
+        let rootPath = 'src/';
 
         let _files = {};
+
+        _files[`sandbox.config.json`] = {
+            content: {
+                "infiniteLoopProtection": false
+            }
+        }
+
         if (sourceType === 'class' || sourceType === 'hooks') {
-            extension = '.js';
+            extension = serviceExtension = '.js';
+            content = js;
         }
         else if (sourceType === 'ts') {
-            extension = '.tsx';
+            extension = serviceExtension = '.tsx';
+            content = js;
 
             _files[`tsconfig.json`] = {
                 content:
@@ -177,72 +438,57 @@ ${extIndexCSS}
                 "typescript": "3.3.3"
             }
         }
+        else if (sourceType === 'browser') {
+            extension = '.html';
+            content = browser;
+            rootPath = '';
 
-        _files[`src/demo/${name}${extension}`] = {
-            content:
-                `import 'primeicons/primeicons.css';
-import 'primereact/resources/themes/nova-light/theme.css';
-import 'primereact/resources/primereact.css';
-import 'primeflex/primeflex.css';
-import '../../index.css';
-import ReactDOM from 'react-dom';
-${sourceValue.content}
-const rootElement = document.getElementById("root");
-ReactDOM.render(<${name} />, rootElement);`
+            _files[`sandbox.config.json`]['content']['template'] = 'static';
         }
 
-        if (this.props.service) {
-            _files[`src/service/${this.props.service}${extension}`] = {
-                content: services[this.props.service]
-            }
-
-            extDependencies['axios'] =  "^0.19.0";
+        _files[`${rootPath}demo/${name}${extension}`] = {
+            content
         }
 
-        if (this.props.data) {
-            _files[`public/data/${this.props.data}.json`] = {
-                content: data[this.props.data]
-            }
+        if (props.service) {
+            const serviceArr = props.service.replace(/\s/g,'').split(',');
+            serviceArr.forEach(s => {
+                const path = `${rootPath}${sourceType === 'browser' ? 'demo' : 'service'}/${s}${serviceExtension}`;
+                const content = sourceType === 'browser' ? services[s].replace('export class', 'class') : services[s];
+
+                _files[path] = {
+                    content
+                }
+            });
         }
 
-        return this.createSandboxParameters(`${name}${extension}`, _files, extDependencies);
+        if (props.data) {
+            const dataArr = props.data.replace(/\s/g,'').split(',');
+            dataArr.forEach(d => {
+                const path = `${sourceType === 'browser' ? 'demo' : 'public'}/data/${d}.json`;
+                const content = data[d];
+
+                _files[path] = {
+                    content
+                }
+            });
+        }
+
+        return createSandboxParameters(`${name}${extension}`, _files, extDependencies, sourceType, rootPath);
     }
 
-    componentDidMount() {
-        if (this.props.editorType === 'codesandbox') {
-            this.postSandboxParameters(this.getSandboxParameters());
+    return {
+        postSandboxParameters(sourceType) {
+            fetch('https://codesandbox.io/api/v1/sandboxes/define?json=1', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(getSandboxParameters(sourceType))
+            })
+                .then(response => response.json())
+                .then(data => window.open(`https://codesandbox.io/s/${data.sandbox_id}`, '_blank'));
         }
-    }
-
-    renderSandboxSource() {
-        if (this.state.showCodeHighlight) {
-            return (
-                <CodeHighlight className="language-javascript">
-                    {this.props.sources[1].content}
-                </CodeHighlight>
-            );
-        }
-
-        return (
-            <iframe title="PrimeReact Demo"
-                src={`https://codesandbox.io/embed/${this.state.sandbox_id}?theme=light&fontsize=14`}
-                style={{'width':'100%', 'height':'600px', 'border':'0', 'overflow':'hidden'}}
-                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
-        );
-    }
-
-    renderElements() {
-        if (this.props.editorType === 'codesandbox') {
-            return this.renderSandboxSource();
-        }
-
-        return null;
-    }
-
-    render() {
-        let elements = this.renderElements();
-
-        return elements;
     }
 }

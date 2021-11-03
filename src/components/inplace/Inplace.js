@@ -1,16 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import {Button} from '../button/Button';
+import { classNames } from '../utils/Utils';
+import { Button } from '../button/Button';
 
 export class InplaceDisplay extends Component {
 
     render() {
-        return (
-            <React.Fragment>
-                {this.props.children}
-            </React.Fragment>
-        )
+        return this.props.children;
     }
 
 }
@@ -18,11 +14,7 @@ export class InplaceDisplay extends Component {
 export class InplaceContent extends Component {
 
     render() {
-        return (
-            <React.Fragment>
-                {this.props.children}
-            </React.Fragment>
-        )
+        return this.props.children;
     }
 
 }
@@ -35,7 +27,8 @@ export class Inplace extends Component {
         active: false,
         closable: false,
         disabled: false,
-        tabIndex: '0',
+        tabIndex: 0,
+        ariaLabel: null,
         onOpen: null,
         onClose: null,
         onToggle: null
@@ -47,20 +40,21 @@ export class Inplace extends Component {
         active: PropTypes.bool,
         closable: PropTypes.bool,
         disabled: PropTypes.bool,
-        tabIndex: PropTypes.string,
+        tabIndex: PropTypes.number,
+        ariaLabel: PropTypes.string,
         onOpen: PropTypes.func,
         onClose: PropTypes.func,
         onToggle: PropTypes.func,
     };
-    
-    constructor(props) {
+
+    constructor(props) {
         super(props);
         if (!this.props.onToggle) {
             this.state = {
                 active: false
             }
         }
-        
+
         this.open = this.open.bind(this);
         this.close = this.close.bind(this);
         this.onDisplayKeyDown = this.onDisplayKeyDown.bind(this);
@@ -71,7 +65,7 @@ export class Inplace extends Component {
             return;
         }
 
-        if(this.props.onOpen) {
+        if (this.props.onOpen) {
             this.props.onOpen(event);
         }
         if (this.props.onToggle) {
@@ -87,7 +81,7 @@ export class Inplace extends Component {
         }
     }
 
-    close(event) {
+    close(event) {
         if (this.props.onClose) {
             this.props.onClose(event);
         }
@@ -113,28 +107,27 @@ export class Inplace extends Component {
     }
 
     isActive() {
-        return this.props.onToggle ? this.props.active: this.state.active;
+        return this.props.onToggle ? this.props.active : this.state.active;
     }
 
     renderDisplay(content) {
-        const className = classNames('p-inplace-display', {'p-disabled': this.props.disabled});
+        const className = classNames('p-inplace-display', { 'p-disabled': this.props.disabled });
 
         return (
-            <div className={className} onClick={this.open} onKeyDown={this.onDisplayKeyDown} tabIndex={this.props.tabIndex} >
+            <div className={className} onClick={this.open} onKeyDown={this.onDisplayKeyDown} tabIndex={this.props.tabIndex} aria-label={this.props.ariaLabel}>
                 {content}
             </div>
         );
     }
-    
+
     renderCloseButton() {
         if (this.props.closable) {
             return (
-                <Button type="button" icon="pi pi-times" onClick={this.close} />
+                <Button type="button" className="p-inplace-content-close" icon="pi pi-times" onClick={this.close} />
             )
         }
-        else {
-            return null;
-        }
+
+        return null;
     }
 
     renderContent(content) {
@@ -164,7 +157,7 @@ export class Inplace extends Component {
     }
 
     render() {
-        const className = classNames('p-inplace p-component', {'p-inplace-closable': this.props.closable}, this.props.className);
+        const className = classNames('p-inplace p-component', { 'p-inplace-closable': this.props.closable }, this.props.className);
 
         return (
             <div className={className}>

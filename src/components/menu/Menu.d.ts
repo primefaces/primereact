@@ -1,20 +1,24 @@
 import * as React from 'react';
-import {MenuItem} from '../menuitem/MenuItem';
-import {SyntheticEvent} from "react";
+import { MenuItem } from '../menuitem';
 
-interface MenuProps {
+type MenuAppendToType = 'self' | HTMLElement | undefined | null;
+
+export interface MenuProps {
     id?: string;
     model?: MenuItem[];
     popup?: boolean;
     style?: object;
     className?: string;
     autoZIndex?: boolean;
-    bazeZIndex?: number;
-    appendTo?: any;
-    onShow?(e: Event): void;
-    onHide?(e: Event): void;
+    baseZIndex?: number;
+    appendTo?: MenuAppendToType;
+    transitionOptions?: object;
+    onShow?(e: React.SyntheticEvent): void;
+    onHide?(e: React.SyntheticEvent): void;
 }
 
-export class Menu extends React.Component<MenuProps ,any> {
-    public toggle(event:SyntheticEvent):void;
+export declare class Menu extends React.Component<MenuProps, any> {
+    public toggle(event: React.SyntheticEvent): void;
+    public show(event: React.SyntheticEvent): void;
+    public hide(event: React.SyntheticEvent): void;
 }

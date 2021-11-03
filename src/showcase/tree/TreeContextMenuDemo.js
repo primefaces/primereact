@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {Tree} from '../../components/tree/Tree';
-import {ContextMenu} from '../../components/contextmenu/ContextMenu';
-import {Growl} from '../../components/growl/Growl';
-import {NodeService} from '../service/NodeService';
-import {TreeSubmenu} from './TreeSubmenu';
-import {TabView, TabPanel} from '../../components/tabview/TabView';
-import AppContentContext from '../../AppContentContext';
-import { LiveEditor } from '../liveeditor/LiveEditor';
+import { Tree } from '../../components/tree/Tree';
+import { ContextMenu } from '../../components/contextmenu/ContextMenu';
+import { Toast} from '../../components/toast/Toast';
+import { NodeService } from '../service/NodeService';
+import { TabView } from '../../components/tabview/TabView';
+import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
+import { AppInlineHeader } from '../../AppInlineHeader';
+import AppDemoActions from '../../AppDemoActions';
 
 export class TreeContextMenuDemo extends Component {
 
@@ -23,7 +23,7 @@ export class TreeContextMenuDemo extends Component {
                 label: 'View Key',
                 icon: 'pi pi-search',
                 command: () => {
-                    this.growl.show({severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey});
+                    this.toast.show({severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey});
                 }
             },
             {
@@ -45,33 +45,30 @@ export class TreeContextMenuDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <TreeSubmenu />
-
                 <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree - ContextMenu</h1>
+                    <AppInlineHeader changelogText="tree">
+                        <h1>Tree <span>ContextMenu</span></h1>
                         <p>Tree has exclusive integration with the ContextMenu component with support for different menus depending on the node.</p>
-
-                        <AppContentContext.Consumer>
-                            { context => <button onClick={() => context.onChangelogBtnClick("tree")} className="layout-changelog-button">{context.changelogText}</button> }
-                        </AppContentContext.Consumer>
-                    </div>
+                    </AppInlineHeader>
+                    <AppDemoActions github="tree/TreeContextMenuDemo.js" />
                 </div>
 
                 <div className="content-section implementation">
-                    <Growl ref={(el) => this.growl = el} />
+                    <Toast ref={(el) => this.toast = el} />
 
-                    <ContextMenu model={this.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedNodeKey: null})}/>
+                    <ContextMenu model={this.menu} ref={el => this.cm = el} onHide={() => this.setState({ selectedNodeKey: null })}/>
 
-                    <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
-                        contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})}
-                        onContextMenu={event => this.cm.show(event.originalEvent)} />
+                    <div className="card">
+                        <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({ expandedKeys: e.value })}
+                            contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({ selectedNodeKey: event.value })}
+                            onContextMenu={event => this.cm.show(event.originalEvent)} />
+                    </div>
                 </div>
 
                 <TreeContextMenuDemoDoc />
@@ -90,10 +87,10 @@ export class TreeContextMenuDemoDoc extends Component {
                 tabName: 'Class Source',
                 content: `
 import React, { Component } from 'react';
-import {Tree} from 'primereact/tree';
-import {ContextMenu} from 'primereact/contextmenu';
-import {Growl} from 'primereact/growl';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { ContextMenu } from 'primereact/contextmenu';
+import { Toast} from 'primereact/toast';
+import { NodeService } from '../service/NodeService';
 
 export class TreeContextMenuDemo extends Component {
 
@@ -110,7 +107,7 @@ export class TreeContextMenuDemo extends Component {
                 label: 'View Key',
                 icon: 'pi pi-search',
                 command: () => {
-                    this.growl.show({severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey});
+                    this.toast.show({severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey});
                 }
             },
             {
@@ -132,19 +129,21 @@ export class TreeContextMenuDemo extends Component {
     }
 
     componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({nodes: data}));
+        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
     }
 
     render() {
         return (
             <div>
-                <Growl ref={(el) => this.growl = el} />
+                <Toast ref={(el) => this.toast = el} />
 
-                <ContextMenu model={this.menu} ref={el => this.cm = el} onHide={() => this.setState({selectedNodeKey: null})}/>
+                <ContextMenu model={this.menu} ref={el => this.cm = el} onHide={() => this.setState({ selectedNodeKey: null })}/>
 
-                <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({expandedKeys: e.value})}
-                    contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({selectedNodeKey: event.value})}
-                    onContextMenu={event => this.cm.show(event.originalEvent)} />
+                <div className="card">
+                    <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({ expandedKeys: e.value })}
+                        contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({ selectedNodeKey: event.value })}
+                        onContextMenu={event => this.cm.show(event.originalEvent)} />
+                </div>
             </div>
         )
     }
@@ -155,24 +154,23 @@ export class TreeContextMenuDemo extends Component {
                 tabName: 'Hooks Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {Tree} from 'primereact/tree';
-import {ContextMenu} from 'primereact/contextmenu';
-import {Growl} from 'primereact/growl';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { ContextMenu } from 'primereact/contextmenu';
+import { Toast} from 'primereact/toast';
+import { NodeService } from '../service/NodeService';
 
 const TreeContextMenuDemo = () => {
     const [nodes, setNodes] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
-    let growl = useRef(null);
-    let cm = useRef(null);
-
+    const toast = useRef(null);
+    const cm = useRef(null);
     const menu = [
         {
             label: 'View Key',
             icon: 'pi pi-search',
             command: () => {
-                growl.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
+                toast.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
             }
         },
         {
@@ -198,13 +196,15 @@ const TreeContextMenuDemo = () => {
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)}/>
 
-            <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
-                contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
-                onContextMenu={event => cm.current.show(event.originalEvent)} />
+            <div className="card">
+                <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
+                    contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
+                    onContextMenu={event => cm.current.show(event.originalEvent)} />
+            </div>
         </div>
     )
 }
@@ -214,31 +214,30 @@ const TreeContextMenuDemo = () => {
                 tabName: 'TS Source',
                 content: `
 import React, { useState, useEffect, useRef } from 'react';
-import {Tree} from 'primereact/tree';
-import {ContextMenu} from 'primereact/contextmenu';
-import {Growl} from 'primereact/growl';
-import {NodeService} from '../service/NodeService';
+import { Tree } from 'primereact/tree';
+import { ContextMenu } from 'primereact/contextmenu';
+import { Toast} from 'primereact/toast';
+import { NodeService } from '../service/NodeService';
 
 const TreeContextMenuDemo = () => {
-    const [nodes, setNodes] = useState<any>(null);
+    const [nodes, setNodes] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
-    const [selectedNodeKey, setSelectedNodeKey] = useState<any>(null);
-    let growl = useRef<any>(null);
-    let cm = useRef<any>(null);
-
+    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
     const menu = [
         {
             label: 'View Key',
             icon: 'pi pi-search',
             command: () => {
-                growl.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
+                toast.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
             }
         },
         {
             label: 'Toggle',
             icon: 'pi pi-cog',
             command: () => {
-                let _expandedKeys:any = {...expandedKeys};
+                let _expandedKeys = {...expandedKeys};
                 if (_expandedKeys[selectedNodeKey])
                     delete _expandedKeys[selectedNodeKey];
                 else
@@ -257,13 +256,82 @@ const TreeContextMenuDemo = () => {
 
     return (
         <div>
-            <Growl ref={growl} />
+            <Toast ref={toast} />
 
             <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)}/>
 
-            <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
-                contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
-                onContextMenu={event => cm.current.show(event.originalEvent)} />
+            <div className="card">
+                <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
+                    contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
+                    onContextMenu={event => cm.current.show(event.originalEvent)} />
+            </div>
+        </div>
+    )
+}
+                `
+            },
+            'browser': {
+                tabName: 'Browser Source',
+                imports: `
+        <script src="./NodeService.js"></script>
+
+        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>
+        <script src="https://unpkg.com/primereact/contextmenu/contextmenu.min.js"></script>
+        <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
+                content: `
+const { useEffect, useState, useRef } = React;
+const { Tree } = primereact.tree;
+const { ContextMenu } = primereact.contextmenu;
+const { Toast } = primereact.toast;
+
+const TreeContextMenuDemo = () => {
+    const [nodes, setNodes] = useState(null);
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
+    const menu = [
+        {
+            label: 'View Key',
+            icon: 'pi pi-search',
+            command: () => {
+                toast.current.show({severity: 'success', summary: 'Node Key', detail: selectedNodeKey});
+            }
+        },
+        {
+            label: 'Toggle',
+            icon: 'pi pi-cog',
+            command: () => {
+                let _expandedKeys = {...expandedKeys};
+                if (_expandedKeys[selectedNodeKey])
+                    delete _expandedKeys[selectedNodeKey];
+                else
+                    _expandedKeys[selectedNodeKey] = true;
+
+                setExpandedKeys(_expandedKeys);
+            }
+        }
+    ];
+
+    const nodeService = new NodeService();
+
+    useEffect(() => {
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <div>
+            <Toast ref={toast} />
+
+            <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)}/>
+
+            <div className="card">
+                <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
+                    contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
+                    onContextMenu={event => cm.current.show(event.originalEvent)} />
+            </div>
         </div>
     )
 }
@@ -278,16 +346,10 @@ const TreeContextMenuDemo = () => {
 
     render() {
         return (
-            <div className="content-section documentation">
+            <div className="content-section documentation" id="app-doc">
                 <TabView>
                     {
-                        this.sources && Object.entries(this.sources).map(([key, value], index) => {
-                            return (
-                                <TabPanel key={`source_${index}`} header={value.tabName} contentClassName="source-content">
-                                    <LiveEditor name="TreeContextMenuDemo" sources={[key, value]} service="NodeService" data="treenodes" />
-                                </TabPanel>
-                            );
-                        })
+                        useLiveEditorTabs({ name: 'TreeContextMenuDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })
                     }
                 </TabView>
             </div>
