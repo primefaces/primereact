@@ -610,7 +610,7 @@ export class DataTableCrudDemo extends Component {
         const reader = new FileReader();
         reader.onload = (e) => {
             const csv = e.target.result;
-            const data = csv.split('\n');
+            const data = csv.split('\\n');
 
             // Prepare DataTable
             const cols = data[0].split(',');
@@ -976,7 +976,7 @@ const DataTableCrudDemo = () => {
         const reader = new FileReader();
         reader.onload = (e) => {
             const csv = e.target.result;
-            const data = csv.split('\n');
+            const data = csv.split('\\n');
 
             // Prepare DataTable
             const cols = data[0].split(',');
@@ -1338,7 +1338,7 @@ const DataTableCrudDemo = () => {
         const reader = new FileReader();
         reader.onload = (e) => {
             const csv = e.target.result;
-            const data = csv.split('\n');
+            const data = csv.split('\\n');
 
             // Prepare DataTable
             const cols = data[0].split(',');
@@ -1569,6 +1569,7 @@ const DataTableCrudDemo = () => {
         <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
         <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>
@@ -1719,7 +1720,7 @@ const DataTableCrudDemo = () => {
         const reader = new FileReader();
         reader.onload = (e) => {
             const csv = e.target.result;
-            const data = csv.split('\n');
+            const data = csv.split('\\n');
 
             // Prepare DataTable
             const cols = data[0].split(',');

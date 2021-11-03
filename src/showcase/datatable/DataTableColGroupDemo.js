@@ -455,6 +455,7 @@ const DataTableColGroupDemo = () => {
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/columngroup/columngroup.min.js"></script>
         <script src="https://unpkg.com/primereact/row/row.min.js"></script>

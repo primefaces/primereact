@@ -519,10 +519,12 @@ const DataTableStateDemo = () => {
     }
 
     const renderHeader = (filtersKey) => {
+        const filters = filtersMap[\`\${filtersKey}\`].value;
+
         return (
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" value={filtersMap[\`\${filtersKey}\`]['global'].value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
+                <InputText type="search" value={filters['global'].value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
             </span>
         );
     }
@@ -699,10 +701,12 @@ const DataTableStateDemo = () => {
     }
 
     const renderHeader = (filtersKey) => {
+        const filters = filtersMap[\`\${filtersKey}\`].value;
+
         return (
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" value={filtersMap[\`\${filtersKey}\`]['global'].value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
+                <InputText type="search" value={filters['global'].value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
             </span>
         );
     }
@@ -762,6 +766,7 @@ const DataTableStateDemo = () => {
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/multiselect/multiselect.min.js"></script>
@@ -890,10 +895,12 @@ const DataTableStateDemo = () => {
     }
 
     const renderHeader = (filtersKey) => {
+        const filters = filtersMap[\`\${filtersKey}\`].value;
+
         return (
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" value={filtersMap[\`\${filtersKey}\`]['global'].value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
+                <InputText type="search" value={filters['global'].value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
             </span>
         );
     }

@@ -1019,6 +1019,7 @@ const DataTableScrollDemo = () => {
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/togglebutton/togglebutton.min.js"></script>
         <script src="https://unpkg.com/primereact/dialog/dialog.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
                 content: `

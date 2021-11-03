@@ -221,7 +221,6 @@ import { Ripple } from 'primereact/ripple';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { CustomerService } from '../service/CustomerService';
-import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 
 export class DataTablePaginatorDemo extends Component {
@@ -352,10 +351,10 @@ export class DataTablePaginatorDemo extends Component {
                 ];
 
                 return (
-                    <>
+                    <React.Fragment>
                         <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                         <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} appendTo={document.body} />
-                    </>
+                    </React.Fragment>
                 );
             },
             'CurrentPageReport': (options) => {
@@ -416,7 +415,6 @@ import { Ripple } from 'primereact/ripple';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { CustomerService } from '../service/CustomerService';
-import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 
 const DataTablePaginatorDemo = () => {
@@ -531,10 +529,10 @@ const DataTablePaginatorDemo = () => {
             ];
 
             return (
-                <>
+                <React.Fragment>
                     <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} appendTo={document.body} />
-                </>
+                </React.Fragment>
             );
         },
         'CurrentPageReport': (options) => {
@@ -594,7 +592,6 @@ import { Ripple } from 'primereact/ripple';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 import { CustomerService } from '../service/CustomerService';
-import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 
 const DataTablePaginatorDemo = () => {
@@ -709,10 +706,10 @@ const DataTablePaginatorDemo = () => {
             ];
 
             return (
-                <>
+                <React.Fragment>
                     <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} appendTo={document.body} />
-                </>
+                </React.Fragment>
             );
         },
         'CurrentPageReport': (options) => {
@@ -771,6 +768,7 @@ const DataTablePaginatorDemo = () => {
         <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
         <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,
@@ -895,10 +893,10 @@ const DataTablePaginatorDemo = () => {
             ];
 
             return (
-                <>
+                <React.Fragment>
                     <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} appendTo={document.body} />
-                </>
+                </React.Fragment>
             );
         },
         'CurrentPageReport': (options) => {

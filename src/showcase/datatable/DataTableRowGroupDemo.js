@@ -15,7 +15,7 @@ export class DataTableRowGroupDemo extends Component {
         super(props);
         this.state = {
             customers: [],
-            expandedRowGroups: []
+            expandedRows: []
         };
 
         this.customerService = new CustomerService();
@@ -127,7 +127,7 @@ export class DataTableRowGroupDemo extends Component {
                         <p>Group customers by their representative.</p>
                         <DataTable value={this.state.customers} rowGroupMode="subheader" groupRowsBy="representative.name"
                             sortMode="single" sortField="representative.name" sortOrder={1}
-                            expandableRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
+                            expandedRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
                             onRowExpand={this.onRowGroupExpand} onRowCollapse={this.onRowGroupCollapse}
                             rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate} responsiveLayout="scroll">
                             <Column field="name" header="Name"></Column>
@@ -181,7 +181,7 @@ export class DataTableRowGroupDemo extends Component {
         super(props);
         this.state = {
             customers: [],
-            expandedRowGroups: []
+            expandedRows: []
         };
 
         this.customerService = new CustomerService();
@@ -284,7 +284,7 @@ export class DataTableRowGroupDemo extends Component {
                     <p>Group customers by their representative.</p>
                     <DataTable value={this.state.customers} rowGroupMode="subheader" groupRowsBy="representative.name"
                         sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll"
-                        expandableRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
+                        expandedRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
                         onRowExpand={this.onRowGroupExpand} onRowCollapse={this.onRowGroupCollapse}
                         rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}>
                         <Column field="name" header="Name"></Column>
@@ -327,7 +327,7 @@ import './DataTableDemo.css';
 const DataTableRowGroupDemo = () => {
 
     const [customers, setCustomers] = useState([]);
-    const [expandedRowGroups, setExpandedRowGroups] = useState([]);
+    const [expandedRows, setExpandedRows] = useState([]);
     const toast = useRef(null);
     const customerService = new CustomerService();
 
@@ -420,7 +420,7 @@ const DataTableRowGroupDemo = () => {
                 <p>Group customers by their representative.</p>
                 <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
                     sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll"
-                    expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                    expandedRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     onRowExpand={onRowGroupExpand} onRowCollapse={onRowGroupCollapse}
                     rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
                     <Column field="name" header="Name"></Column>
@@ -462,7 +462,7 @@ import './DataTableDemo.css';
 const DataTableRowGroupDemo = () => {
 
     const [customers, setCustomers] = useState([]);
-    const [expandedRowGroups, setExpandedRowGroups] = useState([]);
+    const [expandedRows, setExpandedRows] = useState([]);
     const toast = useRef(null);
     const customerService = new CustomerService();
 
@@ -555,7 +555,7 @@ const DataTableRowGroupDemo = () => {
                 <p>Group customers by their representative.</p>
                 <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
                     sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll"
-                    expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                    expandedRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     onRowExpand={onRowGroupExpand} onRowCollapse={onRowGroupCollapse}
                     rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
                     <Column field="name" header="Name"></Column>
@@ -592,6 +592,7 @@ const DataTableRowGroupDemo = () => {
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
@@ -604,7 +605,7 @@ const { Toast } = primereact.toast;
 const DataTableRowGroupDemo = () => {
 
     const [customers, setCustomers] = useState([]);
-    const [expandedRowGroups, setExpandedRowGroups] = useState([]);
+    const [expandedRows, setExpandedRows] = useState([]);
     const toast = useRef(null);
     const customerService = new CustomerService();
 
@@ -697,7 +698,7 @@ const DataTableRowGroupDemo = () => {
                 <p>Group customers by their representative.</p>
                 <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
                     sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll"
-                    expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                    expandedRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     onRowExpand={onRowGroupExpand} onRowCollapse={onRowGroupCollapse}
                     rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
                     <Column field="name" header="Name"></Column>

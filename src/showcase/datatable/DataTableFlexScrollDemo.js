@@ -113,20 +113,18 @@ const DataTableFlexScrollDemo = () => {
         customerService.getCustomersLarge().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    render() {
-        return (
-            <div>
-                <div className="card" style={{ height: 'calc(100vh - 145px)' }}>
-                    <DataTable value={customers} scrollable scrollHeight="flex">
-                        <Column field="name" header="Name"></Column>
-                        <Column field="country.name" header="Country"></Column>
-                        <Column field="representative.name" header="Representative"></Column>
-                        <Column field="status" header="Status"></Column>
-                    </DataTable>
-                </div>
+    return (
+        <div>
+            <div className="card" style={{ height: 'calc(100vh - 145px)' }}>
+                <DataTable value={customers} scrollable scrollHeight="flex">
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="status" header="Status"></Column>
+                </DataTable>
             </div>
-        );
-    }
+        </div>
+    );
 }
                 `
             },
@@ -147,20 +145,19 @@ const DataTableFlexScrollDemo = () => {
         customerService.getCustomersLarge().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    render() {
-        return (
-            <div>
-                <div className="card" style={{ height: 'calc(100vh - 145px)' }}>
-                    <DataTable value={customers} scrollable scrollHeight="flex">
-                        <Column field="name" header="Name"></Column>
-                        <Column field="country.name" header="Country"></Column>
-                        <Column field="representative.name" header="Representative"></Column>
-                        <Column field="status" header="Status"></Column>
-                    </DataTable>
-                </div>
+    return (
+        <div>
+            <div className="card" style={{ height: 'calc(100vh - 145px)' }}>
+                <DataTable value={customers} scrollable scrollHeight="flex">
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="status" header="Status"></Column>
+                </DataTable>
             </div>
-        );
-    }
+        </div>
+    );
+
 }
                 `
             },
@@ -171,6 +168,7 @@ const DataTableFlexScrollDemo = () => {
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
                 content: `
@@ -187,20 +185,19 @@ const DataTableFlexScrollDemo = () => {
         customerService.getCustomersLarge().then(data => setCustomers(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    render() {
-        return (
-            <div>
-                <div className="card" style={{ height: 'calc(100vh - 145px)' }}>
-                    <DataTable value={customers} scrollable scrollHeight="flex">
-                        <Column field="name" header="Name"></Column>
-                        <Column field="country.name" header="Country"></Column>
-                        <Column field="representative.name" header="Representative"></Column>
-                        <Column field="status" header="Status"></Column>
-                    </DataTable>
-                </div>
+    return (
+        <div>
+            <div className="card" style={{ height: 'calc(100vh - 145px)' }}>
+                <DataTable value={customers} scrollable scrollHeight="flex">
+                    <Column field="name" header="Name"></Column>
+                    <Column field="country.name" header="Country"></Column>
+                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="status" header="Status"></Column>
+                </DataTable>
             </div>
-        );
-    }
+        </div>
+    );
+
 }
                 `
             }

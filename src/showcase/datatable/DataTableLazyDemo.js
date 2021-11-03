@@ -286,7 +286,7 @@ const DataTableLazyDemo = () => {
         loadLazyData();
     },[lazyParams]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    loadLazyData() {
+    const loadLazyData = () => {
         setLoading(true);
 
         if (loadLazyTimeout) {
@@ -389,7 +389,7 @@ const DataTableLazyDemo = () => {
         loadLazyData();
     },[lazyParams]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    loadLazyData() {
+    const loadLazyData = () => {
         setLoading(true);
 
         if (loadLazyTimeout) {
@@ -467,6 +467,7 @@ const DataTableLazyDemo = () => {
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/multiselect/multiselect.min.js"></script>`,
@@ -502,7 +503,7 @@ const DataTableLazyDemo = () => {
         loadLazyData();
     },[lazyParams]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    loadLazyData() {
+    const loadLazyData = () => {
         setLoading(true);
 
         if (loadLazyTimeout) {

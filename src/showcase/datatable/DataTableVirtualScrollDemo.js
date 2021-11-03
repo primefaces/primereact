@@ -209,7 +209,7 @@ const DataTableVirtualScrollDemo = () => {
     const [cars, setCars] = useState(Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1)));
     const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
     const [lazyLoading, setLazyLoading] = useState(false);
-    const loadLazyTimeout = null;
+    let loadLazyTimeout = null;
 
     const loadCarsLazy = (event) => {
         !lazyLoading && setLazyLoading(true);
@@ -285,7 +285,7 @@ const DataTableVirtualScrollDemo = () => {
     const [cars, setCars] = useState(Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1)));
     const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
     const [lazyLoading, setLazyLoading] = useState(false);
-    const loadLazyTimeout = null;
+    let loadLazyTimeout = null;
 
     const loadCarsLazy = (event) => {
         !lazyLoading && setLazyLoading(true);
@@ -353,6 +353,7 @@ const DataTableVirtualScrollDemo = () => {
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/skeleton/skeleton.min.js"></script>`,
@@ -368,7 +369,7 @@ const DataTableVirtualScrollDemo = () => {
     const [cars, setCars] = useState(Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1)));
     const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
     const [lazyLoading, setLazyLoading] = useState(false);
-    const loadLazyTimeout = null;
+    let loadLazyTimeout = null;
 
     const loadCarsLazy = (event) => {
         !lazyLoading && setLazyLoading(true);

@@ -586,13 +586,13 @@ export class DataTableFilterDemo extends Component {
 
     activityFilterTemplate(options) {
         return (
-            <>
+            <React.Fragment>
                 <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
                 <div className="p-d-flex p-ai-center p-jc-between p-px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
-            </>
+            </React.Fragment>
         )
     }
 
@@ -752,7 +752,7 @@ const DataTableFilterDemo = () => {
         let _filters1 = { ...filters1 };
         _filters1['global'].value = value;
 
-        setFilter1(_filters1);
+        setFilters1(_filters1);
         setGlobalFilterValue1(value);
     }
 
@@ -761,11 +761,11 @@ const DataTableFilterDemo = () => {
         let _filters2 = { ...filters2 };
         _filters2['global'].value = value;
 
-        setFilter2(_filters2);
+        setFilters2(_filters2);
         setGlobalFilterValue2(value);
     }
 
-    initFilters1() {
+    const initFilters1 = () => {
         setFilters1({
             'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
             'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
@@ -881,13 +881,13 @@ const DataTableFilterDemo = () => {
 
     const activityFilterTemplate = (options) => {
         return (
-            <>
+            <React.Fragment>
                 <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
                 <div className="p-d-flex p-ai-center p-jc-between p-px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
-            </>
+            </React.Fragment>
         )
     }
 
@@ -1045,7 +1045,7 @@ const DataTableFilterDemo = () => {
         let _filters1 = { ...filters1 };
         _filters1['global'].value = value;
 
-        setFilter1(_filters1);
+        setFilters1(_filters1);
         setGlobalFilterValue1(value);
     }
 
@@ -1054,11 +1054,11 @@ const DataTableFilterDemo = () => {
         let _filters2 = { ...filters2 };
         _filters2['global'].value = value;
 
-        setFilter2(_filters2);
+        setFilters2(_filters2);
         setGlobalFilterValue2(value);
     }
 
-    initFilters1() {
+    const initFilters1 = () => {
         setFilters1({
             'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
             'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
@@ -1174,13 +1174,13 @@ const DataTableFilterDemo = () => {
 
     const activityFilterTemplate = (options) => {
         return (
-            <>
+            <React.Fragment>
                 <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
                 <div className="p-d-flex p-ai-center p-jc-between p-px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
-            </>
+            </React.Fragment>
         )
     }
 
@@ -1258,6 +1258,7 @@ const DataTableFilterDemo = () => {
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
@@ -1367,7 +1368,7 @@ const DataTableFilterDemo = () => {
         setGlobalFilterValue2(value);
     }
 
-    initFilters1() {
+    const initFilters1 = () => {
         setFilters1({
             'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
             'name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
@@ -1483,13 +1484,13 @@ const DataTableFilterDemo = () => {
 
     const activityFilterTemplate = (options) => {
         return (
-            <>
+            <React.Fragment>
                 <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
                 <div className="p-d-flex p-ai-center p-jc-between p-px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
-            </>
+            </React.Fragment>
         )
     }
 

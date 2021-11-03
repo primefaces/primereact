@@ -198,13 +198,13 @@ export class DataTableDemo extends Component {
 
     activityFilterTemplate(options) {
         return (
-            <>
+            <React.Fragment>
                 <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
                 <div className="p-d-flex p-ai-center p-jc-between p-px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
-            </>
+            </React.Fragment>
         )
     }
 
@@ -304,7 +304,7 @@ const DataTableDemo = () => {
     const customerService = new CustomerService();
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => { setCustomers(data), setLoading(false) });
+        customerService.getCustomersLarge().then(data => { setCustomers(getCustomers(data)); setLoading(false) });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const getCustomers = (data) => {
@@ -418,13 +418,13 @@ const DataTableDemo = () => {
 
     const activityFilterTemplate = (options) => {
         return (
-            <>
+            <React.Fragment>
                 <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
                 <div className="p-d-flex p-ai-center p-jc-between p-px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
-            </>
+            </React.Fragment>
         )
     }
 
@@ -522,7 +522,7 @@ const DataTableDemo = () => {
     const customerService = new CustomerService();
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => { setCustomers(data), setLoading(false) });
+        customerService.getCustomersLarge().then(data => { setCustomers(getCustomers(data)); setLoading(false) });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const getCustomers = (data) => {
@@ -636,13 +636,13 @@ const DataTableDemo = () => {
 
     const activityFilterTemplate = (options) => {
         return (
-            <>
+            <React.Fragment>
                 <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
                 <div className="p-d-flex p-ai-center p-jc-between p-px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
-            </>
+            </React.Fragment>
         )
     }
 
@@ -699,6 +699,7 @@ const DataTableDemo = () => {
         <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
         <script src="https://unpkg.com/primereact/inputnumber/inputnumber.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>
@@ -756,7 +757,7 @@ const DataTableDemo = () => {
     const customerService = new CustomerService();
 
     useEffect(() => {
-        customerService.getCustomersLarge().then(data => { setCustomers(data), setLoading(false) });
+        customerService.getCustomersLarge().then(data => { setCustomers(getCustomers(data)); setLoading(false) });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const getCustomers = (data) => {
