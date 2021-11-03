@@ -11,7 +11,7 @@ export class ChartDemo extends Component {
                 <div className="content-section introduction">
                     <AppInlineHeader changelogText="chart">
                         <h1>Charts</h1>
-                        <p>Chart components are based on <a style={{color:'black'}} href="http://www.chartjs.org/">Charts.js</a>, an open source HTML5 based charting library.</p>
+                        <p>Chart components are based on <a style={{color:'black'}} href="http://www.chartjs.org/">Chart.js</a>, an open source HTML5 based charting library.</p>
                     </AppInlineHeader> 
                     <AppDemoActions github="chart/ChartDemo.js" />
                 </div>
