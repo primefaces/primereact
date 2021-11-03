@@ -738,6 +738,10 @@ export default class DomHandler {
         return element && element.offsetParent != null;
     }
 
+    static isExist(element) {
+        return element !== null && typeof(element) !== 'undefined' && element.nodeName;
+    }
+
     static getFocusableElements(element, selector = '') {
         let focusableElements = DomHandler.find(element, `button:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
                 [href][clientHeight][clientWidth]:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
