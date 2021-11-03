@@ -11,7 +11,7 @@ export interface ButtonIconOptions {
     props: ButtonProps;
 }
 
-export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'disabled'> {
+export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'disabled'|'ref'> {
     label?: string;
     icon?: ButtonIconType;
     iconPos?: ButtonPositionType;

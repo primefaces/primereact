@@ -2,7 +2,7 @@ import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { KeyFilterType } from '../keyfilter';
 
-export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput'> {
+export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput'|'ref'> {
     keyfilter?: KeyFilterType;
     validateOnly?: boolean;
     tooltip?: string;
