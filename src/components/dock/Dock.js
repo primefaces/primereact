@@ -10,7 +10,10 @@ export class Dock extends Component {
         style: null,
         className: null,
         model: null,
-        position: 'bottom'
+        position: 'bottom',
+        magnification: true,
+        header: null,
+        footer: null
     };
 
     static propTypes = {
@@ -18,7 +21,10 @@ export class Dock extends Component {
         style: PropTypes.object,
         className: PropTypes.string,
         model: PropTypes.array,
-        position: PropTypes.string
+        position: PropTypes.string,
+        magnification: PropTypes.bool,
+        header: PropTypes.any,
+        footer: PropTypes.any
     };
 
     constructor(props) {
@@ -95,6 +101,18 @@ export class Dock extends Component {
         return null;
     }
 
+    renderHeader() {
+        if (this.props.header) {
+            return (
+                <div className="p-dock-header">
+                    {ObjectUtils.getJSXElement(this.props.header, { props: this.props })}
+                </div>
+            )
+        }
+
+        return null;
+    }
+
     renderList() {
         const items = this.renderItems();
 
@@ -105,14 +123,32 @@ export class Dock extends Component {
         )
     }
 
+    renderFooter() {
+        if (this.props.footer) {
+            return (
+                <div className="p-dock-footer">
+                    {ObjectUtils.getJSXElement(this.props.footer, { props: this.props })}
+                </div>
+            )
+        }
+
+        return null;
+    }
+
     render() {
-        const className = classNames(`p-dock p-component p-dock-${this.props.position}`, this.props.className);
+        const className = classNames(`p-dock p-component p-dock-${this.props.position}`, {
+            'p-dock-magnification': this.props.magnification
+        }, this.props.className);
+        const header = this.renderHeader();
         const list = this.renderList();
+        const footer = this.renderFooter();
 
         return (
             <div id={this.props.id} className={className} style={this.props.style}>
-                <div className="p-dock-list-container">
+                <div className="p-dock-container">
+                    {header}
                     {list}
+                    {footer}
                 </div>
             </div>
         );
