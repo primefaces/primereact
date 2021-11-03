@@ -746,7 +746,7 @@
 }
 .p-dropdown-panel .p-dropdown-header .p-dropdown-filter {
   padding-right: 1.5rem;
-  margin-right: 1.5rem;
+  margin-right: -1.5rem;
 }
 .p-dropdown-panel .p-dropdown-header .p-dropdown-filter-icon {
   right: 0.5rem;
@@ -754,6 +754,7 @@
 }
 .p-dropdown-panel .p-dropdown-header .p-dropdown-clearable-filter .p-dropdown-filter {
   padding-right: 3rem;
+  margin-right: -3rem;
 }
 .p-dropdown-panel .p-dropdown-header .p-dropdown-clearable-filter .p-dropdown-filter-clear-icon {
   right: 2rem;
