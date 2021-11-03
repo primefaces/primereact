@@ -399,6 +399,7 @@ export class FileUpload extends Component {
 
     onDragEnter(event) {
         if (!this.props.disabled) {
+            event.dataTransfer.dropEffect = "copy";
             event.stopPropagation();
             event.preventDefault();
         }
@@ -406,6 +407,7 @@ export class FileUpload extends Component {
 
     onDragOver(event) {
         if (!this.props.disabled) {
+            event.dataTransfer.dropEffect = "copy";
             DomHandler.addClass(this.content, 'p-fileupload-highlight');
             event.stopPropagation();
             event.preventDefault();
@@ -414,6 +416,7 @@ export class FileUpload extends Component {
 
     onDragLeave(event) {
         if (!this.props.disabled) {
+            event.dataTransfer.dropEffect = "copy";
             DomHandler.removeClass(this.content, 'p-fileupload-highlight');
         }
     }
