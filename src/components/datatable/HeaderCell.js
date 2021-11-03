@@ -221,7 +221,7 @@ export class HeaderCell extends Component {
     }
 
     renderTitle() {
-        const title = ObjectUtils.getJSXElement(this.getColumnProp('header'), { props: this.props });
+        const title = ObjectUtils.getJSXElement(this.getColumnProp('header'), { props: this.props.tableProps });
 
         return <span className="p-column-title">{title}</span>;
     }

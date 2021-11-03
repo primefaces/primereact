@@ -145,6 +145,9 @@ export class BodyCell extends Component {
 
             this.closeCell(event);
         }
+        else {
+            event.preventDefault();
+        }
     }
 
     findNextSelectableCell(cell) {
@@ -392,15 +395,15 @@ export class BodyCell extends Component {
     }
 
     onRowEditInit(event) {
-        this.props.onRowEditInit({ originalEvent: event, data: this.props.rowData, newData: this.getEditingRowData(), field: this.field, index: this.props.rowIndex, editorCallback: this.editorCallback });
+        this.props.onRowEditInit({ originalEvent: event, data: this.props.rowData, newData: this.getEditingRowData(), field: this.field, index: this.props.rowIndex });
     }
 
     onRowEditSave(event) {
-        this.props.onRowEditSave({ originalEvent: event, data: this.props.rowData, newData: this.getEditingRowData(), field: this.field, index: this.props.rowIndex, editorCallback: this.editorCallback });
+        this.props.onRowEditSave({ originalEvent: event, data: this.props.rowData, newData: this.getEditingRowData(), field: this.field, index: this.props.rowIndex });
     }
 
     onRowEditCancel(event) {
-        this.props.onRowEditCancel({ originalEvent: event, data: this.props.rowData, newData: this.getEditingRowData(), field: this.field, index: this.props.rowIndex, editorCallback: this.editorCallback });
+        this.props.onRowEditCancel({ originalEvent: event, data: this.props.rowData, newData: this.getEditingRowData(), field: this.field, index: this.props.rowIndex });
     }
 
     bindDocumentEditListener() {
@@ -514,13 +517,13 @@ export class BodyCell extends Component {
             'p-highlight': cellSelected,
         });
         const style = this.getStyle();
-        const title = this.props.responsiveLayout === 'stack' && <span className="p-column-title">{ObjectUtils.getJSXElement(header, { props: this.props })}</span>;
+        const title = this.props.responsiveLayout === 'stack' && <span className="p-column-title">{ObjectUtils.getJSXElement(header, { props: this.props.tableProps })}</span>;
 
         if (body && !this.state.editing) {
-            content = body ? ObjectUtils.getJSXElement(body, this.props.rowData, { column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow }) : value;
+            content = body ? ObjectUtils.getJSXElement(body, this.props.rowData, { column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps }) : value;
         }
         else if (editor && this.state.editing) {
-            content = ObjectUtils.getJSXElement(editor, { rowData: this.state.editingRowData, value: this.resolveFieldData(this.state.editingRowData), column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, editorCallback: this.editorCallback  });
+            content = ObjectUtils.getJSXElement(editor, { rowData: this.state.editingRowData, value: this.resolveFieldData(this.state.editingRowData), column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps, editorCallback: this.editorCallback  });
         }
         else if (selectionMode) {
             const showSelection = this.props.showSelectionElement ? this.props.showSelectionElement(this.props.rowData, { index: this.props.rowIndex, props: this.props.tableProps }) : true;

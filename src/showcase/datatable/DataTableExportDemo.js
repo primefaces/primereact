@@ -58,7 +58,7 @@ export class DataTableExportDemo extends Component {
             const data = csv.split('\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             let importedCols = cols.map(col => ({ field: col, header: this.toCapitalize(col.replace(/['"]+/g, '')) }));
@@ -295,7 +295,7 @@ export class DataTableExportDemo extends Component {
             const data = csv.split('\\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             let importedCols = cols.map(col => ({ field: col, header: this.toCapitalize(col.replace(/['"]+/g, '')) }));
@@ -499,7 +499,7 @@ export const DataTableExportDemo = () => {
             const data = csv.split('\\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             let _importedCols = cols.map(col => ({ field: col, header: toCapitalize(col.replace(/['"]+/g, '')) }));
@@ -694,7 +694,7 @@ export const DataTableExportDemo = () => {
             const data = csv.split('\\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             let _importedCols = cols.map(col => ({ field: col, header: toCapitalize(col.replace(/['"]+/g, '')) }));
@@ -902,7 +902,7 @@ const DataTableExportDemo = () => {
             const data = csv.split('\\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             let _importedCols = cols.map(col => ({ field: col, header: toCapitalize(col.replace(/['"]+/g, '')) }));

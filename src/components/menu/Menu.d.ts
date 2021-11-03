@@ -19,4 +19,6 @@ export interface MenuProps {
 
 export declare class Menu extends React.Component<MenuProps, any> {
     public toggle(event: React.SyntheticEvent): void;
+    public show(event: React.SyntheticEvent): void;
+    public hide(event: React.SyntheticEvent): void;
 }

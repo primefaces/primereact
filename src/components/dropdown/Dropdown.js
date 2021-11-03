@@ -921,7 +921,7 @@ export class Dropdown extends Component {
     }
 
     renderLabel(selectedOption) {
-        const label = selectedOption ? this.getOptionLabel(selectedOption) : null;
+        const label = ObjectUtils.isNotEmpty(selectedOption) ? this.getOptionLabel(selectedOption) : null;
 
         if (this.props.editable) {
             let value = label || this.props.value || '';

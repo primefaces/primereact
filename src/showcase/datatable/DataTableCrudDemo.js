@@ -187,7 +187,7 @@ export class DataTableCrudDemo extends Component {
             const data = csv.split('\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             const importedData = data.map(d => {
@@ -195,6 +195,7 @@ export class DataTableCrudDemo extends Component {
                 return cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
+                    (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
             });
@@ -613,7 +614,7 @@ export class DataTableCrudDemo extends Component {
             const data = csv.split('\\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             const importedData = data.map(d => {
@@ -621,6 +622,7 @@ export class DataTableCrudDemo extends Component {
                 return cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
+                    (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
             });
@@ -685,7 +687,7 @@ export class DataTableCrudDemo extends Component {
     rightToolbarTemplate() {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={this.importCSV} />
+                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={this.importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={this.exportCSV} />
             </React.Fragment>
         )
@@ -979,7 +981,7 @@ const DataTableCrudDemo = () => {
             const data = csv.split('\\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             const importedData = data.map(d => {
@@ -987,6 +989,7 @@ const DataTableCrudDemo = () => {
                 return cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
+                    (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
             });
@@ -1049,7 +1052,7 @@ const DataTableCrudDemo = () => {
     const rightToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={importCSV} />
+                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
             </React.Fragment>
         )
@@ -1341,7 +1344,7 @@ const DataTableCrudDemo = () => {
             const data = csv.split('\\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             const importedData = data.map(d => {
@@ -1349,6 +1352,7 @@ const DataTableCrudDemo = () => {
                 return cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
+                    (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
             });
@@ -1411,7 +1415,7 @@ const DataTableCrudDemo = () => {
     const rightToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={importCSV} />
+                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
             </React.Fragment>
         )
@@ -1723,7 +1727,7 @@ const DataTableCrudDemo = () => {
             const data = csv.split('\\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             const importedData = data.map(d => {
@@ -1731,6 +1735,7 @@ const DataTableCrudDemo = () => {
                 return cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
+                    (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
             });
@@ -1793,7 +1798,7 @@ const DataTableCrudDemo = () => {
     const rightToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={importCSV} />
+                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
             </React.Fragment>
         )

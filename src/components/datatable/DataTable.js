@@ -66,6 +66,7 @@ export class DataTable extends Component {
         filterLocale: undefined,
         scrollable: false,
         scrollHeight: null,
+        scrollDirection: 'vertical',
         virtualScrollerOptions: null,
         frozenWidth: null,
         frozenValue: null,
@@ -188,6 +189,7 @@ export class DataTable extends Component {
         filterLocale: PropTypes.string,
         scrollable: PropTypes.bool,
         scrollHeight: PropTypes.string,
+        scrollDirection: PropTypes.string,
         virtualScrollerOptions: PropTypes.object,
         frozenWidth: PropTypes.string,
         frozenValue: PropTypes.array,
@@ -351,13 +353,7 @@ export class DataTable extends Component {
     }
 
     getColumns(ignoreReorderable) {
-        const isValidType = (type) => type.name === 'Column';
-        const columns = React.Children.toArray(this.props.children).reduce((arr, child) => {
-            const type = child && child.type;
-            type && (isValidType(type) ? arr.push(child) : (type.toString() === 'Symbol(react.fragment)' && (arr = [...arr, ...React.Children.toArray(child.props.children).filter(c => isValidType(c.type))])));
-
-            return arr;
-        }, []);
+        const columns = React.Children.toArray(this.props.children);
 
         if (!columns) {
             return null;

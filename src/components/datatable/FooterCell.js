@@ -67,7 +67,7 @@ export class FooterCell extends Component {
         const colSpan = this.getColumnProp('colSpan');
         const rowSpan = this.getColumnProp('rowSpan');
 
-        let content = ObjectUtils.getJSXElement(this.getColumnProp('footer'), { props: this.props });
+        let content = ObjectUtils.getJSXElement(this.getColumnProp('footer'), { props: this.props.tableProps });
 
         return (
             <td ref={el => this.el = el} style={style} className={className} role="cell" colSpan={colSpan} rowSpan={rowSpan}>

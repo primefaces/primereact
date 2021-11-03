@@ -1,4 +1,125 @@
 {
+    "7.0.0-rc.2": {
+        "dialog": [
+            {
+                "number": 2378,
+                "title": "Improve modal animation on Dialog",
+                "url": "https://github.com/primefaces/primereact/issues/2378"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 2368,
+                "title": "Improve DataTable implementation",
+                "url": "https://github.com/primefaces/primereact/issues/2368"
+            },
+            {
+                "number": 2371,
+                "title": "Implemented new VirtualScroll feature for DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/2371"
+            },
+            {
+                "number": 2380,
+                "title": "Table columns not visible on Prod",
+                "url": "https://github.com/primefaces/primereact/issues/2380"
+            }
+        ],
+        "virtualscroller": [
+            {
+                "number": 2373,
+                "title": "Improve VirtualScroller component",
+                "url": "https://github.com/primefaces/primereact/issues/2373"
+            }
+        ],
+        "column": [
+            {
+                "number": 2368,
+                "title": "Improve DataTable implementation",
+                "url": "https://github.com/primefaces/primereact/issues/2368"
+            },
+            {
+                "number": 2374,
+                "title": "Improve Column attributes for Data components",
+                "url": "https://github.com/primefaces/primereact/issues/2374"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 2369,
+                "title": "Calendar Panel closes on the panel's mouseup event",
+                "url": "https://github.com/primefaces/primereact/issues/2369"
+            }
+        ],
+        "api": [
+            {
+                "number": 2376,
+                "title": "Remove FilterUtils class",
+                "url": "https://github.com/primefaces/primereact/issues/2376"
+            },
+            {
+                "number": 2368,
+                "title": "Improve DataTable implementation",
+                "url": "https://github.com/primefaces/primereact/issues/2368"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 2376,
+                "title": "Remove FilterUtils class",
+                "url": "https://github.com/primefaces/primereact/issues/2376"
+            },
+            {
+                "number": 2373,
+                "title": "Improve VirtualScroller component",
+                "url": "https://github.com/primefaces/primereact/issues/2373"
+            }
+        ],
+        "listbox": [
+            {
+                "number": 2376,
+                "title": "Remove FilterUtils class",
+                "url": "https://github.com/primefaces/primereact/issues/2376"
+            },
+            {
+                "number": 2373,
+                "title": "Improve VirtualScroller component",
+                "url": "https://github.com/primefaces/primereact/issues/2373"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 2376,
+                "title": "Remove FilterUtils class",
+                "url": "https://github.com/primefaces/primereact/issues/2376"
+            },
+            {
+                "number": 2373,
+                "title": "Improve VirtualScroller component",
+                "url": "https://github.com/primefaces/primereact/issues/2373"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 2376,
+                "title": "Remove FilterUtils class",
+                "url": "https://github.com/primefaces/primereact/issues/2376"
+            }
+        ],
+        "utils": [
+            {
+                "number": 2376,
+                "title": "Remove FilterUtils class",
+                "url": "https://github.com/primefaces/primereact/issues/2376"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 2373,
+                "title": "Improve VirtualScroller component",
+                "url": "https://github.com/primefaces/primereact/issues/2373"
+            }
+        ]
+    },
     "6.6.0-rc1": {
         "paginator": [
             {

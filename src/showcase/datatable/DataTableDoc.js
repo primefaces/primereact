@@ -1135,6 +1135,12 @@ export const DataTableDemo = () => {
                             <td>When enabled, the data of columns with this property cannot be sorted or changed by the user.</td>
                         </tr>
                         <tr>
+                            <td>dataType</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Depending on the dataType of the column, suitable match modes are displayed.</td>
+                        </tr>
+                        <tr>
                             <td>filter</td>
                             <td>boolean</td>
                             <td>false</td>
@@ -1193,6 +1199,144 @@ export const DataTableDemo = () => {
                             <td>string</td>
                             <td>null</td>
                             <td>Style class of the filter header.</td>
+                        </tr>
+                        <tr>
+                            <td>showFilterMenu</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Whether to display the filter overlay.</td>
+                        </tr>
+                        <tr>
+                            <td>showFilterOperator</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>When enabled, match all and match any operator selector is displayed.</td>
+                        </tr>
+                        <tr>
+                            <td>showClearButton</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Displays a button to clear the column filtering.</td>
+                        </tr>
+                        <tr>
+                            <td>showApplyButton</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Displays a button to apply the column filtering.</td>
+                        </tr>
+                        <tr>
+                            <td>showFilterMatchModes</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Whether to show the match modes selector.</td>
+                        </tr>
+                        <tr>
+                            <td>showFilterMenuOptions</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Whether to show the match modes selector and match operator selector.</td>
+                        </tr>
+                        <tr>
+                            <td>showAddButton</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>When enabled, a button is displayed to add more rules.</td>
+                        </tr>
+                        <tr>
+                            <td>filterMatchModeOptions</td>
+                            <td>array</td>
+                            <td>null</td>
+                            <td>An array of label-value pairs to override the global match mode options.</td>
+                        </tr>
+                        <tr>
+                            <td>maxConstraints</td>
+                            <td>number</td>
+                            <td>2</td>
+                            <td>Maximum number of constraints for a column filter.</td>
+                        </tr>
+                        <tr>
+                            <td>filterMenuClassName</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Style class of the column filter overlay.</td>
+                        </tr>
+                        <tr>
+                            <td>filterMenuStyle</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Inline style of the column filter overlay.</td>
+                        </tr>
+                        <tr>
+                            <td>alignFrozen</td>
+                            <td>string</td>
+                            <td>left</td>
+                            <td>Position of a frozen column, valid values are left and right.</td>
+                        </tr>
+                        <tr>
+                            <td>hidden</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether the column is rendered.</td>
+                        </tr>
+                        <tr>
+                            <td>onFilterClear</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Callback to invoke when the filter meta is cleared.</td>
+                        </tr>
+                        <tr>
+                            <td>onFilterApplyClick</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Callback to invoke when the apply button is clicked.</td>
+                        </tr>
+                        <tr>
+                            <td>onFilterMatchModeChange</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Callback to invoke when the match mode option is changed.</td>
+                        </tr>
+                        <tr>
+                            <td>onFilterOperatorChange</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Callback to invoke when the filter operator option is changed.</td>
+                        </tr>
+                        <tr>
+                            <td>onFilterConstraintAdd</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Callback to invoke when a new constraint is added.</td>
+                        </tr>
+                        <tr>
+                            <td>onFilterConstraintRemove</td>
+                            <td>function</td>
+                            <td>null</td>
+                            <td>Callback to invoke when a constraint is removed.</td>
+                        </tr>
+                        <tr>
+                            <td>filterClear</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template of clear element in menu.</td>
+                        </tr>
+                        <tr>
+                            <td>filterApply</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template of apply element in menu.</td>
+                        </tr>
+                        <tr>
+                            <td>filterHeader</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template of header element in menu.</td>
+                        </tr>
+                        <tr>
+                            <td>filterFooter</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Template of footer element in menu.</td>
                         </tr>
                         <tr>
                             <td>style</td>
@@ -1415,6 +1559,34 @@ export const DataTableTemplatingDemo = () => {
     );
 
 }
+`}
+</CodeHighlight>
+
+            <h5>Size</h5>
+            <p>In addition to the regular table, a smal and a large version are available with different paddings.</p>
+
+<CodeHighlight lang="js">
+{`
+<DataTable value={products} header="Small Table" size="small">
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="quantity" header="Quantity"></Column>
+</DataTable>
+
+<DataTable value={products} header="Small Table" size="normal">
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="quantity" header="Quantity"></Column>
+</DataTable>
+
+<DataTable value={products} header="Small Table" size="large">
+    <Column field="code" header="Code"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="category" header="Category"></Column>
+    <Column field="quantity" header="Quantity"></Column>
+</DataTable>
 `}
 </CodeHighlight>
 
@@ -1682,7 +1854,7 @@ const mysort = (event) => {
 </CodeHighlight>
 
             <p>Getting access to the sorted data is provided by the <i>onValueChange</i> callback.</p>
-<CodeHighlight lang="js">
+<CodeHighlight>
 {`
 <DataTable value={products} onValueChange={sortedData => console.log(sortedData)}>
     <Column field="code" header="Code" sortable></Column>
@@ -1694,48 +1866,130 @@ const mysort = (event) => {
 </CodeHighlight>
 
             <h5>Filtering</h5>
-            <p>Filtering is enabled by setting the <i>filter</i> property as true on a column. Default match mode is "startsWith" and this can be configured using <i>filterMatchMode</i> property that also accepts                 "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom" as available modes.</p>
- <CodeHighlight>
+            <p>DataTable has advanced filtering capabilities that does the heavy lifting while providing flexible customization. Filtering has two layout alternatives defined with the <i>filterDisplay</i>.
+            In <b>row</b> setting, filter elements are displayed in a separate row at the header section whereas
+            in <i>menu</i> mode filter elements are displayed inside an overlay. The template filter gets a <i>value</i>, <i>filterCallback</i> and <i>filterApplyCallback</i>,
+            use value to populate the filter with your own form components and call the filterCallback with the event of your choice like onInput, onChange, onClick.
+            FilterCallback adds new values in hidden 'filters' state in DataTable and when filterApplyCallback is called, data is filtered. The filterApplyCallback method can be used directly if you want to filter by value directly.</p>
+<CodeHighlight lang="js">
 {`
-<DataTable value={products}>
-    <Column field="code" header="Code" filter></Column>
-    <Column field="name" header="Name" filter filterPlaceholder="Search"></Column>
-    <Column field="category" header="Category" filter filterMatchMode="contains"></Column>
-    <Column field="quantity" header="Quantity" filter filterMatchMode="endsWith"></Column>
+const DataTableFilterDemo = () => {
+    const [customers, setCustomers] = useState(null);
+    const filters = {
+        'name': { value: null, matchMode: FilterMatchMode.STARTS_WITH }
+    }
+
+    return (
+        <DataTable value={customers} filters={filters}>
+            <Column field="name" header="Name" filter></Column>
+        </DataTable>
+    )
+}
+`}
+</CodeHighlight>
+
+            <h6>Filter Row</h6>
+            <p>Input field is displayed in a separate header row.</p>
+<CodeHighlight>
+{`
+<DataTable value={customers} filters={filters} filterDisplay="row">
+    <Column field="name" header="Name" filter></Column>
 </DataTable>
 `}
 </CodeHighlight>
 
-            <p>An optional global filter feature is available to search all fields with the same keyword,
-                to implement this place an input component whose value is bound to the globalFilter property of the DataTable.</p>
+            <h6>Filter Menu</h6>
+            <p>Input field is displayed in an overlay.</p>
+<CodeHighlight>
+{`
+<DataTable value={customers} filters={filters} filterDisplay="menu">
+    <Column field="name" header="Name" filter></Column>
+</DataTable>
+`}
+</CodeHighlight>
+
+            <h6>Multiple Constraints</h6>
+            <p>In "menu" display, it is possible to add more constraints to a same filter. In this case, metadata could be an array of constraints. The operator
+            defines whether all or any of the constraints should match.</p>
+
 <CodeHighlight lang="js">
 {`
-export const DataTableFilterDemo = () => {
-
-    const [products, setProducts] = useState([]);
-    const [globalFilter, setGlobalFilter] = useState(null);
-
-    useEffect(() => {
-        productService = new ProductService();
-        productService.getProductsSmall().then(data => setProducts(data));
-    } ,[])
-
-    let header = (
-        <div style={{'textAlign':'left'}}>
-            <i className="pi pi-search" style={{margin:'4px 4px 0 0'}}></i>
-            <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Global Search" size="50"/>
-        </div>
-    );
-
-    return (
-        <DataTable value={products} paginator rows={10} header={header} globalFilter={globalFilter}>
-            <Column field="code" header="Code" filter></Column>
-            <Column field="name" header="Name" filter></Column>
-            <Column field="category" header="Category" filter></Column>
-            <Column field="quantity" header="Quantity" filter></Column>
-        </DataTable>
-    );
+const filters = {
+    'name': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
 }
+`}
+</CodeHighlight>
+
+            <h6>Populate Filters</h6>
+            <p>Providing a filters with predefined values would be enough to display the table as filtered by default. This approach can also be used to clear filters progammatically.</p>
+<CodeHighlight lang="js">
+{`
+const filters = {
+    'name': {operator: FilterOperator.AND, constraints: [
+        {value: 'Prime', matchMode: FilterMatchMode.STARTS_WITH},
+        {value: 'React', matchMode: FilterMatchMode.CONTAINS}
+    ]}
+}
+`}
+</CodeHighlight>
+
+            <h6>Match Modes</h6>
+            <p>Depending on the <i>dataType</i> of the column, suitable match modes are displayed. Default configuration is available at <i>PrimeReact.filterMatchModeOptions</i> which can be used to customize the modes globally for all tables.</p>
+<CodeHighlight lang="js">
+{`
+PrimeReact.filterMatchModeOptions = {
+    text: [
+        FilterMatchMode.STARTS_WITH,
+        FilterMatchMode.CONTAINS,
+        FilterMatchMode.NOT_CONTAINS,
+        FilterMatchMode.ENDS_WITH,
+        FilterMatchMode.EQUALS,
+        FilterMatchMode.NOT_EQUALS
+    ],
+    numeric: [
+        FilterMatchMode.EQUALS,
+        FilterMatchMode.NOT_EQUALS,
+        FilterMatchMode.LESS_THAN,
+        FilterMatchMode.LESS_THAN_OR_EQUAL_TO,
+        FilterMatchMode.GREATER_THAN,
+        FilterMatchMode.GREATER_THAN_OR_EQUAL_TO
+    ],
+    date: [
+        FilterMatchMode.DATE_IS,
+        FilterMatchMode.DATE_IS_NOT,
+        FilterMatchMode.DATE_BEFORE,
+        FilterMatchMode.DATE_AFTER
+    ]
+}
+`}
+</CodeHighlight>
+
+            <p>If you need to override the match modes for a particular column use the <i>filterMatchModeOptions</i> property and provide an array with label-value pairs.</p>
+<CodeHighlight lang="js">
+{`
+const matchModes = [
+    {label: 'Starts With', FilterMatchMode.STARTS_WITH},
+    {label: 'Contains', FilterMatchMode.CONTAINS},
+];
+...
+<Column field="name" header="Name" filterMatchModeOptions={matchModes} />
+`}
+</CodeHighlight>
+
+            <h6>Custom Filter</h6>
+            <p>Custom filtering is implemented using the <i>FilterService</i>, first register your filter and add it to your <i>filterMatchModeOptions</i>.</p>
+<CodeHighlight lang="js">
+{`
+import {FilterService} from 'primereact/api';
+
+FilterService.register('myfilter', (a,b) => a === b);
+...
+
+const matchModes = [
+    {label: 'My Filter', "myfilter"},
+    {label: 'Starts With', FilterMatchMode.STARTS_WITH},
+    {label: 'Contains', FilterMatchMode.CONTAINS},
+]
 `}
 </CodeHighlight>
 
@@ -1745,17 +1999,17 @@ export const DataTableFilterDemo = () => {
 export const DataTableCustomFilterDemo = () => {
 
     const [products, setProducts] = useState([]);
-    const [inventoryStatus, setInventoryStatus] = useState(null);
-    const dt = useRef(null);
+    const filters = {
+        'inventoryStatus': { value: null, matchMode: FilterMatchMode.EQUALS }
+    };
 
     useEffect(() => {
         productService = new ProductService();
         productService.getProductsSmall().then(data => setProducts(data));
     } ,[])
 
-    const onStatusChange = (event) => {
-        dt.current.filter(event.value, 'inventoryStatus', 'equals');
-        setInventoryStatus(event.value);
+    const onStatusChange = (e, options) => {
+        options.filterCallback(event.value);
     }
 
     let inventoryStatuses = [
@@ -1765,11 +2019,11 @@ export const DataTableCustomFilterDemo = () => {
             {label: 'OUTOFSTOCK', value: 'OUTOFSTOCK'}
         ];
 
-    let statusFilter = <Dropdown style={{width: '100%'}} className="ui-column-filter"
-        value={inventoryStatus} options={inventoryStatuses} onChange={onStatusChange}/>
+    let statusFilter = (options) => <Dropdown style={{width: '100%'}} className="ui-column-filter"
+        value={options.value} options={inventoryStatuses} onChange={(e) => onStatusChange(e, options)}/>
 
     return (
-        <DataTable ref={dt} value={products}>
+        <DataTable value={products} filters={filters}>
             <Column field="code" header="Code" filter></Column>
             <Column field="name" header="Name" filter></Column>
             <Column field="category" header="Category" filter></Column>
@@ -1824,36 +2078,9 @@ export const DataTableDefaultFilteredDemo = () => {
 `}
 </CodeHighlight>
 
-            <p>Custom filtering is implemented by setting the <i>filterMatchMode</i> property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
-<CodeHighlight lang="js">
-{`
-export const DataTableFilterDemo = () => {
-
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        productService = new ProductService();
-        productService.getProductsSmall().then(data => setProducts(data));
-    }, [])
-
-    const codeFilter = (value, filter) => {
-        return filter > value;
-    }
-
-    return (
-        <DataTable value={products}>
-            <Column field="code" header="Code" filter filterMatchMode="custom" filterFunction={codeFilter}></Column>
-            <Column field="name" header="Name" filter></Column>
-            <Column field="category" header="Category" filter></Column>
-            <Column field="inventoryStatus" header="Status" filter></Column>
-        </DataTable>
-    );
-}
-`}
-</CodeHighlight>
 
             <p>Getting access to the filtered data is provided by the <i>onValueChange</i> callback.</p>
-            <CodeHighlight lang="js">
+<CodeHighlight>
 {`
 <DataTable value={products} onValueChange={filteredData => console.log(filteredData)}>
     <Column field="code" header="Code" filter></Column>
@@ -2348,7 +2575,7 @@ export const DataTableExportDemo = () => {
 </CodeHighlight>
 
             <h5>RowGrouping</h5>
-            <p>RowGrouping has two modes defined be the <i>rowGroupMode</i> property, in "subheader" option rows are grouped by a groupField and in "rowspan" mode grouping
+            <p>RowGrouping has two modes defined be the <i>rowGroupMode</i> property, in "subheader" option rows are grouped by a groupRowsBy and in "rowspan" mode grouping
             is done based on the sort field. In both cases, data should be sorted initally using the properties such as sortField and sortOrder. In "subheader" mode,
             <i>rowGroupHeaderTemplate</i> property should be defined to provide the content of the header and optionally <i>rowGroupFooterTemplate</i> is available to provide a footer
             for the group.</p>
@@ -2392,7 +2619,7 @@ const DataTableRowGroupDemo = () => {
 
     return (
         <div>
-            <DataTable header="SubHeader" value={products} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupField="name"
+            <DataTable header="SubHeader" value={products} rowGroupMode="subheader" sortField="brand" sortOrder={1} groupRowsBy="name"
                 rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
@@ -2400,7 +2627,7 @@ const DataTableRowGroupDemo = () => {
                 <Column field="price" header="Price"></Column>
             </DataTable>
 
-            <DataTable header="RowSpan" value={products} rowGroupMode="rowspan" sortField="brand" sortOrder={1} groupField="name"
+            <DataTable header="RowSpan" value={products} rowGroupMode="rowspan" sortField="brand" sortOrder={1} groupRowsBy="name"
                 style={{marginTop:'30px'}}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
@@ -2418,7 +2645,7 @@ const DataTableRowGroupDemo = () => {
             <p>DataTable supports both horizontal and vertical scrolling as well as frozen columns and rows. Scrollable DataTable is enabled using <i>scrollable</i> property and <i>scrollHeight</i> to define the viewport height.</p>
 <CodeHighlight>
 {`
-<DataTable value={products} scrollable scrollHeight="200px">
+<DataTable value={products} scrollable scrollHeight="400px">
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -2427,77 +2654,123 @@ const DataTableRowGroupDemo = () => {
 `}
 </CodeHighlight>
 
-            <p>Horizontal Scrolling requires a width of DataTable to be defined and explicit widths on columns.</p>
+            <h5>Column Widths of a Scrollable Table</h5>
+            <p>Scrollable table uses flex layout so there are a couple of rules to consider when adjusting the widths of columns.</p>
+            <ul>
+                <li>Use <i>min-width</i> in vertical scrolling only so that when there is enough space columns may grow and for smaller screens a horizontal scrollbar is displayed to provide responsive design.</li>
+                <li>When horizontal scrolling is enabled, prefer <i>width</i> instead of <i>min-width</i>.</li>
+                <li>In vertical scrolling only, use <i>flex</i> to disable grow and shrink while defining a initial width. When horizontal scrolling is enabled, this is not required as columns do not grow or shrink in horizontal scrolling.</li>
+            </ul>
+
 <CodeHighlight>
 {`
-<DataTable value={products} scrollable scrollHeight="200px" style={{width: '600px'}}>
-    <Column field="code" header="Code" style={{width:'250px'}}></Column>
-    <Column field="name" header="Name" style={{width:'250px'}}></Column>
-    <Column field="category" header="Category" style={{width:'250px'}}></Column>
-    <Column field="quantity" header="Quantity" style={{width:'250px'}}></Column>
+<Column field="code" header="Code" style={{ flex: '0 0 4rem' }}></Column>
+`}
+</CodeHighlight>
+
+            <h6>Flex Scroll</h6>
+            <p>In cases where viewport should adjust itself according to the table parent's height instead of a fixed viewport height, set scrollHeight option as flex. In example below, table is inside a Dialog where viewport size dynamically responds to the dialog size changes such as maximizing.</p>
+<CodeHighlight>
+{`
+<Button label="Show" icon="pi pi-external-link" onClick={() => setDialogVisible(true)} />
+<Dialog header="Flex Scroll" visible={dialogVisible} onHide={() => setDialogVisible(false)} style={{ width: '50vw' }} maximizable modal contentStyle={{ height: '300px' }}>
+    <DataTable value={products} scrollable scrollHeight="flex">
+        <Column field="code" header="Code"></Column>
+        <Column field="name" header="Name"></Column>
+        <Column field="category" header="Category"></Column>
+        <Column field="quantity" header="Quantity"></Column>
+    </DataTable>
+</Dialog>
+`}
+</CodeHighlight>
+
+            <h6>Full Page Scroll</h6>
+            <p>FlexScroll can also be used for cases where scrollable viewport should be responsive with respect to the window size. See the <router-link to="/datatable/flexscroll">full page</router-link> demo for an example.</p>
+<CodeHighlight>
+{`
+<div style={{ height: 'calc(100vh - 143px)' }}>
+    <DataTable value={products} scrollable scrollHeight="flex">
+        <Column field="code" header="Code"></Column>
+        <Column field="name" header="Name"></Column>
+        <Column field="category" header="Category"></Column>
+        <Column field="quantity" header="Quantity"></Column>
+    </DataTable>
+</div>
+`}
+</CodeHighlight>
+
+            <h6>Horizontal Scrolling</h6>
+            <p>For horizontal scrolling, it is required to set <i>scrollDirection</i> to "horizontal" and give fixed widths to columns.</p>
+<CodeHighlight>
+{`
+<DataTable value={products} scrollable scrollDirection="horizontal">
+    <Column field="code" header="Code" style={{ width: '200px' }}></Column>
+    <Column field="name" header="Name" style={{ width: '200px' }}></Column>
+    <Column field="category" header="Category" style={{ width: '200px' }}></Column>
+    <Column field="quantity" header="Quantity" style={{ width: '200px' }}></Column>
+    <Column field="code" header="Code" style={{ width: '200px' }}></Column>
+    <Column field="name" header="Name" style={{ width: '200px' }}></Column>
+    <Column field="category" header="Category" style={{ width: '200px' }}></Column>
+    <Column field="quantity" header="Quantity" style={{ width: '200px' }}></Column>
 </DataTable>
 `}
 </CodeHighlight>
 
-            <p>Certain columns can be frozen by using the <i>frozen</i> property of the column component. Widths of the frozen section is specified by the <i>frozenWidth</i> property.</p>
-
-<CodeHighlight>
-{`
-<DataTable value={products} scrollable scrollHeight="200px" style={{width: '800px'}} frozenWidth="200px">
-    <Column field="code" header="Code" style={{width:'250px'}} frozen></Column>
-    <Column field="name" header="Name" style={{width:'250px'}}></Column>
-    <Column field="category" header="Category" style={{width:'250px'}}></Column>
-    <Column field="quantity" header="Quantity" style={{width:'250px'}}></Column>
-    <Column field="price" header="Price" style={{width:'250px'}}></Column>
-    <Column field="rating" header="Rating" style={{width:'250px'}}></Column>
-    <Column field="description" header="Description" style={{width:'250px'}}></Column>
-    <Column field="inventoryStatus" header="Status" style={{width:'250px'}}></Column>
-</DataTable>
-`}
-</CodeHighlight>
-
-            <p>Note that frozen columns are enabled, frozen and scrollable cells may have content with varying height which leads to misalignment. Provide fixed height to cells to avoid alignment issues.</p>
+            <h6>Horizontal and Vertical Scrolling</h6>
+            <p>Set <i>scrollDirection</i> to "both" and give fixed widths to columns to scroll both ways.</p>
             <CodeHighlight>
-{`
-<DataTable value={products} scrollable scrollHeight="200px" style={{width: '800px'}} frozenWidth="200px">
-    <Column field="code" header="Code" style={{width:'250px', height: '25px'}} frozen></Column>
-    <Column field="name" header="Name" style={{width:'250px', height: '25px'}}></Column>
-    <Column field="category" header="Category" style={{width:'250px', height: '25px'}}></Column>
-    <Column field="quantity" header="Quantity" style={{width:'250px', height: '25px'}}></Column>
+            {`
+<DataTable value={products} scrollable scrollDirection="both" scrollHeight="400px">
+    <Column field="code" header="Code" style={{ width: '200px' }}></Column>
+    <Column field="name" header="Name" style={{ width: '200px' }}></Column>
+    <Column field="category" header="Category" style={{ width: '200px' }}></Column>
+    <Column field="quantity" header="Quantity" style={{ width: '200px' }}></Column>
+    <Column field="code" header="Code" style={{ width: '200px' }}></Column>
+    <Column field="name" header="Name" style={{ width: '200px' }}></Column>
+    <Column field="category" header="Category" style={{ width: '200px' }}></Column>
+    <Column field="quantity" header="Quantity" style={{ width: '200px' }}></Column>
 </DataTable>
 `}
 </CodeHighlight>
 
-            <p>One or more rows can be displayed as fixed using the <i>frozenValue</i> property.</p>
-<CodeHighlight>
-{`
-<DataTable header="Frozen Rows" value={products} frozenValue={frozenProducts} scrollable scrollHeight="200px" style={{marginTop:'30px'}}>
-    <Column field="code" header="Code"></Column>
-    <Column field="name" header="Name"></Column>
-    <Column field="category" header="Category"></Column>
-    <Column field="quantity" header="Quantity"></Column>
-</DataTable>
-`}
-</CodeHighlight>
-
-            <p>When using frozen columns with column grouping, use <i>frozenHeaderColumnGroup</i> and <i>frozenFooterColumnGroup</i> properties along with
-            <i>headerColumnGroup</i> and <i>footerColumnGroup</i>.</p>
-
-            <p>Virtual scrolling is enabled using <i>virtualScroll</i> and <i>onVirtualScroll</i> properties combined with lazy loading so that data is loaded on the fly during scrolling.
-            For smooth scrolling twice the amount of rows property is loaded on a lazy load event. In addition, to avoid performance problems row height is not calculated automatically and
-            should be provided using <i>virtualRowHeight</i> property which defaults to 28px. View the <Link to="/datatable/scroll">scrolling demo</Link> for a sample implementation.</p>
+            <h6>Frozen Rows</h6>
+            <p>Frozen rows are used to fix certain rows while scrolling, this data is defined with the <i>frozenValue</i> property.</p>
 
 <CodeHighlight>
 {`
-<DataTable value={lazyProducts} scrollable scrollHeight="200px" virtualScroll
-    rows={10} totalRecords={lazyTotalRecords} lazy onVirtualScroll={loadProductsLazy} style={{marginTop:'30px'}}>
-    <Column field="code" header="Code"></Column>
+<DataTable value={customers} frozenValue={lockedCustomers} scrollable scrollHeight="400px">
     <Column field="name" header="Name"></Column>
-    <Column field="category" header="Category"></Column>
-    <Column field="quantity" header="Quantity"></Column>
+    <Column field="country.name" header="Country"></Column>
+    <Column field="representative.name" header="Representative"></Column>
+    <Column field="status" header="Status"></Column>
 </DataTable>
 `}
 </CodeHighlight>
+
+            <h6>Frozen Columns</h6>
+            <p>Certain columns can be frozen by using the <i>frozen</i> property of the column component. In addition <i>alignFrozen</i> is available to define whether the column should
+            be fixed on the left or right.</p>
+
+<CodeHighlight>
+{`
+<DataTable value={customers} scrollable scrollHeight="400px" scrollDirection="both">
+    <Column field="name" header="Name" style={{ width:'200px' }} frozen></Column>
+    <Column field="id" header="Id" style={{ width:'100px' }}  frozen></Column>
+    <Column field="name" header="Name" style={{ width:'200px' }} </Column>
+    <Column field="country.name" header="Country" style={{ width:'200px' }} ></Column>
+    <Column field="date" header="Date" style={{ width:'200px' }} ></Column>
+    <Column field="company" header="Company" style={{ width:'200px' }} ></Column>
+    <Column field="status" header="Status" style={{ width:'200px' }} ></Column>
+    <Column field="activity" header="Activity" style={{ width:'200px' }} ></Column>
+    <Column field="representative.name" header="Representative" style={{ width:'200px' }} ></Column>
+    <Column field="balance" header="Balance" style={{ width:'200px' }} frozen alignFrozen="right"></Column>
+</DataTable>
+`}
+</CodeHighlight>
+
+            <h6>Scrollable RowGroup</h6>
+            <p>Row groups with subheaders have exclusive support for filtering, when the table scrolls the subheaders stay fixed as long as their
+            data are still displayed. No additional configuration is required to enable this feature. View the <router-link to="/datatable/rowgroup">Row Group</router-link> demo for an example.</p>
 
             <h5>Lazy Loading</h5>
             <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging, sorting and filtering happens. Sample belows imitates
@@ -2586,64 +2859,28 @@ export const DataTableStateDemo = () => {
 </CodeHighlight>
 
             <h5>Responsive</h5>
-            <p>DataTable display can be optimized according to screen sizes, this example demonstrates a sample demo where columns are stacked on small screens.</p>
+            <p>DataTable responsive layout can be achieved in two ways; first approach is displaying a horizontal scrollbar for smaller screens
+                and second one is defining a breakpoint to display the cells of a row as stacked. Scrollable tables use the scroll layout approach internally and do not require additional configuration.</p>
+
+            <h6>Scroll Layout</h6>
+            <p>Set <i>responsiveLayout</i> to scroll to enabled this layout. Note that, when scroll mode is enabled table-layout automatically switches to auto from fixed
+            as a result table widths are likely to differ and resizable columns are not supported. Read more about <a href="https://www.w3schools.com/cssref/pr_tab_table-layout.asp">table-layout</a> for more details.</p>
+
 <CodeHighlight>
 {`
-<DataTable value={products} className="p-datatable-responsive-demo">
-    <Column field="code" header="Code" body={bodyTemplate}></Column>
-    <Column field="name" header="Name" body={bodyTemplate}></Column>
-    <Column field="category" header="Category" body={bodyTemplate}></Column>
-    <Column field="quantity" header="Quantity" body={bodyTemplate}></Column>
+<DataTable value={products} responsiveLayout="scroll">
+
 </DataTable>
 `}
 </CodeHighlight>
 
-<CodeHighlight lang="js">
+            <h6>Stack Layout</h6>
+            <p>In stack layout, columns are displayed as stacked after a certain breakpoint. Default is '960px'.</p>
+<CodeHighlight>
 {`
-const bodyTemplate = (data, props) => {
-    return (
-        <React.Fragment>
-            <span className="p-column-title">{props.header}</span>
-            {data[props.field]}
-        </React.Fragment>
-    );
-}
-`}
-</CodeHighlight>
+<DataTable value={products} responsiveLayout="stack" breakpoint="640px">
 
-<CodeHighlight lang="scss">
-{`
-.p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
-    display: none;
-}
-
-@media screen and (max-width: 40em) {
-    .p-datatable {
-        &.p-datatable-responsive-demo {
-            .p-datatable-thead > tr > th,
-            .p-datatable-tfoot > tr > td {
-                display: none !important;
-            }
-
-            .p-datatable-tbody > tr > td {
-                text-align: left;
-                display: block;
-                border: 0 none !important;
-                width: 100% !important;
-                float: left;
-                clear: left;
-
-                .p-column-title {
-                    padding: .4rem;
-                    min-width: 30%;
-                    display: inline-block;
-                    margin: -.4em 1em -.4em -.4rem;
-                    font-weight: bold;
-                }
-            }
-        }
-    }
-}
+</DataTable>
 `}
 </CodeHighlight>
 
@@ -2905,18 +3142,6 @@ const bodyTemplate = (data, props) => {
                             <td>ColumnGroup component for footer.</td>
                         </tr>
                         <tr>
-                            <td>frozenHeaderColumnGroup</td>
-                            <td>ColumnGroup</td>
-                            <td>null</td>
-                            <td>ColumnGroup component for header of frozen columns.</td>
-                        </tr>
-                        <tr>
-                            <td>frozenFooterColumnGroup</td>
-                            <td>ColumnGroup</td>
-                            <td>null</td>
-                            <td>ColumnGroup component for footer of frozen columns.</td>
-                        </tr>
-                        <tr>
                             <td>rowExpansionTemplate</td>
                             <td>function</td>
                             <td>null</td>
@@ -2983,22 +3208,17 @@ const bodyTemplate = (data, props) => {
                             <td>Height of the scroll viewport.</td>
                         </tr>
                         <tr>
-                            <td>virtualScroll</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Whether the data should be loaded on demand during scroll.</td>
+                            <td>scrollDirection</td>
+                            <td>string</td>
+                            <td>vertical|horizontal</td>
+                            <td>Orientation of the scrolling, options are "vertical", "horizontal" and "both".</td>
                         </tr>
                         <tr>
-                            <td>virtualScrollDelay</td>
-                            <td>number</td>
-                            <td>250</td>
-                            <td>Delay in virtual scroll before doing a call to lazy load.</td>
-                        </tr>
-                        <tr>
-                            <td>virtualRowHeight</td>
-                            <td>number</td>
-                            <td>28</td>
-                            <td>Height of a row to use in calculations of virtual scrolling.</td>
+                            <td>virtualScrollerOptions</td>
+                            <td>object</td>
+                            <td>null</td>
+                            <td>Whether to use the virtualScroller feature. The properties of <Link to="virtualscroller">VirtualScroller</Link> component can be used like an object in it.
+                            <br /><b>Note:</b> Currently only vertical orientation mode is supported.</td>
                         </tr>
                         <tr>
                             <td>frozenWidth</td>
@@ -3135,6 +3355,48 @@ const bodyTemplate = (data, props) => {
                             <td>Whether to displays rows with alternating colors.</td>
                         </tr>
                         <tr>
+                            <td>size</td>
+                            <td>string</td>
+                            <td>normal</td>
+                            <td>Define to set alternative sizes. Valid values: "small", "normal" and "large".</td>
+                        </tr>
+                        <tr>
+                            <td>responsiveLayout</td>
+                            <td>string</td>
+                            <td>stack</td>
+                            <td>Defines the responsive mode, valid options are "stack" and "scroll".</td>
+                        </tr>
+                        <tr>
+                            <td>breakpoint</td>
+                            <td>string</td>
+                            <td>960px</td>
+                            <td>The breakpoint to define the maximum width boundary when using stack responsive layout.</td>
+                        </tr>
+                        <tr>
+                            <td>filterDisplay</td>
+                            <td>string</td>
+                            <td>menu</td>
+                            <td>Layout of the filter elements, valid values are "row" and "menu".</td>
+                        </tr>
+                        <tr>
+                            <td>expandedRowIcon</td>
+                            <td>string</td>
+                            <td>pi pi-chevron-down</td>
+                            <td>Icon of the row toggler to display the row as expanded.</td>
+                        </tr>
+                        <tr>
+                            <td>collapsedRowIcon</td>
+                            <td>string</td>
+                            <td>pi pi-chevron-up</td>
+                            <td>Icon of the row toggler to display the row as collapsed.</td>
+                        </tr>
+                        <tr>
+                            <td>globalFilterFields</td>
+                            <td>string[]</td>
+                            <td>null</td>
+                            <td>Define fields to be filtered globally.</td>
+                        </tr>
+                        <tr>
                             <td>showSelectionElement</td>
                             <td>function</td>
                             <td>null</td>
@@ -3231,12 +3493,6 @@ const bodyTemplate = (data, props) => {
                             <td>onFilter</td>
                             <td>event.filters: Collection of active filters.</td>
                             <td>Callback to invoke on filtering.</td>
-                        </tr>
-                        <tr>
-                            <td>onVirtualScroll</td>
-                            <td>event.first: Index of the first row. <br />
-                                event.rows: Rows per page.</td>
-                            <td>Callback to invoke during virtual scrolling.</td>
                         </tr>
                         <tr>
                             <td>onAllRowsSelect</td>
@@ -3351,6 +3607,15 @@ const bodyTemplate = (data, props) => {
                             <td>Callback to invoke when the row editor is programmatically shown/hidden on row editing mode.</td>
                         </tr>
                         <tr>
+                            <td>onRowEditComplete</td>
+                            <td>event.originalEvent: Browser event <br />
+                                event.data: Original rows data <br />
+                                event.newData: Editing rows data <br />
+                                event.field: Column field <br />
+                                event.index: Current editing row data index </td>
+                            <td>Callback to invoke when row edit is completed.</td>
+                        </tr>
+                        <tr>
                             <td>onStateSave</td>
                             <td>state: Table state</td>
                             <td>Callback to invoke table state is saved.</td>
@@ -3412,7 +3677,6 @@ const bodyTemplate = (data, props) => {
                 </table>
             </div>
 
-
             <h5>Styling</h5>
             <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
             <div className="doc-tablewrapper">
@@ -3429,12 +3693,36 @@ const bodyTemplate = (data, props) => {
                             <td>Container element.</td>
                         </tr>
                         <tr>
+                            <td>p-datatable-scrollable</td>
+                            <td>Container element when table is scrollable.</td>
+                        </tr>
+                        <tr>
                             <td>p-datatable-header</td>
                             <td>Header section.</td>
                         </tr>
                         <tr>
                             <td>p-datatable-footer</td>
                             <td>Footer section.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-wrapper</td>
+                            <td>Wrapper of table element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-table</td>
+                            <td>Table element.</td>
+                        </tr>
+                         <tr>
+                            <td>p-datatable-thead</td>
+                            <td>Table thead element.</td>
+                        </tr>
+                         <tr>
+                            <td>p-datatable-tbody</td>
+                            <td>Table tbody element.</td>
+                        </tr>
+                         <tr>
+                            <td>p-datatable-tfoot</td>
+                            <td>Table tfoot element.</td>
                         </tr>
                         <tr>
                             <td>p-column-title</td>
@@ -3444,29 +3732,9 @@ const bodyTemplate = (data, props) => {
                             <td>p-sortable-column</td>
                             <td>Sortable column header.</td>
                         </tr>
-                        <tr>
-                            <td>p-column-filter</td>
-                            <td>Filter element in header.</td>
-                        </tr>
-                        <tr>
-                            <td>p-datatable-scrollable-header</td>
-                            <td>Container of header in a scrollable table.</td>
-                        </tr>
-                        <tr>
-                            <td>p-datatable-scrollable-body</td>
-                            <td>Container of body in a scrollable table.</td>
-                        </tr>
-                        <tr>
-                            <td>p-datatable-scrollable-footer</td>
-                            <td>Container of footer in a scrollable table.</td>
-                        </tr>
-                        <tr>
-                            <td>p-datatable-responsive</td>
-                            <td>Container element of a responsive datatable.</td>
-                        </tr>
-                        <tr>
-                            <td>p-datatable-emptymessage</td>
-                            <td>Cell containing the empty message.</td>
+                         <tr>
+                            <td>p-frozen-column</td>
+                            <td>Frozen column header.</td>
                         </tr>
                         <tr>
                             <td>p-rowgroup-header</td>
@@ -3475,6 +3743,30 @@ const bodyTemplate = (data, props) => {
                         <tr>
                             <td>p-rowgroup-footer</td>
                             <td>Footer of a rowgroup.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-row-expansion</td>
+                            <td>Expanded row content.</td>
+                        </tr>
+                        <tr>
+                            <td>p-row-toggler</td>
+                            <td>Toggle element for row expansion.</td>
+                        </tr>
+                        <tr>
+                            <td>p-datatable-emptymessage</td>
+                            <td>Cell containing the empty message.</td>
+                        </tr>
+                        <tr>
+                            <td>p-row-editor-init</td>
+                            <td>Pencil button of row editor.</td>
+                        </tr>
+                        <tr>
+                            <td>p-row-editor-init</td>
+                            <td>Save button of row editor.</td>
+                        </tr>
+                        <tr>
+                            <td>p-row-editor-init</td>
+                            <td>Cancel button of row editor.</td>
                         </tr>
                     </tbody>
                 </table>
