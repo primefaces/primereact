@@ -13,8 +13,14 @@ PrimeReact is a rich set of open source UI Components for React. See [PrimeReact
 PrimeReact is available at npm, if you have an existing application run the following command to download it to your project.
 
 ```
-npm install primereact --save
-npm install primeicons --save
+npm install primereact
+npm install primeicons
+```
+or
+
+```
+yarn add primereact
+yarn add primeicons
 ```
 
 ## Import
