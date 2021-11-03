@@ -733,7 +733,7 @@ export class Dropdown extends Component {
     }
 
     isClearClicked(event) {
-        return DomHandler.hasClass(event.target, 'p-dropdown-clear-icon')
+        return DomHandler.hasClass(event.target, 'p-dropdown-clear-icon') || DomHandler.hasClass(event.target, 'p-dropdown-filter-clear-icon');
     }
 
     updateEditableLabel(option) {
