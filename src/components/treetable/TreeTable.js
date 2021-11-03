@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ObjectUtils, DomHandler, FilterUtils, classNames } from '../utils/Utils';
+import { FilterService } from '../api/Api';
+import { ObjectUtils, DomHandler, classNames } from '../utils/Utils';
 import { Paginator } from '../paginator/Paginator';
 import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableBody } from './TreeTableBody';
@@ -851,9 +852,9 @@ export class TreeTable extends Component {
 
                 //local
                 if (filterMeta) {
-                    let filterMatchMode = filterMeta.matchMode || col.props.filterMatchMode;
+                    let filterMatchMode = filterMeta.matchMode || col.props.filterMatchMode || 'startsWith';
                     filterValue = filterMeta.value;
-                    filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterUtils[filterMatchMode];
+                    filterConstraint = filterMatchMode === 'custom' ? col.props.filterFunction : FilterService.filters[filterMatchMode];
                     options = {
                         rowData: node,
                         filters,
@@ -880,7 +881,7 @@ export class TreeTable extends Component {
                 if (this.props.globalFilter && !globalMatch) {
                     let copyNodeForGlobal = { ...copyNode };
                     filterValue = this.props.globalFilter;
-                    filterConstraint = FilterUtils['contains'];
+                    filterConstraint = FilterService.filters['contains'];
                     paramsWithoutNode = { filterField, filterValue, filterConstraint, isStrictMode };
                     if ((isStrictMode && (this.findFilteredNodes(copyNodeForGlobal, paramsWithoutNode) || this.isFilterMatched(copyNodeForGlobal, paramsWithoutNode))) ||
                         (!isStrictMode && (this.isFilterMatched(copyNodeForGlobal, paramsWithoutNode) || this.findFilteredNodes(copyNodeForGlobal, paramsWithoutNode)))) {

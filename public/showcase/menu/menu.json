@@ -123,7 +123,7 @@
                 },
                 {
                     "name": "SASS API",
-                    "href": "https://www.primefaces.org/designer/api/primereact/6.1.0",
+                    "href": "https://www.primefaces.org/designer/api/primereact/6.3.0",
                     "meta": [
                         "sass api"
                     ]
@@ -239,8 +239,7 @@
                     "to": "/autocomplete",
                     "meta": [
                         "autocomplete"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Calendar",
@@ -284,8 +283,7 @@
                     "meta": [
                         "dropdown",
                         "selectOneMenu"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Editor",
@@ -369,16 +367,14 @@
                     "to": "/listbox",
                     "meta": [
                         "listbox"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Mention",
                     "to": "/mention",
                     "meta": [
                         "mention"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "MultiSelect",
@@ -386,8 +382,7 @@
                     "meta": [
                         "multiselect",
                         "selectCheckboxMenu"
-                    ],
-                    "badge": "updated"
+                    ]
                 },
                 {
                     "name": "Password",
@@ -481,8 +476,7 @@
                     "to": "/speeddial",
                     "meta": [
                         "speeddial"
-                    ],
-                    "badge": "new"
+                    ]
                 }
             ]
         },
@@ -529,6 +523,7 @@
                     "meta": [
                         "datatable"
                     ],
+                    "badge": "updated",
                     "children": [
                         {
                             "name": "Documentation",
@@ -626,6 +621,20 @@
                             "to": "/datatable/scroll",
                             "meta": [
                                 "scroll"
+                            ]
+                        },
+                        {
+                            "name": "FlexScroll",
+                            "to": "/datatable/flexscroll",
+                            "meta": [
+                                "flexscroll"
+                            ]
+                        },
+                        {
+                            "name": "VirtualScroll",
+                            "to": "/datatable/virtualscroll",
+                            "meta": [
+                                "virtualscroll"
                             ]
                         },
                         {
@@ -771,8 +780,7 @@
                     "to": "/virtualscroller",
                     "meta": [
                         "virtualscroller"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Google Maps",
@@ -1245,8 +1253,7 @@
                     "to": "/dock",
                     "meta": [
                         "dock"
-                    ],
-                    "badge": "new"
+                    ]
                 }
             ]
         },
@@ -1255,7 +1262,6 @@
             "meta": [
                 "chart"
             ],
-            "badge": "updated",
             "children": [
                 {
                     "name": "ChartModel",
@@ -1435,8 +1441,7 @@
                     "to": "/image",
                     "meta": [
                         "image"
-                    ],
-                    "badge": "new"
+                    ]
                 }
             ]
         },
@@ -1465,8 +1470,7 @@
                     "to": "/blockui",
                     "meta": [
                         "blockui"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Chip",
@@ -1537,16 +1541,14 @@
                     "to": "/terminal",
                     "meta": [
                         "terminal"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "StyleClass",
                     "to": "/styleclass",
                     "meta": [
                         "styleclass"
-                    ],
-                    "badge": "new"
+                    ]
                 }
             ]
         }

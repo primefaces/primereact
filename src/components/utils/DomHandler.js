@@ -74,6 +74,20 @@ export default class DomHandler {
         return 0;
     }
 
+    static getClientWidth(el, margin) {
+        if (el) {
+            let width = el.clientWidth;
+
+            if (margin) {
+                let style = getComputedStyle(el);
+                width += parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+            }
+
+            return width;
+        }
+        return 0;
+    }
+
     static getViewport() {
         let win = window,
             d = document,
@@ -126,6 +140,24 @@ export default class DomHandler {
                 let styles = className.split(' ');
                 for (let i = 0; i < styles.length; i++) {
                     element.className += ' ' + styles[i];
+                }
+            }
+        }
+    }
+
+    static removeMultipleClasses(element, className) {
+        if (element && className) {
+            if (element.classList) {
+                let styles = className.split(' ');
+                for (let i = 0; i < styles.length; i++) {
+                    element.classList.remove(styles[i]);
+                }
+
+            }
+            else {
+                let styles = className.split(' ');
+                for (let i = 0; i < styles.length; i++) {
+                    element.className = element.className.replace(new RegExp('(^|\\b)' + styles[i].split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
                 }
             }
         }
@@ -193,13 +225,13 @@ export default class DomHandler {
         return 0;
     }
 
-    static alignOverlay(overlay, target, appendTo) {
+    static alignOverlay(overlay, target, appendTo, calculateMinWidth = true) {
         if (overlay && target) {
             if (appendTo === 'self') {
                 this.relativePosition(overlay, target);
             }
             else {
-                overlay.style.minWidth = DomHandler.getOuterWidth(target) + 'px';
+                calculateMinWidth && (overlay.style.minWidth = DomHandler.getOuterWidth(target) + 'px');
                 this.absolutePosition(overlay, target);
             }
         }
@@ -461,8 +493,8 @@ export default class DomHandler {
             let parents = this.getParents(element);
             const overflowRegex = /(auto|scroll)/;
             const overflowCheck = (node) => {
-                let styleDeclaration = window['getComputedStyle'](node, null);
-                return overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowX')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowY'));
+                let styleDeclaration = node ? getComputedStyle(node) : null;
+                return styleDeclaration && (overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowX')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowY')));
             };
 
             for (let parent of parents) {
@@ -491,8 +523,8 @@ export default class DomHandler {
             element.style.visibility = 'hidden';
             element.style.display = 'block';
             let elementHeight = element.offsetHeight;
-            element.style.display = '';
-            element.style.visibility = '';
+            element.style.display = 'none';
+            element.style.visibility = 'visible';
 
             return elementHeight;
         }
@@ -504,8 +536,8 @@ export default class DomHandler {
             element.style.visibility = 'hidden';
             element.style.display = 'block';
             let elementWidth = element.offsetWidth;
-            element.style.display = '';
-            element.style.visibility = '';
+            element.style.display = 'none';
+            element.style.visibility = 'visible';
 
             return elementWidth;
         }
@@ -519,8 +551,8 @@ export default class DomHandler {
             element.style.display = 'block';
             dimensions.width = element.offsetWidth;
             dimensions.height = element.offsetHeight;
-            element.style.display = '';
-            element.style.visibility = '';
+            element.style.display = 'none';
+            element.style.visibility = 'visible';
         }
         return dimensions;
     }
@@ -706,12 +738,18 @@ export default class DomHandler {
         return element && element.offsetParent != null;
     }
 
-    static getFocusableElements(element) {
-        let focusableElements = DomHandler.find(element, `button:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]),
-                [href][clientHeight][clientWidth]:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]),
-                input:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), select:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]),
-                textarea:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]), [tabIndex]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden]),
-                [contenteditable]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])`
+    static isExist(element) {
+        return element !== null && typeof(element) !== 'undefined' && element.nodeName;
+    }
+
+    static getFocusableElements(element, selector = '') {
+        let focusableElements = DomHandler.find(element, `button:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+                [href][clientHeight][clientWidth]:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+                input:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+                select:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+                textarea:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+                [tabIndex]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+                [contenteditable]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector}`
         );
 
         let visibleFocusableElements = [];
@@ -723,13 +761,13 @@ export default class DomHandler {
         return visibleFocusableElements;
     }
 
-    static getFirstFocusableElement(element) {
-        const focusableElements = DomHandler.getFocusableElements(element);
+    static getFirstFocusableElement(element, selector) {
+        const focusableElements = DomHandler.getFocusableElements(element, selector);
         return focusableElements.length > 0 ? focusableElements[0] : null;
     }
 
-    static getLastFocusableElement(element) {
-        const focusableElements = DomHandler.getFocusableElements(element);
+    static getLastFocusableElement(element, selector) {
+        const focusableElements = DomHandler.getFocusableElements(element, selector);
         return focusableElements.length > 0 ? focusableElements[focusableElements.length - 1] : null;
     }
 
@@ -774,5 +812,56 @@ export default class DomHandler {
             top: 'auto',
             left: 'auto'
         };
+    }
+
+    static invokeElementMethod(element, methodName, args) {
+        (element)[methodName].apply(element, args);
+    }
+
+    static isClickable(element) {
+        const targetNode = element.nodeName;
+        const parentNode = element.parentElement && element.parentElement.nodeName;
+
+        return (targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' ||
+                parentNode === 'INPUT' || parentNode === 'BUTTON' || parentNode === 'A' ||
+                this.hasClass(element, 'p-button') || this.hasClass(element.parentElement, 'p-button') ||
+                this.hasClass(element.parentElement, 'p-checkbox') || this.hasClass(element.parentElement, 'p-radiobutton')
+        );
+    }
+
+    static applyStyle(element, style) {
+        if (typeof style === 'string') {
+            element.style.cssText = this.style;
+        }
+        else {
+            for (let prop in this.style) {
+                element.style[prop] = style[prop];
+            }
+        }
+    }
+
+    static exportCSV(csv, filename) {
+        let blob = new Blob([csv], {
+            type: 'application/csv;charset=utf-8;'
+        });
+
+        if (window.navigator.msSaveOrOpenBlob) {
+            navigator.msSaveOrOpenBlob(blob, filename + '.csv');
+        }
+        else {
+            let link = document.createElement("a");
+            if (link.download !== undefined) {
+                link.setAttribute('href', URL.createObjectURL(blob));
+                link.setAttribute('download', filename + '.csv');
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            else {
+                csv = 'data:text/csv;charset=utf-8,' + csv;
+                window.open(encodeURI(csv));
+            }
+        }
     }
 }

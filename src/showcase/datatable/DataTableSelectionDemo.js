@@ -83,7 +83,7 @@ export class DataTableSelectionDemo extends Component {
                         <p>In single mode, a row or cell is selected on its click event. If it is already selected then it gets unselected using meta key.</p>
 
                         <h6>Row Selection</h6>
-                        <DataTable value={this.state.products} selectionMode="single" selection={this.state.selectedProduct1} onSelectionChange={e => this.setState({ selectedProduct1: e.value })} dataKey="id">
+                        <DataTable value={this.state.products} selectionMode="single" selection={this.state.selectedProduct1} onSelectionChange={e => this.setState({ selectedProduct1: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -91,7 +91,7 @@ export class DataTableSelectionDemo extends Component {
                         </DataTable>
 
                         <h6>Cell Selection</h6>
-                        <DataTable value={this.state.products} selectionMode="single" cellSelection selection={this.state.selectedProduct2} onSelectionChange={e => this.setState({ selectedProduct2: e.value })} dataKey="id">
+                        <DataTable value={this.state.products} selectionMode="single" cellSelection selection={this.state.selectedProduct2} onSelectionChange={e => this.setState({ selectedProduct2: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -105,7 +105,7 @@ export class DataTableSelectionDemo extends Component {
                         Setting metaKeySelection property as false enables multiple selection without meta key. In addition, the rectangular selection can be dragged over the desired rows or cells thanks to the dragSelection property. In this way, a range of rows or cells can be selected.</p>
 
                         <h6>Row Selection with MetaKey</h6>
-                        <DataTable value={this.state.products} selectionMode="multiple" selection={this.state.selectedProducts1} onSelectionChange={e => this.setState({ selectedProducts1: e.value })} dataKey="id">
+                        <DataTable value={this.state.products} selectionMode="multiple" selection={this.state.selectedProducts1} onSelectionChange={e => this.setState({ selectedProducts1: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -113,7 +113,7 @@ export class DataTableSelectionDemo extends Component {
                         </DataTable>
 
                         <h6>Row Selection without MetaKey</h6>
-                        <DataTable value={this.state.products} selectionMode="multiple" metaKeySelection={false} selection={this.state.selectedProducts2} onSelectionChange={e => this.setState({ selectedProducts2: e.value })} dataKey="id">
+                        <DataTable value={this.state.products} selectionMode="multiple" metaKeySelection={false} selection={this.state.selectedProducts2} onSelectionChange={e => this.setState({ selectedProducts2: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -121,7 +121,7 @@ export class DataTableSelectionDemo extends Component {
                         </DataTable>
 
                         <h6>Row Selection with Drag Selection</h6>
-                        <DataTable value={this.state.products} selectionMode="multiple" dragSelection selection={this.state.selectedProducts3} onSelectionChange={e => this.setState({ selectedProducts3: e.value })} dataKey="id">
+                        <DataTable value={this.state.products} selectionMode="multiple" dragSelection selection={this.state.selectedProducts3} onSelectionChange={e => this.setState({ selectedProducts3: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -129,7 +129,7 @@ export class DataTableSelectionDemo extends Component {
                         </DataTable>
 
                         <h6>Cell Selection with MetaKey</h6>
-                        <DataTable value={this.state.products} selectionMode="multiple" cellSelection selection={this.state.selectedProducts4} onSelectionChange={e => this.setState({ selectedProducts4: e.value })} dataKey="id">
+                        <DataTable value={this.state.products} selectionMode="multiple" cellSelection selection={this.state.selectedProducts4} onSelectionChange={e => this.setState({ selectedProducts4: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -137,7 +137,7 @@ export class DataTableSelectionDemo extends Component {
                         </DataTable>
 
                         <h6>Cell Selection without MetaKey</h6>
-                        <DataTable value={this.state.products} selectionMode="multiple" cellSelection metaKeySelection={false} selection={this.state.selectedProducts5} onSelectionChange={e => this.setState({ selectedProducts5: e.value })} dataKey="id">
+                        <DataTable value={this.state.products} selectionMode="multiple" cellSelection metaKeySelection={false} selection={this.state.selectedProducts5} onSelectionChange={e => this.setState({ selectedProducts5: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -145,7 +145,7 @@ export class DataTableSelectionDemo extends Component {
                         </DataTable>
 
                         <h6>Cell Selection with Drag Selection</h6>
-                        <DataTable value={this.state.products} selectionMode="multiple" cellSelection dragSelection selection={this.state.selectedProducts6} onSelectionChange={e => this.setState({ selectedProducts6: e.value })} dataKey="id">
+                        <DataTable value={this.state.products} selectionMode="multiple" cellSelection dragSelection selection={this.state.selectedProducts6} onSelectionChange={e => this.setState({ selectedProducts6: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -159,7 +159,7 @@ export class DataTableSelectionDemo extends Component {
 
                         <h6>Row Selection</h6>
                         <p>onRowSelect and onRowUnselects are available as selection events.</p>
-                        <DataTable value={this.state.products} selectionMode="single" selection={this.state.selectedProduct3} onSelectionChange={e => this.setState({ selectedProduct3: e.value })} dataKey="id"
+                        <DataTable value={this.state.products} selectionMode="single" selection={this.state.selectedProduct3} onSelectionChange={e => this.setState({ selectedProduct3: e.value })} dataKey="id" responsiveLayout="scroll"
                             onRowSelect={this.onRowSelect} onRowUnselect={this.onRowUnselect}>
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
@@ -169,7 +169,7 @@ export class DataTableSelectionDemo extends Component {
 
                         <h6>Cell Selection</h6>
                         <p>onCellSelect and onCellUnselects are available as selection events.</p>
-                        <DataTable value={this.state.products} selectionMode="single" cellSelection selection={this.state.selectedProduct4} onSelectionChange={e => this.setState({ selectedProduct4: e.value })} dataKey="id"
+                        <DataTable value={this.state.products} selectionMode="single" cellSelection selection={this.state.selectedProduct4} onSelectionChange={e => this.setState({ selectedProduct4: e.value })} dataKey="id" responsiveLayout="scroll"
                             onCellSelect={this.onCellSelect} onCellUnselect={this.onCellUnselect}>
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
@@ -183,7 +183,7 @@ export class DataTableSelectionDemo extends Component {
                         <p>Single selection can also be handled using radio buttons and rows by enabling the selectionMode property of column as "single".</p>
 
                         <h6>Row and RadioButton Selection</h6>
-                        <DataTable value={this.state.products} selection={this.state.selectedProduct5} onSelectionChange={e => this.setState({ selectedProduct5: e.value })} dataKey="id">
+                        <DataTable value={this.state.products} selection={this.state.selectedProduct5} onSelectionChange={e => this.setState({ selectedProduct5: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column selectionMode="single" headerStyle={{ width: '3em' }}></Column>
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
@@ -192,7 +192,7 @@ export class DataTableSelectionDemo extends Component {
                         </DataTable>
 
                         <h6>RadioButton-Only Selection</h6>
-                        <DataTable value={this.state.products} selectionMode="radiobutton" selection={this.state.selectedProduct6} onSelectionChange={e => this.setState({ selectedProduct6: e.value })} dataKey="id">
+                        <DataTable value={this.state.products} selectionMode="radiobutton" selection={this.state.selectedProduct6} onSelectionChange={e => this.setState({ selectedProduct6: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column selectionMode="single" headerStyle={{ width: '3em' }}></Column>
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
@@ -205,7 +205,7 @@ export class DataTableSelectionDemo extends Component {
                         <h5>Checkbox</h5>
 
                         <h6>Row and Checkbox Selection</h6>
-                        <DataTable value={this.state.products} selection={this.state.selectedProducts7} onSelectionChange={e => this.setState({ selectedProducts7: e.value })} dataKey="id">
+                        <DataTable value={this.state.products} selection={this.state.selectedProducts7} onSelectionChange={e => this.setState({ selectedProducts7: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
@@ -214,7 +214,7 @@ export class DataTableSelectionDemo extends Component {
                         </DataTable>
 
                         <h6>Checkbox-Only Selection</h6>
-                        <DataTable value={this.state.products} selectionMode="checkbox" selection={this.state.selectedProducts8} onSelectionChange={e => this.setState({ selectedProducts8: e.value })} dataKey="id">
+                        <DataTable value={this.state.products} selectionMode="checkbox" selection={this.state.selectedProducts8} onSelectionChange={e => this.setState({ selectedProducts8: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
@@ -310,7 +310,7 @@ export class DataTableSelectionDemo extends Component {
                     <p>In single mode, a row or cell is selected on its click event. If it is already selected then it gets unselected using meta key.</p>
 
                     <h6>Row Selection</h6>
-                    <DataTable value={this.state.products} selectionMode="single" selection={this.state.selectedProduct1} onSelectionChange={e => this.setState({ selectedProduct1: e.value })} dataKey="id">
+                    <DataTable value={this.state.products} selectionMode="single" selection={this.state.selectedProduct1} onSelectionChange={e => this.setState({ selectedProduct1: e.value })} dataKey="id" responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -318,7 +318,7 @@ export class DataTableSelectionDemo extends Component {
                     </DataTable>
 
                     <h6>Cell Selection</h6>
-                    <DataTable value={this.state.products} selectionMode="single" cellSelection selection={this.state.selectedProduct2} onSelectionChange={e => this.setState({ selectedProduct2: e.value })} dataKey="id">
+                    <DataTable value={this.state.products} selectionMode="single" cellSelection selection={this.state.selectedProduct2} onSelectionChange={e => this.setState({ selectedProduct2: e.value })} dataKey="id" responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -332,7 +332,7 @@ export class DataTableSelectionDemo extends Component {
                     Setting metaKeySelection property as false enables multiple selection without meta key. In addition, the rectangular selection can be dragged over the desired rows or cells thanks to the dragSelection property. In this way, a range of rows or cells can be selected.</p>
 
                     <h6>Row Selection with MetaKey</h6>
-                    <DataTable value={this.state.products} selectionMode="multiple" selection={this.state.selectedProducts1} onSelectionChange={e => this.setState({ selectedProducts1: e.value })} dataKey="id">
+                    <DataTable value={this.state.products} selectionMode="multiple" selection={this.state.selectedProducts1} onSelectionChange={e => this.setState({ selectedProducts1: e.value })} dataKey="id" responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -340,7 +340,7 @@ export class DataTableSelectionDemo extends Component {
                     </DataTable>
 
                     <h6>Row Selection without MetaKey</h6>
-                    <DataTable value={this.state.products} selectionMode="multiple" metaKeySelection={false} selection={this.state.selectedProducts2} onSelectionChange={e => this.setState({ selectedProducts2: e.value })} dataKey="id">
+                    <DataTable value={this.state.products} selectionMode="multiple" metaKeySelection={false} selection={this.state.selectedProducts2} onSelectionChange={e => this.setState({ selectedProducts2: e.value })} dataKey="id" responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -348,7 +348,7 @@ export class DataTableSelectionDemo extends Component {
                     </DataTable>
 
                     <h6>Row Selection with Drag Selection</h6>
-                    <DataTable value={this.state.products} selectionMode="multiple" dragSelection selection={this.state.selectedProducts3} onSelectionChange={e => this.setState({ selectedProducts3: e.value })} dataKey="id">
+                    <DataTable value={this.state.products} selectionMode="multiple" dragSelection selection={this.state.selectedProducts3} onSelectionChange={e => this.setState({ selectedProducts3: e.value })} dataKey="id" responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -356,7 +356,7 @@ export class DataTableSelectionDemo extends Component {
                     </DataTable>
 
                     <h6>Cell Selection with MetaKey</h6>
-                    <DataTable value={this.state.products} selectionMode="multiple" cellSelection selection={this.state.selectedProducts4} onSelectionChange={e => this.setState({ selectedProducts4: e.value })} dataKey="id">
+                    <DataTable value={this.state.products} selectionMode="multiple" cellSelection selection={this.state.selectedProducts4} onSelectionChange={e => this.setState({ selectedProducts4: e.value })} dataKey="id" responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -364,7 +364,7 @@ export class DataTableSelectionDemo extends Component {
                     </DataTable>
 
                     <h6>Cell Selection without MetaKey</h6>
-                    <DataTable value={this.state.products} selectionMode="multiple" cellSelection metaKeySelection={false} selection={this.state.selectedProducts5} onSelectionChange={e => this.setState({ selectedProducts5: e.value })} dataKey="id">
+                    <DataTable value={this.state.products} selectionMode="multiple" cellSelection metaKeySelection={false} selection={this.state.selectedProducts5} onSelectionChange={e => this.setState({ selectedProducts5: e.value })} dataKey="id" responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -372,7 +372,7 @@ export class DataTableSelectionDemo extends Component {
                     </DataTable>
 
                     <h6>Cell Selection with Drag Selection</h6>
-                    <DataTable value={this.state.products} selectionMode="multiple" cellSelection dragSelection selection={this.state.selectedProducts6} onSelectionChange={e => this.setState({ selectedProducts6: e.value })} dataKey="id">
+                    <DataTable value={this.state.products} selectionMode="multiple" cellSelection dragSelection selection={this.state.selectedProducts6} onSelectionChange={e => this.setState({ selectedProducts6: e.value })} dataKey="id" responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -386,7 +386,7 @@ export class DataTableSelectionDemo extends Component {
 
                     <h6>Row Selection</h6>
                     <p>onRowSelect and onRowUnselects are available as selection events.</p>
-                    <DataTable value={this.state.products} selectionMode="single" selection={this.state.selectedProduct3} onSelectionChange={e => this.setState({ selectedProduct3: e.value })} dataKey="id"
+                    <DataTable value={this.state.products} selectionMode="single" selection={this.state.selectedProduct3} onSelectionChange={e => this.setState({ selectedProduct3: e.value })} dataKey="id" responsiveLayout="scroll"
                         onRowSelect={this.onRowSelect} onRowUnselect={this.onRowUnselect}>
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
@@ -396,7 +396,7 @@ export class DataTableSelectionDemo extends Component {
 
                     <h6>Cell Selection</h6>
                     <p>onCellSelect and onCellUnselects are available as selection events.</p>
-                    <DataTable value={this.state.products} selectionMode="single" cellSelection selection={this.state.selectedProduct4} onSelectionChange={e => this.setState({ selectedProduct4: e.value })} dataKey="id"
+                    <DataTable value={this.state.products} selectionMode="single" cellSelection selection={this.state.selectedProduct4} onSelectionChange={e => this.setState({ selectedProduct4: e.value })} dataKey="id" responsiveLayout="scroll"
                         onCellSelect={this.onCellSelect} onCellUnselect={this.onCellUnselect}>
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
@@ -410,7 +410,7 @@ export class DataTableSelectionDemo extends Component {
                     <p>Single selection can also be handled using radio buttons and rows by enabling the selectionMode property of column as "single".</p>
 
                     <h6>Row and RadioButton Selection</h6>
-                    <DataTable value={this.state.products} selection={this.state.selectedProduct5} onSelectionChange={e => this.setState({ selectedProduct5: e.value })} dataKey="id">
+                    <DataTable value={this.state.products} selection={this.state.selectedProduct5} onSelectionChange={e => this.setState({ selectedProduct5: e.value })} dataKey="id" responsiveLayout="scroll">
                         <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
@@ -419,7 +419,7 @@ export class DataTableSelectionDemo extends Component {
                     </DataTable>
 
                     <h6>RadioButton-Only Selection</h6>
-                    <DataTable value={this.state.products} selectionMode="radiobutton" selection={this.state.selectedProduct6} onSelectionChange={e => this.setState({ selectedProduct6: e.value })} dataKey="id">
+                    <DataTable value={this.state.products} selectionMode="radiobutton" selection={this.state.selectedProduct6} onSelectionChange={e => this.setState({ selectedProduct6: e.value })} dataKey="id" responsiveLayout="scroll">
                         <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
@@ -432,7 +432,7 @@ export class DataTableSelectionDemo extends Component {
                     <h5>Checkbox</h5>
 
                     <h6>Row and Checkbox Selection</h6>
-                    <DataTable value={this.state.products} selection={this.state.selectedProducts7} onSelectionChange={e => this.setState({ selectedProducts7: e.value })} dataKey="id">
+                    <DataTable value={this.state.products} selection={this.state.selectedProducts7} onSelectionChange={e => this.setState({ selectedProducts7: e.value })} dataKey="id" responsiveLayout="scroll">
                         <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
@@ -441,7 +441,7 @@ export class DataTableSelectionDemo extends Component {
                     </DataTable>
 
                     <h6>Checkbox-Only Selection</h6>
-                    <DataTable value={this.state.products} selectionMode="checkbox" selection={this.state.selectedProducts8} onSelectionChange={e => this.setState({ selectedProducts8: e.value })} dataKey="id">
+                    <DataTable value={this.state.products} selectionMode="checkbox" selection={this.state.selectedProducts8} onSelectionChange={e => this.setState({ selectedProducts8: e.value })} dataKey="id" responsiveLayout="scroll">
                         <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
@@ -519,7 +519,7 @@ const DataTableSelectionDemo = () => {
                 <p>In single mode, a row or cell is selected on its click event. If it is already selected then it gets unselected using meta key.</p>
 
                 <h6>Row Selection</h6>
-                <DataTable value={products} selectionMode="single" selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="single" selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -527,7 +527,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Cell Selection</h6>
-                <DataTable value={products} selectionMode="single" cellSelection selection={selectedProduct2} onSelectionChange={e => setSelectedProduct2(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="single" cellSelection selection={selectedProduct2} onSelectionChange={e => setSelectedProduct2(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -541,7 +541,7 @@ const DataTableSelectionDemo = () => {
                 Setting metaKeySelection property as false enables multiple selection without meta key. In addition, the rectangular selection can be dragged over the desired rows or cells thanks to the dragSelection property. In this way, a range of rows or cells can be selected.</p>
 
                 <h6>Row Selection with MetaKey</h6>
-                <DataTable value={products} selectionMode="multiple" selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -549,7 +549,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Row Selection without MetaKey</h6>
-                <DataTable value={products} selectionMode="multiple" metaKeySelection={false} selection={selectedProducts2} onSelectionChange={e => setSelectedProducts2(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" metaKeySelection={false} selection={selectedProducts2} onSelectionChange={e => setSelectedProducts2(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -557,7 +557,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Row Selection with Drag Selection</h6>
-                <DataTable value={products} selectionMode="multiple" dragSelection selection={selectedProducts3} onSelectionChange={e => setSelectedProducts3(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" dragSelection selection={selectedProducts3} onSelectionChange={e => setSelectedProducts3(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -565,7 +565,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Cell Selection with MetaKey</h6>
-                <DataTable value={products} selectionMode="multiple" cellSelection selection={selectedProducts4} onSelectionChange={e => setSelectedProducts4(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" cellSelection selection={selectedProducts4} onSelectionChange={e => setSelectedProducts4(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -573,7 +573,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Cell Selection without MetaKey</h6>
-                <DataTable value={products} selectionMode="multiple" cellSelection metaKeySelection={false} selection={selectedProducts5} onSelectionChange={e => setSelectedProducts5(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" cellSelection metaKeySelection={false} selection={selectedProducts5} onSelectionChange={e => setSelectedProducts5(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -581,7 +581,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Cell Selection with Drag Selection</h6>
-                <DataTable value={products} selectionMode="multiple" cellSelection dragSelection selection={selectedProducts6} onSelectionChange={e => setSelectedProducts6(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" cellSelection dragSelection selection={selectedProducts6} onSelectionChange={e => setSelectedProducts6(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -595,7 +595,7 @@ const DataTableSelectionDemo = () => {
 
                 <h6>Row Selection</h6>
                 <p>onRowSelect and onRowUnselects are available as selection events.</p>
-                <DataTable value={products} selectionMode="single" selection={selectedProduct3} onSelectionChange={e => setSelectedProduct3(e.value)} dataKey="id"
+                <DataTable value={products} selectionMode="single" selection={selectedProduct3} onSelectionChange={e => setSelectedProduct3(e.value)} dataKey="id" responsiveLayout="scroll"
                     onRowSelect={onRowSelect} onRowUnselect={onRowUnselect}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -605,7 +605,7 @@ const DataTableSelectionDemo = () => {
 
                 <h6>Cell Selection</h6>
                 <p>onCellSelect and onCellUnselects are available as selection events.</p>
-                <DataTable value={products} selectionMode="single" cellSelection selection={selectedProduct4} onSelectionChange={e => setSelectedProduct4(e.value)} dataKey="id"
+                <DataTable value={products} selectionMode="single" cellSelection selection={selectedProduct4} onSelectionChange={e => setSelectedProduct4(e.value)} dataKey="id" responsiveLayout="scroll"
                     onCellSelect={onCellSelect} onCellUnselect={onCellUnselect}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -619,7 +619,7 @@ const DataTableSelectionDemo = () => {
                 <p>Single selection can also be handled using radio buttons and rows by enabling the selectionMode property of column as "single".</p>
 
                 <h6>Row and RadioButton Selection</h6>
-                <DataTable value={products} selection={selectedProduct5} onSelectionChange={e => setSelectedProduct5(e.value)} dataKey="id">
+                <DataTable value={products} selection={selectedProduct5} onSelectionChange={e => setSelectedProduct5(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -628,7 +628,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>RadioButton-Only Selection</h6>
-                <DataTable value={products} selectionMode="radiobutton" selection={selectedProduct6} onSelectionChange={e => setSelectedProduct6(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="radiobutton" selection={selectedProduct6} onSelectionChange={e => setSelectedProduct6(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -641,7 +641,7 @@ const DataTableSelectionDemo = () => {
                 <h5>Checkbox</h5>
 
                 <h6>Row and Checkbox Selection</h6>
-                <DataTable value={products} selection={selectedProducts7} onSelectionChange={e => setSelectedProducts7(e.value)} dataKey="id">
+                <DataTable value={products} selection={selectedProducts7} onSelectionChange={e => setSelectedProducts7(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -650,7 +650,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Checkbox-Only Selection</h6>
-                <DataTable value={products} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -727,7 +727,7 @@ const DataTableSelectionDemo = () => {
                 <p>In single mode, a row or cell is selected on its click event. If it is already selected then it gets unselected using meta key.</p>
 
                 <h6>Row Selection</h6>
-                <DataTable value={products} selectionMode="single" selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="single" selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -735,7 +735,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Cell Selection</h6>
-                <DataTable value={products} selectionMode="single" cellSelection selection={selectedProduct2} onSelectionChange={e => setSelectedProduct2(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="single" cellSelection selection={selectedProduct2} onSelectionChange={e => setSelectedProduct2(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -749,7 +749,7 @@ const DataTableSelectionDemo = () => {
                 Setting metaKeySelection property as false enables multiple selection without meta key. In addition, the rectangular selection can be dragged over the desired rows or cells thanks to the dragSelection property. In this way, a range of rows or cells can be selected.</p>
 
                 <h6>Row Selection with MetaKey</h6>
-                <DataTable value={products} selectionMode="multiple" selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -757,7 +757,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Row Selection without MetaKey</h6>
-                <DataTable value={products} selectionMode="multiple" metaKeySelection={false} selection={selectedProducts2} onSelectionChange={e => setSelectedProducts2(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" metaKeySelection={false} selection={selectedProducts2} onSelectionChange={e => setSelectedProducts2(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -765,7 +765,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Row Selection with Drag Selection</h6>
-                <DataTable value={products} selectionMode="multiple" dragSelection selection={selectedProducts3} onSelectionChange={e => setSelectedProducts3(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" dragSelection selection={selectedProducts3} onSelectionChange={e => setSelectedProducts3(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -773,7 +773,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Cell Selection with MetaKey</h6>
-                <DataTable value={products} selectionMode="multiple" cellSelection selection={selectedProducts4} onSelectionChange={e => setSelectedProducts4(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" cellSelection selection={selectedProducts4} onSelectionChange={e => setSelectedProducts4(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -781,7 +781,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Cell Selection without MetaKey</h6>
-                <DataTable value={products} selectionMode="multiple" cellSelection metaKeySelection={false} selection={selectedProducts5} onSelectionChange={e => setSelectedProducts5(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" cellSelection metaKeySelection={false} selection={selectedProducts5} onSelectionChange={e => setSelectedProducts5(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -789,7 +789,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Cell Selection with Drag Selection</h6>
-                <DataTable value={products} selectionMode="multiple" cellSelection dragSelection selection={selectedProducts6} onSelectionChange={e => setSelectedProducts6(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" cellSelection dragSelection selection={selectedProducts6} onSelectionChange={e => setSelectedProducts6(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -803,7 +803,7 @@ const DataTableSelectionDemo = () => {
 
                 <h6>Row Selection</h6>
                 <p>onRowSelect and onRowUnselects are available as selection events.</p>
-                <DataTable value={products} selectionMode="single" selection={selectedProduct3} onSelectionChange={e => setSelectedProduct3(e.value)} dataKey="id"
+                <DataTable value={products} selectionMode="single" selection={selectedProduct3} onSelectionChange={e => setSelectedProduct3(e.value)} dataKey="id" responsiveLayout="scroll"
                     onRowSelect={onRowSelect} onRowUnselect={onRowUnselect}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -813,7 +813,7 @@ const DataTableSelectionDemo = () => {
 
                 <h6>Cell Selection</h6>
                 <p>onCellSelect and onCellUnselects are available as selection events.</p>
-                <DataTable value={products} selectionMode="single" cellSelection selection={selectedProduct4} onSelectionChange={e => setSelectedProduct4(e.value)} dataKey="id"
+                <DataTable value={products} selectionMode="single" cellSelection selection={selectedProduct4} onSelectionChange={e => setSelectedProduct4(e.value)} dataKey="id" responsiveLayout="scroll"
                     onCellSelect={onCellSelect} onCellUnselect={onCellUnselect}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -827,7 +827,7 @@ const DataTableSelectionDemo = () => {
                 <p>Single selection can also be handled using radio buttons and rows by enabling the selectionMode property of column as "single".</p>
 
                 <h6>Row and RadioButton Selection</h6>
-                <DataTable value={products} selection={selectedProduct5} onSelectionChange={e => setSelectedProduct5(e.value)} dataKey="id">
+                <DataTable value={products} selection={selectedProduct5} onSelectionChange={e => setSelectedProduct5(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -836,7 +836,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>RadioButton-Only Selection</h6>
-                <DataTable value={products} selectionMode="radiobutton" selection={selectedProduct6} onSelectionChange={e => setSelectedProduct6(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="radiobutton" selection={selectedProduct6} onSelectionChange={e => setSelectedProduct6(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -849,7 +849,7 @@ const DataTableSelectionDemo = () => {
                 <h5>Checkbox</h5>
 
                 <h6>Row and Checkbox Selection</h6>
-                <DataTable value={products} selection={selectedProducts7} onSelectionChange={e => setSelectedProducts7(e.value)} dataKey="id">
+                <DataTable value={products} selection={selectedProducts7} onSelectionChange={e => setSelectedProducts7(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -858,7 +858,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Checkbox-Only Selection</h6>
-                <DataTable value={products} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -879,6 +879,7 @@ const DataTableSelectionDemo = () => {
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
@@ -942,7 +943,7 @@ const DataTableSelectionDemo = () => {
                 <p>In single mode, a row or cell is selected on its click event. If it is already selected then it gets unselected using meta key.</p>
 
                 <h6>Row Selection</h6>
-                <DataTable value={products} selectionMode="single" selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="single" selection={selectedProduct1} onSelectionChange={e => setSelectedProduct1(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -950,7 +951,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Cell Selection</h6>
-                <DataTable value={products} selectionMode="single" cellSelection selection={selectedProduct2} onSelectionChange={e => setSelectedProduct2(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="single" cellSelection selection={selectedProduct2} onSelectionChange={e => setSelectedProduct2(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -964,7 +965,7 @@ const DataTableSelectionDemo = () => {
                 Setting metaKeySelection property as false enables multiple selection without meta key. In addition, the rectangular selection can be dragged over the desired rows or cells thanks to the dragSelection property. In this way, a range of rows or cells can be selected.</p>
 
                 <h6>Row Selection with MetaKey</h6>
-                <DataTable value={products} selectionMode="multiple" selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" selection={selectedProducts1} onSelectionChange={e => setSelectedProducts1(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -972,7 +973,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Row Selection without MetaKey</h6>
-                <DataTable value={products} selectionMode="multiple" metaKeySelection={false} selection={selectedProducts2} onSelectionChange={e => setSelectedProducts2(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" metaKeySelection={false} selection={selectedProducts2} onSelectionChange={e => setSelectedProducts2(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -980,7 +981,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Row Selection with Drag Selection</h6>
-                <DataTable value={products} selectionMode="multiple" dragSelection selection={selectedProducts3} onSelectionChange={e => setSelectedProducts3(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" dragSelection selection={selectedProducts3} onSelectionChange={e => setSelectedProducts3(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -988,7 +989,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Cell Selection with MetaKey</h6>
-                <DataTable value={products} selectionMode="multiple" cellSelection selection={selectedProducts4} onSelectionChange={e => setSelectedProducts4(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" cellSelection selection={selectedProducts4} onSelectionChange={e => setSelectedProducts4(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -996,7 +997,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Cell Selection without MetaKey</h6>
-                <DataTable value={products} selectionMode="multiple" cellSelection metaKeySelection={false} selection={selectedProducts5} onSelectionChange={e => setSelectedProducts5(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" cellSelection metaKeySelection={false} selection={selectedProducts5} onSelectionChange={e => setSelectedProducts5(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -1004,7 +1005,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Cell Selection with Drag Selection</h6>
-                <DataTable value={products} selectionMode="multiple" cellSelection dragSelection selection={selectedProducts6} onSelectionChange={e => setSelectedProducts6(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="multiple" cellSelection dragSelection selection={selectedProducts6} onSelectionChange={e => setSelectedProducts6(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -1018,7 +1019,7 @@ const DataTableSelectionDemo = () => {
 
                 <h6>Row Selection</h6>
                 <p>onRowSelect and onRowUnselects are available as selection events.</p>
-                <DataTable value={products} selectionMode="single" selection={selectedProduct3} onSelectionChange={e => setSelectedProduct3(e.value)} dataKey="id"
+                <DataTable value={products} selectionMode="single" selection={selectedProduct3} onSelectionChange={e => setSelectedProduct3(e.value)} dataKey="id" responsiveLayout="scroll"
                     onRowSelect={onRowSelect} onRowUnselect={onRowUnselect}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -1028,7 +1029,7 @@ const DataTableSelectionDemo = () => {
 
                 <h6>Cell Selection</h6>
                 <p>onCellSelect and onCellUnselects are available as selection events.</p>
-                <DataTable value={products} selectionMode="single" cellSelection selection={selectedProduct4} onSelectionChange={e => setSelectedProduct4(e.value)} dataKey="id"
+                <DataTable value={products} selectionMode="single" cellSelection selection={selectedProduct4} onSelectionChange={e => setSelectedProduct4(e.value)} dataKey="id" responsiveLayout="scroll"
                     onCellSelect={onCellSelect} onCellUnselect={onCellUnselect}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -1042,7 +1043,7 @@ const DataTableSelectionDemo = () => {
                 <p>Single selection can also be handled using radio buttons and rows by enabling the selectionMode property of column as "single".</p>
 
                 <h6>Row and RadioButton Selection</h6>
-                <DataTable value={products} selection={selectedProduct5} onSelectionChange={e => setSelectedProduct5(e.value)} dataKey="id">
+                <DataTable value={products} selection={selectedProduct5} onSelectionChange={e => setSelectedProduct5(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -1051,7 +1052,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>RadioButton-Only Selection</h6>
-                <DataTable value={products} selectionMode="radiobutton" selection={selectedProduct6} onSelectionChange={e => setSelectedProduct6(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="radiobutton" selection={selectedProduct6} onSelectionChange={e => setSelectedProduct6(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -1064,7 +1065,7 @@ const DataTableSelectionDemo = () => {
                 <h5>Checkbox</h5>
 
                 <h6>Row and Checkbox Selection</h6>
-                <DataTable value={products} selection={selectedProducts7} onSelectionChange={e => setSelectedProducts7(e.value)} dataKey="id">
+                <DataTable value={products} selection={selectedProducts7} onSelectionChange={e => setSelectedProducts7(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -1073,7 +1074,7 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
 
                 <h6>Checkbox-Only Selection</h6>
-                <DataTable value={products} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id">
+                <DataTable value={products} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>

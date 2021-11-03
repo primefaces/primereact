@@ -26,7 +26,7 @@ function handler() {
     }
 
     const getLastZIndex = (key, baseZIndex = 0) => {
-        return (zIndexes || []).reverse().find(obj => (PrimeReact.autoZIndex ? true : obj.key === key)) || { key, value: baseZIndex };
+        return [...zIndexes].reverse().find(obj => (PrimeReact.autoZIndex ? true : obj.key === key)) || { key, value: baseZIndex };
     }
 
     return {

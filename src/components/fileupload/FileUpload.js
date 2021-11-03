@@ -217,7 +217,7 @@ export class FileUpload extends Component {
         }
 
         this.setState({ msgs: [] });
-        this.files = this.state.files || [];
+        this.files = this.state.files ? [...this.state.files] : [];
         let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
@@ -399,6 +399,7 @@ export class FileUpload extends Component {
 
     onDragEnter(event) {
         if (!this.props.disabled) {
+            event.dataTransfer.dropEffect = "copy";
             event.stopPropagation();
             event.preventDefault();
         }
@@ -406,6 +407,7 @@ export class FileUpload extends Component {
 
     onDragOver(event) {
         if (!this.props.disabled) {
+            event.dataTransfer.dropEffect = "copy";
             DomHandler.addClass(this.content, 'p-fileupload-highlight');
             event.stopPropagation();
             event.preventDefault();
@@ -414,6 +416,7 @@ export class FileUpload extends Component {
 
     onDragLeave(event) {
         if (!this.props.disabled) {
+            event.dataTransfer.dropEffect = "copy";
             DomHandler.removeClass(this.content, 'p-fileupload-highlight');
         }
     }
@@ -425,7 +428,7 @@ export class FileUpload extends Component {
             event.preventDefault();
 
             let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
-            let allowDrop = this.props.multiple || (files && files.length === 1);
+            let allowDrop = this.props.multiple || (files && files.length === 0);
 
             if (allowDrop) {
                 this.onFileSelect(event);

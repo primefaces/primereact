@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { DomHandler } from '../utils/Utils';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 
 export class StyleClass extends Component {
 
@@ -189,12 +189,7 @@ export class StyleClass extends Component {
     }
 
     get el() {
-        const ref = this.props.nodeRef;
-        if (ref) {
-            return typeof ref === 'object' && ref.hasOwnProperty('current') ? ref.current : ref;
-        }
-
-        return null;
+        return ObjectUtils.getRefElement(this.props.nodeRef);
     }
 
     init() {

@@ -1600,6 +1600,24 @@ export const DockDemo = () => {
                                         <td>bottom</td>
                                         <td>Position of element. Valid values are 'bottom', 'top', 'left' and 'right'.</td>
                                     </tr>
+                                    <tr>
+                                        <td>header</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of header element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>footer</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of footer element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>magnification</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Whether to allow scale animation.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

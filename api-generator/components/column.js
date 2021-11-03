@@ -36,12 +36,6 @@ const ColumnProps = [
         description: 'Body content of the column.'
     },
     {
-        name: 'loadingBody',
-        type: 'function',
-        default: 'null',
-        description: 'Function to return the body content of the column to display when virtual scroll loads the new data.'
-    },
-    {
         name: 'footer',
         type: 'any',
         default: 'null',
@@ -210,43 +204,43 @@ const ColumnProps = [
         description: 'Function to provide the cell editor input.'
     },
     {
-        name: 'editorValidator',
+        name: 'cellEditValidator',
         type: 'function',
         default: 'null',
         description: 'Validator function to validate the cell input value.'
     },
     {
-        name: 'editorValidatorEvent',
+        name: 'cellEditValidatorEvent',
         type: 'string',
         default: 'click',
         description: 'Event to trigger the validation, possible values are "click" and "blur".'
     },
     {
-        name: 'onBeforeEditorShow',
+        name: 'onBeforeCellEditShow',
         type: 'function',
         default: 'null',
         description: 'Callback to invoke before the cell editor is shown.'
     },
     {
-        name: 'onBeforeEditorHide',
+        name: 'onBeforeCellEditHide',
         type: 'function',
         default: 'null',
         description: 'Callback to invoke before the cell editor is hidden.'
     },
     {
-        name: 'onEditorInit',
+        name: 'onCellEditInit',
         type: 'function',
         default: 'null',
         description: 'Callback to invoke when cell edit is initiated.'
     },
     {
-        name: 'onEditorSubmit',
+        name: 'onCellEditComplete',
         type: 'function',
         default: 'null',
         description: 'Callback to execute when editor is submitted.'
     },
     {
-        name: 'onEditorCancel',
+        name: 'onCellEditCancel',
         type: 'function',
         default: 'null',
         description: 'Callback to execute when editor is cancelled.'
@@ -285,11 +279,7 @@ const ColumnProps = [
 
 const ColumnEvents = [
     {
-        name: 'loadingBody',
-        description: 'TODO',
-    },
-    {
-        name: 'onEditorInit',
+        name: 'onCellEditInit',
         description: 'TODO',
         arguments: [
             {
@@ -300,7 +290,7 @@ const ColumnEvents = [
         ]
     },
     {
-        name: 'onEditorSubmit',
+        name: 'onCellEditComplete',
         description: 'TODO',
         arguments: [
             {
@@ -311,7 +301,7 @@ const ColumnEvents = [
         ]
     },
     {
-        name: 'onEditorCancel',
+        name: 'onCellEditCancel',
         description: 'TODO',
         arguments: [
             {
@@ -354,7 +344,7 @@ const ColumnEvents = [
         ]
     },
     {
-        name: 'editorValidator',
+        name: 'cellEditValidator',
         description: 'TODO',
         arguments: [
             {
@@ -365,7 +355,7 @@ const ColumnEvents = [
         ]
     },
     {
-        name: 'editorValidator',
+        name: 'cellEditValidator',
         description: 'TODO',
         arguments: [
             {
@@ -376,7 +366,7 @@ const ColumnEvents = [
         ]
     },
     {
-        name: 'editorValidator',
+        name: 'cellEditValidator',
         description: 'TODO',
         arguments: [
             {
@@ -387,7 +377,7 @@ const ColumnEvents = [
         ]
     },
     {
-        name: 'onBeforeEditorHide',
+        name: 'onBeforeCellEditHide',
         description: 'TODO',
         arguments: [
             {
@@ -398,7 +388,7 @@ const ColumnEvents = [
         ]
     },
     {
-        name: 'onBeforeEditorShow',
+        name: 'onBeforeCellEditShow',
         description: 'TODO',
         arguments: [
             {

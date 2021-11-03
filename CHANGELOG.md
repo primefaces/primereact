@@ -1,5 +1,35 @@
 # Changelog
 
+## [7.0.0-rc.2](https://github.com/primefaces/primereact/tree/7.0.0-rc.2) (2021-11-01)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/7.0.0-rc.1...7.0.0-rc.2)
+
+**Fixed bugs:**
+
+- Table columns not visible on Prod [\#2380](https://github.com/primefaces/primereact/issues/2380)
+
+## [7.0.0-rc.1](https://github.com/primefaces/primereact/tree/7.0.0-rc.1) (2021-11-01)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.6.0...7.0.0-rc.1)
+
+**Breaking changes:**
+
+- Improve DataTable implementation [\#2368](https://github.com/primefaces/primereact/issues/2368)
+- Remove FilterUtils class [\#2376](https://github.com/primefaces/primereact/issues/2376)
+- Improve Column attributes for Data components [\#2374](https://github.com/primefaces/primereact/issues/2374)
+- Improve VirtualScroller component [\#2373](https://github.com/primefaces/primereact/issues/2373)
+- Implemented new VirtualScroll feature for DataTable [\#2371](https://github.com/primefaces/primereact/issues/2371)
+- Implemented New Filter modes on DataTable [\#2370](https://github.com/primefaces/primereact/issues/2370)
+
+
+**Implemented New Features and Enhancements:**
+
+- Improve modal animation on Dialog [\#2378](https://github.com/primefaces/primereact/issues/2378)
+
+**Fixed bugs:**
+
+- Calendar Panel closes on the panel's mouseup event [\#2369](https://github.com/primefaces/primereact/issues/2369)
+
 ## [6.6.0](https://github.com/primefaces/primereact/tree/6.6.0) (2021-10-01)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.6.0-rc.1...6.6.0)

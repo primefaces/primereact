@@ -38,7 +38,7 @@ export class DataTableColResizeDemo extends Component {
                 <div className="content-section implementation">
                     <div className="card">
                         <h5>Fit Mode</h5>
-                        <DataTable value={this.state.products} resizableColumns columnResizeMode="fit" showGridlines>
+                        <DataTable value={this.state.products} resizableColumns columnResizeMode="fit" showGridlines responsiveLayout="scroll">
                             <Column field="code" header="Code" style={{width:'20%'}}/>
                             <Column field="name" header="Name" style={{width:'40%'}}/>
                             <Column field="category" header="Category" style={{width:'20%'}}/>
@@ -48,7 +48,7 @@ export class DataTableColResizeDemo extends Component {
 
                     <div className="card">
                         <h5>Expand Mode</h5>
-                        <DataTable value={this.state.products} resizableColumns columnResizeMode="expand" showGridlines>
+                        <DataTable value={this.state.products} resizableColumns columnResizeMode="expand" showGridlines responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -98,7 +98,7 @@ export class DataTableColResizeDemo extends Component {
             <div>
                 <div className="card">
                     <h5>Fit Mode</h5>
-                    <DataTable value={this.state.products} resizableColumns columnResizeMode="fit" showGridlines>
+                    <DataTable value={this.state.products} resizableColumns columnResizeMode="fit" showGridlines responsiveLayout="scroll">
                         <Column field="code" header="Code" style={{width:'20%'}}/>
                         <Column field="name" header="Name" style={{width:'40%'}}/>
                         <Column field="category" header="Category" style={{width:'20%'}}/>
@@ -108,7 +108,7 @@ export class DataTableColResizeDemo extends Component {
 
                 <div className="card">
                     <h5>Expand Mode</h5>
-                    <DataTable value={this.state.products} resizableColumns columnResizeMode="expand" showGridlines>
+                    <DataTable value={this.state.products} resizableColumns columnResizeMode="expand" showGridlines responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -141,7 +141,7 @@ const DataTableColResizeDemo = () => {
         <div>
             <div className="card">
                 <h5>Fit Mode</h5>
-                <DataTable value={products} resizableColumns columnResizeMode="fit" showGridlines>
+                <DataTable value={products} resizableColumns columnResizeMode="fit" showGridlines responsiveLayout="scroll">
                     <Column field="code" header="Code" style={{width:'20%'}}/>
                     <Column field="name" header="Name" style={{width:'40%'}}/>
                     <Column field="category" header="Category" style={{width:'20%'}}/>
@@ -151,7 +151,7 @@ const DataTableColResizeDemo = () => {
 
             <div className="card">
                 <h5>Expand Mode</h5>
-                <DataTable value={products} resizableColumns columnResizeMode="expand" showGridlines>
+                <DataTable value={products} resizableColumns columnResizeMode="expand" showGridlines responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -183,7 +183,7 @@ const DataTableColResizeDemo = () => {
         <div>
             <div className="card">
                 <h5>Fit Mode</h5>
-                <DataTable value={products} resizableColumns columnResizeMode="fit" showGridlines>
+                <DataTable value={products} resizableColumns columnResizeMode="fit" showGridlines responsiveLayout="scroll">
                     <Column field="code" header="Code" style={{width:'20%'}}/>
                     <Column field="name" header="Name" style={{width:'40%'}}/>
                     <Column field="category" header="Category" style={{width:'20%'}}/>
@@ -193,7 +193,7 @@ const DataTableColResizeDemo = () => {
 
             <div className="card">
                 <h5>Expand Mode</h5>
-                <DataTable value={products} resizableColumns columnResizeMode="expand" showGridlines>
+                <DataTable value={products} resizableColumns columnResizeMode="expand" showGridlines responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -212,6 +212,7 @@ const DataTableColResizeDemo = () => {
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
                 content: `
@@ -231,7 +232,7 @@ const DataTableColResizeDemo = () => {
         <div>
             <div className="card">
                 <h5>Fit Mode</h5>
-                <DataTable value={products} resizableColumns columnResizeMode="fit" showGridlines>
+                <DataTable value={products} resizableColumns columnResizeMode="fit" showGridlines responsiveLayout="scroll">
                     <Column field="code" header="Code" style={{width:'20%'}}/>
                     <Column field="name" header="Name" style={{width:'40%'}}/>
                     <Column field="category" header="Category" style={{width:'20%'}}/>
@@ -241,7 +242,7 @@ const DataTableColResizeDemo = () => {
 
             <div className="card">
                 <h5>Expand Mode</h5>
-                <DataTable value={products} resizableColumns columnResizeMode="expand" showGridlines>
+                <DataTable value={products} resizableColumns columnResizeMode="expand" showGridlines responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

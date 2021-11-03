@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import { classNames, DomHandler } from '../utils/Utils';
 
 export class Editor extends Component {
 
@@ -42,7 +42,7 @@ export class Editor extends Component {
 
     componentDidMount() {
         import('quill').then((module) => {
-            if (module && module.default) {
+            if (module && module.default && DomHandler.isExist(this.editorElement)) {
                 this.quill = new module.default(this.editorElement, {
                     modules: {
                         toolbar: this.toolbarElement,

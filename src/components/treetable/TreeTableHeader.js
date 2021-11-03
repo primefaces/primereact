@@ -123,7 +123,7 @@ export class TreeTableHeader extends Component {
                 this.props.onFilter({
                     value: filterValue,
                     field: column.props.field,
-                    matchMode: column.props.filterMatchMode
+                    matchMode: column.props.filterMatchMode || 'startsWith'
                 });
                 this.filterTimeout = null;
             }, this.props.filterDelay);

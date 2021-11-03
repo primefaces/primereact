@@ -49,23 +49,23 @@ export class Toast extends Component {
 
     show(value) {
         if (value) {
-            let newMessages;
+            this.setState(prevState => {
+                let newMessages;
 
-            if (Array.isArray(value)) {
-                for (let i = 0; i < value.length; i++) {
-                    value[i].id = messageIdx++;
-                    newMessages = [...this.state.messages, ...value];
+                if (Array.isArray(value)) {
+                    for (let i = 0; i < value.length; i++) {
+                        value[i].id = messageIdx++;
+                        newMessages = [...prevState.messages, ...value];
+                    }
                 }
-            }
-            else {
-                value.id = messageIdx++;
-                newMessages = this.state.messages ? [...this.state.messages, value] : [value];
-            }
+                else {
+                    value.id = messageIdx++;
+                    newMessages = prevState.messages ? [...prevState.messages, value] : [value];
+                }
 
-            this.state.messages.length === 0 && ZIndexUtils.set('toast', this.container, this.props.baseZIndex);
+                prevState.messages.length === 0 && ZIndexUtils.set('toast', this.container, this.props.baseZIndex);
 
-            this.setState({
-                messages: newMessages
+                return { messages: newMessages }
             });
         }
     }

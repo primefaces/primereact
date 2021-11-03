@@ -62,7 +62,7 @@ export class DataTableReorderDemo extends Component {
                     <Toast ref={(el) => { this.toast = el; }}></Toast>
 
                     <div className="card">
-                        <DataTable value={this.state.products} reorderableColumns onRowReorder={this.onRowReorder} onColReorder={this.onColReorder}>
+                        <DataTable value={this.state.products} reorderableColumns onRowReorder={this.onRowReorder} onColReorder={this.onColReorder} responsiveLayout="scroll">
                             <Column rowReorder style={{width: '3em'}} />
                             {dynamicColumns}
                         </DataTable>
@@ -135,7 +135,7 @@ export class DataTableReorderDemo extends Component {
                 <Toast ref={(el) => { this.toast = el; }}></Toast>
 
                 <div className="card">
-                    <DataTable value={this.state.products} reorderableColumns onRowReorder={this.onRowReorder} onColReorder={this.onColReorder}>
+                    <DataTable value={this.state.products} reorderableColumns onRowReorder={this.onRowReorder} onColReorder={this.onColReorder} responsiveLayout="scroll">
                         <Column rowReorder style={{width: '3em'}} />
                         {dynamicColumns}
                     </DataTable>
@@ -196,7 +196,7 @@ const DataTableReorderDemo = () => {
             <Toast ref={toast}></Toast>
 
             <div className="card">
-                <DataTable value={products} reorderableColumns onRowReorder={onRowReorder} onColReorder={onColReorder}>
+                <DataTable value={products} reorderableColumns onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
                     <Column rowReorder style={{width: '3em'}} />
                     {dynamicColumns}
                 </DataTable>
@@ -256,7 +256,7 @@ const DataTableReorderDemo = () => {
             <Toast ref={toast}></Toast>
 
             <div className="card">
-                <DataTable value={products} reorderableColumns onRowReorder={onRowReorder} onColReorder={onColReorder}>
+                <DataTable value={products} reorderableColumns onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
                     <Column rowReorder style={{width: '3em'}} />
                     {dynamicColumns}
                 </DataTable>
@@ -273,6 +273,7 @@ const DataTableReorderDemo = () => {
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
@@ -323,7 +324,7 @@ const DataTableReorderDemo = () => {
             <Toast ref={toast}></Toast>
 
             <div className="card">
-                <DataTable value={products} reorderableColumns onRowReorder={onRowReorder} onColReorder={onColReorder}>
+                <DataTable value={products} reorderableColumns onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
                     <Column rowReorder style={{width: '3em'}} />
                     {dynamicColumns}
                 </DataTable>

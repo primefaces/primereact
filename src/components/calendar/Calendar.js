@@ -214,6 +214,7 @@ export class Calendar extends Component {
         this.onTodayButtonClick = this.onTodayButtonClick.bind(this);
         this.onClearButtonClick = this.onClearButtonClick.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
+        this.onPanelMouseUp = this.onPanelMouseUp.bind(this);
         this.incrementHour = this.incrementHour.bind(this);
         this.decrementHour = this.decrementHour.bind(this);
         this.incrementMinute = this.incrementMinute.bind(this);
@@ -462,7 +463,7 @@ export class Calendar extends Component {
             if (!(this.isSelectable(value.getDate(), value.getMonth(), value.getFullYear(), false) && this.isSelectableTime(value))) {
                 isValid = false;
             }
-        } else if (value.every(v => (this.isSelectable(v.getDate(), v.getMonth(), v.getFullYear(), false) && this.isSelectableTime(value)))) {
+        } else if (value.every(v => (this.isSelectable(v.getDate(), v.getMonth(), v.getFullYear(), false) && this.isSelectableTime(v)))) {
             if (this.isRangeSelection()) {
                 isValid = value.length > 1 && value[1] > value[0] ? true : false;
             }
@@ -714,6 +715,10 @@ export class Calendar extends Component {
                 target: this.container
             });
         }
+    }
+
+    onPanelMouseUp(event) {
+        this.onPanelClick(event);
     }
 
     onTimePickerElementMouseDown(event, type, direction) {
@@ -3060,7 +3065,7 @@ export class Calendar extends Component {
         if (!this.props.inline) {
             return (
                 <InputText ref={this.inputRef} id={this.props.inputId} name={this.props.name} type="text" className={this.props.inputClassName} style={this.props.inputStyle}
-                    readOnly={this.props.readOnlyInput} disabled={this.props.disabled} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder}
+                    readOnly={this.props.readOnlyInput} disabled={this.props.disabled} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder} tabIndex={this.props.tabIndex}
                     onInput={this.onUserInput} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy} inputMode={this.props.inputMode} />
             );
         }
@@ -3139,7 +3144,7 @@ export class Calendar extends Component {
             <span ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
                 {input}
                 {button}
-                <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick}
+                <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick} onMouseUp={this.onPanelMouseUp}
                     in={isVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
                     transitionOptions={this.props.transitionOptions}>
                     {datePicker}

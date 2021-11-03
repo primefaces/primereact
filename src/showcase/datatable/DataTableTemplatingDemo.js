@@ -71,7 +71,7 @@ export class DataTableTemplatingDemo extends Component {
 
                 <div className="content-section implementation datatable-templating-demo">
                     <div className="card">
-                        <DataTable value={this.state.products} header={header} footer={footer}>
+                        <DataTable value={this.state.products} header={header} footer={footer} responsiveLayout="scroll">
                             <Column field="name" header="Name"></Column>
                             <Column header="Image" body={this.imageBodyTemplate}></Column>
                             <Column field="price" header="Price" body={this.priceBodyTemplate}></Column>
@@ -157,7 +157,7 @@ export class DataTableTemplatingDemo extends Component {
         return (
             <div className="datatable-templating-demo">
                 <div className="card">
-                    <DataTable value={this.state.products} header={header} footer={footer}>
+                    <DataTable value={this.state.products} header={header} footer={footer} responsiveLayout="scroll">
                         <Column field="name" header="Name"></Column>
                         <Column header="Image" body={this.imageBodyTemplate}></Column>
                         <Column field="price" header="Price" body={this.priceBodyTemplate}></Column>
@@ -222,7 +222,7 @@ const DataTableTemplatingDemo = () => {
     return (
         <div className="datatable-templating-demo">
             <div className="card">
-                <DataTable value={products} header={header} footer={footer}>
+                <DataTable value={products} header={header} footer={footer} responsiveLayout="scroll">
                     <Column field="name" header="Name"></Column>
                     <Column header="Image" body={imageBodyTemplate}></Column>
                     <Column field="price" header="Price" body={priceBodyTemplate}></Column>
@@ -286,7 +286,7 @@ const DataTableTemplatingDemo = () => {
     return (
         <div className="datatable-templating-demo">
             <div className="card">
-                <DataTable value={products} header={header} footer={footer}>
+                <DataTable value={products} header={header} footer={footer} responsiveLayout="scroll">
                     <Column field="name" header="Name"></Column>
                     <Column header="Image" body={imageBodyTemplate}></Column>
                     <Column field="price" header="Price" body={priceBodyTemplate}></Column>
@@ -308,6 +308,7 @@ const DataTableTemplatingDemo = () => {
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/rating/rating.min.js"></script>
@@ -358,7 +359,7 @@ const DataTableTemplatingDemo = () => {
     return (
         <div className="datatable-templating-demo">
             <div className="card">
-                <DataTable value={products} header={header} footer={footer}>
+                <DataTable value={products} header={header} footer={footer} responsiveLayout="scroll">
                     <Column field="name" header="Name"></Column>
                     <Column header="Image" body={imageBodyTemplate}></Column>
                     <Column field="price" header="Price" body={priceBodyTemplate}></Column>

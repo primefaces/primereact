@@ -44,9 +44,10 @@ export class Portal extends Component {
     }
 
     render() {
-        if (this.props.element && this.state.mounted) {
+        const element = this.props.element || this.props.children;
+        if (element && this.state.mounted) {
             const appendTo = this.props.appendTo || PrimeReact.appendTo || document.body;
-            return appendTo === 'self' ? this.props.element : ReactDOM.createPortal(this.props.element, appendTo);
+            return appendTo === 'self' ? element : ReactDOM.createPortal(element, appendTo);
         }
 
         return null;

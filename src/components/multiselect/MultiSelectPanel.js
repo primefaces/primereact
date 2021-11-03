@@ -137,7 +137,7 @@ class MultiSelectPanelComponent extends Component {
                     const content = this.isEmptyFilter() ? this.renderEmptyFilter() : options.children;
 
                     return (
-                        <ul ref={options.ref} className={className} role="listbox" aria-multiselectable>
+                        <ul ref={options.contentRef} className={className} role="listbox" aria-multiselectable>
                             {content}
                         </ul>
                     );
