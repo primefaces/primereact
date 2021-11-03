@@ -192,12 +192,15 @@ export class DataTableCrudDemo extends Component {
 
             const importedData = data.map(d => {
                 d = d.split(',');
-                return cols.reduce((obj, c, i) => {
+                const processedData = cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
                     (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
+
+                processedData['id'] = this.createId();
+                return processedData;
             });
 
             const products = [...this.state.products, ...importedData];
@@ -619,12 +622,15 @@ export class DataTableCrudDemo extends Component {
 
             const importedData = data.map(d => {
                 d = d.split(',');
-                return cols.reduce((obj, c, i) => {
+                const processedData = cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
                     (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
+
+                processedData['id'] = this.createId();
+                return processedData;
             });
 
             const products = [...this.state.products, ...importedData];
@@ -986,12 +992,15 @@ const DataTableCrudDemo = () => {
 
             const importedData = data.map(d => {
                 d = d.split(',');
-                return cols.reduce((obj, c, i) => {
+                const processedData = cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
                     (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
+
+                processedData['id'] = this.createId();
+                return processedData;
             });
 
             const _products = [...products, ...importedData];
@@ -1349,12 +1358,15 @@ const DataTableCrudDemo = () => {
 
             const importedData = data.map(d => {
                 d = d.split(',');
-                return cols.reduce((obj, c, i) => {
+                const processedData = cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
                     (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
+
+                processedData['id'] = this.createId();
+                return processedData;
             });
 
             const _products = [...products, ...importedData];
@@ -1732,12 +1744,15 @@ const DataTableCrudDemo = () => {
 
             const importedData = data.map(d => {
                 d = d.split(',');
-                return cols.reduce((obj, c, i) => {
+                const processedData = cols.reduce((obj, c, i) => {
                     c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
                     obj[c] = d[i].replace(/['"]+/g, '');
                     (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
                 }, {});
+
+                processedData['id'] = this.createId();
+                return processedData;
             });
 
             const _products = [...products, ...importedData];
