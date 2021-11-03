@@ -49,6 +49,7 @@ export class OverlayPanel extends Component {
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
         this.onExited = this.onExited.bind(this);
+        this.onContentClick = this.onContentClick.bind(this);
 
         this.attributeSelector = UniqueComponentId();
         this.overlayRef = React.createRef();
