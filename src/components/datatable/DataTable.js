@@ -1357,8 +1357,8 @@ export class DataTable extends Component {
         }
 
         let unselectableDataCount = 0;
-        if(this.props.isDataSelectable){
-            unselectableDataCount = visibleData?.filter((k) => !this.props.isDataSelectable(k)).length;
+        if(this.props.isDataSelectable && visibleData){
+            unselectableDataCount = visibleData.filter((k) => !this.props.isDataSelectable(k)).length;
         }
 
         return this.props.selection && visibleData && visibleData.length && (this.props.selection.length + unselectableDataCount) === visibleData.length;
