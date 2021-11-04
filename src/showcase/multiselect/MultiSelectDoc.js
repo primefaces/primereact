@@ -170,7 +170,7 @@ export class MultiSelectDemo extends Component {
             <div className="multiselect-demo">
                 <div className="card">
                     <h5>Basic</h5>
-                    <MultiSelect value={this.state.selectedCities1} options={this.cities} onChange={(e) => this.setState({ selectedCities1: e.value })} optionLabel="name" placeholder="Select a City" />
+                    <MultiSelect value={this.state.selectedCities1} options={this.cities} onChange={(e) => this.setState({ selectedCities1: e.value })} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />
 
                     <h5>Chips</h5>
                     <MultiSelect value={this.state.selectedCities2} options={this.cities} onChange={(e) => this.setState({ selectedCities2: e.value })} optionLabel="name" placeholder="Select a City" display="chip" />
@@ -345,7 +345,7 @@ const MultiSelectDemo = () => {
         <div className="multiselect-demo">
             <div className="card">
                 <h5>Basic</h5>
-                <MultiSelect value={selectedCities1} options={cities} onChange={(e) => setSelectedCities1(e.value)} optionLabel="name" placeholder="Select a City" />
+                <MultiSelect value={selectedCities1} options={cities} onChange={(e) => setSelectedCities1(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />
 
                 <h5>Chips</h5>
                 <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
@@ -519,7 +519,7 @@ const MultiSelectDemo = () => {
         <div className="multiselect-demo">
             <div className="card">
                 <h5>Basic</h5>
-                <MultiSelect value={selectedCities1} options={cities} onChange={(e) => setSelectedCities1(e.value)} optionLabel="name" placeholder="Select a City" />
+                <MultiSelect value={selectedCities1} options={cities} onChange={(e) => setSelectedCities1(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />
 
                 <h5>Chips</h5>
                 <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
@@ -701,7 +701,7 @@ const MultiSelectDemo = () => {
         <div className="multiselect-demo">
             <div className="card">
                 <h5>Basic</h5>
-                <MultiSelect value={selectedCities1} options={cities} onChange={(e) => setSelectedCities1(e.value)} optionLabel="name" placeholder="Select a City" />
+                <MultiSelect value={selectedCities1} options={cities} onChange={(e) => setSelectedCities1(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />
 
                 <h5>Chips</h5>
                 <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
@@ -1223,7 +1223,7 @@ const groupedCities = [
                         <tr>
                             <td>maxSelectedLabels</td>
                             <td>number</td>
-                            <td>3</td>
+                            <td>null</td>
                             <td>Decides how many selected item labels to show at most.</td>
                         </tr>
                         <tr>
