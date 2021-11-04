@@ -268,6 +268,12 @@ customChip(item) {
                                         <td>When present, it specifies that the element should be disabled.</td>
                                     </tr>
                                     <tr>
+                                        <td>removable</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether an item is removable.</td>
+                                    </tr>
+                                    <tr>
                                         <td>style</td>
                                         <td>string</td>
                                         <td>null</td>
