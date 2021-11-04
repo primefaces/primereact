@@ -521,7 +521,6 @@ export class InputNumber extends Component {
     }
 
     onInputKeyPress(event) {
-        event.preventDefault();
         let code = event.which || event.keyCode;
         let char = String.fromCharCode(code);
         const isDecimalSign = this.isDecimalSign(char);
@@ -529,6 +528,8 @@ export class InputNumber extends Component {
 
         if ((48 <= code && code <= 57) || isMinusSign || isDecimalSign) {
             this.insert(event, char, { isDecimalSign, isMinusSign });
+
+            event.preventDefault();
         }
     }
 
