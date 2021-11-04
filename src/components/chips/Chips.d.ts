@@ -38,6 +38,7 @@ export interface ChipsProps {
     value?: any[];
     max?: number;
     disabled?: boolean;
+    readOnly?: boolean;
     removable?: ChipsRemovableType;
     style?: object;
     className?: string;
