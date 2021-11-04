@@ -999,7 +999,7 @@ const DataTableCrudDemo = () => {
                     return obj;
                 }, {});
 
-                processedData['id'] = this.createId();
+                processedData['id'] = createId();
                 return processedData;
             });
 
@@ -1365,7 +1365,7 @@ const DataTableCrudDemo = () => {
                     return obj;
                 }, {});
 
-                processedData['id'] = this.createId();
+                processedData['id'] = createId();
                 return processedData;
             });
 
@@ -1751,7 +1751,7 @@ const DataTableCrudDemo = () => {
                     return obj;
                 }, {});
 
-                processedData['id'] = this.createId();
+                processedData['id'] = createId();
                 return processedData;
             });
 
