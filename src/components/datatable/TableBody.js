@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BodyRow } from './BodyRow';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { RowTogglerButton } from './RowTogglerButton';
+import { localeOption } from '../api/Api';
 
 export class TableBody extends Component {
 
@@ -804,7 +805,7 @@ export class TableBody extends Component {
     renderEmptyContent() {
         if (!this.props.loading) {
             const colSpan = this.getColumnsLength();
-            const content = ObjectUtils.getJSXElement(this.props.emptyMessage, { props: this.props, frozen: this.props.frozenRow });
+            const content = ObjectUtils.getJSXElement(this.props.emptyMessage, { props: this.props, frozen: this.props.frozenRow }) || localeOption('emptyMessage');
 
             return (
                 <tr className="p-datatable-emptymessage" role="row">

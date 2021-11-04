@@ -40,7 +40,7 @@ export class DataTable extends Component {
         sortMode: 'single',
         defaultSortOrder: 1,
         removableSort: false,
-        emptyMessage: 'No records found',
+        emptyMessage: null,
         selectionMode: null,
         dragSelection: false,
         cellSelection: false,

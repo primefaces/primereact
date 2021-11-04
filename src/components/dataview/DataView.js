@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Paginator } from '../paginator/Paginator';
 import { ObjectUtils, classNames } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
+import { localeOption } from '../api/Api';
 
 export class DataViewLayoutOptions extends Component {
 
@@ -98,7 +99,7 @@ export class DataView extends Component {
         pageLinkSize: 5,
         rowsPerPageOptions: null,
         currentPageReportTemplate: '({currentPage} of {totalPages})',
-        emptyMessage: 'No records found',
+        emptyMessage: null,
         sortField: null,
         sortOrder: null,
         style: null,
@@ -259,7 +260,9 @@ export class DataView extends Component {
 
     renderEmptyMessage() {
         if (!this.props.loading) {
-            return <div className="p-col-12 col-12 p-dataview-emptymessage">{this.props.emptyMessage}</div>;
+            const content = this.props.emptyMessage || localeOption('emptyMessage');
+
+            return <div className="p-col-12 col-12 p-dataview-emptymessage">{content}</div>;
         }
 
         return null;

@@ -36,7 +36,7 @@ export class MultiSelect extends Component {
         filterMatchMode: 'contains',
         filterPlaceholder: null,
         filterLocale: undefined,
-        emptyFilterMessage: 'No results found',
+        emptyFilterMessage: null,
         resetFilterOnHide: false,
         tabIndex: 0,
         dataKey: null,

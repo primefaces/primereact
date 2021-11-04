@@ -63,7 +63,7 @@ export class TreeTable extends Component {
         frozenWidth: null,
         resizableColumns: false,
         columnResizeMode: 'fit',
-        emptyMessage: "No records found",
+        emptyMessage: null,
         filters: null,
         globalFilter: null,
         filterMode: 'lenient',

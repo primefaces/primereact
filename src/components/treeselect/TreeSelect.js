@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
-import PrimeReact from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tree } from '../tree/Tree';
 import { TreeSelectPanel } from './TreeSelectPanel';
@@ -582,7 +582,7 @@ export class TreeSelect extends Component {
                 {
                     this.hasNoOptions() && (
                         <div className="p-treeselect-empty-message">
-                            {this.props.emptyMessage}
+                            {this.props.emptyMessage || localeOption('emptyMessage')}
                         </div>
                     )
                 }

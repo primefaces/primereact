@@ -4,6 +4,7 @@ import { DropdownItem } from './DropdownItem';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
+import { localeOption } from '../api/Api';
 
 class DropdownPanelComponent extends Component {
 
@@ -61,8 +62,9 @@ class DropdownPanelComponent extends Component {
         )
     }
 
-    renderEmptyMessage(emptyMessage) {
-        const message = ObjectUtils.getJSXElement(emptyMessage, this.props);
+    renderEmptyMessage(emptyMessage, isFilter) {
+        const message = ObjectUtils.getJSXElement(emptyMessage, this.props) || localeOption(isFilter ? 'emptyFilterMessage' : 'emptyMessage');
+
         return (
             <li className="p-dropdown-empty-message">
                 {message}
@@ -101,7 +103,7 @@ class DropdownPanelComponent extends Component {
             return this.props.visibleOptions.map((option, index) => this.renderItem(option, index));
         }
         else if (this.props.hasFilter()) {
-            return this.renderEmptyMessage(this.props.emptyFilterMessage);
+            return this.renderEmptyMessage(this.props.emptyFilterMessage, true);
         }
 
         return this.renderEmptyMessage(this.props.emptyMessage);

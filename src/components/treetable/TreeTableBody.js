@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DomHandler from '../utils/DomHandler';
 import { TreeTableRow } from './TreeTableRow';
+import { localeOption } from '../api/Api';
 
 export class TreeTableBody extends Component {
 
@@ -20,7 +21,7 @@ export class TreeTableBody extends Component {
         propagateSelectionDown: true,
         lazy: false,
         rowClassName: null,
-        emptyMessage: "No records found",
+        emptyMessage: null,
         loading: false,
         onExpand: null,
         onCollapse: null,
@@ -277,9 +278,11 @@ export class TreeTableBody extends Component {
         }
         else {
             const colSpan = this.props.columns ? this.props.columns.length : null;
+            const content = this.props.emptyMessage || localeOption('emptyMessage');
+
             return (
                 <tr>
-                    <td className="p-treetable-emptymessage" colSpan={colSpan}>{this.props.emptyMessage}</td>
+                    <td className="p-treetable-emptymessage" colSpan={colSpan}>{content}</td>
                 </tr>
             );
         }
