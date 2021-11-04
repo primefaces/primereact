@@ -83,6 +83,10 @@ export class TabView extends Component {
         return (index === this.getActiveIndex());
     }
 
+    shouldTabRender(tab) {
+        return tab && tab.type === TabPanel;
+    }
+
     onTabHeaderClick(event, tab, index) {
         if (!tab.props.disabled) {
             if (this.props.onTabChange) {
@@ -217,7 +221,9 @@ export class TabView extends Component {
     renderTabHeaders() {
         return (
             React.Children.map(this.props.children, (tab, index) => {
-                return this.renderTabHeader(tab, index);
+                if (this.shouldTabRender(tab)) {
+                    return this.renderTabHeader(tab, index);
+                }
             })
         );
     }
@@ -237,7 +243,7 @@ export class TabView extends Component {
 
     renderContent() {
         const contents = React.Children.map(this.props.children, (tab, index) => {
-            if (!this.props.renderActiveOnly || this.isSelected(index)) {
+            if (this.shouldTabRender(tab) && (!this.props.renderActiveOnly || this.isSelected(index))) {
                 return this.createContent(tab, index);
             }
         })

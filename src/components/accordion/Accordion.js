@@ -73,6 +73,10 @@ export class Accordion extends Component {
         this.contentWrappers = [];
     }
 
+    shouldTabRender(tab) {
+        return tab && tab.type === AccordionTab;
+    }
+
     onTabHeaderClick(event, tab, index) {
         if (!tab.props.disabled) {
             const selected = this.isSelected(index);
@@ -177,7 +181,7 @@ export class Accordion extends Component {
     renderTabs() {
         return (
             React.Children.map(this.props.children, (tab, index) => {
-                if (tab && tab.type === AccordionTab) {
+                if (this.shouldTabRender(tab)) {
                     return this.renderTab(tab, index);
                 }
             })
