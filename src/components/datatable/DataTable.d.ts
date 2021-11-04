@@ -201,12 +201,12 @@ interface DataTableCellClassNameOptions {
 }
 
 interface DataTableShowSelectionElementOptions {
-    index: number;
+    rowIndex: number;
     props: DataTableProps;
 }
 
 interface DataTableShowRowReorderElementOptions {
-    index: number;
+    rowIndex: number;
     props: DataTableProps;
 }
 

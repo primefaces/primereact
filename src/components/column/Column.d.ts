@@ -42,8 +42,30 @@ interface ColumnBodyOptions {
     column: Column;
     field: string;
     rowIndex: number;
+    props?: any;
     frozenRow?: boolean;
-    props: any;
+    expander?: ColumnBodyExpanderOptions;
+    rowEditor?: ColumnBodyRowEditorOptions;
+}
+
+interface ColumnBodyExpanderOptions {
+    onClick?(e: any): void;
+    className?: string;
+    iconClassName?: string;
+    element?: React.ReactNode;
+}
+
+interface ColumnBodyRowEditorOptions {
+    editing: boolean,
+    onSaveClick?(e: any): void;
+    saveClassName?: string;
+    saveIconClassName?: string;
+    onCancelClick?(e: any): void;
+    cancelClassName?: string;
+    cancelIconClassName?: string;
+    onInitClick?(e: any): void;
+    initClassName?: string;
+    initIconClassName?: string;
 }
 
 interface ColumnEditorOptions {

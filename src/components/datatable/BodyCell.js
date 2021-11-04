@@ -526,7 +526,7 @@ export class BodyCell extends Component {
             content = ObjectUtils.getJSXElement(editor, { rowData: this.state.editingRowData, value: this.resolveFieldData(this.state.editingRowData), column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps, editorCallback: this.editorCallback  });
         }
         else if (selectionMode) {
-            const showSelection = this.props.showSelectionElement ? this.props.showSelectionElement(this.props.rowData, { index: this.props.rowIndex, props: this.props.tableProps }) : true;
+            const showSelection = this.props.showSelectionElement ? this.props.showSelectionElement(this.props.rowData, { rowIndex: this.props.rowIndex, props: this.props.tableProps }) : true;
 
             content = showSelection && (
                 <>
@@ -536,7 +536,7 @@ export class BodyCell extends Component {
             )
         }
         else if (rowReorder) {
-            const showReorder = this.props.showRowReorderElement ? this.props.showRowReorderElement(this.props.rowData, { index: this.props.rowIndex, props: this.props.tableProps }) : true;
+            const showReorder = this.props.showRowReorderElement ? this.props.showRowReorderElement(this.props.rowData, { rowIndex: this.props.rowIndex, props: this.props.tableProps }) : true;
             content = showReorder && <i className={classNames('p-datatable-reorderablerow-handle', this.getColumnProp('rowReorderIcon'))}></i>;
         }
         else if (expander) {
@@ -557,7 +557,7 @@ export class BodyCell extends Component {
 
             if (body) {
                 expanderProps['element'] = content;
-                content = ObjectUtils.getJSXElement(body, this.props.rowData, { column: this.props.column, field: this.field, index: this.props.rowIndex, frozenRow: this.props.frozenRow, expander: expanderProps });
+                content = ObjectUtils.getJSXElement(body, this.props.rowData, { column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps, expander: expanderProps });
             }
         }
         else if (isRowEditor && rowEditor) {
@@ -605,7 +605,7 @@ export class BodyCell extends Component {
 
             if (body) {
                 rowEditorProps['element'] = content;
-                content = ObjectUtils.getJSXElement(body, this.props.rowData, { column: this.props.column, field: this.field, index: this.props.rowIndex, frozenRow: this.props.frozenRow, rowEditor: rowEditorProps });
+                content = ObjectUtils.getJSXElement(body, this.props.rowData, { column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps, rowEditor: rowEditorProps });
             }
         }
         else {
