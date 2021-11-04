@@ -190,6 +190,7 @@ const GMapDemo = () => {
     const [selectedPosition, setSelectedPosition] = useState(null);
 
     const toast = useRef(null);
+    const infoWindow = useRef(null);
 
     useEffect(() => {
         loadGoogleMaps(() => {
@@ -211,7 +212,7 @@ const GMapDemo = () => {
 
         if(isMarker) {
             let title = event.overlay.getTitle();
-            infoWindow = infoWindow||new google.maps.InfoWindow();
+            infoWindow.current = infoWindow.current||new google.maps.InfoWindow();
             infoWindow.setContent('<div>' + title + '</div>');
             infoWindow.open(event.map, event.overlay);
             event.map.setCenter(event.overlay.getPosition());
@@ -328,6 +329,7 @@ const GMapDemo = () => {
     const [selectedPosition, setSelectedPosition] = useState(null);
 
     const toast = useRef(null);
+    const infoWindow = useRef(null);
 
     useEffect(() => {
         loadGoogleMaps(() => {
@@ -349,7 +351,7 @@ const GMapDemo = () => {
 
         if(isMarker) {
             let title = event.overlay.getTitle();
-            infoWindow = infoWindow||new google.maps.InfoWindow();
+            infoWindow.current = infoWindow.current||new google.maps.InfoWindow();
             infoWindow.setContent('<div>' + title + '</div>');
             infoWindow.open(event.map, event.overlay);
             event.map.setCenter(event.overlay.getPosition());
@@ -476,6 +478,7 @@ const GMapDemo = () => {
     const [selectedPosition, setSelectedPosition] = useState(null);
 
     const toast = useRef(null);
+    const infoWindow = useRef(null);
 
     useEffect(() => {
         loadGoogleMaps(() => {
@@ -497,7 +500,7 @@ const GMapDemo = () => {
 
         if(isMarker) {
             let title = event.overlay.getTitle();
-            infoWindow = infoWindow||new google.maps.InfoWindow();
+            infoWindow.current = infoWindow.current||new google.maps.InfoWindow();
             infoWindow.setContent('<div>' + title + '</div>');
             infoWindow.open(event.map, event.overlay);
             event.map.setCenter(event.overlay.getPosition());
