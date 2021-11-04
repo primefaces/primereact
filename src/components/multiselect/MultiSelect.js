@@ -334,8 +334,6 @@ export class MultiSelect extends Component {
                 else {
                     value = visibleOptions.map(option => this.getOptionValue(option));
                 }
-
-                value = [...new Set([...value, ...(this.props.value||[])])];
             }
 
             this.updateModel(event.originalEvent, value);
