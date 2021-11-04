@@ -44,7 +44,7 @@ export class MultiSelect extends Component {
         appendTo: null,
         tooltip: null,
         tooltipOptions: null,
-        maxSelectedLabels: 3,
+        maxSelectedLabels: null,
         selectionLimit: null,
         selectedItemsLabel: '{0} items selected',
         ariaLabelledBy: null,
@@ -779,7 +779,10 @@ export class MultiSelect extends Component {
         let label;
 
         if (!this.isEmpty() && !this.props.fixedPlaceholder) {
-            if (this.props.value.length <= this.props.maxSelectedLabels) {
+            if (this.props.maxSelectedLabels && this.props.value.length > this.props.maxSelectedLabels) {
+                return this.getSelectedItemsLabel();
+            }
+            else {
                 label = '';
                 for (let i = 0; i < this.props.value.length; i++) {
                     if (i !== 0) {
@@ -790,9 +793,6 @@ export class MultiSelect extends Component {
 
                 return label;
             }
-            else {
-                return this.getSelectedItemsLabel();
-            }
         }
 
         return label;
@@ -801,7 +801,10 @@ export class MultiSelect extends Component {
     getLabelContent() {
         if (this.props.selectedItemTemplate) {
             if (!this.isEmpty()) {
-                if (this.props.value.length <= this.props.maxSelectedLabels) {
+                if (this.props.maxSelectedLabels && this.props.value.length > this.props.maxSelectedLabels) {
+                    return this.getSelectedItemsLabel();
+                }
+                else {
                     return this.props.value.map((val, index) => {
                         const item = ObjectUtils.getJSXElement(this.props.selectedItemTemplate, val);
 
@@ -810,9 +813,6 @@ export class MultiSelect extends Component {
                         );
                     });
                 }
-                else {
-                    return this.getSelectedItemsLabel();
-                }
             }
             else {
                 return ObjectUtils.getJSXElement(this.props.selectedItemTemplate);
@@ -820,8 +820,10 @@ export class MultiSelect extends Component {
         }
         else {
             if (this.props.display === 'chip' && !this.isEmpty()) {
+                const value = this.props.value.slice(0, this.props.maxSelectedLabels || this.props.value.length);
+
                 return (
-                    this.props.value.map((val) => {
+                    value.map((val) => {
                         const label = this.getLabelByValue(val);
                         return (
                             <div className="p-multiselect-token" key={label}>
@@ -862,7 +864,7 @@ export class MultiSelect extends Component {
         const labelClassName = classNames('p-multiselect-label', {
             'p-placeholder': empty && this.props.placeholder,
             'p-multiselect-label-empty': empty && !this.props.placeholder && !this.props.selectedItemTemplate,
-            'p-multiselect-items-label': !empty && this.props.value.length > this.props.maxSelectedLabels
+            'p-multiselect-items-label': !empty && this.props.display !== 'chip' && this.props.value.length > this.props.maxSelectedLabels
         });
 
         return (
