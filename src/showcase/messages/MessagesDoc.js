@@ -668,6 +668,12 @@ messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message',
                                         <td>Severity level of the message.</td>
                                     </tr>
                                     <tr>
+                                        <td>text</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Text of the message.</td>
+                                    </tr>
+                                    <tr>
                                         <td>style</td>
                                         <td>string</td>
                                         <td>null</td>
