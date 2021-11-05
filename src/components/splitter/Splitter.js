@@ -215,7 +215,7 @@ export class Splitter extends Component {
 
     componentDidMount() {
         if (this.panelElement) {
-            if (this.panelElement.childNodes && DomHandler.find(this.panelElement, '.p-splitter')) {
+            if (this.panelElement.childNodes && DomHandler.find(this.panelElement, '.p-splitter').length) {
                 DomHandler.addClass(this.panelElement, 'p-splitter-panel-nested');
             }
         }
