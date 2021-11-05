@@ -3876,6 +3876,9 @@
   border-color: #4F46E5;
   color: #4F46E5;
 }
+.p-tabview .p-tabview-close {
+  margin-left: 0.5rem;
+}
 .p-tabview .p-tabview-nav-btn.p-link {
   background: #ffffff;
   color: #4F46E5;

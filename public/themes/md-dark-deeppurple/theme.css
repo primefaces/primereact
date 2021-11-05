@@ -3865,6 +3865,9 @@
   border-color: rgba(255, 255, 255, 0.12);
   color: #CE93D8;
 }
+.p-tabview .p-tabview-close {
+  margin-left: 0.5rem;
+}
 .p-tabview .p-tabview-nav-btn.p-link {
   background: transparent;
   color: #CE93D8;
