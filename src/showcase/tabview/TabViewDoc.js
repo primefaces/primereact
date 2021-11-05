@@ -888,6 +888,26 @@ template: (options) => {
                             </table>
                         </div>
 
+                        <h5>Methods</h5>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parameters</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>reset</td>
+                                        <td>-</td>
+                                        <td>Resets all states.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                         <h5>Styling</h5>
                         <p>Following is the list of structural style classes, for theming classes visit <Link to="/theming"> theming</Link> page.</p>
                         <div className="doc-tablewrapper">

@@ -47,4 +47,6 @@ export interface TabViewProps {
 }
 
 // tslint:disable-next-line:max-classes-per-file
-export declare class TabView extends React.Component<TabViewProps, any> { }
+export declare class TabView extends React.Component<TabViewProps, any> {
+    public reset(): void;
+}
