@@ -326,8 +326,8 @@ export class VirtualScroller extends Component {
             const itemSize = this.props.itemSize;
             const calculateTranslateVal = (_first, _size) => (_first * _size);
             const setTransform = (_x = 0, _y = 0) => {
+                this.sticky && (this.sticky.style.top = `-${_y}px`);
                 this.content.style.transform = `translate3d(${_x}px, ${_y}px, 0)`;
-                this.sticky && (this.sticky.style.top = `${_y}px`);
             };
 
             if (isBoth) {

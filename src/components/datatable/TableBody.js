@@ -237,11 +237,16 @@ export class TableBody extends Component {
     }
 
     updateFrozenRowGroupHeaderStickyPosition() {
-        let tableHeaderHeight = DomHandler.getOuterHeight(this.el.previousElementSibling);
-        let top = tableHeaderHeight + 'px';
+        const tableHeaderHeight = DomHandler.getOuterHeight(this.el.previousElementSibling);
+        const top = tableHeaderHeight + 'px';
         if (this.state.rowGroupHeaderStyleObject && this.state.rowGroupHeaderStyleObject.top !== top) {
             this.setState({ rowGroupHeaderStyleObject: { top } })
         }
+    }
+
+    updateVirtualScrollerPosition() {
+        const tableHeaderHeight = DomHandler.getOuterHeight(this.el.previousElementSibling);
+        this.el.style.top = (this.el.style.top || 0) + tableHeaderHeight + 'px';
     }
 
     onSingleSelection({ originalEvent, data, toggleable, type }) {
@@ -776,8 +781,7 @@ export class TableBody extends Component {
         }
 
         if (!this.props.isVirtualScrollerDisabled && this.getVirtualScrollerOption('vertical')) {
-            let style = getComputedStyle(this.el);
-            this.el.style.top = parseFloat(style.top) + parseFloat(this.props.virtualScrollerOptions.itemSize) + 'px';
+            this.updateVirtualScrollerPosition();
         }
     }
 
@@ -791,8 +795,7 @@ export class TableBody extends Component {
         }
 
         if (!this.props.isVirtualScrollerDisabled && this.getVirtualScrollerOption('vertical') && this.getVirtualScrollerOption('itemSize', prevProps.virtualScrollerOptions) !== this.getVirtualScrollerOption('itemSize')) {
-            let style = getComputedStyle(this.el);
-            this.el.style.top = parseFloat(style.top) + parseFloat(this.getVirtualScrollerOption('itemSize')) - parseFloat(this.getVirtualScrollerOption('itemSize', prevProps.virtualScrollerOptions)) + 'px';
+            this.updateVirtualScrollerPosition();
         }
     }
 
