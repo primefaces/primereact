@@ -114,7 +114,9 @@ export class TabView extends Component {
 
     updateScrollBar(index) {
         let tabHeader = this[`tab_${index}`];
-        tabHeader.scrollIntoView({ block: 'nearest' })
+        if (tabHeader) {
+            tabHeader.scrollIntoView({ block: 'nearest' });
+        }
     }
 
     updateButtonState() {
