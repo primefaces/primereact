@@ -3358,6 +3358,12 @@
 .p-tree .p-tree-loading-icon {
   font-size: 2rem;
 }
+.p-tree .p-treenode-droppoint {
+  height: 0.5rem;
+}
+.p-tree .p-treenode-droppoint.p-treenode-droppoint-active {
+  background: #ed4980;
+}
 
 .p-treetable .p-paginator-top {
   border-width: 1px 1px 0 1px;
