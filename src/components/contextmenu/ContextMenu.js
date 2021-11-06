@@ -286,7 +286,7 @@ export class ContextMenu extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.visible && prevState.reshow !== this.state.reshow) {
+        if (this.state.visible && (prevState.reshow !== this.state.reshow || prevProps.model !== this.props.model)) {
             let event = this.currentEvent;
             this.setState({
                 visible: false,
