@@ -264,6 +264,8 @@ export class MultiSelect extends Component {
             }
 
             this.inputRef.current.focus();
+
+            event.preventDefault();
         }
     }
 
