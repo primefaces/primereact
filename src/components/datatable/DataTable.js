@@ -634,8 +634,9 @@ export class DataTable extends Component {
 
     allRowsSelected(processedData) {
         const val = this.props.frozenValue ? [...this.props.frozenValue, ...processedData] : processedData;
-        const length = this.props.lazy ? this.props.totalRecords : (val ? val.length : 0);
-        return (val && length > 0 && this.props.selection && this.props.selection.length > 0 && this.props.selection.length === length);
+        const selectableVal = this.props.showSelectionElement ? val.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : val;
+        const length = this.props.lazy ? this.props.totalRecords : (selectableVal ? selectableVal.length : 0);
+        return (selectableVal && length > 0 && this.props.selection && this.props.selection.length > 0 && this.props.selection.length === length);
     }
 
     getSelectionModeInColumn(columns) {
@@ -818,6 +819,7 @@ export class DataTable extends Component {
 
         if (!checked) {
             selection = this.props.frozenValue ? [...this.props.frozenValue, ...processedData] : processedData;
+            selection = this.props.showSelectionElement ? selection.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : selection;
 
             this.props.onAllRowsSelect && this.props.onAllRowsSelect({ originalEvent, data: selection, type: 'all' });
         }
