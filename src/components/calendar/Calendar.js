@@ -1526,8 +1526,14 @@ export class Calendar extends Component {
                 let startDate = this.props.value[0];
                 let endDate = this.props.value[1];
 
-                if (!endDate && date.getTime() >= startDate.getTime()) {
-                    endDate = date;
+                if (!endDate) {
+                    if (date.getTime() >= startDate.getTime()) {
+                        endDate = date;
+                    }
+                    else {
+                        endDate = startDate;
+                        startDate = date;
+                    }
                 }
                 else {
                     startDate = date;
