@@ -977,6 +977,7 @@ export class Dropdown extends Component {
         });
         let visibleOptions = this.getVisibleOptions();
         let selectedOption = this.getSelectedOption();
+        let appendTo = this.props.appendTo || PrimeReact.appendTo;
 
         let hiddenSelect = this.renderHiddenSelect(selectedOption);
         let keyboardHelper = this.renderKeyboardHelper();
@@ -992,7 +993,7 @@ export class Dropdown extends Component {
                 {labelElement}
                 {clearIcon}
                 {dropdownIcon}
-                <DropdownPanel ref={this.overlayRef} visibleOptions={visibleOptions} {...this.props} onClick={this.onPanelClick} onOptionClick={this.onOptionClick}
+                <DropdownPanel ref={this.overlayRef} visibleOptions={visibleOptions} {...this.props} appendTo={appendTo} onClick={this.onPanelClick} onOptionClick={this.onOptionClick}
                     filterValue={this.state.filter} hasFilter={this.hasFilter} onFilterClearIconClick={this.onFilterClearIconClick} onFilterInputKeyDown={this.onFilterInputKeyDown} onFilterInputChange={this.onFilterInputChange}
                     getOptionLabel={this.getOptionLabel} getOptionRenderKey={this.getOptionRenderKey} isOptionDisabled={this.isOptionDisabled}
                     getOptionGroupChildren={this.getOptionGroupChildren} getOptionGroupLabel={this.getOptionGroupLabel} getOptionGroupRenderKey={this.getOptionGroupRenderKey}
