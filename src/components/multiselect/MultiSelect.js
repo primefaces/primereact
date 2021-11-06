@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames, ConnectedOverlayScrollHandler } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames, ConnectedOverlayScrollHandler, IconUtils } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 import { MultiSelectPanel } from './MultiSelectPanel';
 import { OverlayService } from '../overlayservice/OverlayService';
@@ -54,6 +54,7 @@ export class MultiSelect extends Component {
         panelFooterTemplate: null,
         transitionOptions: null,
         dropdownIcon: 'pi pi-chevron-down',
+        removeIcon: 'pi pi-times-circle',
         showSelectAll: true,
         selectAll: false,
         onChange: null,
@@ -111,6 +112,7 @@ export class MultiSelect extends Component {
         panelFooterTemplate: PropTypes.any,
         transitionOptions: PropTypes.object,
         dropdownIcon: PropTypes.string,
+        removeIcon: PropTypes.any,
         showSelectAll: PropTypes.bool,
         selectAll: PropTypes.bool,
         onChange: PropTypes.func,
@@ -830,7 +832,7 @@ export class MultiSelect extends Component {
                         return (
                             <div className="p-multiselect-token" key={label}>
                                 <span className="p-multiselect-token-label">{label}</span>
-                                { !this.props.disabled && <span className="p-multiselect-token-icon pi pi-times-circle" onClick={(e) => this.removeChip(e, val)}></span>}
+                                { !this.props.disabled && IconUtils.getJSXIcon(this.props.removeIcon, { className: 'p-multiselect-token-icon', onClick: (e) => this.removeChip(e, val) }, { props: this.props }) }
                             </div>
                         )
                     })
@@ -885,7 +887,6 @@ export class MultiSelect extends Component {
             'p-inputwrapper-filled': this.props.value && this.props.value.length > 0,
             'p-inputwrapper-focus': this.state.focused || this.state.overlayVisible
         }, this.props.className);
-        let iconClassName = classNames('p-multiselect-trigger-icon p-c', this.props.dropdownIcon);
         let visibleOptions = this.getVisibleOptions();
 
         let label = this.renderLabel();
@@ -900,7 +901,7 @@ export class MultiSelect extends Component {
                 {label}
                 {clearIcon}
                 <div className="p-multiselect-trigger">
-                    <span className={iconClassName}></span>
+                    {IconUtils.getJSXIcon(this.props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props: this.props })}
                 </div>
                 <MultiSelectPanel ref={this.overlayRef} visibleOptions={visibleOptions} {...this.props} onClick={this.onPanelClick} onOverlayHide={this.hide}
                     filterValue={this.state.filter} hasFilter={this.hasFilter} onFilterInputChange={this.onFilterInputChange} onCloseClick={this.onCloseClick} onSelectAll={this.onSelectAll}

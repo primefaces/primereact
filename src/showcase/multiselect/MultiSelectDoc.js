@@ -1258,9 +1258,15 @@ const groupedCities = [
                         </tr>
                         <tr>
                             <td>dropdownIcon</td>
-                            <td>string</td>
+                            <td>any</td>
                             <td>pi pi-chevron-down</td>
                             <td>Icon class of the dropdown icon.</td>
+                        </tr>
+                        <tr>
+                            <td>removeIcon</td>
+                            <td>any</td>
+                            <td>pi pi-times-circle</td>
+                            <td>Icon of the remove chip element.</td>
                         </tr>
                         <tr>
                             <td>virtualScrollerOptions</td>

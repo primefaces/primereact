@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import { IconType } from '../utils/Utils';
 import { VirtualScrollerProps } from '../virtualscroller';
 
 type MultiSelectOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
@@ -108,7 +109,8 @@ export interface MultiSelectProps {
     panelHeaderTemplate?: MultiSelectPanelHeaderTemplateType;
     panelFooterTemplate?: MultiSelectPanelFooterTemplateType;
     transitionOptions?: object;
-    dropdownIcon?: string;
+    dropdownIcon?: IconType<MultiSelectProps>;
+    removeIcon?: IconType<MultiSelectProps>;
     showSelectAll?: boolean;
     selectAll?: boolean;
     onChange?(e: MultiSelectChangeParams): void;
