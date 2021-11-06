@@ -2,8 +2,10 @@ import * as React from "react";
 import ObjectUtils from "./ObjectUtils";
 
 export default class IconUtils {
+
     static getJSXIcon(icon, iconProps, parentProps) {
         let content = null;
+
         if (icon) {
             let iconType = typeof icon;
             content = <span {...iconProps}></span>;
@@ -15,10 +17,10 @@ export default class IconUtils {
                     props: parentProps
                 };
 
-                content = <span {...iconProps}>{ObjectUtils.getJSXElement(icon, defaultContentOptions)}</span>;
+                return ObjectUtils.getJSXElement(icon, defaultContentOptions);
             }
-
         }
+
         return content;
     }
 }

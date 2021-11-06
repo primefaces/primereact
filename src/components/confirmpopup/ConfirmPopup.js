@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import {
-    DomHandler,
-    ObjectUtils,
-    classNames,
-    ZIndexUtils,
-    ConnectedOverlayScrollHandler,
-    IconUtils
-} from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler, IconUtils } from '../utils/Utils';
 import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { localeOption } from '../api/Api';

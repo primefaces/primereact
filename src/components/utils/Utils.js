@@ -8,4 +8,4 @@ import IconUtils from './IconUtils';
 import UniqueComponentId from './UniqueComponentId';
 import { ZIndexUtils } from './ZIndexUtils';
 
-export { classNames, ConnectedOverlayScrollHandler, DomHandler, EventBus, FilterUtils, mask, ObjectUtils, IconUtils, UniqueComponentId, ZIndexUtils };
+export { classNames, ConnectedOverlayScrollHandler, DomHandler, EventBus, mask, ObjectUtils, IconUtils, UniqueComponentId, ZIndexUtils };

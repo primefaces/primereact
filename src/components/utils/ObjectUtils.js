@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 export default class ObjectUtils {
 
     static equals(obj1, obj2, field) {

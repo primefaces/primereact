@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function classNames(...args) {
     if (args) {
         let classes = [];
@@ -14,7 +12,7 @@ export function classNames(...args) {
             if (type === 'string' || type === 'number') {
                 classes.push(className);
             }
-            else if (type === 'object' && !React.isValidElement(className)) {
+            else if (type === 'object') {
                 const _classes = Array.isArray(className) ? className : Object.entries(className).map(([key, value]) => !!value ? key : null);
 
                 classes = _classes.length ? classes.concat(_classes.filter(c => !!c)) : classes;
