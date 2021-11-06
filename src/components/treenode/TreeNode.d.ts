@@ -1,8 +1,10 @@
+import {IconType} from "../utils/Utils";
+
 export default interface TreeNode {
     key?: string | number;
     label?: string;
     data?: any;
-    icon?: string;
+    icon?: IconType<TreeNode>;
     children?: TreeNode[];
     style?: object;
     className?: string;

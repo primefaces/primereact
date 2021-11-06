@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import {classNames, IconUtils} from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
 
@@ -27,8 +27,8 @@ export class ToggleButton extends Component {
 
     static propTypes = {
         id: PropTypes.string,
-        onIcon: PropTypes.string,
-        offIcon: PropTypes.string,
+        onIcon: PropTypes.any,
+        offIcon: PropTypes.any,
         onLabel: PropTypes.string,
         offLabel: PropTypes.string,
         iconPos: PropTypes.string,
@@ -126,12 +126,13 @@ export class ToggleButton extends Component {
 
         const hasIcon = this.hasIcon();
         const label = this.getLabel();
+        const icon = this.props.checked ? this.props.onIcon : this.props.offIcon
 
         if (hasIcon) {
             iconClassName = classNames('p-button-icon p-c', {
                 'p-button-icon-left': this.props.iconPos === 'left' && label,
                 'p-button-icon-right': this.props.iconPos === 'right' && label
-            }, this.props.checked ? this.props.onIcon : this.props.offIcon);
+            }, icon);
         }
 
         return (
@@ -139,7 +140,7 @@ export class ToggleButton extends Component {
                 onClick={this.toggle} onFocus={this.props.onFocus} onBlur={this.props.onBlur} onKeyDown={this.onKeyDown}
                 tabIndex={!this.props.disabled && this.props.tabIndex} aria-labelledby={this.props.ariaLabelledBy}>
 
-                {hasIcon && <span className={iconClassName}></span>}
+                {hasIcon && IconUtils.getJSXIcon(icon, {className: iconClassName}, this.props)}
                 <span className="p-button-label">{label}</span>
                 <Ripple />
             </div>

@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import {classNames, IconUtils} from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 
 export class Checkbox extends Component {
@@ -44,7 +44,7 @@ export class Checkbox extends Component {
         required: PropTypes.bool,
         readOnly: PropTypes.bool,
         tabIndex: PropTypes.number,
-        icon: PropTypes.string,
+        icon: PropTypes.any,
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
@@ -181,7 +181,7 @@ export class Checkbox extends Component {
                              onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly} required={this.props.required}/>
                 </div>
                 <div className={boxClass} ref={el => this.box = el} role="checkbox" aria-checked={this.isChecked()}>
-                    <span className={iconClass}></span>
+                    {IconUtils.getJSXIcon(this.props.icon, {className: iconClass}, this.props)}
                 </div>
             </div>
         )

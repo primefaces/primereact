@@ -112,7 +112,7 @@ export class AutoComplete extends Component {
         itemTemplate: PropTypes.any,
         selectedItemTemplate: PropTypes.any,
         transitionOptions: PropTypes.object,
-        dropdownIcon: PropTypes.string,
+        dropdownIcon: PropTypes.any,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,

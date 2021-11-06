@@ -116,7 +116,7 @@ export class Calendar extends Component {
         tabIndex: PropTypes.number,
         placeholder: PropTypes.string,
         showIcon: PropTypes.bool,
-        icon: PropTypes.string,
+        icon: PropTypes.any,
         showOnFocus: PropTypes.bool,
         numberOfMonths: PropTypes.number,
         view: PropTypes.string,

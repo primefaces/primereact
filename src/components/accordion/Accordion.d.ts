@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {IconType} from "../utils/Utils";
 
 type AccordionTabHeaderTemplateType = React.ReactNode | ((props: AccordionTabProps) => React.ReactNode);
 
@@ -27,8 +28,8 @@ export interface AccordionProps {
     className?: string;
     style?: object;
     multiple?: boolean;
-    expandIcon?: string;
-    collapseIcon?: string;
+    expandIcon?: IconType<AccordionProps>;
+    collapseIcon?: IconType<AccordionProps>;
     transitionOptions?: object;
     onTabOpen?(e: AccordionEventParams): void;
     onTabClose?(e: AccordionEventParams): void;

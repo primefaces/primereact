@@ -1,12 +1,13 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import {IconType} from "../utils/Utils";
 
 type MultiStateCheckboxOptionsType = MultiStateCheckboxOption[] | any[];
 
 type MultiStateCheckboxIconTemplateType = React.ReactNode | ((options: MultiStateCheckboxIconTemplateParams) => React.ReactNode);
 
 interface MultiStateCheckboxOption {
-    icon: string;
+    icon: IconType<MultiStateCheckboxProps>;
     style: object;
     className: string;
     [key: string]: any;

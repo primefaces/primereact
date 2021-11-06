@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {IconType} from "../utils/Utils";
 
 type ConfirmPopupTemplateType = React.ReactNode | ((options: ConfirmPopupOptions) => React.ReactNode);
 
@@ -23,9 +24,9 @@ export interface ConfirmPopupProps {
     message?: ConfirmPopupTemplateType;
     rejectLabel?: string;
     acceptLabel?: string;
-    icon?: string;
-    rejectIcon?: string;
-    acceptIcon?: string;
+    icon?: IconType<ConfirmPopupProps>;
+    rejectIcon?: IconType<ConfirmPopupProps>;
+    acceptIcon?: IconType<ConfirmPopupProps>;
     rejectClassName?: string;
     acceptClassName?: string;
     className?: string;

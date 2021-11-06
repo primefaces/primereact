@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
+import {IconType} from "../utils/Utils";
 
 type SpeedDialDirectionType = 'up' | 'down' | 'left' | 'right' | 'up-left' | 'up-right' | 'down-left' | 'down-right';
 
@@ -34,8 +35,8 @@ export interface SpeedDialProps {
     buttonTemplate?: SpeedDialButtonTemplateType;
     maskStyle?: object;
     maskClassName?: string;
-    showIcon?: string;
-    hideIcon?: string;
+    showIcon?: IconType<SpeedDialProps>;
+    hideIcon?: IconType<SpeedDialProps>;
     rotateAnimation?: boolean;
     onVisibleChange?(visible: boolean): void;
     onClick?(event: React.MouseEvent<HTMLElement>): void;

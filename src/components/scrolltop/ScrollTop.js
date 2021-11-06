@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { DomHandler, classNames, ZIndexUtils } from '../utils/Utils';
+import {DomHandler, classNames, ZIndexUtils, IconUtils} from '../utils/Utils';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 
@@ -21,7 +21,7 @@ export class ScrollTop extends Component {
     static propTypes = {
         target: PropTypes.string,
         threshold: PropTypes.number,
-        icon: PropTypes.string,
+        icon: PropTypes.any,
         behavior: PropTypes.string,
         className: PropTypes.string,
         style: PropTypes.object,
@@ -128,7 +128,7 @@ export class ScrollTop extends Component {
                 <CSSTransition nodeRef={this.scrollElementRef} classNames="p-scrolltop" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} options={this.props.transitionOptions}
                     unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExited={this.onExited}>
                     <button ref={this.scrollElementRef} type="button" className={className} style={this.props.style} onClick={this.onClick}>
-                        <span className={iconClassName}></span>
+                        {IconUtils.getJSXIcon(this.props.icon, {className: iconClassName}, this.props)}
                         <Ripple />
                     </button>
                 </CSSTransition>

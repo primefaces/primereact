@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import {IconType} from "../utils/Utils";
 
 interface CheckboxChangeTargetOptions {
     type: 'checkbox';
@@ -33,7 +34,7 @@ export interface CheckboxProps {
     required?: boolean;
     readOnly?: boolean;
     tabIndex?: number;
-    icon?: string;
+    icon?: IconType<CheckboxProps>;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;

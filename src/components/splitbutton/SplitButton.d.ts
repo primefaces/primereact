@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
-
-type SplitButtonButtonTemplateType = React.ReactNode | ((props: SplitButtonProps) => React.ReactNode);
+import {IconType, TemplateType} from "../utils/Utils";
 
 type SplitButtonAppendToType = 'self' | HTMLElement | undefined | null;
 
 export interface SplitButtonProps {
     id?: string;
     label?: string;
-    icon?: string;
+    icon?: IconType<SplitButtonProps>;
     model?: MenuItem[];
     disabled?: boolean;
     style?: object;
@@ -20,9 +19,9 @@ export interface SplitButtonProps {
     appendTo?: SplitButtonAppendToType;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    buttonTemplate?: SplitButtonButtonTemplateType;
+    buttonTemplate?: TemplateType<SplitButtonProps>;
     transitionOptions?: object;
-    dropdownIcon?: string;
+    dropdownIcon?: IconType<SplitButtonProps>;
     onClick?(event: React.MouseEvent<HTMLElement>): void;
     onShow?(): void;
     onHide?(): void;

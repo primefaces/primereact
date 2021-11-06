@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from '../button/Button';
 import { Messages } from '../messages/Messages';
 import { ProgressBar } from '../progressbar/ProgressBar';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { DomHandler, ObjectUtils, IconUtils, classNames } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
 import { localeOption } from '../api/Api';
 
@@ -462,7 +462,7 @@ export class FileUpload extends Component {
             <span className={chooseClassName} style={style} onClick={this.choose} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
                 <input ref={(el) => this.fileInput = el} type="file" onChange={this.onFileSelect}
                     multiple={this.props.multiple} accept={this.props.accept} disabled={this.chooseDisabled()} />
-                <span className={chooseIconClassName}></span>
+                {IconUtils.getJSXIcon(icon, {className: chooseIconClassName}, this.props)}
                 {label}
                 <Ripple />
             </span>
@@ -599,7 +599,7 @@ export class FileUpload extends Component {
                 {this.hasFiles() ? this.state.files[0].name : chooseLabel}
             </span>
         );
-        const icon = <span className={iconClassName}></span>;
+        const icon = IconUtils.getJSXIcon(chooseOptions.icon, {className: iconClassName}, this.props);
 
         return (
             <div className={className} style={this.props.style}>

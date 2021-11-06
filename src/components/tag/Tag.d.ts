@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {IconType} from "../utils/Utils";
 
 type TagSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
 
@@ -6,7 +7,7 @@ export interface TagProps {
     value?: React.ReactNode;
     severity?: TagSeverityType;
     rounded?: boolean;
-    icon?: string;
+    icon?: IconType<TagProps>;
     style?: object;
     className?: string;
 }

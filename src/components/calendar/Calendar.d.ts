@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import {IconType} from "../utils/Utils";
 
 type CalendarAppendToType = 'self' | HTMLElement | undefined | null;
 
@@ -84,7 +85,7 @@ export interface CalendarProps {
     tabIndex?: number;
     placeholder?: string;
     showIcon?: boolean;
-    icon?: string;
+    icon?: IconType<CalendarProps>;
     showOnFocus?: boolean;
     numberOfMonths?: number;
     view?: string;
