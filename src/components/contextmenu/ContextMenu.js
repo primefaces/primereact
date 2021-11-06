@@ -285,18 +285,6 @@ export class ContextMenu extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.visible && (prevState.reshow !== this.state.reshow || prevProps.model !== this.props.model)) {
-            let event = this.currentEvent;
-            this.setState({
-                visible: false,
-                reshow: false,
-                rePosition: false,
-                resetMenu: true
-            }, () => this.show(event));
-        }
-    }
-
     hide(event) {
         if (!(event instanceof Event)) {
             event.persist();
@@ -450,6 +438,18 @@ export class ContextMenu extends Component {
     componentDidMount() {
         if (this.props.global) {
             this.bindDocumentContextMenuListener();
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.visible && (prevState.reshow !== this.state.reshow || prevProps.model !== this.props.model)) {
+            let event = this.currentEvent;
+            this.setState({
+                visible: false,
+                reshow: false,
+                rePosition: false,
+                resetMenu: true
+            }, () => this.show(event));
         }
     }
 
