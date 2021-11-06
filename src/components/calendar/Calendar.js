@@ -184,13 +184,7 @@ export class Calendar extends Component {
         };
 
         if (!this.props.onViewDateChange) {
-            let propValue = this.props.value;
-            if (Array.isArray(propValue)) {
-                propValue = propValue[0];
-            }
-
-            let viewDate = this.props.viewDate && this.isValidDate(this.props.viewDate) ?
-                this.props.viewDate : (propValue && this.isValidDate(propValue) ? propValue : new Date());
+            let viewDate = this.getViewDate(this.props.viewDate);
 
             this.validateDate(viewDate);
 
@@ -1020,8 +1014,14 @@ export class Calendar extends Component {
         event.preventDefault();
     }
 
-    getViewDate() {
-        return this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+    getViewDate(date) {
+        let propValue = this.props.value;
+        let viewDate = date || (this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate);
+        if (Array.isArray(propValue)) {
+            propValue = propValue[0];
+        }
+
+        return viewDate && this.isValidDate(viewDate) ? viewDate : (propValue && this.isValidDate(propValue) ? propValue : new Date());
     }
 
     getCurrentDateTime() {
