@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { DomHandler, classNames } from '../utils/Utils';
+import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
 
 export class SplitterPanel extends Component {
 
@@ -215,7 +215,7 @@ export class Splitter extends Component {
 
     componentDidMount() {
         if (this.panelElement) {
-            if (this.panelElement.childNodes && DomHandler.find(this.panelElement, '.p-splitter').length) {
+            if (this.panelElement.childNodes && ObjectUtils.isNotEmpty(DomHandler.find(this.panelElement, '.p-splitter'))) {
                 DomHandler.addClass(this.panelElement, 'p-splitter-panel-nested');
             }
         }
