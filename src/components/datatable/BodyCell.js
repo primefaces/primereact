@@ -354,13 +354,15 @@ export class BodyCell extends Component {
 
                 //enter
                 case 13: // @deprecated
-                    this.onClick(event);
-                    event.preventDefault();
+                    if (!DomHandler.isClickable(target)) {
+                        this.onClick(event);
+                        event.preventDefault();
+                    }
                     break;
 
                 //space
                 case 32:
-                    if (target.nodeName !== 'INPUT' && target.nodeName !== 'TEXTAREA' && !target.readOnly) {
+                    if (!DomHandler.isClickable(target) && !target.readOnly) {
                         this.onClick(event);
                         event.preventDefault();
                     }

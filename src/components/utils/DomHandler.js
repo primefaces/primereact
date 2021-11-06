@@ -822,8 +822,8 @@ export default class DomHandler {
         const targetNode = element.nodeName;
         const parentNode = element.parentElement && element.parentElement.nodeName;
 
-        return (targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' ||
-                parentNode === 'INPUT' || parentNode === 'BUTTON' || parentNode === 'A' ||
+        return (targetNode === 'INPUT' || targetNode === 'TEXTAREA' || targetNode === 'BUTTON' || targetNode === 'A' ||
+                parentNode === 'INPUT'|| parentNode === 'TEXTAREA' || parentNode === 'BUTTON' || parentNode === 'A' ||
                 this.hasClass(element, 'p-button') || this.hasClass(element.parentElement, 'p-button') ||
                 this.hasClass(element.parentElement, 'p-checkbox') || this.hasClass(element.parentElement, 'p-radiobutton')
         );
