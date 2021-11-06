@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { DomHandler, classNames } from '../utils/Utils';
+import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
 import { PickListSubList } from './PickListSubList';
 import { PickListControls } from './PickListControls';
 import { PickListTransferControls } from './PickListTransferControls';
@@ -186,7 +186,9 @@ export class PickList extends Component {
 
     scrollInView(listContainer, direction = 1) {
         let selectedItems = listContainer.getElementsByClassName('p-highlight');
-        DomHandler.scrollInView(listContainer, (direction === -1 ? selectedItems[0] : selectedItems[selectedItems.length - 1]));
+        if (ObjectUtils.isNotEmpty(selectedItems)) {
+            DomHandler.scrollInView(listContainer, (direction === -1 ? selectedItems[0] : selectedItems[selectedItems.length - 1]));
+        }
     }
 
     onSelectionChange(e, stateKey, callback) {
@@ -197,10 +199,10 @@ export class PickList extends Component {
             this.setState({ [stateKey]: e.value });
         }
 
-        if (this.state.sourceSelection && this.state.sourceSelection.length && stateKey === 'targetSelection') {
+        if (ObjectUtils.isNotEmpty(this.state.sourceSelection) && stateKey === 'targetSelection') {
             this.setState({ sourceSelection: [] })
         }
-        else if (this.state.targetSelection && this.state.targetSelection.length && stateKey === 'sourceSelection') {
+        else if (ObjectUtils.isNotEmpty(this.state.targetSelection) && stateKey === 'sourceSelection') {
             this.setState({ targetSelection: [] })
         }
     }

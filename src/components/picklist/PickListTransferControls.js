@@ -16,7 +16,7 @@ export class PickListTransferControls extends Component {
     moveRight(event) {
         let selection = this.props.sourceSelection;
 
-        if (selection && selection.length) {
+        if (ObjectUtils.isNotEmpty(selection)) {
             let targetList = [...this.props.target];
             let sourceList = [...this.props.source];
 
@@ -58,7 +58,7 @@ export class PickListTransferControls extends Component {
     moveLeft(event) {
         let selection = this.props.targetSelection;
 
-        if (selection && selection.length) {
+        if (ObjectUtils.isNotEmpty(selection)) {
             let targetList = [...this.props.target];
             let sourceList = [...this.props.source];
 
@@ -100,10 +100,10 @@ export class PickListTransferControls extends Component {
 
 
     render() {
-        let moveRightDisabled = !this.props.sourceSelection.length;
-        let moveLeftDisabled = !this.props.targetSelection.length;
-        let moveAllRightDisabled = !this.props.source.length;
-        let moveAllLeftDisabled = !this.props.target.length;
+        let moveRightDisabled = ObjectUtils.isEmpty(this.props.sourceSelection);
+        let moveLeftDisabled = ObjectUtils.isEmpty(this.props.targetSelection);
+        let moveAllRightDisabled = ObjectUtils.isEmpty(this.props.source);
+        let moveAllLeftDisabled = ObjectUtils.isEmpty(this.props.target);
 
         let className = classNames('p-picklist-buttons p-picklist-transfer-buttons', this.props.className);
 
