@@ -70,7 +70,6 @@ export class Accordion extends Component {
         }
 
         this.state = state;
-        this.contentWrappers = [];
     }
 
     shouldTabRender(tab) {
