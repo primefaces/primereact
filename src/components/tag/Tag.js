@@ -31,11 +31,9 @@ export class Tag extends Component {
             'p-tag-rounded': this.props.rounded
         }, this.props.className);
 
-        const iconClass = classNames('p-tag-icon', this.props.icon);
-
         return (
             <span className={tagClassName} style={this.props.style}>
-                {this.props.icon && IconUtils.getJSXIcon(this.props.icon, {className: iconClass}, this.props)}
+                {IconUtils.getJSXIcon(this.props.icon, { className: 'p-tag-icon' }, { props: this.props })}
                 <span className="p-tag-value">{this.props.value}</span>
                 <span>{this.props.children}</span>
             </span>

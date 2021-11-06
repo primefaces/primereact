@@ -132,15 +132,14 @@ export class ToggleButton extends Component {
             iconClassName = classNames('p-button-icon p-c', {
                 'p-button-icon-left': this.props.iconPos === 'left' && label,
                 'p-button-icon-right': this.props.iconPos === 'right' && label
-            }, icon);
+            });
         }
 
         return (
             <div ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}
                 onClick={this.toggle} onFocus={this.props.onFocus} onBlur={this.props.onBlur} onKeyDown={this.onKeyDown}
                 tabIndex={!this.props.disabled && this.props.tabIndex} aria-labelledby={this.props.ariaLabelledBy}>
-
-                {hasIcon && IconUtils.getJSXIcon(icon, {className: iconClassName}, this.props)}
+                {hasIcon && IconUtils.getJSXIcon(icon, { className: iconClassName }, { props: this.props })}
                 <span className="p-button-label">{label}</span>
                 <Ripple />
             </div>

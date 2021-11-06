@@ -129,7 +129,6 @@ export class Accordion extends Component {
 
     renderTabHeader(tab, selected, index) {
         const tabHeaderClass = classNames('p-accordion-header', { 'p-highlight': selected, 'p-disabled': tab.props.disabled }, tab.props.headerClassName);
-        const iconClassName = classNames('p-accordion-toggle-icon', { [`${this.props.expandIcon}`]: !selected, [`${this.props.collapseIcon}`]: selected });
         const id = this.state.id + '_header_' + index;
         const ariaControls = this.state.id + '_content_' + index;
         const tabIndex = tab.props.disabled ? -1 : null;
@@ -139,7 +138,7 @@ export class Accordion extends Component {
         return (
             <div className={tabHeaderClass} style={tab.props.headerStyle}>
                 <a href={'#' + ariaControls} id={id} className="p-accordion-header-link" aria-controls={ariaControls} role="tab" aria-expanded={selected} onClick={(event) => this.onTabHeaderClick(event, tab, index)} tabIndex={tabIndex}>
-                    {IconUtils.getJSXIcon(icon, {className: iconClassName}, this.props)}
+                    {IconUtils.getJSXIcon(icon, { className: 'p-accordion-toggle-icon' }, { props: this.props, selected })}
                     {header}
                 </a>
             </div>

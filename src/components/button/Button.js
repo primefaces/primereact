@@ -100,7 +100,7 @@ export class ButtonComponent extends Component {
             'p-button-icon-top': this.props.iconPos === 'top' && this.props.label,
             'p-button-icon-bottom': this.props.iconPos === 'bottom' && this.props.label,
         });
-        return IconUtils.getJSXIcon(icon, {className}, this.props);
+        return IconUtils.getJSXIcon(icon, { className }, { props: this.props });
     }
 
     renderLabel() {

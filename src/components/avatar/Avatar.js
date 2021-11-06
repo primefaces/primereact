@@ -37,8 +37,7 @@ export class Avatar extends Component {
             return <span className="p-avatar-text">{this.props.label}</span>;
         }
         else if (this.props.icon) {
-            const iconClassName = classNames('p-avatar-icon', this.props.icon);
-            return IconUtils.getJSXIcon(this.props.icon, {className: iconClassName}, this.props);
+            return IconUtils.getJSXIcon(this.props.icon, { className: 'p-avatar-icon' }, { props: this.props });
         }
         else if (this.props.image) {
             const onError = (e) => {

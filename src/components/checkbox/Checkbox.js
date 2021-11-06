@@ -171,9 +171,7 @@ export class Checkbox extends Component {
             'p-disabled': this.props.disabled,
             'p-focus': this.state.focused
         });
-        const iconClass = classNames('p-checkbox-icon p-c', {
-            [`${this.props.icon}`]: checked
-        });
+        const icon = checked && this.props.icon;
 
         return (
             <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
@@ -182,7 +180,7 @@ export class Checkbox extends Component {
                              onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly} required={this.props.required}/>
                 </div>
                 <div className={boxClass} ref={el => this.box = el} role="checkbox" aria-checked={checked}>
-                    {IconUtils.getJSXIcon(this.props.icon, {className: iconClass}, this.props)}
+                    {IconUtils.getJSXIcon(icon, { className: 'p-checkbox-icon p-c' }, { props: this.props, checked })}
                 </div>
             </div>
         )

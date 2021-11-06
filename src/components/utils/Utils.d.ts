@@ -98,7 +98,7 @@ export declare class ObjectUtils {
 }
 
 export declare class IconUtils {
-    static getJSXIcon(icon: IconType<any>, iconProps: React.HTMLProps<HTMLElement>, props: any): any;
+    static getJSXIcon(icon: IconType<any>, iconProps: React.HTMLProps<HTMLElement>, options: any): any;
 }
 
 export declare function UniqueComponentId(prefix?: string): string;
@@ -114,7 +114,8 @@ export declare namespace ZIndexUtils {
 export interface IconOptions<ParentProps> {
     iconProps: React.HTMLProps<HTMLElement>;
     element: React.ReactNode;
-    props: ParentProps;
+    props?: ParentProps;
+    [key: string]: any;
 }
 
 export type IconType<ParentProps> = React.ReactNode | ((options: IconOptions<ParentProps>) => React.ReactNode);

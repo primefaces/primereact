@@ -167,15 +167,13 @@ export class ConfirmDialog extends Component {
 
     renderElement() {
         const className = classNames('p-confirm-dialog', this.props.className);
-        const iconClassName = classNames('p-confirm-dialog-icon', this.props.icon);
-
         const dialogProps = ObjectUtils.findDiffKeys(this.props, ConfirmDialog.defaultProps);
         const message = ObjectUtils.getJSXElement(this.props.message, this.props);
         const footer = this.renderFooter();
 
         return (
             <Dialog visible={this.state.visible} {...dialogProps} className={className} footer={footer} onHide={this.hide} breakpoints={this.props.breakpoints}>
-                {IconUtils.getJSXIcon(this.props.icon, {className: iconClassName}, this.props)}
+                {IconUtils.getJSXIcon(this.props.icon, { className: 'p-confirm-dialog-icon' }, { props: this.props })}
                 <span className="p-confirm-dialog-message">{message}</span>
             </Dialog>
         );

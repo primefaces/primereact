@@ -452,9 +452,6 @@ export class FileUpload extends Component {
             'p-focus': this.state.focused,
             'p-button-icon-only': iconOnly
         }, className);
-        const chooseIconClassName = classNames('p-button-icon p-button-icon-left p-clickable', {
-            'pi pi-fw pi-plus': !icon
-        }, icon);
         const labelClassName = 'p-button-label p-clickable';
         const label = iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: "&nbsp;" }} /> : <span className={labelClassName}>{this.chooseButtonLabel()}</span>;
 
@@ -462,7 +459,7 @@ export class FileUpload extends Component {
             <span className={chooseClassName} style={style} onClick={this.choose} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
                 <input ref={(el) => this.fileInput = el} type="file" onChange={this.onFileSelect}
                     multiple={this.props.multiple} accept={this.props.accept} disabled={this.chooseDisabled()} />
-                {IconUtils.getJSXIcon(icon, {className: chooseIconClassName}, this.props)}
+                {IconUtils.getJSXIcon(icon || 'pi pi-fw pi-plus', { className: 'p-button-icon p-button-icon-left p-clickable' }, { props: this.props })}
                 {label}
                 <Ripple />
             </span>
@@ -588,18 +585,19 @@ export class FileUpload extends Component {
     }
 
     renderBasic() {
+        const hasFiles = this.hasFiles();
         const chooseOptions = this.props.chooseOptions;
         const className = classNames('p-fileupload p-fileupload-basic p-component', this.props.className);
-        const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': this.hasFiles(), 'p-disabled': this.props.disabled, 'p-focus': this.state.focused }, chooseOptions.className);
-        const iconClassName = classNames('p-button-icon p-button-icon-left pi', { 'pi-plus': !chooseOptions.icon && (!this.hasFiles() || this.props.auto), 'pi-upload': !chooseOptions.icon && this.hasFiles() && !this.props.auto }, chooseOptions.icon);
+        const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': hasFiles, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused }, chooseOptions.className);
+        const chooseIcon = chooseOptions.icon || classNames({ 'pi pi-plus': !chooseOptions.icon && (!hasFiles || this.props.auto), 'pi pi-upload': !chooseOptions.icon && hasFiles && !this.props.auto });
         const labelClassName = 'p-button-label p-clickable';
         const chooseLabel = chooseOptions.iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: "&nbsp;" }} /> : <span className={labelClassName}>{this.chooseButtonLabel()}</span>;
         const label = this.props.auto ? chooseLabel : (
             <span className={labelClassName}>
-                {this.hasFiles() ? this.state.files[0].name : chooseLabel}
+                {hasFiles ? this.state.files[0].name : chooseLabel}
             </span>
         );
-        const icon = IconUtils.getJSXIcon(chooseOptions.icon, {className: iconClassName}, this.props);
+        const icon = IconUtils.getJSXIcon(chooseIcon, { className: 'p-button-icon p-button-icon-left' }, { props: this.props, hasFiles });
 
         return (
             <div className={className} style={this.props.style}>
@@ -607,7 +605,7 @@ export class FileUpload extends Component {
                 <span className={buttonClassName} style={chooseOptions.style} onMouseUp={this.onSimpleUploaderClick} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
                     {icon}
                     {label}
-                    {!this.hasFiles() && <input ref={(el) => this.fileInput = el} type="file" accept={this.props.accept} multiple={this.props.multiple} disabled={this.props.disabled} onChange={this.onFileSelect} />}
+                    {!hasFiles && <input ref={(el) => this.fileInput = el} type="file" accept={this.props.accept} multiple={this.props.multiple} disabled={this.props.disabled} onChange={this.onFileSelect} />}
                     <Ripple />
                 </span>
             </div>

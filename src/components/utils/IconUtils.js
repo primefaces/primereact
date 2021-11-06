@@ -1,20 +1,22 @@
-import * as React from "react";
-import ObjectUtils from "./ObjectUtils";
+import React from 'react';
+import ObjectUtils from './ObjectUtils';
+import { classNames } from './Utils';
 
 export default class IconUtils {
 
-    static getJSXIcon(icon, iconProps, parentProps) {
+    static getJSXIcon(icon, iconProps, options) {
         let content = null;
 
         if (icon) {
-            let iconType = typeof icon;
-            content = <span {...iconProps}></span>;
+            const iconType = typeof icon;
+            const className = classNames(iconProps.className, iconType === 'string' && icon);
+            content = <span {...iconProps} className={className}></span>;
 
             if (iconType !== 'string') {
                 const defaultContentOptions = {
                     iconProps: iconProps,
                     element: content,
-                    props: parentProps
+                    ...options
                 };
 
                 return ObjectUtils.getJSXElement(icon, defaultContentOptions);

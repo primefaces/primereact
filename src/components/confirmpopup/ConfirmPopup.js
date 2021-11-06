@@ -309,12 +309,11 @@ export class ConfirmPopup extends Component {
     }
 
     renderContent() {
-        const iconClassName = classNames('p-confirm-popup-icon', this.props.icon);
         const message = ObjectUtils.getJSXElement(this.props.message, this.props);
 
         return (
             <div className="p-confirm-popup-content">
-                {IconUtils.getJSXIcon(this.props.icon, {className: iconClassName}, this.props)}
+                {IconUtils.getJSXIcon(this.props.icon, { className: 'p-confirm-popup-icon' }, { props: this.props })}
                 <span className="p-confirm-popup-message">{message}</span>
             </div>
         );

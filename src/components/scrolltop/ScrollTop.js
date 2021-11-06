@@ -120,7 +120,6 @@ export class ScrollTop extends Component {
         const className = classNames('p-scrolltop p-link p-component', {
             'p-scrolltop-sticky': this.props.target !== 'window'
         }, this.props.className);
-        const iconClassName = classNames('p-scrolltop-icon', this.props.icon);
         const isTargetParent = this.props.target === 'parent';
 
         return (
@@ -128,7 +127,7 @@ export class ScrollTop extends Component {
                 <CSSTransition nodeRef={this.scrollElementRef} classNames="p-scrolltop" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} options={this.props.transitionOptions}
                     unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExited={this.onExited}>
                     <button ref={this.scrollElementRef} type="button" className={className} style={this.props.style} onClick={this.onClick}>
-                        {IconUtils.getJSXIcon(this.props.icon, {className: iconClassName}, this.props)}
+                        {IconUtils.getJSXIcon(this.props.icon, { className: 'p-scrolltop-icon' }, { props: this.props })}
                         <Ripple />
                     </button>
                 </CSSTransition>
