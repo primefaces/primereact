@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { VirtualScrollerProps } from '../virtualscroller';
-import {IconType} from "../utils/Utils";
+import { IconType } from '../utils/Utils';
 
 type AutoCompleteOptionGroupTemplateType = React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
 
@@ -85,6 +85,7 @@ export interface AutoCompleteProps {
     selectedItemTemplate?: AutoCompleteSelectedItemTemplateType;
     transitionOptions?: object;
     dropdownIcon?: IconType<AutoCompleteProps>;
+    removeIcon?: IconType<AutoCompleteProps>;
     onChange?(e: AutoCompleteChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;

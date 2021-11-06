@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { InputText } from '../inputtext/InputText';
 import { Button } from '../button/Button';
-import { DomHandler, ObjectUtils, classNames, UniqueComponentId, ConnectedOverlayScrollHandler, ZIndexUtils} from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames, UniqueComponentId, ConnectedOverlayScrollHandler, ZIndexUtils, IconUtils} from '../utils/Utils';
 import { AutoCompletePanel } from './AutoCompletePanel';
 import { tip } from '../tooltip/Tooltip';
 import { OverlayService } from '../overlayservice/OverlayService';
@@ -53,6 +53,7 @@ export class AutoComplete extends Component {
         selectedItemTemplate: null,
         transitionOptions: null,
         dropdownIcon: 'pi pi-chevron-down',
+        removeIcon: 'pi pi-times-circle',
         onChange: null,
         onFocus: null,
         onBlur: null,
@@ -113,6 +114,7 @@ export class AutoComplete extends Component {
         selectedItemTemplate: PropTypes.any,
         transitionOptions: PropTypes.object,
         dropdownIcon: PropTypes.any,
+        removeIcon: PropTypes.any,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
@@ -759,7 +761,7 @@ export class AutoComplete extends Component {
                 return (
                     <li key={index + 'multi-item'} className="p-autocomplete-token p-highlight">
                         <span className="p-autocomplete-token-label">{this.formatValue(val)}</span>
-                        {!this.props.disabled && <span className="p-autocomplete-token-icon pi pi-times-circle" onClick={(e) => this.removeItem(e, index)}></span>}
+                        {!this.props.disabled && IconUtils.getJSXIcon(this.props.removeIcon, { className: 'p-autocomplete-token-icon', onClick: (e) => this.removeItem(e, index) }, { props: this.props })}
                     </li>
                 );
             });
