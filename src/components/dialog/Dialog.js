@@ -384,7 +384,7 @@ export class Dialog extends Component {
             this.bindDocumentResizeListeners();
         }
 
-        if (this.props.closeOnEscape && this.props.closable) {
+        if (this.props.closable) {
             this.bindDocumentKeyDownListener();
         }
     }
@@ -436,7 +436,7 @@ export class Dialog extends Component {
                 let paramLength = params.length;
                 let dialogId = params[paramLength - 1] ? params[paramLength - 1].id : undefined;
 
-                if (dialogId === this.state.id) {
+                if (dialogId === this.state.id && this.props.closeOnEscape) {
                     let dialog = document.getElementById(dialogId);
 
                     if (event.which === 27) {
