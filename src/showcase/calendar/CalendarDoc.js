@@ -1073,6 +1073,12 @@ const monthNavigatorTemplate = (options) => {
                                         <td>Icon of the calendar button.</td>
                                     </tr>
                                     <tr>
+                                        <td>iconPos</td>
+                                        <td>string</td>
+                                        <td>right</td>
+                                        <td>Icon position of the calendar button. Valid values is 'left' and 'right'.</td>
+                                    </tr>
+                                    <tr>
                                         <td>showOnFocus</td>
                                         <td>boolean</td>
                                         <td>true</td>

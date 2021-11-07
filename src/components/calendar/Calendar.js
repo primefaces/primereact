@@ -35,6 +35,7 @@ export class Calendar extends Component {
         placeholder: null,
         showIcon: false,
         icon: 'pi pi-calendar',
+        iconPos: 'right',
         showOnFocus: true,
         numberOfMonths: 1,
         view: 'date',
@@ -117,6 +118,7 @@ export class Calendar extends Component {
         placeholder: PropTypes.string,
         showIcon: PropTypes.bool,
         icon: PropTypes.any,
+        iconPos: PropTypes.string,
         showOnFocus: PropTypes.bool,
         numberOfMonths: PropTypes.number,
         view: PropTypes.string,
@@ -3090,6 +3092,27 @@ export class Calendar extends Component {
         return null;
     }
 
+    renderContent() {
+        const input = this.renderInputElement();
+        const button = this.renderButton();
+
+        if (this.props.iconPos === 'left') {
+            return (
+                <>
+                    {button}
+                    {input}
+                </>
+            )
+        }
+
+        return (
+            <>
+                {input}
+                {button}
+            </>
+        )
+    }
+
     renderButtonBar() {
         if (this.props.showButtonBar) {
             const todayClassName = classNames('p-button-text', this.props.todayButtonClassName);
@@ -3123,7 +3146,7 @@ export class Calendar extends Component {
 
     render() {
         const className = classNames('p-calendar p-component p-inputwrapper', this.props.className, {
-            'p-calendar-w-btn': this.props.showIcon,
+            [`p-calendar-w-btn p-calendar-w-btn-${this.props.iconPos}`]: this.props.showIcon,
             'p-calendar-disabled': this.props.disabled,
             'p-calendar-timeonly': this.props.timeOnly,
             'p-inputwrapper-filled': this.props.value || (DomHandler.hasClass(this.inputRef.current, 'p-filled') && this.inputRef.current.value !== ''),
@@ -3137,8 +3160,7 @@ export class Calendar extends Component {
             'p-datepicker-monthpicker': (this.props.view === 'month'),
             'p-datepicker-touch-ui': this.props.touchUI
         });
-        const input = this.renderInputElement();
-        const button = this.renderButton();
+        const content = this.renderContent();
         const datePicker = this.renderDatePicker();
         const timePicker = this.renderTimePicker();
         const buttonBar = this.renderButtonBar();
@@ -3148,8 +3170,7 @@ export class Calendar extends Component {
 
         return (
             <span ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
-                {input}
-                {button}
+                {content}
                 <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick} onMouseUp={this.onPanelMouseUp}
                     in={isVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
                     transitionOptions={this.props.transitionOptions}>

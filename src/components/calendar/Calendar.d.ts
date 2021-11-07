@@ -6,6 +6,8 @@ type CalendarAppendToType = 'self' | HTMLElement | undefined | null;
 
 type CalendarVisibleType = 'outside' | 'dateselect' | undefined | null;
 
+type CalendarIconPosType = 'left' | 'right';
+
 interface CalendarChangeTargetOptions {
     name: string;
     id: string;
@@ -86,6 +88,7 @@ export interface CalendarProps {
     placeholder?: string;
     showIcon?: boolean;
     icon?: IconType<CalendarProps>;
+    iconPos?: CalendarIconPosType;
     showOnFocus?: boolean;
     numberOfMonths?: number;
     view?: string;
