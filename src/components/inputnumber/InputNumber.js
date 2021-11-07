@@ -296,7 +296,7 @@ export class InputNumber extends Component {
     }
 
     onUpButtonMouseDown(event) {
-        if (!this.props.disabled) {
+        if (!this.props.disabled && !this.props.readOnly) {
             this.inputRef.current.focus();
             this.repeat(event, null, 1);
             event.preventDefault();
@@ -304,31 +304,31 @@ export class InputNumber extends Component {
     }
 
     onUpButtonMouseUp() {
-        if (!this.props.disabled) {
+        if (!this.props.disabled && !this.props.readOnly) {
             this.clearTimer();
         }
     }
 
     onUpButtonMouseLeave() {
-        if (!this.props.disabled) {
+        if (!this.props.disabled && !this.props.readOnly) {
             this.clearTimer();
         }
     }
 
     onUpButtonKeyUp() {
-        if (!this.props.disabled) {
+        if (!this.props.disabled && !this.props.readOnly) {
             this.clearTimer();
         }
     }
 
     onUpButtonKeyDown(event) {
-        if (event.keyCode === 32 || event.keyCode === 13) {
+        if (!this.props.disabled && !this.props.readOnly && (event.keyCode === 32 || event.keyCode === 13)) {
             this.repeat(event, null, 1);
         }
     }
 
     onDownButtonMouseDown(event) {
-        if (!this.props.disabled) {
+        if (!this.props.disabled && !this.props.readOnly) {
             this.inputRef.current.focus();
             this.repeat(event, null, -1);
 
@@ -337,30 +337,34 @@ export class InputNumber extends Component {
     }
 
     onDownButtonMouseUp() {
-        if (!this.props.disabled) {
+        if (!this.props.disabled && !this.props.readOnly) {
             this.clearTimer();
         }
     }
 
     onDownButtonMouseLeave() {
-        if (!this.props.disabled) {
+        if (!this.props.disabled && !this.props.readOnly) {
             this.clearTimer();
         }
     }
 
     onDownButtonKeyUp() {
-        if (!this.props.disabled) {
+        if (!this.props.disabled && !this.props.readOnly) {
             this.clearTimer();
         }
     }
 
     onDownButtonKeyDown(event) {
-        if (event.keyCode === 32 || event.keyCode === 13) {
+        if (!this.props.disabled && !this.props.readOnly && (event.keyCode === 32 || event.keyCode === 13)) {
             this.repeat(event, null, -1);
         }
     }
 
     onInput(event) {
+        if (this.props.disabled || this.props.readOnly) {
+            return;
+        }
+
         if (this.isSpecialChar) {
             event.target.value = this.lastValue;
         }
@@ -368,6 +372,10 @@ export class InputNumber extends Component {
     }
 
     onInputKeyDown(event) {
+        if (this.props.disabled || this.props.readOnly) {
+            return;
+        }
+
         this.lastValue = event.target.value;
         if (event.shiftKey || event.altKey) {
             this.isSpecialChar = true;
@@ -521,6 +529,10 @@ export class InputNumber extends Component {
     }
 
     onInputKeyPress(event) {
+        if (this.props.disabled || this.props.readOnly) {
+            return;
+        }
+
         let code = event.which || event.keyCode;
         let char = String.fromCharCode(code);
         const isDecimalSign = this.isDecimalSign(char);
@@ -535,6 +547,11 @@ export class InputNumber extends Component {
 
     onPaste(event) {
         event.preventDefault();
+
+        if (this.props.disabled || this.props.readOnly) {
+            return;
+        }
+
         let data = (event.clipboardData || window['clipboardData']).getData('Text');
         if (data) {
             let filteredData = this.parseValue(data);
