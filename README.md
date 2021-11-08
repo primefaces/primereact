@@ -45,7 +45,7 @@ const { Accordion, AccordionTab } = primereact.accordion;
 ```
 
 Import all components and structures
-```
+```javascript
 <script src="https://unpkg.com/primereact/primereact.all.min.js"></script>
 ```
 
@@ -55,7 +55,7 @@ Majority of PrimeReact components (95%) are native and there are some exceptions
 
 In addition, components require PrimeIcons for icons and react-transition-group for animations.
 
-```
+```javascript
 dependencies: {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
