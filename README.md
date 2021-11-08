@@ -25,13 +25,14 @@ yarn add primeicons
 
 ## Import
 
+#### Module
 ```javascript
 //import { ComponentName } from 'primereact/{componentname}';
 import { Dialog } from 'primereact/dialog';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 ```
 
-## CDN
+#### CDN
 
 ```javascript
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
