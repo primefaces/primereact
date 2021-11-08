@@ -10,6 +10,8 @@ export interface SidebarProps {
     id?: string;
     style?: object;
     className?: string;
+    maskStyle?: object;
+    maskClassName?: string;
     visible?: boolean;
     position?: SidebarPositionType;
     fullScreen?: boolean;
