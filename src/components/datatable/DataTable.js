@@ -1433,7 +1433,7 @@ export class DataTable extends Component {
                     let cellData = ObjectUtils.resolveFieldData(record, field);
 
                     if (cellData != null) {
-                        cellData = this.props.exportFunction ? this.props.exportFunction({ data: cellData, field }) : String(cellData).replace(/"/g, '""');
+                        cellData = this.props.exportFunction ? this.props.exportFunction({ data: cellData, field, rowData: record, column }) : String(cellData).replace(/"/g, '""');
                     }
                     else
                         cellData = '';

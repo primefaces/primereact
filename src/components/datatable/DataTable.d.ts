@@ -171,6 +171,8 @@ interface DataTableUnselectParams extends DataTableSelectParams { }
 interface DataTableExportFunctionParams {
     data: any;
     field: string;
+    rowData: any;
+    column: Column
 }
 
 interface DataTableColReorderParams {

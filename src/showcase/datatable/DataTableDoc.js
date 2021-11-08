@@ -3328,7 +3328,9 @@ export const DataTableStateDemo = () => {
                             <td>null</td>
                             <td>A function to implement custom export. Need to return string value. <br />
                                 event.data: Field data. <br />
-                                event.rows: Column field.</td>
+                                event.field: Column field.
+                                event.rowData: Row data.
+                                event.column: Column.</td>
                         </tr>
                         <tr>
                             <td>expandableRowGroups</td>
