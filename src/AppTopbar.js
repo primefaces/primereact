@@ -323,6 +323,7 @@ export class AppTopbar extends Component {
                                 <li role="none"><a href="https://twitter.com/primereact?lang=en" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Twitter</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/whouses" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Who Uses</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/newsletter" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Newsletter</span></a></li>
+                                <li role="none"><a href="https://gear.primefaces.org" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Gear Store</span></a></li>
                                 <li role="none"><a href="https://www.primetek.com.tr/" role="menuitem" target="_blank" rel="noopener noreferrer"><span>About PrimeTek</span></a></li>
                             </ul>
                         </CSSTransition>
