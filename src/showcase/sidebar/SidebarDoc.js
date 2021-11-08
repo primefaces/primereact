@@ -399,6 +399,18 @@ import { Sidebar } from 'primereact/sidebar';
                                         <td>Style class of the component.</td>
                                     </tr>
                                     <tr>
+                                        <td>maskStyle</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Inline style of the mask.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>maskClassName</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the mask.</td>
+                                    </tr>
+                                    <tr>
                                         <td>visible</td>
                                         <td>boolean</td>
                                         <td>false</td>
