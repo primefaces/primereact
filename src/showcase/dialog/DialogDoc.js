@@ -839,6 +839,12 @@ const myIcon = (
                                         <td>Style class of the component.</td>
                                     </tr>
                                     <tr>
+                                        <td>maskStyle</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Inline style of the mask.</td>
+                                    </tr>
+                                    <tr>
                                         <td>maskClassName</td>
                                         <td>string</td>
                                         <td>null</td>
