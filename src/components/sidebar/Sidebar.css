@@ -105,7 +105,7 @@
 /* Full */
 .p-sidebar-full .p-sidebar-enter {
     opacity: 0;
-    transform: scale(0.7);
+    transform: scale(0.5);
 }
 
 .p-sidebar-full .p-sidebar-enter-active {
@@ -120,7 +120,7 @@
 
 .p-sidebar-full .p-sidebar-exit-active {
     opacity: 0;
-    transform: scale(0.7);
+    transform: scale(0.5);
     transition: all .15s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
