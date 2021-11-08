@@ -506,7 +506,7 @@ import { Sidebar } from 'primereact/sidebar';
                                     <tr>
                                         <td>onHide</td>
                                         <td>-</td>
-                                        <td>Callback to invoke when sidebar gets hidden.</td>
+                                        <td>Callback to invoke when the actions used to close the sidebar are triggered. Exp; close icon, mask and esc key.</td>
                                     </tr>
                                     <tr>
                                         <td>onShow</td>
