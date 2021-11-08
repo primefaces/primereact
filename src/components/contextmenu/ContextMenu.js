@@ -4,6 +4,7 @@ import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
+import PrimeReact from '../api/Api';
 
 class ContextMenuSub extends Component {
 
@@ -300,7 +301,7 @@ export class ContextMenu extends Component {
 
     onEnter() {
         if (this.props.autoZIndex) {
-            ZIndexUtils.set('menu', this.menuRef.current, this.props.baseZIndex);
+            ZIndexUtils.set('menu', this.menuRef.current, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['menu']);
         }
 
         this.position(this.currentEvent);

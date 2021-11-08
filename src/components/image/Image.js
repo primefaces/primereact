@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { DomHandler, classNames, ZIndexUtils, ObjectUtils } from '../utils/Utils';
 import { Portal } from '../portal/Portal';
+import PrimeReact from '../api/Api';
 
 export class Image extends Component {
 
@@ -114,7 +115,7 @@ export class Image extends Component {
     }
 
     onEntering() {
-        ZIndexUtils.set('modal', this.mask);
+        ZIndexUtils.set('modal', this.mask, PrimeReact.autoZIndex, PrimeReact.zIndex['modal']);
     }
 
     onEntered() {

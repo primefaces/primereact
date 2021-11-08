@@ -5,6 +5,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
+import PrimeReact from '../api/Api';
 
 export class OverlayPanel extends Component {
 
@@ -183,7 +184,7 @@ export class OverlayPanel extends Component {
     }
 
     onEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current);
+        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         this.overlayRef.current.setAttribute(this.attributeSelector, '');
         this.align();
     }

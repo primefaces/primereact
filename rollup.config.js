@@ -14,34 +14,30 @@ const OUTPUT_DIR = 'dist/';
 
 let entries = [];
 
+let core = {};
+
 // alias entries
-const ALIAS_ENTRIES = [
+const ALIAS_COMPONENT_ENTRIES = [
+    { find: '../utils/Utils', replacement: 'primereact/utils' },
     { find: '../api/Api', replacement: 'primereact/api' },
-    { find: '../terminalservice/TerminalService', replacement: 'primereact/terminalservice' },
+    { find: '../ripple/Ripple', replacement: 'primereact/ripple' },
+    { find: '../csstransition/CSSTransition', replacement: 'primereact/csstransition' },
+    { find: '../portal/Portal', replacement: 'primereact/portal' },
+    { find: '../keyfilter/KeyFilter', replacement: 'primereact/keyfilter' },
+    { find: '../tooltip/Tooltip', replacement: 'primereact/tooltip' },
     { find: '../virtualscroller/VirtualScroller', replacement: 'primereact/virtualscroller' },
+    { find: '../terminalservice/TerminalService', replacement: 'primereact/terminalservice' },
+    { find: '../overlayservice/OverlayService', replacement: 'primereact/overlayservice' },
+    { find: '../checkox/Checkbox', replacement: 'primereact/checkbox' },
     { find: '../button/Button', replacement: 'primereact/button' },
     { find: '../inputtext/InputText', replacement: 'primereact/inputtext' },
     { find: '../inputnumber/InputNumber', replacement: 'primereact/inputnumber' },
-    { find: '../paginator/Paginator', replacement: 'primereact/paginator' },
     { find: '../messages/Messages', replacement: 'primereact/messages' },
     { find: '../progressbar/ProgressBar', replacement: 'primereact/progressbar' },
-    { find: '../checkox/Checkbox', replacement: 'primereact/checkbox' },
     { find: '../dropdown/Dropdown', replacement: 'primereact/dropdown' },
-    { find: '../tree/Tree', replacement: 'primereact/tree' },
-    { find: '../dialog/Dialog', replacement: 'primereact/dialog' }
-];
-
-const ALIAS_COMPONENT_ENTRIES = [
-    ...ALIAS_ENTRIES,
-    ...[
-        { find: '../ripple/Ripple', replacement: 'primereact/core' },
-        { find: '../utils/Utils', replacement: 'primereact/core' },
-        { find: '../tooltip/Tooltip', replacement: 'primereact/core' },
-        { find: '../keyfilter/KeyFilter', replacement: 'primereact/core' },
-        { find: '../overlayservice/OverlayService', replacement: 'primereact/core' },
-        { find: '../csstransition/CSSTransition', replacement: 'primereact/core' },
-        { find: '../portal/Portal', replacement: 'primereact/core' }
-    ]
+    { find: '../dialog/Dialog', replacement: 'primereact/dialog' },
+    { find: '../paginator/Paginator', replacement: 'primereact/paginator' },
+    { find: '../tree/Tree', replacement: 'primereact/tree' }
 ];
 
 // dependencies
@@ -55,16 +51,10 @@ const GLOBAL_COMPONENT_DEPENDENCIES = {
     ...GLOBAL_DEPENDENCIES, ...(ALIAS_COMPONENT_ENTRIES.reduce((acc, cur) => ({ ...acc, [cur.replacement]: cur.replacement.replace('\/', '.') }), {}))
 };
 
-const GLOBAL_CORE_DEPENDENCIES = {
-    ...GLOBAL_DEPENDENCIES, ...(ALIAS_ENTRIES.reduce((acc, cur) => ({ ...acc, [cur.replacement]: cur.replacement.replace('\/', '.') }), {}))
-};
-
 // externals
 const EXTERNAL = ['react', 'react-dom', 'react-transition-group', '@babel/runtime', '@fullcalendar/core', 'chart.js/auto', 'quill'];
 
 const EXTERNAL_COMPONENT = [...EXTERNAL, ...(ALIAS_COMPONENT_ENTRIES.map(entries => entries.replacement))];
-
-const EXTERNAL_CORE = [...EXTERNAL, ...(ALIAS_ENTRIES.map(entries => entries.replacement))];
 
 // plugins
 const BABEL_PLUGIN_OPTIONS = {
@@ -74,10 +64,6 @@ const BABEL_PLUGIN_OPTIONS = {
     skipPreflightCheck: true,
     babelHelpers: 'runtime',
     babelrc: false
-};
-
-const ALIAS_PLUGIN_OPTIONS = {
-    entries: ALIAS_ENTRIES
 };
 
 const ALIAS_PLUGIN_OPTIONS_FOR_COMPONENT = {
@@ -123,22 +109,17 @@ const PLUGINS_COMPONENT = [
     ...PLUGINS
 ];
 
-const PLUGINS_CORE = [
-    alias(ALIAS_PLUGIN_OPTIONS),
-    ...PLUGINS
-];
-
 function addEntry(name, input, output, isComponent = true) {
     const exports = name === 'primereact.api' || name === 'primereact' ? 'named' : 'auto';
-    const isCore = name === 'primereact.core';
-    const plugins = isComponent ? PLUGINS_COMPONENT : (isCore ? PLUGINS_CORE : PLUGINS);
-    const external = isComponent ? EXTERNAL_COMPONENT : (isCore ? EXTERNAL_CORE : EXTERNAL);
+    const useCorePlugin = ALIAS_COMPONENT_ENTRIES.some(entry => entry.replacement.replace('primereact/', '') === name.replace('primereact.', ''));
+    const plugins = isComponent ? PLUGINS_COMPONENT : PLUGINS;
+    const external = isComponent ? EXTERNAL_COMPONENT : EXTERNAL;
     const inlineDynamicImports = true;
 
     const getEntry = (isMinify) => {
         return {
             input,
-            plugins: [...plugins, isMinify && terser(TERSER_PLUGIN_OPTIONS)],
+            plugins: [...plugins, isMinify && terser(TERSER_PLUGIN_OPTIONS), useCorePlugin && corePlugin()],
             external,
             inlineDynamicImports
         }
@@ -170,7 +151,7 @@ function addEntry(name, input, output, isComponent = true) {
                     format: 'iife',
                     name,
                     file: `${output}${isMinify ? '.min' : ''}.js`,
-                    globals: isComponent ? GLOBAL_COMPONENT_DEPENDENCIES : (isCore ? GLOBAL_CORE_DEPENDENCIES : GLOBAL_DEPENDENCIES),
+                    globals: isComponent ? GLOBAL_COMPONENT_DEPENDENCIES : GLOBAL_DEPENDENCIES,
                     exports
                 }
             ]
@@ -185,6 +166,50 @@ function addEntry(name, input, output, isComponent = true) {
     entries.push(get_IIFE(true));
 }
 
+function corePlugin() {
+    return {
+        name: 'corePlugin',
+        generateBundle(outputOptions, bundle) {
+            if (outputOptions.format === 'iife') {
+                Object.keys(bundle).forEach(id => {
+                    const chunk = bundle[id];
+                    const name = id.replace('.min.js', '').replace('.js', '');
+                    const filePath = `./dist/core/core${id.indexOf('.min.js') > 0 ? '.min.js': '.js'}`;
+
+                    core[filePath] ? (core[filePath][name] = chunk.code) : (core[filePath] = { [`${name}`]: chunk.code });
+                });
+            }
+        }
+    };
+}
+
+function addCore() {
+    const lastEntry = entries[entries.length - 1];
+
+    lastEntry.plugins = [
+        ...lastEntry.plugins,
+        {
+            name: 'coreMergePlugin',
+            generateBundle() {
+                Object.entries(core).forEach(([filePath, value]) => {
+                    const code = ALIAS_COMPONENT_ENTRIES.reduce((val, entry) => {
+                        const name = entry.replacement.replace('primereact/', '');
+                        val += value[name] + '\n';
+
+                        return val;
+                    }, '');
+
+                    fs.outputFile(path.resolve(__dirname, filePath), code, {}, function(err) {
+                        if (err) {
+                            return console.error(err);
+                        }
+                    });
+                });
+            }
+        }
+    ]
+}
+
 function addComponent() {
     fs.readdirSync(path.resolve(__dirname, INPUT_DIR), { withFileTypes: true })
         .filter(dir => dir.isDirectory())
@@ -195,7 +220,7 @@ function addComponent() {
                     const input = INPUT_DIR + folderName + '/' + file;
                     const output = OUTPUT_DIR + folderName + '/' + name;
 
-                    addEntry('primereact.' + folderName, input, output, folderName !== 'core');
+                    addEntry('primereact.' + folderName, input, output, true);
                 }
             });
         });
@@ -210,5 +235,6 @@ function addPrimeReact() {
 
 addComponent();
 addPrimeReact();
+addCore();
 
 export default entries;

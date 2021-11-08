@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { DomHandler, classNames, ConnectedOverlayScrollHandler, ZIndexUtils } from '../utils/Utils';
 import { Portal } from '../portal/Portal';
+import PrimeReact from '../api/Api';
 
 export function tip(props) {
     let appendTo = props.appendTo || document.body;
@@ -195,7 +196,7 @@ export class Tooltip extends Component {
         const updateTooltipState = () => {
             this.updateText(this.currentTarget, () => {
                 if (this.props.autoZIndex && !ZIndexUtils.get(this.containerEl)) {
-                    ZIndexUtils.set('tooltip', this.containerEl, this.props.baseZIndex);
+                    ZIndexUtils.set('tooltip', this.containerEl, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['tooltip']);
                 }
 
                 this.containerEl.style.left = '';

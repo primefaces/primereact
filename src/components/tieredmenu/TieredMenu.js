@@ -5,6 +5,7 @@ import { TieredMenuSub } from './TieredMenuSub';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
+import PrimeReact from '../api/Api';
 
 export class TieredMenu extends Component {
 
@@ -92,7 +93,7 @@ export class TieredMenu extends Component {
 
     onEnter() {
         if (this.props.autoZIndex) {
-            ZIndexUtils.set('menu', this.menuRef.current, this.props.baseZIndex);
+            ZIndexUtils.set('menu', this.menuRef.current, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['menu']);
         }
         DomHandler.absolutePosition(this.menuRef.current, this.target);
     }

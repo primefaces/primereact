@@ -6,6 +6,7 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { InputTextarea } from '../inputtextarea/InputTextarea';
+import PrimeReact from '../api/Api';
 
 export class Mention extends Component {
 
@@ -105,7 +106,7 @@ export class Mention extends Component {
     }
 
     onOverlayEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current);
+        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         this.alignOverlay();
     }
 

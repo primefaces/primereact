@@ -4,6 +4,7 @@ import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrol
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
+import PrimeReact from '../api/Api';
 
 export class SlideMenuSub extends Component {
 
@@ -274,7 +275,7 @@ export class SlideMenu extends Component {
 
     onEnter() {
         if (this.props.autoZIndex) {
-            ZIndexUtils.set('menu', this.menuRef.current, this.props.baseZIndex);
+            ZIndexUtils.set('menu', this.menuRef.current, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['menu']);
         }
         DomHandler.absolutePosition(this.menuRef.current, this.target);
     }

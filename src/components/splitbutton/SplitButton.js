@@ -99,7 +99,7 @@ export class SplitButton extends Component {
     }
 
     onOverlayEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current);
+        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         this.alignOverlay();
     }
 

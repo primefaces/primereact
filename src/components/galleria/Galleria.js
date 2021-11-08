@@ -6,6 +6,7 @@ import { GalleriaThumbnails } from './GalleriaThumbnails';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
+import PrimeReact from '../api/Api';
 
 export class Galleria extends Component {
 
@@ -132,7 +133,7 @@ export class Galleria extends Component {
     }
 
     onEntering() {
-        ZIndexUtils.set('modal', this.mask, this.props.baseZIndex);
+        ZIndexUtils.set('modal', this.mask, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['modal']);
         DomHandler.addMultipleClasses(this.mask, 'p-component-overlay p-component-overlay-enter');
     }
 

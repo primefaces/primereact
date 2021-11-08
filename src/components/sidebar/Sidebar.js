@@ -4,6 +4,7 @@ import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
+import PrimeReact from '../api/Api';
 
 export class Sidebar extends Component {
 
@@ -147,7 +148,7 @@ export class Sidebar extends Component {
     bindDocumentEscapeListener() {
         this.documentEscapeListener = (event) => {
             if (event.which === 27) {
-                if (ZIndexUtils.get(this.mask) === ZIndexUtils.getCurrent('modal')) {
+                if (ZIndexUtils.get(this.mask) === ZIndexUtils.getCurrent('modal', PrimeReact.autoZIndex)) {
                     this.onClose(event);
                 }
             }
@@ -165,7 +166,7 @@ export class Sidebar extends Component {
     componentDidMount() {
         if (this.props.visible) {
             this.setState({ visible: true }, () => {
-                ZIndexUtils.set('modal', this.mask, this.props.baseZIndex);
+                ZIndexUtils.set('modal', this.mask, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['modal']);
             });
         }
     }
@@ -173,7 +174,7 @@ export class Sidebar extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (this.props.visible && !this.state.maskVisible) {
             this.setState({ maskVisible: true }, () => {
-                ZIndexUtils.set('modal', this.mask, this.props.baseZIndex);
+                ZIndexUtils.set('modal', this.mask, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['modal']);
             });
         }
 

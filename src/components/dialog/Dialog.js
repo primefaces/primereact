@@ -4,6 +4,7 @@ import { DomHandler, ObjectUtils, classNames, ZIndexUtils, UniqueComponentId}  f
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
+import PrimeReact from '../api/Api';
 
 export class Dialog extends Component {
 
@@ -516,7 +517,7 @@ export class Dialog extends Component {
 
         if (this.props.visible) {
             this.setState({ visible: true }, () => {
-                ZIndexUtils.set('modal', this.mask, this.props.baseZIndex);
+                ZIndexUtils.set('modal', this.mask, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['modal']);
             });
         }
 
@@ -528,7 +529,7 @@ export class Dialog extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.visible && !this.state.maskVisible) {
             this.setState({ maskVisible: true }, () => {
-                ZIndexUtils.set('modal', this.mask, this.props.baseZIndex);
+                ZIndexUtils.set('modal', this.mask, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['modal']);
             });
         }
 

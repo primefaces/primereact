@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { MenubarSub } from './MenubarSub';
+import PrimeReact from '../api/Api';
 
 export class Menubar extends Component {
 
@@ -41,7 +42,7 @@ export class Menubar extends Component {
             mobileActive: !prevState.mobileActive
         }), () => {
             if (this.state.mobileActive) {
-                ZIndexUtils.set('menu', this.rootmenu);
+                ZIndexUtils.set('menu', this.rootmenu,  PrimeReact.autoZIndex, PrimeReact.zIndex['menu']);
                 this.bindDocumentClickListener();
             }
             else {
