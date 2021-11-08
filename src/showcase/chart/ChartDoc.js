@@ -10,10 +10,18 @@ export class ChartDoc extends Component {
     render() {
         return (
             <div className="content-section documentation" id="app-doc">
-                <h5>Import</h5>
+                <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Chart } from 'primereact/chart';
+`}
+</CodeHighlight>
+
+                <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/chart/chart.min.js"></script>
 `}
 </CodeHighlight>
 

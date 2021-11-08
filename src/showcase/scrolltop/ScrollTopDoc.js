@@ -137,7 +137,6 @@ export const ScrollTopDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./ScrollTopDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/scrolltop/scrolltop.min.js"></script>
         <script src="https://unpkg.com/primereact/scrollpanel/scrollpanel.min.js"></script>`,
@@ -207,12 +206,21 @@ const ScrollTopDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { ScrollTop } from 'primereact/scrolltop';
 `}
 </CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/scrolltop/scrolltop.min.js"></script>
+`}
+</CodeHighlight>
+
                         <h5>Getting Started</h5>
                         <p>Without any configuration, ScrollTop listens window scroll.</p>
 <CodeHighlight>

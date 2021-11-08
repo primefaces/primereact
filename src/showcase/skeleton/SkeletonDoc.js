@@ -432,7 +432,6 @@ export const SkeletonDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./SkeletonDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
@@ -594,12 +593,21 @@ const SkeletonDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                    <h5>Import</h5>
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Skeleton } from 'primereact/skeleton';
 `}
 </CodeHighlight>
+
+                    <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/skeleton/skeleton.min.js"></script>
+`}
+</CodeHighlight>
+
                 <h5>Getting Started</h5>
 				<p>Skeleton displays a rectangle in its simplest form.</p>
 <CodeHighlight>

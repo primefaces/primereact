@@ -586,7 +586,6 @@ const VirtualScrollerDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./VirtualScrollerDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/blockui/blockui.min.js"></script>
         <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
@@ -819,10 +818,18 @@ const VirtualScrollerDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { VirtualScroller } from 'primereact/virtualscroller';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
 `}
 </CodeHighlight>
 

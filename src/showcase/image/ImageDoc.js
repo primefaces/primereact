@@ -81,15 +81,8 @@ const ImageDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="./ProductService.js"></script>
-
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
-        <script src="https://unpkg.com/primereact/inplace/inplace.min.js"></script>
-        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
-        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
-        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/image/image.min.js"></script>`,
                 content: `
 import React from 'react';
 import { Image } from 'primereact/image';
@@ -122,10 +115,18 @@ const ImageDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Image } from 'primereact/image';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/image/image.min.js"></script>
 `}
 </CodeHighlight>
 

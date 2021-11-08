@@ -171,10 +171,8 @@ const DataScrollerDemo = () => {
         <link rel="stylesheet" href="./DataScrollerDemo.css" />
         <script src="./ProductService.js"></script>
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/datascroller/datascroller.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/rating/rating.min.js"></script>`,
                 content: `
 const { useEffect, useState } = React;
@@ -327,12 +325,20 @@ const DataScrollerDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
-                        <CodeHighlight lang="js">
-                            {`
+                        <h5>Import via Module</h5>
+<CodeHighlight lang="js">
+{`
 import { DataScroller } from 'primereact/datascroller';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/datascroller/datascroller.min.js"></script>
+`}
+</CodeHighlight>
 
                         <h5>Getting Started</h5>
                         <p>DataScroller requires a collection of items as its value, number of rows to load and a template content to display. Here is a sample DataScroller that displays a

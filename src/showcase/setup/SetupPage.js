@@ -25,7 +25,7 @@ npm install primeicons --save
 `}
 </CodeHighlight>
 
-                    <h5>Import</h5>
+                    <h5>Import via Module</h5>
                     <p>Path of each component is available at the "import" section of a component documentation.</p>
 
 <CodeHighlight lang="js">
@@ -33,6 +33,22 @@ npm install primeicons --save
 //import { ComponentName } from 'primereact/{componentname}';
 import { Dialog } from 'primereact/dialog';
 import { Accordion,AccordionTab } from 'primereact/accordion';
+`}
+</CodeHighlight>
+
+                    <h5>Import via CDN</h5>
+                    <p>The core.min.js is required. It includes shared components and structures; utils, api, ripple, portal, keyfilter, tooltip, virtualscroller, terminalservice, overlayservice, checkbox, button, inputtext, inputnumber, messages, progressbar, dropdown, dialog, paginator and tree.</p>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/accordion/accordion.min.js"></script>
+//<script src="https://unpkg.com/primereact/{componentname}/{componentname}.min.js"></script>
+`}
+</CodeHighlight>
+                    <p>For all components and structures</p>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/primereact.all.min.js"></script>
 `}
 </CodeHighlight>
 

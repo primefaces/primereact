@@ -209,9 +209,7 @@ export const TerminalDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./TerminalDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/terminalservice/terminalservice.min.js"></script>
         <script src="https://unpkg.com/primereact/terminal/terminal.min.js"></script>`,
                 content: `
 const { useEffect, useState } = React;
@@ -309,11 +307,19 @@ const TerminalDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Terminal } from 'primereact/terminal';
 import { TerminalService } from 'primereact/terminalservice';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/terminal/terminal.min.js"></script>
 `}
 </CodeHighlight>
 

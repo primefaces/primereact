@@ -206,11 +206,8 @@ const ConfirmPopupDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/confirmpopup/confirmpopup.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
                 content: `
 const { useEffect, useState, useRef } = React;
@@ -282,7 +279,7 @@ const ConfirmPopupDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { ConfirmPopup } from 'primereact/confirmpopup'; // To use <ConfirmPopup> tag
@@ -290,7 +287,15 @@ import { confirmPopup } from 'primereact/confirmpopup'; // To use confirmPopup m
 `}
 </CodeHighlight>
 
-<h5>Getting Started</h5>
+                        <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/confirmpopup/confirmpopup.min.js"></script>
+`}
+</CodeHighlight>
+
+                        <h5>Getting Started</h5>
                         <p>There are two ways to display confirm popup. One of them is to use the <i>confirmPopup</i> method and the other is to use the <i>&lt;ConfirmPopup&gt;</i> tag.
                             These independently create popup element. It supports the same properties in both. <i>target</i> property is mandatory to align the popup to its caller.</p>
 

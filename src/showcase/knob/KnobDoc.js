@@ -301,10 +301,8 @@ const KnobDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/knob/knob.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/knob/knob.min.js"></script>`,
                 content: `
 const { useEffect, useState } = React;
 const { Knob } = primereact.knob;
@@ -405,20 +403,28 @@ const KnobDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
-                        <CodeHighlight lang="js">
-                            {`
+                        <h5>Import via Module</h5>
+<CodeHighlight lang="js">
+{`
 import { Knob } from 'primereact/knob';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/knob/knob.min.js"></script>
+`}
+</CodeHighlight>
 
                         <h5>Getting Started</h5>
                         <p>Knob is used as a controlled input with value and onChange properties.</p>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <Knob value={value} onChange={(e) => setValue(value)} />
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Minimum and Maximum</h5>
                         <p>Boundaries are configured with the <i>min</i> and <i>max</i> values whose defaults are 0 and 100 respectively.</p>

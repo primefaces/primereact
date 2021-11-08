@@ -20,12 +20,19 @@ npm install primeflex@2.0.0 --save
 `}
 </CodeHighlight>
 
-                    <h5>Import</h5>
+                    <h5>Import via Module</h5>
                     <p>Next step is adding the primeflex.css to your application to include all utilities. If you prefer to pick the utilities, move to next step instead.</p>
 
 <CodeHighlight lang="css">
 {`
 import 'primeflex/primeflex.css';
+`}
+</CodeHighlight>
+
+                    <h5>Import via CDN</h5>
+<CodeHighlight lang="css">
+{`
+<script src="https://unpkg.com/primeflex/primeflex.min.js"></script>
 `}
 </CodeHighlight>
 

@@ -156,9 +156,7 @@ const TreeSelectDemo = () => {
         <link rel="stylesheet" href="./TreeSelectDemo.css" />
         <script src="./NodeService.js"></script>
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>
         <script src="https://unpkg.com/primereact/treeselect/treeselect.min.js"></script>`,
                 content: `
 const { useEffect, useState } = React;
@@ -227,10 +225,18 @@ const TreeSelectDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { TreeSelect } from 'primereact/treeselect';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/treeselect/treeselect.min.js"></script>
 `}
 </CodeHighlight>
 

@@ -693,20 +693,11 @@ const DataTableDemo = () => {
         <link rel="stylesheet" href="./DataTableDemo.css" />
         <script src="./CustomerService.js"></script>
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
-        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
-        <script src="https://unpkg.com/primereact/inputnumber/inputnumber.min.js"></script>
-        <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
-        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
-        <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
         <script src="https://unpkg.com/primereact/calendar/calendar.min.js"></script>
         <script src="https://unpkg.com/primereact/multiselect/multiselect.min.js"></script>
-        <script src="https://unpkg.com/primereact/progressbar/progressbar.min.js"></script>
         <script src="https://unpkg.com/primereact/slider/slider.min.js"></script>`,
                 content: `
 const { useEffect, useState } = React;
@@ -971,17 +962,26 @@ const DataTableDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { DataTable } from 'primereact/datatable';
 `}
 </CodeHighlight>
 
-            <h5>Getting Started</h5>
-            <p>DataTable requires a value as an array of objects and columns defined with Column component. Throughout the samples, a product interface having code, name, description, image, category, quantity, price, inventoryStatus and rating properties is used to define an object to be displayed by the datatable.
-                Products are loaded by a CustomerService that connects to a server to fetch the products. Note that this is only for demo purposes, DataTable does not have any restrictions on how data is provided.
-            </p>
+                        <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/column/column.min.js"></script>
+<script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
+`}
+</CodeHighlight>
+
+                        <h5>Getting Started</h5>
+                        <p>DataTable requires a value as an array of objects and columns defined with Column component. Throughout the samples, a product interface having code, name, description, image, category, quantity, price, inventoryStatus and rating properties is used to define an object to be displayed by the datatable.
+                            Products are loaded by a CustomerService that connects to a server to fetch the products. Note that this is only for demo purposes, DataTable does not have any restrictions on how data is provided.
+                        </p>
 
 <CodeHighlight lang="js">
 {`

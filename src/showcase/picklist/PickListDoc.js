@@ -192,9 +192,7 @@ const PickListDemo = () => {
         <link rel="stylesheet" href="./PickListDemo.css" />
         <script src="./ProductService.js"></script>
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/picklist/picklist.min.js"></script>`,
                 content: `
 const { useEffect, useState } = React;
@@ -313,10 +311,18 @@ const PickListDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { PickList } from 'primereact/picklist';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/picklist/picklist.min.js"></script>
 `}
 </CodeHighlight>
 

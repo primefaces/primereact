@@ -124,7 +124,6 @@ export const TagDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/tag/tag.min.js"></script>`,
                 content: `
@@ -169,12 +168,21 @@ const TagDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Tag } from 'primereact/tag';
 `}
 </CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/tag/tag.min.js"></script>
+`}
+</CodeHighlight>
+
                         <h5>Getting Started</h5>
                         <p>Content of the tag is specified using the <i>value</i> property.</p>
 <CodeHighlight>

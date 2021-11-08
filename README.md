@@ -26,9 +26,22 @@ yarn add primeicons
 ## Import
 
 ```javascript
-//import {ComponentName} from 'primereact/{componentname}';
-import {Dialog} from 'primereact/dialog';
-import {Accordion,AccordionTab} from 'primereact/accordion';
+//import { ComponentName } from 'primereact/{componentname}';
+import { Dialog } from 'primereact/dialog';
+import { Accordion,AccordionTab } from 'primereact/accordion';
+```
+
+## CDN
+
+```
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/accordion/accordion.min.js"></script>
+//<script src="https://unpkg.com/primereact/{componentname}/{componentname}.min.js"></script>
+```
+
+For all components and structures
+```
+<script src="https://unpkg.com/primereact/primereact.all.min.js"></script>
 ```
 
 ## Dependencies

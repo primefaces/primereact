@@ -472,10 +472,8 @@ const TabViewDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./TabViewDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/tabview/tabview.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/tabview/tabview.min.js"></script>`,
                 content: `
 const { useEffect, useState } = React;
 const { TabView, TabPanel } = primereact.tabview;
@@ -657,10 +655,18 @@ const TabViewDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
-import { TabView,TabPanel } from 'primereact/tabview';
+import { TabView, TabPanel } from 'primereact/tabview';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/tabview/tabview.min.js"></script>
 `}
 </CodeHighlight>
 

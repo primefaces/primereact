@@ -163,7 +163,7 @@ const FullCalendarDemo = () => {
                             In this way, it is aimed to use it compatible with other PrimeReact components.</h4>
                         <Divider />
 
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { FullCalendar } from 'primereact/fullcalendar';

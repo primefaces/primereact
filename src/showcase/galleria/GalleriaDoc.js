@@ -13,15 +13,23 @@ export class GalleriaDoc extends Component {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Galleria } from 'primereact/galleria';
 `}
 </CodeHighlight>
 
-            <h5>Getting Started</h5>
-            <p>Galleria requires a value as an array of objects and can either be used as a Controlled or Uncontrolled component.</p>
+                        <h5>Import via CDN</h5>
+<CodeHighlight lang="js">
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/galleria/galleria.min.js"></script>
+`}
+</CodeHighlight>
+
+                        <h5>Getting Started</h5>
+                        <p>Galleria requires a value as an array of objects and can either be used as a Controlled or Uncontrolled component.</p>
 
 <CodeHighlight>
 {`
