@@ -306,7 +306,7 @@ import { Inplace } from 'primereact/inplace';
 </CodeHighlight>
 
                         <h5>Import via CDN</h5>
-<CodeHighlight lang="js">
+<CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/inplace/inplace.min.js"></script>

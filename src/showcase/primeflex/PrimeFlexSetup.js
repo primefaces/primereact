@@ -30,7 +30,7 @@ import 'primeflex/primeflex.css';
 </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight lang="css">
+<CodeHighlight>
 {`
 <script src="https://unpkg.com/primeflex/primeflex.min.js"></script>
 `}

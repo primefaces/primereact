@@ -302,7 +302,7 @@ import { SplitButton } from 'primereact/splitbutton';
 </CodeHighlight>
 
                         <h5>Import via CDN</h5>
-<CodeHighlight lang="js">
+<CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/splitbutton/splitbutton.min.js"></script>

@@ -38,7 +38,7 @@ import { Accordion,AccordionTab } from 'primereact/accordion';
 
                     <h5>Import via CDN</h5>
                     <p>The core.min.js is required. It includes shared components and structures; utils, api, ripple, portal, keyfilter, tooltip, virtualscroller, terminalservice, overlayservice, checkbox, button, inputtext, inputnumber, messages, progressbar, dropdown, dialog, paginator and tree.</p>
-<CodeHighlight lang="js">
+<CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/accordion/accordion.min.js"></script>

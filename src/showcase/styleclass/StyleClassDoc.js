@@ -223,7 +223,7 @@ import { StyleClass } from 'primereact/styleclass';
 </CodeHighlight>
 
                         <h5>Import via CDN</h5>
-<CodeHighlight lang="js">
+<CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/styleclass/styleclass.min.js"></script>
