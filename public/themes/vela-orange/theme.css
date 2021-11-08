@@ -1467,7 +1467,7 @@
 .p-rating .p-rating-icon:first-child {
   margin-left: 0;
 }
-.p-rating .p-rating-icon.pi-star {
+.p-rating .p-rating-icon.pi-star-fill {
   color: #FFD54F;
 }
 .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {
