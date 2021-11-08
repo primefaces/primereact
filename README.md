@@ -28,18 +28,23 @@ yarn add primeicons
 ```javascript
 //import { ComponentName } from 'primereact/{componentname}';
 import { Dialog } from 'primereact/dialog';
-import { Accordion,AccordionTab } from 'primereact/accordion';
+import { Accordion, AccordionTab } from 'primereact/accordion';
 ```
 
 ## CDN
 
-```
+```javascript
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/accordion/accordion.min.js"></script>
 //<script src="https://unpkg.com/primereact/{componentname}/{componentname}.min.js"></script>
 ```
 
-For all components and structures
+```javascript
+const { Dialog } = primereact.dialog;
+const { Accordion, AccordionTab } = primereact.accordion;
+```
+
+Import all components and structures
 ```
 <script src="https://unpkg.com/primereact/primereact.all.min.js"></script>
 ```
@@ -50,7 +55,7 @@ Majority of PrimeReact components (95%) are native and there are some exceptions
 
 In addition, components require PrimeIcons for icons and react-transition-group for animations.
 
-```json
+```
 dependencies: {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
