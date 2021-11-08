@@ -68,7 +68,7 @@ export class InputGroupDemo extends Component {
                                         <i className="pi pi-clock"></i>
                                     </span>
                                     <span className="p-inputgroup-addon">
-                                        <i className="pi pi-star"></i>
+                                        <i className="pi pi-star-fill"></i>
                                     </span>
                                     <InputNumber placeholder="Price" />
                                     <span className="p-inputgroup-addon">$</span>

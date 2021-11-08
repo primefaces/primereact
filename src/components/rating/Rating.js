@@ -138,8 +138,8 @@ export class Rating extends Component {
 
         let stars = starsArray.map((value) => {
             let iconClass = classNames('p-rating-icon', {
-                'pi pi-star-o': (!this.props.value || value > this.props.value),
-                'pi pi-star': (value <= this.props.value)
+                'pi pi-star': (!this.props.value || value > this.props.value),
+                'pi pi-star-fill': (value <= this.props.value)
             });
 
             return (

@@ -172,7 +172,7 @@ export class DataTableExportDemo extends Component {
     render() {
         const header = (
             <div className="p-d-flex p-ai-center export-buttons">
-                <Button type="button" icon="pi pi-file-o" onClick={() => this.exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
+                <Button type="button" icon="pi pi-file" onClick={() => this.exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
                 <Button type="button" icon="pi pi-file-excel" onClick={this.exportExcel} className="p-button-success p-mr-2" data-pr-tooltip="XLS" />
                 <Button type="button" icon="pi pi-file-pdf" onClick={this.exportPdf} className="p-button-warning p-mr-2" data-pr-tooltip="PDF" />
                 <Button type="button" icon="pi pi-filter" onClick={() => this.exportCSV(true)} className="p-button-info p-ml-auto" data-pr-tooltip="Selection Only" />
@@ -196,7 +196,7 @@ export class DataTableExportDemo extends Component {
                         <Toast ref={(el) => this.toast = el} />
 
                         <div className="p-d-flex p-ai-center p-py-2">
-                            <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
+                            <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
                             <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="./upload.php"
                                 accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={this.importExcel} />
                             <Button type="button" label="Clear" icon="pi pi-times" onClick={this.clear} className="p-button-info p-ml-auto" />
@@ -409,7 +409,7 @@ export class DataTableExportDemo extends Component {
     render() {
         const header = (
             <div className="p-d-flex p-ai-center export-buttons">
-                <Button type="button" icon="pi pi-file-o" onClick={() => this.exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
+                <Button type="button" icon="pi pi-file" onClick={() => this.exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
                 <Button type="button" icon="pi pi-file-excel" onClick={this.exportExcel} className="p-button-success p-mr-2" data-pr-tooltip="XLS" />
                 <Button type="button" icon="pi pi-file-pdf" onClick={this.exportPdf} className="p-button-warning p-mr-2" data-pr-tooltip="PDF" />
                 <Button type="button" icon="pi pi-filter" onClick={() => this.exportCSV(true)} className="p-button-info p-ml-auto" data-pr-tooltip="Selection Only" />
@@ -424,7 +424,7 @@ export class DataTableExportDemo extends Component {
                     <Toast ref={(el) => this.toast = el} />
 
                     <div className="p-d-flex p-ai-center p-py-2">
-                        <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
+                        <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
                         <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                             accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={this.importExcel} />
                         <Button type="button" label="Clear" icon="pi pi-times" onClick={this.clear} className="p-button-info p-ml-auto" />
@@ -605,7 +605,7 @@ export const DataTableExportDemo = () => {
 
     const header = (
         <div className="p-d-flex p-ai-center export-buttons">
-            <Button type="button" icon="pi pi-file-o" onClick={() => exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
+            <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
             <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success p-mr-2" data-pr-tooltip="XLS" />
             <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning p-mr-2" data-pr-tooltip="PDF" />
             <Button type="button" icon="pi pi-filter" onClick={() => exportCSV(true)} className="p-button-info p-ml-auto" data-pr-tooltip="Selection Only" />
@@ -620,7 +620,7 @@ export const DataTableExportDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="p-d-flex p-ai-center p-py-2">
-                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
+                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
                     <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={importExcel} />
                     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info p-ml-auto" />
@@ -800,7 +800,7 @@ export const DataTableExportDemo = () => {
 
     const header = (
         <div className="p-d-flex p-ai-center export-buttons">
-            <Button type="button" icon="pi pi-file-o" onClick={() => exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
+            <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
             <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success p-mr-2" data-pr-tooltip="XLS" />
             <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning p-mr-2" data-pr-tooltip="PDF" />
             <Button type="button" icon="pi pi-filter" onClick={() => exportCSV(true)} className="p-button-info p-ml-auto" data-pr-tooltip="Selection Only" />
@@ -815,7 +815,7 @@ export const DataTableExportDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="p-d-flex p-ai-center p-py-2">
-                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
+                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
                     <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={importExcel} />
                     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info p-ml-auto" />
@@ -1008,7 +1008,7 @@ const DataTableExportDemo = () => {
 
     const header = (
         <div className="p-d-flex p-ai-center export-buttons">
-            <Button type="button" icon="pi pi-file-o" onClick={() => exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
+            <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
             <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success p-mr-2" data-pr-tooltip="XLS" />
             <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning p-mr-2" data-pr-tooltip="PDF" />
             <Button type="button" icon="pi pi-filter" onClick={() => exportCSV(true)} className="p-button-info p-ml-auto" data-pr-tooltip="Selection Only" />
@@ -1023,7 +1023,7 @@ const DataTableExportDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="p-d-flex p-ai-center p-py-2">
-                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
+                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
                     <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={importExcel} />
                     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info p-ml-auto" />
