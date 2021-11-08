@@ -32,6 +32,7 @@ export interface DialogProps {
     closable?: boolean;
     style?: object;
     className?: string;
+    maskStyle?: object;
     maskClassName?: string;
     showHeader?: boolean;
     appendTo?: DialogAppendToType;

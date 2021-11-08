@@ -26,6 +26,7 @@ export class Dialog extends Component {
         closable: true,
         style: null,
         className: null,
+        maskStyle: null,
         maskClassName: null,
         showHeader: true,
         appendTo: null,
@@ -71,6 +72,7 @@ export class Dialog extends Component {
         closable: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
+        maskStyle: PropTypes.object,
         maskClassName: PropTypes.string,
         showHeader: PropTypes.bool,
         appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -657,7 +659,7 @@ export class Dialog extends Component {
         };
 
         return (
-            <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
+            <div ref={(el) => this.mask = el} style={this.props.maskStyle} className={maskClassName} onClick={this.onMaskClick}>
                 <CSSTransition nodeRef={this.dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} options={this.props.transitionOptions}
                     unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExiting={this.onExiting} onExited={this.onExited}>
                     <div ref={this.dialogRef} id={this.state.id} className={className} style={this.props.style} onClick={this.props.onClick}
