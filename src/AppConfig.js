@@ -114,7 +114,7 @@ export class AppConfig extends Component {
                                 <Button icon="pi pi-minus" onClick={this.decrementScale} className="p-button-text" disabled={this.state.scale === this.state.scales[0]} />
                                 {
                                     this.state.scales.map((scale) => {
-                                        return <i className={classNames('pi pi-circle-on', {'scale-active': scale === this.state.scale})} key={scale}/>
+                                        return <i className={classNames('pi pi-circle-fill', {'scale-active': scale === this.state.scale})} key={scale}/>
                                     })
                                 }
                                 <Button icon="pi pi-plus" onClick={this.incrementScale} className="p-button-text" disabled={this.state.scale === this.state.scales[this.state.scales.length - 1]} />

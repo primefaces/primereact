@@ -151,11 +151,13 @@ const MenuDemo = () => {
 
                     <div className="p-grid icons-list">
                         {
-                            this.state.filteredIcons && this.state.filteredIcons.map(icon => {
-                                return (
-                                    <div className="p-col-12 p-md-2" key={icon.properties.name}>
-                                        <i className={"pi pi-" + icon.properties.name}></i>
-                                        <div>pi-{icon.properties.name}</div>
+                            this.state.filteredIcons && this.state.filteredIcons.map(iconMeta => {
+                                const { icon, properties } = iconMeta;
+
+                                return icon.tags.indexOf('deprecate') === -1 && (
+                                    <div className="p-col-12 p-md-2" key={properties.name}>
+                                        <i className={"pi pi-" + properties.name}></i>
+                                        <div>pi-{properties.name}</div>
                                     </div>
                                 );
                             })

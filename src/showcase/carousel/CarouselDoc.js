@@ -66,7 +66,7 @@ export class CarouselDemo extends Component {
                         <span className={\`product-badge status-\${product.inventoryStatus.toLowerCase()}\`}>{product.inventoryStatus}</span>
                         <div className="car-buttons p-mt-5">
                             <Button icon="pi pi-search" className="p-button p-button-rounded p-mr-2" />
-                            <Button icon="pi pi-star" className="p-button-success p-button-rounded p-mr-2" />
+                            <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded p-mr-2" />
                             <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
                         </div>
                     </div>
@@ -146,7 +146,7 @@ const CarouselDemo = () => {
                         <span className={\`product-badge status-\${product.inventoryStatus.toLowerCase()}\`}>{product.inventoryStatus}</span>
                         <div className="car-buttons p-mt-5">
                             <Button icon="pi pi-search" className="p-button p-button-rounded p-mr-2" />
-                            <Button icon="pi pi-star" className="p-button-success p-button-rounded p-mr-2" />
+                            <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded p-mr-2" />
                             <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
                         </div>
                     </div>
@@ -224,7 +224,7 @@ const CarouselDemo = () => {
                         <span className={\`product-badge status-\${product.inventoryStatus.toLowerCase()}\`}>{product.inventoryStatus}</span>
                         <div className="car-buttons p-mt-5">
                             <Button icon="pi pi-search" className="p-button p-button-rounded p-mr-2" />
-                            <Button icon="pi pi-star" className="p-button-success p-button-rounded p-mr-2" />
+                            <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded p-mr-2" />
                             <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
                         </div>
                     </div>
@@ -308,7 +308,7 @@ const CarouselDemo = () => {
                         <span className={\`product-badge status-\${product.inventoryStatus.toLowerCase()}\`}>{product.inventoryStatus}</span>
                         <div className="car-buttons p-mt-5">
                             <Button icon="pi pi-search" className="p-button p-button-rounded p-mr-2" />
-                            <Button icon="pi pi-star" className="p-button-success p-button-rounded p-mr-2" />
+                            <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded p-mr-2" />
                             <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
                         </div>
                     </div>
