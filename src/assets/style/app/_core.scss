@@ -128,8 +128,32 @@ pre[class*="language-"] {
 
     .toolbar {
         position: absolute;
-        top: 0;
-        right: 0;
+        top: 1rem;
+        right: 1rem;
+
+        a {
+            opacity: 0;
+            padding: 0.3rem 1rem;
+            background-color: var(--surface-50) !important;
+            border-radius: 6px;
+            color: var(--surface-500) !important;
+            font-weight: 600;
+            transition: all .15s;
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--surface-100) !important;
+                color: var(--surface-600) !important;
+            }
+        }
+    }
+
+    &:hover {
+        .toolbar {
+            a {
+                opacity: 1;
+            }
+        }
     }
 }
 
