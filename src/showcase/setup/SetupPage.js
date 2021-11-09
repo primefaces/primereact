@@ -367,6 +367,9 @@ import { MenuItem } from 'primereact/api';
 
 					<h5>Next.js</h5>
                     <p>A <a href="https://github.com/primefaces/primereact-examples/tree/main/nextjs-basic" className="layout-content-link">sample application</a> based on Next.js is available at github.</p>
+                    <div className="video-container">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/OrRffCobuts" frameBorder="0" allowFullScreen title="Getting Started With NextJs"></iframe>
+                    </div>
                 </div>
             </div>
         );
