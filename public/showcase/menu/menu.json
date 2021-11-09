@@ -224,7 +224,8 @@
                     "to": "/icons",
                     "meta": [
                         "icons"
-                    ]
+                    ],
+                    "badge":"updated"
                 }
             ]
         },

@@ -4,6 +4,7 @@ import { InputSwitch } from '../src/components/inputswitch/InputSwitch';
 import { classNames } from './components/utils/ClassNames';
 import { AppInputStyleSwitch } from './AppInputStyleSwitch';
 import AppContentContext from './AppContentContext';
+import { Badge } from './components/badge/Badge';
 
 export class AppConfig extends Component {
 
@@ -238,26 +239,30 @@ export class AppConfig extends Component {
                             <h5>PrimeOne Design</h5>
                             <div className="p-grid free-themes">
                                 <div className="p-col-3">
-                                    <button className="p-link">
-                                        <img src="showcase/images/themes/saga-blue.png" alt="Lara Light Indigo" onClick={(e) => this.onThemeChange(e, 'lara-light-indigo')}/>
+                                    <button className="p-link p-overlay-badge">
+                                        <img src="showcase/images/themes/lara-light-indigo.svg" alt="Lara Light Indigo" onClick={(e) => this.onThemeChange(e, 'lara-light-indigo')}/>
+                                        <Badge value="New" severity="success"></Badge>
                                     </button>
                                     <span>Lara Indigo</span>
                                 </div>
                                 <div className="p-col-3">
-                                    <button className="p-link">
-                                        <img src="showcase/images/themes/saga-blue.png" alt="Lara Light Purple" onClick={(e) => this.onThemeChange(e, 'lara-light-purple')}/>
+                                    <button className="p-link p-overlay-badge">
+                                        <img src="showcase/images/themes/lara-light-purple.svg" alt="Lara Light Purple" onClick={(e) => this.onThemeChange(e, 'lara-light-purple')}/>
+                                        <Badge value="New" severity="success"></Badge>
                                     </button>
                                     <span>Lara Purple</span>
                                 </div>
                                 <div className="p-col-3">
-                                    <button className="p-link">
-                                        <img src="showcase/images/themes/saga-blue.png" alt="Lara Dark Indigo" onClick={(e) => this.onThemeChange(e, 'lara-dark-indigo')}/>
+                                    <button className="p-link p-overlay-badge">
+                                        <img src="showcase/images/themes/lara-dark-indigo.svg" alt="Lara Dark Indigo" onClick={(e) => this.onThemeChange(e, 'lara-dark-indigo', true)}/>
+                                        <Badge value="New" severity="success"></Badge>
                                     </button>
                                     <span>Lara Indigo</span>
                                 </div>
                                 <div className="p-col-3">
-                                    <button className="p-link">
-                                        <img src="showcase/images/themes/saga-blue.png" alt="Lara Dark Purple" onClick={(e) => this.onThemeChange(e, 'lara-dark-purple')}/>
+                                    <button className="p-link p-overlay-badge">
+                                        <img src="showcase/images/themes/lara-dark-purple.svg" alt="Lara Dark Purple" onClick={(e) => this.onThemeChange(e, 'lara-dark-purple', true)}/>
+                                        <Badge value="New" severity="success"></Badge>
                                     </button>
                                     <span>Lara Purple</span>
                                 </div>

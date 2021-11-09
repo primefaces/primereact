@@ -32,7 +32,7 @@ npm install primeicons --save
 {`
 //import { ComponentName } from 'primereact/{componentname}';
 import { Dialog } from 'primereact/dialog';
-import { Accordion,AccordionTab } from 'primereact/accordion';
+import { Accordion, AccordionTab } from 'primereact/accordion';
 `}
 </CodeHighlight>
 

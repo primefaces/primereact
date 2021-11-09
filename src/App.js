@@ -171,7 +171,7 @@ export class App extends Component {
     }
 
     isDarkTheme(theme) {
-        return /(dark|vela|arya|luna|lara)/i.test(theme);
+        return /(dark|vela|arya|luna)/i.test(theme);
     }
 
     onInputStyleChange(inputStyle) {
