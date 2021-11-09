@@ -3018,6 +3018,10 @@
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
+.fc.fc-theme-standard .fc-highlight {
+  color: #ffffff;
+  background: #007bff;
+}
 
 .p-orderlist .p-orderlist-controls {
   padding: 1.25rem;
@@ -3150,12 +3154,12 @@
   color: #007bff;
 }
 .p-paginator .p-paginator-first {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 .p-paginator .p-paginator-last {
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .p-paginator .p-dropdown {
   margin-left: 0.5rem;
@@ -4164,6 +4168,7 @@
   color: #212529;
   border: 1px solid rgba(0, 0, 0, 0.15);
   box-shadow: none;
+  border-radius: 4px;
   width: 12.5rem;
 }
 .p-contextmenu .p-menuitem-link {
@@ -4205,6 +4210,7 @@
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.15);
   box-shadow: none;
+  border-radius: 4px;
 }
 .p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link {
   background: #e9ecef;

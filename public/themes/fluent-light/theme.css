@@ -3006,6 +3006,10 @@
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
 }
+.fc.fc-theme-standard .fc-highlight {
+  color: #323130;
+  background: #edebe9;
+}
 
 .p-orderlist .p-orderlist-controls {
   padding: 1rem;
@@ -4127,6 +4131,7 @@
   color: #323130;
   border: 0 none;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
   width: 12.5rem;
 }
 .p-contextmenu .p-menuitem-link {
@@ -4168,6 +4173,7 @@
   background: #ffffff;
   border: 0 none;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
 }
 .p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link {
   background: #edebe9;
