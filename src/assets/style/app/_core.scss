@@ -86,6 +86,8 @@ input[type="number"] {
 }
 
 pre[class*="language-"] {
+    position: relative;
+
     &:before, &:after {
         display: none !important;
     }
@@ -122,6 +124,12 @@ pre[class*="language-"] {
                 background: transparent;
             }
         }
+    }
+
+    .toolbar {
+        position: absolute;
+        top: 0;
+        right: 0;
     }
 }
 
