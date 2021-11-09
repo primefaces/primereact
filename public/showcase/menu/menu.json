@@ -11,7 +11,10 @@
                     "to": "/setup",
                     "meta": [
                         "get started",
-                        "browser support"
+                        "browser support",
+                        "cdn",
+                        "quickstart",
+                        "starter"
                     ]
                 },
                 {
