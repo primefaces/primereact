@@ -176,16 +176,16 @@ import { FullCalendar } from 'primereact/fullcalendar';
 
 <CodeHighlight lang="js">
 {`
-npm install @fullcalendar/core --save
+npm install @fullcalendar/core
 `}
 </CodeHighlight>
 
                         <p>FullCalendar is plugin based so install the plugins you require and define them with the options property.</p>
 <CodeHighlight lang="js">
 {`
-npm install @fullcalendar/daygrid --save
-npm install @fullcalendar/timegrid --save
-npm install @fullcalendar/interaction --save
+npm install @fullcalendar/daygrid
+npm install @fullcalendar/timegrid
+npm install @fullcalendar/interaction
 `}
 </CodeHighlight>
 

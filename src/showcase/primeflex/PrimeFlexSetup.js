@@ -16,7 +16,7 @@ export class PrimeFlexSetup extends Component {
 
 <CodeHighlight lang="js">
 {`
-npm install primeflex@2.0.0 --save
+npm install primeflex@2.0.0
 `}
 </CodeHighlight>
 

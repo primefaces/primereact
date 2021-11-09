@@ -360,7 +360,7 @@ const header = (
                         <p>Resources of quill needs to be added to your application.</p>
 <CodeHighlight lang="js">
 {`
-npm install quill --save
+npm install quill
 `}
 </CodeHighlight>
                     </TabPanel>

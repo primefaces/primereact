@@ -31,7 +31,7 @@ import { Chart } from 'primereact/chart';
 
 <CodeHighlight lang="js">
 {`
-npm install chart.js --save
+npm install chart.js
 `}
 </CodeHighlight>
 

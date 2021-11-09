@@ -66,7 +66,7 @@ export class IconsPage extends Component {
                     <p>PrimeIcons is available at npm, run the following command to download it to your project.</p>
 <CodeHighlight lang="js">
 {`
-npm install primeicons --save
+npm install primeicons
 `}
 </CodeHighlight>
 
