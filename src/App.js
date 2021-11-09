@@ -158,13 +158,18 @@ export class App extends Component {
     }
 
     getStorage(key, defaultValue) {
-        const itemString = localStorage.getItem(key);
-        if (!itemString) {
+        try {
+            const itemString = localStorage.getItem(key);
+            if (!itemString) {
+                return defaultValue;
+            }
+            const item = JSON.parse(itemString);
+
+            return !this.isStorageExpired(key) && typeof item === 'object' ? item.value : defaultValue;
+        }
+        catch(err) {
             return defaultValue;
         }
-        const item = JSON.parse(itemString);
-
-        return !this.isStorageExpired(key) && typeof item === 'object' ? item.value : defaultValue;
     }
 
     isStorageExpired(key) {
