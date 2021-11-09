@@ -1,4 +1,573 @@
 {
+    "7.0.0": {
+        "dropdown": [
+            {
+                "number": 2384,
+                "title": "Clicking the Clear Filter Button Should Clear the Filter But Leave the Dropdown Open",
+                "url": "https://github.com/primefaces/primereact/issues/2384"
+            },
+            {
+                "number": 2366,
+                "title": "Virtual Scroller Does Not React Properly When Underlying Array Changes Size",
+                "url": "https://github.com/primefaces/primereact/issues/2366"
+            },
+            {
+                "number": 2258,
+                "title": "Failed prop type: Invalid prop `appendTo` of type `string` supplied to `DropdownPanel`, expected `object`.",
+                "url": "https://github.com/primefaces/primereact/issues/2258"
+            },
+            {
+                "number": 2349,
+                "title": "Dropdown: Primitive values",
+                "url": "https://github.com/primefaces/primereact/issues/2349"
+            },
+            {
+                "number": 2337,
+                "title": "Support locale for emptyMessage and emptyFilterMessage default value",
+                "url": "https://github.com/primefaces/primereact/issues/2337"
+            }
+        ],
+        "datatable": [
+            {
+                "number": 2392,
+                "title": "DataTable VirtualScroll alignment issue",
+                "url": "https://github.com/primefaces/primereact/issues/2392"
+            },
+            {
+                "number": 2259,
+                "title": "DataTable: regression in single mode Space and Enter keys are catched and are not usable into cells",
+                "url": "https://github.com/primefaces/primereact/issues/2259"
+            },
+            {
+                "number": 1024,
+                "title": "DataTable cell editor only validates on enter",
+                "url": "https://github.com/primefaces/primereact/issues/1024"
+            },
+            {
+                "number": 2383,
+                "title": "DataTable filter mode is not working after filters are cleared",
+                "url": "https://github.com/primefaces/primereact/issues/2383"
+            },
+            {
+                "number": 2251,
+                "title": "DataTable checked all rows does not honor ShowSelectionElement",
+                "url": "https://github.com/primefaces/primereact/issues/2251"
+            },
+            {
+                "number": 2328,
+                "title": "Expander of ColumnProps has wrong in colums.td.d",
+                "url": "https://github.com/primefaces/primereact/issues/2328"
+            },
+            {
+                "number": 2337,
+                "title": "Support locale for emptyMessage and emptyFilterMessage default value",
+                "url": "https://github.com/primefaces/primereact/issues/2337"
+            },
+            {
+                "number": 2209,
+                "title": "Extend exportFunction (csv) with the whole record",
+                "url": "https://github.com/primefaces/primereact/issues/2209"
+            }
+        ],
+        "virtualscroller": [
+            {
+                "number": 2392,
+                "title": "DataTable VirtualScroll alignment issue",
+                "url": "https://github.com/primefaces/primereact/issues/2392"
+            }
+        ],
+        "ripple": [
+            {
+                "number": 2390,
+                "title": "Ripple is not working on Nextjs",
+                "url": "https://github.com/primefaces/primereact/issues/2390"
+            }
+        ],
+        "treeselect": [
+            {
+                "number": 2372,
+                "title": "Treeselect doesn't select the first node of the list",
+                "url": "https://github.com/primefaces/primereact/issues/2372"
+            },
+            {
+                "number": 2276,
+                "title": "TreeSelect.value should be an array in multiselect mode",
+                "url": "https://github.com/primefaces/primereact/issues/2276"
+            },
+            {
+                "number": 2337,
+                "title": "Support locale for emptyMessage and emptyFilterMessage default value",
+                "url": "https://github.com/primefaces/primereact/issues/2337"
+            }
+        ],
+        "message": [
+            {
+                "number": 2321,
+                "title": "Message content hides icon",
+                "url": "https://github.com/primefaces/primereact/issues/2321"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 2404,
+                "title": "Add maskStyle property to Dialog",
+                "url": "https://github.com/primefaces/primereact/issues/2404"
+            },
+            {
+                "number": 2241,
+                "title": "Dialog: pressing escape in a nested dialog closes the parent dialog",
+                "url": "https://github.com/primefaces/primereact/issues/2241"
+            }
+        ],
+        "tree": [
+            {
+                "number": 2276,
+                "title": "TreeSelect.value should be an array in multiselect mode",
+                "url": "https://github.com/primefaces/primereact/issues/2276"
+            }
+        ],
+        "treetable": [
+            {
+                "number": 2276,
+                "title": "TreeSelect.value should be an array in multiselect mode",
+                "url": "https://github.com/primefaces/primereact/issues/2276"
+            },
+            {
+                "number": 2337,
+                "title": "Support locale for emptyMessage and emptyFilterMessage default value",
+                "url": "https://github.com/primefaces/primereact/issues/2337"
+            },
+            {
+                "number": 1120,
+                "title": "Multiple Selection Using Shift Key for TreeTable",
+                "url": "https://github.com/primefaces/primereact/issues/1120"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 2331,
+                "title": "MultiSelect should also limit the number of displayed chips",
+                "url": "https://github.com/primefaces/primereact/issues/2331"
+            },
+            {
+                "number": 2270,
+                "title": "Add removeIcon property to AutoComplete and MultiSelect components",
+                "url": "https://github.com/primefaces/primereact/issues/2270"
+            },
+            {
+                "number": 2389,
+                "title": "Change default value of maxSelectedLabels property on MultiSelect",
+                "url": "https://github.com/primefaces/primereact/issues/2389"
+            },
+            {
+                "number": 2337,
+                "title": "Support locale for emptyMessage and emptyFilterMessage default value",
+                "url": "https://github.com/primefaces/primereact/issues/2337"
+            },
+            {
+                "number": 2299,
+                "title": "When Multiselect inside of label tag, click on it is not showing dropdown panel",
+                "url": "https://github.com/primefaces/primereact/issues/2299"
+            },
+            {
+                "number": 2341,
+                "title": "Multiselect adds items previously selected by clicking on the \"select all\" toggle ('Advanced with Templating and Filtering')",
+                "url": "https://github.com/primefaces/primereact/issues/2341"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 2254,
+                "title": "Calendar throws exception when have the onViewDateChange property",
+                "url": "https://github.com/primefaces/primereact/issues/2254"
+            },
+            {
+                "number": 2279,
+                "title": "Date gets deselected in Calendar with selection mode range",
+                "url": "https://github.com/primefaces/primereact/issues/2279"
+            },
+            {
+                "number": 2239,
+                "title": "Add iconPos property to Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/2239"
+            },
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            },
+            {
+                "number": 2260,
+                "title": "Calendar prop (tabIndex) never passed into InputText element.",
+                "url": "https://github.com/primefaces/primereact/issues/2260"
+            },
+            {
+                "number": 2386,
+                "title": "isSelectableTime checks value array instead of any value on Calendar",
+                "url": "https://github.com/primefaces/primereact/issues/2386"
+            }
+        ],
+        "utils": [
+            {
+                "number": 2259,
+                "title": "DataTable: regression in single mode Space and Enter keys are catched and are not usable into cells",
+                "url": "https://github.com/primefaces/primereact/issues/2259"
+            },
+            {
+                "number": 2381,
+                "title": "[Editor] quill Invalid Quill container null",
+                "url": "https://github.com/primefaces/primereact/issues/2381"
+            },
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            },
+            {
+                "number": 2266,
+                "title": "Auto z-index isn't generating correctly ",
+                "url": "https://github.com/primefaces/primereact/issues/2266"
+            },
+            {
+                "number": 2352,
+                "title": "Dropdown breaks in shadowRoot when getScrollableParent() encounters document fragment",
+                "url": "https://github.com/primefaces/primereact/issues/2352"
+            }
+        ],
+        "api": [
+            {
+                "number": 2399,
+                "title": "Update PrimeIcons to 5.0",
+                "url": "https://github.com/primefaces/primereact/issues/2399"
+            }
+        ],
+        "accordion": [
+            {
+                "number": 2339,
+                "title": "TabView does not support dynamic panel visibility",
+                "url": "https://github.com/primefaces/primereact/issues/2339"
+            },
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "tabview": [
+            {
+                "number": 2339,
+                "title": "TabView does not support dynamic panel visibility",
+                "url": "https://github.com/primefaces/primereact/issues/2339"
+            },
+            {
+                "number": 2391,
+                "title": "TabView with scrollable throws an exception ",
+                "url": "https://github.com/primefaces/primereact/issues/2391"
+            },
+            {
+                "number": 2278,
+                "title": "Add closeable property to TabPanel",
+                "url": "https://github.com/primefaces/primereact/issues/2278"
+            }
+        ],
+        "inputswitch": [
+            {
+                "number": 2300,
+                "title": "InputSwitch inside Label doesn't toggle correctly.",
+                "url": "https://github.com/primefaces/primereact/issues/2300"
+            }
+        ],
+        "slider": [
+            {
+                "number": 2265,
+                "title": "Slider - onSlideEnd not called when clicking on Slider rail",
+                "url": "https://github.com/primefaces/primereact/issues/2265"
+            }
+        ],
+        "button": [
+            {
+                "number": 2274,
+                "title": "TS2769: No overload matches this call.   Overload 1 of 2, '(props: InputTextProps | Readonly<InputTextProps>): InputText', gave the following error. ",
+                "url": "https://github.com/primefaces/primereact/issues/2274"
+            },
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 2274,
+                "title": "TS2769: No overload matches this call.   Overload 1 of 2, '(props: InputTextProps | Readonly<InputTextProps>): InputText', gave the following error. ",
+                "url": "https://github.com/primefaces/primereact/issues/2274"
+            }
+        ],
+        "inputtext": [
+            {
+                "number": 2274,
+                "title": "TS2769: No overload matches this call.   Overload 1 of 2, '(props: InputTextProps | Readonly<InputTextProps>): InputText', gave the following error. ",
+                "url": "https://github.com/primefaces/primereact/issues/2274"
+            },
+            {
+                "number": 2358,
+                "title": "Floating label is not yet on top of the inputbox when prefilled by Chrome",
+                "url": "https://github.com/primefaces/primereact/issues/2358"
+            }
+        ],
+        "inputtextarea": [
+            {
+                "number": 2274,
+                "title": "TS2769: No overload matches this call.   Overload 1 of 2, '(props: InputTextProps | Readonly<InputTextProps>): InputText', gave the following error. ",
+                "url": "https://github.com/primefaces/primereact/issues/2274"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 2274,
+                "title": "TS2769: No overload matches this call.   Overload 1 of 2, '(props: InputTextProps | Readonly<InputTextProps>): InputText', gave the following error. ",
+                "url": "https://github.com/primefaces/primereact/issues/2274"
+            },
+            {
+                "number": 2338,
+                "title": "OverlayPanel - Uncaught TypeError: this is undefined",
+                "url": "https://github.com/primefaces/primereact/issues/2338"
+            }
+        ],
+        "password": [
+            {
+                "number": 2274,
+                "title": "TS2769: No overload matches this call.   Overload 1 of 2, '(props: InputTextProps | Readonly<InputTextProps>): InputText', gave the following error. ",
+                "url": "https://github.com/primefaces/primereact/issues/2274"
+            }
+        ],
+        "editor": [
+            {
+                "number": 2381,
+                "title": "[Editor] quill Invalid Quill container null",
+                "url": "https://github.com/primefaces/primereact/issues/2381"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 2320,
+                "title": "Lazy loaded menu overflowing the page",
+                "url": "https://github.com/primefaces/primereact/issues/2320"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 2270,
+                "title": "Add removeIcon property to AutoComplete and MultiSelect components",
+                "url": "https://github.com/primefaces/primereact/issues/2270"
+            },
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 2344,
+                "title": "InputNumber doesn't submit a form",
+                "url": "https://github.com/primefaces/primereact/issues/2344"
+            },
+            {
+                "number": 2238,
+                "title": "[Bug]: ReadOnly InputNumber is editable",
+                "url": "https://github.com/primefaces/primereact/issues/2238"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "chips": [
+            {
+                "number": 2345,
+                "title": "Add removable property to Chips",
+                "url": "https://github.com/primefaces/primereact/issues/2345"
+            },
+            {
+                "number": 2334,
+                "title": "Chips component: add 'readOnly' property",
+                "url": "https://github.com/primefaces/primereact/issues/2334"
+            }
+        ],
+        "fileupload": [
+            {
+                "number": 2363,
+                "title": "Bug - FileUpload allows multiple even if \"multiple\" prop is not set",
+                "url": "https://github.com/primefaces/primereact/issues/2363"
+            },
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            },
+            {
+                "number": 2387,
+                "title": "FileUpload not be directly mutated component’s state",
+                "url": "https://github.com/primefaces/primereact/issues/2387"
+            },
+            {
+                "number": 2385,
+                "title": "Improve FileUpload drop mode",
+                "url": "https://github.com/primefaces/primereact/issues/2385"
+            }
+        ],
+        "sidebar": [
+            {
+                "number": 2233,
+                "title": "Improve Sidebar component",
+                "url": "https://github.com/primefaces/primereact/issues/2233"
+            }
+        ],
+        "picklist": [
+            {
+                "number": 2250,
+                "title": "PickList not working webpack 5.5",
+                "url": "https://github.com/primefaces/primereact/issues/2250"
+            }
+        ],
+        "avatar": [
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "chip": [
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "confirmdialog": [
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "scrolltop": [
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "tag": [
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "togglebutton": [
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "column": [
+            {
+                "number": 2328,
+                "title": "Expander of ColumnProps has wrong in colums.td.d",
+                "url": "https://github.com/primefaces/primereact/issues/2328"
+            }
+        ],
+        "multistatecheckbox": [
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "selectitem": [
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "speeddial": [
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "treenode": [
+            {
+                "number": 2397,
+                "title": "Improve custom icon support",
+                "url": "https://github.com/primefaces/primereact/issues/2397"
+            }
+        ],
+        "datascroller": [
+            {
+                "number": 2337,
+                "title": "Support locale for emptyMessage and emptyFilterMessage default value",
+                "url": "https://github.com/primefaces/primereact/issues/2337"
+            }
+        ],
+        "dataview": [
+            {
+                "number": 2337,
+                "title": "Support locale for emptyMessage and emptyFilterMessage default value",
+                "url": "https://github.com/primefaces/primereact/issues/2337"
+            }
+        ],
+        "splitter": [
+            {
+                "number": 2396,
+                "title": "Splitter component always adds p-splitter-panel-nested class",
+                "url": "https://github.com/primefaces/primereact/issues/2396"
+            }
+        ],
+        "dock": [
+            {
+                "number": 2362,
+                "title": "Add header, footer and magnification properties to Dock",
+                "url": "https://github.com/primefaces/primereact/issues/2362"
+            }
+        ],
+        "menu": [
+            {
+                "number": 2295,
+                "title": "The Menu type declaration is missing the \"show\" and \"hide\" methods",
+                "url": "https://github.com/primefaces/primereact/issues/2295"
+            }
+        ],
+        "rating": [
+            {
+                "number": 2399,
+                "title": "Update PrimeIcons to 5.0",
+                "url": "https://github.com/primefaces/primereact/issues/2399"
+            }
+        ]
+    },
     "7.0.0-rc.2": {
         "dialog": [
             {
