@@ -10,6 +10,7 @@
     justify-content: center;
     align-items: center;
     background-image: url('../../images/topbar-atlantis-bg.jpeg');
+    background-size: cover;
     background-color: white;
 
     .layout-news-container {
@@ -50,7 +51,7 @@
             border: 1px solid #ffffff;
             color: #ffffff;
             font-size: 15px;
-            padding: 0.3em 0.3em 0.5em 1em;
+            padding: 0.4em .8em 0.4em 1em;
             font-weight: 700;
             border-radius: 3px;
             display: flex;
@@ -61,6 +62,10 @@
             margin-left: 1rem;
             position: relative;
             z-index: 1;
+
+            > i {
+                margin-left: .2em;
+            }
         }
     }
 
