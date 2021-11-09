@@ -164,7 +164,7 @@ export class App extends Component {
         }
         const item = JSON.parse(itemString);
 
-        return this.isStorageExpired(key) ? defaultValue : item.value;
+        return !this.isStorageExpired(key) && typeof item === 'object' ? item.value : defaultValue;
     }
 
     isStorageExpired(key) {
