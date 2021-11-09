@@ -19,7 +19,7 @@ export class InputMask extends Component {
         className: null,
         placeholder: null,
         size: null,
-        maxlength: null,
+        maxLength: null,
         tabIndex: null,
         disabled: false,
         readOnly: false,
@@ -47,7 +47,7 @@ export class InputMask extends Component {
         className: PropTypes.string,
         placeholder: PropTypes.string,
         size: PropTypes.number,
-        maxlength: PropTypes.number,
+        maxLength: PropTypes.number,
         tabIndex: PropTypes.number,
         disabled: PropTypes.bool,
         readOnly: PropTypes.bool,
@@ -629,7 +629,7 @@ export class InputMask extends Component {
         let inputMaskClassName = classNames('p-inputmask', this.props.className);
         return (
             <InputText id={this.props.id} ref={this.inputRef} type={this.props.type} name={this.props.name} style={this.props.style} className={inputMaskClassName} placeholder={this.props.placeholder}
-                size={this.props.size} maxLength={this.props.maxlength} tabIndex={this.props.tabIndex} disabled={this.props.disabled} readOnly={this.props.readOnly}
+                size={this.props.size} maxLength={this.props.maxLength} tabIndex={this.props.tabIndex} disabled={this.props.disabled} readOnly={this.props.readOnly}
                 onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown} onKeyPress={this.onKeyPress}
                 onInput={this.onInput} onPaste={this.handleInputChange} required={this.props.required} aria-labelledby={this.props.ariaLabelledBy} />
         );
