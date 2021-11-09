@@ -610,7 +610,7 @@ const DataViewDemo = () => {
 
 .dataview-demo .product-grid-item {
     margin: .5em;
-    border: 1px solid #dee2e6;
+    border: 1px solid var(--surface-border);
     padding: 2rem;
 }
 

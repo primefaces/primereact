@@ -829,10 +829,6 @@ const PaginatorDemo = () => {
         this.extFiles = {
             'demo/PaginatorDemo.css': {
                 content: `
-.paginator-demo .p-button.p-button-icon-only {
-    border-radius: 0;
-}
-
 .paginator-demo .image-gallery {
     text-align: center;
     padding: 1rem;

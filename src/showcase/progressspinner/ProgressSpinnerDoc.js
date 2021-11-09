@@ -26,7 +26,7 @@ export class ProgressSpinnerDemo extends Component {
                     <ProgressSpinner />
 
                     <h5>Custom</h5>
-                    <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+                    <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"/>
                 </div>
             </div>
         );
@@ -48,7 +48,7 @@ const ProgressSpinnerDemo = () => {
                 <ProgressSpinner />
 
                 <h5>Custom</h5>
-                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"/>
             </div>
         </div>
     );
@@ -69,7 +69,7 @@ const ProgressSpinnerDemo = () => {
                 <ProgressSpinner />
 
                 <h5>Custom</h5>
-                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"/>
             </div>
         </div>
     );
@@ -93,7 +93,7 @@ const ProgressSpinnerDemo = () => {
                 <ProgressSpinner />
 
                 <h5>Custom</h5>
-                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"/>
             </div>
         </div>
     );
