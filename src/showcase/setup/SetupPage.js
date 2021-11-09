@@ -20,8 +20,17 @@ export class SetupPage extends Component {
 
 <CodeHighlight lang="js">
 {`
-npm install primereact --save
-npm install primeicons --save
+npm install primereact
+npm install primeicons
+`}
+</CodeHighlight>
+
+or
+
+<CodeHighlight lang="js">
+{`
+yarn add primereact
+yarn add primeicons
 `}
 </CodeHighlight>
 
