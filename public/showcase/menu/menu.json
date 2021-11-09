@@ -15,6 +15,19 @@
                     ]
                 },
                 {
+                    "name": "Examples",
+                    "href": "https://github.com/primefaces/primereact-examples",
+                    "meta": [
+                        "create-react-app",
+                        "next.js",
+                        "examples",
+                        "demo",
+                        "quickstart",
+                        "starter"
+                    ],
+                    "badge": "new"
+                },
+                {
                     "name": "Locale",
                     "to": "/locale",
                     "meta": [
