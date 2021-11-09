@@ -10,7 +10,7 @@ let currentProps = {};
 
 const contents = (name, content, imports) => ({
     'js': `import 'primeicons/primeicons.css';
-import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 import '../../index.css';
@@ -30,7 +30,7 @@ ReactDOM.render(<${name} />, rootElement);`,
 
         <!-- PrimeReact -->
         <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css" />
-        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/themes/saga-blue/theme.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/themes/lara-light-indigo/theme.css" />
         <link rel="stylesheet" href="https://unpkg.com/primereact/resources/primereact.min.css" />
         <link rel="stylesheet" href="https://unpkg.com/primeflex@2.0.0/primeflex.min.css" />
 

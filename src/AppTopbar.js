@@ -42,6 +42,10 @@ export class AppTopbar extends Component {
             'mdc-light-deeppurple': 'md-light-deeppurple.svg',
             'mdc-dark-indigo': 'md-dark-indigo.svg',
             'mdc-dark-deeppurple': 'md-dark-deeppurple.svg',
+            'lara-light-indigo': 'saga-blue.png',
+            'lara-light-purple': 'saga-blue.png',
+            'lara-dark-indigo': 'saga-blue.png',
+            'lara-dark-purple': 'saga-blue.png',
             'saga-blue': 'saga-blue.png',
             'saga-green': 'saga-green.png',
             'saga-orange': 'saga-orange.png',
@@ -208,6 +212,10 @@ export class AppTopbar extends Component {
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'fluent-light')} role="menuitem"><img src="showcase/images/themes/fluent-light.png" alt="Fluent Light" /><span>Fluent Light</span></button></li>
 
                                 <li role="none" className="topbar-submenu-header">PRIMEONE</li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'lara-light-indigo')} role="menuitem"><img src="showcase/images/themes/saga-blue.png" alt="Lara Light Indigo" /><span>Lara Indigo</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'lara-light-purple')} role="menuitem"><img src="showcase/images/themes/saga-blue.png" alt="Lara Light Purple" /><span>Lara Purple</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'lara-dark-indigo')} role="menuitem"><img src="showcase/images/themes/saga-blue.png" alt="Lara Dark Indigo" /><span>Lara Indigo</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'lara-dark-indigo')} role="menuitem"><img src="showcase/images/themes/saga-blue.png" alt="Lara Dark Indigo" /><span>Lara Purple</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'saga-blue')} role="menuitem"><img src="showcase/images/themes/saga-blue.png" alt="Saga Blue" /><span>Saga Blue</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'saga-green')} role="menuitem"><img src="showcase/images/themes/saga-green.png" alt="Saga Green" /><span>Saga Green</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'saga-orange')} role="menuitem"><img src="showcase/images/themes/saga-orange.png" alt="Saga Orange" /><span>Saga Orange</span></button></li>

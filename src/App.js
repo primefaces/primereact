@@ -29,9 +29,10 @@ export class App extends Component {
 
         this.news_key = 'primenews-react';
         this.theme_key = 'primetheme-react';
+        this.version = require('../package.json') && require('../package.json').version;
 
         this.state = {
-            theme: 'saga-blue',
+            theme: 'lara-light-indigo',
             inputStyle: 'outlined',
             ripple: false,
             darkTheme: false,
@@ -76,7 +77,7 @@ export class App extends Component {
             }
         }
         else {
-            theme = localStorage.getItem(this.theme_key);
+            theme = localStorage.getItem(`${this.theme_key}-${this.version}`);
         }
 
         if (theme) {
@@ -114,7 +115,7 @@ export class App extends Component {
         };
 
         this.setState(state, () => {
-            localStorage.setItem(this.theme_key, this.state.theme);
+            localStorage.setItem(`${this.theme_key}-${this.version}`, this.state.theme);
         });
     }
 
@@ -170,7 +171,7 @@ export class App extends Component {
     }
 
     isDarkTheme(theme) {
-        return /(dark|vela|arya|luna)/i.test(theme);
+        return /(dark|vela|arya|luna|lara)/i.test(theme);
     }
 
     onInputStyleChange(inputStyle) {

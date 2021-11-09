@@ -239,6 +239,30 @@ export class AppConfig extends Component {
                             <div className="p-grid free-themes">
                                 <div className="p-col-3">
                                     <button className="p-link">
+                                        <img src="showcase/images/themes/saga-blue.png" alt="Lara Light Indigo" onClick={(e) => this.onThemeChange(e, 'lara-light-indigo')}/>
+                                    </button>
+                                    <span>Lara Indigo</span>
+                                </div>
+                                <div className="p-col-3">
+                                    <button className="p-link">
+                                        <img src="showcase/images/themes/saga-blue.png" alt="Lara Light Purple" onClick={(e) => this.onThemeChange(e, 'lara-light-purple')}/>
+                                    </button>
+                                    <span>Lara Purple</span>
+                                </div>
+                                <div className="p-col-3">
+                                    <button className="p-link">
+                                        <img src="showcase/images/themes/saga-blue.png" alt="Lara Dark Indigo" onClick={(e) => this.onThemeChange(e, 'lara-dark-indigo')}/>
+                                    </button>
+                                    <span>Lara Indigo</span>
+                                </div>
+                                <div className="p-col-3">
+                                    <button className="p-link">
+                                        <img src="showcase/images/themes/saga-blue.png" alt="Lara Dark Purple" onClick={(e) => this.onThemeChange(e, 'lara-dark-purple')}/>
+                                    </button>
+                                    <span>Lara Purple</span>
+                                </div>
+                                <div className="p-col-3">
+                                    <button className="p-link">
                                         <img src="showcase/images/themes/saga-blue.png" alt="Saga Blue" onClick={(e) => this.onThemeChange(e, 'saga-blue')}/>
                                     </button>
                                     <span>Saga Blue</span>

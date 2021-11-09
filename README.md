@@ -69,7 +69,7 @@ dependencies: {
 The css dependencies are as follows, note that you may change the theme with another one of your choice.
 
 ```
-primereact/resources/themes/saga-blue/theme.css
+primereact/resources/themes/lara-light-indigo/theme.css
 primereact/resources/primereact.min.css
 primeicons/primeicons.css
 ```
@@ -77,7 +77,7 @@ primeicons/primeicons.css
 If you are using a bundler such as webpack with a css loader you may also import them to your main application component, an example from create-react-app would be.
 
 ```javascript
-import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 ```
