@@ -29,7 +29,6 @@ export class App extends Component {
 
         this.news_key = 'primenews-react';
         this.theme_key = 'primetheme-react';
-        this.version = require('../package.json') && require('../package.json').version;
 
         this.state = {
             theme: 'lara-light-indigo',
@@ -77,7 +76,7 @@ export class App extends Component {
             }
         }
         else {
-            theme = localStorage.getItem(`${this.theme_key}-${this.version}`);
+            theme = this.getStorage(this.theme_key, this.state.theme);
         }
 
         if (theme) {
@@ -90,7 +89,7 @@ export class App extends Component {
 
         this.versionService.getVersions().then(data => this.setState({
             versions: data,
-            newsActive: (data && data[0].news) && this.isNewsStorageExpired(),
+            newsActive: (data && data[0].news) && this.isStorageExpired(this.news_key),
         }));
     }
 
@@ -115,7 +114,7 @@ export class App extends Component {
         };
 
         this.setState(state, () => {
-            localStorage.setItem(`${this.theme_key}-${this.version}`, this.state.theme);
+            this.setStorage(this.theme_key, this.state.theme);
         });
     }
 
@@ -144,26 +143,40 @@ export class App extends Component {
 
     onHideNews(event) {
         this.setState({ newsActive: false }, () => {
-            const now = new Date();
-            const item = {
-                value: false,
-                expiry: now.getTime() + 604800000,
-            }
-            localStorage.setItem(this.news_key, JSON.stringify(item));
+            this.setStorage(this.news_key, false);
         });
         event.stopPropagation();
     }
 
-    isNewsStorageExpired() {
-        const newsString = localStorage.getItem(this.news_key);
-        if (!newsString) {
+    setStorage(key, value) {
+        const now = new Date();
+        const item = {
+            value,
+            expiry: now.getTime() + 604800000
+        }
+        localStorage.setItem(key, JSON.stringify(item));
+    }
+
+    getStorage(key, defaultValue) {
+        const itemString = localStorage.getItem(key);
+        if (!itemString) {
+            return defaultValue;
+        }
+        const item = JSON.parse(itemString);
+
+        return this.isStorageExpired(key) ? defaultValue : item.value;
+    }
+
+    isStorageExpired(key) {
+        const itemString = localStorage.getItem(key);
+        if (!itemString) {
             return true;
         }
-        const newsItem = JSON.parse(newsString);
-        const now = new Date()
+        const item = JSON.parse(itemString);
+        const now = new Date();
 
-        if (now.getTime() > newsItem.expiry) {
-            localStorage.removeItem(this.news_key);
+        if (now.getTime() > item.expiry) {
+            localStorage.removeItem(key);
             return true;
         }
 
