@@ -117,7 +117,7 @@ export class ListBoxDemo extends Component {
                     itemTemplate={this.countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
 
                 <h5>Virtual Scroll (100000 Items)</h5>
-                <ListBox value={this.state.selectedItem} options={this.items} virtualScrollerOptions={{ itemSize: 31 }} onChange={(e) => this.setState({ selectedItem: e.value })} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
+                <ListBox value={this.state.selectedItem} options={this.items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => this.setState({ selectedItem: e.value })} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
             </div>
         );
     }
@@ -222,7 +222,7 @@ const ListBoxDemo = () => {
                 itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
 
             <h5>Virtual Scroll (100000 Items)</h5>
-            <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 31 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
+            <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
         </div>
     );
 }
@@ -326,7 +326,7 @@ const ListBoxDemo = () => {
                 itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
 
             <h5>Virtual Scroll (100000 Items)</h5>
-            <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 31 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
+            <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
         </div>
     );
 }
@@ -433,7 +433,7 @@ const ListBoxDemo = () => {
                 itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
 
             <h5>Virtual Scroll (100000 Items)</h5>
-            <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 31 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
+            <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
         </div>
     );
 }

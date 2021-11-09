@@ -151,7 +151,7 @@ export class AutoCompleteDemo extends Component {
                         <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown forceSelection itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} />
 
                         <h5>Virtual Scroll (100000 Items)</h5>
-                        <AutoComplete value={this.state.selectedItem} suggestions={this.state.filteredItems} completeMethod={this.searchItems} virtualScrollerOptions={{ itemSize: 31 }} field="label" dropdown onChange={(e) => this.setState({ selectedItem: e.value })} />
+                        <AutoComplete value={this.state.selectedItem} suggestions={this.state.filteredItems} completeMethod={this.searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => this.setState({ selectedItem: e.value })} />
 
                         <h5>Multiple</h5>
                         <span className="p-fluid">

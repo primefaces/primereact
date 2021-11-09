@@ -184,10 +184,10 @@ export class MultiSelectDemo extends Component {
                         itemTemplate={this.countryTemplate} selectedItemTemplate={this.selectedCountriesTemplate} panelFooterTemplate={this.panelFooterTemplate} />
 
                     <h5>Virtual Scroll (100000 Items)</h5>
-                    <MultiSelect value={this.state.selectedItems1} options={this.items} onChange={(e) => this.setState({ selectedItems1: e.value, selectAll: e.value.length === this.items.length })} selectAll={this.state.selectAll} onSelectAll={(e) => this.setState({ selectedItems1: e.checked ? [] : this.items.map(item => item.value), selectAll: !e.checked })} virtualScrollerOptions={{ itemSize: 34 }} placeholder="Select Item"/>
+                    <MultiSelect value={this.state.selectedItems1} options={this.items} onChange={(e) => this.setState({ selectedItems1: e.value, selectAll: e.value.length === this.items.length })} selectAll={this.state.selectAll} onSelectAll={(e) => this.setState({ selectedItems1: e.checked ? [] : this.items.map(item => item.value), selectAll: !e.checked })} virtualScrollerOptions={{ itemSize: 43 }} placeholder="Select Item"/>
 
                     <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                    <MultiSelect value={this.state.selectedItems2} options={this.state.lazyItems} onChange={(e) => this.setState({ selectedItems2: e.value })} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 34, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
+                    <MultiSelect value={this.state.selectedItems2} options={this.state.lazyItems} onChange={(e) => this.setState({ selectedItems2: e.value })} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 43, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
                         return (
                             <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
                                 <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
@@ -359,10 +359,10 @@ const MultiSelectDemo = () => {
                     itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
 
                 <h5>Virtual Scroll (100000 Items)</h5>
-                <MultiSelect value={selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : this.items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 34 }} placeholder="Select Item"/>
+                <MultiSelect value={selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : this.items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 43 }} placeholder="Select Item"/>
 
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 34, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
                         <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
@@ -533,10 +533,10 @@ const MultiSelectDemo = () => {
                     itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
 
                 <h5>Virtual Scroll (100000 Items)</h5>
-                <MultiSelect value={state.selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : this.items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 34 }} placeholder="Select Item"/>
+                <MultiSelect value={state.selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : this.items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 43 }} placeholder="Select Item"/>
 
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 34, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
                         <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
@@ -712,10 +712,10 @@ const MultiSelectDemo = () => {
                     itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
 
                 <h5>Virtual Scroll (100000 Items)</h5>
-                <MultiSelect value={selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : this.items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 34 }} placeholder="Select Item"/>
+                <MultiSelect value={selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : this.items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 43 }} placeholder="Select Item"/>
 
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 34, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
                         <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
