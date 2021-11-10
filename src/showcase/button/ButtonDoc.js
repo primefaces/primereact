@@ -996,11 +996,12 @@ import { Button } from 'primereact/button';
 `}
 </CodeHighlight>
                         <h5>Loading</h5>
-                        <p>Loading on a button is specified with <i>loading</i> attribute, and position is configured using <i>loadingOptions</i> attribute and it's <i>position</i> property. Default
-                        loading position is "left" and alternative is "right". Loading icon also can be change with icon property of <i>loadingOptions</i>. To display only a loading, leave label as undefined.</p>
+                        <p>Loading on a button is specified with <i>loading</i> attribute and loading icon can be change with <i>loadingIcon</i> property. To display only a loading, leave label as undefined.</p>
 <CodeHighlight>
 {`
-<Button label="Submit" loading loadingOptions={{ position: 'right' }} />
+<Button loading />
+<Button label="Submit" loading />
+<Button label="Submit" loading loadingIcon="pi pi-spin pi-sun" />
 `}
 </CodeHighlight>
 
