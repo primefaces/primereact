@@ -34,7 +34,7 @@ export default class DomHandler {
 
     static getOuterWidth(el, margin) {
         if (el) {
-            let width = el.offsetWidth ?? el.getBoundingClientRect().width;
+            let width = el.offsetWidth || el.getBoundingClientRect().width;
 
             if (margin) {
                 let style = getComputedStyle(el);
@@ -48,7 +48,7 @@ export default class DomHandler {
 
     static getOuterHeight(el, margin) {
         if (el) {
-            let height = el.offsetHeight ?? el.getBoundingClientRect().height;
+            let height = el.offsetHeight || el.getBoundingClientRect().height;
 
             if (margin) {
                 let style = getComputedStyle(el);
