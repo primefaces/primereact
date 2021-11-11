@@ -351,7 +351,7 @@ const MultiSelectDemo = () => {
                 <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
 
                 <h5>Grouped</h5>
-                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => selectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
                     optionGroupTemplate={groupedItemTemplate} placeholder="Select Cities" />
 
                 <h5>Advanced with Templating and Filtering</h5>
@@ -525,7 +525,7 @@ const MultiSelectDemo = () => {
                 <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
 
                 <h5>Grouped</h5>
-                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => selectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
                     optionGroupTemplate={groupedItemTemplate} placeholder="Select Cities" />
 
                 <h5>Advanced with Templating and Filtering</h5>
@@ -704,7 +704,7 @@ const MultiSelectDemo = () => {
                 <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
 
                 <h5>Grouped</h5>
-                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => selectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
                     optionGroupTemplate={groupedItemTemplate} placeholder="Select Cities" />
 
                 <h5>Advanced with Templating and Filtering</h5>
