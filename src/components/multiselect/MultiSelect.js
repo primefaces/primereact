@@ -396,12 +396,11 @@ export class MultiSelect extends Component {
         callback && callback();
     }
 
-    onOverlayEntered(callback) {
+    onOverlayEntered() {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
 
-        callback && callback();
         this.props.onShow && this.props.onShow();
     }
 
