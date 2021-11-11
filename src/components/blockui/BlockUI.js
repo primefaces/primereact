@@ -49,6 +49,14 @@ export class BlockUI extends Component {
     }
 
     unblock() {
+        if (!this.mask) {
+           this.setState({ visible: false }, () => {
+                this.props.fullScreen && DomHandler.removeClass(document.body, 'p-overflow-hidden');
+                this.props.onUnblocked && this.props.onUnblocked();
+            });
+           return;
+        }
+
         DomHandler.addClass(this.mask, 'p-component-overlay-leave');
         this.mask.addEventListener('animationend', () => {
             ZIndexUtils.clear(this.mask);
