@@ -694,7 +694,7 @@ export class Dropdown extends Component {
     bindScrollListener() {
         if (!this.scrollHandler) {
             this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
-                if (this.state.overlayVisible) {
+                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
                     this.hideOverlay();
                 }
             });
