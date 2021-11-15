@@ -1,5 +1,20 @@
 # Changelog
 
+## [7.0.1](https://github.com/primefaces/primereact/tree/7.0.1)  (2021-10-15)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/7.0.0...7.0.1)
+
+**Implemented New Features and Enhancements:**
+
+- New Themes with dark modes: Lara-Blue and Lara-Teal [\#2435](https://github.com/primefaces/primereact/issues/2435)
+- Remove default max-width style from Tooltip [\#2414](https://github.com/primefaces/primereact/issues/2414)
+
+**Fixed bugs:**
+
+- Button icon classes listed twice [\#2415](https://github.com/primefaces/primereact/issues/2415)
+- MultiSelect with transitionOptions property throws an exception [\#2413](https://github.com/primefaces/primereact/issues/2413)
+- Tooltip positioned incorrectly when target is an SVG [\#2406](https://github.com/primefaces/primereact/issues/2406)
+
 ## [7.0.0](https://github.com/primefaces/primereact/tree/7.0.0)  (2021-10-09)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/7.0.0-rc.2...7.0.0)

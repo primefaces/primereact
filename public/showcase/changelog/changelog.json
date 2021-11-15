@@ -1,4 +1,34 @@
 {
+    "7.0.1": {
+        "tooltip": [
+            {
+                "number": 2414,
+                "title": "Remove default max-width style from Tooltip",
+                "url": "https://github.com/primefaces/primereact/issues/2414"
+            }
+        ],
+        "utils": [
+            {
+                "number": 2406,
+                "title": "Tooltip positioned incorrectly when target is an SVG",
+                "url": "https://github.com/primefaces/primereact/issues/2406"
+            }
+        ],
+        "button": [
+            {
+                "number": 2415,
+                "title": "Button icon classes listed twice",
+                "url": "https://github.com/primefaces/primereact/issues/2415"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 2413,
+                "title": "MultiSelect with transitionOptions property throws an exception",
+                "url": "https://github.com/primefaces/primereact/issues/2413"
+            }
+        ]
+    },
     "7.0.0": {
         "dropdown": [
             {
