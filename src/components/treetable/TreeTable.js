@@ -781,7 +781,7 @@ export class TreeTable extends Component {
 
                 return [...orderedColumns, ...columns.filter((item) => {
                     return orderedColumns.indexOf(item) < 0;
-                })];;
+                })];
             }
             else {
                 return columns;
