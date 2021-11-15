@@ -2221,14 +2221,14 @@
 }
 
 .p-speeddial-direction-up .p-speeddial-item {
-  margin: 0.25rem 0;
+  margin: 0.25rem;
 }
 .p-speeddial-direction-up .p-speeddial-item:first-child {
   margin-bottom: 0.5rem;
 }
 
 .p-speeddial-direction-down .p-speeddial-item {
-  margin: 0.25rem 0;
+  margin: 0.25rem;
 }
 .p-speeddial-direction-down .p-speeddial-item:first-child {
   margin-top: 0.5rem;

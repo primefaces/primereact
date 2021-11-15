@@ -141,10 +141,14 @@ primereact/resources/themes/mdc-light-deeppurple/theme.css
 primereact/resources/themes/mdc-dark-indigo/theme.css
 primereact/resources/themes/mdc-dark-deeppurple/theme.css
 primereact/resources/themes/fluent-light/theme.css
+primereact/resources/themes/lara-light-blue/theme.css
 primereact/resources/themes/lara-light-indigo/theme.css
 primereact/resources/themes/lara-light-purple/theme.css
+primereact/resources/themes/lara-light-teal/theme.css
+primereact/resources/themes/lara-dark-blue/theme.css
 primereact/resources/themes/lara-dark-indigo/theme.css
 primereact/resources/themes/lara-dark-purple/theme.css
+primereact/resources/themes/lara-dark-teal/theme.css
 primereact/resources/themes/saga-blue/theme.css
 primereact/resources/themes/saga-green/theme.css
 primereact/resources/themes/saga-orange/theme.css
