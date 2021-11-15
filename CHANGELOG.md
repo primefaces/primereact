@@ -14,6 +14,7 @@
 - Button icon classes listed twice [\#2415](https://github.com/primefaces/primereact/issues/2415)
 - MultiSelect with transitionOptions property throws an exception [\#2413](https://github.com/primefaces/primereact/issues/2413)
 - Tooltip positioned incorrectly when target is an SVG [\#2406](https://github.com/primefaces/primereact/issues/2406)
+- ConfirmDialogProps breaks the build on Typescript due to double semicolon [\#2429](https://github.com/primefaces/primereact/issues/2429)
 
 ## [7.0.0](https://github.com/primefaces/primereact/tree/7.0.0)  (2021-10-09)
 
