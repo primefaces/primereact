@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from '../src/components/button/Button';
 import { InputSwitch } from '../src/components/inputswitch/InputSwitch';
+import { Badge } from '../src/components/badge/Badge';
 import { classNames } from './components/utils/ClassNames';
 import { AppInputStyleSwitch } from './AppInputStyleSwitch';
 import AppContentContext from './AppContentContext';
@@ -235,7 +236,7 @@ export class AppConfig extends Component {
                                 </div>
                             </div>
 
-                            <h5>PrimeOne Design - 2022</h5>
+                            <h5 className="p-d-flex p-ai-center">PrimeOne Design - 2022 <Badge value="NEW" severity="success" className="p-ml-3" /></h5>
                             <div className="p-grid free-themes">
                                 <div className="p-col-3">
                                     <button className="p-link" onClick={(e) => this.onThemeChange(e, 'lara-light-indigo')}>

@@ -51,7 +51,7 @@
             border: 2px solid #283738;
             color: #283738;
             font-size: 15px;
-            padding: .3em .3em .5em 1em;
+            padding: 0.4em .8em 0.4em 1em;
             font-weight: bold;
             border-radius: 3px;
             display: flex;
@@ -62,6 +62,13 @@
             margin-left: 1rem;
             position: relative;
             z-index: 1;
+
+            > i {
+                margin-left: .5em;
+                font-weight: bold;
+                position: relative;
+                top: 1px;
+            }
 
             &:hover {
                 background-color: rgba(120, 144, 156, 0.4);
