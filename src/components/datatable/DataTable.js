@@ -951,14 +951,12 @@ export class DataTable extends Component {
     }
 
     createStyleElement() {
-        this.styleElement = document.createElement('style');
-        document.head.appendChild(this.styleElement);
+        this.styleElement = DomHandler.createInlineStyle();
     }
 
     createResponsiveStyle() {
         if (!this.responsiveStyleElement) {
-            this.responsiveStyleElement = document.createElement('style');
-            document.head.appendChild(this.responsiveStyleElement);
+            this.responsiveStyleElement = DomHandler.createInlineStyle();
 
             let innerHTML = `
 @media screen and (max-width: ${this.props.breakpoint}) {

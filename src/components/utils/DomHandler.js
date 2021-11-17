@@ -864,4 +864,21 @@ export default class DomHandler {
             }
         }
     }
+
+    /**
+     * Anytime an inline style is created check environment variable 'process.env.REACT_APP_CSS_NONCE'
+     * to set a CSP NONCE.
+     *
+     * @see https://github.com/primefaces/primereact/issues/2423
+     * @return HtmlStyleElement
+     */
+    static createInlineStyle() {
+        let styleElement = document.createElement('style');
+        let nonce = process.env.REACT_APP_CSS_NONCE;
+        if (nonce) {
+            styleElement.setAttribute('nonce', nonce);
+        }
+        document.head.appendChild(styleElement);
+        return styleElement;
+    }
 }
