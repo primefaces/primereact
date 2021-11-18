@@ -6,14 +6,28 @@ type ColorPickerAppendToType = 'self' | HTMLElement | undefined | null;
 
 type ColorPickerFormatType = 'hex' | 'rgb' | 'hsb';
 
+type ColorPickerValueType = string | ColorPickerRGBType | ColorPickerHSBType | undefined;
+
+interface ColorPickerRGBType {
+    r: number;
+    g: number;
+    b: number;
+}
+
+interface ColorPickerHSBType {
+    h: number;
+    s: number;
+    b: number;
+}
+
 interface ColorPickerChangeTargetOptions {
     name: string;
     id: string;
-    value: any;
+    value: ColorPickerValueType;
 }
 
 interface ColorPickerChangeParams {
-    value: any;
+    value: ColorPickerValueType;
     stopPropagation(): void;
     preventDefault(): void;
     target: ColorPickerChangeTargetOptions;
@@ -21,7 +35,7 @@ interface ColorPickerChangeParams {
 
 export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange' | 'value' | 'ref'> {
     inputRef?: React.Ref<HTMLInputElement>;
-    value?: any;
+    value?: ColorPickerValueType;
     defaultColor?: string;
     inline?: boolean;
     format?: string;
