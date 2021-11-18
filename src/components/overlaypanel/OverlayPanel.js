@@ -230,8 +230,7 @@ export class OverlayPanel extends Component {
 
     createStyle() {
         if (!this.styleElement) {
-            this.styleElement = document.createElement('style');
-            document.head.appendChild(this.styleElement);
+            this.styleElement = DomHandler.createInlineStyle();
 
             let innerHTML = '';
             for (let breakpoint in this.props.breakpoints) {

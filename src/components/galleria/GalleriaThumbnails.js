@@ -244,8 +244,7 @@ export class GalleriaThumbnails extends Component {
 
     createStyle() {
         if (!this.thumbnailsStyle) {
-            this.thumbnailsStyle = document.createElement('style');
-            document.body.appendChild(this.thumbnailsStyle);
+            this.thumbnailsStyle = DomHandler.createInlineStyle();
         }
 
         let innerHTML = `
