@@ -432,7 +432,7 @@ export class ColumnFilter extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.overlayVisible) {
+                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
                     this.hide();
                 }
             };

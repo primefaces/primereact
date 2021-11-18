@@ -318,7 +318,7 @@ export class SlideMenu extends Component {
     bindDocumentResizeListener() {
         if (!this.documentResizeListener) {
             this.documentResizeListener = (event) => {
-                if (this.state.visible && !DomHandler.isAndroid()) {
+                if (this.state.visible && !DomHandler.isTouchDevice()) {
                     this.hide(event);
                 }
             };

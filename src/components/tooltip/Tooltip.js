@@ -367,7 +367,7 @@ export class Tooltip extends Component {
 
     bindDocumentResizeListener() {
         this.documentResizeListener = (e) => {
-            if (!DomHandler.isAndroid()) {
+            if (!DomHandler.isTouchDevice()) {
                 this.hide(e);
             }
         };

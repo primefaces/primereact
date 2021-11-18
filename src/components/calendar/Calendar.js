@@ -1721,7 +1721,7 @@ export class Calendar extends Component {
     }
 
     onWindowResize() {
-        if (this.isVisible() && !DomHandler.isAndroid()) {
+        if (this.isVisible() && !DomHandler.isTouchDevice()) {
             this.hideOverlay();
         }
     }
