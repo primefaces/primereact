@@ -637,11 +637,12 @@ export class Dropdown extends Component {
     }
 
     onOverlayEntered(callback) {
+        callback && callback();
+
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
 
-        callback && callback();
         this.props.onShow && this.props.onShow();
     }
 
