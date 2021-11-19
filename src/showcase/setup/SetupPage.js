@@ -302,6 +302,16 @@ PrimeReact.appendTo = 'self'; // Default value is null(document.body).
 `}
 </CodeHighlight>
 
+                    <h5>cssTransition</h5>
+                    <p>Used to determine whether the <i>react-transition-group API</i> is enabled in all overlay components.</p>
+<CodeHighlight lang="js">
+{`
+import PrimeReact from 'primereact/api';
+
+PrimeReact.cssTransition = false; // Default value is true.
+`}
+</CodeHighlight>
+
                     <h5>Locale</h5>
                     <p>PrimeReact provides a Locale API to support i18n and l7n, visit the <Link to="/locale">Locale</Link> documentation for more information.</p>
 

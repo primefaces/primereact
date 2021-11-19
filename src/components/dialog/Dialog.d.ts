@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { CSSTransitionProps } from '../csstransition';
 
 type DialogPositionType = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 
@@ -47,7 +48,7 @@ export interface DialogProps {
     keepInViewport?: boolean;
     maximized?: boolean;
     breakpoints?: DialogBreakpoints;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onMaximize?(e: DialogMaximizeParams): void;
     onDragStart?(e: React.DragEvent<HTMLElement>): void;
     onDrag?(e: React.DragEvent<HTMLElement>): void;

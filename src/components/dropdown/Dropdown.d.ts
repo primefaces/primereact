@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import { CSSTransitionProps } from '../csstransition';
 import { VirtualScrollerProps } from '../virtualscroller';
 
 type DropdownOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
@@ -80,7 +81,7 @@ export interface DropdownProps {
     tooltipOptions?: TooltipOptions;
     ariaLabel?: string;
     ariaLabelledBy?: string;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     dropdownIcon?: string;
     showOnFocus?: boolean;
     onChange?(e: DropdownChangeParams): void;

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
+import { CSSTransitionProps } from '../csstransition';
 
 type ContextMenuAppendToType = 'self' | HTMLElement | undefined | null;
 
@@ -12,7 +13,7 @@ export interface ContextMenuProps {
     autoZIndex?: boolean;
     baseZIndex?: number;
     appendTo?: ContextMenuAppendToType;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onShow?(e: React.SyntheticEvent): void;
     onHide?(e: React.SyntheticEvent): void;
 }

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { CSSTransitionProps } from '../csstransition';
 
 type ToastSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
 
@@ -26,7 +27,7 @@ export interface ToastProps {
     style?: object;
     baseZIndex?: number;
     position?: ToastPositionType;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onClick?(message: ToastMessage): void;
     onRemove?(message: ToastMessage): void;
     onShow?(): void;

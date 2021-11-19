@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { CSSTransitionProps } from '../csstransition';
 
 type GalleriaPositionType = 'top' | 'bottom' | 'left' | 'right';
 
@@ -39,7 +40,7 @@ export interface GalleriaProps {
     showIndicatorsOnItem?: boolean;
     indicatorsPosition?: GalleriaPositionType;
     baseZIndex?: number;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onItemChange?(e: GalleriaItemChangeParams): void;
     onShow?(): void;
     onHide?(): void;

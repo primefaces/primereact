@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { CSSTransitionProps } from '../csstransition';
 
 type PanelHeaderTemplateType = React.ReactNode | ((options: PanelHeaderTemplateOptions) => React.ReactNode);
 
@@ -35,7 +36,7 @@ export interface PanelProps {
     expandIcon?: string;
     collapseIcon?: string;
     icons?: PanelIconsTemplateType;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onExpand?(event: React.SyntheticEvent): void;
     onCollapse?(event: React.SyntheticEvent): void;
     onToggle?(e: PanelToggleParams): void;

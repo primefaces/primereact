@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { CSSTransitionProps } from '../csstransition';
 
 type MentionTriggerType = string | string[];
 
@@ -45,7 +46,7 @@ export interface MentionProps {
     headerTemplate?: MentionHeaderTemplateType;
     footerTemplate?: MentionFooterTemplateType;
     itemTemplate?: MentionItemTemplateType;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onChange?(event: React.FormEvent<HTMLInputElement>): void;
     onInput?(event: React.FormEvent<HTMLInputElement>): void;
     onSearch?(e: MentionSearchParams): void;
