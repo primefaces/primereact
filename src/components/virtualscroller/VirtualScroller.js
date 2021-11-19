@@ -356,9 +356,9 @@ export class VirtualScroller extends Component {
             if (_currentIndex <= _numT)
                 return 0;
             else
-                return _isScrollDownOrRight ?
-                    (_currentIndex < _triggerIndex ? _first : _currentIndex - _numT) :
-                    (_currentIndex > _triggerIndex ? _first : _currentIndex - (2 * _numT));
+                return Math.max(0, _isScrollDownOrRight ?
+                        (_currentIndex < _triggerIndex ? _first : _currentIndex - _numT) :
+                        (_currentIndex > _triggerIndex ? _first : _currentIndex - (2 * _numT)));
         };
         const calculateLast = (_currentIndex, _first, _last, _num, _numT, _isCols) => {
             let lastValue = _first + _num + (2 * _numT);
