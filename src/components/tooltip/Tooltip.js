@@ -60,6 +60,7 @@ export class Tooltip extends Component {
         updateDelay: 0,
         hideDelay: 0,
         autoHide: true,
+        showOnDisabled: false,
         onBeforeShow: null,
         onBeforeHide: null,
         onShow: null,
@@ -89,6 +90,7 @@ export class Tooltip extends Component {
         updateDelay: PropTypes.number,
         hideDelay: PropTypes.number,
         autoHide: PropTypes.bool,
+        showOnDisabled: PropTypes.bool,
         onBeforeShow: PropTypes.func,
         onBeforeHide: PropTypes.func,
         onShow: PropTypes.func,
@@ -123,6 +125,10 @@ export class Tooltip extends Component {
 
     isDisabled(target) {
         return this.getTargetOption(target, 'disabled') === 'true' || this.hasTargetOption(target, 'disabled') || this.props.disabled;
+    }
+
+    isShowOnDisabled(target) {
+        return this.getTargetOption(target, 'showondisabled') || this.props.showOnDisabled;
     }
 
     isAutoHide() {
@@ -188,8 +194,10 @@ export class Tooltip extends Component {
 
     show(e) {
         this.currentTarget = e.currentTarget;
+        const disabled = this.isDisabled(this.currentTarget);
+        const empty = this.isContentEmpty((this.isShowOnDisabled(this.currentTarget) && disabled) ? this.currentTarget.firstChild : this.currentTarget);
 
-        if (this.isContentEmpty(this.currentTarget) || this.isDisabled(this.currentTarget)) {
+        if (empty || disabled) {
             return;
         }
 
@@ -403,16 +411,18 @@ export class Tooltip extends Component {
     bindTargetEvent(target) {
         if (target) {
             const { showEvent, hideEvent } = this.getEvents(target);
-            target.addEventListener(showEvent, this.show);
-            target.addEventListener(hideEvent, this.hide);
+            const currentTarget = this.getTarget(target);
+            currentTarget.addEventListener(showEvent, this.show);
+            currentTarget.addEventListener(hideEvent, this.hide);
         }
     }
 
     unbindTargetEvent(target) {
         if (target) {
             const { showEvent, hideEvent } = this.getEvents(target);
-            target.removeEventListener(showEvent, this.show);
-            target.removeEventListener(hideEvent, this.hide);
+            const currentTarget = this.getTarget(target);
+            currentTarget.removeEventListener(showEvent, this.show);
+            currentTarget.removeEventListener(hideEvent, this.hide);
         }
     }
 
@@ -438,6 +448,22 @@ export class Tooltip extends Component {
         clearTimeout(this.showDelayTimeout);
         clearTimeout(this.updateDelayTimeout);
         clearTimeout(this.hideDelayTimeout);
+    }
+
+    getTarget(target) {
+        if (target) {
+            if (this.isShowOnDisabled(target)) {
+                const wrapper = document.createElement('span');
+                target.parentNode.insertBefore(wrapper, target);
+                wrapper.appendChild(target);
+
+                return wrapper;
+            }
+
+            return target;
+        }
+
+        return null;
     }
 
     updateTargetEvents(target) {
