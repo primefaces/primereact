@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { CSSTransition as ReactCSSTransition } from 'react-transition-group';
+import PrimeReact from '../api/Api';
+import { ObjectUtils } from '../utils/Utils';
 
 export class CSSTransition extends Component {
 
@@ -12,6 +14,10 @@ export class CSSTransition extends Component {
         this.onExit = this.onExit.bind(this);
         this.onExiting = this.onExiting.bind(this);
         this.onExited = this.onExited.bind(this);
+    }
+
+    get disabled() {
+        return this.props.disabled || (this.props.options && this.props.options.disabled) || !PrimeReact.cssTransition;
     }
 
     onEnter(node, isAppearing) {
@@ -44,15 +50,37 @@ export class CSSTransition extends Component {
         this.props.options && this.props.options.onExited && this.props.options.onExited(node); // user option
     }
 
-    render() {
-        const immutableProps = { nodeRef: this.props.nodeRef, in: this.props.in, onEnter: this.onEnter, onEntering: this.onEntering, onEntered: this.onEntered, onExit: this.onExit, onExiting: this.onExiting, onExited: this.onExited };
-        const mutableProps = { classNames: this.props.classNames, timeout: this.props.timeout, unmountOnExit: this.props.unmountOnExit };
-        const props = { ...mutableProps, ...(this.props.options || {}), ...immutableProps };
+    componentDidUpdate(prevProps) {
+        if (this.props.in !== prevProps.in && this.disabled) { // no animation
+            const node = ObjectUtils.getRefElement(this.props.nodeRef);
 
-        return (
-            <ReactCSSTransition {...props}>
-                {this.props.children}
-            </ReactCSSTransition>
-        )
+            if (this.props.in) {
+                this.onEnter(node, true);
+                this.onEntering(node, true);
+                this.onEntered(node, true);
+            }
+            else {
+                this.onExit(node);
+                this.onExiting(node);
+                this.onExited(node);
+            }
+        }
+    }
+
+    render() {
+        if (this.disabled) {
+            return this.props.in ? this.props.children : null;
+        }
+        else {
+            const immutableProps = { nodeRef: this.props.nodeRef, in: this.props.in, onEnter: this.onEnter, onEntering: this.onEntering, onEntered: this.onEntered, onExit: this.onExit, onExiting: this.onExiting, onExited: this.onExited };
+            const mutableProps = { classNames: this.props.classNames, timeout: this.props.timeout, unmountOnExit: this.props.unmountOnExit };
+            const props = { ...mutableProps, ...(this.props.options || {}), ...immutableProps };
+
+            return (
+                <ReactCSSTransition {...props}>
+                    {this.props.children}
+                </ReactCSSTransition>
+            )
+        }
     }
 }

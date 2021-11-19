@@ -21,9 +21,10 @@ interface APIOptions {
     ripple?: boolean;
     inputStyle?: InputStyleType;
     locale?: string;
-    autoZIndex?: false;
-    zIndex?: ZIndexOptions;
     appendTo?: AppendToType;
+    cssTransition?: boolean;
+    autoZIndex?: boolean;
+    zIndex?: ZIndexOptions;
     filterMatchModeOptions?: FilterMatchModeOptions;
 }
 
