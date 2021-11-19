@@ -46,7 +46,7 @@ export class TabViewDemo extends Component {
     tabHeaderIITemplate(options) {
         return (
             <div className="p-d-flex p-ai-center p-px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="showcase/demo/images/avatar/amyelsner.png" shape="circle" className="p-mx-2" />
+                <Avatar image="showcase/demo/images/avatar/amyelsner.png" onImageError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} shape="circle" className="p-mx-2" />
                 Amy Elsner
             </div>
         )
