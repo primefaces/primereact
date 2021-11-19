@@ -8,6 +8,8 @@ export class AccordionTab extends Component {
     static defaultProps = {
         header: null,
         disabled: false,
+        style: null,
+        className: null,
         headerStyle: null,
         headerClassName: null,
         headerTemplate: null,
@@ -18,6 +20,8 @@ export class AccordionTab extends Component {
     static propTypes = {
         header: PropTypes.any,
         disabled: PropTypes.bool,
+        style: PropTypes.object,
+        className: PropTypes.string,
         headerStyle: PropTypes.object,
         headerClassName: PropTypes.string,
         headerTemplate: PropTypes.any,
@@ -128,7 +132,8 @@ export class Accordion extends Component {
     }
 
     renderTabHeader(tab, selected, index) {
-        const tabHeaderClass = classNames('p-accordion-header', { 'p-highlight': selected, 'p-disabled': tab.props.disabled }, tab.props.headerClassName);
+        const style = { ...(tab.props.headerStyle || {}), ...(tab.props.style || {}) };
+        const className = classNames('p-accordion-header', { 'p-highlight': selected, 'p-disabled': tab.props.disabled }, tab.props.headerClassName, tab.props.className);
         const id = this.state.id + '_header_' + index;
         const ariaControls = this.state.id + '_content_' + index;
         const tabIndex = tab.props.disabled ? -1 : null;
@@ -136,7 +141,7 @@ export class Accordion extends Component {
         const icon = selected ? this.props.collapseIcon : this.props.expandIcon;
 
         return (
-            <div className={tabHeaderClass} style={tab.props.headerStyle}>
+            <div className={className} style={style}>
                 <a href={'#' + ariaControls} id={id} className="p-accordion-header-link" aria-controls={ariaControls} role="tab" aria-expanded={selected} onClick={(event) => this.onTabHeaderClick(event, tab, index)} tabIndex={tabIndex}>
                     {IconUtils.getJSXIcon(icon, { className: 'p-accordion-toggle-icon' }, { props: this.props, selected })}
                     {header}
@@ -146,13 +151,14 @@ export class Accordion extends Component {
     }
 
     renderTabContent(tab, selected, index) {
-        const className = classNames('p-toggleable-content', tab.props.contentClassName);
+        const style = { ...(tab.props.contentStyle || {}), ...(tab.props.style || {}) };
+        const className = classNames('p-toggleable-content', tab.props.contentClassName, tab.props.className);
         const id = this.state.id + '_content_' + index;
         const toggleableContentRef = React.createRef();
 
         return (
             <CSSTransition nodeRef={toggleableContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={selected} unmountOnExit options={this.props.transitionOptions}>
-                <div ref={toggleableContentRef} id={id} className={className} style={tab.props.contentStyle} role="region" aria-labelledby={this.state.id + '_header_' + index}>
+                <div ref={toggleableContentRef} id={id} className={className} style={style} role="region" aria-labelledby={this.state.id + '_header_' + index}>
                     <div className="p-accordion-content">
                         {tab.props.children}
                     </div>

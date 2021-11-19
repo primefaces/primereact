@@ -23,6 +23,8 @@ export interface TabPanelProps {
     rightIcon?: string;
     disabled?: boolean;
     closable?: boolean;
+    style?: object;
+    className?: string;
     headerStyle?: object;
     headerClassName?: string;
     contentStyle?: object;

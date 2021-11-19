@@ -7,6 +7,8 @@ type AccordionTabHeaderTemplateType = React.ReactNode | ((props: AccordionTabPro
 interface AccordionTabProps {
     header?: React.ReactNode;
     disabled?: boolean;
+    style?: object;
+    className?: string;
     headerStyle?: object;
     headerClassName?: string;
     headerTemplate?: AccordionTabHeaderTemplateType;

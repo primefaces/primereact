@@ -1008,6 +1008,18 @@ template: (options) => {
                                         <td>Defines if tab can be removed.</td>
                                     </tr>
                                     <tr>
+                                        <td>style</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Inline style of the tab header and content.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the tab header and content.</td>
+                                    </tr>
+                                    <tr>
                                         <td>headerStyle</td>
                                         <td>object</td>
                                         <td>null</td>
