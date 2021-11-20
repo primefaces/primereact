@@ -3130,6 +3130,24 @@ export const DataTableStateDemo = () => {
                             <td>Determines whether the cell editor will be opened when clicking to select any row on Selection and Cell Edit modes.</td>
                         </tr>
                         <tr>
+                            <td>selectionPageOnly</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled with paginator and checkbox selection mode, the select all checkbox in the header will select all rows on the current page.</td>
+                        </tr>
+                        <tr>
+                            <td>showSelectAll</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Whether to show the select all checkbox in the header.</td>
+                        </tr>
+                        <tr>
+                            <td>selectAll</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether all data is selected.</td>
+                        </tr>
+                        <tr>
                             <td>headerColumnGroup</td>
                             <td>ColumnGroup</td>
                             <td>null</td>
@@ -3441,7 +3459,8 @@ export const DataTableStateDemo = () => {
                         <tr>
                             <td>onSelectionChange</td>
                             <td>event.originalEvent: Browser event <br/>
-                                event.value: Selection object
+                                event.value: Selection object <br />
+                                event.type: Type of the selection, valid values are "all", "row", "cell", "radio" and "checkbox".
                             </td>
                             <td>Callback to invoke when selection changes.</td>
                         </tr>
@@ -3495,6 +3514,12 @@ export const DataTableStateDemo = () => {
                             <td>onFilter</td>
                             <td>event.filters: Collection of active filters.</td>
                             <td>Callback to invoke on filtering.</td>
+                        </tr>
+                        <tr>
+                            <td>onSelectAll</td>
+                            <td>event.originalEvent: Browser event<br />
+                                event.checked: Whether all data is selected.</td>
+                            <td>Callback to invoke when all data is selected.</td>
                         </tr>
                         <tr>
                             <td>onAllRowsSelect</td>

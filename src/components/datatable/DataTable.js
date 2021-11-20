@@ -52,6 +52,10 @@ export class DataTable extends Component {
         dataKey: null,
         metaKeySelection: true,
         selectOnEdit: true,
+        selectionPageOnly: false,
+        showSelectAll: true,
+        selectAll: false,
+        onSelectAllChange: null,
         headerColumnGroup: null,
         footerColumnGroup: null,
         rowExpansionTemplate: null,
@@ -175,6 +179,10 @@ export class DataTable extends Component {
         dataKey: PropTypes.string,
         metaKeySelection: PropTypes.bool,
         selectOnEdit: PropTypes.bool,
+        selectionPageOnly: PropTypes.bool,
+        showSelectAll: PropTypes.bool,
+        selectAll: PropTypes.bool,
+        onSelectAllChange: PropTypes.func,
         headerColumnGroup: PropTypes.any,
         footerColumnGroup: PropTypes.any,
         rowExpansionTemplate: PropTypes.func,
@@ -318,6 +326,10 @@ export class DataTable extends Component {
 
     isVirtualScrollerDisabled() {
         return ObjectUtils.isEmpty(this.props.virtualScrollerOptions) || !this.props.scrollable;
+    }
+
+    isEquals(data1, data2) {
+        return this.props.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, this.props.dataKey);
     }
 
     hasFilter() {
@@ -633,10 +645,16 @@ export class DataTable extends Component {
     }
 
     allRowsSelected(processedData) {
-        const val = this.props.frozenValue ? [...this.props.frozenValue, ...processedData] : processedData;
-        const selectableVal = this.props.showSelectionElement ? val.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : val;
-        const length = this.props.lazy ? this.props.totalRecords : (selectableVal ? selectableVal.length : 0);
-        return (selectableVal && length > 0 && this.props.selection && this.props.selection.length > 0 && this.props.selection.length === length);
+        if (this.props.onSelectAllChange) {
+            return this.props.selectAll;
+        }
+        else {
+            const data = this.props.selectionPageOnly ? this.dataToRender(processedData) : processedData;
+            const val = this.props.frozenValue ? [...this.props.frozenValue, ...data] : data;
+            const selectableVal = this.props.showSelectionElement ? val.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : val;
+
+            return selectableVal && this.props.selection && selectableVal.every(sv => this.props.selection.some(s => this.isEquals(s, sv)));
+        }
     }
 
     getSelectionModeInColumn(columns) {
@@ -814,26 +832,31 @@ export class DataTable extends Component {
     }
 
     onColumnHeaderCheckboxChange(e, processedData) {
-        const { originalEvent, checked } = e;
-        let selection;
-
-        if (!checked) {
-            selection = this.props.frozenValue ? [...this.props.frozenValue, ...processedData] : processedData;
-            selection = this.props.showSelectionElement ? selection.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : selection;
-
-            this.props.onAllRowsSelect && this.props.onAllRowsSelect({ originalEvent, data: selection, type: 'all' });
+        if (this.props.onSelectAllChange) {
+            this.props.onSelectAllChange(e);
         }
         else {
-            selection = [];
+            const { originalEvent, checked } = e;
+            const data = this.props.selectionPageOnly ? this.dataToRender(processedData) : processedData;
+            let selection = this.props.selectionPageOnly && this.props.selection ? this.props.selection.filter(s => !data.some(d => this.isEquals(s, d))) : [];
 
-            this.props.onAllRowsUnselect && this.props.onAllRowsUnselect({ originalEvent, data: selection, type: 'all' });
-        }
+            if (!checked) {
+                selection = this.props.frozenValue ? [...selection, ...this.props.frozenValue, ...data] : [...selection, ...data];
+                selection = this.props.showSelectionElement ? selection.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : selection;
 
-        if (this.props.onSelectionChange) {
-            this.props.onSelectionChange({
-                originalEvent,
-                value: selection
-            });
+                this.props.onAllRowsSelect && this.props.onAllRowsSelect({ originalEvent, data: selection, type: 'all' });
+            }
+            else {
+                this.props.onAllRowsUnselect && this.props.onAllRowsUnselect({ originalEvent, data: selection, type: 'all' });
+            }
+
+            if (this.props.onSelectionChange) {
+                this.props.onSelectionChange({
+                    originalEvent,
+                    value: selection,
+                    type: 'all'
+                });
+            }
         }
     }
 
@@ -1582,7 +1605,7 @@ export class DataTable extends Component {
                 onColumnResizeStart={this.onColumnResizeStart} onColumnResizerClick={this.props.onColumnResizerClick} onColumnResizerDoubleClick={this.props.onColumnResizerDoubleClick}
                 sortMode={this.props.sortMode} sortField={sortField} sortOrder={sortOrder} multiSortMeta={multiSortMeta} groupRowsBy={this.props.groupRowsBy} groupRowSortField={groupRowSortField} onSortChange={this.onSortChange}
                 filterDisplay={this.props.filterDisplay} filters={filters} filtersStore={filtersStore} onFilterChange={this.onFilterChange} onFilterApply={this.onFilterApply}
-                allRowsSelected={this.allRowsSelected} onColumnCheckboxChange={this.onColumnHeaderCheckboxChange}
+                showSelectAll={this.props.showSelectAll} allRowsSelected={this.allRowsSelected} onColumnCheckboxChange={this.onColumnHeaderCheckboxChange}
                 onColumnMouseDown={this.onColumnHeaderMouseDown} onColumnDragStart={this.onColumnHeaderDragStart} onColumnDragOver={this.onColumnHeaderDragOver} onColumnDragLeave={this.onColumnHeaderDragLeave} onColumnDrop={this.onColumnHeaderDrop}
                 rowGroupMode={this.props.rowGroupMode} reorderableColumns={this.props.reorderableColumns} />
         )

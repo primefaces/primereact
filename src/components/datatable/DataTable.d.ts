@@ -123,7 +123,13 @@ interface DataTableFilterParams {
 interface DataTableSelectionChangeParams {
     originalEvent: React.SyntheticEvent;
     value: any;
+    type?: string;
     [key: string]: any;
+}
+
+interface DataTableSelectAllChangeParams {
+    originalEvent: React.SyntheticEvent;
+    checked: boolean;
 }
 
 interface DataTableRowEventParams {
@@ -256,6 +262,9 @@ export interface DataTableProps {
     dataKey?: string;
     metaKeySelection?: boolean;
     selectOnEdit?: boolean;
+    selectionPageOnly?: boolean;
+    showSelectAll?: boolean;
+    selectAll?: boolean;
     headerColumnGroup?: React.ReactNode;
     footerColumnGroup?: React.ReactNode;
     expandedRows?: any[] | DataTableExpandedRows;
@@ -296,7 +305,8 @@ export interface DataTableProps {
     collapsedRowIcon?: string;
     globalFilterFields?: string[];
     rowGroupHeaderTemplate?: DataTableRowGroupHeaderTemplateType;
-    rowGroupFooterTemplate?: DataTableRowGroupFooterTemplateType
+    rowGroupFooterTemplate?: DataTableRowGroupFooterTemplateType;
+    onSelectAllChange?(e: DataTableSelectAllChangeParams): void;
     onRowEditComplete?(e: DataTableRowEditCompleteParams): void;
     showSelectionElement?(data: any, options: DataTableShowSelectionElementOptions): boolean | undefined | null;
     showRowReorderElement?(data: any, options: DataTableShowRowReorderElementOptions): boolean | undefined | null;

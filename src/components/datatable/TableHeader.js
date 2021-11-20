@@ -82,9 +82,31 @@ export class TableHeader extends Component {
                     filterDisplay={this.props.filterDisplay} filters={this.props.filters} filtersStore={this.props.filtersStore} onFilterChange={this.props.onFilterChange} onFilterApply={this.props.onFilterApply}
                     onColumnMouseDown={this.props.onColumnMouseDown} onColumnDragStart={this.props.onColumnDragStart} onColumnDragOver={this.props.onColumnDragOver} onColumnDragLeave={this.props.onColumnDragLeave} onColumnDrop={this.props.onColumnDrop}
                     onColumnResizeStart={this.props.onColumnResizeStart} onColumnResizerClick={this.props.onColumnResizerClick} onColumnResizerDoubleClick={this.props.onColumnResizerDoubleClick}
-                    allRowsSelected={this.props.allRowsSelected} onColumnCheckboxChange={this.onCheckboxChange} reorderableColumns={this.props.reorderableColumns} onSortChange={this.props.onSortChange} />
+                    showSelectAll={this.props.showSelectAll} allRowsSelected={this.props.allRowsSelected} onColumnCheckboxChange={this.onCheckboxChange} reorderableColumns={this.props.reorderableColumns} onSortChange={this.props.onSortChange} />
             );
         });
+    }
+
+    renderCheckbox(selectionMode) {
+        if (this.props.showSelectAll && selectionMode === 'multiple') {
+            const allRowsSelected = this.props.allRowsSelected(this.props.value);
+
+            return (
+                <HeaderCheckbox checked={allRowsSelected} onChange={this.onCheckboxChange} disabled={this.props.empty} />
+            )
+        }
+
+        return null;
+    }
+
+    renderFilter(column, filter) {
+        if (filter) {
+            return (
+                <ColumnFilter display="row" column={column} filters={this.props.filters} filtersStore={this.props.filtersStore} onFilterChange={this.props.onFilterChange} onFilterApply={this.props.onFilterApply} />
+            )
+        }
+
+        return null;
     }
 
     renderFilterCells() {
@@ -96,12 +118,13 @@ export class TableHeader extends Component {
                 const colStyle = { ...(filterHeaderStyle || {}), ...(style || {}) };
                 const colClassName = classNames('p-filter-column', filterHeaderClassName, className, { 'p-frozen-column': frozen });
                 const colKey = columnKey || field || i;
-                const allRowsSelected = selectionMode === 'multiple' && this.props.allRowsSelected(this.props.value);
+                const checkbox = this.renderCheckbox(selectionMode);
+                const filterRow = this.renderFilter(col, filter);
 
                 return (
                     <th key={colKey} style={colStyle} className={colClassName}>
-                        {selectionMode === 'multiple' && <HeaderCheckbox checked={allRowsSelected} onChange={this.onCheckboxChange} disabled={this.props.empty} />}
-                        {filter && <ColumnFilter display="row" column={col} filters={this.props.filters} filtersStore={this.props.filtersStore} onFilterChange={this.props.onFilterChange} onFilterApply={this.props.onFilterApply} />}
+                        {checkbox}
+                        {filterRow}
                     </th>
                 )
             }
