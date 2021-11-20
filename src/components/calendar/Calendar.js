@@ -879,10 +879,26 @@ export class Calendar extends Component {
         event.preventDefault();
     }
 
+    doStepMinute(currentMinute, step) {
+        if (this.props.stepMinute <= 1) {
+            return currentMinute;
+        }
+        if (!step) {
+            step = this.props.stepMinute;
+            if (currentMinute % step === 0) {
+                return currentMinute;
+            }
+        }
+
+        var newMinute = currentMinute + step;
+        newMinute = Math.floor(newMinute / step) * step;
+        return newMinute;
+    }
+
     incrementMinute(event) {
         const currentTime = this.getCurrentDateTime();
         const currentMinute = currentTime.getMinutes();
-        let newMinute = currentMinute + this.props.stepMinute;
+        let newMinute = this.doStepMinute(currentMinute, this.props.stepMinute);
         newMinute = (newMinute > 59) ? (newMinute - 60) : newMinute;
 
         if (this.validateMinute(newMinute, currentTime)) {
@@ -910,7 +926,7 @@ export class Calendar extends Component {
     decrementMinute(event) {
         const currentTime = this.getCurrentDateTime();
         const currentMinute = currentTime.getMinutes();
-        let newMinute = currentMinute - this.props.stepMinute;
+        let newMinute = this.doStepMinute(currentMinute, -this.props.stepMinute);
         newMinute = (newMinute < 0) ? (newMinute + 60) : newMinute;
 
         if (this.validateMinute(newMinute, currentTime)) {
