@@ -29,7 +29,8 @@ export class DataTableSelectionDemo extends Component {
             selectedProducts5: null,
             selectedProducts6: null,
             selectedProducts7: null,
-            selectedProducts8: null
+            selectedProducts8: null,
+            selectedProducts9: null
         };
 
         this.productService = new ProductService();
@@ -121,6 +122,7 @@ export class DataTableSelectionDemo extends Component {
                         </DataTable>
 
                         <h6>Row Selection with Drag Selection</h6>
+                        <p>Click and drag the rectangular selection over the desired rows.</p>
                         <DataTable value={this.state.products} selectionMode="multiple" dragSelection selection={this.state.selectedProducts3} onSelectionChange={e => this.setState({ selectedProducts3: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
@@ -145,6 +147,7 @@ export class DataTableSelectionDemo extends Component {
                         </DataTable>
 
                         <h6>Cell Selection with Drag Selection</h6>
+                        <p>Click and drag the rectangular selection over the desired cells.</p>
                         <DataTable value={this.state.products} selectionMode="multiple" cellSelection dragSelection selection={this.state.selectedProducts6} onSelectionChange={e => this.setState({ selectedProducts6: e.value })} dataKey="id" responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
@@ -152,7 +155,6 @@ export class DataTableSelectionDemo extends Component {
                             <Column field="quantity" header="Quantity"></Column>
                         </DataTable>
                     </div>
-
 
                     <div className="card">
                         <h5>Events</h5>
@@ -221,6 +223,16 @@ export class DataTableSelectionDemo extends Component {
                             <Column field="category" header="Category"></Column>
                             <Column field="quantity" header="Quantity"></Column>
                         </DataTable>
+
+                        <h6>Page-Only Selection</h6>
+                        <DataTable value={this.state.products} selection={this.state.selectedProducts9} onSelectionChange={e => this.setState({ selectedProducts9: e.value })} dataKey="id" responsiveLayout="scroll"
+                            selectionPageOnly paginator rows={5}>
+                            <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
                     </div>
                 </div>
 
@@ -266,7 +278,8 @@ export class DataTableSelectionDemo extends Component {
             selectedProducts5: null,
             selectedProducts6: null,
             selectedProducts7: null,
-            selectedProducts8: null
+            selectedProducts8: null,
+            selectedProducts9: null
         };
 
         this.productService = new ProductService();
@@ -380,7 +393,6 @@ export class DataTableSelectionDemo extends Component {
                     </DataTable>
                 </div>
 
-
                 <div className="card">
                     <h5>Events</h5>
 
@@ -448,6 +460,16 @@ export class DataTableSelectionDemo extends Component {
                         <Column field="category" header="Category"></Column>
                         <Column field="quantity" header="Quantity"></Column>
                     </DataTable>
+
+                    <h6>Page-Only Selection</h6>
+                    <DataTable value={this.state.products} selection={this.state.selectedProducts9} onSelectionChange={e => this.setState({ selectedProducts9: e.value })} dataKey="id" responsiveLayout="scroll"
+                        selectionPageOnly paginator rows={5}>
+                        <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
                 </div>
             </div>
         );
@@ -482,6 +504,7 @@ const DataTableSelectionDemo = () => {
     const [selectedProducts6, setSelectedProducts6] = useState(null);
     const [selectedProducts7, setSelectedProducts7] = useState(null);
     const [selectedProducts8, setSelectedProducts8] = useState(null);
+    const [selectedProducts9, setSelectedProducts9] = useState(null);
     const toast = useRef(null);
 
 
@@ -589,7 +612,6 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
             </div>
 
-
             <div className="card">
                 <h5>Events</h5>
 
@@ -652,6 +674,16 @@ const DataTableSelectionDemo = () => {
                 <h6>Checkbox-Only Selection</h6>
                 <DataTable value={products} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+
+                <h6>Page-Only Selection</h6>
+                <DataTable value={products} selection={selectedProducts9} onSelectionChange={e => setSelectedProducts9(e.value)} dataKey="id" responsiveLayout="scroll"
+                    selectionPageOnly paginator rows={5}>
+                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -690,6 +722,7 @@ const DataTableSelectionDemo = () => {
     const [selectedProducts6, setSelectedProducts6] = useState(null);
     const [selectedProducts7, setSelectedProducts7] = useState(null);
     const [selectedProducts8, setSelectedProducts8] = useState(null);
+    const [selectedProducts9, setSelectedProducts9] = useState(null);
     const toast = useRef(null);
 
 
@@ -797,7 +830,6 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
             </div>
 
-
             <div className="card">
                 <h5>Events</h5>
 
@@ -860,6 +892,16 @@ const DataTableSelectionDemo = () => {
                 <h6>Checkbox-Only Selection</h6>
                 <DataTable value={products} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+
+                <h6>Page-Only Selection</h6>
+                <DataTable value={products} selection={selectedProducts9} onSelectionChange={e => setSelectedProducts9(e.value)} dataKey="id" responsiveLayout="scroll"
+                    selectionPageOnly paginator rows={5}>
+                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -906,6 +948,7 @@ const DataTableSelectionDemo = () => {
     const [selectedProducts6, setSelectedProducts6] = useState(null);
     const [selectedProducts7, setSelectedProducts7] = useState(null);
     const [selectedProducts8, setSelectedProducts8] = useState(null);
+    const [selectedProducts9, setSelectedProducts9] = useState(null);
     const toast = useRef(null);
 
 
@@ -1013,7 +1056,6 @@ const DataTableSelectionDemo = () => {
                 </DataTable>
             </div>
 
-
             <div className="card">
                 <h5>Events</h5>
 
@@ -1076,6 +1118,16 @@ const DataTableSelectionDemo = () => {
                 <h6>Checkbox-Only Selection</h6>
                 <DataTable value={products} selectionMode="checkbox" selection={selectedProducts8} onSelectionChange={e => setSelectedProducts8(e.value)} dataKey="id" responsiveLayout="scroll">
                     <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+
+                <h6>Page-Only Selection</h6>
+                <DataTable value={products} selection={selectedProducts9} onSelectionChange={e => setSelectedProducts9(e.value)} dataKey="id" responsiveLayout="scroll"
+                    selectionPageOnly paginator rows={5}>
+                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
