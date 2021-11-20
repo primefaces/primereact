@@ -292,7 +292,8 @@ export interface MessageSeverityOptions {
 
 export declare const MessageSeverity: MessageSeverityOptions;
 
-export interface FilterMatchMode {
+// Filter
+export interface FilterMatchModeOptions {
     readonly STARTS_WITH: string;
     readonly CONTAINS: string;
     readonly NOT_CONTAINS: string;
@@ -312,10 +313,14 @@ export interface FilterMatchMode {
     readonly CUSTOM: string;
 }
 
-export interface FilterOperator {
+export declare const FilterMatchMode: FilterMatchModeOptions;
+
+export interface FilterOperatorOptions {
     readonly AND: string;
     readonly OR: string;
 }
+
+export declare const FilterOperator: FilterOperatorOptions;
 
 export declare namespace FilterService {
     export function filter(value: any, fields: string[], filterValue: any, filterMatchMode: string, filterLocale?: string): any[];
