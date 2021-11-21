@@ -29,7 +29,7 @@ export class HeaderCheckbox extends Component {
 
             this.props.onChange({
                 originalEvent: event,
-                checked: this.props.checked
+                checked: !this.props.checked
             });
         }
     }

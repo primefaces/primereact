@@ -87,13 +87,6 @@ interface DataTableEditingRows {
     [key: string]: boolean;
 }
 
-interface DataTablePageParams {
-    first: number;
-    rows: number;
-    page: number;
-    pageCount: number;
-}
-
 interface DataTableRowToggleParams {
     data: any[];
 }
@@ -110,6 +103,13 @@ interface DataTableColumnResizerClickParams {
     column: Column;
 }
 
+interface DataTablePageParams {
+    first: number;
+    rows: number;
+    page?: number;
+    pageCount?: number;
+}
+
 interface DataTableSortParams {
     sortField: string;
     sortOrder: DataTableSortOrderType;
@@ -118,6 +118,10 @@ interface DataTableSortParams {
 
 interface DataTableFilterParams {
     filters: DataTableFilterMeta;
+}
+
+interface DataTablePFSEvent extends DataTablePageParams, DataTableSortParams, DataTableFilterParams {
+    [key: string]: any;
 }
 
 interface DataTableSelectionChangeParams {
@@ -319,9 +323,9 @@ export interface DataTableProps {
     onColumnResizeEnd?(e: DataTableColumnResizeEndParams): void;
     onColumnResizerClick?(e: DataTableColumnResizerClickParams): void;
     onColumnResizerDoubleClick?(e: DataTableColumnResizerClickParams): void;
-    onSort?(e: DataTableSortParams): void;
-    onPage?(e: DataTablePageParams): void;
-    onFilter?(e: DataTableFilterParams): void;
+    onSort?(e: DataTablePFSEvent): void;
+    onPage?(e: DataTablePFSEvent): void;
+    onFilter?(e: DataTablePFSEvent): void;
     onAllRowsSelect?(e: DataTableSelectParams): void;
     onAllRowsUnselect?(e: DataTableUnselectParams): void;
     onRowClick?(e: DataTableRowClickEventParams): void;

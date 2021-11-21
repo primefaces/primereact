@@ -507,7 +507,7 @@ export class DataTable extends Component {
                         return { first, rows, page, pageCount };
                     }
 
-                    this.props.onPage(getOnPageParams(restoredState.first, restoredState.rows));
+                    this.props.onPage(this.createEvent(getOnPageParams(restoredState.first, restoredState.rows)));
                 }
                 else {
                     state.first = restoredState.first;
@@ -517,10 +517,10 @@ export class DataTable extends Component {
 
             if (restoredState.sortField) {
                 if (this.props.onSort) {
-                    this.props.onSort({
+                    this.props.onSort(this.createEvent({
                         sortField: restoredState.sortField,
                         sortOrder: restoredState.sortOrder
-                    });
+                    }));
                 }
                 else {
                     state.sortField = restoredState.sortField;
@@ -530,9 +530,9 @@ export class DataTable extends Component {
 
             if (restoredState.multiSortMeta) {
                 if (this.props.onSort) {
-                    this.props.onSort({
+                    this.props.onSort(this.createEvent({
                         multiSortMeta: restoredState.multiSortMeta
-                    });
+                    }));
                 }
                 else {
                     state.multiSortMeta = restoredState.multiSortMeta;
@@ -543,9 +543,9 @@ export class DataTable extends Component {
                 state.d_filters = this.cloneFilters(restoredState.filters);
 
                 if (this.props.onFilter) {
-                    this.props.onFilter({
+                    this.props.onFilter(this.createEvent({
                         filters: restoredState.filters
-                    });
+                    }));
                 }
                 else {
                     state.filters = this.cloneFilters(restoredState.filters);
@@ -840,7 +840,7 @@ export class DataTable extends Component {
             const data = this.props.selectionPageOnly ? this.dataToRender(processedData) : processedData;
             let selection = this.props.selectionPageOnly && this.props.selection ? this.props.selection.filter(s => !data.some(d => this.isEquals(s, d))) : [];
 
-            if (!checked) {
+            if (checked) {
                 selection = this.props.frozenValue ? [...selection, ...this.props.frozenValue, ...data] : [...selection, ...data];
                 selection = this.props.showSelectionElement ? selection.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : selection;
 
@@ -1033,7 +1033,7 @@ export class DataTable extends Component {
         this.clearEditingMetaData();
 
         if (this.props.onPage)
-            this.props.onPage(e);
+            this.props.onPage(this.createEvent(e));
         else
             this.setState({ first: e.first, rows: e.rows });
 
@@ -1090,7 +1090,7 @@ export class DataTable extends Component {
         }
 
         if (this.props.onSort) {
-            this.props.onSort(eventMeta);
+            this.props.onSort(this.createEvent(eventMeta));
         }
         else {
             eventMeta.first = 0;
@@ -1230,7 +1230,7 @@ export class DataTable extends Component {
             let filters = this.cloneFilters(this.state.d_filters);
 
             if (this.props.onFilter) {
-                this.props.onFilter({ filters });
+                this.props.onFilter(this.createEvent({ filters }));
             }
             else {
                 this.setState({
@@ -1474,6 +1474,18 @@ export class DataTable extends Component {
     closeEditingCell() {
         if (this.props.editMode !== "row") {
             document.body.click();
+        }
+    }
+
+    createEvent(event) {
+        return {
+            first: this.getFirst(),
+            rows: this.getRows(),
+            sortField: this.getSortField(),
+            sortOrder: this.getSortOrder(),
+            multiSortMeta: this.getMultiSortMeta(),
+            filters: this.getFilters(),
+            ...event
         }
     }
 
