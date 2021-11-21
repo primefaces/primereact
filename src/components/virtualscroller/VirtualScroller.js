@@ -513,6 +513,11 @@ export class VirtualScroller extends Component {
         return [];
     }
 
+    isPropChanged(prevProps) {
+        const props = ['itemSize', 'scrollHeight'];
+        return props.some((p) => !ObjectUtils.equals(prevProps[p], this.props[p]));
+    }
+
     init() {
         this.setSize();
         this.calculateOptions();
@@ -524,7 +529,7 @@ export class VirtualScroller extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (!ObjectUtils.equals(prevProps.itemSize, this.props.itemSize) || (!prevProps.items || prevProps.items.length !== (this.props.items || []).length)) {
+        if ((!prevProps.items || prevProps.items.length !== (this.props.items || []).length) || this.isPropChanged(prevProps)) {
             this.init();
         }
 

@@ -1694,7 +1694,7 @@ export class DataTable extends Component {
 
         return (
             <div className="p-datatable-wrapper" style={{ maxHeight: isVirtualScrollerDisabled ? this.props.scrollHeight : '' }}>
-                <VirtualScroller {...virtualScrollerOptions} items={processedData} columns={columns} style={{ height: this.props.scrollHeight }}
+                <VirtualScroller {...virtualScrollerOptions} items={processedData} columns={columns} scrollHeight={this.props.scrollHeight}
                     disabled={isVirtualScrollerDisabled} loaderDisabled showSpacer={false}
                     contentTemplate={(options) => {
                         const ref = (el) => { this.table = el; options.spacerRef && options.spacerRef(el) };
