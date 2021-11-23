@@ -146,7 +146,7 @@ interface ColumnFilterOperatorChangeParams {
 
 interface ColumnFilterConstraintAddParams {
     field: string;
-    constraing: ColumnFilterMetaData;
+    constraint: ColumnFilterMetaData;
 }
 
 interface ColumnFilterConstraintRemoveParams extends ColumnFilterConstraintAddParams {}
