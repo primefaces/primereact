@@ -69,7 +69,7 @@ export class SplitButtonDemo extends Component {
                     <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.items}></SplitButton>
 
                     <h5>Severities</h5>
-                    <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-mr-2"></SplitButton>
+                    <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-mr-2" buttonClassName="p-button-outlined" menuButtonClassName="p-button-outlined"></SplitButton>
                     <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-secondary p-mr-2"></SplitButton>
                     <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-success p-mr-2"></SplitButton>
                     <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-info p-mr-2"></SplitButton>
@@ -135,7 +135,7 @@ const SplitButtonDemo = () => {
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
 
                 <h5>Severities</h5>
-                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-mr-2" buttonClassName="p-button-outlined" menuButtonClassName="p-button-outlined"></SplitButton>
                 <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-secondary p-mr-2"></SplitButton>
                 <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-success p-mr-2"></SplitButton>
                 <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-info p-mr-2"></SplitButton>
@@ -200,7 +200,7 @@ const SplitButtonDemo = () => {
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
 
                 <h5>Severities</h5>
-                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-mr-2" buttonClassName="p-button-outlined" menuButtonClassName="p-button-outlined"></SplitButton>
                 <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-secondary p-mr-2"></SplitButton>
                 <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-success p-mr-2"></SplitButton>
                 <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-info p-mr-2"></SplitButton>
@@ -269,7 +269,7 @@ const SplitButtonDemo = () => {
                 <SplitButton label="Save" icon="pi pi-plus" onClick={save} model={items}></SplitButton>
 
                 <h5>Severities</h5>
-                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-mr-2"></SplitButton>
+                <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-mr-2" buttonClassName="p-button-outlined" menuButtonClassName="p-button-outlined"></SplitButton>
                 <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-secondary p-mr-2"></SplitButton>
                 <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-success p-mr-2"></SplitButton>
                 <SplitButton label="Save" icon="pi pi-plus" model={items} className="p-button-info p-mr-2"></SplitButton>
@@ -439,6 +439,12 @@ export const SplitButtonDemo = () => {
                                         <td>ClassName of the component.</td>
                                     </tr>
                                     <tr>
+                                        <td>buttonClassName</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>ClassName of the button.</td>
+                                    </tr>
+                                    <tr>
                                         <td>menuStyle</td>
                                         <td>string</td>
                                         <td>null</td>
@@ -449,6 +455,12 @@ export const SplitButtonDemo = () => {
                                         <td>string</td>
                                         <td>null</td>
                                         <td>ClassName class of the overlay menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>menuButtonClassName</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>ClassName of the menu dropdown button.</td>
                                     </tr>
                                     <tr>
                                         <td>tabIndex</td>

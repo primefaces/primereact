@@ -14,8 +14,10 @@ export interface SplitButtonProps {
     disabled?: boolean;
     style?: object;
     className?: string;
+    buttonClassName?: string;
     menuStyle?: object;
     menuClassName?: string;
+    menuButtonClassName?: string;
     tabIndex?: number;
     appendTo?: SplitButtonAppendToType;
     tooltip?: string;
