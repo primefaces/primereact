@@ -1,4 +1,4 @@
-import {IconType} from "../utils/Utils";
+import {IconType} from "../utils/utils";
 
 export interface SelectItem {
     label?: string;
