@@ -1017,7 +1017,7 @@ export class DataTable extends Component {
 
     destroyResponsiveStyle() {
         if (this.responsiveStyleElement) {
-            if (this.responsiveStyleElement.parent) document.head.removeChild(this.responsiveStyleElement);
+            if (this.responsiveStyleElement.parentNode) document.head.removeChild(this.responsiveStyleElement);
             this.responsiveStyleElement = null;
         }
     }
