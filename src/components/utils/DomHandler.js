@@ -881,4 +881,22 @@ export default class DomHandler {
         document.head.appendChild(styleElement);
         return styleElement;
     }
+
+    /**
+     * Remove a style element from the head and attempt to prevent DOM Exception on fast refresh.
+     *
+     * @see https://github.com/primefaces/primereact/issues/2469
+     * @param {HtmlStyleElement} styleElement the element to remove from head
+     */
+    static removeInlineStyle(styleElement) {
+        if (styleElement && styleElement.parentNode) {
+            try {
+                document.head.removeChild(styleElement);
+            } catch (error) {
+                // style element may have already been removed in a fast refresh
+            }
+            styleElement = null;
+        }
+        return styleElement;
+    }
 }

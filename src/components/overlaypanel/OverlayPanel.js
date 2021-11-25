@@ -261,10 +261,7 @@ export class OverlayPanel extends Component {
             this.scrollHandler = null;
         }
 
-        if (this.styleElement) {
-            document.head.removeChild(this.styleElement);
-            this.styleElement = null;
-        }
+        this.styleElement = DomHandler.removeInlineStyle(this.styleElement);
 
         if (this.overlayEventListener) {
             OverlayService.off('overlay-click', this.overlayEventListener);
