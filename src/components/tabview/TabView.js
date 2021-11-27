@@ -46,6 +46,7 @@ export class TabView extends Component {
         className: null,
         renderActiveOnly: true,
         onTabChange: null,
+        onTabClose: null,
         scrollable: false
     }
 
@@ -56,6 +57,7 @@ export class TabView extends Component {
         className: PropTypes.string,
         renderActiveOnly: PropTypes.bool,
         onTabChange: PropTypes.func,
+        onTabClose: PropTypes.func,
         scrollable: PropTypes.bool
     };
 
@@ -110,6 +112,10 @@ export class TabView extends Component {
             const tabInfo = this.findVisibleActiveTab(index);
             tabInfo && this.onTabHeaderClick(event, tabInfo.tab, tabInfo.index);
         });
+
+        if (this.props.onTabClose) {
+            this.props.onTabClose({ originalEvent: event, index: index });
+        }
 
         event.preventDefault();
     }

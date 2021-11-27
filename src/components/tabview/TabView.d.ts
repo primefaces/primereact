@@ -38,6 +38,11 @@ interface TabViewTabChangeParams {
     index: number;
 }
 
+interface TabViewTabCloseParams {
+    originalEvent: React.SyntheticEvent;
+    index: number;
+}
+
 export interface TabViewProps {
     id?: string;
     activeIndex?: number;
@@ -46,6 +51,7 @@ export interface TabViewProps {
     renderActiveOnly?: boolean;
     scrollable?: boolean;
     onTabChange?(e: TabViewTabChangeParams): void;
+    onTabClose?(e: TabViewTabCloseParams): void;
 }
 
 // tslint:disable-next-line:max-classes-per-file
