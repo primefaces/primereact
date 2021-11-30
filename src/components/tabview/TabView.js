@@ -79,7 +79,7 @@ export class TabView extends Component {
         this.navBackward = this.navBackward.bind(this);
         this.navForward = this.navForward.bind(this);
         this.onScroll = this.onScroll.bind(this);
-
+        this.onWheel = this.onWheel.bind(this);
     }
 
     getActiveIndex() {
@@ -159,6 +159,22 @@ export class TabView extends Component {
         this.props.scrollable && this.updateButtonState();
 
         event.preventDefault();
+    }
+
+    onWheel(event) {
+        if(!this.props.scrollable) {
+            return;
+        }
+
+        if (event.deltaY < 0) {
+            this.navBackward();
+        } else {
+            this.navForward();
+        }
+        this.updateButtonState();
+
+        event.preventDefault();
+        return false;
     }
 
     getVisibleButtonWidths() {
@@ -358,7 +374,7 @@ export class TabView extends Component {
         const nextButton = this.renderNextButton();
 
         return (
-            <div className={className}>
+            <div className={className} onWheel={this.onWheel}>
                 <div className="p-tabview-nav-container">
                     {prevButton}
                     {navigator}
