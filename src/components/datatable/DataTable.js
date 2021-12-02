@@ -651,8 +651,8 @@ export class DataTable extends Component {
         else {
             const data = this.props.selectionPageOnly ? this.dataToRender(processedData) : processedData;
             const val = this.props.frozenValue ? [...this.props.frozenValue, ...data] : data;
-            const selectableVal = this.props.showSelectionElement ? val.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : val;
-
+            var selectableVal = this.props.showSelectionElement ? val.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : val;
+            selectableVal = this.props.isDataSelectable ? val.filter((data, index) => this.props.isDataSelectable(data)) : selectableVal;
             return selectableVal && this.props.selection && selectableVal.every(sv => this.props.selection.some(s => this.isEquals(s, sv)));
         }
     }
@@ -843,7 +843,7 @@ export class DataTable extends Component {
             if (checked) {
                 selection = this.props.frozenValue ? [...selection, ...this.props.frozenValue, ...data] : [...selection, ...data];
                 selection = this.props.showSelectionElement ? selection.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : selection;
-                selection = this.props.isDataSelectable ? selection?.filter((k) => this.props.isDataSelectable(k)) : selection
+                selection = this.props.isDataSelectable ? selection.filter((k) => this.props.isDataSelectable(k)) : selection
                 this.props.onAllRowsSelect && this.props.onAllRowsSelect({ originalEvent, data: selection, type: 'all' });
             }
             else {
@@ -1477,7 +1477,6 @@ export class DataTable extends Component {
         }
     }
 
-
     createEvent(event) {
         return {
             first: this.getFirst(),
@@ -1521,8 +1520,8 @@ export class DataTable extends Component {
             const first = this.props.lazy ? 0 : this.getFirst();
             return data.slice(first, first + this.getRows());
         }
-        return data;
 
+        return data;
     }
 
     componentDidMount() {
@@ -1555,6 +1554,7 @@ export class DataTable extends Component {
 
         if (prevProps.responsiveLayout !== this.props.responsiveLayout) {
             this.destroyResponsiveStyle();
+
             if (this.props.responsiveLayout === 'stack' && !this.props.scrollable) {
                 this.createResponsiveStyle();
             }

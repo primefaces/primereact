@@ -186,7 +186,6 @@ export class DataTableSelectionDemo extends Component {
                             <Column field="category" header="Category"></Column>
                             <Column field="quantity" header="Quantity"></Column>
                         </DataTable>
-
                     </div>
 
                     <div className="card">
