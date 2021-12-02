@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { CSSTransitionProps } from '../csstransition';
 
 type OverlayPanelEventType = React.SyntheticEvent | undefined | null;
 
@@ -19,13 +20,13 @@ export interface OverlayPanelProps {
     appendTo?: OverlayPanelAppendToType;
     ariaCloseLabel?: string;
     breakpoints?: OverlayPanelBreakpoints;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onShow?(): void;
     onHide?(): void;
 }
 
 export declare class OverlayPanel extends React.Component<OverlayPanelProps, any> {
-    public toggle(event: OverlayPanelEventType, target: OverlayPanelTargetType): void;
+    public toggle(event: OverlayPanelEventType, target?: OverlayPanelTargetType): void;
     public show(event: OverlayPanelEventType, target: OverlayPanelTargetType): void;
     public hide(): void;
 }

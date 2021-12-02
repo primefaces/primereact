@@ -35,7 +35,7 @@ export class SplitButton extends Component {
     static propTypes = {
         id: PropTypes.string,
         label: PropTypes.string,
-        icon: PropTypes.string,
+        icon: PropTypes.any,
         model: PropTypes.array,
         disabled: PropTypes.bool,
         style: PropTypes.object,
@@ -48,7 +48,7 @@ export class SplitButton extends Component {
         tooltipOptions: PropTypes.object,
         buttonTemplate: PropTypes.any,
         transitionOptions: PropTypes.object,
-        dropdownIcon: PropTypes.string,
+        dropdownIcon: PropTypes.any,
         onClick: PropTypes.func,
         onShow: PropTypes.func,
         onHide: PropTypes.func
@@ -99,7 +99,7 @@ export class SplitButton extends Component {
     }
 
     onOverlayEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current);
+        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         this.alignOverlay();
     }
 
@@ -160,7 +160,7 @@ export class SplitButton extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.overlayVisible && !DomHandler.isAndroid()) {
+                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
                     this.hide();
                 }
             };

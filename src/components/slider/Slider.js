@@ -47,8 +47,12 @@ export class Slider extends Component {
         this.handleIndex = 0;
     }
 
+    get value() {
+        return this.props.range ? this.props.value || [0, 100] : this.props.value || 0;
+    }
+
     spin(event, dir) {
-        const value = (this.props.range ? this.props.value[this.handleIndex] : this.props.value) || 0;
+        const value = this.props.range ? this.value[this.handleIndex] : this.value;
         const step = (this.props.step || 1) * dir;
 
         this.updateValue(event, value + step);
@@ -100,7 +104,11 @@ export class Slider extends Component {
 
         if (!this.sliderHandleClick) {
             this.updateDomData();
-            this.setValue(event);
+            const value = this.setValue(event);
+
+            if (this.props.onSlideEnd) {
+                this.props.onSlideEnd({ originalEvent: event, value });
+            }
         }
 
         this.sliderHandleClick = false;
@@ -195,7 +203,7 @@ export class Slider extends Component {
         let newValue = (this.props.max - this.props.min) * (handleValue / 100) + this.props.min;
 
         if (this.props.step) {
-            const oldValue = this.props.range ? this.props.value[this.handleIndex] : this.props.value;
+            const oldValue = this.props.range ? this.value[this.handleIndex] : this.value;
             const diff = (newValue - oldValue);
 
             if (diff < 0)
@@ -207,41 +215,29 @@ export class Slider extends Component {
             newValue = Math.floor(newValue);
         }
 
-        this.updateValue(event, newValue);
+        return this.updateValue(event, newValue);
     }
 
     updateValue(event, value) {
-        let newValue = parseFloat(value.toFixed(10));
+        let parsedValue = parseFloat(value.toFixed(10));
+        let newValue = parsedValue;
 
         if (this.props.range) {
             if (this.handleIndex === 0) {
-                if (newValue < this.props.min)
-                    newValue = this.props.min;
-                else if (newValue > this.props.value[1])
-                    newValue = this.props.value[1];
+                if (parsedValue < this.props.min)
+                    parsedValue = this.props.min;
+                else if (parsedValue > this.value[1])
+                    parsedValue = this.value[1];
             }
             else {
-                if (newValue > this.props.max)
-                    newValue = this.props.max;
-                else if (newValue < this.props.value[0])
-                    newValue = this.props.value[0];
+                if (parsedValue > this.props.max)
+                    parsedValue = this.props.max;
+                else if (parsedValue < this.value[0])
+                    parsedValue = this.value[0];
             }
 
-            let newValues = [...this.props.value];
-            newValues[this.handleIndex] = newValue;
-
-            if (this.props.onChange) {
-                this.props.onChange({
-                    originalEvent: event,
-                    value: newValues
-                });
-            }
-        }
-        else {
-            if (newValue < this.props.min)
-                newValue = this.props.min;
-            else if (newValue > this.props.max)
-                newValue = this.props.max;
+            newValue = [...this.value];
+            newValue[this.handleIndex] = parsedValue;
 
             if (this.props.onChange) {
                 this.props.onChange({
@@ -250,6 +246,23 @@ export class Slider extends Component {
                 });
             }
         }
+        else {
+            if (parsedValue < this.props.min)
+                parsedValue = this.props.min;
+            else if (parsedValue > this.props.max)
+                parsedValue = this.props.max;
+
+            newValue = parsedValue;
+
+            if (this.props.onChange) {
+                this.props.onChange({
+                    originalEvent: event,
+                    value: newValue
+                });
+            }
+        }
+
+        return newValue;
     }
 
     componentWillUnmount() {
@@ -272,7 +285,7 @@ export class Slider extends Component {
     }
 
     renderRangeSlider() {
-        let values = this.props.value || [0, 0];
+        let values = this.value;
         let horizontal = (this.props.orientation === 'horizontal');
         const handleValueStart = (values[0] < this.props.min ? 0 : values[0] - this.props.min) * 100 / (this.props.max - this.props.min);
         const handleValueEnd = (values[1] > this.props.max ? 100 : values[1] - this.props.min) * 100 / (this.props.max - this.props.min);
@@ -290,7 +303,7 @@ export class Slider extends Component {
     }
 
     renderSingleSlider() {
-        let value = this.props.value || 0;
+        let value = this.value;
         let handleValue;
 
         if (value < this.props.min)

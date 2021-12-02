@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Prism from 'prismjs/components/prism-core';
+import 'prismjs/plugins/toolbar/prism-toolbar';
+import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard';
+import 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-markup';
 import 'prismjs/components/prism-jsx';

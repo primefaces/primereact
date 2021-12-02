@@ -167,7 +167,7 @@ export class MultiSelectDemo extends Component {
                 <div className="content-section implementation multiselect-demo">
                     <div className="card">
                         <h5>Basic</h5>
-                        <MultiSelect value={this.state.selectedCities1} options={this.cities} onChange={(e) => this.setState({ selectedCities1: e.value })} optionLabel="name" placeholder="Select a City" />
+                        <MultiSelect value={this.state.selectedCities1} options={this.cities} onChange={(e) => this.setState({ selectedCities1: e.value })} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />
 
                         <h5>Chips</h5>
                         <MultiSelect value={this.state.selectedCities2} options={this.cities} onChange={(e) => this.setState({ selectedCities2: e.value })} optionLabel="name" placeholder="Select a City" display="chip" />
@@ -181,10 +181,10 @@ export class MultiSelectDemo extends Component {
                             itemTemplate={this.countryTemplate} selectedItemTemplate={this.selectedCountriesTemplate} panelFooterTemplate={this.panelFooterTemplate} />
 
                         <h5>Virtual Scroll (100000 Items)</h5>
-                        <MultiSelect value={this.state.selectedItems1} options={this.items} onChange={(e) => this.setState({ selectedItems1: e.value, selectAll: e.value.length === this.items.length })} selectAll={this.state.selectAll} onSelectAll={(e) => this.setState({ selectedItems1: e.checked ? [] : this.items.map(item => item.value), selectAll: !e.checked })} virtualScrollerOptions={{ itemSize: 34 }} placeholder="Select Item"/>
+                        <MultiSelect value={this.state.selectedItems1} options={this.items} onChange={(e) => this.setState({ selectedItems1: e.value, selectAll: e.value.length === this.items.length })} selectAll={this.state.selectAll} onSelectAll={(e) => this.setState({ selectedItems1: e.checked ? [] : this.items.map(item => item.value), selectAll: !e.checked })} virtualScrollerOptions={{ itemSize: 43 }} placeholder="Select Item"/>
 
                         <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                        <MultiSelect value={this.state.selectedItems2} options={this.state.lazyItems} onChange={(e) => this.setState({ selectedItems2: e.value })} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 34, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
+                        <MultiSelect value={this.state.selectedItems2} options={this.state.lazyItems} onChange={(e) => this.setState({ selectedItems2: e.value })} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 43, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
                             return (
                                 <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
                                     <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />

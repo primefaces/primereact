@@ -1,5 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/Utils';
 import { VirtualScrollerProps } from '../virtualscroller';
 
 type MultiSelectOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
@@ -9,6 +11,8 @@ type MultiSelectItemTemplateType = React.ReactNode | ((option: any) => React.Rea
 type MultiSelectSelectedItemTemplateType = React.ReactNode | ((value: any) => React.ReactNode);
 
 type MultiSelectEmptyFilterMessageType = React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
+
+type MultiSelectDisplayType = 'comma' | 'chip';
 
 interface MultiSelectHeaderCheckboxChangeParams {
     originalEvent: React.FormEvent<HTMLInputElement>;
@@ -73,7 +77,7 @@ export interface MultiSelectProps {
     optionGroupLabel?: string;
     optionGroupChildren?: string;
     optionGroupTemplate?: MultiSelectOptionGroupTemplateType;
-    display?: string;
+    display?: MultiSelectDisplayType;
     style?: object;
     className?: string;
     panelClassName?: string;
@@ -105,8 +109,9 @@ export interface MultiSelectProps {
     selectedItemTemplate?: MultiSelectSelectedItemTemplateType;
     panelHeaderTemplate?: MultiSelectPanelHeaderTemplateType;
     panelFooterTemplate?: MultiSelectPanelFooterTemplateType;
-    transitionOptions?: object;
-    dropdownIcon?: string;
+    transitionOptions?: CSSTransitionProps;
+    dropdownIcon?: IconType<MultiSelectProps>;
+    removeIcon?: IconType<MultiSelectProps>;
     showSelectAll?: boolean;
     selectAll?: boolean;
     onChange?(e: MultiSelectChangeParams): void;

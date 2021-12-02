@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames, ObjectUtils } from '../utils/Utils';
+import { localeOption } from '../api/Api';
 
 export class DataScroller extends Component {
 
@@ -15,7 +16,7 @@ export class DataScroller extends Component {
         style: null,
         className: null,
         onLazyLoad: null,
-        emptyMessage: 'No records found',
+        emptyMessage: null,
         itemTemplate: null,
         header: null,
         footer: null,
@@ -203,7 +204,7 @@ export class DataScroller extends Component {
     }
 
     renderEmptyMessage() {
-        const content = ObjectUtils.getJSXElement(this.props.emptyMessage, this.props);
+        const content = ObjectUtils.getJSXElement(this.props.emptyMessage, this.props) || localeOption('emptyMessage');
 
         return <li>{content}</li>;
     }

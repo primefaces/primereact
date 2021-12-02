@@ -73,6 +73,6 @@ export class Ripple extends Component {
     }
 
     render() {
-        return PrimeReact.ripple && (<span ref={(el => this.ink = el)} className="p-ink" onAnimationEnd={this.onAnimationEnd}></span>);
+        return PrimeReact.ripple ? (<span ref={(el => this.ink = el)} className="p-ink" onAnimationEnd={this.onAnimationEnd}></span>) : null;
     }
 }

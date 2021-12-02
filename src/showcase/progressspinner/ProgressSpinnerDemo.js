@@ -13,7 +13,7 @@ export class ProgressSpinnerDemo extends Component {
                     <AppInlineHeader changelogText="progressSpinner">
                         <h1>ProgressSpinner</h1>
                         <p>ProgressSpinner is a process status indicator.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="progressspinner/ProgressSpinnerDemo.js" />
                 </div>
 
@@ -23,7 +23,7 @@ export class ProgressSpinnerDemo extends Component {
                         <ProgressSpinner />
 
                         <h5>Custom</h5>
-                        <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="var(--surface-b)" animationDuration=".5s"/>
+                        <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"/>
                     </div>
                 </div>
 

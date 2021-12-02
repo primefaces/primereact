@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import {IconType} from "../utils/Utils";
 
 type ToggleButtonIconPositionType = 'left' | 'right';
 
@@ -19,8 +20,8 @@ interface ToggleButtonChangeParams {
 
 export interface ToggleButtonProps {
     id?: string;
-    onIcon?: string;
-    offIcon?: string;
+    onIcon?: IconType<ToggleButtonProps>;
+    offIcon?: IconType<ToggleButtonProps>;
     onLabel?: string;
     offLabel?: string;
     iconPos?: ToggleButtonIconPositionType;

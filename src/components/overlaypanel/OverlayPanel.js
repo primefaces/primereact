@@ -5,6 +5,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
+import PrimeReact from '../api/Api';
 
 export class OverlayPanel extends Component {
 
@@ -49,6 +50,7 @@ export class OverlayPanel extends Component {
         this.onEntered = this.onEntered.bind(this);
         this.onExit = this.onExit.bind(this);
         this.onExited = this.onExited.bind(this);
+        this.onContentClick = this.onContentClick.bind(this);
 
         this.attributeSelector = UniqueComponentId();
         this.overlayRef = React.createRef();
@@ -96,7 +98,7 @@ export class OverlayPanel extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.visible && !DomHandler.isAndroid()) {
+                if (this.state.visible && !DomHandler.isTouchDevice()) {
                     this.hide();
                 }
             };
@@ -182,7 +184,7 @@ export class OverlayPanel extends Component {
     }
 
     onEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current);
+        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         this.overlayRef.current.setAttribute(this.attributeSelector, '');
         this.align();
     }
@@ -228,8 +230,7 @@ export class OverlayPanel extends Component {
 
     createStyle() {
         if (!this.styleElement) {
-            this.styleElement = document.createElement('style');
-            document.head.appendChild(this.styleElement);
+            this.styleElement = DomHandler.createInlineStyle();
 
             let innerHTML = '';
             for (let breakpoint in this.props.breakpoints) {

@@ -369,10 +369,8 @@ const ToastDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./ToastDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
                 content: `
 const { useEffect, useState, useRef } = React;
 const { Toast } = primereact.toast;
@@ -514,10 +512,18 @@ const ToastDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Toast } from 'primereact/toast';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/toast/toast.min.js"></script>
 `}
 </CodeHighlight>
 

@@ -35,6 +35,7 @@ export class Calendar extends Component {
         placeholder: null,
         showIcon: false,
         icon: 'pi pi-calendar',
+        iconPos: 'right',
         showOnFocus: true,
         numberOfMonths: 1,
         view: 'date',
@@ -116,7 +117,8 @@ export class Calendar extends Component {
         tabIndex: PropTypes.number,
         placeholder: PropTypes.string,
         showIcon: PropTypes.bool,
-        icon: PropTypes.string,
+        icon: PropTypes.any,
+        iconPos: PropTypes.string,
         showOnFocus: PropTypes.bool,
         numberOfMonths: PropTypes.number,
         view: PropTypes.string,
@@ -184,13 +186,7 @@ export class Calendar extends Component {
         };
 
         if (!this.props.onViewDateChange) {
-            let propValue = this.props.value;
-            if (Array.isArray(propValue)) {
-                propValue = propValue[0];
-            }
-
-            let viewDate = this.props.viewDate && this.isValidDate(this.props.viewDate) ?
-                this.props.viewDate : (propValue && this.isValidDate(propValue) ? propValue : new Date());
+            let viewDate = this.getViewDate(this.props.viewDate);
 
             this.validateDate(viewDate);
 
@@ -214,6 +210,7 @@ export class Calendar extends Component {
         this.onTodayButtonClick = this.onTodayButtonClick.bind(this);
         this.onClearButtonClick = this.onClearButtonClick.bind(this);
         this.onPanelClick = this.onPanelClick.bind(this);
+        this.onPanelMouseUp = this.onPanelMouseUp.bind(this);
         this.incrementHour = this.incrementHour.bind(this);
         this.decrementHour = this.decrementHour.bind(this);
         this.incrementMinute = this.incrementMinute.bind(this);
@@ -462,7 +459,7 @@ export class Calendar extends Component {
             if (!(this.isSelectable(value.getDate(), value.getMonth(), value.getFullYear(), false) && this.isSelectableTime(value))) {
                 isValid = false;
             }
-        } else if (value.every(v => (this.isSelectable(v.getDate(), v.getMonth(), v.getFullYear(), false) && this.isSelectableTime(value)))) {
+        } else if (value.every(v => (this.isSelectable(v.getDate(), v.getMonth(), v.getFullYear(), false) && this.isSelectableTime(v)))) {
             if (this.isRangeSelection()) {
                 isValid = value.length > 1 && value[1] > value[0] ? true : false;
             }
@@ -714,6 +711,10 @@ export class Calendar extends Component {
                 target: this.container
             });
         }
+    }
+
+    onPanelMouseUp(event) {
+        this.onPanelClick(event);
     }
 
     onTimePickerElementMouseDown(event, type, direction) {
@@ -1015,8 +1016,14 @@ export class Calendar extends Component {
         event.preventDefault();
     }
 
-    getViewDate() {
-        return this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate;
+    getViewDate(date) {
+        let propValue = this.props.value;
+        let viewDate = date || (this.props.onViewDateChange ? this.props.viewDate : this.state.viewDate);
+        if (Array.isArray(propValue)) {
+            propValue = propValue[0];
+        }
+
+        return viewDate && this.isValidDate(viewDate) ? viewDate : (propValue && this.isValidDate(propValue) ? propValue : new Date());
     }
 
     getCurrentDateTime() {
@@ -1521,8 +1528,14 @@ export class Calendar extends Component {
                 let startDate = this.props.value[0];
                 let endDate = this.props.value[1];
 
-                if (!endDate && date.getTime() >= startDate.getTime()) {
-                    endDate = date;
+                if (!endDate) {
+                    if (date.getTime() >= startDate.getTime()) {
+                        endDate = date;
+                    }
+                    else {
+                        endDate = startDate;
+                        startDate = date;
+                    }
                 }
                 else {
                     startDate = date;
@@ -1618,7 +1631,8 @@ export class Calendar extends Component {
 
     onOverlayEnter() {
         if (this.props.autoZIndex) {
-            ZIndexUtils.set(this.props.touchUI ? 'modal' : 'overlay', this.overlayRef.current, this.props.baseZIndex);
+            const key = this.props.touchUI ? 'modal' : 'overlay';
+            ZIndexUtils.set(key, this.overlayRef.current, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex[key]);
         }
         this.alignOverlay();
     }
@@ -1707,7 +1721,7 @@ export class Calendar extends Component {
     }
 
     onWindowResize() {
-        if (this.isVisible() && !DomHandler.isAndroid()) {
+        if (this.isVisible() && !DomHandler.isTouchDevice()) {
             this.hideOverlay();
         }
     }
@@ -3060,7 +3074,7 @@ export class Calendar extends Component {
         if (!this.props.inline) {
             return (
                 <InputText ref={this.inputRef} id={this.props.inputId} name={this.props.name} type="text" className={this.props.inputClassName} style={this.props.inputStyle}
-                    readOnly={this.props.readOnlyInput} disabled={this.props.disabled} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder}
+                    readOnly={this.props.readOnlyInput} disabled={this.props.disabled} required={this.props.required} autoComplete="off" placeholder={this.props.placeholder} tabIndex={this.props.tabIndex}
                     onInput={this.onUserInput} onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown} aria-labelledby={this.props.ariaLabelledBy} inputMode={this.props.inputMode} />
             );
         }
@@ -3077,6 +3091,27 @@ export class Calendar extends Component {
         }
 
         return null;
+    }
+
+    renderContent() {
+        const input = this.renderInputElement();
+        const button = this.renderButton();
+
+        if (this.props.iconPos === 'left') {
+            return (
+                <>
+                    {button}
+                    {input}
+                </>
+            )
+        }
+
+        return (
+            <>
+                {input}
+                {button}
+            </>
+        )
     }
 
     renderButtonBar() {
@@ -3112,7 +3147,7 @@ export class Calendar extends Component {
 
     render() {
         const className = classNames('p-calendar p-component p-inputwrapper', this.props.className, {
-            'p-calendar-w-btn': this.props.showIcon,
+            [`p-calendar-w-btn p-calendar-w-btn-${this.props.iconPos}`]: this.props.showIcon,
             'p-calendar-disabled': this.props.disabled,
             'p-calendar-timeonly': this.props.timeOnly,
             'p-inputwrapper-filled': this.props.value || (DomHandler.hasClass(this.inputRef.current, 'p-filled') && this.inputRef.current.value !== ''),
@@ -3126,8 +3161,7 @@ export class Calendar extends Component {
             'p-datepicker-monthpicker': (this.props.view === 'month'),
             'p-datepicker-touch-ui': this.props.touchUI
         });
-        const input = this.renderInputElement();
-        const button = this.renderButton();
+        const content = this.renderContent();
         const datePicker = this.renderDatePicker();
         const timePicker = this.renderTimePicker();
         const buttonBar = this.renderButtonBar();
@@ -3137,9 +3171,8 @@ export class Calendar extends Component {
 
         return (
             <span ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}>
-                {input}
-                {button}
-                <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick}
+                {content}
+                <CalendarPanel ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} appendTo={this.props.appendTo} inline={this.props.inline} onClick={this.onPanelClick} onMouseUp={this.onPanelMouseUp}
                     in={isVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
                     transitionOptions={this.props.transitionOptions}>
                     {datePicker}

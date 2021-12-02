@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { CSSTransitionProps } from '../csstransition';
 
 interface FieldsetToggleParams {
     originalEvent: React.MouseEvent<HTMLElement>;
@@ -12,7 +13,7 @@ export interface FieldsetProps {
     style?: object;
     toggleable?: boolean;
     collapsed?: boolean;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onExpand?(event: React.MouseEvent<HTMLElement>): void;
     onCollapse?(event: React.MouseEvent<HTMLElement>): void;
     onToggle?(e: FieldsetToggleParams): void;

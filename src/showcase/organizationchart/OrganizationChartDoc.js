@@ -449,7 +449,6 @@ const OrganizationChartDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./OrganizationChartDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/organizationchart/organizationchart.min.js"></script>`,
                 content: `
@@ -646,13 +645,20 @@ const OrganizationChartDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { OrganizationChart } from 'primereact/organizationchart';
 `}
 </CodeHighlight>
 
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/organizationchart/organizationchart.min.js"></script>
+`}
+</CodeHighlight>
 
                         <h5>Getting Started</h5>
                         <p>OrganizationChart requires a model of TreeNode as its value.</p>

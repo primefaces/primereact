@@ -322,12 +322,9 @@ const MessagesDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/messages/messages.min.js"></script>
-        <script src="https://unpkg.com/primereact/message/message.min.js"></script>
-        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/message/message.min.js"></script>`,
                 content: `
 const { useEffect, useState, useRef } = React;
 const { Messages } = primereact.messages;
@@ -439,11 +436,20 @@ const MessagesDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Messages } from 'primereact/messages';
 import { Message } from 'primereact/message';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/messages/messages.min.js"></script>
+<script src="https://unpkg.com/primereact/message/message.min.js"></script>
 `}
 </CodeHighlight>
 
@@ -666,6 +672,12 @@ messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message',
                                         <td>string</td>
                                         <td>null</td>
                                         <td>Severity level of the message.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>text</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Text of the message.</td>
                                     </tr>
                                     <tr>
                                         <td>style</td>

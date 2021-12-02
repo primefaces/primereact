@@ -35,7 +35,7 @@ export class DataTableBasicDemo extends Component {
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <DataTable value={this.state.products}>
+                        <DataTable value={this.state.products} responsiveLayout="scroll">
                             <Column field="code" header="Code"></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="category" header="Category"></Column>
@@ -83,7 +83,7 @@ export class DataTableBasicDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <DataTable value={this.state.products}>
+                    <DataTable value={this.state.products} responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -115,7 +115,7 @@ const DataTableBasicDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products}>
+                <DataTable value={products} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -146,7 +146,7 @@ const DataTableBasicDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products}>
+                <DataTable value={products} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>
@@ -165,6 +165,7 @@ const DataTableBasicDemo = () => {
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
                 content: `
@@ -183,7 +184,7 @@ const DataTableBasicDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products}>
+                <DataTable value={products} responsiveLayout="scroll">
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

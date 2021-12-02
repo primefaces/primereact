@@ -206,11 +206,8 @@ const ConfirmPopupDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/confirmpopup/confirmpopup.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
                 content: `
 const { useEffect, useState, useRef } = React;
@@ -282,7 +279,7 @@ const ConfirmPopupDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { ConfirmPopup } from 'primereact/confirmpopup'; // To use <ConfirmPopup> tag
@@ -290,7 +287,15 @@ import { confirmPopup } from 'primereact/confirmpopup'; // To use confirmPopup m
 `}
 </CodeHighlight>
 
-<h5>Getting Started</h5>
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/confirmpopup/confirmpopup.min.js"></script>
+`}
+</CodeHighlight>
+
+                        <h5>Getting Started</h5>
                         <p>There are two ways to display confirm popup. One of them is to use the <i>confirmPopup</i> method and the other is to use the <i>&lt;ConfirmPopup&gt;</i> tag.
                             These independently create popup element. It supports the same properties in both. <i>target</i> property is mandatory to align the popup to its caller.</p>
 
@@ -310,7 +315,31 @@ const confirm = (event) => {
 <Button onClick={confirm} icon="pi pi-check" label="Confirm"></Button>
 `}
 </CodeHighlight>
+                       <p>The confirmPopup method returns an object incudes <i>hide</i> and <i>show</i> methods. The component can be shown or hidden by using this object at any time.</p>
 
+ <CodeHighlight lang="js">
+{`
+const confirm = (event) => {
+    const myConfirm = confirmPopup({
+        target: event.currentTarget,
+        message: 'Are you sure you want to proceed?',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => acceptFunc(),
+        reject: () => rejectFunc()
+    });
+
+    setTimeout(() => {
+        myConfirm.hide();
+
+        setTimeout(() => {
+            myConfirm.show();
+        }, 1000);
+    }, 500);
+}
+
+<Button onClick={confirm} icon="pi pi-check" label="Confirm"></Button>
+`}
+</CodeHighlight>
                         <h6>2. &lt;ConfirmPopup&gt; tag</h6>
                         <p>ConfirmPopup is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.</p>
 

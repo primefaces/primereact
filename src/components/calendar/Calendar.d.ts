@@ -1,9 +1,13 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import { CSSTransitionProps } from '../csstransition';
+import { IconType } from "../utils/Utils";
 
 type CalendarAppendToType = 'self' | HTMLElement | undefined | null;
 
 type CalendarVisibleType = 'outside' | 'dateselect' | undefined | null;
+
+type CalendarIconPosType = 'left' | 'right';
 
 interface CalendarChangeTargetOptions {
     name: string;
@@ -84,7 +88,8 @@ export interface CalendarProps {
     tabIndex?: number;
     placeholder?: string;
     showIcon?: boolean;
-    icon?: string;
+    icon?: IconType<CalendarProps>;
+    iconPos?: CalendarIconPosType;
     showOnFocus?: boolean;
     numberOfMonths?: number;
     view?: string;
@@ -124,7 +129,7 @@ export interface CalendarProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     dateTemplate?(e: CalendarDateTemplateParams): React.ReactNode;
     headerTemplate?(): React.ReactNode;
     footerTemplate?(): React.ReactNode;

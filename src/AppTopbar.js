@@ -42,6 +42,14 @@ export class AppTopbar extends Component {
             'mdc-light-deeppurple': 'md-light-deeppurple.svg',
             'mdc-dark-indigo': 'md-dark-indigo.svg',
             'mdc-dark-deeppurple': 'md-dark-deeppurple.svg',
+            'lara-light-blue': 'lara-light-blue.png',
+            'lara-light-indigo': 'lara-light-indigo.png',
+            'lara-light-purple': 'lara-light-purple.png',
+            'lara-light-teal': 'lara-light-teal.png',
+            'lara-dark-blue': 'lara-dark-blue.png',
+            'lara-dark-indigo': 'lara-dark-indigo.png',
+            'lara-dark-purple': 'lara-dark-purple.png',
+            'lara-dark-teal': 'lara-dark-teal.png',
             'saga-blue': 'saga-blue.png',
             'saga-green': 'saga-green.png',
             'saga-orange': 'saga-orange.png',
@@ -207,7 +215,17 @@ export class AppTopbar extends Component {
                                 <li role="none" className="topbar-submenu-header">FLUENT UI</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'fluent-light')} role="menuitem"><img src="showcase/images/themes/fluent-light.png" alt="Fluent Light" /><span>Fluent Light</span></button></li>
 
-                                <li role="none" className="topbar-submenu-header">PRIMEONE</li>
+                                <li role="none" className="topbar-submenu-header">PRIMEONE 2022 <Badge value="New" severity="success" className="p-text-capitalize p-ml-2" /></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'lara-light-indigo')} role="menuitem"><img src="showcase/images/themes/lara-light-indigo.png" alt="Lara Light Indigo" /><span>Lara Indigo</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'lara-light-blue')} role="menuitem"><img src="showcase/images/themes/lara-light-blue.png" alt="Lara Light Blue" /><span>Lara Blue</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'lara-light-purple')} role="menuitem"><img src="showcase/images/themes/lara-light-purple.png" alt="Lara Light Purple" /><span>Lara Purple</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'lara-light-teal')} role="menuitem"><img src="showcase/images/themes/lara-light-teal.png" alt="Lara Light Teal" /><span>Lara Teal</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'lara-dark-indigo', true)} role="menuitem"><img src="showcase/images/themes/lara-dark-indigo.png" alt="Lara Dark Indigo" /><span>Lara Indigo</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'lara-dark-blue', true)} role="menuitem"><img src="showcase/images/themes/lara-dark-blue.png" alt="Lara Dark Blue" /><span>Lara Blue</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'lara-dark-purple', true)} role="menuitem"><img src="showcase/images/themes/lara-dark-purple.png" alt="Lara Dark Purple" /><span>Lara Purple</span></button></li>
+                                <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'lara-dark-teal', true)} role="menuitem"><img src="showcase/images/themes/lara-dark-teal.png" alt="Lara Dark Teal" /><span>Lara Teal</span></button></li>
+
+                                <li role="none" className="topbar-submenu-header">PRIMEONE 2021</li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'saga-blue')} role="menuitem"><img src="showcase/images/themes/saga-blue.png" alt="Saga Blue" /><span>Saga Blue</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'saga-green')} role="menuitem"><img src="showcase/images/themes/saga-green.png" alt="Saga Green" /><span>Saga Green</span></button></li>
                                 <li role="none"><button type="button" className="p-link" onClick={e => this.onThemeChange(e, 'saga-orange')} role="menuitem"><img src="showcase/images/themes/saga-orange.png" alt="Saga Orange" /><span>Saga Orange</span></button></li>
@@ -249,25 +267,30 @@ export class AppTopbar extends Component {
                             <ul ref={this.templatesOverlayRef} role="menu" aria-label="Templates">
                                 <li role="none" className="topbar-submenu-header">FREE ADMIN TEMPLATES</li>
                                 <li role="none">
-                                    <a href="https://www.primefaces.org/sigma-react" role="menuitem" rel="noopener noreferrer" target="_blank" className="no-border">
-                                        <img src="showcase/images/layouts/themeswitcher-sigma.png" alt="Sigma" /><span>Sigma</span>
+                                    <a href="https://www.primefaces.org/sakai-react" role="menuitem" rel="noopener noreferrer" target="_blank" className="no-border">
+                                        <img src="showcase/images/layouts/themeswitcher-sakai.svg" alt="Sakai" /><span>Sakai</span><Badge value="New" severity="success"></Badge>
                                     </a>
                                 </li>
 
                                 <li role="none" className="topbar-submenu-header">PREMIUM ADMIN TEMPLATES</li>
                                 <li role="none">
+                                    <a href="https://www.primefaces.org/layouts/atlantis-react" role="menuitem" rel="noopener noreferrer" target="_blank">
+                                        <img src="showcase/images/layouts/themeswitcher-atlantis.svg" alt="Atlantis" /><span>Atlantis</span><Badge value="New" severity="success"></Badge>
+                                    </a>
+                                </li>
+                                <li role="none">
                                     <a href="https://www.primefaces.org/layouts/freya-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/images/layouts/themeswitcher-freya.png" alt="Freya" /><span>Freya</span><span className="theme-badge new p-tag p-tag-success">NEW</span>
+                                        <img src="showcase/images/layouts/themeswitcher-freya.png" alt="Freya" /><span>Freya</span>
                                     </a>
                                 </li>
                                 <li role="none">
                                     <a href="https://www.primefaces.org/layouts/diamond-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/images/layouts/themeswitcher-diamond.png" alt="Diamond" /><span>Diamond</span><span className="theme-badge new p-tag p-tag-success">NEW</span>
+                                        <img src="showcase/images/layouts/themeswitcher-diamond.png" alt="Diamond" /><span>Diamond</span>
                                     </a>
                                 </li>
                                 <li role="none">
                                     <a href="https://www.primefaces.org/layouts/ultima-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><span className="theme-badge material">MATERIAL</span>
+                                        <img src="showcase/images/layouts/themeswitcher-ultima.png" alt="Ultima (Material)" /><span>Ultima</span><Badge value="Material" severity="info"></Badge>
                                     </a>
                                 </li>
                                 <li role="none">
@@ -277,17 +300,17 @@ export class AppTopbar extends Component {
                                 </li>
                                 <li role="none">
                                     <a href="https://www.primefaces.org/layouts/sapphire-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/images/layouts/themeswitcher-sapphire.png" alt="Sapphire (Material)" /><span>Sapphire</span><span className="theme-badge material">MATERIAL</span>
+                                        <img src="showcase/images/layouts/themeswitcher-sapphire.png" alt="Sapphire (Material)" /><span>Sapphire</span><Badge value="Material" severity="info"></Badge>
                                     </a>
                                 </li>
                                 <li role="none">
                                     <a href="https://www.primefaces.org/layouts/serenity-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span><span className="theme-badge material">MATERIAL</span>
+                                        <img src="showcase/images/layouts/themeswitcher-serenity.png" alt="Serenity (Material)" /><span>Serenity</span><Badge value="Material" severity="info"></Badge>
                                     </a>
                                 </li>
                                 <li role="none">
                                     <a href="https://www.primefaces.org/layouts/avalon-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span>Avalon</span><span className="theme-badge bootstrap">BOOTSTRAP</span>
+                                        <img src="showcase/images/layouts/themeswitcher-avalon.png" alt="Avalon (Bootstrap)" /><span>Avalon</span><Badge value="Bootstrap" severity="info"></Badge>
                                     </a>
                                 </li>
                                 <li role="none">
@@ -297,7 +320,7 @@ export class AppTopbar extends Component {
                                 </li>
                                 <li role="none">
                                     <a href="https://www.primefaces.org/layouts/apollo-react" role="menuitem" rel="noopener noreferrer" target="_blank">
-                                        <img src="showcase/images/layouts/themeswitcher-apollo.png" alt="Apollo" /><span>Apollo</span><span className="theme-badge darkmode">DARK MODE</span>
+                                        <img src="showcase/images/layouts/themeswitcher-apollo.png" alt="Apollo" /><span>Apollo</span><Badge value="Dark Mode" severity="warning"></Badge>
                                     </a>
                                 </li>
                             </ul>
@@ -318,6 +341,7 @@ export class AppTopbar extends Component {
                                 <li role="none"><a href="https://twitter.com/primereact?lang=en" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Twitter</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/whouses" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Who Uses</span></a></li>
                                 <li role="none"><a href="https://www.primefaces.org/newsletter" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Newsletter</span></a></li>
+                                <li role="none"><a href="https://gear.primefaces.org" role="menuitem" target="_blank" rel="noopener noreferrer"><span>Gear Store</span></a></li>
                                 <li role="none"><a href="https://www.primetek.com.tr/" role="menuitem" target="_blank" rel="noopener noreferrer"><span>About PrimeTek</span></a></li>
                             </ul>
                         </CSSTransition>

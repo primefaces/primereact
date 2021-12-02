@@ -17,10 +17,12 @@ export declare class DomHandler {
     static getOuterWidth(el: HTMLElement, margin: boolean): number;
     static getOuterHeight(el: HTMLElement, margin: boolean): number;
     static getClientHeight(el: HTMLElement, margin: boolean): number;
+    static getClientWidth(el: HTMLElement, margin: boolean): number;
     static getViewport(): { width: number; height: number; };
     static getOffset(el: HTMLElement): { top: any; left: any; };
     static index(el: HTMLElement): number;
     static addMultipleClasses(el: HTMLElement, className: string): void;
+    static removeMultipleClasses(el: HTMLElement, className: string): void;
     static addClass(el: HTMLElement, className: string): void;
     static removeClass(el: HTMLElement, className: string): void;
     static hasClass(el: HTMLElement, className: string): boolean;
@@ -28,7 +30,7 @@ export declare class DomHandler {
     static findSingle(el: HTMLElement, selector: string): any;
     static getHeight(el: HTMLElement): number;
     static getWidth(el: HTMLElement): number;
-    static alignOverlay(overlay: HTMLElement, target: HTMLElement, appendTo?: string): void;
+    static alignOverlay(overlay: HTMLElement, target: HTMLElement, appendTo?: string, calculateMinWidth?: boolean): void;
     static absolutePosition(el: HTMLElement, target: HTMLElement): void;
     static relativePosition(el: HTMLElement, target: HTMLElement): void;
     static flipfitCollision(el: HTMLElement, target: HTMLElement, my?: string, at?: string, callback?: any): void;
@@ -49,36 +51,26 @@ export declare class DomHandler {
     static removeChild(el: HTMLElement, target: HTMLElement): void;
     static isElement(obj: any): boolean;
     static scrollInView(container: HTMLElement, item: HTMLElement): void;
+    static clearSelection(): void;
     static calculateScrollbarWidth(el: HTMLElement): number;
     static getBrowser(): object;
     static resolveUserAgent(): { browser: string; version: string; };
-    static clearSelection(): void;
-    static calculateScrollbarWidth(): number;
     static isVisible(el: HTMLElement): boolean;
-    static getFocusableElements(el: HTMLElement): any[];
-    static getFirstFocusableElement(el: HTMLElement): any;
-    static getLastFocusableElement(el: HTMLElement): any;
+    static isExist(el: HTMLElement): boolean;
+    static getFocusableElements(el: HTMLElement, selector?: string): any[];
+    static getFirstFocusableElement(el: HTMLElement, selector?: string): any;
+    static getLastFocusableElement(el: HTMLElement, selector?: string): any;
     static getCursorOffset(el: HTMLElement, prevText?: string, nextText?: string, currentText?: string): { top: any; left: any; };
+    static invokeElementMethod(el: HTMLElement, methodName: string, arg: any): void;
+    static isClickable(el: HTMLElement): boolean;
+    static applyStyle(el: HTMLElement, style: any): void;
+    static exportCSV(csv: any, filename: string): void;
 }
 
 export declare function EventBus(): {
     on(type: string, fn: any): void;
     emit(type: string, evt?: any): void;
     off(type: string, fn: any): void;
-}
-
-export declare class FilterUtils {
-    static filter(value: any, fields: string, filterValue: any, filterMatchMode: string, filterLocale?: string): any[];
-    static startsWith(value: any, filter: string, filterLocale?: string): boolean;
-    static contains(value: any, filter: string, filterLocale?: string): boolean;
-    static endsWith(value: any, filter: string, filterLocale?: string): boolean;
-    static equals(value: any, filter: string, filterLocale?: string): boolean;
-    static notEquals(value: any, filter: string, filterLocale?: string): boolean;
-    static in(value: any, filter: string, filterLocale?: string): boolean;
-    static lt(value: any, filter: string, filterLocale?: string): boolean;
-    static lte(value: any, filter: string, filterLocale?: string): boolean;
-    static gt(value: any, filter: string, filterLocale?: string): boolean;
-    static gte(value: any, filter: string, filterLocale?: string): boolean;
 }
 
 export declare function mask(el: HTMLElement, options: object): {
@@ -98,17 +90,34 @@ export declare class ObjectUtils {
     static reorderArray(value: any, from: number, to: number): void;
     static findIndexInList(value: any, list: any[], dataKey?: string): number;
     static getJSXElement(obj: any, ...params: any[]): any;
+    static getPropValue(obj: any, ...params: any[]): any;
+    static getRefElement(ref: any): any;
     static removeAccents(str: any): string;
     static isEmpty(value: any): boolean;
     static isNotEmpty(value: any): boolean;
 }
 
+export declare class IconUtils {
+    static getJSXIcon(icon: IconType<any>, iconProps: React.HTMLProps<HTMLElement>, options: any): any;
+}
+
 export declare function UniqueComponentId(prefix?: string): string;
 
-export declare const ZIndexUtils: {
-    get(el?: HTMLElement): number;
-    set(key: string, el: HTMLElement, baseZIndex?: number): void;
-    clear(el: HTMLElement): void;
-    getBase(key: string): number;
-    getCurrent(key: string): number;
+export declare namespace ZIndexUtils {
+    export function get(el?: HTMLElement): number;
+    export function set(key: string, el: HTMLElement, baseZIndex?: number): void;
+    export function clear(el: HTMLElement): void;
+    export function getBase(key: string): number;
+    export function getCurrent(key: string): number;
 }
+
+export interface IconOptions<ParentProps> {
+    iconProps: React.HTMLProps<HTMLElement>;
+    element: React.ReactNode;
+    props?: ParentProps;
+    [key: string]: any;
+}
+
+export type IconType<ParentProps> = React.ReactNode | ((options: IconOptions<ParentProps>) => React.ReactNode);
+
+export type TemplateType<ParentProps> = React.ReactNode | ((props: ParentProps) => React.ReactNode);

@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
-import PrimeReact from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tree } from '../tree/Tree';
 import { TreeSelectPanel } from './TreeSelectPanel';
@@ -138,7 +138,7 @@ export class TreeSelect extends Component {
 
     getSelectedNodes() {
         let selectedNodes = [];
-        if (this.props.value && this.props.options) {
+        if (ObjectUtils.isNotEmpty(this.props.value) && this.props.options) {
             let keys = this.props.selectionMode === 'single' ? {[`${this.props.value}`]: true} : {...this.props.value};
             this.findSelectedNodes(null, keys, selectedNodes);
         }
@@ -295,7 +295,7 @@ export class TreeSelect extends Component {
     }
 
     onOverlayEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current);
+        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         this.alignOverlay();
         this.scrollInView();
     }
@@ -379,7 +379,7 @@ export class TreeSelect extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.overlayVisible && !DomHandler.isAndroid()) {
+                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
                     this.hide();
                 }
             };
@@ -582,7 +582,7 @@ export class TreeSelect extends Component {
                 {
                     this.hasNoOptions() && (
                         <div className="p-treeselect-empty-message">
-                            {this.props.emptyMessage}
+                            {this.props.emptyMessage || localeOption('emptyMessage')}
                         </div>
                     )
                 }

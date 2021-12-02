@@ -10,7 +10,10 @@ export class TabPanel extends Component {
         headerTemplate: null,
         leftIcon: null,
         rightIcon: null,
+        closable: false,
         disabled: false,
+        style: null,
+        className: null,
         headerStyle: null,
         headerClassName: null,
         contentStyle: null,
@@ -22,7 +25,10 @@ export class TabPanel extends Component {
         headerTemplate: PropTypes.any,
         leftIcon: PropTypes.string,
         rightIcon: PropTypes.string,
+        closeable: PropTypes.bool,
         disabled: PropTypes.bool,
+        style: PropTypes.object,
+        className: PropTypes.string,
         headerStyle: PropTypes.object,
         headerClassName: PropTypes.string,
         contentStyle: PropTypes.object,
@@ -58,7 +64,8 @@ export class TabView extends Component {
         let state = {
             id: props.id,
             backwardIsDisabled: true,
-            forwardIsDisabled: false
+            forwardIsDisabled: false,
+            hiddenTabs: []
         };
 
         if (!this.props.onTabChange) {
@@ -81,6 +88,30 @@ export class TabView extends Component {
 
     isSelected(index) {
         return (index === this.getActiveIndex());
+    }
+
+    shouldTabRender(tab, index) {
+        return tab && tab.type === TabPanel && this.state.hiddenTabs.every((_i) => _i !== index);
+    }
+
+    findVisibleActiveTab(i) {
+        const tabsInfo = React.Children.map(this.props.children, (tab, index) => {
+            if (this.shouldTabRender(tab, index)) {
+                return { tab, index }
+            }
+        });
+
+        return tabsInfo.find(({ tab, index }) => !tab.props.disabled && index >= i) || tabsInfo.reverse().find(({ tab, index }) => !tab.props.disabled && i > index);
+    }
+
+    onTabHeaderClose(event, index) {
+        const hiddenTabs = [...this.state.hiddenTabs, index];
+        this.setState({ hiddenTabs }, () => {
+            const tabInfo = this.findVisibleActiveTab(index);
+            tabInfo && this.onTabHeaderClick(event, tabInfo.tab, tabInfo.index);
+        });
+
+        event.preventDefault();
     }
 
     onTabHeaderClick(event, tab, index) {
@@ -110,7 +141,9 @@ export class TabView extends Component {
 
     updateScrollBar(index) {
         let tabHeader = this[`tab_${index}`];
-        tabHeader.scrollIntoView({ block: 'nearest' })
+        if (tabHeader) {
+            tabHeader.scrollIntoView({ block: 'nearest' });
+        }
     }
 
     updateButtonState() {
@@ -151,6 +184,26 @@ export class TabView extends Component {
         content.scrollLeft = pos >= lastPos ? lastPos : pos;
     }
 
+    reset() {
+        let state = {
+            backwardIsDisabled: true,
+            forwardIsDisabled: false,
+            hiddenTabs: []
+        };
+
+        if (this.props.onTabChange) {
+            this.props.onTabChange({ index: this.props.activeIndex });
+        }
+        else {
+            state = {
+                ...state,
+                activeIndex: this.props.activeIndex
+            };
+        }
+
+        this.setState(state);
+    }
+
     componentDidMount() {
         if (!this.state.id) {
             this.setState({ id: UniqueComponentId() });
@@ -162,20 +215,26 @@ export class TabView extends Component {
     componentDidUpdate(prevProps) {
         this.updateInkBar();
 
-        if (prevProps.activeIndex !== this.props.activeIndex){
+        if (prevProps.activeIndex !== this.props.activeIndex) {
             this.updateScrollBar(this.props.activeIndex);
+        }
+
+        if (prevProps.children !== this.props.children) {
+            this.setState({ hiddenTabs: [] });
         }
     }
 
     renderTabHeader(tab, index) {
         const selected = this.isSelected(index);
-        const className = classNames('p-unselectable-text', { 'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled }, tab.props.headerClassName);
+        const style = { ...(tab.props.headerStyle || {}), ...(tab.props.style || {}) };
+        const className = classNames('p-unselectable-text', { 'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled }, tab.props.headerClassName, tab.props.className);
         const id = this.state.id + '_header_' + index;
         const ariaControls = this.state.id + '_content_' + index;
         const tabIndex = tab.props.disabled ? null : 0;
         const leftIconElement = tab.props.leftIcon && <i className={tab.props.leftIcon}></i>;
         const titleElement = <span className="p-tabview-title">{tab.props.header}</span>;
         const rightIconElement = tab.props.rightIcon && <i className={tab.props.rightIcon}></i>;
+        const closableIconElement = tab.props.closable && <i className="p-tabview-close pi pi-times" onClick={(e) => this.onTabHeaderClose(e, index)}></i>
 
         let content = (
             /* eslint-disable */
@@ -184,6 +243,7 @@ export class TabView extends Component {
                 {leftIconElement}
                 {titleElement}
                 {rightIconElement}
+                {closableIconElement}
                 <Ripple />
             </a>
             /* eslint-enable */
@@ -208,7 +268,7 @@ export class TabView extends Component {
         }
 
         return (
-            <li ref={(el) => this[`tab_${index}`] = el} className={className} style={tab.props.headerStyle} role="presentation">
+            <li ref={(el) => this[`tab_${index}`] = el} className={className} style={style} role="presentation">
                 {content}
             </li>
         );
@@ -217,7 +277,9 @@ export class TabView extends Component {
     renderTabHeaders() {
         return (
             React.Children.map(this.props.children, (tab, index) => {
-                return this.renderTabHeader(tab, index);
+                if (this.shouldTabRender(tab, index)) {
+                    return this.renderTabHeader(tab, index);
+                }
             })
         );
     }
@@ -237,7 +299,7 @@ export class TabView extends Component {
 
     renderContent() {
         const contents = React.Children.map(this.props.children, (tab, index) => {
-            if (!this.props.renderActiveOnly || this.isSelected(index)) {
+            if (this.shouldTabRender(tab, index) && (!this.props.renderActiveOnly || this.isSelected(index))) {
                 return this.createContent(tab, index);
             }
         })
@@ -251,13 +313,13 @@ export class TabView extends Component {
 
     createContent(tab, index) {
         const selected = this.isSelected(index);
-        const className = classNames(tab.props.contentClassName, 'p-tabview-panel', { 'p-hidden': !selected });
+        const style = { ...(tab.props.contentStyle || {}), ...(tab.props.style || {}) };
+        const className = classNames(tab.props.contentClassName, tab.props.className, 'p-tabview-panel', { 'p-hidden': !selected });
         const id = this.state.id + '_content_' + index;
         const ariaLabelledBy = this.state.id + '_header_' + index;
 
         return (
-            <div id={id} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className}
-                style={tab.props.contentStyle} role="tabpanel">
+            <div id={id} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={style} role="tabpanel">
                 {!this.props.renderActiveOnly ? tab.props.children : (selected && tab.props.children)}
             </div>
         );

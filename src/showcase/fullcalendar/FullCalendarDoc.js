@@ -163,7 +163,7 @@ const FullCalendarDemo = () => {
                             In this way, it is aimed to use it compatible with other PrimeReact components.</h4>
                         <Divider />
 
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { FullCalendar } from 'primereact/fullcalendar';
@@ -176,16 +176,16 @@ import { FullCalendar } from 'primereact/fullcalendar';
 
 <CodeHighlight lang="js">
 {`
-npm install @fullcalendar/core --save
+npm install @fullcalendar/core
 `}
 </CodeHighlight>
 
                         <p>FullCalendar is plugin based so install the plugins you require and define them with the options property.</p>
 <CodeHighlight lang="js">
 {`
-npm install @fullcalendar/daygrid --save
-npm install @fullcalendar/timegrid --save
-npm install @fullcalendar/interaction --save
+npm install @fullcalendar/daygrid
+npm install @fullcalendar/timegrid
+npm install @fullcalendar/interaction
 `}
 </CodeHighlight>
 

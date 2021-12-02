@@ -3,7 +3,9 @@ import TreeNode from '../treenode';
 
 type TreeSelectionModeType = 'single' | 'multiple' | 'checkbox';
 
-type TreeSelectionKeys = string | TreeSelectionKeysType | undefined | null;
+type TreeSelectionKeys = string | TreeSelectionKeysType | TreeSelectionKeysType[] | undefined | null;
+
+type TreeSelectionKeyType = boolean | TreeCheckboxSelectionKeyType;
 
 type TreeFilterModeType = 'lenient' | 'strict';
 
@@ -48,7 +50,12 @@ interface TreeTogglerTemplateOptions {
 }
 
 interface TreeSelectionKeysType {
-    [key: string]: boolean;
+    [key: string]: TreeSelectionKeyType;
+}
+
+interface TreeCheckboxSelectionKeyType {
+    checked?: boolean;
+    partialChecked?: boolean;
 }
 
 interface TreeExpandedKeysType {

@@ -48,7 +48,7 @@ export class DataTableSortDemo extends Component {
                 <div className="content-section implementation">
                     <div className="card">
                         <h5>Single Column</h5>
-                        <DataTable value={this.state.products}>
+                        <DataTable value={this.state.products} responsiveLayout="scroll">
                             <Column field="code" header="Code" sortable></Column>
                             <Column field="name" header="Name" sortable></Column>
                             <Column field="category" header="Category" sortable></Column>
@@ -60,7 +60,7 @@ export class DataTableSortDemo extends Component {
                     <div className="card">
                         <h5>Multiple Columns</h5>
                         <p>Use metakey to add a column to the sort selection.</p>
-                        <DataTable value={this.state.products} sortMode="multiple">
+                        <DataTable value={this.state.products} sortMode="multiple" responsiveLayout="scroll">
                             <Column field="code" header="Code" sortable></Column>
                             <Column field="name" header="Name" sortable></Column>
                             <Column field="category" header="Category" sortable></Column>
@@ -71,7 +71,7 @@ export class DataTableSortDemo extends Component {
 
                     <div className="card">
                         <h5>Presort</h5>
-                        <DataTable value={this.state.products} sortField="category" sortOrder={-1}>
+                        <DataTable value={this.state.products} sortField="category" sortOrder={-1} responsiveLayout="scroll">
                             <Column field="code" header="Code" sortable></Column>
                             <Column field="name" header="Name" sortable></Column>
                             <Column field="category" header="Category" sortable></Column>
@@ -82,7 +82,7 @@ export class DataTableSortDemo extends Component {
 
                     <div className="card">
                         <h5>Removable Sort</h5>
-                        <DataTable value={this.state.products} removableSort>
+                        <DataTable value={this.state.products} removableSort responsiveLayout="scroll">
                             <Column field="code" header="Code" sortable></Column>
                             <Column field="name" header="Name" sortable></Column>
                             <Column field="category" header="Category" sortable></Column>
@@ -94,7 +94,7 @@ export class DataTableSortDemo extends Component {
                     <div className="card">
                         <h5>Sortable Disabled</h5>
                         <p>Use metakey to add a column to the multiple sort selection.</p>
-                        <DataTable value={this.state.products} sortMode="multiple" removableSort multiSortMeta={this.state.multiSortMeta} onSort={(e) => this.setState({multiSortMeta: e.multiSortMeta})}>
+                        <DataTable value={this.state.products} sortMode="multiple" removableSort multiSortMeta={this.state.multiSortMeta} onSort={(e) => this.setState({multiSortMeta: e.multiSortMeta})} responsiveLayout="scroll">
                             <Column field="code" header="Code" sortable></Column>
                             <Column field="name" header="Name" sortable></Column>
                             <Column field="category" header="Category (Disabled)" sortable sortableDisabled></Column>
@@ -155,7 +155,7 @@ export class DataTableSortDemo extends Component {
             <div>
                 <div className="card">
                     <h5>Single Column</h5>
-                    <DataTable value={this.state.products}>
+                    <DataTable value={this.state.products} responsiveLayout="scroll">
                         <Column field="code" header="Code" sortable></Column>
                         <Column field="name" header="Name" sortable></Column>
                         <Column field="category" header="Category" sortable></Column>
@@ -167,7 +167,7 @@ export class DataTableSortDemo extends Component {
                 <div className="card">
                     <h5>Multiple Columns</h5>
                     <p>Use metakey to add a column to the sort selection.</p>
-                    <DataTable value={this.state.products} sortMode="multiple">
+                    <DataTable value={this.state.products} sortMode="multiple" responsiveLayout="scroll">
                         <Column field="code" header="Code" sortable></Column>
                         <Column field="name" header="Name" sortable></Column>
                         <Column field="category" header="Category" sortable></Column>
@@ -178,7 +178,7 @@ export class DataTableSortDemo extends Component {
 
                 <div className="card">
                     <h5>Presort</h5>
-                    <DataTable value={this.state.products} sortField="category" sortOrder={-1}>
+                    <DataTable value={this.state.products} sortField="category" sortOrder={-1} responsiveLayout="scroll">
                         <Column field="code" header="Code" sortable></Column>
                         <Column field="name" header="Name" sortable></Column>
                         <Column field="category" header="Category" sortable></Column>
@@ -189,7 +189,7 @@ export class DataTableSortDemo extends Component {
 
                 <div className="card">
                     <h5>Removable Sort</h5>
-                    <DataTable value={this.state.products} removableSort>
+                    <DataTable value={this.state.products} removableSort responsiveLayout="scroll">
                         <Column field="code" header="Code" sortable></Column>
                         <Column field="name" header="Name" sortable></Column>
                         <Column field="category" header="Category" sortable></Column>
@@ -201,7 +201,7 @@ export class DataTableSortDemo extends Component {
                 <div className="card">
                     <h5>Sortable Disabled</h5>
                     <p>Use metakey to add a column to the multiple sort selection.</p>
-                    <DataTable value={this.state.products} sortMode="multiple" removableSort multiSortMeta={this.state.multiSortMeta} onSort={(e) => this.setState({multiSortMeta: e.multiSortMeta})}>
+                    <DataTable value={this.state.products} sortMode="multiple" removableSort multiSortMeta={this.state.multiSortMeta} onSort={(e) => this.setState({multiSortMeta: e.multiSortMeta})} responsiveLayout="scroll">
                         <Column field="code" header="Code" sortable></Column>
                         <Column field="name" header="Name" sortable></Column>
                         <Column field="category" header="Category (Disabled)" sortable sortableDisabled></Column>
@@ -244,7 +244,7 @@ const DataTableSortDemo = () => {
         <div>
             <div className="card">
                 <h5>Single Column</h5>
-                <DataTable value={products}>
+                <DataTable value={products} responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
@@ -256,7 +256,7 @@ const DataTableSortDemo = () => {
             <div className="card">
                 <h5>Multiple Columns</h5>
                 <p>Use metakey to add a column to the sort selection.</p>
-                <DataTable value={products} sortMode="multiple">
+                <DataTable value={products} sortMode="multiple" responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
@@ -267,7 +267,7 @@ const DataTableSortDemo = () => {
 
             <div className="card">
                 <h5>Presort</h5>
-                <DataTable value={products} sortField="category" sortOrder={-1}>
+                <DataTable value={products} sortField="category" sortOrder={-1} responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
@@ -278,7 +278,7 @@ const DataTableSortDemo = () => {
 
             <div className="card">
                 <h5>Removable Sort</h5>
-                <DataTable value={products} removableSort>
+                <DataTable value={products} removableSort responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
@@ -290,7 +290,7 @@ const DataTableSortDemo = () => {
             <div className="card">
                 <h5>Sortable Disabled</h5>
                 <p>Use metakey to add a column to the multiple sort selection.</p>
-                <DataTable value={products} sortMode="multiple" removableSort multiSortMeta={multiSortMeta} onSort={(e) => setMultiSortMeta(e.multiSortMeta)}>
+                <DataTable value={products} sortMode="multiple" removableSort multiSortMeta={multiSortMeta} onSort={(e) => setMultiSortMeta(e.multiSortMeta)} responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category (Disabled)" sortable sortableDisabled></Column>
@@ -332,7 +332,7 @@ const DataTableSortDemo = () => {
         <div>
             <div className="card">
                 <h5>Single Column</h5>
-                <DataTable value={products}>
+                <DataTable value={products} responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
@@ -344,7 +344,7 @@ const DataTableSortDemo = () => {
             <div className="card">
                 <h5>Multiple Columns</h5>
                 <p>Use metakey to add a column to the sort selection.</p>
-                <DataTable value={products} sortMode="multiple">
+                <DataTable value={products} sortMode="multiple" responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
@@ -355,7 +355,7 @@ const DataTableSortDemo = () => {
 
             <div className="card">
                 <h5>Presort</h5>
-                <DataTable value={products} sortField="category" sortOrder={-1}>
+                <DataTable value={products} sortField="category" sortOrder={-1} responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
@@ -366,7 +366,7 @@ const DataTableSortDemo = () => {
 
             <div className="card">
                 <h5>Removable Sort</h5>
-                <DataTable value={products} removableSort>
+                <DataTable value={products} removableSort responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
@@ -378,7 +378,7 @@ const DataTableSortDemo = () => {
             <div className="card">
                 <h5>Sortable Disabled</h5>
                 <p>Use metakey to add a column to the multiple sort selection.</p>
-                <DataTable value={products} sortMode="multiple" removableSort multiSortMeta={multiSortMeta} onSort={(e) => setMultiSortMeta(e.multiSortMeta)}>
+                <DataTable value={products} sortMode="multiple" removableSort multiSortMeta={multiSortMeta} onSort={(e) => setMultiSortMeta(e.multiSortMeta)} responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category (Disabled)" sortable sortableDisabled></Column>
@@ -398,6 +398,7 @@ const DataTableSortDemo = () => {
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
                 content: `
@@ -426,7 +427,7 @@ const DataTableSortDemo = () => {
         <div>
             <div className="card">
                 <h5>Single Column</h5>
-                <DataTable value={products}>
+                <DataTable value={products} responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
@@ -438,7 +439,7 @@ const DataTableSortDemo = () => {
             <div className="card">
                 <h5>Multiple Columns</h5>
                 <p>Use metakey to add a column to the sort selection.</p>
-                <DataTable value={products} sortMode="multiple">
+                <DataTable value={products} sortMode="multiple" responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
@@ -449,7 +450,7 @@ const DataTableSortDemo = () => {
 
             <div className="card">
                 <h5>Presort</h5>
-                <DataTable value={products} sortField="category" sortOrder={-1}>
+                <DataTable value={products} sortField="category" sortOrder={-1} responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
@@ -460,7 +461,7 @@ const DataTableSortDemo = () => {
 
             <div className="card">
                 <h5>Removable Sort</h5>
-                <DataTable value={products} removableSort>
+                <DataTable value={products} removableSort responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category" sortable></Column>
@@ -472,7 +473,7 @@ const DataTableSortDemo = () => {
             <div className="card">
                 <h5>Sortable Disabled</h5>
                 <p>Use metakey to add a column to the multiple sort selection.</p>
-                <DataTable value={products} sortMode="multiple" removableSort multiSortMeta={multiSortMeta} onSort={(e) => setMultiSortMeta(e.multiSortMeta)}>
+                <DataTable value={products} sortMode="multiple" removableSort multiSortMeta={multiSortMeta} onSort={(e) => setMultiSortMeta(e.multiSortMeta)} responsiveLayout="scroll">
                     <Column field="code" header="Code" sortable></Column>
                     <Column field="name" header="Name" sortable></Column>
                     <Column field="category" header="Category (Disabled)" sortable sortableDisabled></Column>

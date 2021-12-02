@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 
 export class Chips extends Component {
@@ -13,6 +13,8 @@ export class Chips extends Component {
         value: null,
         max: null,
         disabled: null,
+        readOnly: false,
+        removable: true,
         style: null,
         className: null,
         tooltip: null,
@@ -36,6 +38,8 @@ export class Chips extends Component {
         value: PropTypes.array,
         max: PropTypes.number,
         disabled: PropTypes.bool,
+        readOnly: PropTypes.bool,
+        removable: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
         style: PropTypes.object,
         className: PropTypes.string,
         tooltip: PropTypes.string,
@@ -68,12 +72,16 @@ export class Chips extends Component {
     }
 
     removeItem(event, index) {
-        if (this.props.disabled) {
+        if (this.props.disabled && this.props.readOnly) {
             return;
         }
 
         let values = [...this.props.value];
         const removedItem = values.splice(index, 1);
+
+        if (!this.isRemovable(removedItem, index)) {
+            return;
+        }
 
         if (this.props.onRemove) {
             this.props.onRemove({
@@ -216,6 +224,10 @@ export class Chips extends Component {
         return (this.props.value && this.props.value.length) || (this.inputRef && this.inputRef.current && this.inputRef.current.value && this.inputRef.current.value.length);
     }
 
+    isRemovable(value, index) {
+        return ObjectUtils.getPropValue(this.props.removable, { value, index, props: this.props })
+    }
+
     updateInputRef() {
         let ref = this.props.inputRef;
 
@@ -269,9 +281,19 @@ export class Chips extends Component {
         });
     }
 
+    renderRemoveIcon(value, index) {
+        if (!this.props.disabled && !this.props.readOnly && this.isRemovable(value, index)) {
+            return (
+                <span className="p-chips-token-icon pi pi-times-circle" onClick={(event) => this.removeItem(event, index)}></span>
+            )
+        }
+
+        return null;
+    }
+
     renderItem(value, index) {
         const content = this.props.itemTemplate ? this.props.itemTemplate(value) : value;
-        const icon = this.props.disabled ? null : <span className="p-chips-token-icon pi pi-times-circle" onClick={(event) => this.removeItem(event, index)}></span>;
+        const icon = this.renderRemoveIcon(value, index);
 
         return (
             <li key={index} className="p-chips-token p-highlight">
@@ -285,7 +307,8 @@ export class Chips extends Component {
         return (
             <li className="p-chips-input-token">
                 <input ref={this.inputRef} placeholder={this.props.placeholder} type="text" name={this.props.name} disabled={this.props.disabled||this.isMaxedOut()}
-                            onKeyDown={this.onKeyDown} onPaste={this.onPaste} onFocus={this.onFocus} onBlur={this.onBlur} aria-labelledby={this.props.ariaLabelledBy}/>
+                            onKeyDown={this.onKeyDown} onPaste={this.onPaste} onFocus={this.onFocus} onBlur={this.onBlur} aria-labelledby={this.props.ariaLabelledBy}
+                            readOnly={this.props.readOnly} />
             </li>
         );
     }

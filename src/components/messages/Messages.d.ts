@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { CSSTransitionProps } from '../csstransition';
 
 type MessagesSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
 
@@ -18,7 +19,7 @@ export interface MessagesProps {
     id?: string;
     className?: string;
     style?: object;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onRemove?(message: MessagesMessage): void;
     onClick?(message: MessagesMessage): void;
 }

@@ -117,7 +117,7 @@ export class ListBoxDemo extends Component {
                     itemTemplate={this.countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
 
                 <h5>Virtual Scroll (100000 Items)</h5>
-                <ListBox value={this.state.selectedItem} options={this.items} virtualScrollerOptions={{ itemSize: 31 }} onChange={(e) => this.setState({ selectedItem: e.value })} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
+                <ListBox value={this.state.selectedItem} options={this.items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => this.setState({ selectedItem: e.value })} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
             </div>
         );
     }
@@ -222,7 +222,7 @@ const ListBoxDemo = () => {
                 itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
 
             <h5>Virtual Scroll (100000 Items)</h5>
-            <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 31 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
+            <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
         </div>
     );
 }
@@ -326,7 +326,7 @@ const ListBoxDemo = () => {
                 itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
 
             <h5>Virtual Scroll (100000 Items)</h5>
-            <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 31 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
+            <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
         </div>
     );
 }
@@ -335,10 +335,7 @@ const ListBoxDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
-        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/listbox/listbox.min.js"></script>`,
                 content: `
 const { useEffect, useState } = React;
@@ -436,7 +433,7 @@ const ListBoxDemo = () => {
                 itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
 
             <h5>Virtual Scroll (100000 Items)</h5>
-            <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 31 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
+            <ListBox value={selectedItem} options={items} virtualScrollerOptions={{ itemSize: 38 }} onChange={(e) => setSelectedItem(e.value)} style={{ width: '15rem' }} listStyle={{ height: '250px' }}/>
         </div>
     );
 }
@@ -455,10 +452,18 @@ const ListBoxDemo = () => {
     <TabView>
         <TabPanel header="Documentation">
 
-            <h5>Import</h5>
+            <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { ListBox } from 'primereact/listbox';
+`}
+</CodeHighlight>
+
+            <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/listbox/listbox.min.js"></script>
 `}
 </CodeHighlight>
 

@@ -7,7 +7,6 @@ export interface TooltipProps extends TooltipOptions {
     id?: string;
     target?: TooltipTargetType;
     content?: string;
-    disabled?: boolean;
 }
 
 export declare class Tooltip extends React.Component<TooltipProps, any> {

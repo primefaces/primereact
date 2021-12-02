@@ -61,7 +61,7 @@ export class DataTableColTogglerDemo extends Component {
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <DataTable value={this.state.products} header={header}>
+                        <DataTable value={this.state.products} header={header} responsiveLayout="scroll">
                             <Column field="code" header="Code" />
                             {columnComponents}
                         </DataTable>
@@ -133,7 +133,7 @@ export class DataTableColTogglerDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <DataTable value={this.state.products} header={header}>
+                    <DataTable value={this.state.products} header={header} responsiveLayout="scroll">
                         <Column field="code" header="Code" />
                         {columnComponents}
                     </DataTable>
@@ -187,7 +187,7 @@ const DataTableColTogglerDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products} header={header}>
+                <DataTable value={products} header={header} responsiveLayout="scroll">
                     <Column field="code" header="Code" />
                     {columnComponents}
                 </DataTable>
@@ -240,7 +240,7 @@ const DataTableColTogglerDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products} header={header}>
+                <DataTable value={products} header={header} responsiveLayout="scroll">
                     <Column field="code" header="Code" />
                     {columnComponents}
                 </DataTable>
@@ -257,6 +257,7 @@ const DataTableColTogglerDemo = () => {
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/multiselect/multiselect.min.js"></script>`,
@@ -300,7 +301,7 @@ const DataTableColTogglerDemo = () => {
     return (
         <div>
             <div className="card">
-                <DataTable value={products} header={header}>
+                <DataTable value={products} header={header} responsiveLayout="scroll">
                     <Column field="code" header="Code" />
                     {columnComponents}
                 </DataTable>

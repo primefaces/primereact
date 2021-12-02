@@ -116,10 +116,12 @@ interface PaginatorCurrentPageReportOptions {
 }
 
 interface PaginatorJumpToPageInputOptions {
-    page: number;
-    rows: number
-    disabled: boolean;
+    value: number;
     onChange(first:number, rows: number): void;
+    disabled: boolean;
+    className: string;
+    element: JSX.Element;
+    props: PaginatorProps;
 }
 
 interface PaginatorTemplateOptions {

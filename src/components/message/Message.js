@@ -17,7 +17,7 @@ export class Message extends Component {
         id: PropTypes.string,
         className: PropTypes.string,
         style: PropTypes.object,
-        text: PropTypes.string,
+        text: PropTypes.any,
         severity: PropTypes.string,
         content: PropTypes.any
     };
@@ -27,6 +27,7 @@ export class Message extends Component {
             return ObjectUtils.getJSXElement(this.props.content, this.props);
         }
 
+        const text = ObjectUtils.getJSXElement(this.props.text, this.props);
         const icon = classNames('p-inline-message-icon pi', {
             'pi-info-circle': this.props.severity === 'info',
             'pi-exclamation-triangle': this.props.severity === 'warn',
@@ -37,7 +38,7 @@ export class Message extends Component {
         return (
             <>
                 <span className={icon}></span>
-                <span className="p-inline-message-text">{this.props.text}</span>
+                <span className="p-inline-message-text">{text}</span>
             </>
         );
     }

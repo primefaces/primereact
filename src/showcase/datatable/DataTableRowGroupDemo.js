@@ -6,8 +6,8 @@ import { CustomerService } from '../service/CustomerService';
 import { TabView } from '../../components/tabview/TabView';
 import { useLiveEditorTabs } from '../liveeditor/LiveEditor';
 import { AppInlineHeader } from '../../AppInlineHeader';
-import './DataTableDemo.scss';
 import AppDemoActions from '../../AppDemoActions';
+import './DataTableDemo.scss';
 
 export class DataTableRowGroupDemo extends Component {
 
@@ -15,7 +15,7 @@ export class DataTableRowGroupDemo extends Component {
         super(props);
         this.state = {
             customers: [],
-            expandedRowGroups: []
+            expandedRows: []
         };
 
         this.customerService = new CustomerService();
@@ -111,27 +111,25 @@ export class DataTableRowGroupDemo extends Component {
                     <div className="card">
                         <h5>Subheader Grouping</h5>
                         <p>Group customers by their representative.</p>
-                        <DataTable value={this.state.customers} rowGroupMode="subheader" groupField="representative.name"
-                            sortMode="single" sortField="representative.name" sortOrder={1}
-                            rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}>
-                            <Column field="representative.name" header="Representative"></Column>
-                            <Column field="name" header="Name"></Column>
-                            <Column field="country" header="Country" body={this.countryBodyTemplate}></Column>
-                            <Column field="company" header="Company"></Column>
-                            <Column field="status" header="Status" body={this.statusBodyTemplate}></Column>
-                            <Column field="date" header="Date"></Column>
+                        <DataTable value={this.state.customers} rowGroupMode="subheader" groupRowsBy="representative.name"
+                            sortMode="single" sortField="representative.name" sortOrder={1} scrollable scrollHeight="400px"
+                            rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate} responsiveLayout="scroll">
+                            <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
+                            <Column field="country" header="Country" body={this.countryBodyTemplate} style={{ minWidth: '200px' }}></Column>
+                            <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                            <Column field="status" header="Status" body={this.statusBodyTemplate} style={{ minWidth: '200px' }}></Column>
+                            <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
                         </DataTable>
                     </div>
 
                     <div className="card">
                         <h5>Expandable Row Groups</h5>
                         <p>Group customers by their representative.</p>
-                        <DataTable value={this.state.customers} rowGroupMode="subheader" groupField="representative.name"
+                        <DataTable value={this.state.customers} rowGroupMode="subheader" groupRowsBy="representative.name"
                             sortMode="single" sortField="representative.name" sortOrder={1}
-                            expandableRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
+                            expandedRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
                             onRowExpand={this.onRowGroupExpand} onRowCollapse={this.onRowGroupCollapse}
-                            rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}>
-                            <Column field="representative.name" header="Representative"></Column>
+                            rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate} responsiveLayout="scroll">
                             <Column field="name" header="Name"></Column>
                             <Column field="country" header="Country" body={this.countryBodyTemplate}></Column>
                             <Column field="company" header="Company"></Column>
@@ -142,9 +140,9 @@ export class DataTableRowGroupDemo extends Component {
 
                     <div className="card">
                         <h5>RowSpan Grouping</h5>
-                        <DataTable value={this.state.customers} rowGroupMode="rowspan" groupField="representative.name"
-                            sortMode="single" sortField="representative.name" sortOrder={1}>
-                            <Column header="#" headerStyle={{ width: '3em' }} body={(data, props) => props.rowIndex + 1}></Column>
+                        <DataTable value={this.state.customers} rowGroupMode="rowspan" groupRowsBy="representative.name"
+                            sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll">
+                            <Column header="#" headerStyle={{ width: '3em' }} body={(data, options) => options.rowIndex + 1}></Column>
                             <Column field="representative.name" header="Representative" body={this.representativeBodyTemplate}></Column>
                             <Column field="name" header="Name"></Column>
                             <Column field="country" header="Country" body={this.countryBodyTemplate}></Column>
@@ -183,7 +181,7 @@ export class DataTableRowGroupDemo extends Component {
         super(props);
         this.state = {
             customers: [],
-            expandedRowGroups: []
+            expandedRows: []
         };
 
         this.customerService = new CustomerService();
@@ -270,27 +268,25 @@ export class DataTableRowGroupDemo extends Component {
                 <div className="card">
                     <h5>Subheader Grouping</h5>
                     <p>Group customers by their representative.</p>
-                    <DataTable value={this.state.customers} rowGroupMode="subheader" groupField="representative.name"
-                        sortMode="single" sortField="representative.name" sortOrder={1}
-                        rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}>
-                        <Column field="representative.name" header="Representative"></Column>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="country" header="Country" body={this.countryBodyTemplate}></Column>
-                        <Column field="company" header="Company"></Column>
-                        <Column field="status" header="Status" body={this.statusBodyTemplate}></Column>
-                        <Column field="date" header="Date"></Column>
+                    <DataTable value={this.state.customers} rowGroupMode="subheader" groupRowsBy="representative.name"
+                        sortMode="single" sortField="representative.name" sortOrder={1} scrollable scrollHeight="400px"
+                        rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate} responsiveLayout="scroll">
+                        <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
+                        <Column field="country" header="Country" body={this.countryBodyTemplate} style={{ minWidth: '200px' }}></Column>
+                        <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                        <Column field="status" header="Status" body={this.statusBodyTemplate} style={{ minWidth: '200px' }}></Column>
+                        <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
                     </DataTable>
                 </div>
 
                 <div className="card">
                     <h5>Expandable Row Groups</h5>
                     <p>Group customers by their representative.</p>
-                    <DataTable value={this.state.customers} rowGroupMode="subheader" groupField="representative.name"
-                        sortMode="single" sortField="representative.name" sortOrder={1}
-                        expandableRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
+                    <DataTable value={this.state.customers} rowGroupMode="subheader" groupRowsBy="representative.name"
+                        sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll"
+                        expandedRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
                         onRowExpand={this.onRowGroupExpand} onRowCollapse={this.onRowGroupCollapse}
                         rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}>
-                        <Column field="representative.name" header="Representative"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="country" header="Country" body={this.countryBodyTemplate}></Column>
                         <Column field="company" header="Company"></Column>
@@ -301,9 +297,9 @@ export class DataTableRowGroupDemo extends Component {
 
                 <div className="card">
                     <h5>RowSpan Grouping</h5>
-                    <DataTable value={this.state.customers} rowGroupMode="rowspan" groupField="representative.name"
-                        sortMode="single" sortField="representative.name" sortOrder={1}>
-                        <Column header="#" headerStyle={{ width: '3em' }} body={(data, props) => props.rowIndex + 1}></Column>
+                    <DataTable value={this.state.customers} rowGroupMode="rowspan" groupRowsBy="representative.name"
+                        sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll">
+                        <Column header="#" headerStyle={{ width: '3em' }} body={(data, options) => options.rowIndex + 1}></Column>
                         <Column field="representative.name" header="Representative" body={this.representativeBodyTemplate}></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="country" header="Country" body={this.countryBodyTemplate}></Column>
@@ -329,6 +325,7 @@ import { CustomerService } from '../service/CustomerService';
 import './DataTableDemo.css';
 
 const DataTableRowGroupDemo = () => {
+
     const [customers, setCustomers] = useState([]);
     const [expandedRows, setExpandedRows] = useState([]);
     const toast = useRef(null);
@@ -407,27 +404,25 @@ const DataTableRowGroupDemo = () => {
             <div className="card">
                 <h5>Subheader Grouping</h5>
                 <p>Group customers by their representative.</p>
-                <DataTable value={customers} rowGroupMode="subheader" groupField="representative.name"
-                    sortMode="single" sortField="representative.name" sortOrder={1}
-                    rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
-                    <Column field="representative.name" header="Representative"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country" header="Country" body={countryBodyTemplate}></Column>
-                    <Column field="company" header="Company"></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate}></Column>
-                    <Column field="date" header="Date"></Column>
+                <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1} scrollable scrollHeight="400px"
+                    rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate} responsiveLayout="scroll">
+                    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
+                    <Column field="country" header="Country" body={countryBodyTemplate} style={{ minWidth: '200px' }}></Column>
+                    <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate} style={{ minWidth: '200px' }}></Column>
+                    <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
                 </DataTable>
             </div>
 
             <div className="card">
                 <h5>Expandable Row Groups</h5>
                 <p>Group customers by their representative.</p>
-                <DataTable value={customers} rowGroupMode="subheader" groupField="representative.name"
-                    sortMode="single" sortField="representative.name" sortOrder={1}
-                    expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll"
+                    expandedRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     onRowExpand={onRowGroupExpand} onRowCollapse={onRowGroupCollapse}
                     rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
-                    <Column field="representative.name" header="Representative"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="country" header="Country" body={countryBodyTemplate}></Column>
                     <Column field="company" header="Company"></Column>
@@ -438,9 +433,9 @@ const DataTableRowGroupDemo = () => {
 
             <div className="card">
                 <h5>RowSpan Grouping</h5>
-                <DataTable value={customers} rowGroupMode="rowspan" groupField="representative.name"
-                    sortMode="single" sortField="representative.name" sortOrder={1}>
-                    <Column header="#" headerStyle={{ width: '3em' }} body={(data, props) => props.rowIndex + 1}></Column>
+                <DataTable value={customers} rowGroupMode="rowspan" groupRowsBy="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll">
+                    <Column header="#" headerStyle={{ width: '3em' }} body={(data, options) => options.rowIndex + 1}></Column>
                     <Column field="representative.name" header="Representative" body={representativeBodyTemplate}></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="country" header="Country" body={countryBodyTemplate}></Column>
@@ -465,6 +460,7 @@ import { CustomerService } from '../service/CustomerService';
 import './DataTableDemo.css';
 
 const DataTableRowGroupDemo = () => {
+
     const [customers, setCustomers] = useState([]);
     const [expandedRows, setExpandedRows] = useState([]);
     const toast = useRef(null);
@@ -539,30 +535,29 @@ const DataTableRowGroupDemo = () => {
     return (
         <div className="datatable-rowgroup-demo">
             <Toast ref={toast}></Toast>
+
             <div className="card">
                 <h5>Subheader Grouping</h5>
                 <p>Group customers by their representative.</p>
-                <DataTable value={customers} rowGroupMode="subheader" groupField="representative.name"
-                    sortMode="single" sortField="representative.name" sortOrder={1}
-                    rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
-                    <Column field="representative.name" header="Representative"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country" header="Country" body={countryBodyTemplate}></Column>
-                    <Column field="company" header="Company"></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate}></Column>
-                    <Column field="date" header="Date"></Column>
+                <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1} scrollable scrollHeight="400px"
+                    rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate} responsiveLayout="scroll">
+                    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
+                    <Column field="country" header="Country" body={countryBodyTemplate} style={{ minWidth: '200px' }}></Column>
+                    <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate} style={{ minWidth: '200px' }}></Column>
+                    <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
                 </DataTable>
             </div>
 
             <div className="card">
                 <h5>Expandable Row Groups</h5>
                 <p>Group customers by their representative.</p>
-                <DataTable value={customers} rowGroupMode="subheader" groupField="representative.name"
-                    sortMode="single" sortField="representative.name" sortOrder={1}
-                    expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll"
+                    expandedRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     onRowExpand={onRowGroupExpand} onRowCollapse={onRowGroupCollapse}
                     rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
-                    <Column field="representative.name" header="Representative"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="country" header="Country" body={countryBodyTemplate}></Column>
                     <Column field="company" header="Company"></Column>
@@ -573,9 +568,9 @@ const DataTableRowGroupDemo = () => {
 
             <div className="card">
                 <h5>RowSpan Grouping</h5>
-                <DataTable value={customers} rowGroupMode="rowspan" groupField="representative.name"
-                    sortMode="single" sortField="representative.name" sortOrder={1}>
-                    <Column header="#" headerStyle={{ width: '3em' }} body={(data, props) => props.rowIndex + 1}></Column>
+                <DataTable value={customers} rowGroupMode="rowspan" groupRowsBy="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll">
+                    <Column header="#" headerStyle={{ width: '3em' }} body={(data, options) => options.rowIndex + 1}></Column>
                     <Column field="representative.name" header="Representative" body={representativeBodyTemplate}></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="country" header="Country" body={countryBodyTemplate}></Column>
@@ -597,6 +592,7 @@ const DataTableRowGroupDemo = () => {
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
@@ -607,6 +603,7 @@ const { DataTable } = primereact.datatable;
 const { Toast } = primereact.toast;
 
 const DataTableRowGroupDemo = () => {
+
     const [customers, setCustomers] = useState([]);
     const [expandedRows, setExpandedRows] = useState([]);
     const toast = useRef(null);
@@ -685,27 +682,25 @@ const DataTableRowGroupDemo = () => {
             <div className="card">
                 <h5>Subheader Grouping</h5>
                 <p>Group customers by their representative.</p>
-                <DataTable value={customers} rowGroupMode="subheader" groupField="representative.name"
-                    sortMode="single" sortField="representative.name" sortOrder={1}
-                    rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
-                    <Column field="representative.name" header="Representative"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country" header="Country" body={countryBodyTemplate}></Column>
-                    <Column field="company" header="Company"></Column>
-                    <Column field="status" header="Status" body={statusBodyTemplate}></Column>
-                    <Column field="date" header="Date"></Column>
+                <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1} scrollable scrollHeight="400px"
+                    rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate} responsiveLayout="scroll">
+                    <Column field="name" header="Name" style={{ minWidth: '200px' }}></Column>
+                    <Column field="country" header="Country" body={countryBodyTemplate} style={{ minWidth: '200px' }}></Column>
+                    <Column field="company" header="Company" style={{ minWidth: '200px' }}></Column>
+                    <Column field="status" header="Status" body={statusBodyTemplate} style={{ minWidth: '200px' }}></Column>
+                    <Column field="date" header="Date" style={{ minWidth: '200px' }}></Column>
                 </DataTable>
             </div>
 
             <div className="card">
                 <h5>Expandable Row Groups</h5>
                 <p>Group customers by their representative.</p>
-                <DataTable value={customers} rowGroupMode="subheader" groupField="representative.name"
-                    sortMode="single" sortField="representative.name" sortOrder={1}
-                    expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll"
+                    expandedRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     onRowExpand={onRowGroupExpand} onRowCollapse={onRowGroupCollapse}
                     rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
-                    <Column field="representative.name" header="Representative"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="country" header="Country" body={countryBodyTemplate}></Column>
                     <Column field="company" header="Company"></Column>
@@ -716,9 +711,9 @@ const DataTableRowGroupDemo = () => {
 
             <div className="card">
                 <h5>RowSpan Grouping</h5>
-                <DataTable value={customers} rowGroupMode="rowspan" groupField="representative.name"
-                    sortMode="single" sortField="representative.name" sortOrder={1}>
-                    <Column header="#" headerStyle={{ width: '3em' }} body={(data, props) => props.rowIndex + 1}></Column>
+                <DataTable value={customers} rowGroupMode="rowspan" groupRowsBy="representative.name"
+                    sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll">
+                    <Column header="#" headerStyle={{ width: '3em' }} body={(data, options) => options.rowIndex + 1}></Column>
                     <Column field="representative.name" header="Representative" body={representativeBodyTemplate}></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="country" header="Country" body={countryBodyTemplate}></Column>

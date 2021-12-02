@@ -63,7 +63,7 @@
     font-size: 12px;
 }
 
-.p-float-label .input:-webkit-autofill ~ label {
+.p-float-label input:-webkit-autofill ~ label {
     top: -20px;
     font-size: 12px;
 }

@@ -203,10 +203,10 @@ export class DropdownDemo extends Component {
                         valueTemplate={this.selectedCountryTemplate} itemTemplate={this.countryOptionTemplate} />
 
                     <h5>Virtual Scroll (100000 Items)</h5>
-                    <Dropdown value={this.state.selectedItem} options={this.items} onChange={this.onItemChange} virtualScrollerOptions={{ itemSize: 31 }} placeholder="Select Item"/>
+                    <Dropdown value={this.state.selectedItem} options={this.items} onChange={this.onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
 
                     <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                    <Dropdown value={this.state.selectedItem2} options={this.state.lazyItems} onChange={this.onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 31, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
+                    <Dropdown value={this.state.selectedItem2} options={this.state.lazyItems} onChange={this.onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 38, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
                         return (
                             <div className="p-d-flex p-ai-center p-p-2" style={{ height: '31px' }}>
                                 <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
@@ -397,10 +397,10 @@ const DropdownDemo = () => {
                     valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
 
                 <h5>Virtual Scroll (100000 Items)</h5>
-                <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 31 }} placeholder="Select Item"/>
+                <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
 
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 31, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
                         <div className="p-d-flex p-ai-center p-p-2" style={{ height: '31px' }}>
                             <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
@@ -590,10 +590,10 @@ const DropdownDemo = () => {
                     valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
 
                 <h5>Virtual Scroll (100000 Items)</h5>
-                <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 31 }} placeholder="Select Item"/>
+                <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
 
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 31, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
                         <div className="p-d-flex p-ai-center p-p-2" style={{ height: '31px' }}>
                             <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
@@ -611,10 +611,7 @@ const DropdownDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./DropdownDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
-        <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
         <script src="https://unpkg.com/primereact/skeleton/skeleton.min.js"></script>`,
                 content: `
 const { useEffect, useState, useRef } = React;
@@ -790,10 +787,10 @@ const DropdownDemo = () => {
                     valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
 
                 <h5>Virtual Scroll (100000 Items)</h5>
-                <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 31 }} placeholder="Select Item"/>
+                <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
 
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 31, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
                         <div className="p-d-flex p-ai-center p-p-2" style={{ height: '31px' }}>
                             <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
@@ -832,10 +829,17 @@ const DropdownDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Dropdown } from 'primereact/dropdown';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
 </CodeHighlight>
 

@@ -538,13 +538,8 @@ const CalendarDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
-        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
-        <script src="https://unpkg.com/primereact/calendar/calendar.min.js"></script>
-        <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/calendar/calendar.min.js"></script>`,
                 content: `
 const { useEffect, useState, useRef } = React;
 const { Calendar } = primereact.calendar;
@@ -727,10 +722,18 @@ const CalendarDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Calendar } from 'primereact/calendar';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/calendar/calendar.min.js"></script>
 `}
 </CodeHighlight>
 
@@ -1071,6 +1074,12 @@ const monthNavigatorTemplate = (options) => {
                                         <td>string</td>
                                         <td>pi pi-calendar</td>
                                         <td>Icon of the calendar button.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>iconPos</td>
+                                        <td>string</td>
+                                        <td>right</td>
+                                        <td>Icon position of the calendar button. Valid values is 'left' and 'right'.</td>
                                     </tr>
                                     <tr>
                                         <td>showOnFocus</td>

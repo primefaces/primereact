@@ -54,7 +54,7 @@ export class MessagesDemo extends Component {
                     <AppInlineHeader changelogText="messages">
                         <h1>Messages</h1>
                         <p>Messages is used to display inline messages with various severities.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="messages/MessagesDemo.js" />
                 </div>
 

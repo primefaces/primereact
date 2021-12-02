@@ -9,7 +9,7 @@ import AppDemoActions from "../../AppDemoActions";
 
 export class SkeletonDemo extends Component {
 
-    products = new Array(5);
+    products = Array.from({ length: 5 });
 
     bodyTemplate = () => {
         return <Skeleton></Skeleton>
@@ -135,16 +135,16 @@ export class SkeletonDemo extends Component {
 
                         <h5>DataTable</h5>
                         <DataTable value={this.products} className="p-datatable-striped">
-                            <Column field="code" header="Code" body={this.bodyTemplate}></Column>
-                            <Column field="name" header="Name" body={this.bodyTemplate}></Column>
-                            <Column field="category" header="Category" body={this.bodyTemplate}></Column>
-                            <Column field="quantity" header="Quantity" body={this.bodyTemplate}></Column>
+                            <Column field="code" header="Code" style={{ width: '25%' }} body={this.bodyTemplate}></Column>
+                            <Column field="name" header="Name" style={{ width: '25%' }} body={this.bodyTemplate}></Column>
+                            <Column field="category" header="Category" style={{ width: '25%' }} body={this.bodyTemplate}></Column>
+                            <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={this.bodyTemplate}></Column>
                         </DataTable>
                     </div>
 
                 </div>
                 <SkeletonDoc />
-            </div >
+            </div>
         );
     }
 }

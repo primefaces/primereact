@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { CSSTransitionProps } from '../csstransition';
 
 type CascadeSelectItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
@@ -31,7 +32,7 @@ export interface CascadeSelectProps {
     tabIndex?: number;
     ariaLabelledBy?: string;
     appendTo?: CascadeSelectAppendToType;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     dropdownIcon?: string;
     onChange?(e: CascadeSelectChangeParams): void;
     onGroupChange?(e: CascadeSelectGroupChangeParams): void;

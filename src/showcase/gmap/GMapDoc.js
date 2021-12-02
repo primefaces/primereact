@@ -190,6 +190,7 @@ const GMapDemo = () => {
     const [selectedPosition, setSelectedPosition] = useState(null);
 
     const toast = useRef(null);
+    const infoWindow = useRef(null);
 
     useEffect(() => {
         loadGoogleMaps(() => {
@@ -211,7 +212,7 @@ const GMapDemo = () => {
 
         if(isMarker) {
             let title = event.overlay.getTitle();
-            infoWindow = infoWindow||new google.maps.InfoWindow();
+            infoWindow.current = infoWindow.current||new google.maps.InfoWindow();
             infoWindow.setContent('<div>' + title + '</div>');
             infoWindow.open(event.map, event.overlay);
             event.map.setCenter(event.overlay.getPosition());
@@ -328,6 +329,7 @@ const GMapDemo = () => {
     const [selectedPosition, setSelectedPosition] = useState(null);
 
     const toast = useRef(null);
+    const infoWindow = useRef(null);
 
     useEffect(() => {
         loadGoogleMaps(() => {
@@ -349,7 +351,7 @@ const GMapDemo = () => {
 
         if(isMarker) {
             let title = event.overlay.getTitle();
-            infoWindow = infoWindow||new google.maps.InfoWindow();
+            infoWindow.current = infoWindow.current||new google.maps.InfoWindow();
             infoWindow.setContent('<div>' + title + '</div>');
             infoWindow.open(event.map, event.overlay);
             event.map.setCenter(event.overlay.getPosition());
@@ -449,13 +451,8 @@ const GMapDemo = () => {
                 imports: `
         <script src="./GoogleMaps.js"></script>
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/gmap/gmap.min.js"></script>
-        <script src="https://unpkg.com/primereact/dialog/dialog.min.js"></script>
-        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
-        <script src="https://unpkg.com/primereact/checkbox/checkbox.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
                 content: `
 const { useEffect, useState, useRef } = React;
@@ -476,6 +473,7 @@ const GMapDemo = () => {
     const [selectedPosition, setSelectedPosition] = useState(null);
 
     const toast = useRef(null);
+    const infoWindow = useRef(null);
 
     useEffect(() => {
         loadGoogleMaps(() => {
@@ -497,7 +495,7 @@ const GMapDemo = () => {
 
         if(isMarker) {
             let title = event.overlay.getTitle();
-            infoWindow = infoWindow||new google.maps.InfoWindow();
+            infoWindow.current = infoWindow.current||new google.maps.InfoWindow();
             infoWindow.setContent('<div>' + title + '</div>');
             infoWindow.open(event.map, event.overlay);
             event.map.setCenter(event.overlay.getPosition());
@@ -644,10 +642,18 @@ export const removeGoogleMaps = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { GMap } from 'primereact/gmap';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/gmap/gmap.min.js"></script>
 `}
 </CodeHighlight>
 

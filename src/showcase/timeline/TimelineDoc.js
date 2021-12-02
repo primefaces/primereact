@@ -272,11 +272,9 @@ const TieredMenuDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./TimelineDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/timeline/timeline.min.js"></script>
-        <script src="https://unpkg.com/primereact/card/card.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/card/card.min.js"></script>`,
                 content: `
 const { useEffect, useState, useRef } = React;
 const { Timeline } = primereact.timeline;
@@ -406,12 +404,21 @@ const TimelineDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Timeline } from 'primereact/timeline';
 `}
 </CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/timeline/timeline.min.js"></script>
+`}
+</CodeHighlight>
+
                         <h5>Getting Started</h5>
                         <p>Timeline receives the events with the <i>value</i> property as a collection of arbitrary objects. In addition, <i>content</i> property is required to display the representation of an event.
                             Example below is a sample events array that is used throughout the documentation.</p>

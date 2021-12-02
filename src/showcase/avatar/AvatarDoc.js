@@ -333,7 +333,6 @@ export const AvatarDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/avatar/avatar.min.js"></script>
         <script src="https://unpkg.com/primereact/avatargroup/avatargroup.min.js"></script>
@@ -450,13 +449,23 @@ const AvatarDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                    <h5>Import</h5>
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Avatar } from 'primereact/avatar';
 import { AvatarGroup } from 'primereact/avatargroup';
 `}
 </CodeHighlight>
+
+                    <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/avatar/avatar.min.js"></script>
+<script src="https://unpkg.com/primereact/avatargroup/avatargroup.min.js"></script>
+`}
+</CodeHighlight>
+
                 <h5>Getting Started</h5>
 				<p>Avatar has three built-in display modes; "label", "icon" and "image".</p>
 <CodeHighlight>

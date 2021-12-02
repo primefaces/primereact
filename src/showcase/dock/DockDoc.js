@@ -1063,16 +1063,11 @@ export const DockDemo = () => {
         <script src="./NodeService.js"></script>
         <script src="./PhotoService.js"></script>
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/dock/dock.min.js"></script>
-        <script src="https://unpkg.com/primereact/tooltip/tooltip.min.js"></script>
-        <script src="https://unpkg.com/primereact/dialog/dialog.min.js"></script>
-        <script src="https://unpkg.com/primereact/terminalservice/terminalservice.min.js"></script>
         <script src="https://unpkg.com/primereact/terminal/terminal.min.js"></script>
         <script src="https://unpkg.com/primereact/galleria/galleria.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>
-        <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>
         <script src="https://unpkg.com/primereact/menubar/menubar.min.js"></script>`,
                 content: `
 const { useEffect, useState, useRef } = React;
@@ -1511,10 +1506,18 @@ const DockDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Dock } from 'primereact/dock';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/dock/dock.min.js"></script>
 `}
 </CodeHighlight>
 
@@ -1599,6 +1602,24 @@ export const DockDemo = () => {
                                         <td>string</td>
                                         <td>bottom</td>
                                         <td>Position of element. Valid values are 'bottom', 'top', 'left' and 'right'.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>header</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of header element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>footer</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Template of footer element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>magnification</td>
+                                        <td>any</td>
+                                        <td>null</td>
+                                        <td>Whether to allow scale animation.</td>
                                     </tr>
                                 </tbody>
                             </table>

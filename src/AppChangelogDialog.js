@@ -103,7 +103,7 @@ export class AppChangelogDialog extends Component {
                                 return (
                                     <li key={index} className="p-my-2">
                                         <span className="p-d-flex p-ai-center">
-                                            <i className="pi pi-circle-on p-mr-2" style={{ fontSize: '.5rem' }}></i>
+                                            <i className="pi pi-circle-fill p-mr-2" style={{ fontSize: '.5rem' }}></i>
                                             {item.title}
                                             <a href={item.url} target="_blank" rel="noopener noreferrer" className="p-ml-auto">#{item.number}</a>
                                         </span>

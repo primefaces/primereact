@@ -58,7 +58,7 @@ export class DataTableExportDemo extends Component {
             const data = csv.split('\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             let importedCols = cols.map(col => ({ field: col, header: this.toCapitalize(col.replace(/['"]+/g, '')) }));
@@ -172,7 +172,7 @@ export class DataTableExportDemo extends Component {
     render() {
         const header = (
             <div className="p-d-flex p-ai-center export-buttons">
-                <Button type="button" icon="pi pi-file-o" onClick={() => this.exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
+                <Button type="button" icon="pi pi-file" onClick={() => this.exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
                 <Button type="button" icon="pi pi-file-excel" onClick={this.exportExcel} className="p-button-success p-mr-2" data-pr-tooltip="XLS" />
                 <Button type="button" icon="pi pi-file-pdf" onClick={this.exportPdf} className="p-button-warning p-mr-2" data-pr-tooltip="PDF" />
                 <Button type="button" icon="pi pi-filter" onClick={() => this.exportCSV(true)} className="p-button-info p-ml-auto" data-pr-tooltip="Selection Only" />
@@ -196,13 +196,13 @@ export class DataTableExportDemo extends Component {
                         <Toast ref={(el) => this.toast = el} />
 
                         <div className="p-d-flex p-ai-center p-py-2">
-                            <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
+                            <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
                             <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="./upload.php"
                                 accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={this.importExcel} />
                             <Button type="button" label="Clear" icon="pi pi-times" onClick={this.clear} className="p-button-info p-ml-auto" />
                         </div>
 
-                        <DataTable value={this.state.importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false}
+                        <DataTable value={this.state.importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false} responsiveLayout="scroll"
                             selectionMode="multiple" selection={this.state.selectedImportedData} onSelectionChange={this.onImportSelectionChange}>
                             {
                                 this.state.importedCols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -215,7 +215,7 @@ export class DataTableExportDemo extends Component {
 
                         <Tooltip target=".export-buttons>button" position="bottom" />
 
-                        <DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id"
+                        <DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id" responsiveLayout="scroll"
                             selectionMode="multiple" selection={this.state.selectedProducts} onSelectionChange={this.onSelectionChange}>
                             {
                                 this.cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -295,7 +295,7 @@ export class DataTableExportDemo extends Component {
             const data = csv.split('\\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             let importedCols = cols.map(col => ({ field: col, header: this.toCapitalize(col.replace(/['"]+/g, '')) }));
@@ -409,7 +409,7 @@ export class DataTableExportDemo extends Component {
     render() {
         const header = (
             <div className="p-d-flex p-ai-center export-buttons">
-                <Button type="button" icon="pi pi-file-o" onClick={() => this.exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
+                <Button type="button" icon="pi pi-file" onClick={() => this.exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
                 <Button type="button" icon="pi pi-file-excel" onClick={this.exportExcel} className="p-button-success p-mr-2" data-pr-tooltip="XLS" />
                 <Button type="button" icon="pi pi-file-pdf" onClick={this.exportPdf} className="p-button-warning p-mr-2" data-pr-tooltip="PDF" />
                 <Button type="button" icon="pi pi-filter" onClick={() => this.exportCSV(true)} className="p-button-info p-ml-auto" data-pr-tooltip="Selection Only" />
@@ -424,13 +424,13 @@ export class DataTableExportDemo extends Component {
                     <Toast ref={(el) => this.toast = el} />
 
                     <div className="p-d-flex p-ai-center p-py-2">
-                        <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
+                        <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={this.importCSV} />
                         <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                             accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={this.importExcel} />
                         <Button type="button" label="Clear" icon="pi pi-times" onClick={this.clear} className="p-button-info p-ml-auto" />
                     </div>
 
-                    <DataTable value={this.state.importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false}
+                    <DataTable value={this.state.importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false} responsiveLayout="scroll"
                         selectionMode="multiple" selection={this.state.selectedImportedData} onSelectionChange={this.onImportSelectionChange}>
                         {
                             this.state.importedCols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -443,7 +443,7 @@ export class DataTableExportDemo extends Component {
 
                     <Tooltip target=".export-buttons>button" position="bottom" />
 
-                    <DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id"
+                    <DataTable ref={(el) => { this.dt = el; }} value={this.state.products} header={header} dataKey="id" responsiveLayout="scroll"
                         selectionMode="multiple" selection={this.state.selectedProducts} onSelectionChange={this.onSelectionChange}>
                         {
                             this.cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -499,7 +499,7 @@ export const DataTableExportDemo = () => {
             const data = csv.split('\\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             let _importedCols = cols.map(col => ({ field: col, header: toCapitalize(col.replace(/['"]+/g, '')) }));
@@ -605,7 +605,7 @@ export const DataTableExportDemo = () => {
 
     const header = (
         <div className="p-d-flex p-ai-center export-buttons">
-            <Button type="button" icon="pi pi-file-o" onClick={() => exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
+            <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
             <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success p-mr-2" data-pr-tooltip="XLS" />
             <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning p-mr-2" data-pr-tooltip="PDF" />
             <Button type="button" icon="pi pi-filter" onClick={() => exportCSV(true)} className="p-button-info p-ml-auto" data-pr-tooltip="Selection Only" />
@@ -620,13 +620,13 @@ export const DataTableExportDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="p-d-flex p-ai-center p-py-2">
-                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
+                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
                     <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={importExcel} />
                     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info p-ml-auto" />
                 </div>
 
-                <DataTable value={importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false}
+                <DataTable value={importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false} responsiveLayout="scroll"
                     selectionMode="multiple" selection={selectedImportedData} onSelectionChange={onImportSelectionChange}>
                     {
                         importedCols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -639,7 +639,7 @@ export const DataTableExportDemo = () => {
 
                 <Tooltip target=".export-buttons>button" position="bottom" />
 
-                <DataTable ref={dt} value={products} header={header} dataKey="id"
+                <DataTable ref={dt} value={products} header={header} dataKey="id" responsiveLayout="scroll"
                     selectionMode="multiple" selection={selectedProducts} onSelectionChange={onSelectionChange}>
                     {
                         cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -694,7 +694,7 @@ export const DataTableExportDemo = () => {
             const data = csv.split('\\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             let _importedCols = cols.map(col => ({ field: col, header: toCapitalize(col.replace(/['"]+/g, '')) }));
@@ -800,7 +800,7 @@ export const DataTableExportDemo = () => {
 
     const header = (
         <div className="p-d-flex p-ai-center export-buttons">
-            <Button type="button" icon="pi pi-file-o" onClick={() => exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
+            <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
             <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success p-mr-2" data-pr-tooltip="XLS" />
             <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning p-mr-2" data-pr-tooltip="PDF" />
             <Button type="button" icon="pi pi-filter" onClick={() => exportCSV(true)} className="p-button-info p-ml-auto" data-pr-tooltip="Selection Only" />
@@ -815,13 +815,13 @@ export const DataTableExportDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="p-d-flex p-ai-center p-py-2">
-                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
+                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
                     <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={importExcel} />
                     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info p-ml-auto" />
                 </div>
 
-                <DataTable value={importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false}
+                <DataTable value={importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false} responsiveLayout="scroll"
                     selectionMode="multiple" selection={selectedImportedData} onSelectionChange={onImportSelectionChange}>
                     {
                         importedCols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -834,7 +834,7 @@ export const DataTableExportDemo = () => {
 
                 <Tooltip target=".export-buttons>button" position="bottom" />
 
-                <DataTable ref={dt} value={products} header={header} dataKey="id"
+                <DataTable ref={dt} value={products} header={header} dataKey="id" responsiveLayout="scroll"
                     selectionMode="multiple" selection={selectedProducts} onSelectionChange={onSelectionChange}>
                     {
                         cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -854,6 +854,7 @@ export const DataTableExportDemo = () => {
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>
@@ -901,7 +902,7 @@ const DataTableExportDemo = () => {
             const data = csv.split('\\n');
 
             // Prepare DataTable
-            const cols = data[0].split(',');
+            const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
             let _importedCols = cols.map(col => ({ field: col, header: toCapitalize(col.replace(/['"]+/g, '')) }));
@@ -1007,7 +1008,7 @@ const DataTableExportDemo = () => {
 
     const header = (
         <div className="p-d-flex p-ai-center export-buttons">
-            <Button type="button" icon="pi pi-file-o" onClick={() => exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
+            <Button type="button" icon="pi pi-file" onClick={() => exportCSV(false)} className="p-mr-2" data-pr-tooltip="CSV" />
             <Button type="button" icon="pi pi-file-excel" onClick={exportExcel} className="p-button-success p-mr-2" data-pr-tooltip="XLS" />
             <Button type="button" icon="pi pi-file-pdf" onClick={exportPdf} className="p-button-warning p-mr-2" data-pr-tooltip="PDF" />
             <Button type="button" icon="pi pi-filter" onClick={() => exportCSV(true)} className="p-button-info p-ml-auto" data-pr-tooltip="Selection Only" />
@@ -1022,13 +1023,13 @@ const DataTableExportDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="p-d-flex p-ai-center p-py-2">
-                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file-o' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
+                    <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="p-mr-2" onUpload={importCSV} />
                     <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
                         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="p-mr-2" onUpload={importExcel} />
                     <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info p-ml-auto" />
                 </div>
 
-                <DataTable value={importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false}
+                <DataTable value={importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false} responsiveLayout="scroll"
                     selectionMode="multiple" selection={selectedImportedData} onSelectionChange={onImportSelectionChange}>
                     {
                         importedCols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
@@ -1041,7 +1042,7 @@ const DataTableExportDemo = () => {
 
                 <Tooltip target=".export-buttons>button" position="bottom" />
 
-                <DataTable ref={dt} value={products} header={header} dataKey="id"
+                <DataTable ref={dt} value={products} header={header} dataKey="id" responsiveLayout="scroll"
                     selectionMode="multiple" selection={selectedProducts} onSelectionChange={onSelectionChange}>
                     {
                         cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)

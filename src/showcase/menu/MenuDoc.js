@@ -219,10 +219,8 @@ const MenuDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/menu/menu.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
                 content: `
 const { useEffect, useState, useRef } = React;
@@ -301,10 +299,18 @@ const MenuDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Menu } from 'primereact/menu';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/menu/menu.min.js"></script>
 `}
 </CodeHighlight>
 

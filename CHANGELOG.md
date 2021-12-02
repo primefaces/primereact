@@ -1,5 +1,180 @@
 # Changelog
 
+## [7.0.1](https://github.com/primefaces/primereact/tree/7.0.1)  (2021-10-15)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/7.0.0...7.0.1)
+
+**Implemented New Features and Enhancements:**
+
+- New Themes with dark modes: Lara-Blue and Lara-Teal [\#2435](https://github.com/primefaces/primereact/issues/2435)
+- Remove default max-width style from Tooltip [\#2414](https://github.com/primefaces/primereact/issues/2414)
+
+**Fixed bugs:**
+
+- Button icon classes listed twice [\#2415](https://github.com/primefaces/primereact/issues/2415)
+- MultiSelect with transitionOptions property throws an exception [\#2413](https://github.com/primefaces/primereact/issues/2413)
+- Tooltip positioned incorrectly when target is an SVG [\#2406](https://github.com/primefaces/primereact/issues/2406)
+- ConfirmDialogProps breaks the build on Typescript due to double semicolon [\#2429](https://github.com/primefaces/primereact/issues/2429)
+
+## [7.0.0](https://github.com/primefaces/primereact/tree/7.0.0)  (2021-10-09)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/7.0.0-rc.2...7.0.0)
+
+**Breaking Changes:**
+
+- Change default value of maxSelectedLabels property on MultiSelect [\#2389](https://github.com/primefaces/primereact/issues/2389)
+
+**Implemented New Features and Enhancements:**
+
+- New Theme: Lara [\#2409](https://github.com/primefaces/primereact/issues/2409)
+- Add maskStyle property to Dialog [\#2404](https://github.com/primefaces/primereact/issues/2404)
+- Material | Use box-shadow for outlined Buttons [\#2401](https://github.com/primefaces/primereact/issues/2401)
+- Material Focus Improvements [\#2400](https://github.com/primefaces/primereact/issues/2400)
+- Update PrimeIcons to 5.0 [\#2399](https://github.com/primefaces/primereact/issues/2399)
+- Improve custom icon support [\#2397](https://github.com/primefaces/primereact/issues/2397)
+- Improve FileUpload drop mode [\#2385](https://github.com/primefaces/primereact/issues/2385)
+- Add header, footer and magnification properties to Dock [\#2362](https://github.com/primefaces/primereact/issues/2362)
+- \(Yarn PnP\) Add react-transition-group as optional peer dependency [\#2346](https://github.com/primefaces/primereact/issues/2346)
+- Support locale for emptyMessage and emptyFilterMessage default value [\#2337](https://github.com/primefaces/primereact/issues/2337)
+- Chips component: add 'readOnly' property [\#2334](https://github.com/primefaces/primereact/issues/2334)
+- Message content hides icon [\#2321](https://github.com/primefaces/primereact/issues/2321)
+- The Menu type declaration is missing the "show" and "hide" methods [\#2295](https://github.com/primefaces/primereact/issues/2295)
+- Date gets deselected in Calendar with selection mode range [\#2279](https://github.com/primefaces/primereact/issues/2279)
+- Add closeable property to TabPanel [\#2278](https://github.com/primefaces/primereact/issues/2278)
+- Add removeIcon property to AutoComplete and MultiSelect components [\#2270](https://github.com/primefaces/primereact/issues/2270)
+- Slider - onSlideEnd not called when clicking on Slider rail [\#2265](https://github.com/primefaces/primereact/issues/2265)
+- Add iconPos property to Calendar [\#2239](https://github.com/primefaces/primereact/issues/2239)
+- Improve Sidebar component [\#2233](https://github.com/primefaces/primereact/issues/2233)
+- Extend exportFunction \(csv\) with the whole record [\#2209](https://github.com/primefaces/primereact/issues/2209)
+- Multiple Selection Using Shift Key for TreeTable [\#1120](https://github.com/primefaces/primereact/issues/1120)
+
+**Fixed Bugs:**
+
+- Splitter component always adds p-splitter-panel-nested class [\#2396](https://github.com/primefaces/primereact/issues/2396)
+- DataTable VirtualScroll alignment issue [\#2392](https://github.com/primefaces/primereact/issues/2392)
+- TabView with scrollable throws an exception  [\#2391](https://github.com/primefaces/primereact/issues/2391)
+- Ripple is not working on Nextjs [\#2390](https://github.com/primefaces/primereact/issues/2390)
+- FileUpload not be directly mutated component’s state [\#2387](https://github.com/primefaces/primereact/issues/2387)
+- isSelectableTime checks value array instead of any value on Calendar [\#2386](https://github.com/primefaces/primereact/issues/2386)
+- Clicking the Clear Filter Button Should Clear the Filter But Leave the Dropdown Open [\#2384](https://github.com/primefaces/primereact/issues/2384)
+- DataTable filter mode is not working after filters are cleared [\#2383](https://github.com/primefaces/primereact/issues/2383)
+- \[Editor\] quill Invalid Quill container null [\#2381](https://github.com/primefaces/primereact/issues/2381)
+- Treeselect doesn't select the first node of the list [\#2372](https://github.com/primefaces/primereact/issues/2372)
+- Virtual Scroller Does Not React Properly When Underlying Array Changes Size [\#2366](https://github.com/primefaces/primereact/issues/2366)
+- Bug - FileUpload allows multiple even if "multiple" prop is not set [\#2363](https://github.com/primefaces/primereact/issues/2363)
+- Floating label is not yet on top of the inputbox when prefilled by Chrome [\#2358](https://github.com/primefaces/primereact/issues/2358)
+- Dropdown breaks in shadowRoot when getScrollableParent\(\) encounters document fragment [\#2352](https://github.com/primefaces/primereact/issues/2352)
+- Dropdown: Primitive values [\#2349](https://github.com/primefaces/primereact/issues/2349)
+- Add removable property to Chips [\#2345](https://github.com/primefaces/primereact/issues/2345)
+- InputNumber doesn't submit a form [\#2344](https://github.com/primefaces/primereact/issues/2344)
+- Multiselect adds items previously selected by clicking on the "select all" toggle \('Advanced with Templating and Filtering'\) [\#2341](https://github.com/primefaces/primereact/issues/2341)
+- TabView does not support dynamic panel visibility [\#2339](https://github.com/primefaces/primereact/issues/2339)
+- OverlayPanel - Uncaught TypeError: this is undefined [\#2338](https://github.com/primefaces/primereact/issues/2338)
+- MultiSelect should also limit the number of displayed chips [\#2331](https://github.com/primefaces/primereact/issues/2331)
+- Expander of ColumnProps has wrong in colums.td.d [\#2328](https://github.com/primefaces/primereact/issues/2328)
+- Lazy loaded menu overflowing the page [\#2320](https://github.com/primefaces/primereact/issues/2320)
+- InputSwitch inside Label doesn't toggle correctly. [\#2300](https://github.com/primefaces/primereact/issues/2300)
+- When Multiselect inside of label tag, click on it is not showing dropdown panel [\#2299](https://github.com/primefaces/primereact/issues/2299)
+- TreeSelect.value should be an array in multiselect mode [\#2276](https://github.com/primefaces/primereact/issues/2276)
+- TS2769: No overload matches this call.   Overload 1 of 2, '\(props: InputTextProps | Readonly\<InputTextProps\>\): InputText', gave the following error.  [\#2274](https://github.com/primefaces/primereact/issues/2274)
+- Auto z-index isn't generating correctly  [\#2266](https://github.com/primefaces/primereact/issues/2266)
+- Calendar prop \(tabIndex\) never passed into InputText element. [\#2260](https://github.com/primefaces/primereact/issues/2260)
+- DataTable: regression in single mode Space and Enter keys are catched and are not usable into cells [\#2259](https://github.com/primefaces/primereact/issues/2259)
+- Failed prop type: Invalid prop `appendTo` of type `string` supplied to `DropdownPanel`, expected `object`. [\#2258](https://github.com/primefaces/primereact/issues/2258)
+- Calendar throws exception when have the onViewDateChange property [\#2254](https://github.com/primefaces/primereact/issues/2254)
+- DataTable checked all rows does not honor ShowSelectionElement [\#2251](https://github.com/primefaces/primereact/issues/2251)
+- PickList not working webpack 5.5 [\#2250](https://github.com/primefaces/primereact/issues/2250)
+- Dialog: pressing escape in a nested dialog closes the parent dialog [\#2241](https://github.com/primefaces/primereact/issues/2241)
+- \[Bug\]: ReadOnly InputNumber is editable [\#2238](https://github.com/primefaces/primereact/issues/2238)
+- Tree DragDrop doesn't allow drag and drop between nodes [\#2177](https://github.com/primefaces/primereact/issues/2177)
+- DataTable cell editor only validates on enter [\#1024](https://github.com/primefaces/primereact/issues/1024)
+
+## [7.0.0-rc.2](https://github.com/primefaces/primereact/tree/7.0.0-rc.2) (2021-11-01)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/7.0.0-rc.1...7.0.0-rc.2)
+
+**Fixed Bugs:**
+
+- Table columns not visible on Prod [\#2380](https://github.com/primefaces/primereact/issues/2380)
+
+## [7.0.0-rc.1](https://github.com/primefaces/primereact/tree/7.0.0-rc.1) (2021-11-01)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.6.0...7.0.0-rc.1)
+
+**Breaking Changes:**
+
+- Improve DataTable implementation [\#2368](https://github.com/primefaces/primereact/issues/2368)
+- Remove FilterUtils class [\#2376](https://github.com/primefaces/primereact/issues/2376)
+- Improve Column attributes for Data components [\#2374](https://github.com/primefaces/primereact/issues/2374)
+- Improve VirtualScroller component [\#2373](https://github.com/primefaces/primereact/issues/2373)
+- Implemented new VirtualScroll feature for DataTable [\#2371](https://github.com/primefaces/primereact/issues/2371)
+- Implemented New Filter modes on DataTable [\#2370](https://github.com/primefaces/primereact/issues/2370)
+
+
+**Implemented New Features and Enhancements:**
+
+- Improve modal animation on Dialog [\#2378](https://github.com/primefaces/primereact/issues/2378)
+
+**Fixed Bugs:**
+
+- Calendar Panel closes on the panel's mouseup event [\#2369](https://github.com/primefaces/primereact/issues/2369)
+
+## [6.6.0](https://github.com/primefaces/primereact/tree/6.6.0) (2021-10-01)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.6.0-rc.1...6.6.0)
+
+**Implemented New Features and Enhancements:**
+
+- PrimeFlex 3 support for DataView [\#2332](https://github.com/primefaces/primereact/issues/2332)
+- Improve scrollbar style on BreadCrumb and TabMenu [\#2330](https://github.com/primefaces/primereact/issues/2330)
+
+**Fixed Bugs:**
+
+- Image component is missing in primereact.all.js [\#2329](https://github.com/primefaces/primereact/issues/2329)
+
+## [6.6.0-rc.1](https://github.com/primefaces/primereact/tree/6.6.0-rc.1) (2021-09-27)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/6.5.1...6.6.0-rc.1)
+
+**Implemented New Features and Enhancements:**
+
+- Improve Galleria Thumbnail animation [\#2326](https://github.com/primefaces/primereact/issues/2326)
+- Add trueValue-falseValue to Checkbox [\#2323](https://github.com/primefaces/primereact/issues/2323)
+- Add trueValue-falseValue to InputSwitch [\#2317](https://github.com/primefaces/primereact/issues/2317)
+- Modal layer enter-leave transition [\#2316](https://github.com/primefaces/primereact/issues/2316)
+- Make Dock component mobile friendly [\#2312](https://github.com/primefaces/primereact/issues/2312)
+- Set Paginator Page from InputNumber [\#2310](https://github.com/primefaces/primereact/issues/2310)
+- Tooltip: word wrap [\#2307](https://github.com/primefaces/primereact/issues/2307)
+- Tailwind Theme [\#2302](https://github.com/primefaces/primereact/issues/2302)
+- Scrollable feature for TabView Component [\#2298](https://github.com/primefaces/primereact/issues/2298)
+- New Component: Image [\#2297](https://github.com/primefaces/primereact/issues/2297)
+- Add p-inputwrapper class to InputNumber [\#2289](https://github.com/primefaces/primereact/issues/2289)
+- Add getFormatter method to InputNumber [\#2287](https://github.com/primefaces/primereact/issues/2287)
+- Add allowEmpty property to InputNumber [\#2285](https://github.com/primefaces/primereact/issues/2285)
+- InputNumber behaves odd when trying to insert fracitonal digits [\#2284](https://github.com/primefaces/primereact/issues/2284)
+- InputNumber: cannot insert fractional digits when minFractionDigits=0  [\#2283](https://github.com/primefaces/primereact/issues/2283)
+
+**Fixed Bugs:**
+
+- CurrentPageReport displays wrong value [\#2314](https://github.com/primefaces/primereact/issues/2314)
+- Filtered Dropdown unusable on Windows Tablet [\#2311](https://github.com/primefaces/primereact/issues/2311)
+- Material themes Surface Border Issue [\#2309](https://github.com/primefaces/primereact/issues/2309)
+- Dropdown scrolls top after reopened  [\#2308](https://github.com/primefaces/primereact/issues/2308)
+- Dropdown with filter bug selecting with arrow keys [\#2306](https://github.com/primefaces/primereact/issues/2306)
+- Incorrect Sizing due to filter input width of dropdown [\#2305](https://github.com/primefaces/primereact/issues/2305)
+- Overlay panel hide when clicking on a label inside of it [\#2304](https://github.com/primefaces/primereact/issues/2304)
+- Thumbnails are not displayed correctly on Galleria if numVisible is greater than the length of value  [\#2293](https://github.com/primefaces/primereact/issues/2293)
+- InputNumber: issues with decimal separator for some locales, 0s are added to input [\#2292](https://github.com/primefaces/primereact/issues/2292)
+- Negative sign in front of number is not possible for Finnish or Swedish locale [\#2291](https://github.com/primefaces/primereact/issues/2291)
+- Input number caret issue with negatives [\#2290](https://github.com/primefaces/primereact/issues/2290)
+- inputnumber : both prefix and currency Input error  [\#2288](https://github.com/primefaces/primereact/issues/2288)
+- InputNumber: setting "min" to anything greater than 0 implies "required" [\#2286](https://github.com/primefaces/primereact/issues/2286)
+- InputNumber input event returns wrong value [\#2282](https://github.com/primefaces/primereact/issues/2282)
+- Checkbox causes layout issues when used inside an overflow: auto div [\#2281](https://github.com/primefaces/primereact/issues/2281)
+- Table Header Checkbox not working when lazy loading enabled [\#2253](https://github.com/primefaces/primereact/issues/2253)
+- \[BUG\] 6.5.1 Toast - ContentClassName prop should be optional  [\#2247](https://github.com/primefaces/primereact/issues/2247)
+- InputNumber with min triggers onValueChange immediately if value is nully [\#2136](https://github.com/primefaces/primereact/issues/2136)
+
 ## [6.5.1](https://github.com/primefaces/primereact/tree/6.5.1) (2021-08-18)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.5.0...6.5.1)
@@ -9,7 +184,7 @@
 - Add StyleClass Component [\#2242](https://github.com/primefaces/primereact/issues/2242)
 - Inline style and style class for ToastMessage and its content [\#2236](https://github.com/primefaces/primereact/issues/2236)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Ripple animation is not working on components [\#2240](https://github.com/primefaces/primereact/issues/2240)
 - Dropdown keypress doesn't support Turkish characters [\#2217](https://github.com/primefaces/primereact/issues/2217)
@@ -41,7 +216,7 @@
 - Primereact should not act on the global style [\#1082](https://github.com/primefaces/primereact/issues/1082)
 - New Component: Terminal [\#472](https://github.com/primefaces/primereact/issues/472)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - When the container is scrolled using the keyboard on VirtualScroller, this behavior does not continue when new elements are loaded. [\#2196](https://github.com/primefaces/primereact/issues/2196)
 - \[bug\] Sidebar Close button ripple effect on opposite side rather than on the button  [\#2185](https://github.com/primefaces/primereact/issues/2185)
@@ -65,7 +240,7 @@
 - Add emptyMessage property to DataScroller [\#2141](https://github.com/primefaces/primereact/issues/2141)
 - Access to Quill object when using the Editor component [\#2122](https://github.com/primefaces/primereact/issues/2122)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - When clicking on the target element to open the confirmPopup, the browser's scroll moves [\#2142](https://github.com/primefaces/primereact/issues/2142)
 - Colors vars are not working [\#2126](https://github.com/primefaces/primereact/issues/2126)
@@ -79,7 +254,7 @@
 
 - New PrimeReact Build [\#2135](https://github.com/primefaces/primereact/issues/2135)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Tooltips closed on window resize after system keyboard appears on mobile devices [\#2140](https://github.com/primefaces/primereact/issues/2140)
 - Overlay components are not aligned correctly [\#2139](https://github.com/primefaces/primereact/issues/2139)
@@ -98,7 +273,7 @@
 - Add monthNavigatorTemplate and yearNavigatorTemplate properties to Calendar [\#2116](https://github.com/primefaces/primereact/issues/2116)
 - Toast center positioning enhancement [\#2108](https://github.com/primefaces/primereact/issues/2108)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - InputMask cannot read property 'length' of null [\#2113](https://github.com/primefaces/primereact/issues/2113)
 - Dropdown search crashes when no match with VirtualScrollar [\#2112](https://github.com/primefaces/primereact/issues/2112)
@@ -111,7 +286,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.3.2...6.4.0)
 
-**Breaking changes:**
+**Breaking Changes:**
 
 - Improve onFilterValueChange event on Tree [\#2037](https://github.com/primefaces/primereact/issues/2037)
 - FullCalendar component is deprecated [\#2092](https://github.com/primefaces/primereact/issues/2092)
@@ -143,7 +318,7 @@
 - Add filterValue and onFilterValueChange properties to TreeSelect [\#2033](https://github.com/primefaces/primereact/issues/2033)
 - Improve Tooltip alignment [\#1973](https://github.com/primefaces/primereact/issues/1973)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - The id property has no effect on Card [\#2105](https://github.com/primefaces/primereact/issues/2105)
 - Items are not aligned on BreadCrumb [\#2104](https://github.com/primefaces/primereact/issues/2104)
@@ -172,7 +347,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.3.1...6.3.2)
 
-**Breaking changes:**
+**Breaking Changes:**
 
 - Remove activeItem property from TabMenu [\#2015](https://github.com/primefaces/primereact/issues/2015)
 - Replace 'data' params name with 'value' for onContextMenuSelectionChange on DataTable [\#2021](https://github.com/primefaces/primereact/issues/2021)
@@ -191,7 +366,7 @@
 - Striped class is not applied to expanded rows on DataTable [\#1987](https://github.com/primefaces/primereact/issues/1987)
 - Improve type definitions for IDEs [\#1986](https://github.com/primefaces/primereact/issues/1986)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Multiselect item on 0 index is getting selected [\#2012](https://github.com/primefaces/primereact/issues/2012)
 - MultiSelect is not working nested value option [\#2011](https://github.com/primefaces/primereact/issues/2011)
@@ -218,7 +393,7 @@
 
 - Improve filled control on InputText [\#1977](https://github.com/primefaces/primereact/issues/1977)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - DataTable - EventParams - wrong interface attribute [\#1983](https://github.com/primefaces/primereact/issues/1983)
 - The optionDisabled property is wrongly typed [\#1982](https://github.com/primefaces/primereact/issues/1982)
@@ -231,7 +406,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.2.1...6.3.0)
 
-**Breaking changes:**
+**Breaking Changes:**
 
 - Improve type definitions on all components [\#1877](https://github.com/primefaces/primereact/issues/1877)
 
@@ -270,7 +445,7 @@
 - Use of "\[key: string\]: any;" in type definitions circumvents type safety [\#1615](https://github.com/primefaces/primereact/issues/1615)
 - OverlayPanel: incorrect type definitions for show/hide arguments [\#1356](https://github.com/primefaces/primereact/issues/1356)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Striped class is not working as expected on DataTable with expanded rows [\#1972](https://github.com/primefaces/primereact/issues/1972)
 - Touch event is not working on ColorPicker [\#1960](https://github.com/primefaces/primereact/issues/1960)
@@ -305,7 +480,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/6.2.0...6.2.1)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Overlay Components throw an exception with Next.js [\#1880](https://github.com/primefaces/primereact/issues/1880)
 
@@ -324,7 +499,7 @@
 - Improve close button style on Inplace [\#1861](https://github.com/primefaces/primereact/issues/1861)
 - Improve type definition of  completeMethod event on AutoComplete [\#1680](https://github.com/primefaces/primereact/issues/1680)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Datatable rows per page doesn't work [\#1870](https://github.com/primefaces/primereact/issues/1870)
 - Server side error because OverlayEventBus [\#1869](https://github.com/primefaces/primereact/issues/1869)
@@ -373,7 +548,7 @@
 - Add onBeforeEditorShow and onBeforeEditorHide callbacks to Column on DataTable with cell editing [\#589](https://github.com/primefaces/primereact/issues/589)
 - Add headerTemplate property to Panel [\#1858](https://github.com/primefaces/primereact/issues/1858)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - DataTable is not working with defaultSortOrder={-1} [\#1855](https://github.com/primefaces/primereact/issues/1855)
 - PanelMenu animation is not working as expected [\#1844](https://github.com/primefaces/primereact/issues/1844)
@@ -403,7 +578,7 @@
 - Improve PrimeReact components for React.StrictMode [\#1790](https://github.com/primefaces/primereact/issues/1790)
 - Improve rowEditor buttons on DataTable with editMode="row" [\#1788](https://github.com/primefaces/primereact/issues/1788)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - AutoComplete in FireFox does not pass focus on Tab [\#1798](https://github.com/primefaces/primereact/issues/1798)
 - Fullcalendar Week View Missing Vertical Lines [\#1797](https://github.com/primefaces/primereact/issues/1797)
@@ -437,7 +612,7 @@
 - Do not hide overlays on body scroll [\#1655](https://github.com/primefaces/primereact/issues/1655)
 - Add template property support to MenuModel API in all menu components [\#1635](https://github.com/primefaces/primereact/issues/1635)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Button link is invisible in material themes [\#1786](https://github.com/primefaces/primereact/issues/1786)
 - Inline Calendar doesn't display correctly with time/button bar  [\#1782](https://github.com/primefaces/primereact/issues/1782)
@@ -454,7 +629,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/5.0.2...6.0.0)
 
-**Breaking changes:**
+**Breaking Changes:**
 
 - Change the type of locale property on Calendar [\#1750](https://github.com/primefaces/primereact/issues/1750)
 - Change the import of PrimeReact class [\#1751](https://github.com/primefaces/primereact/issues/1751)
@@ -489,7 +664,7 @@
 - Add onKeyDown event to InputNumber [\#1695](https://github.com/primefaces/primereact/issues/1695)
 - Constants for PrimeIcons [\#1625](https://github.com/primefaces/primereact/issues/1625)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Chips throws a JS exception [\#1754](https://github.com/primefaces/primereact/issues/1754)
 - Typo in tabIndex property name [\#1710](https://github.com/primefaces/primereact/issues/1710)
@@ -502,7 +677,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/5.0.1...5.0.2)
 
-**Breaking changes:**
+**Breaking Changes:**
 - Change params of onEditorInit, onEditorSubmit, onEditorCancel and editorValidator callbacks on Column [\#1692](https://github.com/primefaces/primereact/issues/1692)
 
 **Implemented New Features and Enhancements:**
@@ -523,7 +698,7 @@
 - Add mediumRegex and strongRegex property to Password [\#1623](https://github.com/primefaces/primereact/issues/1623)
 - Add browser event param to editor callbacks on Datatable [\#1577](https://github.com/primefaces/primereact/issues/1577)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - DataView throws an exception when the last page is reached using Paginator [\#1691](https://github.com/primefaces/primereact/issues/1691)
 - DataTable edit not work \(Input disappears immediately after clicking cell\) in react-dom@17.0.1 [\#1685](https://github.com/primefaces/primereact/issues/1685)
@@ -552,7 +727,7 @@
 - Add paginatorDropdownAppendTo property to DataTable, TreeTable and DataView [\#1621](https://github.com/primefaces/primereact/issues/1621)
 - Tooltip doesn't close in scrollable containers [\#1607](https://github.com/primefaces/primereact/issues/1607)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Fullcalendar button styling issues [\#1633](https://github.com/primefaces/primereact/issues/1633)
 - TriStateCheckbox X icon not visible on Material themes [\#1630](https://github.com/primefaces/primereact/issues/1630)
@@ -580,7 +755,7 @@
 - Add panelClassName and panelStyle properties for appendable overlays [\#1459](https://github.com/primefaces/primereact/issues/1459)
 - TreeTable: expose the filter method for TypeScript [\#1435](https://github.com/primefaces/primereact/issues/1435)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Alignment issue on Scrollable TreeTable [\#1599](https://github.com/primefaces/primereact/issues/1599)
 - Alignment issue on Scrollable Datatable [\#1598](https://github.com/primefaces/primereact/issues/1598)
@@ -614,7 +789,7 @@
 - Add color property to ProgressBar [\#1457](https://github.com/primefaces/primereact/issues/1457)
 - NumberInput does not pass down validation attributes to input element. [\#1444](https://github.com/primefaces/primereact/issues/1444)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - The left and right arrow keys not working on input elements inside Tree [\#1559](https://github.com/primefaces/primereact/issues/1559)
 - Items in PanelMenu are highlighted wrongly with Material dark themes [\#1557](https://github.com/primefaces/primereact/issues/1557)
@@ -632,7 +807,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/4.2.2...5.0.0-rc.1)
 
-**Breaking changes:**
+**Breaking Changes:**
 
 - Change the values of position property on Dialog [\#1516](https://github.com/primefaces/primereact/issues/1516)
 - Rename iconsTemplate property to icons property on Dialog [\#1514](https://github.com/primefaces/primereact/issues/1514)
@@ -675,7 +850,7 @@
 - Remove browserslist, leave processing and transpilation to applications [\#1312](https://github.com/primefaces/primereact/issues/1312)
 - Custom content support for Button [\#1258](https://github.com/primefaces/primereact/issues/1258)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Global filter is not working with invalid values on TreeTable [\#1517](https://github.com/primefaces/primereact/issues/1517)
 - Captcha throws a JS exception [\#1509](https://github.com/primefaces/primereact/issues/1509)
@@ -705,7 +880,7 @@
 - ColorPicker: add missing input attributes [\#1323](https://github.com/primefaces/primereact/issues/1323)
 - Deprecate \*styleClass props in favor of \*className [\#1262](https://github.com/primefaces/primereact/issues/1262)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Tree filter with onToggle method doesn't work as expected [\#1390](https://github.com/primefaces/primereact/issues/1390)
 - Calendar navigator skips one month [\#1388](https://github.com/primefaces/primereact/issues/1388)
@@ -725,7 +900,7 @@
 - Remove filter method from ObjectUtils [\#1343](https://github.com/primefaces/primereact/issues/1343)
 - AutoComplete: selectedItemTemplate gets called for query [\#1296](https://github.com/primefaces/primereact/issues/1296)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Editable Dropdown is not working as expected  [\#1359](https://github.com/primefaces/primereact/issues/1359)
 - Dropdown throws an exception on console after filtering and keyboard navigation [\#1358](https://github.com/primefaces/primereact/issues/1358)
@@ -765,7 +940,7 @@
 - Not nullable `dataKey` in DropDown break `selectedOption` property [\#1286](https://github.com/primefaces/primereact/issues/1286)
 - Separator for Chips [\#1285](https://github.com/primefaces/primereact/issues/1285)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 - Dropdown checkValidity fails [\#1331](https://github.com/primefaces/primereact/issues/1331)
 - Calendar.showOtherMonths property not being used [\#1328](https://github.com/primefaces/primereact/issues/1328)
 - Disable prop on ToggleButton not working [\#1321](https://github.com/primefaces/primereact/issues/1321)
@@ -787,7 +962,7 @@
 
 - DataView: lazy loading implementation [\#1264](https://github.com/primefaces/primereact/issues/1264)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Multiple Sort doesn't work as expected in the DataTable if a sortable column has sortField and field properties [\#1279](https://github.com/primefaces/primereact/issues/1279)
 - Chips in disabled Autocomplete are not disabled [\#1278](https://github.com/primefaces/primereact/issues/1278)
@@ -811,7 +986,7 @@
 - resetFilter function for Dropdown [\#1249](https://github.com/primefaces/primereact/issues/1249)
 - Improve type definition for onChange of form components [\#1199](https://github.com/primefaces/primereact/issues/1199)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - DataTable scrollHeight doesn't calculate correctly with frozen columns and header groups [\#1261](https://github.com/primefaces/primereact/issues/1261)
 - Disabled TabPanel focussable with TAB-Key [\#1254](https://github.com/primefaces/primereact/issues/1254)
@@ -857,7 +1032,7 @@
 - DataTable Columns: Conditional reorder [\#1032](https://github.com/primefaces/primereact/issues/1032)
 - Datatable Columns: Conditional select [\#1031](https://github.com/primefaces/primereact/issues/1031)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Chips cover 100% although input is visually smaller [\#1241](https://github.com/primefaces/primereact/issues/1241)
 - Datatable doesn't change page when the last element on a page is removed. [\#1233](https://github.com/primefaces/primereact/issues/1233)
@@ -891,7 +1066,7 @@
 - Add editing support to the input field on Calendar [\#1141](https://github.com/primefaces/primereact/issues/1141)
 - New Component: Galleria [\#1105](https://github.com/primefaces/primereact/issues/1105)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Remove the legacy lifecycle method from Lightbox component [\#1200](https://github.com/primefaces/primereact/issues/1200)
 - The  disabled items can be focused in the Steps [\#1192](https://github.com/primefaces/primereact/issues/1192)
@@ -911,7 +1086,7 @@
 - Add removableSort property to DataTable [\#1142](https://github.com/primefaces/primereact/issues/1142)
 - Enhance Dialog Positioning [\#1138](https://github.com/primefaces/primereact/issues/1138)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Wrong property name on the propTypes definition of Dropdown  [\#1158](https://github.com/primefaces/primereact/issues/1158)
 - When the InputMask is focused, the mask disappears [\#1156](https://github.com/primefaces/primereact/issues/1156)
@@ -941,7 +1116,7 @@
 - Add maxSelectedLabels property to MultiSelect [\#1074](https://github.com/primefaces/primereact/issues/1074)
 - Passing of data-\* Attributes as Props [\#1073](https://github.com/primefaces/primereact/issues/1073)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - DomHandler functions throw NPE on components [\#1104](https://github.com/primefaces/primereact/issues/1104)
 - Growl messages from "bottom\*" is not displaying as expected [\#1095](https://github.com/primefaces/primereact/issues/1095)
@@ -956,7 +1131,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/3.3.1...3.3.2)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Table state is not working with columnResizeMode="expand" on DataTable [\#1061](https://github.com/primefaces/primereact/issues/1061)
 - Calendar component throws NPE after updating the value [\#1060](https://github.com/primefaces/primereact/issues/1060)
@@ -970,7 +1145,7 @@
 - Improve component styles on Luna, Nova and Rhea Themes [\#1052](https://github.com/primefaces/primereact/issues/1052)
 - Improve Carousel styles [\#1051](https://github.com/primefaces/primereact/issues/1051)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 -  Carousel is not working with 'primereact/carousel' shortcut [\#1049](https://github.com/primefaces/primereact/issues/1049)
 
@@ -987,7 +1162,7 @@
 - New Component: Carousel [\#1030](https://github.com/primefaces/primereact/issues/1030)
 - Add className support to SelectButtonItems [\#1019](https://github.com/primefaces/primereact/issues/1019)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - AutoComplete mode multiple ignores maxlength property [\#1045](https://github.com/primefaces/primereact/issues/1045)
 - The datatable is broken with scrollable and no columns settings [\#1044](https://github.com/primefaces/primereact/issues/1044)
@@ -1005,7 +1180,7 @@
 - Add keyboard support to DataTable with Checkbox selection [\#1005](https://github.com/primefaces/primereact/issues/1005)
 - Add row edit support to DataTable [\#809](https://github.com/primefaces/primereact/issues/809)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - DataTable with global filter and header checkbox selection select all records [\#1012](https://github.com/primefaces/primereact/issues/1012)
 - DataTable column headers not displaying in nested table [\#1009](https://github.com/primefaces/primereact/issues/1009)
@@ -1025,7 +1200,7 @@
 - Add tabIndex prop to Spinner [\#976](https://github.com/primefaces/primereact/issues/976)
 - Add tabIndex prop to RadioButton [\#975](https://github.com/primefaces/primereact/issues/975)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Wrong typings for the property of Spinner [\#1001](https://github.com/primefaces/primereact/issues/1001)
 - Export hide\(\) for ContextMenu in type definition file [\#1000](https://github.com/primefaces/primereact/issues/1000)
@@ -1052,7 +1227,7 @@
 - Add required prop to Checkbox [\#952](https://github.com/primefaces/primereact/issues/952)
 - Add shift key selection support to DataTable with multiple mode [\#934](https://github.com/primefaces/primereact/issues/934)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Calendar ButtonBar Clear button does not use clearButtonStyleClass prop [\#968](https://github.com/primefaces/primereact/issues/968)
 - Datatable rowGroup with rowSpan mode and pagination fails on page break [\#961](https://github.com/primefaces/primereact/issues/961)
@@ -1065,7 +1240,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/3.1.6...3.1.7)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Charts always redraw when they are updated [\#946](https://github.com/primefaces/primereact/issues/946)
 
@@ -1073,7 +1248,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/3.1.5...3.1.6)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - The ChartJs API is not imported correctly [\#945](https://github.com/primefaces/primereact/issues/945)
 - Inplace is not working with 'primereact/inplace' shortcut [\#943](https://github.com/primefaces/primereact/issues/943)
@@ -1091,7 +1266,7 @@
 - Add required, pattern and placeholder props to Spinner.  [\#920](https://github.com/primefaces/primereact/issues/920)
 - Add ariaCloseIconLabel prop to Dialog [\#916](https://github.com/primefaces/primereact/issues/916)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - When components are placed placed inside a label element clicking on the component fires the click event twice [\#940](https://github.com/primefaces/primereact/issues/940)
 - The hide method of Dropdown throws an exception on console [\#937](https://github.com/primefaces/primereact/issues/937)
@@ -1122,7 +1297,7 @@
 - Support for disabling dropdown item\(s\). [\#874](https://github.com/primefaces/primereact/issues/874)
 - Editable Dropdown should support maxLength [\#844](https://github.com/primefaces/primereact/issues/844)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Not able to set focus on Dropdown component [\#903](https://github.com/primefaces/primereact/issues/903)
 - Calendar time parsing broken for showSeconds == false [\#901](https://github.com/primefaces/primereact/issues/901)
@@ -1149,7 +1324,7 @@
 - Add ariaLabel and ariaLabelledBy properties to DropDown [\#855](https://github.com/primefaces/primereact/issues/855)
 - Add contentStyle and contentClassName props to Tree [\#842](https://github.com/primefaces/primereact/issues/842)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - OverlayPanel's icon is in the wrong position after window is resized [\#871](https://github.com/primefaces/primereact/issues/871)
 - Flipped OverlayPanel rendered behind browser [\#868](https://github.com/primefaces/primereact/issues/868)
@@ -1168,7 +1343,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/3.1.1...3.1.2)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - DataTable selection with uncontrolled sorting broken [\#830](https://github.com/primefaces/primereact/issues/830)
 
@@ -1187,7 +1362,7 @@
 - DataTable row selection slow with sortable columns [\#813](https://github.com/primefaces/primereact/issues/813)
 - Add onBlur and onFocus events to multiselect and chips [\#782](https://github.com/primefaces/primereact/issues/782)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - On Accordion, the disabled head can be focused on  [\#829](https://github.com/primefaces/primereact/issues/829)
 - Datatable property 'stateKey' is missing in types file [\#817](https://github.com/primefaces/primereact/issues/817)
@@ -1219,7 +1394,7 @@
 - TableState for DataTable [\#736](https://github.com/primefaces/primereact/issues/736)
 - Filtering for TreeTable [\#380](https://github.com/primefaces/primereact/issues/380)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Datatable toggle issue after reordering [\#774](https://github.com/primefaces/primereact/issues/774)
 - Inputtextarea autoresize invalid height issue after render [\#773](https://github.com/primefaces/primereact/issues/773)
@@ -1237,7 +1412,7 @@
 
 - Customizable editorValidatorEvent for IncellEditing [\#746](https://github.com/primefaces/primereact/issues/746)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Spinner arrow keys not working [\#743](https://github.com/primefaces/primereact/issues/743)
 - Toolbar of Editor Component with nova-dark theme does not render properly. [\#740](https://github.com/primefaces/primereact/issues/740)
@@ -1256,7 +1431,7 @@
 - Header and Footer templates for Calendar component [\#706](https://github.com/primefaces/primereact/issues/706)
 - MultiSelect - Support a fixed defaultLabel [\#674](https://github.com/primefaces/primereact/issues/674)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - InputSwitch focus visuals are missing [\#735](https://github.com/primefaces/primereact/issues/735)
 - DataTable edit throws error on route change [\#734](https://github.com/primefaces/primereact/issues/734)
@@ -1305,7 +1480,7 @@
 - Update to Babel 7 [\#682](https://github.com/primefaces/primereact/issues/682)
 - Improve Radio/Checkbox Accessibility [\#681](https://github.com/primefaces/primereact/issues/681)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - AutoComplete in multiple mode does not receive focus [\#713](https://github.com/primefaces/primereact/issues/713)
 - OrderList droppoints are not highlighted [\#708](https://github.com/primefaces/primereact/issues/708)
@@ -1320,7 +1495,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/2.0.0...2.0.1)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Align SplitButton Overlay with other overlays [\#667](https://github.com/primefaces/primereact/issues/667)
 - Standalone paginator causes replace is undefined error [\#666](https://github.com/primefaces/primereact/issues/666)
@@ -1340,7 +1515,7 @@
 - ProgressBar avoidable re-renders [\#597](https://github.com/primefaces/primereact/issues/597)
 - Feature request: Allow us to choose a different optionLabel to display selected items in MultiSelect [\#451](https://github.com/primefaces/primereact/issues/451)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Today cell is not highlighed in Calendar when selected [\#660](https://github.com/primefaces/primereact/issues/660)
 - Header checkbox fails with filtering [\#659](https://github.com/primefaces/primereact/issues/659)
@@ -1371,7 +1546,7 @@
 - Select a tree node with enter key [\#604](https://github.com/primefaces/primereact/issues/604)
 - Improve button focus visuals on Nova and Luna [\#602](https://github.com/primefaces/primereact/issues/602)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Dropdown throws error on hide [\#631](https://github.com/primefaces/primereact/issues/631)
 - AccordionTab title with custom HTML gives error [\#615](https://github.com/primefaces/primereact/issues/615)
@@ -1388,7 +1563,7 @@
 - Reimplement Slider [\#592](https://github.com/primefaces/primereact/issues/592)
 - New Component: DeferredContent [\#591](https://github.com/primefaces/primereact/issues/591)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Add disabled property to Slider [\#593](https://github.com/primefaces/primereact/issues/593)
 - Floating label for TextInput with number value fails [\#588](https://github.com/primefaces/primereact/issues/588)
@@ -1407,7 +1582,7 @@
 - Keyboard navigation for Tree [\#578](https://github.com/primefaces/primereact/issues/578)
 - Enhanced keyboard search for dropdown [\#577](https://github.com/primefaces/primereact/issues/577)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - DataTable sort issue with sortIcon [\#585](https://github.com/primefaces/primereact/issues/585)
 - AutoComplete does not update input when value prop changes [\#576](https://github.com/primefaces/primereact/issues/576)
@@ -1417,7 +1592,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/2.0.0-beta.6...2.0.0-beta.7)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Uncontrolled input text does not support floating labels [\#572](https://github.com/primefaces/primereact/issues/572)
 - VirtualScroll is broken [\#560](https://github.com/primefaces/primereact/issues/560)
@@ -1426,7 +1601,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/2.0.0-beta.5...2.0.0-beta.6)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Dialog mask has no index at initial display [\#571](https://github.com/primefaces/primereact/issues/571)
 - New Tree component: duplicate key error when 2 TreeNodes has same label [\#570](https://github.com/primefaces/primereact/issues/570)
@@ -1435,7 +1610,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/2.0.0-beta.4...2.0.0-beta.5)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Calendar warning with omission of onChange from InputText [\#569](https://github.com/primefaces/primereact/issues/569)
 
@@ -1451,7 +1626,7 @@
 - Integrate PrimeFlex Grid System [\#556](https://github.com/primefaces/primereact/issues/556)
 - className parameter unsupported by Spinner component [\#548](https://github.com/primefaces/primereact/issues/548)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Dialog resize fails [\#567](https://github.com/primefaces/primereact/issues/567)
 - Dialog resizer css is broken [\#566](https://github.com/primefaces/primereact/issues/566)
@@ -1484,7 +1659,7 @@
 - Property appendTo in menus [\#535](https://github.com/primefaces/primereact/issues/535)
 - Deprecate Free Themes in favor of Nova Free Theme Family [\#527](https://github.com/primefaces/primereact/issues/527)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Tooltip does not remove event listeners [\#542](https://github.com/primefaces/primereact/issues/542)
 - Accordion does not work with multiple controlled tabs [\#540](https://github.com/primefaces/primereact/issues/540)
@@ -1507,7 +1682,7 @@
 - Reimplement Calendar [\#504](https://github.com/primefaces/primereact/issues/504)
 - Update Schedule component to remove jQuery [\#476](https://github.com/primefaces/primereact/issues/476)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Slider shorthand import fails [\#511](https://github.com/primefaces/primereact/issues/511)
 - Error importing Column component [\#509](https://github.com/primefaces/primereact/issues/509)
@@ -1555,7 +1730,7 @@
 - Dialog should not derive visible state from props [\#452](https://github.com/primefaces/primereact/issues/452)
 - Add a 'closable' or 'dismissable' property to Sidebar for 'click outside' control. [\#377](https://github.com/primefaces/primereact/issues/377)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - InputMask can not read property 'bind' of undefined [\#490](https://github.com/primefaces/primereact/issues/490)
 - Dropdown with autoFocus prop throws a JS error [\#489](https://github.com/primefaces/primereact/issues/489)
@@ -1574,7 +1749,7 @@
 
 - Refactor Rating to remove usage of state [\#447](https://github.com/primefaces/primereact/issues/447)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Accordion onTabOpen-onTabClose does not trigger correctly [\#448](https://github.com/primefaces/primereact/issues/448)
 
@@ -1586,7 +1761,7 @@
 
 - Migrate to PrimeIcons [\#446](https://github.com/primefaces/primereact/issues/446)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - DataTable props updating issue [\#443](https://github.com/primefaces/primereact/issues/443)
 - OrganizationChart is not working with React 16.4+ [\#441](https://github.com/primefaces/primereact/issues/441)
@@ -1602,7 +1777,7 @@
 
 - Improve sort property on DataView [\#420](https://github.com/primefaces/primereact/issues/420)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - slotChar issue on InputMask [\#439](https://github.com/primefaces/primereact/issues/439)
 - Missing type definition for DropDownProps [\#436](https://github.com/primefaces/primereact/issues/436)
@@ -1629,7 +1804,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/1.5.2...1.5.3)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - onRowReorder missing from DataTable type definition [\#411](https://github.com/primefaces/primereact/issues/411)
 - Duplicate identifier 'number': DataScroller.d.ts [\#410](https://github.com/primefaces/primereact/issues/410)
@@ -1644,7 +1819,7 @@
 - Add sorting feature to TreeTable [\#400](https://github.com/primefaces/primereact/issues/400)
 - New mode to keyfilter to validate whole value [\#391](https://github.com/primefaces/primereact/issues/391)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - BodyCell className using headerClassName prop [\#407](https://github.com/primefaces/primereact/issues/407)
 - Typings missing for colorPicker component [\#405](https://github.com/primefaces/primereact/issues/405)
@@ -1668,7 +1843,7 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/1.5.0...1.5.1)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - placeholder not working on Chips component [\#374](https://github.com/primefaces/primereact/issues/374)
 - Tree doesn't update on external change [\#372](https://github.com/primefaces/primereact/issues/372)
@@ -1698,7 +1873,7 @@
 - Improve dialog positioning with Dynamic content [\#320](https://github.com/primefaces/primereact/issues/320)
 - Custom filter for Column of the DataTable [\#312](https://github.com/primefaces/primereact/issues/312)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Datatable column reorder may not always work correctly [\#338](https://github.com/primefaces/primereact/issues/338)
 - Ultima theme 1.4.2: icon buttons are cutted [\#317](https://github.com/primefaces/primereact/issues/317)
@@ -1730,7 +1905,7 @@
 - Checkbox and Radio should mark checked/onChange props as required [\#287](https://github.com/primefaces/primereact/issues/287)
 - DataTable pageLinkSize [\#276](https://github.com/primefaces/primereact/issues/276)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Dialog is displayed below topbar in showcase [\#284](https://github.com/primefaces/primereact/issues/284)
 - ResizableColumns fail inside Dialog [\#281](https://github.com/primefaces/primereact/issues/281)
@@ -1760,7 +1935,7 @@
 - Migrate to react-transition-group [\#259](https://github.com/primefaces/primereact/issues/259)
 - Calendar should consider props.disabled in shouldComponentUpdate [\#258](https://github.com/primefaces/primereact/issues/258)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Spinner does not accept decimal or thousand separator as input [\#270](https://github.com/primefaces/primereact/issues/270)
 - Calendar does not rerender when we change "disabled" prop [\#263](https://github.com/primefaces/primereact/issues/263)
@@ -1791,7 +1966,7 @@
 - Keyboard accessibility for Panel components [\#250](https://github.com/primefaces/primereact/issues/250)
 - Refactor FileUpload [\#247](https://github.com/primefaces/primereact/issues/247)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Missing dependency in primereact npm artifcat: 'react-addons-css-transition-group' [\#242](https://github.com/primefaces/primereact/issues/242)
 - AutoComplete dosn't accept spaces [\#249](https://github.com/primefaces/primereact/issues/249)
@@ -1843,7 +2018,7 @@
 - Animation for Accordion [\#182](https://github.com/primefaces/primereact/issues/182)
 - Unsortable option for DataTable columns [\#179](https://github.com/primefaces/primereact/issues/179)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Radio and Checkbox does pass props to super [\#231](https://github.com/primefaces/primereact/issues/231)
 - Dropdown Filter blocks keyboard navigation of items [\#227](https://github.com/primefaces/primereact/issues/227)
@@ -1885,7 +2060,7 @@
 - New Message component [\#159](https://github.com/primefaces/primereact/issues/159)
 - New ProgressSpinner Component [\#143](https://github.com/primefaces/primereact/issues/143)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - DataTable: `onLazyLoad` does not support `sortMode="multiple"` [\#157](https://github.com/primefaces/primereact/issues/157)
 - Password not trigger onChange event [\#177](https://github.com/primefaces/primereact/issues/177)
@@ -1921,7 +2096,7 @@
 - Virtual Scrolling For DataTable [\#79](https://github.com/primefaces/primereact/issues/79)
 - Percentage support for DataTable ScrollWidth and ScrollHeight [\#77](https://github.com/primefaces/primereact/issues/77)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Dropdown Menu in DataTable with resizableColumns [\#123](https://github.com/primefaces/primereact/issues/123)
 - Sorting does not work when you are using Column Group feature [\#115](https://github.com/primefaces/primereact/issues/115)
@@ -1947,7 +2122,7 @@
 - Customizable Paginator using Templating [\#88](https://github.com/primefaces/primereact/issues/88)
 - Column Reordering for DataTable [\#81](https://github.com/primefaces/primereact/issues/81)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Wrong documentation for BreadCrumb component [\#100](https://github.com/primefaces/primereact/issues/100)
 - Relative Position calculation is wrong [\#109](https://github.com/primefaces/primereact/issues/109)
@@ -1990,7 +2165,7 @@
 - Re implemented Dropdown component [\#76](https://github.com/primefaces/primereact/issues/76)
 - Re-implemented Dialog Component [\#75](https://github.com/primefaces/primereact/issues/75)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - PickList callbacks reference error [\#74](https://github.com/primefaces/primereact/issues/74)
 - The state of user is not updated after closing dialog [\#72](https://github.com/primefaces/primereact/issues/72)
@@ -2009,7 +2184,7 @@
 - Add id attribute to all components [\#70](https://github.com/primefaces/primereact/issues/70)
 - Inconsistent API to add CSS class with certain of your component [\#68](https://github.com/primefaces/primereact/issues/68)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - InputText and InputTextarea components aren't re-rendered when props are updated [\#69](https://github.com/primefaces/primereact/issues/69)
 
@@ -2064,7 +2239,7 @@
 - Implemented Captcha Component [\#32](https://github.com/primefaces/primereact/issues/32)
 - Tree Component [\#31](https://github.com/primefaces/primereact/issues/31)
 
-**Fixed bugs:**
+**Fixed Bugs:**
 
 - Accordion activeIndex doesn't work [\#30](https://github.com/primefaces/primereact/issues/30)
 - Dropdown onChange invoked on same item selection [\#28](https://github.com/primefaces/primereact/issues/28)

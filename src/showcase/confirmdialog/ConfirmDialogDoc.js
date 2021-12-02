@@ -294,10 +294,7 @@ const ConfirmDialogDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
-        <script src="https://unpkg.com/primereact/dialog/dialog.min.js"></script>
         <script src="https://unpkg.com/primereact/confirmdialog/confirmdialog.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
                 content: `
@@ -399,11 +396,19 @@ const ConfirmDialogDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { ConfirmDialog } from 'primereact/confirmdialog'; // To use <ConfirmDialog> tag
 import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/confirmdialog/confirmdialog.min.js"></script>
 `}
 </CodeHighlight>
 

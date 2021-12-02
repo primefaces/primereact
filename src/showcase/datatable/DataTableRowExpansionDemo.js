@@ -103,7 +103,7 @@ export class DataTableRowExpansionDemo extends Component {
         return (
             <div className="orders-subtable">
                 <h5>Orders for {data.name}</h5>
-                <DataTable value={data.orders}>
+                <DataTable value={data.orders} responsiveLayout="scroll">
                     <Column field="id" header="Id" sortable></Column>
                     <Column field="customer" header="Customer" sortable></Column>
                     <Column field="date" header="Date" sortable></Column>
@@ -138,7 +138,7 @@ export class DataTableRowExpansionDemo extends Component {
 
                     <div className="card">
                         <DataTable value={this.state.products} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
-                            onRowExpand={this.onRowExpand} onRowCollapse={this.onRowCollapse}
+                            onRowExpand={this.onRowExpand} onRowCollapse={this.onRowCollapse} responsiveLayout="scroll"
                             rowExpansionTemplate={this.rowExpansionTemplate} dataKey="id" header={header}>
                             <Column expander style={{ width: '3em' }} />
                             <Column field="name" header="Name" sortable />
@@ -267,7 +267,7 @@ export class DataTableRowExpansionDemo extends Component {
         return (
             <div className="orders-subtable">
                 <h5>Orders for {data.name}</h5>
-                <DataTable value={data.orders}>
+                <DataTable value={data.orders} responsiveLayout="scroll">
                     <Column field="id" header="Id" sortable></Column>
                     <Column field="customer" header="Customer" sortable></Column>
                     <Column field="date" header="Date" sortable></Column>
@@ -293,7 +293,7 @@ export class DataTableRowExpansionDemo extends Component {
 
                 <div className="card">
                     <DataTable value={this.state.products} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
-                        onRowExpand={this.onRowExpand} onRowCollapse={this.onRowCollapse}
+                        onRowExpand={this.onRowExpand} onRowCollapse={this.onRowCollapse} responsiveLayout="scroll"
                         rowExpansionTemplate={this.rowExpansionTemplate} dataKey="id" header={header}>
                         <Column expander style={{ width: '3em' }} />
                         <Column field="name" header="Name" sortable />
@@ -396,7 +396,7 @@ const DataTableRowExpansionDemo = () => {
         return (
             <div className="orders-subtable">
                 <h5>Orders for {data.name}</h5>
-                <DataTable value={data.orders}>
+                <DataTable value={data.orders} responsiveLayout="scroll">
                     <Column field="id" header="Id" sortable></Column>
                     <Column field="customer" header="Customer" sortable></Column>
                     <Column field="date" header="Date" sortable></Column>
@@ -421,7 +421,7 @@ const DataTableRowExpansionDemo = () => {
 
             <div className="card">
                 <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
-                    onRowExpand={onRowExpand} onRowCollapse={onRowCollapse}
+                    onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} responsiveLayout="scroll"
                     rowExpansionTemplate={rowExpansionTemplate} dataKey="id" header={header}>
                     <Column expander style={{ width: '3em' }} />
                     <Column field="name" header="Name" sortable />
@@ -523,7 +523,7 @@ const DataTableRowExpansionDemo = () => {
         return (
             <div className="orders-subtable">
                 <h5>Orders for {data.name}</h5>
-                <DataTable value={data.orders}>
+                <DataTable value={data.orders} responsiveLayout="scroll">
                     <Column field="id" header="Id" sortable></Column>
                     <Column field="customer" header="Customer" sortable></Column>
                     <Column field="date" header="Date" sortable></Column>
@@ -548,7 +548,7 @@ const DataTableRowExpansionDemo = () => {
 
             <div className="card">
                 <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
-                    onRowExpand={onRowExpand} onRowCollapse={onRowCollapse}
+                    onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} responsiveLayout="scroll"
                     rowExpansionTemplate={rowExpansionTemplate} dataKey="id" header={header}>
                     <Column expander style={{ width: '3em' }} />
                     <Column field="name" header="Name" sortable />
@@ -572,6 +572,7 @@ const DataTableRowExpansionDemo = () => {
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/panel/panel.min.js"></script>
@@ -661,7 +662,7 @@ const DataTableRowExpansionDemo = () => {
         return (
             <div className="orders-subtable">
                 <h5>Orders for {data.name}</h5>
-                <DataTable value={data.orders}>
+                <DataTable value={data.orders} responsiveLayout="scroll">
                     <Column field="id" header="Id" sortable></Column>
                     <Column field="customer" header="Customer" sortable></Column>
                     <Column field="date" header="Date" sortable></Column>
@@ -686,7 +687,7 @@ const DataTableRowExpansionDemo = () => {
 
             <div className="card">
                 <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
-                    onRowExpand={onRowExpand} onRowCollapse={onRowCollapse}
+                    onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} responsiveLayout="scroll"
                     rowExpansionTemplate={rowExpansionTemplate} dataKey="id" header={header}>
                     <Column expander style={{ width: '3em' }} />
                     <Column field="name" header="Name" sortable />

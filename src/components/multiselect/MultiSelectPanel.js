@@ -5,6 +5,7 @@ import { Portal } from '../portal/Portal';
 import { MultiSelectHeader } from './MultiSelectHeader';
 import { MultiSelectItem } from './MultiSelectItem';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
+import { localeOption } from '../api/Api';
 
 class MultiSelectPanelComponent extends Component {
 
@@ -77,7 +78,7 @@ class MultiSelectPanelComponent extends Component {
     }
 
     renderEmptyFilter() {
-        const emptyFilterMessage = ObjectUtils.getJSXElement(this.props.emptyFilterMessage, this.props);
+        const emptyFilterMessage = ObjectUtils.getJSXElement(this.props.emptyFilterMessage, this.props) || localeOption('emptyFilterMessage');
         return (
             <li className="p-multiselect-empty-message">
                 {emptyFilterMessage}
@@ -137,7 +138,7 @@ class MultiSelectPanelComponent extends Component {
                     const content = this.isEmptyFilter() ? this.renderEmptyFilter() : options.children;
 
                     return (
-                        <ul ref={options.ref} className={className} role="listbox" aria-multiselectable>
+                        <ul ref={options.contentRef} className={className} role="listbox" aria-multiselectable>
                             {content}
                         </ul>
                     );

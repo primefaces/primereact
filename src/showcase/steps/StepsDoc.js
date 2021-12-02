@@ -185,7 +185,6 @@ const StepsDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./StepsDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/steps/steps.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>
@@ -302,10 +301,18 @@ const StepsDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
-import {Steps} from 'primereact/steps';
+import { Steps } from 'primereact/steps';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/steps/steps.min.js"></script>
 `}
 </CodeHighlight>
                         <h5>MenuItem API</h5>

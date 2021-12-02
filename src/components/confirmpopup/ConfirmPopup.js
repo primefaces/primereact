@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler, IconUtils } from '../utils/Utils';
 import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { localeOption } from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 
@@ -73,9 +73,9 @@ export class ConfirmPopup extends Component {
         message: PropTypes.any,
         rejectLabel: PropTypes.string,
         acceptLabel: PropTypes.string,
-        icon: PropTypes.string,
-        rejectIcon: PropTypes.string,
-        acceptIcon: PropTypes.string,
+        icon: PropTypes.any,
+        rejectIcon: PropTypes.any,
+        acceptIcon: PropTypes.any,
         rejectClassName: PropTypes.string,
         acceptClassName: PropTypes.string,
         className: PropTypes.string,
@@ -161,7 +161,7 @@ export class ConfirmPopup extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.visible && !DomHandler.isAndroid()) {
+                if (this.state.visible && !DomHandler.isTouchDevice()) {
                     this.hide();
                 }
             };
@@ -235,7 +235,7 @@ export class ConfirmPopup extends Component {
     }
 
     onEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current);
+        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         this.align();
     }
 
@@ -309,12 +309,11 @@ export class ConfirmPopup extends Component {
     }
 
     renderContent() {
-        const iconClassName = classNames('p-confirm-popup-icon', this.props.icon);
         const message = ObjectUtils.getJSXElement(this.props.message, this.props);
 
         return (
             <div className="p-confirm-popup-content">
-                <i className={iconClassName} />
+                {IconUtils.getJSXIcon(this.props.icon, { className: 'p-confirm-popup-icon' }, { props: this.props })}
                 <span className="p-confirm-popup-message">{message}</span>
             </div>
         );

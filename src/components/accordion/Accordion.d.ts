@@ -1,10 +1,14 @@
 import * as React from 'react';
+import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/Utils';
 
 type AccordionTabHeaderTemplateType = React.ReactNode | ((props: AccordionTabProps) => React.ReactNode);
 
 interface AccordionTabProps {
     header?: React.ReactNode;
     disabled?: boolean;
+    style?: object;
+    className?: string;
     headerStyle?: object;
     headerClassName?: string;
     headerTemplate?: AccordionTabHeaderTemplateType;
@@ -27,9 +31,9 @@ export interface AccordionProps {
     className?: string;
     style?: object;
     multiple?: boolean;
-    expandIcon?: string;
-    collapseIcon?: string;
-    transitionOptions?: object;
+    expandIcon?: IconType<AccordionProps>;
+    collapseIcon?: IconType<AccordionProps>;
+    transitionOptions?: CSSTransitionProps;
     onTabOpen?(e: AccordionEventParams): void;
     onTabClose?(e: AccordionEventParams): void;
     onTabChange?(e: AccordionEventParams): void;

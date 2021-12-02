@@ -13,16 +13,41 @@ PrimeReact is a rich set of open source UI Components for React. See [PrimeReact
 PrimeReact is available at npm, if you have an existing application run the following command to download it to your project.
 
 ```
-npm install primereact --save
-npm install primeicons --save
+npm install primereact
+npm install primeicons
+```
+or
+
+```
+yarn add primereact
+yarn add primeicons
 ```
 
 ## Import
 
+#### Module
 ```javascript
-//import {ComponentName} from 'primereact/{componentname}';
-import {Dialog} from 'primereact/dialog';
-import {Accordion,AccordionTab} from 'primereact/accordion';
+//import { ComponentName } from 'primereact/{componentname}';
+import { Dialog } from 'primereact/dialog';
+import { Accordion, AccordionTab } from 'primereact/accordion';
+```
+
+#### CDN
+
+```javascript
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/accordion/accordion.min.js"></script>
+//<script src="https://unpkg.com/primereact/{componentname}/{componentname}.min.js"></script>
+```
+
+```javascript
+const { Dialog } = primereact.dialog;
+const { Accordion, AccordionTab } = primereact.accordion;
+```
+
+Import all components and structures
+```javascript
+<script src="https://unpkg.com/primereact/primereact.all.min.js"></script>
 ```
 
 ## Dependencies
@@ -31,12 +56,12 @@ Majority of PrimeReact components (95%) are native and there are some exceptions
 
 In addition, components require PrimeIcons for icons and react-transition-group for animations.
 
-```json
+```javascript
 dependencies: {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-transition-group": "^4.4.1",
-    "primeicons": "^4.1.0"
+    "primeicons": "^5.0.0"
 }
 ```
 
@@ -44,7 +69,7 @@ dependencies: {
 The css dependencies are as follows, note that you may change the theme with another one of your choice.
 
 ```
-primereact/resources/themes/saga-blue/theme.css
+primereact/resources/themes/lara-light-indigo/theme.css
 primereact/resources/primereact.min.css
 primeicons/primeicons.css
 ```
@@ -52,7 +77,7 @@ primeicons/primeicons.css
 If you are using a bundler such as webpack with a css loader you may also import them to your main application component, an example from create-react-app would be.
 
 ```javascript
-import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 ```

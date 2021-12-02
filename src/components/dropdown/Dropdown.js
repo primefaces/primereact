@@ -1,10 +1,10 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, FilterUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
 import { DropdownPanel } from './DropdownPanel';
 import { tip } from '../tooltip/Tooltip';
 import { OverlayService } from '../overlayservice/OverlayService';
-import PrimeReact from '../api/Api';
+import PrimeReact, { FilterService } from '../api/Api';
 
 export class Dropdown extends Component {
 
@@ -31,8 +31,8 @@ export class Dropdown extends Component {
         filterMatchMode: 'contains',
         filterPlaceholder: null,
         filterLocale: undefined,
-        emptyMessage: 'No records found',
-        emptyFilterMessage: 'No results found',
+        emptyMessage: null,
+        emptyFilterMessage: null,
         editable: false,
         placeholder: null,
         required: false,
@@ -631,17 +631,18 @@ export class Dropdown extends Component {
     }
 
     onOverlayEnter(callback) {
-        ZIndexUtils.set('overlay', this.overlayRef.current);
+        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         this.alignOverlay();
         callback && callback();
     }
 
     onOverlayEntered(callback) {
+        callback && callback();
+
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
 
-        callback && callback();
         this.props.onShow && this.props.onShow();
     }
 
@@ -733,7 +734,7 @@ export class Dropdown extends Component {
     }
 
     isClearClicked(event) {
-        return DomHandler.hasClass(event.target, 'p-dropdown-clear-icon')
+        return DomHandler.hasClass(event.target, 'p-dropdown-clear-icon') || DomHandler.hasClass(event.target, 'p-dropdown-filter-clear-icon');
     }
 
     updateEditableLabel(option) {
@@ -782,15 +783,19 @@ export class Dropdown extends Component {
         return this.inputRef.current.checkValidity();
     }
 
+    isLazy() {
+        return this.props.virtualScrollerOptions && this.props.virtualScrollerOptions.lazy;
+    }
+
     getVisibleOptions() {
-        if (this.hasFilter()) {
+        if (this.hasFilter() && !this.isLazy()) {
             let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale)
             let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
 
             if (this.props.optionGroupLabel) {
                 let filteredGroups = [];
                 for (let optgroup of this.props.options) {
-                    let filteredSubOptions = FilterUtils.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+                    let filteredSubOptions = FilterService.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
                     if (filteredSubOptions && filteredSubOptions.length) {
                         filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
                     }
@@ -798,7 +803,7 @@ export class Dropdown extends Component {
                 return filteredGroups;
             }
             else {
-                return FilterUtils.filter(this.props.options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+                return FilterService.filter(this.props.options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
             }
         }
         else {
@@ -921,7 +926,7 @@ export class Dropdown extends Component {
     }
 
     renderLabel(selectedOption) {
-        const label = selectedOption ? this.getOptionLabel(selectedOption) : null;
+        const label = ObjectUtils.isNotEmpty(selectedOption) ? this.getOptionLabel(selectedOption) : null;
 
         if (this.props.editable) {
             let value = label || this.props.value || '';
@@ -973,6 +978,7 @@ export class Dropdown extends Component {
         });
         let visibleOptions = this.getVisibleOptions();
         let selectedOption = this.getSelectedOption();
+        let appendTo = this.props.appendTo || PrimeReact.appendTo;
 
         let hiddenSelect = this.renderHiddenSelect(selectedOption);
         let keyboardHelper = this.renderKeyboardHelper();
@@ -988,7 +994,7 @@ export class Dropdown extends Component {
                 {labelElement}
                 {clearIcon}
                 {dropdownIcon}
-                <DropdownPanel ref={this.overlayRef} visibleOptions={visibleOptions} {...this.props} onClick={this.onPanelClick} onOptionClick={this.onOptionClick}
+                <DropdownPanel ref={this.overlayRef} visibleOptions={visibleOptions} {...this.props} appendTo={appendTo} onClick={this.onPanelClick} onOptionClick={this.onOptionClick}
                     filterValue={this.state.filter} hasFilter={this.hasFilter} onFilterClearIconClick={this.onFilterClearIconClick} onFilterInputKeyDown={this.onFilterInputKeyDown} onFilterInputChange={this.onFilterInputChange}
                     getOptionLabel={this.getOptionLabel} getOptionRenderKey={this.getOptionRenderKey} isOptionDisabled={this.isOptionDisabled}
                     getOptionGroupChildren={this.getOptionGroupChildren} getOptionGroupLabel={this.getOptionGroupLabel} getOptionGroupRenderKey={this.getOptionGroupRenderKey}

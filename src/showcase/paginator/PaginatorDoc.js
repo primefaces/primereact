@@ -629,14 +629,9 @@ const PaginatorDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./PaginatorDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
-        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
-        <script src="https://unpkg.com/primereact/slider/slider.min.js"></script>
-        <script src="https://unpkg.com/primereact/tooltip/tooltip.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/slider/slider.min.js"></script>`,
                 content: `
 const { useEffect, useState } = React;
 const { Paginator } = primereact.paginator;
@@ -834,10 +829,6 @@ const PaginatorDemo = () => {
         this.extFiles = {
             'demo/PaginatorDemo.css': {
                 content: `
-.paginator-demo .p-button.p-button-icon-only {
-    border-radius: 0;
-}
-
 .paginator-demo .image-gallery {
     text-align: center;
     padding: 1rem;
@@ -856,10 +847,18 @@ const PaginatorDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Paginator } from 'primereact/paginator';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
 `}
 </CodeHighlight>
 

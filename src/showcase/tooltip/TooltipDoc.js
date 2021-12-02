@@ -97,6 +97,16 @@ export class TooltipDemo extends Component {
                         <Button className="custom-tooltip-btn" type="button" label="Save" icon="pi pi-check" />
                     </div>
 
+                    <h5>Disabled Elements</h5>
+                    <div className="p-d-flex p-ai-center">
+                        <Tooltip target=".disabled-button" />
+                        <span className="disabled-button p-mr-2" data-pr-tooltip="A Disabled Button">
+                            <Button type="button" label="Save" icon="pi pi-check" disabled />
+                        </span>
+
+                        <Button type="button" label="Save" icon="pi pi-check" disabled tooltip="A Disabled Button" tooltipOptions={{ showOnDisabled: true }} />
+                    </div>
+
                     <h5>Target</h5>
                     <div className="p-d-flex p-ai-center">
                         <Tooltip target=".custom-target-icon" />
@@ -206,6 +216,16 @@ const TooltipDemo = () => {
                     <Button className="custom-tooltip-btn" type="button" label="Save" icon="pi pi-check" />
                 </div>
 
+                <h5>Disabled Elements</h5>
+                <div className="p-d-flex p-ai-center">
+                    <Tooltip target=".disabled-button" />
+                    <span className="disabled-button p-mr-2" data-pr-tooltip="A Disabled Button">
+                        <Button type="button" label="Save" icon="pi pi-check" disabled />
+                    </span>
+
+                    <Button type="button" label="Save" icon="pi pi-check" disabled tooltip="A Disabled Button" tooltipOptions={{ showOnDisabled: true }} />
+                </div>
+
                 <h5>Target</h5>
                 <div className="p-d-flex p-ai-center">
                     <Tooltip target=".custom-target-icon" />
@@ -312,6 +332,16 @@ const TooltipDemo = () => {
                     </Tooltip>
 
                     <Button className="custom-tooltip-btn" type="button" label="Save" icon="pi pi-check" />
+                </div>
+
+                <h5>Disabled Elements</h5>
+                <div className="p-d-flex p-ai-center">
+                    <Tooltip target=".disabled-button" />
+                    <span className="disabled-button p-mr-2" data-pr-tooltip="A Disabled Button">
+                        <Button type="button" label="Save" icon="pi pi-check" disabled />
+                    </span>
+
+                    <Button type="button" label="Save" icon="pi pi-check" disabled tooltip="A Disabled Button" tooltipOptions={{ showOnDisabled: true }} />
                 </div>
 
                 <h5>Target</h5>
@@ -572,6 +602,19 @@ import { Tooltip } from 'primereact/tooltip';
 `}
 </CodeHighlight>
 
+                        <h5>Disabled Elements</h5>
+                        <p>By default disabled elements like <i>button</i> do not trigger user interactions. So for such issues, a disabled element is usually wrapped with an html element like span and the Tooltip wrapper is set to the element.
+                        If this operation is requested by the Tooltip component, the <i>showOnDisabled</i> property can be used. This is an optional use.</p>
+<CodeHighlight>
+{`
+<Tooltip target=".disabled-button" />
+<span className="disabled-button" data-pr-tooltip="A Disabled Button">
+    <Button type="button" label="Save" icon="pi pi-check" disabled />
+</span>
+
+<Button type="button" label="Save" icon="pi pi-check" disabled tooltip="A Disabled Button" tooltipOptions={{ showOnDisabled: true }} />
+`}
+</CodeHighlight>
                         <h5>Tooltip Options</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
@@ -703,6 +746,12 @@ import { Tooltip } from 'primereact/tooltip';
                                         <td>boolean</td>
                                         <td>true</td>
                                         <td>Whether to hide tooltip when hovering over tooltip content.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>showOnDisabled</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Whether to show tooltip for disabled elements.</td>
                                     </tr>
                                     <tr>
                                         <td>onBeforeShow</td>
@@ -861,6 +910,12 @@ import { Tooltip } from 'primereact/tooltip';
                                         <td>boolean</td>
                                         <td>true</td>
                                         <td>Whether to hide tooltip when hovering over tooltip content.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>data-pr-showondisabled</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Whether to show tooltip for disabled elements.</td>
                                     </tr>
                                 </tbody>
                             </table>

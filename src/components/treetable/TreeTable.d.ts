@@ -19,14 +19,21 @@ type TreeTableFilterMatchModeType = 'startsWith' | 'contains' | 'endsWith' | 'eq
 
 type TreeTableGlobalFilterType = string | undefined | null;
 
-type TreeTableSelectionKeys = string | TreeTableSelectionKeysType | undefined | null;
+type TreeTableSelectionKeys = string | TreeTableSelectionKeysType | TreeTableSelectionKeysType[] | undefined | null;
+
+type TreeTableSelectionKeyType = boolean | TreeTableCheckboxSelectionKeyType;
 
 type TreeTableFilterModeType = 'lenient' | 'strict';
 
 type TreeTableAppendToType = 'self' | HTMLElement | undefined | null;
 
 interface TreeTableSelectionKeysType {
-    [key: string]: boolean;
+    [key: string]: TreeTableSelectionKeyType;
+}
+
+interface TreeTableCheckboxSelectionKeyType {
+    checked?: boolean;
+    partialChecked?: boolean;
 }
 
 type TreeTableExpandedKeysType = {

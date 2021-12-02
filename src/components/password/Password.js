@@ -191,7 +191,7 @@ export class Password extends Component {
     }
 
     onOverlayEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current);
+        ZIndexUtils.set('overlay', this.overlayRef.current,  PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         this.alignOverlay();
     }
 
@@ -340,7 +340,7 @@ export class Password extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.overlayVisible && !DomHandler.isAndroid()) {
+                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
                     this.hideOverlay();
                 }
             };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import {ObjectUtils, classNames, IconUtils} from '../utils/Utils';
 
 export class Avatar extends Component {
 
@@ -20,7 +20,7 @@ export class Avatar extends Component {
 
     static propTypes = {
         label: PropTypes.string,
-        icon: PropTypes.string,
+        icon: PropTypes.any,
         image: PropTypes.string,
         size: PropTypes.string,
         shape: PropTypes.string,
@@ -37,8 +37,7 @@ export class Avatar extends Component {
             return <span className="p-avatar-text">{this.props.label}</span>;
         }
         else if (this.props.icon) {
-            const iconClassName = classNames('p-avatar-icon', this.props.icon);
-            return <span className={iconClassName}></span>;
+            return IconUtils.getJSXIcon(this.props.icon, { className: 'p-avatar-icon' }, { props: this.props });
         }
         else if (this.props.image) {
             const onError = (e) => {

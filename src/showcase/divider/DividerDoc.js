@@ -479,11 +479,8 @@ const DividerDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/divider/divider.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
-        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/divider/divider.min.js"></script>`,
                 content: `
 const { useEffect, useState } = React;
 const { Divider } = primereact.divider;
@@ -645,12 +642,21 @@ const DividerDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                    <h5>Import</h5>
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Divider } from 'primereact/divider';
 `}
 </CodeHighlight>
+
+                    <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/divider/divider.min.js"></script>
+`}
+</CodeHighlight>
+
                 <h5>Getting Started</h5>
 				<p>Divider has two orientations defined with the <i>layout</i> property, default is "horizontal" and the alternative is "vertical".</p>
 <CodeHighlight>

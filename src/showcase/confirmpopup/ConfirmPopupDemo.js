@@ -57,7 +57,7 @@ export class ConfirmPopupDemo extends Component {
                     <AppInlineHeader changelogText="confirmPopup">
                         <h1>ConfirmPopup</h1>
                         <p>ConfirmPopup displays a confirmation overlay displayed relatively to its target.</p>
-                    </AppInlineHeader> 
+                    </AppInlineHeader>
                     <AppDemoActions github="confirmpopup/ConfirmPopupDemo.js" />
                 </div>
 

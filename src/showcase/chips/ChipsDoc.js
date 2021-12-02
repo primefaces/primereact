@@ -132,7 +132,6 @@ const ChipsDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/chips/chips.min.js"></script>`,
                 content: `
@@ -182,10 +181,18 @@ const ChipsDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
-import {Chips} from 'primereact/chips';
+import { Chips } from 'primereact/chips';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/chips/chips.min.js"></script>
 `}
 </CodeHighlight>
 
@@ -266,6 +273,18 @@ customChip(item) {
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>When present, it specifies that the element should be disabled.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>readOnly</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When present, it specifies that the element should be read-only.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>removable</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether an item is removable.</td>
                                     </tr>
                                     <tr>
                                         <td>style</td>

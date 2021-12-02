@@ -50,7 +50,7 @@ export class TreeTableTemplatingDemo extends Component {
                             <Column field="name" header="Name" expander></Column>
                             <Column field="size" header="Size"></Column>
                             <Column field="type" header="Type"></Column>
-                            <Column body={this.actionTemplate} style={{ textAlign: 'center', width: '8em' }} />
+                            <Column body={this.actionTemplate} style={{ textAlign: 'center', width: '10rem' }} />
                         </TreeTable>
                     </div>
                 </div>
@@ -109,7 +109,7 @@ export class TreeTableTemplatingDemo extends Component {
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
-                        <Column body={this.actionTemplate} style={{ textAlign: 'center', width: '8em' }} />
+                        <Column body={this.actionTemplate} style={{ textAlign: 'center', width: '10rem' }} />
                     </TreeTable>
                 </div>
             </div>
@@ -152,7 +152,7 @@ const TreeTableTemplatingDemo = () => {
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>
-                    <Column body={actionTemplate} style={{ textAlign: 'center', width: '8em' }} />
+                    <Column body={actionTemplate} style={{ textAlign: 'center', width: '10rem' }} />
                 </TreeTable>
             </div>
         </div>
@@ -194,7 +194,7 @@ const TreeTableTemplatingDemo = () => {
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>
-                    <Column body={actionTemplate} style={{ textAlign: 'center', width: '8em' }} />
+                    <Column body={actionTemplate} style={{ textAlign: 'center', width: '10rem' }} />
                 </TreeTable>
             </div>
         </div>
@@ -243,7 +243,7 @@ const TreeTableTemplatingDemo = () => {
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>
-                    <Column body={actionTemplate} style={{ textAlign: 'center', width: '8em' }} />
+                    <Column body={actionTemplate} style={{ textAlign: 'center', width: '10rem' }} />
                 </TreeTable>
             </div>
         </div>

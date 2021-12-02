@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import {DomHandler, ObjectUtils, classNames, IconUtils} from '../utils/Utils';
 import { Dialog } from '../dialog/Dialog';
 import { Button } from '../button/Button';
 import { localeOption } from '../api/Api';
@@ -67,9 +67,9 @@ export class ConfirmDialog extends Component {
         message: PropTypes.any,
         rejectLabel: PropTypes.string,
         acceptLabel: PropTypes.string,
-        icon: PropTypes.string,
-        rejectIcon: PropTypes.string,
-        acceptIcon: PropTypes.string,
+        icon: PropTypes.any,
+        rejectIcon: PropTypes.any,
+        acceptIcon: PropTypes.any,
         rejectClassName: PropTypes.string,
         acceptClassName: PropTypes.string,
         appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -167,15 +167,13 @@ export class ConfirmDialog extends Component {
 
     renderElement() {
         const className = classNames('p-confirm-dialog', this.props.className);
-        const iconClassName = classNames('p-confirm-dialog-icon', this.props.icon);
-
         const dialogProps = ObjectUtils.findDiffKeys(this.props, ConfirmDialog.defaultProps);
         const message = ObjectUtils.getJSXElement(this.props.message, this.props);
         const footer = this.renderFooter();
 
         return (
             <Dialog visible={this.state.visible} {...dialogProps} className={className} footer={footer} onHide={this.hide} breakpoints={this.props.breakpoints}>
-                <i className={iconClassName} />
+                {IconUtils.getJSXIcon(this.props.icon, { className: 'p-confirm-dialog-icon' }, { props: this.props })}
                 <span className="p-confirm-dialog-message">{message}</span>
             </Dialog>
         );

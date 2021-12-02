@@ -1,9 +1,10 @@
 import * as React from 'react';
 import TreeNode from '../treenode';
+import { CSSTransitionProps } from '../csstransition';
 
 type TreeSelectSelectionModeType = 'single' | 'multiple' | 'checkbox';
 
-type TreeSelectSelectionKeys = string | TreeSelectSelectionKeysType | undefined | null;
+type TreeSelectSelectionKeys = string | TreeSelectSelectionKeysType | TreeSelectSelectionKeysType[] | undefined | null;
 
 type TreeSelectDisplayType = 'comma' | 'chip';
 
@@ -42,8 +43,15 @@ interface TreeSelectChangeParams {
     target: TreeSelectChangeTargetOptions;
 }
 
+type TreeSelectSelectionKeyType = boolean | TreeSelectCheckboxSelectionKeyType;
+
 interface TreeSelectSelectionKeysType {
-    [key: string]: boolean;
+    [key: string]: TreeSelectSelectionKeyType;
+}
+
+interface TreeSelectCheckboxSelectionKeyType {
+    checked?: boolean;
+    partialChecked?: boolean;
 }
 
 interface TreeSelectEventNodeParams {
@@ -80,7 +88,7 @@ export interface TreeSelectProps {
     valueTemplate?: TreeSelectValueTemplateType;
     panelHeaderTemplate?: TreeSelectPanelHeaderTemplateType;
     panelFooterTemplate?: TreeSelectPanelFooterTemplateType;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     dropdownIcon?: string;
     filter?: boolean;
     filterValue?: string;

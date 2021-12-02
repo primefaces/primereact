@@ -22,6 +22,9 @@ export interface TabPanelProps {
     leftIcon?: string;
     rightIcon?: string;
     disabled?: boolean;
+    closable?: boolean;
+    style?: object;
+    className?: string;
     headerStyle?: object;
     headerClassName?: string;
     contentStyle?: object;
@@ -46,4 +49,6 @@ export interface TabViewProps {
 }
 
 // tslint:disable-next-line:max-classes-per-file
-export declare class TabView extends React.Component<TabViewProps, any> { }
+export declare class TabView extends React.Component<TabViewProps, any> {
+    public reset(): void;
+}

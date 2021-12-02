@@ -1,6 +1,14 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
 
+type ChipsRemovableType = boolean | ((options: ChipsRemovableOptions) => boolean);
+
+interface ChipsRemovableOptions {
+    value: any;
+    index: number;
+    props: ChipsProps;
+}
+
 interface ChipsAddParams {
     originalEvent: React.SyntheticEvent;
     value: any;
@@ -30,6 +38,8 @@ export interface ChipsProps {
     value?: any[];
     max?: number;
     disabled?: boolean;
+    readOnly?: boolean;
+    removable?: ChipsRemovableType;
     style?: object;
     className?: string;
     tooltip?: string;

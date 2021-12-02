@@ -21,7 +21,7 @@ import './SkeletonDemo.css';
 
 export class SkeletonDemo extends Component {
 
-    products = new Array(5);
+    products = Array.from({ length: 5 });
 
     bodyTemplate = () => {
         return <Skeleton></Skeleton>
@@ -138,10 +138,10 @@ export class SkeletonDemo extends Component {
 
                     <h5>DataTable</h5>
                     <DataTable value={this.products} className="p-datatable-striped">
-                        <Column field="code" header="Code" body={this.bodyTemplate}></Column>
-                        <Column field="name" header="Name" body={this.bodyTemplate}></Column>
-                        <Column field="category" header="Category" body={this.bodyTemplate}></Column>
-                        <Column field="quantity" header="Quantity" body={this.bodyTemplate}></Column>
+                        <Column field="code" header="Code" style={{ width: '25%' }} body={this.bodyTemplate}></Column>
+                        <Column field="name" header="Name" style={{ width: '25%' }} body={this.bodyTemplate}></Column>
+                        <Column field="category" header="Category" style={{ width: '25%' }} body={this.bodyTemplate}></Column>
+                        <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={this.bodyTemplate}></Column>
                     </DataTable>
                 </div>
 
@@ -162,7 +162,7 @@ import './SkeletonDemo.css';
 
 export const SkeletonDemo = () => {
 
-    const products = new Array(5);
+    const products = Array.from({ length: 5 });
 
     const bodyTemplate = () => {
         return <Skeleton></Skeleton>
@@ -277,10 +277,10 @@ export const SkeletonDemo = () => {
 
                 <h5>DataTable</h5>
                 <DataTable value={products} className="p-datatable-striped">
-                    <Column field="code" header="Code" body={bodyTemplate}></Column>
-                    <Column field="name" header="Name" body={bodyTemplate}></Column>
-                    <Column field="category" header="Category" body={bodyTemplate}></Column>
-                    <Column field="quantity" header="Quantity" body={bodyTemplate}></Column>
+                    <Column field="code" header="Code" style={{ width: '25%' }} body={bodyTemplate}></Column>
+                    <Column field="name" header="Name" style={{ width: '25%' }} body={bodyTemplate}></Column>
+                    <Column field="category" header="Category" style={{ width: '25%' }} body={bodyTemplate}></Column>
+                    <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={bodyTemplate}></Column>
                 </DataTable>
             </div>
 
@@ -300,7 +300,7 @@ import './SkeletonDemo.css';
 
 export const SkeletonDemo = () => {
 
-    const products = new Array(5);
+    const products = Array.from({ length: 5 });
 
     const bodyTemplate = () => {
         return <Skeleton></Skeleton>
@@ -415,10 +415,10 @@ export const SkeletonDemo = () => {
 
                 <h5>DataTable</h5>
                 <DataTable value={products} className="p-datatable-striped">
-                    <Column field="code" header="Code" body={bodyTemplate}></Column>
-                    <Column field="name" header="Name" body={bodyTemplate}></Column>
-                    <Column field="category" header="Category" body={bodyTemplate}></Column>
-                    <Column field="quantity" header="Quantity" body={bodyTemplate}></Column>
+                    <Column field="code" header="Code" style={{ width: '25%' }} body={bodyTemplate}></Column>
+                    <Column field="name" header="Name" style={{ width: '25%' }} body={bodyTemplate}></Column>
+                    <Column field="category" header="Category" style={{ width: '25%' }} body={bodyTemplate}></Column>
+                    <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={bodyTemplate}></Column>
                 </DataTable>
             </div>
 
@@ -432,7 +432,6 @@ export const SkeletonDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./SkeletonDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
@@ -445,7 +444,7 @@ const { Skeleton } = primereact.skeleton;
 
 const SkeletonDemo = () => {
 
-    const products = new Array(5);
+    const products = Array.from({ length: 5 });
 
     const bodyTemplate = () => {
         return <Skeleton></Skeleton>
@@ -560,10 +559,10 @@ const SkeletonDemo = () => {
 
                 <h5>DataTable</h5>
                 <DataTable value={products} className="p-datatable-striped">
-                    <Column field="code" header="Code" body={bodyTemplate}></Column>
-                    <Column field="name" header="Name" body={bodyTemplate}></Column>
-                    <Column field="category" header="Category" body={bodyTemplate}></Column>
-                    <Column field="quantity" header="Quantity" body={bodyTemplate}></Column>
+                    <Column field="code" header="Code" style={{ width: '25%' }} body={bodyTemplate}></Column>
+                    <Column field="name" header="Name" style={{ width: '25%' }} body={bodyTemplate}></Column>
+                    <Column field="category" header="Category" style={{ width: '25%' }} body={bodyTemplate}></Column>
+                    <Column field="quantity" header="Quantity" style={{ width: '25%' }} body={bodyTemplate}></Column>
                 </DataTable>
             </div>
 
@@ -594,12 +593,21 @@ const SkeletonDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                    <h5>Import</h5>
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Skeleton } from 'primereact/skeleton';
 `}
 </CodeHighlight>
+
+                    <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/skeleton/skeleton.min.js"></script>
+`}
+</CodeHighlight>
+
                 <h5>Getting Started</h5>
 				<p>Skeleton displays a rectangle in its simplest form.</p>
 <CodeHighlight>

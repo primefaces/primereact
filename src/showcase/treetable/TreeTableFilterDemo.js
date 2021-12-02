@@ -55,18 +55,18 @@ export class TreeTableFilterDemo extends Component {
                     <div className="card">
                         <h5>Lenient Filter</h5>
                         <TreeTable value={this.state.nodes} globalFilter={this.state.globalFilter1} header={header1}>
-                            <Column field="name" header="Name" expander filter></Column>
-                            <Column field="size" header="Size" filter></Column>
-                            <Column field="type" header="Type" filter></Column>
+                            <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
+                            <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
+                            <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
                         </TreeTable>
                     </div>
 
                     <div className="card">
                         <h5>Strict Filter</h5>
                         <TreeTable value={this.state.nodes} globalFilter={this.state.globalFilter2} header={header2} filterMode="strict">
-                            <Column field="name" header="Name" expander filter></Column>
-                            <Column field="size" header="Size" filter></Column>
-                            <Column field="type" header="Type" filter></Column>
+                            <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
+                            <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
+                            <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
                         </TreeTable>
                     </div>
                 </div>
@@ -128,18 +128,18 @@ export class TreeTableFilterDemo extends Component {
                 <div className="card">
                     <h5>Lenient Filter</h5>
                     <TreeTable value={this.state.nodes} globalFilter={this.state.globalFilter1} header={header1}>
-                        <Column field="name" header="Name" expander filter></Column>
-                        <Column field="size" header="Size" filter></Column>
-                        <Column field="type" header="Type" filter></Column>
+                        <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
+                        <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
+                        <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
                     </TreeTable>
                 </div>
 
                 <div className="card">
                     <h5>Strict Filter</h5>
                     <TreeTable value={this.state.nodes} globalFilter={this.state.globalFilter2} header={header2} filterMode="strict">
-                        <Column field="name" header="Name" expander filter></Column>
-                        <Column field="size" header="Size" filter></Column>
-                        <Column field="type" header="Type" filter></Column>
+                        <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
+                        <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
+                        <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
                     </TreeTable>
                 </div>
             </div>
@@ -191,18 +191,18 @@ const TreeTableFilterDemo = () => {
             <div className="card">
                 <h5>Lenient Filter</h5>
                 <TreeTable value={nodes} globalFilter={globalFilter1} header={header1}>
-                    <Column field="name" header="Name" expander filter></Column>
-                    <Column field="size" header="Size" filter></Column>
-                    <Column field="type" header="Type" filter></Column>
+                    <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
+                    <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
+                    <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
                 </TreeTable>
             </div>
 
             <div className="card">
                 <h5>Strict Filter</h5>
                 <TreeTable value={nodes} globalFilter={globalFilter2} header={header2} filterMode="strict">
-                    <Column field="name" header="Name" expander filter></Column>
-                    <Column field="size" header="Size" filter></Column>
-                    <Column field="type" header="Type" filter></Column>
+                    <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
+                    <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
+                    <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
                 </TreeTable>
             </div>
         </div>
@@ -253,18 +253,18 @@ const TreeTableFilterDemo = () => {
             <div className="card">
                 <h5>Lenient Filter</h5>
                 <TreeTable value={nodes} globalFilter={globalFilter1} header={header1}>
-                    <Column field="name" header="Name" expander filter></Column>
-                    <Column field="size" header="Size" filter></Column>
-                    <Column field="type" header="Type" filter></Column>
+                    <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
+                    <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
+                    <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
                 </TreeTable>
             </div>
 
             <div className="card">
                 <h5>Strict Filter</h5>
                 <TreeTable value={nodes} globalFilter={globalFilter2} header={header2} filterMode="strict">
-                    <Column field="name" header="Name" expander filter></Column>
-                    <Column field="size" header="Size" filter></Column>
-                    <Column field="type" header="Type" filter></Column>
+                    <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
+                    <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
+                    <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
                 </TreeTable>
             </div>
         </div>
@@ -323,18 +323,18 @@ const TreeTableFilterDemo = () => {
             <div className="card">
                 <h5>Lenient Filter</h5>
                 <TreeTable value={nodes} globalFilter={globalFilter1} header={header1}>
-                    <Column field="name" header="Name" expander filter></Column>
-                    <Column field="size" header="Size" filter></Column>
-                    <Column field="type" header="Type" filter></Column>
+                    <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
+                    <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
+                    <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
                 </TreeTable>
             </div>
 
             <div className="card">
                 <h5>Strict Filter</h5>
                 <TreeTable value={nodes} globalFilter={globalFilter2} header={header2} filterMode="strict">
-                    <Column field="name" header="Name" expander filter></Column>
-                    <Column field="size" header="Size" filter></Column>
-                    <Column field="type" header="Type" filter></Column>
+                    <Column field="name" header="Name" expander filter filterPlaceholder="Filter by name"></Column>
+                    <Column field="size" header="Size" filter filterPlaceholder="Filter by size"></Column>
+                    <Column field="type" header="Type" filter filterPlaceholder="Filter by type"></Column>
                 </TreeTable>
             </div>
         </div>

@@ -196,8 +196,8 @@ export class GalleriaThumbnails extends Component {
         }
     }
 
-    onTransitionEnd() {
-        if (this.itemsContainer) {
+    onTransitionEnd(e) {
+        if (this.itemsContainer && e.propertyName === 'transform') {
             DomHandler.addClass(this.itemsContainer, 'p-items-hidden');
             this.itemsContainer.style.transition = '';
         }
@@ -244,8 +244,7 @@ export class GalleriaThumbnails extends Component {
 
     createStyle() {
         if (!this.thumbnailsStyle) {
-            this.thumbnailsStyle = document.createElement('style');
-            document.body.appendChild(this.thumbnailsStyle);
+            this.thumbnailsStyle = DomHandler.createInlineStyle();
         }
 
         let innerHTML = `
