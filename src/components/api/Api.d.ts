@@ -283,44 +283,38 @@ export interface PrimeIconsOptions {
 export declare const PrimeIcons: PrimeIconsOptions;
 
 // Severity
-export interface MessageSeverityOptions {
-    readonly SUCCESS: string;
-    readonly INFO: string;
-    readonly WARN: string;
-    readonly ERROR: string;
+export declare enum MessageSeverity {
+    SUCCESS = 'success',
+    INFO = 'info',
+    WARN = 'warn',
+    ERROR = 'error'
 }
-
-export declare const MessageSeverity: MessageSeverityOptions;
 
 // Filter
-export interface FilterMatchModeOptions {
-    readonly STARTS_WITH: string;
-    readonly CONTAINS: string;
-    readonly NOT_CONTAINS: string;
-    readonly ENDS_WITH: string;
-    readonly EQUALS: string;
-    readonly NOT_EQUALS: string;
-    readonly IN: string;
-    readonly LESS_THAN: string;
-    readonly LESS_THAN_OR_EQUAL_TO: string;
-    readonly GREATER_THAN: string;
-    readonly GREATER_THAN_OR_EQUAL_TO: string;
-    readonly BETWEEN: string;
-    readonly DATE_IS: string;
-    readonly DATE_IS_NOT: string;
-    readonly DATE_BEFORE: string;
-    readonly DATE_AFTER: string;
-    readonly CUSTOM: string;
+export declare enum FilterMatchMode {
+    STARTS_WITH = 'startsWith',
+    CONTAINS = 'contains',
+    NOT_CONTAINS = 'notContains',
+    ENDS_WITH = 'endsWith',
+    EQUALS = 'equals',
+    NOT_EQUALS = 'notEquals',
+    IN = 'in',
+    LESS_THAN = 'lt',
+    LESS_THAN_OR_EQUAL_TO = 'lte',
+    GREATER_THAN = 'gt',
+    GREATER_THAN_OR_EQUAL_TO = 'gte',
+    BETWEEN = 'between',
+    DATE_IS = 'dateIs',
+    DATE_IS_NOT = 'dateIsNot',
+    DATE_BEFORE = 'dateBefore',
+    DATE_AFTER = 'dateAfter',
+    CUSTOM = 'custom'
 }
 
-export declare const FilterMatchMode: FilterMatchModeOptions;
-
-export interface FilterOperatorOptions {
-    readonly AND: string;
-    readonly OR: string;
+export declare enum FilterOperator {
+    AND = 'and',
+    OR = 'or'
 }
-
-export declare const FilterOperator: FilterOperatorOptions;
 
 export declare namespace FilterService {
     export function filter(value: any, fields: string[], filterValue: any, filterMatchMode: string, filterLocale?: string): any[];
