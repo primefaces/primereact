@@ -780,7 +780,10 @@ export class Dropdown extends Component {
     }
 
     checkValidity() {
-        return this.inputRef.current.checkValidity();
+        if (this.inputRef.current) {
+            return this.inputRef.current.checkValidity();
+        }
+        return false;
     }
 
     isLazy() {
@@ -845,7 +848,9 @@ export class Dropdown extends Component {
         }
 
         this.updateInputField();
-        this.inputRef.current.selectedIndex = 1;
+        if (this.inputRef.current) {
+            this.inputRef.current.selectedIndex = 1;
+        }
     }
 
     componentWillUnmount() {
@@ -892,7 +897,9 @@ export class Dropdown extends Component {
         }
 
         this.updateInputField();
-        this.inputRef.current.selectedIndex = 1;
+        if (this.inputRef.current) {
+            this.inputRef.current.selectedIndex = 1;
+        }
     }
 
     renderHiddenSelect(selectedOption) {
