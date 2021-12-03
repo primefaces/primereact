@@ -290,10 +290,6 @@ export class DataTable extends Component {
             this.state.filters = props.filters;
         }
 
-        if (this.isStateful()) {
-            this.restoreState(this.state);
-        }
-
         this.attributeSelector = UniqueComponentId();
 
         // header
@@ -1531,8 +1527,12 @@ export class DataTable extends Component {
             this.createResponsiveStyle();
         }
 
-        if (this.isStateful() && this.props.resizableColumns) {
-            this.restoreColumnWidths();
+        if (this.isStateful()) {
+            this.setState(this.restoreState(this.state));
+
+            if (this.props.resizableColumns) {
+                this.restoreColumnWidths();
+            }
         }
     }
 
