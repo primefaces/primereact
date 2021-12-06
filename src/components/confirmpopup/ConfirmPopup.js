@@ -370,6 +370,6 @@ export class ConfirmPopup extends Component {
     render() {
         let element = this.renderElement();
 
-        return <Portal element={element} appendTo={this.props.appendTo} visible />;
+        return <Portal element={element} appendTo={this.props.appendTo} visible={this.props.visible} />;
     }
 }
