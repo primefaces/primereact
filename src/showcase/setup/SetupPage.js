@@ -126,9 +126,9 @@ import { Dialog } from 'primereact/dialog';
 
 <CodeHighlight lang="js">
 {`
-primereact/resources/themes/lara-light-indigo/theme.css    //theme
-primereact/resources/primereact.min.css                    //core css
-primeicons/primeicons.css                                  //icons
+import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
+import "primereact/resources/primereact.min.css";                  //core css
+import "primeicons/primeicons.css";                                //icons
 `}
 </CodeHighlight>
 
