@@ -2,7 +2,7 @@
 [![npm version](https://badge.fury.io/js/primereact.svg)](https://badge.fury.io/js/primereact)
 [![Discord Chat](https://img.shields.io/discord/557940238991753223.svg?color=7289da&label=chat&logo=discord)](https://discord.gg/gzKFYnpmCY)
 
-[![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2020/08/primereact-promotion-21aug2020@2x.jpg)](https://www.primefaces.org/primereact)
+[![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2021/12/primereact-release-7.jpeg)](https://www.primefaces.org/primereact)
 
 # PrimeReact
 
