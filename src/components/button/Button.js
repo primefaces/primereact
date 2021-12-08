@@ -91,10 +91,8 @@ export class ButtonComponent extends Component {
 
     renderIcon() {
         let icon = this.props.loading ? this.props.loadingIcon : this.props.icon;
-        let iconType = typeof icon;
         let className = classNames('p-button-icon p-c', {
             'p-button-loading-icon': this.props.loading,
-            [`${icon}`]: iconType === 'string',
             'p-button-icon-left': this.props.iconPos === 'left' && this.props.label,
             'p-button-icon-right': this.props.iconPos === 'right' && this.props.label,
             'p-button-icon-top': this.props.iconPos === 'top' && this.props.label,

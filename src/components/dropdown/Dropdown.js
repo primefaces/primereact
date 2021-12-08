@@ -631,17 +631,18 @@ export class Dropdown extends Component {
     }
 
     onOverlayEnter(callback) {
-        ZIndexUtils.set('overlay', this.overlayRef.current);
+        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         this.alignOverlay();
         callback && callback();
     }
 
     onOverlayEntered(callback) {
+        callback && callback();
+
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
 
-        callback && callback();
         this.props.onShow && this.props.onShow();
     }
 

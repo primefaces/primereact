@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { CSSTransitionProps } from '../csstransition';
 
 type SidebarPositionType = 'top' | 'bottom' | 'left' | 'right';
 
@@ -10,6 +11,8 @@ export interface SidebarProps {
     id?: string;
     style?: object;
     className?: string;
+    maskStyle?: object;
+    maskClassName?: string;
     visible?: boolean;
     position?: SidebarPositionType;
     fullScreen?: boolean;
@@ -22,7 +25,7 @@ export interface SidebarProps {
     icons?: SidebarTemplateType;
     modal?: boolean;
     appendTo?: SidebarAppendToType;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onShow?(): void;
     onHide(): void;
 }

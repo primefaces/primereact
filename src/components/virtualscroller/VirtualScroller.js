@@ -356,9 +356,9 @@ export class VirtualScroller extends Component {
             if (_currentIndex <= _numT)
                 return 0;
             else
-                return _isScrollDownOrRight ?
-                    (_currentIndex < _triggerIndex ? _first : _currentIndex - _numT) :
-                    (_currentIndex > _triggerIndex ? _first : _currentIndex - (2 * _numT));
+                return Math.max(0, _isScrollDownOrRight ?
+                        (_currentIndex < _triggerIndex ? _first : _currentIndex - _numT) :
+                        (_currentIndex > _triggerIndex ? _first : _currentIndex - (2 * _numT)));
         };
         const calculateLast = (_currentIndex, _first, _last, _num, _numT, _isCols) => {
             let lastValue = _first + _num + (2 * _numT);
@@ -513,6 +513,11 @@ export class VirtualScroller extends Component {
         return [];
     }
 
+    isPropChanged(prevProps) {
+        const props = ['itemSize', 'scrollHeight'];
+        return props.some((p) => !ObjectUtils.equals(prevProps[p], this.props[p]));
+    }
+
     init() {
         this.setSize();
         this.calculateOptions();
@@ -524,7 +529,7 @@ export class VirtualScroller extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (!ObjectUtils.equals(prevProps.itemSize, this.props.itemSize) || (!prevProps.items || prevProps.items.length !== (this.props.items || []).length)) {
+        if ((!prevProps.items || prevProps.items.length !== (this.props.items || []).length) || this.isPropChanged(prevProps)) {
             this.init();
         }
 

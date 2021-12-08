@@ -357,7 +357,7 @@ export class DataTableCrudDemo extends Component {
                     </div>
 
                     <Dialog visible={this.state.productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={this.hideDialog}>
-                        {this.state.product.image && <img src={`showcase/demo/images/product/${this.state.product.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={this.state.product.image} className="product-image" />}
+                        {this.state.product.image && <img src={`showcase/demo/images/product/${this.state.product.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={this.state.product.image} className="product-image p-d-block p-m-auto p-pb-3" />}
                         <div className="p-field">
                             <label htmlFor="name">Name</label>
                             <InputText id="name" value={this.state.product.name} onChange={(e) => this.onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.name })} />
@@ -778,7 +778,7 @@ export class DataTableCrudDemo extends Component {
                 </div>
 
                 <Dialog visible={this.state.productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={this.hideDialog}>
-                    {this.state.product.image && <img src={\`showcase/demo/images/product/\${this.state.product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={this.state.product.image} className="product-image" />}
+                    {this.state.product.image && <img src={\`showcase/demo/images/product/\${this.state.product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={this.state.product.image} className="product-image p-d-block p-m-auto p-pb-3" />}
                     <div className="p-field">
                         <label htmlFor="name">Name</label>
                         <InputText id="name" value={this.state.product.name} onChange={(e) => this.onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.name })} />
@@ -1145,7 +1145,7 @@ const DataTableCrudDemo = () => {
             </div>
 
             <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-                {product.image && <img src={\`showcase/demo/images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image" />}
+                {product.image && <img src={\`showcase/demo/images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image p-d-block p-m-auto p-pb-3" />}
                 <div className="p-field">
                     <label htmlFor="name">Name</label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
@@ -1511,7 +1511,7 @@ const DataTableCrudDemo = () => {
             </div>
 
             <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-                {product.image && <img src={\`showcase/demo/images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image" />}
+                {product.image && <img src={\`showcase/demo/images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image p-d-block p-m-auto p-pb-3" />}
                 <div className="p-field">
                     <label htmlFor="name">Name</label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
@@ -1897,7 +1897,7 @@ const DataTableCrudDemo = () => {
             </div>
 
             <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-                {product.image && <img src={\`showcase/demo/images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image" />}
+                {product.image && <img src={\`showcase/demo/images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image p-d-block p-m-auto p-pb-3" />}
                 <div className="p-field">
                     <label htmlFor="name">Name</label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />

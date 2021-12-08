@@ -250,7 +250,7 @@ export class HeaderCell extends Component {
     }
 
     renderCheckbox() {
-        if (this.getColumnProp('selectionMode') === 'multiple' && this.props.filterDisplay !== 'row') {
+        if (this.props.showSelectAll && this.getColumnProp('selectionMode') === 'multiple' && this.props.filterDisplay !== 'row') {
             const allRowsSelected = this.props.allRowsSelected(this.props.value);
 
             return (

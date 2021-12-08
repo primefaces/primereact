@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
+import { CSSTransitionProps } from '../csstransition';
 
 export interface PanelMenuProps {
     id?: string;
@@ -7,7 +8,7 @@ export interface PanelMenuProps {
     style?: object;
     className?: string;
     multiple?: boolean;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
 }
 
 export declare class PanelMenu extends React.Component<PanelMenuProps, any> { }

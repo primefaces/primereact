@@ -52,6 +52,10 @@ export class DataTable extends Component {
         dataKey: null,
         metaKeySelection: true,
         selectOnEdit: true,
+        selectionPageOnly: false,
+        showSelectAll: true,
+        selectAll: false,
+        onSelectAllChange: null,
         headerColumnGroup: null,
         footerColumnGroup: null,
         rowExpansionTemplate: null,
@@ -175,6 +179,10 @@ export class DataTable extends Component {
         dataKey: PropTypes.string,
         metaKeySelection: PropTypes.bool,
         selectOnEdit: PropTypes.bool,
+        selectionPageOnly: PropTypes.bool,
+        showSelectAll: PropTypes.bool,
+        selectAll: PropTypes.bool,
+        onSelectAllChange: PropTypes.func,
         headerColumnGroup: PropTypes.any,
         footerColumnGroup: PropTypes.any,
         rowExpansionTemplate: PropTypes.func,
@@ -282,10 +290,6 @@ export class DataTable extends Component {
             this.state.filters = props.filters;
         }
 
-        if (this.isStateful()) {
-            this.restoreState(this.state);
-        }
-
         this.attributeSelector = UniqueComponentId();
 
         // header
@@ -318,6 +322,10 @@ export class DataTable extends Component {
 
     isVirtualScrollerDisabled() {
         return ObjectUtils.isEmpty(this.props.virtualScrollerOptions) || !this.props.scrollable;
+    }
+
+    isEquals(data1, data2) {
+        return this.props.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, this.props.dataKey);
     }
 
     hasFilter() {
@@ -495,7 +503,7 @@ export class DataTable extends Component {
                         return { first, rows, page, pageCount };
                     }
 
-                    this.props.onPage(getOnPageParams(restoredState.first, restoredState.rows));
+                    this.props.onPage(this.createEvent(getOnPageParams(restoredState.first, restoredState.rows)));
                 }
                 else {
                     state.first = restoredState.first;
@@ -505,10 +513,10 @@ export class DataTable extends Component {
 
             if (restoredState.sortField) {
                 if (this.props.onSort) {
-                    this.props.onSort({
+                    this.props.onSort(this.createEvent({
                         sortField: restoredState.sortField,
                         sortOrder: restoredState.sortOrder
-                    });
+                    }));
                 }
                 else {
                     state.sortField = restoredState.sortField;
@@ -518,9 +526,9 @@ export class DataTable extends Component {
 
             if (restoredState.multiSortMeta) {
                 if (this.props.onSort) {
-                    this.props.onSort({
+                    this.props.onSort(this.createEvent({
                         multiSortMeta: restoredState.multiSortMeta
-                    });
+                    }));
                 }
                 else {
                     state.multiSortMeta = restoredState.multiSortMeta;
@@ -531,9 +539,9 @@ export class DataTable extends Component {
                 state.d_filters = this.cloneFilters(restoredState.filters);
 
                 if (this.props.onFilter) {
-                    this.props.onFilter({
+                    this.props.onFilter(this.createEvent({
                         filters: restoredState.filters
-                    });
+                    }));
                 }
                 else {
                     state.filters = this.cloneFilters(restoredState.filters);
@@ -633,10 +641,16 @@ export class DataTable extends Component {
     }
 
     allRowsSelected(processedData) {
-        const val = this.props.frozenValue ? [...this.props.frozenValue, ...processedData] : processedData;
-        const selectableVal = this.props.showSelectionElement ? val.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : val;
-        const length = this.props.lazy ? this.props.totalRecords : (selectableVal ? selectableVal.length : 0);
-        return (selectableVal && length > 0 && this.props.selection && this.props.selection.length > 0 && this.props.selection.length === length);
+        if (this.props.onSelectAllChange) {
+            return this.props.selectAll;
+        }
+        else {
+            const data = this.props.selectionPageOnly ? this.dataToRender(processedData) : processedData;
+            const val = this.props.frozenValue ? [...this.props.frozenValue, ...data] : data;
+            const selectableVal = this.props.showSelectionElement ? val.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : val;
+
+            return selectableVal && this.props.selection && selectableVal.every(sv => this.props.selection.some(s => this.isEquals(s, sv)));
+        }
     }
 
     getSelectionModeInColumn(columns) {
@@ -814,26 +828,31 @@ export class DataTable extends Component {
     }
 
     onColumnHeaderCheckboxChange(e, processedData) {
-        const { originalEvent, checked } = e;
-        let selection;
-
-        if (!checked) {
-            selection = this.props.frozenValue ? [...this.props.frozenValue, ...processedData] : processedData;
-            selection = this.props.showSelectionElement ? selection.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : selection;
-
-            this.props.onAllRowsSelect && this.props.onAllRowsSelect({ originalEvent, data: selection, type: 'all' });
+        if (this.props.onSelectAllChange) {
+            this.props.onSelectAllChange(e);
         }
         else {
-            selection = [];
+            const { originalEvent, checked } = e;
+            const data = this.props.selectionPageOnly ? this.dataToRender(processedData) : processedData;
+            let selection = this.props.selectionPageOnly && this.props.selection ? this.props.selection.filter(s => !data.some(d => this.isEquals(s, d))) : [];
 
-            this.props.onAllRowsUnselect && this.props.onAllRowsUnselect({ originalEvent, data: selection, type: 'all' });
-        }
+            if (checked) {
+                selection = this.props.frozenValue ? [...selection, ...this.props.frozenValue, ...data] : [...selection, ...data];
+                selection = this.props.showSelectionElement ? selection.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : selection;
 
-        if (this.props.onSelectionChange) {
-            this.props.onSelectionChange({
-                originalEvent,
-                value: selection
-            });
+                this.props.onAllRowsSelect && this.props.onAllRowsSelect({ originalEvent, data: selection, type: 'all' });
+            }
+            else {
+                this.props.onAllRowsUnselect && this.props.onAllRowsUnselect({ originalEvent, data: selection, type: 'all' });
+            }
+
+            if (this.props.onSelectionChange) {
+                this.props.onSelectionChange({
+                    originalEvent,
+                    value: selection,
+                    type: 'all'
+                });
+            }
         }
     }
 
@@ -951,14 +970,12 @@ export class DataTable extends Component {
     }
 
     createStyleElement() {
-        this.styleElement = document.createElement('style');
-        document.head.appendChild(this.styleElement);
+        this.styleElement = DomHandler.createInlineStyle();
     }
 
     createResponsiveStyle() {
         if (!this.responsiveStyleElement) {
-            this.responsiveStyleElement = document.createElement('style');
-            document.head.appendChild(this.responsiveStyleElement);
+            this.responsiveStyleElement = DomHandler.createInlineStyle();
 
             let innerHTML = `
 @media screen and (max-width: ${this.props.breakpoint}) {
@@ -1012,7 +1029,7 @@ export class DataTable extends Component {
         this.clearEditingMetaData();
 
         if (this.props.onPage)
-            this.props.onPage(e);
+            this.props.onPage(this.createEvent(e));
         else
             this.setState({ first: e.first, rows: e.rows });
 
@@ -1069,7 +1086,7 @@ export class DataTable extends Component {
         }
 
         if (this.props.onSort) {
-            this.props.onSort(eventMeta);
+            this.props.onSort(this.createEvent(eventMeta));
         }
         else {
             eventMeta.first = 0;
@@ -1209,7 +1226,7 @@ export class DataTable extends Component {
             let filters = this.cloneFilters(this.state.d_filters);
 
             if (this.props.onFilter) {
-                this.props.onFilter({ filters });
+                this.props.onFilter(this.createEvent({ filters }));
             }
             else {
                 this.setState({
@@ -1433,7 +1450,7 @@ export class DataTable extends Component {
                     let cellData = ObjectUtils.resolveFieldData(record, field);
 
                     if (cellData != null) {
-                        cellData = this.props.exportFunction ? this.props.exportFunction({ data: cellData, field }) : String(cellData).replace(/"/g, '""');
+                        cellData = this.props.exportFunction ? this.props.exportFunction({ data: cellData, field, rowData: record, column }) : String(cellData).replace(/"/g, '""');
                     }
                     else
                         cellData = '';
@@ -1453,6 +1470,18 @@ export class DataTable extends Component {
     closeEditingCell() {
         if (this.props.editMode !== "row") {
             document.body.click();
+        }
+    }
+
+    createEvent(event) {
+        return {
+            first: this.getFirst(),
+            rows: this.getRows(),
+            sortField: this.getSortField(),
+            sortOrder: this.getSortOrder(),
+            multiSortMeta: this.getMultiSortMeta(),
+            filters: this.getFilters(),
+            ...event
         }
     }
 
@@ -1498,8 +1527,12 @@ export class DataTable extends Component {
             this.createResponsiveStyle();
         }
 
-        if (this.isStateful() && this.props.resizableColumns) {
-            this.restoreColumnWidths();
+        if (this.isStateful()) {
+            this.setState(this.restoreState(this.state));
+
+            if (this.props.resizableColumns) {
+                this.restoreColumnWidths();
+            }
         }
     }
 
@@ -1584,7 +1617,7 @@ export class DataTable extends Component {
                 onColumnResizeStart={this.onColumnResizeStart} onColumnResizerClick={this.props.onColumnResizerClick} onColumnResizerDoubleClick={this.props.onColumnResizerDoubleClick}
                 sortMode={this.props.sortMode} sortField={sortField} sortOrder={sortOrder} multiSortMeta={multiSortMeta} groupRowsBy={this.props.groupRowsBy} groupRowSortField={groupRowSortField} onSortChange={this.onSortChange}
                 filterDisplay={this.props.filterDisplay} filters={filters} filtersStore={filtersStore} onFilterChange={this.onFilterChange} onFilterApply={this.onFilterApply}
-                allRowsSelected={this.allRowsSelected} onColumnCheckboxChange={this.onColumnHeaderCheckboxChange}
+                showSelectAll={this.props.showSelectAll} allRowsSelected={this.allRowsSelected} onColumnCheckboxChange={this.onColumnHeaderCheckboxChange}
                 onColumnMouseDown={this.onColumnHeaderMouseDown} onColumnDragStart={this.onColumnHeaderDragStart} onColumnDragOver={this.onColumnHeaderDragOver} onColumnDragLeave={this.onColumnHeaderDragLeave} onColumnDrop={this.onColumnHeaderDrop}
                 rowGroupMode={this.props.rowGroupMode} reorderableColumns={this.props.reorderableColumns} />
         )
@@ -1661,7 +1694,7 @@ export class DataTable extends Component {
 
         return (
             <div className="p-datatable-wrapper" style={{ maxHeight: isVirtualScrollerDisabled ? this.props.scrollHeight : '' }}>
-                <VirtualScroller {...virtualScrollerOptions} items={processedData} columns={columns} style={{ height: this.props.scrollHeight }}
+                <VirtualScroller {...virtualScrollerOptions} items={processedData} columns={columns} scrollHeight={this.props.scrollHeight}
                     disabled={isVirtualScrollerDisabled} loaderDisabled showSpacer={false}
                     contentTemplate={(options) => {
                         const ref = (el) => { this.table = el; options.spacerRef && options.spacerRef(el) };

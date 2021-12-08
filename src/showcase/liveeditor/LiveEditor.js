@@ -4,13 +4,13 @@ import { CodeHighlight } from '../codehighlight/CodeHighlight';
 import { TabPanel } from '../../components/tabview/TabView';
 import * as pkg from '../../../package.json';
 
-const vPrimeReact = '7.0.0-rc.2'; // latest
+const vPrimeReact = '^7.0.0'; // latest
 
 let currentProps = {};
 
 const contents = (name, content, imports) => ({
     'js': `import 'primeicons/primeicons.css';
-import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 import '../../index.css';
@@ -30,7 +30,7 @@ ReactDOM.render(<${name} />, rootElement);`,
 
         <!-- PrimeReact -->
         <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css" />
-        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/themes/saga-blue/theme.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/themes/lara-light-indigo/theme.css" />
         <link rel="stylesheet" href="https://unpkg.com/primereact/resources/primereact.min.css" />
         <link rel="stylesheet" href="https://unpkg.com/primeflex@2.0.0/primeflex.min.css" />
 

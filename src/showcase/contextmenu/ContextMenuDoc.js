@@ -472,7 +472,6 @@ const ContextMenuDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/contextmenu/contextmenu.min.js"></script>`,
                 content: `
@@ -636,12 +635,21 @@ const ContextMenuDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { ContextMenu } from 'primereact/contextmenu';
 `}
 </CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/contextmenu/contextmenu.min.js"></script>
+`}
+</CodeHighlight>
+
                         <h5>MenuItem API</h5>
                         <p>ContextMenu uses the common menu item api to define its items, visit <Link to="/menumodel"> MenuModel </Link> for details.</p>
 

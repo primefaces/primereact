@@ -203,10 +203,7 @@ const TreeDemo = () => {
                 imports: `
         <script src="./NodeService.js"></script>
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
-        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/core/core.min.js"></script>`,
                 content: `
 const { useEffect, useState } = React;
 const { Tree } = primereact.tree;
@@ -275,10 +272,17 @@ const TreeDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Tree } from 'primereact/tree';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
 </CodeHighlight>
 
@@ -410,10 +414,10 @@ const data: [
         "key": "2",
         "label": "Movies",
         "data": "Movies Folder",
-        "icon": "pi pi-fw pi-star",
+        "icon": "pi pi-fw pi-star-fill",
         "children": [{
             "key": "2-0",
-            "icon": "pi pi-fw pi-star",
+            "icon": "pi pi-fw pi-star-fill",
             "label": "Al Pacino",
             "data": "Pacino Movies",
             "children": [{ "key": "2-0-0", "label": "Scarface", "icon": "pi pi-fw pi-video", "data": "Scarface Movie" }, { "key": "2-0-1", "label": "Serpico", "icon": "pi pi-fw pi-video", "data": "Serpico Movie" }]
@@ -421,7 +425,7 @@ const data: [
         {
             "key": "2-1",
             "label": "Robert De Niro",
-            "icon": "pi pi-fw pi-star",
+            "icon": "pi pi-fw pi-star-fill",
             "data": "De Niro Movies",
             "children": [{ "key": "2-1-0", "label": "Goodfellas", "icon": "pi pi-fw pi-video", "data": "Goodfellas Movie" }, { "key": "2-1-1", "label": "Untouchables", "icon": "pi pi-fw pi-video", "data": "Untouchables Movie" }]
         }]

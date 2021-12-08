@@ -10,6 +10,8 @@ export default class PrimeReact {
 
     static appendTo = null;
 
+    static cssTransition = true;
+
     static autoZIndex = true;
 
     static zIndex = {

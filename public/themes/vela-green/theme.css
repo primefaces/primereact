@@ -1467,7 +1467,7 @@
 .p-rating .p-rating-icon:first-child {
   margin-left: 0;
 }
-.p-rating .p-rating-icon.pi-star {
+.p-rating .p-rating-icon.pi-star-fill {
   color: #81C784;
 }
 .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {
@@ -2209,14 +2209,14 @@
 }
 
 .p-speeddial-direction-up .p-speeddial-item {
-  margin: 0.25rem 0;
+  margin: 0.25rem;
 }
 .p-speeddial-direction-up .p-speeddial-item:first-child {
   margin-bottom: 0.5rem;
 }
 
 .p-speeddial-direction-down .p-speeddial-item {
-  margin: 0.25rem 0;
+  margin: 0.25rem;
 }
 .p-speeddial-direction-down .p-speeddial-item:first-child {
   margin-top: 0.5rem;
@@ -3005,6 +3005,10 @@
 .fc.fc-theme-standard .fc-toolbar .fc-button-group .fc-button:last-child {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
+}
+.fc.fc-theme-standard .fc-highlight {
+  color: rgba(255, 255, 255, 0.87);
+  background: rgba(129, 199, 132, 0.16);
 }
 
 .p-orderlist .p-orderlist-controls {
@@ -4152,6 +4156,7 @@
   color: rgba(255, 255, 255, 0.87);
   border: 1px solid #304562;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
   width: 12.5rem;
 }
 .p-contextmenu .p-menuitem-link {
@@ -4193,6 +4198,7 @@
   background: #1f2d40;
   border: 1px solid #304562;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
 }
 .p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link {
   background: #17212f;

@@ -26,7 +26,7 @@ export class ProgressSpinnerDemo extends Component {
                     <ProgressSpinner />
 
                     <h5>Custom</h5>
-                    <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+                    <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"/>
                 </div>
             </div>
         );
@@ -48,7 +48,7 @@ const ProgressSpinnerDemo = () => {
                 <ProgressSpinner />
 
                 <h5>Custom</h5>
-                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"/>
             </div>
         </div>
     );
@@ -69,7 +69,7 @@ const ProgressSpinnerDemo = () => {
                 <ProgressSpinner />
 
                 <h5>Custom</h5>
-                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"/>
             </div>
         </div>
     );
@@ -79,7 +79,6 @@ const ProgressSpinnerDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/progressspinner/progressspinner.min.js"></script>`,
                 content: `
@@ -94,7 +93,7 @@ const ProgressSpinnerDemo = () => {
                 <ProgressSpinner />
 
                 <h5>Custom</h5>
-                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/>
+                <ProgressSpinner style={{width: '50px', height: '50px'}} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"/>
             </div>
         </div>
     );
@@ -113,10 +112,18 @@ const ProgressSpinnerDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { ProgressSpinner } from 'primereact/progressspinner';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/progressspinner/progressspinner.min.js"></script>
 `}
 </CodeHighlight>
 

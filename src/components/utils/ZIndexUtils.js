@@ -1,12 +1,8 @@
-import PrimeReact from '../api/Api';
-
 function handler() {
     let zIndexes = [];
 
-    const generateZIndex = (key, baseZIndex) => {
-        baseZIndex = baseZIndex || getBaseZIndex(key);
-
-        const lastZIndex = getLastZIndex(key, baseZIndex);
+    const generateZIndex = (key, autoZIndex, baseZIndex = 999) => {
+        const lastZIndex = getLastZIndex(key, autoZIndex, baseZIndex);
         const newZIndex = lastZIndex.value + (lastZIndex.key === key ? 0 : baseZIndex) + 1;
 
         zIndexes.push({ key, value: newZIndex });
@@ -17,23 +13,23 @@ function handler() {
         zIndexes = zIndexes.filter(obj => obj.value !== zIndex);
     }
 
-    const getBaseZIndex = (key) => {
-        return PrimeReact.zIndex[key] || 999;
+    const getCurrentZIndex = (key, autoZIndex) => {
+        return getLastZIndex(key, autoZIndex).value;
     }
 
-    const getCurrentZIndex = (key) => {
-        return getLastZIndex(key).value;
+    const getLastZIndex = (key, autoZIndex, baseZIndex = 0) => {
+        return [...zIndexes].reverse().find(obj => (autoZIndex ? true : obj.key === key)) || { key, value: baseZIndex };
     }
 
-    const getLastZIndex = (key, baseZIndex = 0) => {
-        return [...zIndexes].reverse().find(obj => (PrimeReact.autoZIndex ? true : obj.key === key)) || { key, value: baseZIndex };
+    const getZIndex = (el) => {
+        return el ? parseInt(el.style.zIndex, 10) || 0 : 0
     }
 
     return {
-        get: (el) => el ? parseInt(el.style.zIndex, 10) || 0 : 0,
-        set: (key, el, baseZIndex) => {
+        get: getZIndex,
+        set: (key, el, autoZIndex, baseZIndex) => {
             if (el) {
-                el.style.zIndex = String(generateZIndex(key, baseZIndex));
+                el.style.zIndex = String(generateZIndex(key, autoZIndex, baseZIndex));
             }
         },
         clear: (el) => {
@@ -42,8 +38,7 @@ function handler() {
                 el.style.zIndex = '';
             }
         },
-        getBase: (key) => getBaseZIndex(key),
-        getCurrent: (key) => getCurrentZIndex(key)
+        getCurrent: (key, autoZIndex) => getCurrentZIndex(key, autoZIndex)
     };
 }
 

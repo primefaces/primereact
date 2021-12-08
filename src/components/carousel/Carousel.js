@@ -371,8 +371,7 @@ export class Carousel extends Component {
 
     createStyle() {
         if (!this.carouselStyle) {
-            this.carouselStyle = document.createElement('style');
-            document.body.appendChild(this.carouselStyle);
+            this.carouselStyle = DomHandler.createInlineStyle();
         }
 
         let innerHTML = `

@@ -52,7 +52,7 @@ export class TableBody extends Component {
         if (this.allowCellSelection())
             return (data1.rowIndex === data2.rowIndex || data1.rowData === data2.rowData) && (data1.field === data2.field || data1.cellIndex === data2.cellIndex)
         else
-            return this.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, this.props.dataKey);
+            return this.props.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, this.props.dataKey);
     }
 
     isSubheaderGrouping() {
@@ -269,7 +269,8 @@ export class TableBody extends Component {
         if (this.props.onSelectionChange && selection !== this.props.selection) {
             this.props.onSelectionChange({
                 originalEvent,
-                value: selection
+                value: selection,
+                type
             });
         }
     }
@@ -300,12 +301,13 @@ export class TableBody extends Component {
         if (this.props.onSelectionChange && selection !== this.props.selection) {
             this.props.onSelectionChange({
                 originalEvent,
-                value: selection
+                value: selection,
+                type
             });
         }
     }
 
-    onRangeSelection(event) {
+    onRangeSelection(event, type) {
         DomHandler.clearSelection();
         this.rangeRowIndex = this.allowCellSelection() ? event.rowIndex : event.index;
         let selectionInRange = this.selectRange(event);
@@ -314,7 +316,8 @@ export class TableBody extends Component {
         if (this.props.onSelectionChange && selection !== this.props.selection) {
             this.props.onSelectionChange({
                 originalEvent: event.originalEvent,
-                value: selection
+                value: selection,
+                type
             });
         }
 
@@ -461,7 +464,7 @@ export class TableBody extends Component {
 
         if (this.allowRowSelection()) {
             if (this.allowRangeSelection(event)) {
-                this.onRangeSelection(event);
+                this.onRangeSelection(event, 'row');
             }
             else {
                 const toggleable = this.isRadioSelectionModeInColumn() || this.isCheckboxSelectionModeInColumn() || this.allowMetaKeySelection(event);
@@ -542,7 +545,7 @@ export class TableBody extends Component {
     onRowMouseUp(event) {
         const isSameRow = event.index === this.anchorRowIndex;
         if (this.allowRowDrag(event) && !isSameRow) {
-            this.onRangeSelection(event);
+            this.onRangeSelection(event, 'row');
         }
     }
 
@@ -722,7 +725,7 @@ export class TableBody extends Component {
 
         if (this.allowCellSelection()) {
             if (this.allowRangeSelection(event)) {
-                this.onRangeSelection(event);
+                this.onRangeSelection(event, 'cell');
             }
             else {
                 let toggleable = this.allowMetaKeySelection(event);
@@ -757,7 +760,7 @@ export class TableBody extends Component {
     onCellMouseUp(event) {
         const isSameCell = event.rowIndex === this.anchorRowIndex && event.cellIndex === this.anchorCellIndex;
         if (this.allowCellDrag(event) && !isSameCell) {
-            this.onRangeSelection(event);
+            this.onRangeSelection(event, 'cell');
         }
     }
 

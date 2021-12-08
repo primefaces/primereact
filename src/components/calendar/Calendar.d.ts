@@ -1,6 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
-import {IconType} from "../utils/Utils";
+import { CSSTransitionProps } from '../csstransition';
+import { IconType } from "../utils/Utils";
 
 type CalendarAppendToType = 'self' | HTMLElement | undefined | null;
 
@@ -128,7 +129,7 @@ export interface CalendarProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     dateTemplate?(e: CalendarDateTemplateParams): React.ReactNode;
     headerTemplate?(): React.ReactNode;
     footerTemplate?(): React.ReactNode;

@@ -1,19 +1,33 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
-import Omit from '../util';
+import { CSSTransitionProps } from '../csstransition';
 
 type ColorPickerAppendToType = 'self' | HTMLElement | undefined | null;
 
 type ColorPickerFormatType = 'hex' | 'rgb' | 'hsb';
 
+type ColorPickerValueType = string | ColorPickerRGBType | ColorPickerHSBType | undefined;
+
+interface ColorPickerRGBType {
+    r: number;
+    g: number;
+    b: number;
+}
+
+interface ColorPickerHSBType {
+    h: number;
+    s: number;
+    b: number;
+}
+
 interface ColorPickerChangeTargetOptions {
     name: string;
     id: string;
-    value: string;
+    value: ColorPickerValueType;
 }
 
 interface ColorPickerChangeParams {
-    value: string;
+    value: ColorPickerValueType;
     stopPropagation(): void;
     preventDefault(): void;
     target: ColorPickerChangeTargetOptions;
@@ -21,7 +35,7 @@ interface ColorPickerChangeParams {
 
 export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange' | 'value' | 'ref'> {
     inputRef?: React.Ref<HTMLInputElement>;
-    value?: any;
+    value?: ColorPickerValueType;
     defaultColor?: string;
     inline?: boolean;
     format?: string;
@@ -29,7 +43,7 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
     inputId?: string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onChange?(e: ColorPickerChangeParams): void;
     onShow?(): void;
     onHide?(): void;

@@ -1631,7 +1631,8 @@ export class Calendar extends Component {
 
     onOverlayEnter() {
         if (this.props.autoZIndex) {
-            ZIndexUtils.set(this.props.touchUI ? 'modal' : 'overlay', this.overlayRef.current, this.props.baseZIndex);
+            const key = this.props.touchUI ? 'modal' : 'overlay';
+            ZIndexUtils.set(key, this.overlayRef.current, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex[key]);
         }
         this.alignOverlay();
     }
@@ -1720,7 +1721,7 @@ export class Calendar extends Component {
     }
 
     onWindowResize() {
-        if (this.isVisible() && !DomHandler.isAndroid()) {
+        if (this.isVisible() && !DomHandler.isTouchDevice()) {
             this.hideOverlay();
         }
     }

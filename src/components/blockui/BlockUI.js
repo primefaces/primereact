@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { Portal } from '../portal/Portal';
+import PrimeReact from '../api/Api';
 
 export class BlockUI extends Component {
 
@@ -65,7 +66,8 @@ export class BlockUI extends Component {
         }
 
         if (this.props.autoZIndex) {
-            ZIndexUtils.set(this.props.fullScreen ? 'modal' : 'overlay', this.mask, this.props.baseZIndex);
+            const key = this.props.fullScreen ? 'modal' : 'overlay';
+            ZIndexUtils.set(key, this.mask, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex[key]);
         }
 
         this.props.onBlocked && this.props.onBlocked();

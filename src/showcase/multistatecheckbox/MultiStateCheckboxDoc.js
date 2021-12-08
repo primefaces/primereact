@@ -104,7 +104,6 @@ const MultiStateCheckboxDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/multistatecheckbox/multistatecheckbox.min.js"></script>`,
                 content: `
@@ -144,10 +143,18 @@ const MultiStateCheckboxDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
-import {MultiStateCheckbox} from 'primereact/multistatecheckbox';
+import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/multistatecheckbox/multistatecheckbox.min.js"></script>
 `}
 </CodeHighlight>
 

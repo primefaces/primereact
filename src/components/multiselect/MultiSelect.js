@@ -390,18 +390,17 @@ export class MultiSelect extends Component {
     }
 
     onOverlayEnter(callback) {
-        ZIndexUtils.set('overlay', this.overlayRef.current);
+        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         this.alignOverlay();
         this.scrollInView();
         callback && callback();
     }
 
-    onOverlayEntered(callback) {
+    onOverlayEntered() {
         this.bindDocumentClickListener();
         this.bindScrollListener();
         this.bindResizeListener();
 
-        callback && callback();
         this.props.onShow && this.props.onShow();
     }
 
@@ -563,7 +562,7 @@ export class MultiSelect extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.overlayVisible && !DomHandler.isAndroid()) {
+                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
                     this.hide();
                 }
             };

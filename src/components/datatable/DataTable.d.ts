@@ -87,13 +87,6 @@ interface DataTableEditingRows {
     [key: string]: boolean;
 }
 
-interface DataTablePageParams {
-    first: number;
-    rows: number;
-    page: number;
-    pageCount: number;
-}
-
 interface DataTableRowToggleParams {
     data: any[];
 }
@@ -110,6 +103,13 @@ interface DataTableColumnResizerClickParams {
     column: Column;
 }
 
+interface DataTablePageParams {
+    first: number;
+    rows: number;
+    page?: number;
+    pageCount?: number;
+}
+
 interface DataTableSortParams {
     sortField: string;
     sortOrder: DataTableSortOrderType;
@@ -120,10 +120,20 @@ interface DataTableFilterParams {
     filters: DataTableFilterMeta;
 }
 
+interface DataTablePFSEvent extends DataTablePageParams, DataTableSortParams, DataTableFilterParams {
+    [key: string]: any;
+}
+
 interface DataTableSelectionChangeParams {
     originalEvent: React.SyntheticEvent;
     value: any;
+    type?: string;
     [key: string]: any;
+}
+
+interface DataTableSelectAllChangeParams {
+    originalEvent: React.SyntheticEvent;
+    checked: boolean;
 }
 
 interface DataTableRowEventParams {
@@ -171,6 +181,8 @@ interface DataTableUnselectParams extends DataTableSelectParams { }
 interface DataTableExportFunctionParams {
     data: any;
     field: string;
+    rowData: any;
+    column: Column
 }
 
 interface DataTableColReorderParams {
@@ -254,6 +266,9 @@ export interface DataTableProps {
     dataKey?: string;
     metaKeySelection?: boolean;
     selectOnEdit?: boolean;
+    selectionPageOnly?: boolean;
+    showSelectAll?: boolean;
+    selectAll?: boolean;
     headerColumnGroup?: React.ReactNode;
     footerColumnGroup?: React.ReactNode;
     expandedRows?: any[] | DataTableExpandedRows;
@@ -294,7 +309,8 @@ export interface DataTableProps {
     collapsedRowIcon?: string;
     globalFilterFields?: string[];
     rowGroupHeaderTemplate?: DataTableRowGroupHeaderTemplateType;
-    rowGroupFooterTemplate?: DataTableRowGroupFooterTemplateType
+    rowGroupFooterTemplate?: DataTableRowGroupFooterTemplateType;
+    onSelectAllChange?(e: DataTableSelectAllChangeParams): void;
     onRowEditComplete?(e: DataTableRowEditCompleteParams): void;
     showSelectionElement?(data: any, options: DataTableShowSelectionElementOptions): boolean | undefined | null;
     showRowReorderElement?(data: any, options: DataTableShowRowReorderElementOptions): boolean | undefined | null;
@@ -307,9 +323,9 @@ export interface DataTableProps {
     onColumnResizeEnd?(e: DataTableColumnResizeEndParams): void;
     onColumnResizerClick?(e: DataTableColumnResizerClickParams): void;
     onColumnResizerDoubleClick?(e: DataTableColumnResizerClickParams): void;
-    onSort?(e: DataTableSortParams): void;
-    onPage?(e: DataTablePageParams): void;
-    onFilter?(e: DataTableFilterParams): void;
+    onSort?(e: DataTablePFSEvent): void;
+    onPage?(e: DataTablePFSEvent): void;
+    onFilter?(e: DataTablePFSEvent): void;
     onAllRowsSelect?(e: DataTableSelectParams): void;
     onAllRowsUnselect?(e: DataTableUnselectParams): void;
     onRowClick?(e: DataTableRowClickEventParams): void;

@@ -177,7 +177,7 @@ type ProductItem = {
     inventoryStatus?: string;
     rating?: number;
   };
-  
+
   const OverlayPanelDemo = () => {
     const [products, setProducts] = useState<ProductItem[] | null>(null);
     const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(
@@ -187,7 +187,7 @@ type ProductItem = {
     const op = useRef<OverlayPanel>(null);
     const toast = useRef<Toast>(null);
     const isMounted = useRef(false);
-  
+
     useEffect(() => {
       if (isMounted.current) {
         op.current?.hide();
@@ -199,23 +199,23 @@ type ProductItem = {
         });
       }
     }, [selectedProduct]); // eslint-disable-line react-hooks/exhaustive-deps
-  
+
     useEffect(() => {
       isMounted.current = true;
       productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  
+
     const formatCurrency = (value: number) => {
       return value.toLocaleString("en-US", {
         style: "currency",
         currency: "USD"
       });
     };
-  
+
     const onProductSelect = (e: DataTableSelectionChangeParams) => {
       setSelectedProduct(e.value);
     };
-  
+
     const imageBody = (rowData: ProductItem) => {
       return (
         <img
@@ -229,15 +229,15 @@ type ProductItem = {
         />
       );
     };
-  
+
     const priceBody = (rowData: ProductItem) => {
       return formatCurrency(rowData.price ?? 0);
     };
-  
+
     return (
       <div>
         <Toast ref={toast} />
-  
+
         <div className="card">
           <Button
             type="button"
@@ -248,7 +248,7 @@ type ProductItem = {
             aria-controls="overlay_panel"
             className="select-product-button"
           />
-  
+
           <OverlayPanel
             ref={op}
             showCloseIcon
@@ -281,13 +281,10 @@ type ProductItem = {
         <link rel="stylesheet" href="./OverlayPanelDemo.css" />
         <script src="./ProductService.js"></script>
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/overlaypanel/overlaypanel.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
-        <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
                 content: `
 const { useEffect, useState, useRef } = React;
@@ -381,10 +378,18 @@ const OverlayPanelDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { OverlayPanel } from 'primereact/overlaypanel';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/overlaypanel/overlaypanel.min.js"></script>
 `}
 </CodeHighlight>
 

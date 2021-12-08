@@ -124,18 +124,15 @@ const StyleClassDemo = () => {
             'browser': {
                 tabName: 'Browser Source',
                 imports: `
-        <link rel="stylesheet" href="./StepsDemo.css" />
+        <link rel="stylesheet" href="./StyleClassDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/steps/steps.min.js"></script>
-        <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>
-        <script src="https://unpkg.com/primereact/panel/panel.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/styleclass/styleclass.min.js"></script>`,
                 content: `
-import React, { useRef } from 'react';
-import { StyleClass } from 'primereact/styleclass/';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
+const { useRef } = React;
+const { StyleClass } = primereact.styleclass;
+const { Button } = primereact.button;
+const { InputText } = primereact.inputtext;
 
 const StyleClassDemo = () => {
 
@@ -218,12 +215,21 @@ const StyleClassDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
-import {StyleClass} from 'primereact/styleclass';
+import { StyleClass } from 'primereact/styleclass';
 `}
 </CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/styleclass/styleclass.min.js"></script>
+`}
+</CodeHighlight>
+
                         <h5>Getting Started</h5>
                         <p>Required prop <i>nodeRef</i> needs to be bind to target's ref which is DOM element. StyleClass has two modes, <i>toggleClassName</i> to simply add-remove a class and enter/leave animations.</p>
 

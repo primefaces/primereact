@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler, IconUtils } from '../utils/Utils';
 import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { localeOption } from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 
@@ -161,7 +161,7 @@ export class ConfirmPopup extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.visible && !DomHandler.isAndroid()) {
+                if (this.state.visible && !DomHandler.isTouchDevice()) {
                     this.hide();
                 }
             };
@@ -235,7 +235,7 @@ export class ConfirmPopup extends Component {
     }
 
     onEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current);
+        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         this.align();
     }
 
@@ -370,6 +370,6 @@ export class ConfirmPopup extends Component {
     render() {
         let element = this.renderElement();
 
-        return <Portal element={element} appendTo={this.props.appendTo} visible />;
+        return <Portal element={element} appendTo={this.props.appendTo} visible={this.props.visible} />;
     }
 }

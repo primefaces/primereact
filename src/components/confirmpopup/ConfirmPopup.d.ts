@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {IconType} from "../utils/Utils";
+import { CSSTransitionProps } from '../csstransition';
+import { IconType } from "../utils/Utils";
 
 type ConfirmPopupTemplateType = React.ReactNode | ((options: ConfirmPopupOptions) => React.ReactNode);
 
@@ -34,7 +35,7 @@ export interface ConfirmPopupProps {
     appendTo?: ConfirmPopupAppendToType;
     dismissable?: boolean;
     footer?: ConfirmPopupTemplateType;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onShow?(): void;
     onHide?(result: string): void;
     accept?(): void;

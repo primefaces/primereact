@@ -131,7 +131,6 @@ const EditorDemo = () => {
                 imports: `
         <script src="https://unpkg.com/quill/dist/quill.min.js"></script>
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/editor/editor.min.js"></script>`,
                 content: `
@@ -180,10 +179,18 @@ const EditorDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Editor } from 'primereact/editor';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/editor/editor.min.js"></script>
 `}
 </CodeHighlight>
 
@@ -353,7 +360,7 @@ const header = (
                         <p>Resources of quill needs to be added to your application.</p>
 <CodeHighlight lang="js">
 {`
-npm install quill --save
+npm install quill
 `}
 </CodeHighlight>
                     </TabPanel>

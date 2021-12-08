@@ -390,10 +390,8 @@ export const AccordionDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./AccordionDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/accordion/accordion.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/accordion/accordion.min.js"></script>`,
                 content: `
 const { useEffect, useState, useRef } = React;
 const { Accordion, AccordionTab } = primereact.accordion;
@@ -544,10 +542,18 @@ const AccordionDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Accordion, AccordionTab } from 'primereact/accordion';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/accordion/accordion.min.js"></script>
 `}
 </CodeHighlight>
 
@@ -634,6 +640,18 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>Whether the tab is disabled.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>style</td>
+                                        <td>object</td>
+                                        <td>null</td>
+                                        <td>Inline style of the tab header and content.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>className</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Style class of the tab header and content.</td>
                                     </tr>
                                     <tr>
                                         <td>headerStyle</td>

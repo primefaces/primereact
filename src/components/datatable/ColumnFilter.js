@@ -361,7 +361,7 @@ export class ColumnFilter extends Component {
     }
 
     onOverlayEnter() {
-        ZIndexUtils.set('overlay', this.overlay);
+        ZIndexUtils.set('overlay', this.overlay, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         DomHandler.alignOverlay(this.overlay, this.icon, PrimeReact.appendTo, false);
         this.bindOutsideClickListener();
         this.bindScrollListener();
@@ -432,7 +432,7 @@ export class ColumnFilter extends Component {
     bindResizeListener() {
         if (!this.resizeListener) {
             this.resizeListener = () => {
-                if (this.state.overlayVisible) {
+                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
                     this.hide();
                 }
             };

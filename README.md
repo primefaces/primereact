@@ -2,7 +2,7 @@
 [![npm version](https://badge.fury.io/js/primereact.svg)](https://badge.fury.io/js/primereact)
 [![Discord Chat](https://img.shields.io/discord/557940238991753223.svg?color=7289da&label=chat&logo=discord)](https://discord.gg/gzKFYnpmCY)
 
-[![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2020/08/primereact-promotion-21aug2020@2x.jpg)](https://www.primefaces.org/primereact)
+[![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2021/12/primereact-release-7.jpeg)](https://www.primefaces.org/primereact)
 
 # PrimeReact
 
@@ -25,10 +25,29 @@ yarn add primeicons
 
 ## Import
 
+#### Module
 ```javascript
-//import {ComponentName} from 'primereact/{componentname}';
-import {Dialog} from 'primereact/dialog';
-import {Accordion,AccordionTab} from 'primereact/accordion';
+//import { ComponentName } from 'primereact/{componentname}';
+import { Dialog } from 'primereact/dialog';
+import { Accordion, AccordionTab } from 'primereact/accordion';
+```
+
+#### CDN
+
+```javascript
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/accordion/accordion.min.js"></script>
+//<script src="https://unpkg.com/primereact/{componentname}/{componentname}.min.js"></script>
+```
+
+```javascript
+const { Dialog } = primereact.dialog;
+const { Accordion, AccordionTab } = primereact.accordion;
+```
+
+Import all components and structures
+```javascript
+<script src="https://unpkg.com/primereact/primereact.all.min.js"></script>
 ```
 
 ## Dependencies
@@ -37,12 +56,12 @@ Majority of PrimeReact components (95%) are native and there are some exceptions
 
 In addition, components require PrimeIcons for icons and react-transition-group for animations.
 
-```json
+```javascript
 dependencies: {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-transition-group": "^4.4.1",
-    "primeicons": "^4.1.0"
+    "primeicons": "^5.0.0"
 }
 ```
 
@@ -50,7 +69,7 @@ dependencies: {
 The css dependencies are as follows, note that you may change the theme with another one of your choice.
 
 ```
-primereact/resources/themes/saga-blue/theme.css
+primereact/resources/themes/lara-light-indigo/theme.css
 primereact/resources/primereact.min.css
 primeicons/primeicons.css
 ```
@@ -58,7 +77,7 @@ primeicons/primeicons.css
 If you are using a bundler such as webpack with a css loader you may also import them to your main application component, an example from create-react-app would be.
 
 ```javascript
-import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 ```

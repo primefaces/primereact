@@ -4,6 +4,7 @@ import { DomHandler, ObjectUtils, classNames, ZIndexUtils, UniqueComponentId}  f
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
+import PrimeReact from '../api/Api';
 
 export class Dialog extends Component {
 
@@ -26,6 +27,7 @@ export class Dialog extends Component {
         closable: true,
         style: null,
         className: null,
+        maskStyle: null,
         maskClassName: null,
         showHeader: true,
         appendTo: null,
@@ -71,6 +73,7 @@ export class Dialog extends Component {
         closable: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
+        maskStyle: PropTypes.object,
         maskClassName: PropTypes.string,
         showHeader: PropTypes.bool,
         appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -489,8 +492,7 @@ export class Dialog extends Component {
 
     createStyle() {
         if (!this.styleElement) {
-            this.styleElement = document.createElement('style');
-            document.head.appendChild(this.styleElement);
+            this.styleElement = DomHandler.createInlineStyle();
 
             let innerHTML = '';
             for (let breakpoint in this.props.breakpoints) {
@@ -514,7 +516,7 @@ export class Dialog extends Component {
 
         if (this.props.visible) {
             this.setState({ visible: true }, () => {
-                ZIndexUtils.set('modal', this.mask, this.props.baseZIndex);
+                ZIndexUtils.set('modal', this.mask, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['modal']);
             });
         }
 
@@ -526,7 +528,7 @@ export class Dialog extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.visible && !this.state.maskVisible) {
             this.setState({ maskVisible: true }, () => {
-                ZIndexUtils.set('modal', this.mask, this.props.baseZIndex);
+                ZIndexUtils.set('modal', this.mask, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['modal']);
             });
         }
 
@@ -657,7 +659,7 @@ export class Dialog extends Component {
         };
 
         return (
-            <div ref={(el) => this.mask = el} className={maskClassName} onClick={this.onMaskClick}>
+            <div ref={(el) => this.mask = el} style={this.props.maskStyle} className={maskClassName} onClick={this.onMaskClick}>
                 <CSSTransition nodeRef={this.dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={this.state.visible} options={this.props.transitionOptions}
                     unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExiting={this.onExiting} onExited={this.onExited}>
                     <div ref={this.dialogRef} id={this.state.id} className={className} style={this.props.style} onClick={this.props.onClick}

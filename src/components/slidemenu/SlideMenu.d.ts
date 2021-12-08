@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
+import { CSSTransitionProps } from '../csstransition';
 
 type SlideMenuAppendToType = 'self' | HTMLElement | undefined | null;
 
@@ -17,7 +18,7 @@ export interface SlideMenuProps {
     autoZIndex?: boolean;
     baseZIndex?: number;
     appendTo?: SlideMenuAppendToType;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onShow?(e: React.SyntheticEvent): void;
     onHide?(e: React.SyntheticEvent): void;
 }

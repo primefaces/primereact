@@ -12,6 +12,8 @@ export class TabPanel extends Component {
         rightIcon: null,
         closable: false,
         disabled: false,
+        style: null,
+        className: null,
         headerStyle: null,
         headerClassName: null,
         contentStyle: null,
@@ -25,6 +27,8 @@ export class TabPanel extends Component {
         rightIcon: PropTypes.string,
         closeable: PropTypes.bool,
         disabled: PropTypes.bool,
+        style: PropTypes.object,
+        className: PropTypes.string,
         headerStyle: PropTypes.object,
         headerClassName: PropTypes.string,
         contentStyle: PropTypes.object,
@@ -222,7 +226,8 @@ export class TabView extends Component {
 
     renderTabHeader(tab, index) {
         const selected = this.isSelected(index);
-        const className = classNames('p-unselectable-text', { 'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled }, tab.props.headerClassName);
+        const style = { ...(tab.props.headerStyle || {}), ...(tab.props.style || {}) };
+        const className = classNames('p-unselectable-text', { 'p-tabview-selected p-highlight': selected, 'p-disabled': tab.props.disabled }, tab.props.headerClassName, tab.props.className);
         const id = this.state.id + '_header_' + index;
         const ariaControls = this.state.id + '_content_' + index;
         const tabIndex = tab.props.disabled ? null : 0;
@@ -263,7 +268,7 @@ export class TabView extends Component {
         }
 
         return (
-            <li ref={(el) => this[`tab_${index}`] = el} className={className} style={tab.props.headerStyle} role="presentation">
+            <li ref={(el) => this[`tab_${index}`] = el} className={className} style={style} role="presentation">
                 {content}
             </li>
         );
@@ -308,13 +313,13 @@ export class TabView extends Component {
 
     createContent(tab, index) {
         const selected = this.isSelected(index);
-        const className = classNames(tab.props.contentClassName, 'p-tabview-panel', { 'p-hidden': !selected });
+        const style = { ...(tab.props.contentStyle || {}), ...(tab.props.style || {}) };
+        const className = classNames(tab.props.contentClassName, tab.props.className, 'p-tabview-panel', { 'p-hidden': !selected });
         const id = this.state.id + '_content_' + index;
         const ariaLabelledBy = this.state.id + '_header_' + index;
 
         return (
-            <div id={id} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className}
-                style={tab.props.contentStyle} role="tabpanel">
+            <div id={id} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={style} role="tabpanel">
                 {!this.props.renderActiveOnly ? tab.props.children : (selected && tab.props.children)}
             </div>
         );

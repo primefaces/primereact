@@ -184,10 +184,10 @@ export class MultiSelectDemo extends Component {
                         itemTemplate={this.countryTemplate} selectedItemTemplate={this.selectedCountriesTemplate} panelFooterTemplate={this.panelFooterTemplate} />
 
                     <h5>Virtual Scroll (100000 Items)</h5>
-                    <MultiSelect value={this.state.selectedItems1} options={this.items} onChange={(e) => this.setState({ selectedItems1: e.value, selectAll: e.value.length === this.items.length })} selectAll={this.state.selectAll} onSelectAll={(e) => this.setState({ selectedItems1: e.checked ? [] : this.items.map(item => item.value), selectAll: !e.checked })} virtualScrollerOptions={{ itemSize: 34 }} placeholder="Select Item"/>
+                    <MultiSelect value={this.state.selectedItems1} options={this.items} onChange={(e) => this.setState({ selectedItems1: e.value, selectAll: e.value.length === this.items.length })} selectAll={this.state.selectAll} onSelectAll={(e) => this.setState({ selectedItems1: e.checked ? [] : this.items.map(item => item.value), selectAll: !e.checked })} virtualScrollerOptions={{ itemSize: 43 }} placeholder="Select Item"/>
 
                     <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                    <MultiSelect value={this.state.selectedItems2} options={this.state.lazyItems} onChange={(e) => this.setState({ selectedItems2: e.value })} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 34, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
+                    <MultiSelect value={this.state.selectedItems2} options={this.state.lazyItems} onChange={(e) => this.setState({ selectedItems2: e.value })} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 43, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
                         return (
                             <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
                                 <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
@@ -351,7 +351,7 @@ const MultiSelectDemo = () => {
                 <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
 
                 <h5>Grouped</h5>
-                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => selectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
                     optionGroupTemplate={groupedItemTemplate} placeholder="Select Cities" />
 
                 <h5>Advanced with Templating and Filtering</h5>
@@ -359,10 +359,10 @@ const MultiSelectDemo = () => {
                     itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
 
                 <h5>Virtual Scroll (100000 Items)</h5>
-                <MultiSelect value={selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : this.items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 34 }} placeholder="Select Item"/>
+                <MultiSelect value={selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : this.items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 43 }} placeholder="Select Item"/>
 
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 34, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
                         <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
@@ -525,7 +525,7 @@ const MultiSelectDemo = () => {
                 <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
 
                 <h5>Grouped</h5>
-                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => selectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
                     optionGroupTemplate={groupedItemTemplate} placeholder="Select Cities" />
 
                 <h5>Advanced with Templating and Filtering</h5>
@@ -533,10 +533,10 @@ const MultiSelectDemo = () => {
                     itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
 
                 <h5>Virtual Scroll (100000 Items)</h5>
-                <MultiSelect value={state.selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : this.items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 34 }} placeholder="Select Item"/>
+                <MultiSelect value={state.selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : this.items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 43 }} placeholder="Select Item"/>
 
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 34, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
                         <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
@@ -554,10 +554,7 @@ const MultiSelectDemo = () => {
                 imports: `
         <link rel="stylesheet" href="./MultiSelectDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
-        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
         <script src="https://unpkg.com/primereact/multiselect/multiselect.min.js"></script>
         <script src="https://unpkg.com/primereact/skeleton/skeleton.min.js"></script>`,
                 content: `
@@ -707,7 +704,7 @@ const MultiSelectDemo = () => {
                 <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
 
                 <h5>Grouped</h5>
-                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => selectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
                     optionGroupTemplate={groupedItemTemplate} placeholder="Select Cities" />
 
                 <h5>Advanced with Templating and Filtering</h5>
@@ -715,10 +712,10 @@ const MultiSelectDemo = () => {
                     itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
 
                 <h5>Virtual Scroll (100000 Items)</h5>
-                <MultiSelect value={selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : this.items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 34 }} placeholder="Select Item"/>
+                <MultiSelect value={selectedItems1} options={items} onChange={(e) => {setSelectedItems1(e.value); setSelectAll(e.value.length === items.length)}} selectAll={selectAll} onSelectAll={(e) => {setSelectedItems1(e.checked ? [] : this.items.map(item => item.value)); setSelectAll(!e.checked)}} virtualScrollerOptions={{ itemSize: 43 }} placeholder="Select Item"/>
 
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 34, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
                         <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
@@ -771,10 +768,18 @@ const MultiSelectDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { MultiSelect } from 'primereact/multiselect';
+`}
+</CodeHighlight>
+
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/multiselect/multiselect.min.js"></script>
 `}
 </CodeHighlight>
 

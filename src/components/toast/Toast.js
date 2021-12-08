@@ -4,6 +4,7 @@ import { classNames, ZIndexUtils } from '../utils/Utils';
 import { ToastMessage } from './ToastMessage';
 import { TransitionGroup } from 'react-transition-group';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import PrimeReact from '../api/Api';
 
 let messageIdx = 0;
 
@@ -49,24 +50,24 @@ export class Toast extends Component {
 
     show(value) {
         if (value) {
-            this.setState(prevState => {
+            if (value) {
                 let newMessages;
 
                 if (Array.isArray(value)) {
                     for (let i = 0; i < value.length; i++) {
                         value[i].id = messageIdx++;
-                        newMessages = [...prevState.messages, ...value];
+                        newMessages = [...this.state.messages, ...value];
                     }
                 }
                 else {
                     value.id = messageIdx++;
-                    newMessages = prevState.messages ? [...prevState.messages, value] : [value];
+                    newMessages = this.state.messages ? [...this.state.messages, value] : [value];
                 }
 
-                prevState.messages.length === 0 && ZIndexUtils.set('toast', this.container, this.props.baseZIndex);
+                this.state.messages.length === 0 && ZIndexUtils.set('toast', this.container, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['toast']);
 
-                return { messages: newMessages }
-            });
+                this.setState({ messages: newMessages });
+            }
         }
     }
 

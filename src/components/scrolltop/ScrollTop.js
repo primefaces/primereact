@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {DomHandler, classNames, ZIndexUtils, IconUtils} from '../utils/Utils';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Ripple } from '../ripple/Ripple';
+import PrimeReact from '../api/Api';
 
 export class ScrollTop extends Component {
 
@@ -87,7 +88,7 @@ export class ScrollTop extends Component {
     }
 
     onEnter() {
-        ZIndexUtils.set('overlay', this.scrollElementRef.current);
+        ZIndexUtils.set('overlay', this.scrollElementRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
     }
 
     onEntered() {

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import { CSSTransitionProps } from '../csstransition';
 
 type PasswordHeaderType = React.ReactNode | ((props: PasswordProps) => React.ReactNode);
 
@@ -43,7 +44,7 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
     inputClassName?: string;
     panelStyle?: object;
     panelClassName?: string;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     onInput?(event: React.FormEvent<HTMLInputElement>, validatePattern: boolean): void;
     onShow?(): void;
     onHide?(): void;

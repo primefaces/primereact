@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TreeNode from '../treenode';
+import { CSSTransitionProps } from '../csstransition';
 
 type TreeSelectSelectionModeType = 'single' | 'multiple' | 'checkbox';
 
@@ -87,7 +88,7 @@ export interface TreeSelectProps {
     valueTemplate?: TreeSelectValueTemplateType;
     panelHeaderTemplate?: TreeSelectPanelHeaderTemplateType;
     panelFooterTemplate?: TreeSelectPanelFooterTemplateType;
-    transitionOptions?: object;
+    transitionOptions?: CSSTransitionProps;
     dropdownIcon?: string;
     filter?: boolean;
     filterValue?: string;

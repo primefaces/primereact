@@ -1,7 +1,6 @@
 .p-tooltip {
     position:absolute;
     padding: .25em .5rem;
-    max-width: 12.5rem;
 }
 
 .p-tooltip.p-tooltip-right,

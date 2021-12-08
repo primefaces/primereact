@@ -693,20 +693,11 @@ const DataTableDemo = () => {
         <link rel="stylesheet" href="./DataTableDemo.css" />
         <script src="./CustomerService.js"></script>
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
-        <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
-        <script src="https://unpkg.com/primereact/inputnumber/inputnumber.min.js"></script>
-        <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
-        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
-        <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
         <script src="https://unpkg.com/primereact/calendar/calendar.min.js"></script>
         <script src="https://unpkg.com/primereact/multiselect/multiselect.min.js"></script>
-        <script src="https://unpkg.com/primereact/progressbar/progressbar.min.js"></script>
         <script src="https://unpkg.com/primereact/slider/slider.min.js"></script>`,
                 content: `
 const { useEffect, useState } = React;
@@ -971,17 +962,26 @@ const DataTableDemo = () => {
             <div className="content-section documentation" id="app-doc">
                 <TabView>
                     <TabPanel header="Documentation">
-                        <h5>Import</h5>
+                        <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { DataTable } from 'primereact/datatable';
 `}
 </CodeHighlight>
 
-            <h5>Getting Started</h5>
-            <p>DataTable requires a value as an array of objects and columns defined with Column component. Throughout the samples, a product interface having code, name, description, image, category, quantity, price, inventoryStatus and rating properties is used to define an object to be displayed by the datatable.
-                Products are loaded by a CustomerService that connects to a server to fetch the products. Note that this is only for demo purposes, DataTable does not have any restrictions on how data is provided.
-            </p>
+                        <h5>Import via CDN</h5>
+<CodeHighlight>
+{`
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/column/column.min.js"></script>
+<script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
+`}
+</CodeHighlight>
+
+                        <h5>Getting Started</h5>
+                        <p>DataTable requires a value as an array of objects and columns defined with Column component. Throughout the samples, a product interface having code, name, description, image, category, quantity, price, inventoryStatus and rating properties is used to define an object to be displayed by the datatable.
+                            Products are loaded by a CustomerService that connects to a server to fetch the products. Note that this is only for demo purposes, DataTable does not have any restrictions on how data is provided.
+                        </p>
 
 <CodeHighlight lang="js">
 {`
@@ -3130,6 +3130,24 @@ export const DataTableStateDemo = () => {
                             <td>Determines whether the cell editor will be opened when clicking to select any row on Selection and Cell Edit modes.</td>
                         </tr>
                         <tr>
+                            <td>selectionPageOnly</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>When enabled with paginator and checkbox selection mode, the select all checkbox in the header will select all rows on the current page.</td>
+                        </tr>
+                        <tr>
+                            <td>showSelectAll</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Whether to show the select all checkbox in the header.</td>
+                        </tr>
+                        <tr>
+                            <td>selectAll</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>Whether all data is selected.</td>
+                        </tr>
+                        <tr>
                             <td>headerColumnGroup</td>
                             <td>ColumnGroup</td>
                             <td>null</td>
@@ -3328,7 +3346,9 @@ export const DataTableStateDemo = () => {
                             <td>null</td>
                             <td>A function to implement custom export. Need to return string value. <br />
                                 event.data: Field data. <br />
-                                event.rows: Column field.</td>
+                                event.field: Column field.
+                                event.rowData: Row data.
+                                event.column: Column.</td>
                         </tr>
                         <tr>
                             <td>expandableRowGroups</td>
@@ -3439,7 +3459,8 @@ export const DataTableStateDemo = () => {
                         <tr>
                             <td>onSelectionChange</td>
                             <td>event.originalEvent: Browser event <br/>
-                                event.value: Selection object
+                                event.value: Selection object <br />
+                                event.type: Type of the selection, valid values are "all", "row", "cell", "radio" and "checkbox".
                             </td>
                             <td>Callback to invoke when selection changes.</td>
                         </tr>
@@ -3493,6 +3514,12 @@ export const DataTableStateDemo = () => {
                             <td>onFilter</td>
                             <td>event.filters: Collection of active filters.</td>
                             <td>Callback to invoke on filtering.</td>
+                        </tr>
+                        <tr>
+                            <td>onSelectAll</td>
+                            <td>event.originalEvent: Browser event<br />
+                                event.checked: Whether all data is selected.</td>
+                            <td>Callback to invoke when all data is selected.</td>
                         </tr>
                         <tr>
                             <td>onAllRowsSelect</td>

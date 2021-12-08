@@ -4,6 +4,7 @@ import { DomHandler, ObjectUtils,ZIndexUtils, classNames, ConnectedOverlayScroll
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
+import PrimeReact from '../api/Api';
 
 export class Menu extends Component {
 
@@ -159,7 +160,7 @@ export class Menu extends Component {
     }
 
     onEnter() {
-        ZIndexUtils.set('menu', this.menuRef.current, this.props.baseZIndex);
+        ZIndexUtils.set('menu', this.menuRef.current, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['menu']);
         DomHandler.absolutePosition(this.menuRef.current, this.target);
     }
 
@@ -191,7 +192,7 @@ export class Menu extends Component {
 
         if (!this.documentResizeListener) {
             this.documentResizeListener = (event) => {
-                if (this.state.visible && !DomHandler.isAndroid()) {
+                if (this.state.visible && !DomHandler.isTouchDevice()) {
                     this.hide(event);
                 }
             };

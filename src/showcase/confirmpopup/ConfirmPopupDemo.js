@@ -70,9 +70,9 @@ export class ConfirmPopupDemo extends Component {
                         <Button onClick={this.confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
 
                         <h5>Using ConfirmPopup tag</h5>
-                        <ConfirmPopup target={document.getElementById('button')} visible={this.state.visible} onHide={() => this.setState({ visible: false })} message="Are you sure you want to proceed?"
+                        <ConfirmPopup target={this.button} visible={this.state.visible} onHide={() => this.setState({ visible: false })} message="Are you sure you want to proceed?"
                             icon="pi pi-exclamation-triangle" accept={this.accept} reject={this.reject} />
-                        <Button id="button" onClick={() => this.setState({ visible: true })} icon="pi pi-check" label="Confirm" />
+                        <Button ref={(el) => this.button = el} onClick={() => this.setState({ visible: true })} icon="pi pi-check" label="Confirm" />
                     </div>
                 </div>
 

@@ -28,8 +28,8 @@ export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
     rejectLabel?: string;
     acceptLabel?: string;
     icon?: IconType<ConfirmDialogProps>;
-    rejectIcon?: IconType<ConfirmDialogProps>;;
-    acceptIcon?: IconType<ConfirmDialogProps>;;
+    rejectIcon?: IconType<ConfirmDialogProps>;
+    acceptIcon?: IconType<ConfirmDialogProps>;
     rejectClassName?: string;
     acceptClassName?: string;
     appendTo?: ConfirmDialogAppendToType;

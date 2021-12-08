@@ -1,10 +1,10 @@
 {
     "name": "primereact",
-    "version": "7.0.0-rc.2",
+    "version": "8.0.0",
     "homepage": "https://www.primefaces.org/primereact",
     "repository": {
-      "type": "git",
-      "url": "https://github.com/primefaces/primereact.git"
+        "type": "git",
+        "url": "https://github.com/primefaces/primereact.git"
     },
     "license": "MIT",
     "bugs": {
@@ -24,7 +24,14 @@
     ],
     "peerDependencies": {
         "react": "^17.0.1",
-        "react-dom": "^17.0.1"
+        "react-dom": "^17.0.1",
+        "react-transition-group": "^4.4.1",
+        "primeicons": "^5.0.0"
+    },
+    "peerDependenciesMeta": {
+        "react-transition-group": {
+            "optional": true
+        }
     },
     "unpkg": "primereact.all.min.js"
 }
