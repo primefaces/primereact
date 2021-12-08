@@ -945,6 +945,8 @@ export default class DomHandler {
     
         // Seem the same
         return true;
+    }
+    
     /**
      * Anytime an inline style is created check environment variable 'process.env.REACT_APP_CSS_NONCE'
      * to set a CSP NONCE.
@@ -960,6 +962,5 @@ export default class DomHandler {
         }
         document.head.appendChild(styleElement);
         return styleElement;
-
     }
 }
