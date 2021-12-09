@@ -20,22 +20,30 @@ import './StyleClassDemo.css';
 
 export class StyleClassDemo extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.toggleBtnRef = React.createRef();
+        this.openBtnRef = React.createRef();
+        this.closeBtnRef = React.createRef();
+    }
+
     render() {
         return (
             <div className="card">
                 <h5>Toggle Class</h5>
                 <StyleClass nodeRef={this.toggleBtnRef} selector="@next" toggleClassName="p-disabled">
-                    <Button ref={(el) => this.toggleBtnRef = el} label="Toggle p-disabled" />
+                    <Button ref={this.toggleBtnRef} label="Toggle p-disabled" />
                 </StyleClass>
                 <InputText className="p-d-block p-mt-3" />
 
                 <h5>Animations</h5>
                 <StyleClass nodeRef={this.openBtnRef} selector=".box" enterClassName="p-d-none" enterActiveClassName="my-fadein">
-                    <Button ref={(el) => this.openBtnRef = el} label="Show" className="p-mr-2" />
+                    <Button ref={this.openBtnRef} label="Show" className="p-mr-2" />
                 </StyleClass>
 
                 <StyleClass nodeRef={this.closeBtnRef} selector=".box" leaveActiveClassName="my-fadeout" leaveToClassName="p-d-none">
-                    <Button ref={(el) => this.closeBtnRef = el} label="Hide" />
+                    <Button ref={this.closeBtnRef} label="Hide" />
                 </StyleClass>
 
                 <div className="box p-d-none">Content</div>
