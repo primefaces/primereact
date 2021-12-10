@@ -18,8 +18,10 @@ export class SplitButton extends Component {
         disabled: null,
         style: null,
         className: null,
+        buttonClassName: null,
         menuStyle: null,
         menuClassName: null,
+        menuButtonClassName: null,
         tabIndex: null,
         appendTo: null,
         tooltip: null,
@@ -40,8 +42,10 @@ export class SplitButton extends Component {
         disabled: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
+        buttonClassName: PropTypes.string,
         menuStyle: PropTypes.object,
         menuClassName: PropTypes.string,
+        menuButtonClassName: PropTypes.string,
         tabIndex: PropTypes.number,
         appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         tooltip: PropTypes.string,
@@ -241,15 +245,17 @@ export class SplitButton extends Component {
 
     render() {
         let className = classNames('p-splitbutton p-component', this.props.className, { 'p-disabled': this.props.disabled });
+        let buttonClassName = classNames('p-splitbutton-defaultbutton', this.props.buttonClassName);
+        let menuButtonClassName = classNames('p-splitbutton-menubutton', this.props.menuButtonClassName);
         let items = this.renderItems();
         const buttonContent = this.props.buttonTemplate ? ObjectUtils.getJSXElement(this.props.buttonTemplate, this.props) : null;
 
         return (
             <div id={this.state.id} className={className} style={this.props.style} ref={el => this.container = el}>
-                <Button ref={(el) => this.defaultButton = el} type="button" className="p-splitbutton-defaultbutton" icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} tabIndex={this.props.tabIndex}>
+                <Button ref={(el) => this.defaultButton = el} type="button" className={buttonClassName} icon={this.props.icon} label={this.props.label} onClick={this.props.onClick} disabled={this.props.disabled} tabIndex={this.props.tabIndex}>
                     {buttonContent}
                 </Button>
-                <Button type="button" className="p-splitbutton-menubutton" icon={this.props.dropdownIcon} onClick={this.onDropdownButtonClick} disabled={this.props.disabled}
+                <Button type="button" className={menuButtonClassName} icon={this.props.dropdownIcon} onClick={this.onDropdownButtonClick} disabled={this.props.disabled}
                     aria-expanded={this.state.overlayVisible} aria-haspopup aria-owns={this.state.id + '_overlay'} />
                 <SplitButtonPanel ref={this.overlayRef} appendTo={this.props.appendTo} id={this.state.id + '_overlay'}
                     menuStyle={this.props.menuStyle} menuClassName={this.props.menuClassName} onClick={this.onPanelClick}
