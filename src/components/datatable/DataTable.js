@@ -1100,6 +1100,23 @@ export class DataTable extends Component {
         return this.props.removableSort ? (this.props.defaultSortOrder === currentOrder ? currentOrder * -1 : 0) : currentOrder * -1;
     }
 
+    compareValuesOnSort(value1, value2) {
+        let result = null;
+
+        if (value1 == null && value2 != null)
+            result = -1;
+        else if (value1 != null && value2 == null)
+            result = 1;
+        else if (value1 == null && value2 == null)
+            result = 0;
+        else if (typeof value1 === 'string' && typeof value2 === 'string')
+            result = value1.localeCompare(value2, undefined, { numeric: true });
+        else
+            result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+
+        return result;
+    }
+
     addSortMeta(meta, multiSortMeta) {
         const index = multiSortMeta.findIndex(sortMeta => sortMeta.field === meta.field);
 
@@ -1139,18 +1156,7 @@ export class DataTable extends Component {
             value.sort((data1, data2) => {
                 const value1 = ObjectUtils.resolveFieldData(data1, field);
                 const value2 = ObjectUtils.resolveFieldData(data2, field);
-                let result = null;
-
-                if (value1 == null && value2 != null)
-                    result = -1;
-                else if (value1 != null && value2 == null)
-                    result = 1;
-                else if (value1 == null && value2 == null)
-                    result = 0;
-                else if (typeof value1 === 'string' && typeof value2 === 'string')
-                    result = value1.localeCompare(value2, undefined, { numeric: true });
-                else
-                    result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+                const result = this.compareValuesOnSort(value1, value2);
 
                 return (order * result);
             });
@@ -1190,22 +1196,12 @@ export class DataTable extends Component {
     multisortField(data1, data2, multiSortMeta, index) {
         const value1 = ObjectUtils.resolveFieldData(data1, multiSortMeta[index].field);
         const value2 = ObjectUtils.resolveFieldData(data2, multiSortMeta[index].field);
-        let result = null;
 
         if (value1 === value2) {
             return (multiSortMeta.length - 1) > (index) ? (this.multisortField(data1, data2, multiSortMeta, index + 1)) : 0;
         }
 
-        if (value1 == null && value2 != null)
-            result = -1;
-        else if (value1 != null && value2 == null)
-            result = 1;
-        else if (value1 == null && value2 == null)
-                result = 0;
-        else if (typeof value1 === 'string' && typeof value2 === 'string')
-            result = value1.localeCompare(value2, undefined, { numeric: true });
-        else
-            result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+        const result = this.compareValuesOnSort(value1, value2);
 
         return (multiSortMeta[index].order * result);
     }
