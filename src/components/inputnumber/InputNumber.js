@@ -783,11 +783,19 @@ export class InputNumber extends Component {
 
         if (valueStr != null) {
             newValue = this.parseValue(valueStr);
-            newValue = !newValue && !this.props.allowEmpty ? 0 : newValue;
+            newValue = this.evaluateEmpty(newValue);
             this.updateInput(newValue, insertedValueStr, operation, valueStr);
 
             this.handleOnChange(event, currentValue, newValue);
         }
+    }
+
+    evaluateEmpty(newValue) {
+        let minimum = this.props.min || 0;
+        if (minimum < 0) {
+            minimum = 0;
+        }
+        return !newValue && !this.props.allowEmpty ? minimum : newValue;
     }
 
     handleOnChange(event, currentValue, newValue) {
@@ -907,7 +915,7 @@ export class InputNumber extends Component {
     }
 
     updateInputValue(newValue) {
-        newValue = !newValue && !this.props.allowEmpty ? 0 : newValue;
+        newValue = this.evaluateEmpty(newValue);
 
         const inputEl = this.inputRef.current;
         const value = inputEl.value;
@@ -920,8 +928,8 @@ export class InputNumber extends Component {
     }
 
     formattedValue(val) {
-        const newVal = !val && !this.props.allowEmpty ? 0 : val;
-        return this.formatValue(newVal);
+        const newValue = this.evaluateEmpty(val);
+        return this.formatValue(newValue);
     }
 
     concatValues(val1, val2) {
