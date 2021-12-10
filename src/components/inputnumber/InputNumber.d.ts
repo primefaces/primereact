@@ -4,12 +4,12 @@ import TooltipOptions from '../tooltip/tooltipoptions';
 interface InputNumberValueChangeTargetOptions {
     name: string;
     id: string;
-    value: number;
+    value: number | null;
 }
 
 interface InputNumberValueChangeParams {
     originalEvent: React.SyntheticEvent;
-    value: number;
+    value: number | null;
     stopPropagation(): void;
     preventDefault(): void;
     target: InputNumberValueChangeTargetOptions;
@@ -17,11 +17,11 @@ interface InputNumberValueChangeParams {
 
 interface InputNumberChangeParams {
     originalEvent: React.SyntheticEvent;
-    value: number;
+    value: number | null;
 }
 
 export interface InputNumberProps {
-    value?: number;
+    value?: number | null;
     inputRef?: React.Ref<HTMLInputElement>;
     format?: boolean;
     showButtons?: boolean;
