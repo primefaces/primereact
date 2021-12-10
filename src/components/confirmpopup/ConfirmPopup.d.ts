@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from "../utils/Utils";
+import { IconType } from "../utils/utils";
 
 type ConfirmPopupTemplateType = React.ReactNode | ((options: ConfirmPopupOptions) => React.ReactNode);
 

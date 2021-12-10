@@ -2,7 +2,7 @@ import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { VirtualScrollerProps } from '../virtualscroller';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from '../utils/Utils';
+import { IconType } from '../utils/utils';
 
 type AutoCompleteOptionGroupTemplateType = React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
 

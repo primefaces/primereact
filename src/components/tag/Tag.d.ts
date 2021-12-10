@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {IconType} from "../utils/Utils";
+import {IconType} from "../utils/utils";
 
 type TagSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
 
