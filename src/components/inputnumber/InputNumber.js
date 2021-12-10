@@ -791,11 +791,7 @@ export class InputNumber extends Component {
     }
 
     evaluateEmpty(newValue) {
-        let minimum = this.props.min || 0;
-        if (minimum < 0) {
-            minimum = 0;
-        }
-        return !newValue && !this.props.allowEmpty ? minimum : newValue;
+        return !newValue && !this.props.allowEmpty ?  this.props.min || 0 : newValue;
     }
 
     handleOnChange(event, currentValue, newValue) {
