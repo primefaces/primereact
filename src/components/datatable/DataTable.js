@@ -1012,17 +1012,11 @@ export class DataTable extends Component {
     }
 
     destroyResponsiveStyle() {
-        if (this.responsiveStyleElement) {
-            document.head.removeChild(this.responsiveStyleElement);
-            this.responsiveStyleElement = null;
-        }
+        this.responsiveStyleElement = DomHandler.removeInlineStyle(this.responsiveStyleElement);
     }
 
     destroyStyleElement() {
-        if (this.styleElement) {
-            document.head.removeChild(this.styleElement);
-            this.styleElement = null;
-        }
+        this.styleElement = DomHandler.removeInlineStyle(this.styleElement);
     }
 
     onPageChange(e) {

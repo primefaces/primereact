@@ -553,10 +553,7 @@ export class Dialog extends Component {
     componentWillUnmount() {
         this.disableDocumentSettings();
 
-        if (this.styleElement) {
-            document.head.removeChild(this.styleElement);
-            this.styleElement = null;
-        }
+        this.styleElement = DomHandler.removeInlineStyle(this.styleElement);
 
         ZIndexUtils.clear(this.mask);
     }
