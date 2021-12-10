@@ -23,6 +23,7 @@ export interface EditorProps {
     modules?: any;
     formats?: string[];
     theme?: string;
+    showHeader?: boolean;
     headerTemplate?: React.ReactNode;
     onTextChange?(e: EditorTextChangeParams): void;
     onSelectionChange?(e: EditorSelectionChangeParams): void;

@@ -14,6 +14,7 @@ export class Editor extends Component {
         modules: null,
         formats: null,
         theme: 'snow',
+        showHeader: true,
         headerTemplate: null,
         onTextChange: null,
         onSelectionChange: null,
@@ -30,6 +31,7 @@ export class Editor extends Component {
         modules: PropTypes.object,
         formats: PropTypes.array,
         theme: PropTypes.string,
+        showHeader: PropTypes.bool,
         headerTemplate: PropTypes.any,
         onTextChange: PropTypes.func,
         onSelectionChange: PropTypes.func,
@@ -45,7 +47,7 @@ export class Editor extends Component {
             if (module && module.default && DomHandler.isExist(this.editorElement)) {
                 this.quill = new module.default(this.editorElement, {
                     modules: {
-                        toolbar: this.toolbarElement,
+                        toolbar: this.props.showHeader ? this.toolbarElement : false,
                         ...this.props.modules
                     },
                     placeholder: this.props.placeholder,
@@ -105,7 +107,11 @@ export class Editor extends Component {
         let containerClass = classNames('p-component p-editor-container', this.props.className);
         let toolbarHeader = null;
 
-        if (this.props.headerTemplate) {
+        if (this.props.showHeader === false) {
+            toolbarHeader = '';
+            this.toolbarElement = undefined;
+        }
+        else if (this.props.headerTemplate) {
             toolbarHeader = (
                 <div ref={(el) => this.toolbarElement = el} className="p-editor-toolbar">
                     {this.props.headerTemplate}

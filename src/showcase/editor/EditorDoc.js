@@ -281,6 +281,12 @@ const header = (
                                         <td>Whitelist of formats to display, see <a href="http://quilljs.com/docs/formats/">here</a> for available options.</td>
                                     </tr>
                                     <tr>
+                                        <td>showHeader</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>Whether to display the toolbar or hide it.</td>
+                                    </tr>
+                                    <tr>
                                         <td>headerTemplate</td>
                                         <td>any</td>
                                         <td>null</td>
