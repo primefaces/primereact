@@ -3,7 +3,7 @@ import TreeNode from '../treenode';
 
 type TreeSelectionModeType = 'single' | 'multiple' | 'checkbox';
 
-type TreeSelectionKeys = string | TreeSelectionKeysType | TreeSelectionKeysType[] | undefined | null;
+type TreeSelectionKeys = string | TreeMultipleSelectionKeys | TreeCheckboxSelectionKeys | null;
 
 type TreeSelectionKeyType = boolean | TreeCheckboxSelectionKeyType;
 
@@ -49,8 +49,12 @@ interface TreeTogglerTemplateOptions {
     expanded: boolean;
 }
 
-interface TreeSelectionKeysType {
-    [key: string]: TreeSelectionKeyType;
+interface TreeMultipleSelectionKeys {
+    [key: string]: boolean;
+}
+
+interface TreeCheckboxSelectionKeys {
+    [key: string]: TreeCheckboxSelectionKeyType;
 }
 
 interface TreeCheckboxSelectionKeyType {
@@ -69,7 +73,7 @@ interface TreeExpandedParams {
 
 interface TreeSelectionParams {
     originalEvent: React.SyntheticEvent;
-    value: TreeSelectionKeysType;
+    value: TreeSelectionKeys;
 }
 
 interface TreeEventNodeParams {
