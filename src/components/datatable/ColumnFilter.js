@@ -305,7 +305,7 @@ export class ColumnFilter extends Component {
         let filters = { ...this.props.filters };
         let newConstraint = { value: null, matchMode: defaultConstraint.matchMode };
         filters[this.field].constraints.push(newConstraint);
-        filterConstraintAddCallback && filterConstraintAddCallback({ field: this.field, constraing: newConstraint });
+        filterConstraintAddCallback && filterConstraintAddCallback({ field: this.field, constraint: newConstraint });
         this.props.onFilterChange(filters);
 
         if (!this.getColumnProp('showApplyButton')) {
@@ -317,7 +317,7 @@ export class ColumnFilter extends Component {
         const filterConstraintRemoveCallback = this.getColumnProp('onFilterConstraintRemove');
         let filters = { ...this.props.filters };
         let removedConstraint = filters[this.field].constraints.splice(index, 1);
-        filterConstraintRemoveCallback && filterConstraintRemoveCallback({ field: this.field, constraing: removedConstraint });
+        filterConstraintRemoveCallback && filterConstraintRemoveCallback({ field: this.field, constraint: removedConstraint });
         this.props.onFilterChange(filters);
 
         if (!this.getColumnProp('showApplyButton')) {
