@@ -657,7 +657,7 @@ export class MultiSelect extends Component {
         }
         else {
             let visibleOptions = this.getVisibleOptions();
-            if (visibleOptions.length === 0) {
+            if (!visibleOptions || visibleOptions.length === 0) {
                 return false;
             }
 
