@@ -739,7 +739,11 @@ export default class DomHandler {
     }
 
     static isExist(element) {
-        return element !== null && typeof(element) !== 'undefined' && element.nodeName;
+        return element !== null && typeof(element) !== 'undefined' && element.nodeName && element.parentNode;
+    }
+
+    static hasDOM() {
+        return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
     }
 
     static getFocusableElements(element, selector = '') {

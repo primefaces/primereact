@@ -57,6 +57,7 @@ export declare class DomHandler {
     static resolveUserAgent(): { browser: string; version: string; };
     static isVisible(el: HTMLElement): boolean;
     static isExist(el: HTMLElement): boolean;
+    static hasDOM(): boolean;
     static getFocusableElements(el: HTMLElement, selector?: string): any[];
     static getFirstFocusableElement(el: HTMLElement, selector?: string): any;
     static getLastFocusableElement(el: HTMLElement, selector?: string): any;

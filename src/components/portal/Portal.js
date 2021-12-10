@@ -2,6 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import PrimeReact from '../api/Api';
+import { DomHandler } from '../utils/Utils';
 
 export class Portal extends Component {
 
@@ -29,12 +30,8 @@ export class Portal extends Component {
         };
     }
 
-    hasDOM() {
-        return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-    }
-
     componentDidMount() {
-        if (this.hasDOM() && !this.state.mounted) {
+        if (DomHandler.hasDOM() && !this.state.mounted) {
             this.setState({ mounted: true }, this.props.onMounted);
         }
     }
