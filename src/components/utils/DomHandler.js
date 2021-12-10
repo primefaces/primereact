@@ -893,7 +893,7 @@ export default class DomHandler {
      * @param {HtmlStyleElement} styleElement the element to remove from head
      */
     static removeInlineStyle(styleElement) {
-        if (styleElement && styleElement.parentNode) {
+        if (this.isExist(styleElement)) {
             try {
                 document.head.removeChild(styleElement);
             } catch (error) {
