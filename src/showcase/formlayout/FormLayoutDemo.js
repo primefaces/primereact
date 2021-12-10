@@ -221,7 +221,7 @@ export class FormLayoutDemo extends Component {
                             </div>
                             <div className="p-field p-col-12">
                                 <label htmlFor="address">Address</label>
-                                <InputTextarea id="address" type="text" rows="4" />
+                                <InputTextarea id="address" rows={4} />
                             </div>
                             <div className="p-field p-col-12 p-md-6">
                                 <label htmlFor="city">City</label>
