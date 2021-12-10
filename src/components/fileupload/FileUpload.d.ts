@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {IconType} from "../utils/utils";
+import {IconType} from "../utils";
 
 type FileUploadModeType = 'basic' | 'advanced';
 

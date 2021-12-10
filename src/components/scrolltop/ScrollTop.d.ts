@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from '../utils/utils';
+import { IconType } from '../utils';
 
 type ScrollTopTargetType = 'window' | 'parent';
 
