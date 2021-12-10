@@ -33,7 +33,7 @@ export interface InputMaskProps {
     className?: string;
     placeholder?: string;
     size?: number;
-    maxlength?: number;
+    maxLength?: number;
     tabIndex?: number;
     disabled?: boolean;
     readOnly?: boolean;

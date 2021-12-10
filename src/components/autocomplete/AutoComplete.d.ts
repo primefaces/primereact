@@ -75,7 +75,7 @@ export interface AutoCompleteProps {
     placeholder?: string;
     readOnly?: boolean;
     disabled?: boolean;
-    maxlength?: number;
+    maxLength?: number;
     size?: number;
     appendTo?: AutoCompleteAppendToType;
     tabIndex?: number;

@@ -40,7 +40,7 @@ export class AutoComplete extends Component {
         placeholder: null,
         readOnly: false,
         disabled: false,
-        maxlength: null,
+        maxLength: null,
         size: null,
         appendTo: null,
         tabIndex: null,
@@ -101,7 +101,7 @@ export class AutoComplete extends Component {
         placeholder: PropTypes.string,
         readOnly: PropTypes.bool,
         disabled: PropTypes.bool,
-        maxlength: PropTypes.number,
+        maxLength: PropTypes.number,
         size: PropTypes.number,
         appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         tabIndex: PropTypes.number,
@@ -747,7 +747,7 @@ export class AutoComplete extends Component {
                 defaultValue={this.formatValue(this.props.value)} role="searchbox" aria-autocomplete="list" aria-controls={this.state.id + '_list'}
                 aria-labelledby={this.props.ariaLabelledBy} className={inputClassName} style={this.props.inputStyle} autoComplete="off"
                 readOnly={this.props.readOnly} disabled={this.props.disabled} placeholder={this.props.placeholder} size={this.props.size}
-                maxLength={this.props.maxlength} tabIndex={this.props.tabIndex}
+                maxLength={this.props.maxLength} tabIndex={this.props.tabIndex}
                 onBlur={this.onInputBlur} onFocus={this.onInputFocus} onChange={this.onInputChange}
                 onMouseDown={this.props.onMouseDown} onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown}
                 onKeyPress={this.props.onKeyPress} onContextMenu={this.props.onContextMenu}
@@ -776,7 +776,7 @@ export class AutoComplete extends Component {
                 <input ref={this.inputRef} type={this.props.type} disabled={this.props.disabled} placeholder={this.props.placeholder}
                     role="searchbox" aria-autocomplete="list" aria-controls={this.state.id + '_list'} aria-labelledby={this.props.ariaLabelledBy}
                     autoComplete="off" tabIndex={this.props.tabIndex} onChange={this.onInputChange} id={this.props.inputId} name={this.props.name}
-                    style={this.props.inputStyle} className={this.props.inputClassName} maxLength={this.props.maxlength}
+                    style={this.props.inputStyle} className={this.props.inputClassName} maxLength={this.props.maxLength}
                     onKeyUp={this.props.onKeyUp} onKeyDown={this.onInputKeyDown} onKeyPress={this.props.onKeyPress}
                     onFocus={this.onMultiInputFocus} onBlur={this.onMultiInputBlur} />
             </li>
