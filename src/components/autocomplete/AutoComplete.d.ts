@@ -12,6 +12,8 @@ type AutoCompleteSelectedItemTemplateType = React.ReactNode | ((value: any) => R
 
 type AutoCompleteAppendToType = 'self' | HTMLElement | undefined | null;
 
+type AutoCompleteSourceType = 'dropdown' | 'input';
+
 interface AutoCompleteChangeTargetOptions {
     name: string;
     id: string;
@@ -104,4 +106,6 @@ export interface AutoCompleteProps {
     onHide?(): void;
 }
 
-export declare class AutoComplete extends React.Component<AutoCompleteProps, any> { }
+export declare class AutoComplete extends React.Component<AutoCompleteProps, any> { 
+    public search(event:React.SyntheticEvent, query:string, source: AutoCompleteSourceType): void;
+}
