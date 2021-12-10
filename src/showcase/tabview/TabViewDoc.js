@@ -1117,6 +1117,13 @@ template: (options) => {
                             </td>
                                         <td>Callback to invoke when an active tab is changed.</td>
                                     </tr>
+                                    <tr>
+                                        <td>onTabClose</td>
+                                        <td>event.originalEvent: Browser event  <br />
+                                event.index: Index of the selected tab
+                            </td>
+                                        <td>Callback to invoke when a tab is closed.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
