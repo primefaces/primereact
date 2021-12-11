@@ -130,6 +130,7 @@ export interface CalendarProps {
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     transitionOptions?: CSSTransitionProps;
+    innerTab?: boolean;
     dateTemplate?(e: CalendarDateTemplateParams): React.ReactNode;
     headerTemplate?(): React.ReactNode;
     footerTemplate?(): React.ReactNode;

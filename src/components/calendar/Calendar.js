@@ -91,7 +91,8 @@ export class Calendar extends Component {
         onTodayButtonClick: null,
         onClearButtonClick: null,
         onShow: null,
-        onHide: null
+        onHide: null,
+        innerTab: true
     }
 
     static propTypes = {
@@ -158,6 +159,7 @@ export class Calendar extends Component {
         tooltip: PropTypes.string,
         tooltipOptions: PropTypes.object,
         ariaLabelledBy: PropTypes.string,
+        innerTab: PropTypes.bool,
         dateTemplate: PropTypes.func,
         headerTemplate: PropTypes.func,
         footerTemplate: PropTypes.func,
@@ -504,30 +506,48 @@ export class Calendar extends Component {
                 break;
         }
     }
-
+    // If the user wants to switch to other inputs, we should not use event.preventDefault(). that's why 'event.preventDefault()' is used over and over again
     trapFocus(event) {
-        event.preventDefault();
+        if (this.props.innerTab) {
         let focusableElements = DomHandler.getFocusableElements(this.overlayRef.current);
 
         if (focusableElements && focusableElements.length > 0) {
             if (!document.activeElement) {
+                event.preventDefault();
                 focusableElements[0].focus();
             }
             else {
                 let focusedIndex = focusableElements.indexOf(document.activeElement);
 
                 if (event.shiftKey) {
-                    if (focusedIndex === -1 || focusedIndex === 0)
+                    event.preventDefault();
+                    if (focusedIndex === -1) {
                         focusableElements[focusableElements.length - 1].focus();
+                    } else if (focusedIndex === 0) {
+                        if (this.isVisible) {
+                            this.hideOverlay(null, this.reFocusInputField);
+                        }
+                    }
                     else
                         focusableElements[focusedIndex - 1].focus();
                 }
                 else {
-                    if (focusedIndex === -1 || focusedIndex === (focusableElements.length - 1))
+                    if (focusedIndex === -1) {
+                        event.preventDefault()
                         focusableElements[0].focus();
-                    else
+                    }
+                    else if (focusedIndex === focusableElements.length - 1 && this.isVisible) {
+                        this.hideOverlay(null,this.reFocusInputField)
+                    } else {
+                        event.preventDefault();
                         focusableElements[focusedIndex + 1].focus();
+                    }
                 }
+            }
+        }
+        } else {
+            if (this.isVisible) {
+                this.hideOverlay(null, this.reFocusInputField);
             }
         }
     }

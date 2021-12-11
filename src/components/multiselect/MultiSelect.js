@@ -63,7 +63,8 @@ export class MultiSelect extends Component {
         onShow: null,
         onHide: null,
         onFilter: null,
-        onSelectAll: null
+        onSelectAll: null,
+        innerTab: true
     };
 
     static propTypes = {
@@ -115,6 +116,7 @@ export class MultiSelect extends Component {
         removeIcon: PropTypes.any,
         showSelectAll: PropTypes.bool,
         selectAll: PropTypes.bool,
+        innerTab: PropTypes.bool,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
@@ -131,7 +133,7 @@ export class MultiSelect extends Component {
             focused: false,
             overlayVisible: false
         };
-
+        this.trapFocus = this.trapFocus.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
         this.onOptionSelect = this.onOptionSelect.bind(this);
@@ -198,7 +200,7 @@ export class MultiSelect extends Component {
     onOptionKeyDown(event) {
         const originalEvent = event.originalEvent;
         let listItem = originalEvent.currentTarget;
-
+        
         switch (originalEvent.which) {
             //down
             case 40:
@@ -232,11 +234,60 @@ export class MultiSelect extends Component {
                 this.hide();
                 this.inputRef.current.focus();
                 break;
-
+            case 9:
+                console.log('tab',event);
+                this.trapFocus(originalEvent);
+                break;
             default:
                 break;
         }
     }
+    trapFocus(event) {
+        debugger
+        if (this.props.innerTab) {
+            let focusableElements = DomHandler.getFocusableElements(this.overlayRef.current);
+    
+            if (focusableElements && focusableElements.length > 0) {
+                if (!document.activeElement) {
+                    event.preventDefault();
+                    focusableElements[0].focus();
+                }
+                else {
+                    let focusedIndex = focusableElements.indexOf(document.activeElement);
+                    
+                    if (event.shiftKey) {
+                        
+                        if (focusedIndex === -1) {
+                            this.hide()
+                            this.inputRef.current.focus();
+                            
+                        }
+                        else if (focusedIndex === 0 && this.state.overlayVisible) {
+                            event.preventDefault()
+                            focusableElements[0].focus();
+                        } 
+                            
+                    }
+                    else {
+                        if (focusedIndex === -1) {
+                            event.preventDefault()
+                            focusableElements[0].focus();
+                        }
+                        else if (focusedIndex === focusableElements.length - 1 && this.state.overlayVisible) {
+                            this.hide()
+                            this.inputRef.current.focus();
+                            
+                        } 
+                    }
+                }
+            }
+            } else {
+                if (this.state.overlayVisible) {
+                    this.hide()
+                }
+            }
+    }
+    
 
     findNextItem(item) {
         let nextItem = item.nextElementSibling;
@@ -272,6 +323,7 @@ export class MultiSelect extends Component {
     }
 
     onKeyDown(event) {
+       
         switch (event.which) {
             //down
             case 40:
@@ -298,13 +350,8 @@ export class MultiSelect extends Component {
 
             //tab
             case 9:
-                if (this.state.overlayVisible) {
-                    const firstFocusableElement = DomHandler.getFirstFocusableElement(this.overlayRef.current);
-                    if (firstFocusableElement) {
-                        firstFocusableElement.focus();
-                        event.preventDefault();
-                    }
-                }
+                console.log('event')
+                this.trapFocus(event);
                 break;
 
             default:
@@ -892,7 +939,7 @@ export class MultiSelect extends Component {
         let clearIcon = this.renderClearIcon();
 
         return (
-            <div id={this.props.id} className={className} onClick={this.onClick} ref={el => this.container = el} style={this.props.style}>
+            <div id={this.props.id} className={className} onClick={this.onClick} ref={el => this.container = el} style={this.props.style} >
                 <div className="p-hidden-accessible">
                     <input ref={this.inputRef} id={this.props.inputId} name={this.props.name} readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}
                         role="listbox" aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy} aria-expanded={this.state.overlayVisible} disabled={this.props.disabled} tabIndex={this.props.tabIndex} />

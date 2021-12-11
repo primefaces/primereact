@@ -114,6 +114,7 @@ export interface MultiSelectProps {
     removeIcon?: IconType<MultiSelectProps>;
     showSelectAll?: boolean;
     selectAll?: boolean;
+    innerTab?: boolean;
     onChange?(e: MultiSelectChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
