@@ -266,8 +266,8 @@ export class Carousel extends Component {
         }
     }
 
-    onTransitionEnd() {
-        if (this.itemsContainer) {
+    onTransitionEnd(e) {
+        if (this.itemsContainer && e.propertyName === 'transform') {
             DomHandler.addClass(this.itemsContainer, 'p-items-hidden');
             this.itemsContainer.style.transition = '';
 
@@ -612,9 +612,8 @@ export class Carousel extends Component {
         return (
             <div className={containerClassName}>
                 {backwardNavigator}
-                <div className="p-carousel-items-content" style={{'height': height}}>
-                    <div ref={(el) => this.itemsContainer = el} className="p-carousel-items-container" onTransitionEnd={this.onTransitionEnd}
-                        onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove} onTouchEnd={this.onTouchEnd}>
+                <div className="p-carousel-items-content" style={{'height': height}} onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove} onTouchEnd={this.onTouchEnd}>
+                    <div ref={(el) => this.itemsContainer = el} className="p-carousel-items-container" onTransitionEnd={this.onTransitionEnd}>
                         {items}
                     </div>
                 </div>
