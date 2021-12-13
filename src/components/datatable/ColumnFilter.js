@@ -72,7 +72,7 @@ export class ColumnFilter extends Component {
     }
 
     isRowMatchModeSelected(matchMode) {
-        return this.filterModel.matchMode === matchMode;
+        return this.filterModel && this.filterModel.matchMode === matchMode;
     }
 
     showMenuButton() {
@@ -515,9 +515,11 @@ export class ColumnFilter extends Component {
     }
 
     renderFilterElement(model, index) {
+        const value = model ? model.value : null;
+
         return this.getColumnProp('filterElement') ?
-            ObjectUtils.getJSXElement(this.getColumnProp('filterElement'), { field: this.field, index, filterModel: model, value: model.value, filterApplyCallback: this.filterApplyCallback, filterCallback: this.filterCallback })
-            : <InputText type={this.getColumnProp('filterType')} value={model.value || ''} onChange={(e) => this.onInputChange(e, index)} className="p-column-filter" placeholder={this.getColumnProp('filterPlaceholder')} maxLength={this.getColumnProp('filterMaxLength')} />;
+            ObjectUtils.getJSXElement(this.getColumnProp('filterElement'), { field: this.field, index, filterModel: model, value, filterApplyCallback: this.filterApplyCallback, filterCallback: this.filterCallback })
+            : <InputText type={this.getColumnProp('filterType')} value={value || ''} onChange={(e) => this.onInputChange(e, index)} className="p-column-filter" placeholder={this.getColumnProp('filterPlaceholder')} maxLength={this.getColumnProp('filterMaxLength')} />;
     }
 
     renderRowFilterElement() {

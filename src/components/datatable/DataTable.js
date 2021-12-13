@@ -1333,19 +1333,17 @@ export class DataTable extends Component {
             const columns = this.getColumns();
 
             cloned = columns.reduce((_filters, col) => {
-                if (col.props.filter) {
-                    const field = col.props.filterField || col.props.field;
-                    const filterFunction = col.props.filterFunction;
-                    const dataType = col.props.dataType;
-                    const matchMode = col.props.filterMatchMode || (PrimeReact.filterMatchModeOptions[dataType] ? PrimeReact.filterMatchModeOptions[dataType][0] : FilterMatchMode.STARTS_WITH);
-                    let constraint = { value: null, matchMode };
+                const field = col.props.filterField || col.props.field;
+                const filterFunction = col.props.filterFunction;
+                const dataType = col.props.dataType;
+                const matchMode = col.props.filterMatchMode || (PrimeReact.filterMatchModeOptions[dataType] ? PrimeReact.filterMatchModeOptions[dataType][0] : FilterMatchMode.STARTS_WITH);
+                let constraint = { value: null, matchMode };
 
-                    if (filterFunction) {
-                        FilterService.register(`custom_${field}`, (...args) => filterFunction(...args, { column: col }));
-                    }
-
-                    _filters[field] = this.props.filterDisplay === 'menu' ? { operator: FilterOperator.AND, constraints: [constraint] } : constraint;
+                if (filterFunction) {
+                    FilterService.register(`custom_${field}`, (...args) => filterFunction(...args, { column: col }));
                 }
+
+                _filters[field] = this.props.filterDisplay === 'menu' ? { operator: FilterOperator.AND, constraints: [constraint] } : constraint;
 
                 return _filters;
             }, {});
