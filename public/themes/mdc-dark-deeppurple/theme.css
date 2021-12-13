@@ -3357,6 +3357,10 @@
   background: rgba(255, 255, 255, 0.04);
   color: rgba(255, 255, 255, 0.87);
 }
+.p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-dragover {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.87);
+}
 .p-tree .p-tree-filter-container {
   margin-bottom: 0.5rem;
 }
