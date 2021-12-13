@@ -3368,6 +3368,10 @@
   background: #e9ecef;
   color: #495057;
 }
+.p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-dragover {
+  background: #e9ecef;
+  color: #495057;
+}
 .p-tree .p-tree-filter-container {
   margin-bottom: 0.5rem;
 }
