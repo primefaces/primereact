@@ -521,13 +521,7 @@ export class BodyCell extends Component {
         const style = this.getStyle();
         const title = this.props.responsiveLayout === 'stack' && <span className="p-column-title">{ObjectUtils.getJSXElement(header, { props: this.props.tableProps })}</span>;
 
-        if (body && !this.state.editing) {
-            content = body ? ObjectUtils.getJSXElement(body, this.props.rowData, { column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps }) : value;
-        }
-        else if (editor && this.state.editing) {
-            content = ObjectUtils.getJSXElement(editor, { rowData: this.state.editingRowData, value: this.resolveFieldData(this.state.editingRowData), column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps, editorCallback: this.editorCallback  });
-        }
-        else if (selectionMode) {
+        if (selectionMode) {
             const showSelection = this.props.showSelectionElement ? this.props.showSelectionElement(this.props.rowData, { rowIndex: this.props.rowIndex, props: this.props.tableProps }) : true;
 
             content = showSelection && (
@@ -609,6 +603,12 @@ export class BodyCell extends Component {
                 rowEditorProps['element'] = content;
                 content = ObjectUtils.getJSXElement(body, this.props.rowData, { column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps, rowEditor: rowEditorProps });
             }
+        }
+        else if (body && !this.state.editing) {
+            content = body ? ObjectUtils.getJSXElement(body, this.props.rowData, { column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps }) : value;
+        }
+        else if (editor && this.state.editing) {
+            content = ObjectUtils.getJSXElement(editor, { rowData: this.state.editingRowData, value: this.resolveFieldData(this.state.editingRowData), column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps, editorCallback: this.editorCallback  });
         }
         else {
             content = value;
