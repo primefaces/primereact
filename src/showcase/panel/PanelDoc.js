@@ -411,6 +411,18 @@ template: (options) => {
                             <td>Defines the initial state of panel content, supports one or two-way binding as well.</td>
                         </tr>
                         <tr>
+                            <td>expandIcon</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Icon of a collapsed tab.</td>
+                        </tr>
+                        <tr>
+                            <td>collapseIcon</td>
+                            <td>any</td>
+                            <td>null</td>
+                            <td>Icon of an expanded tab.</td>
+                        </tr>
+                        <tr>
                             <td>transitionOptions</td>
                             <td>object</td>
                             <td>null</td>

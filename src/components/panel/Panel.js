@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ObjectUtils, classNames, UniqueComponentId } from '../utils/Utils';
+import { ObjectUtils, classNames, IconUtils, UniqueComponentId } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
 
 export class Panel extends Component {
@@ -118,7 +118,7 @@ export class Panel extends Component {
             return (
                 <button className="p-panel-header-icon p-panel-toggler p-link" onClick={this.toggle}
                     id={id} aria-controls={ariaControls} aria-expanded={!collapsed} role="tab">
-                    <span className={toggleIcon}></span>
+                    {IconUtils.getJSXIcon(toggleIcon, { props: this.props, collapsed })}
                     <Ripple />
                 </button>
             );
