@@ -127,7 +127,7 @@ export class DataTableRowGroupDemo extends Component {
                         <p>Group customers by their representative.</p>
                         <DataTable value={this.state.customers} rowGroupMode="subheader" groupRowsBy="representative.name"
                             sortMode="single" sortField="representative.name" sortOrder={1}
-                            expandedRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
+                            expandableRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
                             onRowExpand={this.onRowGroupExpand} onRowCollapse={this.onRowGroupCollapse}
                             rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate} responsiveLayout="scroll">
                             <Column field="name" header="Name"></Column>
@@ -284,7 +284,7 @@ export class DataTableRowGroupDemo extends Component {
                     <p>Group customers by their representative.</p>
                     <DataTable value={this.state.customers} rowGroupMode="subheader" groupRowsBy="representative.name"
                         sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll"
-                        expandedRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
+                        expandableRowGroups expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({ expandedRows: e.data })}
                         onRowExpand={this.onRowGroupExpand} onRowCollapse={this.onRowGroupCollapse}
                         rowGroupHeaderTemplate={this.headerTemplate} rowGroupFooterTemplate={this.footerTemplate}>
                         <Column field="name" header="Name"></Column>
@@ -420,7 +420,7 @@ const DataTableRowGroupDemo = () => {
                 <p>Group customers by their representative.</p>
                 <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
                     sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll"
-                    expandedRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                    expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     onRowExpand={onRowGroupExpand} onRowCollapse={onRowGroupCollapse}
                     rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
                     <Column field="name" header="Name"></Column>
@@ -555,7 +555,7 @@ const DataTableRowGroupDemo = () => {
                 <p>Group customers by their representative.</p>
                 <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
                     sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll"
-                    expandedRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                    expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     onRowExpand={onRowGroupExpand} onRowCollapse={onRowGroupCollapse}
                     rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
                     <Column field="name" header="Name"></Column>
@@ -698,7 +698,7 @@ const DataTableRowGroupDemo = () => {
                 <p>Group customers by their representative.</p>
                 <DataTable value={customers} rowGroupMode="subheader" groupRowsBy="representative.name"
                     sortMode="single" sortField="representative.name" sortOrder={1} responsiveLayout="scroll"
-                    expandedRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+                    expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     onRowExpand={onRowGroupExpand} onRowCollapse={onRowGroupCollapse}
                     rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}>
                     <Column field="name" header="Name"></Column>
