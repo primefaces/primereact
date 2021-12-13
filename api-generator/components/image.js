@@ -46,7 +46,7 @@ const ImageStyles = [
 module.exports = {
     image: {
         name: 'Image',
-        description: 'Displays an image with preview and tranformation options.',
+        description: 'Displays an image with preview and transformation options.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/image',
         props: ImageProps,
         events: ImageEvents,
