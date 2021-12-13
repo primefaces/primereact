@@ -677,7 +677,7 @@
 
 .p-colorpicker-panel {
   background: #2a323d;
-  border-color: #3f4b5b;
+  border: 1px solid #3f4b5b;
 }
 .p-colorpicker-panel .p-colorpicker-color-handle,
 .p-colorpicker-panel .p-colorpicker-hue-handle {
@@ -2463,6 +2463,10 @@
 .p-datatable .p-datatable-scrollable-footer {
   background: #2a323d;
 }
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-thead,
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot {
+  background-color: #2a323d;
+}
 .p-datatable .p-datatable-loading-icon {
   font-size: 2rem;
 }
@@ -3316,7 +3320,7 @@
 }
 .p-tree .p-tree-container .p-treenode .p-treenode-content .p-treenode-icon {
   margin-right: 0.5rem;
-  color: #3f4b5b;
+  color: rgba(255, 255, 255, 0.6);
 }
 .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox {
   margin-right: 0.5rem;

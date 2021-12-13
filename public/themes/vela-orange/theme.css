@@ -673,7 +673,7 @@
 
 .p-colorpicker-panel {
   background: #1f2d40;
-  border-color: #304562;
+  border: 1px solid #304562;
 }
 .p-colorpicker-panel .p-colorpicker-color-handle,
 .p-colorpicker-panel .p-colorpicker-hue-handle {
@@ -2450,6 +2450,10 @@
 .p-datatable .p-datatable-scrollable-header,
 .p-datatable .p-datatable-scrollable-footer {
   background: #1f2d40;
+}
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-thead,
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot {
+  background-color: #1f2d40;
 }
 .p-datatable .p-datatable-loading-icon {
   font-size: 2rem;
