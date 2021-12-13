@@ -731,13 +731,13 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                                     </tr>
                                     <tr>
                                         <td>expandIcon</td>
-                                        <td>string</td>
+                                        <td>any</td>
                                         <td>pi pi-chevron-right</td>
                                         <td>Icon of a collapsed tab.</td>
                                     </tr>
                                     <tr>
                                         <td>collapseIcon</td>
-                                        <td>string</td>
+                                        <td>any</td>
                                         <td>pi pi-chevron-down</td>
                                         <td>Icon of an expanded tab.</td>
                                     </tr>
