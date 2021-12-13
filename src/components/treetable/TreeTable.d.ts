@@ -79,7 +79,7 @@ interface TreeTableSortParams {
 
 interface TreeTableSelectionParams {
     originalEvent: React.SyntheticEvent;
-    value: TreeTableSelectionKeysType
+    value: TreeTableSelectionKeysType;
 }
 
 interface TreeTableColumnResizeEndParams {
