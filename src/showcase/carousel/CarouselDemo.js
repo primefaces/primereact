@@ -87,7 +87,7 @@ export class CarouselDemo extends Component {
                     </div>
 
                     <div className="card">
-                        <Carousel value={this.state.products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="352px"
+                        <Carousel value={this.state.products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px"
                             itemTemplate={this.productTemplate} header={<h5>Vertical</h5>} style={{maxWidth: '400px', marginTop: '2em'}} />
                     </div>
                 </div>
