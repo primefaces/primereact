@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-angular</title>
+    <defs>
+        <polygon id="path-1" points="14.8947371 0 14.8947371 0 14.8947371 0 0.038353864 5.2597509 2.30431134 24.76202 14.8947371 31.6852464 14.8947371 31.6852464 14.8947371 31.6852464 27.4851628 24.76202 29.7511203 5.2597509"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-angular" transform="translate(1.000000, 1.000000)">
+            <circle id="Oval" stroke="#DD0031" stroke-width="2" fill="#FFFFFF" fill-rule="nonzero" cx="23" cy="23" r="23"></circle>
+            <g id="primeng-icon" transform="translate(8.000000, 7.000000)">
+                <g id="angular-back">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Shape" fill="#DD0031" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <polygon id="Shape-path" fill="#C3002F" mask="url(#mask-2)" points="14.8947371 0 14.8947371 3.51706235 14.8947371 3.50121972 14.8947371 19.549797 14.8947371 19.549797 14.8947371 31.6852464 14.8947371 31.6852464 27.4851628 24.76202 29.7511203 5.2597509"></polygon>
+                </g>
+                <g id="head" transform="translate(5.789474, 5.560656)" fill="#FFFFFF">
+                    <polygon id="chick-right" fill-rule="nonzero" points="13.4599544 9.46665012 12.0347828 9.15109512 13.1432496 10.7288701 13.1432496 15.6199727 16.9437073 12.4644227 16.9437073 7.09998759 15.2018309 7.7310976"></polygon>
+                    <polygon id="chick-left" fill-rule="nonzero" transform="translate(3.562929, 11.359980) scale(-1, 1) translate(-3.562929, -11.359980) " points="2.53363848 9.46665012 1.10846684 9.15109512 2.21693367 10.7288701 2.21693367 15.6199727 6.01739139 12.4644227 6.01739139 7.09998759 4.27551494 7.7310976"></polygon>
+                    <polygon id="mask" points="5.36842113 11.025017 6.63157905 9.12786899 7.42105274 9.60215599 10.5789475 9.60215599 11.3684212 9.12786899 12.6315791 11.025017 12.6315791 18.1393221 11.6842107 19.5621831 10.5789475 20.6688528 7.42105274 20.6688528 6.31578957 19.5621831 5.36842113 18.1393221"></polygon>
+                    <polygon id="bottom-chick-right" fill-rule="nonzero" points="13.1432496 18.6177452 15.2018309 16.5666377 15.2018309 14.5155302 13.1432496 16.2510827"></polygon>
+                    <polygon id="bottom-chick-left" fill-rule="nonzero" transform="translate(3.879634, 16.566638) scale(-1, 1) translate(-3.879634, -16.566638) " points="2.85034329 18.6177452 4.90892456 16.5666377 4.90892456 14.5155302 2.85034329 16.2510827"></polygon>
+                    <path d="M11.0846684,0 L12.3514876,2.99777254 L10.4512587,8.99331762 L9.3427919,8.99331762 L9.3427919,0 L11.0846684,0 Z M8.70938228,8.99331762 L7.75926785,8.99331762 L5.70068658,2.99777254 L6.96750582,0 L8.70938228,0 L8.70938228,8.99331762 Z"></path>
+                    <polygon id="head-left" fill-rule="nonzero" points="7.75926785 8.99331762 0.950114431 6.46887758 0 2.52444003 5.85903899 2.99777254 7.91762026 8.99331762"></polygon>
+                    <polygon id="head-right" fill-rule="nonzero" transform="translate(14.251716, 5.758879) scale(-1, 1) translate(-14.251716, -5.758879) " points="18.0521742 8.99331762 11.2430208 6.46887758 10.2929063 2.52444003 16.3102977 2.99777254 18.2105266 8.99331762"></polygon>
+                    <polygon id="ear-right" fill-rule="nonzero" points="12.6681924 2.52444003 15.9935929 2.20888503 13.7766592 0 11.5597256 0"></polygon>
+                    <polygon id="ear-left" fill-rule="nonzero" transform="translate(4.275515, 1.262220) scale(-1, 1) translate(-4.275515, -1.262220) " points="3.1670481 2.52444003 6.49244861 2.20888503 4.27551494 0 2.05858127 0"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

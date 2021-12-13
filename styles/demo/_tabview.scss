@@ -1,0 +1,16 @@
+.tabview-demo {
+    .tabview-header-icon {
+        i, span {
+            vertical-align: middle;
+        }
+
+        span {
+            margin: 0 .5rem;
+        }
+    }
+
+    .p-tabview p {
+        line-height: 1.5;
+        margin: 0;
+    }
+}
