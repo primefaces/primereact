@@ -1,4 +1,541 @@
 {
+    "7.1.0": {
+        "datatable": [
+            {
+                "number": 2487,
+                "title": "[DataTable] Row expander customization isn't working",
+                "url": "https://github.com/primefaces/primereact/issues/2487"
+            },
+            {
+                "number": 2456,
+                "title": "When scrollable and virtual Scroller are enabled at the same time, the scroll style is incorrect when the scrollHeight is changed",
+                "url": "https://github.com/primefaces/primereact/issues/2456"
+            },
+            {
+                "number": 2493,
+                "title": "DataTable issue related to restoreState with nextjs",
+                "url": "https://github.com/primefaces/primereact/issues/2493"
+            },
+            {
+                "number": 2478,
+                "title": "DataTable error when filters become available dynamically",
+                "url": "https://github.com/primefaces/primereact/issues/2478"
+            },
+            {
+                "number": 2454,
+                "title": "Add selectionPageOnly property to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/2454"
+            },
+            {
+                "number": 2463,
+                "title": "ColumnFilterConstraintAddParams: constraint is mispelled",
+                "url": "https://github.com/primefaces/primereact/issues/2463"
+            },
+            {
+                "number": 2455,
+                "title": "Add showSelectAll, selectAll and onSelectAll properties to DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/2455"
+            },
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            },
+            {
+                "number": 2157,
+                "title": "Issue in Grid sorting, null values not handled in sortMultiple function (when sortMode=multiple)",
+                "url": "https://github.com/primefaces/primereact/issues/2157"
+            },
+            {
+                "number": 2469,
+                "title": "DOMException in DataTable after React fast refresh",
+                "url": "https://github.com/primefaces/primereact/issues/2469"
+            },
+            {
+                "number": 2457,
+                "title": "Improve lazy loading on DataTable",
+                "url": "https://github.com/primefaces/primereact/issues/2457"
+            },
+            {
+                "number": 2423,
+                "title": "CSP: Violating Inline Style Policy",
+                "url": "https://github.com/primefaces/primereact/issues/2423"
+            }
+        ],
+        "confirmpopup": [
+            {
+                "number": 2495,
+                "title": "ConfirmPopup crashes the app when using Next.js",
+                "url": "https://github.com/primefaces/primereact/issues/2495"
+            },
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            },
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            }
+        ],
+        "virtualscroller": [
+            {
+                "number": 2456,
+                "title": "When scrollable and virtual Scroller are enabled at the same time, the scroll style is incorrect when the scrollHeight is changed",
+                "url": "https://github.com/primefaces/primereact/issues/2456"
+            },
+            {
+                "number": 2431,
+                "title": "DataTable  virtualScroll index bug",
+                "url": "https://github.com/primefaces/primereact/issues/2431"
+            }
+        ],
+        "accordion": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            },
+            {
+                "number": 2449,
+                "title": "Add style and className properties to TabPanel and AccordionPanel",
+                "url": "https://github.com/primefaces/primereact/issues/2449"
+            }
+        ],
+        "autocomplete": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            },
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            },
+            {
+                "number": 2408,
+                "title": "InputMask/AutoComplete: maxlength property ",
+                "url": "https://github.com/primefaces/primereact/issues/2408"
+            },
+            {
+                "number": 2445,
+                "title": "AutoComplete Show Dropdown When Clicked",
+                "url": "https://github.com/primefaces/primereact/issues/2445"
+            }
+        ],
+        "avatar": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            }
+        ],
+        "button": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            }
+        ],
+        "calendar": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            },
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            },
+            {
+                "number": 2301,
+                "title": "Calendar timepicker stepMinute should show zero-based multiples of step",
+                "url": "https://github.com/primefaces/primereact/issues/2301"
+            }
+        ],
+        "checkbox": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            }
+        ],
+        "chip": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            }
+        ],
+        "confirmdialog": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            }
+        ],
+        "fileupload": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            }
+        ],
+        "multiselect": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            },
+            {
+                "number": 2496,
+                "title": "MultiSelect - breaking when options is empty array",
+                "url": "https://github.com/primefaces/primereact/issues/2496"
+            },
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            }
+        ],
+        "multistatecheckbox": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            }
+        ],
+        "scrolltop": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            }
+        ],
+        "selectitem": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            }
+        ],
+        "speeddial": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            }
+        ],
+        "splitbutton": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            },
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            },
+            {
+                "number": 1939,
+                "title": "SplitButton does not carry through the classname",
+                "url": "https://github.com/primefaces/primereact/issues/1939"
+            },
+            {
+                "number": 1882,
+                "title": "Add \"p-button-outlined\" class for SplitButton",
+                "url": "https://github.com/primefaces/primereact/issues/1882"
+            }
+        ],
+        "tag": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            }
+        ],
+        "togglebutton": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            }
+        ],
+        "treenode": [
+            {
+                "number": 2506,
+                "title": "Type definition issue with utils import",
+                "url": "https://github.com/primefaces/primereact/issues/2506"
+            }
+        ],
+        "api": [
+            {
+                "number": 2467,
+                "title": "Typescript DataTables with filters don't import or compile correctly.",
+                "url": "https://github.com/primefaces/primereact/issues/2467"
+            },
+            {
+                "number": 2426,
+                "title": "Add options to control CSSTransition in all overlay components",
+                "url": "https://github.com/primefaces/primereact/issues/2426"
+            }
+        ],
+        "column": [
+            {
+                "number": 2463,
+                "title": "ColumnFilterConstraintAddParams: constraint is mispelled",
+                "url": "https://github.com/primefaces/primereact/issues/2463"
+            }
+        ],
+        "panel": [
+            {
+                "number": 2437,
+                "title": "Panel's expandIcon and collapseIcon Properties  Accept Only Strings, Not Elements",
+                "url": "https://github.com/primefaces/primereact/issues/2437"
+            }
+        ],
+        "inputnumber": [
+            {
+                "number": 2465,
+                "title": "InputNumber Critical Issue",
+                "url": "https://github.com/primefaces/primereact/issues/2465"
+            },
+            {
+                "number": 2417,
+                "title": "InputNumber value type should include null",
+                "url": "https://github.com/primefaces/primereact/issues/2417"
+            },
+            {
+                "number": 2408,
+                "title": "InputMask/AutoComplete: maxlength property ",
+                "url": "https://github.com/primefaces/primereact/issues/2408"
+            }
+        ],
+        "carousel": [
+            {
+                "number": 2499,
+                "title": "Using the transition property on elements inside Carousel causes items become hidden",
+                "url": "https://github.com/primefaces/primereact/issues/2499"
+            },
+            {
+                "number": 2423,
+                "title": "CSP: Violating Inline Style Policy",
+                "url": "https://github.com/primefaces/primereact/issues/2423"
+            }
+        ],
+        "cascadeselect": [
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            }
+        ],
+        "colorpicker": [
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            },
+            {
+                "number": 2045,
+                "title": "ColorPicker: wrong value type definitions when using rgb or hsb format, part 2",
+                "url": "https://github.com/primefaces/primereact/issues/2045"
+            }
+        ],
+        "contextmenu": [
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            }
+        ],
+        "mention": [
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            }
+        ],
+        "menu": [
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            }
+        ],
+        "overlaypanel": [
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            },
+            {
+                "number": 2469,
+                "title": "DOMException in DataTable after React fast refresh",
+                "url": "https://github.com/primefaces/primereact/issues/2469"
+            },
+            {
+                "number": 2423,
+                "title": "CSP: Violating Inline Style Policy",
+                "url": "https://github.com/primefaces/primereact/issues/2423"
+            }
+        ],
+        "password": [
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            }
+        ],
+        "slidemenu": [
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            }
+        ],
+        "tieredmenu": [
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            }
+        ],
+        "tooltip": [
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            },
+            {
+                "number": 2221,
+                "title": "Tooltip not displayed for disabled components",
+                "url": "https://github.com/primefaces/primereact/issues/2221"
+            }
+        ],
+        "treeselect": [
+            {
+                "number": 2446,
+                "title": "Improve resize listeners for Overlay Components",
+                "url": "https://github.com/primefaces/primereact/issues/2446"
+            }
+        ],
+        "dropdown": [
+            {
+                "number": 2491,
+                "title": "Dropdown: Property selectedIndex being referenced from null current inputRef",
+                "url": "https://github.com/primefaces/primereact/issues/2491"
+            },
+            {
+                "number": 2422,
+                "title": "Dropdown auto close in mobile when keyboard is open",
+                "url": "https://github.com/primefaces/primereact/issues/2422"
+            }
+        ],
+        "csstransition": [
+            {
+                "number": 2426,
+                "title": "Add options to control CSSTransition in all overlay components",
+                "url": "https://github.com/primefaces/primereact/issues/2426"
+            }
+        ],
+        "util.d.ts": [
+            {
+                "number": 2426,
+                "title": "Add options to control CSSTransition in all overlay components",
+                "url": "https://github.com/primefaces/primereact/issues/2426"
+            }
+        ],
+        "menubar": [
+            {
+                "number": 2439,
+                "title": "Menubar Component needs CSS styles for \"text-decoration: none;\"",
+                "url": "https://github.com/primefaces/primereact/issues/2439"
+            }
+        ],
+        "organizationchart": [
+            {
+                "number": 2439,
+                "title": "Menubar Component needs CSS styles for \"text-decoration: none;\"",
+                "url": "https://github.com/primefaces/primereact/issues/2439"
+            }
+        ],
+        "tabview": [
+            {
+                "number": 2449,
+                "title": "Add style and className properties to TabPanel and AccordionPanel",
+                "url": "https://github.com/primefaces/primereact/issues/2449"
+            },
+            {
+                "number": 2418,
+                "title": "TabPanel onClose Event",
+                "url": "https://github.com/primefaces/primereact/issues/2418"
+            }
+        ],
+        "tree": [
+            {
+                "number": 2473,
+                "title": "Tree selection types (pt. 2)",
+                "url": "https://github.com/primefaces/primereact/issues/2473"
+            }
+        ],
+        "blockui": [
+            {
+                "number": 2412,
+                "title": "BlockUI: rapid blocking-unblocking leads to TypeError this.mask is null",
+                "url": "https://github.com/primefaces/primereact/issues/2412"
+            }
+        ],
+        "dialog": [
+            {
+                "number": 2469,
+                "title": "DOMException in DataTable after React fast refresh",
+                "url": "https://github.com/primefaces/primereact/issues/2469"
+            },
+            {
+                "number": 2423,
+                "title": "CSP: Violating Inline Style Policy",
+                "url": "https://github.com/primefaces/primereact/issues/2423"
+            }
+        ],
+        "utils": [
+            {
+                "number": 2469,
+                "title": "DOMException in DataTable after React fast refresh",
+                "url": "https://github.com/primefaces/primereact/issues/2469"
+            },
+            {
+                "number": 2423,
+                "title": "CSP: Violating Inline Style Policy",
+                "url": "https://github.com/primefaces/primereact/issues/2423"
+            }
+        ],
+        "editor": [
+            {
+                "number": 1567,
+                "title": "Editor's header cannot be hidden no matter what",
+                "url": "https://github.com/primefaces/primereact/issues/1567"
+            }
+        ],
+        "inputmask": [
+            {
+                "number": 2408,
+                "title": "InputMask/AutoComplete: maxlength property ",
+                "url": "https://github.com/primefaces/primereact/issues/2408"
+            }
+        ],
+        "galleria": [
+            {
+                "number": 2423,
+                "title": "CSP: Violating Inline Style Policy",
+                "url": "https://github.com/primefaces/primereact/issues/2423"
+            }
+        ]
+    },
     "7.0.1": {
         "tooltip": [
             {

@@ -631,7 +631,8 @@
                             "to": "/datatable/lazy",
                             "meta": [
                                 "lazy"
-                            ]
+                            ],
+                            "badge":"updated"
                         },
                         {
                             "name": "Scroll",
