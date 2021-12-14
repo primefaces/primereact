@@ -196,10 +196,12 @@ export class TreeTableRow extends Component {
 
     onCheckboxFocus() {
         DomHandler.addClass(this.checkboxBox, 'p-focus');
+        DomHandler.addClass(this.checkboxRef, 'p-checkbox-focused');
     }
 
     onCheckboxBlur() {
         DomHandler.removeClass(this.checkboxBox, 'p-focus');
+        DomHandler.removeClass(this.checkboxRef, 'p-checkbox-focused');
     }
 
     propagateUp(event) {
@@ -361,7 +363,7 @@ export class TreeTableRow extends Component {
             const icon = classNames('p-checkbox-icon p-c', {'pi pi-check': checked, 'pi pi-minus': partialChecked});
 
             return (
-                <div className="p-checkbox p-treetable-checkbox p-component" onClick={this.onCheckboxChange} role="checkbox" aria-checked={checked}>
+                <div className="p-checkbox p-treetable-checkbox p-component" ref={el => this.checkboxRef = el} onClick={this.onCheckboxChange} role="checkbox" aria-checked={checked}>
                     <div className="p-hidden-accessible">
                         <input type="checkbox" onFocus={this.onCheckboxFocus} onBlur={this.onCheckboxBlur} />
                     </div>

@@ -42,13 +42,14 @@ export class RowCheckbox extends Component {
     }
 
     render() {
-        const className = classNames('p-checkbox-box p-component', { 'p-highlight': this.props.checked, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused });
+        const className = classNames('p-checkbox p-component', {'p-checkbox-focused': this.state.focused} )
+        const boxClassName = classNames('p-checkbox-box p-component', { 'p-highlight': this.props.checked, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused});
         const iconClassName = classNames('p-checkbox-icon', { 'pi pi-check': this.props.checked });
         const tabIndex = this.props.disabled ? null : '0';
 
         return (
-            <div className="p-checkbox p-component" onClick={this.onClick}>
-                <div className={className} role="checkbox" aria-checked={this.props.checked} tabIndex={tabIndex}
+            <div className={className} onClick={this.onClick}>
+                <div className={boxClassName} role="checkbox" aria-checked={this.props.checked} tabIndex={tabIndex}
                     onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur}>
                     <span className={iconClassName}></span>
                 </div>

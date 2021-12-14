@@ -48,16 +48,17 @@ export class RowRadioButton extends Component {
     }
 
     render() {
-        const className = classNames('p-radiobutton-box p-component', { 'p-highlight': this.props.checked, 'p-focus': this.state.focused, 'p-disabled': this.props.disabled });
+        const className = classNames('p-radiobutton p-component', { 'p-radiobutton-focused': this.state.focused });
+        const boxClassName = classNames('p-radiobutton-box p-component', { 'p-highlight': this.props.checked, 'p-focus': this.state.focused, 'p-disabled': this.props.disabled });
         const name = `${this.props.tableSelector}_dt_radio`;
 
         return (
-            <div className="p-radiobutton p-component">
+            <div className={className}>
                 <div className="p-hidden-accessible">
                     <input name={name} ref={(el) => this.input = el} type="radio" checked={this.props.checked}
                         onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} onKeyDown={this.onKeyDown} />
                 </div>
-                <div className={className} onClick={this.onClick} role="radio" aria-checked={this.props.checked}>
+                <div className={boxClassName} onClick={this.onClick} role="radio" aria-checked={this.props.checked}>
                     <div className="p-radiobutton-icon"></div>
                 </div>
             </div>
