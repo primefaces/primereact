@@ -22,7 +22,7 @@
     "final-form": "^4.20.2",
     "react-hook-form": "^7.8.4",
     "react-final-form": "^6.5.3",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.4.0",
     "jspdf-autotable": "^3.2.5",
     "xlsx": "^0.15.1"
   },
