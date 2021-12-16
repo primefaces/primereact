@@ -253,7 +253,7 @@ export class InputNumber extends Component {
                             .replace(this._suffix, '')
                             .replace(this._prefix, '')
                             .trim()
-                            .replace(/\s/g, '')
+                            .replace(/[A-Z&\s]*[,.]?[a-z&\s]/g, '')
                             .replace(this._currency, '')
                             .replace(this._group, '')
                             .replace(this._minusSign, '-')
