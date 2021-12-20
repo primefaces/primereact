@@ -967,11 +967,11 @@ const DataTableFilterDemo = () => {
             'ts': {
                 tabName: 'TS Source',
                 content: `
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { classNames } from 'primereact/utils';
 import { FilterMatchMode, FilterOperator } from 'primereact/api';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
+import { DataTable, DataTableFilterMeta, DataTableFilterMetaData } from 'primereact/datatable';
+import { Column, ColumnFilterElementTemplateOptions } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
@@ -985,10 +985,10 @@ import { CustomerService } from '../service/CustomerService';
 import './DataTableDemo.css';
 
 const DataTableFilterDemo = () => {
-    const [customers1, setCustomers1] = useState(null);
-    const [customers2, setCustomers2] = useState(null);
-    const [filters1, setFilters1] = useState(null);
-    const [filters2, setFilters2] = useState({
+    const [customers1, setCustomers1] = useState<any>(undefined);
+    const [customers2, setCustomers2] = useState<any>(undefined);
+    const [filters1, setFilters1] = useState<DataTableFilterMeta | undefined> (undefined);
+    const [filters2, setFilters2] = useState<DataTableFilterMeta>({
         'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
         'name': { value: null, matchMode: FilterMatchMode.STARTS_WITH },
         'country.name': { value: null, matchMode: FilterMatchMode.STARTS_WITH },
@@ -1026,14 +1026,14 @@ const DataTableFilterDemo = () => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 
-    const getCustomers = (data) => {
+    const getCustomers = (data:any) => {
         return [...data || []].map(d => {
             d.date = new Date(d.date);
             return d;
         });
     }
 
-    const formatDate = (value) => {
+    const formatDate = (value: Date) => {
         return value.toLocaleDateString('en-US', {
             day: '2-digit',
             month: '2-digit',
@@ -1041,7 +1041,7 @@ const DataTableFilterDemo = () => {
         });
     }
 
-    const formatCurrency = (value) => {
+    const formatCurrency = (value: number) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     }
 
@@ -1049,19 +1049,20 @@ const DataTableFilterDemo = () => {
         initFilters1();
     }
 
-    const onGlobalFilterChange1 = (e) => {
+    const onGlobalFilterChange1 = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         let _filters1 = { ...filters1 };
-        _filters1['global'].value = value;
+        (_filters1['global'] as DataTableFilterMetaData).value = value;
+
 
         setFilters1(_filters1);
         setGlobalFilterValue1(value);
     }
 
-    const onGlobalFilterChange2 = (e) => {
+    const onGlobalFilterChange2 = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         let _filters2 = { ...filters2 };
-        _filters2['global'].value = value;
+        (_filters2['global'] as DataTableFilterMetaData).value = value; 
 
         setFilters2(_filters2);
         setGlobalFilterValue2(value);
@@ -1105,20 +1106,20 @@ const DataTableFilterDemo = () => {
         )
     }
 
-    const countryBodyTemplate = (rowData) => {
+    const countryBodyTemplate = (rowData:any) => {
         return (
             <React.Fragment>
-                <img alt="flag" src="/images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${rowData.country.code}\`} width={30} />
+                <img alt="flag" src="/images/flag/flag_placeholder.png" onError={(e) => (e.target as HTMLImageElement).src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-${rowData.country.code}\`} width={30} />
                 <span className="image-text">{rowData.country.name}</span>
             </React.Fragment>
         );
     }
 
-    const filterClearTemplate = (options) => {
+    const filterClearTemplate = (options: any) => {
         return <Button type="button" icon="pi pi-times" onClick={options.filterClearCallback} className="p-button-secondary"></Button>;
     }
 
-    const filterApplyTemplate = (options) => {
+    const filterApplyTemplate = (options: any) => {
         return <Button type="button" icon="pi pi-check" onClick={options.filterApplyCallback} className="p-button-success"></Button>
     }
 
@@ -1126,62 +1127,62 @@ const DataTableFilterDemo = () => {
         return <div className="p-px-3 p-pt-0 p-pb-3 p-text-center p-text-bold">Customized Buttons</div>;
     }
 
-    const representativeBodyTemplate = (rowData) => {
+    const representativeBodyTemplate = (rowData: any) => {
         const representative = rowData.representative;
         return (
             <React.Fragment>
-                <img alt={representative.name} src={\`images/avatar/\${representative.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <img alt={representative.name} src={\`images/avatar/\${representative.image}\`} onError={(e) => (e.target as HTMLImageElement).src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
                 <span className="image-text">{representative.name}</span>
             </React.Fragment>
         );
     }
 
-    const representativeFilterTemplate = (options) => {
+    const representativeFilterTemplate = (options: any) => {
         return <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />;
     }
 
-    const representativesItemTemplate = (option) => {
+    const representativesItemTemplate = (option: any) => {
         return (
             <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={\`images/avatar/\${option.image}\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
+                <img alt={option.name} src={\`images/avatar/\${option.image}\`} onError={(e) => (e.target as HTMLImageElement).src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width={32} style={{ verticalAlign: 'middle' }} />
                 <span className="image-text">{option.name}</span>
             </div>
         );
     }
 
-    const dateBodyTemplate = (rowData) => {
+    const dateBodyTemplate = (rowData: any) => {
         return formatDate(rowData.date);
     }
 
-    const dateFilterTemplate = (options) => {
+    const dateFilterTemplate = (options:ColumnFilterElementTemplateOptions) => {
         return <Calendar value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" mask="99/99/9999" />
     }
 
-    const balanceBodyTemplate = (rowData) => {
+    const balanceBodyTemplate = (rowData: any) => {
         return formatCurrency(rowData.balance);
     }
 
-    const balanceFilterTemplate = (options) => {
+    const balanceFilterTemplate = (options:ColumnFilterElementTemplateOptions) => {
         return <InputNumber value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} mode="currency" currency="USD" locale="en-US" />
     }
 
-    const statusBodyTemplate = (rowData) => {
+    const statusBodyTemplate = (rowData: any) => {
         return <span className={\`customer-badge status-\${rowData.status}\`}>{rowData.status}</span>;
     }
 
-    const statusFilterTemplate = (options) => {
+    const statusFilterTemplate = (options:ColumnFilterElementTemplateOptions) => {
         return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterCallback(e.value, options.index)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
     }
 
-    const statusItemTemplate = (option) => {
+    const statusItemTemplate = (option:ColumnFilterElementTemplateOptions) => {
         return <span className={\`customer-badge status-\${option}\`}>{option}</span>;
     }
 
-    const activityBodyTemplate = (rowData) => {
+    const activityBodyTemplate = (rowData: any) => {
         return <ProgressBar value={rowData.activity} showValue={false}></ProgressBar>;
     }
 
-    const activityFilterTemplate = (options) => {
+    const activityFilterTemplate = (options:ColumnFilterElementTemplateOptions) => {
         return (
             <React.Fragment>
                 <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
@@ -1193,23 +1194,23 @@ const DataTableFilterDemo = () => {
         )
     }
 
-    const verifiedBodyTemplate = (rowData) => {
+    const verifiedBodyTemplate = (rowData: any) => {
         return <i className={classNames('pi', {'true-icon pi-check-circle': rowData.verified, 'false-icon pi-times-circle': !rowData.verified})}></i>;
     }
 
-    const verifiedFilterTemplate = (options) => {
+    const verifiedFilterTemplate = (options:ColumnFilterElementTemplateOptions) => {
         return <TriStateCheckbox value={options.value} onChange={(e) => options.filterCallback(e.value)} />
     }
 
-    const representativeRowFilterTemplate = (options) => {
+    const representativeRowFilterTemplate = (options:ColumnFilterElementTemplateOptions) => {
         return <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterApplyCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" maxSelectedLabels={1} />;
     }
 
-    const statusRowFilterTemplate = (options) => {
+    const statusRowFilterTemplate = (options:ColumnFilterElementTemplateOptions) => {
         return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterApplyCallback(e.value)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
     }
 
-    const verifiedRowFilterTemplate = (options) => {
+    const verifiedRowFilterTemplate = (options:ColumnFilterElementTemplateOptions) => {
         return <TriStateCheckbox value={options.value} onChange={(e) => options.filterApplyCallback(e.value)} />
     }
 
