@@ -60,11 +60,22 @@ export class Editor extends Component {
                     this.quill.setContents(this.quill.clipboard.convert(this.props.value));
                 }
 
-                this.quill.on('text-change', (delta, source) => {
+                this.quill.on('text-change', (delta, oldContents, source) => {
                     let html = this.editorElement.children[0].innerHTML;
                     let text = this.quill.getText();
                     if (html === '<p><br></p>') {
                         html = null;
+                    }
+
+                    // GitHub #2271 prevent infinite loop on clipboard paste of HTML
+                    if (source === "api") {
+                        const htmlValue = this.editorElement.children[0];
+                        const editorValue = document.createElement("div");
+                        editorValue.innerHTML = this.props.value || "";
+                        // this is necessary because Quill rearranged style elements
+                        if (DomHandler.isEqualElement(htmlValue, editorValue)) {
+                            return;
+                        }
                     }
 
                     if (this.props.onTextChange) {
