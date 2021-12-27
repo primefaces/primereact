@@ -84,7 +84,7 @@ export default function Layout({ children }) {
         const now = new Date();
 
         if (now.getTime() > item.expiry) {
-            localStorage.removeItem(key);
+            localStorage.removeItem(storageKey);
             return true;
         }
 
@@ -102,7 +102,7 @@ export default function Layout({ children }) {
         if (!mounted.current) {
             restoreSettings();
             mounted.current = true;
-        } 
+        }
         else {
             saveSettings();
         }
@@ -149,7 +149,7 @@ export default function Layout({ children }) {
                     {children}
                     <Footer></Footer>
                 </div>
-                <Config ripple={ripple} onRippleChange={onRippleChange} 
+                <Config ripple={ripple} onRippleChange={onRippleChange}
                         inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} />
             </AppContentContext.Provider>
             <div className={maskClassName} onClick={onMaskClick}></div>
