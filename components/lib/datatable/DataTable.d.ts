@@ -210,6 +210,7 @@ interface DataTableRowClassNameOptions {
 interface DataTableCellClassNameOptions {
     props: DataTableProps;
     rowData: any;
+    column: Column;
 }
 
 interface DataTableShowSelectionElementOptions {
