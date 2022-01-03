@@ -592,6 +592,7 @@ export class Calendar extends Component {
     navBackward(event) {
         if (this.props.disabled) {
             event.preventDefault();
+            event.stopPropagation();
             return;
         }
 
@@ -605,6 +606,18 @@ export class Calendar extends Component {
             }
             else {
                 newViewDate.setMonth(newViewDate.getMonth() - 1);
+            }
+
+            // check if month can be navigated to by checking last day in month
+            let testDate = new Date(newViewDate.getTime()),
+                minDate = this.props.minDate;
+            testDate.setMonth(testDate.getMonth() + 1);
+            testDate.setHours(-1);
+            if (minDate && minDate > testDate) {
+                this.setNavigationState(newViewDate);
+                event.preventDefault();
+                event.stopPropagation();
+                return;
             }
         }
         else if (this.props.view === 'month') {
@@ -625,11 +638,13 @@ export class Calendar extends Component {
         this.updateViewDate(event, newViewDate);
 
         event.preventDefault();
+        event.stopPropagation();
     }
 
     navForward(event) {
         if (this.props.disabled) {
             event.preventDefault();
+            event.stopPropagation();
             return;
         }
 
@@ -643,6 +658,15 @@ export class Calendar extends Component {
             }
             else {
                 newViewDate.setMonth(newViewDate.getMonth() + 1);
+            }
+
+            // check if month can be navigated to by checking first day next month
+            let maxDate = this.props.maxDate;
+            if (maxDate && maxDate < newViewDate) {
+                this.setNavigationState(newViewDate);
+                event.preventDefault();
+                event.stopPropagation();
+                return;
             }
         }
         else if (this.props.view === 'month') {
@@ -663,6 +687,41 @@ export class Calendar extends Component {
         this.updateViewDate(event, newViewDate);
 
         event.preventDefault();
+        event.stopPropagation();
+    }
+
+    setNavigationState(newViewDate) {
+        if (this.props.view !== 'date' || !this.overlayRef) {
+            return;
+        }
+
+        let navPrev = DomHandler.findSingle(this.overlayRef.current, '.p-datepicker-prev');
+        let navNext = DomHandler.findSingle(this.overlayRef.current, '.p-datepicker-next');
+
+        if (this.props.disabled) {
+            DomHandler.addClass(navPrev, 'p-disabled');
+            DomHandler.addClass(navNext, 'p-disabled');
+            return;
+        }
+
+        // previous
+        let testDate = new Date(newViewDate.getTime()),
+            minDate = this.props.minDate;
+        testDate.setMonth(testDate.getMonth()+1);
+        testDate.setHours(-1);
+        if (minDate && minDate > testDate) {
+            DomHandler.addClass(navPrev, 'p-disabled');
+        } else {
+            DomHandler.removeClass(navPrev, 'p-disabled');
+        }
+
+        // next
+        let maxDate = this.props.maxDate;
+        if (maxDate && maxDate < newViewDate) {
+            DomHandler.addClass(navNext, 'p-disabled');
+        } else {
+            DomHandler.removeClass(navNext, 'p-disabled');
+        }
     }
 
     onMonthDropdownChange(event, value) {
@@ -1180,6 +1239,9 @@ export class Calendar extends Component {
 
             value.setMonth(viewMonthWithMinMax);
         }
+
+        // set state of navigator buttons
+        this.setNavigationState(value);
     }
 
     updateTime(event, hour, minute, second, millisecond) {
