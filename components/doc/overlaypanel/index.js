@@ -405,13 +405,13 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 `}
 </CodeHighlight>
 
-            <h5>Dismissable and CloseIcon</h5>
-            <p>Clicking outside the overlay hides the panel, setting dismissable to false disables this behavior.
+            <h5>Dismissible and CloseIcon</h5>
+            <p>Clicking outside the overlay hides the panel, setting dismissible to false disables this behavior.
                Additionally enablign showCloseIcon property displays a close icon at the top right corner to close the panel.</p>
 
 <CodeHighlight>
 {`
-<OverlayPanel ref={op} showCloseIcon dismissable>
+<OverlayPanel ref={op} showCloseIcon dismissible>
     // Content
 </OverlayPanel>
 `}
@@ -448,7 +448,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                             <td>Unique identifier of the element.</td>
                         </tr>
                         <tr>
-                            <td>dismissable</td>
+                            <td>dismissible</td>
                             <td>boolean</td>
                             <td>true</td>
                             <td>Enables to hide the overlay when outside is clicked.</td>

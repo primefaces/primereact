@@ -447,7 +447,7 @@ import { Sidebar } from 'primereact/sidebar';
                                         <td>Base zIndex value to use in layering.</td>
                                     </tr>
                                     <tr>
-                                        <td>dismissable</td>
+                                        <td>dismissible</td>
                                         <td>boolean</td>
                                         <td>true</td>
                                         <td>Whether clicking outside closes the panel.</td>

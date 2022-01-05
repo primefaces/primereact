@@ -60,7 +60,7 @@ const ConfirmPopupProps = [
         description: 'Style class of the reject button.'
     },
     {
-        name: 'dismissable',
+        name: 'dismissible',
         type: 'boolean',
         default: 'true',
         description: 'Enables to hide the popup when outside is clicked.'

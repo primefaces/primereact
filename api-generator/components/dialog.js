@@ -84,7 +84,7 @@ const DialogProps = [
         description: 'Specifies if pressing escape key should hide the dialog.'
     },
     {
-        name: 'dismissableMask',
+        name: 'dismissibleMask',
         type: 'boolean',
         default: 'false',
         description: 'Specifies if clicking the modal background should hide the dialog.'

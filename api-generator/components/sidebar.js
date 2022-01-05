@@ -48,7 +48,7 @@ const SidebarProps = [
         description: 'Base zIndex value to use in layering.'
     },
     {
-        name: 'dismissable',
+        name: 'dismissible',
         type: 'boolean',
         default: 'true',
         description: 'Whether clicking outside closes the panel.'

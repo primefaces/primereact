@@ -11,7 +11,7 @@ export class OverlayPanel extends Component {
 
     static defaultProps = {
         id: null,
-        dismissable: true,
+        dismissible: true,
         showCloseIcon: false,
         style: null,
         className: null,
@@ -25,7 +25,7 @@ export class OverlayPanel extends Component {
 
     static propTypes = {
         id: PropTypes.string,
-        dismissable: PropTypes.bool,
+        dismissible: PropTypes.bool,
         showCloseIcon: PropTypes.bool,
         style: PropTypes.object,
         className: PropTypes.string,
@@ -57,7 +57,7 @@ export class OverlayPanel extends Component {
     }
 
     bindDocumentClickListener() {
-        if(!this.documentClickListener && this.props.dismissable) {
+        if(!this.documentClickListener && this.props.dismissible) {
             this.documentClickListener = (event) => {
                 if (!this.isPanelClicked && this.isOutsideClicked(event.target)) {
                     this.hide();

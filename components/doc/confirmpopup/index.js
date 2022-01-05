@@ -425,7 +425,7 @@ const confirm = (event) => {
                                         <td>Style class of the reject button.</td>
                                     </tr>
                                     <tr>
-                                        <td>dismissable</td>
+                                        <td>dismissible</td>
                                         <td>boolean</td>
                                         <td>true</td>
                                         <td>Enables to hide the popup when outside is clicked.</td>

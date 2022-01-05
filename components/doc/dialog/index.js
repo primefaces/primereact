@@ -813,7 +813,7 @@ const myIcon = (
                                         <td>Specifies if pressing escape key should hide the dialog.</td>
                                     </tr>
                                     <tr>
-                                        <td>dismissableMask</td>
+                                        <td>dismissibleMask</td>
                                         <td>boolean</td>
                                         <td>false</td>
                                         <td>Specifies if clicking the modal background should hide the dialog.</td>

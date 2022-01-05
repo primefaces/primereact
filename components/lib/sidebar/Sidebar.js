@@ -19,7 +19,7 @@ export class Sidebar extends Component {
         fullScreen: false,
         blockScroll: false,
         baseZIndex: 0,
-        dismissable: true,
+        dismissible: true,
         showCloseIcon: true,
         ariaCloseLabel: 'close',
         closeOnEscape: true,
@@ -42,7 +42,7 @@ export class Sidebar extends Component {
         fullScreen: PropTypes.bool,
         blockScroll: PropTypes.bool,
         baseZIndex: PropTypes.number,
-        dismissable: PropTypes.bool,
+        dismissible: PropTypes.bool,
         showCloseIcon: PropTypes.bool,
         ariaCloseLabel: PropTypes.string,
         closeOnEscape: PropTypes.bool,
@@ -87,7 +87,7 @@ export class Sidebar extends Component {
     }
 
     onMaskClick(event) {
-        if (this.props.dismissable && this.props.modal && this.mask === event.target) {
+        if (this.props.dismissible && this.props.modal && this.mask === event.target) {
             this.onClose(event);
         }
     }

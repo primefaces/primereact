@@ -6,7 +6,7 @@ const OverlayPanelProps = [
         description: 'Unique identifier of the element.'
     },
     {
-        name: 'dismissable',
+        name: 'dismissible',
         type: 'boolean',
         default: 'true',
         description: 'Enables to hide the overlay when outside is clicked.'

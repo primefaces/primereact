@@ -58,7 +58,7 @@ export class ConfirmPopup extends Component {
         className: null,
         style: null,
         appendTo: null,
-        dismissable: true,
+        dismissible: true,
         footer: null,
         onShow: null,
         onHide: null,
@@ -81,7 +81,7 @@ export class ConfirmPopup extends Component {
         className: PropTypes.string,
         style: PropTypes.object,
         appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        dismissable: PropTypes.bool,
+        dismissible: PropTypes.bool,
         footer: PropTypes.any,
         onShow: PropTypes.func,
         onHide: PropTypes.func,
@@ -120,7 +120,7 @@ export class ConfirmPopup extends Component {
     }
 
     bindDocumentClickListener() {
-        if(!this.documentClickListener && this.props.dismissable) {
+        if(!this.documentClickListener && this.props.dismissible) {
             this.documentClickListener = (event) => {
                 if (!this.isPanelClicked && this.isOutsideClicked(event.target)) {
                     this.hide();

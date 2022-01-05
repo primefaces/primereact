@@ -22,7 +22,7 @@ export class Dialog extends Component {
         contentStyle: null,
         contentClassName: null,
         closeOnEscape: true,
-        dismissableMask: false,
+        dismissibleMask: false,
         rtl: false,
         closable: true,
         style: null,
@@ -68,7 +68,7 @@ export class Dialog extends Component {
         contentStyle: PropTypes.object,
         contentClassName: PropTypes.string,
         closeOnEscape: PropTypes.bool,
-        dismissableMask: PropTypes.bool,
+        dismissibleMask: PropTypes.bool,
         rtl: PropTypes.bool,
         closable: PropTypes.bool,
         style: PropTypes.object,
@@ -140,7 +140,7 @@ export class Dialog extends Component {
     }
 
     onMaskClick(event) {
-        if (this.props.dismissableMask && this.props.modal && this.mask === event.target) {
+        if (this.props.dismissibleMask && this.props.modal && this.mask === event.target) {
             this.onClose(event);
         }
 
