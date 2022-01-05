@@ -139,10 +139,14 @@ export class Sidebar extends Component {
         if (this.props.closeOnEscape) {
             this.bindDocumentEscapeListener();
         }
+        if (this.props.dismissable && !this.props.modal) {
+            this.bindDocumentClickListener();
+        }
     }
 
     unbindGlobalListeners() {
         this.unbindDocumentEscapeListener();
+        this.unbindDocumentClickListener();
     }
 
     bindDocumentEscapeListener() {
@@ -161,6 +165,33 @@ export class Sidebar extends Component {
             document.removeEventListener('keydown', this.documentEscapeListener);
             this.documentEscapeListener = null;
         }
+    }
+
+    bindDocumentClickListener() {
+        if (!this.documentClickListener) {
+            this.documentClickListener = (event) => {
+                if (event.which === 2) { // left click
+                    return;
+                }
+
+                if (this.isOutsideClicked(event)) {
+                    this.onClose(event);
+                }
+            };
+
+            document.addEventListener('click', this.documentClickListener);
+        }
+    }
+
+    unbindDocumentClickListener() {
+        if (this.documentClickListener) {
+            document.removeEventListener('click', this.documentClickListener);
+            this.documentClickListener = null;
+        }
+    }
+
+    isOutsideClicked(event) {
+        return this.sidebarRef && (this.sidebarRef && this.sidebarRef.current && !this.sidebarRef.current.contains(event.target));
     }
 
     componentDidMount() {
