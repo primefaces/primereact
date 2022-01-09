@@ -243,7 +243,7 @@ export class OverlayPanel extends Component {
                 `
             }
 
-            this.styleElement.innerHTML = innerHTML;
+            this.styleElement.innerHTML = DomHandler.sanitizeHtml(innerHTML);
         }
     }
 

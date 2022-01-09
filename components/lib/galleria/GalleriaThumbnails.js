@@ -287,7 +287,7 @@ export class GalleriaThumbnails extends Component {
             }
         }
 
-        this.thumbnailsStyle.innerHTML = innerHTML;
+        this.thumbnailsStyle.innerHTML = DomHandler.sanitizeHtml(innerHTML);
     }
 
     calculatePosition() {

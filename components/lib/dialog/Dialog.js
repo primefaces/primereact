@@ -505,7 +505,7 @@ export class Dialog extends Component {
                 `
             }
 
-            this.styleElement.innerHTML = innerHTML;
+            this.styleElement.innerHTML = DomHandler.sanitizeHtml(innerHTML);
         }
     }
 

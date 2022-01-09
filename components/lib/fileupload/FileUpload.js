@@ -453,7 +453,7 @@ export class FileUpload extends Component {
             'p-button-icon-only': iconOnly
         }, className);
         const labelClassName = 'p-button-label p-clickable';
-        const label = iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: "&nbsp;" }} /> : <span className={labelClassName}>{this.chooseButtonLabel()}</span>;
+        const label = iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: DomHandler.sanitizeHtml("&nbsp;") }} /> : <span className={labelClassName}>{this.chooseButtonLabel()}</span>;
 
         return (
             <span className={chooseClassName} style={style} onClick={this.choose} onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} tabIndex={0}>
@@ -591,7 +591,7 @@ export class FileUpload extends Component {
         const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': hasFiles, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused }, chooseOptions.className);
         const chooseIcon = chooseOptions.icon || classNames({ 'pi pi-plus': !chooseOptions.icon && (!hasFiles || this.props.auto), 'pi pi-upload': !chooseOptions.icon && hasFiles && !this.props.auto });
         const labelClassName = 'p-button-label p-clickable';
-        const chooseLabel = chooseOptions.iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: "&nbsp;" }} /> : <span className={labelClassName}>{this.chooseButtonLabel()}</span>;
+        const chooseLabel = chooseOptions.iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: DomHandler.sanitizeHtml("&nbsp;") }} /> : <span className={labelClassName}>{this.chooseButtonLabel()}</span>;
         const label = this.props.auto ? chooseLabel : (
             <span className={labelClassName}>
                 {hasFiles ? this.state.files[0].name : chooseLabel}

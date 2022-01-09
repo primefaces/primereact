@@ -414,7 +414,7 @@ export class Carousel extends Component {
             }
         }
 
-        this.carouselStyle.innerHTML = innerHTML;
+        this.carouselStyle.innerHTML = DomHandler.sanitizeHtml(innerHTML);
     }
 
     changePosition(totalShiftedItems) {

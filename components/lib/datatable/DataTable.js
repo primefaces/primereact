@@ -614,7 +614,7 @@ export class DataTable extends Component {
                     `
                 });
 
-                this.styleElement.innerHTML = innerHTML;
+                this.styleElement.innerHTML = DomHandler.sanitizeHtml(innerHTML);
             }
             else {
                 DomHandler.find(this.table, '.p-datatable-thead > tr > th').forEach((header, index) => header.style.width = widths[index] + 'px');
@@ -780,7 +780,7 @@ export class DataTable extends Component {
                 }
             `
         });
-        this.styleElement.innerHTML = innerHTML;
+        this.styleElement.innerHTML = DomHandler.sanitizeHtml(innerHTML);
     }
 
     bindColumnResizeEvents() {
@@ -1007,7 +1007,7 @@ export class DataTable extends Component {
 }
 `;
 
-            this.responsiveStyleElement.innerHTML = innerHTML;
+            this.responsiveStyleElement.innerHTML = DomHandler.sanitizeHtml(innerHTML);
         }
     }
 

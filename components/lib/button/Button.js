@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { ObjectUtils, classNames, IconUtils } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
+import DomHandler from '../utils/DomHandler';
 
 export class ButtonComponent extends Component {
 
@@ -106,7 +107,7 @@ export class ButtonComponent extends Component {
             return <span className="p-button-label p-c">{this.props.label}</span>;
         }
 
-        return !this.props.children && !this.props.label && <span className="p-button-label p-c" dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+        return !this.props.children && !this.props.label && <span className="p-button-label p-c" dangerouslySetInnerHTML={{ __html: DomHandler.sanitizeHtml("&nbsp;") }}></span>
     }
 
     renderBadge() {

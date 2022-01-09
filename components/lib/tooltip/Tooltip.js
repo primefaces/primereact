@@ -182,7 +182,7 @@ export class Tooltip extends Component {
             let content = this.getTargetOption(target, 'tooltip') || this.props.content;
 
             if (content) {
-                this.tooltipTextEl.innerHTML = ''; // remove children
+                this.tooltipTextEl.innerHTML = DomHandler.sanitizeHtml(''); // remove children
                 this.tooltipTextEl.appendChild(document.createTextNode(content));
                 callback();
             }

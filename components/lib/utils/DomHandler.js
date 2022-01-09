@@ -1,3 +1,5 @@
+import DOMPurify from 'isomorphic-dompurify';
+
 export default class DomHandler {
 
     static innerWidth(el) {
@@ -792,7 +794,7 @@ export default class DomHandler {
             ghostDiv.style.overflowWrap = style.overflowWrap;
             ghostDiv.style.whiteSpace = style.whiteSpace;
             ghostDiv.style.lineHeight = style.lineHeight;
-            ghostDiv.innerHTML = prevText.replace(/\r\n|\r|\n/g, '<br />');
+            ghostDiv.innerHTML = DomHandler.sanitizeHtml( prevText.replace(/\r\n|\r|\n/g, '<br />'));
 
             let ghostSpan = document.createElement('span');
             ghostSpan.textContent = currentText;
@@ -902,5 +904,17 @@ export default class DomHandler {
             styleElement = null;
         }
         return styleElement;
+    }
+
+    /**
+     * Anytime innerHtml is set it should be santized as well as set as a Trusted Type.
+     * 
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API
+     * @see https://github.com/primefaces/primereact/issues/2566
+     * @param {string} data the HTML data to sanitize for innerHtml
+     * @returns a sanitized HTML string secured as a Trusted Type
+     */
+    static sanitizeHtml(data) {
+        return DOMPurify.sanitize(data, {RETURN_TRUSTED_TYPE: true});
     }
 }
