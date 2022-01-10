@@ -509,7 +509,7 @@ export class BodyCell extends Component {
         const editor = this.getColumnProp('editor');
         const frozen = this.getColumnProp('frozen');
         const value = this.resolveFieldData();
-        const cellClassName = ObjectUtils.getPropValue(this.props.cellClassName, value, { props: this.props.tableProps, rowData: this.props.rowData });
+        const cellClassName = ObjectUtils.getPropValue(this.props.cellClassName, value, { props: this.props.tableProps, rowData: this.props.rowData, column: this.props.column });
         const className = classNames(this.getColumnProp('bodyClassName'), this.getColumnProp('class'), cellClassName, {
             'p-selection-column': selectionMode !== null,
             'p-editable-column': editor,
