@@ -266,7 +266,7 @@ export class TabView extends Component {
                 className: 'p-tabview-nav-link',
                 titleClassName: 'p-tabview-title',
                 onClick: (event) => this.onTabHeaderClick(event, tab, index),
-                onKeyDown: (event) => onKeyDown(event, tab, index),
+                onKeyDown: (event) => this.onKeyDown(event, tab, index),
                 leftIconElement,
                 titleElement,
                 rightIconElement,
