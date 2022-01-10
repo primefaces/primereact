@@ -172,6 +172,12 @@ import { Image } from 'primereact/image';
                                         <td>Controls the preview functionality.</td>
                                     </tr>
                                     <tr>
+                                        <td>downloadable</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>Adds a download button to the preview control menu.</td>
+                                    </tr>
+                                    <tr>
                                         <td>imageStyle</td>
                                         <td>any</td>
                                         <td>null</td>
