@@ -293,6 +293,7 @@ export class HeaderCell extends Component {
         const isSortableDisabled = this.isSortableDisabled();
         const sortMeta = this.getSortMeta();
         const style = this.getStyle();
+        const align = this.getColumnProp('alignHeader') || this.getColumnProp('align');
         const className = classNames(this.getColumnProp('headerClassName'), this.getColumnProp('className'), {
             'p-sortable-column': this.getColumnProp('sortable'),
             'p-resizable-column': this.props.resizableColumns,
@@ -300,7 +301,8 @@ export class HeaderCell extends Component {
             'p-frozen-column': this.getColumnProp('frozen'),
             'p-selection-column': this.getColumnProp('selectionMode'),
             'p-sortable-disabled': this.getColumnProp('sortable') && isSortableDisabled,
-            'p-reorderable-column': this.props.reorderableColumns && this.getColumnProp('reorderable')
+            'p-reorderable-column': this.props.reorderableColumns && this.getColumnProp('reorderable'),
+            [`p-align-${align}`]: !!align
         });
         const tabIndex = this.getColumnProp('sortable') && !isSortableDisabled ? this.props.tabIndex : null;
         const colSpan = this.getColumnProp('colSpan');

@@ -137,6 +137,12 @@ export class TabView extends Component {
         event.preventDefault();
     }
 
+    onKeyDown(event, tab, index) {
+        if(event.code === 'Enter') {
+            this.onTabHeaderClick(event,tab,index)
+        }
+    }
+
     updateInkBar() {
         const activeIndex = this.getActiveIndex();
         const tabHeader = this[`tab_${activeIndex}`];
@@ -244,7 +250,7 @@ export class TabView extends Component {
 
         let content = (
             /* eslint-disable */
-            <a role="tab" className="p-tabview-nav-link" onClick={(event) => this.onTabHeaderClick(event, tab, index)} id={id}
+            <a role="tab" className="p-tabview-nav-link" onClick={(event) => this.onTabHeaderClick(event, tab, index)} id={id} onKeyDown={(event) => this.onKeyDown(event, tab, index)}
                 aria-controls={ariaControls} aria-selected={selected} tabIndex={tabIndex}>
                 {leftIconElement}
                 {titleElement}
@@ -260,6 +266,7 @@ export class TabView extends Component {
                 className: 'p-tabview-nav-link',
                 titleClassName: 'p-tabview-title',
                 onClick: (event) => this.onTabHeaderClick(event, tab, index),
+                onKeyDown: (event) => this.onKeyDown(event, tab, index),
                 leftIconElement,
                 titleElement,
                 rightIconElement,

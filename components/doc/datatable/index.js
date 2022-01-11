@@ -1267,6 +1267,18 @@ export const DataTableDemo = () => {
                                         <td>Inline style of the column filter overlay.</td>
                                     </tr>
                                     <tr>
+                                        <td>align</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Aligns the content of the column, valid values are left, right and center.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>alignHeader</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Aligns the header of the column, valid values are left, right and center.</td>
+                                    </tr>
+                                    <tr>
                                         <td>alignFrozen</td>
                                         <td>string</td>
                                         <td>left</td>

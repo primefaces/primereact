@@ -61,8 +61,10 @@ export class FooterCell extends Component {
 
     render() {
         const style = this.getStyle();
+        const align = this.getColumnProp('align');
         const className = classNames(this.getColumnProp('footerClassName'), this.getColumnProp('className'), {
-            'p-frozen-column': this.getColumnProp('frozen')
+            'p-frozen-column': this.getColumnProp('frozen'),
+            [`p-align-${align}`]: !!align
         });
         const colSpan = this.getColumnProp('colSpan');
         const rowSpan = this.getColumnProp('rowSpan');
