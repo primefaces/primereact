@@ -8,14 +8,14 @@ var gulp = require('gulp'),
 
 gulp.task('build-css', function () {
     return gulp.src([
-            'src/components/common/Common.css',
-            'src/components/**/*.css'
+            process.env.INPUT_DIR + 'common/Common.css',
+            process.env.INPUT_DIR + '**/*.css'
         ])
         .pipe(concat('primereact.css'))
-        .pipe(gulp.dest('dist/resources'))
+        .pipe(gulp.dest(process.env.OUTPUT_DIR + 'resources'))
         .pipe(uglifycss({ "uglyComments": true }))
         .pipe(rename('primereact.min.css'))
-        .pipe(gulp.dest('dist/resources'));
+        .pipe(gulp.dest(process.env.OUTPUT_DIR + 'resources'));
 });
 
 gulp.task('build-themes', function () {
@@ -31,18 +31,18 @@ gulp.task('build-themes', function () {
             '!public/themes/nano/**/*'
         ])
         //.pipe(uglifycss({"uglyComments": true}))
-        .pipe(gulp.dest('dist/resources/themes'));
+        .pipe(gulp.dest(process.env.OUTPUT_DIR + 'resources/themes'));
 })
 
 gulp.task('images', function () {
-    return gulp.src(['src/components/**/images/*.png', 'src/components/**/images/*.gif'])
+    return gulp.src([process.env.INPUT_DIR + '**/images/*.png', process.env.INPUT_DIR + '**/images/*.gif'])
         .pipe(flatten())
-        .pipe(gulp.dest('dist/resources/images'));
+        .pipe(gulp.dest(process.env.OUTPUT_DIR + 'resources/images'));
 });
 
 gulp.task('build-exports', function () {
     return gulp.src(['exports/*.js', 'exports/*.d.ts'])
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest(process.env.OUTPUT_DIR));
 });
 
 gulp.task('build-meta', function () {
@@ -52,33 +52,33 @@ gulp.task('build-meta', function () {
                 path.basename = path.basename.replace('package-build', 'package');
             }
         }))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest(process.env.OUTPUT_DIR));
 });
 
 gulp.task('copy-css', function () {
     return gulp.src([
-            'src/components/**/Common.css',
-            'src/components/**/*.css'
+            process.env.INPUT_DIR + '**/Common.css',
+            process.env.INPUT_DIR + '**/*.css'
         ])
         .pipe(uglifycss({ "uglyComments": true }))
         .pipe(rename(function (path) {
             path.basename = path.basename.toLowerCase();
             path.extname = '.min' + path.extname;
         }))
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest('./' + process.env.OUTPUT_DIR));
 });
 
 gulp.task('copy-d.ts', function () {
-    return gulp.src('src/components/**/*.d.ts')
+    return gulp.src(process.env.INPUT_DIR + '**/*.d.ts')
         .pipe(rename(function (path) {
             path.basename = path.basename.toLowerCase();
         }))
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest('./' + process.env.OUTPUT_DIR));
 });
 
 gulp.task('copy-package.json', function () {
-    return gulp.src('src/components/**/package.json')
-        .pipe(gulp.dest('./dist'));
+    return gulp.src(process.env.INPUT_DIR + '**/package.json')
+        .pipe(gulp.dest('./' + process.env.OUTPUT_DIR));
 });
 
 //Building project with run sequence
