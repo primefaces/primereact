@@ -508,6 +508,7 @@ export class BodyCell extends Component {
         const body = this.getColumnProp('body');
         const editor = this.getColumnProp('editor');
         const frozen = this.getColumnProp('frozen');
+        const align = this.getColumnProp('align');
         const value = this.resolveFieldData();
         const cellClassName = ObjectUtils.getPropValue(this.props.cellClassName, value, { props: this.props.tableProps, rowData: this.props.rowData, column: this.props.column });
         const className = classNames(this.getColumnProp('bodyClassName'), this.getColumnProp('class'), cellClassName, {
@@ -517,6 +518,7 @@ export class BodyCell extends Component {
             'p-frozen-column': frozen,
             'p-selectable-cell': this.props.allowCellSelection,
             'p-highlight': cellSelected,
+            [`p-align-${align}`]: !!align
         });
         const style = this.getStyle();
         const title = this.props.responsiveLayout === 'stack' && <span className="p-column-title">{ObjectUtils.getJSXElement(header, { props: this.props.tableProps })}</span>;

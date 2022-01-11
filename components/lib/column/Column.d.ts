@@ -16,6 +16,8 @@ type ColumnSortOrderType = 1 | 0 | -1 | undefined | null;
 
 type ColumnDataType = 'text' | 'numeric' | 'date' | string;
 
+type ColumnAlignType = 'left' | 'right' | 'center' | undefined | null;
+
 type ColumnAlignFrozenType = 'left' | 'right';
 
 type ColumnFilterOperatorType = 'and' | 'or';
@@ -200,6 +202,8 @@ export interface ColumnProps {
     maxConstraints?: number;
     filterMenuClassName?: string;
     filterMenuStyle?: object;
+    align?: ColumnAlignType;
+    alignHeader?: ColumnAlignType;
     alignFrozen?: ColumnAlignFrozenType;
     hidden?: boolean;
     onFilterClear?(): void;

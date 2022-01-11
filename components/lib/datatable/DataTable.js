@@ -611,6 +611,10 @@ export class DataTable extends Component {
                         .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}) {
                             flex: 0 0 ${width}px;
                         }
+
+                        .p-datatable[${this.attributeSelector}] .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
+                            flex: 0 0 ${width}px;
+                        }
                     `
                 });
 
