@@ -152,21 +152,6 @@
 @media screen and (max-width: 960px) {
     .layout-wrapper {
         @include overlay-menu;
-
-        .layout-news-container {
-            display: flex;
-
-            .layout-news-close {
-                right: 15px;
-            }
-
-            .layout-news-header {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                position: relative;
-            }
-        }
     }
 }
 
@@ -209,18 +194,5 @@
 @media screen and (max-width: 576px) {
     .layout-wrapper .layout-news .layout-news-container img.layouts-news-mockup-image {
         width: 95%;
-    }
-
-
-    .layout-news-container {
-        display: flex;
-
-        .layout-news-close {
-            right: 8px !important;
-        }
-
-        .layout-news-header {
-            font-size: 18px ;
-        }
     }
 }
