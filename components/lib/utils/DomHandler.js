@@ -1,3 +1,5 @@
+import PrimeReact from '../api/Api';
+
 export default class DomHandler {
 
     static innerWidth(el) {
@@ -870,15 +872,29 @@ export default class DomHandler {
     }
 
     /**
-     * Anytime an inline style is created check environment variable 'process.env.REACT_APP_CSS_NONCE'
-     * to set a CSP NONCE.
+     * Anytime an inline style is created check for CSP Nonce.
+     * Create React App/Next look for environment variable 'process.env.REACT_APP_CSS_NONCE'.
+     * Vite look for environment variable 'import.meta.env.VITE_CSS_NONCE'
+     * Finally look for global variable PrimeReact.inlineCssNonce to set a CSP NONCE.
      *
      * @see https://github.com/primefaces/primereact/issues/2423
      * @return HtmlStyleElement
      */
     static createInlineStyle() {
         let styleElement = document.createElement('style');
-        let nonce = process.env.REACT_APP_CSS_NONCE;
+        let nonce = '';
+        // CRA and Next
+        if (process) {
+            nonce = process.env.REACT_APP_CSS_NONCE;
+        }
+        // Vite
+        if (!nonce && import.meta.env) {
+            nonce = import.meta.env.VITE_CSS_NONCE;
+        }
+        // global variable
+        if (!nonce) {
+            nonce = PrimeReact.inlineCssNonce;
+        }
         if (nonce) {
             styleElement.setAttribute('nonce', nonce);
         }

@@ -14,6 +14,8 @@ export default class PrimeReact {
 
     static autoZIndex = true;
 
+    static inlineCssNonce = null;
+
     static zIndex = {
         modal: 1100,
         overlay: 1000,
