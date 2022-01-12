@@ -511,7 +511,7 @@ export class BodyCell extends Component {
         const align = this.getColumnProp('align');
         const value = this.resolveFieldData();
         const cellClassName = ObjectUtils.getPropValue(this.props.cellClassName, value, { props: this.props.tableProps, rowData: this.props.rowData, column: this.props.column });
-        const className = classNames(this.getColumnProp('bodyClassName'), this.getColumnProp('class'), cellClassName, {
+        const className = classNames(this.getColumnProp('bodyClassName'), this.getColumnProp('className'), cellClassName, {
             'p-selection-column': selectionMode !== null,
             'p-editable-column': editor,
             'p-cell-editing': editor && this.state.editing,
