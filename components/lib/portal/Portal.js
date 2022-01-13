@@ -25,8 +25,10 @@ export class Portal extends Component {
     constructor(props) {
         super(props);
 
+        const mounted = props.visible && DomHandler.hasDOM();
+
         this.state = {
-            mounted: props.visible
+            mounted
         };
     }
 
