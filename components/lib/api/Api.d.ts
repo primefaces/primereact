@@ -20,7 +20,7 @@ interface FilterMatchModeOptions {
 interface APIOptions {
     ripple?: boolean;
     inputStyle?: InputStyleType;
-    inlineCssNonce?: string;
+    nonce?: string;
     locale?: string;
     appendTo?: AppendToType;
     cssTransition?: boolean;

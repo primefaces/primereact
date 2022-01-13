@@ -14,7 +14,7 @@ export default class PrimeReact {
 
     static autoZIndex = true;
 
-    static inlineCssNonce = null;
+    static nonce = null;
 
     static zIndex = {
         modal: 1100,

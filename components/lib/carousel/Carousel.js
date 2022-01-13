@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DomHandler, classNames, UniqueComponentId } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
+import PrimeReact from '../api/Api';
 
 class CarouselItem extends Component {
 
@@ -371,7 +372,7 @@ export class Carousel extends Component {
 
     createStyle() {
         if (!this.carouselStyle) {
-            this.carouselStyle = DomHandler.createInlineStyle();
+            this.carouselStyle = DomHandler.createInlineStyle(PrimeReact.nonce);
         }
 
         let innerHTML = `

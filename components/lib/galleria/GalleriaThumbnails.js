@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import PrimeReact from '../api/Api';
 import { DomHandler, classNames, UniqueComponentId } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
 
@@ -244,7 +245,7 @@ export class GalleriaThumbnails extends Component {
 
     createStyle() {
         if (!this.thumbnailsStyle) {
-            this.thumbnailsStyle = DomHandler.createInlineStyle();
+            this.thumbnailsStyle = DomHandler.createInlineStyle(PrimeReact.nonce);
         }
 
         let innerHTML = `

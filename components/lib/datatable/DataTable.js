@@ -974,12 +974,12 @@ export class DataTable extends Component {
     }
 
     createStyleElement() {
-        this.styleElement = DomHandler.createInlineStyle();
+        this.styleElement = DomHandler.createInlineStyle(PrimeReact.nonce);
     }
 
     createResponsiveStyle() {
         if (!this.responsiveStyleElement) {
-            this.responsiveStyleElement = DomHandler.createInlineStyle();
+            this.responsiveStyleElement = DomHandler.createInlineStyle(PrimeReact.nonce);
 
             let innerHTML = `
 @media screen and (max-width: ${this.props.breakpoint}) {
