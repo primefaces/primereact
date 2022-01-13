@@ -118,7 +118,8 @@ export class FileUpload extends Component {
         this.state = {
             files: [],
             msgs: [],
-            focused: false
+            focused: false,
+            progress: 0
         };
 
         this.choose = this.choose.bind(this);
