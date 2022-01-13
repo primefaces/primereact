@@ -208,9 +208,11 @@ export class Image extends Component {
         return (
             <span ref={(el) => this.container = el} className={containerClassName} style={this.props.style}>
                 <img src={src} className={this.props.imageClassName} width={width} height={height} style={this.props.imageStyle} alt={alt} />
-                {this.props.preview && <div className="p-image-preview-indicator" onClick={this.onImageClick} >
-                    {content}
-                </div>}
+                {
+                    this.props.preview && <div className="p-image-preview-indicator" onClick={this.onImageClick} >
+                        {content}
+                    </div>
+                }
 
                 {this.state.maskVisible && <Portal element={element} appendTo={document.body} />}
             </span>
