@@ -450,7 +450,7 @@ import { Sidebar } from 'primereact/sidebar';
                                         <td>dismissable</td>
                                         <td>boolean</td>
                                         <td>true</td>
-                                        <td>Whether clicking outside closes the panel.</td>
+                                        <td>Whether to dismiss sidebar on click of the mask.</td>
                                     </tr>
                                     <tr>
                                         <td>showCloseIcon</td>
