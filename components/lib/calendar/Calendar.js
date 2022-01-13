@@ -881,11 +881,7 @@ export class Calendar extends Component {
 
     doStepMinute(currentMinute, step) {
         if (this.props.stepMinute <= 1) {
-            if (!step) {
-                return currentMinute;
-            } else {
-                return currentMinute + step;
-            }
+            return step ? currentMinute + step : currentMinute;
         }
         if (!step) {
             step = this.props.stepMinute;
