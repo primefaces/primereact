@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PrimeReact, { localeOption, FilterOperator } from '../api/Api';
+import PrimeReact, { localeOption, FilterOperator, FilterMatchMode } from '../api/Api';
 import { classNames, ConnectedOverlayScrollHandler, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { OverlayService } from '../overlayservice/OverlayService';
@@ -7,7 +7,6 @@ import { Portal } from '../portal/Portal';
 import { InputText } from '../inputtext/InputText';
 import { Dropdown } from '../dropdown/Dropdown';
 import { Button } from '../button/Button';
-import { FilterMatchMode } from '../api/FilterMatchMode';
 
 export class ColumnFilter extends Component {
 
