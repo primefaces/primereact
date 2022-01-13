@@ -853,20 +853,32 @@ export default class DomHandler {
             navigator.msSaveOrOpenBlob(blob, filename + '.csv');
         }
         else {
-            let link = document.createElement("a");
-            if (link.download !== undefined) {
-                link.setAttribute('href', URL.createObjectURL(blob));
-                link.setAttribute('download', filename + '.csv');
-                link.style.display = 'none';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-            else {
+            const isDownloaded = DomHandler.saveAs({ name: filename + '.csv', src: URL.createObjectURL(blob) });
+            if (!isDownloaded) {
                 csv = 'data:text/csv;charset=utf-8,' + csv;
                 window.open(encodeURI(csv));
             }
         }
+    }
+
+    static saveAs(file) {
+        if (file) {
+            let link = document.createElement('a');
+            if (link.download !== undefined) {
+                const { name, src } = file;
+
+                link.setAttribute('href', src);
+                link.setAttribute('download', name);
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
     static createInlineStyle(nonce) {

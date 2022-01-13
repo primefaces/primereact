@@ -66,6 +66,7 @@ export declare class DomHandler {
     static isClickable(el: HTMLElement): boolean;
     static applyStyle(el: HTMLElement, style: any): void;
     static exportCSV(csv: any, filename: string): void;
+    static saveAs(file: { name: string, url: any }): boolean;
 }
 
 export declare function EventBus(): {
