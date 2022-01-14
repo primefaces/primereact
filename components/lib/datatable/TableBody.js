@@ -441,7 +441,7 @@ export class TableBody extends Component {
     focusOnElement(event, isFocused) {
         const target = event.currentTarget;
 
-        if (!this.allowCellSelection()) {
+        if (!this.allowCellSelection() && this.props.selectionAutoFocus) {
             if (this.isCheckboxSelectionModeInColumn()) {
                 const checkbox = DomHandler.findSingle(target, 'td.p-selection-column .p-checkbox-box');
                 checkbox && checkbox.focus();

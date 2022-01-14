@@ -127,6 +127,10 @@ export class BodyRow extends Component {
     }
 
     onClick(event) {
+        const row = event.currentTarget;
+        const tabbableEl = DomHandler.findSingle(row.parentElement, 'tr[tabIndex="0"]');
+        tabbableEl && this.changeTabIndex(tabbableEl, row);
+
         this.props.onRowClick({ originalEvent: event, data: this.props.rowData, index: this.props.index });
     }
 

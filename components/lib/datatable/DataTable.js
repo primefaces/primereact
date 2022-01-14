@@ -53,6 +53,7 @@ export class DataTable extends Component {
         metaKeySelection: true,
         selectOnEdit: true,
         selectionPageOnly: false,
+        selectionAutoFocus: true,
         showSelectAll: true,
         selectAll: false,
         onSelectAllChange: null,
@@ -180,6 +181,7 @@ export class DataTable extends Component {
         metaKeySelection: PropTypes.bool,
         selectOnEdit: PropTypes.bool,
         selectionPageOnly: PropTypes.bool,
+        selectionAutoFocus: PropTypes.bool,
         showSelectAll: PropTypes.bool,
         selectAll: PropTypes.bool,
         onSelectAllChange: PropTypes.func,
@@ -1638,7 +1640,7 @@ export class DataTable extends Component {
                 rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowExpansionTemplate={this.props.rowExpansionTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                 onRowEditChange={this.props.onRowEditChange} compareSelectionBy={this.props.compareSelectionBy} selectOnEdit={this.props.selectOnEdit}
                 onRowEditInit={this.props.onRowEditInit} rowEditValidator={this.props.rowEditValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
-                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout}
+                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} selectionAutoFocus={this.props.selectionAutoFocus}
                 showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement}
                 expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon} rowClassName={this.props.rowClassName}
                 isVirtualScrollerDisabled={true} />
@@ -1658,7 +1660,7 @@ export class DataTable extends Component {
                 rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowExpansionTemplate={this.props.rowExpansionTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                 onRowEditChange={this.props.onRowEditChange} compareSelectionBy={this.props.compareSelectionBy} selectOnEdit={this.props.selectOnEdit}
                 onRowEditInit={this.props.onRowEditInit} rowEditValidator={this.props.rowEditValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
-                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout}
+                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} selectionAutoFocus={this.props.selectionAutoFocus}
                 showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement}
                 expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon} rowClassName={this.props.rowClassName}
                 virtualScrollerContentRef={contentRef} virtualScrollerOptions={options} isVirtualScrollerDisabled={isVirtualScrollerDisabled} />
