@@ -268,6 +268,7 @@ export interface DataTableProps {
     metaKeySelection?: boolean;
     selectOnEdit?: boolean;
     selectionPageOnly?: boolean;
+    selectionAutoFocus?: boolean;
     showSelectAll?: boolean;
     selectAll?: boolean;
     headerColumnGroup?: React.ReactNode;
