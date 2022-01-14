@@ -228,6 +228,18 @@ const DataTableProps = [
         description: 'Determines whether the cell editor will be opened when clicking to select any row on Selection and Cell Edit modes.'
     },
     {
+        name: 'selectionPageOnly',
+        type: 'boolean',
+        default: 'false',
+        description: 'When enabled with paginator and checkbox selection mode, the select all checkbox in the header will select all rows on the current page.'
+    },
+    {
+        name: 'selectionAutoFocus',
+        type: 'boolean',
+        default: 'true',
+        description: 'When a selectable row is clicked on RadioButton and Checkbox selection, it automatically decides whether to focus on elements such as checkbox or radio.'
+    },
+    {
         name: 'headerColumnGroup',
         type: 'ColumnGroup',
         default: 'null',

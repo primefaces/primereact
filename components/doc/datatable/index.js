@@ -963,20 +963,20 @@ const DataTableDemo = () => {
                 <TabView>
                     <TabPanel header="Documentation">
                         <h5>Import via Module</h5>
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 import { DataTable } from 'primereact/datatable';
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Import via CDN</h5>
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+{`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/column/column.min.js"></script>
 <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
                         <h5>Getting Started</h5>
                         <p>DataTable requires a value as an array of objects and columns defined with Column component. Throughout the samples, a product interface having code, name, description, image, category, quantity, price, inventoryStatus and rating properties is used to define an object to be displayed by the datatable.
@@ -3134,6 +3134,18 @@ export const DataTableStateDemo = () => {
                                             When true metaKey needs to be pressed to select or unselect an item and <br />
                                             when set to false selection of each item
                                             can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>selectionPageOnly</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled with paginator and checkbox selection mode, the select all checkbox in the header will select all rows on the current page.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>selectionAutoFocus</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>When a selectable row is clicked on RadioButton and Checkbox selection, it automatically decides whether to focus on elements such as checkbox or radio.</td>
                                     </tr>
                                     <tr>
                                         <td>selectOnEdit</td>
