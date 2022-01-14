@@ -836,6 +836,9 @@
 .p-input-filled .p-dropdown:not(.p-disabled).p-focus {
   background-color: #ffffff;
 }
+.p-input-filled .p-dropdown:not(.p-disabled).p-focus .p-inputtext {
+  background-color: transparent;
+}
 
 .p-editor-container .p-editor-toolbar {
   background: #f8f9fa;
@@ -2418,14 +2421,12 @@
   background: #ffffff;
   color: #495057;
   transition: box-shadow 0.2s;
-  outline-color: #DDD6FE;
 }
 .p-datatable .p-datatable-tbody > tr > td {
   text-align: left;
   border: 1px solid #dee2e6;
   border-width: 0 0 1px 0;
   padding: 1rem 1rem;
-  outline-color: #DDD6FE;
 }
 .p-datatable .p-datatable-tbody > tr > td .p-row-toggler,
 .p-datatable .p-datatable-tbody > tr > td .p-row-editor-init,
@@ -2461,9 +2462,17 @@
 .p-datatable .p-datatable-tbody > tr > td > .p-column-title {
   font-weight: 700;
 }
+.p-datatable .p-datatable-tbody > tr > td:focus {
+  outline: 1px solid #DDD6FE;
+  outline-offset: -1px;
+}
 .p-datatable .p-datatable-tbody > tr > td.p-highlight {
   background: #F5F3FF;
   color: #6D28D9;
+}
+.p-datatable .p-datatable-tbody > tr:focus {
+  outline: 1px solid #DDD6FE;
+  outline-offset: -1px;
 }
 .p-datatable .p-datatable-tbody > tr.p-highlight {
   background: #F5F3FF;

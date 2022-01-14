@@ -805,6 +805,9 @@
 .p-input-filled .p-dropdown:not(.p-disabled).p-focus {
   background-color: #efefef;
 }
+.p-input-filled .p-dropdown:not(.p-disabled).p-focus .p-inputtext {
+  background-color: transparent;
+}
 
 .p-editor-container .p-editor-toolbar {
   background: #efefef;
@@ -2395,14 +2398,12 @@
   background: #ffffff;
   color: #212529;
   transition: box-shadow 0.15s;
-  outline-color: rgba(38, 143, 255, 0.5);
 }
 .p-datatable .p-datatable-tbody > tr > td {
   text-align: left;
   border: 1px solid #dee2e6;
   border-width: 1px 0 0 0;
   padding: 1rem 1rem;
-  outline-color: rgba(38, 143, 255, 0.5);
 }
 .p-datatable .p-datatable-tbody > tr > td .p-row-toggler,
 .p-datatable .p-datatable-tbody > tr > td .p-row-editor-init,
@@ -2438,9 +2439,17 @@
 .p-datatable .p-datatable-tbody > tr > td > .p-column-title {
   font-weight: 600;
 }
+.p-datatable .p-datatable-tbody > tr > td:focus {
+  outline: 1px solid rgba(38, 143, 255, 0.5);
+  outline-offset: -1px;
+}
 .p-datatable .p-datatable-tbody > tr > td.p-highlight {
   background: #007bff;
   color: #ffffff;
+}
+.p-datatable .p-datatable-tbody > tr:focus {
+  outline: 1px solid rgba(38, 143, 255, 0.5);
+  outline-offset: -1px;
 }
 .p-datatable .p-datatable-tbody > tr.p-highlight {
   background: #007bff;
