@@ -5,6 +5,7 @@ import { ToastMessage } from './ToastMessage';
 import { TransitionGroup } from 'react-transition-group';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import PrimeReact from '../api/Api';
+import { Portal } from '../portal/Portal';
 
 let messageIdx = 0;
 
@@ -17,6 +18,7 @@ export class Toast extends Component {
         baseZIndex: 0,
         position: 'top-right',
         transitionOptions: null,
+        appendTo: 'self',
         onClick: null,
         onRemove: null,
         onShow: null,
@@ -30,6 +32,7 @@ export class Toast extends Component {
         baseZIndex: PropTypes.number,
         position: PropTypes.string,
         transitionOptions: PropTypes.object,
+        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
         onClick: PropTypes.func,
         onRemove: PropTypes.func,
         onShow: PropTypes.func,
@@ -104,7 +107,7 @@ export class Toast extends Component {
         ZIndexUtils.clear(this.container);
     }
 
-    render() {
+    renderElement() {
         let className = classNames('p-toast p-component p-toast-' + this.props.position, this.props.className);
 
         return (
@@ -124,5 +127,11 @@ export class Toast extends Component {
                 </TransitionGroup>
             </div>
         );
+    }
+
+    render() {
+        let element = this.renderElement();
+
+        return <Portal element={element} appendTo={this.props.appendTo} />;
     }
 }

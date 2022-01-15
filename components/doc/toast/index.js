@@ -771,6 +771,12 @@ toast.current.show({life: 5000, severity: 'error', summary: 'Error Message', det
                                         <td>null</td>
                                         <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
                                     </tr>
+                                    <tr>
+                                        <td>appendTo</td>
+                                        <td>DOM element | string</td>
+                                        <td>self</td>
+                                        <td>DOM element instance where the component should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
