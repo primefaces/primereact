@@ -492,6 +492,12 @@ const DataTableProps = [
         description: 'Function that returns a boolean by passing the row data to decide if the row reorder element should be displayed per row.'
     },
     {
+        name: 'isDataSelectable',
+        type: 'function',
+        default: 'null',
+        description: 'Function that returns a boolean to decide whether the data should be selectable.'
+    },
+    {
         name: 'customSaveState',
         type: 'function',
         default: 'null',

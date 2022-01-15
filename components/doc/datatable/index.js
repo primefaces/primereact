@@ -3435,6 +3435,12 @@ export const DataTableStateDemo = () => {
                                         <td>Function that returns a boolean by passing the row data to decide if the row reorder element should be displayed per row.</td>
                                     </tr>
                                     <tr>
+                                        <td>isDataSelectable</td>
+                                        <td>function</td>
+                                        <td>null</td>
+                                        <td>Function that returns a boolean to decide whether the data should be selectable.</td>
+                                    </tr>
+                                    <tr>
                                         <td>customSaveState</td>
                                         <td>function</td>
                                         <td>null</td>
