@@ -2427,17 +2427,9 @@
 .p-datatable .p-datatable-tbody > tr > td > .p-column-title {
   font-weight: 700;
 }
-.p-datatable .p-datatable-tbody > tr > td:focus {
-  outline: 1px solid #8dcdff;
-  outline-offset: -1px;
-}
 .p-datatable .p-datatable-tbody > tr > td.p-highlight {
   background: #e02365;
   color: #ffffff;
-}
-.p-datatable .p-datatable-tbody > tr:focus {
-  outline: 1px solid #8dcdff;
-  outline-offset: -1px;
 }
 .p-datatable .p-datatable-tbody > tr.p-highlight {
   background: #e02365;
@@ -2448,6 +2440,22 @@
 }
 .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-bottom > td {
   box-shadow: inset 0 -2px 0 0 #e02365;
+}
+.p-datatable.p-datatable-selectable .p-datatable-tbody > tr.p-selectable-row:not(.p-highlight):not(.p-datatable-emptymessage):hover {
+  background: #eaeaea;
+  color: #333333;
+}
+.p-datatable.p-datatable-selectable .p-datatable-tbody > tr.p-selectable-row:focus {
+  outline: 1px solid #8dcdff;
+  outline-offset: -1px;
+}
+.p-datatable.p-datatable-selectable-cell .p-datatable-tbody > tr.p-selectable-row > td.p-selectable-cell:not(.p-highlight):hover {
+  background: #eaeaea;
+  color: #333333;
+}
+.p-datatable.p-datatable-selectable-cell .p-datatable-tbody > tr.p-selectable-row > td.p-selectable-cell:focus {
+  outline: 1px solid #8dcdff;
+  outline-offset: -1px;
 }
 .p-datatable.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight):not(.p-datatable-emptymessage):hover {
   background: #eaeaea;
