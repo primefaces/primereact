@@ -105,6 +105,7 @@ export class DataTable extends Component {
         globalFilterFields: null,
         showSelectionElement: null,
         showRowReorderElement: null,
+        isDataSelectable: null,
         onColumnResizeEnd: null,
         onColumnResizerClick: null,
         onColumnResizerDoubleClick: null,
@@ -233,6 +234,7 @@ export class DataTable extends Component {
         onRowEditComplete: PropTypes.func,
         showSelectionElement: PropTypes.func,
         showRowReorderElement: PropTypes.func,
+        isDataSelectable: PropTypes.func,
         onColumnResizeEnd: PropTypes.func,
         onColumnResizerClick: PropTypes.func,
         onColumnResizerDoubleClick: PropTypes.func,
@@ -646,6 +648,23 @@ export class DataTable extends Component {
         return this.props.sortMode === 'single' ? this.props.sortField : (this.state.groupRowsSortMeta ? this.state.groupRowsSortMeta.field : null);
     }
 
+    getSelectableData(val) {
+        if (this.props.showSelectionElement || this.props.isDataSelectable) {
+            return val.filter((data, index) => {
+                let isSelectable = true;
+
+                if (this.props.showSelectionElement)
+                    isSelectable = this.props.showSelectionElement({ rowIndex: index, props: this.props });
+                if (this.props.isDataSelectable && isSelectable)
+                    isSelectable = this.props.isDataSelectable({ data, index });
+
+                return isSelectable;
+            });
+        }
+
+        return val;
+    }
+
     allRowsSelected(processedData) {
         if (this.props.onSelectAllChange) {
             return this.props.selectAll;
@@ -653,7 +672,7 @@ export class DataTable extends Component {
         else {
             const data = this.props.selectionPageOnly ? this.dataToRender(processedData) : processedData;
             const val = this.props.frozenValue ? [...this.props.frozenValue, ...data] : data;
-            const selectableVal = this.props.showSelectionElement ? val.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : val;
+            const selectableVal = this.getSelectableData(val);
 
             return selectableVal && this.props.selection && selectableVal.every(sv => this.props.selection.some(s => this.isEquals(s, sv)));
         }
@@ -844,7 +863,7 @@ export class DataTable extends Component {
 
             if (checked) {
                 selection = this.props.frozenValue ? [...selection, ...this.props.frozenValue, ...data] : [...selection, ...data];
-                selection = this.props.showSelectionElement ? selection.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : selection;
+                selection = this.getSelectableData(selection);
 
                 this.props.onAllRowsSelect && this.props.onAllRowsSelect({ originalEvent, data: selection, type: 'all' });
             }
@@ -1640,7 +1659,7 @@ export class DataTable extends Component {
                 rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowExpansionTemplate={this.props.rowExpansionTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                 onRowEditChange={this.props.onRowEditChange} compareSelectionBy={this.props.compareSelectionBy} selectOnEdit={this.props.selectOnEdit}
                 onRowEditInit={this.props.onRowEditInit} rowEditValidator={this.props.rowEditValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
-                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} selectionAutoFocus={this.props.selectionAutoFocus}
+                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} selectionAutoFocus={this.props.selectionAutoFocus} isDataSelectable={this.props.isDataSelectable}
                 showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement}
                 expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon} rowClassName={this.props.rowClassName}
                 isVirtualScrollerDisabled={true} />
@@ -1660,7 +1679,7 @@ export class DataTable extends Component {
                 rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowExpansionTemplate={this.props.rowExpansionTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                 onRowEditChange={this.props.onRowEditChange} compareSelectionBy={this.props.compareSelectionBy} selectOnEdit={this.props.selectOnEdit}
                 onRowEditInit={this.props.onRowEditInit} rowEditValidator={this.props.rowEditValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
-                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} selectionAutoFocus={this.props.selectionAutoFocus}
+                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} selectionAutoFocus={this.props.selectionAutoFocus} isDataSelectable={this.props.isDataSelectable}
                 showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement}
                 expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon} rowClassName={this.props.rowClassName}
                 virtualScrollerContentRef={contentRef} virtualScrollerOptions={options} isVirtualScrollerDisabled={isVirtualScrollerDisabled} />
@@ -1778,8 +1797,11 @@ export class DataTable extends Component {
         const totalRecords = this.getTotalRecords(processedData);
         const empty = ObjectUtils.isEmpty(processedData);
         const selectionModeInColumn = this.getSelectionModeInColumn(columns);
+        const selectable = this.props.selectionMode || selectionModeInColumn;
         const className = classNames('p-datatable p-component', {
-            'p-datatable-hoverable-rows': this.props.rowHover || this.props.selectionMode || selectionModeInColumn,
+            'p-datatable-hoverable-rows': this.props.rowHover,
+            'p-datatable-selectable': selectable && !this.props.cellSelection,
+            'p-datatable-selectable-cell': selectable && this.props.cellSelection,
             'p-datatable-auto-layout': this.props.autoLayout,
             'p-datatable-resizable': this.props.resizableColumns,
             'p-datatable-resizable-fit': this.props.resizableColumns && this.props.columnResizeMode === 'fit',

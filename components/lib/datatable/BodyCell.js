@@ -22,6 +22,8 @@ export class BodyCell extends Component {
         this.onBlur = this.onBlur.bind(this);
         this.onEditorFocus = this.onEditorFocus.bind(this);
         this.onRowToggle = this.onRowToggle.bind(this);
+        this.onRadioChange = this.onRadioChange.bind(this);
+        this.onCheckboxChange = this.onCheckboxChange.bind(this);
 
         this.onRowEditSave = this.onRowEditSave.bind(this);
         this.onRowEditCancel = this.onRowEditCancel.bind(this);
@@ -69,9 +71,8 @@ export class BodyCell extends Component {
         return this.getColumnProp('frozen') ? Object.assign({}, columnStyle, bodyStyle, this.state.styleObject) : Object.assign({}, columnStyle, bodyStyle);
     }
 
-    getCellCallbackParams(event) {
+    getCellParams() {
         return {
-            originalEvent: event,
             value: this.resolveFieldData(),
             field: this.field,
             rowData: this.props.rowData,
@@ -80,6 +81,14 @@ export class BodyCell extends Component {
             selected: this.isSelected(),
             column: this.props.column,
             props: this.props
+        }
+    }
+
+    getCellCallbackParams(event) {
+        const params = this.getCellParams();
+        return {
+            originalEvent: event,
+            ...params
         }
     }
 
@@ -153,28 +162,27 @@ export class BodyCell extends Component {
     findNextSelectableCell(cell) {
         let nextCell = cell.nextElementSibling;
 
-        return nextCell ? (DomHandler.hasClass(nextCell, 'p-selectable-cell') ? nextCell : this.findNextSelectableRow(nextCell)) : null;
+        return nextCell ? (DomHandler.hasClass(nextCell, 'p-selectable-cell') ? nextCell : this.findNextSelectableCell(nextCell)) : null;
     }
 
     findPrevSelectableCell(cell) {
         let prevCell = cell.previousElementSibling;
 
-        return prevCell ? (DomHandler.hasClass(prevCell, 'p-selectable-cell') ? prevCell : this.findPrevSelectableRow(prevCell)) : null;
+        return prevCell ? (DomHandler.hasClass(prevCell, 'p-selectable-cell') ? prevCell : this.findPrevSelectableCell(prevCell)) : null;
     }
 
-    findNextSelectableRow(row) {
-        let nextRow = row.nextElementSibling;
+    findDownSelectableCell(cell) {
+        let downRow = cell.parentElement.nextElementSibling;
+        let downCell = downRow ? downRow.children[this.props.index] : null;
 
-        return nextRow ? (DomHandler.hasClass(nextRow, 'p-selectable-row') ? nextRow : this.findNextSelectableRow(nextRow)) : null;
+        return downRow && downCell ? (DomHandler.hasClass(downRow, 'p-selectable-row') && DomHandler.hasClass(downCell, 'p-selectable-cell') ? downCell : this.findDownSelectableCell(downCell)) : null;
     }
 
-    findPrevSelectableRow(row) {
-        let prevRow = row.previousElementSibling;
-        if (prevRow) {
-            return DomHandler.hasClass(prevRow, 'p-selectable-row') ? prevRow : this.findPrevSelectableRow(prevRow);
-        }
+    findUpSelectableCell(cell) {
+        let upRow = cell.parentElement.previousElementSibling;
+        let upCell = upRow ? upRow.children[this.props.index] : null;
 
-        return null;
+        return upRow && upCell ? (DomHandler.hasClass(upRow, 'p-selectable-row') && DomHandler.hasClass(upCell, 'p-selectable-cell') ? upCell : this.findUpSelectableCell(upCell)) : null;
     }
 
     changeTabIndex(currentCell, nextCell) {
@@ -330,9 +338,8 @@ export class BodyCell extends Component {
 
                 //up arrow
                 case 38:
-                    let prevRow = this.findPrevSelectableRow(cell.parentElement);
-                    if (prevRow) {
-                        let upCell = prevRow.children[this.props.index];
+                    let upCell = this.findUpSelectableCell(cell);
+                    if (upCell) {
                         this.changeTabIndex(cell, upCell);
                         upCell.focus();
                     }
@@ -342,9 +349,8 @@ export class BodyCell extends Component {
 
                 //down arrow
                 case 40:
-                    let nextRow = this.findNextSelectableRow(cell.parentElement);
-                    if (nextRow) {
-                        let downCell = nextRow.children[this.props.index];
+                    let downCell = this.findDownSelectableCell(cell);
+                    if (downCell) {
                         this.changeTabIndex(cell, downCell);
                         downCell.focus();
                     }
@@ -385,6 +391,22 @@ export class BodyCell extends Component {
 
     onEditorFocus(event) {
         this.onClick(event);
+    }
+
+    onRadioChange(event) {
+        this.props.onRadioChange({
+            originalEvent: event,
+            data: this.props.rowData,
+            index: this.props.rowIndex
+        });
+    }
+
+    onCheckboxChange(event) {
+        this.props.onCheckboxChange({
+            originalEvent: event,
+            data: this.props.rowData,
+            index: this.props.rowIndex
+        });
     }
 
     onRowToggle(event) {
@@ -516,7 +538,7 @@ export class BodyCell extends Component {
             'p-editable-column': editor,
             'p-cell-editing': editor && this.state.editing,
             'p-frozen-column': frozen,
-            'p-selectable-cell': this.props.allowCellSelection,
+            'p-selectable-cell': this.props.allowCellSelection && this.props.isSelectable({ data: this.getCellParams(), index: this.props.rowIndex }),
             'p-highlight': cellSelected,
             [`p-align-${align}`]: !!align
         });
@@ -528,8 +550,8 @@ export class BodyCell extends Component {
 
             content = showSelection && (
                 <>
-                    {selectionMode === 'single' && <RowRadioButton value={this.props.rowData} checked={this.props.selected} onChange={this.props.onRadioChange} tabIndex={this.props.tabIndex} tableSelector={this.props.tableSelector} />}
-                    {selectionMode === 'multiple' && <RowCheckbox value={this.props.rowData} checked={this.props.selected} onChange={this.props.onCheckboxChange} tabIndex={this.props.tabIndex} />}
+                    {selectionMode === 'single' && <RowRadioButton checked={this.props.selected} onChange={this.onRadioChange} tabIndex={this.props.tabIndex} tableSelector={this.props.tableSelector} />}
+                    {selectionMode === 'multiple' && <RowCheckbox checked={this.props.selected} onChange={this.onCheckboxChange} tabIndex={this.props.tabIndex} />}
                 </>
             )
         }

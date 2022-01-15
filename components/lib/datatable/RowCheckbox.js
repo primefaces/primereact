@@ -19,10 +19,7 @@ export class RowCheckbox extends Component {
         if (!this.props.disabled) {
             this.setState({ focused: true });
 
-            this.props.onChange({
-                originalEvent: event,
-                data: this.props.value
-            });
+            this.props.onChange(event);
         }
     }
 

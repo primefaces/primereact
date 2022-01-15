@@ -38,7 +38,8 @@
     table-layout: auto;
 }
 
-.p-datatable-hoverable-rows .p-selectable-row {
+.p-datatable-selectable .p-selectable-row,
+.p-datatable-selectable-cell .p-selectable-cell {
     cursor: pointer;
 }
 

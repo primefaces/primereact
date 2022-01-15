@@ -34,6 +34,7 @@ export class TableBody extends Component {
         this.onCheckboxChange = this.onCheckboxChange.bind(this);
         this.onDragSelectionMouseMove = this.onDragSelectionMouseMove.bind(this);
         this.onDragSelectionMouseUp = this.onDragSelectionMouseUp.bind(this);
+        this.isSelectable = this.isSelectable.bind(this);
 
         // cell
         this.onCellClick = this.onCellClick.bind(this);
@@ -110,6 +111,10 @@ export class TableBody extends Component {
         }
 
         return false;
+    }
+
+    isSelectable(options) {
+        return this.props.isDataSelectable ? this.props.isDataSelectable(options) : true;
     }
 
     isRowExpanded(rowData) {
@@ -249,7 +254,11 @@ export class TableBody extends Component {
         this.el.style.top = (this.el.style.top || 0) + tableHeaderHeight + 'px';
     }
 
-    onSingleSelection({ originalEvent, data, toggleable, type }) {
+    onSingleSelection({ originalEvent, data, index, toggleable, type }) {
+        if (!this.isSelectable({ data, index })) {
+            return;
+        }
+
         let selected = this.isSelected(data);
         let selection = this.props.selection;
 
@@ -275,7 +284,11 @@ export class TableBody extends Component {
         }
     }
 
-    onMultipleSelection({ originalEvent, data, toggleable, type }) {
+    onMultipleSelection({ originalEvent, data, index, toggleable, type }) {
+        if (!this.isSelectable({ data, index })) {
+            return;
+        }
+
         let selected = this.isSelected(data);
         let selection = this.props.selection || [];
 
@@ -362,6 +375,10 @@ export class TableBody extends Component {
 
         for (let i = rowRangeStart; i <= rowRangeEnd; i++) {
             let rangeRowData = value[i];
+            if (!this.isSelectable({ data: rangeRowData, index: i })) {
+                continue;
+            }
+
             selection.push(rangeRowData);
 
             this.onSelect({ originalEvent: event.originalEvent, data: rangeRowData, type: 'row' });
@@ -393,14 +410,19 @@ export class TableBody extends Component {
 
             for (let j = cellRangeStart; j <= cellRangeEnd; j++) {
                 let field = columns[j].props.field;
+                let value = ObjectUtils.resolveFieldData(rowData, field);
                 let rangeRowData = {
-                    value: ObjectUtils.resolveFieldData(rowData, field),
+                    value,
                     field,
                     rowData,
                     rowIndex: i,
                     cellIndex: j,
                     selected: true
                 };
+
+                if (!this.isSelectable({ data: rangeRowData, index: i })) {
+                    continue;
+                }
 
                 selection.push(rangeRowData);
 
@@ -455,6 +477,21 @@ export class TableBody extends Component {
         !isFocused && target && target.focus();
     }
 
+    changeTabIndex(event, type) {
+        const target = event.currentTarget;
+        const isSelectable = DomHandler.hasClass(target, type === 'cell' ? 'p-selectable-cell' : 'p-selectable-row');
+
+        if (isSelectable) {
+            const selector = type === 'cell' ? 'tr > td' : 'tr';
+            const tabbableEl = DomHandler.findSingle(this.el, `${selector}[tabindex="${this.props.tabIndex}"]`);
+
+            if (tabbableEl && target) {
+                tabbableEl.tabIndex = -1;
+                target.tabIndex = this.props.tabIndex;
+            }
+        }
+    }
+
     onRowClick(event) {
         if (this.allowCellSelection() || !this.allowSelection(event)) {
             return;
@@ -479,6 +516,8 @@ export class TableBody extends Component {
                     this.onMultipleSelection({ ...event, toggleable, type: 'row' });
                 }
             }
+
+            this.changeTabIndex(event.originalEvent, 'row');
         }
         else {
             this.focusOnElement(event.originalEvent);
@@ -535,7 +574,7 @@ export class TableBody extends Component {
             event.currentTarget.draggable = false;
 
         if (this.allowRowDrag(e)) {
-            this.enableDragSelection(event);
+            this.enableDragSelection(event, 'row');
             this.anchorRowIndex = e.index;
             this.rangeRowIndex = e.index;
             this.anchorRowFirst = this.props.first;
@@ -736,12 +775,14 @@ export class TableBody extends Component {
                 this.anchorCellIndex = event.cellIndex;
 
                 if (this.isSingleSelection()) {
-                    this.onSingleSelection({ originalEvent, data, toggleable, type: 'cell' });
+                    this.onSingleSelection({ originalEvent, data, index: event.rowIndex, toggleable, type: 'cell' });
                 }
                 else {
-                    this.onMultipleSelection({ originalEvent, data, toggleable, type: 'cell' });
+                    this.onMultipleSelection({ originalEvent, data, index: event.rowIndex, toggleable, type: 'cell' });
                 }
             }
+
+            this.changeTabIndex(event.originalEvent, 'cell');
         }
 
         this.rowTouched = false;
@@ -858,7 +899,7 @@ export class TableBody extends Component {
 
             return (
                 <BodyRow tableProps={this.props.tableProps} tableSelector={this.props.tableSelector} value={this.props.value} columns={this.props.columns} rowData={rowData} index={index} selected={selected} contextMenuSelected={contextMenuSelected}
-                    onRowClick={this.onRowClick} onRowDoubleClick={this.onRowDoubleClick} onRowRightClick={this.onRowRightClick} tabIndex={this.props.tabIndex}
+                    onRowClick={this.onRowClick} onRowDoubleClick={this.onRowDoubleClick} onRowRightClick={this.onRowRightClick} tabIndex={this.props.tabIndex} isSelectable={this.isSelectable}
                     onRowTouchEnd={this.onRowTouchEnd} onRowMouseDown={this.onRowMouseDown} onRowMouseUp={this.onRowMouseUp} onRowToggle={this.onRowToggle}
                     onRowDragStart={this.onRowDragStart} onRowDragOver={this.onRowDragOver} onRowDragLeave={this.onRowDragLeave} onRowDragEnd={this.onRowDragEnd} onRowDrop={this.onRowDrop}
                     onRadioChange={this.onRadioChange} onCheckboxChange={this.onCheckboxChange} onCellClick={this.onCellClick} onCellMouseDown={this.onCellMouseDown} onCellMouseUp={this.onCellMouseUp}

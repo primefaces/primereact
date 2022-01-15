@@ -124,6 +124,11 @@ interface DataTablePFSEvent extends DataTablePageParams, DataTableSortParams, Da
     [key: string]: any;
 }
 
+interface DataTableDataSelectableParams {
+    data: any;
+    index: number;
+}
+
 interface DataTableSelectionChangeParams {
     originalEvent: React.SyntheticEvent;
     value: any;
@@ -316,6 +321,7 @@ export interface DataTableProps {
     onRowEditComplete?(e: DataTableRowEditCompleteParams): void;
     showSelectionElement?(data: any, options: DataTableShowSelectionElementOptions): boolean | undefined | null;
     showRowReorderElement?(data: any, options: DataTableShowRowReorderElementOptions): boolean | undefined | null;
+    isDataSelectable?(e: DataTableDataSelectableParams): boolean | undefined | null;
     onSelectionChange?(e: DataTableSelectionChangeParams): void;
     onContextMenuSelectionChange?(e: DataTableSelectionChangeParams): void;
     rowExpansionTemplate?(data: any, options: DataTableRowExpansionTemplate): React.ReactNode;
