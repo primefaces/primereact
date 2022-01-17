@@ -602,30 +602,22 @@ export class DataTable extends Component {
                 this.el.style.width = this.tableWidthState;
             }
 
-            this.createStyleElement();
+            if (ObjectUtils.isNotEmpty(widths)) {
+                this.createStyleElement();
 
-            if (this.props.scrollable && widths && widths.length > 0) {
                 let innerHTML = '';
                 widths.forEach((width, index) => {
+                    let style = this.props.scrollable ? `flex: 1 1 ${width}px !important` : `width: ${width}px !important`;
                     innerHTML += `
-                        .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}) {
-                            flex: 0 0 ${width}px;
-                        }
-
-                        .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}) {
-                            flex: 0 0 ${width}px;
-                        }
-
+                        .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
+                        .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
                         .p-datatable[${this.attributeSelector}] .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
-                            flex: 0 0 ${width}px;
+                            ${style}
                         }
                     `
                 });
 
                 this.styleElement.innerHTML = innerHTML;
-            }
-            else {
-                DomHandler.find(this.table, '.p-datatable-thead > tr > th').forEach((header, index) => header.style.width = widths[index] + 'px');
             }
         }
     }
@@ -796,7 +788,7 @@ export class DataTable extends Component {
         let innerHTML = '';
         widths.forEach((width, index) => {
             let colWidth = index === colIndex ? newColumnWidth : (nextColumnWidth && index === colIndex + 1) ? nextColumnWidth : width;
-            let style = this.props.scrollable ? `flex: 0 0 ${colWidth}px !important` : `width: ${colWidth}px !important`;
+            let style = this.props.scrollable ? `flex: 1 1 ${colWidth}px !important` : `width: ${colWidth}px !important`;
             innerHTML += `
                 .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
                 .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
@@ -805,6 +797,7 @@ export class DataTable extends Component {
                 }
             `
         });
+
         this.styleElement.innerHTML = innerHTML;
     }
 
