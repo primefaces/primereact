@@ -21,8 +21,7 @@
     table-layout: auto;
 }
 
-.p-treetable-selectable .p-treetable-tbody > tr,
-.p-treetable-hoverable-rows .p-treetable-tbody > tr {
+.p-treetable-selectable .p-treetable-tbody > tr {
     cursor: pointer;
 }
 
