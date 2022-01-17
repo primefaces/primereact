@@ -584,7 +584,7 @@ export class Dropdown extends Component {
     }
 
     getSelectedOptionIndex() {
-        let visibleOptions = this.getVisibleOptions()
+        let visibleOptions = this.getVisibleOptions();
 
         if (this.props.value != null && visibleOptions) {
             if (this.props.optionGroupLabel) {
