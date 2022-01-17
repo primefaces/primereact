@@ -3366,7 +3366,7 @@ export const DataTableStateDemo = () => {
                                         <td>rowHover</td>
                                         <td>boolean</td>
                                         <td>false</td>
-                                        <td>When enabled, background of the rows change on hover..</td>
+                                        <td>When enabled, background of the rows change on hover.</td>
                                     </tr>
                                     <tr>
                                         <td>showGridlines</td>

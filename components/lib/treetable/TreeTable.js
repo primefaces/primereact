@@ -69,6 +69,7 @@ export class TreeTable extends Component {
         filterMode: 'lenient',
         filterDelay: 300,
         filterLocale: undefined,
+        rowHover: false,
         showGridlines: false,
         stripedRows: false,
         onFilter: null,
@@ -146,6 +147,7 @@ export class TreeTable extends Component {
         filterMode: PropTypes.string,
         filterDelay: PropTypes.number,
         filterLocale: PropTypes.string,
+        rowHover: PropTypes.bool,
         showGridlines: PropTypes.bool,
         stripedRows: PropTypes.bool,
         onFilter: PropTypes.func,
@@ -1079,7 +1081,8 @@ export class TreeTable extends Component {
     render() {
         const value = this.processValue();
         const className = classNames('p-treetable p-component', {
-            'p-treetable-hoverable-rows': this.isRowSelectionMode(),
+            'p-treetable-hoverable-rows': this.props.rowHover,
+            'p-treetable-selectable': this.isRowSelectionMode(),
             'p-treetable-resizable': this.props.resizableColumns,
             'p-treetable-resizable-fit': (this.props.resizableColumns && this.props.columnResizeMode === 'fit'),
             'p-treetable-auto-layout': this.props.autoLayout,
