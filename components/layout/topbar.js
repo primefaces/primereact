@@ -172,7 +172,7 @@ export default function Topbar(props) {
                             <li role="none" className="topbar-submenu-header">FLUENT UI</li>
                             <li role="none"><button type="button" className="p-link" onClick={() => onThemeChange('fluent-light')} role="menuitem"><img src={`${contextPath}/images/themes/fluent-light.png`} alt="Fluent Light" /><span>Fluent Light</span></button></li>
 
-                            <li role="none" className="topbar-submenu-header">PRIMEONE 2022 <Badge value="New" severity="success" className="p-text-capitalize p-ml-2" /></li>
+                            <li role="none" className="topbar-submenu-header">PRIMEONE 2022 <Badge value="New" severity="success" className="capitalize ml-2" /></li>
                             <li role="none"><button type="button" className="p-link" onClick={() => onThemeChange('lara-light-indigo')} role="menuitem"><img src={`${contextPath}/images/themes/lara-light-indigo.png`} alt="Lara Light Indigo" /><span>Lara Indigo</span></button></li>
                             <li role="none"><button type="button" className="p-link" onClick={() => onThemeChange('lara-light-blue')} role="menuitem"><img src={`${contextPath}/images/themes/lara-light-blue.png`} alt="Lara Light Blue" /><span>Lara Blue</span></button></li>
                             <li role="none"><button type="button" className="p-link" onClick={() => onThemeChange('lara-light-purple')} role="menuitem"><img src={`${contextPath}/images/themes/lara-light-purple.png`} alt="Lara Light Purple" /><span>Lara Purple</span></button></li>

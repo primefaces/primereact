@@ -9,10 +9,10 @@ export default function Footer() {
             </div>
 
             <div className="layout-footer-right">
-                <a href="https://github.com/primefaces/primereact" target="_blank" rel="noopener noreferrer" className="p-mr-3">
+                <a href="https://github.com/primefaces/primereact" target="_blank" rel="noopener noreferrer" className="mr-3">
                     <i className="pi pi-github"></i>
                 </a>
-                <a href="https://twitter.com/primereact" target="_blank" rel="noopener noreferrer" className="p-mr-3">
+                <a href="https://twitter.com/primereact" target="_blank" rel="noopener noreferrer" className="mr-3">
                     <i className="pi pi-twitter"></i>
                 </a>
                 <a href="https://discord.gg/gzKFYnpmCY" target="_blank" rel="noopener noreferrer">
