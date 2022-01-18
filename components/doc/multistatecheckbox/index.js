@@ -36,7 +36,7 @@ export class MultiStateCheckboxDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <div className="p-field-checkbox p-m-0">
+                    <div className="field-checkbox m-0">
                         <MultiStateCheckbox value={this.state.value} options={this.options} optionValue="value" onChange={(e) => this.setState({ value: e.value })} />
                         <label>{this.state.value}</label>
                     </div>
@@ -64,7 +64,7 @@ const MultiStateCheckboxDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-field-checkbox p-m-0">
+                <div className="field-checkbox m-0">
                     <MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} />
                     <label>{value}</label>
                 </div>
@@ -91,7 +91,7 @@ const MultiStateCheckboxDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-field-checkbox p-m-0">
+                <div className="field-checkbox m-0">
                     <MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} />
                     <label>{value}</label>
                 </div>
@@ -121,7 +121,7 @@ const MultiStateCheckboxDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-field-checkbox p-m-0">
+                <div className="field-checkbox m-0">
                     <MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} />
                     <label>{value}</label>
                 </div>

@@ -96,7 +96,7 @@ export class CalendarDemo extends Component {
     }
 
     yearNavigatorTemplate(e) {
-        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="p-ml-2" style={{ lineHeight: 1 }} />;
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="ml-2" style={{ lineHeight: 1 }} />;
     }
 
     onVisibleChange(e) {
@@ -110,76 +110,76 @@ export class CalendarDemo extends Component {
             <div>
                 <div className="card">
                     <h5>Popup</h5>
-                    <div className="p-fluid p-grid p-formgrid">
-                        <div className="p-field p-col-12 p-md-4">
+                    <div className="p-fluid grid formgrid">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="basic">Basic</label>
                             <Calendar id="basic" value={this.state.date1} onChange={(e) => this.setState({ date1: e.value })} />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="icon">Icon</label>
                             <Calendar id="icon" value={this.state.date2} onChange={(e) => this.setState({ date2: e.value })} showIcon />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="spanish">Spanish</label>
                             <Calendar id="spanish" value={this.state.date3} onChange={(e) => this.setState({ date3: e.value })} locale="es" dateFormat="dd/mm/yy" />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="minmax">MinMax</label>
                             <Calendar id="minmax" value={this.state.date4} onChange={(e) => this.setState({ date4: e.value })} minDate={this.minDate} maxDate={this.maxDate} readOnlyInput />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="disableddays">Disabled Days</label>
                             <Calendar id="disableddays" value={this.state.date5} onChange={(e) => this.setState({ date5: e.value })} disabledDates={this.invalidDates} disabledDays={[0, 6]} readOnlyInput />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="navigators">Navigators</label>
                             <Calendar id="navigators" value={this.state.date6} onChange={(e) => this.setState({ date6: e.value })} monthNavigator yearNavigator yearRange="2010:2030" />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="multiple">Multiple</label>
                             <Calendar id="multiple" value={this.state.dates1} onChange={(e) => this.setState({ dates1: e.value })} selectionMode="multiple" readOnlyInput />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="range">Range</label>
                             <Calendar id="range" value={this.state.dates2} onChange={(e) => this.setState({ dates2: e.value })} selectionMode="range" readOnlyInput />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="buttonbar">Button Bar</label>
                             <Calendar id="buttonbar" value={this.state.date7} onChange={(e) => this.setState({ date7: e.value })} showButtonBar />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="time24">Time / 24h</label>
                             <Calendar id="time24" value={this.state.date8} onChange={(e) => this.setState({ date8: e.value })} showTime showSeconds />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="time12">Time / 12h</label>
                             <Calendar id="time12" value={this.state.date9} onChange={(e) => this.setState({ date9: e.value })} timeOnly hourFormat="12" />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="monthpicker">Month Picker</label>
                             <Calendar id="monthpicker" value={this.state.date10} onChange={(e) => this.setState({ date10: e.value })} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030" />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="multiplemonths">Multiple Months</label>
                             <Calendar id="multiplemonths" value={this.state.date11} onChange={(e) => this.setState({ date11: e.value })} numberOfMonths={3} />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="datetemplate">Date Template</label>
                             <Calendar id="datetemplate" value={this.state.date12} onChange={(e) => this.setState({ date12: e.value })} dateTemplate={this.dateTemplate} />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="touchUI">TouchUI</label>
                             <Calendar id="touchUI" value={this.state.date13} onChange={(e) => this.setState({ date13: e.value })} touchUI />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="mask">Mask</label>
                             <Calendar id="mask" value={this.state.date14} onChange={(e) => this.setState({ date14: e.value })} mask="99/99/9999"/>
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="controlled">Visibility Control</label>
                             <Calendar id="controlled" value={this.state.date15} onChange={(e) => this.setState({ date15: e.value })} visible={this.state.visible} onVisibleChange={this.onVisibleChange} />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="navigatorstemplate">Navigators Template</label>
                             <Calendar id="navigatorstemplate" value={this.state.date16} onChange={(e) => this.setState({ date16: e.value })} monthNavigator yearNavigator yearRange="2010:2030"
                                 monthNavigatorTemplate={this.monthNavigatorTemplate} yearNavigatorTemplate={this.yearNavigatorTemplate} />
@@ -269,7 +269,7 @@ const CalendarDemo = () => {
     }
 
     const yearNavigatorTemplate = (e) => {
-        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="p-ml-2" style={{ lineHeight: 1 }} />;
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="ml-2" style={{ lineHeight: 1 }} />;
     }
 
     const onVisibleChange = (e) => {
@@ -283,76 +283,76 @@ const CalendarDemo = () => {
         <div>
             <div className="card">
                 <h5>Popup</h5>
-                <div className="p-fluid p-grid p-formgrid">
-                    <div className="p-field p-col-12 p-md-4">
+                <div className="p-fluid grid formgrid">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="basic">Basic</label>
                         <Calendar id="basic" value={date1} onChange={(e) => setDate1(e.value)} />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="icon">Icon</label>
                         <Calendar id="icon" value={date2} onChange={(e) => setDate2(e.value)} showIcon />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="spanish">Spanish</label>
                         <Calendar id="spanish" value={date3} onChange={(e) => setDate3(e.value)} locale="es" dateFormat="dd/mm/yy" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="minmax">MinMax</label>
                         <Calendar id="minmax" value={date4} onChange={(e) => setDate4(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="disableddays">Disabled Days</label>
                         <Calendar id="disableddays" value={date5} onChange={(e) => setDate5(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="navigators">Navigators</label>
                         <Calendar id="navigators" value={date6} onChange={(e) => setDate6(e.value)} monthNavigator yearNavigator yearRange="2010:2030" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="multiple">Multiple</label>
                         <Calendar id="multiple" value={dates1} onChange={(e) => setDates1(e.value)} selectionMode="multiple" readOnlyInput />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="range">Range</label>
                         <Calendar id="range" value={dates2} onChange={(e) => setDates2(e.value)} selectionMode="range" readOnlyInput />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="buttonbar">Button Bar</label>
                         <Calendar id="buttonbar" value={date7} onChange={(e) => setDate7(e.value)} showButtonBar />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="time24">Time / 24h</label>
                         <Calendar id="time24" value={date8} onChange={(e) => setDate8(e.value)} showTime showSeconds />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="time12">Time / 12h</label>
                         <Calendar id="time12" value={date9} onChange={(e) => setDate9(e.value)} timeOnly hourFormat="12" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="monthpicker">Month Picker</label>
                         <Calendar id="monthpicker" value={date10} onChange={(e) => setDate10(e.value)} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="multiplemonths">Multiple Months</label>
                         <Calendar id="multiplemonths" value={date11} onChange={(e) => setDate11(e.value)} numberOfMonths={3} />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="datetemplate">Date Template</label>
                         <Calendar id="datetemplate" value={date12} onChange={(e) => setDate12(e.value)} dateTemplate={dateTemplate} />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="touchUI">TouchUI</label>
                         <Calendar id="touchUI" value={date13} onChange={(e) => setDate13(e.value)} touchUI />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="mask">Mask</label>
                         <Calendar id="mask" value={date14} onChange={(e) => setDate14(e.value)} mask="99/99/9999"/>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="controlled">Visibility Control</label>
                         <Calendar id="controlled" value={date15} onChange={(e) => setDate15(e.value)} visible={visible} onVisibleChange={onVisibleChange} />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="navigatorstemplate">Navigators Template</label>
                         <Calendar id="navigatorstemplate" value={date16} onChange={(e) => setDate16(e.value)} monthNavigator yearNavigator yearRange="2010:2030"
                             monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate} />
@@ -441,7 +441,7 @@ const CalendarDemo = () => {
     }
 
     const yearNavigatorTemplate = (e: any) => {
-        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="p-ml-2" style={{ lineHeight: 1 }} />;
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="ml-2" style={{ lineHeight: 1 }} />;
     }
 
     const onVisibleChange = (e: any) => {
@@ -455,72 +455,72 @@ const CalendarDemo = () => {
         <div>
             <div className="card">
                 <h5>Popup</h5>
-                <div className="p-fluid p-grid p-formgrid">
-                    <div className="p-field p-col-12 p-md-4">
+                <div className="p-fluid grid formgrid">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="basic">Basic</label>
                         <Calendar id="basic" value={date1} onChange={(e) => setDate1(e.value)} />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="icon">Icon</label>
                         <Calendar id="icon" value={date2} onChange={(e) => setDate2(e.value)} showIcon />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="spanish">Spanish</label>
                         <Calendar id="spanish" value={date3} onChange={(e) => setDate3(e.value)} locale="es" dateFormat="dd/mm/yy" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="minmax">MinMax</label>
                         <Calendar id="minmax" value={date4} onChange={(e) => setDate4(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="disableddays">Disabled Days</label>
                         <Calendar id="disableddays" value={date5} onChange={(e) => setDate5(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="navigators">Navigators</label>
                         <Calendar id="navigators" value={date6} onChange={(e) => setDate6(e.value)} monthNavigator yearNavigator yearRange="2010:2030" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="multiple">Multiple</label>
                         <Calendar id="multiple" value={dates1} onChange={(e) => setDates1(e.value)} selectionMode="multiple" readOnlyInput />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="range">Range</label>
                         <Calendar id="range" value={dates2} onChange={(e) => setDates2(e.value)} selectionMode="range" readOnlyInput />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="buttonbar">Button Bar</label>
                         <Calendar id="buttonbar" value={date7} onChange={(e) => setDate7(e.value)} showButtonBar />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="time24">Time / 24h</label>
                         <Calendar id="time24" value={date8} onChange={(e) => setDate8(e.value)} showTime showSeconds />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="time12">Time / 12h</label>
                         <Calendar id="time12" value={date9} onChange={(e) => setDate9(e.value)} timeOnly hourFormat="12" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="monthpicker">Month Picker</label>
                         <Calendar id="monthpicker" value={date10} onChange={(e) => setDate10(e.value)} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="multiplemonths">Multiple Months</label>
                         <Calendar id="multiplemonths" value={date11} onChange={(e) => setDate11(e.value)} numberOfMonths={3} />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="datetemplate">Date Template</label>
                         <Calendar id="datetemplate" value={date12} onChange={(e) => setDate12(e.value)} dateTemplate={dateTemplate} />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="touchUI">TouchUI</label>
                         <Calendar id="touchUI" value={date13} onChange={(e) => setDate13(e.value)} touchUI />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="mask">Mask</label>
                         <Calendar id="mask" value={date14} onChange={(e) => setDate14(e.value)} mask="99/99/9999"/>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="navigatorstemplate">Navigators Template</label>
                         <Calendar id="navigatorstemplate" value={date16} onChange={(e) => setDate16(e.value)} monthNavigator yearNavigator yearRange="2010:2030"
                             monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate} />
@@ -612,7 +612,7 @@ const CalendarDemo = () => {
     }
 
     const yearNavigatorTemplate = (e) => {
-        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="p-ml-2" style={{ lineHeight: 1 }} />;
+        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="ml-2" style={{ lineHeight: 1 }} />;
     }
 
     const onVisibleChange = (e) => {
@@ -626,76 +626,76 @@ const CalendarDemo = () => {
         <div>
             <div className="card">
                 <h5>Popup</h5>
-                <div className="p-fluid p-grid p-formgrid">
-                    <div className="p-field p-col-12 p-md-4">
+                <div className="p-fluid grid formgrid">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="basic">Basic</label>
                         <Calendar id="basic" value={date1} onChange={(e) => setDate1(e.value)} />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="icon">Icon</label>
                         <Calendar id="icon" value={date2} onChange={(e) => setDate2(e.value)} showIcon />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="spanish">Spanish</label>
                         <Calendar id="spanish" value={date3} onChange={(e) => setDate3(e.value)} locale="es" dateFormat="dd/mm/yy" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="minmax">MinMax</label>
                         <Calendar id="minmax" value={date4} onChange={(e) => setDate4(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="disableddays">Disabled Days</label>
                         <Calendar id="disableddays" value={date5} onChange={(e) => setDate5(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="navigators">Navigators</label>
                         <Calendar id="navigators" value={date6} onChange={(e) => setDate6(e.value)} monthNavigator yearNavigator yearRange="2010:2030" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="multiple">Multiple</label>
                         <Calendar id="multiple" value={dates1} onChange={(e) => setDates1(e.value)} selectionMode="multiple" readOnlyInput />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="range">Range</label>
                         <Calendar id="range" value={dates2} onChange={(e) => setDates2(e.value)} selectionMode="range" readOnlyInput />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="buttonbar">Button Bar</label>
                         <Calendar id="buttonbar" value={date7} onChange={(e) => setDate7(e.value)} showButtonBar />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="time24">Time / 24h</label>
                         <Calendar id="time24" value={date8} onChange={(e) => setDate8(e.value)} showTime showSeconds />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="time12">Time / 12h</label>
                         <Calendar id="time12" value={date9} onChange={(e) => setDate9(e.value)} timeOnly hourFormat="12" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="monthpicker">Month Picker</label>
                         <Calendar id="monthpicker" value={date10} onChange={(e) => setDate10(e.value)} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="multiplemonths">Multiple Months</label>
                         <Calendar id="multiplemonths" value={date11} onChange={(e) => setDate11(e.value)} numberOfMonths={3} />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="datetemplate">Date Template</label>
                         <Calendar id="datetemplate" value={date12} onChange={(e) => setDate12(e.value)} dateTemplate={dateTemplate} />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="touchUI">TouchUI</label>
                         <Calendar id="touchUI" value={date13} onChange={(e) => setDate13(e.value)} touchUI />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="mask">Mask</label>
                         <Calendar id="mask" value={date14} onChange={(e) => setDate14(e.value)} mask="99/99/9999"/>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="controlled">Visibility Control</label>
                         <Calendar id="controlled" value={date15} onChange={(e) => setDate15(e.value)} visible={visible} onVisibleChange={onVisibleChange} />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="navigatorstemplate">Navigators Template</label>
                         <Calendar id="navigatorstemplate" value={date16} onChange={(e) => setDate16(e.value)} monthNavigator yearNavigator yearRange="2010:2030"
                             monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate} />

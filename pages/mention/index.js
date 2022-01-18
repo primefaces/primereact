@@ -95,9 +95,9 @@ export default class MentionDemo extends Component {
         const src = 'images/avatar/' + suggestion.representative.image;
 
         return (
-            <div className="p-d-flex p-ai-center">
+            <div className="flex align-items-center">
                 <img alt={suggestion.name} src={src} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" style={{ verticalAlign: 'middle' }} />
-                <span className="p-d-flex p-dir-col p-ml-2">
+                <span className="flex flex-column ml-2">
                     {suggestion.name}
                     <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
                 </span>

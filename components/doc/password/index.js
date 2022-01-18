@@ -36,8 +36,8 @@ export class PasswordDemo extends Component {
         const footer = (
             <React.Fragment>
                 <Divider />
-                <p className="p-mt-2">Suggestions</p>
-                <ul className="p-pl-2 p-ml-2 p-mt-0" style={{lineHeight: '1.5'}}>
+                <p className="mt-2">Suggestions</p>
+                <ul className="pl-2 ml-2 mt-0" style={{lineHeight: '1.5'}}>
                     <li>At least one lowercase</li>
                     <li>At least one uppercase</li>
                     <li>At least one numeric</li>
@@ -85,8 +85,8 @@ const PasswordDemo = () => {
     const footer = (
         <React.Fragment>
             <Divider />
-            <p className="p-mt-2">Suggestions</p>
-            <ul className="p-pl-2 p-ml-2 p-mt-0" style={{lineHeight: '1.5'}}>
+            <p className="mt-2">Suggestions</p>
+            <ul className="pl-2 ml-2 mt-0" style={{lineHeight: '1.5'}}>
                 <li>At least one lowercase</li>
                 <li>At least one uppercase</li>
                 <li>At least one numeric</li>
@@ -133,8 +133,8 @@ const PasswordDemo = () => {
     const footer = (
         <React.Fragment>
             <Divider />
-            <p className="p-mt-2">Suggestions</p>
-            <ul className="p-pl-2 p-ml-2 p-mt-0" style={{lineHeight: '1.5'}}>
+            <p className="mt-2">Suggestions</p>
+            <ul className="pl-2 ml-2 mt-0" style={{lineHeight: '1.5'}}>
                 <li>At least one lowercase</li>
                 <li>At least one uppercase</li>
                 <li>At least one numeric</li>
@@ -186,8 +186,8 @@ const PasswordDemo = () => {
     const footer = (
         <React.Fragment>
             <Divider />
-            <p className="p-mt-2">Suggestions</p>
-            <ul className="p-pl-2 p-ml-2 p-mt-0" style={{lineHeight: '1.5'}}>
+            <p className="mt-2">Suggestions</p>
+            <ul className="pl-2 ml-2 mt-0" style={{lineHeight: '1.5'}}>
                 <li>At least one lowercase</li>
                 <li>At least one uppercase</li>
                 <li>At least one numeric</li>
