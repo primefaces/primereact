@@ -99,22 +99,22 @@ export default function Home() {
                 <p><a href="https://www.primetek.com.tr">PrimeTek Informatics</a> is the author of PrimeReact, a UI Component vendor with well known vastly popular projects 
                     including PrimeFaces, PrimeNG and PrimeVue.</p>
 
-                <div className="features-cards p-grid">
-                    <div className="p-col-12 p-md-6 p-lg-4">
+                <div className="features-cards grid">
+                    <div className="col-12 md:col-6 lg:col-4">
                         <div className="features-card">
                             <img src={`${contextPath}/images/landing/asset-components.png`} alt="Components" />
                             <h2>80+ Components</h2>
                             <span>Variety of React UI Components with top-notch quality to help you implement all your UI requirements in style.</span>
                         </div>
                     </div>
-                    <div className="p-col-12 p-md-6 p-lg-4">
+                    <div className="col-12 md:col-6 lg:col-4">
                         <div className="features-card">
                             <img src={`${contextPath}/images/landing/asset-opensource.png`} alt="Open Source" />
                             <h2>Open Source</h2>
                             <span>Licensed under MIT, the whole suite is free to use and hosted at GitHub.</span>
                         </div>
                     </div>
-                    <div className="p-col-12 p-md-6 p-lg-4">
+                    <div className="col-12 md:col-6 lg:col-4">
                         <div className="features-card ">
                             <img src={`${contextPath}/images/landing/asset-themes.png`} alt="Themes" />
                             <h2>Themes</h2>
@@ -123,21 +123,21 @@ export default function Home() {
                             </span>
                         </div>
                     </div>
-                    <div className="p-col-12 p-md-6 p-lg-4">
+                    <div className="col-12 md:col-6 lg:col-4">
                         <div className="features-card ">
                             <img src={`${contextPath}/images/landing/asset-templates.png`} alt="Templates" />
                             <h2>Templates</h2>
                             <span>Premium application shell templates empowered by the create-react-app to give you a quick start in fashion.</span>
                         </div>
                     </div>
-                    <div className="p-col-12 p-md-6 p-lg-4">
+                    <div className="col-12 md:col-6 lg:col-4">
                         <div className="features-card ">
                             <img src={`${contextPath}/images/landing/asset-accesibility.png`} alt="Accessibility" />
                             <h2>Accesibility</h2>
                             <span>First class support for Section 508 standards to bring fully accessible UI Components.</span>
                         </div>
                     </div>
-                    <div className="p-col-12 p-md-6 p-lg-4">
+                    <div className="col-12 md:col-6 lg:col-4">
                         <div className="features-card ">
                             <img src={`${contextPath}/images/landing/asset-support.png`} alt="PRO Support" />
                             <h2>Pro Support</h2>
@@ -146,21 +146,21 @@ export default function Home() {
                             </span>
                         </div>
                     </div>
-                    <div className="p-col-12 p-md-6 p-lg-4">
+                    <div className="col-12 md:col-6 lg:col-4">
                         <div className="features-card ">
                             <img src={`${contextPath}/images/landing/asset-productivity.png`} alt="Productivity" />
                             <h2>Productivity</h2>
                             <span>Let the UI Components speed up the development while you focus on the business requirements.</span>
                         </div>
                     </div>
-                    <div className="p-col-12 p-md-6 p-lg-4">
+                    <div className="col-12 md:col-6 lg:col-4">
                         <div className="features-card ">
                             <img src={`${contextPath}/images/landing/asset-community.png`} alt="Community" />
                             <h2>Community</h2>
                             <span>Become a member of the PrimeReact community, discuss the technology, send PRs and feedback to collabarate on the project.</span>
                         </div>
                     </div>
-                    <div className="p-col-12 p-md-6 p-lg-4">
+                    <div className="col-12 md:col-6 lg:col-4">
                         <div className="features-card ">
                             <img src={`${contextPath}/images/landing/asset-mobile.png`} alt="Mobile" />
                             <h2>Mobile</h2>
@@ -175,54 +175,54 @@ export default function Home() {
                     <p>Install the awesome React UI Components from <a href="https://www.npmjs.com/package/primereact">NPM</a>.</p>
                 </div>
                 <a className="landing-button" href="https://www.npmjs.com/package/primereact" target="_blank">
-                    <span className="p-mr-2">DOWNLOAD</span>
+                    <span className="mr-2">DOWNLOAD</span>
                     <span>NOW</span>
                 </a>
             </div>
             <div className="landing-component-features">
-                <div className="landing-component-feature p-grid">
-                    <div className="component-image p-col-12 p-lg-6">
+                <div className="landing-component-feature grid">
+                    <div className="component-image col-12 lg:col-6">
                         <img src={`${contextPath}/images/landing/asset-forms.png`} alt="Forms" />
                     </div>
-                    <div className="component-feature-text p-col-12 p-lg-6">
+                    <div className="component-feature-text col-12 lg:col-6">
                         <h1>Forms</h1>
                         <p>Develop attractive forms with the variety of the form components compatible with the React form libraries such as Formik.</p>
                     </div>
                 </div>
-                <div className="landing-component-feature image-right p-grid">
-                    <div className="component-image p-col-12 p-lg-6">
+                <div className="landing-component-feature image-right grid">
+                    <div className="component-image col-12 lg:col-6">
                         <img src={`${contextPath}/images/landing/asset-data.png`} alt="data" />
                     </div>
-                    <div className="component-feature-text p-col-12 p-lg-6">
+                    <div className="component-feature-text col-12 lg:col-6">
                         <h1>Data</h1>
                         <p>Led by the most powerful React Table component, Data components deliver performant and customizable solutions
                             to assist you deal with complex UI requirements smoothly.</p>
                     </div>
                 </div>
-                <div className="landing-component-feature p-grid">
-                    <div className="component-image p-col-12 p-lg-6">
+                <div className="landing-component-feature grid">
+                    <div className="component-image col-12 lg:col-6">
                         <img src={`${contextPath}/images/landing/asset-panels.png`} alt="panel" />
                     </div>
-                    <div className="component-feature-text p-col-12 p-lg-6">
+                    <div className="component-feature-text col-12 lg:col-6">
                         <h1>Containers</h1>
                         <p>Collapsible Panel, Tabs and the mighty PrimeFlex Grid CSS are just the few examples of the container components to design and implement
                             appealing layouts in no time.</p>
                     </div>
                 </div>
-                <div className="landing-component-feature image-right p-grid ">
-                    <div className="component-image p-col-12 p-lg-6">
+                <div className="landing-component-feature image-right grid">
+                    <div className="component-image col-12 lg:col-6">
                         <img src={`${contextPath}/images/landing/asset-menus.png`} alt="Menus" />
                     </div>
-                    <div className="component-feature-text p-col-12 p-lg-6">
+                    <div className="component-feature-text col-12 lg:col-6">
                         <h1>Menus</h1>
                         <p>Variety of Menu options made up of menubar, contextmenu, panelmenu build with the flexible menu api.</p>
                     </div>
                 </div>
-                <div className="landing-component-feature p-grid">
-                    <div className="component-image p-col-12 p-lg-6">
+                <div className="landing-component-feature grid">
+                    <div className="component-image col-12 lg:col-6">
                         <img src={`${contextPath}/images/landing/asset-charts.png`} alt="Charts" />
                     </div>
-                    <div className="component-feature-text p-col-12 p-lg-6">
+                    <div className="component-feature-text col-12 lg:col-6">
                         <h1>Charts</h1>
                         <p>Establish stunning user interfaces with the aid of the pie, line, bar, polararea, doughnut and radar charts</p>
                     </div>
@@ -232,58 +232,58 @@ export default function Home() {
                 <h1>Premium Application Templates</h1>
                 <p>Designed by professional designers and and implemented as create-react-app templates, premium themes will boost your productivity
                     by giving you a head start to bring thrilling applications to your users.</p>
-                <div className="template-cards p-grid">
-                <div className="p-col-6 p-md-4 p-lg-3">
+                <div className="template-cards grid">
+                <div className="col-6 col:md-4 lg:col-3">
                         <a href="https://www.primefaces.org/layouts/sakai-react"  className="template-card ">
                             <img src={`${contextPath}/images/layouts/sakai-react.jpg`} alt="Sakai" />
                         </a>
                     </div>
-                    <div className="p-col-6 p-md-4 p-lg-3">
+                    <div className="col-6 col:md-4 lg:col-3">
                         <a href="https://www.primefaces.org/layouts/atlantis-react"  className="template-card ">
                             <img src={`${contextPath}/images/layouts/atlantis-react.jpg`} alt="Atlantis" />
                         </a>
                     </div>
-                    <div className="p-col-6 p-md-4 p-lg-3">
+                    <div className="col-6 col:md-4 lg:col-3">
                         <a href="https://www.primefaces.org/layouts/freya-react"  className="template-card ">
                             <img src={`${contextPath}/images/layouts/freya-react.jpg`} alt="Freya" />
                         </a>
                     </div>
-                    <div className="p-col-6 p-md-4 p-lg-3">
+                    <div className="col-6 col:md-4 lg:col-3">
                         <a href="https://www.primefaces.org/layouts/diamond-react"  className="template-card ">
                             <img src={`${contextPath}/images/layouts/diamond-react.jpg`} alt="Diamond" />
                         </a>
                     </div>
-                    <div className="p-col-6 p-md-4 p-lg-3">
+                    <div className="col-6 col:md-4 lg:col-3">
                         <a href="https://www.primefaces.org/layouts/sapphire-react"  className="template-card ">
                             <img src={`${contextPath}/images/layouts/sapphire-react.jpg`} alt="Sapphire" />
                         </a>
                     </div>
-                    <div className="p-col-6 p-md-4 p-lg-3">
+                    <div className="col-6 col:md-4 lg:col-3">
                         <a href="https://www.primefaces.org/layouts/serenity-react"  className="template-card ">
                             <img src={`${contextPath}/images/layouts/serenity-react.jpg`} alt="Serenity" />
                         </a>
                     </div>
-                    <div className="p-col-6 p-md-4 p-lg-3">
+                    <div className="col-6 col:md-4 lg:col-3">
                         <a href="https://www.primefaces.org/layouts/ultima-react"  className="template-card ">
                             <img src={`${contextPath}/images/layouts/ultima-react.jpg`} alt="Ultima" />
                         </a>
                     </div>
-                    <div className="p-col-6 p-md-4 p-lg-3">
+                    <div className="col-6 col:md-4 lg:col-3">
                         <a href="https://www.primefaces.org/layouts/roma-react"  className="template-card ">
                             <img src={`${contextPath}/images/layouts/roma-react.jpg`} alt="Roma" />
                         </a>
                     </div>
-                    <div className="p-col-6 p-md-4 p-lg-3">
+                    <div className="col-6 col:md-4 lg:col-3">
                         <a href="https://www.primefaces.org/layouts/babylon-react"  className="template-card ">
                             <img src={`${contextPath}/images/layouts/babylon-react.jpg`} alt="Babylon" />
                         </a>
                     </div>
-                    <div className="p-col-6 p-md-4 p-lg-3">
+                    <div className="col-6 col:md-4 lg:col-3">
                         <a href="https://www.primefaces.org/layouts/avalon-react"  className="template-card ">
                             <img src={`${contextPath}/images/layouts/avalon-react.jpg`} alt="Avalon" />
                         </a>
                     </div>
-                    <div className="p-col-6 p-md-4 p-lg-3">
+                    <div className="col-6 col:md-4 lg:col-3">
                         <a href="https://www.primefaces.org/layouts/apollo-react"  className="template-card ">
                             <img src={`${contextPath}/images/layouts/apollo-react.jpg`} alt="Apollo" />
                         </a>
@@ -291,8 +291,8 @@ export default function Home() {
                 </div>
             </div>
             <div className="landing-product-features">
-                <div className="product-feature designer dark p-grid p-nogutter">
-                    <div className="product-feature-text p-col-12 p-md-6">
+                <div className="product-feature designer dark grid grid-nogutter">
+                    <div className="product-feature-text col-12 md:col-6">
                         <h1>PrimeReact Theme Designer</h1>
                         <p>Have your own style guide? No problem. Theme Designer is the easiest way to design and implement your own themes
                             for the PrimeReact components.</p>
@@ -302,12 +302,12 @@ export default function Home() {
                                 <span>Learn More</span>
                             </a>
                     </div>
-                    <div className="p-col-12 p-md-6 product-image">
+                    <div className="col-12 md:col-6 product-image">
                         <img src={`${contextPath}/images/landing/asset-designer.jpg`} alt="Designer" />
                     </div>
                 </div>
-                <div className="product-feature p-grid p-nogutter">
-                    <div className="product-feature-text p-col-12 p-md-6">
+                <div className="product-feature grid grid-nogutter">
+                    <div className="product-feature-text col-12 md:col-6">
                         <h1>PrimeBlocks</h1>
                         <p>280+ ready to use UI blocks to build spectacular applications in no time.</p>
 
@@ -315,12 +315,12 @@ export default function Home() {
                             <span>Learn More</span>
                         </a>
                     </div>
-                    <div className="p-col-12 p-md-6 product-image">
+                    <div className="col-12 md:col-6 product-image">
                         <img src={`${contextPath}/images/landing/primeblocks.png`} alt="PrimeBlocks" style={{maxWidth: '250px'}} />
                     </div>
                 </div>
-                <div className="product-feature dark p-grid p-nogutter">
-                    <div className="product-feature-text p-col-12 p-md-6">
+                <div className="product-feature dark grid grid-nogutter">
+                    <div className="product-feature-text col-12 md:col-6">
                         <h1>PrimeFlex</h1>
                         <p>PrimeFlex is a lightweight responsive CSS utility library to accompany Prime UI libraries and static webpages as well.</p>
 
@@ -328,12 +328,12 @@ export default function Home() {
                             <span>Learn More</span>
                         </a>
                     </div>
-                    <div className="p-col-12 p-md-6 product-image">
+                    <div className="col-12 md:col-6 product-image">
                         <img src={`${contextPath}/images/landing/primeflex.png`} alt="PrimeFlex" style={{maxWidth: '250px'}} />
                     </div>
                 </div>
-                <div className="product-feature p-grid p-nogutter">
-                    <div className="product-feature-text p-col-12 p-lg-7">
+                <div className="product-feature grid grid-nogutter">
+                    <div className="product-feature-text col-12 lg:col-7">
                         <h1>PrimeReact Pro Support</h1>
                         <p>Professional support for your projects directly from the PrimeReact engineers themselves.</p>
                         <p>PrimeReact PRO is a premium support service to secure the response of PrimeTek within 1 business day delivered
@@ -345,7 +345,7 @@ export default function Home() {
                             </a>
                         </Link>
                     </div>
-                    <div className="p-col-12 p-lg-5 product-image">
+                    <div className="col-12 lg:col-5 product-image">
                         <img src={`${contextPath}/images/landing/asset-pro.png`} alt="PRO Support" style={{maxWidth: '250px'}} />
                     </div>
 
