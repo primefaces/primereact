@@ -30,7 +30,7 @@ export default class MessagesDemo extends Component {
             severity: 'info', sticky: true, content: (
                 <React.Fragment>
                     <img alt="logo" src={`${this.contextPath}/images/logo.png`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />
-                    <div className="p-ml-2">Always bet on Prime.</div>
+                    <div className="ml-2">Always bet on Prime.</div>
                 </React.Fragment>
             )
         });
@@ -70,7 +70,7 @@ export default class MessagesDemo extends Component {
                         <Messages ref={(el) => this.msgs1 = el} />
 
                         <h5>Dynamic</h5>
-                        <Button type="button" onClick={this.addMessages} label="Show" className="p-mr-2" />
+                        <Button type="button" onClick={this.addMessages} label="Show" className="mr-2" />
                         <Button type="button" onClick={this.clearMessages} icon="pi pi-times" label="Clear" className="p-button-secondary" />
 
                         <Messages ref={(el) => this.msgs2 = el} />
@@ -80,37 +80,37 @@ export default class MessagesDemo extends Component {
 
                         <h5>Inline Message</h5>
                         <p>Message component is used to display inline messages mostly within forms.</p>
-                        <div className="p-grid">
-                            <div className="p-col-12 p-md-3">
+                        <div className="grid">
+                            <div className="col-12 md:col-3">
                                 <Message severity="info" text="Message Content" />
                             </div>
-                            <div className="p-col-12 p-md-3">
+                            <div className="col-12 md:col-3">
                                 <Message severity="success" text="Message Content" />
                             </div>
-                            <div className="p-col-12 p-md-3">
+                            <div className="col-12 md:col-3">
                                 <Message severity="warn" text="Message Content" />
                             </div>
-                            <div className="p-col-12 p-md-3">
+                            <div className="col-12 md:col-3">
                                 <Message severity="error" text="Message Content" />
                             </div>
                         </div>
 
                         <h5>Validation Message</h5>
-                        <div className="p-formgroup-inline p-mb-2">
+                        <div className="formgroup-inline mb-2">
                             <label htmlFor="username1" className="p-sr-only">Username</label>
-                            <InputText id="username1" placeholder="Username" className="p-invalid p-mr-2" />
+                            <InputText id="username1" placeholder="Username" className="p-invalid mr-2" />
                             <Message severity="error" text="Username is required" />
                         </div>
-                        <div className="p-formgroup-inline">
+                        <div className="formgroup-inline">
                             <label htmlFor="email" className="p-sr-only">email</label>
-                            <InputText id="email" placeholder="Email" className="p-invalid p-mr-2" />
+                            <InputText id="email" placeholder="Email" className="p-invalid mr-2" />
                             <Message severity="error" />
                         </div>
 
                         <h5>Form Layout</h5>
-                        <div className="p-field p-fluid">
+                        <div className="field p-fluid">
                             <label htmlFor="username2">Username</label>
-                            <InputText id="username2" aria-describedby="username-help" className="p-invalid p-mr-2" />
+                            <InputText id="username2" aria-describedby="username-help" className="p-invalid mr-2" />
                             <small id="username-help" className="p-error">Username is not available.</small>
                         </div>
                     </div>
