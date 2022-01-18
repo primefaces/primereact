@@ -329,32 +329,32 @@ PrimeReact.cssTransition = false; // Default value is true.
                             <thead>
                                 <tr>
                                     <th>
-                                        <div className="p-d-flex p-ai-center">
-                                            <img src={`${contextPath}/images/browsers/edge.svg`} alt="edge" style={{width: '1.5rem'}} className="p-mr-2" />
+                                        <div className="flex align-items-center">
+                                            <img src={`${contextPath}/images/browsers/edge.svg`} alt="edge" style={{width: '1.5rem'}} className="mr-2" />
                                             IE / Edge
                                         </div>
                                     </th>
                                     <th>
-                                        <div className="p-d-flex p-ai-center">
-                                            <img src={`${contextPath}/images/browsers/firefox.svg`} alt="firefox" style={{width: '1.5rem'}} className="p-mr-2" />
+                                        <div className="flex align-items-center">
+                                            <img src={`${contextPath}/images/browsers/firefox.svg`} alt="firefox" style={{width: '1.5rem'}} className="mr-2" />
                                             Firefox
                                         </div>
                                     </th>
                                     <th>
-                                        <div className="p-d-flex p-ai-center">
-                                            <img src={`${contextPath}/images/browsers/chrome.svg`} alt="chrome" style={{width: '1.5rem'}} className="p-mr-2" />
+                                        <div className="flex align-items-center">
+                                            <img src={`${contextPath}/images/browsers/chrome.svg`} alt="chrome" style={{width: '1.5rem'}} className="mr-2" />
                                             Chrome
                                         </div>
                                     </th>
                                     <th>
-                                        <div className="p-d-flex p-ai-center">
-                                            <img src={`${contextPath}/images/browsers/safari.svg`} alt="safari" style={{width: '1.5rem'}} className="p-mr-2" />
+                                        <div className="flex align-items-center">
+                                            <img src={`${contextPath}/images/browsers/safari.svg`} alt="safari" style={{width: '1.5rem'}} className="mr-2" />
                                             Safari
                                         </div>
                                     </th>
                                     <th>
-                                        <div className="p-d-flex p-ai-center">
-                                            <img src={`${contextPath}/images/browsers/opera.svg`} alt="opera" style={{width: '1.5rem'}} className="p-mr-2" />
+                                        <div className="flex align-items-center">
+                                            <img src={`${contextPath}/images/browsers/opera.svg`} alt="opera" style={{width: '1.5rem'}} className="mr-2" />
                                             Opera
                                         </div>
                                     </th>
