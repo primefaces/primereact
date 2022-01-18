@@ -26,7 +26,7 @@ export default class TreeTableFilterDemo extends Component {
 
     getHeader(globalFilterKey) {
         return (
-            <div className="p-text-right">
+            <div className="text-right">
                 <div className="p-input-icon-left">
                     <i className="pi pi-search"></i>
                     <InputText type="search" onInput={(e) => this.setState({ [`${globalFilterKey}`]: e.target.value })} placeholder="Global Search" size="50" />
@@ -115,7 +115,7 @@ export class TreeTableFilterDemo extends Component {
 
     getHeader(globalFilterKey) {
         return (
-            <div className="p-text-right">
+            <div className="text-right">
                 <div className="p-input-icon-left">
                     <i className="pi pi-search"></i>
                     <InputText type="search" onInput={(e) => this.setState({ [\`\${globalFilterKey}\`]: e.target.value })} placeholder="Global Search" size="50" />
@@ -179,7 +179,7 @@ const TreeTableFilterDemo = () => {
 
     const getHeader = (globalFilterKey) => {
         return (
-            <div className="p-text-right">
+            <div className="text-right">
                 <div className="p-input-icon-left">
                     <i className="pi pi-search"></i>
                     <InputText type="search" onInput={(e) => treeTableFuncMap[\`\${globalFilterKey}\`](e.target.value)} placeholder="Global Search" size="50" />
@@ -241,7 +241,7 @@ const TreeTableFilterDemo = () => {
 
     const getHeader = (globalFilterKey) => {
         return (
-            <div className="p-text-right">
+            <div className="text-right">
                 <div className="p-input-icon-left">
                     <i className="pi pi-search"></i>
                     <InputText type="search" onInput={(e) => treeTableFuncMap[\`\${globalFilterKey}\`](e.target.value)} placeholder="Global Search" size="50" />
@@ -311,7 +311,7 @@ const TreeTableFilterDemo = () => {
 
     const getHeader = (globalFilterKey) => {
         return (
-            <div className="p-text-right">
+            <div className="text-right">
                 <div className="p-input-icon-left">
                     <i className="pi pi-search"></i>
                     <InputText type="search" onInput={(e) => treeTableFuncMap[\`\${globalFilterKey}\`](e.target.value)} placeholder="Global Search" size="50" />
