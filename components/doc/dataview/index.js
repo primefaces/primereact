@@ -68,7 +68,7 @@ export class DataViewDemo extends Component {
 
     renderListItem(data) {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
                     <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
@@ -89,7 +89,7 @@ export class DataViewDemo extends Component {
 
     renderGridItem(data) {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>
@@ -126,11 +126,11 @@ export class DataViewDemo extends Component {
 
     renderHeader() {
         return (
-            <div className="p-grid p-nogutter">
-                <div className="p-col-6" style={{textAlign: 'left'}}>
+            <div className="grid grid-nogutter">
+                <div className="col-6" style={{textAlign: 'left'}}>
                     <Dropdown options={this.sortOptions} value={this.state.sortKey} optionLabel="label" placeholder="Sort By Price" onChange={this.onSortChange}/>
                 </div>
-                <div className="p-col-6" style={{textAlign: 'right'}}>
+                <div className="col-6" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={this.state.layout} onChange={(e) => this.setState({ layout: e.value })} />
                 </div>
             </div>
@@ -198,7 +198,7 @@ const DataViewDemo = () => {
 
     const renderListItem = (data) => {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
                     <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
@@ -219,7 +219,7 @@ const DataViewDemo = () => {
 
     const renderGridItem = (data) => {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>
@@ -256,11 +256,11 @@ const DataViewDemo = () => {
 
     const renderHeader = () => {
         return (
-            <div className="p-grid p-nogutter">
-                <div className="p-col-6" style={{textAlign: 'left'}}>
+            <div className="grid grid-nogutter">
+                <div className="col-6" style={{textAlign: 'left'}}>
                     <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange}/>
                 </div>
-                <div className="p-col-6" style={{textAlign: 'right'}}>
+                <div className="col-6" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
                 </div>
             </div>
@@ -326,7 +326,7 @@ const DataViewDemo = () => {
 
     const renderListItem = (data) => {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
                     <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
@@ -347,7 +347,7 @@ const DataViewDemo = () => {
 
     const renderGridItem = (data) => {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>
@@ -384,11 +384,11 @@ const DataViewDemo = () => {
 
     const renderHeader = () => {
         return (
-            <div className="p-grid p-nogutter">
-                <div className="p-col-6" style={{textAlign: 'left'}}>
+            <div className="grid grid-nogutter">
+                <div className="col-6" style={{textAlign: 'left'}}>
                     <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange}/>
                 </div>
-                <div className="p-col-6" style={{textAlign: 'right'}}>
+                <div className="col-6" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
                 </div>
             </div>
@@ -459,7 +459,7 @@ const DataViewDemo = () => {
 
     const renderListItem = (data) => {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
                     <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
@@ -480,7 +480,7 @@ const DataViewDemo = () => {
 
     const renderGridItem = (data) => {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>
@@ -517,11 +517,11 @@ const DataViewDemo = () => {
 
     const renderHeader = () => {
         return (
-            <div className="p-grid p-nogutter">
-                <div className="p-col-6" style={{textAlign: 'left'}}>
+            <div className="grid grid-nogutter">
+                <div className="col-6" style={{textAlign: 'left'}}>
                     <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange}/>
                 </div>
-                <div className="p-col-6" style={{textAlign: 'right'}}>
+                <div className="col-6" style={{textAlign: 'right'}}>
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
                 </div>
             </div>
@@ -843,8 +843,8 @@ const sortOptions = [
 ];
 
 const header = (
-    <div className="p-grid">
-        <div className="p-col-12 p-md-4">
+    <div className="grid">
+        <div className="col-12 md:col-4">
             <Dropdown options={sortOptions} value={sortKey} placeholder="Sort By" onChange={onSortChange} />
         </div>
     </div>
