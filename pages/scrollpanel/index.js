@@ -23,8 +23,8 @@ export default class ScrollPanelDemo extends Component {
 
                 <div className="content-section implementation scrollpanel-demo">
                     <div className="card">
-                        <div className="p-grid">
-                            <div className="p-col-12 p-md-4">
+                        <div className="grid">
+                            <div className="col-12 md:col-4">
                                 <ScrollPanel style={{ width: '100%', height: '200px' }}>
                                     <div style={{ padding: '1em', lineHeight: '1.5' }}>
                                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
@@ -40,7 +40,7 @@ export default class ScrollPanelDemo extends Component {
                                 </div>
                                 </ScrollPanel>
                             </div>
-                            <div className="p-col-12 p-md-4">
+                            <div className="col-12 md:col-4">
                                 <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar1">
                                     <div style={{ padding: '1em', lineHeight: '1.5' }}>
                                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
@@ -56,7 +56,7 @@ export default class ScrollPanelDemo extends Component {
                                 </div>
                                 </ScrollPanel>
                             </div>
-                            <div className="p-col-12 p-md-4">
+                            <div className="col-12 md:col-4">
                                 <ScrollPanel style={{ width: '100%', height: '200px' }} className="custombar2">
                                     <div style={{ padding: '1em', lineHeight: '1.5', width: '600px' }}>
                                         The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved

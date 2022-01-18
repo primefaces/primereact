@@ -94,8 +94,8 @@ export default class AccordionDemo extends Component {
                         <h5>Programmatic</h5>
                         <div className="p-pt-2 p-pb-4">
                             <Button icon={this.state.activeIndex && this.state.activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => this.onClick(0)} className="p-button-text" />
-                            <Button icon={this.state.activeIndex && this.state.activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => this.onClick(1)} className="p-button-text p-ml-2" />
-                            <Button icon={this.state.activeIndex && this.state.activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => this.onClick(2)} className="p-button-text p-ml-2" />
+                            <Button icon={this.state.activeIndex && this.state.activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => this.onClick(1)} className="p-button-text ml-2" />
+                            <Button icon={this.state.activeIndex && this.state.activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => this.onClick(2)} className="p-button-text ml-2" />
                         </div>
 
                         <Accordion multiple activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>

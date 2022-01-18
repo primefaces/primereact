@@ -47,17 +47,17 @@ export default class ToolbarDemo extends Component {
     render() {
         const leftContents = (
             <React.Fragment>
-                <Button label="New" icon="pi pi-plus" className="p-mr-2" />
+                <Button label="New" icon="pi pi-plus" className="mr-2" />
                 <Button label="Upload" icon="pi pi-upload" className="p-button-success" />
-                <i className="pi pi-bars p-toolbar-separator p-mr-2" />
+                <i className="pi pi-bars p-toolbar-separator mr-2" />
                 <SplitButton label="Save" icon="pi pi-check" model={this.items} className="p-button-warning"></SplitButton>
             </React.Fragment>
         );
 
         const rightContents = (
             <React.Fragment>
-                <Button icon="pi pi-search" className="p-mr-2" />
-                <Button icon="pi pi-calendar" className="p-button-success p-mr-2" />
+                <Button icon="pi pi-search" className="mr-2" />
+                <Button icon="pi pi-calendar" className="p-button-success mr-2" />
                 <Button icon="pi pi-times" className="p-button-danger" />
             </React.Fragment>
         );

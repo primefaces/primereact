@@ -81,23 +81,23 @@ export class ConfirmDialogDemo extends Component {
 
                 <div className="card">
                     <h5>Basic</h5>
-                    <Button onClick={this.confirm1} icon="pi pi-check" label="Confirm" className="p-mr-2"></Button>
+                    <Button onClick={this.confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                     <Button onClick={this.confirm2} icon="pi pi-times" label="Delete"></Button>
 
                     <h5>Position</h5>
-                    <div className="p-grid">
-                        <div className="p-col-12">
-                            <Button onClick={() => this.confirmPosition('left')} icon="pi pi-arrow-right" label="Left" className="p-button-help p-mr-2"></Button>
+                    <div className="grid">
+                        <div className="col-12">
+                            <Button onClick={() => this.confirmPosition('left')} icon="pi pi-arrow-right" label="Left" className="p-button-help mr-2"></Button>
                             <Button onClick={() => this.confirmPosition('right')} icon="pi pi-arrow-left" label="Right" className="p-button-help"></Button>
                         </div>
-                        <div className="p-col-12">
-                            <Button onClick={() => this.confirmPosition('top-left')} icon="pi pi-arrow-down" label="TopLeft" className="p-button-warning p-mr-2"></Button>
-                            <Button onClick={() => this.confirmPosition('top')} icon="pi pi-arrow-down" label="Top" className="p-button-warning p-mr-2"></Button>
+                        <div className="col-12">
+                            <Button onClick={() => this.confirmPosition('top-left')} icon="pi pi-arrow-down" label="TopLeft" className="p-button-warning mr-2"></Button>
+                            <Button onClick={() => this.confirmPosition('top')} icon="pi pi-arrow-down" label="Top" className="p-button-warning mr-2"></Button>
                             <Button onClick={() => this.confirmPosition('top-right')} icon="pi pi-arrow-down" label="TopRight" className="p-button-warning"></Button>
                         </div>
-                        <div className="p-col-12">
-                            <Button onClick={() => this.confirmPosition('bottom-left')} icon="pi pi-arrow-up" label="BottomLeft" className="p-button-success p-mr-2"></Button>
-                            <Button onClick={() => this.confirmPosition('bottom')} icon="pi pi-arrow-up" label="Bottom" className="p-button-success p-mr-2"></Button>
+                        <div className="col-12">
+                            <Button onClick={() => this.confirmPosition('bottom-left')} icon="pi pi-arrow-up" label="BottomLeft" className="p-button-success mr-2"></Button>
+                            <Button onClick={() => this.confirmPosition('bottom')} icon="pi pi-arrow-up" label="Bottom" className="p-button-success mr-2"></Button>
                             <Button onClick={() => this.confirmPosition('bottom-right')} icon="pi pi-arrow-up" label="BottomRight" className="p-button-success"></Button>
                         </div>
                     </div>
@@ -171,23 +171,23 @@ const ConfirmDialogDemo = () => {
 
             <div className="card">
                 <h5>Basic</h5>
-                <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="p-mr-2"></Button>
+                <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                 <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
 
                 <h5>Position</h5>
-                <div className="p-grid">
-                    <div className="p-col-12">
-                        <Button onClick={() => confirmPosition('left')} icon="pi pi-arrow-right" label="Left" className="p-button-help p-mr-2"></Button>
+                <div className="grid">
+                    <div className="col-12">
+                        <Button onClick={() => confirmPosition('left')} icon="pi pi-arrow-right" label="Left" className="p-button-help mr-2"></Button>
                         <Button onClick={() => confirmPosition('right')} icon="pi pi-arrow-left" label="Right" className="p-button-help"></Button>
                     </div>
-                    <div className="p-col-12">
-                        <Button onClick={() => confirmPosition('top-left')} icon="pi pi-arrow-down" label="TopLeft" className="p-button-warning p-mr-2"></Button>
-                        <Button onClick={() => confirmPosition('top')} icon="pi pi-arrow-down" label="Top" className="p-button-warning p-mr-2"></Button>
+                    <div className="col-12">
+                        <Button onClick={() => confirmPosition('top-left')} icon="pi pi-arrow-down" label="TopLeft" className="p-button-warning mr-2"></Button>
+                        <Button onClick={() => confirmPosition('top')} icon="pi pi-arrow-down" label="Top" className="p-button-warning mr-2"></Button>
                         <Button onClick={() => confirmPosition('top-right')} icon="pi pi-arrow-down" label="TopRight" className="p-button-warning"></Button>
                     </div>
-                    <div className="p-col-12">
-                        <Button onClick={() => confirmPosition('bottom-left')} icon="pi pi-arrow-up" label="BottomLeft" className="p-button-success p-mr-2"></Button>
-                        <Button onClick={() => confirmPosition('bottom')} icon="pi pi-arrow-up" label="Bottom" className="p-button-success p-mr-2"></Button>
+                    <div className="col-12">
+                        <Button onClick={() => confirmPosition('bottom-left')} icon="pi pi-arrow-up" label="BottomLeft" className="p-button-success mr-2"></Button>
+                        <Button onClick={() => confirmPosition('bottom')} icon="pi pi-arrow-up" label="Bottom" className="p-button-success mr-2"></Button>
                         <Button onClick={() => confirmPosition('bottom-right')} icon="pi pi-arrow-up" label="BottomRight" className="p-button-success"></Button>
                     </div>
                 </div>
@@ -260,23 +260,23 @@ const ConfirmDialogDemo = () => {
 
             <div className="card">
                 <h5>Basic</h5>
-                <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="p-mr-2"></Button>
+                <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                 <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
 
                 <h5>Position</h5>
-                <div className="p-grid">
-                    <div className="p-col-12">
-                        <Button onClick={() => confirmPosition('left')} icon="pi pi-arrow-right" label="Left" className="p-button-help p-mr-2"></Button>
+                <div className="grid">
+                    <div className="col-12">
+                        <Button onClick={() => confirmPosition('left')} icon="pi pi-arrow-right" label="Left" className="p-button-help mr-2"></Button>
                         <Button onClick={() => confirmPosition('right')} icon="pi pi-arrow-left" label="Right" className="p-button-help"></Button>
                     </div>
-                    <div className="p-col-12">
-                        <Button onClick={() => confirmPosition('top-left')} icon="pi pi-arrow-down" label="TopLeft" className="p-button-warning p-mr-2"></Button>
-                        <Button onClick={() => confirmPosition('top')} icon="pi pi-arrow-down" label="Top" className="p-button-warning p-mr-2"></Button>
+                    <div className="col-12">
+                        <Button onClick={() => confirmPosition('top-left')} icon="pi pi-arrow-down" label="TopLeft" className="p-button-warning mr-2"></Button>
+                        <Button onClick={() => confirmPosition('top')} icon="pi pi-arrow-down" label="Top" className="p-button-warning mr-2"></Button>
                         <Button onClick={() => confirmPosition('top-right')} icon="pi pi-arrow-down" label="TopRight" className="p-button-warning"></Button>
                     </div>
-                    <div className="p-col-12">
-                        <Button onClick={() => confirmPosition('bottom-left')} icon="pi pi-arrow-up" label="BottomLeft" className="p-button-success p-mr-2"></Button>
-                        <Button onClick={() => confirmPosition('bottom')} icon="pi pi-arrow-up" label="Bottom" className="p-button-success p-mr-2"></Button>
+                    <div className="col-12">
+                        <Button onClick={() => confirmPosition('bottom-left')} icon="pi pi-arrow-up" label="BottomLeft" className="p-button-success mr-2"></Button>
+                        <Button onClick={() => confirmPosition('bottom')} icon="pi pi-arrow-up" label="Bottom" className="p-button-success mr-2"></Button>
                         <Button onClick={() => confirmPosition('bottom-right')} icon="pi pi-arrow-up" label="BottomRight" className="p-button-success"></Button>
                     </div>
                 </div>
@@ -353,23 +353,23 @@ const ConfirmDialogDemo = () => {
 
             <div className="card">
                 <h5>Basic</h5>
-                <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="p-mr-2"></Button>
+                <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                 <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
 
                 <h5>Position</h5>
-                <div className="p-grid">
-                    <div className="p-col-12">
-                        <Button onClick={() => confirmPosition('left')} icon="pi pi-arrow-right" label="Left" className="p-button-help p-mr-2"></Button>
+                <div className="grid">
+                    <div className="col-12">
+                        <Button onClick={() => confirmPosition('left')} icon="pi pi-arrow-right" label="Left" className="p-button-help mr-2"></Button>
                         <Button onClick={() => confirmPosition('right')} icon="pi pi-arrow-left" label="Right" className="p-button-help"></Button>
                     </div>
-                    <div className="p-col-12">
-                        <Button onClick={() => confirmPosition('top-left')} icon="pi pi-arrow-down" label="TopLeft" className="p-button-warning p-mr-2"></Button>
-                        <Button onClick={() => confirmPosition('top')} icon="pi pi-arrow-down" label="Top" className="p-button-warning p-mr-2"></Button>
+                    <div className="col-12">
+                        <Button onClick={() => confirmPosition('top-left')} icon="pi pi-arrow-down" label="TopLeft" className="p-button-warning mr-2"></Button>
+                        <Button onClick={() => confirmPosition('top')} icon="pi pi-arrow-down" label="Top" className="p-button-warning mr-2"></Button>
                         <Button onClick={() => confirmPosition('top-right')} icon="pi pi-arrow-down" label="TopRight" className="p-button-warning"></Button>
                     </div>
-                    <div className="p-col-12">
-                        <Button onClick={() => confirmPosition('bottom-left')} icon="pi pi-arrow-up" label="BottomLeft" className="p-button-success p-mr-2"></Button>
-                        <Button onClick={() => confirmPosition('bottom')} icon="pi pi-arrow-up" label="Bottom" className="p-button-success p-mr-2"></Button>
+                    <div className="col-12">
+                        <Button onClick={() => confirmPosition('bottom-left')} icon="pi pi-arrow-up" label="BottomLeft" className="p-button-success mr-2"></Button>
+                        <Button onClick={() => confirmPosition('bottom')} icon="pi pi-arrow-up" label="Bottom" className="p-button-success mr-2"></Button>
                         <Button onClick={() => confirmPosition('bottom-right')} icon="pi pi-arrow-up" label="BottomRight" className="p-button-success"></Button>
                     </div>
                 </div>
