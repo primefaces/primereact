@@ -95,7 +95,7 @@ export default class SkeletonDemo extends Component {
                             <div className="field col-12 md:col-6">
                                 <h5>List</h5>
                                 <div className="custom-skeleton p-4">
-                                    <ul className="p-m-0 p-0">
+                                    <ul className="m-0 p-0">
                                         <li className="mb-3">
                                             <div className="flex">
                                                 <Skeleton shape="circle" size="4rem" className="mr-2"></Skeleton>

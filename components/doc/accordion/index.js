@@ -92,7 +92,7 @@ export class AccordionDemo extends Component {
                     </Accordion>
 
                     <h5>Programmatic</h5>
-                    <div className="p-pt-2 p-pb-4">
+                    <div className="pt-2 pb-4">
                         <Button icon={this.state.activeIndex && this.state.activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => this.onClick(0)} className="p-button-text" />
                         <Button icon={this.state.activeIndex && this.state.activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => this.onClick(1)} className="p-button-text ml-2" />
                         <Button icon={this.state.activeIndex && this.state.activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => this.onClick(2)} className="p-button-text ml-2" />
@@ -215,7 +215,7 @@ export const AccordionDemo = () => {
                 </Accordion>
 
                 <h5>Programmatic</h5>
-                <div className="p-pt-2 p-pb-4">
+                <div className="pt-2 pb-4">
                     <Button icon={activeIndex && activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => onClick(0)} className="p-button-text" />
                     <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text ml-2" />
                     <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text ml-2" />
@@ -337,7 +337,7 @@ export const AccordionDemo = () => {
                 </Accordion>
 
                 <h5>Programmatic</h5>
-                <div className="p-pt-2 p-pb-4">
+                <div className="pt-2 pb-4">
                     <Button icon={activeIndex && activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => onClick(0)} className="p-button-text" />
                     <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text ml-2" />
                     <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text ml-2" />
@@ -463,7 +463,7 @@ const AccordionDemo = () => {
                 </Accordion>
 
                 <h5>Programmatic</h5>
-                <div className="p-pt-2 p-pb-4">
+                <div className="pt-2 pb-4">
                     <Button icon={activeIndex && activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => onClick(0)} className="p-button-text" />
                     <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text ml-2" />
                     <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text ml-2" />

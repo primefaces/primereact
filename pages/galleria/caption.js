@@ -53,7 +53,7 @@ export default class GalleriaCaptionDemo extends Component {
     caption(item) {
         return (
             <React.Fragment>
-                <h4 className="p-mb-2">{item.title}</h4>
+                <h4 className="mb-2">{item.title}</h4>
                 <p>{item.alt}</p>
             </React.Fragment>
         );
@@ -151,7 +151,7 @@ export class GalleriaCaptionDemo extends Component {
     caption(item) {
         return (
             <React.Fragment>
-                <h4 className="p-mb-2">{item.title}</h4>
+                <h4 className="mb-2">{item.title}</h4>
                 <p>{item.alt}</p>
             </React.Fragment>
         );

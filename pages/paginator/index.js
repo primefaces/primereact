@@ -161,7 +161,7 @@ export default class PaginatorDemo extends Component {
 
                 return (
                     <>
-                        <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                        <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                         <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                     </>
                 );

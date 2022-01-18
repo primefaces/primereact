@@ -415,15 +415,15 @@ import { Checkbox } from 'primereact/checkbox';
                         <p>Multiple checkboxes can be grouped using a list of values.</p>
 <CodeHighlight>
 {`
-<div className="p-col-12">
+<div className="col-12">
     <Checkbox inputId="cb1" value="New York" onChange={onCityChange} checked={cities.includes('New York')}></Checkbox>
     <label htmlFor="cb1" className="p-checkbox-label">New York</label>
 </div>
-<div className="p-col-12">
+<div className="col-12">
     <Checkbox inputId="cb2" value="San Francisco" onChange={onCityChange} checked={cities.includes('San Francisco')}></Checkbox>
     <label htmlFor="cb2" className="p-checkbox-label">San Francisco</label>
 </div>
-<div className="p-col-12">
+<div className="col-12">
     <Checkbox inputId="cb3" value="Los Angeles" onChange={onCityChange} checked={cities.includes('Los Angeles')}></Checkbox>
     <label htmlFor="cb3" className="p-checkbox-label">Los Angeles</label>
 </div>

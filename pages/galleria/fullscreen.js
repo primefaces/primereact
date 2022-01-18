@@ -122,7 +122,7 @@ export default class GalleriaFullScreenDemo extends Component {
                                     }} />
 
                                     return (
-                                        <div className="p-col-3" key={index}>
+                                        <div className="col-3" key={index}>
                                             {imgEl}
                                         </div>
                                     )
@@ -255,7 +255,7 @@ export class GalleriaFullScreenDemo extends Component {
                                 }} />
 
                                 return (
-                                    <div className="p-col-3" key={index}>
+                                    <div className="col-3" key={index}>
                                         {imgEl}
                                     </div>
                                 )

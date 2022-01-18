@@ -2474,7 +2474,7 @@ export const DataTableRowExpansionDemo = () => {
 
     const header = (
         <div className="table-header-container">
-            <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} className="p-mr-2" />
+            <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
             <Button icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
         </div>
     );
