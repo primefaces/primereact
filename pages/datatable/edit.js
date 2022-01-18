@@ -212,7 +212,7 @@ export default class DataTableEditDemo extends Component {
 
                     <div className="card">
                         <h5>Programmatic</h5>
-                        <div className="p-pt-2 p-pb-4">
+                        <div className="pt-2 pb-4">
                             <Button onClick={() => this.setActiveRowIndex(0)} className="p-button-text" label="Activate 1st" />
                             <Button onClick={() => this.setActiveRowIndex(2)} className="p-button-text" label="Activate 3rd" />
                             <Button onClick={() => this.setActiveRowIndex(4)} className="p-button-text" label="Activate 5th" />
@@ -454,7 +454,7 @@ export class DataTableEditDemo extends Component {
 
                 <div className="card">
                     <h5>Programmatic</h5>
-                    <div className="p-pt-2 p-pb-4">
+                    <div className="pt-2 pb-4">
                         <Button onClick={() => this.setActiveRowIndex(0)} className="p-button-text" label="Activate 1st" />
                         <Button onClick={() => this.setActiveRowIndex(2)} className="p-button-text" label="Activate 3rd" />
                         <Button onClick={() => this.setActiveRowIndex(4)} className="p-button-text" label="Activate 5th" />
@@ -681,7 +681,7 @@ const DataTableEditDemo = () => {
 
             <div className="card">
                 <h5>Programmatic</h5>
-                <div className="p-pt-2 p-pb-4">
+                <div className="pt-2 pb-4">
                     <Button onClick={() => setActiveRowIndex(0)} className="p-button-text" label="Activate 1st" />
                     <Button onClick={() => setActiveRowIndex(2)} className="p-button-text" label="Activate 3rd" />
                     <Button onClick={() => setActiveRowIndex(4)} className="p-button-text" label="Activate 5th" />
@@ -907,7 +907,7 @@ const DataTableEditDemo = () => {
 
             <div className="card">
                 <h5>Programmatic</h5>
-                <div className="p-pt-2 p-pb-4">
+                <div className="pt-2 pb-4">
                     <Button onClick={() => setActiveRowIndex(0)} className="p-button-text" label="Activate 1st" />
                     <Button onClick={() => setActiveRowIndex(2)} className="p-button-text" label="Activate 3rd" />
                     <Button onClick={() => setActiveRowIndex(4)} className="p-button-text" label="Activate 5th" />
@@ -1145,7 +1145,7 @@ const DataTableEditDemo = () => {
 
             <div className="card">
                 <h5>Programmatic</h5>
-                <div className="p-pt-2 p-pb-4">
+                <div className="pt-2 pb-4">
                     <Button onClick={() => setActiveRowIndex(0)} className="p-button-text" label="Activate 1st" />
                     <Button onClick={() => setActiveRowIndex(2)} className="p-button-text" label="Activate 3rd" />
                     <Button onClick={() => setActiveRowIndex(4)} className="p-button-text" label="Activate 5th" />
