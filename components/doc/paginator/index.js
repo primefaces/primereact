@@ -114,7 +114,7 @@ export class PaginatorDemo extends Component {
             'PrevPageLink': (options) => {
                 return (
                     <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                        <span className="p-p-3">Previous</span>
+                        <span className="p-3">Previous</span>
                         <Ripple />
                     </button>
                 )
@@ -122,7 +122,7 @@ export class PaginatorDemo extends Component {
             'NextPageLink': (options) => {
                 return (
                     <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                        <span className="p-p-3">Next</span>
+                        <span className="p-3">Next</span>
                         <Ripple />
                     </button>
                 )
@@ -153,8 +153,8 @@ export class PaginatorDemo extends Component {
             },
             'CurrentPageReport': (options) => {
                 return (
-                    <span className="p-mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                        Go to <InputText size="2" className="p-ml-1" value={this.state.currentPage} tooltip={this.state.pageInputTooltip}
+                    <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
+                        Go to <InputText size="2" className="ml-1" value={this.state.currentPage} tooltip={this.state.pageInputTooltip}
                             onKeyDown={(e) => this.onPageInputKeyDown(e, options)} onChange={this.onPageInputChange}/>
                     </span>
                 )
@@ -172,7 +172,7 @@ export class PaginatorDemo extends Component {
 
                 return (
                     <React.Fragment>
-                        <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                        <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                         <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                     </React.Fragment>
                 );
@@ -189,10 +189,10 @@ export class PaginatorDemo extends Component {
             layout: 'RowsPerPageDropdown PrevPageLink PageLinks NextPageLink CurrentPageReport',
             'RowsPerPageDropdown': (options) => {
                 return (
-                    <div className="p-d-flex p-ai-center">
+                    <div className="flex align-items-center">
                         <Tooltip target=".slider>.p-slider-handle" content={\`\${options.value} / page\`} position="top" event="focus" />
 
-                        <span className="p-mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                        <span className="mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                         <Slider className="slider" value={options.value} onChange={options.onChange} min={10} max={120} step={30} style={{ width: '10rem' }} />
                     </div>
                 );
@@ -214,8 +214,8 @@ export class PaginatorDemo extends Component {
 
                     <h5>Custom Template</h5>
                     <Paginator template={template1} first={this.state.customFirst1} rows={this.state.customRows1} totalRecords={120} onPageChange={this.onCustomPageChange1}></Paginator>
-                    <Paginator template={template2} first={this.state.customFirst2} rows={this.state.customRows2} totalRecords={120} onPageChange={this.onCustomPageChange2} className="p-jc-end p-my-3"></Paginator>
-                    <Paginator template={template3} first={this.state.customFirst3} rows={this.state.customRows3} totalRecords={120} onPageChange={this.onCustomPageChange3} className="p-jc-start p-my-3"></Paginator>
+                    <Paginator template={template2} first={this.state.customFirst2} rows={this.state.customRows2} totalRecords={120} onPageChange={this.onCustomPageChange2} className="justify-content-end my-3"></Paginator>
+                    <Paginator template={template3} first={this.state.customFirst3} rows={this.state.customRows3} totalRecords={120} onPageChange={this.onCustomPageChange3} className="justify-content-start my-3"></Paginator>
 
                     <h5>Left and Right Content</h5>
                     <Paginator first={this.state.contentFirst} rows={1} totalRecords={12} onPageChange={this.onContentPageChange}
@@ -311,7 +311,7 @@ const PaginatorDemo = () => {
         'PrevPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Previous</span>
+                    <span className="p-3">Previous</span>
                     <Ripple />
                 </button>
             )
@@ -319,7 +319,7 @@ const PaginatorDemo = () => {
         'NextPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Next</span>
+                    <span className="p-3">Next</span>
                     <Ripple />
                 </button>
             )
@@ -350,8 +350,8 @@ const PaginatorDemo = () => {
         },
         'CurrentPageReport': (options) => {
             return (
-                <span className="p-mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                    Go to <InputText size="2" className="p-ml-1" value={currentPage} tooltip={pageInputTooltip}
+                <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
+                    Go to <InputText size="2" className="ml-1" value={currentPage} tooltip={pageInputTooltip}
                         onKeyDown={(e) => onPageInputKeyDown(e, options)} onChange={onPageInputChange}/>
                 </span>
             )
@@ -369,7 +369,7 @@ const PaginatorDemo = () => {
 
             return (
                 <React.Fragment>
-                    <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                 </React.Fragment>
             );
@@ -386,10 +386,10 @@ const PaginatorDemo = () => {
         layout: 'RowsPerPageDropdown PrevPageLink PageLinks NextPageLink CurrentPageReport',
         'RowsPerPageDropdown': (options) => {
             return (
-                <div className="p-d-flex p-ai-center">
+                <div className="flex align-items-center">
                     <Tooltip target=".slider>.p-slider-handle" content={\`\${options.value} / page\`} position="top" event="focus" />
 
-                    <span className="p-mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Slider className="slider" value={options.value} onChange={options.onChange} min={10} max={120} step={30} style={{ width: '10rem' }} />
                 </div>
             );
@@ -411,8 +411,8 @@ const PaginatorDemo = () => {
 
                 <h5>Custom Template</h5>
                 <Paginator template={template1} first={customFirst1} rows={customRows1} totalRecords={120} onPageChange={onCustomPageChange1}></Paginator>
-                <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="p-jc-end p-my-3"></Paginator>
-                <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="p-jc-start p-my-3"></Paginator>
+                <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="justify-content-end my-3"></Paginator>
+                <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="justify-content-start my-3"></Paginator>
 
                 <h5>Left and Right Content</h5>
                 <Paginator first={contentFirst} rows={1} totalRecords={12} onPageChange={onContentPageChange}
@@ -507,7 +507,7 @@ const PaginatorDemo = () => {
         'PrevPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Previous</span>
+                    <span className="p-3">Previous</span>
                     <Ripple />
                 </button>
             )
@@ -515,7 +515,7 @@ const PaginatorDemo = () => {
         'NextPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Next</span>
+                    <span className="p-3">Next</span>
                     <Ripple />
                 </button>
             )
@@ -546,8 +546,8 @@ const PaginatorDemo = () => {
         },
         'CurrentPageReport': (options) => {
             return (
-                <span className="p-mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                    Go to <InputText size="2" className="p-ml-1" value={currentPage} tooltip={pageInputTooltip}
+                <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
+                    Go to <InputText size="2" className="ml-1" value={currentPage} tooltip={pageInputTooltip}
                         onKeyDown={(e) => onPageInputKeyDown(e, options)} onChange={onPageInputChange}/>
                 </span>
             )
@@ -565,7 +565,7 @@ const PaginatorDemo = () => {
 
             return (
                 <React.Fragment>
-                    <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                 </React.Fragment>
             );
@@ -582,10 +582,10 @@ const PaginatorDemo = () => {
         layout: 'RowsPerPageDropdown PrevPageLink PageLinks NextPageLink CurrentPageReport',
         'RowsPerPageDropdown': (options) => {
             return (
-                <div className="p-d-flex p-ai-center">
+                <div className="flex align-items-center">
                     <Tooltip target=".slider>.p-slider-handle" content={\`\${options.value} / page\`} position="top" event="focus" />
 
-                    <span className="p-mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Slider className="slider" value={options.value} onChange={options.onChange} min={10} max={120} step={30} style={{ width: '10rem' }} />
                 </div>
             );
@@ -607,8 +607,8 @@ const PaginatorDemo = () => {
 
                 <h5>Custom Template</h5>
                 <Paginator template={template1} first={customFirst1} rows={customRows1} totalRecords={120} onPageChange={onCustomPageChange1}></Paginator>
-                <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="p-jc-end p-my-3"></Paginator>
-                <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="p-jc-start p-my-3"></Paginator>
+                <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="justify-content-end my-3"></Paginator>
+                <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="justify-content-start my-3"></Paginator>
 
                 <h5>Left and Right Content</h5>
                 <Paginator first={contentFirst} rows={1} totalRecords={12} onPageChange={onContentPageChange}
@@ -707,7 +707,7 @@ const PaginatorDemo = () => {
         'PrevPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Previous</span>
+                    <span className="p-3">Previous</span>
                     <Ripple />
                 </button>
             )
@@ -715,7 +715,7 @@ const PaginatorDemo = () => {
         'NextPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Next</span>
+                    <span className="p-3">Next</span>
                     <Ripple />
                 </button>
             )
@@ -746,8 +746,8 @@ const PaginatorDemo = () => {
         },
         'CurrentPageReport': (options) => {
             return (
-                <span className="p-mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                    Go to <InputText size="2" className="p-ml-1" value={currentPage} tooltip={pageInputTooltip}
+                <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
+                    Go to <InputText size="2" className="ml-1" value={currentPage} tooltip={pageInputTooltip}
                         onKeyDown={(e) => onPageInputKeyDown(e, options)} onChange={onPageInputChange}/>
                 </span>
             )
@@ -765,7 +765,7 @@ const PaginatorDemo = () => {
 
             return (
                 <React.Fragment>
-                    <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                 </React.Fragment>
             );
@@ -782,10 +782,10 @@ const PaginatorDemo = () => {
         layout: 'RowsPerPageDropdown PrevPageLink PageLinks NextPageLink CurrentPageReport',
         'RowsPerPageDropdown': (options) => {
             return (
-                <div className="p-d-flex p-ai-center">
+                <div className="flex align-items-center">
                     <Tooltip target=".slider>.p-slider-handle" content={\`\${options.value} / page\`} position="top" event="focus" />
 
-                    <span className="p-mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Slider className="slider" value={options.value} onChange={options.onChange} min={10} max={120} step={30} style={{ width: '10rem' }} />
                 </div>
             );
@@ -807,8 +807,8 @@ const PaginatorDemo = () => {
 
                 <h5>Custom Template</h5>
                 <Paginator template={template1} first={customFirst1} rows={customRows1} totalRecords={120} onPageChange={onCustomPageChange1}></Paginator>
-                <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="p-jc-end p-my-3"></Paginator>
-                <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="p-jc-start p-my-3"></Paginator>
+                <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="justify-content-end my-3"></Paginator>
+                <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="justify-content-start my-3"></Paginator>
 
                 <h5>Left and Right Content</h5>
                 <Paginator first={contentFirst} rows={1} totalRecords={12} onPageChange={onContentPageChange}
