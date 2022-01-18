@@ -80,12 +80,12 @@ npm install primeicons
 
 <CodeHighlight>
 {`
-<i className="pi pi-check p-mr-2"></i>
+<i className="pi pi-check mr-2"></i>
 <i className="pi pi-times"></i>
 `}
 </CodeHighlight>
 
-                    <i className="pi pi-check  p-mr-2"></i>
+                    <i className="pi pi-check  mr-2"></i>
                     <i className="pi pi-times"></i>
 
                     <h5>Size</h5>
@@ -153,13 +153,13 @@ const MenuDemo = () => {
 
                     <InputText className="icon-filter" placeholder="Search an icon" onChange={this.onFilter} />
 
-                    <div className="p-grid icons-list">
+                    <div className="grid icons-list">
                         {
                             this.state.filteredIcons && this.state.filteredIcons.map(iconMeta => {
                                 const { icon, properties } = iconMeta;
 
                                 return icon.tags.indexOf('deprecate') === -1 && (
-                                    <div className="p-col-12 p-md-2" key={properties.name}>
+                                    <div className="col-12 md:col-2 mb-4" key={properties.name}>
                                         <i className={"pi pi-" + properties.name}></i>
                                         <div>pi-{properties.name}</div>
                                     </div>
