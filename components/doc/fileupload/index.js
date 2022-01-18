@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
-import { CodeHighlight } from '../common/codehighlight'; 
+import { CodeHighlight } from '../common/codehighlight';
 
 export class FileUploadDoc extends Component {
 
@@ -698,6 +698,8 @@ const customItemTemplate = (file, props) => {
     // options.sizeElement: The default size element in the container.
     // options.removeElement: The default remove element in the container.
     // options.formatSize: The formated size of file.
+    // options.files: Current files.
+    // options.index: The index of file in current files list.
     // options.element: Default element created by the component.
     // options.props: component props.
 }

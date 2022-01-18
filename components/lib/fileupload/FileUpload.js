@@ -489,6 +489,8 @@ export class FileUpload extends Component {
                 sizeElement: size,
                 removeElement: removeButton,
                 formatSize: this.formatSize(file.size),
+                files: this.state.files,
+                index,
                 element: content,
                 props: this.props
             };
