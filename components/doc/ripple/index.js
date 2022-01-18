@@ -28,7 +28,7 @@ export class RippleDemo extends Component {
     render() {
         return (
             <div className="ripple-demo">
-                <div className="card-container p-d-flex">
+                <div className="card-container flex">
                     <div className="card primary-box p-ripple">
                         Default
                         <Ripple />
@@ -65,7 +65,7 @@ const RippleDemo = () => {
 
     return (
         <div className="ripple-demo">
-            <div className="card-container p-d-flex">
+            <div className="card-container flex">
                 <div className="card primary-box p-ripple">
                     Default
                     <Ripple />
@@ -101,7 +101,7 @@ const RippleDemo = () => {
 
     return (
         <div className="ripple-demo">
-            <div className="card-container p-d-flex">
+            <div className="card-container flex">
                 <div className="card primary-box p-ripple">
                     Default
                     <Ripple />
@@ -140,7 +140,7 @@ const RippleDemo = () => {
 
     return (
         <div className="ripple-demo">
-            <div className="card-container p-d-flex">
+            <div className="card-container flex">
                 <div className="card primary-box p-ripple">
                     Default
                     <Ripple />
