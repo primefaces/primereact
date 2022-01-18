@@ -100,7 +100,7 @@ export default class RadarChartDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="card p-d-flex p-jc-center">
+                    <div className="card flex justify-content-center">
                         <AppContentContext.Consumer>
                             {
                                 context => {
@@ -188,7 +188,7 @@ export class RadarChartDemo extends Component {
 
     render() {
         return (
-            <div className="card p-d-flex p-jc-center">
+            <div className="card flex justify-content-center">
                 <Chart type="radar" data={this.chartData} options={this.lightOptions} style={{ position: 'relative', width: '40%' }} />
             </div>
         )
@@ -253,7 +253,7 @@ const RadarChartDemo = () => {
     };
 
     return (
-        <div className="card p-d-flex p-jc-center">
+        <div className="card flex justify-content-center">
             <Chart type="radar" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
     );
@@ -317,7 +317,7 @@ const RadarChartDemo = () => {
     };
 
     return (
-        <div className="card p-d-flex p-jc-center">
+        <div className="card flex justify-content-center">
             <Chart type="radar" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
     );
