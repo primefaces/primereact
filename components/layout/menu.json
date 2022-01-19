@@ -160,26 +160,16 @@
             "href": "https://www.primefaces.org/primeblocks-react"
         },
         {
-            "name": "PrimeFlex 3.0",
+            "name": "PrimeFlex",
             "meta": ["primeflex"],
-            "banner": true,
-            "imageLight": "/images/banner-primeflex.svg",
-            "imageDark": "/images/banner-primeflex-dark.svg",
-            "href": "https://www.primefaces.org/primeflex"
-        },
-        {
-            "name": "PrimeFlex 2.0",
-            "meta": [
-                "primeflex"
-            ],
             "children": [
                 {
-                    "name": "Guide",
-                    "to": "/",
-                    "meta": [
-                        "primeflex",
-                        "setup"
-                    ]
+                    "name": "PrimeFlex v3",
+                    "href": "https://www.primefaces.org/primeflex"
+                },
+                {
+                    "name": "PrimeFlex v2",
+                    "href": "https://github.com/primefaces/primeflex/wiki/PrimeFlex-v2"
                 }
             ]
         },
