@@ -19,6 +19,7 @@
     text-decoration: none;
     text-decoration: none;
     overflow: hidden;
+    height: 100%;
 }
 
 .p-tabmenu-nav a:focus {
