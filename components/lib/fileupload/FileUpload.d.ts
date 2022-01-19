@@ -29,6 +29,8 @@ interface ItemTemplateOptions {
     sizeElement: JSX.Element;
     removeElement: JSX.Element;
     formatSize: string;
+    files: File[],
+    index: number,
     element: JSX.Element;
     props: FileUploadProps;
 }

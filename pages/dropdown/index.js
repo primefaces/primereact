@@ -214,7 +214,7 @@ export default class DropdownDemo extends Component {
                         <Dropdown value={this.state.selectedItem2} options={this.state.lazyItems} onChange={this.onLazyItemChange} virtualScrollerOptions={{
                             lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 38, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
                                 return (
-                                    <div className="flex align-items-center p-2" style={{ height: '31px' }}>
+                                    <div className="flex align-items-center p-2" style={{ height: '38px' }}>
                                         <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
                                     </div>
                                 )

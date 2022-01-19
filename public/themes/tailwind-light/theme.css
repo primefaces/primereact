@@ -5027,6 +5027,7 @@
   border-top-left-radius: 0.375rem;
   transition: none;
   margin: 0 0 -2px 0;
+  height: calc(100% + 2px);
 }
 .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link .p-menuitem-icon {
   margin-right: 0.5rem;

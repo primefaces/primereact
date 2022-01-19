@@ -208,7 +208,7 @@ export class DropdownDemo extends Component {
                     <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                     <Dropdown value={this.state.selectedItem2} options={this.state.lazyItems} onChange={this.onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 38, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
                         return (
-                            <div className="flex align-items-center p-2" style={{ height: '31px' }}>
+                            <div className="flex align-items-center p-2" style={{ height: '38px' }}>
                                 <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
                             </div>
                         )}
@@ -402,7 +402,7 @@ const DropdownDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="flex align-items-center p-2" style={{ height: '31px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '38px' }}>
                             <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
                         </div>
                     )}
@@ -595,7 +595,7 @@ const DropdownDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="flex align-items-center p-2" style={{ height: '31px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '38px' }}>
                             <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
                         </div>
                     )}
@@ -792,7 +792,7 @@ const DropdownDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="flex align-items-center p-2" style={{ height: '31px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '38px' }}>
                             <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
                         </div>
                     )}

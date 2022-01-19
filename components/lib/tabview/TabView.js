@@ -230,10 +230,6 @@ export class TabView extends Component {
         if (prevProps.activeIndex !== this.props.activeIndex) {
             this.updateScrollBar(this.props.activeIndex);
         }
-
-        if (prevProps.children !== this.props.children) {
-            this.setState({ hiddenTabs: [] });
-        }
     }
 
     renderTabHeader(tab, index) {
