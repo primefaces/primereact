@@ -1099,6 +1099,12 @@ export const DataTableDemo = () => {
                                         <td>Property of a row data used for filtering, defaults to field.</td>
                                     </tr>
                                     <tr>
+                                        <td>exportField</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>Property of a row data used for exporting, defaults to field.</td>
+                                    </tr>
+                                    <tr>
                                         <td>header</td>
                                         <td>any</td>
                                         <td>null</td>

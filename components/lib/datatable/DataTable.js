@@ -1452,7 +1452,8 @@ export class DataTable extends Component {
         data.forEach((record) => {
             csv += '\n';
             columns.forEach((column, i) => {
-                const { field, exportable } = column.props;
+                const { field: columnField, exportField, exportable } = column.props;
+                const field = exportField || columnField;
 
                 if (exportable && field) {
                     let cellData = ObjectUtils.resolveFieldData(record, field);
