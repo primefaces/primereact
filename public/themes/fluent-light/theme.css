@@ -4943,6 +4943,7 @@
   border-top-left-radius: 2px;
   transition: box-shadow 0.2s;
   margin: 0 0.5rem -2px 0;
+  height: calc(100% + 2px);
 }
 .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link .p-menuitem-icon {
   margin-right: 0.5rem;
