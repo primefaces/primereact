@@ -5134,7 +5134,7 @@
 }
 .p-inline-message.p-inline-message-success {
   background: #ECFDF5;
-  border: snone;
+  border: none;
   border-width: 0px;
   color: #059669;
 }
@@ -5206,7 +5206,7 @@
 }
 .p-message.p-message-success {
   background: #ECFDF5;
-  border: snone;
+  border: none;
   border-width: 0 0 0 6px;
   color: #059669;
 }
@@ -5300,7 +5300,7 @@
 }
 .p-toast .p-toast-message.p-toast-message-success {
   background: #ECFDF5;
-  border: snone;
+  border: none;
   border-width: 0 0 0 6px;
   color: #059669;
 }
