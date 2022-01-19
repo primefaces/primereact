@@ -46,13 +46,13 @@ const ReactHookFormDemo = () => {
         return errors[name] && <small className="p-error">{errors[name].message}</small>
     };
 
-    const dialogFooter = <div className="p-d-flex p-jc-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
+    const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
     const passwordHeader = <h6>Pick a password</h6>;
     const passwordFooter = (
         <React.Fragment>
             <Divider />
-            <p className="p-mt-2">Suggestions</p>
-            <ul className="p-pl-2 p-ml-2 p-mt-0" style={{ lineHeight: '1.5' }}>
+            <p className="mt-2">Suggestions</p>
+            <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: '1.5' }}>
                 <li>At least one lowercase</li>
                 <li>At least one uppercase</li>
                 <li>At least one numeric</li>
@@ -78,7 +78,7 @@ const ReactHookFormDemo = () => {
 
             <div className="content-section implementation form-demo">
                 <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
-                    <div className="p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
+                    <div className="flex justify-content-center flex-column pt-6 px-3">
                         <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
                         <h5>Registration Successful!</h5>
                         <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
@@ -87,11 +87,11 @@ const ReactHookFormDemo = () => {
                     </div>
                 </Dialog>
 
-                <div className="p-d-flex p-jc-center">
+                <div className="flex justify-content-center">
                     <div className="card">
-                        <h5 className="p-text-center">Register</h5>
+                        <h5 className="text-center">Register</h5>
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
-                            <div className="p-field">
+                            <div className="field">
                                 <span className="p-float-label">
                                     <Controller name="name" control={control} rules={{ required: 'Name is required.' }} render={({ field, fieldState }) => (
                                         <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
@@ -100,7 +100,7 @@ const ReactHookFormDemo = () => {
                                 </span>
                                 {getFormErrorMessage('name')}
                             </div>
-                            <div className="p-field">
+                            <div className="field">
                                 <span className="p-float-label p-input-icon-right">
                                     <i className="pi pi-envelope" />
                                     <Controller name="email" control={control}
@@ -112,7 +112,7 @@ const ReactHookFormDemo = () => {
                                 </span>
                                 {getFormErrorMessage('email')}
                             </div>
-                            <div className="p-field">
+                            <div className="field">
                                 <span className="p-float-label">
                                     <Controller name="password" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
                                         <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
@@ -121,7 +121,7 @@ const ReactHookFormDemo = () => {
                                 </span>
                                 {getFormErrorMessage('password')}
                             </div>
-                            <div className="p-field">
+                            <div className="field">
                                 <span className="p-float-label">
                                     <Controller name="date" control={control} render={({ field }) => (
                                         <Calendar id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />
@@ -129,7 +129,7 @@ const ReactHookFormDemo = () => {
                                     <label htmlFor="date">Birthday</label>
                                 </span>
                             </div>
-                            <div className="p-field">
+                            <div className="field">
                                 <span className="p-float-label">
                                     <Controller name="country" control={control} render={({ field }) => (
                                         <Dropdown id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} options={countries} optionLabel="name" />
@@ -137,14 +137,14 @@ const ReactHookFormDemo = () => {
                                     <label htmlFor="country">Country</label>
                                 </span>
                             </div>
-                            <div className="p-field-checkbox">
+                            <div className="field-checkbox">
                                 <Controller name="accept" control={control} rules={{ required: true }} render={({ field, fieldState }) => (
                                     <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />
                                 )} />
                                 <label htmlFor="accept" className={classNames({ 'p-error': errors.accept })}>I agree to the terms and conditions*</label>
                             </div>
 
-                            <Button type="submit" label="Submit" className="p-mt-2" />
+                            <Button type="submit" label="Submit" className="mt-2" />
                         </form>
                     </div>
                 </div>
@@ -206,13 +206,13 @@ export const ReactHookFormDemo = () => {
         return errors[name] && <small className="p-error">{errors[name].message}</small>
     };
 
-    const dialogFooter = <div className="p-d-flex p-jc-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
+    const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
     const passwordHeader = <h6>Pick a password</h6>;
     const passwordFooter = (
         <React.Fragment>
             <Divider />
-            <p className="p-mt-2">Suggestions</p>
-            <ul className="p-pl-2 p-ml-2 p-mt-0" style={{ lineHeight: '1.5' }}>
+            <p className="mt-2">Suggestions</p>
+            <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: '1.5' }}>
                 <li>At least one lowercase</li>
                 <li>At least one uppercase</li>
                 <li>At least one numeric</li>
@@ -224,7 +224,7 @@ export const ReactHookFormDemo = () => {
     return (
         <div className="form-demo">
             <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
-                <div className="p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
+                <div className="flex justify-content-center flex-column pt-6 px-3">
                     <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
                     <h5>Registration Successful!</h5>
                     <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
@@ -233,11 +233,11 @@ export const ReactHookFormDemo = () => {
                 </div>
             </Dialog>
 
-            <div className="p-d-flex p-jc-center">
+            <div className="flex justify-content-center">
                 <div className="card">
-                    <h5 className="p-text-center">Register</h5>
+                    <h5 className="text-center">Register</h5>
                     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
-                        <div className="p-field">
+                        <div className="field">
                             <span className="p-float-label">
                                 <Controller name="name" control={control} rules={{ required: 'Name is required.' }} render={({ field, fieldState }) => (
                                     <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
@@ -246,7 +246,7 @@ export const ReactHookFormDemo = () => {
                             </span>
                             {getFormErrorMessage('name')}
                         </div>
-                        <div className="p-field">
+                        <div className="field">
                             <span className="p-float-label p-input-icon-right">
                                 <i className="pi pi-envelope" />
                                 <Controller name="email" control={control}
@@ -258,7 +258,7 @@ export const ReactHookFormDemo = () => {
                             </span>
                             {getFormErrorMessage('email')}
                         </div>
-                        <div className="p-field">
+                        <div className="field">
                             <span className="p-float-label">
                                 <Controller name="password" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
                                     <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
@@ -267,7 +267,7 @@ export const ReactHookFormDemo = () => {
                             </span>
                             {getFormErrorMessage('password')}
                         </div>
-                        <div className="p-field">
+                        <div className="field">
                             <span className="p-float-label">
                                 <Controller name="date" control={control} render={({ field }) => (
                                     <Calendar id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />
@@ -275,7 +275,7 @@ export const ReactHookFormDemo = () => {
                                 <label htmlFor="date">Birthday</label>
                             </span>
                         </div>
-                        <div className="p-field">
+                        <div className="field">
                             <span className="p-float-label">
                                 <Controller name="country" control={control} render={({ field }) => (
                                     <Dropdown id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} options={countries} optionLabel="name" />
@@ -283,14 +283,14 @@ export const ReactHookFormDemo = () => {
                                 <label htmlFor="country">Country</label>
                             </span>
                         </div>
-                        <div className="p-field-checkbox">
+                        <div className="field-checkbox">
                             <Controller name="accept" control={control} rules={{ required: true }} render={({ field, fieldState }) => (
                                 <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />
                             )} />
                             <label htmlFor="accept" className={classNames({ 'p-error': errors.accept })}>I agree to the terms and conditions*</label>
                         </div>
 
-                        <Button type="submit" label="Submit" className="p-mt-2" />
+                        <Button type="submit" label="Submit" className="mt-2" />
                     </form>
                 </div>
             </div>
@@ -347,13 +347,13 @@ export const ReactHookFormDemo = () => {
         return errors[name] && <small className="p-error">{errors[name].message}</small>
     };
 
-    const dialogFooter = <div className="p-d-flex p-jc-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
+    const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
     const passwordHeader = <h6>Pick a password</h6>;
     const passwordFooter = (
         <React.Fragment>
             <Divider />
-            <p className="p-mt-2">Suggestions</p>
-            <ul className="p-pl-2 p-ml-2 p-mt-0" style={{ lineHeight: '1.5' }}>
+            <p className="mt-2">Suggestions</p>
+            <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: '1.5' }}>
                 <li>At least one lowercase</li>
                 <li>At least one uppercase</li>
                 <li>At least one numeric</li>
@@ -365,7 +365,7 @@ export const ReactHookFormDemo = () => {
     return (
         <div className="form-demo">
             <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
-                <div className="p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
+                <div className="flex justify-content-center flex-column pt-6 px-3">
                     <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
                     <h5>Registration Successful!</h5>
                     <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
@@ -374,11 +374,11 @@ export const ReactHookFormDemo = () => {
                 </div>
             </Dialog>
 
-            <div className="p-d-flex p-jc-center">
+            <div className="flex justify-content-center">
                 <div className="card">
-                    <h5 className="p-text-center">Register</h5>
+                    <h5 className="text-center">Register</h5>
                     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
-                        <div className="p-field">
+                        <div className="field">
                             <span className="p-float-label">
                                 <Controller name="name" control={control} rules={{ required: 'Name is required.' }} render={({ field, fieldState }) => (
                                     <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
@@ -387,7 +387,7 @@ export const ReactHookFormDemo = () => {
                             </span>
                             {getFormErrorMessage('name')}
                         </div>
-                        <div className="p-field">
+                        <div className="field">
                             <span className="p-float-label p-input-icon-right">
                                 <i className="pi pi-envelope" />
                                 <Controller name="email" control={control}
@@ -399,7 +399,7 @@ export const ReactHookFormDemo = () => {
                             </span>
                             {getFormErrorMessage('email')}
                         </div>
-                        <div className="p-field">
+                        <div className="field">
                             <span className="p-float-label">
                                 <Controller name="password" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
                                     <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
@@ -408,7 +408,7 @@ export const ReactHookFormDemo = () => {
                             </span>
                             {getFormErrorMessage('password')}
                         </div>
-                        <div className="p-field">
+                        <div className="field">
                             <span className="p-float-label">
                                 <Controller name="date" control={control} render={({ field }) => (
                                     <Calendar id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />
@@ -416,7 +416,7 @@ export const ReactHookFormDemo = () => {
                                 <label htmlFor="date">Birthday</label>
                             </span>
                         </div>
-                        <div className="p-field">
+                        <div className="field">
                             <span className="p-float-label">
                                 <Controller name="country" control={control} render={({ field }) => (
                                     <Dropdown id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} options={countries} optionLabel="name" />
@@ -424,14 +424,14 @@ export const ReactHookFormDemo = () => {
                                 <label htmlFor="country">Country</label>
                             </span>
                         </div>
-                        <div className="p-field-checkbox">
+                        <div className="field-checkbox">
                             <Controller name="accept" control={control} rules={{ required: true }} render={({ field, fieldState }) => (
                                 <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />
                             )} />
                             <label htmlFor="accept" className={classNames({ 'p-error': errors.accept })}>I agree to the terms and conditions*</label>
                         </div>
 
-                        <Button type="submit" label="Submit" className="p-mt-2" />
+                        <Button type="submit" label="Submit" className="mt-2" />
                     </form>
                 </div>
             </div>
@@ -451,7 +451,7 @@ export const ReactHookFormDemo = () => {
 .form-demo .card form {
     margin-top: 2rem;
 }
-.form-demo .card .p-field {
+.form-demo .card .field {
     margin-bottom: 1.5rem;
 }
 @media screen and (max-width: 960px) {

@@ -23,7 +23,7 @@ export default class RippleDemo extends Component {
                 </div>
 
                 <div className="content-section implementation ripple-demo">
-                    <div className="card-container p-d-flex">
+                    <div className="card-container flex">
                         <div className="card primary-box p-ripple">
                             Default
                             <Ripple />

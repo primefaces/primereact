@@ -177,7 +177,7 @@ export class DropdownDemo extends Component {
 
     groupedItemTemplate(option) {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={option.label} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>
@@ -208,7 +208,7 @@ export class DropdownDemo extends Component {
                     <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                     <Dropdown value={this.state.selectedItem2} options={this.state.lazyItems} onChange={this.onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 38, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
                         return (
-                            <div className="p-d-flex p-ai-center p-p-2" style={{ height: '38px' }}>
+                            <div className="flex align-items-center p-2" style={{ height: '38px' }}>
                                 <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
                             </div>
                         )}
@@ -372,7 +372,7 @@ const DropdownDemo = () => {
 
     const groupedItemTemplate = (option) => {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={option.label} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>
@@ -402,7 +402,7 @@ const DropdownDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="p-d-flex p-ai-center p-p-2" style={{ height: '38px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '38px' }}>
                             <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
                         </div>
                     )}
@@ -565,7 +565,7 @@ const DropdownDemo = () => {
 
     const groupedItemTemplate = (option: any) => {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={option.label} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>
@@ -595,7 +595,7 @@ const DropdownDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="p-d-flex p-ai-center p-p-2" style={{ height: '38px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '38px' }}>
                             <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
                         </div>
                     )}
@@ -762,7 +762,7 @@ const DropdownDemo = () => {
 
     const groupedItemTemplate = (option) => {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={option.label} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>
@@ -792,7 +792,7 @@ const DropdownDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="p-d-flex p-ai-center p-p-2" style={{ height: '38px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '38px' }}>
                             <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
                         </div>
                     )}

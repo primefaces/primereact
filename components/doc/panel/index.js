@@ -27,8 +27,8 @@ export class PanelDemo extends Component {
 
     template(options) {
         const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
-        const className = \`\${options.className} p-jc-start\`;
-        const titleClassName = \`\${options.titleClassName} p-pl-1\`;
+        const className = \`\${options.className} justify-content-start\`;
+        const titleClassName = \`\${options.titleClassName} pl-1\`;
 
         return (
             <div className={className}>
@@ -85,8 +85,8 @@ import { Ripple } from 'primereact/ripple';
 const PanelDemo = () => {
     const template = (options) => {
         const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
-        const className = \`\${options.className} p-jc-start\`;
-        const titleClassName = \`\${options.titleClassName} p-pl-1\`;
+        const className = \`\${options.className} justify-content-start\`;
+        const titleClassName = \`\${options.titleClassName} pl-1\`;
 
         return (
             <div className={className}>
@@ -141,8 +141,8 @@ import { Ripple } from 'primereact/ripple';
 const PanelDemo = () => {
     const template = (options) => {
         const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
-        const className = \`\${options.className} p-jc-start\`;
-        const titleClassName = \`\${options.titleClassName} p-pl-1\`;
+        const className = \`\${options.className} justify-content-start\`;
+        const titleClassName = \`\${options.titleClassName} pl-1\`;
 
         return (
             <div className={className}>
@@ -200,8 +200,8 @@ const { Ripple } = primereact.core;
 const PanelDemo = () => {
     const template = (options) => {
         const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
-        const className = \`\${options.className} p-jc-start\`;
-        const titleClassName = \`\${options.titleClassName} p-pl-1\`;
+        const className = \`\${options.className} justify-content-start\`;
+        const titleClassName = \`\${options.titleClassName} pl-1\`;
 
         return (
             <div className={className}>

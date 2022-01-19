@@ -30,7 +30,7 @@ export class TriStateCheckboxDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <div className="p-field-checkbox p-m-0">
+                    <div className="field-checkbox m-0">
                         <TriStateCheckbox value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
                         <label>{String(this.state.value)}</label>
                     </div>
@@ -53,7 +53,7 @@ const TriStateCheckboxDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-field-checkbox p-m-0">
+                <div className="field-checkbox m-0">
                     <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
                     <label>{String(value)}</label>
                 </div>
@@ -75,7 +75,7 @@ const TriStateCheckboxDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-field-checkbox p-m-0">
+                <div className="field-checkbox m-0">
                     <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
                     <label>{String(value)}</label>
                 </div>
@@ -100,7 +100,7 @@ const TriStateCheckboxDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-field-checkbox p-m-0">
+                <div className="field-checkbox m-0">
                     <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
                     <label>{String(value)}</label>
                 </div>

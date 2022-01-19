@@ -34,19 +34,19 @@ export class RadioButtonDemo extends Component {
             <div>
                 <div className="card">
                     <h5>Basic</h5>
-                    <div className="p-field-radiobutton">
+                    <div className="field-radiobutton">
                         <RadioButton inputId="city1" name="city" value="Chicago" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Chicago'} />
                         <label htmlFor="city1">Chicago</label>
                     </div>
-                    <div className="p-field-radiobutton">
+                    <div className="field-radiobutton">
                         <RadioButton inputId="city2" name="city" value="Los Angeles" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Los Angeles'} />
                         <label htmlFor="city2">Los Angeles</label>
                     </div>
-                    <div className="p-field-radiobutton">
+                    <div className="field-radiobutton">
                         <RadioButton inputId="city3" name="city" value="New York" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'New York'} />
                         <label htmlFor="city3">New York</label>
                     </div>
-                    <div className="p-field-radiobutton">
+                    <div className="field-radiobutton">
                         <RadioButton inputId="city4" name="city" value="San Francisco" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'San Francisco'} />
                         <label htmlFor="city4">San Francisco</label>
                     </div>
@@ -55,7 +55,7 @@ export class RadioButtonDemo extends Component {
                     {
                         this.categories.map((category) => {
                             return (
-                                <div key={category.key} className="p-field-radiobutton">
+                                <div key={category.key} className="field-radiobutton">
                                     <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => this.setState({selectedCategory: e.value})}  checked={this.state.selectedCategory.key === category.key} disabled={category.key === 'R'} />
                                     <label htmlFor={category.key}>{category.name}</label>
                                 </div>
@@ -84,19 +84,19 @@ const RadioButtonDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city1" name="city" value="Chicago" onChange={(e) => setCity(e.value)} checked={city === 'Chicago'} />
                     <label htmlFor="city1">Chicago</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city2" name="city" value="Los Angeles" onChange={(e) => setCity(e.value)} checked={city === 'Los Angeles'} />
                     <label htmlFor="city2">Los Angeles</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city3" name="city" value="New York" onChange={(e) => setCity(e.value)} checked={city === 'New York'} />
                     <label htmlFor="city3">New York</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city4" name="city" value="San Francisco" onChange={(e) => setCity(e.value)} checked={city === 'San Francisco'} />
                     <label htmlFor="city4">San Francisco</label>
                 </div>
@@ -105,7 +105,7 @@ const RadioButtonDemo = () => {
                 {
                     categories.map((category) => {
                         return (
-                            <div key={category.key} className="p-field-radiobutton">
+                            <div key={category.key} className="field-radiobutton">
                                 <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)}  checked={selectedCategory.key === category.key} disabled={category.key === 'R'} />
                                 <label htmlFor={category.key}>{category.name}</label>
                             </div>
@@ -133,19 +133,19 @@ const RadioButtonDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city1" name="city" value="Chicago" onChange={(e) => setCity(e.value)} checked={city === 'Chicago'} />
                     <label htmlFor="city1">Chicago</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city2" name="city" value="Los Angeles" onChange={(e) => setCity(e.value)} checked={city === 'Los Angeles'} />
                     <label htmlFor="city2">Los Angeles</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city3" name="city" value="New York" onChange={(e) => setCity(e.value)} checked={city === 'New York'} />
                     <label htmlFor="city3">New York</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city4" name="city" value="San Francisco" onChange={(e) => setCity(e.value)} checked={city === 'San Francisco'} />
                     <label htmlFor="city4">San Francisco</label>
                 </div>
@@ -154,7 +154,7 @@ const RadioButtonDemo = () => {
                 {
                     categories.map((category) => {
                         return (
-                            <div key={category.key} className="p-field-radiobutton">
+                            <div key={category.key} className="field-radiobutton">
                                 <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)}  checked={selectedCategory.key === category.key} disabled={category.key === 'R'} />
                                 <label htmlFor={category.key}>{category.name}</label>
                             </div>
@@ -185,19 +185,19 @@ const RadioButtonDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city1" name="city" value="Chicago" onChange={(e) => setCity(e.value)} checked={city === 'Chicago'} />
                     <label htmlFor="city1">Chicago</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city2" name="city" value="Los Angeles" onChange={(e) => setCity(e.value)} checked={city === 'Los Angeles'} />
                     <label htmlFor="city2">Los Angeles</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city3" name="city" value="New York" onChange={(e) => setCity(e.value)} checked={city === 'New York'} />
                     <label htmlFor="city3">New York</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city4" name="city" value="San Francisco" onChange={(e) => setCity(e.value)} checked={city === 'San Francisco'} />
                     <label htmlFor="city4">San Francisco</label>
                 </div>
@@ -206,7 +206,7 @@ const RadioButtonDemo = () => {
                 {
                     categories.map((category) => {
                         return (
-                            <div key={category.key} className="p-field-radiobutton">
+                            <div key={category.key} className="field-radiobutton">
                                 <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)}  checked={selectedCategory.key === category.key} disabled={category.key === 'R'} />
                                 <label htmlFor={category.key}>{category.name}</label>
                             </div>

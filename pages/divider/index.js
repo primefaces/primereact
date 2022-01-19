@@ -88,8 +88,8 @@ export default class DividerDemo extends Component {
                             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
                         <Divider align="left">
-                            <div className="p-d-inline-flex p-ai-center">
-                                <i className="pi pi-user p-mr-2"></i>
+                            <div className="inline-flex align-items-center">
+                                <i className="pi pi-user mr-2"></i>
                                 <b>Icon</b>
                             </div>
                         </Divider>
@@ -117,7 +117,7 @@ export default class DividerDemo extends Component {
 
                     <div className="card">
                         <h5>Vertical</h5>
-                        <div className="p-d-flex">
+                        <div className="flex">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                             ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                                 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -138,26 +138,26 @@ export default class DividerDemo extends Component {
 
                     <div className="card">
                         <h5>Vertical with Content</h5>
-                        <div className="p-grid">
-                            <div className="p-col-5 p-d-flex p-ai-center p-jc-center">
+                        <div className="grid">
+                            <div className="col-5 flex align-items-center justify-content-center">
                                 <div className="p-fluid">
-                                    <div className="p-field">
+                                    <div className="field">
                                         <label htmlFor="username">Username</label>
                                         <InputText id="username" type="text" />
                                     </div>
-                                    <div className="p-field">
+                                    <div className="field">
                                         <label htmlFor="password">Password</label>
                                         <InputText id="password" type="password" />
                                     </div>
                                     <Button label="Login"></Button>
                                 </div>
                             </div>
-                            <div className="p-col-2">
+                            <div className="col-2">
                                 <Divider layout="vertical">
                                     <b>OR</b>
                                 </Divider>
                             </div>
-                            <div className="p-col-5 p-d-flex p-ai-center p-jc-center">
+                            <div className="col-5 flex align-items-center justify-content-center">
                                 <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Button>
                             </div>
                         </div>

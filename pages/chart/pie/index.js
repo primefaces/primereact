@@ -67,7 +67,7 @@ export default class PieChartDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="card p-d-flex p-jc-center">
+                    <div className="card flex justify-content-center">
                         <AppContentContext.Consumer>
                         {
                             context => {
@@ -135,7 +135,7 @@ export class PieChartDemo extends Component {
 
     render() {
         return (
-            <div className="card p-d-flex p-jc-center">
+            <div className="card flex justify-content-center">
                 <Chart type="pie" data={this.chartData} options={this.lightOptions} style={{ position: 'relative', width: '40%' }} />
             </div>
         )
@@ -180,7 +180,7 @@ const PieChartDemo = () => {
     };
 
     return (
-        <div className="card p-d-flex p-jc-center">
+        <div className="card flex justify-content-center">
             <Chart type="pie" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
     )
@@ -224,7 +224,7 @@ const PieChartDemo = () => {
     };
 
     return (
-        <div className="card p-d-flex p-jc-center">
+        <div className="card flex justify-content-center">
             <Chart type="pie" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
     )

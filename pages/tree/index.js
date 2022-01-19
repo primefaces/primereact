@@ -70,8 +70,8 @@ export default class TreeDemo extends Component {
                         <Tree value={this.state.nodes} />
 
                         <h5>Programmatic Control</h5>
-                        <div className="p-mb-4">
-                            <Button type="button" icon="pi pi-plus" label="Expand All" onClick={this.expandAll} className="p-mr-2" />
+                        <div className="mb-4">
+                            <Button type="button" icon="pi pi-plus" label="Expand All" onClick={this.expandAll} className="mr-2" />
                             <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={this.collapseAll} />
                         </div>
                         <Tree value={this.state.nodes} expandedKeys={this.state.expandedKeys}

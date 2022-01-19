@@ -59,7 +59,7 @@ export default class DataTableScrollDemo extends Component {
 
     balanceTemplate2(rowData) {
         return (
-            <span className="p-text-bold">
+            <span className="font-bold">
                 {this.formatCurrency(rowData.balance)}
             </span>
         )
@@ -95,7 +95,7 @@ export default class DataTableScrollDemo extends Component {
     }
 
     footerTemplate(rowData) {
-        return <td className="p-text-bold">Total Customers: {this.calculateCustomerTotal(rowData.representative.name)}</td>;
+        return <td className="font-bold">Total Customers: {this.calculateCustomerTotal(rowData.representative.name)}</td>;
     }
 
     formatCurrency(value) {
@@ -240,7 +240,7 @@ export default class DataTableScrollDemo extends Component {
                         <h5>Frozen Columns</h5>
                         <ToggleButton checked={this.state.balanceFrozen} onChange={(e) => this.setState({ balanceFrozen: e.value })} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Balance" offLabel="Freeze Balance" style={{ flexGrow: 1, flexBasis: '12rem' }} />
 
-                        <DataTable value={this.state.customers2} scrollable scrollHeight="400px" loading={this.state.loading} scrollDirection="both" className="p-mt-3">
+                        <DataTable value={this.state.customers2} scrollable scrollHeight="400px" loading={this.state.loading} scrollDirection="both" className="mt-3">
                             <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '160px' }} frozen></Column>
                             <Column field="id" header="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
                             <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
@@ -339,7 +339,7 @@ export class DataTableScrollDemo extends Component {
 
     balanceTemplate2(rowData) {
         return (
-            <span className="p-text-bold">
+            <span className="font-bold">
                 {this.formatCurrency(rowData.balance)}
             </span>
         )
@@ -375,7 +375,7 @@ export class DataTableScrollDemo extends Component {
     }
 
     footerTemplate(rowData) {
-        return <td className="p-text-bold">Total Customers: {this.calculateCustomerTotal(rowData.representative.name)}</td>;
+        return <td className="font-bold">Total Customers: {this.calculateCustomerTotal(rowData.representative.name)}</td>;
     }
 
     formatCurrency(value) {
@@ -506,7 +506,7 @@ export class DataTableScrollDemo extends Component {
                     <h5>Frozen Columns</h5>
                     <ToggleButton checked={this.state.balanceFrozen} onChange={(e) => this.setState({ balanceFrozen: e.value })} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Balance" offLabel="Freeze Balance" style={{ flexGrow: 1, flexBasis: '12rem' }} />
 
-                    <DataTable value={this.state.customers2} scrollable scrollHeight="400px" loading={this.state.loading} scrollDirection="both" className="p-mt-3">
+                    <DataTable value={this.state.customers2} scrollable scrollHeight="400px" loading={this.state.loading} scrollDirection="both" className="mt-3">
                         <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '160px' }} frozen></Column>
                         <Column field="id" header="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
                         <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
@@ -608,7 +608,7 @@ const DataTableScrollDemo = () => {
 
     const balanceTemplate2 = (rowData) => {
         return (
-            <span className="p-text-bold">
+            <span className="font-bold">
                 {formatCurrency(rowData.balance)}
             </span>
         )
@@ -644,7 +644,7 @@ const DataTableScrollDemo = () => {
     }
 
     const footerTemplate = (rowData) => {
-        return <td className="p-text-bold">Total Customers: {calculateCustomerTotal(rowData.representative.name)}</td>;
+        return <td className="font-bold">Total Customers: {calculateCustomerTotal(rowData.representative.name)}</td>;
     }
 
     const formatCurrency = (value) => {
@@ -745,7 +745,7 @@ const DataTableScrollDemo = () => {
                 <h5>Frozen Columns</h5>
                 <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Balance" offLabel="Freeze Balance" style={{ flexGrow: 1, flexBasis: '12rem' }} />
 
-                <DataTable value={customers2} scrollable scrollHeight="400px" loading={loading} scrollDirection="both" className="p-mt-3">
+                <DataTable value={customers2} scrollable scrollHeight="400px" loading={loading} scrollDirection="both" className="mt-3">
                     <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '160px' }} frozen></Column>
                     <Column field="id" header="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
                     <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
@@ -846,7 +846,7 @@ const DataTableScrollDemo = () => {
 
     const balanceTemplate2 = (rowData) => {
         return (
-            <span className="p-text-bold">
+            <span className="font-bold">
                 {formatCurrency(rowData.balance)}
             </span>
         )
@@ -882,7 +882,7 @@ const DataTableScrollDemo = () => {
     }
 
     const footerTemplate = (rowData) => {
-        return <td className="p-text-bold">Total Customers: {calculateCustomerTotal(rowData.representative.name)}</td>;
+        return <td className="font-bold">Total Customers: {calculateCustomerTotal(rowData.representative.name)}</td>;
     }
 
     const formatCurrency = (value) => {
@@ -983,7 +983,7 @@ const DataTableScrollDemo = () => {
                 <h5>Frozen Columns</h5>
                 <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Balance" offLabel="Freeze Balance" style={{ flexGrow: 1, flexBasis: '12rem' }} />
 
-                <DataTable value={customers2} scrollable scrollHeight="400px" loading={loading} scrollDirection="both" className="p-mt-3">
+                <DataTable value={customers2} scrollable scrollHeight="400px" loading={loading} scrollDirection="both" className="mt-3">
                     <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '160px' }} frozen></Column>
                     <Column field="id" header="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
                     <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
@@ -1094,7 +1094,7 @@ const DataTableScrollDemo = () => {
 
     const balanceTemplate2 = (rowData) => {
         return (
-            <span className="p-text-bold">
+            <span className="font-bold">
                 {formatCurrency(rowData.balance)}
             </span>
         )
@@ -1130,7 +1130,7 @@ const DataTableScrollDemo = () => {
     }
 
     const footerTemplate = (rowData) => {
-        return <td className="p-text-bold">Total Customers: {calculateCustomerTotal(rowData.representative.name)}</td>;
+        return <td className="font-bold">Total Customers: {calculateCustomerTotal(rowData.representative.name)}</td>;
     }
 
     const formatCurrency = (value) => {
@@ -1231,7 +1231,7 @@ const DataTableScrollDemo = () => {
                 <h5>Frozen Columns</h5>
                 <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Balance" offLabel="Freeze Balance" style={{ flexGrow: 1, flexBasis: '12rem' }} />
 
-                <DataTable value={customers2} scrollable scrollHeight="400px" loading={loading} scrollDirection="both" className="p-mt-3">
+                <DataTable value={customers2} scrollable scrollHeight="400px" loading={loading} scrollDirection="both" className="mt-3">
                     <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '160px' }} frozen></Column>
                     <Column field="id" header="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
                     <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>

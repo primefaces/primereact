@@ -123,7 +123,7 @@ export default class AutoCompleteDemo extends Component {
 
     groupedItemTemplate(item) {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={item.name} src={`${this.contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${item.code.toLowerCase()}`} />
                 <div>{item.label}</div>
             </div>
@@ -138,7 +138,7 @@ export default class AutoCompleteDemo extends Component {
                     <meta name="description" content="AutoComplete is an input component that provides real-time suggestions when being typed." />
                 </Head>
                 <div className="content-section introduction">
-                    <div className="featur-intro">
+                    <div className="feature-intro">
                         <h1>AutoComplete</h1>
                         <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
                     </div>

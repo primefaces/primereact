@@ -78,13 +78,13 @@ export default class SplitButtonDemo extends Component {
                         <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.items}></SplitButton>
 
                         <h5>Severities</h5>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-mr-2"></SplitButton>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-secondary p-mr-2"></SplitButton>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-success p-mr-2"></SplitButton>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-info p-mr-2"></SplitButton>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-warning p-mr-2"></SplitButton>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-help p-mr-2"></SplitButton>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-danger p-mr-2"></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="mr-2"></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-secondary mr-2"></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-success mr-2"></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-info mr-2"></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-warning mr-2"></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-help mr-2"></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-danger mr-2"></SplitButton>
                     </div>
                 </div>
 

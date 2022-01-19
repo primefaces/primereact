@@ -95,7 +95,7 @@ export class ListBoxDemo extends Component {
 
     groupedItemTemplate(option) {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>
@@ -201,7 +201,7 @@ const ListBoxDemo = () => {
 
     const groupedItemTemplate = (option) => {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>
@@ -305,7 +305,7 @@ const ListBoxDemo = () => {
 
     const groupedItemTemplate = (option) => {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>
@@ -412,7 +412,7 @@ const ListBoxDemo = () => {
 
     const groupedItemTemplate = (option) => {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>

@@ -54,9 +54,9 @@ export class InplaceDemo extends Component {
                     <h5>Image</h5>
                     <Inplace>
                         <InplaceDisplay>
-                            <span className="p-d-inline-flex p-align-center">
+                            <span className="inline-flex align-items-center">
                                 <span className="pi pi-search"></span>
-                                <span className="p-ml-2">View Picture</span>
+                                <span className="ml-2">View Picture</span>
                             </span>
                         </InplaceDisplay>
                         <InplaceContent>
@@ -120,9 +120,9 @@ const InplaceDemo = () => {
                 <h5>Image</h5>
                 <Inplace>
                     <InplaceDisplay>
-                        <span className="p-d-inline-flex p-align-center">
+                        <span className="inline-flex align-items-center">
                             <span className="pi pi-search"></span>
-                            <span className="p-ml-2">View Picture</span>
+                            <span className="ml-2">View Picture</span>
                         </span>
                     </InplaceDisplay>
                     <InplaceContent>
@@ -185,9 +185,9 @@ const InplaceDemo = () => {
                 <h5>Image</h5>
                 <Inplace>
                     <InplaceDisplay>
-                        <span className="p-d-inline-flex p-align-center">
+                        <span className="inline-flex align-items-center">
                             <span className="pi pi-search"></span>
-                            <span className="p-ml-2">View Picture</span>
+                            <span className="ml-2">View Picture</span>
                         </span>
                     </InplaceDisplay>
                     <InplaceContent>
@@ -256,9 +256,9 @@ const InplaceDemo = () => {
                 <h5>Image</h5>
                 <Inplace>
                     <InplaceDisplay>
-                        <span className="p-d-inline-flex p-align-center">
+                        <span className="inline-flex align-items-center">
                             <span className="pi pi-search"></span>
-                            <span className="p-ml-2">View Picture</span>
+                            <span className="ml-2">View Picture</span>
                         </span>
                     </InplaceDisplay>
                     <InplaceContent>

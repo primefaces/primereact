@@ -117,8 +117,8 @@ export class DataTableDemo extends Component {
 
     renderHeader() {
         return (
-            <div className="p-d-flex p-jc-between p-ai-center">
-                <h5 className="p-m-0">Customers</h5>
+            <div className="flex justify-content-between align-items-center">
+                <h5 className="m-0">Customers</h5>
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
                     <InputText value={this.state.globalFilterValue} onChange={this.onGlobalFilterChange} placeholder="Keyword Search" />
@@ -149,7 +149,7 @@ export class DataTableDemo extends Component {
     representativeFilterTemplate(options) {
         return (
             <React.Fragment>
-                <div className="p-mb-3 p-text-bold">Agent Picker</div>
+                <div className="mb-3 font-bold">Agent Picker</div>
                 <MultiSelect value={options.value} options={this.representatives} itemTemplate={this.representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />
             </React.Fragment>
         );
@@ -199,8 +199,8 @@ export class DataTableDemo extends Component {
     activityFilterTemplate(options) {
         return (
             <React.Fragment>
-                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
-                <div className="p-d-flex p-ai-center p-jc-between p-px-2">
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3"></Slider>
+                <div className="flex align-items-center justify-content-between px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
@@ -337,8 +337,8 @@ const DataTableDemo = () => {
 
     const renderHeader = () => {
         return (
-            <div className="p-d-flex p-jc-between p-ai-center">
-                <h5 className="p-m-0">Customers</h5>
+            <div className="flex justify-content-between align-items-center">
+                <h5 className="m-0">Customers</h5>
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
                     <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
@@ -369,7 +369,7 @@ const DataTableDemo = () => {
     const representativeFilterTemplate = (options) => {
         return (
             <React.Fragment>
-                <div className="p-mb-3 p-text-bold">Agent Picker</div>
+                <div className="mb-3 font-bold">Agent Picker</div>
                 <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />
             </React.Fragment>
         );
@@ -419,8 +419,8 @@ const DataTableDemo = () => {
     const activityFilterTemplate = (options) => {
         return (
             <React.Fragment>
-                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
-                <div className="p-d-flex p-ai-center p-jc-between p-px-2">
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3"></Slider>
+                <div className="flex align-items-center justify-content-between px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
@@ -555,8 +555,8 @@ const DataTableDemo = () => {
 
     const renderHeader = () => {
         return (
-            <div className="p-d-flex p-jc-between p-ai-center">
-                <h5 className="p-m-0">Customers</h5>
+            <div className="flex justify-content-between align-items-center">
+                <h5 className="m-0">Customers</h5>
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
                     <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
@@ -587,7 +587,7 @@ const DataTableDemo = () => {
     const representativeFilterTemplate = (options) => {
         return (
             <React.Fragment>
-                <div className="p-mb-3 p-text-bold">Agent Picker</div>
+                <div className="mb-3 font-bold">Agent Picker</div>
                 <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />
             </React.Fragment>
         );
@@ -637,8 +637,8 @@ const DataTableDemo = () => {
     const activityFilterTemplate = (options) => {
         return (
             <React.Fragment>
-                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
-                <div className="p-d-flex p-ai-center p-jc-between p-px-2">
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3"></Slider>
+                <div className="flex align-items-center justify-content-between px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
@@ -781,8 +781,8 @@ const DataTableDemo = () => {
 
     const renderHeader = () => {
         return (
-            <div className="p-d-flex p-jc-between p-ai-center">
-                <h5 className="p-m-0">Customers</h5>
+            <div className="flex justify-content-between align-items-center">
+                <h5 className="m-0">Customers</h5>
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
                     <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
@@ -813,7 +813,7 @@ const DataTableDemo = () => {
     const representativeFilterTemplate = (options) => {
         return (
             <React.Fragment>
-                <div className="p-mb-3 p-text-bold">Agent Picker</div>
+                <div className="mb-3 font-bold">Agent Picker</div>
                 <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />
             </React.Fragment>
         );
@@ -863,8 +863,8 @@ const DataTableDemo = () => {
     const activityFilterTemplate = (options) => {
         return (
             <>
-                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
-                <div className="p-d-flex p-ai-center p-jc-between p-px-2">
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3"></Slider>
+                <div className="flex align-items-center justify-content-between px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
@@ -2480,7 +2480,7 @@ export const DataTableRowExpansionDemo = () => {
 
     const header = (
         <div className="table-header-container">
-            <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} className="p-mr-2" />
+            <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
             <Button icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
         </div>
     );

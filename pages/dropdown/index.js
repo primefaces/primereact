@@ -169,7 +169,7 @@ export default class DropdownDemo extends Component {
 
     groupedItemTemplate(option) {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center untry-item">
                 <img alt={option.label} src={`${this.contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
                 <div>{option.label}</div>
             </div>
@@ -214,7 +214,7 @@ export default class DropdownDemo extends Component {
                         <Dropdown value={this.state.selectedItem2} options={this.state.lazyItems} onChange={this.onLazyItemChange} virtualScrollerOptions={{
                             lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 38, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
                                 return (
-                                    <div className="p-d-flex p-ai-center p-p-2" style={{ height: '38px' }}>
+                                    <div className="flex align-items-center p-2" style={{ height: '38px' }}>
                                         <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
                                     </div>
                                 )

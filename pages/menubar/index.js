@@ -142,7 +142,7 @@ export default class MenubarDemo extends Component {
 
     render() {
         const contextPath = getConfig().publicRuntimeConfig.contextPath;
-        const start = <img alt="logo" src={`${contextPath}/images/logo.png`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="p-mr-2"></img>;
+        const start = <img alt="logo" src={`${contextPath}/images/logo.png`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
         const end = <InputText placeholder="Search" type="text" />;
 
         return (

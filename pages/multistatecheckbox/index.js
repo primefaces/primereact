@@ -38,7 +38,7 @@ export default class MultiStateCheckboxDemo extends Component {
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <div className="p-field-checkbox p-m-0">
+                        <div className="field-checkbox m-0">
                             <MultiStateCheckbox value={this.state.value} options={this.options} optionValue="value" onChange={(e) => this.setState({ value: e.value })} />
                             <label>{this.state.value}</label>
                         </div>

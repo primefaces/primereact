@@ -119,7 +119,7 @@ export default class DataTableRowExpansionDemo extends Component {
     render() {
         const header = (
             <div className="table-header-container">
-                <Button icon="pi pi-plus" label="Expand All" onClick={this.expandAll} className="p-mr-2" />
+                <Button icon="pi pi-plus" label="Expand All" onClick={this.expandAll} className="mr-2" />
                 <Button icon="pi pi-minus" label="Collapse All" onClick={this.collapseAll} />
             </div>
         );
@@ -288,7 +288,7 @@ export class DataTableRowExpansionDemo extends Component {
     render() {
         const header = (
             <div className="table-header-container">
-                <Button icon="pi pi-plus" label="Expand All" onClick={this.expandAll} className="p-mr-2" />
+                <Button icon="pi pi-plus" label="Expand All" onClick={this.expandAll} className="mr-2" />
                 <Button icon="pi pi-minus" label="Collapse All" onClick={this.collapseAll} />
             </div>
         );
@@ -416,7 +416,7 @@ const DataTableRowExpansionDemo = () => {
 
     const header = (
         <div className="table-header-container">
-            <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} className="p-mr-2" />
+            <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
             <Button icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
         </div>
     );
@@ -543,7 +543,7 @@ const DataTableRowExpansionDemo = () => {
 
     const header = (
         <div className="table-header-container">
-            <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} className="p-mr-2" />
+            <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
             <Button icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
         </div>
     );
@@ -682,7 +682,7 @@ const DataTableRowExpansionDemo = () => {
 
     const header = (
         <div className="table-header-container">
-            <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} className="p-mr-2" />
+            <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
             <Button icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
         </div>
     );

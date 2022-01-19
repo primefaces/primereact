@@ -71,11 +71,11 @@ export default class ColorsDemo extends Component {
 </CodeHighlight>
 
                     <div className="card">
-                        <div className="p-d-flex p-flex-wrap">
+                        <div className="flex flex-wrap">
                             {
                                 colors.map((color) => {
                                     return (
-                                        <div key={color} className="color-stack p-mr-6 p-mb-6">
+                                        <div key={color} className="color-stack mr-6 mb-6">
                                             {
                                                 shades.map(shade => {
                                                     return (

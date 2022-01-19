@@ -37,7 +37,7 @@ export class TabViewDemo extends Component {
     tabHeaderITemplate(options) {
         return (
             <button type="button" onClick={options.onClick} className={options.className}>
-                <i className="pi pi-prime p-mr-2" />
+                <i className="pi pi-prime mr-2" />
                 {options.titleElement}
             </button>
         );
@@ -51,14 +51,14 @@ export class TabViewDemo extends Component {
         ];
 
         return (
-            <SplitButton label="Header III" icon="pi pi-plus" onClick={options.onClick} className="p-px-2" model={items}></SplitButton>
+            <SplitButton label="Header III" icon="pi pi-plus" onClick={options.onClick} className="px-2" model={items}></SplitButton>
         )
     }
 
     tabHeaderIITemplate(options) {
         return (
-            <div className="p-d-flex p-ai-center p-px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="images/avatar/amyelsner.png" onImageError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} shape="circle" className="p-mx-2" />
+            <div className="flex align-items-center px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
+                <Avatar image="images/avatar/amyelsner.png" onImageError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} shape="circle" className="mx-2" />
                 Amy Elsner
             </div>
         )
@@ -92,9 +92,9 @@ export class TabViewDemo extends Component {
 
                 <div className="card">
                     <h5>Programmatic</h5>
-                    <div className="p-pt-2 p-pb-4">
-                        <Button onClick={() => this.setState({ activeIndex1: 0 })} className="p-button-text p-mr-1" label="Activate 1st" />
-                        <Button onClick={() => this.setState({ activeIndex1: 1 })} className="p-button-text p-mr-1" label="Activate 2nd" />
+                    <div className="pt-2 pb-4">
+                        <Button onClick={() => this.setState({ activeIndex1: 0 })} className="p-button-text mr-1" label="Activate 1st" />
+                        <Button onClick={() => this.setState({ activeIndex1: 1 })} className="p-button-text mr-1" label="Activate 2nd" />
                         <Button onClick={() => this.setState({ activeIndex1: 2 })} className="p-button-text" label="Activate 3rd" />
                     </div>
 
@@ -168,12 +168,12 @@ export class TabViewDemo extends Component {
                             ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         </TabPanel>
-                        <TabPanel headerTemplate={this.tabHeaderIITemplate} headerClassName="p-d-flex p-ai-center">
+                        <TabPanel headerTemplate={this.tabHeaderIITemplate} headerClassName="flex align-items-center">
                             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
                             architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
                         voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
                         </TabPanel>
-                        <TabPanel headerTemplate={this.tabHeaderIIITemplate} headerClassName="p-d-flex p-ai-center">
+                        <TabPanel headerTemplate={this.tabHeaderIIITemplate} headerClassName="flex align-items-center">
                             <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
                             cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
                         Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
@@ -204,9 +204,9 @@ export class TabViewDemo extends Component {
 
                 <div className="card">
                     <h5>Scrollable</h5>
-                    <div className="p-py-2">
-                        <Button onClick={() => this.setState({ activeIndex2: 0 })} className="p-button-text p-mr-1" label="Activate 1st" />
-                        <Button onClick={() => this.setState({ activeIndex2: 29 })} className="p-button-text p-mr-1" label="Activate 30th" />
+                    <div className="py-2">
+                        <Button onClick={() => this.setState({ activeIndex2: 0 })} className="p-button-text mr-1" label="Activate 1st" />
+                        <Button onClick={() => this.setState({ activeIndex2: 29 })} className="p-button-text mr-1" label="Activate 30th" />
                         <Button onClick={() => this.setState({ activeIndex2: 49 })} className="p-button-text" label="Activate 50th" />
                     </div>
 
@@ -244,7 +244,7 @@ const TabViewDemo = () => {
     const tabHeaderITemplate = (options) => {
         return (
             <button type="button" onClick={options.onClick} className={options.className}>
-                <i className="pi pi-prime p-mr-2" />
+                <i className="pi pi-prime mr-2" />
                 {options.titleElement}
             </button>
         );
@@ -258,14 +258,14 @@ const TabViewDemo = () => {
         ];
 
         return (
-            <SplitButton label="Header III" icon="pi pi-plus" onClick={options.onClick} className="p-px-2" model={items}></SplitButton>
+            <SplitButton label="Header III" icon="pi pi-plus" onClick={options.onClick} className="px-2" model={items}></SplitButton>
         )
     };
 
     const tabHeaderIITemplate = (options) => {
         return (
-            <div className="p-d-flex p-ai-center p-px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="images/avatar/amyelsner.png" onImageError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} shape="circle" className="p-mx-2" />
+            <div className="flex align-items-center px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
+                <Avatar image="images/avatar/amyelsner.png" onImageError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} shape="circle" className="mx-2" />
                 Amy Elsner
             </div>
         )
@@ -296,9 +296,9 @@ const TabViewDemo = () => {
 
             <div className="card">
                 <h5>Programmatic</h5>
-                <div className="p-pt-2 p-pb-4">
-                    <Button onClick={() => setActiveIndex1(0)} className="p-button-text p-mr-1" label="Activate 1st" />
-                    <Button onClick={() => setActiveIndex1(1)} className="p-button-text p-mr-1" label="Activate 2nd" />
+                <div className="pt-2 pb-4">
+                    <Button onClick={() => setActiveIndex1(0)} className="p-button-text mr-1" label="Activate 1st" />
+                    <Button onClick={() => setActiveIndex1(1)} className="p-button-text mr-1" label="Activate 2nd" />
                     <Button onClick={() => setActiveIndex1(2)} className="p-button-text" label="Activate 3rd" />
                 </div>
 
@@ -372,12 +372,12 @@ const TabViewDemo = () => {
                         ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </TabPanel>
-                    <TabPanel headerTemplate={tabHeaderIITemplate} headerClassName="p-d-flex p-ai-center">
+                    <TabPanel headerTemplate={tabHeaderIITemplate} headerClassName="flex align-items-center">
                         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
                         architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
                     voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
                     </TabPanel>
-                    <TabPanel headerTemplate={tabHeaderIIITemplate} headerClassName="p-d-flex p-ai-center">
+                    <TabPanel headerTemplate={tabHeaderIIITemplate} headerClassName="flex align-items-center">
                         <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
                         cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
                     Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
@@ -408,9 +408,9 @@ const TabViewDemo = () => {
 
             <div className="card">
                 <h5>Scrollable</h5>
-                <div className="p-py-2">
-                    <Button onClick={() => setActiveIndex2(0)} className="p-button-text p-mr-1" label="Activate 1st" />
-                    <Button onClick={() => setActiveIndex2(29)} className="p-button-text p-mr-1" label="Activate 30th" />
+                <div className="py-2">
+                    <Button onClick={() => setActiveIndex2(0)} className="p-button-text mr-1" label="Activate 1st" />
+                    <Button onClick={() => setActiveIndex2(29)} className="p-button-text mr-1" label="Activate 30th" />
                     <Button onClick={() => setActiveIndex2(49)} className="p-button-text" label="Activate 50th" />
                 </div>
 
@@ -447,7 +447,7 @@ const TabViewDemo = () => {
     const tabHeaderITemplate = (options) => {
         return (
             <button type="button" onClick={options.onClick} className={options.className}>
-                <i className="pi pi-prime p-mr-2" />
+                <i className="pi pi-prime mr-2" />
                 {options.titleElement}
             </button>
         );
@@ -461,14 +461,14 @@ const TabViewDemo = () => {
         ];
 
         return (
-            <SplitButton label="Header III" icon="pi pi-plus" onClick={options.onClick} className="p-px-2" model={items}></SplitButton>
+            <SplitButton label="Header III" icon="pi pi-plus" onClick={options.onClick} className="px-2" model={items}></SplitButton>
         )
     };
 
     const tabHeaderIITemplate = (options) => {
         return (
-            <div className="p-d-flex p-ai-center p-px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="images/avatar/amyelsner.png" onImageError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} shape="circle" className="p-mx-2" />
+            <div className="flex align-items-center px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
+                <Avatar image="images/avatar/amyelsner.png" onImageError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} shape="circle" className="mx-2" />
                 Amy Elsner
             </div>
         )
@@ -499,9 +499,9 @@ const TabViewDemo = () => {
 
             <div className="card">
                 <h5>Programmatic</h5>
-                <div className="p-pt-2 p-pb-4">
-                    <Button onClick={() => setActiveIndex1(0)} className="p-button-text p-mr-1" label="Activate 1st" />
-                    <Button onClick={() => setActiveIndex1(1)} className="p-button-text p-mr-1" label="Activate 2nd" />
+                <div className="pt-2 pb-4">
+                    <Button onClick={() => setActiveIndex1(0)} className="p-button-text mr-1" label="Activate 1st" />
+                    <Button onClick={() => setActiveIndex1(1)} className="p-button-text mr-1" label="Activate 2nd" />
                     <Button onClick={() => setActiveIndex1(2)} className="p-button-text" label="Activate 3rd" />
                 </div>
 
@@ -575,12 +575,12 @@ const TabViewDemo = () => {
                         ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </TabPanel>
-                    <TabPanel headerTemplate={tabHeaderIITemplate} headerClassName="p-d-flex p-ai-center">
+                    <TabPanel headerTemplate={tabHeaderIITemplate} headerClassName="flex align-items-center">
                         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
                         architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
                     voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
                     </TabPanel>
-                    <TabPanel headerTemplate={tabHeaderIIITemplate} headerClassName="p-d-flex p-ai-center">
+                    <TabPanel headerTemplate={tabHeaderIIITemplate} headerClassName="flex align-items-center">
                         <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
                         cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
                     Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
@@ -611,9 +611,9 @@ const TabViewDemo = () => {
 
             <div className="card">
                 <h5>Scrollable</h5>
-                <div className="p-py-2">
-                    <Button onClick={() => setActiveIndex2(0)} className="p-button-text p-mr-1" label="Activate 1st" />
-                    <Button onClick={() => setActiveIndex2(29)} className="p-button-text p-mr-1" label="Activate 30th" />
+                <div className="py-2">
+                    <Button onClick={() => setActiveIndex2(0)} className="p-button-text mr-1" label="Activate 1st" />
+                    <Button onClick={() => setActiveIndex2(29)} className="p-button-text mr-1" label="Activate 30th" />
                     <Button onClick={() => setActiveIndex2(49)} className="p-button-text" label="Activate 50th" />
                 </div>
 
@@ -654,7 +654,7 @@ const TabViewDemo = () => {
     const tabHeaderITemplate = (options) => {
         return (
             <button type="button" onClick={options.onClick} className={options.className}>
-                <i className="pi pi-prime p-mr-2" />
+                <i className="pi pi-prime mr-2" />
                 {options.titleElement}
             </button>
         );
@@ -668,14 +668,14 @@ const TabViewDemo = () => {
         ];
 
         return (
-            <SplitButton label="Header III" icon="pi pi-plus" onClick={options.onClick} className="p-px-2" model={items}></SplitButton>
+            <SplitButton label="Header III" icon="pi pi-plus" onClick={options.onClick} className="px-2" model={items}></SplitButton>
         )
     };
 
     const tabHeaderIITemplate = (options) => {
         return (
-            <div className="p-d-flex p-ai-center p-px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
-                <Avatar image="images/avatar/amyelsner.png" onImageError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} shape="circle" className="p-mx-2" />
+            <div className="flex align-items-center px-3" style={{ cursor: 'pointer' }} onClick={options.onClick}>
+                <Avatar image="images/avatar/amyelsner.png" onImageError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} shape="circle" className="mx-2" />
                 Amy Elsner
             </div>
         )
@@ -706,9 +706,9 @@ const TabViewDemo = () => {
 
             <div className="card">
                 <h5>Programmatic</h5>
-                <div className="p-pt-2 p-pb-4">
-                    <Button onClick={() => setActiveIndex1(0)} className="p-button-text p-mr-1" label="Activate 1st" />
-                    <Button onClick={() => setActiveIndex1(1)} className="p-button-text p-mr-1" label="Activate 2nd" />
+                <div className="pt-2 pb-4">
+                    <Button onClick={() => setActiveIndex1(0)} className="p-button-text mr-1" label="Activate 1st" />
+                    <Button onClick={() => setActiveIndex1(1)} className="p-button-text mr-1" label="Activate 2nd" />
                     <Button onClick={() => setActiveIndex1(2)} className="p-button-text" label="Activate 3rd" />
                 </div>
 
@@ -782,12 +782,12 @@ const TabViewDemo = () => {
                         ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </TabPanel>
-                    <TabPanel headerTemplate={tabHeaderIITemplate} headerClassName="p-d-flex p-ai-center">
+                    <TabPanel headerTemplate={tabHeaderIITemplate} headerClassName="flex align-items-center">
                         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
                         architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
                     voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
                     </TabPanel>
-                    <TabPanel headerTemplate={tabHeaderIIITemplate} headerClassName="p-d-flex p-ai-center">
+                    <TabPanel headerTemplate={tabHeaderIIITemplate} headerClassName="flex align-items-center">
                         <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
                         cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
                     Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
@@ -818,9 +818,9 @@ const TabViewDemo = () => {
 
             <div className="card">
                 <h5>Scrollable</h5>
-                <div className="p-py-2">
-                    <Button onClick={() => setActiveIndex2(0)} className="p-button-text p-mr-1" label="Activate 1st" />
-                    <Button onClick={() => setActiveIndex2(29)} className="p-button-text p-mr-1" label="Activate 30th" />
+                <div className="py-2">
+                    <Button onClick={() => setActiveIndex2(0)} className="p-button-text mr-1" label="Activate 1st" />
+                    <Button onClick={() => setActiveIndex2(29)} className="p-button-text mr-1" label="Activate 30th" />
                     <Button onClick={() => setActiveIndex2(49)} className="p-button-text" label="Activate 50th" />
                 </div>
 

@@ -84,7 +84,7 @@ export default class DataTablePaginatorDemo extends Component {
             'PrevPageLink': (options) => {
                 return (
                     <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                        <span className="p-p-3">Previous</span>
+                        <span className="p-3">Previous</span>
                         <Ripple />
                     </button>
                 )
@@ -92,7 +92,7 @@ export default class DataTablePaginatorDemo extends Component {
             'NextPageLink': (options) => {
                 return (
                     <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                        <span className="p-p-3">Next</span>
+                        <span className="p-3">Next</span>
                         <Ripple />
                     </button>
                 )
@@ -123,8 +123,8 @@ export default class DataTablePaginatorDemo extends Component {
             },
             'CurrentPageReport': (options) => {
                 return (
-                    <span className="p-mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                        Go to <InputText size="2" className="p-ml-1" value={this.state.currentPage} tooltip={this.state.pageInputTooltip}
+                    <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
+                        Go to <InputText size="2" className="ml-1" value={this.state.currentPage} tooltip={this.state.pageInputTooltip}
                             onKeyDown={(e) => this.onPageInputKeyDown(e, options)} onChange={this.onPageInputChange}/>
                     </span>
                 )
@@ -141,7 +141,7 @@ export default class DataTablePaginatorDemo extends Component {
 
                 return (
                     <>
-                        <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                        <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                         <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                     </>
                 );
@@ -194,7 +194,7 @@ export default class DataTablePaginatorDemo extends Component {
                         </DataTable>
 
                         <DataTable value={this.state.customers3} paginator paginatorTemplate={template2} first={this.state.first2} rows={this.state.rows2} onPage={this.onCustomPage2}
-                            paginatorClassName="p-jc-end" className="p-mt-6" responsiveLayout="scroll">
+                            paginatorClassName="justify-content-end" className="mt-6" responsiveLayout="scroll">
                             <Column field="name" header="Name"></Column>
                             <Column field="country.name" header="Country"></Column>
                             <Column field="company" header="Company"></Column>
@@ -300,7 +300,7 @@ export class DataTablePaginatorDemo extends Component {
             'PrevPageLink': (options) => {
                 return (
                     <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                        <span className="p-p-3">Previous</span>
+                        <span className="p-3">Previous</span>
                         <Ripple />
                     </button>
                 )
@@ -308,7 +308,7 @@ export class DataTablePaginatorDemo extends Component {
             'NextPageLink': (options) => {
                 return (
                     <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                        <span className="p-p-3">Next</span>
+                        <span className="p-3">Next</span>
                         <Ripple />
                     </button>
                 )
@@ -339,8 +339,8 @@ export class DataTablePaginatorDemo extends Component {
             },
             'CurrentPageReport': (options) => {
                 return (
-                    <span className="p-mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                        Go to <InputText size="2" className="p-ml-1" value={this.state.currentPage} tooltip={this.state.pageInputTooltip}
+                    <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
+                        Go to <InputText size="2" className="ml-1" value={this.state.currentPage} tooltip={this.state.pageInputTooltip}
                             onKeyDown={(e) => this.onPageInputKeyDown(e, options)} onChange={this.onPageInputChange}/>
                     </span>
                 )
@@ -357,7 +357,7 @@ export class DataTablePaginatorDemo extends Component {
 
                 return (
                     <React.Fragment>
-                        <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                        <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                         <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                     </React.Fragment>
                 );
@@ -396,7 +396,7 @@ export class DataTablePaginatorDemo extends Component {
                     </DataTable>
 
                     <DataTable value={this.state.customers3} paginator paginatorTemplate={template2} first={this.state.first2} rows={this.state.rows2} onPage={this.onCustomPage2}
-                        paginatorClassName="p-jc-end" className="p-mt-6" responsiveLayout="scroll">
+                        paginatorClassName="justify-content-end" className="mt-6" responsiveLayout="scroll">
                         <Column field="name" header="Name"></Column>
                         <Column field="country.name" header="Country"></Column>
                         <Column field="company" header="Company"></Column>
@@ -478,7 +478,7 @@ const DataTablePaginatorDemo = () => {
         'PrevPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Previous</span>
+                    <span className="p-3">Previous</span>
                     <Ripple />
                 </button>
             )
@@ -486,7 +486,7 @@ const DataTablePaginatorDemo = () => {
         'NextPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Next</span>
+                    <span className="p-3">Next</span>
                     <Ripple />
                 </button>
             )
@@ -517,8 +517,8 @@ const DataTablePaginatorDemo = () => {
         },
         'CurrentPageReport': (options) => {
             return (
-                <span className="p-mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                    Go to <InputText size="2" className="p-ml-1" value={currentPage} tooltip={pageInputTooltip}
+                <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
+                    Go to <InputText size="2" className="ml-1" value={currentPage} tooltip={pageInputTooltip}
                         onKeyDown={(e) => onPageInputKeyDown(e, options)} onChange={onPageInputChange}/>
                 </span>
             )
@@ -535,7 +535,7 @@ const DataTablePaginatorDemo = () => {
 
             return (
                 <React.Fragment>
-                    <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                 </React.Fragment>
             );
@@ -574,7 +574,7 @@ const DataTablePaginatorDemo = () => {
                 </DataTable>
 
                 <DataTable value={customers3} paginator paginatorTemplate={template2} first={first2} rows={rows2} onPage={onCustomPage2}
-                    paginatorClassName="p-jc-end" className="p-mt-6" responsiveLayout="scroll">
+                    paginatorClassName="justify-content-end" className="mt-6" responsiveLayout="scroll">
                     <Column field="name" header="Name"></Column>
                     <Column field="country.name" header="Country"></Column>
                     <Column field="company" header="Company"></Column>
@@ -655,7 +655,7 @@ const DataTablePaginatorDemo = () => {
         'PrevPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Previous</span>
+                    <span className="p-3">Previous</span>
                     <Ripple />
                 </button>
             )
@@ -663,7 +663,7 @@ const DataTablePaginatorDemo = () => {
         'NextPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Next</span>
+                    <span className="p-3">Next</span>
                     <Ripple />
                 </button>
             )
@@ -694,8 +694,8 @@ const DataTablePaginatorDemo = () => {
         },
         'CurrentPageReport': (options) => {
             return (
-                <span className="p-mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                    Go to <InputText size="2" className="p-ml-1" value={currentPage} tooltip={pageInputTooltip}
+                <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
+                    Go to <InputText size="2" className="ml-1" value={currentPage} tooltip={pageInputTooltip}
                         onKeyDown={(e) => onPageInputKeyDown(e, options)} onChange={onPageInputChange}/>
                 </span>
             )
@@ -712,7 +712,7 @@ const DataTablePaginatorDemo = () => {
 
             return (
                 <React.Fragment>
-                    <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                 </React.Fragment>
             );
@@ -751,7 +751,7 @@ const DataTablePaginatorDemo = () => {
                 </DataTable>
 
                 <DataTable value={customers3} paginator paginatorTemplate={template2} first={first2} rows={rows2} onPage={onCustomPage2}
-                    paginatorClassName="p-jc-end" className="p-mt-6" responsiveLayout="scroll">
+                    paginatorClassName="justify-content-end" className="mt-6" responsiveLayout="scroll">
                     <Column field="name" header="Name"></Column>
                     <Column field="country.name" header="Country"></Column>
                     <Column field="company" header="Company"></Column>
@@ -842,7 +842,7 @@ const DataTablePaginatorDemo = () => {
         'PrevPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Previous</span>
+                    <span className="p-3">Previous</span>
                     <Ripple />
                 </button>
             )
@@ -850,7 +850,7 @@ const DataTablePaginatorDemo = () => {
         'NextPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Next</span>
+                    <span className="p-3">Next</span>
                     <Ripple />
                 </button>
             )
@@ -881,8 +881,8 @@ const DataTablePaginatorDemo = () => {
         },
         'CurrentPageReport': (options) => {
             return (
-                <span className="p-mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                    Go to <InputText size="2" className="p-ml-1" value={currentPage} tooltip={pageInputTooltip}
+                <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
+                    Go to <InputText size="2" className="ml-1" value={currentPage} tooltip={pageInputTooltip}
                         onKeyDown={(e) => onPageInputKeyDown(e, options)} onChange={onPageInputChange}/>
                 </span>
             )
@@ -899,7 +899,7 @@ const DataTablePaginatorDemo = () => {
 
             return (
                 <React.Fragment>
-                    <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                 </React.Fragment>
             );
@@ -938,7 +938,7 @@ const DataTablePaginatorDemo = () => {
                 </DataTable>
 
                 <DataTable value={customers3} paginator paginatorTemplate={template2} first={first2} rows={rows2} onPage={onCustomPage2}
-                    paginatorClassName="p-jc-end" className="p-mt-6" responsiveLayout="scroll">
+                    paginatorClassName="justify-content-end" className="mt-6" responsiveLayout="scroll">
                     <Column field="name" header="Name"></Column>
                     <Column field="country.name" header="Country"></Column>
                     <Column field="company" header="Company"></Column>

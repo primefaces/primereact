@@ -35,18 +35,18 @@ export class StyleClassDemo extends Component {
                 <StyleClass nodeRef={this.toggleBtnRef} selector="@next" toggleClassName="p-disabled">
                     <Button ref={this.toggleBtnRef} label="Toggle p-disabled" />
                 </StyleClass>
-                <InputText className="p-d-block p-mt-3" />
+                <InputText className="block mt-3" />
 
                 <h5>Animations</h5>
-                <StyleClass nodeRef={this.openBtnRef} selector=".box" enterClassName="p-d-none" enterActiveClassName="my-fadein">
-                    <Button ref={this.openBtnRef} label="Show" className="p-mr-2" />
+                <StyleClass nodeRef={this.openBtnRef} selector=".box" enterClassName="hidden" enterActiveClassName="my-fadein">
+                    <Button ref={this.openBtnRef} label="Show" className="mr-2" />
                 </StyleClass>
 
-                <StyleClass nodeRef={this.closeBtnRef} selector=".box" leaveActiveClassName="my-fadeout" leaveToClassName="p-d-none">
+                <StyleClass nodeRef={this.closeBtnRef} selector=".box" leaveActiveClassName="my-fadeout" leaveToClassName="hidden">
                     <Button ref={this.closeBtnRef} label="Hide" />
                 </StyleClass>
 
-                <div className="box p-d-none">Content</div>
+                <div className="box hidden">Content</div>
             </div>
         )
     }
@@ -74,18 +74,18 @@ const StyleClassDemo = () => {
             <StyleClass nodeRef={toggleBtnRef} selector="@next" toggleClassName="p-disabled">
                 <Button ref={toggleBtnRef} label="Toggle p-disabled" />
             </StyleClass>
-            <InputText className="p-d-block p-mt-3" />
+            <InputText className="block mt-3" />
 
             <h5>Animations</h5>
-            <StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="p-d-none" enterActiveClassName="my-fadein">
-                <Button ref={openBtnRef} label="Show" className="p-mr-2" />
+            <StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="hidden" enterActiveClassName="my-fadein">
+                <Button ref={openBtnRef} label="Show" className="mr-2" />
             </StyleClass>
 
-            <StyleClass nodeRef={closeBtnRef} selector=".box" leaveActiveClassName="my-fadeout" leaveToClassName="p-d-none">
+            <StyleClass nodeRef={closeBtnRef} selector=".box" leaveActiveClassName="my-fadeout" leaveToClassName="hidden">
                 <Button ref={closeBtnRef} label="Hide" />
             </StyleClass>
 
-            <div className="box p-d-none">Content</div>
+            <div className="box hidden">Content</div>
         </div>
     )
 }
@@ -112,18 +112,18 @@ const StyleClassDemo = () => {
             <StyleClass nodeRef={toggleBtnRef} selector="@next" toggleClassName="p-disabled">
                 <Button ref={toggleBtnRef} label="Toggle p-disabled" />
             </StyleClass>
-            <InputText className="p-d-block p-mt-3" />
+            <InputText className="block mt-3" />
 
             <h5>Animations</h5>
-            <StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="p-d-none" enterActiveClassName="my-fadein">
-                <Button ref={openBtnRef} label="Show" className="p-mr-2" />
+            <StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="hidden" enterActiveClassName="my-fadein">
+                <Button ref={openBtnRef} label="Show" className="mr-2" />
             </StyleClass>
 
-            <StyleClass nodeRef={closeBtnRef} selector=".box" leaveActiveClassName="my-fadeout" leaveToClassName="p-d-none">
+            <StyleClass nodeRef={closeBtnRef} selector=".box" leaveActiveClassName="my-fadeout" leaveToClassName="hidden">
                 <Button ref={closeBtnRef} label="Hide" />
             </StyleClass>
 
-            <div className="box p-d-none">Content</div>
+            <div className="box hidden">Content</div>
         </div>
     )
 }
@@ -154,18 +154,18 @@ const StyleClassDemo = () => {
             <StyleClass nodeRef={toggleBtnRef} selector="@next" toggleClassName="p-disabled">
                 <Button ref={toggleBtnRef} label="Toggle p-disabled" />
             </StyleClass>
-            <InputText className="p-d-block p-mt-3" />
+            <InputText className="block mt-3" />
 
             <h5>Animations</h5>
-            <StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="p-d-none" enterActiveClassName="my-fadein">
-                <Button ref={openBtnRef} label="Show" className="p-mr-2" />
+            <StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="hidden" enterActiveClassName="my-fadein">
+                <Button ref={openBtnRef} label="Show" className="mr-2" />
             </StyleClass>
 
-            <StyleClass nodeRef={closeBtnRef} selector=".box" leaveActiveClassName="my-fadeout" leaveToClassName="p-d-none">
+            <StyleClass nodeRef={closeBtnRef} selector=".box" leaveActiveClassName="my-fadeout" leaveToClassName="hidden">
                 <Button ref={closeBtnRef} label="Hide" />
             </StyleClass>
 
-            <div className="box p-d-none">Content</div>
+            <div className="box hidden">Content</div>
         </div>
     )
 }
@@ -247,21 +247,21 @@ import { StyleClass } from 'primereact/styleclass';
 <StyleClass nodeRef={toggleBtnRef} selector="@next" toggleClassName="p-disabled">
     <Button ref={toggleBtnRef} label="Toggle p-disabled" />
 </StyleClass>
-<InputText className="p-d-block p-mt-3" />
+<InputText className="block mt-3" />
 `}
 </CodeHighlight>
                         <p><b>Enter/Leave Animation</b></p>
 <CodeHighlight>
 {`
-<StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="p-d-none" enterActiveClassName="my-fadein">
-    <Button ref={openBtnRef} label="Show" className="p-mr-2" />
+<StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="hidden" enterActiveClassName="my-fadein">
+    <Button ref={openBtnRef} label="Show" className="mr-2" />
 </StyleClass>
 
-<StyleClass nodeRef={closeBtnRef} selector=".box" leaveActiveClassName="my-fadeout" leaveToClassName="p-d-none">
+<StyleClass nodeRef={closeBtnRef} selector=".box" leaveActiveClassName="my-fadeout" leaveToClassName="hidden">
     <Button ref={closeBtnRef} label="Hide" />
 </StyleClass>
 
-<div className="box p-d-none">Content</div>
+<div className="box hidden">Content</div>
 `}
 </CodeHighlight>
                         <h5>Target</h5>

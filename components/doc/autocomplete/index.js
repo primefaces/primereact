@@ -133,7 +133,7 @@ export class AutoCompleteDemo extends Component {
 
     groupedItemTemplate(item) {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={item.name} src={\`images/flag/flag_placeholder.png\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
                 <div>{item.label}</div>
             </div>
@@ -277,7 +277,7 @@ export const AutoCompleteDemo = () => {
 
     const groupedItemTemplate = (item) => {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={item.name} src={\`images/flag/flag_placeholder.png\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
                 <div>{item.label}</div>
             </div>
@@ -419,7 +419,7 @@ export const AutoCompleteDemo = () => {
 
     const groupedItemTemplate = (item: any) => {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={item.name} src={\`images/flag/flag_placeholder.png\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
                 <div>{item.label}</div>
             </div>
@@ -564,7 +564,7 @@ const AutoCompleteDemo = () => {
 
     const groupedItemTemplate = (item) => {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={item.name} src={\`images/flag/flag_placeholder.png\`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${item.code.toLowerCase()}\`} />
                 <div>{item.label}</div>
             </div>

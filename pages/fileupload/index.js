@@ -93,25 +93,25 @@ export default class FileUploadDemo extends Component {
 
     itemTemplate(file, props) {
         return (
-            <div className="p-d-flex p-ai-center p-flex-wrap">
-                <div className="p-d-flex p-ai-center" style={{width: '40%'}}>
+            <div className="flex align-items-center flex-wrap">
+                <div className="flex align-items-center" style={{width: '40%'}}>
                     <img alt={file.name} role="presentation" src={file.objectURL} width={100} />
-                    <span className="p-d-flex p-dir-col p-text-left p-ml-3">
+                    <span className="flex flex-column text-left ml-3">
                         {file.name}
                         <small>{new Date().toLocaleDateString()}</small>
                     </span>
                 </div>
-                <Tag value={props.formatSize} severity="warning" className="p-px-3 p-py-2" />
-                <Button type="button" icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger p-ml-auto" onClick={() => this.onTemplateRemove(file, props.onRemove)} />
+                <Tag value={props.formatSize} severity="warning" className="px-3 py-2" />
+                <Button type="button" icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger ml-auto" onClick={() => this.onTemplateRemove(file, props.onRemove)} />
             </div>
         )
     }
 
     emptyTemplate() {
         return (
-            <div className="p-d-flex p-ai-center p-dir-col">
-                <i className="pi pi-image p-mt-3 p-p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
-                <span style={{'fontSize': '1.2em', color: 'var(--text-color-secondary)'}} className="p-my-5">Drag and Drop Image Here</span>
+            <div className="flex align-items-center flex-column">
+                <i className="pi pi-image mt-3 p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
+                <span style={{'fontSize': '1.2em', color: 'var(--text-color-secondary)'}} className="my-5">Drag and Drop Image Here</span>
             </div>
         )
     }
@@ -145,7 +145,7 @@ export default class FileUploadDemo extends Component {
                     <div className="card">
                         <h5>Advanced</h5>
                         <FileUpload name="demo[]" url="upload.php" onUpload={this.onUpload} multiple accept="image/*" maxFileSize={1000000}
-                            emptyTemplate={<p className="p-m-0">Drag and drop files to here to upload.</p>} />
+                            emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
 
                         <h5>Template</h5>
                         <FileUpload ref={(el) => this.fileUploadRef = el} name="demo[]" url="upload.php" multiple accept="image/*" maxFileSize={1000000}

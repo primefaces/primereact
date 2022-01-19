@@ -174,62 +174,11 @@
             ],
             "children": [
                 {
-                    "name": "Setup",
-                    "to": "/primeflex",
+                    "name": "Guide",
+                    "to": "/",
                     "meta": [
                         "primeflex",
                         "setup"
-                    ]
-                },
-                {
-                    "name": "Display",
-                    "to": "/display",
-                    "meta": [
-                        "display"
-                    ]
-                },
-                {
-                    "name": "Elevation",
-                    "to": "/elevation",
-                    "meta": [
-                        "elevation",
-                        "shadow"
-                    ]
-                },
-                {
-                    "name": "Flexbox",
-                    "to": "/flexbox",
-                    "meta": [
-                        "flexbox"
-                    ]
-                },
-                {
-                    "name": "FormLayout",
-                    "to": "/formlayout",
-                    "meta": [
-                        "formlayout"
-                    ]
-                },
-                {
-                    "name": "Grid System",
-                    "to": "/flexgrid",
-                    "meta": [
-                        "grid system",
-                        "flexgrid"
-                    ]
-                },
-                {
-                    "name": "Spacing",
-                    "to": "/spacing",
-                    "meta": [
-                        "spacing"
-                    ]
-                },
-                {
-                    "name": "Text",
-                    "to": "/text",
-                    "meta": [
-                        "text"
                     ]
                 }
             ]

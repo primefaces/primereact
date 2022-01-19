@@ -83,9 +83,9 @@ export default class GalleriaProgrammaticDemo extends Component {
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <div className="p-py-2">
+                        <div className="py-2">
                             <Button icon="pi pi-minus" onClick={this.prev} className="p-button-secondary" />
-                            <Button icon="pi pi-plus" onClick={this.next} className="p-button-secondary p-ml-2" />
+                            <Button icon="pi pi-plus" onClick={this.next} className="p-button-secondary ml-2" />
                         </div>
 
                         <Galleria value={this.state.images} activeIndex={this.state.activeIndex} onItemChange={(e) => this.setState({ activeIndex: e.index })} responsiveOptions={this.responsiveOptions} numVisible={5}
@@ -177,9 +177,9 @@ export class GalleriaProgrammaticDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <div className="p-py-2">
+                    <div className="py-2">
                         <Button icon="pi pi-minus" onClick={this.prev} className="p-button-secondary" />
-                        <Button icon="pi pi-plus" onClick={this.next} className="p-button-secondary p-ml-2" />
+                        <Button icon="pi pi-plus" onClick={this.next} className="p-button-secondary ml-2" />
                     </div>
 
                     <Galleria value={this.state.images} activeIndex={this.state.activeIndex} onItemChange={(e) => this.setState({ activeIndex: e.index })} responsiveOptions={this.responsiveOptions} numVisible={5}

@@ -102,8 +102,8 @@ export default class CascadeSelectDemo extends Component {
             <div className="country-item">
                 {option.states && <img alt={option.name} src={`${this.contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}
                                        className={`flag flag-${option.code.toLowerCase()}`} />}
-                {option.cities && <i className="pi pi-compass p-mr-2"/>}
-                {option.cname && <i className="pi pi-map-marker p-mr-2"/>}
+                {option.cities && <i className="pi pi-compass mr-2"/>}
+                {option.cname && <i className="pi pi-map-marker mr-2"/>}
                 <span>{option.cname || option.name}</span>
             </div>
         );

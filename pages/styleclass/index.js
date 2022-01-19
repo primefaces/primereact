@@ -38,18 +38,18 @@ export default class StyleClassDemo extends Component {
                         <StyleClass nodeRef={this.toggleBtnRef} selector="@next" toggleClassName="p-disabled">
                             <Button ref={this.toggleBtnRef} label="Toggle p-disabled" />
                         </StyleClass>
-                        <InputText className="p-d-block p-mt-3" />
+                        <InputText className="block mt-3" />
 
                         <h5>Animations</h5>
-                        <StyleClass nodeRef={this.openBtnRef} selector=".box" enterClassName="p-d-none" enterActiveClassName="my-fadein">
-                            <Button ref={this.openBtnRef} label="Show" className="p-mr-2" />
+                        <StyleClass nodeRef={this.openBtnRef} selector=".box" enterClassName="hidden" enterActiveClassName="my-fadein">
+                            <Button ref={this.openBtnRef} label="Show" className="mr-2" />
                         </StyleClass>
 
-                        <StyleClass nodeRef={this.closeBtnRef} selector=".box" leaveActiveClassName="my-fadeout" leaveToClassName="p-d-none">
+                        <StyleClass nodeRef={this.closeBtnRef} selector=".box" leaveActiveClassName="my-fadeout" leaveToClassName="hidden">
                             <Button ref={this.closeBtnRef} label="Hide" />
                         </StyleClass>
 
-                        <div className="box p-d-none">Content</div>
+                        <div className="box hidden">Content</div>
                     </div>
                 </div>
 

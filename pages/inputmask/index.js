@@ -35,33 +35,33 @@ export default class InputMaskDemo extends Component {
 
                 <div className="content-section implementation">
                     <div className="card">
-                        <div className="p-fluid p-formgrid p-grid">
-                            <div className="p-field p-col-12 p-md-4">
+                        <div className="p-fluid formgrid grid">
+                            <div className="field col-12 md:col-4">
                                 <label htmlFor="basic">Basic</label>
                                 <InputMask id="basic" mask="99-999999" value={this.state.val1} placeholder="99-999999" onChange={(e) => this.setState({ val1: e.value })}></InputMask>
                             </div>
 
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <label htmlFor="ssn">SSN</label>
                                 <InputMask id="ssn" mask="999-99-9999" value={this.state.val2} placeholder="999-99-9999" onChange={(e) => this.setState({ val2: e.value })}></InputMask>
                             </div>
 
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <label htmlFor="date">Date</label>
                                 <InputMask id="date" mask="99/99/9999" value={this.state.val3} placeholder="99/99/9999" slotChar="mm/dd/yyyy" onChange={(e) => this.setState({ val3: e.value })}></InputMask>
                             </div>
 
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <label htmlFor="phone">Phone</label>
                                 <InputMask id="phone" mask="(999) 999-9999" value={this.state.val4} placeholder="(999) 999-9999" onChange={(e) => this.setState({ val4: e.value })}></InputMask>
                             </div>
 
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <label htmlFor="phoneext">Phone Ext</label>
                                 <InputMask id="phoneext" mask="(999) 999-9999? x99999" value={this.state.val5} placeholder="(999) 999-9999? x99999" onChange={(e) => this.setState({ val5: e.value })}></InputMask>
                             </div>
 
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <label htmlFor="serial">Serial</label>
                                 <InputMask id="serial" mask="a*-999-a999" value={this.state.val6} placeholder="a*-999-a999" onChange={(e) => this.setState({ val6: e.value })}></InputMask>
                             </div>

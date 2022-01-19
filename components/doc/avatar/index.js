@@ -23,26 +23,26 @@ export class AvatarDemo extends Component {
     render() {
         return (
             <div>
-                <div className="p-grid">
-                    <div className="p-col-12 p-md-4">
+                <div className="grid">
+                    <div className="col-12 md:col-4">
                         <div className="card">
                             <h5>Label</h5>
-                            <Avatar label="P" className="p-mr-2" size="xlarge" />
-                            <Avatar label="V" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                            <Avatar label="U" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                            <Avatar label="P" className="mr-2" size="xlarge" />
+                            <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                            <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="card">
                             <h5>Label - Circle</h5>
-                            <Avatar label="P" className="p-mr-2" size="xlarge" shape="circle" />
-                            <Avatar label="V" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                            <Avatar label="U" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
+                            <Avatar label="P" className="mr-2" size="xlarge" shape="circle" />
+                            <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
+                            <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="card">
                             <h5>Label - Badge</h5>
                             <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
@@ -52,26 +52,26 @@ export class AvatarDemo extends Component {
                     </div>
                 </div>
 
-                <div className="p-grid">
-                    <div className="p-col-12 p-md-4">
+                <div className="grid">
+                    <div className="col-12 md:col-4">
                         <div className="card">
                             <h5>Icon</h5>
-                            <Avatar icon="pi pi-user" className="p-mr-2" size="xlarge" />
-                            <Avatar icon="pi pi-user" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                            <Avatar icon="pi pi-user" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                            <Avatar icon="pi pi-user" className="mr-2" size="xlarge" />
+                            <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                            <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="card">
                             <h5>Icon - Circle</h5>
-                            <Avatar icon="pi pi-user" className="p-mr-2" size="xlarge" shape="circle" />
-                            <Avatar icon="pi pi-user" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                            <Avatar icon="pi pi-user" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
+                            <Avatar icon="pi pi-user" className="mr-2" size="xlarge" shape="circle" />
+                            <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
+                            <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="card">
                             <h5>Icon - Badge</h5>
                             <Avatar className="p-overlay-badge" icon="pi pi-user" size="xlarge" ><Badge value="4" /> </Avatar>
@@ -79,20 +79,20 @@ export class AvatarDemo extends Component {
                     </div>
                 </div>
 
-                <div className="p-grid">
-                    <div className="p-col-12 p-md-4">
+                <div className="grid">
+                    <div className="col-12 md:col-4">
                         <div className="card">
                             <h5>Image</h5>
-                            <Avatar image="images/avatar/amyelsner.png" className="p-mr-2" size="xlarge" shape="circle" />
-                            <Avatar image="images/avatar/asiyajavayant.png" className="p-mr-2" size="large" shape="circle" />
-                            <Avatar image="images/avatar/onyamalimba.png" className="p-mr-2" shape="circle" />
+                            <Avatar image="images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
+                            <Avatar image="images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
+                            <Avatar image="images/avatar/onyamalimba.png" className="mr-2" shape="circle" />
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="card">
                             <h5>Avatar Group</h5>
-                            <AvatarGroup className="p-mb-3">
+                            <AvatarGroup className="mb-3">
                                 <Avatar image="images/avatar/amyelsner.png" size="large" shape="circle" />
                                 <Avatar image="images/avatar/asiyajavayant.png" size="large" shape="circle" />
                                 <Avatar image="images/avatar/onyamalimba.png" size="large" shape="circle" />
@@ -103,7 +103,7 @@ export class AvatarDemo extends Component {
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="card">
                             <h5>Image - Badge</h5>
                             <Avatar className="p-overlay-badge" image="demo/images/organization/walter.jpg" size="xlarge">
@@ -130,26 +130,26 @@ export const AvatarDemo = () => {
 
     return (
         <div>
-            <div className="p-grid">
-                <div className="p-col-12 p-md-4">
+            <div className="grid">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Label</h5>
-                        <Avatar label="P" className="p-mr-2" size="xlarge" />
-                        <Avatar label="V" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                        <Avatar label="U" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                        <Avatar label="P" className="mr-2" size="xlarge" />
+                        <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                        <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Label - Circle</h5>
-                        <Avatar label="P" className="p-mr-2" size="xlarge" shape="circle" />
-                        <Avatar label="V" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                        <Avatar label="U" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
+                        <Avatar label="P" className="mr-2" size="xlarge" shape="circle" />
+                        <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
+                        <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Label - Badge</h5>
                         <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
@@ -159,26 +159,26 @@ export const AvatarDemo = () => {
                 </div>
             </div>
 
-            <div className="p-grid">
-                <div className="p-col-12 p-md-4">
+            <div className="grid">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Icon</h5>
-                        <Avatar icon="pi pi-user" className="p-mr-2" size="xlarge" />
-                        <Avatar icon="pi pi-user" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                        <Avatar icon="pi pi-user" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                        <Avatar icon="pi pi-user" className="mr-2" size="xlarge" />
+                        <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                        <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Icon - Circle</h5>
-                        <Avatar icon="pi pi-user" className="p-mr-2" size="xlarge" shape="circle" />
-                        <Avatar icon="pi pi-user" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                        <Avatar icon="pi pi-user" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
+                        <Avatar icon="pi pi-user" className="mr-2" size="xlarge" shape="circle" />
+                        <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
+                        <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Icon - Badge</h5>
                         <Avatar className="p-overlay-badge" icon="pi pi-user" size="xlarge" ><Badge value="4" /> </Avatar>
@@ -186,20 +186,20 @@ export const AvatarDemo = () => {
                 </div>
             </div>
 
-            <div className="p-grid">
-                <div className="p-col-12 p-md-4">
+            <div className="grid">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Image</h5>
-                        <Avatar image="images/avatar/amyelsner.png" className="p-mr-2" size="xlarge" shape="circle" />
-                        <Avatar image="images/avatar/asiyajavayant.png" className="p-mr-2" size="large" shape="circle" />
-                        <Avatar image="images/avatar/onyamalimba.png" className="p-mr-2" shape="circle" />
+                        <Avatar image="images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
+                        <Avatar image="images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
+                        <Avatar image="images/avatar/onyamalimba.png" className="mr-2" shape="circle" />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Avatar Group</h5>
-                        <AvatarGroup className="p-mb-3">
+                        <AvatarGroup className="mb-3">
                             <Avatar image="images/avatar/amyelsner.png" size="large" shape="circle" />
                             <Avatar image="images/avatar/asiyajavayant.png" size="large" shape="circle" />
                             <Avatar image="images/avatar/onyamalimba.png" size="large" shape="circle" />
@@ -210,7 +210,7 @@ export const AvatarDemo = () => {
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Image - Badge</h5>
                         <Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
@@ -236,26 +236,26 @@ export const AvatarDemo = () => {
 
     return (
         <div>
-            <div className="p-grid">
-                <div className="p-col-12 p-md-4">
+            <div className="grid">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Label</h5>
-                        <Avatar label="P" className="p-mr-2" size="xlarge" />
-                        <Avatar label="V" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                        <Avatar label="U" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                        <Avatar label="P" className="mr-2" size="xlarge" />
+                        <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                        <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Label - Circle</h5>
-                        <Avatar label="P" className="p-mr-2" size="xlarge" shape="circle" />
-                        <Avatar label="V" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                        <Avatar label="U" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
+                        <Avatar label="P" className="mr-2" size="xlarge" shape="circle" />
+                        <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
+                        <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Label - Badge</h5>
                         <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
@@ -265,26 +265,26 @@ export const AvatarDemo = () => {
                 </div>
             </div>
 
-            <div className="p-grid">
-                <div className="p-col-12 p-md-4">
+            <div className="grid">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Icon</h5>
-                        <Avatar icon="pi pi-user" className="p-mr-2" size="xlarge" />
-                        <Avatar icon="pi pi-user" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                        <Avatar icon="pi pi-user" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                        <Avatar icon="pi pi-user" className="mr-2" size="xlarge" />
+                        <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                        <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Icon - Circle</h5>
-                        <Avatar icon="pi pi-user" className="p-mr-2" size="xlarge" shape="circle" />
-                        <Avatar icon="pi pi-user" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                        <Avatar icon="pi pi-user" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
+                        <Avatar icon="pi pi-user" className="mr-2" size="xlarge" shape="circle" />
+                        <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
+                        <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Icon - Badge</h5>
                         <Avatar className="p-overlay-badge" icon="pi pi-user" size="xlarge" ><Badge value="4" /> </Avatar>
@@ -292,20 +292,20 @@ export const AvatarDemo = () => {
                 </div>
             </div>
 
-            <div className="p-grid">
-                <div className="p-col-12 p-md-4">
+            <div className="grid">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Image</h5>
-                        <Avatar image="images/avatar/amyelsner.png" className="p-mr-2" size="xlarge" shape="circle" />
-                        <Avatar image="images/avatar/asiyajavayant.png" className="p-mr-2" size="large" shape="circle" />
-                        <Avatar image="images/avatar/onyamalimba.png" className="p-mr-2" shape="circle" />
+                        <Avatar image="images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
+                        <Avatar image="images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
+                        <Avatar image="images/avatar/onyamalimba.png" className="mr-2" shape="circle" />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Avatar Group</h5>
-                        <AvatarGroup className="p-mb-3">
+                        <AvatarGroup className="mb-3">
                             <Avatar image="images/avatar/amyelsner.png" size="large" shape="circle" />
                             <Avatar image="images/avatar/asiyajavayant.png" size="large" shape="circle" />
                             <Avatar image="images/avatar/onyamalimba.png" size="large" shape="circle" />
@@ -316,7 +316,7 @@ export const AvatarDemo = () => {
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Image - Badge</h5>
                         <Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
@@ -347,26 +347,26 @@ const AvatarDemo = () => {
 
     return (
         <div>
-            <div className="p-grid">
-                <div className="p-col-12 p-md-4">
+            <div className="grid">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Label</h5>
-                        <Avatar label="P" className="p-mr-2" size="xlarge" />
-                        <Avatar label="V" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                        <Avatar label="U" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                        <Avatar label="P" className="mr-2" size="xlarge" />
+                        <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                        <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Label - Circle</h5>
-                        <Avatar label="P" className="p-mr-2" size="xlarge" shape="circle" />
-                        <Avatar label="V" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                        <Avatar label="U" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
+                        <Avatar label="P" className="mr-2" size="xlarge" shape="circle" />
+                        <Avatar label="V" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
+                        <Avatar label="U" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Label - Badge</h5>
                         <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
@@ -376,26 +376,26 @@ const AvatarDemo = () => {
                 </div>
             </div>
 
-            <div className="p-grid">
-                <div className="p-col-12 p-md-4">
+            <div className="grid">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Icon</h5>
-                        <Avatar icon="pi pi-user" className="p-mr-2" size="xlarge" />
-                        <Avatar icon="pi pi-user" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
-                        <Avatar icon="pi pi-user" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                        <Avatar icon="pi pi-user" className="mr-2" size="xlarge" />
+                        <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} />
+                        <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Icon - Circle</h5>
-                        <Avatar icon="pi pi-user" className="p-mr-2" size="xlarge" shape="circle" />
-                        <Avatar icon="pi pi-user" className="p-mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
-                        <Avatar icon="pi pi-user" className="p-mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
+                        <Avatar icon="pi pi-user" className="mr-2" size="xlarge" shape="circle" />
+                        <Avatar icon="pi pi-user" className="mr-2" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
+                        <Avatar icon="pi pi-user" className="mr-2" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Icon - Badge</h5>
                         <Avatar className="p-overlay-badge" icon="pi pi-user" size="xlarge" ><Badge value="4" /> </Avatar>
@@ -403,20 +403,20 @@ const AvatarDemo = () => {
                 </div>
             </div>
 
-            <div className="p-grid">
-                <div className="p-col-12 p-md-4">
+            <div className="grid">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Image</h5>
-                        <Avatar image="images/avatar/amyelsner.png" className="p-mr-2" size="xlarge" shape="circle" />
-                        <Avatar image="images/avatar/asiyajavayant.png" className="p-mr-2" size="large" shape="circle" />
-                        <Avatar image="images/avatar/onyamalimba.png" className="p-mr-2" shape="circle" />
+                        <Avatar image="images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
+                        <Avatar image="images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
+                        <Avatar image="images/avatar/onyamalimba.png" className="mr-2" shape="circle" />
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Avatar Group</h5>
-                        <AvatarGroup className="p-mb-3">
+                        <AvatarGroup className="mb-3">
                             <Avatar image="images/avatar/amyelsner.png" size="large" shape="circle" />
                             <Avatar image="images/avatar/asiyajavayant.png" size="large" shape="circle" />
                             <Avatar image="images/avatar/onyamalimba.png" size="large" shape="circle" />
@@ -427,7 +427,7 @@ const AvatarDemo = () => {
                     </div>
                 </div>
 
-                <div className="p-col-12 p-md-4">
+                <div className="col-12 md:col-4">
                     <div className="card">
                         <h5>Image - Badge</h5>
                         <Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
