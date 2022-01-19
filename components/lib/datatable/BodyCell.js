@@ -196,11 +196,19 @@ export class BodyCell extends Component {
         clearTimeout(this.tabindexTimeout);
         this.tabindexTimeout = setTimeout(() => {
             if (this.state.editing) {
-                const focusableEl = DomHandler.getFirstFocusableElement(this.el, ':not(.p-cell-editor-key-helper)');
+                const focusableEl = this.props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(this.el, ':not(.p-cell-editor-key-helper)') : DomHandler.findSingle(this.el, '.p-row-editor-save');
                 focusableEl && focusableEl.focus();
             }
 
             this.keyHelper && (this.keyHelper.tabIndex = this.state.editing ? -1 : 0);
+        }, 1);
+    }
+
+    focusOnInit() {
+        clearTimeout(this.initFocusTimeout);
+        this.initFocusTimeout = setTimeout(() => {
+            const focusableEl = this.props.editMode === 'row' ? DomHandler.findSingle(this.el, '.p-row-editor-init') : null;
+            focusableEl && focusableEl.focus();
         }, 1);
     }
 
@@ -424,10 +432,12 @@ export class BodyCell extends Component {
 
     onRowEditSave(event) {
         this.props.onRowEditSave({ originalEvent: event, data: this.props.rowData, newData: this.getEditingRowData(), field: this.field, index: this.props.rowIndex });
+        this.focusOnInit();
     }
 
     onRowEditCancel(event) {
         this.props.onRowEditCancel({ originalEvent: event, data: this.props.rowData, newData: this.getEditingRowData(), field: this.field, index: this.props.rowIndex });
+        this.focusOnInit();
     }
 
     bindDocumentEditListener() {
