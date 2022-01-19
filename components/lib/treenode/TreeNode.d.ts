@@ -12,4 +12,5 @@ export default interface TreeNode {
     draggable?: boolean;
     selectable?: boolean;
     leaf?: boolean;
+    expanded?: boolean;
 }
