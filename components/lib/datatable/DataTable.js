@@ -275,7 +275,8 @@ export class DataTable extends Component {
             d_rows: props.rows,
             columnOrder: [],
             groupRowsSortMeta: null,
-            editingMeta: {}
+            editingMeta: {},
+            attributeSelector: null
         };
 
         if (!this.props.onPage) {
@@ -293,8 +294,6 @@ export class DataTable extends Component {
         if (!this.props.onFilter) {
             this.state.filters = props.filters;
         }
-
-        this.attributeSelector = UniqueComponentId();
 
         // header
         this.onSortChange = this.onSortChange.bind(this);
@@ -609,9 +608,9 @@ export class DataTable extends Component {
                 widths.forEach((width, index) => {
                     let style = this.props.scrollable ? `flex: 1 1 ${width}px !important` : `width: ${width}px !important`;
                     innerHTML += `
-                        .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
-                        .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
-                        .p-datatable[${this.attributeSelector}] .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
+                        .p-datatable[${this.state.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
+                        .p-datatable[${this.state.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
+                        .p-datatable[${this.state.attributeSelector}] .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
                             ${style}
                         }
                     `
@@ -790,9 +789,9 @@ export class DataTable extends Component {
             let colWidth = index === colIndex ? newColumnWidth : (nextColumnWidth && index === colIndex + 1) ? nextColumnWidth : width;
             let style = this.props.scrollable ? `flex: 1 1 ${colWidth}px !important` : `width: ${colWidth}px !important`;
             innerHTML += `
-                .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
-                .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
-                .p-datatable[${this.attributeSelector}] .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
+                .p-datatable[${this.state.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
+                .p-datatable[${this.state.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
+                .p-datatable[${this.state.attributeSelector}] .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
                     ${style}
                 }
             `
@@ -997,29 +996,29 @@ export class DataTable extends Component {
 
             let innerHTML = `
 @media screen and (max-width: ${this.props.breakpoint}) {
-    .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th,
-    .p-datatable[${this.attributeSelector}] .p-datatable-tfoot > tr > td {
+    .p-datatable[${this.state.attributeSelector}] .p-datatable-thead > tr > th,
+    .p-datatable[${this.state.attributeSelector}] .p-datatable-tfoot > tr > td {
         display: none !important;
     }
 
-    .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td {
+    .p-datatable[${this.state.attributeSelector}] .p-datatable-tbody > tr > td {
         display: flex;
         width: 100% !important;
         align-items: center;
         justify-content: space-between;
     }
 
-    .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td:not(:last-child) {
+    .p-datatable[${this.state.attributeSelector}] .p-datatable-tbody > tr > td:not(:last-child) {
         border: 0 none;
     }
 
-    .p-datatable[${this.attributeSelector}].p-datatable-gridlines .p-datatable-tbody > tr > td:last-child {
+    .p-datatable[${this.state.attributeSelector}].p-datatable-gridlines .p-datatable-tbody > tr > td:last-child {
         border-top: 0;
         border-right: 0;
         border-left: 0;
     }
 
-    .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td > .p-column-title {
+    .p-datatable[${this.state.attributeSelector}] .p-datatable-tbody > tr > td > .p-column-title {
         display: block;
     }
 }
@@ -1530,7 +1529,9 @@ export class DataTable extends Component {
     }
 
     componentDidMount() {
-        this.el.setAttribute(this.attributeSelector, '');
+        this.setState({ attributeSelector: UniqueComponentId() }, () => {
+            this.el.setAttribute(this.state.attributeSelector, '');
+        });
 
         if (this.props.responsiveLayout === 'stack' && !this.props.scrollable) {
             this.createResponsiveStyle();
@@ -1633,7 +1634,7 @@ export class DataTable extends Component {
     }
 
     renderTableBody(options, selectionModeInColumn, empty, isVirtualScrollerDisabled) {
-        const tableSelector = this.attributeSelector;
+        const tableSelector = this.state.attributeSelector;
         const first = this.getFirst();
         const editingMeta = this.state.editingMeta;
         const { rows, columns, contentRef, className } = options;
