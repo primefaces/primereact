@@ -515,8 +515,9 @@ export class Dialog extends Component {
         }
 
         if (this.props.visible) {
-            this.setState({ maskVisible: true, visible: true }, () => {
+            this.setState({ maskVisible: true }, () => {
                 ZIndexUtils.set('modal', this.mask, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['modal']);
+                this.setState({ visible: true });
             });
         }
 
