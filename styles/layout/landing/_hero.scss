@@ -1,0 +1,194 @@
+.landing-hero {
+    height: calc(100vh - 12rem);
+
+    .hero-inner {
+        .hero-box {
+            position: relative;
+            z-index: 1;
+            height: 170px;
+            width: 170px;
+
+            .name {
+                text-align: center;
+                margin-top: 20px;
+                opacity: 0;
+                transition: 1s;
+                transition-delay: 1.8s;
+            }
+
+            img {
+                transform: scale(0);
+                opacity: 0;
+                transition: 0.5s;
+                transition-delay: 1.8s;
+            }
+
+            b {
+                color: #ffffff;
+                display: block;
+                font-weight: 600;
+                font-size: 13px;
+            }
+
+            span {
+                color: #B6C4D6;
+                font-weight: 500;
+                font-size: 12px;
+            }
+
+            &:before {
+                content: '';
+                background: #0B213F;
+                border: 1px solid transparent;
+                box-shadow: 0px 50px 100px rgba(0, 0, 0, 0.25);
+                border-radius: 9px;
+                z-index: -1;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 100%;
+                height: 0%;
+                opacity: 0;
+                transform: translate(-50%, -50%);
+                transition: 1s;
+                transition-delay: 1.4s;
+            }
+        }
+
+        .hero-border-top {
+            border: 1px solid transparent;
+            width: 380px;
+            height: 0%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: -1;
+            transition: 1.5s;
+            transition-delay: 0.6s;
+            border-radius: 9px;
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-border-left {
+            border: 1px solid #183E71;
+            border-right: transparent;
+            width: 0%;
+            border-radius: 9px 0 0 9px;
+            height: 35%;
+            position: absolute;
+            top: 50%;
+            left: -3%;
+            z-index: -1;
+            opacity: 0;
+            transition: 1s;
+            transition-delay: 1s;
+            transform: translate(108px, -50%);
+        }
+
+        .hero-border-right {
+            border: 1px solid #183E71;
+            border-left: transparent;
+            width: 0%;
+            border-radius: 0 9px 9px 0;
+            height: 35%;
+            position: absolute;
+            top: 50%;
+            right: -3%;
+            z-index: -1;
+            opacity: 0;
+            transition: 1s;
+            transition-delay: 1s;
+            transform: translate(-108px, -50%);
+        }
+    }
+
+    .hero-bg {
+        transition-delay: 1.4s;
+
+        .hero-strip-top {
+            transition: 1.6s;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 114px;
+            height: 0%;
+            opacity: 0;
+            background: linear-gradient(360deg, rgba(3, 11, 23, 0) 0%, rgba(11, 37, 73, 0.913125) 53.83%, rgba(7, 24, 48, 0) 101.32%);
+        }
+
+        .hero-strip-left {
+            transition: 1.6s;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0%;
+            height: 114px;
+            opacity: 0;
+            background: linear-gradient(90deg, rgba(3, 11, 23, 0) 0%, #0C284E 50%, rgba(3, 11, 23, 0) 100%);
+        }
+    }
+
+    &.animation {
+        .hero-bg {
+            .hero-strip-top {
+                opacity: 1;
+                height: 100%;
+            }
+
+            .hero-strip-left {
+                width: 100%;
+                opacity: 1;
+            }
+        }
+
+        .hero-inner {
+            .hero-box {
+                img {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+
+                &.logo {
+                    &::before {
+                        box-shadow: 0px 50px 100px 0px #000000;
+                    }
+                    .name {
+                        position: relative;
+                        top: -12px;
+
+                        b {
+                            font-size: 12px;
+                        }
+                    }
+                }
+
+                .name {
+                    opacity: 1;
+                }
+
+                &:before {
+                    height: 100%;
+                    border-color: #183E71;
+                    opacity: 1;
+                }
+            }
+
+            .hero-border-top {
+                height: 70%;
+                border-color: #183E71;
+            }
+            .hero-border-left {
+                opacity: 1;
+                width: 19%;
+                transform: translate(0, -50%);
+            }
+            .hero-border-right {
+                opacity: 1;
+                width: 19%;
+                transform: translate(0, -50%);
+            }
+        }
+    }
+}
