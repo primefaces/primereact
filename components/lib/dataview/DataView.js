@@ -205,20 +205,7 @@ export class DataView extends Component {
             value.sort((data1, data2) => {
                 let value1 = ObjectUtils.resolveFieldData(data1, this.props.sortField);
                 let value2 = ObjectUtils.resolveFieldData(data2, this.props.sortField);
-                let result = null;
-
-                if (value1 == null && value2 != null)
-                    result = -1;
-                else if (value1 != null && value2 == null)
-                    result = 1;
-                else if (value1 == null && value2 == null)
-                    result = 0;
-                else if (typeof value1 === 'string' && typeof value2 === 'string')
-                    result = value1.localeCompare(value2, undefined, { numeric: true });
-                else
-                    result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
-
-                return (this.props.sortOrder * result);
+                return ObjectUtils.sort(value1, value2, this.props.sortOrder);
             });
 
             return value;
