@@ -5,6 +5,7 @@ import HeaderSection from './landing/headersection';
 import HeroSection from './landing/herosection';
 import ComponentSection from './landing/componentsection';
 import ThemeSection from './landing/themesection';
+import DesignerSection from './landing/designersection';
 import { useState } from 'react';
 
 export default function Home() {
@@ -37,9 +38,10 @@ export default function Home() {
                 <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
             </Head>
             <HeaderSection />
-            <HeroSection />
-            <ComponentSection />
-            <ThemeSection theme={theme} onThemeChange={(t) => setTheme(t)}/>
+            {false && <HeroSection />}
+            {false &&<ComponentSection />}
+            {false &&<ThemeSection theme={theme} onThemeChange={(t) => setTheme(t)}/>}
+            <DesignerSection />
         </div>
     );
 }

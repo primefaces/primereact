@@ -78,7 +78,7 @@ export default function HeroSection() {
                                 <img src={`${contextPath}/images/landing-new/icons-icon.svg`} alt="primereact templates" />
                                 <div className="name">
                                     <b>Icon Library</b>
-                                    <span>2500+ Icons</span>
+                                    <span>200+ Icons</span>
                                 </div>
                             </div>
                         </div>
