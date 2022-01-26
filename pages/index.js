@@ -7,6 +7,7 @@ import ComponentSection from './landing/componentsection';
 import ThemeSection from './landing/themesection';
 import DesignerSection from './landing/designersection';
 import UsersSection from './landing/userssection';
+import FeaturesSection from './landing/featuressection';
 import { useState } from 'react';
 
 export default function Home() {
@@ -44,6 +45,7 @@ export default function Home() {
             {false &&<ThemeSection theme={theme} onThemeChange={(t) => setTheme(t)}/>}
             {false && <DesignerSection />}
             {false && <UsersSection />}
+            {false && <FeaturesSection />}
         </div>
     );
 }
