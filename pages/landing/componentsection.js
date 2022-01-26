@@ -16,6 +16,27 @@ import { Chart } from '../../components/lib/chart/Chart';
 import Link from 'next/link';
 import getConfig from 'next/config';
 
+const chartData = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+        {
+            label: 'Income',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: '#42A5F5',
+            tension: .4
+        },
+        {
+            label: 'Expenses',
+            data: [28, 48, 40, 19, 86, 27, 90],
+            fill: true,
+            borderColor: '#FFA726',
+            tension: .4,
+            backgroundColor: 'rgba(255,167,38,0.2)'
+        }
+    ]
+};
+
 export default function ComponentSection() {
     const categories = [{name: 'Clothing', key: 'C'}, {name: 'Fitness', key: 'F'}, {name: 'Electronics', key: 'E'}];
     const [category, setCategory] = useState(categories[0]);
@@ -37,27 +58,6 @@ export default function ComponentSection() {
         {name: 'React', value: 2},
         {name: 'Themes', value: 3}
     ];
-    const chartData = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [
-            {
-                label: 'Income',
-                data: [65, 59, 80, 81, 56, 55, 40],
-                fill: false,
-                borderColor: '#42A5F5',
-                tension: .4
-            },
-            {
-                label: 'Expenses',
-                data: [28, 48, 40, 19, 86, 27, 90],
-                fill: true,
-                borderColor: '#FFA726',
-                tension: .4,
-                backgroundColor: 'rgba(255,167,38,0.2)'
-            }
-        ]
-    };
-
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
     }, []); 
