@@ -224,23 +224,24 @@ export class BodyRow extends Component {
         if (this.props.onRowEditChange) {
             let editingRows;
             const dataKey = this.props.dataKey;
-            const { originalEvent, data, index } = e;
+            const { originalEvent, data, index, newData } = e;
 
             if (dataKey) {
                 let dataKeyValue = String(ObjectUtils.resolveFieldData(data, dataKey));
                 editingRows = this.props.editingRows ? { ...this.props.editingRows } : {};
 
-                if (editingRows[dataKeyValue] != null)
+                if (!editing) {
                     delete editingRows[dataKeyValue];
-                else
+                    // if the key value was changed, stop editing for the new key value too
+                    let newDataKeyValue = String(ObjectUtils.resolveFieldData(newData, dataKey));
+                    delete editingRows[newDataKeyValue];
+                } else
                     editingRows[dataKeyValue] = true;
             }
             else {
-                let editingRowIndex = this.findIndex(this.props.editingRows, data);
                 editingRows = this.props.editingRows ? [...this.props.editingRows] : [];
-
-                if (editingRowIndex !== -1)
-                    editingRows = editingRows.filter((val, i) => i !== editingRowIndex);
+                if (!editing)
+                    editingRows = editingRows.filter(val => val !== data);
                 else
                     editingRows.push(data);
             }
