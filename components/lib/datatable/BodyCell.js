@@ -96,8 +96,13 @@ export class BodyCell extends Component {
         return ObjectUtils.resolveFieldData(data || this.props.rowData, this.field);
     }
 
+    getEditingKey() {
+        return this.props.dataKey ? this.props.rowData[this.props.dataKey] : this.props.rowIndex;
+    }
+
     getEditingRowData() {
-        return this.props.editingMeta && this.props.editingMeta[this.props.rowIndex] ? this.props.editingMeta[this.props.rowIndex].data : this.props.rowData;
+        const editingKey = this.getEditingKey();
+        return this.props.editingMeta && this.props.editingMeta[editingKey] ? this.props.editingMeta[editingKey].data : this.props.rowData;
     }
 
     getTabIndex(cellSelected) {
@@ -245,7 +250,7 @@ export class BodyCell extends Component {
         this.setState({ editingRowData });
 
         // update editing meta for complete methods on row mode
-        this.props.editingMeta[this.props.rowIndex].data[this.field] = val;
+        this.props.editingMeta[this.getEditingKey()].data[this.field] = val;
     }
 
     onClick(event) {
@@ -492,7 +497,7 @@ export class BodyCell extends Component {
 
             if (prevState.editing !== this.state.editing) {
                 const callbackParams = this.getCellCallbackParams();
-                const params = { ...callbackParams, editing: this.state.editing };
+                const params = { ...callbackParams, editing: this.state.editing, editingKey: this.getEditingKey() };
 
                 this.props.onEditingMetaChange(params);
             }

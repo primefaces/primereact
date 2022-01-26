@@ -687,17 +687,17 @@ export class DataTable extends Component {
     }
 
     onEditingMetaChange(e) {
-        const { rowData, field, rowIndex, editing } = e;
+        const { rowData, field, editingKey, editing } = e;
         let editingMeta = { ...this.state.editingMeta };
-        let meta = editingMeta[rowIndex];
+        let meta = editingMeta[editingKey];
 
         if (editing) {
-            !meta && (meta = editingMeta[rowIndex] = { data: { ...rowData }, fields: [] });
+            (this.props.editMode === 'row' || !meta) && (meta = editingMeta[editingKey] = { data: { ...rowData }, fields: [] });
             meta['fields'].push(field);
         }
         else if (meta) {
             const fields = meta['fields'].filter(f => f !== field);
-            !fields.length ? (delete editingMeta[rowIndex]) : (meta['fields'] = fields);
+            !fields.length ? (delete editingMeta[editingKey]) : (meta['fields'] = fields);
         }
 
         this.setState({ editingMeta });
