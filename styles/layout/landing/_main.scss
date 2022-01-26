@@ -39,8 +39,19 @@
         font-size: 1.143rem;
         margin: 1.5rem 0 0 0;
     }
+
+    .section-divider {
+        border: 1px solid #183E71;
+        height: 1px;
+        border-bottom: 0 none;
+        overflow: hidden;
+    }
 }
 
 .text-secondary {
     color: var(--text-color-secondary);
+}
+
+.pad-section {
+    padding: 8rem 12rem;
 }

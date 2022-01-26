@@ -8,6 +8,7 @@ import ThemeSection from './landing/themesection';
 import DesignerSection from './landing/designersection';
 import UsersSection from './landing/userssection';
 import FeaturesSection from './landing/featuressection';
+import FooterSection from './landing/footersection';
 import { useState } from 'react';
 
 export default function Home() {
@@ -46,6 +47,7 @@ export default function Home() {
             {false && <DesignerSection />}
             {false && <UsersSection />}
             {false && <FeaturesSection />}
+            {false && <FooterSection />}
         </div>
     );
 }
