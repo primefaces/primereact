@@ -334,7 +334,7 @@ export class TreeSelect extends Component {
 
     scrollInView() {
         let highlightItem = DomHandler.findSingle(this.overlayRef.current, '.p-treenode-content.p-highlight');
-        if (highlightItem) {
+        if (highlightItem && highlightItem.scrollIntoView) {
             highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });
         }
     }

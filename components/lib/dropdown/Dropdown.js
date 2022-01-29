@@ -668,7 +668,7 @@ export class Dropdown extends Component {
 
     scrollInView() {
         let highlightItem = DomHandler.findSingle(this.overlayRef.current, 'li.p-highlight');
-        if (highlightItem) {
+        if (highlightItem && highlightItem.scrollIntoView) {
             highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });
         }
     }
