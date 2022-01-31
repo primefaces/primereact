@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 
 export class RadioButton extends Component {
@@ -148,7 +148,7 @@ export class RadioButton extends Component {
         });
 
         return (
-            <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
+            <div {...ObjectUtils.findDiffKeys(this.props, RadioButton.defaultProps)} ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
                 <div className="p-hidden-accessible">
                     <input ref={this.inputRef} id={this.props.inputId} type="radio" aria-labelledby={this.props.ariaLabelledBy} name={this.props.name} defaultChecked={this.props.checked}
                         onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} required={this.props.required} tabIndex={this.props.tabIndex}/>

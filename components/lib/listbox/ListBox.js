@@ -443,7 +443,7 @@ export class ListBox extends Component {
         }
 
         return (
-            <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
+            <div {...ObjectUtils.findDiffKeys(this.props, ListBox.defaultProps)} ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 {header}
                 <div ref={(el) => this.wrapper = el} className={listClassName} style={this.props.listStyle}>
                     {list}

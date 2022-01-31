@@ -174,7 +174,7 @@ export class Checkbox extends Component {
         const icon = checked && this.props.icon;
 
         return (
-            <div ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
+            <div {...ObjectUtils.findDiffKeys(this.props, Checkbox.defaultProps)} ref={(el) => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick} onContextMenu={this.props.onContextMenu} onMouseDown={this.props.onMouseDown}>
                 <div className="p-hidden-accessible">
                     <input ref={this.inputRef} type="checkbox" aria-labelledby={this.props.ariaLabelledBy} id={this.props.inputId} name={this.props.name} tabIndex={this.props.tabIndex} defaultChecked={checked}
                              onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly} required={this.props.required}/>

@@ -1825,7 +1825,7 @@ export class DataTable extends Component {
         const reorderIndicators = this.renderReorderIndicators();
 
         return (
-            <div ref={el => this.el = el} id={this.props.id} className={className} style={this.props.style} data-scrollselectors=".p-datatable-wrapper">
+            <div ref={el => this.el = el} {...ObjectUtils.findDiffKeys(this.props, DataTable.defaultProps)} id={this.props.id} className={className} style={this.props.style} data-scrollselectors=".p-datatable-wrapper">
                 {loader}
                 {header}
                 {paginatorTop}

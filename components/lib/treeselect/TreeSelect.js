@@ -659,7 +659,7 @@ export class TreeSelect extends Component {
         const footer = ObjectUtils.getJSXElement(this.props.footer, this.props);
 
         return (
-            <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}>
+            <div {...ObjectUtils.findDiffKeys(this.props, TreeSelect.defaultProps)} id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}>
                 {keyboardHelper}
                 {labelElement}
                 {dropdownIcon}

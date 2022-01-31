@@ -1101,7 +1101,7 @@ export class TreeTable extends Component {
         const reorderIndicatorDown = this.props.reorderableColumns && <span ref={el => this.reorderIndicatorDown = el} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{ position: 'absolute', display: 'none' }} />;
 
         return (
-            <div id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} data-scrollselectors=".p-treetable-scrollable-body">
+            <div {...ObjectUtils.findDiffKeys(this.props, TreeTable.defaultProps)} id={this.props.id} className={className} style={this.props.style} ref={el => this.container = el} data-scrollselectors=".p-treetable-scrollable-body">
                 {loader}
                 {headerFacet}
                 {paginatorTop}

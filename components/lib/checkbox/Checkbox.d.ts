@@ -19,7 +19,7 @@ interface CheckboxChangeParams {
     target: CheckboxChangeTargetOptions;
 }
 
-export interface CheckboxProps {
+export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     inputId?: string;

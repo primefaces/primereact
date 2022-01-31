@@ -892,7 +892,7 @@ export class MultiSelect extends Component {
         let clearIcon = this.renderClearIcon();
 
         return (
-            <div id={this.props.id} className={className} onClick={this.onClick} ref={el => this.container = el} style={this.props.style}>
+            <div {...ObjectUtils.findDiffKeys(this.props, MultiSelect.defaultProps)} id={this.props.id} className={className} onClick={this.onClick} ref={el => this.container = el} style={this.props.style}>
                 <div className="p-hidden-accessible">
                     <input ref={this.inputRef} id={this.props.inputId} name={this.props.name} readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}
                         role="listbox" aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy} aria-expanded={this.state.overlayVisible} disabled={this.props.disabled} tabIndex={this.props.tabIndex} />

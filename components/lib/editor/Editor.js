@@ -167,7 +167,7 @@ export class Editor extends Component {
         let content = (<div ref={(el) => this.editorElement = el} className="p-editor-content" style={this.props.style}></div>)
 
         return (
-            <div id={this.props.id} className={containerClass}>
+            <div {...ObjectUtils.findDiffKeys(this.props, Editor.defaultProps)} id={this.props.id} className={containerClass}>
                 {toolbarHeader}
                 {content}
             </div>

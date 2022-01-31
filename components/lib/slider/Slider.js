@@ -334,7 +334,7 @@ export class Slider extends Component {
         const content = this.props.range ? this.renderRangeSlider() : this.renderSingleSlider();
 
         return (
-            <div id={this.props.id} ref={el => this.el = el} style={this.props.style} className={className} onClick={this.onBarClick}>
+            <div {...ObjectUtils.findDiffKeys(this.props, Slider.defaultProps)} id={this.props.id} ref={el => this.el = el} style={this.props.style} className={className} onClick={this.onBarClick}>
                 {content}
             </div>
         );

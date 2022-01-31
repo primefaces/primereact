@@ -169,7 +169,7 @@ export class Rating extends Component {
         let stars = this.renderStars();
 
         return (
-            <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
+            <div {...ObjectUtils.findDiffKeys(this.props, Rating.defaultProps)} ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
                 {cancelIcon}
                 {stars}
             </div>

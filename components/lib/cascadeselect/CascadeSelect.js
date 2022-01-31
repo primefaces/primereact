@@ -435,7 +435,7 @@ export class CascadeSelect extends Component {
         let overlay = this.renderOverlay();
 
         return (
-            <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}>
+            <div {...ObjectUtils.findDiffKeys(this.props, CascadeSelect.defaultProps)} id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}>
                 {keyboardHelper}
                 {labelElement}
                 {dropdownIcon}

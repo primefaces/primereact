@@ -164,6 +164,7 @@ import { ToggleButton } from 'primereact/togglebutton';
 </CodeHighlight>
 
             <h5>Properties</h5>
+            <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
                     <thead>

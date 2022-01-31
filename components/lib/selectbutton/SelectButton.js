@@ -184,7 +184,7 @@ export class SelectButton extends Component {
         let items = this.renderItems();
 
         return (
-            <div id={this.props.id} ref={(el) => this.element = el} className={className} style={this.props.style} role="group">
+            <div {...ObjectUtils.findDiffKeys(this.props, SelectButton.defaultProps)} id={this.props.id} ref={(el) => this.element = el} className={className} style={this.props.style} role="group">
                 {items}
             </div>
         );

@@ -994,7 +994,7 @@ export class Dropdown extends Component {
         let clearIcon = this.renderClearIcon();
 
         return (
-            <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
+            <div {...ObjectUtils.findDiffKeys(this.props, Dropdown.defaultProps)} id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
                 onMouseDown={this.props.onMouseDown} onContextMenu={this.props.onContextMenu}>
                 {keyboardHelper}
                 {hiddenSelect}

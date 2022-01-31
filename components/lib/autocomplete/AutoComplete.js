@@ -831,7 +831,7 @@ export class AutoComplete extends Component {
         }
 
         return (
-            <span ref={(el) => this.container = el} id={this.state.id} style={this.props.style} className={className} aria-haspopup="listbox"
+            <span {...ObjectUtils.findDiffKeys(this.props, AutoComplete.defaultProps)} ref={(el) => this.container = el} id={this.state.id} style={this.props.style} className={className} aria-haspopup="listbox"
                 aria-expanded={this.state.overlayVisible} aria-owns={this.state.id + '_list'}>
                 {input}
                 {loader}

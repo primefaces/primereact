@@ -172,7 +172,7 @@ export class InputSwitch extends Component {
         let inputSwitchProps = ObjectUtils.findDiffKeys(this.props, InputSwitch.defaultProps);
 
         return (
-            <div ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onClick}
+            <div {...ObjectUtils.findDiffKeys(this.props, InputSwitch.defaultProps)} ref={el => this.container = el} id={this.props.id} className={className} style={this.props.style} onClick={this.onClick}
                 role="checkbox" aria-checked={checked} {...inputSwitchProps}>
                 <div className="p-hidden-accessible">
                     <input ref={this.inputRef} type="checkbox" id={this.props.inputId} name={this.props.name} checked={checked} onChange={this.toggle}

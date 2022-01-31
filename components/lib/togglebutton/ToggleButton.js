@@ -136,7 +136,7 @@ export class ToggleButton extends Component {
         }
 
         return (
-            <div ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}
+            <div {...ObjectUtils.findDiffKeys(this.props, ToggleButton.defaultProps)} ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}
                 onClick={this.toggle} onFocus={this.props.onFocus} onBlur={this.props.onBlur} onKeyDown={this.onKeyDown}
                 tabIndex={!this.props.disabled && this.props.tabIndex} aria-labelledby={this.props.ariaLabelledBy}>
                 {hasIcon && IconUtils.getJSXIcon(icon, { className: iconClassName }, { props: this.props })}

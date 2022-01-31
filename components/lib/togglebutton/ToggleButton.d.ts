@@ -18,7 +18,7 @@ interface ToggleButtonChangeParams {
     target: ToggleButtonChangeTargetOptions;
 }
 
-export interface ToggleButtonProps {
+export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
     id?: string;
     onIcon?: IconType<ToggleButtonProps>;
     offIcon?: IconType<ToggleButtonProps>;

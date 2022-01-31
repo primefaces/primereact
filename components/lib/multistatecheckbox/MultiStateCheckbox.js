@@ -204,7 +204,7 @@ export class MultiStateCheckbox extends Component {
         const icon = this.renderIcon(option);
 
         return (
-            <div ref={el => this.element = el} id={this.props.id} className={containerClassName} style={this.props.style} onClick={this.onClick}>
+            <div {...ObjectUtils.findDiffKeys(this.props, MultiStateCheckbox.defaultProps)} ref={el => this.element = el} id={this.props.id} className={containerClassName} style={this.props.style} onClick={this.onClick}>
                 <div className="p-hidden-accessible">
                     <input ref={this.inputRef} type="checkbox" aria-labelledby={this.props.ariaLabelledBy} id={this.props.inputId} name={this.props.name}
                            onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly} defaultChecked={!!option} />

@@ -146,7 +146,7 @@ export class TriStateCheckbox extends Component {
         });
 
         return (
-            <div ref={el => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
+            <div {...ObjectUtils.findDiffKeys(this.props, TriStateCheckbox.defaultProps)} ref={el => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
                 <div className="p-hidden-accessible">
                     <input ref={this.inputRef} type="checkbox" aria-labelledby={this.props.ariaLabelledBy} id={this.props.inputId} name={this.props.name}
                            onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} defaultChecked={this.props.value} />

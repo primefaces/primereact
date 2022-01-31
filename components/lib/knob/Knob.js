@@ -228,7 +228,7 @@ export class Knob extends Component {
         let text = this.props.showValue && <text x={50} y={57} textAnchor={'middle'} fill={this.props.textColor} className={'p-knob-text'} name={this.props.name}>{this.valueToDisplay()}</text>
 
         return (
-            <div id={this.props.id} className={containerClassName} style={this.props.style} ref={(el) => this.element = el}>
+            <div {...ObjectUtils.findDiffKeys(this.props, Knob.defaultProps)} id={this.props.id} className={containerClassName} style={this.props.style} ref={(el) => this.element = el}>
                 <svg viewBox="0 0 100 100" width={this.props.size} height={this.props.size} onClick={this.onClick} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}
                      onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}>
                     <path d={this.rangePath()} strokeWidth={this.props.strokeWidth} stroke={this.props.rangeColor} className={'p-knob-range'}></path>
