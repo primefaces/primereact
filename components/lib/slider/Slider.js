@@ -251,7 +251,7 @@ export const Slider = memo(forwardRef((props, ref) => {
     const content = props.range ? createRangeSlider() : createSingleSlider();
 
     return (
-        <div ref={elementRef} id={props.id} style={props.style} className={className} onClick={onBarClick}>
+        <div {...ObjectUtils.findDiffKeys(this.props, Slider.defaultProps)} ref={elementRef} id={props.id} style={props.style} className={className} onClick={onBarClick}>
             {content}
         </div>
     )

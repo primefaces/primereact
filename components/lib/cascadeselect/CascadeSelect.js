@@ -257,7 +257,7 @@ export const CascadeSelect = memo(forwardRef((props, ref) => {
         const overlay = createOverlay();
 
         return (
-            <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+            <div {...ObjectUtils.findDiffKeys(this.props, CascadeSelect.defaultProps)}  ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
                 {keyboardHelper}
                 {labelElement}
                 {dropdownIcon}

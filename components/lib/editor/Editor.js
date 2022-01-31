@@ -139,7 +139,7 @@ export const Editor = memo(forwardRef((props, ref) => {
     const content = <div ref={contentRef} className="p-editor-content"></div>
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div {...ObjectUtils.findDiffKeys(this.props, Editor.defaultProps)} id={props.id} className={className} style={props.style}>
             {header}
             {content}
         </div>

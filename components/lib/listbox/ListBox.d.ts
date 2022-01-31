@@ -28,7 +28,7 @@ interface ListBoxFilterValueChangeParams {
     value: any;
 }
 
-export interface ListBoxProps {
+export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
     id?: string;
     value?: any;
     options?: any[];

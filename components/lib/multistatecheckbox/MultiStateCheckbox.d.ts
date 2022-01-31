@@ -34,7 +34,7 @@ interface MultiStateCheckboxChangeParams {
     target: MultiStateCheckboxChangeTargetOptions;
 }
 
-export interface MultiStateCheckboxProps {
+export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     inputId?: string;

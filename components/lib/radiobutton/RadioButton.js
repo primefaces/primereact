@@ -1,5 +1,6 @@
 import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 import { useUnmountEffect } from '../hooks/Hooks';
@@ -90,7 +91,7 @@ export const RadioButton = memo(forwardRef((props, ref) => {
     });
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+        <div {...ObjectUtils.findDiffKeys(this.props, RadioButton.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
             <div className="p-hidden-accessible">
                 <input ref={inputRef} id={props.inputId} type="radio" aria-labelledby={props.ariaLabelledBy} name={props.name} defaultChecked={props.checked}
                     onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} required={props.required} tabIndex={props.tabIndex} />

@@ -129,7 +129,7 @@ export const MultiStateCheckbox = memo(forwardRef((props, ref) => {
     const icon = createIcon();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+        <div {...ObjectUtils.findDiffKeys(this.props, MultiStateCheckbox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
             <div className="p-hidden-accessible">
                 <input ref={inputRef} type="checkbox" aria-labelledby={props.ariaLabelledBy} id={props.inputId} name={props.name}
                     onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} defaultChecked={!!selectedOption} />
