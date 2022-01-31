@@ -5,6 +5,7 @@ import HeaderSection from './landing/headersection';
 import HeroSection from './landing/herosection';
 import ComponentSection from './landing/componentsection';
 import ThemeSection from './landing/themesection';
+import BlocksSection from './landing/blockssection';
 import DesignerSection from './landing/designersection';
 import UsersSection from './landing/userssection';
 import FeaturesSection from './landing/featuressection';
@@ -44,6 +45,7 @@ export default function Home() {
             {false && <HeroSection />}
             {false &&<ComponentSection />}
             {false &&<ThemeSection theme={theme} onThemeChange={(t) => setTheme(t)}/>}
+            <BlocksSection />
             {false && <DesignerSection />}
             {false && <UsersSection />}
             {false && <FeaturesSection />}
