@@ -8,7 +8,8 @@ import { Checkbox } from '../../components/lib/checkbox/Checkbox';
 import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
 import { InputMask } from '../../components/lib/inputmask/InputMask';
 import { Slider } from '../../components/lib/slider/Slider';
-import { useState } from 'react';
+import { classNames } from '../../components/lib/utils/ClassNames';
+import { useRef, useState } from 'react';
 
 export default function HeroSection() {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -17,7 +18,7 @@ export default function HeroSection() {
         {label: 'Arial', value: 'Arial,Helvetica Neue,Helvetica,sans-serif'},
         {label: 'Inter', value: 'Inter'},
         {label: 'Verdana', value: 'Verdana,Geneva,sans-serif'},
-        {label: 'Trebuches MS', value: 'font-family: Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif'}
+        {label: 'Trebuches MS', value: 'Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif'}
     ];
     const [size,setSize] = useState('normal');
     const [inputStyle,setInputStyle] = useState('outlined');
@@ -30,9 +31,26 @@ export default function HeroSection() {
     ];
     const [range, setRange] = useState([20,80]);
     const [optionValue, setOptionValue] = useState(1);
+    const editor = useRef(null);
+
+    const changeTheme = (color, darker) => {
+        editor.current.style.setProperty('--dd-primary', color);
+        editor.current.style.setProperty('--dd-primary-darker', darker);
+    }
+
+    const changeFont = (value) => {
+        editor.current.style.setProperty('--dd-font', value);
+        setFont(value);
+    }
+
+    const editorClassName = classNames('p-4 designer-demo surface-card', {
+        'p-input-filled': inputStyle === 'filled',
+        'demo-size-small': size === 'small',
+        'demo-size-large': size === 'large'
+    });
 
     return (
-        <section className="landing-designer">
+        <section className="landing-designer border-1 border-pink-300">
             <div className="section-header">Theme Designer</div>
             <p className="section-detail">Designer is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer.</p>
             <div className="designer-main flex py-7 relative justify-content-center">
@@ -45,14 +63,14 @@ export default function HeroSection() {
                         <div className="p-fluid">
                             <span className="font-semibold block mb-3">Primary</span>
                             <div>
-                                <button type="button" className="border-circle w-2rem h-2rem p-link mr-3" style={{backgroundColor:'#03C4E8'}}></button>
-                                <button type="button" className="border-circle w-2rem h-2rem p-link mr-3" style={{backgroundColor:'#03E8BF'}}></button>
-                                <button type="button" className="border-circle w-2rem h-2rem p-link mr-3" style={{backgroundColor:'#916AFF'}}></button>
-                                <button type="button" className="border-circle w-2rem h-2rem p-link" style={{backgroundColor:'#FFBD80'}}></button>
+                                <button type="button" className="border-circle w-2rem h-2rem p-link mr-3" style={{backgroundColor:'#03C4E8'}} onClick={() => changeTheme('#03C4E8', '#029dba')}></button>
+                                <button type="button" className="border-circle w-2rem h-2rem p-link mr-3" style={{backgroundColor:'#03E8BF'}} onClick={() => changeTheme('#03E8BF', '#02ba99')}></button>
+                                <button type="button" className="border-circle w-2rem h-2rem p-link mr-3" style={{backgroundColor:'#916AFF'}} onClick={() => changeTheme('#916AFF', '#7455cc')}></button>
+                                <button type="button" className="border-circle w-2rem h-2rem p-link" style={{backgroundColor:'#FFBD80'}} onClick={() => changeTheme('#FFBD80','#cc9766')}></button>
                             </div>
 
                             <span className="font-semibold block mt-4 mb-3">Font</span>
-                            <Dropdown options={fonts} value={font} onChange={e => setFont(e.value)}></Dropdown>
+                            <Dropdown options={fonts} value={font} onChange={e => changeFont(e.value)}></Dropdown>
 
                             <span className="font-semibold block mt-4 mb-3">Size</span>
                             <div className="flex align-items-center">
@@ -89,18 +107,18 @@ export default function HeroSection() {
                             </a>
                         </div>
                     </div>
-                    <div className="p-4 designer-demo surface-card" style={{borderRadius: '10px'}}>
+                    <div className={editorClassName} style={{borderRadius: '10px'}} ref={editor}>
                         <div class="p-fluid formgrid grid">
                             <div class="field col-6">
-                                <label for="username" className="font-semibold mb-3">Username</label>
+                                <label for="username" className="font-semibold mb-3 p-component">Username</label>
                                 <InputText id="username" type="text" />
                             </div>
                             <div class="field col-6">
-                                <label for="email" className="font-semibold mb-3">Email</label>
+                                <label for="email" className="font-semibold mb-3 p-component">Email</label>
                                 <InputText id="email" type="text" />
                             </div>
                             <div class="field col-6">
-                                <label for="price" className="font-semibold mb-3">Price</label>
+                                <label for="price" className="font-semibold mb-3 p-component">Price</label>
                                 <div className="p-inputgroup">
                                     <span className="p-inputgroup-addon">$</span>
                                     <InputNumber inputId="price" placeholder="Price" />
@@ -108,7 +126,7 @@ export default function HeroSection() {
                                 </div>
                             </div>
                             <div class="field col-6">
-                                <label for="date" className="font-semibold mb-3">Date</label>
+                                <label for="date" className="font-semibold mb-3 p-component">Date</label>
                                 <div className="p-inputgroup">
                                     <span className="p-inputgroup-addon">
                                         <i className="pi pi-calendar"></i>
@@ -117,30 +135,30 @@ export default function HeroSection() {
                                 </div>
                             </div>
                             <div class="field col-6">
-                                <span className="font-semibold mb-2 block mb-3 mt-3">City</span>
+                                <span className="font-semibold mb-2 block mb-3 mt-3 p-component">City</span>
                                 <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" />
                             </div>
                             <div class="field col-6">
-                                <label for="email" className="font-semibold mb-3 mt-3">Range</label>
+                                <label for="email" className="font-semibold mb-3 mt-3 p-component">Range</label>
                                 <Slider value={range} onChange={(e) => setRange(e.value)} range />
 
-                                <span className="font-semibold mb-2 block mb-3 mt-5">Checkboxes</span>
+                                <span className="font-semibold mb-2 block mb-3 mt-5  p-component">Checkboxes</span>
                                 <div className="flex align-items-center">
                                     <div className="flex align-items-center">
                                         <Checkbox inputId="cb1" value={1} name="cbvalue" onChange={(e) => setOptionValue(1)} checked={optionValue === 1} />
-                                        <label htmlFor="cb1" className="ml-2 font-medium">Option 1</label>
+                                        <label htmlFor="cb1" className="ml-2 font-medium p-component">Option 1</label>
                                     </div>
                                     <div className="flex align-items-center ml-4">
                                         <Checkbox inputId="cb2" value={2} name="cbvalue" onChange={(e) => setOptionValue(2)} checked={optionValue === 2} />
-                                        <label htmlFor="cb2" className="ml-2 font-medium">Option 2</label>
+                                        <label htmlFor="cb2" className="ml-2 font-medium p-component">Option 2</label>
                                     </div>
                                     <div className="flex align-items-center ml-4">
-                                        <Checkbox inputId="cb2" value={3} name="cbvalue" onChange={(e) => setOptionValue(2)} checked={optionValue === 3} />
-                                        <label htmlFor="cb2" className="ml-2 font-medium">Option 3</label>
+                                        <Checkbox inputId="cb2" value={3} name="cbvalue" onChange={(e) => setOptionValue(3)} checked={optionValue === 3} />
+                                        <label htmlFor="cb2" className="ml-2 font-medium p-component">Option 3</label>
                                     </div>
                                 </div>
 
-                                <span className="font-semibold mb-2 block mb-3 mt-5">Buttons</span>
+                                <span className="font-semibold mb-2 block mb-3 mt-5 p-component">Buttons</span>
                                 <div className="flex align-items-center">
                                     <Button type="button" label="Save" icon="pi pi-check" className="mr-2"></Button>
                                     <Button type="button" label="Cancel" icon="pi pi-times" className="p-button-outlined ml-2"></Button>

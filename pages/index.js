@@ -47,8 +47,8 @@ export default function Home() {
             {false &&<ComponentSection />}
             {false &&<ThemeSection theme={theme} onThemeChange={(t) => setTheme(t)}/>}
             {false && <BlockSection />}
-            <TemplateSection />
-            {false && <DesignerSection />}
+            {false && <TemplateSection />}
+            <DesignerSection />
             {false && <UsersSection />}
             {false && <FeaturesSection />}
             {false && <FooterSection />}
