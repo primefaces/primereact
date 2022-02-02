@@ -54,31 +54,40 @@
             position: relative;
             z-index: 1;
             transition: 1.5s;
-            &.block-1 {
-                transform: translateX(-200%);
+            opacity:0;
+            visibility: hidden;
+            @keyframes animation1 {
+                to {
+                transform:  translateX(-10px);
             }
-            &.block-2 {
-                transform: translateX(200%);
             }
-            &.block-middle {
-                transform: scale(0.7);
+            @keyframes animation2 {
+                to {
+                transform:  translateX(10px);
             }
-            &.block-3 {
-                transform: translateX(-200%);
-                transition-delay: 0.3s;
             }
-            &.block-4 {
-                transform: translateX(200%);
-                transition-delay: 0.3s;
-            }
-            &.block-5 {
-                transform: translateX(-200%);
-                transition-delay: 0.6s;
-            }
-            &.block-6 {
-                transform: translateX(200%);
-                transition-delay: 0.6s;
-            }
+
+            &.block-1{
+                animation: animation1 2s ease-in-out alternate infinite;
+              }
+              &.block-2{
+                animation: animation2 2s 0.2s ease-in-out alternate infinite;
+              }
+              &.block-middle{
+                transform: scale(0.9);
+              }
+              &.block-3{
+                animation: animation1 2s 0.4s ease-in-out alternate infinite;
+              }
+              &.block-4{
+                animation: animation2 2s 0.6s ease-in-out alternate infinite;
+              }
+              &.block-5{
+                animation: animation1 2s 0.8s ease-in-out alternate infinite;
+              }
+              &.block-6{
+                animation: animation2 2s 1s ease-in-out alternate infinite;
+              }
             &:hover {
                 &:before {
                     opacity: 1;
@@ -272,23 +281,25 @@
                 }
             }
         }
-        &.animation {
-            .template-block {
-                transform: translateX(0);
+        &.animation{
+            .template-block{
+              opacity:1;
+            visibility: visible;
+            transition: none !important;
             }
-            .block-middle {
-                .theme-mode,
-                img {
-                    opacity: 1;
-                    visibility: visible;
-                    transform: scale(1);
-                }
+            .block-middle{
+              .theme-mode, img{
+                opacity: 1;
+                visibility: visible;
+                transform: scale(1);
+                transition: none !important;
+              }
             }
-            .lines {
-                opacity: 0.5;
-                width: 100%;
+            .lines{
+              opacity: 0.5;
+              width: 100%;
             }
-        }
+          }
     }
 }
 

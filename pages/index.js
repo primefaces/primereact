@@ -43,15 +43,15 @@ export default function Home() {
                 <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
             </Head>
             <HeaderSection />
-            {false && <HeroSection />}
-            {false &&<ComponentSection />}
-            {false &&<ThemeSection theme={theme} onThemeChange={(t) => setTheme(t)}/>}
-            {false && <BlockSection />}
-            {false && <TemplateSection />}
+            <HeroSection />
+            <ComponentSection />
+            <ThemeSection theme={theme} onThemeChange={(t) => setTheme(t)}/>
+            <BlockSection />
+            <TemplateSection />
             <DesignerSection />
-            {false && <UsersSection />}
-            {false && <FeaturesSection />}
-            {false && <FooterSection />}
+            <UsersSection />
+            <FeaturesSection />
+            <FooterSection />
         </div>
     );
 }
