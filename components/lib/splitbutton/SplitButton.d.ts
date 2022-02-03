@@ -31,6 +31,6 @@ export interface SplitButtonProps {
 }
 
 export declare class SplitButton extends React.Component<SplitButtonProps, any> {
-    public show(event: React.SyntheticEvent): void;
-    public hide(event: React.SyntheticEvent): void;
+    public show(): void;
+    public hide(): void;
 }
