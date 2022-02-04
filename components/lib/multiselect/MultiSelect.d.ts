@@ -57,7 +57,7 @@ interface MultiSelectChangeParams {
 
 interface MultiSelectFilterParams {
     originalEvent: React.SyntheticEvent;
-    filter: string;
+    query: string;
 }
 
 interface MultiSelectAllParams {
@@ -89,6 +89,7 @@ export interface MultiSelectProps {
     disabled?: boolean;
     showClear?: boolean;
     filter?: boolean;
+    filterValue?: string;
     filterBy?: string;
     filterMatchMode?: string;
     filterPlaceholder?: string;
