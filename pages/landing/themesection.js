@@ -181,7 +181,7 @@ export default function ThemeSection(props) {
     const header = renderHeader();
 
     return (
-        <section className="landing-themes">
+        <section className="landing-themes py-8">
             <div className="section-header">Themes</div>
             <p className="section-detail">Build on a design-agnostic infrastructure, choose from a vast amount of themes such as material, bootstrap, tailwind, primeone or develop your own.</p>
             <div className="flex justify-content-center mt-4">
@@ -190,7 +190,7 @@ export default function ThemeSection(props) {
                 <button type="button" className={classNames('font-medium p-link linkbox mr-3', {'active': props.theme === 'bootstrap4-dark-blue'})} onClick={e => props.onThemeChange('bootstrap4-dark-blue')}>Bootstrap</button>
                 <a type="button" className="font-medium p-link linkbox" href="https://www.primefaces.org/designer-react">more...</a>
             </div>
-            <div className="themes-main flex my-7 px-7 relative justify-content-center">
+            <div className="themes-main flex mt-7 relative justify-content-center">
                 <div className="box bg-transparent overflow-hidden z-1">
                     <DataTable value={customers} paginator className="p-datatable-customers" header={header} rows={5}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[5,10,20]}

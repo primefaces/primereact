@@ -4,7 +4,7 @@ export default function FeaturesSection() {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
-        <section className="landing-features border-1 border-pink-500 p-8">
+        <section className="landing-features py-8 pad-section">
             <div className="section-header">Features</div>
             <p className="section-detail">PrimeReact is the most complete solution for your UI requirements.</p>
             <div className="grid mt-7">

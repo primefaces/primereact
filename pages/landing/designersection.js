@@ -50,10 +50,10 @@ export default function HeroSection() {
     });
 
     return (
-        <section className="landing-designer border-1 border-pink-300">
+        <section className="landing-designer pb-8">
             <div className="section-header">Theme Designer</div>
             <p className="section-detail">Designer is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer.</p>
-            <div className="designer-main flex py-7 relative justify-content-center">
+            <div className="designer-main flex mt-7 relative justify-content-center">
                 <img src={`${contextPath}/images/landing-new/wave-dark-alt.svg`} className="absolute w-full"/>
                 <div className="box p-4 flex z-1 designer-editor">
                     <div className="surfaces-card mr-4 p-4" style={{borderRadius: '10px'}}>

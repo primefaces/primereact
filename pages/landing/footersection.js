@@ -5,7 +5,7 @@ export default function FooterSection() {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
-        <section className="landing-footer border-1 border-pink-500 pad-section">
+        <section className="landing-footer pt-8 pad-section">
             <div className="flex flex-wrap z-1">
                 <div className="w-full md:w-6 lg:w-3 flex">
                     <ul className="list-none p-0 m-0">
@@ -47,9 +47,6 @@ export default function FooterSection() {
                         </li>
                         <li className="mb-4">
                             <a href="https://github.com/primefaces/primereact" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Source Code</a>
-                        </li>
-                        <li className="mb-4">
-                            <a href="https://github.com/primefaces/primereact/blob/master/CHANGELOG.md" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Changelog</a>
                         </li>
                         <li className="mb-4">
                             <a href="https://twitter.com/primereact" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Twitter</a>

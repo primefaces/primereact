@@ -43,14 +43,16 @@ export default function Home() {
                 <link rel="stylesheet" href={`${contextPath}/styles/flags.css`}></link>
                 <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
             </Head>
-            <HeaderSection />
-            <HeroSection />
+            <div className="landing-intro">
+                <HeaderSection />
+                <HeroSection />
+            </div>
             <GetStartedSection />
             <ComponentSection />
             <ThemeSection theme={theme} onThemeChange={(t) => setTheme(t)}/>
             <BlockSection />
-            <TemplateSection />
             <DesignerSection />
+            <TemplateSection />
             <UsersSection />
             <FeaturesSection />
             <FooterSection />

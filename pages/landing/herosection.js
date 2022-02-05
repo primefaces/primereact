@@ -19,7 +19,7 @@ export default function HeroSection() {
                                 <img src={`${contextPath}/images/landing-new/templates-icon.svg`} alt="primereact templates" />
                                 <div className="name">
                                     <b>Premium Templates</b>
-                                    <span>50+ Templates</span>
+                                    <span>Spectacular Designs</span>
                                 </div>
                             </div>
                         </div>
@@ -28,7 +28,7 @@ export default function HeroSection() {
                             <img src={`${contextPath}/images/landing-new/designer-icon.svg`} alt="primereact templates" />
                                 <div className="name">
                                     <b>Theme Designer</b>
-                                    <span>Custom Design</span>
+                                    <span>Create Your Own</span>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@ export default function HeroSection() {
                             <img src={`${contextPath}/images/landing-new/core-icon.svg`} alt="primereact templates" />
                                 <div className="name">
                                     <b>Open Source Core</b>
-                                    <span>50+ Free Themes</span>
+                                    <span>80+ UI Components</span>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +49,7 @@ export default function HeroSection() {
                                     <img src={`${contextPath}/images/landing-new/overview-icon.svg`} alt="primereact templates" />
                                 </div>
                                 <div className="name">
-                                    <b className="font-bold">EVERYTHING YOU NEED</b>
+                                    <b className="font-bold">NEXT-GEN REACT UI</b>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@ export default function HeroSection() {
                                 <img src={`${contextPath}/images/landing-new/css-icon.svg`} alt="primereact templates" />
                                 <div className="name">
                                     <b>CSS Utilities</b>
-                                    <span>150+ Components</span>
+                                    <span>PrimeFlex CSS</span>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@ export default function HeroSection() {
                                 <img src={`${contextPath}/images/landing-new/blocks-icon.svg`} alt="primereact templates" />
                                 <div className="name">
                                     <b>Prime Blocks</b>
-                                    <span>50+ Templates</span>
+                                    <span>280+ UI Blocks</span>
                                 </div>
                             </div>
                         </div>

@@ -15,7 +15,7 @@ export default function TemplateSection() {
     });
 
     return (
-        <section className="landing-templates theme-dark border-1 border-pink-500 pad-section">
+        <section className="landing-templates theme-dark py-8">
             <div className="section-header">Templates</div>
             <p className="section-detail">Professionally designed highly customizable application templates to get started in style.</p>
             <div class="flex justify-content-center mt-4">
@@ -24,7 +24,7 @@ export default function TemplateSection() {
                     <i class="pi pi-arrow-right ml-2"></i>
                 </a>
             </div>
-            <section className={`templates ${animationClass} flex justify-content-center align-items-center flex-column`}>
+            <section className={`templates ${animationClass} flex justify-content-center align-items-center flex-column mt-7`}>
             <div className="flex">
                 <div
                 className="template-block block-1 mr-2 flex justify-content-center align-items-center"

@@ -1,6 +1,10 @@
 .landing {
-    background: linear-gradient(180deg, #061730 0%, #030B17 100%);
     min-height: 100vh;
+    background: #030B17;
+
+    .landing-intro {
+        background: linear-gradient(180deg, #061730 0%, #030B17 100%)
+    }
 
     .box,.linkbox {
         border: 1px solid #183E71;
@@ -53,5 +57,5 @@
 }
 
 .pad-section {
-    padding: 8rem 12rem;
+    padding: 0 16rem;
 }

@@ -63,10 +63,10 @@ export default function ComponentSection() {
     }, []); 
 
     return (
-        <section className="landing-components">
+        <section className="landing-components py-8">
             <div className="section-header">Components</div>
-            <p className="section-detail"><span className="text-primary font-bold">Over 80</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.</p>
-            <div className="components-main flex my-7 px-7 relative justify-content-center">
+            <p className="section-detail"><span className="font-bold text-900">Over 80</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.</p>
+            <div className="components-main flex mt-7 relative justify-content-center">
                 <div className="flex flex-column px-3 py-8 z-1">
                     <div className="box p-4 mb-5">
                         <span className="text-secondary font-medium block mb-3">Balance</span>

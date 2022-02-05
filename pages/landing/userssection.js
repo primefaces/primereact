@@ -4,7 +4,7 @@ export default function UsersSection() {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
-        <section className="landing-users border-1 border-pink-500 p-8">
+        <section className="landing-users py-8 pad-section">
             <div className="section-header">Who Uses</div>
             <p className="section-detail">Open source products of PrimeTek are used all around the world by millions of developers.</p>
             <div className="grid mt-7">

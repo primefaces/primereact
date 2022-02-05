@@ -98,7 +98,7 @@
    }
     .prime-blocks {
         transform: rotateX(55deg) rotateY(0deg) rotateZ(-45deg);
-        margin-top: -12rem;
+        margin: -12rem 0;
         &.animation{
             .prime-block{
                 .block-sidebar,.block-header, .block-sidebar-list,.block-content{
