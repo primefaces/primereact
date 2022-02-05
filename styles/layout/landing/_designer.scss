@@ -69,6 +69,11 @@
                 .p-button-icon, .p-button-label {
                     color: var(--dd-primary);
                 }
+
+                &:enabled:hover,
+                &:enabled:active {
+                    background-color: transparent;
+                }
             }
     
             &:enabled:hover,
@@ -90,7 +95,7 @@
         }
 
         .p-inputtext, .p-button, .p-listbox-item, .p-slider {
-            transition: padding .5s;
+            transition: all .5s;
         }
 
         .p-slider, .p-checkbox {
