@@ -43,7 +43,7 @@ export default function HeroSection() {
         setFont(value);
     }
 
-    const editorClassName = classNames('p-4 designer-demo surface-card', {
+    const editorClassName = classNames('p-4 designer-demo', {
         'p-input-filled': inputStyle === 'filled',
         'demo-size-small': size === 'small',
         'demo-size-large': size === 'large'
@@ -56,7 +56,7 @@ export default function HeroSection() {
             <div className="designer-main flex mt-7 relative justify-content-center">
                 <img src={`${contextPath}/images/landing-new/wave-dark-alt.svg`} className="absolute w-full"/>
                 <div className="box p-4 flex z-1 designer-editor">
-                    <div className="surfaces-card mr-4 p-4" style={{borderRadius: '10px'}}>
+                    <div className="mr-4 p-4 designer-controls box border-none border-right-1" style={{borderRadius: '10px'}}>
                         <div className="text-center mb-4">
                             <img src={`${contextPath}/images/landing-new/designer.svg`} />
                         </div>

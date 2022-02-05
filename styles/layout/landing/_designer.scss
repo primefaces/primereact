@@ -139,5 +139,14 @@
     .formgrid > .field {
         padding: 2rem;
     }
+
+    .designer-editor {
+        backdrop-filter: blur(1rem);
+    }
+
+    .designer-controls {
+        border-radius: 0 !important;
+        background: transparent;
+    }
     
 }
