@@ -110,15 +110,15 @@ export default function HeroSection() {
                     <div className={editorClassName} style={{borderRadius: '10px'}} ref={editor}>
                         <div class="p-fluid formgrid grid">
                             <div class="field col-6">
-                                <label for="username" className="font-semibold mb-3 p-component">Username</label>
+                                <label htmlFor="username" className="font-semibold mb-3 p-component">Username</label>
                                 <InputText id="username" type="text" />
                             </div>
                             <div class="field col-6">
-                                <label for="email" className="font-semibold mb-3 p-component">Email</label>
+                                <label htmlFor="email" className="font-semibold mb-3 p-component">Email</label>
                                 <InputText id="email" type="text" />
                             </div>
                             <div class="field col-6">
-                                <label for="price" className="font-semibold mb-3 p-component">Price</label>
+                                <label htmlFor="price" className="font-semibold mb-3 p-component">Price</label>
                                 <div className="p-inputgroup">
                                     <span className="p-inputgroup-addon">$</span>
                                     <InputNumber inputId="price" placeholder="Price" />
@@ -126,7 +126,7 @@ export default function HeroSection() {
                                 </div>
                             </div>
                             <div class="field col-6">
-                                <label for="date" className="font-semibold mb-3 p-component">Date</label>
+                                <label htmlFor="date" className="font-semibold mb-3 p-component">Date</label>
                                 <div className="p-inputgroup">
                                     <span className="p-inputgroup-addon">
                                         <i className="pi pi-calendar"></i>
@@ -139,7 +139,7 @@ export default function HeroSection() {
                                 <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" />
                             </div>
                             <div class="field col-6">
-                                <label for="email" className="font-semibold mb-3 mt-3 p-component">Range</label>
+                                <label htmlFor="email" className="font-semibold mb-3 mt-3 p-component">Range</label>
                                 <Slider value={range} onChange={(e) => setRange(e.value)} range />
 
                                 <span className="font-semibold mb-2 block mb-3 mt-5  p-component">Checkboxes</span>
