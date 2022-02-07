@@ -15,13 +15,13 @@ export default function TemplateSection() {
     });
 
     return (
-        <section className="landing-templates theme-dark py-8">
+        <section id="template-section" className="landing-templates theme-dark py-8">
             <div className="section-header">Templates</div>
             <p className="section-detail">Professionally designed highly customizable application templates to get started in style.</p>
-            <div class="flex justify-content-center mt-4">
+            <div className="flex justify-content-center mt-4">
                 <a href="https://www.primefaces.org/store" className="font-semibold p-3 border-round flex align-items-center linkbox">
                     <span>Learn More</span>
-                    <i class="pi pi-arrow-right ml-2"></i>
+                    <i className="pi pi-arrow-right ml-2"></i>
                 </a>
             </div>
             <section className={`templates ${animationClass} flex justify-content-center align-items-center flex-column mt-7`}>

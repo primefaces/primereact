@@ -131,17 +131,13 @@
         }
     }
 
-    .designer-main {
-        padding-left: 20rem;
-        padding-right: 20rem;
-    }
-
     .formgrid > .field {
         padding: 2rem;
     }
 
     .designer-editor {
         backdrop-filter: blur(1rem);
+        overflow: auto;
     }
 
     .designer-controls {

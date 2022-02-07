@@ -50,10 +50,10 @@ export default function HeroSection() {
     });
 
     return (
-        <section className="landing-designer pb-8">
+        <section id="designer-section" className="landing-designer py-8 pad-section">
             <div className="section-header">Theme Designer</div>
             <p className="section-detail">Designer is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer.</p>
-            <div className="designer-main flex mt-7 relative justify-content-center">
+            <div className="designer-main mt-7 relative justify-content-center">
                 <img src={`${contextPath}/images/landing-new/wave-dark-alt.svg`} className="absolute w-full"/>
                 <div className="box p-4 flex z-1 designer-editor">
                     <div className="mr-4 p-4 designer-controls box border-none border-right-1" style={{borderRadius: '10px'}}>
@@ -103,21 +103,21 @@ export default function HeroSection() {
                             <a href="https://www.primefaces.org/designer-react" 
                                 className="font-semibold p-3 border-round flex align-items-center linkbox">
                                 <span>View Full Version</span>
-                                <i class="pi pi-arrow-right ml-auto"></i>
+                                <i className="pi pi-arrow-right ml-auto"></i>
                             </a>
                         </div>
                     </div>
                     <div className={editorClassName} style={{borderRadius: '10px'}} ref={editor}>
-                        <div class="p-fluid formgrid grid">
-                            <div class="field col-6">
+                        <div className="p-fluid formgrid grid">
+                            <div className="field col-12 xl:col-6">
                                 <label htmlFor="username" className="font-semibold mb-3 p-component">Username</label>
                                 <InputText id="username" type="text" />
                             </div>
-                            <div class="field col-6">
+                            <div className="field col-12 xl:col-6">
                                 <label htmlFor="email" className="font-semibold mb-3 p-component">Email</label>
                                 <InputText id="email" type="text" />
                             </div>
-                            <div class="field col-6">
+                            <div className="field col-12 xl:col-6">
                                 <label htmlFor="price" className="font-semibold mb-3 p-component">Price</label>
                                 <div className="p-inputgroup">
                                     <span className="p-inputgroup-addon">$</span>
@@ -125,7 +125,7 @@ export default function HeroSection() {
                                     <span className="p-inputgroup-addon">.00</span>
                                 </div>
                             </div>
-                            <div class="field col-6">
+                            <div className="field col-12 xl:col-6">
                                 <label htmlFor="date" className="font-semibold mb-3 p-component">Date</label>
                                 <div className="p-inputgroup">
                                     <span className="p-inputgroup-addon">
@@ -134,27 +134,23 @@ export default function HeroSection() {
                                     <InputMask inputId="date" placeholder="mm/dd/yyyy" mask="99/99/9999" slotChar="mm/dd/yyyy" />
                                 </div>
                             </div>
-                            <div class="field col-6">
+                            <div className="field col-12 xl:col-6">
                                 <span className="font-semibold mb-2 block mb-3 mt-3 p-component">City</span>
                                 <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" />
                             </div>
-                            <div class="field col-6">
+                            <div className="field col-12 xl:col-6">
                                 <label htmlFor="email" className="font-semibold mb-3 mt-3 p-component">Range</label>
                                 <Slider value={range} onChange={(e) => setRange(e.value)} range />
 
                                 <span className="font-semibold mb-2 block mb-3 mt-5  p-component">Checkboxes</span>
-                                <div className="flex align-items-center">
+                                <div className="flex flex-column xl:flex-row xl:align-items-center">
                                     <div className="flex align-items-center">
                                         <Checkbox inputId="cb1" value={1} name="cbvalue" onChange={(e) => setOptionValue(1)} checked={optionValue === 1} />
-                                        <label htmlFor="cb1" className="ml-2 font-medium p-component">Option 1</label>
+                                        <label htmlFor="cb1" className="ml-2 font-medium p-component white-space-nowrap">Option 1</label>
                                     </div>
-                                    <div className="flex align-items-center ml-4">
+                                    <div className="flex align-items-center mt-3 xl:mt-0 xl:ml-4">
                                         <Checkbox inputId="cb2" value={2} name="cbvalue" onChange={(e) => setOptionValue(2)} checked={optionValue === 2} />
-                                        <label htmlFor="cb2" className="ml-2 font-medium p-component">Option 2</label>
-                                    </div>
-                                    <div className="flex align-items-center ml-4">
-                                        <Checkbox inputId="cb2" value={3} name="cbvalue" onChange={(e) => setOptionValue(3)} checked={optionValue === 3} />
-                                        <label htmlFor="cb2" className="ml-2 font-medium p-component">Option 3</label>
+                                        <label htmlFor="cb2" className="ml-2 font-medium p-component white-space-nowrap">Option 2</label>
                                     </div>
                                 </div>
 

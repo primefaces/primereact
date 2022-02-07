@@ -15,13 +15,13 @@ export default function BlockSection() {
     });
 
     return (
-        <section className="landing-blocks theme-dark pt-8">
+        <section id="blocks-section" className="landing-blocks theme-dark pt-8">
             <div className="section-header">PrimeBlocks</div>
             <p className="section-detail">280+ ready to copy-paste UI blocks to build spectacular applications in no time.</p>
-            <div class="flex justify-content-center mt-4">
+            <div className="flex justify-content-center mt-4">
                 <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox">
                     <span>Learn More</span>
-                    <i class="pi pi-arrow-right ml-2"></i>
+                    <i className="pi pi-arrow-right ml-2"></i>
                 </a>
             </div>
             <section className={`prime-blocks ${animationClass} flex justify-content-center align-items-center flex-column`}>
@@ -315,15 +315,15 @@ export default function BlockSection() {
                         <div className="block-content flex-1 my-5 mx-4 flex flex-column">
                             <div className="block-main  h-full flex justify-content-center align-items-center flex-column px-2">
                                 <div className="flex justify-content-between">
-                                    <div class="block-item block-item-table block-item-active animation-1 flex ">
+                                    <div className="block-item block-item-table block-item-active animation-1 flex ">
                                         <div className="bar w-3rem mx-3"></div>
                                         <div className="bar w-3rem mx-3"></div>
                                         <div className="bar w-3rem mx-3"></div>
                                         <div className="bar w-3rem mx-3"></div>
                                     </div>
                                 </div>
-                                <div class="block-item block-item-col  flex ">
-                                    <div class="flex">
+                                <div className="block-item block-item-col  flex ">
+                                    <div className="flex">
                                         <div className="circle circle-small -mr-1"></div>
                                         <div className="bar w-3rem mx-3"></div>
                                     </div>
@@ -331,8 +331,8 @@ export default function BlockSection() {
                                     <div className="bar w-3rem mx-3"></div>
                                     <div className="bar w-3rem mx-3"></div>
                                 </div>
-                                <div class="block-item block-item-col  flex ">
-                                    <div class="flex">
+                                <div className="block-item block-item-col  flex ">
+                                    <div className="flex">
                                         <div className="circle circle-small -mr-1"></div>
                                         <div className="bar w-3rem mx-3"></div>
                                     </div>
@@ -340,8 +340,8 @@ export default function BlockSection() {
                                     <div className="bar w-3rem mx-3"></div>
                                     <div className="bar w-3rem mx-3"></div>
                                 </div>
-                                <div class="block-item block-item-col  flex ">
-                                    <div class="flex">
+                                <div className="block-item block-item-col  flex ">
+                                    <div className="flex">
                                         <div className="circle circle-small -mr-1"></div>
                                         <div className="bar w-3rem mx-3"></div>
                                     </div>
@@ -378,8 +378,8 @@ export default function BlockSection() {
                                     <div className="bar w-6rem mt-2"></div>
                                     <div className="bar w-4rem mt-2"></div>
                                     <div className="flex">
-                                        <div class="bar bar-blue bar-button w-4rem mr-2 mt-4"></div>
-                                        <div class="bar bar-button w-4rem  mr-2 mt-4"></div>
+                                        <div className="bar bar-blue bar-button w-4rem mr-2 mt-4"></div>
+                                        <div className="bar bar-button w-4rem  mr-2 mt-4"></div>
                                     </div>
                                 </div>
                             </div>

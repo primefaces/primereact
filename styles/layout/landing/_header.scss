@@ -1,33 +1,49 @@
 .landing-header {
-    padding: 0 12rem;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    height: 6rem;
-
     ol {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        font-weight: 600;
-
-        li {
-            margin-right: 1rem;
-        }
-
         a {
-            color: #ffffff;
-            border-bottom: 2px solid transparent;
-            display: block;
-            padding: .5rem 1rem;
-            text-align: center;
-            transition: background-color .3s;
             border-radius: 10px;
+            color: #ffffff;
+            white-space: nowrap;
 
             &:hover {
                 background: rgba(11, 33, 63, 0.9);
+            }
+        }
+    }
+
+    .header-button {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+
+@media screen and (max-width: $landingBreakpointLG) {
+    .landing-header {
+        nav {
+            background: rgba(11, 33, 63, 0.55);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+
+            ol {
+                border: 1px solid #183E71;
+                border-radius: 10px;
+                overflow: hidden;
+
+                li:last-child {
+                    a {
+                        border-bottom: 0 none;
+                    }
+                }
+            }
+
+            a {
+                font-size: 1.5rem;
+                background: rgba(0,0,0,.4);
+                border-radius: 10px;
+                display: flex;
+                font-weight: medium !important;
+                border-radius: 0;
+                border-bottom: 1px solid #183E71;
             }
         }
     }

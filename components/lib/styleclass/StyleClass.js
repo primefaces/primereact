@@ -31,6 +31,7 @@ export class StyleClass extends Component {
     }
 
     enter() {
+        debugger;
         if (this.props.enterActiveClassName) {
             if (!this.animating) {
                 this.animating = true;

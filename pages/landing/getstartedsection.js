@@ -5,7 +5,7 @@ export default function GetStartedSection() {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
-        <section className="landing-getstarted flex align-items-center justify-content-center pb-8">
+        <section className="landing-getstarted flex align-items-center justify-content-center py-8">
             <Link href="/setup">
                 <a className="linkbox font-medium py-3 px-4">Get Started <i className="pi pi-arrow-right ml-3"></i></a>
             </Link>

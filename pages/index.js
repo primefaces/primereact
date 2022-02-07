@@ -47,7 +47,6 @@ export default function Home() {
                 <HeaderSection />
                 <HeroSection />
             </div>
-            <GetStartedSection />
             <ComponentSection />
             <ThemeSection theme={theme} onThemeChange={(t) => setTheme(t)}/>
             <BlockSection />
@@ -55,6 +54,7 @@ export default function Home() {
             <TemplateSection />
             <UsersSection />
             <FeaturesSection />
+            <GetStartedSection />
             <FooterSection />
         </div>
     );

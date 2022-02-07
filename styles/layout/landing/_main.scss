@@ -1,6 +1,7 @@
 .landing {
     min-height: 100vh;
     background: #030B17;
+    scroll-behavior: smooth;
 
     .landing-intro {
         background: linear-gradient(180deg, #061730 0%, #030B17 100%)
@@ -34,6 +35,7 @@
         color: #ffffff;
         font-weight: 700;
         text-align: center;
+        padding: 0 2rem;
     }
 
     .section-detail {
@@ -42,6 +44,7 @@
         font-weight: 500;
         font-size: 1.143rem;
         margin: 1.5rem 0 0 0;
+        padding: 0 2rem;
     }
 
     .section-divider {
@@ -57,5 +60,23 @@
 }
 
 .pad-section {
-    padding: 0 16rem;
+    padding: 0 12rem;
+}
+
+@media screen and (max-width: $landingBreakpointXL) {
+    .pad-section {
+        padding: 0 8rem;
+    }
+}
+
+@media screen and (max-width: $landingBreakpointLG) {
+    .pad-section {
+        padding: 0 4rem;
+    }
+}
+
+@media screen and (max-width: $landingBreakpointMD) {
+    .pad-section {
+        padding: 0 2rem;
+    }
 }

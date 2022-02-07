@@ -181,7 +181,7 @@ export default function ThemeSection(props) {
     const header = renderHeader();
 
     return (
-        <section className="landing-themes py-8">
+        <section id="theme-section" className="landing-themes py-8">
             <div className="section-header">Themes</div>
             <p className="section-detail">Build on a design-agnostic infrastructure, choose from a vast amount of themes such as material, bootstrap, tailwind, primeone or develop your own.</p>
             <div className="flex justify-content-center mt-4">
@@ -190,7 +190,7 @@ export default function ThemeSection(props) {
                 <button type="button" className={classNames('font-medium p-link linkbox mr-3', {'active': props.theme === 'bootstrap4-dark-blue'})} onClick={e => props.onThemeChange('bootstrap4-dark-blue')}>Bootstrap</button>
                 <a type="button" className="font-medium p-link linkbox" href="https://www.primefaces.org/designer-react">more...</a>
             </div>
-            <div className="themes-main flex mt-7 relative justify-content-center">
+            <div className="themes-main flex mt-7 relative justify-content-center pad-section">
                 <div className="box overflow-hidden z-1 p-5 table-container">
                     <DataTable value={customers} paginator className="p-datatable-customers" header={header} rows={5}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport"
@@ -199,13 +199,13 @@ export default function ThemeSection(props) {
                         globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                         <Column selectionMode="multiple" style={{ width: '3rem' }}></Column>
-                        <Column field="name" header="Name" sortable style={{ width: '14rem' }} />
-                        <Column field="country.name" header="Country" sortable filterField="country.name" style={{ width: '14rem' }} body={countryBodyTemplate} filterPlaceholder="Search by country" />
-                        <Column header="Agent" sortable sortField="representative.name" filterField="representative" style={{ width: '14rem' }} body={representativeBodyTemplate} />
-                        <Column field="date" header="Date" sortable filterField="date" dataType="date" style={{ width: '8rem' }} body={dateBodyTemplate} />
-                        <Column field="balance" header="Balance" sortable dataType="numeric" style={{ width: '8rem' }} body={balanceBodyTemplate}  />
-                        <Column field="status" header="Status" sortable filterMenuStyle={{ width: '14rem' }} style={{ width: '10rem' }} body={statusBodyTemplate} />
-                        <Column field="activity" header="Activity" sortable showFilterMatchModes={false} style={{ width: '6rem' }} body={activityBodyTemplate} />
+                        <Column field="name" header="Name" sortable style={{ minWidth: '14rem' }} />
+                        <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filterPlaceholder="Search by country" />
+                        <Column header="Agent" sortable sortField="representative.name" filterField="representative" style={{ minWidth: '14rem' }} body={representativeBodyTemplate} />
+                        <Column field="date" header="Date" sortable filterField="date" dataType="date" style={{ minWidth: '8rem' }} body={dateBodyTemplate} />
+                        <Column field="balance" header="Balance" sortable dataType="numeric" style={{ minWidth: '8rem' }} body={balanceBodyTemplate}  />
+                        <Column field="status" header="Status" sortable style={{ minWidth: '10rem' }} body={statusBodyTemplate} />
+                        <Column field="activity" header="Activity" sortable showFilterMatchModes={false} style={{ minWidth: '6rem' }} body={activityBodyTemplate} />
                         <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={actionBodyTemplate} />
                     </DataTable>
                 </div>

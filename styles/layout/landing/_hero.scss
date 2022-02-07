@@ -1,5 +1,5 @@
 .landing-hero {
-    height: calc(100vh - 6rem);
+    height: calc(100vh - 10rem);
 
     .hero-inner {
         .hero-box {
@@ -190,5 +190,12 @@
                 transform: translate(0, -50%);
             }
         }
+    }
+}
+
+@media screen and (max-width: $landingBreakpointLG) {
+    .landing-hero {
+        padding: 0 2rem;
+        height: auto;
     }
 }

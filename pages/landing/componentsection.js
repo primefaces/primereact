@@ -63,16 +63,22 @@ export default function ComponentSection() {
     }, []); 
 
     return (
-        <section className="landing-components py-8">
+        <section id="component-section" className="landing-components py-8">
             <div className="section-header">Components</div>
             <p className="section-detail"><span className="font-bold text-900">Over 80</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.</p>
-            <div className="components-main flex mt-7 relative justify-content-center">
+            <div className="flex justify-content-center mt-4">
+                <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox">
+                    <span>Get Started</span>
+                    <i className="pi pi-arrow-right ml-2"></i>
+                </a>
+            </div>
+            <div className="components-main flex mt-7 relative md:justify-content-center overflow-auto">
                 <div className="flex flex-column px-3 py-8 z-1">
                     <div className="box p-4 mb-5">
                         <span className="text-secondary font-medium block mb-3">Balance</span>
                         <div className="flex">
-                            <InputNumber value="240" mode="currency" currency="USD" locale="en-US" className="mr-2" />
-                            <InputNumber value="356" mode="currency" currency="USD" locale="en-US" />
+                            <InputNumber value={240} mode="currency" currency="USD" locale="en-US" className="mr-2" />
+                            <InputNumber value={356} mode="currency" currency="USD" locale="en-US" />
                         </div>
                         <span className="text-secondary font-medium block mt-5 mb-3">Category</span>
                         <div className="flex justify-content-between">
@@ -208,11 +214,6 @@ export default function ComponentSection() {
                     </div>
                     <div className="box p-4 mb-5">
                         <Calendar value={dateValue} onChange={(e) => setDateValue(e.value)} inline showWeek />
-                    </div>
-                    <div className="flex justify-content-end mt-5">
-                        <Link href="/setup">
-                            <a className="linkbox font-medium">Get Started <i className="pi pi-angle-right ml-2"></i></a>
-                        </Link>
                     </div>
                 </div>
                 <div className="components-strip-top absolute w-6 h-8rem top-0 left-0"></div>
