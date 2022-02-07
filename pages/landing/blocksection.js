@@ -15,7 +15,7 @@ export default function BlockSection() {
     });
 
     return (
-        <section id="blocks-section" className="landing-blocks theme-dark pt-8">
+        <section id="blocks-section" className="landing-blocks theme-dark pt-8 overflow-hidden">
             <div className="section-header">PrimeBlocks</div>
             <p className="section-detail">280+ ready to copy-paste UI blocks to build spectacular applications in no time.</p>
             <div className="flex justify-content-center mt-4">

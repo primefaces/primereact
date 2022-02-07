@@ -13,7 +13,6 @@ import { Badge } from '../../components/lib/badge/Badge';
 import { SelectButton } from '../../components/lib/selectbutton/SelectButton';
 import { TabMenu } from '../../components/lib/tabmenu/TabMenu';
 import { Chart } from '../../components/lib/chart/Chart';
-import Link from 'next/link';
 import getConfig from 'next/config';
 
 const chartData = {
@@ -216,8 +215,8 @@ export default function ComponentSection() {
                         <Calendar value={dateValue} onChange={(e) => setDateValue(e.value)} inline showWeek />
                     </div>
                 </div>
-                <div className="components-strip-top absolute w-6 h-8rem top-0 left-0"></div>
-                <div className="components-strip-bottom absolute w-6 h-8rem bottom-0 right-0"></div>
+                <div className="components-strip-top absolute w-full md:w-6 h-8rem top-0 left-0"></div>
+                <div className="components-strip-bottom absolute w-full md:w-6 h-8rem bottom-0 right-0"></div>
             </div>
         </section>
     );
