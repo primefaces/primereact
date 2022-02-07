@@ -13,8 +13,8 @@ export default function HeroSection() {
         <section className={`landing-hero ${animationClass} flex align-items-center justify-content-center relative`}>
             <div className="hero-inner z-2 relative">
                 <div className="flex flex-column md:align-items-center md:flex-row">
-                    <div className="p-2 flex flex-row flex-wrap md:flex-column">
-                        <div className="hero-box animation flex align-items-center justify-content-center">
+                    <div className="p-2 flex flex-row md:flex-column">
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center">
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/templates-icon.svg`} alt="primereact templates" />
                                 <div className="name">
@@ -23,7 +23,7 @@ export default function HeroSection() {
                                 </div>
                             </div>
                         </div>
-                        <div className="hero-box animation ml-4 md:ml-0 md:mt-4 flex align-items-center justify-content-center">
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation ml-4 md:ml-0 md:mt-4 flex align-items-center justify-content-center">
                             <div className="flex flex-column align-items-center">
                             <img src={`${contextPath}/images/landing-new/designer-icon.svg`} alt="primereact templates" />
                                 <div className="name">
@@ -33,8 +33,8 @@ export default function HeroSection() {
                             </div>
                         </div>
                     </div>
-                    <div className="p-2 flex flex-row flex-wrap md:flex-column">
-                        <div className="hero-box animation flex align-items-center justify-content-center">
+                    <div className="p-2 flex flex-row md:flex-column">
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center">
                             <div className="flex flex-column align-items-center">
                             <img src={`${contextPath}/images/landing-new/core-icon.svg`} alt="primereact templates" />
                                 <div className="name">
@@ -43,7 +43,7 @@ export default function HeroSection() {
                                 </div>
                             </div>
                         </div>
-                        <div className="hero-box animation logo hidden md:flex my-4 align-items-center justify-content-center">
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation logo hidden md:flex my-4 align-items-center justify-content-center">
                             <div className="hero-box-inner">
                                 <div className="flex align-items-center justify-content-center">
                                     <img src={`${contextPath}/images/landing-new/overview-icon.svg`} alt="primereact templates" />
@@ -53,7 +53,7 @@ export default function HeroSection() {
                                 </div>
                             </div>
                         </div>
-                        <div className="hero-box animation flex ml-4 md:ml-0 md:mt-4 align-items-center justify-content-center">
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex ml-4 md:ml-0 align-items-center justify-content-center">
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/css-icon.svg`} alt="primereact templates" />
                                 <div className="name">
@@ -63,8 +63,8 @@ export default function HeroSection() {
                             </div>
                         </div>
                     </div>
-                    <div className="p-2 flex flex-row flex-wrap md:flex-column">
-                        <div className="hero-box animation flex align-items-center justify-content-center">
+                    <div className="p-2 flex flex-row md:flex-column">
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center">
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/blocks-icon.svg`} alt="primereact templates" />
                                 <div className="name">
@@ -73,7 +73,7 @@ export default function HeroSection() {
                                 </div>
                             </div>
                         </div>
-                        <div className="hero-box animation flex ml-4 md:ml-0 md:mt-4 align-items-center justify-content-center">
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex ml-4 md:ml-0 md:mt-4 align-items-center justify-content-center">
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/icons-icon.svg`} alt="primereact templates" />
                                 <div className="name">
