@@ -55,8 +55,8 @@ export default function HeroSection() {
             <p className="section-detail">Designer is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer.</p>
             <div className="designer-main mt-7 relative justify-content-center">
                 <img src={`${contextPath}/images/landing-new/wave-dark-alt.svg`} className="absolute w-full"/>
-                <div className="box p-4 flex z-1 designer-editor">
-                    <div className="mr-4 p-4 designer-controls box border-none border-right-1" style={{borderRadius: '10px'}}>
+                <div className="box p-4 flex flex-column md:flex-row z-1 designer-editor">
+                    <div className="mr-0 md:mr-4 p-4 designer-controls box border-bottom-1 border-left-none border-right-none border-top-none md:border-bottom-none md:border-right-1" style={{borderRadius: '10px'}}>
                         <div className="text-center mb-4">
                             <img src={`${contextPath}/images/landing-new/designer.svg`} />
                         </div>
