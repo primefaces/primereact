@@ -1,6 +1,5 @@
 .landing-components {
     .components-main {
-        
         .components-strip-top {
             background: var(--home-components-strip-bg);
             transform: matrix(-1, 0, 0, 1, 0, 0);
@@ -13,5 +12,9 @@
 
     .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
         background: transparent;
+    }
+
+    .box {
+        box-shadow: var(--home-card-shadow);
     }
 }
