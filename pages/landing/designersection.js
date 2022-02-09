@@ -52,7 +52,7 @@ export default function DesignerSection(props) {
     const designerLogo = props.dark ? 'designer-light.svg' : 'designer-dark.svg';
 
     return (
-        <section id="designer-section" className="landing-designer py-8">
+        <section className="landing-designer py-8">
             <div className="section-header">Theme Designer</div>
             <p className="section-detail">Designer is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer.</p>
             <div className="designer-main mt-7 justify-content-center pad-section"

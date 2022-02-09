@@ -10,7 +10,7 @@ export default function TemplateSection(props) {
     });
 
     return (
-        <section id="template-section" className="landing-templates theme-dark py-8">
+        <section className="landing-templates theme-dark py-8">
             <div className="section-header">Templates</div>
             <p className="section-detail">Professionally designed highly customizable application templates to get started in style.</p>
             <div className="flex justify-content-center mt-4">

@@ -118,7 +118,7 @@ export default function ThemeSection(props) {
     const header = renderHeader();
 
     return (
-        <section id="theme-section" className="landing-themes py-8">
+        <section className="landing-themes py-8">
             <div className="section-header">Themes</div>
             <p className="section-detail">Crafted on a design-agnostic infrastructure, choose from a vast amount of themes such as material, bootstrap, tailwind, primeone or develop your own.</p>
             <div className="flex flex-wrap justify-content-center">

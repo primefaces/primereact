@@ -2,6 +2,7 @@ import getConfig from 'next/config';
 import { StyleClass } from '../../components/lib/styleclass/StyleClass';
 import DomHandler from '../../components/lib/utils/DomHandler';
 import { useRef } from 'react';
+import Link from 'next/link';
 import { classNames } from '../../components/lib/utils/ClassNames';
 
 export default function HeroSection(props) {
@@ -28,27 +29,32 @@ export default function HeroSection(props) {
                 <nav id="landing-menu" ref={navMenu} className="hidden lg:block fixed h-screen lg:h-auto top-0 left-0 w-full lg:static origin-top p-8 lg:p-0">
                     <ol className="list-none m-0 p-0 flex flex-column lg:flex-row flex-wrap lg:flex-nowrap lg:align-items-center lg:font-semibold">
                         <li>
-                            <a href="#component-section" className="block px-3 lg:py-2 p-4 text-center transition-colors transition-duration-300" onClick={onItemClick}>Components</a>
+                            <Link href="/setup">
+                                <a className="block px-3 lg:py-2 p-4 text-center transition-colors transition-duration-300">Components</a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#theme-section" className="block lg:py-2 p-4 text-center transition-colors transition-duration-300" onClick={onItemClick}>Themes</a>
+                            <a href="https://www.primefaces.org/primeblocks-react" className="block lg:py-2 p-4 text-center transition-colors transition-duration-300">Blocks</a>
                         </li>
                         <li>
-                            <a href="#blocks-section" className="block lg:py-2 p-4 text-center transition-colors transition-duration-300" onClick={onItemClick}>Blocks</a>
+                            <a href="https://www.primefaces.org/designer-react" className="block lg:py-2 p-4 text-center transition-colors transition-duration-300">Designer</a>
                         </li>
                         <li>
-                            <a href="#designer-section" className="block lg:py-2 p-4 text-center transition-colors transition-duration-300" onClick={onItemClick}>Designer</a>
-                        </li>
-                        <li>
-                            <a href="#template-section" className="block lg:py-2 p-4 text-center transition-colors transition-duration-300" onClick={onItemClick}>Templates</a>
+                            <a href="https://www.primefaces.org/store/templates.xhtml" className="block lg:py-2 p-4 text-center transition-colors transition-duration-300">Templates</a>
                         </li>
                     </ol>
                 </nav>
-                <button type="button" className="p-link linkbox header-button mx-3 inline-flex align-items-center justify-content-center" onClick={changeColorScheme}>
+                <a href="https://github.com/primefaces/primereact" rel="noopener noreferrer" className="linkbox p-0 header-button mr-2 flex align-items-center justify-content-center flex-shrink-0">
+                    <i className="pi pi-github"></i>
+                </a>
+                <a href="https://discord.gg/gzKFYnpmCY" rel="noopener noreferrer" className="linkbox p-0 header-button mr-2 flex align-items-center justify-content-center flex-shrink-0">
+                    <i className="pi pi-discord"></i>
+                </a>
+                <button type="button" className="linkbox header-button inline-flex align-items-center justify-content-center" onClick={changeColorScheme}>
                     <i className={colorSchemeIcon}></i>
                 </button>
                 <StyleClass nodeRef={menubutton} selector="#landing-menu" enterClassName="hidden" enterActiveClassName="scalein">
-                    <button ref={menubutton} type="button" className="p-link linkbox header-button inline-flex align-items-center justify-content-center lg:hidden">
+                    <button ref={menubutton} type="button" className="linkbox header-button inline-flex align-items-center justify-content-center lg:hidden ml-2">
                         <i className="pi pi-bars"></i>
                     </button>
                 </StyleClass>
