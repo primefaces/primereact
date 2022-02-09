@@ -127,7 +127,8 @@ export default function ThemeSection(props) {
                 <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', {'active': props.theme.startsWith('bootstrap4')})} onClick={() => changeTheme('bootstrap4', 'blue')}>Bootstrap</button>
                 <a type="button" className="font-medium p-link linkbox mt-4" href="https://www.primefaces.org/designer-react">more...</a>
             </div>
-            <div className="themes-main flex mt-7 relative justify-content-center pad-section">
+            <div className="themes-main flex mt-7 justify-content-center pad-section"
+                style={{backgroundImage:`url(${contextPath}/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize:'cover'}}>
                 <div className="box overflow-hidden z-1 p-5 table-container">
                     <DataTable value={customers} paginator className="p-datatable-customers" header={header} rows={5}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport"
@@ -146,7 +147,6 @@ export default function ThemeSection(props) {
                         <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={actionBodyTemplate} />
                     </DataTable>
                 </div>
-                <img src={`${contextPath}/images/landing-new/wave-${props.dark ? 'dark' : 'light'}.svg`} className="absolute w-full left-0 top-0"/>
             </div>
         </section>
     );

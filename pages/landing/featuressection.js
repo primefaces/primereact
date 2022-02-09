@@ -4,11 +4,10 @@ export default function FeaturesSection(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
-        <section className="landing-features py-8 pad-section relative">
-            <img src={`${contextPath}/images/landing-new/wave-${props.dark ? 'dark' : 'light'}.svg`} className="absolute w-full left-0 top-50 hidden"/>
+        <section className="landing-features py-8">
             <div className="section-header">Features</div>
             <p className="section-detail">PrimeReact is the most complete solution for your UI requirements.</p>
-            <div className="grid mt-7 relative">
+            <div className="grid mt-7 pad-section" style={{backgroundImage:`url(${contextPath}/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize:'cover'}}>
                 <div className="col-12 md:col-6 xl:col-3 flex justify-content-center p-3">
                     <div className="box p-4 w-full">
                         <img src={`${contextPath}/images/landing-new/features/icon-components.svg`} alt="components icon" className="block mb-3"/>
