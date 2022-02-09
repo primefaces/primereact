@@ -37,8 +37,7 @@ const chartData = {
 };
 
 export default function ComponentSection() {
-    const categories = [{name: 'Clothing', key: 'C'}, {name: 'Fitness', key: 'F'}, {name: 'Electronics', key: 'E'}];
-    const [category, setCategory] = useState(categories[0]);
+    const [category, setCategory] = useState('C');
     const [nodes, setNodes] = useState(null);
     const [switchValue, setSwitchValue] = useState(true);
     const [rangeValues, setRangeValues] = useState([20,80]);
@@ -82,15 +81,15 @@ export default function ComponentSection() {
                         <span className="text-secondary font-medium block mt-5 mb-3">Category</span>
                         <div className="flex justify-content-between">
                             <div className="flex align-items-center">
-                                <RadioButton inputId="category1" value="C" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'clothing'} />
+                                <RadioButton inputId="category1" value="C" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'C'} />
                                 <label htmlFor="category1" className="ml-2 font-medium">Clothing</label>
                             </div>
                             <div className="flex align-items-center">
-                                <RadioButton inputId="category2" value="F" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'fitness'} />
+                                <RadioButton inputId="category2" value="F" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'F'} />
                                 <label htmlFor="category2" className="ml-2 font-medium">Fitness</label>
                             </div>
                             <div className="flex align-items-center">
-                                <RadioButton inputId="category3" value="E" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'electronics'} />
+                                <RadioButton inputId="category3" value="E" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'E'} />
                                 <label htmlFor="category3" className="ml-2 font-medium">Electronics</label>
                             </div>
                         </div>
