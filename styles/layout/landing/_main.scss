@@ -20,8 +20,8 @@
         align-items: center;
         color: var(--home-linkbox-text-color);
         padding: .5rem 1rem;
-        border: 1px solid var(--home-border-color);
-        background-color: var(--home-box-bg);
+        border: var(--home-linkbox-border);
+        background-color: var(--home-linkbox-bg);
         border-radius: 10px;
         cursor: pointer;
 

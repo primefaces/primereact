@@ -5,7 +5,7 @@ export default function FeaturesSection(props) {
 
     return (
         <section className="landing-features py-8 pad-section relative">
-            <img src={`${contextPath}/images/landing-new/wave-${props.dark ? 'dark' : 'light'}.svg`} className="absolute w-full left-0 top-50"/>
+            <img src={`${contextPath}/images/landing-new/wave-${props.dark ? 'dark' : 'light'}.svg`} className="absolute w-full left-0 top-50 hidden"/>
             <div className="section-header">Features</div>
             <p className="section-detail">PrimeReact is the most complete solution for your UI requirements.</p>
             <div className="grid mt-7 relative">

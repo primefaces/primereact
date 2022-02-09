@@ -103,8 +103,7 @@ export default function DesignerSection(props) {
                                 </div>
                             </div>
 
-                            <a href="https://www.primefaces.org/designer-react" 
-                                className="font-semibold p-3 border-round flex align-items-center linkbox">
+                            <a href="https://www.primefaces.org/designer-react" className="font-semibold p-3 border-round flex align-items-center linkbox active">
                                 <span>View Full Version</span>
                                 <i className="pi pi-arrow-right ml-auto"></i>
                             </a>

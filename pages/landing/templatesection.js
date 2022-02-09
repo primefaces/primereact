@@ -14,7 +14,7 @@ export default function TemplateSection(props) {
             <div className="section-header">Templates</div>
             <p className="section-detail">Professionally designed highly customizable application templates to get started in style.</p>
             <div className="flex justify-content-center mt-4">
-                <a href="https://www.primefaces.org/store" className="font-semibold p-3 border-round flex align-items-center linkbox">
+                <a href="https://www.primefaces.org/store" className="font-semibold p-3 border-round flex align-items-center linkbox active">
                     <span>Learn More</span>
                     <i className="pi pi-arrow-right ml-2"></i>
                 </a>

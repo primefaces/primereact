@@ -81,7 +81,7 @@ export default function ComponentSection() {
             <div className="section-header">Components</div>
             <p className="section-detail"><span className="font-bold text-900">Over 80</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.</p>
             <div className="flex justify-content-center mt-4">
-                <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox">
+                <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox active">
                     <span>Get Started</span>
                     <i className="pi pi-arrow-right ml-2"></i>
                 </a>
