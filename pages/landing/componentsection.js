@@ -15,25 +15,40 @@ import { TabMenu } from '../../components/lib/tabmenu/TabMenu';
 import { Chart } from '../../components/lib/chart/Chart';
 import getConfig from 'next/config';
 
-const chartData = {
+let chartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
         {
             label: 'Income',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            fill: false,
-            borderColor: '#42A5F5',
-            tension: .4
-        },
-        {
-            label: 'Expenses',
-            data: [28, 48, 40, 19, 86, 27, 90],
+            data: [40, 59, 40, 50, 56, 40, 70],
             fill: true,
-            borderColor: '#FFA726',
+            borderColor: '#03C4E8',
             tension: .4,
-            backgroundColor: 'rgba(255,167,38,0.2)'
+            backgroundColor: 'rgba(3, 196, 232, .2)'
         }
     ]
+};
+
+let chartOptions = {
+    plugins: {
+        legend: {
+            display: false
+        }
+    },
+    scales: {
+        y: {
+            ticks: {
+                display: false
+            },
+            min: 0,
+            max: 100,
+        },
+        x: {
+            ticks: {
+                display: false
+            }
+        }
+    }
 };
 
 export default function ComponentSection() {
@@ -56,6 +71,7 @@ export default function ComponentSection() {
         {name: 'React', value: 2},
         {name: 'Themes', value: 3}
     ];
+
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
     }, []); 
@@ -95,7 +111,7 @@ export default function ComponentSection() {
                         </div>
                     </div>
                     <div className="box p-4 mb-5">
-                        <Chart type="line" data={chartData}/>
+                        <Chart type="line" data={chartData} options={chartOptions} />
                     </div>
                     <div className="box p-4 mb-5">
                         <TabMenu model={items} activeIndex={activeTabIndex} onTabChange={(e) => setActiveTabIndex(e.index)}/>
