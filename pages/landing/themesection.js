@@ -115,7 +115,7 @@ export default function ThemeSection(props) {
     return (
         <section id="theme-section" className="landing-themes py-8">
             <div className="section-header">Themes</div>
-            <p className="section-detail">Build on a design-agnostic infrastructure, choose from a vast amount of themes such as material, bootstrap, tailwind, primeone or develop your own.</p>
+            <p className="section-detail">Crafted on a design-agnostic infrastructure, choose from a vast amount of themes such as material, bootstrap, tailwind, primeone or develop your own.</p>
             <div className="flex flex-wrap justify-content-center">
                 <button type="button" className={classNames('font-medium p-link linkbox mr-3 mt-4', {'active': props.theme === 'lara-dark-indigo'})} onClick={e => props.onThemeChange('lara-dark-indigo')}>PrimeOne</button>
                 <button type="button" className={classNames('font-medium p-link linkbox mr-3 mt-4', {'active': props.theme === 'md-dark-indigo'})} onClick={e => props.onThemeChange('md-dark-indigo')}>Material</button>
@@ -133,7 +133,7 @@ export default function ThemeSection(props) {
                         <Column selectionMode="multiple" style={{ width: '3rem' }}></Column>
                         <Column field="name" header="Name" sortable style={{ minWidth: '14rem' }} />
                         <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filterPlaceholder="Search by country" />
-                        <Column header="Agent" sortable sortField="representative.name" filterField="representative" style={{ minWidth: '14rem' }} body={representativeBodyTemplate} />
+                        <Column sortable header="Agent" sortField="representative.name" filterField="representative" style={{ minWidth: '14rem' }} body={representativeBodyTemplate} />
                         <Column field="date" header="Date" sortable filterField="date" dataType="date" style={{ minWidth: '8rem' }} body={dateBodyTemplate} />
                         <Column field="balance" header="Balance" sortable dataType="numeric" style={{ minWidth: '8rem' }} body={balanceBodyTemplate}  />
                         <Column field="status" header="Status" sortable style={{ minWidth: '10rem' }} body={statusBodyTemplate} />
@@ -141,7 +141,7 @@ export default function ThemeSection(props) {
                         <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={actionBodyTemplate} />
                     </DataTable>
                 </div>
-                <img src={`${contextPath}/images/landing-new/wave-dark.svg`} className="absolute w-full"/>
+                <img src={`${contextPath}/images/landing-new/wave-${props.dark ? 'dark' : 'light'}.svg`} className="absolute w-full"/>
             </div>
         </section>
     );

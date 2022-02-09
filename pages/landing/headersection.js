@@ -2,20 +2,26 @@ import getConfig from 'next/config';
 import { StyleClass } from '../../components/lib/styleclass/StyleClass';
 import DomHandler from '../../components/lib/utils/DomHandler';
 import { useRef } from 'react';
+import { classNames } from '../../components/lib/utils/ClassNames';
 
-export default function HeroSection() {
+export default function HeroSection(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const menubutton = useRef();
     const navMenu = useRef();
+    const colorSchemeIcon = classNames('pi', {'pi-sun': props.dark, 'pi-moon': !props.dark});
 
     const onItemClick = () => {
         DomHandler.addClass(navMenu.current, 'hidden');
     }
 
+    const changeColorScheme = () => {
+        props.onToggleColorScheme();
+    }
+
     return (
         <section className="landing-header flex align-items-center justify-content-between h-10rem pad-section">
             <span>
-                <img src={`${contextPath}/images/landing-new/primereact-logo-black.svg`} alt="primereact logo" />
+                <img src={`${contextPath}/images/landing-new/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
             </span>
 
             <div className="flex align-items-center">
@@ -38,8 +44,8 @@ export default function HeroSection() {
                         </li>
                     </ol>
                 </nav>
-                <button type="button" className="p-link linkbox header-button mx-3 inline-flex align-items-center justify-content-center">
-                    <i className="pi pi-moon"></i>
+                <button type="button" className="p-link linkbox header-button mx-3 inline-flex align-items-center justify-content-center" onClick={changeColorScheme}>
+                    <i className={colorSchemeIcon}></i>
                 </button>
                 <StyleClass nodeRef={menubutton} selector="#landing-menu" enterClassName="hidden" enterActiveClassName="scalein">
                     <button ref={menubutton} type="button" className="p-link linkbox header-button inline-flex align-items-center justify-content-center lg:hidden">

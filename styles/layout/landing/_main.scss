@@ -1,38 +1,38 @@
 .landing {
     min-height: 100vh;
-    background: #030B17;
+    background: var(--home-bg);
     scroll-behavior: smooth;
 
     .landing-intro {
-        background: linear-gradient(180deg, #061730 0%, #030B17 100%)
+        background: var(--home-intro-bg);
     }
 
     .box,.linkbox {
-        border: 1px solid #183E71;
+        border: 1px solid var(--home-border-color);
         border-radius: 10px;
-        background-color: rgba(11, 33, 63, 0.55);
+        background-color: var(--home-box-bg);
     }
 
     .linkbox {
         transition: background-color .3s;
         display: inline-flex;
         align-items: center;
-        color: #ffffff;
+        color: var(--home-box-text-color);
         padding: .5rem 1rem;
 
         &:hover {
-            background: rgba(11, 33, 63, 0.9);
+            background: var(--home-box-hover-bg);
         }
 
         &.active {
-            background: #03C4E8;
-            color: #212121;
+            background: var(--home-box-active-bg);
+            color: var(--home-box-active-text-color);
         }
     }
 
     .section-header {
         font-size: 2rem;
-        color: #ffffff;
+        color: var(--home-primary-text-color);
         font-weight: 700;
         text-align: center;
         padding: 0 2rem;
@@ -40,7 +40,7 @@
 
     .section-detail {
         text-align: center;
-        color: #B6C4D6;
+        color: var(--home-secondary-text-color);
         font-weight: 500;
         font-size: 1.143rem;
         margin: 1.5rem 0 0 0;
@@ -48,7 +48,7 @@
     }
 
     .section-divider {
-        border: 1px solid #183E71;
+        border: 1px solid var(--home-border-color);
         height: 1px;
         border-bottom: 0 none;
         overflow: hidden;
@@ -56,7 +56,7 @@
 }
 
 .text-secondary {
-    color: var(--text-color-secondary);
+    color: var(--home-secondary-text-color);
 }
 
 .pad-section {

@@ -3,6 +3,8 @@ $landingBreakpointLG: 991px;
 $landingBreakpointXL: 1199px;
 
 @import './_main';
+@import './_light';
+@import './_dark';
 @import './_header';
 @import './_hero';
 @import './_getstarted';

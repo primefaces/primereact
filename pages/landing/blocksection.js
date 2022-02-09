@@ -15,7 +15,7 @@ export default function BlockSection() {
     });
 
     return (
-        <section id="blocks-section" className="landing-blocks theme-dark pt-8 overflow-hidden">
+        <section id="blocks-section" className="landing-blocks pt-8 overflow-hidden">
             <div className="section-header">PrimeBlocks</div>
             <p className="section-detail">280+ ready to copy-paste UI blocks to build spectacular applications in no time.</p>
             <div className="flex justify-content-center mt-4">
@@ -51,7 +51,7 @@ export default function BlockSection() {
                                             </div>
                                             <div>
                                                 <div className="flex-1">
-                                                    <div className="circle"></div>
+                                                    <div className="circle circle-highlight"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -74,7 +74,7 @@ export default function BlockSection() {
                                                 <div className="bar w-4rem mt-3"></div>
                                             </div>
                                             <div>
-                                                <div className="circle"></div>
+                                                <div className="circle circle-highligh"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -87,7 +87,7 @@ export default function BlockSection() {
                                                 <div className="bar w-4rem mt-3"></div>
                                             </div>
                                             <div>
-                                                <div className="circle"></div>
+                                                <div className="circle circle-highligh"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +98,7 @@ export default function BlockSection() {
                                                 <div className="bar w-4rem mt-3"></div>
                                             </div>
                                             <div>
-                                                <div className="circle"></div>
+                                                <div className="circle circle-highligh"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -109,7 +109,7 @@ export default function BlockSection() {
                                                 <div className="bar w-4rem mt-3"></div>
                                             </div>
                                             <div>
-                                                <div className="circle"></div>
+                                                <div className="circle circle-highligh"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +131,7 @@ export default function BlockSection() {
                                 <div className="bar w-2rem mx-2"></div>
                                 <div className="bar w-2rem mx-2"></div>
                             </div>
-                            <div className="circle"></div>
+                            <div className="circle circle-highlight"></div>
                         </div>
                         <div className="block-content flex-1 p-4 flex flex-column">
                             <div className="bar w-1"></div>
@@ -167,9 +167,9 @@ export default function BlockSection() {
                                 <img src={`${contextPath}/images/landing-new/blocks/logo-2.svg`} alt="block logo" />
                             </div>
                             <div className="sidebar-menu mt-5">
-                                <div className="circle circle-blue my-3"></div>
-                                <div className="circle circle-blue my-3"></div>
-                                <div className="circle circle-blue my-3"></div>
+                                <div className="circle my-3"></div>
+                                <div className="circle my-3"></div>
+                                <div className="circle my-3"></div>
                             </div>
                         </div>
                         <div className="block-sidebar-list px-4">
@@ -188,7 +188,7 @@ export default function BlockSection() {
                                     <div className="block-item  w-3 flex justify-content-between flex-column ">
                                         <div className="bar w-full "></div>
                                         <div className="flex align-items-center mt-3">
-                                            <div className="circle circle-small mr-2"></div>
+                                            <div className="circle circle-small circle-highlight mr-2"></div>
                                             <div className="bar w-2rem"></div>
                                         </div>
                                         <div className="bar bar-button w-4rem mt-4"></div>
@@ -196,11 +196,11 @@ export default function BlockSection() {
                                     <div className="block-item  block-item-active animation-3 mx-3 w-3 flex justify-content-between flex-column">
                                         <div className="bar w-full "></div>
                                         <div className="flex align-items-center mt-3">
-                                            <div className="circle circle-small mr-2"></div>
+                                            <div className="circle circle-small circle-highlight mr-2"></div>
                                             <div className="bar w-2rem"></div>
                                         </div>
                                         <div className="flex align-items-center mt-3">
-                                            <div className="circle circle-small mr-2"></div>
+                                            <div className="circle circle-small circle-highlight mr-2"></div>
                                             <div className="bar w-3rem"></div>
                                         </div>
                                         <div className="bar bar-button w-4rem mt-4"></div>
@@ -208,15 +208,15 @@ export default function BlockSection() {
                                     <div className="block-item  w-3 flex justify-content-between flex-column">
                                         <div className="bar w-full "></div>
                                         <div className="flex align-items-center mt-3">
-                                            <div className="circle circle-small mr-2"></div>
+                                            <div className="circle circle-small circle-highlight mr-2"></div>
                                             <div className="bar w-2rem"></div>
                                         </div>
                                         <div className="flex align-items-center mt-3">
-                                            <div className="circle circle-small mr-2"></div>
+                                            <div className="circle circle-small circle-highlight mr-2"></div>
                                             <div className="bar w-2rem"></div>
                                         </div>
                                         <div className="flex align-items-center mt-3">
-                                            <div className="circle circle-small mr-2"></div>
+                                            <div className="circle circle-small circle-highlight mr-2"></div>
                                             <div className="bar w-2rem"></div>
                                         </div>
                                         <div className="bar bar-button w-4rem mt-4"></div>
@@ -254,7 +254,7 @@ export default function BlockSection() {
                                             </div>
                                             <div>
                                                 <div className="flex-1">
-                                                    <div className="circle circle-medium"></div>
+                                                    <div className="circle circle-highlight circle-medium"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -268,7 +268,7 @@ export default function BlockSection() {
                                             </div>
                                             <div>
                                                 <div className="flex-1">
-                                                    <div className="circle circle-medium"></div>
+                                                    <div className="circle circle-highlight circle-medium"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -282,7 +282,7 @@ export default function BlockSection() {
                                             </div>
                                             <div>
                                                 <div className="flex-1">
-                                                    <div className="circle circle-medium"></div>
+                                                    <div className="circle circle-highlight circle-medium"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -297,9 +297,9 @@ export default function BlockSection() {
                                 <img src={`${contextPath}/images/landing-new/blocks/logo-2.svg`} alt="block logo" />
                             </div>
                             <div className="sidebar-menu mt-5">
-                                <div className="circle circle-blue my-3"></div>
-                                <div className="circle circle-blue my-3"></div>
-                                <div className="circle circle-blue my-3"></div>
+                                <div className="circle my-3"></div>
+                                <div className="circle my-3"></div>
+                                <div className="circle my-3"></div>
                             </div>
                         </div>
                         <div className="block-sidebar-list px-4">
@@ -324,7 +324,7 @@ export default function BlockSection() {
                                 </div>
                                 <div className="block-item block-item-col  flex ">
                                     <div className="flex">
-                                        <div className="circle circle-small -mr-1"></div>
+                                        <div className="circle circle-small circle-highlight -mr-1"></div>
                                         <div className="bar w-3rem mx-3"></div>
                                     </div>
                                     <div className="bar w-3rem mx-3"></div>
@@ -333,7 +333,7 @@ export default function BlockSection() {
                                 </div>
                                 <div className="block-item block-item-col  flex ">
                                     <div className="flex">
-                                        <div className="circle circle-small -mr-1"></div>
+                                        <div className="circle circle-small circle-highlight -mr-1"></div>
                                         <div className="bar w-3rem mx-3"></div>
                                     </div>
                                     <div className="bar w-3rem mx-3"></div>
@@ -342,7 +342,7 @@ export default function BlockSection() {
                                 </div>
                                 <div className="block-item block-item-col  flex ">
                                     <div className="flex">
-                                        <div className="circle circle-small -mr-1"></div>
+                                        <div className="circle circle-small circle-highlight -mr-1"></div>
                                         <div className="bar w-3rem mx-3"></div>
                                     </div>
                                     <div className="bar w-3rem mx-3"></div>
@@ -378,7 +378,7 @@ export default function BlockSection() {
                                     <div className="bar w-6rem mt-2"></div>
                                     <div className="bar w-4rem mt-2"></div>
                                     <div className="flex">
-                                        <div className="bar bar-blue bar-button w-4rem mr-2 mt-4"></div>
+                                        <div className="bar bar-highlight bar-button w-4rem mr-2 mt-4"></div>
                                         <div className="bar bar-button w-4rem  mr-2 mt-4"></div>
                                     </div>
                                 </div>
