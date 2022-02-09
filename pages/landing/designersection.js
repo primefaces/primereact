@@ -11,7 +11,7 @@ import { Slider } from '../../components/lib/slider/Slider';
 import { classNames } from '../../components/lib/utils/ClassNames';
 import { useRef, useState } from 'react';
 
-export default function HeroSection() {
+export default function DesignerSection(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [font,setFont] = useState('Inter');
     const fonts = [
@@ -49,6 +49,8 @@ export default function HeroSection() {
         'demo-size-large': size === 'large'
     });
 
+    const designerLogo = props.dark ? 'designer-light.svg' : 'designer-dark.svg';
+
     return (
         <section id="designer-section" className="landing-designer py-8 pad-section">
             <div className="section-header">Theme Designer</div>
@@ -58,7 +60,7 @@ export default function HeroSection() {
                 <div className="box p-4 flex flex-column md:flex-row z-1 designer-editor">
                     <div className="mr-0 md:mr-4 p-4 designer-controls box border-bottom-1 border-left-none border-right-none border-top-none md:border-bottom-none md:border-right-1" style={{borderRadius: '10px'}}>
                         <div className="text-center mb-4">
-                            <img src={`${contextPath}/images/landing-new/designer.svg`} />
+                            <img src={`${contextPath}/images/landing-new/${designerLogo}`} />
                         </div>
                         <div className="p-fluid">
                             <span className="font-semibold block mb-3">Primary</span>

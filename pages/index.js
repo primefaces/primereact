@@ -66,7 +66,7 @@ export default function Home() {
             <ComponentSection />
             <ThemeSection theme={tableTheme} onThemeChange={(t) => setTableTheme(t)} dark={dark} />
             <BlockSection />
-            <DesignerSection />
+            <DesignerSection dark={dark} />
             <TemplateSection dark={dark} />
             <UsersSection dark={dark}/>
             <FeaturesSection />
