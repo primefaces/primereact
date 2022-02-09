@@ -20,14 +20,15 @@
         align-items: center;
         color: var(--home-box-text-color);
         padding: .5rem 1rem;
+        cursor: pointer;
 
         &:hover {
             background: var(--home-box-hover-bg);
         }
 
         &.active {
-            background: var(--home-box-active-bg);
-            color: var(--home-box-active-text-color);
+            background: var(--home-highlight-color);
+            color: var(--home-highlight-fore-color);
         }
     }
 
