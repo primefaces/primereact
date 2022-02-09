@@ -17,9 +17,22 @@ import { useState } from 'react';
 
 export default function Home() {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const [theme, setTheme] = useState('lara-dark-indigo');
+    const [mainTheme, setMainTheme] = useState('lara-dark-indigo');
+    const [tableTheme, setTableTheme] = useState('lara-dark-indigo');
     const [dark, setDark] = useState(true);
     const rootClassName = classNames('landing', {'landing-light': !dark, 'landing-dark': dark});
+    const onColorSchemeChange = () => {
+        if (dark) {
+            setDark(false);
+            setMainTheme('lara-light-indigo');
+            setTableTheme(tableTheme.replace('dark', 'light'));
+        }
+        else {
+            setDark(true);
+            setMainTheme('lara-dark-indigo');
+            setTableTheme(tableTheme.replace('light', 'dark'));
+        }
+    }
 
     return (
         <div className={rootClassName}>
@@ -41,17 +54,17 @@ export default function Home() {
                 <meta property="og:image" content="https://www.primefaces.org/primereact/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
                 <link href={`${contextPath}/images/favicon.ico`} rel="icon" type="image/x-icon"></link>
-                <link href={`${contextPath}/themes/${theme}/theme.css`} rel="stylesheet"></link>
-                <link rel="stylesheet" href={`${contextPath}/styles/landing/themes/${theme}/theme.css`}></link>
+                <link href={`${contextPath}/themes/${mainTheme}/theme.css`} rel="stylesheet"></link>
+                <link rel="stylesheet" href={`${contextPath}/styles/landing/themes/${tableTheme}/theme.css`}></link>
                 <link rel="stylesheet" href={`${contextPath}/styles/flags.css`}></link>
                 <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
             </Head>
             <div className="landing-intro">
-                <HeaderSection dark={dark} onToggleColorScheme={() => setDark(!dark)} />
+                <HeaderSection dark={dark} onToggleColorScheme={onColorSchemeChange} />
                 <HeroSection />
             </div>
             <ComponentSection />
-            <ThemeSection theme={theme} onThemeChange={(t) => setTheme(t)} dark={dark} />
+            <ThemeSection theme={tableTheme} onThemeChange={(t) => setTableTheme(t)} dark={dark} />
             <BlockSection />
             <DesignerSection />
             <TemplateSection dark={dark} />

@@ -27,6 +27,11 @@ export default function ThemeSection(props) {
     const [loading, setLoading] = useState(true);
     const customerService = new CustomerService();
 
+    const changeTheme = (name, color) => {
+        let newTheme = name + '-' + (props.dark ? 'dark' : 'light') + '-' + color;
+        props.onThemeChange(newTheme);
+    }
+
     useEffect(() => {
         customerService.getCustomersLarge().then(data => { setCustomers(getCustomers(data)); setLoading(false) });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -117,9 +122,9 @@ export default function ThemeSection(props) {
             <div className="section-header">Themes</div>
             <p className="section-detail">Crafted on a design-agnostic infrastructure, choose from a vast amount of themes such as material, bootstrap, tailwind, primeone or develop your own.</p>
             <div className="flex flex-wrap justify-content-center">
-                <button type="button" className={classNames('font-medium p-link linkbox mr-3 mt-4', {'active': props.theme === 'lara-dark-indigo'})} onClick={e => props.onThemeChange('lara-dark-indigo')}>PrimeOne</button>
-                <button type="button" className={classNames('font-medium p-link linkbox mr-3 mt-4', {'active': props.theme === 'md-dark-indigo'})} onClick={e => props.onThemeChange('md-dark-indigo')}>Material</button>
-                <button type="button" className={classNames('font-medium p-link linkbox mr-3 mt-4', {'active': props.theme === 'bootstrap4-dark-blue'})} onClick={e => props.onThemeChange('bootstrap4-dark-blue')}>Bootstrap</button>
+                <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', {'active': props.theme.startsWith('lara')})} onClick={() => changeTheme('lara', 'indigo')}>PrimeOne</button>
+                <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', {'active': props.theme.startsWith('md')})} onClick={() => changeTheme('md', 'indigo')}>Material</button>
+                <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', {'active': props.theme.startsWith('bootstrap4')})} onClick={() => changeTheme('bootstrap4', 'blue')}>Bootstrap</button>
                 <a type="button" className="font-medium p-link linkbox mt-4" href="https://www.primefaces.org/designer-react">more...</a>
             </div>
             <div className="themes-main flex mt-7 relative justify-content-center pad-section">

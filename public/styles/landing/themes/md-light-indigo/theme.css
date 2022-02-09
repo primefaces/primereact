@@ -25,9 +25,6 @@
 .landing-themes * {
   box-sizing: border-box;
 }
-.landing-themes .box.table-container {
-  background-color: #1e1e1e;
-}
 .landing-themes .p-component {
   font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
   font-size: 1rem;
@@ -41,10 +38,10 @@
   opacity: 0.38;
 }
 .landing-themes .p-error {
-  color: #f44435;
+  color: #B00020;
 }
 .landing-themes .p-text-secondary {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .pi {
   font-size: 1rem;
@@ -82,30 +79,30 @@
   }
 }
 .landing-themes .p-calendar.p-invalid.p-component > .p-inputtext {
-  border-color: #f44435;
+  border-color: #B00020;
 }
 .landing-themes .p-datepicker {
   padding: 0.5rem;
-  background: #1e1e1e;
-  color: rgba(255, 255, 255, 0.87);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
+  border: 1px solid #e5e5e5;
   border-radius: 4px;
 }
 .landing-themes .p-datepicker:not(.p-datepicker-inline) {
-  background: #2b2b2b;
+  background: #ffffff;
   border: 0 none;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 .landing-themes .p-datepicker:not(.p-datepicker-inline) .p-datepicker-header {
-  background: #2b2b2b;
+  background: #ffffff;
 }
 .landing-themes .p-datepicker .p-datepicker-header {
   padding: 0.5rem;
-  color: rgba(255, 255, 255, 0.87);
-  background: #1e1e1e;
+  color: rgba(0, 0, 0, 0.87);
+  background: #ffffff;
   font-weight: 500;
   margin: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 }
@@ -113,7 +110,7 @@
 .landing-themes .p-datepicker .p-datepicker-header .p-datepicker-next {
   width: 2.5rem;
   height: 2.5rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   border: 0 none;
   background: transparent;
   border-radius: 50%;
@@ -121,9 +118,9 @@
 }
 .landing-themes .p-datepicker .p-datepicker-header .p-datepicker-prev:enabled:hover,
 .landing-themes .p-datepicker .p-datepicker-header .p-datepicker-next:enabled:hover {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   border-color: transparent;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-datepicker .p-datepicker-header .p-datepicker-prev:focus,
 .landing-themes .p-datepicker .p-datepicker-header .p-datepicker-next:focus {
@@ -141,7 +138,7 @@
   outline: 0 none;
   outline-offset: 0;
   box-shadow: none;
-  border-color: #9FA8DA;
+  border-color: #3F51B5;
 }
 .landing-themes .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
   margin-right: 0.5rem;
@@ -168,8 +165,8 @@
   border: 1px solid transparent;
 }
 .landing-themes .p-datepicker table td > span.p-highlight {
-  color: #9FA8DA;
-  background: rgba(159, 168, 218, 0.16);
+  color: #3F51B5;
+  background: rgba(63, 81, 181, 0.12);
 }
 .landing-themes .p-datepicker table td > span:focus {
   outline: 0 none;
@@ -177,38 +174,38 @@
   box-shadow: none;
 }
 .landing-themes .p-datepicker table td.p-datepicker-today > span {
-  background: transparent;
-  color: rgba(255, 255, 255, 0.87);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
+  border-color: black;
 }
 .landing-themes .p-datepicker table td.p-datepicker-today > span.p-highlight {
-  color: #9FA8DA;
-  background: rgba(159, 168, 218, 0.16);
+  color: #3F51B5;
+  background: rgba(63, 81, 181, 0.12);
 }
 .landing-themes .p-datepicker .p-datepicker-buttonbar {
   padding: 1rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 .landing-themes .p-datepicker .p-datepicker-buttonbar .p-button {
   width: auto;
 }
 .landing-themes .p-datepicker .p-timepicker {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
   padding: 0.5rem;
 }
 .landing-themes .p-datepicker .p-timepicker button {
   width: 2.5rem;
   height: 2.5rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   border: 0 none;
   background: transparent;
   border-radius: 50%;
   transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .landing-themes .p-datepicker .p-timepicker button:enabled:hover {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   border-color: transparent;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-datepicker .p-timepicker button:focus {
   outline: 0 none;
@@ -236,11 +233,11 @@
   border-radius: 4px;
 }
 .landing-themes .p-datepicker .p-monthpicker .p-monthpicker-month.p-highlight {
-  color: #9FA8DA;
-  background: rgba(159, 168, 218, 0.16);
+  color: #3F51B5;
+  background: rgba(63, 81, 181, 0.12);
 }
 .landing-themes .p-datepicker.p-datepicker-multiple-month .p-datepicker-group {
-  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   padding-top: 0;
@@ -254,7 +251,7 @@
   border-right: 0 none;
 }
 .landing-themes .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):focus {
   outline: 0 none;
@@ -262,7 +259,7 @@
   box-shadow: none;
 }
 .landing-themes .p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-highlight):not(.p-disabled):hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-highlight):not(.p-disabled):focus {
   outline: 0 none;
@@ -279,71 +276,71 @@
   height: 18px;
 }
 .landing-themes .p-checkbox .p-checkbox-box {
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  background: #1e1e1e;
+  border: 2px solid #757575;
+  background: #ffffff;
   width: 18px;
   height: 18px;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(0, 0, 0, 0.87);
   border-radius: 4px;
   transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
 }
 .landing-themes .p-checkbox .p-checkbox-box .p-checkbox-icon {
   transition-duration: 0.2s;
-  color: #121212;
+  color: #ffffff;
   font-size: 14px;
 }
 .landing-themes .p-checkbox .p-checkbox-box.p-highlight {
-  border-color: #9FA8DA;
-  background: #9FA8DA;
+  border-color: #3F51B5;
+  background: #3F51B5;
 }
 .landing-themes .p-checkbox .p-checkbox-box.p-highlight:not(.p-disabled):hover {
-  border-color: #9FA8DA;
-  background: #9FA8DA;
-  color: #121212;
+  border-color: #3F51B5;
+  background: #3F51B5;
+  color: #ffffff;
 }
 .landing-themes .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
-  border-color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: none;
-  border-color: #9FA8DA;
+  border-color: #3F51B5;
 }
 .landing-themes .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
-  border-color: #9FA8DA;
-  background: #9FA8DA;
-  color: #121212;
+  border-color: #3F51B5;
+  background: #3F51B5;
+  color: #ffffff;
 }
 .landing-themes .p-checkbox.p-invalid > .p-checkbox-box {
-  border-color: #f44435;
+  border-color: #B00020;
 }
 .landing-themes .p-input-filled .p-checkbox .p-checkbox-box {
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: #f5f5f5;
 }
 .landing-themes .p-input-filled .p-checkbox .p-checkbox-box.p-highlight {
-  background: #9FA8DA;
+  background: #3F51B5;
 }
 .landing-themes .p-input-filled .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: #ececec;
 }
 .landing-themes .p-input-filled .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
-  background: #9FA8DA;
+  background: #3F51B5;
 }
 .landing-themes .p-dropdown {
-  background: #1e1e1e;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.38);
   transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
   border-radius: 4px;
 }
 .landing-themes .p-dropdown:not(.p-disabled):hover {
-  border-color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-dropdown:not(.p-disabled).p-focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: none;
-  border-color: #9FA8DA;
+  border-color: #3F51B5;
 }
 .landing-themes .p-dropdown.p-dropdown-clearable .p-dropdown-label {
   padding-right: 2rem;
@@ -353,7 +350,7 @@
   border: 0 none;
 }
 .landing-themes .p-dropdown .p-dropdown-label.p-placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-dropdown .p-dropdown-label:enabled:focus {
   outline: 0 none;
@@ -361,30 +358,30 @@
 }
 .landing-themes .p-dropdown .p-dropdown-trigger {
   background: transparent;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   width: 2.357rem;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
 .landing-themes .p-dropdown .p-dropdown-clear-icon {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   right: 2.357rem;
 }
 .landing-themes .p-dropdown.p-invalid.p-component {
-  border-color: #f44435;
+  border-color: #B00020;
 }
 .landing-themes .p-dropdown-panel {
-  background: #2b2b2b;
-  color: rgba(255, 255, 255, 0.87);
+  background: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
   border: 0 none;
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 .landing-themes .p-dropdown-panel .p-dropdown-header {
   padding: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.87);
-  background: #2b2b2b;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.87);
+  background: #ffffff;
   margin: 0;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
@@ -395,7 +392,7 @@
 }
 .landing-themes .p-dropdown-panel .p-dropdown-header .p-dropdown-filter-icon {
   right: 1rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-dropdown-panel .p-dropdown-header .p-dropdown-clearable-filter .p-dropdown-filter {
   padding-right: 4rem;
@@ -411,68 +408,68 @@
   margin: 0;
   padding: 1rem 1rem;
   border: 0 none;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(0, 0, 0, 0.87);
   background: transparent;
   transition: none;
   border-radius: 0;
 }
 .landing-themes .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
-  color: #9FA8DA;
-  background: rgba(159, 168, 218, 0.16);
+  color: #3F51B5;
+  background: rgba(63, 81, 181, 0.12);
 }
 .landing-themes .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
-  color: rgba(255, 255, 255, 0.87);
-  background: rgba(255, 255, 255, 0.04);
+  color: rgba(0, 0, 0, 0.87);
+  background: rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-dropdown-panel .p-dropdown-items .p-dropdown-item-group {
   margin: 0;
   padding: 1rem;
-  color: rgba(255, 255, 255, 0.6);
-  background: transparent;
+  color: rgba(0, 0, 0, 0.6);
+  background: #ffffff;
   font-weight: 400;
 }
 .landing-themes .p-dropdown-panel .p-dropdown-items .p-dropdown-empty-message {
   padding: 1rem 1rem;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(0, 0, 0, 0.87);
   background: transparent;
 }
 .landing-themes .p-input-filled .p-dropdown {
-  background: rgba(255, 255, 255, 0.06);
+  background: #f5f5f5;
 }
 .landing-themes .p-input-filled .p-dropdown:not(.p-disabled):hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: #ececec;
 }
 .landing-themes .p-input-filled .p-dropdown:not(.p-disabled).p-focus {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #dcdcdc;
 }
 .landing-themes .p-input-filled .p-dropdown:not(.p-disabled).p-focus .p-inputtext {
   background-color: transparent;
 }
 .landing-themes .p-inputnumber.p-invalid.p-component > .p-inputtext {
-  border-color: #f44435;
+  border-color: #B00020;
 }
 .landing-themes .p-inputtext {
   font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.87);
-  background: #1e1e1e;
+  color: rgba(0, 0, 0, 0.87);
+  background: #ffffff;
   padding: 1rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.38);
   transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
   appearance: none;
   border-radius: 4px;
 }
 .landing-themes .p-inputtext:enabled:hover {
-  border-color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-inputtext:enabled:focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: none;
-  border-color: #9FA8DA;
+  border-color: #3F51B5;
 }
 .landing-themes .p-inputtext.p-invalid.p-component {
-  border-color: #f44435;
+  border-color: #B00020;
 }
 .landing-themes .p-inputtext.p-inputtext-sm {
   font-size: 0.875rem;
@@ -484,17 +481,17 @@
 }
 .landing-themes .p-float-label > label {
   left: 1rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   transition-duration: 0.2s;
 }
 .landing-themes .p-float-label > label.p-error {
-  color: #f44435;
+  color: #B00020;
 }
 .landing-themes .p-input-icon-left > i:first-of-type,
 .landing-themes .p-input-icon-left > svg:first-of-type,
 .landing-themes .p-input-icon-left > .p-input-prefix {
   left: 1rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-input-icon-left > .p-inputtext {
   padding-left: 3rem;
@@ -506,31 +503,31 @@
 .landing-themes .p-input-icon-right > svg:last-of-type,
 .landing-themes .p-input-icon-right > .p-input-suffix {
   right: 1rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-input-icon-right > .p-inputtext {
   padding-right: 3rem;
 }
 .landing-themes ::-webkit-input-placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes :-moz-placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes ::-moz-placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes :-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-input-filled .p-inputtext {
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: #f5f5f5;
 }
 .landing-themes .p-input-filled .p-inputtext:enabled:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: #ececec;
 }
 .landing-themes .p-input-filled .p-inputtext:enabled:focus {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #dcdcdc;
 }
 .landing-themes .p-inputtext-sm .p-inputtext {
   font-size: 0.875rem;
@@ -541,19 +538,19 @@
   padding: 1.25rem 1.25rem;
 }
 .landing-themes .p-multiselect {
-  background: #1e1e1e;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.38);
   transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
   border-radius: 4px;
 }
 .landing-themes .p-multiselect:not(.p-disabled):hover {
-  border-color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-multiselect:not(.p-disabled).p-focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: none;
-  border-color: #9FA8DA;
+  border-color: #3F51B5;
 }
 .landing-themes .p-multiselect.p-multiselect-clearable .p-multiselect-label {
   padding-right: 2rem;
@@ -563,13 +560,13 @@
   transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
 }
 .landing-themes .p-multiselect .p-multiselect-label.p-placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-multiselect.p-multiselect-chip .p-multiselect-token {
   padding: 0.5rem 1rem;
   margin-right: 0.5rem;
-  background: rgba(159, 168, 218, 0.16);
-  color: #9FA8DA;
+  background: rgba(63, 81, 181, 0.12);
+  color: #3F51B5;
   border-radius: 4px;
 }
 .landing-themes .p-multiselect.p-multiselect-chip .p-multiselect-token .p-multiselect-token-icon {
@@ -577,17 +574,17 @@
 }
 .landing-themes .p-multiselect .p-multiselect-trigger {
   background: transparent;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   width: 2.357rem;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
 .landing-themes .p-multiselect .p-multiselect-clear-icon {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   right: 2.357rem;
 }
 .landing-themes .p-multiselect.p-invalid.p-component {
-  border-color: #f44435;
+  border-color: #B00020;
 }
 .landing-themes .p-inputwrapper-filled.p-multiselect.p-multiselect-chip .p-multiselect-label {
   padding: 0.5rem 1rem;
@@ -599,17 +596,17 @@
   padding-right: 2rem;
 }
 .landing-themes .p-multiselect-panel {
-  background: #2b2b2b;
-  color: rgba(255, 255, 255, 0.87);
+  background: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
   border: 0 none;
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 .landing-themes .p-multiselect-panel .p-multiselect-header {
   padding: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.87);
-  background: #2b2b2b;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.87);
+  background: #ffffff;
   margin: 0;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
@@ -622,21 +619,21 @@
 }
 .landing-themes .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-multiselect-filter-icon {
   right: 1rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-multiselect-panel .p-multiselect-header .p-multiselect-close {
   width: 2.5rem;
   height: 2.5rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   border: 0 none;
   background: transparent;
   border-radius: 50%;
   transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .landing-themes .p-multiselect-panel .p-multiselect-header .p-multiselect-close:enabled:hover {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   border-color: transparent;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-multiselect-panel .p-multiselect-header .p-multiselect-close:focus {
   outline: 0 none;
@@ -650,18 +647,18 @@
   margin: 0;
   padding: 1rem 1rem;
   border: 0 none;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(0, 0, 0, 0.87);
   background: transparent;
   transition: none;
   border-radius: 0;
 }
 .landing-themes .p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
-  color: #9FA8DA;
-  background: rgba(159, 168, 218, 0.16);
+  color: #3F51B5;
+  background: rgba(63, 81, 181, 0.12);
 }
 .landing-themes .p-multiselect-panel .p-multiselect-items .p-multiselect-item:not(.p-highlight):not(.p-disabled):hover {
-  color: rgba(255, 255, 255, 0.87);
-  background: rgba(255, 255, 255, 0.04);
+  color: rgba(0, 0, 0, 0.87);
+  background: rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-multiselect-panel .p-multiselect-items .p-multiselect-item:focus {
   outline: 0 none;
@@ -674,81 +671,81 @@
 .landing-themes .p-multiselect-panel .p-multiselect-items .p-multiselect-item-group {
   margin: 0;
   padding: 1rem;
-  color: rgba(255, 255, 255, 0.6);
-  background: transparent;
+  color: rgba(0, 0, 0, 0.6);
+  background: #ffffff;
   font-weight: 400;
 }
 .landing-themes .p-multiselect-panel .p-multiselect-items .p-multiselect-empty-message {
   padding: 1rem 1rem;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(0, 0, 0, 0.87);
   background: transparent;
 }
 .landing-themes .p-input-filled .p-multiselect {
-  background: rgba(255, 255, 255, 0.06);
+  background: #f5f5f5;
 }
 .landing-themes .p-input-filled .p-multiselect:not(.p-disabled):hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: #ececec;
 }
 .landing-themes .p-input-filled .p-multiselect:not(.p-disabled).p-focus {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #dcdcdc;
 }
 .landing-themes .p-radiobutton {
   width: 20px;
   height: 20px;
 }
 .landing-themes .p-radiobutton .p-radiobutton-box {
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  background: #1e1e1e;
+  border: 2px solid #757575;
+  background: #ffffff;
   width: 20px;
   height: 20px;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(0, 0, 0, 0.87);
   border-radius: 50%;
   transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
 }
 .landing-themes .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
-  border-color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: none;
-  border-color: #9FA8DA;
+  border-color: #3F51B5;
 }
 .landing-themes .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
   width: 10px;
   height: 10px;
   transition-duration: 0.2s;
-  background-color: #9FA8DA;
+  background-color: #3F51B5;
 }
 .landing-themes .p-radiobutton .p-radiobutton-box.p-highlight {
-  border-color: #9FA8DA;
-  background: #121212;
+  border-color: #3F51B5;
+  background: #ffffff;
 }
 .landing-themes .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
-  border-color: #9FA8DA;
-  background: #121212;
-  color: #9FA8DA;
+  border-color: #3F51B5;
+  background: #ffffff;
+  color: #3F51B5;
 }
 .landing-themes .p-radiobutton.p-invalid > .p-radiobutton-box {
-  border-color: #f44435;
+  border-color: #B00020;
 }
 .landing-themes .p-radiobutton:focus {
   outline: 0 none;
 }
 .landing-themes .p-input-filled .p-radiobutton .p-radiobutton-box {
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: #f5f5f5;
 }
 .landing-themes .p-input-filled .p-radiobutton .p-radiobutton-box:not(.p-disabled):hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: #ececec;
 }
 .landing-themes .p-input-filled .p-radiobutton .p-radiobutton-box.p-highlight {
-  background: #121212;
+  background: #ffffff;
 }
 .landing-themes .p-input-filled .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
-  background: #121212;
+  background: #ffffff;
 }
 .landing-themes .p-slider {
-  background: rgba(255, 255, 255, 0.3);
+  background: #c1c1c1;
   border: 0 none;
   border-radius: 4px;
 }
@@ -769,7 +766,7 @@
 .landing-themes .p-slider .p-slider-handle {
   height: 20px;
   width: 20px;
-  background: #9FA8DA;
+  background: #3F51B5;
   border: 0 none;
   border-radius: 50%;
   transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
@@ -780,15 +777,15 @@
   box-shadow: none;
 }
 .landing-themes .p-slider .p-slider-range {
-  background: #9FA8DA;
+  background: #3F51B5;
 }
 .landing-themes .p-slider:not(.p-disabled) .p-slider-handle:hover {
-  background: #9FA8DA;
+  background: #3F51B5;
   border-color: 0 none;
 }
 .landing-themes .p-button {
-  color: #121212;
-  background: #9FA8DA;
+  color: #ffffff;
+  background: #3F51B5;
   border: 0 none;
   padding: 0.714rem 1rem;
   font-size: 1rem;
@@ -796,67 +793,67 @@
   border-radius: 4px;
 }
 .landing-themes .p-button:enabled:hover, .landing-themes .p-button:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(159, 168, 218, 0.92);
-  color: #121212;
+  background: rgba(63, 81, 181, 0.92);
+  color: #ffffff;
   border-color: transparent;
 }
 .landing-themes .p-button:enabled:active, .landing-themes .p-button:not(button):not(a):not(.p-disabled):active {
-  background: rgba(159, 168, 218, 0.68);
-  color: #121212;
+  background: rgba(63, 81, 181, 0.68);
+  color: #ffffff;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-outlined {
   background-color: transparent;
-  color: #9FA8DA;
+  color: #3F51B5;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-outlined:enabled:hover, .landing-themes .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(159, 168, 218, 0.04);
-  color: #9FA8DA;
+  background: rgba(63, 81, 181, 0.04);
+  color: #3F51B5;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(159, 168, 218, 0.16);
-  color: #9FA8DA;
+  background: rgba(63, 81, 181, 0.16);
+  color: #3F51B5;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-outlined.p-button-plain {
-  color: rgba(255, 255, 255, 0.6);
-  border-color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
+  border-color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-button.p-button-outlined.p-button-plain:enabled:hover, .landing-themes .p-button.p-button-outlined.p-button-plain:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-button.p-button-outlined.p-button-plain:enabled:active, .landing-themes .p-button.p-button-outlined.p-button-plain:not(button):not(a):not(.p-disabled):active {
-  background: rgba(255, 255, 255, 0.16);
-  color: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.16);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-button.p-button-text {
   background-color: transparent;
-  color: #9FA8DA;
+  color: #3F51B5;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-text:enabled:hover, .landing-themes .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(159, 168, 218, 0.04);
-  color: #9FA8DA;
+  background: rgba(63, 81, 181, 0.04);
+  color: #3F51B5;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-text:enabled:active, .landing-themes .p-button.p-button-text:not(button):not(a):not(.p-disabled):active {
-  background: rgba(159, 168, 218, 0.16);
-  color: #9FA8DA;
+  background: rgba(63, 81, 181, 0.16);
+  color: #3F51B5;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-text.p-button-plain {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-button.p-button-text.p-button-plain:enabled:hover, .landing-themes .p-button.p-button-text.p-button-plain:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-button.p-button-text.p-button-plain:enabled:active, .landing-themes .p-button.p-button-text.p-button-plain:not(button):not(a):not(.p-disabled):active {
-  background: rgba(255, 255, 255, 0.16);
-  color: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.16);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-button:focus {
   outline: 0 none;
@@ -880,8 +877,8 @@
   min-width: 1rem;
   height: 1rem;
   line-height: 1rem;
-  color: #9FA8DA;
-  background-color: #121212;
+  color: #3F51B5;
+  background-color: #ffffff;
 }
 .landing-themes .p-button.p-button-raised {
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -943,301 +940,301 @@
   flex: 1;
 }
 .landing-themes .p-button.p-button-secondary, .landing-themes .p-buttonset.p-button-secondary > .p-button, .landing-themes .p-splitbutton.p-button-secondary > .p-button, .landing-themes .p-fileupload-choose.p-button-secondary {
-  color: #121212;
-  background: #F48FB1;
+  color: #ffffff;
+  background: #ff4081;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-secondary:enabled:hover, .landing-themes .p-button.p-button-secondary:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-secondary > .p-button:enabled:hover, .landing-themes .p-buttonset.p-button-secondary > .p-button:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-secondary > .p-button:enabled:hover, .landing-themes .p-splitbutton.p-button-secondary > .p-button:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-secondary:enabled:hover, .landing-themes .p-fileupload-choose.p-button-secondary:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(244, 143, 177, 0.92);
-  color: #121212;
+  background: rgba(255, 64, 129, 0.92);
+  color: #ffffff;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-secondary:enabled:focus, .landing-themes .p-button.p-button-secondary:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-secondary > .p-button:enabled:focus, .landing-themes .p-buttonset.p-button-secondary > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-secondary > .p-button:enabled:focus, .landing-themes .p-splitbutton.p-button-secondary > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-secondary:enabled:focus, .landing-themes .p-fileupload-choose.p-button-secondary:not(button):not(a):not(.p-disabled):focus {
   box-shadow: none;
 }
 .landing-themes .p-button.p-button-secondary:enabled:active, .landing-themes .p-button.p-button-secondary:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-secondary > .p-button:enabled:active, .landing-themes .p-buttonset.p-button-secondary > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-secondary > .p-button:enabled:active, .landing-themes .p-splitbutton.p-button-secondary > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-secondary:enabled:active, .landing-themes .p-fileupload-choose.p-button-secondary:not(button):not(a):not(.p-disabled):active {
-  background: rgba(244, 143, 177, 0.68);
-  color: #121212;
+  background: rgba(255, 64, 129, 0.68);
+  color: #ffffff;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-secondary.p-button-outlined, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-outlined, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-outlined, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-outlined {
   background-color: transparent;
-  color: #F48FB1;
+  color: #ff4081;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-secondary.p-button-outlined:enabled:hover, .landing-themes .p-button.p-button-secondary.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:hover, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:hover, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-outlined:enabled:hover, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-outlined:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(244, 143, 177, 0.04);
-  color: #F48FB1;
+  background: rgba(255, 64, 129, 0.04);
+  color: #ff4081;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-secondary.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-secondary.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:active, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:active, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-outlined:enabled:active, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(244, 143, 177, 0.16);
-  color: #F48FB1;
+  background: rgba(255, 64, 129, 0.16);
+  color: #ff4081;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-secondary.p-button-text, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-text, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-text, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-text {
   background-color: transparent;
-  color: #F48FB1;
+  color: #ff4081;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-secondary.p-button-text:enabled:hover, .landing-themes .p-button.p-button-secondary.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:hover, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:hover, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-text:enabled:hover, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-text:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(244, 143, 177, 0.04);
+  background: rgba(255, 64, 129, 0.04);
   border-color: transparent;
-  color: #F48FB1;
+  color: #ff4081;
 }
 .landing-themes .p-button.p-button-secondary.p-button-text:enabled:active, .landing-themes .p-button.p-button-secondary.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:active, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:active, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-text:enabled:active, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-text:not(button):not(a):not(.p-disabled):active {
-  background: rgba(244, 143, 177, 0.16);
+  background: rgba(255, 64, 129, 0.16);
   border-color: transparent;
-  color: #F48FB1;
+  color: #ff4081;
 }
 .landing-themes .p-button.p-button-info, .landing-themes .p-buttonset.p-button-info > .p-button, .landing-themes .p-splitbutton.p-button-info > .p-button, .landing-themes .p-fileupload-choose.p-button-info {
-  color: #212121;
-  background: #90CAF9;
+  color: #ffffff;
+  background: #2196F3;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-info:enabled:hover, .landing-themes .p-button.p-button-info:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-info > .p-button:enabled:hover, .landing-themes .p-buttonset.p-button-info > .p-button:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-info > .p-button:enabled:hover, .landing-themes .p-splitbutton.p-button-info > .p-button:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-info:enabled:hover, .landing-themes .p-fileupload-choose.p-button-info:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(144, 202, 249, 0.92);
-  color: #212121;
+  background: rgba(33, 150, 243, 0.92);
+  color: #ffffff;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-info:enabled:focus, .landing-themes .p-button.p-button-info:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-info > .p-button:enabled:focus, .landing-themes .p-buttonset.p-button-info > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-info > .p-button:enabled:focus, .landing-themes .p-splitbutton.p-button-info > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-info:enabled:focus, .landing-themes .p-fileupload-choose.p-button-info:not(button):not(a):not(.p-disabled):focus {
   box-shadow: none;
 }
 .landing-themes .p-button.p-button-info:enabled:active, .landing-themes .p-button.p-button-info:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-info > .p-button:enabled:active, .landing-themes .p-buttonset.p-button-info > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-info > .p-button:enabled:active, .landing-themes .p-splitbutton.p-button-info > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-info:enabled:active, .landing-themes .p-fileupload-choose.p-button-info:not(button):not(a):not(.p-disabled):active {
-  background: rgba(144, 202, 249, 0.68);
-  color: #212121;
+  background: rgba(33, 150, 243, 0.68);
+  color: #ffffff;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-info.p-button-outlined, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-outlined, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-outlined, .landing-themes .p-fileupload-choose.p-button-info.p-button-outlined {
   background-color: transparent;
-  color: #90CAF9;
+  color: #2196F3;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-info.p-button-outlined:enabled:hover, .landing-themes .p-button.p-button-info.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-outlined:enabled:hover, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-outlined:enabled:hover, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-info.p-button-outlined:enabled:hover, .landing-themes .p-fileupload-choose.p-button-info.p-button-outlined:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(144, 202, 249, 0.04);
-  color: #90CAF9;
+  background: rgba(33, 150, 243, 0.04);
+  color: #2196F3;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-info.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-info.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-outlined:enabled:active, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-outlined:enabled:active, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-info.p-button-outlined:enabled:active, .landing-themes .p-fileupload-choose.p-button-info.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(144, 202, 249, 0.16);
-  color: #90CAF9;
+  background: rgba(33, 150, 243, 0.16);
+  color: #2196F3;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-info.p-button-text, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-text, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-text, .landing-themes .p-fileupload-choose.p-button-info.p-button-text {
   background-color: transparent;
-  color: #90CAF9;
+  color: #2196F3;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-info.p-button-text:enabled:hover, .landing-themes .p-button.p-button-info.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-text:enabled:hover, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-text:enabled:hover, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-info.p-button-text:enabled:hover, .landing-themes .p-fileupload-choose.p-button-info.p-button-text:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(144, 202, 249, 0.04);
+  background: rgba(33, 150, 243, 0.04);
   border-color: transparent;
-  color: #90CAF9;
+  color: #2196F3;
 }
 .landing-themes .p-button.p-button-info.p-button-text:enabled:active, .landing-themes .p-button.p-button-info.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-text:enabled:active, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-text:enabled:active, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-info.p-button-text:enabled:active, .landing-themes .p-fileupload-choose.p-button-info.p-button-text:not(button):not(a):not(.p-disabled):active {
-  background: rgba(144, 202, 249, 0.16);
+  background: rgba(33, 150, 243, 0.16);
   border-color: transparent;
-  color: #90CAF9;
+  color: #2196F3;
 }
 .landing-themes .p-button.p-button-success, .landing-themes .p-buttonset.p-button-success > .p-button, .landing-themes .p-splitbutton.p-button-success > .p-button, .landing-themes .p-fileupload-choose.p-button-success {
-  color: #212121;
-  background: #C5E1A5;
+  color: #ffffff;
+  background: #689F38;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-success:enabled:hover, .landing-themes .p-button.p-button-success:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-success > .p-button:enabled:hover, .landing-themes .p-buttonset.p-button-success > .p-button:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-success > .p-button:enabled:hover, .landing-themes .p-splitbutton.p-button-success > .p-button:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-success:enabled:hover, .landing-themes .p-fileupload-choose.p-button-success:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(197, 225, 165, 0.92);
-  color: #212121;
+  background: rgba(104, 159, 56, 0.92);
+  color: #ffffff;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-success:enabled:focus, .landing-themes .p-button.p-button-success:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-success > .p-button:enabled:focus, .landing-themes .p-buttonset.p-button-success > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-success > .p-button:enabled:focus, .landing-themes .p-splitbutton.p-button-success > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-success:enabled:focus, .landing-themes .p-fileupload-choose.p-button-success:not(button):not(a):not(.p-disabled):focus {
   box-shadow: none;
 }
 .landing-themes .p-button.p-button-success:enabled:active, .landing-themes .p-button.p-button-success:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-success > .p-button:enabled:active, .landing-themes .p-buttonset.p-button-success > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-success > .p-button:enabled:active, .landing-themes .p-splitbutton.p-button-success > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-success:enabled:active, .landing-themes .p-fileupload-choose.p-button-success:not(button):not(a):not(.p-disabled):active {
-  background: rgba(197, 225, 165, 0.68);
-  color: #212121;
+  background: rgba(104, 159, 56, 0.68);
+  color: #ffffff;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-success.p-button-outlined, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-outlined, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-outlined, .landing-themes .p-fileupload-choose.p-button-success.p-button-outlined {
   background-color: transparent;
-  color: #C5E1A5;
+  color: #689F38;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-success.p-button-outlined:enabled:hover, .landing-themes .p-button.p-button-success.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:hover, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:hover, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-success.p-button-outlined:enabled:hover, .landing-themes .p-fileupload-choose.p-button-success.p-button-outlined:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(197, 225, 165, 0.04);
-  color: #C5E1A5;
+  background: rgba(104, 159, 56, 0.04);
+  color: #689F38;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-success.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-success.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:active, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:active, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-success.p-button-outlined:enabled:active, .landing-themes .p-fileupload-choose.p-button-success.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(197, 225, 165, 0.16);
-  color: #C5E1A5;
+  background: rgba(104, 159, 56, 0.16);
+  color: #689F38;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-success.p-button-text, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-text, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-text, .landing-themes .p-fileupload-choose.p-button-success.p-button-text {
   background-color: transparent;
-  color: #C5E1A5;
+  color: #689F38;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-success.p-button-text:enabled:hover, .landing-themes .p-button.p-button-success.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-text:enabled:hover, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:hover, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-success.p-button-text:enabled:hover, .landing-themes .p-fileupload-choose.p-button-success.p-button-text:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(197, 225, 165, 0.04);
+  background: rgba(104, 159, 56, 0.04);
   border-color: transparent;
-  color: #C5E1A5;
+  color: #689F38;
 }
 .landing-themes .p-button.p-button-success.p-button-text:enabled:active, .landing-themes .p-button.p-button-success.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-text:enabled:active, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:active, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-success.p-button-text:enabled:active, .landing-themes .p-fileupload-choose.p-button-success.p-button-text:not(button):not(a):not(.p-disabled):active {
-  background: rgba(197, 225, 165, 0.16);
+  background: rgba(104, 159, 56, 0.16);
   border-color: transparent;
-  color: #C5E1A5;
+  color: #689F38;
 }
 .landing-themes .p-button.p-button-warning, .landing-themes .p-buttonset.p-button-warning > .p-button, .landing-themes .p-splitbutton.p-button-warning > .p-button, .landing-themes .p-fileupload-choose.p-button-warning {
-  color: #212121;
-  background: #FFF59D;
+  color: #212529;
+  background: #FBC02D;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-warning:enabled:hover, .landing-themes .p-button.p-button-warning:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-warning > .p-button:enabled:hover, .landing-themes .p-buttonset.p-button-warning > .p-button:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-warning > .p-button:enabled:hover, .landing-themes .p-splitbutton.p-button-warning > .p-button:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-warning:enabled:hover, .landing-themes .p-fileupload-choose.p-button-warning:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(255, 245, 157, 0.92);
-  color: #212121;
+  background: rgba(251, 192, 45, 0.92);
+  color: #212529;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-warning:enabled:focus, .landing-themes .p-button.p-button-warning:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-warning > .p-button:enabled:focus, .landing-themes .p-buttonset.p-button-warning > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-warning > .p-button:enabled:focus, .landing-themes .p-splitbutton.p-button-warning > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-warning:enabled:focus, .landing-themes .p-fileupload-choose.p-button-warning:not(button):not(a):not(.p-disabled):focus {
   box-shadow: none;
 }
 .landing-themes .p-button.p-button-warning:enabled:active, .landing-themes .p-button.p-button-warning:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-warning > .p-button:enabled:active, .landing-themes .p-buttonset.p-button-warning > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-warning > .p-button:enabled:active, .landing-themes .p-splitbutton.p-button-warning > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-warning:enabled:active, .landing-themes .p-fileupload-choose.p-button-warning:not(button):not(a):not(.p-disabled):active {
-  background: rgba(255, 245, 157, 0.68);
-  color: #212121;
+  background: rgba(251, 192, 45, 0.68);
+  color: #212529;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-warning.p-button-outlined, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-outlined, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-outlined, .landing-themes .p-fileupload-choose.p-button-warning.p-button-outlined {
   background-color: transparent;
-  color: #FFF59D;
+  color: #FBC02D;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-warning.p-button-outlined:enabled:hover, .landing-themes .p-button.p-button-warning.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-outlined:enabled:hover, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-outlined:enabled:hover, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-warning.p-button-outlined:enabled:hover, .landing-themes .p-fileupload-choose.p-button-warning.p-button-outlined:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(255, 245, 157, 0.04);
-  color: #FFF59D;
+  background: rgba(251, 192, 45, 0.04);
+  color: #FBC02D;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-warning.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-warning.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-outlined:enabled:active, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-outlined:enabled:active, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-warning.p-button-outlined:enabled:active, .landing-themes .p-fileupload-choose.p-button-warning.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(255, 245, 157, 0.16);
-  color: #FFF59D;
+  background: rgba(251, 192, 45, 0.16);
+  color: #FBC02D;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-warning.p-button-text, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-text, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-text, .landing-themes .p-fileupload-choose.p-button-warning.p-button-text {
   background-color: transparent;
-  color: #FFF59D;
+  color: #FBC02D;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-warning.p-button-text:enabled:hover, .landing-themes .p-button.p-button-warning.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-text:enabled:hover, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-text:enabled:hover, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-warning.p-button-text:enabled:hover, .landing-themes .p-fileupload-choose.p-button-warning.p-button-text:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(255, 245, 157, 0.04);
+  background: rgba(251, 192, 45, 0.04);
   border-color: transparent;
-  color: #FFF59D;
+  color: #FBC02D;
 }
 .landing-themes .p-button.p-button-warning.p-button-text:enabled:active, .landing-themes .p-button.p-button-warning.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-text:enabled:active, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-text:enabled:active, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-warning.p-button-text:enabled:active, .landing-themes .p-fileupload-choose.p-button-warning.p-button-text:not(button):not(a):not(.p-disabled):active {
-  background: rgba(255, 245, 157, 0.16);
+  background: rgba(251, 192, 45, 0.16);
   border-color: transparent;
-  color: #FFF59D;
+  color: #FBC02D;
 }
 .landing-themes .p-button.p-button-help, .landing-themes .p-buttonset.p-button-help > .p-button, .landing-themes .p-splitbutton.p-button-help > .p-button, .landing-themes .p-fileupload-choose.p-button-help {
-  color: #212121;
-  background: #CE93D8;
+  color: #ffffff;
+  background: #9C27B0;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-help:enabled:hover, .landing-themes .p-button.p-button-help:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-help > .p-button:enabled:hover, .landing-themes .p-buttonset.p-button-help > .p-button:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-help > .p-button:enabled:hover, .landing-themes .p-splitbutton.p-button-help > .p-button:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-help:enabled:hover, .landing-themes .p-fileupload-choose.p-button-help:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(206, 147, 216, 0.92);
-  color: #212121;
+  background: rgba(156, 39, 176, 0.92);
+  color: #ffffff;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-help:enabled:focus, .landing-themes .p-button.p-button-help:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-help > .p-button:enabled:focus, .landing-themes .p-buttonset.p-button-help > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-help > .p-button:enabled:focus, .landing-themes .p-splitbutton.p-button-help > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-help:enabled:focus, .landing-themes .p-fileupload-choose.p-button-help:not(button):not(a):not(.p-disabled):focus {
   box-shadow: none;
 }
 .landing-themes .p-button.p-button-help:enabled:active, .landing-themes .p-button.p-button-help:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-help > .p-button:enabled:active, .landing-themes .p-buttonset.p-button-help > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-help > .p-button:enabled:active, .landing-themes .p-splitbutton.p-button-help > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-help:enabled:active, .landing-themes .p-fileupload-choose.p-button-help:not(button):not(a):not(.p-disabled):active {
-  background: rgba(206, 147, 216, 0.68);
-  color: #212121;
+  background: rgba(156, 39, 176, 0.68);
+  color: #ffffff;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-help.p-button-outlined, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-outlined, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-outlined, .landing-themes .p-fileupload-choose.p-button-help.p-button-outlined {
   background-color: transparent;
-  color: #CE93D8;
+  color: #9C27B0;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-help.p-button-outlined:enabled:hover, .landing-themes .p-button.p-button-help.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-outlined:enabled:hover, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-outlined:enabled:hover, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-help.p-button-outlined:enabled:hover, .landing-themes .p-fileupload-choose.p-button-help.p-button-outlined:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(206, 147, 216, 0.04);
-  color: #CE93D8;
+  background: rgba(156, 39, 176, 0.04);
+  color: #9C27B0;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-help.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-help.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-outlined:enabled:active, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-outlined:enabled:active, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-help.p-button-outlined:enabled:active, .landing-themes .p-fileupload-choose.p-button-help.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(206, 147, 216, 0.16);
-  color: #CE93D8;
+  background: rgba(156, 39, 176, 0.16);
+  color: #9C27B0;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-help.p-button-text, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-text, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-text, .landing-themes .p-fileupload-choose.p-button-help.p-button-text {
   background-color: transparent;
-  color: #CE93D8;
+  color: #9C27B0;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-help.p-button-text:enabled:hover, .landing-themes .p-button.p-button-help.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-text:enabled:hover, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-text:enabled:hover, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-help.p-button-text:enabled:hover, .landing-themes .p-fileupload-choose.p-button-help.p-button-text:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(206, 147, 216, 0.04);
+  background: rgba(156, 39, 176, 0.04);
   border-color: transparent;
-  color: #CE93D8;
+  color: #9C27B0;
 }
 .landing-themes .p-button.p-button-help.p-button-text:enabled:active, .landing-themes .p-button.p-button-help.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-text:enabled:active, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-text:enabled:active, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-help.p-button-text:enabled:active, .landing-themes .p-fileupload-choose.p-button-help.p-button-text:not(button):not(a):not(.p-disabled):active {
-  background: rgba(206, 147, 216, 0.16);
+  background: rgba(156, 39, 176, 0.16);
   border-color: transparent;
-  color: #CE93D8;
+  color: #9C27B0;
 }
 .landing-themes .p-button.p-button-danger, .landing-themes .p-buttonset.p-button-danger > .p-button, .landing-themes .p-splitbutton.p-button-danger > .p-button, .landing-themes .p-fileupload-choose.p-button-danger {
-  color: #212121;
-  background: #EF9A9A;
+  color: #ffffff;
+  background: #D32F2F;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-danger:enabled:hover, .landing-themes .p-button.p-button-danger:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-danger > .p-button:enabled:hover, .landing-themes .p-buttonset.p-button-danger > .p-button:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-danger > .p-button:enabled:hover, .landing-themes .p-splitbutton.p-button-danger > .p-button:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-danger:enabled:hover, .landing-themes .p-fileupload-choose.p-button-danger:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(239, 154, 154, 0.92);
-  color: #212121;
+  background: rgba(211, 47, 47, 0.92);
+  color: #ffffff;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-danger:enabled:focus, .landing-themes .p-button.p-button-danger:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-danger > .p-button:enabled:focus, .landing-themes .p-buttonset.p-button-danger > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-danger > .p-button:enabled:focus, .landing-themes .p-splitbutton.p-button-danger > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-danger:enabled:focus, .landing-themes .p-fileupload-choose.p-button-danger:not(button):not(a):not(.p-disabled):focus {
   box-shadow: none;
 }
 .landing-themes .p-button.p-button-danger:enabled:active, .landing-themes .p-button.p-button-danger:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-danger > .p-button:enabled:active, .landing-themes .p-buttonset.p-button-danger > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-danger > .p-button:enabled:active, .landing-themes .p-splitbutton.p-button-danger > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-danger:enabled:active, .landing-themes .p-fileupload-choose.p-button-danger:not(button):not(a):not(.p-disabled):active {
-  background: rgba(239, 154, 154, 0.68);
-  color: #212121;
+  background: rgba(211, 47, 47, 0.68);
+  color: #ffffff;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-danger.p-button-outlined, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-outlined, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-outlined, .landing-themes .p-fileupload-choose.p-button-danger.p-button-outlined {
   background-color: transparent;
-  color: #EF9A9A;
+  color: #D32F2F;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-danger.p-button-outlined:enabled:hover, .landing-themes .p-button.p-button-danger.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:hover, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-outlined:enabled:hover, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-danger.p-button-outlined:enabled:hover, .landing-themes .p-fileupload-choose.p-button-danger.p-button-outlined:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(239, 154, 154, 0.04);
-  color: #EF9A9A;
+  background: rgba(211, 47, 47, 0.04);
+  color: #D32F2F;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-danger.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-danger.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:active, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-outlined:enabled:active, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-danger.p-button-outlined:enabled:active, .landing-themes .p-fileupload-choose.p-button-danger.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(239, 154, 154, 0.16);
-  color: #EF9A9A;
+  background: rgba(211, 47, 47, 0.16);
+  color: #D32F2F;
   border: 0 none;
 }
 .landing-themes .p-button.p-button-danger.p-button-text, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-text, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-text, .landing-themes .p-fileupload-choose.p-button-danger.p-button-text {
   background-color: transparent;
-  color: #EF9A9A;
+  color: #D32F2F;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-danger.p-button-text:enabled:hover, .landing-themes .p-button.p-button-danger.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-text:enabled:hover, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-text:enabled:hover, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover, .landing-themes .p-fileupload-choose.p-button-danger.p-button-text:enabled:hover, .landing-themes .p-fileupload-choose.p-button-danger.p-button-text:not(button):not(a):not(.p-disabled):hover {
-  background: rgba(239, 154, 154, 0.04);
+  background: rgba(211, 47, 47, 0.04);
   border-color: transparent;
-  color: #EF9A9A;
+  color: #D32F2F;
 }
 .landing-themes .p-button.p-button-danger.p-button-text:enabled:active, .landing-themes .p-button.p-button-danger.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-text:enabled:active, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-text:enabled:active, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-danger.p-button-text:enabled:active, .landing-themes .p-fileupload-choose.p-button-danger.p-button-text:not(button):not(a):not(.p-disabled):active {
-  background: rgba(239, 154, 154, 0.16);
+  background: rgba(211, 47, 47, 0.16);
   border-color: transparent;
-  color: #EF9A9A;
+  color: #D32F2F;
 }
 .landing-themes .p-button.p-button-link {
-  color: #9FA8DA;
+  color: #3F51B5;
   background: transparent;
   border: transparent;
 }
 .landing-themes .p-button.p-button-link:enabled:hover, .landing-themes .p-button.p-button-link:not(button):not(a):not(.p-disabled):hover {
   background: transparent;
-  color: #9FA8DA;
+  color: #3F51B5;
   border-color: transparent;
 }
 .landing-themes .p-button.p-button-link:enabled:hover .p-button-label, .landing-themes .p-button.p-button-link:not(button):not(a):not(.p-disabled):hover .p-button-label {
@@ -1250,7 +1247,7 @@
 }
 .landing-themes .p-button.p-button-link:enabled:active, .landing-themes .p-button.p-button-link:not(button):not(a):not(.p-disabled):active {
   background: transparent;
-  color: #9FA8DA;
+  color: #3F51B5;
   border-color: transparent;
 }
 .landing-themes .p-datatable .p-paginator-top {
@@ -1262,17 +1259,17 @@
   border-radius: 0;
 }
 .landing-themes .p-datatable .p-datatable-header {
-  background: #1e1e1e;
-  color: rgba(255, 255, 255, 0.87);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
+  border: 1px solid #e4e4e4;
   border-width: 0 0 1px 0;
   padding: 1rem 1rem;
   font-weight: 500;
 }
 .landing-themes .p-datatable .p-datatable-footer {
-  background: #1e1e1e;
-  color: rgba(255, 255, 255, 0.87);
-  border: 1px solid #404040;
+  background: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
+  border: 1px solid #e4e4e4;
   border-width: 0 0 1px 0;
   padding: 1rem 1rem;
   font-weight: 500;
@@ -1280,24 +1277,24 @@
 .landing-themes .p-datatable .p-datatable-thead > tr > th {
   text-align: left;
   padding: 1rem 1rem;
-  border: 1px solid #404040;
+  border: 1px solid #e4e4e4;
   border-width: 0 0 1px 0;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.87);
-  background: #1e1e1e;
+  color: rgba(0, 0, 0, 0.87);
+  background: #ffffff;
   transition: none;
 }
 .landing-themes .p-datatable .p-datatable-tfoot > tr > td {
   text-align: left;
   padding: 1rem 1rem;
-  border: 1px solid 3404040;
+  border: 1px solid #e4e4e4;
   border-width: 0 0 1px 0;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.87);
-  background: #1e1e1e;
+  color: rgba(0, 0, 0, 0.87);
+  background: #ffffff;
 }
 .landing-themes .p-datatable .p-sortable-column .p-sortable-column-icon {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   margin-left: 0.5rem;
 }
 .landing-themes .p-datatable .p-sortable-column .p-sortable-column-badge {
@@ -1305,43 +1302,43 @@
   height: 1.143rem;
   min-width: 1.143rem;
   line-height: 1.143rem;
-  color: #9FA8DA;
-  background: rgba(159, 168, 218, 0.16);
+  color: #3F51B5;
+  background: rgba(63, 81, 181, 0.12);
   margin-left: 0.5rem;
 }
 .landing-themes .p-datatable .p-sortable-column:not(.p-highlight):not(.p-sortable-disabled):hover {
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.87);
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-datatable .p-sortable-column:not(.p-highlight):not(.p-sortable-disabled):hover .p-sortable-column-icon {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-datatable .p-sortable-column.p-highlight {
-  background: #1e1e1e;
-  color: rgba(255, 255, 255, 0.87);
+  background: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-datatable .p-sortable-column.p-highlight:not(.p-sortable-disabled):hover {
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.87);
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-datatable .p-sortable-column.p-highlight:not(.p-sortable-disabled):hover .p-sortable-column-icon {
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-datatable .p-sortable-column:focus {
   box-shadow: none;
   outline: 0 none;
 }
 .landing-themes .p-datatable .p-datatable-tbody > tr {
-  background: #1e1e1e;
-  color: rgba(255, 255, 255, 0.87);
+  background: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
   transition: none;
 }
 .landing-themes .p-datatable .p-datatable-tbody > tr > td {
   text-align: left;
-  border: 1px solid #404040;
+  border: 1px solid #e4e4e4;
   border-width: 0 0 1px 0;
   padding: 1rem 1rem;
 }
@@ -1351,7 +1348,7 @@
 .landing-themes .p-datatable .p-datatable-tbody > tr > td .p-row-editor-cancel {
   width: 2.5rem;
   height: 2.5rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   border: 0 none;
   background: transparent;
   border-radius: 50%;
@@ -1361,9 +1358,9 @@
 .landing-themes .p-datatable .p-datatable-tbody > tr > td .p-row-editor-init:enabled:hover,
 .landing-themes .p-datatable .p-datatable-tbody > tr > td .p-row-editor-save:enabled:hover,
 .landing-themes .p-datatable .p-datatable-tbody > tr > td .p-row-editor-cancel:enabled:hover {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   border-color: transparent;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-datatable .p-datatable-tbody > tr > td .p-row-toggler:focus,
 .landing-themes .p-datatable .p-datatable-tbody > tr > td .p-row-editor-init:focus,
@@ -1380,49 +1377,49 @@
   font-weight: 500;
 }
 .landing-themes .p-datatable .p-datatable-tbody > tr > td.p-highlight {
-  background: rgba(159, 168, 218, 0.16);
-  color: #9FA8DA;
+  background: rgba(63, 81, 181, 0.12);
+  color: #3F51B5;
 }
 .landing-themes .p-datatable .p-datatable-tbody > tr.p-highlight {
-  background: rgba(159, 168, 218, 0.16);
-  color: #9FA8DA;
+  background: rgba(63, 81, 181, 0.12);
+  color: #3F51B5;
 }
 .landing-themes .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-top > td {
-  box-shadow: inset 0 2px 0 0 rgba(159, 168, 218, 0.16);
+  box-shadow: inset 0 2px 0 0 rgba(63, 81, 181, 0.12);
 }
 .landing-themes .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-bottom > td {
-  box-shadow: inset 0 -2px 0 0 rgba(159, 168, 218, 0.16);
+  box-shadow: inset 0 -2px 0 0 rgba(63, 81, 181, 0.12);
 }
 .landing-themes .p-datatable.p-datatable-selectable .p-datatable-tbody > tr.p-selectable-row:not(.p-highlight):not(.p-datatable-emptymessage):hover {
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.87);
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-datatable.p-datatable-selectable .p-datatable-tbody > tr.p-selectable-row:focus {
   outline: 0.15rem solid transparent;
   outline-offset: -0.15rem;
 }
 .landing-themes .p-datatable.p-datatable-selectable-cell .p-datatable-tbody > tr.p-selectable-row > td.p-selectable-cell:not(.p-highlight):hover {
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.87);
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-datatable.p-datatable-selectable-cell .p-datatable-tbody > tr.p-selectable-row > td.p-selectable-cell:focus {
   outline: 0.15rem solid transparent;
   outline-offset: -0.15rem;
 }
 .landing-themes .p-datatable.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight):not(.p-datatable-emptymessage):hover {
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.87);
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-datatable .p-column-resizer-helper {
-  background: #9FA8DA;
+  background: #3F51B5;
 }
 .landing-themes .p-datatable .p-datatable-scrollable-header,
 .landing-themes .p-datatable .p-datatable-scrollable-footer {
-  background: #1e1e1e;
+  background: #ffffff;
 }
 .landing-themes .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-thead,
 .landing-themes .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot {
-  background-color: #1e1e1e;
+  background-color: #ffffff;
 }
 .landing-themes .p-datatable .p-datatable-loading-icon {
   font-size: 2rem;
@@ -1449,20 +1446,20 @@
   border-width: 1px;
 }
 .landing-themes .p-datatable.p-datatable-striped .p-datatable-tbody > tr.p-row-odd {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(0, 0, 0, 0.02);
 }
 .landing-themes .p-datatable.p-datatable-striped .p-datatable-tbody > tr.p-row-odd.p-highlight {
-  background: rgba(159, 168, 218, 0.16);
-  color: #9FA8DA;
+  background: rgba(63, 81, 181, 0.12);
+  color: #3F51B5;
 }
 .landing-themes .p-datatable.p-datatable-striped .p-datatable-tbody > tr.p-row-odd.p-highlight .p-row-toggler {
-  color: #9FA8DA;
+  color: #3F51B5;
 }
 .landing-themes .p-datatable.p-datatable-striped .p-datatable-tbody > tr.p-row-odd.p-highlight .p-row-toggler:hover {
-  color: #9FA8DA;
+  color: #3F51B5;
 }
 .landing-themes .p-datatable.p-datatable-striped .p-datatable-tbody > tr.p-row-odd + .p-row-expanded {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(0, 0, 0, 0.02);
 }
 .landing-themes .p-datatable.p-datatable-sm .p-datatable-header {
   padding: 0.5rem 0.5rem;
@@ -1495,7 +1492,7 @@
   padding: 1.25rem 1.25rem;
 }
 .landing-themes .p-datatable-drag-selection-helper {
-  background: rgba(159, 168, 218, 0.16);
+  background: rgba(63, 81, 181, 0.16);
 }
 .landing-themes .p-column-filter-row .p-column-filter-menu-button,
 .landing-themes .p-column-filter-row .p-column-filter-clear-button {
@@ -1504,24 +1501,24 @@
 .landing-themes .p-column-filter-menu-button {
   width: 2.5rem;
   height: 2.5rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   border: 0 none;
   background: transparent;
   border-radius: 50%;
   transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .landing-themes .p-column-filter-menu-button:hover {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   border-color: transparent;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-column-filter-menu-button.p-column-filter-menu-button-open, .landing-themes .p-column-filter-menu-button.p-column-filter-menu-button-open:hover {
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-column-filter-menu-button.p-column-filter-menu-button-active, .landing-themes .p-column-filter-menu-button.p-column-filter-menu-button-active:hover {
-  background: rgba(159, 168, 218, 0.16);
-  color: #9FA8DA;
+  background: rgba(63, 81, 181, 0.12);
+  color: #3F51B5;
 }
 .landing-themes .p-column-filter-menu-button:focus {
   outline: 0 none;
@@ -1531,16 +1528,16 @@
 .landing-themes .p-column-filter-clear-button {
   width: 2.5rem;
   height: 2.5rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   border: 0 none;
   background: transparent;
   border-radius: 50%;
   transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .landing-themes .p-column-filter-clear-button:hover {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   border-color: transparent;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-column-filter-clear-button:focus {
   outline: 0 none;
@@ -1548,8 +1545,8 @@
   box-shadow: none;
 }
 .landing-themes .p-column-filter-overlay {
-  background: #2b2b2b;
-  color: rgba(255, 255, 255, 0.87);
+  background: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
   border: 0 none;
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
@@ -1562,18 +1559,18 @@
   margin: 0;
   padding: 1rem 1rem;
   border: 0 none;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(0, 0, 0, 0.87);
   background: transparent;
   transition: none;
   border-radius: 0;
 }
 .landing-themes .p-column-filter-overlay .p-column-filter-row-items .p-column-filter-row-item.p-highlight {
-  color: #9FA8DA;
-  background: rgba(159, 168, 218, 0.16);
+  color: #3F51B5;
+  background: rgba(63, 81, 181, 0.12);
 }
 .landing-themes .p-column-filter-overlay .p-column-filter-row-items .p-column-filter-row-item:not(.p-highlight):not(.p-disabled):hover {
-  color: rgba(255, 255, 255, 0.87);
-  background: rgba(255, 255, 255, 0.04);
+  color: rgba(0, 0, 0, 0.87);
+  background: rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-column-filter-overlay .p-column-filter-row-items .p-column-filter-row-item:focus {
   outline: 0 none;
@@ -1581,21 +1578,21 @@
   box-shadow: none;
 }
 .landing-themes .p-column-filter-overlay .p-column-filter-row-items .p-column-filter-separator {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
   margin: 0.5rem 0;
 }
 .landing-themes .p-column-filter-overlay-menu .p-column-filter-operator {
   padding: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.87);
-  background: #2b2b2b;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.87);
+  background: #ffffff;
   margin: 0;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 }
 .landing-themes .p-column-filter-overlay-menu .p-column-filter-constraint {
   padding: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 .landing-themes .p-column-filter-overlay-menu .p-column-filter-constraint .p-column-filter-matchmode-dropdown {
   margin-bottom: 0.5rem;
@@ -1613,9 +1610,9 @@
   padding: 1rem;
 }
 .landing-themes .p-paginator {
-  background: #1e1e1e;
-  color: rgba(255, 255, 255, 0.87);
-  border: solid #404040;
+  background: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
+  border: solid #e4e4e4;
   border-width: 0;
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -1626,7 +1623,7 @@
 .landing-themes .p-paginator .p-paginator-last {
   background-color: transparent;
   border: 0 none;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   min-width: 3rem;
   height: 3rem;
   margin: 0.143rem;
@@ -1637,9 +1634,9 @@
 .landing-themes .p-paginator .p-paginator-prev:not(.p-disabled):not(.p-highlight):hover,
 .landing-themes .p-paginator .p-paginator-next:not(.p-disabled):not(.p-highlight):hover,
 .landing-themes .p-paginator .p-paginator-last:not(.p-disabled):not(.p-highlight):hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
   border-color: transparent;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-paginator .p-paginator-first {
   border-top-left-radius: 50%;
@@ -1666,7 +1663,7 @@
 .landing-themes .p-paginator .p-paginator-current {
   background-color: transparent;
   border: 0 none;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   min-width: 3rem;
   height: 3rem;
   margin: 0.143rem;
@@ -1675,7 +1672,7 @@
 .landing-themes .p-paginator .p-paginator-pages .p-paginator-page {
   background-color: transparent;
   border: 0 none;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   min-width: 3rem;
   height: 3rem;
   margin: 0.143rem;
@@ -1683,14 +1680,14 @@
   border-radius: 50%;
 }
 .landing-themes .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-  background: rgba(159, 168, 218, 0.16);
-  border-color: rgba(159, 168, 218, 0.16);
-  color: #9FA8DA;
+  background: rgba(63, 81, 181, 0.12);
+  border-color: rgba(63, 81, 181, 0.12);
+  color: #3F51B5;
 }
 .landing-themes .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
   border-color: transparent;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .landing-themes .p-button {
@@ -1701,22 +1698,22 @@
   min-width: auto;
 }
 .landing-themes .p-button:enabled:focus, .landing-themes .p-button:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(159, 168, 218, 0.76);
+  background: rgba(63, 81, 181, 0.76);
 }
 .landing-themes .p-button:enabled:active, .landing-themes .p-button:not(button):not(a):not(.p-disabled):active {
-  background: rgba(159, 168, 218, 0.68);
+  background: rgba(63, 81, 181, 0.68);
 }
 .landing-themes .p-button .p-ink {
   background-color: rgba(255, 255, 255, 0.32);
 }
 .landing-themes .p-button.p-button-text:enabled:focus, .landing-themes .p-button.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-button.p-button-outlined:enabled:focus, .landing-themes .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(159, 168, 218, 0.12);
+  background: rgba(63, 81, 181, 0.12);
 }
 .landing-themes .p-button.p-button-text:enabled:active, .landing-themes .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-button.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(159, 168, 218, 0.16);
+  background: rgba(63, 81, 181, 0.16);
 }
 .landing-themes .p-button.p-button-text .p-ink, .landing-themes .p-button.p-button-outlined .p-ink {
-  background-color: rgba(159, 168, 218, 0.16);
+  background-color: rgba(63, 81, 181, 0.16);
 }
 .landing-themes .p-button.p-button-outlined {
   box-shadow: inset 0 0 0 1px;
@@ -1728,115 +1725,115 @@
   box-shadow: inset 0 0 0 1px;
 }
 .landing-themes .p-button:disabled {
-  background-color: rgba(255, 255, 255, 0.12) !important;
-  color: rgba(255, 255, 255, 0.38) !important;
+  background-color: rgba(0, 0, 0, 0.12) !important;
+  color: rgba(0, 0, 0, 0.38) !important;
   opacity: 1;
 }
 .landing-themes .p-button:disabled.p-button-text {
   background-color: transparent !important;
-  color: rgba(255, 255, 255, 0.38) !important;
+  color: rgba(0, 0, 0, 0.38) !important;
 }
 .landing-themes .p-button:disabled.p-button-outlined {
   background-color: transparent !important;
-  color: rgba(255, 255, 255, 0.38) !important;
-  border-color: rgba(255, 255, 255, 0.38) !important;
+  color: rgba(0, 0, 0, 0.38) !important;
+  border-color: rgba(0, 0, 0, 0.38) !important;
 }
 .landing-themes .p-button.p-button-raised:enabled:focus, .landing-themes .p-button.p-button-raised:not(button):not(a):not(.p-disabled):focus {
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 .landing-themes .p-button.p-button-secondary:enabled:focus, .landing-themes .p-button.p-button-secondary:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-secondary > .p-button:enabled:focus, .landing-themes .p-buttonset.p-button-secondary > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-secondary > .p-button:enabled:focus, .landing-themes .p-splitbutton.p-button-secondary > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-secondary:enabled:focus, .landing-themes .p-fileupload-choose.p-button-secondary:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(244, 143, 177, 0.76);
+  background: rgba(255, 64, 129, 0.76);
 }
 .landing-themes .p-button.p-button-secondary:enabled:active, .landing-themes .p-button.p-button-secondary:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-secondary > .p-button:enabled:active, .landing-themes .p-buttonset.p-button-secondary > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-secondary > .p-button:enabled:active, .landing-themes .p-splitbutton.p-button-secondary > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-secondary:enabled:active, .landing-themes .p-fileupload-choose.p-button-secondary:not(button):not(a):not(.p-disabled):active {
-  background: rgba(244, 143, 177, 0.68);
+  background: rgba(255, 64, 129, 0.68);
 }
 .landing-themes .p-button.p-button-secondary.p-button-text:enabled:focus, .landing-themes .p-button.p-button-secondary.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-button.p-button-secondary.p-button-outlined:enabled:focus, .landing-themes .p-button.p-button-secondary.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:focus, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:focus, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:focus, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:focus, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-text:enabled:focus, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-outlined:enabled:focus, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-outlined:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(244, 143, 177, 0.12);
+  background: rgba(255, 64, 129, 0.12);
 }
 .landing-themes .p-button.p-button-secondary.p-button-text:enabled:active, .landing-themes .p-button.p-button-secondary.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-button.p-button-secondary.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-secondary.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:active, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:active, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:active, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:active, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-text:enabled:active, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-outlined:enabled:active, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(244, 143, 177, 0.16);
+  background: rgba(255, 64, 129, 0.16);
 }
 .landing-themes .p-button.p-button-secondary.p-button-text .p-ink, .landing-themes .p-button.p-button-secondary.p-button-outlined .p-ink, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-text .p-ink, .landing-themes .p-buttonset.p-button-secondary > .p-button.p-button-outlined .p-ink, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-text .p-ink, .landing-themes .p-splitbutton.p-button-secondary > .p-button.p-button-outlined .p-ink, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-text .p-ink, .landing-themes .p-fileupload-choose.p-button-secondary.p-button-outlined .p-ink {
-  background-color: rgba(244, 143, 177, 0.16);
+  background-color: rgba(255, 64, 129, 0.16);
 }
 .landing-themes .p-button.p-button-info:enabled:focus, .landing-themes .p-button.p-button-info:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-info > .p-button:enabled:focus, .landing-themes .p-buttonset.p-button-info > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-info > .p-button:enabled:focus, .landing-themes .p-splitbutton.p-button-info > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-info:enabled:focus, .landing-themes .p-fileupload-choose.p-button-info:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(144, 202, 249, 0.76);
+  background: rgba(33, 150, 243, 0.76);
 }
 .landing-themes .p-button.p-button-info:enabled:active, .landing-themes .p-button.p-button-info:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-info > .p-button:enabled:active, .landing-themes .p-buttonset.p-button-info > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-info > .p-button:enabled:active, .landing-themes .p-splitbutton.p-button-info > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-info:enabled:active, .landing-themes .p-fileupload-choose.p-button-info:not(button):not(a):not(.p-disabled):active {
-  background: rgba(144, 202, 249, 0.68);
+  background: rgba(33, 150, 243, 0.68);
 }
 .landing-themes .p-button.p-button-info.p-button-text:enabled:focus, .landing-themes .p-button.p-button-info.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-button.p-button-info.p-button-outlined:enabled:focus, .landing-themes .p-button.p-button-info.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-text:enabled:focus, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-outlined:enabled:focus, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-text:enabled:focus, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-outlined:enabled:focus, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-info.p-button-text:enabled:focus, .landing-themes .p-fileupload-choose.p-button-info.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-info.p-button-outlined:enabled:focus, .landing-themes .p-fileupload-choose.p-button-info.p-button-outlined:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(144, 202, 249, 0.12);
+  background: rgba(33, 150, 243, 0.12);
 }
 .landing-themes .p-button.p-button-info.p-button-text:enabled:active, .landing-themes .p-button.p-button-info.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-button.p-button-info.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-info.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-text:enabled:active, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-outlined:enabled:active, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-text:enabled:active, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-outlined:enabled:active, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-info.p-button-text:enabled:active, .landing-themes .p-fileupload-choose.p-button-info.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-info.p-button-outlined:enabled:active, .landing-themes .p-fileupload-choose.p-button-info.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(144, 202, 249, 0.16);
+  background: rgba(33, 150, 243, 0.16);
 }
 .landing-themes .p-button.p-button-info.p-button-text .p-ink, .landing-themes .p-button.p-button-info.p-button-outlined .p-ink, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-text .p-ink, .landing-themes .p-buttonset.p-button-info > .p-button.p-button-outlined .p-ink, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-text .p-ink, .landing-themes .p-splitbutton.p-button-info > .p-button.p-button-outlined .p-ink, .landing-themes .p-fileupload-choose.p-button-info.p-button-text .p-ink, .landing-themes .p-fileupload-choose.p-button-info.p-button-outlined .p-ink {
-  background-color: rgba(144, 202, 249, 0.16);
+  background-color: rgba(33, 150, 243, 0.16);
 }
 .landing-themes .p-button.p-button-success:enabled:focus, .landing-themes .p-button.p-button-success:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-success > .p-button:enabled:focus, .landing-themes .p-buttonset.p-button-success > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-success > .p-button:enabled:focus, .landing-themes .p-splitbutton.p-button-success > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-success:enabled:focus, .landing-themes .p-fileupload-choose.p-button-success:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(197, 225, 165, 0.76);
+  background: rgba(104, 159, 56, 0.76);
 }
 .landing-themes .p-button.p-button-success:enabled:active, .landing-themes .p-button.p-button-success:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-success > .p-button:enabled:active, .landing-themes .p-buttonset.p-button-success > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-success > .p-button:enabled:active, .landing-themes .p-splitbutton.p-button-success > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-success:enabled:active, .landing-themes .p-fileupload-choose.p-button-success:not(button):not(a):not(.p-disabled):active {
-  background: rgba(197, 225, 165, 0.68);
+  background: rgba(104, 159, 56, 0.68);
 }
 .landing-themes .p-button.p-button-success.p-button-text:enabled:focus, .landing-themes .p-button.p-button-success.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-button.p-button-success.p-button-outlined:enabled:focus, .landing-themes .p-button.p-button-success.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-text:enabled:focus, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:focus, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:focus, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:focus, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-success.p-button-text:enabled:focus, .landing-themes .p-fileupload-choose.p-button-success.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-success.p-button-outlined:enabled:focus, .landing-themes .p-fileupload-choose.p-button-success.p-button-outlined:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(197, 225, 165, 0.12);
+  background: rgba(104, 159, 56, 0.12);
 }
 .landing-themes .p-button.p-button-success.p-button-text:enabled:active, .landing-themes .p-button.p-button-success.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-button.p-button-success.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-success.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-text:enabled:active, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:active, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:active, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:active, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-success.p-button-text:enabled:active, .landing-themes .p-fileupload-choose.p-button-success.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-success.p-button-outlined:enabled:active, .landing-themes .p-fileupload-choose.p-button-success.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(197, 225, 165, 0.16);
+  background: rgba(104, 159, 56, 0.16);
 }
 .landing-themes .p-button.p-button-success.p-button-text .p-ink, .landing-themes .p-button.p-button-success.p-button-outlined .p-ink, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-text .p-ink, .landing-themes .p-buttonset.p-button-success > .p-button.p-button-outlined .p-ink, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-text .p-ink, .landing-themes .p-splitbutton.p-button-success > .p-button.p-button-outlined .p-ink, .landing-themes .p-fileupload-choose.p-button-success.p-button-text .p-ink, .landing-themes .p-fileupload-choose.p-button-success.p-button-outlined .p-ink {
-  background-color: rgba(197, 225, 165, 0.16);
+  background-color: rgba(104, 159, 56, 0.16);
 }
 .landing-themes .p-button.p-button-warning:enabled:focus, .landing-themes .p-button.p-button-warning:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-warning > .p-button:enabled:focus, .landing-themes .p-buttonset.p-button-warning > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-warning > .p-button:enabled:focus, .landing-themes .p-splitbutton.p-button-warning > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-warning:enabled:focus, .landing-themes .p-fileupload-choose.p-button-warning:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(255, 245, 157, 0.76);
+  background: rgba(251, 192, 45, 0.76);
 }
 .landing-themes .p-button.p-button-warning:enabled:active, .landing-themes .p-button.p-button-warning:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-warning > .p-button:enabled:active, .landing-themes .p-buttonset.p-button-warning > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-warning > .p-button:enabled:active, .landing-themes .p-splitbutton.p-button-warning > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-warning:enabled:active, .landing-themes .p-fileupload-choose.p-button-warning:not(button):not(a):not(.p-disabled):active {
-  background: rgba(255, 245, 157, 0.68);
+  background: rgba(251, 192, 45, 0.68);
 }
 .landing-themes .p-button.p-button-warning.p-button-text:enabled:focus, .landing-themes .p-button.p-button-warning.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-button.p-button-warning.p-button-outlined:enabled:focus, .landing-themes .p-button.p-button-warning.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-text:enabled:focus, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-outlined:enabled:focus, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-text:enabled:focus, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-outlined:enabled:focus, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-warning.p-button-text:enabled:focus, .landing-themes .p-fileupload-choose.p-button-warning.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-warning.p-button-outlined:enabled:focus, .landing-themes .p-fileupload-choose.p-button-warning.p-button-outlined:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(255, 245, 157, 0.12);
+  background: rgba(251, 192, 45, 0.12);
 }
 .landing-themes .p-button.p-button-warning.p-button-text:enabled:active, .landing-themes .p-button.p-button-warning.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-button.p-button-warning.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-warning.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-text:enabled:active, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-outlined:enabled:active, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-text:enabled:active, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-outlined:enabled:active, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-warning.p-button-text:enabled:active, .landing-themes .p-fileupload-choose.p-button-warning.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-warning.p-button-outlined:enabled:active, .landing-themes .p-fileupload-choose.p-button-warning.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(255, 245, 157, 0.16);
+  background: rgba(251, 192, 45, 0.16);
 }
 .landing-themes .p-button.p-button-warning.p-button-text .p-ink, .landing-themes .p-button.p-button-warning.p-button-outlined .p-ink, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-text .p-ink, .landing-themes .p-buttonset.p-button-warning > .p-button.p-button-outlined .p-ink, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-text .p-ink, .landing-themes .p-splitbutton.p-button-warning > .p-button.p-button-outlined .p-ink, .landing-themes .p-fileupload-choose.p-button-warning.p-button-text .p-ink, .landing-themes .p-fileupload-choose.p-button-warning.p-button-outlined .p-ink {
-  background-color: rgba(255, 245, 157, 0.16);
+  background-color: rgba(251, 192, 45, 0.16);
 }
 .landing-themes .p-button.p-button-help:enabled:focus, .landing-themes .p-button.p-button-help:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-help > .p-button:enabled:focus, .landing-themes .p-buttonset.p-button-help > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-help > .p-button:enabled:focus, .landing-themes .p-splitbutton.p-button-help > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-help:enabled:focus, .landing-themes .p-fileupload-choose.p-button-help:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(206, 147, 216, 0.76);
+  background: rgba(156, 39, 176, 0.76);
 }
 .landing-themes .p-button.p-button-help:enabled:active, .landing-themes .p-button.p-button-help:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-help > .p-button:enabled:active, .landing-themes .p-buttonset.p-button-help > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-help > .p-button:enabled:active, .landing-themes .p-splitbutton.p-button-help > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-help:enabled:active, .landing-themes .p-fileupload-choose.p-button-help:not(button):not(a):not(.p-disabled):active {
-  background: rgba(206, 147, 216, 0.68);
+  background: rgba(156, 39, 176, 0.68);
 }
 .landing-themes .p-button.p-button-help.p-button-text:enabled:focus, .landing-themes .p-button.p-button-help.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-button.p-button-help.p-button-outlined:enabled:focus, .landing-themes .p-button.p-button-help.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-text:enabled:focus, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-outlined:enabled:focus, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-text:enabled:focus, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-outlined:enabled:focus, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-help.p-button-text:enabled:focus, .landing-themes .p-fileupload-choose.p-button-help.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-help.p-button-outlined:enabled:focus, .landing-themes .p-fileupload-choose.p-button-help.p-button-outlined:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(206, 147, 216, 0.12);
+  background: rgba(156, 39, 176, 0.12);
 }
 .landing-themes .p-button.p-button-help.p-button-text:enabled:active, .landing-themes .p-button.p-button-help.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-button.p-button-help.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-help.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-text:enabled:active, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-outlined:enabled:active, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-text:enabled:active, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-outlined:enabled:active, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-help.p-button-text:enabled:active, .landing-themes .p-fileupload-choose.p-button-help.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-help.p-button-outlined:enabled:active, .landing-themes .p-fileupload-choose.p-button-help.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(206, 147, 216, 0.16);
+  background: rgba(156, 39, 176, 0.16);
 }
 .landing-themes .p-button.p-button-help.p-button-text .p-ink, .landing-themes .p-button.p-button-help.p-button-outlined .p-ink, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-text .p-ink, .landing-themes .p-buttonset.p-button-help > .p-button.p-button-outlined .p-ink, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-text .p-ink, .landing-themes .p-splitbutton.p-button-help > .p-button.p-button-outlined .p-ink, .landing-themes .p-fileupload-choose.p-button-help.p-button-text .p-ink, .landing-themes .p-fileupload-choose.p-button-help.p-button-outlined .p-ink {
-  background-color: rgba(206, 147, 216, 0.16);
+  background-color: rgba(156, 39, 176, 0.16);
 }
 .landing-themes .p-button.p-button-danger:enabled:focus, .landing-themes .p-button.p-button-danger:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-danger > .p-button:enabled:focus, .landing-themes .p-buttonset.p-button-danger > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-danger > .p-button:enabled:focus, .landing-themes .p-splitbutton.p-button-danger > .p-button:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-danger:enabled:focus, .landing-themes .p-fileupload-choose.p-button-danger:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(239, 154, 154, 0.76);
+  background: rgba(211, 47, 47, 0.76);
 }
 .landing-themes .p-button.p-button-danger:enabled:active, .landing-themes .p-button.p-button-danger:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-danger > .p-button:enabled:active, .landing-themes .p-buttonset.p-button-danger > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-danger > .p-button:enabled:active, .landing-themes .p-splitbutton.p-button-danger > .p-button:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-danger:enabled:active, .landing-themes .p-fileupload-choose.p-button-danger:not(button):not(a):not(.p-disabled):active {
-  background: rgba(239, 154, 154, 0.68);
+  background: rgba(211, 47, 47, 0.68);
 }
 .landing-themes .p-button.p-button-danger.p-button-text:enabled:focus, .landing-themes .p-button.p-button-danger.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-button.p-button-danger.p-button-outlined:enabled:focus, .landing-themes .p-button.p-button-danger.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-text:enabled:focus, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:focus, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-text:enabled:focus, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-outlined:enabled:focus, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-danger.p-button-text:enabled:focus, .landing-themes .p-fileupload-choose.p-button-danger.p-button-text:not(button):not(a):not(.p-disabled):focus, .landing-themes .p-fileupload-choose.p-button-danger.p-button-outlined:enabled:focus, .landing-themes .p-fileupload-choose.p-button-danger.p-button-outlined:not(button):not(a):not(.p-disabled):focus {
-  background: rgba(239, 154, 154, 0.12);
+  background: rgba(211, 47, 47, 0.12);
 }
 .landing-themes .p-button.p-button-danger.p-button-text:enabled:active, .landing-themes .p-button.p-button-danger.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-button.p-button-danger.p-button-outlined:enabled:active, .landing-themes .p-button.p-button-danger.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-text:enabled:active, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:active, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-text:enabled:active, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-outlined:enabled:active, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-danger.p-button-text:enabled:active, .landing-themes .p-fileupload-choose.p-button-danger.p-button-text:not(button):not(a):not(.p-disabled):active, .landing-themes .p-fileupload-choose.p-button-danger.p-button-outlined:enabled:active, .landing-themes .p-fileupload-choose.p-button-danger.p-button-outlined:not(button):not(a):not(.p-disabled):active {
-  background: rgba(239, 154, 154, 0.16);
+  background: rgba(211, 47, 47, 0.16);
 }
 .landing-themes .p-button.p-button-danger.p-button-text .p-ink, .landing-themes .p-button.p-button-danger.p-button-outlined .p-ink, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-text .p-ink, .landing-themes .p-buttonset.p-button-danger > .p-button.p-button-outlined .p-ink, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-text .p-ink, .landing-themes .p-splitbutton.p-button-danger > .p-button.p-button-outlined .p-ink, .landing-themes .p-fileupload-choose.p-button-danger.p-button-text .p-ink, .landing-themes .p-fileupload-choose.p-button-danger.p-button-outlined .p-ink {
-  background-color: rgba(239, 154, 154, 0.16);
+  background-color: rgba(211, 47, 47, 0.16);
 }
 .landing-themes .p-calendar-w-btn {
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: #1e1e1e;
+  border: 1px solid rgba(0, 0, 0, 0.38);
+  background: #ffffff;
   border-radius: 4px;
   transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
 }
@@ -1853,20 +1850,20 @@
   border: 0 none;
 }
 .landing-themes .p-calendar-w-btn .p-datepicker-trigger.p-button span {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 .landing-themes .p-calendar-w-btn .p-datepicker-trigger.p-button:enabled:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-calendar-w-btn .p-datepicker-trigger.p-button:enabled:active, .landing-themes .p-calendar-w-btn .p-datepicker-trigger.p-button:focus {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.12);
 }
 .landing-themes .p-calendar-w-btn:not(.p-disabled):hover {
-  border-color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(0, 0, 0, 0.87);
 }
 .landing-themes .p-calendar-w-btn:not(.p-disabled).p-inputwrapper-focus {
-  border-color: #9FA8DA;
-  box-shadow: inset 0 0 0 1px #9FA8DA, inset 0 0 0 1px #9FA8DA, inset 0 0 0 1px #9FA8DA, inset 0 0 0 1px #9FA8DA;
+  border-color: #3F51B5;
+  box-shadow: inset 0 0 0 1px #3F51B5, inset 0 0 0 1px #3F51B5, inset 0 0 0 1px #3F51B5, inset 0 0 0 1px #3F51B5;
 }
 .landing-themes .p-datepicker .p-datepicker-header {
   border-bottom: 0 none;
@@ -1882,35 +1879,35 @@
   order: 3;
 }
 .landing-themes .p-datepicker table th {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.38);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.38);
   font-weight: 400;
   font-size: 0.875rem;
 }
 .landing-themes .p-datepicker table td.p-datepicker-today > span {
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.38);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.38);
 }
 .landing-themes .p-datepicker table td.p-datepicker-today.p-highlight {
-  box-shadow: 0 0 0 1px rgba(159, 168, 218, 0.16);
+  box-shadow: 0 0 0 1px rgba(63, 81, 181, 0.12);
 }
 .landing-themes .p-calendar.p-invalid .p-inputtext:enabled:focus {
-  box-shadow: inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435;
+  box-shadow: inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020;
 }
 .landing-themes .p-calendar.p-invalid.p-calendar-w-btn {
-  border-color: #f44435;
+  border-color: #B00020;
 }
 .landing-themes .p-calendar.p-invalid.p-calendar-w-btn .p-inputtext:enabled:focus {
   box-shadow: none;
 }
 .landing-themes .p-calendar.p-invalid.p-calendar-w-btn:not(.p-disabled).p-inputwrapper-focus {
-  box-shadow: inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435;
+  box-shadow: inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020;
 }
 .landing-themes .p-input-filled .p-calendar-w-btn {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border: 1px solid transparent;
-  background: rgba(255, 255, 255, 0.06) no-repeat;
-  background-image: linear-gradient(to bottom, #9FA8DA, #9FA8DA), linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
+  background: #f5f5f5 no-repeat;
+  background-image: linear-gradient(to bottom, #3F51B5, #3F51B5), linear-gradient(to bottom, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.38));
   background-size: 0 2px, 100% 1px;
   background-position: 50% 100%, 50% 100%;
   background-origin: border-box;
@@ -1920,13 +1917,13 @@
   background: transparent;
 }
 .landing-themes .p-input-filled .p-calendar-w-btn:not(.p-disabled):hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: #ececec;
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #9FA8DA, #9FA8DA), linear-gradient(to bottom, rgba(255, 255, 255, 0.87), rgba(255, 255, 255, 0.87));
+  background-image: linear-gradient(to bottom, #3F51B5, #3F51B5), linear-gradient(to bottom, rgba(0, 0, 0, 0.87), rgba(0, 0, 0, 0.87));
 }
 .landing-themes .p-input-filled .p-calendar-w-btn:not(.p-disabled).p-focus, .landing-themes .p-input-filled .p-calendar-w-btn:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #dcdcdc;
   border-color: transparent;
   background-size: 100% 2px, 100% 1px;
 }
@@ -1939,11 +1936,11 @@
 }
 .landing-themes .p-input-filled .p-calendar.p-invalid .p-inputtext {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-input-filled .p-calendar.p-invalid .p-inputtext:enabled:hover {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-input-filled .p-calendar.p-invalid .p-inputtext:enabled:focus {
   box-shadow: none;
@@ -1951,14 +1948,14 @@
 }
 .landing-themes .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn:not(.p-disabled).p-focus, .landing-themes .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn .p-inputtext,
 .landing-themes .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn .p-inputtext:enabled:hover,
@@ -1971,18 +1968,18 @@
   transition: box-shadow 0.2s;
 }
 .landing-themes .p-checkbox .p-checkbox-box {
-  border-color: rgba(255, 255, 255, 0.7);
+  border-color: #757575;
   border-radius: 2px;
   position: relative;
 }
 .landing-themes .p-checkbox .p-checkbox-box:not(.p-disabled):hover {
-  border-color: rgba(255, 255, 255, 0.7);
+  border-color: #757575;
 }
 .landing-themes .p-checkbox .p-checkbox-box:not(.p-disabled).p-focus {
-  border-color: rgba(255, 255, 255, 0.7);
+  border-color: #757575;
 }
 .landing-themes .p-checkbox .p-checkbox-box.p-highlight:not(.p-disabled).p-focus {
-  border-color: #9FA8DA;
+  border-color: #3F51B5;
 }
 .landing-themes .p-checkbox .p-checkbox-box.p-highlight .p-checkbox-icon.pi-check:before {
   content: "";
@@ -1996,28 +1993,28 @@
   animation: checkbox-check 125ms 50ms linear forwards;
 }
 .landing-themes .p-checkbox:not(.p-checkbox-disabled):hover {
-  box-shadow: 0 0 1px 10px rgba(255, 255, 255, 0.04);
+  box-shadow: 0 0 1px 10px rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-checkbox:not(.p-checkbox-disabled).p-checkbox-focused {
-  box-shadow: 0 0 1px 10px rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 1px 10px rgba(0, 0, 0, 0.12);
 }
 .landing-themes .p-checkbox.p-checkbox-checked:not(.p-checkbox-disabled):hover {
-  box-shadow: 0 0 1px 10px rgba(159, 168, 218, 0.04);
+  box-shadow: 0 0 1px 10px rgba(63, 81, 181, 0.04);
 }
 .landing-themes .p-checkbox.p-checkbox-checked:not(.p-checkbox-disabled).p-checkbox-focused {
-  box-shadow: 0 0 1px 10px rgba(159, 168, 218, 0.12);
+  box-shadow: 0 0 1px 10px rgba(63, 81, 181, 0.12);
 }
 .landing-themes .p-input-filled .p-checkbox .p-checkbox-box {
-  background-color: #1e1e1e;
+  background-color: #ffffff;
 }
 .landing-themes .p-input-filled .p-checkbox .p-checkbox-box:not(.p-disabled):hover {
-  background-color: #1e1e1e;
+  background-color: #ffffff;
 }
 @keyframes checkbox-check {
   0% {
     width: 0;
     height: 0;
-    border-color: #121212;
+    border-color: #ffffff;
     transform: translate3d(0, 0, 0) rotate(45deg);
   }
   33% {
@@ -2028,7 +2025,7 @@
   100% {
     width: 4px;
     height: 10px;
-    border-color: #121212;
+    border-color: #ffffff;
     transform: translate3d(0, -10px, 0) rotate(45deg);
   }
 }
@@ -2036,19 +2033,19 @@
   outline: 0 none;
 }
 .landing-themes .p-datatable .p-sortable-column:focus {
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgba(0, 0, 0, 0.03);
 }
 .landing-themes .p-datatable .p-datatable-tbody > tr {
   outline: 0 none;
 }
 .landing-themes .p-datatable .p-datatable-tbody > tr:not(.p-highlight):focus {
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgba(0, 0, 0, 0.03);
 }
 .landing-themes .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-top > td {
-  box-shadow: inset 0 2px 0 0 #9FA8DA;
+  box-shadow: inset 0 2px 0 0 #3F51B5;
 }
 .landing-themes .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-bottom > td {
-  box-shadow: inset 0 -2px 0 0 #9FA8DA;
+  box-shadow: inset 0 -2px 0 0 #3F51B5;
 }
 .landing-themes .p-dropdown .p-inputtext, .landing-themes .p-dropdown .p-dropdown-trigger {
   background-image: none;
@@ -2058,17 +2055,17 @@
   border: 0 none;
 }
 .landing-themes .p-dropdown:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px #9FA8DA, inset 0 0 0 1px #9FA8DA, inset 0 0 0 1px #9FA8DA, inset 0 0 0 1px #9FA8DA;
+  box-shadow: inset 0 0 0 1px #3F51B5, inset 0 0 0 1px #3F51B5, inset 0 0 0 1px #3F51B5, inset 0 0 0 1px #3F51B5;
 }
 .landing-themes .p-dropdown-item .p-ink {
-  background-color: rgba(159, 168, 218, 0.16);
+  background-color: rgba(63, 81, 181, 0.16);
 }
 .landing-themes .p-input-filled .p-dropdown {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border: 1px solid transparent;
-  background: rgba(255, 255, 255, 0.06) no-repeat;
-  background-image: linear-gradient(to bottom, #9FA8DA, #9FA8DA), linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
+  background: #f5f5f5 no-repeat;
+  background-image: linear-gradient(to bottom, #3F51B5, #3F51B5), linear-gradient(to bottom, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.38));
   background-size: 0 2px, 100% 1px;
   background-position: 50% 100%, 50% 100%;
   background-origin: border-box;
@@ -2078,13 +2075,13 @@
   background: transparent;
 }
 .landing-themes .p-input-filled .p-dropdown:not(.p-disabled):hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: #ececec;
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #9FA8DA, #9FA8DA), linear-gradient(to bottom, rgba(255, 255, 255, 0.87), rgba(255, 255, 255, 0.87));
+  background-image: linear-gradient(to bottom, #3F51B5, #3F51B5), linear-gradient(to bottom, rgba(0, 0, 0, 0.87), rgba(0, 0, 0, 0.87));
 }
 .landing-themes .p-input-filled .p-dropdown:not(.p-disabled).p-focus, .landing-themes .p-input-filled .p-dropdown:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #dcdcdc;
   border-color: transparent;
   background-size: 100% 2px, 100% 1px;
 }
@@ -2097,67 +2094,67 @@
 }
 .landing-themes .p-input-filled .p-dropdown.p-invalid {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-input-filled .p-dropdown.p-invalid:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-input-filled .p-dropdown.p-invalid:not(.p-disabled).p-focus, .landing-themes .p-input-filled .p-dropdown.p-invalid:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-dropdown.p-invalid:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435;
+  box-shadow: inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020;
 }
 .landing-themes .p-inputtext:enabled:focus {
-  box-shadow: inset 0 0 0 1px #9FA8DA, inset 0 0 0 1px #9FA8DA, inset 0 0 0 1px #9FA8DA, inset 0 0 0 1px #9FA8DA;
+  box-shadow: inset 0 0 0 1px #3F51B5, inset 0 0 0 1px #3F51B5, inset 0 0 0 1px #3F51B5, inset 0 0 0 1px #3F51B5;
 }
 .landing-themes .p-inputtext:enabled:focus.p-invalid {
-  box-shadow: inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435;
+  box-shadow: inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020;
 }
 .landing-themes .p-input-filled .p-inputtext {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border: 1px solid transparent;
-  background: rgba(255, 255, 255, 0.06) no-repeat;
-  background-image: linear-gradient(to bottom, #9FA8DA, #9FA8DA), linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
+  background: #f5f5f5 no-repeat;
+  background-image: linear-gradient(to bottom, #3F51B5, #3F51B5), linear-gradient(to bottom, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.38));
   background-size: 0 2px, 100% 1px;
   background-position: 50% 100%, 50% 100%;
   background-origin: border-box;
 }
 .landing-themes .p-input-filled .p-inputtext:enabled:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: #ececec;
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #9FA8DA, #9FA8DA), linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6));
+  background-image: linear-gradient(to bottom, #3F51B5, #3F51B5), linear-gradient(to bottom, rgba(0, 0, 0, 0.87), rgba(0, 0, 0, 0.87));
 }
 .landing-themes .p-input-filled .p-inputtext:enabled:focus {
   box-shadow: none;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #dcdcdc;
   border-color: transparent;
   background-size: 100% 2px, 100% 1px;
 }
 .landing-themes .p-input-filled .p-inputtext.p-invalid.p-component {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-input-filled .p-inputtext.p-invalid.p-component:enabled:hover {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-input-filled .p-inputtext.p-invalid.p-component:enabled:focus {
   box-shadow: none;
   border-color: transparent;
 }
 .landing-themes .p-inputnumber.p-invalid .p-inputtext:enabled:focus {
-  box-shadow: inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435;
+  box-shadow: inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020;
 }
 .landing-themes .p-input-filled .p-inputnumber.p-invalid .p-inputtext {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-input-filled .p-inputnumber.p-invalid .p-inputtext:enabled:hover {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-input-filled .p-inputnumber.p-invalid .p-inputtext:enabled:focus {
   box-shadow: none;
@@ -2170,7 +2167,7 @@
 .landing-themes .p-float-label .p-inputwrapper-focus ~ label,
 .landing-themes .p-float-label .p-inputwrapper-filled ~ label {
   top: -0.5rem !important;
-  background-color: #1e1e1e;
+  background-color: #ffffff;
   padding: 2px 4px;
   margin-left: -4px;
   margin-top: 0;
@@ -2180,7 +2177,7 @@
 }
 .landing-themes .p-float-label input:focus ~ label,
 .landing-themes .p-float-label .p-inputwrapper-focus ~ label {
-  color: #9FA8DA;
+  color: #3F51B5;
 }
 .landing-themes .p-input-filled .p-float-label .p-inputtext {
   padding-top: 1.5rem;
@@ -2204,26 +2201,26 @@
   border: 0 none;
 }
 .landing-themes .p-multiselect:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px #9FA8DA, inset 0 0 0 1px #9FA8DA, inset 0 0 0 1px #9FA8DA, inset 0 0 0 1px #9FA8DA;
+  box-shadow: inset 0 0 0 1px #3F51B5, inset 0 0 0 1px #3F51B5, inset 0 0 0 1px #3F51B5, inset 0 0 0 1px #3F51B5;
 }
 .landing-themes .p-multiselect-panel .p-multiselect-items .p-multiselect-item .p-ink {
-  background-color: rgba(159, 168, 218, 0.16);
+  background-color: rgba(63, 81, 181, 0.16);
 }
 .landing-themes .p-multiselect-panel .p-multiselect-items .p-multiselect-item:focus {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.12);
 }
 .landing-themes .p-multiselect-panel .p-multiselect-items .p-multiselect-item:focus.p-highlight {
-  background: rgba(159, 168, 218, 0.24);
+  background: rgba(63, 81, 181, 0.24);
 }
 .landing-themes .p-multiselect-panel .p-multiselect-header .p-multiselect-close:focus {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.12);
 }
 .landing-themes .p-input-filled .p-multiselect {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border: 1px solid transparent;
-  background: rgba(255, 255, 255, 0.06) no-repeat;
-  background-image: linear-gradient(to bottom, #9FA8DA, #9FA8DA), linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
+  background: #f5f5f5 no-repeat;
+  background-image: linear-gradient(to bottom, #3F51B5, #3F51B5), linear-gradient(to bottom, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.38));
   background-size: 0 2px, 100% 1px;
   background-position: 50% 100%, 50% 100%;
   background-origin: border-box;
@@ -2233,13 +2230,13 @@
   background: transparent;
 }
 .landing-themes .p-input-filled .p-multiselect:not(.p-disabled):hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: #ececec;
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #9FA8DA, #9FA8DA), linear-gradient(to bottom, rgba(255, 255, 255, 0.87), rgba(255, 255, 255, 0.87));
+  background-image: linear-gradient(to bottom, #3F51B5, #3F51B5), linear-gradient(to bottom, rgba(0, 0, 0, 0.87), rgba(0, 0, 0, 0.87));
 }
 .landing-themes .p-input-filled .p-multiselect:not(.p-disabled).p-focus, .landing-themes .p-input-filled .p-multiselect:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #dcdcdc;
   border-color: transparent;
   background-size: 100% 2px, 100% 1px;
 }
@@ -2275,26 +2272,26 @@
 }
 .landing-themes .p-input-filled .p-multiselect.p-invalid {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-input-filled .p-multiselect.p-invalid:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-input-filled .p-multiselect.p-invalid:not(.p-disabled).p-focus, .landing-themes .p-input-filled .p-multiselect.p-invalid:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, #f44435, #f44435), linear-gradient(to bottom, #f44435, #f44435);
+  background-image: linear-gradient(to bottom, #B00020, #B00020), linear-gradient(to bottom, #B00020, #B00020);
 }
 .landing-themes .p-multiselect.p-invalid:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435, inset 0 0 0 1px #f44435;
+  box-shadow: inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020;
 }
 .landing-themes .p-paginator {
   justify-content: flex-end;
 }
 .landing-themes .p-paginator .p-paginator-element:focus {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.12);
 }
 .landing-themes .p-paginator .p-paginator-element:focus.p-highlight {
-  background: rgba(159, 168, 218, 0.24);
+  background: rgba(63, 81, 181, 0.24);
 }
 .landing-themes .p-progressbar {
   border-radius: 0;
@@ -2307,38 +2304,38 @@
   transition: box-shadow 0.2s;
 }
 .landing-themes .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
-  border: 2px solid rgba(255, 255, 255, 0.7);
+  border: 2px solid #757575;
 }
 .landing-themes .p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
-  border: 2px solid rgba(255, 255, 255, 0.7);
+  border: 2px solid #757575;
 }
 .landing-themes .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled).p-focus {
-  border-color: #9FA8DA;
+  border-color: #3F51B5;
 }
 .landing-themes .p-radiobutton:not(.p-radiobutton-disabled):hover {
-  box-shadow: 0 0 1px 10px rgba(255, 255, 255, 0.04);
+  box-shadow: 0 0 1px 10px rgba(0, 0, 0, 0.04);
 }
 .landing-themes .p-radiobutton:not(.p-radiobutton-disabled).p-radiobutton-focused {
-  box-shadow: 0 0 1px 10px rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 1px 10px rgba(0, 0, 0, 0.12);
 }
 .landing-themes .p-radiobutton.p-radiobutton-checked:not(.p-radiobutton-disabled):hover {
-  box-shadow: 0 0 1px 10px rgba(159, 168, 218, 0.04);
+  box-shadow: 0 0 1px 10px rgba(63, 81, 181, 0.04);
 }
 .landing-themes .p-radiobutton.p-radiobutton-checked:not(.p-radiobutton-disabled).p-radiobutton-focused {
-  box-shadow: 0 0 1px 10px rgba(159, 168, 218, 0.12);
+  box-shadow: 0 0 1px 10px rgba(63, 81, 181, 0.12);
 }
 .landing-themes .p-input-filled .p-radiobutton .p-radiobutton-box {
-  background-color: #1e1e1e;
+  background-color: #ffffff;
 }
 .landing-themes .p-input-filled .p-radiobutton .p-radiobutton-box:not(.p-disabled):hover {
-  background-color: #1e1e1e;
+  background-color: #ffffff;
 }
 .landing-themes .p-slider .p-slider-handle {
   transition: transform 0.2s, box-shadow 0.2s;
   transform: scale(0.7);
 }
 .landing-themes .p-slider .p-slider-handle:focus {
-  box-shadow: 0 0 1px 10px rgba(244, 143, 177, 0.2);
+  box-shadow: 0 0 1px 10px rgba(255, 64, 129, 0.2);
 }
 .landing-themes .p-slider.p-slider-sliding .p-slider-handle {
   transform: scale(1);
