@@ -146,7 +146,7 @@ export default function ThemeSection(props) {
                         <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={actionBodyTemplate} />
                     </DataTable>
                 </div>
-                <img src={`${contextPath}/images/landing-new/wave-${props.dark ? 'dark' : 'light'}.svg`} className="absolute w-full"/>
+                <img src={`${contextPath}/images/landing-new/wave-${props.dark ? 'dark' : 'light'}.svg`} className="absolute w-full left-0 top-0"/>
             </div>
         </section>
     );

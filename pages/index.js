@@ -69,7 +69,7 @@ export default function Home() {
             <DesignerSection dark={dark} />
             <TemplateSection dark={dark} />
             <UsersSection dark={dark}/>
-            <FeaturesSection />
+            <FeaturesSection dark={dark}/>
             <GetStartedSection />
             <FooterSection dark={dark} />
         </div>
