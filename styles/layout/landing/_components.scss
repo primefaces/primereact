@@ -17,4 +17,9 @@
     .box {
         box-shadow: var(--home-card-shadow);
     }
+
+    .p-datepicker, .p-datepicker-header {
+        background: transparent;
+        border-color: transparent;
+    }
 }

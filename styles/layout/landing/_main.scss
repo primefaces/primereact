@@ -7,7 +7,7 @@
         background: var(--home-intro-bg);
     }
 
-    .box,.linkbox {
+    .box {
         border: 1px solid var(--home-border-color);
         border-radius: 10px;
         background-color: var(--home-box-bg);
@@ -18,12 +18,15 @@
         transition: background-color .3s;
         display: inline-flex;
         align-items: center;
-        color: var(--home-box-text-color);
+        color: var(--home-linkbox-text-color);
         padding: .5rem 1rem;
+        border: 1px solid var(--home-border-color);
+        background-color: var(--home-box-bg);
+        border-radius: 10px;
         cursor: pointer;
 
         &:hover {
-            background: var(--home-box-hover-bg);
+            background: var(--home-linkbox-hover-bg);
         }
 
         &.active {
