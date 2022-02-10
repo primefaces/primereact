@@ -33,7 +33,7 @@ export default function Home() {
             setTableTheme(tableTheme.replace('light', 'dark'));
         }
     }
-
+    
     return (
         <div className={rootClassName}>
             <Analytics />
@@ -59,7 +59,7 @@ export default function Home() {
                 <link rel="stylesheet" href={`${contextPath}/styles/flags.css`}></link>
                 <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
             </Head>
-            <div className="landing-intro">
+            <div className="landing-intro">    
                 <HeaderSection dark={dark} onToggleColorScheme={onColorSchemeChange} />
                 <HeroSection />
             </div>

@@ -1,4 +1,21 @@
 .landing-header {
+    height: 5rem;
+    background-color: transparent;
+    transition: background-color .5s;
+
+    &.landing-header-sticky {
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        background-color: var(--home-header-bg);
+        z-index: 100;
+        backdrop-filter: blur(12px);
+
+        + .landing-hero {
+            margin-top:5rem;
+        }
+    }
+    
     ol {
         a {
             border-radius: 10px;
