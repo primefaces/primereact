@@ -70,7 +70,6 @@ export default function Home() {
             <TemplateSection dark={dark} />
             <UsersSection dark={dark}/>
             <FeaturesSection dark={dark}/>
-            <GetStartedSection />
             <FooterSection dark={dark} />
         </div>
     );

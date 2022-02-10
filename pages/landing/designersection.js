@@ -157,8 +157,8 @@ export default function DesignerSection(props) {
 
                                 <span className="font-semibold mb-2 block mb-3 mt-5 p-component">Buttons</span>
                                 <div className="flex align-items-center">
-                                    <Button type="button" label="Save" icon="pi pi-check" className="mr-2"></Button>
-                                    <Button type="button" label="Cancel" icon="pi pi-times" className="p-button-outlined ml-2"></Button>
+                                    <Button type="button" label="Save" icon="pi pi-check" className="mr-1"></Button>
+                                    <Button type="button" label="Clear" icon="pi pi-times" className="p-button-outlined ml-1"></Button>
                                 </div>
                             </div>
                         </div>

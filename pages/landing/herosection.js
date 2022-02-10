@@ -1,6 +1,8 @@
 import getConfig from 'next/config';
 import { useEffect, useState } from "react";
 
+import GetStartedSection from './getstartedsection';
+
 export default function HeroSection() {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [animationClass, setAnimationClass] = useState("");
@@ -10,7 +12,7 @@ export default function HeroSection() {
     });
 
     return (
-        <section className={`landing-hero ${animationClass} flex align-items-center justify-content-center relative`}>
+        <section className={`landing-hero ${animationClass} flex align-items-center flex-column justify-content-center relative`}>
             <div className="hero-inner z-2 relative">
                 <div className="flex flex-column md:align-items-center md:flex-row">
                     <div className="p-2 flex flex-row md:flex-column">
@@ -86,6 +88,7 @@ export default function HeroSection() {
                 <div className="hero-border-left hidden md:block"></div>
                 <div className="hero-border-right hidden md:block"></div>
             </div>
+            <GetStartedSection />
             <div className="hero-bg absolute top-0 left-0 right-0 bottom-0 z-0">
                 <div className="hero-strip-top"></div>
                 <div className="hero-strip-left"></div>
