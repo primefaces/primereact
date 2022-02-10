@@ -1,10 +1,12 @@
 .landing {
-    min-height: 100vh;
     background: var(--home-bg);
     scroll-behavior: smooth;
 
     .landing-intro {
         background: var(--home-intro-bg);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
 
     .box {
@@ -65,23 +67,27 @@
 }
 
 .pad-section {
-    padding: 0 12rem;
+    padding-left: 12rem;
+    padding-right: 12rem;
 }
 
 @media screen and (max-width: $landingBreakpointXL) {
     .pad-section {
-        padding: 0 8rem;
+        padding-left: 8rem;
+        padding-right: 8rem;
     }
 }
 
 @media screen and (max-width: $landingBreakpointLG) {
     .pad-section {
-        padding: 0 4rem;
+        padding-left: 4rem;
+        padding-right: 4rem;
     }
 }
 
 @media screen and (max-width: $landingBreakpointMD) {
     .pad-section {
-        padding: 0 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
 }

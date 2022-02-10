@@ -11,7 +11,7 @@ export default function HeroSection(props) {
     const changeColorScheme = () => {
         props.onToggleColorScheme();
     }
-    const headerClassName = classNames('landing-header flex align-items-center justify-content-between pad-section', {'landing-header-active': menuActive});
+    const headerClassName = classNames('landing-header pad-section', {'landing-header-active': menuActive});
 
     const scrollListener = useRef();
     const bindScrollListener = () => {

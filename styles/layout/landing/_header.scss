@@ -1,18 +1,19 @@
 .landing-header {
-    height: 5rem;
     background-color: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     &.landing-header-sticky {
-        position: fixed;
-        top: 0;
-        width: 100%;
         background-color: var(--home-header-bg);
-        z-index: 100;
         backdrop-filter: blur(12px);
-
-        + .landing-hero {
-            margin-top:5rem;
-        }
     }
     
     ol {
@@ -43,34 +44,26 @@
 
 @media screen and (max-width: $landingBreakpointLG) {
     .landing-header {
+        align-items: flex-start;
+
         nav {
             display: none;
         }
 
         &.landing-header-active {
             background-color: var(--home-header-bg);
-            z-index: 100;
-            top: 0;
-            left: 0;
-            position: fixed;
-            width: 100%;
             backdrop-filter: blur(12px);
-            overflow: visible;
-
-            + .landing-hero {
-                margin-top:5rem;
-            }
+            height: 100vh;
 
             nav {
                 display: block;
                 position: fixed;
+                left: 100px;
+                top: 100px;
+                width: 100%;
+                padding: 4rem 2rem;
                 top: 5rem;
                 left: 0;
-                height: calc(100vh - 5rem);
-                width: 100%;
-                background-color: var(--home-header-bg);
-                backdrop-filter: blur(20px);
-                padding: 4rem 2rem;
             }
 
             .menu-button {
