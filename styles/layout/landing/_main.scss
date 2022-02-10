@@ -34,6 +34,10 @@
         &.active {
             background: var(--home-highlight-color);
             color: var(--home-highlight-fore-color);
+
+            &:hover {
+                background: var(--home-highlight-darker-color);
+            }
         }
     }
 
