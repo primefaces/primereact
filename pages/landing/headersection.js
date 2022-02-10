@@ -47,7 +47,7 @@ export default function HeroSection(props) {
             <div className="flex align-items-center">
                 <nav className="scalein origin-top">
                     <ol className="list-none m-0 p-0 flex flex-column lg:flex-row flex-wrap lg:flex-nowrap lg:align-items-center font-semibold">
-                        <li>
+                        <li className="mr-0 lg:mr-2">
                             <Link href="/setup">
                                 <a>
                                     <img src={`${contextPath}/images/landing-new/core-icon.svg`} alt="primereact core" />
@@ -55,19 +55,19 @@ export default function HeroSection(props) {
                                 </a>
                             </Link>
                         </li>
-                        <li>
+                        <li className="mr-0 lg:mr-2">
                             <a href="https://www.primefaces.org/primeblocks-react">
                                 <img src={`${contextPath}/images/landing-new/blocks-icon.svg`} alt="primereact templates" />
                                 <span>Blocks</span>
                             </a>
                         </li>
-                        <li>
+                        <li className="mr-0 lg:mr-2">
                             <a href="https://www.primefaces.org/designer-react">
                                 <img src={`${contextPath}/images/landing-new/designer-icon.svg`} alt="primereact templates" />
                                 <span>Designer</span>
                             </a>
                         </li>
-                        <li>
+                        <li className="mr-0 lg:mr-2">
                             <a href="https://www.primefaces.org/store/templates.xhtml">
                                 <img src={`${contextPath}/images/landing-new/templates-icon.svg`} alt="primereact templates" />
                                 <span>Templates</span>
