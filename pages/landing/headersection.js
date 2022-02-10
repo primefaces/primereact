@@ -84,7 +84,7 @@ export default function HeroSection(props) {
                 <button type="button" className="linkbox header-button inline-flex align-items-center justify-content-center" onClick={changeColorScheme}>
                     <i className={colorSchemeIcon}></i>
                 </button>
-                <button type="button" className="linkbox header-button inline-flex align-items-center justify-content-center lg:hidden ml-2" onClick={() => setMenuActive(!menuActive)}>
+                <button type="button" className="linkbox header-button inline-flex align-items-center justify-content-center lg:hidden ml-2 menu-button" onClick={() => setMenuActive(!menuActive)}>
                     <i className="pi pi-bars"></i>
                 </button>
             </div>

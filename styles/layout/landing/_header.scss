@@ -72,6 +72,12 @@
                 backdrop-filter: blur(20px);
                 padding: 4rem 2rem;
             }
+
+            .menu-button {
+                i:before {
+                    content: "\e90b";
+                }
+            }
         }
 
         ol {
