@@ -41,7 +41,7 @@ export default function HeroSection(props) {
     return (
         <section ref={containerElement} className={headerClassName}>
             <span>
-                <img src={`${contextPath}/images/landing-new/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
+                <img src={`${contextPath}/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
             </span>
 
             <div className="flex align-items-center">

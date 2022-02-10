@@ -123,7 +123,7 @@ export default function Topbar(props) {
             </button>
             <Link href="/">
                 <a className="logo" aria-label="PrimeReact logo">
-                    <img alt="logo" src={`${contextPath}/images/primereact-logo${props.darkTheme ? '' : '-dark'}.png`} />
+                    <img alt="logo" src={`${contextPath}/images/primereact-logo${props.darkTheme ? '-light' : '-dark'}.svg`} />
                 </a>
             </Link>
             <div className="app-theme" data-pr-tooltip={props.theme}>

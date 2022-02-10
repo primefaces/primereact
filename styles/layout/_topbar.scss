@@ -34,10 +34,6 @@
     }
 
     .logo {
-        img {
-            width: 180px;
-        }
-
         &:focus {
             outline: 0 none;
             transition: box-shadow .2s;
