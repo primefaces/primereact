@@ -1,6 +1,5 @@
 import getConfig from 'next/config';
 import { StyleClass } from '../../components/lib/styleclass/StyleClass';
-import DomHandler from '../../components/lib/utils/DomHandler';
 import { useRef } from 'react';
 import Link from 'next/link';
 import { classNames } from '../../components/lib/utils/ClassNames';
@@ -10,10 +9,6 @@ export default function HeroSection(props) {
     const menubutton = useRef();
     const navMenu = useRef();
     const colorSchemeIcon = classNames('pi', {'pi-sun': props.dark, 'pi-moon': !props.dark});
-
-    const onItemClick = () => {
-        DomHandler.addClass(navMenu.current, 'hidden');
-    }
 
     const changeColorScheme = () => {
         props.onToggleColorScheme();
