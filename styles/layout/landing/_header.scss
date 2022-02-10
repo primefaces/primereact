@@ -5,7 +5,7 @@
 
     &.landing-header-sticky {
         position: fixed;
-        top: 0px;
+        top: 0;
         width: 100%;
         background-color: var(--home-header-bg);
         z-index: 100;
@@ -18,12 +18,20 @@
     
     ol {
         a {
+            display: block;
+            padding: .5rem 1.5rem;
+            text-align: center;
+            transition: background-color .3s;
             border-radius: 10px;
             color: var(--home-menu-link-text-color);
             white-space: nowrap;
 
+            img {
+                display: none;
+            }
+
             &:hover {
-                background: var(--home-menu-link-hover-bg)
+                background: var(--home-menu-link-hover-bg);
             }
         }
     }
@@ -37,30 +45,53 @@
 @media screen and (max-width: $landingBreakpointLG) {
     .landing-header {
         nav {
-            background: var(--home-menu-mobile-bg);
-            backdrop-filter: blur(12px);
+            display: none;
+        }
+
+        &.landing-header-active {
+            background-color: var(--home-header-bg);
             z-index: 100;
+            top: 0;
+            left: 0;
+            position: fixed;
+            width: 100%;
+            backdrop-filter: blur(12px);
+            overflow: visible;
 
-            ol {
-                border: 1px solid var(--home-border-color);
-                border-radius: 10px;
-                overflow: hidden;
-
-                li:last-child {
-                    a {
-                        border-bottom: 0 none;
-                    }
-                }
+            + .landing-hero {
+                margin-top:5rem;
             }
 
+            nav {
+                display: block;
+                position: fixed;
+                top: 5rem;
+                left: 0;
+                height: calc(100vh - 5rem);
+                width: 100%;
+                background-color: var(--home-header-bg);
+                backdrop-filter: blur(20px);
+                padding: 4rem 2rem;
+            }
+        }
+
+        ol {
             a {
+                border: 1px solid var(--home-border-color);
+                background-color: var(--home-herobox-bg);
+                margin-bottom: 1rem;
+                color: var(--home-linkbox-text-color);
+                cursor: pointer;
                 font-size: 1.5rem;
-                background: var(--home-menu-mobile-link-bg);
-                border-radius: 10px;
+                text-align: left;
                 display: flex;
-                font-weight: medium !important;
-                border-radius: 0;
-                border-bottom: 1px solid var(--home-border-color);
+                align-items: center;
+                padding: 1.5rem;
+
+                img {
+                    display: block;
+                    margin-right: 1.5rem;
+                }
             }
         }
     }

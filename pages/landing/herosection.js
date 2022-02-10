@@ -36,7 +36,7 @@ export default function HeroSection() {
                     <div className="p-2 flex flex-row md:flex-column">
                         <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center">
                             <div className="flex flex-column align-items-center">
-                                <img src={`${contextPath}/images/landing-new/core-icon.svg`} alt="primereact templates" />
+                                <img src={`${contextPath}/images/landing-new/core-icon.svg`} alt="primereact core" />
                                 <div className="name">
                                     <b>Open Source Core</b>
                                     <span>80+ UI Components</span>
@@ -45,7 +45,7 @@ export default function HeroSection() {
                         </div>
                         <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation logo hidden md:flex my-4 align-items-center justify-content-center">
                             <div className="hero-box-inner text-center">
-                                <img src={`${contextPath}/images/landing-new/overview-icon.svg`} alt="primereact templates" />
+                                <img src={`${contextPath}/images/landing-new/overview-icon.svg`} alt="primereact main" />
                                 <div className="name">
                                     <b className="font-bold">NEXT-GEN REACT UI</b>
                                 </div>
@@ -53,7 +53,7 @@ export default function HeroSection() {
                         </div>
                         <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex ml-4 md:ml-0 align-items-center justify-content-center">
                             <div className="flex flex-column align-items-center">
-                                <img src={`${contextPath}/images/landing-new/css-icon.svg`} alt="primereact templates" />
+                                <img src={`${contextPath}/images/landing-new/css-icon.svg`} alt="primereact icons" />
                                 <div className="name">
                                     <b>CSS Utilities</b>
                                     <span>PrimeFlex CSS</span>
