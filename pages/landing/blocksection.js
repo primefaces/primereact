@@ -26,7 +26,7 @@ export default function BlockSection() {
             </div>
             <section className={`prime-blocks ${animationClass} flex justify-content-center align-items-center flex-column`}>
                 <div className="flex">
-                    <div className="prime-block  flex align-self-stretch p-1">
+                    <div className="prime-block flex align-self-stretch p-1">
                         <div className="block-sidebar w-1 p-3">
                             <div className="logo">
                                 <img src={`${contextPath}/images/landing-new/blocks/logo-1.svg`} alt="block logo" />

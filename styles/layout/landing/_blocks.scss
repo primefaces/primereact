@@ -33,13 +33,13 @@
             position: relative;
             z-index: 1;
             margin: 15px;
-            transition: 1.3s;
+            transition: opacity 1.3s, transform 1.3s;
 
             .block-sidebar, 
             .block-header, 
             .block-sidebar-list, 
             .block-content {
-                transition: 1.3s;
+                transition: opacity 1.3s, transform 1.3s;
                 opacity: 0;
                 visibility: hidden;
                 transform: scale(0.9);
@@ -79,7 +79,7 @@
             background: var(--home-blocks-item-bg);
             border-radius: 6px;
             padding: 1rem;
-            transition: 1s;
+            transition: transform 1s, box-shadow 1s;
             overflow: hidden;
             transform: translateY(0);
 
@@ -110,7 +110,7 @@
                 height: 44px;
             }
 
-            .text{
+            .text {
                 display: block;
                 font-size: 24px;
                 font-weight: 700;
