@@ -4,7 +4,6 @@ import { Button } from '../../components/lib/button/Button';
 import { NodeService } from '../../service/NodeService';
 import { TreeDoc } from '../../components/doc/tree';
 import { DocActions } from '../../components/doc/common/docactions';
-import { NodeService } from '../../service/NodeService';
 import Head from 'next/head';
 
 export default class TreeDemo extends Component {
