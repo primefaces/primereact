@@ -86,7 +86,7 @@ export default function FooterSection(props) {
 
             <div className="flex justify-content-between py-6">
                 <span>
-                    <img src={`${contextPath}/images/landing-new/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
+                    <img src={`${contextPath}/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
                 </span>
                 <div className="flex align-items-center">
                     <a href="https://twitter.com/primereact" className="linkbox block w-3rem h-3rem flex align-items-center justify-content-center mr-3">

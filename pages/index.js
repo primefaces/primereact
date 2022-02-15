@@ -3,7 +3,6 @@ import Analytics from '../components/layout/analytics';
 import getConfig from 'next/config';
 import HeaderSection from './landing/headersection';
 import HeroSection from './landing/herosection';
-import GetStartedSection from './landing/getstartedsection';
 import ComponentSection from './landing/componentsection';
 import ThemeSection from './landing/themesection';
 import BlockSection from './landing/blocksection';
