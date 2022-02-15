@@ -11,12 +11,13 @@ import AppContentContext from './appcontentcontext';
 import PrimeReact from '../lib/api/PrimeReact';
 import getConfig from 'next/config';
 
-export default function Layout({ children }) {
-    const [theme, setTheme] = useState('lara-light-indigo');
+export default function Layout(props) {
+    const defaultTheme = props.dark ? 'lara-dark-indigo' : 'lara-light-indigo';
+    console.log(defaultTheme);
+    const [theme, setTheme] = useState(defaultTheme);
     const [inputStyle, setInputStyle] = useState('outlined');
     const [ripple, setRipple] = useState(false);
     const [sidebarActive, setSidebarActive] = useState(false);
-    const [darkTheme, setDarkTheme] = useState(false);
     const [newsActive, setNewsActive] = useState(true);
     const mounted = useRef(false);
     const storageKey = 'primereact';
@@ -44,7 +45,7 @@ export default function Layout({ children }) {
             setRipple(true);
         }
         setTheme(event.theme);
-        setDarkTheme(event.dark);
+        props.onColorSchemeChange(event.dark);
     }
     const onInputStyleChange = (value) => {
         setInputStyle(value);
@@ -57,7 +58,7 @@ export default function Layout({ children }) {
     }
     const saveSettings = () => {
         const now = new Date();
-        const settings = {theme, darkTheme, newsActive};
+        const settings = {newsActive};
         const item = {
             settings,
             expiry: now.getTime() + 604800000
@@ -69,8 +70,6 @@ export default function Layout({ children }) {
         if (itemString) {
             const item = JSON.parse(itemString);
             if (!isStorageExpired()) {
-                setTheme(item.settings.theme);
-                setDarkTheme(item.settings.darkTheme);
                 setNewsActive(item.settings.newsActive);
             }
         }
@@ -106,7 +105,7 @@ export default function Layout({ children }) {
         else {
             saveSettings();
         }
-    },[theme, darkTheme, newsActive]);
+    },[newsActive]);
 
     PrimeReact.ripple = true;
 
@@ -136,17 +135,17 @@ export default function Layout({ children }) {
                 <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
             </Head>
             <News active={newsActive} onHide={onNewsHide}/>
-            <Topbar onMenuButtonClick={onMenuButtonClick} onThemeChange={onThemeChange} theme={theme} darkTheme={darkTheme} versions={[]} />
-            <Menu active={sidebarActive} onMenuItemClick={onMenuItemClick} darkTheme={darkTheme} />
+            <Topbar onMenuButtonClick={onMenuButtonClick} onThemeChange={onThemeChange} theme={theme} darkTheme={props.dark} versions={[]} />
+            <Menu active={sidebarActive} onMenuItemClick={onMenuItemClick} darkTheme={props.dark} />
             <AppContentContext.Provider value={{
                     ripple: ripple,
                     inputStyle: inputStyle,
-                    darkTheme: darkTheme,
+                    darkTheme: props.dark,
                     onInputStyleChange: onInputStyleChange,
                     onRippleChange: onRippleChange
                 }}>
                 <div className="layout-content">
-                    {children}
+                    {props.children}
                     <Footer></Footer>
                 </div>
                 <Config ripple={ripple} onRippleChange={onRippleChange}
