@@ -152,12 +152,7 @@ export default function Topbar(props) {
 
             <ul ref={topbarMenu} className="topbar-menu p-unselectable-text" role="menubar">
                 <li role="none" className="topbar-submenu">
-                    <button type="button" role="menuitem" onClick={() => toggleMenu(0)} aria-haspopup className="p-link">
-                        <span className="p-overlay-badge">
-                            Themes
-                            <Badge severity="danger"></Badge>
-                        </span>
-                    </button>
+                    <button type="button" role="menuitem" onClick={() => toggleMenu(0)} aria-haspopup className="p-link">Themes</button>
                     <CSSTransition nodeRef={themesOverlayRef} classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={activeMenuIndex === 0}
                         unmountOnExit>
                         <ul ref={themesOverlayRef} role="menu" aria-label="Themes">
