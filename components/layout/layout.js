@@ -142,8 +142,10 @@ export default function Layout(props) {
                     onRippleChange: onRippleChange
                 }}>
                 <div className="layout-content">
-                    {props.children}
-                    <Footer></Footer>
+                    <div className="layout-content-inner">
+                        {props.children}
+                        <Footer></Footer>
+                    </div>
                 </div>
                 <Config ripple={ripple} onRippleChange={onRippleChange}
                         inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} />

@@ -70,6 +70,7 @@
             .doc-tablewrapper {
                 margin: 1rem 0;
                 overflow: auto;
+                border-radius: 10px;
             }
 
             i:not([class~="pi"]) {
@@ -186,7 +187,7 @@
                     border-bottom: 1px solid var(--surface-border);
 
                     &:first-child {
-                        font-family: Courier New,monospace;
+                        font-family: ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,Liberation Mono,monospace;
                         font-weight: 700;
                         color: var(--text-color-secondary);
                     }
@@ -208,7 +209,7 @@
     .card {
         background: var(--surface-card);
         padding: 2rem;
-        border-radius: var(--border-radius);
+        border-radius: 10px;
         margin-bottom: 2rem;
 
         .card-header {

@@ -37,18 +37,17 @@
             margin: 0;
 
             > li {
-                height: 40px;
-                line-height: 40px;
                 width: 25%;
+                margin-right: 0;
 
                 > a,
                 > .p-link {
-                    padding-bottom: 0;
-                    height: 40px;
-                    line-height: 38px;
+                    display: flex;
+                    height: 100%;
                     width: 100%;
-                    font-size: 14px;
-                    min-width: auto;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 0;
                 }
 
                 &.topbar-submenu > ul {
@@ -143,13 +142,19 @@
     overflow: hidden;
 }
 
+
+@media screen and (min-width: 1729px) {
+    .layout-content-inner {
+        max-width: 1478px;
+        margin: 0 auto;
+    }
+}
+
 @media screen and (max-width: 960px) {
     .layout-wrapper {
         @include overlay-menu;
     }
-}
 
-@media screen and (max-width: 640px) {
     .layout-wrapper {
         &.layout-news-active {
             .topbar-menu {
