@@ -70,6 +70,10 @@
     color: var(--home-secondary-text-color);
 }
 
+.hover\:surface-hover:hover {
+    background-color: var(--surface-hover);
+}
+
 .pad-section {
     padding-left: 12rem;
     padding-right: 12rem;

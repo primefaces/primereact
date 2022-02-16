@@ -197,7 +197,7 @@ export default function ComponentSection() {
                                 </div>
                             </li>
                             <li className="flex">
-                                <a className="flex align-items-center p-3 w-full hover:bg-black-alpha-20 transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
+                                <a className="flex align-items-center p-3 w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
                                     <i className="pi pi-home text-xl mr-3"></i>
                                     <span className="flex flex-column">
                                         <span className="font-bold mb-1">Dashboard</span>
@@ -206,7 +206,7 @@ export default function ComponentSection() {
                                 </a>
                             </li>
                             <li className="flex">
-                                <a className="flex align-items-center p-3 w-full hover:bg-black-alpha-20 transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
+                                <a className="flex align-items-center p-3 w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
                                     <i className="pi pi-envelope text-xl mr-3"></i>
                                     <span className="flex flex-column">
                                         <span className="font-bold mb-1">Inbox</span>
@@ -216,7 +216,7 @@ export default function ComponentSection() {
                                 </a>
                             </li>
                             <li className="flex">
-                                <a className="flex align-items-center p-3 w-full hover:bg-black-alpha-20 transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
+                                <a className="flex align-items-center p-3 w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
                                     <i className="pi pi-cog text-xl mr-3"></i>
                                     <span className="flex flex-column">
                                         <span className="font-bold mb-1">Profile</span>
