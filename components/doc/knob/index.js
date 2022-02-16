@@ -529,13 +529,13 @@ import { Knob } from 'primereact/knob';
                                 </tr>
                                 <tr>
                                     <td>rangeColor</td>
-                                    <td>number</td>
+                                    <td>string</td>
                                     <td>null</td>
                                     <td>Background color of the range.</td>
                                 </tr>
                                 <tr>
                                     <td>textColor</td>
-                                    <td>number</td>
+                                    <td>string</td>
                                     <td>null</td>
                                     <td>Color of the value text.</td>
                                 </tr>
