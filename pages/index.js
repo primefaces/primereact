@@ -12,17 +12,24 @@ import UsersSection from './landing/userssection';
 import FeaturesSection from './landing/featuressection';
 import FooterSection from './landing/footersection';
 import { classNames } from '../components/lib/utils/ClassNames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const [tableTheme, setTableTheme] = useState(props.dark ? 'lara-dark-indigo' : 'lara-light-indigo');
+    const [tableTheme, setTableTheme] = useState('lara-dark-indigo');
     const rootClassName = classNames('landing', {'landing-light': !props.dark, 'landing-dark': props.dark});
     const toggleColorScheme = () => {
         const darkMode = !props.dark;
         const newTheme = darkMode ? 'lara-dark-indigo': 'lara-light-indigo';
         props.onThemeChange(newTheme, darkMode);
     };
+
+    useEffect(() => {
+        if (props.dark)
+            setTableTheme(tableTheme.replace('light','dark'));
+        else
+            setTableTheme(tableTheme.replace('dark','light'));
+    }, [props.dark]);
     
     return (
         <div className={rootClassName}>
