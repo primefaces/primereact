@@ -12,9 +12,6 @@ import PrimeReact from '../lib/api/PrimeReact';
 import getConfig from 'next/config';
 
 export default function Layout(props) {
-    const defaultTheme = props.dark ? 'lara-dark-indigo' : 'lara-light-indigo';
-    console.log(defaultTheme);
-    const [theme, setTheme] = useState(defaultTheme);
     const [inputStyle, setInputStyle] = useState('outlined');
     const [ripple, setRipple] = useState(false);
     const [sidebarActive, setSidebarActive] = useState(false);
@@ -44,8 +41,7 @@ export default function Layout(props) {
         if (event.theme.startsWith('md')) {
             setRipple(true);
         }
-        setTheme(event.theme);
-        props.onColorSchemeChange(event.dark);
+        props.onThemeChange(event.theme, event.dark);
     }
     const onInputStyleChange = (value) => {
         setInputStyle(value);
@@ -130,12 +126,11 @@ export default function Layout(props) {
                 <meta property="og:image" content="https://www.primefaces.org/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
                 <link rel="icon" href={`${contextPath}/images/favicon.ico`} type="image/x-icon"></link>
-                <link rel="stylesheet" href={`${contextPath}/themes/${theme}/theme.css`}></link>
                 <link rel="stylesheet" href={`${contextPath}/styles/flags.css`}></link>
                 <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
             </Head>
             <News active={newsActive} onHide={onNewsHide}/>
-            <Topbar onMenuButtonClick={onMenuButtonClick} onThemeChange={onThemeChange} theme={theme} darkTheme={props.dark} versions={[]} />
+            <Topbar onMenuButtonClick={onMenuButtonClick} onThemeChange={onThemeChange} theme={props.theme} darkTheme={props.dark} versions={[]} />
             <Menu active={sidebarActive} onMenuItemClick={onMenuItemClick} darkTheme={props.dark} />
             <AppContentContext.Provider value={{
                     ripple: ripple,

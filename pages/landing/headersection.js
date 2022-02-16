@@ -9,7 +9,7 @@ export default function HeroSection(props) {
     const colorSchemeIcon = classNames('pi', {'pi-sun': props.dark, 'pi-moon': !props.dark});
     const containerElement = useRef(null);
     const changeColorScheme = () => {
-        props.onToggleColorScheme(!props.dark);
+        props.onToggleColorScheme();
     }
     const headerClassName = classNames('landing-header pad-section', {'landing-header-active': menuActive});
 

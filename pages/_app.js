@@ -8,12 +8,32 @@ import { useState } from 'react';
 
 export default function MyApp({ Component }) {
     const [dark, setDark] = useState(true);
+    const [theme, setTheme] = useState('lara-dark-indigo');
 
     const props = {
         dark: dark,
-        onColorSchemeChange: (value) => {
-            setDark(value);
+        theme: theme,
+        onThemeChange: (newTheme, dark) => {
+            setDark(dark);
+            changeTheme(newTheme);
         }
+    }
+
+    const changeTheme = (newTheme) => {
+        const elementId = 'theme-link';
+        const linkElement = document.getElementById('theme-link');
+        const cloneLinkElement = linkElement.cloneNode(true);
+        const newThemeUrl = linkElement.getAttribute('href').replace(theme, newTheme);
+
+        cloneLinkElement.setAttribute('id', elementId + '-clone');
+        cloneLinkElement.setAttribute('href', newThemeUrl);
+        cloneLinkElement.addEventListener('load', () => {
+            linkElement.remove();
+            cloneLinkElement.setAttribute('id', elementId);
+        });
+        
+        linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
+        setTheme(newTheme);
     }
 
     if (Component.getLayout) {
