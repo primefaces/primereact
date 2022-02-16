@@ -1,4 +1,5 @@
 import getConfig from 'next/config';
+import Link from 'next/link';
 import { useEffect, useState } from "react";
 
 import GetStartedSection from './getstartedsection';
@@ -16,7 +17,7 @@ export default function HeroSection() {
             <div className="hero-inner z-2 relative">
                 <div className="flex flex-column md:align-items-center md:flex-row">
                     <div className="p-2 flex flex-row md:flex-column">
-                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center">
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center" onClick={() => window.location.href = 'https://www.primefaces.org/store'}>
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/templates-icon.svg`} alt="primereact templates" />
                                 <div className="name">
@@ -25,7 +26,7 @@ export default function HeroSection() {
                                 </div>
                             </div>
                         </div>
-                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation ml-4 md:ml-0 md:mt-4 flex align-items-center justify-content-center">
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation ml-4 md:ml-0 md:mt-4 flex align-items-center justify-content-center"  onClick={() => window.location.href = 'https://www.primefaces.org/designer-react'}>
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/designer-icon.svg`} alt="primereact templates" />
                                 <div className="name">
@@ -36,7 +37,7 @@ export default function HeroSection() {
                         </div>
                     </div>
                     <div className="p-2 flex flex-row md:flex-column">
-                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center">
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center" onClick={() => window.location.href = 'https://github.com/primefaces/primereact'}>
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/core-icon.svg`} alt="primereact core" />
                                 <div className="name">
@@ -45,15 +46,17 @@ export default function HeroSection() {
                                 </div>
                             </div>
                         </div>
-                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation logo hidden md:flex my-4 align-items-center justify-content-center">
-                            <div className="hero-box-inner text-center">
-                                <img src={`${contextPath}/images/landing-new/overview-icon.svg`} alt="primereact main" />
-                                <div className="name">
-                                    <b className="font-bold">NEXT-GEN REACT UI</b>
+                        <Link href="/setup">
+                            <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation logo hidden md:flex my-4 align-items-center justify-content-center">
+                                <div className="hero-box-inner text-center">
+                                    <img src={`${contextPath}/images/landing-new/overview-icon.svg`} alt="primereact main" />
+                                    <div className="name">
+                                        <b className="font-bold">NEXT-GEN REACT UI</b>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex ml-4 md:ml-0 align-items-center justify-content-center">
+                        </Link>
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex ml-4 md:ml-0 align-items-center justify-content-center" onClick={() => window.location.href = 'https://www.primefaces.org/primeflex'}>
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/css-icon.svg`} alt="primereact icons" />
                                 <div className="name">
@@ -64,7 +67,7 @@ export default function HeroSection() {
                         </div>
                     </div>
                     <div className="p-2 flex flex-row md:flex-column">
-                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center">
+                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center" onClick={() => window.location.href = 'https://www.primefaces.org/primeblocks-react'}>
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/blocks-icon.svg`} alt="primereact templates" />
                                 <div className="name">
@@ -73,15 +76,17 @@ export default function HeroSection() {
                                 </div>
                             </div>
                         </div>
-                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex ml-4 md:ml-0 md:mt-4 align-items-center justify-content-center">
-                            <div className="flex flex-column align-items-center">
-                                <img src={`${contextPath}/images/landing-new/icons-icon.svg`} alt="primereact templates" />
-                                <div className="name">
-                                    <b>Icon Library</b>
-                                    <span>200+ Icons</span>
+                        <Link href="/icons">
+                            <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex ml-4 md:ml-0 md:mt-4 align-items-center justify-content-center">
+                                <div className="flex flex-column align-items-center">
+                                    <img src={`${contextPath}/images/landing-new/icons-icon.svg`} alt="primereact templates" />
+                                    <div className="name">
+                                        <b>Icon Library</b>
+                                        <span>200+ Icons</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                 </div>
                 <div className="hero-border-top hidden md:block"></div>
