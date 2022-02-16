@@ -1,38 +1,3 @@
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 300;
-  src: local(""), url("../../../../themes/lara-dark-indigo/fonts/Inter-Light.woff2") format("woff2"), url("../../../../themes/lara-dark-indigo/fonts/Inter-Light.woff") format("woff");
-  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  src: local(""), url("../../../../themes/lara-dark-indigo/fonts/Inter-Regular.woff2") format("woff2"), url("../../../../themes/lara-dark-indigo/fonts/Inter-Regular.woff") format("woff");
-  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  src: local(""), url("../../../../themes/lara-dark-indigo/fonts/Inter-Medium.woff2") format("woff2"), url("../../../../themes/lara-dark-indigo/fonts/Inter-Medium.woff") format("woff");
-  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 600;
-  src: local(""), url("../../../../themes/lara-dark-indigo/fonts/Inter-SemiBold.woff2") format("woff2"), url("../../../../themes/lara-dark-indigo/fonts/Inter-SemiBold.woff") format("woff");
-  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  src: local(""), url("../../../../themes/lara-dark-indigo/fonts/Inter-Bold.woff2") format("woff2"), url("../../../../themes/lara-dark-indigo/fonts/Inter-Bold.woff") format("woff");
-  /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
 .landing-themes * {
   box-sizing: border-box;
 }
@@ -40,7 +5,7 @@
   background-color: #071426;
 }
 .landing-themes .p-component {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1rem;
   font-weight: normal;
 }
@@ -62,7 +27,7 @@
 }
 .landing-themes .p-link {
   font-size: 1rem;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   border-radius: 6px;
 }
 .landing-themes .p-link:focus {
@@ -463,7 +428,7 @@
   border-color: #FCA5A5;
 }
 .landing-themes .p-inputtext {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.87);
   background: #040d19;
