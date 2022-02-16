@@ -2,7 +2,7 @@
  pre[class*="language-"] {
      color: black;
      background: none;
-     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+     font-family: ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,Liberation Mono,monospace;
      font-size: 1em;
      text-align: left;
      white-space: pre;
@@ -277,47 +277,137 @@
      color: inherit;
      text-decoration: none;
  }
+
+ .layout-wrapper-dark {
+    pre[class*="language-"] {
+        code {
+            .token {
+                &.tag {
+                    color: var(--text-color) !important;
+                }
+                &.keyword {
+                    color: rgb(244,112,103) !important;
+                }
+    
+                &.property {
+                    color: rgb(150,208,255) !important;
+                }
+    
+                &.attr-name,
+                &.attr-string {
+                    color: rgb(108,182,255) !important;
+                }
+    
+                &.string {
+                    color: var(--text-color) !important;
+                }
+    
+                &.attr-value {
+                    color: var(--text-color) !important;
+    
+                    .punctuation {
+                        color: rgb(108,182,255) !important;
+                    }
+                }
+    
+                &.punctuation {
+                    color: var(--text-color) !important;
+                }
+    
+                &.operator,
+                &.string {
+                    background: transparent;
+                }
+    
+                &.function {
+                    color: rgb(220,189,251) !important;
+                }
+    
+                &.class-name {
+                    color: rgb(141,219,140) !important;
+                }
+    
+                &.operator {
+                    color: rgb(150,208,255) !important;
+                }
+            }
+        }
+    }
+ }
+
+ .layout-wrapper-light {
+    pre[class*="language-"] {
+        code {
+            .token {
+                &.tag {
+                    color: rgb(10,48,105) !important;
+                }
+                &.keyword {
+                    color: rgb(207,34,46) !important;
+                }
+    
+                &.property {
+                    color: rgb(5,80,174) !important;
+                }
+    
+                &.attr-name,
+                &.attr-string {
+                    color: rgb(5,80,174) !important;
+                }
+    
+                &.string {
+                    color: rgb(10,48,105) !important;
+                }
+    
+                &.attr-value {
+                    color: rgb(10,48,105) !important;
+    
+                    .punctuation {
+                        color: rgb(10,48,105) !important;
+                    }
+                }
+    
+                &.punctuation {
+                    color: rgb(5,80,174) !important;
+                }
+    
+                &.operator,
+                &.string {
+                    background: transparent;
+                }
+    
+                &.function {
+                    color: rgb(130,80,223) !important;
+                }
+    
+                &.class-name {
+                    color: rgb(17,99,41) !important;
+                }
+    
+                &.operator {
+                    color: rgb(5,80,174) !important;
+                }
+            }
+        }
+    }
+}
  
  pre[class*="language-"] {
     position: relative;
-    background: var(--surface-e) !important;
+    background: transparent !important;
 
     &:before, &:after {
         display: none !important;
     }
 
     code {
-        border-left: 10px solid var(--surface-d) !important;
+        border-left: 1rem solid transparent !important;
         box-shadow: none !important;
-        background: var(--surface-e) !important;
+        background: var(--surface-card) !important;
         margin: 0;
-        color: var(--text-color);
+        color: var(--surface-900);
         font-size: 14px;
-
-        .token {
-            &.tag,
-            &.keyword {
-                color: #2196F3 !important;
-            }
-
-            &.attr-name,
-            &.attr-string {
-                color: #2196F3 !important;
-            }
-
-            &.attr-value {
-                color: #4CAF50 !important;
-            }
-
-            &.punctuation {
-                color: var(--text-color);
-            }
-
-            &.operator,
-            &.string {
-                background: transparent;
-            }
-        }
+        border-radius: 20px;
     }
 }
 
