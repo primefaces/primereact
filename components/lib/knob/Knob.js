@@ -19,7 +19,7 @@ export class Knob extends Component {
         strokeWidth: 14,
         name: null,
         valueColor: 'var(--primary-color, Black)',
-        rangeColor: 'var(--surface-d, LightGray)',
+        rangeColor: 'var(--surface-border, LightGray)',
         textColor: 'var(--text-color-secondary, Black)',
         valueTemplate: '{value}',
         onChange: null
