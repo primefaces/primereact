@@ -622,7 +622,7 @@ export class TreeSelect extends Component {
             </div>
         );
 
-        if (this.props.header) {
+        if (this.props.panelHeaderTemplate) {
             const defaultOptions = {
                 className: 'p-treeselect-header',
                 filterElement,
@@ -634,7 +634,7 @@ export class TreeSelect extends Component {
                 props: this.props
             }
 
-            return ObjectUtils.getJSXElement(this.props.header, defaultOptions);
+            return ObjectUtils.getJSXElement(this.props.panelHeaderTemplate, defaultOptions);
         }
 
         return content;
