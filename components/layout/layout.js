@@ -23,7 +23,9 @@ export default function Layout(props) {
     const wrapperClassName = classNames('layout-wrapper', {
         'layout-news-active': newsActive,
         'p-input-filled': inputStyle === 'filled',
-        'p-ripple-disabled': ripple === false
+        'p-ripple-disabled': ripple === false,
+        'layout-wrapper-dark': props.dark,
+        'layout-wrapper-light': !props.dark
     });
     const maskClassName = classNames('layout-mask', {
         'layout-mask-active': sidebarActive

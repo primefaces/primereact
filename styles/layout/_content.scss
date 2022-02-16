@@ -6,7 +6,6 @@
         padding: 2rem;
 
         &.introduction {
-            background-color: var(--surface-b);
             color: var(--text-color);
             padding-bottom: 0;
             display: flex;
@@ -44,7 +43,6 @@
         }
 
         &.implementation {
-            background-color: var(--surface-b);
             color: var(--text-color);
 
             +.documentation {
@@ -53,7 +51,6 @@
         }
 
         &.documentation {
-            background-color: var(--surface-b);
             color: var(--text-color);
 
             li {
@@ -76,7 +73,7 @@
             }
 
             i:not([class~="pi"]) {
-                background-color: var(--surface-a);
+                background-color: var(--surface-card);
                 color: #2196f3;
                 font-family: Monaco, courier, monospace;
                 font-style: normal;
@@ -96,7 +93,7 @@
                 .p-tabview-nav {
                     border-radius: 0;
                     padding: 0;
-                    border-bottom: 1px solid var(--surface-d);
+                    border-bottom: 1px solid var(--surface-border);
                     background-color: transparent;
 
                     li {
@@ -118,7 +115,7 @@
                             &:focus {
                                 outline: 0 none;
                                 transition: background-color .2s, box-shadow .2s;
-                                box-shadow: inset 0 0 0 0.2em $focusBorderColor;
+                                box-shadow: var(--focus-ring);
                             }
 
                             &:hover {
@@ -171,10 +168,10 @@
         .doc-table {
             border-collapse: collapse;
             width: 100%;
-            background-color: var(--surface-a);
+            background-color: var(--surface-card);
 
             th {
-                border-bottom: 1px solid var(--surface-d);
+                border-bottom: 1px solid var(--surface-border);
                 padding: 1rem;
                 text-align: left;
             }
@@ -186,7 +183,7 @@
 
                 td {
                     padding: 1rem;
-                    border-bottom: 1px solid var(--surface-d);
+                    border-bottom: 1px solid var(--surface-border);
 
                     &:first-child {
                         font-family: Courier New,monospace;
@@ -209,10 +206,9 @@
     }
 
     .card {
-        background: var(--surface-e);
+        background: var(--surface-card);
         padding: 2rem;
-        box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
-        border-radius: 4px;
+        border-radius: var(--border-radius);
         margin-bottom: 2rem;
 
         .card-header {

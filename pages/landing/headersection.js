@@ -16,10 +16,12 @@ export default function HeroSection(props) {
     const scrollListener = useRef();
     const bindScrollListener = () => {
         scrollListener.current = () => {
-            if (window.scrollY > 0)
-                containerElement.current.classList.add('landing-header-sticky');
-            else
-                containerElement.current.classList.remove('landing-header-sticky');
+            if (containerElement && containerElement.current) {
+                if (window.scrollY > 0)
+                    containerElement.current.classList.add('landing-header-sticky');
+                else
+                    containerElement.current.classList.remove('landing-header-sticky');
+            }
         }
         window.addEventListener('scroll', scrollListener.current);
     }

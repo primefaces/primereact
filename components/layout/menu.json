@@ -27,8 +27,7 @@
                         "demo",
                         "quickstart",
                         "starter"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Locale",

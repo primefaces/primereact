@@ -56,6 +56,34 @@ export default function Topbar(props) {
         versionService.getVersions().then(data => setVersions(data));
     },[]);
 
+    const containerElement = useRef(null);
+    const scrollListener = useRef();
+    const bindScrollListener = () => {
+        scrollListener.current = () => {
+            if (containerElement && containerElement.current) {
+                if (window.scrollY > 0)
+                    containerElement.current.classList.add('layout-topbar-sticky');
+                else
+                    containerElement.current.classList.remove('layout-topbar-sticky');
+            }
+        }
+        window.addEventListener('scroll', scrollListener.current);
+    }
+
+    const unbindScrollListener = () => {
+        if (scrollListener.current) {
+            window.removeEventListener('scroll', scrollListener.current);
+            scrollListener.current = null;
+        }
+    }
+
+    useEffect(() => {
+        bindScrollListener();
+        return function unbind() {
+            unbindScrollListener();
+        }
+    }, []);
+
     const topbarMenu = useRef();
     const themesOverlayRef = useRef();
     const templatesOverlayRef = useRef();
@@ -115,17 +143,12 @@ export default function Topbar(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
-        <div className="layout-topbar">
+        <div ref={containerElement} className="layout-topbar">
             <Tooltip target=".app-theme" position="bottom" />
 
             <button type="button" className="p-link menu-button" onClick={onMenuButtonClick} aria-haspopup aria-label="Menu">
                 <i className="pi pi-bars"></i>
             </button>
-            <Link href="/">
-                <a className="logo" aria-label="PrimeReact logo">
-                    <img alt="logo" src={`${contextPath}/images/primereact-logo${props.darkTheme ? '-light' : '-dark'}.svg`} />
-                </a>
-            </Link>
             <div className="app-theme" data-pr-tooltip={props.theme}>
                 <img alt={props.theme} src={`${contextPath}/images/themes/${logoMap[props.theme]}`} />
             </div>
