@@ -30,6 +30,13 @@ export default function Home(props) {
         else
             setTableTheme(tableTheme.replace('dark','light'));
     }, [props.dark]);
+
+    useEffect(() => {
+        if (props.dark)
+            props.onThemeChange('lara-dark-indigo', true);
+        else
+            props.onThemeChange('lara-light-indigo', false);
+    }, []);
     
     return (
         <div className={rootClassName}>
