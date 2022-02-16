@@ -12,26 +12,22 @@
             align-items: top;
             justify-content: space-between;
 
-            .feature-intro {
-                h1 {
-                    span {
-                        font-weight: 400;
-                        color: var(--text-color-secondary);
-                    }
-                }
+            h1 {
+                color: var(--surface-900);
+            }
 
-                p {
-                    margin: 0;
-                }
+            p {
+                margin: 0;
+                font-size: 1.25rem;
+            }
 
-                a {
-                    text-decoration: none;
-                    color: $linkColor;
-                    font-weight: 600;
+            a {
+                text-decoration: none;
+                color: $linkColor;
+                font-weight: 600;
 
-                    &:hover {
-                        text-decoration: underline;
-                    }
+                &:hover {
+                    text-decoration: underline;
                 }
             }
         }

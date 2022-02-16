@@ -1,4 +1,3 @@
-import { Tooltip } from '../lib/tooltip/Tooltip';
 import { Badge } from '../lib/badge/Badge';
 import { CSSTransition } from 'react-transition-group';
 import Link from 'next/link';
@@ -144,8 +143,6 @@ export default function Topbar(props) {
 
     return (
         <div ref={containerElement} className="layout-topbar">
-            <Tooltip target=".app-theme" position="bottom" />
-
             <button type="button" className="p-link menu-button" onClick={onMenuButtonClick} aria-haspopup aria-label="Menu">
                 <i className="pi pi-bars"></i>
             </button>
