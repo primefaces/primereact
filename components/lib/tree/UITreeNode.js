@@ -554,10 +554,12 @@ export class UITreeNode extends Component {
             DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
 
             if (this.props.onDropPoint) {
+                const dropIndex = position === -1 ? this.props.index : this.props.index +1;
+
                 this.props.onDropPoint({
                     originalEvent: event,
                     path: this.props.path,
-                    index: this.props.index,
+                    index: dropIndex,
                     position: position
                 });
             }
