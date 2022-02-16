@@ -15,7 +15,7 @@ export default function Layout(props) {
     const [inputStyle, setInputStyle] = useState('outlined');
     const [ripple, setRipple] = useState(false);
     const [sidebarActive, setSidebarActive] = useState(false);
-    const [newsActive, setNewsActive] = useState(true);
+    const [newsActive, setNewsActive] = useState(false);
     const mounted = useRef(false);
     const storageKey = 'primereact';
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
