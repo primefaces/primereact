@@ -112,7 +112,7 @@
                             &:focus {
                                 outline: 0 none;
                                 transition: background-color .2s, box-shadow .2s;
-                                box-shadow: var(--focus-ring);
+                                box-shadow: inset var(--focus-ring);
                             }
 
                             &:hover {
