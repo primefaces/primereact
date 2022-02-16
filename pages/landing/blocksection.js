@@ -3,15 +3,10 @@ import { useEffect, useState } from 'react';
 
 export default function BlockSection() {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const [animationClass, setAnimationClass] = useState("");
-    const [isActive, setActive] = useState(false);
-
-    const handleClick = () => {
-        setActive(!isActive);
-    }
+    const [animationClass, setAnimationClass] = useState('');
 
     useEffect(() => {
-        setAnimationClass("animation");
+        setAnimationClass("blocks-animation");
     });
 
     return (

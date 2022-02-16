@@ -9,7 +9,7 @@
         transform: rotateX(55deg) rotateY(0deg) rotateZ(-45deg);
         margin: -12rem 0;
 
-        &.animation {
+        &.blocks-animation {
             .prime-block {
                 .block-sidebar, 
                 .block-header, 
@@ -128,13 +128,6 @@
                 z-index: 5;
                 animation: block-animation 1500ms ease-in-out alternate infinite;
 
-                @keyframes block-animation {
-                    to {
-                        transform: translateY(-10px) scale(1.02);
-                        box-shadow: var(--home-blocks-animation-shadow);
-                    }
-                }
-
                 &.animation-2{
                     animation-delay: 1s;
                 }
@@ -218,5 +211,12 @@
     .landing-blocks .prime-blocks {
         margin: -24rem 0;
         transform: rotateX(55deg) rotateY(0deg) rotateZ(-45deg) scale(0.6);
+    }
+}
+
+@keyframes block-animation {
+    to {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: var(--home-blocks-animation-shadow);
     }
 }

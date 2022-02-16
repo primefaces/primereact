@@ -6,7 +6,7 @@ export default function TemplateSection(props) {
     const [animationClass, setAnimationClass] = useState("");
 
     useEffect(() => {
-        setAnimationClass("animation");
+        setAnimationClass("templates-animation");
     });
 
     return (

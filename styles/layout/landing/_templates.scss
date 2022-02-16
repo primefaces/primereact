@@ -22,24 +22,12 @@
             opacity:0;
             visibility: hidden;
 
-            @keyframes animation1 {
-                to {
-                    transform:  translateX(-10px);
-                }
-            }
-
-            @keyframes animation2 {
-                to {
-                    transform:  translateX(10px);
-                }
-            }
-
             &.block-1 {
-                animation: animation1 2s ease-in-out alternate infinite;
+                animation: animated-block-1 2s ease-in-out alternate infinite;
             }
               
             &.block-2 {
-                animation: animation2 2s 0.2s ease-in-out alternate infinite;
+                animation: animated-block-2 2s 0.2s ease-in-out alternate infinite;
             }
             
             &.block-middle {
@@ -47,19 +35,19 @@
             }
 
             &.block-3 {
-                animation: animation1 2s 0.4s ease-in-out alternate infinite;
+                animation: animated-block-1 2s 0.4s ease-in-out alternate infinite;
             }
 
             &.block-4 {
-                animation: animation2 2s 0.6s ease-in-out alternate infinite;
+                animation: animated-block-2 2s 0.6s ease-in-out alternate infinite;
             }
 
             &.block-5 {
-                animation: animation1 2s 0.8s ease-in-out alternate infinite;
+                animation: animated-block-1 2s 0.8s ease-in-out alternate infinite;
             }
 
             &.block-6 {
-                animation: animation2 2s 1s ease-in-out alternate infinite;
+                animation: animated-block-2 2s 1s ease-in-out alternate infinite;
             }
 
             &:hover {
@@ -182,7 +170,7 @@
             }
         }
 
-        &.animation {
+        &.templates-animation {
             .template-block {
                 opacity:1;
                 visibility: visible;
@@ -203,6 +191,18 @@
                 width: 100%;
             }
         }
+    }
+}
+
+@keyframes animated-block-1 {
+    to {
+        transform:  translateX(-10px);
+    }
+}
+
+@keyframes animated-block-2 {
+    to {
+        transform:  translateX(10px);
     }
 }
 

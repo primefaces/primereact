@@ -9,7 +9,7 @@ export default function HeroSection() {
     const [animationClass, setAnimationClass] = useState("");
 
     useEffect(() => {
-        setAnimationClass("animation");
+        setAnimationClass("hero-animation");
     });
 
     return (
