@@ -142,6 +142,8 @@ import "primeicons/primeicons.css";                                //icons
 
                 <h5>Free Themes</h5>
                 <p>PrimeReact ships with various free themes to choose from.</p>
+<div style={{overflow: 'auto', height: '400px'}}>
+
 <CodeHighlight lang="js">
 {`
 primereact/resources/themes/bootstrap4-light-blue/theme.css
@@ -188,6 +190,7 @@ primereact/resources/themes/luna-pink/theme.css
 primereact/resources/themes/rhea/theme.css
 `}
 </CodeHighlight>
+</div>
 
                     <h5>PrimeFlex</h5>
                     <p>PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more. Although it is not required, it is highly

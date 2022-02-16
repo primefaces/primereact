@@ -68,9 +68,9 @@
                 color: var(--text-color);
                 display: flex;
                 padding: .5rem .75rem;
-                border-radius: var(--border-radius);
-                cursor: pointer;
+                border-radius: 10px;
                 align-items: center;
+                cursor: pointer;
 
                 .layout-menu-badge {
                     padding: .14rem .5rem;
