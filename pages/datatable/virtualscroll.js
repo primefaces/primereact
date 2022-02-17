@@ -52,7 +52,7 @@ export default class DataTableVirtualScrollDemo extends Component {
 
     loadingTemplate(options) {
         return (
-            <div className="p-d-flex p-ai-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }} >
+            <div className="flex align-items-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }} >
                 <Skeleton width={options.cellEven ? (options.field === 'year' ? '30%' : '40%') : '60%'} height="1rem" />
             </div>
         )
@@ -163,7 +163,7 @@ export class DataTableVirtualScrollDemo extends Component {
 
     loadingTemplate(options) {
         return (
-            <div className="p-d-flex p-ai-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }} >
+            <div className="flex align-items-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }} >
                 <Skeleton width={options.cellEven ? (options.field === 'year' ? '30%' : '40%') : '60%'} height="1rem" />
             </div>
         )
@@ -241,7 +241,7 @@ const DataTableVirtualScrollDemo = () => {
 
     const loadingTemplate = (options) => {
         return (
-            <div className="p-d-flex p-ai-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }} >
+            <div className="flex align-items-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }} >
                 <Skeleton width={options.cellEven ? (options.field === 'year' ? '30%' : '40%') : '60%'} height="1rem" />
             </div>
         )
@@ -317,7 +317,7 @@ const DataTableVirtualScrollDemo = () => {
 
     const loadingTemplate = (options) => {
         return (
-            <div className="p-d-flex p-ai-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }} >
+            <div className="flex align-items-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }} >
                 <Skeleton width={options.cellEven ? (options.field === 'year' ? '30%' : '40%') : '60%'} height="1rem" />
             </div>
         )
@@ -401,7 +401,7 @@ const DataTableVirtualScrollDemo = () => {
 
     const loadingTemplate = (options) => {
         return (
-            <div className="p-d-flex p-ai-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }} >
+            <div className="flex align-items-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }} >
                 <Skeleton width={options.cellEven ? (options.field === 'year' ? '30%' : '40%') : '60%'} height="1rem" />
             </div>
         )

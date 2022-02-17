@@ -29,7 +29,10 @@ export default class DataTableSelectionDemo extends Component {
             selectedProducts6: null,
             selectedProducts7: null,
             selectedProducts8: null,
-            selectedProducts9: null
+            selectedProducts9: null,
+            selectedProducts10: null,
+            selectedProducts11: null,
+            selectedProducts12: null
         };
 
         this.productService = new ProductService();
@@ -37,6 +40,10 @@ export default class DataTableSelectionDemo extends Component {
         this.onRowUnselect = this.onRowUnselect.bind(this);
         this.onCellSelect = this.onCellSelect.bind(this);
         this.onCellUnselect = this.onCellUnselect.bind(this);
+        this.isRowSelectable = this.isRowSelectable.bind(this);
+        this.isCellSelectable = this.isCellSelectable.bind(this);
+        this.rowClassName = this.rowClassName.bind(this);
+        this.cellClassName = this.cellClassName.bind(this);
     }
 
     componentDidMount() {
@@ -63,6 +70,42 @@ export default class DataTableSelectionDemo extends Component {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    isSelectable(value, field) {
+        let isSelectable = true;
+        switch (field) {
+            case 'quantity':
+                isSelectable = value > 10;
+                break;
+            case 'name':
+            case 'category':
+                isSelectable = value.startsWith('B') || value.startsWith('A');
+                break;
+
+            default:
+                break;
+        }
+        return isSelectable;
+    }
+
+    isRowSelectable(event) {
+        const data = event.data;
+        return this.isSelectable(data.quantity, 'quantity');
+    }
+
+    isCellSelectable(event) {
+        const data = event.data;
+        return this.isSelectable(data.value, data.field);
+    }
+
+    rowClassName(data) {
+        return this.isSelectable(data.quantity, 'quantity') ? '' : 'p-disabled';
+    }
+
+    cellClassName(value, options) {
+        const { field } = options.column.props;
+        return this.isSelectable(value, field) ? '' : 'p-disabled';
+    }
+
     render() {
         return (
             <div>
@@ -76,7 +119,7 @@ export default class DataTableSelectionDemo extends Component {
                         <p>DataTable provides single, multiple, radiobutton and checkbox selection modes. Selected rows or cells are bound to the selection property and onRowSelect-onRowUnselect/onCellSelect-onCellUnselect
                             events are provided as optional callbacks. In addition built-in radio button and checkbox based selections are available as alternatives.</p>
                     </div>
-                    
+
                     <DocActions github="datatable/selection.js" />
                 </div>
 
@@ -238,6 +281,39 @@ export default class DataTableSelectionDemo extends Component {
                             <Column field="quantity" header="Quantity"></Column>
                         </DataTable>
                     </div>
+
+                    <div className="card">
+                        <h5>Controlled Selection</h5>
+                        <p>It can be checked whether a row or cell can be selected or not according to the specified conditions.</p>
+
+                        <h6>Row Selection</h6>
+                        <DataTable value={this.state.products} selectionMode="multiple" dragSelection selection={this.state.selectedProduct10} onSelectionChange={e => this.setState({ selectedProduct10: e.value })} dataKey="id" responsiveLayout="scroll"
+                            isDataSelectable={this.isRowSelectable} rowClassName={this.rowClassName}>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+
+                        <h6>Cell Selection</h6>
+                        <DataTable value={this.state.products} selectionMode="multiple" dragSelection cellSelection selection={this.state.selectedProduct11} onSelectionChange={e => this.setState({ selectedProduct11: e.value })} dataKey="id" responsiveLayout="scroll"
+                            isDataSelectable={this.isCellSelectable} cellClassName={this.cellClassName}>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+
+                        <h6>Checkbox Selection</h6>
+                        <DataTable value={this.state.products} selection={this.state.selectedProducts12} onSelectionChange={e => this.setState({ selectedProducts12: e.value })} dataKey="id" responsiveLayout="scroll"
+                            isDataSelectable={this.isRowSelectable} rowClassName={this.rowClassName}>
+                            <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                            <Column field="code" header="Code"></Column>
+                            <Column field="name" header="Name"></Column>
+                            <Column field="category" header="Category"></Column>
+                            <Column field="quantity" header="Quantity"></Column>
+                        </DataTable>
+                    </div>
                 </div>
 
                 <DataTableSelectionDemoDoc></DataTableSelectionDemoDoc>
@@ -283,7 +359,10 @@ export class DataTableSelectionDemo extends Component {
             selectedProducts6: null,
             selectedProducts7: null,
             selectedProducts8: null,
-            selectedProducts9: null
+            selectedProducts9: null,
+            selectedProducts10: null,
+            selectedProducts11: null,
+            selectedProducts12: null
         };
 
         this.productService = new ProductService();
@@ -291,6 +370,10 @@ export class DataTableSelectionDemo extends Component {
         this.onRowUnselect = this.onRowUnselect.bind(this);
         this.onCellSelect = this.onCellSelect.bind(this);
         this.onCellUnselect = this.onCellUnselect.bind(this);
+        this.isRowSelectable = this.isRowSelectable.bind(this);
+        this.isCellSelectable = this.isCellSelectable.bind(this);
+        this.rowClassName = this.rowClassName.bind(this);
+        this.cellClassName = this.cellClassName.bind(this);
     }
 
     componentDidMount() {
@@ -315,6 +398,42 @@ export class DataTableSelectionDemo extends Component {
 
     toCapitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    isSelectable(value, field) {
+        let isSelectable = true;
+        switch (field) {
+            case 'quantity':
+                isSelectable = value > 10;
+                break;
+            case 'name':
+            case 'category':
+                isSelectable = value.startsWith('B') || value.startsWith('A');
+                break;
+
+            default:
+                break;
+        }
+        return isSelectable;
+    }
+
+    isRowSelectable(event) {
+        const data = event.data;
+        return this.isSelectable(data.quantity, 'quantity');
+    }
+
+    isCellSelectable(event) {
+        const data = event.data;
+        return this.isSelectable(data.value, data.field);
+    }
+
+    rowClassName(data) {
+        return this.isSelectable(data.quantity, 'quantity') ? '' : 'p-disabled';
+    }
+
+    cellClassName(value, options) {
+        const { field } = options.column.props;
+        return this.isSelectable(value, field) ? '' : 'p-disabled';
     }
 
     render() {
@@ -475,6 +594,39 @@ export class DataTableSelectionDemo extends Component {
                         <Column field="quantity" header="Quantity"></Column>
                     </DataTable>
                 </div>
+
+                <div className="card">
+                    <h5>Controlled Selection</h5>
+                    <p>It can be checked whether a row or cell can be selected or not according to the specified conditions.</p>
+
+                    <h6>Row Selection</h6>
+                    <DataTable value={this.state.products} selectionMode="multiple" dragSelection selection={this.state.selectedProduct10} onSelectionChange={e => this.setState({ selectedProduct10: e.value })} dataKey="id" responsiveLayout="scroll"
+                        isDataSelectable={this.isRowSelectable} rowClassName={this.rowClassName}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+
+                    <h6>Cell Selection</h6>
+                    <DataTable value={this.state.products} selectionMode="multiple" dragSelection cellSelection selection={this.state.selectedProduct11} onSelectionChange={e => this.setState({ selectedProduct11: e.value })} dataKey="id" responsiveLayout="scroll"
+                        isDataSelectable={this.isCellSelectable} cellClassName={this.cellClassName}>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+
+                    <h6>Checkbox Selection</h6>
+                    <DataTable value={this.state.products} selection={this.state.selectedProducts12} onSelectionChange={e => this.setState({ selectedProducts12: e.value })} dataKey="id" responsiveLayout="scroll"
+                        isDataSelectable={this.isRowSelectable} rowClassName={this.rowClassName}>
+                        <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
             </div>
         );
     }
@@ -509,6 +661,9 @@ const DataTableSelectionDemo = () => {
     const [selectedProducts7, setSelectedProducts7] = useState(null);
     const [selectedProducts8, setSelectedProducts8] = useState(null);
     const [selectedProducts9, setSelectedProducts9] = useState(null);
+    const [selectedProducts10, setSelectedProducts10] = useState(null);
+    const [selectedProducts11, setSelectedProducts11] = useState(null);
+    const [selectedProducts12, setSelectedProducts12] = useState(null);
     const toast = useRef(null);
 
 
@@ -535,6 +690,42 @@ const DataTableSelectionDemo = () => {
 
     const toCapitalize = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    const isSelectable = (value, field) => {
+        let isSelectable = true;
+        switch (field) {
+            case 'quantity':
+                isSelectable = value > 10;
+                break;
+            case 'name':
+            case 'category':
+                isSelectable = value.startsWith('B') || value.startsWith('A');
+                break;
+
+            default:
+                break;
+        }
+        return isSelectable;
+    }
+
+    const isRowSelectable = (event) => {
+        const data = event.data;
+        return isSelectable(data.quantity, 'quantity');
+    }
+
+    const isCellSelectable = (event) => {
+        const data = event.data;
+        return isSelectable(data.value, data.field);
+    }
+
+    const rowClassName = (data) => {
+        return isSelectable(data.quantity, 'quantity') ? '' : 'p-disabled';
+    }
+
+    const cellClassName = (value, options) => {
+        const { field } = options.column.props;
+        return isSelectable(value, field) ? '' : 'p-disabled';
     }
 
     return (
@@ -694,6 +885,39 @@ const DataTableSelectionDemo = () => {
                     <Column field="quantity" header="Quantity"></Column>
                 </DataTable>
             </div>
+
+            <div className="card">
+                <h5>Controlled Selection</h5>
+                <p>It can be checked whether a row or cell can be selected or not according to the specified conditions.</p>
+
+                <h6>Row Selection</h6>
+                <DataTable value={products} selectionMode="multiple" dragSelection selection={selectedProduct10} onSelectionChange={e => setSelectedProduct10(e.value)} dataKey="id" responsiveLayout="scroll"
+                    isDataSelectable={isRowSelectable} rowClassName={rowClassName}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+
+                <h6>Cell Selection</h6>
+                <DataTable value={products} selectionMode="multiple" dragSelection cellSelection selection={selectedProduct11} onSelectionChange={e => setSelectedProduct11(e.value)} dataKey="id" responsiveLayout="scroll"
+                    isDataSelectable={isCellSelectable} cellClassName={cellClassName}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+
+                <h6>Checkbox Selection</h6>
+                <DataTable value={products} selection={selectedProducts12} onSelectionChange={e => setSelectedProducts12(e.value)} dataKey="id" responsiveLayout="scroll"
+                    isDataSelectable={isRowSelectable} rowClassName={rowClassName}>
+                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
         </div>
     );
 }
@@ -727,6 +951,9 @@ const DataTableSelectionDemo = () => {
     const [selectedProducts7, setSelectedProducts7] = useState(null);
     const [selectedProducts8, setSelectedProducts8] = useState(null);
     const [selectedProducts9, setSelectedProducts9] = useState(null);
+    const [selectedProducts10, setSelectedProducts10] = useState(null);
+    const [selectedProducts11, setSelectedProducts11] = useState(null);
+    const [selectedProducts12, setSelectedProducts12] = useState(null);
     const toast = useRef(null);
 
 
@@ -753,6 +980,42 @@ const DataTableSelectionDemo = () => {
 
     const onCellUnselect = (event) => {
         toast.current.show({ severity: 'warn', summary: \`Item Unselected In Product\`, detail: \`\${toCapitalize(event.field)}: \${event.value}\`, life: 3000 });
+    }
+
+    const isSelectable = (value, field) => {
+        let isSelectable = true;
+        switch (field) {
+            case 'quantity':
+                isSelectable = value > 10;
+                break;
+            case 'name':
+            case 'category':
+                isSelectable = value.startsWith('B') || value.startsWith('A');
+                break;
+
+            default:
+                break;
+        }
+        return isSelectable;
+    }
+
+    const isRowSelectable = (event) => {
+        const data = event.data;
+        return isSelectable(data.quantity, 'quantity');
+    }
+
+    const isCellSelectable = (event) => {
+        const data = event.data;
+        return isSelectable(data.value, data.field);
+    }
+
+    const rowClassName = (data) => {
+        return isSelectable(data.quantity, 'quantity') ? '' : 'p-disabled';
+    }
+
+    const cellClassName = (value, options) => {
+        const { field } = options.column.props;
+        return isSelectable(value, field) ? '' : 'p-disabled';
     }
 
     return (
@@ -905,6 +1168,39 @@ const DataTableSelectionDemo = () => {
                 <h6>Page-Only Selection</h6>
                 <DataTable value={products} selection={selectedProducts9} onSelectionChange={e => setSelectedProducts9(e.value)} dataKey="id" responsiveLayout="scroll"
                     selectionPageOnly paginator rows={5}>
+                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Controlled Selection</h5>
+                <p>It can be checked whether a row or cell can be selected or not according to the specified conditions.</p>
+
+                <h6>Row Selection</h6>
+                <DataTable value={products} selectionMode="multiple" dragSelection selection={selectedProduct10} onSelectionChange={e => setSelectedProduct10(e.value)} dataKey="id" responsiveLayout="scroll"
+                    isDataSelectable={isRowSelectable} rowClassName={rowClassName}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+
+                <h6>Cell Selection</h6>
+                <DataTable value={products} selectionMode="multiple" dragSelection cellSelection selection={selectedProduct11} onSelectionChange={e => setSelectedProduct11(e.value)} dataKey="id" responsiveLayout="scroll"
+                    isDataSelectable={isCellSelectable} cellClassName={cellClassName}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+
+                <h6>Checkbox Selection</h6>
+                <DataTable value={products} selection={selectedProducts12} onSelectionChange={e => setSelectedProducts12(e.value)} dataKey="id" responsiveLayout="scroll"
+                    isDataSelectable={isRowSelectable} rowClassName={rowClassName}>
                     <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
@@ -953,6 +1249,9 @@ const DataTableSelectionDemo = () => {
     const [selectedProducts7, setSelectedProducts7] = useState(null);
     const [selectedProducts8, setSelectedProducts8] = useState(null);
     const [selectedProducts9, setSelectedProducts9] = useState(null);
+    const [selectedProducts10, setSelectedProducts10] = useState(null);
+    const [selectedProducts11, setSelectedProducts11] = useState(null);
+    const [selectedProducts12, setSelectedProducts12] = useState(null);
     const toast = useRef(null);
 
 
@@ -979,6 +1278,42 @@ const DataTableSelectionDemo = () => {
 
     const toCapitalize = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    const isSelectable = (value, field) => {
+        let isSelectable = true;
+        switch (field) {
+            case 'quantity':
+                isSelectable = value > 10;
+                break;
+            case 'name':
+            case 'category':
+                isSelectable = value.startsWith('B') || value.startsWith('A');
+                break;
+
+            default:
+                break;
+        }
+        return isSelectable;
+    }
+
+    const isRowSelectable = (event) => {
+        const data = event.data;
+        return isSelectable(data.quantity, 'quantity');
+    }
+
+    const isCellSelectable = (event) => {
+        const data = event.data;
+        return isSelectable(data.value, data.field);
+    }
+
+    const rowClassName = (data) => {
+        return isSelectable(data.quantity, 'quantity') ? '' : 'p-disabled';
+    }
+
+    const cellClassName = (value, options) => {
+        const { field } = options.column.props;
+        return isSelectable(value, field) ? '' : 'p-disabled';
     }
 
     return (
@@ -1131,6 +1466,39 @@ const DataTableSelectionDemo = () => {
                 <h6>Page-Only Selection</h6>
                 <DataTable value={products} selection={selectedProducts9} onSelectionChange={e => setSelectedProducts9(e.value)} dataKey="id" responsiveLayout="scroll"
                     selectionPageOnly paginator rows={5}>
+                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+
+            <div className="card">
+                <h5>Controlled Selection</h5>
+                <p>It can be checked whether a row or cell can be selected or not according to the specified conditions.</p>
+
+                <h6>Row Selection</h6>
+                <DataTable value={products} selectionMode="multiple" dragSelection selection={selectedProduct10} onSelectionChange={e => setSelectedProduct10(e.value)} dataKey="id" responsiveLayout="scroll"
+                    isDataSelectable={isRowSelectable} rowClassName={rowClassName}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+
+                <h6>Cell Selection</h6>
+                <DataTable value={products} selectionMode="multiple" dragSelection cellSelection selection={selectedProduct11} onSelectionChange={e => setSelectedProduct11(e.value)} dataKey="id" responsiveLayout="scroll"
+                    isDataSelectable={isCellSelectable} cellClassName={cellClassName}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+
+                <h6>Checkbox Selection</h6>
+                <DataTable value={products} selection={selectedProducts12} onSelectionChange={e => setSelectedProducts12(e.value)} dataKey="id" responsiveLayout="scroll"
+                    isDataSelectable={isRowSelectable} rowClassName={rowClassName}>
                     <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>

@@ -1,4 +1,3 @@
-import { Tooltip } from '../lib/tooltip/Tooltip';
 import { Badge } from '../lib/badge/Badge';
 import { CSSTransition } from 'react-transition-group';
 import Link from 'next/link';
@@ -55,6 +54,34 @@ export default function Topbar(props) {
     useEffect(() => {
         versionService.getVersions().then(data => setVersions(data));
     },[]);
+
+    const containerElement = useRef(null);
+    const scrollListener = useRef();
+    const bindScrollListener = () => {
+        scrollListener.current = () => {
+            if (containerElement && containerElement.current) {
+                if (window.scrollY > 0)
+                    containerElement.current.classList.add('layout-topbar-sticky');
+                else
+                    containerElement.current.classList.remove('layout-topbar-sticky');
+            }
+        }
+        window.addEventListener('scroll', scrollListener.current);
+    }
+
+    const unbindScrollListener = () => {
+        if (scrollListener.current) {
+            window.removeEventListener('scroll', scrollListener.current);
+            scrollListener.current = null;
+        }
+    }
+
+    useEffect(() => {
+        bindScrollListener();
+        return function unbind() {
+            unbindScrollListener();
+        }
+    }, []);
 
     const topbarMenu = useRef();
     const themesOverlayRef = useRef();
@@ -115,29 +142,17 @@ export default function Topbar(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
-        <div className="layout-topbar">
-            <Tooltip target=".app-theme" position="bottom" />
-
+        <div ref={containerElement} className="layout-topbar">
             <button type="button" className="p-link menu-button" onClick={onMenuButtonClick} aria-haspopup aria-label="Menu">
                 <i className="pi pi-bars"></i>
             </button>
-            <Link href="/">
-                <a className="logo" aria-label="PrimeReact logo">
-                    <img alt="logo" src={`${contextPath}/images/primereact-logo${props.darkTheme ? '' : '-dark'}.png`} />
-                </a>
-            </Link>
             <div className="app-theme" data-pr-tooltip={props.theme}>
                 <img alt={props.theme} src={`${contextPath}/images/themes/${logoMap[props.theme]}`} />
             </div>
 
             <ul ref={topbarMenu} className="topbar-menu p-unselectable-text" role="menubar">
                 <li role="none" className="topbar-submenu">
-                    <button type="button" role="menuitem" onClick={() => toggleMenu(0)} aria-haspopup className="p-link">
-                        <span className="p-overlay-badge">
-                            Themes
-                            <Badge severity="danger"></Badge>
-                        </span>
-                    </button>
+                    <button type="button" role="menuitem" onClick={() => toggleMenu(0)} aria-haspopup className="p-link">Themes</button>
                     <CSSTransition nodeRef={themesOverlayRef} classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={activeMenuIndex === 0}
                         unmountOnExit>
                         <ul ref={themesOverlayRef} role="menu" aria-label="Themes">
@@ -172,7 +187,7 @@ export default function Topbar(props) {
                             <li role="none" className="topbar-submenu-header">FLUENT UI</li>
                             <li role="none"><button type="button" className="p-link" onClick={() => onThemeChange('fluent-light')} role="menuitem"><img src={`${contextPath}/images/themes/fluent-light.png`} alt="Fluent Light" /><span>Fluent Light</span></button></li>
 
-                            <li role="none" className="topbar-submenu-header">PRIMEONE 2022 <Badge value="New" severity="success" className="p-text-capitalize p-ml-2" /></li>
+                            <li role="none" className="topbar-submenu-header">PRIMEONE 2022 <Badge value="New" severity="success" className="capitalize ml-2" /></li>
                             <li role="none"><button type="button" className="p-link" onClick={() => onThemeChange('lara-light-indigo')} role="menuitem"><img src={`${contextPath}/images/themes/lara-light-indigo.png`} alt="Lara Light Indigo" /><span>Lara Indigo</span></button></li>
                             <li role="none"><button type="button" className="p-link" onClick={() => onThemeChange('lara-light-blue')} role="menuitem"><img src={`${contextPath}/images/themes/lara-light-blue.png`} alt="Lara Light Blue" /><span>Lara Blue</span></button></li>
                             <li role="none"><button type="button" className="p-link" onClick={() => onThemeChange('lara-light-purple')} role="menuitem"><img src={`${contextPath}/images/themes/lara-light-purple.png`} alt="Lara Light Purple" /><span>Lara Purple</span></button></li>

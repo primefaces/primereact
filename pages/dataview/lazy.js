@@ -62,7 +62,7 @@ export default class DataViewLazyDemo extends Component {
 
     renderListItem(data) {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
                     <img src={`${this.contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
@@ -83,7 +83,7 @@ export default class DataViewLazyDemo extends Component {
 
     renderGridItem(data) {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>
@@ -239,7 +239,7 @@ export class DataViewLazyDemo extends Component {
 
     renderListItem(data) {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
                     <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
@@ -260,7 +260,7 @@ export class DataViewLazyDemo extends Component {
 
     renderGridItem(data) {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>
@@ -388,7 +388,7 @@ const DataViewLazyDemo = () => {
 
     const renderListItem = (data) => {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
                     <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
@@ -409,7 +409,7 @@ const DataViewLazyDemo = () => {
 
     const renderGridItem = (data) => {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>
@@ -529,7 +529,7 @@ const DataViewLazyDemo = () => {
 
     const renderListItem = (data) => {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
                     <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
@@ -550,7 +550,7 @@ const DataViewLazyDemo = () => {
 
     const renderGridItem = (data) => {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>
@@ -679,7 +679,7 @@ const DataViewLazyDemo = () => {
 
     const renderListItem = (data) => {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
                     <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
@@ -700,7 +700,7 @@ const DataViewLazyDemo = () => {
 
     const renderGridItem = (data) => {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>

@@ -6,6 +6,12 @@ const ImageProps = [
         description: 'Controls the preview functionality.'
     },
     {
+        name: 'downloadable',
+        type: 'boolean',
+        default: 'false',
+        description: 'Adds a download button to the preview control menu.'
+    },
+    {
         name: 'imageStyle',
         type: 'any',
         default: 'null',

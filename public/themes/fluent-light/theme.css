@@ -548,7 +548,7 @@
 .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item .p-cascadeselect-item-content:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item.p-highlight {
   color: #323130;
@@ -800,6 +800,9 @@
 }
 .p-input-filled .p-dropdown:not(.p-disabled).p-focus {
   background-color: #faf9f8;
+}
+.p-input-filled .p-dropdown:not(.p-disabled).p-focus .p-inputtext {
+  background-color: transparent;
 }
 
 .p-editor-container .p-editor-toolbar {
@@ -1161,7 +1164,7 @@
 .p-listbox .p-listbox-list .p-listbox-item:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-listbox .p-listbox-list .p-listbox-item-group {
   margin: 0;
@@ -1339,7 +1342,7 @@
 .p-multiselect-panel .p-multiselect-items .p-multiselect-item:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-multiselect-panel .p-multiselect-items .p-multiselect-item .p-checkbox {
   margin-right: 0.5rem;
@@ -2376,21 +2379,19 @@
   color: #323130;
 }
 .p-datatable .p-sortable-column:focus {
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
   outline: 0 none;
 }
 .p-datatable .p-datatable-tbody > tr {
   background: #ffffff;
   color: #323130;
   transition: box-shadow 0.2s;
-  outline-color: #605e5c;
 }
 .p-datatable .p-datatable-tbody > tr > td {
   text-align: left;
   border: 1px solid #f3f2f1;
   border-width: 0 0 1px 0;
   padding: 0.75rem 0.75rem;
-  outline-color: #605e5c;
 }
 .p-datatable .p-datatable-tbody > tr > td .p-row-toggler,
 .p-datatable .p-datatable-tbody > tr > td .p-row-editor-init,
@@ -2439,6 +2440,22 @@
 }
 .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-bottom > td {
   box-shadow: inset 0 -2px 0 0 #edebe9;
+}
+.p-datatable.p-datatable-selectable .p-datatable-tbody > tr.p-selectable-row:not(.p-highlight):not(.p-datatable-emptymessage):hover {
+  background: #f3f2f1;
+  color: #323130;
+}
+.p-datatable.p-datatable-selectable .p-datatable-tbody > tr.p-selectable-row:focus {
+  outline: 0.15rem solid #605e5c;
+  outline-offset: -0.15rem;
+}
+.p-datatable.p-datatable-selectable-cell .p-datatable-tbody > tr.p-selectable-row > td.p-selectable-cell:not(.p-highlight):hover {
+  background: #f3f2f1;
+  color: #323130;
+}
+.p-datatable.p-datatable-selectable-cell .p-datatable-tbody > tr.p-selectable-row > td.p-selectable-cell:focus {
+  outline: 0.15rem solid #605e5c;
+  outline-offset: -0.15rem;
 }
 .p-datatable.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight):not(.p-datatable-emptymessage):hover {
   background: #f3f2f1;
@@ -2691,7 +2708,7 @@
 .p-column-filter-overlay .p-column-filter-row-items .p-column-filter-row-item:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-column-filter-overlay .p-column-filter-row-items .p-column-filter-separator {
   border-top: 1px solid #edebe9;
@@ -3054,7 +3071,7 @@
 .p-orderlist .p-orderlist-list .p-orderlist-item:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-orderlist .p-orderlist-list .p-orderlist-item.p-highlight {
   color: #323130;
@@ -3236,7 +3253,7 @@
 .p-picklist .p-picklist-list .p-picklist-item:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-picklist .p-picklist-list .p-picklist-item.p-highlight {
   color: #323130;
@@ -3319,7 +3336,7 @@
 .p-tree .p-tree-container .p-treenode .p-treenode-content:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight {
   background: #edebe9;
@@ -3442,7 +3459,6 @@
   background: #ffffff;
   color: #323130;
   transition: box-shadow 0.2s;
-  outline-color: #605e5c;
 }
 .p-treetable .p-treetable-tbody > tr > td {
   text-align: left;
@@ -3476,6 +3492,10 @@
 .p-treetable .p-treetable-tbody > tr > td .p-treetable-toggler + .p-checkbox .p-indeterminate .p-checkbox-icon {
   color: #323130;
 }
+.p-treetable .p-treetable-tbody > tr:focus {
+  outline: 0.15rem solid #605e5c;
+  outline-offset: -0.15rem;
+}
 .p-treetable .p-treetable-tbody > tr.p-highlight {
   background: #edebe9;
   color: #323130;
@@ -3486,11 +3506,11 @@
 .p-treetable .p-treetable-tbody > tr.p-highlight .p-treetable-toggler:hover {
   color: #323130;
 }
-.p-treetable.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover {
+.p-treetable.p-treetable-selectable .p-treetable-tbody > tr:not(.p-highlight):hover, .p-treetable.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover {
   background: #f3f2f1;
   color: #323130;
 }
-.p-treetable.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover .p-treetable-toggler {
+.p-treetable.p-treetable-selectable .p-treetable-tbody > tr:not(.p-highlight):hover .p-treetable-toggler, .p-treetable.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover .p-treetable-toggler {
   color: #323130;
 }
 .p-treetable .p-column-resizer-helper {
@@ -4174,7 +4194,7 @@
 .p-contextmenu .p-menuitem-link:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-contextmenu .p-submenu-list {
   padding: 0;
@@ -4300,7 +4320,7 @@
 .p-megamenu .p-megamenu-root-list > .p-menuitem > .p-menuitem-link:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-megamenu .p-megamenu-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link,
 .p-megamenu .p-megamenu-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link:not(.p-disabled):hover {
@@ -4350,7 +4370,7 @@
 .p-megamenu .p-menuitem-link:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-megamenu .p-megamenu-panel {
   background: #ffffff;
@@ -4429,7 +4449,7 @@
 .p-menu .p-menuitem-link:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-menu.p-menu-overlay {
   background: #ffffff;
@@ -4489,7 +4509,7 @@
 .p-menubar .p-menuitem-link:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
   padding: 0.75rem 0.5rem;
@@ -4524,7 +4544,7 @@
 .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-menubar .p-menubar-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link,
 .p-menubar .p-menubar-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link:not(.p-disabled):hover {
@@ -4639,7 +4659,7 @@
   .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: inset 0 0 0 1px #605e5c;
+    box-shadow: inset 0 0 0 0.15rem #605e5c;
   }
   .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link > .p-submenu-icon {
     margin-left: auto;
@@ -4772,7 +4792,7 @@
 .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-panelmenu-icon {
   margin-right: 0.5rem;
@@ -4824,7 +4844,7 @@
 .p-slidemenu .p-menuitem-link:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-slidemenu.p-slidemenu-overlay {
   background: #ffffff;
@@ -4923,6 +4943,7 @@
   border-top-left-radius: 2px;
   transition: box-shadow 0.2s;
   margin: 0 0.5rem -2px 0;
+  height: calc(100% + 2px);
 }
 .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link .p-menuitem-icon {
   margin-right: 0.5rem;
@@ -4983,7 +5004,7 @@
 .p-tieredmenu .p-menuitem-link:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: inset 0 0 0 1px #605e5c;
+  box-shadow: inset 0 0 0 0.15rem #605e5c;
 }
 .p-tieredmenu.p-tieredmenu-overlay {
   background: #ffffff;

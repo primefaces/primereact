@@ -12,6 +12,7 @@ export declare class ConnectedOverlayScrollHandler {
 export declare class DomHandler {
     static innerWidth(el: HTMLElement): number;
     static width(el: HTMLElement): number;
+    static getBrowserLanguage(): string;
     static getWindowScrollTop(): number;
     static getWindowScrollLeft(): number;
     static getOuterWidth(el: HTMLElement, margin: boolean): number;
@@ -66,6 +67,7 @@ export declare class DomHandler {
     static isClickable(el: HTMLElement): boolean;
     static applyStyle(el: HTMLElement, style: any): void;
     static exportCSV(csv: any, filename: string): void;
+    static saveAs(file: { name: string, url: any }): boolean;
 }
 
 export declare function EventBus(): {

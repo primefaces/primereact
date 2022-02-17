@@ -324,7 +324,7 @@ export class BodyRow extends Component {
                         editing={editing} editingMeta={this.props.editingMeta} editMode={this.props.editMode} onRowEditInit={this.onEditInit} onRowEditSave={this.onEditSave} onRowEditCancel={this.onEditCancel} onEditingMetaChange={this.props.onEditingMetaChange}
                         onRowToggle={this.props.onRowToggle} selection={this.props.selection} allowCellSelection={this.props.allowCellSelection} compareSelectionBy={this.props.compareSelectionBy} selectOnEdit={this.props.selectOnEdit} selected={this.props.selected}
                         onClick={this.props.onCellClick} onMouseDown={this.props.onCellMouseDown} onMouseUp={this.props.onCellMouseUp} tabIndex={this.props.tabIndex}
-                        cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} frozenRow={this.props.frozenRow}
+                        cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} frozenRow={this.props.frozenRow} isSelectable={this.props.isSelectable}
                         showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement} onRadioChange={this.props.onRadioChange} onCheckboxChange={this.props.onCheckboxChange}
                         expanded={this.props.expanded} expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon}
                         virtualScrollerOptions={this.props.virtualScrollerOptions} />
@@ -340,7 +340,7 @@ export class BodyRow extends Component {
         const className = classNames(rowClassName, {
             'p-highlight': !this.props.allowCellSelection && this.props.selected,
             'p-highlight-contextmenu': this.props.contextMenuSelected,
-            'p-selectable-row': this.props.allowRowSelection,
+            'p-selectable-row': this.props.allowRowSelection && this.props.isSelectable({ data: this.props.rowData, index: this.props.index }),
             'p-row-odd': this.props.index % 2 !== 0
         });
         const content = this.renderContent();

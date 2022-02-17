@@ -118,7 +118,8 @@ export class FileUpload extends Component {
         this.state = {
             files: [],
             msgs: [],
-            focused: false
+            focused: false,
+            progress: 0
         };
 
         this.choose = this.choose.bind(this);
@@ -488,6 +489,8 @@ export class FileUpload extends Component {
                 sizeElement: size,
                 removeElement: removeButton,
                 formatSize: this.formatSize(file.size),
+                files: this.state.files,
+                index,
                 element: content,
                 props: this.props
             };

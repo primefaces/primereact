@@ -82,7 +82,7 @@ export class VirtualScroller extends Component {
         const isBoth = this.isBoth();
         const isHorizontal = this.isHorizontal();
         const first = this.state.first;
-        const numToleratedItems = this.state.numToleratedItems;
+        const { numToleratedItems } = this.calculateNumItems();
         const itemSize = this.props.itemSize;
         const contentPos = this.getContentPosition();
         const calculateFirst = (_index = 0, _numT) => (_index <= _numT ? 0 : _index);
@@ -220,10 +220,9 @@ export class VirtualScroller extends Component {
         return this.props.orientation === 'both';
     }
 
-    calculateOptions() {
+    calculateNumItems() {
         const isBoth = this.isBoth();
         const isHorizontal = this.isHorizontal();
-        const first = this.state.first;
         const itemSize = this.props.itemSize;
         const contentPos = this.getContentPosition();
         const contentWidth = this.el ? this.el.offsetWidth - contentPos.left : 0;
@@ -234,10 +233,17 @@ export class VirtualScroller extends Component {
             { rows: calculateNumItemsInViewport(contentHeight, itemSize[0]), cols: calculateNumItemsInViewport(contentWidth, itemSize[1]) } :
             calculateNumItemsInViewport((isHorizontal ? contentWidth : contentHeight), itemSize);
 
-        let numToleratedItems = this.state.numToleratedItems || (isBoth ?
+        const numToleratedItems = this.state.numToleratedItems || (isBoth ?
             [calculateNumToleratedItems(numItemsInViewport.rows), calculateNumToleratedItems(numItemsInViewport.cols)] :
             calculateNumToleratedItems(numItemsInViewport));
 
+        return { numItemsInViewport, numToleratedItems };
+    }
+
+    calculateOptions() {
+        const isBoth = this.isBoth();
+        const first = this.state.first;
+        const { numItemsInViewport, numToleratedItems } = this.calculateNumItems();
         const calculateLast = (_first, _num, _numT, _isCols) => this.getLast(_first + _num + ((_first < _numT ? 2 : 3) * _numT), _isCols);
         const last = isBoth ?
             { rows: calculateLast(first.rows, numItemsInViewport.rows, numToleratedItems[0]), cols: calculateLast(first.cols, numItemsInViewport.cols, numToleratedItems[1], true) } :

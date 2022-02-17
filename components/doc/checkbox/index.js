@@ -70,25 +70,25 @@ export class CheckboxDemo extends Component {
             <div>
                 <div className="card">
                     <h5>Basic</h5>
-                    <div className="p-field-checkbox">
+                    <div className="field-checkbox">
                         <Checkbox inputId="binary" checked={this.state.checked} onChange={e => this.setState({ checked: e.checked })} />
                         <label htmlFor="binary">{this.state.checked ? 'true' : 'false'}</label>
                     </div>
 
                     <h5>Multiple</h5>
-                    <div className="p-field-checkbox">
+                    <div className="field-checkbox">
                         <Checkbox inputId="city1" name="city" value="Chicago" onChange={this.onCityChange} checked={this.state.cities.indexOf('Chicago') !== -1} />
                         <label htmlFor="city1">Chicago</label>
                     </div>
-                    <div className="p-field-checkbox">
+                    <div className="field-checkbox">
                         <Checkbox inputId="city2" name="city" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.indexOf('Los Angeles') !== -1} />
                         <label htmlFor="city2">Los Angeles</label>
                     </div>
-                    <div className="p-field-checkbox">
+                    <div className="field-checkbox">
                         <Checkbox inputId="city3" name="city" value="New York" onChange={this.onCityChange} checked={this.state.cities.indexOf('New York') !== -1} />
                         <label htmlFor="city3">New York</label>
                     </div>
-                    <div className="p-field-checkbox">
+                    <div className="field-checkbox">
                         <Checkbox inputId="city4" name="city" value="San Francisco" onChange={this.onCityChange} checked={this.state.cities.indexOf('San Francisco') !== -1} />
                         <label htmlFor="city4">San Francisco</label>
                     </div>
@@ -97,7 +97,7 @@ export class CheckboxDemo extends Component {
                     {
                         this.categories.map((category) => {
                             return (
-                                <div key={category.key} className="p-field-checkbox">
+                                <div key={category.key} className="field-checkbox">
                                     <Checkbox inputId={category.key} name="category" value={category} onChange={this.onCategoryChange} checked={this.state.selectedCategories.some((item) => item.key === category.key)} disabled={category.key === 'R'} />
                                     <label htmlFor={category.key}>{category.name}</label>
                                 </div>
@@ -159,25 +159,25 @@ const CheckboxDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
                     <label htmlFor="binary">{checked ? 'true' : 'false'}</label>
                 </div>
 
                 <h5>Multiple</h5>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="city1" name="city" value="Chicago" onChange={onCityChange} checked={cities.indexOf('Chicago') !== -1} />
                     <label htmlFor="city1">Chicago</label>
                 </div>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="city2" name="city" value="Los Angeles" onChange={onCityChange} checked={cities.indexOf('Los Angeles') !== -1} />
                     <label htmlFor="city2">Los Angeles</label>
                 </div>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="city3" name="city" value="New York" onChange={onCityChange} checked={cities.indexOf('New York') !== -1} />
                     <label htmlFor="city3">New York</label>
                 </div>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="city4" name="city" value="San Francisco" onChange={onCityChange} checked={cities.indexOf('San Francisco') !== -1} />
                     <label htmlFor="city4">San Francisco</label>
                 </div>
@@ -186,7 +186,7 @@ const CheckboxDemo = () => {
                 {
                     categories.map((category) => {
                         return (
-                            <div key={category.key} className="p-field-checkbox">
+                            <div key={category.key} className="field-checkbox">
                                 <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} disabled={category.key === 'R'} />
                                 <label htmlFor={category.key}>{category.name}</label>
                             </div>
@@ -247,25 +247,25 @@ const CheckboxDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
                     <label htmlFor="binary">{checked ? 'true' : 'false'}</label>
                 </div>
 
                 <h5>Multiple</h5>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="city1" name="city" value="Chicago" onChange={onCityChange} checked={cities.indexOf('Chicago') !== -1} />
                     <label htmlFor="city1">Chicago</label>
                 </div>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="city2" name="city" value="Los Angeles" onChange={onCityChange} checked={cities.indexOf('Los Angeles') !== -1} />
                     <label htmlFor="city2">Los Angeles</label>
                 </div>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="city3" name="city" value="New York" onChange={onCityChange} checked={cities.indexOf('New York') !== -1} />
                     <label htmlFor="city3">New York</label>
                 </div>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="city4" name="city" value="San Francisco" onChange={onCityChange} checked={cities.indexOf('San Francisco') !== -1} />
                     <label htmlFor="city4">San Francisco</label>
                 </div>
@@ -274,7 +274,7 @@ const CheckboxDemo = () => {
                 {
                     categories.map((category) => {
                         return (
-                            <div key={category.key} className="p-field-checkbox">
+                            <div key={category.key} className="field-checkbox">
                                 <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} disabled={category.key === 'R'} />
                                 <label htmlFor={category.key}>{category.name}</label>
                             </div>
@@ -337,25 +337,25 @@ const CheckboxDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
                     <label htmlFor="binary">{checked ? 'true' : 'false'}</label>
                 </div>
 
                 <h5>Multiple</h5>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="city1" name="city" value="Chicago" onChange={onCityChange} checked={cities.indexOf('Chicago') !== -1} />
                     <label htmlFor="city1">Chicago</label>
                 </div>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="city2" name="city" value="Los Angeles" onChange={onCityChange} checked={cities.indexOf('Los Angeles') !== -1} />
                     <label htmlFor="city2">Los Angeles</label>
                 </div>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="city3" name="city" value="New York" onChange={onCityChange} checked={cities.indexOf('New York') !== -1} />
                     <label htmlFor="city3">New York</label>
                 </div>
-                <div className="p-field-checkbox">
+                <div className="field-checkbox">
                     <Checkbox inputId="city4" name="city" value="San Francisco" onChange={onCityChange} checked={cities.indexOf('San Francisco') !== -1} />
                     <label htmlFor="city4">San Francisco</label>
                 </div>
@@ -364,7 +364,7 @@ const CheckboxDemo = () => {
                 {
                     categories.map((category) => {
                         return (
-                            <div key={category.key} className="p-field-checkbox">
+                            <div key={category.key} className="field-checkbox">
                                 <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} disabled={category.key === 'R'} />
                                 <label htmlFor={category.key}>{category.name}</label>
                             </div>
@@ -415,15 +415,15 @@ import { Checkbox } from 'primereact/checkbox';
                         <p>Multiple checkboxes can be grouped using a list of values.</p>
 <CodeHighlight>
 {`
-<div className="p-col-12">
+<div className="col-12">
     <Checkbox inputId="cb1" value="New York" onChange={onCityChange} checked={cities.includes('New York')}></Checkbox>
     <label htmlFor="cb1" className="p-checkbox-label">New York</label>
 </div>
-<div className="p-col-12">
+<div className="col-12">
     <Checkbox inputId="cb2" value="San Francisco" onChange={onCityChange} checked={cities.includes('San Francisco')}></Checkbox>
     <label htmlFor="cb2" className="p-checkbox-label">San Francisco</label>
 </div>
-<div className="p-col-12">
+<div className="col-12">
     <Checkbox inputId="cb3" value="Los Angeles" onChange={onCityChange} checked={cities.includes('Los Angeles')}></Checkbox>
     <label htmlFor="cb3" className="p-checkbox-label">Los Angeles</label>
 </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FilterService } from '../api/Api';
+import PrimeReact, { FilterService } from '../api/Api';
 import { ObjectUtils, DomHandler, classNames } from '../utils/Utils';
 import { Paginator } from '../paginator/Paginator';
 import { TreeTableHeader } from './TreeTableHeader';
@@ -69,6 +69,7 @@ export class TreeTable extends Component {
         filterMode: 'lenient',
         filterDelay: 300,
         filterLocale: undefined,
+        rowHover: false,
         showGridlines: false,
         stripedRows: false,
         onFilter: null,
@@ -146,6 +147,7 @@ export class TreeTable extends Component {
         filterMode: PropTypes.string,
         filterDelay: PropTypes.number,
         filterLocale: PropTypes.string,
+        rowHover: PropTypes.bool,
         showGridlines: PropTypes.bool,
         stripedRows: PropTypes.bool,
         onFilter: PropTypes.func,
@@ -333,20 +335,7 @@ export class TreeTable extends Component {
                 const sortField = this.getSortField();
                 const value1 = ObjectUtils.resolveFieldData(node1.data, sortField);
                 const value2 = ObjectUtils.resolveFieldData(node2.data, sortField);
-                let result = null;
-
-                if (value1 == null && value2 != null)
-                    result = -1;
-                else if (value1 != null && value2 == null)
-                    result = 1;
-                else if (value1 == null && value2 == null)
-                    result = 0;
-                else if (typeof value1 === 'string' && typeof value2 === 'string')
-                    result = value1.localeCompare(value2, undefined, { numeric: true });
-                else
-                    result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
-
-                return (this.getSortOrder() * result);
+                return ObjectUtils.sort(value1, value2, this.getSortOrder(), PrimeReact.locale);
             });
 
             for (let i = 0; i < value.length; i++) {
@@ -400,7 +389,7 @@ export class TreeTable extends Component {
             }
             else {
                 if ((typeof value1 === 'string' || value1 instanceof String) && (typeof value2 === 'string' || value2 instanceof String))
-                    return (multiSortMeta[index].order * value1.localeCompare(value2, undefined, { numeric: true }));
+                    return (multiSortMeta[index].order * value1.localeCompare(value2, PrimeReact.locale, { numeric: true }));
                 else
                     result = (value1 < value2) ? -1 : 1;
             }
@@ -1079,7 +1068,8 @@ export class TreeTable extends Component {
     render() {
         const value = this.processValue();
         const className = classNames('p-treetable p-component', {
-            'p-treetable-hoverable-rows': this.isRowSelectionMode(),
+            'p-treetable-hoverable-rows': this.props.rowHover,
+            'p-treetable-selectable': this.isRowSelectionMode(),
             'p-treetable-resizable': this.props.resizableColumns,
             'p-treetable-resizable-fit': (this.props.resizableColumns && this.props.columnResizeMode === 'fit'),
             'p-treetable-auto-layout': this.props.autoLayout,

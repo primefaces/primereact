@@ -55,13 +55,13 @@ const KnobProps = [
     },
     {
         name: 'rangeColor',
-        type: 'number',
+        type: 'string',
         default: 'null',
         description: 'Background color of the range.'
     },
     {
         name: 'textColor',
-        type: 'number',
+        type: 'string',
         default: 'null',
         description: 'Color of the value text.'
     },

@@ -51,12 +51,12 @@ export class PickListDemo extends Component {
                     <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
                 </div>
                 <div className="product-list-detail">
-                    <h5 className="p-mb-2">{item.name}</h5>
+                    <h5 className="mb-2">{item.name}</h5>
                     <i className="pi pi-tag product-category-icon"></i>
                     <span className="product-category">{item.category}</span>
                 </div>
                 <div className="product-list-action">
-                    <h6 className="p-mb-2">\${item.price}</h6>
+                    <h6 className="mb-2">\${item.price}</h6>
                     <span className={\`product-badge status-\${item.inventoryStatus.toLowerCase()}\`}>{item.inventoryStatus}</span>
                 </div>
             </div>
@@ -107,12 +107,12 @@ const PickListDemo = () => {
                     <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
                 </div>
                 <div className="product-list-detail">
-                    <h5 className="p-mb-2">{item.name}</h5>
+                    <h5 className="mb-2">{item.name}</h5>
                     <i className="pi pi-tag product-category-icon"></i>
                     <span className="product-category">{item.category}</span>
                 </div>
                 <div className="product-list-action">
-                    <h6 className="p-mb-2">\${item.price}</h6>
+                    <h6 className="mb-2">\${item.price}</h6>
                     <span className={\`product-badge status-\${item.inventoryStatus.toLowerCase()}\`}>{item.inventoryStatus}</span>
                 </div>
             </div>
@@ -161,12 +161,12 @@ const PickListDemo = () => {
                     <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
                 </div>
                 <div className="product-list-detail">
-                    <h5 className="p-mb-2">{item.name}</h5>
+                    <h5 className="mb-2">{item.name}</h5>
                     <i className="pi pi-tag product-category-icon"></i>
                     <span className="product-category">{item.category}</span>
                 </div>
                 <div className="product-list-action">
-                    <h6 className="p-mb-2">\${item.price}</h6>
+                    <h6 className="mb-2">\${item.price}</h6>
                     <span className={\`product-badge status-\${item.inventoryStatus.toLowerCase()}\`}>{item.inventoryStatus}</span>
                 </div>
             </div>
@@ -219,12 +219,12 @@ const PickListDemo = () => {
                     <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
                 </div>
                 <div className="product-list-detail">
-                    <h5 className="p-mb-2">{item.name}</h5>
+                    <h5 className="mb-2">{item.name}</h5>
                     <i className="pi pi-tag product-category-icon"></i>
                     <span className="product-category">{item.category}</span>
                 </div>
                 <div className="product-list-action">
-                    <h6 className="p-mb-2">\${item.price}</h6>
+                    <h6 className="mb-2">\${item.price}</h6>
                     <span className={\`product-badge status-\${item.inventoryStatus.toLowerCase()}\`}>{item.inventoryStatus}</span>
                 </div>
             </div>

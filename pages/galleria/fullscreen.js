@@ -114,7 +114,7 @@ export default class GalleriaFullScreenDemo extends Component {
                             activeIndex={this.state.activeIndex} onItemChange={(e) => this.setState({ activeIndex: e.index })}
                             circular fullScreen showItemNavigators showThumbnails={false} item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
 
-                        <div className="p-grid" style={{ maxWidth: '400px' }}>
+                        <div className="grid" style={{ maxWidth: '400px' }}>
                             {
                                 this.state.images && this.state.images.map((image, index) => {
                                     let imgEl = <img src={`${this.contextPath}/${image.thumbnailImageSrc}`} alt={image.alt} style={{ cursor: 'pointer' }} onClick={() => {
@@ -122,7 +122,7 @@ export default class GalleriaFullScreenDemo extends Component {
                                     }} />
 
                                     return (
-                                        <div className="p-col-3" key={index}>
+                                        <div className="col-3" key={index}>
                                             {imgEl}
                                         </div>
                                     )
@@ -247,7 +247,7 @@ export class GalleriaFullScreenDemo extends Component {
                         activeIndex={this.state.activeIndex} onItemChange={(e) => this.setState({ activeIndex: e.index })}
                         circular fullScreen showItemNavigators showThumbnails={false} item={this.itemTemplate} thumbnail={this.thumbnailTemplate}/>
 
-                    <div className="p-grid" style={{ maxWidth: '400px' }}>
+                    <div className="grid" style={{ maxWidth: '400px' }}>
                         {
                             this.state.images && this.state.images.map((image, index) => {
                                 let imgEl = <img src={image.thumbnailImageSrc} alt={image.alt} style={{ cursor: 'pointer' }} onClick={() => {
@@ -255,7 +255,7 @@ export class GalleriaFullScreenDemo extends Component {
                                 }} />
 
                                 return (
-                                    <div className="p-col-3" key={index}>
+                                    <div className="col-3" key={index}>
                                         {imgEl}
                                     </div>
                                 )

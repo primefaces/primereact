@@ -168,37 +168,37 @@ export default class ButtonDemo extends Component {
 
                         <h5>Template</h5>
                         <div className="template">
-                            <Button className="google p-p-0">
-                                <i className="pi pi-google p-px-2"></i>
-                                <span className="p-px-3">Google</span>
+                            <Button className="google p-0">
+                                <i className="pi pi-google px-2"></i>
+                                <span className="px-3">Google</span>
                             </Button>
-                            <Button className="youtube p-p-0">
-                                <i className="pi pi-youtube p-px-2"></i>
-                                <span className="p-px-3">Youtube</span>
+                            <Button className="youtube p-0">
+                                <i className="pi pi-youtube px-2"></i>
+                                <span className="px-3">Youtube</span>
                             </Button>
-                            <Button className="vimeo p-p-0">
-                                <i className="pi pi-vimeo p-px-2"></i>
-                                <span className="p-px-3">Vimeo</span>
+                            <Button className="vimeo p-0">
+                                <i className="pi pi-vimeo px-2"></i>
+                                <span className="px-3">Vimeo</span>
                             </Button>
-                            <Button className="facebook p-p-0">
-                                <i className="pi pi-facebook p-px-2"></i>
-                                <span className="p-px-3">Facebook</span>
+                            <Button className="facebook p-0">
+                                <i className="pi pi-facebook px-2"></i>
+                                <span className="px-3">Facebook</span>
                             </Button>
-                            <Button className="twitter p-p-0">
-                                <i className="pi pi-twitter p-px-2"></i>
-                                <span className="p-px-3">Twitter</span>
+                            <Button className="twitter p-0">
+                                <i className="pi pi-twitter px-2"></i>
+                                <span className="px-3">Twitter</span>
                             </Button>
-                            <Button className="slack p-p-0">
-                                <i className="pi pi-slack p-px-2"></i>
-                                <span className="p-px-3">Slack</span>
+                            <Button className="slack p-0">
+                                <i className="pi pi-slack px-2"></i>
+                                <span className="px-3">Slack</span>
                             </Button>
-                            <Button className="amazon p-p-0">
-                                <i className="pi pi-amazon p-px-2"></i>
-                                <span className="p-px-3">Amazon</span>
+                            <Button className="amazon p-0">
+                                <i className="pi pi-amazon px-2"></i>
+                                <span className="px-3">Amazon</span>
                             </Button>
-                            <Button className="discord p-p-0">
-                                <i className="pi pi-discord p-px-2"></i>
-                                <span className="p-px-3">Discord</span>
+                            <Button className="discord p-0">
+                                <i className="pi pi-discord px-2"></i>
+                                <span className="px-3">Discord</span>
                             </Button>
                         </div>
                     </div>

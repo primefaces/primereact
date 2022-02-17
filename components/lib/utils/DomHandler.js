@@ -22,6 +22,15 @@ export default class DomHandler {
         return 0;
     }
 
+    static getBrowserLanguage() {
+        return navigator.userLanguage
+          || (navigator.languages && navigator.languages.length && navigator.languages[0])
+          || navigator.language
+          || navigator.browserLanguage
+          || navigator.systemLanguage
+          || 'en';
+    }
+
     static getWindowScrollTop() {
         let doc = document.documentElement;
         return (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
@@ -853,45 +862,49 @@ export default class DomHandler {
             navigator.msSaveOrOpenBlob(blob, filename + '.csv');
         }
         else {
-            let link = document.createElement("a");
-            if (link.download !== undefined) {
-                link.setAttribute('href', URL.createObjectURL(blob));
-                link.setAttribute('download', filename + '.csv');
-                link.style.display = 'none';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-            else {
+            const isDownloaded = DomHandler.saveAs({ name: filename + '.csv', src: URL.createObjectURL(blob) });
+            if (!isDownloaded) {
                 csv = 'data:text/csv;charset=utf-8,' + csv;
                 window.open(encodeURI(csv));
             }
         }
     }
 
-    /**
-     * Anytime an inline style is created check environment variable 'process.env.REACT_APP_CSS_NONCE'
-     * to set a CSP NONCE.
-     *
-     * @see https://github.com/primefaces/primereact/issues/2423
-     * @return HtmlStyleElement
-     */
-    static createInlineStyle() {
-        let styleElement = document.createElement('style');
-        let nonce = process.env.REACT_APP_CSS_NONCE;
-        if (nonce) {
-            styleElement.setAttribute('nonce', nonce);
+    static saveAs(file) {
+        if (file) {
+            let link = document.createElement('a');
+            if (link.download !== undefined) {
+                const { name, src } = file;
+
+                link.setAttribute('href', src);
+                link.setAttribute('download', name);
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                return true;
+            }
         }
+
+        return false;
+    }
+
+    static createInlineStyle(nonce) {
+        let styleElement = document.createElement('style');
+        try {
+            if (!nonce) {
+                nonce = process.env.REACT_APP_CSS_NONCE;
+            }
+        } catch (error) {
+            // NOOP
+        }
+
+        nonce && styleElement.setAttribute('nonce', nonce);
         document.head.appendChild(styleElement);
         return styleElement;
     }
 
-    /**
-     * Remove a style element from the head and attempt to prevent DOM Exception on fast refresh.
-     *
-     * @see https://github.com/primefaces/primereact/issues/2469
-     * @param {HtmlStyleElement} styleElement the element to remove from head
-     */
     static removeInlineStyle(styleElement) {
         if (this.isExist(styleElement)) {
             try {

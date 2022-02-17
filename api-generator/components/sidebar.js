@@ -51,7 +51,7 @@ const SidebarProps = [
         name: 'dismissable',
         type: 'boolean',
         default: 'true',
-        description: 'Whether clicking outside closes the panel.'
+        description: 'Whether to dismiss sidebar on click of the mask.'
     },
     {
         name: 'showCloseIcon',

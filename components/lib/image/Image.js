@@ -10,6 +10,7 @@ export class Image extends Component {
     static defaultProps = {
         preview: false,
         className: null,
+        downloadable: false,
         style: null,
         imageStyle: null,
         imageClassName: null,
@@ -23,6 +24,7 @@ export class Image extends Component {
     static propTypes = {
         preview: PropTypes.bool,
         className: PropTypes.string,
+        downloadable: PropTypes.bool,
         style: PropTypes.object,
         imageClassName: PropTypes.string,
         imageStyle: PropTypes.object,
@@ -44,6 +46,7 @@ export class Image extends Component {
 
         this.onImageClick = this.onImageClick.bind(this);
         this.onMaskClick = this.onMaskClick.bind(this);
+        this.onDownload = this.onDownload.bind(this);
         this.rotateRight = this.rotateRight.bind(this);
         this.rotateLeft = this.rotateLeft.bind(this);
         this.zoomIn = this.zoomIn.bind(this);
@@ -56,7 +59,6 @@ export class Image extends Component {
         this.onExited = this.onExited.bind(this)
 
         this.previewRef = React.createRef();
-
     }
 
     onImageClick() {
@@ -80,6 +82,12 @@ export class Image extends Component {
         }
 
         this.previewClick = false;
+    }
+
+    onDownload() {
+        const { alt: name, src } = this.props;
+        DomHandler.saveAs({ name, src });
+        this.previewClick = true;
     }
 
     rotateRight() {
@@ -147,7 +155,7 @@ export class Image extends Component {
     }
 
     renderElement() {
-
+        const { downloadable } = this.props;
         const imagePreviewStyle = { transform: 'rotate(' + this.state.rotate + 'deg) scale(' + this.state.scale + ')' };
         const zoomDisabled = this.state.scale <= 0.5 || this.state.scale >= 1.5;
         // const rotateClassName = 'p-image-preview-rotate-' + this.state.rotate;
@@ -155,22 +163,29 @@ export class Image extends Component {
         return (
             <div ref={(el) => this.mask = el} className="p-image-mask p-component-overlay p-component-overlay-enter" onClick={this.onMaskClick}>
                 <div className="p-image-toolbar">
+                    {
+                        downloadable && (
+                            <button className="p-image-action p-link" onClick={this.onDownload} type="button">
+                                <i className="pi pi-download"></i>
+                            </button>
+                        )
+                    }
                     <button className="p-image-action p-link" onClick={this.rotateRight} type="button">
                         <i className="pi pi-refresh"></i>
                     </button>
                     <button className="p-image-action p-link" onClick={this.rotateLeft} type="button">
                         <i className="pi pi-undo"></i>
                     </button>
-                    <button className="p-image-action p-link" onClick={this.zoomOut} type="button" disabled={zoomDisabled} >
+                    <button className="p-image-action p-link" onClick={this.zoomOut} type="button" disabled={zoomDisabled}>
                         <i className="pi pi-search-minus"></i>
-                    </button >
-                    <button className="p-image-action p-link" onClick={this.zoomIn} type="button" disabled={zoomDisabled} >
+                    </button>
+                    <button className="p-image-action p-link" onClick={this.zoomIn} type="button" disabled={zoomDisabled}>
                         <i className="pi pi-search-plus"></i>
-                    </button >
-                    <button className="p-image-action p-link" type="button" onClick={this.hidePreview} >
+                    </button>
+                    <button className="p-image-action p-link" type="button" onClick={this.hidePreview}>
                         <i className="pi pi-times"></i>
-                    </button >
-                </div >
+                    </button>
+                </div>
                 <CSSTransition nodeRef={this.previewRef} classNames="p-image-preview" in={this.state.previewVisible} timeout={{ enter: 150, exit: 150 }}
                     unmountOnExit onEntering={this.onEntering} onEntered={this.onEntered} onExit={this.onExit} onExiting={this.onExiting} onExited={this.onExited}>
                     <div ref={this.previewRef}>
@@ -180,8 +195,6 @@ export class Image extends Component {
             </div>
         );
     }
-
-
 
     render() {
         const containerClassName = classNames('p-image p-component', this.props.className, {
@@ -195,9 +208,11 @@ export class Image extends Component {
         return (
             <span ref={(el) => this.container = el} className={containerClassName} style={this.props.style}>
                 <img src={src} className={this.props.imageClassName} width={width} height={height} style={this.props.imageStyle} alt={alt} />
-                {this.props.preview && <div className="p-image-preview-indicator" onClick={this.onImageClick} >
-                    {content}
-                </div>}
+                {
+                    this.props.preview && <div className="p-image-preview-indicator" onClick={this.onImageClick} >
+                        {content}
+                    </div>
+                }
 
                 {this.state.maskVisible && <Portal element={element} appendTo={document.body} />}
             </span>
@@ -206,6 +221,3 @@ export class Image extends Component {
 
     }
 }
-
-
-

@@ -70,7 +70,7 @@ export default class ConfirmPopupDemo extends Component {
 
                     <div className="card">
                         <h5>Basic</h5>
-                        <Button onClick={this.confirm1} icon="pi pi-check" label="Confirm" className="p-mr-2"></Button>
+                        <Button onClick={this.confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                         <Button onClick={this.confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
 
                         <h5>Using ConfirmPopup tag</h5>

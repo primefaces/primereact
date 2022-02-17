@@ -104,7 +104,7 @@ export class Dialog extends Component {
         super(props);
         this.state = {
             id: props.id,
-            maskVisible: props.visible,
+            maskVisible: false,
             visible: false
         };
 
@@ -492,7 +492,7 @@ export class Dialog extends Component {
 
     createStyle() {
         if (!this.styleElement) {
-            this.styleElement = DomHandler.createInlineStyle();
+            this.styleElement = DomHandler.createInlineStyle(PrimeReact.nonce);
 
             let innerHTML = '';
             for (let breakpoint in this.props.breakpoints) {
@@ -515,8 +515,9 @@ export class Dialog extends Component {
         }
 
         if (this.props.visible) {
-            this.setState({ visible: true }, () => {
+            this.setState({ maskVisible: true }, () => {
                 ZIndexUtils.set('modal', this.mask, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['modal']);
+                this.setState({ visible: true });
             });
         }
 

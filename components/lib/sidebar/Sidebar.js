@@ -58,7 +58,7 @@ export class Sidebar extends Component {
         super(props);
 
         this.state = {
-            maskVisible: props.visible,
+            maskVisible: false,
             visible: false
         }
 
@@ -165,7 +165,7 @@ export class Sidebar extends Component {
 
     componentDidMount() {
         if (this.props.visible) {
-            this.setState({ visible: true }, () => {
+            this.setState({ maskVisible: true, visible: true }, () => {
                 ZIndexUtils.set('modal', this.mask, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['modal']);
             });
         }

@@ -142,6 +142,8 @@ import "primeicons/primeicons.css";                                //icons
 
                 <h5>Free Themes</h5>
                 <p>PrimeReact ships with various free themes to choose from.</p>
+<div style={{overflow: 'auto', height: '400px'}}>
+
 <CodeHighlight lang="js">
 {`
 primereact/resources/themes/bootstrap4-light-blue/theme.css
@@ -188,6 +190,7 @@ primereact/resources/themes/luna-pink/theme.css
 primereact/resources/themes/rhea/theme.css
 `}
 </CodeHighlight>
+</div>
 
                     <h5>PrimeFlex</h5>
                     <p>PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more. Although it is not required, it is highly
@@ -329,32 +332,32 @@ PrimeReact.cssTransition = false; // Default value is true.
                             <thead>
                                 <tr>
                                     <th>
-                                        <div className="p-d-flex p-ai-center">
-                                            <img src={`${contextPath}/images/browsers/edge.svg`} alt="edge" style={{width: '1.5rem'}} className="p-mr-2" />
+                                        <div className="flex align-items-center">
+                                            <img src={`${contextPath}/images/browsers/edge.svg`} alt="edge" style={{width: '1.5rem'}} className="mr-2" />
                                             IE / Edge
                                         </div>
                                     </th>
                                     <th>
-                                        <div className="p-d-flex p-ai-center">
-                                            <img src={`${contextPath}/images/browsers/firefox.svg`} alt="firefox" style={{width: '1.5rem'}} className="p-mr-2" />
+                                        <div className="flex align-items-center">
+                                            <img src={`${contextPath}/images/browsers/firefox.svg`} alt="firefox" style={{width: '1.5rem'}} className="mr-2" />
                                             Firefox
                                         </div>
                                     </th>
                                     <th>
-                                        <div className="p-d-flex p-ai-center">
-                                            <img src={`${contextPath}/images/browsers/chrome.svg`} alt="chrome" style={{width: '1.5rem'}} className="p-mr-2" />
+                                        <div className="flex align-items-center">
+                                            <img src={`${contextPath}/images/browsers/chrome.svg`} alt="chrome" style={{width: '1.5rem'}} className="mr-2" />
                                             Chrome
                                         </div>
                                     </th>
                                     <th>
-                                        <div className="p-d-flex p-ai-center">
-                                            <img src={`${contextPath}/images/browsers/safari.svg`} alt="safari" style={{width: '1.5rem'}} className="p-mr-2" />
+                                        <div className="flex align-items-center">
+                                            <img src={`${contextPath}/images/browsers/safari.svg`} alt="safari" style={{width: '1.5rem'}} className="mr-2" />
                                             Safari
                                         </div>
                                     </th>
                                     <th>
-                                        <div className="p-d-flex p-ai-center">
-                                            <img src={`${contextPath}/images/browsers/opera.svg`} alt="opera" style={{width: '1.5rem'}} className="p-mr-2" />
+                                        <div className="flex align-items-center">
+                                            <img src={`${contextPath}/images/browsers/opera.svg`} alt="opera" style={{width: '1.5rem'}} className="mr-2" />
                                             Opera
                                         </div>
                                     </th>

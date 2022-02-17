@@ -7,6 +7,8 @@ type ToastMessageType = ToastMessage | ToastMessage[];
 
 type ToastPositionType = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-center' | 'top-left' | 'top-right' | 'bottom-center' | 'bottom-left' | 'bottom-right';
 
+type ToastAppendToType = 'self' | HTMLElement | undefined | null;
+
 export interface ToastMessage {
     severity?: ToastSeverityType;
     summary?: React.ReactNode;
@@ -28,6 +30,7 @@ export interface ToastProps {
     baseZIndex?: number;
     position?: ToastPositionType;
     transitionOptions?: CSSTransitionProps;
+    appendTo?: ToastAppendToType;
     onClick?(message: ToastMessage): void;
     onRemove?(message: ToastMessage): void;
     onShow?(): void;

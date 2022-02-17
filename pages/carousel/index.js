@@ -47,16 +47,16 @@ export default class CarouselDemo extends Component {
         return (
             <div className="product-item">
                 <div className="product-item-content">
-                    <div className="p-mb-3">
+                    <div className="mb-3">
                         <img src={`${this.contextPath}/images/product/${product.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.name} className="product-image" />
                     </div>
                     <div>
-                        <h4 className="p-mb-1">{product.name}</h4>
-                        <h6 className="p-mt-0 p-mb-3">${product.price}</h6>
+                        <h4 className="mb-1">{product.name}</h4>
+                        <h6 className="mt-0 mb-3">${product.price}</h6>
                         <span className={`product-badge status-${product.inventoryStatus.toLowerCase()}`}>{product.inventoryStatus}</span>
-                        <div className="car-buttons p-mt-5">
-                            <Button icon="pi pi-search" className="p-button p-button-rounded p-mr-2" />
-                            <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded p-mr-2" />
+                        <div className="car-buttons mt-5">
+                            <Button icon="pi pi-search" className="p-button p-button-rounded mr-2" />
+                            <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded mr-2" />
                             <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
                         </div>
                     </div>
@@ -92,7 +92,7 @@ export default class CarouselDemo extends Component {
                     </div>
 
                     <div className="card">
-                        <Carousel value={this.state.products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="352px"
+                        <Carousel value={this.state.products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px"
                             itemTemplate={this.productTemplate} header={<h5>Vertical</h5>} style={{maxWidth: '400px', marginTop: '2em'}} />
                     </div>
                 </div>

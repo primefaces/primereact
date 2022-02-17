@@ -30,4 +30,7 @@ export interface SplitButtonProps {
     onHide?(): void;
 }
 
-export declare class SplitButton extends React.Component<SplitButtonProps, any> { }
+export declare class SplitButton extends React.Component<SplitButtonProps, any> {
+    public show(): void;
+    public hide(): void;
+}

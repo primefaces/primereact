@@ -151,7 +151,7 @@ export default class DataTableFilterDemo extends Component {
 
     renderHeader1() {
         return (
-            <div className="p-d-flex p-jc-between">
+            <div className="flex justify-content-between">
                 <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={this.clearFilter1} />
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
@@ -163,7 +163,7 @@ export default class DataTableFilterDemo extends Component {
 
     renderHeader2() {
         return (
-            <div className="p-d-flex p-jc-end">
+            <div className="flex justify-content-end">
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
                     <InputText value={this.state.globalFilterValue2} onChange={this.onGlobalFilterChange2} placeholder="Keyword Search" />
@@ -190,7 +190,7 @@ export default class DataTableFilterDemo extends Component {
     }
 
     filterFooterTemplate() {
-        return <div className="p-px-3 p-pt-0 p-pb-3 p-text-center p-text-bold">Customized Buttons</div>;
+        return <div className="px-3 pt-0 pb-3 text-center font-bold">Customized Buttons</div>;
     }
 
     representativeBodyTemplate(rowData) {
@@ -251,8 +251,8 @@ export default class DataTableFilterDemo extends Component {
     activityFilterTemplate(options) {
         return (
             <>
-                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
-                <div className="p-d-flex p-ai-center p-jc-between p-px-2">
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3"></Slider>
+                <div className="flex align-items-center justify-content-between px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
@@ -316,7 +316,7 @@ export default class DataTableFilterDemo extends Component {
                             <Column header="Balance" filterField="balance" dataType="numeric" style={{ minWidth: '10rem' }} body={this.balanceBodyTemplate} filter filterElement={this.balanceFilterTemplate} />
                             <Column field="status" header="Status" filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={this.statusBodyTemplate} filter filterElement={this.statusFilterTemplate} />
                             <Column field="activity" header="Activity" showFilterMatchModes={false} style={{ minWidth: '12rem' }} body={this.activityBodyTemplate} filter filterElement={this.activityFilterTemplate} />
-                            <Column field="verified" header="Verified" dataType="boolean" bodyClassName="p-text-center" style={{ minWidth: '8rem' }} body={this.verifiedBodyTemplate} filter filterElement={this.verifiedFilterTemplate} />
+                            <Column field="verified" header="Verified" dataType="boolean" bodyClassName="text-center" style={{ minWidth: '8rem' }} body={this.verifiedBodyTemplate} filter filterElement={this.verifiedFilterTemplate} />
                         </DataTable>
                     </div>
 
@@ -496,7 +496,7 @@ export class DataTableFilterDemo extends Component {
 
     renderHeader1() {
         return (
-            <div className="p-d-flex p-jc-between">
+            <div className="flex justify-content-between">
                 <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={this.clearFilter1} />
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
@@ -508,7 +508,7 @@ export class DataTableFilterDemo extends Component {
 
     renderHeader2() {
         return (
-            <div className="p-d-flex p-jc-end">
+            <div className="flex justify-content-end">
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
                     <InputText value={this.state.globalFilterValue2} onChange={this.onGlobalFilterChange2} placeholder="Keyword Search" />
@@ -535,7 +535,7 @@ export class DataTableFilterDemo extends Component {
     }
 
     filterFooterTemplate() {
-        return <div className="p-px-3 p-pt-0 p-pb-3 p-text-center p-text-bold">Customized Buttons</div>;
+        return <div className="px-3 pt-0 pb-3 text-center font-bold">Customized Buttons</div>;
     }
 
     representativeBodyTemplate(rowData) {
@@ -596,8 +596,8 @@ export class DataTableFilterDemo extends Component {
     activityFilterTemplate(options) {
         return (
             <React.Fragment>
-                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
-                <div className="p-d-flex p-ai-center p-jc-between p-px-2">
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3"></Slider>
+                <div className="flex align-items-center justify-content-between px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
@@ -647,7 +647,7 @@ export class DataTableFilterDemo extends Component {
                         <Column header="Balance" filterField="balance" dataType="numeric" style={{ minWidth: '10rem' }} body={this.balanceBodyTemplate} filter filterElement={this.balanceFilterTemplate} />
                         <Column field="status" header="Status" filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={this.statusBodyTemplate} filter filterElement={this.statusFilterTemplate} />
                         <Column field="activity" header="Activity" showFilterMatchModes={false} style={{ minWidth: '12rem' }} body={this.activityBodyTemplate} filter filterElement={this.activityFilterTemplate} />
-                        <Column field="verified" header="Verified" dataType="boolean" bodyClassName="p-text-center" style={{ minWidth: '8rem' }} body={this.verifiedBodyTemplate} filter filterElement={this.verifiedFilterTemplate} />
+                        <Column field="verified" header="Verified" dataType="boolean" bodyClassName="text-center" style={{ minWidth: '8rem' }} body={this.verifiedBodyTemplate} filter filterElement={this.verifiedFilterTemplate} />
                     </DataTable>
                 </div>
 
@@ -791,7 +791,7 @@ const DataTableFilterDemo = () => {
 
     const renderHeader1 = () => {
         return (
-            <div className="p-d-flex p-jc-between">
+            <div className="flex justify-content-between">
                 <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={clearFilter1} />
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
@@ -803,7 +803,7 @@ const DataTableFilterDemo = () => {
 
     const renderHeader2 = () => {
         return (
-            <div className="p-d-flex p-jc-end">
+            <div className="flex justify-content-end">
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
                     <InputText value={globalFilterValue2} onChange={onGlobalFilterChange2} placeholder="Keyword Search" />
@@ -830,7 +830,7 @@ const DataTableFilterDemo = () => {
     }
 
     const filterFooterTemplate = () => {
-        return <div className="p-px-3 p-pt-0 p-pb-3 p-text-center p-text-bold">Customized Buttons</div>;
+        return <div className="px-3 pt-0 pb-3 text-center font-bold">Customized Buttons</div>;
     }
 
     const representativeBodyTemplate = (rowData) => {
@@ -891,8 +891,8 @@ const DataTableFilterDemo = () => {
     const activityFilterTemplate = (options) => {
         return (
             <React.Fragment>
-                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
-                <div className="p-d-flex p-ai-center p-jc-between p-px-2">
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3"></Slider>
+                <div className="flex align-items-center justify-content-between px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
@@ -941,7 +941,7 @@ const DataTableFilterDemo = () => {
                     <Column header="Balance" filterField="balance" dataType="numeric" style={{ minWidth: '10rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
                     <Column field="status" header="Status" filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
                     <Column field="activity" header="Activity" showFilterMatchModes={false} style={{ minWidth: '12rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
-                    <Column field="verified" header="Verified" dataType="boolean" bodyClassName="p-text-center" style={{ minWidth: '8rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedFilterTemplate} />
+                    <Column field="verified" header="Verified" dataType="boolean" bodyClassName="text-center" style={{ minWidth: '8rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedFilterTemplate} />
                 </DataTable>
             </div>
 
@@ -1084,7 +1084,7 @@ const DataTableFilterDemo = () => {
 
     const renderHeader1 = () => {
         return (
-            <div className="p-d-flex p-jc-between">
+            <div className="flex justify-content-between">
                 <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={clearFilter1} />
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
@@ -1096,7 +1096,7 @@ const DataTableFilterDemo = () => {
 
     const renderHeader2 = () => {
         return (
-            <div className="p-d-flex p-jc-end">
+            <div className="flex justify-content-end">
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
                     <InputText value={globalFilterValue2} onChange={onGlobalFilterChange2} placeholder="Keyword Search" />
@@ -1123,7 +1123,7 @@ const DataTableFilterDemo = () => {
     }
 
     const filterFooterTemplate = () => {
-        return <div className="p-px-3 p-pt-0 p-pb-3 p-text-center p-text-bold">Customized Buttons</div>;
+        return <div className="px-3 pt-0 pb-3 text-center font-bold">Customized Buttons</div>;
     }
 
     const representativeBodyTemplate = (rowData) => {
@@ -1184,8 +1184,8 @@ const DataTableFilterDemo = () => {
     const activityFilterTemplate = (options) => {
         return (
             <React.Fragment>
-                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
-                <div className="p-d-flex p-ai-center p-jc-between p-px-2">
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3"></Slider>
+                <div className="flex align-items-center justify-content-between px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
@@ -1234,7 +1234,7 @@ const DataTableFilterDemo = () => {
                     <Column header="Balance" filterField="balance" dataType="numeric" style={{ minWidth: '10rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
                     <Column field="status" header="Status" filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
                     <Column field="activity" header="Activity" showFilterMatchModes={false} style={{ minWidth: '12rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
-                    <Column field="verified" header="Verified" dataType="boolean" bodyClassName="p-text-center" style={{ minWidth: '8rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedFilterTemplate} />
+                    <Column field="verified" header="Verified" dataType="boolean" bodyClassName="text-center" style={{ minWidth: '8rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedFilterTemplate} />
                 </DataTable>
             </div>
 
@@ -1394,7 +1394,7 @@ const DataTableFilterDemo = () => {
 
     const renderHeader1 = () => {
         return (
-            <div className="p-d-flex p-jc-between">
+            <div className="flex justify-content-between">
                 <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={clearFilter1} />
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
@@ -1406,7 +1406,7 @@ const DataTableFilterDemo = () => {
 
     const renderHeader2 = () => {
         return (
-            <div className="p-d-flex p-jc-end">
+            <div className="flex justify-content-end">
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
                     <InputText value={globalFilterValue2} onChange={onGlobalFilterChange2} placeholder="Keyword Search" />
@@ -1433,7 +1433,7 @@ const DataTableFilterDemo = () => {
     }
 
     const filterFooterTemplate = () => {
-        return <div className="p-px-3 p-pt-0 p-pb-3 p-text-center p-text-bold">Customized Buttons</div>;
+        return <div className="px-3 pt-0 pb-3 text-center font-bold">Customized Buttons</div>;
     }
 
     const representativeBodyTemplate = (rowData) => {
@@ -1494,8 +1494,8 @@ const DataTableFilterDemo = () => {
     const activityFilterTemplate = (options) => {
         return (
             <React.Fragment>
-                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="p-m-3"></Slider>
-                <div className="p-d-flex p-ai-center p-jc-between p-px-2">
+                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3"></Slider>
+                <div className="flex align-items-center justify-content-between px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>
@@ -1544,7 +1544,7 @@ const DataTableFilterDemo = () => {
                     <Column header="Balance" filterField="balance" dataType="numeric" style={{ minWidth: '10rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
                     <Column field="status" header="Status" filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '12rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
                     <Column field="activity" header="Activity" showFilterMatchModes={false} style={{ minWidth: '12rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
-                    <Column field="verified" header="Verified" dataType="boolean" bodyClassName="p-text-center" style={{ minWidth: '8rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedFilterTemplate} />
+                    <Column field="verified" header="Verified" dataType="boolean" bodyClassName="text-center" style={{ minWidth: '8rem' }} body={verifiedBodyTemplate} filter filterElement={verifiedFilterTemplate} />
                 </DataTable>
             </div>
 

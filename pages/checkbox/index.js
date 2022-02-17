@@ -71,25 +71,25 @@ export default class CheckboxDemo extends Component {
                 <div className="content-section implementation">
                     <div className="card">
                         <h5>Basic</h5>
-                        <div className="p-field-checkbox">
+                        <div className="field-checkbox">
                             <Checkbox inputId="binary" checked={this.state.checked} onChange={e => this.setState({ checked: e.checked })} />
                             <label htmlFor="binary">{this.state.checked ? 'true' : 'false'}</label>
                         </div>
 
                         <h5>Multiple</h5>
-                        <div className="p-field-checkbox">
+                        <div className="field-checkbox">
                             <Checkbox inputId="city1" name="city" value="Chicago" onChange={this.onCityChange} checked={this.state.cities.indexOf('Chicago') !== -1} />
                             <label htmlFor="city1">Chicago</label>
                         </div>
-                        <div className="p-field-checkbox">
+                        <div className="field-checkbox">
                             <Checkbox inputId="city2" name="city" value="Los Angeles" onChange={this.onCityChange} checked={this.state.cities.indexOf('Los Angeles') !== -1} />
                             <label htmlFor="city2">Los Angeles</label>
                         </div>
-                        <div className="p-field-checkbox">
+                        <div className="field-checkbox">
                             <Checkbox inputId="city3" name="city" value="New York" onChange={this.onCityChange} checked={this.state.cities.indexOf('New York') !== -1} />
                             <label htmlFor="city3">New York</label>
                         </div>
-                        <div className="p-field-checkbox">
+                        <div className="field-checkbox">
                             <Checkbox inputId="city4" name="city" value="San Francisco" onChange={this.onCityChange} checked={this.state.cities.indexOf('San Francisco') !== -1} />
                             <label htmlFor="city4">San Francisco</label>
                         </div>
@@ -98,7 +98,7 @@ export default class CheckboxDemo extends Component {
                         {
                             this.categories.map((category) => {
                                 return (
-                                    <div key={category.key} className="p-field-checkbox">
+                                    <div key={category.key} className="field-checkbox">
                                         <Checkbox inputId={category.key} name="category" value={category} onChange={this.onCategoryChange} checked={this.state.selectedCategories.some((item) => item.key === category.key)} disabled={category.key === 'R'} />
                                         <label htmlFor={category.key}>{category.name}</label>
                                     </div>

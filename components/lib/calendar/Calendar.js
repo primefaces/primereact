@@ -697,7 +697,7 @@ export class Calendar extends Component {
     onClearButtonClick(event) {
         this.updateModel(event, null);
         this.updateInputfield(null);
-        this.hideOverlay(null, this.reFocusInputField);
+        this.hideOverlay();
 
         if (this.props.onClearButtonClick) {
             this.props.onClearButtonClick(event);
@@ -881,7 +881,7 @@ export class Calendar extends Component {
 
     doStepMinute(currentMinute, step) {
         if (this.props.stepMinute <= 1) {
-            return currentMinute;
+            return step ? currentMinute + step : currentMinute;
         }
         if (!step) {
             step = this.props.stepMinute;

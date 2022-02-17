@@ -66,7 +66,7 @@ export default class DoughnutChartDemo extends Component {
                 </div>
 
                 <div className="content-section implementation">
-                    <div className="card p-d-flex p-jc-center">
+                    <div className="card flex justify-content-center">
                         <AppContentContext.Consumer>
                             {
                                 context => {
@@ -133,7 +133,7 @@ export class DoughnutChartDemo extends Component {
 
     render() {
         return (
-            <div className="card p-d-flex p-jc-center">
+            <div className="card flex justify-content-center">
                 <Chart type="doughnut" data={this.chartData} options={this.lightOptions} style={{ position: 'relative', width: '40%' }} />
             </div>
         )
@@ -177,7 +177,7 @@ const DoughnutChartDemo = () => {
     };
 
     return (
-        <div className="card p-d-flex p-jc-center">
+        <div className="card flex justify-content-center">
             <Chart type="doughnut" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
     )
@@ -220,7 +220,7 @@ const DoughnutChartDemo = () => {
     };
 
     return (
-        <div className="card p-d-flex p-jc-center">
+        <div className="card flex justify-content-center">
             <Chart type="doughnut" data={chartData} options={lightOptions} style={{ position: 'relative', width: '40%' }} />
         </div>
     )

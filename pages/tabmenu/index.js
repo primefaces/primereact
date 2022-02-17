@@ -46,7 +46,7 @@ export default class TabMenuDemo extends Component {
 
                     <div className="card">
                         <h5>Programmatic</h5>
-                        <div className="p-pt-2 p-pb-4">
+                        <div className="pt-2 pb-4">
                             <Button onClick={() => this.setState({ activeIndex: 0 })} className="p-button-text" label="Activate 1st" />
                             <Button onClick={() => this.setState({ activeIndex: 1 })} className="p-button-text" label="Activate 2nd" />
                             <Button onClick={() => this.setState({ activeIndex: 2 })} className="p-button-text" label="Activate 3rd" />

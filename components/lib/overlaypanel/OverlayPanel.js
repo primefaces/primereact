@@ -230,7 +230,7 @@ export class OverlayPanel extends Component {
 
     createStyle() {
         if (!this.styleElement) {
-            this.styleElement = DomHandler.createInlineStyle();
+            this.styleElement = DomHandler.createInlineStyle(PrimeReact.nonce);
 
             let innerHTML = '';
             for (let breakpoint in this.props.breakpoints) {

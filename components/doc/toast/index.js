@@ -69,17 +69,17 @@ export class ToastDemo extends Component {
 
     showConfirm() {
         this.toastBC.show({ severity: 'warn', sticky: true, content: (
-            <div className="p-flex p-flex-column" style={{flex: '1'}}>
-                <div className="p-text-center">
+            <div className="flex flex-column" style={{flex: '1'}}>
+                <div className="text-center">
                     <i className="pi pi-exclamation-triangle" style={{fontSize: '3rem'}}></i>
                     <h4>Are you sure?</h4>
                     <p>Confirm to proceed</p>
                 </div>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-6">
+                <div className="grid p-fluid">
+                    <div className="col-6">
                         <Button type="button" label="Yes" className="p-button-success" />
                     </div>
-                    <div className="p-col-6">
+                    <div className="col-6">
                         <Button type="button" label="No" className="p-button-secondary" />
                     </div>
                 </div>
@@ -116,7 +116,7 @@ export class ToastDemo extends Component {
                     <Button label="Error" className="p-button-danger" onClick={this.showError} />
 
                     <h5>Positions</h5>
-                    <Button label="Top Left" className="p-mr-2" onClick={this.showTopLeft} />
+                    <Button label="Top Left" className="mr-2" onClick={this.showTopLeft} />
                     <Button label="Bottom Left" className="p-button-warning" onClick={this.showBottomLeft} />
                     <Button label="Bottom Right" className="p-button-success" onClick={this.showBottomRight} />
 
@@ -185,17 +185,17 @@ const ToastDemo = () => {
 
     const showConfirm = () => {
         toastBC.current.show({ severity: 'warn', sticky: true, content: (
-            <div className="p-flex p-flex-column" style={{flex: '1'}}>
-                <div className="p-text-center">
+            <div className="flex flex-column" style={{flex: '1'}}>
+                <div className="text-center">
                     <i className="pi pi-exclamation-triangle" style={{fontSize: '3rem'}}></i>
                     <h4>Are you sure?</h4>
                     <p>Confirm to proceed</p>
                 </div>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-6">
+                <div className="grid p-fluid">
+                    <div className="col-6">
                         <Button type="button" label="Yes" className="p-button-success" />
                     </div>
-                    <div className="p-col-6">
+                    <div className="col-6">
                         <Button type="button" label="No" className="p-button-secondary" />
                     </div>
                 </div>
@@ -231,7 +231,7 @@ const ToastDemo = () => {
                 <Button label="Error" className="p-button-danger" onClick={showError} />
 
                 <h5>Positions</h5>
-                <Button label="Top Left" className="p-mr-2" onClick={showTopLeft} />
+                <Button label="Top Left" className="mr-2" onClick={showTopLeft} />
                 <Button label="Bottom Left" className="p-button-warning" onClick={showBottomLeft} />
                 <Button label="Bottom Right" className="p-button-success" onClick={showBottomRight} />
 
@@ -299,17 +299,17 @@ const ToastDemo = () => {
 
     const showConfirm = () => {
         toastBC.current.show({ severity: 'warn', sticky: true, content: (
-            <div className="p-flex p-flex-column" style={{flex: '1'}}>
-                <div className="p-text-center">
+            <div className="flex flex-column" style={{flex: '1'}}>
+                <div className="text-center">
                     <i className="pi pi-exclamation-triangle" style={{fontSize: '3rem'}}></i>
                     <h4>Are you sure?</h4>
                     <p>Confirm to proceed</p>
                 </div>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-6">
+                <div className="grid p-fluid">
+                    <div className="col-6">
                         <Button type="button" label="Yes" className="p-button-success" />
                     </div>
-                    <div className="p-col-6">
+                    <div className="col-6">
                         <Button type="button" label="No" className="p-button-secondary" />
                     </div>
                 </div>
@@ -345,7 +345,7 @@ const ToastDemo = () => {
                 <Button label="Error" className="p-button-danger" onClick={showError} />
 
                 <h5>Positions</h5>
-                <Button label="Top Left" className="p-mr-2" onClick={showTopLeft} />
+                <Button label="Top Left" className="mr-2" onClick={showTopLeft} />
                 <Button label="Bottom Left" className="p-button-warning" onClick={showBottomLeft} />
                 <Button label="Bottom Right" className="p-button-success" onClick={showBottomRight} />
 
@@ -417,17 +417,17 @@ const ToastDemo = () => {
 
     const showConfirm = () => {
         toastBC.current.show({ severity: 'warn', sticky: true, content: (
-            <div className="p-flex p-flex-column" style={{flex: '1'}}>
-                <div className="p-text-center">
+            <div className="flex flex-column" style={{flex: '1'}}>
+                <div className="text-center">
                     <i className="pi pi-exclamation-triangle" style={{fontSize: '3rem'}}></i>
                     <h4>Are you sure?</h4>
                     <p>Confirm to proceed</p>
                 </div>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-6">
+                <div className="grid p-fluid">
+                    <div className="col-6">
                         <Button type="button" label="Yes" className="p-button-success" />
                     </div>
-                    <div className="p-col-6">
+                    <div className="col-6">
                         <Button type="button" label="No" className="p-button-secondary" />
                     </div>
                 </div>
@@ -463,7 +463,7 @@ const ToastDemo = () => {
                 <Button label="Error" className="p-button-danger" onClick={showError} />
 
                 <h5>Positions</h5>
-                <Button label="Top Left" className="p-mr-2" onClick={showTopLeft} />
+                <Button label="Top Left" className="mr-2" onClick={showTopLeft} />
                 <Button label="Bottom Left" className="p-button-warning" onClick={showBottomLeft} />
                 <Button label="Bottom Right" className="p-button-success" onClick={showBottomRight} />
 
@@ -770,6 +770,12 @@ toast.current.show({life: 5000, severity: 'error', summary: 'Error Message', det
                                         <td>object</td>
                                         <td>null</td>
                                         <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>appendTo</td>
+                                        <td>DOM element | string</td>
+                                        <td>self</td>
+                                        <td>DOM element instance where the component should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
                                     </tr>
                                 </tbody>
                             </table>

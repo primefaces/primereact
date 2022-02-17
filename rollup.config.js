@@ -9,9 +9,6 @@ import { terser } from 'rollup-plugin-terser';
 import fs from 'fs-extra';
 import path from 'path';
 
-const INPUT_DIR = 'src/components/';
-const OUTPUT_DIR = 'dist/';
-
 let entries = [];
 
 let core = {};
@@ -80,7 +77,7 @@ const RESOLVE_PLUGIN_OPTIONS = {
 };
 
 const COMMONJS_PLUGIN_OPTIONS = {
-    exclude: 'src/**',
+    exclude: process.env.INPUT_DIR + '**',
     sourceMap: false
 };
 
@@ -211,14 +208,14 @@ function addCore() {
 }
 
 function addComponent() {
-    fs.readdirSync(path.resolve(__dirname, INPUT_DIR), { withFileTypes: true })
+    fs.readdirSync(path.resolve(__dirname, process.env.INPUT_DIR), { withFileTypes: true })
         .filter(dir => dir.isDirectory())
         .forEach(({ name: folderName }) => {
-            fs.readdirSync(path.resolve(__dirname, INPUT_DIR + folderName)).forEach(file => {
+            fs.readdirSync(path.resolve(__dirname, process.env.INPUT_DIR + folderName)).forEach(file => {
                 let name = file.split(/(.js)$/)[0].toLowerCase();
                 if (name === folderName) {
-                    const input = INPUT_DIR + folderName + '/' + file;
-                    const output = OUTPUT_DIR + folderName + '/' + name;
+                    const input = process.env.INPUT_DIR + folderName + '/' + file;
+                    const output = process.env.OUTPUT_DIR + folderName + '/' + name;
 
                     addEntry('primereact.' + folderName, input, output, true);
                 }
@@ -227,8 +224,8 @@ function addComponent() {
 }
 
 function addPrimeReact() {
-    const input = INPUT_DIR + 'primereact.all.js';
-    const output = OUTPUT_DIR + 'primereact.all';
+    const input = process.env.INPUT_DIR + 'primereact.all.js';
+    const output = process.env.OUTPUT_DIR + 'primereact.all';
 
     addEntry('primereact', input, output, false);
 }

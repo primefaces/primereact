@@ -53,6 +53,7 @@ export class DataTable extends Component {
         metaKeySelection: true,
         selectOnEdit: true,
         selectionPageOnly: false,
+        selectionAutoFocus: true,
         showSelectAll: true,
         selectAll: false,
         onSelectAllChange: null,
@@ -104,6 +105,7 @@ export class DataTable extends Component {
         globalFilterFields: null,
         showSelectionElement: null,
         showRowReorderElement: null,
+        isDataSelectable: null,
         onColumnResizeEnd: null,
         onColumnResizerClick: null,
         onColumnResizerDoubleClick: null,
@@ -180,6 +182,7 @@ export class DataTable extends Component {
         metaKeySelection: PropTypes.bool,
         selectOnEdit: PropTypes.bool,
         selectionPageOnly: PropTypes.bool,
+        selectionAutoFocus: PropTypes.bool,
         showSelectAll: PropTypes.bool,
         selectAll: PropTypes.bool,
         onSelectAllChange: PropTypes.func,
@@ -231,6 +234,7 @@ export class DataTable extends Component {
         onRowEditComplete: PropTypes.func,
         showSelectionElement: PropTypes.func,
         showRowReorderElement: PropTypes.func,
+        isDataSelectable: PropTypes.func,
         onColumnResizeEnd: PropTypes.func,
         onColumnResizerClick: PropTypes.func,
         onColumnResizerDoubleClick: PropTypes.func,
@@ -271,7 +275,8 @@ export class DataTable extends Component {
             d_rows: props.rows,
             columnOrder: [],
             groupRowsSortMeta: null,
-            editingMeta: {}
+            editingMeta: {},
+            attributeSelector: null
         };
 
         if (!this.props.onPage) {
@@ -289,8 +294,6 @@ export class DataTable extends Component {
         if (!this.props.onFilter) {
             this.state.filters = props.filters;
         }
-
-        this.attributeSelector = UniqueComponentId();
 
         // header
         this.onSortChange = this.onSortChange.bind(this);
@@ -598,26 +601,22 @@ export class DataTable extends Component {
                 this.el.style.width = this.tableWidthState;
             }
 
-            this.createStyleElement();
+            if (ObjectUtils.isNotEmpty(widths)) {
+                this.createStyleElement();
 
-            if (this.props.scrollable && widths && widths.length > 0) {
                 let innerHTML = '';
                 widths.forEach((width, index) => {
+                    let style = this.props.scrollable ? `flex: 1 1 ${width}px !important` : `width: ${width}px !important`;
                     innerHTML += `
-                        .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}) {
-                            flex: 0 0 ${width}px;
-                        }
-
-                        .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}) {
-                            flex: 0 0 ${width}px;
+                        .p-datatable[${this.state.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
+                        .p-datatable[${this.state.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
+                        .p-datatable[${this.state.attributeSelector}] .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
+                            ${style}
                         }
                     `
                 });
 
                 this.styleElement.innerHTML = innerHTML;
-            }
-            else {
-                DomHandler.find(this.table, '.p-datatable-thead > tr > th').forEach((header, index) => header.style.width = widths[index] + 'px');
             }
         }
     }
@@ -640,6 +639,23 @@ export class DataTable extends Component {
         return this.props.sortMode === 'single' ? this.props.sortField : (this.state.groupRowsSortMeta ? this.state.groupRowsSortMeta.field : null);
     }
 
+    getSelectableData(val) {
+        if (this.props.showSelectionElement || this.props.isDataSelectable) {
+            return val.filter((data, index) => {
+                let isSelectable = true;
+
+                if (this.props.showSelectionElement)
+                    isSelectable = this.props.showSelectionElement({ rowIndex: index, props: this.props });
+                if (this.props.isDataSelectable && isSelectable)
+                    isSelectable = this.props.isDataSelectable({ data, index });
+
+                return isSelectable;
+            });
+        }
+
+        return val;
+    }
+
     allRowsSelected(processedData) {
         if (this.props.onSelectAllChange) {
             return this.props.selectAll;
@@ -647,7 +663,7 @@ export class DataTable extends Component {
         else {
             const data = this.props.selectionPageOnly ? this.dataToRender(processedData) : processedData;
             const val = this.props.frozenValue ? [...this.props.frozenValue, ...data] : data;
-            const selectableVal = this.props.showSelectionElement ? val.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : val;
+            const selectableVal = this.getSelectableData(val);
 
             return selectableVal && this.props.selection && selectableVal.every(sv => this.props.selection.some(s => this.isEquals(s, sv)));
         }
@@ -771,15 +787,16 @@ export class DataTable extends Component {
         let innerHTML = '';
         widths.forEach((width, index) => {
             let colWidth = index === colIndex ? newColumnWidth : (nextColumnWidth && index === colIndex + 1) ? nextColumnWidth : width;
-            let style = this.props.scrollable ? `flex: 0 0 ${colWidth}px !important` : `width: ${colWidth}px !important`;
+            let style = this.props.scrollable ? `flex: 1 1 ${colWidth}px !important` : `width: ${colWidth}px !important`;
             innerHTML += `
-                .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
-                .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
-                .p-datatable[${this.attributeSelector}] .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
+                .p-datatable[${this.state.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
+                .p-datatable[${this.state.attributeSelector}] .p-datatable-tbody > tr > td:nth-child(${index + 1}),
+                .p-datatable[${this.state.attributeSelector}] .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
                     ${style}
                 }
             `
         });
+
         this.styleElement.innerHTML = innerHTML;
     }
 
@@ -838,7 +855,7 @@ export class DataTable extends Component {
 
             if (checked) {
                 selection = this.props.frozenValue ? [...selection, ...this.props.frozenValue, ...data] : [...selection, ...data];
-                selection = this.props.showSelectionElement ? selection.filter((data, index) => this.props.showSelectionElement(data, { rowIndex: index, props: this.props })) : selection;
+                selection = this.getSelectableData(selection);
 
                 this.props.onAllRowsSelect && this.props.onAllRowsSelect({ originalEvent, data: selection, type: 'all' });
             }
@@ -970,38 +987,38 @@ export class DataTable extends Component {
     }
 
     createStyleElement() {
-        this.styleElement = DomHandler.createInlineStyle();
+        this.styleElement = DomHandler.createInlineStyle(PrimeReact.nonce);
     }
 
     createResponsiveStyle() {
         if (!this.responsiveStyleElement) {
-            this.responsiveStyleElement = DomHandler.createInlineStyle();
+            this.responsiveStyleElement = DomHandler.createInlineStyle(PrimeReact.nonce);
 
             let innerHTML = `
 @media screen and (max-width: ${this.props.breakpoint}) {
-    .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th,
-    .p-datatable[${this.attributeSelector}] .p-datatable-tfoot > tr > td {
+    .p-datatable[${this.state.attributeSelector}] .p-datatable-thead > tr > th,
+    .p-datatable[${this.state.attributeSelector}] .p-datatable-tfoot > tr > td {
         display: none !important;
     }
 
-    .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td {
+    .p-datatable[${this.state.attributeSelector}] .p-datatable-tbody > tr > td {
         display: flex;
         width: 100% !important;
         align-items: center;
         justify-content: space-between;
     }
 
-    .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td:not(:last-child) {
+    .p-datatable[${this.state.attributeSelector}] .p-datatable-tbody > tr > td:not(:last-child) {
         border: 0 none;
     }
 
-    .p-datatable[${this.attributeSelector}].p-datatable-gridlines .p-datatable-tbody > tr > td:last-child {
+    .p-datatable[${this.state.attributeSelector}].p-datatable-gridlines .p-datatable-tbody > tr > td:last-child {
         border-top: 0;
         border-right: 0;
         border-left: 0;
     }
 
-    .p-datatable[${this.attributeSelector}] .p-datatable-tbody > tr > td > .p-column-title {
+    .p-datatable[${this.state.attributeSelector}] .p-datatable-tbody > tr > td > .p-column-title {
         display: block;
     }
 }
@@ -1101,20 +1118,7 @@ export class DataTable extends Component {
     }
 
     compareValuesOnSort(value1, value2) {
-        let result = null;
-
-        if (value1 == null && value2 != null)
-            result = -1;
-        else if (value1 != null && value2 == null)
-            result = 1;
-        else if (value1 == null && value2 == null)
-            result = 0;
-        else if (typeof value1 === 'string' && typeof value2 === 'string')
-            result = value1.localeCompare(value2, undefined, { numeric: true });
-        else
-            result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
-
-        return result;
+        return ObjectUtils.sort(value1, value2, 1, PrimeReact.locale);
     }
 
     addSortMeta(meta, multiSortMeta) {
@@ -1434,7 +1438,8 @@ export class DataTable extends Component {
         data.forEach((record) => {
             csv += '\n';
             columns.forEach((column, i) => {
-                const { field, exportable } = column.props;
+                const { field: columnField, exportField, exportable } = column.props;
+                const field = exportField || columnField;
 
                 if (exportable && field) {
                     let cellData = ObjectUtils.resolveFieldData(record, field);
@@ -1511,11 +1516,13 @@ export class DataTable extends Component {
     }
 
     componentDidMount() {
-        this.el.setAttribute(this.attributeSelector, '');
+        this.setState({ attributeSelector: UniqueComponentId() }, () => {
+            this.el.setAttribute(this.state.attributeSelector, '');
 
-        if (this.props.responsiveLayout === 'stack' && !this.props.scrollable) {
-            this.createResponsiveStyle();
-        }
+            if (this.props.responsiveLayout === 'stack' && !this.props.scrollable) {
+                this.createResponsiveStyle();
+            }
+        });
 
         if (this.isStateful()) {
             this.setState(this.restoreState(this.state));
@@ -1614,7 +1621,7 @@ export class DataTable extends Component {
     }
 
     renderTableBody(options, selectionModeInColumn, empty, isVirtualScrollerDisabled) {
-        const tableSelector = this.attributeSelector;
+        const tableSelector = this.state.attributeSelector;
         const first = this.getFirst();
         const editingMeta = this.state.editingMeta;
         const { rows, columns, contentRef, className } = options;
@@ -1634,7 +1641,7 @@ export class DataTable extends Component {
                 rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowExpansionTemplate={this.props.rowExpansionTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                 onRowEditChange={this.props.onRowEditChange} compareSelectionBy={this.props.compareSelectionBy} selectOnEdit={this.props.selectOnEdit}
                 onRowEditInit={this.props.onRowEditInit} rowEditValidator={this.props.rowEditValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
-                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout}
+                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} selectionAutoFocus={this.props.selectionAutoFocus} isDataSelectable={this.props.isDataSelectable}
                 showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement}
                 expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon} rowClassName={this.props.rowClassName}
                 isVirtualScrollerDisabled={true} />
@@ -1654,7 +1661,7 @@ export class DataTable extends Component {
                 rowGroupHeaderTemplate={this.props.rowGroupHeaderTemplate} rowExpansionTemplate={this.props.rowExpansionTemplate} rowGroupFooterTemplate={this.props.rowGroupFooterTemplate}
                 onRowEditChange={this.props.onRowEditChange} compareSelectionBy={this.props.compareSelectionBy} selectOnEdit={this.props.selectOnEdit}
                 onRowEditInit={this.props.onRowEditInit} rowEditValidator={this.props.rowEditValidator} onRowEditSave={this.props.onRowEditSave} onRowEditComplete={this.props.onRowEditComplete} onRowEditCancel={this.props.onRowEditCancel}
-                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout}
+                cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} selectionAutoFocus={this.props.selectionAutoFocus} isDataSelectable={this.props.isDataSelectable}
                 showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement}
                 expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon} rowClassName={this.props.rowClassName}
                 virtualScrollerContentRef={contentRef} virtualScrollerOptions={options} isVirtualScrollerDisabled={isVirtualScrollerDisabled} />
@@ -1683,7 +1690,7 @@ export class DataTable extends Component {
         const virtualScrollerOptions = this.props.virtualScrollerOptions || {};
 
         return (
-            <div className="p-datatable-wrapper" style={{ maxHeight: isVirtualScrollerDisabled ? this.props.scrollHeight : '' }}>
+            <div className="p-datatable-wrapper" style={{ maxHeight: isVirtualScrollerDisabled ? this.props.scrollHeight : null }}>
                 <VirtualScroller {...virtualScrollerOptions} items={processedData} columns={columns} scrollHeight={this.props.scrollHeight}
                     disabled={isVirtualScrollerDisabled} loaderDisabled showSpacer={false}
                     contentTemplate={(options) => {
@@ -1772,8 +1779,11 @@ export class DataTable extends Component {
         const totalRecords = this.getTotalRecords(processedData);
         const empty = ObjectUtils.isEmpty(processedData);
         const selectionModeInColumn = this.getSelectionModeInColumn(columns);
+        const selectable = this.props.selectionMode || selectionModeInColumn;
         const className = classNames('p-datatable p-component', {
-            'p-datatable-hoverable-rows': this.props.rowHover || this.props.selectionMode || selectionModeInColumn,
+            'p-datatable-hoverable-rows': this.props.rowHover,
+            'p-datatable-selectable': selectable && !this.props.cellSelection,
+            'p-datatable-selectable-cell': selectable && this.props.cellSelection,
             'p-datatable-auto-layout': this.props.autoLayout,
             'p-datatable-resizable': this.props.resizableColumns,
             'p-datatable-resizable-fit': this.props.resizableColumns && this.props.columnResizeMode === 'fit',

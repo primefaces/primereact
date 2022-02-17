@@ -28,7 +28,7 @@ export class RippleDemo extends Component {
     render() {
         return (
             <div className="ripple-demo">
-                <div className="card-container p-d-flex">
+                <div className="card-container flex">
                     <div className="card primary-box p-ripple">
                         Default
                         <Ripple />
@@ -65,7 +65,7 @@ const RippleDemo = () => {
 
     return (
         <div className="ripple-demo">
-            <div className="card-container p-d-flex">
+            <div className="card-container flex">
                 <div className="card primary-box p-ripple">
                     Default
                     <Ripple />
@@ -101,7 +101,7 @@ const RippleDemo = () => {
 
     return (
         <div className="ripple-demo">
-            <div className="card-container p-d-flex">
+            <div className="card-container flex">
                 <div className="card primary-box p-ripple">
                     Default
                     <Ripple />
@@ -140,7 +140,7 @@ const RippleDemo = () => {
 
     return (
         <div className="ripple-demo">
-            <div className="card-container p-d-flex">
+            <div className="card-container flex">
                 <div className="card primary-box p-ripple">
                     Default
                     <Ripple />
@@ -237,7 +237,7 @@ PrimeReact.ripple = true;
 `}
 </CodeHighlight>
 
-                        <p><span className="p-text-bold">Note</span>: That would be it to enable ripple on PrimeReact components, next section describes how to use it with your own components and standard elements.</p>
+                        <p><span className="font-bold">Note</span>: That would be it to enable ripple on PrimeReact components, next section describes how to use it with your own components and standard elements.</p>
 
                         <h5>Usage</h5>
 				        <p>Ripple is a component that needs to be imported and activated using <i>PrimeReact.ripple = true</i></p>

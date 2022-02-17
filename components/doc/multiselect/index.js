@@ -150,7 +150,7 @@ export class MultiSelectDemo extends Component {
         const selectedItems = this.state.selectedCountries;
         const length = selectedItems ? selectedItems.length : 0;
         return (
-            <div className="p-py-2 p-px-3">
+            <div className="py-2 px-3">
                 <b>{length}</b> item{length > 1 ? 's' : ''} selected.
             </div>
         );
@@ -158,7 +158,7 @@ export class MultiSelectDemo extends Component {
 
     groupedItemTemplate(option) {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={option.label} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>
@@ -189,7 +189,7 @@ export class MultiSelectDemo extends Component {
                     <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                     <MultiSelect value={this.state.selectedItems2} options={this.state.lazyItems} onChange={(e) => this.setState({ selectedItems2: e.value })} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 43, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
                         return (
-                            <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
+                            <div className="flex align-items-center p-2" style={{ height: '34px' }}>
                                 <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
                             </div>
                         )}
@@ -326,7 +326,7 @@ const MultiSelectDemo = () => {
         const selectedItems = selectedCountries;
         const length = selectedItems ? selectedItems.length : 0;
         return (
-            <div className="p-py-2 p-px-3">
+            <div className="py-2 px-3">
                 <b>{length}</b> item{length > 1 ? 's' : ''} selected.
             </div>
         );
@@ -334,7 +334,7 @@ const MultiSelectDemo = () => {
 
     const groupedItemTemplate = (option) => {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={option.label} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>
@@ -364,7 +364,7 @@ const MultiSelectDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '34px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
                         </div>
                     )}
@@ -500,7 +500,7 @@ const MultiSelectDemo = () => {
         const selectedItems = selectedCountries;
         const length = selectedItems ? selectedItems.length : 0;
         return (
-            <div className="p-py-2 p-px-3">
+            <div className="py-2 px-3">
                 <b>{length}</b> item{length > 1 ? 's' : ''} selected.
             </div>
         );
@@ -508,7 +508,7 @@ const MultiSelectDemo = () => {
 
     const groupedItemTemplate = (option) => {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={option.label} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>
@@ -538,7 +538,7 @@ const MultiSelectDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '34px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
                         </div>
                     )}
@@ -679,7 +679,7 @@ const MultiSelectDemo = () => {
         const selectedItems = selectedCountries;
         const length = selectedItems ? selectedItems.length : 0;
         return (
-            <div className="p-py-2 p-px-3">
+            <div className="py-2 px-3">
                 <b>{length}</b> item{length > 1 ? 's' : ''} selected.
             </div>
         );
@@ -687,7 +687,7 @@ const MultiSelectDemo = () => {
 
     const groupedItemTemplate = (option) => {
         return (
-            <div className="p-d-flex p-ai-center country-item">
+            <div className="flex align-items-center country-item">
                 <img alt={option.label} src="images/flag/flag_placeholder.png" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={\`flag flag-\${option.code.toLowerCase()}\`} />
                 <div>{option.label}</div>
             </div>
@@ -717,7 +717,7 @@ const MultiSelectDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="p-d-flex p-ai-center p-p-2" style={{ height: '34px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '34px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
                         </div>
                     )}

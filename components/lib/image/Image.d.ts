@@ -3,6 +3,7 @@ import * as React from 'react';
 export interface ImageProps {
     preview?: boolean;
     className?: string;
+    downloadable?: boolean;
     style?: string;
     imageStyle?: string;
     imageClassName?: string;

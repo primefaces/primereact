@@ -19,10 +19,7 @@ export class RowRadioButton extends Component {
 
     onClick(event) {
         if (!this.props.disabled) {
-            this.props.onChange({
-                originalEvent: event,
-                data: this.props.value
-            });
+            this.props.onChange(event);
 
             this.input.focus();
         }

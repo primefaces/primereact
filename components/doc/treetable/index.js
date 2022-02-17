@@ -2434,6 +2434,12 @@ export const TreeTableResponsiveDemo = () => {
                                         <td>Text to display when there is no data.</td>
                                     </tr>
                                     <tr>
+                                        <td>rowHover</td>
+                                        <td>boolean</td>
+                                        <td>false</td>
+                                        <td>When enabled, background of the rows change on hover.</td>
+                                    </tr>
+                                    <tr>
                                         <td>showGridlines</td>
                                         <td>boolean</td>
                                         <td>false</td>
