@@ -1531,11 +1531,11 @@ export class DataTable extends Component {
     componentDidMount() {
         this.setState({ attributeSelector: UniqueComponentId() }, () => {
             this.el.setAttribute(this.state.attributeSelector, '');
-        });
 
-        if (this.props.responsiveLayout === 'stack' && !this.props.scrollable) {
-            this.createResponsiveStyle();
-        }
+            if (this.props.responsiveLayout === 'stack' && !this.props.scrollable) {
+                this.createResponsiveStyle();
+            }
+        });
 
         if (this.isStateful()) {
             this.setState(this.restoreState(this.state));
