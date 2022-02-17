@@ -439,6 +439,12 @@ export const SplitButtonDemo = () => {
                                         <td>ClassName of the component.</td>
                                     </tr>
                                     <tr>
+                                        <td>buttonClassName</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>ClassName of the button.</td>
+                                    </tr>
+                                    <tr>
                                         <td>menuStyle</td>
                                         <td>string</td>
                                         <td>null</td>
@@ -449,6 +455,12 @@ export const SplitButtonDemo = () => {
                                         <td>string</td>
                                         <td>null</td>
                                         <td>ClassName class of the overlay menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>menuButtonClassName</td>
+                                        <td>string</td>
+                                        <td>null</td>
+                                        <td>ClassName of the menu dropdown button.</td>
                                     </tr>
                                     <tr>
                                         <td>tabIndex</td>
