@@ -107,7 +107,7 @@ export class TabMenu extends Component {
 
         if (item.template) {
             const defaultContentOptions = {
-                onClick: (event) => this.itemClick(event, item),
+                onClick: (event) => this.itemClick(event, item, index),
                 className: 'p-menuitem-link',
                 labelClassName: 'p-menuitem-text',
                 iconClassName,
