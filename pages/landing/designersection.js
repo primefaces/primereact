@@ -30,7 +30,7 @@ export default function DesignerSection(props) {
         { name: 'Paris', code: 'PRS' }
     ];
     const [range, setRange] = useState([20,80]);
-    const [optionValue, setOptionValue] = useState(1);
+    const [checkboxValue, setCheckboxValue] = useState([1]);
     const editor = useRef(null);
 
     const changeTheme = (color, darker) => {
@@ -48,6 +48,16 @@ export default function DesignerSection(props) {
         'demo-size-small': size === 'small',
         'demo-size-large': size === 'large'
     });
+
+    const onCheckboxChange = (e) => {
+        let _checkboxValue = [...checkboxValue];
+        if (e.checked)
+            _checkboxValue.push(e.value);
+        else
+            _checkboxValue.splice(_checkboxValue.indexOf(e.value), 1);
+    
+        setCheckboxValue(_checkboxValue);
+    }
 
     const designerLogo = props.dark ? 'designer-light.svg' : 'designer-dark.svg';
 
@@ -146,11 +156,11 @@ export default function DesignerSection(props) {
                                 <span className="font-semibold mb-2 block mb-3 mt-5  p-component">Checkboxes</span>
                                 <div className="flex flex-column xl:flex-row xl:align-items-center">
                                     <div className="flex align-items-center">
-                                        <Checkbox inputId="cb1" value={1} name="cbvalue" onChange={(e) => setOptionValue(1)} checked={optionValue === 1} />
+                                        <Checkbox inputId="cb1" value={1} name="cbvalue" onChange={onCheckboxChange} checked={checkboxValue.includes(1)} />
                                         <label htmlFor="cb1" className="ml-2 font-medium p-component white-space-nowrap">Option 1</label>
                                     </div>
                                     <div className="flex align-items-center mt-3 xl:mt-0 xl:ml-4">
-                                        <Checkbox inputId="cb2" value={2} name="cbvalue" onChange={(e) => setOptionValue(2)} checked={optionValue === 2} />
+                                        <Checkbox inputId="cb2" value={2} name="cbvalue" onChange={onCheckboxChange} checked={checkboxValue.includes(2)} />
                                         <label htmlFor="cb2" className="ml-2 font-medium p-component white-space-nowrap">Option 2</label>
                                     </div>
                                 </div>
