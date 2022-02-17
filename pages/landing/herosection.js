@@ -21,7 +21,7 @@ export default function HeroSection() {
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/templates-icon.svg`} alt="primereact templates" />
                                 <div className="name">
-                                    <b>Premium Templates</b>
+                                    <b>Templates</b>
                                     <span>Spectacular Designs</span>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@ export default function HeroSection() {
                             <div className="flex flex-column align-items-center">
                                 <img src={`${contextPath}/images/landing-new/core-icon.svg`} alt="primereact core" />
                                 <div className="name">
-                                    <b>Open Source Core</b>
+                                    <b>Open Source</b>
                                     <span>80+ UI Components</span>
                                 </div>
                             </div>

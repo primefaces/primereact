@@ -4,9 +4,10 @@
 
     .landing-intro {
         background: var(--home-intro-bg);
-        min-height: 100vh;
         display: flex;
         flex-direction: column;
+        padding-top: 5rem;
+        min-height: 100vh;
     }
 
     .box {
