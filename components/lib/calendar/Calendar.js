@@ -697,7 +697,7 @@ export class Calendar extends Component {
     onClearButtonClick(event) {
         this.updateModel(event, null);
         this.updateInputfield(null);
-        this.hideOverlay(null);
+        this.hideOverlay();
 
         if (this.props.onClearButtonClick) {
             this.props.onClearButtonClick(event);
