@@ -205,7 +205,7 @@ export class DataView extends Component {
             value.sort((data1, data2) => {
                 let value1 = ObjectUtils.resolveFieldData(data1, this.props.sortField);
                 let value2 = ObjectUtils.resolveFieldData(data2, this.props.sortField);
-                return ObjectUtils.sort(value1, value2, this.props.sortOrder);
+                return ObjectUtils.sort(value1, value2, this.props.sortOrder, PrimeReact.locale);
             });
 
             return value;

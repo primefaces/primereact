@@ -1,5 +1,3 @@
-import PrimeReact from '../api/PrimeReact';
-
 export default class DomHandler {
 
     static innerWidth(el) {
@@ -24,13 +22,12 @@ export default class DomHandler {
         return 0;
     }
 
-    static getLanguage() {
-        return PrimeReact.locale 
-          || navigator.userLanguage
+    static getBrowserLanguage() {
+        return navigator.userLanguage
           || (navigator.languages && navigator.languages.length && navigator.languages[0])
-          || navigator.language 
-          || navigator.browserLanguage 
-          || navigator.systemLanguage 
+          || navigator.language
+          || navigator.browserLanguage
+          || navigator.systemLanguage
           || 'en';
     }
 

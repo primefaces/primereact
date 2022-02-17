@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FilterService } from '../api/Api';
+import PrimeReact, { FilterService } from '../api/Api';
 import { ObjectUtils, DomHandler, classNames } from '../utils/Utils';
 import { Paginator } from '../paginator/Paginator';
 import { TreeTableHeader } from './TreeTableHeader';
@@ -335,7 +335,7 @@ export class TreeTable extends Component {
                 const sortField = this.getSortField();
                 const value1 = ObjectUtils.resolveFieldData(node1.data, sortField);
                 const value2 = ObjectUtils.resolveFieldData(node2.data, sortField);
-                return ObjectUtils.sort(value1, value2, this.getSortOrder());
+                return ObjectUtils.sort(value1, value2, this.getSortOrder(), PrimeReact.locale);
             });
 
             for (let i = 0; i < value.length; i++) {
@@ -389,7 +389,7 @@ export class TreeTable extends Component {
             }
             else {
                 if ((typeof value1 === 'string' || value1 instanceof String) && (typeof value2 === 'string' || value2 instanceof String))
-                    return (multiSortMeta[index].order * value1.localeCompare(value2, DomHandler.getLanguage(), { numeric: true }));
+                    return (multiSortMeta[index].order * value1.localeCompare(value2, PrimeReact.locale, { numeric: true }));
                 else
                     result = (value1 < value2) ? -1 : 1;
             }

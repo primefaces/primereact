@@ -1,5 +1,3 @@
-import DomHandler from './DomHandler';
-
 export default class ObjectUtils {
 
     static equals(obj1, obj2, field) {
@@ -180,17 +178,15 @@ export default class ObjectUtils {
 
     /**
      * Compare value1 and value2 ascending by default (1) or pass in order as -1 for descending.
-     *  
+     *
      * @param {any} value1 the first value
      * @param {any} value2 the second value
      * @param {number | undefined} order by default ascending (1) set to descending (-1)
      * @param {string | undefined} locale the locale to use (default to browser locale if null)
      * @returns either 0, 1 or -1 for comparing the two values
      */
-    static sort(value1, value2, order, locale) {
+    static sort(value1, value2, order = 1, locale) {
         let result = null;
-        order = Object.is(order, undefined) ? 1 :  order;
-        locale = locale || DomHandler.getLanguage();
 
         if (value1 == null && value2 != null)
             result = -1;

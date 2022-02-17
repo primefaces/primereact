@@ -387,7 +387,7 @@ export class Carousel extends Component {
             this.responsiveOptions.sort((data1, data2) => {
                 const value1 = data1.breakpoint;
                 const value2 = data2.breakpoint;
-                return ObjectUtils.sort(value1, value2, -1);
+                return ObjectUtils.sort(value1, value2, -1, PrimeReact.locale);
             });
 
             for (let i = 0; i < this.responsiveOptions.length; i++) {

@@ -12,6 +12,7 @@ export declare class ConnectedOverlayScrollHandler {
 export declare class DomHandler {
     static innerWidth(el: HTMLElement): number;
     static width(el: HTMLElement): number;
+    static getBrowserLanguage(): string;
     static getWindowScrollTop(): number;
     static getWindowScrollLeft(): number;
     static getOuterWidth(el: HTMLElement, margin: boolean): number;

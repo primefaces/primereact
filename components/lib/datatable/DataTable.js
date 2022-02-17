@@ -1118,7 +1118,7 @@ export class DataTable extends Component {
     }
 
     compareValuesOnSort(value1, value2) {
-        return ObjectUtils.sort(value1, value2, 1);
+        return ObjectUtils.sort(value1, value2, 1, PrimeReact.locale);
     }
 
     addSortMeta(meta, multiSortMeta) {
