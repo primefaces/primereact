@@ -342,12 +342,6 @@ export class TableBody extends Component {
 
     selectRange(event) {
         let rangeStart, rangeEnd;
-        let isLazyAndPaginator = this.props.lazy && this.props.paginator;
-
-        if (isLazyAndPaginator) {
-            this.anchorRowIndex += this.anchorRowFirst;
-            this.rangeRowIndex += this.props.first;
-        }
 
         if (this.rangeRowIndex > this.anchorRowIndex) {
             rangeStart = this.anchorRowIndex;
@@ -361,7 +355,7 @@ export class TableBody extends Component {
             rangeStart = rangeEnd = this.rangeRowIndex;
         }
 
-        if (isLazyAndPaginator) {
+        if (this.props.paginator) {
             rangeStart = Math.max(rangeStart - this.props.first, 0);
             rangeEnd -= this.props.first;
         }
