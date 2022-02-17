@@ -33,7 +33,7 @@ export class TabMenu extends Component {
         }
     }
 
-    itemClick(event, item, index) {
+    itemClick(event, item, index) {
         if (item.disabled) {
             event.preventDefault();
             return;
