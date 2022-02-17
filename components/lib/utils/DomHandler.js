@@ -1,3 +1,5 @@
+import PrimeReact from '../api/PrimeReact';
+
 export default class DomHandler {
 
     static innerWidth(el) {
@@ -20,6 +22,16 @@ export default class DomHandler {
             return width;
         }
         return 0;
+    }
+
+    static getLanguage() {
+        return PrimeReact.locale 
+          || navigator.userLanguage
+          || (navigator.languages && navigator.languages.length && navigator.languages[0])
+          || navigator.language 
+          || navigator.browserLanguage 
+          || navigator.systemLanguage 
+          || 'en';
     }
 
     static getWindowScrollTop() {

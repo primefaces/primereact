@@ -335,20 +335,7 @@ export class TreeTable extends Component {
                 const sortField = this.getSortField();
                 const value1 = ObjectUtils.resolveFieldData(node1.data, sortField);
                 const value2 = ObjectUtils.resolveFieldData(node2.data, sortField);
-                let result = null;
-
-                if (value1 == null && value2 != null)
-                    result = -1;
-                else if (value1 != null && value2 == null)
-                    result = 1;
-                else if (value1 == null && value2 == null)
-                    result = 0;
-                else if (typeof value1 === 'string' && typeof value2 === 'string')
-                    result = value1.localeCompare(value2, undefined, { numeric: true });
-                else
-                    result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
-
-                return (this.getSortOrder() * result);
+                return ObjectUtils.sort(value1, value2, this.getSortOrder());
             });
 
             for (let i = 0; i < value.length; i++) {
@@ -402,7 +389,7 @@ export class TreeTable extends Component {
             }
             else {
                 if ((typeof value1 === 'string' || value1 instanceof String) && (typeof value2 === 'string' || value2 instanceof String))
-                    return (multiSortMeta[index].order * value1.localeCompare(value2, undefined, { numeric: true }));
+                    return (multiSortMeta[index].order * value1.localeCompare(value2, DomHandler.getLanguage(), { numeric: true }));
                 else
                     result = (value1 < value2) ? -1 : 1;
             }
