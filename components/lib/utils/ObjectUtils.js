@@ -175,4 +175,30 @@ export default class ObjectUtils {
     static isNotEmpty(value) {
         return !this.isEmpty(value);
     }
+
+    /**
+     * Compare value1 and value2 ascending by default (1) or pass in order as -1 for descending.
+     *
+     * @param {any} value1 the first value
+     * @param {any} value2 the second value
+     * @param {number | undefined} order by default ascending (1) set to descending (-1)
+     * @param {string | undefined} locale the locale to use (default to browser locale if null)
+     * @returns either 0, 1 or -1 for comparing the two values
+     */
+    static sort(value1, value2, order = 1, locale) {
+        let result = null;
+
+        if (value1 == null && value2 != null)
+            result = -1;
+        else if (value1 != null && value2 == null)
+            result = 1;
+        else if (value1 == null && value2 == null)
+            result = 0;
+        else if (typeof value1 === 'string' && typeof value2 === 'string')
+            result = value1.localeCompare(value2, locale, { numeric: true });
+        else
+            result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+
+        return order * result;
+    }
 }

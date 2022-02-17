@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { DomHandler, classNames, UniqueComponentId } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
 import PrimeReact from '../api/Api';
+import ObjectUtils from '../utils/ObjectUtils';
 
 class CarouselItem extends Component {
 
@@ -386,20 +387,7 @@ export class Carousel extends Component {
             this.responsiveOptions.sort((data1, data2) => {
                 const value1 = data1.breakpoint;
                 const value2 = data2.breakpoint;
-                let result = null;
-
-                if (value1 == null && value2 != null)
-                    result = -1;
-                else if (value1 != null && value2 == null)
-                    result = 1;
-                else if (value1 == null && value2 == null)
-                    result = 0;
-                else if (typeof value1 === 'string' && typeof value2 === 'string')
-                    result = value1.localeCompare(value2, undefined, { numeric: true });
-                else
-                    result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
-
-                return -1 * result;
+                return ObjectUtils.sort(value1, value2, -1, PrimeReact.locale);
             });
 
             for (let i = 0; i < this.responsiveOptions.length; i++) {

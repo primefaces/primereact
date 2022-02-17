@@ -534,14 +534,17 @@ export class InputNumber extends Component {
         }
 
         let code = event.which || event.keyCode;
+
+        if (code !== 13) { // to submit a form
+            event.preventDefault();
+        }
+
         let char = String.fromCharCode(code);
         const isDecimalSign = this.isDecimalSign(char);
         const isMinusSign = this.isMinusSign(char);
 
         if ((48 <= code && code <= 57) || isMinusSign || isDecimalSign) {
             this.insert(event, char, { isDecimalSign, isMinusSign });
-
-            event.preventDefault();
         }
     }
 
