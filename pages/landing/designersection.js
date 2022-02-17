@@ -13,12 +13,12 @@ import { useRef, useState } from 'react';
 
 export default function DesignerSection(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const [font,setFont] = useState('Inter');
+    const [font,setFont] = useState('-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol');
     const fonts = [
         {label: 'Arial', value: 'Arial,Helvetica Neue,Helvetica,sans-serif'},
-        {label: 'Inter', value: 'Inter'},
+        {label: 'System', value: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol'},
+        {label: 'Trebuches MS', value: 'Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif'},
         {label: 'Verdana', value: 'Verdana,Geneva,sans-serif'},
-        {label: 'Trebuches MS', value: 'Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif'}
     ];
     const [size,setSize] = useState('normal');
     const [inputStyle,setInputStyle] = useState('outlined');
