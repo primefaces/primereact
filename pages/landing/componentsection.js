@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
 import { RadioButton } from '../../components/lib/radiobutton/RadioButton';
 import { ProgressBar } from '../../components/lib/progressbar/ProgressBar';
@@ -81,10 +82,12 @@ export default function ComponentSection() {
             <div className="section-header">Components</div>
             <p className="section-detail"><span className="font-bold text-900">Over 80</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.</p>
             <div className="flex justify-content-center mt-4">
-                <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox active">
-                    <span>Get Started</span>
-                    <i className="pi pi-arrow-right ml-2"></i>
-                </a>
+                <Link href="/setup">
+                    <a className="font-semibold p-3 border-round flex align-items-center linkbox active">
+                        <span>Get Started</span>
+                        <i className="pi pi-arrow-right ml-2"></i>
+                    </a>
+                </Link>
             </div>
             <div className="components-main flex mt-7 relative md:justify-content-center overflow-auto">
                 <div className="flex flex-column px-3 py-8 z-1">
