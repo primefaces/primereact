@@ -75,16 +75,68 @@ export default class SplitButtonDemo extends Component {
 
                     <div className="card">
                         <h5>Basic</h5>
-                        <SplitButton label="Save" icon="pi pi-plus" onClick={this.save} model={this.items}></SplitButton>
+                        <SplitButton label="Save" icon="pi pi-plus"  onClick={this.save} model={this.items}></SplitButton>
 
                         <h5>Severities</h5>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="mr-2"></SplitButton>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-secondary mr-2"></SplitButton>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-success mr-2"></SplitButton>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-info mr-2"></SplitButton>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-warning mr-2"></SplitButton>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-help mr-2"></SplitButton>
-                        <SplitButton label="Save" icon="pi pi-plus" model={this.items} className="p-button-danger mr-2"></SplitButton>
+                        <SplitButton label="Primary" model={this.items} className="mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Secondary" model={this.items} className="p-button-secondary mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Success" model={this.items} className="p-button-success mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Info" model={this.items} className="p-button-info mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Warning" model={this.items} className="p-button-warning mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Help" model={this.items} className="p-button-help mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Danger" model={this.items} className="p-button-danger mr-2 mb-2"></SplitButton>
+
+                        <h5>Raised Buttons</h5>
+                        <SplitButton label="Primary" model={this.items} className="p-button-raised mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Secondary" model={this.items} className="p-button-raised p-button-secondary mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Success" model={this.items} className="p-button-raised p-button-success mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Info" model={this.items} className="p-button-raised p-button-info mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Warning" model={this.items} className="p-button-raised p-button-warning mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Help" model={this.items} className="p-button-raised p-button-help mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Danger" model={this.items} className="p-button-raised p-button-danger mr-2 mb-2"></SplitButton>
+
+                        <h5>Rounded Buttons</h5>
+                        <SplitButton label="Primary" model={this.items} className="p-button-rounded mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Secondary" model={this.items} className="p-button-rounded p-button-secondary mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Success" model={this.items} className="p-button-rounded p-button-success mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Info" model={this.items} className="p-button-rounded p-button-info mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Warning" model={this.items} className="p-button-rounded p-button-warning mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Help" model={this.items} className="p-button-rounded p-button-help mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Danger" model={this.items} className="p-button-rounded p-button-danger mr-2 mb-2"></SplitButton>
+
+                        <h5>Text Buttons</h5>
+                        <SplitButton label="Primary" model={this.items} className="p-button-text mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Secondary" model={this.items} className="p-button-text p-button-secondary mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Success" model={this.items} className="p-button-text p-button-success mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Info" model={this.items} className="p-button-text p-button-info mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Warning" model={this.items} className="p-button-text p-button-warning mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Help" model={this.items} className="p-button-text p-button-help mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Danger" model={this.items} className="p-button-text p-button-danger mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Plain" model={this.items} className="p-button-text p-button-plain mr-2 mb-2"></SplitButton>
+
+                        <h5>Raised Text Buttons</h5>
+                        <SplitButton label="Primary" model={this.items} className="p-button-raised p-button-text mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Secondary" model={this.items} className="p-button-raised p-button-secondary p-button-text mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Success" model={this.items} className="p-button-raised p-button-success p-button-text mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Info" model={this.items} className="p-button-raised p-button-info p-button-text mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Warning" model={this.items} className="p-button-raised p-button-warning p-button-text mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Help" model={this.items} className="p-button-raised p-button-help p-button-text mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Danger" model={this.items} className="p-button-raised p-button-danger p-button-text mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Plain" model={this.items} className="p-button-raised p-button-plain p-button-text mr-2 mb-2"></SplitButton>
+
+                        <h5>Outlined Buttons</h5>
+                        <SplitButton label="Primary" model={this.items} className="p-button-outlined mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Secondary" model={this.items} className="p-button-outlined p-button-secondary mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Success" model={this.items} className="p-button-outlined p-button-success mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Info" model={this.items} className="p-button-outlined p-button-info mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Warning" model={this.items} className="p-button-outlined p-button-warning mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Help" model={this.items} className="p-button-outlined p-button-help mr-2 mb-2"></SplitButton>
+                        <SplitButton label="Danger" model={this.items} className="p-button-outlined p-button-danger mr-2 mb-2"></SplitButton>
+
+                        <h5>Sizes</h5>
+                        <SplitButton label="Small" model={this.items} className="p-button-sm mr-2 mb-2" />
+                        <SplitButton label="Normal" model={this.items} className="mr-2 mb-2" />
+                        <SplitButton label="Large" model={this.items} className="p-button-lg mr-2 mb-2" />
                     </div>
                 </div>
 
