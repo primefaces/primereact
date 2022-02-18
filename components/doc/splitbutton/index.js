@@ -592,6 +592,14 @@ export const SplitButtonDemo = () => {
 `}
 </CodeHighlight>
 
+                        <h5>Raised and Rounded Buttons</h5>
+                        <p>SplitButton can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class.</p>
+<CodeHighlight>
+{`
+<SplitButton label="Proceed" className="p-button-raised p-button-rounded" model={items} />
+`}
+</CodeHighlight>
+
                         <h5>Properties</h5>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
