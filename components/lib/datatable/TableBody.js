@@ -835,6 +835,10 @@ export class TableBody extends Component {
         if (!this.props.isVirtualScrollerDisabled && this.getVirtualScrollerOption('vertical') && this.getVirtualScrollerOption('itemSize', prevProps.virtualScrollerOptions) !== this.getVirtualScrollerOption('itemSize')) {
             this.updateVirtualScrollerPosition();
         }
+
+        if (this.props.paginator && this.isMultipleSelection() && this.props.first !== prevProps.first) {
+            this.anchorRowIndex = null;
+        }
     }
 
     componentWillUnmount() {
