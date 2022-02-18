@@ -1395,6 +1395,13 @@ export class DataTable extends Component {
         this.setState(state);
     }
 
+    resetScroll() {
+        if (this.wrapper) {
+            const scrollableContainer = !this.isVirtualScrollerDisabled() ? DomHandler.findSingle(this.wrapper, '.p-virtualscroller') : this.wrapper;
+            scrollableContainer.scrollTo(0, 0);
+        }
+    }
+
     resetColumnOrder() {
         const columns = this.getColumns(true);
         let columnOrder = [];
@@ -1690,7 +1697,7 @@ export class DataTable extends Component {
         const virtualScrollerOptions = this.props.virtualScrollerOptions || {};
 
         return (
-            <div className="p-datatable-wrapper" style={{ maxHeight: isVirtualScrollerDisabled ? this.props.scrollHeight : null }}>
+            <div ref={el => this.wrapper = el} className="p-datatable-wrapper" style={{ maxHeight: isVirtualScrollerDisabled ? this.props.scrollHeight : null }}>
                 <VirtualScroller {...virtualScrollerOptions} items={processedData} columns={columns} scrollHeight={this.props.scrollHeight}
                     disabled={isVirtualScrollerDisabled} loaderDisabled showSpacer={false}
                     contentTemplate={(options) => {
