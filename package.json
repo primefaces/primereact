@@ -76,6 +76,7 @@
     "not ie <= 8"
   ],
   "dependencies": {
-    "jalali-moment": "^3.3.10"
+    "jalali-moment": "^3.3.10",
+    "moment": "^2.29.1"
   }
 }

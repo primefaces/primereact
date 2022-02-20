@@ -39,7 +39,7 @@ export class Calendar extends Component {
         icon: "pi pi-calendar",
         showOnFocus: true,
         numberOfMonths: 1,
-        view: "date",
+        view: "jDate",
         touchUI: false,
         showTime: false,
         timeOnly: false,
@@ -185,11 +185,11 @@ export class Calendar extends Component {
 
             let viewDate =
                 this.props.viewDate &&
-                this.isValidDate(moment(this.props.viewDate))
+                    this.isValidDate(moment(this.props.viewDate))
                     ? this.props.viewDate
                     : propValue && this.isValidDate(moment(propValue))
-                    ? propValue
-                    : moment();
+                        ? propValue
+                        : moment();
 
             this.validateDate(viewDate);
 
@@ -308,8 +308,8 @@ export class Calendar extends Component {
                     this.props.viewDate && this.isValidDate(this.props.viewDate)
                         ? this.props.viewDate
                         : propValue && this.isValidDate(propValue)
-                        ? propValue
-                        : moment();
+                            ? propValue
+                            : moment();
 
                 this.validateDate(viewDate);
 
@@ -473,7 +473,7 @@ export class Calendar extends Component {
                 this.updateViewDate(event, value.length ? value[0] : value);
             }
         } catch (err) {
-            //invalid date
+            //invalid jDate
             let value = this.props.keepInvalid ? rawValue : null;
             this.updateModel(event, value);
         }
@@ -492,9 +492,9 @@ export class Calendar extends Component {
             if (
                 !(
                     this.isSelectable(
-                        value.date(),
-                        value.month(),
-                        value.year(),
+                        value.jDate(),
+                        value.jMonth(),
+                        value.jYear(),
                         false
                     ) && this.isSelectableTime(value)
                 )
@@ -504,7 +504,7 @@ export class Calendar extends Component {
         } else if (
             value.every(
                 (v) =>
-                    this.isSelectable(v.date(), v.month(), v.year(), false) &&
+                    this.isSelectable(v.jDate(), v.jMonth(), v.jYear(), false) &&
                     this.isSelectableTime(value)
             )
         ) {
@@ -627,14 +627,14 @@ export class Calendar extends Component {
 
     initFocusableCell() {
         let cell;
-        if (this.view === "month") {
+        if (this.view === "jMonth") {
             let cells = DomHandler.find(
                 this.overlayRef.current,
-                ".p-monthpicker .p-monthpicker-month"
+                ".p-monthpicker .p-monthpicker-jMonth"
             );
             let selectedCell = DomHandler.findSingle(
                 this.overlayRef.current,
-                ".p-monthpicker .p-monthpicker-month.p-highlight"
+                ".p-monthpicker .p-monthpicker-jMonth.p-highlight"
             );
             cells.forEach((cell) => (cell.tabIndex = -1));
             cell = selectedCell || cells[0];
@@ -669,17 +669,17 @@ export class Calendar extends Component {
         }
 
         let newViewDate = moment(this.getViewDate().valueOf());
-        newViewDate.date(1);
+        newViewDate.jDate(1);
 
-        if (this.props.view === "date") {
-            if (newViewDate.month() === 0) {
-                newViewDate.month(11);
-                newViewDate.year(newViewDate.year() - 1);
+        if (this.props.view === "jDate") {
+            if (newViewDate.jMonth() === 0) {
+                newViewDate.jMonth(11);
+                newViewDate.jYear(newViewDate.jYear() - 1);
             } else {
-                newViewDate.month(newViewDate.month() - 1);
+                newViewDate.jMonth(newViewDate.jMonth() - 1);
             }
-        } else if (this.props.view === "month") {
-            let currentYear = newViewDate.year();
+        } else if (this.props.view === "jMonth") {
+            let currentYear = newViewDate.jYear();
             let newYear = currentYear - 1;
 
             if (this.props.yearNavigator) {
@@ -693,7 +693,7 @@ export class Calendar extends Component {
                 }
             }
 
-            newViewDate.year(newYear);
+            newViewDate.jYear(newYear);
         }
 
         this.updateViewDate(event, newViewDate);
@@ -708,17 +708,17 @@ export class Calendar extends Component {
         }
 
         let newViewDate = moment(this.getViewDate().valueOf());
-        newViewDate.date(1);
+        newViewDate.jDate(1);
 
-        if (this.props.view === "date") {
-            if (newViewDate.month() === 11) {
-                newViewDate.month(0);
-                newViewDate.year(newViewDate.year() + 1);
+        if (this.props.view === "jDate") {
+            if (newViewDate.jMonth() === 11) {
+                newViewDate.jMonth(0);
+                newViewDate.jYear(newViewDate.jYear() + 1);
             } else {
-                newViewDate.month(newViewDate.month() + 1);
+                newViewDate.jMonth(newViewDate.jMonth() + 1);
             }
-        } else if (this.props.view === "month") {
-            let currentYear = newViewDate.year();
+        } else if (this.props.view === "jMonth") {
+            let currentYear = newViewDate.jYear();
             let newYear = currentYear + 1;
 
             if (this.props.yearNavigator) {
@@ -732,7 +732,7 @@ export class Calendar extends Component {
                 }
             }
 
-            newViewDate.year(newYear);
+            newViewDate.jYear(newYear);
         }
 
         this.updateViewDate(event, newViewDate);
@@ -743,7 +743,7 @@ export class Calendar extends Component {
     onMonthDropdownChange(event) {
         const currentViewDate = this.getViewDate();
         let newViewDate = moment(currentViewDate.valueOf());
-        newViewDate.month(parseInt(event.target.value, 10));
+        newViewDate.jMonth(parseInt(event.target.value, 10));
 
         this.updateViewDate(event, newViewDate);
     }
@@ -751,7 +751,7 @@ export class Calendar extends Component {
     onYearDropdownChange(event) {
         const currentViewDate = this.getViewDate();
         let newViewDate = moment(currentViewDate.valueOf());
-        newViewDate.year(parseInt(event.target.value, 10));
+        newViewDate.jYear(parseInt(event.target.value, 10));
 
         this.updateViewDate(event, newViewDate);
     }
@@ -759,9 +759,9 @@ export class Calendar extends Component {
     onTodayButtonClick(event) {
         const today = moment();
         const dateMeta = {
-            day: today.date(),
-            month: today.month(),
-            year: today.year(),
+            day: today.jDate(),
+            jMonth: today.jMonth(),
+            jYear: today.jYear(),
             today: true,
             selectable: true,
         };
@@ -873,7 +873,7 @@ export class Calendar extends Component {
             if (
                 this.props.maxDate &&
                 this.props.maxDate.format("YYYY-MM-DD") ===
-                    currentTime.format("YYYY-MM-DD") &&
+                currentTime.format("YYYY-MM-DD") &&
                 this.props.maxDate.hour() === newHour
             ) {
                 if (this.props.maxDate.minute() < currentTime.minute()) {
@@ -974,7 +974,7 @@ export class Calendar extends Component {
             if (
                 this.props.minDate &&
                 this.props.minDate.format("YYYY-MM-DD") ===
-                    currentTime.format("YYYY-MM-DD") &&
+                currentTime.format("YYYY-MM-DD") &&
                 this.props.minDate.hour() === newHour
             ) {
                 if (this.props.minDate.minute() > currentTime.minute()) {
@@ -1075,7 +1075,7 @@ export class Calendar extends Component {
             if (
                 this.props.maxDate &&
                 this.props.maxDate.format("YYYY-MM-DD") ===
-                    currentTime.format("YYYY-MM-DD") &&
+                currentTime.format("YYYY-MM-DD") &&
                 this.props.maxDate.minute() === newMinute
             ) {
                 if (this.props.maxDate.second() < currentTime.second()) {
@@ -1132,7 +1132,7 @@ export class Calendar extends Component {
             if (
                 this.props.minDate &&
                 this.props.minDate.format("YYYY-MM-DD") ===
-                    currentTime.format("YYYY-MM-DD") &&
+                currentTime.format("YYYY-MM-DD") &&
                 this.props.minDate.minute() === newMinute
             ) {
                 if (this.props.minDate.second() > currentTime.second()) {
@@ -1189,7 +1189,7 @@ export class Calendar extends Component {
             if (
                 this.props.maxDate &&
                 this.props.maxDate.format("YYYY-MM-DD") ===
-                    currentTime.format("YYYY-MM-DD") &&
+                currentTime.format("YYYY-MM-DD") &&
                 this.props.maxDate.second() === newSecond
             ) {
                 if (this.props.maxDate.valueOf() < currentTime.valueOf()) {
@@ -1236,7 +1236,7 @@ export class Calendar extends Component {
             if (
                 this.props.minDate &&
                 this.props.minDate.format("YYYY-MM-DD") ===
-                    currentTime.format("YYYY-MM-DD") &&
+                currentTime.format("YYYY-MM-DD") &&
                 this.props.minDate.second() === newSecond
             ) {
                 if (this.props.minDate.valueOf() > currentTime.valueOf()) {
@@ -1340,8 +1340,8 @@ export class Calendar extends Component {
             : this.state.viewDate;
     }
 
-    isValidDate(date) {
-        return date instanceof moment.Moment && !isNaN(moment(date));
+    isValidDate(jDate) {
+        return jDate instanceof moment.Moment && !isNaN(moment(jDate));
     }
 
     validateHour(hour, value) {
@@ -1480,7 +1480,7 @@ export class Calendar extends Component {
 
     validateDate(value) {
         if (this.props.yearNavigator) {
-            let viewYear = value.year();
+            let viewYear = value.jYear();
 
             const minRangeYear = this.props.yearRange
                 ? parseInt(this.props.yearRange.split(":")[0], 10)
@@ -1490,11 +1490,11 @@ export class Calendar extends Component {
                 : null;
             const minYear =
                 this.props.minDate && minRangeYear != null
-                    ? Math.max(this.props.minDate.year(), minRangeYear)
+                    ? Math.max(this.props.minDate.jYear(), minRangeYear)
                     : this.props.minDate || minRangeYear;
             const maxYear =
                 this.props.maxDate && maxRangeYear != null
-                    ? Math.min(this.props.maxDate.year(), maxRangeYear)
+                    ? Math.min(this.props.maxDate.jYear(), maxRangeYear)
                     : this.props.maxDate || maxRangeYear;
 
             if (minYear && minYear > viewYear) {
@@ -1504,26 +1504,26 @@ export class Calendar extends Component {
                 viewYear = maxYear;
             }
 
-            value.year(viewYear);
+            value.jYear(viewYear);
         }
 
-        if (this.props.monthNavigator && this.props.view !== "month") {
-            let viewMonth = value.month();
+        if (this.props.monthNavigator && this.props.view !== "jMonth") {
+            let viewMonth = value.jMonth();
             let viewMonthWithMinMax = parseInt(
                 (this.isInMinYear(value) &&
                     Math.max(
-                        this.props.minDate.month(),
+                        this.props.minDate.jMonth(),
                         viewMonth
                     ).toString()) ||
-                    (this.isInMaxYear(value) &&
-                        Math.min(
-                            this.props.maxDate.month(),
-                            viewMonth
-                        ).toString()) ||
-                    viewMonth
+                (this.isInMaxYear(value) &&
+                    Math.min(
+                        this.props.maxDate.jMonth(),
+                        viewMonth
+                    ).toString()) ||
+                viewMonth
             );
 
-            value.month(viewMonthWithMinMax);
+            value.jMonth(viewMonthWithMinMax);
         }
     }
 
@@ -1565,7 +1565,7 @@ export class Calendar extends Component {
         }
     }
 
-    onDateCellKeydown(event, date, groupIndex) {
+    onDateCellKeydown(event, jDate, groupIndex) {
         const cellContent = event.currentTarget;
         const cell = cellContent.parentElement;
 
@@ -1654,7 +1654,7 @@ export class Calendar extends Component {
 
             //enter
             case 13: {
-                this.onDateSelect(event, date);
+                this.onDateSelect(event, jDate);
                 event.preventDefault();
                 break;
             }
@@ -1799,8 +1799,8 @@ export class Calendar extends Component {
 
         if (this.isMultipleSelection()) {
             if (this.isSelected(dateMeta)) {
-                let value = this.props.value.filter((date, i) => {
-                    return !this.isDateEquals(date, dateMeta);
+                let value = this.props.value.filter((jDate, i) => {
+                    return !this.isDateEquals(jDate, dateMeta);
                 });
                 this.updateModel(event, value);
             } else if (
@@ -1831,7 +1831,7 @@ export class Calendar extends Component {
         event.preventDefault();
     }
 
-    selectTime(date, timeMeta) {
+    selectTime(jDate, timeMeta) {
         if (this.props.showTime) {
             let hours, minutes, seconds, milliseconds;
 
@@ -1849,53 +1849,54 @@ export class Calendar extends Component {
                     time.valueOf(),
                 ];
             }
+            console.log("jDate : " , jDate);
 
-            date.hour(hours);
-            date.minutes(minutes);
-            date.second(seconds);
-            date.valueOf(milliseconds);
+            // jDate.hour(hours);
+            // jDate.minutes(minutes);
+            // jDate.second(seconds);
+            // jDate.valueOf(milliseconds);
         }
     }
 
     selectDate(event, dateMeta, timeMeta) {
-        let date = moment([dateMeta.year, dateMeta.month, dateMeta.day]).format(
+        let jDate = moment([dateMeta.jYear, dateMeta.jMonth, dateMeta.day]).format(
             "YYYY-MM-DD"
         );
-        this.selectTime(date, timeMeta);
+        this.selectTime(jDate, timeMeta);
 
-        if (this.props.minDate && this.props.minDate > date) {
-            date = this.props.minDate;
+        if (this.props.minDate && this.props.minDate > jDate) {
+            jDate = this.props.minDate;
         }
 
-        if (this.props.maxDate && this.props.maxDate < date) {
-            date = this.props.maxDate;
+        if (this.props.maxDate && this.props.maxDate < jDate) {
+            jDate = this.props.maxDate;
         }
 
-        let selectedValues = date;
+        let selectedValues = jDate;
 
         if (this.isSingleSelection()) {
-            this.updateModel(event, date);
+            this.updateModel(event, jDate);
         } else if (this.isMultipleSelection()) {
             selectedValues = this.props.value
-                ? [...this.props.value, date]
-                : [date];
+                ? [...this.props.value, jDate]
+                : [jDate];
             this.updateModel(event, selectedValues);
         } else if (this.isRangeSelection()) {
             if (this.props.value && this.props.value.length) {
                 let startDate = this.props.value[0];
                 let endDate = this.props.value[1];
 
-                if (!endDate && date.valueOf() >= startDate.valueOf()) {
-                    endDate = date;
+                if (!endDate && jDate.valueOf() >= startDate.valueOf()) {
+                    endDate = jDate;
                 } else {
-                    startDate = date;
+                    startDate = jDate;
                     endDate = null;
                 }
 
                 selectedValues = [startDate, endDate];
                 this.updateModel(event, selectedValues);
             } else {
-                selectedValues = [date, null];
+                selectedValues = [jDate, null];
                 this.updateModel(event, selectedValues);
             }
         }
@@ -1903,17 +1904,17 @@ export class Calendar extends Component {
         if (this.props.onSelect) {
             this.props.onSelect({
                 originalEvent: event,
-                value: date,
+                value: jDate,
             });
         }
 
         this.updateInputfield(selectedValues);
     }
 
-    onMonthSelect(event, month) {
+    onMonthSelect(event, jMonth) {
         this.onDateSelect(event, {
-            year: this.getViewDate().year(),
-            month: month,
+            jYear: this.getViewDate().jYear(),
+            jMonth: jMonth,
             day: 1,
             selectable: true,
         });
@@ -1927,8 +1928,8 @@ export class Calendar extends Component {
             this.props.onChange({
                 originalEvent: event,
                 value: value,
-                stopPropagation: () => {},
-                preventDefault: () => {},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
                     name: this.props.name,
                     id: this.props.id,
@@ -2137,64 +2138,64 @@ export class Calendar extends Component {
         }
     }
 
-    getFirstDayOfMonthIndex(month, year) {
+    getFirstDayOfMonthIndex(jMonth, jYear) {
         let day = moment();
-        day.date(1);
-        day.month(month);
-        day.year(year);
+        day.jDate(1);
+        day.jMonth(jMonth);
+        day.jYear(jYear);
         let dayIndex = day.day() + this.getSundayIndex();
         return dayIndex >= 7 ? dayIndex - 7 : dayIndex;
     }
 
-    getDaysCountInMonth(month, year) {
-        var newDate = moment().year(year).month(month).date(32);
+    getDaysCountInMonth(jMonth, jYear) {
+        var newDate = moment().jYear(jYear).jMonth(jMonth).jDate(32);
 
-        var temp = this.daylightSavingAdjust(newDate).date();
+        var temp = this.daylightSavingAdjust(newDate).jDate();
 
         return 32 - temp;
     }
 
-    getDaysCountInPrevMonth(month, year) {
-        let prev = this.getPreviousMonthAndYear(month, year);
-        return this.getDaysCountInMonth(prev.month, prev.year);
+    getDaysCountInPrevMonth(jMonth, jYear) {
+        let prev = this.getPreviousMonthAndYear(jMonth, jYear);
+        return this.getDaysCountInMonth(prev.jMonth, prev.jYear);
     }
 
-    daylightSavingAdjust(date) {
-        if (!date) {
+    daylightSavingAdjust(jDate) {
+        if (!jDate) {
             return null;
         }
 
-        date.hour(date.hour() > 12 ? date.hour() + 2 : 0);
+        jDate.hour(jDate.hour() > 12 ? jDate.hour() + 2 : 0);
 
-        return date;
+        return jDate;
     }
 
-    getPreviousMonthAndYear(month, year) {
+    getPreviousMonthAndYear(jMonth, jYear) {
         let m, y;
 
-        if (month === 0) {
+        if (jMonth === 0) {
             m = 11;
-            y = year - 1;
+            y = jYear - 1;
         } else {
-            m = month - 1;
-            y = year;
+            m = jMonth - 1;
+            y = jYear;
         }
 
-        return { month: m, year: y };
+        return { jMonth: m, jYear: y };
     }
 
-    getNextMonthAndYear(month, year) {
+    getNextMonthAndYear(jMonth, jYear) {
         let m, y;
 
-        if (month === 11) {
+        if (jMonth === 11) {
             m = 0;
-            y = year + 1;
+            y = jYear + 1;
         } else {
-            m = month + 1;
-            y = year;
+            m = jMonth + 1;
+            y = jYear;
         }
 
-        return { month: m, year: y };
+        return { jMonth: m, jYear: y };
     }
 
     getSundayIndex() {
@@ -2218,14 +2219,14 @@ export class Calendar extends Component {
         return weekDays;
     }
 
-    createMonths(month, year) {
+    createMonths(jMonth, jYear) {
         let months = [];
         for (let i = 0; i < this.props.numberOfMonths; i++) {
-            let m = month + i;
-            let y = year;
+            let m = jMonth + i;
+            let y = jYear;
             if (m > 11) {
                 m = (m % 11) - 1;
-                y = year + 1;
+                y = jYear + 1;
             }
 
             months.push(this.createMonth(m, y));
@@ -2234,11 +2235,11 @@ export class Calendar extends Component {
         return months;
     }
 
-    createMonth(month, year) {
+    createMonth(jMonth, jYear) {
         let dates = [];
-        let firstDay = this.getFirstDayOfMonthIndex(month, year);
-        let daysLength = this.getDaysCountInMonth(month, year);
-        let prevMonthDaysLength = this.getDaysCountInPrevMonth(month, year);
+        let firstDay = this.getFirstDayOfMonthIndex(jMonth, jYear);
+        let daysLength = this.getDaysCountInMonth(jMonth, jYear);
+        let prevMonthDaysLength = this.getDaysCountInPrevMonth(jMonth, jYear);
         let dayNo = 1;
         let today = moment();
         let weekNumbers = [];
@@ -2253,17 +2254,17 @@ export class Calendar extends Component {
                     j <= prevMonthDaysLength;
                     j++
                 ) {
-                    let prev = this.getPreviousMonthAndYear(month, year);
+                    let prev = this.getPreviousMonthAndYear(jMonth, jYear);
                     week.push({
                         day: j,
-                        month: prev.month,
-                        year: prev.year,
+                        jMonth: prev.jMonth,
+                        jYear: prev.jYear,
                         otherMonth: true,
-                        today: this.isToday(today, j, prev.month, prev.year),
+                        today: this.isToday(today, j, prev.jMonth, prev.jYear),
                         selectable: this.isSelectable(
                             j,
-                            prev.month,
-                            prev.year,
+                            prev.jMonth,
+                            prev.jYear,
                             true
                         ),
                     });
@@ -2273,13 +2274,13 @@ export class Calendar extends Component {
                 for (let j = 0; j < remainingDaysLength; j++) {
                     week.push({
                         day: dayNo,
-                        month: month,
-                        year: year,
-                        today: this.isToday(today, dayNo, month, year),
+                        jMonth: jMonth,
+                        jYear: jYear,
+                        today: this.isToday(today, dayNo, jMonth, jYear),
                         selectable: this.isSelectable(
                             dayNo,
-                            month,
-                            year,
+                            jMonth,
+                            jYear,
                             false
                         ),
                     });
@@ -2288,35 +2289,35 @@ export class Calendar extends Component {
             } else {
                 for (let j = 0; j < 7; j++) {
                     if (dayNo > daysLength) {
-                        let next = this.getNextMonthAndYear(month, year);
+                        let next = this.getNextMonthAndYear(jMonth, jYear);
                         week.push({
                             day: dayNo - daysLength,
-                            month: next.month,
-                            year: next.year,
+                            jMonth: next.jMonth,
+                            jYear: next.jYear,
                             otherMonth: true,
                             today: this.isToday(
                                 today,
                                 dayNo - daysLength,
-                                next.month,
-                                next.year
+                                next.jMonth,
+                                next.jYear
                             ),
                             selectable: this.isSelectable(
                                 dayNo - daysLength,
-                                next.month,
-                                next.year,
+                                next.jMonth,
+                                next.jYear,
                                 true
                             ),
                         });
                     } else {
                         week.push({
                             day: dayNo,
-                            month: month,
-                            year: year,
-                            today: this.isToday(today, dayNo, month, year),
+                            jMonth: jMonth,
+                            jYear: jYear,
+                            today: this.isToday(today, dayNo, jMonth, jYear),
                             selectable: this.isSelectable(
                                 dayNo,
-                                month,
-                                year,
+                                jMonth,
+                                jYear,
                                 false
                             ),
                         });
@@ -2329,7 +2330,7 @@ export class Calendar extends Component {
             if (this.props.showWeek) {
                 weekNumbers.push(
                     this.getWeekNumber(
-                        moment([week[0].year, week[0].month, week[0].day])
+                        moment([week[0].jYear, week[0].jMonth, week[0].day])
                     )
                 );
             }
@@ -2338,19 +2339,19 @@ export class Calendar extends Component {
         }
 
         return {
-            month: month,
-            year: year,
+            jMonth: jMonth,
+            jYear: jYear,
             dates: dates,
             weekNumbers: weekNumbers,
         };
     }
 
-    getWeekNumber(date) {
-        let checkDate = moment(date.valueOf());
-        checkDate.date(checkDate.date() + 4 - (checkDate.day() || 7));
+    getWeekNumber(jDate) {
+        let checkDate = moment(jDate.valueOf());
+        checkDate.jDate(checkDate.jDate() + 4 - (checkDate.day() || 7));
         let time = checkDate.valueOf();
-        checkDate.month(0);
-        checkDate.date(1);
+        checkDate.jMonth(0);
+        checkDate.jDate(1);
         return (
             Math.floor(
                 Math.round((time - checkDate.valueOf()) / 86400000) / 7
@@ -2358,7 +2359,7 @@ export class Calendar extends Component {
         );
     }
 
-    isSelectable(day, month, year, otherMonth) {
+    isSelectable(day, jMonth, jYear, otherMonth) {
         let validMin = true;
         let validMax = true;
         let validDate = true;
@@ -2366,13 +2367,13 @@ export class Calendar extends Component {
         let validMonth = true;
 
         if (this.props.minDate) {
-            if (this.props.minDate.year() > year) {
+            if (this.props.minDate.jYear() > jYear) {
                 validMin = false;
-            } else if (this.props.minDate.year() === year) {
-                if (this.props.minDate.month() > month) {
+            } else if (this.props.minDate.jYear() === jYear) {
+                if (this.props.minDate.jMonth() > jMonth) {
                     validMin = false;
-                } else if (this.props.minDate.month() === month) {
-                    if (this.props.minDate.date() > day) {
+                } else if (this.props.minDate.jMonth() === jMonth) {
+                    if (this.props.minDate.jDate() > day) {
                         validMin = false;
                     }
                 }
@@ -2380,13 +2381,13 @@ export class Calendar extends Component {
         }
 
         if (this.props.maxDate) {
-            if (this.props.maxDate.year() < year) {
+            if (this.props.maxDate.jYear() < jYear) {
                 validMax = false;
-            } else if (this.props.maxDate.year() === year) {
-                if (this.props.maxDate.month() < month) {
+            } else if (this.props.maxDate.jYear() === jYear) {
+                if (this.props.maxDate.jMonth() < jMonth) {
                     validMax = false;
-                } else if (this.props.maxDate.month() === month) {
-                    if (this.props.maxDate.date() < day) {
+                } else if (this.props.maxDate.jMonth() === jMonth) {
+                    if (this.props.maxDate.jDate() < day) {
                         validMax = false;
                     }
                 }
@@ -2394,11 +2395,11 @@ export class Calendar extends Component {
         }
 
         if (this.props.disabledDates) {
-            validDate = !this.isDateDisabled(day, month, year);
+            validDate = !this.isDateDisabled(day, jMonth, jYear);
         }
 
         if (this.props.disabledDays) {
-            validDay = !this.isDayDisabled(day, month, year);
+            validDay = !this.isDayDisabled(day, jMonth, jYear);
         }
 
         if (this.props.selectOtherMonths === false && otherMonth) {
@@ -2415,7 +2416,7 @@ export class Calendar extends Component {
         if (
             this.props.minDate &&
             this.props.minDate.format("YYYY-MM-DD") ===
-                value.format("YYYY-MM-DD")
+            value.format("YYYY-MM-DD")
         ) {
             if (this.props.minDate.hour() > value.hour()) {
                 validMin = false;
@@ -2437,7 +2438,7 @@ export class Calendar extends Component {
         if (
             this.props.maxDate &&
             this.props.maxDate.format("YYYY-MM-DD") ===
-                value.format("YYYY-MM-DD")
+            value.format("YYYY-MM-DD")
         ) {
             if (this.props.maxDate.hour() < value.hour()) {
                 validMax = false;
@@ -2465,8 +2466,8 @@ export class Calendar extends Component {
                 return this.isDateEquals(this.props.value, dateMeta);
             } else if (this.isMultipleSelection()) {
                 let selected = false;
-                for (let date of this.props.value) {
-                    selected = this.isDateEquals(date, dateMeta);
+                for (let jDate of this.props.value) {
+                    selected = this.isDateEquals(jDate, dateMeta);
                     if (selected) {
                         break;
                     }
@@ -2492,14 +2493,14 @@ export class Calendar extends Component {
         }
     }
 
-    isMonthSelected(month) {
+    isMonthSelected(jMonth) {
         const viewDate = this.getViewDate();
 
         if (this.props.value && this.props.value instanceof moment)
             return (
-                this.props.value.date() === 1 &&
-                this.props.value.month() === month &&
-                this.props.value.year() === viewDate.year()
+                this.props.value.jDate() === 1 &&
+                this.props.value.jMonth() === jMonth &&
+                this.props.value.jYear() === viewDate.jYear()
             );
         else return false;
     }
@@ -2507,9 +2508,9 @@ export class Calendar extends Component {
     isDateEquals(value, dateMeta) {
         if (value && value instanceof moment)
             return (
-                value.date() === dateMeta.day &&
-                value.month() === dateMeta.month &&
-                value.year() === dateMeta.year
+                value.jDate() === dateMeta.day &&
+                value.jMonth() === dateMeta.jMonth &&
+                value.jYear() === dateMeta.jYear
             );
         else return false;
     }
@@ -2517,8 +2518,8 @@ export class Calendar extends Component {
     isDateBetween(start, end, dateMeta) {
         let between = false;
         if (start && end) {
-            let date = moment([dateMeta.year, dateMeta.month, dateMeta.day]);
-            return start.unix() <= date.unix() && end.unix() >= date.unix();
+            let jDate = moment([dateMeta.jYear, dateMeta.jMonth, dateMeta.day]);
+            return start.unix() <= jDate.unix() && end.unix() >= jDate.unix();
         }
 
         return between;
@@ -2536,23 +2537,23 @@ export class Calendar extends Component {
         return this.props.selectionMode === "multiple";
     }
 
-    isToday(today, day, month, year) {
+    isToday(today, day, jMonth, jYear) {
         return (
-            today.date() === day &&
-            today.month() === month &&
-            today.year() === year
+            today.jDate() === day &&
+            today.jMonth() === jMonth &&
+            today.jYear() === jYear
         );
     }
 
-    isDateDisabled(day, month, year) {
+    isDateDisabled(day, jMonth, jYear) {
         if (this.props.disabledDates) {
             for (let i = 0; i < this.props.disabledDates.length; i++) {
                 let disabledDate = this.props.disabledDates[i];
 
                 if (
-                    disabledDate.year() === year &&
-                    disabledDate.month() === month &&
-                    disabledDate.date() === day
+                    disabledDate.jYear() === jYear &&
+                    disabledDate.jMonth() === jMonth &&
+                    disabledDate.jDate() === day
                 ) {
                     return true;
                 }
@@ -2562,9 +2563,9 @@ export class Calendar extends Component {
         return false;
     }
 
-    isDayDisabled(day, month, year) {
+    isDayDisabled(day, jMonth, jYear) {
         if (this.props.disabledDays) {
-            let weekday = moment([year, month, day]);
+            let weekday = moment([jYear, jMonth, day]);
             let weekdayNumber = weekday.day();
 
             return this.props.disabledDays.indexOf(weekdayNumber) !== -1;
@@ -2622,15 +2623,15 @@ export class Calendar extends Component {
         this.inputRef.current.value = formattedValue;
     }
 
-    formatDateTime(date) {
+    formatDateTime(jDate) {
         let formattedValue = null;
-        if (date) {
+        if (jDate) {
             if (this.props.timeOnly) {
-                formattedValue = this.formatTime(date);
+                formattedValue = this.formatTime(jDate);
             } else {
-                formattedValue = this.formatDate(date, this.getDateFormat());
+                formattedValue = this.formatDate(jDate, this.getDateFormat());
                 if (this.props.showTime) {
-                    formattedValue += " " + this.formatTime(date);
+                    formattedValue += " " + this.formatTime(jDate);
                 }
             }
         }
@@ -2638,21 +2639,21 @@ export class Calendar extends Component {
         return formattedValue;
     }
 
-    formatDate(date, format) {
-        if (!date) {
+    formatDate(jDate, format) {
+        if (!jDate) {
             return "";
         }
 
         let iFormat;
         const lookAhead = (match) => {
-                const matches =
-                    iFormat + 1 < format.length &&
-                    format.charAt(iFormat + 1) === match;
-                if (matches) {
-                    iFormat++;
-                }
-                return matches;
-            },
+            const matches =
+                iFormat + 1 < format.length &&
+                format.charAt(iFormat + 1) === match;
+            if (matches) {
+                iFormat++;
+            }
+            return matches;
+        },
             formatNumber = (match, value, len) => {
                 let num = "" + value;
                 if (lookAhead(match)) {
@@ -2674,7 +2675,7 @@ export class Calendar extends Component {
             monthNames,
         } = localeOptions(this.props.locale);
 
-        if (date) {
+        if (jDate) {
             for (iFormat = 0; iFormat < format.length; iFormat++) {
                 if (literal) {
                     if (format.charAt(iFormat) === "'" && !lookAhead("'")) {
@@ -2685,12 +2686,12 @@ export class Calendar extends Component {
                 } else {
                     switch (format.charAt(iFormat)) {
                         case "d":
-                            output += formatNumber("d", date.date(), 2);
+                            output += formatNumber("d", jDate.jDate(), 2);
                             break;
                         case "D":
                             output += formatName(
                                 "D",
-                                date.day(),
+                                jDate.day(),
                                 dayNamesShort,
                                 dayNames
                             );
@@ -2700,38 +2701,38 @@ export class Calendar extends Component {
                                 "o",
                                 Math.round(
                                     (moment(
-                                        date.year(),
-                                        date.month(),
-                                        date.date()
+                                        jDate.jYear(),
+                                        jDate.jMonth(),
+                                        jDate.jDate()
                                     ).unix() -
-                                        moment(date.year(), 0, 0).unix()) /
-                                        86400000
+                                        moment(jDate.jYear(), 0, 0).unix()) /
+                                    86400000
                                 ),
                                 3
                             );
                             break;
                         case "m":
-                            output += formatNumber("m", date.month() + 1, 2);
+                            output += formatNumber("m", jDate.jMonth() + 1, 2);
                             break;
                         case "M":
                             output += formatName(
                                 "M",
-                                date.month(),
+                                jDate.jMonth(),
                                 monthNamesShort,
                                 monthNames
                             );
                             break;
                         case "y":
                             output += lookAhead("y")
-                                ? date.year()
-                                : (date.year() % 100 < 10 ? "0" : "") +
-                                  (date.year() % 100);
+                                ? jDate.jYear()
+                                : (jDate.jYear() % 100 < 10 ? "0" : "") +
+                                (jDate.jYear() % 100);
                             break;
                         case "@":
-                            output += date.valueOf();
+                            output += jDate.valueOf();
                             break;
                         case "!":
-                            output += date.valueOf() * 10000 + this.ticksTo1970;
+                            output += jDate.valueOf() * 10000 + this.ticksTo1970;
                             break;
                         case "'":
                             if (lookAhead("'")) {
@@ -2749,16 +2750,16 @@ export class Calendar extends Component {
         return output;
     }
 
-    formatTime(date) {
-        if (!date) {
+    formatTime(jDate) {
+        if (!jDate) {
             return "";
         }
 
         let output = "";
-        let hours = date.hour();
-        let minutes = date.minute();
-        let seconds = date.second();
-        let milliseconds = date.valueOf();
+        let hours = jDate.hour();
+        let minutes = jDate.minute();
+        let seconds = jDate.second();
+        let milliseconds = jDate.valueOf();
 
         if (this.props.hourFormat === "12" && hours > 11 && hours !== 12) {
             hours -= 12;
@@ -2786,7 +2787,7 @@ export class Calendar extends Component {
         }
 
         if (this.props.hourFormat === "12") {
-            output += date.hour() > 11 ? " PM" : " AM";
+            output += jDate.hour() > 11 ? " PM" : " AM";
         }
 
         return output;
@@ -2819,22 +2820,22 @@ export class Calendar extends Component {
     }
 
     parseDateTime(text) {
-        let date;
+        let jDate;
         let parts = text.split(" ");
 
         if (this.props.timeOnly) {
-            date = moment();
-            this.populateTime(date, parts[0], parts[1]);
+            jDate = moment();
+            this.populateTime(jDate, parts[0], parts[1]);
         } else {
             if (this.props.showTime) {
-                date = this.parseDate(parts[0], this.getDateFormat());
-                this.populateTime(date, parts[1], parts[2]);
+                jDate = this.parseDate(parts[0], this.getDateFormat());
+                this.populateTime(jDate, parts[1], parts[2]);
             } else {
-                date = this.parseDate(text, this.getDateFormat());
+                jDate = this.parseDate(text, this.getDateFormat());
             }
         }
 
-        return date;
+        return jDate;
     }
 
     populateTime(value, timeString, ampm) {
@@ -2909,14 +2910,14 @@ export class Calendar extends Component {
             shortYearCutoff =
                 typeof this.props.shortYearCutoff !== "string"
                     ? this.props.shortYearCutoff
-                    : (moment().year() % 100) +
-                      parseInt(this.props.shortYearCutoff, 10),
-            year = -1,
-            month = -1,
+                    : (moment().jYear() % 100) +
+                    parseInt(this.props.shortYearCutoff, 10),
+            jYear = -1,
+            jMonth = -1,
             day = -1,
             doy = -1,
             literal = false,
-            date,
+            jDate,
             lookAhead = (match) => {
                 let matches =
                     iFormat + 1 < format.length &&
@@ -2932,12 +2933,12 @@ export class Calendar extends Component {
                         match === "@"
                             ? 14
                             : match === "!"
-                            ? 20
-                            : match === "y" && isDoubled
-                            ? 4
-                            : match === "o"
-                            ? 3
-                            : 2,
+                                ? 20
+                                : match === "y" && isDoubled
+                                    ? 4
+                                    : match === "o"
+                                        ? 3
+                                        : 2,
                     minSize = match === "y" ? size : 1,
                     digits = new RegExp("^\\d{" + minSize + "," + size + "}"),
                     num = value.substring(iValue).match(digits);
@@ -2984,7 +2985,7 @@ export class Calendar extends Component {
                 iValue++;
             };
 
-        if (this.props.view === "month") {
+        if (this.props.view === "jMonth") {
             day = 1;
         }
 
@@ -3014,27 +3015,27 @@ export class Calendar extends Component {
                         doy = getNumber("o");
                         break;
                     case "m":
-                        month = getNumber("m");
+                        jMonth = getNumber("m");
                         break;
                     case "M":
-                        month = getName("M", monthNamesShort, monthNames);
+                        jMonth = getName("M", monthNamesShort, monthNames);
                         break;
                     case "y":
-                        year = getNumber("y");
+                        jYear = getNumber("y");
                         break;
                     case "@":
-                        date = moment(getNumber("@"));
-                        year = date.year();
-                        month = date.month() + 1;
-                        day = date.date();
+                        jDate = moment(getNumber("@"));
+                        jYear = jDate.jYear();
+                        jMonth = jDate.jMonth() + 1;
+                        day = jDate.jDate();
                         break;
                     case "!":
-                        date = moment(
+                        jDate = moment(
                             (getNumber("!") - this.ticksTo1970) / 10000
                         );
-                        year = date.year();
-                        month = date.month() + 1;
-                        day = date.date();
+                        jYear = jDate.jYear();
+                        jMonth = jDate.jMonth() + 1;
+                        day = jDate.jDate();
                         break;
                     case "'":
                         if (lookAhead("'")) {
@@ -3053,51 +3054,51 @@ export class Calendar extends Component {
             extra = value.substr(iValue);
             if (!/^\s+/.test(extra)) {
                 throw new Error(
-                    "Extra/unparsed characters found in date: " + extra
+                    "Extra/unparsed characters found in jDate: " + extra
                 );
             }
         }
 
-        if (year === -1) {
-            year = moment().year();
-        } else if (year < 100) {
-            year +=
-                moment().year() -
-                (moment().year() % 100) +
-                (year <= shortYearCutoff ? 0 : -100);
+        if (jYear === -1) {
+            jYear = moment().jYear();
+        } else if (jYear < 100) {
+            jYear +=
+                moment().jYear() -
+                (moment().jYear() % 100) +
+                (jYear <= shortYearCutoff ? 0 : -100);
         }
 
         if (doy > -1) {
-            month = 1;
+            jMonth = 1;
             day = doy;
             do {
-                dim = this.getDaysCountInMonth(year, month - 1);
+                dim = this.getDaysCountInMonth(jYear, jMonth - 1);
                 if (day <= dim) {
                     break;
                 }
-                month++;
+                jMonth++;
                 day -= dim;
             } while (true);
         }
 
-        date = this.daylightSavingAdjust(moment([year, month - 1, day]));
+        jDate = this.daylightSavingAdjust(moment([jYear, jMonth - 1, day]));
         if (
-            date.year() !== year ||
-            date.month() + 1 !== month ||
-            date.date() !== day
+            jDate.jYear() !== jYear ||
+            jDate.jMonth() + 1 !== jMonth ||
+            jDate.jDate() !== day
         ) {
-            throw new Error("Invalid date"); // E.g. 31/02/00
+            throw new Error("Invalid jDate"); // E.g. 31/02/00
         }
 
-        return date;
+        return jDate;
     }
 
     renderBackwardNavigator(isVisible) {
         let navigatorProps = isVisible
             ? {
-                  onClick: this.onPrevButtonClick,
-                  onKeyDown: (e) => this.onContainerButtonKeydown(e),
-              }
+                onClick: this.onPrevButtonClick,
+                onKeyDown: (e) => this.onContainerButtonKeydown(e),
+            }
             : { style: { visibility: "hidden" } };
         return (
             <button
@@ -3114,9 +3115,9 @@ export class Calendar extends Component {
     renderForwardNavigator(isVisible) {
         let navigatorProps = isVisible
             ? {
-                  onClick: this.onNextButtonClick,
-                  onKeyDown: (e) => this.onContainerButtonKeydown(e),
-              }
+                onClick: this.onNextButtonClick,
+                onKeyDown: (e) => this.onContainerButtonKeydown(e),
+            }
             : { style: { visibility: "hidden" } };
         return (
             <button
@@ -3132,39 +3133,39 @@ export class Calendar extends Component {
 
     isInMinYear(viewDate) {
         return (
-            this.props.minDate && this.props.minDate.year() === viewDate.year()
+            this.props.minDate && this.props.minDate.jYear() === viewDate.jYear()
         );
     }
 
     isInMaxYear(viewDate) {
         return (
-            this.props.maxDate && this.props.maxDate.year() === viewDate.year()
+            this.props.maxDate && this.props.maxDate.jYear() === viewDate.jYear()
         );
     }
 
-    renderTitleMonthElement(month) {
+    renderTitleMonthElement(jMonth) {
         const monthNames = localeOption("monthNames", this.props.locale);
 
-        if (this.props.monthNavigator && this.props.view !== "month") {
+        if (this.props.monthNavigator && this.props.view !== "jMonth") {
             const viewDate = this.getViewDate();
-            const viewMonth = viewDate.month();
+            const viewMonth = viewDate.jMonth();
 
             return (
                 <select
-                    className="p-datepicker-month"
+                    className="p-datepicker-jMonth"
                     onChange={this.onMonthDropdownChange}
                     value={viewMonth}
                 >
-                    {monthNames.map((month, index) => {
+                    {monthNames.map((jMonth, index) => {
                         if (
                             (!this.isInMinYear(viewDate) ||
-                                index >= this.props.minDate.month()) &&
+                                index >= this.props.minDate.jMonth()) &&
                             (!this.isInMaxYear(viewDate) ||
-                                index <= this.props.maxDate.month())
+                                index <= this.props.maxDate.jMonth())
                         ) {
                             return (
-                                <option key={month} value={index}>
-                                    {month}
+                                <option key={jMonth} value={index}>
+                                    {jMonth}
                                 </option>
                             );
                         }
@@ -3174,12 +3175,12 @@ export class Calendar extends Component {
             );
         } else {
             return (
-                <span className="p-datepicker-month">{monthNames[month]}</span>
+                <span className="p-datepicker-jMonth">{monthNames[jMonth]}</span>
             );
         }
     }
 
-    renderTitleYearElement(year) {
+    renderTitleYearElement(jYear) {
         if (this.props.yearNavigator) {
             let yearOptions = [];
             const years = this.props.yearRange.split(":");
@@ -3191,28 +3192,28 @@ export class Calendar extends Component {
             }
 
             let viewDate = this.getViewDate();
-            let viewYear = viewDate.year();
+            let viewYear = viewDate.jYear();
 
             return (
                 <select
-                    className="p-datepicker-year"
+                    className="p-datepicker-jYear"
                     onChange={this.onYearDropdownChange}
                     value={viewYear}
                 >
-                    {yearOptions.map((year) => {
+                    {yearOptions.map((jYear) => {
                         if (
                             !(
                                 this.props.minDate &&
-                                this.props.minDate.year() > year
+                                this.props.minDate.jYear() > jYear
                             ) &&
                             !(
                                 this.props.maxDate &&
-                                this.props.maxDate.year() < year
+                                this.props.maxDate.jYear() < jYear
                             )
                         ) {
                             return (
-                                <option key={year} value={year}>
-                                    {year}
+                                <option key={jYear} value={jYear}>
+                                    {jYear}
                                 </option>
                             );
                         }
@@ -3221,18 +3222,18 @@ export class Calendar extends Component {
                 </select>
             );
         } else {
-            return <span className="p-datepicker-year">{year}</span>;
+            return <span className="p-datepicker-jYear">{jYear}</span>;
         }
     }
 
     renderTitle(monthMetaData) {
-        const month = this.renderTitleMonthElement(monthMetaData.month);
-        const year = this.renderTitleYearElement(monthMetaData.year);
+        const jMonth = this.renderTitleMonthElement(monthMetaData.jMonth);
+        const jYear = this.renderTitleYearElement(monthMetaData.jYear);
 
         return (
             <div className="p-datepicker-title">
-                {month}
-                {year}
+                {jMonth}
+                {jYear}
             </div>
         );
     }
@@ -3261,16 +3262,16 @@ export class Calendar extends Component {
         }
     }
 
-    renderDateCellContent(date, className, groupIndex) {
+    renderDateCellContent(jDate, className, groupIndex) {
         const content = this.props.dateTemplate
-            ? this.props.dateTemplate(date)
-            : date.day;
+            ? this.props.dateTemplate(jDate)
+            : jDate.day;
 
         return (
             <span
                 className={className}
-                onClick={(e) => this.onDateSelect(e, date)}
-                onKeyDown={(e) => this.onDateCellKeydown(e, date, groupIndex)}
+                onClick={(e) => this.onDateSelect(e, jDate)}
+                onKeyDown={(e) => this.onDateCellKeydown(e, jDate, groupIndex)}
             >
                 {content}
                 <Ripple />
@@ -3279,27 +3280,27 @@ export class Calendar extends Component {
     }
 
     renderWeek(weekDates, weekNumber, groupIndex) {
-        const week = weekDates.map((date) => {
-            const selected = this.isSelected(date);
+        const week = weekDates.map((jDate) => {
+            const selected = this.isSelected(jDate);
             const cellClassName = classNames({
-                "p-datepicker-other-month": date.otherMonth,
-                "p-datepicker-today": date.today,
+                "p-datepicker-other-jMonth": jDate.otherMonth,
+                "p-datepicker-today": jDate.today,
             });
             const dateClassName = classNames({
                 "p-highlight": selected,
-                "p-disabled": !date.selectable,
+                "p-disabled": !jDate.selectable,
             });
             const content =
-                date.otherMonth && !this.props.showOtherMonths
+                jDate.otherMonth && !this.props.showOtherMonths
                     ? null
                     : this.renderDateCellContent(
-                          date,
-                          dateClassName,
-                          groupIndex
-                      );
+                        jDate,
+                        dateClassName,
+                        groupIndex
+                    );
 
             return (
-                <td key={date.day} className={cellClassName}>
+                <td key={jDate.day} className={cellClassName}>
                     {content}
                 </td>
             );
@@ -3353,7 +3354,7 @@ export class Calendar extends Component {
         const backwardNavigator = this.renderBackwardNavigator(index === 0);
         const forwardNavigator = this.renderForwardNavigator(
             this.props.numberOfMonths === 1 ||
-                index === this.props.numberOfMonths - 1
+            index === this.props.numberOfMonths - 1
         );
         const title = this.renderTitle(monthMetaData);
         const dateViewGrid = this.renderDateViewGrid(
@@ -3366,7 +3367,7 @@ export class Calendar extends Component {
             : null;
 
         return (
-            <div key={monthMetaData.month} className="p-datepicker-group">
+            <div key={monthMetaData.jMonth} className="p-datepicker-group">
                 <div className="p-datepicker-header">
                     {header}
                     {backwardNavigator}
@@ -3389,8 +3390,8 @@ export class Calendar extends Component {
     renderDateView() {
         let viewDate = this.getViewDate();
         const monthsMetaData = this.createMonths(
-            viewDate.month(),
-            viewDate.year()
+            viewDate.jMonth(),
+            viewDate.jYear()
         );
         const months = this.renderMonths(monthsMetaData);
 
@@ -3398,7 +3399,7 @@ export class Calendar extends Component {
     }
 
     renderMonthViewMonth(index) {
-        const className = classNames("p-monthpicker-month", {
+        const className = classNames("p-monthpicker-jMonth", {
             "p-highlight": this.isMonthSelected(index),
         });
         const monthNamesShort = localeOption(
@@ -3433,7 +3434,7 @@ export class Calendar extends Component {
         const backwardNavigator = this.renderBackwardNavigator(true);
         const forwardNavigator = this.renderForwardNavigator(true);
         const yearElement = this.renderTitleYearElement(
-            this.getViewDate().year()
+            this.getViewDate().jYear()
         );
         const months = this.renderMonthViewMonths();
 
@@ -3457,9 +3458,9 @@ export class Calendar extends Component {
 
     renderDatePicker() {
         if (!this.props.timeOnly) {
-            if (this.props.view === "date") {
+            if (this.props.view === "jDate") {
                 return this.renderDateView();
-            } else if (this.props.view === "month") {
+            } else if (this.props.view === "jMonth") {
                 return this.renderMonthView();
             } else {
                 return null;
@@ -3824,8 +3825,8 @@ export class Calendar extends Component {
                 "p-datepicker-inline": this.props.inline,
                 "p-disabled": this.props.disabled,
                 "p-datepicker-timeonly": this.props.timeOnly,
-                "p-datepicker-multiple-month": this.props.numberOfMonths > 1,
-                "p-datepicker-monthpicker": this.props.view === "month",
+                "p-datepicker-multiple-jMonth": this.props.numberOfMonths > 1,
+                "p-datepicker-monthpicker": this.props.view === "jMonth",
                 "p-datepicker-touch-ui": this.props.touchUI,
             }
         );
