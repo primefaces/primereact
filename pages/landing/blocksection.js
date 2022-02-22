@@ -14,12 +14,12 @@ export default function BlockSection() {
             <div className="section-header">PrimeBlocks</div>
             <p className="section-detail">280+ ready to copy-paste UI blocks to build spectacular applications in no time.</p>
             <div className="flex justify-content-center mt-4">
-                <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox active">
+                <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox active z-2">
                     <span>Learn More</span>
                     <i className="pi pi-arrow-right ml-2"></i>
                 </a>
             </div>
-            <section className={`prime-blocks ${animationClass} flex justify-content-center align-items-center flex-column`}>
+            <section className={`prime-blocks ${animationClass} flex justify-content-center align-items-center flex-column z-1`}>
                 <div className="flex">
                     <div className="prime-block flex align-self-stretch p-1">
                         <div className="block-sidebar w-1 p-3">
