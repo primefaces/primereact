@@ -230,7 +230,7 @@ export class Sidebar extends Component {
         };
 
         return (
-            <div ref={(el) => this.mask = el} style={this.props.maskStyle} className={maskClassName} onClick={this.onMaskClick}>
+            <div ref={(el) => this.mask = el} style={this.props.maskStyle} className={maskClassName} onMouseDown={this.onMaskClick}>
                 <CSSTransition nodeRef={this.sidebarRef} classNames="p-sidebar" in={this.state.visible} timeout={transitionTimeout} options={this.props.transitionOptions}
                     unmountOnExit onEntered={this.onEntered} onExiting={this.onExiting} onExited={this.onExited}>
                     <div ref={this.sidebarRef} id={this.props.id} className={className} style={this.props.style} role="complementary">
