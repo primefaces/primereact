@@ -225,21 +225,24 @@ export class Tooltip extends Component {
             this.applyDelay('updateDelay', updateTooltipState);
         }
         else {
-            this.sendCallback(this.props.onBeforeShow, { originalEvent: e, target: this.currentTarget });
-            this.applyDelay('showDelay', () => {
-                this.setState({
-                    visible: true,
-                    position: this.getPosition(this.currentTarget)
-                }, () => {
-                    updateTooltipState();
-                    this.sendCallback(this.props.onShow, { originalEvent: e, target: this.currentTarget });
+            // #2653 give the callback a chance to return false and not continue with display
+            const success = this.sendCallback(this.props.onBeforeShow, { originalEvent: e, target: this.currentTarget });
+            if (success) {
+                this.applyDelay('showDelay', () => {
+                    this.setState({
+                        visible: true,
+                        position: this.getPosition(this.currentTarget)
+                    }, () => {
+                        updateTooltipState();
+                        this.sendCallback(this.props.onShow, { originalEvent: e, target: this.currentTarget });
+                    });
+    
+                    this.bindDocumentResizeListener();
+                    this.bindScrollListener();
+    
+                    DomHandler.addClass(this.currentTarget, this.getTargetOption(this.currentTarget, 'classname'));
                 });
-
-                this.bindDocumentResizeListener();
-                this.bindScrollListener();
-
-                DomHandler.addClass(this.currentTarget, this.getTargetOption(this.currentTarget, 'classname'));
-            });
+            }
         }
     }
 
@@ -249,32 +252,34 @@ export class Tooltip extends Component {
         if (this.state.visible) {
             DomHandler.removeClass(this.currentTarget, this.getTargetOption(this.currentTarget, 'classname'));
 
-            this.sendCallback(this.props.onBeforeHide, { originalEvent: e, target: this.currentTarget });
-            this.applyDelay('hideDelay', () => {
-                ZIndexUtils.clear(this.containerEl);
-                DomHandler.removeClass(this.containerEl, 'p-tooltip-active');
-
-                if (!this.isAutoHide() && this.allowHide === false) {
-                    return;
-                }
-
-                this.setState({
-                    visible: false,
-                    position: this.props.position
-                }, () => {
-                    if (this.tooltipTextEl) {
-                        ReactDOM.unmountComponentAtNode(this.tooltipTextEl);
+            const success = this.sendCallback(this.props.onBeforeHide, { originalEvent: e, target: this.currentTarget });
+            if (success) {
+                this.applyDelay('hideDelay', () => {
+                    ZIndexUtils.clear(this.containerEl);
+                    DomHandler.removeClass(this.containerEl, 'p-tooltip-active');
+    
+                    if (!this.isAutoHide() && this.allowHide === false) {
+                        return;
                     }
-
-                    this.unbindDocumentResizeListener();
-                    this.unbindScrollListener();
-                    this.currentTarget = null;
-                    this.scrollHandler = null;
-                    this.containerSize = null;
-                    this.allowHide = true;
-                    this.sendCallback(this.props.onHide, { originalEvent: e, target: this.currentTarget });
+    
+                    this.setState({
+                        visible: false,
+                        position: this.props.position
+                    }, () => {
+                        if (this.tooltipTextEl) {
+                            ReactDOM.unmountComponentAtNode(this.tooltipTextEl);
+                        }
+    
+                        this.unbindDocumentResizeListener();
+                        this.unbindScrollListener();
+                        this.currentTarget = null;
+                        this.scrollHandler = null;
+                        this.containerSize = null;
+                        this.allowHide = true;
+                        this.sendCallback(this.props.onHide, { originalEvent: e, target: this.currentTarget });
+                    });
                 });
-            });
+            }
         }
     }
 
@@ -440,8 +445,13 @@ export class Tooltip extends Component {
 
     sendCallback(callback, ...params) {
         if (callback) {
-            callback(...params);
+             let result = callback(...params);
+             if (result === undefined) {
+                 result = true;
+             }
+             return result;
         }
+        return true;
     }
 
     clearTimeouts() {
