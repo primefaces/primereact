@@ -251,12 +251,12 @@ export class Tooltip extends Component {
 
             this.sendCallback(this.props.onBeforeHide, { originalEvent: e, target: this.currentTarget });
             this.applyDelay('hideDelay', () => {
-                ZIndexUtils.clear(this.containerEl);
-                DomHandler.removeClass(this.containerEl, 'p-tooltip-active');
-
                 if (!this.isAutoHide() && this.allowHide === false) {
                     return;
                 }
+
+                ZIndexUtils.clear(this.containerEl);
+                DomHandler.removeClass(this.containerEl, 'p-tooltip-active');
 
                 this.setState({
                     visible: false,
