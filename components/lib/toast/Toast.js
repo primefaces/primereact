@@ -42,13 +42,16 @@ export class Toast extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            messages: []
-        };
-
+        this.messages = []
         this.onClose = this.onClose.bind(this);
         this.onEntered = this.onEntered.bind(this);
         this.onExited = this.onExited.bind(this);
+    }
+    
+    setMessages(messages) {
+        this.messages = messages
+        
+        this.forceUpdate()
     }
 
     show(value) {
@@ -59,17 +62,17 @@ export class Toast extends Component {
                 if (Array.isArray(value)) {
                     for (let i = 0; i < value.length; i++) {
                         value[i].id = messageIdx++;
-                        newMessages = [...this.state.messages, ...value];
+                        newMessages = [...this.messages, ...value];
                     }
                 }
                 else {
                     value.id = messageIdx++;
-                    newMessages = this.state.messages ? [...this.state.messages, value] : [value];
+                    newMessages = this.messages ? [...this.messages, value] : [value];
                 }
 
-                this.state.messages.length === 0 && ZIndexUtils.set('toast', this.container, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['toast']);
+                this.messages.length === 0 && ZIndexUtils.set('toast', this.container, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['toast']);
 
-                this.setState({ messages: newMessages });
+                this.setMessages(newMessages)
             }
         }
     }
@@ -77,16 +80,13 @@ export class Toast extends Component {
     clear() {
         ZIndexUtils.clear(this.container);
 
-        this.setState({
-            messages: []
-        });
+        this.setMessages([])
     }
 
     onClose(message) {
-        let newMessages = this.state.messages.filter(msg => msg.id !== message.id);
-        this.setState({
-            messages: newMessages
-        });
+        let newMessages = this.messages.filter(msg => msg.id !== message.id);
+                
+        this.setMessages(newMessages)
 
         if (this.props.onRemove) {
             this.props.onRemove(message);
@@ -98,7 +98,7 @@ export class Toast extends Component {
     }
 
     onExited() {
-        this.state.messages.length === 0 && ZIndexUtils.clear(this.container);
+        this.messages.length === 0 && ZIndexUtils.clear(this.container);
 
         this.props.onHide && this.props.onHide();
     }
@@ -114,7 +114,7 @@ export class Toast extends Component {
             <div ref={(el) => { this.container = el; }} id={this.props.id} className={className} style={this.props.style}>
                 <TransitionGroup>
                     {
-                        this.state.messages.map((message) => {
+                        this.messages.map((message) => {
                             const messageRef = React.createRef();
 
                             return (
