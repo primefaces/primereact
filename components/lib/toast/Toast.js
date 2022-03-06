@@ -83,6 +83,13 @@ export class Toast extends Component {
         this.setMessages([])
     }
 
+    replace(value) {
+        // We are fine with setMessages being called twice behind the scenes
+        // as react batches state updates
+        this.clear()
+        this.show(value)
+    }
+
     onClose(message) {
         let newMessages = this.messages.filter(msg => msg.id !== message.id);
                 
