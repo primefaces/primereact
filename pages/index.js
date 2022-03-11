@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const [tableTheme, setTableTheme] = useState('lara-dark-indigo');
+    const [tableTheme, setTableTheme] = useState('lara-light-indigo');
     const rootClassName = classNames('landing', {'landing-light': !props.dark, 'landing-dark': props.dark});
     const toggleColorScheme = () => {
         const darkMode = !props.dark;

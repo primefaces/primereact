@@ -7,8 +7,8 @@ import Layout from '../components/layout/layout';
 import { useState } from 'react';
 
 export default function MyApp({ Component }) {
-    const [dark, setDark] = useState(true);
-    const [theme, setTheme] = useState('lara-dark-indigo');
+    const [dark, setDark] = useState(false);
+    const [theme, setTheme] = useState('lara-light-indigo');
 
     const props = {
         dark: dark,
