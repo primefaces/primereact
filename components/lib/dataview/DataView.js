@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import PrimeReact from '../api/Api';
 import { Paginator } from '../paginator/Paginator';
 import { ObjectUtils, classNames } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
