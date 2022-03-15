@@ -27,6 +27,7 @@ export class AutoComplete extends Component {
         scrollHeight: '200px',
         dropdown: false,
         dropdownMode: 'blank',
+        dropdownAutoFocus: true,
         multiple: false,
         minLength: 1,
         delay: 300,
@@ -88,6 +89,7 @@ export class AutoComplete extends Component {
         scrollHeight: PropTypes.string,
         dropdown: PropTypes.bool,
         dropdownMode: PropTypes.string,
+        dropdownAutoFocus: PropTypes.bool,
         multiple: PropTypes.bool,
         minLength: PropTypes.number,
         delay: PropTypes.number,
@@ -335,7 +337,9 @@ export class AutoComplete extends Component {
     }
 
     onDropdownClick(event) {
-        this.inputRef.current.focus();
+        if (this.props.dropdownAutoFocus) {
+            this.inputRef.current.focus();
+        }
 
         if (this.props.dropdownMode === 'blank')
             this.search(event, '', 'dropdown');

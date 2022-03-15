@@ -62,6 +62,7 @@ export interface AutoCompleteProps {
     scrollHeight?: string;
     dropdown?: boolean;
     dropdownMode?: string;
+    dropdownAutoFocus?: boolean;
     multiple?: boolean;
     minLength?: number;
     delay?: number;
