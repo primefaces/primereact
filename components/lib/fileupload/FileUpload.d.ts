@@ -76,7 +76,10 @@ interface FileUploadHandlerParam extends FileUploadFilesParam {
     options: FileUploadHandlerOptions;
 }
 
-interface FileUploadRemoveParams extends FileUploadSelectParams { }
+interface FileUploadRemoveParams { 
+    originalEvent: React.SyntheticEvent;
+    file: File;
+}
 
 interface FileUploadProps {
     id?: string;
