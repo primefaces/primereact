@@ -163,7 +163,7 @@ export class Rating extends Component {
     render() {
         let className = classNames('p-rating', {
             'p-disabled': this.props.disabled,
-            'p-rating-readonly': this.props.readOnly
+            'p-readonly': this.props.readOnly
         }, this.props.className);
         let cancelIcon = this.renderCancelIcon();
         let stars = this.renderStars();
