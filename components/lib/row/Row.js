@@ -14,6 +14,6 @@ export class Row extends Component {
     }
 
     render() {
-        return <tr>{this.props.children}</tr>;
+        return <tr className={this.props.className} style={this.props.style}>{this.props.children}</tr>;
     }
 }
