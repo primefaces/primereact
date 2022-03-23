@@ -53,24 +53,24 @@ export class Toast extends Component {
 
     show(value) {
         if (value) {
-            if (value) {
-                let newMessages;
+            // GitHub #2696 copy value
+            const currentMessage = {...value}
+            let newMessages;
 
-                if (Array.isArray(value)) {
-                    for (let i = 0; i < value.length; i++) {
-                        value[i].id = messageIdx++;
-                        newMessages = [...this.state.messages, ...value];
-                    }
+            if (Array.isArray(currentMessage)) {
+                for (let i = 0; i < currentMessage.length; i++) {
+                    currentMessage[i].id = messageIdx++;
+                    newMessages = [...this.state.messages, ...currentMessage];
                 }
-                else {
-                    value.id = messageIdx++;
-                    newMessages = this.state.messages ? [...this.state.messages, value] : [value];
-                }
-
-                this.state.messages.length === 0 && ZIndexUtils.set('toast', this.container, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['toast']);
-
-                this.setState({ messages: newMessages });
             }
+            else {
+                currentMessage.id = messageIdx++;
+                newMessages = this.state.messages ? [...this.state.messages, currentMessage] : [currentMessage];
+            }
+
+            this.state.messages.length === 0 && ZIndexUtils.set('toast', this.container, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['toast']);
+
+            this.setState({ messages: newMessages });
         }
     }
 
