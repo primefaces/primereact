@@ -48,8 +48,9 @@ export class FileUploadDemo extends Component {
 
     onTemplateSelect(e) {
         let totalSize = this.state.totalSize;
-        e.files.forEach(file => {
-            totalSize += file.size;
+        let files = e.files;
+        Object.keys(files).forEach(key => {
+            totalSize += (files[key].size || 0);
         });
 
         this.setState({
@@ -186,8 +187,9 @@ export const FileUploadDemo = () => {
 
     const onTemplateSelect = (e) => {
         let _totalSize = totalSize;
-        e.files.forEach(file => {
-            _totalSize += file.size;
+        let files = e.files;
+        Object.keys(files).forEach(key => {
+            totalSize += (files[key].size || 0);
         });
 
         setTotalSize(_totalSize);
@@ -316,8 +318,9 @@ export const FileUploadDemo = () => {
 
     const onTemplateSelect = (e) => {
         let _totalSize = totalSize;
-        e.files.forEach(file => {
-            _totalSize += file.size;
+        let files = e.files;
+        Object.keys(files).forEach(key => {
+            totalSize += (files[key].size || 0);
         });
 
         setTotalSize(_totalSize);
@@ -451,8 +454,9 @@ const FileUploadDemo = () => {
 
     const onTemplateSelect = (e) => {
         let _totalSize = totalSize;
-        e.files.forEach(file => {
-            _totalSize += file.size;
+        let files = e.files;
+        Object.keys(files).forEach(key => {
+            totalSize += (files[key].size || 0);
         });
 
         setTotalSize(_totalSize);

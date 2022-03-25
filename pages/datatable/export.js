@@ -260,11 +260,12 @@ export class DataTableExportDemoDoc extends Component {
 import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { ProductService } from '../service/ProductService';
+import { TabView } from 'primereact/tabview';
 import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
-import { ProductService } from '../service/ProductService';
 
 export class DataTableExportDemo extends Component {
 
@@ -372,32 +373,42 @@ export class DataTableExportDemo extends Component {
     }
 
     exportPdf() {
-        import('jspdf').then(jsPDF => {
-            import('jspdf-autotable').then(() => {
+        import("jspdf").then((jsPDF) => {
+            import("jspdf-autotable").then(() => {
                 const doc = new jsPDF.default(0, 0);
                 doc.autoTable(this.exportColumns, this.state.products);
-                doc.save('products.pdf');
-            })
+                doc.save("products.pdf");
+            });
         })
     }
 
     exportExcel() {
-        import('xlsx').then(xlsx => {
+        import("xlsx").then((xlsx) => {
             const worksheet = xlsx.utils.json_to_sheet(this.state.products);
-            const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-            const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-            this.saveAsExcelFile(excelBuffer, 'products');
+            const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+            const excelBuffer = xlsx.write(workbook, {
+                bookType: "xlsx",
+                type: "array"
+            });
+            this.saveAsExcelFile(excelBuffer, "products");
         });
     }
 
     saveAsExcelFile(buffer, fileName) {
-        import('file-saver').then(FileSaver => {
-            let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-            let EXCEL_EXTENSION = '.xlsx';
-            const data = new Blob([buffer], {
-                type: EXCEL_TYPE
-            });
-            FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+        import("file-saver").then((module) => {
+            if (module && module.default) {
+                let EXCEL_TYPE =
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+                let EXCEL_EXTENSION = ".xlsx";
+                const data = new Blob([buffer], {
+                    type: EXCEL_TYPE
+                });
+
+                module.default.saveAs(
+                    data,
+                    fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+                );
+            }
         });
     }
 
@@ -442,8 +453,8 @@ export class DataTableExportDemo extends Component {
                     <Toast ref={(el) => this.toast = el} />
 
                     <div className="flex align-items-center py-2">
-                        <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" className="mr-2" onUpload={this.importCSV} />
-                        <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php"
+                        <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php accept=".csv" className="mr-2" onUpload={this.importCSV} />
+                        <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php
                             accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="mr-2" onUpload={this.importExcel} />
                         <Button type="button" label="Clear" icon="pi pi-times" onClick={this.clear} className="p-button-info ml-auto" />
                     </div>
@@ -473,6 +484,7 @@ export class DataTableExportDemo extends Component {
     }
 }
                 `
+
             },
             'hooks': {
                 tabName: 'Hooks Source',
@@ -480,13 +492,15 @@ export class DataTableExportDemo extends Component {
 import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { ProductService } from '../service/ProductService';
+import { TabView } from 'primereact/tabview';
 import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
-import { ProductService } from '../service/ProductService';
 
 export const DataTableExportDemo = () => {
+
     const [products, setProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [importedData, setImportedData] = useState([]);
@@ -494,6 +508,7 @@ export const DataTableExportDemo = () => {
     const [importedCols, setImportedCols] = useState([{ field: '', header: 'Header' }]);
     const dt = useRef(null);
     const toast = useRef(null);
+
     const productService = new ProductService();
 
     const cols = [
@@ -506,8 +521,8 @@ export const DataTableExportDemo = () => {
     const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        const productService.getProductsSmall().then(data => setProducts(data));
+    }, [])
 
     const importCSV = (e) => {
         const file = e.files[0];
@@ -572,32 +587,42 @@ export const DataTableExportDemo = () => {
     }
 
     const exportPdf = () => {
-        import('jspdf').then(jsPDF => {
-            import('jspdf-autotable').then(() => {
+        import("jspdf").then((jsPDF) => {
+            import("jspdf-autotable").then(() => {
                 const doc = new jsPDF.default(0, 0);
                 doc.autoTable(exportColumns, products);
-                doc.save('products.pdf');
-            })
+                doc.save("products.pdf");
+            });
         })
     }
 
     const exportExcel = () => {
-        import('xlsx').then(xlsx => {
+        import("xlsx").then((xlsx) => {
             const worksheet = xlsx.utils.json_to_sheet(products);
-            const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-            const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-            saveAsExcelFile(excelBuffer, 'products');
+            const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+            const excelBuffer = xlsx.write(workbook, {
+                bookType: "xlsx",
+                type: "array"
+            });
+            saveAsExcelFile(excelBuffer, "products");
         });
     }
 
     const saveAsExcelFile = (buffer, fileName) => {
-        import('file-saver').then(FileSaver => {
-            let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-            let EXCEL_EXTENSION = '.xlsx';
-            const data = new Blob([buffer], {
-                type: EXCEL_TYPE
-            });
-            FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+        import("file-saver").then((module) => {
+            if (module && module.default) {
+                let EXCEL_TYPE =
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+                let EXCEL_EXTENSION = ".xlsx";
+                const data = new Blob([buffer], {
+                    type: EXCEL_TYPE
+                });
+
+                module.default.saveAs(
+                    data,
+                    fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+                );
+            }
         });
     }
 
@@ -613,9 +638,12 @@ export const DataTableExportDemo = () => {
 
     const onImportSelectionChange = (e) => {
         setSelectedImportedData(e.value);
-        const detail = e.value.map(d => Object.values(d)[0]).join(', ');
-        toast.current.show({ severity: 'info', summary: 'Data Selected', detail, life: 3000 });
     }
+
+    useEffect(() => {
+        const detail = selectedImportedData.map(d => Object.values(d)[0]).join(', ');
+        toast.current.show({ severity: 'info', summary: 'Data Selected', detail, life: 3000 });
+    }, [selectedImportedData])
 
     const onSelectionChange = (e) => {
         setSelectedProducts(e.value);
@@ -675,13 +703,15 @@ export const DataTableExportDemo = () => {
 import React, { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { ProductService } from '../service/ProductService';
+import { TabView } from 'primereact/tabview';
 import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
-import { ProductService } from '../service/ProductService';
 
 export const DataTableExportDemo = () => {
+
     const [products, setProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [importedData, setImportedData] = useState([]);
@@ -689,6 +719,7 @@ export const DataTableExportDemo = () => {
     const [importedCols, setImportedCols] = useState([{ field: '', header: 'Header' }]);
     const dt = useRef(null);
     const toast = useRef(null);
+
     const productService = new ProductService();
 
     const cols = [
@@ -701,8 +732,8 @@ export const DataTableExportDemo = () => {
     const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        const productService.getProductsSmall().then(data => setProducts(data));
+    }, [])
 
     const importCSV = (e) => {
         const file = e.files[0];
@@ -767,32 +798,42 @@ export const DataTableExportDemo = () => {
     }
 
     const exportPdf = () => {
-        import('jspdf').then(jsPDF => {
-            import('jspdf-autotable').then(() => {
+        import("jspdf").then((jsPDF) => {
+            import("jspdf-autotable").then(() => {
                 const doc = new jsPDF.default(0, 0);
                 doc.autoTable(exportColumns, products);
-                doc.save('products.pdf');
-            })
+                doc.save("products.pdf");
+            });
         })
     }
 
     const exportExcel = () => {
-        import('xlsx').then(xlsx => {
+        import("xlsx").then((xlsx) => {
             const worksheet = xlsx.utils.json_to_sheet(products);
-            const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-            const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-            saveAsExcelFile(excelBuffer, 'products');
+            const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+            const excelBuffer = xlsx.write(workbook, {
+                bookType: "xlsx",
+                type: "array"
+            });
+            saveAsExcelFile(excelBuffer, "products");
         });
     }
 
     const saveAsExcelFile = (buffer, fileName) => {
-        import('file-saver').then(FileSaver => {
-            let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-            let EXCEL_EXTENSION = '.xlsx';
-            const data = new Blob([buffer], {
-                type: EXCEL_TYPE
-            });
-            FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+        import("file-saver").then((module) => {
+            if (module && module.default) {
+                let EXCEL_TYPE =
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+                let EXCEL_EXTENSION = ".xlsx";
+                const data = new Blob([buffer], {
+                    type: EXCEL_TYPE
+                });
+
+                module.default.saveAs(
+                    data,
+                    fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+                );
+            }
         });
     }
 
@@ -808,9 +849,12 @@ export const DataTableExportDemo = () => {
 
     const onImportSelectionChange = (e) => {
         setSelectedImportedData(e.value);
-        const detail = e.value.map(d => Object.values(d)[0]).join(', ');
-        toast.current.show({ severity: 'info', summary: 'Data Selected', detail, life: 3000 });
     }
+
+    useEffect(() => {
+        const detail = selectedImportedData.map(d => Object.values(d)[0]).join(', ');
+        toast.current.show({ severity: 'info', summary: 'Data Selected', detail, life: 3000 });
+    }, [selectedImportedData])
 
     const onSelectionChange = (e) => {
         setSelectedProducts(e.value);
@@ -890,6 +934,7 @@ const { Tooltip } = primereact.tooltip;
 const { Toast } = primereact.toast;
 
 const DataTableExportDemo = () => {
+
     const [products, setProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [importedData, setImportedData] = useState([]);
@@ -897,6 +942,7 @@ const DataTableExportDemo = () => {
     const [importedCols, setImportedCols] = useState([{ field: '', header: 'Header' }]);
     const dt = useRef(null);
     const toast = useRef(null);
+
     const productService = new ProductService();
 
     const cols = [
@@ -909,15 +955,15 @@ const DataTableExportDemo = () => {
     const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        const productService.getProductsSmall().then(data => setProducts(data));
+    }, [])
 
     const importCSV = (e) => {
         const file = e.files[0];
         const reader = new FileReader();
         reader.onload = (e) => {
             const csv = e.target.result;
-            const data = csv.split('\\n');
+            const data = csv.split('\n');
 
             // Prepare DataTable
             const cols = data[0].replace(/['"]+/g, '').split(',');
@@ -975,32 +1021,42 @@ const DataTableExportDemo = () => {
     }
 
     const exportPdf = () => {
-        import('jspdf').then(jsPDF => {
-            import('jspdf-autotable').then(() => {
+        import("jspdf").then((jsPDF) => {
+            import("jspdf-autotable").then(() => {
                 const doc = new jsPDF.default(0, 0);
                 doc.autoTable(exportColumns, products);
-                doc.save('products.pdf');
-            })
+                doc.save("products.pdf");
+            });
         })
     }
 
     const exportExcel = () => {
-        import('xlsx').then(xlsx => {
+        import("xlsx").then((xlsx) => {
             const worksheet = xlsx.utils.json_to_sheet(products);
-            const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-            const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-            saveAsExcelFile(excelBuffer, 'products');
+            const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+            const excelBuffer = xlsx.write(workbook, {
+                bookType: "xlsx",
+                type: "array"
+            });
+            saveAsExcelFile(excelBuffer, "products");
         });
     }
 
     const saveAsExcelFile = (buffer, fileName) => {
-        import('file-saver').then(FileSaver => {
-            let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-            let EXCEL_EXTENSION = '.xlsx';
-            const data = new Blob([buffer], {
-                type: EXCEL_TYPE
-            });
-            FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+        import("file-saver").then((module) => {
+            if (module && module.default) {
+                let EXCEL_TYPE =
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+                let EXCEL_EXTENSION = ".xlsx";
+                const data = new Blob([buffer], {
+                    type: EXCEL_TYPE
+                });
+
+                module.default.saveAs(
+                    data,
+                    fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+                );
+            }
         });
     }
 
@@ -1008,7 +1064,7 @@ const DataTableExportDemo = () => {
         return s.charAt(0).toUpperCase() + s.slice(1);
     }
 
-    const clear = () => {
+    const clear = () 0> {
         setImportedData([]);
         setSelectedImportedData([]);
         setImportedCols([{ field: '', header: 'Header' }]);
@@ -1016,9 +1072,12 @@ const DataTableExportDemo = () => {
 
     const onImportSelectionChange = (e) => {
         setSelectedImportedData(e.value);
-        const detail = e.value.map(d => Object.values(d)[0]).join(', ');
-        toast.current.show({ severity: 'info', summary: 'Data Selected', detail, life: 3000 });
     }
+
+    useEffect(() => {
+        const detail = .electedImportedData.map(d => Object.values(d)[0]).join(', ');
+        toast.current.show({ severity: 'info', summary: 'Data Selected', detail, life: 3000 });
+    }, [selectedImportedData])
 
     const onSelectionChange = (e) => {
         setSelectedProducts(e.value);
