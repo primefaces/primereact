@@ -10,6 +10,7 @@ import { Tooltip } from '../../components/lib/tooltip/Tooltip';
 import { Toast } from '../../components/lib/toast/Toast';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import getConfig from 'next/config';
 
 export default class DataTableExportDemo extends Component {
 
@@ -23,6 +24,8 @@ export default class DataTableExportDemo extends Component {
             selectedImportedData: [],
             importedCols: [{ field: '', header: 'Header' }]
         };
+
+        this.uploadPath = getConfig().publicRuntimeConfig.uploadPath;
 
         this.importCSV = this.importCSV.bind(this);
         this.importExcel = this.importExcel.bind(this);
@@ -117,32 +120,42 @@ export default class DataTableExportDemo extends Component {
     }
 
     exportPdf() {
-        import('jspdf').then(jsPDF => {
-            import('jspdf-autotable').then(() => {
+        import("jspdf").then((jsPDF) => {
+            import("jspdf-autotable").then(() => {
                 const doc = new jsPDF.default(0, 0);
                 doc.autoTable(this.exportColumns, this.state.products);
-                doc.save('products.pdf');
-            })
+                doc.save("products.pdf");
+            });
         })
     }
 
     exportExcel() {
-        import('xlsx').then(xlsx => {
+        import("xlsx").then((xlsx) => {
             const worksheet = xlsx.utils.json_to_sheet(this.state.products);
-            const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-            const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-            this.saveAsExcelFile(excelBuffer, 'products');
+            const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+            const excelBuffer = xlsx.write(workbook, {
+                bookType: "xlsx",
+                type: "array"
+            });
+            this.saveAsExcelFile(excelBuffer, "products");
         });
     }
 
     saveAsExcelFile(buffer, fileName) {
-        import('file-saver').then(FileSaver => {
-            let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-            let EXCEL_EXTENSION = '.xlsx';
-            const data = new Blob([buffer], {
-                type: EXCEL_TYPE
-            });
-            FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+        import("file-saver").then((module) => {
+            if (module && module.default) {
+                let EXCEL_TYPE =
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+                let EXCEL_EXTENSION = ".xlsx";
+                const data = new Blob([buffer], {
+                    type: EXCEL_TYPE
+                });
+
+                module.default.saveAs(
+                    data,
+                    fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+                );
+            }
         });
     }
 
@@ -201,8 +214,8 @@ export default class DataTableExportDemo extends Component {
                         <Toast ref={(el) => this.toast = el} />
 
                         <div className="flex align-items-center py-2">
-                            <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" className="mr-2" onUpload={this.importCSV} />
-                            <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url="./upload.php"
+                            <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url={this.uploadPath} accept=".csv" className="mr-2" onUpload={this.importCSV} />
+                            <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url={this.uploadPath}
                                 accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="mr-2" onUpload={this.importExcel} />
                             <Button type="button" label="Clear" icon="pi pi-times" onClick={this.clear} className="p-button-info ml-auto" />
                         </div>

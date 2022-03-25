@@ -8,6 +8,7 @@ import { Tag } from '../../components/lib/tag/Tag';
 import { FileUploadDoc } from '../../components/doc/fileupload';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import getConfig from 'next/config';
 
 export default class FileUploadDemo extends Component {
 
@@ -28,6 +29,7 @@ export default class FileUploadDemo extends Component {
         this.headerTemplate = this.headerTemplate.bind(this);
         this.itemTemplate = this.itemTemplate.bind(this);
         this.emptyTemplate = this.emptyTemplate.bind(this);
+        this.uploadPath = getConfig().publicRuntimeConfig.uploadPath;
     }
 
     onUpload() {
@@ -36,8 +38,9 @@ export default class FileUploadDemo extends Component {
 
     onTemplateSelect(e) {
         let totalSize = this.state.totalSize;
-        e.files.forEach(file => {
-            totalSize += file.size;
+        let files = e.files;
+        Object.keys(files).forEach(key => {
+            totalSize += (files[key].size || 0);
         });
 
         this.setState({
@@ -144,20 +147,20 @@ export default class FileUploadDemo extends Component {
 
                     <div className="card">
                         <h5>Advanced</h5>
-                        <FileUpload name="demo[]" url="upload.php" onUpload={this.onUpload} multiple accept="image/*" maxFileSize={1000000}
+                        <FileUpload name="demo[]" url={this.uploadPath} onUpload={this.onUpload} multiple accept="image/*" maxFileSize={1000000}
                             emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
 
                         <h5>Template</h5>
-                        <FileUpload ref={(el) => this.fileUploadRef = el} name="demo[]" url="upload.php" multiple accept="image/*" maxFileSize={1000000}
+                        <FileUpload ref={(el) => this.fileUploadRef = el} name="demo[]" url={this.uploadPath} multiple accept="image/*" maxFileSize={1000000}
                             onUpload={this.onTemplateUpload} onSelect={this.onTemplateSelect} onError={this.onTemplateClear} onClear={this.onTemplateClear}
                             headerTemplate={this.headerTemplate} itemTemplate={this.itemTemplate} emptyTemplate={this.emptyTemplate}
                             chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
 
                         <h5>Basic</h5>
-                        <FileUpload mode="basic" name="demo[]" url="upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
+                        <FileUpload mode="basic" name="demo[]" url={this.uploadPath} accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUpload} />
 
                         <h5>Basic with Auto</h5>
-                        <FileUpload mode="basic" name="demo[]" url="upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto chooseLabel="Browse" />
+                        <FileUpload mode="basic" name="demo[]" url={this.uploadPath} accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto chooseLabel="Browse" />
                     </div>
                 </div>
 
