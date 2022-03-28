@@ -210,6 +210,11 @@ export class Tooltip extends Component {
                 this.containerEl.style.left = '';
                 this.containerEl.style.top = '';
 
+                // GitHub #2695 disable pointer events when autohiding
+                if (this.isAutoHide()) {
+                    this.containerEl.style.pointerEvents = 'none';
+                }
+
                 if (this.isMouseTrack(this.currentTarget) && !this.containerSize) {
                     this.containerSize = {
                         width: DomHandler.getOuterWidth(this.containerEl),
