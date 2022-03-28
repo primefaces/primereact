@@ -46,6 +46,15 @@ interface ConfirmDialogReturn {
     hide(): void;
 }
 
-export declare class ConfirmDialog extends React.Component<ConfirmDialogProps, any> { }
+export declare class ConfirmDialog extends React.Component<ConfirmDialogProps, any> {
+    acceptLabel(): string;
+    rejectLabel(): string;
+    accept(): void;
+    reject(): void;
+    show(): void;
+    hide(result?: string): void;
+    renderFooter(): JSX.Element | null;
+    renderElement(): JSX.Element | null;
+}
 
 export declare function confirmDialog(props: ConfirmDialogProps): ConfirmDialogReturn;

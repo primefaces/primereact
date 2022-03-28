@@ -62,4 +62,45 @@ export interface DialogProps {
     onClick?(e: React.MouseEvent<HTMLElement>): void;
 }
 
-export declare class Dialog extends React.Component<DialogProps, any> { }
+export declare class Dialog extends React.Component<DialogProps, any> {
+    attributeSelector: string;
+    dialogRef: React.RefObject<HTMLElement>;
+    onClose(e: React.MouseEvent<HTMLElement>): void;
+    focus(): void;
+    onMaskClick(e: React.MouseEvent<HTMLElement>): void;
+    toggleMaximize(e: React.MouseEvent<HTMLElement>): void;
+    onDragStart(e: React.DragEvent<HTMLElement>): void;
+    onDrag(e: React.DragEvent<HTMLElement>): void;
+    onDragEnd(e: React.DragEvent<HTMLElement>): void;
+    onResizeStart(e: React.DragEvent<HTMLElement>): void;
+    convertToPx(value: string, property: string, viewport: { width: number; height: number; }): void;
+    onResize(e: React.MouseEvent<HTMLElement>): void;
+    onResizeEnd(e: React.MouseEvent<HTMLElement>): void;
+    resetPosition(): void;
+    getPositionClass(): string;
+    get maximized(): boolean;
+    get dialogEl(): HTMLElement | null;
+    onEnter(): void;
+    onEntered(): void;
+    onExiting(): void;
+    onExited(): void;
+    enableDocumentSettings(): void;
+    disableDocumentSettings(): void;
+    bindGlobalListeners(): void;
+    unbindGlobalListeners(): void;
+    bindDocumentDragListener(): void;
+    unbindDocumentDragListener(): void;
+    bindDocumentResizeListeners(): void;
+    unbindDocumentResizeListeners(): void;
+    bindDocumentKeyDownListener(): void;
+    unbindDocumentKeyDownListener(): void;
+    createStyle(): void;
+    changeScrollOnMaximizable(): void;
+    renderCloseIcon(): JSX.Element | null;
+    renderMaximizeIcon(): JSX.Element | null;
+    renderHeader(): JSX.Element | null;
+    renderContent(): JSX.Element | null;
+    renderFooter(): JSX.Element | null;
+    renderResizer(): JSX.Element | null;
+    renderElement(): JSX.Element | null;
+}
