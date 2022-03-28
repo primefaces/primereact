@@ -65,6 +65,7 @@ export interface DialogProps {
 export declare class Dialog extends React.Component<DialogProps, any> {
     attributeSelector: string;
     dialogRef: React.RefObject<HTMLDivElement>;
+    mask: HTMLDivElement | null;
     onClose(e: React.MouseEvent<HTMLElement>): void;
     focus(): void;
     onMaskClick(e: React.MouseEvent<HTMLElement>): void;
