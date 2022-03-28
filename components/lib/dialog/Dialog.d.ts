@@ -64,7 +64,7 @@ export interface DialogProps {
 
 export declare class Dialog extends React.Component<DialogProps, any> {
     attributeSelector: string;
-    dialogRef: React.RefObject<HTMLElement>;
+    dialogRef: React.RefObject<HTMLDivElement>;
     onClose(e: React.MouseEvent<HTMLElement>): void;
     focus(): void;
     onMaskClick(e: React.MouseEvent<HTMLElement>): void;
@@ -79,7 +79,7 @@ export declare class Dialog extends React.Component<DialogProps, any> {
     resetPosition(): void;
     getPositionClass(): string;
     get maximized(): boolean;
-    get dialogEl(): HTMLElement | null;
+    get dialogEl(): HTMLDivElement | null;
     onEnter(): void;
     onEntered(): void;
     onExiting(): void;
