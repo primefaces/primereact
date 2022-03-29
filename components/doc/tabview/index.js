@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class TabViewDoc extends Component {
+const TabViewDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Button } from 'primereact/button';
@@ -141,7 +138,7 @@ export class TabViewDemo extends Component {
 
                 <div className="card">
                     <h5>Header Icons</h5>
-                    <TabView className="tabview-custom">
+                    <TabView className="tabview-header-icon">
                         <TabPanel header="Header I" leftIcon="pi pi-calendar">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                             ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
@@ -225,10 +222,10 @@ export class TabViewDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Button } from 'primereact/button';
@@ -345,7 +342,7 @@ const TabViewDemo = () => {
 
             <div className="card">
                 <h5>Header Icons</h5>
-                <TabView className="tabview-custom">
+                <TabView className="tabview-header-icon">
                     <TabPanel header="Header I" leftIcon="pi pi-calendar">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                         ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
@@ -428,10 +425,10 @@ const TabViewDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Button } from 'primereact/button';
@@ -548,7 +545,7 @@ const TabViewDemo = () => {
 
             <div className="card">
                 <h5>Header Icons</h5>
-                <TabView className="tabview-custom">
+                <TabView className="tabview-header-icon">
                     <TabPanel header="Header I" leftIcon="pi pi-calendar">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                         ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
@@ -631,16 +628,16 @@ const TabViewDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./TabViewDemo.css" />
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/tabview/tabview.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { TabView, TabPanel } = primereact.tabview;
 const { Button } = primereact.button;
 const { SplitButton } = primereact.splitbutton;
@@ -755,7 +752,7 @@ const TabViewDemo = () => {
 
             <div className="card">
                 <h5>Header Icons</h5>
-                <TabView className="tabview-custom">
+                <TabView className="tabview-header-icon">
                     <TabPanel header="Header I" leftIcon="pi pi-calendar">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                         ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
@@ -838,12 +835,12 @@ const TabViewDemo = () => {
     )
 }
                 `
-            }
-        };
+        }
+    };
 
-        this.extFiles = {
-            'demo/TabViewDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/TabViewDemo.css': {
+            content: `
 .tabview-demo .tabview-header-icon i, .tabview-demo .tabview-header-icon span {
     vertical-align: middle;
 }
@@ -857,27 +854,21 @@ const TabViewDemo = () => {
     margin: 0;
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { TabView, TabPanel } from 'primereact/tabview';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -885,11 +876,11 @@ import { TabView, TabPanel } from 'primereact/tabview';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>Tabview element consists of one or more TabPanel elements and can either be used as a Controlled or Uncontrolled component.</p>
+                    <h5>Getting Started</h5>
+                    <p>Tabview element consists of one or more TabPanel elements and can either be used as a Controlled or Uncontrolled component.</p>
 
-                        <h5>Controlled Component</h5>
-                        <p>In controlled mode, <i>activeIndex</i> and <i>onTabChange</i> properties need to be defined to control the state.</p>
+                    <h5>Controlled Component</h5>
+                    <p>In controlled mode, <i>activeIndex</i> and <i>onTabChange</i> properties need to be defined to control the state.</p>
 
 <CodeHighlight>
 {`
@@ -909,9 +900,9 @@ const [activeIndex, setActiveIndex] = useState(0);
 `}
 </CodeHighlight>
 
-                        <h5>Uncontrolled</h5>
-                        <p>In uncontrolled mode, no additional properties are required. Initial active tab can be provided using the <i>activeIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
-                need to update the active tab, prefer to use the component as controlled.</p>
+                    <h5>Uncontrolled</h5>
+                    <p>In uncontrolled mode, no additional properties are required. Initial active tab can be provided using the <i>activeIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
+            need to update the active tab, prefer to use the component as controlled.</p>
 
 <CodeHighlight>
 {`
@@ -929,8 +920,8 @@ const [activeIndex, setActiveIndex] = useState(0);
 `}
 </CodeHighlight>
 
-                        <h5>Header Template</h5>
-                        <p>The header element is fully customizable on TabPanel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.</p>
+                    <h5>Header Template</h5>
+                    <p>The header element is fully customizable on TabPanel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.</p>
 <CodeHighlight lang="js">
 {`
 <TabView>
@@ -959,233 +950,234 @@ template: (options) => {
 `}
 </CodeHighlight>
 
-                        <h5>Properties For TabPanel</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>header</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Orientation of tab headers.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>headerTemplate</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Header template of the tab to customize more.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>leftIcon</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Icons can be placed at left of a header.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>rightIcon</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Icons can be placed at right of a header.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>disabled</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Whether the tab is disabled.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>closable</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Defines if tab can be removed.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the tab header and content.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the tab header and content.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>headerStyle</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the tab header.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>headerClassName</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the tab header.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>contentStyle</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the tab content.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>contentClassName</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the tab content.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties For TabPanel</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>header</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Orientation of tab headers.</td>
+                                </tr>
+                                <tr>
+                                    <td>headerTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Header template of the tab to customize more.</td>
+                                </tr>
+                                <tr>
+                                    <td>leftIcon</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Icons can be placed at left of a header.</td>
+                                </tr>
+                                <tr>
+                                    <td>rightIcon</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Icons can be placed at right of a header.</td>
+                                </tr>
+                                <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether the tab is disabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>closable</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Defines if tab can be removed.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the tab header and content.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the tab header and content.</td>
+                                </tr>
+                                <tr>
+                                    <td>headerStyle</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the tab header.</td>
+                                </tr>
+                                <tr>
+                                    <td>headerClassName</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the tab header.</td>
+                                </tr>
+                                <tr>
+                                    <td>contentStyle</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the tab content.</td>
+                                </tr>
+                                <tr>
+                                    <td>contentClassName</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the tab content.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Properties For TabView</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>activeIndex</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Active index of the TabView.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the tabview.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the tabview.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>renderActiveOnly</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether to render the contents of the selected tab or all tabs.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>scrollable</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>When enabled displays buttons at each side of the tab headers to scroll the tab list.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties For TabView</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>activeIndex</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Active index of the TabView.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the tabview.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the tabview.</td>
+                                </tr>
+                                <tr>
+                                    <td>renderActiveOnly</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to render the contents of the selected tab or all tabs.</td>
+                                </tr>
+                                <tr>
+                                    <td>scrollable</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When enabled displays buttons at each side of the tab headers to scroll the tab list.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onTabChange</td>
-                                        <td>event.originalEvent: Browser event  <br />
-                                event.index: Index of the selected tab
-                            </td>
-                                        <td>Callback to invoke when an active tab is changed.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onTabChange</td>
+                                    <td>event.originalEvent: Browser event  <br />
+                            event.index: Index of the selected tab
+                        </td>
+                                    <td>Callback to invoke when an active tab is changed.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Methods</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>reset</td>
-                                        <td>-</td>
-                                        <td>Resets all states.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Methods</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>reset</td>
+                                    <td>-</td>
+                                    <td>Resets all states.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-tabview</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-tabview-nav</td>
-                                        <td>Container of headers.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-tabview-selected</td>
-                                        <td>Selected tab header.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-tabview-panels</td>
-                                        <td>Container panels.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-tabview-panel</td>
-                                        <td>Content of a tab.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-tabview</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-tabview-nav</td>
+                                    <td>Container of headers.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-tabview-selected</td>
+                                    <td>Selected tab header.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-tabview-panels</td>
+                                    <td>Container panels.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-tabview-panel</td>
+                                    <td>Content of a tab.</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                            <h5>Dependencies</h5>
-                            <p>None.</p>
-                        </div>
+                        <h5>Dependencies</h5>
+                        <p>None.</p>
+                    </div>
 
-                    </TabPanel>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'TabViewDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'TabViewDemo', sources: sources, extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default TabViewDoc;

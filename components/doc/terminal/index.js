@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class TerminalDoc extends Component {
+const TerminalDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Terminal } from 'primereact/terminal';
 import { TerminalService } from 'primereact/terminalservice';
@@ -75,10 +72,10 @@ export class TerminalDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useEFfect } from 'react';
 import { Terminal } from 'primereact/terminal';
 import { TerminalService } from 'primereact/terminalservice';
@@ -139,10 +136,10 @@ export const TerminalDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useEFfect } from 'react';
 import { Terminal } from 'primereact/terminal';
 import { TerminalService } from 'primereact/terminalservice';
@@ -203,15 +200,15 @@ export const TerminalDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./TerminalDemo.css" />
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/terminal/terminal.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { Terminal } = primereact.terminal;
 const { TerminalService } = primereact.terminalservice;
@@ -271,12 +268,12 @@ const TerminalDemo = () => {
     )
 }
                 `
-            }
         }
+    }
 
-        this.extFiles = {
-            'demo/TerminalDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/TerminalDemo.css': {
+            content: `
 .terminal-demo p {
     margin-top: 0;
 }
@@ -294,20 +291,14 @@ const TerminalDemo = () => {
     color: #9fa8da;
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Terminal } from 'primereact/terminal';
@@ -315,7 +306,7 @@ import { TerminalService } from 'primereact/terminalservice';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -323,10 +314,10 @@ import { TerminalService } from 'primereact/terminalservice';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>Commands are processed using an EventBus implementation called TerminalService.
-                            Import this service into your component and subscribe to the <i>command</i> event to process the commands by
-                                sending replies with the <i>response</i> event. Also, all commands can be cleared using the <i>clear</i> event</p>
+                    <h5>Getting Started</h5>
+                    <p>Commands are processed using an EventBus implementation called TerminalService.
+                        Import this service into your component and subscribe to the <i>command</i> event to process the commands by
+                            sending replies with the <i>response</i> event. Also, all commands can be cleared using the <i>clear</i> event</p>
 
 <CodeHighlight lang="js">
 {`
@@ -382,98 +373,99 @@ export const TerminalDemo = () => {
 `}
 </CodeHighlight>
 
-                        <h5>Properties</h5>
-                        <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>welcomeMessage</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Initial text to display on terminal.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>prompt</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Prompt text for each command.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>welcomeMessage</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Initial text to display on terminal.</td>
+                                </tr>
+                                <tr>
+                                    <td>prompt</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Prompt text for each command.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-terminal</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-terminal-content</td>
-                                        <td>Content of terminal.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-terminal-prompt</td>
-                                        <td>Prompt text.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-terminal-response</td>
-                                        <td>Command response.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-terminal-input</td>
-                                        <td>Input element to enter commands.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-terminal</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-terminal-content</td>
+                                    <td>Content of terminal.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-terminal-prompt</td>
+                                    <td>Prompt text.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-terminal-response</td>
+                                    <td>Command response.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-terminal-input</td>
+                                    <td>Input element to enter commands.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'TerminalDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
+                {
+                    useLiveEditorTabs({ name: 'TerminalDemo', sources: sources, extFiles: extFiles })
+                }
 
-                </TabView>
-            </div>
-        )
-    }
-}
+            </TabView>
+        </div>
+    )
+})
+
+export default TerminalDoc;

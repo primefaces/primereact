@@ -12,6 +12,7 @@
     scroll-behavior: smooth;
     scrollbar-width: none;
     overscroll-behavior: contain auto;
+    position: relative;
 }
 
 .p-tabview-nav {

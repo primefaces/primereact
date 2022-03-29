@@ -1,51 +1,20 @@
-import React, { Component } from 'react';
+import React, { forwardRef, memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { classNames, ObjectUtils } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
 
-export class Dock extends Component {
+export const Dock = memo(forwardRef((props, ref) => {
+    const [currentIndexState, setCurrentIndexState] = useState(-3);
 
-    static defaultProps = {
-        id: null,
-        style: null,
-        className: null,
-        model: null,
-        position: 'bottom',
-        magnification: true,
-        header: null,
-        footer: null
-    };
-
-    static propTypes = {
-        id: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        model: PropTypes.array,
-        position: PropTypes.string,
-        magnification: PropTypes.bool,
-        header: PropTypes.any,
-        footer: PropTypes.any
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            currentIndex: -3
-        };
-
-        this.onListMouseLeave = this.onListMouseLeave.bind(this);
+    const onListMouseLeave = () => {
+        setCurrentIndexState(-3);
     }
 
-    onListMouseLeave() {
-        this.setState({ currentIndex: -3 });
+    const onItemMouseEnter = (index) => {
+        setCurrentIndexState(index);
     }
 
-    onItemMouseEnter(index) {
-        this.setState({ currentIndex: index });
-    }
-
-    onItemClick(e, item) {
+    const onItemClick = (e, item) => {
         if (item.command) {
             item.command({ originalEvent: e, item });
         }
@@ -53,21 +22,21 @@ export class Dock extends Component {
         e.preventDefault();
     }
 
-    renderItem(item, index) {
+    const createItem = (item, index) => {
         const { disabled, icon: _icon, label, template, url, target } = item;
         const className = classNames('p-dock-item', {
-            'p-dock-item-second-prev': (this.state.currentIndex - 2) === index,
-            'p-dock-item-prev': (this.state.currentIndex - 1) === index,
-            'p-dock-item-current': this.state.currentIndex === index,
-            'p-dock-item-next': (this.state.currentIndex + 1) === index,
-            'p-dock-item-second-next': (this.state.currentIndex + 2) === index
+            'p-dock-item-second-prev': (currentIndexState - 2) === index,
+            'p-dock-item-prev': (currentIndexState - 1) === index,
+            'p-dock-item-current': currentIndexState === index,
+            'p-dock-item-next': (currentIndexState + 1) === index,
+            'p-dock-item-second-next': (currentIndexState + 2) === index
         });
         const contentClassName = classNames('p-dock-action', { 'p-disabled': disabled });
         const iconClassName = classNames('p-dock-action-icon', _icon);
-        const icon = typeof _icon === 'string' ? <span className={iconClassName}></span> : ObjectUtils.getJSXElement(_icon, this.props);
+        const icon = typeof _icon === 'string' ? <span className={iconClassName}></span> : ObjectUtils.getJSXElement(_icon, props);
 
         let content = (
-            <a href={url || '#'} role="menuitem" className={contentClassName} target={target} data-pr-tooltip={label} onClick={(e) => this.onItemClick(e, item)}>
+            <a href={url || '#'} role="menuitem" className={contentClassName} target={target} data-pr-tooltip={label} onClick={(e) => onItemClick(e, item)}>
                 {icon}
                 <Ripple />
             </a>
@@ -75,11 +44,11 @@ export class Dock extends Component {
 
         if (template) {
             const defaultContentOptions = {
-                onClick: (e) => this.onItemClick(e, item),
+                onClick: (e) => onItemClick(e, item),
                 className: contentClassName,
                 iconClassName,
                 element: content,
-                props: this.props,
+                props,
                 index
             };
 
@@ -87,25 +56,22 @@ export class Dock extends Component {
         }
 
         return (
-            <li key={index} className={className} role="none" onMouseEnter={() => this.onItemMouseEnter(index)}>
+            <li key={index} className={className} role="none" onMouseEnter={() => onItemMouseEnter(index)}>
                 {content}
             </li>
         )
     }
 
-    renderItems() {
-        if (this.props.model) {
-            return this.props.model.map((item, index) => this.renderItem(item, index));
-        }
-
-        return null;
+    const createItems = () => {
+        return props.model ? props.model.map(createItem) : null;
     }
 
-    renderHeader() {
-        if (this.props.header) {
+    const createHeader = () => {
+        if (props.header) {
+            const header = ObjectUtils.getJSXElement(props.header, { props });
             return (
                 <div className="p-dock-header">
-                    {ObjectUtils.getJSXElement(this.props.header, { props: this.props })}
+                    {header}
                 </div>
             )
         }
@@ -113,21 +79,22 @@ export class Dock extends Component {
         return null;
     }
 
-    renderList() {
-        const items = this.renderItems();
+    const createList = () => {
+        const items = createItems();
 
         return (
-            <ul ref={(el) => this.list = el} className="p-dock-list" role="menu" onMouseLeave={this.onListMouseLeave}>
+            <ul className="p-dock-list" role="menu" onMouseLeave={onListMouseLeave}>
                 {items}
             </ul>
         )
     }
 
-    renderFooter() {
-        if (this.props.footer) {
+    const createFooter = () => {
+        if (props.footer) {
+            const footer = ObjectUtils.getJSXElement(props.footer, { props });
             return (
                 <div className="p-dock-footer">
-                    {ObjectUtils.getJSXElement(this.props.footer, { props: this.props })}
+                    {footer}
                 </div>
             )
         }
@@ -135,22 +102,44 @@ export class Dock extends Component {
         return null;
     }
 
-    render() {
-        const className = classNames(`p-dock p-component p-dock-${this.props.position}`, {
-            'p-dock-magnification': this.props.magnification
-        }, this.props.className);
-        const header = this.renderHeader();
-        const list = this.renderList();
-        const footer = this.renderFooter();
+    const className = classNames(`p-dock p-component p-dock-${props.position}`, {
+        'p-dock-magnification': props.magnification
+    }, props.className);
+    const header = createHeader();
+    const list = createList();
+    const footer = createFooter();
 
-        return (
-            <div id={this.props.id} className={className} style={this.props.style}>
-                <div className="p-dock-container">
-                    {header}
-                    {list}
-                    {footer}
-                </div>
+    return (
+        <div id={props.id} className={className} style={props.style}>
+            <div className="p-dock-container">
+                {header}
+                {list}
+                {footer}
             </div>
-        );
-    }
+        </div>
+    )
+}));
+
+Dock.defaultProps = {
+    __TYPE: 'Dock',
+    id: null,
+    style: null,
+    className: null,
+    model: null,
+    position: 'bottom',
+    magnification: true,
+    header: null,
+    footer: null
+}
+
+Dock.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    id: PropTypes.string,
+    style: PropTypes.object,
+    className: PropTypes.string,
+    model: PropTypes.array,
+    position: PropTypes.string,
+    magnification: PropTypes.bool,
+    header: PropTypes.any,
+    footer: PropTypes.any
 }

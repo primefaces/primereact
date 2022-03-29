@@ -4,7 +4,7 @@ import { classNames } from './ClassNames';
 
 export default class IconUtils {
 
-    static getJSXIcon(icon, iconProps, options) {
+    static getJSXIcon(icon, iconProps = {}, options = {}) {
         let content = null;
 
         if (icon) {

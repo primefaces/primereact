@@ -1,7 +1,7 @@
 {
     "versions": [
         {
-            "version": "v7.2.1",
+            "version": "v8.0.0",
             "url": "https://www.primefaces.org/primereact",
             "news": true
         },

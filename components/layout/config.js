@@ -50,7 +50,7 @@ export default function Config(props) {
 
     useEffect(() => {
         document.documentElement.style.fontSize = scale + 'px';
-    }, [scale]);
+    }, [scale]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         if (active)
@@ -61,7 +61,7 @@ export default function Config(props) {
         return function unbind() {
             unbindOutsideClickListener();
         };
-    }, [active]);
+    }, [active]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const configClassName = classNames('layout-config', {
         'layout-config-active': active

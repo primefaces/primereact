@@ -49,11 +49,11 @@ export default function Topbar(props) {
         return function unbind() {
             unbindOutsideClickListener();
         }
-    }, [activeMenuIndex]);
+    }, [activeMenuIndex]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         versionService.getVersions().then(data => setVersions(data));
-    },[]);
+    },[]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const containerElement = useRef(null);
     const scrollListener = useRef();

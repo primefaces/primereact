@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Terminal } from '../../components/lib/terminal/Terminal';
 import { TerminalService } from '../../components/lib/terminalservice/TerminalService';
-import { TerminalDoc } from '../../components/doc/terminal';
+import TerminalDoc from '../../components/doc/terminal';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class TerminalDemo extends Component {
+const TerminalDemo = () => {
 
-    commandHandler(text) {
+    const commandHandler = (text) => {
         let response;
         let argsIndex = text.indexOf(' ');
         let command = argsIndex !== -1 ? text.substring(0, argsIndex) : text;
@@ -42,39 +42,40 @@ export default class TerminalDemo extends Component {
         }
     }
 
-    componentDidMount() {
-        TerminalService.on('command', this.commandHandler);
-    }
+    useEffect(() => {
+        TerminalService.on('command', commandHandler);
 
-    componentWillUnmount() {
-        TerminalService.off('command', this.commandHandler);
-    }
+        return () => {
+            TerminalService.off('command', commandHandler);
+        }
+    }, [])
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React Terminal Component</title>
-                    <meta name="description" content="Terminal is a text based user interface." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Terminal</h1>
-                        <p>Terminal is a text based user interface.</p>
-                    </div>
 
-                    <DocActions github="terminal/index.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Terminal Component</title>
+                <meta name="description" content="Terminal is a text based user interface." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>Terminal</h1>
+                    <p>Terminal is a text based user interface.</p>
                 </div>
 
-                <div className="content-section implementation terminal-demo">
-                    <div className="card">
-                        <p>Enter "<strong>date</strong>" to display the current date, "<strong>greet {'{0}'}</strong>" for a message, "<strong>random</strong>" to get a random number and "<strong>clear</strong>" to clear all commands.</p>
-                        <Terminal welcomeMessage="Welcome to PrimeReact" prompt="primereact $" />
-                    </div>
-                </div>
-
-                <TerminalDoc />
+                <DocActions github="terminal/index.js" />
             </div>
-        )
-    }
+
+            <div className="content-section implementation terminal-demo">
+                <div className="card">
+                    <p>Enter "<strong>date</strong>" to display the current date, "<strong>greet {'{0}'}</strong>" for a message, "<strong>random</strong>" to get a random number and "<strong>clear</strong>" to clear all commands.</p>
+                    <Terminal welcomeMessage="Welcome to PrimeReact" prompt="primereact $" />
+                </div>
+            </div>
+
+            <TerminalDoc />
+        </div>
+    )
 }
+
+export default TerminalDemo;

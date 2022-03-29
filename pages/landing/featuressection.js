@@ -1,6 +1,6 @@
 import getConfig from 'next/config';
 
-export default function FeaturesSection(props) {
+const FeaturesSection = (props) => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
@@ -33,7 +33,7 @@ export default function FeaturesSection(props) {
                     <div className="box p-4 w-full">
                         <img src={`${contextPath}/images/landing-new/features/icon-accessibility.svg`} alt="components icon" className="block mb-3"/>
                         <div className="font-semibold mb-3 text-lg">Accessibility</div>
-                        <p className="m-0 text-secondary font-medium">Compliant with the Web Content Accessibility Guidelines (WCAG 2.0).</p>
+                        <p className="m-0 text-secondary font-medium">The ultimate set of UI Components to assist you with 90+ impressive React Components.</p>
                     </div>
                 </div>
                 <div className="col-12 md:col-6 xl:col-3 flex justify-content-center p-3">
@@ -68,3 +68,5 @@ export default function FeaturesSection(props) {
         </section>
     );
 }
+
+export default FeaturesSection;
