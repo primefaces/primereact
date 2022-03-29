@@ -21,14 +21,14 @@ export const Toast = memo(forwardRef((props, ref) => {
             if (Array.isArray(value)) {
                 const currentMessages = [...value];
                 for (let i = 0; i < currentMessages.length; i++) {
-                    const message = {...currentMessages[i]};
+                    const message = { ...currentMessages[i] };
                     message.id = messageIdx++;
                     currentMessages[i] = message;
                 }
                 messages = [...messagesState, ...currentMessages];
             }
             else {
-                const currentMessage = {...value};
+                const currentMessage = { ...value };
                 currentMessage.id = messageIdx++;
                 messages = messagesState ? [...messagesState, currentMessage] : [currentMessage];
             }
