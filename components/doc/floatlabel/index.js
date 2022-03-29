@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import { TabView } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 
+const FloatLabelDoc = memo(() => {
 
-export class FloatLabelDoc extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { AutoComplete } from 'primereact/autocomplete';
@@ -161,58 +157,58 @@ export class FloatLabelDemo extends Component {
             <div>
                 <div className="content-section implementation">
                     <div className="card">
-                        <div className="p-fluid p-grid">
-                            <div className="p-field p-col-12 p-md-4">
+                        <div className="p-fluid grid">
+                            <div className="field col-12 md:col-4">
                                 <span className="p-float-label">
                                     <InputText id="inputtext" value={this.state.value1} onChange={(e) => this.setState({ value1: e.target.value })} />
                                     <label htmlFor="inputtext">InputText</label>
                                 </span>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <span className="p-float-label p-input-icon-left">
                                     <i className="pi pi-search" />
                                     <InputText id="lefticon" value={this.state.value2} onChange={(e) => this.setState({ value2: e.target.value })} />
                                     <label htmlFor="lefticon">Left Icon</label>
                                 </span>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <span className="p-float-label p-input-icon-right">
                                     <i className="pi pi-spin pi-spinner" />
                                     <InputText id="righticon" value={this.state.value3} onChange={(e) => this.setState({ value3: e.target.value })} />
                                     <label htmlFor="righticon">Right Icon</label>
                                 </span>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <span className="p-float-label">
                                     <AutoComplete value={this.state.value4} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" onChange={(e) => this.setState({ value4: e.value })} />
                                     <label htmlFor="autocomplete">AutoComplete</label>
                                 </span>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <span className="p-float-label">
                                     <Calendar id="calendar" value={this.state.value5} onChange={(e) => this.setState({ value5: e.value })} />
                                     <label htmlFor="calendar">Calendar</label>
                                 </span>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <span className="p-float-label">
                                     <Chips id="chips" value={this.state.value6} onChange={(e) => this.setState({ value6: e.value })} />
                                     <label htmlFor="chips">Chips</label>
                                 </span>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <span className="p-float-label">
                                     <InputMask id="inputmask" value={this.state.value7} onChange={(e) => this.setState({ value7: e.value })} mask="99/99/9999" slotChar="mm/dd/yyyy" />
                                     <label htmlFor="inputmask">InputMask</label>
                                 </span>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <span className="p-float-label">
                                     <InputNumber inputId="inputnumber" value={this.state.value8} onChange={(e) => this.setState({ value8: e.value })} />
                                     <label htmlFor="inputnumber">InputNumber</label>
                                 </span>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <div className="p-inputgroup">
                                     <span className="p-inputgroup-addon">
                                         <i className="pi pi-user"></i>
@@ -223,37 +219,37 @@ export class FloatLabelDemo extends Component {
                                     </span>
                                 </div>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <span className="p-float-label">
                                     <CascadeSelect inputId="cascadeselect" value={this.state.value10} options={this.cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={event => this.setState({ value10: event.value })} />
                                     <label htmlFor="cascadeselect">CascadeSelect</label>
                                 </span>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <span className="p-float-label">
                                     <Dropdown inputId="dropdown" value={this.state.value11} options={this.state.cities} onChange={(e) => this.setState({ value11: e.value })} optionLabel="name" />
                                     <label htmlFor="dropdown">Dropdown</label>
                                 </span>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <span className="p-float-label">
                                     <MultiSelect inputId="multiselect" value={this.state.value12} options={this.state.cities} onChange={(e) => this.setState({ value12: e.value })} optionLabel="name" />
                                     <label htmlFor="multiselect">MultiSelect</label>
                                 </span>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <span className="p-float-label">
                                     <TreeSelect inputId="treeselect" value={this.state.selectedNodeKey} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey: e.value })}></TreeSelect>
                                     <label htmlFor="treeselect">TreeSelect</label>
                                 </span>
                             </div>
-                            <div className="p-field p-col-12 p-md-4">
+                            <div className="field col-12 md:col-4">
                                 <span className="p-float-label">
                                     <Password inputId="password" value={this.state.value13} onChange={(e) => this.setState({ value13: e.target.value })}/>
                                     <label htmlFor="password">Password</label>
                                 </span>
                             </div>
-                            <div className="p-field p-col-12">
+                            <div className="field col-12">
                                 <span className="p-float-label">
                                     <InputTextarea id="textarea" value={this.state.value14} onChange={(e) => this.setState({ value14: e.target.value })} rows={3} />
                                     <label htmlFor="textarea">Textarea</label>
@@ -267,10 +263,10 @@ export class FloatLabelDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { AutoComplete } from 'primereact/autocomplete';
@@ -411,58 +407,58 @@ const FloatLabelDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-fluid p-grid">
-                    <div className="p-field p-col-12 p-md-4">
+                <div className="p-fluid grid">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <InputText id="inputtext" value={value1} onChange={(e) => setValue1(e.target.value)} />
                             <label htmlFor="inputtext">InputText</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label p-input-icon-left">
                             <i className="pi pi-search" />
                             <InputText id="lefticon" value={value2} onChange={(e) => setValue2(e.target.value)} />
                             <label htmlFor="lefticon">Left Icon</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label p-input-icon-right">
                             <i className="pi pi-spin pi-spinner" />
                             <InputText id="righticon" value={value3} onChange={(e) => setValue3(e.target.value)} />
                             <label htmlFor="righticon">Right Icon</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <AutoComplete value={value4} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setValue4(e.value)} />
                             <label htmlFor="autocomplete">AutoComplete</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <Calendar id="calendar" value={value5} onChange={(e) => setValue5(e.value)} />
                             <label htmlFor="calendar">Calendar</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <Chips id="chips" value={value6} onChange={(e) => setValue6(e.value)} />
                             <label htmlFor="chips">Chips</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <InputMask id="inputmask" value={value7} onChange={(e) => setValue7(e.value)} mask="99/99/9999" slotChar="mm/dd/yyyy" />
                             <label htmlFor="inputmask">InputMask</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <InputNumber inputId="inputnumber" value={value8} onChange={(e) => setValue8(e.value)} />
                             <label htmlFor="inputnumber">InputNumber</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-user"></i>
@@ -473,37 +469,37 @@ const FloatLabelDemo = () => {
                             </span>
                         </div>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <CascadeSelect inputId="cascadeselect" value={value10} options={cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={event => setValue10(event.value)} />
                             <label htmlFor="cascadeselect">CascadeSelect</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <Dropdown inputId="dropdown" value={value11} options={cities} onChange={(e) => setValue11(e.value)} optionLabel="name" />
                             <label htmlFor="dropdown">Dropdown</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <MultiSelect inputId="multiselect" value={value12} options={cities} onChange={(e) => setValue12(e.value)} optionLabel="name" />
                             <label htmlFor="multiselect">MultiSelect</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <TreeSelect inputId="treeselect" value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)}></TreeSelect>
                             <label htmlFor="treeselect">TreeSelect</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <Password inputId="password" value={value13} onChange={(e) => setValue13(e.target.value)}/>
                             <label htmlFor="password">Password</label>
                         </span>
                             </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <InputTextarea id="textarea" value={value14} onChange={(e) => setValue14(e.target.value)} rows={3} />
                             <label htmlFor="textarea">Textarea</label>
@@ -515,10 +511,10 @@ const FloatLabelDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { AutoComplete } from 'primereact/autocomplete';
@@ -659,58 +655,58 @@ const FloatLabelDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-fluid p-grid">
-                    <div className="p-field p-col-12 p-md-4">
+                <div className="p-fluid grid">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <InputText id="inputtext" value={value1} onChange={(e) => setValue1(e.target.value)} />
                             <label htmlFor="inputtext">InputText</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label p-input-icon-left">
                             <i className="pi pi-search" />
                             <InputText id="lefticon" value={value2} onChange={(e) => setValue2(e.target.value)} />
                             <label htmlFor="lefticon">Left Icon</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label p-input-icon-right">
                             <i className="pi pi-spin pi-spinner" />
                             <InputText id="righticon" value={value3} onChange={(e) => setValue3(e.target.value)} />
                             <label htmlFor="righticon">Right Icon</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <AutoComplete value={value4} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setValue4(e.value)} />
                             <label htmlFor="autocomplete">AutoComplete</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <Calendar id="calendar" value={value5} onChange={(e) => setValue5(e.value)} />
                             <label htmlFor="calendar">Calendar</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <Chips id="chips" value={value6} onChange={(e) => setValue6(e.value)} />
                             <label htmlFor="chips">Chips</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <InputMask id="inputmask" value={value7} onChange={(e) => setValue7(e.value)} mask="99/99/9999" slotChar="mm/dd/yyyy" />
                             <label htmlFor="inputmask">InputMask</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <InputNumber inputId="inputnumber" value={value8} onChange={(e) => setValue8(e.value)} />
                             <label htmlFor="inputnumber">InputNumber</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-user"></i>
@@ -721,37 +717,37 @@ const FloatLabelDemo = () => {
                             </span>
                         </div>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <CascadeSelect inputId="cascadeselect" value={value10} options={cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={event => setValue10(event.value)} />
                             <label htmlFor="cascadeselect">CascadeSelect</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <Dropdown inputId="dropdown" value={value11} options={cities} onChange={(e) => setValue11(e.value)} optionLabel="name" />
                             <label htmlFor="dropdown">Dropdown</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <MultiSelect inputId="multiselect" value={value12} options={cities} onChange={(e) => setValue12(e.value)} optionLabel="name" />
                             <label htmlFor="multiselect">MultiSelect</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <TreeSelect inputId="treeselect" value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)}></TreeSelect>
                             <label htmlFor="treeselect">TreeSelect</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <Password inputId="password" value={value13} onChange={(e) => setValue13(e.target.value)}/>
                             <label htmlFor="password">Password</label>
                         </span>
                             </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <InputTextarea id="textarea" value={value14} onChange={(e) => setValue14(e.target.value)} rows={3} />
                             <label htmlFor="textarea">Textarea</label>
@@ -763,10 +759,10 @@ const FloatLabelDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="./CountryService.js"></script>
         <script src="./NodeService.js"></script>
 
@@ -785,7 +781,7 @@ const FloatLabelDemo = () => {
         <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>
         <script src="https://unpkg.com/primereact/treeselect/treeselect.min.js"></script>
         <script src="https://unpkg.com/primereact/password/password.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { InputText } = primereact.inputtext;
 const { AutoComplete } = primereact.autocomplete;
@@ -924,58 +920,58 @@ const FloatLabelDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-fluid p-grid">
-                    <div className="p-field p-col-12 p-md-4">
+                <div className="p-fluid grid">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <InputText id="inputtext" value={value1} onChange={(e) => setValue1(e.target.value)} />
                             <label htmlFor="inputtext">InputText</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label p-input-icon-left">
                             <i className="pi pi-search" />
                             <InputText id="lefticon" value={value2} onChange={(e) => setValue2(e.target.value)} />
                             <label htmlFor="lefticon">Left Icon</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label p-input-icon-right">
                             <i className="pi pi-spin pi-spinner" />
                             <InputText id="righticon" value={value3} onChange={(e) => setValue3(e.target.value)} />
                             <label htmlFor="righticon">Right Icon</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <AutoComplete value={value4} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setValue4(e.value)} />
                             <label htmlFor="autocomplete">AutoComplete</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <Calendar id="calendar" value={value5} onChange={(e) => setValue5(e.value)} />
                             <label htmlFor="calendar">Calendar</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <Chips id="chips" value={value6} onChange={(e) => setValue6(e.value)} />
                             <label htmlFor="chips">Chips</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <InputMask id="inputmask" value={value7} onChange={(e) => setValue7(e.value)} mask="99/99/9999" slotChar="mm/dd/yyyy" />
                             <label htmlFor="inputmask">InputMask</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <InputNumber inputId="inputnumber" value={value8} onChange={(e) => setValue8(e.value)} />
                             <label htmlFor="inputnumber">InputNumber</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-user"></i>
@@ -986,37 +982,37 @@ const FloatLabelDemo = () => {
                             </span>
                         </div>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <CascadeSelect inputId="cascadeselect" value={value10} options={cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={event => setValue10(event.value)} />
                             <label htmlFor="cascadeselect">CascadeSelect</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <Dropdown inputId="dropdown" value={value11} options={cities} onChange={(e) => setValue11(e.value)} optionLabel="name" />
                             <label htmlFor="dropdown">Dropdown</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <MultiSelect inputId="multiselect" value={value12} options={cities} onChange={(e) => setValue12(e.value)} optionLabel="name" />
                             <label htmlFor="multiselect">MultiSelect</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <TreeSelect inputId="treeselect" value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)}></TreeSelect>
                             <label htmlFor="treeselect">TreeSelect</label>
                         </span>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <Password inputId="password" value={value13} onChange={(e) => setValue13(e.target.value)}/>
                             <label htmlFor="password">Password</label>
                         </span>
                             </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <InputTextarea id="textarea" value={value14} onChange={(e) => setValue14(e.target.value)} rows={3} />
                             <label htmlFor="textarea">Textarea</label>
@@ -1028,23 +1024,19 @@ const FloatLabelDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'FloatLabelDemo', sources: sources, service: 'CountryService, NodeService', data: 'countries, treenodes' })
+                }
+            </TabView>
+        </div>
+    );
 
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'FloatLabelDemo', sources: this.sources, service: 'CountryService, NodeService', data: 'countries, treenodes' })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+})
+
+export default FloatLabelDoc;

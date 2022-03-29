@@ -124,6 +124,11 @@ interface DataTablePFSEvent extends DataTablePageParams, DataTableSortParams, Da
     [key: string]: any;
 }
 
+interface DataTableDataSelectableParams {
+    data: any;
+    index: number;
+}
+
 interface DataTableSelectionChangeParams {
     originalEvent: React.SyntheticEvent;
     value: any;
@@ -268,6 +273,7 @@ export interface DataTableProps {
     metaKeySelection?: boolean;
     selectOnEdit?: boolean;
     selectionPageOnly?: boolean;
+    selectionAutoFocus?: boolean;
     showSelectAll?: boolean;
     selectAll?: boolean;
     headerColumnGroup?: React.ReactNode;
@@ -315,6 +321,7 @@ export interface DataTableProps {
     onRowEditComplete?(e: DataTableRowEditCompleteParams): void;
     showSelectionElement?(data: any, options: DataTableShowSelectionElementOptions): boolean | undefined | null;
     showRowReorderElement?(data: any, options: DataTableShowRowReorderElementOptions): boolean | undefined | null;
+    isDataSelectable?(e: DataTableDataSelectableParams): boolean | undefined | null;
     onSelectionChange?(e: DataTableSelectionChangeParams): void;
     onContextMenuSelectionChange?(e: DataTableSelectionChangeParams): void;
     rowExpansionTemplate?(data: any, options: DataTableRowExpansionTemplate): React.ReactNode;
@@ -356,8 +363,11 @@ export interface DataTableProps {
 
 export declare class DataTable extends React.Component<DataTableProps, any> {
     public reset(): void;
+    public resetScroll(): void;
     public exportCSV(options?: { selectionOnly: boolean }): void;
     public filter<T>(value: T, field: string, mode: DataTableFilterMatchModeType, index?: number): void;
     public resetColumnOrder(): void;
     public closeEditingCell(): void;
+    public restoreTableState(state: any): void;
+    public clearState(): void;
 }

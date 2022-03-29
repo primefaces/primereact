@@ -1,18 +1,15 @@
-import React, {Component} from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class RadioButtonDoc extends Component {
+const RadioButtonDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { RadioButton } from 'primereact/radiobutton';
 
@@ -34,19 +31,19 @@ export class RadioButtonDemo extends Component {
             <div>
                 <div className="card">
                     <h5>Basic</h5>
-                    <div className="p-field-radiobutton">
+                    <div className="field-radiobutton">
                         <RadioButton inputId="city1" name="city" value="Chicago" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Chicago'} />
                         <label htmlFor="city1">Chicago</label>
                     </div>
-                    <div className="p-field-radiobutton">
+                    <div className="field-radiobutton">
                         <RadioButton inputId="city2" name="city" value="Los Angeles" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'Los Angeles'} />
                         <label htmlFor="city2">Los Angeles</label>
                     </div>
-                    <div className="p-field-radiobutton">
+                    <div className="field-radiobutton">
                         <RadioButton inputId="city3" name="city" value="New York" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'New York'} />
                         <label htmlFor="city3">New York</label>
                     </div>
-                    <div className="p-field-radiobutton">
+                    <div className="field-radiobutton">
                         <RadioButton inputId="city4" name="city" value="San Francisco" onChange={(e) => this.setState({city: e.value})} checked={this.state.city === 'San Francisco'} />
                         <label htmlFor="city4">San Francisco</label>
                     </div>
@@ -55,7 +52,7 @@ export class RadioButtonDemo extends Component {
                     {
                         this.categories.map((category) => {
                             return (
-                                <div key={category.key} className="p-field-radiobutton">
+                                <div key={category.key} className="field-radiobutton">
                                     <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => this.setState({selectedCategory: e.value})}  checked={this.state.selectedCategory.key === category.key} disabled={category.key === 'R'} />
                                     <label htmlFor={category.key}>{category.name}</label>
                                 </div>
@@ -68,10 +65,10 @@ export class RadioButtonDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { RadioButton } from 'primereact/radiobutton';
 
@@ -84,19 +81,19 @@ const RadioButtonDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city1" name="city" value="Chicago" onChange={(e) => setCity(e.value)} checked={city === 'Chicago'} />
                     <label htmlFor="city1">Chicago</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city2" name="city" value="Los Angeles" onChange={(e) => setCity(e.value)} checked={city === 'Los Angeles'} />
                     <label htmlFor="city2">Los Angeles</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city3" name="city" value="New York" onChange={(e) => setCity(e.value)} checked={city === 'New York'} />
                     <label htmlFor="city3">New York</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city4" name="city" value="San Francisco" onChange={(e) => setCity(e.value)} checked={city === 'San Francisco'} />
                     <label htmlFor="city4">San Francisco</label>
                 </div>
@@ -105,7 +102,7 @@ const RadioButtonDemo = () => {
                 {
                     categories.map((category) => {
                         return (
-                            <div key={category.key} className="p-field-radiobutton">
+                            <div key={category.key} className="field-radiobutton">
                                 <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)}  checked={selectedCategory.key === category.key} disabled={category.key === 'R'} />
                                 <label htmlFor={category.key}>{category.name}</label>
                             </div>
@@ -117,10 +114,10 @@ const RadioButtonDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { RadioButton } from 'primereact/radiobutton';
 
@@ -133,19 +130,19 @@ const RadioButtonDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city1" name="city" value="Chicago" onChange={(e) => setCity(e.value)} checked={city === 'Chicago'} />
                     <label htmlFor="city1">Chicago</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city2" name="city" value="Los Angeles" onChange={(e) => setCity(e.value)} checked={city === 'Los Angeles'} />
                     <label htmlFor="city2">Los Angeles</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city3" name="city" value="New York" onChange={(e) => setCity(e.value)} checked={city === 'New York'} />
                     <label htmlFor="city3">New York</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city4" name="city" value="San Francisco" onChange={(e) => setCity(e.value)} checked={city === 'San Francisco'} />
                     <label htmlFor="city4">San Francisco</label>
                 </div>
@@ -154,7 +151,7 @@ const RadioButtonDemo = () => {
                 {
                     categories.map((category) => {
                         return (
-                            <div key={category.key} className="p-field-radiobutton">
+                            <div key={category.key} className="field-radiobutton">
                                 <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)}  checked={selectedCategory.key === category.key} disabled={category.key === 'R'} />
                                 <label htmlFor={category.key}>{category.name}</label>
                             </div>
@@ -166,14 +163,14 @@ const RadioButtonDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/radiobutton/radiobutton.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { RadioButton } = primereact.radiobutton;
 
 const RadioButtonDemo = () => {
@@ -185,19 +182,19 @@ const RadioButtonDemo = () => {
         <div>
             <div className="card">
                 <h5>Basic</h5>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city1" name="city" value="Chicago" onChange={(e) => setCity(e.value)} checked={city === 'Chicago'} />
                     <label htmlFor="city1">Chicago</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city2" name="city" value="Los Angeles" onChange={(e) => setCity(e.value)} checked={city === 'Los Angeles'} />
                     <label htmlFor="city2">Los Angeles</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city3" name="city" value="New York" onChange={(e) => setCity(e.value)} checked={city === 'New York'} />
                     <label htmlFor="city3">New York</label>
                 </div>
-                <div className="p-field-radiobutton">
+                <div className="field-radiobutton">
                     <RadioButton inputId="city4" name="city" value="San Francisco" onChange={(e) => setCity(e.value)} checked={city === 'San Francisco'} />
                     <label htmlFor="city4">San Francisco</label>
                 </div>
@@ -206,7 +203,7 @@ const RadioButtonDemo = () => {
                 {
                     categories.map((category) => {
                         return (
-                            <div key={category.key} className="p-field-radiobutton">
+                            <div key={category.key} className="field-radiobutton">
                                 <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)}  checked={selectedCategory.key === category.key} disabled={category.key === 'R'} />
                                 <label htmlFor={category.key}>{category.name}</label>
                             </div>
@@ -218,27 +215,21 @@ const RadioButtonDemo = () => {
     )
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { RadioButton } from 'primereact/radiobutton';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -246,8 +237,8 @@ import { RadioButton } from 'primereact/radiobutton';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>RadioButton is used as a controlled input with checked and onChange properties.</p>
+                    <h5>Getting Started</h5>
+                    <p>RadioButton is used as a controlled input with checked and onChange properties.</p>
 <CodeHighlight>
 {`
 <RadioButton value="val1" name="city" onChange={(e) => setValue(e.value)} checked={value === 'val1'} />
@@ -400,11 +391,12 @@ import { RadioButton } from 'primereact/radiobutton';
                     <p>None.</p>
                 </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'RadioButtonDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'RadioButtonDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    )
+})
+
+export default RadioButtonDoc;

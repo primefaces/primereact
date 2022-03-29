@@ -1,32 +1,17 @@
-import React, { Component } from 'react';
+import React, { memo, useRef } from 'react';
+import { InputText } from '../inputtext/InputText';
 import { DomHandler, classNames } from '../utils/Utils';
-import {InputText} from '../inputtext/InputText';
 
-export class TreeTableHeader extends Component {
+export const TreeTableHeader = memo((props) => {
+    const filterTimeout = useRef(null);
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            badgeVisible: false
-        }
-
-        this.onFilterInput = this.onFilterInput.bind(this);
-    }
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        return {
-            badgeVisible: nextProps.multiSortMeta && nextProps.multiSortMeta.length > 1
-        }
-    }
-
-    onHeaderClick(event, column) {
+    const onHeaderClick = (event, column) => {
         if (column.props.sortable) {
             const targetNode = event.target;
-            if (DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title')
-                || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
+            if (DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title')
+                || DomHandler.hasClass(targetNode, 'p-sortable-column-icon') || DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')) {
 
-                this.props.onSort({
+                props.onSort({
                     originalEvent: event,
                     sortField: column.props.sortField || column.props.field,
                     sortFunction: column.props.sortFunction,
@@ -38,8 +23,8 @@ export class TreeTableHeader extends Component {
         }
     }
 
-    onHeaderMouseDown(event, column) {
-        if (this.props.reorderableColumns && column.props.reorderable) {
+    const onHeaderMouseDown = (event, column) => {
+        if (props.reorderableColumns && column.props.reorderable) {
             if (event.target.nodeName !== 'INPUT')
                 event.currentTarget.draggable = true;
             else if (event.target.nodeName === 'INPUT')
@@ -47,17 +32,17 @@ export class TreeTableHeader extends Component {
         }
     }
 
-    onHeaderKeyDown(event, column) {
+    const onHeaderKeyDown = (event, column) => {
         if (event.key === 'Enter') {
-            this.onHeaderClick(event, column);
+            onHeaderClick(event, column);
             event.preventDefault();
         }
     }
 
-    getMultiSortMetaDataIndex(column) {
-        if(this.props.multiSortMeta) {
-            for(let i = 0; i < this.props.multiSortMeta.length; i++) {
-                if(this.props.multiSortMeta[i].field === column.props.field) {
+    const getMultiSortMetaDataIndex = (column) => {
+        if (props.multiSortMeta) {
+            for (let i = 0; i < props.multiSortMeta.length; i++) {
+                if (props.multiSortMeta[i].field === column.props.field) {
                     return i;
                 }
             }
@@ -66,9 +51,9 @@ export class TreeTableHeader extends Component {
         return -1;
     }
 
-    onResizerMouseDown(event, column) {
-        if(this.props.resizableColumns && this.props.onResizeStart) {
-            this.props.onResizeStart({
+    const onResizerMouseDown = (event, column) => {
+        if (props.resizableColumns && props.onResizeStart) {
+            props.onResizeStart({
                 originalEvent: event,
                 columnEl: event.target.parentElement,
                 column: column
@@ -76,61 +61,61 @@ export class TreeTableHeader extends Component {
         }
     }
 
-    onDragStart(event, column) {
-        if (this.props.onDragStart) {
-            this.props.onDragStart({
+    const onDragStart = (event, column) => {
+        if (props.onDragStart) {
+            props.onDragStart({
                 originalEvent: event,
                 column
             });
         }
     }
 
-    onDragOver(event, column) {
-        if (this.props.onDragOver) {
-            this.props.onDragOver({
+    const onDragOver = (event, column) => {
+        if (props.onDragOver) {
+            props.onDragOver({
                 originalEvent: event,
                 column
             });
         }
     }
 
-    onDragLeave(event, column) {
-        if (this.props.onDragLeave) {
-            this.props.onDragLeave({
+    const onDragLeave = (event, column) => {
+        if (props.onDragLeave) {
+            props.onDragLeave({
                 originalEvent: event,
                 column
             });
         }
     }
 
-    onDrop(event, column) {
-        if (this.props.onDrop) {
-            this.props.onDrop({
+    const onDrop = (event, column) => {
+        if (props.onDrop) {
+            props.onDrop({
                 originalEvent: event,
                 column
             });
         }
     }
 
-    onFilterInput(e, column) {
-        if(column.props.filter && this.props.onFilter) {
-            if(this.filterTimeout) {
-                clearTimeout(this.filterTimeout);
+    const onFilterInput = (e, column) => {
+        if (column.props.filter && props.onFilter) {
+            if (filterTimeout.current) {
+                clearTimeout(filterTimeout.current);
             }
 
             let filterValue = e.target.value;
-            this.filterTimeout = setTimeout(() => {
-                this.props.onFilter({
+            filterTimeout.current = setTimeout(() => {
+                props.onFilter({
                     value: filterValue,
                     field: column.props.field,
                     matchMode: column.props.filterMatchMode || 'startsWith'
                 });
-                this.filterTimeout = null;
-            }, this.props.filterDelay);
+                filterTimeout.current = null;
+            }, props.filterDelay);
         }
     }
 
-    hasColumnFilter(columns) {
+    const hasColumnFilter = (columns) => {
         if (columns) {
             for (let col of columns) {
                 if (col.props.filter) {
@@ -142,34 +127,9 @@ export class TreeTableHeader extends Component {
         return false;
     }
 
-    renderSortIcon(column, sorted, sortOrder) {
+    const getAriaSort = (column, sorted, sortOrder) => {
         if (column.props.sortable) {
-            const sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt': 'pi-sort-alt';
-            const sortIconClassName = classNames('p-sortable-column-icon', 'pi pi-fw', sortIcon);
-
-            return (
-                <span className={sortIconClassName}></span>
-            );
-        }
-        else {
-            return null;
-        }
-    }
-
-    renderResizer(column) {
-        if (this.props.resizableColumns) {
-            return (
-                <span className="p-column-resizer p-clickable" onMouseDown={e => this.onResizerMouseDown(e, column)} />
-            );
-        }
-        else {
-            return null;
-        }
-    }
-
-    getAriaSort(column, sorted, sortOrder) {
-        if (column.props.sortable) {
-            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up': 'pi-sort';
+            let sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up' : 'pi-sort';
             if (sortIcon === 'pi-sort-down')
                 return 'descending';
             else if (sortIcon === 'pi-sort-up')
@@ -182,101 +142,124 @@ export class TreeTableHeader extends Component {
         }
     }
 
-    renderSortBadge(sortMetaDataIndex) {
-        if (sortMetaDataIndex !== -1 && this.state.badgeVisible) {
+    const createSortIcon = (column, sorted, sortOrder) => {
+        if (column.props.sortable) {
+            const sortIcon = sorted ? sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt' : 'pi-sort-alt';
+            const sortIconClassName = classNames('p-sortable-column-icon', 'pi pi-fw', sortIcon);
+
+            return (
+                <span className={sortIconClassName}></span>
+            )
+        }
+        else {
+            return null;
+        }
+    }
+
+    const createResizer = (column) => {
+        if (props.resizableColumns) {
+            return (
+                <span className="p-column-resizer p-clickable" onMouseDown={e => onResizerMouseDown(e, column)} />
+            )
+        }
+        else {
+            return null;
+        }
+    }
+
+    const createSortBadge = (sortMetaDataIndex) => {
+        if (sortMetaDataIndex !== -1 && props.multiSortMeta && props.multiSortMeta.length > 1) {
             return <span className="p-sortable-column-badge">{sortMetaDataIndex + 1}</span>;
         }
 
         return null;
     }
 
-    renderHeaderCell(column, options) {
+    const createHeaderCell = (column, options) => {
         let filterElement;
 
         if (column.props.filter && options.renderFilter) {
-            filterElement = column.props.filterElement||<InputText onInput={(e) => this.onFilterInput(e, column)} type={this.props.filterType} defaultValue={this.props.filters && this.props.filters[column.props.field] ? this.props.filters[column.props.field].value : null}
-                    className="p-column-filter" placeholder={column.props.filterPlaceholder} maxLength={column.props.filterMaxLength}/>;
+            filterElement = column.props.filterElement || <InputText onInput={(e) => onFilterInput(e, column)} type={props.filterType} defaultValue={props.filters && props.filters[column.props.field] ? props.filters[column.props.field].value : null}
+                className="p-column-filter" placeholder={column.props.filterPlaceholder} maxLength={column.props.filterMaxLength} />;
         }
 
         if (options.filterOnly) {
             return (
-                <th key={column.props.columnKey||column.props.field||options.index} className={classNames('p-filter-column', column.props.filterHeaderClassName)} style={column.props.filterHeaderStyle||column.props.style}
+                <th key={column.props.columnKey || column.props.field || options.index} className={classNames('p-filter-column', column.props.filterHeaderClassName)} style={column.props.filterHeaderStyle || column.props.style}
                     rowSpan={column.props.rowSpan} colSpan={column.props.colSpan}>
                     {filterElement}
                 </th>
-            );
+            )
         }
         else {
-            const sortMetaDataIndex = this.getMultiSortMetaDataIndex(column);
-            const multiSortMetaData = sortMetaDataIndex !== -1 ? this.props.multiSortMeta[sortMetaDataIndex] : null;
-            const singleSorted = (column.props.field === this.props.sortField);
+            const sortMetaDataIndex = getMultiSortMetaDataIndex(column);
+            const multiSortMetaData = sortMetaDataIndex !== -1 ? props.multiSortMeta[sortMetaDataIndex] : null;
+            const singleSorted = (column.props.field === props.sortField);
             const multipleSorted = multiSortMetaData !== null;
             const sorted = column.props.sortable && (singleSorted || multipleSorted);
             let sortOrder = 0;
 
-            if(singleSorted)
-                sortOrder = this.props.sortOrder;
-            else if(multipleSorted)
+            if (singleSorted)
+                sortOrder = props.sortOrder;
+            else if (multipleSorted)
                 sortOrder = multiSortMetaData.order;
 
-            const sortIconElement = this.renderSortIcon(column, sorted, sortOrder);
-            let ariaSortData = this.getAriaSort(column, sorted, sortOrder);
-            let sortBadge = this.renderSortBadge(sortMetaDataIndex);
+            const sortIconElement = createSortIcon(column, sorted, sortOrder);
+            const ariaSortData = getAriaSort(column, sorted, sortOrder);
+            const sortBadge = createSortBadge(sortMetaDataIndex);
 
-            const className = classNames(column.props.headerClassName||column.props.className, {
+            const className = classNames(column.props.headerClassName || column.props.className, {
                 'p-sortable-column': column.props.sortable,
                 'p-highlight': sorted,
-                'p-resizable-column': this.props.resizableColumns
+                'p-resizable-column': props.resizableColumns
             });
 
-            const resizer = this.renderResizer(column);
+            const resizer = createResizer(column);
 
             return (
-                <th key={column.columnKey||column.field||options.index} className={className} style={column.props.headerStyle||column.props.style} tabIndex={column.props.sortable ? this.props.tabIndex: null}
-                    onClick={e => this.onHeaderClick(e, column)} onMouseDown={e => this.onHeaderMouseDown(e, column)} onKeyDown={e => this.onHeaderKeyDown(e, column)}
+                <th key={column.columnKey || column.field || options.index} className={className} style={column.props.headerStyle || column.props.style} tabIndex={column.props.sortable ? props.tabIndex : null}
+                    onClick={e => onHeaderClick(e, column)} onMouseDown={e => onHeaderMouseDown(e, column)} onKeyDown={e => onHeaderKeyDown(e, column)}
                     rowSpan={column.props.rowSpan} colSpan={column.props.colSpan} aria-sort={ariaSortData}
-                    onDragStart={e => this.onDragStart(e, column)} onDragOver={e => this.onDragOver(e, column)} onDragLeave={e => this.onDragLeave(e, column)} onDrop={e => this.onDrop(e, column)}>
+                    onDragStart={e => onDragStart(e, column)} onDragOver={e => onDragOver(e, column)} onDragLeave={e => onDragLeave(e, column)} onDrop={e => onDrop(e, column)}>
                     {resizer}
                     <span className="p-column-title">{column.props.header}</span>
                     {sortIconElement}
                     {sortBadge}
                     {filterElement}
                 </th>
-            );
+            )
         }
     }
 
-    renderHeaderRow(row, index) {
+    const createHeaderRow = (row, index) => {
         const rowColumns = React.Children.toArray(row.props.children);
-        const rowHeaderCells = rowColumns.map((col, i) => this.renderHeaderCell(col, {index: i, filterOnly: false, renderFilter: true}));
+        const rowHeaderCells = rowColumns.map((col, i) => createHeaderCell(col, { index: i, filterOnly: false, renderFilter: true }));
 
         return (
             <tr key={index}>{rowHeaderCells}</tr>
         )
     }
 
-    renderColumnGroup() {
-        let rows = React.Children.toArray(this.props.columnGroup.props.children);
+    const createColumnGroup = () => {
+        const rows = React.Children.toArray(props.columnGroup.props.children);
 
-        return (
-            rows.map((row, i) => this.renderHeaderRow(row, i))
-        );
+        return rows.map(createHeaderRow);
     }
 
-    renderColumns(columns) {
+    const createColumns = (columns) => {
         if (columns) {
-            if (this.hasColumnFilter(columns)) {
+            if (hasColumnFilter(columns)) {
                 return (
                     <>
-                        <tr>{columns.map((col, i) => this.renderHeaderCell(col, {index: i, filterOnly: false, renderFilter: false}))}</tr>
-                        <tr>{columns.map((col, i) => this.renderHeaderCell(col, {index: i, filterOnly: true, renderFilter: true}))}</tr>
+                        <tr>{columns.map((col, i) => createHeaderCell(col, { index: i, filterOnly: false, renderFilter: false }))}</tr>
+                        <tr>{columns.map((col, i) => createHeaderCell(col, { index: i, filterOnly: true, renderFilter: true }))}</tr>
                     </>
-                );
+                )
             }
             else {
                 return (
-                    <tr>{columns.map((col, i) => this.renderHeaderCell(col, {index: i, filterOnly: false, renderFilter: false}))}</tr>
-                );
+                    <tr>{columns.map((col, i) => createHeaderCell(col, { index: i, filterOnly: false, renderFilter: false }))}</tr>
+                )
             }
         }
         else {
@@ -284,13 +267,11 @@ export class TreeTableHeader extends Component {
         }
     }
 
-    render() {
-        const content = this.props.columnGroup ? this.renderColumnGroup() : this.renderColumns(this.props.columns);
+    const content = props.columnGroup ? createColumnGroup() : createColumns(props.columns);
 
-        return (
-            <thead className="p-treetable-thead">
-                {content}
-            </thead>
-        );
-    }
-}
+    return (
+        <thead className="p-treetable-thead">
+            {content}
+        </thead>
+    )
+});

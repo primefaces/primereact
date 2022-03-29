@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { TreeTable } from '../../components/lib/treetable/TreeTable';
 import { Column } from '../../components/lib/column/Column';
 import { NodeService } from '../../service/NodeService';
@@ -7,22 +7,16 @@ import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class TreeTableResponsiveDemo extends Component {
+const TreeTableResponsiveDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: []
-        };
-        this.nodeservice = new NodeService();
-        this.nameTemplate = this.nameTemplate.bind(this);
-    }
+    const [nodes, setNodes] = useState([]);
+    const nodeservice = new NodeService();
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({nodes: data}));
-    }
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    nameTemplate(node) {
+    const nameTemplate = (node) => {
         return (
             <React.Fragment>
                 <span>{node.data.name}</span>
@@ -32,47 +26,44 @@ export default class TreeTableResponsiveDemo extends Component {
         )
     }
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React TreeTable Component - Responsive</title>
-                    <meta name="description" content="TreeTable columns are displayed as stacked in responsive mode if the screen size becomes smaller than a certain breakpoint value." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable <span>Responsive</span></h1>
-                        <p>TreeTable columns are displayed as stacked in responsive mode if the screen size becomes smaller than a certain breakpoint value.</p>
-                    </div>
-
-                    <DocActions github="treetable/responsive.js" />
+    return (
+        <div>
+            <Head>
+                <title>React TreeTable Component - Responsive</title>
+                <meta name="description" content="TreeTable columns are displayed as stacked in responsive mode if the screen size becomes smaller than a certain breakpoint value." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>TreeTable <span>Responsive</span></h1>
+                    <p>TreeTable columns are displayed as stacked in responsive mode if the screen size becomes smaller than a certain breakpoint value.</p>
                 </div>
 
-                <div className="content-section implementation treetable-responsive-demo">
-                    <div className="card">
-                        <TreeTable value={this.state.nodes} header="Responsive">
-                            <Column field="name" header="Name" body={this.nameTemplate} expander></Column>
-                            <Column field="size" header="Size" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
-                            <Column field="type" header="Type" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
-                        </TreeTable>
-                    </div>
-                </div>
-
-                <TreeTableResponsiveDemoDoc />
+                <DocActions github="treetable/responsive.js" />
             </div>
-        )
-    }
+
+            <div className="content-section implementation treetable-responsive-demo">
+                <div className="card">
+                    <TreeTable value={nodes} header="Responsive">
+                        <Column field="name" header="Name" body={nameTemplate} expander></Column>
+                        <Column field="size" header="Size" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
+                        <Column field="type" header="Type" headerClassName="sm-invisible" bodyClassName="sm-invisible"></Column>
+                    </TreeTable>
+                </div>
+            </div>
+
+            <TreeTableResponsiveDemoDoc />
+        </div>
+    )
 }
 
-class TreeTableResponsiveDemoDoc extends Component {
+export default TreeTableResponsiveDemo;
 
-    constructor(props) {
-        super(props);
+const TreeTableResponsiveDemoDoc = memo(() => {
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -119,10 +110,10 @@ export class TreeTableResponsiveDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -160,10 +151,10 @@ const TreeTableResponsiveDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -201,10 +192,10 @@ const TreeTableResponsiveDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./TreeTableDemo.css" />
         <script src="./NodeService.js"></script>
 
@@ -212,7 +203,7 @@ const TreeTableResponsiveDemo = () => {
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { Column } = primereact.column;
 const { TreeTable } = primereact.treetable;
@@ -248,12 +239,12 @@ const TreeTableResponsiveDemo = () => {
     );
 }
                 `
-            }
         }
+    }
 
-        this.extFiles = {
-            'demo/TreeTableDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/TreeTableDemo.css': {
+            content: `
 .treetable-responsive-demo .sm-visible {
     display: none;
 }
@@ -269,23 +260,16 @@ const TreeTableResponsiveDemo = () => {
     }
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'TreeTableResponsiveDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes', extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'TreeTableResponsiveDemo', sources: sources, service: 'NodeService', data: 'treetablenodes', extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    )
+})

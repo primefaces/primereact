@@ -1,151 +1,133 @@
-import React, { Component } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Dropdown } from '../../components/lib/dropdown/Dropdown';
-import { DropdownDoc } from '../../components/doc/dropdown';
+import DropdownDoc from '../../components/doc/dropdown';
 import { Skeleton } from '../../components/lib/skeleton/Skeleton';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 import getConfig from 'next/config';
 
-export default class DropdownDemo extends Component {
+const DropdownDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.contextPath = getConfig().publicRuntimeConfig.contextPath;
-        this.state = {
-            lazyItems: [],
-            lazyLoading: false,
-            selectedCity1: null,
-            selectedCity2: null,
-            selectedCountry: null,
-            selectedGroupedCity: null,
-            selectedItem: null,
-            selectedItem2: null
-        };
+    const [lazyItems, setLazyItems] = useState([]);
+    const [lazyLoading, setLazyLoading] = useState(false);
+    const [selectedCity1, setSelectedCity1] = useState(null);
+    const [selectedCity2, setSelectedCity2] = useState(null);
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedItem2, setSelectedItem2] = useState(null);
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-        this.cities = [
-            { name: 'New York', code: 'NY' },
-            { name: 'Rome', code: 'RM' },
-            { name: 'London', code: 'LDN' },
-            { name: 'Istanbul', code: 'IST' },
-            { name: 'Paris', code: 'PRS' }
-        ];
+    let loadLazyTimeout = useRef(null);
 
-        this.countries = [
-            { name: 'Australia', code: 'AU' },
-            { name: 'Brazil', code: 'BR' },
-            { name: 'China', code: 'CN' },
-            { name: 'Egypt', code: 'EG' },
-            { name: 'France', code: 'FR' },
-            { name: 'Germany', code: 'DE' },
-            { name: 'India', code: 'IN' },
-            { name: 'Japan', code: 'JP' },
-            { name: 'Spain', code: 'ES' },
-            { name: 'United States', code: 'US' }
-        ];
+    const cities = [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' }
+    ];
 
-        this.groupedCities = [
-            {
-                label: 'Germany', code: 'DE',
-                items: [
-                    { label: 'Berlin', value: 'Berlin' },
-                    { label: 'Frankfurt', value: 'Frankfurt' },
-                    { label: 'Hamburg', value: 'Hamburg' },
-                    { label: 'Munich', value: 'Munich' }
-                ]
-            },
-            {
-                label: 'USA', code: 'US',
-                items: [
-                    { label: 'Chicago', value: 'Chicago' },
-                    { label: 'Los Angeles', value: 'Los Angeles' },
-                    { label: 'New York', value: 'New York' },
-                    { label: 'San Francisco', value: 'San Francisco' }
-                ]
-            },
-            {
-                label: 'Japan', code: 'JP',
-                items: [
-                    { label: 'Kyoto', value: 'Kyoto' },
-                    { label: 'Osaka', value: 'Osaka' },
-                    { label: 'Tokyo', value: 'Tokyo' },
-                    { label: 'Yokohama', value: 'Yokohama' }
-                ]
-            }
-        ];
+    const countries = [
+        { name: 'Australia', code: 'AU' },
+        { name: 'Brazil', code: 'BR' },
+        { name: 'China', code: 'CN' },
+        { name: 'Egypt', code: 'EG' },
+        { name: 'France', code: 'FR' },
+        { name: 'Germany', code: 'DE' },
+        { name: 'India', code: 'IN' },
+        { name: 'Japan', code: 'JP' },
+        { name: 'Spain', code: 'ES' },
+        { name: 'United States', code: 'US' }
+    ];
 
-        this.items = Array.from({ length: 100000 }).map((_, i) => ({ label: `Item #${i}`, value: i }));
+    const groupedCities = [
+        {
+            label: 'Germany', code: 'DE',
+            items: [
+                { label: 'Berlin', value: 'Berlin' },
+                { label: 'Frankfurt', value: 'Frankfurt' },
+                { label: 'Hamburg', value: 'Hamburg' },
+                { label: 'Munich', value: 'Munich' }
+            ]
+        },
+        {
+            label: 'USA', code: 'US',
+            items: [
+                { label: 'Chicago', value: 'Chicago' },
+                { label: 'Los Angeles', value: 'Los Angeles' },
+                { label: 'New York', value: 'New York' },
+                { label: 'San Francisco', value: 'San Francisco' }
+            ]
+        },
+        {
+            label: 'Japan', code: 'JP',
+            items: [
+                { label: 'Kyoto', value: 'Kyoto' },
+                { label: 'Osaka', value: 'Osaka' },
+                { label: 'Tokyo', value: 'Tokyo' },
+                { label: 'Yokohama', value: 'Yokohama' }
+            ]
+        }
+    ];
 
-        this.onCityChange = this.onCityChange.bind(this);
-        this.onCityChange2 = this.onCityChange2.bind(this);
-        this.onCountryChange = this.onCountryChange.bind(this);
-        this.onGroupedCityChange = this.onGroupedCityChange.bind(this);
-        this.onItemChange = this.onItemChange.bind(this);
-        this.onLazyItemChange = this.onLazyItemChange.bind(this);
-        this.onLazyLoad = this.onLazyLoad.bind(this);
-        this.selectedCountryTemplate = this.selectedCountryTemplate.bind(this);
-        this.countryOptionTemplate = this.countryOptionTemplate.bind(this);
-        this.groupedItemTemplate = this.groupedItemTemplate.bind(this);
+    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: `Item #${i}`, value: i }));
+
+    useEffect(() => {
+        setLazyItems(Array.from({ length: 100000 }));
+        setLazyLoading(false);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const onCityChange = (e) => {
+        setSelectedCity1(e.value);
     }
 
-    componentDidMount() {
-        this.setState({
-            lazyItems: Array.from({ length: 100000 }),
-            lazyLoading: false
-        });
+    const onCityChange2 = (e) => {
+        setSelectedCity2(e.value);
     }
 
-    onCityChange(e) {
-        this.setState({ selectedCity1: e.value });
+    const onCountryChange = (e) => {
+        setSelectedCountry(e.value);
     }
 
-    onCityChange2(e) {
-        this.setState({ selectedCity2: e.value });
+    const onGroupedCityChange = (e) => {
+        setSelectedGroupedCity(e.value);
     }
 
-    onCountryChange(e) {
-        this.setState({ selectedCountry: e.value });
+    const onItemChange = (e) => {
+        setSelectedItem(e.value);
     }
 
-    onGroupedCityChange(e) {
-        this.setState({ selectedGroupedCity: e.value });
+    const onLazyItemChange = (e) => {
+        setSelectedItem2(e.value)
     }
 
-    onItemChange(e) {
-        this.setState({ selectedItem: e.value });
-    }
+    const onLazyLoad = (event) => {
+        setLazyLoading(true);
 
-    onLazyItemChange(e) {
-        this.setState({ selectedItem2: e.value });
-    }
-
-    onLazyLoad(event) {
-        this.setState({ lazyLoading: true });
-
-        if (this.loadLazyTimeout) {
-            clearTimeout(this.loadLazyTimeout);
+        if (loadLazyTimeout) {
+            clearTimeout(loadLazyTimeout);
         }
 
         //imitate delay of a backend call
-        this.loadLazyTimeout = setTimeout(() => {
+        loadLazyTimeout = setTimeout(() => {
             const { first, last } = event;
-            const lazyItems = [...this.state.lazyItems];
+            const _lazyItems = [...lazyItems];
 
             for (let i = first; i < last; i++) {
-                lazyItems[i] = { label: `Item #${i}`, value: i };
+                _lazyItems[i] = { label: `Item #${i}`, value: i };
             }
 
-            this.setState({
-                lazyItems,
-                lazyLoading: false
-            });
+            setLazyItems(_lazyItems);
+            setLazyLoading(false);
         }, Math.random() * 1000 + 250);
     }
 
-    selectedCountryTemplate(option, props) {
+    const selectedCountryTemplate = (option, props) => {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src={`${this.contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
+                    <img alt={option.name} src={`${contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
                     <div>{option.name}</div>
                 </div>
             );
@@ -158,73 +140,73 @@ export default class DropdownDemo extends Component {
         );
     }
 
-    countryOptionTemplate(option) {
+    const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                <img alt={option.name} src={`${this.contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
+                <img alt={option.name} src={`${contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
                 <div>{option.name}</div>
             </div>
         );
     }
 
-    groupedItemTemplate(option) {
+    const groupedItemTemplate = (option) => {
         return (
-            <div className="p-d-flex p-ai-center country-item">
-                <img alt={option.label} src={`${this.contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
+            <div className="flex align-items-center country-item">
+                <img alt={option.label} src={`${contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
                 <div>{option.label}</div>
             </div>
         );
     }
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React Select Component</title>
-                    <meta name="description" content="Dropdown also known as Select, is used to choose an item from a collection of options." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Dropdown</h1>
-                        <p>Dropdown also known as Select, is used to choose an item from a collection of options.</p>
-                    </div>
-                    <DocActions github="dropdown/index.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Select Component</title>
+                <meta name="description" content="Dropdown also known as Select, is used to choose an item from a collection of options." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>Dropdown</h1>
+                    <p>Dropdown also known as Select, is used to choose an item from a collection of options.</p>
                 </div>
-
-                <div className="content-section implementation dropdown-demo">
-                    <div className="card">
-                        <h5>Basic</h5>
-                        <Dropdown value={this.state.selectedCity1} options={this.cities} onChange={this.onCityChange} optionLabel="name" placeholder="Select a City" />
-
-                        <h5>Editable</h5>
-                        <Dropdown value={this.state.selectedCity2} options={this.cities} onChange={this.onCityChange2} optionLabel="name" editable />
-
-                        <h5>Grouped</h5>
-                        <Dropdown value={this.state.selectedGroupedCity} options={this.groupedCities} onChange={this.onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
-                            optionGroupTemplate={this.groupedItemTemplate} />
-
-                        <h5>Advanced with Templating, Filtering and Clear Icon</h5>
-                        <Dropdown value={this.state.selectedCountry} options={this.countries} onChange={this.onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
-                            valueTemplate={this.selectedCountryTemplate} itemTemplate={this.countryOptionTemplate} />
-
-                        <h5>Virtual Scroll (100000 Items)</h5>
-                        <Dropdown value={this.state.selectedItem} options={this.items} onChange={this.onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item" />
-
-                        <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                        <Dropdown value={this.state.selectedItem2} options={this.state.lazyItems} onChange={this.onLazyItemChange} virtualScrollerOptions={{
-                            lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 38, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
-                                return (
-                                    <div className="p-d-flex p-ai-center p-p-2" style={{ height: '31px' }}>
-                                        <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
-                                    </div>
-                                )
-                            }
-                        }} placeholder="Select Item" />
-                    </div>
-                </div>
-
-                <DropdownDoc />
+                <DocActions github="dropdown/index.js" />
             </div>
-        );
-    }
+
+            <div className="content-section implementation dropdown-demo">
+                <div className="card">
+                    <h5>Basic</h5>
+                    <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+
+                    <h5>Editable</h5>
+                    <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
+
+                    <h5>Grouped</h5>
+                    <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
+                        optionGroupTemplate={groupedItemTemplate} />
+
+                    <h5>Advanced with Templating, Filtering and Clear Icon</h5>
+                    <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
+                        valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+
+                    <h5>Virtual Scroll (100000 Items)</h5>
+                    <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item" />
+
+                    <h5>Virtual Scroll (100000 Items) and Lazy</h5>
+                    <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{
+                        lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
+                            return (
+                                <div className="flex align-items-center p-2" style={{ height: '38px' }}>
+                                    <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
+                                </div>
+                            )
+                        }
+                    }} placeholder="Select Item" />
+                </div>
+            </div>
+
+            <DropdownDoc />
+        </div>
+    );
 }
+
+export default DropdownDemo;

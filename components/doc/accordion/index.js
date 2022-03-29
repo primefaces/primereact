@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class AccordionDoc extends Component {
+const AccordionDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Button } from 'primereact/button';
@@ -92,10 +89,10 @@ export class AccordionDemo extends Component {
                     </Accordion>
 
                     <h5>Programmatic</h5>
-                    <div className="p-pt-2 p-pb-4">
+                    <div className="pt-2 pb-4">
                         <Button icon={this.state.activeIndex && this.state.activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => this.onClick(0)} className="p-button-text" />
-                        <Button icon={this.state.activeIndex && this.state.activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => this.onClick(1)} className="p-button-text p-ml-2" />
-                        <Button icon={this.state.activeIndex && this.state.activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => this.onClick(2)} className="p-button-text p-ml-2" />
+                        <Button icon={this.state.activeIndex && this.state.activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => this.onClick(1)} className="p-button-text ml-2" />
+                        <Button icon={this.state.activeIndex && this.state.activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => this.onClick(2)} className="p-button-text ml-2" />
                     </div>
 
                     <Accordion multiple activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
@@ -140,10 +137,10 @@ export class AccordionDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Button } from 'primereact/button';
@@ -215,10 +212,10 @@ export const AccordionDemo = () => {
                 </Accordion>
 
                 <h5>Programmatic</h5>
-                <div className="p-pt-2 p-pb-4">
+                <div className="pt-2 pb-4">
                     <Button icon={activeIndex && activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => onClick(0)} className="p-button-text" />
-                    <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text p-ml-2" />
-                    <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text p-ml-2" />
+                    <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text ml-2" />
+                    <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text ml-2" />
                 </div>
 
                 <Accordion multiple activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
@@ -262,10 +259,10 @@ export const AccordionDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Button } from 'primereact/button';
@@ -337,10 +334,10 @@ export const AccordionDemo = () => {
                 </Accordion>
 
                 <h5>Programmatic</h5>
-                <div className="p-pt-2 p-pb-4">
+                <div className="pt-2 pb-4">
                     <Button icon={activeIndex && activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => onClick(0)} className="p-button-text" />
-                    <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text p-ml-2" />
-                    <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text p-ml-2" />
+                    <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text ml-2" />
+                    <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text ml-2" />
                 </div>
 
                 <Accordion multiple activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
@@ -385,15 +382,15 @@ export const AccordionDemo = () => {
 }
                 `
             },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./AccordionDemo.css" />
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/accordion/accordion.min.js"></script>`,
-                content: `
-const { useEffect, useState, useRef } = React;
+            content: `
+const { useState, useRef } = React;
 const { Accordion, AccordionTab } = primereact.accordion;
 const { Button } = primereact.button;
 
@@ -463,10 +460,10 @@ const AccordionDemo = () => {
                 </Accordion>
 
                 <h5>Programmatic</h5>
-                <div className="p-pt-2 p-pb-4">
+                <div className="pt-2 pb-4">
                     <Button icon={activeIndex && activeIndex.some((index) => index === 0) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 1st" onClick={() => onClick(0)} className="p-button-text" />
-                    <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text p-ml-2" />
-                    <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text p-ml-2" />
+                    <Button icon={activeIndex && activeIndex.some((index) => index === 1) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 2nd" onClick={() => onClick(1)} className="p-button-text ml-2" />
+                    <Button icon={activeIndex && activeIndex.some((index) => index === 2) ? 'pi pi-minus' : 'pi pi-plus'} label="Toggle 3rd" onClick={() => onClick(2)} className="p-button-text ml-2" />
                 </div>
 
                 <Accordion multiple activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
@@ -513,9 +510,9 @@ const AccordionDemo = () => {
             }
         };
 
-        this.extFiles = {
-            'demo/AccordionDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/AccordionDemo.css': {
+            content: `
 .accordion-demo .accordion-custom i, .accordion-demo .accordion-custom span {
     vertical-align: middle;
 }
@@ -529,19 +526,13 @@ const AccordionDemo = () => {
     margin: 0;
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
                         <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
@@ -565,7 +556,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 
 <CodeHighlight>
 {`
-<Accordion activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({activeIndex: e.index})}>
+<Accordion activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
     <AccordionTab header="Header I">
         Content I
     </AccordionTab>
@@ -816,14 +807,14 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                             <h5>Dependencies</h5>
                             <p>None.</p>
                         </div>
+                </TabPanel>
 
-                    </TabPanel>
+                {
+                    useLiveEditorTabs({ name: 'AccordionDemo', sources: sources, extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    );
+})
 
-                    {
-                        useLiveEditorTabs({ name: 'AccordionDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+export default AccordionDoc;

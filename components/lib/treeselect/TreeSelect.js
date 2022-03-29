@@ -1,251 +1,118 @@
-import React, { Component, createRef } from 'react';
+import React, { forwardRef, memo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
 import PrimeReact, { localeOption } from '../api/Api';
-import { OverlayService } from '../overlayservice/OverlayService';
-import { Tree } from '../tree/Tree';
 import { TreeSelectPanel } from './TreeSelectPanel';
+import { Tree } from '../tree/Tree';
 import { Ripple } from '../ripple/Ripple';
+import { OverlayService } from '../overlayservice/OverlayService';
+import { DomHandler, ObjectUtils, classNames, ZIndexUtils } from '../utils/Utils';
+import { useUpdateEffect, useUnmountEffect, useOverlayListener, useMountEffect } from '../hooks/Hooks';
 
-export class TreeSelect extends Component {
+export const TreeSelect = memo(forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
+    const [expandedKeysState, setExpandedKeysState] = useState({});
+    const [filterValueState, setFilterValueState] = useState('');
+    const elementRef = useRef(null);
+    const overlayRef = useRef(null);
+    const filterInputRef = useRef(null);
+    const focusInputRef = useRef(null);
+    const triggerRef = useRef(null);
+    const selfChange = useRef(null);
+    const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
+    const isValueEmpty = ObjectUtils.isEmpty(props.value);
+    const hasNoOptions = ObjectUtils.isEmpty(props.options);
+    const isSingleSelectionMode = props.selectionMode === 'single';
+    const isCheckboxSelectionMode = props.selectionMode === 'checkbox';
 
-    static defaultProps = {
-        id: null,
-        value: null,
-        name: null,
-        style: null,
-        className: null,
-        disabled: false,
-        options: null,
-        scrollHeight: '400px',
-        placeholder: null,
-        tabIndex: null,
-        inputId: null,
-        ariaLabel: null,
-        ariaLabelledBy: null,
-        selectionMode: 'single',
-        panelStyle: null,
-        panelClassName: null,
-        appendTo: null,
-        emptyMessage: null,
-        display: 'comma',
-        metaKeySelection: true,
-        valueTemplate: null,
-        panelHeaderTemplate: null,
-        panelFooterTemplate: null,
-        transitionOptions: null,
-        dropdownIcon: 'pi pi-chevron-down',
-        filter: false,
-        filterValue: null,
-        filterBy: 'label',
-        filterMode: 'lenient',
-        filterPlaceholder: null,
-        filterLocale: undefined,
-        filterInputAutoFocus: true,
-        resetFilterOnHide: false,
-        onShow: null,
-        onHide: null,
-        onChange: null,
-        onNodeSelect: null,
-        onNodeUnselect: null,
-        onNodeExpand: null,
-        onNodeCollapse: null,
-        onFilterValueChange: null
+    const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
+        target: elementRef, overlay: overlayRef, listener: (event, { valid }) => {
+            valid && hide();
+        }, when: overlayVisibleState
+    });
+
+    const getLabel = () => {
+        return selectedNodes.length ? selectedNodes.map(node => node.label).join(', ') : props.placeholder;
     }
 
-    static propTypes = {
-        id: PropTypes.string,
-        value: PropTypes.any,
-        name: PropTypes.string,
-        style: PropTypes.object,
-        classNames: PropTypes.string,
-        disabled: PropTypes.bool,
-        options: PropTypes.any,
-        scrollHeight: PropTypes.string,
-        placeholder: PropTypes.string,
-        tabIndex: PropTypes.number,
-        inputId: PropTypes.string,
-        ariaLabel: PropTypes.string,
-        ariaLabelledBy: PropTypes.string,
-        selectionMode: PropTypes.string,
-        panelStyle: PropTypes.bool,
-        panelClassName: PropTypes.string,
-        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        emptyMessage: PropTypes.string,
-        display: PropTypes.string,
-        metaKeySelection: PropTypes.bool,
-        valueTemplate: PropTypes.any,
-        panelHeaderTemplate: PropTypes.any,
-        panelFooterTemplate: PropTypes.any,
-        transitionOptions: PropTypes.object,
-        dropdownIcon: PropTypes.string,
-        filter: PropTypes.bool,
-        filterValue: PropTypes.string,
-        filterBy: PropTypes.any,
-        filterMode: PropTypes.string,
-        filterPlaceholder: PropTypes.string,
-        filterLocale: PropTypes.string,
-        filterInputAutoFocus: PropTypes.bool,
-        resetFilterOnHide: PropTypes.bool,
-        onShow: PropTypes.func,
-        onHide: PropTypes.func,
-        onChange: PropTypes.func,
-        onNodeSelect: PropTypes.func,
-        onNodeUnselect: PropTypes.func,
-        onNodeExpand: PropTypes.func,
-        onNodeCollapse: PropTypes.func,
-        onFilterValueChange: PropTypes.func
+    const show = () => {
+        setOverlayVisibleState(true);
     }
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            focused: false,
-            overlayVisible: false,
-            expandedKeys: {}
-        }
-
-        if (!this.props.onFilterValueChange) {
-            this.state['filterValue'] = '';
-        }
-
-        this.onClick = this.onClick.bind(this);
-        this.onInputFocus = this.onInputFocus.bind(this);
-        this.onInputBlur = this.onInputBlur.bind(this);
-        this.onInputKeyDown = this.onInputKeyDown.bind(this);
-        this.onFilterInputChange = this.onFilterInputChange.bind(this);
-        this.onFilterInputKeyDown = this.onFilterInputKeyDown.bind(this);
-        this.onOverlayClick = this.onOverlayClick.bind(this);
-        this.onOverlayEnter = this.onOverlayEnter.bind(this);
-        this.onOverlayEntered = this.onOverlayEntered.bind(this);
-        this.onOverlayExit = this.onOverlayExit.bind(this);
-        this.onOverlayExited = this.onOverlayExited.bind(this);
-        this.onSelectionChange = this.onSelectionChange.bind(this);
-        this.onNodeSelect = this.onNodeSelect.bind(this);
-        this.onNodeUnselect = this.onNodeUnselect.bind(this);
-        this.onNodeToggle = this.onNodeToggle.bind(this);
-        this.onFilterValueChange = this.onFilterValueChange.bind(this);
-        this.hide = this.hide.bind(this);
-        this.show = this.show.bind(this);
-
-        this.overlayRef = createRef();
+    const hide = () => {
+        setOverlayVisibleState(false);
     }
 
-    getFilterValue() {
-        return this.props.onFilterValueChange ? this.props.filterValue : this.state.filterValue;
+    const onInputFocus = () => {
+        setFocusedState(true);
     }
 
-    getSelectedNodes() {
-        let selectedNodes = [];
-        if (ObjectUtils.isNotEmpty(this.props.value) && this.props.options) {
-            let keys = this.props.selectionMode === 'single' ? {[`${this.props.value}`]: true} : {...this.props.value};
-            this.findSelectedNodes(null, keys, selectedNodes);
-        }
-
-        return selectedNodes;
+    const onInputBlur = () => {
+        setFocusedState(false);
     }
 
-    getLabel() {
-        let value = this.getSelectedNodes();
-        return value.length ? value.map(node => node.label).join(', ') : this.props.placeholder;
-    }
-
-    isValueEmpty() {
-        return !this.props.value || Object.keys(this.props.value).length === 0;
-    }
-
-    hasNoOptions() {
-        return !this.props.options || this.props.options.length === 0;
-    }
-
-    show() {
-        this.setState({ overlayVisible: true });
-    }
-
-    hide() {
-        this.setState({ overlayVisible: false });
-    }
-
-    onInputFocus() {
-        this.setState({ focused: true });
-    }
-
-    onInputBlur() {
-        this.setState({ focused: false });
-    }
-
-    onClick(event) {
-        if (!this.props.disabled && (!this.overlayRef || !this.overlayRef.current || !this.overlayRef.current.contains(event.target)) && !DomHandler.hasClass(event.target, 'p-treeselect-close')) {
-            this.focusInput.focus();
-
-            if (this.state.overlayVisible) {
-                this.hide();
-            }
-            else {
-                this.show();
-            }
+    const onClick = (event) => {
+        if (!props.disabled && (!overlayRef.current || !overlayRef.current.contains(event.target)) && !DomHandler.hasClass(event.target, 'p-treeselect-close')) {
+            focusInputRef.current.focus();
+            overlayVisibleState ? hide() : show();
         }
     }
 
-    onSelectionChange(event) {
-        if (this.props.onChange) {
-            this.selfChange = true;
+    const onSelectionChange = (event) => {
+        if (props.onChange) {
+            selfChange.current = true;
 
-            this.props.onChange({
+            props.onChange({
                 originalEvent: event.originalEvent,
                 value: event.value,
                 stopPropagation: () => { },
                 preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
+                    name: props.name,
+                    id: props.id,
                     value: event.value
                 }
             });
         }
     }
 
-    onNodeSelect(node) {
-        this.props.onNodeSelect && this.props.onNodeSelect(node);
-
-        if (this.props.selectionMode === 'single') {
-            this.hide();
-        }
+    const onNodeSelect = (node) => {
+        props.onNodeSelect && props.onNodeSelect(node);
+        isSingleSelectionMode && hide();
     }
 
-    onNodeUnselect(node) {
-        this.props.onNodeUnselect && this.props.onNodeUnselect(node);
+    const onNodeUnselect = (node) => {
+        props.onNodeUnselect && props.onNodeUnselect(node);
     }
 
-    onNodeToggle(e) {
-        this.setState({ expandedKeys: e.value });
+    const onNodeToggle = (e) => {
+        setExpandedKeysState(e.value);
     }
 
-    onFilterValueChange(e) {
-        this.setState({ filterValue: e.value });
+    const onFilterValueChange = (e) => {
+        setFilterValueState(e.value);
     }
 
-    onOverlayClick(event) {
+    const onOverlayClick = (event) => {
         OverlayService.emit('overlay-click', {
             originalEvent: event,
-            target: this.container
+            target: elementRef.current
         });
     }
 
-    onInputKeyDown(event) {
+    const onInputKeyDown = (event) => {
         switch (event.which) {
             //down
             case 40:
-                if (!this.state.overlayVisible && event.altKey) {
-                    this.show();
+                if (!overlayVisibleState && event.altKey) {
+                    show();
                 }
                 break;
 
             //space
             case 32:
-                if (!this.state.overlayVisible) {
-                    this.show();
+                if (!overlayVisibleState) {
+                    show();
                     event.preventDefault();
                 }
                 break;
@@ -253,15 +120,15 @@ export class TreeSelect extends Component {
             //enter and escape
             case 13:
             case 27:
-                if (this.state.overlayVisible) {
-                    this.hide();
+                if (overlayVisibleState) {
+                    hide();
                     event.preventDefault();
                 }
                 break;
 
             //tab
             case 9:
-                this.hide();
+                hide();
                 break;
 
             default:
@@ -269,266 +136,209 @@ export class TreeSelect extends Component {
         }
     }
 
-    onFilterInputKeyDown(event) {
+    const onFilterInputKeyDown = (event) => {
         //enter
         if (event.which === 13) {
             event.preventDefault();
         }
     }
 
-    onFilterInputChange(event) {
-        let filterValue = event.target.value;
+    const onFilterInputChange = (event) => {
+        const value = event.target.value;
 
-        if (this.props.onFilterValueChange) {
-            this.props.onFilterValueChange({
+        if (props.onFilterValueChange) {
+            props.onFilterValueChange({
                 originalEvent: event,
-                value: filterValue
+                value
             });
         }
         else {
-            this.setState({ filterValue });
+            setFilterValueState(value);
         }
     }
 
-    resetFilter() {
-        this.setState({ filterValue: '' });
+    const resetFilter = () => {
+        setFilterValueState('');
     }
 
-    onOverlayEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
-        this.alignOverlay();
-        this.scrollInView();
+    const onOverlayEnter = () => {
+        ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+        alignOverlay();
+        scrollInView();
     }
 
-    onOverlayEntered() {
-        this.bindDocumentClickListener();
-        this.bindScrollListener();
-        this.bindResizeListener();
+    const onOverlayEntered = () => {
+        bindOverlayListener();
 
-        if (this.props.filter && this.props.filterInputAutoFocus) {
-            this.filterInput.focus();
+        if (props.filter && props.filterInputAutoFocus) {
+            filterInputRef.current.focus();
         }
 
-        this.props.onShow && this.props.onShow();
+        props.onShow && props.onShow();
     }
 
-    onOverlayExit() {
-        this.unbindDocumentClickListener();
-        this.unbindScrollListener();
-        this.unbindResizeListener();
+    const onOverlayExit = () => {
+        unbindOverlayListener();
     }
 
-    onOverlayExited() {
-        if (this.props.filter && this.props.resetFilterOnHide) {
-            this.resetFilter();
+    const onOverlayExited = () => {
+        if (props.filter && props.resetFilterOnHide) {
+            resetFilter();
         }
 
-        ZIndexUtils.clear(this.overlayRef.current);
+        ZIndexUtils.clear(overlayRef.current);
 
-        this.props.onHide && this.props.onHide();
+        props.onHide && props.onHide();
     }
 
-    alignOverlay() {
-        DomHandler.alignOverlay(this.overlayRef.current, this.trigger.parentElement, this.props.appendTo || PrimeReact.appendTo);
+    const alignOverlay = () => {
+        DomHandler.alignOverlay(overlayRef.current, triggerRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
     }
 
-    scrollInView() {
-        let highlightItem = DomHandler.findSingle(this.overlayRef.current, '.p-treenode-content.p-highlight');
-        if (highlightItem) {
+    const scrollInView = () => {
+        const highlightItem = DomHandler.findSingle(overlayRef.current, '.p-treenode-content.p-highlight');
+        if (highlightItem && highlightItem.scrollIntoView) {
             highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });
         }
     }
 
-    bindDocumentClickListener() {
-        if (!this.documentClickListener) {
-            this.documentClickListener = (event) => {
-                if (this.state.overlayVisible && this.isOutsideClicked(event)) {
-                    this.hide();
-                }
-            };
-
-            document.addEventListener('click', this.documentClickListener);
-        }
-    }
-
-    unbindDocumentClickListener() {
-        if (this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-            this.documentClickListener = null;
-        }
-    }
-
-    bindScrollListener() {
-        if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
-                if (this.state.overlayVisible) {
-                    this.hide();
-                }
-            });
-        }
-
-        this.scrollHandler.bindScrollListener();
-    }
-
-    unbindScrollListener() {
-        if (this.scrollHandler) {
-            this.scrollHandler.unbindScrollListener();
-        }
-    }
-
-    bindResizeListener() {
-        if (!this.resizeListener) {
-            this.resizeListener = () => {
-                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
-                    this.hide();
-                }
-            };
-            window.addEventListener('resize', this.resizeListener);
-        }
-    }
-
-    unbindResizeListener() {
-        if (this.resizeListener) {
-            window.removeEventListener('resize', this.resizeListener);
-            this.resizeListener = null;
-        }
-    }
-
-    isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target)
-            || (this.overlayRef && this.overlayRef.current.contains(event.target)));
-    }
-
-    findSelectedNodes(node, keys, selectedNodes) {
+    const findSelectedNodes = (node, keys, selectedNodes) => {
         if (node) {
-            if (this.isSelected(node, keys)) {
+            if (isSelected(node, keys)) {
                 selectedNodes.push(node);
                 delete keys[node.key];
             }
 
             if (Object.keys(keys).length && node.children) {
                 for (let childNode of node.children) {
-                    this.findSelectedNodes(childNode, keys, selectedNodes);
+                    findSelectedNodes(childNode, keys, selectedNodes);
                 }
             }
         }
         else {
-            for (let childNode of this.props.options) {
-                this.findSelectedNodes(childNode, keys, selectedNodes);
+            for (let childNode of props.options) {
+                findSelectedNodes(childNode, keys, selectedNodes);
             }
         }
     }
 
-    isSelected(node, keys) {
-        return this.props.selectionMode === 'checkbox' ? keys[node.key] && keys[node.key].checked : keys[node.key];
+    const isSelected = (node, keys) => {
+        return isCheckboxSelectionMode ? keys[node.key] && keys[node.key].checked : keys[node.key];
     }
 
-    updateTreeState() {
-        let keys = this.props.selectionMode === 'single' ? {[`${this.props.value}`]: true} : {...this.props.value};
+    const updateTreeState = () => {
+        const keys = isSingleSelectionMode ? { [`${props.value}`]: true } : { ...props.value };
 
-        this.setState({ expandedKeys: {} });
-        if (keys && this.props.options) {
-            this.updateTreeBranchState(null, null, keys);
+        setExpandedKeysState({});
+
+        if (keys && props.options) {
+            updateTreeBranchState(null, null, keys);
         }
     }
 
-    updateTreeBranchState(node, path, keys) {
+    const updateTreeBranchState = (node, path, keys) => {
         if (node) {
-            if (this.isSelected(node, keys)) {
-                this.expandPath(path);
+            if (isSelected(node, keys)) {
+                expandPath(path);
                 delete keys[node.key];
             }
 
             if (Object.keys(keys).length && node.children) {
                 for (let childNode of node.children) {
                     path.push(node.key);
-                    this.updateTreeBranchState(childNode, path, keys);
+                    updateTreeBranchState(childNode, path, keys);
                 }
             }
         }
         else {
-            for (let childNode of this.props.options) {
-                this.updateTreeBranchState(childNode, [], keys);
+            for (let childNode of props.options) {
+                updateTreeBranchState(childNode, [], keys);
             }
         }
     }
 
-    expandPath(path) {
+    const expandPath = (path) => {
         if (path.length > 0) {
-            let expandedKeys = { ...(this.state.expandedKeys || {}) };
+            let expandedKeys = { ...(expandedKeysState || {}) };
             for (let key of path) {
                 expandedKeys[key] = true;
             }
 
-            this.setState({ expandedKeys });
+            setExpandedKeysState(expandedKeys);
         }
     }
 
-    componentDidMount() {
-        this.updateTreeState();
+    const getSelectedNodes = () => {
+        let selectedNodes = [];
+        if (ObjectUtils.isNotEmpty(props.value) && props.options) {
+            const keys = isSingleSelectionMode ? { [`${props.value}`]: true } : { ...props.value };
+            findSelectedNodes(null, keys, selectedNodes);
+        }
+
+        return selectedNodes;
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.overlayVisible) {
-            if (this.props.filter || prevState.expandedKeys !== this.state.expandedKeys) {
-                this.alignOverlay();
+    useMountEffect(() => {
+        updateTreeState();
+    });
+
+    useUpdateEffect(() => {
+        if (overlayVisibleState && props.filter) {
+            alignOverlay();
+        }
+    });
+
+    useUpdateEffect(() => {
+        updateTreeState();
+    }, [props.options]);
+
+    useUpdateEffect(() => {
+        if (overlayVisibleState && expandedKeysState) {
+            alignOverlay();
+        }
+    }, [expandedKeysState]);
+
+    useUpdateEffect(() => {
+        if (overlayVisibleState) {
+            if (!selfChange.current) {
+                updateTreeState();
             }
+            scrollInView();
 
-            if (prevProps.value !== this.props.value) {
-                if (!this.selfChange) {
-                    this.updateTreeState();
-                }
-                this.scrollInView();
-
-                this.selfChange = false;
-            }
+            selfChange.current = false;
         }
+    }, [props.value]);
 
-        if (prevProps.options !== this.props.options) {
-            this.updateTreeState();
-        }
-    }
+    useUnmountEffect(() => {
+        ZIndexUtils.clear(overlayRef.current);
+    });
 
-    componentWillUnmount() {
-        this.unbindDocumentClickListener();
-        this.unbindResizeListener();
-        if (this.scrollHandler) {
-            this.scrollHandler.destroy();
-            this.scrollHandler = null;
-        }
-
-        ZIndexUtils.clear(this.overlayRef.current);
-    }
-
-    renderKeyboardHelper() {
+    const createKeyboardHelper = () => {
         return (
             <div className="p-hidden-accessible">
-                <input ref={(el) => this.focusInput = el} role="listbox" id={this.props.inputId} type="text" readOnly aria-haspopup="true" aria-expanded={this.state.overlayVisible}
-                    onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
-                    disabled={this.props.disabled} tabIndex={this.props.tabIndex} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy} />
+                <input ref={focusInputRef} role="listbox" id={props.inputId} type="text" readOnly aria-expanded={overlayVisibleState}
+                    onFocus={onInputFocus} onBlur={onInputBlur} onKeyDown={onInputKeyDown}
+                    disabled={props.disabled} tabIndex={props.tabIndex} aria-label={props.ariaLabel} aria-labelledby={props.ariaLabelledBy} />
             </div>
-        );
+        )
     }
 
-    renderLabel(selectedNodes) {
-        const isValueEmpty = this.isValueEmpty();
+    const createLabel = () => {
         const labelClassName = classNames('p-treeselect-label', {
-            'p-placeholder': this.getLabel() === this.props.placeholder,
-            'p-treeselect-label-empty': !this.props.placeholder && isValueEmpty
+            'p-placeholder': getLabel() === props.placeholder,
+            'p-treeselect-label-empty': !props.placeholder && isValueEmpty
         });
 
         let content = null;
 
-        if (this.props.valueTemplate) {
-            content = ObjectUtils.getJSXElement(this.props.valueTemplate, selectedNodes, this.props);
+        if (props.valueTemplate) {
+            content = ObjectUtils.getJSXElement(props.valueTemplate, selectedNodes, props);
         }
         else {
-            if (this.props.display === 'comma') {
-                content = this.getLabel() || 'empty';
+            if (props.display === 'comma') {
+                content = getLabel() || 'empty';
             }
-            else if (this.props.display === 'chip') {
-                const selectedNodes = this.getSelectedNodes();
-
+            else if (props.display === 'chip') {
                 content = (
                     <>
                         {
@@ -541,7 +351,7 @@ export class TreeSelect extends Component {
                             })
                         }
 
-                        {isValueEmpty && (this.props.placeholder || 'empty')}
+                        {isValueEmpty && (props.placeholder || 'empty')}
                     </>
                 )
             }
@@ -553,36 +363,34 @@ export class TreeSelect extends Component {
                     {content}
                 </div>
             </div>
-        );
+        )
     }
 
-    renderDropdownIcon() {
-        let iconClassName = classNames('p-treeselect-trigger-icon p-clickable', this.props.dropdownIcon);
+    const createDropdownIcon = () => {
+        const iconClassName = classNames('p-treeselect-trigger-icon p-clickable', props.dropdownIcon);
 
         return (
-            <div ref={(el) => this.trigger = el} className="p-treeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={this.state.overlayVisible}>
+            <div ref={triggerRef} className="p-treeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState}>
                 <span className={iconClassName}></span>
             </div>
-        );
+        )
     }
 
-    renderContent() {
-        const filterValue = this.getFilterValue();
-
+    const createContent = () => {
         return (
             <>
-                <Tree value={this.props.options} selectionMode={this.props.selectionMode} selectionKeys={this.props.value} metaKeySelection={this.props.metaKeySelection}
-                    onSelectionChange={this.onSelectionChange} onSelect={this.onNodeSelect} onUnselect={this.onNodeUnselect}
-                    expandedKeys={this.state.expandedKeys} onToggle={this.onNodeToggle}
-                    onExpand={this.props.onNodeExpand} onCollapse={this.props.onNodeCollapse}
-                    filter={this.props.filter} filterValue={filterValue} filterBy={this.props.filterBy} filterMode={this.props.filterMode}
-                    filterPlaceholder={this.props.filterPlaceholder} filterLocale={this.props.filterLocale} showHeader={false} onFilterValueChange={this.onFilterValueChange}>
+                <Tree value={props.options} selectionMode={props.selectionMode} selectionKeys={props.value} metaKeySelection={props.metaKeySelection}
+                    onSelectionChange={onSelectionChange} onSelect={onNodeSelect} onUnselect={onNodeUnselect}
+                    expandedKeys={expandedKeysState} onToggle={onNodeToggle}
+                    onExpand={props.onNodeExpand} onCollapse={props.onNodeCollapse}
+                    filter={props.filter} filterValue={filteredValue} filterBy={props.filterBy} filterMode={props.filterMode}
+                    filterPlaceholder={props.filterPlaceholder} filterLocale={props.filterLocale} showHeader={false} onFilterValueChange={onFilterValueChange}>
                 </Tree>
 
                 {
-                    this.hasNoOptions() && (
+                    hasNoOptions && (
                         <div className="p-treeselect-empty-message">
-                            {this.props.emptyMessage || localeOption('emptyMessage')}
+                            {props.emptyMessage || localeOption('emptyMessage')}
                         </div>
                     )
                 }
@@ -590,27 +398,26 @@ export class TreeSelect extends Component {
         )
     }
 
-    renderFilterElement() {
-        if (this.props.filter) {
-            let filterValue = this.getFilterValue();
-            filterValue = ObjectUtils.isNotEmpty(filterValue) ? filterValue : '';
+    const createFilterElement = () => {
+        if (props.filter) {
+            const filterValue = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
 
             return (
                 <div className="p-treeselect-filter-container">
-                    <input ref={(el) => this.filterInput = el} type="text" value={filterValue} autoComplete="off" className="p-treeselect-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
-                        onKeyDown={this.onFilterInputKeyDown} onChange={this.onFilterInputChange} disabled={this.props.disabled} />
+                    <input ref={filterInputRef} type="text" value={filterValue} autoComplete="off" className="p-treeselect-filter p-inputtext p-component" placeholder={props.filterPlaceholder}
+                        onKeyDown={onFilterInputKeyDown} onChange={onFilterInputChange} disabled={props.disabled} />
                     <span className="p-treeselect-filter-icon pi pi-search"></span>
                 </div>
-            );
+            )
         }
 
         return null;
     }
 
-    renderHeader() {
-        const filterElement = this.renderFilterElement();
+    const createHeader = () => {
+        const filterElement = createFilterElement();
         const closeElement = (
-            <button type="button" className="p-treeselect-close p-link" onClick={this.hide}>
+            <button type="button" className="p-treeselect-close p-link" onClick={hide}>
                 <span className="p-treeselect-close-icon pi pi-times"></span>
                 <Ripple />
             </button>
@@ -622,53 +429,144 @@ export class TreeSelect extends Component {
             </div>
         );
 
-        if (this.props.header) {
+        if (props.panelHeaderTemplate) {
             const defaultOptions = {
                 className: 'p-treeselect-header',
                 filterElement,
                 closeElement,
                 closeElementClassName: 'p-treeselect-close p-link',
                 closeIconClassName: 'p-treeselect-close-icon pi pi-times',
-                onCloseClick: this.hide,
+                onCloseClick: hide,
                 element: content,
-                props: this.props
+                props
             }
 
-            return ObjectUtils.getJSXElement(this.props.header, defaultOptions);
+            return ObjectUtils.getJSXElement(props.panelHeaderTemplate, defaultOptions);
         }
 
         return content;
     }
 
-    render() {
-        const className = classNames('p-treeselect p-component p-inputwrapper', {
-            'p-treeselect-chip': this.props.display === 'chip',
-            'p-disabled': this.props.disabled,
-            'p-focus': this.state.focused,
-            'p-inputwrapper-filled': !this.isValueEmpty(),
-            'p-inputwrapper-focus': this.state.focused || this.state.overlayVisible
-        }, this.props.className);
-
-        const selectedNodes = this.getSelectedNodes();
-
-        const keyboardHelper = this.renderKeyboardHelper();
-        const labelElement = this.renderLabel(selectedNodes);
-        const dropdownIcon = this.renderDropdownIcon();
-        const content = this.renderContent();
-        const header = this.renderHeader();
-        const footer = ObjectUtils.getJSXElement(this.props.footer, this.props);
-
-        return (
-            <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}>
-                {keyboardHelper}
-                {labelElement}
-                {dropdownIcon}
-                <TreeSelectPanel ref={this.overlayRef} appendTo={this.props.appendTo} panelStyle={this.props.panelStyle} panelClassName={this.props.panelClassName}
-                    scrollHeight={this.props.scrollHeight} onClick={this.onOverlayClick} header={header} footer={footer} transitionOptions={this.props.transitionOptions}
-                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
-                    {content}
-                </TreeSelectPanel>
-            </div>
-        )
+    const createFooter = () => {
+        return ObjectUtils.getJSXElement(props.footer, props);
     }
+
+    const selectedNodes = getSelectedNodes();
+
+    const className = classNames('p-treeselect p-component p-inputwrapper', {
+        'p-treeselect-chip': props.display === 'chip',
+        'p-disabled': props.disabled,
+        'p-focus': focusedState,
+        'p-inputwrapper-filled': !isValueEmpty,
+        'p-inputwrapper-focus': focusedState || overlayVisibleState
+    }, props.className);
+    const keyboardHelper = createKeyboardHelper();
+    const labelElement = createLabel();
+    const dropdownIcon = createDropdownIcon();
+    const content = createContent();
+    const header = createHeader();
+    const footer = createFooter();
+
+    return (
+        <div id={props.id} ref={elementRef} className={className} style={props.style} onClick={onClick}>
+            {keyboardHelper}
+            {labelElement}
+            {dropdownIcon}
+            <TreeSelectPanel ref={overlayRef} appendTo={props.appendTo} panelStyle={props.panelStyle} panelClassName={props.panelClassName}
+                scrollHeight={props.scrollHeight} onClick={onOverlayClick} header={header} footer={footer} transitionOptions={props.transitionOptions}
+                in={overlayVisibleState} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited}>
+                {content}
+            </TreeSelectPanel>
+        </div>
+    )
+}));
+
+TreeSelect.defaultProps = {
+    __TYPE: 'TreeSelect',
+    id: null,
+    value: null,
+    name: null,
+    style: null,
+    className: null,
+    disabled: false,
+    options: null,
+    scrollHeight: '400px',
+    placeholder: null,
+    tabIndex: null,
+    inputId: null,
+    ariaLabel: null,
+    ariaLabelledBy: null,
+    selectionMode: 'single',
+    panelStyle: null,
+    panelClassName: null,
+    appendTo: null,
+    emptyMessage: null,
+    display: 'comma',
+    metaKeySelection: true,
+    valueTemplate: null,
+    panelHeaderTemplate: null,
+    panelFooterTemplate: null,
+    transitionOptions: null,
+    dropdownIcon: 'pi pi-chevron-down',
+    filter: false,
+    filterValue: null,
+    filterBy: 'label',
+    filterMode: 'lenient',
+    filterPlaceholder: null,
+    filterLocale: undefined,
+    filterInputAutoFocus: true,
+    resetFilterOnHide: false,
+    onShow: null,
+    onHide: null,
+    onChange: null,
+    onNodeSelect: null,
+    onNodeUnselect: null,
+    onNodeExpand: null,
+    onNodeCollapse: null,
+    onFilterValueChange: null
+}
+
+TreeSelect.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    id: PropTypes.string,
+    value: PropTypes.any,
+    name: PropTypes.string,
+    style: PropTypes.object,
+    classNames: PropTypes.string,
+    disabled: PropTypes.bool,
+    options: PropTypes.any,
+    scrollHeight: PropTypes.string,
+    placeholder: PropTypes.string,
+    tabIndex: PropTypes.number,
+    inputId: PropTypes.string,
+    ariaLabel: PropTypes.string,
+    ariaLabelledBy: PropTypes.string,
+    selectionMode: PropTypes.string,
+    panelStyle: PropTypes.bool,
+    panelClassName: PropTypes.string,
+    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    emptyMessage: PropTypes.string,
+    display: PropTypes.string,
+    metaKeySelection: PropTypes.bool,
+    valueTemplate: PropTypes.any,
+    panelHeaderTemplate: PropTypes.any,
+    panelFooterTemplate: PropTypes.any,
+    transitionOptions: PropTypes.object,
+    dropdownIcon: PropTypes.string,
+    filter: PropTypes.bool,
+    filterValue: PropTypes.string,
+    filterBy: PropTypes.any,
+    filterMode: PropTypes.string,
+    filterPlaceholder: PropTypes.string,
+    filterLocale: PropTypes.string,
+    filterInputAutoFocus: PropTypes.bool,
+    resetFilterOnHide: PropTypes.bool,
+    onShow: PropTypes.func,
+    onHide: PropTypes.func,
+    onChange: PropTypes.func,
+    onNodeSelect: PropTypes.func,
+    onNodeUnselect: PropTypes.func,
+    onNodeExpand: PropTypes.func,
+    onNodeCollapse: PropTypes.func,
+    onFilterValueChange: PropTypes.func
 }

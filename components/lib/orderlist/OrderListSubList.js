@@ -1,131 +1,133 @@
-import React, { Component } from 'react'
+import React, { useRef, memo } from 'react'
 import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
 
-export class OrderListSubList extends Component {
+export const OrderListSubList = memo((props) => {
+    const dragging = useRef(null);
+    const draggedItemIndex = useRef(null);
+    const dragOverItemIndex = useRef(null);
+    const listElementRef = useRef(null);
 
-    constructor(props) {
-        super(props);
-
-        this.onDragEnd = this.onDragEnd.bind(this);
-        this.onDragLeave = this.onDragLeave.bind(this);
-        this.onDrop = this.onDrop.bind(this);
-        this.onListMouseMove = this.onListMouseMove.bind(this);
+    const isSelected = (item) => {
+        return ObjectUtils.findIndexInList(item, props.selection, props.dataKey) !== -1;
     }
 
-    isSelected(item) {
-        return ObjectUtils.findIndexInList(item, this.props.selection, this.props.dataKey) !== -1;
-    }
-
-    onDragStart(event, index) {
-        this.dragging = true;
-        this.draggedItemIndex = index;
-        if(this.props.dragdropScope) {
+    const onDragStart = (event, index) => {
+        dragging.current = true;
+        draggedItemIndex.current = index;
+        if (props.dragdropScope) {
             event.dataTransfer.setData('text', 'orderlist');
         }
     }
 
-    onDragOver(event, index) {
-        if(this.draggedItemIndex !== index && this.draggedItemIndex + 1 !== index) {
-            this.dragOverItemIndex = index;
+    const onDragOver = (event, index) => {
+        if (draggedItemIndex.current !== index && draggedItemIndex.current + 1 !== index) {
+            dragOverItemIndex.current = index;
             DomHandler.addClass(event.target, 'p-orderlist-droppoint-highlight');
             event.preventDefault();
         }
     }
 
-    onDragLeave(event) {
-        this.dragOverItemIndex = null;
+    const onDragLeave = (event) => {
+        dragOverItemIndex.current = null;
         DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
     }
 
-    onDrop(event) {
-        let dropIndex = (this.draggedItemIndex > this.dragOverItemIndex) ? this.dragOverItemIndex : (this.dragOverItemIndex === 0) ? 0 : this.dragOverItemIndex - 1;
-        let value = [...this.props.value];
-        ObjectUtils.reorderArray(value, this.draggedItemIndex, dropIndex);
-        this.dragOverItemIndex = null;
+    const onDrop = (event) => {
+        let dropIndex = (draggedItemIndex.current > dragOverItemIndex.current) ? dragOverItemIndex.current : (dragOverItemIndex.current === 0) ? 0 : dragOverItemIndex.current - 1;
+        let value = [...props.value];
+        ObjectUtils.reorderArray(value, draggedItemIndex.current, dropIndex);
+        dragOverItemIndex.current = null;
         DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
 
-        if(this.props.onChange) {
-            this.props.onChange({
+        if (props.onChange) {
+            props.onChange({
                 originalEvent: event,
                 value: value
-            })
+            });
         }
     }
 
-    onDragEnd(event) {
-        this.dragging = false;
+    const onDragEnd = (event) => {
+        dragging.current = false;
     }
 
-    onListMouseMove(event) {
-        if(this.dragging) {
-            let offsetY = this.listElement.getBoundingClientRect().top + DomHandler.getWindowScrollTop();
-            let bottomDiff = (offsetY + this.listElement.clientHeight) - event.pageY;
-            let topDiff = (event.pageY - offsetY);
+    const onListMouseMove = (event) => {
+        if (dragging.current) {
+            const offsetY = listElementRef.current.getBoundingClientRect().top + DomHandler.getWindowScrollTop();
+            const bottomDiff = (offsetY + listElementRef.current.clientHeight) - event.pageY;
+            const topDiff = (event.pageY - offsetY);
 
-            if(bottomDiff < 25 && bottomDiff > 0)
-                this.listElement.scrollTop += 15;
-            else if(topDiff < 25 && topDiff > 0)
-                this.listElement.scrollTop -= 15;
+            if (bottomDiff < 25 && bottomDiff > 0)
+                listElementRef.current.scrollTop += 15;
+            else if (topDiff < 25 && topDiff > 0)
+                listElementRef.current.scrollTop -= 15;
         }
     }
 
-    renderDropPoint(index, key) {
-        return (
-            <li key={key} className="p-orderlist-droppoint"
-                            onDragOver={(e) => this.onDragOver(e, index + 1)} onDragLeave={this.onDragLeave} onDrop={this.onDrop}></li>
-        );
+    const createDropPoint = (index, key) => {
+        return <li key={key} className="p-orderlist-droppoint" onDragOver={(e) => onDragOver(e, index + 1)} onDragLeave={onDragLeave} onDrop={onDrop}></li>
     }
 
-    render() {
-        let header = null;
-        let items = null;
+    const createHeader = () => {
+        return props.header ? <div className="p-orderlist-header">{props.header}</div> : null;
+    }
 
-        if (this.props.header) {
-            header = <div className="p-orderlist-header">{this.props.header}</div>
-        }
+    const createItems = () => {
+        if (props.value) {
+            return props.value.map((item, i) => {
+                const content = props.itemTemplate ? props.itemTemplate(item) : item;
+                const itemClassName = classNames('p-orderlist-item', { 'p-highlight': isSelected(item) }, props.className);
+                const key = JSON.stringify(item);
 
-        if (this.props.value) {
-            items = this.props.value.map((item, i) => {
-                let content = this.props.itemTemplate ? this.props.itemTemplate(item) : item;
-                let itemClassName = classNames('p-orderlist-item', {'p-highlight': this.isSelected(item)}, this.props.className);
-                let key = JSON.stringify(item);
-
-                if (this.props.dragdrop) {
+                if (props.dragdrop) {
                     let items = [
-                        this.renderDropPoint(i, key + '_droppoint'),
-                        <li key={key} className={itemClassName} onClick={(e) => this.props.onItemClick({originalEvent: e, value: item, index: i})}
-                            onKeyDown={(e) => this.props.onItemKeyDown({originalEvent: e, value: item, index: i})} role="option" aria-selected={this.isSelected(item)}
-                            draggable="true" onDragStart={(e) => this.onDragStart(e, i)} onDragEnd={this.onDragEnd} tabIndex={this.props.tabIndex}>
+                        createDropPoint(i, key + '_droppoint'),
+                        <li key={key} className={itemClassName} onClick={(e) => props.onItemClick({ originalEvent: e, value: item, index: i })}
+                            onKeyDown={(e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i })} role="option" aria-selected={isSelected(item)}
+                            draggable="true" onDragStart={(e) => onDragStart(e, i)} onDragEnd={onDragEnd} tabIndex={props.tabIndex}>
                             {content}
                             <Ripple />
                         </li>
                     ];
 
-                    if (i === this.props.value.length - 1) {
-                        items.push(this.renderDropPoint(item, i, key + '_droppoint_end'));
+                    if (i === props.value.length - 1) {
+                        items.push(createDropPoint(item, i, key + '_droppoint_end'));
                     }
 
                     return items;
                 }
                 else {
                     return (
-                        <li key={JSON.stringify(item)} className={itemClassName} role="option" aria-selected={this.isSelected(item)}
-                            onClick={(e) => this.props.onItemClick({originalEvent: e, value: item, index: i})}
-                            onKeyDown={(e) => this.props.onItemKeyDown({originalEvent: e, value: item, index: i})}
-                            tabIndex={this.props.tabIndex}>{content}</li>
-                    );
+                        <li key={key} className={itemClassName} role="option" aria-selected={isSelected(item)}
+                            onClick={(e) => props.onItemClick({ originalEvent: e, value: item, index: i })}
+                            onKeyDown={(e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i })}
+                            tabIndex={props.tabIndex}>{content}</li>
+                    )
                 }
             });
         }
 
-        return (
-            <div className="p-orderlist-list-container">
-                {header}
-                <ul ref={(el) => this.listElement = el} className="p-orderlist-list" style={this.props.listStyle} onDragOver={this.onListMouseMove} role="listbox" aria-multiselectable>
-                    {items}
-                </ul>
-            </div>
-        );
+        return null;
     }
-}
+
+    const createList = () => {
+        const items = createItems();
+
+        return (
+            <ul ref={listElementRef} className="p-orderlist-list" style={props.listStyle} onDragOver={onListMouseMove} role="listbox" aria-multiselectable>
+                {items}
+            </ul>
+        )
+    }
+
+    const header = createHeader();
+    const list = createList();
+
+    return (
+        <div className="p-orderlist-list-container">
+            {header}
+            {list}
+        </div>
+    )
+});

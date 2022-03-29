@@ -153,6 +153,7 @@ export interface TreeTableProps {
     filterMode?: TreeTableFilterModeType;
     filterDelay?: number;
     filterLocale?: string;
+    rowHover?: boolean;
     showGridlines?: boolean;
     stripedRows?: boolean;
     rowClassName?(data: TreeNode): object;

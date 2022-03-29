@@ -24,6 +24,12 @@ const ColumnProps = [
         description: 'Property of a row data used for filtering, defaults to field.'
     },
     {
+        name: 'exportField',
+        type: 'string',
+        default: 'null',
+        description: 'Property of a row data used for exporting, defaults to field.'
+    },
+    {
         name: 'header',
         type: 'any',
         default: 'null',

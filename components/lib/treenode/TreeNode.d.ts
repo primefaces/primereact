@@ -1,4 +1,4 @@
-import {IconType} from "../utils";
+import { IconType } from '../utils';
 
 export default interface TreeNode {
     key?: string | number;
@@ -12,4 +12,5 @@ export default interface TreeNode {
     draggable?: boolean;
     selectable?: boolean;
     leaf?: boolean;
+    expanded?: boolean;
 }

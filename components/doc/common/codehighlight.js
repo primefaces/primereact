@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export function CodeHighlight(props) {
     const codeElement = useRef();
@@ -6,7 +6,7 @@ export function CodeHighlight(props) {
 
     useEffect(() => {
         window.Prism.highlightElement(codeElement.current);
-    },[]);
+    }, []);
 
     return (
         <pre style={props.style}>

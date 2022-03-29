@@ -1,211 +1,194 @@
-import React, { Component } from 'react';
+import React, { forwardRef, memo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import PrimeReact from '../api/Api';
+import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { DomHandler, classNames, ZIndexUtils, ObjectUtils } from '../utils/Utils';
-import { Portal } from '../portal/Portal';
-import PrimeReact from '../api/Api';
+import { useUnmountEffect } from '../hooks/Hooks';
 
-export class Image extends Component {
+export const Image = memo(forwardRef((props, ref) => {
+    const [maskVisibleState, setMaskVisibleState] = useState(false);
+    const [previewVisibleState, setPreviewVisibleState] = useState(false);
+    const [rotateState, setRotateState] = useState(0);
+    const [scaleState, setScaleState] = useState(1);
+    const elementRef = useRef(null);
+    const maskRef = useRef(null);
+    const previewRef = useRef(null);
+    const previewClick = useRef(false);
 
-    static defaultProps = {
-        preview: false,
-        className: null,
-        style: null,
-        imageStyle: null,
-        imageClassName: null,
-        template: null,
-        src: null,
-        alt: null,
-        width: null,
-        height: null
-    }
-
-    static propTypes = {
-        preview: PropTypes.bool,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        imageClassName: PropTypes.string,
-        imageStyle: PropTypes.object,
-        template: PropTypes.any,
-        src: PropTypes.string,
-        alt: PropTypes.string,
-        width: PropTypes.string,
-        height: PropTypes.string
-    }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            maskVisible: false,
-            previewVisible: false,
-            rotate: 0,
-            scale: 1
-        }
-
-        this.onImageClick = this.onImageClick.bind(this);
-        this.onMaskClick = this.onMaskClick.bind(this);
-        this.rotateRight = this.rotateRight.bind(this);
-        this.rotateLeft = this.rotateLeft.bind(this);
-        this.zoomIn = this.zoomIn.bind(this);
-        this.zoomOut = this.zoomOut.bind(this);
-        this.onEntering = this.onEntering.bind(this);
-        this.onEntered = this.onEntered.bind(this);
-        this.onPreviewImageClick = this.onPreviewImageClick.bind(this);
-        this.onExit = this.onExit.bind(this)
-        this.onExiting = this.onExiting.bind(this);
-        this.onExited = this.onExited.bind(this)
-
-        this.previewRef = React.createRef();
-
-    }
-
-    onImageClick() {
-        if (this.props.preview) {
-            this.setState({ maskVisible: true });
+    const onImageClick = () => {
+        if (props.preview) {
+            setMaskVisibleState(true);
             setTimeout(() => {
-                this.setState({ previewVisible: true });
+                setPreviewVisibleState(true);
             }, 25);
         }
     }
 
-    onPreviewImageClick() {
-        this.previewClick = true;
+    const onPreviewImageClick = () => {
+        previewClick.current = true;
     }
 
-    onMaskClick() {
-        if (!this.previewClick) {
-            this.setState({ previewVisible: false });
-            this.setState({ rotate: 0 });
-            this.setState({ scale: 1 });
+    const onMaskClick = () => {
+        if (!previewClick.current) {
+            setPreviewVisibleState(false);
+            setRotateState(0);
+            setScaleState(1);
         }
 
-        this.previewClick = false;
+        previewClick.current = false;
     }
 
-    rotateRight() {
-        this.setState((prevState) => ({
-            rotate: prevState.rotate + 90
-        }));
-
-        this.previewClick = true;
+    const onDownload = () => {
+        const { alt: name, src } = props;
+        DomHandler.saveAs({ name, src });
+        previewClick.current = true;
     }
 
-    rotateLeft() {
-        this.setState((prevState) => ({
-            rotate: prevState.rotate - 90
-        }));
-
-        this.previewClick = true;
+    const rotateRight = () => {
+        setRotateState(prevRotate => prevRotate + 90);
+        previewClick.current = true;
     }
 
-    zoomIn() {
-        this.setState((prevState) => ({
-            scale: prevState.scale + 0.1
-        }));
-
-        this.previewClick = true;
+    const rotateLeft = () => {
+        setRotateState(prevRotate => prevRotate - 90);
+        previewClick.current = true;
     }
 
-    zoomOut() {
-        this.setState((prevState) => ({
-            scale: prevState.scale - 0.1
-        }));
-
-        this.previewClick = true;
+    const zoomIn = () => {
+        setScaleState(prevScale => prevScale + 0.1);
+        previewClick.current = true;
     }
 
-    onEntering() {
-        ZIndexUtils.set('modal', this.mask, PrimeReact.autoZIndex, PrimeReact.zIndex['modal']);
+    const zoomOut = () => {
+        setScaleState(prevScale => prevScale - 0.1);
+        previewClick.current = true;
     }
 
-    onEntered() {
-        if (this.props.onShow) {
-            this.props.onShow();
+    const onEntering = () => {
+        ZIndexUtils.set('modal', maskRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['modal']);
+    }
+
+    const onEntered = () => {
+        props.onShow && props.onShow();
+    }
+
+    const onExit = () => {
+        DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+    }
+
+    const onExiting = () => {
+        props.onHide && props.onHide();
+    }
+
+    const onExited = () => {
+        ZIndexUtils.clear(maskRef.current);
+
+        setMaskVisibleState(false);
+    }
+
+    useUnmountEffect(() => {
+        maskRef.current && ZIndexUtils.clear(maskRef.current);
+    });
+
+    const createPreview = () => {
+        if (props.preview) {
+            return (
+                <div className="p-image-preview-indicator" onClick={onImageClick} >
+                    {content}
+                </div>
+            )
         }
+
+        return null;
     }
 
-    onExit() {
-        DomHandler.addClass(this.mask, 'p-component-overlay-leave');
-    }
-
-    onExiting() {
-        if (this.props.onHide) {
-            this.props.onHide();
-        }
-    }
-
-    onExited(el) {
-        ZIndexUtils.clear(el);
-
-        this.setState({ maskVisible: false });
-    }
-
-    componentWillUnmount() {
-        if (this.mask) {
-            ZIndexUtils.clear(this.container);
-        }
-    }
-
-    renderElement() {
-
-        const imagePreviewStyle = { transform: 'rotate(' + this.state.rotate + 'deg) scale(' + this.state.scale + ')' };
-        const zoomDisabled = this.state.scale <= 0.5 || this.state.scale >= 1.5;
-        // const rotateClassName = 'p-image-preview-rotate-' + this.state.rotate;
+    const createElement = () => {
+        const { downloadable } = props;
+        const imagePreviewStyle = { transform: 'rotate(' + rotateState + 'deg) scale(' + scaleState + ')' };
+        const zoomDisabled = scaleState <= 0.5 || scaleState >= 1.5;
+        // const rotateClassName = 'p-image-preview-rotate-' + rotateScale;
 
         return (
-            <div ref={(el) => this.mask = el} className="p-image-mask p-component-overlay p-component-overlay-enter" onClick={this.onMaskClick}>
+            <div ref={maskRef} className="p-image-mask p-component-overlay p-component-overlay-enter" onClick={onMaskClick}>
                 <div className="p-image-toolbar">
-                    <button className="p-image-action p-link" onClick={this.rotateRight} type="button">
+                    {
+                        downloadable && (
+                            <button className="p-image-action p-link" onClick={onDownload} type="button">
+                                <i className="pi pi-download"></i>
+                            </button>
+                        )
+                    }
+                    <button className="p-image-action p-link" onClick={rotateRight} type="button">
                         <i className="pi pi-refresh"></i>
                     </button>
-                    <button className="p-image-action p-link" onClick={this.rotateLeft} type="button">
+                    <button className="p-image-action p-link" onClick={rotateLeft} type="button">
                         <i className="pi pi-undo"></i>
                     </button>
-                    <button className="p-image-action p-link" onClick={this.zoomOut} type="button" disabled={zoomDisabled} >
+                    <button className="p-image-action p-link" onClick={zoomOut} type="button" disabled={zoomDisabled}>
                         <i className="pi pi-search-minus"></i>
-                    </button >
-                    <button className="p-image-action p-link" onClick={this.zoomIn} type="button" disabled={zoomDisabled} >
+                    </button>
+                    <button className="p-image-action p-link" onClick={zoomIn} type="button" disabled={zoomDisabled}>
                         <i className="pi pi-search-plus"></i>
-                    </button >
-                    <button className="p-image-action p-link" type="button" onClick={this.hidePreview} >
+                    </button>
+                    <button className="p-image-action p-link" type="button">
                         <i className="pi pi-times"></i>
-                    </button >
-                </div >
-                <CSSTransition nodeRef={this.previewRef} classNames="p-image-preview" in={this.state.previewVisible} timeout={{ enter: 150, exit: 150 }}
-                    unmountOnExit onEntering={this.onEntering} onEntered={this.onEntered} onExit={this.onExit} onExiting={this.onExiting} onExited={this.onExited}>
-                    <div ref={this.previewRef}>
-                        <img src={this.props.src} className="p-image-preview" style={imagePreviewStyle} onClick={this.onPreviewImageClick} alt={this.props.alt} />
+                    </button>
+                </div>
+                <CSSTransition nodeRef={previewRef} classNames="p-image-preview" in={previewVisibleState} timeout={{ enter: 150, exit: 150 }}
+                    unmountOnExit onEntering={onEntering} onEntered={onEntered} onExit={onExit} onExiting={onExiting} onExited={onExited}>
+                    <div ref={previewRef}>
+                        <img src={props.src} className="p-image-preview" style={imagePreviewStyle} onClick={onPreviewImageClick} alt={props.alt} />
                     </div>
                 </CSSTransition>
             </div>
-        );
+        )
     }
 
+    const { src, alt, width, height } = props;
+    const containerClassName = classNames('p-image p-component', props.className, {
+        'p-image-preview-container': props.preview
+    });
+    const element = createElement();
+    const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : <i className="p-image-preview-icon pi pi-eye"></i>;
+    const preview = createPreview();
+    const image = <img src={src} className={props.imageClassName} width={width} height={height} style={props.imageStyle} alt={alt} />;
 
+    return (
+        <span ref={elementRef} className={containerClassName} style={props.style}>
+            {image}
+            {preview}
+            {maskVisibleState && <Portal element={element} appendTo={document.body} />}
+        </span>
+    )
+}));
 
-    render() {
-        const containerClassName = classNames('p-image p-component', this.props.className, {
-            'p-image-preview-container': this.props.preview
-        });
-        const element = this.renderElement();
-        const content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.props) : <i className="p-image-preview-icon pi pi-eye"></i>
-
-        const { src, alt, width, height } = this.props;
-
-        return (
-            <span ref={(el) => this.container = el} className={containerClassName} style={this.props.style}>
-                <img src={src} className={this.props.imageClassName} width={width} height={height} style={this.props.imageStyle} alt={alt} />
-                {this.props.preview && <div className="p-image-preview-indicator" onClick={this.onImageClick} >
-                    {content}
-                </div>}
-
-                {this.state.maskVisible && <Portal element={element} appendTo={document.body} />}
-            </span>
-
-        );
-
-    }
+Image.defaultProps = {
+    __TYPE: 'Image',
+    preview: false,
+    className: null,
+    downloadable: false,
+    style: null,
+    imageStyle: null,
+    imageClassName: null,
+    template: null,
+    src: null,
+    alt: null,
+    width: null,
+    height: null
 }
 
-
-
+Image.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    preview: PropTypes.bool,
+    className: PropTypes.string,
+    downloadable: PropTypes.bool,
+    style: PropTypes.object,
+    imageClassName: PropTypes.string,
+    imageStyle: PropTypes.object,
+    template: PropTypes.any,
+    src: PropTypes.string,
+    alt: PropTypes.string,
+    width: PropTypes.string,
+    height: PropTypes.string
+}

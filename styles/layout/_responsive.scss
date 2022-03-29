@@ -19,15 +19,11 @@
         flex-wrap: wrap;
         justify-content: space-between;
         padding: 0;
+        left: 0;
+        width: 100%;
 
         .menu-button {
             display: block;
-        }
-
-        .logo {
-            img{
-                width: 150px;
-            }
         }
 
         .app-theme {
@@ -36,25 +32,22 @@
         }
 
         .topbar-menu {
-            background-color: var(--surface-a);
             width: 100%;
             height: 40px;
             margin: 0;
-            border-top: 1px solid var(--surface-d);
 
             > li {
-                height: 40px;
-                line-height: 40px;
                 width: 25%;
+                margin-right: 0;
 
                 > a,
                 > .p-link {
-                    padding-bottom: 0;
-                    height: 40px;
-                    line-height: 38px;
+                    display: flex;
+                    height: 100%;
                     width: 100%;
-                    font-size: 14px;
-                    min-width: auto;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 0;
                 }
 
                 &.topbar-submenu > ul {
@@ -145,32 +138,18 @@
     }
 }
 
-.blocked-scroll {
-    overflow: hidden;
+@media screen and (min-width: 1729px) {
+    .layout-content-inner {
+        max-width: 1478px;
+        margin: 0 auto;
+    }
 }
 
 @media screen and (max-width: 960px) {
     .layout-wrapper {
         @include overlay-menu;
-
-        .layout-news-container {
-            display: flex;
-
-            .layout-news-close {
-                right: 15px;
-            }
-
-            .layout-news-header {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                position: relative;
-            }
-        }
     }
-}
 
-@media screen and (max-width: 640px) {
     .layout-wrapper {
         &.layout-news-active {
             .topbar-menu {
@@ -202,25 +181,22 @@
             }
         }
 
+        .layout-content {
+            .content-section {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
 
+    }
+
+    .blocked-scroll {
+        overflow: hidden;
     }
 }
 
 @media screen and (max-width: 576px) {
     .layout-wrapper .layout-news .layout-news-container img.layouts-news-mockup-image {
         width: 95%;
-    }
-
-
-    .layout-news-container {
-        display: flex;
-
-        .layout-news-close {
-            right: 8px !important;
-        }
-
-        .layout-news-header {
-            font-size: 18px ;
-        }
     }
 }

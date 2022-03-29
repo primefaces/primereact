@@ -1,81 +1,56 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { forwardRef, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useMountEffect, useEventListener } from '../hooks/Hooks';
 
-export class DeferredContent extends Component {
+export const DeferredContent = forwardRef((props, ref) => {
+    const [loadedState, setLoadedState] = useState(false);
+    const elementRef = useRef(null);
 
-    static defaultProps = {
-        onload: null
-    }
-
-    static propTypes = {
-        onLoad: PropTypes.func
-    }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            loaded: false
-        };
-    }
-
-    componentDidMount() {
-        if (!this.state.loaded) {
-            if (this.shouldLoad())
-                this.load();
-            else
-                this.bindScrollListener();
-        }
-    }
-
-    bindScrollListener() {
-        this.documentScrollListener = () => {
-            if (this.shouldLoad()) {
-                this.load();
-                this.unbindScrollListener();
+    const [bindScrollListener, unbindScrollListener] = useEventListener({
+        target: 'window', type: 'scroll', listener: () => {
+            if (shouldLoad()) {
+                load();
+                unbindScrollListener();
             }
-        };
-
-        window.addEventListener('scroll', this.documentScrollListener);
-    }
-
-    unbindScrollListener() {
-        if (this.documentScrollListener) {
-            window.removeEventListener('scroll', this.documentScrollListener);
-            this.documentScrollListener = null;
         }
-    }
+    });
 
-    shouldLoad() {
-        if (this.state.loaded) {
+    const shouldLoad = () => {
+        if (loadedState) {
             return false;
         }
         else {
-            let rect = this.container.getBoundingClientRect();
-            let docElement = document.documentElement;
-            let winHeight = docElement.clientHeight;
+            const rect = elementRef.current.getBoundingClientRect();
+            const winHeight = document.documentElement.clientHeight;
 
             return (winHeight >= rect.top);
         }
     }
 
-    load(event) {
-        this.setState({ loaded: true });
+    const load = (event) => {
+        setLoadedState(true);
+        props.onLoad && props.onLoad(event);
+    }
 
-        if (this.props.onLoad) {
-            this.props.onLoad(event);
+    useMountEffect(() => {
+        if (!loadedState) {
+            shouldLoad() ? load() : bindScrollListener();
         }
-    }
+    });
 
-    componentWillUnmount() {
-        this.unbindScrollListener();
-    }
+    return (
+        <div ref={elementRef}>
+            {loadedState && props.children}
+        </div>
+    )
+});
 
-    render() {
-        return (
-            <div ref={(el) => this.container = el}>
-                {this.state.loaded ? this.props.children : null}
-            </div>
-        );
-    }
+DeferredContent.defaultProps = {
+    __TYPE: 'DeferredContent',
+    onload: null
+}
 
+DeferredContent.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    onLoad: PropTypes.func
 }
