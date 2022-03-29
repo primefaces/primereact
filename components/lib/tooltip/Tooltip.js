@@ -189,15 +189,15 @@ export const Tooltip = forwardRef((props, ref) => {
 
         if (visibleState) {
             DomHandler.removeClass(currentTargetRef.current, getTargetOption(currentTargetRef.current, 'classname'));
-
+ 
             sendCallback(props.onBeforeHide, { originalEvent: e, target: currentTargetRef.current });
             applyDelay('hideDelay', () => {
-                ZIndexUtils.clear(elementRef.current);
-                DomHandler.removeClass(elementRef.current, 'p-tooltip-active');
-
                 if (!isAutoHide() && allowHide.current === false) {
                     return;
                 }
+              
+                ZIndexUtils.clear(elementRef.current);
+                DomHandler.removeClass(elementRef.current, 'p-tooltip-active');
 
                 setVisibleState(false);
                 setPositionState(props.position);
