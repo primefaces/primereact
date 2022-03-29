@@ -27,8 +27,7 @@
                         "demo",
                         "quickstart",
                         "starter"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Locale",
@@ -154,10 +153,22 @@
         {
             "name": "PrimeBlocks",
             "meta": ["primeblocks"],
-            "banner": true,
-            "imageLight": "/images/banner-primeblocks.png",
-            "imageDark": "/images/banner-primeblocks-dark.png",
-            "href": "https://www.primefaces.org/primeblocks-react"
+            "children": [
+                {
+                    "name": "Free Blocks",
+                    "href": "https://www.primefaces.org/primeblocks-react/#/free",
+                    "meta": [
+                        "free blocks"
+                    ]
+                },
+                {
+                    "name": "All Blocks",
+                    "href": "https://www.primefaces.org/primeblocks-react",
+                    "meta": [
+                        "primeblocks"
+                    ]
+                }
+            ]
         },
         {
             "name": "PrimeFlex",
@@ -184,8 +195,7 @@
                     "to": "/icons",
                     "meta": [
                         "icons"
-                    ],
-                    "badge":"updated"
+                    ]
                 }
             ]
         },
@@ -484,7 +494,6 @@
                     "meta": [
                         "datatable"
                     ],
-                    "badge": "updated",
                     "children": [
                         {
                             "name": "Documentation",
@@ -561,8 +570,7 @@
                             "to": "/datatable/selection",
                             "meta": [
                                 "selection"
-                            ],
-                            "badge": "updated"
+                            ]
                         },
                         {
                             "name": "Edit",

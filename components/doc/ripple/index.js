@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class RippleDoc extends Component {
+const RippleDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
@@ -51,10 +48,10 @@ export class RippleDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React from 'react';
 import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
@@ -87,10 +84,10 @@ const RippleDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React from 'react';
 import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
@@ -123,15 +120,15 @@ const RippleDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./RippleDemo.css" />
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const PrimeReact = primereact.api;
 const { Ripple } = primereact.core;
 
@@ -162,12 +159,12 @@ const RippleDemo = () => {
     );
 }
                 `
-            }
-        };
+        }
+    };
 
-        this.extFiles = {
-            'demo/RippleDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/RippleDemo.css': {
+            content: `
 .ripple-demo .card-container .card {
     width: 75px;
     height: 75px;
@@ -201,20 +198,14 @@ const RippleDemo = () => {
     margin-right: 0;
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import PrimeReact from 'primereact/api';
@@ -222,25 +213,25 @@ import { Ripple } from 'primereact/ripple';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
 </CodeHighlight>
-                        <h5>Getting Started</h5>
-                        <p>Ripple effect is an optional animation for the supported components such as buttons. It is disabled by default and needs to be enabled at
-                            your app's main container (e.g. App.js) using the <i>PrimeReact</i> class.</p>
+                    <h5>Getting Started</h5>
+                    <p>Ripple effect is an optional animation for the supported components such as buttons. It is disabled by default and needs to be enabled at
+                        your app's main container (e.g. App.js) using the <i>PrimeReact</i> class.</p>
 <CodeHighlight lang="js">
 {`
 PrimeReact.ripple = true;
 `}
 </CodeHighlight>
 
-                        <p><span className="font-bold">Note</span>: That would be it to enable ripple on PrimeReact components, next section describes how to use it with your own components and standard elements.</p>
+                    <p><span className="font-bold">Note</span>: That would be it to enable ripple on PrimeReact components, next section describes how to use it with your own components and standard elements.</p>
 
-                        <h5>Usage</h5>
-				        <p>Ripple is a component that needs to be imported and activated using <i>PrimeReact.ripple = true</i></p>
+                    <h5>Usage</h5>
+                    <p>Ripple is a component that needs to be imported and activated using <i>PrimeReact.ripple = true</i></p>
 <CodeHighlight lang="js">
 {`
 import { Ripple } from 'primereact/ripple';
@@ -251,8 +242,8 @@ import { Ripple } from 'primereact/ripple';
 `}
 </CodeHighlight>
 
-                        <h5>Styling</h5>
-                        <p>Default styling of the animation adds a shade of white. This can easily be customized using css that changes the color of <i>.p-ink</i> element.</p>
+                    <h5>Styling</h5>
+                    <p>Default styling of the animation adds a shade of white. This can easily be customized using css that changes the color of <i>.p-ink</i> element.</p>
 <CodeHighlight>
 {`
 <div className="p-ripple purple">
@@ -269,42 +260,42 @@ import { Ripple } from 'primereact/ripple';
 `}
 </CodeHighlight>
 
+                    <h5>Styling</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-ripple</td>
+                                    <td>Host element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-ink</td>
+                                    <td>Ripple element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-ink-active</td>
+                                    <td>Ripple element during animating.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-ripple</td>
-                                        <td>Host element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-ink</td>
-                                        <td>Ripple element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-ink-active</td>
-                                        <td>Ripple element during animating.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                {
+                    useLiveEditorTabs({ name: 'RippleDemo', sources: sources, extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    );
+})
 
-                    {
-                        useLiveEditorTabs({ name: 'RippleDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+export default RippleDoc;

@@ -12,4 +12,10 @@ export interface ChartProps {
     className?: string;
 }
 
-export declare class Chart extends React.Component<ChartProps, any> { }
+export declare class Chart extends React.Component<ChartProps, any> {
+    public getCanvas(): HTMLCanvasElement;
+    public getChart(): any;
+    public getBase64Image(): any;
+    public generateLegend(): string;
+    public refresh(): void;
+}

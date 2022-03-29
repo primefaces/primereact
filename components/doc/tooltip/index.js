@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class TooltipDoc extends Component {
+const TooltipDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
@@ -134,10 +131,10 @@ export class TooltipDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
@@ -252,10 +249,10 @@ const TooltipDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
@@ -370,10 +367,10 @@ const TooltipDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./TooltipDemo.css" />
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
@@ -384,8 +381,8 @@ const TooltipDemo = () => {
         <script src="https://unpkg.com/primereact/badge/badge.min.js"></script>
         <script src="https://unpkg.com/primereact/slider/slider.min.js"></script>
         <script src="https://unpkg.com/primereact/tooltip/tooltip.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { InputText } = primereact.inputtext;
 const { Button } = primereact.button;
 const { Knob } = primereact.knob;
@@ -488,12 +485,12 @@ const TooltipDemo = () => {
     )
 }
                 `
-            }
-        };
+        }
+    };
 
-        this.extFiles = {
-            'demo/TooltipDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/TooltipDemo.css': {
+            content: `
 .blue-tooltip.p-tooltip .p-tooltip-arrow {
     border-top-color: var(--blue-500);
 }
@@ -549,27 +546,21 @@ const TooltipDemo = () => {
     background-color: var(--purple-500);
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import to use it as a component</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import to use it as a component</h5>
 <CodeHighlight lang="js">
 {`
 import { Tooltip } from 'primereact/tooltip';
 `}
 </CodeHighlight>
-                        <h5>Getting Started</h5>
-                        <p>Tooltip functionality is integrated within the the components that have support such as inputtext or buttons. Content is defined with the <i>tooltip</i> property.</p>
+                    <h5>Getting Started</h5>
+                    <p>Tooltip functionality is integrated within the the components that have support such as inputtext or buttons. Content is defined with the <i>tooltip</i> property.</p>
 <CodeHighlight>
 {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" />
@@ -577,34 +568,34 @@ import { Tooltip } from 'primereact/tooltip';
 `}
 </CodeHighlight>
 
-                        <h5>Position</h5>
-                        <p>There are four choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left". Position is
-                        specified using <i>tooltipOptions</i> property.</p>
+                    <h5>Position</h5>
+                    <p>There are four choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left". Position is
+                    specified using <i>tooltipOptions</i> property.</p>
 <CodeHighlight>
 {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{position: 'right'}}/>
 `}
 </CodeHighlight>
 
-                        <h5>Events</h5>
-                        <p>Tooltip gets displayed on hover event of its target by default, other option is the focus event to display and blur to hide.</p>
+                    <h5>Events</h5>
+                    <p>Tooltip gets displayed on hover event of its target by default, other option is the focus event to display and blur to hide.</p>
 <CodeHighlight>
 {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{event: 'focus'}}/>
 `}
 </CodeHighlight>
 
-                        <h5>Delay</h5>
-                        <p>Tooltip is displayed or hidden instantly by default however you may add delays using <i>showDelay</i> and <i>hideDelay</i> properties which accept a number value in terms of milliseconds.</p>
+                    <h5>Delay</h5>
+                    <p>Tooltip is displayed or hidden instantly by default however you may add delays using <i>showDelay</i> and <i>hideDelay</i> properties which accept a number value in terms of milliseconds.</p>
 <CodeHighlight>
 {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{showDelay: 1000, hideDelay: 300}}/>
 `}
 </CodeHighlight>
 
-                        <h5>Disabled Elements</h5>
-                        <p>By default disabled elements like <i>button</i> do not trigger user interactions. So for such issues, a disabled element is usually wrapped with an html element like span and the Tooltip wrapper is set to the element.
-                        If this operation is requested by the Tooltip component, the <i>showOnDisabled</i> property can be used. This is an optional use.</p>
+                    <h5>Disabled Elements</h5>
+                    <p>By default disabled elements like <i>button</i> do not trigger user interactions. So for such issues, a disabled element is usually wrapped with an html element like span and the Tooltip wrapper is set to the element.
+                    If this operation is requested by the Tooltip component, the <i>showOnDisabled</i> property can be used. This is an optional use.</p>
 <CodeHighlight>
 {`
 <Tooltip target=".disabled-button" />
@@ -615,175 +606,175 @@ import { Tooltip } from 'primereact/tooltip';
 <Button type="button" label="Save" icon="pi pi-check" disabled tooltip="A Disabled Button" tooltipOptions={{ showOnDisabled: true }} />
 `}
 </CodeHighlight>
-                        <h5>Tooltip Options</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>disabled</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>When present, it specifies that the tooltip should be hidden.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the tooltip.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style of the tooltip.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>appendTo</td>
-                                        <td>DOM element | string</td>
-                                        <td>document.body</td>
-                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>position</td>
-                                        <td>string</td>
-                                        <td>right</td>
-                                        <td>Position of the tooltip, valid values are right, left, top and bottom.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>my</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Defines which position on the tooltip being positioned to align with the target element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>at</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Defines which position on the target element to align the positioned tooltip.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>event</td>
-                                        <td>string</td>
-                                        <td>hover</td>
-                                        <td>Event to show the tooltip, valid values are hover and focus.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>showEvent</td>
-                                        <td>string</td>
-                                        <td>mouseenter</td>
-                                        <td>Event to show the tooltip if the <i>event</i> property is empty.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>hideEvent</td>
-                                        <td>string</td>
-                                        <td>mouseleave</td>
-                                        <td>Event to hide the tooltip if the <i>event</i> property is empty.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>autoZIndex</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether to automatically manage layering.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>baseZIndex</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Base zIndex value to use in layering.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>mouseTrack</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Whether the tooltip will follow the mouse.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>mouseTrackTop</td>
-                                        <td>number</td>
-                                        <td>5</td>
-                                        <td>Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>mouseTrackLeft</td>
-                                        <td>number</td>
-                                        <td>5</td>
-                                        <td>Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>showDelay</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Delay to show the tooltip in milliseconds.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>updateDelay</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Delay to update the tooltip in milliseconds.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>hideDelay</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Delay to hide the tooltip in milliseconds.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>autoHide</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether to hide tooltip when hovering over tooltip content.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>showOnDisabled</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Whether to show tooltip for disabled elements.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onBeforeShow</td>
-                                        <td>function</td>
-                                        <td>null</td>
-                                        <td>Callback to invoke before the tooltip is shown.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onBeforeHide</td>
-                                        <td>function</td>
-                                        <td>null</td>
-                                        <td>Callback to invoke before the tooltip is hidden.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onShow</td>
-                                        <td>function</td>
-                                        <td>null</td>
-                                        <td>Callback to invoke when the tooltip is shown.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onHide</td>
-                                        <td>function</td>
-                                        <td>null</td>
-                                        <td>Callback to invoke when the tooltip is hidden.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Tooltip Options</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the tooltip should be hidden.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style of the tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td>appendTo</td>
+                                    <td>DOM element | string</td>
+                                    <td>document.body</td>
+                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                </tr>
+                                <tr>
+                                    <td>position</td>
+                                    <td>string</td>
+                                    <td>right</td>
+                                    <td>Position of the tooltip, valid values are right, left, top and bottom.</td>
+                                </tr>
+                                <tr>
+                                    <td>my</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Defines which position on the tooltip being positioned to align with the target element.</td>
+                                </tr>
+                                <tr>
+                                    <td>at</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Defines which position on the target element to align the positioned tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td>event</td>
+                                    <td>string</td>
+                                    <td>hover</td>
+                                    <td>Event to show the tooltip, valid values are hover and focus.</td>
+                                </tr>
+                                <tr>
+                                    <td>showEvent</td>
+                                    <td>string</td>
+                                    <td>mouseenter</td>
+                                    <td>Event to show the tooltip if the <i>event</i> property is empty.</td>
+                                </tr>
+                                <tr>
+                                    <td>hideEvent</td>
+                                    <td>string</td>
+                                    <td>mouseleave</td>
+                                    <td>Event to hide the tooltip if the <i>event</i> property is empty.</td>
+                                </tr>
+                                <tr>
+                                    <td>autoZIndex</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to automatically manage layering.</td>
+                                </tr>
+                                <tr>
+                                    <td>baseZIndex</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Base zIndex value to use in layering.</td>
+                                </tr>
+                                <tr>
+                                    <td>mouseTrack</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether the tooltip will follow the mouse.</td>
+                                </tr>
+                                <tr>
+                                    <td>mouseTrackTop</td>
+                                    <td>number</td>
+                                    <td>5</td>
+                                    <td>Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>mouseTrackLeft</td>
+                                    <td>number</td>
+                                    <td>5</td>
+                                    <td>Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>showDelay</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Delay to show the tooltip in milliseconds.</td>
+                                </tr>
+                                <tr>
+                                    <td>updateDelay</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Delay to update the tooltip in milliseconds.</td>
+                                </tr>
+                                <tr>
+                                    <td>hideDelay</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Delay to hide the tooltip in milliseconds.</td>
+                                </tr>
+                                <tr>
+                                    <td>autoHide</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to hide tooltip when hovering over tooltip content.</td>
+                                </tr>
+                                <tr>
+                                    <td>showOnDisabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether to show tooltip for disabled elements.</td>
+                                </tr>
+                                <tr>
+                                    <td>onBeforeShow</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Callback to invoke before the tooltip is shown.</td>
+                                </tr>
+                                <tr>
+                                    <td>onBeforeHide</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Callback to invoke before the tooltip is hidden.</td>
+                                </tr>
+                                <tr>
+                                    <td>onShow</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Callback to invoke when the tooltip is shown.</td>
+                                </tr>
+                                <tr>
+                                    <td>onHide</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Callback to invoke when the tooltip is hidden.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Global Tooltip</h5>
-                        <p>It is used to bind the same properties to more than one element. Each element can have its own <i>{`data-pr-{options}`}</i> properties. In this way, options can be customized among themselves. Using the <i>data-pr-tooltip</i> property on any element, the text to be displayed in the tooltip is determined.
-                            The target property is required for the global tooltip. It can be a selector, DOM element or selector array.</p>
+                    <h5>Global Tooltip</h5>
+                    <p>It is used to bind the same properties to more than one element. Each element can have its own <i>{`data-pr-{options}`}</i> properties. In this way, options can be customized among themselves. Using the <i>data-pr-tooltip</i> property on any element, the text to be displayed in the tooltip is determined.
+                        The target property is required for the global tooltip. It can be a selector, DOM element or selector array.</p>
 <CodeHighlight>
 {`
 <Tooltip target=".customClassName" mouseTrack mouseTrackLeft={10} />
@@ -793,8 +784,8 @@ import { Tooltip } from 'primereact/tooltip';
 `}
 </CodeHighlight>
 
-                        <h5>Custom Content</h5>
-                        <p>The tooltip can display custom content by using JSX elements in its children.</p>
+                    <h5>Custom Content</h5>
+                    <p>The tooltip can display custom content by using JSX elements in its children.</p>
 <CodeHighlight>
 {`
 <Tooltip target=".customClassName">
@@ -803,220 +794,221 @@ import { Tooltip } from 'primereact/tooltip';
 `}
 </CodeHighlight>
 
-                        <h5>Target Element Options</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>data-pr-tooltip</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Content of the tooltip.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-disabled</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>When present, it specifies that the tooltip should be hidden.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-classname</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the tooltip.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-position</td>
-                                        <td>string</td>
-                                        <td>right</td>
-                                        <td>Position of the tooltip, valid values are right, left, top and bottom.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-my</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Defines which position on the tooltip being positioned to align with the target element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-at</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Defines which position on the target element to align the positioned tooltip.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-event</td>
-                                        <td>string</td>
-                                        <td>hover</td>
-                                        <td>Event to show the tooltip, valid values are hover and focus.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-showevent</td>
-                                        <td>string</td>
-                                        <td>mouseenter</td>
-                                        <td>Event to show the tooltip if the <i>event</i> property is empty.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-hideevent</td>
-                                        <td>string</td>
-                                        <td>mouseleave</td>
-                                        <td>Event to hide the tooltip if the <i>event</i> property is empty.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-mousetrack</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Whether the tooltip will follow the mouse.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-mousetracktop</td>
-                                        <td>number</td>
-                                        <td>5</td>
-                                        <td>Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-mousetrackleft</td>
-                                        <td>number</td>
-                                        <td>5</td>
-                                        <td>Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-showdelay</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Delay to show the tooltip in milliseconds.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-updatedelay</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Delay to update the tooltip in milliseconds.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-hidedelay</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Delay to hide the tooltip in milliseconds.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-autohide</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether to hide tooltip when hovering over tooltip content.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>data-pr-showondisabled</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Whether to show tooltip for disabled elements.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Target Element Options</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data-pr-tooltip</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Content of the tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the tooltip should be hidden.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-classname</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-position</td>
+                                    <td>string</td>
+                                    <td>right</td>
+                                    <td>Position of the tooltip, valid values are right, left, top and bottom.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-my</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Defines which position on the tooltip being positioned to align with the target element.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-at</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Defines which position on the target element to align the positioned tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-event</td>
+                                    <td>string</td>
+                                    <td>hover</td>
+                                    <td>Event to show the tooltip, valid values are hover and focus.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-showevent</td>
+                                    <td>string</td>
+                                    <td>mouseenter</td>
+                                    <td>Event to show the tooltip if the <i>event</i> property is empty.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-hideevent</td>
+                                    <td>string</td>
+                                    <td>mouseleave</td>
+                                    <td>Event to hide the tooltip if the <i>event</i> property is empty.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-mousetrack</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether the tooltip will follow the mouse.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-mousetracktop</td>
+                                    <td>number</td>
+                                    <td>5</td>
+                                    <td>Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-mousetrackleft</td>
+                                    <td>number</td>
+                                    <td>5</td>
+                                    <td>Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-showdelay</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Delay to show the tooltip in milliseconds.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-updatedelay</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Delay to update the tooltip in milliseconds.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-hidedelay</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Delay to hide the tooltip in milliseconds.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-autohide</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to hide tooltip when hovering over tooltip content.</td>
+                                </tr>
+                                <tr>
+                                    <td>data-pr-showondisabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether to show tooltip for disabled elements.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
 
-                        <h5>Tooltip Component Properties</h5>
-                        <p>All options in <i>Tooltip Options</i> section can be used as a property. In addition;</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>target</td>
-                                        <td>selector or DOM element</td>
-                                        <td>null</td>
-                                        <td>Target element on global tooltip option.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Tooltip Component Properties</h5>
+                    <p>All options in <i>Tooltip Options</i> section can be used as a property. In addition;</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>target</td>
+                                    <td>selector or DOM element</td>
+                                    <td>null</td>
+                                    <td>Target element on global tooltip option.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 <CodeHighlight>
 {`
 <Tooltip target=".customClassName" mouseTrack mouseTrackLeft={10} showDelay={100}/>
 `}
 </CodeHighlight>
 
-                        <h5>Methods</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>updateTargetEvents</td>
-                                        <td>target: target element. (Default: current target)</td>
-                                        <td>Used to reload target events. In some cases, the target element can be hidden initially. <br />
-                                        Later, when this element becomes visible, it will be necessary to bind tooltip events to this element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>loadTargetEvents</td>
-                                        <td>target: target element. (Default: current target)</td>
-                                        <td>Used to load target events.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>unloadTargetEvents</td>
-                                        <td>target: target element. (Default: current target)</td>
-                                        <td>Used to unload target events.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Methods</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>updateTargetEvents</td>
+                                    <td>target: target element. (Default: current target)</td>
+                                    <td>Used to reload target events. In some cases, the target element can be hidden initially. <br />
+                                    Later, when this element becomes visible, it will be necessary to bind tooltip events to this element.</td>
+                                </tr>
+                                <tr>
+                                    <td>loadTargetEvents</td>
+                                    <td>target: target element. (Default: current target)</td>
+                                    <td>Used to load target events.</td>
+                                </tr>
+                                <tr>
+                                    <td>unloadTargetEvents</td>
+                                    <td>target: target element. (Default: current target)</td>
+                                    <td>Used to unload target events.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-tooltip</td>
-                                        <td>Container element</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-tooltip-arrow</td>
-                                        <td>Arrow of the tooltip</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-tooltip-text</td>
-                                        <td>Text of the tooltip</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-tooltip</td>
+                                    <td>Container element</td>
+                                </tr>
+                                <tr>
+                                    <td>p-tooltip-arrow</td>
+                                    <td>Arrow of the tooltip</td>
+                                </tr>
+                                <tr>
+                                    <td>p-tooltip-text</td>
+                                    <td>Text of the tooltip</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'TooltipDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'TooltipDemo', sources: sources, extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    )
+})
+
+export default TooltipDoc;

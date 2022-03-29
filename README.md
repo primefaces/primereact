@@ -13,15 +13,13 @@ PrimeReact is a rich set of open source UI Components for React. See [PrimeReact
 PrimeReact is available at npm, if you have an existing application run the following command to download it to your project.
 
 ```
+// with npm
 npm install primereact
-npm install primeicons
-```
-or
 
-```
+// with yarn
 yarn add primereact
-yarn add primeicons
 ```
+Please note that react >= 17.0.0 and react-dom >= 17.0.0 are peer dependencies and some components have optional dependencies.
 
 ## Import
 
@@ -54,14 +52,12 @@ Import all components and structures
 
 Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.
 
-In addition, components require PrimeIcons for icons and react-transition-group for animations.
+In addition, components require PrimeIcons for icons and react-transition-group for animations. They are available as dependencies in the npm package of PrimeReact.
 
 ```javascript
 dependencies: {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-transition-group": "^4.4.1",
-    "primeicons": "^5.0.0"
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
 }
 ```
 

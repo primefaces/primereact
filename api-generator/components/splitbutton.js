@@ -42,6 +42,12 @@ const SplitButtonProps = [
         description: 'ClassName of the component.'
     },
     {
+        name: 'buttonClassName',
+        type: 'string',
+        default: 'null',
+        description: 'ClassName of the button.'
+    },
+    {
         name: 'menuStyle',
         type: 'string',
         default: 'null',
@@ -52,6 +58,12 @@ const SplitButtonProps = [
         type: 'string',
         default: 'null',
         description: 'ClassName class of the overlay menu.'
+    },
+    {
+        name: 'menuButtonClassName',
+        type: 'string',
+        default: 'null',
+        description: 'ClassName class of menu dropdown button.'
     },
     {
         name: 'tabIndex',

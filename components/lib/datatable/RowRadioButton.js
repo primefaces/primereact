@@ -1,64 +1,50 @@
-import React, { Component } from 'react';
+import React, { memo, useRef, useState } from 'react';
 import { classNames } from '../utils/Utils';
 
-export class RowRadioButton extends Component {
+export const RowRadioButton = memo((props) => {
+    const [focusedState, setFocusedState] = useState(false);
+    const inputRef = useRef(null);
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            focused: false
-        };
-
-        this.onClick = this.onClick.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
-        this.onChange = this.onChange.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
+    const onFocus = () => {
+        setFocusedState(true);
     }
 
-    onClick(event) {
-        if (!this.props.disabled) {
-            this.props.onChange(event);
+    const onBlur = () => {
+        setFocusedState(false);
+    }
 
-            this.input.focus();
+    const onClick = (event) => {
+        if (!props.disabled) {
+            props.onChange(event);
+
+            inputRef.current.focus();
         }
     }
 
-    onFocus() {
-        this.setState({ focused: true });
-    }
-
-    onBlur() {
-        this.setState({ focused: false });
-    }
-
-    onChange(event) {
-        this.onClick(event);
-    }
-
-    onKeyDown(event) {
+    const onKeyDown = (event) => {
         if (event.code === 'Space') {
-            this.onClick(event);
+            onClick(event);
             event.preventDefault();
         }
     }
 
-    render() {
-        const className = classNames('p-radiobutton p-component', { 'p-radiobutton-focused': this.state.focused });
-        const boxClassName = classNames('p-radiobutton-box p-component', { 'p-highlight': this.props.checked, 'p-focus': this.state.focused, 'p-disabled': this.props.disabled });
-        const name = `${this.props.tableSelector}_dt_radio`;
-
-        return (
-            <div className={className}>
-                <div className="p-hidden-accessible">
-                    <input name={name} ref={(el) => this.input = el} type="radio" checked={this.props.checked}
-                        onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} onKeyDown={this.onKeyDown} />
-                </div>
-                <div className={boxClassName} onClick={this.onClick} role="radio" aria-checked={this.props.checked}>
-                    <div className="p-radiobutton-icon"></div>
-                </div>
-            </div>
-        );
+    const onChange = (event) => {
+        onClick(event);
     }
-}
+
+    const className = classNames('p-radiobutton p-component', { 'p-radiobutton-focused': focusedState });
+    const boxClassName = classNames('p-radiobutton-box p-component', { 'p-highlight': props.checked, 'p-focus': focusedState, 'p-disabled': props.disabled });
+    const name = `${props.tableSelector}_dt_radio`;
+
+    return (
+        <div className={className}>
+            <div className="p-hidden-accessible">
+                <input name={name} ref={inputRef} type="radio" checked={props.checked}
+                    onFocus={onFocus} onBlur={onBlur} onChange={onChange} onKeyDown={onKeyDown} />
+            </div>
+            <div className={boxClassName} onClick={onClick} role="radio" aria-checked={props.checked}>
+                <div className="p-radiobutton-icon"></div>
+            </div>
+        </div>
+    )
+});

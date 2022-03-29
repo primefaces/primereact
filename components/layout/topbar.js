@@ -1,4 +1,3 @@
-import { Tooltip } from '../lib/tooltip/Tooltip';
 import { Badge } from '../lib/badge/Badge';
 import { CSSTransition } from 'react-transition-group';
 import Link from 'next/link';
@@ -50,11 +49,39 @@ export default function Topbar(props) {
         return function unbind() {
             unbindOutsideClickListener();
         }
-    }, [activeMenuIndex]);
+    }, [activeMenuIndex]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         versionService.getVersions().then(data => setVersions(data));
-    },[]);
+    },[]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const containerElement = useRef(null);
+    const scrollListener = useRef();
+    const bindScrollListener = () => {
+        scrollListener.current = () => {
+            if (containerElement && containerElement.current) {
+                if (window.scrollY > 0)
+                    containerElement.current.classList.add('layout-topbar-sticky');
+                else
+                    containerElement.current.classList.remove('layout-topbar-sticky');
+            }
+        }
+        window.addEventListener('scroll', scrollListener.current);
+    }
+
+    const unbindScrollListener = () => {
+        if (scrollListener.current) {
+            window.removeEventListener('scroll', scrollListener.current);
+            scrollListener.current = null;
+        }
+    }
+
+    useEffect(() => {
+        bindScrollListener();
+        return function unbind() {
+            unbindScrollListener();
+        }
+    }, []);
 
     const topbarMenu = useRef();
     const themesOverlayRef = useRef();
@@ -115,29 +142,17 @@ export default function Topbar(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
-        <div className="layout-topbar">
-            <Tooltip target=".app-theme" position="bottom" />
-
+        <div ref={containerElement} className="layout-topbar">
             <button type="button" className="p-link menu-button" onClick={onMenuButtonClick} aria-haspopup aria-label="Menu">
                 <i className="pi pi-bars"></i>
             </button>
-            <Link href="/">
-                <a className="logo" aria-label="PrimeReact logo">
-                    <img alt="logo" src={`${contextPath}/images/primereact-logo${props.darkTheme ? '' : '-dark'}.png`} />
-                </a>
-            </Link>
             <div className="app-theme" data-pr-tooltip={props.theme}>
                 <img alt={props.theme} src={`${contextPath}/images/themes/${logoMap[props.theme]}`} />
             </div>
 
             <ul ref={topbarMenu} className="topbar-menu p-unselectable-text" role="menubar">
                 <li role="none" className="topbar-submenu">
-                    <button type="button" role="menuitem" onClick={() => toggleMenu(0)} aria-haspopup className="p-link">
-                        <span className="p-overlay-badge">
-                            Themes
-                            <Badge severity="danger"></Badge>
-                        </span>
-                    </button>
+                    <button type="button" role="menuitem" onClick={() => toggleMenu(0)} aria-haspopup className="p-link">Themes</button>
                     <CSSTransition nodeRef={themesOverlayRef} classNames="p-connected-overlay" timeout={{ enter: 120, exit: 100 }} in={activeMenuIndex === 0}
                         unmountOnExit>
                         <ul ref={themesOverlayRef} role="menu" aria-label="Themes">

@@ -13,12 +13,46 @@ import { Badge } from '../../components/lib/badge/Badge';
 import { SelectButton } from '../../components/lib/selectbutton/SelectButton';
 import { TabMenu } from '../../components/lib/tabmenu/TabMenu';
 import { Chart } from '../../components/lib/chart/Chart';
-import Link from 'next/link';
 import getConfig from 'next/config';
 
-export default function ComponentSection() {
-    const categories = [{name: 'Clothing', key: 'C'}, {name: 'Fitness', key: 'F'}, {name: 'Electronics', key: 'E'}];
-    const [category, setCategory] = useState(categories[0]);
+let chartData = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+        {
+            label: 'Income',
+            data: [40, 59, 40, 50, 56, 40, 70],
+            fill: true,
+            borderColor: '#03C4E8',
+            tension: .4,
+            backgroundColor: 'rgba(3, 196, 232, .2)'
+        }
+    ]
+};
+
+let chartOptions = {
+    plugins: {
+        legend: {
+            display: false
+        }
+    },
+    scales: {
+        y: {
+            ticks: {
+                display: false
+            },
+            min: 0,
+            max: 100,
+        },
+        x: {
+            ticks: {
+                display: false
+            }
+        }
+    }
+};
+
+const ComponentSection = () => {
+    const [category, setCategory] = useState('C');
     const [nodes, setNodes] = useState(null);
     const [switchValue, setSwitchValue] = useState(true);
     const [rangeValues, setRangeValues] = useState([20,80]);
@@ -37,61 +71,47 @@ export default function ComponentSection() {
         {name: 'React', value: 2},
         {name: 'Themes', value: 3}
     ];
-    const chartData = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [
-            {
-                label: 'Income',
-                data: [65, 59, 80, 81, 56, 55, 40],
-                fill: false,
-                borderColor: '#42A5F5',
-                tension: .4
-            },
-            {
-                label: 'Expenses',
-                data: [28, 48, 40, 19, 86, 27, 90],
-                fill: true,
-                borderColor: '#FFA726',
-                tension: .4,
-                backgroundColor: 'rgba(255,167,38,0.2)'
-            }
-        ]
-    };
 
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
-    }, []); 
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <section className="landing-components">
+        <section className="landing-components py-8">
             <div className="section-header">Components</div>
-            <p className="section-detail"><span className="text-primary font-bold">Over 80</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.</p>
-            <div className="components-main flex my-7 px-7 relative justify-content-center">
+            <p className="section-detail"><span className="font-bold text-900">Over 80</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.</p>
+            <div className="flex justify-content-center mt-4">
+                <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox active">
+                    <span>Get Started</span>
+                    <i className="pi pi-arrow-right ml-2"></i>
+                </a>
+            </div>
+            <div className="components-main flex mt-7 relative md:justify-content-center overflow-auto">
                 <div className="flex flex-column px-3 py-8 z-1">
                     <div className="box p-4 mb-5">
                         <span className="text-secondary font-medium block mb-3">Balance</span>
                         <div className="flex">
-                            <InputNumber value="240" mode="currency" currency="USD" locale="en-US" className="mr-2" />
-                            <InputNumber value="356" mode="currency" currency="USD" locale="en-US" />
+                            <InputNumber value={240} mode="currency" currency="USD" locale="en-US" className="mr-2" />
+                            <InputNumber value={356} mode="currency" currency="USD" locale="en-US" />
                         </div>
                         <span className="text-secondary font-medium block mt-5 mb-3">Category</span>
                         <div className="flex justify-content-between">
                             <div className="flex align-items-center">
-                                <RadioButton inputId="category1" value="C" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'clothing'} />
+                                <RadioButton inputId="category1" value="C" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'C'} />
                                 <label htmlFor="category1" className="ml-2 font-medium">Clothing</label>
                             </div>
                             <div className="flex align-items-center">
-                                <RadioButton inputId="category2" value="F" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'fitness'} />
+                                <RadioButton inputId="category2" value="F" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'F'} />
                                 <label htmlFor="category2" className="ml-2 font-medium">Fitness</label>
                             </div>
                             <div className="flex align-items-center">
-                                <RadioButton inputId="category3" value="E" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'electronics'} />
+                                <RadioButton inputId="category3" value="E" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'E'} />
                                 <label htmlFor="category3" className="ml-2 font-medium">Electronics</label>
                             </div>
                         </div>
                     </div>
                     <div className="box p-4 mb-5">
-                        <Chart type="line" data={chartData}/>
+                        <Chart type="line" data={chartData} options={chartOptions} />
                     </div>
                     <div className="box p-4 mb-5">
                         <TabMenu model={items} activeIndex={activeTabIndex} onTabChange={(e) => setActiveTabIndex(e.index)}/>
@@ -177,7 +197,7 @@ export default function ComponentSection() {
                                 </div>
                             </li>
                             <li className="flex">
-                                <a className="flex align-items-center p-3 w-full hover:bg-black-alpha-20 transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
+                                <a className="flex align-items-center p-3 w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
                                     <i className="pi pi-home text-xl mr-3"></i>
                                     <span className="flex flex-column">
                                         <span className="font-bold mb-1">Dashboard</span>
@@ -186,7 +206,7 @@ export default function ComponentSection() {
                                 </a>
                             </li>
                             <li className="flex">
-                                <a className="flex align-items-center p-3 w-full hover:bg-black-alpha-20 transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
+                                <a className="flex align-items-center p-3 w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
                                     <i className="pi pi-envelope text-xl mr-3"></i>
                                     <span className="flex flex-column">
                                         <span className="font-bold mb-1">Inbox</span>
@@ -196,7 +216,7 @@ export default function ComponentSection() {
                                 </a>
                             </li>
                             <li className="flex">
-                                <a className="flex align-items-center p-3 w-full hover:bg-black-alpha-20 transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
+                                <a className="flex align-items-center p-3 w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
                                     <i className="pi pi-cog text-xl mr-3"></i>
                                     <span className="flex flex-column">
                                         <span className="font-bold mb-1">Profile</span>
@@ -209,15 +229,12 @@ export default function ComponentSection() {
                     <div className="box p-4 mb-5">
                         <Calendar value={dateValue} onChange={(e) => setDateValue(e.value)} inline showWeek />
                     </div>
-                    <div className="flex justify-content-end mt-5">
-                        <Link href="/setup">
-                            <a className="linkbox font-medium">Get Started <i className="pi pi-angle-right ml-2"></i></a>
-                        </Link>
-                    </div>
                 </div>
-                <div className="components-strip-top absolute w-6 h-8rem top-0 left-0"></div>
-                <div className="components-strip-bottom absolute w-6 h-8rem bottom-0 right-0"></div>
+                <div className="components-strip-top absolute w-full md:w-6 h-8rem top-0 left-0"></div>
+                <div className="components-strip-bottom absolute w-full md:w-6 h-8rem bottom-0 right-0"></div>
             </div>
         </section>
     );
 }
+
+export default ComponentSection;

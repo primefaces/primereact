@@ -1,47 +1,26 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import React, { forwardRef } from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
+import { classNames } from '../utils/Utils';
 
-class SplitButtonPanelComponent extends Component {
+export const SplitButtonPanel = forwardRef((props, ref) => {
 
-    static defaultProps = {
-        appendTo: null,
-        menuStyle: null,
-        menuClassName: null,
-        id: null,
-        onClick: null
-    };
-
-    static propTypes = {
-        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        menustyle: PropTypes.object,
-        menuClassName: PropTypes.string,
-        id: PropTypes.any,
-        onClick: PropTypes.func
-    };
-
-    renderElement() {
-        let className = classNames('p-menu p-menu-overlay p-component', this.props.menuClassName);
+    const createElement = () => {
+        const className = classNames('p-menu p-menu-overlay p-component', props.menuClassName);
 
         return (
-            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
-                unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
-                <div ref={this.props.forwardRef} className={className} style={this.props.menuStyle} id={this.props.id} onClick={this.onClick}>
+            <CSSTransition nodeRef={ref} classNames="p-connected-overlay" in={props.in} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
+                unmountOnExit onEnter={props.onEnter} onEntered={props.onEntered} onExit={props.onExit} onExited={props.onExited}>
+                <div ref={ref} className={className} style={props.menuStyle} id={props.id} onClick={props.onClick}>
                     <ul className="p-menu-list p-reset" role="menu">
-                        {this.props.children}
+                        {props.children}
                     </ul>
                 </div>
             </CSSTransition>
-        );
+        )
     }
 
-    render() {
-        let element = this.renderElement();
+    const element = createElement();
 
-        return <Portal element={element} appendTo={this.props.appendTo} />;
-    }
-}
-
-export const SplitButtonPanel = React.forwardRef((props, ref) => <SplitButtonPanelComponent forwardRef={ref} {...props} />);
+    return <Portal element={element} appendTo={props.appendTo} />
+});

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { PhotoService } from '../../service/PhotoService';
 import { Galleria } from '../../components/lib/galleria/Galleria';
 import { TabView, TabPanel } from '../../components/lib/tabview/TabView';
@@ -7,50 +7,40 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 import getConfig from 'next/config';
 
-export default class GalleriaCaptionDemo extends Component {
+const GalleriaCaptionDemo = () => {
 
-    constructor(props) {
-        super(props);
+    const [images, setImages] = useState(null);
+    const galleriaService = new PhotoService();
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-        this.state = {
-            images: null
-        };
+    const responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 5
+        },
+        {
+            breakpoint: '768px',
+            numVisible: 3
+        },
+        {
+            breakpoint: '560px',
+            numVisible: 1
+        }
+    ];
 
-        this.galleriaService = new PhotoService();
-        this.itemTemplate = this.itemTemplate.bind(this);
-        this.thumbnailTemplate = this.thumbnailTemplate.bind(this);
-        this.caption = this.caption.bind(this);
-        this.contextPath = getConfig().publicRuntimeConfig.contextPath;
+    useEffect(() => {
+        galleriaService.getImages().then(data => setImages(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-        this.responsiveOptions = [
-            {
-                breakpoint: '1024px',
-                numVisible: 5
-            },
-            {
-                breakpoint: '768px',
-                numVisible: 3
-            },
-            {
-                breakpoint: '560px',
-                numVisible: 1
-            }
-        ];
+    const itemTemplate = (item) => {
+        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
-    componentDidMount() {
-        this.galleriaService.getImages().then(data => this.setState({ images: data }));
+    const thumbnailTemplate = (item) => {
+        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />;
     }
 
-    itemTemplate(item) {
-        return <img src={`${this.contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
-    }
-
-    thumbnailTemplate(item) {
-        return <img src={`${this.contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />;
-    }
-
-    caption(item) {
+    const caption = (item) => {
         return (
             <React.Fragment>
                 <h4 className="mb-2">{item.title}</h4>
@@ -59,49 +49,44 @@ export default class GalleriaCaptionDemo extends Component {
         );
     }
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React Gallery Component - Caption</title>
-                    <meta name="description" content="Caption displays a description for an item." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Galleria <span>Caption</span></h1>
-                        <p>Caption displays a description for an item.</p>
-                    </div>
-
-                    <DocActions github="galleria/caption.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Gallery Component - Caption</title>
+                <meta name="description" content="Caption displays a description for an item." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>Galleria <span>Caption</span></h1>
+                    <p>Caption displays a description for an item.</p>
                 </div>
 
-                <div className="content-section implementation">
-                    <div className="card">
-                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5}
-                            item={this.itemTemplate} thumbnail={this.thumbnailTemplate}
-                            caption={this.caption} style={{ maxWidth: '640px' }} />
-                    </div>
-                </div>
-
-                <GalleriaCaptionDemoDoc></GalleriaCaptionDemoDoc>
+                <DocActions github="galleria/caption.js" />
             </div>
-        );
-    }
+
+            <div className="content-section implementation">
+                <div className="card">
+                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5}
+                        item={itemTemplate} thumbnail={thumbnailTemplate}
+                        caption={caption} style={{ maxWidth: '640px' }} />
+                </div>
+            </div>
+
+            <GalleriaCaptionDemoDoc></GalleriaCaptionDemoDoc>
+        </div>
+    );
 }
 
-export class GalleriaCaptionDemoDoc extends Component {
+export default GalleriaCaptionDemo;
 
-    shouldComponentUpdate() {
-        return false;
-    }
+export const GalleriaCaptionDemoDoc = memo(() => {
 
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Source">
-<CodeHighlight lang="js">
-{`
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Source">
+                    <CodeHighlight lang="js">
+                        {`
 import React, { Component } from 'react';
 import { PhotoService } from '../service/PhotoService';
 import { Galleria } from 'primereact/galleria';
@@ -170,10 +155,9 @@ export class GalleriaCaptionDemo extends Component {
     }
 }
 `}
-                        </CodeHighlight>
-                    </TabPanel>
-                </TabView>
-            </div>
-        )
-    }
-}
+                    </CodeHighlight>
+                </TabPanel>
+            </TabView>
+        </div>
+    )
+})

@@ -11,13 +11,11 @@ import AppContentContext from './appcontentcontext';
 import PrimeReact from '../lib/api/PrimeReact';
 import getConfig from 'next/config';
 
-export default function Layout({ children }) {
-    const [theme, setTheme] = useState('lara-light-indigo');
+export default function Layout(props) {
     const [inputStyle, setInputStyle] = useState('outlined');
     const [ripple, setRipple] = useState(false);
     const [sidebarActive, setSidebarActive] = useState(false);
-    const [darkTheme, setDarkTheme] = useState(false);
-    const [newsActive, setNewsActive] = useState(true);
+    const [newsActive, setNewsActive] = useState(false);
     const mounted = useRef(false);
     const storageKey = 'primereact';
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -25,7 +23,9 @@ export default function Layout({ children }) {
     const wrapperClassName = classNames('layout-wrapper', {
         'layout-news-active': newsActive,
         'p-input-filled': inputStyle === 'filled',
-        'p-ripple-disabled': ripple === false
+        'p-ripple-disabled': ripple === false,
+        'layout-wrapper-dark': props.dark,
+        'layout-wrapper-light': !props.dark
     });
     const maskClassName = classNames('layout-mask', {
         'layout-mask-active': sidebarActive
@@ -43,8 +43,7 @@ export default function Layout({ children }) {
         if (event.theme.startsWith('md')) {
             setRipple(true);
         }
-        setTheme(event.theme);
-        setDarkTheme(event.dark);
+        props.onThemeChange(event.theme, event.dark);
     }
     const onInputStyleChange = (value) => {
         setInputStyle(value);
@@ -57,7 +56,7 @@ export default function Layout({ children }) {
     }
     const saveSettings = () => {
         const now = new Date();
-        const settings = {theme, darkTheme, newsActive};
+        const settings = {newsActive};
         const item = {
             settings,
             expiry: now.getTime() + 604800000
@@ -69,8 +68,6 @@ export default function Layout({ children }) {
         if (itemString) {
             const item = JSON.parse(itemString);
             if (!isStorageExpired()) {
-                setTheme(item.settings.theme);
-                setDarkTheme(item.settings.darkTheme);
                 setNewsActive(item.settings.newsActive);
             }
         }
@@ -96,7 +93,7 @@ export default function Layout({ children }) {
             document.body.classList.add('blocked-scroll');
         else
             document.body.classList.remove('blocked-scroll');
-    }, [sidebarActive]);
+    }, [sidebarActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         if (!mounted.current) {
@@ -106,7 +103,7 @@ export default function Layout({ children }) {
         else {
             saveSettings();
         }
-    },[theme, darkTheme, newsActive]);
+    },[newsActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
     PrimeReact.ripple = true;
 
@@ -131,23 +128,26 @@ export default function Layout({ children }) {
                 <meta property="og:image" content="https://www.primefaces.org/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
                 <link rel="icon" href={`${contextPath}/images/favicon.ico`} type="image/x-icon"></link>
-                <link rel="stylesheet" href={`${contextPath}/themes/${theme}/theme.css`}></link>
                 <link rel="stylesheet" href={`${contextPath}/styles/flags.css`}></link>
+                {/* eslint-disable */}
                 <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
+                {/* eslint-enable */}
             </Head>
             <News active={newsActive} onHide={onNewsHide}/>
-            <Topbar onMenuButtonClick={onMenuButtonClick} onThemeChange={onThemeChange} theme={theme} darkTheme={darkTheme} versions={[]} />
-            <Menu active={sidebarActive} onMenuItemClick={onMenuItemClick} darkTheme={darkTheme} />
+            <Topbar onMenuButtonClick={onMenuButtonClick} onThemeChange={onThemeChange} theme={props.theme} darkTheme={props.dark} versions={[]} />
+            <Menu active={sidebarActive} onMenuItemClick={onMenuItemClick} darkTheme={props.dark} />
             <AppContentContext.Provider value={{
                     ripple: ripple,
                     inputStyle: inputStyle,
-                    darkTheme: darkTheme,
+                    darkTheme: props.dark,
                     onInputStyleChange: onInputStyleChange,
                     onRippleChange: onRippleChange
                 }}>
                 <div className="layout-content">
-                    {children}
-                    <Footer></Footer>
+                    <div className="layout-content-inner">
+                        {props.children}
+                        <Footer></Footer>
+                    </div>
                 </div>
                 <Config ripple={ripple} onRippleChange={onRippleChange}
                         inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} />

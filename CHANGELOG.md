@@ -1,5 +1,30 @@
 # Changelog
 
+## [7.2.1](https://github.com/primefaces/primereact/tree/7.2.1) (2022-02-22)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/7.2.0...7.2.1)
+
+**Implemented New Features and Enhancements:**
+
+- Add p-button-\* class support to SplitButton [\#2647](https://github.com/primefaces/primereact/issues/2647)
+- Change lara to use system font [\#2645](https://github.com/primefaces/primereact/issues/2645)
+- Knob | replace surface letters with new surface variables [\#2643](https://github.com/primefaces/primereact/issues/2643)
+- Bug: When calendar is closed by clicking cancel button, It should be focus out  [\#2638](https://github.com/primefaces/primereact/issues/2638)
+- Add possibility to reset scroll in DataTable [\#2636](https://github.com/primefaces/primereact/issues/2636)
+- The SplitButton type declarations are missing the "show" and "hide" methods [\#2625](https://github.com/primefaces/primereact/issues/2625)
+- Automated tests throw "TypeError: highlightItem.scrollIntoView is not a function" [\#2616](https://github.com/primefaces/primereact/issues/2616)
+- DataTable sorting lacks collation support [\#2604](https://github.com/primefaces/primereact/issues/2604)
+
+**Fixed bugs:**
+
+- TreeSelect templateHeader doesn't work [\#2641](https://github.com/primefaces/primereact/issues/2641)
+- dropIndex returns same index for different nodes in Tree component [\#2632](https://github.com/primefaces/primereact/issues/2632)
+- InputNumber editor in Datatable doesn't accept only numbers as input values anymore [\#2631](https://github.com/primefaces/primereact/issues/2631)
+- Bug on Dark Themes related with fixed columns [\#2630](https://github.com/primefaces/primereact/issues/2630)
+- DataTable with paginator and selection [\#2612](https://github.com/primefaces/primereact/issues/2612)
+- Datatable:  Responsive broken in 7.2.0 [\#2594](https://github.com/primefaces/primereact/issues/2594)
+- TabMenu with MenuItem template function does not work properly [\#2590](https://github.com/primefaces/primereact/issues/2590)
+
 ## [7.2.0](https://github.com/primefaces/primereact/tree/7.2.0) (2022-01-19)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/7.1.0...7.2.0)

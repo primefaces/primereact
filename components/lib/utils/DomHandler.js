@@ -22,6 +22,15 @@ export default class DomHandler {
         return 0;
     }
 
+    static getBrowserLanguage() {
+        return navigator.userLanguage
+          || (navigator.languages && navigator.languages.length && navigator.languages[0])
+          || navigator.language
+          || navigator.browserLanguage
+          || navigator.systemLanguage
+          || 'en';
+    }
+
     static getWindowScrollTop() {
         let doc = document.documentElement;
         return (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
@@ -906,5 +915,24 @@ export default class DomHandler {
             styleElement = null;
         }
         return styleElement;
+    }
+
+    static getTargetElement(target) {
+        if (!target) return null;
+
+        if (target === 'document') {
+            return document;
+        }
+        else if (target === 'window') {
+            return window;
+        }
+        else if (typeof target === 'object' && target.hasOwnProperty('current')) {
+            return this.isExist(target.current) ? target.current : null;
+        }
+        else {
+            const isFunction = (obj) => !!(obj && obj.constructor && obj.call && obj.apply);
+            const element = isFunction(target) ? target() : target;
+            return ((element && element.nodeType === 9) || this.isExist(element)) ? element : null;
+        }
     }
 }

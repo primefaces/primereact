@@ -1,5 +1,4 @@
 $linkColor: #2196f3;
-$focusBorderColor:#BBDEFB;
 
 html {
     font-size: 14px;
@@ -7,7 +6,7 @@ html {
 
 body {
     margin: 0px;
-    height: 100%;
+    min-height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: var(--surface-ground);
