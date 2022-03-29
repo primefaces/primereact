@@ -1,18 +1,15 @@
-import React, {Component} from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class PanelMenuDoc extends Component {
+const PanelMenuDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { PanelMenu } from 'primereact/panelmenu';
 
@@ -150,10 +147,10 @@ export class PanelMenuDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React from 'react';
 import { PanelMenu } from 'primereact/panelmenu';
 
@@ -284,10 +281,10 @@ const PanelMenuDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React from 'react';
 import { PanelMenu } from 'primereact/panelmenu';
 
@@ -418,14 +415,14 @@ const PanelMenuDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/panelmenu/panelmenu.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { PanelMenu } = primereact.panelmenu;
 
 const PanelMenuDemo = () => {
@@ -555,38 +552,32 @@ const PanelMenuDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { PanelMenu } from 'primereact/panelmenu';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/panelmenu/panelmenu.min.js"></script>
 `}
 </CodeHighlight>
-                        <h5>MenuItem API</h5>
-                        <p>PanelMenu uses the common menu item api to define its items, visit <Link href="/menumodel"> MenuModel </Link> for details.</p>
+                    <h5>MenuItem API</h5>
+                    <p>PanelMenu uses the common menu item api to define its items, visit <Link href="/menumodel"> MenuModel </Link> for details.</p>
 
-                        <h5>Getting Started</h5>
-                        <p>PanelMenu requires a collection of menuitems as its model.</p>
+                    <h5>Getting Started</h5>
+                    <p>PanelMenu requires a collection of menuitems as its model.</p>
 <CodeHighlight>
 {`
 <PanelMenu model={items} style={{width:'300px'}}/>
@@ -715,114 +706,115 @@ const items = [
 `}
 </CodeHighlight>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>model</td>
-                                        <td>array</td>
-                                        <td>null</td>
-                                        <td>An array of menuitems.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>multiple</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Whether multiple tabs can be activated at the same time or not.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>transitionOptions</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>model</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>An array of menuitems.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>multiple</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether multiple tabs can be activated at the same time or not.</td>
+                                </tr>
+                                <tr>
+                                    <td>transitionOptions</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-panelmenu</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-panelmenu-header</td>
-                                        <td>Accordion header of root submenu.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-panelmenu-content</td>
-                                        <td>Accordion content of root submenu.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-submenu-list</td>
-                                        <td>List element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menuitem</td>
-                                        <td>Menuitem element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menuitem-text</td>
-                                        <td>Label of a menuitem.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menuitem-icon</td>
-                                        <td>Icon of a menuitem.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-panelmenu-icon</td>
-                                        <td>Arrow icon of an accordion header.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-panelmenu</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-panelmenu-header</td>
+                                    <td>Accordion header of root submenu.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-panelmenu-content</td>
+                                    <td>Accordion content of root submenu.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-submenu-list</td>
+                                    <td>List element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menuitem</td>
+                                    <td>Menuitem element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menuitem-text</td>
+                                    <td>Label of a menuitem.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menuitem-icon</td>
+                                    <td>Icon of a menuitem.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-panelmenu-icon</td>
+                                    <td>Arrow icon of an accordion header.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'PanelMenuDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'PanelMenuDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    )
+})
+
+export default PanelMenuDoc;

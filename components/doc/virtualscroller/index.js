@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class VirtualScrollerDoc extends Component {
+const VirtualScrollerDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
@@ -212,11 +209,11 @@ export class VirtualScrollerDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
-import React, { useEffect, useState } from 'react';
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
+import React, { useEffect, useState, useRef } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 import { Skeleton } from 'primereact/skeleton';
@@ -225,10 +222,10 @@ import './VirtualScrollerDemo.css';
 const VirtualScrollerDemo = () => {
     const [lazyItems, setLazyItems] = useState([]);
     const [lazyLoading, setLazyLoading] = useState(false);
-
-    const basicItems = Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`);
-    const multiItems = Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`));
-    let loadLazyTimeout = null;
+    const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
+    const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`)));
+    const [templateItems] = useState(Array.from({ length: 10000 }).map((_, i) => \`Item #\${i}\`));
+    const loadLazyTimeout = useRef(null);
 
     useEffect(() => {
         setLazyItems(Array.from({ length: 100000 }));
@@ -236,14 +233,14 @@ const VirtualScrollerDemo = () => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onLazyLoad = (event) => {
-        setLazyLoading(false);
+        setLazyLoading(true);
 
-        if (loadLazyTimeout) {
-            clearTimeout(loadLazyTimeout);
+        if (loadLazyTimeout.current) {
+            clearTimeout(loadLazyTimeout.current);
         }
 
         //imitate delay of a backend call
-        loadLazyTimeout = setTimeout(() => {
+        loadLazyTimeout.current = setTimeout(() => {
             const { first, last } = event;
             const _lazyItems = [...lazyItems];
 
@@ -390,17 +387,17 @@ const VirtualScrollerDemo = () => {
 
             <div className="card">
                 <h5>Template</h5>
-                <VirtualScroller items={basicItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
+                <VirtualScroller items={templateItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
             </div>
         </div>
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
-import React, { useEffect, useState } from 'react';
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
+import React, { useEffect, useState, useRef } from 'react';
 import { VirtualScroller } from 'primereact/virtualscroller';
 import { classNames } from 'primereact/utils';
 import { Skeleton } from 'primereact/skeleton';
@@ -409,10 +406,10 @@ import './VirtualScrollerDemo.css';
 const VirtualScrollerDemo = () => {
     const [lazyItems, setLazyItems] = useState([]);
     const [lazyLoading, setLazyLoading] = useState(false);
-
-    const basicItems = Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`);
-    const multiItems = Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`));
-    let loadLazyTimeout = null;
+    const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
+    const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`)));
+    const [templateItems] = useState(Array.from({ length: 10000 }).map((_, i) => \`Item #\${i}\`));
+    const loadLazyTimeout = useRef(null);
 
     useEffect(() => {
         setLazyItems(Array.from({ length: 100000 }));
@@ -420,14 +417,14 @@ const VirtualScrollerDemo = () => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onLazyLoad = (event) => {
-        setLazyLoading(false);
+        setLazyLoading(true);
 
-        if (loadLazyTimeout) {
-            clearTimeout(loadLazyTimeout);
+        if (loadLazyTimeout.current) {
+            clearTimeout(loadLazyTimeout.current);
         }
 
         //imitate delay of a backend call
-        loadLazyTimeout = setTimeout(() => {
+        loadLazyTimeout.current = setTimeout(() => {
             const { first, last } = event;
             const _lazyItems = [...lazyItems];
 
@@ -574,24 +571,24 @@ const VirtualScrollerDemo = () => {
 
             <div className="card">
                 <h5>Template</h5>
-                <VirtualScroller items={basicItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
+                <VirtualScroller items={templateItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
             </div>
         </div>
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
-        <link rel="stylesheet" href="./VirtualScrollerDemo.css" />
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
+    <link rel="stylesheet" href="./VirtualScrollerDemo.css" />
 
-        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/blockui/blockui.min.js"></script>
-        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
-        <script src="https://unpkg.com/primereact/skeleton/skeleton.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+    <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+    <script src="https://unpkg.com/primereact/blockui/blockui.min.js"></script>
+    <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
+    <script src="https://unpkg.com/primereact/skeleton/skeleton.min.js"></script>`,
+            content: `
+const { useEffect, useState, useRef } = React;
 const { classNames } = primereact.core;
 const { VirtualScroller } = primereact.virtualscroller;
 const { Skeleton } = primereact.skeleton;
@@ -599,10 +596,10 @@ const { Skeleton } = primereact.skeleton;
 const VirtualScrollerDemo = () => {
     const [lazyItems, setLazyItems] = useState([]);
     const [lazyLoading, setLazyLoading] = useState(false);
-
-    const basicItems = Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`);
-    const multiItems = Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`));
-    let loadLazyTimeout = null;
+    const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
+    const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`)));
+    const [templateItems] = useState(Array.from({ length: 10000 }).map((_, i) => \`Item #\${i}\`));
+    const loadLazyTimeout = useRef(null);
 
     useEffect(() => {
         setLazyItems(Array.from({ length: 100000 }));
@@ -610,14 +607,14 @@ const VirtualScrollerDemo = () => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onLazyLoad = (event) => {
-        setLazyLoading(false);
+        setLazyLoading(true);
 
-        if (loadLazyTimeout) {
-            clearTimeout(loadLazyTimeout);
+        if (loadLazyTimeout.current) {
+            clearTimeout(loadLazyTimeout.current);
         }
 
         //imitate delay of a backend call
-        loadLazyTimeout = setTimeout(() => {
+        loadLazyTimeout.current = setTimeout(() => {
             const { first, last } = event;
             const _lazyItems = [...lazyItems];
 
@@ -764,18 +761,18 @@ const VirtualScrollerDemo = () => {
 
             <div className="card">
                 <h5>Template</h5>
-                <VirtualScroller items={basicItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
+                <VirtualScroller items={templateItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
             </div>
         </div>
     )
 }
                 `
-            }
         }
+    }
 
-        this.extFiles = {
-            'demo/VirtualScrollerDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/VirtualScrollerDemo.css': {
+            content: `
 .virtualscroller-demo .scroll-item {
     display: flex;
     align-items: center;
@@ -805,27 +802,21 @@ const VirtualScrollerDemo = () => {
     writing-mode: vertical-lr;
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { VirtualScroller } from 'primereact/virtualscroller';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -833,10 +824,10 @@ import { VirtualScroller } from 'primereact/virtualscroller';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>VirtualScroller is used to display huge data. It periodically adds special elements defined according to the scroll's position to the DOM.
-                            The <i>itemSize</i> and <i>itemTemplate</i> properties are required on component. In addition, an initial array is required based on the total number of items to display.<br />
-                            VirtualScroller automatically calculates how many items will be displayed in the view according to <i>itemSize</i> using a specified scroll height. Its scroll height can be adjusted with <i>scrollHeight</i> property or height property of CSS.</p>
+                    <h5>Getting Started</h5>
+                    <p>VirtualScroller is used to display huge data. It periodically adds special elements defined according to the scroll's position to the DOM.
+                        The <i>itemSize</i> and <i>itemTemplate</i> properties are required on component. In addition, an initial array is required based on the total number of items to display.<br />
+                        VirtualScroller automatically calculates how many items will be displayed in the view according to <i>itemSize</i> using a specified scroll height. Its scroll height can be adjusted with <i>scrollHeight</i> property or height property of CSS.</p>
 <CodeHighlight>
 {`
 <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} />
@@ -862,9 +853,9 @@ const itemTemplate = (item, options) => {
 `}
 </CodeHighlight>
 
-                        <h5>Loader</h5>
-                        <p>VirtualScroller has a special loader. It can be activated with the <i>showLoader</i> property.
-                            In addition, <i>loadingTemplate</i> can be used to add custom loaders to item elements.</p>
+                    <h5>Loader</h5>
+                    <p>VirtualScroller has a special loader. It can be activated with the <i>showLoader</i> property.
+                        In addition, <i>loadingTemplate</i> can be used to add custom loaders to item elements.</p>
 <CodeHighlight>
 {`
 <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} showLoader delay={250} />
@@ -894,8 +885,8 @@ const loadingTemplate = (options) => {
 `}
 </CodeHighlight>
 
-                        <h5>Lazy</h5>
-                        <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking <i>onLazyLoad</i> callback.</p>
+                    <h5>Lazy</h5>
+                    <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking <i>onLazyLoad</i> callback.</p>
 
 <CodeHighlight>
 {`
@@ -929,9 +920,9 @@ const onLazyLoad = (event) => {
 `}
 </CodeHighlight>
 
-                        <h5>Content Template</h5>
-                        <p>VirtualScroller has a HTML div element to wrap the all items. But in some cases, it may be desirable to define a completely special wrapper element instead of the HTML div element. The <i>contentTemplate</i> property can be used for this.
-                        This will be especially necessary to maintain the DOM layout and provide accessibility.</p>
+                    <h5>Content Template</h5>
+                    <p>VirtualScroller has a HTML div element to wrap the all items. But in some cases, it may be desirable to define a completely special wrapper element instead of the HTML div element. The <i>contentTemplate</i> property can be used for this.
+                    This will be especially necessary to maintain the DOM layout and provide accessibility.</p>
 <CodeHighlight>
 {`
 <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} contentTemplate={contentTemplate} />
@@ -970,255 +961,256 @@ const itemTemplate = (item, options) => {
 }
 `}
 </CodeHighlight>
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Style class of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>items</td>
-                                        <td>array</td>
-                                        <td>null</td>
-                                        <td>An array of objects to display.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>itemSize</td>
-                                        <td>number / [number, number]</td>
-                                        <td>null</td>
-                                        <td>The height/width of item according to orientation.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>scrollHeight</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Height of the scroll viewport.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>scrollWidth</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Width of the scroll viewport.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>orientation</td>
-                                        <td>string</td>
-                                        <td>'vertical'</td>
-                                        <td>The orientation of scrollbar, valid values are 'vertical', 'horizontal' and 'both'.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>numToleratedItems</td>
-                                        <td>number</td>
-                                        <td>null</td>
-                                        <td>Determines how many additional elements to add to the DOM outside of the view. <br />
-                                            According to the scrolls made up and down, extra items are added in a certain algorithm in the form of multiples of this number. <br />
-                                            Default value is half the number of items shown in the view.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>delay</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Delay in scroll before new data is loaded.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>lazy</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Defines if data is loaded and interacted with in lazy manner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>disabled</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>If disabled, the VirtualScroller feature is eliminated and the content is displayed directly.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>loaderDisabled</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Used to implement a custom loader instead of using the loader feature in the VirtualScroller.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>loading</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Whether the data is loaded.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>showSpacer</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Used to implement a custom spacer instead of using the spacer feature in the VirtualScroller.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>showLoader</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Whether to show loader.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>loadingTemplate</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>The template of loader.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>itemTemplate</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>The template of item.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>contentTemplate</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>The template of item's wrapper element.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Style class of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>items</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>An array of objects to display.</td>
+                                </tr>
+                                <tr>
+                                    <td>itemSize</td>
+                                    <td>number / [number, number]</td>
+                                    <td>null</td>
+                                    <td>The height/width of item according to orientation.</td>
+                                </tr>
+                                <tr>
+                                    <td>scrollHeight</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Height of the scroll viewport.</td>
+                                </tr>
+                                <tr>
+                                    <td>scrollWidth</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Width of the scroll viewport.</td>
+                                </tr>
+                                <tr>
+                                    <td>orientation</td>
+                                    <td>string</td>
+                                    <td>'vertical'</td>
+                                    <td>The orientation of scrollbar, valid values are 'vertical', 'horizontal' and 'both'.</td>
+                                </tr>
+                                <tr>
+                                    <td>numToleratedItems</td>
+                                    <td>number</td>
+                                    <td>null</td>
+                                    <td>Determines how many additional elements to add to the DOM outside of the view. <br />
+                                        According to the scrolls made up and down, extra items are added in a certain algorithm in the form of multiples of this number. <br />
+                                        Default value is half the number of items shown in the view.</td>
+                                </tr>
+                                <tr>
+                                    <td>delay</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Delay in scroll before new data is loaded.</td>
+                                </tr>
+                                <tr>
+                                    <td>lazy</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Defines if data is loaded and interacted with in lazy manner.</td>
+                                </tr>
+                                <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>If disabled, the VirtualScroller feature is eliminated and the content is displayed directly.</td>
+                                </tr>
+                                <tr>
+                                    <td>loaderDisabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Used to implement a custom loader instead of using the loader feature in the VirtualScroller.</td>
+                                </tr>
+                                <tr>
+                                    <td>loading</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether the data is loaded.</td>
+                                </tr>
+                                <tr>
+                                    <td>showSpacer</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Used to implement a custom spacer instead of using the spacer feature in the VirtualScroller.</td>
+                                </tr>
+                                <tr>
+                                    <td>showLoader</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether to show loader.</td>
+                                </tr>
+                                <tr>
+                                    <td>loadingTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template of loader.</td>
+                                </tr>
+                                <tr>
+                                    <td>itemTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template of item.</td>
+                                </tr>
+                                <tr>
+                                    <td>contentTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template of item's wrapper element.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onScroll</td>
-                                        <td>event: Browser event</td>
-                                        <td>Callback to invoke when scroll position changes.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onScrollIndexChange</td>
-                                        <td>event.first: First index of the new data range to be loaded.<br/>
-                                            event.last: Last index of the new data range to be loaded.
-                                        </td>
-                                        <td>Callback to invoke when scroll position and item's range in view changes.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onLazyLoad</td>
-                                        <td>event.first: First index of the new data range to be loaded.<br/>
-                                            event.last: Last index of the new data range to be loaded.
-                                        </td>
-                                        <td>Callback to invoke in lazy mode to load new data.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onScroll</td>
+                                    <td>event: Browser event</td>
+                                    <td>Callback to invoke when scroll position changes.</td>
+                                </tr>
+                                <tr>
+                                    <td>onScrollIndexChange</td>
+                                    <td>event.first: First index of the new data range to be loaded.<br/>
+                                        event.last: Last index of the new data range to be loaded.
+                                    </td>
+                                    <td>Callback to invoke when scroll position and item's range in view changes.</td>
+                                </tr>
+                                <tr>
+                                    <td>onLazyLoad</td>
+                                    <td>event.first: First index of the new data range to be loaded.<br/>
+                                        event.last: Last index of the new data range to be loaded.
+                                    </td>
+                                    <td>Callback to invoke in lazy mode to load new data.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Methods</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>scrollTo</td>
-                                        <td>
-                                            left: Left position of scroll. <br />
-                                            top: Top position of scroll <br />
-                                            behavior: Behavior of scroll, valid values are 'auto' and 'smooth'
-                                        </td>
-                                        <td>Scroll to move to a specific position.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>scrollToIndex</td>
-                                        <td>
-                                            index: Index of item according to orientation mode. <br />
-                                            behavior: Behavior of scroll, valid values are 'auto' and 'smooth'
-                                        </td>
-                                        <td>Scroll to move to a specific item.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>scrollInView</td>
-                                        <td>
-                                            index: Index of item according to orientation mode. <br />
-                                            to: Defines the location of the item in view, valid values are 'to-start' and 'to-end'. <br />
-                                            behavior: Behavior of scroll, valid values are 'auto' and 'smooth'
-                                        </td>
-                                        <td>It is used to move the specified index into the view. It is a method that will usually be needed when keyboard support is added to the virtualScroller component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>getRenderedRange</td>
-                                        <td>-</td>
-                                        <td>Returns the range of items added to the DOM.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Methods</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>scrollTo</td>
+                                    <td>
+                                        left: Left position of scroll. <br />
+                                        top: Top position of scroll <br />
+                                        behavior: Behavior of scroll, valid values are 'auto' and 'smooth'
+                                    </td>
+                                    <td>Scroll to move to a specific position.</td>
+                                </tr>
+                                <tr>
+                                    <td>scrollToIndex</td>
+                                    <td>
+                                        index: Index of item according to orientation mode. <br />
+                                        behavior: Behavior of scroll, valid values are 'auto' and 'smooth'
+                                    </td>
+                                    <td>Scroll to move to a specific item.</td>
+                                </tr>
+                                <tr>
+                                    <td>scrollInView</td>
+                                    <td>
+                                        index: Index of item according to orientation mode. <br />
+                                        to: Defines the location of the item in view, valid values are 'to-start' and 'to-end'. <br />
+                                        behavior: Behavior of scroll, valid values are 'auto' and 'smooth'
+                                    </td>
+                                    <td>It is used to move the specified index into the view. It is a method that will usually be needed when keyboard support is added to the virtualScroller component.</td>
+                                </tr>
+                                <tr>
+                                    <td>getRenderedRange</td>
+                                    <td>-</td>
+                                    <td>Returns the range of items added to the DOM.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-virtualscroller</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-virtualscroller-content</td>
-                                        <td>Content element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-virtualscroller-loader</td>
-                                        <td>Loader element.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-virtualscroller</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-virtualscroller-content</td>
+                                    <td>Content element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-virtualscroller-loader</td>
+                                    <td>Loader element.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
 
-                    </TabPanel>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'VirtualScrollerDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'VirtualScrollerDemo', sources: sources, extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    )
+})
+
+export default VirtualScrollerDoc;

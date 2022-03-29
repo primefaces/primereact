@@ -17,6 +17,7 @@ let core = {};
 const ALIAS_COMPONENT_ENTRIES = [
     { find: '../utils/Utils', replacement: 'primereact/utils' },
     { find: '../api/Api', replacement: 'primereact/api' },
+    { find: '../hooks/Hooks', replacement: 'primereact/hooks' },
     { find: '../ripple/Ripple', replacement: 'primereact/ripple' },
     { find: '../csstransition/CSSTransition', replacement: 'primereact/csstransition' },
     { find: '../portal/Portal', replacement: 'primereact/portal' },

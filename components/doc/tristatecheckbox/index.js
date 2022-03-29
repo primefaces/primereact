@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class TriStateCheckboxDoc extends Component {
+const TriStateCheckboxDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
@@ -40,10 +37,10 @@ export class TriStateCheckboxDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
@@ -62,10 +59,10 @@ const TriStateCheckboxDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
@@ -84,14 +81,14 @@ const TriStateCheckboxDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/tristatecheckbox/tristatecheckbox.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { TriStateCheckbox } = primereact.tristatecheckbox;
 
 const TriStateCheckboxDemo = () => {
@@ -109,15 +106,9 @@ const TriStateCheckboxDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
         return (
             <div className="content-section documentation" id="app-doc">
                 <TabView>
@@ -279,10 +270,11 @@ import { TriStateCheckbox } from 'primereact/tristatecheckbox';
                 </TabPanel>
 
                 {
-                    useLiveEditorTabs({ name: 'TriStateCheckboxDemo', sources: this.sources })
+                    useLiveEditorTabs({ name: 'TriStateCheckboxDemo', sources: sources })
                 }
             </TabView>
         </div>
-        )
-    }
-}
+    )
+})
+
+export default TriStateCheckboxDoc;

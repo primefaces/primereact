@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class ChipsDoc extends Component {
+export const ChipsDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Chips } from 'primereact/chips';
 
@@ -54,10 +51,10 @@ export class ChipsDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { Chips } from 'primereact/chips';
 
@@ -68,7 +65,7 @@ const ChipsDemo = () => {
 
     const customChip = (item) => {
         return (
-            <div>
+            <div>f
                 <span>{item} - (active) </span>
                 <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
             </div>
@@ -91,10 +88,10 @@ const ChipsDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { Chips } from 'primereact/chips';
 
@@ -128,14 +125,14 @@ const ChipsDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/chips/chips.min.js"></script>`,
-                content: `
-const { useEffect, useState, useRef } = React;
+            content: `
+const { useState, useRef } = React;
 const { Chips } = primereact.chips;
 
 const ChipsDemo = () => {
@@ -168,27 +165,21 @@ const ChipsDemo = () => {
     )
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Chips } from 'primereact/chips';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -196,8 +187,8 @@ import { Chips } from 'primereact/chips';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>Chips requires an array as its <i>value</i> and <i>onChange</i> callback to update the model.</p>
+                    <h5>Getting Started</h5>
+                    <p>Chips requires an array as its <i>value</i> and <i>onChange</i> callback to update the model.</p>
 
 <CodeHighlight>
 {`
@@ -205,8 +196,8 @@ import { Chips } from 'primereact/chips';
 `}
 </CodeHighlight>
 
-                        <h5>Custom Content</h5>
-                        <p>A chip is customized using <i>itemTemplate</i> function where value is passed to return JSX.</p>
+                    <h5>Custom Content</h5>
+                    <p>A chip is customized using <i>itemTemplate</i> function where value is passed to return JSX.</p>
 <CodeHighlight>
 {`
 <Chips value={value} onChange={(e) => setValue(e.value)} itemTemplate={customChip}></Chips>
@@ -226,205 +217,206 @@ customChip(item) {
 `}
 </CodeHighlight>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>name</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Name of the input field.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>placeholder</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Advisory information to display on input.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>value</td>
-                                        <td>array</td>
-                                        <td>null</td>
-                                        <td>Value of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>max</td>
-                                        <td>number</td>
-                                        <td>null</td>
-                                        <td>Maximum number of entries allowed.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>disabled</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>When present, it specifies that the element should be disabled.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>readOnly</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>When present, it specifies that the element should be read-only.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>removable</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether an item is removable.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>tooltip</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Content of the tooltip.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>tooltipOptions</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ariaLabelledBy</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>allowDuplicate</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether to allow duplicate values or not.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>separator</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Separator char to add an item when pressed in addition to the enter key. Currently only possible value is ","</td>
-                                    </tr>
-                                    <tr>
-                                        <td>itemTemplate</td>
-                                        <td>function</td>
-                                        <td>null</td>
-                                        <td>Template function to return the content of a chip.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Name of the input field.</td>
+                                </tr>
+                                <tr>
+                                    <td>placeholder</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Advisory information to display on input.</td>
+                                </tr>
+                                <tr>
+                                    <td>value</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>Value of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>max</td>
+                                    <td>number</td>
+                                    <td>null</td>
+                                    <td>Maximum number of entries allowed.</td>
+                                </tr>
+                                <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the element should be disabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>readOnly</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the element should be read-only.</td>
+                                </tr>
+                                <tr>
+                                    <td>removable</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether an item is removable.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>tooltip</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Content of the tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td>tooltipOptions</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                                </tr>
+                                <tr>
+                                    <td>ariaLabelledBy</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
+                                </tr>
+                                <tr>
+                                    <td>allowDuplicate</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to allow duplicate values or not.</td>
+                                </tr>
+                                <tr>
+                                    <td>separator</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Separator char to add an item when pressed in addition to the enter key. Currently only possible value is ","</td>
+                                </tr>
+                                <tr>
+                                    <td>itemTemplate</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Template function to return the content of a chip.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onChange</td>
-                                        <td>originalEvent: Browser event <br />
-                                value: New value of the component</td>
-                                        <td>Callback to invoke when a chip is added or removed.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onAdd</td>
-                                        <td>originalEvent: Browser event <br />
-                                value: Added item value</td>
-                                        <td>Callback to invoke when a chip is added.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onRemove</td>
-                                        <td>originalEvent: Browser event <br />
-                                value: Removed item value</td>
-                                        <td>Callback to invoke when a chip is removed.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onFocus</td>
-                                        <td>event: Browser event</td>
-                                        <td>Callback to invoke when the component gets focus.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onBlur</td>
-                                        <td>event: Browser event</td>
-                                        <td>Callback to invoke when the component loses focus.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onChange</td>
+                                    <td>originalEvent: Browser event <br />
+                            value: New value of the component</td>
+                                    <td>Callback to invoke when a chip is added or removed.</td>
+                                </tr>
+                                <tr>
+                                    <td>onAdd</td>
+                                    <td>originalEvent: Browser event <br />
+                            value: Added item value</td>
+                                    <td>Callback to invoke when a chip is added.</td>
+                                </tr>
+                                <tr>
+                                    <td>onRemove</td>
+                                    <td>originalEvent: Browser event <br />
+                            value: Removed item value</td>
+                                    <td>Callback to invoke when a chip is removed.</td>
+                                </tr>
+                                <tr>
+                                    <td>onFocus</td>
+                                    <td>event: Browser event</td>
+                                    <td>Callback to invoke when the component gets focus.</td>
+                                </tr>
+                                <tr>
+                                    <td>onBlur</td>
+                                    <td>event: Browser event</td>
+                                    <td>Callback to invoke when the component loses focus.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-chips</td>
-                                        <td>Container element</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-chips-token</td>
-                                        <td>Chip element container.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-chips-token-icon</td>
-                                        <td>Icon of a chip.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-chips-token-label</td>
-                                        <td>label of a chip.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-chips-input-token</td>
-                                        <td>Container of input element.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-chips</td>
+                                    <td>Container element</td>
+                                </tr>
+                                <tr>
+                                    <td>p-chips-token</td>
+                                    <td>Chip element container.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-chips-token-icon</td>
+                                    <td>Icon of a chip.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-chips-token-label</td>
+                                    <td>label of a chip.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-chips-input-token</td>
+                                    <td>Container of input element.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'ChipsDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'ChipsDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default ChipsDoc;

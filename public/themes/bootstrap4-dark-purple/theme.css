@@ -212,6 +212,16 @@
   --purple-700:#4e2e87;
   --purple-800:#3d246a;
   --purple-900:#2c1a4d;
+  --red-50:#fdf5f6;
+  --red-100:#f7cfd2;
+  --red-200:#f0a8af;
+  --red-300:#e9828c;
+  --red-400:#e35b68;
+  --red-500:#dc3545;
+  --red-600:#bb2d3b;
+  --red-700:#9a2530;
+  --red-800:#791d26;
+  --red-900:#58151c;
 }
 
 .p-autocomplete .p-autocomplete-loader {
@@ -4550,18 +4560,18 @@
 }
 
 @media screen and (max-width: 960px) {
-  .p-dock.p-dock-top .p-dock-list-container, .p-dock.p-dock-bottom .p-dock-list-container {
+  .p-dock.p-dock-top .p-dock-container, .p-dock.p-dock-bottom .p-dock-container {
     overflow-x: auto;
     width: 100%;
   }
-  .p-dock.p-dock-top .p-dock-list-container .p-dock-list, .p-dock.p-dock-bottom .p-dock-list-container .p-dock-list {
+  .p-dock.p-dock-top .p-dock-container .p-dock-list, .p-dock.p-dock-bottom .p-dock-container .p-dock-list {
     margin: 0 auto;
   }
-  .p-dock.p-dock-left .p-dock-list-container, .p-dock.p-dock-right .p-dock-list-container {
+  .p-dock.p-dock-left .p-dock-container, .p-dock.p-dock-right .p-dock-container {
     overflow-y: auto;
     height: 100%;
   }
-  .p-dock.p-dock-left .p-dock-list-container .p-dock-list, .p-dock.p-dock-right .p-dock-list-container .p-dock-list {
+  .p-dock.p-dock-left .p-dock-container .p-dock-list, .p-dock.p-dock-right .p-dock-container .p-dock-list {
     margin: auto 0;
   }
   .p-dock .p-dock-list .p-dock-item {
