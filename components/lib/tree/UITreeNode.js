@@ -660,7 +660,7 @@ export const UITreeNode = memo((props) => {
                                     selectionMode={props.selectionMode} selectionKeys={props.selectionKeys} onSelectionChange={props.onSelectionChange} metaKeySelection={props.metaKeySelection}
                                     propagateSelectionDown={props.propagateSelectionDown} propagateSelectionUp={props.propagateSelectionUp}
                                     contextMenuSelectionKey={props.contextMenuSelectionKey} onContextMenuSelectionChange={props.onContextMenuSelectionChange} onContextMenu={props.onContextMenu}
-                                    onExpand={props.onExpand} onCollapse={props.onCollapse} onSelect={props.onSelect} onUnselect={props.onUnselect}
+                                    onExpand={props.onExpand} onCollapse={props.onCollapse} onSelect={props.onSelect} onUnselect={props.onUnselect} onClick={props.onClick} onDoubleClick={props.onDoubleClick}
                                     expandedKeys={props.expandedKeys} onToggle={props.onToggle} onPropagateUp={propagateUp} nodeTemplate={props.nodeTemplate} togglerTemplate={props.togglerTemplate} isNodeLeaf={props.isNodeLeaf}
                                     dragdropScope={props.dragdropScope} onDragStart={props.onDragStart} onDragEnd={props.onDragEnd} onDrop={props.onDrop} onDropPoint={props.onDropPoint} />
                             )
