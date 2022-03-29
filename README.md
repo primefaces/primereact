@@ -61,7 +61,7 @@ dependencies: {
 }
 ```
 
-### Optional
+#### Optional
 
 Here is the list of components with 3rd party dependencies.
 
@@ -72,7 +72,8 @@ Here is the list of components with 3rd party dependencies.
 | Editor | Quill.js |
 | FullCalendar* | FullCalendar 4.0 Alpha.2+
 | DataView | PrimeFlex |
-* Deprecated
+
+<sub>*Deprecated since v6.4.0</sup>
 
 ## Styles
 The css dependencies are as follows, note that you may change the theme with another one of your choice.
