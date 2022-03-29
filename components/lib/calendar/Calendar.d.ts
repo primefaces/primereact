@@ -9,6 +9,8 @@ type CalendarVisibleType = 'outside' | 'dateselect' | undefined | null;
 
 type CalendarIconPosType = 'left' | 'right';
 
+type CalendarEventType = React.SyntheticEvent | undefined | null;
+
 interface CalendarChangeTargetOptions {
     name: string;
     id: string;
@@ -148,4 +150,10 @@ export interface CalendarProps {
     onHide?(): void;
 }
 
-export declare class Calendar extends React.Component<CalendarProps, any> { }
+export declare class Calendar extends React.Component<CalendarProps, any> { 
+    public showOverlay(): void;
+    public hideOverlay(): void;
+    public getCurrentDateTime(): Date | Date[];
+    public getViewDate(): Date | Date[];
+    public updateViewDate(event: CalendarEventType, value: Date | Date[]): void;
+}
