@@ -19,14 +19,18 @@ export const Toast = memo(forwardRef((props, ref) => {
             let messages;
 
             if (Array.isArray(value)) {
-                for (let i = 0; i < value.length; i++) {
-                    value[i].id = messageIdx++;
-                    messages = [...messagesState, ...value];
+                const currentMessages = [...value];
+                for (let i = 0; i < currentMessages.length; i++) {
+                    const message = {...currentMessages[i]};
+                    message.id = messageIdx++;
+                    currentMessages[i] = message;
                 }
+                messages = [...messagesState, ...currentMessages];
             }
             else {
-                value.id = messageIdx++;
-                messages = messagesState ? [...messagesState, value] : [value];
+                const currentMessage = {...value};
+                currentMessage.id = messageIdx++;
+                messages = messagesState ? [...messagesState, currentMessage] : [currentMessage];
             }
 
             messagesState.length === 0 && ZIndexUtils.set('toast', containerRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['toast']);
