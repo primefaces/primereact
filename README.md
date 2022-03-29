@@ -94,7 +94,7 @@ import 'primeicons/primeicons.css';
 
 ## QuickStart
 
-[Example applications](https://github.com/primefaces/primereact-examples) based on create-react-app and nextjs are available at github.
+[Example applications](https://github.com/primefaces/primereact-examples) based on create-react-app and Next.js are available at github.
 
 ## TypeScript
 
