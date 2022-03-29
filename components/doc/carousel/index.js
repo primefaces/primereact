@@ -384,7 +384,7 @@ import { Carousel } from 'primereact/carousel';
 
 <CodeHighlight lang="js">
 {`
-const itemTemplate = (car) => {
+const itemTemplate = (product) => {
     // return content;
 }
 `}
