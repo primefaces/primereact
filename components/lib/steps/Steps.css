@@ -24,7 +24,7 @@
     text-decoration: none;
 }
 
-.p-steps.p-steps-readonly .p-steps-item {
+.p-steps.p-readonly .p-steps-item {
     cursor: auto;
 }
 

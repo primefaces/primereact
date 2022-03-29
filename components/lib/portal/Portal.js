@@ -1,52 +1,51 @@
-import { Component } from 'react';
+import { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import PrimeReact from '../api/Api';
 import { DomHandler } from '../utils/Utils';
+import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 
-export class Portal extends Component {
+export const Portal = memo((props) => {
+    const [mountedState, setMountedState] = useState(props.visible && DomHandler.hasDOM());
 
-    static defaultProps = {
-        element: null,
-        appendTo: null,
-        visible: false,
-        onMounted: null,
-        onUnmounted: null
-    };
-
-    static propTypes = {
-        element: PropTypes.any,
-        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        visible: PropTypes.bool,
-        onMounted: PropTypes.func,
-        onUnmounted: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            mounted: props.visible
-        };
-    }
-
-    componentDidMount() {
-        if (DomHandler.hasDOM() && !this.state.mounted) {
-            this.setState({ mounted: true }, this.props.onMounted);
+    useMountEffect(() => {
+        if (DomHandler.hasDOM() && !mountedState) {
+            setMountedState(true);
+            props.onMounted && props.onMounted();
         }
+    });
+
+    useUpdateEffect(() => {
+        props.onMounted && props.onMounted();
+    }, [mountedState]);
+
+    useUnmountEffect(() => {
+        props.onUnmounted && props.onUnmounted();
+    });
+
+    const element = props.element || props.children;
+    if (element && mountedState) {
+        const appendTo = props.appendTo || PrimeReact.appendTo || document.body;
+        return appendTo === 'self' ? element : ReactDOM.createPortal(element, appendTo);
     }
 
-    componentWillUnmount() {
-        this.props.onUnmounted && this.props.onUnmounted();
-    }
+    return null;
+});
 
-    render() {
-        const element = this.props.element || this.props.children;
-        if (element && this.state.mounted) {
-            const appendTo = this.props.appendTo || PrimeReact.appendTo || document.body;
-            return appendTo === 'self' ? element : ReactDOM.createPortal(element, appendTo);
-        }
+Portal.defaultProps = {
+    __TYPE: 'Portal',
+    element: null,
+    appendTo: null,
+    visible: false,
+    onMounted: null,
+    onUnmounted: null
+}
 
-        return null;
-    }
+Portal.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    element: PropTypes.any,
+    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    visible: PropTypes.bool,
+    onMounted: PropTypes.func,
+    onUnmounted: PropTypes.func
 }

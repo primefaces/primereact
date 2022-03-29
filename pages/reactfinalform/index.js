@@ -62,13 +62,13 @@ const ReactFinalFormDemo = () => {
         return isFormFieldValid(meta) && <small className="p-error">{meta.error}</small>;
     };
 
-    const dialogFooter = <div className="p-d-flex p-jc-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false) } /></div>;
+    const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false) } /></div>;
     const passwordHeader = <h6>Pick a password</h6>;
     const passwordFooter = (
         <React.Fragment>
             <Divider />
-            <p className="p-mt-2">Suggestions</p>
-            <ul className="p-pl-2 p-ml-2 p-mt-0" style={{ lineHeight: '1.5' }}>
+            <p className="mt-2">Suggestions</p>
+            <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: '1.5' }}>
                 <li>At least one lowercase</li>
                 <li>At least one uppercase</li>
                 <li>At least one numeric</li>
@@ -95,7 +95,7 @@ const ReactFinalFormDemo = () => {
 
             <div className="content-section implementation form-demo">
                 <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
-                    <div className="p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
+                    <div className="flex align-items-center flex-column pt-6 px-3">
                         <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
                         <h5>Registration Successful!</h5>
                         <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
@@ -104,13 +104,13 @@ const ReactFinalFormDemo = () => {
                     </div>
                 </Dialog>
 
-                <div className="p-d-flex p-jc-center">
+                <div className="flex justify-content-center">
                     <div className="card">
-                        <h5 className="p-text-center">Register</h5>
+                        <h5 className="text-center">Register</h5>
                         <Form onSubmit={onSubmit} initialValues={{ name: '', email: '', password: '', date: null, country: null, accept: false }} validate={validate} render={({ handleSubmit }) => (
                             <form onSubmit={handleSubmit} className="p-fluid">
                                 <Field name="name" render={({ input, meta }) => (
-                                    <div className="p-field">
+                                    <div className="field">
                                         <span className="p-float-label">
                                             <InputText id="name" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
                                             <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid(meta) })}>Name*</label>
@@ -119,7 +119,7 @@ const ReactFinalFormDemo = () => {
                                     </div>
                                 )} />
                                 <Field name="email" render={({ input, meta }) => (
-                                    <div className="p-field">
+                                    <div className="field">
                                         <span className="p-float-label p-input-icon-right">
                                             <i className="pi pi-envelope" />
                                             <InputText id="email" {...input} className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
@@ -129,7 +129,7 @@ const ReactFinalFormDemo = () => {
                                     </div>
                                 )} />
                                 <Field name="password" render={({ input, meta }) => (
-                                    <div className="p-field">
+                                    <div className="field">
                                         <span className="p-float-label">
                                             <Password id="password" {...input} toggleMask className={classNames({ 'p-invalid': isFormFieldValid(meta) })} header={passwordHeader} footer={passwordFooter} />
                                             <label htmlFor="password" className={classNames({ 'p-error': isFormFieldValid(meta) })}>Password*</label>
@@ -138,7 +138,7 @@ const ReactFinalFormDemo = () => {
                                     </div>
                                 )} />
                                 <Field name="date" render={({ input }) => (
-                                    <div className="p-field">
+                                    <div className="field">
                                         <span className="p-float-label">
                                             <Calendar id="date" {...input} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />
                                             <label htmlFor="date">Birthday</label>
@@ -146,7 +146,7 @@ const ReactFinalFormDemo = () => {
                                     </div>
                                 )} />
                                 <Field name="country" render={({ input }) => (
-                                    <div className="p-field">
+                                    <div className="field">
                                         <span className="p-float-label">
                                             <Dropdown id="country" {...input} options={countries} optionLabel="name" />
                                             <label htmlFor="country">Country</label>
@@ -154,13 +154,13 @@ const ReactFinalFormDemo = () => {
                                     </div>
                                 )} />
                                 <Field name="accept" type="checkbox" render={({ input, meta }) => (
-                                    <div className="p-field-checkbox">
+                                    <div className="field-checkbox">
                                         <Checkbox inputId="accept" {...input} className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
                                         <label htmlFor="accept" className={classNames({ 'p-error': isFormFieldValid(meta) })}>I agree to the terms and conditions*</label>
                                     </div>
                                 )} />
 
-                                <Button type="submit" label="Submit" className="p-mt-2" />
+                                <Button type="submit" label="Submit" className="mt-2" />
                             </form>
                         )} />
                     </div>
@@ -239,13 +239,13 @@ export const ReactFinalFormDemo = () => {
         return isFormFieldValid(meta) && <small className="p-error">{meta.error}</small>;
     };
 
-    const dialogFooter = <div className="p-d-flex p-jc-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false) } /></div>;
+    const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false) } /></div>;
     const passwordHeader = <h6>Pick a password</h6>;
     const passwordFooter = (
         <React.Fragment>
             <Divider />
-            <p className="p-mt-2">Suggestions</p>
-            <ul className="p-pl-2 p-ml-2 p-mt-0" style={{ lineHeight: '1.5' }}>
+            <p className="mt-2">Suggestions</p>
+            <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: '1.5' }}>
                 <li>At least one lowercase</li>
                 <li>At least one uppercase</li>
                 <li>At least one numeric</li>
@@ -257,7 +257,7 @@ export const ReactFinalFormDemo = () => {
     return (
         <div className="form-demo">
             <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
-                <div className="p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
+                <div className="flex align-items-center flex-column pt-6 px-3">
                     <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
                     <h5>Registration Successful!</h5>
                     <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
@@ -266,13 +266,13 @@ export const ReactFinalFormDemo = () => {
                 </div>
             </Dialog>
 
-            <div className="p-d-flex p-jc-center">
+            <div className="flex justify-content-center">
                 <div className="card">
-                    <h5 className="p-text-center">Register</h5>
+                    <h5 className="text-center">Register</h5>
                     <Form onSubmit={onSubmit} initialValues={{ name: '', email: '', password: '', date: null, country: null, accept: false }} validate={validate} render={({ handleSubmit }) => (
                         <form onSubmit={handleSubmit} className="p-fluid">
                             <Field name="name" render={({ input, meta }) => (
-                                <div className="p-field">
+                                <div className="field">
                                     <span className="p-float-label">
                                         <InputText id="name" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
                                         <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid(meta) })}>Name*</label>
@@ -281,7 +281,7 @@ export const ReactFinalFormDemo = () => {
                                 </div>
                             )} />
                             <Field name="email" render={({ input, meta }) => (
-                                <div className="p-field">
+                                <div className="field">
                                     <span className="p-float-label p-input-icon-right">
                                         <i className="pi pi-envelope" />
                                         <InputText id="email" {...input} className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
@@ -291,7 +291,7 @@ export const ReactFinalFormDemo = () => {
                                 </div>
                             )} />
                             <Field name="password" render={({ input, meta }) => (
-                                <div className="p-field">
+                                <div className="field">
                                     <span className="p-float-label">
                                         <Password id="password" {...input} toggleMask className={classNames({ 'p-invalid': isFormFieldValid(meta) })} header={passwordHeader} footer={passwordFooter} />
                                         <label htmlFor="password" className={classNames({ 'p-error': isFormFieldValid(meta) })}>Password*</label>
@@ -300,7 +300,7 @@ export const ReactFinalFormDemo = () => {
                                 </div>
                             )} />
                             <Field name="date" render={({ input }) => (
-                                <div className="p-field">
+                                <div className="field">
                                     <span className="p-float-label">
                                         <Calendar id="date" {...input} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />
                                         <label htmlFor="date">Birthday</label>
@@ -308,7 +308,7 @@ export const ReactFinalFormDemo = () => {
                                 </div>
                             )} />
                             <Field name="country" render={({ input }) => (
-                                <div className="p-field">
+                                <div className="field">
                                     <span className="p-float-label">
                                         <Dropdown id="country" {...input} options={countries} optionLabel="name" />
                                         <label htmlFor="country">Country</label>
@@ -316,13 +316,13 @@ export const ReactFinalFormDemo = () => {
                                 </div>
                             )} />
                             <Field name="accept" type="checkbox" render={({ input, meta }) => (
-                                <div className="p-field-checkbox">
+                                <div className="field-checkbox">
                                     <Checkbox inputId="accept" {...input} className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
                                     <label htmlFor="accept" className={classNames({ 'p-error': isFormFieldValid(meta) })}>I agree to the terms and conditions*</label>
                                 </div>
                             )} />
 
-                            <Button type="submit" label="Submit" className="p-mt-2" />
+                            <Button type="submit" label="Submit" className="mt-2" />
                         </form>
                     )} />
                 </div>
@@ -396,13 +396,13 @@ export const ReactFinalFormDemo = () => {
         return isFormFieldValid(meta) && <small className="p-error">{meta.error}</small>;
     };
 
-    const dialogFooter = <div className="p-d-flex p-jc-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false) } /></div>;
+    const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false) } /></div>;
     const passwordHeader = <h6>Pick a password</h6>;
     const passwordFooter = (
         <React.Fragment>
             <Divider />
-            <p className="p-mt-2">Suggestions</p>
-            <ul className="p-pl-2 p-ml-2 p-mt-0" style={{ lineHeight: '1.5' }}>
+            <p className="mt-2">Suggestions</p>
+            <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: '1.5' }}>
                 <li>At least one lowercase</li>
                 <li>At least one uppercase</li>
                 <li>At least one numeric</li>
@@ -414,7 +414,7 @@ export const ReactFinalFormDemo = () => {
     return (
         <div className="form-demo">
             <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
-                <div className="p-d-flex p-ai-center p-dir-col p-pt-6 p-px-3">
+                <div className="flex align-items-center flex-column pt-6 px-3">
                     <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
                     <h5>Registration Successful!</h5>
                     <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
@@ -423,13 +423,13 @@ export const ReactFinalFormDemo = () => {
                 </div>
             </Dialog>
 
-            <div className="p-d-flex p-jc-center">
+            <div className="flex justify-content-center">
                 <div className="card">
-                    <h5 className="p-text-center">Register</h5>
+                    <h5 className="text-center">Register</h5>
                     <Form onSubmit={onSubmit} initialValues={{ name: '', email: '', password: '', date: null, country: null, accept: false }} validate={validate} render={({ handleSubmit }) => (
                         <form onSubmit={handleSubmit} className="p-fluid">
                             <Field name="name" render={({ input, meta }) => (
-                                <div className="p-field">
+                                <div className="field">
                                     <span className="p-float-label">
                                         <InputText id="name" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
                                         <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid(meta) })}>Name*</label>
@@ -438,7 +438,7 @@ export const ReactFinalFormDemo = () => {
                                 </div>
                             )} />
                             <Field name="email" render={({ input, meta }) => (
-                                <div className="p-field">
+                                <div className="field">
                                     <span className="p-float-label p-input-icon-right">
                                         <i className="pi pi-envelope" />
                                         <InputText id="email" {...input} className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
@@ -448,7 +448,7 @@ export const ReactFinalFormDemo = () => {
                                 </div>
                             )} />
                             <Field name="password" render={({ input, meta }) => (
-                                <div className="p-field">
+                                <div className="field">
                                     <span className="p-float-label">
                                         <Password id="password" {...input} toggleMask className={classNames({ 'p-invalid': isFormFieldValid(meta) })} header={passwordHeader} footer={passwordFooter} />
                                         <label htmlFor="password" className={classNames({ 'p-error': isFormFieldValid(meta) })}>Password*</label>
@@ -457,7 +457,7 @@ export const ReactFinalFormDemo = () => {
                                 </div>
                             )} />
                             <Field name="date" render={({ input }) => (
-                                <div className="p-field">
+                                <div className="field">
                                     <span className="p-float-label">
                                         <Calendar id="date" {...input} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />
                                         <label htmlFor="date">Birthday</label>
@@ -465,7 +465,7 @@ export const ReactFinalFormDemo = () => {
                                 </div>
                             )} />
                             <Field name="country" render={({ input }) => (
-                                <div className="p-field">
+                                <div className="field">
                                     <span className="p-float-label">
                                         <Dropdown id="country" {...input} options={countries} optionLabel="name" />
                                         <label htmlFor="country">Country</label>
@@ -473,13 +473,13 @@ export const ReactFinalFormDemo = () => {
                                 </div>
                             )} />
                             <Field name="accept" type="checkbox" render={({ input, meta }) => (
-                                <div className="p-field-checkbox">
+                                <div className="field-checkbox">
                                     <Checkbox inputId="accept" {...input} className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
                                     <label htmlFor="accept" className={classNames({ 'p-error': isFormFieldValid(meta) })}>I agree to the terms and conditions*</label>
                                 </div>
                             )} />
 
-                            <Button type="submit" label="Submit" className="p-mt-2" />
+                            <Button type="submit" label="Submit" className="mt-2" />
                         </form>
                     )} />
                 </div>
@@ -500,7 +500,7 @@ export const ReactFinalFormDemo = () => {
 .form-demo .card form {
     margin-top: 2rem;
 }
-.form-demo .card .p-field {
+.form-demo .card .field {
     margin-bottom: 1.5rem;
 }
 @media screen and (max-width: 960px) {

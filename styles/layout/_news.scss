@@ -41,6 +41,7 @@
                 padding: 0 0.2rem;
                 margin-right: 0.3rem;
             }
+
         }
 
         img.layouts-news-mockup-image {
@@ -54,11 +55,6 @@
             padding: 0.4em .8em 0.4em 1em;
             font-weight: bold;
             border-radius: 3px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-            transition: background-color 0.15s;
             margin-left: 1rem;
             position: relative;
             z-index: 1;

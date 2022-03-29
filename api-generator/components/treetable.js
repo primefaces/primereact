@@ -336,6 +336,12 @@ const TreeTableProps = [
         description: 'Text to display when there is no data.'
     },
     {
+        name: 'rowHover',
+        type: 'boolean',
+        default: 'false',
+        description: 'When enabled, background of the rows change on hover..'
+    },
+    {
         name: 'showGridlines',
         type: 'boolean',
         default: 'false',

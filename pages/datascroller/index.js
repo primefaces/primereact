@@ -1,35 +1,28 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataScroller } from '../../components/lib/datascroller/DataScroller';
 import { Button } from '../../components/lib/button/Button';
 import { Rating } from '../../components/lib/rating/Rating';
 import { ProductService } from '../../service/ProductService';
-import { DataScrollerDoc } from '../../components/doc/datascroller';
+import DataScrollerDoc from '../../components/doc/datascroller';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 import getConfig from 'next/config';
 
-export default class DataScrollerDemo extends Component {
+const DataScrollerDemo = () => {
 
-    constructor(props) {
-        super(props);
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-        this.state = {
-            products: []
-        };
+    useEffect(() => {
+        productService.getProducts().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-        this.productService = new ProductService();
-        this.itemTemplate = this.itemTemplate.bind(this);
-        this.contextPath = getConfig().publicRuntimeConfig.contextPath;
-    }
 
-    componentDidMount() {
-        this.productService.getProducts().then(data => this.setState({ products: data }));
-    }
-
-    itemTemplate(data) {
+    const itemTemplate = (data) => {
         return (
             <div className="product-item">
-                <img src={`${this.contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
@@ -45,36 +38,36 @@ export default class DataScrollerDemo extends Component {
         );
     }
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React DataScroller Component</title>
-                    <meta name="description" content="DataScroller displays data with on demand loading using scroll." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataScroller</h1>
-                        <p>DataScroller displays data with on demand loading using scroll.</p>
-                    </div>
-
-                    <DocActions github="datascroller/index.js" />
+    return (
+        <div>
+            <Head>
+                <title>React DataScroller Component</title>
+                <meta name="description" content="DataScroller displays data with on demand loading using scroll." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>DataScroller</h1>
+                    <p>DataScroller displays data with on demand loading using scroll.</p>
                 </div>
 
-                <div className="content-section implementation">
-                    Demo is at the bottom of this page.
-                </div>
-
-                <DataScrollerDoc />
-
-                <div className="content-section implementation datascroller-demo">
-                    <div className="card">
-                        <DataScroller value={this.state.products} itemTemplate={this.itemTemplate}
-                            rows={5} buffer={0.4} header="List of Products" />
-                    </div>
-                </div>
-
+                <DocActions github="datascroller/index.js" />
             </div>
-        );
-    }
+
+            <div className="content-section implementation">
+                Demo is at the bottom of this page.
+            </div>
+
+            <DataScrollerDoc />
+
+            <div className="content-section implementation datascroller-demo">
+                <div className="card">
+                    <DataScroller value={products} itemTemplate={itemTemplate}
+                        rows={5} buffer={0.4} header="List of Products" />
+                </div>
+            </div>
+
+        </div>
+    );
 }
+
+export default DataScrollerDemo;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { classNames } from '../../components/lib/utils/ClassNames';
 import { DataTable } from '../../components/lib/datatable/DataTable';
 import { Column } from '../../components/lib/column/Column';
@@ -19,9 +19,9 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 import getConfig from 'next/config';
 
-export default class DataTableCrudDemo extends Component {
+const DataTableCrudDemo = () => {
 
-    emptyProduct = {
+    let emptyProduct = {
         id: null,
         name: '',
         image: null,
@@ -33,136 +33,93 @@ export default class DataTableCrudDemo extends Component {
         inventoryStatus: 'INSTOCK'
     };
 
-    constructor(props) {
-        super(props);
+    const [products, setProducts] = useState(null);
+    const [productDialog, setProductDialog] = useState(false);
+    const [deleteProductDialog, setDeleteProductDialog] = useState(false);
+    const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
+    const [product, setProduct] = useState(emptyProduct);
+    const [selectedProducts, setSelectedProducts] = useState(null);
+    const [submitted, setSubmitted] = useState(false);
+    const [globalFilter, setGlobalFilter] = useState(null);
+    const toast = useRef(null);
+    const dt = useRef(null);
+    const productService = new ProductService();
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-        this.state = {
-            products: null,
-            productDialog: false,
-            deleteProductDialog: false,
-            deleteProductsDialog: false,
-            product: this.emptyProduct,
-            selectedProducts: null,
-            submitted: false,
-            globalFilter: null
-        };
+    useEffect(() => {
+        productService.getProducts().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-        this.productService = new ProductService();
-        this.leftToolbarTemplate = this.leftToolbarTemplate.bind(this);
-        this.rightToolbarTemplate = this.rightToolbarTemplate.bind(this);
-        this.imageBodyTemplate = this.imageBodyTemplate.bind(this);
-        this.priceBodyTemplate = this.priceBodyTemplate.bind(this);
-        this.ratingBodyTemplate = this.ratingBodyTemplate.bind(this);
-        this.statusBodyTemplate = this.statusBodyTemplate.bind(this);
-        this.actionBodyTemplate = this.actionBodyTemplate.bind(this);
-
-        this.openNew = this.openNew.bind(this);
-        this.hideDialog = this.hideDialog.bind(this);
-        this.saveProduct = this.saveProduct.bind(this);
-        this.editProduct = this.editProduct.bind(this);
-        this.confirmDeleteProduct = this.confirmDeleteProduct.bind(this);
-        this.deleteProduct = this.deleteProduct.bind(this);
-        this.importCSV = this.importCSV.bind(this);
-        this.exportCSV = this.exportCSV.bind(this);
-        this.confirmDeleteSelected = this.confirmDeleteSelected.bind(this);
-        this.deleteSelectedProducts = this.deleteSelectedProducts.bind(this);
-        this.onCategoryChange = this.onCategoryChange.bind(this);
-        this.onInputChange = this.onInputChange.bind(this);
-        this.onInputNumberChange = this.onInputNumberChange.bind(this);
-        this.hideDeleteProductDialog = this.hideDeleteProductDialog.bind(this);
-        this.hideDeleteProductsDialog = this.hideDeleteProductsDialog.bind(this);
-        this.contextPath = getConfig().publicRuntimeConfig.contextPath;
-    }
-
-    componentDidMount() {
-        this.productService.getProducts().then(data => this.setState({ products: data }));
-    }
-
-    formatCurrency(value) {
+    const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     }
 
-    openNew() {
-        this.setState({
-            product: this.emptyProduct,
-            submitted: false,
-            productDialog: true
-        });
+    const openNew = () => {
+        setProduct(emptyProduct);
+        setSubmitted(false);
+        setProductDialog(true);
     }
 
-    hideDialog() {
-        this.setState({
-            submitted: false,
-            productDialog: false
-        });
+    const hideDialog = () => {
+        setSubmitted(false);
+        setProductDialog(false);
     }
 
-    hideDeleteProductDialog() {
-        this.setState({ deleteProductDialog: false });
+    const hideDeleteProductDialog = () => {
+        setDeleteProductDialog(false);
     }
 
-    hideDeleteProductsDialog() {
-        this.setState({ deleteProductsDialog: false });
+    const hideDeleteProductsDialog = () => {
+        setDeleteProductsDialog(false);
     }
 
-    saveProduct() {
-        let state = { submitted: true };
+    const saveProduct = () => {
+        setSubmitted(true);
 
-        if (this.state.product.name.trim()) {
-            let products = [...this.state.products];
-            let product = { ...this.state.product };
-            if (this.state.product.id) {
-                const index = this.findIndexById(this.state.product.id);
+        if (product.name.trim()) {
+            let _products = [...products];
+            let _product = {...product};
+            if (product.id) {
+                const index = findIndexById(product.id);
 
-                products[index] = product;
-                this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
+                _products[index] = _product;
+                toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             }
             else {
-                product.id = this.createId();
-                product.image = 'product-placeholder.svg';
-                products.push(product);
-                this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
+                _product.id = createId();
+                _product.image = 'product-placeholder.svg';
+                _products.push(_product);
+                toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
 
-            state = {
-                ...state,
-                products,
-                productDialog: false,
-                product: this.emptyProduct
-            };
+            setProducts(_products);
+            setProductDialog(false);
+            setProduct(emptyProduct);
         }
-
-        this.setState(state);
     }
 
-    editProduct(product) {
-        this.setState({
-            product: { ...product },
-            productDialog: true
-        });
+    const editProduct = (product) => {
+        setProduct({...product});
+        setProductDialog(true);
     }
 
-    confirmDeleteProduct(product) {
-        this.setState({
-            product,
-            deleteProductDialog: true
-        });
+    const confirmDeleteProduct = (product) => {
+        setProduct(product);
+        setDeleteProductDialog(true);
     }
 
-    deleteProduct() {
-        let products = this.state.products.filter(val => val.id !== this.state.product.id);
-        this.setState({
-            products,
-            deleteProductDialog: false,
-            product: this.emptyProduct
-        });
-        this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
+    const deleteProduct = () => {
+        let _products = products.filter(val => val.id !== product.id);
+        setProducts(_products);
+        setDeleteProductDialog(false);
+        setProduct(emptyProduct);
+        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
     }
 
-    findIndexById(id) {
+    const findIndexById = (id) => {
         let index = -1;
-        for (let i = 0; i < this.state.products.length; i++) {
-            if (this.state.products[i].id === id) {
+        for (let i = 0; i < products.length; i++) {
+            if (products[i].id === id) {
                 index = i;
                 break;
             }
@@ -171,7 +128,7 @@ export default class DataTableCrudDemo extends Component {
         return index;
     }
 
-    createId() {
+    const createId = () => {
         let id = '';
         let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         for (let i = 0; i < 5; i++) {
@@ -180,12 +137,12 @@ export default class DataTableCrudDemo extends Component {
         return id;
     }
 
-    importCSV(e) {
+    const importCSV = (e) => {
         const file = e.files[0];
         const reader = new FileReader();
         reader.onload = (e) => {
             const csv = e.target.result;
-            const data = csv.split('\n');
+            const data = csv.split('\\n');
 
             // Prepare DataTable
             const cols = data[0].replace(/['"]+/g, '').split(',');
@@ -200,129 +157,126 @@ export default class DataTableCrudDemo extends Component {
                     return obj;
                 }, {});
 
-                processedData['id'] = this.createId();
+                processedData['id'] = createId();
                 return processedData;
             });
 
-            const products = [...this.state.products, ...importedData];
+            const _products = [...products, ...importedData];
 
-            this.setState({ products });
+            setProducts(_products);
         };
 
         reader.readAsText(file, 'UTF-8');
     }
 
-    exportCSV() {
-        this.dt.exportCSV();
+    const exportCSV = () => {
+        dt.current.exportCSV();
     }
 
-    confirmDeleteSelected() {
-        this.setState({ deleteProductsDialog: true });
+    const confirmDeleteSelected = () => {
+        setDeleteProductsDialog(true);
     }
 
-    deleteSelectedProducts() {
-        let products = this.state.products.filter(val => !this.state.selectedProducts.includes(val));
-        this.setState({
-            products,
-            deleteProductsDialog: false,
-            selectedProducts: null
-        });
-        this.toast.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
+    const deleteSelectedProducts = () => {
+        let _products = products.filter(val => !selectedProducts.includes(val));
+        setProducts(_products);
+        setDeleteProductsDialog(false);
+        setSelectedProducts(null);
+        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
     }
 
-    onCategoryChange(e) {
-        let product = { ...this.state.product };
-        product['category'] = e.value;
-        this.setState({ product });
+    const onCategoryChange = (e) => {
+        let _product = {...product};
+        _product['category'] = e.value;
+        setProduct(_product);
     }
 
-    onInputChange(e, name) {
+    const onInputChange = (e, name) => {
         const val = (e.target && e.target.value) || '';
-        let product = { ...this.state.product };
-        product[`${name}`] = val;
+        let _product = {...product};
+        _product[`${name}`] = val;
 
-        this.setState({ product });
+        setProduct(_product);
     }
 
-    onInputNumberChange(e, name) {
+    const onInputNumberChange = (e, name) => {
         const val = e.value || 0;
-        let product = { ...this.state.product };
-        product[`${name}`] = val;
+        let _product = {...product};
+        _product[`${name}`] = val;
 
-        this.setState({ product });
+        setProduct(_product);
     }
 
-    leftToolbarTemplate() {
+    const leftToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <Button label="New" icon="pi pi-plus" className="p-button-success p-mr-2" onClick={this.openNew} />
-                <Button label="Delete" icon="pi pi-trash" className="p-button-danger" onClick={this.confirmDeleteSelected} disabled={!this.state.selectedProducts || !this.state.selectedProducts.length} />
+                <Button label="New" icon="pi pi-plus" className="p-button-success mr-2" onClick={openNew} />
+                <Button label="Delete" icon="pi pi-trash" className="p-button-danger" onClick={confirmDeleteSelected} disabled={!selectedProducts || !selectedProducts.length} />
             </React.Fragment>
         )
     }
 
-    rightToolbarTemplate() {
+    const rightToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" name="demo[]" auto url="./upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={this.importCSV} />
-                <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={this.exportCSV} />
+                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="mr-2 inline-block" onUpload={importCSV} />
+                <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
             </React.Fragment>
         )
     }
 
-    imageBodyTemplate(rowData) {
-        return <img src={`${this.contextPath}/images/product/${rowData.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
+    const imageBodyTemplate = (rowData) => {
+        return <img src={`images/product/${rowData.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
     }
 
-    priceBodyTemplate(rowData) {
-        return this.formatCurrency(rowData.price);
+    const priceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.price);
     }
 
-    ratingBodyTemplate(rowData) {
+    const ratingBodyTemplate = (rowData) => {
         return <Rating value={rowData.rating} readOnly cancel={false} />;
     }
 
-    statusBodyTemplate(rowData) {
+    const statusBodyTemplate = (rowData) => {
         return <span className={`product-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>;
     }
 
-    actionBodyTemplate(rowData) {
+    const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={() => this.editProduct(rowData)} />
-                <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => this.confirmDeleteProduct(rowData)} />
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editProduct(rowData)} />
+                <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => confirmDeleteProduct(rowData)} />
             </React.Fragment>
         );
     }
 
-    render() {
-        const header = (
-            <div className="table-header">
-                <h5 className="p-mx-0 p-my-1">Manage Products</h5>
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
-                    <InputText type="search" onInput={(e) => this.setState({ globalFilter: e.target.value })} placeholder="Search..." />
-                </span>
-            </div>
-        );
-        const productDialogFooter = (
-            <React.Fragment>
-                <Button label="Cancel" icon="pi pi-times" className="p-button-text" onClick={this.hideDialog} />
-                <Button label="Save" icon="pi pi-check" className="p-button-text" onClick={this.saveProduct} />
-            </React.Fragment>
-        );
-        const deleteProductDialogFooter = (
-            <React.Fragment>
-                <Button label="No" icon="pi pi-times" className="p-button-text" onClick={this.hideDeleteProductDialog} />
-                <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={this.deleteProduct} />
-            </React.Fragment>
-        );
-        const deleteProductsDialogFooter = (
-            <React.Fragment>
-                <Button label="No" icon="pi pi-times" className="p-button-text" onClick={this.hideDeleteProductsDialog} />
-                <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={this.deleteSelectedProducts} />
-            </React.Fragment>
-        );
+    const header = (
+        <div className="table-header">
+            <h5 className="mx-0 my-1">Manage Products</h5>
+            <span className="p-input-icon-left">
+                <i className="pi pi-search" />
+                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
+            </span>
+        </div>
+    );
+    const productDialogFooter = (
+        <React.Fragment>
+            <Button label="Cancel" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />
+            <Button label="Save" icon="pi pi-check" className="p-button-text" onClick={saveProduct} />
+        </React.Fragment>
+    );
+    const deleteProductDialogFooter = (
+        <React.Fragment>
+            <Button label="No" icon="pi pi-times" className="p-button-text" onClick={hideDeleteProductDialog} />
+            <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={deleteProduct} />
+        </React.Fragment>
+    );
+    const deleteProductsDialogFooter = (
+        <React.Fragment>
+            <Button label="No" icon="pi pi-times" className="p-button-text" onClick={hideDeleteProductsDialog} />
+            <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={deleteSelectedProducts} />
+        </React.Fragment>
+    );
 
         return (
             <div>
@@ -340,85 +294,85 @@ export default class DataTableCrudDemo extends Component {
                 </div>
 
                 <div className="content-section implementation datatable-crud-demo">
-                    <Toast ref={(el) => this.toast = el} />
+                    <Toast ref={toast} />
 
                     <div className="card">
-                        <Toolbar className="p-mb-4" left={this.leftToolbarTemplate} right={this.rightToolbarTemplate}></Toolbar>
+                        <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
 
-                        <DataTable ref={(el) => this.dt = el} value={this.state.products} selection={this.state.selectedProducts} onSelectionChange={(e) => this.setState({ selectedProducts: e.value })}
+                        <DataTable ref={dt} value={products} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)}
                             dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-                            globalFilter={this.state.globalFilter} header={header} responsiveLayout="scroll">
+                            globalFilter={globalFilter} header={header} responsiveLayout="scroll">
                             <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
                             <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column>
                             <Column field="name" header="Name" sortable style={{ minWidth: '16rem' }}></Column>
-                            <Column field="image" header="Image" body={this.imageBodyTemplate}></Column>
-                            <Column field="price" header="Price" body={this.priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
+                            <Column field="image" header="Image" body={imageBodyTemplate}></Column>
+                            <Column field="price" header="Price" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
                             <Column field="category" header="Category" sortable style={{ minWidth: '10rem' }}></Column>
-                            <Column field="rating" header="Reviews" body={this.ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
-                            <Column field="inventoryStatus" header="Status" body={this.statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
-                            <Column body={this.actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
+                            <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                            <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                            <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
                         </DataTable>
                     </div>
 
-                    <Dialog visible={this.state.productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={this.hideDialog}>
-                        {this.state.product.image && <img src={`${this.contextPath}/images/product/${this.state.product.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={this.state.product.image} className="product-image p-d-block p-m-auto p-pb-3" />}
-                        <div className="p-field">
+                    <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
+                        {product.image && <img src={`${contextPath}/images/product/${product.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image block m-auto pb-3" />}
+                        <div className="field">
                             <label htmlFor="name">Name</label>
-                            <InputText id="name" value={this.state.product.name} onChange={(e) => this.onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.name })} />
-                            {this.state.submitted && !this.state.product.name && <small className="p-error">Name is required.</small>}
+                            <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
+                            {submitted && !product.name && <small className="p-error">Name is required.</small>}
                         </div>
-                        <div className="p-field">
+                        <div className="field">
                             <label htmlFor="description">Description</label>
-                            <InputTextarea id="description" value={this.state.product.description} onChange={(e) => this.onInputChange(e, 'description')} required rows={3} cols={20} />
+                            <InputTextarea id="description" value={product.description} onChange={(e) => onInputChange(e, 'description')} required rows={3} cols={20} />
                         </div>
 
-                        <div className="p-field">
-                            <label className="p-mb-3">Category</label>
-                            <div className="p-formgrid p-grid">
-                                <div className="p-field-radiobutton p-col-6">
-                                    <RadioButton inputId="category1" name="category" value="Accessories" onChange={this.onCategoryChange} checked={this.state.product.category === 'Accessories'} />
+                        <div className="field">
+                            <label className="mb-3">Category</label>
+                            <div className="formgrid grid">
+                                <div className="field-radiobutton col-6">
+                                    <RadioButton inputId="category1" name="category" value="Accessories" onChange={onCategoryChange} checked={product.category === 'Accessories'} />
                                     <label htmlFor="category1">Accessories</label>
                                 </div>
-                                <div className="p-field-radiobutton p-col-6">
-                                    <RadioButton inputId="category2" name="category" value="Clothing" onChange={this.onCategoryChange} checked={this.state.product.category === 'Clothing'} />
+                                <div className="field-radiobutton col-6">
+                                    <RadioButton inputId="category2" name="category" value="Clothing" onChange={onCategoryChange} checked={product.category === 'Clothing'} />
                                     <label htmlFor="category2">Clothing</label>
                                 </div>
-                                <div className="p-field-radiobutton p-col-6">
-                                    <RadioButton inputId="category3" name="category" value="Electronics" onChange={this.onCategoryChange} checked={this.state.product.category === 'Electronics'} />
+                                <div className="field-radiobutton col-6">
+                                    <RadioButton inputId="category3" name="category" value="Electronics" onChange={onCategoryChange} checked={product.category === 'Electronics'} />
                                     <label htmlFor="category3">Electronics</label>
                                 </div>
-                                <div className="p-field-radiobutton p-col-6">
-                                    <RadioButton inputId="category4" name="category" value="Fitness" onChange={this.onCategoryChange} checked={this.state.product.category === 'Fitness'} />
+                                <div className="field-radiobutton col-6">
+                                    <RadioButton inputId="category4" name="category" value="Fitness" onChange={onCategoryChange} checked={product.category === 'Fitness'} />
                                     <label htmlFor="category4">Fitness</label>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="p-formgrid p-grid">
-                            <div className="p-field p-col">
+                        <div className="formgrid grid">
+                            <div className="field col">
                                 <label htmlFor="price">Price</label>
-                                <InputNumber id="price" value={this.state.product.price} onValueChange={(e) => this.onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
+                                <InputNumber id="price" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
                             </div>
-                            <div className="p-field p-col">
+                            <div className="field col">
                                 <label htmlFor="quantity">Quantity</label>
-                                <InputNumber id="quantity" value={this.state.product.quantity} onValueChange={(e) => this.onInputNumberChange(e, 'quantity')} integeronly />
+                                <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
                             </div>
                         </div>
                     </Dialog>
 
-                    <Dialog visible={this.state.deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={this.hideDeleteProductDialog}>
+                    <Dialog visible={deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
                         <div className="confirmation-content">
-                            <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
-                            {this.state.product && <span>Are you sure you want to delete <b>{this.state.product.name}</b>?</span>}
+                            <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
+                            {product && <span>Are you sure you want to delete <b>{product.name}</b>?</span>}
                         </div>
                     </Dialog>
 
-                    <Dialog visible={this.state.deleteProductsDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={this.hideDeleteProductsDialog}>
+                    <Dialog visible={deleteProductsDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
                         <div className="confirmation-content">
-                            <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
-                            {this.state.product && <span>Are you sure you want to delete the selected products?</span>}
+                            <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
+                            {product && <span>Are you sure you want to delete the selected products?</span>}
                         </div>
                     </Dialog>
                 </div>
@@ -426,18 +380,16 @@ export default class DataTableCrudDemo extends Component {
                 <DataTableCrudDoc />
             </div>
         );
-    }
 }
 
-export class DataTableCrudDoc extends Component {
+export default  DataTableCrudDemo;
 
-    constructor(props) {
-        super(props);
+export const DataTableCrudDoc = memo(() => {
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
@@ -690,7 +642,7 @@ export class DataTableCrudDemo extends Component {
     leftToolbarTemplate() {
         return (
             <React.Fragment>
-                <Button label="New" icon="pi pi-plus" className="p-button-success p-mr-2" onClick={this.openNew} />
+                <Button label="New" icon="pi pi-plus" className="p-button-success mr-2" onClick={this.openNew} />
                 <Button label="Delete" icon="pi pi-trash" className="p-button-danger" onClick={this.confirmDeleteSelected} disabled={!this.state.selectedProducts || !this.state.selectedProducts.length} />
             </React.Fragment>
         )
@@ -699,7 +651,7 @@ export class DataTableCrudDemo extends Component {
     rightToolbarTemplate() {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={this.importCSV} />
+                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="mr-2 inline-block" onUpload={this.importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={this.exportCSV} />
             </React.Fragment>
         )
@@ -724,7 +676,7 @@ export class DataTableCrudDemo extends Component {
     actionBodyTemplate(rowData) {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={() => this.editProduct(rowData)} />
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => this.editProduct(rowData)} />
                 <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => this.confirmDeleteProduct(rowData)} />
             </React.Fragment>
         );
@@ -733,7 +685,7 @@ export class DataTableCrudDemo extends Component {
     render() {
         const header = (
             <div className="table-header">
-                <h5 className="p-mx-0 p-my-1">Manage Products</h5>
+                <h5 className="mx-0 my-1">Manage Products</h5>
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
                     <InputText type="search" onInput={(e) => this.setState({ globalFilter: e.target.value })} placeholder="Search..." />
@@ -764,7 +716,7 @@ export class DataTableCrudDemo extends Component {
                 <Toast ref={(el) => this.toast = el} />
 
                 <div className="card">
-                    <Toolbar className="p-mb-4" left={this.leftToolbarTemplate} right={this.rightToolbarTemplate}></Toolbar>
+                    <Toolbar className="mb-4" left={this.leftToolbarTemplate} right={this.rightToolbarTemplate}></Toolbar>
 
                     <DataTable ref={(el) => this.dt = el} value={this.state.products} selection={this.state.selectedProducts} onSelectionChange={(e) => this.setState({ selectedProducts: e.value })}
                         dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
@@ -784,45 +736,45 @@ export class DataTableCrudDemo extends Component {
                 </div>
 
                 <Dialog visible={this.state.productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={this.hideDialog}>
-                    {this.state.product.image && <img src={\`images/product/\${this.state.product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={this.state.product.image} className="product-image p-d-block p-m-auto p-pb-3" />}
-                    <div className="p-field">
+                    {this.state.product.image && <img src={\`images/product/\${this.state.product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={this.state.product.image} className="product-image block m-auto pb-3" />}
+                    <div className="field">
                         <label htmlFor="name">Name</label>
                         <InputText id="name" value={this.state.product.name} onChange={(e) => this.onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': this.state.submitted && !this.state.product.name })} />
                         {this.state.submitted && !this.state.product.name && <small className="p-error">Name is required.</small>}
                     </div>
-                    <div className="p-field">
+                    <div className="field">
                         <label htmlFor="description">Description</label>
                         <InputTextarea id="description" value={this.state.product.description} onChange={(e) => this.onInputChange(e, 'description')} required rows={3} cols={20} />
                     </div>
 
-                    <div className="p-field">
-                        <label className="p-mb-3">Category</label>
-                        <div className="p-formgrid p-grid">
-                            <div className="p-field-radiobutton p-col-6">
+                    <div className="field">
+                        <label className="mb-3">Category</label>
+                        <div className="formgrid grid">
+                            <div className="field-radiobutton col-6">
                                 <RadioButton inputId="category1" name="category" value="Accessories" onChange={this.onCategoryChange} checked={this.state.product.category === 'Accessories'} />
                                 <label htmlFor="category1">Accessories</label>
                             </div>
-                            <div className="p-field-radiobutton p-col-6">
+                            <div className="field-radiobutton col-6">
                                 <RadioButton inputId="category2" name="category" value="Clothing" onChange={this.onCategoryChange} checked={this.state.product.category === 'Clothing'} />
                                 <label htmlFor="category2">Clothing</label>
                             </div>
-                            <div className="p-field-radiobutton p-col-6">
+                            <div className="field-radiobutton col-6">
                                 <RadioButton inputId="category3" name="category" value="Electronics" onChange={this.onCategoryChange} checked={this.state.product.category === 'Electronics'} />
                                 <label htmlFor="category3">Electronics</label>
                             </div>
-                            <div className="p-field-radiobutton p-col-6">
+                            <div className="field-radiobutton col-6">
                                 <RadioButton inputId="category4" name="category" value="Fitness" onChange={this.onCategoryChange} checked={this.state.product.category === 'Fitness'} />
                                 <label htmlFor="category4">Fitness</label>
                             </div>
                         </div>
                     </div>
 
-                    <div className="p-formgrid p-grid">
-                        <div className="p-field p-col">
+                    <div className="formgrid grid">
+                        <div className="field col">
                             <label htmlFor="price">Price</label>
                             <InputNumber id="price" value={this.state.product.price} onValueChange={(e) => this.onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
                         </div>
-                        <div className="p-field p-col">
+                        <div className="field col">
                             <label htmlFor="quantity">Quantity</label>
                             <InputNumber id="quantity" value={this.state.product.quantity} onValueChange={(e) => this.onInputNumberChange(e, 'quantity')} integeronly />
                         </div>
@@ -831,14 +783,14 @@ export class DataTableCrudDemo extends Component {
 
                 <Dialog visible={this.state.deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={this.hideDeleteProductDialog}>
                     <div className="confirmation-content">
-                        <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem'}} />
+                        <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem'}} />
                         {this.state.product && <span>Are you sure you want to delete <b>{this.state.product.name}</b>?</span>}
                     </div>
                 </Dialog>
 
                 <Dialog visible={this.state.deleteProductsDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={this.hideDeleteProductsDialog}>
                     <div className="confirmation-content">
-                        <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem'}} />
+                        <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem'}} />
                         {this.state.product && <span>Are you sure you want to delete the selected products?</span>}
                     </div>
                 </Dialog>
@@ -847,10 +799,10 @@ export class DataTableCrudDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect, useRef } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
@@ -1058,7 +1010,7 @@ const DataTableCrudDemo = () => {
     const leftToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <Button label="New" icon="pi pi-plus" className="p-button-success p-mr-2" onClick={openNew} />
+                <Button label="New" icon="pi pi-plus" className="p-button-success mr-2" onClick={openNew} />
                 <Button label="Delete" icon="pi pi-trash" className="p-button-danger" onClick={confirmDeleteSelected} disabled={!selectedProducts || !selectedProducts.length} />
             </React.Fragment>
         )
@@ -1067,7 +1019,7 @@ const DataTableCrudDemo = () => {
     const rightToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={importCSV} />
+                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="mr-2 inline-block" onUpload={importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
             </React.Fragment>
         )
@@ -1092,7 +1044,7 @@ const DataTableCrudDemo = () => {
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={() => editProduct(rowData)} />
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editProduct(rowData)} />
                 <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => confirmDeleteProduct(rowData)} />
             </React.Fragment>
         );
@@ -1100,7 +1052,7 @@ const DataTableCrudDemo = () => {
 
     const header = (
         <div className="table-header">
-            <h5 className="p-mx-0 p-my-1">Manage Products</h5>
+            <h5 className="mx-0 my-1">Manage Products</h5>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
@@ -1131,7 +1083,7 @@ const DataTableCrudDemo = () => {
             <Toast ref={toast} />
 
             <div className="card">
-                <Toolbar className="p-mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
 
                 <DataTable ref={dt} value={products} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)}
                     dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
@@ -1151,45 +1103,45 @@ const DataTableCrudDemo = () => {
             </div>
 
             <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-                {product.image && <img src={\`images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image p-d-block p-m-auto p-pb-3" />}
-                <div className="p-field">
+                {product.image && <img src={\`images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image block m-auto pb-3" />}
+                <div className="field">
                     <label htmlFor="name">Name</label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
                     {submitted && !product.name && <small className="p-error">Name is required.</small>}
                 </div>
-                <div className="p-field">
+                <div className="field">
                     <label htmlFor="description">Description</label>
                     <InputTextarea id="description" value={product.description} onChange={(e) => onInputChange(e, 'description')} required rows={3} cols={20} />
                 </div>
 
-                <div className="p-field">
-                    <label className="p-mb-3">Category</label>
-                    <div className="p-formgrid p-grid">
-                        <div className="p-field-radiobutton p-col-6">
+                <div className="field">
+                    <label className="mb-3">Category</label>
+                    <div className="formgrid grid">
+                        <div className="field-radiobutton col-6">
                             <RadioButton inputId="category1" name="category" value="Accessories" onChange={onCategoryChange} checked={product.category === 'Accessories'} />
                             <label htmlFor="category1">Accessories</label>
                         </div>
-                        <div className="p-field-radiobutton p-col-6">
+                        <div className="field-radiobutton col-6">
                             <RadioButton inputId="category2" name="category" value="Clothing" onChange={onCategoryChange} checked={product.category === 'Clothing'} />
                             <label htmlFor="category2">Clothing</label>
                         </div>
-                        <div className="p-field-radiobutton p-col-6">
+                        <div className="field-radiobutton col-6">
                             <RadioButton inputId="category3" name="category" value="Electronics" onChange={onCategoryChange} checked={product.category === 'Electronics'} />
                             <label htmlFor="category3">Electronics</label>
                         </div>
-                        <div className="p-field-radiobutton p-col-6">
+                        <div className="field-radiobutton col-6">
                             <RadioButton inputId="category4" name="category" value="Fitness" onChange={onCategoryChange} checked={product.category === 'Fitness'} />
                             <label htmlFor="category4">Fitness</label>
                         </div>
                     </div>
                 </div>
 
-                <div className="p-formgrid p-grid">
-                    <div className="p-field p-col">
+                <div className="formgrid grid">
+                    <div className="field col">
                         <label htmlFor="price">Price</label>
                         <InputNumber id="price" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
                     </div>
-                    <div className="p-field p-col">
+                    <div className="field col">
                         <label htmlFor="quantity">Quantity</label>
                         <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
                     </div>
@@ -1198,14 +1150,14 @@ const DataTableCrudDemo = () => {
 
             <Dialog visible={deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
                 <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem'}} />
+                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem'}} />
                     {product && <span>Are you sure you want to delete <b>{product.name}</b>?</span>}
                 </div>
             </Dialog>
 
             <Dialog visible={deleteProductsDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
                 <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem'}} />
+                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem'}} />
                     {product && <span>Are you sure you want to delete the selected products?</span>}
                 </div>
             </Dialog>
@@ -1213,10 +1165,10 @@ const DataTableCrudDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect, useRef } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
@@ -1424,7 +1376,7 @@ const DataTableCrudDemo = () => {
     const leftToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <Button label="New" icon="pi pi-plus" className="p-button-success p-mr-2" onClick={openNew} />
+                <Button label="New" icon="pi pi-plus" className="p-button-success mr-2" onClick={openNew} />
                 <Button label="Delete" icon="pi pi-trash" className="p-button-danger" onClick={confirmDeleteSelected} disabled={!selectedProducts || !selectedProducts.length} />
             </React.Fragment>
         )
@@ -1433,7 +1385,7 @@ const DataTableCrudDemo = () => {
     const rightToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={importCSV} />
+                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="mr-2 inline-block" onUpload={importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
             </React.Fragment>
         )
@@ -1458,7 +1410,7 @@ const DataTableCrudDemo = () => {
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={() => editProduct(rowData)} />
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editProduct(rowData)} />
                 <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => confirmDeleteProduct(rowData)} />
             </React.Fragment>
         );
@@ -1466,7 +1418,7 @@ const DataTableCrudDemo = () => {
 
     const header = (
         <div className="table-header">
-            <h5 className="p-mx-0 p-my-1">Manage Products</h5>
+            <h5 className="mx-0 my-1">Manage Products</h5>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
@@ -1497,7 +1449,7 @@ const DataTableCrudDemo = () => {
             <Toast ref={toast} />
 
             <div className="card">
-                <Toolbar className="p-mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
 
                 <DataTable ref={dt} value={products} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)}
                     dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
@@ -1517,45 +1469,45 @@ const DataTableCrudDemo = () => {
             </div>
 
             <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-                {product.image && <img src={\`images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image p-d-block p-m-auto p-pb-3" />}
-                <div className="p-field">
+                {product.image && <img src={\`images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image block m-auto pb-3" />}
+                <div className="field">
                     <label htmlFor="name">Name</label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
                     {submitted && !product.name && <small className="p-error">Name is required.</small>}
                 </div>
-                <div className="p-field">
+                <div className="field">
                     <label htmlFor="description">Description</label>
                     <InputTextarea id="description" value={product.description} onChange={(e) => onInputChange(e, 'description')} required rows={3} cols={20} />
                 </div>
 
-                <div className="p-field">
-                    <label className="p-mb-3">Category</label>
-                    <div className="p-formgrid p-grid">
-                        <div className="p-field-radiobutton p-col-6">
+                <div className="field">
+                    <label className="mb-3">Category</label>
+                    <div className="formgrid grid">
+                        <div className="field-radiobutton col-6">
                             <RadioButton inputId="category1" name="category" value="Accessories" onChange={onCategoryChange} checked={product.category === 'Accessories'} />
                             <label htmlFor="category1">Accessories</label>
                         </div>
-                        <div className="p-field-radiobutton p-col-6">
+                        <div className="field-radiobutton col-6">
                             <RadioButton inputId="category2" name="category" value="Clothing" onChange={onCategoryChange} checked={product.category === 'Clothing'} />
                             <label htmlFor="category2">Clothing</label>
                         </div>
-                        <div className="p-field-radiobutton p-col-6">
+                        <div className="field-radiobutton col-6">
                             <RadioButton inputId="category3" name="category" value="Electronics" onChange={onCategoryChange} checked={product.category === 'Electronics'} />
                             <label htmlFor="category3">Electronics</label>
                         </div>
-                        <div className="p-field-radiobutton p-col-6">
+                        <div className="field-radiobutton col-6">
                             <RadioButton inputId="category4" name="category" value="Fitness" onChange={onCategoryChange} checked={product.category === 'Fitness'} />
                             <label htmlFor="category4">Fitness</label>
                         </div>
                     </div>
                 </div>
 
-                <div className="p-formgrid p-grid">
-                    <div className="p-field p-col">
+                <div className="formgrid grid">
+                    <div className="field col">
                         <label htmlFor="price">Price</label>
                         <InputNumber id="price" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
                     </div>
-                    <div className="p-field p-col">
+                    <div className="field col">
                         <label htmlFor="quantity">Quantity</label>
                         <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
                     </div>
@@ -1564,14 +1516,14 @@ const DataTableCrudDemo = () => {
 
             <Dialog visible={deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
                 <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem'}} />
+                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem'}} />
                     {product && <span>Are you sure you want to delete <b>{product.name}</b>?</span>}
                 </div>
             </Dialog>
 
             <Dialog visible={deleteProductsDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
                 <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem'}} />
+                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem'}} />
                     {product && <span>Are you sure you want to delete the selected products?</span>}
                 </div>
             </Dialog>
@@ -1580,9 +1532,9 @@ const DataTableCrudDemo = () => {
 }
                 `
             },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./DataTableDemo.css" />
         <script src="./ProductService.js"></script>
 
@@ -1604,7 +1556,7 @@ const DataTableCrudDemo = () => {
         <script src="https://unpkg.com/primereact/radiobutton/radiobutton.min.js"></script>
         <script src="https://unpkg.com/primereact/inputnumber/inputnumber.min.js"></script>
         <script src="https://unpkg.com/primereact/dialog/dialog.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState, useRef } = React;
 const { classNames } = primereact.core;
 const { Column } = primereact.column;
@@ -1810,7 +1762,7 @@ const DataTableCrudDemo = () => {
     const leftToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <Button label="New" icon="pi pi-plus" className="p-button-success p-mr-2" onClick={openNew} />
+                <Button label="New" icon="pi pi-plus" className="p-button-success mr-2" onClick={openNew} />
                 <Button label="Delete" icon="pi pi-trash" className="p-button-danger" onClick={confirmDeleteSelected} disabled={!selectedProducts || !selectedProducts.length} />
             </React.Fragment>
         )
@@ -1819,7 +1771,7 @@ const DataTableCrudDemo = () => {
     const rightToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" onUpload={importCSV} />
+                <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="mr-2 inline-block" onUpload={importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
             </React.Fragment>
         )
@@ -1844,7 +1796,7 @@ const DataTableCrudDemo = () => {
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={() => editProduct(rowData)} />
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editProduct(rowData)} />
                 <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => confirmDeleteProduct(rowData)} />
             </React.Fragment>
         );
@@ -1852,7 +1804,7 @@ const DataTableCrudDemo = () => {
 
     const header = (
         <div className="table-header">
-            <h5 className="p-mx-0 p-my-1">Manage Products</h5>
+            <h5 className="mx-0 my-1">Manage Products</h5>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
@@ -1883,7 +1835,7 @@ const DataTableCrudDemo = () => {
             <Toast ref={toast} />
 
             <div className="card">
-                <Toolbar className="p-mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
 
                 <DataTable ref={dt} value={products} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)}
                     dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
@@ -1903,45 +1855,45 @@ const DataTableCrudDemo = () => {
             </div>
 
             <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-                {product.image && <img src={\`images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image p-d-block p-m-auto p-pb-3" />}
-                <div className="p-field">
+                {product.image && <img src={\`images/product/\${product.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image block m-auto pb-3" />}
+                <div className="field">
                     <label htmlFor="name">Name</label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
                     {submitted && !product.name && <small className="p-error">Name is required.</small>}
                 </div>
-                <div className="p-field">
+                <div className="field">
                     <label htmlFor="description">Description</label>
                     <InputTextarea id="description" value={product.description} onChange={(e) => onInputChange(e, 'description')} required rows={3} cols={20} />
                 </div>
 
-                <div className="p-field">
-                    <label className="p-mb-3">Category</label>
-                    <div className="p-formgrid p-grid">
-                        <div className="p-field-radiobutton p-col-6">
+                <div className="field">
+                    <label className="mb-3">Category</label>
+                    <div className="formgrid grid">
+                        <div className="field-radiobutton col-6">
                             <RadioButton inputId="category1" name="category" value="Accessories" onChange={onCategoryChange} checked={product.category === 'Accessories'} />
                             <label htmlFor="category1">Accessories</label>
                         </div>
-                        <div className="p-field-radiobutton p-col-6">
+                        <div className="field-radiobutton col-6">
                             <RadioButton inputId="category2" name="category" value="Clothing" onChange={onCategoryChange} checked={product.category === 'Clothing'} />
                             <label htmlFor="category2">Clothing</label>
                         </div>
-                        <div className="p-field-radiobutton p-col-6">
+                        <div className="field-radiobutton col-6">
                             <RadioButton inputId="category3" name="category" value="Electronics" onChange={onCategoryChange} checked={product.category === 'Electronics'} />
                             <label htmlFor="category3">Electronics</label>
                         </div>
-                        <div className="p-field-radiobutton p-col-6">
+                        <div className="field-radiobutton col-6">
                             <RadioButton inputId="category4" name="category" value="Fitness" onChange={onCategoryChange} checked={product.category === 'Fitness'} />
                             <label htmlFor="category4">Fitness</label>
                         </div>
                     </div>
                 </div>
 
-                <div className="p-formgrid p-grid">
-                    <div className="p-field p-col">
+                <div className="formgrid grid">
+                    <div className="field col">
                         <label htmlFor="price">Price</label>
                         <InputNumber id="price" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
                     </div>
-                    <div className="p-field p-col">
+                    <div className="field col">
                         <label htmlFor="quantity">Quantity</label>
                         <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
                     </div>
@@ -1950,14 +1902,14 @@ const DataTableCrudDemo = () => {
 
             <Dialog visible={deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
                 <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem'}} />
+                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem'}} />
                     {product && <span>Are you sure you want to delete <b>{product.name}</b>?</span>}
                 </div>
             </Dialog>
 
             <Dialog visible={deleteProductsDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
                 <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem'}} />
+                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem'}} />
                     {product && <span>Are you sure you want to delete the selected products?</span>}
                 </div>
             </Dialog>
@@ -1965,12 +1917,12 @@ const DataTableCrudDemo = () => {
     );
 }
                 `
-            }
-        };
+        }
+    };
 
-        this.extFiles = {
-            'demo/DataTableDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/DataTableDemo.css': {
+            content: `
 .datatable-crud-demo .table-header {
     display: flex;
     align-items: center;
@@ -2010,23 +1962,16 @@ const DataTableCrudDemo = () => {
     }
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'DataTableCrudDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'DataTableCrudDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    )
+})

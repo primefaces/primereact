@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class PaginatorDoc extends Component {
+const PaginatorDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Paginator } from 'primereact/paginator';
 import { Button } from 'primereact/button';
@@ -83,8 +80,7 @@ export class PaginatorDemo extends Component {
 
     onContentPageChange(event) {
         this.setState({
-            contentFirst: event.first,
-            contentRows: event.rows
+            contentFirst: event.first
         });
     }
 
@@ -114,7 +110,7 @@ export class PaginatorDemo extends Component {
             'PrevPageLink': (options) => {
                 return (
                     <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                        <span className="p-p-3">Previous</span>
+                        <span className="p-3">Previous</span>
                         <Ripple />
                     </button>
                 )
@@ -122,7 +118,7 @@ export class PaginatorDemo extends Component {
             'NextPageLink': (options) => {
                 return (
                     <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                        <span className="p-p-3">Next</span>
+                        <span className="p-3">Next</span>
                         <Ripple />
                     </button>
                 )
@@ -153,8 +149,8 @@ export class PaginatorDemo extends Component {
             },
             'CurrentPageReport': (options) => {
                 return (
-                    <span className="p-mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                        Go to <InputText size="2" className="p-ml-1" value={this.state.currentPage} tooltip={this.state.pageInputTooltip}
+                    <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
+                        Go to <InputText size="2" className="ml-1" value={this.state.currentPage} tooltip={this.state.pageInputTooltip}
                             onKeyDown={(e) => this.onPageInputKeyDown(e, options)} onChange={this.onPageInputChange}/>
                     </span>
                 )
@@ -172,7 +168,7 @@ export class PaginatorDemo extends Component {
 
                 return (
                     <React.Fragment>
-                        <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                        <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                         <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                     </React.Fragment>
                 );
@@ -189,10 +185,10 @@ export class PaginatorDemo extends Component {
             layout: 'RowsPerPageDropdown PrevPageLink PageLinks NextPageLink CurrentPageReport',
             'RowsPerPageDropdown': (options) => {
                 return (
-                    <div className="p-d-flex p-ai-center">
+                    <div className="flex align-items-center">
                         <Tooltip target=".slider>.p-slider-handle" content={\`\${options.value} / page\`} position="top" event="focus" />
 
-                        <span className="p-mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                        <span className="mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                         <Slider className="slider" value={options.value} onChange={options.onChange} min={10} max={120} step={30} style={{ width: '10rem' }} />
                     </div>
                 );
@@ -214,8 +210,8 @@ export class PaginatorDemo extends Component {
 
                     <h5>Custom Template</h5>
                     <Paginator template={template1} first={this.state.customFirst1} rows={this.state.customRows1} totalRecords={120} onPageChange={this.onCustomPageChange1}></Paginator>
-                    <Paginator template={template2} first={this.state.customFirst2} rows={this.state.customRows2} totalRecords={120} onPageChange={this.onCustomPageChange2} className="p-jc-end p-my-3"></Paginator>
-                    <Paginator template={template3} first={this.state.customFirst3} rows={this.state.customRows3} totalRecords={120} onPageChange={this.onCustomPageChange3} className="p-jc-start p-my-3"></Paginator>
+                    <Paginator template={template2} first={this.state.customFirst2} rows={this.state.customRows2} totalRecords={120} onPageChange={this.onCustomPageChange2} className="justify-content-end my-3"></Paginator>
+                    <Paginator template={template3} first={this.state.customFirst3} rows={this.state.customRows3} totalRecords={120} onPageChange={this.onCustomPageChange3} className="justify-content-start my-3"></Paginator>
 
                     <h5>Left and Right Content</h5>
                     <Paginator first={this.state.contentFirst} rows={1} totalRecords={12} onPageChange={this.onContentPageChange}
@@ -231,10 +227,10 @@ export class PaginatorDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { Paginator } from 'primereact/paginator';
 import { Button } from 'primereact/button';
@@ -282,7 +278,6 @@ const PaginatorDemo = () => {
 
     const onContentPageChange = (event) => {
         setContentFirst(event.first);
-        setContentRows(event.rows);
     }
 
     const onPageInputKeyDown = (event, options) => {
@@ -311,7 +306,7 @@ const PaginatorDemo = () => {
         'PrevPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Previous</span>
+                    <span className="p-3">Previous</span>
                     <Ripple />
                 </button>
             )
@@ -319,7 +314,7 @@ const PaginatorDemo = () => {
         'NextPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Next</span>
+                    <span className="p-3">Next</span>
                     <Ripple />
                 </button>
             )
@@ -350,8 +345,8 @@ const PaginatorDemo = () => {
         },
         'CurrentPageReport': (options) => {
             return (
-                <span className="p-mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                    Go to <InputText size="2" className="p-ml-1" value={currentPage} tooltip={pageInputTooltip}
+                <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
+                    Go to <InputText size="2" className="ml-1" value={currentPage} tooltip={pageInputTooltip}
                         onKeyDown={(e) => onPageInputKeyDown(e, options)} onChange={onPageInputChange}/>
                 </span>
             )
@@ -369,7 +364,7 @@ const PaginatorDemo = () => {
 
             return (
                 <React.Fragment>
-                    <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                 </React.Fragment>
             );
@@ -386,10 +381,10 @@ const PaginatorDemo = () => {
         layout: 'RowsPerPageDropdown PrevPageLink PageLinks NextPageLink CurrentPageReport',
         'RowsPerPageDropdown': (options) => {
             return (
-                <div className="p-d-flex p-ai-center">
+                <div className="flex align-items-center">
                     <Tooltip target=".slider>.p-slider-handle" content={\`\${options.value} / page\`} position="top" event="focus" />
 
-                    <span className="p-mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Slider className="slider" value={options.value} onChange={options.onChange} min={10} max={120} step={30} style={{ width: '10rem' }} />
                 </div>
             );
@@ -411,8 +406,8 @@ const PaginatorDemo = () => {
 
                 <h5>Custom Template</h5>
                 <Paginator template={template1} first={customFirst1} rows={customRows1} totalRecords={120} onPageChange={onCustomPageChange1}></Paginator>
-                <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="p-jc-end p-my-3"></Paginator>
-                <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="p-jc-start p-my-3"></Paginator>
+                <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="justify-content-end my-3"></Paginator>
+                <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="justify-content-start my-3"></Paginator>
 
                 <h5>Left and Right Content</h5>
                 <Paginator first={contentFirst} rows={1} totalRecords={12} onPageChange={onContentPageChange}
@@ -427,10 +422,10 @@ const PaginatorDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { Paginator } from 'primereact/paginator';
 import { Button } from 'primereact/button';
@@ -478,7 +473,6 @@ const PaginatorDemo = () => {
 
     const onContentPageChange = (event) => {
         setContentFirst(event.first);
-        setContentRows(event.rows);
     }
 
     const onPageInputKeyDown = (event, options) => {
@@ -507,7 +501,7 @@ const PaginatorDemo = () => {
         'PrevPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Previous</span>
+                    <span className="p-3">Previous</span>
                     <Ripple />
                 </button>
             )
@@ -515,7 +509,7 @@ const PaginatorDemo = () => {
         'NextPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Next</span>
+                    <span className="p-3">Next</span>
                     <Ripple />
                 </button>
             )
@@ -546,8 +540,8 @@ const PaginatorDemo = () => {
         },
         'CurrentPageReport': (options) => {
             return (
-                <span className="p-mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                    Go to <InputText size="2" className="p-ml-1" value={currentPage} tooltip={pageInputTooltip}
+                <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
+                    Go to <InputText size="2" className="ml-1" value={currentPage} tooltip={pageInputTooltip}
                         onKeyDown={(e) => onPageInputKeyDown(e, options)} onChange={onPageInputChange}/>
                 </span>
             )
@@ -565,7 +559,7 @@ const PaginatorDemo = () => {
 
             return (
                 <React.Fragment>
-                    <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                 </React.Fragment>
             );
@@ -582,10 +576,10 @@ const PaginatorDemo = () => {
         layout: 'RowsPerPageDropdown PrevPageLink PageLinks NextPageLink CurrentPageReport',
         'RowsPerPageDropdown': (options) => {
             return (
-                <div className="p-d-flex p-ai-center">
+                <div className="flex align-items-center">
                     <Tooltip target=".slider>.p-slider-handle" content={\`\${options.value} / page\`} position="top" event="focus" />
 
-                    <span className="p-mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Slider className="slider" value={options.value} onChange={options.onChange} min={10} max={120} step={30} style={{ width: '10rem' }} />
                 </div>
             );
@@ -607,8 +601,8 @@ const PaginatorDemo = () => {
 
                 <h5>Custom Template</h5>
                 <Paginator template={template1} first={customFirst1} rows={customRows1} totalRecords={120} onPageChange={onCustomPageChange1}></Paginator>
-                <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="p-jc-end p-my-3"></Paginator>
-                <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="p-jc-start p-my-3"></Paginator>
+                <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="justify-content-end my-3"></Paginator>
+                <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="justify-content-start my-3"></Paginator>
 
                 <h5>Left and Right Content</h5>
                 <Paginator first={contentFirst} rows={1} totalRecords={12} onPageChange={onContentPageChange}
@@ -623,17 +617,17 @@ const PaginatorDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./PaginatorDemo.css" />
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
         <script src="https://unpkg.com/primereact/slider/slider.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { Paginator } = primereact.paginator;
 const { Button } = primereact.button;
 const { Ripple, classNames } = primereact.core;
@@ -678,7 +672,6 @@ const PaginatorDemo = () => {
 
     const onContentPageChange = (event) => {
         setContentFirst(event.first);
-        setContentRows(event.rows);
     }
 
     const onPageInputKeyDown = (event, options) => {
@@ -707,7 +700,7 @@ const PaginatorDemo = () => {
         'PrevPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Previous</span>
+                    <span className="p-3">Previous</span>
                     <Ripple />
                 </button>
             )
@@ -715,7 +708,7 @@ const PaginatorDemo = () => {
         'NextPageLink': (options) => {
             return (
                 <button type="button" className={options.className} onClick={options.onClick} disabled={options.disabled}>
-                    <span className="p-p-3">Next</span>
+                    <span className="p-3">Next</span>
                     <Ripple />
                 </button>
             )
@@ -746,8 +739,8 @@ const PaginatorDemo = () => {
         },
         'CurrentPageReport': (options) => {
             return (
-                <span className="p-mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
-                    Go to <InputText size="2" className="p-ml-1" value={currentPage} tooltip={pageInputTooltip}
+                <span className="mx-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>
+                    Go to <InputText size="2" className="ml-1" value={currentPage} tooltip={pageInputTooltip}
                         onKeyDown={(e) => onPageInputKeyDown(e, options)} onChange={onPageInputChange}/>
                 </span>
             )
@@ -765,7 +758,7 @@ const PaginatorDemo = () => {
 
             return (
                 <React.Fragment>
-                    <span className="p-mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
                 </React.Fragment>
             );
@@ -782,10 +775,10 @@ const PaginatorDemo = () => {
         layout: 'RowsPerPageDropdown PrevPageLink PageLinks NextPageLink CurrentPageReport',
         'RowsPerPageDropdown': (options) => {
             return (
-                <div className="p-d-flex p-ai-center">
+                <div className="flex align-items-center">
                     <Tooltip target=".slider>.p-slider-handle" content={\`\${options.value} / page\`} position="top" event="focus" />
 
-                    <span className="p-mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
+                    <span className="mr-3" style={{ color: 'var(--text-color)', userSelect: 'none' }}>Items per page: </span>
                     <Slider className="slider" value={options.value} onChange={options.onChange} min={10} max={120} step={30} style={{ width: '10rem' }} />
                 </div>
             );
@@ -807,8 +800,8 @@ const PaginatorDemo = () => {
 
                 <h5>Custom Template</h5>
                 <Paginator template={template1} first={customFirst1} rows={customRows1} totalRecords={120} onPageChange={onCustomPageChange1}></Paginator>
-                <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="p-jc-end p-my-3"></Paginator>
-                <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="p-jc-start p-my-3"></Paginator>
+                <Paginator template={template2} first={customFirst2} rows={customRows2} totalRecords={120} onPageChange={onCustomPageChange2} className="justify-content-end my-3"></Paginator>
+                <Paginator template={template3} first={customFirst3} rows={customRows3} totalRecords={120} onPageChange={onCustomPageChange3} className="justify-content-start my-3"></Paginator>
 
                 <h5>Left and Right Content</h5>
                 <Paginator first={contentFirst} rows={1} totalRecords={12} onPageChange={onContentPageChange}
@@ -823,38 +816,32 @@ const PaginatorDemo = () => {
     );
 }
                 `
-            }
-        };
+        }
+    };
 
-        this.extFiles = {
-            'demo/PaginatorDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/PaginatorDemo.css': {
+            content: `
 .paginator-demo .image-gallery {
     text-align: center;
     padding: 1rem;
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Paginator } from 'primereact/paginator';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -862,8 +849,8 @@ import { Paginator } from 'primereact/paginator';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>Paginator is used as a controlled component with <i>first</i>, <i>rows</i> (optional) and <i>onPageChange</i> properties.</p>
+                    <h5>Getting Started</h5>
+                    <p>Paginator is used as a controlled component with <i>first</i>, <i>rows</i> (optional) and <i>onPageChange</i> properties.</p>
 
 <CodeHighlight>
 {`
@@ -871,17 +858,17 @@ import { Paginator } from 'primereact/paginator';
 `}
 </CodeHighlight>
 
-                        <h5>Rows and TotalRecords</h5>
-                        <p>Rows and TotalRecords define how many pages the paginator should display. Paginator below will have 10 pages.</p>
+                    <h5>Rows and TotalRecords</h5>
+                    <p>Rows and TotalRecords define how many pages the paginator should display. Paginator below will have 10 pages.</p>
 <CodeHighlight>
 {`
 <Paginator rows={10} totalRecords={120} first={first} onPageChange={(e) => setFirst(e.first)}></Paginator>
 `}
 </CodeHighlight>
 
-                        <h5>Rows Per Page</h5>
-                        <p>Number of items per page can be changed by the user using a dropdown if you define rowsPerPageOptions as an array of possible values. In this case,
-                        rows property should also be updated
+                    <h5>Rows Per Page</h5>
+                    <p>Number of items per page can be changed by the user using a dropdown if you define rowsPerPageOptions as an array of possible values. In this case,
+                    rows property should also be updated
             </p>
 <CodeHighlight lang="js">
 {`
@@ -897,23 +884,23 @@ const onPageChange = (e) => {
 `}
 </CodeHighlight>
 
-                        <h5>Template</h5>
-                        <p>Paginator elements can be customized using the template property using the predefined keys, default value is
-                        "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown". Here are the available elements that
-            can be placed inside a paginator.</p>
+                    <h5>Template</h5>
+                    <p>Paginator elements can be customized using the template property using the predefined keys, default value is
+                    "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown". Here are the available elements that
+        can be placed inside a paginator.</p>
 
-                        <ul>
-                            <li>FirstPageLink</li>
-                            <li>PrevPageLink</li>
-                            <li>PageLinks</li>
-                            <li>NextPageLink</li>
-                            <li>LastPageLink</li>
-                            <li>RowsPerPageDropdown</li>
-                            <li>JumpToPageInput</li>
-                            <li>CurrentPageReport</li>
-                        </ul>
+                    <ul>
+                        <li>FirstPageLink</li>
+                        <li>PrevPageLink</li>
+                        <li>PageLinks</li>
+                        <li>NextPageLink</li>
+                        <li>LastPageLink</li>
+                        <li>RowsPerPageDropdown</li>
+                        <li>JumpToPageInput</li>
+                        <li>CurrentPageReport</li>
+                    </ul>
 
-                        <p>The pagination element is fully customizable. To make special paginators, an object can be given to the <i>template</i> property as below.</p>
+                    <p>The pagination element is fully customizable. To make special paginators, an object can be given to the <i>template</i> property as below.</p>
 <CodeHighlight lang="js">
 {`
 const template = {
@@ -1006,189 +993,190 @@ const template = {
 `}
 </CodeHighlight>
 
-                        <h5>CurrentPageReport</h5>
-                        <p>Current page report item in the itemplate displays information about the pagination state. Default value is (&#123;currentPage&#125; of &#123;totalPages&#125;)
-                whereas available placeholders are the following;</p>
-                        <ul>
-                            <li>&#123;currentPage&#125;</li>
-                            <li>&#123;totalPages&#125;</li>
-                            <li>&#123;rows&#125;</li>
-                            <li>&#123;first&#125;</li>
-                            <li>&#123;last&#125;</li>
-                            <li>&#123;totalRecords&#125;</li>
-                        </ul>
+                    <h5>CurrentPageReport</h5>
+                    <p>Current page report item in the itemplate displays information about the pagination state. Default value is (&#123;currentPage&#125; of &#123;totalPages&#125;)
+            whereas available placeholders are the following;</p>
+                    <ul>
+                        <li>&#123;currentPage&#125;</li>
+                        <li>&#123;totalPages&#125;</li>
+                        <li>&#123;rows&#125;</li>
+                        <li>&#123;first&#125;</li>
+                        <li>&#123;last&#125;</li>
+                        <li>&#123;totalRecords&#125;</li>
+                    </ul>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>totalRecords</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Number of total records.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>rows</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Data count to display per page.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>first</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Zero-relative number of the first row to be displayed.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>pageLinkSize</td>
-                                        <td>number</td>
-                                        <td>5</td>
-                                        <td>Number of page links to display.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>rowsPerPageOptions</td>
-                                        <td>array</td>
-                                        <td>null</td>
-                                        <td>Array of integer values to display inside rows per page dropdown.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>template</td>
-                                        <td>string|object</td>
-                                        <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
-                                        <td>Template of the paginator.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>leftContent</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Content to inject into the left side of the paginator.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>rightContent</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Content to inject into the right side of the paginator.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>currentPageReportTemplate</td>
-                                        <td>string</td>
-                                        <td>(&#123;currentPage&#125; of &#123;totalPages&#125;)</td>
-                                        <td>Template of the current page report element. Available placeholders are
-                                        &#123;currentPage&#125;,&#123;totalPages&#125;,&#123;rows&#125;,&#123;first&#125;,&#123;last&#125; and &#123;totalRecords&#125;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>dropdownAppendTo</td>
-                                        <td>DOM element | string</td>
-                                        <td>document.body</td>
-                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>totalRecords</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Number of total records.</td>
+                                </tr>
+                                <tr>
+                                    <td>rows</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Data count to display per page.</td>
+                                </tr>
+                                <tr>
+                                    <td>first</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Zero-relative number of the first row to be displayed.</td>
+                                </tr>
+                                <tr>
+                                    <td>pageLinkSize</td>
+                                    <td>number</td>
+                                    <td>5</td>
+                                    <td>Number of page links to display.</td>
+                                </tr>
+                                <tr>
+                                    <td>rowsPerPageOptions</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>Array of integer values to display inside rows per page dropdown.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>template</td>
+                                    <td>string|object</td>
+                                    <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
+                                    <td>Template of the paginator.</td>
+                                </tr>
+                                <tr>
+                                    <td>leftContent</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Content to inject into the left side of the paginator.</td>
+                                </tr>
+                                <tr>
+                                    <td>rightContent</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Content to inject into the right side of the paginator.</td>
+                                </tr>
+                                <tr>
+                                    <td>currentPageReportTemplate</td>
+                                    <td>string</td>
+                                    <td>(&#123;currentPage&#125; of &#123;totalPages&#125;)</td>
+                                    <td>Template of the current page report element. Available placeholders are
+                                    &#123;currentPage&#125;,&#123;totalPages&#125;,&#123;rows&#125;,&#123;first&#125;,&#123;last&#125; and &#123;totalRecords&#125;</td>
+                                </tr>
+                                <tr>
+                                    <td>dropdownAppendTo</td>
+                                    <td>DOM element | string</td>
+                                    <td>document.body</td>
+                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onPageChange</td>
-                                        <td>event.page: New page number <br />
-                                event.first: Index of first record <br />
-                                event.rows: Number of rows to display in new page <br />
-                                event.page: Index of the new page <br />
-                                event.pageCount: Total number of pages
-                            </td>
-                                        <td>Callback to invoke when page changes, the event object contains information about the new state.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onPageChange</td>
+                                    <td>event.page: New page number <br />
+                            event.first: Index of first record <br />
+                            event.rows: Number of rows to display in new page <br />
+                            event.page: Index of the new page <br />
+                            event.pageCount: Total number of pages
+                        </td>
+                                    <td>Callback to invoke when page changes, the event object contains information about the new state.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-paginator</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-paginator-first</td>
-                                        <td>First page element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-paginator-prev</td>
-                                        <td>Previous page element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-paginator-pages</td>
-                                        <td>Container of page links.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-paginator-page</td>
-                                        <td>A page link.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-paginator-next</td>
-                                        <td>Next pge element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-paginator-last</td>
-                                        <td>Last page element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-paginator-rpp-options</td>
-                                        <td>Rows per page dropdown.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-paginator</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-paginator-first</td>
+                                    <td>First page element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-paginator-prev</td>
+                                    <td>Previous page element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-paginator-pages</td>
+                                    <td>Container of page links.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-paginator-page</td>
+                                    <td>A page link.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-paginator-next</td>
+                                    <td>Next pge element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-paginator-last</td>
+                                    <td>Last page element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-paginator-rpp-options</td>
+                                    <td>Rows per page dropdown.</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                            <h5>Dependencies</h5>
-                            <p>None.</p>
-                        </div>
+                        <h5>Dependencies</h5>
+                        <p>None.</p>
+                    </div>
 
-                    </TabPanel>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'PaginatorDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'PaginatorDemo', sources: sources, extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default PaginatorDoc;

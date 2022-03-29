@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class PanelDoc extends Component {
+const PanelDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Panel } from 'primereact/panel';
 import { Ripple } from 'primereact/ripple';
@@ -27,8 +24,8 @@ export class PanelDemo extends Component {
 
     template(options) {
         const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
-        const className = \`\${options.className} p-jc-start\`;
-        const titleClassName = \`\${options.titleClassName} p-pl-1\`;
+        const className = \`\${options.className} justify-content-start\`;
+        const titleClassName = \`\${options.titleClassName} pl-1\`;
 
         return (
             <div className={className}>
@@ -74,10 +71,10 @@ export class PanelDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React from 'react';
 import { Panel } from 'primereact/panel';
 import { Ripple } from 'primereact/ripple';
@@ -85,8 +82,8 @@ import { Ripple } from 'primereact/ripple';
 const PanelDemo = () => {
     const template = (options) => {
         const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
-        const className = \`\${options.className} p-jc-start\`;
-        const titleClassName = \`\${options.titleClassName} p-pl-1\`;
+        const className = \`\${options.className} justify-content-start\`;
+        const titleClassName = \`\${options.titleClassName} pl-1\`;
 
         return (
             <div className={className}>
@@ -130,10 +127,10 @@ const PanelDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React from 'react';
 import { Panel } from 'primereact/panel';
 import { Ripple } from 'primereact/ripple';
@@ -141,8 +138,8 @@ import { Ripple } from 'primereact/ripple';
 const PanelDemo = () => {
     const template = (options) => {
         const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
-        const className = \`\${options.className} p-jc-start\`;
-        const titleClassName = \`\${options.titleClassName} p-pl-1\`;
+        const className = \`\${options.className} justify-content-start\`;
+        const titleClassName = \`\${options.titleClassName} pl-1\`;
 
         return (
             <div className={className}>
@@ -186,22 +183,22 @@ const PanelDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
-        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/panel/panel.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
+    <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+    <script src="https://unpkg.com/primereact/panel/panel.min.js"></script>`,
+            content: `
+const { useState } = React;
 const { Panel } = primereact.panel;
 const { Ripple } = primereact.core;
 
 const PanelDemo = () => {
     const template = (options) => {
         const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
-        const className = \`\${options.className} p-jc-start\`;
-        const titleClassName = \`\${options.titleClassName} p-pl-1\`;
+        const className = \`\${options.className} justify-content-start\`;
+        const titleClassName = \`\${options.titleClassName} pl-1\`;
 
         return (
             <div className={className}>
@@ -245,27 +242,21 @@ const PanelDemo = () => {
     )
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Panel } from 'primereact/panel';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -273,8 +264,8 @@ import { Panel } from 'primereact/panel';
 `}
 </CodeHighlight>
 
-            <h5>Getting Started</h5>
-            <p>Panel is a container component that accepts content as its children.</p>
+                    <h5>Getting Started</h5>
+                    <p>Panel is a container component that accepts content as its children.</p>
 <CodeHighlight>
 {`
 <Panel header="Header">
@@ -286,12 +277,12 @@ import { Panel } from 'primereact/panel';
 `}
 </CodeHighlight>
 
-            <p><i>header</i> propery also can be used to provide custom content as JSX.</p>
+                    <p><i>header</i> propery also can be used to provide custom content as JSX.</p>
 
-            <h5>Toggleable</h5>
-            <p>Content of the panel can be expanded and collapsed using <i>toggleable</i> option. A toggleable panel can either be used as a Controlled or Uncontrolled component.</p>
+                    <h5>Toggleable</h5>
+                    <p>Content of the panel can be expanded and collapsed using <i>toggleable</i> option. A toggleable panel can either be used as a Controlled or Uncontrolled component.</p>
 
-            <p>In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties needs to be defined to control the collapsed state.</p>
+                    <p>In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties needs to be defined to control the collapsed state.</p>
 
 <CodeHighlight>
 {`
@@ -304,10 +295,10 @@ import { Panel } from 'primereact/panel';
 `}
 </CodeHighlight>
 
-            <p>In uncontrolled mode, only <i>toggleable</i> property needs to be enabled. Initial state can be still be provided using the <i>collapsed</i> property in uncontrolled mode however
-            it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the collapsed state, prefer to use the component as controlled.</p>
+                    <p>In uncontrolled mode, only <i>toggleable</i> property needs to be enabled. Initial state can be still be provided using the <i>collapsed</i> property in uncontrolled mode however
+                    it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the collapsed state, prefer to use the component as controlled.</p>
 
-            <CodeHighlight>
+<CodeHighlight>
 {`
 <Panel header="Header" toggleable>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -318,8 +309,8 @@ import { Panel } from 'primereact/panel';
 `}
 </CodeHighlight>
 
-            <h5>Header Template</h5>
-            <p>The header element is fully customizable on Panel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.</p>
+                    <h5>Header Template</h5>
+                    <p>The header element is fully customizable on Panel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.</p>
 <CodeHighlight lang="js">
 {`
 <Panel headerTemplate={template} toggleable>
@@ -350,155 +341,156 @@ template: (options) => {
 `}
 </CodeHighlight>
 
-            <h5>Properties</h5>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Default</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>id</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Unique identifier of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>header</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>Custom header template of the panel.</td>
-                        </tr>
-                        <tr>
-                            <td>headerTemplate</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>Header template of the panel to customize more.</td>
-                        </tr>
-                        <tr>
-                            <td>toggleable</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Defines if content of panel can be expanded and collapsed.</td>
-                        </tr>
-                        <tr>
-                            <td>icons</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>Custom icons template for the header.</td>
-                        </tr>
-                        <tr>
-                            <td>style</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>Inline style of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>className</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Style class of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>collapsed</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Defines the initial state of panel content, supports one or two-way binding as well.</td>
-                        </tr>
-                        <tr>
-                            <td>transitionOptions</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>header</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Custom header template of the panel.</td>
+                                </tr>
+                                <tr>
+                                    <td>headerTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Header template of the panel to customize more.</td>
+                                </tr>
+                                <tr>
+                                    <td>toggleable</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Defines if content of panel can be expanded and collapsed.</td>
+                                </tr>
+                                <tr>
+                                    <td>icons</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Custom icons template for the header.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>collapsed</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Defines the initial state of panel content, supports one or two-way binding as well.</td>
+                                </tr>
+                                <tr>
+                                    <td>transitionOptions</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <h5>Events</h5>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Parameters</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>onCollapse</td>
-                            <td>event.originalEvent: browser event </td>
-                            <td>Callback to invoke when an active tab is collapsed by clicking on the header.</td>
-                        </tr>
-                        <tr>
-                            <td>onExpand</td>
-                            <td>event.originalEvent: browser event </td>
-                            <td>Callback to invoke when a tab gets expanded.</td>
-                        </tr>
-                        <tr>
-                            <td>onToggle</td>
-                            <td>event.originalEvent: browser event <br />
-                                event.value: collapsed state as a boolean
-                             </td>
-                            <td>Callback to invoke when a tab gets expanded.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Parameters</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onCollapse</td>
+                                    <td>event.originalEvent: browser event </td>
+                                    <td>Callback to invoke when an active tab is collapsed by clicking on the header.</td>
+                                </tr>
+                                <tr>
+                                    <td>onExpand</td>
+                                    <td>event.originalEvent: browser event </td>
+                                    <td>Callback to invoke when a tab gets expanded.</td>
+                                </tr>
+                                <tr>
+                                    <td>onToggle</td>
+                                    <td>event.originalEvent: browser event <br />
+                                        event.value: collapsed state as a boolean
+                                    </td>
+                                    <td>Callback to invoke when a tab gets expanded.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <h5>Styling</h5>
-            <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Element</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>p-panel</td>
-                            <td>Container element.</td>
-                        </tr>
-                        <tr>
-                            <td>p-panel-titlebar</td>
-                            <td>Header section.</td>
-                        </tr>
-                        <tr>
-                            <td>p-panel-title</td>
-                            <td>Title text of panel.</td>
-                        </tr>
-                        <tr>
-                            <td>p-panel-titlebar-toggler</td>
-                            <td>Toggle icon.</td>
-                        </tr>
-                        <tr>
-                            <td>p-panel-content</td>
-                            <td>Content of panel.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-panel</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-panel-titlebar</td>
+                                    <td>Header section.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-panel-title</td>
+                                    <td>Title text of panel.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-panel-titlebar-toggler</td>
+                                    <td>Toggle icon.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-panel-content</td>
+                                    <td>Content of panel.</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                <h5>Dependencies</h5>
-                <ul>
-                    <li>react-transition-group</li>
-                </ul>
-            </div>
+                        <h5>Dependencies</h5>
+                        <ul>
+                            <li>react-transition-group</li>
+                        </ul>
+                    </div>
 
-            </TabPanel>
+                </TabPanel>
 
-            {
-                useLiveEditorTabs({ name: 'PanelDemo', sources: this.sources })
-            }
-        </TabView>
-    </div>
-        );
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'PanelDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default PanelDoc;

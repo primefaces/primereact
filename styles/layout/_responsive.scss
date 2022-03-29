@@ -9,15 +9,8 @@
             height: 100%;
         }
 
-        .layout-news-button {
-            opacity: 0;
-            position: absolute;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            top: 0;
-            left: 0;
+        .layout-news-button, .layout-news-logo  {
+            display: none;
         }
     }
 
@@ -26,15 +19,11 @@
         flex-wrap: wrap;
         justify-content: space-between;
         padding: 0;
+        left: 0;
+        width: 100%;
 
         .menu-button {
             display: block;
-        }
-
-        .logo {
-            img{
-                width: 150px;
-            }
         }
 
         .app-theme {
@@ -43,25 +32,22 @@
         }
 
         .topbar-menu {
-            background-color: var(--surface-a);
             width: 100%;
             height: 40px;
             margin: 0;
-            border-top: 1px solid var(--surface-d);
 
             > li {
-                height: 40px;
-                line-height: 40px;
                 width: 25%;
+                margin-right: 0;
 
                 > a,
                 > .p-link {
-                    padding-bottom: 0;
-                    height: 40px;
-                    line-height: 38px;
+                    display: flex;
+                    height: 100%;
                     width: 100%;
-                    font-size: 14px;
-                    min-width: auto;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 0;
                 }
 
                 &.topbar-submenu > ul {
@@ -152,17 +138,18 @@
     }
 }
 
-.blocked-scroll {
-    overflow: hidden;
+@media screen and (min-width: 1729px) {
+    .layout-content-inner {
+        max-width: 1478px;
+        margin: 0 auto;
+    }
 }
 
 @media screen and (max-width: 960px) {
     .layout-wrapper {
         @include overlay-menu;
     }
-}
 
-@media screen and (max-width: 640px) {
     .layout-wrapper {
         &.layout-news-active {
             .topbar-menu {
@@ -193,6 +180,18 @@
                 }
             }
         }
+
+        .layout-content {
+            .content-section {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+
+    }
+
+    .blocked-scroll {
+        overflow: hidden;
     }
 }
 

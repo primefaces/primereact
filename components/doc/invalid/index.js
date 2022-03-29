@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import { TabView } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 
-export class InvalidDoc extends Component {
+const InvalidDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { AutoComplete } from 'primereact/autocomplete';
@@ -156,52 +153,52 @@ export class InvalidDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <div className="p-fluid p-grid">
-                        <div className="p-field p-col-12 p-md-4">
+                    <div className="p-fluid grid">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="inputtext">InputText</label>
                             <InputText id="inputtext" value={this.state.value1} onChange={(e) => this.setState({ value1: e.target.value })} className="p-invalid" />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="autocomplete">AutoComplete</label>
                             <AutoComplete value={this.state.value2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" onChange={(e) => this.setState({ value2: e.value })} className="p-invalid" />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="calendar">Calendar</label>
                             <Calendar id="calendar" value={this.state.value3} onChange={(e) => this.setState({ value3: e.value })} className="p-invalid" />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="chips">Chips</label>
                             <Chips id="chips" value={this.state.value4} onChange={(e) => this.setState({ value4: e.value })} className="p-invalid" />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="inputmask">InputMask</label>
                             <InputMask id="inputmask" value={this.state.value5} onChange={(e) => this.setState({ value5: e.value })} mask="99/99/9999" slotChar="mm/dd/yyyy" className="p-invalid" />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="inputnumber">InputNumber</label>
                             <InputNumber inputId="inputnumber" value={this.state.value6} onChange={(e) => this.setState({ value6: e.value })} className="p-invalid" />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="cascadeselect">CascadeSelect</label>
                             <CascadeSelect inputId="cascadeselect" value={this.state.value10} options={this.cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={event => this.setState({ value10: event.value })} className="p-invalid"/>
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="dropdown">Dropdown</label>
                             <Dropdown inputId="dropdown" value={this.state.value7} options={this.state.cities} onChange={(e) => this.setState({ value7: e.value })} optionLabel="name" className="p-invalid" />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="multiselect">MultiSelect</label>
                             <MultiSelect inputId="multiselect" value={this.state.value8} options={this.state.cities} onChange={(e) => this.setState({ value8: e.value })} optionLabel="name" className="p-invalid" />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="treeselect">TreeSelect</label>
                             <TreeSelect inputId="treeselect" value={this.state.selectedNodeKey} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey: e.value })} className="p-invalid"></TreeSelect>
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="password">Password</label>
                             <Password inputId="password" value={this.state.value9} onChange={(e) => this.setState({ value9: e.target.value })} className="p-invalid" />
                         </div>
-                        <div className="p-field p-col-12 p-md-4">
+                        <div className="field col-12 md:col-4">
                             <label htmlFor="textarea">Textarea</label>
                             <InputTextarea id="textarea" value={this.state.value11} onChange={(e) => this.setState({ value11: e.target.value })} rows={3} className="p-invalid" />
                         </div>
@@ -212,10 +209,10 @@ export class InvalidDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { AutoComplete } from 'primereact/autocomplete';
@@ -353,52 +350,52 @@ const InvalidDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-fluid p-grid">
-                    <div className="p-field p-col-12 p-md-4">
+                <div className="p-fluid grid">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="inputtext">InputText</label>
                         <InputText id="inputtext" value={value1} onChange={(e) => setValue1(e.target.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="autocomplete">AutoComplete</label>
                         <AutoComplete value={value2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setValue2(e.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="calendar">Calendar</label>
                         <Calendar id="calendar" value={value3} onChange={(e) => setValue3(e.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="chips">Chips</label>
                         <Chips id="chips" value={value4} onChange={(e) => setValue4(e.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="inputmask">InputMask</label>
                         <InputMask id="inputmask" value={value5} onChange={(e) => setValue5(e.value)} mask="99/99/9999" slotChar="mm/dd/yyyy" className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="inputnumber">InputNumber</label>
                         <InputNumber inputId="inputnumber" value={value6} onChange={(e) => setValue6(e.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="cascadeselect">CascadeSelect</label>
                         <CascadeSelect inputId="cascadeselect" value={value10} options={cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={(e) => setValue10(e.value)} className="p-invalid"/>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="dropdown">Dropdown</label>
                         <Dropdown inputId="dropdown" value={value7} options={cities} onChange={(e) => setValue7(e.value)} optionLabel="name" className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="multiselect">MultiSelect</label>
                         <MultiSelect inputId="multiselect" value={value8} options={cities} onChange={(e) => setValue8(e.value)} optionLabel="name" className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="treeselect">TreeSelect</label>
                         <TreeSelect inputId="treeselect" value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} className="p-invalid"></TreeSelect>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="password">Password</label>
                         <Password inputId="password" value={value9} onChange={(e) => setValue9(e.target.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="textarea">Textarea</label>
                         <InputTextarea id="textarea" value={value11} onChange={(e) => setValue9(e.value)} rows={3} className="p-invalid" />
                     </div>
@@ -408,10 +405,10 @@ const InvalidDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { AutoComplete } from 'primereact/autocomplete';
@@ -549,52 +546,52 @@ const InvalidDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-fluid p-grid">
-                    <div className="p-field p-col-12 p-md-4">
+                <div className="p-fluid grid">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="inputtext">InputText</label>
                         <InputText id="inputtext" value={value1} onChange={(e) => setValue1(e.target.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="autocomplete">AutoComplete</label>
                         <AutoComplete value={value2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setValue2(e.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="calendar">Calendar</label>
                         <Calendar id="calendar" value={value3} onChange={(e) => setValue3(e.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="chips">Chips</label>
                         <Chips id="chips" value={value4} onChange={(e) => setValue4(e.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="inputmask">InputMask</label>
                         <InputMask id="inputmask" value={value5} onChange={(e) => setValue5(e.value)} mask="99/99/9999" slotChar="mm/dd/yyyy" className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="inputnumber">InputNumber</label>
                         <InputNumber inputId="inputnumber" value={value6} onChange={(e) => setValue6(e.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="cascadeselect">CascadeSelect</label>
                         <CascadeSelect inputId="cascadeselect" value={value10} options={cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={(e) => setValue10(e.value)} className="p-invalid"/>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="dropdown">Dropdown</label>
                         <Dropdown inputId="dropdown" value={value7} options={cities} onChange={(e) => setValue7(e.value)} optionLabel="name" className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="multiselect">MultiSelect</label>
                         <MultiSelect inputId="multiselect" value={value8} options={cities} onChange={(e) => setValue8(e.value)} optionLabel="name" className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="treeselect">TreeSelect</label>
                         <TreeSelect inputId="treeselect" value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} className="p-invalid"></TreeSelect>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="password">Password</label>
                         <Password inputId="password" value={value9} onChange={(e) => setValue9(e.target.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="textarea">Textarea</label>
                         <InputTextarea id="textarea" value={value11} onChange={(e) => setValue9(e.value)} rows={3} className="p-invalid" />
                     </div>
@@ -604,10 +601,10 @@ const InvalidDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="./CountryService.js"></script>
         <script src="./NodeService.js"></script>
 
@@ -626,7 +623,7 @@ const InvalidDemo = () => {
         <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>
         <script src="https://unpkg.com/primereact/treeselect/treeselect.min.js"></script>
         <script src="https://unpkg.com/primereact/password/password.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { InputText } = primereact.inputtext;
 const { AutoComplete } = primereact.autocomplete;
@@ -762,52 +759,52 @@ const InvalidDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-fluid p-grid">
-                    <div className="p-field p-col-12 p-md-4">
+                <div className="p-fluid grid">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="inputtext">InputText</label>
                         <InputText id="inputtext" value={value1} onChange={(e) => setValue1(e.target.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="autocomplete">AutoComplete</label>
                         <AutoComplete value={value2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setValue2(e.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="calendar">Calendar</label>
                         <Calendar id="calendar" value={value3} onChange={(e) => setValue3(e.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="chips">Chips</label>
                         <Chips id="chips" value={value4} onChange={(e) => setValue4(e.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="inputmask">InputMask</label>
                         <InputMask id="inputmask" value={value5} onChange={(e) => setValue5(e.value)} mask="99/99/9999" slotChar="mm/dd/yyyy" className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="inputnumber">InputNumber</label>
                         <InputNumber inputId="inputnumber" value={value6} onChange={(e) => setValue6(e.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="cascadeselect">CascadeSelect</label>
                         <CascadeSelect inputId="cascadeselect" value={value10} options={cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={(e) => setValue10(e.value)} className="p-invalid"/>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="dropdown">Dropdown</label>
                         <Dropdown inputId="dropdown" value={value7} options={cities} onChange={(e) => setValue7(e.value)} optionLabel="name" className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="multiselect">MultiSelect</label>
                         <MultiSelect inputId="multiselect" value={value8} options={cities} onChange={(e) => setValue8(e.value)} optionLabel="name" className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="treeselect">TreeSelect</label>
                         <TreeSelect inputId="treeselect" value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} className="p-invalid"></TreeSelect>
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="password">Password</label>
                         <Password inputId="password" value={value9} onChange={(e) => setValue9(e.target.value)} className="p-invalid" />
                     </div>
-                    <div className="p-field p-col-12 p-md-4">
+                    <div className="field col-12 md:col-4">
                         <label htmlFor="textarea">Textarea</label>
                         <InputTextarea id="textarea" value={value11} onChange={(e) => setValue9(e.value)} rows={3} className="p-invalid" />
                     </div>
@@ -817,23 +814,18 @@ const InvalidDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'InvalidDemo', sources: sources, service: 'CountryService, NodeService', data: 'countries, treenodes' })
+                }
+            </TabView>
+        </div>
+    );
+})
 
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'InvalidDemo', sources: this.sources, service: 'CountryService, NodeService', data: 'countries, treenodes' })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+export default InvalidDoc;

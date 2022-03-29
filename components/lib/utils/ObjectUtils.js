@@ -135,6 +135,17 @@ export default class ObjectUtils {
         return null;
     }
 
+    static combinedRefs(innerRef, forwardRef) {
+        if (innerRef && forwardRef) {
+            if (typeof forwardRef === 'function') {
+                forwardRef(innerRef.current);
+            }
+            else {
+                forwardRef.current = innerRef.current;
+            }
+        }
+    }
+
     static removeAccents(str) {
         if (str && str.search(/[\xC0-\xFF]/g) > -1) {
             str = str
@@ -174,5 +185,22 @@ export default class ObjectUtils {
 
     static isNotEmpty(value) {
         return !this.isEmpty(value);
+    }
+
+    static sort(value1, value2, order = 1, locale) {
+        let result = null;
+
+        if (value1 == null && value2 != null)
+            result = -1;
+        else if (value1 != null && value2 == null)
+            result = 1;
+        else if (value1 == null && value2 == null)
+            result = 0;
+        else if (typeof value1 === 'string' && typeof value2 === 'string')
+            result = value1.localeCompare(value2, locale, { numeric: true });
+        else
+            result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+
+        return order * result;
     }
 }

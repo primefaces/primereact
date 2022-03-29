@@ -1,85 +1,57 @@
-import React, { Component } from 'react';
+import React, { forwardRef, memo, useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { classNames, DomHandler } from '../utils/Utils';
+import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 
-export class Editor extends Component {
+export const Editor = memo(forwardRef((props, ref) => {
+    const contentRef = useRef(null);
+    const toolbarRef = useRef(null);
+    const quill = useRef(null);
 
-    static defaultProps = {
-        id: null,
-        value: null,
-        style: null,
-        className: null,
-        placeholder: null,
-        readOnly: false,
-        modules: null,
-        formats: null,
-        theme: 'snow',
-        showHeader: true,
-        headerTemplate: null,
-        onTextChange: null,
-        onSelectionChange: null,
-        onLoad: null
-    };
-
-    static propTypes = {
-        id: PropTypes.string,
-        value: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        placeholder: PropTypes.string,
-        readOnly: PropTypes.bool,
-        modules: PropTypes.object,
-        formats: PropTypes.array,
-        theme: PropTypes.string,
-        showHeader: PropTypes.bool,
-        headerTemplate: PropTypes.any,
-        onTextChange: PropTypes.func,
-        onSelectionChange: PropTypes.func,
-        onLoad: PropTypes.func
-    };
-
-    getQuill() {
-        return this.quill;
+    const getQuill = () => {
+        return quill.current;
     }
 
-    componentDidMount() {
+    useMountEffect(() => {
         import('quill').then((module) => {
-            if (module && module.default && DomHandler.isExist(this.editorElement)) {
-                this.quill = new module.default(this.editorElement, {
+            if (module && module.default && DomHandler.isExist(contentRef.current)) {
+                quill.current = new module.default(contentRef.current, {
                     modules: {
-                        toolbar: this.props.showHeader ? this.toolbarElement : false,
-                        ...this.props.modules
+                        toolbar: props.showHeader ? toolbarRef.current : false,
+                        ...props.modules
                     },
-                    placeholder: this.props.placeholder,
-                    readOnly: this.props.readOnly,
-                    theme: this.props.theme,
-                    formats: this.props.formats
+                    placeholder: props.placeholder,
+                    readOnly: props.readOnly,
+                    theme: props.theme,
+                    formats: props.formats
                 });
 
-                if (this.props.value) {
-                    this.quill.setContents(this.quill.clipboard.convert(this.props.value));
+                if (props.value) {
+                    quill.current.setContents(quill.current.clipboard.convert(props.value));
                 }
 
-                this.quill.on('text-change', (delta, oldContents, source) => {
-                    let html = this.editorElement.children[0].innerHTML;
-                    let text = this.quill.getText();
+
+                quill.current.on('text-change', ((delta, oldContents, source) => {
+                    let html = contentRef.current.children[0].innerHTML;
+                    let text = quill.current.getText();
+
                     if (html === '<p><br></p>') {
                         html = null;
                     }
 
                     // GitHub #2271 prevent infinite loop on clipboard paste of HTML
                     if (source === "api") {
-                        const htmlValue = this.editorElement.children[0];
+                        const htmlValue = editorElement.children[0];
                         const editorValue = document.createElement("div");
-                        editorValue.innerHTML = this.props.value || "";
+                        editorValue.innerHTML = props.value || "";
                         // this is necessary because Quill rearranged style elements
                         if (DomHandler.isEqualElement(htmlValue, editorValue)) {
                             return;
                         }
                     }
 
-                    if (this.props.onTextChange) {
-                        this.props.onTextChange({
+                    if (props.onTextChange) {
+                        props.onTextChange({
                             htmlValue: html,
                             textValue: text,
                             delta: delta,
@@ -88,9 +60,9 @@ export class Editor extends Component {
                     }
                 });
 
-                this.quill.on('selection-change', (range, oldRange, source) => {
-                    if (this.props.onSelectionChange) {
-                        this.props.onSelectionChange({
+                quill.current.on('selection-change', (range, oldRange, source) => {
+                    if (props.onSelectionChange) {
+                        props.onSelectionChange({
                             range: range,
                             oldRange: oldRange,
                             source: source
@@ -99,39 +71,38 @@ export class Editor extends Component {
                 });
             }
         }).then(() => {
-            if (this.quill && this.quill.getModule('toolbar')) {
-                this.props.onLoad && this.props.onLoad(this.quill);
+            if (quill.current && quill.current.getModule('toolbar')) {
+                props.onLoad && props.onLoad(quill.current);
             }
         })
-    }
+    });
 
-    componentDidUpdate(prevProps) {
-        if (this.props.value !== prevProps.value && this.quill && !this.quill.hasFocus()) {
-            if (this.props.value)
-                this.quill.setContents(this.quill.clipboard.convert(this.props.value));
-            else
-                this.quill.setText('');
+    useUpdateEffect(() => {
+        if (quill.current && !quill.current.hasFocus()) {
+            props.value ?
+                quill.current.setContents(quill.current.clipboard.convert(props.value)) :
+                quill.current.setText('');
         }
-    }
+    }, [props.value]);
 
-    render() {
-        let containerClass = classNames('p-component p-editor-container', this.props.className);
-        let toolbarHeader = null;
+    useImperativeHandle(ref, () => ({
+        getQuill
+    }));
 
-        if (this.props.showHeader === false) {
-            toolbarHeader = '';
-            this.toolbarElement = undefined;
+    const createToolbarHeader = () => {
+        if (props.showHeader === false) {
+            return null;
         }
-        else if (this.props.headerTemplate) {
-            toolbarHeader = (
-                <div ref={(el) => this.toolbarElement = el} className="p-editor-toolbar">
-                    {this.props.headerTemplate}
+        else if (props.headerTemplate) {
+            return (
+                <div ref={toolbarRef} className="p-editor-toolbar">
+                    {props.headerTemplate}
                 </div>
-            );
+            )
         }
         else {
-            toolbarHeader = (
-                <div ref={el => this.toolbarElement = el} className="p-editor-toolbar">
+            return (
+                <div ref={toolbarRef} className="p-editor-toolbar">
                     <span className="ql-formats">
                         <select className="ql-header" defaultValue="0">
                             <option value="1">Heading</option>
@@ -172,16 +143,54 @@ export class Editor extends Component {
                         <button type="button" className="ql-clean" aria-label="Remove Styles"></button>
                     </span>
                 </div>
-            );
+            )
         }
-
-        let content = (<div ref={(el) => this.editorElement = el} className="p-editor-content" style={this.props.style}></div>)
-
-        return (
-            <div id={this.props.id} className={containerClass}>
-                {toolbarHeader}
-                {content}
-            </div>
-        );
     }
+
+    const className = classNames('p-component p-editor-container', props.className);
+    const header = createToolbarHeader();
+    const content = <div ref={contentRef} className="p-editor-content"></div>
+
+    return (
+        <div id={props.id} className={className} style={props.style}>
+            {header}
+            {content}
+        </div>
+    )
+}));
+
+Editor.defaultProps = {
+    __TYPE: 'Editor',
+    id: null,
+    value: null,
+    style: null,
+    className: null,
+    placeholder: null,
+    readOnly: false,
+    modules: null,
+    formats: null,
+    theme: 'snow',
+    showHeader: true,
+    headerTemplate: null,
+    onTextChange: null,
+    onSelectionChange: null,
+    onLoad: null
+}
+
+Editor.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    id: PropTypes.string,
+    value: PropTypes.string,
+    style: PropTypes.object,
+    className: PropTypes.string,
+    placeholder: PropTypes.string,
+    readOnly: PropTypes.bool,
+    modules: PropTypes.object,
+    formats: PropTypes.array,
+    theme: PropTypes.string,
+    showHeader: PropTypes.bool,
+    headerTemplate: PropTypes.any,
+    onTextChange: PropTypes.func,
+    onSelectionChange: PropTypes.func,
+    onLoad: PropTypes.func
 }

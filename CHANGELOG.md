@@ -1,6 +1,70 @@
 # Changelog
 
-## [7.1.0](https://github.com/primefaces/primereact/tree/7.1.0)  (2021-12-13)
+## [7.2.1](https://github.com/primefaces/primereact/tree/7.2.1) (2022-02-22)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/7.2.0...7.2.1)
+
+**Implemented New Features and Enhancements:**
+
+- Add p-button-\* class support to SplitButton [\#2647](https://github.com/primefaces/primereact/issues/2647)
+- Change lara to use system font [\#2645](https://github.com/primefaces/primereact/issues/2645)
+- Knob | replace surface letters with new surface variables [\#2643](https://github.com/primefaces/primereact/issues/2643)
+- Bug: When calendar is closed by clicking cancel button, It should be focus out  [\#2638](https://github.com/primefaces/primereact/issues/2638)
+- Add possibility to reset scroll in DataTable [\#2636](https://github.com/primefaces/primereact/issues/2636)
+- The SplitButton type declarations are missing the "show" and "hide" methods [\#2625](https://github.com/primefaces/primereact/issues/2625)
+- Automated tests throw "TypeError: highlightItem.scrollIntoView is not a function" [\#2616](https://github.com/primefaces/primereact/issues/2616)
+- DataTable sorting lacks collation support [\#2604](https://github.com/primefaces/primereact/issues/2604)
+
+**Fixed bugs:**
+
+- TreeSelect templateHeader doesn't work [\#2641](https://github.com/primefaces/primereact/issues/2641)
+- dropIndex returns same index for different nodes in Tree component [\#2632](https://github.com/primefaces/primereact/issues/2632)
+- InputNumber editor in Datatable doesn't accept only numbers as input values anymore [\#2631](https://github.com/primefaces/primereact/issues/2631)
+- Bug on Dark Themes related with fixed columns [\#2630](https://github.com/primefaces/primereact/issues/2630)
+- DataTable with paginator and selection [\#2612](https://github.com/primefaces/primereact/issues/2612)
+- Datatable:  Responsive broken in 7.2.0 [\#2594](https://github.com/primefaces/primereact/issues/2594)
+- TabMenu with MenuItem template function does not work properly [\#2590](https://github.com/primefaces/primereact/issues/2590)
+
+## [7.2.0](https://github.com/primefaces/primereact/tree/7.2.0) (2022-01-19)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/7.1.0...7.2.0)
+
+**Implemented New Features and Enhancements:**
+
+- Add files and index options to itemTemplate on FileUpload [\#2584](https://github.com/primefaces/primereact/issues/2584)
+- Add rowHover property to TreeTable [\#2582](https://github.com/primefaces/primereact/issues/2582)
+- Improve resizable structure on DataTable [\#2581](https://github.com/primefaces/primereact/issues/2581)
+- Add appendTo property to Toast [\#2578](https://github.com/primefaces/primereact/issues/2578)
+- Add selectionAutoFocus property to DataTable [\#2575](https://github.com/primefaces/primereact/issues/2575)
+- Add align and alignHeader property to Column [\#2572](https://github.com/primefaces/primereact/issues/2572)
+- Keyboard click for TabView [\#2569](https://github.com/primefaces/primereact/issues/2569)
+- Column property for cellClassName function [\#2553](https://github.com/primefaces/primereact/issues/2553)
+- New Feature: 'downloadable' prop of 'Image' [\#2552](https://github.com/primefaces/primereact/issues/2552)
+- Add exportField property to DataTable [\#2544](https://github.com/primefaces/primereact/issues/2544)
+- Improve table row reorder highlight  [\#2519](https://github.com/primefaces/primereact/issues/2519)
+- ColorPicker | Add border for Dark Themes [\#2516](https://github.com/primefaces/primereact/issues/2516)
+- Add isDataSelectable property to DataTable [\#1303](https://github.com/primefaces/primereact/issues/1303)
+
+**Fixed bugs:**
+
+- tailwind theme - wrong styles [\#2587](https://github.com/primefaces/primereact/issues/2587)
+- Body cell is not assigned with the className property of Column [\#2576](https://github.com/primefaces/primereact/issues/2576)
+- TabView programmatically set activeIndex is ignored in onTabClose function. [\#2573](https://github.com/primefaces/primereact/issues/2573)
+- Calendar as editor inside DataTable in row edit mode [\#2561](https://github.com/primefaces/primereact/issues/2561)
+- Dropdown with VirtualScroll not rendering items. [\#2560](https://github.com/primefaces/primereact/issues/2560)
+- \<Calendar /\> Minutes - increment and decrement operations do not work with stepMinute = 1 [\#2557](https://github.com/primefaces/primereact/issues/2557)
+- TreeNode: TypeScript def missing expanded property [\#2548](https://github.com/primefaces/primereact/issues/2548)
+- Row grouping breaking with pagination [\#2545](https://github.com/primefaces/primereact/issues/2545)
+- Styling of TabMenu is broken for multi line headings [\#2540](https://github.com/primefaces/primereact/issues/2540)
+- \[Bug\] Next.js - `document is not defined` when using Dialog and Sidebar component [\#2538](https://github.com/primefaces/primereact/issues/2538)
+- `progress` is not a part of state but using in multiple places. [\#2537](https://github.com/primefaces/primereact/issues/2537)
+- DataTable: ReferenceError: process is not defined regression in 7.1 [\#2536](https://github.com/primefaces/primereact/issues/2536)
+- DataTable: When scrollable and virtual scroller are enabled, scroll to the right to display blank [\#2534](https://github.com/primefaces/primereact/issues/2534)
+- DataTable, TreeTable | Checkbox and RadioButton Focus Missing on Material [\#2522](https://github.com/primefaces/primereact/issues/2522)
+- DataTable | scrollable-sortable header hover on dark themes [\#2517](https://github.com/primefaces/primereact/issues/2517)
+- DataTable with resizable property is not working as expected [\#2448](https://github.com/primefaces/primereact/issues/2448)
+
+## [7.1.0](https://github.com/primefaces/primereact/tree/7.1.0) (2021-12-13)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/7.0.1...7.1.0)
 

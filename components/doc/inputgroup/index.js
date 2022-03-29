@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import { TabView } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 
-export class InputGroupDoc extends Component {
+const InputGroupDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
@@ -35,8 +32,8 @@ export class InputGroupDemo extends Component {
             <div>
                 <div className="card">
                     <h5>Addons</h5>
-                    <div className="p-grid p-fluid">
-                        <div className="p-col-12 p-md-4">
+                    <div className="grid p-fluid">
+                        <div className="col-12 md:col-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
                                     <i className="pi pi-user"></i>
@@ -45,7 +42,7 @@ export class InputGroupDemo extends Component {
                             </div>
                         </div>
 
-                        <div className="p-col-12 p-md-4">
+                        <div className="col-12 md:col-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">$</span>
                                 <InputNumber placeholder="Price" />
@@ -53,7 +50,7 @@ export class InputGroupDemo extends Component {
                             </div>
                         </div>
 
-                        <div className="p-col-12 p-md-4">
+                        <div className="col-12 md:col-4">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">www</span>
                                 <InputText placeholder="Website" />
@@ -62,8 +59,8 @@ export class InputGroupDemo extends Component {
                     </div>
 
                     <h5>Multiple Addons</h5>
-                    <div className="p-grid">
-                        <div className="p-col-12">
+                    <div className="grid">
+                        <div className="col-12">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
                                     <i className="pi pi-clock"></i>
@@ -79,22 +76,22 @@ export class InputGroupDemo extends Component {
                     </div>
 
                     <h5>Button Addons</h5>
-                    <div className="p-grid p-fluid">
-                        <div className="p-col-12 p-md-4">
+                    <div className="grid p-fluid">
+                        <div className="col-12 md:col-4">
                             <div className="p-inputgroup">
                                 <Button label="Search"/>
                                 <InputText placeholder="Keyword"/>
                             </div>
                         </div>
 
-                        <div className="p-col-12 p-md-4">
+                        <div className="col-12 md:col-4">
                             <div className="p-inputgroup">
                                 <InputText placeholder="Keyword"/>
                                 <Button icon="pi pi-search" className="p-button-warning"/>
                             </div>
                         </div>
 
-                        <div className="p-col-12 p-md-4">
+                        <div className="col-12 md:col-4">
                             <div className="p-inputgroup">
                                 <Button icon="pi pi-check" className="p-button-success"/>
                                 <InputText placeholder="Vote"/>
@@ -104,8 +101,8 @@ export class InputGroupDemo extends Component {
                     </div>
 
                     <h5>Checkbox and RadioButton</h5>
-                    <div className="p-grid p-fluid">
-                        <div className="p-col-12 p-md-12">
+                    <div className="grid p-fluid">
+                        <div className="col-12">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
                                     <Checkbox checked={this.state.checked1} onChange={(e) => this.setState((prevState) => ({ checked1: !prevState.checked1 }))} />
@@ -114,7 +111,7 @@ export class InputGroupDemo extends Component {
                             </div>
                         </div>
 
-                        <div className="p-col-12 p-md-12">
+                        <div className="col-12">
                             <div className="p-inputgroup">
                                 <InputText placeholder="Price"/>
                                 <span className="p-inputgroup-addon">
@@ -123,7 +120,7 @@ export class InputGroupDemo extends Component {
                             </div>
                         </div>
 
-                        <div className="p-col-12 p-md-12">
+                        <div className="col-12">
                             <div className="p-inputgroup">
                                 <span className="p-inputgroup-addon">
                                     <Checkbox checked={this.state.checked2} onChange={(e) => this.setState((prevState) => ({ checked2: !prevState.checked2 }))} />
@@ -141,10 +138,10 @@ export class InputGroupDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hook Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hook Source',
+            content: `
 import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
@@ -162,8 +159,8 @@ const InputGroupDemo = () => {
         <div>
             <div className="card">
                 <h5>Addons</h5>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-4">
+                <div className="grid p-fluid">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-user"></i>
@@ -172,7 +169,7 @@ const InputGroupDemo = () => {
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">$</span>
                             <InputNumber placeholder="Price" />
@@ -180,7 +177,7 @@ const InputGroupDemo = () => {
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">www</span>
                             <InputText placeholder="Website" />
@@ -189,8 +186,8 @@ const InputGroupDemo = () => {
                 </div>
 
                 <h5>Multiple Addons</h5>
-                <div className="p-grid">
-                    <div className="p-col-12">
+                <div className="grid">
+                    <div className="col-12">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-clock"></i>
@@ -206,22 +203,22 @@ const InputGroupDemo = () => {
                 </div>
 
                 <h5>Button Addons</h5>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-4">
+                <div className="grid p-fluid">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <Button label="Search"/>
                             <InputText placeholder="Keyword"/>
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <InputText placeholder="Keyword"/>
                             <Button icon="pi pi-search" className="p-button-warning"/>
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <Button icon="pi pi-check" className="p-button-success"/>
                             <InputText placeholder="Vote"/>
@@ -231,8 +228,8 @@ const InputGroupDemo = () => {
                 </div>
 
                 <h5>Checkbox and RadioButton</h5>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-12">
+                <div className="grid p-fluid">
+                    <div className="col-12">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <Checkbox checked={checked1} onChange={(e) => setChecked1(!checked1)} />
@@ -241,7 +238,7 @@ const InputGroupDemo = () => {
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-12">
+                    <div className="col-12">
                         <div className="p-inputgroup">
                             <InputText placeholder="Price"/>
                             <span className="p-inputgroup-addon">
@@ -250,7 +247,7 @@ const InputGroupDemo = () => {
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-12">
+                    <div className="col-12">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <Checkbox checked={checked2} onChange={(e) => setChecked2(!checked2)} />
@@ -267,10 +264,10 @@ const InputGroupDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
@@ -288,8 +285,8 @@ const InputGroupDemo = () => {
         <div>
             <div className="card">
                 <h5>Addons</h5>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-4">
+                <div className="grid p-fluid">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-user"></i>
@@ -298,7 +295,7 @@ const InputGroupDemo = () => {
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">$</span>
                             <InputNumber placeholder="Price" />
@@ -306,7 +303,7 @@ const InputGroupDemo = () => {
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">www</span>
                             <InputText placeholder="Website" />
@@ -315,8 +312,8 @@ const InputGroupDemo = () => {
                 </div>
 
                 <h5>Multiple Addons</h5>
-                <div className="p-grid">
-                    <div className="p-col-12">
+                <div className="grid">
+                    <div className="col-12">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-clock"></i>
@@ -332,22 +329,22 @@ const InputGroupDemo = () => {
                 </div>
 
                 <h5>Button Addons</h5>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-4">
+                <div className="grid p-fluid">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <Button label="Search"/>
                             <InputText placeholder="Keyword"/>
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <InputText placeholder="Keyword"/>
                             <Button icon="pi pi-search" className="p-button-warning"/>
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <Button icon="pi pi-check" className="p-button-success"/>
                             <InputText placeholder="Vote"/>
@@ -357,8 +354,8 @@ const InputGroupDemo = () => {
                 </div>
 
                 <h5>Checkbox and RadioButton</h5>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-12">
+                <div className="grid p-fluid">
+                    <div className="col-12">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <Checkbox checked={checked1} onChange={(e) => setChecked1(!checked1)} />
@@ -367,7 +364,7 @@ const InputGroupDemo = () => {
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-12">
+                    <div className="col-12">
                         <div className="p-inputgroup">
                             <InputText placeholder="Price"/>
                             <span className="p-inputgroup-addon">
@@ -376,7 +373,7 @@ const InputGroupDemo = () => {
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-12">
+                    <div className="col-12">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <Checkbox checked={checked2} onChange={(e) => setChecked2(!checked2)} />
@@ -393,18 +390,18 @@ const InputGroupDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/checkbox/checkbox.min.js"></script>
         <script src="https://unpkg.com/primereact/radiobutton/radiobutton.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { InputText } = primereact.inputtext;
 const { Button } = primereact.button;
 const { Checkbox } = primereact.checkbox;
@@ -420,8 +417,8 @@ const InputGroupDemo = () => {
         <div>
             <div className="card">
                 <h5>Addons</h5>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-4">
+                <div className="grid p-fluid">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-user"></i>
@@ -430,7 +427,7 @@ const InputGroupDemo = () => {
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">$</span>
                             <InputText placeholder="Price" />
@@ -438,7 +435,7 @@ const InputGroupDemo = () => {
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">www</span>
                             <InputText placeholder="Website" />
@@ -447,8 +444,8 @@ const InputGroupDemo = () => {
                 </div>
 
                 <h5>Multiple Addons</h5>
-                <div className="p-grid">
-                    <div className="p-col-12">
+                <div className="grid">
+                    <div className="col-12">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <i className="pi pi-clock"></i>
@@ -464,22 +461,22 @@ const InputGroupDemo = () => {
                 </div>
 
                 <h5>Button Addons</h5>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-4">
+                <div className="grid p-fluid">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <Button label="Search"/>
                             <InputText placeholder="Keyword"/>
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <InputText placeholder="Keyword"/>
                             <Button icon="pi pi-search" className="p-button-warning"/>
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-4">
+                    <div className="col-12 md:col-4">
                         <div className="p-inputgroup">
                             <Button icon="pi pi-check" className="p-button-success"/>
                             <InputText placeholder="Vote"/>
@@ -489,8 +486,8 @@ const InputGroupDemo = () => {
                 </div>
 
                 <h5>Checkbox and RadioButton</h5>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-12 p-md-12">
+                <div className="grid p-fluid">
+                    <div className="col-12">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <Checkbox checked={checked1} onChange={(e) => setChecked1(!checked1)} />
@@ -499,7 +496,7 @@ const InputGroupDemo = () => {
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-12">
+                    <div className="col-12">
                         <div className="p-inputgroup">
                             <InputText placeholder="Price"/>
                             <span className="p-inputgroup-addon">
@@ -508,7 +505,7 @@ const InputGroupDemo = () => {
                         </div>
                     </div>
 
-                    <div className="p-col-12 p-md-12">
+                    <div className="col-12">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
                                 <Checkbox checked={checked2} onChange={(e) => setChecked2(!checked2)} />
@@ -525,24 +522,19 @@ const InputGroupDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
 
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'InputGroupDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'InputGroupDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    );
+})
 
+export default InputGroupDoc;
