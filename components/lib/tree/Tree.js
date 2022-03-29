@@ -299,7 +299,7 @@ export const Tree = memo(forwardRef((props, ref) => {
                 onExpand={props.onExpand} onCollapse={props.onCollapse} onSelect={props.onSelect} onUnselect={props.onUnselect}
                 expandedKeys={expandedKeys} onToggle={onToggle} nodeTemplate={props.nodeTemplate} togglerTemplate={props.togglerTemplate} isNodeLeaf={isNodeLeaf}
                 dragdropScope={props.dragdropScope} onDragStart={onDragStart} onDragEnd={onDragEnd} onDrop={onDrop} onDropPoint={onDropPoint}
-                onNodeClick={props.onNodeClick} onNodeDoubleClick={props.onNodeDoubleClick} />
+                onClick={props.onNodeClick} onDoubleClick={props.onNodeDoubleClick} />
         )
     }
 
