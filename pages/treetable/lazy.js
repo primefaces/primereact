@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { TreeTable } from '../../components/lib/treetable/TreeTable';
 import { Column } from '../../components/lib/column/Column';
 import { TabView } from '../../components/lib/tabview/TabView';
@@ -6,33 +6,22 @@ import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class TreeTableLazyDemo extends Component {
+const TreeTableLazyDemo = () => {
+    const [nodes, setNodes] = useState([]);
+    const [first, setFirst] = useState(0);
+    const [rows, setRows] = useState(10);
+    const [totalRecords, setTotalRecords] = useState(0);
+    const [loading, setLoading] = useState(true);
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: [],
-            first: 0,
-            rows: 10,
-            totalRecords: 0,
-            loading: true
-        };
-
-        this.onPage = this.onPage.bind(this);
-        this.onExpand = this.onExpand.bind(this);
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         setTimeout(() => {
-            this.setState({
-                loading: false,
-                nodes: this.loadNodes(this.state.first, this.state.rows),
-                totalRecords: 1000
-            });
+            setLoading(false);
+            setNodes(loadNodes(first, rows));
+            setTotalRecords(1000);
         }, 500);
-    }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    loadNodes(first, rows) {
+    const loadNodes = (first, rows) => {
         let nodes = [];
 
         for (let i = 0; i < rows; i++) {
@@ -52,14 +41,12 @@ export default class TreeTableLazyDemo extends Component {
         return nodes;
     }
 
-    onExpand(event) {
+    const onExpand = (event) => {
         if (!event.node.children) {
-            this.setState({
-                loading: true
-            });
+            setLoading(true);
 
             setTimeout(() => {
-                this.loading = false;
+                setLoading(false);
                 let lazyNode = { ...event.node };
 
                 lazyNode.children = [
@@ -79,7 +66,7 @@ export default class TreeTableLazyDemo extends Component {
                     }
                 ];
 
-                let nodes = this.state.nodes.map(node => {
+                let _nodes = nodes.map(node => {
                     if (node.key === event.node.key) {
                         node = lazyNode;
                     }
@@ -87,73 +74,64 @@ export default class TreeTableLazyDemo extends Component {
                     return node;
                 });
 
-                this.setState({
-                    loading: false,
-                    nodes: nodes
-                });
+                setLoading(false);
+                setNodes(_nodes);
             }, 250);
         }
     }
 
-    onPage(event) {
-        this.setState({
-            loading: true
-        });
+    const onPage = (event) => {
+        setLoading(true);
 
         //imitate delay of a backend call
         setTimeout(() => {
-            this.setState({
-                first: event.first,
-                rows: event.rows,
-                nodes: this.loadNodes(event.first, event.rows),
-                loading: false
-            });
+            setFirst(event.first);
+            setRows(event.rows);
+            setNodes(loadNodes(event.first, event.rows));
+            setLoading(false);
         }, 500);
     }
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React TreeTable Component - Lazy</title>
-                    <meta name="description" content="Lazy mode is handy to deal with large datasets." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable <span>Lazy</span></h1>
-                        <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging or sorting.
-                            In addition, children of a node can be loaded on demand at onNodeExpand event as well. Sample belows imitates lazy paging by using an in memory list.</p>
-                    </div>
-
-                    <DocActions github="treetable/lazy.js" />
+    return (
+        <div>
+            <Head>
+                <title>React TreeTable Component - Lazy</title>
+                <meta name="description" content="Lazy mode is handy to deal with large datasets." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>TreeTable <span>Lazy</span></h1>
+                    <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging or sorting.
+                        In addition, children of a node can be loaded on demand at onNodeExpand event as well. Sample belows imitates lazy paging by using an in memory list.</p>
                 </div>
 
-                <div className="content-section implementation">
-                    <div className="card">
-                        <TreeTable value={this.state.nodes} lazy paginator totalRecords={this.state.totalRecords}
-                            first={this.state.first} rows={this.state.rows} onPage={this.onPage} onExpand={this.onExpand} loading={this.state.loading}>
-                            <Column field="name" header="Name" expander></Column>
-                            <Column field="size" header="Size"></Column>
-                            <Column field="type" header="Type"></Column>
-                        </TreeTable>
-                    </div>
-                </div>
-
-                <TreeTableLazyDemoDoc />
+                <DocActions github="treetable/lazy.js" />
             </div>
-        )
-    }
+
+            <div className="content-section implementation">
+                <div className="card">
+                    <TreeTable value={nodes} lazy paginator totalRecords={totalRecords}
+                        first={first} rows={rows} onPage={onPage} onExpand={onExpand} loading={loading}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
+            </div>
+
+            <TreeTableLazyDemoDoc />
+        </div>
+    )
 }
 
-class TreeTableLazyDemoDoc extends Component {
+export default TreeTableLazyDemo;
 
-    constructor(props) {
-        super(props);
+const TreeTableLazyDemoDoc = memo(() => {
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -279,10 +257,10 @@ export class TreeTableLazyDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -387,10 +365,10 @@ const TreeTableLazyDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -495,16 +473,16 @@ const TreeTableLazyDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { Column } = primereact.column;
 const { TreeTable } = primereact.treetable;
@@ -609,23 +587,16 @@ const TreeTableLazyDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'TreeTableLazyDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'TreeTableLazyDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })
+                }
+            </TabView>
+        </div>
+    )
+})

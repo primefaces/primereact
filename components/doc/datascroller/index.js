@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class DataScrollerDoc extends Component {
+const DataScrollerDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { DataScroller } from 'primereact/datascroller';
 import { Button } from 'primereact/button';
@@ -67,10 +64,10 @@ export class DataScrollerDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { DataScroller } from 'primereact/datascroller';
 import { Button } from 'primereact/button';
@@ -115,10 +112,10 @@ const DataScrollerDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { DataScroller } from 'primereact/datascroller';
 import { Button } from 'primereact/button';
@@ -163,17 +160,17 @@ const DataScrollerDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./DataScrollerDemo.css" />
         <script src="./ProductService.js"></script>
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/datascroller/datascroller.min.js"></script>
         <script src="https://unpkg.com/primereact/rating/rating.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { DataScroller } = primereact.datascroller;
 const { Button } = primereact.button;
@@ -216,12 +213,12 @@ const DataScrollerDemo = () => {
     );
 }
                 `
-            }
         }
+    }
 
-        this.extFiles = {
-            'demo/DataScrollerDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/DataScrollerDemo.css': {
+            content: `
 .datascroller-demo .product-name {
     font-size: 1.5rem;
     font-weight: 700;
@@ -311,27 +308,21 @@ const DataScrollerDemo = () => {
     }
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { DataScroller } from 'primereact/datascroller';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -339,213 +330,213 @@ import { DataScroller } from 'primereact/datascroller';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>DataScroller requires a collection of items as its value, number of rows to load and a template content to display. Here is a sample DataScroller that displays a
-                list of cars where each load event adds 10 more rows if available.</p>
-                        <CodeHighlight>
-                            {`
+                    <h5>Getting Started</h5>
+                    <p>DataScroller requires a collection of items as its value, number of rows to load and a template content to display. Here is a sample DataScroller that displays a
+            list of cars where each load event adds 10 more rows if available.</p>
+<CodeHighlight>
+{`
 <DataScroller value={products} itemTemplate={itemTemplate} rows={10}></DataScroller>
 `}
-                        </CodeHighlight>
-                        <CodeHighlight lang="js">
+</CodeHighlight>
+<CodeHighlight lang="js">
                             {`
 const itemTemplate = (item) => {
     // custom item content
 }
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-
-                        <h5>Inline</h5>
-                        <p>By default DataScroller listens to the scroll event of window, the alternative is the inline mode where container of the DataScroller element itself is used as the event target. Set <i>inline</i> option to true to enable this mode.</p>
-                        <CodeHighlight>
-                            {`
+                    <h5>Inline</h5>
+                    <p>By default DataScroller listens to the scroll event of window, the alternative is the inline mode where container of the DataScroller element itself is used as the event target. Set <i>inline</i> option to true to enable this mode.</p>
+<CodeHighlight>
+    {`
 <DataScroller value={products} itemTemplate={itemTemplate} rows={10} inline></DataScroller>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h5>Lazy Loading</h5>
-                        <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking
-                        onLazyLoad callback everytime paging happens. To implement lazy loading,
-            enable <i>lazy</i> property and provide a method callback using <i>onLazyLoad</i> that actually loads the data from a remote datasource. onLazyLoad gets an event object
-            that contains information about what to load.</p>
+                    <h5>Lazy Loading</h5>
+                    <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking
+                    onLazyLoad callback everytime paging happens. To implement lazy loading,
+        enable <i>lazy</i> property and provide a method callback using <i>onLazyLoad</i> that actually loads the data from a remote datasource. onLazyLoad gets an event object
+        that contains information about what to load.</p>
 
-                        <CodeHighlight>
-                            {`
+<CodeHighlight>
+    {`
 <DataScroller value={products} itemTemplate={itemTemplate} rows={10} lazy onLazyLoad={loadData}></DataScroller>
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <CodeHighlight lang="js">
-                            {`
+<CodeHighlight lang="js">
+{`
 const loadData = (event) => {
     //event.first = First row offset
     //event.rows = Number of rows per page
     //add more records to the cars array
 }
 `}
-                        </CodeHighlight>
+</CodeHighlight>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>value</td>
-                                        <td>array</td>
-                                        <td>null</td>
-                                        <td>An array of objects to display.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>rows</td>
-                                        <td>number</td>
-                                        <td>null</td>
-                                        <td>Number of rows to fetch in a load event.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>inline</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Defines if the event target to listen the scroll event is the element itself.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>scrollHeight</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Max height of the content area in inline mode.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>loader</td>
-                                        <td>boolean</td>
-                                        <td>null</td>
-                                        <td>Determines whether data is loaded by a target element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>buffer</td>
-                                        <td>number</td>
-                                        <td>0.9</td>
-                                        <td>Number of buffer size.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>itemTemplate</td>
-                                        <td>function</td>
-                                        <td>null</td>
-                                        <td>Function that gets an item in the value and returns the content for it.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>header</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Label of header.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>footer</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Label of footer.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>emptyMessage</td>
-                                        <td>any</td>
-                                        <td>No records found</td>
-                                        <td>Text to display when there is no data.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>value</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>An array of objects to display.</td>
+                                </tr>
+                                <tr>
+                                    <td>rows</td>
+                                    <td>number</td>
+                                    <td>null</td>
+                                    <td>Number of rows to fetch in a load event.</td>
+                                </tr>
+                                <tr>
+                                    <td>inline</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Defines if the event target to listen the scroll event is the element itself.</td>
+                                </tr>
+                                <tr>
+                                    <td>scrollHeight</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Max height of the content area in inline mode.</td>
+                                </tr>
+                                <tr>
+                                    <td>loader</td>
+                                    <td>boolean</td>
+                                    <td>null</td>
+                                    <td>Determines whether data is loaded by a target element.</td>
+                                </tr>
+                                <tr>
+                                    <td>buffer</td>
+                                    <td>number</td>
+                                    <td>0.9</td>
+                                    <td>Number of buffer size.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>itemTemplate</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Function that gets an item in the value and returns the content for it.</td>
+                                </tr>
+                                <tr>
+                                    <td>header</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Label of header.</td>
+                                </tr>
+                                <tr>
+                                    <td>footer</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Label of footer.</td>
+                                </tr>
+                                <tr>
+                                    <td>emptyMessage</td>
+                                    <td>any</td>
+                                    <td>No records found</td>
+                                    <td>Text to display when there is no data.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onLazyLoad</td>
-                                        <td>event.first = First row offset <br />
-                                event.rows = Number of rows per page <br /></td>
-                                        <td>Callback to invoke in lazy mode to load new data.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onLazyLoad</td>
+                                    <td>event.first = First row offset <br />
+                            event.rows = Number of rows per page <br /></td>
+                                    <td>Callback to invoke in lazy mode to load new data.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-datascroller</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-datascroller-header</td>
-                                        <td>Header section.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-datascroller-footer</td>
-                                        <td>Footer section.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-datascroller-content</td>
-                                        <td>Wrapper of item container.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-datascroller-list</td>
-                                        <td>Item container element.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-datascroller</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-datascroller-header</td>
+                                    <td>Header section.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-datascroller-footer</td>
+                                    <td>Footer section.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-datascroller-content</td>
+                                    <td>Wrapper of item container.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-datascroller-list</td>
+                                    <td>Item container element.</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                            <h5>Dependencies</h5>
-                            <p>None.</p>
-                        </div>
+                        <h5>Dependencies</h5>
+                        <p>None.</p>
+                    </div>
 
-                    </TabPanel>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'DataScrollerDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'DataScrollerDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default DataScrollerDoc;

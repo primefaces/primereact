@@ -319,7 +319,7 @@ export declare enum FilterOperator {
 
 export declare namespace FilterService {
     export function filter(value: any, fields: string[], filterValue: any, filterMatchMode: string, filterLocale?: string): any[];
-    export interface filters {
+    export const filters: {
         startsWith(value: any, filter: string, filterLocale?: string): boolean;
         contains(value: any, filter: string, filterLocale?: string): boolean;
         notContains(value: any, filter: string, filterLocale?: string): boolean;

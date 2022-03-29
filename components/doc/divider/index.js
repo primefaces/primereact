@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class DividerDoc extends Component {
+const DividerDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
@@ -165,10 +162,10 @@ export class DividerDemo extends Component {
     }
 }
 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React from 'react';
 import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
@@ -320,10 +317,10 @@ const DividerDemo = () => {
     );
 }
 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React from 'react';
 import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
@@ -475,14 +472,14 @@ const DividerDemo = () => {
     );
 }
 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/divider/divider.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { Divider } = primereact.divider;
 const { InputText } = primereact.inputtext;
 const { Button } = primereact.button;
@@ -633,23 +630,21 @@ const DividerDemo = () => {
     );
 }
                 `
-            }
-        };
+        }
     }
 
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                    <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Divider } from 'primereact/divider';
 `}
 </CodeHighlight>
 
-                    <h5>Import via CDN</h5>
+                <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -657,8 +652,8 @@ import { Divider } from 'primereact/divider';
 `}
 </CodeHighlight>
 
-                <h5>Getting Started</h5>
-				<p>Divider has two orientations defined with the <i>layout</i> property, default is "horizontal" and the alternative is "vertical".</p>
+            <h5>Getting Started</h5>
+            <p>Divider has two orientations defined with the <i>layout</i> property, default is "horizontal" and the alternative is "vertical".</p>
 <CodeHighlight>
 {`
 <div>Content 1</div>
@@ -666,8 +661,8 @@ import { Divider } from 'primereact/divider';
 <div>Content 2</div>
 `}
 </CodeHighlight>
-                <h5>Border Style</h5>
-                <p>Style of the border is configured with the <i>type</i> property and supports 3 values; default is "solid" and other possibilities are "dashed" and "dotted".</p>
+            <h5>Border Style</h5>
+            <p>Style of the border is configured with the <i>type</i> property and supports 3 values; default is "solid" and other possibilities are "dashed" and "dotted".</p>
 <CodeHighlight>
 {`
 <div>Content 1</div>
@@ -676,8 +671,8 @@ import { Divider } from 'primereact/divider';
 `}
 </CodeHighlight>
 
-                <h5>Vertical Divider</h5>
-                <p>Vertical divider is enabled by setting the <i>layout</i> property as "vertical".</p>
+            <h5>Vertical Divider</h5>
+            <p>Vertical divider is enabled by setting the <i>layout</i> property as "vertical".</p>
 
 <CodeHighlight>
 {`
@@ -690,11 +685,11 @@ import { Divider } from 'primereact/divider';
 </div>
 `}
 </CodeHighlight>
-                <h5>Content</h5>
-                <p>Any content placed inside is rendered within the boundaries of the divider. In addition, location
-                    of the content is configured with the <i>align</i> property. In horizontal layout, alignment options
-                    are "left", "center" and "right" whereas vertical mode supports "top", "center" and "bottom".
-                </p>
+            <h5>Content</h5>
+            <p>Any content placed inside is rendered within the boundaries of the divider. In addition, location
+                of the content is configured with the <i>align</i> property. In horizontal layout, alignment options
+                are "left", "center" and "right" whereas vertical mode supports "top", "center" and "bottom".
+            </p>
 <CodeHighlight>
 {`
 <div>Content 1</div>
@@ -721,110 +716,111 @@ import { Divider } from 'primereact/divider';
 <div>Content 4</div>
 `}
 </CodeHighlight>
-                <h5>Properties</h5>
-                <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
-				<div className="doc-tablewrapper">
-					<table className="doc-table">
-						<thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Default</th>
-                                <th>Description</th>
-                            </tr>
-						</thead>
-						<tbody>
-                            <tr>
-                                <td>align</td>
-                                <td>string</td>
-                                <td>null</td>
-                                <td>Alignment of the content, options are "left", "center", "right" for horizontal layout
-                                    and "top", "center", "bottom" for vertical.</td>
-                            </tr>
-                            <tr>
-                                <td>layout</td>
-                                <td>string</td>
-                                <td>horizontal</td>
-                                <td>Specifies the orientation, valid values are "horizontal" and "vertical".</td>
-                            </tr>
-                            <tr>
-                                <td>type</td>
-                                <td>String</td>
-                                <td>solid</td>
-                                <td>Border style type, default is "solid" and other options are "dashed" and "dotted".</td>
-                            </tr>
-						</tbody>
-					</table>
-				</div>
-
-				<h5>Styling</h5>
-				<p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-				<div className="doc-tablewrapper">
-					<table className="doc-table">
-						<thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
-						</thead>
-						<tbody>
-                            <tr>
-                                <td>p-divider</td>
-                                <td>Container element.</td>
-                            </tr>
-                            <tr>
-                                <td>p-divider-horizontal</td>
-                                <td>Container element in horizontal layout.</td>
-                            </tr>
-                            <tr>
-                                <td>p-divider-vertical</td>
-                                <td>Container element in vertical layout.</td>
-                            </tr>
-                            <tr>
-                                <td>p-divider-solid</td>
-                                <td>Container element with solid border.</td>
-                            </tr>
-                            <tr>
-                                <td>p-divider-dashed</td>
-                                <td>Container element with dashed border.</td>
-                            </tr>
-                            <tr>
-                                <td>p-divider-dotted</td>
-                                <td>Container element with dotted border.</td>
-                            </tr>
-                            <tr>
-                                <td>p-divider-left</td>
-                                <td>Container element with content aligned to left.</td>
-                            </tr>
-                            <tr>
-                                <td>p-divider-right</td>
-                                <td>Container element with content aligned to right.</td>
-                            </tr>
-                            <tr>
-                                <td>p-divider-center</td>
-                                <td>Container element with content aligned to center.</td>
-                            </tr>
-                            <tr>
-                                <td>p-divider-bottom</td>
-                                <td>Container element with content aligned to bottom.</td>
-                            </tr>
-                            <tr>
-                                <td>p-divider-top</td>
-                                <td>Container element with content aligned to top.</td>
-                            </tr>
-						</tbody>
-					</table>
-				</div>
-
-				<h5>Dependencies</h5>
-				<p>None.</p>
-                    </TabPanel>
-
-                    {
-                        useLiveEditorTabs({ name: 'DividerDemo', sources: this.sources })
-                    }
-                </TabView>
+            <h5>Properties</h5>
+            <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>align</td>
+                            <td>string</td>
+                            <td>null</td>
+                            <td>Alignment of the content, options are "left", "center", "right" for horizontal layout
+                                and "top", "center", "bottom" for vertical.</td>
+                        </tr>
+                        <tr>
+                            <td>layout</td>
+                            <td>string</td>
+                            <td>horizontal</td>
+                            <td>Specifies the orientation, valid values are "horizontal" and "vertical".</td>
+                        </tr>
+                        <tr>
+                            <td>type</td>
+                            <td>String</td>
+                            <td>solid</td>
+                            <td>Border style type, default is "solid" and other options are "dashed" and "dotted".</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        );
-    }
-}
+
+            <h5>Styling</h5>
+            <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Element</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>p-divider</td>
+                            <td>Container element.</td>
+                        </tr>
+                        <tr>
+                            <td>p-divider-horizontal</td>
+                            <td>Container element in horizontal layout.</td>
+                        </tr>
+                        <tr>
+                            <td>p-divider-vertical</td>
+                            <td>Container element in vertical layout.</td>
+                        </tr>
+                        <tr>
+                            <td>p-divider-solid</td>
+                            <td>Container element with solid border.</td>
+                        </tr>
+                        <tr>
+                            <td>p-divider-dashed</td>
+                            <td>Container element with dashed border.</td>
+                        </tr>
+                        <tr>
+                            <td>p-divider-dotted</td>
+                            <td>Container element with dotted border.</td>
+                        </tr>
+                        <tr>
+                            <td>p-divider-left</td>
+                            <td>Container element with content aligned to left.</td>
+                        </tr>
+                        <tr>
+                            <td>p-divider-right</td>
+                            <td>Container element with content aligned to right.</td>
+                        </tr>
+                        <tr>
+                            <td>p-divider-center</td>
+                            <td>Container element with content aligned to center.</td>
+                        </tr>
+                        <tr>
+                            <td>p-divider-bottom</td>
+                            <td>Container element with content aligned to bottom.</td>
+                        </tr>
+                        <tr>
+                            <td>p-divider-top</td>
+                            <td>Container element with content aligned to top.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h5>Dependencies</h5>
+            <p>None.</p>
+                </TabPanel>
+
+                {
+                    useLiveEditorTabs({ name: 'DividerDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default DividerDoc;

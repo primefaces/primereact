@@ -1,5 +1,11 @@
-import { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export class ColumnGroup extends Component {
-    
+export const ColumnGroup = () => { }
+
+ColumnGroup.defaultProps = {
+    __TYPE: 'ColumnGroup'
+}
+
+ColumnGroup.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string
 }

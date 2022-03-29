@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class MessagesDoc extends Component {
+const MessagesDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Messages } from 'primereact/messages';
 import { Message } from 'primereact/message';
@@ -116,10 +113,10 @@ export class MessagesDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+    },
+    'hooks': {
+        tabName: 'Hooks Source',
+        content: `
 import React, { useEffect, useRef } from 'react';
 import { Messages } from 'primereact/messages';
 import { Message } from 'primereact/message';
@@ -217,10 +214,10 @@ const MessagesDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+    },
+    'ts': {
+        tabName: 'TS Source',
+        content: `
 import React, { useEffect, useRef } from 'react';
 import { Messages } from 'primereact/messages';
 import { Message } from 'primereact/message';
@@ -318,14 +315,14 @@ const MessagesDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+    },
+    'browser': {
+        tabName: 'Browser Source',
+        imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/messages/messages.min.js"></script>
         <script src="https://unpkg.com/primereact/message/message.min.js"></script>`,
-                content: `
+        content: `
 const { useEffect, useState, useRef } = React;
 const { Messages } = primereact.messages;
 const { Message } = primereact.message;
@@ -423,20 +420,14 @@ const MessagesDemo = () => {
     )
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Messages } from 'primereact/messages';
@@ -444,7 +435,7 @@ import { Message } from 'primereact/message';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -453,11 +444,11 @@ import { Message } from 'primereact/message';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>A single message is specified by the Message interface in PrimeReact that defines various properties such as severity,
-               summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Messages instance.</p>
+                    <h5>Getting Started</h5>
+                    <p>A single message is specified by the Message interface in PrimeReact that defines various properties such as severity,
+            summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Messages instance.</p>
 
-                        <p>Note that for animations, messages requires react-transition-group package.</p>
+                    <p>Note that for animations, messages requires react-transition-group package.</p>
 
 <CodeHighlight>
 {`
@@ -471,76 +462,76 @@ messages.current.show({severity: 'success', summary: 'Success Message', detail: 
 `}
 </CodeHighlight>
 
-                        <h5>Message API</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>severity</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Severity of the message.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>content</td>
-                                        <td>element</td>
-                                        <td>null</td>
-                                        <td>Template of the message.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>summary</td>
-                                        <td>element</td>
-                                        <td>null</td>
-                                        <td>Summary content of the message.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>detail</td>
-                                        <td>element</td>
-                                        <td>null</td>
-                                        <td>Detail content of the message.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>closable</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether the message can be closed manually using the close icon.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>sticky</td>
-                                        <td>element</td>
-                                        <td>null</td>
-                                        <td>When enabled, message is not removed automatically.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>life</td>
-                                        <td>number</td>
-                                        <td>3000</td>
-                                        <td>Delay in milliseconds to close the message automatically.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Message API</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>severity</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Severity of the message.</td>
+                                </tr>
+                                <tr>
+                                    <td>content</td>
+                                    <td>element</td>
+                                    <td>null</td>
+                                    <td>Template of the message.</td>
+                                </tr>
+                                <tr>
+                                    <td>summary</td>
+                                    <td>element</td>
+                                    <td>null</td>
+                                    <td>Summary content of the message.</td>
+                                </tr>
+                                <tr>
+                                    <td>detail</td>
+                                    <td>element</td>
+                                    <td>null</td>
+                                    <td>Detail content of the message.</td>
+                                </tr>
+                                <tr>
+                                    <td>closable</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether the message can be closed manually using the close icon.</td>
+                                </tr>
+                                <tr>
+                                    <td>sticky</td>
+                                    <td>element</td>
+                                    <td>null</td>
+                                    <td>When enabled, message is not removed automatically.</td>
+                                </tr>
+                                <tr>
+                                    <td>life</td>
+                                    <td>number</td>
+                                    <td>3000</td>
+                                    <td>Delay in milliseconds to close the message automatically.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Severities</h5>
-                        <p>There are four possible values for the severity of a message.</p>
+                    <h5>Severities</h5>
+                    <p>There are four possible values for the severity of a message.</p>
 
-                        <ul>
-                            <li>success</li>
-                            <li>info</li>
-                            <li>warn</li>
-                            <li>error</li>
-                        </ul>
+                    <ul>
+                        <li>success</li>
+                        <li>info</li>
+                        <li>warn</li>
+                        <li>error</li>
+                    </ul>
 
-                        <h5>Showing Messages</h5>
-                        <p>Show method accepts either a single message or an array of messages.</p>
+                    <h5>Showing Messages</h5>
+                    <p>Show method accepts either a single message or an array of messages.</p>
 
 <CodeHighlight>
 {`
@@ -557,33 +548,33 @@ messages.current.show({severity: 'success', summary: 'Success Message', detail: 
 <CodeHighlight lang="js">
 {`
 const showSuccess = () => {
-    messages.current.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+messages.current.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
 }
 
 const showInfo = () => {
-    messages.current.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
+messages.current.show({ severity: 'info', summary: 'Info Message', detail: 'PrimeReact rocks' });
 }
 
 const showWarn = () => {
-    messages.current.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
+messages.current.show({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
 }
 
 const showError = () => {
-    messages.current.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
+messages.current.show({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 }
 
 const showMultiple = () => {
-    messages.current.show([
-        {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
-        {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
-        {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
-    ]);
+messages.current.show([
+    {severity:'info', summary:'Message 1', detail:'PrimeReact rocks'},
+    {severity:'info', summary:'Message 2', detail:'PrimeReact rocks'},
+    {severity:'info', summary:'Message 3', detail:'PrimeFaces rocks'}
+]);
 }
 `}
 </CodeHighlight>
 
-                        <h5>Clearing Messages</h5>
-                        <p><i>clear()</i> method removes all messages.</p>
+                    <h5>Clearing Messages</h5>
+                    <p><i>clear()</i> method removes all messages.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -591,8 +582,8 @@ messages.current.clear();
 `}
 </CodeHighlight>
 
-                        <h5>Replacing Messages</h5>
-                        <p><i>replace(newMessages)</i> method adds new messages after removing all old messages.</p>
+                    <h5>Replacing Messages</h5>
+                    <p><i>replace(newMessages)</i> method adds new messages after removing all old messages.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -600,8 +591,8 @@ messages.current.replace(newMessages);
 `}
 </CodeHighlight>
 
-                        <h5>Closable</h5>
-                        <p>Messages are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set <i>closable</i> to false.</p>
+                    <h5>Closable</h5>
+                    <p>Messages are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set <i>closable</i> to false.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -609,9 +600,9 @@ messages.current.show({closable: false, severity: 'error', summary: 'Error Messa
 `}
 </CodeHighlight>
 
-                        <h5>Sticky</h5>
-                        <p>Messages are cleared automatically after the timeout defined by <i>life</i> property which is 3 seconds by default. Use <i>sticky</i> mode to make them stay until
-                they are manually removed.</p>
+                    <h5>Sticky</h5>
+                    <p>Messages are cleared automatically after the timeout defined by <i>life</i> property which is 3 seconds by default. Use <i>sticky</i> mode to make them stay until
+            they are manually removed.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -624,8 +615,8 @@ messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message',
 </CodeHighlight>
 
 
-                        <h5>Message Component</h5>
-                        <p>Message component is useful in cases where a single message needs to be displayed related to an element such as forms. It has two properties, <i>severity</i> and <i>text</i> of the message.</p>
+                    <h5>Message Component</h5>
+                    <p>Message component is useful in cases where a single message needs to be displayed related to an element such as forms. It has two properties, <i>severity</i> and <i>text</i> of the message.</p>
 <CodeHighlight>
 {`
 <h5>Inline Message CSS</h5>
@@ -637,192 +628,193 @@ messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message',
 `}
 </CodeHighlight>
 
-                        <h5>Properties of Message</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>severity</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Severity level of the message.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>text</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Text of the message.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Message text.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>content</td>
-                                        <td>element</td>
-                                        <td>null</td>
-                                        <td>Template of the message.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties of Message</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>severity</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Severity level of the message.</td>
+                                </tr>
+                                <tr>
+                                    <td>text</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Text of the message.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Message text.</td>
+                                </tr>
+                                <tr>
+                                    <td>content</td>
+                                    <td>element</td>
+                                    <td>null</td>
+                                    <td>Template of the message.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Properties of Messages</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>transitionOptions</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties of Messages</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>transitionOptions</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events of Messages</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onRemove</td>
-                                        <td>message: Removed message </td>
-                                        <td>Callback to invoke when a message is removed.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onClick</td>
-                                        <td>message: Clicked message </td>
-                                        <td>Callback to invoke when a message gets clicked.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events of Messages</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onRemove</td>
+                                    <td>message: Removed message </td>
+                                    <td>Callback to invoke when a message is removed.</td>
+                                </tr>
+                                <tr>
+                                    <td>onClick</td>
+                                    <td>message: Clicked message </td>
+                                    <td>Callback to invoke when a message gets clicked.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-messages</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-messages-info</td>
-                                        <td>Container element when displaying info messages.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-messages-warn</td>
-                                        <td>Container element when displaying warning messages.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-messages-error</td>
-                                        <td>Container element when displaying error messages.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-messages-success</td>
-                                        <td>Container element when displaying success messages.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-messages-close</td>
-                                        <td>Close icon.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-messages-icon</td>
-                                        <td>Severity icon.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-messages-summary</td>
-                                        <td>Summary of a message.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-messages-detail</td>
-                                        <td>Detail of a message.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-messages</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-messages-info</td>
+                                    <td>Container element when displaying info messages.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-messages-warn</td>
+                                    <td>Container element when displaying warning messages.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-messages-error</td>
+                                    <td>Container element when displaying error messages.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-messages-success</td>
+                                    <td>Container element when displaying success messages.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-messages-close</td>
+                                    <td>Close icon.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-messages-icon</td>
+                                    <td>Severity icon.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-messages-summary</td>
+                                    <td>Summary of a message.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-messages-detail</td>
+                                    <td>Detail of a message.</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                            <h5>Dependencies</h5>
-                            <ul>
-                                <li>react-transition-group</li>
-                            </ul>
-                        </div>
+                        <h5>Dependencies</h5>
+                        <ul>
+                            <li>react-transition-group</li>
+                        </ul>
+                    </div>
 
-                    </TabPanel>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'MessagesDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'MessagesDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default MessagesDoc;

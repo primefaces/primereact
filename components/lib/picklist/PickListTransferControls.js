@@ -1,93 +1,88 @@
-import React, { Component } from 'react';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import React, { memo } from 'react';
 import { Button } from '../button/Button';
+import { ObjectUtils, classNames } from '../utils/Utils';
 
-export class PickListTransferControls extends Component {
+export const PickListTransferControls = memo((props) => {
+    const moveRightDisabled = ObjectUtils.isEmpty(props.sourceSelection);
+    const moveLeftDisabled = ObjectUtils.isEmpty(props.targetSelection);
+    const moveAllRightDisabled = ObjectUtils.isEmpty(props.source);
+    const moveAllLeftDisabled = ObjectUtils.isEmpty(props.target);
 
-    constructor(props) {
-        super(props);
-
-        this.moveRight = this.moveRight.bind(this);
-        this.moveAllRight = this.moveAllRight.bind(this);
-        this.moveLeft = this.moveLeft.bind(this);
-        this.moveAllLeft = this.moveAllLeft.bind(this);
-    }
-
-    moveRight(event) {
-        let selection = this.props.sourceSelection;
+    const moveRight = (event) => {
+        const selection = props.sourceSelection;
 
         if (ObjectUtils.isNotEmpty(selection)) {
-            let targetList = [...this.props.target];
-            let sourceList = [...this.props.source];
+            let targetList = [...props.target];
+            let sourceList = [...props.source];
 
             for (let i = 0; i < selection.length; i++) {
-                let selectedItem = selection[i];
+                const selectedItem = selection[i];
 
-                if (ObjectUtils.findIndexInList(selectedItem, targetList, this.props.dataKey) === -1) {
-                    targetList.push(sourceList.splice(ObjectUtils.findIndexInList(selectedItem, sourceList, this.props.dataKey), 1)[0]);
+                if (ObjectUtils.findIndexInList(selectedItem, targetList, props.dataKey) === -1) {
+                    targetList.push(sourceList.splice(ObjectUtils.findIndexInList(selectedItem, sourceList, props.dataKey), 1)[0]);
                 }
             }
 
-            if (this.props.onTransfer) {
-                this.props.onTransfer({
+            if (props.onTransfer) {
+                props.onTransfer({
                     originalEvent: event,
                     source: sourceList,
                     target: targetList,
                     direction: 'toTarget'
-                })
+                });
             }
         }
     }
 
-    moveAllRight(event) {
-        if (this.props.source) {
-            let targetList = [...this.props.target, ...this.props.source];
+    const moveAllRight = (event) => {
+        if (props.source) {
+            let targetList = [...props.target, ...props.source];
             let sourceList = [];
 
-            if (this.props.onTransfer) {
-                this.props.onTransfer({
+            if (props.onTransfer) {
+                props.onTransfer({
                     originalEvent: event,
                     source: sourceList,
                     target: targetList,
                     direction: 'allToTarget'
-                })
+                });
             }
         }
     }
 
-    moveLeft(event) {
-        let selection = this.props.targetSelection;
+    const moveLeft = (event) => {
+        const selection = props.targetSelection;
 
         if (ObjectUtils.isNotEmpty(selection)) {
-            let targetList = [...this.props.target];
-            let sourceList = [...this.props.source];
+            let targetList = [...props.target];
+            let sourceList = [...props.source];
 
             for (let i = 0; i < selection.length; i++) {
                 let selectedItem = selection[i];
 
-                if (ObjectUtils.findIndexInList(selectedItem, sourceList, this.props.dataKey) === -1) {
-                    sourceList.push(targetList.splice(ObjectUtils.findIndexInList(selectedItem, targetList, this.props.dataKey), 1)[0]);
+                if (ObjectUtils.findIndexInList(selectedItem, sourceList, props.dataKey) === -1) {
+                    sourceList.push(targetList.splice(ObjectUtils.findIndexInList(selectedItem, targetList, props.dataKey), 1)[0]);
                 }
             }
 
-            if (this.props.onTransfer) {
-                this.props.onTransfer({
+            if (props.onTransfer) {
+                props.onTransfer({
                     originalEvent: event,
                     source: sourceList,
                     target: targetList,
                     direction: 'toSource'
-                })
+                });
             }
         }
     }
 
-    moveAllLeft(event) {
-        if (this.props.source) {
-            let sourceList = [...this.props.source, ...this.props.target];
+    const moveAllLeft = (event) => {
+        if (props.source) {
+            let sourceList = [...props.source, ...props.target];
             let targetList = [];
 
-            if (this.props.onTransfer) {
-                this.props.onTransfer({
+            if (props.onTransfer) {
+                props.onTransfer({
                     originalEvent: event,
                     source: sourceList,
                     target: targetList,
@@ -97,21 +92,14 @@ export class PickListTransferControls extends Component {
         }
     }
 
+    const className = classNames('p-picklist-buttons p-picklist-transfer-buttons', props.className);
 
-
-    render() {
-        let moveRightDisabled = ObjectUtils.isEmpty(this.props.sourceSelection);
-        let moveLeftDisabled = ObjectUtils.isEmpty(this.props.targetSelection);
-        let moveAllRightDisabled = ObjectUtils.isEmpty(this.props.source);
-        let moveAllLeftDisabled = ObjectUtils.isEmpty(this.props.target);
-
-        let className = classNames('p-picklist-buttons p-picklist-transfer-buttons', this.props.className);
-
-        return <div className={className}>
-            <Button disabled={moveRightDisabled} type="button" icon="pi pi-angle-right" onClick={this.moveRight}></Button>
-            <Button disabled={moveAllRightDisabled} type="button" icon="pi pi-angle-double-right" onClick={this.moveAllRight}></Button>
-            <Button disabled={moveLeftDisabled} type="button" icon="pi pi-angle-left" onClick={this.moveLeft}></Button>
-            <Button disabled={moveAllLeftDisabled} type="button" icon="pi pi-angle-double-left" onClick={this.moveAllLeft}></Button>
-        </div>;
-    }
-}
+    return (
+        <div className={className}>
+            <Button disabled={moveRightDisabled} type="button" icon="pi pi-angle-right" onClick={moveRight}></Button>
+            <Button disabled={moveAllRightDisabled} type="button" icon="pi pi-angle-double-right" onClick={moveAllRight}></Button>
+            <Button disabled={moveLeftDisabled} type="button" icon="pi pi-angle-left" onClick={moveLeft}></Button>
+            <Button disabled={moveAllLeftDisabled} type="button" icon="pi pi-angle-double-left" onClick={moveAllLeft}></Button>
+        </div>
+    )
+});

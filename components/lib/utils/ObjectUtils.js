@@ -135,6 +135,17 @@ export default class ObjectUtils {
         return null;
     }
 
+    static combinedRefs(innerRef, forwardRef) {
+        if (innerRef && forwardRef) {
+            if (typeof forwardRef === 'function') {
+                forwardRef(innerRef.current);
+            }
+            else {
+                forwardRef.current = innerRef.current;
+            }
+        }
+    }
+
     static removeAccents(str) {
         if (str && str.search(/[\xC0-\xFF]/g) > -1) {
             str = str
@@ -176,15 +187,6 @@ export default class ObjectUtils {
         return !this.isEmpty(value);
     }
 
-    /**
-     * Compare value1 and value2 ascending by default (1) or pass in order as -1 for descending.
-     *
-     * @param {any} value1 the first value
-     * @param {any} value2 the second value
-     * @param {number | undefined} order by default ascending (1) set to descending (-1)
-     * @param {string | undefined} locale the locale to use (default to browser locale if null)
-     * @returns either 0, 1 or -1 for comparing the two values
-     */
     static sort(value1, value2, order = 1, locale) {
         let result = null;
 

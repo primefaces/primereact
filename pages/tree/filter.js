@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Tree } from '../../components/lib/tree/Tree';
 import { NodeService } from '../../service/NodeService';
 import { TabView } from '../../components/lib/tabview/TabView';
@@ -6,62 +6,53 @@ import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class TreeFilterDemo extends Component {
+const TreeFilterDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: null
-        };
+    const [nodes, setNodes] = useState(null);
+    const nodeService = new NodeService();
 
-        this.nodeService = new NodeService();
-    }
+    useEffect(() => {
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    componentDidMount() {
-        this.nodeService.getTreeNodes().then(data => this.setState({ nodes: data }));
-    }
-
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React Tree Component - Filter</title>
-                    <meta name="description" content="Filtering updates the node based on the constraints." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree <span>Filter</span></h1>
-                        <p>Filtering updates the node based on the constraints.</p>
-                    </div>
-
-                    <DocActions github="tree/filter.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Tree Component - Filter</title>
+                <meta name="description" content="Filtering updates the node based on the constraints." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>Tree <span>Filter</span></h1>
+                    <p>Filtering updates the node based on the constraints.</p>
                 </div>
 
-                <div className="content-section implementation">
-                    <div className="card">
-                        <h5>Lenient Filter</h5>
-                        <Tree value={this.state.nodes} filter filterMode="lenient"></Tree>
-
-                        <h5>Strict Filter</h5>
-                        <Tree value={this.state.nodes} filter filterMode="strict"></Tree>
-                    </div>
-                </div>
-
-                <TreeFilterDemoDoc />
+                <DocActions github="tree/filter.js" />
             </div>
-        )
-    }
+
+            <div className="content-section implementation">
+                <div className="card">
+                    <h5>Lenient Filter</h5>
+                    <Tree value={nodes} filter filterMode="lenient"></Tree>
+
+                    <h5>Strict Filter</h5>
+                    <Tree value={nodes} filter filterMode="strict"></Tree>
+                </div>
+            </div>
+
+            <TreeFilterDemoDoc />
+        </div>
+    )
 }
 
-export class TreeFilterDemoDoc extends Component {
+export default TreeFilterDemo;
 
-    constructor(props) {
-        super(props);
+export const TreeFilterDemoDoc = memo(() => {
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Tree } from 'primereact/tree';
 import { NodeService } from '../service/NodeService';
@@ -96,10 +87,10 @@ export class TreeFilterDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { NodeService } from '../service/NodeService';
@@ -125,10 +116,10 @@ const TreeFilterDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import {Tree} from 'primereact/tree';
 import {NodeService} from '../service/NodeService';
@@ -156,16 +147,16 @@ const TreeFilterDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="./NodeService.js"></script>
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { Tree } = primereact.tree;
 
@@ -190,23 +181,16 @@ const TreeFilterDemo = () => {
     )
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'TreeFilterDemo', sources: this.sources, service: 'NodeService', data: 'treenodes' })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'TreeFilterDemo', sources: sources, service: 'NodeService', data: 'treenodes' })
+                }
+            </TabView>
+        </div>
+    );
+})

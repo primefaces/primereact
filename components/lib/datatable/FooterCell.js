@@ -1,34 +1,28 @@
-import React, { Component } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export class FooterCell extends Component {
+export const FooterCell = memo((props) => {
+    const [styleObjectState, setStyleObjectState] = useState({});
+    const elementRef = useRef(null);
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            styleObject: {}
-        };
+    const getColumnProp = (prop) => {
+        return props.column.props[prop];
     }
 
-    getColumnProp(prop) {
-        return this.props.column.props[prop];
+    const getStyle = () => {
+        const footerStyle = getColumnProp('footerStyle');
+        const columnStyle = getColumnProp('style');
+
+        return getColumnProp('frozen') ? Object.assign({}, columnStyle, footerStyle, styleObjectState) : Object.assign({}, columnStyle, footerStyle);
     }
 
-    getStyle() {
-        const footerStyle = this.getColumnProp('footerStyle');
-        const columnStyle = this.getColumnProp('style');
-
-        return this.getColumnProp('frozen') ? Object.assign({}, columnStyle, footerStyle, this.state.styleObject) : Object.assign({}, columnStyle, footerStyle);
-    }
-
-    updateStickyPosition() {
-        if (this.getColumnProp('frozen')) {
-            let styleObject = { ...this.state.styleObject };
-            let align = this.getColumnProp('alignFrozen');
+    const updateStickyPosition = () => {
+        if (getColumnProp('frozen')) {
+            let styleObject = { ...styleObjectState };
+            let align = getColumnProp('alignFrozen');
             if (align === 'right') {
                 let right = 0;
-                let next = this.el.nextElementSibling;
+                let next = elementRef.current.nextElementSibling;
                 if (next) {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
                 }
@@ -36,45 +30,36 @@ export class FooterCell extends Component {
             }
             else {
                 let left = 0;
-                let prev = this.el.previousElementSibling;
+                let prev = elementRef.current.previousElementSibling;
                 if (prev) {
                     left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
                 }
                 styleObject['left'] = left + 'px';
             }
 
-            this.setState({ styleObject });
+            setStyleObjectState(styleObject);
         }
     }
 
-    componentDidMount() {
-        if (this.getColumnProp('frozen')) {
-            this.updateStickyPosition();
+    useEffect(() => {
+        if (getColumnProp('frozen')) {
+            updateStickyPosition();
         }
-    }
+    });
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.getColumnProp('frozen')) {
-            this.updateStickyPosition();
-        }
-    }
+    const style = getStyle();
+    const align = getColumnProp('align');
+    const colSpan = getColumnProp('colSpan');
+    const rowSpan = getColumnProp('rowSpan');
+    const className = classNames(getColumnProp('footerClassName'), getColumnProp('className'), {
+        'p-frozen-column': getColumnProp('frozen'),
+        [`p-align-${align}`]: !!align
+    });
+    const content = ObjectUtils.getJSXElement(getColumnProp('footer'), { props: props.tableProps });
 
-    render() {
-        const style = this.getStyle();
-        const align = this.getColumnProp('align');
-        const className = classNames(this.getColumnProp('footerClassName'), this.getColumnProp('className'), {
-            'p-frozen-column': this.getColumnProp('frozen'),
-            [`p-align-${align}`]: !!align
-        });
-        const colSpan = this.getColumnProp('colSpan');
-        const rowSpan = this.getColumnProp('rowSpan');
-
-        let content = ObjectUtils.getJSXElement(this.getColumnProp('footer'), { props: this.props.tableProps });
-
-        return (
-            <td ref={el => this.el = el} style={style} className={className} role="cell" colSpan={colSpan} rowSpan={rowSpan}>
-                {content}
-            </td>
-        )
-    }
-}
+    return (
+        <td ref={elementRef} style={style} className={className} role="cell" colSpan={colSpan} rowSpan={rowSpan}>
+            {content}
+        </td>
+    )
+});

@@ -1,45 +1,44 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { ObjectUtils, classNames } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
+import { ObjectUtils, classNames } from '../utils/Utils';
 
-export class FirstPageLink extends Component {
+export const FirstPageLink = memo((props) => {
+    const className = classNames('p-paginator-first p-paginator-element p-link', { 'p-disabled': props.disabled });
+    const iconClassName = 'p-paginator-icon pi pi-angle-double-left';
+    const element = (
+        <button type="button" className={className} onClick={props.onClick} disabled={props.disabled}>
+            <span className={iconClassName}></span>
+            <Ripple />
+        </button>
+    );
 
-    static defaultProps = {
-        disabled: false,
-        onClick: null,
-        template: null
+    if (props.template) {
+        const defaultOptions = {
+            onClick: props.onClick,
+            className,
+            iconClassName,
+            disabled: props.disabled,
+            element,
+            props
+        };
+
+        return ObjectUtils.getJSXElement(props.template, defaultOptions);
     }
 
-    static propTypes = {
-        disabled: PropTypes.bool,
-        onClick: PropTypes.func,
-        template: PropTypes.any
-    }
+    return element;
+});
 
-    render() {
-        const className = classNames('p-paginator-first p-paginator-element p-link', { 'p-disabled': this.props.disabled });
-        const iconClassName = 'p-paginator-icon pi pi-angle-double-left';
-        const element = (
-            <button type="button" className={className} onClick={this.props.onClick} disabled={this.props.disabled}>
-                <span className={iconClassName}></span>
-                <Ripple />
-            </button>
-        );
+FirstPageLink.defaultProps = {
+    __TYPE: 'FirstPageLink',
+    disabled: false,
+    onClick: null,
+    template: null
+}
 
-        if (this.props.template) {
-            const defaultOptions = {
-                onClick: this.props.onClick,
-                className,
-                iconClassName,
-                disabled: this.props.disabled,
-                element,
-                props: this.props
-            };
-
-            return ObjectUtils.getJSXElement(this.props.template, defaultOptions);
-        }
-
-        return element;
-    }
+FirstPageLink.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    disabled: PropTypes.bool,
+    onClick: PropTypes.func,
+    template: PropTypes.any
 }

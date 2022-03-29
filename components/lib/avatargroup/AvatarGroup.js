@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../utils/Utils';
 
-export class AvatarGroup extends Component {
+export const AvatarGroup = forwardRef((props, ref) => {
+    const className = classNames('p-avatar-group p-component', props.className);
 
-    static defaultProps = {
-        style: null,
-        className: null
-    }
+    return (
+        <div className={className} style={props.style}>
+            {props.children}
+        </div>
+    )
+});
 
-    static propTypes = {
-        style: PropTypes.object,
-        className: PropTypes.string
-    };
+AvatarGroup.defaultProps = {
+    __TYPE: 'AvatarGroup',
+    style: null,
+    className: null
+}
 
-    render() {
-        const containerClassName = classNames('p-avatar-group p-component', this.props.className);
-
-        return (
-            <div className={containerClassName} style={this.props.style}>
-                {this.props.children}
-            </div>
-        );
-    }
+AvatarGroup.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    style: PropTypes.object,
+    className: PropTypes.string
 }

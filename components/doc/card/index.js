@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class CardDoc extends Component {
+const CardDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
@@ -46,10 +43,10 @@ export class CardDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React from 'react';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
@@ -81,10 +78,10 @@ const CardDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React from 'react';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
@@ -116,14 +113,14 @@ const CardDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/card/card.min.js"></script>`,
-                content: `
-const { useEffect, useState, useRef } = React;
+            content: `
+const { useState, useRef } = React;
 const { Card } = primereact.card;
 const { Button } = primereact.button;
 
@@ -154,27 +151,21 @@ const CardDemo = () => {
     )
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Card } from 'primereact/card';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -182,8 +173,8 @@ import { Card } from 'primereact/card';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>Card is used as a container.</p>
+                    <h5>Getting Started</h5>
+                    <p>Card is used as a container.</p>
 <CodeHighlight>
 {`
 <Card>
@@ -192,8 +183,8 @@ import { Card } from 'primereact/card';
 `}
 </CodeHighlight>
 
-                        <h5>Title</h5>
-                        <p>Title text of the card is provided using the <i>title</i> property whereas <strong>subTitle</strong> property is available for additional information about the card. Both of these properties accept JSX as well.</p>
+                    <h5>Title</h5>
+                    <p>Title text of the card is provided using the <i>title</i> property whereas <strong>subTitle</strong> property is available for additional information about the card. Both of these properties accept JSX as well.</p>
 <CodeHighlight>
 {`
 <Card title="Title" subTitle="SubTitle">
@@ -202,8 +193,8 @@ import { Card } from 'primereact/card';
 `}
 </CodeHighlight>
 
-                        <h5>Header and Footer</h5>
-                        <p>Header and Footer sections are defined using the properties of the same name.</p>
+                    <h5>Header and Footer</h5>
+                    <p>Header and Footer sections are defined using the properties of the same name.</p>
 
 <CodeHighlight>
 {`
@@ -219,108 +210,109 @@ const footer = <span>
 `}
 </CodeHighlight>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>header</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Header of the card.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>footer</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Footer of the card.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>title</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Title of the card.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>subTitle</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Secondary title of the card.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the component.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>header</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Header of the card.</td>
+                                </tr>
+                                <tr>
+                                    <td>footer</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Footer of the card.</td>
+                                </tr>
+                                <tr>
+                                    <td>title</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Title of the card.</td>
+                                </tr>
+                                <tr>
+                                    <td>subTitle</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Secondary title of the card.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the component.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-card</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-card-title</td>
-                                        <td>Title element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-card-subtitle</td>
-                                        <td>Subtitle element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-card-content</td>
-                                        <td>Content of the card.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-card-footer</td>
-                                        <td>Footer of the card.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-card</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-card-title</td>
+                                    <td>Title element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-card-subtitle</td>
+                                    <td>Subtitle element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-card-content</td>
+                                    <td>Content of the card.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-card-footer</td>
+                                    <td>Footer of the card.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'CardDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'CardDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    )
+})
+
+export default CardDoc;
