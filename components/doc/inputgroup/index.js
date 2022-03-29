@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import { TabView } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 
-export class InputGroupDoc extends Component {
+const InputGroupDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
@@ -141,10 +138,10 @@ export class InputGroupDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hook Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hook Source',
+            content: `
 import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
@@ -267,10 +264,10 @@ const InputGroupDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
@@ -393,18 +390,18 @@ const InputGroupDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/inputtext/inputtext.min.js"></script>
         <script src="https://unpkg.com/primereact/button/button.min.js"></script>
         <script src="https://unpkg.com/primereact/checkbox/checkbox.min.js"></script>
         <script src="https://unpkg.com/primereact/radiobutton/radiobutton.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { InputText } = primereact.inputtext;
 const { Button } = primereact.button;
 const { Checkbox } = primereact.checkbox;
@@ -525,24 +522,19 @@ const InputGroupDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
 
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'InputGroupDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'InputGroupDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    );
+})
 
+export default InputGroupDoc;

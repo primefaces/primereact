@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
-import {IconType} from "../utils";
+import { IconType } from '../utils';
 
 type SpeedDialDirectionType = 'up' | 'down' | 'left' | 'right' | 'up-left' | 'up-right' | 'down-left' | 'down-right';
 

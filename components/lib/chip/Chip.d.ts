@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {IconType, TemplateType} from "../utils";
+import { IconType, TemplateType } from '../utils';
 
 export interface ChipProps {
     label?: string;

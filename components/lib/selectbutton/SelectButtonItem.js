@@ -1,95 +1,51 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import React, { memo, useState } from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export class SelectButtonItem extends Component {
+export const SelectButtonItem = memo((props) => {
+    const [focusedState, setFocusedState] = useState(false);
 
-    static defaultProps = {
-        option: null,
-        label: null,
-        className: null,
-        selected: null,
-        tabIndex: null,
-        ariaLabelledBy: null,
-        template: null,
-        onClick: null
-    };
-
-    static propTypes = {
-        option: PropTypes.any,
-        label: PropTypes.any,
-        className: PropTypes.string,
-        selected: PropTypes.bool,
-        tabIndex: PropTypes.number,
-        ariaLabelledBy: PropTypes.string,
-        template: PropTypes.func,
-        onClick: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            focused: false
-        };
-
-        this.onClick = this.onClick.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
-    }
-
-    onClick(event) {
-        if (this.props.onClick) {
-            this.props.onClick({
+    const onClick = (event) => {
+        if (props.onClick) {
+            props.onClick({
                 originalEvent: event,
-                option: this.props.option
+                option: props.option
             });
         }
     }
 
-    onFocus() {
-        this.setState({ focused: true });
+    const onFocus = () => {
+        setFocusedState(true);
     }
 
-    onBlur() {
-        this.setState({ focused: false });
+    const onBlur = () => {
+        setFocusedState(false);
     }
 
-    onKeyDown(event) {
+    const onKeyDown = (event) => {
         const keyCode = event.which;
         if (keyCode === 32 || keyCode === 13) { //space and enter
-            this.onClick(event);
+            onClick(event);
             event.preventDefault();
         }
     }
 
-    renderContent() {
-        if (this.props.template) {
-            return this.props.template(this.props.option);
-        }
-        else {
-            return (
-                <span className="p-button-label p-c">{this.props.label}</span>
-            );
-        }
+    const createContent = () => {
+        return props.template ? ObjectUtils.getJSXElement(props.template, props.option) : <span className="p-button-label p-c">{props.label}</span>;
     }
 
-    render() {
-        const className = classNames('p-button p-component', {
-            'p-highlight': this.props.selected,
-            'p-disabled': this.props.disabled,
-            'p-focus': this.state.focused
-        }, this.props.className);
-        const content = this.renderContent();
+    const className = classNames('p-button p-component', {
+        'p-highlight': props.selected,
+        'p-disabled': props.disabled,
+        'p-focus': focusedState
+    }, props.className);
+    const content = createContent();
 
-        return (
-            <div className={className} role="button" aria-label={this.props.label} aria-pressed={this.props.selected} aria-labelledby={this.props.ariaLabelledBy}
-                onClick={this.onClick} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex} onFocus={this.onFocus} onBlur={this.onBlur}>
-                {content}
-                { !this.props.disabled && <Ripple /> }
-            </div>
-        );
-    }
-}
+    return (
+        <div className={className} role="button" aria-label={props.label} aria-pressed={props.selected} aria-labelledby={props.ariaLabelledBy}
+            onClick={onClick} onKeyDown={onKeyDown} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur}>
+            {content}
+            {!props.disabled && <Ripple />}
+        </div>
+    )
+});

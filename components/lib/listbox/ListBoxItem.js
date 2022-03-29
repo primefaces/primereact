@@ -1,125 +1,81 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import React, { memo } from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
-export class ListBoxItem extends Component {
+export const ListBoxItem = memo((props) => {
 
-    static defaultProps = {
-        option: null,
-        label: null,
-        selected: false,
-        disabled: false,
-        tabIndex: null,
-        onClick: null,
-        onTouchEnd: null,
-        template: null,
-    }
-
-    static propTypes = {
-        option: PropTypes.any,
-        label: PropTypes.string,
-        selected: PropTypes.bool,
-        disabled: PropTypes.bool,
-        tabIndex: PropTypes.number,
-        onClick: PropTypes.func,
-        onTouchEnd: PropTypes.func,
-        template: PropTypes.any
-    }
-
-    constructor(props) {
-        super(props);
-        this.onClick = this.onClick.bind(this);
-        this.onTouchEnd = this.onTouchEnd.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
-    }
-
-    onClick(event) {
-        if(this.props.onClick) {
-            this.props.onClick({
+    const onClick = (event) => {
+        if (props.onClick) {
+            props.onClick({
                 originalEvent: event,
-                option: this.props.option
+                option: props.option
             });
         }
 
         event.preventDefault();
     }
 
-    onTouchEnd(event) {
-        if(this.props.onTouchEnd) {
-            this.props.onTouchEnd({
+    const onTouchEnd = (event) => {
+        if (props.onTouchEnd) {
+            props.onTouchEnd({
                 originalEvent: event,
-                option: this.props.option
+                option: props.option
             });
         }
     }
 
-    onKeyDown(event) {
-        let item = event.currentTarget;
+    const onKeyDown = (event) => {
+        const item = event.currentTarget;
 
-        switch(event.which) {
+        switch (event.which) {
             //down
             case 40:
-                let nextItem = this.findNextItem(item);
-                if(nextItem) {
-                    nextItem.focus();
-                }
+                const nextItem = findNextItem(item);
+                nextItem && nextItem.focus();
 
                 event.preventDefault();
-            break;
+                break;
 
             //up
             case 38:
-                let prevItem = this.findPrevItem(item);
-                if(prevItem) {
-                    prevItem.focus();
-                }
+                const prevItem = findPrevItem(item);
+                prevItem && prevItem.focus();
 
                 event.preventDefault();
-            break;
+                break;
 
             //enter
             case 13:
-                this.onClick(event);
+                onClick(event);
                 event.preventDefault();
-            break;
+                break;
 
             default:
-            break;
+                break;
         }
     }
 
-    findNextItem(item) {
-        let nextItem = item.nextElementSibling;
-
-        if (nextItem)
-            return DomHandler.hasClass(nextItem, 'p-disabled') || DomHandler.hasClass(nextItem, 'p-listbox-item-group') ? this.findNextItem(nextItem) : nextItem;
-        else
-            return null;
+    const findNextItem = (item) => {
+        const nextItem = item.nextElementSibling;
+        return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || DomHandler.hasClass(nextItem, 'p-listbox-item-group') ? findNextItem(nextItem) : nextItem) : null;
     }
 
-    findPrevItem(item) {
-        let prevItem = item.previousElementSibling;
-
-        if (prevItem)
-            return DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-listbox-item-group') ? this.findPrevItem(prevItem) : prevItem;
-        else
-            return null;
+    const findPrevItem = (item) => {
+        const prevItem = item.previousElementSibling;
+        return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-listbox-item-group') ? findPrevItem(prevItem) : prevItem) : null;
     }
 
-    render() {
-        let className = classNames('p-listbox-item', {
-            'p-highlight': this.props.selected,
-            'p-disabled': this.props.disabled
-        }, this.props.option.className);
-        let content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.props.option) : this.props.label;
+    const className = classNames('p-listbox-item', {
+        'p-highlight': props.selected,
+        'p-disabled': props.disabled
+    }, props.option.className);
+    const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
 
-        return (
-            <li className={className} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex}
-                aria-label={this.props.label} key={this.props.label} role="option" aria-selected={this.props.selected}>
-                {content}
-                <Ripple />
-            </li>
-        );
-    }
-}
+    return (
+        <li className={className} onClick={onClick} onTouchEnd={onTouchEnd} onKeyDown={onKeyDown} tabIndex={props.tabIndex}
+            aria-label={props.label} key={props.label} role="option" aria-selected={props.selected}>
+            {content}
+            <Ripple />
+        </li>
+    )
+});

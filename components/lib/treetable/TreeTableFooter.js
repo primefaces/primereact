@@ -1,64 +1,48 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { memo } from 'react';
 
-export class TreeTableFooter extends Component {
+export const TreeTableFooter = memo((props) => {
 
-    static defaultProps = {
-        columns: null,
-        columnGroup: null
-    }
-
-    static propTypes = {
-        columns: PropTypes.array,
-        columnGroup: PropTypes.any
-    }
-
-    renderFooterCell(column, index) {
+    const createFooterCell = (column, index) => {
         return (
-            <td key={column.field||index} className={column.props.footerClassName||column.props.className} style={column.props.footerStyle||column.props.style}
+            <td key={column.field || index} className={column.props.footerClassName || column.props.className} style={column.props.footerStyle || column.props.style}
                 rowSpan={column.props.rowSpan} colSpan={column.props.colSpan}>
                 {column.props.footer}
             </td>
-        );
+        )
     }
 
-    renderFooterRow(row, index) {
+    const createFooterRow = (row, index) => {
         const rowColumns = React.Children.toArray(row.props.children);
-        const rowFooterCells = rowColumns.map((col, index) => this.renderFooterCell(col, index));
-        
+        const rowFooterCells = rowColumns.map(createFooterCell);
+
         return (
             <tr key={index}>{rowFooterCells}</tr>
         )
     }
 
-    renderColumnGroup() {
-        let rows = React.Children.toArray(this.props.columnGroup.props.children);
+    const createColumnGroup = () => {
+        let rows = React.Children.toArray(props.columnGroup.props.children);
 
-        return (
-            rows.map((row, i) => this.renderFooterRow(row, i))
-        );
+        return rows.map(createFooterRow);
     }
 
-    renderColumns(columns) {
+    const createColumns = (columns) => {
         if (columns) {
-            const headerCells = columns.map((col, index) => this.renderFooterCell(col, index));
-            return (
-                <tr>{headerCells}</tr>
-            );
+            const headerCells = columns.map(createFooterCell);
+            return <tr>{headerCells}</tr>
         }
         else {
             return null;
         }
     }
 
-
-    hasFooter() {
-        if(this.props.columnGroup) {
+    const hasFooter = () => {
+        if (props.columnGroup) {
             return true;
         }
         else {
-            for (let i = 0; i < this.props.columns.length; i++) {
-                if (this.props.columns[i].props.footer) {
+            for (let i = 0; i < props.columns.length; i++) {
+                if (props.columns[i].props.footer) {
                     return true;
                 }
             }
@@ -67,19 +51,16 @@ export class TreeTableFooter extends Component {
         return false;
     }
 
-    render() {
-        let content = this.props.columnGroup ? this.renderColumnGroup() : this.renderColumns(this.props.columns);
+    const content = props.columnGroup ? createColumnGroup() : createColumns(props.columns);
 
-        if (this.hasFooter()) {
-            return (
-                <tfoot className="p-treetable-tfoot">
-                    {content}
-                </tfoot>
-            );
-        } 
-        else {
-            return null;
-        }
-        
+    if (hasFooter()) {
+        return (
+            <tfoot className="p-treetable-tfoot">
+                {content}
+            </tfoot>
+        )
     }
-}
+    else {
+        return null;
+    }
+})

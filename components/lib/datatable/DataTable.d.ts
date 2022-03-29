@@ -363,8 +363,11 @@ export interface DataTableProps {
 
 export declare class DataTable extends React.Component<DataTableProps, any> {
     public reset(): void;
+    public resetScroll(): void;
     public exportCSV(options?: { selectionOnly: boolean }): void;
     public filter<T>(value: T, field: string, mode: DataTableFilterMatchModeType, index?: number): void;
     public resetColumnOrder(): void;
     public closeEditingCell(): void;
+    public restoreTableState(state: any): void;
+    public clearState(): void;
 }

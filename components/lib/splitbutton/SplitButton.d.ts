@@ -2,7 +2,7 @@ import * as React from 'react';
 import { MenuItem } from '../menuitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType, TemplateType } from "../utils";
+import { IconType, TemplateType } from '../utils';
 
 type SplitButtonAppendToType = 'self' | HTMLElement | undefined | null;
 
@@ -30,4 +30,7 @@ export interface SplitButtonProps {
     onHide?(): void;
 }
 
-export declare class SplitButton extends React.Component<SplitButtonProps, any> { }
+export declare class SplitButton extends React.Component<SplitButtonProps, any> {
+    public show(): void;
+    public hide(): void;
+}

@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class OrderListDoc extends Component {
+const OrderListDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { ProductService } from '../service/ProductService';
@@ -66,10 +63,10 @@ export class OrderListDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { ProductService } from '../service/ProductService';
@@ -112,10 +109,10 @@ const OrderListDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { ProductService } from '../service/ProductService';
@@ -158,16 +155,16 @@ const OrderListDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./OrderListDemo.css" />
         <script src="./ProductService.js"></script>
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/orderlist/orderlist.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { OrderList } = primereact.orderlist;
 
@@ -208,12 +205,12 @@ const OrderListDemo = () => {
     );
 }
                 `
-            }
-        };
+        }
+    };
 
-        this.extFiles = {
-            'demo/OrderListDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/OrderListDemo.css': {
+            content: `
 .orderlist-demo .product-item {
     display: flex;
     align-items: center;
@@ -263,27 +260,21 @@ const OrderListDemo = () => {
     }
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { OrderList } from 'primereact/orderlist';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -291,18 +282,18 @@ import { OrderList } from 'primereact/orderlist';
 `}
 </CodeHighlight>
 
-            <h5>Getting Started</h5>
-            <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and <i>onChange</i>
-                    callback to update the value after reorder.
-            </p>
+                    <h5>Getting Started</h5>
+                    <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and <i>onChange</i>
+                            callback to update the value after reorder.
+                    </p>
 <CodeHighlight>
 {`
 <OrderList value={products} itemTemplate={itemTemplate} header="Products" onChange={(e) => setProducts(e.value)}></OrderList>
 `}
 </CodeHighlight>
 
-            <h5>DragDrop</h5>
-            <p>Items can be reordered using drag and drop by enabling <i>dragdrop</i> property.</p>
+                    <h5>DragDrop</h5>
+                    <p>Items can be reordered using drag and drop by enabling <i>dragdrop</i> property.</p>
 
 <CodeHighlight>
 {`
@@ -310,146 +301,147 @@ import { OrderList } from 'primereact/orderlist';
 `}
 </CodeHighlight>
 
-            <h5>Properties</h5>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Default</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>id</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Unique identifier of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>value</td>
-                            <td>array</td>
-                            <td>null</td>
-                            <td>An array of objects to reorder.</td>
-                        </tr>
-                        <tr>
-                            <td>dataKey</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Name of the field that uniquely identifies the a record in the data.</td>
-                        </tr>
-                        <tr>
-                            <td>header</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Text for the caption</td>
-                        </tr>
-                        <tr>
-                            <td>style</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Inline style of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>className</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Style class of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>listStyle</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Inline style of the list element.</td>
-                        </tr>
-                        <tr>
-                            <td>dragdrop</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Whether to enable dragdrop based reordering.</td>
-                        </tr>
-                        <tr>
-                            <td>dragdropScope</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Unique key of drag drop events to avoid conflict with other drag drop events on the page.</td>
-                        </tr>
-                        <tr>
-                            <td>itemTemplate</td>
-                            <td>function</td>
-                            <td>null</td>
-                            <td>Function that gets an item in the list and returns the content for it.</td>
-                        </tr>
-                        <tr>
-                            <td>tabIndex</td>
-                            <td>number</td>
-                            <td>null</td>
-                            <td>Index of the element in tabbing order.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>value</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>An array of objects to reorder.</td>
+                                </tr>
+                                <tr>
+                                    <td>dataKey</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Name of the field that uniquely identifies the a record in the data.</td>
+                                </tr>
+                                <tr>
+                                    <td>header</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Text for the caption</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>listStyle</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the list element.</td>
+                                </tr>
+                                <tr>
+                                    <td>dragdrop</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether to enable dragdrop based reordering.</td>
+                                </tr>
+                                <tr>
+                                    <td>dragdropScope</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique key of drag drop events to avoid conflict with other drag drop events on the page.</td>
+                                </tr>
+                                <tr>
+                                    <td>itemTemplate</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Function that gets an item in the list and returns the content for it.</td>
+                                </tr>
+                                <tr>
+                                    <td>tabIndex</td>
+                                    <td>number</td>
+                                    <td>null</td>
+                                    <td>Index of the element in tabbing order.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <h5>Events</h5>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Parameters</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>onChange</td>
-                            <td>event.originalEvent: Browser event <br />
-                                event.value: Reordered list</td>
-                            <td>Callback to invoke when list is reordered.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Parameters</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onChange</td>
+                                    <td>event.originalEvent: Browser event <br />
+                                        event.value: Reordered list</td>
+                                    <td>Callback to invoke when list is reordered.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <h5>Styling</h5>
-            <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Element</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>p-orderlist</td>
-                            <td>Container element.</td>
-                        </tr>
-                        <tr>
-                            <td>p-orderlist-list</td>
-                            <td>List container.</td>
-                        </tr>
-                        <tr>
-                            <td>p-orderlist-item</td>
-                            <td>An item in the list</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-orderlist</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-orderlist-list</td>
+                                    <td>List container.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-orderlist-item</td>
+                                    <td>An item in the list</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                <h5>Dependencies</h5>
-                <p>None.</p>
-            </div>
+                        <h5>Dependencies</h5>
+                        <p>None.</p>
+                    </div>
 
-            </TabPanel>
+                </TabPanel>
 
-            {
-                useLiveEditorTabs({ name: 'OrderListDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
-            }
-        </TabView>
-    </div>
-        );
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'OrderListDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default OrderListDoc;

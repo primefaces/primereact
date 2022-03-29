@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class MegaMenuDoc extends Component {
+const MegaMenuDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { MegaMenu } from 'primereact/megamenu';
 
@@ -150,10 +147,10 @@ export class MegaMenuDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React from 'react';
 import { MegaMenu } from 'primereact/megamenu';
 
@@ -285,10 +282,10 @@ const MegaMenuDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React from 'react';
 import { MegaMenu } from 'primereact/megamenu';
 
@@ -420,14 +417,14 @@ const MegaMenuDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/megamenu/megamenu.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { MegaMenu } = primereact.megamenu;
 
 const MegaMenuDemo = () => {
@@ -558,27 +555,21 @@ const MegaMenuDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { MegaMenu } from 'primereact/megamenu';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -586,9 +577,9 @@ import { MegaMenu } from 'primereact/megamenu';
 `}
 </CodeHighlight>
 
-                        <h5>MenuItem API</h5>
-                        <p>MegaMenu uses the common menu item api to define its items, visit <Link href="/menumodel">  MenuModel </Link> for details.</p>
-                        <p>MegaMenu requires a collection of menuitems as its model.</p>
+                    <h5>MenuItem API</h5>
+                    <p>MegaMenu uses the common menu item api to define its items, visit <Link href="/menumodel">  MenuModel </Link> for details.</p>
+                    <p>MegaMenu requires a collection of menuitems as its model.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -713,16 +704,16 @@ const items = [
 `}
 </CodeHighlight>
 
-                        <h5>Orientation</h5>
-                        <p>Default orientation is "horizontal" with "vertical" as the alternative.</p>
+                    <h5>Orientation</h5>
+                    <p>Default orientation is "horizontal" with "vertical" as the alternative.</p>
 <CodeHighlight>
 {`
 <MegaMenu model={items} orientation="vertical"/>
 `}
 </CodeHighlight>
 
-                        <h5>Custom Content</h5>
-                        <p>Any content inside the megamenu will be displayed on the right side by default. You may use ".ui-megamenu-custom" style class to change the location of the content.</p>
+                    <h5>Custom Content</h5>
+                    <p>Any content inside the megamenu will be displayed on the right side by default. You may use ".ui-megamenu-custom" style class to change the location of the content.</p>
 <CodeHighlight>
 {`
 <MegaMenu model={items}>
@@ -732,101 +723,101 @@ const items = [
 `}
 </CodeHighlight>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>model</td>
-                                        <td>array</td>
-                                        <td>null</td>
-                                        <td>An array of menuitems.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>orientation</td>
-                                        <td>string</td>
-                                        <td>horizontal</td>
-                                        <td>Defines the orientation, valid values are horizontal and vertical.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>model</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>An array of menuitems.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>orientation</td>
+                                    <td>string</td>
+                                    <td>horizontal</td>
+                                    <td>Defines the orientation, valid values are horizontal and vertical.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-megamenu</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menu-list</td>
-                                        <td>List element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menuitem</td>
-                                        <td>Menuitem element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menuitem-text</td>
-                                        <td>Label of a menuitem.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menuitem-icon</td>
-                                        <td>Icon of a menuitem.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-submenu-icon</td>
-                                        <td>Arrow icon of a submenu.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-megamenu</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menu-list</td>
+                                    <td>List element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menuitem</td>
+                                    <td>Menuitem element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menuitem-text</td>
+                                    <td>Label of a menuitem.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menuitem-icon</td>
+                                    <td>Icon of a menuitem.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-submenu-icon</td>
+                                    <td>Arrow icon of a submenu.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'MegaMenuDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        )
-    }
+                {
+                    useLiveEditorTabs({ name: 'MegaMenuDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    )
+})
 
-}
+export default MegaMenuDoc;

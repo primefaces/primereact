@@ -8,16 +8,17 @@ import { Checkbox } from '../../components/lib/checkbox/Checkbox';
 import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
 import { InputMask } from '../../components/lib/inputmask/InputMask';
 import { Slider } from '../../components/lib/slider/Slider';
-import { useState } from 'react';
+import { classNames } from '../../components/lib/utils/ClassNames';
+import { useRef, useState } from 'react';
 
-export default function HeroSection() {
+const DesignerSection = (props) => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const [font,setFont] = useState('Inter');
+    const [font,setFont] = useState('-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol');
     const fonts = [
         {label: 'Arial', value: 'Arial,Helvetica Neue,Helvetica,sans-serif'},
-        {label: 'Inter', value: 'Inter'},
+        {label: 'System', value: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol'},
+        {label: 'Trebuches MS', value: 'Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif'},
         {label: 'Verdana', value: 'Verdana,Geneva,sans-serif'},
-        {label: 'Trebuches MS', value: 'font-family: Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif'}
     ];
     const [size,setSize] = useState('normal');
     const [inputStyle,setInputStyle] = useState('outlined');
@@ -29,30 +30,59 @@ export default function HeroSection() {
         { name: 'Paris', code: 'PRS' }
     ];
     const [range, setRange] = useState([20,80]);
-    const [optionValue, setOptionValue] = useState(1);
+    const [checkboxValue, setCheckboxValue] = useState([1]);
+    const editor = useRef(null);
+
+    const changeTheme = (color, darker) => {
+        editor.current.style.setProperty('--dd-primary', color);
+        editor.current.style.setProperty('--dd-primary-darker', darker);
+    }
+
+    const changeFont = (value) => {
+        editor.current.style.setProperty('--dd-font', value);
+        setFont(value);
+    }
+
+    const editorClassName = classNames('p-4 designer-demo', {
+        'p-input-filled': inputStyle === 'filled',
+        'demo-size-small': size === 'small',
+        'demo-size-large': size === 'large'
+    });
+
+    const onCheckboxChange = (e) => {
+        let _checkboxValue = [...checkboxValue];
+        if (e.checked)
+            _checkboxValue.push(e.value);
+        else
+            _checkboxValue.splice(_checkboxValue.indexOf(e.value), 1);
+
+        setCheckboxValue(_checkboxValue);
+    }
+
+    const designerLogo = props.dark ? 'designer-light.svg' : 'designer-dark.svg';
 
     return (
-        <section className="landing-designer">
+        <section className="landing-designer py-8">
             <div className="section-header">Theme Designer</div>
             <p className="section-detail">Designer is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer.</p>
-            <div className="designer-main flex py-7 relative justify-content-center">
-                <img src={`${contextPath}/images/landing-new/wave-dark-alt.svg`} className="absolute w-full"/>
-                <div className="box p-4 flex z-1 designer-editor">
-                    <div className="surfaces-card mr-4 p-4" style={{borderRadius: '10px'}}>
+            <div className="designer-main mt-7 justify-content-center pad-section"
+                style={{backgroundImage:`url(${contextPath}/images/landing-new/wave-${props.dark ? 'dark' : 'light'}.svg)`, backgroundSize:'cover'}}>
+                <div className="box p-4 flex flex-column md:flex-row z-1 designer-editor">
+                    <div className="mr-0 md:mr-4 p-4 designer-controls box border-bottom-1 border-left-none border-right-none border-top-none md:border-bottom-none md:border-right-1" style={{borderRadius: '10px'}}>
                         <div className="text-center mb-4">
-                            <img src={`${contextPath}/images/landing-new/designer.svg`} />
+                            <img src={`${contextPath}/images/landing-new/${designerLogo}`} alt={designerLogo} />
                         </div>
                         <div className="p-fluid">
                             <span className="font-semibold block mb-3">Primary</span>
                             <div>
-                                <button type="button" className="border-circle w-2rem h-2rem p-link mr-3" style={{backgroundColor:'#03C4E8'}}></button>
-                                <button type="button" className="border-circle w-2rem h-2rem p-link mr-3" style={{backgroundColor:'#03E8BF'}}></button>
-                                <button type="button" className="border-circle w-2rem h-2rem p-link mr-3" style={{backgroundColor:'#916AFF'}}></button>
-                                <button type="button" className="border-circle w-2rem h-2rem p-link" style={{backgroundColor:'#FFBD80'}}></button>
+                                <button type="button" className="border-circle w-2rem h-2rem p-link mr-3" style={{backgroundColor:'#03C4E8'}} onClick={() => changeTheme('#03C4E8', '#029dba')}></button>
+                                <button type="button" className="border-circle w-2rem h-2rem p-link mr-3" style={{backgroundColor:'#03E8BF'}} onClick={() => changeTheme('#03E8BF', '#02ba99')}></button>
+                                <button type="button" className="border-circle w-2rem h-2rem p-link mr-3" style={{backgroundColor:'#916AFF'}} onClick={() => changeTheme('#916AFF', '#7455cc')}></button>
+                                <button type="button" className="border-circle w-2rem h-2rem p-link" style={{backgroundColor:'#FFBD80'}} onClick={() => changeTheme('#FFBD80','#cc9766')}></button>
                             </div>
 
                             <span className="font-semibold block mt-4 mb-3">Font</span>
-                            <Dropdown options={fonts} value={font} onChange={e => setFont(e.value)}></Dropdown>
+                            <Dropdown options={fonts} value={font} onChange={e => changeFont(e.value)}></Dropdown>
 
                             <span className="font-semibold block mt-4 mb-3">Size</span>
                             <div className="flex align-items-center">
@@ -82,33 +112,32 @@ export default function HeroSection() {
                                 </div>
                             </div>
 
-                            <a href="https://www.primefaces.org/designer-react" 
-                                className="font-semibold p-3 border-round flex align-items-center linkbox">
+                            <a href="https://www.primefaces.org/designer-react" className="font-semibold p-3 border-round flex align-items-center linkbox active">
                                 <span>View Full Version</span>
-                                <i class="pi pi-arrow-right ml-auto"></i>
+                                <i className="pi pi-arrow-right ml-auto"></i>
                             </a>
                         </div>
                     </div>
-                    <div className="p-4 designer-demo surface-card" style={{borderRadius: '10px'}}>
-                        <div class="p-fluid formgrid grid">
-                            <div class="field col-6">
-                                <label for="username" className="font-semibold mb-3">Username</label>
+                    <div className={editorClassName} style={{borderRadius: '10px'}} ref={editor}>
+                        <div className="p-fluid formgrid grid">
+                            <div className="field col-12 xl:col-6">
+                                <label htmlFor="username" className="font-semibold mb-3 p-component">Username</label>
                                 <InputText id="username" type="text" />
                             </div>
-                            <div class="field col-6">
-                                <label for="email" className="font-semibold mb-3">Email</label>
+                            <div className="field col-12 xl:col-6">
+                                <label htmlFor="email" className="font-semibold mb-3 p-component">Email</label>
                                 <InputText id="email" type="text" />
                             </div>
-                            <div class="field col-6">
-                                <label for="price" className="font-semibold mb-3">Price</label>
+                            <div className="field col-12 xl:col-6">
+                                <label htmlFor="price" className="font-semibold mb-3 p-component">Price</label>
                                 <div className="p-inputgroup">
                                     <span className="p-inputgroup-addon">$</span>
                                     <InputNumber inputId="price" placeholder="Price" />
                                     <span className="p-inputgroup-addon">.00</span>
                                 </div>
                             </div>
-                            <div class="field col-6">
-                                <label for="date" className="font-semibold mb-3">Date</label>
+                            <div className="field col-12 xl:col-6">
+                                <label htmlFor="date" className="font-semibold mb-3 p-component">Date</label>
                                 <div className="p-inputgroup">
                                     <span className="p-inputgroup-addon">
                                         <i className="pi pi-calendar"></i>
@@ -116,34 +145,30 @@ export default function HeroSection() {
                                     <InputMask inputId="date" placeholder="mm/dd/yyyy" mask="99/99/9999" slotChar="mm/dd/yyyy" />
                                 </div>
                             </div>
-                            <div class="field col-6">
-                                <span className="font-semibold mb-2 block mb-3 mt-3">City</span>
+                            <div className="field col-12 xl:col-6">
+                                <span className="font-semibold mb-2 block mb-3 mt-3 p-component">City</span>
                                 <ListBox value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" />
                             </div>
-                            <div class="field col-6">
-                                <label for="email" className="font-semibold mb-3 mt-3">Range</label>
+                            <div className="field col-12 xl:col-6">
+                                <label htmlFor="email" className="font-semibold mb-3 mt-3 p-component">Range</label>
                                 <Slider value={range} onChange={(e) => setRange(e.value)} range />
 
-                                <span className="font-semibold mb-2 block mb-3 mt-5">Checkboxes</span>
-                                <div className="flex align-items-center">
+                                <span className="font-semibold mb-2 block mb-3 mt-5  p-component">Checkboxes</span>
+                                <div className="flex flex-column xl:flex-row xl:align-items-center">
                                     <div className="flex align-items-center">
-                                        <Checkbox inputId="cb1" value={1} name="cbvalue" onChange={(e) => setOptionValue(1)} checked={optionValue === 1} />
-                                        <label htmlFor="cb1" className="ml-2 font-medium">Option 1</label>
+                                        <Checkbox inputId="cb1" value={1} name="cbvalue" onChange={onCheckboxChange} checked={checkboxValue.includes(1)} />
+                                        <label htmlFor="cb1" className="ml-2 font-medium p-component white-space-nowrap">Option 1</label>
                                     </div>
-                                    <div className="flex align-items-center ml-4">
-                                        <Checkbox inputId="cb2" value={2} name="cbvalue" onChange={(e) => setOptionValue(2)} checked={optionValue === 2} />
-                                        <label htmlFor="cb2" className="ml-2 font-medium">Option 2</label>
-                                    </div>
-                                    <div className="flex align-items-center ml-4">
-                                        <Checkbox inputId="cb2" value={3} name="cbvalue" onChange={(e) => setOptionValue(2)} checked={optionValue === 3} />
-                                        <label htmlFor="cb2" className="ml-2 font-medium">Option 3</label>
+                                    <div className="flex align-items-center mt-3 xl:mt-0 xl:ml-4">
+                                        <Checkbox inputId="cb2" value={2} name="cbvalue" onChange={onCheckboxChange} checked={checkboxValue.includes(2)} />
+                                        <label htmlFor="cb2" className="ml-2 font-medium p-component white-space-nowrap">Option 2</label>
                                     </div>
                                 </div>
 
-                                <span className="font-semibold mb-2 block mb-3 mt-5">Buttons</span>
+                                <span className="font-semibold mb-2 block mb-3 mt-5 p-component">Buttons</span>
                                 <div className="flex align-items-center">
-                                    <Button type="button" label="Save" icon="pi pi-check" className="mr-2"></Button>
-                                    <Button type="button" label="Cancel" icon="pi pi-times" className="p-button-outlined ml-2"></Button>
+                                    <Button type="button" label="Save" icon="pi pi-check" className="mr-1"></Button>
+                                    <Button type="button" label="Clear" icon="pi pi-times" className="p-button-outlined ml-1"></Button>
                                 </div>
                             </div>
                         </div>
@@ -154,3 +179,4 @@ export default function HeroSection() {
     );
 }
 
+export default DesignerSection;

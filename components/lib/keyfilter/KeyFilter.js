@@ -1,9 +1,9 @@
 import { DomHandler } from '../utils/Utils';
 
-export class KeyFilter {
+export const KeyFilter = {
 
     /* eslint-disable */
-    static DEFAULT_MASKS = {
+    DEFAULT_MASKS: {
         pint: /[\d]/,
         int: /[\d\-]/,
         pnum: /[\d\.]/,
@@ -13,18 +13,18 @@ export class KeyFilter {
         email: /[a-z0-9_\.\-@]/i,
         alpha: /[a-z_]/i,
         alphanum: /[a-z0-9_]/i
-    };
+    },
     /* eslint-enable */
 
-    static KEYS = {
+    KEYS: {
         TAB: 9,
         RETURN: 13,
         ESC: 27,
         BACKSPACE: 8,
         DELETE: 46
-    };
+    },
 
-    static SAFARI_KEYS = {
+    SAFARI_KEYS: {
         63234: 37, // left
         63235: 39, // right
         63232: 38, // up
@@ -34,37 +34,37 @@ export class KeyFilter {
         63272: 46, // delete
         63273: 36, // home
         63275: 35  // end
-    };
+    },
 
-    static isNavKeyPress(e) {
+    isNavKeyPress(e) {
         let k = e.keyCode;
         k = DomHandler.getBrowser().safari ? (KeyFilter.SAFARI_KEYS[k] || k) : k;
 
         return (k >= 33 && k <= 40) || k === KeyFilter.KEYS.RETURN || k === KeyFilter.KEYS.TAB || k === KeyFilter.KEYS.ESC;
-    }
+    },
 
-    static isSpecialKey(e) {
+    isSpecialKey(e) {
         let k = e.keyCode;
 
-        return k === 9 || k === 13 || k === 27 || k === 16 || k === 17 ||(k >= 18 && k <= 20) ||
+        return k === 9 || k === 13 || k === 27 || k === 16 || k === 17 || (k >= 18 && k <= 20) ||
             (DomHandler.getBrowser().opera && !e.shiftKey && (k === 8 || (k >= 33 && k <= 35) || (k >= 36 && k <= 39) || (k >= 44 && k <= 45)));
-    }
+    },
 
-    static getKey(e) {
+    getKey(e) {
         let k = e.keyCode || e.charCode;
         return DomHandler.getBrowser().safari ? (KeyFilter.SAFARI_KEYS[k] || k) : k;
-    }
+    },
 
-    static getCharCode(e) {
+    getCharCode(e) {
         return e.charCode || e.keyCode || e.which;
-    }
+    },
 
-    static onKeyPress(e, keyfilter, validateOnly) {
-        if(validateOnly) {
+    onKeyPress(e, keyfilter, validateOnly) {
+        if (validateOnly) {
             return;
         }
 
-        const regex = KeyFilter.DEFAULT_MASKS[keyfilter]? KeyFilter.DEFAULT_MASKS[keyfilter] : keyfilter;
+        const regex = KeyFilter.DEFAULT_MASKS[keyfilter] ? KeyFilter.DEFAULT_MASKS[keyfilter] : keyfilter;
         const browser = DomHandler.getBrowser();
 
         if (e.ctrlKey || e.altKey) {
@@ -86,11 +86,11 @@ export class KeyFilter {
         if (!regex.test(cc)) {
             e.preventDefault();
         }
-    }
+    },
 
-    static validate(e, keyfilter) {
+    validate(e, keyfilter) {
         let value = e.target.value,
-        validatePattern = true;
+            validatePattern = true;
 
         if (value && !keyfilter.test(value)) {
             validatePattern = false;

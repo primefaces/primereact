@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class ButtonDoc extends Component {
+const ButtonDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
@@ -206,10 +203,10 @@ export class ButtonDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
@@ -395,10 +392,10 @@ const ButtonDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
@@ -584,15 +581,15 @@ const ButtonDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./ButtonDemo.css" />
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { Button } = primereact.button;
 
 const ButtonDemo = () => {
@@ -779,9 +776,9 @@ const ButtonDemo = () => {
             }
         }
 
-        this.extFiles = {
-            'demo/ButtonDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/ButtonDemo.css': {
+            content: `
 .button-demo .p-button {
     margin-right: 0.5rem;
 }
@@ -940,53 +937,46 @@ const ButtonDemo = () => {
     }
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-
-        return (
-            <div className="content-section documentation">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Button } from 'primereact/button';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>Button is created using the Button element.</p>
+                    <h5>Getting Started</h5>
+                    <p>Button is created using the Button element.</p>
 <CodeHighlight>
 {`
 <Button />
 `}
 </CodeHighlight>
 
-                        <h5>Label</h5>
-                        <p>Text of the button is defined using the <i>label</i> property.</p>
+                    <h5>Label</h5>
+                    <p>Text of the button is defined using the <i>label</i> property.</p>
 <CodeHighlight>
 {`
 <Button label="Save" />
 `}
 </CodeHighlight>
 
-                        <h5>Icons</h5>
-                        <p>Icon on a button is specified with <i>icon</i> property and position is configured using <i>iconPos</i> attribute. Default
-                        icon position is "left" and alternative is "right". To display only an icon, leave label as undefined.</p>
+                    <h5>Icons</h5>
+                    <p>Icon on a button is specified with <i>icon</i> property and position is configured using <i>iconPos</i> attribute. Default
+                    icon position is "left" and alternative is "right". To display only an icon, leave label as undefined.</p>
 
 <CodeHighlight>
 {`
@@ -995,8 +985,8 @@ import { Button } from 'primereact/button';
 <Button icon="pi pi-check" iconPos="right" />
 `}
 </CodeHighlight>
-                        <h5>Loading</h5>
-                        <p>Loading on a button is specified with <i>loading</i> attribute and loading icon can be change with <i>loadingIcon</i> property. To display only a loading, leave label as undefined.</p>
+                    <h5>Loading</h5>
+                    <p>Loading on a button is specified with <i>loading</i> attribute and loading icon can be change with <i>loadingIcon</i> property. To display only a loading, leave label as undefined.</p>
 <CodeHighlight>
 {`
 <Button loading />
@@ -1005,26 +995,24 @@ import { Button } from 'primereact/button';
 `}
 </CodeHighlight>
 
-                        <h5>Events</h5>
-                        <p>Events are defined with the standard notation.</p>
+                    <h5>Events</h5>
+                    <p>Events are defined with the standard notation.</p>
 <CodeHighlight>
 {`
 <Button label="Click" onClick={handleClick} />
 `}
 </CodeHighlight>
 
+                    <h5>Severity</h5>
+                    <p>Different color options are available as severity levels.</p>
 
-
-                        <h5>Severity</h5>
-                        <p>Different color options are available as severity levels.</p>
-
-                        <ul>
-                            <li>.p-button-secondary</li>
-                            <li>.p-button-success</li>
-                            <li>.p-button-info</li>
-                            <li>.p-button-warning</li>
-                            <li>.p-button-danger</li>
-                        </ul>
+                    <ul>
+                        <li>.p-button-secondary</li>
+                        <li>.p-button-success</li>
+                        <li>.p-button-info</li>
+                        <li>.p-button-warning</li>
+                        <li>.p-button-danger</li>
+                    </ul>
 
 <CodeHighlight>
 {`
@@ -1037,119 +1025,120 @@ import { Button } from 'primereact/button';
 `}
 </CodeHighlight>
 
-                        <h5>Raised and Rounded Buttons</h5>
-                        <p>A button can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class.</p>
+                    <h5>Raised and Rounded Buttons</h5>
+                    <p>A button can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class.</p>
 <CodeHighlight>
 {`
 <Button label="Proceed" className="p-button-raised p-button-rounded" />
 `}
 </CodeHighlight>
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>label</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Text of the button.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>icon</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Name of the icon or JSX.Element for icon.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>iconPos</td>
-                                        <td>string</td>
-                                        <td>left</td>
-                                        <td>Position of the icon, valid values are "left", "right", "top" and "bottom".</td>
-                                    </tr>
-                                    <tr>
-                                        <td>badge</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Value of the badge.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>badgeClassName</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the badge.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>tooltip</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Content of the tooltip.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>tooltipOptions</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>loading</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Display loading icon of the button</td>
-                                    </tr>
-                                    <tr>
-                                        <td>loadingIcon</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Name of the loading icon or JSX.Element for loading icon.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>label</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Text of the button.</td>
+                                </tr>
+                                <tr>
+                                    <td>icon</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Name of the icon or JSX.Element for icon.</td>
+                                </tr>
+                                <tr>
+                                    <td>iconPos</td>
+                                    <td>string</td>
+                                    <td>left</td>
+                                    <td>Position of the icon, valid values are "left", "right", "top" and "bottom".</td>
+                                </tr>
+                                <tr>
+                                    <td>badge</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Value of the badge.</td>
+                                </tr>
+                                <tr>
+                                    <td>badgeClassName</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the badge.</td>
+                                </tr>
+                                <tr>
+                                    <td>tooltip</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Content of the tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td>tooltipOptions</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                                </tr>
+                                <tr>
+                                    <td>loading</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Display loading icon of the button</td>
+                                </tr>
+                                <tr>
+                                    <td>loadingIcon</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Name of the loading icon or JSX.Element for loading icon.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-button</td>
-                                        <td>Button element</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-button-icon</td>
-                                        <td>Icon element</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-button-text</td>
-                                        <td>Label element of the button</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-button</td>
+                                    <td>Button element</td>
+                                </tr>
+                                <tr>
+                                    <td>p-button-icon</td>
+                                    <td>Icon element</td>
+                                </tr>
+                                <tr>
+                                    <td>p-button-text</td>
+                                    <td>Label element of the button</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'ButtonDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'ButtonDemo', sources: sources, extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    )
+})
+
+export default ButtonDoc;

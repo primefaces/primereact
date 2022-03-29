@@ -1,139 +1,106 @@
-import React, { Component } from 'react';
+import React, { forwardRef, memo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import {DomHandler, classNames, ZIndexUtils, IconUtils} from '../utils/Utils';
-import { CSSTransition } from '../csstransition/CSSTransition';
-import { Ripple } from '../ripple/Ripple';
 import PrimeReact from '../api/Api';
+import { Ripple } from '../ripple/Ripple';
+import { CSSTransition } from '../csstransition/CSSTransition';
+import { DomHandler, classNames, ZIndexUtils, IconUtils } from '../utils/Utils';
+import { useMountEffect, useUnmountEffect, useEventListener } from '../hooks/Hooks';
 
-export class ScrollTop extends Component {
+export const ScrollTop = memo(forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = useState(false);
+    const scrollElementRef = useRef(null);
+    const helperRef = useRef(null);
+    const isTargetParent = props.target === 'parent';
 
-    static defaultProps = {
-        target: 'window',
-        threshold: 400,
-        icon: 'pi pi-chevron-up',
-        behavior: 'smooth',
-        className: null,
-        style: null,
-        transitionOptions: null,
-        onShow: null,
-        onHide: null
-    };
+    const [bindParentScrollListener,] = useEventListener({
+        target: () => helperRef.current && helperRef.current.parentElement, type: 'scroll', listener: (event) => {
+            checkVisibility(event.currentTarget.scrollTop);
+        }
+    });
 
-    static propTypes = {
-        target: PropTypes.string,
-        threshold: PropTypes.number,
-        icon: PropTypes.any,
-        behavior: PropTypes.string,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        transitionOptions: PropTypes.object,
-        onShow: PropTypes.func,
-        onHide: PropTypes.func
-    };
+    const [bindDocumentScrollListener,] = useEventListener({
+        target: 'window', type: 'scroll', listener: () => {
+            checkVisibility(DomHandler.getWindowScrollTop());
+        }
+    });
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            visible: false
-        };
-
-        this.onClick = this.onClick.bind(this);
-        this.onEnter = this.onEnter.bind(this);
-        this.onEntered = this.onEntered.bind(this);
-        this.onExited = this.onExited.bind(this);
-        this.scrollElementRef = React.createRef();
-    }
-
-    onClick() {
-        let scrollElement = this.props.target === 'window' ? window : this.helper.parentElement;
+    const onClick = () => {
+        const scrollElement = props.target === 'window' ? window : helperRef.current.parentElement;
         scrollElement.scroll({
             top: 0,
-            behavior: this.props.behavior
+            behavior: props.behavior
         });
     }
 
-    checkVisibility(scrollY) {
-        this.setState({ visible: scrollY > this.props.threshold });
+    const checkVisibility = (scrollY) => {
+        setVisibleState(scrollY > props.threshold);
     }
 
-    bindParentScrollListener() {
-        this.scrollListener = () => {
-            this.checkVisibility(this.helper.parentElement.scrollTop);
-        };
-
-        this.helper.parentElement.addEventListener('scroll', this.scrollListener);
+    const onEnter = () => {
+        ZIndexUtils.set('overlay', scrollElementRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
     }
 
-    bindDocumentScrollListener() {
-        this.scrollListener = () => {
-            this.checkVisibility(DomHandler.getWindowScrollTop());
-        };
-
-        window.addEventListener('scroll', this.scrollListener);
+    const onEntered = () => {
+        props.onShow && props.onShow();
     }
 
-    unbindParentScrollListener() {
-        if (this.scrollListener) {
-            this.helper.parentElement.removeEventListener('scroll', this.scrollListener);
-            this.scrollListener = null;
-        }
+    const onExited = () => {
+        ZIndexUtils.clear(scrollElementRef.current);
+
+        props.onHide && props.onHide();
     }
 
-    unbindDocumentScrollListener() {
-        if (this.scrollListener) {
-            window.removeEventListener('scroll', this.scrollListener);
-            this.scrollListener = null;
-        }
-    }
+    useMountEffect(() => {
+        if (props.target === 'window')
+            bindDocumentScrollListener();
+        else if (props.target === 'parent')
+            bindParentScrollListener();
+    });
 
-    onEnter() {
-        ZIndexUtils.set('overlay', this.scrollElementRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
-    }
+    useUnmountEffect(() => {
+        ZIndexUtils.clear(scrollElementRef.current);
+    });
 
-    onEntered() {
-        this.props.onShow && this.props.onShow();
-    }
+    const className = classNames('p-scrolltop p-link p-component', {
+        'p-scrolltop-sticky': props.target !== 'window'
+    }, props.className);
 
-    onExited() {
-        ZIndexUtils.clear(this.scrollElementRef.current);
+    return (
+        <>
+            <CSSTransition nodeRef={scrollElementRef} classNames="p-scrolltop" in={visibleState} timeout={{ enter: 150, exit: 150 }} options={props.transitionOptions}
+                unmountOnExit onEnter={onEnter} onEntered={onEntered} onExited={onExited}>
+                <button ref={scrollElementRef} type="button" className={className} style={props.style} onClick={onClick}>
+                    {IconUtils.getJSXIcon(props.icon, { className: 'p-scrolltop-icon' }, { props })}
+                    <Ripple />
+                </button>
+            </CSSTransition>
+            {isTargetParent && <span ref={helperRef} className="p-scrolltop-helper"></span>}
+        </>
+    )
+}));
 
-        this.props.onHide && this.props.onHide();
-    }
+ScrollTop.defaultProps = {
+    __TYPE: 'ScrollTop',
+    target: 'window',
+    threshold: 400,
+    icon: 'pi pi-chevron-up',
+    behavior: 'smooth',
+    className: null,
+    style: null,
+    transitionOptions: null,
+    onShow: null,
+    onHide: null
+}
 
-    componentDidMount() {
-        if (this.props.target === 'window')
-            this.bindDocumentScrollListener();
-        else if (this.props.target === 'parent')
-            this.bindParentScrollListener();
-    }
-
-    componentWillUnmount() {
-        if (this.props.target === 'window')
-            this.unbindDocumentScrollListener();
-        else if (this.props.target === 'parent')
-            this.unbindParentScrollListener();
-
-        ZIndexUtils.clear(this.scrollElementRef.current);
-    }
-
-    render() {
-        const className = classNames('p-scrolltop p-link p-component', {
-            'p-scrolltop-sticky': this.props.target !== 'window'
-        }, this.props.className);
-        const isTargetParent = this.props.target === 'parent';
-
-        return (
-            <>
-                <CSSTransition nodeRef={this.scrollElementRef} classNames="p-scrolltop" in={this.state.visible} timeout={{ enter: 150, exit: 150 }} options={this.props.transitionOptions}
-                    unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExited={this.onExited}>
-                    <button ref={this.scrollElementRef} type="button" className={className} style={this.props.style} onClick={this.onClick}>
-                        {IconUtils.getJSXIcon(this.props.icon, { className: 'p-scrolltop-icon' }, { props: this.props })}
-                        <Ripple />
-                    </button>
-                </CSSTransition>
-                {isTargetParent && <span ref={(el) => this.helper = el} className="p-scrolltop-helper"></span>}
-            </>
-        );
-    }
+ScrollTop.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    target: PropTypes.string,
+    threshold: PropTypes.number,
+    icon: PropTypes.any,
+    behavior: PropTypes.string,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    transitionOptions: PropTypes.object,
+    onShow: PropTypes.func,
+    onHide: PropTypes.func
 }

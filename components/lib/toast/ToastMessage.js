@@ -1,77 +1,44 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import React, { forwardRef, memo } from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { useTimeout } from '../hooks/Hooks';
 
-class ToastMessageComponent extends Component {
+export const ToastMessage = memo(forwardRef((props, ref) => {
+    const { severity, content, summary, detail, closable, life, sticky,
+            className: _className, style, contentClassName: _contentClassName, contentStyle } = props.message;
 
-    static defaultProps = {
-        message: null,
-        onClose: null,
-        onClick: null
+    const [clearTimer] = useTimeout(() => {
+        onClose();
+    }, life || 3000, !sticky);
+
+    const onClose = () => {
+        clearTimer();
+        props.onClose && props.onClose(props.message);
     }
 
-    static propTypes = {
-        message: PropTypes.object,
-        onClose: PropTypes.func,
-        onClick: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.onClick = this.onClick.bind(this);
-        this.onClose = this.onClose.bind(this);
-    }
-
-    componentWillUnmount() {
-        if (this.timeout) {
-            clearTimeout(this.timeout);
+    const onClick = (event) => {
+        if (props.onClick && !(DomHandler.hasClass(event.target, 'p-toast-icon-close') || DomHandler.hasClass(event.target, 'p-toast-icon-close-icon'))) {
+            props.onClick(props.message);
         }
     }
 
-    componentDidMount() {
-        if (!this.props.message.sticky) {
-            this.timeout = setTimeout(() => {
-                this.onClose(null);
-            }, this.props.message.life || 3000);
-        }
-    }
-
-    onClose() {
-        if (this.timeout) {
-            clearTimeout(this.timeout);
-        }
-
-        if (this.props.onClose) {
-            this.props.onClose(this.props.message);
-        }
-    }
-
-    onClick(event) {
-        if (this.props.onClick && !(DomHandler.hasClass(event.target, 'p-toast-icon-close') || DomHandler.hasClass(event.target, 'p-toast-icon-close-icon'))) {
-            this.props.onClick(this.props.message);
-        }
-    }
-
-    renderCloseIcon() {
-        if (this.props.message.closable !== false) {
+    const createCloseIcon = () => {
+        if (closable !== false) {
             return (
-                <button type="button" className="p-toast-icon-close p-link" onClick={this.onClose}>
+                <button type="button" className="p-toast-icon-close p-link" onClick={onClose}>
                     <span className="p-toast-icon-close-icon pi pi-times"></span>
                     <Ripple />
                 </button>
-            );
+            )
         }
 
         return null;
     }
 
-    renderMessage() {
-        if (this.props.message) {
-            const { severity, content, summary, detail } = this.props.message;
-            const contentEl = ObjectUtils.getJSXElement(content, {...this.props, onClose: this.onClose});
-            let iconClassName = classNames('p-toast-message-icon pi', {
+    const createMessage = () => {
+        if (props.message) {
+            const contentEl = ObjectUtils.getJSXElement(content, { ...props, onClose });
+            const iconClassName = classNames('p-toast-message-icon pi', {
                 'pi-info-circle': severity === 'info',
                 'pi-exclamation-triangle': severity === 'warn',
                 'pi-times': severity === 'error',
@@ -92,30 +59,19 @@ class ToastMessageComponent extends Component {
         return null;
     }
 
-    render() {
-        const severity = this.props.message.severity;
-        const contentClassName = this.props.message.contentClassName;
-        const contentStyle = this.props.message.contentStyle;
-        const style = this.props.message.style;
+    const className = classNames('p-toast-message', {
+        [`p-toast-message-${severity}`]: severity
+    }, _className);
+    const contentClassName = classNames('p-toast-message-content', _contentClassName);
+    const message = createMessage();
+    const closeIcon = createCloseIcon();
 
-        const className = classNames('p-toast-message', {
-            'p-toast-message-info': severity === 'info',
-            'p-toast-message-warn': severity === 'warn',
-            'p-toast-message-error': severity === 'error',
-            'p-toast-message-success': severity === 'success'
-        }, this.props.message.className);
-        const message = this.renderMessage();
-        const closeIcon = this.renderCloseIcon();
-
-        return (
-            <div ref={this.props.forwardRef} className={className} style={style} role="alert" aria-live="assertive" aria-atomic="true" onClick={this.onClick}>
-                <div className={classNames('p-toast-message-content', contentClassName)} style={contentStyle}>
-                    {message}
-                    {closeIcon}
-                </div>
+    return (
+        <div ref={ref} className={className} style={style} role="alert" aria-live="assertive" aria-atomic="true" onClick={onClick}>
+            <div className={contentClassName} style={contentStyle}>
+                {message}
+                {closeIcon}
             </div>
-        );
-    }
-}
-
-export const ToastMessage = React.forwardRef((props, ref) => <ToastMessageComponent forwardRef={ref} {...props} />);
+        </div>
+    )
+}));
