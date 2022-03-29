@@ -80,8 +80,8 @@ import 'primeicons/primeicons.css';
 
 ## QuickStart
 
-An [example application](https://github.com/primefaces/primereact-quickstart) based on create-react-app is available at github.
+[Example applications](https://github.com/primefaces/primereact-examples) based on create-react-app and nextjs are available at github.
 
 ## TypeScript
 
-Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample [typescript-primereact application](https://github.com/primefaces/primereact-typescript-quickstart) is available as well at github.
+Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample [typescript-primereact application](https://github.com/primefaces/primereact-examples/tree/main/cra-basic-ts) is available as well at github.

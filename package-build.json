@@ -42,5 +42,6 @@
         "react-transition-group": "^4.4.1",
         "primeicons": "^5.0.0"
     },
+    "sideEffects": false,
     "unpkg": "primereact.all.min.js"
 }
