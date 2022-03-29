@@ -1,18 +1,15 @@
-import React, {Component} from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class ToggleButtonDoc extends Component {
+const ToggleButtonDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { ToggleButton } from 'primereact/togglebutton';
 
@@ -42,10 +39,10 @@ export class ToggleButtonDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { ToggleButton } from 'primereact/togglebutton';
 
@@ -90,14 +87,14 @@ const ToggleButtonDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/togglebutton/togglebutton.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { ToggleButton } = primereact.togglebutton;
 
 const ToggleButtonDemo = () => {
@@ -117,27 +114,21 @@ const ToggleButtonDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-    <TabView>
-        <TabPanel header="Documentation">
-            <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { ToggleButton } from 'primereact/togglebutton';
 `}
 </CodeHighlight>
 
-            <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -145,8 +136,8 @@ import { ToggleButton } from 'primereact/togglebutton';
 `}
 </CodeHighlight>
 
-            <h5>Getting Started</h5>
-            <p>ToggleButton is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
+                    <h5>Getting Started</h5>
+                    <p>ToggleButton is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
 
 <CodeHighlight>
 {`
@@ -154,8 +145,8 @@ import { ToggleButton } from 'primereact/togglebutton';
 `}
 </CodeHighlight>
 
-            <h5>Labels and Icons</h5>
-            <p>Icons and Labels can be customized using <i>onLabel</i>, <i>offLabel</i>, <i>onIcon</i> and <i>offIcon</i> properties.</p>
+                    <h5>Labels and Icons</h5>
+                    <p>Icons and Labels can be customized using <i>onLabel</i>, <i>offLabel</i>, <i>onIcon</i> and <i>offIcon</i> properties.</p>
 
 <CodeHighlight>
 {`
@@ -163,167 +154,168 @@ import { ToggleButton } from 'primereact/togglebutton';
 `}
 </CodeHighlight>
 
-            <h5>Properties</h5>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Default</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>id</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Unique identifier of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>onIcon</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Icon for the on state.</td>
-                        </tr>
-                        <tr>
-                            <td>offIcon</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Icon for the off state.</td>
-                        </tr>
-                        <tr>
-                            <td>onLabel</td>
-                            <td>string</td>
-                            <td>yes</td>
-                            <td>Label for the on state.</td>
-                        </tr>
-                        <tr>
-                            <td>offLabel</td>
-                            <td>string</td>
-                            <td>no</td>
-                            <td>Label for the off state.</td>
-                        </tr>
-                        <tr>
-                            <td>style</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Inline style of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>className</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Style class of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>checked</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Specifies the on/off state of the button.</td>
-                        </tr>
-                        <tr>
-                            <td>tabIndex</td>
-                            <td>number</td>
-                            <td>0</td>
-                            <td>Index of the element in tabbing order.</td>
-                        </tr>
-                        <tr>
-                            <td>iconPos</td>
-                            <td>string</td>
-                            <td>left</td>
-                            <td>Position of the icon, valid values are "left" and "right".</td>
-                        </tr>
-                        <tr>
-                            <td>tooltip</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>Content of the tooltip.</td>
-                        </tr>
-                        <tr>
-                            <td>tooltipOptions</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
-                        </tr>
-                        <tr>
-                            <td>ariaLabelledBy</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>onIcon</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Icon for the on state.</td>
+                                </tr>
+                                <tr>
+                                    <td>offIcon</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Icon for the off state.</td>
+                                </tr>
+                                <tr>
+                                    <td>onLabel</td>
+                                    <td>string</td>
+                                    <td>yes</td>
+                                    <td>Label for the on state.</td>
+                                </tr>
+                                <tr>
+                                    <td>offLabel</td>
+                                    <td>string</td>
+                                    <td>no</td>
+                                    <td>Label for the off state.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>checked</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Specifies the on/off state of the button.</td>
+                                </tr>
+                                <tr>
+                                    <td>tabIndex</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Index of the element in tabbing order.</td>
+                                </tr>
+                                <tr>
+                                    <td>iconPos</td>
+                                    <td>string</td>
+                                    <td>left</td>
+                                    <td>Position of the icon, valid values are "left" and "right".</td>
+                                </tr>
+                                <tr>
+                                    <td>tooltip</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Content of the tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td>tooltipOptions</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                                </tr>
+                                <tr>
+                                    <td>ariaLabelledBy</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <h5>Events</h5>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Parameters</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>onChange</td>
-                            <td>event.originalEvent: Browser event <br />
-                                event.value: Value as the checked state.</td>
-                            <td>Callback to invoke on value change.</td>
-                        </tr>
-                        <tr>
-                            <td>onFocus</td>
-                            <td>event: Browser event</td>
-                            <td>Callback to invoke when autocomplete gets focus.</td>
-                        </tr>
-                        <tr>
-                            <td>onBlur</td>
-                            <td>event: Browser event</td>
-                            <td>Callback to invoke when autocomplete loses focus.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onChange</td>
+                                    <td>event.originalEvent: Browser event <br />
+                                        event.value: Value as the checked state.</td>
+                                    <td>Callback to invoke on value change.</td>
+                                </tr>
+                                <tr>
+                                    <td>onFocus</td>
+                                    <td>event: Browser event</td>
+                                    <td>Callback to invoke when autocomplete gets focus.</td>
+                                </tr>
+                                <tr>
+                                    <td>onBlur</td>
+                                    <td>event: Browser event</td>
+                                    <td>Callback to invoke when autocomplete loses focus.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <h5>Styling</h5>
-            <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Element</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>p-togglebutton</td>
-                            <td>Container element</td>
-                        </tr>
-                        <tr>
-                            <td>p-button-icon-left</td>
-                            <td>Icon element.</td>
-                        </tr>
-                        <tr>
-                            <td>p-button-text</td>
-                            <td>Label element.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-togglebutton</td>
+                                    <td>Container element</td>
+                                </tr>
+                                <tr>
+                                    <td>p-button-icon-left</td>
+                                    <td>Icon element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-button-text</td>
+                                    <td>Label element.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <h5>Dependencies</h5>
-            <p>None.</p>
-        </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-        {
-            useLiveEditorTabs({ name: 'ToggleButtonDemo', sources: this.sources })
-        }
-    </TabView>
-</div>
-        );
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'ToggleButtonDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default ToggleButtonDoc;

@@ -11,7 +11,7 @@ import { Slider } from '../../components/lib/slider/Slider';
 import { classNames } from '../../components/lib/utils/ClassNames';
 import { useRef, useState } from 'react';
 
-export default function DesignerSection(props) {
+const DesignerSection = (props) => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [font,setFont] = useState('-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol');
     const fonts = [
@@ -55,7 +55,7 @@ export default function DesignerSection(props) {
             _checkboxValue.push(e.value);
         else
             _checkboxValue.splice(_checkboxValue.indexOf(e.value), 1);
-    
+
         setCheckboxValue(_checkboxValue);
     }
 
@@ -70,7 +70,7 @@ export default function DesignerSection(props) {
                 <div className="box p-4 flex flex-column md:flex-row z-1 designer-editor">
                     <div className="mr-0 md:mr-4 p-4 designer-controls box border-bottom-1 border-left-none border-right-none border-top-none md:border-bottom-none md:border-right-1" style={{borderRadius: '10px'}}>
                         <div className="text-center mb-4">
-                            <img src={`${contextPath}/images/landing-new/${designerLogo}`} />
+                            <img src={`${contextPath}/images/landing-new/${designerLogo}`} alt={designerLogo} />
                         </div>
                         <div className="p-fluid">
                             <span className="font-semibold block mb-3">Primary</span>
@@ -179,3 +179,4 @@ export default function DesignerSection(props) {
     );
 }
 
+export default DesignerSection;

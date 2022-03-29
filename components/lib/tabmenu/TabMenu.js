@@ -1,39 +1,16 @@
-import React, {Component} from 'react';
+import React, { useState, useRef, useEffect, memo, forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
-export class TabMenu extends Component {
+export const TabMenu = memo(forwardRef((props, ref) => {
+    const [activeIndexState, setActiveIndexState] = useState(props.activeIndex);
+    const inkbarRef = useRef(null);
+    const navRef = useRef(null);
+    const tabsRef = useRef({});
+    const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
 
-    static defaultProps = {
-        id: null,
-        model: null,
-        activeIndex: 0,
-        style: null,
-        className: null,
-        onTabChange: null
-    };
-
-    static propTypes = {
-        id: PropTypes.string,
-        model: PropTypes.array,
-        activeIndex: PropTypes.number,
-        style: PropTypes.any,
-        className: PropTypes.string,
-        onTabChange: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-
-        if (!this.props.onTabChange) {
-            this.state = {
-                activeIndex: props.activeIndex
-            };
-        }
-    }
-
-    itemClick(event, item, index) {
+    const itemClick = (event, item, index) => {
         if (item.disabled) {
             event.preventDefault();
             return;
@@ -50,106 +27,111 @@ export class TabMenu extends Component {
             });
         }
 
-        if (this.props.onTabChange) {
-            this.props.onTabChange({
+        if (props.onTabChange) {
+            props.onTabChange({
                 originalEvent: event,
                 value: item,
                 index
             });
         }
         else {
-            this.setState({
-                activeIndex: index
-            });
+            setActiveIndexState(index);
         }
     }
 
-    getActiveIndex() {
-        return this.props.onTabChange ? this.props.activeIndex : this.state.activeIndex;
+    const isSelected = (index) => {
+        return (index === (activeIndex || 0));
     }
 
-    isSelected(index) {
-        return (index === (this.getActiveIndex() || 0));
+    const updateInkBar = () => {
+        const tabHeader = tabsRef.current[`tab_${activeIndex}`];
+
+        inkbarRef.current.style.width = DomHandler.getWidth(tabHeader) + 'px';
+        inkbarRef.current.style.left = DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(navRef.current).left + 'px';
     }
 
-    updateInkBar() {
-        const activeIndex = this.getActiveIndex();
-        const tabHeader = this[`tab_${activeIndex}`];
+    useEffect(() => {
+        updateInkBar();
+    });
 
-        this.inkbar.style.width = DomHandler.getWidth(tabHeader) + 'px';
-        this.inkbar.style.left =  DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(this.nav).left + 'px';
-    }
-
-    componentDidMount() {
-        this.updateInkBar();
-    }
-
-    componentDidUpdate() {
-        this.updateInkBar();
-    }
-
-    renderMenuItem(item, index) {
-        const active = this.isSelected(index);
+    const createMenuItem = (item, index) => {
+        const { className: _className, style, disabled, icon: _icon, label: _label, template, url, target } = item;
+        const key = _label + '_' + index;
+        const active = isSelected(index);
         const className = classNames('p-tabmenuitem', {
             'p-highlight': active,
-            'p-disabled': item.disabled
-        }, item.className);
-        const iconClassName = classNames('p-menuitem-icon', item.icon);
-        const icon = item.icon && <span className={iconClassName}></span>;
-        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+            'p-disabled': disabled
+        }, _className);
+        const iconClassName = classNames('p-menuitem-icon', _icon);
+        const icon = _icon && <span className={iconClassName}></span>;
+        const label = _label && <span className="p-menuitem-text">{_label}</span>;
         let content = (
-            <a href={item.url||'#'} className="p-menuitem-link" target={item.target} onClick={(event) => this.itemClick(event, item, index)} role="presentation">
+            <a href={url || '#'} className="p-menuitem-link" target={target} onClick={(event) => itemClick(event, item, index)} role="presentation">
                 {icon}
                 {label}
                 <Ripple />
             </a>
         );
 
-        if (item.template) {
+        if (template) {
             const defaultContentOptions = {
-                onClick: (event) => this.itemClick(event, item, index),
+                onClick: (event) => itemClick(event, item, index),
                 className: 'p-menuitem-link',
                 labelClassName: 'p-menuitem-text',
                 iconClassName,
                 element: content,
-                props: this.props,
+                props,
                 active,
                 index
             };
 
-            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+            content = ObjectUtils.getJSXElement(template, item, defaultContentOptions);
         }
 
         return (
-            <li ref={(el) => this[`tab_${index}`] = el} key={item.label + '_' + index} className={className} style={item.style} role="tab" aria-selected={active} aria-expanded={active} aria-disabled={item.disabled}>
+            <li ref={tabsRef.current[`tab_${index}`]} key={key} className={className} style={style} role="tab" aria-selected={active} aria-expanded={active} aria-disabled={disabled}>
                 {content}
             </li>
-        );
+        )
     }
 
-    renderItems() {
+    const createItems = () => {
+        return props.model.map(createMenuItem);
+    }
+
+    if (props.model) {
+        const className = classNames('p-tabmenu p-component', props.className);
+        const items = createItems();
+
         return (
-            this.props.model.map((item, index) => {
-                return this.renderMenuItem(item, index);
-            })
+            <div id={props.id} className={className} style={props.style}>
+                <ul ref={navRef} className="p-tabmenu-nav p-reset" role="tablist">
+                    {items}
+                    <li ref={inkbarRef} className="p-tabmenu-ink-bar"></li>
+                </ul>
+            </div>
         );
     }
 
-    render() {
-        if (this.props.model) {
-            const className = classNames('p-tabmenu p-component', this.props.className);
-            const items = this.renderItems();
+    return null;
+}));
 
-            return (
-                <div id={this.props.id} className={className} style={this.props.style}>
-                    <ul ref={(el) => this.nav = el} className="p-tabmenu-nav p-reset" role="tablist">
-                        {items}
-                        <li ref={(el) => this.inkbar = el} className="p-tabmenu-ink-bar"></li>
-                    </ul>
-                </div>
-            );
-        }
+TabMenu.defaultProps = {
+    __TYPE: 'TabMenu',
+    id: null,
+    model: null,
+    activeIndex: 0,
+    style: null,
+    className: null,
+    onTabChange: null
+}
 
-        return null;
-    }
+TabMenu.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    id: PropTypes.string,
+    model: PropTypes.array,
+    activeIndex: PropTypes.number,
+    style: PropTypes.any,
+    className: PropTypes.string,
+    onTabChange: PropTypes.func
 }

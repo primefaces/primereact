@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class SliderDoc extends Component {
+const SliderDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Slider } from 'primereact/slider';
 import { InputText } from 'primereact/inputtext';
@@ -61,10 +58,10 @@ export class SliderDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { Slider } from 'primereact/slider';
 import { InputText } from 'primereact/inputtext';
@@ -104,10 +101,10 @@ const SliderDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { Slider } from 'primereact/slider';
 import { InputText } from 'primereact/inputtext';
@@ -147,16 +144,16 @@ const SliderDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./SliderDemo.css" />
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/slider/slider.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { Slider } = primereact.slider;
 const { InputText } = primereact.inputtext;
 
@@ -194,12 +191,12 @@ const SliderDemo = () => {
     );
 }
                 `
-            }
-        };
+        }
+    };
 
-        this.extFiles = {
-            'demo/SliderDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/SliderDemo.css': {
+            content: `
 .slider-demo .p-slider-horizontal, .slider-demo .p-inputtext {
     width: 14rem;
 }
@@ -208,27 +205,21 @@ const SliderDemo = () => {
     height: 14rem;
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-    <TabView>
-        <TabPanel header="Documentation">
-            <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Slider } from 'primereact/slider';
 `}
 </CodeHighlight>
 
-            <h5>Import via CDN</h5>
+            <       h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -236,8 +227,8 @@ import { Slider } from 'primereact/slider';
 `}
 </CodeHighlight>
 
-            <h5>Getting Started</h5>
-            <p>Slider is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
+                    <h5>Getting Started</h5>
+                    <p>Slider is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
 
 <CodeHighlight>
 {`
@@ -245,177 +236,178 @@ import { Slider } from 'primereact/slider';
 `}
 </CodeHighlight>
 
-            <h5>Range</h5>
-            <p>Range slider provides two handles to define two values. Enable <i>range</i> property and bind an array to implement a range slider.</p>
+                    <h5>Range</h5>
+                    <p>Range slider provides two handles to define two values. Enable <i>range</i> property and bind an array to implement a range slider.</p>
 <CodeHighlight>
 {`
 <Slider value={rangeValues} onChange={(e) => setRangeValues(e.value)} range />
 `}
 </CodeHighlight>
 
-            <h5>Orientation</h5>
-            <p>Default layout of slider is horizontal, use <i>orientation</i> property for the alternative vertical mode.</p>
+                    <h5>Orientation</h5>
+                    <p>Default layout of slider is horizontal, use <i>orientation</i> property for the alternative vertical mode.</p>
 <CodeHighlight>
 {`
 <Slider value={value} onChange={(e) => setValue(e.value)} orientation="vertical" />
 `}
 </CodeHighlight>
 
-            <h5>Properties</h5>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Default</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>id</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Unique identifier of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>value</td>
-                            <td>number</td>
-                            <td>0</td>
-                            <td>Value of the component.</td>
-                        </tr>
-                        <tr>
-                            <td>animate</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When enabled, displays an animation on click of the slider bar.</td>
-                        </tr>
-                        <tr>
-                            <td>min</td>
-                            <td>number</td>
-                            <td>0</td>
-                            <td>Mininum boundary value.</td>
-                        </tr>
-                        <tr>
-                            <td>max</td>
-                            <td>number</td>
-                            <td>100</td>
-                            <td>Maximum boundary value.</td>
-                        </tr>
-                        <tr>
-                            <td>orientation</td>
-                            <td>string</td>
-                            <td>horizontal</td>
-                            <td>Orientation of the slider, valid values are horizontal and vertical.</td>
-                        </tr>
-                        <tr>
-                           <td>step</td>
-                           <td>number</td>
-                           <td>1</td>
-                           <td>Step factor to increment/decrement the value.</td>
-                         </tr>
-                        <tr>
-                           <td>range</td>
-                           <td>boolean</td>
-                           <td>false</td>
-                           <td>When speficed, allows two boundary values to be picked.</td>
-                         </tr>
-                        <tr>
-                            <td>style</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Inline style of the component.</td>
-                        </tr>
-                        <tr>
-                            <td>className</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Style class of the element.</td>
-                        </tr>
-                        <tr>
-                            <td>disabled</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When present, it specifies that the component should be disabled.</td>
-                        </tr>
-                        <tr>
-                            <td>tabIndex</td>
-                            <td>number</td>
-                            <td>null</td>
-                            <td>Index of the element in tabbing order.</td>
-                        </tr>
-                        <tr>
-                            <td>ariaLabelledBy</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>value</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Value of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>animate</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When enabled, displays an animation on click of the slider bar.</td>
+                                </tr>
+                                <tr>
+                                    <td>min</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Mininum boundary value.</td>
+                                </tr>
+                                <tr>
+                                    <td>max</td>
+                                    <td>number</td>
+                                    <td>100</td>
+                                    <td>Maximum boundary value.</td>
+                                </tr>
+                                <tr>
+                                    <td>orientation</td>
+                                    <td>string</td>
+                                    <td>horizontal</td>
+                                    <td>Orientation of the slider, valid values are horizontal and vertical.</td>
+                                </tr>
+                                <tr>
+                                <td>step</td>
+                                <td>number</td>
+                                <td>1</td>
+                                <td>Step factor to increment/decrement the value.</td>
+                                </tr>
+                                <tr>
+                                <td>range</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>When speficed, allows two boundary values to be picked.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the component should be disabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>tabIndex</td>
+                                    <td>number</td>
+                                    <td>null</td>
+                                    <td>Index of the element in tabbing order.</td>
+                                </tr>
+                                <tr>
+                                    <td>ariaLabelledBy</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <h5>Events</h5>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Parameters</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>onChange</td>
-                            <td>event.originalEvent: Slide event <br />
-                                event.value: New value.
-                            </td>
-                            <td>Callback to invoke on value change via slide.</td>
-                        </tr>
-                        <tr>
-                            <td>onSlideEnd</td>
-                            <td>event.originalEvent: Slide event <br />
-                                event.value: New value.
-                            </td>
-                            <td>Callback to invoke when slide ends.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onChange</td>
+                                    <td>event.originalEvent: Slide event <br />
+                                        event.value: New value.
+                                    </td>
+                                    <td>Callback to invoke on value change via slide.</td>
+                                </tr>
+                                <tr>
+                                    <td>onSlideEnd</td>
+                                    <td>event.originalEvent: Slide event <br />
+                                        event.value: New value.
+                                    </td>
+                                    <td>Callback to invoke when slide ends.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <h5>Styling</h5>
-            <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Element</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>p-slider</td>
-                            <td>Container element</td>
-                        </tr>
-                        <tr>
-                            <td>p-slider-handle</td>
-                            <td>Handle element.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-slider</td>
+                                    <td>Container element</td>
+                                </tr>
+                                <tr>
+                                    <td>p-slider-handle</td>
+                                    <td>Handle element.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <h5>Dependencies</h5>
-            <p>None.</p>
-        </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-        {
-            useLiveEditorTabs({ name: 'SliderDemo', sources: this.sources, extFiles: this.extFiles })
-        }
-    </TabView>
-</div>
-        );
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'SliderDemo', sources: sources, extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default SliderDoc;

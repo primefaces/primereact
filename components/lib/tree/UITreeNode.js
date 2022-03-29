@@ -1,170 +1,69 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import React, { memo, useRef } from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
-export class UITreeNode extends Component {
+export const UITreeNode = memo((props) => {
+    const contentRef = useRef(null);
+    const nodeTouched = useRef(false);
+    const isLeaf = props.isNodeLeaf(props.node);
+    const expanded = (props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false) || props.node.expanded;
 
-    static defaultProps = {
-        node: null,
-        index: null,
-        last: null,
-        parent: null,
-        path: null,
-        disabled: false,
-        selectionMode: null,
-        selectionKeys: null,
-        contextMenuSelectionKey: null,
-        metaKeySelection: true,
-        expandedKeys: null,
-        propagateSelectionUp: true,
-        propagateSelectionDown: true,
-        dragdropScope: null,
-        ariaLabel: null,
-        ariaLabelledBy: null,
-        nodeTemplate: null,
-        togglerTemplate: null,
-        isNodeLeaf: null,
-        onSelect: null,
-        onUnselect: null,
-        onExpand: null,
-        onCollapse: null,
-        onToggle: null,
-        onSelectionChange: null,
-        onContextMenuSelectionChange: null,
-        onPropagateUp: null,
-        onDragStart: null,
-        onDragEnd: null,
-        onDrop: null,
-        onDropPoint: null,
-        onContextMenu: null,
-        onNodeClick: null,
-        onNodeDoubleClick: null
-    }
+    const expand = (event) => {
+        let expandedKeys = props.expandedKeys ? { ...props.expandedKeys } : {};
+        expandedKeys[props.node.key] = true;
 
-    static propTypes = {
-        node: PropTypes.object,
-        index: PropTypes.number,
-        last: PropTypes.bool,
-        parent: PropTypes.object,
-        path: PropTypes.string,
-        disabled: PropTypes.bool,
-        selectionMode: PropTypes.string,
-        selectionKeys: PropTypes.any,
-        contextMenuSelectionKey: PropTypes.any,
-        metaKeySelection: PropTypes.bool,
-        expandedKeys: PropTypes.object,
-        propagateSelectionUp: PropTypes.bool,
-        propagateSelectionDown: PropTypes.bool,
-        dragdropScope: PropTypes.string,
-        ariaLabel: PropTypes.string,
-        ariaLabelledBy: PropTypes.string,
-        nodeTemplate: PropTypes.any,
-        togglerTemplate: PropTypes.func,
-        isNodeLeaf: PropTypes.func,
-        onSelect: PropTypes.func,
-        onUnselect: PropTypes.func,
-        onExpand: PropTypes.func,
-        onCollapse: PropTypes.func,
-        onToggle: PropTypes.func,
-        onSelectionChange: PropTypes.func,
-        onContextMenuSelectionChange: PropTypes.func,
-        onPropagateUp: PropTypes.func,
-        onDragStart: PropTypes.func,
-        onDragEnd: PropTypes.func,
-        onDrop: PropTypes.func,
-        onDropPoint: PropTypes.func,
-        onContextMenu: PropTypes.func,
-        onNodeClick: PropTypes.func,
-        onNodeDoubleClick: PropTypes.func
-    }
-
-    constructor(props) {
-        super(props);
-
-        this.onClick = this.onClick.bind(this);
-        this.onDoubleClick = this.onDoubleClick.bind(this);
-        this.onRightClick = this.onRightClick.bind(this);
-        this.onTouchEnd = this.onTouchEnd.bind(this);
-        this.onTogglerClick = this.onTogglerClick.bind(this);
-        this.onNodeKeyDown = this.onNodeKeyDown.bind(this);
-        this.propagateUp = this.propagateUp.bind(this);
-
-        this.onDrop = this.onDrop.bind(this);
-        this.onDragOver = this.onDragOver.bind(this);
-        this.onDragEnter = this.onDragEnter.bind(this);
-        this.onDragLeave = this.onDragLeave.bind(this);
-        this.onDragStart = this.onDragStart.bind(this);
-        this.onDragEnd = this.onDragEnd.bind(this);
-        this.onDropPointDragOver = this.onDropPointDragOver.bind(this);
-        this.onDropPointDragEnter = this.onDropPointDragEnter.bind(this);
-        this.onDropPointDragLeave = this.onDropPointDragLeave.bind(this);
-    }
-
-    isLeaf() {
-        return this.props.isNodeLeaf(this.props.node);
-    }
-
-    expand(event) {
-        let expandedKeys = this.props.expandedKeys ? {...this.props.expandedKeys} : {};
-        expandedKeys[this.props.node.key] = true;
-
-        this.props.onToggle({
+        props.onToggle({
             originalEvent: event,
             value: expandedKeys
         });
 
-        this.invokeToggleEvents(event, true);
+        invokeToggleEvents(event, true);
     }
 
-    collapse(event) {
-        let expandedKeys = {...this.props.expandedKeys};
-        delete expandedKeys[this.props.node.key];
+    const collapse = (event) => {
+        let expandedKeys = { ...props.expandedKeys };
+        delete expandedKeys[props.node.key];
 
-        this.props.onToggle({
+        props.onToggle({
             originalEvent: event,
             value: expandedKeys
         });
 
-        this.invokeToggleEvents(event, false);
+        invokeToggleEvents(event, false);
     }
 
-    onTogglerClick(event) {
-        if (this.props.disabled) {
+    const onTogglerClick = (event) => {
+        if (props.disabled) {
             return;
         }
 
-        if (this.isExpanded())
-            this.collapse(event);
-        else
-            this.expand(event);
+        expanded ? collapse(event) : expand(event);
+
+        event.preventDefault();
+        event.stopPropagation();
     }
 
-    invokeToggleEvents(event, expanded) {
-        if (expanded) {
-            if (this.props.onExpand) {
-                this.props.onExpand({
+    const invokeToggleEvents = (event, isExpanded) => {
+        if (isExpanded) {
+            if (props.onExpand) {
+                props.onExpand({
                     originalEvent: event,
-                    node: this.props.node
+                    node: props.node
                 });
             }
         }
         else {
-            if (this.props.onCollapse) {
-                this.props.onCollapse({
+            if (props.onCollapse) {
+                props.onCollapse({
                     originalEvent: event,
-                    node: this.props.node
+                    node: props.node
                 });
             }
         }
     }
 
-    isExpanded() {
-        return (this.props.expandedKeys ? this.props.expandedKeys[this.props.node.key] !== undefined : false) || this.props.node.expanded;
-    }
-
-    onNodeKeyDown(event) {
-        if (this.props.disabled) {
+    const onNodeKeyDown = (event) => {
+        if (props.disabled) {
             return;
         }
 
@@ -179,249 +78,236 @@ export class UITreeNode extends Component {
             case 40:
                 const listElement = nodeElement.children[1];
                 if (listElement) {
-                    this.focusNode(listElement.children[0]);
+                    focusNode(listElement.children[0]);
                 }
                 else {
                     const nextNodeElement = nodeElement.nextElementSibling;
                     if (nextNodeElement) {
-                        this.focusNode(nextNodeElement);
+                        focusNode(nextNodeElement);
                     }
                     else {
-                        let nextSiblingAncestor = this.findNextSiblingOfAncestor(nodeElement);
-                        if (nextSiblingAncestor) {
-                            this.focusNode(nextSiblingAncestor);
-                        }
+                        const nextSiblingAncestor = findNextSiblingOfAncestor(nodeElement);
+                        nextSiblingAncestor && focusNode(nextSiblingAncestor);
                     }
                 }
 
                 event.preventDefault();
-            break;
+                break;
 
             //up arrow
             case 38:
                 if (nodeElement.previousElementSibling) {
-                    this.focusNode(this.findLastVisibleDescendant(nodeElement.previousElementSibling));
+                    focusNode(findLastVisibleDescendant(nodeElement.previousElementSibling));
                 }
                 else {
-                    let parentNodeElement = this.getParentNodeElement(nodeElement);
-                    if (parentNodeElement) {
-                        this.focusNode(parentNodeElement);
-                    }
+                    const parentNodeElement = getParentNodeElement(nodeElement);
+                    parentNodeElement && focusNode(parentNodeElement);
                 }
 
                 event.preventDefault();
-            break;
+                break;
 
             //right arrow
             case 39:
-                if (!this.isExpanded()) {
-                    this.expand(event);
+                if (!expanded) {
+                    expand(event);
                 }
 
                 event.preventDefault();
-            break;
+                break;
 
             //left arrow
             case 37:
-                if (this.isExpanded()) {
-                    this.collapse(event);
+                if (expanded) {
+                    collapse(event);
                 }
 
                 event.preventDefault();
-            break;
+                break;
 
             //enter
             case 13:
-                this.onClick(event);
+                onClick(event);
                 event.preventDefault();
-            break;
+                break;
 
             default:
                 //no op
-            break;
+                break;
         }
     }
 
-    findNextSiblingOfAncestor(nodeElement) {
-        let parentNodeElement = this.getParentNodeElement(nodeElement);
-        if (parentNodeElement) {
-            if (parentNodeElement.nextElementSibling)
-                return parentNodeElement.nextElementSibling;
-            else
-                return this.findNextSiblingOfAncestor(parentNodeElement);
-        }
-        else {
-            return null;
-        }
+    const findNextSiblingOfAncestor = (nodeElement) => {
+        const parentNodeElement = getParentNodeElement(nodeElement);
+        return parentNodeElement ? (parentNodeElement.nextElementSibling || findNextSiblingOfAncestor(parentNodeElement)) : null;
     }
 
-    findLastVisibleDescendant(nodeElement) {
+    const findLastVisibleDescendant = (nodeElement) => {
         const childrenListElement = nodeElement.children[1];
         if (childrenListElement) {
             const lastChildElement = childrenListElement.children[childrenListElement.children.length - 1];
-
-            return this.findLastVisibleDescendant(lastChildElement);
+            return findLastVisibleDescendant(lastChildElement);
         }
         else {
             return nodeElement;
         }
     }
 
-    getParentNodeElement(nodeElement) {
+    const getParentNodeElement = (nodeElement) => {
         const parentNodeElement = nodeElement.parentElement.parentElement;
-
         return DomHandler.hasClass(parentNodeElement, 'p-treenode') ? parentNodeElement : null;
     }
 
-    focusNode(element) {
+    const focusNode = (element) => {
         element.children[0].focus();
     }
 
-    onClick(event) {
-        if (this.props.onClick) {
-            this.props.onClick({
+    const onClick = (event) => {
+        if (props.onClick) {
+            props.onClick({
                 originalEvent: event,
-                node: this.props.node
+                node: props.node
             });
         }
 
-        if ((event.target.className && event.target.className.constructor === String && event.target.className.indexOf('p-tree-toggler') === 0) || this.props.disabled) {
+        const targetNode = event.target.nodeName;
+        if (props.disabled || targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || DomHandler.hasClass(event.target, 'p-clickable')) {
             return;
         }
 
-        if (this.props.selectionMode && this.props.node.selectable !== false) {
+        if (props.selectionMode && props.node.selectable !== false) {
             let selectionKeys;
 
-            if (this.isCheckboxSelectionMode()) {
-                const checked = this.isChecked();
-                selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};
+            if (isCheckboxSelectionMode()) {
+                const checked = isChecked();
+                selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
 
                 if (checked) {
-                    if (this.props.propagateSelectionDown)
-                        this.propagateDown(this.props.node, false, selectionKeys);
+                    if (props.propagateSelectionDown)
+                        propagateDown(props.node, false, selectionKeys);
                     else
-                        delete selectionKeys[this.props.node.key];
+                        delete selectionKeys[props.node.key];
 
-                    if (this.props.propagateSelectionUp && this.props.onPropagateUp) {
-                        this.props.onPropagateUp({
+                    if (props.propagateSelectionUp && props.onPropagateUp) {
+                        props.onPropagateUp({
                             originalEvent: event,
                             check: false,
                             selectionKeys: selectionKeys
                         });
                     }
 
-                    if (this.props.onUnselect) {
-                        this.props.onUnselect({
+                    if (props.onUnselect) {
+                        props.onUnselect({
                             originalEvent: event,
-                            node: this.props.node
+                            node: props.node
                         });
                     }
                 }
                 else {
-                    if (this.props.propagateSelectionDown)
-                        this.propagateDown(this.props.node, true, selectionKeys);
+                    if (props.propagateSelectionDown)
+                        propagateDown(props.node, true, selectionKeys);
                     else
-                        selectionKeys[this.props.node.key] = {checked: true};
+                        selectionKeys[props.node.key] = { checked: true };
 
-                        if (this.props.propagateSelectionUp && this.props.onPropagateUp) {
-                            this.props.onPropagateUp({
-                                originalEvent: event,
-                                check: true,
-                                selectionKeys: selectionKeys
-                            });
-                        }
-
-                    if (this.props.onSelect) {
-                        this.props.onSelect({
+                    if (props.propagateSelectionUp && props.onPropagateUp) {
+                        props.onPropagateUp({
                             originalEvent: event,
-                            node: this.props.node
+                            check: true,
+                            selectionKeys: selectionKeys
+                        });
+                    }
+
+                    if (props.onSelect) {
+                        props.onSelect({
+                            originalEvent: event,
+                            node: props.node
                         });
                     }
                 }
             }
             else {
-                const selected = this.isSelected();
-                const metaSelection = this.nodeTouched ? false : this.props.metaKeySelection;
+                const selected = isSelected();
+                const metaSelection = nodeTouched.current ? false : props.metaKeySelection;
 
                 if (metaSelection) {
-                    let metaKey = (event.metaKey||event.ctrlKey);
+                    let metaKey = (event.metaKey || event.ctrlKey);
 
                     if (selected && metaKey) {
-                        if (this.isSingleSelectionMode()) {
+                        if (isSingleSelectionMode()) {
                             selectionKeys = null;
                         }
                         else {
-                            selectionKeys = {...this.props.selectionKeys};
-                            delete selectionKeys[this.props.node.key];
+                            selectionKeys = { ...props.selectionKeys };
+                            delete selectionKeys[props.node.key];
                         }
 
-                        if (this.props.onUnselect) {
-                            this.props.onUnselect({
+                        if (props.onUnselect) {
+                            props.onUnselect({
                                 originalEvent: event,
-                                node: this.props.node
+                                node: props.node
                             });
                         }
                     }
                     else {
-                        if (this.isSingleSelectionMode()) {
-                            selectionKeys = this.props.node.key;
+                        if (isSingleSelectionMode()) {
+                            selectionKeys = props.node.key;
                         }
-                        else if (this.isMultipleSelectionMode()) {
-                            selectionKeys = !metaKey ? {} : (this.props.selectionKeys ? {...this.props.selectionKeys} : {});
-                            selectionKeys[this.props.node.key] = true;
+                        else if (isMultipleSelectionMode()) {
+                            selectionKeys = !metaKey ? {} : (props.selectionKeys ? { ...props.selectionKeys } : {});
+                            selectionKeys[props.node.key] = true;
                         }
 
-                        if (this.props.onSelect) {
-                            this.props.onSelect({
+                        if (props.onSelect) {
+                            props.onSelect({
                                 originalEvent: event,
-                                node: this.props.node
+                                node: props.node
                             });
                         }
                     }
                 }
                 else {
-                    if (this.isSingleSelectionMode()) {
+                    if (isSingleSelectionMode()) {
                         if (selected) {
                             selectionKeys = null;
 
-                            if (this.props.onUnselect) {
-                                this.props.onUnselect({
+                            if (props.onUnselect) {
+                                props.onUnselect({
                                     originalEvent: event,
-                                    node: this.props.node
+                                    node: props.node
                                 });
                             }
                         }
                         else {
-                            selectionKeys = this.props.node.key;
+                            selectionKeys = props.node.key;
 
-                            if (this.props.onSelect) {
-                                this.props.onSelect({
+                            if (props.onSelect) {
+                                props.onSelect({
                                     originalEvent: event,
-                                    node: this.props.node
+                                    node: props.node
                                 });
                             }
                         }
                     }
                     else {
                         if (selected) {
-                            selectionKeys = {...this.props.selectionKeys};
-                            delete selectionKeys[this.props.node.key];
+                            selectionKeys = { ...props.selectionKeys };
+                            delete selectionKeys[props.node.key];
 
-                            if (this.props.onUnselect) {
-                                this.props.onUnselect({
+                            if (props.onUnselect) {
+                                props.onUnselect({
                                     originalEvent: event,
-                                    node: this.props.node
+                                    node: props.node
                                 });
                             }
                         }
                         else {
-                            selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};
-                            selectionKeys[this.props.node.key] = true;
+                            selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
+                            selectionKeys[props.node.key] = true;
 
-                            if (this.props.onSelect) {
-                                this.props.onSelect({
+                            if (props.onSelect) {
+                                props.onSelect({
                                     originalEvent: event,
-                                    node: this.props.node
+                                    node: props.node
                                 });
                             }
                         }
@@ -429,250 +315,250 @@ export class UITreeNode extends Component {
                 }
             }
 
-            if (this.props.onSelectionChange) {
-                this.props.onSelectionChange({
+            if (props.onSelectionChange) {
+                props.onSelectionChange({
                     originalEvent: event,
                     value: selectionKeys
                 })
             }
         }
 
-        this.nodeTouched = false;
+        nodeTouched.current = false;
     }
 
-    onDoubleClick(event) {
-        if (this.props.onDoubleClick) {
-            this.props.onDoubleClick({
+    const onDoubleClick = (event) => {
+        if (props.onDoubleClick) {
+            props.onDoubleClick({
                 originalEvent: event,
-                node: this.props.node
+                node: props.node
             })
         }
     }
 
-    onRightClick(event) {
-        if (this.props.disabled) {
+    const onRightClick = (event) => {
+        if (props.disabled) {
             return;
         }
 
         DomHandler.clearSelection();
 
-        if (this.props.onContextMenuSelectionChange) {
-            this.props.onContextMenuSelectionChange({
+        if (props.onContextMenuSelectionChange) {
+            props.onContextMenuSelectionChange({
                 originalEvent: event,
-                value: this.props.node.key
+                value: props.node.key
             })
         }
 
-        if (this.props.onContextMenu) {
-            this.props.onContextMenu({
+        if (props.onContextMenu) {
+            props.onContextMenu({
                 originalEvent: event,
-                node: this.props.node
+                node: props.node
             });
         }
     }
 
-    propagateUp(event) {
+    const propagateUp = (event) => {
         let check = event.check;
         let selectionKeys = event.selectionKeys;
         let checkedChildCount = 0;
         let childPartialSelected = false;
 
-        for(let child of this.props.node.children) {
-            if(selectionKeys[child.key] && selectionKeys[child.key].checked)
+        for (let child of props.node.children) {
+            if (selectionKeys[child.key] && selectionKeys[child.key].checked)
                 checkedChildCount++;
-            else if(selectionKeys[child.key] && selectionKeys[child.key].partialChecked)
+            else if (selectionKeys[child.key] && selectionKeys[child.key].partialChecked)
                 childPartialSelected = true;
         }
 
-        if(check && checkedChildCount === this.props.node.children.length) {
-            selectionKeys[this.props.node.key] = {checked: true, partialChecked: false};
+        if (check && checkedChildCount === props.node.children.length) {
+            selectionKeys[props.node.key] = { checked: true, partialChecked: false };
         }
         else {
             if (!check) {
-                delete selectionKeys[this.props.node.key];
+                delete selectionKeys[props.node.key];
             }
 
-            if(childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== this.props.node.children.length))
-                selectionKeys[this.props.node.key] = {checked: false, partialChecked: true};
+            if (childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== props.node.children.length))
+                selectionKeys[props.node.key] = { checked: false, partialChecked: true };
             else
-                delete selectionKeys[this.props.node.key];
+                delete selectionKeys[props.node.key];
         }
 
-        if (this.props.propagateSelectionUp && this.props.onPropagateUp) {
-            this.props.onPropagateUp(event);
+        if (props.propagateSelectionUp && props.onPropagateUp) {
+            props.onPropagateUp(event);
         }
     }
 
-    propagateDown(node, check, selectionKeys) {
-        if(check)
-            selectionKeys[node.key] = {checked: true, partialChecked: false};
+    const propagateDown = (node, check, selectionKeys) => {
+        if (check)
+            selectionKeys[node.key] = { checked: true, partialChecked: false };
         else
             delete selectionKeys[node.key];
 
         if (node.children && node.children.length) {
             for (let i = 0; i < node.children.length; i++) {
-                this.propagateDown(node.children[i], check, selectionKeys);
+                propagateDown(node.children[i], check, selectionKeys);
             }
         }
     }
 
-    isSelected() {
-        if (this.props.selectionMode && this.props.selectionKeys)
-            return this.isSingleSelectionMode() ? this.props.selectionKeys === this.props.node.key : this.props.selectionKeys[this.props.node.key] !== undefined;
+    const isSelected = () => {
+        if (props.selectionMode && props.selectionKeys)
+            return isSingleSelectionMode() ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
         else
             return false;
     }
 
-    isChecked() {
-        return this.props.selectionKeys ? this.props.selectionKeys[this.props.node.key] && this.props.selectionKeys[this.props.node.key].checked: false;
+    const isChecked = () => {
+        return props.selectionKeys ? props.selectionKeys[props.node.key] && props.selectionKeys[props.node.key].checked : false;
     }
 
-    isPartialChecked() {
-        return this.props.selectionKeys ? this.props.selectionKeys[this.props.node.key] && this.props.selectionKeys[this.props.node.key].partialChecked: false;
+    const isPartialChecked = () => {
+        return props.selectionKeys ? props.selectionKeys[props.node.key] && props.selectionKeys[props.node.key].partialChecked : false;
     }
 
-    isSingleSelectionMode() {
-        return this.props.selectionMode && this.props.selectionMode === 'single';
+    const isSingleSelectionMode = () => {
+        return props.selectionMode && props.selectionMode === 'single';
     }
 
-    isMultipleSelectionMode() {
-        return this.props.selectionMode && this.props.selectionMode === 'multiple';
+    const isMultipleSelectionMode = () => {
+        return props.selectionMode && props.selectionMode === 'multiple';
     }
 
-    isCheckboxSelectionMode() {
-        return this.props.selectionMode && this.props.selectionMode === 'checkbox';
+    const isCheckboxSelectionMode = () => {
+        return props.selectionMode && props.selectionMode === 'checkbox';
     }
 
-    onTouchEnd() {
-        this.nodeTouched = true;
+    const onTouchEnd = () => {
+        nodeTouched.current = true;
     }
 
-    onDropPoint(event, position) {
+    const onDropPoint = (event, position) => {
         event.preventDefault();
 
-        if (this.props.node.droppable !== false) {
+        if (props.node.droppable !== false) {
             DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
 
-            if (this.props.onDropPoint) {
-                const dropIndex = position === -1 ? this.props.index : this.props.index +1;
+            if (props.onDropPoint) {
+                const dropIndex = position === -1 ? props.index : props.index + 1;
 
-                this.props.onDropPoint({
+                props.onDropPoint({
                     originalEvent: event,
-                    path: this.props.path,
+                    path: props.path,
                     index: dropIndex,
-                    position: position
+                    position
                 });
             }
         }
     }
 
-    onDropPointDragOver(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase()) {
+    const onDropPointDragOver = (event) => {
+        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
             event.dataTransfer.dropEffect = 'move';
             event.preventDefault();
         }
     }
 
-    onDropPointDragEnter(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase()) {
+    const onDropPointDragEnter = (event) => {
+        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.addClass(event.target, 'p-treenode-droppoint-active');
         }
     }
 
-    onDropPointDragLeave(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase()) {
+    const onDropPointDragLeave = (event) => {
+        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase()) {
             DomHandler.removeClass(event.target, 'p-treenode-droppoint-active');
         }
     }
 
-    onDrop(event) {
-        if (this.props.dragdropScope && this.props.node.droppable !== false) {
-            DomHandler.removeClass(this.contentElement, 'p-treenode-dragover');
+    const onDrop = (event) => {
+        if (props.dragdropScope && props.node.droppable !== false) {
+            DomHandler.removeClass(contentRef.current, 'p-treenode-dragover');
             event.preventDefault();
             event.stopPropagation();
 
-            if (this.props.onDrop) {
-                this.props.onDrop({
+            if (props.onDrop) {
+                props.onDrop({
                     originalEvent: event,
-                    path: this.props.path,
-                    index: this.props.index
+                    path: props.path,
+                    index: props.index
                 });
             }
         }
     }
 
-    onDragOver(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase() && this.props.node.droppable !== false) {
+    const onDragOver = (event) => {
+        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
             event.dataTransfer.dropEffect = 'move';
             event.preventDefault();
             event.stopPropagation();
         }
     }
 
-    onDragEnter(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase() && this.props.node.droppable !== false) {
-            DomHandler.addClass(this.contentElement, 'p-treenode-dragover');
+    const onDragEnter = (event) => {
+        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
+            DomHandler.addClass(contentRef.current, 'p-treenode-dragover');
         }
     }
 
-    onDragLeave(event) {
-        if (event.dataTransfer.types[1] === this.props.dragdropScope.toLocaleLowerCase() && this.props.node.droppable !== false) {
+    const onDragLeave = (event) => {
+        if (event.dataTransfer.types[1] === props.dragdropScope.toLocaleLowerCase() && props.node.droppable !== false) {
             let rect = event.currentTarget.getBoundingClientRect();
             if (event.nativeEvent.x > rect.left + rect.width || event.nativeEvent.x < rect.left || event.nativeEvent.y >= Math.floor(rect.top + rect.height) || event.nativeEvent.y < rect.top) {
-                DomHandler.removeClass(this.contentElement, 'p-treenode-dragover');
+                DomHandler.removeClass(contentRef.current, 'p-treenode-dragover');
             }
         }
     }
 
-    onDragStart(event) {
-        event.dataTransfer.setData("text", this.props.dragdropScope);
-        event.dataTransfer.setData(this.props.dragdropScope, this.props.dragdropScope);
+    const onDragStart = (event) => {
+        event.dataTransfer.setData("text", props.dragdropScope);
+        event.dataTransfer.setData(props.dragdropScope, props.dragdropScope);
 
-        if (this.props.onDragStart) {
-            this.props.onDragStart({
+        if (props.onDragStart) {
+            props.onDragStart({
                 originalEvent: event,
-                path: this.props.path,
-                index: this.props.index
+                path: props.path,
+                index: props.index
             });
         }
     }
 
-    onDragEnd(event) {
-        if (this.props.onDragEnd) {
-            this.props.onDragEnd({
+    const onDragEnd = (event) => {
+        if (props.onDragEnd) {
+            props.onDragEnd({
                 originalEvent: event
             });
         }
     }
 
-    renderLabel() {
+    const createLabel = () => {
         let content = (
             <span className="p-treenode-label">
-                {this.props.node.label}
+                {props.node.label}
             </span>
         );
 
-        if (this.props.nodeTemplate) {
+        if (props.nodeTemplate) {
             const defaultContentOptions = {
-                onTogglerClick: this.onTogglerClick,
+                onTogglerClick: onTogglerClick,
                 className: 'p-treenode-label',
                 element: content,
-                props: this.props,
-                expanded: this.isExpanded()
+                props,
+                expanded
             };
 
-            content = ObjectUtils.getJSXElement(this.props.nodeTemplate, this.props.node, defaultContentOptions);
+            content = ObjectUtils.getJSXElement(props.nodeTemplate, props.node, defaultContentOptions);
         }
 
         return content;
     }
 
-    renderCheckbox() {
-        if (this.isCheckboxSelectionMode() && this.props.node.selectable !== false) {
-            const checked = this.isChecked();
-            const partialChecked = this.isPartialChecked();
-            const className = classNames('p-checkbox-box', {'p-highlight': checked, 'p-indeterminate': partialChecked, 'p-disabled': this.props.disabled});
-            const icon = classNames('p-checkbox-icon p-c', {'pi pi-check': checked, 'pi pi-minus': partialChecked});
+    const createCheckbox = () => {
+        if (isCheckboxSelectionMode() && props.node.selectable !== false) {
+            const checked = isChecked();
+            const partialChecked = isPartialChecked();
+            const className = classNames('p-checkbox-box', { 'p-highlight': checked, 'p-indeterminate': partialChecked, 'p-disabled': props.disabled });
+            const icon = classNames('p-checkbox-icon p-c', { 'pi pi-check': checked, 'pi pi-minus': partialChecked });
 
             return (
                 <div className="p-checkbox p-component">
@@ -686,101 +572,98 @@ export class UITreeNode extends Component {
         return null;
     }
 
-    renderIcon(expanded) {
-        let icon = this.props.node.icon || (expanded  ? this.props.node.expandedIcon : this.props.node.collapsedIcon);
+    const createIcon = () => {
+        const icon = props.node.icon || (expanded ? props.node.expandedIcon : props.node.collapsedIcon);
 
         if (icon) {
-            let className = classNames('p-treenode-icon', icon);
+            const className = classNames('p-treenode-icon', icon);
 
-            return (
-               <span className={className}></span>
-            );
+            return <span className={className}></span>
         }
 
         return null;
     }
 
-    renderToggler(expanded) {
-        const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {'pi-chevron-right': !expanded, 'pi-chevron-down': expanded});
+    const createToggler = () => {
+        const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
         let content = (
-            <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={this.onTogglerClick}>
+            <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={onTogglerClick}>
                 <span className={iconClassName}></span>
                 <Ripple />
             </button>
         );
 
-        if (this.props.togglerTemplate) {
+        if (props.togglerTemplate) {
             const defaultContentOptions = {
-                onClick: this.onTogglerClick,
+                onClick: onTogglerClick,
                 containerClassName: 'p-tree-toggler p-link',
                 iconClassName: 'p-tree-toggler-icon',
                 element: content,
-                props: this.props,
+                props,
                 expanded
             };
 
-            content = ObjectUtils.getJSXElement(this.props.togglerTemplate, this.props.node, defaultContentOptions);
+            content = ObjectUtils.getJSXElement(props.togglerTemplate, props.node, defaultContentOptions);
         }
 
         return content;
     }
 
-    renderDropPoint(position) {
-        if (this.props.dragdropScope) {
+    const createDropPoint = (position) => {
+        if (props.dragdropScope) {
             return (
-                <li className="p-treenode-droppoint" onDrop={event => this.onDropPoint(event, position)} onDragOver={this.onDropPointDragOver}
-                        onDragEnter={this.onDropPointDragEnter} onDragLeave={this.onDropPointDragLeave}></li>
-            );
+                <li className="p-treenode-droppoint" onDrop={event => onDropPoint(event, position)} onDragOver={onDropPointDragOver}
+                    onDragEnter={onDropPointDragEnter} onDragLeave={onDropPointDragLeave}></li>
+            )
         }
 
         return null;
     }
 
-    renderContent() {
-        const selected = this.isSelected();
-        const checked = this.isChecked();
-        const className = classNames('p-treenode-content', this.props.node.className, {
-                'p-treenode-selectable': (this.props.selectionMode && this.props.node.selectable !== false),
-                'p-highlight': this.isCheckboxSelectionMode() ? checked : selected,
-                'p-highlight-contextmenu': (this.props.contextMenuSelectionKey && this.props.contextMenuSelectionKey === this.props.node.key),
-                'p-disabled': this.props.disabled
-            });
-        const expanded = this.isExpanded();
-        const toggler = this.renderToggler(expanded);
-        const checkbox = this.renderCheckbox();
-        const icon = this.renderIcon(expanded);
-        const label = this.renderLabel();
-        const tabIndex = this.props.disabled ? undefined : 0;
+    const createContent = () => {
+        const selected = isSelected();
+        const checked = isChecked();
+        const className = classNames('p-treenode-content', props.node.className, {
+            'p-treenode-selectable': (props.selectionMode && props.node.selectable !== false),
+            'p-highlight': isCheckboxSelectionMode() ? checked : selected,
+            'p-highlight-contextmenu': (props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key),
+            'p-disabled': props.disabled
+        });
+        const toggler = createToggler();
+        const checkbox = createCheckbox();
+        const icon = createIcon();
+        const label = createLabel();
+        const tabIndex = props.disabled ? undefined : 0;
 
         return (
-            <div ref={(el) => this.contentElement = el} className={className} style={this.props.node.style} onClick={this.onClick} onDoubleClick={this.onDoubleClick}
-                onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} draggable={this.props.dragdropScope && this.props.node.draggable !== false && !this.props.disabled}
-                onDrop={this.onDrop} onDragOver={this.onDragOver} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave}
-                onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} tabIndex={tabIndex} onKeyDown={this.onNodeKeyDown}
-                role="treeitem" aria-posinset={this.props.index + 1} aria-expanded={this.isExpanded()} aria-selected={checked || selected}>
+            <div ref={contentRef} className={className} style={props.node.style} onClick={onClick} onDoubleClick={onDoubleClick}
+                onContextMenu={onRightClick} onTouchEnd={onTouchEnd} draggable={props.dragdropScope && props.node.draggable !== false && !props.disabled}
+                onDrop={onDrop} onDragOver={onDragOver} onDragEnter={onDragEnter} onDragLeave={onDragLeave}
+                onDragStart={onDragStart} onDragEnd={onDragEnd} tabIndex={tabIndex} onKeyDown={onNodeKeyDown}
+                role="treeitem" aria-posinset={props.index + 1} aria-expanded={expanded} aria-selected={checked || selected}>
                 {toggler}
                 {checkbox}
                 {icon}
                 {label}
             </div>
-        );
+        )
     }
 
-    renderChildren() {
-        if (this.props.node.children && this.props.node.children.length && this.isExpanded()) {
+    const createChildren = () => {
+        if (ObjectUtils.isNotEmpty(props.node.children) && expanded) {
             return (
                 <ul className="p-treenode-children" role="group">
                     {
-                        this.props.node.children.map((childNode, index) => {
+                        props.node.children.map((childNode, index) => {
                             return (
-                                <UITreeNode key={childNode.key||childNode.label} node={childNode} parent={this.props.node} index={index} last={index === this.props.node.children.length - 1} path={this.props.path + '-' + index} disabled={this.props.disabled}
-                                    selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange} metaKeySelection={this.props.metaKeySelection}
-                                    propagateSelectionDown={this.props.propagateSelectionDown} propagateSelectionUp={this.props.propagateSelectionUp}
-                                    contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu}
-                                    onExpand={this.props.onExpand} onCollapse={this.props.onCollapse} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                                    expandedKeys={this.props.expandedKeys} onToggle={this.props.onToggle} onPropagateUp={this.propagateUp} nodeTemplate={this.props.nodeTemplate} togglerTemplate={this.props.togglerTemplate} isNodeLeaf={this.props.isNodeLeaf}
-                                    dragdropScope={this.props.dragdropScope} onDragStart={this.props.onDragStart} onDragEnd={this.props.onDragEnd} onDrop={this.props.onDrop} onDropPoint={this.props.onDropPoint} />
-                            );
+                                <UITreeNode key={childNode.key || childNode.label} node={childNode} parent={props.node} index={index} last={index === props.node.children.length - 1} path={props.path + '-' + index} disabled={props.disabled}
+                                    selectionMode={props.selectionMode} selectionKeys={props.selectionKeys} onSelectionChange={props.onSelectionChange} metaKeySelection={props.metaKeySelection}
+                                    propagateSelectionDown={props.propagateSelectionDown} propagateSelectionUp={props.propagateSelectionUp}
+                                    contextMenuSelectionKey={props.contextMenuSelectionKey} onContextMenuSelectionChange={props.onContextMenuSelectionChange} onContextMenu={props.onContextMenu}
+                                    onExpand={props.onExpand} onCollapse={props.onCollapse} onSelect={props.onSelect} onUnselect={props.onUnselect} onClick={props.onClick} onDoubleClick={props.onDoubleClick}
+                                    expandedKeys={props.expandedKeys} onToggle={props.onToggle} onPropagateUp={propagateUp} nodeTemplate={props.nodeTemplate} togglerTemplate={props.togglerTemplate} isNodeLeaf={props.isNodeLeaf}
+                                    dragdropScope={props.dragdropScope} onDragStart={props.onDragStart} onDragEnd={props.onDragEnd} onDrop={props.onDrop} onDropPoint={props.onDropPoint} />
+                            )
                         })
                     }
                 </ul>
@@ -790,36 +673,35 @@ export class UITreeNode extends Component {
         return null;
     }
 
-    renderNode() {
-        const className = classNames('p-treenode', {'p-treenode-leaf': this.isLeaf()}, this.props.node.className)
-        const content = this.renderContent();
-        const children = this.renderChildren();
+    const createNode = () => {
+        const className = classNames('p-treenode', {
+            'p-treenode-leaf': isLeaf
+        }, props.node.className)
+        const content = createContent();
+        const children = createChildren();
 
         return (
-            <li className={className} style={this.props.node.style}>
+            <li className={className} style={props.node.style}>
                 {content}
                 {children}
             </li>
-        );
+        )
     }
 
-    render() {
-        const node = this.renderNode();
+    const node = createNode();
 
-        if (this.props.dragdropScope && !this.props.disabled) {
-            const beforeDropPoint = this.renderDropPoint(-1);
-            const afterDropPoint = this.props.last ? this.renderDropPoint(1) : null;
+    if (props.dragdropScope && !props.disabled) {
+        const beforeDropPoint = createDropPoint(-1);
+        const afterDropPoint = props.last ? createDropPoint(1) : null;
 
-            return (
-                <>
-                    {beforeDropPoint}
-                    {node}
-                    {afterDropPoint}
-                </>
-            );
-        }
-        else {
-            return node;
-        }
+        return (
+            <>
+                {beforeDropPoint}
+                {node}
+                {afterDropPoint}
+            </>
+        )
     }
-}
+
+    return node;
+});

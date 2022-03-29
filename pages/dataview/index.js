@@ -1,65 +1,53 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataView, DataViewLayoutOptions } from '../../components/lib/dataview/DataView';
 import { Button } from '../../components/lib/button/Button';
 import { Dropdown } from '../../components/lib/dropdown/Dropdown';
 import { ProductService } from '../../service/ProductService';
 import { Rating } from '../../components/lib/rating/Rating';
-import { DataViewDoc } from '../../components/doc/dataview';
+import DataViewDoc from '../../components/doc/dataview';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 import getConfig from 'next/config';
 
-export default class DataViewDemo extends Component {
+const DataViewDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            products: null,
-            layout: 'grid',
-            sortKey: null,
-            sortOrder: null,
-            sortField: null
-        };
+    const [products, setProducts] = useState(null);
+    const [layout, setLayout] = useState('grid');
+    const [sortKey, setSortKey] = useState(null);
+    const [sortOrder, setSortOrder] = useState(null);
+    const [sortField, setSortField] = useState(null);
+    const sortOptions = [
+        { label: 'Price High to Low', value: '!price' },
+        { label: 'Price Low to High', value: 'price' },
+    ];
 
-        this.sortOptions = [
-            {label: 'Price High to Low', value: '!price'},
-            {label: 'Price Low to High', value: 'price'},
-        ];
+    const productService = new ProductService();
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-        this.productService = new ProductService();
-        this.itemTemplate = this.itemTemplate.bind(this);
-        this.onSortChange = this.onSortChange.bind(this);
-        this.contextPath = getConfig().publicRuntimeConfig.contextPath;
-    }
+    useEffect(() => {
+        productService.getProducts().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    componentDidMount() {
-        this.productService.getProducts().then(data => this.setState({ products: data }));
-    }
-
-    onSortChange(event) {
+    const onSortChange = (event) => {
         const value = event.value;
 
         if (value.indexOf('!') === 0) {
-            this.setState({
-                sortOrder: -1,
-                sortField: value.substring(1, value.length),
-                sortKey: value
-            });
+            setSortOrder(-1);
+            setSortField(value.substring(1, value.length));
+            setSortKey(value);
         }
         else {
-            this.setState({
-                sortOrder: 1,
-                sortField: value,
-                sortKey: value
-            });
+            setSortOrder(1);
+            setSortField(value);
+            setSortKey(value);
         }
     }
 
-    renderListItem(data) {
+    const renderListItem = (data) => {
         return (
             <div className="col-12">
                 <div className="product-list-item">
-                    <img src={`${this.contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                    <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
@@ -76,7 +64,7 @@ export default class DataViewDemo extends Component {
         );
     }
 
-    renderGridItem(data) {
+    const renderGridItem = (data) => {
         return (
             <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
@@ -88,7 +76,7 @@ export default class DataViewDemo extends Component {
                         <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="product-grid-item-content">
-                    <img src={`${this.contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                        <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
                         <Rating value={data.rating} readOnly cancel={false}></Rating>
@@ -102,58 +90,59 @@ export default class DataViewDemo extends Component {
         );
     }
 
-    itemTemplate(product, layout) {
+    const itemTemplate = (product, layout) => {
         if (!product) {
             return;
         }
 
         if (layout === 'list')
-            return this.renderListItem(product);
+            return renderListItem(product);
         else if (layout === 'grid')
-            return this.renderGridItem(product);
+            return renderGridItem(product);
     }
 
-    renderHeader() {
+
+    const renderHeader = () => {
         return (
             <div className="grid grid-nogutter">
-                <div className="col-6" style={{textAlign: 'left'}}>
-                    <Dropdown options={this.sortOptions} value={this.state.sortKey} optionLabel="label" placeholder="Sort By Price" onChange={this.onSortChange}/>
+                <div className="col-6" style={{ textAlign: 'left' }}>
+                    <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} />
                 </div>
-                <div className="col-6" style={{textAlign: 'right'}}>
-                    <DataViewLayoutOptions layout={this.state.layout} onChange={(e) => this.setState({ layout: e.value })} />
+                <div className="col-6" style={{ textAlign: 'right' }}>
+                    <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
                 </div>
             </div>
         );
     }
 
-    render() {
-        const header = this.renderHeader();
+    const header = renderHeader();
 
-        return (
-            <div>
-                <Head>
-                    <title>React DataView Component</title>
-                    <meta name="description" content="DataView displays data in grid or list layout with pagination and sorting features." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataView</h1>
-                        <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
-                    </div>
-
-                    <DocActions github="dataview/index.js" />
+    return (
+        <div>
+            <Head>
+                <title>React DataView Component</title>
+                <meta name="description" content="DataView displays data in grid or list layout with pagination and sorting features." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>DataView</h1>
+                    <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
                 </div>
 
-                <div className="content-section implementation dataview-demo">
-                    <div className="card">
-                        <DataView value={this.state.products} layout={this.state.layout} header={header}
-                                itemTemplate={this.itemTemplate} paginator rows={9}
-                                sortOrder={this.state.sortOrder} sortField={this.state.sortField} />
-                    </div>
-                </div>
-
-                <DataViewDoc />
+                <DocActions github="dataview/index.js" />
             </div>
-        );
-    }
+
+            <div className="content-section implementation dataview-demo">
+                <div className="card">
+                    <DataView value={products} layout={layout} header={header}
+                        itemTemplate={itemTemplate} paginator rows={9}
+                        sortOrder={sortOrder} sortField={sortField} />
+                </div>
+            </div>
+
+            <DataViewDoc />
+        </div>
+    );
 }
+
+export default DataViewDemo;

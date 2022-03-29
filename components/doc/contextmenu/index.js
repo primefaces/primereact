@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class ContextMenuDoc extends Component {
+const ContextMenuDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { ContextMenu } from 'primereact/contextmenu';
 
@@ -159,17 +156,17 @@ export class ContextMenuDemo extends Component {
                 <div className="card">
                     <ContextMenu model={this.items} ref={el => this.cm = el}></ContextMenu>
 
-                    <img src="images/nature/nature3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Logo" onContextMenu={(e) => this.cm.show(e)} aria-haspopup />
+                    <img src="images/nature/nature3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Logo" onContextMenu={(e) => this.cm.show(e)} />
                 </div>
             </div>
         );
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useRef } from 'react';
 import { ContextMenu } from 'primereact/contextmenu';
 
@@ -311,16 +308,16 @@ const ContextMenuDemo = () => {
             <div className="card">
                 <ContextMenu model={items} ref={cm}></ContextMenu>
 
-                <img src="images/nature/nature3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Logo" onContextMenu={(e) => cm.current.show(e)} aria-haspopup />
+                <img src="images/nature/nature3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
             </div>
         </div>
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useRef } from 'react';
 import { ContextMenu } from 'primereact/contextmenu';
 
@@ -462,20 +459,20 @@ const ContextMenuDemo = () => {
             <div className="card">
                 <ContextMenu model={items} ref={cm}></ContextMenu>
 
-                <img src="images/nature/nature3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Logo" onContextMenu={(e) => cm.current.show(e)} aria-haspopup />
+                <img src="images/nature/nature3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
             </div>
         </div>
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/contextmenu/contextmenu.min.js"></script>`,
-                content: `
-const { useEffect, useState, useRef } = React;
+            content: `
+const { useState, useRef } = React;
 const { ContextMenu } = primereact.contextmenu;
 
 const ContextMenuDemo = () => {
@@ -616,33 +613,27 @@ const ContextMenuDemo = () => {
             <div className="card">
                 <ContextMenu model={items} ref={cm}></ContextMenu>
 
-                <img src="images/nature/nature3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Logo" onContextMenu={(e) => cm.current.show(e)} aria-haspopup />
+                <img src="images/nature/nature3.jpg" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
             </div>
         </div>
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { ContextMenu } from 'primereact/contextmenu';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -650,11 +641,11 @@ import { ContextMenu } from 'primereact/contextmenu';
 `}
 </CodeHighlight>
 
-                        <h5>MenuItem API</h5>
-                        <p>ContextMenu uses the common menu item api to define its items, visit <Link href="/menumodel"> MenuModel </Link> for details.</p>
+                    <h5>MenuItem API</h5>
+                    <p>ContextMenu uses the common menu item api to define its items, visit <Link href="/menumodel"> MenuModel </Link> for details.</p>
 
-                        <h5>Getting Started</h5>
-                        <p>Menu requires a collection of menuitems as its model.</p>
+                    <h5>Getting Started</h5>
+                    <p>Menu requires a collection of menuitems as its model.</p>
 <CodeHighlight lang="js">
 {`
 const items = [
@@ -797,9 +788,8 @@ const items = [
 `}
 </CodeHighlight>
 
-                        <h5>Document Menu</h5>
-                        <p>Setting global property attaches the context menu to the document.
-                        </p>
+                    <h5>Document Menu</h5>
+                    <p>Setting global property attaches the context menu to the document.</p>
 
 
 <CodeHighlight>
@@ -808,8 +798,8 @@ const items = [
 `}
 </CodeHighlight>
 
-                        <h5>Element Menu</h5>
-                        <p>ContextMenu is attached to a custom element manually using the reference and calling the show(event) method.</p>
+                    <h5>Element Menu</h5>
+                    <p>ContextMenu is attached to a custom element manually using the reference and calling the show(event) method.</p>
 
 <CodeHighlight>
 {`
@@ -818,177 +808,176 @@ const items = [
 `}
 </CodeHighlight>
 
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>model</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>An array of menuitems.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>global</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Attaches the menu to document instead of a particular item.</td>
+                                </tr>
+                                <tr>
+                                    <td>baseZIndex</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Base zIndex value to use in layering.</td>
+                                </tr>
+                                <tr>
+                                    <td>autoZIndex</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to automatically manage layering.</td>
+                                </tr>
+                                <tr>
+                                    <td>appendTo</td>
+                                    <td>DOM element | string</td>
+                                    <td>document.body</td>
+                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                </tr>
+                                <tr>
+                                    <td>transitionOptions</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
+                    <h5>Methods</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>show</td>
+                                    <td>event: browser event</td>
+                                    <td>Displays the popup menu.</td>
+                                </tr>
+                                <tr>
+                                    <td>hide</td>
+                                    <td>event: browser event</td>
+                                    <td>Hides the popup menu.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>model</td>
-                                        <td>array</td>
-                                        <td>null</td>
-                                        <td>An array of menuitems.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>global</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Attaches the menu to document instead of a particular item.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>baseZIndex</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Base zIndex value to use in layering.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>autoZIndex</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether to automatically manage layering.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>appendTo</td>
-                                        <td>DOM element | string</td>
-                                        <td>document.body</td>
-                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>transitionOptions</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onShow</td>
+                                    <td>event: Browser event </td>
+                                    <td>Callback to invoke when a popup menu is shown.</td>
+                                </tr>
+                                <tr>
+                                    <td>onHide</td>
+                                    <td>event: Browser event </td>
+                                    <td>Callback to invoke when a popup menu is hidden.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Methods</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>show</td>
-                                        <td>event: browser event</td>
-                                        <td>Displays the popup menu.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>hide</td>
-                                        <td>event: browser event</td>
-                                        <td>Hides the popup menu.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-contextmenu</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menu-list</td>
+                                    <td>List element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menuitem</td>
+                                    <td>Menuitem element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menuitem-text</td>
+                                    <td>Label of a menuitem.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menuitem-icon</td>
+                                    <td>Icon of a menuitem.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-submenu-icon</td>
+                                    <td>Arrow icon of a submenu.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onShow</td>
-                                        <td>event: Browser event </td>
-                                        <td>Callback to invoke when a popup menu is shown.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onHide</td>
-                                        <td>event: Browser event </td>
-                                        <td>Callback to invoke when a popup menu is hidden.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-contextmenu</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menu-list</td>
-                                        <td>List element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menuitem</td>
-                                        <td>Menuitem element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menuitem-text</td>
-                                        <td>Label of a menuitem.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menuitem-icon</td>
-                                        <td>Icon of a menuitem.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-submenu-icon</td>
-                                        <td>Arrow icon of a submenu.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                {
+                    useLiveEditorTabs({ name: 'ContextMenuDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    )
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+})
 
-                    {
-                        useLiveEditorTabs({ name: 'ContextMenuDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-
-}
+export default ContextMenuDoc;

@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class CheckboxDoc extends Component {
+const CheckboxDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Checkbox } from 'primereact/checkbox';
 
@@ -110,10 +107,10 @@ export class CheckboxDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { Checkbox } from 'primereact/checkbox';
 
@@ -198,10 +195,10 @@ const CheckboxDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { Checkbox } from 'primereact/checkbox';
 
@@ -286,13 +283,13 @@ const CheckboxDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>`,
-                content: `
-const { useEffect, useState, useRef } = React;
+            content: `
+const { useState, useRef } = React;
 const { Checkbox } = primereact.checkbox;
 
 const CheckboxDemo = () => {
@@ -376,43 +373,37 @@ const CheckboxDemo = () => {
     )
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Checkbox } from 'primereact/checkbox';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>Checkbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
+                    <h5>Getting Started</h5>
+                    <p>Checkbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
 <CodeHighlight>
 {`
 <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
 `}
 </CodeHighlight>
 
-                        <h5>Multiple Values</h5>
-                        <p>Multiple checkboxes can be grouped using a list of values.</p>
+                    <h5>Multiple Values</h5>
+                    <p>Multiple checkboxes can be grouped using a list of values.</p>
 <CodeHighlight>
 {`
 <div className="col-12">
@@ -446,196 +437,197 @@ const onCityChange = (e) => {
 `}
 </CodeHighlight>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>inputId</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the inner native radiobutton.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>value</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Value of the checkbox.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>name</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Name of the checkbox element .</td>
-                                    </tr>
-                                    <tr>
-                                        <td>checked</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Specifies whether a checkbox should be checked or not.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>trueValue</td>
-                                        <td>any</td>
-                                        <td>true</td>
-                                        <td>Value in checked state.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>falseValue</td>
-                                        <td>any</td>
-                                        <td>false</td>
-                                        <td>Value in unchecked state.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>disabled</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>When present, it specifies that the element value cannot be altered.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>required</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>When present, it specifies that an input field must be filled out before submitting the form.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>readOnly</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>When present, it specifies that the element cannot be typed.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>tabIndex</td>
-                                        <td>number</td>
-                                        <td>null</td>
-                                        <td>Index of the element in tabbing order.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>icon</td>
-                                        <td>string</td>
-                                        <td>pi pi-check</td>
-                                        <td>Icon class of the checkbox icon.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>tooltip</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Content of the tooltip.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>tooltipOptions</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ariaLabelledBy</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>inputId</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the inner native radiobutton.</td>
+                                </tr>
+                                <tr>
+                                    <td>value</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Value of the checkbox.</td>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Name of the checkbox element .</td>
+                                </tr>
+                                <tr>
+                                    <td>checked</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Specifies whether a checkbox should be checked or not.</td>
+                                </tr>
+                                <tr>
+                                    <td>trueValue</td>
+                                    <td>any</td>
+                                    <td>true</td>
+                                    <td>Value in checked state.</td>
+                                </tr>
+                                <tr>
+                                    <td>falseValue</td>
+                                    <td>any</td>
+                                    <td>false</td>
+                                    <td>Value in unchecked state.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the element value cannot be altered.</td>
+                                </tr>
+                                <tr>
+                                    <td>required</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that an input field must be filled out before submitting the form.</td>
+                                </tr>
+                                <tr>
+                                    <td>readOnly</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the element cannot be typed.</td>
+                                </tr>
+                                <tr>
+                                    <td>tabIndex</td>
+                                    <td>number</td>
+                                    <td>null</td>
+                                    <td>Index of the element in tabbing order.</td>
+                                </tr>
+                                <tr>
+                                    <td>icon</td>
+                                    <td>string</td>
+                                    <td>pi pi-check</td>
+                                    <td>Icon class of the checkbox icon.</td>
+                                </tr>
+                                <tr>
+                                    <td>tooltip</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Content of the tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td>tooltipOptions</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                                </tr>
+                                <tr>
+                                    <td>ariaLabelledBy</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onChange</td>
-                                        <td>event.originalEvent: Original event <br />
-                                        event.value: Value of the checkbox <br />
-                                        event.checked: Checked state as a boolean.</td>
-                                        <td>Callback to invoke on value change</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onMouseDown</td>
-                                        <td>event: Browser event</td>
-                                        <td>Callback to invoke to when a mouse button is pressed.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onContextMenu</td>
-                                        <td>event: Browser event</td>
-                                        <td>Callback to invoke on right-click.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onChange</td>
+                                    <td>event.originalEvent: Original event <br />
+                                    event.value: Value of the checkbox <br />
+                                    event.checked: Checked state as a boolean.</td>
+                                    <td>Callback to invoke on value change</td>
+                                </tr>
+                                <tr>
+                                    <td>onMouseDown</td>
+                                    <td>event: Browser event</td>
+                                    <td>Callback to invoke to when a mouse button is pressed.</td>
+                                </tr>
+                                <tr>
+                                    <td>onContextMenu</td>
+                                    <td>event: Browser event</td>
+                                    <td>Callback to invoke on right-click.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-checkbox</td>
-                                        <td>Container element</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-checkbox-box</td>
-                                        <td>Container of icon.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-checkbox-icon</td>
-                                        <td>Icon element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-checkbox-label</td>
-                                        <td>Label element and it is an external CSS class.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-checkbox</td>
+                                    <td>Container element</td>
+                                </tr>
+                                <tr>
+                                    <td>p-checkbox-box</td>
+                                    <td>Container of icon.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-checkbox-icon</td>
+                                    <td>Icon element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-checkbox-label</td>
+                                    <td>Label element and it is an external CSS class.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'CheckboxDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'CheckboxDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    )
+})
+
+export default CheckboxDoc;
