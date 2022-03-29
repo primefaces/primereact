@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { memo, useContext } from 'react';
 import { TabView } from '../../../components/lib/tabview/TabView';
 import { Chart } from '../../../components/lib/chart/Chart';
 import { useLiveEditorTabs } from '../../../components/doc/common/liveeditor';
@@ -6,128 +6,119 @@ import AppContentContext from '../../../components/layout/appcontentcontext';
 import { DocActions } from '../../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class RadarChartDemo extends Component {
+const RadarChartDemo = memo(() => {
 
-    constructor(props) {
-        super(props);
+    const context = useContext(AppContentContext);
 
-        this.chartData = {
-            labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
-            datasets: [
-                {
-                    label: 'My First dataset',
-                    backgroundColor: 'rgba(179,181,198,0.2)',
-                    borderColor: 'rgba(179,181,198,1)',
-                    pointBackgroundColor: 'rgba(179,181,198,1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(179,181,198,1)',
-                    data: [65, 59, 90, 81, 56, 55, 40]
+    const chartData = {
+        labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+        datasets: [
+            {
+                label: 'My First dataset',
+                backgroundColor: 'rgba(179,181,198,0.2)',
+                borderColor: 'rgba(179,181,198,1)',
+                pointBackgroundColor: 'rgba(179,181,198,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(179,181,198,1)',
+                data: [65, 59, 90, 81, 56, 55, 40]
+            },
+            {
+                label: 'My Second dataset',
+                backgroundColor: 'rgba(255,99,132,0.2)',
+                borderColor: 'rgba(255,99,132,1)',
+                pointBackgroundColor: 'rgba(255,99,132,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(255,99,132,1)',
+                data: [28, 48, 40, 19, 96, 27, 100]
+            }
+        ]
+    };
+
+    const lightOptions = {
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057'
+                }
+            }
+        },
+        scales: {
+            r: {
+                pointLabels: {
+                    color: '#495057',
                 },
-                {
-                    label: 'My Second dataset',
-                    backgroundColor: 'rgba(255,99,132,0.2)',
-                    borderColor: 'rgba(255,99,132,1)',
-                    pointBackgroundColor: 'rgba(255,99,132,1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(255,99,132,1)',
-                    data: [28, 48, 40, 19, 96, 27, 100]
-                }
-            ]
-        };
-
-        this.lightOptions = {
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#495057'
-                    }
-                }
-            },
-            scales: {
-                r: {
-                    pointLabels: {
-                        color: '#495057',
-                    },
-                    grid: {
-                        color: '#ebedef',
-                    },
-                    angleLines: {
-                        color: '#ebedef'
-                    }
+                grid: {
+                    color: '#ebedef',
+                },
+                angleLines: {
+                    color: '#ebedef'
                 }
             }
-        };
+        }
+    };
 
-        this.darkOptions = {
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#ebedef'
-                    }
-                }
-            },
-            scales: {
-                r: {
-                    pointLabels: {
-                        color: '#ebedef',
-                    },
-                    grid: {
-                        color: 'rgba(255,255,255,0.2)',
-                    },
-                    angleLines: {
-                        color: 'rgba(255,255,255,0.2)'
-                    }
+    const darkOptions = {
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#ebedef'
                 }
             }
-        };
-    }
+        },
+        scales: {
+            r: {
+                pointLabels: {
+                    color: '#ebedef',
+                },
+                grid: {
+                    color: 'rgba(255,255,255,0.2)',
+                },
+                angleLines: {
+                    color: 'rgba(255,255,255,0.2)'
+                }
+            }
+        }
+    };
 
-    render() {
-        return (
+    const options = context.darkTheme ? darkOptions : lightOptions;
+
+    return (
+    <div>
+        <Head>
+            <title>React Radar Chart Component</title>
+            <meta name="description" content="A radar chart is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same point." />
+        </Head>
+        <div className="content-section introduction">
             <div>
-                <Head>
-                    <title>React Radar Chart Component</title>
-                    <meta name="description" content="A radar chart is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same point." />
-                </Head>
-                <div className="content-section introduction">
-                    <div>
-                        <h1>RadarChart</h1>
-                        <p>A radar chart is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same point.</p>
-                    </div>
-                    <DocActions github="chart/radarchart/index.js" />
-                </div>
-
-                <div className="content-section implementation">
-                    <div className="card flex justify-content-center">
-                        <AppContentContext.Consumer>
-                            {
-                                context => {
-                                    let options = context.darkTheme ? this.darkOptions : this.lightOptions;
-
-                                    return <Chart type="radar" data={this.chartData} options={options} style={{ position: 'relative', width: '40%' }} />
-                                }
-                            }
-                        </AppContentContext.Consumer>
-                    </div>
-                </div>
-
-                <RadarChartDemoDoc></RadarChartDemoDoc>
+                <h1>RadarChart</h1>
+                <p>A radar chart is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same point.</p>
             </div>
-        )
-    }
-}
+            <DocActions github="chart/radarchart/index.js" />
+        </div>
 
-class RadarChartDemoDoc extends Component {
+        <div className="content-section implementation">
+            <div className="card flex justify-content-center">
 
-    constructor(props) {
-        super(props);
+                <Chart type="radar" data={chartData} options={options} style={{ position: 'relative', width: '40%' }} />
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+            </div>
+        </div>
+
+        <RadarChartDemoDoc></RadarChartDemoDoc>
+    </div>
+)
+})
+
+export default RadarChartDemo;
+
+const RadarChartDemoDoc = memo(() => {
+
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Chart } from 'primereact/chart';
 
@@ -195,10 +186,10 @@ export class RadarChartDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React from 'react';
 import { Chart } from 'primereact/chart';
 
@@ -259,10 +250,10 @@ const RadarChartDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React from 'react';
 import { Chart } from 'primereact/chart';
 
@@ -323,23 +314,17 @@ const RadarChartDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'RadarChartDemo', sources: sources, dependencies: { 'chart.js': '3.3.2' } })
+                }
+            </TabView>
+        </div>
+    )
 
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'RadarChartDemo', sources: this.sources, dependencies: { 'chart.js': '3.3.2' } })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+})

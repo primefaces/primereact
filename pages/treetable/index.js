@@ -1,78 +1,72 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TreeTable } from '../../components/lib/treetable/TreeTable';
 import { Column } from '../../components/lib/column/Column';
 import { Button } from '../../components/lib/button/Button';
 import { NodeService } from '../../service/NodeService';
-import { TreeTableDoc } from '../../components/doc/treetable';
+import TreeTableDoc from '../../components/doc/treetable';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class TreeTableDemo extends Component {
+const TreeTableDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: [],
-            expandedKeys: {}
-        };
-        this.nodeservice = new NodeService();
-        this.toggleApplications = this.toggleApplications.bind(this);
-    }
+    const [nodes, setNodes] = useState([]);
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const nodeservice = new NodeService();
 
-    toggleApplications() {
-        let expandedKeys = { ...this.state.expandedKeys };
-        if (expandedKeys['0'])
-            delete expandedKeys['0'];
+    const toggleApplications = () => {
+        let _expandedKeys = { ...expandedKeys };
+        if (_expandedKeys['0'])
+            delete _expandedKeys['0'];
         else
-            expandedKeys['0'] = true;
+            _expandedKeys['0'] = true;
 
-        this.setState({ expandedKeys: expandedKeys });
+        setExpandedKeys(_expandedKeys);
     }
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
-    }
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React TreeTable Component</title>
-                    <meta name="description" content="TreeTable is used to display hierarchical data in tabular format." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable</h1>
-                        <p>TreeTable is used to display hierarchical data in tabular format.</p>
-                    </div>
-
-                    <DocActions github="treetable/index.js" />
+    return (
+        <div>
+            <Head>
+                <title>React TreeTable Component</title>
+                <meta name="description" content="TreeTable is used to display hierarchical data in tabular format." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>TreeTable</h1>
+                    <p>TreeTable is used to display hierarchical data in tabular format.</p>
                 </div>
 
-                <div className="content-section implementation">
-                    <div className="card">
-                        <h5>Basic</h5>
-                        <TreeTable value={this.state.nodes}>
-                            <Column field="name" header="Name" expander></Column>
-                            <Column field="size" header="Size"></Column>
-                            <Column field="type" header="Type"></Column>
-                        </TreeTable>
-                    </div>
-
-                    <div className="card">
-                        <h5>Programmatic</h5>
-                        <Button onClick={this.toggleApplications} label="Toggle Applications" />
-                        <TreeTable value={this.state.nodes} expandedKeys={this.state.expandedKeys}
-                            onToggle={e => this.setState({ expandedKeys: e.value })} style={{ marginTop: '.5em' }}>
-                            <Column field="name" header="Name" expander></Column>
-                            <Column field="size" header="Size"></Column>
-                            <Column field="type" header="Type"></Column>
-                        </TreeTable>
-                    </div>
-                </div>
-
-                <TreeTableDoc />
+                <DocActions github="treetable/index.js" />
             </div>
-        )
-    }
+
+            <div className="content-section implementation">
+                <div className="card">
+                    <h5>Basic</h5>
+                    <TreeTable value={nodes}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
+
+                <div className="card">
+                    <h5>Programmatic</h5>
+                    <Button onClick={toggleApplications} label="Toggle Applications" />
+                    <TreeTable value={nodes} expandedKeys={expandedKeys}
+                        onToggle={e => setExpandedKeys(e.value)} style={{ marginTop: '.5em' }}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
+            </div>
+
+            <TreeTableDoc />
+        </div>
+    )
 }
+
+export default TreeTableDemo;

@@ -1,25 +1,25 @@
 import getConfig from 'next/config';
 import { useEffect, useState } from 'react';
 
-export default function BlockSection() {
+const BlockSection = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [animationClass, setAnimationClass] = useState('');
 
     useEffect(() => {
         setAnimationClass("blocks-animation");
-    });
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <section id="blocks-section" className="landing-blocks pt-8 overflow-hidden">
             <div className="section-header">PrimeBlocks</div>
             <p className="section-detail">280+ ready to copy-paste UI blocks to build spectacular applications in no time.</p>
             <div className="flex justify-content-center mt-4">
-                <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox active z-2">
+                <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox active">
                     <span>Learn More</span>
                     <i className="pi pi-arrow-right ml-2"></i>
                 </a>
             </div>
-            <section className={`prime-blocks ${animationClass} flex justify-content-center align-items-center flex-column z-1`}>
+            <section className={`prime-blocks ${animationClass} flex justify-content-center align-items-center flex-column`}>
                 <div className="flex">
                     <div className="prime-block flex align-self-stretch p-1">
                         <div className="block-sidebar w-1 p-3">
@@ -385,3 +385,5 @@ export default function BlockSection() {
         </section>
     );
 }
+
+export default BlockSection;

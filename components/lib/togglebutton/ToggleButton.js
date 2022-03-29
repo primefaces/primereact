@@ -1,148 +1,129 @@
-import React, {Component} from 'react';
+import React, { forwardRef, memo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import {classNames, IconUtils} from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
+import { classNames, IconUtils } from '../utils/Utils';
+import { useUnmountEffect } from '../hooks/Hooks';
 
-export class ToggleButton extends Component {
+export const ToggleButton = memo(forwardRef((props, ref) => {
+    const elementRef = useRef(null);
+    const tooltipRef = useRef(null);
+    const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
+    const hasIcon = props.onIcon && props.onIcon.length > 0 && props.offIcon && props.offIcon.length > 0;
+    const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '&nbsp;';
+    const icon = props.checked ? props.onIcon : props.offIcon
 
-    static defaultProps = {
-        id: null,
-        onIcon: null,
-        offIcon: null,
-        onLabel: 'Yes',
-        offLabel: 'No',
-        iconPos: 'left',
-        style: null,
-        className: null,
-        checked: false,
-        tabIndex: 0,
-        tooltip: null,
-        tooltipOptions: null,
-        ariaLabelledBy: null,
-        onChange: null,
-        onFocus: null,
-        onBlur: null
-    };
-
-    static propTypes = {
-        id: PropTypes.string,
-        onIcon: PropTypes.any,
-        offIcon: PropTypes.any,
-        onLabel: PropTypes.string,
-        offLabel: PropTypes.string,
-        iconPos: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        checked: PropTypes.bool,
-        tabIndex: PropTypes.number,
-        tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object,
-        ariaLabelledBy: PropTypes.string,
-        onChange: PropTypes.func,
-        onFocus: PropTypes.func,
-        onBlur: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.toggle = this.toggle.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
-    }
-
-    toggle(e) {
-        if (!this.props.disabled && this.props.onChange) {
-            this.props.onChange({
+    const toggle = (e) => {
+        if (!props.disabled && props.onChange) {
+            props.onChange({
                 originalEvent: e,
-                value: !this.props.checked,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                value: !props.checked,
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
-                    value: !this.props.checked,
+                    name: props.name,
+                    id: props.id,
+                    value: !props.checked,
                 }
-            });
+            })
         }
     }
 
-    onKeyDown(event) {
+    const onKeyDown = (event) => {
         if (event.key === 'Enter') {
-            this.toggle(event);
+            toggle(event);
             event.preventDefault();
         }
     }
 
-    hasLabel() {
-        return this.props.onLabel && this.props.onLabel.length > 0 && this.props.offLabel && this.props.offLabel.length > 0;
-    }
-
-    hasIcon() {
-        return this.props.onIcon && this.props.onIcon.length > 0 && this.props.offIcon && this.props.offIcon.length > 0;
-    }
-
-    getLabel() {
-        return this.hasLabel() ? (this.props.checked ? this.props.onLabel : this.props.offLabel): '&nbsp;';
-    }
-
-    componentDidMount() {
-        if (this.props.tooltip) {
-            this.renderTooltip();
+    useEffect(() => {
+        if (tooltipRef.current) {
+            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
         }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
-            if (this.tooltip)
-                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
-            else
-                this.renderTooltip();
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
-        }
-    }
-
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.container,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
-    }
-
-    render() {
-        let className = classNames('p-button p-togglebutton p-component', {
-            'p-button-icon-only': this.hasIcon() && !this.hasLabel(),
-            'p-highlight': this.props.checked,
-            'p-disabled': this.props.disabled,
-        }, this.props.className),
-        iconClassName = null;
-
-        const hasIcon = this.hasIcon();
-        const label = this.getLabel();
-        const icon = this.props.checked ? this.props.onIcon : this.props.offIcon
-
-        if (hasIcon) {
-            iconClassName = classNames('p-button-icon p-c', {
-                'p-button-icon-left': this.props.iconPos === 'left' && label,
-                'p-button-icon-right': this.props.iconPos === 'right' && label
+        else if (props.tooltip) {
+            tooltipRef.current = tip({
+                target: elementRef.current,
+                content: props.tooltip,
+                options: props.tooltipOptions
             });
         }
+    }, [props.tooltip, props.tooltipOptions]);
 
-        return (
-            <div ref={(el) => this.container = el} id={this.props.id} className={className} style={this.props.style}
-                onClick={this.toggle} onFocus={this.props.onFocus} onBlur={this.props.onBlur} onKeyDown={this.onKeyDown}
-                tabIndex={!this.props.disabled && this.props.tabIndex} aria-labelledby={this.props.ariaLabelledBy}>
-                {hasIcon && IconUtils.getJSXIcon(icon, { className: iconClassName }, { props: this.props })}
-                <span className="p-button-label">{label}</span>
-                <Ripple />
-            </div>
-        );
+    useUnmountEffect(() => {
+        if (tooltipRef.current) {
+            tooltipRef.current.destroy();
+            tooltipRef.current = null;
+        }
+    });
+
+    const createIcon = () => {
+        if (hasIcon) {
+            const iconClassName = classNames('p-button-icon p-c', {
+                'p-button-icon-left': props.iconPos === 'left' && label,
+                'p-button-icon-right': props.iconPos === 'right' && label
+            });
+
+            return IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+        }
+
+        return null;
     }
+
+    const tabIndex = !props.disabled && props.tabIndex;
+    const className = classNames('p-button p-togglebutton p-component', {
+        'p-button-icon-only': hasIcon && !hasLabel,
+        'p-highlight': props.checked,
+        'p-disabled': props.disabled
+    }, props.className);
+    const iconElement = createIcon();
+
+    return (
+        <div ref={elementRef} id={props.id} className={className} style={props.style}
+            onClick={toggle} onFocus={props.onFocus} onBlur={props.onBlur} onKeyDown={onKeyDown}
+            tabIndex={tabIndex} aria-labelledby={props.ariaLabelledBy}>
+            {iconElement}
+            <span className="p-button-label">{label}</span>
+            <Ripple />
+        </div>
+    )
+}));
+
+ToggleButton.defaultProps = {
+    __TYPE: 'ToggleButton',
+    id: null,
+    onIcon: null,
+    offIcon: null,
+    onLabel: 'Yes',
+    offLabel: 'No',
+    iconPos: 'left',
+    style: null,
+    className: null,
+    checked: false,
+    tabIndex: 0,
+    tooltip: null,
+    tooltipOptions: null,
+    ariaLabelledBy: null,
+    onChange: null,
+    onFocus: null,
+    onBlur: null
+}
+
+ToggleButton.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    id: PropTypes.string,
+    onIcon: PropTypes.any,
+    offIcon: PropTypes.any,
+    onLabel: PropTypes.string,
+    offLabel: PropTypes.string,
+    iconPos: PropTypes.string,
+    style: PropTypes.object,
+    className: PropTypes.string,
+    checked: PropTypes.bool,
+    tabIndex: PropTypes.number,
+    tooltip: PropTypes.string,
+    tooltipOptions: PropTypes.object,
+    ariaLabelledBy: PropTypes.string,
+    onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func
 }

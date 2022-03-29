@@ -42,7 +42,7 @@ export default function MyApp({ Component }) {
     else {
         return (
             <Layout {...props}>
-                <Component />
+                <Component {...props}/>
             </Layout>
         )
     }

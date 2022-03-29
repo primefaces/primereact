@@ -3,6 +3,7 @@ module.exports = {
   trailingSlash: true,
   basePath: process.env.NODE_ENV === 'production' ? '/primereact' : '',
   publicRuntimeConfig: {
-      contextPath: process.env.NODE_ENV === 'production' ? '/primereact' : ''
+      contextPath: process.env.NODE_ENV === 'production' ? '/primereact' : '',
+      uploadPath: process.env.NODE_ENV === 'production' ? '/primereact/upload.php' : '/api/upload',
   }
 }

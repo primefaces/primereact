@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { DataScroller } from '../../components/lib/datascroller/DataScroller';
 import { Button } from '../../components/lib/button/Button';
 import { Rating } from '../../components/lib/rating/Rating';
@@ -9,28 +9,21 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 import getConfig from 'next/config';
 
-export default class DataScrollerInlineDemo extends Component {
+const DataScrollerInlineDemo = () => {
 
-    constructor(props) {
-        super(props);
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-        this.state = {
-            products: []
-        };
 
-        this.productService = new ProductService();
-        this.itemTemplate = this.itemTemplate.bind(this);
-        this.contextPath = getConfig().publicRuntimeConfig.contextPath;
-    }
+    useEffect(() => {
+        productService.getProducts().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    componentDidMount() {
-        this.productService.getProducts().then(data => this.setState({ products: data }));
-    }
-
-    itemTemplate(data) {
+    const itemTemplate = (data) => {
         return (
             <div className="product-item">
-                <img src={`${this.contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
@@ -46,43 +39,40 @@ export default class DataScrollerInlineDemo extends Component {
         );
     }
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React DataScroller Component - Inline</title>
-                    <meta name="description" content="DataScroller can listen scroll event of itself rather than document in inline mode." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataScroller <span>Inline</span></h1>
-                        <p>DataScroller can listen scroll event of itself rather than document in inline mode.</p>
-                    </div>
-
-                    <DocActions github="datascroller/inline.js" />
+    return (
+        <div>
+            <Head>
+                <title>React DataScroller Component - Inline</title>
+                <meta name="description" content="DataScroller can listen scroll event of itself rather than document in inline mode." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>DataScroller <span>Inline</span></h1>
+                    <p>DataScroller can listen scroll event of itself rather than document in inline mode.</p>
                 </div>
 
-                <div className="content-section implementation datascroller-demo">
-                    <div className="card">
-                        <DataScroller value={this.state.products} itemTemplate={this.itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
-                    </div>
-                </div>
-
-                <DataScrollerInlineDoc></DataScrollerInlineDoc>
+                <DocActions github="datascroller/inline.js" />
             </div>
-        );
-    }
+
+            <div className="content-section implementation datascroller-demo">
+                <div className="card">
+                    <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
+                </div>
+            </div>
+
+            <DataScrollerInlineDoc></DataScrollerInlineDoc>
+        </div>
+    );
 }
 
-export class DataScrollerInlineDoc extends Component {
+export default DataScrollerInlineDemo;
 
-    constructor(props) {
-        super(props);
+export const DataScrollerInlineDoc = memo(() => {
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { DataScroller } from 'primereact/datascroller';
 import { Button } from 'primereact/button';
@@ -137,10 +127,10 @@ export class DataScrollerInlineDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { DataScroller } from 'primereact/datascroller';
 import { Button } from 'primereact/button';
@@ -184,10 +174,10 @@ const DataScrollerInlineDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { DataScroller } from 'primereact/datascroller';
 import { Button } from 'primereact/button';
@@ -231,19 +221,19 @@ const DataScrollerInlineDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
-        <link rel="stylesheet" href="./DataScrollerDemo.css" />
-        <script src="./ProductService.js"></script>
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
+<link rel="stylesheet" href="./DataScrollerDemo.css" />
+<script src="./ProductService.js"></script>
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
-        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/datascroller/datascroller.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
-        <script src="https://unpkg.com/primereact/rating/rating.min.js"></script>`,
-                content: `
+<script src="https://unpkg.com/primereact/api/api.min.js"></script>
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/datascroller/datascroller.min.js"></script>
+<script src="https://unpkg.com/primereact/button/button.min.js"></script>
+<script src="https://unpkg.com/primereact/rating/rating.min.js"></script>`,
+            content: `
 const { useEffect, useState } = React;
 const { DataScroller } = primereact.datascroller;
 const { Button } = primereact.button;
@@ -285,12 +275,12 @@ const DataScrollerInlineDemo = () => {
     );
 }
                 `
-            }
         }
+    }
 
-        this.extFiles = {
-            'demo/DataScrollerDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/DataScrollerDemo.css': {
+            content: `
 .datascroller-demo .product-name {
     font-size: 1.5rem;
     font-weight: 700;
@@ -380,23 +370,16 @@ const DataScrollerInlineDemo = () => {
     }
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'DataScrollerInlineDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'DataScrollerInlineDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    );
+})

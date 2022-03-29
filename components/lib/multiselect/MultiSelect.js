@@ -1,236 +1,92 @@
-import React, { Component, createRef } from 'react';
+import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames, ConnectedOverlayScrollHandler, IconUtils } from '../utils/Utils';
+import PrimeReact, { FilterService } from '../api/Api';
 import { tip } from '../tooltip/Tooltip';
 import { MultiSelectPanel } from './MultiSelectPanel';
 import { OverlayService } from '../overlayservice/OverlayService';
-import PrimeReact, { FilterService } from '../api/Api';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames, IconUtils } from '../utils/Utils';
+import { useUpdateEffect, useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
 
-export class MultiSelect extends Component {
+export const MultiSelect = memo(forwardRef((props, ref) => {
+    const [filterState, setFilterState] = useState('');
+    const [focusedState, setFocusedState] = useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
+    const elementRef = useRef(null);
+    const inputRef = useRef(props.inputRef);
+    const labelRef = useRef(null);
+    const overlayRef = useRef(null);
+    const tooltipRef = useRef(null);
+    const hasFilter = filterState && filterState.trim().length > 0;
+    const empty = ObjectUtils.isEmpty(props.value);
+    const equalityKey = props.optionValue ? null : props.dataKey;
 
-    static defaultProps = {
-        id: null,
-        inputRef: null,
-        name: null,
-        value: null,
-        options: null,
-        optionLabel: null,
-        optionValue: null,
-        optionDisabled: null,
-        optionGroupLabel: null,
-        optionGroupChildren: null,
-        optionGroupTemplate: null,
-        display: 'comma',
-        style: null,
-        className: null,
-        panelClassName: null,
-        panelStyle: null,
-        virtualScrollerOptions: null,
-        scrollHeight: '200px',
-        placeholder: null,
-        fixedPlaceholder: false,
-        disabled: false,
-        showClear: false,
-        filter: false,
-        filterBy: null,
-        filterMatchMode: 'contains',
-        filterPlaceholder: null,
-        filterLocale: undefined,
-        emptyFilterMessage: null,
-        resetFilterOnHide: false,
-        tabIndex: 0,
-        dataKey: null,
-        inputId: null,
-        appendTo: null,
-        tooltip: null,
-        tooltipOptions: null,
-        maxSelectedLabels: null,
-        selectionLimit: null,
-        selectedItemsLabel: '{0} items selected',
-        ariaLabelledBy: null,
-        itemTemplate: null,
-        selectedItemTemplate: null,
-        panelHeaderTemplate: null,
-        panelFooterTemplate: null,
-        transitionOptions: null,
-        dropdownIcon: 'pi pi-chevron-down',
-        removeIcon: 'pi pi-times-circle',
-        showSelectAll: true,
-        selectAll: false,
-        onChange: null,
-        onFocus: null,
-        onBlur: null,
-        onShow: null,
-        onHide: null,
-        onFilter: null,
-        onSelectAll: null
-    };
+    const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
+        target: elementRef, overlay: overlayRef, listener: (event, { type, valid }) => {
+            if (valid) {
+                (type === 'outside') ? !isClearClicked(event) && hide() : hide();
+            }
+        }, when: overlayVisibleState
+    });
 
-    static propTypes = {
-        id: PropTypes.string,
-        inputRef: PropTypes.any,
-        name: PropTypes.string,
-        value: PropTypes.any,
-        options: PropTypes.array,
-        optionLabel: PropTypes.string,
-        optionValue: PropTypes.string,
-        optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-        optionGroupLabel: PropTypes.string,
-        optionGroupChildren: PropTypes.string,
-        optionGroupTemplate: PropTypes.any,
-        display: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        panelClassName: PropTypes.string,
-        panelStyle: PropTypes.object,
-        virtualScrollerOptions: PropTypes.object,
-        scrollHeight: PropTypes.string,
-        placeholder: PropTypes.string,
-        fixedPlaceholder: PropTypes.bool,
-        disabled: PropTypes.bool,
-        showClear: PropTypes.bool,
-        filter: PropTypes.bool,
-        filterBy: PropTypes.string,
-        filterMatchMode: PropTypes.string,
-        filterPlaceholder: PropTypes.string,
-        filterLocale: PropTypes.string,
-        emptyFilterMessage: PropTypes.any,
-        resetFilterOnHide: PropTypes.bool,
-        tabIndex: PropTypes.number,
-        dataKey: PropTypes.string,
-        inputId: PropTypes.string,
-        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object,
-        maxSelectedLabels: PropTypes.number,
-        selectionLimit: PropTypes.number,
-        selectedItemsLabel: PropTypes.string,
-        ariaLabelledBy: PropTypes.string,
-        itemTemplate: PropTypes.any,
-        selectedItemTemplate: PropTypes.any,
-        panelHeaderTemplate: PropTypes.any,
-        panelFooterTemplate: PropTypes.any,
-        transitionOptions: PropTypes.object,
-        dropdownIcon: PropTypes.string,
-        removeIcon: PropTypes.any,
-        showSelectAll: PropTypes.bool,
-        selectAll: PropTypes.bool,
-        onChange: PropTypes.func,
-        onFocus: PropTypes.func,
-        onBlur: PropTypes.func,
-        onShow: PropTypes.func,
-        onHide: PropTypes.func,
-        onFilter: PropTypes.func,
-        onSelectAll: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            filter: '',
-            focused: false,
-            overlayVisible: false
-        };
-
-        this.onClick = this.onClick.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
-        this.onOptionSelect = this.onOptionSelect.bind(this);
-        this.onOptionKeyDown = this.onOptionKeyDown.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
-        this.onFilterInputChange = this.onFilterInputChange.bind(this);
-        this.onCloseClick = this.onCloseClick.bind(this);
-        this.onSelectAll = this.onSelectAll.bind(this);
-        this.onOverlayEnter = this.onOverlayEnter.bind(this);
-        this.onOverlayEntered = this.onOverlayEntered.bind(this);
-        this.onOverlayExit = this.onOverlayExit.bind(this);
-        this.onOverlayExited = this.onOverlayExited.bind(this);
-        this.onPanelClick = this.onPanelClick.bind(this);
-
-        this.getOptionLabel = this.getOptionLabel.bind(this);
-        this.getOptionRenderKey = this.getOptionRenderKey.bind(this);
-        this.isOptionDisabled = this.isOptionDisabled.bind(this);
-        this.getOptionGroupChildren = this.getOptionGroupChildren.bind(this);
-        this.getOptionGroupLabel = this.getOptionGroupLabel.bind(this);
-        this.getOptionGroupRenderKey = this.getOptionGroupRenderKey.bind(this);
-        this.allowOptionSelect = this.allowOptionSelect.bind(this);
-        this.isSelected = this.isSelected.bind(this);
-        this.isAllSelected = this.isAllSelected.bind(this);
-        this.hasFilter = this.hasFilter.bind(this);
-        this.getSelectedOptionIndex = this.getSelectedOptionIndex.bind(this);
-
-        this.hide = this.hide.bind(this);
-        this.onOptionKeyDown = this.onOptionKeyDown.bind(this);
-
-        this.overlayRef = createRef();
-        this.inputRef = createRef(this.props.inputRef);
-    }
-
-    onPanelClick(event) {
+    const onPanelClick = (event) => {
         OverlayService.emit('overlay-click', {
             originalEvent: event,
-            target: this.container
-        });
+            target: elementRef.current
+        })
     }
 
-    allowOptionSelect() {
-        return !this.props.selectionLimit || !this.props.value || (this.props.value && this.props.value.length < this.props.selectionLimit);
+    const allowOptionSelect = () => {
+        return !props.selectionLimit || !props.value || (props.value && props.value.length < props.selectionLimit);
     }
 
-    onOptionSelect(event) {
-        let { originalEvent, option } = event;
+    const onOptionSelect = (event) => {
+        const { originalEvent, option } = event;
 
-        if (this.props.disabled || this.isOptionDisabled(option)) {
+        if (props.disabled || isOptionDisabled(option)) {
             return;
         }
 
-        let optionValue = this.getOptionValue(option);
-        let isOptionValueUsed = this.isOptionValueUsed(option);
-        let selected = this.isSelected(option);
-        let allowOptionSelect = this.allowOptionSelect();
+        const optionValue = getOptionValue(option);
+        const isUsed = isOptionValueUsed(option);
+        const selected = isSelected(option);
+        const allowSelect = allowOptionSelect();
 
         if (selected)
-            this.updateModel(originalEvent, this.props.value.filter(val => !ObjectUtils.equals(isOptionValueUsed ? val : this.getOptionValue(val), optionValue, this.equalityKey())));
-        else if (allowOptionSelect)
-            this.updateModel(originalEvent, [...this.props.value || [], optionValue]);
+            updateModel(originalEvent, props.value.filter(val => !ObjectUtils.equals(isUsed ? val : getOptionValue(val), optionValue, equalityKey)));
+        else if (allowSelect)
+            updateModel(originalEvent, [...props.value || [], optionValue]);
     }
 
-    onOptionKeyDown(event) {
+    const onOptionKeyDown = (event) => {
         const originalEvent = event.originalEvent;
-        let listItem = originalEvent.currentTarget;
+        const listItem = originalEvent.currentTarget;
 
         switch (originalEvent.which) {
             //down
             case 40:
-                let nextItem = this.findNextItem(listItem);
-                if (nextItem) {
-                    nextItem.focus();
-                }
-
+                const nextItem = findNextItem(listItem);
+                nextItem && nextItem.focus();
                 originalEvent.preventDefault();
                 break;
 
             //up
             case 38:
-                let prevItem = this.findPrevItem(listItem);
-                if (prevItem) {
-                    prevItem.focus();
-                }
-
+                const prevItem = findPrevItem(listItem);
+                prevItem && prevItem.focus();
                 originalEvent.preventDefault();
                 break;
 
             //enter and space
             case 13:
             case 32:
-                this.onOptionSelect(event);
+                onOptionSelect(event);
                 originalEvent.preventDefault();
                 break;
 
             //escape
             case 27:
-                this.hide();
-                this.inputRef.current.focus();
+                hide();
+                inputRef.current.focus();
                 break;
 
             default:
@@ -238,68 +94,50 @@ export class MultiSelect extends Component {
         }
     }
 
-    findNextItem(item) {
-        let nextItem = item.nextElementSibling;
-
-        if (nextItem)
-            return DomHandler.hasClass(nextItem, 'p-disabled') || DomHandler.hasClass(nextItem, 'p-multiselect-item-group') ? this.findNextItem(nextItem) : nextItem;
-        else
-            return null;
+    const findNextItem = (item) => {
+        const nextItem = item.nextElementSibling;
+        return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || DomHandler.hasClass(nextItem, 'p-multiselect-item-group') ? findNextItem(nextItem) : nextItem) : null;
     }
 
-    findPrevItem(item) {
-        let prevItem = item.previousElementSibling;
-
-        if (prevItem)
-            return DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-multiselect-item-group') ? this.findPrevItem(prevItem) : prevItem;
-        else
-            return null;
+    const findPrevItem = (item) => {
+        const prevItem = item.previousElementSibling;
+        return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-multiselect-item-group') ? findPrevItem(prevItem) : prevItem) : null;
     }
 
-    onClick(event) {
-        if (!this.props.disabled && !this.isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon') && !this.isClearClicked(event)) {
-            if (this.state.overlayVisible) {
-                this.hide();
-            }
-            else {
-                this.show();
-            }
-
-            this.inputRef.current.focus();
+    const onClick = (event) => {
+        if (!props.disabled && !isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon') && !isClearClicked(event)) {
+            overlayVisibleState ? hide() : show();
+            inputRef.current.focus();
 
             event.preventDefault();
         }
     }
 
-    onKeyDown(event) {
+    const onKeyDown = (event) => {
         switch (event.which) {
             //down
             case 40:
-                if (!this.state.overlayVisible && event.altKey) {
-                    this.show();
+                if (!overlayVisibleState && event.altKey) {
+                    show();
                     event.preventDefault();
                 }
                 break;
 
             //space
             case 32:
-                if (this.state.overlayVisible)
-                    this.hide();
-                else
-                    this.show();
-
+                overlayVisibleState ? hide() : show();
                 event.preventDefault();
                 break;
 
             //escape
             case 27:
-                this.hide();
+                hide();
                 break;
 
             //tab
             case 9:
-                if (this.state.overlayVisible) {
-                    const firstFocusableElement = DomHandler.getFirstFocusableElement(this.overlayRef.current);
+                if (overlayVisibleState) {
+                    const firstFocusableElement = DomHandler.getFirstFocusableElement(overlayRef.current);
                     if (firstFocusableElement) {
                         firstFocusableElement.focus();
                         event.preventDefault();
@@ -312,429 +150,343 @@ export class MultiSelect extends Component {
         }
     }
 
-    onSelectAll(event) {
-        if (this.props.onSelectAll) {
-            this.props.onSelectAll(event);
+    const onSelectAll = (event) => {
+        if (props.onSelectAll) {
+            props.onSelectAll(event);
         }
         else {
             let value = null;
-            let visibleOptions = this.getVisibleOptions();
 
             if (event.checked) {
                 value = [];
 
                 if (visibleOptions) {
-                    const selectedOptions = visibleOptions.filter(option => this.isOptionDisabled(option) && this.isSelected(option));
-                    value = selectedOptions.map(option => this.getOptionValue(option));
+                    const selectedOptions = visibleOptions.filter(option => isOptionDisabled(option) && isSelected(option));
+                    value = selectedOptions.map(option => getOptionValue(option));
                 }
             }
             else if (visibleOptions) {
-                visibleOptions = visibleOptions.filter(option => !this.isOptionDisabled(option));
+                const options = visibleOptions.filter(option => !isOptionDisabled(option));
 
-                if (this.props.optionGroupLabel) {
+                if (props.optionGroupLabel) {
                     value = [];
-                    visibleOptions.forEach(optionGroup => value = [...value, ...this.getOptionGroupChildren(optionGroup).filter((option) => !this.isOptionDisabled(option)).map(option => this.getOptionValue(option))]);
+                    options.forEach(optionGroup => value = [...value, ...getOptionGroupChildren(optionGroup).filter((option) => !isOptionDisabled(option)).map(option => getOptionValue(option))]);
                 }
                 else {
-                    value = visibleOptions.map(option => this.getOptionValue(option));
+                    value = options.map(option => getOptionValue(option));
                 }
             }
 
-            this.updateModel(event.originalEvent, value);
+            updateModel(event.originalEvent, value);
         }
     }
 
-    updateModel(event, value) {
-        if (this.props.onChange) {
-            this.props.onChange({
+    const updateModel = (event, value) => {
+        if (props.onChange) {
+            props.onChange({
                 originalEvent: event,
-                value: value,
+                value,
                 stopPropagation: () => { },
                 preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
-                    value: value
+                    name: props.name,
+                    id: props.id,
+                    value
                 }
             });
         }
     }
 
-    onFilterInputChange(event) {
+    const onFilterInputChange = (event) => {
         const filter = event.query;
+        setFilterState(filter);
 
-        this.setState({ filter }, () => {
-            if (this.props.onFilter) {
-                this.props.onFilter({
-                    originalEvent: event,
-                    filter
-                });
-            }
-        });
-    }
-
-    resetFilter() {
-        const filter = '';
-
-        this.setState({ filter }, () => {
-            this.props.onFilter && this.props.onFilter({ filter });
-        });
-    }
-
-    show() {
-        this.setState({ overlayVisible: true });
-    }
-
-    hide() {
-        this.setState({ overlayVisible: false });
-    }
-
-    onOverlayEnter(callback) {
-        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
-        this.alignOverlay();
-        this.scrollInView();
-        callback && callback();
-    }
-
-    onOverlayEntered() {
-        this.bindDocumentClickListener();
-        this.bindScrollListener();
-        this.bindResizeListener();
-
-        this.props.onShow && this.props.onShow();
-    }
-
-    onOverlayExit() {
-        this.unbindDocumentClickListener();
-        this.unbindScrollListener();
-        this.unbindResizeListener();
-    }
-
-    onOverlayExited() {
-        if (this.props.filter && this.props.resetFilterOnHide) {
-            this.resetFilter();
+        if (props.onFilter) {
+            props.onFilter({
+                originalEvent: event,
+                filter
+            });
         }
-
-        ZIndexUtils.clear(this.overlayRef.current);
-
-        this.props.onHide && this.props.onHide();
     }
 
-    alignOverlay() {
-        DomHandler.alignOverlay(this.overlayRef.current, this.label.parentElement, this.props.appendTo || PrimeReact.appendTo);
+    const resetFilter = () => {
+        setFilterState('');
+        props.onFilter && props.onFilter({ filter: '' });
     }
 
-    scrollInView() {
-        let highlightItem = DomHandler.findSingle(this.overlayRef.current, 'li.p-highlight');
+    const scrollInView = () => {
+        const highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
         if (highlightItem && highlightItem.scrollIntoView) {
             highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });
         }
     }
 
-    onCloseClick(event) {
-        this.hide();
-        this.inputRef.current.focus();
+    const show = () => {
+        setOverlayVisibleState(true);
+    }
+
+    const hide = () => {
+        setOverlayVisibleState(false);
+    }
+
+    const onOverlayEnter = (callback) => {
+        ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+        alignOverlay();
+        scrollInView();
+        callback && callback();
+    }
+
+    const onOverlayEntered = () => {
+        bindOverlayListener();
+        props.onShow && props.onShow();
+    }
+
+    const onOverlayExit = () => {
+        unbindOverlayListener();
+    }
+
+    const onOverlayExited = () => {
+        if (props.filter && props.resetFilterOnHide) {
+            resetFilter();
+        }
+
+        ZIndexUtils.clear(overlayRef.current);
+
+        props.onHide && props.onHide();
+    }
+
+    const alignOverlay = () => {
+        DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+    }
+
+    const isClearClicked = (event) => {
+        return DomHandler.hasClass(event.target, 'p-multiselect-clear-icon');
+    }
+
+    const isPanelClicked = (event) => {
+        return overlayRef.current && overlayRef.current.contains(event.target);
+    }
+
+    const onCloseClick = (event) => {
+        hide();
+        inputRef.current.focus();
         event.preventDefault();
         event.stopPropagation();
     }
 
-    getSelectedOptionIndex() {
-        if (this.props.value != null && this.props.options) {
-            if (this.props.optionGroupLabel) {
-                for (let i = 0; i < this.props.options.length; i++) {
-                    let selectedOptionIndex = this.findOptionIndexInList(this.props.value, this.getOptionGroupChildren(this.props.options[i]));
-                    if (selectedOptionIndex !== -1) {
-                        return { group: i, option: selectedOptionIndex };
-                    }
-                }
+    const getSelectedOptionIndex = () => {
+        if (props.value != null && props.options) {
+            if (props.optionGroupLabel) {
+                let groupIndex = 0;
+                const optionIndex = props.options.findIndex((optionGroup, i) => (groupIndex = i) && findOptionIndexInList(props.value, getOptionGroupChildren(optionGroup)) !== -1)
+                return optionIndex !== -1 ? { group: groupIndex, option: optionIndex } : -1;
             }
             else {
-                return this.findOptionIndexInList(this.props.value, this.props.options);
+                return findOptionIndexInList(props.value, props.options);
             }
         }
 
         return -1;
     }
 
-    findOptionIndexInList(value, list) {
-        const key = this.equalityKey();
-
-        return list.findIndex(item => value.some(val => ObjectUtils.equals(val, this.getOptionValue(item), key)));
+    const findOptionIndexInList = (value, list) => {
+        return list.findIndex(item => value.some(val => ObjectUtils.equals(val, getOptionValue(item), equalityKey)));
     }
 
-    isSelected(option) {
-        let selected = false;
+    const isSelected = (option) => {
+        if (props.value) {
+            const optionValue = getOptionValue(option);
+            const isUsed = isOptionValueUsed(option);
 
-        if (this.props.value) {
-            let optionValue = this.getOptionValue(option);
-            let isOptionValueUsed = this.isOptionValueUsed(option);
-            let key = this.equalityKey();
-
-            selected = this.props.value.some(val => ObjectUtils.equals(isOptionValueUsed ? val : this.getOptionValue(val), optionValue, key));
+            return props.value.some(val => ObjectUtils.equals(isUsed ? val : getOptionValue(val), optionValue, equalityKey));
         }
 
-        return selected;
+        return false;
     }
 
-    getLabelByValue(val) {
+    const getLabelByValue = (val) => {
         let option;
-        if (this.props.options) {
-            if (this.props.optionGroupLabel) {
-                for (let optionGroup of this.props.options) {
-                    option = this.findOptionByValue(val, this.getOptionGroupChildren(optionGroup));
+        if (props.options) {
+            if (props.optionGroupLabel) {
+                for (let optionGroup of props.options) {
+                    option = findOptionByValue(val, getOptionGroupChildren(optionGroup));
                     if (option) {
                         break;
                     }
                 }
             }
             else {
-                option = this.findOptionByValue(val, this.props.options);
+                option = findOptionByValue(val, props.options);
             }
         }
 
-        return option ? this.getOptionLabel(option) : null;
+        return option ? getOptionLabel(option) : null;
     }
 
-    findOptionByValue(val, list) {
-        let key = this.equalityKey();
-
-        for (let option of list) {
-            let optionValue = this.getOptionValue(option);
-
-            if (ObjectUtils.equals(optionValue, val, key)) {
-                return option;
-            }
-        }
-
-        return null;
+    const findOptionByValue = (val, list) => {
+        return list.find((option) => ObjectUtils.equals(getOptionValue(option), val, equalityKey));
     }
 
-    onFocus(event) {
-        event.persist();
-
-        this.setState({ focused: true }, () => {
-            if (this.props.onFocus) {
-                this.props.onFocus(event);
-            }
-        });
+    const onFocus = (event) => {
+        setFocusedState(true);
+        props.onFocus && props.onFocus(event);
     }
 
-    onBlur(event) {
-        event.persist();
-
-        this.setState({ focused: false }, () => {
-            if (this.props.onBlur) {
-                this.props.onBlur(event);
-            }
-        });
+    const onBlur = (event) => {
+        setFocusedState(false);
+        props.onBlur && props.onBlur(event);
     }
 
-    bindDocumentClickListener() {
-        if (!this.documentClickListener) {
-            this.documentClickListener = (event) => {
-                if (this.state.overlayVisible && this.isOutsideClicked(event)) {
-                    this.hide();
-                }
-            };
-
-            document.addEventListener('click', this.documentClickListener);
-        }
-    }
-
-    bindScrollListener() {
-        if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
-                if (this.state.overlayVisible) {
-                    this.hide();
-                }
-            });
-        }
-
-        this.scrollHandler.bindScrollListener();
-    }
-
-    unbindScrollListener() {
-        if (this.scrollHandler) {
-            this.scrollHandler.unbindScrollListener();
-        }
-    }
-
-    bindResizeListener() {
-        if (!this.resizeListener) {
-            this.resizeListener = () => {
-                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
-                    this.hide();
-                }
-            };
-            window.addEventListener('resize', this.resizeListener);
-        }
-    }
-
-    unbindResizeListener() {
-        if (this.resizeListener) {
-            window.removeEventListener('resize', this.resizeListener);
-            this.resizeListener = null;
-        }
-    }
-
-    isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.isClearClicked(event) || this.container.contains(event.target)
-            || this.isPanelClicked(event));
-    }
-
-    isClearClicked(event) {
-        return DomHandler.hasClass(event.target, 'p-multiselect-clear-icon')
-    }
-
-    isPanelClicked(event) {
-        return this.overlayRef && this.overlayRef.current && this.overlayRef.current.contains(event.target);
-    }
-
-    unbindDocumentClickListener() {
-        if (this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-            this.documentClickListener = null;
-        }
-    }
-
-    updateInputRef() {
-        let ref = this.props.inputRef;
-
-        if (ref) {
-            if (typeof ref === 'function') {
-                ref(this.inputRef.current);
-            }
-            else {
-                ref.current = this.inputRef.current;
-            }
-        }
-    }
-
-    componentDidMount() {
-        this.updateInputRef();
-
-        if (this.props.tooltip) {
-            this.renderTooltip();
-        }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
-            if (this.tooltip)
-                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
-            else
-                this.renderTooltip();
-        }
-
-        if (this.state.overlayVisible && this.hasFilter()) {
-            this.alignOverlay();
-        }
-    }
-
-    componentWillUnmount() {
-        this.unbindDocumentClickListener();
-        this.unbindResizeListener();
-        if (this.scrollHandler) {
-            this.scrollHandler.destroy();
-            this.scrollHandler = null;
-        }
-
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
-        }
-
-        ZIndexUtils.clear(this.overlayRef.current);
-    }
-
-    hasFilter() {
-        return this.state.filter && this.state.filter.trim().length > 0;
-    }
-
-    isAllSelected() {
-        if (this.props.onSelectAll) {
-            return this.props.selectAll;
+    const isAllSelected = () => {
+        if (props.onSelectAll) {
+            return props.selectAll;
         }
         else {
-            let visibleOptions = this.getVisibleOptions();
             if (ObjectUtils.isEmpty(visibleOptions)) {
                 return false;
             }
 
-            visibleOptions = visibleOptions.filter((option) => !this.isOptionDisabled(option));
+            const options = visibleOptions.filter((option) => !isOptionDisabled(option));
 
-            if (this.props.optionGroupLabel) {
-                for (let optionGroup of visibleOptions) {
-                    const visibleOptionsGroupChildren = this.getOptionGroupChildren(optionGroup).filter((option) => !this.isOptionDisabled(option));
-                    for (let option of visibleOptionsGroupChildren) {
-                        if (!this.isSelected(option)) {
-                            return false;
-                        }
-                    }
+            if (props.optionGroupLabel) {
+                for (let optionGroup of options) {
+                    const visibleOptionsGroupChildren = getOptionGroupChildren(optionGroup).filter((option) => !isOptionDisabled(option));
+                    return !(visibleOptionsGroupChildren.some((option) => !isSelected(option)));
                 }
             }
             else {
-                for (let option of visibleOptions) {
-                    if (!this.isSelected(option)) {
-                        return false;
-                    }
-                }
+                return !(options.some((option) => !isSelected(option)));
             }
         }
 
         return true;
     }
 
-    getOptionLabel(option) {
-        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : (option && option['label'] !== undefined ? option['label'] : option);
+    const getOptionLabel = (option) => {
+        return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : (option && option['label'] !== undefined ? option['label'] : option);
     }
 
-    getOptionValue(option) {
-        if (this.props.optionValue) {
-            const data = ObjectUtils.resolveFieldData(option, this.props.optionValue);
+    const getOptionValue = (option) => {
+        if (props.optionValue) {
+            const data = ObjectUtils.resolveFieldData(option, props.optionValue);
             return data !== null ? data : option;
         }
 
         return option && option['value'] !== undefined ? option['value'] : option;
     }
 
-    getOptionRenderKey(option) {
-        return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : this.getOptionLabel(option);
+    const getOptionRenderKey = (option) => {
+        return props.dataKey ? ObjectUtils.resolveFieldData(option, props.dataKey) : getOptionLabel(option);
     }
 
-    getOptionGroupRenderKey(optionGroup) {
-        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    const getOptionGroupRenderKey = (optionGroup) => {
+        return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
     }
 
-    getOptionGroupLabel(optionGroup) {
-        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    const getOptionGroupLabel = (optionGroup) => {
+        return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
     }
 
-    getOptionGroupChildren(optionGroup) {
-        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupChildren);
+    const getOptionGroupChildren = (optionGroup) => {
+        return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupChildren);
     }
 
-    isOptionDisabled(option) {
-        if (this.props.optionDisabled) {
-            return ObjectUtils.isFunction(this.props.optionDisabled) ? this.props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, this.props.optionDisabled);
+    const isOptionDisabled = (option) => {
+        if (props.optionDisabled) {
+            return ObjectUtils.isFunction(props.optionDisabled) ? props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, props.optionDisabled);
         }
 
         return (option && option['disabled'] !== undefined ? option['disabled'] : false);
     }
 
-    isOptionValueUsed(option) {
-        return this.props.optionValue || (option && option['value'] !== undefined);
+    const isOptionValueUsed = (option) => {
+        return props.optionValue || (option && option['value'] !== undefined);
     }
 
-    getVisibleOptions() {
-        if (this.hasFilter()) {
-            let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale);
-            let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
+    const checkValidity = () => {
+        return inputRef.current.checkValidity();
+    }
 
-            if (this.props.optionGroupLabel) {
+    const removeChip = (event, item) => {
+        const value = props.value.filter(val => !ObjectUtils.equals(val, item, equalityKey));
+
+        updateModel(event, value);
+    }
+
+    const getSelectedItemsLabel = () => {
+        const pattern = /{(.*?)}/;
+        if (pattern.test(props.selectedItemsLabel)) {
+            return props.selectedItemsLabel.replace(props.selectedItemsLabel.match(pattern)[0], props.value.length + '');
+        }
+
+        return props.selectedItemsLabel;
+    }
+
+    const getLabel = () => {
+        let label;
+
+        if (!empty && !props.fixedPlaceholder) {
+            if (props.maxSelectedLabels && props.value.length > props.maxSelectedLabels) {
+                return getSelectedItemsLabel();
+            }
+            else {
+                return props.value.reduce((acc, value, index) => (acc + (index !== 0 ? ',' : '') + getLabelByValue(value)), '');
+            }
+        }
+
+        return label;
+    }
+
+    const getLabelContent = () => {
+        if (props.selectedItemTemplate) {
+            if (!empty) {
+                if (props.maxSelectedLabels && props.value.length > props.maxSelectedLabels) {
+                    return getSelectedItemsLabel();
+                }
+                else {
+                    return props.value.map((val, index) => {
+                        const item = ObjectUtils.getJSXElement(props.selectedItemTemplate, val);
+
+                        return <React.Fragment key={index}>{item}</React.Fragment>
+                    });
+                }
+            }
+            else {
+                return ObjectUtils.getJSXElement(props.selectedItemTemplate);
+            }
+        }
+        else {
+            if (props.display === 'chip' && !empty) {
+                const value = props.value.slice(0, props.maxSelectedLabels || props.value.length);
+
+                return (
+                    value.map((val) => {
+                        const label = getLabelByValue(val);
+                        const icon = !props.disabled && IconUtils.getJSXIcon(props.removeIcon, { className: 'p-multiselect-token-icon', onClick: (e) => removeChip(e, val) }, { props });
+
+                        return (
+                            <div className="p-multiselect-token" key={label}>
+                                <span className="p-multiselect-token-label">{label}</span>
+                                {icon}
+                            </div>
+                        )
+                    })
+                )
+            }
+
+            return getLabel();
+        }
+    }
+
+    const getVisibleOptions = () => {
+        if (hasFilter) {
+            const filterValue = filterState.trim().toLocaleLowerCase(props.filterLocale);
+            const searchFields = props.filterBy ? props.filterBy.split(',') : [props.optionLabel || 'label'];
+
+            if (props.optionGroupLabel) {
                 let filteredGroups = [];
-                for (let optgroup of this.props.options) {
-                    let filteredSubOptions = FilterService.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+                for (let optgroup of props.options) {
+                    let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
                     if (filteredSubOptions && filteredSubOptions.length) {
                         filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
                     }
@@ -742,173 +494,217 @@ export class MultiSelect extends Component {
                 return filteredGroups;
             }
             else {
-                return FilterService.filter(this.props.options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+                return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
             }
         }
         else {
-            return this.props.options;
+            return props.options;
         }
     }
 
-    isEmpty() {
-        return !this.props.value || this.props.value.length === 0;
-    }
+    useEffect(() => {
+        ObjectUtils.combinedRefs(inputRef, props.inputRef);
+    }, [inputRef, props.inputRef]);
 
-    equalityKey() {
-        return this.props.optionValue ? null : this.props.dataKey;
-    }
-
-    checkValidity() {
-        return this.inputRef.current.checkValidity();
-    }
-
-    removeChip(event, item) {
-        let key = this.equalityKey();
-        let value = this.props.value.filter(val => !ObjectUtils.equals(val, item, key));
-
-        this.updateModel(event, value);
-    }
-
-    getSelectedItemsLabel() {
-        let pattern = /{(.*?)}/;
-        if (pattern.test(this.props.selectedItemsLabel)) {
-            return this.props.selectedItemsLabel.replace(this.props.selectedItemsLabel.match(pattern)[0], this.props.value.length + '');
+    useEffect(() => {
+        if (tooltipRef.current) {
+            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
         }
-
-        return this.props.selectedItemsLabel;
-    }
-
-    getLabel() {
-        let label;
-
-        if (!this.isEmpty() && !this.props.fixedPlaceholder) {
-            if (this.props.maxSelectedLabels && this.props.value.length > this.props.maxSelectedLabels) {
-                return this.getSelectedItemsLabel();
-            }
-            else {
-                label = '';
-                for (let i = 0; i < this.props.value.length; i++) {
-                    if (i !== 0) {
-                        label += ',';
-                    }
-                    label += this.getLabelByValue(this.props.value[i]);
-                }
-
-                return label;
-            }
+        else if (props.tooltip) {
+            tooltipRef.current = tip({
+                target: elementRef.current,
+                content: props.tooltip,
+                options: props.tooltipOptions
+            });
         }
+    }, [props.tooltip, props.tooltipOptions]);
 
-        return label;
-    }
-
-    getLabelContent() {
-        if (this.props.selectedItemTemplate) {
-            if (!this.isEmpty()) {
-                if (this.props.maxSelectedLabels && this.props.value.length > this.props.maxSelectedLabels) {
-                    return this.getSelectedItemsLabel();
-                }
-                else {
-                    return this.props.value.map((val, index) => {
-                        const item = ObjectUtils.getJSXElement(this.props.selectedItemTemplate, val);
-
-                        return (
-                            <React.Fragment key={index}>{item}</React.Fragment>
-                        );
-                    });
-                }
-            }
-            else {
-                return ObjectUtils.getJSXElement(this.props.selectedItemTemplate);
-            }
+    useUpdateEffect(() => {
+        if (overlayVisibleState && hasFilter) {
+            alignOverlay();
         }
-        else {
-            if (this.props.display === 'chip' && !this.isEmpty()) {
-                const value = this.props.value.slice(0, this.props.maxSelectedLabels || this.props.value.length);
+    }, [overlayVisibleState, hasFilter]);
 
-                return (
-                    value.map((val) => {
-                        const label = this.getLabelByValue(val);
-                        return (
-                            <div className="p-multiselect-token" key={label}>
-                                <span className="p-multiselect-token-label">{label}</span>
-                                { !this.props.disabled && IconUtils.getJSXIcon(this.props.removeIcon, { className: 'p-multiselect-token-icon', onClick: (e) => this.removeChip(e, val) }, { props: this.props }) }
-                            </div>
-                        )
-                    })
-                );
-            }
+    useUnmountEffect(() => {
+        ZIndexUtils.clear(overlayRef.current);
 
-            return this.getLabel();
+        if (tooltipRef.current) {
+            tooltipRef.current.destroy();
+            tooltipRef.current = null;
         }
-    }
+    });
 
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.container,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
-    }
-
-    renderClearIcon() {
-        const empty = this.isEmpty();
-        if (!empty && this.props.showClear && !this.props.disabled) {
-            return (
-                <i className="p-multiselect-clear-icon pi pi-times" onClick={(e) => this.updateModel(e, null)}></i>
-            );
+    const createClearIcon = () => {
+        if (!empty && props.showClear && !props.disabled) {
+            return <i className="p-multiselect-clear-icon pi pi-times" onClick={(e) => updateModel(e, null)}></i>
         }
 
         return null;
     }
 
-    renderLabel() {
-        const empty = this.isEmpty();
-        const content = this.getLabelContent();
-        const labelClassName = classNames('p-multiselect-label', {
-            'p-placeholder': empty && this.props.placeholder,
-            'p-multiselect-label-empty': empty && !this.props.placeholder && !this.props.selectedItemTemplate,
-            'p-multiselect-items-label': !empty && this.props.display !== 'chip' && this.props.value.length > this.props.maxSelectedLabels
+    const createLabel = () => {
+        const content = getLabelContent();
+        const className = classNames('p-multiselect-label', {
+            'p-placeholder': empty && props.placeholder,
+            'p-multiselect-label-empty': empty && !props.placeholder && !props.selectedItemTemplate,
+            'p-multiselect-items-label': !empty && props.display !== 'chip' && props.value.length > props.maxSelectedLabels
         });
 
         return (
-            <div ref={(el) => this.label = el} className="p-multiselect-label-container">
-                <div className={labelClassName}>{content || this.props.placeholder || 'empty'}</div>
+            <div ref={labelRef} className="p-multiselect-label-container">
+                <div className={className}>{content || props.placeholder || 'empty'}</div>
             </div>
-        );
+        )
     }
 
-    render() {
-        let className = classNames('p-multiselect p-component p-inputwrapper', {
-            'p-multiselect-chip': this.props.display === 'chip',
-            'p-disabled': this.props.disabled,
-            'p-multiselect-clearable': this.props.showClear && !this.props.disabled,
-            'p-focus': this.state.focused,
-            'p-inputwrapper-filled': this.props.value && this.props.value.length > 0,
-            'p-inputwrapper-focus': this.state.focused || this.state.overlayVisible
-        }, this.props.className);
-        let visibleOptions = this.getVisibleOptions();
+    const visibleOptions = getVisibleOptions();
 
-        let label = this.renderLabel();
-        let clearIcon = this.renderClearIcon();
+    const className = classNames('p-multiselect p-component p-inputwrapper', {
+        'p-multiselect-chip': props.display === 'chip',
+        'p-disabled': props.disabled,
+        'p-multiselect-clearable': props.showClear && !props.disabled,
+        'p-focus': focusedState,
+        'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
+        'p-inputwrapper-focus': focusedState || overlayVisibleState
+    }, props.className);
+    const label = createLabel();
+    const clearIcon = createClearIcon();
 
-        return (
-            <div id={this.props.id} className={className} onClick={this.onClick} ref={el => this.container = el} style={this.props.style}>
-                <div className="p-hidden-accessible">
-                    <input ref={this.inputRef} id={this.props.inputId} name={this.props.name} readOnly type="text" onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.onKeyDown}
-                        role="listbox" aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy} aria-expanded={this.state.overlayVisible} disabled={this.props.disabled} tabIndex={this.props.tabIndex} />
-                </div>
-                {label}
-                {clearIcon}
-                <div className="p-multiselect-trigger">
-                    {IconUtils.getJSXIcon(this.props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props: this.props })}
-                </div>
-                <MultiSelectPanel ref={this.overlayRef} visibleOptions={visibleOptions} {...this.props} onClick={this.onPanelClick} onOverlayHide={this.hide}
-                    filterValue={this.state.filter} hasFilter={this.hasFilter} onFilterInputChange={this.onFilterInputChange} onCloseClick={this.onCloseClick} onSelectAll={this.onSelectAll}
-                    getOptionLabel={this.getOptionLabel} getOptionRenderKey={this.getOptionRenderKey} isOptionDisabled={this.isOptionDisabled}
-                    getOptionGroupChildren={this.getOptionGroupChildren} getOptionGroupLabel={this.getOptionGroupLabel} getOptionGroupRenderKey={this.getOptionGroupRenderKey}
-                    isSelected={this.isSelected} getSelectedOptionIndex={this.getSelectedOptionIndex} isAllSelected={this.isAllSelected} onOptionSelect={this.onOptionSelect} allowOptionSelect={this.allowOptionSelect} onOptionKeyDown={this.onOptionKeyDown}
-                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited} />
+    return (
+        <div ref={elementRef} id={props.id} className={className} onClick={onClick} style={props.style}>
+            <div className="p-hidden-accessible">
+                <input ref={inputRef} id={props.inputId} name={props.name} readOnly type="text" onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}
+                    role="listbox" aria-labelledby={props.ariaLabelledBy} aria-expanded={overlayVisibleState} disabled={props.disabled} tabIndex={props.tabIndex} />
             </div>
-        );
-    }
+            {label}
+            {clearIcon}
+            <div className="p-multiselect-trigger">
+                {IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}
+            </div>
+            <MultiSelectPanel ref={overlayRef} visibleOptions={visibleOptions} {...props} onClick={onPanelClick} onOverlayHide={hide}
+                filterValue={filterState} hasFilter={hasFilter} onFilterInputChange={onFilterInputChange} onCloseClick={onCloseClick} onSelectAll={onSelectAll}
+                getOptionLabel={getOptionLabel} getOptionRenderKey={getOptionRenderKey} isOptionDisabled={isOptionDisabled}
+                getOptionGroupChildren={getOptionGroupChildren} getOptionGroupLabel={getOptionGroupLabel} getOptionGroupRenderKey={getOptionGroupRenderKey}
+                isSelected={isSelected} getSelectedOptionIndex={getSelectedOptionIndex} isAllSelected={isAllSelected} onOptionSelect={onOptionSelect} allowOptionSelect={allowOptionSelect} onOptionKeyDown={onOptionKeyDown}
+                in={overlayVisibleState} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited} />
+        </div>
+    )
+}));
+
+MultiSelect.defaultProps = {
+    __TYPE: 'MultiSelect',
+    id: null,
+    inputRef: null,
+    name: null,
+    value: null,
+    options: null,
+    optionLabel: null,
+    optionValue: null,
+    optionDisabled: null,
+    optionGroupLabel: null,
+    optionGroupChildren: null,
+    optionGroupTemplate: null,
+    display: 'comma',
+    style: null,
+    className: null,
+    panelClassName: null,
+    panelStyle: null,
+    virtualScrollerOptions: null,
+    scrollHeight: '200px',
+    placeholder: null,
+    fixedPlaceholder: false,
+    disabled: false,
+    showClear: false,
+    filter: false,
+    filterBy: null,
+    filterMatchMode: 'contains',
+    filterPlaceholder: null,
+    filterLocale: undefined,
+    emptyFilterMessage: null,
+    resetFilterOnHide: false,
+    tabIndex: 0,
+    dataKey: null,
+    inputId: null,
+    appendTo: null,
+    tooltip: null,
+    tooltipOptions: null,
+    maxSelectedLabels: null,
+    selectionLimit: null,
+    selectedItemsLabel: '{0} items selected',
+    ariaLabelledBy: null,
+    itemTemplate: null,
+    selectedItemTemplate: null,
+    panelHeaderTemplate: null,
+    panelFooterTemplate: null,
+    transitionOptions: null,
+    dropdownIcon: 'pi pi-chevron-down',
+    removeIcon: 'pi pi-times-circle',
+    showSelectAll: true,
+    selectAll: false,
+    onChange: null,
+    onFocus: null,
+    onBlur: null,
+    onShow: null,
+    onHide: null,
+    onFilter: null,
+    onSelectAll: null
+}
+
+MultiSelect.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    id: PropTypes.string,
+    inputRef: PropTypes.any,
+    name: PropTypes.string,
+    value: PropTypes.any,
+    options: PropTypes.array,
+    optionLabel: PropTypes.string,
+    optionValue: PropTypes.string,
+    optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    optionGroupLabel: PropTypes.string,
+    optionGroupChildren: PropTypes.string,
+    optionGroupTemplate: PropTypes.any,
+    display: PropTypes.string,
+    style: PropTypes.object,
+    className: PropTypes.string,
+    panelClassName: PropTypes.string,
+    panelStyle: PropTypes.object,
+    virtualScrollerOptions: PropTypes.object,
+    scrollHeight: PropTypes.string,
+    placeholder: PropTypes.string,
+    fixedPlaceholder: PropTypes.bool,
+    disabled: PropTypes.bool,
+    showClear: PropTypes.bool,
+    filter: PropTypes.bool,
+    filterBy: PropTypes.string,
+    filterMatchMode: PropTypes.string,
+    filterPlaceholder: PropTypes.string,
+    filterLocale: PropTypes.string,
+    emptyFilterMessage: PropTypes.any,
+    resetFilterOnHide: PropTypes.bool,
+    tabIndex: PropTypes.number,
+    dataKey: PropTypes.string,
+    inputId: PropTypes.string,
+    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    tooltip: PropTypes.string,
+    tooltipOptions: PropTypes.object,
+    maxSelectedLabels: PropTypes.number,
+    selectionLimit: PropTypes.number,
+    selectedItemsLabel: PropTypes.string,
+    ariaLabelledBy: PropTypes.string,
+    itemTemplate: PropTypes.any,
+    selectedItemTemplate: PropTypes.any,
+    panelHeaderTemplate: PropTypes.any,
+    panelFooterTemplate: PropTypes.any,
+    transitionOptions: PropTypes.object,
+    dropdownIcon: PropTypes.string,
+    removeIcon: PropTypes.any,
+    showSelectAll: PropTypes.bool,
+    selectAll: PropTypes.bool,
+    onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onShow: PropTypes.func,
+    onHide: PropTypes.func,
+    onFilter: PropTypes.func,
+    onSelectAll: PropTypes.func
 }

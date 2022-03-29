@@ -1,56 +1,43 @@
-import React, { Component } from 'react';
+import React, { memo, useState } from 'react';
 import { classNames } from '../utils/Utils';
 
-export class RowCheckbox extends Component {
+export const RowCheckbox = memo((props) => {
+    const [focusedState, setFocusedState] = useState(false);
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            focused: false
-        };
-
-        this.onClick = this.onClick.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
+    const onFocus = () => {
+        setFocusedState(true);
     }
 
-    onClick(event) {
-        if (!this.props.disabled) {
-            this.setState({ focused: true });
+    const onBlur = () => {
+        setFocusedState(false);
+    }
 
-            this.props.onChange(event);
+    const onClick = (event) => {
+        if (!props.disabled) {
+            setFocusedState(true);
+
+            props.onChange(event);
         }
     }
 
-    onFocus() {
-        this.setState({ focused: true });
-    }
-
-    onBlur() {
-        this.setState({ focused: false });
-    }
-
-    onKeyDown(event) {
+    const onKeyDown = (event) => {
         if (event.code === 'Space') {
-            this.onClick(event);
+            onClick(event);
             event.preventDefault();
         }
     }
 
-    render() {
-        const className = classNames('p-checkbox p-component', {'p-checkbox-focused': this.state.focused} )
-        const boxClassName = classNames('p-checkbox-box p-component', { 'p-highlight': this.props.checked, 'p-disabled': this.props.disabled, 'p-focus': this.state.focused});
-        const iconClassName = classNames('p-checkbox-icon', { 'pi pi-check': this.props.checked });
-        const tabIndex = this.props.disabled ? null : '0';
+    const className = classNames('p-checkbox p-component', { 'p-checkbox-focused': focusedState })
+    const boxClassName = classNames('p-checkbox-box p-component', { 'p-highlight': props.checked, 'p-disabled': props.disabled, 'p-focus': focusedState });
+    const iconClassName = classNames('p-checkbox-icon', { 'pi pi-check': props.checked });
+    const tabIndex = props.disabled ? null : '0';
 
-        return (
-            <div className={className} onClick={this.onClick}>
-                <div className={boxClassName} role="checkbox" aria-checked={this.props.checked} tabIndex={tabIndex}
-                    onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur}>
-                    <span className={iconClassName}></span>
-                </div>
+    return (
+        <div className={className} onClick={onClick}>
+            <div className={boxClassName} role="checkbox" aria-checked={props.checked} tabIndex={tabIndex}
+                onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur}>
+                <span className={iconClassName}></span>
             </div>
-        );
-    }
-}
+        </div>
+    )
+});

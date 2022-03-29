@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class PickListDoc extends Component {
+const PickListDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { PickList } from 'primereact/picklist';
 import { ProductService } from '../service/ProductService';
@@ -77,10 +74,10 @@ export class PickListDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { PickList } from 'primereact/picklist';
 import { ProductService } from '../service/ProductService';
@@ -131,10 +128,10 @@ const PickListDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { PickList } from 'primereact/picklist';
 import { ProductService } from '../service/ProductService';
@@ -185,16 +182,16 @@ const PickListDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./PickListDemo.css" />
         <script src="./ProductService.js"></script>
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/picklist/picklist.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { PickList } = primereact.picklist;
 
@@ -243,12 +240,12 @@ const PickListDemo = () => {
     );
 }
                 `
-            }
-        };
+        }
+    };
 
-        this.extFiles = {
-            'demo/PickListDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/PickListDemo.css': {
+            content: `
 .picklist-demo .product-item {
     display: flex;
     align-items: center;
@@ -298,27 +295,21 @@ const PickListDemo = () => {
     }
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { PickList } from 'primereact/picklist';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -326,8 +317,8 @@ import { PickList } from 'primereact/picklist';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>PickList requires two arrays as <i>source</i> and <i>target</i> lists, an <i>itemTemplate</i> for the item content and <i>onChange</i> callback to update the value after reorder or transfer.</p>
+                    <h5>Getting Started</h5>
+                    <p>PickList requires two arrays as <i>source</i> and <i>target</i> lists, an <i>itemTemplate</i> for the item content and <i>onChange</i> callback to update the value after reorder or transfer.</p>
 <CodeHighlight>
 {`
 const onChange = (e) => {
@@ -344,8 +335,8 @@ const onChange = (e) => {
 </CodeHighlight>
 
 
-                        <h5>Headers</h5>
-                        <p><i>sourceHeader</i> and <i>targetHeader</i> properties are used to define captions for the lists that accept simple strings or JSX for custom content.</p>
+                    <h5>Headers</h5>
+                    <p><i>sourceHeader</i> and <i>targetHeader</i> properties are used to define captions for the lists that accept simple strings or JSX for custom content.</p>
 
 <CodeHighlight>
 {`
@@ -354,236 +345,237 @@ const onChange = (e) => {
 `}
 </CodeHighlight>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>source</td>
-                                        <td>array</td>
-                                        <td>null</td>
-                                        <td>An array of objects for the source list.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>target</td>
-                                        <td>array</td>
-                                        <td>null</td>
-                                        <td>An array of objects for the target list.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>sourceHeader</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Template for the source list caption.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>targetHeader</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Template for the target list caption.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>sourceStyle</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the source list element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>targetStyle</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the target list element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>sourceSelection</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Selected item in the source list.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>targetSelection</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Selected items in the target list.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>showSourceControls</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether to show buttons of source list.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>showTargetControls</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether to show buttons of target list.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>itemTemplate</td>
-                                        <td>function</td>
-                                        <td>null</td>
-                                        <td>Function that gets the option and returns the content for it.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>metaKeySelection</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item
-                            can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>tabIndex</td>
-                                        <td>number</td>
-                                        <td>null</td>
-                                        <td>Index of the element in tabbing order.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>dataKey</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Name of the field that uniquely identifies the a record in the data.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>source</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>An array of objects for the source list.</td>
+                                </tr>
+                                <tr>
+                                    <td>target</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>An array of objects for the target list.</td>
+                                </tr>
+                                <tr>
+                                    <td>sourceHeader</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template for the source list caption.</td>
+                                </tr>
+                                <tr>
+                                    <td>targetHeader</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template for the target list caption.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>sourceStyle</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the source list element.</td>
+                                </tr>
+                                <tr>
+                                    <td>targetStyle</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the target list element.</td>
+                                </tr>
+                                <tr>
+                                    <td>sourceSelection</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Selected item in the source list.</td>
+                                </tr>
+                                <tr>
+                                    <td>targetSelection</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Selected items in the target list.</td>
+                                </tr>
+                                <tr>
+                                    <td>showSourceControls</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to show buttons of source list.</td>
+                                </tr>
+                                <tr>
+                                    <td>showTargetControls</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to show buttons of target list.</td>
+                                </tr>
+                                <tr>
+                                    <td>itemTemplate</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Function that gets the option and returns the content for it.</td>
+                                </tr>
+                                <tr>
+                                    <td>metaKeySelection</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item
+                        can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
+                                </tr>
+                                <tr>
+                                    <td>tabIndex</td>
+                                    <td>number</td>
+                                    <td>null</td>
+                                    <td>Index of the element in tabbing order.</td>
+                                </tr>
+                                <tr>
+                                    <td>dataKey</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Name of the field that uniquely identifies the a record in the data.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onChange</td>
-                                        <td>event.originalEvent: Browser event <br />
-                                event.source: Source list  <br />
-                                event.target: Target list </td>
-                                        <td>Callback to invoke when items are moved from source to target.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onMoveToSource</td>
-                                        <td>event.originalEvent: Browser event <br />
-                                event.value: Moved items</td>
-                                        <td>Callback to invoke when items are moved from target to source.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onMoveAllToSource</td>
-                                        <td>event.originalEvent: Browser event <br />
-                                event.value: Moved items</td>
-                                        <td>Callback to invoke when all items are moved from target to source.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onMoveToTarget</td>
-                                        <td>event.originalEvent: Browser event <br />
-                                event.value: Moved items</td>
-                                        <td>Callback to invoke when items are moved from source to target.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onMoveAllToTarget</td>
-                                        <td>event.originalEvent: Browser event <br />
-                                event.value: Moved items</td>
-                                        <td>Callback to invoke when all items are moved from source to target.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onSourceSelectionChange</td>
-                                        <td>event.originalEvent: Browser event <br />
-                                items: Selected items array</td>
-                                        <td>Callback to invoke when items are selected within source list.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onTargetSelectionChange</td>
-                                        <td>event.originalEvent: Browser event <br />
-                                items: Selected items array</td>
-                                        <td>Callback to invoke when items are selected within target list.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onChange</td>
+                                    <td>event.originalEvent: Browser event <br />
+                            event.source: Source list  <br />
+                            event.target: Target list </td>
+                                    <td>Callback to invoke when items are moved from source to target.</td>
+                                </tr>
+                                <tr>
+                                    <td>onMoveToSource</td>
+                                    <td>event.originalEvent: Browser event <br />
+                            event.value: Moved items</td>
+                                    <td>Callback to invoke when items are moved from target to source.</td>
+                                </tr>
+                                <tr>
+                                    <td>onMoveAllToSource</td>
+                                    <td>event.originalEvent: Browser event <br />
+                            event.value: Moved items</td>
+                                    <td>Callback to invoke when all items are moved from target to source.</td>
+                                </tr>
+                                <tr>
+                                    <td>onMoveToTarget</td>
+                                    <td>event.originalEvent: Browser event <br />
+                            event.value: Moved items</td>
+                                    <td>Callback to invoke when items are moved from source to target.</td>
+                                </tr>
+                                <tr>
+                                    <td>onMoveAllToTarget</td>
+                                    <td>event.originalEvent: Browser event <br />
+                            event.value: Moved items</td>
+                                    <td>Callback to invoke when all items are moved from source to target.</td>
+                                </tr>
+                                <tr>
+                                    <td>onSourceSelectionChange</td>
+                                    <td>event.originalEvent: Browser event <br />
+                            items: Selected items array</td>
+                                    <td>Callback to invoke when items are selected within source list.</td>
+                                </tr>
+                                <tr>
+                                    <td>onTargetSelectionChange</td>
+                                    <td>event.originalEvent: Browser event <br />
+                            items: Selected items array</td>
+                                    <td>Callback to invoke when items are selected within target list.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-picklist</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-picklist-source-controls</td>
-                                        <td>Container of source list buttons.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-picklist-target-controls</td>
-                                        <td>Container of target list buttons.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-picklist-buttons</td>
-                                        <td>Container of buttons.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-picklist-listwrapper</td>
-                                        <td>Parent of a list element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-picklist-list</td>
-                                        <td>List element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-picklist-item</td>
-                                        <td>An item in the list.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-picklist</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-picklist-source-controls</td>
+                                    <td>Container of source list buttons.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-picklist-target-controls</td>
+                                    <td>Container of target list buttons.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-picklist-buttons</td>
+                                    <td>Container of buttons.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-picklist-listwrapper</td>
+                                    <td>Parent of a list element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-picklist-list</td>
+                                    <td>List element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-picklist-item</td>
+                                    <td>An item in the list.</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                            <h5>Dependencies</h5>
-                            <p>None.</p>
-                        </div>
+                        <h5>Dependencies</h5>
+                        <p>None.</p>
+                    </div>
 
-                    </TabPanel>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'PickListDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'PickListDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default PickListDoc;

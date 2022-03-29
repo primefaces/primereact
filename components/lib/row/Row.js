@@ -1,19 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export class Row extends Component {
+export const Row = () => <tr>{props.children}</tr>
 
-    static defaultProps = {
-        style: null,
-        className: null
-    }
+Row.defaultProps = {
+    __TYPE: 'Row'
+}
 
-    static propTypes = {
-        style: PropTypes.object,
-        className: PropTypes.string
-    }
-
-    render() {
-        return <tr>{this.props.children}</tr>;
-    }
+Row.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string
 }
