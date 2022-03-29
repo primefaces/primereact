@@ -243,8 +243,8 @@ export const BodyRow = memo((props) => {
     }
 
     const onEditSave = (e) => {
-        const { originalEvent: event } = e;
-        const valid = props.rowEditValidator ? props.rowEditValidator(props.rowData, { props: props.tableProps }) : true;
+        const { originalEvent: event, newData } = e;
+        const valid = props.rowEditValidator ? props.rowEditValidator(newData, { props: props.tableProps }) : true;
 
         if (props.onRowEditSave) {
             props.onRowEditSave({
