@@ -74,7 +74,7 @@ export class CalendarDemo extends Component {
             monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
             monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
             today: 'Hoy',
-            clear: 'Claro'
+            clear: 'Limpiar'
         });
     }
 
