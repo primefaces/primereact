@@ -50,6 +50,8 @@ export interface TabViewProps {
     className?: string;
     renderActiveOnly?: boolean;
     scrollable?: boolean;
+    panelContainerStyle?: object;
+    panelContainerClassName?: string;
     onTabChange?(e: TabViewTabChangeParams): void;
     onTabClose?(e: TabViewTabCloseParams): void;
 }

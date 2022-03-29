@@ -226,6 +226,7 @@ export const TabView = forwardRef((props, ref) => {
     }
 
     const createContent = () => {
+        const className = classNames('p-tabview-panels', props.panelContainerClassName);
         const contents = React.Children.map(props.children, (tab, index) => {
             if (shouldUseTab(tab, index) && (!props.renderActiveOnly || isSelected(index))) {
                 const selected = isSelected(index);
@@ -243,7 +244,7 @@ export const TabView = forwardRef((props, ref) => {
         });
 
         return (
-            <div className="p-tabview-panels">
+            <div className={className} style={props.panelContainerStyle}>
                 {contents}
             </div>
         )
@@ -334,7 +335,9 @@ TabView.defaultProps = {
     renderActiveOnly: true,
     onTabChange: null,
     onTabClose: null,
-    scrollable: false
+    scrollable: false,
+    panelContainerStyle: null,
+    panelContainerClassName: null
 }
 
 TabView.propTypes /* remove-proptypes */ = {
@@ -346,5 +349,7 @@ TabView.propTypes /* remove-proptypes */ = {
     renderActiveOnly: PropTypes.bool,
     onTabChange: PropTypes.func,
     onTabClose: PropTypes.func,
-    scrollable: PropTypes.bool
+    scrollable: PropTypes.bool,
+    panelContainerStyle: PropTypes.object,
+    panelContainerClassName: PropTypes.string
 }
