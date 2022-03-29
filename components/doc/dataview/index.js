@@ -1033,6 +1033,12 @@ const onSortChange = (event) => {
                                     <td>Defines if data is loaded and interacted with in lazy manner.</td>
                                 </tr>
                                 <tr>
+                                    <td>gutter</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether the grid structure in the container has gutter. Default value is false.</td>
+                                </tr>
+                                <tr>
                                     <td>itemTemplate</td>
                                     <td>function</td>
                                     <td>null</td>

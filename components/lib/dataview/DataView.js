@@ -172,10 +172,13 @@ export const DataView = memo(forwardRef((props, ref) => {
 
     const createContent = (value) => {
         const items = createItems(value);
+        const gridClassName = classNames('p-grid grid', {
+            'p-nogutter grid-nogutter': !props.gutter
+        });
 
         return (
             <div className="p-dataview-content">
-                <div className="p-grid p-nogutter grid grid-nogutter">
+                <div className={gridClassName}>
                     {items}
                 </div>
             </div>
@@ -247,6 +250,7 @@ DataView.defaultProps = {
     lazy: false,
     loading: false,
     loadingIcon: 'pi pi-spinner',
+    gutter: false,
     itemTemplate: null,
     onPage: null
 }
@@ -281,6 +285,7 @@ DataView.propTypes /* remove-proptypes */ = {
     lazy: PropTypes.bool,
     loading: PropTypes.bool,
     loadingIcon: PropTypes.string,
+    gutter: PropTypes.bool,
     itemTemplate: PropTypes.func.isRequired,
     onPage: PropTypes.func
 }
