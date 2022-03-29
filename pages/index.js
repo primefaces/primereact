@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const [tableTheme, setTableTheme] = useState('lara-dark-indigo');
+    const [tableTheme, setTableTheme] = useState('lara-light-indigo');
     const rootClassName = classNames('landing', {'landing-light': !props.dark, 'landing-dark': props.dark});
     const toggleColorScheme = () => {
         const darkMode = !props.dark;
@@ -29,15 +29,15 @@ export default function Home(props) {
             setTableTheme(tableTheme.replace('light','dark'));
         else
             setTableTheme(tableTheme.replace('dark','light'));
-    }, [props.dark]);
+    }, [props.dark]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         if (props.dark)
             props.onThemeChange('lara-dark-indigo', true);
         else
             props.onThemeChange('lara-light-indigo', false);
-    }, []);
-    
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
     return (
         <div className={rootClassName}>
             <Analytics />
@@ -60,7 +60,9 @@ export default function Home(props) {
                 <link href={`${contextPath}/images/favicon.ico`} rel="icon" type="image/x-icon"></link>
                 <link href={`${contextPath}/styles/landing/themes/${tableTheme}/theme.css`} rel="stylesheet"></link>
                 <link rel="stylesheet" href={`${contextPath}/styles/flags.css`}></link>
+                {/* eslint-disable */}
                 <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
+                {/* eslint-enable */}
             </Head>
             <div className="landing-intro">
                 <HeaderSection dark={props.dark} onToggleColorScheme={toggleColorScheme} />

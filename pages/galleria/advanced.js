@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useRef, useEffect, useState, memo } from 'react';
 import { classNames } from '../../components/lib/utils/ClassNames';
 import { PhotoService } from '../../service/PhotoService';
 import { Button } from '../../components/lib/button/Button';
@@ -9,86 +9,68 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 import getConfig from 'next/config';
 
-export default class GalleriaAdvancedDemo extends Component {
+const GalleriaAdvancedDemo = () => {
+    const [images, setImages] = useState(null);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [showThumbnails, setShowThumbnails] = useState(false);
+    const [isAutoPlayActive, setAutoPlayActive] = useState(true);
+    const [isFullScreen, setFullScreen] = useState(false);
+    const galleriaService = new PhotoService();
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+    const galleria = useRef(null)
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            images: null,
-            activeIndex: 0,
-            showThumbnails: false,
-            isAutoPlayActive: true,
-            isFullScreen: false
-        };
-
-        this.responsiveOptions = [
-            {
-                breakpoint: '1024px',
-                numVisible: 5
-            },
-            {
-                breakpoint: '960px',
-                numVisible: 4
-            },
-            {
-                breakpoint: '768px',
-                numVisible: 3
-            },
-            {
-                breakpoint: '560px',
-                numVisible: 1
-            }
-        ];
-
-        this.galleriaService = new PhotoService();
-        this.itemTemplate = this.itemTemplate.bind(this);
-        this.thumbnailTemplate = this.thumbnailTemplate.bind(this);
-        this.onThumbnailChange = this.onThumbnailChange.bind(this);
-        this.onItemChange = this.onItemChange.bind(this);
-        this.onFullScreenChange = this.onFullScreenChange.bind(this);
-        this.contextPath = getConfig().publicRuntimeConfig.contextPath;
-    }
-
-    componentDidMount() {
-        this.galleriaService.getImages().then(data => this.setState({ images: data }));
-        this.bindDocumentListeners();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.isAutoPlayActive !== this.galleria.isAutoPlayActive()) {
-            this.setState({
-                isAutoPlayActive: this.galleria.isAutoPlayActive()
-            });
+    const responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 5
+        },
+        {
+            breakpoint: '960px',
+            numVisible: 4
+        },
+        {
+            breakpoint: '768px',
+            numVisible: 3
+        },
+        {
+            breakpoint: '560px',
+            numVisible: 1
         }
+    ];
+
+    useEffect(() => {
+        galleriaService.getImages().then(data => setImages(data));
+        bindDocumentListeners();
+
+        return () => unbindDocumentListeners();
+    },[]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        setAutoPlayActive(galleria.current.isAutoPlayActive())
+    },[isAutoPlayActive]);
+
+    const onThumbnailChange = (event) => {
+        setActiveIndex(event.index)
     }
 
-    componentWillUnmount() {
-        this.unbindDocumentListeners();
+    const onItemChange = (event) => {
+        setActiveIndex(event.index)
     }
 
-    onThumbnailChange(event) {
-        this.setState({ activeIndex: event.index });
-    }
-
-    onItemChange(event) {
-        this.setState({ activeIndex: event.index });
-    }
-
-    toggleFullScreen() {
-        if (this.state.isFullScreen) {
-            this.closeFullScreen();
+    const toggleFullScreen = () => {
+        if (isFullScreen) {
+            closeFullScreen();
         }
         else {
-            this.openFullScreen();
+            openFullScreen();
         }
     }
 
-    onFullScreenChange() {
-        this.setState((prevState) => ({ isFullScreen: !prevState.isFullScreen }));
+    const onFullScreenChange = () => {
+        setFullScreen(prevState => !prevState )
     }
 
-    openFullScreen() {
+    const openFullScreen = () => {
         let elem = document.querySelector('.custom-galleria');
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
@@ -104,7 +86,7 @@ export default class GalleriaAdvancedDemo extends Component {
         }
     }
 
-    closeFullScreen() {
+    const closeFullScreen = () => {
         if (document.exitFullscreen) {
             document.exitFullscreen();
         }
@@ -119,122 +101,117 @@ export default class GalleriaAdvancedDemo extends Component {
         }
     }
 
-    bindDocumentListeners() {
-        document.addEventListener("fullscreenchange", this.onFullScreenChange);
-        document.addEventListener("mozfullscreenchange", this.onFullScreenChange);
-        document.addEventListener("webkitfullscreenchange", this.onFullScreenChange);
-        document.addEventListener("msfullscreenchange", this.onFullScreenChange);
+    const bindDocumentListeners = () => {
+        document.addEventListener("fullscreenchange", onFullScreenChange);
+        document.addEventListener("mozfullscreenchange", onFullScreenChange);
+        document.addEventListener("webkitfullscreenchange", onFullScreenChange);
+        document.addEventListener("msfullscreenchange", onFullScreenChange);
     }
 
-    unbindDocumentListeners() {
-        document.removeEventListener("fullscreenchange", this.onFullScreenChange);
-        document.removeEventListener("mozfullscreenchange", this.onFullScreenChange);
-        document.removeEventListener("webkitfullscreenchange", this.onFullScreenChange);
-        document.removeEventListener("msfullscreenchange", this.onFullScreenChange);
+    const unbindDocumentListeners = () => {
+        document.removeEventListener("fullscreenchange", onFullScreenChange);
+        document.removeEventListener("mozfullscreenchange", onFullScreenChange);
+        document.removeEventListener("webkitfullscreenchange", onFullScreenChange);
+        document.removeEventListener("msfullscreenchange", onFullScreenChange);
     }
 
-    thumbnailTemplate(item) {
+    const thumbnailTemplate = (item) => {
         return (
             <div className="grid grid-nogutter justify-content-center">
-                <img src={`${this.contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />
+                <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />
             </div>
         );
     }
 
-    itemTemplate(item) {
-        if (this.state.isFullScreen) {
-            return <img src={`${this.contextPath}/${item.itemImageSrc}`} alt={item.alt} />
+    const itemTemplate = (item) => {
+        if (isFullScreen) {
+            return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} />
         }
 
-        return <img src={`${this.contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
+        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
     }
 
-    renderFooter() {
+    const renderFooter = () => {
         let autoPlayClassName = classNames('pi', {
-            'pi-play': !this.state.isAutoPlayActive,
-            'pi-pause': this.state.isAutoPlayActive
+            'pi-play': !isAutoPlayActive,
+            'pi-pause': isAutoPlayActive
         });
 
         let fullScreenClassName = classNames('pi', {
-            'pi-window-maximize': !this.state.isFullScreen,
-            'pi-window-minimize': this.state.isFullScreen
+            'pi-window-maximize': !isFullScreen,
+            'pi-window-minimize': isFullScreen
         });
 
         return (
             <div className="custom-galleria-footer">
-                <Button icon="pi pi-list" onClick={() => this.setState({ showThumbnails: !this.state.showThumbnails })} />
+                <Button icon="pi pi-list" onClick={() => setShowThumbnails(prevState => !prevState)} />
                 <Button icon={autoPlayClassName} onClick={() => {
-                    if (!this.state.isAutoPlayActive) {
-                        this.galleria.startSlideShow();
-                        this.setState({ isAutoPlayActive: true });
+                    if (!isAutoPlayActive) {
+                        galleria.current.startSlideShow();
+                        setAutoPlayActive(true)
                     }
                     else {
-                        this.galleria.stopSlideShow();
-                        this.setState({ isAutoPlayActive: false });
+                        galleria.current.stopSlideShow();
+                        setAutoPlayActive(false)
                     }
                 }} />
                 {
-                    this.state.images && (
+                    images && (
                         <span className="title-container">
-                            <span>{this.state.activeIndex + 1}/{this.state.images.length}</span>
-                            <span className="title">{this.state.images[this.state.activeIndex].title}</span>
-                            <span>{this.state.images[this.state.activeIndex].alt}</span>
+                            <span>{activeIndex + 1}/{images.length}</span>
+                            <span className="title">{images[activeIndex].title}</span>
+                            <span>{images[activeIndex].alt}</span>
                         </span>
                     )
                 }
-                <Button icon={fullScreenClassName} onClick={() => this.toggleFullScreen()} className="fullscreen-button" />
+                <Button icon={fullScreenClassName} onClick={() => toggleFullScreen()} className="fullscreen-button" />
             </div>
         );
     }
 
-    render() {
-        const footer = this.renderFooter();
-        const galleriaClassName = classNames('custom-galleria', {
-            'fullscreen': this.state.isFullScreen
-        });
+    const footer = renderFooter();
+    const galleriaClassName = classNames('custom-galleria', {
+        'fullscreen': isFullScreen
+    });
 
-        return (
-            <div>
-                <Head>
-                    <title>React Gallery Component - Advanced</title>
-                    <meta name="description" content="Galleria can be extended further to implement complex requirements." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Galleria <span>Advanced</span></h1>
-                        <p>Galleria can be extended further to implement complex requirements.</p>
-                    </div>
-
-                    <DocActions github="galleria/advanced.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Gallery Component - Advanced</title>
+                <meta name="description" content="Galleria can be extended further to implement complex requirements." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>Galleria <span>Advanced</span></h1>
+                    <p>Galleria can be extended further to implement complex requirements.</p>
                 </div>
 
-                <div className="content-section implementation galleria-demo">
-                    <div className="card">
-                        <Galleria ref={(el) => this.galleria = el} value={this.state.images} activeIndex={this.state.activeIndex} onItemChange={this.onItemChange}
-                            showThumbnails={this.state.showThumbnails} showItemNavigators showItemNavigatorsOnHover
-                            numVisible={5} circular autoPlay transitionInterval={3000} responsiveOptions={this.responsiveOptions}
-                            item={this.itemTemplate} thumbnail={this.thumbnailTemplate} footer={footer}
-                            style={{ maxWidth: '640px' }} className={galleriaClassName} />
-                    </div>
-                </div>
-
-                <GalleriaAdvancedDemoDoc />
+                <DocActions github="galleria/advanced.js" />
             </div>
-        );
-    }
+
+            <div className="content-section implementation galleria-demo">
+                <div className="card">
+                    <Galleria ref={galleria} value={images} activeIndex={activeIndex} onItemChange={onItemChange}
+                        showThumbnails={showThumbnails} showItemNavigators showItemNavigatorsOnHover
+                        numVisible={5} circular autoPlay transitionInterval={3000} responsiveOptions={responsiveOptions}
+                        item={itemTemplate} thumbnail={thumbnailTemplate} footer={footer}
+                        style={{ maxWidth: '640px' }} className={galleriaClassName} />
+                </div>
+            </div>
+
+            <GalleriaAdvancedDemoDoc />
+        </div>
+    );
 }
 
-export class GalleriaAdvancedDemoDoc extends Component {
+export default GalleriaAdvancedDemo;
 
-    shouldComponentUpdate() {
-        return false;
-    }
+export const GalleriaAdvancedDemoDoc = memo(() => {
 
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Source">
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Source">
 <CodeHighlight lang="js">
 {`
 import React, { Component } from 'react';
@@ -510,9 +487,8 @@ export class GalleriaAdvancedDemo extends Component {
 
 `}
 </CodeHighlight>
-                    </TabPanel>
-                </TabView>
-            </div>
-        );
-    }
-}
+                </TabPanel>
+            </TabView>
+        </div>
+    );
+})

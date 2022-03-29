@@ -1,275 +1,152 @@
-import React, { Component, createRef } from 'react';
+import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler } from '../utils/Utils';
+import PrimeReact, { FilterService } from '../api/Api';
 import { DropdownPanel } from './DropdownPanel';
 import { tip } from '../tooltip/Tooltip';
 import { OverlayService } from '../overlayservice/OverlayService';
-import PrimeReact, { FilterService } from '../api/Api';
+import { DomHandler, ObjectUtils, classNames, ZIndexUtils } from '../utils/Utils';
+import { useMountEffect, useUpdateEffect, useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
 
-export class Dropdown extends Component {
+export const Dropdown = memo(forwardRef((props, ref) => {
+    const [filterState, setFilterState] = useState('');
+    const [focusedState, setFocusedState] = useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
+    const elementRef = useRef(null);
+    const overlayRef = useRef(null);
+    const inputRef = useRef(props.inputRef);
+    const tooltipRef = useRef(null);
+    const focusInputRef = useRef(null);
+    const searchTimeout = useRef(null);
+    const searchValue = useRef(null);
+    const currentSearchChar = useRef(null);
+    const isLazy = props.virtualScrollerOptions && props.virtualScrollerOptions.lazy;
+    const hasFilter = ObjectUtils.isNotEmpty(filterState);
+    const appendTo = props.appendTo || PrimeReact.appendTo;
 
-    static defaultProps = {
-        id: null,
-        inputRef: null,
-        name: null,
-        value: null,
-        options: null,
-        optionLabel: null,
-        optionValue: null,
-        optionDisabled: null,
-        optionGroupLabel: null,
-        optionGroupChildren: null,
-        optionGroupTemplate: null,
-        valueTemplate: null,
-        itemTemplate: null,
-        style: null,
-        className: null,
-        virtualScrollerOptions: null,
-        scrollHeight: '200px',
-        filter: false,
-        filterBy: null,
-        filterMatchMode: 'contains',
-        filterPlaceholder: null,
-        filterLocale: undefined,
-        emptyMessage: null,
-        emptyFilterMessage: null,
-        editable: false,
-        placeholder: null,
-        required: false,
-        disabled: false,
-        appendTo: null,
-        tabIndex: null,
-        autoFocus: false,
-        filterInputAutoFocus: true,
-        resetFilterOnHide: false,
-        showFilterClear: false,
-        panelClassName: null,
-        panelStyle: null,
-        dataKey: null,
-        inputId: null,
-        showClear: false,
-        maxLength: null,
-        tooltip: null,
-        tooltipOptions: null,
-        ariaLabel: null,
-        ariaLabelledBy: null,
-        transitionOptions: null,
-        dropdownIcon: 'pi pi-chevron-down',
-        showOnFocus: false,
-        onChange: null,
-        onFocus: null,
-        onBlur: null,
-        onMouseDown: null,
-        onContextMenu: null,
-        onShow: null,
-        onHide: null,
-        onFilter: null
-    };
+    const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
+        target: elementRef, overlay: overlayRef, listener: (event, { type, valid }) => {
+            if (valid) {
+                (type === 'outside') ? !isClearClicked(event) && hide() : hide();
+            }
+        }, when: overlayVisibleState
+    });
 
-    static propTypes = {
-        id: PropTypes.string,
-        inputRef: PropTypes.any,
-        name: PropTypes.string,
-        value: PropTypes.any,
-        options: PropTypes.array,
-        optionLabel: PropTypes.string,
-        optionValue: PropTypes.string,
-        optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-        optionGroupLabel: PropTypes.string,
-        optionGroupChildren: PropTypes.string,
-        optionGroupTemplate: PropTypes.any,
-        valueTemplate: PropTypes.any,
-        itemTemplate: PropTypes.any,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        virtualScrollerOptions: PropTypes.object,
-        scrollHeight: PropTypes.string,
-        filter: PropTypes.bool,
-        filterBy: PropTypes.string,
-        filterMatchMode: PropTypes.string,
-        filterPlaceholder: PropTypes.string,
-        filterLocale: PropTypes.string,
-        emptyMessage: PropTypes.any,
-        emptyFilterMessage: PropTypes.any,
-        editable: PropTypes.bool,
-        placeholder: PropTypes.string,
-        required: PropTypes.bool,
-        disabled: PropTypes.bool,
-        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        tabIndex: PropTypes.number,
-        autoFocus: PropTypes.bool,
-        filterInputAutoFocus: PropTypes.bool,
-        resetFilterOnHide: PropTypes.bool,
-        showFilterClear: PropTypes.bool,
-        panelClassName: PropTypes.string,
-        panelStyle: PropTypes.object,
-        dataKey: PropTypes.string,
-        inputId: PropTypes.string,
-        showClear: PropTypes.bool,
-        maxLength: PropTypes.number,
-        tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object,
-        ariaLabel: PropTypes.string,
-        ariaLabelledBy: PropTypes.string,
-        transitionOptions: PropTypes.object,
-        dropdownIcon: PropTypes.string,
-        showOnFocus: PropTypes.bool,
-        onChange: PropTypes.func,
-        onFocus: PropTypes.func,
-        onBlur: PropTypes.func,
-        onMouseDown: PropTypes.func,
-        onContextMenu: PropTypes.func,
-        onShow: PropTypes.func,
-        onHide: PropTypes.func,
-        onFilter: PropTypes.func
-    };
+    const getVisibleOptions = () => {
+        if (hasFilter && !isLazy) {
+            const filterValue = filterState.trim().toLocaleLowerCase(props.filterLocale)
+            const searchFields = props.filterBy ? props.filterBy.split(',') : [props.optionLabel || 'label'];
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            filter: '',
-            focused: false,
-            overlayVisible: false
-        };
-
-        this.onClick = this.onClick.bind(this);
-        this.onInputFocus = this.onInputFocus.bind(this);
-        this.onInputBlur = this.onInputBlur.bind(this);
-        this.onInputKeyDown = this.onInputKeyDown.bind(this);
-        this.onEditableInputChange = this.onEditableInputChange.bind(this);
-        this.onEditableInputFocus = this.onEditableInputFocus.bind(this);
-        this.onOptionClick = this.onOptionClick.bind(this);
-        this.onFilterInputChange = this.onFilterInputChange.bind(this);
-        this.onFilterInputKeyDown = this.onFilterInputKeyDown.bind(this);
-        this.onFilterClearIconClick = this.onFilterClearIconClick.bind(this);
-        this.onPanelClick = this.onPanelClick.bind(this);
-        this.onOverlayEnter = this.onOverlayEnter.bind(this);
-        this.onOverlayEntered = this.onOverlayEntered.bind(this);
-        this.onOverlayExit = this.onOverlayExit.bind(this);
-        this.onOverlayExited = this.onOverlayExited.bind(this);
-        this.resetFilter = this.resetFilter.bind(this);
-        this.clear = this.clear.bind(this);
-        this.hasFilter = this.hasFilter.bind(this);
-
-        this.getOptionLabel = this.getOptionLabel.bind(this);
-        this.getOptionRenderKey = this.getOptionRenderKey.bind(this);
-        this.isOptionDisabled = this.isOptionDisabled.bind(this);
-        this.getOptionGroupChildren = this.getOptionGroupChildren.bind(this);
-        this.getOptionGroupLabel = this.getOptionGroupLabel.bind(this);
-        this.getOptionGroupRenderKey = this.getOptionGroupRenderKey.bind(this);
-        this.getSelectedOptionIndex = this.getSelectedOptionIndex.bind(this);
-        this.isSelected = this.isSelected.bind(this);
-
-        this.overlayRef = createRef();
-        this.inputRef = createRef(this.props.inputRef);
+            if (props.optionGroupLabel) {
+                let filteredGroups = [];
+                for (let optgroup of props.options) {
+                    let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+                    if (filteredSubOptions && filteredSubOptions.length) {
+                        filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
+                    }
+                }
+                return filteredGroups;
+            }
+            else {
+                return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+            }
+        }
+        else {
+            return props.options;
+        }
     }
 
-    onClick(event) {
-        if (this.props.disabled) {
+    const isClearClicked = (event) => {
+        return DomHandler.hasClass(event.target, 'p-dropdown-clear-icon') || DomHandler.hasClass(event.target, 'p-dropdown-filter-clear-icon');
+    }
+
+    const onClick = (event) => {
+        if (props.disabled) {
             return;
         }
 
         if (DomHandler.hasClass(event.target, 'p-dropdown-clear-icon') || event.target.tagName === 'INPUT') {
             return;
         }
-        else if (!this.overlayRef.current || !(this.overlayRef.current && this.overlayRef.current.contains(event.target))) {
-            this.focusInput.focus();
-
-            if (this.state.overlayVisible) {
-                this.hideOverlay();
-            }
-            else {
-                this.showOverlay();
-            }
+        else if (!overlayRef.current || !(overlayRef.current && overlayRef.current.contains(event.target))) {
+            focusInputRef.current.focus();
+            overlayVisibleState ? hide() : show();
         }
     }
 
-    onInputFocus(event) {
-        event.persist();
-
-        if (this.props.showOnFocus && !this.state.overlayVisible) {
-            this.showOverlay();
+    const onInputFocus = (event) => {
+        if (props.showOnFocus && !overlayVisibleState) {
+            show();
         }
 
-        this.setState({ focused: true }, () => {
-            if (this.props.onFocus) {
-                this.props.onFocus(event);
-            }
-        });
+        setFocusedState(true);
+        props.onFocus && props.onFocus(event);
     }
 
-    onInputBlur(event) {
-        event.persist();
-        this.setState({ focused: false }, () => {
-            if (this.props.onBlur) {
-                this.props.onBlur(event);
-            }
-        });
+    const onInputBlur = (event) => {
+        setFocusedState(false);
+        props.onBlur && props.onBlur(event);
     }
 
-    onPanelClick(event) {
+    const onPanelClick = (event) => {
         OverlayService.emit('overlay-click', {
             originalEvent: event,
-            target: this.container
+            target: elementRef.current
         });
     }
 
-    onInputKeyDown(event) {
+    const onInputKeyDown = (event) => {
         switch (event.which) {
             //down
             case 40:
-                this.onDownKey(event);
+                onDownKey(event);
                 break;
 
             //up
             case 38:
-                this.onUpKey(event);
+                onUpKey(event);
                 break;
 
             //space
             case 32:
-                if (this.state.overlayVisible)
-                    this.hideOverlay();
-                else
-                    this.showOverlay();
+                overlayVisibleState ? hide() : show();
 
                 event.preventDefault();
                 break;
 
             //enter
             case 13:
-                this.hideOverlay();
+                hide();
                 event.preventDefault();
                 break;
 
             //escape and tab
             case 27:
             case 9:
-                this.hideOverlay();
+                hide();
                 break;
 
             default:
-                this.search(event);
+                search(event);
                 break;
         }
     }
 
-    onFilterInputKeyDown(event) {
+    const onFilterInputKeyDown = (event) => {
         switch (event.which) {
             //down
             case 40:
-                this.onDownKey(event);
+                onDownKey(event);
                 break;
 
             //up
             case 38:
-                this.onUpKey(event);
+                onUpKey(event);
                 break;
 
             //enter and escape
             case 13:
             case 27:
-                this.hideOverlay();
+                hide();
                 event.preventDefault();
                 break;
 
@@ -278,12 +155,12 @@ export class Dropdown extends Component {
         }
     }
 
-    onUpKey(event) {
-        let visibleOptions = this.getVisibleOptions();
+    const onUpKey = (event) => {
         if (visibleOptions) {
-            let prevOption = this.findPrevOption(this.getSelectedOptionIndex());
+            const prevOption = findPrevOption(getSelectedOptionIndex());
+
             if (prevOption) {
-                this.selectItem({
+                selectItem({
                     originalEvent: event,
                     option: prevOption
                 });
@@ -293,16 +170,16 @@ export class Dropdown extends Component {
         event.preventDefault();
     }
 
-    onDownKey(event) {
-        let visibleOptions = this.getVisibleOptions();
+    const onDownKey = (event) => {
         if (visibleOptions) {
-            if (!this.state.overlayVisible && event.altKey) {
-                this.showOverlay();
+            if (!overlayVisibleState && event.altKey) {
+                show();
             }
             else {
-                let nextOption = this.findNextOption(this.getSelectedOptionIndex());
+                const nextOption = findNextOption(getSelectedOptionIndex());
+
                 if (nextOption) {
-                    this.selectItem({
+                    selectItem({
                         originalEvent: event,
                         option: nextOption
                     });
@@ -313,127 +190,106 @@ export class Dropdown extends Component {
         event.preventDefault();
     }
 
-    findNextOption(index) {
-        let visibleOptions = this.getVisibleOptions();
-
-        if (this.props.optionGroupLabel) {
-            let groupIndex = index === -1 ? 0 : index.group;
-            let optionIndex = index === -1 ? -1 : index.option;
-            let option = this.findNextOptionInList(this.getOptionGroupChildren(visibleOptions[groupIndex]), optionIndex);
+    const findNextOption = (index) => {
+        if (props.optionGroupLabel) {
+            const groupIndex = index === -1 ? 0 : index.group;
+            const optionIndex = index === -1 ? -1 : index.option;
+            const option = findNextOptionInList(getOptionGroupChildren(visibleOptions[groupIndex]), optionIndex);
 
             if (option)
                 return option;
             else if ((groupIndex + 1) !== visibleOptions.length)
-                return this.findNextOption({ group: (groupIndex + 1), option: -1 });
+                return findNextOption({ group: (groupIndex + 1), option: -1 });
             else
                 return null;
         }
-        else {
-            return this.findNextOptionInList(visibleOptions, index);
-        }
+
+        return findNextOptionInList(visibleOptions, index);
     }
 
-    findNextOptionInList(list, index) {
-        let i = index + 1;
+    const findNextOptionInList = (list, index) => {
+        const i = index + 1;
         if (i === list.length) {
             return null;
         }
 
-        let option = list[i];
-        if (this.isOptionDisabled(option))
-            return this.findNextOptionInList(i);
-        else
-            return option;
+        const option = list[i];
+        return isOptionDisabled(option) ? findNextOptionInList(i) : option;
     }
 
-    findPrevOption(index) {
+    const findPrevOption = (index) => {
         if (index === -1) {
             return null;
         }
 
-        let visibleOptions = this.getVisibleOptions();
-
-        if (this.props.optionGroupLabel) {
-            let groupIndex = index.group;
-            let optionIndex = index.option;
-            let option = this.findPrevOptionInList(this.getOptionGroupChildren(visibleOptions[groupIndex]), optionIndex);
+        if (props.optionGroupLabel) {
+            const groupIndex = index.group;
+            const optionIndex = index.option;
+            const option = findPrevOptionInList(getOptionGroupChildren(visibleOptions[groupIndex]), optionIndex);
 
             if (option)
                 return option;
             else if (groupIndex > 0)
-                return this.findPrevOption({ group: (groupIndex - 1), option: this.getOptionGroupChildren(visibleOptions[groupIndex - 1]).length });
+                return findPrevOption({ group: (groupIndex - 1), option: getOptionGroupChildren(visibleOptions[groupIndex - 1]).length });
             else
                 return null;
         }
-        else {
-            return this.findPrevOptionInList(visibleOptions, index);
-        }
+
+        return findPrevOptionInList(visibleOptions, index);
     }
 
-    findPrevOptionInList(list, index) {
-        let i = index - 1;
+    const findPrevOptionInList = (list, index) => {
+        const i = index - 1;
         if (i < 0) {
             return null;
         }
 
-        let option = list[i];
-        if (this.isOptionDisabled(option))
-            return this.findPrevOption(i);
-        else
-            return option;
+        const option = list[i];
+        return isOptionDisabled(option) ? findPrevOption(i) : option;
     }
 
-    search(event) {
-        if (this.searchTimeout) {
-            clearTimeout(this.searchTimeout);
+    const search = (event) => {
+        if (searchTimeout.current) {
+            clearTimeout(searchTimeout.current);
         }
 
         const char = event.key;
-        this.previousSearchChar = this.currentSearchChar;
-        this.currentSearchChar = char;
 
-        if (this.previousSearchChar === this.currentSearchChar)
-            this.searchValue = this.currentSearchChar;
+        if (currentSearchChar.current === char)
+            searchValue.current = char;
         else
-            this.searchValue = this.searchValue ? this.searchValue + char : char;
+            searchValue.current = searchValue.current ? searchValue.current + char : char;
 
-        if (this.searchValue) {
-            let searchIndex = this.getSelectedOptionIndex();
-            let newOption = this.props.optionGroupLabel ? this.searchOptionInGroup(searchIndex) : this.searchOption(++searchIndex);
+        currentSearchChar.current = char;
+
+        if (searchValue.current) {
+            const searchIndex = getSelectedOptionIndex();
+            const newOption = props.optionGroupLabel ? searchOptionInGroup(searchIndex) : searchOption(++searchIndex);
             if (newOption) {
-                this.selectItem({
+                selectItem({
                     originalEvent: event,
                     option: newOption
                 });
-                this.selectedOptionUpdated = true;
             }
         }
 
-        this.searchTimeout = setTimeout(() => {
-            this.searchValue = null;
+        searchTimeout.current = setTimeout(() => {
+            searchValue.current = null;
         }, 250);
     }
 
-    searchOption(index) {
-        let option;
-
-        if (this.searchValue) {
-            let visibleOptions = this.getVisibleOptions();
-            option = this.searchOptionInRange(index, visibleOptions.length);
-
-            if (!option) {
-                option = this.searchOptionInRange(0, index);
-            }
+    const searchOption = (index) => {
+        if (searchValue.current) {
+            return searchOptionInRange(index, visibleOptions.length) || searchOptionInRange(0, index);
         }
 
-        return option;
+        return null;
     }
 
-    searchOptionInRange(start, end) {
-        let visibleOptions = this.getVisibleOptions();
+    const searchOptionInRange = (start, end) => {
         for (let i = start; i < end; i++) {
-            let opt = visibleOptions[i];
-            if (this.matchesSearchValue(opt)) {
+            const opt = visibleOptions[i];
+            if (matchesSearchValue(opt)) {
                 return opt;
             }
         }
@@ -441,23 +297,22 @@ export class Dropdown extends Component {
         return null;
     }
 
-    searchOptionInGroup(index) {
-        let searchIndex = index === -1 ? { group: 0, option: -1 } : index;
-        let visibleOptions = this.getVisibleOptions();
+    const searchOptionInGroup = (index) => {
+        const searchIndex = index === -1 ? { group: 0, option: -1 } : index;
 
         for (let i = searchIndex.group; i < visibleOptions.length; i++) {
-            let groupOptions = this.getOptionGroupChildren(visibleOptions[i]);
+            let groupOptions = getOptionGroupChildren(visibleOptions[i]);
             for (let j = (searchIndex.group === i ? searchIndex.option + 1 : 0); j < groupOptions.length; j++) {
-                if (this.matchesSearchValue(groupOptions[j])) {
+                if (matchesSearchValue(groupOptions[j])) {
                     return groupOptions[j];
                 }
             }
         }
 
         for (let i = 0; i <= searchIndex.group; i++) {
-            let groupOptions = this.getOptionGroupChildren(visibleOptions[i]);
+            let groupOptions = getOptionGroupChildren(visibleOptions[i]);
             for (let j = 0; j < (searchIndex.group === i ? searchIndex.option : groupOptions.length); j++) {
-                if (this.matchesSearchValue(groupOptions[j])) {
+                if (matchesSearchValue(groupOptions[j])) {
                     return groupOptions[j];
                 }
             }
@@ -466,109 +321,99 @@ export class Dropdown extends Component {
         return null;
     }
 
-    matchesSearchValue(option) {
-        let label = this.getOptionLabel(option).toLocaleLowerCase(this.props.filterLocale);
-        return label.startsWith(this.searchValue.toLocaleLowerCase(this.props.filterLocale));
+    const matchesSearchValue = (option) => {
+        const label = getOptionLabel(option).toLocaleLowerCase(props.filterLocale);
+        return label.startsWith(searchValue.current.toLocaleLowerCase(props.filterLocale));
     }
 
-    onEditableInputChange(event) {
-        if (this.props.onChange) {
-            this.props.onChange({
+    const onEditableInputChange = (event) => {
+        if (props.onChange) {
+            props.onChange({
                 originalEvent: event.originalEvent,
                 value: event.target.value,
                 stopPropagation: () => { },
                 preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
+                    name: props.name,
+                    id: props.id,
                     value: event.target.value,
                 }
             });
         }
     }
 
-    onEditableInputFocus(event) {
-        event.persist();
-        this.setState({ focused: true }, () => {
-            this.hideOverlay();
-
-            if (this.props.onFocus) {
-                this.props.onFocus(event);
-            }
-        });
+    const onEditableInputFocus = (event) => {
+        setFocusedState(true);
+        hide();
+        props.onFocus && props.onFocus(event);
     }
 
-    onOptionClick(event) {
+    const onOptionClick = (event) => {
         const option = event.option;
 
         if (!option.disabled) {
-            this.selectItem(event);
-            this.focusInput.focus();
+            selectItem(event);
+            focusInputRef.current.focus();
         }
 
-        this.hideOverlay();
+        hide();
     }
 
-    onFilterInputChange(event) {
+    const onFilterInputChange = (event) => {
         const filter = event.target.value;
 
-        this.setState({ filter }, () => {
-            if (this.props.onFilter) {
-                this.props.onFilter({
-                    originalEvent: event,
-                    filter
-                });
-            }
-        });
+        setFilterState(filter);
+
+        if (props.onFilter) {
+            props.onFilter({
+                originalEvent: event,
+                filter
+            });
+        }
     }
 
-    onFilterClearIconClick(callback) {
-        this.resetFilter(callback);
+    const onFilterClearIconClick = (callback) => {
+        resetFilter(callback);
     }
 
-    resetFilter(callback) {
-        const filter = '';
-
-        this.setState({ filter }, () => {
-            this.props.onFilter && this.props.onFilter({ filter });
-            callback && callback();
-        });
+    const resetFilter = (callback) => {
+        setFilterState('');
+        props.onFilter && props.onFilter({ filter: '' });
+        callback && callback();
     }
 
-    clear(event) {
-        if (this.props.onChange) {
-            this.props.onChange({
+    const clear = (event) => {
+        if (props.onChange) {
+            props.onChange({
                 originalEvent: event,
                 value: undefined,
                 stopPropagation: () => { },
                 preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
+                    name: props.name,
+                    id: props.id,
                     value: undefined
                 }
             });
         }
 
-        this.updateEditableLabel();
+        updateEditableLabel();
     }
 
-    selectItem(event) {
-        let currentSelectedOption = this.getSelectedOption();
+    const selectItem = (event) => {
+        if (selectedOption !== event.option) {
+            updateEditableLabel(event.option);
+            const optionValue = getOptionValue(event.option);
 
-        if (currentSelectedOption !== event.option) {
-            this.updateEditableLabel(event.option);
-            const optionValue = this.getOptionValue(event.option);
-
-            if (this.props.onChange) {
-                this.props.onChange({
+            if (props.onChange) {
+                props.onChange({
                     originalEvent: event.originalEvent,
                     value: optionValue,
                     stopPropagation: () => { },
                     preventDefault: () => { },
                     target: {
-                        name: this.props.name,
-                        id: this.props.id,
+                        name: props.name,
+                        id: props.id,
                         value: optionValue
                     }
                 });
@@ -576,438 +421,404 @@ export class Dropdown extends Component {
         }
     }
 
-    getSelectedOption() {
-        let index = this.getSelectedOptionIndex();
-        let visibleOptions = this.getVisibleOptions()
-
-        return index !== -1 ? (this.props.optionGroupLabel ? this.getOptionGroupChildren(visibleOptions[index.group])[index.option] : visibleOptions[index]) : null;
-    }
-
-    getSelectedOptionIndex() {
-        let visibleOptions = this.getVisibleOptions();
-
-        if (this.props.value != null && visibleOptions) {
-            if (this.props.optionGroupLabel) {
+    const getSelectedOptionIndex = () => {
+        if (props.value != null && visibleOptions) {
+            if (props.optionGroupLabel) {
                 for (let i = 0; i < visibleOptions.length; i++) {
-                    let selectedOptionIndex = this.findOptionIndexInList(this.props.value, this.getOptionGroupChildren(visibleOptions[i]));
+                    let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(visibleOptions[i]));
                     if (selectedOptionIndex !== -1) {
                         return { group: i, option: selectedOptionIndex };
                     }
                 }
             }
             else {
-                return this.findOptionIndexInList(this.props.value, visibleOptions);
+                return findOptionIndexInList(props.value, visibleOptions);
             }
         }
 
         return -1;
     }
 
-    findOptionIndexInList(value, list) {
-        const key = this.equalityKey();
-        for (let i = 0; i < list.length; i++) {
-            if ((ObjectUtils.equals(value, this.getOptionValue(list[i]), key))) {
-                return i;
-            }
-        }
-
-        return -1;
+    const equalityKey = () => {
+        return props.optionValue ? null : props.dataKey;
     }
 
-    isSelected(option) {
-        return ObjectUtils.equals(this.props.value, this.getOptionValue(option), this.equalityKey());
+    const findOptionIndexInList = (value, list) => {
+        const key = equalityKey();
+        return list.findIndex(item => ObjectUtils.equals(value, getOptionValue(item), key));
     }
 
-    equalityKey() {
-        return this.props.optionValue ? null : this.props.dataKey;
+    const isSelected = (option) => {
+        return ObjectUtils.equals(props.value, getOptionValue(option), equalityKey());
     }
 
-    showOverlay() {
-        this.setState({ overlayVisible: true });
+    const show = () => {
+        setOverlayVisibleState(true);
     }
 
-    hideOverlay() {
-        this.setState({ overlayVisible: false });
+    const hide = () => {
+        setOverlayVisibleState(false);
     }
 
-    onOverlayEnter(callback) {
-        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
-        this.alignOverlay();
+    const onOverlayEnter = (callback) => {
+        ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+        alignOverlay();
         callback && callback();
     }
 
-    onOverlayEntered(callback) {
+    const onOverlayEntered = (callback) => {
         callback && callback();
+        bindOverlayListener();
 
-        this.bindDocumentClickListener();
-        this.bindScrollListener();
-        this.bindResizeListener();
-
-        this.props.onShow && this.props.onShow();
+        props.onShow && props.onShow();
     }
 
-    onOverlayExit() {
-        this.unbindDocumentClickListener();
-        this.unbindScrollListener();
-        this.unbindResizeListener();
+    const onOverlayExit = () => {
+        unbindOverlayListener();
     }
 
-    onOverlayExited() {
-        if (this.props.filter && this.props.resetFilterOnHide) {
-            this.resetFilter();
+    const onOverlayExited = () => {
+        if (props.filter && props.resetFilterOnHide) {
+            resetFilter();
         }
 
-        ZIndexUtils.clear(this.overlayRef.current);
+        ZIndexUtils.clear(overlayRef.current);
 
-        this.props.onHide && this.props.onHide();
+        props.onHide && props.onHide();
     }
 
-    alignOverlay() {
-        DomHandler.alignOverlay(this.overlayRef.current, this.input.parentElement, this.props.appendTo || PrimeReact.appendTo);
+    const alignOverlay = () => {
+        DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
     }
 
-    scrollInView() {
-        let highlightItem = DomHandler.findSingle(this.overlayRef.current, 'li.p-highlight');
+    const scrollInView = () => {
+        const highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
         if (highlightItem && highlightItem.scrollIntoView) {
             highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });
         }
     }
 
-    bindDocumentClickListener() {
-        if (!this.documentClickListener) {
-            this.documentClickListener = (event) => {
-                if (this.state.overlayVisible && this.isOutsideClicked(event)) {
-                    this.hideOverlay();
-                }
-            };
-
-            document.addEventListener('click', this.documentClickListener);
+    const updateEditableLabel = (option) => {
+        if (inputRef.current) {
+            inputRef.current.value = (option ? getOptionLabel(option) : props.value || '');
         }
     }
 
-    unbindDocumentClickListener() {
-        if (this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-            this.documentClickListener = null;
-        }
+    const getOptionLabel = (option) => {
+        return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : (option && option['label'] !== undefined ? option['label'] : option);
     }
 
-    bindScrollListener() {
-        if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
-                if (this.state.overlayVisible) {
-                    this.hideOverlay();
-                }
-            });
-        }
-
-        this.scrollHandler.bindScrollListener();
+    const getOptionValue = (option) => {
+        return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : (option && option['value'] !== undefined ? option['value'] : option);
     }
 
-    unbindScrollListener() {
-        if (this.scrollHandler) {
-            this.scrollHandler.unbindScrollListener();
-        }
+    const getOptionRenderKey = (option) => {
+        return props.dataKey ? ObjectUtils.resolveFieldData(option, props.dataKey) : getOptionLabel(option);
     }
 
-    bindResizeListener() {
-        if (!this.resizeListener) {
-            this.resizeListener = () => {
-                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
-                    this.hideOverlay();
-                }
-            };
-            window.addEventListener('resize', this.resizeListener);
-        }
-    }
-
-    unbindResizeListener() {
-        if (this.resizeListener) {
-            window.removeEventListener('resize', this.resizeListener);
-            this.resizeListener = null;
-        }
-    }
-
-    isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.isClearClicked(event) || this.container.contains(event.target)
-            || (this.overlayRef && this.overlayRef.current.contains(event.target)));
-    }
-
-    isClearClicked(event) {
-        return DomHandler.hasClass(event.target, 'p-dropdown-clear-icon') || DomHandler.hasClass(event.target, 'p-dropdown-filter-clear-icon');
-    }
-
-    updateEditableLabel(option) {
-        if (this.input) {
-            this.input.value = (option ? this.getOptionLabel(option) : this.props.value || '');
-        }
-    }
-
-    hasFilter() {
-        return this.state.filter && this.state.filter.trim().length > 0;
-    }
-
-    getOptionLabel(option) {
-        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : (option && option['label'] !== undefined ? option['label'] : option);
-    }
-
-    getOptionValue(option) {
-        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option && option['value'] !== undefined ? option['value'] : option);
-    }
-
-    getOptionRenderKey(option) {
-        return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : this.getOptionLabel(option);
-    }
-
-    isOptionDisabled(option) {
-        if (this.props.optionDisabled) {
-            return ObjectUtils.isFunction(this.props.optionDisabled) ? this.props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, this.props.optionDisabled);
+    const isOptionDisabled = (option) => {
+        if (props.optionDisabled) {
+            return ObjectUtils.isFunction(props.optionDisabled) ? props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, props.optionDisabled);
         }
 
         return (option && option['disabled'] !== undefined ? option['disabled'] : false);
     }
 
-    getOptionGroupRenderKey(optionGroup) {
-        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    const getOptionGroupRenderKey = (optionGroup) => {
+        return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
     }
 
-    getOptionGroupLabel(optionGroup) {
-        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    const getOptionGroupLabel = (optionGroup) => {
+        return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
     }
 
-    getOptionGroupChildren(optionGroup) {
-        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupChildren);
+    const getOptionGroupChildren = (optionGroup) => {
+        return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupChildren);
     }
 
-    checkValidity() {
-        if (this.inputRef.current) {
-            return this.inputRef.current.checkValidity();
-        }
-        return false;
-    }
-
-    isLazy() {
-        return this.props.virtualScrollerOptions && this.props.virtualScrollerOptions.lazy;
-    }
-
-    getVisibleOptions() {
-        if (this.hasFilter() && !this.isLazy()) {
-            let filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale)
-            let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
-
-            if (this.props.optionGroupLabel) {
-                let filteredGroups = [];
-                for (let optgroup of this.props.options) {
-                    let filteredSubOptions = FilterService.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
-                    if (filteredSubOptions && filteredSubOptions.length) {
-                        filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
-                    }
-                }
-                return filteredGroups;
-            }
-            else {
-                return FilterService.filter(this.props.options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
-            }
-        }
-        else {
-            return this.props.options;
+    const updateInputField = () => {
+        if (props.editable && inputRef.current) {
+            const label = selectedOption ? getOptionLabel(selectedOption) : null;
+            const value = label || props.value || '';
+            inputRef.current.value = value;
         }
     }
 
-    updateInputField() {
-        if (this.props.editable && this.input) {
-            let selectedOption = this.getSelectedOption();
-            const label = selectedOption ? this.getOptionLabel(selectedOption) : null;
-            const value = label || this.props.value || '';
-            this.input.value = value;
-        }
+    const getSelectedOption = () => {
+        const index = getSelectedOptionIndex();
+
+        return index !== -1 ? (props.optionGroupLabel ? getOptionGroupChildren(visibleOptions[index.group])[index.option] : visibleOptions[index]) : null;
     }
 
-    updateInputRef() {
-        let ref = this.props.inputRef;
+    useEffect(() => {
+        ObjectUtils.combinedRefs(inputRef, props.inputRef);
+    }, [inputRef, props.inputRef]);
 
-        if (ref) {
-            if (typeof ref === 'function') {
-                ref(this.inputRef.current);
-            }
-            else {
-                ref.current = this.inputRef.current;
-            }
+    useEffect(() => {
+        if (tooltipRef.current) {
+            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
         }
-    }
-
-    componentDidMount() {
-        this.updateInputRef();
-
-        if (this.props.autoFocus && this.focusInput) {
-            this.focusInput.focus();
+        else if (props.tooltip) {
+            tooltipRef.current = tip({
+                target: elementRef.current,
+                content: props.tooltip,
+                options: props.tooltipOptions
+            });
         }
+    }, [props.tooltip, props.tooltipOptions]);
 
-        if (this.props.tooltip) {
-            this.renderTooltip();
+    useMountEffect(() => {
+        if (props.autoFocus && focusInputRef.current) {
+            focusInputRef.current.focus();
         }
+    });
 
-        this.updateInputField();
-        if (this.inputRef.current) {
-            this.inputRef.current.selectedIndex = 1;
+    useUpdateEffect(() => {
+        if (overlayVisibleState && props.value) {
+            scrollInView();
         }
-    }
+    }, [overlayVisibleState, props.value]);
 
-    componentWillUnmount() {
-        this.unbindDocumentClickListener();
-        this.unbindResizeListener();
-        if (this.scrollHandler) {
-            this.scrollHandler.destroy();
-            this.scrollHandler = null;
+    useUpdateEffect(() => {
+        if (overlayVisibleState && props.filter) {
+            alignOverlay();
         }
+    }, [overlayVisibleState, props.filter]);
 
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
+    useUpdateEffect(() => {
+        if (filterState && (!props.options || props.options.length === 0)) {
+            setFilterState('');
         }
 
-        if (this.hideTimeout) {
-            clearTimeout(this.hideTimeout);
-            this.hideTimeout = null;
+        updateInputField();
+        if (inputRef.current) {
+            inputRef.current.selectedIndex = 1;
         }
+    });
 
-        ZIndexUtils.clear(this.overlayRef.current);
-    }
+    useUnmountEffect(() => {
+        ZIndexUtils.clear(overlayRef.current);
 
-    componentDidUpdate(prevProps) {
-        if (this.state.overlayVisible) {
-            if (this.props.filter) {
-                this.alignOverlay();
-            }
-
-            if (prevProps.value !== this.props.value) {
-                this.scrollInView();
-            }
+        if (tooltipRef.current) {
+            tooltipRef.current.destroy();
+            tooltipRef.current = null;
         }
+    });
 
-        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
-            if (this.tooltip)
-                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
-            else
-                this.renderTooltip();
-        }
-
-        if (this.state.filter && (!this.props.options || this.props.options.length === 0)) {
-            this.setState({ filter: '' });
-        }
-
-        this.updateInputField();
-        if (this.inputRef.current) {
-            this.inputRef.current.selectedIndex = 1;
-        }
-    }
-
-    renderHiddenSelect(selectedOption) {
-        let placeHolderOption = <option value="">{this.props.placeholder}</option>;
-        let option = selectedOption ? <option value={selectedOption.value}>{this.getOptionLabel(selectedOption)}</option> : null;
+    const createHiddenSelect = () => {
+        const placeHolderOption = <option value="">{props.placeholder}</option>;
+        const option = selectedOption ? <option value={selectedOption.value}>{getOptionLabel(selectedOption)}</option> : null;
 
         return (
             <div className="p-hidden-accessible p-dropdown-hidden-select">
-                <select ref={this.inputRef} required={this.props.required} name={this.props.name} tabIndex={-1} aria-hidden="true">
+                <select ref={inputRef} required={props.required} name={props.name} tabIndex={-1} aria-hidden="true">
                     {placeHolderOption}
                     {option}
                 </select>
             </div>
-        );
+        )
     }
 
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.container,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
+    const createKeyboardHelper = () => {
+        return (
+            <div className="p-hidden-accessible">
+                <input ref={focusInputRef} id={props.inputId} type="text" readOnly aria-haspopup="listbox"
+                    onFocus={onInputFocus} onBlur={onInputBlur} onKeyDown={onInputKeyDown}
+                    disabled={props.disabled} tabIndex={props.tabIndex} aria-label={props.ariaLabel} aria-labelledby={props.ariaLabelledBy} />
+            </div>
+        )
     }
 
-    renderKeyboardHelper() {
-        return <div className="p-hidden-accessible">
-            <input ref={(el) => this.focusInput = el} id={this.props.inputId} type="text" readOnly aria-haspopup="listbox"
-                onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
-                disabled={this.props.disabled} tabIndex={this.props.tabIndex} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy} />
-        </div>;
-    }
+    const createLabel = () => {
+        const label = ObjectUtils.isNotEmpty(selectedOption) ? getOptionLabel(selectedOption) : null;
 
-    renderLabel(selectedOption) {
-        const label = ObjectUtils.isNotEmpty(selectedOption) ? this.getOptionLabel(selectedOption) : null;
+        if (props.editable) {
+            const value = label || props.value || '';
 
-        if (this.props.editable) {
-            let value = label || this.props.value || '';
-
-            return <input ref={(el) => this.input = el} type="text" defaultValue={value} className="p-dropdown-label p-inputtext" disabled={this.props.disabled}
-                placeholder={this.props.placeholder} maxLength={this.props.maxLength} onInput={this.onEditableInputChange}
-                onFocus={this.onEditableInputFocus} onBlur={this.onInputBlur} aria-label={this.props.ariaLabel} aria-labelledby={this.props.ariaLabelledBy}
-                aria-haspopup="listbox" />;
+            return (
+                <input ref={inputRef} type="text" defaultValue={value} className="p-dropdown-label p-inputtext" disabled={props.disabled}
+                    placeholder={props.placeholder} maxLength={props.maxLength} onInput={onEditableInputChange}
+                    onFocus={onEditableInputFocus} onBlur={onInputBlur} aria-label={props.ariaLabel} aria-labelledby={props.ariaLabelledBy}
+                    aria-haspopup="listbox" />
+            )
         }
         else {
-            let className = classNames('p-dropdown-label p-inputtext', {
-                'p-placeholder': label === null && this.props.placeholder,
-                'p-dropdown-label-empty': label === null && !this.props.placeholder
+            const className = classNames('p-dropdown-label p-inputtext', {
+                'p-placeholder': label === null && props.placeholder,
+                'p-dropdown-label-empty': label === null && !props.placeholder
             });
+            const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, selectedOption, props) : (label || props.placeholder || 'empty');
 
-            let content = this.props.valueTemplate ? ObjectUtils.getJSXElement(this.props.valueTemplate, selectedOption, this.props) : (label || this.props.placeholder || 'empty');
-
-            return <span ref={(el) => this.input = el} className={className}>{content}</span>;
+            return <span ref={inputRef} className={className}>{content}</span>
         }
     }
 
-    renderClearIcon() {
-        if (this.props.value != null && this.props.showClear && !this.props.disabled) {
-            return (
-                <i className="p-dropdown-clear-icon pi pi-times" onClick={this.clear}></i>
-            );
+    const createClearIcon = () => {
+        if (props.value != null && props.showClear && !props.disabled) {
+            return <i className="p-dropdown-clear-icon pi pi-times" onClick={clear}></i>
         }
 
         return null;
     }
 
-    renderDropdownIcon() {
-        const iconClassName = classNames('p-dropdown-trigger-icon p-clickable', this.props.dropdownIcon);
+    const createDropdownIcon = () => {
+        const iconClassName = classNames('p-dropdown-trigger-icon p-clickable', props.dropdownIcon);
 
         return (
-            <div ref={(el) => this.trigger = el} className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={this.state.overlayVisible}>
+            <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState}>
                 <span className={iconClassName}></span>
             </div>
-        );
+        )
     }
 
-    render() {
-        let className = classNames('p-dropdown p-component p-inputwrapper', this.props.className, {
-            'p-disabled': this.props.disabled,
-            'p-focus': this.state.focused,
-            'p-dropdown-clearable': this.props.showClear && !this.props.disabled,
-            'p-inputwrapper-filled': this.props.value,
-            'p-inputwrapper-focus': this.state.focused || this.state.overlayVisible
-        });
-        let visibleOptions = this.getVisibleOptions();
-        let selectedOption = this.getSelectedOption();
-        let appendTo = this.props.appendTo || PrimeReact.appendTo;
+    const visibleOptions = getVisibleOptions();
+    const selectedOption = getSelectedOption();
 
-        let hiddenSelect = this.renderHiddenSelect(selectedOption);
-        let keyboardHelper = this.renderKeyboardHelper();
-        let labelElement = this.renderLabel(selectedOption);
-        let dropdownIcon = this.renderDropdownIcon();
-        let clearIcon = this.renderClearIcon();
+    const className = classNames('p-dropdown p-component p-inputwrapper', {
+        'p-disabled': props.disabled,
+        'p-focus': focusedState,
+        'p-dropdown-clearable': props.showClear && !props.disabled,
+        'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
+        'p-inputwrapper-focus': focusedState || overlayVisibleState
+    }, props.className);
+    const hiddenSelect = createHiddenSelect();
+    const keyboardHelper = createKeyboardHelper();
+    const labelElement = createLabel();
+    const dropdownIcon = createDropdownIcon();
+    const clearIcon = createClearIcon();
 
-        return (
-            <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}
-                onMouseDown={this.props.onMouseDown} onContextMenu={this.props.onContextMenu}>
-                {keyboardHelper}
-                {hiddenSelect}
-                {labelElement}
-                {clearIcon}
-                {dropdownIcon}
-                <DropdownPanel ref={this.overlayRef} visibleOptions={visibleOptions} {...this.props} appendTo={appendTo} onClick={this.onPanelClick} onOptionClick={this.onOptionClick}
-                    filterValue={this.state.filter} hasFilter={this.hasFilter} onFilterClearIconClick={this.onFilterClearIconClick} onFilterInputKeyDown={this.onFilterInputKeyDown} onFilterInputChange={this.onFilterInputChange}
-                    getOptionLabel={this.getOptionLabel} getOptionRenderKey={this.getOptionRenderKey} isOptionDisabled={this.isOptionDisabled}
-                    getOptionGroupChildren={this.getOptionGroupChildren} getOptionGroupLabel={this.getOptionGroupLabel} getOptionGroupRenderKey={this.getOptionGroupRenderKey}
-                    isSelected={this.isSelected} getSelectedOptionIndex={this.getSelectedOptionIndex}
-                    in={this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited} />
-            </div>
-        );
-    }
+    return (
+        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}
+            onMouseDown={props.onMouseDown} onContextMenu={props.onContextMenu}>
+            {keyboardHelper}
+            {hiddenSelect}
+            {labelElement}
+            {clearIcon}
+            {dropdownIcon}
+            <DropdownPanel ref={overlayRef} visibleOptions={visibleOptions} {...props} appendTo={appendTo} onClick={onPanelClick} onOptionClick={onOptionClick}
+                filterValue={filterState} hasFilter={hasFilter} onFilterClearIconClick={onFilterClearIconClick} onFilterInputKeyDown={onFilterInputKeyDown} onFilterInputChange={onFilterInputChange}
+                getOptionLabel={getOptionLabel} getOptionRenderKey={getOptionRenderKey} isOptionDisabled={isOptionDisabled}
+                getOptionGroupChildren={getOptionGroupChildren} getOptionGroupLabel={getOptionGroupLabel} getOptionGroupRenderKey={getOptionGroupRenderKey}
+                isSelected={isSelected} getSelectedOptionIndex={getSelectedOptionIndex}
+                in={overlayVisibleState} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited} />
+        </div>
+    )
+}));
+
+Dropdown.defaultProps = {
+    __TYPE: 'Dropdown',
+    id: null,
+    inputRef: null,
+    name: null,
+    value: null,
+    options: null,
+    optionLabel: null,
+    optionValue: null,
+    optionDisabled: null,
+    optionGroupLabel: null,
+    optionGroupChildren: null,
+    optionGroupTemplate: null,
+    valueTemplate: null,
+    itemTemplate: null,
+    style: null,
+    className: null,
+    virtualScrollerOptions: null,
+    scrollHeight: '200px',
+    filter: false,
+    filterBy: null,
+    filterMatchMode: 'contains',
+    filterPlaceholder: null,
+    filterLocale: undefined,
+    emptyMessage: null,
+    emptyFilterMessage: null,
+    editable: false,
+    placeholder: null,
+    required: false,
+    disabled: false,
+    appendTo: null,
+    tabIndex: null,
+    autoFocus: false,
+    filterInputAutoFocus: true,
+    resetFilterOnHide: false,
+    showFilterClear: false,
+    panelClassName: null,
+    panelStyle: null,
+    dataKey: null,
+    inputId: null,
+    showClear: false,
+    maxLength: null,
+    tooltip: null,
+    tooltipOptions: null,
+    ariaLabel: null,
+    ariaLabelledBy: null,
+    transitionOptions: null,
+    dropdownIcon: 'pi pi-chevron-down',
+    showOnFocus: false,
+    onChange: null,
+    onFocus: null,
+    onBlur: null,
+    onMouseDown: null,
+    onContextMenu: null,
+    onShow: null,
+    onHide: null,
+    onFilter: null
+}
+
+Dropdown.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    id: PropTypes.string,
+    inputRef: PropTypes.any,
+    name: PropTypes.string,
+    value: PropTypes.any,
+    options: PropTypes.array,
+    optionLabel: PropTypes.string,
+    optionValue: PropTypes.string,
+    optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    optionGroupLabel: PropTypes.string,
+    optionGroupChildren: PropTypes.string,
+    optionGroupTemplate: PropTypes.any,
+    valueTemplate: PropTypes.any,
+    itemTemplate: PropTypes.any,
+    style: PropTypes.object,
+    className: PropTypes.string,
+    virtualScrollerOptions: PropTypes.object,
+    scrollHeight: PropTypes.string,
+    filter: PropTypes.bool,
+    filterBy: PropTypes.string,
+    filterMatchMode: PropTypes.string,
+    filterPlaceholder: PropTypes.string,
+    filterLocale: PropTypes.string,
+    emptyMessage: PropTypes.any,
+    emptyFilterMessage: PropTypes.any,
+    editable: PropTypes.bool,
+    placeholder: PropTypes.string,
+    required: PropTypes.bool,
+    disabled: PropTypes.bool,
+    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    tabIndex: PropTypes.number,
+    autoFocus: PropTypes.bool,
+    filterInputAutoFocus: PropTypes.bool,
+    resetFilterOnHide: PropTypes.bool,
+    showFilterClear: PropTypes.bool,
+    panelClassName: PropTypes.string,
+    panelStyle: PropTypes.object,
+    dataKey: PropTypes.string,
+    inputId: PropTypes.string,
+    showClear: PropTypes.bool,
+    maxLength: PropTypes.number,
+    tooltip: PropTypes.string,
+    tooltipOptions: PropTypes.object,
+    ariaLabel: PropTypes.string,
+    ariaLabelledBy: PropTypes.string,
+    transitionOptions: PropTypes.object,
+    dropdownIcon: PropTypes.string,
+    showOnFocus: PropTypes.bool,
+    onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onMouseDown: PropTypes.func,
+    onContextMenu: PropTypes.func,
+    onShow: PropTypes.func,
+    onHide: PropTypes.func,
+    onFilter: PropTypes.func
 }

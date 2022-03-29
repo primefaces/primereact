@@ -1,117 +1,111 @@
-import React, { Component } from 'react';
-import { ObjectUtils, classNames } from '../utils/Utils';
-import { Ripple } from '../ripple/Ripple';
+import React, { forwardRef, memo } from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
+import { ObjectUtils, classNames } from '../utils/Utils';
 
-class AutoCompletePanelComponent extends Component {
+export const AutoCompletePanel = memo(forwardRef((props, ref) => {
 
-    getOptionGroupRenderKey(optionGroup) {
-        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    const getOptionGroupRenderKey = (optionGroup) => {
+        return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
     }
 
-    renderGroupChildren(optionGroup, i) {
-        const groupChildren = this.props.getOptionGroupChildren(optionGroup);
+    const createGroupChildren = (optionGroup, i) => {
+        const groupChildren = props.getOptionGroupChildren(optionGroup);
         return (
             groupChildren.map((item, j) => {
-                let itemContent = this.props.itemTemplate ? ObjectUtils.getJSXElement(this.props.itemTemplate, item, j) : this.props.field ? ObjectUtils.resolveFieldData(item, this.props.field) : item;
+                const key = i + '_' + j;
+                const selected = props.selectedItem === item;
+                const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, item, j) : props.field ? ObjectUtils.resolveFieldData(item, props.field) : item;
 
                 return (
-                    <li key={j + '_item'} role="option" aria-selected={this.props.ariaSelected === item} className="p-autocomplete-item" onClick={(e) => this.props.onItemClick(e, item)} data-group={i} data-index={j}>
-                        {itemContent}
+                    <li key={key} role="option" aria-selected={selected} className="p-autocomplete-item" onClick={(e) => props.onItemClick(e, item)} data-group={i} data-index={j}>
+                        {content}
                         <Ripple />
                     </li>
-                );
+                )
             })
         )
     }
 
-    renderItem(suggestion, index) {
-        if (this.props.optionGroupLabel) {
-            const groupContent = this.props.optionGroupTemplate ? ObjectUtils.getJSXElement(this.props.optionGroupTemplate, suggestion, index) : this.props.getOptionGroupLabel(suggestion);
-            const groupChildrenContent = this.renderGroupChildren(suggestion, index);
-            const key = index + '_' + this.getOptionGroupRenderKey(suggestion);
+    const createItem = (suggestion, index) => {
+        if (props.optionGroupLabel) {
+            const content = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, suggestion, index) : props.getOptionGroupLabel(suggestion);
+            const childrenContent = createGroupChildren(suggestion, index);
+            const key = index + '_' + getOptionGroupRenderKey(suggestion);
 
             return (
                 <React.Fragment key={key}>
                     <li className="p-autocomplete-item-group">
-                        {groupContent}
+                        {content}
                     </li>
-                    {groupChildrenContent}
+                    {childrenContent}
                 </React.Fragment>
             )
         }
         else {
-            let itemContent = this.props.itemTemplate ? ObjectUtils.getJSXElement(this.props.itemTemplate, suggestion, index) : this.props.field ? ObjectUtils.resolveFieldData(suggestion, this.props.field) : suggestion;
+            const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, index) : props.field ? ObjectUtils.resolveFieldData(suggestion, props.field) : suggestion;
 
             return (
-                <li key={index + '_item'} role="option" aria-selected={this.props.ariaSelected === suggestion} className="p-autocomplete-item" onClick={(e) => this.props.onItemClick(e, suggestion)}>
-                    {itemContent}
+                <li key={index} role="option" aria-selected={props.selectedItem === suggestion} className="p-autocomplete-item" onClick={(e) => props.onItemClick(e, suggestion)}>
+                    {content}
                     <Ripple />
                 </li>
-            );
+            )
         }
     }
 
-    renderItems() {
-        if (this.props.suggestions) {
-            return this.props.suggestions.map((suggestion, index) => this.renderItem(suggestion, index));
-        }
-
-        return null;
+    const createItems = () => {
+        return props.suggestions ? props.suggestions.map(createItem) : null;
     }
 
-    renderContent() {
-        if (this.props.virtualScrollerOptions) {
-            const virtualScrollerProps = { ...this.props.virtualScrollerOptions, ...{
-                style: {...this.props.virtualScrollerOptions.style, ...{ height: this.props.scrollHeight }},
-                items: this.props.suggestions,
-                itemTemplate: (item, options) => item && this.renderItem(item, options.index),
+    const createContent = () => {
+        if (props.virtualScrollerOptions) {
+            const virtualScrollerProps = { ...props.virtualScrollerOptions, ...{
+                style: { ...props.virtualScrollerOptions.style, ...{ height: props.scrollHeight }},
+                items: props.suggestions,
+                itemTemplate: (item, options) => item && createItem(item, options.index),
                 contentTemplate: (options) => {
                     const className = classNames('p-autocomplete-items', options.className);
 
                     return (
-                        <ul ref={options.contentRef} className={className} role="listbox" id={this.props.listId}>
+                        <ul ref={options.contentRef} className={className} role="listbox" id={props.listId}>
                             {options.children}
                         </ul>
-                    );
+                    )
                 }
             }};
 
-            return <VirtualScroller ref={this.props.virtualScrollerRef} {...virtualScrollerProps} />;
+            return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} />;
         }
         else {
-            const items = this.renderItems();
+            const items = createItems();
 
             return (
-                <ul className="p-autocomplete-items" role="listbox" id={this.props.listId}>
+                <ul className="p-autocomplete-items" role="listbox" id={props.listId}>
                     {items}
                 </ul>
-            );
+            )
         }
     }
 
-    renderElement() {
-        const panelClassName = classNames('p-autocomplete-panel p-component', this.props.panelClassName);
-        const panelStyle = { maxHeight: this.props.scrollHeight, ...this.props.panelStyle };
-        const content = this.renderContent();
+    const createElement = () => {
+        const className = classNames('p-autocomplete-panel p-component', props.panelClassName);
+        const style = { maxHeight: props.scrollHeight, ...(props.panelStyle || {}) };
+        const content = createContent();
 
         return (
-            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
-                unmountOnExit onEnter={this.props.onEnter} onEntering={this.props.onEntering} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
-                <div ref={this.props.forwardRef} className={panelClassName} style={panelStyle} onClick={this.props.onClick}>
+            <CSSTransition nodeRef={ref} classNames="p-connected-overlay" in={props.in} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
+                unmountOnExit onEnter={props.onEnter} onEntering={props.onEntering} onEntered={props.onEntered} onExit={props.onExit} onExited={props.onExited}>
+                <div ref={ref} className={className} style={style} onClick={props.onClick}>
                     {content}
                 </div>
             </CSSTransition>
-        );
+        )
     }
 
-    render() {
-        let element = this.renderElement();
+    const element = createElement();
 
-        return <Portal element={element} appendTo={this.props.appendTo} />;
-    }
-}
-
-export const AutoCompletePanel = React.forwardRef((props, ref) => <AutoCompletePanelComponent forwardRef={ref} {...props} />);
+    return <Portal element={element} appendTo={props.appendTo} />;
+}))

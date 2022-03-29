@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class SpeedDialDoc extends Component {
+const SpeedDialDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
@@ -122,10 +119,10 @@ export class SpeedDialDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
@@ -231,10 +228,10 @@ export const SpeedDialDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
@@ -340,17 +337,17 @@ export const SpeedDialDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./SpeedDialDemo.css" />
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/speeddial/speeddial.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
-                content: `
-const { useEffect, useState, useRef } = React;
+            content: `
+const { useState, useRef } = React;
 const { SpeedDial } = primereact.speeddial;
 const { Tooltip } = primereact.tooltip;
 const { Toast } = primereact.toast;
@@ -454,12 +451,12 @@ const SpeedDialDemo = () => {
     )
 }
                 `
-            }
         }
+    }
 
-        this.extFiles = {
-            'demo/SpeedDialDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/SpeedDialDemo.css': {
+            content: `
 .speeddial-linear-demo .p-speeddial-direction-up {
     left: calc(50% - 2rem);
     bottom: 0;
@@ -529,27 +526,21 @@ const SpeedDialDemo = () => {
     bottom: 0;
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { SpeedDial } from 'primereact/speeddial';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -557,9 +548,9 @@ import { SpeedDial } from 'primereact/speeddial';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>When pressed, a floating action button can display multiple primary actions that can be performed on a page. It has a collection of additional options defined by the <i>model</i> property.
-                        SpeedDial's position is calculated according to the container element with the position type style.</p>
+                    <h5>Getting Started</h5>
+                    <p>When pressed, a floating action button can display multiple primary actions that can be performed on a page. It has a collection of additional options defined by the <i>model</i> property.
+                    SpeedDial's position is calculated according to the container element with the position type style.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -596,232 +587,233 @@ export const SpeedDialDemo = () => {
 `}
 </CodeHighlight>
 
-                        <h5>MenuModel API</h5>
-                        <p>SpeedDial uses the common MenuModel API to define the items, visit <Link href="/menumodel">MenuModel API</Link> for details.</p>
+                    <h5>MenuModel API</h5>
+                    <p>SpeedDial uses the common MenuModel API to define the items, visit <Link href="/menumodel">MenuModel API</Link> for details.</p>
 
-                        <h5>Type</h5>
-                        <p>SpeedDial has 4 types; <i>linear</i>, <i>circle</i>, <i>semi-circle</i> and <i>quarter-circle</i>.</p>
+                    <h5>Type</h5>
+                    <p>SpeedDial has 4 types; <i>linear</i>, <i>circle</i>, <i>semi-circle</i> and <i>quarter-circle</i>.</p>
 
-                        <h5>Direction</h5>
-                        <p>Specifies the opening direction of actions. For the <strong>linear</strong> and <strong>semi-circle</strong> types; <i>up</i>, <i>down</i>, <i>left</i> and <i>right</i>. For the <strong>quarter-circle</strong> type; <i>up-left</i>, <i>up-right</i>, <i>down-left</i> and <i>down-right</i>.</p>
+                    <h5>Direction</h5>
+                    <p>Specifies the opening direction of actions. For the <strong>linear</strong> and <strong>semi-circle</strong> types; <i>up</i>, <i>down</i>, <i>left</i> and <i>right</i>. For the <strong>quarter-circle</strong> type; <i>up-left</i>, <i>up-right</i>, <i>down-left</i> and <i>down-right</i>.</p>
 
-                        <h5>Properties</h5>
-                        <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>model</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>MenuModel instance to define the action items.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>visible</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Specifies the visibility of the overlay.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>direction</td>
-                                        <td>string</td>
-                                        <td>up</td>
-                                        <td>Specifies the opening direction of actions. Valid values are 'up', 'down', 'left', 'right', 'up-left', 'up-right', 'down-left' and 'down-right'</td>
-                                    </tr>
-                                    <tr>
-                                        <td>transitionDelay</td>
-                                        <td>number</td>
-                                        <td>30</td>
-                                        <td>Transition delay step for each action item.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>type</td>
-                                        <td>string</td>
-                                        <td>linear</td>
-                                        <td>Specifies the opening type of actions.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>radius</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Radius for *circle types.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>mask</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Whether to show a mask element behind the speeddial</td>
-                                    </tr>
-                                    <tr>
-                                        <td>disabled</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Whether the component is disabled.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>hideOnClickOutside</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether the actions close when clicked outside.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>buttonClassName</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the button element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>buttonStyle</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the button element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>buttonTemplate</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Template of button element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>maskClassName</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the mask element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>maskStyle</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the mask element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>showIcon</td>
-                                        <td>string</td>
-                                        <td>pi pi-plus</td>
-                                        <td>Show icon of the button element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>hideIcon</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Hide icon of the button element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>rotateAnimation</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Defined to rotate showIcon when hideIcon is not present.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>model</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>MenuModel instance to define the action items.</td>
+                                </tr>
+                                <tr>
+                                    <td>visible</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Specifies the visibility of the overlay.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>direction</td>
+                                    <td>string</td>
+                                    <td>up</td>
+                                    <td>Specifies the opening direction of actions. Valid values are 'up', 'down', 'left', 'right', 'up-left', 'up-right', 'down-left' and 'down-right'</td>
+                                </tr>
+                                <tr>
+                                    <td>transitionDelay</td>
+                                    <td>number</td>
+                                    <td>30</td>
+                                    <td>Transition delay step for each action item.</td>
+                                </tr>
+                                <tr>
+                                    <td>type</td>
+                                    <td>string</td>
+                                    <td>linear</td>
+                                    <td>Specifies the opening type of actions.</td>
+                                </tr>
+                                <tr>
+                                    <td>radius</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Radius for *circle types.</td>
+                                </tr>
+                                <tr>
+                                    <td>mask</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether to show a mask element behind the speeddial</td>
+                                </tr>
+                                <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether the component is disabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>hideOnClickOutside</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether the actions close when clicked outside.</td>
+                                </tr>
+                                <tr>
+                                    <td>buttonClassName</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the button element.</td>
+                                </tr>
+                                <tr>
+                                    <td>buttonStyle</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the button element.</td>
+                                </tr>
+                                <tr>
+                                    <td>buttonTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template of button element.</td>
+                                </tr>
+                                <tr>
+                                    <td>maskClassName</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the mask element.</td>
+                                </tr>
+                                <tr>
+                                    <td>maskStyle</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the mask element.</td>
+                                </tr>
+                                <tr>
+                                    <td>showIcon</td>
+                                    <td>string</td>
+                                    <td>pi pi-plus</td>
+                                    <td>Show icon of the button element.</td>
+                                </tr>
+                                <tr>
+                                    <td>hideIcon</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Hide icon of the button element.</td>
+                                </tr>
+                                <tr>
+                                    <td>rotateAnimation</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Defined to rotate showIcon when hideIcon is not present.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onVisibleChange</td>
-                                        <td>visible: Whether the actions are visible.</td>
-                                        <td>Fired when the visibility of element changed.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onClick</td>
-                                        <td>event: Browser event.</td>
-                                        <td>Fired when the button element clicked.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onShow</td>
-                                        <td>-</td>
-                                        <td>Fired when the actions are visible.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onHide</td>
-                                        <td>-</td>
-                                        <td>Fired when the actions are hidden.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onVisibleChange</td>
+                                    <td>visible: Whether the actions are visible.</td>
+                                    <td>Fired when the visibility of element changed.</td>
+                                </tr>
+                                <tr>
+                                    <td>onClick</td>
+                                    <td>event: Browser event.</td>
+                                    <td>Fired when the button element clicked.</td>
+                                </tr>
+                                <tr>
+                                    <td>onShow</td>
+                                    <td>-</td>
+                                    <td>Fired when the actions are visible.</td>
+                                </tr>
+                                <tr>
+                                    <td>onHide</td>
+                                    <td>-</td>
+                                    <td>Fired when the actions are hidden.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-speeddial</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-speeddial-button</td>
-                                        <td>Button element of speeddial.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-speeddial-mask</td>
-                                        <td>Mask element of speeddial.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-speeddial-list</td>
-                                        <td>List of the actions.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-speeddial-item</td>
-                                        <td>Each action item of list.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-speeddial</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-speeddial-button</td>
+                                    <td>Button element of speeddial.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-speeddial-mask</td>
+                                    <td>Mask element of speeddial.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-speeddial-list</td>
+                                    <td>List of the actions.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-speeddial-item</td>
+                                    <td>Each action item of list.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'SpeedDialDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
+                {
+                    useLiveEditorTabs({ name: 'SpeedDialDemo', sources: sources, extFiles: extFiles })
+                }
 
-                </TabView>
-            </div>
-        )
-    }
-}
+            </TabView>
+        </div>
+    )
+})
+
+export default SpeedDialDoc;

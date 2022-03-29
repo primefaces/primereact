@@ -1,40 +1,20 @@
-import React, {Component} from 'react';
+import React, { forwardRef, memo } from 'react';
 import PropTypes from 'prop-types';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
-export class Steps extends Component {
+export const Steps = memo(forwardRef((props, ref) => {
 
-    static defaultProps = {
-        id: null,
-        model: null,
-        activeIndex: 0,
-        readOnly: true,
-        style: null,
-        className: null,
-        onSelect: null
-    };
-
-    static propTypes = {
-        id: PropTypes.string,
-        model: PropTypes.array.isRequired,
-        activeIndex: PropTypes.number,
-        readOnly: PropTypes.bool,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        onSelect: PropTypes.func
-    };
-
-    itemClick(event, item, index) {
-        if (this.props.readOnly || item.disabled) {
+    const itemClick = (event, item, index) => {
+        if (props.readOnly || item.disabled) {
             event.preventDefault();
             return;
         }
 
-        if (this.props.onSelect){
-            this.props.onSelect({
+        if (props.onSelect) {
+            props.onSelect({
                 originalEvent: event,
-                item: item,
-                index: index
+                item,
+                index
             });
         }
 
@@ -45,23 +25,24 @@ export class Steps extends Component {
         if (item.command) {
             item.command({
                 originalEvent: event,
-                item: item,
-                index: index
+                item,
+                index
             });
         }
     }
 
-    renderItem(item, index) {
-        const active = index === this.props.activeIndex;
-        const disabled = (item.disabled || (index !== this.props.activeIndex && this.props.readOnly))
+    const createItem = (item, index) => {
+        const key = item.label + '_' + index;
+        const active = index === props.activeIndex;
+        const disabled = (item.disabled || (index !== props.activeIndex && props.readOnly));
+        const tabIndex = disabled ? -1 : '';
         const className = classNames('p-steps-item', item.className, {
             'p-highlight p-steps-current': active,
             'p-disabled': disabled
         });
         const label = item.label && <span className="p-steps-title">{item.label}</span>;
-        const tabIndex = disabled ? -1 : '';
         let content = (
-            <a href={item.url || '#'} className="p-menuitem-link" role="presentation" target={item.target} onClick={event => this.itemClick(event, item, index)} tabIndex={tabIndex} aria-disabled={disabled}>
+            <a href={item.url || '#'} className="p-menuitem-link" role="presentation" target={item.target} onClick={event => itemClick(event, item, index)} tabIndex={tabIndex}>
                 <span className="p-steps-number">{index + 1}</span>
                 {label}
             </a>
@@ -69,12 +50,12 @@ export class Steps extends Component {
 
         if (item.template) {
             const defaultContentOptions = {
-                onClick: (event) => this.itemClick(event, item, index),
+                onClick: (event) => itemClick(event, item, index),
                 className: 'p-menuitem-link',
                 labelClassName: 'p-steps-title',
                 numberClassName: 'p-steps-number',
                 element: content,
-                props: this.props,
+                props,
                 tabIndex,
                 active,
                 disabled
@@ -84,36 +65,56 @@ export class Steps extends Component {
         }
 
         return (
-            <li key={item.label + '_' + index} className={className} style={item.style} role="tab" aria-selected={active} aria-expanded={active}>
+            <li key={key} className={className} style={item.style} role="tab" aria-selected={active} aria-expanded={active}>
                 {content}
             </li>
-        );
+        )
     }
 
-    renderItems() {
-        if (this.props.model) {
-            const items = this.props.model.map((item, index) => {
-                return this.renderItem(item, index);
-            });
+    const createItems = () => {
+        if (props.model) {
+            const items = props.model.map(createItem);
 
             return (
                 <ul role="tablist">
                     {items}
                 </ul>
-            );
+            )
         }
 
         return null;
     }
 
-    render() {
-        const className = classNames('p-steps p-component', this.props.className, {'p-readonly': this.props.readOnly});
-        const items = this.renderItems();
+    const className = classNames('p-steps p-component', {
+        'p-readonly': props.readOnly
+    }, props.className);
+    const items = createItems();
 
-        return (
-            <div id={this.props.id} className={className} style={this.props.style}>
-                {items}
-            </div>
-        );
-    }
+    return (
+        <div id={props.id} className={className} style={props.style}>
+            {items}
+        </div>
+    )
+}));
+
+Steps.defaultProps = {
+    __TYPE: 'Steps',
+    id: null,
+    model: null,
+    activeIndex: 0,
+    readOnly: true,
+    style: null,
+    className: null,
+    onSelect: null
+}
+
+Steps.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    id: PropTypes.string,
+    model: PropTypes.array.isRequired,
+    activeIndex: PropTypes.number,
+    readOnly: PropTypes.bool,
+    style: PropTypes.object,
+    className: PropTypes.string,
+    onSelect: PropTypes.func
 }

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
 import { RadioButton } from '../../components/lib/radiobutton/RadioButton';
 import { ProgressBar } from '../../components/lib/progressbar/ProgressBar';
@@ -52,7 +51,7 @@ let chartOptions = {
     }
 };
 
-export default function ComponentSection() {
+const ComponentSection = () => {
     const [category, setCategory] = useState('C');
     const [nodes, setNodes] = useState(null);
     const [switchValue, setSwitchValue] = useState(true);
@@ -75,19 +74,17 @@ export default function ComponentSection() {
 
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
-    }, []); 
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <section className="landing-components py-8">
             <div className="section-header">Components</div>
             <p className="section-detail"><span className="font-bold text-900">Over 80</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.</p>
             <div className="flex justify-content-center mt-4">
-                <Link href="/setup">
-                    <a className="font-semibold p-3 border-round flex align-items-center linkbox active">
-                        <span>Get Started</span>
-                        <i className="pi pi-arrow-right ml-2"></i>
-                    </a>
-                </Link>
+                <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox active">
+                    <span>Get Started</span>
+                    <i className="pi pi-arrow-right ml-2"></i>
+                </a>
             </div>
             <div className="components-main flex mt-7 relative md:justify-content-center overflow-auto">
                 <div className="flex flex-column px-3 py-8 z-1">
@@ -239,3 +236,5 @@ export default function ComponentSection() {
         </section>
     );
 }
+
+export default ComponentSection;

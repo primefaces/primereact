@@ -13,7 +13,7 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <link id="theme-link" href={`${contextPath}/themes/lara-dark-indigo/theme.css`} rel="stylesheet"></link>
+                    <link id="theme-link" href={`${contextPath}/themes/lara-light-indigo/theme.css`} rel="stylesheet"></link>
                 </Head>
                 <body>
                     <Main />

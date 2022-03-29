@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class DeferredContentDoc extends Component {
+const DeferredContentDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { DeferredContent } from 'primereact/deferredcontent';
 import { DataTable } from 'primereact/datatable';
@@ -71,10 +68,10 @@ export class DeferredContentDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useRef } from 'react';
 import { DeferredContent } from 'primereact/deferredcontent';
 import { DataTable } from 'primereact/datatable';
@@ -124,10 +121,10 @@ const DeferredContentDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useRef } from 'react';
 import { DeferredContent } from 'primereact/deferredcontent';
 import { DataTable } from 'primereact/datatable';
@@ -177,10 +174,10 @@ const DeferredContentDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="./ProductService.js"></script>
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -188,8 +185,8 @@ const DeferredContentDemo = () => {
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
-                content: `
-const { useEffect, useState, useRef } = React;
+            content: `
+const { useState, useRef } = React;
 const { DeferredContent } = primereact.deferredcontent;
 const { Column } = primereact.column;
 const { DataTable } = primereact.datatable;
@@ -237,27 +234,21 @@ const DeferredContentDemo = () => {
     )
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { DeferredContent } from 'primereact/deferredcontent';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -265,8 +256,8 @@ import { DeferredContent } from 'primereact/deferredcontent';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>DeferredContent is used as a wrapper element of its content.</p>
+                    <h5>Getting Started</h5>
+                    <p>DeferredContent is used as a wrapper element of its content.</p>
 <CodeHighlight>
 {`
 <DeferredContent onLoad={onDataLoad}>
@@ -280,8 +271,8 @@ import { DeferredContent } from 'primereact/deferredcontent';
 `}
 </CodeHighlight>
 
-                        <h5>Callback</h5>
-                        <p><i>onLoad</i> callback is useful to initialize the content when it becomes visible on scroll such as loading data.</p>
+                    <h5>Callback</h5>
+                    <p><i>onLoad</i> callback is useful to initialize the content when it becomes visible on scroll such as loading data.</p>
 <CodeHighlight>
 {`
 <DeferredContent onLoad={onDataLoad}>
@@ -295,45 +286,46 @@ import { DeferredContent } from 'primereact/deferredcontent';
 `}
 </CodeHighlight>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            Component has no attributes.
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        Component has no attributes.
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onLoad</td>
-                                        <td>event: Event object</td>
-                                        <td>Callback to invoke when deferred content is loaded.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onLoad</td>
+                                    <td>event: Event object</td>
+                                    <td>Callback to invoke when deferred content is loaded.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <div className="doc-tablewrapper">
-                            Component does not apply any styling.
-                        </div>
+                    <h5>Styling</h5>
+                    <div className="doc-tablewrapper">
+                        Component does not apply any styling.
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'DeferredContentDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'DeferredContentDemo', sources: sources, service: 'ProductService', data: 'products-small' })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default DeferredContentDoc;

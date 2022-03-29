@@ -1,46 +1,40 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { TriStateCheckbox } from '../../components/lib/tristatecheckbox/TriStateCheckbox';
-import { TriStateCheckboxDoc } from '../../components/doc/tristatecheckbox';
+import TriStateCheckboxDoc from '../../components/doc/tristatecheckbox';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class TriStateCheckboxDemo extends Component {
+const TriStateCheckboxDemo = () => {
 
-    constructor(props) {
-        super(props);
+    const [value, setValue] = useState(null);
 
-        this.state = {
-            value: null
-        };
-    }
-
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React TriStateCheckbox Component</title>
-                    <meta name="description" content="TriStateCheckbox is used to select either true, false or null as the value." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TriStateCheckbox</h1>
-                        <p>TriStateCheckbox is used to select either "true", "false" or "null" as the value.</p>
-                    </div>
-
-                    <DocActions github="tristatecheckbox/index.js" />
+    return (
+        <div>
+            <Head>
+                <title>React TriStateCheckbox Component</title>
+                <meta name="description" content="TriStateCheckbox is used to select either true, false or null as the value." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>TriStateCheckbox</h1>
+                    <p>TriStateCheckbox is used to select either "true", "false" or "null" as the value.</p>
                 </div>
 
-                <div className="content-section implementation">
-                    <div className="card">
-                        <div className="field-checkbox m-0">
-                            <TriStateCheckbox value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
-                            <label>{String(this.state.value)}</label>
-                        </div>
-                    </div>
-                </div>
-
-                <TriStateCheckboxDoc />
+                <DocActions github="tristatecheckbox/index.js" />
             </div>
-        );
-    }
+
+            <div className="content-section implementation">
+                <div className="card">
+                    <div className="field-checkbox m-0">
+                        <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
+                        <label>{String(value)}</label>
+                    </div>
+                </div>
+            </div>
+
+            <TriStateCheckboxDoc />
+        </div>
+    );
 }
+
+export default TriStateCheckboxDemo;

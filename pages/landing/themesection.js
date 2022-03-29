@@ -9,7 +9,7 @@ import { CustomerService } from '../../service/CustomerService';
 import { classNames } from '../../components/lib/utils/Utils';
 import getConfig from 'next/config';
 
-export default function ThemeSection(props) {
+const ThemeSection = (props) => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [customers, setCustomers] = useState(null);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
@@ -151,3 +151,5 @@ export default function ThemeSection(props) {
         </section>
     );
 }
+
+export default ThemeSection;

@@ -1,128 +1,89 @@
-import React, { Component, createRef } from 'react';
+import React, { forwardRef, memo, useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { tip } from '../tooltip/Tooltip';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { useUnmountEffect } from '../hooks/Hooks';
 
-class InputTextComponent extends Component {
+export const InputText = memo(forwardRef((props, ref) => {
+    const elementRef = useRef(ref);
+    const tooltipRef = useRef(null);
 
-    static defaultProps = {
-        keyfilter: null,
-        validateOnly: false,
-        tooltip: null,
-        tooltipOptions: null,
-        onInput: null,
-        onKeyPress: null,
-        forwardRef: null
-    };
+    const onKeyPress = (event) => {
+        props.onKeyPress && props.onKeyPress(event);
 
-    static propTypes = {
-        keyfilter: PropTypes.any,
-        validateOnly: PropTypes.bool,
-        tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object,
-        onInput: PropTypes.func,
-        onKeyPress: PropTypes.func,
-        forwardRef: PropTypes.any
-    };
-
-    constructor(props) {
-        super(props);
-        this.onInput = this.onInput.bind(this);
-        this.onKeyPress = this.onKeyPress.bind(this);
-
-        this.elementRef = createRef(this.props.forwardRef);
-    }
-
-    isFilled() {
-        return (this.props.value != null && this.props.value.toString().length > 0) ||
-            (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0) ||
-            (this.elementRef && this.elementRef.current && this.elementRef.current.value != null && this.elementRef.current.value.toString().length > 0);
-    }
-
-    onKeyPress(event) {
-        if (this.props.onKeyPress) {
-            this.props.onKeyPress(event);
-        }
-
-        if (this.props.keyfilter) {
-            KeyFilter.onKeyPress(event, this.props.keyfilter, this.props.validateOnly)
+        if (props.keyfilter) {
+            KeyFilter.onKeyPress(event, props.keyfilter, props.validateOnly)
         }
     }
 
-    onInput(event) {
+    const onInput = (event) => {
         let validatePattern = true;
-        if (this.props.keyfilter && this.props.validateOnly) {
-            validatePattern = KeyFilter.validate(event, this.props.keyfilter);
+        if (props.keyfilter && props.validateOnly) {
+            validatePattern = KeyFilter.validate(event, props.keyfilter);
         }
 
-        if (this.props.onInput) {
-            this.props.onInput(event, validatePattern);
-        }
+        props.onInput && props.onInput(event, validatePattern);
 
-        if (!this.props.onChange) {
-            if (event.target.value.length > 0)
-                DomHandler.addClass(event.target, 'p-filled');
-            else
-                DomHandler.removeClass(event.target, 'p-filled');
+        if (!props.onChange) {
+            const target = event.target;
+            ObjectUtils.isNotEmpty(target.value) ? DomHandler.addClass(target, 'p-filled') : DomHandler.removeClass(target, 'p-filled');
         }
     }
 
-    updateForwardRef() {
-        let ref = this.props.forwardRef;
+    const isFilled = useMemo(() => (
+        ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (elementRef.current && ObjectUtils.isNotEmpty(elementRef.current.value))
+    ), [props.value, props.defaultValue]);
 
-        if (ref) {
-            if (typeof ref === 'function') {
-                ref(this.elementRef.current);
-            }
-            else {
-                ref.current = this.elementRef.current;
-            }
+    useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
+
+    useEffect(() => {
+        if (tooltipRef.current) {
+            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
         }
-    }
-
-    componentDidMount() {
-        this.updateForwardRef();
-
-        if (this.props.tooltip) {
-            this.renderTooltip();
+        else if (props.tooltip) {
+            tooltipRef.current = tip({
+                target: elementRef.current,
+                content: props.tooltip,
+                options: props.tooltipOptions
+            });
         }
-    }
+    }, [props.tooltip, props.tooltipOptions]);
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
-            if (this.tooltip)
-                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
-            else
-                this.renderTooltip();
+    useUnmountEffect(() => {
+        if (tooltipRef.current) {
+            tooltipRef.current.destroy();
+            tooltipRef.current = null;
         }
-    }
+    });
 
-    componentWillUnmount() {
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
-        }
-    }
+    const inputProps = ObjectUtils.findDiffKeys(props, InputText.defaultProps);
+    const className = classNames('p-inputtext p-component', {
+        'p-disabled': props.disabled,
+        'p-filled': isFilled
+    }, props.className);
 
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.elementRef.current,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
-    }
+    return <input ref={elementRef} {...inputProps} className={className} onInput={onInput} onKeyPress={onKeyPress} />;
+}));
 
-    render() {
-        const className = classNames('p-inputtext p-component', {
-            'p-disabled': this.props.disabled,
-            'p-filled': this.isFilled()
-        }, this.props.className);
-
-        let inputProps = ObjectUtils.findDiffKeys(this.props, InputTextComponent.defaultProps);
-
-        return <input ref={this.elementRef} {...inputProps} className={className} onInput={this.onInput} onKeyPress={this.onKeyPress} />;
-    }
+InputText.defaultProps = {
+    __TYPE: 'InputText',
+    keyfilter: null,
+    validateOnly: false,
+    tooltip: null,
+    tooltipOptions: null,
+    onInput: null,
+    onKeyPress: null
 }
 
-export const InputText = React.forwardRef((props, ref) => <InputTextComponent forwardRef={ref} {...props} />);
+InputText.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    keyfilter: PropTypes.any,
+    validateOnly: PropTypes.bool,
+    tooltip: PropTypes.string,
+    tooltipOptions: PropTypes.object,
+    onInput: PropTypes.func,
+    onKeyPress: PropTypes.func
+}

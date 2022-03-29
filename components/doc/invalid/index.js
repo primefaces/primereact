@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import { TabView } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 
-export class InvalidDoc extends Component {
+const InvalidDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { AutoComplete } from 'primereact/autocomplete';
@@ -212,10 +209,10 @@ export class InvalidDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { AutoComplete } from 'primereact/autocomplete';
@@ -408,10 +405,10 @@ const InvalidDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { AutoComplete } from 'primereact/autocomplete';
@@ -604,10 +601,10 @@ const InvalidDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="./CountryService.js"></script>
         <script src="./NodeService.js"></script>
 
@@ -626,7 +623,7 @@ const InvalidDemo = () => {
         <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>
         <script src="https://unpkg.com/primereact/treeselect/treeselect.min.js"></script>
         <script src="https://unpkg.com/primereact/password/password.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { InputText } = primereact.inputtext;
 const { AutoComplete } = primereact.autocomplete;
@@ -817,23 +814,18 @@ const InvalidDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'InvalidDemo', sources: sources, service: 'CountryService, NodeService', data: 'countries, treenodes' })
+                }
+            </TabView>
+        </div>
+    );
+})
 
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'InvalidDemo', sources: this.sources, service: 'CountryService, NodeService', data: 'countries, treenodes' })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+export default InvalidDoc;

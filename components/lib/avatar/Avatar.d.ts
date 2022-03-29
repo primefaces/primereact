@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {IconType} from "../utils";
+import { IconType } from '../utils';
 
 type AvatarSizeType = 'normal' | 'large' | 'xlarge';
 

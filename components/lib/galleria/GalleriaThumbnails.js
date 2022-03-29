@@ -1,153 +1,113 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { forwardRef, memo, useRef, useState } from 'react';
 import PrimeReact from '../api/Api';
-import { DomHandler, classNames, UniqueComponentId } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
-import ObjectUtils from '../utils/ObjectUtils';
+import { DomHandler, ObjectUtils, classNames, UniqueComponentId } from '../utils/Utils';
+import { useMountEffect, useUpdateEffect, usePrevious, useResizeListener } from '../hooks/Hooks';
 
-class GalleriaThumbnailItem extends Component {
+const GalleriaThumbnailItem = memo((props) => {
 
-    static defaultProps = {
-        index: null,
-        template: null,
-        item: null,
-        current: false,
-        active: false,
-        start: false,
-        end: false,
-        className: null,
-        onItemClick: null
-    }
-
-    static propTypes = {
-        index: PropTypes.number,
-        template: PropTypes.func,
-        item: PropTypes.any,
-        current: PropTypes.bool,
-        active: PropTypes.bool,
-        start: PropTypes.bool,
-        end: PropTypes.bool,
-        className: PropTypes.string,
-        onItemClick: PropTypes.func
-    }
-
-    constructor(props) {
-        super(props);
-
-        this.onItemClick = this.onItemClick.bind(this);
-        this.onItemKeyDown = this.onItemKeyDown.bind(this);
-    }
-
-    onItemClick(event) {
-        this.props.onItemClick({
+    const onItemClick = (event) => {
+        props.onItemClick({
             originalEvent: event,
-            index: this.props.index
+            index: props.index
         });
     }
 
-    onItemKeyDown(event) {
+    const onItemKeyDown = (event) => {
         if (event.which === 13) {
-            this.props.onItemClick({
+            props.onItemClick({
                 originalEvent: event,
-                index: this.props.index
+                index: props.index
             });
         }
     }
 
-    render() {
-        const content = this.props.template && this.props.template(this.props.item);
-        const itemClassName = classNames(this.props.className, 'p-galleria-thumbnail-item', {
-            'p-galleria-thumbnail-item-current': this.props.current,
-            'p-galleria-thumbnail-item-active': this.props.active,
-            'p-galleria-thumbnail-item-start': this.props.start,
-            'p-galleria-thumbnail-item-end': this.props.end
-        });
+    const tabIndex = props.active ? 0 : null;
+    const content = props.template && props.template(props.item);
+    const className = classNames('p-galleria-thumbnail-item', {
+        'p-galleria-thumbnail-item-current': props.current,
+        'p-galleria-thumbnail-item-active': props.active,
+        'p-galleria-thumbnail-item-start': props.start,
+        'p-galleria-thumbnail-item-end': props.end
+    }, props.className);
 
-        return (
-            <div className={itemClassName}>
-                <div className="p-galleria-thumbnail-item-content" tabIndex={this.props.active ? 0 : null} onClick={this.onItemClick} onKeyDown={this.onItemKeyDown}>
-                    { content }
-                </div>
+    return (
+        <div className={className}>
+            <div className="p-galleria-thumbnail-item-content" tabIndex={tabIndex} onClick={onItemClick} onKeyDown={onItemKeyDown}>
+                {content}
             </div>
-        );
-    }
-}
+        </div>
+    )
+});
 
-export class GalleriaThumbnails extends Component {
+export const GalleriaThumbnails = memo(forwardRef((props, ref) => {
+    const [numVisibleState, setNumVisibleState] = useState(props.numVisible);
+    const [totalShiftedItemsState, setTotalShiftedItemsState] = useState(0);
+    const itemsContainerRef = useRef(null);
+    const startPos = useRef(null);
+    const attributeSelector = useRef('');
+    const thumbnailsStyle = useRef(null);
+    const responsiveOptions = useRef(null);
+    const prevNumVisible = usePrevious(numVisibleState);
+    const prevActiveItemIndex = usePrevious(props.activeItemIndex);
 
-    constructor(props) {
-        super(props);
+    const [bindWindowResizeListener,] = useResizeListener({
+        listener: () => {
+            calculatePosition();
+        }, when: props.responsiveOptions
+    });
 
-        this.state = {
-            numVisible: props.numVisible,
-            totalShiftedItems: 0,
-            page: 0
-        }
+    const step = (dir) => {
+        let totalShiftedItems = totalShiftedItemsState + dir;
 
-        this.navForward = this.navForward.bind(this);
-        this.navBackward = this.navBackward.bind(this);
-        this.onTransitionEnd = this.onTransitionEnd.bind(this);
-        this.onTouchStart = this.onTouchStart.bind(this);
-        this.onTouchMove = this.onTouchMove.bind(this);
-        this.onTouchEnd = this.onTouchEnd.bind(this);
-        this.onItemClick = this.onItemClick.bind(this);
-
-        this.attributeSelector = UniqueComponentId();
-    }
-
-    step(dir) {
-        let totalShiftedItems = this.state.totalShiftedItems + dir;
-
-        if (dir < 0 && (-1 * totalShiftedItems) + this.state.numVisible > (this.props.value.length - 1)) {
-            totalShiftedItems = this.state.numVisible - this.props.value.length;
+        if (dir < 0 && (-1 * totalShiftedItems) + numVisibleState > (props.value.length - 1)) {
+            totalShiftedItems = numVisibleState - props.value.length;
         }
         else if (dir > 0 && totalShiftedItems > 0) {
             totalShiftedItems = 0;
         }
 
-        if (this.props.circular) {
-            if (dir < 0 && this.props.value.length - 1 === this.props.activeItemIndex) {
+        if (props.circular) {
+            if (dir < 0 && props.value.length - 1 === props.activeItemIndex) {
                 totalShiftedItems = 0;
             }
-            else if (dir > 0 && this.props.activeItemIndex === 0) {
-                totalShiftedItems = this.state.numVisible - this.props.value.length;
+            else if (dir > 0 && props.activeItemIndex === 0) {
+                totalShiftedItems = numVisibleState - props.value.length;
             }
         }
 
-        if (this.itemsContainer) {
-            DomHandler.removeClass(this.itemsContainer, 'p-items-hidden');
-            this.itemsContainer.style.transform = this.props.isVertical ? `translate3d(0, ${totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
-            this.itemsContainer.style.transition = 'transform 500ms ease 0s';
+        if (itemsContainerRef.current) {
+            DomHandler.removeClass(itemsContainerRef.current, 'p-items-hidden');
+            itemsContainerRef.current.style.transform = props.isVertical ? `translate3d(0, ${totalShiftedItems * (100 / numVisibleState)}%, 0)` : `translate3d(${totalShiftedItems * (100 / numVisibleState)}%, 0, 0)`;
+            itemsContainerRef.current.style.transition = 'transform 500ms ease 0s';
         }
 
-        this.setState({
-            totalShiftedItems
-        });
+        setTotalShiftedItemsState(totalShiftedItems);
     }
 
-    stopSlideShow() {
-        if (this.props.slideShowActive && this.props.stopSlideShow) {
-            this.props.stopSlideShow();
+    const stopSlideShow = () => {
+        if (props.slideShowActive && props.stopSlideShow) {
+            props.stopSlideShow();
         }
     }
 
-    getMedianItemIndex() {
-        let index = Math.floor(this.state.numVisible / 2);
+    const getMedianItemIndex = () => {
+        const index = Math.floor(numVisibleState / 2);
 
-        return (this.state.numVisible % 2) ? index : index - 1;
+        return (numVisibleState % 2) ? index : index - 1;
     }
 
-    navBackward(e) {
-        this.stopSlideShow();
+    const navBackward = (e) => {
+        stopSlideShow();
 
-        let prevItemIndex = this.props.activeItemIndex !== 0 ? this.props.activeItemIndex - 1 : 0;
-        let diff = prevItemIndex + this.state.totalShiftedItems;
-        if ((this.state.numVisible - diff - 1) > this.getMedianItemIndex() && ((-1 * this.state.totalShiftedItems) !== 0 || this.props.circular)) {
-            this.step(1);
+        let prevItemIndex = props.activeItemIndex !== 0 ? props.activeItemIndex - 1 : 0;
+        let diff = prevItemIndex + totalShiftedItemsState;
+        if ((numVisibleState - diff - 1) > getMedianItemIndex() && ((-1 * totalShiftedItemsState) !== 0 || props.circular)) {
+            step(1);
         }
 
-        this.props.onActiveItemChange({
-            index: this.props.circular && this.props.activeItemIndex === 0 ? this.props.value.length - 1 : prevItemIndex
+        props.onActiveItemChange({
+            index: props.circular && props.activeItemIndex === 0 ? props.value.length - 1 : prevItemIndex
         });
 
         if (e.cancelable) {
@@ -155,16 +115,16 @@ export class GalleriaThumbnails extends Component {
         }
     }
 
-    navForward(e) {
-        this.stopSlideShow();
+    const navForward = (e) => {
+        stopSlideShow();
 
-        let nextItemIndex = this.props.activeItemIndex + 1;
-        if (nextItemIndex + this.state.totalShiftedItems > this.getMedianItemIndex() && ((-1 * this.state.totalShiftedItems) < this.getTotalPageNumber() - 1 || this.props.circular)) {
-            this.step(-1);
+        let nextItemIndex = props.activeItemIndex + 1;
+        if (nextItemIndex + totalShiftedItemsState > getMedianItemIndex() && ((-1 * totalShiftedItemsState) < getTotalPageNumber() - 1 || props.circular)) {
+            step(-1);
         }
 
-        this.props.onActiveItemChange({
-            index: this.props.circular && (this.props.value.length - 1) === this.props.activeItemIndex ? 0 : nextItemIndex
+        props.onActiveItemChange({
+            index: props.circular && (props.value.length - 1) === props.activeItemIndex ? 0 : nextItemIndex
         });
 
         if (e.cancelable) {
@@ -172,289 +132,257 @@ export class GalleriaThumbnails extends Component {
         }
     }
 
-    onItemClick(event) {
-        this.stopSlideShow();
+    const onItemClick = (event) => {
+        stopSlideShow();
 
         let selectedItemIndex = event.index;
-        if (selectedItemIndex !== this.props.activeItemIndex) {
-            const diff = selectedItemIndex + this.state.totalShiftedItems;
+        if (selectedItemIndex !== props.activeItemIndex) {
+            const diff = selectedItemIndex + totalShiftedItemsState;
             let dir = 0;
-            if (selectedItemIndex < this.props.activeItemIndex) {
-                dir = (this.state.numVisible - diff - 1) - this.getMedianItemIndex();
-                if (dir > 0 && (-1 * this.state.totalShiftedItems) !== 0) {
-                    this.step(dir);
+            if (selectedItemIndex < props.activeItemIndex) {
+                dir = (numVisibleState - diff - 1) - getMedianItemIndex();
+                if (dir > 0 && (-1 * totalShiftedItemsState) !== 0) {
+                    step(dir);
                 }
             }
             else {
-                dir = this.getMedianItemIndex() - diff;
-                if (dir < 0 && (-1 * this.state.totalShiftedItems) < this.getTotalPageNumber() - 1) {
-                    this.step(dir);
+                dir = getMedianItemIndex() - diff;
+                if (dir < 0 && (-1 * totalShiftedItemsState) < getTotalPageNumber() - 1) {
+                    step(dir);
                 }
             }
 
-            this.props.onActiveItemChange({
+            props.onActiveItemChange({
                 index: selectedItemIndex
             });
         }
     }
 
-    onTransitionEnd(e) {
-        if (this.itemsContainer && e.propertyName === 'transform') {
-            DomHandler.addClass(this.itemsContainer, 'p-items-hidden');
-            this.itemsContainer.style.transition = '';
+    const onTransitionEnd = (e) => {
+        if (itemsContainerRef.current && e.propertyName === 'transform') {
+            DomHandler.addClass(itemsContainerRef.current, 'p-items-hidden');
+            itemsContainerRef.current.style.transition = '';
         }
     }
 
-    onTouchStart(e) {
+    const onTouchStart = (e) => {
         let touchobj = e.changedTouches[0];
 
-        this.startPos = {
+        startPos.current = {
             x: touchobj.pageX,
             y: touchobj.pageY
         };
     }
 
-    onTouchMove(e) {
+    const onTouchMove = (e) => {
         if (e.cancelable) {
             e.preventDefault();
         }
     }
 
-    onTouchEnd(e) {
+    const onTouchEnd = (e) => {
         let touchobj = e.changedTouches[0];
 
-        if (this.props.isVertical) {
-            this.changePageOnTouch(e, (touchobj.pageY - this.startPos.y));
+        if (props.isVertical) {
+            changePageOnTouch(e, (touchobj.pageY - startPos.current.y));
         }
         else {
-            this.changePageOnTouch(e, (touchobj.pageX - this.startPos.x));
+            changePageOnTouch(e, (touchobj.pageX - startPos.current.x));
         }
     }
 
-    changePageOnTouch(e, diff) {
+    const changePageOnTouch = (e, diff) => {
         if (diff < 0) {           // left
-            this.navForward(e);
+            navForward(e);
         }
         else {                    // right
-            this.navBackward(e);
+            navBackward(e);
         }
     }
 
-    getTotalPageNumber() {
-        return this.props.value.length > this.state.numVisible ? (this.props.value.length - this.state.numVisible) + 1 : 0;
+    const getTotalPageNumber = () => {
+        return props.value.length > numVisibleState ? (props.value.length - numVisibleState) + 1 : 0;
     }
 
-    createStyle() {
-        if (!this.thumbnailsStyle) {
-            this.thumbnailsStyle = DomHandler.createInlineStyle(PrimeReact.nonce);
+    const createStyle = () => {
+        if (!thumbnailsStyle.current) {
+            thumbnailsStyle.current = DomHandler.createInlineStyle(PrimeReact.nonce);
         }
 
         let innerHTML = `
-            .p-galleria-thumbnail-items[${this.attributeSelector}] .p-galleria-thumbnail-item {
-                flex: 1 0 ${ (100/ this.state.numVisible) }%
+            .p-galleria-thumbnail-items[${attributeSelector.current}] .p-galleria-thumbnail-item {
+                flex: 1 0 ${(100 / numVisibleState)}%
             }
         `;
 
-        if (this.props.responsiveOptions) {
-            this.responsiveOptions = [...this.props.responsiveOptions];
-            this.responsiveOptions.sort((data1, data2) => {
+        if (props.responsiveOptions) {
+            responsiveOptions.current = [...props.responsiveOptions];
+            responsiveOptions.current.sort((data1, data2) => {
                 const value1 = data1.breakpoint;
                 const value2 = data2.breakpoint;
                 return ObjectUtils.sort(value1, value2, -1, PrimeReact.locale);
             });
 
-            for (let i = 0; i < this.responsiveOptions.length; i++) {
-                let res = this.responsiveOptions[i];
+            for (let i = 0; i < responsiveOptions.current.length; i++) {
+                let res = responsiveOptions.current[i];
 
                 innerHTML += `
                     @media screen and (max-width: ${res.breakpoint}) {
-                        .p-galleria-thumbnail-items[${this.attributeSelector}] .p-galleria-thumbnail-item {
-                            flex: 1 0 ${ (100/ res.numVisible) }%
+                        .p-galleria-thumbnail-items[${attributeSelector.current}] .p-galleria-thumbnail-item {
+                            flex: 1 0 ${(100 / res.numVisible)}%
                         }
                     }
                 `
             }
         }
 
-        this.thumbnailsStyle.innerHTML = innerHTML;
+        thumbnailsStyle.current.innerHTML = innerHTML;
     }
 
-    calculatePosition() {
-        if (this.itemsContainer && this.responsiveOptions) {
+    const calculatePosition = () => {
+        if (itemsContainerRef.current && responsiveOptions.current) {
             let windowWidth = window.innerWidth;
             let matchedResponsiveData = {
-                numVisible: this.props.numVisible
+                numVisible: props.numVisible
             };
 
-            for (let i = 0; i < this.responsiveOptions.length; i++) {
-                let res = this.responsiveOptions[i];
+            for (let i = 0; i < responsiveOptions.current.length; i++) {
+                let res = responsiveOptions.current[i];
 
                 if (parseInt(res.breakpoint, 10) >= windowWidth) {
                     matchedResponsiveData = res;
                 }
             }
 
-            if (this.state.numVisible !== matchedResponsiveData.numVisible) {
-                this.setState({
-                    numVisible: matchedResponsiveData.numVisible
-                });
+            if (numVisibleState !== matchedResponsiveData.numVisible) {
+                setNumVisibleState(matchedResponsiveData.numVisible);
             }
         }
     }
 
-    bindDocumentListeners() {
-        if (!this.documentResizeListener) {
-            this.documentResizeListener = () => {
-                this.calculatePosition();
-            };
-
-            window.addEventListener('resize', this.documentResizeListener);
-        }
-    }
-
-    unbindDocumentListeners() {
-        if(this.documentResizeListener) {
-            window.removeEventListener('resize', this.documentResizeListener);
-            this.documentResizeListener = null;
-        }
-    }
-
-    componentDidMount() {
-        if (this.itemsContainer) {
-            this.itemsContainer.setAttribute(this.attributeSelector, '');
+    useMountEffect(() => {
+        if (itemsContainerRef.current) {
+            attributeSelector.current = UniqueComponentId();
+            itemsContainerRef.current.setAttribute(attributeSelector.current, '');
         }
 
-        this.createStyle();
-        this.calculatePosition();
+        createStyle();
+        calculatePosition();
+        bindWindowResizeListener();
+    });
 
-        if (this.props.responsiveOptions) {
-            this.bindDocumentListeners();
-        }
-    }
+    useUpdateEffect(() => {
+        let totalShiftedItems = totalShiftedItemsState;
 
-    componentDidUpdate(prevProps, prevState) {
-        let totalShiftedItems = this.state.totalShiftedItems;
-
-        if (prevState.numVisible !== this.state.numVisible || prevProps.activeItemIndex !== this.props.activeItemIndex) {
-            if (this.props.activeItemIndex <= this.getMedianItemIndex()) {
+        if (prevNumVisible !== numVisibleState || prevActiveItemIndex !== props.activeItemIndex) {
+            if (props.activeItemIndex <= getMedianItemIndex()) {
                 totalShiftedItems = 0;
             }
-            else if (this.props.value.length - this.state.numVisible + this.getMedianItemIndex() < this.props.activeItemIndex) {
-                totalShiftedItems = this.state.numVisible - this.props.value.length;
+            else if (props.value.length - numVisibleState + getMedianItemIndex() < props.activeItemIndex) {
+                totalShiftedItems = numVisibleState - props.value.length;
             }
-            else if (this.props.value.length - this.state.numVisible < this.props.activeItemIndex && this.state.numVisible % 2 === 0) {
-                totalShiftedItems = (this.props.activeItemIndex * -1) + this.getMedianItemIndex() + 1;
+            else if (props.value.length - numVisibleState < props.activeItemIndex && numVisibleState % 2 === 0) {
+                totalShiftedItems = (props.activeItemIndex * -1) + getMedianItemIndex() + 1;
             }
             else {
-                totalShiftedItems = (this.props.activeItemIndex * -1) + this.getMedianItemIndex();
+                totalShiftedItems = (props.activeItemIndex * -1) + getMedianItemIndex();
             }
 
-            if (totalShiftedItems !== this.state.totalShiftedItems) {
-                this.setState({
-                    totalShiftedItems
-                })
+            if (totalShiftedItems !== totalShiftedItemsState) {
+                setTotalShiftedItemsState(totalShiftedItems);
             }
 
-            this.itemsContainer.style.transform = this.props.isVertical ? `translate3d(0, ${totalShiftedItems * (100/ this.state.numVisible)}%, 0)` : `translate3d(${totalShiftedItems * (100/ this.state.numVisible)}%, 0, 0)`;
+            itemsContainerRef.current.style.transform = props.isVertical ? `translate3d(0, ${totalShiftedItems * (100 / numVisibleState)}%, 0)` : `translate3d(${totalShiftedItems * (100 / numVisibleState)}%, 0, 0)`;
 
-            if (prevProps.activeItemIndex !== this.props.activeItemIndex) {
-                DomHandler.removeClass(this.itemsContainer, 'p-items-hidden');
-                this.itemsContainer.style.transition = 'transform 500ms ease 0s';
+            if (prevActiveItemIndex !== props.activeItemIndex) {
+                DomHandler.removeClass(itemsContainerRef.current, 'p-items-hidden');
+                itemsContainerRef.current.style.transition = 'transform 500ms ease 0s';
             }
         }
+    });
+
+    const createItems = () => {
+        return props.value.map((item, index) => {
+            const firstIndex = totalShiftedItemsState * -1;
+            const lastIndex = firstIndex + numVisibleState - 1;
+            const isActive = firstIndex <= index && lastIndex >= index;
+            const start = firstIndex === index;
+            const end = lastIndex === index;
+            const current = props.activeItemIndex === index;
+
+            return <GalleriaThumbnailItem key={index} index={index} template={props.itemTemplate} item={item} active={isActive} start={start} end={end} onItemClick={onItemClick} current={current} />
+        });
     }
 
-    componentWillUnmount() {
-        if (this.props.responsiveOptions) {
-            this.unbindDocumentListeners();
-        }
-    }
-
-    renderItems() {
-        return this.props.value.map((item, index) => {
-                        let firstIndex = this.state.totalShiftedItems * -1,
-                        lastIndex = firstIndex + this.state.numVisible - 1,
-                        isActive = firstIndex <= index && lastIndex >= index,
-                        start = firstIndex === index,
-                        end = lastIndex === index,
-                        current = this.props.activeItemIndex === index;
-
-                        return <GalleriaThumbnailItem key={index} index={index} template={this.props.itemTemplate} item={item} active={isActive} start={start} end={end}
-                            onItemClick={this.onItemClick} current={current}/>
-                    });
-    }
-
-    renderBackwardNavigator() {
-        if (this.props.showThumbnailNavigators) {
-            let isDisabled = (!this.props.circular && this.props.activeItemIndex === 0) || (this.props.value.length <= this.state.numVisible);
+    const createBackwardNavigator = () => {
+        if (props.showThumbnailNavigators) {
+            let isDisabled = (!props.circular && props.activeItemIndex === 0) || (props.value.length <= numVisibleState);
             let buttonClassName = classNames('p-galleria-thumbnail-prev p-link', {
                 'p-disabled': isDisabled
             }),
-            iconClassName = classNames('p-galleria-thumbnail-prev-icon pi', {
-                'pi-chevron-left': !this.props.isVertical,
-                'pi-chevron-up': this.props.isVertical
-            });
+                iconClassName = classNames('p-galleria-thumbnail-prev-icon pi', {
+                    'pi-chevron-left': !props.isVertical,
+                    'pi-chevron-up': props.isVertical
+                });
 
             return (
-                <button className={buttonClassName} onClick={this.navBackward} disabled={isDisabled}>
+                <button className={buttonClassName} onClick={navBackward} disabled={isDisabled}>
                     <span className={iconClassName}></span>
                     <Ripple />
                 </button>
-            );
+            )
         }
 
         return null;
     }
 
-    renderForwardNavigator() {
-        if (this.props.showThumbnailNavigators) {
-            let isDisabled = (!this.props.circular && this.props.activeItemIndex === (this.props.value.length - 1)) || (this.props.value.length <= this.state.numVisible);
-            let buttonClassName = classNames('p-galleria-thumbnail-next p-link', {
+    const createForwardNavigator = () => {
+        if (props.showThumbnailNavigators) {
+            const isDisabled = (!props.circular && props.activeItemIndex === (props.value.length - 1)) || (props.value.length <= numVisibleState);
+            const buttonClassName = classNames('p-galleria-thumbnail-next p-link', {
                 'p-disabled': isDisabled
-            }),
-            iconClassName = classNames('p-galleria-thumbnail-next-icon pi', {
-                'pi-chevron-right': !this.props.isVertical,
-                'pi-chevron-down': this.props.isVertical
+            });
+            const iconClassName = classNames('p-galleria-thumbnail-next-icon pi', {
+                'pi-chevron-right': !props.isVertical,
+                'pi-chevron-down': props.isVertical
             });
 
             return (
-                <button className={buttonClassName} onClick={this.navForward} disabled={isDisabled}>
+                <button className={buttonClassName} onClick={navForward} disabled={isDisabled}>
                     <span className={iconClassName}></span>
                     <Ripple />
                 </button>
-            );
+            )
         }
 
         return null;
     }
 
-    renderContent() {
-        const items = this.renderItems();
-        const height = this.props.isVertical ? this.props.contentHeight : '';
-        const backwardNavigator = this.renderBackwardNavigator();
-        const forwardNavigator = this.renderForwardNavigator();
+    const createContent = () => {
+        const items = createItems();
+        const height = props.isVertical ? props.contentHeight : '';
+        const backwardNavigator = createBackwardNavigator();
+        const forwardNavigator = createForwardNavigator();
 
         return (
             <div className="p-galleria-thumbnail-container">
-                { backwardNavigator }
-                <div className="p-galleria-thumbnail-items-container" style={{'height': height}}>
-                    <div ref={(el) => this.itemsContainer = el} className="p-galleria-thumbnail-items" onTransitionEnd={this.onTransitionEnd}
-                        onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove} onTouchEnd={this.onTouchEnd}>
-                        { items }
+                {backwardNavigator}
+                <div className="p-galleria-thumbnail-items-container" style={{ 'height': height }}>
+                    <div ref={itemsContainerRef} className="p-galleria-thumbnail-items" onTransitionEnd={onTransitionEnd}
+                        onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
+                        {items}
                     </div>
                 </div>
-                { forwardNavigator }
+                {forwardNavigator}
             </div>
-        );
+        )
     }
 
-    render() {
-        const content = this.renderContent();
+    const content = createContent();
 
-        return (
-            <div className="p-galleria-thumbnail-wrapper">
-                { content }
-            </div>
-        );
-    }
-}
+    return (
+        <div className="p-galleria-thumbnail-wrapper">
+            {content}
+        </div>
+    )
+}));

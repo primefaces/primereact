@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { DataTable } from '../../components/lib/datatable/DataTable';
 import { Column } from '../../components/lib/column/Column';
 import { TabView } from '../../components/lib/tabview/TabView';
@@ -7,64 +7,54 @@ import { ProductService } from '../../service/ProductService';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class DataTableStripedDemo extends Component {
+const DataTableStripedDemo = () => {
+    const [products, setProducts] = useState(null);
+    const productService = new ProductService();
 
-    constructor(props) {
-        super(props);
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-        this.state = {
-            products: null
-        };
 
-        this.productService = new ProductService();
-    }
-
-    componentDidMount() {
-        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
-    }
-
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React Table Component - Striped Rows</title>
-                    <meta name="description" content="Adding stripedRows displays rows with alternating colors." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable <span>Striped Rows</span></h1>
-                        <p>Adding <b>stripedRows</b> displays rows with alternating colors.</p>
-                    </div>
-
-                    <DocActions github="datatable/striped.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Table Component - Striped Rows</title>
+                <meta name="description" content="Adding stripedRows displays rows with alternating colors." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>DataTable <span>Striped Rows</span></h1>
+                    <p>Adding <b>stripedRows</b> displays rows with alternating colors.</p>
                 </div>
 
-                <div className="content-section implementation">
-                    <div className="card">
-                        <DataTable value={this.state.products} stripedRows responsiveLayout="scroll">
-                            <Column field="code" header="Code"></Column>
-                            <Column field="name" header="Name"></Column>
-                            <Column field="category" header="Category"></Column>
-                            <Column field="quantity" header="Quantity"></Column>
-                        </DataTable>
-                    </div>
-                </div>
-
-                <DataTableStripedDemoDoc />
+                <DocActions github="datatable/striped.js" />
             </div>
-        );
-    }
+
+            <div className="content-section implementation">
+                <div className="card">
+                    <DataTable value={products} stripedRows responsiveLayout="scroll">
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity"></Column>
+                    </DataTable>
+                </div>
+            </div>
+
+            <DataTableStripedDemoDoc />
+        </div>
+    );
 }
 
-export class DataTableStripedDemoDoc extends Component {
+export default DataTableStripedDemo;
 
-    constructor(props) {
-        super(props);
+export const DataTableStripedDemoDoc = memo(() => {
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -102,10 +92,10 @@ export class DataTableStripedDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -133,10 +123,10 @@ const DataTableStripedDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -164,10 +154,10 @@ const DataTableStripedDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="./ProductService.js"></script>
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
@@ -175,7 +165,7 @@ const DataTableStripedDemo = () => {
         <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { Column } = primereact.column;
 const { DataTable } = primereact.datatable;
@@ -202,23 +192,16 @@ const DataTableStripedDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'DataTableStripedDemo', sources: this.sources, service: 'ProductService', data: 'products-small' })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'DataTableStripedDemo', sources: sources, service: 'ProductService', data: 'products-small' })
+                }
+            </TabView>
+        </div>
+    )
+})
