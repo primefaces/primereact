@@ -153,6 +153,11 @@ export const Tooltip = forwardRef((props, ref) => {
                 elementRef.current.style.left = '';
                 elementRef.current.style.top = '';
 
+                // GitHub #2695 disable pointer events when autohiding
+                if (isAutoHide()) {
+                    elementRef.current.style.pointerEvents = 'none';
+                }
+     
                 if (isMouseTrack(currentTargetRef.current) && !containerSize.current) {
                     containerSize.current = {
                         width: DomHandler.getOuterWidth(elementRef.current),
