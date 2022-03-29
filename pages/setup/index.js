@@ -235,11 +235,11 @@ dependencies: {
                             </tr>
                             <tr>
                                 <td>FullCalendar*</td>
-                                <td>FullCalendar 4.0 Alpha.2+.</td>
+                                <td>FullCalendar 4.0 Alpha.2+</td>
                             </tr>
                             <tr>
+                                <td>DataView</td>
                                 <td>PrimeFlex</td>
-                                <td>DataView component.</td>
                             </tr>
                         </tbody>
                     </table>

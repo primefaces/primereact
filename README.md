@@ -61,6 +61,19 @@ dependencies: {
 }
 ```
 
+### Optional
+
+Here is the list of components with 3rd party dependencies.
+
+| Component | Dependency |
+| --- | --- |
+| Charts | Charts.js 3.x |
+| GMap | Google Maps |
+| Editor | Quill.js |
+| FullCalendar* | FullCalendar 4.0 Alpha.2+
+| DataView | PrimeFlex |
+* Deprecated
+
 ## Styles
 The css dependencies are as follows, note that you may change the theme with another one of your choice.
 
