@@ -462,9 +462,9 @@ export const AutoComplete = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(overlayRef.current);
     });
 
-    useImperativeHandle(ref, () => {
+    useImperativeHandle(ref, () => ({
         search
-    });
+    }));
 
     const createSimpleAutoComplete = () => {
         const value = formatValue(props.value);

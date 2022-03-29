@@ -74,9 +74,9 @@ export const RadioButton = memo(forwardRef((props, ref) => {
         }
     });
 
-    useImperativeHandle(ref, () => {
+    useImperativeHandle(ref, () => ({
         select
-    });
+    }));
 
     const className = classNames('p-radiobutton p-component', {
         'p-radiobutton-checked': props.checked,

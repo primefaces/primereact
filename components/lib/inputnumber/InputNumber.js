@@ -904,9 +904,9 @@ export const InputNumber = memo(forwardRef((props, ref) => {
         return numberFormat.current;
     }
 
-    useImperativeHandle(ref, () => {
+    useImperativeHandle(ref, () => ({
         getFormatter
-    });
+    }));
 
     useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);

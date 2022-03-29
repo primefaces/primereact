@@ -72,9 +72,9 @@ export const Editor = memo(forwardRef((props, ref) => {
         }
     }, [props.value]);
 
-    useImperativeHandle(ref, () => {
+    useImperativeHandle(ref, () => ({
         getQuill
-    });
+    }));
 
     const createToolbarHeader = () => {
         if (props.showHeader === false) {

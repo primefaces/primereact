@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import PrimeReact, { localeOption, localeOptions } from '../api/Api';
 import { CalendarPanel } from './CalendarPanel';
@@ -2278,6 +2278,14 @@ export const Calendar = memo(forwardRef((props, ref) => {
 
         ZIndexUtils.clear(overlayRef.current);
     });
+
+    useImperativeHandle(ref, () => ({
+        show,
+        hide,
+        getCurrentDateTime,
+        getViewDate,
+        updateViewDate
+    }));
 
     const createBackwardNavigator = (isVisible) => {
         const navigatorProps = isVisible ? { 'onClick': onPrevButtonClick, 'onKeyDown': e => onContainerButtonKeydown(e) } : { 'style': { visibility: 'hidden' } };

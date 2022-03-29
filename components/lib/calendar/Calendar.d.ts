@@ -150,9 +150,9 @@ export interface CalendarProps {
     onHide?(): void;
 }
 
-export declare class Calendar extends React.Component<CalendarProps, any> { 
-    public showOverlay(): void;
-    public hideOverlay(): void;
+export declare class Calendar extends React.Component<CalendarProps, any> {
+    public show(): void;
+    public hide(): void;
     public getCurrentDateTime(): Date | Date[];
     public getViewDate(): Date | Date[];
     public updateViewDate(event: CalendarEventType, value: Date | Date[]): void;
