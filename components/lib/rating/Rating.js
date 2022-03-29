@@ -101,7 +101,7 @@ export const Rating = memo(forwardRef((props, ref) => {
 
     const className = classNames('p-rating', {
         'p-disabled': props.disabled,
-        'p-rating-readonly': props.readOnly
+        'p-readonly': props.readOnly
     }, props.className);
     const cancelIcon = createCancelIcon();
     const stars = createStars();
