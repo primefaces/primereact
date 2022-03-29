@@ -19,6 +19,7 @@ export const BodyCell = memo((props) => {
 
     const getColumnProp = (prop) => (props.column ? props.column.props[prop] : null);
     const field = getColumnProp('field') || `field_${props.index}`;
+    const editingKey = props.dataKey ? (props.rowData[props.dataKey] || props.rowIndex) : props.rowIndex;
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click', listener: (e) => {
@@ -91,7 +92,7 @@ export const BodyCell = memo((props) => {
     }
 
     const getEditingRowData = () => {
-        return props.editingMeta && props.editingMeta[props.rowIndex] ? props.editingMeta[props.rowIndex].data : props.rowData;
+        return props.editingMeta && props.editingMeta[editingKey] ? props.editingMeta[editingKey].data : props.rowData;
     }
 
     const getTabIndex = (cellSelected) => {
@@ -237,7 +238,7 @@ export const BodyCell = memo((props) => {
         setEditingRowDataState(editingRowData);
 
         // update editing meta for complete methods on row mode
-        props.editingMeta[props.rowIndex].data[field] = val;
+        props.editingMeta[editingKey].data[field] = val;
     }
 
     const onClick = (event) => {
@@ -443,7 +444,7 @@ export const BodyCell = memo((props) => {
     useUpdateEffect(() => {
         if (props.editMode === 'cell' || props.editMode === 'row') {
             const callbackParams = getCellCallbackParams();
-            const params = { ...callbackParams, editing: editingState };
+            const params = { ...callbackParams, editing: editingState, editingKey };
 
             props.onEditingMetaChange(params);
         }

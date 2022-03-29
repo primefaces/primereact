@@ -433,17 +433,17 @@ export const DataTable = forwardRef((props, ref) => {
     }
 
     const onEditingMetaChange = (e) => {
-        const { rowData, field, rowIndex, editing } = e;
+        const { rowData, field, editingKey, rowIndex, editing } = e;
         let editingMeta = { ...editingMetaState };
-        let meta = editingMeta[rowIndex];
+        let meta = editingMeta[editingKey];
 
         if (editing) {
-            !meta && (meta = editingMeta[rowIndex] = { data: { ...rowData }, fields: [] });
+            (this.props.editMode === 'row' || !meta) && (meta = editingMeta[editingKey] = { data: { ...rowData }, fields: [] });
             meta['fields'].push(field);
         }
         else if (meta) {
             const fields = meta['fields'].filter(f => f !== field);
-            !fields.length ? (delete editingMeta[rowIndex]) : (meta['fields'] = fields);
+            !fields.length ? (delete editingMeta[editingKey]) : (meta['fields'] = fields);
         }
 
         setEditingMetaState(editingMeta);

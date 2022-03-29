@@ -194,15 +194,18 @@ export const BodyRow = memo((props) => {
         if (props.onRowEditChange) {
             let editingRows;
             const dataKey = props.dataKey;
-            const { originalEvent, data, index } = e;
+            const { originalEvent, data, index, newData } = e;
 
             if (dataKey) {
                 let dataKeyValue = String(ObjectUtils.resolveFieldData(data, dataKey));
                 editingRows = props.editingRows ? { ...props.editingRows } : {};
 
-                if (editingRows[dataKeyValue] != null)
+                if (!editing) {
                     delete editingRows[dataKeyValue];
-                else
+                    // if the key value was changed, stop editing for the new key value too
+                    let newDataKeyValue = String(ObjectUtils.resolveFieldData(newData, dataKey));
+                    delete editingRows[newDataKeyValue];
+                } else
                     editingRows[dataKeyValue] = true;
             }
             else {
