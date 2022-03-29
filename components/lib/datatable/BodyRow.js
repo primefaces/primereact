@@ -205,8 +205,10 @@ export const BodyRow = memo((props) => {
                     // if the key value was changed, stop editing for the new key value too
                     let newDataKeyValue = String(ObjectUtils.resolveFieldData(newData, dataKey));
                     delete editingRows[newDataKeyValue];
-                } else
+                }
+                else {
                     editingRows[dataKeyValue] = true;
+                }
             }
             else {
                 let editingRowIndex = findIndex(props.editingRows, data);

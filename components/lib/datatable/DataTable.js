@@ -438,7 +438,7 @@ export const DataTable = forwardRef((props, ref) => {
         let meta = editingMeta[editingKey];
 
         if (editing) {
-            (this.props.editMode === 'row' || !meta) && (meta = editingMeta[editingKey] = { data: { ...rowData }, fields: [] });
+            !meta && (meta = editingMeta[editingKey] = { data: { ...rowData }, fields: [] });
             meta['fields'].push(field);
         }
         else if (meta) {
