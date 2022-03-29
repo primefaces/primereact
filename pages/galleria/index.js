@@ -1,60 +1,67 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PhotoService } from '../../service/PhotoService';
 import { Galleria } from '../../components/lib/galleria/Galleria';
-import { GalleriaDoc } from '../../components/doc/galleria';
+import GalleriaDoc from '../../components/doc/galleria';
 import Head from 'next/head';
 import getConfig from 'next/config';
 
-export default class GalleriaDemo extends Component {
+const GalleriaDemo = () => {
 
-    constructor(props) {
-        super(props);
+    const [images, setImages] = useState(null);
 
-        this.state = {
-            images: null
-        };
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+    const galleriaService = new PhotoService();
 
-        this.galleriaService = new PhotoService();
-        this.itemTemplate = this.itemTemplate.bind(this);
-        this.thumbnailTemplate = this.thumbnailTemplate.bind(this);
-        this.contextPath = getConfig().publicRuntimeConfig.contextPath;
+    useEffect(() => {
+        galleriaService.getImages().then(data => setImages(data));
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+    const responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 5
+        },
+        {
+            breakpoint: '768px',
+            numVisible: 3
+        },
+        {
+            breakpoint: '560px',
+            numVisible: 1
+        }
+    ];
+
+    const itemTemplate = (item) => {
+        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%' }} />
     }
 
-    componentDidMount() {
-        this.galleriaService.getImages().then(data => this.setState({ images: data }));
+    const thumbnailTemplate = (item) => {
+        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} />
     }
 
-    itemTemplate(item) {
-        return <img src={`${this.contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%' }} />
-    }
-
-    thumbnailTemplate(item) {
-        return <img src={`${this.contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} />
-    }
-
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React Gallery Component</title>
-                    <meta name="description" content="Galleria is a content gallery component." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Galleria</h1>
-                        <p>Galleria is a content gallery component.</p>
-                    </div>
+    return (
+        <div>
+            <Head>
+                <title>React Gallery Component</title>
+                <meta name="description" content="Galleria is a content gallery component." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>Galleria</h1>
+                    <p>Galleria is a content gallery component.</p>
                 </div>
-
-                <div className="content-section implementation">
-                    <div className="card">
-                        <Galleria value={this.state.images} responsiveOptions={this.responsiveOptions} numVisible={5} style={{maxWidth: '640px'}}
-                            item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
-                    </div>
-                </div>
-
-                <GalleriaDoc />
             </div>
-        );
-    }
+
+            <div className="content-section implementation">
+                <div className="card">
+                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
+                        item={itemTemplate} thumbnail={thumbnailTemplate} />
+                </div>
+            </div>
+
+            <GalleriaDoc />
+        </div>
+    );
 }
+
+export default GalleriaDemo;

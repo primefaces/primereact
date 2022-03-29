@@ -138,11 +138,6 @@
     }
 }
 
-.blocked-scroll {
-    overflow: hidden;
-}
-
-
 @media screen and (min-width: 1729px) {
     .layout-content-inner {
         max-width: 1478px;
@@ -186,7 +181,17 @@
             }
         }
 
+        .layout-content {
+            .content-section {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
 
+    }
+
+    .blocked-scroll {
+        overflow: hidden;
     }
 }
 

@@ -1,13 +1,13 @@
 import getConfig from 'next/config';
 import { useEffect, useState } from 'react';
 
-export default function TemplateSection(props) {
+const TemplateSection = (props) => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [animationClass, setAnimationClass] = useState("");
 
     useEffect(() => {
         setAnimationClass("templates-animation");
-    });
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <section className="landing-templates theme-dark py-8">
@@ -35,6 +35,7 @@ export default function TemplateSection(props) {
                 <a
                     className="templates-btn"
                     target="_blank"
+                    rel="noopener noreferrer"
                     href="https://www.primefaces.org/diamond-react/"
                     >
                 Diamond Preview
@@ -55,6 +56,7 @@ export default function TemplateSection(props) {
             <a
                 className="templates-btn"
                 target="_blank"
+                rel="noopener noreferrer"
                 href="https://www.primefaces.org/freya-react/"
                 >
             Freya Preview
@@ -77,13 +79,14 @@ export default function TemplateSection(props) {
                 <a
                     className="templates-btn"
                     target="_blank"
+                    rel="noopener noreferrer"
                     href="https://www.primefaces.org/atlantis-react/"
                     >
                 Atlantis Preview
                 </a>
             </div>
             <div className="template-block block-middle border-none box-shadow-none mr-2 flex justify-content-center align-items-center flex-column">
-                <img className="img-1" src={props.dark ? `${contextPath}/images/landing-new/templates/templates-text-dark.png` : `${contextPath}/images/landing-new/templates/templates-text-light.png`} height={110} />
+                <img className="img-1" src={props.dark ? `${contextPath}/images/landing-new/templates/templates-text-dark.png` : `${contextPath}/images/landing-new/templates/templates-text-light.png`} alt="template-text" height={110} />
             </div>
             <div className="template-block block-4 ml-2 flex justify-content-center align-items-center"
             style={
@@ -99,6 +102,7 @@ export default function TemplateSection(props) {
             <a
                 className="templates-btn"
                 target="_blank"
+                rel="noopener noreferrer"
                 href="https://www.primefaces.org/apollo-react/"
                 >
             Apollo Preview
@@ -121,6 +125,7 @@ export default function TemplateSection(props) {
                 <a
                     className="templates-btn"
                     target="_blank"
+                    rel="noopener noreferrer"
                     href="https://www.primefaces.org/serenity-react/"
                     >
                 Serenity Preview
@@ -141,6 +146,7 @@ export default function TemplateSection(props) {
             <a
                 className="templates-btn"
                 target="_blank"
+                rel="noopener noreferrer"
                 href="https://www.primefaces.org/ultima-react/"
                 >
             Ultima Preview
@@ -206,7 +212,9 @@ export default function TemplateSection(props) {
                 </div>
             </div>
             </section>
-            
+
         </section>
     );
 }
+
+export default TemplateSection;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { MenuItem } from '../menuitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType, TemplateType } from "../utils";
+import { IconType, TemplateType } from '../utils';
 
 type SplitButtonAppendToType = 'self' | HTMLElement | undefined | null;
 

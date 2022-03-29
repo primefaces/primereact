@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, memo } from 'react';
 import { DataTable } from '../../components/lib/datatable/DataTable';
 import { Column } from '../../components/lib/column/Column';
 import { TabView } from '../../components/lib/tabview/TabView';
@@ -8,49 +8,38 @@ import { Skeleton } from '../../components/lib/skeleton/Skeleton';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class DataTableVirtualScrollDemo extends Component {
+const DataTableVirtualScrollDemo = () => {
 
-    constructor(props) {
-        super(props);
+    const carService = new CarService();
+    const [cars, setCars] = useState(Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1)));
+    const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
+    const [lazyLoading, setLazyLoading] = useState(false);
+    let loadLazyTimeout = null;
 
-        this.carService = new CarService();
+    const loadCarsLazy = (event) => {
+        !lazyLoading && setLazyLoading(true);
 
-        this.state = {
-            cars: Array.from({ length: 100000 }).map((_, i) => this.carService.generateCar(i + 1)),
-            virtualCars: Array.from({ length: 100000 }),
-            lazyLoading: false
-        };
-
-        this.loadingTemplate = this.loadingTemplate.bind(this);
-        this.loadCarsLazy = this.loadCarsLazy.bind(this);
-    }
-
-    loadCarsLazy(event) {
-        !this.state.lazyLoading && this.setState({ lazyLoading: true });
-
-        if (this.loadLazyTimeout) {
-            clearTimeout(this.loadLazyTimeout);
+        if (loadLazyTimeout) {
+            clearTimeout(loadLazyTimeout);
         }
 
         //simulate remote connection with a timeout
-        this.loadLazyTimeout = setTimeout(() => {
-            let virtualCars = [...this.state.virtualCars];
+        loadLazyTimeout = setTimeout(() => {
+            let _virtualCars = [...virtualCars];
             let { first, last } = event;
 
             //load data of required page
-            const loadedCars = this.state.cars.slice(first, last);
+            const loadedCars = cars.slice(first, last);
 
             //populate page of virtual cars
-            Array.prototype.splice.apply(virtualCars, [...[first, last - first], ...loadedCars]);
+            Array.prototype.splice.apply(_virtualCars, [...[first, last - first], ...loadedCars]);
 
-            this.setState({
-                virtualCars,
-                lazyLoading: false
-            });
+            setVirtualCars(_virtualCars);
+            setLazyLoading(false);
         }, Math.random() * 1000 + 250);
     }
 
-    loadingTemplate(options) {
+    const loadingTemplate = (options) => {
         return (
             <div className="flex align-items-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }} >
                 <Skeleton width={options.cellEven ? (options.field === 'year' ? '30%' : '40%') : '60%'} height="1rem" />
@@ -58,61 +47,58 @@ export default class DataTableVirtualScrollDemo extends Component {
         )
     }
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React Table Component - VirtualScroll</title>
-                    <meta name="description" content="VirtualScroller is a performant approach to handle huge data efficiently." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable <span>VirtualScroll</span></h1>
-                        <p>VirtualScroller is a performant approach to handle huge data efficiently.</p>
-                    </div>
-
-                    <DocActions github="datatable/virtualscroll.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Table Component - VirtualScroll</title>
+                <meta name="description" content="VirtualScroller is a performant approach to handle huge data efficiently." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>DataTable <span>VirtualScroll</span></h1>
+                    <p>VirtualScroller is a performant approach to handle huge data efficiently.</p>
                 </div>
 
-                <div className="content-section implementation">
-                    <div className="card">
-                        <h5>Preloaded Data (100000 Rows)</h5>
-                        <DataTable value={this.state.cars} scrollable scrollHeight="400px" virtualScrollerOptions={{ itemSize: 46 }}>
-                            <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
-                            <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
-                            <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
-                            <Column field="brand" header="Brand" style={{ minWidth: '200px' }}></Column>
-                            <Column field="color" header="Color" style={{ minWidth: '200px' }}></Column>
-                        </DataTable>
-                    </div>
-
-                    <div className="card">
-                        <h5>Lazy Loading from a Remote Datasource (100000 Rows)</h5>
-                        <DataTable value={this.state.virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: this.loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: this.state.lazyLoading, loadingTemplate: this.loadingTemplate }}>
-                            <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
-                            <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
-                            <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
-                            <Column field="brand" header="Brand" style={{ minWidth: '200px' }}></Column>
-                            <Column field="color" header="Color" style={{ minWidth: '200px' }}></Column>
-                        </DataTable>
-                    </div>
-                </div>
-
-                <DataTableVirtualScrollDemoDoc />
+                <DocActions github="datatable/virtualscroll.js" />
             </div>
-        );
-    }
+
+            <div className="content-section implementation">
+                <div className="card">
+                    <h5>Preloaded Data (100000 Rows)</h5>
+                    <DataTable value={cars} scrollable scrollHeight="400px" virtualScrollerOptions={{ itemSize: 46 }}>
+                        <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
+                        <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
+                        <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
+                        <Column field="brand" header="Brand" style={{ minWidth: '200px' }}></Column>
+                        <Column field="color" header="Color" style={{ minWidth: '200px' }}></Column>
+                    </DataTable>
+                </div>
+
+                <div className="card">
+                    <h5>Lazy Loading from a Remote Datasource (100000 Rows)</h5>
+                    <DataTable value={virtualCars} scrollable scrollHeight="400px" virtualScrollerOptions={{ lazy: true, onLazyLoad: loadCarsLazy, itemSize: 46, delay: 200, showLoader: true, loading: lazyLoading, loadingTemplate }}>
+                        <Column field="id" header="Id" style={{ minWidth: '200px' }}></Column>
+                        <Column field="vin" header="Vin" style={{ minWidth: '200px' }}></Column>
+                        <Column field="year" header="Year" style={{ minWidth: '200px' }}></Column>
+                        <Column field="brand" header="Brand" style={{ minWidth: '200px' }}></Column>
+                        <Column field="color" header="Color" style={{ minWidth: '200px' }}></Column>
+                    </DataTable>
+                </div>
+            </div>
+
+            <DataTableVirtualScrollDemoDoc />
+        </div>
+    );
 }
 
-export class DataTableVirtualScrollDemoDoc extends Component {
+export default DataTableVirtualScrollDemo;
 
-    constructor(props) {
-        super(props);
+export const DataTableVirtualScrollDemoDoc = memo(() => {
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -198,10 +184,10 @@ export class DataTableVirtualScrollDemo extends Component {
     }
 }
 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -274,10 +260,10 @@ const DataTableVirtualScrollDemo = () => {
     );
 }
 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -350,10 +336,10 @@ const DataTableVirtualScrollDemo = () => {
     );
 }
 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="./CarService.js"></script>
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
@@ -362,7 +348,7 @@ const DataTableVirtualScrollDemo = () => {
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>
         <script src="https://unpkg.com/primereact/skeleton/skeleton.min.js"></script>`,
-                content: `
+            content: `
 const { useState } = React;
 const { Column } = primereact.column;
 const { DataTable } = primereact.datatable;
@@ -434,23 +420,16 @@ const DataTableVirtualScrollDemo = () => {
     );
 }
                 `
-            }
-        };
+        }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'DataTableVirtualScrollDemo', sources: this.sources, service: 'CarService' })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'DataTableVirtualScrollDemo', sources: sources, service: 'CarService' })
+                }
+            </TabView>
+        </div>
+    )
+})

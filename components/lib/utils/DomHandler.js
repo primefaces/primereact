@@ -916,4 +916,23 @@ export default class DomHandler {
         }
         return styleElement;
     }
+
+    static getTargetElement(target) {
+        if (!target) return null;
+
+        if (target === 'document') {
+            return document;
+        }
+        else if (target === 'window') {
+            return window;
+        }
+        else if (typeof target === 'object' && target.hasOwnProperty('current')) {
+            return this.isExist(target.current) ? target.current : null;
+        }
+        else {
+            const isFunction = (obj) => !!(obj && obj.constructor && obj.call && obj.apply);
+            const element = isFunction(target) ? target() : target;
+            return ((element && element.nodeType === 9) || this.isExist(element)) ? element : null;
+        }
+    }
 }

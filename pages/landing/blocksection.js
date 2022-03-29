@@ -1,13 +1,13 @@
 import getConfig from 'next/config';
 import { useEffect, useState } from 'react';
 
-export default function BlockSection() {
+const BlockSection = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [animationClass, setAnimationClass] = useState('');
 
     useEffect(() => {
         setAnimationClass("blocks-animation");
-    });
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <section id="blocks-section" className="landing-blocks pt-8 overflow-hidden">
@@ -385,3 +385,5 @@ export default function BlockSection() {
         </section>
     );
 }
+
+export default BlockSection;

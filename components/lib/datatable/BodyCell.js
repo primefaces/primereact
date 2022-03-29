@@ -1,116 +1,111 @@
-import React, { Component } from 'react';
-import { ObjectUtils, DomHandler, classNames } from '../utils/Utils';
-import { OverlayService } from '../overlayservice/OverlayService';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { RowRadioButton } from './RowRadioButton';
 import { RowCheckbox } from './RowCheckbox';
 import { Ripple } from '../ripple/Ripple';
+import { OverlayService } from '../overlayservice/OverlayService';
+import { ObjectUtils, DomHandler, classNames } from '../utils/Utils';
+import { useEventListener, useUpdateEffect, useUnmountEffect } from '../hooks/Hooks';
 
-export class BodyCell extends Component {
+export const BodyCell = memo((props) => {
+    const [editingState, setEditingState] = useState(props.editing);
+    const [editingRowDataState, setEditingRowDataState] = useState(props.rowData);
+    const [styleObjectState, setStyleObjectState] = useState({});
+    const elementRef = useRef(null);
+    const keyHelperRef = useRef(null);
+    const overlayEventListener = useRef(null);
+    const selfClick = useRef(false);
+    const tabindexTimeout = useRef(null);
+    const initFocusTimeout = useRef(null);
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            editing: props.editing,
-            editingRowData: props.rowData,
-            styleObject: {}
-        };
+    const getColumnProp = (prop) => (props.column ? props.column.props[prop] : null);
+    const field = getColumnProp('field') || `field_${props.index}`;
+    const editingKey = props.dataKey ? (props.rowData[props.dataKey] || props.rowIndex) : props.rowIndex;
 
-        this.onClick = this.onClick.bind(this);
-        this.onMouseDown = this.onMouseDown.bind(this);
-        this.onMouseUp = this.onMouseUp.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
-        this.onBlur = this.onBlur.bind(this);
-        this.onEditorFocus = this.onEditorFocus.bind(this);
-        this.onRowToggle = this.onRowToggle.bind(this);
-        this.onRadioChange = this.onRadioChange.bind(this);
-        this.onCheckboxChange = this.onCheckboxChange.bind(this);
+    const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
+        type: 'click', listener: (e) => {
+            if (!selfClick.current && isOutsideClicked(e.target)) {
+                switchCellToViewMode(e, true);
+            }
 
-        this.onRowEditSave = this.onRowEditSave.bind(this);
-        this.onRowEditCancel = this.onRowEditCancel.bind(this);
-        this.onRowEditInit = this.onRowEditInit.bind(this);
+            selfClick.current = false;
+        }, options: true
+    });
 
-        this.editorCallback = this.editorCallback.bind(this);
+    if (props.editMode === 'row' && props.editing !== editingState) {
+        setEditingState(props.editing);
     }
 
-    get field() {
-        return this.getColumnProp('field') || `field_${this.props.index}`;
+    const isEditable = () => {
+        return getColumnProp('editor');
     }
 
-    isEditable() {
-        return this.getColumnProp('editor');
+    const isSelected = () => {
+        return props.selection ? (props.selection instanceof Array ? findIndex(props.selection) > -1 : equals(props.selection)) : false
     }
 
-    isSelected() {
-        return this.props.selection ? (this.props.selection instanceof Array ? this.findIndex(this.props.selection) > -1 : this.equals(this.props.selection)) : false
+    const equalsData = (data) => {
+        return props.compareSelectionBy === 'equals' ? (data === props.rowData) : ObjectUtils.equals(data, props.rowData, props.dataKey);
     }
 
-    equalsData(data) {
-        return this.props.compareSelectionBy === 'equals' ? (data === this.props.rowData) : ObjectUtils.equals(data, this.props.rowData, this.props.dataKey);
+    const equals = (selectedCell) => {
+        return (selectedCell.rowIndex === props.rowIndex || equalsData(selectedCell.rowData)) && (selectedCell.field === field || selectedCell.cellIndex === props.index);
     }
 
-    equals(selectedCell) {
-        return (selectedCell.rowIndex === this.props.rowIndex || this.equalsData(selectedCell.rowData)) && (selectedCell.field === this.field || selectedCell.cellIndex === this.props.index);
+    const isOutsideClicked = (target) => {
+        return elementRef.current && !(elementRef.current.isSameNode(target) || elementRef.current.contains(target));
     }
 
-    isOutsideClicked(target) {
-        return this.el && !(this.el.isSameNode(target) || this.el.contains(target));
+    const getVirtualScrollerOption = (option) => {
+        return props.virtualScrollerOptions ? props.virtualScrollerOptions[option] : null;
     }
 
-    getColumnProp(prop) {
-        return this.props.column ? this.props.column.props[prop] : null;
+    const getStyle = () => {
+        const bodyStyle = getColumnProp('bodyStyle');
+        const columnStyle = getColumnProp('style');
+
+        return getColumnProp('frozen') ? Object.assign({}, columnStyle, bodyStyle, styleObjectState) : Object.assign({}, columnStyle, bodyStyle);
     }
 
-    getVirtualScrollerOption(option) {
-        return this.props.virtualScrollerOptions ? this.props.virtualScrollerOptions[option] : null;
-    }
-
-    getStyle() {
-        const bodyStyle = this.getColumnProp('bodyStyle');
-        const columnStyle = this.getColumnProp('style');
-
-        return this.getColumnProp('frozen') ? Object.assign({}, columnStyle, bodyStyle, this.state.styleObject) : Object.assign({}, columnStyle, bodyStyle);
-    }
-
-    getCellParams() {
+    const getCellParams = () => {
         return {
-            value: this.resolveFieldData(),
-            field: this.field,
-            rowData: this.props.rowData,
-            rowIndex: this.props.rowIndex,
-            cellIndex: this.props.index,
-            selected: this.isSelected(),
-            column: this.props.column,
-            props: this.props
+            value: resolveFieldData(),
+            field: field,
+            rowData: props.rowData,
+            rowIndex: props.rowIndex,
+            cellIndex: props.index,
+            selected: isSelected(),
+            column: props.column,
+            props
         }
     }
 
-    getCellCallbackParams(event) {
-        const params = this.getCellParams();
+    const getCellCallbackParams = (event) => {
+        const params = getCellParams();
         return {
             originalEvent: event,
             ...params
         }
     }
 
-    resolveFieldData(data) {
-        return ObjectUtils.resolveFieldData(data || this.props.rowData, this.field);
+    const resolveFieldData = (data) => {
+        return ObjectUtils.resolveFieldData(data || props.rowData, field);
     }
 
-    getEditingRowData() {
-        return this.props.editingMeta && this.props.editingMeta[this.props.rowIndex] ? this.props.editingMeta[this.props.rowIndex].data : this.props.rowData;
+    const getEditingRowData = () => {
+        return props.editingMeta && props.editingMeta[editingKey] ? props.editingMeta[editingKey].data : props.rowData;
     }
 
-    getTabIndex(cellSelected) {
-        return this.props.allowCellSelection ? (cellSelected ? 0 : (this.props.rowIndex === 0 && this.props.index === 0 ? this.props.tabIndex : -1)) : null;
+    const getTabIndex = (cellSelected) => {
+        return props.allowCellSelection ? (cellSelected ? 0 : (props.rowIndex === 0 && props.index === 0 ? props.tabIndex : -1)) : null;
     }
 
-    findIndex(collection) {
-        return (collection || []).findIndex(data => this.equals(data));
+    const findIndex = (collection) => {
+        return (collection || []).findIndex(data => equals(data));
     }
 
-    closeCell(event) {
-        const params = this.getCellCallbackParams(event);
-        const onBeforeCellEditHide = this.getColumnProp('onBeforeCellEditHide');
+    const closeCell = (event) => {
+        const params = getCellCallbackParams(event);
+        const onBeforeCellEditHide = getColumnProp('onBeforeCellEditHide');
 
         if (onBeforeCellEditHide) {
             onBeforeCellEditHide(params);
@@ -118,25 +113,23 @@ export class BodyCell extends Component {
 
         /* When using the 'tab' key, the focus event of the next cell is not called in IE. */
         setTimeout(() => {
-            this.setState({
-                editing: false
-            }, () => {
-                this.unbindDocumentEditListener();
-                OverlayService.off('overlay-click', this.overlayEventListener);
-                this.overlayEventListener = null;
-            });
+            setEditingState(false);
+            unbindDocumentClickListener();
+            OverlayService.off('overlay-click', overlayEventListener.current);
+            overlayEventListener.current = null;
+            selfClick.current = false;
         }, 1);
     }
 
-    switchCellToViewMode(event, submit) {
-        const callbackParams = this.getCellCallbackParams(event);
-        const newRowData = this.state.editingRowData;
-        const newValue = this.resolveFieldData(newRowData);
+    const switchCellToViewMode = (event, submit) => {
+        const callbackParams = getCellCallbackParams(event);
+        const newRowData = editingRowDataState;
+        const newValue = resolveFieldData(newRowData);
         const params = { ...callbackParams, newRowData, newValue };
 
-        const onCellEditCancel = this.getColumnProp('onCellEditCancel');
-        const cellEditValidator = this.getColumnProp('cellEditValidator');
-        const onCellEditComplete = this.getColumnProp('onCellEditComplete');
+        const onCellEditCancel = getColumnProp('onCellEditCancel');
+        const cellEditValidator = getColumnProp('cellEditValidator');
+        const onCellEditComplete = getColumnProp('onCellEditComplete');
 
         if (!submit && onCellEditCancel) {
             onCellEditCancel(params);
@@ -152,73 +145,73 @@ export class BodyCell extends Component {
                 onCellEditComplete(params);
             }
 
-            this.closeCell(event);
+            closeCell(event);
         }
         else {
             event.preventDefault();
         }
     }
 
-    findNextSelectableCell(cell) {
-        let nextCell = cell.nextElementSibling;
+    const findNextSelectableCell = (cell) => {
+        const nextCell = cell.nextElementSibling;
 
-        return nextCell ? (DomHandler.hasClass(nextCell, 'p-selectable-cell') ? nextCell : this.findNextSelectableCell(nextCell)) : null;
+        return nextCell ? (DomHandler.hasClass(nextCell, 'p-selectable-cell') ? nextCell : findNextSelectableCell(nextCell)) : null;
     }
 
-    findPrevSelectableCell(cell) {
-        let prevCell = cell.previousElementSibling;
+    const findPrevSelectableCell = (cell) => {
+        const prevCell = cell.previousElementSibling;
 
-        return prevCell ? (DomHandler.hasClass(prevCell, 'p-selectable-cell') ? prevCell : this.findPrevSelectableCell(prevCell)) : null;
+        return prevCell ? (DomHandler.hasClass(prevCell, 'p-selectable-cell') ? prevCell : findPrevSelectableCell(prevCell)) : null;
     }
 
-    findDownSelectableCell(cell) {
-        let downRow = cell.parentElement.nextElementSibling;
-        let downCell = downRow ? downRow.children[this.props.index] : null;
+    const findDownSelectableCell = (cell) => {
+        const downRow = cell.parentElement.nextElementSibling;
+        const downCell = downRow ? downRow.children[props.index] : null;
 
-        return downRow && downCell ? (DomHandler.hasClass(downRow, 'p-selectable-row') && DomHandler.hasClass(downCell, 'p-selectable-cell') ? downCell : this.findDownSelectableCell(downCell)) : null;
+        return downRow && downCell ? (DomHandler.hasClass(downRow, 'p-selectable-row') && DomHandler.hasClass(downCell, 'p-selectable-cell') ? downCell : findDownSelectableCell(downCell)) : null;
     }
 
-    findUpSelectableCell(cell) {
-        let upRow = cell.parentElement.previousElementSibling;
-        let upCell = upRow ? upRow.children[this.props.index] : null;
+    const findUpSelectableCell = (cell) => {
+        const upRow = cell.parentElement.previousElementSibling;
+        const upCell = upRow ? upRow.children[props.index] : null;
 
-        return upRow && upCell ? (DomHandler.hasClass(upRow, 'p-selectable-row') && DomHandler.hasClass(upCell, 'p-selectable-cell') ? upCell : this.findUpSelectableCell(upCell)) : null;
+        return upRow && upCell ? (DomHandler.hasClass(upRow, 'p-selectable-row') && DomHandler.hasClass(upCell, 'p-selectable-cell') ? upCell : findUpSelectableCell(upCell)) : null;
     }
 
-    changeTabIndex(currentCell, nextCell) {
+    const changeTabIndex = (currentCell, nextCell) => {
         if (currentCell && nextCell) {
             currentCell.tabIndex = -1;
-            nextCell.tabIndex = this.props.tabIndex;
+            nextCell.tabIndex = props.tabIndex;
         }
     }
 
-    focusOnElement() {
-        clearTimeout(this.tabindexTimeout);
-        this.tabindexTimeout = setTimeout(() => {
-            if (this.state.editing) {
-                const focusableEl = this.props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(this.el, ':not(.p-cell-editor-key-helper)') : DomHandler.findSingle(this.el, '.p-row-editor-save');
+    const focusOnElement = () => {
+        clearTimeout(tabindexTimeout.current);
+        tabindexTimeout.current = setTimeout(() => {
+            if (editingState) {
+                const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not(.p-cell-editor-key-helper)') : DomHandler.findSingle(elementRef.current, '.p-row-editor-save');
                 focusableEl && focusableEl.focus();
             }
 
-            this.keyHelper && (this.keyHelper.tabIndex = this.state.editing ? -1 : 0);
+            keyHelperRef.current && (keyHelperRef.current.tabIndex = editingState ? -1 : 0);
         }, 1);
     }
 
-    focusOnInit() {
-        clearTimeout(this.initFocusTimeout);
-        this.initFocusTimeout = setTimeout(() => {
-            const focusableEl = this.props.editMode === 'row' ? DomHandler.findSingle(this.el, '.p-row-editor-init') : null;
+    const focusOnInit = () => {
+        clearTimeout(initFocusTimeout.current);
+        initFocusTimeout.current = setTimeout(() => {
+            const focusableEl = props.editMode === 'row' ? DomHandler.findSingle(elementRef.current, '.p-row-editor-init') : null;
             focusableEl && focusableEl.focus();
         }, 1);
     }
 
-    updateStickyPosition() {
-        if (this.getColumnProp('frozen')) {
-            let styleObject = { ...this.state.styleObject };
-            let align = this.getColumnProp('alignFrozen');
+    const updateStickyPosition = () => {
+        if (getColumnProp('frozen')) {
+            let styleObject = { ...styleObjectState };
+            let align = getColumnProp('alignFrozen');
             if (align === 'right') {
                 let right = 0;
-                let next = this.el.nextElementSibling;
+                let next = elementRef.current.nextElementSibling;
                 if (next) {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
                 }
@@ -226,37 +219,37 @@ export class BodyCell extends Component {
             }
             else {
                 let left = 0;
-                let prev = this.el.previousElementSibling;
+                let prev = elementRef.current.previousElementSibling;
                 if (prev) {
                     left = DomHandler.getOuterWidth(prev) + parseFloat(prev.style.left || 0);
                 }
                 styleObject['left'] = left + 'px';
             }
 
-            const isSameStyle = this.state.styleObject['left'] === styleObject['left'] && this.state.styleObject['right'] === styleObject['right'];
-            !isSameStyle && this.setState({ styleObject });
+            const isSameStyle = styleObjectState['left'] === styleObject['left'] && styleObjectState['right'] === styleObject['right'];
+            !isSameStyle && setStyleObjectState(styleObject);
         }
     }
 
-    editorCallback(val) {
-        let editingRowData = { ...this.state.editingRowData };
-        editingRowData[this.field] = val;
+    const editorCallback = (val) => {
+        let editingRowData = { ...editingRowDataState };
+        editingRowData[field] = val;
 
-        this.setState({ editingRowData });
+        setEditingRowDataState(editingRowData);
 
         // update editing meta for complete methods on row mode
-        this.props.editingMeta[this.props.rowIndex].data[this.field] = val;
+        props.editingMeta[editingKey].data[field] = val;
     }
 
-    onClick(event) {
-        const params = this.getCellCallbackParams(event);
+    const onClick = (event) => {
+        const params = getCellCallbackParams(event);
 
-        if (this.props.editMode !== 'row' && this.isEditable() && !this.state.editing && (this.props.selectOnEdit || (!this.props.selectOnEdit && this.props.selected))) {
-            this.selfClick = true;
+        if (props.editMode !== 'row' && isEditable() && !editingState && (props.selectOnEdit || (!props.selectOnEdit && props.selected))) {
+            selfClick.current = true;
 
-            const onBeforeCellEditShow = this.getColumnProp('onBeforeCellEditShow');
-            const onCellEditInit = this.getColumnProp('onCellEditInit');
-            const cellEditValidatorEvent = this.getColumnProp('cellEditValidatorEvent');
+            const onBeforeCellEditShow = getColumnProp('onBeforeCellEditShow');
+            const onCellEditInit = getColumnProp('onCellEditInit');
+            const cellEditValidatorEvent = getColumnProp('cellEditValidatorEvent');
 
             if (onBeforeCellEditShow) {
                 onBeforeCellEditShow(params);
@@ -264,69 +257,61 @@ export class BodyCell extends Component {
 
             // If the data is sorted using sort icon, it has been added to wait for the sort operation when any cell is wanted to be opened.
             setTimeout(() => {
-                this.setState({
-                    editing: true
-                }, () => {
-                    if (onCellEditInit) {
-                        onCellEditInit(params);
-                    }
+                setEditingState(true);
 
-                    if (cellEditValidatorEvent === 'click') {
-                        this.bindDocumentEditListener();
+                if (onCellEditInit) {
+                    onCellEditInit(params);
+                }
 
-                        this.overlayEventListener = (e) => {
-                            if (!this.isOutsideClicked(e.target)) {
-                                this.selfClick = true;
-                            }
-                        };
+                if (cellEditValidatorEvent === 'click') {
+                    bindDocumentClickListener();
 
-                        OverlayService.on('overlay-click', this.overlayEventListener);
-                    }
-                });
+                    overlayEventListener.current = (e) => {
+                        if (!isOutsideClicked(e.target)) {
+                            selfClick.current = true;
+                        }
+                    };
+
+                    OverlayService.on('overlay-click', overlayEventListener.current);
+                }
             }, 1);
         }
 
-        if (this.props.allowCellSelection && this.props.onClick) {
-            this.props.onClick(params);
+        if (props.allowCellSelection && props.onClick) {
+            props.onClick(params);
         }
     }
 
-    onMouseDown(event) {
-        const params = this.getCellCallbackParams(event);
-
-        if (this.props.onMouseDown) {
-            this.props.onMouseDown(params);
-        }
+    const onMouseDown = (event) => {
+        const params = getCellCallbackParams(event);
+        props.onMouseDown && props.onMouseDown(params);
     }
 
-    onMouseUp(event) {
-        const params = this.getCellCallbackParams(event);
-
-        if (this.props.onMouseUp) {
-            this.props.onMouseUp(params);
-        }
+    const onMouseUp = (event) => {
+        const params = getCellCallbackParams(event);
+        props.onMouseUp && props.onMouseUp(params);
     }
 
-    onKeyDown(event) {
-        if (this.props.editMode !== 'row') {
+    const onKeyDown = (event) => {
+        if (props.editMode !== 'row') {
             if (event.which === 13 || event.which === 9) { // tab || enter
-                this.switchCellToViewMode(event, true);
+                switchCellToViewMode(event, true);
             }
 
             if (event.which === 27) { // escape
-                this.switchCellToViewMode(event, false);
+                switchCellToViewMode(event, false);
             }
         }
 
-        if (this.props.allowCellSelection) {
+        if (props.allowCellSelection) {
             const { target, currentTarget: cell } = event;
 
             switch (event.which) {
                 //left arrow
                 case 37:
-                    let prevCell = this.findPrevSelectableCell(cell);
+                    let prevCell = findPrevSelectableCell(cell);
                     if (prevCell) {
-                        this.changeTabIndex(cell, prevCell);
+                        changeTabIndex(cell, prevCell);
                         prevCell.focus();
                     }
 
@@ -335,9 +320,9 @@ export class BodyCell extends Component {
 
                 //right arrow
                 case 39:
-                    let nextCell = this.findNextSelectableCell(cell);
+                    let nextCell = findNextSelectableCell(cell);
                     if (nextCell) {
-                        this.changeTabIndex(cell, nextCell);
+                        changeTabIndex(cell, nextCell);
                         nextCell.focus();
                     }
 
@@ -346,9 +331,9 @@ export class BodyCell extends Component {
 
                 //up arrow
                 case 38:
-                    let upCell = this.findUpSelectableCell(cell);
+                    let upCell = findUpSelectableCell(cell);
                     if (upCell) {
-                        this.changeTabIndex(cell, upCell);
+                        changeTabIndex(cell, upCell);
                         upCell.focus();
                     }
 
@@ -357,9 +342,9 @@ export class BodyCell extends Component {
 
                 //down arrow
                 case 40:
-                    let downCell = this.findDownSelectableCell(cell);
+                    let downCell = findDownSelectableCell(cell);
                     if (downCell) {
-                        this.changeTabIndex(cell, downCell);
+                        changeTabIndex(cell, downCell);
                         downCell.focus();
                     }
 
@@ -369,7 +354,7 @@ export class BodyCell extends Component {
                 //enter
                 case 13: // @deprecated
                     if (!DomHandler.isClickable(target)) {
-                        this.onClick(event);
+                        onClick(event);
                         event.preventDefault();
                     }
                     break;
@@ -377,7 +362,7 @@ export class BodyCell extends Component {
                 //space
                 case 32:
                     if (!DomHandler.isClickable(target) && !target.readOnly) {
-                        this.onClick(event);
+                        onClick(event);
                         event.preventDefault();
                     }
                     break;
@@ -389,136 +374,100 @@ export class BodyCell extends Component {
         }
     }
 
-    onBlur(event) {
-        this.selfClick = false;
+    const onBlur = (event) => {
+        selfClick.current = false;
 
-        if (this.props.editMode !== 'row' && this.state.editing && this.getColumnProp('cellEditValidatorEvent') === 'blur') {
-            this.switchCellToViewMode(event, true);
+        if (props.editMode !== 'row' && editingState && getColumnProp('cellEditValidatorEvent') === 'blur') {
+            switchCellToViewMode(event, true);
         }
     }
 
-    onEditorFocus(event) {
-        this.onClick(event);
+    const onEditorFocus = (event) => {
+        onClick(event);
     }
 
-    onRadioChange(event) {
-        this.props.onRadioChange({
+    const onRadioChange = (event) => {
+        props.onRadioChange({
             originalEvent: event,
-            data: this.props.rowData,
-            index: this.props.rowIndex
+            data: props.rowData,
+            index: props.rowIndex
         });
     }
 
-    onCheckboxChange(event) {
-        this.props.onCheckboxChange({
+    const onCheckboxChange = (event) => {
+        props.onCheckboxChange({
             originalEvent: event,
-            data: this.props.rowData,
-            index: this.props.rowIndex
+            data: props.rowData,
+            index: props.rowIndex
         });
     }
 
-    onRowToggle(event) {
-        this.props.onRowToggle({
+    const onRowToggle = (event) => {
+        props.onRowToggle({
             originalEvent: event,
-            data: this.props.rowData
+            data: props.rowData
         });
 
         event.preventDefault();
     }
 
-    onRowEditInit(event) {
-        this.props.onRowEditInit({ originalEvent: event, data: this.props.rowData, newData: this.getEditingRowData(), field: this.field, index: this.props.rowIndex });
+    const onRowEditInit = (event) => {
+        props.onRowEditInit({ originalEvent: event, data: props.rowData, newData: getEditingRowData(), field: field, index: props.rowIndex });
     }
 
-    onRowEditSave(event) {
-        this.props.onRowEditSave({ originalEvent: event, data: this.props.rowData, newData: this.getEditingRowData(), field: this.field, index: this.props.rowIndex });
-        this.focusOnInit();
+    const onRowEditSave = (event) => {
+        props.onRowEditSave({ originalEvent: event, data: props.rowData, newData: getEditingRowData(), field: field, index: props.rowIndex });
+        focusOnInit();
     }
 
-    onRowEditCancel(event) {
-        this.props.onRowEditCancel({ originalEvent: event, data: this.props.rowData, newData: this.getEditingRowData(), field: this.field, index: this.props.rowIndex });
-        this.focusOnInit();
+    const onRowEditCancel = (event) => {
+        props.onRowEditCancel({ originalEvent: event, data: props.rowData, newData: getEditingRowData(), field: field, index: props.rowIndex });
+        focusOnInit();
     }
 
-    bindDocumentEditListener() {
-        if (!this.documentEditListener) {
-            this.documentEditListener = (e) => {
-                if (!this.selfClick && this.isOutsideClicked(e.target)) {
-                    this.switchCellToViewMode(e, true);
-                }
-
-                this.selfClick = false;
-            };
-
-            document.addEventListener('click', this.documentEditListener, true);
-        }
-    }
-
-    unbindDocumentEditListener() {
-        if (this.documentEditListener) {
-            document.removeEventListener('click', this.documentEditListener, true);
-            this.documentEditListener = null;
-            this.selfClick = false;
-        }
-    }
-
-    componentDidMount() {
-        if (this.getColumnProp('frozen')) {
-            this.updateStickyPosition();
-        }
-    }
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.editMode === 'row' && nextProps.editing !== prevState.editing) {
-            return {
-                editing: nextProps.editing
-            }
+    useEffect(() => {
+        if (getColumnProp('frozen')) {
+            updateStickyPosition();
         }
 
-        return null;
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (this.getColumnProp('frozen')) {
-            this.updateStickyPosition();
+        if (props.editMode === 'cell' || props.editMode === 'row') {
+            focusOnElement();
         }
+    });
 
-        if (this.props.editMode === 'cell' || this.props.editMode === 'row') {
-            this.focusOnElement();
-
-            if (prevProps.editingMeta !== this.props.editingMeta) {
-                this.setState({ editingRowData: this.getEditingRowData() });
-            }
-
-            if (prevState.editing !== this.state.editing) {
-                const callbackParams = this.getCellCallbackParams();
-                const params = { ...callbackParams, editing: this.state.editing };
-
-                this.props.onEditingMetaChange(params);
-            }
+    useUpdateEffect(() => {
+        if (props.editMode === 'cell' || props.editMode === 'row') {
+            setEditingRowDataState(getEditingRowData());
         }
-    }
+    }, [props.editingMeta]);
 
-    componentWillUnmount() {
-        this.unbindDocumentEditListener();
+    useUpdateEffect(() => {
+        if (props.editMode === 'cell' || props.editMode === 'row') {
+            const callbackParams = getCellCallbackParams();
+            const params = { ...callbackParams, editing: editingState, editingKey };
 
-        if (this.overlayEventListener) {
-            OverlayService.off('overlay-click', this.overlayEventListener);
-            this.overlayEventListener = null;
+            props.onEditingMetaChange(params);
         }
-    }
+    }, [editingState]);
 
-    renderLoading() {
-        const options = this.getVirtualScrollerOption('getLoaderOptions')(this.props.rowIndex, {
-            cellIndex: this.props.index,
-            cellFirst: this.props.index === 0,
-            cellLast: this.props.index === (this.getVirtualScrollerOption('columns').length - 1),
-            cellEven: this.props.index % 2 === 0,
-            cellOdd: this.props.index % 2 !== 0,
-            column: this.props.column,
-            field: this.field
+    useUnmountEffect(() => {
+        if (overlayEventListener.current) {
+            OverlayService.off('overlay-click', overlayEventListener.current);
+            overlayEventListener.current = null;
+        }
+    });
+
+    const createLoading = () => {
+        const options = getVirtualScrollerOption('getLoaderOptions')(props.rowIndex, {
+            cellIndex: props.index,
+            cellFirst: props.index === 0,
+            cellLast: props.index === (getVirtualScrollerOption('columns').length - 1),
+            cellEven: props.index % 2 === 0,
+            cellOdd: props.index % 2 !== 0,
+            column: props.column,
+            field: field
         });
-        const content = ObjectUtils.getJSXElement(this.getVirtualScrollerOption('loadingTemplate'), options);
+        const content = ObjectUtils.getJSXElement(getVirtualScrollerOption('loadingTemplate'), options);
 
         return (
             <td>
@@ -527,59 +476,59 @@ export class BodyCell extends Component {
         )
     }
 
-    renderElement() {
+    const createElement = () => {
         let content, editorKeyHelper;
-        const cellSelected = this.props.allowCellSelection && this.isSelected();
-        const isRowEditor = this.props.editMode === 'row';
-        const tabIndex = this.getTabIndex(cellSelected);
-        const selectionMode = this.getColumnProp('selectionMode');
-        const rowReorder = this.getColumnProp('rowReorder');
-        const expander = this.getColumnProp('expander');
-        const rowEditor = this.getColumnProp('rowEditor');
-        const header = this.getColumnProp('header');
-        const body = this.getColumnProp('body');
-        const editor = this.getColumnProp('editor');
-        const frozen = this.getColumnProp('frozen');
-        const align = this.getColumnProp('align');
-        const value = this.resolveFieldData();
-        const cellClassName = ObjectUtils.getPropValue(this.props.cellClassName, value, { props: this.props.tableProps, rowData: this.props.rowData, column: this.props.column });
-        const className = classNames(this.getColumnProp('bodyClassName'), this.getColumnProp('className'), cellClassName, {
+        const cellSelected = props.allowCellSelection && isSelected();
+        const isRowEditor = props.editMode === 'row';
+        const tabIndex = getTabIndex(cellSelected);
+        const selectionMode = getColumnProp('selectionMode');
+        const rowReorder = getColumnProp('rowReorder');
+        const expander = getColumnProp('expander');
+        const rowEditor = getColumnProp('rowEditor');
+        const header = getColumnProp('header');
+        const body = getColumnProp('body');
+        const editor = getColumnProp('editor');
+        const frozen = getColumnProp('frozen');
+        const align = getColumnProp('align');
+        const value = resolveFieldData();
+        const cellClassName = ObjectUtils.getPropValue(props.cellClassName, value, { props: props.tableProps, rowData: props.rowData, column: props.column });
+        const className = classNames(getColumnProp('bodyClassName'), getColumnProp('className'), cellClassName, {
             'p-selection-column': selectionMode !== null,
             'p-editable-column': editor,
-            'p-cell-editing': editor && this.state.editing,
+            'p-cell-editing': editor && editingState,
             'p-frozen-column': frozen,
-            'p-selectable-cell': this.props.allowCellSelection && this.props.isSelectable({ data: this.getCellParams(), index: this.props.rowIndex }),
+            'p-selectable-cell': props.allowCellSelection && props.isSelectable({ data: getCellParams(), index: props.rowIndex }),
             'p-highlight': cellSelected,
             [`p-align-${align}`]: !!align
         });
-        const style = this.getStyle();
-        const title = this.props.responsiveLayout === 'stack' && <span className="p-column-title">{ObjectUtils.getJSXElement(header, { props: this.props.tableProps })}</span>;
+        const style = getStyle();
+        const title = props.responsiveLayout === 'stack' && <span className="p-column-title">{ObjectUtils.getJSXElement(header, { props: props.tableProps })}</span>;
 
         if (selectionMode) {
-            const showSelection = this.props.showSelectionElement ? this.props.showSelectionElement(this.props.rowData, { rowIndex: this.props.rowIndex, props: this.props.tableProps }) : true;
+            const showSelection = props.showSelectionElement ? props.showSelectionElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
 
             content = showSelection && (
                 <>
-                    {selectionMode === 'single' && <RowRadioButton checked={this.props.selected} onChange={this.onRadioChange} tabIndex={this.props.tabIndex} tableSelector={this.props.tableSelector} />}
-                    {selectionMode === 'multiple' && <RowCheckbox checked={this.props.selected} onChange={this.onCheckboxChange} tabIndex={this.props.tabIndex} />}
+                    {selectionMode === 'single' && <RowRadioButton checked={props.selected} onChange={onRadioChange} tabIndex={props.tabIndex} tableSelector={props.tableSelector} />}
+                    {selectionMode === 'multiple' && <RowCheckbox checked={props.selected} onChange={onCheckboxChange} tabIndex={props.tabIndex} />}
                 </>
             )
         }
         else if (rowReorder) {
-            const showReorder = this.props.showRowReorderElement ? this.props.showRowReorderElement(this.props.rowData, { rowIndex: this.props.rowIndex, props: this.props.tableProps }) : true;
-            content = showReorder && <i className={classNames('p-datatable-reorderablerow-handle', this.getColumnProp('rowReorderIcon'))}></i>;
+            const showReorder = props.showRowReorderElement ? props.showRowReorderElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
+            content = showReorder && <i className={classNames('p-datatable-reorderablerow-handle', getColumnProp('rowReorderIcon'))}></i>;
         }
         else if (expander) {
-            const iconClassName = classNames('p-row-toggler-icon', this.props.expanded ? this.props.expandedRowIcon : this.props.collapsedRowIcon);
-            const ariaControls = `${this.props.tableSelector}_content_${this.props.rowIndex}_expanded`;
+            const iconClassName = classNames('p-row-toggler-icon', props.expanded ? props.expandedRowIcon : props.collapsedRowIcon);
+            const ariaControls = `${props.tableSelector}_content_${props.rowIndex}_expanded`;
             const expanderProps = {
-                onClick: this.onRowToggle,
+                onClick: onRowToggle,
                 className: 'p-row-toggler p-link',
                 iconClassName
             };
 
             content = (
-                <button className={expanderProps.className} onClick={expanderProps.onClick} type="button" aria-expanded={this.props.expanded} aria-controls={ariaControls} tabIndex={this.props.tabIndex}>
+                <button className={expanderProps.className} onClick={expanderProps.onClick} type="button" aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex}>
                     <span className={expanderProps.iconClassName}></span>
                     <Ripple />
                 </button>
@@ -587,30 +536,30 @@ export class BodyCell extends Component {
 
             if (body) {
                 expanderProps['element'] = content;
-                content = ObjectUtils.getJSXElement(body, this.props.rowData, { column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps, expander: expanderProps });
+                content = ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, expander: expanderProps });
             }
         }
         else if (isRowEditor && rowEditor) {
             let rowEditorProps = {};
 
-            if (this.state.editing) {
+            if (editingState) {
                 rowEditorProps = {
                     editing: true,
-                    onSaveClick: this.onRowEditSave,
+                    onSaveClick: onRowEditSave,
                     saveClassName: 'p-row-editor-save p-link',
                     saveIconClassName: 'p-row-editor-save-icon pi pi-fw pi-check',
-                    onCancelClick: this.onRowEditCancel,
+                    onCancelClick: onRowEditCancel,
                     cancelClassName: 'p-row-editor-cancel p-link',
                     cancelIconClassName: 'p-row-editor-cancel-icon pi pi-fw pi-times'
                 };
 
                 content = (
                     <>
-                        <button type="button" onClick={rowEditorProps.onSaveClick} className={rowEditorProps.saveClassName} tabIndex={this.props.tabIndex}>
+                        <button type="button" onClick={rowEditorProps.onSaveClick} className={rowEditorProps.saveClassName} tabIndex={props.tabIndex}>
                             <span className={rowEditorProps.saveIconClassName}></span>
                             <Ripple />
                         </button>
-                        <button type="button" onClick={rowEditorProps.onCancelClick} className={rowEditorProps.cancelClassName} tabIndex={this.props.tabIndex}>
+                        <button type="button" onClick={rowEditorProps.onCancelClick} className={rowEditorProps.cancelClassName} tabIndex={props.tabIndex}>
                             <span className={rowEditorProps.cancelIconClassName}></span>
                             <Ripple />
                         </button>
@@ -620,13 +569,13 @@ export class BodyCell extends Component {
             else {
                 rowEditorProps = {
                     editing: false,
-                    onInitClick: this.onRowEditInit,
+                    onInitClick: onRowEditInit,
                     initClassName: 'p-row-editor-init p-link',
                     initIconClassName: 'p-row-editor-init-icon pi pi-fw pi-pencil'
                 };
 
                 content = (
-                    <button type="button" onClick={rowEditorProps.onInitClick} className={rowEditorProps.initClassName} tabIndex={this.props.tabIndex}>
+                    <button type="button" onClick={rowEditorProps.onInitClick} className={rowEditorProps.initClassName} tabIndex={props.tabIndex}>
                         <span className={rowEditorProps.initIconClassName}></span>
                         <Ripple />
                     </button>
@@ -635,14 +584,14 @@ export class BodyCell extends Component {
 
             if (body) {
                 rowEditorProps['element'] = content;
-                content = ObjectUtils.getJSXElement(body, this.props.rowData, { column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps, rowEditor: rowEditorProps });
+                content = ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, rowEditor: rowEditorProps });
             }
         }
-        else if (body && !this.state.editing) {
-            content = body ? ObjectUtils.getJSXElement(body, this.props.rowData, { column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps }) : value;
+        else if (body && !editingState) {
+            content = body ? ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps }) : value;
         }
-        else if (editor && this.state.editing) {
-            content = ObjectUtils.getJSXElement(editor, { rowData: this.state.editingRowData, value: this.resolveFieldData(this.state.editingRowData), column: this.props.column, field: this.field, rowIndex: this.props.rowIndex, frozenRow: this.props.frozenRow, props: this.props.tableProps, editorCallback: this.editorCallback  });
+        else if (editor && editingState) {
+            content = ObjectUtils.getJSXElement(editor, { rowData: editingRowDataState, value: resolveFieldData(editingRowDataState), column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, editorCallback });
         }
         else {
             content = value;
@@ -650,13 +599,13 @@ export class BodyCell extends Component {
 
         if (!isRowEditor && editor) {
             /* eslint-disable */
-            editorKeyHelper = <a tabIndex="0" ref={(el) => this.keyHelper = el} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
+            editorKeyHelper = <a tabIndex="0" ref={keyHelperRef} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={onEditorFocus}><span></span></a>;
             /* eslint-enable */
         }
 
         return (
-            <td ref={(el) => this.el = el} style={style} className={className} rowSpan={this.props.rowSpan} tabIndex={tabIndex} role="cell" onClick={this.onClick} onKeyDown={this.onKeyDown}
-                onBlur={this.onBlur} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}>
+            <td ref={elementRef} style={style} className={className} rowSpan={props.rowSpan} tabIndex={tabIndex} role="cell" onClick={onClick} onKeyDown={onKeyDown}
+                onBlur={onBlur} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
                 {editorKeyHelper}
                 {title}
                 {content}
@@ -664,7 +613,5 @@ export class BodyCell extends Component {
         )
     }
 
-    render() {
-        return this.getVirtualScrollerOption('loading') ? this.renderLoading() : this.renderElement();
-    }
-}
+    return getVirtualScrollerOption('loading') ? createLoading() : createElement();
+});
