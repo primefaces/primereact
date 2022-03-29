@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { TreeTable } from '../../components/lib/treetable/TreeTable';
 import { Column } from '../../components/lib/column/Column';
 import { TabView } from '../../components/lib/tabview/TabView';
@@ -6,16 +6,11 @@ import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class TreeTablePageDemo extends Component {
+const TreeTablePageDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: []
-        };
-    }
+    const [nodes, setNodes] = useState([]);
 
-    componentDidMount() {
+    useEffect(() => {
         let files = [];
         for (let i = 0; i < 50; i++) {
             let node = {
@@ -40,52 +35,47 @@ export default class TreeTablePageDemo extends Component {
             files.push(node);
         }
 
-        this.setState({
-            nodes: files
-        });
-    }
+        setNodes(files);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React TreeTable Component - Page</title>
-                    <meta name="description" content="Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable <span>Page</span></h1>
-                        <p>Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page.</p>
-                    </div>
-
-                    <DocActions github="treetable/page.js" />
+    return (
+        <div>
+            <Head>
+                <title>React TreeTable Component - Page</title>
+                <meta name="description" content="Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>TreeTable <span>Page</span></h1>
+                    <p>Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page.</p>
                 </div>
 
-                <div className="content-section implementation">
-                    <div className="card">
-                        <TreeTable value={this.state.nodes} paginator rows={10}>
-                            <Column field="name" header="Name" expander></Column>
-                            <Column field="size" header="Size"></Column>
-                            <Column field="type" header="Type"></Column>
-                        </TreeTable>
-                    </div>
-                </div>
-
-                <TreeTablePageDemoDoc />
+                <DocActions github="treetable/page.js" />
             </div>
-        )
-    }
+
+            <div className="content-section implementation">
+                <div className="card">
+                    <TreeTable value={nodes} paginator rows={10}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
+            </div>
+
+            <TreeTablePageDemoDoc />
+        </div>
+    )
 }
 
-class TreeTablePageDemoDoc extends Component {
+export default TreeTablePageDemo;
 
-    constructor(props) {
-        super(props);
+const TreeTablePageDemoDoc = memo(() => {
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -144,10 +134,10 @@ export class TreeTablePageDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -196,10 +186,10 @@ const TreeTablePageDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -248,16 +238,16 @@ const TreeTablePageDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { Column } = primereact.column;
 const { TreeTable } = primereact.treetable;
@@ -306,23 +296,16 @@ const TreeTablePageDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'TreeTablePageDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'TreeTablePageDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    )
+})

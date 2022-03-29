@@ -62,4 +62,6 @@ export interface DialogProps {
     onClick?(e: React.MouseEvent<HTMLElement>): void;
 }
 
-export declare class Dialog extends React.Component<DialogProps, any> { }
+export declare class Dialog extends React.Component<DialogProps, any> {
+    public resetPosition(): void;
+}

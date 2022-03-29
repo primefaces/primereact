@@ -1,192 +1,168 @@
-import React, { Component } from 'react';
+import React, { forwardRef, memo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { ObjectUtils, classNames } from '../utils/Utils';
 import { SelectButtonItem } from './SelectButtonItem';
 import { tip } from '../tooltip/Tooltip';
+import { ObjectUtils, classNames } from '../utils/Utils';
+import { useUnmountEffect } from '../hooks/Hooks';
 
-export class SelectButton extends Component {
+export const SelectButton = memo(forwardRef((props, ref) => {
+    const elementRef = useRef(null);
+    const tooltipRef = useRef(null);
 
-    static defaultProps = {
-        id: null,
-        value: null,
-        options: null,
-        optionLabel: null,
-        optionValue: null,
-        optionDisabled: null,
-        tabIndex: null,
-        multiple: false,
-        unselectable: true,
-        disabled: false,
-        style: null,
-        className: null,
-        dataKey: null,
-        tooltip: null,
-        tooltipOptions: null,
-        ariaLabelledBy: null,
-        itemTemplate: null,
-        onChange: null
-    };
-
-    static propTypes = {
-        id: PropTypes.string,
-        value: PropTypes.any,
-        options: PropTypes.array,
-        optionLabel: PropTypes.string,
-        optionValue: PropTypes.string,
-        optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-        tabIndex: PropTypes.number,
-        multiple: PropTypes.bool,
-        unselectable: PropTypes.bool,
-        disabled: PropTypes.bool,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        dataKey: PropTypes.string,
-        tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object,
-        ariaLabelledBy: PropTypes.string,
-        itemTemplate: PropTypes.func,
-        onChange: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.onOptionClick = this.onOptionClick.bind(this);
-    }
-
-    onOptionClick(event) {
-        if (this.props.disabled || this.isOptionDisabled(event.option)) {
+    const onOptionClick = (event) => {
+        if (props.disabled || isOptionDisabled(event.option)) {
             return;
         }
 
-        let selected = this.isSelected(event.option);
-        if (selected && !this.props.unselectable) {
+        let selected = isSelected(event.option);
+        if (selected && !props.unselectable) {
             return;
         }
 
-        let optionValue = this.getOptionValue(event.option);
+        let optionValue = getOptionValue(event.option);
         let newValue;
 
-        if (this.props.multiple) {
-            let currentValue = this.props.value ? [...this.props.value] : [];
-
-            if (selected)
-                newValue = currentValue.filter((val) => !ObjectUtils.equals(val, optionValue, this.props.dataKey));
-            else
-                newValue = [...currentValue, optionValue];
+        if (props.multiple) {
+            let currentValue = props.value ? [...props.value] : [];
+            newValue = selected ? currentValue.filter((val) => !ObjectUtils.equals(val, optionValue, props.dataKey)) : [...currentValue, optionValue];
         }
         else {
-            if (selected)
-                newValue = null;
-            else
-                newValue = optionValue;
+            newValue = selected ? null : optionValue;
         }
 
-        if (this.props.onChange) {
-            this.props.onChange({
+        if (props.onChange) {
+            props.onChange({
                 originalEvent: event.originalEvent,
                 value: newValue,
                 stopPropagation: () => { },
                 preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
+                    name: props.name,
+                    id: props.id,
                     value: newValue,
                 }
             });
         }
     }
 
-    getOptionLabel(option) {
-        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : (option && option['label'] !== undefined ? option['label'] : option);
+    const getOptionLabel = (option) => {
+        return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : (option && option['label'] !== undefined ? option['label'] : option);
     }
 
-    getOptionValue(option) {
-        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option && option['value'] !== undefined ? option['value'] : option);
+    const getOptionValue = (option) => {
+        return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : (option && option['value'] !== undefined ? option['value'] : option);
     }
 
-    isOptionDisabled(option) {
-        if (this.props.optionDisabled) {
-            return ObjectUtils.isFunction(this.props.optionDisabled) ? this.props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, this.props.optionDisabled);
+    const isOptionDisabled = (option) => {
+        if (props.optionDisabled) {
+            return ObjectUtils.isFunction(props.optionDisabled) ? props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, props.optionDisabled);
         }
 
         return (option && option['disabled'] !== undefined ? option['disabled'] : false);
     }
 
-    isSelected(option) {
-        let selected = false;
-        let optionValue = this.getOptionValue(option);
+    const isSelected = (option) => {
+        let optionValue = getOptionValue(option);
 
-        if (this.props.multiple) {
-            if (this.props.value && this.props.value.length) {
-                for (let val of this.props.value) {
-                    if (ObjectUtils.equals(val, optionValue, this.props.dataKey)) {
-                        selected = true;
-                        break;
-                    }
-                }
+        if (props.multiple) {
+            if (props.value && props.value.length) {
+                return props.value.some((val) => ObjectUtils.equals(val, optionValue, props.dataKey));
             }
         }
         else {
-            selected = ObjectUtils.equals(this.props.value, optionValue, this.props.dataKey);
+            return ObjectUtils.equals(props.value, optionValue, props.dataKey);
         }
 
-        return selected;
+        return false;
     }
 
-    componentDidMount() {
-        if (this.props.tooltip) {
-            this.renderTooltip();
+    useEffect(() => {
+        if (tooltipRef.current) {
+            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
         }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
-            if (this.tooltip)
-                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
-            else
-                this.renderTooltip();
+        else if (props.tooltip) {
+            tooltipRef.current = tip({
+                target: elementRef.current,
+                content: props.tooltip,
+                options: props.tooltipOptions
+            });
         }
-    }
+    }, [props.tooltip, props.tooltipOptions]);
 
-    componentWillUnmount() {
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
+    useUnmountEffect(() => {
+        if (tooltipRef.current) {
+            tooltipRef.current.destroy();
+            tooltipRef.current = null;
         }
-    }
+    });
 
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.element,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
-    }
-
-    renderItems() {
-        if (this.props.options && this.props.options.length) {
-            return this.props.options.map((option, index) => {
-                const isDisabled = this.props.disabled || this.isOptionDisabled(option);
-                const optionLabel = this.getOptionLabel(option);
+    const createItems = () => {
+        if (props.options && props.options.length) {
+            return props.options.map((option, index) => {
+                const isDisabled = props.disabled || isOptionDisabled(option);
+                const optionLabel = getOptionLabel(option);
                 const tabIndex = isDisabled ? null : 0;
+                const selected = isSelected(option);
+                const key = optionLabel + '_' + index;
 
-                return <SelectButtonItem key={`${optionLabel}_${index}`} label={optionLabel} className={option.className} option={option} onClick={this.onOptionClick} template={this.props.itemTemplate}
-                    selected={this.isSelected(option)} tabIndex={tabIndex} disabled={isDisabled} ariaLabelledBy={this.props.ariaLabelledBy} />;
+                return <SelectButtonItem key={key} label={optionLabel} className={option.className} option={option} onClick={onOptionClick} template={props.itemTemplate}
+                    selected={selected} tabIndex={tabIndex} disabled={isDisabled} ariaLabelledBy={props.ariaLabelledBy} />
             });
         }
 
         return null;
     }
 
-    render() {
-        let className = classNames('p-selectbutton p-buttonset p-component', this.props.className);
-        let items = this.renderItems();
+    const className = classNames('p-selectbutton p-buttonset p-component', props.className);
+    const items = createItems();
 
-        return (
-            <div id={this.props.id} ref={(el) => this.element = el} className={className} style={this.props.style} role="group">
-                {items}
-            </div>
-        );
-    }
+    return (
+        <div ref={elementRef} id={props.id} className={className} style={props.style} role="group">
+            {items}
+        </div>
+    )
+}));
+
+SelectButton.defaultProps = {
+    __TYPE: 'SelectButton',
+    id: null,
+    value: null,
+    options: null,
+    optionLabel: null,
+    optionValue: null,
+    optionDisabled: null,
+    tabIndex: null,
+    multiple: false,
+    unselectable: true,
+    disabled: false,
+    style: null,
+    className: null,
+    dataKey: null,
+    tooltip: null,
+    tooltipOptions: null,
+    ariaLabelledBy: null,
+    itemTemplate: null,
+    onChange: null
+}
+
+SelectButton.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    id: PropTypes.string,
+    value: PropTypes.any,
+    options: PropTypes.array,
+    optionLabel: PropTypes.string,
+    optionValue: PropTypes.string,
+    optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    tabIndex: PropTypes.number,
+    multiple: PropTypes.bool,
+    unselectable: PropTypes.bool,
+    disabled: PropTypes.bool,
+    style: PropTypes.object,
+    className: PropTypes.string,
+    dataKey: PropTypes.string,
+    tooltip: PropTypes.string,
+    tooltipOptions: PropTypes.object,
+    ariaLabelledBy: PropTypes.string,
+    itemTemplate: PropTypes.func,
+    onChange: PropTypes.func
 }

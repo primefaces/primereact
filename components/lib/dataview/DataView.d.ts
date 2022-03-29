@@ -60,6 +60,7 @@ export interface DataViewProps {
     lazy?: boolean;
     loading?: boolean;
     loadingIcon?: string;
+    gutter?: boolean;
     onPage?(e: DataViewPageParams): void;
     itemTemplate?(item: any, layout: DataViewLayoutType): React.ReactNode;
 }

@@ -1,23 +1,15 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Tree } from '../../components/lib/tree/Tree';
 import { TabView } from '../../components/lib/tabview/TabView';
 import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class TreeLazyDemo extends Component {
+const TreeLazyDemo = () => {
+    const [nodes, setNodes] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: null,
-            loading: true,
-        };
-
-        this.loadOnExpand = this.loadOnExpand.bind(this);
-    }
-
-    createLazyNodes() {
+    const createLazyNodes = () => {
         return [
             {
                 key: '0',
@@ -37,11 +29,9 @@ export default class TreeLazyDemo extends Component {
         ];
     }
 
-    loadOnExpand(event) {
+    const loadOnExpand = (event) => {
         if (!event.node.children) {
-            this.setState({
-                loading: true
-            });
+            setLoading(true);
 
             setTimeout(() => {
                 let node = { ...event.node };
@@ -54,62 +44,55 @@ export default class TreeLazyDemo extends Component {
                     });
                 }
 
-                let value = [...this.state.nodes];
+                let value = [...nodes];
                 value[parseInt(event.node.key, 10)] = node;
-                this.setState({
-                    nodes: value,
-                    loading: false
-                });
+                setNodes(value);
+                setLoading(false);
             }, 500);
         }
     }
 
-    componentDidMount() {
+    useEffect(() => {
         setTimeout(() => {
-            this.setState({
-                nodes: this.createLazyNodes(),
-                loading: false
-            });
+            setNodes(createLazyNodes());
+            setLoading(false);
         }, 2000);
-    }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React Tree Component - Lazy</title>
-                    <meta name="description" content="Lazy loading is useful when dealing with huge datasets." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Tree <span>Lazy</span></h1>
-                        <p>Lazy loading is useful when dealing with huge datasets.</p>
-                    </div>
-
-                    <DocActions github="tree/lazy.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Tree Component - Lazy</title>
+                <meta name="description" content="Lazy loading is useful when dealing with huge datasets." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>Tree <span>Lazy</span></h1>
+                    <p>Lazy loading is useful when dealing with huge datasets.</p>
                 </div>
 
-                <div className="content-section implementation">
-                    <div className="card">
-                        <Tree value={this.state.nodes} onExpand={this.loadOnExpand} loading={this.state.loading} />
-                    </div>
-                </div>
-
-                <TreeLazyDemoDoc />
+                <DocActions github="tree/lazy.js" />
             </div>
-        )
-    }
+
+            <div className="content-section implementation">
+                <div className="card">
+                    <Tree value={nodes} onExpand={loadOnExpand} loading={loading} />
+                </div>
+            </div>
+
+            <TreeLazyDemoDoc />
+        </div>
+    )
 }
 
-export class TreeLazyDemoDoc extends Component {
+export default TreeLazyDemo;
 
-    constructor(props) {
-        super(props);
+export const TreeLazyDemoDoc = memo(() => {
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Tree } from 'primereact/tree';
 
@@ -192,10 +175,10 @@ export class TreeLazyDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 
@@ -262,10 +245,10 @@ const TreeLazyDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 
@@ -332,14 +315,14 @@ const TreeLazyDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/tree/tree.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { Tree } = primereact.tree;
 
@@ -406,23 +389,16 @@ const TreeLazyDemo = () => {
     )
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'TreeLazyDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'TreeLazyDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    );
+})

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function GetStartedSection() {
+const GetStartedSection = () => {
     return (
         <section className="landing-getstarted flex flex-column md:flex-row align-items-center justify-content-center mt-8 z-1">
             <Link href="/setup">
@@ -13,3 +13,5 @@ export default function GetStartedSection() {
         </section>
     );
 }
+
+export default GetStartedSection;

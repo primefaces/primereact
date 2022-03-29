@@ -30,4 +30,6 @@ export interface EditorProps {
     onLoad?(quill: any): void;
 }
 
-export declare class Editor extends React.Component<EditorProps, any> { }
+export declare class Editor extends React.Component<EditorProps, any> {
+    public getQuill(): any;
+}

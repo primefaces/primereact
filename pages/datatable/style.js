@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { classNames } from '../../components/lib/utils/ClassNames';
 import { DataTable } from '../../components/lib/datatable/DataTable';
 import { Column } from '../../components/lib/column/Column';
@@ -8,31 +8,21 @@ import { ProductService } from '../../service/ProductService';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class DataTableStyleDemo extends Component {
+const DataTableStyleDemo = () => {
+    const [products, setProducts] = useState([]);
+    const productService = new ProductService();
 
-    constructor(props) {
-        super(props);
+    useEffect(() => {
+        productService.getProductsSmall().then(data => setProducts(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-        this.state = {
-            products: []
-        };
-
-        this.productService = new ProductService();
-        this.stockBodyTemplate = this.stockBodyTemplate.bind(this);
-        this.rowClass = this.rowClass.bind(this);
-    }
-
-    componentDidMount() {
-        this.productService.getProductsSmall().then(data => this.setState({ products: data }));
-    }
-
-    rowClass(data) {
+    const rowClass = (data) => {
         return {
             'row-accessories': data.category === 'Accessories'
         }
     }
 
-    stockBodyTemplate(rowData) {
+    const stockBodyTemplate = (rowData) => {
         const stockClassName = classNames({
             'outofstock': rowData.quantity === 0,
             'lowstock': rowData.quantity > 0 && rowData.quantity < 10,
@@ -46,48 +36,45 @@ export default class DataTableStyleDemo extends Component {
         );
     }
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React Table Component - Styling</title>
-                    <meta name="description" content="Particular rows and cells can be styled based on data." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable <span>Styling</span></h1>
-                        <p>Particular rows and cells can be styled based on data.</p>
-                    </div>
-
-                    <DocActions github="datatable/style.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Table Component - Styling</title>
+                <meta name="description" content="Particular rows and cells can be styled based on data." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>DataTable <span>Styling</span></h1>
+                    <p>Particular rows and cells can be styled based on data.</p>
                 </div>
 
-                <div className="content-section implementation datatable-style-demo">
-                    <div className="card">
-                        <DataTable value={this.state.products} rowClassName={this.rowClass} responsiveLayout="scroll">
-                            <Column field="code" header="Code"></Column>
-                            <Column field="name" header="Name"></Column>
-                            <Column field="category" header="Category"></Column>
-                            <Column field="quantity" header="Quantity" body={this.stockBodyTemplate}></Column>
-                        </DataTable>
-                    </div>
-                </div>
-
-                <DataTableStyleDemoDoc></DataTableStyleDemoDoc>
+                <DocActions github="datatable/style.js" />
             </div>
-        );
-    }
+
+            <div className="content-section implementation datatable-style-demo">
+                <div className="card">
+                    <DataTable value={products} rowClassName={rowClass} responsiveLayout="scroll">
+                        <Column field="code" header="Code"></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="category" header="Category"></Column>
+                        <Column field="quantity" header="Quantity" body={stockBodyTemplate}></Column>
+                    </DataTable>
+                </div>
+            </div>
+
+            <DataTableStyleDemoDoc></DataTableStyleDemoDoc>
+        </div>
+    );
 }
 
-export class DataTableStyleDemoDoc extends Component {
+export default DataTableStyleDemo;
 
-    constructor(props) {
-        super(props);
+export const DataTableStyleDemoDoc = memo(() => {
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
@@ -149,10 +136,10 @@ export class DataTableStyleDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
@@ -202,10 +189,10 @@ const DataTableStyleDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
@@ -255,10 +242,10 @@ const DataTableStyleDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./DataTableDemo.css" />
         <script src="./ProductService.js"></script>
 
@@ -267,7 +254,7 @@ const DataTableStyleDemo = () => {
         <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
         <script src="https://unpkg.com/primereact/column/column.min.js"></script>
         <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { Column } = primereact.column;
 const { DataTable } = primereact.datatable;
@@ -315,12 +302,12 @@ const DataTableStyleDemo = () => {
     );
 }
                 `
-            }
-        };
+        }
+    };
 
-        this.extFiles = {
-            'demo/DataTableDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/DataTableDemo.css': {
+            content: `
 .datatable-style-demo .outofstock {
     font-weight: 700;
     color: #FF5252;
@@ -341,23 +328,16 @@ const DataTableStyleDemo = () => {
     background-color: rgba(0, 0, 0, 0.15) !important;
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'DataTableStyleDemo', sources: this.sources, service: 'ProductService', data: 'products-small', extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'DataTableStyleDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    )
+})

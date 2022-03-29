@@ -1,63 +1,36 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import React, { memo } from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { classNames } from '../utils/Utils';
 
-export class PickListItem extends Component {
+export const PickListItem = memo((props) => {
 
-    static defaultProps = {
-        value: null,
-        className: null,
-        template: null,
-        selected: false,
-        tabIndex: null,
-        onClick: null,
-        onKeyDown: null
-    }
-
-    static propTypes = {
-        value: PropTypes.any,
-        className: PropTypes.string,
-        template: PropTypes.func,
-        selected: PropTypes.bool,
-        tabIndex: PropTypes.number,
-        onClick: PropTypes.func,
-        onKeyDown: PropTypes.func
-    }
-
-    constructor(props) {
-        super(props);
-        this.onClick = this.onClick.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
-    }
-
-    onClick(event) {
-        if(this.props.onClick) {
-            this.props.onClick({
+    const onClick = (event) => {
+        if (props.onClick) {
+            props.onClick({
                 originalEvent: event,
-                value: this.props.value
+                value: props.value
             });
         }
     }
 
-    onKeyDown(event) {
-        if (this.props.onKeyDown) {
-            this.props.onKeyDown({
+    const onKeyDown = (event) => {
+        if (props.onKeyDown) {
+            props.onKeyDown({
                 originalEvent: event,
-                value: this.props.value
+                value: props.value
             });
         }
     }
 
-    render() {
-        let content = this.props.template ? this.props.template(this.props.value) : this.props.value;
-        let className = classNames('p-picklist-item', {'p-highlight': this.props.selected}, this.props.className);
+    const content = props.template ? props.template(props.value) : props.value;
+    const className = classNames('p-picklist-item', {
+        'p-highlight': props.selected
+    }, props.className);
 
-        return (
-            <li className={className} onClick={this.onClick} onKeyDown={this.onKeyDown} tabIndex={this.props.tabIndex} role="option" aria-selected={this.props.selected}>
-                {content}
-                <Ripple />
-            </li>
-        );
-    }
-}
+    return (
+        <li className={className} onClick={onClick} onKeyDown={onKeyDown} tabIndex={props.tabIndex} role="option" aria-selected={props.selected}>
+            {content}
+            <Ripple />
+        </li>
+    )
+});

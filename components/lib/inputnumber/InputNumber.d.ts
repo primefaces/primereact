@@ -71,4 +71,6 @@ export interface InputNumberProps {
     onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
 }
 
-export declare class InputNumber extends React.Component<InputNumberProps, any> { }
+export declare class InputNumber extends React.Component<InputNumberProps, any> {
+    public getFormatter(): any;
+}

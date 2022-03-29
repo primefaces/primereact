@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class StepsDoc extends Component {
+const StepsDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
@@ -71,10 +68,10 @@ export class StepsDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useRef } from 'react';
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
@@ -125,10 +122,10 @@ const StepsDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useRef } from 'react';
 import { Steps } from 'primereact/steps';
 import { Toast } from 'primereact/toast';
@@ -179,18 +176,18 @@ const StepsDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./StepsDemo.css" />
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/steps/steps.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>
         <script src="https://unpkg.com/primereact/panel/panel.min.js"></script>`,
-                content: `
-const { useEffect, useState, useRef } = React;
+            content: `
+const { useState, useRef } = React;
 const { Steps } = primereact.steps;
 const { Toast } = primereact.toast;
 const { Panel } = primereact.panel;
@@ -240,12 +237,12 @@ const StepsDemo = () => {
     );
 }
                 `
-            }
         }
+    }
 
-        this.extFiles = {
-            'demo/StepsDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/StepsDemo.css': {
+            content: `
 @media screen and (max-width: 640px) {
     .steps-demo .p-steps {
         height: 350px;
@@ -288,38 +285,32 @@ const StepsDemo = () => {
     }
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Steps } from 'primereact/steps';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/steps/steps.min.js"></script>
 `}
 </CodeHighlight>
-                        <h5>MenuItem API</h5>
-                        <p>Steps uses the common menu item api to define its items, visit <Link href="/menumodel"> MenuModel </Link> for details.</p>
+                    <h5>MenuItem API</h5>
+                    <p>Steps uses the common menu item api to define its items, visit <Link href="/menumodel"> MenuModel </Link> for details.</p>
 
-                        <h5>Getting Started</h5>
-                        <p>TabMenu requires a collection of menuitems as its model.</p>
+                    <h5>Getting Started</h5>
+                    <p>TabMenu requires a collection of menuitems as its model.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -338,9 +329,9 @@ const items = [
 `}
 </CodeHighlight>
 
-                        <h5>interactive</h5>
-                        <p>Items are readOnly by default, if you'd like to make them interactive then disable readonly, use command handlers of menuitem to respond to selection events and define activeIndex property along with the
-                            onSelect event to use it as a controlled component.</p>
+                    <h5>interactive</h5>
+                    <p>Items are readOnly by default, if you'd like to make them interactive then disable readonly, use command handlers of menuitem to respond to selection events and define activeIndex property along with the
+                        onSelect event to use it as a controlled component.</p>
 
 <CodeHighlight>
 {`
@@ -379,121 +370,121 @@ const interactiveItems = [
 `}
 </CodeHighlight>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>model</td>
-                                        <td>array</td>
-                                        <td>null</td>
-                                        <td>An array of menuitems.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>activeIndex</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Index of the active item.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>readOnly</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether the items are clickable or not.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the component.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>model</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>An array of menuitems.</td>
+                                </tr>
+                                <tr>
+                                    <td>activeIndex</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Index of the active item.</td>
+                                </tr>
+                                <tr>
+                                    <td>readOnly</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether the items are clickable or not.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the component.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onSelect</td>
-                                        <td>event.originalEvent: Browser event<br />
-                                        event.item: Selected item instance<br />
-                                        event.index: Index of selected item instance</td>
-                                        <td>Callback to invoke when the new step is selected.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onSelect</td>
+                                    <td>event.originalEvent: Browser event<br />
+                                    event.item: Selected item instance<br />
+                                    event.index: Index of selected item instance</td>
+                                    <td>Callback to invoke when the new step is selected.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-steps</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-steps-item</td>
-                                        <td>Menuitem element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-steps-number</td>
-                                        <td>Number of menuitem.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-steps-title</td>
-                                        <td>Label of menuitem.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-steps</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-steps-item</td>
+                                    <td>Menuitem element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-steps-number</td>
+                                    <td>Number of menuitem.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-steps-title</td>
+                                    <td>Label of menuitem.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'StepsDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        )
-    }
+                {
+                    useLiveEditorTabs({ name: 'StepsDemo', sources: sources, extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    )
+})
 
-}
+export default StepsDoc;

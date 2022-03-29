@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class ImageDoc extends Component {
+const ImageDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Image } from 'primereact/image';
 
@@ -33,10 +30,10 @@ export class ImageDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React from 'react';
 import { Image } from 'primereact/image';
 
@@ -55,10 +52,10 @@ const ImageDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React from 'react';
 import { Image } from 'primereact/image';
 
@@ -77,13 +74,13 @@ const ImageDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/image/image.min.js"></script>`,
-                content: `
+            content: `
 import React from 'react';
 import { Image } from 'primereact/image';
 
@@ -102,27 +99,21 @@ const ImageDemo = () => {
     )
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Image } from 'primereact/image';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -130,8 +121,8 @@ import { Image } from 'primereact/image';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>Image is used as the native <i>img</i> element and supports all properties that the native element has.</p>
+                    <h5>Getting Started</h5>
+                    <p>Image is used as the native <i>img</i> element and supports all properties that the native element has.</p>
 
 <CodeHighlight>
 {`
@@ -139,11 +130,11 @@ import { Image } from 'primereact/image';
 `}
 </CodeHighlight>
 
-                        <h5>Preview</h5>
-                        <p>Preview mode displays a modal layer when the image is clicked that provides transformation options such as rotating and zooming.</p>
+                    <h5>Preview</h5>
+                    <p>Preview mode displays a modal layer when the image is clicked that provides transformation options such as rotating and zooming.</p>
 
-                        <h5>Templating</h5>
-                        <p>An eye icon is displayed by default when the image is hovered in preview mode. Use the<i>template</i>prop for custom content.</p>
+                    <h5>Templating</h5>
+                    <p>An eye icon is displayed by default when the image is hovered in preview mode. Use the<i>template</i>prop for custom content.</p>
 
 <CodeHighlight>
 {`
@@ -152,130 +143,131 @@ import { Image } from 'primereact/image';
 </CodeHighlight>
 
 
-                        <h5>Properties</h5>
-                        <p>Image passes any valid attribute to the underlying img element, additional attribute is the following.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>preview</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Controls the preview functionality.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>downloadable</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Adds a download button to the preview control menu.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>imageStyle</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Inline style of the image element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>imageClassName</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the image element.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <p>Image passes any valid attribute to the underlying img element, additional attribute is the following.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>preview</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Controls the preview functionality.</td>
+                                </tr>
+                                <tr>
+                                    <td>downloadable</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Adds a download button to the preview control menu.</td>
+                                </tr>
+                                <tr>
+                                    <td>imageStyle</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Inline style of the image element.</td>
+                                </tr>
+                                <tr>
+                                    <td>imageClassName</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the image element.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <p>Any valid event like click and mouseover are passed to the underlying input element. Events below are the additional ones related to the preview functionality.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onShow</td>
-                                        <td>-</td>
-                                        <td>Triggered when the preview overlay is shown.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onHide</td>
-                                        <td>-</td>
-                                        <td>Triggered when the preview overlay is hidden.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <p>Any valid event like click and mouseover are passed to the underlying input element. Events below are the additional ones related to the preview functionality.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onShow</td>
+                                    <td>-</td>
+                                    <td>Triggered when the preview overlay is shown.</td>
+                                </tr>
+                                <tr>
+                                    <td>onHide</td>
+                                    <td>-</td>
+                                    <td>Triggered when the preview overlay is hidden.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-image</td>
-                                        <td>Container element</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-image-preview-container</td>
-                                        <td>Container element with preview enabled.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-image-preview-indicator</td>
-                                        <td>Mask layer over the image when hovered.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-image-preview-icon</td>
-                                        <td>Icon of the preview indicator.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-image-mask</td>
-                                        <td>Preview overlay container.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-image-toolbar</td>
-                                        <td>Transformation options container.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-image-action</td>
-                                        <td>An element inside the toolbar.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-image-preview</td>
-                                        <td>Image element inside the preview overlay.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-image</td>
+                                    <td>Container element</td>
+                                </tr>
+                                <tr>
+                                    <td>p-image-preview-container</td>
+                                    <td>Container element with preview enabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-image-preview-indicator</td>
+                                    <td>Mask layer over the image when hovered.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-image-preview-icon</td>
+                                    <td>Icon of the preview indicator.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-image-mask</td>
+                                    <td>Preview overlay container.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-image-toolbar</td>
+                                    <td>Transformation options container.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-image-action</td>
+                                    <td>An element inside the toolbar.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-image-preview</td>
+                                    <td>Image element inside the preview overlay.</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                            <h5>Dependencies</h5>
-                            <p>None.</p>
-                        </div>
+                        <h5>Dependencies</h5>
+                        <p>None.</p>
+                    </div>
 
-                    </TabPanel>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'ImageDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+                {
+                    useLiveEditorTabs({ name: 'ImageDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default ImageDoc;

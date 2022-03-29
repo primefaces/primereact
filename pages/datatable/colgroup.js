@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import { DataTable } from '../../components/lib/datatable/DataTable';
 import { Column } from '../../components/lib/column/Column';
 import { ColumnGroup } from '../../components/lib/columngroup/ColumnGroup';
@@ -8,137 +8,123 @@ import { Row } from '../../components/lib/row/Row';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class DataTableColGroupDemo extends Component {
+const DataTableColGroupDemo = () => {
 
-    constructor(props) {
-        super(props);
+    const sales = [
+        {product: 'Bamboo Watch', lastYearSale: 51, thisYearSale: 40, lastYearProfit: 54406, thisYearProfit: 43342},
+        {product: 'Black Watch', lastYearSale: 83, thisYearSale: 9, lastYearProfit: 423132, thisYearProfit: 312122},
+        {product: 'Blue Band', lastYearSale: 38, thisYearSale: 5, lastYearProfit: 12321, thisYearProfit: 8500},
+        {product: 'Blue T-Shirt', lastYearSale: 49, thisYearSale: 22, lastYearProfit: 745232, thisYearProfit: 65323},
+        {product: 'Brown Purse', lastYearSale: 17, thisYearSale: 79, lastYearProfit: 643242, thisYearProfit: 500332},
+        {product: 'Chakra Bracelet', lastYearSale: 52, thisYearSale:  65, lastYearProfit: 421132, thisYearProfit: 150005},
+        {product: 'Galaxy Earrings', lastYearSale: 82, thisYearSale: 12, lastYearProfit: 131211, thisYearProfit: 100214},
+        {product: 'Game Controller', lastYearSale: 44, thisYearSale: 45, lastYearProfit: 66442, thisYearProfit: 53322},
+        {product: 'Gaming Set', lastYearSale: 90, thisYearSale: 56, lastYearProfit: 765442, thisYearProfit: 296232},
+        {product: 'Gold Phone Case', lastYearSale: 75, thisYearSale: 54, lastYearProfit: 21212, thisYearProfit: 12533}
+    ];
 
-        this.sales = [
-            {product: 'Bamboo Watch', lastYearSale: 51, thisYearSale: 40, lastYearProfit: 54406, thisYearProfit: 43342},
-            {product: 'Black Watch', lastYearSale: 83, thisYearSale: 9, lastYearProfit: 423132, thisYearProfit: 312122},
-            {product: 'Blue Band', lastYearSale: 38, thisYearSale: 5, lastYearProfit: 12321, thisYearProfit: 8500},
-            {product: 'Blue T-Shirt', lastYearSale: 49, thisYearSale: 22, lastYearProfit: 745232, thisYearProfit: 65323},
-            {product: 'Brown Purse', lastYearSale: 17, thisYearSale: 79, lastYearProfit: 643242, thisYearProfit: 500332},
-            {product: 'Chakra Bracelet', lastYearSale: 52, thisYearSale:  65, lastYearProfit: 421132, thisYearProfit: 150005},
-            {product: 'Galaxy Earrings', lastYearSale: 82, thisYearSale: 12, lastYearProfit: 131211, thisYearProfit: 100214},
-            {product: 'Game Controller', lastYearSale: 44, thisYearSale: 45, lastYearProfit: 66442, thisYearProfit: 53322},
-            {product: 'Gaming Set', lastYearSale: 90, thisYearSale: 56, lastYearProfit: 765442, thisYearProfit: 296232},
-            {product: 'Gold Phone Case', lastYearSale: 75, thisYearSale: 54, lastYearProfit: 21212, thisYearProfit: 12533}
-        ];
-
-        this.lastYearTotal = this.lastYearTotal.bind(this);
-        this.thisYearTotal = this.thisYearTotal.bind(this);
-        this.lastYearSaleBodyTemplate = this.lastYearSaleBodyTemplate.bind(this);
-        this.thisYearSaleBodyTemplate = this.thisYearSaleBodyTemplate.bind(this);
-        this.lastYearProfitBodyTemplate = this.lastYearProfitBodyTemplate.bind(this);
-        this.thisYearProfitBodyTemplate = this.thisYearProfitBodyTemplate.bind(this);
-    }
-
-    lastYearSaleBodyTemplate(rowData) {
+    const lastYearSaleBodyTemplate = (rowData) => {
         return `${rowData.lastYearSale}%`;
     }
 
-    thisYearSaleBodyTemplate(rowData) {
+    const thisYearSaleBodyTemplate = (rowData) => {
         return `${rowData.thisYearSale}%`;
     }
 
-    lastYearProfitBodyTemplate(rowData) {
-        return `${this.formatCurrency(rowData.lastYearProfit)}`;
+    const lastYearProfitBodyTemplate = (rowData) => {
+        return `${formatCurrency(rowData.lastYearProfit)}`;
     }
 
-    thisYearProfitBodyTemplate(rowData) {
-        return `${this.formatCurrency(rowData.thisYearProfit)}`;
+    const thisYearProfitBodyTemplate = (rowData) => {
+        return `${formatCurrency(rowData.thisYearProfit)}`;
     }
 
-    formatCurrency(value) {
+    const formatCurrency = (value) => {
         return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
     }
 
-    lastYearTotal() {
+    const lastYearTotal = () => {
         let total = 0;
-        for(let sale of this.sales) {
+        for(let sale of sales) {
             total += sale.lastYearProfit;
         }
 
-        return this.formatCurrency(total);
+        return formatCurrency(total);
     }
 
-    thisYearTotal() {
+    const thisYearTotal = () => {
         let total = 0;
-        for(let sale of this.sales) {
+        for(let sale of sales) {
             total += sale.thisYearProfit;
         }
 
-        return this.formatCurrency(total);
+        return formatCurrency(total);
     }
 
-    render() {
-        let headerGroup = <ColumnGroup>
-                            <Row>
-                                <Column header="Product" rowSpan={3} />
-                                <Column header="Sale Rate" colSpan={4} />
-                            </Row>
-                            <Row>
-                                <Column header="Sales" colSpan={2} />
-                                <Column header="Profits" colSpan={2} />
-                            </Row>
-                            <Row>
-                                <Column header="Last Year" sortable field="lastYearSale"/>
-                                <Column header="This Year" sortable field="thisYearSale"/>
-                                <Column header="Last Year" sortable field="lastYearProfit"/>
-                                <Column header="This Year" sortable field="thisYearProfit"/>
-                            </Row>
+    let headerGroup = <ColumnGroup>
+                        <Row>
+                            <Column header="Product" rowSpan={3} />
+                            <Column header="Sale Rate" colSpan={4} />
+                        </Row>
+                        <Row>
+                            <Column header="Sales" colSpan={2} />
+                            <Column header="Profits" colSpan={2} />
+                        </Row>
+                        <Row>
+                            <Column header="Last Year" sortable field="lastYearSale"/>
+                            <Column header="This Year" sortable field="thisYearSale"/>
+                            <Column header="Last Year" sortable field="lastYearProfit"/>
+                            <Column header="This Year" sortable field="thisYearProfit"/>
+                        </Row>
+                    </ColumnGroup>;
+
+    let footerGroup = <ColumnGroup>
+                        <Row>
+                            <Column footer="Totals:" colSpan={3} footerStyle={{textAlign: 'right'}}/>
+                            <Column footer={lastYearTotal} />
+                            <Column footer={thisYearTotal} />
+                        </Row>
                         </ColumnGroup>;
-
-       let footerGroup = <ColumnGroup>
-                            <Row>
-                                <Column footer="Totals:" colSpan={3} footerStyle={{textAlign: 'right'}}/>
-                                <Column footer={this.lastYearTotal} />
-                                <Column footer={this.thisYearTotal} />
-                            </Row>
-                         </ColumnGroup>;
-        return (
-            <div>
-                <Head>
-                    <title>React Table Component - Column Grouping</title>
-                    <meta name="description" content="Columns can be grouped at header and footer using headerColumnGroup and footerColumnGroup components that both define an array of columns each having colspan and rowspan." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable <span>ColumnGroup</span></h1>
-                        <p>Columns can be grouped at header and footer using headerColumnGroup and footerColumnGroup components that both define an array of columns each having colspan and rowspan.</p>
-                    </div>
-
-                    <DocActions github="datatable/colgroup.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Table Component - Column Grouping</title>
+                <meta name="description" content="Columns can be grouped at header and footer using headerColumnGroup and footerColumnGroup components that both define an array of columns each having colspan and rowspan." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>DataTable <span>ColumnGroup</span></h1>
+                    <p>Columns can be grouped at header and footer using headerColumnGroup and footerColumnGroup components that both define an array of columns each having colspan and rowspan.</p>
                 </div>
 
-                <div className="content-section implementation">
-                    <div className="card">
-                        <DataTable value={this.sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} responsiveLayout="scroll">
-                            <Column field="product" />
-                            <Column field="lastYearSale" body={this.lastYearSaleBodyTemplate} />
-                            <Column field="thisYearSale" body={this.thisYearSaleBodyTemplate} />
-                            <Column field="lastYearProfit" body={this.lastYearProfitBodyTemplate} />
-                            <Column field="thisYearProfit" body={this.thisYearProfitBodyTemplate} />
-                        </DataTable>
-                    </div>
-                </div>
-
-                <DataTableColGroupDemoDoc></DataTableColGroupDemoDoc>
+                <DocActions github="datatable/colgroup.js" />
             </div>
-        );
-    }
+
+            <div className="content-section implementation">
+                <div className="card">
+                    <DataTable value={sales} headerColumnGroup={headerGroup} footerColumnGroup={footerGroup} responsiveLayout="scroll">
+                        <Column field="product" />
+                        <Column field="lastYearSale" body={lastYearSaleBodyTemplate} />
+                        <Column field="thisYearSale" body={thisYearSaleBodyTemplate} />
+                        <Column field="lastYearProfit" body={lastYearProfitBodyTemplate} />
+                        <Column field="thisYearProfit" body={thisYearProfitBodyTemplate} />
+                    </DataTable>
+                </div>
+            </div>
+
+            <DataTableColGroupDemoDoc></DataTableColGroupDemoDoc>
+        </div>
+    );
 }
 
-export class DataTableColGroupDemoDoc extends Component {
+export default DataTableColGroupDemo;
 
-    constructor(props) {
-        super(props);
+export const DataTableColGroupDemoDoc = memo(() => {
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -250,10 +236,10 @@ export class DataTableColGroupDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -351,10 +337,10 @@ const DataTableColGroupDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -452,21 +438,21 @@ const DataTableColGroupDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
-        <link rel="stylesheet" href="./BlockUIDemo.css" />
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
+<link rel="stylesheet" href="./BlockUIDemo.css" />
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
-        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
-        <script src="https://unpkg.com/primereact/column/column.min.js"></script>
-        <script src="https://unpkg.com/primereact/columngroup/columngroup.min.js"></script>
-        <script src="https://unpkg.com/primereact/row/row.min.js"></script>
-        <script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+<script src="https://unpkg.com/primereact/api/api.min.js"></script>
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
+<script src="https://unpkg.com/primereact/column/column.min.js"></script>
+<script src="https://unpkg.com/primereact/columngroup/columngroup.min.js"></script>
+<script src="https://unpkg.com/primereact/row/row.min.js"></script>
+<script src="https://unpkg.com/primereact/datatable/datatable.min.js"></script>`,
+            content: `
+const { useState } = React;
 const { DataTable } = primereact.datatable;
 const { Column } = primereact.column;
 const { ColumnGroup } = primereact.columngroup;
@@ -563,23 +549,16 @@ const DataTableColGroupDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'DataTableColGroupDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'DataTableColGroupDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    )
+})
