@@ -149,7 +149,7 @@ export const Sidebar = forwardRef((props, ref) => {
         };
 
         return (
-            <div ref={maskRef} style={props.maskStyle} className={maskClassName} onClick={onMaskClick}>
+            <div ref={maskRef} style={props.maskStyle} className={maskClassName} onMouseDown={onMaskClick}>
                 <CSSTransition nodeRef={sidebarRef} classNames="p-sidebar" in={visibleState} timeout={transitionTimeout} options={props.transitionOptions}
                     unmountOnExit onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
                     <div ref={sidebarRef} id={props.id} className={className} style={props.style} role="complementary">
