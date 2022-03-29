@@ -1,109 +1,88 @@
-import React, { Component } from 'react';
+import React, { forwardRef, memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { classNames, ObjectUtils, IconUtils } from '../utils/Utils';
 
-export class Chip extends Component {
+export const Chip = memo(forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = useState(true);
 
-    static defaultProps = {
-        label: null,
-        icon: null,
-        image: null,
-        removable: false,
-        removeIcon: 'pi pi-times-circle',
-        className: null,
-        style: null,
-        template: null,
-        imageAlt: 'chip',
-        onImageError: null,
-        onRemove: null
-    };
-
-    static propTypes = {
-        label: PropTypes.string,
-        icon: PropTypes.any,
-        image: PropTypes.string,
-        removable: PropTypes.bool,
-        removeIcon: PropTypes.any,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        template: PropTypes.any,
-        imageAlt: PropTypes.string,
-        onImageError: PropTypes.func,
-        onRemove: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            visible: true
-        };
-
-        this.close = this.close.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
-    }
-
-    onKeyDown(event) {
+    const onKeyDown = (event) => {
         if (event.keyCode === 13) { // enter
-            this.close(event);
+            close(event);
         }
     }
 
-    close(event) {
-        event.persist();
+    const close = (event) => {
+        setVisibleState(false);
 
-        this.setState({ visible: false }, () => {
-            if (this.props.onRemove) {
-                this.props.onRemove(event);
-            }
-        });
+        if (props.onRemove) {
+            props.onRemove(event);
+        }
     }
 
-    renderContent() {
+    const createContent = () => {
         let content = [];
 
-        if (this.props.image) {
-            const onError = (e) => {
-                if (this.props.onImageError) {
-                    this.props.onImageError(e);
-                }
-            };
-
-            content.push(<img key="image" src={this.props.image} alt={this.props.imageAlt} onError={onError}></img>);
+        if (props.image) {
+            content.push(<img key="image" src={props.image} alt={props.imageAlt} onError={props.onImageError}></img>);
         }
-        else if (this.props.icon) {
-            content.push(IconUtils.getJSXIcon(this.props.icon, { key: 'icon', className: 'p-chip-icon' }, { props: this.props }));
+        else if (props.icon) {
+            content.push(IconUtils.getJSXIcon(props.icon, { key: 'icon', className: 'p-chip-icon' }, { props }));
         }
 
-        if (this.props.label) {
-            content.push(<span key="label" className="p-chip-text">{this.props.label}</span>);
+        if (props.label) {
+            content.push(<span key="label" className="p-chip-text">{props.label}</span>);
         }
 
-        if (this.props.removable) {
-            content.push(IconUtils.getJSXIcon(this.props.removeIcon,
-                { key: 'removeIcon', tabIndex: 0, className: 'p-chip-remove-icon', onClick: this.close, onKeyDown: this.onKeyDown },
-                { props: this.props }
-            ))
+        if (props.removable) {
+            content.push(IconUtils.getJSXIcon(props.removeIcon, { key: 'removeIcon', tabIndex: 0, className: 'p-chip-remove-icon', onClick: close, onKeyDown }, { props }));
         }
 
         return content;
     }
 
-    renderElement() {
-        const containerClassName = classNames('p-chip p-component', {
-            'p-chip-image': this.props.image != null
-        }, this.props.className);
+    const createElement = () => {
+        const className = classNames('p-chip p-component', {
+            'p-chip-image': props.image != null
+        }, props.className);
 
-        const content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.props) : this.renderContent();
+        const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
         return (
-            <div className={containerClassName} style={this.props.style}>
+            <div className={className} style={props.style}>
                 {content}
             </div>
-        );
+        )
     }
 
-    render() {
-        return this.state.visible && this.renderElement();
-    }
+    return visibleState && createElement();
+}));
+
+Chip.defaultProps = {
+    __TYPE: 'Chip',
+    label: null,
+    icon: null,
+    image: null,
+    removable: false,
+    removeIcon: 'pi pi-times-circle',
+    className: null,
+    style: null,
+    template: null,
+    imageAlt: 'chip',
+    onImageError: null,
+    onRemove: null
+}
+
+Chip.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    label: PropTypes.string,
+    icon: PropTypes.any,
+    image: PropTypes.string,
+    removable: PropTypes.bool,
+    removeIcon: PropTypes.any,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    template: PropTypes.any,
+    imageAlt: PropTypes.string,
+    onImageError: PropTypes.func,
+    onRemove: PropTypes.func
 }

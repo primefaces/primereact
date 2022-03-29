@@ -1,30 +1,22 @@
-import React, { Component } from 'react';
-import { classNames } from '../utils/Utils';
+import React, { memo } from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { classNames } from '../utils/Utils';
 
-export class RowTogglerButton extends Component {
+export const RowTogglerButton = memo((props) => {
 
-    constructor(props) {
-        super(props);
-
-        this.onClick = this.onClick.bind(this);
-    }
-
-    onClick(event) {
-        this.props.onClick({
+    const onClick = (event) => {
+        props.onClick({
             originalEvent: event,
-            data: this.props.rowData
+            data: props.rowData
         })
     }
 
-    render() {
-        const iconClassName = classNames('p-row-toggler-icon', this.props.expanded ? this.props.expandedRowIcon : this.props.collapsedRowIcon);
+    const iconClassName = classNames('p-row-toggler-icon', props.expanded ? props.expandedRowIcon : props.collapsedRowIcon);
 
-        return (
-            <button type="button" onClick={this.onClick} className="p-row-toggler p-link" tabIndex={this.props.tabIndex}>
-                <span className={iconClassName}></span>
-                <Ripple />
-            </button>
-        );
-    }
-}
+    return (
+        <button type="button" onClick={onClick} className="p-row-toggler p-link" tabIndex={props.tabIndex}>
+            <span className={iconClassName}></span>
+            <Ripple />
+        </button>
+    )
+});

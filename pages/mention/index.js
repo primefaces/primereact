@@ -1,57 +1,46 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mention } from '../../components/lib/mention/Mention';
 import { CustomerService } from '../../service/CustomerService';
-import { MentionDoc } from '../../components/doc/mention';
+import MentionDoc from '../../components/doc/mention';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class MentionDemo extends Component {
+const MentionDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            customers: [],
-            suggestions: [],
-            multipleSuggestions: []
-        };
+    const [customers, setCustomers] = useState([]);
+    const [suggestions, setSuggestions] = useState([]);
+    const [multipleSuggestions, setMultipleSuggestions] = useState([]);
 
-        this.tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
+    const tagSuggestions = ['primereact', 'primefaces', 'primeng', 'primevue'];
+    const customerservice = new CustomerService();
 
-        this.customerservice = new CustomerService();
-
-        this.onSearch = this.onSearch.bind(this);
-        this.onMultipleSearch = this.onMultipleSearch.bind(this);
-        this.itemTemplate = this.itemTemplate.bind(this);
-        this.multipleItemTemplate = this.multipleItemTemplate.bind(this);
-    }
-
-    componentDidMount() {
-        this.customerservice.getCustomersSmall().then(data => {
+    useEffect(() => {
+        customerservice.getCustomersSmall().then(data => {
             data.forEach(d => d['nickname'] = `${d.name.replace(/\s+/g, '').toLowerCase()}_${d.id}`);
-            this.setState({ customers: data })
+            setCustomers(data);
         });
-    }
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-    onSearch(event) {
+    const onSearch = (event) => {
         //in a real application, make a request to a remote url with the query and return suggestions, for demo we filter at client side
         setTimeout(() => {
             const query = event.query;
             let suggestions;
 
             if (!query.trim().length) {
-                suggestions = [...this.state.customers];
+                suggestions = [...customers];
             }
             else {
-                suggestions = this.state.customers.filter((customer) => {
+                suggestions = customers.filter((customer) => {
                     return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
                 });
             }
 
-            this.setState({ suggestions });
+            setSuggestions(suggestions);
         }, 250);
     }
 
-    onMultipleSearch(event) {
+    const onMultipleSearch = (event) => {
         const trigger = event.trigger;
 
         if (trigger === '@') {
@@ -61,15 +50,15 @@ export default class MentionDemo extends Component {
                 let suggestions;
 
                 if (!query.trim().length) {
-                    suggestions = [...this.state.customers];
+                    suggestions = [...customers];
                 }
                 else {
-                    suggestions = this.state.customers.filter((customer) => {
+                    suggestions = customers.filter((customer) => {
                         return customer.nickname.toLowerCase().startsWith(query.toLowerCase());
                     });
                 }
 
-                this.setState({ multipleSuggestions: suggestions });
+                setMultipleSuggestions(suggestions);
             }, 250);
         }
         else if (trigger === '#') {
@@ -78,20 +67,20 @@ export default class MentionDemo extends Component {
                 let suggestions;
 
                 if (!query.trim().length) {
-                    suggestions = [...this.tagSuggestions];
+                    suggestions = [...tagSuggestions];
                 }
                 else {
-                    suggestions = this.tagSuggestions.filter((tag) => {
+                    suggestions = tagSuggestions.filter((tag) => {
                         return tag.toLowerCase().startsWith(query.toLowerCase());
                     });
                 }
 
-                this.setState({ multipleSuggestions: suggestions });
+                setMultipleSuggestions(suggestions);
             }, 250);
         }
     }
 
-    itemTemplate(suggestion) {
+    const itemTemplate = (suggestion) => {
         const src = 'images/avatar/' + suggestion.representative.image;
 
         return (
@@ -105,11 +94,11 @@ export default class MentionDemo extends Component {
         );
     }
 
-    multipleItemTemplate(suggestion, options) {
+    const multipleItemTemplate = (suggestion, options) => {
         const trigger = options.trigger;
 
         if (trigger === '@' && suggestion.nickname) {
-            return this.itemTemplate(suggestion);
+            return itemTemplate(suggestion);
         }
         else if (trigger === '#' && !suggestion.nickname) {
             return <span>{suggestion}</span>;
@@ -118,40 +107,40 @@ export default class MentionDemo extends Component {
         return null;
     }
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React Mention Component</title>
-                    <meta name="description" content="Mention component is used to refer someone or something." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>Mention</h1>
-                        <p>Mention component is used to refer someone or something.</p>
-                    </div>
-
-                    <DocActions github="mention/index.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Mention Component</title>
+                <meta name="description" content="Mention component is used to refer someone or something." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>Mention</h1>
+                    <p>Mention component is used to refer someone or something.</p>
                 </div>
 
-                <div className="content-section implementation">
-                    <div className="card">
-                        <h5>Basic</h5>
-                        <Mention suggestions={this.state.suggestions} onSearch={this.onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40}
-                            itemTemplate={this.itemTemplate} />
-
-                        <h5>Auto Resize</h5>
-                        <Mention suggestions={this.state.suggestions} onSearch={this.onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} autoResize
-                            itemTemplate={this.itemTemplate} />
-
-                        <h5>Multiple Trigger</h5>
-                        <Mention trigger={['@', '#']} suggestions={this.state.multipleSuggestions} onSearch={this.onMultipleSearch} field={['nickname']} placeholder="Please enter @ to mention people, # to mention tag"
-                            itemTemplate={this.multipleItemTemplate} rows={5} cols={40} />
-                    </div>
-                </div>
-
-                <MentionDoc />
+                <DocActions github="mention/index.js" />
             </div>
-        )
-    }
+
+            <div className="content-section implementation">
+                <div className="card">
+                    <h5>Basic</h5>
+                    <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40}
+                        itemTemplate={itemTemplate} />
+
+                    <h5>Auto Resize</h5>
+                    <Mention suggestions={suggestions} onSearch={onSearch} field="nickname" placeholder="Please enter @ to mention people" rows={5} cols={40} autoResize
+                        itemTemplate={itemTemplate} />
+
+                    <h5>Multiple Trigger</h5>
+                    <Mention trigger={['@', '#']} suggestions={multipleSuggestions} onSearch={onMultipleSearch} field={['nickname']} placeholder="Please enter @ to mention people, # to mention tag"
+                        itemTemplate={multipleItemTemplate} rows={5} cols={40} />
+                </div>
+            </div>
+
+            <MentionDoc />
+        </div>
+    )
 }
+
+export default MentionDemo;

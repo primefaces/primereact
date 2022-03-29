@@ -1,245 +1,141 @@
-import React, { Component, createRef } from 'react';
+import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import {InputText} from '../inputtext/InputText';
-import { classNames } from '../utils/Utils';
 import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
+import { InputText } from '../inputtext/InputText';
+import { classNames, ObjectUtils } from '../utils/Utils';
+import { useMountEffect, useUpdateEffect, useUnmountEffect } from '../hooks/Hooks';
 
-export class InputNumber extends Component {
+export const InputNumber = memo(forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = useState(false);
+    const elementRef = useRef(null);
+    const inputRef = useRef(null);
+    const tooltipRef = useRef(null);
+    const timer = useRef(null);
+    const lastValue = useRef(null);
 
-    static defaultProps = {
-        value: null,
-        inputRef: null,
-        format: true,
-        showButtons: false,
-        buttonLayout: 'stacked',
-        incrementButtonClassName: null,
-        decrementButtonClassName: null,
-        incrementButtonIcon: 'pi pi-angle-up',
-        decrementButtonIcon: 'pi pi-angle-down',
-        locale: undefined,
-        localeMatcher: undefined,
-        mode: 'decimal',
-        suffix: null,
-        prefix: null,
-        currency: undefined,
-        currencyDisplay: undefined,
-        useGrouping: true,
-        minFractionDigits: undefined,
-        maxFractionDigits: undefined,
-        id: null,
-        name: null,
-        type: 'text',
-        allowEmpty: true,
-        step: 1,
-        min: null,
-        max: null,
-        disabled: false,
-        required: false,
-        tabIndex: null,
-        pattern: null,
-        inputMode: null,
-        placeholder: null,
-        readOnly: false,
-        size: null,
-        style: null,
-        className: null,
-        inputId: null,
-        autoFocus: false,
-        inputStyle: null,
-        inputClassName: null,
-        tooltip: null,
-        tooltipOptions: null,
-        ariaLabelledBy: null,
-        onValueChange: null,
-        onChange: null,
-        onBlur: null,
-        onFocus: null,
-        onKeyDown: null
-    }
+    const numberFormat = useRef(null);
+    const groupChar = useRef(null);
+    const prefixChar = useRef(null);
+    const suffixChar = useRef(null);
+    const isSpecialChar = useRef(null);
+    const _numeral = useRef(null);
+    const _group = useRef(null);
+    const _minusSign = useRef(null);
+    const _currency = useRef(null);
+    const _decimal = useRef(null);
+    const _suffix = useRef(null);
+    const _prefix = useRef(null);
+    const _index = useRef(null);
 
-    static propTypes = {
-        value: PropTypes.number,
-        inputRef: PropTypes.any,
-        format: PropTypes.bool,
-        showButtons: PropTypes.bool,
-        buttonLayout: PropTypes.string,
-        incrementButtonClassName: PropTypes.string,
-        decrementButtonClassName: PropTypes.string,
-        incrementButtonIcon: PropTypes.string,
-        decrementButtonIcon: PropTypes.string,
-        locale: PropTypes.string,
-        localeMatcher: PropTypes.string,
-        mode: PropTypes.string,
-        suffix: PropTypes.string,
-        prefix: PropTypes.string,
-        currency: PropTypes.string,
-        currencyDisplay: PropTypes.string,
-        useGrouping: PropTypes.bool,
-        minFractionDigits: PropTypes.number,
-        maxFractionDigits: PropTypes.number,
-        id: PropTypes.string,
-        name: PropTypes.string,
-        type: PropTypes.string,
-        allowEmpty: PropTypes.bool,
-        step: PropTypes.number,
-        min: PropTypes.number,
-        max: PropTypes.number,
-        disabled: PropTypes.bool,
-        required: PropTypes.bool,
-        tabIndex: PropTypes.number,
-        pattern: PropTypes.string,
-        inputMode: PropTypes.string,
-        placeholder: PropTypes.string,
-        readOnly: PropTypes.bool,
-        size: PropTypes.number,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        inputId: PropTypes.string,
-        autoFocus: PropTypes.bool,
-        inputStyle: PropTypes.object,
-        inputClassName: PropTypes.string,
-        tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object,
-        ariaLabelledBy: PropTypes.string,
-        onValueChange: PropTypes.func,
-        onChange: PropTypes.func,
-        onBlur: PropTypes.func,
-        onFocus: PropTypes.func,
-        onKeyDown: PropTypes.func
-    }
+    const stacked = props.showButtons && props.buttonLayout === 'stacked';
+    const horizontal = props.showButtons && props.buttonLayout === 'horizontal';
+    const vertical = props.showButtons && props.buttonLayout === 'vertical';
+    const inputMode = props.inputMode || ((props.mode === 'decimal' && !props.minFractionDigits) ? 'numeric' : 'decimal');
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            focused: false
-        };
-
-        this.constructParser();
-
-        this.onInput = this.onInput.bind(this);
-        this.onInputKeyDown = this.onInputKeyDown.bind(this);
-        this.onInputKeyPress = this.onInputKeyPress.bind(this);
-        this.onInputClick = this.onInputClick.bind(this);
-        this.onInputBlur = this.onInputBlur.bind(this);
-        this.onInputFocus = this.onInputFocus.bind(this);
-        this.onPaste = this.onPaste.bind(this);
-
-        this.onUpButtonMouseLeave = this.onUpButtonMouseLeave.bind(this);
-        this.onUpButtonMouseDown = this.onUpButtonMouseDown.bind(this);
-        this.onUpButtonMouseUp = this.onUpButtonMouseUp.bind(this);
-        this.onUpButtonKeyDown = this.onUpButtonKeyDown.bind(this);
-        this.onUpButtonKeyUp = this.onUpButtonKeyUp.bind(this);
-
-        this.onDownButtonMouseLeave = this.onDownButtonMouseLeave.bind(this);
-        this.onDownButtonMouseDown = this.onDownButtonMouseDown.bind(this);
-        this.onDownButtonMouseUp = this.onDownButtonMouseUp.bind(this);
-        this.onDownButtonKeyDown = this.onDownButtonKeyDown.bind(this);
-        this.onDownButtonKeyUp = this.onDownButtonKeyUp.bind(this);
-
-        this.inputRef = createRef(this.props.inputRef);
-    }
-
-    getOptions() {
+    const getOptions = () => {
         return {
-            localeMatcher: this.props.localeMatcher,
-            style: this.props.mode,
-            currency: this.props.currency,
-            currencyDisplay: this.props.currencyDisplay,
-            useGrouping: this.props.useGrouping,
-            minimumFractionDigits: this.props.minFractionDigits,
-            maximumFractionDigits: this.props.maxFractionDigits
-        };
+            localeMatcher: props.localeMatcher,
+            style: props.mode,
+            currency: props.currency,
+            currencyDisplay: props.currencyDisplay,
+            useGrouping: props.useGrouping,
+            minimumFractionDigits: props.minFractionDigits,
+            maximumFractionDigits: props.maxFractionDigits
+        }
     }
 
-    constructParser() {
-        this.numberFormat = new Intl.NumberFormat(this.props.locale, this.getOptions());
-        const numerals = [...new Intl.NumberFormat(this.props.locale, {useGrouping: false}).format(9876543210)].reverse();
+    const constructParser = () => {
+        numberFormat.current = new Intl.NumberFormat(props.locale, getOptions());
+        const numerals = [...new Intl.NumberFormat(props.locale, { useGrouping: false }).format(9876543210)].reverse();
         const index = new Map(numerals.map((d, i) => [d, i]));
-        this._numeral = new RegExp(`[${numerals.join('')}]`, 'g');
-        this._group = this.getGroupingExpression();
-        this._minusSign = this.getMinusSignExpression();
-        this._currency = this.getCurrencyExpression();
-        this._decimal = this.getDecimalExpression();
-        this._suffix = this.getSuffixExpression();
-        this._prefix = this.getPrefixExpression();
-        this._index = d => index.get(d);
+        _numeral.current = new RegExp(`[${numerals.join('')}]`, 'g');
+        _group.current = getGroupingExpression();
+        _minusSign.current = getMinusSignExpression();
+        _currency.current = getCurrencyExpression();
+        _decimal.current = getDecimalExpression();
+        _suffix.current = getSuffixExpression();
+        _prefix.current = getPrefixExpression();
+        _index.current = d => index.get(d);
     }
 
-    escapeRegExp(text) {
+    const escapeRegExp = (text) => {
         return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
     }
 
-    getDecimalExpression() {
-        const formatter = new Intl.NumberFormat(this.props.locale, {...this.getOptions(), useGrouping: false});
-        return new RegExp(`[${formatter.format(1.1).replace(this._currency, '').trim().replace(this._numeral, '')}]`, 'g');
+    const getDecimalExpression = () => {
+        const formatter = new Intl.NumberFormat(props.locale, { ...getOptions(), useGrouping: false });
+        return new RegExp(`[${formatter.format(1.1).replace(_currency.current, '').trim().replace(_numeral.current, '')}]`, 'g');
     }
 
-    getGroupingExpression() {
-        const formatter = new Intl.NumberFormat(this.props.locale, {useGrouping: true});
-        this.groupChar = formatter.format(1000000).trim().replace(this._numeral, '').charAt(0);
-        return new RegExp(`[${this.groupChar}]`, 'g');
+    const getGroupingExpression = () => {
+        const formatter = new Intl.NumberFormat(props.locale, { useGrouping: true });
+        groupChar.current = formatter.format(1000000).trim().replace(_numeral.current, '').charAt(0);
+        return new RegExp(`[${groupChar.current}]`, 'g');
     }
 
-    getMinusSignExpression() {
-        const formatter = new Intl.NumberFormat(this.props.locale, {useGrouping: false});
-        return new RegExp(`[${formatter.format(-1).trim().replace(this._numeral, '')}]`, 'g');
+    const getMinusSignExpression = () => {
+        const formatter = new Intl.NumberFormat(props.locale, { useGrouping: false });
+        return new RegExp(`[${formatter.format(-1).trim().replace(_numeral.current, '')}]`, 'g');
     }
 
-    getCurrencyExpression() {
-        if (this.props.currency) {
-            const formatter = new Intl.NumberFormat(this.props.locale, {style: 'currency', currency: this.props.currency, currencyDisplay: this.props.currencyDisplay,
-                minimumFractionDigits: 0, maximumFractionDigits: 0});
-            return new RegExp(`[${formatter.format(1).replace(/\s/g, '').replace(this._numeral, '').replace(this._group, '')}]`, 'g');
+    const getCurrencyExpression = () => {
+        if (props.currency) {
+            const formatter = new Intl.NumberFormat(props.locale, {
+                style: 'currency', currency: props.currency, currencyDisplay: props.currencyDisplay,
+                minimumFractionDigits: 0, maximumFractionDigits: 0
+            });
+            return new RegExp(`[${formatter.format(1).replace(/\s/g, '').replace(_numeral.current, '').replace(_group.current, '')}]`, 'g');
         }
 
-        return new RegExp(`[]`,'g');
+        return new RegExp(`[]`, 'g');
     }
 
-    getPrefixExpression() {
-        if (this.props.prefix) {
-            this.prefixChar = this.props.prefix;
-        }
-        else {
-            const formatter = new Intl.NumberFormat(this.props.locale, {style: this.props.mode, currency: this.props.currency, currencyDisplay: this.props.currencyDisplay});
-            this.prefixChar = formatter.format(1).split('1')[0];
-        }
-
-        return new RegExp(`${this.escapeRegExp(this.prefixChar||'')}`, 'g');
-    }
-
-    getSuffixExpression() {
-        if (this.props.suffix) {
-            this.suffixChar = this.props.suffix;
+    const getPrefixExpression = () => {
+        if (props.prefix) {
+            prefixChar.current = props.prefix;
         }
         else {
-            const formatter = new Intl.NumberFormat(this.props.locale, {style: this.props.mode, currency: this.props.currency, currencyDisplay: this.props.currencyDisplay,
-                minimumFractionDigits: 0, maximumFractionDigits: 0});
-            this.suffixChar = formatter.format(1).split('1')[1];
+            const formatter = new Intl.NumberFormat(props.locale, { style: props.mode, currency: props.currency, currencyDisplay: props.currencyDisplay });
+            prefixChar.current = formatter.format(1).split('1')[0];
         }
 
-        return new RegExp(`${this.escapeRegExp(this.suffixChar||'')}`, 'g');
+        return new RegExp(`${escapeRegExp(prefixChar.current || '')}`, 'g');
     }
 
-    formatValue(value) {
+    const getSuffixExpression = () => {
+        if (props.suffix) {
+            suffixChar.current = props.suffix;
+        }
+        else {
+            const formatter = new Intl.NumberFormat(props.locale, {
+                style: props.mode, currency: props.currency, currencyDisplay: props.currencyDisplay,
+                minimumFractionDigits: 0, maximumFractionDigits: 0
+            });
+            suffixChar.current = formatter.format(1).split('1')[1];
+        }
+
+        return new RegExp(`${escapeRegExp(suffixChar.current || '')}`, 'g');
+    }
+
+    const formatValue = (value) => {
         if (value != null) {
             if (value === '-') { // Minus sign
                 return value;
             }
 
-            if (this.props.format) {
-                let formatter = new Intl.NumberFormat(this.props.locale, this.getOptions());
-                let formattedValue = formatter.format(value);
-                if (this.props.prefix) {
-                    formattedValue = this.props.prefix + formattedValue;
+            if (props.format) {
+                let formatter = new Intl.NumberFormat(props.locale, getOptions());
+                let _formattedValue = formatter.format(value);
+                if (props.prefix) {
+                    _formattedValue = props.prefix + _formattedValue;
                 }
 
-                if (this.props.suffix) {
-                    formattedValue = formattedValue + this.props.suffix;
+                if (props.suffix) {
+                    _formattedValue = _formattedValue + props.suffix;
                 }
 
-                return formattedValue;
+                return _formattedValue;
             }
 
             return value.toString();
@@ -248,17 +144,17 @@ export class InputNumber extends Component {
         return '';
     }
 
-    parseValue(text) {
+    const parseValue = (text) => {
         let filteredText = text
-                            .replace(this._suffix, '')
-                            .replace(this._prefix, '')
-                            .trim()
-                            .replace(/\s/g, '')
-                            .replace(this._currency, '')
-                            .replace(this._group, '')
-                            .replace(this._minusSign, '-')
-                            .replace(this._decimal, '.')
-                            .replace(this._numeral, this._index);
+            .replace(_suffix.current, '')
+            .replace(_prefix.current, '')
+            .trim()
+            .replace(/\s/g, '')
+            .replace(_currency.current, '')
+            .replace(_group.current, '')
+            .replace(_minusSign.current, '-')
+            .replace(_decimal.current, '.')
+            .replace(_numeral.current, _index.current);
 
         if (filteredText) {
             if (filteredText === '-') // Minus sign
@@ -271,114 +167,114 @@ export class InputNumber extends Component {
         return null;
     }
 
-    repeat(event, interval, dir) {
+    const repeat = (event, interval, dir) => {
         let i = interval || 500;
 
-        this.clearTimer();
-        this.timer = setTimeout(() => {
-            this.repeat(event, 40, dir);
+        clearTimer();
+        timer.current = setTimeout(() => {
+            repeat(event, 40, dir);
         }, i);
 
-        this.spin(event, dir);
+        spin(event, dir);
     }
 
-    spin(event, dir) {
-        if (this.inputRef && this.inputRef.current) {
-            let step = this.props.step * dir;
-            let currentValue = this.parseValue(this.inputRef.current.value) || 0;
-            let newValue = this.validateValue(currentValue + step);
+    const spin = (event, dir) => {
+        if (inputRef.current) {
+            let step = props.step * dir;
+            let currentValue = parseValue(inputRef.current.value) || 0;
+            let newValue = validateValue(currentValue + step);
 
-            this.updateInput(newValue, null, 'spin');
-            this.updateModel(event, newValue);
+            updateInput(newValue, null, 'spin');
+            updateModel(event, newValue);
 
-            this.handleOnChange(event, currentValue, newValue);
+            handleOnChange(event, currentValue, newValue);
         }
     }
 
-    onUpButtonMouseDown(event) {
-        if (!this.props.disabled && !this.props.readOnly) {
-            this.inputRef.current.focus();
-            this.repeat(event, null, 1);
+    const onUpButtonMouseDown = (event) => {
+        if (!props.disabled && !props.readOnly) {
+            inputRef.current.focus();
+            repeat(event, null, 1);
             event.preventDefault();
         }
     }
 
-    onUpButtonMouseUp() {
-        if (!this.props.disabled && !this.props.readOnly) {
-            this.clearTimer();
+    const onUpButtonMouseUp = () => {
+        if (!props.disabled && !props.readOnly) {
+            clearTimer();
         }
     }
 
-    onUpButtonMouseLeave() {
-        if (!this.props.disabled && !this.props.readOnly) {
-            this.clearTimer();
+    const onUpButtonMouseLeave = () => {
+        if (!props.disabled && !props.readOnly) {
+            clearTimer();
         }
     }
 
-    onUpButtonKeyUp() {
-        if (!this.props.disabled && !this.props.readOnly) {
-            this.clearTimer();
+    const onUpButtonKeyUp = () => {
+        if (!props.disabled && !props.readOnly) {
+            clearTimer();
         }
     }
 
-    onUpButtonKeyDown(event) {
-        if (!this.props.disabled && !this.props.readOnly && (event.keyCode === 32 || event.keyCode === 13)) {
-            this.repeat(event, null, 1);
+    const onUpButtonKeyDown = (event) => {
+        if (!props.disabled && !props.readOnly && (event.keyCode === 32 || event.keyCode === 13)) {
+            repeat(event, null, 1);
         }
     }
 
-    onDownButtonMouseDown(event) {
-        if (!this.props.disabled && !this.props.readOnly) {
-            this.inputRef.current.focus();
-            this.repeat(event, null, -1);
+    const onDownButtonMouseDown = (event) => {
+        if (!props.disabled && !props.readOnly) {
+            inputRef.current.focus();
+            repeat(event, null, -1);
 
             event.preventDefault();
         }
     }
 
-    onDownButtonMouseUp() {
-        if (!this.props.disabled && !this.props.readOnly) {
-            this.clearTimer();
+    const onDownButtonMouseUp = () => {
+        if (!props.disabled && !props.readOnly) {
+            clearTimer();
         }
     }
 
-    onDownButtonMouseLeave() {
-        if (!this.props.disabled && !this.props.readOnly) {
-            this.clearTimer();
+    const onDownButtonMouseLeave = () => {
+        if (!props.disabled && !props.readOnly) {
+            clearTimer();
         }
     }
 
-    onDownButtonKeyUp() {
-        if (!this.props.disabled && !this.props.readOnly) {
-            this.clearTimer();
+    const onDownButtonKeyUp = () => {
+        if (!props.disabled && !props.readOnly) {
+            clearTimer();
         }
     }
 
-    onDownButtonKeyDown(event) {
-        if (!this.props.disabled && !this.props.readOnly && (event.keyCode === 32 || event.keyCode === 13)) {
-            this.repeat(event, null, -1);
+    const onDownButtonKeyDown = (event) => {
+        if (!props.disabled && !props.readOnly && (event.keyCode === 32 || event.keyCode === 13)) {
+            repeat(event, null, -1);
         }
     }
 
-    onInput(event) {
-        if (this.props.disabled || this.props.readOnly) {
+    const onInput = (event) => {
+        if (props.disabled || props.readOnly) {
             return;
         }
 
-        if (this.isSpecialChar) {
-            event.target.value = this.lastValue;
+        if (isSpecialChar.current) {
+            event.target.value = lastValue.current;
         }
-        this.isSpecialChar = false;
+        isSpecialChar.current = false;
     }
 
-    onInputKeyDown(event) {
-        if (this.props.disabled || this.props.readOnly) {
+    const onInputKeyDown = (event) => {
+        if (props.disabled || props.readOnly) {
             return;
         }
 
-        this.lastValue = event.target.value;
+        lastValue.current = event.target.value;
         if (event.shiftKey || event.altKey) {
-            this.isSpecialChar = true;
+            isSpecialChar.current = true;
             return;
         }
 
@@ -394,37 +290,37 @@ export class InputNumber extends Component {
         switch (event.which) {
             //up
             case 38:
-                this.spin(event, 1);
+                spin(event, 1);
                 event.preventDefault();
-            break;
+                break;
 
             //down
             case 40:
-                this.spin(event, -1);
+                spin(event, -1);
                 event.preventDefault();
-            break;
+                break;
 
             //left
             case 37:
-                if (!this.isNumeralChar(inputValue.charAt(selectionStart - 1))) {
+                if (!isNumeralChar(inputValue.charAt(selectionStart - 1))) {
                     event.preventDefault();
                 }
-            break;
+                break;
 
             //right
             case 39:
-                if (!this.isNumeralChar(inputValue.charAt(selectionStart))) {
+                if (!isNumeralChar(inputValue.charAt(selectionStart))) {
                     event.preventDefault();
                 }
-            break;
+                break;
 
             //enter
             case 13:
-                newValueStr = this.validateValue(this.parseValue(inputValue));
-                this.inputRef.current.value = this.formatValue(newValueStr);
-                this.inputRef.current.setAttribute('aria-valuenow', newValueStr);
-                this.updateModel(event, newValueStr);
-            break;
+                newValueStr = validateValue(parseValue(inputValue));
+                inputRef.current.value = formatValue(newValueStr);
+                inputRef.current.setAttribute('aria-valuenow', newValueStr);
+                updateModel(event, newValueStr);
+                break;
 
             //backspace
             case 8:
@@ -432,46 +328,46 @@ export class InputNumber extends Component {
 
                 if (selectionStart === selectionEnd) {
                     const deleteChar = inputValue.charAt(selectionStart - 1);
-                    const { decimalCharIndex, decimalCharIndexWithoutPrefix } = this.getDecimalCharIndexes(inputValue);
+                    const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
 
-                    if (this.isNumeralChar(deleteChar)) {
-                        const decimalLength = this.getDecimalLength(inputValue);
+                    if (isNumeralChar(deleteChar)) {
+                        const decimalLength = getDecimalLength(inputValue);
 
-                        if (this._group.test(deleteChar)) {
-                            this._group.lastIndex = 0;
+                        if (_group.current.test(deleteChar)) {
+                            _group.current.lastIndex = 0;
                             newValueStr = inputValue.slice(0, selectionStart - 2) + inputValue.slice(selectionStart - 1);
                         }
-                        else if (this._decimal.test(deleteChar)) {
-                            this._decimal.lastIndex = 0;
+                        else if (_decimal.current.test(deleteChar)) {
+                            _decimal.current.lastIndex = 0;
 
                             if (decimalLength) {
-                                this.inputRef.current.setSelectionRange(selectionStart - 1, selectionStart - 1);
+                                inputRef.current.setSelectionRange(selectionStart - 1, selectionStart - 1);
                             }
                             else {
                                 newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
                             }
                         }
                         else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
-                            const insertedText = this.isDecimalMode() && (this.props.minFractionDigits || 0) < decimalLength ? '' : '0';
+                            const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
                             newValueStr = inputValue.slice(0, selectionStart - 1) + insertedText + inputValue.slice(selectionStart);
                         }
                         else if (decimalCharIndexWithoutPrefix === 1) {
                             newValueStr = inputValue.slice(0, selectionStart - 1) + '0' + inputValue.slice(selectionStart);
-                            newValueStr = this.parseValue(newValueStr) > 0 ? newValueStr : '';
+                            newValueStr = parseValue(newValueStr) > 0 ? newValueStr : '';
                         }
                         else {
                             newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
                         }
                     }
 
-                    this.updateValue(event, newValueStr, null, 'delete-single');
+                    updateValue(event, newValueStr, null, 'delete-single');
                 }
                 else {
-                    newValueStr = this.deleteRange(inputValue, selectionStart, selectionEnd);
-                    this.updateValue(event, newValueStr, null, 'delete-range');
+                    newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
+                    updateValue(event, newValueStr, null, 'delete-range');
                 }
 
-            break;
+                break;
 
             // del
             case 46:
@@ -479,179 +375,179 @@ export class InputNumber extends Component {
 
                 if (selectionStart === selectionEnd) {
                     const deleteChar = inputValue.charAt(selectionStart);
-                    const { decimalCharIndex, decimalCharIndexWithoutPrefix } = this.getDecimalCharIndexes(inputValue);
+                    const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
 
-                    if (this.isNumeralChar(deleteChar)) {
-                        const decimalLength = this.getDecimalLength(inputValue);
+                    if (isNumeralChar(deleteChar)) {
+                        const decimalLength = getDecimalLength(inputValue);
 
-                        if (this._group.test(deleteChar)) {
-                            this._group.lastIndex = 0;
+                        if (_group.current.test(deleteChar)) {
+                            _group.current.lastIndex = 0;
                             newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 2);
                         }
-                        else if (this._decimal.test(deleteChar)) {
-                            this._decimal.lastIndex = 0;
+                        else if (_decimal.current.test(deleteChar)) {
+                            _decimal.current.lastIndex = 0;
 
                             if (decimalLength) {
-                                this.$refs.input.$el.setSelectionRange(selectionStart + 1, selectionStart + 1);
+                                $refs.input.$el.setSelectionRange(selectionStart + 1, selectionStart + 1);
                             }
                             else {
                                 newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
                             }
                         }
                         else if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
-                            const insertedText = this.isDecimalMode() && (this.props.minFractionDigits || 0) < decimalLength ? '' : '0';
+                            const insertedText = isDecimalMode() && (props.minFractionDigits || 0) < decimalLength ? '' : '0';
                             newValueStr = inputValue.slice(0, selectionStart) + insertedText + inputValue.slice(selectionStart + 1);
                         }
                         else if (decimalCharIndexWithoutPrefix === 1) {
                             newValueStr = inputValue.slice(0, selectionStart) + '0' + inputValue.slice(selectionStart + 1);
-                            newValueStr = this.parseValue(newValueStr) > 0 ? newValueStr : '';
+                            newValueStr = parseValue(newValueStr) > 0 ? newValueStr : '';
                         }
                         else {
                             newValueStr = inputValue.slice(0, selectionStart) + inputValue.slice(selectionStart + 1);
                         }
                     }
 
-                    this.updateValue(event, newValueStr, null, 'delete-back-single');
+                    updateValue(event, newValueStr, null, 'delete-back-single');
                 }
                 else {
-                    newValueStr = this.deleteRange(inputValue, selectionStart, selectionEnd);
-                    this.updateValue(event, newValueStr, null, 'delete-range');
+                    newValueStr = deleteRange(inputValue, selectionStart, selectionEnd);
+                    updateValue(event, newValueStr, null, 'delete-range');
                 }
-            break;
+                break;
 
             default:
-            break;
+                break;
         }
 
-        if (this.props.onKeyDown) {
-            this.props.onKeyDown(event);
+        if (props.onKeyDown) {
+            props.onKeyDown(event);
         }
     }
 
-    onInputKeyPress(event) {
-        if (this.props.disabled || this.props.readOnly) {
+    const onInputKeyPress = (event) => {
+        if (props.disabled || props.readOnly) {
             return;
         }
 
-        let code = event.which || event.keyCode;
+        const code = event.which || event.keyCode;
 
         if (code !== 13) { // to submit a form
             event.preventDefault();
         }
 
-        let char = String.fromCharCode(code);
-        const isDecimalSign = this.isDecimalSign(char);
-        const isMinusSign = this.isMinusSign(char);
+        const char = String.fromCharCode(code);
+        const _isDecimalSign = isDecimalSign(char);
+        const _isMinusSign = isMinusSign(char);
 
-        if ((48 <= code && code <= 57) || isMinusSign || isDecimalSign) {
-            this.insert(event, char, { isDecimalSign, isMinusSign });
+        if ((48 <= code && code <= 57) || _isMinusSign || _isDecimalSign) {
+            insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
         }
     }
 
-    onPaste(event) {
+    const onPaste = (event) => {
         event.preventDefault();
 
-        if (this.props.disabled || this.props.readOnly) {
+        if (props.disabled || props.readOnly) {
             return;
         }
 
         let data = (event.clipboardData || window['clipboardData']).getData('Text');
         if (data) {
-            let filteredData = this.parseValue(data);
+            let filteredData = parseValue(data);
             if (filteredData != null) {
-                this.insert(event, filteredData.toString());
+                insert(event, filteredData.toString());
             }
         }
     }
 
-    allowMinusSign() {
-        return this.props.min === null || this.props.min < 0;
+    const allowMinusSign = () => {
+        return props.min === null || props.min < 0;
     }
 
-    isMinusSign(char) {
-        if (this._minusSign.test(char) || char === '-') {
-            this._minusSign.lastIndex = 0;
+    const isMinusSign = (char) => {
+        if (_minusSign.current.test(char) || char === '-') {
+            _minusSign.current.lastIndex = 0;
             return true;
         }
 
         return false;
     }
 
-    isDecimalSign(char) {
-        if (this._decimal.test(char)) {
-            this._decimal.lastIndex = 0;
+    const isDecimalSign = (char) => {
+        if (_decimal.current.test(char)) {
+            _decimal.current.lastIndex = 0;
             return true;
         }
 
         return false;
     }
 
-    isDecimalMode() {
-        return this.props.mode === 'decimal';
+    const isDecimalMode = () => {
+        return props.mode === 'decimal';
     }
 
-    getDecimalCharIndexes(val) {
-        let decimalCharIndex = val.search(this._decimal);
-        this._decimal.lastIndex = 0;
+    const getDecimalCharIndexes = (val) => {
+        const decimalCharIndex = val.search(_decimal.current);
+        _decimal.current.lastIndex = 0;
 
-        const filteredVal = val.replace(this._prefix, '').trim().replace(/\s/g, '').replace(this._currency, '');
-        const decimalCharIndexWithoutPrefix = filteredVal.search(this._decimal);
-        this._decimal.lastIndex = 0;
+        const filteredVal = val.replace(_prefix.current, '').trim().replace(/\s/g, '').replace(_currency.current, '');
+        const decimalCharIndexWithoutPrefix = filteredVal.search(_decimal.current);
+        _decimal.current.lastIndex = 0;
 
         return { decimalCharIndex, decimalCharIndexWithoutPrefix };
     }
 
-    getCharIndexes(val) {
-        const decimalCharIndex = val.search(this._decimal);
-        this._decimal.lastIndex = 0;
-        const minusCharIndex = val.search(this._minusSign);
-        this._minusSign.lastIndex = 0;
-        const suffixCharIndex = val.search(this._suffix);
-        this._suffix.lastIndex = 0;
-        const currencyCharIndex = val.search(this._currency);
-        this._currency.lastIndex = 0;
+    const getCharIndexes = (val) => {
+        const decimalCharIndex = val.search(_decimal.current);
+        _decimal.current.lastIndex = 0;
+        const minusCharIndex = val.search(_minusSign.current);
+        _minusSign.current.lastIndex = 0;
+        const suffixCharIndex = val.search(_suffix.current);
+        _suffix.current.lastIndex = 0;
+        const currencyCharIndex = val.search(_currency.current);
+        _currency.current.lastIndex = 0;
 
         return { decimalCharIndex, minusCharIndex, suffixCharIndex, currencyCharIndex };
     }
 
-    insert(event, text, sign = { isDecimalSign: false, isMinusSign: false }) {
-        const minusCharIndexOnText = text.search(this._minusSign);
-        this._minusSign.lastIndex = 0;
-        if (!this.allowMinusSign() && minusCharIndexOnText !== -1) {
+    const insert = (event, text, sign = { isDecimalSign: false, isMinusSign: false }) => {
+        const minusCharIndexOnText = text.search(_minusSign.current);
+        _minusSign.current.lastIndex = 0;
+        if (!allowMinusSign() && minusCharIndexOnText !== -1) {
             return;
         }
 
-        const selectionStart = this.inputRef.current.selectionStart;
-        const selectionEnd = this.inputRef.current.selectionEnd;
-        let inputValue = this.inputRef.current.value.trim();
-        const { decimalCharIndex, minusCharIndex, suffixCharIndex, currencyCharIndex } = this.getCharIndexes(inputValue);
+        const selectionStart = inputRef.current.selectionStart;
+        const selectionEnd = inputRef.current.selectionEnd;
+        let inputValue = inputRef.current.value.trim();
+        const { decimalCharIndex, minusCharIndex, suffixCharIndex, currencyCharIndex } = getCharIndexes(inputValue);
         let newValueStr;
 
         if (sign.isMinusSign) {
             if (selectionStart === 0) {
                 newValueStr = inputValue;
                 if (minusCharIndex === -1 || selectionEnd !== 0) {
-                    newValueStr = this.insertText(inputValue, text, 0, selectionEnd);
+                    newValueStr = insertText(inputValue, text, 0, selectionEnd);
                 }
 
-                this.updateValue(event, newValueStr, text, 'insert');
+                updateValue(event, newValueStr, text, 'insert');
             }
         }
         else if (sign.isDecimalSign) {
             if (decimalCharIndex > 0 && selectionStart === decimalCharIndex) {
-                this.updateValue(event, inputValue, text, 'insert');
+                updateValue(event, inputValue, text, 'insert');
             }
             else if (decimalCharIndex > selectionStart && decimalCharIndex < selectionEnd) {
-                newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
-                this.updateValue(event, newValueStr, text, 'insert');
+                newValueStr = insertText(inputValue, text, selectionStart, selectionEnd);
+                updateValue(event, newValueStr, text, 'insert');
             }
-            else if (decimalCharIndex === -1 && this.props.maxFractionDigits) {
-                newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
-                this.updateValue(event, newValueStr, text, 'insert');
+            else if (decimalCharIndex === -1 && props.maxFractionDigits) {
+                newValueStr = insertText(inputValue, text, selectionStart, selectionEnd);
+                updateValue(event, newValueStr, text, 'insert');
             }
         }
         else {
-            const maxFractionDigits = this.numberFormat.resolvedOptions().maximumFractionDigits;
+            const maxFractionDigits = numberFormat.current.resolvedOptions().maximumFractionDigits;
             const operation = selectionStart !== selectionEnd ? 'range-insert' : 'insert';
 
             if (decimalCharIndex > 0 && selectionStart > decimalCharIndex) {
@@ -659,26 +555,26 @@ export class InputNumber extends Component {
                     const charIndex = currencyCharIndex >= selectionStart ? currencyCharIndex - 1 : (suffixCharIndex >= selectionStart ? suffixCharIndex : inputValue.length);
 
                     newValueStr = inputValue.slice(0, selectionStart) + text + inputValue.slice(selectionStart + text.length, charIndex) + inputValue.slice(charIndex);
-                    this.updateValue(event, newValueStr, text, operation);
+                    updateValue(event, newValueStr, text, operation);
                 }
             }
             else {
-                newValueStr = this.insertText(inputValue, text, selectionStart, selectionEnd);
-                this.updateValue(event, newValueStr, text, operation);
+                newValueStr = insertText(inputValue, text, selectionStart, selectionEnd);
+                updateValue(event, newValueStr, text, operation);
             }
         }
     }
 
-    insertText(value, text, start, end) {
+    const insertText = (value, text, start, end) => {
         let textSplit = text === '.' ? text : text.split('.');
 
         if (textSplit.length === 2) {
-            const decimalCharIndex = value.slice(start, end).search(this._decimal);
-            this._decimal.lastIndex = 0;
-            return (decimalCharIndex > 0) ? value.slice(0, start) + this.formatValue(text) + value.slice(end) : (value || this.formatValue(text));
+            const decimalCharIndex = value.slice(start, end).search(_decimal.current);
+            _decimal.current.lastIndex = 0;
+            return (decimalCharIndex > 0) ? value.slice(0, start) + formatValue(text) + value.slice(end) : (value || formatValue(text));
         }
         else if ((end - start) === value.length) {
-            return this.formatValue(text);
+            return formatValue(text);
         }
         else if (start === 0) {
             return text + value.slice(end);
@@ -691,7 +587,7 @@ export class InputNumber extends Component {
         }
     }
 
-    deleteRange(value, start, end) {
+    const deleteRange = (value, start, end) => {
         let newValueStr;
 
         if ((end - start) === value.length)
@@ -706,19 +602,19 @@ export class InputNumber extends Component {
         return newValueStr;
     }
 
-    initCursor() {
-        let selectionStart = this.inputRef.current.selectionStart;
-        let inputValue = this.inputRef.current.value;
+    const initCursor = () => {
+        let selectionStart = inputRef.current.selectionStart;
+        let inputValue = inputRef.current.value;
         let valueLength = inputValue.length;
         let index = null;
 
         // remove prefix
-        let prefixLength = (this.prefixChar || '').length;
-        inputValue = inputValue.replace(this._prefix, '');
+        let prefixLength = (prefixChar.current || '').length;
+        inputValue = inputValue.replace(_prefix.current, '');
         selectionStart = selectionStart - prefixLength;
 
         let char = inputValue.charAt(selectionStart);
-        if (this.isNumeralChar(char)) {
+        if (isNumeralChar(char)) {
             return selectionStart + prefixLength;
         }
 
@@ -726,7 +622,7 @@ export class InputNumber extends Component {
         let i = selectionStart - 1;
         while (i >= 0) {
             char = inputValue.charAt(i);
-            if (this.isNumeralChar(char)) {
+            if (isNumeralChar(char)) {
                 index = i + prefixLength;
                 break;
             }
@@ -736,13 +632,13 @@ export class InputNumber extends Component {
         }
 
         if (index !== null) {
-            this.inputRef.current.setSelectionRange(index + 1, index + 1);
+            inputRef.current.setSelectionRange(index + 1, index + 1);
         }
         else {
             i = selectionStart;
             while (i < valueLength) {
                 char = inputValue.charAt(i);
-                if (this.isNumeralChar(char)) {
+                if (isNumeralChar(char)) {
                     index = i + prefixLength;
                     break;
                 }
@@ -752,20 +648,20 @@ export class InputNumber extends Component {
             }
 
             if (index !== null) {
-                this.inputRef.current.setSelectionRange(index, index);
+                inputRef.current.setSelectionRange(index, index);
             }
         }
 
         return index || 0;
     }
 
-    onInputClick() {
-        this.initCursor();
+    const onInputClick = () => {
+        initCursor();
     }
 
-    isNumeralChar(char) {
-        if (char.length === 1 && (this._numeral.test(char) || this._decimal.test(char) || this._group.test(char) || this._minusSign.test(char))) {
-            this.resetRegex();
+    const isNumeralChar = (char) => {
+        if (char.length === 1 && (_numeral.current.test(char) || _decimal.current.test(char) || _group.current.test(char) || _minusSign.current.test(char))) {
+            resetRegex();
             return true;
         }
         else {
@@ -773,84 +669,83 @@ export class InputNumber extends Component {
         }
     }
 
-    resetRegex() {
-        this._numeral.lastIndex =  0;
-        this._decimal.lastIndex =  0;
-        this._group.lastIndex =  0;
-        this._minusSign.lastIndex =  0;
+    const resetRegex = () => {
+        _numeral.current.lastIndex = 0;
+        _decimal.current.lastIndex = 0;
+        _group.current.lastIndex = 0;
+        _minusSign.current.lastIndex = 0;
     }
 
-    updateValue(event, valueStr, insertedValueStr, operation) {
-        let currentValue = this.inputRef.current.value;
+    const updateValue = (event, valueStr, insertedValueStr, operation) => {
+        let currentValue = inputRef.current.value;
         let newValue = null;
 
         if (valueStr != null) {
-            newValue = this.parseValue(valueStr);
-            newValue = this.evaluateEmpty(newValue);
-            this.updateInput(newValue, insertedValueStr, operation, valueStr);
+            newValue = evaluateEmpty(parseValue(valueStr));
+            updateInput(newValue, insertedValueStr, operation, valueStr);
 
-            this.handleOnChange(event, currentValue, newValue);
+            handleOnChange(event, currentValue, newValue);
         }
     }
 
-    evaluateEmpty(newValue) {
-        return !newValue && !this.props.allowEmpty ?  this.props.min || 0 : newValue;
+    const evaluateEmpty = (newValue) => {
+        return !newValue && !props.allowEmpty ? props.min || 0 : newValue;
     }
 
-    handleOnChange(event, currentValue, newValue) {
-        if (this.props.onChange && this.isValueChanged(currentValue, newValue)) {
-            this.props.onChange({
+    const handleOnChange = (event, currentValue, newValue) => {
+        if (props.onChange && isValueChanged(currentValue, newValue)) {
+            props.onChange({
                 originalEvent: event,
                 value: newValue
             });
         }
     }
 
-    isValueChanged(currentValue, newValue) {
+    const isValueChanged = (currentValue, newValue) => {
         if (newValue === null && currentValue !== null) {
             return true;
         }
 
         if (newValue != null) {
-            let parsedCurrentValue = (typeof currentValue === 'string') ? this.parseValue(currentValue) : currentValue;
+            let parsedCurrentValue = (typeof currentValue === 'string') ? parseValue(currentValue) : currentValue;
             return newValue !== parsedCurrentValue;
         }
 
         return false;
     }
 
-    validateValue(value) {
+    const validateValue = (value) => {
         if (value === '-' || value == null) {
             return null;
         }
 
-        if (this.props.min !== null && value < this.props.min) {
-            return this.props.min;
+        if (props.min !== null && value < props.min) {
+            return props.min;
         }
 
-        if (this.props.max !== null && value > this.props.max) {
-            return this.props.max;
+        if (props.max !== null && value > props.max) {
+            return props.max;
         }
 
         return value;
     }
 
-    updateInput(value, insertedValueStr, operation, valueStr) {
+    const updateInput = (value, insertedValueStr, operation, valueStr) => {
         insertedValueStr = insertedValueStr || '';
 
-        let inputEl = this.inputRef.current;
+        let inputEl = inputRef.current;
         let inputValue = inputEl.value;
-        let newValue = this.formatValue(value);
+        let newValue = formatValue(value);
         let currentLength = inputValue.length;
 
         if (newValue !== valueStr) {
-            newValue = this.concatValues(newValue, valueStr);
+            newValue = concatValues(newValue, valueStr);
         }
 
         if (currentLength === 0) {
             inputEl.value = newValue;
             inputEl.setSelectionRange(0, 0);
-            const index = this.initCursor();
+            const index = initCursor();
             const selectionEnd = index + insertedValueStr.length;
             inputEl.setSelectionRange(selectionEnd, selectionEnd);
         }
@@ -861,13 +756,13 @@ export class InputNumber extends Component {
             let newLength = newValue.length;
 
             if (operation === 'range-insert') {
-                const startValue = this.parseValue((inputValue || '').slice(0, selectionStart));
+                const startValue = parseValue((inputValue || '').slice(0, selectionStart));
                 const startValueStr = startValue !== null ? startValue.toString() : '';
-                const startExpr = startValueStr.split('').join(`(${this.groupChar})?`);
+                const startExpr = startValueStr.split('').join(`(${groupChar.current})?`);
                 const sRegex = new RegExp(startExpr, 'g');
                 sRegex.test(newValue);
 
-                const tExpr = insertedValueStr.split('').join(`(${this.groupChar})?`);
+                const tExpr = insertedValueStr.split('').join(`(${groupChar.current})?`);
                 const tRegex = new RegExp(tExpr, 'g');
                 tRegex.test(newValue.slice(sRegex.lastIndex));
 
@@ -886,21 +781,21 @@ export class InputNumber extends Component {
                 let prevChar = inputValue.charAt(selectionEnd - 1);
                 let nextChar = inputValue.charAt(selectionEnd);
                 let diff = currentLength - newLength;
-                let isGroupChar = this._group.test(nextChar);
+                let isGroupChar = _group.current.test(nextChar);
 
                 if (isGroupChar && diff === 1) {
                     selectionEnd += 1;
                 }
-                else if (!isGroupChar && this.isNumeralChar(prevChar)) {
+                else if (!isGroupChar && isNumeralChar(prevChar)) {
                     selectionEnd += (-1 * diff) + 1;
                 }
 
-                this._group.lastIndex = 0;
+                _group.current.lastIndex = 0;
                 inputEl.setSelectionRange(selectionEnd, selectionEnd);
             }
             else if (inputValue === '-' && operation === 'insert') {
                 inputEl.setSelectionRange(0, 0);
-                const index = this.initCursor();
+                const index = initCursor();
                 const selectionEnd = index + insertedValueStr.length + 1;
                 inputEl.setSelectionRange(selectionEnd, selectionEnd);
             }
@@ -913,237 +808,198 @@ export class InputNumber extends Component {
         inputEl.setAttribute('aria-valuenow', value);
     }
 
-    updateInputValue(newValue) {
-        newValue = this.evaluateEmpty(newValue);
+    const updateInputValue = (newValue) => {
+        newValue = evaluateEmpty(newValue);
 
-        const inputEl = this.inputRef.current;
+        const inputEl = inputRef.current;
         const value = inputEl.value;
-        const formattedValue = this.formattedValue(newValue);
+        const _formattedValue = formattedValue(newValue);
 
-        if (value !== formattedValue) {
-            inputEl.value = formattedValue;
+        if (value !== _formattedValue) {
+            inputEl.value = _formattedValue;
             inputEl.setAttribute('aria-valuenow', newValue);
         }
     }
 
-    formattedValue(val) {
-        const newValue = this.evaluateEmpty(val);
-        return this.formatValue(newValue);
+    const formattedValue = (val) => {
+        return formatValue(evaluateEmpty(val));
     }
 
-    concatValues(val1, val2) {
+    const concatValues = (val1, val2) => {
         if (val1 && val2) {
-            let decimalCharIndex = val2.search(this._decimal);
-            this._decimal.lastIndex = 0;
+            let decimalCharIndex = val2.search(_decimal.current);
+            _decimal.current.lastIndex = 0;
 
-            return decimalCharIndex !== -1 ? (val1.split(this._decimal)[0] + val2.slice(decimalCharIndex)) : val1;
+            return decimalCharIndex !== -1 ? (val1.split(_decimal.current)[0] + val2.slice(decimalCharIndex)) : val1;
         }
 
         return val1;
     }
 
-    getDecimalLength(value) {
+    const getDecimalLength = (value) => {
         if (value) {
-            const valueSplit = value.split(this._decimal);
+            const valueSplit = value.split(_decimal.current);
 
             if (valueSplit.length === 2) {
-                return valueSplit[1].replace(this._suffix, '')
-                            .trim()
-                            .replace(/\s/g, '')
-                            .replace(this._currency, '').length;
+                return valueSplit[1].replace(_suffix.current, '')
+                    .trim()
+                    .replace(/\s/g, '')
+                    .replace(_currency.current, '').length;
             }
         }
 
         return 0;
     }
 
-    updateModel(event, value) {
-        if (this.props.onValueChange) {
-            this.props.onValueChange({
+    const updateModel = (event, value) => {
+        if (props.onValueChange) {
+            props.onValueChange({
                 originalEvent: event,
                 value: value,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
+                    name: props.name,
+                    id: props.id,
                     value: value
                 }
             });
         }
     }
 
-    onInputFocus(event) {
-        event.persist();
-        this.setState({ focused: true }, () => {
-            if (this.props.onFocus) {
-                this.props.onFocus(event);
-            }
-        });
+    const onInputFocus = (event) => {
+        setFocusedState(true);
+        props.onFocus && props.onFocus(event);
     }
 
-    onInputBlur(event) {
-        event.persist();
-        this.setState({ focused: false }, () => {
-            let currentValue = this.inputRef.current.value;
+    const onInputBlur = (event) => {
+        setFocusedState(false);
 
-            if (this.isValueChanged(currentValue, this.props.value)) {
-                let newValue = this.validateValue(this.parseValue(currentValue));
-                this.updateInputValue(newValue);
-                this.updateModel(event, newValue);
-            }
+        let currentValue = inputRef.current.value;
+        if (isValueChanged(currentValue, props.value)) {
+            let newValue = validateValue(parseValue(currentValue));
+            updateInputValue(newValue);
+            updateModel(event, newValue);
+        }
 
-            if (this.props.onBlur) {
-                this.props.onBlur(event);
-            }
-        });
+        props.onBlur && props.onBlur(event);
     }
 
-    clearTimer() {
-        if (this.timer) {
-            clearInterval(this.timer);
+    const clearTimer = () => {
+        if (timer.current) {
+            clearInterval(timer.current);
         }
     }
 
-    isStacked() {
-        return this.props.showButtons && this.props.buttonLayout === 'stacked';
-    }
+    const changeValue = () => {
+        const newValue = validateValue(props.value);
+        updateInputValue(newValue);
 
-    isHorizontal() {
-        return this.props.showButtons && this.props.buttonLayout === 'horizontal';
-    }
-
-    isVertical() {
-        return this.props.showButtons && this.props.buttonLayout === 'vertical';
-    }
-
-    getInputMode() {
-        return this.props.inputMode || ((this.props.mode === 'decimal' && !this.props.minFractionDigits) ? 'numeric' : 'decimal');
-    }
-
-    getFormatter() {
-        return this.numberFormat;
-    }
-
-    updateInputRef() {
-        let ref = this.props.inputRef;
-
-        if (ref) {
-            if (typeof ref === 'function') {
-                ref(this.inputRef.current);
-            }
-            else {
-                ref.current = this.inputRef.current;
-            }
+        if (props.value !== null && props.value !== newValue) {
+            updateModel(null, newValue);
         }
     }
 
-    componentDidMount() {
-        this.updateInputRef();
-
-        if (this.props.tooltip) {
-            this.renderTooltip();
-        }
-
-        const newValue = this.validateValue(this.props.value);
-        if (this.props.value !== null && this.props.value !== newValue) {
-            this.updateModel(null, newValue);
-        }
+    const getFormatter = () => {
+        return numberFormat.current;
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
-            if (this.tooltip)
-                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
-            else
-                this.renderTooltip();
+    useImperativeHandle(ref, () => {
+        getFormatter
+    });
+
+    useEffect(() => {
+        ObjectUtils.combinedRefs(inputRef, props.inputRef);
+    }, [inputRef, props.inputRef]);
+
+    useEffect(() => {
+        if (tooltipRef.current) {
+            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
         }
-
-        const isOptionChanged = this.isOptionChanged(prevProps);
-        if (isOptionChanged) {
-            this.constructParser();
+        else if (props.tooltip) {
+            tooltipRef.current = tip({
+                target: elementRef.current,
+                content: props.tooltip,
+                options: props.tooltipOptions
+            });
         }
+    }, [props.tooltip, props.tooltipOptions]);
 
-        if (prevProps.value !== this.props.value || isOptionChanged) {
-            const newValue = this.validateValue(this.props.value);
-            this.updateInputValue(newValue);
+    useMountEffect(() => {
+        constructParser();
 
-            if (this.props.value !== null && this.props.value !== newValue) {
-                this.updateModel(null, newValue);
-            }
+        const newValue = validateValue(props.value);
+        if (props.value !== null && props.value !== newValue) {
+            updateModel(null, newValue);
         }
-    }
+    });
 
-    isOptionChanged(prevProps) {
-        const optionProps = ['locale', 'localeMatcher', 'mode', 'currency', 'currencyDisplay', 'useGrouping', 'minFractionDigits', 'maxFractionDigits', 'suffix', 'prefix'];
-        return optionProps.some((option) => prevProps[option] !== this.props[option]);
-    }
+    useUpdateEffect(() => {
+        constructParser();
+        changeValue();
+    }, [props.locale, props.localeMatcher, props.mode, props.currency, props.currencyDisplay, props.useGrouping, props.minFractionDigits, props.maxFractionDigits, props.suffix, props.prefix]);
 
-    componentWillUnmount() {
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
+    useUpdateEffect(() => {
+        changeValue();
+    }, [props.value]);
+
+    useUnmountEffect(() => {
+        if (tooltipRef.current) {
+            tooltipRef.current.destroy();
+            tooltipRef.current = null;
         }
-    }
+    });
 
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.element,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
-    }
-
-    renderInputElement() {
-        const className = classNames('p-inputnumber-input', this.props.inputClassName);
-        const valueToRender = this.formattedValue(this.props.value);
+    const createInputElement = () => {
+        const className = classNames('p-inputnumber-input', props.inputClassName);
+        const valueToRender = formattedValue(props.value);
 
         return (
-            <InputText ref={this.inputRef} id={this.props.inputId} style={this.props.inputStyle} role="spinbutton"
-                       className={className} defaultValue={valueToRender} type={this.props.type} size={this.props.size} tabIndex={this.props.tabIndex} inputMode={this.getInputMode()}
-                       maxLength={this.props.maxLength} disabled={this.props.disabled} required={this.props.required} pattern={this.props.pattern}
-                       placeholder={this.props.placeholder} readOnly={this.props.readOnly} name={this.props.name} autoFocus={this.props.autoFocus}
-                       onKeyDown={this.onInputKeyDown} onKeyPress={this.onInputKeyPress} onInput={this.onInput} onClick={this.onInputClick}
-                       onBlur={this.onInputBlur} onFocus={this.onInputFocus} onPaste={this.onPaste} min={this.props.min} max={this.props.max}
-                       aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={this.props.value} aria-labelledby={this.props.ariaLabelledBy} />
-        );
+            <InputText ref={inputRef} id={props.inputId} style={props.inputStyle} role="spinbutton"
+                className={className} defaultValue={valueToRender} type={props.type} size={props.size} tabIndex={props.tabIndex} inputMode={inputMode}
+                maxLength={props.maxLength} disabled={props.disabled} required={props.required} pattern={props.pattern}
+                placeholder={props.placeholder} readOnly={props.readOnly} name={props.name} autoFocus={props.autoFocus}
+                onKeyDown={onInputKeyDown} onKeyPress={onInputKeyPress} onInput={onInput} onClick={onInputClick}
+                onBlur={onInputBlur} onFocus={onInputFocus} onPaste={onPaste} min={props.min} max={props.max}
+                aria-valuemin={props.min} aria-valuemax={props.max} aria-valuenow={props.value} aria-labelledby={props.ariaLabelledBy} />
+        )
     }
 
-    renderUpButton() {
+    const createUpButton = () => {
         const className = classNames('p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component', {
-            'p-disabled': this.props.disabled
-        }, this.props.incrementButtonClassName);
-        const icon = classNames('p-button-icon', this.props.incrementButtonIcon);
+            'p-disabled': props.disabled
+        }, props.incrementButtonClassName);
+        const icon = classNames('p-button-icon', props.incrementButtonIcon);
 
         return (
-            <button type="button" className={className} onMouseLeave={this.onUpButtonMouseLeave} onMouseDown={this.onUpButtonMouseDown} onMouseUp={this.onUpButtonMouseUp}
-                onKeyDown={this.onUpButtonKeyDown} onKeyUp={this.onUpButtonKeyUp} disabled={this.props.disabled} tabIndex={-1}>
+            <button type="button" className={className} onMouseLeave={onUpButtonMouseLeave} onMouseDown={onUpButtonMouseDown} onMouseUp={onUpButtonMouseUp}
+                onKeyDown={onUpButtonKeyDown} onKeyUp={onUpButtonKeyUp} disabled={props.disabled} tabIndex={-1}>
                 <span className={icon}></span>
                 <Ripple />
             </button>
-        );
+        )
     }
 
-    renderDownButton() {
+    const createDownButton = () => {
         const className = classNames('p-inputnumber-button p-inputnumber-button-down p-button p-button-icon-only p-component', {
-            'p-disabled': this.props.disabled
-        }, this.props.decrementButtonClassName);
-        const icon = classNames('p-button-icon', this.props.decrementButtonIcon);
+            'p-disabled': props.disabled
+        }, props.decrementButtonClassName);
+        const icon = classNames('p-button-icon', props.decrementButtonIcon);
 
         return (
-            <button type="button" className={className} onMouseLeave={this.onDownButtonMouseLeave} onMouseDown={this.onDownButtonMouseDown} onMouseUp={this.onDownButtonMouseUp}
-                onKeyDown={this.onDownButtonKeyDown} onKeyUp={this.onDownButtonKeyUp} disabled={this.props.disabled} tabIndex={-1}>
+            <button type="button" className={className} onMouseLeave={onDownButtonMouseLeave} onMouseDown={onDownButtonMouseDown} onMouseUp={onDownButtonMouseUp}
+                onKeyDown={onDownButtonKeyDown} onKeyUp={onDownButtonKeyUp} disabled={props.disabled} tabIndex={-1}>
                 <span className={icon}></span>
                 <Ripple />
             </button>
-        );
+        )
     }
 
-    renderButtonGroup() {
-        const upButton = this.props.showButtons && this.renderUpButton();
-        const downButton = this.props.showButtons && this.renderDownButton();
+    const createButtonGroup = () => {
+        const upButton = props.showButtons && createUpButton();
+        const downButton = props.showButtons && createDownButton();
 
-        if (this.isStacked()) {
+        if (stacked) {
             return (
                 <span className="p-inputnumber-button-group">
                     {upButton}
@@ -1160,22 +1016,124 @@ export class InputNumber extends Component {
         )
     }
 
-    render() {
-        const className = classNames('p-inputnumber p-component p-inputwrapper', this.props.className, {
-                'p-inputwrapper-filled': this.props.value != null && this.props.value.toString().length > 0,
-                'p-inputwrapper-focus': this.state.focused,
-                'p-inputnumber-buttons-stacked': this.isStacked(),
-                'p-inputnumber-buttons-horizontal': this.isHorizontal(),
-                'p-inputnumber-buttons-vertical': this.isVertical()
-        });
-        const inputElement = this.renderInputElement();
-        const buttonGroup = this.renderButtonGroup();
+    const className = classNames('p-inputnumber p-component p-inputwrapper', {
+        'p-inputwrapper-filled': props.value != null && props.value.toString().length > 0,
+        'p-inputwrapper-focus': focusedState,
+        'p-inputnumber-buttons-stacked': stacked,
+        'p-inputnumber-buttons-horizontal': horizontal,
+        'p-inputnumber-buttons-vertical': vertical
+    }, props.className);
+    const inputElement = createInputElement();
+    const buttonGroup = createButtonGroup();
 
-        return (
-            <span ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
-                {inputElement}
-                {buttonGroup}
-            </span>
-        );
-    }
+    return (
+        <span ref={elementRef} id={props.id} className={className} style={props.style}>
+            {inputElement}
+            {buttonGroup}
+        </span>
+    )
+}));
+
+InputNumber.defaultProps = {
+    __TYPE: 'InputNumber',
+    value: null,
+    inputRef: null,
+    format: true,
+    showButtons: false,
+    buttonLayout: 'stacked',
+    incrementButtonClassName: null,
+    decrementButtonClassName: null,
+    incrementButtonIcon: 'pi pi-angle-up',
+    decrementButtonIcon: 'pi pi-angle-down',
+    locale: undefined,
+    localeMatcher: undefined,
+    mode: 'decimal',
+    suffix: null,
+    prefix: null,
+    currency: undefined,
+    currencyDisplay: undefined,
+    useGrouping: true,
+    minFractionDigits: undefined,
+    maxFractionDigits: undefined,
+    id: null,
+    name: null,
+    type: 'text',
+    allowEmpty: true,
+    step: 1,
+    min: null,
+    max: null,
+    disabled: false,
+    required: false,
+    tabIndex: null,
+    pattern: null,
+    inputMode: null,
+    placeholder: null,
+    readOnly: false,
+    size: null,
+    style: null,
+    className: null,
+    inputId: null,
+    autoFocus: false,
+    inputStyle: null,
+    inputClassName: null,
+    tooltip: null,
+    tooltipOptions: null,
+    ariaLabelledBy: null,
+    onValueChange: null,
+    onChange: null,
+    onBlur: null,
+    onFocus: null,
+    onKeyDown: null
+}
+
+InputNumber.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    value: PropTypes.number,
+    inputRef: PropTypes.any,
+    format: PropTypes.bool,
+    showButtons: PropTypes.bool,
+    buttonLayout: PropTypes.string,
+    incrementButtonClassName: PropTypes.string,
+    decrementButtonClassName: PropTypes.string,
+    incrementButtonIcon: PropTypes.string,
+    decrementButtonIcon: PropTypes.string,
+    locale: PropTypes.string,
+    localeMatcher: PropTypes.string,
+    mode: PropTypes.string,
+    suffix: PropTypes.string,
+    prefix: PropTypes.string,
+    currency: PropTypes.string,
+    currencyDisplay: PropTypes.string,
+    useGrouping: PropTypes.bool,
+    minFractionDigits: PropTypes.number,
+    maxFractionDigits: PropTypes.number,
+    id: PropTypes.string,
+    name: PropTypes.string,
+    type: PropTypes.string,
+    allowEmpty: PropTypes.bool,
+    step: PropTypes.number,
+    min: PropTypes.number,
+    max: PropTypes.number,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool,
+    tabIndex: PropTypes.number,
+    pattern: PropTypes.string,
+    inputMode: PropTypes.string,
+    placeholder: PropTypes.string,
+    readOnly: PropTypes.bool,
+    size: PropTypes.number,
+    style: PropTypes.object,
+    className: PropTypes.string,
+    inputId: PropTypes.string,
+    autoFocus: PropTypes.bool,
+    inputStyle: PropTypes.object,
+    inputClassName: PropTypes.string,
+    tooltip: PropTypes.string,
+    tooltipOptions: PropTypes.object,
+    ariaLabelledBy: PropTypes.string,
+    onValueChange: PropTypes.func,
+    onChange: PropTypes.func,
+    onBlur: PropTypes.func,
+    onFocus: PropTypes.func,
+    onKeyDown: PropTypes.func
 }

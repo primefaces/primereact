@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { classNames } from '../../components/lib/utils/ClassNames';
 
-export default function HeroSection(props) {
+const HeaderSection = (props) => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [menuActive, setMenuActive] = useState(false);
     const colorSchemeIcon = classNames('pi', {'pi-sun': props.dark, 'pi-moon': !props.dark});
@@ -41,10 +41,10 @@ export default function HeroSection(props) {
     }, []);
 
     useEffect(() => {
-       if (scrollListener.current) {
-           scrollListener.current();
-       } 
-    });
+        if (scrollListener.current) {
+            scrollListener.current();
+        }
+     });
 
     return (
         <section ref={containerElement} className={headerClassName}>
@@ -100,3 +100,4 @@ export default function HeroSection(props) {
     );
 }
 
+export default HeaderSection;

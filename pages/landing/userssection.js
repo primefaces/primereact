@@ -1,6 +1,6 @@
 import getConfig from 'next/config';
 
-export default function UsersSection(props) {
+const UsersSection = (props) => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const colorScheme = props.dark ? 'light' : 'dark';
 
@@ -73,3 +73,5 @@ export default function UsersSection(props) {
         </section>
     );
 }
+
+export default UsersSection;

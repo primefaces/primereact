@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
-export class BlockUIDoc extends Component {
+const BlockUIDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { BlockUI } from 'primereact/blockui';
 import { Button } from 'primereact/button';
@@ -94,10 +91,10 @@ export class BlockUIDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { BlockUI } from 'primereact/blockui';
 import { Button } from 'primereact/button';
@@ -163,10 +160,10 @@ export const BlockUIDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import { BlockUI } from 'primereact/blockui';
 import { Button } from 'primereact/button';
@@ -232,16 +229,16 @@ export const BlockUIDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./BlockUIDemo.css" />
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/blockui/blockui.min.js"></script>
         <script src="https://unpkg.com/primereact/panel/panel.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState } = React;
 const { BlockUI } = primereact.blockui;
 const { Button } = primereact.button;
@@ -309,9 +306,9 @@ const BlockUIDemo = () => {
             }
         }
 
-        this.extFiles = {
-            'demo/BlockUIDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/BlockUIDemo.css': {
+            content: `
 .blockui-demo .p-panel p {
     line-height: 1.5;
     margin: 0;
@@ -320,27 +317,21 @@ const BlockUIDemo = () => {
     margin-right: 0.5rem;
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { BlockUI } from 'primereact/blockui';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -348,10 +339,10 @@ import { BlockUI } from 'primereact/blockui';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>BlockUI is controlled using the <i>blocked</i> property, by default target element to block is the child component. In example below, panel gets blocked
-                            with a mask when blockedPanel is enabled and gets unblock when the bound variable is set to false.
-                        </p>
+                    <h5>Getting Started</h5>
+                    <p>BlockUI is controlled using the <i>blocked</i> property, by default target element to block is the child component. In example below, panel gets blocked
+                        with a mask when blockedPanel is enabled and gets unblock when the bound variable is set to false.
+                    </p>
 
 <CodeHighlight lang="js">
 {`
@@ -378,8 +369,8 @@ export const BlockUIDemo = () => {
 `}
 </CodeHighlight>
 
-                        <h5>Full Screen</h5>
-                        <p>In full screen mode, instead of a particular element, the whole document gets blocked. Set <i>fullScreen</i> as true in order to enable this functionality.</p>
+                    <h5>Full Screen</h5>
+                    <p>In full screen mode, instead of a particular element, the whole document gets blocked. Set <i>fullScreen</i> as true in order to enable this functionality.</p>
 <CodeHighlight>
 {`
 <BlockUI blocked={blockedPanel} fullScreen>
@@ -388,129 +379,130 @@ export const BlockUIDemo = () => {
 `}
 </CodeHighlight>
 
-                        <h5>Properties</h5>
-                        <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>blocked</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Controls the blocked state.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>fullScreen</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>When enabled, the whole document gets blocked.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>baseZIndex</td>
-                                        <td>number</td>
-                                        <td>0</td>
-                                        <td>Base zIndex value to use in layering.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>autoZIndex</td>
-                                        <td>boolean</td>
-                                        <td>true</td>
-                                        <td>Whether to automatically manage layering.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>template</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Template of mask.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>blocked</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Controls the blocked state.</td>
+                                </tr>
+                                <tr>
+                                    <td>fullScreen</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When enabled, the whole document gets blocked.</td>
+                                </tr>
+                                <tr>
+                                    <td>baseZIndex</td>
+                                    <td>number</td>
+                                    <td>0</td>
+                                    <td>Base zIndex value to use in layering.</td>
+                                </tr>
+                                <tr>
+                                    <td>autoZIndex</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to automatically manage layering.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>template</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template of mask.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onBlocked</td>
-                                        <td>-</td>
-                                        <td>Fired when the element gets blocked.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onUnblocked</td>
-                                        <td>-</td>
-                                        <td>Fired when the element gets unblocked.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onBlocked</td>
+                                    <td>-</td>
+                                    <td>Fired when the element gets blocked.</td>
+                                </tr>
+                                <tr>
+                                    <td>onUnblocked</td>
+                                    <td>-</td>
+                                    <td>Fired when the element gets unblocked.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-blockui</td>
-                                        <td>Mask element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-blockui-document</td>
-                                        <td>Mask element in full screen mode.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-blockui</td>
+                                    <td>Mask element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-blockui-document</td>
+                                    <td>Mask element in full screen mode.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
 
-                    {
-                        useLiveEditorTabs({ name: 'BlockUIDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
+                {
+                    useLiveEditorTabs({ name: 'BlockUIDemo', sources: sources, extFiles: extFiles })
+                }
 
-                </TabView>
-            </div>
-        )
-    }
-}
+            </TabView>
+        </div>
+    )
+})
+
+export default BlockUIDoc;

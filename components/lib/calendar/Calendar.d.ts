@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from "../utils";
+import { IconType } from '../utils';
 
 type CalendarAppendToType = 'self' | HTMLElement | undefined | null;
 

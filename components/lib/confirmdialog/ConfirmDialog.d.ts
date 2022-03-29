@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DialogProps } from '../dialog';
-import {IconType} from "../utils";
+import { IconType } from '../utils';
 
 type ConfirmDialogTemplateType = React.ReactNode | ((options: ConfirmDialogOptions) => React.ReactNode);
 

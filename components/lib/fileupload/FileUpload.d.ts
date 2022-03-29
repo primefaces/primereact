@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {IconType} from "../utils";
+import { IconType } from '../utils';
 
 type FileUploadModeType = 'basic' | 'advanced';
 
@@ -124,4 +124,5 @@ interface FileUploadProps {
 export declare class FileUpload extends React.Component<FileUploadProps, any> {
     public upload(): void;
     public clear(): void;
+    public formatSize(bytes: number): number;
 }

@@ -1,84 +1,88 @@
-import React, { Component } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { ObjectUtils } from '../utils/Utils';
+import { useMountEffect, useUpdateEffect, useUnmountEffect, usePrevious } from '../hooks/Hooks';
 
-export class FullCalendar extends Component {
+export const FullCalendar = memo(forwardRef((props, ref) => {
+    const elementRef = useRef(null);
+    const config = useRef({});
+    const calendar = useRef(null);
+    const prevEvents = usePrevious(props.events);
+    const prevOptions = usePrevious(props.options);
 
-    static defaultProps = {
-        id: null,
-        events: [],
-        style: null,
-        className: null,
-        options: null
-    }
-
-    static propTypes = {
-        id: PropTypes.string,
-        events: PropTypes.array,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        options: PropTypes.object
-    }
-
-    componentDidMount() {
-        console.warn("FullCalendar component is deprecated. Use FullCalendar component of '@fullcalendar/react' package.");
-
-        this.config = {
-            theme: true
-        };
-
-        if (this.props.options) {
-            for (let prop in this.props.options) {
-                this.config[prop] = this.props.options[prop];
-            }
-        }
-
-        this.initialize();
-    }
-
-    componentDidUpdate(prevProps) {
-        if (!this.calendar) {
-            this.initialize();
-        }
-        else {
-            if (!ObjectUtils.equals(prevProps.events, this.props.events)) {
-                this.calendar.removeAllEventSources();
-                this.calendar.addEventSource(this.props.events);
-            }
-
-            if (!ObjectUtils.equals(prevProps.options, this.props.options)) {
-                for (let prop in this.props.options) {
-                    let optionValue = this.props.options[prop];
-                    this.config[prop] = optionValue;
-                    this.calendar.setOption(prop, optionValue);
-                }
-            }
-        }
-    }
-
-    initialize() {
+    const initialize = () => {
         import('@fullcalendar/core').then((module) => {
             if (module && module.Calendar) {
-                this.calendar = new module.Calendar(this.element, this.config);
-                this.calendar.render();
+                calendar.current = new module.Calendar(elementRef.current, config.current);
+                calendar.current.render();
 
-                if (this.props.events) {
-                    this.calendar.removeAllEventSources();
-                    this.calendar.addEventSource(this.props.events);
+                if (props.events) {
+                    calendar.current.removeAllEventSources();
+                    calendar.current.addEventSource(props.events);
                 }
             }
         });
     }
 
-    componentWillUnmount() {
-        if (this.calendar) {
-            this.calendar.destroy();
-        }
-    }
+    useMountEffect(() => {
+        console.warn("FullCalendar component is deprecated. Use FullCalendar component of '@fullcalendar/react' package.");
 
-    render() {
-        return (
-            <div id={this.props.id} ref={(el) => this.element = el} style={this.props.style} className={this.props.className}></div>
-        );
-    }
+        config.current = {
+            theme: true
+        };
+
+        if (props.options) {
+            for (let prop in props.options) {
+                config.current[prop] = props.options[prop];
+            }
+        }
+
+        initialize();
+    });
+
+    useUpdateEffect(() => {
+        if (!calendar.current) {
+            initialize();
+        }
+        else {
+            if (!ObjectUtils.equals(prevEvents, props.events)) {
+                calendar.current.removeAllEventSources();
+                calendar.addEventSource(props.events);
+            }
+
+            if (!ObjectUtils.equals(prevOptions, props.options)) {
+                for (let prop in props.options) {
+                    let optionValue = props.options[prop];
+                    config.current[prop] = optionValue;
+                    calendar.current.setOption(prop, optionValue);
+                }
+            }
+        }
+    });
+
+    useUnmountEffect(() => {
+        if (calendar.current) {
+            calendar.current.destroy();
+        }
+    });
+
+    return <div ref={elementRef} id={props.id} style={props.style} className={props.className}></div>
+}));
+
+FullCalendar.defaultProps = {
+    __TYPE: 'FullCalendar',
+    id: null,
+    events: [],
+    style: null,
+    className: null,
+    options: null
+}
+
+FullCalendar.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    id: PropTypes.string,
+    events: PropTypes.array,
+    style: PropTypes.object,
+    className: PropTypes.string,
+    options: PropTypes.object
 }

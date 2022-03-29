@@ -1,255 +1,154 @@
-import React, { Component, createRef } from 'react';
+import React, { forwardRef, memo, useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames, ConnectedOverlayScrollHandler } from '../utils/Utils';
+import PrimeReact, { localeOption } from '../api/Api';
 import { tip } from '../tooltip/Tooltip';
 import { InputText } from '../inputtext/InputText';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import PrimeReact, { localeOption } from '../api/Api';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
 
-export class Password extends Component {
+export const Password = memo(forwardRef((props, ref) => {
+    const promptLabel = props.promptLabel || localeOption('passwordPrompt');
+    const weakLabel = props.weakLabel || localeOption('weak');
+    const mediumLabel = props.mediumLabel || localeOption('medium');
+    const strongLabel = props.strongLabel || localeOption('strong');
 
-    static defaultProps = {
-        id: null,
-        inputId: null,
-        inputRef: null,
-        promptLabel: null,
-        weakLabel: null,
-        mediumLabel: null,
-        strongLabel: null,
-        mediumRegex: '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})',
-        strongRegex: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})',
-        feedback: true,
-        toggleMask: false,
-        appendTo: null,
-        header: null,
-        content: null,
-        footer: null,
-        icon: null,
-        tooltip: null,
-        tooltipOptions: null,
-        style: null,
-        className: null,
-        inputStyle: null,
-        inputClassName: null,
-        panelStyle: null,
-        panelClassName: null,
-        transitionOptions: null,
-        onInput: null,
-        onShow: null,
-        onHide: null
-    };
+    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
+    const [meterState, setMeterState] = useState(null);
+    const [infoTextState, setInfoTextState] = useState(promptLabel);
+    const [focusedState, setFocusedState] = useState(false);
+    const [unmaskedState, setUnmaskedState] = useState(false);
+    const elementRef = useRef(null);
+    const overlayRef = useRef(null);
+    const inputRef = useRef(props.inputRef);
+    const tooltipRef = useRef(null);
+    const mediumCheckRegExp = useRef(new RegExp(props.mediumRegex));
+    const strongCheckRegExp = useRef(new RegExp(props.strongRegex));
+    const type = unmaskedState ? 'text' : 'password';
 
-    static propTypes = {
-        id: PropTypes.string,
-        inputId: PropTypes.string,
-        inputRef: PropTypes.any,
-        promptLabel: PropTypes.string,
-        weakLabel: PropTypes.string,
-        mediumLabel: PropTypes.string,
-        strongLabel:PropTypes.string,
-        mediumRegex: PropTypes.string,
-        strongRegex: PropTypes.string,
-        feedback: PropTypes.bool,
-        toggleMask: PropTypes.bool,
-        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        header: PropTypes.any,
-        content: PropTypes.any,
-        footer: PropTypes.any,
-        icon: PropTypes.any,
-        tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        inputStyle: PropTypes.object,
-        inputClassName: PropTypes.string,
-        panelStyle: PropTypes.object,
-        panelClassName: PropTypes.string,
-        transitionOptions: PropTypes.object,
-        onInput: PropTypes.func,
-        onShow: PropTypes.func,
-        onHide: PropTypes.func
-    };
+    const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
+        target: elementRef, overlay: overlayRef, listener: (event, { valid }) => {
+            valid && hide();
+        }, when: overlayVisibleState
+    });
 
-    constructor(props) {
-        super(props);
+    const isFilled = useMemo(() => (
+        ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (inputRef.current && ObjectUtils.isNotEmpty(inputRef.current.value))
+    ), [props.value, props.defaultValue, inputRef]);
 
-        this.state = {
-            overlayVisible: false,
-            meter: null,
-            infoText: this.promptLabel(),
-            focused: false,
-            unmasked: false
-        };
-
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
-        this.onKeyup = this.onKeyup.bind(this);
-        this.onInput = this.onInput.bind(this);
-        this.onMaskToggle = this.onMaskToggle.bind(this);
-        this.onOverlayEnter = this.onOverlayEnter.bind(this);
-        this.onOverlayEntered = this.onOverlayEntered.bind(this);
-        this.onOverlayExit = this.onOverlayExit.bind(this);
-        this.onOverlayExited = this.onOverlayExited.bind(this);
-        this.onPanelClick = this.onPanelClick.bind(this);
-
-        this.overlayRef = createRef();
-        this.inputRef = createRef(this.props.inputRef);
-        this.mediumCheckRegExp = new RegExp(this.props.mediumRegex);
-        this.strongCheckRegExp = new RegExp(this.props.strongRegex);
-    }
-
-    promptLabel() {
-        return this.props.promptLabel || localeOption('passwordPrompt');
-    }
-
-    weakLabel() {
-        return this.props.weakLabel || localeOption('weak');
-    }
-
-    mediumLabel() {
-        return this.props.mediumLabel || localeOption('medium');
-    }
-
-    strongLabel() {
-        return this.props.strongLabel || localeOption('strong');
-    }
-
-    isFilled() {
-        return (this.props.value != null && this.props.value.toString().length > 0) ||
-            (this.props.defaultValue != null && this.props.defaultValue.toString().length > 0) ||
-            (this.inputRef && this.inputRef.current && DomHandler.hasClass(this.inputRef.current, 'p-filled'));
-    }
-
-    getInputType() {
-        return this.state.unmasked ? 'text' : 'password';
-    }
-
-    updateLabels() {
-        if (this.state.meter) {
+    const updateLabels = () => {
+        if (meterState) {
             let label = null;
-            switch (this.state.meter.strength) {
+            switch (meterState.strength) {
                 case 'weak':
-                    label = this.weakLabel();
+                    label = weakLabel;
                     break;
 
                 case 'medium':
-                    label = this.mediumLabel();
+                    label = mediumLabel;
                     break;
 
                 case 'strong':
-                    label = this.strongLabel();
+                    label = strongLabel;
                     break;
 
                 default:
                     break;
             }
 
-            if (label && this.state.infoText !== label) {
-                this.setState({ infoText: label });
+            if (label && infoTextState !== label) {
+                setInfoTextState(label);
             }
         }
         else {
-            const promptLabel = this.promptLabel();
-            if (this.state.infoText !== promptLabel) {
-                this.setState({ infoText: promptLabel });
+            if (infoTextState !== promptLabel) {
+                setInfoTextState(promptLabel);
             }
         }
     }
 
-    onPanelClick(event) {
-        if (this.props.feedback) {
+    const onPanelClick = (event) => {
+        if (props.feedback) {
             OverlayService.emit('overlay-click', {
                 originalEvent: event,
-                target: this.container
+                target: elementRef.current
             });
         }
     }
 
-    onMaskToggle() {
-        this.setState((prevState) => {
-            return {
-                unmasked: !prevState.unmasked
-            }
-        });
+    const onMaskToggle = () => {
+        setUnmaskedState((prevUnmasked) => !prevUnmasked);
     }
 
-    showOverlay() {
-        this.updateLabels();
-        this.setState({ overlayVisible: true });
+    const show = () => {
+        updateLabels();
+        setOverlayVisibleState(true);
     }
 
-    hideOverlay() {
-        this.setState({ overlayVisible: false });
+    const hide = () => {
+        setOverlayVisibleState(false);
     }
 
-    alignOverlay() {
-        if (this.inputRef && this.inputRef.current) {
-            DomHandler.alignOverlay(this.overlayRef.current, this.inputRef.current.parentElement, this.props.appendTo || PrimeReact.appendTo);
+    const alignOverlay = () => {
+        if (inputRef.current) {
+            DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
         }
     }
 
-    onOverlayEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current,  PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
-        this.alignOverlay();
+    const onOverlayEnter = () => {
+        ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+        alignOverlay();
     }
 
-    onOverlayEntered() {
-        this.bindScrollListener();
-        this.bindResizeListener();
+    const onOverlayEntered = () => {
+        bindOverlayListener();
 
-        this.props.onShow && this.props.onShow();
+        props.onShow && props.onShow();
     }
 
-    onOverlayExit() {
-        this.unbindScrollListener();
-        this.unbindResizeListener();
+    const onOverlayExit = () => {
+        unbindOverlayListener();
     }
 
-    onOverlayExited() {
-        ZIndexUtils.clear(this.overlayRef.current);
+    const onOverlayExited = () => {
+        ZIndexUtils.clear(overlayRef.current);
 
-        this.props.onHide && this.props.onHide();
+        props.onHide && props.onHide();
     }
 
-    onFocus(event) {
-        event.persist();
-        this.setState({ focused: true }, () => {
-            if (this.props.feedback) {
-                this.showOverlay();
-            }
+    const onFocus = (event) => {
+        setFocusedState(true);
 
-            if (this.props.onFocus) {
-                this.props.onFocus(event);
-            }
-        });
+        if (props.feedback) {
+            show();
+        }
+
+        props.onFocus && props.onFocus(event);
     }
 
-    onBlur(event) {
-        event.persist();
-        this.setState({ focused: false }, () => {
-            if (this.props.feedback) {
-                this.hideOverlay();
-            }
+    const onBlur = (event) => {
+        setFocusedState(false);
 
-            if (this.props.onBlur) {
-                this.props.onBlur(event);
-            }
-        });
+        if (props.feedback) {
+            hide();
+        }
+
+        props.onBlur && props.onBlur(event);
     }
 
-    onKeyup(e) {
+    const onKeyup = (e) => {
         let keyCode = e.keyCode || e.which;
 
-        if (this.props.feedback) {
+        if (props.feedback) {
             let value = e.target.value;
             let label = null;
             let meter = null;
 
-            switch (this.testStrength(value)) {
+            switch (testStrength(value)) {
                 case 1:
-                    label = this.weakLabel();
+                    label = weakLabel;
                     meter = {
                         strength: 'weak',
                         width: '33.33%'
@@ -257,7 +156,7 @@ export class Password extends Component {
                     break;
 
                 case 2:
-                    label = this.mediumLabel();
+                    label = mediumLabel;
                     meter = {
                         strength: 'medium',
                         width: '66.66%'
@@ -265,7 +164,7 @@ export class Password extends Component {
                     break;
 
                 case 3:
-                    label = this.strongLabel();
+                    label = strongLabel;
                     meter = {
                         strength: 'strong',
                         width: '100%'
@@ -273,167 +172,99 @@ export class Password extends Component {
                     break;
 
                 default:
-                    label = this.promptLabel();
+                    label = promptLabel;
                     meter = null;
                     break;
             }
 
-            this.setState({
-                meter,
-                infoText: label
-            }, () => {
-                if (!!keyCode && !this.state.overlayVisible) {
-                    this.showOverlay();
-                }
-            });
+            setMeterState(meter);
+            setInfoTextState(label);
+
+            if (!!keyCode && !overlayVisibleState) {
+                show();
+            }
         }
 
-        if (this.props.onKeyUp) {
-            this.props.onKeyUp(e);
+        props.onKeyUp && props.onKeyUp(e);
+    }
+
+    const onInput = (event, validatePattern) => {
+        if (props.onInput) {
+            props.onInput(event, validatePattern);
+        }
+
+        if (!props.onChange) {
+            ObjectUtils.isNotEmpty(event.target.value) ?
+                DomHandler.addClass(elementRef.current, 'p-inputwrapper-filled') :
+                DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
         }
     }
 
-    onInput(event, validatePattern) {
-        if (this.props.onInput) {
-            this.props.onInput(event, validatePattern);
-        }
-
-        if (!this.props.onChange) {
-            if (event.target.value.length > 0)
-                DomHandler.addClass(this.container, 'p-inputwrapper-filled');
-            else
-                DomHandler.removeClass(this.container, 'p-inputwrapper-filled');
-        }
-    }
-
-    testStrength(str) {
-        let level = 0;
-
-        if (this.strongCheckRegExp.test(str))
-            level = 3;
-        else if (this.mediumCheckRegExp.test(str))
-            level = 2;
+    const testStrength = (str) => {
+        if (strongCheckRegExp.current.test(str))
+            return 3;
+        else if (mediumCheckRegExp.current.test(str))
+            return 2;
         else if (str.length)
-            level = 1;
+            return 1;
 
-        return level;
+        return 0;
     }
 
-    bindScrollListener() {
-        if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.inputEl, () => {
-                if (this.state.overlayVisible) {
-                    this.hideOverlay();
-                }
+    useEffect(() => {
+        ObjectUtils.combinedRefs(inputRef, props.inputRef);
+    }, [inputRef, props.inputRef]);
+
+    useEffect(() => {
+        if (tooltipRef.current) {
+            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
+        }
+        else if (props.tooltip) {
+            tooltipRef.current = tip({
+                target: inputRef.current,
+                content: props.tooltip,
+                options: props.tooltipOptions
             });
         }
+    }, [props.tooltip, props.tooltipOptions]);
 
-        this.scrollHandler.bindScrollListener();
-    }
+    useEffect(() => {
+        mediumCheckRegExp.current = new RegExp(props.mediumRegex);
+    }, [props.mediumRegex]);
 
-    unbindScrollListener() {
-        if (this.scrollHandler) {
-            this.scrollHandler.unbindScrollListener();
+    useEffect(() => {
+        strongCheckRegExp.current = new RegExp(props.strongRegex);
+    }, [props.strongRegex]);
+
+    useEffect(() => {
+        if (!isFilled && DomHandler.hasClass(elementRef.current, 'p-inputwrapper-filled')) {
+            DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
         }
-    }
+    }, [isFilled]);
 
-    bindResizeListener() {
-        if (!this.resizeListener) {
-            this.resizeListener = () => {
-                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
-                    this.hideOverlay();
-                }
-            };
-            window.addEventListener('resize', this.resizeListener);
+    useUnmountEffect(() => {
+        ZIndexUtils.clear(overlayRef.current);
+
+        if (tooltipRef.current) {
+            tooltipRef.current.destroy();
+            tooltipRef.current = null;
         }
-    }
+    });
 
-    unbindResizeListener() {
-        if (this.resizeListener) {
-            window.removeEventListener('resize', this.resizeListener);
-            this.resizeListener = null;
-        }
-    }
+    const createIcon = () => {
+        if (props.toggleMask) {
+            const iconClassName = unmaskedState ? 'pi pi-eye-slash' : 'pi pi-eye';
+            let content = <i className={iconClassName} onClick={onMaskToggle} />
 
-    updateInputRef() {
-        let ref = this.props.inputRef;
-
-        if (ref) {
-            if (typeof ref === 'function') {
-                ref(this.inputRef.current);
-            }
-            else {
-                ref.current = this.inputRef.current;
-            }
-        }
-    }
-
-    componentDidMount() {
-        this.updateInputRef();
-
-        if (this.props.tooltip) {
-            this.renderTooltip();
-        }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
-            if (this.tooltip)
-                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
-            else
-                this.renderTooltip();
-        }
-
-        if (prevProps.mediumRegex !== this.props.mediumRegex) {
-            this.mediumCheckRegExp = new RegExp(this.props.mediumRegex);
-        }
-
-        if (prevProps.strongRegex !== this.props.strongRegex) {
-            this.strongCheckRegExp = new RegExp(this.props.strongRegex);
-        }
-
-        if (!this.isFilled() && DomHandler.hasClass(this.container, 'p-inputwrapper-filled')) {
-            DomHandler.removeClass(this.container, 'p-inputwrapper-filled');
-        }
-    }
-
-    componentWillUnmount() {
-        this.unbindResizeListener();
-        if (this.scrollHandler) {
-            this.scrollHandler.destroy();
-            this.scrollHandler = null;
-        }
-
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
-        }
-
-        ZIndexUtils.clear(this.overlayRef.current);
-    }
-
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.inputEl,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
-    }
-
-    renderIcon() {
-        if (this.props.toggleMask) {
-            const iconClassName = this.state.unmasked ? 'pi pi-eye-slash' : 'pi pi-eye';
-            let content = <i className={iconClassName} onClick={this.onMaskToggle} />
-
-            if (this.props.icon) {
+            if (props.icon) {
                 const defaultIconOptions = {
-                    onClick: this.onMaskToggle,
+                    onClick: onMaskToggle,
                     className: iconClassName,
                     element: content,
-                    props: this.props
+                    props
                 };
 
-                content = ObjectUtils.getJSXElement(this.props.icon, defaultIconOptions);
+                content = ObjectUtils.getJSXElement(props.icon, defaultIconOptions);
             }
 
             return content;
@@ -442,26 +273,26 @@ export class Password extends Component {
         return null;
     }
 
-    renderPanel() {
-        const panelClassName = classNames('p-password-panel p-component', this.props.panelClassName);
-        const { strength, width } = this.state.meter || { strength: '', width: '0%' };
-        const header = ObjectUtils.getJSXElement(this.props.header, this.props);
-        const footer = ObjectUtils.getJSXElement(this.props.footer, this.props);
-        const content = this.props.content ? ObjectUtils.getJSXElement(this.props.content, this.props) : (
+    const createPanel = () => {
+        const panelClassName = classNames('p-password-panel p-component', props.panelClassName);
+        const { strength, width } = meterState || { strength: '', width: '0%' };
+        const header = ObjectUtils.getJSXElement(props.header, props);
+        const footer = ObjectUtils.getJSXElement(props.footer, props);
+        const content = props.content ? ObjectUtils.getJSXElement(props.content, props) : (
             <>
                 <div className="p-password-meter">
-                    <div className={`p-password-strength ${strength}`} style={{ width: width }}></div>
+                    <div className={`p-password-strength ${strength}`} style={{ width }}></div>
                 </div>
                 <div className="p-password-info">
-                    {this.state.infoText}
+                    {infoTextState}
                 </div>
             </>
         );
 
         const panel = (
-            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
-                unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
-                <div ref={this.overlayRef} className={panelClassName} style={this.props.panelStyle} onClick={this.onPanelClick}>
+            <CSSTransition nodeRef={overlayRef} classNames="p-connected-overlay" in={overlayVisibleState} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
+                unmountOnExit onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited}>
+                <div ref={overlayRef} className={panelClassName} style={props.panelStyle} onClick={onPanelClick}>
                     {header}
                     {content}
                     {footer}
@@ -469,29 +300,89 @@ export class Password extends Component {
             </CSSTransition>
         );
 
-        return <Portal element={panel} appendTo={this.props.appendTo} />;
+        return <Portal element={panel} appendTo={props.appendTo} />;
     }
 
-    render() {
-        const containerClassName = classNames('p-password p-component p-inputwrapper', {
-            'p-inputwrapper-filled': this.isFilled(),
-            'p-inputwrapper-focus': this.state.focused,
-            'p-input-icon-right': this.props.toggleMask
-        }, this.props.className);
-        const inputClassName = classNames('p-password-input', this.props.inputClassName)
+    const className = classNames('p-password p-component p-inputwrapper', {
+        'p-inputwrapper-filled': isFilled,
+        'p-inputwrapper-focus': focusedState,
+        'p-input-icon-right': props.toggleMask
+    }, props.className);
+    const inputClassName = classNames('p-password-input', props.inputClassName)
+    const inputProps = ObjectUtils.findDiffKeys(props, Password.defaultProps);
+    const icon = createIcon();
+    const panel = createPanel();
 
-        const type = this.getInputType();
-        const inputProps = ObjectUtils.findDiffKeys(this.props, Password.defaultProps);
-        const icon = this.renderIcon();
-        const panel = this.renderPanel();
+    return (
+        <div ref={elementRef} id={props.id} className={className} style={props.style}>
+            <InputText ref={inputRef} id={props.inputId} {...inputProps} type={type} className={inputClassName} style={props.inputStyle}
+                onFocus={onFocus} onBlur={onBlur} onKeyUp={onKeyup} onInput={onInput} />
+            {icon}
+            {panel}
+        </div>
+    )
+}));
 
-        return (
-            <div ref={el => this.container = el} id={this.props.id} className={containerClassName} style={this.props.style}>
-                <InputText ref={this.inputRef} id={this.props.inputId} {...inputProps} type={type} className={inputClassName} style={this.props.inputStyle}
-                    onFocus={this.onFocus} onBlur={this.onBlur} onKeyUp={this.onKeyup} onInput={this.onInput} />
-                {icon}
-                {panel}
-            </div>
-        );
-    }
+Password.defaultProps = {
+    __TYPE: 'Password',
+    id: null,
+    inputId: null,
+    inputRef: null,
+    promptLabel: null,
+    weakLabel: null,
+    mediumLabel: null,
+    strongLabel: null,
+    mediumRegex: '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})',
+    strongRegex: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})',
+    feedback: true,
+    toggleMask: false,
+    appendTo: null,
+    header: null,
+    content: null,
+    footer: null,
+    icon: null,
+    tooltip: null,
+    tooltipOptions: null,
+    style: null,
+    className: null,
+    inputStyle: null,
+    inputClassName: null,
+    panelStyle: null,
+    panelClassName: null,
+    transitionOptions: null,
+    onInput: null,
+    onShow: null,
+    onHide: null
+}
+
+Password.propTypes /* remove-proptypes */ = {
+    __TYPE: PropTypes.string,
+    id: PropTypes.string,
+    inputId: PropTypes.string,
+    inputRef: PropTypes.any,
+    promptLabel: PropTypes.string,
+    weakLabel: PropTypes.string,
+    mediumLabel: PropTypes.string,
+    strongLabel: PropTypes.string,
+    mediumRegex: PropTypes.string,
+    strongRegex: PropTypes.string,
+    feedback: PropTypes.bool,
+    toggleMask: PropTypes.bool,
+    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    header: PropTypes.any,
+    content: PropTypes.any,
+    footer: PropTypes.any,
+    icon: PropTypes.any,
+    tooltip: PropTypes.string,
+    tooltipOptions: PropTypes.object,
+    style: PropTypes.object,
+    className: PropTypes.string,
+    inputStyle: PropTypes.object,
+    inputClassName: PropTypes.string,
+    panelStyle: PropTypes.object,
+    panelClassName: PropTypes.string,
+    transitionOptions: PropTypes.object,
+    onInput: PropTypes.func,
+    onShow: PropTypes.func,
+    onHide: PropTypes.func
 }

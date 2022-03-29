@@ -368,4 +368,6 @@ export declare class DataTable extends React.Component<DataTableProps, any> {
     public filter<T>(value: T, field: string, mode: DataTableFilterMatchModeType, index?: number): void;
     public resetColumnOrder(): void;
     public closeEditingCell(): void;
+    public restoreTableState(state: any): void;
+    public clearState(): void;
 }
