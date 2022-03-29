@@ -1,100 +1,70 @@
-import React, { Component } from 'react';
-import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
+import React, { memo, useState } from 'react';
 import { BodyCell } from './BodyCell';
+import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
 
-export class BodyRow extends Component {
+export const BodyRow = memo((props) => {
+    const [editingState, setEditingState] = useState(false);
+    const editing = props.onRowEditChange ? props.editing : editingState;
 
-    constructor(props) {
-        super(props);
-
-        if (!this.props.onRowEditChange) {
-            this.state = {
-                editing: false
-            };
-        }
-
-        this.onClick = this.onClick.bind(this);
-        this.onDoubleClick = this.onDoubleClick.bind(this);
-        this.onRightClick = this.onRightClick.bind(this);
-        this.onTouchEnd = this.onTouchEnd.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
-        this.onMouseDown = this.onMouseDown.bind(this);
-        this.onMouseUp = this.onMouseUp.bind(this);
-
-        this.onDragStart = this.onDragStart.bind(this);
-        this.onDragEnd = this.onDragEnd.bind(this);
-        this.onDragOver = this.onDragOver.bind(this);
-        this.onDragLeave = this.onDragLeave.bind(this);
-        this.onDrop = this.onDrop.bind(this);
-
-        this.onEditInit = this.onEditInit.bind(this);
-        this.onEditSave = this.onEditSave.bind(this);
-        this.onEditCancel = this.onEditCancel.bind(this);
+    const isFocusable = () => {
+        return props.selectionMode && props.selectionModeInColumn !== 'single' && props.selectionModeInColumn !== 'multiple';
     }
 
-    isFocusable() {
-        return this.props.selectionMode && this.props.selectionModeInColumn !== 'single' && this.props.selectionModeInColumn !== 'multiple';
-    }
-
-    isGrouped(column) {
-        if (this.props.groupRowsBy && this.getColumnProp(column, 'field')) {
-            if (Array.isArray(this.props.groupRowsBy))
-                return this.props.groupRowsBy.indexOf(column.props.field) > -1;
-            else
-                return this.props.groupRowsBy === column.props.field;
+    const isGrouped = (column) => {
+        if (props.groupRowsBy && getColumnProp(column, 'field')) {
+            return Array.isArray(props.groupRowsBy) ?
+                props.groupRowsBy.indexOf(column.props.field) > -1 :
+                props.groupRowsBy === column.props.field;
         }
 
         return false;
     }
 
-    equals(data1, data2) {
-        return this.props.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, this.props.dataKey);
+    const equals = (data1, data2) => {
+        return props.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, props.dataKey);
     }
 
-    getColumnProp(col, prop) {
+    const getColumnProp = (col, prop) => {
         return col ? col.props[prop] : null;
     }
 
-    getEditing() {
-        return this.props.onRowEditChange ? this.props.editing : this.state.editing;
+    const getTabIndex = () => {
+        return isFocusable() && !props.allowCellSelection ? (props.index === 0 ? props.tabIndex : -1) : null;
     }
 
-    getTabIndex() {
-        return this.isFocusable() && !this.props.allowCellSelection ? (this.props.index === 0 ? this.props.tabIndex : -1) : null;
+    const findIndex = (collection, rowData) => {
+        return (collection || []).findIndex(data => equals(rowData, data));
     }
 
-    findIndex(collection, rowData) {
-        return (collection || []).findIndex(data => this.equals(rowData, data));
-    }
-
-    changeTabIndex(currentRow, nextRow) {
+    const changeTabIndex = (currentRow, nextRow) => {
         if (currentRow && nextRow) {
             currentRow.tabIndex = -1;
-            nextRow.tabIndex = this.props.tabIndex;
+            nextRow.tabIndex = props.tabIndex;
         }
     }
 
-    findNextSelectableRow(row) {
-        let nextRow = row.nextElementSibling;
+    const findNextSelectableRow = (row) => {
+        const nextRow = row.nextElementSibling;
 
-        return nextRow ? (DomHandler.hasClass(nextRow, 'p-selectable-row') ? nextRow : this.findNextSelectableRow(nextRow)) : null;
+        return nextRow ? (DomHandler.hasClass(nextRow, 'p-selectable-row') ? nextRow : findNextSelectableRow(nextRow)) : null;
     }
 
-    findPrevSelectableRow(row) {
-        let prevRow = row.previousElementSibling;
+    const findPrevSelectableRow = (row) => {
+        const prevRow = row.previousElementSibling;
 
-        return prevRow ? (DomHandler.hasClass(prevRow, 'p-selectable-row') ? prevRow : this.findPrevSelectableRow(prevRow)) : null;
+        return prevRow ? (DomHandler.hasClass(prevRow, 'p-selectable-row') ? prevRow : findPrevSelectableRow(prevRow)) : null;
     }
 
-    shouldRenderBodyCell(value, column, i) {
-        if (this.getColumnProp(column, 'hidden')) {
+    const shouldRenderBodyCell = (value, column, i) => {
+        if (getColumnProp(column, 'hidden')) {
             return false;
         }
-        else if (this.props.rowGroupMode && this.props.rowGroupMode === 'rowspan' && this.isGrouped(column)) {
+        else if (props.rowGroupMode && props.rowGroupMode === 'rowspan' && isGrouped(column)) {
             let prevRowData = value[i - 1];
             if (prevRowData) {
-                let currentRowFieldData = ObjectUtils.resolveFieldData(value[i], this.getColumnProp(column, 'field'));
-                let previousRowFieldData = ObjectUtils.resolveFieldData(prevRowData, this.getColumnProp(column, 'field'));
+                const currentRowFieldData = ObjectUtils.resolveFieldData(value[i], getColumnProp(column, 'field'));
+                const previousRowFieldData = ObjectUtils.resolveFieldData(prevRowData, getColumnProp(column, 'field'));
+
                 return currentRowFieldData !== previousRowFieldData;
             }
         }
@@ -102,9 +72,9 @@ export class BodyRow extends Component {
         return true;
     }
 
-    calculateRowGroupSize(value, column, index) {
-        if (this.isGrouped(column)) {
-            let currentRowFieldData = ObjectUtils.resolveFieldData(value[index], this.getColumnProp(column, 'field'));
+    const calculateRowGroupSize = (value, column, index) => {
+        if (isGrouped(column)) {
+            let currentRowFieldData = ObjectUtils.resolveFieldData(value[index], getColumnProp(column, 'field'));
             let nextRowFieldData = currentRowFieldData;
             let groupRowSpan = 0;
 
@@ -112,7 +82,7 @@ export class BodyRow extends Component {
                 groupRowSpan++;
                 let nextRowData = value[++index];
                 if (nextRowData) {
-                    nextRowFieldData = ObjectUtils.resolveFieldData(nextRowData, this.getColumnProp(column, 'field'));
+                    nextRowFieldData = ObjectUtils.resolveFieldData(nextRowData, getColumnProp(column, 'field'));
                 }
                 else {
                     break;
@@ -126,32 +96,32 @@ export class BodyRow extends Component {
         }
     }
 
-    onClick(event) {
-        this.props.onRowClick({ originalEvent: event, data: this.props.rowData, index: this.props.index });
+    const onClick = (event) => {
+        props.onRowClick({ originalEvent: event, data: props.rowData, index: props.index });
     }
 
-    onDoubleClick(event) {
-        this.props.onRowDoubleClick({ originalEvent: event, data: this.props.rowData, index: this.props.index });
+    const onDoubleClick = (event) => {
+        props.onRowDoubleClick({ originalEvent: event, data: props.rowData, index: props.index });
     }
 
-    onRightClick(event) {
-        this.props.onRowRightClick({ originalEvent: event, data: this.props.rowData, index: this.props.index });
+    const onRightClick = (event) => {
+        props.onRowRightClick({ originalEvent: event, data: props.rowData, index: props.index });
     }
 
-    onTouchEnd(event) {
-        this.props.onRowTouchEnd(event);
+    const onTouchEnd = (event) => {
+        props.onRowTouchEnd(event);
     }
 
-    onKeyDown(event) {
-        if (this.isFocusable() && !this.props.allowCellSelection) {
+    const onKeyDown = (event) => {
+        if (isFocusable() && !props.allowCellSelection) {
             const { target, currentTarget: row } = event;
 
             switch (event.which) {
                 //down arrow
                 case 40:
-                    let nextRow = this.findNextSelectableRow(row);
+                    let nextRow = findNextSelectableRow(row);
                     if (nextRow) {
-                        this.changeTabIndex(row, nextRow);
+                        changeTabIndex(row, nextRow);
                         nextRow.focus();
                     }
 
@@ -160,9 +130,9 @@ export class BodyRow extends Component {
 
                 //up arrow
                 case 38:
-                    let prevRow = this.findPrevSelectableRow(row);
+                    let prevRow = findPrevSelectableRow(row);
                     if (prevRow) {
-                        this.changeTabIndex(row, prevRow);
+                        changeTabIndex(row, prevRow);
                         prevRow.focus();
                     }
 
@@ -172,7 +142,7 @@ export class BodyRow extends Component {
                 //enter
                 case 13: // @deprecated
                     if (!DomHandler.isClickable(target)) {
-                        this.onClick(event);
+                        onClick(event);
                         event.preventDefault();
                     }
                     break;
@@ -180,7 +150,7 @@ export class BodyRow extends Component {
                 //space
                 case 32:
                     if (!DomHandler.isClickable(target) && !target.readOnly) {
-                        this.onClick(event);
+                        onClick(event);
                         event.preventDefault();
                     }
                     break;
@@ -192,52 +162,57 @@ export class BodyRow extends Component {
         }
     }
 
-    onMouseDown(event) {
-        this.props.onRowMouseDown({ originalEvent: event, data: this.props.rowData, index: this.props.index });
+    const onMouseDown = (event) => {
+        props.onRowMouseDown({ originalEvent: event, data: props.rowData, index: props.index });
     }
 
-    onMouseUp(event) {
-        this.props.onRowMouseUp({ originalEvent: event, data: this.props.rowData, index: this.props.index });
+    const onMouseUp = (event) => {
+        props.onRowMouseUp({ originalEvent: event, data: props.rowData, index: props.index });
     }
 
-    onDragStart(event) {
-        this.props.onRowDragStart({ originalEvent: event, data: this.props.rowData, index: this.props.index });
+    const onDragStart = (event) => {
+        props.onRowDragStart({ originalEvent: event, data: props.rowData, index: props.index });
     }
 
-    onDragOver(event) {
-        this.props.onRowDragOver({ originalEvent: event, data: this.props.rowData, index: this.props.index });
+    const onDragOver = (event) => {
+        props.onRowDragOver({ originalEvent: event, data: props.rowData, index: props.index });
     }
 
-    onDragLeave(event) {
-        this.props.onRowDragLeave({ originalEvent: event, data: this.props.rowData, index: this.props.index });
+    const onDragLeave = (event) => {
+        props.onRowDragLeave({ originalEvent: event, data: props.rowData, index: props.index });
     }
 
-    onDragEnd(event) {
-        this.props.onRowDragEnd({ originalEvent: event, data: this.props.rowData, index: this.props.index });
+    const onDragEnd = (event) => {
+        props.onRowDragEnd({ originalEvent: event, data: props.rowData, index: props.index });
     }
 
-    onDrop(event) {
-        this.props.onRowDrop({ originalEvent: event, data: this.props.rowData, index: this.props.index });
+    const onDrop = (event) => {
+        props.onRowDrop({ originalEvent: event, data: props.rowData, index: props.index });
     }
 
-    onEditChange(e, editing) {
-        if (this.props.onRowEditChange) {
+    const onEditChange = (e, isEditing) => {
+        if (props.onRowEditChange) {
             let editingRows;
-            const dataKey = this.props.dataKey;
-            const { originalEvent, data, index } = e;
+            const dataKey = props.dataKey;
+            const { originalEvent, data, index, newData } = e;
 
             if (dataKey) {
                 let dataKeyValue = String(ObjectUtils.resolveFieldData(data, dataKey));
-                editingRows = this.props.editingRows ? { ...this.props.editingRows } : {};
+                editingRows = props.editingRows ? { ...props.editingRows } : {};
 
-                if (editingRows[dataKeyValue] != null)
+                if (!editing) {
                     delete editingRows[dataKeyValue];
-                else
+                    // if the key value was changed, stop editing for the new key value too
+                    let newDataKeyValue = String(ObjectUtils.resolveFieldData(newData, dataKey));
+                    delete editingRows[newDataKeyValue];
+                }
+                else {
                     editingRows[dataKeyValue] = true;
+                }
             }
             else {
-                let editingRowIndex = this.findIndex(this.props.editingRows, data);
-                editingRows = this.props.editingRows ? [...this.props.editingRows] : [];
+                let editingRowIndex = findIndex(props.editingRows, data);
+                editingRows = props.editingRows ? [...props.editingRows] : [];
 
                 if (editingRowIndex !== -1)
                     editingRows = editingRows.filter((val, i) => i !== editingRowIndex);
@@ -245,89 +220,88 @@ export class BodyRow extends Component {
                     editingRows.push(data);
             }
 
-            this.props.onRowEditChange({
+            props.onRowEditChange({
                 originalEvent,
                 data: editingRows,
                 index
             });
         }
         else {
-            this.setState({ editing });
+            setEditingState(isEditing);
         }
     }
 
-    onEditInit(e) {
+    const onEditInit = (e) => {
         const { originalEvent: event } = e;
 
-        if (this.props.onRowEditInit) {
-            this.props.onRowEditInit({
+        if (props.onRowEditInit) {
+            props.onRowEditInit({
                 originalEvent: event,
-                data: this.props.rowData,
-                index: this.props.index
+                data: props.rowData,
+                index: props.index
             });
         }
 
-        this.onEditChange(e, true);
+        onEditChange(e, true);
 
         event.preventDefault();
     }
 
-    onEditSave(e) {
-        const { originalEvent: event } = e;
-        const valid = this.props.rowEditValidator ? this.props.rowEditValidator(this.props.rowData, { props: this.props.tableProps }) : true;
+    const onEditSave = (e) => {
+        const { originalEvent: event, newData } = e;
+        const valid = props.rowEditValidator ? props.rowEditValidator(newData, { props: props.tableProps }) : true;
 
-        if (this.props.onRowEditSave) {
-            this.props.onRowEditSave({
+        if (props.onRowEditSave) {
+            props.onRowEditSave({
                 originalEvent: event,
-                data: this.props.rowData,
-                index: this.props.index,
+                data: props.rowData,
+                index: props.index,
                 valid
             });
         }
 
         if (valid) {
-            if (this.props.onRowEditComplete) {
-                this.props.onRowEditComplete(e);
+            if (props.onRowEditComplete) {
+                props.onRowEditComplete(e);
             }
 
-            this.onEditChange(e, false);
+            onEditChange(e, false);
         }
 
         event.preventDefault();
     }
 
-    onEditCancel(e) {
+    const onEditCancel = (e) => {
         const { originalEvent: event } = e;
 
-        if (this.props.onRowEditCancel) {
-            this.props.onRowEditCancel({
+        if (props.onRowEditCancel) {
+            props.onRowEditCancel({
                 originalEvent: event,
-                data: this.props.rowData,
-                index: this.props.index
+                data: props.rowData,
+                index: props.index
             });
         }
 
-        this.onEditChange(e, false);
+        onEditChange(e, false);
 
         event.preventDefault();
     }
 
-    renderContent() {
-        return this.props.columns.map((col, i) => {
-            if (this.shouldRenderBodyCell(this.props.value, col, this.props.index)) {
-                const key = `${this.getColumnProp(col, 'columnKey') || this.getColumnProp(col, 'field')}_${i}`;
-                const rowSpan = this.props.rowGroupMode === 'rowspan' ? this.calculateRowGroupSize(this.props.value, col, this.props.index) : null;
-                const editing = this.getEditing();
+    const createContent = () => {
+        return props.columns.map((col, i) => {
+            if (shouldRenderBodyCell(props.value, col, props.index)) {
+                const key = `${getColumnProp(col, 'columnKey') || getColumnProp(col, 'field')}_${i}`;
+                const rowSpan = props.rowGroupMode === 'rowspan' ? calculateRowGroupSize(props.value, col, props.index) : null;
 
                 return (
-                    <BodyCell key={key} value={this.props.value} tableProps={this.props.tableProps} tableSelector={this.props.tableSelector} column={col} rowData={this.props.rowData} rowIndex={this.props.index} index={i} rowSpan={rowSpan} dataKey={this.props.dataKey}
-                        editing={editing} editingMeta={this.props.editingMeta} editMode={this.props.editMode} onRowEditInit={this.onEditInit} onRowEditSave={this.onEditSave} onRowEditCancel={this.onEditCancel} onEditingMetaChange={this.props.onEditingMetaChange}
-                        onRowToggle={this.props.onRowToggle} selection={this.props.selection} allowCellSelection={this.props.allowCellSelection} compareSelectionBy={this.props.compareSelectionBy} selectOnEdit={this.props.selectOnEdit} selected={this.props.selected}
-                        onClick={this.props.onCellClick} onMouseDown={this.props.onCellMouseDown} onMouseUp={this.props.onCellMouseUp} tabIndex={this.props.tabIndex}
-                        cellClassName={this.props.cellClassName} responsiveLayout={this.props.responsiveLayout} frozenRow={this.props.frozenRow} isSelectable={this.props.isSelectable}
-                        showSelectionElement={this.props.showSelectionElement} showRowReorderElement={this.props.showRowReorderElement} onRadioChange={this.props.onRadioChange} onCheckboxChange={this.props.onCheckboxChange}
-                        expanded={this.props.expanded} expandedRowIcon={this.props.expandedRowIcon} collapsedRowIcon={this.props.collapsedRowIcon}
-                        virtualScrollerOptions={this.props.virtualScrollerOptions} />
+                    <BodyCell key={key} value={props.value} tableProps={props.tableProps} tableSelector={props.tableSelector} column={col} rowData={props.rowData} rowIndex={props.index} index={i} rowSpan={rowSpan} dataKey={props.dataKey}
+                        editing={editing} editingMeta={props.editingMeta} editMode={props.editMode} onRowEditInit={onEditInit} onRowEditSave={onEditSave} onRowEditCancel={onEditCancel} onEditingMetaChange={props.onEditingMetaChange}
+                        onRowToggle={props.onRowToggle} selection={props.selection} allowCellSelection={props.allowCellSelection} compareSelectionBy={props.compareSelectionBy} selectOnEdit={props.selectOnEdit} selected={props.selected}
+                        onClick={props.onCellClick} onMouseDown={props.onCellMouseDown} onMouseUp={props.onCellMouseUp} tabIndex={props.tabIndex}
+                        cellClassName={props.cellClassName} responsiveLayout={props.responsiveLayout} frozenRow={props.frozenRow} isSelectable={props.isSelectable}
+                        showSelectionElement={props.showSelectionElement} showRowReorderElement={props.showRowReorderElement} onRadioChange={props.onRadioChange} onCheckboxChange={props.onCheckboxChange}
+                        expanded={props.expanded} expandedRowIcon={props.expandedRowIcon} collapsedRowIcon={props.collapsedRowIcon}
+                        virtualScrollerOptions={props.virtualScrollerOptions} />
                 )
             }
 
@@ -335,23 +309,21 @@ export class BodyRow extends Component {
         })
     }
 
-    render() {
-        const rowClassName = ObjectUtils.getPropValue(this.props.rowClassName, this.props.rowData, { props: this.props.tableProps });
-        const className = classNames(rowClassName, {
-            'p-highlight': !this.props.allowCellSelection && this.props.selected,
-            'p-highlight-contextmenu': this.props.contextMenuSelected,
-            'p-selectable-row': this.props.allowRowSelection && this.props.isSelectable({ data: this.props.rowData, index: this.props.index }),
-            'p-row-odd': this.props.index % 2 !== 0
-        });
-        const content = this.renderContent();
-        const tabIndex = this.getTabIndex();
+    const rowClassName = ObjectUtils.getPropValue(props.rowClassName, props.rowData, { props: props.tableProps });
+    const className = classNames(rowClassName, {
+        'p-highlight': !props.allowCellSelection && props.selected,
+        'p-highlight-contextmenu': props.contextMenuSelected,
+        'p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.index }),
+        'p-row-odd': props.index % 2 !== 0
+    });
+    const content = createContent();
+    const tabIndex = getTabIndex();
 
-        return (
-            <tr ref={(el) => this.el = el} role="row" tabIndex={tabIndex} className={className} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}
-                onClick={this.onClick} onDoubleClick={this.onDoubleClick} onContextMenu={this.onRightClick} onTouchEnd={this.onTouchEnd} onKeyDown={this.onKeyDown}
-                onDragStart={this.onDragStart} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDragEnd={this.onDragEnd} onDrop={this.onDrop}>
-                {content}
-            </tr>
-        )
-    }
-}
+    return (
+        <tr role="row" tabIndex={tabIndex} className={className} onMouseDown={onMouseDown} onMouseUp={onMouseUp}
+            onClick={onClick} onDoubleClick={onDoubleClick} onContextMenu={onRightClick} onTouchEnd={onTouchEnd} onKeyDown={onKeyDown}
+            onDragStart={onDragStart} onDragOver={onDragOver} onDragLeave={onDragLeave} onDragEnd={onDragEnd} onDrop={onDrop}>
+            {content}
+        </tr>
+    )
+});

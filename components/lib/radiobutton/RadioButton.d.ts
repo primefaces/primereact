@@ -35,4 +35,6 @@ export interface RadioButtonProps {
     onChange?(e: RadioButtonChangeParams): void;
 }
 
-export declare class RadioButton extends React.Component<RadioButtonProps, any> { }
+export declare class RadioButton extends React.Component<RadioButtonProps, any> {
+    public select(e?: React.SyntheticEvent): void;
+}

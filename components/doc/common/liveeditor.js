@@ -77,7 +77,14 @@ export const useLiveEditorTabs = (props) => {
         )
     });
 
-    let tabs = Object.entries(props.sources).map(([key, value]) => {
+    let ordered_sources = {
+        'hooks': { ...props.sources.hooks },
+        'class': { ...props.sources.class },
+        'ts': { ...props.sources.ts },
+        'browser': {...props.sources.browser}
+    }
+
+    let tabs = Object.entries(ordered_sources).map(([key, value]) => {
         const { content: _c, imports: _i } = value;
         const content = key === 'browser' ? contents(props.name, _c, _i).browser : _c;
 
