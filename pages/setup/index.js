@@ -140,7 +140,7 @@ import "primeicons/primeicons.css";                                //icons
 
             <h5>Free Themes</h5>
             <p>PrimeReact ships with various free themes to choose from.</p>
-<div style={{overflow: 'auto', height: '400px'}}>
+<div className="h-20rem overflow-auto">
 
 <CodeHighlight lang="js">
 {`

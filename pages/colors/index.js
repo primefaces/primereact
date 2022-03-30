@@ -5,6 +5,7 @@ import Head from 'next/head';
 const ColorsDemo = (props) => {
     const colors = ['blue', 'green', 'yellow', 'cyan', 'pink', 'indigo', 'teal', 'orange', 'bluegray', 'purple', 'red', 'gray'];
     const shades = [0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+    const surfaces = ['ground','section','card','overlay','border','hover'];
 
     return (
         <div>
@@ -55,6 +56,22 @@ const ColorsDemo = (props) => {
                             <tr>
                                 <td><i>--font-family</i></td>
                                 <td>Font family of the theme.</td>
+                            </tr>
+                            <tr>
+                                <td><i>--inline-spacing</i></td>
+                                <td>Spacing between to adjacent items.</td>
+                            </tr>
+                            <tr>
+                                <td><i>--border-radius</i></td>
+                                <td>Common border radius of elements.</td>
+                            </tr>
+                            <tr>
+                                <td><i>--focus-ring</i></td>
+                                <td>Box shadow of a focused element.</td>
+                            </tr>
+                            <tr>
+                                <td><i>--mask-bg</i></td>
+                                <td>Background of an overlay mask.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -111,6 +128,44 @@ const ColorsDemo = (props) => {
                             })
                         }
                     </div>
+                </div>
+                <p>A theme also exports named surfaces for common use cases.</p>
+
+                <div className="doc-tablewrapper">
+                    <table className="doc-table">
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><i>--surface-ground</i></td>
+                                <td>Base ground color.</td>
+                            </tr>
+                            <tr>
+                                <td><i>--surface-section</i></td>
+                                <td>Color of a section on a ground surface.</td>
+                            </tr>
+                            <tr>
+                                <td><i>--surface-card</i></td>
+                                <td>Color of a surface used as a card.</td>
+                            </tr>
+                            <tr>
+                                <td><i>--surface-overlay</i></td>
+                                <td>Color of overlay surfaces.</td>
+                            </tr>
+                            <tr>
+                                <td><i>--surface-border</i></td>
+                                <td>Color of a divider.</td>
+                            </tr>
+                            <tr>
+                                <td><i>--surface-hover</i></td>
+                                <td>Color of an element in hover state.</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
