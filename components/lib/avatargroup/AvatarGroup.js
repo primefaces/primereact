@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { classNames } from '../utils/Utils';
 
 export const AvatarGroup = forwardRef((props, ref) => {
@@ -16,10 +15,4 @@ AvatarGroup.defaultProps = {
     __TYPE: 'AvatarGroup',
     style: null,
     className: null
-}
-
-AvatarGroup.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string
 }

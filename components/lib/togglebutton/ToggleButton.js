@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils } from '../utils/Utils';
@@ -106,24 +105,4 @@ ToggleButton.defaultProps = {
     onChange: null,
     onFocus: null,
     onBlur: null
-}
-
-ToggleButton.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    onIcon: PropTypes.any,
-    offIcon: PropTypes.any,
-    onLabel: PropTypes.string,
-    offLabel: PropTypes.string,
-    iconPos: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    checked: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func
 }

@@ -1,5 +1,4 @@
 import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
 export const Toolbar = memo(forwardRef((props, ref) => {
@@ -26,13 +25,4 @@ Toolbar.defaultProps = {
     className: null,
     left: null,
     right: null
-}
-
-Toolbar.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    left: PropTypes.any,
-    right: PropTypes.any
 }

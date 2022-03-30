@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { tip } from '../tooltip/Tooltip';
 import { classNames } from '../utils/Utils';
 import { useUnmountEffect } from '../hooks/Hooks';
@@ -127,19 +126,4 @@ Rating.defaultProps = {
     tooltip: null,
     tooltipOptions: null,
     onChange: null
-}
-
-Rating.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.number,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    stars: PropTypes.number,
-    cancel: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    onChange: PropTypes.func
 }

@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import PropTypes from 'prop-types';
 import { Dropdown } from '../dropdown/Dropdown';
 import { ObjectUtils } from '../utils/Utils';
 
@@ -39,16 +38,4 @@ RowsPerPageDropdown.defaultProps = {
     onChange: null,
     template: null,
     disabled: false
-}
-
-RowsPerPageDropdown.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    options: PropTypes.array,
-    value: PropTypes.number,
-    page: PropTypes.number,
-    pageCount: PropTypes.number,
-    totalRecords: PropTypes.number,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    onChange: PropTypes.func,
-    template: PropTypes.any
 }

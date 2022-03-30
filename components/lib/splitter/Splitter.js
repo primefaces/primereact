@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
 import { useMountEffect, useEventListener } from '../hooks/Hooks';
 
@@ -242,14 +241,6 @@ SplitterPanel.defaultProps = {
     className: null
 }
 
-SplitterPanel.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    header: PropTypes.number,
-    minSize: PropTypes.number,
-    style: PropTypes.object,
-    className: PropTypes.string
-}
-
 Splitter.defaultProps = {
     __TYPE: 'Splitter',
     id: null,
@@ -260,16 +251,4 @@ Splitter.defaultProps = {
     stateKey: null,
     stateStorage: 'session',
     onResizeEnd: null
-}
-
-Splitter.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    layout: PropTypes.string,
-    gutterSize: PropTypes.number,
-    stateKey: PropTypes.string,
-    stateStorage: PropTypes.string,
-    onResizeEnd: PropTypes.func
 }

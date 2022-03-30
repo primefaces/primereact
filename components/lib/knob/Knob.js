@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { classNames } from '../utils/Utils';
 import { useEventListener } from '../hooks/Hooks';
 
@@ -168,26 +167,4 @@ Knob.defaultProps = {
     textColor: 'var(--text-color-secondary, Black)',
     valueTemplate: '{value}',
     onChange: null
-}
-
-Knob.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    value: PropTypes.number,
-    size: PropTypes.number,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    showValue: PropTypes.bool,
-    step: PropTypes.number,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    strokeWidth: PropTypes.number,
-    name: PropTypes.string,
-    valueColor: PropTypes.string,
-    rangeColor: PropTypes.string,
-    textColor: PropTypes.string,
-    valueTemplate: PropTypes.string,
-    onChange: PropTypes.func
 }

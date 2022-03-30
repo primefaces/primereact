@@ -61,6 +61,20 @@ dependencies: {
 }
 ```
 
+#### Optional
+
+Here is the list of components with 3rd party dependencies.
+
+| Component | Dependency |
+| --- | --- |
+| Charts | Charts.js 3.x |
+| GMap | Google Maps |
+| Editor | Quill.js |
+| FullCalendar* | FullCalendar 4.0 Alpha.2+
+| DataView | PrimeFlex |
+
+<sub>*Deprecated since v6.4.0</sup>
+
 ## Styles
 The css dependencies are as follows, note that you may change the theme with another one of your choice.
 
@@ -80,8 +94,8 @@ import 'primeicons/primeicons.css';
 
 ## QuickStart
 
-An [example application](https://github.com/primefaces/primereact-quickstart) based on create-react-app is available at github.
+[Example applications](https://github.com/primefaces/primereact-examples) based on create-react-app and Next.js are available at github.
 
 ## TypeScript
 
-Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample [typescript-primereact application](https://github.com/primefaces/primereact-typescript-quickstart) is available as well at github.
+Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample [typescript-primereact application](https://github.com/primefaces/primereact-examples/tree/main/cra-basic-ts) is available as well at github.

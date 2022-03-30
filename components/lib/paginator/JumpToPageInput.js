@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import PropTypes from 'prop-types';
 import { InputNumber } from '../inputnumber/InputNumber';
 import { ObjectUtils } from '../utils/Utils';
 
@@ -38,14 +37,4 @@ JumpToPageInput.defaultProps = {
     disabled: false,
     template: null,
     onChange: null
-}
-
-JumpToPageInput.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    page: PropTypes.number,
-    rows: PropTypes.number,
-    pageCount: PropTypes.number,
-    disabled: PropTypes.bool,
-    template: PropTypes.any,
-    onChange: PropTypes.func
 }

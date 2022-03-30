@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { TerminalService } from '../terminalservice/TerminalService';
 import { classNames } from '../utils/Utils';
 
@@ -150,13 +149,4 @@ Terminal.defaultProps = {
     className: null,
     welcomeMessage: null,
     prompt: null
-}
-
-Terminal.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    welcomeMessage: PropTypes.string,
-    prompt: PropTypes.string
 }

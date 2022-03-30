@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useImperativeHandle, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { classNames, DomHandler } from '../utils/Utils';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 
@@ -162,22 +161,4 @@ Editor.defaultProps = {
     onTextChange: null,
     onSelectionChange: null,
     onLoad: null
-}
-
-Editor.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    placeholder: PropTypes.string,
-    readOnly: PropTypes.bool,
-    modules: PropTypes.object,
-    formats: PropTypes.array,
-    theme: PropTypes.string,
-    showHeader: PropTypes.bool,
-    headerTemplate: PropTypes.any,
-    onTextChange: PropTypes.func,
-    onSelectionChange: PropTypes.func,
-    onLoad: PropTypes.func
 }

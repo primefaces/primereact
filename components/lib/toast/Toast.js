@@ -1,5 +1,4 @@
 import React, { useState, useRef, forwardRef, useImperativeHandle, createRef, memo } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { ToastMessage } from './ToastMessage';
 import { TransitionGroup } from 'react-transition-group';
@@ -110,19 +109,4 @@ Toast.defaultProps = {
     onRemove: null,
     onShow: null,
     onHide: null
-}
-
-Toast.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    baseZIndex: PropTypes.number,
-    position: PropTypes.string,
-    transitionOptions: PropTypes.object,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    onClick: PropTypes.func,
-    onRemove: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Button } from '../button/Button';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
@@ -282,32 +281,4 @@ SpeedDial.defaultProps = {
     onClick: null,
     onShow: null,
     onHide: null
-}
-
-SpeedDial.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array,
-    visible: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    direction: PropTypes.string,
-    transitionDelay: PropTypes.number,
-    type: PropTypes.string,
-    radius: PropTypes.number,
-    mask: PropTypes.bool,
-    disabled: PropTypes.bool,
-    hideOnClickOutside: PropTypes.bool,
-    buttonStyle: PropTypes.object,
-    buttonClassName: PropTypes.string,
-    buttonTemplate: PropTypes.any,
-    maskStyle: PropTypes.object,
-    maskClassName: PropTypes.string,
-    showIcon: PropTypes.any,
-    hideIcon: PropTypes.any,
-    rotateAnimation: PropTypes.bool,
-    onVisibleChange: PropTypes.func,
-    onClick: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

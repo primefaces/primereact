@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useMemo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { OverlayService } from '../overlayservice/OverlayService';
@@ -430,35 +429,4 @@ Mention.defaultProps = {
     onBlur: null,
     onShow: null,
     onHide: null
-}
-
-Mention.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputId: PropTypes.string,
-    inputRef: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    trigger: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    suggestions: PropTypes.array,
-    field: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    inputStyle: PropTypes.object,
-    inputClassName: PropTypes.string,
-    panelClassName: PropTypes.string,
-    panelStyle: PropTypes.object,
-    scrollHeight: PropTypes.string,
-    autoHighlight: PropTypes.bool,
-    delay: PropTypes.number,
-    headerTemplate: PropTypes.any,
-    footerTemplate: PropTypes.any,
-    itemTemplate: PropTypes.any,
-    transitionOptions: PropTypes.object,
-    onChange: PropTypes.func,
-    onInput: PropTypes.func,
-    onSearch: PropTypes.func,
-    onSelect: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

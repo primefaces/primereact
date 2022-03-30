@@ -235,11 +235,11 @@ dependencies: {
                             </tr>
                             <tr>
                                 <td>FullCalendar*</td>
-                                <td>FullCalendar 4.0 Alpha.2+.</td>
+                                <td>FullCalendar 4.0 Alpha.2+</td>
                             </tr>
                             <tr>
+                                <td>DataView</td>
                                 <td>PrimeFlex</td>
-                                <td>DataView component.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -331,7 +331,7 @@ PrimeReact.cssTransition = false; // Default value is true.
                                 <th>
                                     <div className="flex align-items-center">
                                         <img src={`${contextPath}/images/browsers/edge.svg`} alt="edge" style={{width: '1.5rem'}} className="mr-2" />
-                                        IE / Edge
+                                        Edge
                                     </div>
                                 </th>
                                 <th>
@@ -362,7 +362,7 @@ PrimeReact.cssTransition = false; // Default value is true.
                         </thead>
                         <tbody>
                             <tr>
-                                <td>IE11, Edge</td>
+                                <td>Last 2 versions</td>
                                 <td>Last 2 versions</td>
                                 <td>Last 2 versions</td>
                                 <td>Last 2 versions</td>

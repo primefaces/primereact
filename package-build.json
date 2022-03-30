@@ -16,14 +16,17 @@
     "keywords": [
         "primereact",
         "react",
-        "ui framework",
-        "component framework",
+        "hooks",
+        "next",
+        "nextjs",
+        "ui-kit",
         "ui library",
         "component library",
         "material",
         "material design",
         "bootstrap",
         "tailwind theme",
+        "dark theme",
         "react components",
         "responsive components"
     ],
@@ -42,5 +45,6 @@
         "react-transition-group": "^4.4.1",
         "primeicons": "^5.0.0"
     },
+    "sideEffects": false,
     "unpkg": "primereact.all.min.js"
 }

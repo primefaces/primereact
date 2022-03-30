@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect, memo, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
@@ -124,14 +123,4 @@ TabMenu.defaultProps = {
     style: null,
     className: null,
     onTabChange: null
-}
-
-TabMenu.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array,
-    activeIndex: PropTypes.number,
-    style: PropTypes.any,
-    className: PropTypes.string,
-    onTabChange: PropTypes.func
 }
