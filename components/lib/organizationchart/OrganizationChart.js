@@ -1,5 +1,4 @@
 import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
 import { OrganizationChartNode } from './OrganizationChartNode';
 import { classNames, DomHandler } from '../utils/Utils';
 
@@ -83,18 +82,4 @@ OrganizationChart.defaultProps = {
     onSelectionChange: null,
     onNodeSelect: null,
     onNodeUnselect: null
-}
-
-OrganizationChart.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    selectionMode: PropTypes.string,
-    selection: PropTypes.any,
-    nodeTemplate: PropTypes.any,
-    onSelectionChange: PropTypes.func,
-    onNodeSelect: PropTypes.func,
-    onNodeUnselect: PropTypes.func
 }

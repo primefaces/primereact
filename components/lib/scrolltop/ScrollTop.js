@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -90,17 +89,4 @@ ScrollTop.defaultProps = {
     transitionOptions: null,
     onShow: null,
     onHide: null
-}
-
-ScrollTop.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    target: PropTypes.string,
-    threshold: PropTypes.number,
-    icon: PropTypes.any,
-    behavior: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    transitionOptions: PropTypes.object,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

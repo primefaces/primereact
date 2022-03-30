@@ -1,6 +1,5 @@
 /*global google*/
 import React, { useRef, forwardRef, useImperativeHandle, memo } from 'react';
-import PropTypes from 'prop-types';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 
 export const GMap = memo(forwardRef((props, ref) => {
@@ -115,20 +114,4 @@ GMap.defaultProps = {
     onOverlayDrag: null,
     onOverlayDragEnd: null,
     onOverlayClick: null
-}
-
-GMap.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    options: PropTypes.object,
-    overlays: PropTypes.array,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    onMapReady: PropTypes.func,
-    onMapClick: PropTypes.func,
-    onMapDragEnd: PropTypes.func,
-    onZoomChanged: PropTypes.func,
-    onOverlayDragStart: PropTypes.func,
-    onOverlayDrag: PropTypes.func,
-    onOverlayDragEnd: PropTypes.func,
-    onOverlayClick: PropTypes.func
 }

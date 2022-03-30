@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { ObjectUtils, classNames, IconUtils } from '../utils/Utils';
 
 export const Avatar = forwardRef((props, ref) => {
@@ -49,19 +48,4 @@ Avatar.defaultProps = {
     imageAlt: 'avatar',
     onImageError: null,
     onClick: null
-}
-
-Avatar.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    label: PropTypes.string,
-    icon: PropTypes.any,
-    image: PropTypes.string,
-    size: PropTypes.string,
-    shape: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    template: PropTypes.any,
-    imageAlt: PropTypes.string,
-    onImageError: PropTypes.func,
-    onClick: PropTypes.func
 }

@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
 import { ObjectUtils, classNames, IconUtils } from '../utils/Utils';
@@ -99,18 +98,4 @@ Button.defaultProps = {
     disabled: false,
     loading: false,
     loadingIcon: 'pi pi-spinner pi-spin'
-}
-
-Button.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    label: PropTypes.string,
-    icon: PropTypes.any,
-    iconPos: PropTypes.string,
-    badge: PropTypes.string,
-    badgeClassName: PropTypes.string,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    disabled: PropTypes.bool,
-    loading: PropTypes.bool,
-    loadingIcon: PropTypes.any
 }

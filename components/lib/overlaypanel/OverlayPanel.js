@@ -1,5 +1,4 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
@@ -230,19 +229,4 @@ OverlayPanel.defaultProps = {
     transitionOptions: null,
     onShow: null,
     onHide: null
-}
-
-OverlayPanel.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    dismissable: PropTypes.bool,
-    showCloseIcon: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    breakpoints: PropTypes.object,
-    ariaCloseLabel: PropTypes.string,
-    transitionOptions: PropTypes.object,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

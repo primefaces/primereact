@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { tip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 import { useUnmountEffect } from '../hooks/Hooks';
@@ -111,20 +110,4 @@ TriStateCheckbox.defaultProps = {
     tooltipOptions: null,
     ariaLabelledBy: null,
     onChange: null
-}
-
-TriStateCheckbox.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    inputId: PropTypes.string,
-    value: PropTypes.bool,
-    name: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    onChange: PropTypes.func
 }

@@ -1,5 +1,4 @@
 import React, { forwardRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Button } from '../button/Button';
 import { classNames } from '../utils/Utils';
 
@@ -112,16 +111,8 @@ InplaceDisplay.defaultProps = {
     __TYPE: 'InplaceDisplay'
 }
 
-InplaceDisplay.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string
-}
-
 InplaceContent.defaultProps = {
     __TYPE: 'InplaceContent'
-}
-
-InplaceContent.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string
 }
 
 Inplace.defaultProps = {
@@ -136,18 +127,4 @@ Inplace.defaultProps = {
     onOpen: null,
     onClose: null,
     onToggle: null
-}
-
-Inplace.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    active: PropTypes.bool,
-    closable: PropTypes.bool,
-    disabled: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    ariaLabel: PropTypes.string,
-    onOpen: PropTypes.func,
-    onClose: PropTypes.func,
-    onToggle: PropTypes.func,
 }

@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useMemo, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { tip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
@@ -76,14 +75,4 @@ InputText.defaultProps = {
     tooltipOptions: null,
     onInput: null,
     onKeyPress: null
-}
-
-InputText.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    keyfilter: PropTypes.any,
-    validateOnly: PropTypes.bool,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    onInput: PropTypes.func,
-    onKeyPress: PropTypes.func
 }

@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
@@ -235,37 +234,4 @@ Galleria.defaultProps = {
     baseZIndex: 0,
     transitionOptions: null,
     onItemChange: null
-}
-
-Galleria.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.any,
-    activeIndex: PropTypes.number,
-    fullScreen: PropTypes.bool,
-    item: PropTypes.any,
-    thumbnail: PropTypes.any,
-    indicator: PropTypes.any,
-    caption: PropTypes.any,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    header: PropTypes.any,
-    footer: PropTypes.any,
-    numVisible: PropTypes.number,
-    responsiveOptions: PropTypes.array,
-    showItemNavigators: PropTypes.bool,
-    showThumbnailNavigators: PropTypes.bool,
-    showItemNavigatorsOnHover: PropTypes.bool,
-    changeItemOnIndicatorHover: PropTypes.bool,
-    circular: PropTypes.bool,
-    autoPlay: PropTypes.bool,
-    transitionInterval: PropTypes.number,
-    showThumbnails: PropTypes.bool,
-    thumbnailsPosition: PropTypes.string,
-    showIndicators: PropTypes.bool,
-    showIndicatorsOnItem: PropTypes.bool,
-    indicatorsPosition: PropTypes.string,
-    baseZIndex: PropTypes.number,
-    transitionOptions: PropTypes.object,
-    onItemChange: PropTypes.func
 }

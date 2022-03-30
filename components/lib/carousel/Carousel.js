@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, ObjectUtils, classNames, UniqueComponentId } from '../utils/Utils';
@@ -586,27 +585,4 @@ Carousel.defaultProps = {
     containerClassName: null,
     indicatorsContentClassName: null,
     onPageChange: null
-}
-
-Carousel.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.any,
-    page: PropTypes.number,
-    header: PropTypes.any,
-    footer: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    itemTemplate: PropTypes.any,
-    circular: PropTypes.bool,
-    autoplayInterval: PropTypes.number,
-    numVisible: PropTypes.number,
-    numScroll: PropTypes.number,
-    responsiveOptions: PropTypes.array,
-    orientation: PropTypes.string,
-    verticalViewPortHeight: PropTypes.string,
-    contentClassName: PropTypes.string,
-    containerClassName: PropTypes.string,
-    indicatorsContentClassName: PropTypes.string,
-    onPageChange: PropTypes.func
 }

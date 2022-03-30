@@ -1,5 +1,4 @@
 import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
 import { classNames } from '../utils/Utils';
 
 export const ProgressBar = memo(forwardRef((props, ref) => {
@@ -56,17 +55,4 @@ ProgressBar.defaultProps = {
     mode: 'determinate',
     displayValueTemplate: null,
     color: null
-}
-
-ProgressBar.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    showValue: PropTypes.bool,
-    unit: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    mode: PropTypes.string,
-    displayValueTemplate: PropTypes.func,
-    color: PropTypes.string
 }
