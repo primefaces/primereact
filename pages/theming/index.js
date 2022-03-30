@@ -155,7 +155,7 @@ export default function PanelDemo() {
                 <i>paneldemo.module.css</i>
 <CodeHighlight lang="css">
 {`
-.mypanel [class~="p-panel-header"] {
+.mypanel > [class~="p-panel-header"] {
     background-color: #07c4e8;
     color: #ffffff;
 }
