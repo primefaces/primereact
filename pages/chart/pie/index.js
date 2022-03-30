@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useState } from 'react';
 import { TabView } from '../../../components/lib/tabview/TabView';
 import { Chart } from '../../../components/lib/chart/Chart';
 import { useLiveEditorTabs } from '../../../components/doc/common/liveeditor';
@@ -10,7 +10,7 @@ const PieChartDemo = () => {
 
     const context = useContext(AppContentContext);
 
-    const chartData = {
+    const [chartData] = useState({
         labels: ['A', 'B', 'C'],
         datasets: [
             {
@@ -27,9 +27,9 @@ const PieChartDemo = () => {
                 ]
             }
         ]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -37,9 +37,9 @@ const PieChartDemo = () => {
                 }
             }
         }
-    };
+    });
 
-    const darkOptions = {
+    const [darkOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -47,7 +47,7 @@ const PieChartDemo = () => {
                 }
             }
         }
-    };
+    });
 
     const options = context.darkTheme ? darkOptions : lightOptions;
 
@@ -135,11 +135,11 @@ export class PieChartDemo extends Component {
         'hooks': {
             tabName: 'Hooks Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const PieChartDemo = () => {
-    const chartData = {
+    const [chartData] = useState({
         labels: ['A', 'B', 'C'],
         datasets: [
             {
@@ -156,9 +156,9 @@ const PieChartDemo = () => {
                 ]
             }
         ]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -166,7 +166,7 @@ const PieChartDemo = () => {
                 }
             }
         }
-    };
+    });
 
     return (
         <div className="card flex justify-content-center">
@@ -179,11 +179,11 @@ const PieChartDemo = () => {
         'ts': {
             tabName: 'TS Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const PieChartDemo = () => {
-    const chartData = {
+    const [chartData] = useState({
         labels: ['A', 'B', 'C'],
         datasets: [
             {
@@ -200,9 +200,9 @@ const PieChartDemo = () => {
                 ]
             }
         ]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -210,7 +210,7 @@ const PieChartDemo = () => {
                 }
             }
         }
-    };
+    });
 
     return (
         <div className="card flex justify-content-center">
