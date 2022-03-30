@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Ripple } from '../ripple/Ripple';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -8,6 +8,7 @@ import { useMountEffect } from '../hooks/Hooks';
 export const Panel = forwardRef((props, ref) => {
     const [idState, setIdState] = useState(props.id);
     const [collapsedState, setCollapsedState] = useState(props.collapsed);
+    const elementRef = useRef(ref);
     const contentRef = useRef(null);
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
     const headerId = idState + '_header';
@@ -43,6 +44,10 @@ export const Panel = forwardRef((props, ref) => {
 
         props.onCollapse && props.onCollapse(event);
     }
+
+    useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     useMountEffect(() => {
         if (!idState) {
@@ -128,7 +133,7 @@ export const Panel = forwardRef((props, ref) => {
     const content = createContent();
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} ref={elementRef} className={className} style={props.style}>
             {header}
             {content}
         </div>

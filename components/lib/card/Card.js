@@ -1,8 +1,10 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
 export const Card = forwardRef((props, ref) => {
+
+    const elementRef = useRef(ref);
 
     const createHeader = () => {
         if (props.header) {
@@ -32,8 +34,12 @@ export const Card = forwardRef((props, ref) => {
     const header = createHeader();
     const body = createBody();
 
+    useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
+
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} ref={elementRef} className={className} style={props.style}>
             {header}
             {body}
         </div>
