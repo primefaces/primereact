@@ -600,7 +600,7 @@ export const TableBody = memo((props) => {
         if (rowDragging.current && draggedRowIndex.current !== index) {
             const rowElement = event.currentTarget;
             const rowY = DomHandler.getOffset(rowElement).top + DomHandler.getWindowScrollTop();
-            const pageY = event.pageY;
+            const pageY = event.pageY + window.scrollY;
             const rowMidY = rowY + DomHandler.getOuterHeight(rowElement) / 2;
             const prevRowElement = rowElement.previousElementSibling;
 
