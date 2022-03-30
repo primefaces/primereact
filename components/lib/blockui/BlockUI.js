@@ -1,5 +1,4 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
@@ -109,18 +108,4 @@ BlockUI.defaultProps = {
     template: null,
     onBlocked: null,
     onUnblocked: null
-}
-
-BlockUI.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    blocked: PropTypes.bool,
-    fullScreen: PropTypes.bool,
-    baseZIndex: PropTypes.number,
-    autoZIndex: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    template: PropTypes.any,
-    onBlocked: PropTypes.func,
-    onUnblocked: PropTypes.func
 }

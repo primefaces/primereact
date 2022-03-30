@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { classNames } from '../utils/Utils';
 import { useUnmountEffect } from '../hooks/Hooks';
 
@@ -65,17 +64,4 @@ Chart.defaultProps = {
     height: null,
     style: null,
     className: null
-}
-
-Chart.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    type: PropTypes.string,
-    data: PropTypes.object,
-    options: PropTypes.object,
-    plugins: PropTypes.array,
-    width: PropTypes.string,
-    height: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string
 }

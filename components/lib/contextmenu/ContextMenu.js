@@ -1,5 +1,4 @@
 import React, { useRef, forwardRef, useState, useImperativeHandle, memo } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { ContextMenuSub } from './ContextMenuSub';
 import { Portal } from '../portal/Portal';
@@ -200,19 +199,4 @@ ContextMenu.defaultProps = {
     transitionOptions: null,
     onShow: null,
     onHide: null
-}
-
-ContextMenu.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    global: PropTypes.bool,
-    autoZIndex: PropTypes.bool,
-    baseZIndex: PropTypes.number,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    transitionOptions: PropTypes.object,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

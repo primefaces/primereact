@@ -1,6 +1,5 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { Portal } from '../portal/Portal';
 import { DomHandler, classNames, ZIndexUtils } from '../utils/Utils';
@@ -157,7 +156,7 @@ export const Tooltip = forwardRef((props, ref) => {
                 if (isAutoHide()) {
                     elementRef.current.style.pointerEvents = 'none';
                 }
-     
+
                 if (isMouseTrack(currentTargetRef.current) && !containerSize.current) {
                     containerSize.current = {
                         width: DomHandler.getOuterWidth(elementRef.current),
@@ -189,13 +188,13 @@ export const Tooltip = forwardRef((props, ref) => {
 
         if (visibleState) {
             DomHandler.removeClass(currentTargetRef.current, getTargetOption(currentTargetRef.current, 'classname'));
- 
+
             sendCallback(props.onBeforeHide, { originalEvent: e, target: currentTargetRef.current });
             applyDelay('hideDelay', () => {
                 if (!isAutoHide() && allowHide.current === false) {
                     return;
                 }
-              
+
                 ZIndexUtils.clear(elementRef.current);
                 DomHandler.removeClass(elementRef.current, 'p-tooltip-active');
 
@@ -504,35 +503,4 @@ Tooltip.defaultProps = {
     onBeforeHide: null,
     onShow: null,
     onHide: null
-}
-
-Tooltip.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    target: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.array]),
-    content: PropTypes.string,
-    disabled: PropTypes.bool,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    position: PropTypes.string,
-    my: PropTypes.string,
-    at: PropTypes.string,
-    event: PropTypes.string,
-    showEvent: PropTypes.string,
-    hideEvent: PropTypes.string,
-    autoZIndex: PropTypes.bool,
-    baseZIndex: PropTypes.number,
-    mouseTrack: PropTypes.bool,
-    mouseTrackTop: PropTypes.number,
-    mouseTrackLeft: PropTypes.number,
-    showDelay: PropTypes.number,
-    updateDelay: PropTypes.number,
-    hideDelay: PropTypes.number,
-    autoHide: PropTypes.bool,
-    showOnDisabled: PropTypes.bool,
-    onBeforeShow: PropTypes.func,
-    onBeforeHide: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

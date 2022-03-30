@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { tip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { useUpdateEffect, useUnmountEffect } from '../hooks/Hooks';
@@ -133,29 +132,4 @@ Checkbox.defaultProps = {
     onChange: null,
     onMouseDown: null,
     onContextMenu: null
-}
-
-Checkbox.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    inputId: PropTypes.string,
-    value: PropTypes.any,
-    name: PropTypes.string,
-    checked: PropTypes.any,
-    trueValue: PropTypes.any,
-    falseValue: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-    required: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    icon: PropTypes.any,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    onChange: PropTypes.func,
-    onMouseDown: PropTypes.func,
-    onContextMenu: PropTypes.func
 }

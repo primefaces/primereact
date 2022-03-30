@@ -1,5 +1,4 @@
 import React, { createRef, forwardRef, memo, useState } from 'react';
-import PropTypes from 'prop-types';
 import { PanelMenuSub } from './PanelMenuSub';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { ObjectUtils, classNames, UniqueComponentId } from '../utils/Utils';
@@ -155,14 +154,4 @@ PanelMenu.defaultProps = {
     className: null,
     multiple: false,
     transitionOptions: null
-}
-
-PanelMenu.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    multiple: PropTypes.bool,
-    transitionOptions: PropTypes.object
 }

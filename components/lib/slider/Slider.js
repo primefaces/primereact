@@ -1,5 +1,4 @@
-import React, { forwardRef, memo, useRef } from 'react'
-import PropTypes from 'prop-types';
+import React, { forwardRef, memo, useRef } from 'react';
 import { DomHandler, classNames } from '../utils/Utils';
 import { useEventListener } from '../hooks/Hooks';
 
@@ -273,22 +272,4 @@ Slider.defaultProps = {
     ariaLabelledBy: null,
     onChange: null,
     onSlideEnd: null
-}
-
-Slider.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.any,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    orientation: PropTypes.string,
-    step: PropTypes.number,
-    range: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    ariaLabelledBy: PropTypes.string,
-    onChange: PropTypes.func,
-    onSlideEnd: PropTypes.func
 }

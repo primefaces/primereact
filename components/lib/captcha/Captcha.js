@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useImperativeHandle, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 
 export const Captcha = memo(forwardRef((props, ref) => {
@@ -93,17 +92,4 @@ Captcha.defaultProps = {
     language: 'en',
     onResponse: null,
     onExpire: null
-}
-
-Captcha.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    sitekey: PropTypes.string,
-    theme: PropTypes.string,
-    type: PropTypes.string,
-    size: PropTypes.string,
-    tabIndex: PropTypes.number,
-    language: PropTypes.string,
-    onResponse: PropTypes.func,
-    onExpire: PropTypes.func
 }

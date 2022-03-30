@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useState } from 'react';
 import { TabView } from '../../../components/lib/tabview/TabView';
 import { Chart } from '../../../components/lib/chart/Chart';
 import { useLiveEditorTabs } from '../../../components/doc/common/liveeditor';
@@ -10,7 +10,7 @@ const RadarChartDemo = memo(() => {
 
     const context = useContext(AppContentContext);
 
-    const chartData = {
+    const [chartData] = useState({
         labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
         datasets: [
             {
@@ -34,9 +34,9 @@ const RadarChartDemo = memo(() => {
                 data: [28, 48, 40, 19, 96, 27, 100]
             }
         ]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -57,9 +57,9 @@ const RadarChartDemo = memo(() => {
                 }
             }
         }
-    };
+    });
 
-    const darkOptions = {
+    const [darkOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -80,7 +80,7 @@ const RadarChartDemo = memo(() => {
                 }
             }
         }
-    };
+    });
 
     const options = context.darkTheme ? darkOptions : lightOptions;
 
@@ -190,11 +190,11 @@ export class RadarChartDemo extends Component {
         'hooks': {
             tabName: 'Hooks Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const RadarChartDemo = () => {
-    const chartData = {
+    const [chartData] = useState({
         labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
         datasets: [
             {
@@ -218,9 +218,9 @@ const RadarChartDemo = () => {
                 data: [28, 48, 40, 19, 96, 27, 100]
             }
         ]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -241,7 +241,7 @@ const RadarChartDemo = () => {
                 }
             }
         }
-    };
+    });
 
     return (
         <div className="card flex justify-content-center">
@@ -254,11 +254,11 @@ const RadarChartDemo = () => {
         'ts': {
             tabName: 'TS Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const RadarChartDemo = () => {
-    const chartData = {
+    const [chartData] = useState({
         labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
         datasets: [
             {
@@ -282,9 +282,9 @@ const RadarChartDemo = () => {
                 data: [28, 48, 40, 19, 96, 27, 100]
             }
         ]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -305,7 +305,7 @@ const RadarChartDemo = () => {
                 }
             }
         }
-    };
+    });
 
     return (
         <div className="card flex justify-content-center">

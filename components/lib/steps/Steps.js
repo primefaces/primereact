@@ -1,5 +1,4 @@
 import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
 export const Steps = memo(forwardRef((props, ref) => {
@@ -106,15 +105,4 @@ Steps.defaultProps = {
     style: null,
     className: null,
     onSelect: null
-}
-
-Steps.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array.isRequired,
-    activeIndex: PropTypes.number,
-    readOnly: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    onSelect: PropTypes.func
 }

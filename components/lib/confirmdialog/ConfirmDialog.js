@@ -1,6 +1,5 @@
 import React, { forwardRef, memo, useState } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import { localeOption } from '../api/Api';
 import { Dialog } from '../dialog/Dialog';
 import { Button } from '../button/Button';
@@ -140,24 +139,4 @@ ConfirmDialog.defaultProps = {
     onHide: null,
     accept: null,
     reject: null
-}
-
-ConfirmDialog.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    visible: PropTypes.bool,
-    message: PropTypes.any,
-    rejectLabel: PropTypes.string,
-    acceptLabel: PropTypes.string,
-    icon: PropTypes.any,
-    rejectIcon: PropTypes.any,
-    acceptIcon: PropTypes.any,
-    rejectClassName: PropTypes.string,
-    acceptClassName: PropTypes.string,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    className: PropTypes.string,
-    footer: PropTypes.any,
-    breakpoints: PropTypes.object,
-    onHide: PropTypes.func,
-    accept: PropTypes.func,
-    reject: PropTypes.func
 }

@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { tip } from '../tooltip/Tooltip';
 import { ObjectUtils, classNames } from '../utils/Utils';
 import { useUnmountEffect } from '../hooks/Hooks';
@@ -119,24 +118,4 @@ InputSwitch.defaultProps = {
     onChange: null,
     onFocus: null,
     onBlur: null
-}
-
-InputSwitch.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    inputId: PropTypes.string,
-    name: PropTypes.string,
-    checked: PropTypes.any,
-    trueValue: PropTypes.any,
-    falseValue: PropTypes.any,
-    disabled: PropTypes.bool,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func
 }

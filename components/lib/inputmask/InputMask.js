@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useCallback, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { InputText } from '../inputtext/InputText';
 import { tip } from '../tooltip/Tooltip';
 import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
@@ -585,33 +584,4 @@ InputMask.defaultProps = {
     onChange: null,
     onFocus: null,
     onBlur: null
-}
-
-InputMask.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    value: PropTypes.string,
-    type: PropTypes.string,
-    mask: PropTypes.string,
-    slotChar: PropTypes.string,
-    autoClear: PropTypes.bool,
-    unmask: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    placeholder: PropTypes.string,
-    size: PropTypes.number,
-    maxLength: PropTypes.number,
-    tabIndex: PropTypes.number,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    name: PropTypes.string,
-    required: PropTypes.bool,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    onComplete: PropTypes.func,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func
 }

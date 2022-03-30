@@ -78,7 +78,7 @@ const DataTableScrollDemo = () => {
     }
 
     const lockTemplate = (rowData, options) => {
-        const icon = options.frozenRow ? 'pi pi-lock-open' : 'pi pi-lock';
+        const icon = options.frozenRow ? 'pi pi-lock' : 'pi pi-lock-open';
         const disabled = options.frozenRow ? false : lockedCustomers.length >= 2;
 
         return <Button type="button" icon={icon} disabled={disabled} className="p-button-sm p-button-text" onClick={() => toggleLock(rowData, options.frozenRow, options.rowIndex)} />
@@ -326,7 +326,7 @@ export class DataTableScrollDemo extends Component {
     }
 
     lockTemplate(rowData, options) {
-        const icon = options.frozenRow ? 'pi pi-lock-open' : 'pi pi-lock';
+        const icon = options.frozenRow ? 'pi pi-lock' : 'pi pi-lock-open';
         const disabled = options.frozenRow ? false : this.state.lockedCustomers.length >= 2;
 
         return <Button type="button" icon={icon} disabled={disabled} className="p-button-sm p-button-text" onClick={() => this.toggleLock(rowData, options.frozenRow, options.rowIndex)} />
@@ -595,7 +595,7 @@ const DataTableScrollDemo = () => {
     }
 
     const lockTemplate = (rowData, options) => {
-        const icon = options.frozenRow ? 'pi pi-lock-open' : 'pi pi-lock';
+        const icon = options.frozenRow ? 'pi pi-lock' : 'pi pi-lock-open';
         const disabled = options.frozenRow ? false : lockedCustomers.length >= 2;
 
         return <Button type="button" icon={icon} disabled={disabled} className="p-button-sm p-button-text" onClick={() => toggleLock(rowData, options.frozenRow, options.rowIndex)} />
@@ -833,7 +833,7 @@ const DataTableScrollDemo = () => {
     }
 
     const lockTemplate = (rowData, options) => {
-        const icon = options.frozenRow ? 'pi pi-lock-open' : 'pi pi-lock';
+        const icon = options.frozenRow ? 'pi pi-lock' : 'pi pi-lock-open';
         const disabled = options.frozenRow ? false : lockedCustomers.length >= 2;
 
         return <Button type="button" icon={icon} disabled={disabled} className="p-button-sm p-button-text" onClick={() => toggleLock(rowData, options.frozenRow, options.rowIndex)} />
@@ -1081,7 +1081,7 @@ const DataTableScrollDemo = () => {
     }
 
     const lockTemplate = (rowData, options) => {
-        const icon = options.frozenRow ? 'pi pi-lock-open' : 'pi pi-lock';
+        const icon = options.frozenRow ? 'pi pi-lock' : 'pi pi-lock-open';
         const disabled = options.frozenRow ? false : lockedCustomers.length >= 2;
 
         return <Button type="button" icon={icon} disabled={disabled} className="p-button-sm p-button-text" onClick={() => toggleLock(rowData, options.frozenRow, options.rowIndex)} />

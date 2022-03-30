@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useMemo, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { tip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { useUnmountEffect } from '../hooks/Hooks';
@@ -122,12 +121,4 @@ InputTextarea.defaultProps = {
     tooltip: null,
     tooltipOptions: null,
     onInput: null
-}
-
-InputTextarea.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    autoResize: PropTypes.bool,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    onInput: PropTypes.func
 }

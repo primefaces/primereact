@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -176,19 +175,4 @@ Image.defaultProps = {
     alt: null,
     width: null,
     height: null
-}
-
-Image.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    preview: PropTypes.bool,
-    className: PropTypes.string,
-    downloadable: PropTypes.bool,
-    style: PropTypes.object,
-    imageClassName: PropTypes.string,
-    imageStyle: PropTypes.object,
-    template: PropTypes.any,
-    src: PropTypes.string,
-    alt: PropTypes.string,
-    width: PropTypes.string,
-    height: PropTypes.string
 }

@@ -140,7 +140,7 @@ import "primeicons/primeicons.css";                                //icons
 
             <h5>Free Themes</h5>
             <p>PrimeReact ships with various free themes to choose from.</p>
-<div style={{overflow: 'auto', height: '400px'}}>
+<div className="h-20rem overflow-auto">
 
 <CodeHighlight lang="js">
 {`
@@ -331,7 +331,7 @@ PrimeReact.cssTransition = false; // Default value is true.
                                 <th>
                                     <div className="flex align-items-center">
                                         <img src={`${contextPath}/images/browsers/edge.svg`} alt="edge" style={{width: '1.5rem'}} className="mr-2" />
-                                        IE / Edge
+                                        Edge
                                     </div>
                                 </th>
                                 <th>
@@ -362,7 +362,7 @@ PrimeReact.cssTransition = false; // Default value is true.
                         </thead>
                         <tbody>
                             <tr>
-                                <td>IE11, Edge</td>
+                                <td>Last 2 versions</td>
                                 <td>Last 2 versions</td>
                                 <td>Last 2 versions</td>
                                 <td>Last 2 versions</td>

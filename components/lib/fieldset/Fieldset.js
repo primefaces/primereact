@@ -1,5 +1,4 @@
 import React, { forwardRef, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Ripple } from '../ripple/Ripple';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { classNames, UniqueComponentId } from '../utils/Utils';
@@ -130,19 +129,4 @@ Fieldset.defaultProps = {
     onCollapse: null,
     onToggle: null,
     onClick: null
-};
-
-Fieldset.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    legend: PropTypes.any,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    toggleable: PropTypes.bool,
-    collapsed: PropTypes.bool,
-    transitionOptions: PropTypes.object,
-    onExpand: PropTypes.func,
-    onCollapse: PropTypes.func,
-    onToggle: PropTypes.func,
-    onClick: PropTypes.func
-};
+}
