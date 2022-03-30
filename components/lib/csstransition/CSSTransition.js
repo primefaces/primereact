@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import { CSSTransition as ReactCSSTransition } from 'react-transition-group';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { ObjectUtils } from '../utils/Utils';
 import { useUpdateEffect } from '../hooks/Hooks';
@@ -73,8 +72,4 @@ export const CSSTransition = forwardRef((props, ref) => {
 
 CSSTransition.defaultProps = {
     __TYPE: 'CSSTransition'
-}
-
-CSSTransition.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string
 }

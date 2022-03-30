@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { FirstPageLink } from './FirstPageLink';
 import { NextPageLink } from './NextPageLink';
 import { PrevPageLink } from './PrevPageLink';
@@ -216,22 +215,4 @@ Paginator.defaultProps = {
     rightContent: null,
     dropdownAppendTo: null,
     currentPageReportTemplate: '({currentPage} of {totalPages})'
-}
-
-Paginator.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    totalRecords: PropTypes.number,
-    rows: PropTypes.number,
-    first: PropTypes.number,
-    pageLinkSize: PropTypes.number,
-    rowsPerPageOptions: PropTypes.array,
-    alwaysShow: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    template: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    onPageChange: PropTypes.func,
-    leftContent: PropTypes.any,
-    rightContent: PropTypes.any,
-    dropdownAppendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    currentPageReportTemplate: PropTypes.any
 }

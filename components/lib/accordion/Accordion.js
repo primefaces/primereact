@@ -1,5 +1,4 @@
 import React, { createRef, forwardRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { classNames, ObjectUtils, IconUtils, UniqueComponentId } from '../utils/Utils';
 import { useMountEffect } from '../hooks/Hooks';
@@ -141,19 +140,6 @@ AccordionTab.defaultProps = {
     contentClassName: null
 }
 
-AccordionTab.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    header: PropTypes.any,
-    disabled: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    headerStyle: PropTypes.object,
-    headerClassName: PropTypes.string,
-    headerTemplate: PropTypes.any,
-    contentStyle: PropTypes.object,
-    contentClassName: PropTypes.string
-}
-
 Accordion.defaultProps = {
     __TYPE: 'Accordion',
     id: null,
@@ -167,19 +153,4 @@ Accordion.defaultProps = {
     onTabOpen: null,
     onTabClose: null,
     onTabChange: null
-}
-
-Accordion.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    activeIndex: PropTypes.any,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    multiple: PropTypes.bool,
-    expandIcon: PropTypes.any,
-    collapseIcon: PropTypes.any,
-    transitionOptions: PropTypes.object,
-    onTabOpen: PropTypes.func,
-    onTabClose: PropTypes.func,
-    onTabChange: PropTypes.func
 }

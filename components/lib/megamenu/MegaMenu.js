@@ -1,5 +1,4 @@
 import React, { useState, useRef, memo, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, ObjectUtils, classNames, ZIndexUtils } from '../utils/Utils';
@@ -377,13 +376,4 @@ MegaMenu.defaultProps = {
     style: null,
     className: null,
     orientation: 'horizontal'
-}
-
-MegaMenu.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    orientation: PropTypes.string
 }

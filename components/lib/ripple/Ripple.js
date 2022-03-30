@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useRef } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { DomHandler } from '../utils/Utils';
 import { useUpdateEffect, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
@@ -75,8 +74,4 @@ export const Ripple = memo(forwardRef(() => {
 
 Ripple.defaultProps = {
     __TYPE: 'Ripple'
-}
-
-Ripple.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string
 }

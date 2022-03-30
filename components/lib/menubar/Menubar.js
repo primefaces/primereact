@@ -1,5 +1,4 @@
 import React, { useRef, forwardRef, useState, useImperativeHandle, memo } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { MenubarSub } from './MenubarSub';
 import { ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
@@ -131,14 +130,4 @@ Menubar.defaultProps = {
     className: null,
     start: null,
     end: null
-}
-
-Menubar.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    start: PropTypes.any,
-    end: PropTypes.any
 }

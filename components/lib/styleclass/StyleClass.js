@@ -1,5 +1,4 @@
 import { forwardRef, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 
@@ -185,18 +184,4 @@ StyleClass.defaultProps = {
     leaveToClassName: null,
     hideOnOutsideClick: false,
     toggleClassName: null
-}
-
-StyleClass.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    nodeRef: PropTypes.any,
-    selector: PropTypes.string,
-    enterClassName: PropTypes.string,
-    enterActiveClassName: PropTypes.string,
-    enterToClassName: PropTypes.string,
-    leaveClassName: PropTypes.string,
-    leaveActiveClassName: PropTypes.string,
-    leaveToClassName: PropTypes.string,
-    hideOnOutsideClick: PropTypes.bool,
-    toggleClassName: PropTypes.string
 }

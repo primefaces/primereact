@@ -1,5 +1,4 @@
 import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
 import { classNames } from '../utils/Utils';
 
 export const Badge = memo(forwardRef((props, ref) => {
@@ -25,13 +24,4 @@ Badge.defaultProps = {
     size: null,
     style: null,
     className: null
-}
-
-Badge.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    value: PropTypes.any,
-    severity: PropTypes.string,
-    size: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string
 }

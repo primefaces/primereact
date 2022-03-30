@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { ColorPickerPanel } from './ColorPickerPanel';
 import { tip } from '../tooltip/Tooltip';
@@ -567,26 +566,4 @@ ColorPicker.defaultProps = {
     onChange: null,
     onShow: null,
     onHide: null
-}
-
-ColorPicker.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    value: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    defaultColor: PropTypes.string,
-    inline: PropTypes.bool,
-    format: PropTypes.string,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    disabled: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    inputId: PropTypes.string,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    transitionOptions: PropTypes.object,
-    onChange: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

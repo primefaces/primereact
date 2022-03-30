@@ -1,5 +1,4 @@
 import React, { forwardRef, useEffect, useState, useImperativeHandle, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, ObjectUtils, classNames, UniqueComponentId } from '../utils/Utils';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -310,22 +309,6 @@ TabPanel.defaultProps = {
     contentClassName: null
 }
 
-TabPanel.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    header: PropTypes.any,
-    headerTemplate: PropTypes.any,
-    leftIcon: PropTypes.string,
-    rightIcon: PropTypes.string,
-    closeable: PropTypes.bool,
-    disabled: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    headerStyle: PropTypes.object,
-    headerClassName: PropTypes.string,
-    contentStyle: PropTypes.object,
-    contentClassName: PropTypes.string
-}
-
 TabView.defaultProps = {
     __TYPE: 'TabView',
     id: null,
@@ -338,18 +321,4 @@ TabView.defaultProps = {
     scrollable: false,
     panelContainerStyle: null,
     panelContainerClassName: null
-}
-
-TabView.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    activeIndex: PropTypes.number,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    renderActiveOnly: PropTypes.bool,
-    onTabChange: PropTypes.func,
-    onTabClose: PropTypes.func,
-    scrollable: PropTypes.bool,
-    panelContainerStyle: PropTypes.object,
-    panelContainerClassName: PropTypes.string
 }

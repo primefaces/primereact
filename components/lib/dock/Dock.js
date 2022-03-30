@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useState } from 'react';
-import PropTypes from 'prop-types';
 import { classNames, ObjectUtils } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
 
@@ -130,16 +129,4 @@ Dock.defaultProps = {
     magnification: true,
     header: null,
     footer: null
-}
-
-Dock.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    model: PropTypes.array,
-    position: PropTypes.string,
-    magnification: PropTypes.bool,
-    header: PropTypes.any,
-    footer: PropTypes.any
 }

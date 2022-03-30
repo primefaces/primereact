@@ -1,5 +1,4 @@
 import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
 export const Message = memo(forwardRef((props, ref) => {
@@ -50,13 +49,3 @@ Message.defaultProps = {
     severity: 'info',
     content: null
 }
-
-Message.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    text: PropTypes.any,
-    severity: PropTypes.string,
-    content: PropTypes.any
-};

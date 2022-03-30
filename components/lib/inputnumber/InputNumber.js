@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { tip } from '../tooltip/Tooltip';
 import { Ripple } from '../ripple/Ripple';
 import { InputText } from '../inputtext/InputText';
@@ -1084,56 +1083,4 @@ InputNumber.defaultProps = {
     onBlur: null,
     onFocus: null,
     onKeyDown: null
-}
-
-InputNumber.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    value: PropTypes.number,
-    inputRef: PropTypes.any,
-    format: PropTypes.bool,
-    showButtons: PropTypes.bool,
-    buttonLayout: PropTypes.string,
-    incrementButtonClassName: PropTypes.string,
-    decrementButtonClassName: PropTypes.string,
-    incrementButtonIcon: PropTypes.string,
-    decrementButtonIcon: PropTypes.string,
-    locale: PropTypes.string,
-    localeMatcher: PropTypes.string,
-    mode: PropTypes.string,
-    suffix: PropTypes.string,
-    prefix: PropTypes.string,
-    currency: PropTypes.string,
-    currencyDisplay: PropTypes.string,
-    useGrouping: PropTypes.bool,
-    minFractionDigits: PropTypes.number,
-    maxFractionDigits: PropTypes.number,
-    id: PropTypes.string,
-    name: PropTypes.string,
-    type: PropTypes.string,
-    allowEmpty: PropTypes.bool,
-    step: PropTypes.number,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    disabled: PropTypes.bool,
-    required: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    pattern: PropTypes.string,
-    inputMode: PropTypes.string,
-    placeholder: PropTypes.string,
-    readOnly: PropTypes.bool,
-    size: PropTypes.number,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    inputId: PropTypes.string,
-    autoFocus: PropTypes.bool,
-    inputStyle: PropTypes.object,
-    inputClassName: PropTypes.string,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    onValueChange: PropTypes.func,
-    onChange: PropTypes.func,
-    onBlur: PropTypes.func,
-    onFocus: PropTypes.func,
-    onKeyDown: PropTypes.func
 }

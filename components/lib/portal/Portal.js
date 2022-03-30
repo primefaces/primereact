@@ -1,5 +1,4 @@
 import { memo, useState } from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import PrimeReact from '../api/Api';
 import { DomHandler } from '../utils/Utils';
@@ -39,13 +38,4 @@ Portal.defaultProps = {
     visible: false,
     onMounted: null,
     onUnmounted: null
-}
-
-Portal.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    element: PropTypes.any,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    visible: PropTypes.bool,
-    onMounted: PropTypes.func,
-    onUnmounted: PropTypes.func
 }
