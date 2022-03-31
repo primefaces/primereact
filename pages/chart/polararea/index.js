@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useState } from 'react';
 import { TabView } from '../../../components/lib/tabview/TabView';
 import { Chart } from '../../../components/lib/chart/Chart';
 import { useLiveEditorTabs } from '../../../components/doc/common/liveeditor';
@@ -10,7 +10,7 @@ const PolarAreaChartDemo = memo(() => {
 
     const context = useContext(AppContentContext);
 
-    const chartData = {
+    const [chartData] = useState({
         datasets: [{
             data: [
                 11,
@@ -35,9 +35,9 @@ const PolarAreaChartDemo = memo(() => {
             "Grey",
             "Blue"
         ]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -52,9 +52,9 @@ const PolarAreaChartDemo = memo(() => {
                 }
             }
         }
-    };
+    });
 
-    const darkOptions = {
+    const [darkOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -69,7 +69,7 @@ const PolarAreaChartDemo = memo(() => {
                 }
             }
         }
-    };
+    });
 
     const options = context.darkTheme ? darkOptions : lightOptions;
 
@@ -172,11 +172,11 @@ export class PolarAreaChartDemo extends Component {
         'hooks': {
             tabName: 'Hooks Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const PolarAreaChartDemo = () => {
-    const chartData = {
+    const [chartData] = useState({
         datasets: [{
             data: [
                 11,
@@ -201,9 +201,9 @@ const PolarAreaChartDemo = () => {
             "Grey",
             "Blue"
         ]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -218,7 +218,7 @@ const PolarAreaChartDemo = () => {
                 }
             }
         }
-    };
+    });
 
     return (
         <div className="card flex justify-content-center">
@@ -231,11 +231,11 @@ const PolarAreaChartDemo = () => {
         'ts': {
             tabName: 'TS Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const PolarAreaChartDemo = () => {
-    const chartData = {
+    const [chartData] = {
         datasets: [{
             data: [
                 11,
@@ -262,7 +262,7 @@ const PolarAreaChartDemo = () => {
         ]
     };
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -277,7 +277,7 @@ const PolarAreaChartDemo = () => {
                 }
             }
         }
-    };
+    });
 
     return (
         <div className="card flex justify-content-center">

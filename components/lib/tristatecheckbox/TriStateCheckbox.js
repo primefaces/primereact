@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { tip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 import { useUnmountEffect } from '../hooks/Hooks';
@@ -85,7 +84,7 @@ export const TriStateCheckbox = memo(forwardRef((props, ref) => {
     });
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+        <div {...ObjectUtils.findDiffKeys(this.props, TriStateCheckbox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
             <div className="p-hidden-accessible">
                 <input ref={inputRef} type="checkbox" aria-labelledby={props.ariaLabelledBy} id={props.inputId} name={props.name}
                     onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} defaultChecked={props.value} />
@@ -111,20 +110,4 @@ TriStateCheckbox.defaultProps = {
     tooltipOptions: null,
     ariaLabelledBy: null,
     onChange: null
-}
-
-TriStateCheckbox.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    inputId: PropTypes.string,
-    value: PropTypes.bool,
-    name: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    onChange: PropTypes.func
 }

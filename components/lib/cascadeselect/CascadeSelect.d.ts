@@ -12,7 +12,7 @@ interface CascadeSelectChangeParams {
 
 interface CascadeSelectGroupChangeParams extends CascadeSelectChangeParams { }
 
-export interface CascadeSelectProps {
+export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     style?: object;

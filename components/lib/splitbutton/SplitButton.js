@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
@@ -159,29 +158,4 @@ SplitButton.defaultProps = {
     onClick: null,
     onShow: null,
     onHide: null
-}
-
-SplitButton.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    label: PropTypes.string,
-    icon: PropTypes.any,
-    model: PropTypes.array,
-    disabled: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    buttonClassName: PropTypes.string,
-    menuStyle: PropTypes.object,
-    menuClassName: PropTypes.string,
-    menuButtonClassName: PropTypes.string,
-    tabIndex: PropTypes.number,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    buttonTemplate: PropTypes.any,
-    transitionOptions: PropTypes.object,
-    dropdownIcon: PropTypes.any,
-    onClick: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

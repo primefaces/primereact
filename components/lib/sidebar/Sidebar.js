@@ -1,5 +1,4 @@
 import React, { useState, useRef, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
@@ -197,28 +196,4 @@ Sidebar.defaultProps = {
     transitionOptions: null,
     onShow: null,
     onHide: null
-}
-
-Sidebar.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    maskStyle: PropTypes.object,
-    maskClassName: PropTypes.string,
-    visible: PropTypes.bool,
-    position: PropTypes.string,
-    fullScreen: PropTypes.bool,
-    blockScroll: PropTypes.bool,
-    baseZIndex: PropTypes.number,
-    dismissable: PropTypes.bool,
-    showCloseIcon: PropTypes.bool,
-    ariaCloseLabel: PropTypes.string,
-    closeOnEscape: PropTypes.bool,
-    icons: PropTypes.any,
-    modal: PropTypes.bool,
-    appendTo: PropTypes.any,
-    transitionOptions: PropTypes.object,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func.isRequired
 }

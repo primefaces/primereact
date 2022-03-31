@@ -1,6 +1,5 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import PrimeReact, { localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { Portal } from '../portal/Portal';
@@ -248,28 +247,4 @@ ConfirmPopup.defaultProps = {
     accept: null,
     reject: null,
     transitionOptions: null
-}
-
-ConfirmPopup.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    target: PropTypes.any,
-    visible: PropTypes.bool,
-    message: PropTypes.any,
-    rejectLabel: PropTypes.string,
-    acceptLabel: PropTypes.string,
-    icon: PropTypes.any,
-    rejectIcon: PropTypes.any,
-    acceptIcon: PropTypes.any,
-    rejectClassName: PropTypes.string,
-    acceptClassName: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    dismissable: PropTypes.bool,
-    footer: PropTypes.any,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func,
-    accept: PropTypes.func,
-    reject: PropTypes.func,
-    transitionOptions: PropTypes.object
 }

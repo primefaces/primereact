@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { ObjectUtils, classNames } from '../utils/Utils';
 import { useMountEffect, useUpdateEffect, usePrevious } from '../hooks/Hooks';
 
@@ -617,31 +616,4 @@ VirtualScroller.defaultProps = {
     onScroll: null,
     onScrollIndexChange: null,
     onLazyLoad: null
-}
-
-VirtualScroller.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    items: PropTypes.any,
-    itemSize: PropTypes.oneOfType([PropTypes.number, PropTypes.array]).isRequired,
-    scrollHeight: PropTypes.string,
-    scrollWidth: PropTypes.string,
-    orientation: PropTypes.string,
-    numToleratedItems: PropTypes.number,
-    delay: PropTypes.number,
-    lazy: PropTypes.bool,
-    disabled: PropTypes.bool,
-    loaderDisabled: PropTypes.bool,
-    columns: PropTypes.any,
-    loading: PropTypes.bool,
-    showSpacer: PropTypes.bool,
-    showLoader: PropTypes.bool,
-    loadingTemplate: PropTypes.any,
-    itemTemplate: PropTypes.any,
-    contentTemplate: PropTypes.any,
-    onScroll: PropTypes.func,
-    onScrollIndexChange: PropTypes.func,
-    onLazyLoad: PropTypes.func
 }

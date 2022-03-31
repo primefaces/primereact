@@ -1,5 +1,4 @@
 import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
 export const BreadCrumb = memo(forwardRef((props, ref) => {
@@ -118,13 +117,4 @@ BreadCrumb.defaultProps = {
     home: null,
     style: null,
     className: null
-}
-
-BreadCrumb.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array,
-    home: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string
 }

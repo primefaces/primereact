@@ -1,5 +1,4 @@
 import React, { useState, forwardRef, useImperativeHandle, createRef, memo } from 'react';
-import PropTypes from 'prop-types';
 import { UIMessage } from './UIMessage';
 import { TransitionGroup } from 'react-transition-group';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -74,14 +73,4 @@ Messages.defaultProps = {
     transitionOptions: null,
     onRemove: null,
     onClick: null
-}
-
-Messages.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    transitionOptions: PropTypes.object,
-    onRemove: PropTypes.func,
-    onClick: PropTypes.func
 }

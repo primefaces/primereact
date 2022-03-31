@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { tip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { useUpdateEffect, useUnmountEffect } from '../hooks/Hooks';
@@ -98,7 +97,7 @@ export const Checkbox = memo(forwardRef((props, ref) => {
     const icon = IconUtils.getJSXIcon(checked && props.icon, { className: 'p-checkbox-icon p-c' }, { props, checked });
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
+        <div {...ObjectUtils.findDiffKeys(this.props, Checkbox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
             <div className="p-hidden-accessible">
                 <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} tabIndex={props.tabIndex} defaultChecked={checked} aria-labelledby={props.ariaLabelledBy}
                     onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} required={props.required} />
@@ -133,29 +132,4 @@ Checkbox.defaultProps = {
     onChange: null,
     onMouseDown: null,
     onContextMenu: null
-}
-
-Checkbox.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    inputId: PropTypes.string,
-    value: PropTypes.any,
-    name: PropTypes.string,
-    checked: PropTypes.any,
-    trueValue: PropTypes.any,
-    falseValue: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-    required: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    icon: PropTypes.any,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    onChange: PropTypes.func,
-    onMouseDown: PropTypes.func,
-    onContextMenu: PropTypes.func
 }

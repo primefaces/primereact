@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { UITreeNode } from './UITreeNode';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
@@ -465,48 +464,4 @@ Tree.defaultProps = {
     onFilterValueChange: null,
     onNodeClick: null,
     onNodeDoubleClick: null
-}
-
-Tree.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.any,
-    disabled: PropTypes.bool,
-    selectionMode: PropTypes.string,
-    selectionKeys: PropTypes.any,
-    onSelectionChange: PropTypes.func,
-    contextMenuSelectionKey: PropTypes.any,
-    onContextMenuSelectionChange: PropTypes.func,
-    expandedKeys: PropTypes.object,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    contentStyle: PropTypes.object,
-    contentClassName: PropTypes.string,
-    metaKeySelection: PropTypes.bool,
-    propagateSelectionUp: PropTypes.bool,
-    propagateSelectionDown: PropTypes.bool,
-    loading: PropTypes.bool,
-    loadingIcon: PropTypes.string,
-    dragdropScope: PropTypes.string,
-    header: PropTypes.any,
-    footer: PropTypes.any,
-    showHeader: PropTypes.bool,
-    filter: PropTypes.bool,
-    filterValue: PropTypes.string,
-    filterBy: PropTypes.any,
-    filterMode: PropTypes.string,
-    filterPlaceholder: PropTypes.string,
-    filterLocale: PropTypes.string,
-    nodeTemplate: PropTypes.any,
-    togglerTemplate: PropTypes.func,
-    onSelect: PropTypes.func,
-    onUnselect: PropTypes.func,
-    onExpand: PropTypes.func,
-    onCollapse: PropTypes.func,
-    onToggle: PropTypes.func,
-    onDragDrop: PropTypes.func,
-    onContextMenu: PropTypes.func,
-    onFilterValueChange: PropTypes.func,
-    onNodeClick: PropTypes.func,
-    onNodeDoubleClick: PropTypes.func
 }

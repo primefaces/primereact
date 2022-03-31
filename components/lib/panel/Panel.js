@@ -1,5 +1,4 @@
 import React, { forwardRef, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Ripple } from '../ripple/Ripple';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { ObjectUtils, classNames, IconUtils, UniqueComponentId } from '../utils/Utils';
@@ -151,22 +150,4 @@ Panel.defaultProps = {
     onExpand: null,
     onCollapse: null,
     onToggle: null
-}
-
-Panel.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    header: PropTypes.any,
-    headerTemplate: PropTypes.any,
-    toggleable: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    collapsed: PropTypes.bool,
-    expandIcon: PropTypes.string,
-    collapseIcon: PropTypes.string,
-    icons: PropTypes.any,
-    transitionOptions: PropTypes.object,
-    onExpand: PropTypes.func,
-    onCollapse: PropTypes.func,
-    onToggle: PropTypes.func
 }

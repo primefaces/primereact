@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { OrderListControls } from './OrderListControls';
 import { OrderListSubList } from './OrderListSubList';
 import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
@@ -136,19 +135,4 @@ OrderList.defaultProps = {
     dataKey: null,
     onChange: null,
     itemTemplate: null
-}
-
-OrderList.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.array,
-    header: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    listStyle: PropTypes.object,
-    dragdrop: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    dataKey: PropTypes.string,
-    onChange: PropTypes.func,
-    itemTemplate: PropTypes.func
 }

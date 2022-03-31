@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import PropTypes from 'prop-types';
 import { ObjectUtils } from '../utils/Utils';
 
 export const CurrentPageReport = memo((props) => {
@@ -46,15 +45,4 @@ CurrentPageReport.defaultProps = {
     totalRecords: null,
     reportTemplate: '({currentPage} of {totalPages})',
     template: null
-}
-
-CurrentPageReport.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    pageCount: PropTypes.number,
-    page: PropTypes.number,
-    first: PropTypes.number,
-    rows: PropTypes.number,
-    totalRecords: PropTypes.number,
-    reportTemplate: PropTypes.string,
-    template: PropTypes.any
 }

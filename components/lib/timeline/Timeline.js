@@ -1,5 +1,4 @@
 import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
 export const Timeline = memo(forwardRef((props, ref) => {
@@ -58,18 +57,4 @@ Timeline.defaultProps = {
     opposite: null,
     marker: null,
     content: null
-}
-
-Timeline.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.array,
-    align: PropTypes.string,
-    layout: PropTypes.string,
-    dataKey: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    opposite: PropTypes.any,
-    marker: PropTypes.any,
-    content: PropTypes.any
 }

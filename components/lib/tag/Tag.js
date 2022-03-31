@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { classNames, IconUtils } from '../utils/Utils';
 
 export const Tag = forwardRef((props, ref) => {
@@ -27,14 +26,4 @@ Tag.defaultProps = {
     icon: null,
     style: null,
     className: null
-}
-
-Tag.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    value: PropTypes.any,
-    severity: PropTypes.string,
-    rounded: PropTypes.bool,
-    icon: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string
 }

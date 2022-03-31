@@ -742,6 +742,7 @@ itemTemplate(item) {
 </CodeHighlight>
 
                     <h5>Properties</h5>
+                    <p>Standard HTMLSpanElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -831,6 +832,12 @@ itemTemplate(item) {
                                     <td>string</td>
                                     <td>blank</td>
                                     <td>Specifies the behavior dropdown button. Default "blank" mode sends an empty string and "current" mode sends the input value.</td>
+                                </tr>
+                                <tr>
+                                    <td>dropdownAutoFocus</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Focus the input field when the dropdown button is clicked if enabled.</td>
                                 </tr>
                                 <tr>
                                     <td>multiple</td>

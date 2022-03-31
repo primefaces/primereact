@@ -1,5 +1,4 @@
 import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
 import { classNames } from '../utils/Utils';
 
 export const Skeleton = memo(forwardRef((props, ref) => {
@@ -25,16 +24,4 @@ Skeleton.defaultProps = {
     animation: 'wave',
     style: null,
     className: null
-}
-
-Skeleton.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    shape: PropTypes.string,
-    size: PropTypes.string,
-    width: PropTypes.string,
-    height: PropTypes.string,
-    borderRadius: PropTypes.string,
-    animation: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string
 }

@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { localeOption } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { Button } from '../button/Button';
@@ -533,48 +532,4 @@ FileUpload.defaultProps = {
     onValidationFail: null,
     uploadHandler: null,
     onRemove: null
-}
-
-FileUpload.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    name: PropTypes.string,
-    url: PropTypes.string,
-    mode: PropTypes.string,
-    multiple: PropTypes.bool,
-    accept: PropTypes.string,
-    disabled: PropTypes.bool,
-    auto: PropTypes.bool,
-    maxFileSize: PropTypes.number,
-    invalidFileSizeMessageSummary: PropTypes.string,
-    invalidFileSizeMessageDetail: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    widthCredentials: PropTypes.bool,
-    previewWidth: PropTypes.number,
-    chooseLabel: PropTypes.string,
-    uploadLabel: PropTypes.string,
-    cancelLabel: PropTypes.string,
-    chooseOptions: PropTypes.object,
-    uploadOptions: PropTypes.object,
-    cancelOptions: PropTypes.object,
-    customUpload: PropTypes.bool,
-    headerClassName: PropTypes.string,
-    headerStyle: PropTypes.object,
-    contentClassName: PropTypes.string,
-    contentStyle: PropTypes.object,
-    headerTemplate: PropTypes.any,
-    itemTemplate: PropTypes.any,
-    emptyTemplate: PropTypes.any,
-    progressBarTemplate: PropTypes.any,
-    onBeforeUpload: PropTypes.func,
-    onBeforeSend: PropTypes.func,
-    onUpload: PropTypes.func,
-    onError: PropTypes.func,
-    onClear: PropTypes.func,
-    onSelect: PropTypes.func,
-    onProgress: PropTypes.func,
-    onValidationFail: PropTypes.func,
-    uploadHandler: PropTypes.func,
-    onRemove: PropTypes.func
 }

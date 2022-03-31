@@ -1,5 +1,4 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact, { FilterService } from '../api/Api';
 import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableBody } from './TreeTableBody';
@@ -929,7 +928,7 @@ export const TreeTable = forwardRef((props, ref) => {
     const reorderIndicatorDown = props.reorderableColumns && <span ref={reorderIndicatorDownRef} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{ position: 'absolute', display: 'none' }} />;
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-scrollable-body">
+        <div {...ObjectUtils.findDiffKeys(this.props, TreeTable.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-scrollable-body">
             {loader}
             {headerFacet}
             {paginatorTop}
@@ -1020,83 +1019,4 @@ TreeTable.defaultProps = {
     onColumnResizeEnd: null,
     onColReorder: null,
     onContextMenu: null
-}
-
-TreeTable.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.any,
-    header: PropTypes.any,
-    footer: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    tableStyle: PropTypes.any,
-    tableClassName: PropTypes.string,
-    expandedKeys: PropTypes.object,
-    paginator: PropTypes.bool,
-    paginatorPosition: PropTypes.string,
-    alwaysShowPaginator: PropTypes.bool,
-    paginatorClassName: PropTypes.string,
-    paginatorTemplate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    paginatorLeft: PropTypes.any,
-    paginatorRight: PropTypes.any,
-    paginatorDropdownAppendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    pageLinkSize: PropTypes.number,
-    rowsPerPageOptions: PropTypes.array,
-    currentPageReportTemplate: PropTypes.string,
-    first: PropTypes.number,
-    rows: PropTypes.number,
-    totalRecords: PropTypes.number,
-    lazy: PropTypes.bool,
-    sortField: PropTypes.string,
-    sortOrder: PropTypes.number,
-    multiSortMeta: PropTypes.array,
-    sortMode: PropTypes.string,
-    defaultSortOrder: PropTypes.number,
-    removableSort: PropTypes.bool,
-    selectionMode: PropTypes.string,
-    selectionKeys: PropTypes.any,
-    contextMenuSelectionKey: PropTypes.any,
-    metaKeySelection: PropTypes.bool,
-    selectOnEdit: PropTypes.bool,
-    propagateSelectionUp: PropTypes.bool,
-    propagateSelectionDown: PropTypes.bool,
-    autoLayout: PropTypes.bool,
-    rowClassName: PropTypes.func,
-    loading: PropTypes.bool,
-    loadingIcon: PropTypes.string,
-    tabIndex: PropTypes.number,
-    scrollable: PropTypes.bool,
-    scrollHeight: PropTypes.string,
-    reorderableColumns: PropTypes.bool,
-    headerColumnGroup: PropTypes.any,
-    footerColumnGroup: PropTypes.any,
-    frozenHeaderColumnGroup: PropTypes.any,
-    frozenFooterColumnGroup: PropTypes.any,
-    frozenWidth: PropTypes.string,
-    resizableColumns: PropTypes.bool,
-    columnResizeMode: PropTypes.string,
-    emptyMessage: PropTypes.string,
-    filters: PropTypes.object,
-    globalFilter: PropTypes.any,
-    filterMode: PropTypes.string,
-    filterDelay: PropTypes.number,
-    filterLocale: PropTypes.string,
-    rowHover: PropTypes.bool,
-    showGridlines: PropTypes.bool,
-    stripedRows: PropTypes.bool,
-    onFilter: PropTypes.func,
-    onExpand: PropTypes.func,
-    onCollapse: PropTypes.func,
-    onToggle: PropTypes.func,
-    onPage: PropTypes.func,
-    onSort: PropTypes.func,
-    onSelect: PropTypes.func,
-    onUnselect: PropTypes.func,
-    onRowClick: PropTypes.func,
-    onSelectionChange: PropTypes.func,
-    onContextMenuSelectionChange: PropTypes.func,
-    onColumnResizeEnd: PropTypes.func,
-    onColReorder: PropTypes.func,
-    onContextMenu: PropTypes.func
 }

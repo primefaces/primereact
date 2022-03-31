@@ -58,7 +58,7 @@ const EXTERNAL_COMPONENT = [...EXTERNAL, ...(ALIAS_COMPONENT_ENTRIES.map(entries
 const BABEL_PLUGIN_OPTIONS = {
     exclude: 'node_modules/**',
     presets: ['@babel/preset-env', '@babel/preset-react'],
-    plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-proposal-class-properties', ['babel-plugin-transform-react-remove-prop-types', { removeImport: true }]],
+    plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-proposal-class-properties'],
     skipPreflightCheck: true,
     babelHelpers: 'runtime',
     babelrc: false

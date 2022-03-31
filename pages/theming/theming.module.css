@@ -1,0 +1,4 @@
+.mypanel > [class~="p-panel-header"] {
+    background-color: #626ae9;
+    color: #ffffff;
+}
