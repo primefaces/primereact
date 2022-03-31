@@ -80,10 +80,8 @@ export const OverlayPanel = forwardRef((props, ref) => {
             setVisibleState(true);
 
             overlayEventListener.current = (e) => {
-                if (!isOutsideClicked(e.target)) {
-                    isPanelClicked.current = true;
-                }
-            };
+                !isOutsideClicked(e.target) && (isPanelClicked.current = true);
+            }
 
             OverlayService.on('overlay-click', overlayEventListener.current);
         }
