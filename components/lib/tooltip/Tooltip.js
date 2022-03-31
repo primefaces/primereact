@@ -172,14 +172,17 @@ export const Tooltip = forwardRef((props, ref) => {
             applyDelay('updateDelay', updateTooltipState);
         }
         else {
-            sendCallback(props.onBeforeShow, { originalEvent: e, target: currentTargetRef.current });
-            applyDelay('showDelay', () => {
-                setVisibleState(true);
-                setPositionState(getPosition(currentTargetRef.current));
-                updateTooltipState();
-                sendCallback(props.onShow, { originalEvent: e, target: currentTargetRef.current });
-                DomHandler.addClass(currentTargetRef.current, getTargetOption(currentTargetRef.current, 'classname'));
-            });
+            // #2653 give the callback a chance to return false and not continue with display
+            const success = sendCallback(props.onBeforeShow, { originalEvent: e, target: currentTargetRef.current });
+            if (success) {
+                applyDelay('showDelay', () => {
+                    setVisibleState(true);
+                    setPositionState(getPosition(currentTargetRef.current));
+                    updateTooltipState();
+                    sendCallback(props.onShow, { originalEvent: e, target: currentTargetRef.current });
+                    DomHandler.addClass(currentTargetRef.current, getTargetOption(currentTargetRef.current, 'classname'));
+                });
+            };
         }
     }
 
@@ -189,22 +192,24 @@ export const Tooltip = forwardRef((props, ref) => {
         if (visibleState) {
             DomHandler.removeClass(currentTargetRef.current, getTargetOption(currentTargetRef.current, 'classname'));
 
-            sendCallback(props.onBeforeHide, { originalEvent: e, target: currentTargetRef.current });
-            applyDelay('hideDelay', () => {
-                if (!isAutoHide() && allowHide.current === false) {
-                    return;
-                }
+            const success = sendCallback(props.onBeforeHide, { originalEvent: e, target: currentTargetRef.current });
+            if (success) {
+                applyDelay('hideDelay', () => {
+                    if (!isAutoHide() && allowHide.current === false) {
+                        return;
+                    }
 
-                ZIndexUtils.clear(elementRef.current);
-                DomHandler.removeClass(elementRef.current, 'p-tooltip-active');
+                    ZIndexUtils.clear(elementRef.current);
+                    DomHandler.removeClass(elementRef.current, 'p-tooltip-active');
 
-                setVisibleState(false);
-                setPositionState(props.position);
-                currentTargetRef.current = null;
-                containerSize.current = null;
-                allowHide.current = true;
-                sendCallback(props.onHide, { originalEvent: e, target: currentTargetRef.current });
-            });
+                    setVisibleState(false);
+                    setPositionState(props.position);
+                    currentTargetRef.current = null;
+                    containerSize.current = null;
+                    allowHide.current = true;
+                    sendCallback(props.onHide, { originalEvent: e, target: currentTargetRef.current });
+                });
+            }
         }
     }
 
@@ -326,7 +331,14 @@ export const Tooltip = forwardRef((props, ref) => {
     }
 
     const sendCallback = (callback, ...params) => {
-        callback && callback(...params);
+        if (callback) {
+             let result = callback(...params);
+             if (result === undefined) {
+                 result = true;
+             }
+             return result;
+        }
+        return true;
     }
 
     const clearTimeouts = () => {
