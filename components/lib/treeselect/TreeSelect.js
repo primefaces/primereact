@@ -467,7 +467,7 @@ export const TreeSelect = memo(forwardRef((props, ref) => {
     const footer = createFooter();
 
     return (
-        <div id={props.id} ref={elementRef} className={className} style={props.style} onClick={onClick}>
+        <div {...ObjectUtils.findDiffKeys(this.props, TreeSelect.defaultProps)} id={props.id} ref={elementRef} className={className} style={props.style} onClick={onClick}>
             {keyboardHelper}
             {labelElement}
             {dropdownIcon}

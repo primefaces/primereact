@@ -687,7 +687,7 @@ export const Dropdown = memo(forwardRef((props, ref) => {
     const clearIcon = createClearIcon();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}
+        <div {...ObjectUtils.findDiffKeys(this.props, Dropdown.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}
             onMouseDown={props.onMouseDown} onContextMenu={props.onContextMenu}>
             {keyboardHelper}
             {hiddenSelect}

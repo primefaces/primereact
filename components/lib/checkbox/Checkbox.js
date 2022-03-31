@@ -97,7 +97,7 @@ export const Checkbox = memo(forwardRef((props, ref) => {
     const icon = IconUtils.getJSXIcon(checked && props.icon, { className: 'p-checkbox-icon p-c' }, { props, checked });
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
+        <div {...ObjectUtils.findDiffKeys(this.props, Checkbox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
             <div className="p-hidden-accessible">
                 <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} tabIndex={props.tabIndex} defaultChecked={checked} aria-labelledby={props.ariaLabelledBy}
                     onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} required={props.required} />

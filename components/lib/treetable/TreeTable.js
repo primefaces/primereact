@@ -928,7 +928,7 @@ export const TreeTable = forwardRef((props, ref) => {
     const reorderIndicatorDown = props.reorderableColumns && <span ref={reorderIndicatorDownRef} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{ position: 'absolute', display: 'none' }} />;
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-scrollable-body">
+        <div {...ObjectUtils.findDiffKeys(this.props, TreeTable.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-scrollable-body">
             {loader}
             {headerFacet}
             {paginatorTop}

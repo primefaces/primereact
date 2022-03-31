@@ -136,7 +136,7 @@ export const Knob = memo(forwardRef((props, ref) => {
     const text = props.showValue && <text x={50} y={57} textAnchor={'middle'} fill={props.textColor} className={'p-knob-text'} name={props.name}>{valueToDisplay()}</text>
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}>
+        <div {...ObjectUtils.findDiffKeys(this.props, Knob.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}>
             <svg viewBox="0 0 100 100" width={props.size} height={props.size} onClick={onClick} onMouseDown={onMouseDown} onMouseUp={onMouseUp}
                 onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
                 <path d={rangePath} strokeWidth={props.strokeWidth} stroke={props.rangeColor} className={'p-knob-range'}></path>

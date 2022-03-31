@@ -77,7 +77,7 @@ export const ToggleButton = memo(forwardRef((props, ref) => {
     const iconElement = createIcon();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}
+        <div {...ObjectUtils.findDiffKeys(this.props, ToggleButton.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}
             onClick={toggle} onFocus={props.onFocus} onBlur={props.onBlur} onKeyDown={onKeyDown}
             tabIndex={tabIndex} aria-labelledby={props.ariaLabelledBy}>
             {iconElement}

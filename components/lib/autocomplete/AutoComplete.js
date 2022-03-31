@@ -564,7 +564,7 @@ export const AutoComplete = memo(forwardRef((props, ref) => {
     const dropdown = createDropdown();
 
     return (
-        <span ref={elementRef} id={idState} style={props.style} className={className} aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-owns={listId}>
+        <span {...ObjectUtils.findDiffKeys(this.props, AutoComplete.defaultProps)} ref={elementRef} id={idState} style={props.style} className={className} aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-owns={listId}>
             {input}
             {loader}
             {dropdown}

@@ -84,7 +84,7 @@ export const TriStateCheckbox = memo(forwardRef((props, ref) => {
     });
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+        <div {...ObjectUtils.findDiffKeys(this.props, TriStateCheckbox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
             <div className="p-hidden-accessible">
                 <input ref={inputRef} type="checkbox" aria-labelledby={props.ariaLabelledBy} id={props.inputId} name={props.name}
                     onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} defaultChecked={props.value} />
