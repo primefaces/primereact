@@ -1547,7 +1547,7 @@ export const DataTable = forwardRef((props, ref) => {
     const reorderIndicators = createReorderIndicators();
 
     return (
-        <div {...ObjectUtils.findDiffKeys(this.props, DataTable.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-datatable-wrapper">
+        <div {...ObjectUtils.findDiffKeys(props, DataTable.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-datatable-wrapper">
             {loader}
             {header}
             {paginatorTop}

@@ -89,7 +89,7 @@ export const RadioButton = memo(forwardRef((props, ref) => {
     });
 
     return (
-        <div {...ObjectUtils.findDiffKeys(this.props, RadioButton.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+        <div {...ObjectUtils.findDiffKeys(props, RadioButton.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
             <div className="p-hidden-accessible">
                 <input ref={inputRef} id={props.inputId} type="radio" aria-labelledby={props.ariaLabelledBy} name={props.name} defaultChecked={props.checked}
                     onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} required={props.required} tabIndex={props.tabIndex} />

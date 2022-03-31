@@ -106,7 +106,7 @@ export const Rating = memo(forwardRef((props, ref) => {
     const stars = createStars();
 
     return (
-        <div {...ObjectUtils.findDiffKeys(this.props, Rating.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}>
+        <div {...ObjectUtils.findDiffKeys(props, Rating.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}>
             {cancelIcon}
             {stars}
         </div>

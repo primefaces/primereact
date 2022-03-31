@@ -570,7 +570,7 @@ export const MultiSelect = memo(forwardRef((props, ref) => {
     const clearIcon = createClearIcon();
 
     return (
-        <div {...ObjectUtils.findDiffKeys(this.props, MultiSelect.defaultProps)} ref={elementRef} id={props.id} className={className} onClick={onClick} style={props.style}>
+        <div {...ObjectUtils.findDiffKeys(props, MultiSelect.defaultProps)} ref={elementRef} id={props.id} className={className} onClick={onClick} style={props.style}>
             <div className="p-hidden-accessible">
                 <input ref={inputRef} id={props.inputId} name={props.name} readOnly type="text" onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}
                     role="listbox" aria-labelledby={props.ariaLabelledBy} aria-expanded={overlayVisibleState} disabled={props.disabled} tabIndex={props.tabIndex} />

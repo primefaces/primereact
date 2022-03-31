@@ -328,7 +328,7 @@ export const ListBox = memo(forwardRef((props, ref) => {
     const header = createHeader();
 
     return (
-        <div {...ObjectUtils.findDiffKeys(this.props, ListBox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}>
+        <div {...ObjectUtils.findDiffKeys(props, ListBox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}>
             {header}
             <div className={listClassName} style={props.listStyle}>
                 {list}

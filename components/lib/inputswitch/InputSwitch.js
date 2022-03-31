@@ -88,7 +88,7 @@ export const InputSwitch = memo(forwardRef((props, ref) => {
     const inputSwitchProps = ObjectUtils.findDiffKeys(props, InputSwitch.defaultProps);
 
     return (
-        <div {...ObjectUtils.findDiffKeys(this.props, InputSwitch.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}
+        <div {...ObjectUtils.findDiffKeys(props, InputSwitch.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}
             role="checkbox" aria-checked={checked} {...inputSwitchProps}>
             <div className="p-hidden-accessible">
                 <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} checked={checked} onChange={toggle}

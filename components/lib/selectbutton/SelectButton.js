@@ -116,7 +116,7 @@ export const SelectButton = memo(forwardRef((props, ref) => {
     const items = createItems();
 
     return (
-        <div {...ObjectUtils.findDiffKeys(this.props, SelectButton.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} role="group">
+        <div {...ObjectUtils.findDiffKeys(props, SelectButton.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} role="group">
             {items}
         </div>
     )
