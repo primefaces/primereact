@@ -451,8 +451,7 @@ import { Knob } from 'primereact/knob';
 </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <p>Any property as style and class are passed to the main container element. Following are the
-                        additional properties to configure the component.</p>
+                    <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>

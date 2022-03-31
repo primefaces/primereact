@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import PropTypes from 'prop-types';
 import { Ripple } from '../ripple/Ripple';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
@@ -73,14 +72,4 @@ PageLinks.defaultProps = {
     pageCount: null,
     links: null,
     template: null
-}
-
-PageLinks.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    value: PropTypes.array,
-    page: PropTypes.number,
-    rows: PropTypes.number,
-    pageCount: PropTypes.number,
-    onClick: PropTypes.func,
-    template: PropTypes.any
 }

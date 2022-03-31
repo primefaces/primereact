@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { classNames } from '../utils/Utils';
 
 export const Divider = forwardRef((props, ref) => {
@@ -29,13 +28,4 @@ Divider.defaultProps = {
     type: 'solid',
     style: null,
     className: null
-}
-
-Divider.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    align: PropTypes.string,
-    layout: PropTypes.string,
-    type: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string
 }

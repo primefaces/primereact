@@ -232,7 +232,7 @@ interface DataTableRowEditValidatorOptions {
     props: DataTableProps;
 }
 
-export interface DataTableProps {
+export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'size' | 'onContextMenu'> {
     id?: string;
     value?: any[];
     header?: DataTableHeaderTemplateType;

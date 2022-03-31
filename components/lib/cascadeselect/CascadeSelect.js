@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -257,7 +256,7 @@ export const CascadeSelect = memo(forwardRef((props, ref) => {
         const overlay = createOverlay();
 
         return (
-            <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+            <div {...ObjectUtils.findDiffKeys(this.props, CascadeSelect.defaultProps)}  ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
                 {keyboardHelper}
                 {labelElement}
                 {dropdownIcon}
@@ -300,35 +299,4 @@ CascadeSelect.defaultProps = {
     onBeforeHide: null,
     onShow: null,
     onHide: null
-}
-
-CascadeSelect.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    value: PropTypes.any,
-    name: PropTypes.string,
-    options: PropTypes.array,
-    optionLabel: PropTypes.string,
-    optionValue: PropTypes.string,
-    optionGroupLabel: PropTypes.string,
-    optionGroupChildren: PropTypes.array,
-    placeholder: PropTypes.string,
-    itemTemplate: PropTypes.any,
-    disabled: PropTypes.bool,
-    dataKey: PropTypes.string,
-    inputId: PropTypes.string,
-    tabIndex: PropTypes.number,
-    ariaLabelledBy: PropTypes.string,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    transitionOptions: PropTypes.object,
-    dropdownIcon: PropTypes.string,
-    onChange: PropTypes.func,
-    onGroupChange: PropTypes.func,
-    onBeforeShow: PropTypes.func,
-    onBeforeHide: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

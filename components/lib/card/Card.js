@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
 export const Card = forwardRef((props, ref) => {
@@ -49,15 +48,4 @@ Card.defaultProps = {
     subTitle: null,
     style: null,
     className: null
-}
-
-Card.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    header: PropTypes.any,
-    footer: PropTypes.any,
-    title: PropTypes.any,
-    subTitle: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string
 }

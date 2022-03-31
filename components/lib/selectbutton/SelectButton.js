@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { SelectButtonItem } from './SelectButtonItem';
 import { tip } from '../tooltip/Tooltip';
 import { ObjectUtils, classNames } from '../utils/Utils';
@@ -117,7 +116,7 @@ export const SelectButton = memo(forwardRef((props, ref) => {
     const items = createItems();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} role="group">
+        <div {...ObjectUtils.findDiffKeys(this.props, SelectButton.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} role="group">
             {items}
         </div>
     )
@@ -143,26 +142,4 @@ SelectButton.defaultProps = {
     ariaLabelledBy: null,
     itemTemplate: null,
     onChange: null
-}
-
-SelectButton.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.any,
-    options: PropTypes.array,
-    optionLabel: PropTypes.string,
-    optionValue: PropTypes.string,
-    optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    tabIndex: PropTypes.number,
-    multiple: PropTypes.bool,
-    unselectable: PropTypes.bool,
-    disabled: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    dataKey: PropTypes.string,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    itemTemplate: PropTypes.func,
-    onChange: PropTypes.func
 }

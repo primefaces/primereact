@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact, { FilterService } from '../api/Api';
 import { tip } from '../tooltip/Tooltip';
 import { MultiSelectPanel } from './MultiSelectPanel';
@@ -571,7 +570,7 @@ export const MultiSelect = memo(forwardRef((props, ref) => {
     const clearIcon = createClearIcon();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} onClick={onClick} style={props.style}>
+        <div {...ObjectUtils.findDiffKeys(this.props, MultiSelect.defaultProps)} ref={elementRef} id={props.id} className={className} onClick={onClick} style={props.style}>
             <div className="p-hidden-accessible">
                 <input ref={inputRef} id={props.inputId} name={props.name} readOnly type="text" onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}
                     role="listbox" aria-labelledby={props.ariaLabelledBy} aria-expanded={overlayVisibleState} disabled={props.disabled} tabIndex={props.tabIndex} />
@@ -648,63 +647,4 @@ MultiSelect.defaultProps = {
     onHide: null,
     onFilter: null,
     onSelectAll: null
-}
-
-MultiSelect.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    name: PropTypes.string,
-    value: PropTypes.any,
-    options: PropTypes.array,
-    optionLabel: PropTypes.string,
-    optionValue: PropTypes.string,
-    optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    optionGroupLabel: PropTypes.string,
-    optionGroupChildren: PropTypes.string,
-    optionGroupTemplate: PropTypes.any,
-    display: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    panelClassName: PropTypes.string,
-    panelStyle: PropTypes.object,
-    virtualScrollerOptions: PropTypes.object,
-    scrollHeight: PropTypes.string,
-    placeholder: PropTypes.string,
-    fixedPlaceholder: PropTypes.bool,
-    disabled: PropTypes.bool,
-    showClear: PropTypes.bool,
-    filter: PropTypes.bool,
-    filterBy: PropTypes.string,
-    filterMatchMode: PropTypes.string,
-    filterPlaceholder: PropTypes.string,
-    filterLocale: PropTypes.string,
-    emptyFilterMessage: PropTypes.any,
-    resetFilterOnHide: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    dataKey: PropTypes.string,
-    inputId: PropTypes.string,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    maxSelectedLabels: PropTypes.number,
-    selectionLimit: PropTypes.number,
-    selectedItemsLabel: PropTypes.string,
-    ariaLabelledBy: PropTypes.string,
-    itemTemplate: PropTypes.any,
-    selectedItemTemplate: PropTypes.any,
-    panelHeaderTemplate: PropTypes.any,
-    panelFooterTemplate: PropTypes.any,
-    transitionOptions: PropTypes.object,
-    dropdownIcon: PropTypes.string,
-    removeIcon: PropTypes.any,
-    showSelectAll: PropTypes.bool,
-    selectAll: PropTypes.bool,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func,
-    onFilter: PropTypes.func,
-    onSelectAll: PropTypes.func
 }

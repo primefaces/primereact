@@ -13,7 +13,7 @@ interface EditorSelectionChangeParams {
     source: string;
 }
 
-export interface EditorProps {
+export interface EditorProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     id?: string;
     value?: string;
     style?: object;

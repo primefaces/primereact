@@ -1,5 +1,4 @@
 import React, { useRef, useState, forwardRef, useImperativeHandle } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
@@ -575,51 +574,4 @@ Dialog.defaultProps = {
     onResizeEnd: null,
     onClick: null,
     onMaskClick: null
-}
-
-Dialog.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    header: PropTypes.any,
-    footer: PropTypes.any,
-    visible: PropTypes.bool,
-    position: PropTypes.string,
-    draggable: PropTypes.bool,
-    resizable: PropTypes.bool,
-    modal: PropTypes.bool,
-    onHide: PropTypes.func.isRequired,
-    onShow: PropTypes.func,
-    contentStyle: PropTypes.object,
-    contentClassName: PropTypes.string,
-    closeOnEscape: PropTypes.bool,
-    dismissableMask: PropTypes.bool,
-    rtl: PropTypes.bool,
-    closable: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    maskStyle: PropTypes.object,
-    maskClassName: PropTypes.string,
-    showHeader: PropTypes.bool,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    baseZIndex: PropTypes.number,
-    maximizable: PropTypes.bool,
-    blockScroll: PropTypes.bool,
-    icons: PropTypes.any,
-    ariaCloseIconLabel: PropTypes.string,
-    focusOnShow: PropTypes.bool,
-    minX: PropTypes.number,
-    minY: PropTypes.number,
-    keepInViewport: PropTypes.bool,
-    maximized: PropTypes.bool,
-    breakpoints: PropTypes.object,
-    transitionOptions: PropTypes.object,
-    onMaximize: PropTypes.func,
-    onDragStart: PropTypes.func,
-    onDrag: PropTypes.func,
-    onDragEnd: PropTypes.func,
-    onResizeStart: PropTypes.func,
-    onResize: PropTypes.func,
-    onResizeEnd: PropTypes.func,
-    onClick: PropTypes.func,
-    onMaskClick: PropTypes.func
 }

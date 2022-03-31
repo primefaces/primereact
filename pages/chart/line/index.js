@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useState } from 'react';
 import { TabView } from '../../../components/lib/tabview/TabView';
 import { Chart } from '../../../components/lib/chart/Chart';
 import { useLiveEditorTabs } from '../../../components/doc/common/liveeditor';
@@ -10,7 +10,7 @@ const LineChartDemo = memo(() => {
 
     const context = useContext(AppContentContext);
 
-    const basicData = {
+    const [basicData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
             {
@@ -28,9 +28,9 @@ const LineChartDemo = memo(() => {
                 tension: .4
             }
         ]
-    };
+    });
 
-    const multiAxisData = {
+    const [multiAxisData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             label: 'Dataset 1',
@@ -47,9 +47,9 @@ const LineChartDemo = memo(() => {
             tension: .4,
             data: [28, 48, 40, 19, 86, 27, 90]
         }]
-    };
+    });
 
-    const lineStylesData = {
+    const [lineStylesData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
             {
@@ -76,7 +76,7 @@ const LineChartDemo = memo(() => {
                 backgroundColor: 'rgba(255,167,38,0.2)'
             }
         ]
-    };
+    });
 
     const getLightTheme = () => {
         let basicOptions = {
@@ -244,10 +244,10 @@ const LineChartDemo = memo(() => {
         }
     }
 
-    const options = {
+    const [options] = useState({
         'light': getLightTheme(),
         'dark': getDarkTheme()
-    };
+    });
 
     const { basicOptions, multiAxisOptions } = options[`${context.darkTheme ? 'dark' : 'light'}`];
 
@@ -490,11 +490,11 @@ export class LineChartDemo extends Component {
         'hooks': {
             tabName: 'Hooks Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const LineChartDemo = () => {
-    const basicData = {
+    const [basicData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
             {
@@ -512,9 +512,9 @@ const LineChartDemo = () => {
                 tension: .4
             }
         ]
-    };
+    });
 
-    const multiAxisData = {
+    const [multiAxisData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             label: 'Dataset 1',
@@ -531,9 +531,9 @@ const LineChartDemo = () => {
             tension: .4,
             data: [28, 48, 40, 19, 86, 27, 90]
         }]
-    };
+    });
 
-    const lineStylesData = {
+    const [lineStylesData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
             {
@@ -560,7 +560,7 @@ const LineChartDemo = () => {
                 backgroundColor: 'rgba(255,167,38,0.2)'
             }
         ]
-    };
+    });
 
     const getLightTheme = () => {
         let basicOptions = {
@@ -671,11 +671,11 @@ const LineChartDemo = () => {
         'ts': {
             tabName: 'TS Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const LineChartDemo = () => {
-    const basicData = {
+    const [basicData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
             {
@@ -693,9 +693,9 @@ const LineChartDemo = () => {
                 tension: .4
             }
         ]
-    };
+    });
 
-    const multiAxisData = {
+    const [multiAxisData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             label: 'Dataset 1',
@@ -712,9 +712,9 @@ const LineChartDemo = () => {
             tension: .4,
             data: [28, 48, 40, 19, 86, 27, 90]
         }]
-    };
+    });
 
-    const lineStylesData = {
+    const [lineStylesData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
             {
@@ -741,7 +741,7 @@ const LineChartDemo = () => {
                 backgroundColor: 'rgba(255,167,38,0.2)'
             }
         ]
-    };
+    });
 
     const getLightTheme = () => {
         let basicOptions = {

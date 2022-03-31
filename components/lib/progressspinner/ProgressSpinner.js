@@ -1,5 +1,4 @@
 import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
 import { classNames } from '../utils/Utils';
 
 export const ProgressSpinner = memo(forwardRef((props, ref) => {
@@ -22,14 +21,4 @@ ProgressSpinner.defaultProps = {
     strokeWidth: "2",
     fill: "none",
     animationDuration: "2s"
-}
-
-ProgressSpinner.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    strokeWidth: PropTypes.string,
-    fill: PropTypes.string,
-    animationDuration: PropTypes.string
 }

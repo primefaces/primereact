@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useState } from 'react';
-import PropTypes from 'prop-types';
 import { classNames, ObjectUtils, IconUtils } from '../utils/Utils';
 
 export const Chip = memo(forwardRef((props, ref) => {
@@ -70,19 +69,4 @@ Chip.defaultProps = {
     imageAlt: 'chip',
     onImageError: null,
     onRemove: null
-}
-
-Chip.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    label: PropTypes.string,
-    icon: PropTypes.any,
-    image: PropTypes.string,
-    removable: PropTypes.bool,
-    removeIcon: PropTypes.any,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    template: PropTypes.any,
-    imageAlt: PropTypes.string,
-    onImageError: PropTypes.func,
-    onRemove: PropTypes.func
 }

@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useState } from 'react';
 import { TabView } from '../../../components/lib/tabview/TabView';
 import { Chart } from '../../../components/lib/chart/Chart';
 import { useLiveEditorTabs } from '../../../components/doc/common/liveeditor';
@@ -10,7 +10,7 @@ const ComboChartDemo = memo(() => {
 
     const context = useContext(AppContentContext);
 
-    const chartData = {
+    const [chartData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             type: 'line',
@@ -57,9 +57,9 @@ const ComboChartDemo = memo(() => {
                 32
             ]
         }]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         maintainAspectRatio: false,
         aspectRatio: .6,
         plugins: {
@@ -87,9 +87,9 @@ const ComboChartDemo = memo(() => {
                 }
             }
         }
-    };
+    });
 
-    const darkOptions = {
+    const [darkOptions] = useState({
         maintainAspectRatio: false,
         aspectRatio: .6,
         plugins: {
@@ -117,7 +117,7 @@ const ComboChartDemo = memo(() => {
                 }
             }
         }
-    };
+    });
 
     let options = context.darkTheme ? darkOptions : lightOptions;
 
@@ -255,11 +255,11 @@ export class ComboChartDemo extends Component {
         'hooks': {
             tabName: 'Hooks Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const ComboChartDemo = () => {
-    const chartData = {
+    const [chartData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             type: 'line',
@@ -306,9 +306,9 @@ const ComboChartDemo = () => {
                 32
             ]
         }]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         maintainAspectRatio: false,
         aspectRatio: .6,
         plugins: {
@@ -336,7 +336,7 @@ const ComboChartDemo = () => {
                 }
             }
         }
-    };
+    });
 
     return (
         <div className="card">
@@ -349,11 +349,11 @@ const ComboChartDemo = () => {
         'ts': {
             tabName: 'TS Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const ComboChartDemo = () => {
-    const chartData = {
+    const [chartData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             type: 'line',
@@ -400,9 +400,9 @@ const ComboChartDemo = () => {
                 32
             ]
         }]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         maintainAspectRatio: false,
         aspectRatio: .6,
         plugins: {
@@ -430,7 +430,7 @@ const ComboChartDemo = () => {
                 }
             }
         }
-    };
+    });
 
     return (
         <div className="card">

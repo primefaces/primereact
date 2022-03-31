@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useMemo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { tip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 import { useUnmountEffect } from '../hooks/Hooks';
@@ -267,30 +266,4 @@ Chips.defaultProps = {
     onChange: null,
     onFocus: null,
     onBlur: null
-}
-
-Chips.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    name: PropTypes.string,
-    placeholder: PropTypes.string,
-    value: PropTypes.array,
-    max: PropTypes.number,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    removable: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-    style: PropTypes.object,
-    className: PropTypes.string,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    separator: PropTypes.string,
-    allowDuplicate: PropTypes.bool,
-    itemTemplate: PropTypes.func,
-    onAdd: PropTypes.func,
-    onRemove: PropTypes.func,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func
 }

@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { FilterService } from '../api/Api';
 import { ListBoxItem } from './ListBoxItem';
 import { ListBoxHeader } from './ListBoxHeader';
@@ -329,7 +328,7 @@ export const ListBox = memo(forwardRef((props, ref) => {
     const header = createHeader();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}>
+        <div {...ObjectUtils.findDiffKeys(this.props, ListBox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}>
             {header}
             <div className={listClassName} style={props.listStyle}>
                 {list}
@@ -371,39 +370,4 @@ ListBox.defaultProps = {
     ariaLabelledBy: null,
     onChange: null,
     onFilterValueChange: null
-}
-
-ListBox.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.any,
-    options: PropTypes.array,
-    optionLabel: PropTypes.string,
-    optionValue: PropTypes.string,
-    optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    optionGroupLabel: PropTypes.string,
-    optionGroupChildren: PropTypes.string,
-    optionGroupTemplate: PropTypes.any,
-    itemTemplate: PropTypes.any,
-    style: PropTypes.object,
-    listStyle: PropTypes.object,
-    listClassName: PropTypes.string,
-    className: PropTypes.string,
-    virtualScrollerOptions: PropTypes.object,
-    disabled: PropTypes.bool,
-    dataKey: PropTypes.string,
-    multiple: PropTypes.bool,
-    metaKeySelection: PropTypes.bool,
-    filter: PropTypes.bool,
-    filterBy: PropTypes.string,
-    filterValue: PropTypes.string,
-    filterMatchMode: PropTypes.string,
-    filterPlaceholder: PropTypes.string,
-    filterLocale: PropTypes.string,
-    tabIndex: PropTypes.number,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    onChange: PropTypes.func,
-    onFilterValueChange: PropTypes.func
 }

@@ -518,8 +518,6 @@ export const TableBody = memo((props) => {
     }
 
     const onRowMouseDown = (e) => {
-        DomHandler.clearSelection();
-
         const { originalEvent: event } = e;
 
         if (DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle'))

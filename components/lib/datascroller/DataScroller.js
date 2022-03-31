@@ -1,5 +1,4 @@
 import React, { useRef, useState, forwardRef, useImperativeHandle, memo } from 'react';
-import PropTypes from 'prop-types';
 import { localeOption } from '../api/Api';
 import { classNames, ObjectUtils } from '../utils/Utils';
 import { useMountEffect, useUpdateEffect, useUnmountEffect } from '../hooks/Hooks';
@@ -225,23 +224,4 @@ DataScroller.defaultProps = {
     header: null,
     footer: null,
     lazy: false
-}
-
-DataScroller.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.array,
-    rows: PropTypes.number,
-    inline: PropTypes.bool,
-    scrollHeight: PropTypes.string,
-    loader: PropTypes.bool,
-    buffer: PropTypes.number,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    onLazyLoad: PropTypes.func,
-    emptyMessage: PropTypes.any,
-    itemTemplate: PropTypes.func,
-    header: PropTypes.any,
-    footer: PropTypes.any,
-    lazy: PropTypes.bool
 }

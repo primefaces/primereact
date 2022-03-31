@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useMemo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact, { localeOption } from '../api/Api';
 import { tip } from '../tooltip/Tooltip';
 import { InputText } from '../inputtext/InputText';
@@ -353,36 +352,4 @@ Password.defaultProps = {
     onInput: null,
     onShow: null,
     onHide: null
-}
-
-Password.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputId: PropTypes.string,
-    inputRef: PropTypes.any,
-    promptLabel: PropTypes.string,
-    weakLabel: PropTypes.string,
-    mediumLabel: PropTypes.string,
-    strongLabel: PropTypes.string,
-    mediumRegex: PropTypes.string,
-    strongRegex: PropTypes.string,
-    feedback: PropTypes.bool,
-    toggleMask: PropTypes.bool,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    header: PropTypes.any,
-    content: PropTypes.any,
-    footer: PropTypes.any,
-    icon: PropTypes.any,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    inputStyle: PropTypes.object,
-    inputClassName: PropTypes.string,
-    panelStyle: PropTypes.object,
-    panelClassName: PropTypes.string,
-    transitionOptions: PropTypes.object,
-    onInput: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

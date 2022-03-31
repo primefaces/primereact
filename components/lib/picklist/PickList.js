@@ -1,5 +1,4 @@
 import React, { useState, useRef, memo, forwardRef } from 'react'
-import PropTypes from 'prop-types';
 import { PickListSubList } from './PickListSubList';
 import { PickListControls } from './PickListControls';
 import { PickListTransferControls } from './PickListTransferControls';
@@ -195,32 +194,4 @@ PickList.defaultProps = {
     onMoveAllToTarget: null,
     onSourceSelectionChange: null,
     onTargetSelectionChange: null
-}
-
-PickList.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    source: PropTypes.array,
-    target: PropTypes.array,
-    sourceHeader: PropTypes.any,
-    targetHeader: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    sourcestyle: PropTypes.object,
-    targetstyle: PropTypes.object,
-    sourceSelection: PropTypes.any,
-    targetSelection: PropTypes.any,
-    showSourceControls: PropTypes.bool,
-    showTargetControls: PropTypes.bool,
-    metaKeySelection: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    dataKey: PropTypes.string,
-    itemTemplate: PropTypes.func,
-    onChange: PropTypes.func,
-    onMoveToSource: PropTypes.func,
-    onMoveAllToSource: PropTypes.func,
-    onMoveToTarget: PropTypes.func,
-    onMoveAllToTarget: PropTypes.func,
-    onSourceSelectionChange: PropTypes.func,
-    onTargetSelectionChange: PropTypes.func
 }

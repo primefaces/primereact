@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact, { localeOption } from '../api/Api';
 import { Paginator } from '../paginator/Paginator';
 import { Ripple } from '../ripple/Ripple';
@@ -255,41 +254,6 @@ DataView.defaultProps = {
     onPage: null
 }
 
-DataView.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    header: PropTypes.any,
-    footer: PropTypes.any,
-    value: PropTypes.array,
-    layout: PropTypes.string,
-    dataKey: PropTypes.string,
-    rows: PropTypes.number,
-    first: PropTypes.number,
-    totalRecords: PropTypes.number,
-    paginator: PropTypes.bool,
-    paginatorPosition: PropTypes.string,
-    alwaysShowPaginator: PropTypes.bool,
-    paginatorClassName: PropTypes.string,
-    paginatorTemplate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    paginatorLeft: PropTypes.any,
-    paginatorRight: PropTypes.any,
-    paginatorDropdownAppendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    pageLinkSize: PropTypes.number,
-    rowsPerPageOptions: PropTypes.array,
-    currentPageReportTemplate: PropTypes.string,
-    emptyMessage: PropTypes.string,
-    sortField: PropTypes.string,
-    sortOrder: PropTypes.number,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    lazy: PropTypes.bool,
-    loading: PropTypes.bool,
-    loadingIcon: PropTypes.string,
-    gutter: PropTypes.bool,
-    itemTemplate: PropTypes.func.isRequired,
-    onPage: PropTypes.func
-}
-
 DataViewLayoutOptions.defaultProps = {
     __TYPE: 'DataViewLayoutOptions',
     id: null,
@@ -297,13 +261,4 @@ DataViewLayoutOptions.defaultProps = {
     className: null,
     layout: null,
     onChange: null
-}
-
-DataViewLayoutOptions.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    layout: PropTypes.string,
-    onChange: PropTypes.func.isRequired
 }

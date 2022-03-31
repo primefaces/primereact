@@ -15,7 +15,7 @@ interface TriStateCheckboxChangeParams {
     target: TriStateCheckboxChangeTargetOptions;
 }
 
-export interface TriStateCheckboxProps {
+export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     inputId?: string;

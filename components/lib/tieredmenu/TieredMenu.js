@@ -1,5 +1,4 @@
 import React, { useState, useRef, forwardRef, useImperativeHandle, memo } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact from '../api/Api';
 import { TieredMenuSub } from './TieredMenuSub';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -110,19 +109,4 @@ TieredMenu.defaultProps = {
     transitionOptions: null,
     onShow: null,
     onHide: null
-}
-
-TieredMenu.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array,
-    popup: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    autoZIndex: PropTypes.bool,
-    baseZIndex: PropTypes.number,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    transitionOptions: PropTypes.object,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

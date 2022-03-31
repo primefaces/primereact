@@ -1,5 +1,4 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { DomHandler, classNames } from '../utils/Utils';
 import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 
@@ -173,11 +172,4 @@ ScrollPanel.defaultProps = {
     id: null,
     style: null,
     className: null
-}
-
-ScrollPanel.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string
 }

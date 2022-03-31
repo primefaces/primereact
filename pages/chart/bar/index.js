@@ -753,11 +753,11 @@ export class BarChartDemo extends Component {
         'hooks': {
             tabName: 'Hooks Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const BarChartDemo = () => {
-    const basicData = {
+    const [basicData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
             {
@@ -771,9 +771,9 @@ const BarChartDemo = () => {
                 data: [28, 48, 40, 19, 86, 27, 90]
             }
         ]
-    };
+    });
 
-    const multiAxisData = {
+    const [multiAxisData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             label: 'Dataset 1',
@@ -794,9 +794,9 @@ const BarChartDemo = () => {
             yAxisID: 'y1',
             data: [28, 48, 40, 19, 86, 27, 90]
         }]
-    };
+    });
 
-    const stackedData = {
+    const [stackedData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             type: 'bar',
@@ -838,7 +838,7 @@ const BarChartDemo = () => {
                 32
             ]
         }]
-    };
+    });
 
     const getLightTheme = () => {
         let basicOptions = {
@@ -1030,11 +1030,11 @@ const BarChartDemo = () => {
         'ts': {
             tabName: 'TS Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const BarChartDemo = () => {
-    const basicData = {
+    const [basicData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
             {
@@ -1048,9 +1048,9 @@ const BarChartDemo = () => {
                 data: [28, 48, 40, 19, 86, 27, 90]
             }
         ]
-    };
+    });
 
-    const multiAxisData = {
+    const [multiAxisData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             label: 'Dataset 1',
@@ -1071,9 +1071,9 @@ const BarChartDemo = () => {
             yAxisID: 'y1',
             data: [28, 48, 40, 19, 86, 27, 90]
         }]
-    };
+    });
 
-    const stackedData = {
+    const [stackedData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             type: 'bar',
@@ -1115,7 +1115,7 @@ const BarChartDemo = () => {
                 32
             ]
         }]
-    };
+    });
 
     const getLightTheme = () => {
         let basicOptions = {

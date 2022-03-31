@@ -256,13 +256,14 @@ const CarouselDemo = () => {
             imports: `
         <link rel="stylesheet" href="./CarouselDemo.css" />
         <script src="./ProductService.js"></script>
-
+        <script src="https://unpkg.com/primereact/utils/utils.min.js"></script>
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/carousel/carousel.min.js"></script>`,
             content: `
 const { useEffect, useState } = React;
 const { Carousel } = primereact.carousel;
 const { Button } = primereact.button;
+const { classNames } = primereact.utils;
 
 const CarouselDemo = () => {
     const [products, setProducts] = useState([]);

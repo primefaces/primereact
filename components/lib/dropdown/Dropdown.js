@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact, { FilterService } from '../api/Api';
 import { DropdownPanel } from './DropdownPanel';
 import { tip } from '../tooltip/Tooltip';
@@ -688,7 +687,7 @@ export const Dropdown = memo(forwardRef((props, ref) => {
     const clearIcon = createClearIcon();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}
+        <div {...ObjectUtils.findDiffKeys(this.props, Dropdown.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}
             onMouseDown={props.onMouseDown} onContextMenu={props.onContextMenu}>
             {keyboardHelper}
             {hiddenSelect}
@@ -762,63 +761,4 @@ Dropdown.defaultProps = {
     onShow: null,
     onHide: null,
     onFilter: null
-}
-
-Dropdown.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    name: PropTypes.string,
-    value: PropTypes.any,
-    options: PropTypes.array,
-    optionLabel: PropTypes.string,
-    optionValue: PropTypes.string,
-    optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    optionGroupLabel: PropTypes.string,
-    optionGroupChildren: PropTypes.string,
-    optionGroupTemplate: PropTypes.any,
-    valueTemplate: PropTypes.any,
-    itemTemplate: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    virtualScrollerOptions: PropTypes.object,
-    scrollHeight: PropTypes.string,
-    filter: PropTypes.bool,
-    filterBy: PropTypes.string,
-    filterMatchMode: PropTypes.string,
-    filterPlaceholder: PropTypes.string,
-    filterLocale: PropTypes.string,
-    emptyMessage: PropTypes.any,
-    emptyFilterMessage: PropTypes.any,
-    editable: PropTypes.bool,
-    placeholder: PropTypes.string,
-    required: PropTypes.bool,
-    disabled: PropTypes.bool,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    tabIndex: PropTypes.number,
-    autoFocus: PropTypes.bool,
-    filterInputAutoFocus: PropTypes.bool,
-    resetFilterOnHide: PropTypes.bool,
-    showFilterClear: PropTypes.bool,
-    panelClassName: PropTypes.string,
-    panelStyle: PropTypes.object,
-    dataKey: PropTypes.string,
-    inputId: PropTypes.string,
-    showClear: PropTypes.bool,
-    maxLength: PropTypes.number,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabel: PropTypes.string,
-    ariaLabelledBy: PropTypes.string,
-    transitionOptions: PropTypes.object,
-    dropdownIcon: PropTypes.string,
-    showOnFocus: PropTypes.bool,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onMouseDown: PropTypes.func,
-    onContextMenu: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func,
-    onFilter: PropTypes.func
 }

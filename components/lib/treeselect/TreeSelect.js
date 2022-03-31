@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import PrimeReact, { localeOption } from '../api/Api';
 import { TreeSelectPanel } from './TreeSelectPanel';
 import { Tree } from '../tree/Tree';
@@ -468,7 +467,7 @@ export const TreeSelect = memo(forwardRef((props, ref) => {
     const footer = createFooter();
 
     return (
-        <div id={props.id} ref={elementRef} className={className} style={props.style} onClick={onClick}>
+        <div {...ObjectUtils.findDiffKeys(this.props, TreeSelect.defaultProps)} id={props.id} ref={elementRef} className={className} style={props.style} onClick={onClick}>
             {keyboardHelper}
             {labelElement}
             {dropdownIcon}
@@ -524,49 +523,4 @@ TreeSelect.defaultProps = {
     onNodeExpand: null,
     onNodeCollapse: null,
     onFilterValueChange: null
-}
-
-TreeSelect.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.any,
-    name: PropTypes.string,
-    style: PropTypes.object,
-    classNames: PropTypes.string,
-    disabled: PropTypes.bool,
-    options: PropTypes.any,
-    scrollHeight: PropTypes.string,
-    placeholder: PropTypes.string,
-    tabIndex: PropTypes.number,
-    inputId: PropTypes.string,
-    ariaLabel: PropTypes.string,
-    ariaLabelledBy: PropTypes.string,
-    selectionMode: PropTypes.string,
-    panelStyle: PropTypes.bool,
-    panelClassName: PropTypes.string,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    emptyMessage: PropTypes.string,
-    display: PropTypes.string,
-    metaKeySelection: PropTypes.bool,
-    valueTemplate: PropTypes.any,
-    panelHeaderTemplate: PropTypes.any,
-    panelFooterTemplate: PropTypes.any,
-    transitionOptions: PropTypes.object,
-    dropdownIcon: PropTypes.string,
-    filter: PropTypes.bool,
-    filterValue: PropTypes.string,
-    filterBy: PropTypes.any,
-    filterMode: PropTypes.string,
-    filterPlaceholder: PropTypes.string,
-    filterLocale: PropTypes.string,
-    filterInputAutoFocus: PropTypes.bool,
-    resetFilterOnHide: PropTypes.bool,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func,
-    onChange: PropTypes.func,
-    onNodeSelect: PropTypes.func,
-    onNodeUnselect: PropTypes.func,
-    onNodeExpand: PropTypes.func,
-    onNodeCollapse: PropTypes.func,
-    onFilterValueChange: PropTypes.func
 }

@@ -1,5 +1,4 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { tip } from '../tooltip/Tooltip';
 import { ObjectUtils, classNames } from '../utils/Utils';
 import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
@@ -129,7 +128,7 @@ export const MultiStateCheckbox = memo(forwardRef((props, ref) => {
     const icon = createIcon();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+        <div {...ObjectUtils.findDiffKeys(this.props, MultiStateCheckbox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
             <div className="p-hidden-accessible">
                 <input ref={inputRef} type="checkbox" aria-labelledby={props.ariaLabelledBy} id={props.inputId} name={props.name}
                     onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} defaultChecked={!!selectedOption} />
@@ -161,26 +160,4 @@ MultiStateCheckbox.defaultProps = {
     tooltipOptions: null,
     ariaLabelledBy: null,
     onChange: null
-}
-
-MultiStateCheckbox.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    inputId: PropTypes.string,
-    value: PropTypes.any,
-    options: PropTypes.any,
-    optionValue: PropTypes.string,
-    iconTemplate: PropTypes.any,
-    dataKey: PropTypes.string,
-    name: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    empty: PropTypes.bool,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    onChange: PropTypes.func
 }
