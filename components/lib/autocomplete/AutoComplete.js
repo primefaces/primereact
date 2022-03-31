@@ -195,7 +195,9 @@ export const AutoComplete = memo(forwardRef((props, ref) => {
     }
 
     const onDropdownClick = (event) => {
-        inputRef.current.focus();
+        if (props.dropdownAutoFocus) {
+            inputRef.current.focus();
+        }
 
         if (props.dropdownMode === 'blank')
             search(event, '', 'dropdown');
@@ -593,6 +595,7 @@ AutoComplete.defaultProps = {
     scrollHeight: '200px',
     dropdown: false,
     dropdownMode: 'blank',
+    dropdownAutoFocus: true,
     multiple: false,
     minLength: 1,
     delay: 300,

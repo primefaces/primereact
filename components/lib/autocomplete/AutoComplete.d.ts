@@ -62,6 +62,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     scrollHeight?: string;
     dropdown?: boolean;
     dropdownMode?: string;
+    dropdownAutoFocus?: boolean;
     multiple?: boolean;
     minLength?: number;
     delay?: number;

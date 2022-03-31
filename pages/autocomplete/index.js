@@ -143,7 +143,7 @@ const AutoCompleteDemo = () => {
                     <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)} />
 
                     <h5>Dropdown, Templating and Force Selection</h5>
-                    <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
+                    <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown dropdownAutoFocus={false} forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
 
                     <h5>Virtual Scroll (100000 Items)</h5>
                     <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} />
