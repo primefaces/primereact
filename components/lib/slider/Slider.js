@@ -1,5 +1,5 @@
 import React, { forwardRef, memo, useRef } from 'react';
-import { DomHandler, classNames } from '../utils/Utils';
+import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
 import { useEventListener } from '../hooks/Hooks';
 
 export const Slider = memo(forwardRef((props, ref) => {
