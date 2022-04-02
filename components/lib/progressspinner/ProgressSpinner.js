@@ -1,7 +1,7 @@
-import React, { forwardRef, memo } from 'react';
+import * as React from 'react';
 import { classNames } from '../utils/Utils';
 
-export const ProgressSpinner = memo(forwardRef((props, ref) => {
+export const ProgressSpinner = React.memo(React.forwardRef((props, ref) => {
     const className = classNames('p-progress-spinner', props.className);
 
     return (
@@ -13,12 +13,13 @@ export const ProgressSpinner = memo(forwardRef((props, ref) => {
     )
 }));
 
+ProgressSpinner.displayName = 'ProgressSpinner';
 ProgressSpinner.defaultProps = {
     __TYPE: 'ProgressSpinner',
     id: null,
     style: null,
     className: null,
-    strokeWidth: "2",
-    fill: "none",
-    animationDuration: "2s"
+    strokeWidth: '2',
+    fill: 'none',
+    animationDuration: '2s'
 }

@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 
-export const TreeTableFooter = memo((props) => {
+export const TreeTableFooter = React.memo((props) => {
 
     const createFooterCell = (column, index) => {
         return (
@@ -63,4 +63,6 @@ export const TreeTableFooter = memo((props) => {
     else {
         return null;
     }
-})
+});
+
+TreeTableFooter.displayName = 'TreeTableFooter';

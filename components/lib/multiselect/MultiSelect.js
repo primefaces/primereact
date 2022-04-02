@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
@@ -6,14 +6,14 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { MultiSelectPanel } from './MultiSelectPanel';
 
-export const MultiSelect = memo(forwardRef((props, ref) => {
-    const [filterState, setFilterState] = useState('');
-    const [focusedState, setFocusedState] = useState(false);
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const elementRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const labelRef = useRef(null);
-    const overlayRef = useRef(null);
+export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
+    const [filterState, setFilterState] = React.useState('');
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
+    const labelRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
     const hasFilter = filterState && filterState.trim().length > 0;
     const empty = ObjectUtils.isEmpty(props.value);
     const equalityKey = props.optionValue ? null : props.dataKey;
@@ -500,7 +500,7 @@ export const MultiSelect = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
@@ -575,6 +575,7 @@ export const MultiSelect = memo(forwardRef((props, ref) => {
     )
 }));
 
+MultiSelect.displayName = 'MultiSelect';
 MultiSelect.defaultProps = {
     __TYPE: 'MultiSelect',
     id: null,

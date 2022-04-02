@@ -1,10 +1,10 @@
-import React, { forwardRef, memo, useEffect, useMemo, useRef } from 'react';
+import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const InputTextarea = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(ref);
-    const cachedScrollHeight = useRef(0);
+export const InputTextarea = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(ref);
+    const cachedScrollHeight = React.useRef(0);
 
     const onFocus = (event) => {
         if (props.autoResize) {
@@ -67,15 +67,15 @@ export const InputTextarea = memo(forwardRef((props, ref) => {
         }
     }
 
-    const isFilled = useMemo(() => (
+    const isFilled = useReact.memo(() => (
         ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (elementRef.current && ObjectUtils.isNotEmpty(elementRef.current.value))
     ), [props.value, props.defaultValue]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(elementRef, ref);
     }, [elementRef, ref]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (props.autoResize) {
             resize(true);
         }
@@ -97,6 +97,7 @@ export const InputTextarea = memo(forwardRef((props, ref) => {
     )
 }));
 
+InputTextarea.displayName = 'InputTextarea';
 InputTextarea.defaultProps = {
     __TYPE: 'InputTextarea',
     autoResize: false,

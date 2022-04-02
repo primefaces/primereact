@@ -1,7 +1,7 @@
-import React, { forwardRef, memo } from 'react';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const BreadCrumb = memo(forwardRef((props, ref) => {
+export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
 
     const itemClick = (event, item) => {
         if (item.disabled) {
@@ -110,6 +110,7 @@ export const BreadCrumb = memo(forwardRef((props, ref) => {
     )
 }));
 
+BreadCrumb.displayName = 'BreadCrumb';
 BreadCrumb.defaultProps = {
     __TYPE: 'BreadCrumb',
     id: null,

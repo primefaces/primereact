@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const MultiSelectItem = memo((props) => {
+export const MultiSelectItem = React.memo((props) => {
 
     const onClick = (event) => {
         if (props.onClick) {
@@ -49,3 +49,5 @@ export const MultiSelectItem = memo((props) => {
         </li>
     )
 });
+
+MultiSelectItem.displayName = 'MultiSelectItem';

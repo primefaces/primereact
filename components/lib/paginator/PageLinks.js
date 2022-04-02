@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const PageLinks = memo((props) => {
+export const PageLinks = React.memo((props) => {
 
     const onPageLinkClick = (event, pageLink) => {
         if (props.onClick) {
@@ -64,6 +64,7 @@ export const PageLinks = memo((props) => {
     return <span className="p-paginator-pages">{elements}</span>
 });
 
+PageLinks.displayName = 'PageLinks';
 PageLinks.defaultProps = {
     __TYPE: 'PageLinks',
     value: null,

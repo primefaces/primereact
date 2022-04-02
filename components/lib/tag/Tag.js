@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
+import * as React from 'react';
 import { classNames, IconUtils } from '../utils/Utils';
 
-export const Tag = forwardRef((props, ref) => {
+export const Tag = React.forwardRef((props, ref) => {
 
     const className = classNames('p-tag p-component', {
         [`p-tag-${props.severity}`]: props.severity !== null,
@@ -18,6 +18,7 @@ export const Tag = forwardRef((props, ref) => {
     )
 });
 
+Tag.displayName = 'Tag';
 Tag.defaultProps = {
     __TYPE: 'Tag',
     value: null,

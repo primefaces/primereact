@@ -1,9 +1,9 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const FooterCell = memo((props) => {
-    const [styleObjectState, setStyleObjectState] = useState({});
-    const elementRef = useRef(null);
+export const FooterCell = React.memo((props) => {
+    const [styleObjectState, setStyleObjectState] = React.useState({});
+    const elementRef = React.useRef(null);
 
     const getColumnProp = (prop) => {
         return props.column.props[prop];
@@ -41,7 +41,7 @@ export const FooterCell = memo((props) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (getColumnProp('frozen')) {
             updateStickyPosition();
         }
@@ -63,3 +63,5 @@ export const FooterCell = memo((props) => {
         </td>
     )
 });
+
+FooterCell.displayName = 'FooterCell';

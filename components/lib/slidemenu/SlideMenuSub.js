@@ -1,8 +1,8 @@
-import React, { useState, memo } from 'react';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const SlideMenuSub = memo((props) => {
-    const [activeItemState, setActiveItemState] = useState(null);
+export const SlideMenuSub = React.memo((props) => {
+    const [activeItemState, setActiveItemState] = React.useState(null);
 
     const onItemClick = (event, item) => {
         if (item.disabled) {
@@ -110,3 +110,5 @@ export const SlideMenuSub = memo((props) => {
         </ul>
     )
 });
+
+SlideMenuSub.displayName = 'SlideMenuSub';

@@ -1,12 +1,12 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const MultiStateCheckbox = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const elementRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
+export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
     const equalityKey = props.optionValue ? null : props.dataKey;
 
     const onClick = (event) => {
@@ -65,7 +65,7 @@ export const MultiStateCheckbox = memo(forwardRef((props, ref) => {
         return { option, index };
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
@@ -123,6 +123,7 @@ export const MultiStateCheckbox = memo(forwardRef((props, ref) => {
     )
 }));
 
+MultiStateCheckbox.displayName = 'MultiStateCheckbox';
 MultiStateCheckbox.defaultProps = {
     __TYPE: 'MultiStateCheckbox',
     id: null,

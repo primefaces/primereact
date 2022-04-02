@@ -1,10 +1,10 @@
-import React, { forwardRef, memo, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames, UniqueComponentId } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, usePrevious, useResizeListener } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
-const GalleriaThumbnailItem = memo((props) => {
+const GalleriaThumbnailItem = React.memo((props) => {
 
     const onItemClick = (event) => {
         props.onItemClick({
@@ -40,14 +40,14 @@ const GalleriaThumbnailItem = memo((props) => {
     )
 });
 
-export const GalleriaThumbnails = memo(forwardRef((props, ref) => {
-    const [numVisibleState, setNumVisibleState] = useState(props.numVisible);
-    const [totalShiftedItemsState, setTotalShiftedItemsState] = useState(0);
-    const itemsContainerRef = useRef(null);
-    const startPos = useRef(null);
-    const attributeSelector = useRef('');
-    const thumbnailsStyle = useRef(null);
-    const responsiveOptions = useRef(null);
+export const GalleriaThumbnails = React.memo(React.forwardRef((props, ref) => {
+    const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
+    const [totalShiftedItemsState, setTotalShiftedItemsState] = React.useState(0);
+    const itemsContainerRef = React.useRef(null);
+    const startPos = React.useRef(null);
+    const attributeSelector = React.useRef('');
+    const thumbnailsStyle = React.useRef(null);
+    const responsiveOptions = React.useRef(null);
     const prevNumVisible = usePrevious(numVisibleState);
     const prevActiveItemIndex = usePrevious(props.activeItemIndex);
 
@@ -386,3 +386,6 @@ export const GalleriaThumbnails = memo(forwardRef((props, ref) => {
         </div>
     )
 }));
+
+GalleriaThumbnailItem.displayName = 'GalleriaThumbnailItem';
+GalleriaThumbnails.displayName = 'GalleriaThumbnails';

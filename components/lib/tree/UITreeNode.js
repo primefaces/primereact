@@ -1,10 +1,10 @@
-import React, { memo, useRef } from 'react';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const UITreeNode = memo((props) => {
-    const contentRef = useRef(null);
-    const nodeTouched = useRef(false);
+export const UITreeNode = React.memo((props) => {
+    const contentRef = React.useRef(null);
+    const nodeTouched = React.useRef(false);
     const isLeaf = props.isNodeLeaf(props.node);
     const expanded = (props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false) || props.node.expanded;
 
@@ -705,3 +705,5 @@ export const UITreeNode = memo((props) => {
 
     return node;
 });
+
+UITreeNode.displayName = 'UITreeNode';

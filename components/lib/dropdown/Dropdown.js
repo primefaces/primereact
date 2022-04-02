@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
@@ -6,17 +6,17 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { DropdownPanel } from './DropdownPanel';
 
-export const Dropdown = memo(forwardRef((props, ref) => {
-    const [filterState, setFilterState] = useState('');
-    const [focusedState, setFocusedState] = useState(false);
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const elementRef = useRef(null);
-    const overlayRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const focusInputRef = useRef(null);
-    const searchTimeout = useRef(null);
-    const searchValue = useRef(null);
-    const currentSearchChar = useRef(null);
+export const Dropdown = React.memo(React.forwardRef((props, ref) => {
+    const [filterState, setFilterState] = React.useState('');
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
+    const focusInputRef = React.useRef(null);
+    const searchTimeout = React.useRef(null);
+    const searchValue = React.useRef(null);
+    const currentSearchChar = React.useRef(null);
     const isLazy = props.virtualScrollerOptions && props.virtualScrollerOptions.lazy;
     const hasFilter = ObjectUtils.isNotEmpty(filterState);
     const appendTo = props.appendTo || PrimeReact.appendTo;
@@ -548,7 +548,7 @@ export const Dropdown = memo(forwardRef((props, ref) => {
         return index !== -1 ? (props.optionGroupLabel ? getOptionGroupChildren(visibleOptions[index.group])[index.option] : visibleOptions[index]) : null;
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
@@ -689,6 +689,7 @@ export const Dropdown = memo(forwardRef((props, ref) => {
     )
 }));
 
+Dropdown.displayName = 'Dropdown';
 Dropdown.defaultProps = {
     __TYPE: 'Dropdown',
     id: null,

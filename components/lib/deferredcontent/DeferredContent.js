@@ -1,9 +1,9 @@
-import React, { forwardRef, useRef, useState } from 'react';
-import { useMountEffect, useEventListener } from '../hooks/Hooks';
+import * as React from 'react';
+import { useEventListener, useMountEffect } from '../hooks/Hooks';
 
-export const DeferredContent = forwardRef((props, ref) => {
-    const [loadedState, setLoadedState] = useState(false);
-    const elementRef = useRef(null);
+export const DeferredContent = React.forwardRef((props, ref) => {
+    const [loadedState, setLoadedState] = React.useState(false);
+    const elementRef = React.useRef(null);
 
     const [bindScrollListener, unbindScrollListener] = useEventListener({
         target: 'window', type: 'scroll', listener: () => {
@@ -44,6 +44,7 @@ export const DeferredContent = forwardRef((props, ref) => {
     )
 });
 
+DeferredContent.displayName = 'DeferredContent';
 DeferredContent.defaultProps = {
     __TYPE: 'DeferredContent',
     onload: null

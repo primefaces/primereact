@@ -1,27 +1,27 @@
-import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { localeOption } from '../api/Api';
+import { useMountEffect, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyRow } from './BodyRow';
 import { RowTogglerButton } from './RowTogglerButton';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect, usePrevious } from '../hooks/Hooks';
 
-export const TableBody = memo((props) => {
-    const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = useState({});
-    const elementRef = useRef(null);
-    const ref = useCallback((el) => {
+export const TableBody = React.memo((props) => {
+    const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = React.useState({});
+    const elementRef = React.useRef(null);
+    const ref = React.useCallback((el) => {
         elementRef.current = el;
         props.virtualScrollerContentRef && props.virtualScrollerContentRef(el);
     }, [props]);
-    const dragSelectionHelper = useRef(null);
-    const initialDragPosition = useRef(null);
-    const anchorRowIndex = useRef(null);
-    const anchorCellIndex = useRef(null);
-    const rangeRowIndex = useRef(null);
-    const anchorRowFirst = useRef(null);
-    const rowTouched = useRef(false);
-    const rowDragging = useRef(false);
-    const draggedRowIndex = useRef(null);
-    const droppedRowIndex = useRef(null);
+    const dragSelectionHelper = React.useRef(null);
+    const initialDragPosition = React.useRef(null);
+    const anchorRowIndex = React.useRef(null);
+    const anchorCellIndex = React.useRef(null);
+    const rangeRowIndex = React.useRef(null);
+    const anchorRowFirst = React.useRef(null);
+    const rowTouched = React.useRef(false);
+    const rowDragging = React.useRef(false);
+    const draggedRowIndex = React.useRef(null);
+    const droppedRowIndex = React.useRef(null);
     const prevVirtualScrollerOptions = usePrevious(props.virtualScrollerOptions);
     const isSubheaderGrouping = props.rowGroupMode && props.rowGroupMode === 'subheader';
     const isRadioSelectionMode = props.selectionMode === 'radiobutton';
@@ -767,7 +767,7 @@ export const TableBody = memo((props) => {
         onDragSelectionMouseUp();
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (props.frozenRow) {
             updateFrozenRowStickyPosition();
         }
@@ -932,3 +932,5 @@ export const TableBody = memo((props) => {
         </tbody>
     )
 });
+
+TableBody.displayName = 'TableBody';

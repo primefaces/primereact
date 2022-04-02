@@ -1,13 +1,13 @@
-import React, { forwardRef, useRef, useState } from 'react';
-import { Ripple } from '../ripple/Ripple';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ObjectUtils, classNames, IconUtils, UniqueComponentId } from '../utils/Utils';
 import { useMountEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
-export const Panel = forwardRef((props, ref) => {
-    const [idState, setIdState] = useState(props.id);
-    const [collapsedState, setCollapsedState] = useState(props.collapsed);
-    const contentRef = useRef(null);
+export const Panel = React.forwardRef((props, ref) => {
+    const [idState, setIdState] = React.useState(props.id);
+    const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
+    const contentRef = React.useRef(null);
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
     const headerId = idState + '_header';
     const contentId = idState + '_content';
@@ -134,6 +134,7 @@ export const Panel = forwardRef((props, ref) => {
     )
 });
 
+Panel.displayName = 'Panel';
 Panel.defaultProps = {
     __TYPE: 'Panel',
     id: null,

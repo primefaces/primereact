@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -8,18 +8,18 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { AutoCompletePanel } from './AutoCompletePanel';
 
-export const AutoComplete = memo(forwardRef((props, ref) => {
-    const [idState, setIdState] = useState(props.id);
-    const [searchingState, setSearchingState] = useState(false);
-    const [focusedState, setFocusedState] = useState(false);
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const elementRef = useRef(null);
-    const overlayRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const multiContainerRef = useRef(null);
-    const virtualScrollerRef = useRef(null);
-    const timeout = useRef(null);
-    const selectedItem = useRef(null);
+export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
+    const [idState, setIdState] = React.useState(props.id);
+    const [searchingState, setSearchingState] = React.useState(false);
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
+    const multiContainerRef = React.useRef(null);
+    const virtualScrollerRef = React.useRef(null);
+    const timeout = React.useRef(null);
+    const selectedItem = React.useRef(null);
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: elementRef, overlay: overlayRef, listener: (event, { type, valid }) => {
@@ -409,7 +409,7 @@ export const AutoComplete = memo(forwardRef((props, ref) => {
         return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupChildren);
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
@@ -444,7 +444,7 @@ export const AutoComplete = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(overlayRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         search
     }));
 
@@ -562,6 +562,7 @@ export const AutoComplete = memo(forwardRef((props, ref) => {
     )
 }));
 
+AutoComplete.displayName = 'AutoComplete';
 AutoComplete.defaultProps = {
     __TYPE: 'AutoComplete',
     id: null,

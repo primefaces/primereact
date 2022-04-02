@@ -1,9 +1,9 @@
-import React, { memo, useState } from 'react';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const SelectButtonItem = memo((props) => {
-    const [focusedState, setFocusedState] = useState(false);
+export const SelectButtonItem = React.memo((props) => {
+    const [focusedState, setFocusedState] = React.useState(false);
 
     const onClick = (event) => {
         if (props.onClick) {
@@ -49,3 +49,5 @@ export const SelectButtonItem = memo((props) => {
         </div>
     )
 });
+
+SelectButtonItem.displayName = 'SelectButtonItem';

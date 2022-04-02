@@ -1,9 +1,9 @@
-import React, { forwardRef, memo, useState } from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Dock = memo(forwardRef((props, ref) => {
-    const [currentIndexState, setCurrentIndexState] = useState(-3);
+export const Dock = React.memo(React.forwardRef((props, ref) => {
+    const [currentIndexState, setCurrentIndexState] = React.useState(-3);
 
     const onListMouseLeave = () => {
         setCurrentIndexState(-3);
@@ -119,6 +119,7 @@ export const Dock = memo(forwardRef((props, ref) => {
     )
 }));
 
+Dock.displayName = 'Dock';
 Dock.defaultProps = {
     __TYPE: 'Dock',
     id: null,

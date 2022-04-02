@@ -1,11 +1,11 @@
-import React, { forwardRef, memo, useImperativeHandle, useRef } from 'react';
-import { classNames, DomHandler } from '../utils/Utils';
+import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler } from '../utils/Utils';
 
-export const Editor = memo(forwardRef((props, ref) => {
-    const contentRef = useRef(null);
-    const toolbarRef = useRef(null);
-    const quill = useRef(null);
+export const Editor = React.memo(React.forwardRef((props, ref) => {
+    const contentRef = React.useRef(null);
+    const toolbarRef = React.useRef(null);
+    const quill = React.useRef(null);
 
     const getQuill = () => {
         return quill.current;
@@ -71,7 +71,7 @@ export const Editor = memo(forwardRef((props, ref) => {
         }
     }, [props.value]);
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         getQuill
     }));
 
@@ -145,6 +145,7 @@ export const Editor = memo(forwardRef((props, ref) => {
     )
 }));
 
+Editor.displayName = 'Editor';
 Editor.defaultProps = {
     __TYPE: 'Editor',
     id: null,

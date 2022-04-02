@@ -1,8 +1,8 @@
-import React, { forwardRef } from 'react';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 
-export const CalendarPanel = forwardRef((props, ref) => {
+export const CalendarPanel = React.forwardRef((props, ref) => {
 
     const createElement = () => {
         return (
@@ -19,3 +19,5 @@ export const CalendarPanel = forwardRef((props, ref) => {
 
     return props.inline ? element : <Portal element={element} appendTo={props.appendTo} />;
 });
+
+CalendarPanel.displayName = 'CalendarPanel';

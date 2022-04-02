@@ -1,12 +1,12 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export const Checkbox = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const elementRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
+export const Checkbox = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
 
     const onClick = (event) => {
         if (!props.disabled && !props.readOnly && props.onChange) {
@@ -54,7 +54,7 @@ export const Checkbox = memo(forwardRef((props, ref) => {
         return props.checked === props.trueValue;
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
@@ -92,6 +92,7 @@ export const Checkbox = memo(forwardRef((props, ref) => {
     )
 }));
 
+Checkbox.displayName = 'Checkbox';
 Checkbox.defaultProps = {
     __TYPE: 'Checkbox',
     id: null,

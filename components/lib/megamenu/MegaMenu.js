@@ -1,12 +1,12 @@
-import React, { useState, useRef, memo, forwardRef } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils } from '../utils/Utils';
-import { useMountEffect, useEventListener, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export const MegaMenu = memo(forwardRef((props, ref) => {
-    const [activeItemState, setActiveItemState] = useState(null);
-    const elementRef = useRef(null);
+export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
+    const [activeItemState, setActiveItemState] = React.useState(null);
+    const elementRef = React.useRef(null);
     const horizontal = props.orientation === 'horizontal';
     const vertical = props.orientation === 'vertical';
 
@@ -369,6 +369,7 @@ export const MegaMenu = memo(forwardRef((props, ref) => {
     )
 }));
 
+MegaMenu.displayName = 'MegaMenu';
 MegaMenu.defaultProps = {
     __TYPE: 'MegaMenu',
     id: null,

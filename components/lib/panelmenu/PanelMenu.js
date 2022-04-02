@@ -1,12 +1,12 @@
-import React, { createRef, forwardRef, memo, useState } from 'react';
-import { PanelMenuSub } from './PanelMenuSub';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ObjectUtils, classNames, UniqueComponentId } from '../utils/Utils';
 import { useMountEffect } from '../hooks/Hooks';
+import { classNames, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { PanelMenuSub } from './PanelMenuSub';
 
-export const PanelMenu = memo(forwardRef((props, ref) => {
-    const [idState, setIdState] = useState(props.id);
-    const [activeItemState, setActiveItemState] = useState(null);
+export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
+    const [idState, setIdState] = React.useState(props.id);
+    const [activeItemState, setActiveItemState] = React.useState(null);
     const headerId = idState + '_header';
     const contentId = idState + '_content';
 
@@ -90,7 +90,7 @@ export const PanelMenu = memo(forwardRef((props, ref) => {
         const itemIcon = item.icon && <span className={iconClassName}></span>;
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const contentWrapperClassName = classNames('p-toggleable-content', { 'p-toggleable-content-collapsed': !active });
-        const menuContentRef = createRef();
+        const menuContentRef = React.createRef();
         let content = (
             <a href={item.url || '#'} className="p-panelmenu-header-link" onClick={(e) => onItemClick(e, item)} aria-expanded={active}
                 id={headerId} aria-controls={contentId} aria-disabled={item.disabled}>
@@ -146,6 +146,7 @@ export const PanelMenu = memo(forwardRef((props, ref) => {
     )
 }));
 
+PanelMenu.displayName = 'PanelMenu';
 PanelMenu.defaultProps = {
     __TYPE: 'Panel',
     id: null,

@@ -1,11 +1,11 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const TriStateCheckbox = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const elementRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
+export const TriStateCheckbox = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
 
     const onClick = (event) => {
         if (!props.disabled) {
@@ -46,7 +46,7 @@ export const TriStateCheckbox = memo(forwardRef((props, ref) => {
         setFocusedState(false);
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
@@ -78,6 +78,7 @@ export const TriStateCheckbox = memo(forwardRef((props, ref) => {
     )
 }));
 
+TriStateCheckbox.displayName = 'TriStateCheckbox';
 TriStateCheckbox.defaultProps = {
     __TYPE: 'TriStateCheckbox',
     id: null,

@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { Button } from '../button/Button';
 import { ObjectUtils } from '../utils/Utils';
 
-export const OrderListControls = memo((props) => {
+export const OrderListControls = React.memo((props) => {
 
     const moveUp = (event) => {
         if (props.selection) {
@@ -125,3 +125,5 @@ export const OrderListControls = memo((props) => {
         </div>
     )
 });
+
+OrderListControls.displayName = 'OrderListControls';

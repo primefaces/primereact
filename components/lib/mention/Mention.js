@@ -1,23 +1,23 @@
-import React, { forwardRef, memo, useEffect, useMemo, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { Ripple } from '../ripple/Ripple';
-import { OverlayService } from '../overlayservice/OverlayService';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { Portal } from '../portal/Portal';
+import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputTextarea } from '../inputtextarea/InputTextarea';
+import { OverlayService } from '../overlayservice/OverlayService';
+import { Portal } from '../portal/Portal';
+import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { useUpdateEffect, useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
 
-export const Mention = memo(forwardRef((props, ref) => {
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const [focusedState, setFocusedState] = useState(false);
-    const [searchingState, setSearchingState] = useState(false);
-    const [triggerState, setTriggerState] = useState(null);
-    const elementRef = useRef(null);
-    const overlayRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const listRef = useRef(null);
-    const timeout = useRef(null);
+export const Mention = React.memo(React.forwardRef((props, ref) => {
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [searchingState, setSearchingState] = React.useState(false);
+    const [triggerState, setTriggerState] = React.useState(null);
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
+    const listRef = React.useRef(null);
+    const timeout = React.useRef(null);
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: elementRef, overlay: overlayRef, listener: (event, { valid }) => {
@@ -308,11 +308,11 @@ export const Mention = memo(forwardRef((props, ref) => {
         }
     }
 
-    const isFilled = useMemo(() => (
+    const isFilled = useReact.memo(() => (
         ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (inputRef.current && ObjectUtils.isNotEmpty(inputRef.current.value))
     ), [props.value, props.defaultValue, inputRef]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
@@ -400,6 +400,7 @@ export const Mention = memo(forwardRef((props, ref) => {
     )
 }));
 
+Mention.displayName = 'Mention';
 Mention.defaultProps = {
     __TYPE: 'Mention',
     id: null,

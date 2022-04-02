@@ -1,13 +1,13 @@
-import React, { forwardRef, memo, useRef, useState } from 'react';
+import * as React from 'react';
+import { useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { OrderListControls } from './OrderListControls';
 import { OrderListSubList } from './OrderListSubList';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
-import { useUpdateEffect } from '../hooks/Hooks';
 
-export const OrderList = memo(forwardRef((props, ref) => {
-    const [selectionState, setSelectionState] = useState([]);
-    const elementRef = useRef(null);
-    const reorderDirection = useRef(null);
+export const OrderList = React.memo(React.forwardRef((props, ref) => {
+    const [selectionState, setSelectionState] = React.useState([]);
+    const elementRef = React.useRef(null);
+    const reorderDirection = React.useRef(null);
 
     const onItemClick = (event) => {
         const metaKey = (event.originalEvent.metaKey || event.originalEvent.ctrlKey);
@@ -122,6 +122,7 @@ export const OrderList = memo(forwardRef((props, ref) => {
     )
 }));
 
+OrderList.displayName = 'OrderList';
 OrderList.defaultProps = {
     __TYPE: 'OrderList',
     id: null,

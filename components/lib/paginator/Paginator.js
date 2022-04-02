@@ -1,17 +1,17 @@
-import React, { forwardRef, memo, useRef } from 'react';
-import { FirstPageLink } from './FirstPageLink';
-import { NextPageLink } from './NextPageLink';
-import { PrevPageLink } from './PrevPageLink';
-import { LastPageLink } from './LastPageLink';
-import { PageLinks } from './PageLinks';
-import { RowsPerPageDropdown } from './RowsPerPageDropdown';
-import { CurrentPageReport } from './CurrentPageReport';
-import { JumpToPageInput } from './JumpToPageInput';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
 import { useUpdateEffect } from '../hooks/Hooks';
+import { classNames, ObjectUtils } from '../utils/Utils';
+import { CurrentPageReport } from './CurrentPageReport';
+import { FirstPageLink } from './FirstPageLink';
+import { JumpToPageInput } from './JumpToPageInput';
+import { LastPageLink } from './LastPageLink';
+import { NextPageLink } from './NextPageLink';
+import { PageLinks } from './PageLinks';
+import { PrevPageLink } from './PrevPageLink';
+import { RowsPerPageDropdown } from './RowsPerPageDropdown';
 
-export const Paginator = memo(forwardRef((props, ref) => {
-    const rppChanged = useRef(false);
+export const Paginator = React.memo(React.forwardRef((props, ref) => {
+    const rppChanged = React.useRef(false);
     const page = Math.floor(props.first / props.rows);
     const pageCount = Math.ceil(props.totalRecords / props.rows);
     const isFirstPage = (page === 0);
@@ -199,6 +199,7 @@ export const Paginator = memo(forwardRef((props, ref) => {
     }
 }));
 
+Paginator.displayName = 'Paginator';
 Paginator.defaultProps = {
     __TYPE: 'Paginator',
     totalRecords: 0,

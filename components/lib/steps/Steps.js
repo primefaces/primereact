@@ -1,7 +1,7 @@
-import React, { forwardRef, memo } from 'react';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Steps = memo(forwardRef((props, ref) => {
+export const Steps = React.memo(React.forwardRef((props, ref) => {
 
     const itemClick = (event, item, index) => {
         if (props.readOnly || item.disabled) {
@@ -96,6 +96,7 @@ export const Steps = memo(forwardRef((props, ref) => {
     )
 }));
 
+Steps.displayName = 'Steps';
 Steps.defaultProps = {
     __TYPE: 'Steps',
     id: null,

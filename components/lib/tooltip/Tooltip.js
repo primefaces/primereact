@@ -1,18 +1,18 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { DomHandler, classNames, ZIndexUtils, ObjectUtils } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect, useResizeListener, useOverlayScrollListener } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export const Tooltip = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(false);
-    const [positionState, setPositionState] = useState(props.position);
-    const elementRef = useRef(null);
-    const textRef = useRef(null);
-    const currentTargetRef = useRef(null);
-    const containerSize = useRef(null);
-    const allowHide = useRef(true);
-    const timeouts = useRef({});
+export const Tooltip = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(false);
+    const [positionState, setPositionState] = React.useState(props.position);
+    const elementRef = React.useRef(null);
+    const textRef = React.useRef(null);
+    const currentTargetRef = React.useRef(null);
+    const containerSize = React.useRef(null);
+    const allowHide = React.useRef(true);
+    const timeouts = React.useRef({});
 
     const [bindWindowResizeListener, unbindWindowResizeListener] = useResizeListener({
         listener: (event) => {
@@ -301,11 +301,11 @@ export const Tooltip = memo(forwardRef((props, ref) => {
 
     const sendCallback = (callback, ...params) => {
         if (callback) {
-             let result = callback(...params);
-             if (result === undefined) {
-                 result = true;
-             }
-             return result;
+            let result = callback(...params);
+            if (result === undefined) {
+                result = true;
+            }
+            return result;
         }
         return true;
     }
@@ -379,7 +379,7 @@ export const Tooltip = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (visibleState && currentTargetRef.current && isDisabled(currentTargetRef.current)) {
             hide();
         }
@@ -426,7 +426,7 @@ export const Tooltip = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(elementRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         updateTargetEvents,
         loadTargetEvents,
         unloadTargetEvents
@@ -458,6 +458,7 @@ export const Tooltip = memo(forwardRef((props, ref) => {
     return null;
 }));
 
+Tooltip.displayName = 'Tooltip';
 Tooltip.defaultProps = {
     __TYPE: 'Tooltip',
     id: null,

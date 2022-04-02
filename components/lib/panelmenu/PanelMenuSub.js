@@ -1,10 +1,10 @@
-import React, { useState, createRef, memo } from 'react';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ObjectUtils, classNames } from '../utils/Utils';
 import { useMountEffect } from '../hooks/Hooks';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const PanelMenuSub = memo((props) => {
-    const [activeItemState, setActiveItemState] = useState(null);
+export const PanelMenuSub = React.memo((props) => {
+    const [activeItemState, setActiveItemState] = React.useState(null);
 
     const findActiveItem = () => {
         if (props.model) {
@@ -81,7 +81,7 @@ export const PanelMenuSub = memo((props) => {
         const className = classNames('p-toggleable-content', {
             'p-toggleable-content-collapsed': !active
         });
-        const submenuRef = createRef();
+        const submenuRef = React.createRef();
 
         if (item.items) {
             return (
@@ -156,3 +156,5 @@ export const PanelMenuSub = memo((props) => {
         </ul>
     )
 });
+
+PanelMenuSub.displayName = 'PanelMenuSub';

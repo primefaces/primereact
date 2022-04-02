@@ -1,9 +1,9 @@
-import React, { forwardRef } from 'react';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames } from '../utils/Utils';
 
-export const TreeSelectPanel = forwardRef((props, ref) => {
+export const TreeSelectPanel = React.forwardRef((props, ref) => {
 
     const createElement = () => {
         const wrapperStyle = { maxHeight: props.scrollHeight || 'auto' };
@@ -27,3 +27,5 @@ export const TreeSelectPanel = forwardRef((props, ref) => {
 
     return <Portal element={element} appendTo={props.appendTo} />
 });
+
+TreeSelectPanel.displayName = 'TreeSelectPanel';

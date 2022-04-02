@@ -1,11 +1,11 @@
-import React, { forwardRef, useRef } from 'react';
+import * as React from 'react';
+import { useMountEffect, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ObjectUtils } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect, usePrevious } from '../hooks/Hooks';
 
-export const FullCalendar = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
-    const config = useRef({});
-    const calendar = useRef(null);
+export const FullCalendar = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
+    const config = React.useRef({});
+    const calendar = React.useRef(null);
     const prevEvents = usePrevious(props.events);
     const prevOptions = usePrevious(props.options);
 
@@ -68,6 +68,7 @@ export const FullCalendar = memo(forwardRef((props, ref) => {
     return <div ref={elementRef} id={props.id} style={props.style} className={props.className}></div>
 }));
 
+FullCalendar.displayName = 'FullCalendar';
 FullCalendar.defaultProps = {
     __TYPE: 'FullCalendar',
     id: null,

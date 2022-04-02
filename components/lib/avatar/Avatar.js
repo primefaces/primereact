@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
-import { ObjectUtils, classNames, IconUtils } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export const Avatar = forwardRef((props, ref) => {
+export const Avatar = React.forwardRef((props, ref) => {
 
     const createContent = () => {
         if (props.label) {
@@ -35,6 +35,7 @@ export const Avatar = forwardRef((props, ref) => {
     )
 });
 
+Avatar.displayName = 'Avatar';
 Avatar.defaultProps = {
     __TYPE: 'Avatar',
     label: null,

@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const NextPageLink = memo((props) => {
+export const NextPageLink = React.memo((props) => {
     const className = classNames('p-paginator-next p-paginator-element p-link', { 'p-disabled': props.disabled });
     const iconClassName = 'p-paginator-icon pi pi-angle-right';
     const element = (
@@ -28,6 +28,7 @@ export const NextPageLink = memo((props) => {
     return element;
 });
 
+NextPageLink.displayName = 'NextPageLink';
 NextPageLink.defaultProps = {
     __TYPE: 'NextPageLink',
     disabled: false,

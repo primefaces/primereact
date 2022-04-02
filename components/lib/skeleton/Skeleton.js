@@ -1,8 +1,7 @@
-import React, { forwardRef, memo } from 'react';
+import * as React from 'react';
 import { classNames } from '../utils/Utils';
 
-export const Skeleton = memo(forwardRef((props, ref) => {
-
+export const Skeleton = React.memo(React.forwardRef((props, ref) => {
     const style = props.size ?
         { width: props.size, height: props.size, borderRadius: props.borderRadius } :
         { width: props.width, height: props.height, borderRadius: props.borderRadius };
@@ -14,6 +13,7 @@ export const Skeleton = memo(forwardRef((props, ref) => {
     return <div style={style} className={className}></div>
 }));
 
+Skeleton.displayName = 'Skeleton';
 Skeleton.defaultProps = {
     __TYPE: 'Skeleton',
     shape: 'rectangle',

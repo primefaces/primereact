@@ -1,15 +1,15 @@
-import React, { useState, useRef, forwardRef, useImperativeHandle, memo } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
-import { useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export const Menu = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(!props.popup);
-    const menuRef = useRef(null);
-    const targetRef = useRef(null);
+export const Menu = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(!props.popup);
+    const menuRef = React.useRef(null);
+    const targetRef = React.useRef(null);
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: targetRef, overlay: menuRef, listener: (event, { valid }) => {
@@ -121,7 +121,7 @@ export const Menu = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(menuRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         toggle,
         show,
         hide
@@ -220,6 +220,7 @@ export const Menu = memo(forwardRef((props, ref) => {
     return props.popup ? <Portal element={element} appendTo={props.appendTo} /> : element;
 }));
 
+Menu.displayName = 'Menu';
 Menu.defaultProps = {
     __TYPE: 'Menu',
     id: null,

@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, useImperativeHandle, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
@@ -8,12 +8,12 @@ import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } f
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
 
-export const SplitButton = memo(forwardRef((props, ref) => {
-    const [idState, setIdState] = useState(props.id);
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const elementRef = useRef(null);
-    const defaultButtonRef = useRef(null);
-    const overlayRef = useRef(null);
+export const SplitButton = React.memo(React.forwardRef((props, ref) => {
+    const [idState, setIdState] = React.useState(props.id);
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const defaultButtonRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: elementRef, overlay: overlayRef, listener: (event, { valid }) => {
@@ -79,7 +79,7 @@ export const SplitButton = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(overlayRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         show,
         hide
     }));
@@ -120,6 +120,7 @@ export const SplitButton = memo(forwardRef((props, ref) => {
     )
 }));
 
+SplitButton.displayName = 'SplitButton';
 SplitButton.defaultProps = {
     __TYPE: 'SplitButton',
     id: null,

@@ -1,22 +1,22 @@
-import React, { forwardRef, useEffect, useState, useImperativeHandle, useRef } from 'react';
-import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames, UniqueComponentId } from '../utils/Utils';
+import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
 export const TabPanel = () => { }
 
-export const TabView = forwardRef((props, ref) => {
-    const [idState, setIdState] = useState(props.id);
-    const [backwardIsDisabledState, setBackwardIsDisabledState] = useState(true);
-    const [forwardIsDisabledState, setForwardIsDisabledState] = useState(false);
-    const [hiddenTabsState, setHiddenTabsState] = useState([]);
-    const [activeIndexState, setActiveIndexState] = useState(props.activeIndex);
-    const contentRef = useRef(null);
-    const navRef = useRef(null);
-    const inkbarRef = useRef(null);
-    const prevBtnRef = useRef(null);
-    const nextBtnRef = useRef(null);
-    const tabsRef = useRef({});
+export const TabView = React.forwardRef((props, ref) => {
+    const [idState, setIdState] = React.useState(props.id);
+    const [backwardIsDisabledState, setBackwardIsDisabledState] = React.useState(true);
+    const [forwardIsDisabledState, setForwardIsDisabledState] = React.useState(false);
+    const [hiddenTabsState, setHiddenTabsState] = React.useState([]);
+    const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
+    const contentRef = React.useRef(null);
+    const navRef = React.useRef(null);
+    const inkbarRef = React.useRef(null);
+    const prevBtnRef = React.useRef(null);
+    const nextBtnRef = React.useRef(null);
+    const tabsRef = React.useRef({});
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
 
     const isSelected = (index) => index === activeIndex;
@@ -124,7 +124,7 @@ export const TabView = forwardRef((props, ref) => {
             setActiveIndexState(props.activeIndex);
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         updateInkBar();
     });
 
@@ -145,7 +145,7 @@ export const TabView = forwardRef((props, ref) => {
         updateScrollBar(props.activeIndex);
     }, [props.activeIndex]);
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         reset
     }));
 
@@ -293,6 +293,7 @@ export const TabView = forwardRef((props, ref) => {
     )
 });
 
+TabPanel.displayName = 'TabPanel';
 TabPanel.defaultProps = {
     __TYPE: 'TabPanel',
     header: null,
@@ -309,6 +310,7 @@ TabPanel.defaultProps = {
     contentClassName: null
 }
 
+TabView.displayName = 'TabView';
 TabView.defaultProps = {
     __TYPE: 'TabView',
     id: null,

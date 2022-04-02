@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { ObjectUtils } from '../utils/Utils';
 
-export const CurrentPageReport = memo((props) => {
+export const CurrentPageReport = React.memo((props) => {
     const report = {
         currentPage: props.page + 1,
         totalPages: props.pageCount,
@@ -36,6 +36,7 @@ export const CurrentPageReport = memo((props) => {
     return element;
 });
 
+CurrentPageReport.displayName = 'CurrentPageReport';
 CurrentPageReport.defaultProps = {
     __TYPE: 'CurrentPageReport',
     pageCount: null,

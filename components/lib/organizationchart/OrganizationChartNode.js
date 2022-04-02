@@ -1,9 +1,9 @@
-import React, { memo, useState } from 'react';
+import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const OrganizationChartNode = memo((props) => {
+export const OrganizationChartNode = React.memo((props) => {
     const node = props.node;
-    const [expandedState, setExpandedState] = useState(node.expanded);
+    const [expandedState, setExpandedState] = React.useState(node.expanded);
     const leaf = node.leaf === false ? false : !(node.children && node.children.length);
     const colspan = (node.children && node.children.length) ? node.children.length * 2 : null;
     const selected = props.isSelected(node);
@@ -132,3 +132,5 @@ export const OrganizationChartNode = memo((props) => {
         </table>
     )
 });
+
+OrganizationChartNode.displayName = 'OrganizationChartNode';

@@ -1,11 +1,11 @@
 /*global google*/
-import React, { useRef, forwardRef, useImperativeHandle, memo } from 'react';
+import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 
-export const GMap = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
-    const map = useRef(null);
-    const prevOverlays = useRef(null);
+export const GMap = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
+    const map = React.useRef(null);
+    const prevOverlays = React.useRef(null);
 
     const initMap = () => {
         map.current = new google.maps.Map(elementRef.current, props.options);
@@ -93,13 +93,14 @@ export const GMap = memo(forwardRef((props, ref) => {
         initOverlays(props.overlays);
     }, [props.overlays]);
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         getMap
     }));
 
     return <div ref={elementRef} style={props.style} className={props.className}></div>
 }));
 
+GMap.displayName = 'GMap';
 GMap.defaultProps = {
     __TYPE: 'GMap',
     options: null,

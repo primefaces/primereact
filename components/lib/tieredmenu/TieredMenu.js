@@ -1,16 +1,16 @@
-import React, { useState, useRef, forwardRef, useImperativeHandle, memo } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { TieredMenuSub } from './TieredMenuSub';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, classNames, ZIndexUtils } from '../utils/Utils';
-import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ZIndexUtils } from '../utils/Utils';
+import { TieredMenuSub } from './TieredMenuSub';
 
-export const TieredMenu = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(!props.popup);
-    const menuRef = useRef(null)
-    const targetRef = useRef(null);
+export const TieredMenu = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(!props.popup);
+    const menuRef = React.useRef(null)
+    const targetRef = React.useRef(null);
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: targetRef, overlay: menuRef, listener: (event, { valid }) => {
@@ -70,7 +70,7 @@ export const TieredMenu = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(menuRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         toggle,
         show,
         hide
@@ -96,6 +96,7 @@ export const TieredMenu = memo(forwardRef((props, ref) => {
     return props.popup ? <Portal element={element} appendTo={props.appendTo} /> : element;
 }));
 
+TieredMenu.displayName = 'TieredMenu';
 TieredMenu.defaultProps = {
     __TYPE: 'TieredMenu',
     id: null,

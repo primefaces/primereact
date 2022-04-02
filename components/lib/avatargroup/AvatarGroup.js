@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
+import * as React from 'react';
 import { classNames } from '../utils/Utils';
 
-export const AvatarGroup = forwardRef((props, ref) => {
+export const AvatarGroup = React.forwardRef((props, ref) => {
     const className = classNames('p-avatar-group p-component', props.className);
 
     return (
@@ -11,6 +11,7 @@ export const AvatarGroup = forwardRef((props, ref) => {
     )
 });
 
+AvatarGroup.displayName = 'AvatarGroup';
 AvatarGroup.defaultProps = {
     __TYPE: 'AvatarGroup',
     style: null,

@@ -1,10 +1,10 @@
-import React, { forwardRef, memo, useEffect, useMemo, useRef } from 'react';
+import * as React from 'react';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const InputText = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(ref);
+export const InputText = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(ref);
 
     const onKeyPress = (event) => {
         props.onKeyPress && props.onKeyPress(event);
@@ -28,11 +28,11 @@ export const InputText = memo(forwardRef((props, ref) => {
         }
     }
 
-    const isFilled = useMemo(() => (
+    const isFilled = useReact.memo(() => (
         ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (elementRef.current && ObjectUtils.isNotEmpty(elementRef.current.value))
     ), [props.value, props.defaultValue]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(elementRef, ref);
     }, [elementRef, ref]);
 
@@ -51,6 +51,7 @@ export const InputText = memo(forwardRef((props, ref) => {
     )
 }));
 
+InputText.displayName = 'InputText';
 InputText.defaultProps = {
     __TYPE: 'InputText',
     keyfilter: null,

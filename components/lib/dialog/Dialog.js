@@ -1,28 +1,28 @@
-import React, { useRef, useState, forwardRef, useImperativeHandle } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { Ripple } from '../ripple/Ripple';
-import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils, UniqueComponentId } from '../utils/Utils';
-import { useMountEffect, useUnmountEffect, useUpdateEffect, useEventListener } from '../hooks/Hooks';
+import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 
-export const Dialog = forwardRef((props, ref) => {
-    const [idState, setIdState] = useState(props.id);
-    const [maskVisibleState, setMaskVisibleState] = useState(false);
-    const [visibleState, setVisibleState] = useState(false);
-    const [maximizedState, setMaximizedState] = useState(props.maximized);
-    const dialogRef = useRef(null);
-    const maskRef = useRef(null);
-    const contentRef = useRef(null);
-    const headerRef = useRef(null);
-    const footerRef = useRef(null);
-    const closeRef = useRef(null);
-    const dragging = useRef(false);
-    const resizing = useRef(false);
-    const lastPageX = useRef(null);
-    const lastPageY = useRef(null);
-    const styleElement = useRef(null);
-    const attributeSelector = useRef('');
+export const Dialog = React.forwardRef((props, ref) => {
+    const [idState, setIdState] = React.useState(props.id);
+    const [maskVisibleState, setMaskVisibleState] = React.useState(false);
+    const [visibleState, setVisibleState] = React.useState(false);
+    const [maximizedState, setMaximizedState] = React.useState(props.maximized);
+    const dialogRef = React.useRef(null);
+    const maskRef = React.useRef(null);
+    const contentRef = React.useRef(null);
+    const headerRef = React.useRef(null);
+    const footerRef = React.useRef(null);
+    const closeRef = React.useRef(null);
+    const dragging = React.useRef(false);
+    const resizing = React.useRef(false);
+    const lastPageX = React.useRef(null);
+    const lastPageY = React.useRef(null);
+    const styleElement = React.useRef(null);
+    const attributeSelector = React.useRef('');
     const maximized = props.onMaximize ? props.maximized : maximizedState;
 
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
@@ -398,7 +398,7 @@ export const Dialog = forwardRef((props, ref) => {
         ZIndexUtils.clear(maskRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         resetPosition
     }));
 
@@ -529,6 +529,7 @@ export const Dialog = forwardRef((props, ref) => {
     return maskVisibleState && createDialog();
 });
 
+Dialog.displayName = 'Dialog';
 Dialog.defaultProps = {
     __TYPE: 'Dialog',
     id: null,

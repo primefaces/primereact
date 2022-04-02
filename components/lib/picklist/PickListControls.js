@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { Button } from '../button/Button';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const PickListControls = memo((props) => {
+export const PickListControls = React.memo((props) => {
     const moveDisabled = !props.selection.length;
 
     const moveUp = (event) => {
@@ -136,3 +136,5 @@ export const PickListControls = memo((props) => {
         </div>
     )
 });
+
+PickListControls.displayName = 'PickListControls';

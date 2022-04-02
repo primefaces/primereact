@@ -1,23 +1,23 @@
-import React, { forwardRef, memo, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
-import { TreeSelectPanel } from './TreeSelectPanel';
-import { Tree } from '../tree/Tree';
-import { Ripple } from '../ripple/Ripple';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils } from '../utils/Utils';
-import { useUpdateEffect, useUnmountEffect, useOverlayListener, useMountEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { Tree } from '../tree/Tree';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { TreeSelectPanel } from './TreeSelectPanel';
 
-export const TreeSelect = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const [expandedKeysState, setExpandedKeysState] = useState({});
-    const [filterValueState, setFilterValueState] = useState('');
-    const elementRef = useRef(null);
-    const overlayRef = useRef(null);
-    const filterInputRef = useRef(null);
-    const focusInputRef = useRef(null);
-    const triggerRef = useRef(null);
-    const selfChange = useRef(null);
+export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const [expandedKeysState, setExpandedKeysState] = React.useState({});
+    const [filterValueState, setFilterValueState] = React.useState('');
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const filterInputRef = React.useRef(null);
+    const focusInputRef = React.useRef(null);
+    const triggerRef = React.useRef(null);
+    const selfChange = React.useRef(null);
     const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
     const isValueEmpty = ObjectUtils.isEmpty(props.value);
     const hasNoOptions = ObjectUtils.isEmpty(props.options);
@@ -480,6 +480,7 @@ export const TreeSelect = memo(forwardRef((props, ref) => {
     )
 }));
 
+TreeSelect.displayName = 'TreeSelect';
 TreeSelect.defaultProps = {
     __TYPE: 'TreeSelect',
     id: null,

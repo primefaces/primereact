@@ -1,8 +1,8 @@
-import React, { forwardRef, memo } from 'react';
-import { OrganizationChartNode } from './OrganizationChartNode';
+import * as React from 'react';
 import { classNames, DomHandler } from '../utils/Utils';
+import { OrganizationChartNode } from './OrganizationChartNode';
 
-export const OrganizationChart = memo(forwardRef((props, ref) => {
+export const OrganizationChart = React.memo(React.forwardRef((props, ref) => {
     const root = props.value && props.value.length ? props.value[0] : null;
 
     const onNodeClick = (event, node) => {
@@ -70,6 +70,7 @@ export const OrganizationChart = memo(forwardRef((props, ref) => {
     )
 }));
 
+OrganizationChart.displayName = 'OrganizationChart';
 OrganizationChart.defaultProps = {
     __TYPE: 'OrganizationChart',
     id: null,

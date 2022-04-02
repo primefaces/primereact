@@ -1,12 +1,12 @@
-import React, { forwardRef, memo, useEffect, useRef } from 'react';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export const Button = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(ref);
+export const Button = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(ref);
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(elementRef, ref);
     }, [elementRef, ref]);
 
@@ -68,6 +68,7 @@ export const Button = memo(forwardRef((props, ref) => {
     )
 }));
 
+Button.displayName = 'Button';
 Button.defaultProps = {
     __TYPE: 'Button',
     label: null,

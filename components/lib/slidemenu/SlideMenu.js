@@ -1,19 +1,19 @@
-import React, { useState, useRef, useImperativeHandle, forwardRef, memo } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { SlideMenuSub } from './SlideMenuSub';
-import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, classNames, ZIndexUtils } from '../utils/Utils';
-import { useUpdateEffect, useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { classNames, DomHandler, ZIndexUtils } from '../utils/Utils';
+import { SlideMenuSub } from './SlideMenuSub';
 
-export const SlideMenu = memo(forwardRef((props, ref) => {
-    const [levelState, setLevelState] = useState(0);
-    const [visibleState, setVisibleState] = useState(false);
-    const menuRef = useRef(null);
-    const targetRef = useRef(null);
-    const backward = useRef(null);
-    const slideMenuContent = useRef(null);
+export const SlideMenu = React.memo(React.forwardRef((props, ref) => {
+    const [levelState, setLevelState] = React.useState(0);
+    const [visibleState, setVisibleState] = React.useState(false);
+    const menuRef = React.useRef(null);
+    const targetRef = React.useRef(null);
+    const backward = React.useRef(null);
+    const slideMenuContent = React.useRef(null);
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: targetRef, overlay: menuRef, listener: (event, { valid }) => {
@@ -85,7 +85,7 @@ export const SlideMenu = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(menuRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         toggle,
         show,
         hide
@@ -132,6 +132,7 @@ export const SlideMenu = memo(forwardRef((props, ref) => {
     return props.popup ? <Portal element={element} appendTo={props.appendTo} /> : element;
 }));
 
+SlideMenu.displayName = 'SlideMenu';
 SlideMenu.defaultProps = {
     __TYPE: 'SlideMenu',
     id: null,

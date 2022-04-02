@@ -1,17 +1,17 @@
-import React, { useRef, forwardRef, useState, useImperativeHandle, memo } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { ContextMenuSub } from './ContextMenuSub';
-import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { DomHandler, ZIndexUtils, classNames } from '../utils/Utils';
-import { useMountEffect, useUnmountEffect, useUpdateEffect, useEventListener, useResizeListener } from '../hooks/Hooks';
+import { useEventListener, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { classNames, DomHandler, ZIndexUtils } from '../utils/Utils';
+import { ContextMenuSub } from './ContextMenuSub';
 
-export const ContextMenu = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(false);
-    const [reshowState, setReshowState] = useState(false);
-    const [resetMenuState, setResetMenuState] = useState(false);
-    const menuRef = useRef(null);
-    const currentEvent = useRef(null);
+export const ContextMenu = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(false);
+    const [reshowState, setReshowState] = React.useState(false);
+    const [resetMenuState, setResetMenuState] = React.useState(false);
+    const menuRef = React.useRef(null);
+    const currentEvent = React.useRef(null);
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click', listener: event => {
@@ -22,7 +22,7 @@ export const ContextMenu = memo(forwardRef((props, ref) => {
         }
     });
 
-    const [bindDocumentContextMenuListener, ] = useEventListener({
+    const [bindDocumentContextMenuListener,] = useEventListener({
         type: 'contextmenu', listener: event => {
             show(event);
         }
@@ -163,7 +163,7 @@ export const ContextMenu = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(menuRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         show,
         hide
     }));
@@ -186,6 +186,7 @@ export const ContextMenu = memo(forwardRef((props, ref) => {
     return <Portal element={element} appendTo={props.appendTo} />
 }));
 
+ContextMenu.displayName = 'ContextMenu';
 ContextMenu.defaultProps = {
     __TYPE: 'ContextMenu',
     id: null,

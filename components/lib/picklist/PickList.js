@@ -1,17 +1,17 @@
-import React, { useState, useRef, memo, forwardRef } from 'react'
-import { PickListSubList } from './PickListSubList';
-import { PickListControls } from './PickListControls';
-import { PickListTransferControls } from './PickListTransferControls';
-import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
+import * as React from 'react';
 import { useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { PickListControls } from './PickListControls';
+import { PickListSubList } from './PickListSubList';
+import { PickListTransferControls } from './PickListTransferControls';
 
-export const PickList = memo(forwardRef((props, ref) => {
-    const [sourceSelectionState, setSourceSelectionState] = useState([]);
-    const [targetSelectionState, setTargetSelectionState] = useState([]);
-    const sourceListElementRef = useRef(null);
-    const targetListElementRef = useRef(null);
-    const reorderedListElementRef = useRef(null);
-    const reorderDirection = useRef(null);
+export const PickList = React.memo(React.forwardRef((props, ref) => {
+    const [sourceSelectionState, setSourceSelectionState] = React.useState([]);
+    const [targetSelectionState, setTargetSelectionState] = React.useState([]);
+    const sourceListElementRef = React.useRef(null);
+    const targetListElementRef = React.useRef(null);
+    const reorderedListElementRef = React.useRef(null);
+    const reorderDirection = React.useRef(null);
     const sourceSelection = props.onSourceSelectionChange ? props.sourceSelection : sourceSelectionState;
     const targetSelection = props.onTargetSelectionChange ? props.targetSelection : targetSelectionState;
 
@@ -168,6 +168,7 @@ export const PickList = memo(forwardRef((props, ref) => {
     );
 }));
 
+PickList.displayName = 'PickList';
 PickList.defaultProps = {
     __TYPE: 'PickList',
     id: null,

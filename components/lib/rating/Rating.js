@@ -1,9 +1,9 @@
-import React, { forwardRef, memo, useRef } from 'react';
+import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames } from '../utils/Utils';
 
-export const Rating = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
+export const Rating = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
     const enabled = !props.disabled && !props.readOnly;
     const tabIndex = enabled ? 0 : null;
 
@@ -95,6 +95,7 @@ export const Rating = memo(forwardRef((props, ref) => {
     )
 }));
 
+Rating.displayName = 'Rating';
 Rating.defaultProps = {
     __TYPE: 'Rating',
     id: null,

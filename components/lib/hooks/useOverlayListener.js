@@ -1,14 +1,14 @@
 /* eslint-disable */
-import { useEffect, useRef } from 'react';
+import * as React from 'react';
 import { DomHandler } from '../utils/Utils';
 import { useEventListener } from './useEventListener';
-import { useResizeListener } from './useResizeListener';
 import { useOverlayScrollListener } from './useOverlayScrollListener';
+import { useResizeListener } from './useResizeListener';
 import { useUnmountEffect } from './useUnmountEffect';
 
 export const useOverlayListener = ({ target, overlay, listener, when = true }) => {
-    const targetRef = useRef(null);
-    const overlayRef = useRef(null);
+    const targetRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
 
     /**
      * The parameters of the 'listener' method in the following event handlers;
@@ -16,15 +16,21 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
      * @param {string} options.type The custom type to detect event.
      * @param {boolean} options.valid It is controlled by PrimeReact. It is determined whether it is valid or not according to some custom validation.
      */
-    const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({ type: 'click', listener: event => {
-        listener && listener(event, { type: 'outside', valid: (event.which !== 3) && isOutsideClicked(event)});
-    }});
-    const [bindWindowResizeListener, unbindWindowResizeListener] = useResizeListener({ listener: event => {
-        listener && listener(event, { type: 'resize', valid: !DomHandler.isTouchDevice() });
-    }});
-    const [bindOverlayScrollListener, unbindOverlayScrollListener] = useOverlayScrollListener({ target: targetRef, listener: event => {
-        listener && listener(event, { type: 'scroll', valid: true });
-    }});
+    const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
+        type: 'click', listener: event => {
+            listener && listener(event, { type: 'outside', valid: (event.which !== 3) && isOutsideClicked(event) });
+        }
+    });
+    const [bindWindowResizeListener, unbindWindowResizeListener] = useResizeListener({
+        listener: event => {
+            listener && listener(event, { type: 'resize', valid: !DomHandler.isTouchDevice() });
+        }
+    });
+    const [bindOverlayScrollListener, unbindOverlayScrollListener] = useOverlayScrollListener({
+        target: targetRef, listener: event => {
+            listener && listener(event, { type: 'scroll', valid: true });
+        }
+    });
 
     const isOutsideClicked = (event) => {
         return targetRef.current && !(targetRef.current.isSameNode(event.target) || targetRef.current.contains(event.target)
@@ -43,7 +49,7 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
         unbindOverlayScrollListener();
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (when) {
             targetRef.current = DomHandler.getTargetElement(target);
             overlayRef.current = DomHandler.getTargetElement(overlay);
@@ -54,7 +60,7 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
         }
     }, [target, overlay, when]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         unbind();
         // when && bind();
     }, [when]);

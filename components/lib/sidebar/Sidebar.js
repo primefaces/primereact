@@ -1,17 +1,17 @@
-import React, { useState, useRef, forwardRef } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { Ripple } from '../ripple/Ripple';
-import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect, useEventListener } from '../hooks/Hooks';
+import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export const Sidebar = forwardRef((props, ref) => {
-    const [maskVisibleState, setMaskVisibleState] = useState(false);
-    const [visibleState, setVisibleState] = useState(false);
-    const sidebarRef = useRef(null);
-    const maskRef = useRef(null);
-    const closeIconRef = useRef(null);
+export const Sidebar = React.forwardRef((props, ref) => {
+    const [maskVisibleState, setMaskVisibleState] = React.useState(false);
+    const [visibleState, setVisibleState] = React.useState(false);
+    const sidebarRef = React.useRef(null);
+    const maskRef = React.useRef(null);
+    const closeIconRef = React.useRef(null);
 
     const [bindDocumentEscapeListener, unbindDocumentEscapeListener] = useEventListener({
         type: 'keydown', listener: event => {
@@ -174,6 +174,7 @@ export const Sidebar = forwardRef((props, ref) => {
     return maskVisibleState && createSidebar();
 });
 
+Sidebar.displayName = 'Sidebar';
 Sidebar.defaultProps = {
     __TYPE: 'Sidebar',
     id: null,

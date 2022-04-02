@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const SplitButtonItem = memo((props) => {
+export const SplitButtonItem = React.memo((props) => {
 
     const onClick = (e) => {
         if (props.menuitem.command) {
@@ -60,3 +60,5 @@ export const SplitButtonItem = memo((props) => {
 
     return item;
 });
+
+SplitButtonItem.displayName = 'SplitButtonItem';

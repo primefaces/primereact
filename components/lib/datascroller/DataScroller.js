@@ -1,15 +1,15 @@
-import React, { useRef, useState, forwardRef, useImperativeHandle, memo } from 'react';
+import * as React from 'react';
 import { localeOption } from '../api/Api';
+import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect } from '../hooks/Hooks';
 
-export const DataScroller = memo(forwardRef((props, ref) => {
-    const [dataToRenderState, setDataToRenderState] = useState([]);
-    const contentRef = useRef(null);
-    const value = useRef(props.value);
-    const dataToRender = useRef([]);
-    const first = useRef(0);
-    const scrollFunction = useRef(null);
+export const DataScroller = React.memo(React.forwardRef((props, ref) => {
+    const [dataToRenderState, setDataToRenderState] = React.useState([]);
+    const contentRef = React.useRef(null);
+    const value = React.useRef(props.value);
+    const dataToRender = React.useRef([]);
+    const first = React.useRef(0);
+    const scrollFunction = React.useRef(null);
 
     const handleDataChange = () => {
         if (props.lazy) {
@@ -141,7 +141,7 @@ export const DataScroller = memo(forwardRef((props, ref) => {
         }
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         load,
         reset
     }));
@@ -207,6 +207,7 @@ export const DataScroller = memo(forwardRef((props, ref) => {
     )
 }));
 
+DataScroller.displayName = 'DataScroller';
 DataScroller.defaultProps = {
     __TYPE: 'DataScroller',
     id: null,

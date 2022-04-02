@@ -1,9 +1,9 @@
-import React, { forwardRef, memo } from 'react';
+import * as React from 'react';
+import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames } from '../utils/Utils';
-import { useMountEffect } from '../hooks/Hooks';
 
-export const GalleriaItem = memo(forwardRef((props, ref) => {
+export const GalleriaItem = React.memo(React.forwardRef((props, ref) => {
 
     const next = () => {
         const nextItemIndex = props.activeItemIndex + 1;
@@ -191,4 +191,6 @@ export const GalleriaItem = memo(forwardRef((props, ref) => {
             {indicators}
         </div>
     )
-}))
+}));
+
+GalleriaItem.displayName = 'GalleriaItem';

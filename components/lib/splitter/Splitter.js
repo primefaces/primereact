@@ -1,21 +1,21 @@
-import React, { forwardRef, memo, useRef } from 'react';
+import * as React from 'react';
 import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
 import { useMountEffect, useEventListener } from '../hooks/Hooks';
 
 export const SplitterPanel = () => { }
 
-export const Splitter = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
-    const gutterRef = useRef(null);
-    const size = useRef(null);
-    const dragging = useRef(null);
-    const startPos = useRef(null);
-    const prevPanelElement = useRef(null);
-    const nextPanelElement = useRef(null);
-    const prevPanelSize = useRef(null);
-    const nextPanelSize = useRef(null);
-    const prevPanelIndex = useRef(null);
-    const panelSizes = useRef(null);
+export const Splitter = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
+    const gutterRef = React.useRef(null);
+    const size = React.useRef(null);
+    const dragging = React.useRef(null);
+    const startPos = React.useRef(null);
+    const prevPanelElement = React.useRef(null);
+    const nextPanelElement = React.useRef(null);
+    const prevPanelSize = React.useRef(null);
+    const nextPanelSize = React.useRef(null);
+    const prevPanelIndex = React.useRef(null);
+    const panelSizes = React.useRef(null);
     const isStateful = props.stateKey != null;
 
     const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({ type: 'mousemove', listener: (event) => onResize(event) });
@@ -233,6 +233,7 @@ export const Splitter = memo(forwardRef((props, ref) => {
     )
 }));
 
+SplitterPanel.displayName = 'SplitterPanel';
 SplitterPanel.defaultProps = {
     __TYPE: 'SplitterPanel',
     size: null,
@@ -241,6 +242,7 @@ SplitterPanel.defaultProps = {
     className: null
 }
 
+Splitter.displayName = 'Splitter';
 Splitter.defaultProps = {
     __TYPE: 'Splitter',
     id: null,

@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, useRef, useState } from 'react';
+import * as React from 'react';
 import { FilterService } from '../api/Api';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
@@ -6,11 +6,11 @@ import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { ListBoxHeader } from './ListBoxHeader';
 import { ListBoxItem } from './ListBoxItem';
 
-export const ListBox = memo(forwardRef((props, ref) => {
-    const [filterValueState, setFilterValueState] = useState('');
-    const elementRef = useRef(null);
-    const virtualScrollerRef = useRef(null);
-    const optionTouched = useRef(false);
+export const ListBox = React.memo(React.forwardRef((props, ref) => {
+    const [filterValueState, setFilterValueState] = React.useState('');
+    const elementRef = React.useRef(null);
+    const virtualScrollerRef = React.useRef(null);
+    const optionTouched = React.useRef(false);
     const filteredValue = (props.onFilterValueChange ? props.filterValue : filterValueState) || '';
     const hasFilter = filteredValue && filteredValue.trim().length > 0;
 
@@ -319,6 +319,7 @@ export const ListBox = memo(forwardRef((props, ref) => {
     )
 }));
 
+ListBox.displayName = 'ListBox';
 ListBox.defaultProps = {
     __TYPE: 'ListBox',
     id: null,

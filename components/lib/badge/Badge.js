@@ -1,7 +1,7 @@
-import React, { forwardRef, memo } from 'react';
+import * as React from 'react';
 import { classNames } from '../utils/Utils';
 
-export const Badge = memo(forwardRef((props, ref) => {
+export const Badge = React.memo(React.forwardRef((props, ref) => {
     const className = classNames('p-badge p-component', {
         'p-badge-no-gutter': props.value && String(props.value).length === 1,
         'p-badge-dot': !props.value,
@@ -17,6 +17,7 @@ export const Badge = memo(forwardRef((props, ref) => {
     )
 }));
 
+Badge.displayName = 'Badge';
 Badge.defaultProps = {
     __TYPE: 'Badge',
     value: null,

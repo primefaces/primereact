@@ -1,10 +1,10 @@
-import React, { memo } from 'react';
-import { InputText } from '../inputtext/InputText';
+import * as React from 'react';
 import { Checkbox } from '../checkbox/Checkbox';
+import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { ObjectUtils } from '../utils/Utils';
 
-export const MultiSelectHeader = memo((props) => {
+export const MultiSelectHeader = React.memo((props) => {
 
     const onFilter = (event) => {
         if (props.onFilter) {
@@ -74,3 +74,5 @@ export const MultiSelectHeader = memo((props) => {
 
     return element;
 });
+
+MultiSelectHeader.displayName = 'MultiSelectHeader';

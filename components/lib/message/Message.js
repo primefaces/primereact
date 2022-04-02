@@ -1,7 +1,7 @@
-import React, { forwardRef, memo } from 'react';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Message = memo(forwardRef((props, ref) => {
+export const Message = React.memo(React.forwardRef((props, ref) => {
 
     const createContent = () => {
         if (props.content) {
@@ -40,6 +40,7 @@ export const Message = memo(forwardRef((props, ref) => {
     )
 }));
 
+Message.displayName = 'Message';
 Message.defaultProps = {
     __TYPE: 'Message',
     id: null,

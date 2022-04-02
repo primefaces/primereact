@@ -1,10 +1,10 @@
-import React, { forwardRef, memo, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames, UniqueComponentId } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect, useResizeListener, usePrevious } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
-const CarouselItem = memo((props) => {
+const CarouselItem = React.memo((props) => {
     const content = props.template(props.item);
     const className = classNames(props.className, 'p-carousel-item', {
         'p-carousel-item-active': props.active,
@@ -19,23 +19,23 @@ const CarouselItem = memo((props) => {
     )
 });
 
-export const Carousel = memo(forwardRef((props, ref) => {
-    const [numVisibleState, setNumVisibleState] = useState(props.numVisible);
-    const [numScrollState, setNumScrollState] = useState(props.numScroll);
-    const [totalShiftedItemsState, setTotalShiftedItemsState] = useState((props.page * props.numScroll) * -1);
-    const [pageState, setPageState] = useState(props.page);
-    const elementRef = useRef(null);
-    const itemsContainerRef = useRef(null);
-    const remainingItems = useRef(0);
-    const allowAutoplay = useRef(!!props.autoplayInterval);
-    const circular = useRef(props.circular || !!props.autoplayInterval);
-    const attributeSelector = useRef('');
-    const swipeThreshold = useRef(20);
-    const startPos = useRef(null);
-    const interval = useRef(null);
-    const carouselStyle = useRef(null);
-    const isRemainingItemsAdded = useRef(false);
-    const responsiveOptions = useRef(null);
+export const Carousel = React.memo(React.forwardRef((props, ref) => {
+    const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
+    const [numScrollState, setNumScrollState] = React.useState(props.numScroll);
+    const [totalShiftedItemsState, setTotalShiftedItemsState] = React.useState((props.page * props.numScroll) * -1);
+    const [pageState, setPageState] = React.useState(props.page);
+    const elementRef = React.useRef(null);
+    const itemsContainerRef = React.useRef(null);
+    const remainingItems = React.useRef(0);
+    const allowAutoplay = React.useRef(!!props.autoplayInterval);
+    const circular = React.useRef(props.circular || !!props.autoplayInterval);
+    const attributeSelector = React.useRef('');
+    const swipeThreshold = React.useRef(20);
+    const startPos = React.useRef(null);
+    const interval = React.useRef(null);
+    const carouselStyle = React.useRef(null);
+    const isRemainingItemsAdded = React.useRef(false);
+    const responsiveOptions = React.useRef(null);
     const prevNumScroll = usePrevious(numScrollState);
     const prevNumVisible = usePrevious(numVisibleState);
     const prevValue = usePrevious(props.value);
@@ -564,6 +564,9 @@ export const Carousel = memo(forwardRef((props, ref) => {
     )
 }));
 
+CarouselItem.displayName = 'CarouselItem';
+
+Carousel.displayName = 'Carousel';
 Carousel.defaultProps = {
     __TYPE: 'Carousel',
     id: null,

@@ -1,10 +1,10 @@
-import React, { forwardRef, memo, useState } from 'react';
+import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
 import { Paginator } from '../paginator/Paginator';
 import { Ripple } from '../ripple/Ripple';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const DataViewLayoutOptions = memo((props) => {
+export const DataViewLayoutOptions = React.memo((props) => {
 
     const changeLayout = (event, layoutMode) => {
         props.onChange({
@@ -32,13 +32,13 @@ export const DataViewLayoutOptions = memo((props) => {
     )
 });
 
-export const DataViewItem = memo((props) => {
+export const DataViewItem = React.memo((props) => {
     return props.template(props.item, props.layout);
 });
 
-export const DataView = memo(forwardRef((props, ref) => {
-    const [firstState, setFirstState] = useState(props.first);
-    const [rowsState, setRowsState] = useState(props.rows);
+export const DataView = React.memo(React.forwardRef((props, ref) => {
+    const [firstState, setFirstState] = React.useState(props.first);
+    const [rowsState, setRowsState] = React.useState(props.rows);
     const first = props.onPage ? props.first : firstState;
     const rows = props.onPage ? props.rows : rowsState;
 
@@ -219,6 +219,19 @@ export const DataView = memo(forwardRef((props, ref) => {
     )
 }));
 
+DataViewLayoutOptions.displayName = 'DataViewLayoutOptions';
+DataViewLayoutOptions.defaultProps = {
+    __TYPE: 'DataViewLayoutOptions',
+    id: null,
+    style: null,
+    className: null,
+    layout: null,
+    onChange: null
+}
+
+DataViewItem.displayName = 'DataViewItem';
+
+DataView.displayName = 'DataView';
 DataView.defaultProps = {
     __TYPE: 'DataView',
     id: null,
@@ -252,13 +265,4 @@ DataView.defaultProps = {
     gutter: false,
     itemTemplate: null,
     onPage: null
-}
-
-DataViewLayoutOptions.defaultProps = {
-    __TYPE: 'DataViewLayoutOptions',
-    id: null,
-    style: null,
-    className: null,
-    layout: null,
-    onChange: null
 }

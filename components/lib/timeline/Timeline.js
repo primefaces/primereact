@@ -1,7 +1,7 @@
-import React, { forwardRef, memo } from 'react';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Timeline = memo(forwardRef((props, ref) => {
+export const Timeline = React.memo(React.forwardRef((props, ref) => {
 
     const getKey = (item, index) => {
         return props.dataKey ? ObjectUtils.resolveFieldData(item, props.dataKey) : `pr_id__${index}`;
@@ -45,6 +45,7 @@ export const Timeline = memo(forwardRef((props, ref) => {
     )
 }));
 
+Timeline.displayName = 'Timeline';
 Timeline.defaultProps = {
     __TYPE: 'Timeline',
     id: null,

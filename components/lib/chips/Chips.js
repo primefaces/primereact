@@ -1,12 +1,12 @@
-import React, { forwardRef, memo, useEffect, useMemo, useRef, useState } from 'react';
+import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Chips = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const elementRef = useRef(null);
-    const listRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
+export const Chips = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const listRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
 
     const removeItem = (event, index) => {
         if (props.disabled && props.readOnly) {
@@ -143,7 +143,7 @@ export const Chips = memo(forwardRef((props, ref) => {
         return props.max && props.value && props.max === props.value.length;
     }
 
-    const isFilled = useMemo(() => {
+    const isFilled = useReact.memo(() => {
         return (props.value && props.value.length) || (inputRef.current && inputRef.current.value && inputRef.current.value.length);
     }, [props.value]);
 
@@ -151,7 +151,7 @@ export const Chips = memo(forwardRef((props, ref) => {
         return ObjectUtils.getPropValue(props.removable, { value, index, props });
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
@@ -223,6 +223,7 @@ export const Chips = memo(forwardRef((props, ref) => {
     )
 }));
 
+Chips.displayName = 'Chips';
 Chips.defaultProps = {
     __TYPE: 'Chips',
     id: null,

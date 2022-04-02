@@ -1,14 +1,14 @@
-import React, { forwardRef, memo, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { Ripple } from '../ripple/Ripple';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { DomHandler, classNames, ZIndexUtils, IconUtils } from '../utils/Utils';
-import { useMountEffect, useUnmountEffect, useEventListener } from '../hooks/Hooks';
+import { useEventListener, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, IconUtils, ZIndexUtils } from '../utils/Utils';
 
-export const ScrollTop = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(false);
-    const scrollElementRef = useRef(null);
-    const helperRef = useRef(null);
+export const ScrollTop = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(false);
+    const scrollElementRef = React.useRef(null);
+    const helperRef = React.useRef(null);
     const isTargetParent = props.target === 'parent';
 
     const [bindParentScrollListener,] = useEventListener({
@@ -78,6 +78,7 @@ export const ScrollTop = memo(forwardRef((props, ref) => {
     )
 }));
 
+ScrollTop.displayName = 'ScrollTop';
 ScrollTop.defaultProps = {
     __TYPE: 'ScrollTop',
     target: 'window',

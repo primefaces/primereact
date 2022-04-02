@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Card = forwardRef((props, ref) => {
+export const Card = React.forwardRef((props, ref) => {
 
     const createHeader = () => {
         if (props.header) {
@@ -39,6 +39,7 @@ export const Card = forwardRef((props, ref) => {
     )
 });
 
+Card.displayName = 'Card';
 Card.defaultProps = {
     __TYPE: 'Card',
     id: null,

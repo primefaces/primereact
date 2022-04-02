@@ -1,6 +1,6 @@
-import React, { forwardRef, memo, useRef } from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 const radius = 40;
 const midX = 50;
@@ -8,8 +8,8 @@ const midY = 50;
 const minRadians = 4 * Math.PI / 3;
 const maxRadians = -Math.PI / 3;
 
-export const Knob = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
+export const Knob = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
     const enabled = !props.disabled && !props.readOnly;
 
     const [bindWindowMouseMoveListener, unbindWindowMouseMoveListener] = useEventListener({
@@ -147,6 +147,7 @@ export const Knob = memo(forwardRef((props, ref) => {
     )
 }));
 
+Knob.displayName = 'Knob';
 Knob.defaultProps = {
     __TYPE: 'Knob',
     id: null,

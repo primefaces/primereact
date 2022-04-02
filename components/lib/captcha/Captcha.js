@@ -1,10 +1,10 @@
-import React, { forwardRef, memo, useImperativeHandle, useRef } from 'react';
+import * as React from 'react';
 import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 
-export const Captcha = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
-    const instance = useRef(null);
-    const recaptchaScript = useRef(null);
+export const Captcha = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
+    const instance = React.useRef(null);
+    const recaptchaScript = React.useRef(null);
 
     const init = () => {
         instance.current = (window).grecaptcha.render(elementRef.current, {
@@ -73,7 +73,7 @@ export const Captcha = memo(forwardRef((props, ref) => {
         }
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         reset,
         getResponse
     }));
@@ -81,6 +81,7 @@ export const Captcha = memo(forwardRef((props, ref) => {
     return <div ref={elementRef} id={props.id}></div>
 }));
 
+Captcha.displayName = 'Captcha';
 Captcha.defaultProps = {
     __TYPE: 'Captcha',
     id: null,

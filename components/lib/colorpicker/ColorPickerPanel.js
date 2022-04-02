@@ -1,9 +1,9 @@
-import React, { forwardRef } from 'react';
+import * as React from 'react';
+import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames } from '../utils/Utils';
-import { CSSTransition } from '../csstransition/CSSTransition';
 
-export const ColorPickerPanel = forwardRef((props, ref) => {
+export const ColorPickerPanel = React.forwardRef((props, ref) => {
 
     const createElement = () => {
         const className = classNames('p-colorpicker-panel', {
@@ -25,3 +25,5 @@ export const ColorPickerPanel = forwardRef((props, ref) => {
 
     return props.inline ? element : <Portal element={element} appendTo={props.appendTo} />;
 });
+
+ColorPickerPanel.displayName = 'ColorPickerPanel';

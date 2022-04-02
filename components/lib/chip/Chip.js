@@ -1,8 +1,8 @@
-import React, { forwardRef, memo, useState } from 'react';
-import { classNames, ObjectUtils, IconUtils } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export const Chip = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(true);
+export const Chip = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(true);
 
     const onKeyDown = (event) => {
         if (event.keyCode === 13) { // enter
@@ -56,6 +56,7 @@ export const Chip = memo(forwardRef((props, ref) => {
     return visibleState && createElement();
 }));
 
+Chip.displayName = 'Chip';
 Chip.defaultProps = {
     __TYPE: 'Chip',
     label: null,

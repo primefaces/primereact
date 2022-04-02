@@ -1,11 +1,11 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
 import { Button } from '../button/Button';
-import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils, IconUtils } from '../utils/Utils';
-import { useUnmountEffect, useOverlayListener, useUpdateEffect } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
 export const confirmPopup = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -22,14 +22,14 @@ export const confirmPopup = (props = {}) => {
     return [show, hide];
 }
 
-export const ConfirmPopup = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(props.visible);
-    const [reshowState, setReshowState] = useState(false);
-    const overlayRef = useRef(null);
-    const acceptBtnRef = useRef(null);
-    const isPanelClicked = useRef(false);
-    const overlayEventListener = useRef(null);
-    const confirmProps = useRef(null);
+export const ConfirmPopup = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(props.visible);
+    const [reshowState, setReshowState] = React.useState(false);
+    const overlayRef = React.useRef(null);
+    const acceptBtnRef = React.useRef(null);
+    const isPanelClicked = React.useRef(false);
+    const overlayEventListener = React.useRef(null);
+    const confirmProps = React.useRef(null);
     const getCurrentProps = () => confirmProps.current || props;
     const getPropValue = (key) => (confirmProps.current || props)[key];
     const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
@@ -148,11 +148,11 @@ export const ConfirmPopup = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         props.visible ? show() : hide();
     }, [props.visible]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (!props.target && !props.message) {
             OverlayService.on('confirm-popup', confirm);
         }
@@ -176,7 +176,7 @@ export const ConfirmPopup = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(overlayRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         confirm
     }));
 
@@ -246,6 +246,7 @@ export const ConfirmPopup = memo(forwardRef((props, ref) => {
     return <Portal element={element} appendTo={getPropValue('appendTo')} visible={getPropValue('visible')} />
 }));
 
+ConfirmPopup.displayName = 'ConfirmPopup';
 ConfirmPopup.defaultProps = {
     __TYPE: 'ConfirmPopup',
     tagKey: undefined,

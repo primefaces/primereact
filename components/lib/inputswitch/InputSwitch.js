@@ -1,11 +1,11 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const InputSwitch = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const elementRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
+export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
     const checked = props.checked === props.trueValue;
 
     const onClick = (event) => {
@@ -53,7 +53,7 @@ export const InputSwitch = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
@@ -82,6 +82,7 @@ export const InputSwitch = memo(forwardRef((props, ref) => {
     )
 }));
 
+InputSwitch.displayName = 'InputSwitch';
 InputSwitch.defaultProps = {
     __TYPE: 'InputSwitch',
     id: null,

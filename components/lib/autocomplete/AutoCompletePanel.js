@@ -1,11 +1,11 @@
-import React, { forwardRef, memo } from 'react';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { Ripple } from '../ripple/Ripple';
 import { Portal } from '../portal/Portal';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
-import { ObjectUtils, classNames } from '../utils/Utils';
 
-export const AutoCompletePanel = memo(forwardRef((props, ref) => {
+export const AutoCompletePanel = React.memo(React.forwardRef((props, ref) => {
 
     const getOptionGroupRenderKey = (optionGroup) => {
         return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
@@ -62,20 +62,22 @@ export const AutoCompletePanel = memo(forwardRef((props, ref) => {
 
     const createContent = () => {
         if (props.virtualScrollerOptions) {
-            const virtualScrollerProps = { ...props.virtualScrollerOptions, ...{
-                style: { ...props.virtualScrollerOptions.style, ...{ height: props.scrollHeight }},
-                items: props.suggestions,
-                itemTemplate: (item, options) => item && createItem(item, options.index),
-                contentTemplate: (options) => {
-                    const className = classNames('p-autocomplete-items', options.className);
+            const virtualScrollerProps = {
+                ...props.virtualScrollerOptions, ...{
+                    style: { ...props.virtualScrollerOptions.style, ...{ height: props.scrollHeight } },
+                    items: props.suggestions,
+                    itemTemplate: (item, options) => item && createItem(item, options.index),
+                    contentTemplate: (options) => {
+                        const className = classNames('p-autocomplete-items', options.className);
 
-                    return (
-                        <ul ref={options.contentRef} className={className} role="listbox" id={props.listId}>
-                            {options.children}
-                        </ul>
-                    )
+                        return (
+                            <ul ref={options.contentRef} className={className} role="listbox" id={props.listId}>
+                                {options.children}
+                            </ul>
+                        )
+                    }
                 }
-            }};
+            };
 
             return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} />;
         }
@@ -108,4 +110,6 @@ export const AutoCompletePanel = memo(forwardRef((props, ref) => {
     const element = createElement();
 
     return <Portal element={element} appendTo={props.appendTo} />;
-}))
+}));
+
+AutoCompletePanel.displayName = 'AutoCompletePanel';

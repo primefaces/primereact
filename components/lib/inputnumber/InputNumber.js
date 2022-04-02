@@ -1,30 +1,30 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const InputNumber = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const elementRef = useRef(null);
-    const inputRef = useRef(null);
-    const timer = useRef(null);
-    const lastValue = useRef(null);
+export const InputNumber = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const inputRef = React.useRef(null);
+    const timer = React.useRef(null);
+    const lastValue = React.useRef(null);
 
-    const numberFormat = useRef(null);
-    const groupChar = useRef(null);
-    const prefixChar = useRef(null);
-    const suffixChar = useRef(null);
-    const isSpecialChar = useRef(null);
-    const _numeral = useRef(null);
-    const _group = useRef(null);
-    const _minusSign = useRef(null);
-    const _currency = useRef(null);
-    const _decimal = useRef(null);
-    const _suffix = useRef(null);
-    const _prefix = useRef(null);
-    const _index = useRef(null);
+    const numberFormat = React.useRef(null);
+    const groupChar = React.useRef(null);
+    const prefixChar = React.useRef(null);
+    const suffixChar = React.useRef(null);
+    const isSpecialChar = React.useRef(null);
+    const _numeral = React.useRef(null);
+    const _group = React.useRef(null);
+    const _minusSign = React.useRef(null);
+    const _currency = React.useRef(null);
+    const _decimal = React.useRef(null);
+    const _suffix = React.useRef(null);
+    const _prefix = React.useRef(null);
+    const _index = React.useRef(null);
 
     const stacked = props.showButtons && props.buttonLayout === 'stacked';
     const horizontal = props.showButtons && props.buttonLayout === 'horizontal';
@@ -902,11 +902,11 @@ export const InputNumber = memo(forwardRef((props, ref) => {
         return numberFormat.current;
     }
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         getFormatter
     }));
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
@@ -1016,6 +1016,7 @@ export const InputNumber = memo(forwardRef((props, ref) => {
     )
 }));
 
+InputNumber.displayName = 'InputNumber';
 InputNumber.defaultProps = {
     __TYPE: 'InputNumber',
     value: null,

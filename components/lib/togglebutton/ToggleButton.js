@@ -1,10 +1,10 @@
-import React, { forwardRef, memo, useRef } from 'react';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils } from '../utils/Utils';
 
-export const ToggleButton = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
+export const ToggleButton = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
     const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
     const hasIcon = props.onIcon && props.onIcon.length > 0 && props.offIcon && props.offIcon.length > 0;
     const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '&nbsp;';
@@ -69,6 +69,7 @@ export const ToggleButton = memo(forwardRef((props, ref) => {
     )
 }));
 
+ToggleButton.displayName = 'ToggleButton';
 ToggleButton.defaultProps = {
     __TYPE: 'ToggleButton',
     id: null,

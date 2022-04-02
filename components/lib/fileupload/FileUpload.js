@@ -1,20 +1,20 @@
-import React, { forwardRef, memo, useImperativeHandle, useRef, useState } from 'react';
+import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { Ripple } from '../ripple/Ripple';
 import { Button } from '../button/Button';
 import { Messages } from '../messages/Messages';
 import { ProgressBar } from '../progressbar/ProgressBar';
-import { DomHandler, ObjectUtils, IconUtils, classNames } from '../utils/Utils';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export const FileUpload = memo(forwardRef((props, ref) => {
-    const [filesState, setFilesState] = useState([]);
-    const [progressState, setProgressState] = useState(0);
-    const [focusedState, setFocusedState] = useState(false);
-    const fileInputRef = useRef(null);
-    const messagesRef = useRef(null);
-    const contentRef = useRef(null);
-    const duplicateIEEvent = useRef(false);
-    const uploadedFileCount = useRef(0);
+export const FileUpload = React.memo(React.forwardRef((props, ref) => {
+    const [filesState, setFilesState] = React.useState([]);
+    const [progressState, setProgressState] = React.useState(0);
+    const [focusedState, setFocusedState] = React.useState(false);
+    const fileInputRef = React.useRef(null);
+    const messagesRef = React.useRef(null);
+    const contentRef = React.useRef(null);
+    const duplicateIEEvent = React.useRef(false);
+    const uploadedFileCount = React.useRef(0);
     const hasFiles = ObjectUtils.isNotEmpty(filesState);
     const chooseButtonLabel = props.chooseLabel || props.chooseOptions.label || localeOption('choose');
     const uploadButtonLabel = props.uploadLabel || props.uploadOptions.label || localeOption('upload');
@@ -294,7 +294,7 @@ export const FileUpload = memo(forwardRef((props, ref) => {
         hasFiles ? upload() : fileInputRef.current.click();
     }
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         upload,
         clear,
         formatSize
@@ -472,6 +472,7 @@ export const FileUpload = memo(forwardRef((props, ref) => {
         return createBasic();
 }));
 
+FileUpload.displayName = 'FileUpload';
 FileUpload.defaultProps = {
     __TYPE: 'FileUpload',
     id: null,

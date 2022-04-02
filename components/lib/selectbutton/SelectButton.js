@@ -1,10 +1,10 @@
-import React, { forwardRef, memo, useRef } from 'react';
+import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 import { SelectButtonItem } from './SelectButtonItem';
 
-export const SelectButton = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
+export const SelectButton = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
 
     const onOptionClick = (event) => {
         if (props.disabled || isOptionDisabled(event.option)) {
@@ -104,6 +104,7 @@ export const SelectButton = memo(forwardRef((props, ref) => {
     )
 }));
 
+SelectButton.displayName = 'SelectButton';
 SelectButton.defaultProps = {
     __TYPE: 'SelectButton',
     id: null,

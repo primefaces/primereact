@@ -24,11 +24,11 @@ export default class DomHandler {
 
     static getBrowserLanguage() {
         return navigator.userLanguage
-          || (navigator.languages && navigator.languages.length && navigator.languages[0])
-          || navigator.language
-          || navigator.browserLanguage
-          || navigator.systemLanguage
-          || 'en';
+            || (navigator.languages && navigator.languages.length && navigator.languages[0])
+            || navigator.language
+            || navigator.browserLanguage
+            || navigator.systemLanguage
+            || 'en';
     }
 
     static getWindowScrollTop() {
@@ -69,7 +69,7 @@ export default class DomHandler {
         return 0;
     }
 
-	static getClientHeight(el, margin) {
+    static getClientHeight(el, margin) {
         if (el) {
             let height = el.clientHeight;
 
@@ -105,7 +105,7 @@ export default class DomHandler {
             w = win.innerWidth || e.clientWidth || g.clientWidth,
             h = win.innerHeight || e.clientHeight || g.clientHeight;
 
-        return {width: w, height: h};
+        return { width: w, height: h };
     }
 
     static getOffset(el) {
@@ -261,7 +261,7 @@ export default class DomHandler {
 
             if (targetOffset.top + targetOuterHeight + elementOuterHeight > viewport.height) {
                 top = targetOffset.top + windowScrollTop - elementOuterHeight;
-                if(top < 0) {
+                if (top < 0) {
                     top = windowScrollTop;
                 }
 
@@ -357,7 +357,7 @@ export default class DomHandler {
                     x: 0,
                     y: 0
                 },
-                left: function() {
+                left: function () {
                     const left = myOffset.left();
                     const scrollLeft = DomHandler.getWindowScrollLeft();
                     element.style.left = (left + scrollLeft) + 'px';
@@ -376,7 +376,7 @@ export default class DomHandler {
                         this.right();
                     }
                 },
-                right: function() {
+                right: function () {
                     const left = myOffset.left() + DomHandler.getOuterWidth(target);
                     const scrollLeft = DomHandler.getWindowScrollLeft();
                     element.style.left = (left + scrollLeft) + 'px';
@@ -396,7 +396,7 @@ export default class DomHandler {
                         this.left();
                     }
                 },
-                top: function() {
+                top: function () {
                     const top = myOffset.top();
                     const scrollTop = DomHandler.getWindowScrollTop();
                     element.style.top = (top + scrollTop) + 'px';
@@ -416,7 +416,7 @@ export default class DomHandler {
                         this.bottom();
                     }
                 },
-                bottom: function() {
+                bottom: function () {
                     const top = myOffset.top() + DomHandler.getOuterHeight(target);
                     const scrollTop = DomHandler.getWindowScrollTop();
                     element.style.top = (top + scrollTop) + 'px';
@@ -436,7 +436,7 @@ export default class DomHandler {
                         this.top();
                     }
                 },
-                center: function(axis) {
+                center: function (axis) {
                     if (axis === 'y') {
                         const top = myOffset.top() + (DomHandler.getOuterHeight(target) / 2);
                         element.style.top = (top + DomHandler.getWindowScrollTop()) + 'px';
@@ -630,7 +630,7 @@ export default class DomHandler {
     static appendChild(element, target) {
         if (this.isElement(target))
             target.appendChild(element);
-        else if(target.el && target.el.nativeElement)
+        else if (target.el && target.el.nativeElement)
             target.el.nativeElement.appendChild(element);
         else
             throw new Error('Cannot append ' + target + ' to ' + element);
@@ -672,17 +672,17 @@ export default class DomHandler {
     }
 
     static clearSelection() {
-        if(window.getSelection) {
-            if(window.getSelection().empty) {
+        if (window.getSelection) {
+            if (window.getSelection().empty) {
                 window.getSelection().empty();
-            } else if(window.getSelection().removeAllRanges && window.getSelection().rangeCount > 0 && window.getSelection().getRangeAt(0).getClientRects().length > 0) {
+            } else if (window.getSelection().removeAllRanges && window.getSelection().rangeCount > 0 && window.getSelection().getRangeAt(0).getClientRects().length > 0) {
                 window.getSelection().removeAllRanges();
             }
         }
-        else if(document['selection'] && document['selection'].empty) {
+        else if (document['selection'] && document['selection'].empty) {
             try {
                 document['selection'].empty();
-            } catch(error) {
+            } catch (error) {
                 //ignore IE bug
             }
         }
@@ -694,7 +694,7 @@ export default class DomHandler {
             return (el.offsetWidth - el.clientWidth - parseFloat(style.borderLeftWidth) - parseFloat(style.borderRightWidth));
         }
         else {
-            if(this.calculatedScrollbarWidth != null)
+            if (this.calculatedScrollbarWidth != null)
                 return this.calculatedScrollbarWidth;
 
             let scrollDiv = document.createElement("div");
@@ -711,7 +711,7 @@ export default class DomHandler {
     }
 
     static getBrowser() {
-        if(!this.browser) {
+        if (!this.browser) {
             let matched = this.resolveUserAgent();
             this.browser = {};
 
@@ -750,7 +750,7 @@ export default class DomHandler {
     }
 
     static isExist(element) {
-        return element !== null && typeof(element) !== 'undefined' && element.nodeName && element.parentNode;
+        return element !== null && typeof (element) !== 'undefined' && element.nodeName && element.parentNode;
     }
 
     static hasDOM() {
@@ -838,9 +838,9 @@ export default class DomHandler {
         const parentNode = element.parentElement && element.parentElement.nodeName;
 
         return (targetNode === 'INPUT' || targetNode === 'TEXTAREA' || targetNode === 'BUTTON' || targetNode === 'A' ||
-                parentNode === 'INPUT'|| parentNode === 'TEXTAREA' || parentNode === 'BUTTON' || parentNode === 'A' ||
-                this.hasClass(element, 'p-button') || this.hasClass(element.parentElement, 'p-button') ||
-                this.hasClass(element.parentElement, 'p-checkbox') || this.hasClass(element.parentElement, 'p-radiobutton')
+            parentNode === 'INPUT' || parentNode === 'TEXTAREA' || parentNode === 'BUTTON' || parentNode === 'A' ||
+            this.hasClass(element, 'p-button') || this.hasClass(element.parentElement, 'p-button') ||
+            this.hasClass(element.parentElement, 'p-checkbox') || this.hasClass(element.parentElement, 'p-radiobutton')
         );
     }
 

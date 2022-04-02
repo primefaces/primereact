@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact, { localeOption, localeOptions } from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -8,22 +8,22 @@ import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, mask, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { CalendarPanel } from './CalendarPanel';
 
-export const Calendar = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const [viewDateState, setViewDateState] = useState(null);
-    const elementRef = useRef(null);
-    const overlayRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const navigation = useRef(null);
-    const ignoreFocusFunctionality = useRef(false);
-    const isKeydown = useRef(false);
-    const timePickerTimer = useRef(null);
-    const viewStateChanged = useRef(false);
-    const touchUIMask = useRef(null);
-    const overlayEventListener = useRef(null);
-    const touchUIMaskClickListener = useRef(null);
-    const isOverlayClicked = useRef(false);
+export const Calendar = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const [viewDateState, setViewDateState] = React.useState(null);
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
+    const navigation = React.useRef(null);
+    const ignoreFocusFunctionality = React.useRef(false);
+    const isKeydown = React.useRef(false);
+    const timePickerTimer = React.useRef(null);
+    const viewStateChanged = React.useRef(false);
+    const touchUIMask = React.useRef(null);
+    const overlayEventListener = React.useRef(null);
+    const touchUIMaskClickListener = React.useRef(null);
+    const isOverlayClicked = React.useRef(false);
     const previousValue = usePrevious(props.value);
     const visible = props.inline || (props.onVisibleChange ? props.visible : overlayVisibleState);
 
@@ -2186,7 +2186,7 @@ export const Calendar = memo(forwardRef((props, ref) => {
         return props.maxDate && props.maxDate.getFullYear() === viewDate.getFullYear();
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
@@ -2258,7 +2258,7 @@ export const Calendar = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(overlayRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         show,
         hide,
         getCurrentDateTime,
@@ -2831,6 +2831,7 @@ export const Calendar = memo(forwardRef((props, ref) => {
     )
 }));
 
+Calendar.displayName = 'Calendar';
 Calendar.defaultProps = {
     __TYPE: 'Calendar',
     id: null,

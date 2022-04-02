@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
+import * as React from 'react';
 import { classNames } from '../utils/Utils';
 
-export const Divider = forwardRef((props, ref) => {
+export const Divider = React.forwardRef((props, ref) => {
     const horizontal = props.layout === 'horizontal';
     const vertical = props.layout === 'vertical';
     const className = classNames(`p-divider p-component p-divider-${props.layout} p-divider-${props.type}`, {
@@ -21,6 +21,7 @@ export const Divider = forwardRef((props, ref) => {
     )
 });
 
+Divider.displayName = 'Divider';
 Divider.defaultProps = {
     __TYPE: 'Divider',
     align: null,

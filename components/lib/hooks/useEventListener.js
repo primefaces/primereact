@@ -1,12 +1,12 @@
 /* eslint-disable */
-import { useEffect, useRef } from 'react';
+import * as React from 'react';
 import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { usePrevious } from './usePrevious';
 import { useUnmountEffect } from './useUnmountEffect';
 
 export const useEventListener = ({ target = 'document', type, listener, options, when = true }) => {
-    const targetRef = useRef(null);
-    const listenerRef = useRef(null);
+    const targetRef = React.useRef(null);
+    const listenerRef = React.useRef(null);
     const prevOptions = usePrevious(options);
 
     const bind = (bindOptions = {}) => {
@@ -28,7 +28,7 @@ export const useEventListener = ({ target = 'document', type, listener, options,
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (when) {
             targetRef.current = DomHandler.getTargetElement(target);
         }
@@ -38,7 +38,7 @@ export const useEventListener = ({ target = 'document', type, listener, options,
         }
     }, [target, when]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (listenerRef.current && (listenerRef.current !== listener || prevOptions !== options)) {
             unbind();
             when && bind();

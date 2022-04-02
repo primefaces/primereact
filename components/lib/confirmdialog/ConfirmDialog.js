@@ -1,11 +1,11 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { Dialog } from '../dialog/Dialog';
 import { Button } from '../button/Button';
-import { Portal } from '../portal/Portal';
-import { ObjectUtils, classNames, IconUtils } from '../utils/Utils';
+import { Dialog } from '../dialog/Dialog';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
+import { Portal } from '../portal/Portal';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const confirmDialog = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -22,10 +22,10 @@ export const confirmDialog = (props = {}) => {
     return [show, hide];
 }
 
-export const ConfirmDialog = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(props.visible);
-    const [reshowState, setReshowState] = useState(false);
-    const confirmProps = useRef(null);
+export const ConfirmDialog = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(props.visible);
+    const [reshowState, setReshowState] = React.useState(false);
+    const confirmProps = React.useRef(null);
     const getCurrentProps = () => confirmProps.current || props;
     const getPropValue = (key) => (confirmProps.current || props)[key];
     const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
@@ -69,11 +69,11 @@ export const ConfirmDialog = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         props.visible ? show() : hide();
     }, [props.visible]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (!props.target && !props.message) {
             OverlayService.on('confirm-dialog', confirm);
         }
@@ -91,7 +91,7 @@ export const ConfirmDialog = memo(forwardRef((props, ref) => {
         OverlayService.off('confirm-dialog', confirm);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         confirm
     }));
 
@@ -146,6 +146,7 @@ export const ConfirmDialog = memo(forwardRef((props, ref) => {
     return <Portal element={element} appendTo={getPropValue('appendTo')} />
 }));
 
+ConfirmDialog.displayName = 'ConfirmDialog';
 ConfirmDialog.defaultProps = {
     __TYPE: 'ConfirmDialog',
     tagKey: undefined,
