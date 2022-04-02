@@ -1,12 +1,10 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import { tip } from '../tooltip/Tooltip';
+import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
 
 export const TriStateCheckbox = memo(forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = useState(false);
     const elementRef = useRef(null);
-    const tooltipRef = useRef(null);
     const inputRef = useRef(props.inputRef);
 
     const onClick = (event) => {
@@ -52,26 +50,7 @@ export const TriStateCheckbox = memo(forwardRef((props, ref) => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const className = classNames('p-tristatecheckbox p-checkbox p-component', props.className);
     const boxClassName = classNames('p-checkbox-box', {
         'p-highlight': (props.value || !props.value) && props.value !== null,
@@ -84,15 +63,18 @@ export const TriStateCheckbox = memo(forwardRef((props, ref) => {
     });
 
     return (
-        <div {...ObjectUtils.findDiffKeys(props, TriStateCheckbox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
-            <div className="p-hidden-accessible">
-                <input ref={inputRef} type="checkbox" aria-labelledby={props.ariaLabelledBy} id={props.inputId} name={props.name}
-                    onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} defaultChecked={props.value} />
+        <>
+            <div {...ObjectUtils.findDiffKeys(props, TriStateCheckbox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+                <div className="p-hidden-accessible">
+                    <input ref={inputRef} type="checkbox" aria-labelledby={props.ariaLabelledBy} id={props.inputId} name={props.name}
+                        onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} defaultChecked={props.value} />
+                </div>
+                <div className={boxClassName} role="checkbox" aria-checked={props.value === true}>
+                    <span className={iconClassName}></span>
+                </div>
             </div>
-            <div className={boxClassName} role="checkbox" aria-checked={props.value === true}>
-                <span className={iconClassName}></span>
-            </div>
-        </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 

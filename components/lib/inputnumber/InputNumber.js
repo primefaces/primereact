@@ -1,15 +1,14 @@
 import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { tip } from '../tooltip/Tooltip';
-import { Ripple } from '../ripple/Ripple';
+import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
+import { Ripple } from '../ripple/Ripple';
+import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect } from '../hooks/Hooks';
 
 export const InputNumber = memo(forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = useState(false);
     const elementRef = useRef(null);
     const inputRef = useRef(null);
-    const tooltipRef = useRef(null);
     const timer = useRef(null);
     const lastValue = useRef(null);
 
@@ -911,19 +910,6 @@ export const InputNumber = memo(forwardRef((props, ref) => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
     useMountEffect(() => {
         constructParser();
 
@@ -941,13 +927,6 @@ export const InputNumber = memo(forwardRef((props, ref) => {
     useUpdateEffect(() => {
         changeValue();
     }, [props.value]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
 
     const createInputElement = () => {
         const className = classNames('p-inputnumber-input', props.inputClassName);
@@ -1015,6 +994,7 @@ export const InputNumber = memo(forwardRef((props, ref) => {
         )
     }
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const className = classNames('p-inputnumber p-component p-inputwrapper', {
         'p-inputwrapper-filled': props.value != null && props.value.toString().length > 0,
         'p-inputwrapper-focus': focusedState,
@@ -1026,10 +1006,13 @@ export const InputNumber = memo(forwardRef((props, ref) => {
     const buttonGroup = createButtonGroup();
 
     return (
-        <span ref={elementRef} id={props.id} className={className} style={props.style}>
-            {inputElement}
-            {buttonGroup}
-        </span>
+        <>
+            <span ref={elementRef} id={props.id} className={className} style={props.style}>
+                {inputElement}
+                {buttonGroup}
+            </span>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 

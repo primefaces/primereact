@@ -1,13 +1,11 @@
 import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { tip } from '../tooltip/Tooltip';
+import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
 
 export const RadioButton = memo(forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = useState(false);
     const elementRef = useRef(null);
     const inputRef = useRef(props.inputRef);
-    const tooltipRef = useRef(null);
 
     const select = (e) => {
         inputRef.current.checked = true;
@@ -53,30 +51,11 @@ export const RadioButton = memo(forwardRef((props, ref) => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
     useImperativeHandle(ref, () => ({
         select
     }));
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const className = classNames('p-radiobutton p-component', {
         'p-radiobutton-checked': props.checked,
         'p-radiobutton-disabled': props.disabled,
@@ -89,15 +68,18 @@ export const RadioButton = memo(forwardRef((props, ref) => {
     });
 
     return (
-        <div {...ObjectUtils.findDiffKeys(props, RadioButton.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
-            <div className="p-hidden-accessible">
-                <input ref={inputRef} id={props.inputId} type="radio" aria-labelledby={props.ariaLabelledBy} name={props.name} defaultChecked={props.checked}
-                    onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} required={props.required} tabIndex={props.tabIndex} />
+        <>
+            <div {...ObjectUtils.findDiffKeys(props, RadioButton.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+                <div className="p-hidden-accessible">
+                    <input ref={inputRef} id={props.inputId} type="radio" aria-labelledby={props.ariaLabelledBy} name={props.name} defaultChecked={props.checked}
+                        onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} required={props.required} tabIndex={props.tabIndex} />
+                </div>
+                <div className={boxClassName} role="radio" aria-checked={props.checked}>
+                    <div className="p-radiobutton-icon"></div>
+                </div>
             </div>
-            <div className={boxClassName} role="radio" aria-checked={props.checked}>
-                <div className="p-radiobutton-icon"></div>
-            </div>
-        </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 

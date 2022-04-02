@@ -1,12 +1,10 @@
 import React, { forwardRef, memo, useEffect, useMemo, useRef } from 'react';
 import { KeyFilter } from '../keyfilter/KeyFilter';
-import { tip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const InputText = memo(forwardRef((props, ref) => {
     const elementRef = useRef(ref);
-    const tooltipRef = useRef(null);
 
     const onKeyPress = (event) => {
         props.onKeyPress && props.onKeyPress(event);
@@ -38,33 +36,19 @@ export const InputText = memo(forwardRef((props, ref) => {
         ObjectUtils.combinedRefs(elementRef, ref);
     }, [elementRef, ref]);
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const inputProps = ObjectUtils.findDiffKeys(props, InputText.defaultProps);
     const className = classNames('p-inputtext p-component', {
         'p-disabled': props.disabled,
         'p-filled': isFilled
     }, props.className);
 
-    return <input ref={elementRef} {...inputProps} className={className} onInput={onInput} onKeyPress={onKeyPress} />;
+    return (
+        <>
+            <input ref={elementRef} {...inputProps} className={className} onInput={onInput} onKeyPress={onKeyPress} />
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
+    )
 }));
 
 InputText.defaultProps = {

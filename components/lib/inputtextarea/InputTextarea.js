@@ -1,11 +1,9 @@
 import React, { forwardRef, memo, useEffect, useMemo, useRef } from 'react';
-import { tip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const InputTextarea = memo(forwardRef((props, ref) => {
     const elementRef = useRef(ref);
-    const tooltipRef = useRef(null);
     const cachedScrollHeight = useRef(0);
 
     const onFocus = (event) => {
@@ -78,31 +76,12 @@ export const InputTextarea = memo(forwardRef((props, ref) => {
     }, [elementRef, ref]);
 
     useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useEffect(() => {
         if (props.autoResize) {
             resize(true);
         }
     }, [props.autoResize]);
 
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const textareaProps = ObjectUtils.findDiffKeys(props, InputTextarea.defaultProps);
     const className = classNames('p-inputtextarea p-inputtext p-component', {
         'p-disabled': props.disabled,
@@ -111,7 +90,10 @@ export const InputTextarea = memo(forwardRef((props, ref) => {
     }, props.className);
 
     return (
-        <textarea ref={elementRef} {...textareaProps} className={className} onFocus={onFocus} onBlur={onBlur} onKeyUp={onKeyUp} onInput={onInput}></textarea>
+        <>
+            <textarea ref={elementRef} {...textareaProps} className={className} onFocus={onFocus} onBlur={onBlur} onKeyUp={onKeyUp} onInput={onInput}></textarea>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 

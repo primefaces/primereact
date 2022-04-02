@@ -1,12 +1,10 @@
-import React, { forwardRef, memo, useEffect, useRef } from 'react';
+import React, { forwardRef, memo, useRef } from 'react';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { SelectButtonItem } from './SelectButtonItem';
-import { tip } from '../tooltip/Tooltip';
-import { ObjectUtils, classNames } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
 
 export const SelectButton = memo(forwardRef((props, ref) => {
     const elementRef = useRef(null);
-    const tooltipRef = useRef(null);
 
     const onOptionClick = (event) => {
         if (props.disabled || isOptionDisabled(event.option)) {
@@ -75,26 +73,6 @@ export const SelectButton = memo(forwardRef((props, ref) => {
         return false;
     }
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
     const createItems = () => {
         if (props.options && props.options.length) {
             return props.options.map((option, index) => {
@@ -112,13 +90,17 @@ export const SelectButton = memo(forwardRef((props, ref) => {
         return null;
     }
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const className = classNames('p-selectbutton p-buttonset p-component', props.className);
     const items = createItems();
 
     return (
-        <div {...ObjectUtils.findDiffKeys(props, SelectButton.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} role="group">
-            {items}
-        </div>
+        <>
+            <div {...ObjectUtils.findDiffKeys(props, SelectButton.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} role="group">
+                {items}
+            </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 

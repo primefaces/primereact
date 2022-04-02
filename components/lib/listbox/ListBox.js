@@ -1,16 +1,14 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, memo, useRef, useState } from 'react';
 import { FilterService } from '../api/Api';
-import { ListBoxItem } from './ListBoxItem';
-import { ListBoxHeader } from './ListBoxHeader';
-import { tip } from '../tooltip/Tooltip';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
-import { ObjectUtils, classNames } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
+import { ListBoxHeader } from './ListBoxHeader';
+import { ListBoxItem } from './ListBoxItem';
 
 export const ListBox = memo(forwardRef((props, ref) => {
     const [filterValueState, setFilterValueState] = useState('');
     const elementRef = useRef(null);
-    const tooltipRef = useRef(null);
     const virtualScrollerRef = useRef(null);
     const optionTouched = useRef(false);
     const filteredValue = (props.onFilterValueChange ? props.filterValue : filterValueState) || '';
@@ -212,26 +210,6 @@ export const ListBox = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
     const createHeader = () => {
         return props.filter ? <ListBoxHeader filter={filteredValue} onFilter={onFilter} disabled={props.disabled} filterPlaceholder={props.filterPlaceholder} /> : null;
     }
@@ -320,6 +298,7 @@ export const ListBox = memo(forwardRef((props, ref) => {
 
     const visibleOptions = getVisibleOptions();
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const className = classNames('p-listbox p-component', {
         'p-disabled': props.disabled
     }, props.className);
@@ -328,12 +307,15 @@ export const ListBox = memo(forwardRef((props, ref) => {
     const header = createHeader();
 
     return (
-        <div {...ObjectUtils.findDiffKeys(props, ListBox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}>
-            {header}
-            <div className={listClassName} style={props.listStyle}>
-                {list}
+        <>
+            <div {...ObjectUtils.findDiffKeys(props, ListBox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}>
+                {header}
+                <div className={listClassName} style={props.listStyle}>
+                    {list}
+                </div>
             </div>
-        </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 

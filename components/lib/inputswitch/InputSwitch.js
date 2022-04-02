@@ -1,13 +1,11 @@
 import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import { tip } from '../tooltip/Tooltip';
-import { ObjectUtils, classNames } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const InputSwitch = memo(forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = useState(false);
     const elementRef = useRef(null);
     const inputRef = useRef(props.inputRef);
-    const tooltipRef = useRef(null);
     const checked = props.checked === props.trueValue;
 
     const onClick = (event) => {
@@ -59,26 +57,7 @@ export const InputSwitch = memo(forwardRef((props, ref) => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const className = classNames('p-inputswitch p-component', {
         'p-inputswitch-checked': checked,
         'p-disabled': props.disabled,
@@ -88,15 +67,18 @@ export const InputSwitch = memo(forwardRef((props, ref) => {
     const inputSwitchProps = ObjectUtils.findDiffKeys(props, InputSwitch.defaultProps);
 
     return (
-        <div {...ObjectUtils.findDiffKeys(props, InputSwitch.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}
-            role="checkbox" aria-checked={checked} {...inputSwitchProps}>
-            <div className="p-hidden-accessible">
-                <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} checked={checked} onChange={toggle}
-                    onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} disabled={props.disabled} role="switch" aria-checked={checked}
-                    aria-labelledby={props.ariaLabelledBy} />
+        <>
+            <div {...ObjectUtils.findDiffKeys(props, InputSwitch.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}
+                role="checkbox" aria-checked={checked} {...inputSwitchProps}>
+                <div className="p-hidden-accessible">
+                    <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} checked={checked} onChange={toggle}
+                        onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} disabled={props.disabled} role="switch" aria-checked={checked}
+                        aria-labelledby={props.ariaLabelledBy} />
+                </div>
+                <span className="p-inputswitch-slider"></span>
             </div>
-            <span className="p-inputswitch-slider"></span>
-        </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 

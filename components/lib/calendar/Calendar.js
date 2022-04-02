@@ -1,13 +1,12 @@
 import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import PrimeReact, { localeOption, localeOptions } from '../api/Api';
-import { CalendarPanel } from './CalendarPanel';
-import { InputText } from '../inputtext/InputText';
 import { Button } from '../button/Button';
-import { tip } from '../tooltip/Tooltip';
-import { Ripple } from '../ripple/Ripple';
+import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, mask, ZIndexUtils } from '../utils/Utils';
-import { useMountEffect, useUnmountEffect, useUpdateEffect, useOverlayListener, usePrevious } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, mask, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { CalendarPanel } from './CalendarPanel';
 
 export const Calendar = memo(forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = useState(false);
@@ -16,7 +15,6 @@ export const Calendar = memo(forwardRef((props, ref) => {
     const elementRef = useRef(null);
     const overlayRef = useRef(null);
     const inputRef = useRef(props.inputRef);
-    const tooltipRef = useRef(null);
     const navigation = useRef(null);
     const ignoreFocusFunctionality = useRef(false);
     const isKeydown = useRef(false);
@@ -2192,19 +2190,6 @@ export const Calendar = memo(forwardRef((props, ref) => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: inputRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
     useMountEffect(() => {
         let viewDate = getViewDate(props.viewDate);
         validateDate(viewDate);
@@ -2268,11 +2253,6 @@ export const Calendar = memo(forwardRef((props, ref) => {
         if (touchUIMask.current) {
             disableModality();
             touchUIMask.current = null;
-        }
-
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
         }
 
         ZIndexUtils.clear(overlayRef.current);
@@ -2746,7 +2726,8 @@ export const Calendar = memo(forwardRef((props, ref) => {
             return (
                 <InputText ref={inputRef} id={props.inputId} name={props.name} type="text" className={props.inputClassName} style={props.inputStyle}
                     readOnly={props.readOnlyInput} disabled={props.disabled} required={props.required} autoComplete="off" placeholder={props.placeholder} tabIndex={props.tabIndex}
-                    onInput={onUserInput} onFocus={onInputFocus} onBlur={onInputBlur} onKeyDown={onInputKeyDown} aria-labelledby={props.ariaLabelledBy} inputMode={props.inputMode} />
+                    onInput={onUserInput} onFocus={onInputFocus} onBlur={onInputBlur} onKeyDown={onInputKeyDown} aria-labelledby={props.ariaLabelledBy} inputMode={props.inputMode}
+                    tooltip={props.tooltip} tooltipOptions={props.tooltipOptions} />
             )
         }
 
@@ -2813,6 +2794,7 @@ export const Calendar = memo(forwardRef((props, ref) => {
         return null;
     }
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const className = classNames('p-calendar p-component p-inputwrapper', props.className, {
         [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon,
         'p-calendar-disabled': props.disabled,

@@ -1,12 +1,10 @@
 import React, { forwardRef, memo, useCallback, useEffect, useRef } from 'react';
+import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
-import { tip } from '../tooltip/Tooltip';
-import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
-import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const InputMask = memo(forwardRef((props, ref) => {
     const elementRef = useRef(null);
-    const tooltipRef = useRef(null);
     const firstNonMaskPos = useRef(null);
     const lastRequiredNonMaskPos = useRef(0);
     const tests = useRef([]);
@@ -510,19 +508,6 @@ export const InputMask = memo(forwardRef((props, ref) => {
         ObjectUtils.combinedRefs(elementRef, props.inputRef);
     }, [elementRef, props.inputRef]);
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
     useMountEffect(() => {
         init();
         updateValue();
@@ -540,20 +525,13 @@ export const InputMask = memo(forwardRef((props, ref) => {
         }
     }, [isValueUpdated]);
 
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
     const className = classNames('p-inputmask', props.className);
 
     return (
         <InputText ref={elementRef} id={props.id} type={props.type} name={props.name} style={props.style} className={className} placeholder={props.placeholder}
             size={props.size} maxLength={props.maxLength} tabIndex={props.tabIndex} disabled={props.disabled} readOnly={props.readOnly}
-            onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} onKeyPress={onKeyPress}
-            onInput={onInput} onPaste={handleInputChange} required={props.required} aria-labelledby={props.ariaLabelledBy} />
+            onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} onKeyPress={onKeyPress} onInput={onInput} onPaste={handleInputChange}
+            required={props.required} aria-labelledby={props.ariaLabelledBy} tooltip={props.tooltip} tooltipOptions={props.tooltipOptions} />
     )
 }));
 

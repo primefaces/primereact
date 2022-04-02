@@ -1,39 +1,8 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
 import PrimeReact from '../api/Api';
 import { Portal } from '../portal/Portal';
-import { DomHandler, classNames, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, classNames, ZIndexUtils, ObjectUtils } from '../utils/Utils';
 import { useMountEffect, useUpdateEffect, useUnmountEffect, useResizeListener, useOverlayScrollListener } from '../hooks/Hooks';
-
-export const tip = (props) => {
-    const appendTo = props.appendTo || document.body;
-
-    const tooltipWrapper = document.createDocumentFragment();
-    DomHandler.appendChild(tooltipWrapper, appendTo);
-
-    props = { ...props, ...props.options };
-
-    const tooltipEl = React.createElement(Tooltip, props);
-    ReactDOM.render(tooltipEl, tooltipWrapper);
-
-    const updateTooltip = (newProps) => {
-        props = { ...props, ...newProps };
-        ReactDOM.render(React.cloneElement(tooltipEl, props), tooltipWrapper);
-    };
-
-    return {
-        destroy: () => {
-            ReactDOM.unmountComponentAtNode(tooltipWrapper);
-        },
-        updateContent: (newContent) => {
-            console.warn("The 'updateContent' method has been deprecated on Tooltip. Use update(newProps) method.");
-            updateTooltip({ content: newContent });
-        },
-        update: (newProps) => {
-            updateTooltip(newProps);
-        }
-    }
-}
 
 export const Tooltip = forwardRef((props, ref) => {
     const [visibleState, setVisibleState] = useState(false);
@@ -178,7 +147,7 @@ export const Tooltip = forwardRef((props, ref) => {
                 applyDelay('showDelay', () => {
                     setVisibleState(true);
                     setPositionState(getPosition(currentTargetRef.current));
-                    updateTooltipState();
+                    setTimeout(() => updateTooltipState(), 0);
                     sendCallback(props.onShow, { originalEvent: e, target: currentTargetRef.current });
                     DomHandler.addClass(currentTargetRef.current, getTargetOption(currentTargetRef.current, 'classname'));
                 });
@@ -384,6 +353,8 @@ export const Tooltip = forwardRef((props, ref) => {
     }
 
     const setTargetEventOperations = (target, operation) => {
+        target = ObjectUtils.getRefElement(target);
+
         if (target) {
             if (DomHandler.isElement(target)) {
                 operation(target);
@@ -419,16 +390,17 @@ export const Tooltip = forwardRef((props, ref) => {
     });
 
     useUpdateEffect(() => {
-        visibleState && loadTargetEvents();
+        loadTargetEvents();
+
+        return () => {
+            unloadTargetEvents();
+        }
     }, [show, hide, props.target]);
 
     useUpdateEffect(() => {
         if (visibleState) {
             bindWindowResizeListener();
             bindOverlayScrollListener();
-        }
-        else {
-            textRef.current && ReactDOM.unmountComponentAtNode(textRef.current);
         }
 
         return () => {

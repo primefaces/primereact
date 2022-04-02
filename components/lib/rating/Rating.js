@@ -1,11 +1,9 @@
-import React, { forwardRef, memo, useEffect, useRef } from 'react';
-import { tip } from '../tooltip/Tooltip';
+import React, { forwardRef, memo, useRef } from 'react';
+import { Tooltip } from '../tooltip/Tooltip';
 import { classNames } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
 
 export const Rating = memo(forwardRef((props, ref) => {
     const elementRef = useRef(null);
-    const tooltipRef = useRef(null);
     const enabled = !props.disabled && !props.readOnly;
     const tabIndex = enabled ? 0 : null;
 
@@ -57,26 +55,6 @@ export const Rating = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
     const createStars = () => {
         return Array.from({ length: props.stars }, (_, i) => i + 1).map((value) => {
             const iconClassName = classNames('p-rating-icon', {
@@ -98,6 +76,7 @@ export const Rating = memo(forwardRef((props, ref) => {
         return null;
     }
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const className = classNames('p-rating', {
         'p-disabled': props.disabled,
         'p-readonly': props.readOnly
@@ -106,10 +85,13 @@ export const Rating = memo(forwardRef((props, ref) => {
     const stars = createStars();
 
     return (
-        <div {...ObjectUtils.findDiffKeys(props, Rating.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}>
-            {cancelIcon}
-            {stars}
-        </div>
+        <>
+            <div {...ObjectUtils.findDiffKeys(props, Rating.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}>
+                {cancelIcon}
+                {stars}
+            </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 

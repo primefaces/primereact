@@ -1,14 +1,12 @@
 import React, { forwardRef, memo, useEffect, useMemo, useRef, useState } from 'react';
-import { tip } from '../tooltip/Tooltip';
+import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
 
 export const Chips = memo(forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = useState(false);
     const elementRef = useRef(null);
     const listRef = useRef(null);
     const inputRef = useRef(props.inputRef);
-    const tooltipRef = useRef(null);
 
     const removeItem = (event, index) => {
         if (props.disabled && props.readOnly) {
@@ -157,27 +155,6 @@ export const Chips = memo(forwardRef((props, ref) => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: inputRef.current,
-                targetContainer: listRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
     const createRemoveIcon = (value, index) => {
         if (!props.disabled && !props.readOnly && isRemovable(value, index)) {
             return <span className="p-chips-token-icon pi pi-times-circle" onClick={(event) => removeItem(event, index)}></span>
@@ -229,6 +206,7 @@ export const Chips = memo(forwardRef((props, ref) => {
         )
     }
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const className = classNames('p-chips p-component p-inputwrapper', {
         'p-inputwrapper-filled': isFilled,
         'p-inputwrapper-focus': focusedState
@@ -236,9 +214,12 @@ export const Chips = memo(forwardRef((props, ref) => {
     const list = createList();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}>
-            {list}
-        </div>
+        <>
+            <div ref={elementRef} id={props.id} className={className} style={props.style}>
+                {list}
+            </div>
+            {hasTooltip && <Tooltip target={inputRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
