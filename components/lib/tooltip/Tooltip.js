@@ -1,10 +1,10 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import PrimeReact from '../api/Api';
 import { Portal } from '../portal/Portal';
 import { DomHandler, classNames, ZIndexUtils, ObjectUtils } from '../utils/Utils';
 import { useMountEffect, useUpdateEffect, useUnmountEffect, useResizeListener, useOverlayScrollListener } from '../hooks/Hooks';
 
-export const Tooltip = forwardRef((props, ref) => {
+export const Tooltip = memo(forwardRef((props, ref) => {
     const [visibleState, setVisibleState] = useState(false);
     const [positionState, setPositionState] = useState(props.position);
     const elementRef = useRef(null);
@@ -456,7 +456,7 @@ export const Tooltip = forwardRef((props, ref) => {
     }
 
     return null;
-});
+}));
 
 Tooltip.defaultProps = {
     __TYPE: 'Tooltip',
