@@ -143,7 +143,7 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
         return props.max && props.value && props.max === props.value.length;
     }
 
-    const isFilled = useReact.memo(() => {
+    const isFilled = React.useMemo(() => {
         return (props.value && props.value.length) || (inputRef.current && inputRef.current.value && inputRef.current.value.length);
     }, [props.value]);
 
