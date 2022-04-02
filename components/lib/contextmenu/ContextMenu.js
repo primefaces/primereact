@@ -3,7 +3,7 @@ import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { ContextMenuSub } from './ContextMenuSub';
 
 export const ContextMenu = React.memo(React.forwardRef((props, ref) => {
@@ -169,12 +169,13 @@ export const ContextMenu = React.memo(React.forwardRef((props, ref) => {
     }));
 
     const createContextMenu = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, ContextMenu.defaultProps);
         const className = classNames('p-contextmenu p-component', props.className);
 
         return (
             <CSSTransition nodeRef={menuRef} classNames="p-contextmenu" in={visibleState} timeout={{ enter: 250, exit: 0 }} options={props.transitionOptions}
                 unmountOnExit onEnter={onEnter} onEntered={onEntered} onExit={onExit} onExited={onExited}>
-                <div ref={menuRef} id={props.id} className={className} style={props.style} onClick={onMenuClick} onMouseEnter={onMenuMouseEnter}>
+                <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onMenuClick} onMouseEnter={onMenuMouseEnter}>
                     <ContextMenuSub model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} />
                 </div>
             </CSSTransition>

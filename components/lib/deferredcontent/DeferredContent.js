@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect } from '../hooks/Hooks';
+import { ObjectUtils } from '../utils/Utils';
 
 export const DeferredContent = React.forwardRef((props, ref) => {
     const [loadedState, setLoadedState] = React.useState(false);
@@ -37,8 +38,10 @@ export const DeferredContent = React.forwardRef((props, ref) => {
         }
     });
 
+    const otherProps = ObjectUtils.findDiffKeys(props, DeferredContent.defaultProps);
+
     return (
-        <div ref={elementRef}>
+        <div ref={elementRef} {...otherProps}>
             {loadedState && props.children}
         </div>
     )

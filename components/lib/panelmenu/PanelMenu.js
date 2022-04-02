@@ -136,11 +136,12 @@ export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
         return props.model ? props.model.map(createPanel) : null;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, PanelMenu.defaultProps);
     const className = classNames('p-panelmenu p-component', props.className);
     const panels = createPanels();
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {panels}
         </div>
     )

@@ -82,7 +82,7 @@ export const InputTextarea = React.memo(React.forwardRef((props, ref) => {
     }, [props.autoResize]);
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-    const textareaProps = ObjectUtils.findDiffKeys(props, InputTextarea.defaultProps);
+    const otherProps = ObjectUtils.findDiffKeys(props, InputTextarea.defaultProps);
     const className = classNames('p-inputtextarea p-inputtext p-component', {
         'p-disabled': props.disabled,
         'p-filled': isFilled,
@@ -91,7 +91,7 @@ export const InputTextarea = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <textarea ref={elementRef} {...textareaProps} className={className} onFocus={onFocus} onBlur={onBlur} onKeyUp={onKeyUp} onInput={onInput}></textarea>
+            <textarea ref={elementRef} {...otherProps} className={className} onFocus={onFocus} onBlur={onBlur} onKeyUp={onKeyUp} onInput={onInput}></textarea>
             {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
         </>
     )

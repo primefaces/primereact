@@ -243,6 +243,7 @@ export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, CascadeSelect.defaultProps);
         const className = classNames('p-cascadeselect p-component p-inputwrapper', {
             'p-disabled': props.disabled,
             'p-focus': focusedState,
@@ -256,7 +257,7 @@ export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
         const overlay = createOverlay();
 
         return (
-            <div {...ObjectUtils.findDiffKeys(props, CascadeSelect.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
                 {keyboardHelper}
                 {labelElement}
                 {dropdownIcon}

@@ -64,6 +64,7 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
 
     const checked = isChecked();
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, Checkbox.defaultProps);
     const className = classNames('p-checkbox p-component', {
         'p-checkbox-checked': checked,
         'p-checkbox-disabled': props.disabled,
@@ -78,7 +79,7 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div {...ObjectUtils.findDiffKeys(props, Checkbox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
                 <div className="p-hidden-accessible">
                     <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} tabIndex={props.tabIndex} defaultChecked={checked} aria-labelledby={props.ariaLabelledBy}
                         onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} required={props.required} />

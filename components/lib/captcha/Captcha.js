@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
+import { ObjectUtils } from '../utils/Utils';
 
 export const Captcha = React.memo(React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
@@ -78,7 +79,9 @@ export const Captcha = React.memo(React.forwardRef((props, ref) => {
         getResponse
     }));
 
-    return <div ref={elementRef} id={props.id}></div>
+    const otherProps = ObjectUtils.findDiffKeys(props, Captcha.defaultProps);
+
+    return <div ref={elementRef} id={props.id} {...otherProps}></div>
 }));
 
 Captcha.displayName = 'Captcha';

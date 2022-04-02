@@ -94,13 +94,14 @@ export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, BreadCrumb.defaultProps);
     const className = classNames('p-breadcrumb p-component', props.className);
     const home = createHome();
     const items = createMenuitems();
     const separator = createSeparator();
 
     return (
-        <nav id={props.id} className={className} style={props.style} aria-label="Breadcrumb">
+        <nav id={props.id} className={className} style={props.style} aria-label="Breadcrumb" {...otherProps}>
             <ul>
                 {home}
                 {separator}

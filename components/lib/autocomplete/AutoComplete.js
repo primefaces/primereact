@@ -537,6 +537,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
 
     const listId = idState + '_list';
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, AutoComplete.defaultProps);
     const className = classNames('p-autocomplete p-component p-inputwrapper', {
         'p-autocomplete-dd': props.dropdown,
         'p-autocomplete-multiple': props.multiple,
@@ -549,7 +550,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <span {...ObjectUtils.findDiffKeys(props, AutoComplete.defaultProps)} ref={elementRef} id={idState} style={props.style} className={className} aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-owns={listId}>
+            <span ref={elementRef} id={idState} style={props.style} className={className} aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-owns={listId} {...otherProps}>
                 {input}
                 {loader}
                 {dropdown}

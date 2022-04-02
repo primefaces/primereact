@@ -181,6 +181,7 @@ export const Paginator = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
     else {
+        const otherProps = ObjectUtils.findDiffKeys(props, Paginator.defaultProps);
         const className = classNames('p-paginator p-component', props.className);
         const leftContent = ObjectUtils.getJSXElement(props.leftContent, props);
         const rightContent = ObjectUtils.getJSXElement(props.rightContent, props);
@@ -190,7 +191,7 @@ export const Paginator = React.memo(React.forwardRef((props, ref) => {
         const rightElement = rightContent && <div className="p-paginator-right-content">{rightContent}</div>;
 
         return (
-            <div className={className} style={props.style}>
+            <div className={className} style={props.style} {...otherProps}>
                 {leftElement}
                 {elements}
                 {rightElement}

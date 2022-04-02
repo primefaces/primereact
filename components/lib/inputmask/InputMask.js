@@ -525,10 +525,11 @@ export const InputMask = React.memo(React.forwardRef((props, ref) => {
         }
     }, [isValueUpdated]);
 
+    const otherProps = ObjectUtils.findDiffKeys(props, InputMask.defaultProps);
     const className = classNames('p-inputmask', props.className);
 
     return (
-        <InputText ref={elementRef} id={props.id} type={props.type} name={props.name} style={props.style} className={className} placeholder={props.placeholder}
+        <InputText ref={elementRef} id={props.id} type={props.type} name={props.name} style={props.style} className={className} {...otherProps} placeholder={props.placeholder}
             size={props.size} maxLength={props.maxLength} tabIndex={props.tabIndex} disabled={props.disabled} readOnly={props.readOnly}
             onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} onKeyPress={onKeyPress} onInput={onInput} onPaste={handleInputChange}
             required={props.required} aria-labelledby={props.ariaLabelledBy} tooltip={props.tooltip} tooltipOptions={props.tooltipOptions} />

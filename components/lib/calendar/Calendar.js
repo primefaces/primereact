@@ -2794,7 +2794,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
-    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, Calendar.defaultProps);
     const className = classNames('p-calendar p-component p-inputwrapper', props.className, {
         [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon,
         'p-calendar-disabled': props.disabled,
@@ -2817,7 +2817,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     const footer = createFooter();
 
     return (
-        <span ref={elementRef} id={props.id} className={className} style={props.style}>
+        <span ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
             {content}
             <CalendarPanel ref={overlayRef} className={panelClassName} style={props.panelStyle} appendTo={props.appendTo} inline={props.inline} onClick={onPanelClick} onMouseUp={onPanelMouseUp}
                 in={visible} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited}

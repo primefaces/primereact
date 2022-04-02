@@ -226,6 +226,7 @@ export const ConfirmPopup = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, ConfirmPopup.defaultProps);
         const className = classNames('p-confirm-popup p-component', getPropValue('className'));
         const content = createContent();
         const footer = createFooter();
@@ -233,7 +234,7 @@ export const ConfirmPopup = React.memo(React.forwardRef((props, ref) => {
         return (
             <CSSTransition nodeRef={overlayRef} classNames="p-connected-overlay" in={visibleState} timeout={{ enter: 120, exit: 100 }} options={getPropValue('transitionOptions')}
                 unmountOnExit onEnter={onEnter} onEntered={onEntered} onExit={onExit} onExited={onExited}>
-                <div ref={overlayRef} id={getPropValue('id')} className={className} style={getPropValue('style')} onClick={onPanelClick}>
+                <div ref={overlayRef} id={getPropValue('id')} className={className} style={getPropValue('style')} {...otherProps} onClick={onPanelClick}>
                     {content}
                     {footer}
                 </div>

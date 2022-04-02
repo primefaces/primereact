@@ -24,6 +24,7 @@ export const Message = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Message.defaultProps);
     const className = classNames('p-inline-message p-component', {
         'p-inline-message-info': props.severity === 'info',
         'p-inline-message-warn': props.severity === 'warn',
@@ -34,7 +35,7 @@ export const Message = React.memo(React.forwardRef((props, ref) => {
     const content = createContent();
 
     return (
-        <div id={props.id} aria-live="polite" className={className} style={props.style} role="alert">
+        <div id={props.id} className={className} style={props.style} {...otherProps} role="alert" aria-live="polite">
             {content}
         </div>
     )

@@ -199,6 +199,7 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
     });
 
     const createPanel = (panel, index) => {
+        const otherProps = ObjectUtils.findDiffKeys(panel.props, SplitterPanel.defaultProps);
         const panelClassName = classNames('p-splitter-panel', panel.props.className);
         const gutterStyle = props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' }
         const gutter = (index !== props.children.length - 1) && (
@@ -210,7 +211,7 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
 
         return (
             <React.Fragment>
-                <div key={index} className={panelClassName} style={panel.props.style}>
+                <div key={index} className={panelClassName} style={panel.props.style} {...otherProps}>
                     {panel.props.children}
                 </div>
                 {gutter}
@@ -223,11 +224,12 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
         return React.Children.map(props.children, createPanel);
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Splitter.defaultProps);
     const className = classNames(`p-splitter p-component p-splitter-${props.layout}`, props.className);
     const panels = createPanels();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}>
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
             {panels}
         </div>
     )

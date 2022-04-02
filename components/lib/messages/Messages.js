@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { ObjectUtils } from '../utils/Utils';
 import { UIMessage } from './UIMessage';
 
 let messageIdx = 0;
@@ -46,8 +47,10 @@ export const Messages = React.memo(React.forwardRef((props, ref) => {
         clear
     }));
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Messages.defaultProps);
+
     return (
-        <div id={props.id} className={props.className} style={props.style}>
+        <div id={props.id} className={props.className} style={props.style} {...otherProps}>
             <TransitionGroup>
                 {
                     messagesState.map((message) => {

@@ -572,6 +572,7 @@ export const VirtualScroller = React.memo(React.forwardRef((props, ref) => {
         )
     }
     else {
+        const otherProps = ObjectUtils.findDiffKeys(props, VirtualScroller.defaultProps);
         const className = classNames('p-virtualscroller', {
             'p-both-scroll': both,
             'p-horizontal-scroll': horizontal
@@ -582,7 +583,7 @@ export const VirtualScroller = React.memo(React.forwardRef((props, ref) => {
         const spacer = createSpacer();
 
         return (
-            <div ref={elementRef} className={className} tabIndex={0} style={props.style} onScroll={onScroll}>
+            <div ref={elementRef} className={className} tabIndex={0} style={props.style} {...otherProps} onScroll={onScroll}>
                 {content}
                 {spacer}
                 {loader}

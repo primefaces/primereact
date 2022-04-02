@@ -540,6 +540,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
     const visibleOptions = getVisibleOptions();
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, MultiSelect.defaultProps);
     const className = classNames('p-multiselect p-component p-inputwrapper', {
         'p-multiselect-chip': props.display === 'chip',
         'p-disabled': props.disabled,
@@ -553,7 +554,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div {...ObjectUtils.findDiffKeys(props, MultiSelect.defaultProps)} ref={elementRef} id={props.id} className={className} onClick={onClick} style={props.style}>
+            <div ref={elementRef} id={props.id} style={props.style} className={className} {...otherProps} onClick={onClick}>
                 <div className="p-hidden-accessible">
                     <input ref={inputRef} id={props.inputId} name={props.name} readOnly type="text" onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}
                         role="listbox" aria-labelledby={props.ariaLabelledBy} aria-expanded={overlayVisibleState} disabled={props.disabled} tabIndex={props.tabIndex} />

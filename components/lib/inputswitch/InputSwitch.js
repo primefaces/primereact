@@ -58,18 +58,16 @@ export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
     }, [inputRef, props.inputRef]);
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, InputSwitch.defaultProps);
     const className = classNames('p-inputswitch p-component', {
         'p-inputswitch-checked': checked,
         'p-disabled': props.disabled,
         'p-inputswitch-focus': focusedState
     }, props.className);
 
-    const inputSwitchProps = ObjectUtils.findDiffKeys(props, InputSwitch.defaultProps);
-
     return (
         <>
-            <div {...ObjectUtils.findDiffKeys(props, InputSwitch.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}
-                role="checkbox" aria-checked={checked} {...inputSwitchProps}>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} role="checkbox" aria-checked={checked}>
                 <div className="p-hidden-accessible">
                     <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} checked={checked} onChange={toggle}
                         onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} disabled={props.disabled} role="switch" aria-checked={checked}

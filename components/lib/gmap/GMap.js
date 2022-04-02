@@ -1,6 +1,7 @@
 /*global google*/
 import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ObjectUtils } from '../utils/Utils';
 
 export const GMap = React.memo(React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
@@ -97,7 +98,9 @@ export const GMap = React.memo(React.forwardRef((props, ref) => {
         getMap
     }));
 
-    return <div ref={elementRef} style={props.style} className={props.className}></div>
+    const otherProps = ObjectUtils.findDiffKeys(props, GMap.defaultProps);
+
+    return <div ref={elementRef} style={props.style} className={props.className} {...otherProps}></div>
 }));
 
 GMap.displayName = 'GMap';

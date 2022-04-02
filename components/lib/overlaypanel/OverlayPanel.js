@@ -5,7 +5,7 @@ import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/H
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 
 export const OverlayPanel = React.forwardRef((props, ref) => {
     const [visibleState, setVisibleState] = React.useState(false);
@@ -193,13 +193,14 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     }
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, OverlayPanel.defaultProps);
         const className = classNames('p-overlaypanel p-component', props.className);
         const closeIcon = createCloseIcon();
 
         return (
             <CSSTransition nodeRef={overlayRef} classNames="p-overlaypanel" in={visibleState} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
                 unmountOnExit onEnter={onEnter} onEntered={onEntered} onExit={onExit} onExited={onExited}>
-                <div ref={overlayRef} id={props.id} className={className} style={props.style} onClick={onPanelClick}>
+                <div ref={overlayRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
                     <div className="p-overlaypanel-content" onClick={onContentClick} onMouseDown={onContentClick}>
                         {props.children}
                     </div>

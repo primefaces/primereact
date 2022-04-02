@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
-import { classNames, DomHandler } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const ScrollPanel = React.forwardRef((props, ref) => {
     const containerRef = React.useRef(null);
@@ -152,10 +152,11 @@ export const ScrollPanel = React.forwardRef((props, ref) => {
         refresh
     }));
 
+    const otherProps = ObjectUtils.findDiffKeys(props, ScrollPanel.defaultProps);
     const className = classNames('p-scrollpanel p-component', props.className);
 
     return (
-        <div ref={containerRef} id={props.id} className={className} style={props.style}>
+        <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>
             <div className="p-scrollpanel-wrapper">
                 <div ref={contentRef} className="p-scrollpanel-content" onScroll={moveBar} onMouseEnter={moveBar}>
                     {props.children}

@@ -134,6 +134,7 @@ export const Galleria = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, Galleria.defaultProps);
         const thumbnailsPosClassName = props.showThumbnails && getPositionClassName('p-galleria-thumbnails', props.thumbnailsPosition);
         const indicatorPosClassName = props.showIndicators && getPositionClassName('p-galleria-indicators', props.indicatorsPosition);
         const galleriaClassName = classNames('p-galleria p-component', props.className, {
@@ -152,7 +153,7 @@ export const Galleria = React.memo(React.forwardRef((props, ref) => {
         const header = createHeader();
         const footer = createFooter();
         const element = (
-            <div ref={elementRef} id={props.id} className={galleriaClassName} style={props.style}>
+            <div ref={elementRef} id={props.id} className={galleriaClassName} style={props.style} {...otherProps}>
                 {closeIcon}
                 {header}
                 <div className="p-galleria-content">

@@ -99,6 +99,7 @@ export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
     const { option: selectedOption, index: selectedOptionIndex } = getSelectedOptionMap();
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, MultiStateCheckbox.defaultProps);
     const className = classNames('p-multistatecheckbox p-checkbox p-component', props.className);
     const boxClassName = classNames('p-checkbox-box', {
         'p-highlight': !!selectedOption,
@@ -109,7 +110,7 @@ export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div {...ObjectUtils.findDiffKeys(props, MultiStateCheckbox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
                 <div className="p-hidden-accessible">
                     <input ref={inputRef} type="checkbox" aria-labelledby={props.ariaLabelledBy} id={props.inputId} name={props.name}
                         onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} defaultChecked={!!selectedOption} />

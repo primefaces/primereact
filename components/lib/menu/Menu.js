@@ -195,6 +195,7 @@ export const Menu = React.memo(React.forwardRef((props, ref) => {
 
     const createElement = () => {
         if (props.model) {
+            const otherProps = ObjectUtils.findDiffKeys(props, Menu.defaultProps);
             const className = classNames('p-menu p-component', {
                 'p-menu-overlay': props.popup
             }, props.className);
@@ -203,7 +204,7 @@ export const Menu = React.memo(React.forwardRef((props, ref) => {
             return (
                 <CSSTransition nodeRef={menuRef} classNames="p-connected-overlay" in={visibleState} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
                     unmountOnExit onEnter={onEnter} onEntered={onEntered} onExit={onExit} onExited={onExited}>
-                    <div ref={menuRef} id={props.id} className={className} style={props.style} onClick={onPanelClick}>
+                    <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
                         <ul className="p-menu-list p-reset" role="menu">
                             {menuitems}
                         </ul>

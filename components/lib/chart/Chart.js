@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useUnmountEffect } from '../hooks/Hooks';
-import { classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const Chart = React.memo(React.forwardRef((props, ref) => {
     const chartRef = React.useRef(null);
@@ -43,11 +43,12 @@ export const Chart = React.memo(React.forwardRef((props, ref) => {
         }
     });
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Chart.defaultProps);
     const className = classNames('p-chart', props.className);
     const style = Object.assign({ width: props.width, height: props.height }, props.style);
 
     return (
-        <div id={props.id} style={style} className={className}>
+        <div id={props.id} style={style} className={className} {...otherProps}>
             <canvas ref={canvasRef} width={props.width} height={props.height}></canvas>
         </div>
     );

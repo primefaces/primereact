@@ -3,7 +3,7 @@ import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
 export const ScrollTop = React.memo(React.forwardRef((props, ref) => {
     const [visibleState, setVisibleState] = React.useState(false);
@@ -60,6 +60,7 @@ export const ScrollTop = React.memo(React.forwardRef((props, ref) => {
         ZIndexUtils.clear(scrollElementRef.current);
     });
 
+    const otherProps = ObjectUtils.findDiffKeys(props, ScrollTop.defaultProps);
     const className = classNames('p-scrolltop p-link p-component', {
         'p-scrolltop-sticky': props.target !== 'window'
     }, props.className);
@@ -68,7 +69,7 @@ export const ScrollTop = React.memo(React.forwardRef((props, ref) => {
         <>
             <CSSTransition nodeRef={scrollElementRef} classNames="p-scrolltop" in={visibleState} timeout={{ enter: 150, exit: 150 }} options={props.transitionOptions}
                 unmountOnExit onEnter={onEnter} onEntered={onEntered} onExited={onExited}>
-                <button ref={scrollElementRef} type="button" className={className} style={props.style} onClick={onClick}>
+                <button ref={scrollElementRef} type="button" className={className} style={props.style} {...otherProps} onClick={onClick}>
                     {IconUtils.getJSXIcon(props.icon, { className: 'p-scrolltop-icon' }, { props })}
                     <Ripple />
                 </button>

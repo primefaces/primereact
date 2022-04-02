@@ -51,6 +51,7 @@ export const TriStateCheckbox = React.memo(React.forwardRef((props, ref) => {
     }, [inputRef, props.inputRef]);
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, TriStateCheckbox.defaultProps);
     const className = classNames('p-tristatecheckbox p-checkbox p-component', props.className);
     const boxClassName = classNames('p-checkbox-box', {
         'p-highlight': (props.value || !props.value) && props.value !== null,
@@ -64,7 +65,7 @@ export const TriStateCheckbox = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div {...ObjectUtils.findDiffKeys(props, TriStateCheckbox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
                 <div className="p-hidden-accessible">
                     <input ref={inputRef} type="checkbox" aria-labelledby={props.ariaLabelledBy} id={props.inputId} name={props.name}
                         onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} defaultChecked={props.value} />

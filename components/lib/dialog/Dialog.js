@@ -482,6 +482,7 @@ export const Dialog = React.forwardRef((props, ref) => {
     }
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, Dialog.defaultProps);
         const className = classNames('p-dialog p-component', props.className, {
             'p-dialog-rtl': props.rtl,
             'p-dialog-maximized': maximized
@@ -509,7 +510,7 @@ export const Dialog = React.forwardRef((props, ref) => {
                 <CSSTransition nodeRef={dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={visibleState} options={props.transitionOptions}
                     unmountOnExit onEnter={onEnter} onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
                     <div ref={dialogRef} id={idState} className={className} style={props.style} onClick={props.onClick}
-                        role="dialog" aria-labelledby={headerId} aria-describedby={contentId} aria-modal={props.modal}>
+                        role="dialog" {...otherProps} aria-labelledby={headerId} aria-describedby={contentId} aria-modal={props.modal}>
                         {header}
                         {content}
                         {footer}

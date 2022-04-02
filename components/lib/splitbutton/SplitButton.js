@@ -95,6 +95,7 @@ export const SplitButton = React.memo(React.forwardRef((props, ref) => {
     }
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, SplitButton.defaultProps);
     const className = classNames('p-splitbutton p-component', props.className, { 'p-disabled': props.disabled });
     const buttonClassName = classNames('p-splitbutton-defaultbutton', props.buttonClassName);
     const menuButtonClassName = classNames('p-splitbutton-menubutton', props.menuButtonClassName);
@@ -104,7 +105,7 @@ export const SplitButton = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div id={idState} className={className} style={props.style} ref={elementRef}>
+            <div ref={elementRef} id={idState} className={className} style={props.style} {...otherProps}>
                 <Button ref={defaultButtonRef} type="button" className={buttonClassName} icon={props.icon} label={props.label} onClick={props.onClick} disabled={props.disabled} tabIndex={props.tabIndex}>
                     {buttonContent}
                 </Button>

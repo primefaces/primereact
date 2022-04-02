@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, IconUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const ToggleButton = React.memo(React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
@@ -48,6 +48,7 @@ export const ToggleButton = React.memo(React.forwardRef((props, ref) => {
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const tabIndex = !props.disabled && props.tabIndex;
+    const otherProps = ObjectUtils.findDiffKeys(props, ToggleButton.defaultProps);
     const className = classNames('p-button p-togglebutton p-component', {
         'p-button-icon-only': hasIcon && !hasLabel,
         'p-highlight': props.checked,
@@ -57,7 +58,7 @@ export const ToggleButton = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div {...ObjectUtils.findDiffKeys(props, ToggleButton.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}
                 onClick={toggle} onFocus={props.onFocus} onBlur={props.onBlur} onKeyDown={onKeyDown}
                 tabIndex={tabIndex} aria-labelledby={props.ariaLabelledBy}>
                 {iconElement}

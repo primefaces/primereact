@@ -1515,6 +1515,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const empty = ObjectUtils.isEmpty(data);
     const selectionModeInColumn = getSelectionModeInColumn(columns);
     const selectable = props.selectionMode || selectionModeInColumn;
+    const otherProps = ObjectUtils.findDiffKeys(props, DataTable.defaultProps);
     const className = classNames('p-datatable p-component', {
         'p-datatable-hoverable-rows': props.rowHover,
         'p-datatable-selectable': selectable && !props.cellSelection,
@@ -1547,7 +1548,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const reorderIndicators = createReorderIndicators();
 
     return (
-        <div {...ObjectUtils.findDiffKeys(props, DataTable.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-datatable-wrapper">
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} data-scrollselectors=".p-datatable-wrapper">
             {loader}
             {header}
             {paginatorTop}

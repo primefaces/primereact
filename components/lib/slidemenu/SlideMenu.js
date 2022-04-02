@@ -4,7 +4,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { SlideMenuSub } from './SlideMenuSub';
 
 export const SlideMenu = React.memo(React.forwardRef((props, ref) => {
@@ -105,6 +105,7 @@ export const SlideMenu = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, SlideMenu.defaultProps);
         const className = classNames('p-slidemenu p-component', {
             'p-slidemenu-overlay': props.popup
         }, props.className);
@@ -114,7 +115,7 @@ export const SlideMenu = React.memo(React.forwardRef((props, ref) => {
         return (
             <CSSTransition nodeRef={menuRef} classNames="p-connected-overlay" in={!props.popup || visibleState} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
                 unmountOnExit onEnter={onEnter} onEntered={onEntered} onExit={onExit} onExited={onExited}>
-                <div ref={menuRef} id={props.id} className={className} style={props.style} onClick={onPanelClick}>
+                <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
                     <div className="p-slidemenu-wrapper" style={wrapperStyle}>
                         <div className="p-slidemenu-content" ref={slideMenuContent}>
                             <SlideMenuSub model={props.model} root index={0} menuWidth={props.menuWidth} effectDuration={props.effectDuration}

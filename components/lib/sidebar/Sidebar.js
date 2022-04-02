@@ -131,6 +131,7 @@ export const Sidebar = React.forwardRef((props, ref) => {
     }
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, Sidebar.defaultProps);
         const className = classNames('p-sidebar p-component', props.className);
         const maskClassName = classNames('p-sidebar-mask', {
             'p-component-overlay p-component-overlay-enter': props.modal,
@@ -151,7 +152,7 @@ export const Sidebar = React.forwardRef((props, ref) => {
             <div ref={maskRef} style={props.maskStyle} className={maskClassName} onMouseDown={onMaskClick}>
                 <CSSTransition nodeRef={sidebarRef} classNames="p-sidebar" in={visibleState} timeout={transitionTimeout} options={props.transitionOptions}
                     unmountOnExit onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
-                    <div ref={sidebarRef} id={props.id} className={className} style={props.style} role="complementary">
+                    <div ref={sidebarRef} id={props.id} className={className} style={props.style} {...otherProps} role="complementary">
                         <div className="p-sidebar-header">
                             {icons}
                             {closeIcon}

@@ -86,10 +86,11 @@ export const BlockUI = React.forwardRef((props, ref) => {
         return null;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, BlockUI.defaultProps);
     const mask = createMask();
 
     return (
-        <div id={props.id} className="p-blockui-container">
+        <div id={props.id} className="p-blockui-container" {...otherProps}>
             {props.children}
             {mask}
         </div>

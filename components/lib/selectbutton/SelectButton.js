@@ -91,12 +91,13 @@ export const SelectButton = React.memo(React.forwardRef((props, ref) => {
     }
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, SelectButton.defaultProps);
     const className = classNames('p-selectbutton p-buttonset p-component', props.className);
     const items = createItems();
 
     return (
         <>
-            <div {...ObjectUtils.findDiffKeys(props, SelectButton.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} role="group">
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} role="group">
                 {items}
             </div>
             {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}

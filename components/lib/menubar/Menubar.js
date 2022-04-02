@@ -104,6 +104,7 @@ export const Menubar = React.memo(React.forwardRef((props, ref) => {
         return button;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Menubar.defaultProps);
     const className = classNames('p-menubar p-component', {
         'p-menubar-mobile-active': mobileActiveState
     }, props.className);
@@ -113,7 +114,7 @@ export const Menubar = React.memo(React.forwardRef((props, ref) => {
     const submenu = <MenubarSub ref={rootMenuRef} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} />;
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {start}
             {menuButton}
             {submenu}

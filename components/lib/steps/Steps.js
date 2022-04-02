@@ -84,13 +84,14 @@ export const Steps = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Steps.defaultProps);
     const className = classNames('p-steps p-component', {
         'p-readonly': props.readOnly
     }, props.className);
     const items = createItems();
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {items}
         </div>
     )

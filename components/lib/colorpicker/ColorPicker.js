@@ -510,6 +510,7 @@ export const ColorPicker = React.memo(React.forwardRef((props, ref) => {
     }
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, ColorPicker.defaultProps);
     const className = classNames('p-colorpicker p-component', {
         'p-colorpicker-overlay': !props.inline
     }, props.className);
@@ -518,7 +519,7 @@ export const ColorPicker = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div ref={elementRef} id={props.id} style={props.style} className={className}>
+            <div ref={elementRef} id={props.id} style={props.style} className={className} {...otherProps}>
                 {input}
                 <ColorPickerPanel ref={overlayRef} appendTo={props.appendTo} inline={props.inline} disabled={props.disabled} onClick={onPanelClick}
                     in={props.inline || overlayVisibleState} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited}

@@ -452,6 +452,7 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
 
     const selectedNodes = getSelectedNodes();
 
+    const otherProps = ObjectUtils.findDiffKeys(props, TreeSelect.defaultProps);
     const className = classNames('p-treeselect p-component p-inputwrapper', {
         'p-treeselect-chip': props.display === 'chip',
         'p-disabled': props.disabled,
@@ -467,7 +468,7 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
     const footer = createFooter();
 
     return (
-        <div {...ObjectUtils.findDiffKeys(props, TreeSelect.defaultProps)} id={props.id} ref={elementRef} className={className} style={props.style} onClick={onClick}>
+        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps} onClick={onClick}>
             {keyboardHelper}
             {labelElement}
             {dropdownIcon}

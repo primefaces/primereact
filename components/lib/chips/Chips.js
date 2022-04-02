@@ -207,6 +207,7 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
     }
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, Chips.defaultProps);
     const className = classNames('p-chips p-component p-inputwrapper', {
         'p-inputwrapper-filled': isFilled,
         'p-inputwrapper-focus': focusedState
@@ -215,7 +216,7 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div ref={elementRef} id={props.id} className={className} style={props.style}>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
                 {list}
             </div>
             {hasTooltip && <Tooltip target={inputRef} content={props.tooltip} {...props.tooltipOptions} />}

@@ -381,6 +381,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createAdvanced = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, FileUpload.defaultProps);
         const className = classNames('p-fileupload p-fileupload-advanced p-component', props.className);
         const headerClassName = classNames('p-fileupload-buttonbar', props.headerClassName);
         const contentClassName = classNames('p-fileupload-content', props.contentClassName);
@@ -425,7 +426,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
         }
 
         return (
-            <div id={props.id} className={className} style={props.style}>
+            <div id={props.id} className={className} style={props.style} {...otherProps}>
                 {header}
                 <div ref={contentRef} className={contentClassName} style={props.contentStyle}
                     onDragEnter={onDragEnter} onDragOver={onDragOver} onDragLeave={onDragLeave} onDrop={onDrop}>
@@ -440,6 +441,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
 
     const createBasic = () => {
         const chooseOptions = props.chooseOptions;
+        const otherProps = ObjectUtils.findDiffKeys(props, FileUpload.defaultProps);
         const className = classNames('p-fileupload p-fileupload-basic p-component', props.className);
         const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': hasFiles, 'p-disabled': props.disabled, 'p-focus': focusedState }, chooseOptions.className);
         const chooseIcon = chooseOptions.icon || classNames({ 'pi pi-plus': !chooseOptions.icon && (!hasFiles || props.auto), 'pi pi-upload': !chooseOptions.icon && hasFiles && !props.auto });
@@ -454,7 +456,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
         const input = !hasFiles && <input ref={fileInputRef} type="file" accept={props.accept} multiple={props.multiple} disabled={props.disabled} onChange={onFileSelect} />;
 
         return (
-            <div className={className} style={props.style}>
+            <div className={className} style={props.style} {...otherProps}>
                 <Messages ref={messagesRef} />
                 <span className={buttonClassName} style={chooseOptions.style} onMouseUp={onSimpleUploaderClick} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} tabIndex={0}>
                     {icon}

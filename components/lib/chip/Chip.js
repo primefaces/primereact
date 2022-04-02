@@ -40,6 +40,7 @@ export const Chip = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, Chip.defaultProps);
         const className = classNames('p-chip p-component', {
             'p-chip-image': props.image != null
         }, props.className);
@@ -47,7 +48,7 @@ export const Chip = React.memo(React.forwardRef((props, ref) => {
         const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
         return (
-            <div className={className} style={props.style}>
+            <div className={className} style={props.style} {...otherProps}>
                 {content}
             </div>
         )

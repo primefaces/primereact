@@ -235,6 +235,7 @@ export const SpeedDial = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, SpeedDial.defaultProps);
     const className = classNames(`p-speeddial p-component p-speeddial-${props.type}`, {
         [`p-speeddial-direction-${props.direction}`]: props.type !== 'circle',
         'p-speeddial-opened': visible,
@@ -246,7 +247,7 @@ export const SpeedDial = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <React.Fragment>
-            <div ref={elementRef} id={props.id} className={className} style={props.style}>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
                 {button}
                 {list}
             </div>

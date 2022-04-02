@@ -4,7 +4,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { TieredMenuSub } from './TieredMenuSub';
 
 export const TieredMenu = React.memo(React.forwardRef((props, ref) => {
@@ -77,6 +77,7 @@ export const TieredMenu = React.memo(React.forwardRef((props, ref) => {
     }));
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, TieredMenu.defaultProps);
         const className = classNames('p-tieredmenu p-component', {
             'p-tieredmenu-overlay': props.popup
         }, props.className);
@@ -84,7 +85,7 @@ export const TieredMenu = React.memo(React.forwardRef((props, ref) => {
         return (
             <CSSTransition nodeRef={menuRef} classNames="p-connected-overlay" in={visibleState} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
                 unmountOnExit onEnter={onEnter} onEntered={onEntered} onExit={onExit} onExited={onExited}>
-                <div ref={menuRef} id={props.id} className={className} style={props.style} onClick={onPanelClick}>
+                <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
                     <TieredMenuSub model={props.model} root popup={props.popup} />
                 </div>
             </CSSTransition>

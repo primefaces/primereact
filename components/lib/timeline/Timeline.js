@@ -31,6 +31,7 @@ export const Timeline = React.memo(React.forwardRef((props, ref) => {
         });
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Timeline.defaultProps);
     const className = classNames('p-timeline p-component', {
         [`p-timeline-${props.align}`]: true,
         [`p-timeline-${props.layout}`]: true
@@ -39,7 +40,7 @@ export const Timeline = React.memo(React.forwardRef((props, ref) => {
     const events = createEvents();
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {events}
         </div>
     )

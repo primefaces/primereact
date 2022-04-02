@@ -907,6 +907,8 @@ export const TreeTable = React.forwardRef((props, ref) => {
     }
 
     const data = processData();
+
+    const otherProps = ObjectUtils.findDiffKeys(props, Toolbar.defaultProps);
     const className = classNames('p-treetable p-component', {
         'p-treetable-hoverable-rows': props.rowHover,
         'p-treetable-selectable': isRowSelectionMode(),
@@ -928,7 +930,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const reorderIndicatorDown = props.reorderableColumns && <span ref={reorderIndicatorDownRef} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{ position: 'absolute', display: 'none' }} />;
 
     return (
-        <div {...ObjectUtils.findDiffKeys(props, TreeTable.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-scrollable-body">
+        <div ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-scrollable-body" {...otherProps}>
             {loader}
             {headerFacet}
             {paginatorTop}

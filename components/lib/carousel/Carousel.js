@@ -542,6 +542,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Carousel.defaultProps);
     const className = classNames('p-carousel p-component', {
         'p-carousel-vertical': isVertical,
         'p-carousel-horizontal': !isVertical
@@ -553,7 +554,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
     const footer = createFooter();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}>
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
             {header}
             <div className={contentClassName}>
                 {content}

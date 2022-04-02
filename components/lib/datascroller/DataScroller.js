@@ -190,6 +190,7 @@ export const DataScroller = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, DataScroller.defaultProps);
     const className = classNames('p-datascroller p-component', props.className, {
         'p-datascroller-inline': props.inline
     });
@@ -199,7 +200,7 @@ export const DataScroller = React.memo(React.forwardRef((props, ref) => {
     const content = createContent();
 
     return (
-        <div id={props.id} className={className}>
+        <div id={props.id} className={className} {...otherProps}>
             {header}
             {content}
             {footer}

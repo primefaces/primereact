@@ -99,17 +99,18 @@ export const TabMenu = React.memo(React.forwardRef((props, ref) => {
     }
 
     if (props.model) {
+        const otherProps = ObjectUtils.findDiffKeys(props, TabMenu.defaultProps);
         const className = classNames('p-tabmenu p-component', props.className);
         const items = createItems();
 
         return (
-            <div id={props.id} className={className} style={props.style}>
+            <div id={props.id} className={className} style={props.style} {...otherProps}>
                 <ul ref={navRef} className="p-tabmenu-nav p-reset" role="tablist">
                     {items}
                     <li ref={inkbarRef} className="p-tabmenu-ink-bar"></li>
                 </ul>
             </div>
-        );
+        )
     }
 
     return null;

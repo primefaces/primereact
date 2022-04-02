@@ -96,6 +96,7 @@ export const Accordion = React.forwardRef((props, ref) => {
         if (shouldUseTab(tab)) {
             const key = idState + '_' + index;
             const selected = isSelected(index);
+            const otherProps = ObjectUtils.findDiffKeys(tab.props, AccordionTab.defaultProps);
             const tabHeader = createTabHeader(tab, selected, index);
             const tabContent = createTabContent(tab, selected, index);
             const tabClassName = classNames('p-accordion-tab', {
@@ -103,7 +104,7 @@ export const Accordion = React.forwardRef((props, ref) => {
             });
 
             return (
-                <div key={key} className={tabClassName}>
+                <div key={key} className={tabClassName} {...otherProps}>
                     {tabHeader}
                     {tabContent}
                 </div>
@@ -117,11 +118,12 @@ export const Accordion = React.forwardRef((props, ref) => {
         return React.Children.map(props.children, createTab);
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Accordion.defaultProps);
     const className = classNames('p-accordion p-component', props.className);
     const tabs = createTabs();
 
     return (
-        <div id={idState} className={className} style={props.style}>
+        <div id={idState} className={className} style={props.style} {...otherProps}>
             {tabs}
         </div>
     )

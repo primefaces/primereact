@@ -14,12 +14,13 @@ export const DataViewLayoutOptions = React.memo((props) => {
         event.preventDefault();
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, DataViewLayoutOptions.defaultProps);
     const className = classNames('p-dataview-layout-options p-selectbutton p-buttonset', props.className);
     const buttonListClass = classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'list' });
     const buttonGridClass = classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'grid' });
 
     return (
-        <div id={props.id} style={props.style} className={className}>
+        <div id={props.id} style={props.style} className={className} {...otherProps}>
             <button type="button" className={buttonListClass} onClick={(event) => changeLayout(event, 'list')}>
                 <i className="pi pi-bars"></i>
                 <Ripple />
@@ -196,6 +197,7 @@ export const DataView = React.memo(React.forwardRef((props, ref) => {
 
     const data = processData();
 
+    const otherProps = ObjectUtils.findDiffKeys(props, DataView.defaultProps);
     const className = classNames('p-dataview p-component', {
         [`p-dataview-${props.layout}`]: !!props.layout,
         'p-dataview-loading': props.loading
@@ -208,7 +210,7 @@ export const DataView = React.memo(React.forwardRef((props, ref) => {
     const content = createContent(data);
 
     return (
-        <div id={props.id} style={props.style} className={className}>
+        <div id={props.id} style={props.style} className={className} {...otherProps}>
             {loader}
             {header}
             {topPaginator}

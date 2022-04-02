@@ -402,6 +402,7 @@ export const Tree = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Tree.defaultProps);
     const className = classNames('p-tree p-component', props.className, {
         'p-tree-selectable': props.selectionMode,
         'p-tree-loading': props.loading,
@@ -413,7 +414,7 @@ export const Tree = React.memo(React.forwardRef((props, ref) => {
     const footer = createFooter();
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {loader}
             {header}
             {content}

@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const Badge = React.memo(React.forwardRef((props, ref) => {
+    const otherProps = ObjectUtils.findDiffKeys(props, Badge.defaultProps);
     const className = classNames('p-badge p-component', {
         'p-badge-no-gutter': props.value && String(props.value).length === 1,
         'p-badge-dot': !props.value,
@@ -11,7 +12,7 @@ export const Badge = React.memo(React.forwardRef((props, ref) => {
     }, props.className);
 
     return (
-        <span className={className} style={props.style}>
+        <span className={className} style={props.style} {...otherProps}>
             {props.value}
         </span>
     )

@@ -128,13 +128,13 @@ export const ConfirmDialog = React.memo(React.forwardRef((props, ref) => {
     const createElement = () => {
         const currentProps = getCurrentProps();
         const className = classNames('p-confirm-dialog', getPropValue('className'));
-        const dialogProps = ObjectUtils.findDiffKeys(currentProps, ConfirmDialog.defaultProps);
+        const otherProps = ObjectUtils.findDiffKeys(currentProps, ConfirmDialog.defaultProps);
         const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
         const icon = IconUtils.getJSXIcon(getPropValue('icon'), { className: 'p-confirm-dialog-icon' }, { props: currentProps });
         const footer = createFooter();
 
         return (
-            <Dialog visible={visibleState} {...dialogProps} className={className} footer={footer} onHide={hide} breakpoints={getPropValue('breakpoints')}>
+            <Dialog visible={visibleState} {...otherProps} className={className} footer={footer} onHide={hide} breakpoints={getPropValue('breakpoints')}>
                 {icon}
                 <span className="p-confirm-dialog-message">{message}</span>
             </Dialog>

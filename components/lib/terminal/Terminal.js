@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TerminalService } from '../terminalservice/TerminalService';
-import { classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const Terminal = React.memo(React.forwardRef((props, ref) => {
     const [commandTextState, setCommandTextState] = React.useState('');
@@ -128,13 +128,14 @@ export const Terminal = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Terminal.defaultProps);
     const className = classNames('p-terminal p-component', props.className);
     const welcomeMessage = createWelcomeMessage();
     const content = createContent();
     const prompt = createPromptContainer();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
             {welcomeMessage}
             {content}
             {prompt}

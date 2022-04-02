@@ -138,7 +138,7 @@ export default class ObjectUtils {
     static combinedRefs(innerRef, forwardRef) {
         if (innerRef && forwardRef) {
             if (typeof forwardRef === 'function') {
-                React.forwardRef(innerRef.current);
+                forwardRef(innerRef.current);
             }
             else {
                 forwardRef.current = innerRef.current;

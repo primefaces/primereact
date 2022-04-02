@@ -40,7 +40,7 @@ export const Button = React.memo(React.forwardRef((props, ref) => {
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const disabled = props.disabled || props.loading;
-    const buttonProps = ObjectUtils.findDiffKeys(props, Button.defaultProps);
+    const otherProps = ObjectUtils.findDiffKeys(props, Button.defaultProps);
     const className = classNames('p-button p-component', props.className, {
         'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label,
         'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
@@ -56,7 +56,7 @@ export const Button = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <button ref={elementRef} {...buttonProps} className={className} disabled={disabled}>
+            <button ref={elementRef} {...otherProps} className={className} disabled={disabled}>
                 {icon}
                 {label}
                 {props.children}

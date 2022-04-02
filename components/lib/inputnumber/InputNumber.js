@@ -995,6 +995,7 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
     }
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, InputNumber.defaultProps);
     const className = classNames('p-inputnumber p-component p-inputwrapper', {
         'p-inputwrapper-filled': props.value != null && props.value.toString().length > 0,
         'p-inputwrapper-focus': focusedState,
@@ -1007,7 +1008,7 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <span ref={elementRef} id={props.id} className={className} style={props.style}>
+            <span ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
                 {inputElement}
                 {buttonGroup}
             </span>

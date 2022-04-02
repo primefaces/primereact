@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const Rating = React.memo(React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
@@ -77,6 +77,7 @@ export const Rating = React.memo(React.forwardRef((props, ref) => {
     }
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, Rating.defaultProps);
     const className = classNames('p-rating', {
         'p-disabled': props.disabled,
         'p-readonly': props.readOnly
@@ -86,7 +87,7 @@ export const Rating = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div {...ObjectUtils.findDiffKeys(props, Rating.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
                 {cancelIcon}
                 {stars}
             </div>

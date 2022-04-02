@@ -120,6 +120,7 @@ export const Panel = React.forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Panel.defaultProps);
     const className = classNames('p-panel p-component', {
         'p-panel-toggleable': props.toggleable
     }, props.className);
@@ -127,7 +128,7 @@ export const Panel = React.forwardRef((props, ref) => {
     const content = createContent();
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {header}
             {content}
         </div>

@@ -433,6 +433,7 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
     }));
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, Tooltip.defaultProps);
         const tooltipClassName = classNames('p-tooltip p-component', {
             [`p-tooltip-${positionState}`]: true
         }, props.className);
@@ -440,7 +441,7 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
 
         return (
             <div id={props.id} ref={elementRef} className={tooltipClassName} style={props.style} role="tooltip" aria-hidden={visibleState}
-                onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+                {...otherProps} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
                 <div className="p-tooltip-arrow"></div>
                 <div ref={textRef} className="p-tooltip-text">
                     {empty && props.children}

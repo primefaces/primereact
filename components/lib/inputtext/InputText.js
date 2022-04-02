@@ -37,7 +37,7 @@ export const InputText = React.memo(React.forwardRef((props, ref) => {
     }, [elementRef, ref]);
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-    const inputProps = ObjectUtils.findDiffKeys(props, InputText.defaultProps);
+    const otherProps = ObjectUtils.findDiffKeys(props, InputText.defaultProps);
     const className = classNames('p-inputtext p-component', {
         'p-disabled': props.disabled,
         'p-filled': isFilled
@@ -45,7 +45,7 @@ export const InputText = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <input ref={elementRef} {...inputProps} className={className} onInput={onInput} onKeyPress={onKeyPress} />
+            <input ref={elementRef} {...otherProps} className={className} onInput={onInput} onKeyPress={onKeyPress} />
             {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
         </>
     )

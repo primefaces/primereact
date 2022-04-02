@@ -4,7 +4,7 @@ import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, ZIndexUtils } from '../utils/Utils';
+import { classNames, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { ToastMessage } from './ToastMessage';
 
 let messageIdx = 0;
@@ -70,10 +70,11 @@ export const Toast = React.memo(React.forwardRef((props, ref) => {
     }));
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, Toast.defaultProps);
         const className = classNames('p-toast p-component p-toast-' + props.position, props.className);
 
         return (
-            <div ref={containerRef} id={props.id} className={className} style={props.style}>
+            <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>
                 <TransitionGroup>
                     {
                         messagesState.map((message) => {

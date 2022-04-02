@@ -282,7 +282,6 @@ export const Password = React.memo(React.forwardRef((props, ref) => {
         return <Portal element={panel} appendTo={props.appendTo} />;
     }
 
-    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const className = classNames('p-password p-component p-inputwrapper', {
         'p-inputwrapper-filled': isFilled,
         'p-inputwrapper-focus': focusedState,

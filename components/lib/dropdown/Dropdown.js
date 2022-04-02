@@ -655,6 +655,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
     const selectedOption = getSelectedOption();
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, Dropdown.defaultProps);
     const className = classNames('p-dropdown p-component p-inputwrapper', {
         'p-disabled': props.disabled,
         'p-focus': focusedState,
@@ -670,7 +671,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div {...ObjectUtils.findDiffKeys(props, Dropdown.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}
                 onMouseDown={props.onMouseDown} onContextMenu={props.onContextMenu}>
                 {keyboardHelper}
                 {hiddenSelect}

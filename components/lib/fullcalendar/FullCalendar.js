@@ -65,7 +65,9 @@ export const FullCalendar = React.memo(React.forwardRef((props, ref) => {
         }
     });
 
-    return <div ref={elementRef} id={props.id} style={props.style} className={props.className}></div>
+    const otherProps = ObjectUtils.findDiffKeys(props, FullCalendar.defaultProps);
+
+    return <div ref={elementRef} id={props.id} style={props.style} className={props.className} {...otherProps}></div>
 }));
 
 FullCalendar.displayName = 'FullCalendar';

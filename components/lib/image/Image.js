@@ -145,6 +145,7 @@ export const Image = React.memo(React.forwardRef((props, ref) => {
     }
 
     const { src, alt, width, height } = props;
+    const otherProps = ObjectUtils.findDiffKeys(props, Image.defaultProps);
     const containerClassName = classNames('p-image p-component', props.className, {
         'p-image-preview-container': props.preview
     });
@@ -154,7 +155,7 @@ export const Image = React.memo(React.forwardRef((props, ref) => {
     const image = <img src={src} className={props.imageClassName} width={width} height={height} style={props.imageStyle} alt={alt} />;
 
     return (
-        <span ref={elementRef} className={containerClassName} style={props.style}>
+        <span ref={elementRef} className={containerClassName} style={props.style} {...otherProps}>
             {image}
             {preview}
             {maskVisibleState && <Portal element={element} appendTo={document.body} />}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
-import { classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;
@@ -52,12 +52,13 @@ export const Inplace = React.forwardRef((props, ref) => {
     }
 
     const createDisplay = (content) => {
+        const otherProps = ObjectUtils.findDiffKeys(content.props, InplaceDisplay.defaultProps);
         const className = classNames('p-inplace-display', {
             'p-disabled': props.disabled
         });
 
         return (
-            <div className={className} onClick={open} onKeyDown={onDisplayKeyDown} tabIndex={props.tabIndex} aria-label={props.ariaLabel}>
+            <div className={className} {...otherProps} onClick={open} onKeyDown={onDisplayKeyDown} tabIndex={props.tabIndex} aria-label={props.ariaLabel}>
                 {content}
             </div>
         )
@@ -72,10 +73,11 @@ export const Inplace = React.forwardRef((props, ref) => {
     }
 
     const createContent = (content) => {
+        const otherProps = ObjectUtils.findDiffKeys(content.props, InplaceContent.defaultProps);
         const closeButton = createCloseButton();
 
         return (
-            <div className="p-inplace-content">
+            <div className="p-inplace-content" {...otherProps}>
                 {content}
                 {closeButton}
             </div>
@@ -95,13 +97,14 @@ export const Inplace = React.forwardRef((props, ref) => {
         );
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Inplace.defaultProps);
     const children = createChildren();
     const className = classNames('p-inplace p-component', {
         'p-inplace-closable': props.closable
     }, props.className);
 
     return (
-        <div className={className}>
+        <div className={className} {...otherProps}>
             {children}
         </div>
     )

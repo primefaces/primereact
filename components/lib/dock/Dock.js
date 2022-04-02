@@ -101,6 +101,7 @@ export const Dock = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Dock.defaultProps);
     const className = classNames(`p-dock p-component p-dock-${props.position}`, {
         'p-dock-magnification': props.magnification
     }, props.className);
@@ -109,7 +110,7 @@ export const Dock = React.memo(React.forwardRef((props, ref) => {
     const footer = createFooter();
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             <div className="p-dock-container">
                 {header}
                 {list}

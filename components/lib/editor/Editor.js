@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const Editor = React.memo(React.forwardRef((props, ref) => {
     const contentRef = React.useRef(null);
@@ -14,6 +14,7 @@ export const Editor = React.memo(React.forwardRef((props, ref) => {
     useMountEffect(() => {
         import('quill').then((module) => {
             if (module && module.default && DomHandler.isExist(contentRef.current)) {
+                debugger;
                 quill.current = new module.default(contentRef.current, {
                     modules: {
                         toolbar: props.showHeader ? toolbarRef.current : false,
@@ -30,7 +31,8 @@ export const Editor = React.memo(React.forwardRef((props, ref) => {
                 }
 
                 quill.current.on('text-change', (delta, source) => {
-                    let html = contentRef.current.children[0].innerHTML;
+                    let firstChild = contentRef.current.children[0];
+                    let html = firstChild ? firstChild.innerHTML : null;
                     let text = quill.current.getText();
                     if (html === '<p><br></p>') {
                         html = null;
@@ -133,12 +135,13 @@ export const Editor = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Editor.defaultProps);
     const className = classNames('p-component p-editor-container', props.className);
     const header = createToolbarHeader();
     const content = <div ref={contentRef} className="p-editor-content"></div>
 
     return (
-        <div {...ObjectUtils.findDiffKeys(props, Editor.defaultProps)} id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {header}
             {content}
         </div>

@@ -299,6 +299,7 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
     const visibleOptions = getVisibleOptions();
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, ListBox.defaultProps);
     const className = classNames('p-listbox p-component', {
         'p-disabled': props.disabled
     }, props.className);
@@ -308,7 +309,7 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div {...ObjectUtils.findDiffKeys(props, ListBox.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
                 {header}
                 <div className={listClassName} style={props.listStyle}>
                     {list}

@@ -130,13 +130,14 @@ export const Knob = React.memo(React.forwardRef((props, ref) => {
         unbindWindowTouchEndListener();
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Knob.defaultProps);
     const className = classNames('p-knob p-component', {
         'p-disabled': props.disabled,
     }, props.className);
     const text = props.showValue && <text x={50} y={57} textAnchor={'middle'} fill={props.textColor} className={'p-knob-text'} name={props.name}>{valueToDisplay()}</text>
 
     return (
-        <div {...ObjectUtils.findDiffKeys(props, Knob.defaultProps)} ref={elementRef} id={props.id} className={className} style={props.style}>
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
             <svg viewBox="0 0 100 100" width={props.size} height={props.size} onClick={onClick} onMouseDown={onMouseDown} onMouseUp={onMouseUp}
                 onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
                 <path d={rangePath} strokeWidth={props.strokeWidth} stroke={props.rangeColor} className={'p-knob-range'}></path>

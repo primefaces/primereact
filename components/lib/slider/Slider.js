@@ -242,6 +242,7 @@ export const Slider = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Slider.defaultProps);
     const className = classNames('p-slider p-component', props.className, {
         'p-disabled': props.disabled,
         'p-slider-horizontal': horizontal,
@@ -250,7 +251,7 @@ export const Slider = React.memo(React.forwardRef((props, ref) => {
     const content = props.range ? createRangeSlider() : createSingleSlider();
 
     return (
-        <div {...ObjectUtils.findDiffKeys(props, Slider.defaultProps)} ref={elementRef} id={props.id} style={props.style} className={className} onClick={onBarClick}>
+        <div ref={elementRef} id={props.id} style={props.style} className={className} {...otherProps} onClick={onBarClick}>
             {content}
         </div>
     )

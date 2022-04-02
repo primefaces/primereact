@@ -352,6 +352,7 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
     }
 
 
+    const otherProps = ObjectUtils.findDiffKeys(props, MegaMenu.defaultProps);
     const className = classNames('p-megamenu p-component', {
         'p-megamenu-horizontal': props.orientation === 'horizontal',
         'p-megamenu-vertical': props.orientation === 'vertical'
@@ -360,7 +361,7 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
     const customContent = createCustomContent();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}>
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
             <ul className="p-megamenu-root-list" role="menubar">
                 {menu}
             </ul>

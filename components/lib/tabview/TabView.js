@@ -233,9 +233,10 @@ export const TabView = React.forwardRef((props, ref) => {
                 const className = classNames(tab.props.contentClassName, tab.props.className, 'p-tabview-panel', { 'p-hidden': !selected });
                 const contentId = idState + '_content_' + index;
                 const ariaLabelledBy = idState + '_header_' + index;
+                const otherProps = ObjectUtils.findDiffKeys(tab.props, TabPanel.defaultProps);
 
                 return (
-                    <div id={contentId} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={style} role="tabpanel">
+                    <div {...otherProps} id={contentId} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={style} role="tabpanel">
                         {!props.renderActiveOnly ? tab.props.children : (selected && tab.props.children)}
                     </div>
                 )
@@ -273,6 +274,7 @@ export const TabView = React.forwardRef((props, ref) => {
         }
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, TabView.defaultProps);
     const className = classNames('p-tabview p-component', {
         'p-tabview-scrollable': props.scrollable
     }, props.className);
@@ -282,7 +284,7 @@ export const TabView = React.forwardRef((props, ref) => {
     const nextButton = createNextButton();
 
     return (
-        <div className={className}>
+        <div className={className} {...otherProps}>
             <div className="p-tabview-nav-container">
                 {prevButton}
                 {navigator}
