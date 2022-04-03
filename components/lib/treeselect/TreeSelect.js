@@ -1,24 +1,23 @@
-import React, { forwardRef, memo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
-import { TreeSelectPanel } from './TreeSelectPanel';
-import { Tree } from '../tree/Tree';
-import { Ripple } from '../ripple/Ripple';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils } from '../utils/Utils';
-import { useUpdateEffect, useUnmountEffect, useOverlayListener, useMountEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { Tree } from '../tree/Tree';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { TreeSelectPanel } from './TreeSelectPanel';
 
-export const TreeSelect = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const [expandedKeysState, setExpandedKeysState] = useState({});
-    const [filterValueState, setFilterValueState] = useState('');
-    const elementRef = useRef(null);
-    const overlayRef = useRef(null);
-    const filterInputRef = useRef(null);
-    const focusInputRef = useRef(null);
-    const triggerRef = useRef(null);
-    const selfChange = useRef(null);
+export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const [expandedKeysState, setExpandedKeysState] = React.useState({});
+    const [filterValueState, setFilterValueState] = React.useState('');
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const filterInputRef = React.useRef(null);
+    const focusInputRef = React.useRef(null);
+    const triggerRef = React.useRef(null);
+    const selfChange = React.useRef(null);
     const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
     const isValueEmpty = ObjectUtils.isEmpty(props.value);
     const hasNoOptions = ObjectUtils.isEmpty(props.options);
@@ -453,6 +452,7 @@ export const TreeSelect = memo(forwardRef((props, ref) => {
 
     const selectedNodes = getSelectedNodes();
 
+    const otherProps = ObjectUtils.findDiffKeys(props, TreeSelect.defaultProps);
     const className = classNames('p-treeselect p-component p-inputwrapper', {
         'p-treeselect-chip': props.display === 'chip',
         'p-disabled': props.disabled,
@@ -468,7 +468,7 @@ export const TreeSelect = memo(forwardRef((props, ref) => {
     const footer = createFooter();
 
     return (
-        <div id={props.id} ref={elementRef} className={className} style={props.style} onClick={onClick}>
+        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps} onClick={onClick}>
             {keyboardHelper}
             {labelElement}
             {dropdownIcon}
@@ -481,6 +481,7 @@ export const TreeSelect = memo(forwardRef((props, ref) => {
     )
 }));
 
+TreeSelect.displayName = 'TreeSelect';
 TreeSelect.defaultProps = {
     __TYPE: 'TreeSelect',
     id: null,
@@ -524,49 +525,4 @@ TreeSelect.defaultProps = {
     onNodeExpand: null,
     onNodeCollapse: null,
     onFilterValueChange: null
-}
-
-TreeSelect.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.any,
-    name: PropTypes.string,
-    style: PropTypes.object,
-    classNames: PropTypes.string,
-    disabled: PropTypes.bool,
-    options: PropTypes.any,
-    scrollHeight: PropTypes.string,
-    placeholder: PropTypes.string,
-    tabIndex: PropTypes.number,
-    inputId: PropTypes.string,
-    ariaLabel: PropTypes.string,
-    ariaLabelledBy: PropTypes.string,
-    selectionMode: PropTypes.string,
-    panelStyle: PropTypes.bool,
-    panelClassName: PropTypes.string,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    emptyMessage: PropTypes.string,
-    display: PropTypes.string,
-    metaKeySelection: PropTypes.bool,
-    valueTemplate: PropTypes.any,
-    panelHeaderTemplate: PropTypes.any,
-    panelFooterTemplate: PropTypes.any,
-    transitionOptions: PropTypes.object,
-    dropdownIcon: PropTypes.string,
-    filter: PropTypes.bool,
-    filterValue: PropTypes.string,
-    filterBy: PropTypes.any,
-    filterMode: PropTypes.string,
-    filterPlaceholder: PropTypes.string,
-    filterLocale: PropTypes.string,
-    filterInputAutoFocus: PropTypes.bool,
-    resetFilterOnHide: PropTypes.bool,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func,
-    onChange: PropTypes.func,
-    onNodeSelect: PropTypes.func,
-    onNodeUnselect: PropTypes.func,
-    onNodeExpand: PropTypes.func,
-    onNodeCollapse: PropTypes.func,
-    onFilterValueChange: PropTypes.func
 }

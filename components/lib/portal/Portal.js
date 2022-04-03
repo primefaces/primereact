@@ -1,12 +1,11 @@
-import { memo, useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import PrimeReact from '../api/Api';
-import { DomHandler } from '../utils/Utils';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { DomHandler } from '../utils/Utils';
 
-export const Portal = memo((props) => {
-    const [mountedState, setMountedState] = useState(props.visible && DomHandler.hasDOM());
+export const Portal = React.memo((props) => {
+    const [mountedState, setMountedState] = React.useState(props.visible && DomHandler.hasDOM());
 
     useMountEffect(() => {
         if (DomHandler.hasDOM() && !mountedState) {
@@ -32,6 +31,7 @@ export const Portal = memo((props) => {
     return null;
 });
 
+Portal.displayName = 'Portal';
 Portal.defaultProps = {
     __TYPE: 'Portal',
     element: null,
@@ -39,13 +39,4 @@ Portal.defaultProps = {
     visible: false,
     onMounted: null,
     onUnmounted: null
-}
-
-Portal.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    element: PropTypes.any,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    visible: PropTypes.bool,
-    onMounted: PropTypes.func,
-    onUnmounted: PropTypes.func
 }

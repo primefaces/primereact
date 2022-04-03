@@ -1,8 +1,7 @@
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { ObjectUtils } from '../utils/Utils';
 
-export const CurrentPageReport = memo((props) => {
+export const CurrentPageReport = React.memo((props) => {
     const report = {
         currentPage: props.page + 1,
         totalPages: props.pageCount,
@@ -37,6 +36,7 @@ export const CurrentPageReport = memo((props) => {
     return element;
 });
 
+CurrentPageReport.displayName = 'CurrentPageReport';
 CurrentPageReport.defaultProps = {
     __TYPE: 'CurrentPageReport',
     pageCount: null,
@@ -46,15 +46,4 @@ CurrentPageReport.defaultProps = {
     totalRecords: null,
     reportTemplate: '({currentPage} of {totalPages})',
     template: null
-}
-
-CurrentPageReport.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    pageCount: PropTypes.number,
-    page: PropTypes.number,
-    first: PropTypes.number,
-    rows: PropTypes.number,
-    totalRecords: PropTypes.number,
-    reportTemplate: PropTypes.string,
-    template: PropTypes.any
 }

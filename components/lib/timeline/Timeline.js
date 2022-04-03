@@ -1,8 +1,7 @@
-import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Timeline = memo(forwardRef((props, ref) => {
+export const Timeline = React.memo(React.forwardRef((props, ref) => {
 
     const getKey = (item, index) => {
         return props.dataKey ? ObjectUtils.resolveFieldData(item, props.dataKey) : `pr_id__${index}`;
@@ -32,6 +31,7 @@ export const Timeline = memo(forwardRef((props, ref) => {
         });
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Timeline.defaultProps);
     const className = classNames('p-timeline p-component', {
         [`p-timeline-${props.align}`]: true,
         [`p-timeline-${props.layout}`]: true
@@ -40,12 +40,13 @@ export const Timeline = memo(forwardRef((props, ref) => {
     const events = createEvents();
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {events}
         </div>
     )
 }));
 
+Timeline.displayName = 'Timeline';
 Timeline.defaultProps = {
     __TYPE: 'Timeline',
     id: null,
@@ -58,18 +59,4 @@ Timeline.defaultProps = {
     opposite: null,
     marker: null,
     content: null
-}
-
-Timeline.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.array,
-    align: PropTypes.string,
-    layout: PropTypes.string,
-    dataKey: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    opposite: PropTypes.any,
-    marker: PropTypes.any,
-    content: PropTypes.any
 }

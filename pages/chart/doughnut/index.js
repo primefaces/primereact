@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useState } from 'react';
 import { TabView } from '../../../components/lib/tabview/TabView';
 import { Chart } from '../../../components/lib/chart/Chart';
 import { useLiveEditorTabs } from '../../../components/doc/common/liveeditor';
@@ -10,7 +10,7 @@ const DoughnutChartDemo = memo(() => {
 
     const context = useContext(AppContentContext);
 
-    const chartData = {
+    const [chartData] = useState({
         labels: ['A', 'B', 'C'],
         datasets: [
             {
@@ -26,9 +26,9 @@ const DoughnutChartDemo = memo(() => {
                     "#FFCE56"
                 ]
             }]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -36,9 +36,9 @@ const DoughnutChartDemo = memo(() => {
                 }
             }
         }
-    };
+    });
 
-    const darkOptions = {
+    const [darkOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -46,7 +46,7 @@ const DoughnutChartDemo = memo(() => {
                 }
             }
         }
-    };
+    });
 
     const options = context.darkTheme ? darkOptions : lightOptions;
 
@@ -133,11 +133,11 @@ export class DoughnutChartDemo extends Component {
         'hooks': {
             tabName: 'Hooks Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const DoughnutChartDemo = () => {
-    const chartData = {
+    const [chartData] = useState({
         labels: ['A', 'B', 'C'],
         datasets: [
             {
@@ -153,9 +153,9 @@ const DoughnutChartDemo = () => {
                     "#FFCE56"
                 ]
             }]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -163,7 +163,7 @@ const DoughnutChartDemo = () => {
                 }
             }
         }
-    };
+    });
 
     return (
         <div className="card flex justify-content-center">
@@ -176,11 +176,11 @@ const DoughnutChartDemo = () => {
         'ts': {
             tabName: 'TS Source',
             content: `
-import React from 'react';
+import React, { useState } from 'react';
 import { Chart } from 'primereact/chart';
 
 const DoughnutChartDemo = () => {
-    const chartData = {
+    const [chartData] = useState({
         labels: ['A', 'B', 'C'],
         datasets: [
             {
@@ -196,9 +196,9 @@ const DoughnutChartDemo = () => {
                     "#FFCE56"
                 ]
             }]
-    };
+    });
 
-    const lightOptions = {
+    const [lightOptions] = useState({
         plugins: {
             legend: {
                 labels: {
@@ -206,7 +206,7 @@ const DoughnutChartDemo = () => {
                 }
             }
         }
-    };
+    });
 
     return (
         <div className="card flex justify-content-center">

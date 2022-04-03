@@ -1,13 +1,10 @@
-import React, { forwardRef, memo, useEffect, useMemo, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { tip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
+import * as React from 'react';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const InputTextarea = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(ref);
-    const tooltipRef = useRef(null);
-    const cachedScrollHeight = useRef(0);
+export const InputTextarea = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(ref);
+    const cachedScrollHeight = React.useRef(0);
 
     const onFocus = (event) => {
         if (props.autoResize) {
@@ -70,41 +67,22 @@ export const InputTextarea = memo(forwardRef((props, ref) => {
         }
     }
 
-    const isFilled = useMemo(() => (
+    const isFilled = React.useMemo(() => (
         ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (elementRef.current && ObjectUtils.isNotEmpty(elementRef.current.value))
     ), [props.value, props.defaultValue]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(elementRef, ref);
     }, [elementRef, ref]);
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useEffect(() => {
+    React.useEffect(() => {
         if (props.autoResize) {
             resize(true);
         }
     }, [props.autoResize]);
 
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
-    const textareaProps = ObjectUtils.findDiffKeys(props, InputTextarea.defaultProps);
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, InputTextarea.defaultProps);
     const className = classNames('p-inputtextarea p-inputtext p-component', {
         'p-disabled': props.disabled,
         'p-filled': isFilled,
@@ -112,22 +90,18 @@ export const InputTextarea = memo(forwardRef((props, ref) => {
     }, props.className);
 
     return (
-        <textarea ref={elementRef} {...textareaProps} className={className} onFocus={onFocus} onBlur={onBlur} onKeyUp={onKeyUp} onInput={onInput}></textarea>
+        <>
+            <textarea ref={elementRef} {...otherProps} className={className} onFocus={onFocus} onBlur={onBlur} onKeyUp={onKeyUp} onInput={onInput}></textarea>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+InputTextarea.displayName = 'InputTextarea';
 InputTextarea.defaultProps = {
     __TYPE: 'InputTextarea',
     autoResize: false,
     tooltip: null,
     tooltipOptions: null,
     onInput: null
-}
-
-InputTextarea.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    autoResize: PropTypes.bool,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    onInput: PropTypes.func
 }

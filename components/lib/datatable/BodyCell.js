@@ -1,21 +1,21 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
-import { RowRadioButton } from './RowRadioButton';
-import { RowCheckbox } from './RowCheckbox';
-import { Ripple } from '../ripple/Ripple';
+import * as React from 'react';
+import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { ObjectUtils, DomHandler, classNames } from '../utils/Utils';
-import { useEventListener, useUpdateEffect, useUnmountEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { RowCheckbox } from './RowCheckbox';
+import { RowRadioButton } from './RowRadioButton';
 
-export const BodyCell = memo((props) => {
-    const [editingState, setEditingState] = useState(props.editing);
-    const [editingRowDataState, setEditingRowDataState] = useState(props.rowData);
-    const [styleObjectState, setStyleObjectState] = useState({});
-    const elementRef = useRef(null);
-    const keyHelperRef = useRef(null);
-    const overlayEventListener = useRef(null);
-    const selfClick = useRef(false);
-    const tabindexTimeout = useRef(null);
-    const initFocusTimeout = useRef(null);
+export const BodyCell = React.memo((props) => {
+    const [editingState, setEditingState] = React.useState(props.editing);
+    const [editingRowDataState, setEditingRowDataState] = React.useState(props.rowData);
+    const [styleObjectState, setStyleObjectState] = React.useState({});
+    const elementRef = React.useRef(null);
+    const keyHelperRef = React.useRef(null);
+    const overlayEventListener = React.useRef(null);
+    const selfClick = React.useRef(false);
+    const tabindexTimeout = React.useRef(null);
+    const initFocusTimeout = React.useRef(null);
 
     const getColumnProp = (prop) => (props.column ? props.column.props[prop] : null);
     const field = getColumnProp('field') || `field_${props.index}`;
@@ -425,7 +425,7 @@ export const BodyCell = memo((props) => {
         focusOnInit();
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (getColumnProp('frozen')) {
             updateStickyPosition();
         }
@@ -615,3 +615,5 @@ export const BodyCell = memo((props) => {
 
     return getVirtualScrollerOption('loading') ? createLoading() : createElement();
 });
+
+BodyCell.displayName = 'BodyCell';

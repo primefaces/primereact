@@ -1,13 +1,12 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect } from '../hooks/Hooks';
 
-export const BlockUI = forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(props.blocked);
-    const maskRef = useRef(null);
+export const BlockUI = React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(props.blocked);
+    const maskRef = React.useRef(null);
 
     const block = () => {
         setVisibleState(true);
@@ -63,7 +62,7 @@ export const BlockUI = forwardRef((props, ref) => {
         ZIndexUtils.clear(maskRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         block,
         unblock
     }));
@@ -87,16 +86,18 @@ export const BlockUI = forwardRef((props, ref) => {
         return null;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, BlockUI.defaultProps);
     const mask = createMask();
 
     return (
-        <div id={props.id} className="p-blockui-container">
+        <div id={props.id} className="p-blockui-container" {...otherProps}>
             {props.children}
             {mask}
         </div>
     )
 });
 
+BlockUI.displayName = 'BlockUI';
 BlockUI.defaultProps = {
     __TYPE: 'BlockUI',
     id: null,
@@ -109,18 +110,4 @@ BlockUI.defaultProps = {
     template: null,
     onBlocked: null,
     onUnblocked: null
-}
-
-BlockUI.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    blocked: PropTypes.bool,
-    fullScreen: PropTypes.bool,
-    baseZIndex: PropTypes.number,
-    autoZIndex: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    template: PropTypes.any,
-    onBlocked: PropTypes.func,
-    onUnblocked: PropTypes.func
 }

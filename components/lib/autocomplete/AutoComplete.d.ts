@@ -45,7 +45,7 @@ interface AutoCompleteCompleteMethodParams {
     query: string;
 }
 
-export interface AutoCompleteProps {
+export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     value?: any;
@@ -62,6 +62,7 @@ export interface AutoCompleteProps {
     scrollHeight?: string;
     dropdown?: boolean;
     dropdownMode?: string;
+    dropdownAutoFocus?: boolean;
     multiple?: boolean;
     minLength?: number;
     delay?: number;
@@ -106,6 +107,6 @@ export interface AutoCompleteProps {
     onHide?(): void;
 }
 
-export declare class AutoComplete extends React.Component<AutoCompleteProps, any> { 
+export declare class AutoComplete extends React.Component<AutoCompleteProps, any> {
     public search(event:React.SyntheticEvent, query:string, source: AutoCompleteSourceType): void;
 }

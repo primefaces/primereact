@@ -1,12 +1,12 @@
-import React, { useRef, useState, memo } from 'react';
-import { Ripple } from '../ripple/Ripple';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
-import {useUpdateEffect } from '../hooks/Hooks';
+import { useUpdateEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const ContextMenuSub = memo((props) => {
-    const [activeItemState, setActiveItemState] = useState(null);
-    const submenuRef = useRef(null);
+export const ContextMenuSub = React.memo((props) => {
+    const [activeItemState, setActiveItemState] = React.useState(null);
+    const submenuRef = React.useRef(null);
     const active = props.root || !props.resetMenu;
 
     if (props.resetMenu === true && activeItemState !== null) {
@@ -145,3 +145,5 @@ export const ContextMenuSub = memo((props) => {
         </CSSTransition>
     )
 });
+
+ContextMenuSub.displayName = 'ContextMenuSub';

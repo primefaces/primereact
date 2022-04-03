@@ -1,14 +1,13 @@
-import React, { forwardRef, memo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import { useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { OrderListControls } from './OrderListControls';
 import { OrderListSubList } from './OrderListSubList';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
-import { useUpdateEffect } from '../hooks/Hooks';
 
-export const OrderList = memo(forwardRef((props, ref) => {
-    const [selectionState, setSelectionState] = useState([]);
-    const elementRef = useRef(null);
-    const reorderDirection = useRef(null);
+export const OrderList = React.memo(React.forwardRef((props, ref) => {
+    const [selectionState, setSelectionState] = React.useState([]);
+    const elementRef = React.useRef(null);
+    const reorderDirection = React.useRef(null);
 
     const onItemClick = (event) => {
         const metaKey = (event.originalEvent.metaKey || event.originalEvent.ctrlKey);
@@ -111,10 +110,11 @@ export const OrderList = memo(forwardRef((props, ref) => {
         }
     });
 
+    const otherProps = ObjectUtils.findDiffKeys(props, OrderList.defaultProps);
     const className = classNames('p-orderlist p-component', props.className);
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}>
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
             <OrderListControls value={props.value} selection={selectionState} onReorder={onReorder} dataKey={props.dataKey} />
             <OrderListSubList value={props.value} selection={selectionState} onItemClick={onItemClick} onItemKeyDown={onItemKeyDown}
                 itemTemplate={props.itemTemplate} header={props.header} listStyle={props.listStyle} dataKey={props.dataKey}
@@ -123,6 +123,7 @@ export const OrderList = memo(forwardRef((props, ref) => {
     )
 }));
 
+OrderList.displayName = 'OrderList';
 OrderList.defaultProps = {
     __TYPE: 'OrderList',
     id: null,
@@ -136,19 +137,4 @@ OrderList.defaultProps = {
     dataKey: null,
     onChange: null,
     itemTemplate: null
-}
-
-OrderList.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.array,
-    header: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    listStyle: PropTypes.object,
-    dragdrop: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    dataKey: PropTypes.string,
-    onChange: PropTypes.func,
-    itemTemplate: PropTypes.func
 }

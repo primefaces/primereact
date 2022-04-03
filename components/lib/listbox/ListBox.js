@@ -1,19 +1,16 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { FilterService } from '../api/Api';
-import { ListBoxItem } from './ListBoxItem';
-import { ListBoxHeader } from './ListBoxHeader';
-import { tip } from '../tooltip/Tooltip';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
-import { ObjectUtils, classNames } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
+import { ListBoxHeader } from './ListBoxHeader';
+import { ListBoxItem } from './ListBoxItem';
 
-export const ListBox = memo(forwardRef((props, ref) => {
-    const [filterValueState, setFilterValueState] = useState('');
-    const elementRef = useRef(null);
-    const tooltipRef = useRef(null);
-    const virtualScrollerRef = useRef(null);
-    const optionTouched = useRef(false);
+export const ListBox = React.memo(React.forwardRef((props, ref) => {
+    const [filterValueState, setFilterValueState] = React.useState('');
+    const elementRef = React.useRef(null);
+    const virtualScrollerRef = React.useRef(null);
+    const optionTouched = React.useRef(false);
     const filteredValue = (props.onFilterValueChange ? props.filterValue : filterValueState) || '';
     const hasFilter = filteredValue && filteredValue.trim().length > 0;
 
@@ -213,26 +210,6 @@ export const ListBox = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
     const createHeader = () => {
         return props.filter ? <ListBoxHeader filter={filteredValue} onFilter={onFilter} disabled={props.disabled} filterPlaceholder={props.filterPlaceholder} /> : null;
     }
@@ -321,6 +298,8 @@ export const ListBox = memo(forwardRef((props, ref) => {
 
     const visibleOptions = getVisibleOptions();
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, ListBox.defaultProps);
     const className = classNames('p-listbox p-component', {
         'p-disabled': props.disabled
     }, props.className);
@@ -329,15 +308,19 @@ export const ListBox = memo(forwardRef((props, ref) => {
     const header = createHeader();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}>
-            {header}
-            <div className={listClassName} style={props.listStyle}>
-                {list}
+        <>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+                {header}
+                <div className={listClassName} style={props.listStyle}>
+                    {list}
+                </div>
             </div>
-        </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+ListBox.displayName = 'ListBox';
 ListBox.defaultProps = {
     __TYPE: 'ListBox',
     id: null,
@@ -371,39 +354,4 @@ ListBox.defaultProps = {
     ariaLabelledBy: null,
     onChange: null,
     onFilterValueChange: null
-}
-
-ListBox.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.any,
-    options: PropTypes.array,
-    optionLabel: PropTypes.string,
-    optionValue: PropTypes.string,
-    optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    optionGroupLabel: PropTypes.string,
-    optionGroupChildren: PropTypes.string,
-    optionGroupTemplate: PropTypes.any,
-    itemTemplate: PropTypes.any,
-    style: PropTypes.object,
-    listStyle: PropTypes.object,
-    listClassName: PropTypes.string,
-    className: PropTypes.string,
-    virtualScrollerOptions: PropTypes.object,
-    disabled: PropTypes.bool,
-    dataKey: PropTypes.string,
-    multiple: PropTypes.bool,
-    metaKeySelection: PropTypes.bool,
-    filter: PropTypes.bool,
-    filterBy: PropTypes.string,
-    filterValue: PropTypes.string,
-    filterMatchMode: PropTypes.string,
-    filterPlaceholder: PropTypes.string,
-    filterLocale: PropTypes.string,
-    tabIndex: PropTypes.number,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    onChange: PropTypes.func,
-    onFilterValueChange: PropTypes.func
 }

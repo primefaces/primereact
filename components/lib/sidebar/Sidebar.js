@@ -1,18 +1,17 @@
-import React, { useState, useRef, forwardRef } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { Ripple } from '../ripple/Ripple';
-import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect, useEventListener } from '../hooks/Hooks';
+import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export const Sidebar = forwardRef((props, ref) => {
-    const [maskVisibleState, setMaskVisibleState] = useState(false);
-    const [visibleState, setVisibleState] = useState(false);
-    const sidebarRef = useRef(null);
-    const maskRef = useRef(null);
-    const closeIconRef = useRef(null);
+export const Sidebar = React.forwardRef((props, ref) => {
+    const [maskVisibleState, setMaskVisibleState] = React.useState(false);
+    const [visibleState, setVisibleState] = React.useState(false);
+    const sidebarRef = React.useRef(null);
+    const maskRef = React.useRef(null);
+    const closeIconRef = React.useRef(null);
 
     const [bindDocumentEscapeListener, unbindDocumentEscapeListener] = useEventListener({
         type: 'keydown', listener: event => {
@@ -132,6 +131,7 @@ export const Sidebar = forwardRef((props, ref) => {
     }
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, Sidebar.defaultProps);
         const className = classNames('p-sidebar p-component', props.className);
         const maskClassName = classNames('p-sidebar-mask', {
             'p-component-overlay p-component-overlay-enter': props.modal,
@@ -152,7 +152,7 @@ export const Sidebar = forwardRef((props, ref) => {
             <div ref={maskRef} style={props.maskStyle} className={maskClassName} onMouseDown={onMaskClick}>
                 <CSSTransition nodeRef={sidebarRef} classNames="p-sidebar" in={visibleState} timeout={transitionTimeout} options={props.transitionOptions}
                     unmountOnExit onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
-                    <div ref={sidebarRef} id={props.id} className={className} style={props.style} role="complementary">
+                    <div ref={sidebarRef} id={props.id} className={className} style={props.style} {...otherProps} role="complementary">
                         <div className="p-sidebar-header">
                             {icons}
                             {closeIcon}
@@ -175,6 +175,7 @@ export const Sidebar = forwardRef((props, ref) => {
     return maskVisibleState && createSidebar();
 });
 
+Sidebar.displayName = 'Sidebar';
 Sidebar.defaultProps = {
     __TYPE: 'Sidebar',
     id: null,
@@ -197,28 +198,4 @@ Sidebar.defaultProps = {
     transitionOptions: null,
     onShow: null,
     onHide: null
-}
-
-Sidebar.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    maskStyle: PropTypes.object,
-    maskClassName: PropTypes.string,
-    visible: PropTypes.bool,
-    position: PropTypes.string,
-    fullScreen: PropTypes.bool,
-    blockScroll: PropTypes.bool,
-    baseZIndex: PropTypes.number,
-    dismissable: PropTypes.bool,
-    showCloseIcon: PropTypes.bool,
-    ariaCloseLabel: PropTypes.string,
-    closeOnEscape: PropTypes.bool,
-    icons: PropTypes.any,
-    modal: PropTypes.bool,
-    appendTo: PropTypes.any,
-    transitionOptions: PropTypes.object,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func.isRequired
 }

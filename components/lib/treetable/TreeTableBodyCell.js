@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { OverlayService } from '../overlayservice/OverlayService';
-import { ObjectUtils, DomHandler, classNames } from '../utils/Utils';
+import * as React from 'react';
 import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
+import { OverlayService } from '../overlayservice/OverlayService';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const TreeTableBodyCell = (props) => {
-    const [editingState, setEditingState] = useState(false);
-    const elementRef = useRef(null);
-    const keyHelperRef = useRef(null);
-    const selfClick = useRef(false);
-    const overlayEventListener = useRef(null);
-    const tabIndexTimeout = useRef(null);
+    const [editingState, setEditingState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const keyHelperRef = React.useRef(null);
+    const selfClick = React.useRef(false);
+    const overlayEventListener = React.useRef(null);
+    const tabIndexTimeout = React.useRef(null);
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click', listener: (e) => {
@@ -79,7 +79,7 @@ export const TreeTableBodyCell = (props) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (elementRef.current && props.editor) {
             clearTimeout(tabIndexTimeout.current);
             if (editingState) {
@@ -140,3 +140,5 @@ export const TreeTableBodyCell = (props) => {
         </td>
     )
 }
+
+TreeTableBodyCell.displayName = 'TreeTableBodyCell';

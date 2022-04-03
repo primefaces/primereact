@@ -1,9 +1,9 @@
-import React, { memo, useState } from 'react';
+import * as React from 'react';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyCell } from './BodyCell';
-import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
 
-export const BodyRow = memo((props) => {
-    const [editingState, setEditingState] = useState(false);
+export const BodyRow = React.memo((props) => {
+    const [editingState, setEditingState] = React.useState(false);
     const editing = props.onRowEditChange ? props.editing : editingState;
 
     const isFocusable = () => {
@@ -327,3 +327,5 @@ export const BodyRow = memo((props) => {
         </tr>
     )
 });
+
+BodyRow.displayName = 'BodyRow';

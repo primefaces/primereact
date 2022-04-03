@@ -1,50 +1,18 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { DomHandler, classNames, ZIndexUtils } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect, useResizeListener, useOverlayScrollListener } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export const tip = (props) => {
-    const appendTo = props.appendTo || document.body;
-
-    const tooltipWrapper = document.createDocumentFragment();
-    DomHandler.appendChild(tooltipWrapper, appendTo);
-
-    props = { ...props, ...props.options };
-
-    const tooltipEl = React.createElement(Tooltip, props);
-    ReactDOM.render(tooltipEl, tooltipWrapper);
-
-    const updateTooltip = (newProps) => {
-        props = { ...props, ...newProps };
-        ReactDOM.render(React.cloneElement(tooltipEl, props), tooltipWrapper);
-    };
-
-    return {
-        destroy: () => {
-            ReactDOM.unmountComponentAtNode(tooltipWrapper);
-        },
-        updateContent: (newContent) => {
-            console.warn("The 'updateContent' method has been deprecated on Tooltip. Use update(newProps) method.");
-            updateTooltip({ content: newContent });
-        },
-        update: (newProps) => {
-            updateTooltip(newProps);
-        }
-    }
-}
-
-export const Tooltip = forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(false);
-    const [positionState, setPositionState] = useState(props.position);
-    const elementRef = useRef(null);
-    const textRef = useRef(null);
-    const currentTargetRef = useRef(null);
-    const containerSize = useRef(null);
-    const allowHide = useRef(true);
-    const timeouts = useRef({});
+export const Tooltip = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(false);
+    const [positionState, setPositionState] = React.useState(props.position);
+    const elementRef = React.useRef(null);
+    const textRef = React.useRef(null);
+    const currentTargetRef = React.useRef(null);
+    const containerSize = React.useRef(null);
+    const allowHide = React.useRef(true);
+    const timeouts = React.useRef({});
 
     const [bindWindowResizeListener, unbindWindowResizeListener] = useResizeListener({
         listener: (event) => {
@@ -157,7 +125,7 @@ export const Tooltip = forwardRef((props, ref) => {
                 if (isAutoHide()) {
                     elementRef.current.style.pointerEvents = 'none';
                 }
-     
+
                 if (isMouseTrack(currentTargetRef.current) && !containerSize.current) {
                     containerSize.current = {
                         width: DomHandler.getOuterWidth(elementRef.current),
@@ -173,14 +141,17 @@ export const Tooltip = forwardRef((props, ref) => {
             applyDelay('updateDelay', updateTooltipState);
         }
         else {
-            sendCallback(props.onBeforeShow, { originalEvent: e, target: currentTargetRef.current });
-            applyDelay('showDelay', () => {
-                setVisibleState(true);
-                setPositionState(getPosition(currentTargetRef.current));
-                updateTooltipState();
-                sendCallback(props.onShow, { originalEvent: e, target: currentTargetRef.current });
-                DomHandler.addClass(currentTargetRef.current, getTargetOption(currentTargetRef.current, 'classname'));
-            });
+            // #2653 give the callback a chance to return false and not continue with display
+            const success = sendCallback(props.onBeforeShow, { originalEvent: e, target: currentTargetRef.current });
+            if (success) {
+                applyDelay('showDelay', () => {
+                    setVisibleState(true);
+                    setPositionState(getPosition(currentTargetRef.current));
+                    setTimeout(() => updateTooltipState(), 0);
+                    sendCallback(props.onShow, { originalEvent: e, target: currentTargetRef.current });
+                    DomHandler.addClass(currentTargetRef.current, getTargetOption(currentTargetRef.current, 'classname'));
+                });
+            };
         }
     }
 
@@ -189,23 +160,25 @@ export const Tooltip = forwardRef((props, ref) => {
 
         if (visibleState) {
             DomHandler.removeClass(currentTargetRef.current, getTargetOption(currentTargetRef.current, 'classname'));
- 
-            sendCallback(props.onBeforeHide, { originalEvent: e, target: currentTargetRef.current });
-            applyDelay('hideDelay', () => {
-                if (!isAutoHide() && allowHide.current === false) {
-                    return;
-                }
-              
-                ZIndexUtils.clear(elementRef.current);
-                DomHandler.removeClass(elementRef.current, 'p-tooltip-active');
 
-                setVisibleState(false);
-                setPositionState(props.position);
-                currentTargetRef.current = null;
-                containerSize.current = null;
-                allowHide.current = true;
-                sendCallback(props.onHide, { originalEvent: e, target: currentTargetRef.current });
-            });
+            const success = sendCallback(props.onBeforeHide, { originalEvent: e, target: currentTargetRef.current });
+            if (success) {
+                applyDelay('hideDelay', () => {
+                    if (!isAutoHide() && allowHide.current === false) {
+                        return;
+                    }
+
+                    ZIndexUtils.clear(elementRef.current);
+                    DomHandler.removeClass(elementRef.current, 'p-tooltip-active');
+
+                    setVisibleState(false);
+                    setPositionState(props.position);
+                    currentTargetRef.current = null;
+                    containerSize.current = null;
+                    allowHide.current = true;
+                    sendCallback(props.onHide, { originalEvent: e, target: currentTargetRef.current });
+                });
+            }
         }
     }
 
@@ -327,7 +300,14 @@ export const Tooltip = forwardRef((props, ref) => {
     }
 
     const sendCallback = (callback, ...params) => {
-        callback && callback(...params);
+        if (callback) {
+            let result = callback(...params);
+            if (result === undefined) {
+                result = true;
+            }
+            return result;
+        }
+        return true;
     }
 
     const clearTimeouts = () => {
@@ -373,6 +353,8 @@ export const Tooltip = forwardRef((props, ref) => {
     }
 
     const setTargetEventOperations = (target, operation) => {
+        target = ObjectUtils.getRefElement(target);
+
         if (target) {
             if (DomHandler.isElement(target)) {
                 operation(target);
@@ -397,7 +379,7 @@ export const Tooltip = forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (visibleState && currentTargetRef.current && isDisabled(currentTargetRef.current)) {
             hide();
         }
@@ -408,16 +390,17 @@ export const Tooltip = forwardRef((props, ref) => {
     });
 
     useUpdateEffect(() => {
-        visibleState && loadTargetEvents();
+        loadTargetEvents();
+
+        return () => {
+            unloadTargetEvents();
+        }
     }, [show, hide, props.target]);
 
     useUpdateEffect(() => {
         if (visibleState) {
             bindWindowResizeListener();
             bindOverlayScrollListener();
-        }
-        else {
-            textRef.current && ReactDOM.unmountComponentAtNode(textRef.current);
         }
 
         return () => {
@@ -443,13 +426,14 @@ export const Tooltip = forwardRef((props, ref) => {
         ZIndexUtils.clear(elementRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         updateTargetEvents,
         loadTargetEvents,
         unloadTargetEvents
     }));
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, Tooltip.defaultProps);
         const tooltipClassName = classNames('p-tooltip p-component', {
             [`p-tooltip-${positionState}`]: true
         }, props.className);
@@ -457,7 +441,7 @@ export const Tooltip = forwardRef((props, ref) => {
 
         return (
             <div id={props.id} ref={elementRef} className={tooltipClassName} style={props.style} role="tooltip" aria-hidden={visibleState}
-                onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+                {...otherProps} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
                 <div className="p-tooltip-arrow"></div>
                 <div ref={textRef} className="p-tooltip-text">
                     {empty && props.children}
@@ -473,8 +457,9 @@ export const Tooltip = forwardRef((props, ref) => {
     }
 
     return null;
-});
+}));
 
+Tooltip.displayName = 'Tooltip';
 Tooltip.defaultProps = {
     __TYPE: 'Tooltip',
     id: null,
@@ -504,35 +489,4 @@ Tooltip.defaultProps = {
     onBeforeHide: null,
     onShow: null,
     onHide: null
-}
-
-Tooltip.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    target: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.array]),
-    content: PropTypes.string,
-    disabled: PropTypes.bool,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    position: PropTypes.string,
-    my: PropTypes.string,
-    at: PropTypes.string,
-    event: PropTypes.string,
-    showEvent: PropTypes.string,
-    hideEvent: PropTypes.string,
-    autoZIndex: PropTypes.bool,
-    baseZIndex: PropTypes.number,
-    mouseTrack: PropTypes.bool,
-    mouseTrackTop: PropTypes.number,
-    mouseTrackLeft: PropTypes.number,
-    showDelay: PropTypes.number,
-    updateDelay: PropTypes.number,
-    hideDelay: PropTypes.number,
-    autoHide: PropTypes.bool,
-    showOnDisabled: PropTypes.bool,
-    onBeforeShow: PropTypes.func,
-    onBeforeHide: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

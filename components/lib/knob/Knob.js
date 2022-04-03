@@ -1,7 +1,6 @@
-import React, { forwardRef, memo, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 const radius = 40;
 const midX = 50;
@@ -9,8 +8,8 @@ const midY = 50;
 const minRadians = 4 * Math.PI / 3;
 const maxRadians = -Math.PI / 3;
 
-export const Knob = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
+export const Knob = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
     const enabled = !props.disabled && !props.readOnly;
 
     const [bindWindowMouseMoveListener, unbindWindowMouseMoveListener] = useEventListener({
@@ -131,13 +130,14 @@ export const Knob = memo(forwardRef((props, ref) => {
         unbindWindowTouchEndListener();
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Knob.defaultProps);
     const className = classNames('p-knob p-component', {
         'p-disabled': props.disabled,
     }, props.className);
     const text = props.showValue && <text x={50} y={57} textAnchor={'middle'} fill={props.textColor} className={'p-knob-text'} name={props.name}>{valueToDisplay()}</text>
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}>
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
             <svg viewBox="0 0 100 100" width={props.size} height={props.size} onClick={onClick} onMouseDown={onMouseDown} onMouseUp={onMouseUp}
                 onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
                 <path d={rangePath} strokeWidth={props.strokeWidth} stroke={props.rangeColor} className={'p-knob-range'}></path>
@@ -148,6 +148,7 @@ export const Knob = memo(forwardRef((props, ref) => {
     )
 }));
 
+Knob.displayName = 'Knob';
 Knob.defaultProps = {
     __TYPE: 'Knob',
     id: null,
@@ -168,26 +169,4 @@ Knob.defaultProps = {
     textColor: 'var(--text-color-secondary, Black)',
     valueTemplate: '{value}',
     onChange: null
-}
-
-Knob.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    value: PropTypes.number,
-    size: PropTypes.number,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    showValue: PropTypes.bool,
-    step: PropTypes.number,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    strokeWidth: PropTypes.number,
-    name: PropTypes.string,
-    valueColor: PropTypes.string,
-    rangeColor: PropTypes.string,
-    textColor: PropTypes.string,
-    valueTemplate: PropTypes.string,
-    onChange: PropTypes.func
 }

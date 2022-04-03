@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useEffect } from 'react';
+import * as React from 'react';
 
-export const useMountEffect = (fn) => useEffect(fn, []);
+export const useMountEffect = (fn) => React.useEffect(fn, []);
 /* eslint-enable */

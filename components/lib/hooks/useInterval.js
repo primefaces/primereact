@@ -1,18 +1,18 @@
 /* eslint-disable */
-import { useCallback, useEffect, useRef } from 'react';
+import * as React from 'react';
 import { useUnmountEffect } from './useUnmountEffect';
 
 export const useInterval = (fn, delay = 0, when = true) => {
-    const timeout = useRef(null);
-    const savedCallback = useRef(null);
+    const timeout = React.useRef(null);
+    const savedCallback = React.useRef(null);
 
-    const clear = useCallback(() => clearInterval(timeout.current), [timeout.current]);
+    const clear = React.useCallback(() => clearInterval(timeout.current), [timeout.current]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         savedCallback.current = fn;
     });
 
-    useEffect(() => {
+    React.useEffect(() => {
         function callback() {
             savedCallback.current();
         }

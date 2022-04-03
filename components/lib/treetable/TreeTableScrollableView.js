@@ -1,15 +1,15 @@
-import React, { memo, useEffect, useRef } from 'react';
-import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
+import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const TreeTableScrollableView = memo((props) => {
-    const elementRef = useRef(null);
-    const scrollHeaderRef = useRef(null);
-    const scrollHeaderBoxRef = useRef(null);
-    const scrollBodyRef = useRef(null);
-    const scrollTableRef = useRef(null);
-    const scrollFooterRef = useRef(null);
-    const scrollFooterBoxRef = useRef(null);
+export const TreeTableScrollableView = React.memo((props) => {
+    const elementRef = React.useRef(null);
+    const scrollHeaderRef = React.useRef(null);
+    const scrollHeaderBoxRef = React.useRef(null);
+    const scrollBodyRef = React.useRef(null);
+    const scrollTableRef = React.useRef(null);
+    const scrollFooterRef = React.useRef(null);
+    const scrollFooterBoxRef = React.useRef(null);
 
     const setScrollHeight = () => {
         if (props.scrollHeight) {
@@ -81,7 +81,7 @@ export const TreeTableScrollableView = memo((props) => {
         }
     });
 
-    useEffect(() => {
+    React.useEffect(() => {
         setScrollHeight();
     });
 
@@ -133,3 +133,5 @@ export const TreeTableScrollableView = memo((props) => {
         </div>
     )
 });
+
+TreeTableScrollableView.displayName = 'TreeTableScrollableView';

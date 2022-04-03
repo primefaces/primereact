@@ -1,13 +1,12 @@
-import React, { forwardRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { Button } from '../button/Button';
-import { classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;
 
-export const Inplace = forwardRef((props, ref) => {
-    const [activeState, setActiveState] = useState(false);
+export const Inplace = React.forwardRef((props, ref) => {
+    const [activeState, setActiveState] = React.useState(false);
     const active = props.onToggle ? props.active : activeState;
 
     const shouldUseInplaceContent = (child) => child && child.props.__TYPE === 'InplaceContent';
@@ -53,12 +52,13 @@ export const Inplace = forwardRef((props, ref) => {
     }
 
     const createDisplay = (content) => {
+        const otherProps = ObjectUtils.findDiffKeys(content.props, InplaceDisplay.defaultProps);
         const className = classNames('p-inplace-display', {
             'p-disabled': props.disabled
         });
 
         return (
-            <div className={className} onClick={open} onKeyDown={onDisplayKeyDown} tabIndex={props.tabIndex} aria-label={props.ariaLabel}>
+            <div className={className} {...otherProps} onClick={open} onKeyDown={onDisplayKeyDown} tabIndex={props.tabIndex} aria-label={props.ariaLabel}>
                 {content}
             </div>
         )
@@ -73,10 +73,11 @@ export const Inplace = forwardRef((props, ref) => {
     }
 
     const createContent = (content) => {
+        const otherProps = ObjectUtils.findDiffKeys(content.props, InplaceContent.defaultProps);
         const closeButton = createCloseButton();
 
         return (
-            <div className="p-inplace-content">
+            <div className="p-inplace-content" {...otherProps}>
                 {content}
                 {closeButton}
             </div>
@@ -96,34 +97,30 @@ export const Inplace = forwardRef((props, ref) => {
         );
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Inplace.defaultProps);
     const children = createChildren();
     const className = classNames('p-inplace p-component', {
         'p-inplace-closable': props.closable
     }, props.className);
 
     return (
-        <div className={className}>
+        <div className={className} {...otherProps}>
             {children}
         </div>
     )
 });
 
+InplaceDisplay.displayName = 'InplaceDisplay';
 InplaceDisplay.defaultProps = {
     __TYPE: 'InplaceDisplay'
 }
 
-InplaceDisplay.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string
-}
-
+InplaceContent.displayName = 'InplaceContent';
 InplaceContent.defaultProps = {
     __TYPE: 'InplaceContent'
 }
 
-InplaceContent.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string
-}
-
+Inplace.displayName = 'Inplace';
 Inplace.defaultProps = {
     __TYPE: 'Inplace',
     style: null,
@@ -136,18 +133,4 @@ Inplace.defaultProps = {
     onOpen: null,
     onClose: null,
     onToggle: null
-}
-
-Inplace.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    active: PropTypes.bool,
-    closable: PropTypes.bool,
-    disabled: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    ariaLabel: PropTypes.string,
-    onOpen: PropTypes.func,
-    onClose: PropTypes.func,
-    onToggle: PropTypes.func,
 }

@@ -1,11 +1,10 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import * as React from 'react';
 import { useUnmountEffect } from '../hooks/Hooks';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Chart = memo(forwardRef((props, ref) => {
-    const chartRef = useRef(null);
-    const canvasRef = useRef(null);
+export const Chart = React.memo(React.forwardRef((props, ref) => {
+    const chartRef = React.useRef(null);
+    const canvasRef = React.useRef(null);
 
     const initChart = () => {
         import('chart.js/auto').then((module) => {
@@ -25,7 +24,7 @@ export const Chart = memo(forwardRef((props, ref) => {
         });
     }
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         getCanvas: () => canvasRef.current,
         getChart: () => chartRef.current,
         getBase64Image: () => chartRef.current.toBase64Image(),
@@ -33,7 +32,7 @@ export const Chart = memo(forwardRef((props, ref) => {
         refresh: () => chartRef.current && chartRef.current.update()
     }));
 
-    useEffect(() => {
+    React.useEffect(() => {
         initChart();
     });
 
@@ -44,16 +43,18 @@ export const Chart = memo(forwardRef((props, ref) => {
         }
     });
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Chart.defaultProps);
     const className = classNames('p-chart', props.className);
     const style = Object.assign({ width: props.width, height: props.height }, props.style);
 
     return (
-        <div id={props.id} style={style} className={className}>
+        <div id={props.id} style={style} className={className} {...otherProps}>
             <canvas ref={canvasRef} width={props.width} height={props.height}></canvas>
         </div>
     );
 }), (prevProps, nextProps) => prevProps.data === nextProps.data && prevProps.options === nextProps.options && prevProps.type === nextProps.type);
 
+Chart.displayName = 'Chart';
 Chart.defaultProps = {
     __TYPE: 'Chart',
     id: null,
@@ -65,17 +66,4 @@ Chart.defaultProps = {
     height: null,
     style: null,
     className: null
-}
-
-Chart.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    type: PropTypes.string,
-    data: PropTypes.object,
-    options: PropTypes.object,
-    plugins: PropTypes.array,
-    width: PropTypes.string,
-    height: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string
 }

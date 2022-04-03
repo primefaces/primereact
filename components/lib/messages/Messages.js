@@ -1,13 +1,13 @@
-import React, { useState, forwardRef, useImperativeHandle, createRef, memo } from 'react';
-import PropTypes from 'prop-types';
-import { UIMessage } from './UIMessage';
+import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { ObjectUtils } from '../utils/Utils';
+import { UIMessage } from './UIMessage';
 
 let messageIdx = 0;
 
-export const Messages = memo(forwardRef((props, ref) => {
-    const [messagesState, setMessagesState] = useState([]);
+export const Messages = React.memo(React.forwardRef((props, ref) => {
+    const [messagesState, setMessagesState] = React.useState([]);
 
     const show = (value) => {
         if (value) {
@@ -41,18 +41,20 @@ export const Messages = memo(forwardRef((props, ref) => {
         props.onRemove && props.onRemove(message);
     }
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         show,
         replace,
         clear
     }));
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Messages.defaultProps);
+
     return (
-        <div id={props.id} className={props.className} style={props.style}>
+        <div id={props.id} className={props.className} style={props.style} {...otherProps}>
             <TransitionGroup>
                 {
                     messagesState.map((message) => {
-                        const messageRef = createRef();
+                        const messageRef = React.createRef();
 
                         return (
                             <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={props.transitionOptions}>
@@ -66,6 +68,7 @@ export const Messages = memo(forwardRef((props, ref) => {
     )
 }));
 
+Messages.displayName = 'Messages';
 Messages.defaultProps = {
     __TYPE: 'Messages',
     id: null,
@@ -74,14 +77,4 @@ Messages.defaultProps = {
     transitionOptions: null,
     onRemove: null,
     onClick: null
-}
-
-Messages.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    transitionOptions: PropTypes.object,
-    onRemove: PropTypes.func,
-    onClick: PropTypes.func
 }

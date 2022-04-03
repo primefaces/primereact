@@ -1,12 +1,12 @@
-import React, { useRef, memo } from 'react'
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const OrderListSubList = memo((props) => {
-    const dragging = useRef(null);
-    const draggedItemIndex = useRef(null);
-    const dragOverItemIndex = useRef(null);
-    const listElementRef = useRef(null);
+export const OrderListSubList = React.memo((props) => {
+    const dragging = React.useRef(null);
+    const draggedItemIndex = React.useRef(null);
+    const dragOverItemIndex = React.useRef(null);
+    const listElementRef = React.useRef(null);
 
     const isSelected = (item) => {
         return ObjectUtils.findIndexInList(item, props.selection, props.dataKey) !== -1;
@@ -131,3 +131,5 @@ export const OrderListSubList = memo((props) => {
         </div>
     )
 });
+
+OrderListSubList.displayName = 'OrderListSubList';

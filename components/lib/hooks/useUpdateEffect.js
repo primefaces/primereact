@@ -1,9 +1,9 @@
 /* eslint-disable */
-import { useEffect, useRef } from 'react';
+import * as React from 'react';
 
 export const useUpdateEffect = (fn, deps) => {
-    const mounted = useRef(false);
-    return useEffect(() => {
+    const mounted = React.useRef(false);
+    return React.useEffect(() => {
         if (!mounted.current) {
             mounted.current = true;
             return;

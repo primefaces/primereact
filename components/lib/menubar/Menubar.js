@@ -1,14 +1,13 @@
-import React, { useRef, forwardRef, useState, useImperativeHandle, memo } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { MenubarSub } from './MenubarSub';
-import { ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
-import { useUpdateEffect, useUnmountEffect, useEventListener } from '../hooks/Hooks';
 
-export const Menubar = memo(forwardRef((props, ref) => {
-    const [mobileActiveState, setMobileActiveState] = useState(false);
-    const rootMenuRef = useRef(null);
-    const menuButtonRef = useRef(null);
+export const Menubar = React.memo(React.forwardRef((props, ref) => {
+    const [mobileActiveState, setMobileActiveState] = React.useState(false);
+    const rootMenuRef = React.useRef(null);
+    const menuButtonRef = React.useRef(null);
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click', listener: (event) => {
@@ -48,7 +47,7 @@ export const Menubar = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(rootMenuRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         toggle,
         useCustomContent
     }));
@@ -105,16 +104,17 @@ export const Menubar = memo(forwardRef((props, ref) => {
         return button;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Menubar.defaultProps);
     const className = classNames('p-menubar p-component', {
         'p-menubar-mobile-active': mobileActiveState
     }, props.className);
     const start = createStartContent();
     const end = createEndContent();
     const menuButton = createMenuButton();
-    const submenu =  <MenubarSub ref={rootMenuRef} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} />;
+    const submenu = <MenubarSub ref={rootMenuRef} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} />;
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {start}
             {menuButton}
             {submenu}
@@ -123,6 +123,7 @@ export const Menubar = memo(forwardRef((props, ref) => {
     )
 }));
 
+Menubar.displayName = 'Menubar';
 Menubar.defaultProps = {
     __TYPE: 'Menubar',
     id: null,
@@ -131,14 +132,4 @@ Menubar.defaultProps = {
     className: null,
     start: null,
     end: null
-}
-
-Menubar.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    start: PropTypes.any,
-    end: PropTypes.any
 }

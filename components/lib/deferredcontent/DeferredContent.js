@@ -1,10 +1,10 @@
-import React, { forwardRef, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useMountEffect, useEventListener } from '../hooks/Hooks';
+import * as React from 'react';
+import { useEventListener, useMountEffect } from '../hooks/Hooks';
+import { ObjectUtils } from '../utils/Utils';
 
-export const DeferredContent = forwardRef((props, ref) => {
-    const [loadedState, setLoadedState] = useState(false);
-    const elementRef = useRef(null);
+export const DeferredContent = React.forwardRef((props, ref) => {
+    const [loadedState, setLoadedState] = React.useState(false);
+    const elementRef = React.useRef(null);
 
     const [bindScrollListener, unbindScrollListener] = useEventListener({
         target: 'window', type: 'scroll', listener: () => {
@@ -38,19 +38,17 @@ export const DeferredContent = forwardRef((props, ref) => {
         }
     });
 
+    const otherProps = ObjectUtils.findDiffKeys(props, DeferredContent.defaultProps);
+
     return (
-        <div ref={elementRef}>
+        <div ref={elementRef} {...otherProps}>
             {loadedState && props.children}
         </div>
     )
 });
 
+DeferredContent.displayName = 'DeferredContent';
 DeferredContent.defaultProps = {
     __TYPE: 'DeferredContent',
     onload: null
-}
-
-DeferredContent.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    onLoad: PropTypes.func
 }

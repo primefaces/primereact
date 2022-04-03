@@ -1,8 +1,8 @@
-import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Badge = memo(forwardRef((props, ref) => {
+export const Badge = React.memo(React.forwardRef((props, ref) => {
+    const otherProps = ObjectUtils.findDiffKeys(props, Badge.defaultProps);
     const className = classNames('p-badge p-component', {
         'p-badge-no-gutter': props.value && String(props.value).length === 1,
         'p-badge-dot': !props.value,
@@ -12,12 +12,13 @@ export const Badge = memo(forwardRef((props, ref) => {
     }, props.className);
 
     return (
-        <span className={className} style={props.style}>
+        <span className={className} style={props.style} {...otherProps}>
             {props.value}
         </span>
     )
 }));
 
+Badge.displayName = 'Badge';
 Badge.defaultProps = {
     __TYPE: 'Badge',
     value: null,
@@ -25,13 +26,4 @@ Badge.defaultProps = {
     size: null,
     style: null,
     className: null
-}
-
-Badge.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    value: PropTypes.any,
-    severity: PropTypes.string,
-    size: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string
 }

@@ -1,13 +1,12 @@
-import React, { createRef, forwardRef, memo, useState } from 'react';
-import PropTypes from 'prop-types';
-import { PanelMenuSub } from './PanelMenuSub';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ObjectUtils, classNames, UniqueComponentId } from '../utils/Utils';
 import { useMountEffect } from '../hooks/Hooks';
+import { classNames, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { PanelMenuSub } from './PanelMenuSub';
 
-export const PanelMenu = memo(forwardRef((props, ref) => {
-    const [idState, setIdState] = useState(props.id);
-    const [activeItemState, setActiveItemState] = useState(null);
+export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
+    const [idState, setIdState] = React.useState(props.id);
+    const [activeItemState, setActiveItemState] = React.useState(null);
     const headerId = idState + '_header';
     const contentId = idState + '_content';
 
@@ -91,7 +90,7 @@ export const PanelMenu = memo(forwardRef((props, ref) => {
         const itemIcon = item.icon && <span className={iconClassName}></span>;
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const contentWrapperClassName = classNames('p-toggleable-content', { 'p-toggleable-content-collapsed': !active });
-        const menuContentRef = createRef();
+        const menuContentRef = React.createRef();
         let content = (
             <a href={item.url || '#'} className="p-panelmenu-header-link" onClick={(e) => onItemClick(e, item)} aria-expanded={active}
                 id={headerId} aria-controls={contentId} aria-disabled={item.disabled}>
@@ -137,16 +136,18 @@ export const PanelMenu = memo(forwardRef((props, ref) => {
         return props.model ? props.model.map(createPanel) : null;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, PanelMenu.defaultProps);
     const className = classNames('p-panelmenu p-component', props.className);
     const panels = createPanels();
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {panels}
         </div>
     )
 }));
 
+PanelMenu.displayName = 'PanelMenu';
 PanelMenu.defaultProps = {
     __TYPE: 'Panel',
     id: null,
@@ -155,14 +156,4 @@ PanelMenu.defaultProps = {
     className: null,
     multiple: false,
     transitionOptions: null
-}
-
-PanelMenu.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    multiple: PropTypes.bool,
-    transitionOptions: PropTypes.object
 }

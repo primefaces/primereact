@@ -1,80 +1,84 @@
-import React, { forwardRef, memo, useImperativeHandle, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { classNames, DomHandler } from '../utils/Utils';
+import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const Editor = memo(forwardRef((props, ref) => {
-    const contentRef = useRef(null);
-    const toolbarRef = useRef(null);
-    const quill = useRef(null);
+export const Editor = React.memo(React.forwardRef((props, ref) => {
+    const contentRef = React.useRef(null);
+    const toolbarRef = React.useRef(null);
+    const quill = React.useRef(null);
+    const isQuillLoaded = React.useRef(false);
 
     const getQuill = () => {
         return quill.current;
     }
 
     useMountEffect(() => {
-        import('quill').then((module) => {
-            if (module && module.default && DomHandler.isExist(contentRef.current)) {
-                quill.current = new module.default(contentRef.current, {
-                    modules: {
-                        toolbar: props.showHeader ? toolbarRef.current : false,
-                        ...props.modules
-                    },
-                    placeholder: props.placeholder,
-                    readOnly: props.readOnly,
-                    theme: props.theme,
-                    formats: props.formats
-                });
+        if (!isQuillLoaded.current) {
+            import('quill').then((module) => {
+                if (module && module.default && DomHandler.isExist(contentRef.current)) {
+                    quill.current = new module.default(contentRef.current, {
+                        modules: {
+                            toolbar: props.showHeader ? toolbarRef.current : false,
+                            ...props.modules
+                        },
+                        placeholder: props.placeholder,
+                        readOnly: props.readOnly,
+                        theme: props.theme,
+                        formats: props.formats
+                    });
 
-                if (props.value) {
-                    quill.current.setContents(quill.current.clipboard.convert(props.value));
-                }
-
-
-                quill.current.on('text-change', ((delta, oldContents, source) => {
-                    let html = contentRef.current.children[0].innerHTML;
-                    let text = quill.current.getText();
-
-                    if (html === '<p><br></p>') {
-                        html = null;
+                    if (props.value) {
+                        quill.current.setContents(quill.current.clipboard.convert(props.value));
                     }
 
-                    // GitHub #2271 prevent infinite loop on clipboard paste of HTML
-                    if (source === "api") {
-                        const htmlValue = editorElement.children[0];
-                        const editorValue = document.createElement("div");
-                        editorValue.innerHTML = props.value || "";
-                        // this is necessary because Quill rearranged style elements
-                        if (DomHandler.isEqualElement(htmlValue, editorValue)) {
-                            return;
+                    quill.current.on('text-change', ((delta, oldContents, source) => {
+                        let firstChild = contentRef.current.children[0];
+                        let html = firstChild ? firstChild.innerHTML : null;
+                        let text = quill.current.getText();
+
+                        if (html === '<p><br></p>') {
+                           html = null;
                         }
-                    }
 
-                    if (props.onTextChange) {
-                        props.onTextChange({
-                            htmlValue: html,
-                            textValue: text,
-                            delta: delta,
-                            source: source
-                        });
-                    }
-                });
+                        // GitHub #2271 prevent infinite loop on clipboard paste of HTML
+                        if (source === "api") {
+                            const htmlValue = editorElement.children[0];
+                            const editorValue = document.createElement("div");
+                            editorValue.innerHTML = props.value || "";
+                            // this is necessary because Quill rearranged style elements
+                            if (DomHandler.isEqualElement(htmlValue, editorValue)) {
+                                return;
+                            }
+                        }
 
-                quill.current.on('selection-change', (range, oldRange, source) => {
-                    if (props.onSelectionChange) {
-                        props.onSelectionChange({
-                            range: range,
-                            oldRange: oldRange,
-                            source: source
-                        });
-                    }
-                });
-            }
-        }).then(() => {
-            if (quill.current && quill.current.getModule('toolbar')) {
-                props.onLoad && props.onLoad(quill.current);
-            }
-        })
+                        if (props.onTextChange) {
+                            props.onTextChange({
+                                htmlValue: html,
+                                textValue: text,
+                                delta: delta,
+                                source: source
+                            });
+                        }
+                    });
+
+                    quill.current.on('selection-change', (range, oldRange, source) => {
+                        if (props.onSelectionChange) {
+                            props.onSelectionChange({
+                                range: range,
+                                oldRange: oldRange,
+                                source: source
+                            });
+                        }
+                    });
+                }
+            }).then(() => {
+                if (quill.current && quill.current.getModule('toolbar')) {
+                    props.onLoad && props.onLoad(quill.current);
+                }
+            });
+
+            isQuillLoaded.current = true;
+        }
     });
 
     useUpdateEffect(() => {
@@ -85,7 +89,7 @@ export const Editor = memo(forwardRef((props, ref) => {
         }
     }, [props.value]);
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         getQuill
     }));
 
@@ -147,18 +151,20 @@ export const Editor = memo(forwardRef((props, ref) => {
         }
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Editor.defaultProps);
     const className = classNames('p-component p-editor-container', props.className);
     const header = createToolbarHeader();
-    const content = <div ref={contentRef} className="p-editor-content"></div>
+    const content = <div ref={contentRef} className="p-editor-content" style={props.style}></div>
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} {...otherProps}>
             {header}
             {content}
         </div>
     )
 }));
 
+Editor.displayName = 'Editor';
 Editor.defaultProps = {
     __TYPE: 'Editor',
     id: null,
@@ -175,22 +181,4 @@ Editor.defaultProps = {
     onTextChange: null,
     onSelectionChange: null,
     onLoad: null
-}
-
-Editor.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    placeholder: PropTypes.string,
-    readOnly: PropTypes.bool,
-    modules: PropTypes.object,
-    formats: PropTypes.array,
-    theme: PropTypes.string,
-    showHeader: PropTypes.bool,
-    headerTemplate: PropTypes.any,
-    onTextChange: PropTypes.func,
-    onSelectionChange: PropTypes.func,
-    onLoad: PropTypes.func
 }

@@ -11,7 +11,7 @@ interface SliderChangeParams {
 
 interface SliderSlideEndParams extends SliderChangeParams { }
 
-export interface SliderProps {
+export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value'> {
     id?: string;
     value?: SliderValueType;
     min?: number;

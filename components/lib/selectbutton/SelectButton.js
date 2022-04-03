@@ -1,13 +1,10 @@
-import React, { forwardRef, memo, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { SelectButtonItem } from './SelectButtonItem';
-import { tip } from '../tooltip/Tooltip';
-import { ObjectUtils, classNames } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
 
-export const SelectButton = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
-    const tooltipRef = useRef(null);
+export const SelectButton = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
 
     const onOptionClick = (event) => {
         if (props.disabled || isOptionDisabled(event.option)) {
@@ -76,26 +73,6 @@ export const SelectButton = memo(forwardRef((props, ref) => {
         return false;
     }
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
     const createItems = () => {
         if (props.options && props.options.length) {
             return props.options.map((option, index) => {
@@ -113,16 +90,22 @@ export const SelectButton = memo(forwardRef((props, ref) => {
         return null;
     }
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, SelectButton.defaultProps);
     const className = classNames('p-selectbutton p-buttonset p-component', props.className);
     const items = createItems();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} role="group">
-            {items}
-        </div>
+        <>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} role="group">
+                {items}
+            </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+SelectButton.displayName = 'SelectButton';
 SelectButton.defaultProps = {
     __TYPE: 'SelectButton',
     id: null,
@@ -143,26 +126,4 @@ SelectButton.defaultProps = {
     ariaLabelledBy: null,
     itemTemplate: null,
     onChange: null
-}
-
-SelectButton.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.any,
-    options: PropTypes.array,
-    optionLabel: PropTypes.string,
-    optionValue: PropTypes.string,
-    optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    tabIndex: PropTypes.number,
-    multiple: PropTypes.bool,
-    unselectable: PropTypes.bool,
-    disabled: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    dataKey: PropTypes.string,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    itemTemplate: PropTypes.func,
-    onChange: PropTypes.func
 }

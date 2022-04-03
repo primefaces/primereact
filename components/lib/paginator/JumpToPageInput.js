@@ -1,9 +1,8 @@
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { InputNumber } from '../inputnumber/InputNumber';
 import { ObjectUtils } from '../utils/Utils';
 
-export const JumpToPageInput = memo((props) => {
+export const JumpToPageInput = React.memo((props) => {
 
     const onChange = (event) => {
         if (props.onChange) {
@@ -30,6 +29,7 @@ export const JumpToPageInput = memo((props) => {
     return element;
 });
 
+JumpToPageInput.displayName = 'JumpToPageInput';
 JumpToPageInput.defaultProps = {
     __TYPE: 'JumbToPageInput',
     page: null,
@@ -38,14 +38,4 @@ JumpToPageInput.defaultProps = {
     disabled: false,
     template: null,
     onChange: null
-}
-
-JumpToPageInput.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    page: PropTypes.number,
-    rows: PropTypes.number,
-    pageCount: PropTypes.number,
-    disabled: PropTypes.bool,
-    template: PropTypes.any,
-    onChange: PropTypes.func
 }

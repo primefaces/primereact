@@ -1,8 +1,7 @@
-import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const BreadCrumb = memo(forwardRef((props, ref) => {
+export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
 
     const itemClick = (event, item) => {
         if (item.disabled) {
@@ -95,13 +94,14 @@ export const BreadCrumb = memo(forwardRef((props, ref) => {
         return null;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, BreadCrumb.defaultProps);
     const className = classNames('p-breadcrumb p-component', props.className);
     const home = createHome();
     const items = createMenuitems();
     const separator = createSeparator();
 
     return (
-        <nav id={props.id} className={className} style={props.style} aria-label="Breadcrumb">
+        <nav id={props.id} className={className} style={props.style} aria-label="Breadcrumb" {...otherProps}>
             <ul>
                 {home}
                 {separator}
@@ -111,6 +111,7 @@ export const BreadCrumb = memo(forwardRef((props, ref) => {
     )
 }));
 
+BreadCrumb.displayName = 'BreadCrumb';
 BreadCrumb.defaultProps = {
     __TYPE: 'BreadCrumb',
     id: null,
@@ -118,13 +119,4 @@ BreadCrumb.defaultProps = {
     home: null,
     style: null,
     className: null
-}
-
-BreadCrumb.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array,
-    home: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string
 }

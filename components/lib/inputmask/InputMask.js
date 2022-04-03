@@ -1,26 +1,23 @@
-import React, { forwardRef, memo, useCallback, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
-import { tip } from '../tooltip/Tooltip';
-import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
-import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const InputMask = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
-    const tooltipRef = useRef(null);
-    const firstNonMaskPos = useRef(null);
-    const lastRequiredNonMaskPos = useRef(0);
-    const tests = useRef([]);
-    const buffer = useRef([]);
-    const len = useRef(0);
-    const oldVal = useRef(null);
-    const focus = useRef(false);
-    const focusText = useRef(null);
-    const isValueChecked = useRef(null);
-    const partialPosition = useRef(null);
-    const defaultBuffer = useRef(null);
-    const caretTimeoutId = useRef(null);
-    const androidChrome = useRef(false);
+export const InputMask = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
+    const firstNonMaskPos = React.useRef(null);
+    const lastRequiredNonMaskPos = React.useRef(0);
+    const tests = React.useRef([]);
+    const buffer = React.useRef([]);
+    const len = React.useRef(0);
+    const oldVal = React.useRef(null);
+    const focus = React.useRef(false);
+    const focusText = React.useRef(null);
+    const isValueChecked = React.useRef(null);
+    const partialPosition = React.useRef(null);
+    const defaultBuffer = React.useRef(null);
+    const caretTimeoutId = React.useRef(null);
+    const androidChrome = React.useRef(false);
 
     const caret = (first, last) => {
         let range, begin, end;
@@ -69,7 +66,7 @@ export const InputMask = memo(forwardRef((props, ref) => {
         return true;
     }
 
-    const getPlaceholder = useCallback((i) => {
+    const getPlaceholder = React.useCallback((i) => {
         if (i < props.slotChar.length) {
             return props.slotChar.charAt(i);
         }
@@ -388,7 +385,7 @@ export const InputMask = memo(forwardRef((props, ref) => {
         }
     }
 
-    const getUnmaskedValue = useCallback(() => {
+    const getUnmaskedValue = React.useCallback(() => {
         let unmaskedBuffer = [];
         for (let i = 0; i < buffer.current.length; i++) {
             let c = buffer.current[i];
@@ -451,7 +448,7 @@ export const InputMask = memo(forwardRef((props, ref) => {
         return pos;
     }
 
-    const isValueUpdated = useCallback(() => {
+    const isValueUpdated = React.useCallback(() => {
         return props.unmask ?
             (props.value !== getUnmaskedValue()) :
             (defaultBuffer.current !== elementRef.current.value && elementRef.current.value !== props.value);
@@ -507,22 +504,9 @@ export const InputMask = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(elementRef, props.inputRef);
     }, [elementRef, props.inputRef]);
-
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
 
     useMountEffect(() => {
         init();
@@ -541,23 +525,18 @@ export const InputMask = memo(forwardRef((props, ref) => {
         }
     }, [isValueUpdated]);
 
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
+    const otherProps = ObjectUtils.findDiffKeys(props, InputMask.defaultProps);
     const className = classNames('p-inputmask', props.className);
 
     return (
-        <InputText ref={elementRef} id={props.id} type={props.type} name={props.name} style={props.style} className={className} placeholder={props.placeholder}
+        <InputText ref={elementRef} id={props.id} type={props.type} name={props.name} style={props.style} className={className} {...otherProps} placeholder={props.placeholder}
             size={props.size} maxLength={props.maxLength} tabIndex={props.tabIndex} disabled={props.disabled} readOnly={props.readOnly}
-            onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} onKeyPress={onKeyPress}
-            onInput={onInput} onPaste={handleInputChange} required={props.required} aria-labelledby={props.ariaLabelledBy} />
+            onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} onKeyPress={onKeyPress} onInput={onInput} onPaste={handleInputChange}
+            required={props.required} aria-labelledby={props.ariaLabelledBy} tooltip={props.tooltip} tooltipOptions={props.tooltipOptions} />
     )
 }));
 
+InputMask.displayName = 'InputMask';
 InputMask.defaultProps = {
     __TYPE: 'InputMask',
     id: null,
@@ -585,33 +564,4 @@ InputMask.defaultProps = {
     onChange: null,
     onFocus: null,
     onBlur: null
-}
-
-InputMask.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    value: PropTypes.string,
-    type: PropTypes.string,
-    mask: PropTypes.string,
-    slotChar: PropTypes.string,
-    autoClear: PropTypes.bool,
-    unmask: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    placeholder: PropTypes.string,
-    size: PropTypes.number,
-    maxLength: PropTypes.number,
-    tabIndex: PropTypes.number,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    name: PropTypes.string,
-    required: PropTypes.bool,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    onComplete: PropTypes.func,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func
 }

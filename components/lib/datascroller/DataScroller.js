@@ -1,16 +1,15 @@
-import React, { useRef, useState, forwardRef, useImperativeHandle, memo } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { localeOption } from '../api/Api';
+import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect } from '../hooks/Hooks';
 
-export const DataScroller = memo(forwardRef((props, ref) => {
-    const [dataToRenderState, setDataToRenderState] = useState([]);
-    const contentRef = useRef(null);
-    const value = useRef(props.value);
-    const dataToRender = useRef([]);
-    const first = useRef(0);
-    const scrollFunction = useRef(null);
+export const DataScroller = React.memo(React.forwardRef((props, ref) => {
+    const [dataToRenderState, setDataToRenderState] = React.useState([]);
+    const contentRef = React.useRef(null);
+    const value = React.useRef(props.value);
+    const dataToRender = React.useRef([]);
+    const first = React.useRef(0);
+    const scrollFunction = React.useRef(null);
 
     const handleDataChange = () => {
         if (props.lazy) {
@@ -102,7 +101,6 @@ export const DataScroller = memo(forwardRef((props, ref) => {
         if (scrollFunction.current) {
             if (props.inline && contentRef.current) {
                 contentRef.current.removeEventListener('scroll', scrollFunction.current);
-                contentRef.current = null;
             }
             else if (!props.loader) {
                 window.removeEventListener('scroll', scrollFunction.current);
@@ -142,7 +140,7 @@ export const DataScroller = memo(forwardRef((props, ref) => {
         }
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         load,
         reset
     }));
@@ -191,6 +189,7 @@ export const DataScroller = memo(forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, DataScroller.defaultProps);
     const className = classNames('p-datascroller p-component', props.className, {
         'p-datascroller-inline': props.inline
     });
@@ -200,7 +199,7 @@ export const DataScroller = memo(forwardRef((props, ref) => {
     const content = createContent();
 
     return (
-        <div id={props.id} className={className}>
+        <div id={props.id} className={className} {...otherProps}>
             {header}
             {content}
             {footer}
@@ -208,6 +207,7 @@ export const DataScroller = memo(forwardRef((props, ref) => {
     )
 }));
 
+DataScroller.displayName = 'DataScroller';
 DataScroller.defaultProps = {
     __TYPE: 'DataScroller',
     id: null,
@@ -225,23 +225,4 @@ DataScroller.defaultProps = {
     header: null,
     footer: null,
     lazy: false
-}
-
-DataScroller.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.array,
-    rows: PropTypes.number,
-    inline: PropTypes.bool,
-    scrollHeight: PropTypes.string,
-    loader: PropTypes.bool,
-    buffer: PropTypes.number,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    onLazyLoad: PropTypes.func,
-    emptyMessage: PropTypes.any,
-    itemTemplate: PropTypes.func,
-    header: PropTypes.any,
-    footer: PropTypes.any,
-    lazy: PropTypes.bool
 }

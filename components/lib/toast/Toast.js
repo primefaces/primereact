@@ -1,18 +1,17 @@
-import React, { useState, useRef, forwardRef, useImperativeHandle, createRef, memo } from 'react';
-import PropTypes from 'prop-types';
-import PrimeReact from '../api/Api';
-import { ToastMessage } from './ToastMessage';
+import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
+import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { Portal } from '../portal/Portal';
-import { classNames, ZIndexUtils } from '../utils/Utils';
 import { useUnmountEffect } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { classNames, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { ToastMessage } from './ToastMessage';
 
 let messageIdx = 0;
 
-export const Toast = memo(forwardRef((props, ref) => {
-    const [messagesState, setMessagesState] = useState([]);
-    const containerRef = useRef(null);
+export const Toast = React.memo(React.forwardRef((props, ref) => {
+    const [messagesState, setMessagesState] = React.useState([]);
+    const containerRef = React.useRef(null);
 
     const show = (value) => {
         if (value) {
@@ -65,20 +64,21 @@ export const Toast = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(containerRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         show,
         clear
     }));
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, Toast.defaultProps);
         const className = classNames('p-toast p-component p-toast-' + props.position, props.className);
 
         return (
-            <div ref={containerRef} id={props.id} className={className} style={props.style}>
+            <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>
                 <TransitionGroup>
                     {
                         messagesState.map((message) => {
-                            const messageRef = createRef();
+                            const messageRef = React.createRef();
 
                             return (
                                 <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
@@ -95,8 +95,9 @@ export const Toast = memo(forwardRef((props, ref) => {
     const element = createElement();
 
     return <Portal element={element} appendTo={props.appendTo} />
-}))
+}));
 
+Toast.displayName = 'Toast';
 Toast.defaultProps = {
     __TYPE: 'Toast',
     id: null,
@@ -110,19 +111,4 @@ Toast.defaultProps = {
     onRemove: null,
     onShow: null,
     onHide: null
-}
-
-Toast.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    baseZIndex: PropTypes.number,
-    position: PropTypes.string,
-    transitionOptions: PropTypes.object,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    onClick: PropTypes.func,
-    onRemove: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

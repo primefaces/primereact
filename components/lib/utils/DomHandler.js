@@ -24,11 +24,11 @@ export default class DomHandler {
 
     static getBrowserLanguage() {
         return navigator.userLanguage
-          || (navigator.languages && navigator.languages.length && navigator.languages[0])
-          || navigator.language
-          || navigator.browserLanguage
-          || navigator.systemLanguage
-          || 'en';
+            || (navigator.languages && navigator.languages.length && navigator.languages[0])
+            || navigator.language
+            || navigator.browserLanguage
+            || navigator.systemLanguage
+            || 'en';
     }
 
     static getWindowScrollTop() {
@@ -69,7 +69,7 @@ export default class DomHandler {
         return 0;
     }
 
-	static getClientHeight(el, margin) {
+    static getClientHeight(el, margin) {
         if (el) {
             let height = el.clientHeight;
 
@@ -105,7 +105,7 @@ export default class DomHandler {
             w = win.innerWidth || e.clientWidth || g.clientWidth,
             h = win.innerHeight || e.clientHeight || g.clientHeight;
 
-        return {width: w, height: h};
+        return { width: w, height: h };
     }
 
     static getOffset(el) {
@@ -261,7 +261,7 @@ export default class DomHandler {
 
             if (targetOffset.top + targetOuterHeight + elementOuterHeight > viewport.height) {
                 top = targetOffset.top + windowScrollTop - elementOuterHeight;
-                if(top < 0) {
+                if (top < 0) {
                     top = windowScrollTop;
                 }
 
@@ -322,150 +322,152 @@ export default class DomHandler {
     }
 
     static flipfitCollision(element, target, my = 'left top', at = 'left bottom', callback) {
-        const targetOffset = target.getBoundingClientRect();
-        const viewport = this.getViewport();
-        const myArr = my.split(' ');
-        const atArr = at.split(' ');
-        const getPositionValue = (arr, isOffset) => (isOffset ? (+arr.substring(arr.search(/(\+|-)/g)) || 0) : (arr.substring(0, arr.search(/(\+|-)/g)) || arr));
-        const position = {
-            my: {
-                x: getPositionValue(myArr[0]),
-                y: getPositionValue(myArr[1] || myArr[0]),
-                offsetX: getPositionValue(myArr[0], true),
-                offsetY: getPositionValue((myArr[1] || myArr[0]), true)
-            },
-            at: {
-                x: getPositionValue(atArr[0]),
-                y: getPositionValue(atArr[1] || atArr[0]),
-                offsetX: getPositionValue(atArr[0], true),
-                offsetY: getPositionValue((atArr[1] || atArr[0]), true)
-            }
-        };
-        const myOffset = {
-            left: () => {
-                const totalOffset = position.my.offsetX + position.at.offsetX;
-                return totalOffset + targetOffset.left + (position.my.x === 'left' ? 0 : -1 * (position.my.x === 'center' ? this.getOuterWidth(element) / 2 : this.getOuterWidth(element)));
-            },
-            top: () => {
-                const totalOffset = position.my.offsetY + position.at.offsetY;
-                return totalOffset + targetOffset.top + (position.my.y === 'top' ? 0 : -1 * (position.my.y === 'center' ? this.getOuterHeight(element) / 2 : this.getOuterHeight(element)));
-            }
-        };
-        const alignWithAt = {
-            count: {
-                x: 0,
-                y: 0
-            },
-            left: function() {
-                const left = myOffset.left();
-                const scrollLeft = DomHandler.getWindowScrollLeft();
-                element.style.left = (left + scrollLeft) + 'px';
-
-                if (this.count.x === 2) {
-                    element.style.left = scrollLeft + 'px';
-                    this.count.x = 0;
+        if (element && target) {
+            const targetOffset = target.getBoundingClientRect();
+            const viewport = this.getViewport();
+            const myArr = my.split(' ');
+            const atArr = at.split(' ');
+            const getPositionValue = (arr, isOffset) => (isOffset ? (+arr.substring(arr.search(/(\+|-)/g)) || 0) : (arr.substring(0, arr.search(/(\+|-)/g)) || arr));
+            const position = {
+                my: {
+                    x: getPositionValue(myArr[0]),
+                    y: getPositionValue(myArr[1] || myArr[0]),
+                    offsetX: getPositionValue(myArr[0], true),
+                    offsetY: getPositionValue((myArr[1] || myArr[0]), true)
+                },
+                at: {
+                    x: getPositionValue(atArr[0]),
+                    y: getPositionValue(atArr[1] || atArr[0]),
+                    offsetX: getPositionValue(atArr[0], true),
+                    offsetY: getPositionValue((atArr[1] || atArr[0]), true)
                 }
-                else if (left < 0) {
-                    this.count.x++;
-                    position.my.x = 'left';
-                    position.at.x = 'right';
-                    position.my.offsetX *= -1;
-                    position.at.offsetX *= -1;
-
-                    this.right();
+            };
+            const myOffset = {
+                left: () => {
+                    const totalOffset = position.my.offsetX + position.at.offsetX;
+                    return totalOffset + targetOffset.left + (position.my.x === 'left' ? 0 : -1 * (position.my.x === 'center' ? this.getOuterWidth(element) / 2 : this.getOuterWidth(element)));
+                },
+                top: () => {
+                    const totalOffset = position.my.offsetY + position.at.offsetY;
+                    return totalOffset + targetOffset.top + (position.my.y === 'top' ? 0 : -1 * (position.my.y === 'center' ? this.getOuterHeight(element) / 2 : this.getOuterHeight(element)));
                 }
-            },
-            right: function() {
-                const left = myOffset.left() + DomHandler.getOuterWidth(target);
-                const scrollLeft = DomHandler.getWindowScrollLeft();
-                element.style.left = (left + scrollLeft) + 'px';
+            };
+            const alignWithAt = {
+                count: {
+                    x: 0,
+                    y: 0
+                },
+                left: function () {
+                    const left = myOffset.left();
+                    const scrollLeft = DomHandler.getWindowScrollLeft();
+                    element.style.left = (left + scrollLeft) + 'px';
 
-                if (this.count.x === 2) {
-                    element.style.left = (viewport.width - DomHandler.getOuterWidth(element) + scrollLeft) + 'px';
-                    this.count.x = 0;
-                }
-                else if (left + DomHandler.getOuterWidth(element) > viewport.width) {
-                    this.count.x++;
-
-                    position.my.x = 'right';
-                    position.at.x = 'left';
-                    position.my.offsetX *= -1;
-                    position.at.offsetX *= -1;
-
-                    this.left();
-                }
-            },
-            top: function() {
-                const top = myOffset.top();
-                const scrollTop = DomHandler.getWindowScrollTop();
-                element.style.top = (top + scrollTop) + 'px';
-
-                if (this.count.y === 2) {
-                    element.style.left = scrollTop + 'px';
-                    this.count.y = 0;
-                }
-                else if (top < 0) {
-                    this.count.y++;
-
-                    position.my.y = 'top';
-                    position.at.y = 'bottom';
-                    position.my.offsetY *= -1;
-                    position.at.offsetY *= -1;
-
-                    this.bottom();
-                }
-            },
-            bottom: function() {
-                const top = myOffset.top() + DomHandler.getOuterHeight(target);
-                const scrollTop = DomHandler.getWindowScrollTop();
-                element.style.top = (top + scrollTop) + 'px';
-
-                if (this.count.y === 2) {
-                    element.style.left = (viewport.height - DomHandler.getOuterHeight(element) + scrollTop) + 'px';
-                    this.count.y = 0;
-                }
-                else if (top + DomHandler.getOuterHeight(target) > viewport.height) {
-                    this.count.y++;
-
-                    position.my.y = 'bottom';
-                    position.at.y = 'top';
-                    position.my.offsetY *= -1;
-                    position.at.offsetY *= -1;
-
-                    this.top();
-                }
-            },
-            center: function(axis) {
-                if (axis === 'y') {
-                    const top = myOffset.top() + (DomHandler.getOuterHeight(target) / 2);
-                    element.style.top = (top + DomHandler.getWindowScrollTop()) + 'px';
-
-                    if (top < 0) {
-                        this.bottom();
+                    if (this.count.x === 2) {
+                        element.style.left = scrollLeft + 'px';
+                        this.count.x = 0;
                     }
-                    else if (top + DomHandler.getOuterHeight(target) > viewport.height) {
-                        this.top();
-                    }
-                }
-                else {
-                    const left = myOffset.left() + (DomHandler.getOuterWidth(target) / 2);
-                    element.style.left = (left + DomHandler.getWindowScrollLeft()) + 'px';
+                    else if (left < 0) {
+                        this.count.x++;
+                        position.my.x = 'left';
+                        position.at.x = 'right';
+                        position.my.offsetX *= -1;
+                        position.at.offsetX *= -1;
 
-                    if (left < 0) {
-                        this.left();
-                    }
-                    else if (left + DomHandler.getOuterWidth(element) > viewport.width) {
                         this.right();
                     }
+                },
+                right: function () {
+                    const left = myOffset.left() + DomHandler.getOuterWidth(target);
+                    const scrollLeft = DomHandler.getWindowScrollLeft();
+                    element.style.left = (left + scrollLeft) + 'px';
+
+                    if (this.count.x === 2) {
+                        element.style.left = (viewport.width - DomHandler.getOuterWidth(element) + scrollLeft) + 'px';
+                        this.count.x = 0;
+                    }
+                    else if (left + DomHandler.getOuterWidth(element) > viewport.width) {
+                        this.count.x++;
+
+                        position.my.x = 'right';
+                        position.at.x = 'left';
+                        position.my.offsetX *= -1;
+                        position.at.offsetX *= -1;
+
+                        this.left();
+                    }
+                },
+                top: function () {
+                    const top = myOffset.top();
+                    const scrollTop = DomHandler.getWindowScrollTop();
+                    element.style.top = (top + scrollTop) + 'px';
+
+                    if (this.count.y === 2) {
+                        element.style.left = scrollTop + 'px';
+                        this.count.y = 0;
+                    }
+                    else if (top < 0) {
+                        this.count.y++;
+
+                        position.my.y = 'top';
+                        position.at.y = 'bottom';
+                        position.my.offsetY *= -1;
+                        position.at.offsetY *= -1;
+
+                        this.bottom();
+                    }
+                },
+                bottom: function () {
+                    const top = myOffset.top() + DomHandler.getOuterHeight(target);
+                    const scrollTop = DomHandler.getWindowScrollTop();
+                    element.style.top = (top + scrollTop) + 'px';
+
+                    if (this.count.y === 2) {
+                        element.style.left = (viewport.height - DomHandler.getOuterHeight(element) + scrollTop) + 'px';
+                        this.count.y = 0;
+                    }
+                    else if (top + DomHandler.getOuterHeight(target) > viewport.height) {
+                        this.count.y++;
+
+                        position.my.y = 'bottom';
+                        position.at.y = 'top';
+                        position.my.offsetY *= -1;
+                        position.at.offsetY *= -1;
+
+                        this.top();
+                    }
+                },
+                center: function (axis) {
+                    if (axis === 'y') {
+                        const top = myOffset.top() + (DomHandler.getOuterHeight(target) / 2);
+                        element.style.top = (top + DomHandler.getWindowScrollTop()) + 'px';
+
+                        if (top < 0) {
+                            this.bottom();
+                        }
+                        else if (top + DomHandler.getOuterHeight(target) > viewport.height) {
+                            this.top();
+                        }
+                    }
+                    else {
+                        const left = myOffset.left() + (DomHandler.getOuterWidth(target) / 2);
+                        element.style.left = (left + DomHandler.getWindowScrollLeft()) + 'px';
+
+                        if (left < 0) {
+                            this.left();
+                        }
+                        else if (left + DomHandler.getOuterWidth(element) > viewport.width) {
+                            this.right();
+                        }
+                    }
                 }
+            };
+
+            alignWithAt[position.at.x]('x');
+            alignWithAt[position.at.y]('y');
+
+            if (this.isFunction(callback)) {
+                callback(position);
             }
-        };
-
-        alignWithAt[position.at.x]('x');
-        alignWithAt[position.at.y]('y');
-
-        if (this.isFunction(callback)) {
-            callback(position);
         }
     }
 
@@ -628,7 +630,7 @@ export default class DomHandler {
     static appendChild(element, target) {
         if (this.isElement(target))
             target.appendChild(element);
-        else if(target.el && target.el.nativeElement)
+        else if (target.el && target.el.nativeElement)
             target.el.nativeElement.appendChild(element);
         else
             throw new Error('Cannot append ' + target + ' to ' + element);
@@ -670,17 +672,17 @@ export default class DomHandler {
     }
 
     static clearSelection() {
-        if(window.getSelection) {
-            if(window.getSelection().empty) {
+        if (window.getSelection) {
+            if (window.getSelection().empty) {
                 window.getSelection().empty();
-            } else if(window.getSelection().removeAllRanges && window.getSelection().rangeCount > 0 && window.getSelection().getRangeAt(0).getClientRects().length > 0) {
+            } else if (window.getSelection().removeAllRanges && window.getSelection().rangeCount > 0 && window.getSelection().getRangeAt(0).getClientRects().length > 0) {
                 window.getSelection().removeAllRanges();
             }
         }
-        else if(document['selection'] && document['selection'].empty) {
+        else if (document['selection'] && document['selection'].empty) {
             try {
                 document['selection'].empty();
-            } catch(error) {
+            } catch (error) {
                 //ignore IE bug
             }
         }
@@ -692,7 +694,7 @@ export default class DomHandler {
             return (el.offsetWidth - el.clientWidth - parseFloat(style.borderLeftWidth) - parseFloat(style.borderRightWidth));
         }
         else {
-            if(this.calculatedScrollbarWidth != null)
+            if (this.calculatedScrollbarWidth != null)
                 return this.calculatedScrollbarWidth;
 
             let scrollDiv = document.createElement("div");
@@ -709,7 +711,7 @@ export default class DomHandler {
     }
 
     static getBrowser() {
-        if(!this.browser) {
+        if (!this.browser) {
             let matched = this.resolveUserAgent();
             this.browser = {};
 
@@ -748,7 +750,7 @@ export default class DomHandler {
     }
 
     static isExist(element) {
-        return element !== null && typeof(element) !== 'undefined' && element.nodeName && element.parentNode;
+        return element !== null && typeof (element) !== 'undefined' && element.nodeName && element.parentNode;
     }
 
     static hasDOM() {
@@ -836,9 +838,9 @@ export default class DomHandler {
         const parentNode = element.parentElement && element.parentElement.nodeName;
 
         return (targetNode === 'INPUT' || targetNode === 'TEXTAREA' || targetNode === 'BUTTON' || targetNode === 'A' ||
-                parentNode === 'INPUT'|| parentNode === 'TEXTAREA' || parentNode === 'BUTTON' || parentNode === 'A' ||
-                this.hasClass(element, 'p-button') || this.hasClass(element.parentElement, 'p-button') ||
-                this.hasClass(element.parentElement, 'p-checkbox') || this.hasClass(element.parentElement, 'p-radiobutton')
+            parentNode === 'INPUT' || parentNode === 'TEXTAREA' || parentNode === 'BUTTON' || parentNode === 'A' ||
+            this.hasClass(element, 'p-button') || this.hasClass(element.parentElement, 'p-button') ||
+            this.hasClass(element.parentElement, 'p-checkbox') || this.hasClass(element.parentElement, 'p-radiobutton')
         );
     }
 

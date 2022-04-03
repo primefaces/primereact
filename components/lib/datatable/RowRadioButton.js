@@ -1,9 +1,9 @@
-import React, { memo, useRef, useState } from 'react';
+import * as React from 'react';
 import { classNames } from '../utils/Utils';
 
-export const RowRadioButton = memo((props) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const inputRef = useRef(null);
+export const RowRadioButton = React.memo((props) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const inputRef = React.useRef(null);
 
     const onFocus = () => {
         setFocusedState(true);
@@ -48,3 +48,5 @@ export const RowRadioButton = memo((props) => {
         </div>
     )
 });
+
+RowRadioButton.displayName = 'RowRadioButton';

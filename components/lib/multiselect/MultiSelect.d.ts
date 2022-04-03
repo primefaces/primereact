@@ -65,7 +65,7 @@ interface MultiSelectAllParams {
     checked: boolean;
 }
 
-export interface MultiSelectProps {
+export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
     id?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
     name?: string;

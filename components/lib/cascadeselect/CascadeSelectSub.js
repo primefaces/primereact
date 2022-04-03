@@ -1,11 +1,11 @@
-import React, { memo, useRef, useState } from 'react';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 
-export const CascadeSelectSub = memo((props) => {
-    const [activeOptionState, setActiveOptionState] = useState(null);
-    const elementRef = useRef(null);
+export const CascadeSelectSub = React.memo((props) => {
+    const [activeOptionState, setActiveOptionState] = React.useState(null);
+    const elementRef = React.useRef(null);
 
     const position = () => {
         const parentItem = elementRef.current.parentElement;

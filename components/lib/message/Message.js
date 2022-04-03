@@ -1,8 +1,7 @@
-import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Message = memo(forwardRef((props, ref) => {
+export const Message = React.memo(React.forwardRef((props, ref) => {
 
     const createContent = () => {
         if (props.content) {
@@ -25,6 +24,7 @@ export const Message = memo(forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Message.defaultProps);
     const className = classNames('p-inline-message p-component', {
         'p-inline-message-info': props.severity === 'info',
         'p-inline-message-warn': props.severity === 'warn',
@@ -35,12 +35,13 @@ export const Message = memo(forwardRef((props, ref) => {
     const content = createContent();
 
     return (
-        <div id={props.id} aria-live="polite" className={className} style={props.style} role="alert">
+        <div id={props.id} className={className} style={props.style} {...otherProps} role="alert" aria-live="polite">
             {content}
         </div>
     )
 }));
 
+Message.displayName = 'Message';
 Message.defaultProps = {
     __TYPE: 'Message',
     id: null,
@@ -50,13 +51,3 @@ Message.defaultProps = {
     severity: 'info',
     content: null
 }
-
-Message.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    text: PropTypes.any,
-    severity: PropTypes.string,
-    content: PropTypes.any
-};

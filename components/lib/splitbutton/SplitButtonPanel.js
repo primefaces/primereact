@@ -1,9 +1,9 @@
-import React, { forwardRef } from 'react';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames } from '../utils/Utils';
 
-export const SplitButtonPanel = forwardRef((props, ref) => {
+export const SplitButtonPanel = React.forwardRef((props, ref) => {
 
     const createElement = () => {
         const className = classNames('p-menu p-menu-overlay p-component', props.menuClassName);
@@ -24,3 +24,5 @@ export const SplitButtonPanel = forwardRef((props, ref) => {
 
     return <Portal element={element} appendTo={props.appendTo} />
 });
+
+SplitButtonPanel.displayName = 'SplitButtonPanel';

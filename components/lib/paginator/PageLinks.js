@@ -1,9 +1,8 @@
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const PageLinks = memo((props) => {
+export const PageLinks = React.memo((props) => {
 
     const onPageLinkClick = (event, pageLink) => {
         if (props.onClick) {
@@ -65,6 +64,7 @@ export const PageLinks = memo((props) => {
     return <span className="p-paginator-pages">{elements}</span>
 });
 
+PageLinks.displayName = 'PageLinks';
 PageLinks.defaultProps = {
     __TYPE: 'PageLinks',
     value: null,
@@ -73,14 +73,4 @@ PageLinks.defaultProps = {
     pageCount: null,
     links: null,
     template: null
-}
-
-PageLinks.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    value: PropTypes.array,
-    page: PropTypes.number,
-    rows: PropTypes.number,
-    pageCount: PropTypes.number,
-    onClick: PropTypes.func,
-    template: PropTypes.any
 }

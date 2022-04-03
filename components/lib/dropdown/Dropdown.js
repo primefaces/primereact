@@ -1,24 +1,22 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
-import { DropdownPanel } from './DropdownPanel';
-import { tip } from '../tooltip/Tooltip';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DropdownPanel } from './DropdownPanel';
 
-export const Dropdown = memo(forwardRef((props, ref) => {
-    const [filterState, setFilterState] = useState('');
-    const [focusedState, setFocusedState] = useState(false);
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const elementRef = useRef(null);
-    const overlayRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const tooltipRef = useRef(null);
-    const focusInputRef = useRef(null);
-    const searchTimeout = useRef(null);
-    const searchValue = useRef(null);
-    const currentSearchChar = useRef(null);
+export const Dropdown = React.memo(React.forwardRef((props, ref) => {
+    const [filterState, setFilterState] = React.useState('');
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
+    const focusInputRef = React.useRef(null);
+    const searchTimeout = React.useRef(null);
+    const searchValue = React.useRef(null);
+    const currentSearchChar = React.useRef(null);
     const isLazy = props.virtualScrollerOptions && props.virtualScrollerOptions.lazy;
     const hasFilter = ObjectUtils.isNotEmpty(filterState);
     const appendTo = props.appendTo || PrimeReact.appendTo;
@@ -550,22 +548,9 @@ export const Dropdown = memo(forwardRef((props, ref) => {
         return index !== -1 ? (props.optionGroupLabel ? getOptionGroupChildren(visibleOptions[index.group])[index.option] : visibleOptions[index]) : null;
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
-
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
 
     useMountEffect(() => {
         if (props.autoFocus && focusInputRef.current) {
@@ -598,11 +583,6 @@ export const Dropdown = memo(forwardRef((props, ref) => {
 
     useUnmountEffect(() => {
         ZIndexUtils.clear(overlayRef.current);
-
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
     });
 
     const createHiddenSelect = () => {
@@ -674,6 +654,8 @@ export const Dropdown = memo(forwardRef((props, ref) => {
     const visibleOptions = getVisibleOptions();
     const selectedOption = getSelectedOption();
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, Dropdown.defaultProps);
     const className = classNames('p-dropdown p-component p-inputwrapper', {
         'p-disabled': props.disabled,
         'p-focus': focusedState,
@@ -688,23 +670,27 @@ export const Dropdown = memo(forwardRef((props, ref) => {
     const clearIcon = createClearIcon();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}
-            onMouseDown={props.onMouseDown} onContextMenu={props.onContextMenu}>
-            {keyboardHelper}
-            {hiddenSelect}
-            {labelElement}
-            {clearIcon}
-            {dropdownIcon}
-            <DropdownPanel ref={overlayRef} visibleOptions={visibleOptions} {...props} appendTo={appendTo} onClick={onPanelClick} onOptionClick={onOptionClick}
-                filterValue={filterState} hasFilter={hasFilter} onFilterClearIconClick={onFilterClearIconClick} onFilterInputKeyDown={onFilterInputKeyDown} onFilterInputChange={onFilterInputChange}
-                getOptionLabel={getOptionLabel} getOptionRenderKey={getOptionRenderKey} isOptionDisabled={isOptionDisabled}
-                getOptionGroupChildren={getOptionGroupChildren} getOptionGroupLabel={getOptionGroupLabel} getOptionGroupRenderKey={getOptionGroupRenderKey}
-                isSelected={isSelected} getSelectedOptionIndex={getSelectedOptionIndex}
-                in={overlayVisibleState} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited} />
-        </div>
+        <>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}
+                onMouseDown={props.onMouseDown} onContextMenu={props.onContextMenu}>
+                {keyboardHelper}
+                {hiddenSelect}
+                {labelElement}
+                {clearIcon}
+                {dropdownIcon}
+                <DropdownPanel ref={overlayRef} visibleOptions={visibleOptions} {...props} appendTo={appendTo} onClick={onPanelClick} onOptionClick={onOptionClick}
+                    filterValue={filterState} hasFilter={hasFilter} onFilterClearIconClick={onFilterClearIconClick} onFilterInputKeyDown={onFilterInputKeyDown} onFilterInputChange={onFilterInputChange}
+                    getOptionLabel={getOptionLabel} getOptionRenderKey={getOptionRenderKey} isOptionDisabled={isOptionDisabled}
+                    getOptionGroupChildren={getOptionGroupChildren} getOptionGroupLabel={getOptionGroupLabel} getOptionGroupRenderKey={getOptionGroupRenderKey}
+                    isSelected={isSelected} getSelectedOptionIndex={getSelectedOptionIndex}
+                    in={overlayVisibleState} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited} />
+            </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+Dropdown.displayName = 'Dropdown';
 Dropdown.defaultProps = {
     __TYPE: 'Dropdown',
     id: null,
@@ -762,63 +748,4 @@ Dropdown.defaultProps = {
     onShow: null,
     onHide: null,
     onFilter: null
-}
-
-Dropdown.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    name: PropTypes.string,
-    value: PropTypes.any,
-    options: PropTypes.array,
-    optionLabel: PropTypes.string,
-    optionValue: PropTypes.string,
-    optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    optionGroupLabel: PropTypes.string,
-    optionGroupChildren: PropTypes.string,
-    optionGroupTemplate: PropTypes.any,
-    valueTemplate: PropTypes.any,
-    itemTemplate: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    virtualScrollerOptions: PropTypes.object,
-    scrollHeight: PropTypes.string,
-    filter: PropTypes.bool,
-    filterBy: PropTypes.string,
-    filterMatchMode: PropTypes.string,
-    filterPlaceholder: PropTypes.string,
-    filterLocale: PropTypes.string,
-    emptyMessage: PropTypes.any,
-    emptyFilterMessage: PropTypes.any,
-    editable: PropTypes.bool,
-    placeholder: PropTypes.string,
-    required: PropTypes.bool,
-    disabled: PropTypes.bool,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    tabIndex: PropTypes.number,
-    autoFocus: PropTypes.bool,
-    filterInputAutoFocus: PropTypes.bool,
-    resetFilterOnHide: PropTypes.bool,
-    showFilterClear: PropTypes.bool,
-    panelClassName: PropTypes.string,
-    panelStyle: PropTypes.object,
-    dataKey: PropTypes.string,
-    inputId: PropTypes.string,
-    showClear: PropTypes.bool,
-    maxLength: PropTypes.number,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabel: PropTypes.string,
-    ariaLabelledBy: PropTypes.string,
-    transitionOptions: PropTypes.object,
-    dropdownIcon: PropTypes.string,
-    showOnFocus: PropTypes.bool,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onMouseDown: PropTypes.func,
-    onContextMenu: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func,
-    onFilter: PropTypes.func
 }

@@ -1,25 +1,24 @@
-import React, { forwardRef, memo, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import { ObjectUtils, classNames } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, usePrevious } from '../hooks/Hooks';
+import * as React from 'react';
+import { useMountEffect, usePrevious, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const VirtualScroller = memo(forwardRef((props, ref) => {
+export const VirtualScroller = React.memo(React.forwardRef((props, ref) => {
     const vertical = props.orientation === 'vertical';
     const horizontal = props.orientation === 'horizontal';
     const both = props.orientation === 'both';
 
-    const [firstState, setFirstState] = useState(both ? { rows: 0, cols: 0 } : 0);
-    const [lastState, setLastState] = useState(both ? { rows: 0, cols: 0 } : 0);
-    const [numItemsInViewportState, setNumItemsInViewportState] = useState(both ? { rows: 0, cols: 0 } : 0);
-    const [numToleratedItemsState, setNumToleratedItemsState] = useState(props.numToleratedItems);
-    const [loadingState, setLoadingState] = useState(props.loading);
-    const [loaderArrState, setLoaderArrState] = useState([]);
-    const elementRef = useRef(null);
-    const contentRef = useRef(null);
-    const spacerRef = useRef(null);
-    const stickyRef = useRef(null);
-    const lastScrollPos = useRef(both ? { top: 0, left: 0 } : 0);
-    const scrollTimeout = useRef(null);
+    const [firstState, setFirstState] = React.useState(both ? { rows: 0, cols: 0 } : 0);
+    const [lastState, setLastState] = React.useState(both ? { rows: 0, cols: 0 } : 0);
+    const [numItemsInViewportState, setNumItemsInViewportState] = React.useState(both ? { rows: 0, cols: 0 } : 0);
+    const [numToleratedItemsState, setNumToleratedItemsState] = React.useState(props.numToleratedItems);
+    const [loadingState, setLoadingState] = React.useState(props.loading);
+    const [loaderArrState, setLoaderArrState] = React.useState([]);
+    const elementRef = React.useRef(null);
+    const contentRef = React.useRef(null);
+    const spacerRef = React.useRef(null);
+    const stickyRef = React.useRef(null);
+    const lastScrollPos = React.useRef(both ? { top: 0, left: 0 } : 0);
+    const scrollTimeout = React.useRef(null);
     const prevItems = usePrevious(props.items);
     const prevLoading = usePrevious(props.loading);
 
@@ -458,7 +457,7 @@ export const VirtualScroller = memo(forwardRef((props, ref) => {
         lastScrollPos.current = both ? { top: 0, left: 0 } : 0;
     }, [props.orientation]);
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         scrollTo,
         scrollToIndex,
         scrollInView,
@@ -573,6 +572,7 @@ export const VirtualScroller = memo(forwardRef((props, ref) => {
         )
     }
     else {
+        const otherProps = ObjectUtils.findDiffKeys(props, VirtualScroller.defaultProps);
         const className = classNames('p-virtualscroller', {
             'p-both-scroll': both,
             'p-horizontal-scroll': horizontal
@@ -583,7 +583,7 @@ export const VirtualScroller = memo(forwardRef((props, ref) => {
         const spacer = createSpacer();
 
         return (
-            <div ref={elementRef} className={className} tabIndex={0} style={props.style} onScroll={onScroll}>
+            <div ref={elementRef} className={className} tabIndex={0} style={props.style} {...otherProps} onScroll={onScroll}>
                 {content}
                 {spacer}
                 {loader}
@@ -592,6 +592,7 @@ export const VirtualScroller = memo(forwardRef((props, ref) => {
     }
 }));
 
+VirtualScroller.displayName = 'VirtualScroller';
 VirtualScroller.defaultProps = {
     __TYPE: 'VirtualScroller',
     id: null,
@@ -617,31 +618,4 @@ VirtualScroller.defaultProps = {
     onScroll: null,
     onScrollIndexChange: null,
     onLazyLoad: null
-}
-
-VirtualScroller.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    items: PropTypes.any,
-    itemSize: PropTypes.oneOfType([PropTypes.number, PropTypes.array]).isRequired,
-    scrollHeight: PropTypes.string,
-    scrollWidth: PropTypes.string,
-    orientation: PropTypes.string,
-    numToleratedItems: PropTypes.number,
-    delay: PropTypes.number,
-    lazy: PropTypes.bool,
-    disabled: PropTypes.bool,
-    loaderDisabled: PropTypes.bool,
-    columns: PropTypes.any,
-    loading: PropTypes.bool,
-    showSpacer: PropTypes.bool,
-    showLoader: PropTypes.bool,
-    loadingTemplate: PropTypes.any,
-    itemTemplate: PropTypes.any,
-    contentTemplate: PropTypes.any,
-    onScroll: PropTypes.func,
-    onScrollIndexChange: PropTypes.func,
-    onLazyLoad: PropTypes.func
 }

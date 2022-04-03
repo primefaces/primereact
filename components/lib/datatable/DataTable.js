@@ -1,48 +1,47 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import PrimeReact, { FilterService, FilterOperator, FilterMatchMode } from '../api/Api';
+import * as React from 'react';
+import PrimeReact, { FilterMatchMode, FilterOperator, FilterService } from '../api/Api';
+import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { Paginator } from '../paginator/Paginator';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
-import { Paginator } from '../paginator/Paginator';
-import { VirtualScroller } from '../virtualscroller/VirtualScroller';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
-import { useEventListener, useMountEffect, useUpdateEffect, useUnmountEffect } from '../hooks/Hooks';
 
-export const DataTable = forwardRef((props, ref) => {
-    const [firstState, setFirstState] = useState(props.first);
-    const [rowsState, setRowsState] = useState(props.rows);
-    const [sortFieldState, setSortFieldState] = useState(props.sortField);
-    const [sortOrderState, setSortOrderState] = useState(props.sortOrder);
-    const [multiSortMetaState, setMultiSortMetaState] = useState(props.multiSortMeta);
-    const [filtersState, setFiltersState] = useState(props.filters);
-    const [columnOrderState, setColumnOrderState] = useState([]);
-    const [groupRowsSortMetaState, setGroupRowsSortMetaState] = useState(null);
-    const [editingMetaState, setEditingMetaState] = useState({});
-    const [attributeSelectorState, setAttributeSelectorState] = useState(null);
-    const [d_rowsState, setD_rowsState] = useState(props.rows);
-    const [d_filtersState, setD_filtersState] = useState({});
-    const elementRef = useRef(null);
-    const tableRef = useRef(null);
-    const wrapperRef = useRef(null);
-    const reorderIndicatorUpRef = useRef(null);
-    const reorderIndicatorDownRef = useRef(null);
-    const resizeHelperRef = useRef(null);
-    const draggedColumnElement = useRef(null);
-    const draggedColumn = useRef(null);
-    const dropPosition = useRef(null);
-    const styleElement = useRef(null);
-    const responsiveStyleElement = useRef(null);
-    const columnWidthsState = useRef(null);
-    const tableWidthState = useRef(null);
-    const resizeColumn = useRef(null);
-    const resizeColumnElement = useRef(null);
-    const columnResizing = useRef(false);
-    const lastResizeHelperX = useRef(null);
-    const columnSortable = useRef(false);
-    const columnSortFunction = useRef(null);
-    const columnField = useRef(null);
-    const filterTimeout = useRef(null);
+export const DataTable = React.forwardRef((props, ref) => {
+    const [firstState, setFirstState] = React.useState(props.first);
+    const [rowsState, setRowsState] = React.useState(props.rows);
+    const [sortFieldState, setSortFieldState] = React.useState(props.sortField);
+    const [sortOrderState, setSortOrderState] = React.useState(props.sortOrder);
+    const [multiSortMetaState, setMultiSortMetaState] = React.useState(props.multiSortMeta);
+    const [filtersState, setFiltersState] = React.useState(props.filters);
+    const [columnOrderState, setColumnOrderState] = React.useState([]);
+    const [groupRowsSortMetaState, setGroupRowsSortMetaState] = React.useState(null);
+    const [editingMetaState, setEditingMetaState] = React.useState({});
+    const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
+    const [d_rowsState, setD_rowsState] = React.useState(props.rows);
+    const [d_filtersState, setD_filtersState] = React.useState({});
+    const elementRef = React.useRef(null);
+    const tableRef = React.useRef(null);
+    const wrapperRef = React.useRef(null);
+    const reorderIndicatorUpRef = React.useRef(null);
+    const reorderIndicatorDownRef = React.useRef(null);
+    const resizeHelperRef = React.useRef(null);
+    const draggedColumnElement = React.useRef(null);
+    const draggedColumn = React.useRef(null);
+    const dropPosition = React.useRef(null);
+    const styleElement = React.useRef(null);
+    const responsiveStyleElement = React.useRef(null);
+    const columnWidthsState = React.useRef(null);
+    const tableWidthState = React.useRef(null);
+    const resizeColumn = React.useRef(null);
+    const resizeColumnElement = React.useRef(null);
+    const columnResizing = React.useRef(false);
+    const lastResizeHelperX = React.useRef(null);
+    const columnSortable = React.useRef(false);
+    const columnSortFunction = React.useRef(null);
+    const columnField = React.useRef(null);
+    const filterTimeout = React.useRef(null);
 
     if (props.rows !== d_rowsState && !props.onPage) {
         setRowsState(props.rows);
@@ -1303,7 +1302,7 @@ export const DataTable = forwardRef((props, ref) => {
         destroyResponsiveStyle();
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         reset,
         resetScroll,
         exportCSV,
@@ -1516,6 +1515,7 @@ export const DataTable = forwardRef((props, ref) => {
     const empty = ObjectUtils.isEmpty(data);
     const selectionModeInColumn = getSelectionModeInColumn(columns);
     const selectable = props.selectionMode || selectionModeInColumn;
+    const otherProps = ObjectUtils.findDiffKeys(props, DataTable.defaultProps);
     const className = classNames('p-datatable p-component', {
         'p-datatable-hoverable-rows': props.rowHover,
         'p-datatable-selectable': selectable && !props.cellSelection,
@@ -1548,7 +1548,7 @@ export const DataTable = forwardRef((props, ref) => {
     const reorderIndicators = createReorderIndicators();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-datatable-wrapper">
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} data-scrollselectors=".p-datatable-wrapper">
             {loader}
             {header}
             {paginatorTop}
@@ -1561,6 +1561,7 @@ export const DataTable = forwardRef((props, ref) => {
     )
 });
 
+DataTable.displayName = 'DataTable';
 DataTable.defaultProps = {
     __TYPE: 'DataTable',
     id: null,
@@ -1689,134 +1690,4 @@ DataTable.defaultProps = {
     customRestoreState: null,
     onStateSave: null,
     onStateRestore: null
-}
-
-DataTable.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.array,
-    header: PropTypes.any,
-    footer: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    tableStyle: PropTypes.any,
-    tableClassName: PropTypes.string,
-    paginator: PropTypes.bool,
-    paginatorPosition: PropTypes.string,
-    alwaysShowPaginator: PropTypes.bool,
-    paginatorClassName: PropTypes.string,
-    paginatorTemplate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    paginatorLeft: PropTypes.any,
-    paginatorRight: PropTypes.any,
-    paginatorDropdownAppendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    pageLinkSize: PropTypes.number,
-    rowsPerPageOptions: PropTypes.array,
-    currentPageReportTemplate: PropTypes.string,
-    first: PropTypes.number,
-    rows: PropTypes.number,
-    totalRecords: PropTypes.number,
-    lazy: PropTypes.bool,
-    sortField: PropTypes.string,
-    sortOrder: PropTypes.number,
-    multiSortMeta: PropTypes.array,
-    sortMode: PropTypes.string,
-    defaultSortOrder: PropTypes.number,
-    removableSort: PropTypes.bool,
-    emptyMessage: PropTypes.any,
-    selectionMode: PropTypes.string,
-    dragSelection: PropTypes.bool,
-    cellSelection: PropTypes.bool,
-    selection: PropTypes.any,
-    onSelectionChange: PropTypes.func,
-    contextMenuSelection: PropTypes.object,
-    onContextMenuSelectionChange: PropTypes.func,
-    compareSelectionBy: PropTypes.string,
-    dataKey: PropTypes.string,
-    metaKeySelection: PropTypes.bool,
-    selectOnEdit: PropTypes.bool,
-    selectionPageOnly: PropTypes.bool,
-    selectionAutoFocus: PropTypes.bool,
-    showSelectAll: PropTypes.bool,
-    selectAll: PropTypes.bool,
-    onSelectAllChange: PropTypes.func,
-    headerColumnGroup: PropTypes.any,
-    footerColumnGroup: PropTypes.any,
-    rowExpansionTemplate: PropTypes.func,
-    expandedRows: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-    onRowToggle: PropTypes.func,
-    resizableColumns: PropTypes.bool,
-    columnResizeMode: PropTypes.string,
-    reorderableColumns: PropTypes.bool,
-    filters: PropTypes.object,
-    globalFilter: PropTypes.any,
-    filterDelay: PropTypes.number,
-    filterLocale: PropTypes.string,
-    scrollable: PropTypes.bool,
-    scrollHeight: PropTypes.string,
-    scrollDirection: PropTypes.string,
-    virtualScrollerOptions: PropTypes.object,
-    frozenWidth: PropTypes.string,
-    frozenValue: PropTypes.array,
-    csvSeparator: PropTypes.string,
-    exportFilename: PropTypes.string,
-    rowGroupMode: PropTypes.string,
-    autoLayout: PropTypes.bool,
-    rowClassName: PropTypes.func,
-    cellClassName: PropTypes.func,
-    rowGroupHeaderTemplate: PropTypes.func,
-    rowGroupFooterTemplate: PropTypes.func,
-    loading: PropTypes.bool,
-    loadingIcon: PropTypes.string,
-    tabIndex: PropTypes.number,
-    stateKey: PropTypes.string,
-    stateStorage: PropTypes.string,
-    groupRowsBy: PropTypes.string,
-    editMode: PropTypes.string,
-    editingRows: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-    expandableRowGroups: PropTypes.bool,
-    rowHover: PropTypes.bool,
-    showGridlines: PropTypes.bool,
-    stripedRows: PropTypes.bool,
-    size: PropTypes.string,
-    responsiveLayout: PropTypes.string,
-    breakpoint: PropTypes.string,
-    filterDisplay: PropTypes.string,
-    expandedRowIcon: PropTypes.string,
-    collapsedRowIcon: PropTypes.string,
-    globalFilterFields: PropTypes.array,
-    onRowEditComplete: PropTypes.func,
-    showSelectionElement: PropTypes.func,
-    showRowReorderElement: PropTypes.func,
-    isDataSelectable: PropTypes.func,
-    onColumnResizeEnd: PropTypes.func,
-    onColumnResizerClick: PropTypes.func,
-    onColumnResizerDoubleClick: PropTypes.func,
-    onSort: PropTypes.func,
-    onPage: PropTypes.func,
-    onFilter: PropTypes.func,
-    onAllRowsSelect: PropTypes.func,
-    onAllRowsUnselect: PropTypes.func,
-    onRowClick: PropTypes.func,
-    onRowDoubleClick: PropTypes.func,
-    onRowSelect: PropTypes.func,
-    onRowUnselect: PropTypes.func,
-    onRowExpand: PropTypes.func,
-    onRowCollapse: PropTypes.func,
-    onCellClick: PropTypes.func,
-    onCellSelect: PropTypes.func,
-    onCellUnselect: PropTypes.func,
-    onContextMenu: PropTypes.func,
-    onColReorder: PropTypes.func,
-    onRowReorder: PropTypes.func,
-    onValueChange: PropTypes.func,
-    rowEditValidator: PropTypes.func,
-    onRowEditInit: PropTypes.func,
-    onRowEditSave: PropTypes.func,
-    onRowEditCancel: PropTypes.func,
-    onRowEditChange: PropTypes.func,
-    exportFunction: PropTypes.func,
-    customSaveState: PropTypes.func,
-    customRestoreState: PropTypes.func,
-    onStateSave: PropTypes.func,
-    onStateRestore: PropTypes.func
 }

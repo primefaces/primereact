@@ -1,13 +1,12 @@
-import React, { useState, useRef, memo, forwardRef } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils } from '../utils/Utils';
-import { useMountEffect, useEventListener, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export const MegaMenu = memo(forwardRef((props, ref) => {
-    const [activeItemState, setActiveItemState] = useState(null);
-    const elementRef = useRef(null);
+export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
+    const [activeItemState, setActiveItemState] = React.useState(null);
+    const elementRef = React.useRef(null);
     const horizontal = props.orientation === 'horizontal';
     const vertical = props.orientation === 'vertical';
 
@@ -353,6 +352,7 @@ export const MegaMenu = memo(forwardRef((props, ref) => {
     }
 
 
+    const otherProps = ObjectUtils.findDiffKeys(props, MegaMenu.defaultProps);
     const className = classNames('p-megamenu p-component', {
         'p-megamenu-horizontal': props.orientation === 'horizontal',
         'p-megamenu-vertical': props.orientation === 'vertical'
@@ -361,7 +361,7 @@ export const MegaMenu = memo(forwardRef((props, ref) => {
     const customContent = createCustomContent();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}>
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
             <ul className="p-megamenu-root-list" role="menubar">
                 {menu}
             </ul>
@@ -370,6 +370,7 @@ export const MegaMenu = memo(forwardRef((props, ref) => {
     )
 }));
 
+MegaMenu.displayName = 'MegaMenu';
 MegaMenu.defaultProps = {
     __TYPE: 'MegaMenu',
     id: null,
@@ -377,13 +378,4 @@ MegaMenu.defaultProps = {
     style: null,
     className: null,
     orientation: 'horizontal'
-}
-
-MegaMenu.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    orientation: PropTypes.string
 }

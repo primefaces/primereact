@@ -1,18 +1,17 @@
-import React, { useState, useRef, memo, forwardRef } from 'react'
-import PropTypes from 'prop-types';
-import { PickListSubList } from './PickListSubList';
-import { PickListControls } from './PickListControls';
-import { PickListTransferControls } from './PickListTransferControls';
-import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
+import * as React from 'react';
 import { useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { PickListControls } from './PickListControls';
+import { PickListSubList } from './PickListSubList';
+import { PickListTransferControls } from './PickListTransferControls';
 
-export const PickList = memo(forwardRef((props, ref) => {
-    const [sourceSelectionState, setSourceSelectionState] = useState([]);
-    const [targetSelectionState, setTargetSelectionState] = useState([]);
-    const sourceListElementRef = useRef(null);
-    const targetListElementRef = useRef(null);
-    const reorderedListElementRef = useRef(null);
-    const reorderDirection = useRef(null);
+export const PickList = React.memo(React.forwardRef((props, ref) => {
+    const [sourceSelectionState, setSourceSelectionState] = React.useState([]);
+    const [targetSelectionState, setTargetSelectionState] = React.useState([]);
+    const sourceListElementRef = React.useRef(null);
+    const targetListElementRef = React.useRef(null);
+    const reorderedListElementRef = React.useRef(null);
+    const reorderDirection = React.useRef(null);
     const sourceSelection = props.onSourceSelectionChange ? props.sourceSelection : sourceSelectionState;
     const targetSelection = props.onTargetSelectionChange ? props.targetSelection : targetSelectionState;
 
@@ -149,10 +148,11 @@ export const PickList = memo(forwardRef((props, ref) => {
         }
     });
 
+    const otherProps = ObjectUtils.findDiffKeys(props, PickList.defaultProps);
     const className = classNames('p-picklist p-component', props.className);
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {props.showSourceControls && <PickListControls list={props.source} selection={sourceSelection} onReorder={onSourceReorder} className="p-picklist-source-controls" dataKey={props.dataKey} />}
 
             <PickListSubList ref={sourceListElementRef} list={props.source} selection={sourceSelection} onSelectionChange={(e) => onSelectionChange(e, 'sourceSelection', props.onSourceSelectionChange)} itemTemplate={props.itemTemplate}
@@ -169,6 +169,7 @@ export const PickList = memo(forwardRef((props, ref) => {
     );
 }));
 
+PickList.displayName = 'PickList';
 PickList.defaultProps = {
     __TYPE: 'PickList',
     id: null,
@@ -195,32 +196,4 @@ PickList.defaultProps = {
     onMoveAllToTarget: null,
     onSourceSelectionChange: null,
     onTargetSelectionChange: null
-}
-
-PickList.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    source: PropTypes.array,
-    target: PropTypes.array,
-    sourceHeader: PropTypes.any,
-    targetHeader: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    sourcestyle: PropTypes.object,
-    targetstyle: PropTypes.object,
-    sourceSelection: PropTypes.any,
-    targetSelection: PropTypes.any,
-    showSourceControls: PropTypes.bool,
-    showTargetControls: PropTypes.bool,
-    metaKeySelection: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    dataKey: PropTypes.string,
-    itemTemplate: PropTypes.func,
-    onChange: PropTypes.func,
-    onMoveToSource: PropTypes.func,
-    onMoveAllToSource: PropTypes.func,
-    onMoveToTarget: PropTypes.func,
-    onMoveAllToTarget: PropTypes.func,
-    onSourceSelectionChange: PropTypes.func,
-    onTargetSelectionChange: PropTypes.func
 }

@@ -1,32 +1,29 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import PrimeReact, { localeOption, localeOptions } from '../api/Api';
-import { CalendarPanel } from './CalendarPanel';
-import { InputText } from '../inputtext/InputText';
 import { Button } from '../button/Button';
-import { tip } from '../tooltip/Tooltip';
-import { Ripple } from '../ripple/Ripple';
+import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, mask, ZIndexUtils } from '../utils/Utils';
-import { useMountEffect, useUnmountEffect, useUpdateEffect, useOverlayListener, usePrevious } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, mask, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { CalendarPanel } from './CalendarPanel';
 
-export const Calendar = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const [viewDateState, setViewDateState] = useState(null);
-    const elementRef = useRef(null);
-    const overlayRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const tooltipRef = useRef(null);
-    const navigation = useRef(null);
-    const ignoreFocusFunctionality = useRef(false);
-    const isKeydown = useRef(false);
-    const timePickerTimer = useRef(null);
-    const viewStateChanged = useRef(false);
-    const touchUIMask = useRef(null);
-    const overlayEventListener = useRef(null);
-    const touchUIMaskClickListener = useRef(null);
-    const isOverlayClicked = useRef(false);
+export const Calendar = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const [viewDateState, setViewDateState] = React.useState(null);
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
+    const navigation = React.useRef(null);
+    const ignoreFocusFunctionality = React.useRef(false);
+    const isKeydown = React.useRef(false);
+    const timePickerTimer = React.useRef(null);
+    const viewStateChanged = React.useRef(false);
+    const touchUIMask = React.useRef(null);
+    const overlayEventListener = React.useRef(null);
+    const touchUIMaskClickListener = React.useRef(null);
+    const isOverlayClicked = React.useRef(false);
     const previousValue = usePrevious(props.value);
     const visible = props.inline || (props.onVisibleChange ? props.visible : overlayVisibleState);
 
@@ -2189,22 +2186,9 @@ export const Calendar = memo(forwardRef((props, ref) => {
         return props.maxDate && props.maxDate.getFullYear() === viewDate.getFullYear();
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
-
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: inputRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
 
     useMountEffect(() => {
         let viewDate = getViewDate(props.viewDate);
@@ -2271,15 +2255,10 @@ export const Calendar = memo(forwardRef((props, ref) => {
             touchUIMask.current = null;
         }
 
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-
         ZIndexUtils.clear(overlayRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         show,
         hide,
         getCurrentDateTime,
@@ -2747,7 +2726,8 @@ export const Calendar = memo(forwardRef((props, ref) => {
             return (
                 <InputText ref={inputRef} id={props.inputId} name={props.name} type="text" className={props.inputClassName} style={props.inputStyle}
                     readOnly={props.readOnlyInput} disabled={props.disabled} required={props.required} autoComplete="off" placeholder={props.placeholder} tabIndex={props.tabIndex}
-                    onInput={onUserInput} onFocus={onInputFocus} onBlur={onInputBlur} onKeyDown={onInputKeyDown} aria-labelledby={props.ariaLabelledBy} inputMode={props.inputMode} />
+                    onInput={onUserInput} onFocus={onInputFocus} onBlur={onInputBlur} onKeyDown={onInputKeyDown} aria-labelledby={props.ariaLabelledBy} inputMode={props.inputMode}
+                    tooltip={props.tooltip} tooltipOptions={props.tooltipOptions} />
             )
         }
 
@@ -2814,6 +2794,7 @@ export const Calendar = memo(forwardRef((props, ref) => {
         return null;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Calendar.defaultProps);
     const className = classNames('p-calendar p-component p-inputwrapper', props.className, {
         [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon,
         'p-calendar-disabled': props.disabled,
@@ -2836,7 +2817,7 @@ export const Calendar = memo(forwardRef((props, ref) => {
     const footer = createFooter();
 
     return (
-        <span ref={elementRef} id={props.id} className={className} style={props.style}>
+        <span ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
             {content}
             <CalendarPanel ref={overlayRef} className={panelClassName} style={props.panelStyle} appendTo={props.appendTo} inline={props.inline} onClick={onPanelClick} onMouseUp={onPanelMouseUp}
                 in={visible} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited}
@@ -2850,6 +2831,7 @@ export const Calendar = memo(forwardRef((props, ref) => {
     )
 }));
 
+Calendar.displayName = 'Calendar';
 Calendar.defaultProps = {
     __TYPE: 'Calendar',
     id: null,
@@ -2932,88 +2914,4 @@ Calendar.defaultProps = {
     onClearButtonClick: null,
     onShow: null,
     onHide: null
-}
-
-Calendar.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    name: PropTypes.string,
-    value: PropTypes.any,
-    visible: PropTypes.bool,
-    viewDate: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    inline: PropTypes.bool,
-    selectionMode: PropTypes.string,
-    inputId: PropTypes.string,
-    inputStyle: PropTypes.object,
-    inputClassName: PropTypes.string,
-    inputMode: PropTypes.string,
-    required: PropTypes.bool,
-    readOnlyInput: PropTypes.bool,
-    keepInvalid: PropTypes.bool,
-    mask: PropTypes.string,
-    disabled: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    placeholder: PropTypes.string,
-    showIcon: PropTypes.bool,
-    icon: PropTypes.any,
-    iconPos: PropTypes.string,
-    showOnFocus: PropTypes.bool,
-    numberOfMonths: PropTypes.number,
-    view: PropTypes.string,
-    touchUI: PropTypes.bool,
-    showTime: PropTypes.bool,
-    timeOnly: PropTypes.bool,
-    showSeconds: PropTypes.bool,
-    showMillisec: PropTypes.bool,
-    hourFormat: PropTypes.string,
-    stepHour: PropTypes.number,
-    stepMinute: PropTypes.number,
-    stepSecond: PropTypes.number,
-    stepMillisec: PropTypes.number,
-    shortYearCutoff: PropTypes.string,
-    hideOnDateTimeSelect: PropTypes.bool,
-    showWeek: PropTypes.bool,
-    locale: PropTypes.string,
-    dateFormat: PropTypes.string,
-    panelStyle: PropTypes.object,
-    panelClassName: PropTypes.string,
-    monthNavigator: PropTypes.bool,
-    yearNavigator: PropTypes.bool,
-    yearRange: PropTypes.string,
-    disabledDates: PropTypes.array,
-    disabledDays: PropTypes.array,
-    minDate: PropTypes.any,
-    maxDate: PropTypes.any,
-    maxDateCount: PropTypes.number,
-    showOtherMonths: PropTypes.bool,
-    selectOtherMonths: PropTypes.bool,
-    showButtonBar: PropTypes.bool,
-    todayButtonClassName: PropTypes.string,
-    clearButtonClassName: PropTypes.string,
-    autoZIndex: PropTypes.bool,
-    baseZIndex: PropTypes.number,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    dateTemplate: PropTypes.func,
-    headerTemplate: PropTypes.func,
-    footerTemplate: PropTypes.func,
-    monthNavigatorTemplate: PropTypes.func,
-    yearNavigatorTemplate: PropTypes.func,
-    transitionOptions: PropTypes.object,
-    onVisibleChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onInput: PropTypes.func,
-    onSelect: PropTypes.func,
-    onChange: PropTypes.func,
-    onViewDateChange: PropTypes.func,
-    onTodayButtonClick: PropTypes.func,
-    onClearButtonClick: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

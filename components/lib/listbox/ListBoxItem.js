@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const ListBoxItem = memo((props) => {
+export const ListBoxItem = React.memo((props) => {
 
     const onClick = (event) => {
         if (props.onClick) {
@@ -79,3 +79,5 @@ export const ListBoxItem = memo((props) => {
         </li>
     )
 });
+
+ListBoxItem.displayName = 'ListBoxItem';

@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { TreeTableRow } from './TreeTableRow';
 import { DomHandler } from '../utils/Utils';
+import { TreeTableRow } from './TreeTableRow';
 
-export const TreeTableBody = memo((props) => {
+export const TreeTableBody = React.memo((props) => {
     const isSingleSelectionMode = props.selectionMode === 'single';
     const isMultipleSelectionMode = props.selectionMode === 'multiple';
 
@@ -225,3 +225,5 @@ export const TreeTableBody = memo((props) => {
         </tbody>
     )
 });
+
+TreeTableBody.displayName = 'TreeTableBody';

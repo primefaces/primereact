@@ -1,11 +1,10 @@
-import React, { forwardRef, memo, useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
 import { Paginator } from '../paginator/Paginator';
 import { Ripple } from '../ripple/Ripple';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const DataViewLayoutOptions = memo((props) => {
+export const DataViewLayoutOptions = React.memo((props) => {
 
     const changeLayout = (event, layoutMode) => {
         props.onChange({
@@ -15,12 +14,13 @@ export const DataViewLayoutOptions = memo((props) => {
         event.preventDefault();
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, DataViewLayoutOptions.defaultProps);
     const className = classNames('p-dataview-layout-options p-selectbutton p-buttonset', props.className);
     const buttonListClass = classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'list' });
     const buttonGridClass = classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'grid' });
 
     return (
-        <div id={props.id} style={props.style} className={className}>
+        <div id={props.id} style={props.style} className={className} {...otherProps}>
             <button type="button" className={buttonListClass} onClick={(event) => changeLayout(event, 'list')}>
                 <i className="pi pi-bars"></i>
                 <Ripple />
@@ -33,13 +33,13 @@ export const DataViewLayoutOptions = memo((props) => {
     )
 });
 
-export const DataViewItem = memo((props) => {
+export const DataViewItem = React.memo((props) => {
     return props.template(props.item, props.layout);
 });
 
-export const DataView = memo(forwardRef((props, ref) => {
-    const [firstState, setFirstState] = useState(props.first);
-    const [rowsState, setRowsState] = useState(props.rows);
+export const DataView = React.memo(React.forwardRef((props, ref) => {
+    const [firstState, setFirstState] = React.useState(props.first);
+    const [rowsState, setRowsState] = React.useState(props.rows);
     const first = props.onPage ? props.first : firstState;
     const rows = props.onPage ? props.rows : rowsState;
 
@@ -197,6 +197,7 @@ export const DataView = memo(forwardRef((props, ref) => {
 
     const data = processData();
 
+    const otherProps = ObjectUtils.findDiffKeys(props, DataView.defaultProps);
     const className = classNames('p-dataview p-component', {
         [`p-dataview-${props.layout}`]: !!props.layout,
         'p-dataview-loading': props.loading
@@ -209,7 +210,7 @@ export const DataView = memo(forwardRef((props, ref) => {
     const content = createContent(data);
 
     return (
-        <div id={props.id} style={props.style} className={className}>
+        <div id={props.id} style={props.style} className={className} {...otherProps}>
             {loader}
             {header}
             {topPaginator}
@@ -220,6 +221,19 @@ export const DataView = memo(forwardRef((props, ref) => {
     )
 }));
 
+DataViewLayoutOptions.displayName = 'DataViewLayoutOptions';
+DataViewLayoutOptions.defaultProps = {
+    __TYPE: 'DataViewLayoutOptions',
+    id: null,
+    style: null,
+    className: null,
+    layout: null,
+    onChange: null
+}
+
+DataViewItem.displayName = 'DataViewItem';
+
+DataView.displayName = 'DataView';
 DataView.defaultProps = {
     __TYPE: 'DataView',
     id: null,
@@ -253,57 +267,4 @@ DataView.defaultProps = {
     gutter: false,
     itemTemplate: null,
     onPage: null
-}
-
-DataView.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    header: PropTypes.any,
-    footer: PropTypes.any,
-    value: PropTypes.array,
-    layout: PropTypes.string,
-    dataKey: PropTypes.string,
-    rows: PropTypes.number,
-    first: PropTypes.number,
-    totalRecords: PropTypes.number,
-    paginator: PropTypes.bool,
-    paginatorPosition: PropTypes.string,
-    alwaysShowPaginator: PropTypes.bool,
-    paginatorClassName: PropTypes.string,
-    paginatorTemplate: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    paginatorLeft: PropTypes.any,
-    paginatorRight: PropTypes.any,
-    paginatorDropdownAppendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    pageLinkSize: PropTypes.number,
-    rowsPerPageOptions: PropTypes.array,
-    currentPageReportTemplate: PropTypes.string,
-    emptyMessage: PropTypes.string,
-    sortField: PropTypes.string,
-    sortOrder: PropTypes.number,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    lazy: PropTypes.bool,
-    loading: PropTypes.bool,
-    loadingIcon: PropTypes.string,
-    gutter: PropTypes.bool,
-    itemTemplate: PropTypes.func.isRequired,
-    onPage: PropTypes.func
-}
-
-DataViewLayoutOptions.defaultProps = {
-    __TYPE: 'DataViewLayoutOptions',
-    id: null,
-    style: null,
-    className: null,
-    layout: null,
-    onChange: null
-}
-
-DataViewLayoutOptions.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    layout: PropTypes.string,
-    onChange: PropTypes.func.isRequired
 }

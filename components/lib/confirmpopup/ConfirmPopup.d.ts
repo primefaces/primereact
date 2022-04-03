@@ -20,6 +20,7 @@ interface ConfirmPopupOptions {
 }
 
 export interface ConfirmPopupProps {
+    tagKey?: string;
     target?: HTMLElement;
     visible?: boolean;
     message?: ConfirmPopupTemplateType;
@@ -47,6 +48,8 @@ interface ConfirmPopupReturn {
     hide(): void;
 }
 
-export declare class ConfirmPopup extends React.Component<ConfirmPopupProps, any> { }
+export declare class ConfirmPopup extends React.Component<ConfirmPopupProps, any> {
+    public confirm(props?: ConfirmPopupProps): void;
+}
 
 export declare function confirmPopup(props: ConfirmPopupProps): ConfirmPopupReturn;

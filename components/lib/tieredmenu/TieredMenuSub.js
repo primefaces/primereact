@@ -1,13 +1,13 @@
-import React, { memo, useRef, useState } from 'react';
-import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const TieredMenuSub = memo((props) => {
-    const [activeItemState, setActiveItemState] = useState(null);
-    const elementRef = useRef(null);
+export const TieredMenuSub = React.memo((props) => {
+    const [activeItemState, setActiveItemState] = React.useState(null);
+    const elementRef = React.useRef(null);
 
-    const [bindDocumentClickListener, ] = useEventListener({
+    const [bindDocumentClickListener,] = useEventListener({
         type: 'click', listener: event => {
             if (elementRef.current && !elementRef.current.contains(event.target)) {
                 setActiveItemState(null);
@@ -230,3 +230,5 @@ export const TieredMenuSub = memo((props) => {
         </ul>
     )
 });
+
+TieredMenuSub.displayName = 'TieredMenuSub';

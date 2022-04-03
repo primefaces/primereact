@@ -1,9 +1,8 @@
-import React, { forwardRef, memo, useState } from 'react';
-import PropTypes from 'prop-types';
-import { classNames, ObjectUtils, IconUtils } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export const Chip = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(true);
+export const Chip = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(true);
 
     const onKeyDown = (event) => {
         if (event.keyCode === 13) { // enter
@@ -41,6 +40,7 @@ export const Chip = memo(forwardRef((props, ref) => {
     }
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, Chip.defaultProps);
         const className = classNames('p-chip p-component', {
             'p-chip-image': props.image != null
         }, props.className);
@@ -48,7 +48,7 @@ export const Chip = memo(forwardRef((props, ref) => {
         const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
         return (
-            <div className={className} style={props.style}>
+            <div className={className} style={props.style} {...otherProps}>
                 {content}
             </div>
         )
@@ -57,6 +57,7 @@ export const Chip = memo(forwardRef((props, ref) => {
     return visibleState && createElement();
 }));
 
+Chip.displayName = 'Chip';
 Chip.defaultProps = {
     __TYPE: 'Chip',
     label: null,
@@ -70,19 +71,4 @@ Chip.defaultProps = {
     imageAlt: 'chip',
     onImageError: null,
     onRemove: null
-}
-
-Chip.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    label: PropTypes.string,
-    icon: PropTypes.any,
-    image: PropTypes.string,
-    removable: PropTypes.bool,
-    removeIcon: PropTypes.any,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    template: PropTypes.any,
-    imageAlt: PropTypes.string,
-    onImageError: PropTypes.func,
-    onRemove: PropTypes.func
 }

@@ -1,8 +1,7 @@
-import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Card = forwardRef((props, ref) => {
+export const Card = React.forwardRef((props, ref) => {
 
     const createHeader = () => {
         if (props.header) {
@@ -28,18 +27,20 @@ export const Card = forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Card.defaultProps);
     const className = classNames('p-card p-component', props.className);
     const header = createHeader();
     const body = createBody();
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {header}
             {body}
         </div>
     )
 });
 
+Card.displayName = 'Card';
 Card.defaultProps = {
     __TYPE: 'Card',
     id: null,
@@ -49,15 +50,4 @@ Card.defaultProps = {
     subTitle: null,
     style: null,
     className: null
-}
-
-Card.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    header: PropTypes.any,
-    footer: PropTypes.any,
-    title: PropTypes.any,
-    subTitle: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string
 }

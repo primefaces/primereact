@@ -1,13 +1,12 @@
-import React, { useState, useRef, useEffect, memo, forwardRef } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const TabMenu = memo(forwardRef((props, ref) => {
-    const [activeIndexState, setActiveIndexState] = useState(props.activeIndex);
-    const inkbarRef = useRef(null);
-    const navRef = useRef(null);
-    const tabsRef = useRef({});
+export const TabMenu = React.memo(React.forwardRef((props, ref) => {
+    const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
+    const inkbarRef = React.useRef(null);
+    const navRef = React.useRef(null);
+    const tabsRef = React.useRef({});
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
 
     const itemClick = (event, item, index) => {
@@ -50,7 +49,7 @@ export const TabMenu = memo(forwardRef((props, ref) => {
         inkbarRef.current.style.left = DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(navRef.current).left + 'px';
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         updateInkBar();
     });
 
@@ -100,22 +99,24 @@ export const TabMenu = memo(forwardRef((props, ref) => {
     }
 
     if (props.model) {
+        const otherProps = ObjectUtils.findDiffKeys(props, TabMenu.defaultProps);
         const className = classNames('p-tabmenu p-component', props.className);
         const items = createItems();
 
         return (
-            <div id={props.id} className={className} style={props.style}>
+            <div id={props.id} className={className} style={props.style} {...otherProps}>
                 <ul ref={navRef} className="p-tabmenu-nav p-reset" role="tablist">
                     {items}
                     <li ref={inkbarRef} className="p-tabmenu-ink-bar"></li>
                 </ul>
             </div>
-        );
+        )
     }
 
     return null;
 }));
 
+TabMenu.displayName = 'TabMenu';
 TabMenu.defaultProps = {
     __TYPE: 'TabMenu',
     id: null,
@@ -124,14 +125,4 @@ TabMenu.defaultProps = {
     style: null,
     className: null,
     onTabChange: null
-}
-
-TabMenu.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array,
-    activeIndex: PropTypes.number,
-    style: PropTypes.any,
-    className: PropTypes.string,
-    onTabChange: PropTypes.func
 }

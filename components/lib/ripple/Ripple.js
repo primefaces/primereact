@@ -1,12 +1,11 @@
-import React, { forwardRef, memo, useRef } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler } from '../utils/Utils';
-import { useUpdateEffect, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 
-export const Ripple = memo(forwardRef(() => {
-    const inkRef = useRef(null);
-    const targetRef = useRef(null);
+export const Ripple = React.memo(React.forwardRef(() => {
+    const inkRef = React.useRef(null);
+    const targetRef = React.useRef(null);
 
     const getTarget = () => {
         return inkRef.current && inkRef.current.parentElement;
@@ -73,10 +72,7 @@ export const Ripple = memo(forwardRef(() => {
     return PrimeReact.ripple ? (<span ref={inkRef} className="p-ink" onAnimationEnd={onAnimationEnd}></span>) : null;
 }));
 
+Ripple.displayName = 'Ripple';
 Ripple.defaultProps = {
     __TYPE: 'Ripple'
-}
-
-Ripple.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string
 }

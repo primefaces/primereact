@@ -1,9 +1,9 @@
-import React, { memo, useRef } from 'react';
+import * as React from 'react';
 import { InputText } from '../inputtext/InputText';
-import { DomHandler, classNames } from '../utils/Utils';
+import { classNames, DomHandler } from '../utils/Utils';
 
-export const TreeTableHeader = memo((props) => {
-    const filterTimeout = useRef(null);
+export const TreeTableHeader = React.memo((props) => {
+    const filterTimeout = React.useRef(null);
 
     const onHeaderClick = (event, column) => {
         if (column.props.sortable) {
@@ -275,3 +275,5 @@ export const TreeTableHeader = memo((props) => {
         </thead>
     )
 });
+
+TreeTableHeader.displayName = 'TreeTableHeader';

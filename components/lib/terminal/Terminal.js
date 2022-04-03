@@ -1,16 +1,15 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { TerminalService } from '../terminalservice/TerminalService';
-import { classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Terminal = memo(forwardRef((props, ref) => {
-    const [commandTextState, setCommandTextState] = useState('');
-    const [commandsState, setCommandsState] = useState([]);
-    const [indexState, setIndexState] = useState(0);
-    const [emittedTextState, setEmittedTextState] = useState('');
-    const elementRef = useRef(null);
-    const inputRef = useRef(null);
-    const isEmitted = useRef(false);
+export const Terminal = React.memo(React.forwardRef((props, ref) => {
+    const [commandTextState, setCommandTextState] = React.useState('');
+    const [commandsState, setCommandsState] = React.useState([]);
+    const [indexState, setIndexState] = React.useState(0);
+    const [emittedTextState, setEmittedTextState] = React.useState('');
+    const elementRef = React.useRef(null);
+    const inputRef = React.useRef(null);
+    const isEmitted = React.useRef(false);
 
     const onClick = () => {
         inputRef.current.focus();
@@ -55,7 +54,7 @@ export const Terminal = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         const response = (res) => {
             if (commandsState && commandsState.length > 0) {
                 let commands = [...commandsState];
@@ -79,7 +78,7 @@ export const Terminal = memo(forwardRef((props, ref) => {
         }
     }, [commandsState]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (isEmitted.current) {
             TerminalService.emit('command', emittedTextState);
             isEmitted.current = false;
@@ -129,13 +128,14 @@ export const Terminal = memo(forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Terminal.defaultProps);
     const className = classNames('p-terminal p-component', props.className);
     const welcomeMessage = createWelcomeMessage();
     const content = createContent();
     const prompt = createPromptContainer();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
             {welcomeMessage}
             {content}
             {prompt}
@@ -143,6 +143,7 @@ export const Terminal = memo(forwardRef((props, ref) => {
     )
 }));
 
+Terminal.displayName = 'Terminal';
 Terminal.defaultProps = {
     __TYPE: 'Terminal',
     id: null,
@@ -150,13 +151,4 @@ Terminal.defaultProps = {
     className: null,
     welcomeMessage: null,
     prompt: null
-}
-
-Terminal.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    welcomeMessage: PropTypes.string,
-    prompt: PropTypes.string
 }

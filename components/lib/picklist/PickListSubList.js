@@ -1,9 +1,9 @@
-import React, { forwardRef, useRef, useImperativeHandle, memo } from 'react';
+import * as React from 'react';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { PickListItem } from './PickListItem';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
-export const PickListSubList = memo(forwardRef((props, ref) => {
-    const listElementRef = useRef(null);
+export const PickListSubList = React.memo(React.forwardRef((props, ref) => {
+    const listElementRef = React.useRef(null);
 
     const onItemClick = (event) => {
         let originalEvent = event.originalEvent;
@@ -85,7 +85,7 @@ export const PickListSubList = memo(forwardRef((props, ref) => {
         return ObjectUtils.findIndexInList(item, props.selection, props.dataKey) !== -1;
     }
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         listElementRef
     }));
 
@@ -131,3 +131,5 @@ export const PickListSubList = memo(forwardRef((props, ref) => {
         </div>
     )
 }));
+
+PickListSubList.displayName = 'PickListSubList';

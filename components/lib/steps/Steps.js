@@ -1,8 +1,7 @@
-import React, { forwardRef, memo } from 'react';
-import PropTypes from 'prop-types';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Steps = memo(forwardRef((props, ref) => {
+export const Steps = React.memo(React.forwardRef((props, ref) => {
 
     const itemClick = (event, item, index) => {
         if (props.readOnly || item.disabled) {
@@ -85,18 +84,20 @@ export const Steps = memo(forwardRef((props, ref) => {
         return null;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Steps.defaultProps);
     const className = classNames('p-steps p-component', {
         'p-readonly': props.readOnly
     }, props.className);
     const items = createItems();
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {items}
         </div>
     )
 }));
 
+Steps.displayName = 'Steps';
 Steps.defaultProps = {
     __TYPE: 'Steps',
     id: null,
@@ -106,15 +107,4 @@ Steps.defaultProps = {
     style: null,
     className: null,
     onSelect: null
-}
-
-Steps.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    model: PropTypes.array.isRequired,
-    activeIndex: PropTypes.number,
-    readOnly: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    onSelect: PropTypes.func
 }

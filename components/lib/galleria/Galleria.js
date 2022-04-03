@@ -1,22 +1,21 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { CSSTransition } from '../csstransition/CSSTransition';
+import { useInterval, useUnmountEffect } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
-import { Ripple } from '../ripple/Ripple';
-import { Portal } from '../portal/Portal';
-import { CSSTransition } from '../csstransition/CSSTransition';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { useUnmountEffect, useInterval } from '../hooks/Hooks';
 
-export const Galleria = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(false);
-    const [numVisibleState, setNumVisibleState] = useState(props.numVisible);
-    const [slideShowActiveState, setSlideShowActiveState] = useState(false);
-    const [activeIndexState, setActiveIndexState] = useState(props.activeIndex);
-    const elementRef = useRef(null);
-    const previewContentRef = useRef(null);
-    const maskRef = useRef(null);
+export const Galleria = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(false);
+    const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
+    const [slideShowActiveState, setSlideShowActiveState] = React.useState(false);
+    const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
+    const elementRef = React.useRef(null);
+    const previewContentRef = React.useRef(null);
+    const maskRef = React.useRef(null);
     const activeItemIndex = props.onItemChange ? props.activeIndex : activeIndexState;
     const isVertical = props.thumbnailsPosition === 'left' || props.thumbnailsPosition === 'right';
 
@@ -84,13 +83,13 @@ export const Galleria = memo(forwardRef((props, ref) => {
         return pos ? `${preClassName}-${pos}` : '';
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (props.value && props.value.length < numVisibleState) {
             setNumVisibleState(props.value.length);
         }
     }, [props.value, numVisibleState]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         setNumVisibleState(props.numVisible);
     }, [props.numVisible]);
 
@@ -102,7 +101,7 @@ export const Galleria = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(maskRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         show,
         hide,
         isAutoPlayActive,
@@ -135,6 +134,7 @@ export const Galleria = memo(forwardRef((props, ref) => {
     }
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, Galleria.defaultProps);
         const thumbnailsPosClassName = props.showThumbnails && getPositionClassName('p-galleria-thumbnails', props.thumbnailsPosition);
         const indicatorPosClassName = props.showIndicators && getPositionClassName('p-galleria-indicators', props.indicatorsPosition);
         const galleriaClassName = classNames('p-galleria p-component', props.className, {
@@ -153,7 +153,7 @@ export const Galleria = memo(forwardRef((props, ref) => {
         const header = createHeader();
         const footer = createFooter();
         const element = (
-            <div ref={elementRef} id={props.id} className={galleriaClassName} style={props.style}>
+            <div ref={elementRef} id={props.id} className={galleriaClassName} style={props.style} {...otherProps}>
                 {closeIcon}
                 {header}
                 <div className="p-galleria-content">
@@ -203,6 +203,7 @@ export const Galleria = memo(forwardRef((props, ref) => {
     return ObjectUtils.isNotEmpty(props.value) && createGalleria();
 }));
 
+Galleria.displayName = 'Galleria';
 Galleria.defaultProps = {
     __TYPE: 'Galleria',
     id: null,
@@ -235,37 +236,4 @@ Galleria.defaultProps = {
     baseZIndex: 0,
     transitionOptions: null,
     onItemChange: null
-}
-
-Galleria.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    value: PropTypes.any,
-    activeIndex: PropTypes.number,
-    fullScreen: PropTypes.bool,
-    item: PropTypes.any,
-    thumbnail: PropTypes.any,
-    indicator: PropTypes.any,
-    caption: PropTypes.any,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    header: PropTypes.any,
-    footer: PropTypes.any,
-    numVisible: PropTypes.number,
-    responsiveOptions: PropTypes.array,
-    showItemNavigators: PropTypes.bool,
-    showThumbnailNavigators: PropTypes.bool,
-    showItemNavigatorsOnHover: PropTypes.bool,
-    changeItemOnIndicatorHover: PropTypes.bool,
-    circular: PropTypes.bool,
-    autoPlay: PropTypes.bool,
-    transitionInterval: PropTypes.number,
-    showThumbnails: PropTypes.bool,
-    thumbnailsPosition: PropTypes.string,
-    showIndicators: PropTypes.bool,
-    showIndicatorsOnItem: PropTypes.bool,
-    indicatorsPosition: PropTypes.string,
-    baseZIndex: PropTypes.number,
-    transitionOptions: PropTypes.object,
-    onItemChange: PropTypes.func
 }

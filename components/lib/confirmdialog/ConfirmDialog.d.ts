@@ -23,6 +23,7 @@ interface ConfirmDialogOptions {
 }
 
 export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
+    tagKey?: string;
     visible?: boolean;
     message?: ConfirmDialogTemplateType;
     rejectLabel?: string;
@@ -46,6 +47,8 @@ interface ConfirmDialogReturn {
     hide(): void;
 }
 
-export declare class ConfirmDialog extends React.Component<ConfirmDialogProps, any> { }
+export declare class ConfirmDialog extends React.Component<ConfirmDialogProps, any> {
+    public confirm(props?: ConfirmDialogProps): void;
+}
 
 export declare function confirmDialog(props: ConfirmDialogProps): ConfirmDialogReturn;

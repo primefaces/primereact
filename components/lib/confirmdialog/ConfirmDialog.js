@@ -1,116 +1,140 @@
-import React, { forwardRef, memo, useState } from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { Dialog } from '../dialog/Dialog';
 import { Button } from '../button/Button';
+import { Dialog } from '../dialog/Dialog';
+import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, ObjectUtils, classNames, IconUtils } from '../utils/Utils';
-import { useUpdateEffect } from '../hooks/Hooks';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export const confirmDialog = (props) => {
-    const appendTo = props.appendTo || document.body;
-
-    const confirmDialogWrapper = document.createDocumentFragment();
-    DomHandler.appendChild(confirmDialogWrapper, appendTo);
-
+export const confirmDialog = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
+    props.visible && OverlayService.emit('confirm-dialog', props);
 
-    const confirmDialogEl = React.createElement(ConfirmDialog, props);
-    ReactDOM.render(confirmDialogEl, confirmDialogWrapper);
-
-    const updateConfirmDialog = (newProps) => {
-        props = { ...props, ...newProps };
-        ReactDOM.render(React.cloneElement(confirmDialogEl, props), confirmDialogWrapper);
-    };
-
-    return {
-        _destroy: () => {
-            ReactDOM.unmountComponentAtNode(confirmDialogWrapper);
-        },
-        show: () => {
-            updateConfirmDialog({
-                visible: true, onHide: () => {
-                    updateConfirmDialog({ visible: false }); // reset
-                }
-            });
-        },
-        hide: () => {
-            updateConfirmDialog({ visible: false });
-        },
-        update: (newProps) => {
-            updateConfirmDialog(newProps);
-        }
+    const show = (updatedProps = {}) => {
+        OverlayService.emit('confirm-dialog', { ...props, ...updatedProps, ...{ visible: true } });
     }
+
+    const hide = () => {
+        OverlayService.emit('confirm-dialog', { visible: false });
+    }
+
+    return [show, hide];
 }
 
-export const ConfirmDialog = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(props.visible);
-    const acceptLabel = props.acceptLabel || localeOption('accept');
-    const rejectLabel = props.rejectLabel || localeOption('reject');
+export const ConfirmDialog = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(props.visible);
+    const [reshowState, setReshowState] = React.useState(false);
+    const confirmProps = React.useRef(null);
+    const getCurrentProps = () => confirmProps.current || props;
+    const getPropValue = (key) => (confirmProps.current || props)[key];
+    const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
+
+    const acceptLabel = getPropValue('acceptLabel') || localeOption('accept');
+    const rejectLabel = getPropValue('rejectLabel') || localeOption('reject');
 
     const accept = () => {
-        props.accept && props.accept();
+        callbackFromProp('accept');
         hide('accept');
     }
 
     const reject = () => {
-        props.reject && props.reject();
+        callbackFromProp('reject');
         hide('reject');
     }
 
     const show = () => {
-        setVisibleState(true)
+        setVisibleState(true);
     }
 
     const hide = (result) => {
         setVisibleState(false);
-        props.onHide && props.onHide(result);
+        callbackFromProp('onHide', result);
     }
 
-    useUpdateEffect(() => {
-        setVisibleState(props.visible);
+    const confirm = (updatedProps) => {
+        if (updatedProps.tagKey === props.tagKey) {
+            const isVisibleChanged = visibleState !== updatedProps.visible;
+            const targetChanged = getPropValue('target') !== updatedProps.target;
+
+            if (targetChanged && !props.target) {
+                hide();
+                confirmProps.current = updatedProps;
+                setReshowState(true);
+            }
+            else if (isVisibleChanged) {
+                confirmProps.current = updatedProps;
+                updatedProps.visible ? show() : hide();
+            }
+        }
+    }
+
+    React.useEffect(() => {
+        props.visible ? show() : hide();
     }, [props.visible]);
 
+    React.useEffect(() => {
+        if (!props.target && !props.message) {
+            OverlayService.on('confirm-dialog', confirm);
+        }
+
+        return () => {
+            OverlayService.off('confirm-dialog', confirm);
+        }
+    }, [props.target]);
+
+    useUpdateEffect(() => {
+        reshowState && show();
+    }, [reshowState]);
+
+    useUnmountEffect(() => {
+        OverlayService.off('confirm-dialog', confirm);
+    });
+
+    React.useImperativeHandle(ref, () => ({
+        confirm
+    }));
+
     const createFooter = () => {
-        const acceptClassName = classNames('p-confirm-dialog-accept', props.acceptClassName);
+        const acceptClassName = classNames('p-confirm-dialog-accept', getPropValue('acceptClassName'));
         const rejectClassName = classNames('p-confirm-dialog-reject', {
-            'p-button-text': !props.rejectClassName
-        }, props.rejectClassName);
+            'p-button-text': !getPropValue('rejectClassName')
+        }, getPropValue('rejectClassName'));
         const content = (
             <>
-                <Button label={rejectLabel} icon={props.rejectIcon} className={rejectClassName} onClick={reject} />
-                <Button label={acceptLabel} icon={props.acceptIcon} className={acceptClassName} onClick={accept} autoFocus />
+                <Button label={rejectLabel} icon={getPropValue('rejectIcon')} className={rejectClassName} onClick={reject} />
+                <Button label={acceptLabel} icon={getPropValue('acceptIcon')} className={acceptClassName} onClick={accept} autoFocus />
             </>
         );
 
-        if (props.footer) {
+        if (getPropValue('footer')) {
             const defaultContentOptions = {
-                accept: accept,
-                reject: reject,
+                accept,
+                reject,
                 acceptClassName,
                 rejectClassName,
                 acceptLabel,
                 rejectLabel,
                 element: content,
-                props
+                props: getCurrentProps()
             };
 
-            return ObjectUtils.getJSXElement(props.footer, defaultContentOptions);
+            return ObjectUtils.getJSXElement(getPropValue('footer'), defaultContentOptions);
         }
 
         return content;
     }
 
     const createElement = () => {
-        const className = classNames('p-confirm-dialog', props.className);
-        const dialogProps = ObjectUtils.findDiffKeys(props, ConfirmDialog.defaultProps);
-        const message = ObjectUtils.getJSXElement(props.message, props);
-        const icon = IconUtils.getJSXIcon(props.icon, { className: 'p-confirm-dialog-icon' }, { props });
+        const currentProps = getCurrentProps();
+        const className = classNames('p-confirm-dialog', getPropValue('className'));
+        const otherProps = ObjectUtils.findDiffKeys(currentProps, ConfirmDialog.defaultProps);
+        const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
+        const icon = IconUtils.getJSXIcon(getPropValue('icon'), { className: 'p-confirm-dialog-icon' }, { props: currentProps });
         const footer = createFooter();
 
         return (
-            <Dialog visible={visibleState} {...dialogProps} className={className} footer={footer} onHide={hide} breakpoints={props.breakpoints}>
+            <Dialog visible={visibleState} {...otherProps} className={className} footer={footer} onHide={hide} breakpoints={getPropValue('breakpoints')}>
                 {icon}
                 <span className="p-confirm-dialog-message">{message}</span>
             </Dialog>
@@ -119,11 +143,13 @@ export const ConfirmDialog = memo(forwardRef((props, ref) => {
 
     const element = createElement();
 
-    return <Portal element={element} appendTo={props.appendTo} />
+    return <Portal element={element} appendTo={getPropValue('appendTo')} />
 }));
 
+ConfirmDialog.displayName = 'ConfirmDialog';
 ConfirmDialog.defaultProps = {
     __TYPE: 'ConfirmDialog',
+    tagKey: undefined,
     visible: false,
     message: null,
     rejectLabel: null,
@@ -140,24 +166,4 @@ ConfirmDialog.defaultProps = {
     onHide: null,
     accept: null,
     reject: null
-}
-
-ConfirmDialog.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    visible: PropTypes.bool,
-    message: PropTypes.any,
-    rejectLabel: PropTypes.string,
-    acceptLabel: PropTypes.string,
-    icon: PropTypes.any,
-    rejectIcon: PropTypes.any,
-    acceptIcon: PropTypes.any,
-    rejectClassName: PropTypes.string,
-    acceptClassName: PropTypes.string,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    className: PropTypes.string,
-    footer: PropTypes.any,
-    breakpoints: PropTypes.object,
-    onHide: PropTypes.func,
-    accept: PropTypes.func,
-    reject: PropTypes.func
 }

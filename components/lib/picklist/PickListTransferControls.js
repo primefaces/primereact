@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { Button } from '../button/Button';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const PickListTransferControls = memo((props) => {
+export const PickListTransferControls = React.memo((props) => {
     const moveRightDisabled = ObjectUtils.isEmpty(props.sourceSelection);
     const moveLeftDisabled = ObjectUtils.isEmpty(props.targetSelection);
     const moveAllRightDisabled = ObjectUtils.isEmpty(props.source);
@@ -103,3 +103,5 @@ export const PickListTransferControls = memo((props) => {
         </div>
     )
 });
+
+PickListTransferControls.displayName = 'PickListTransferControls';

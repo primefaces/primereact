@@ -1,14 +1,11 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import { tip } from '../tooltip/Tooltip';
-import { ObjectUtils, classNames } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
+import * as React from 'react';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const InputSwitch = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const elementRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const tooltipRef = useRef(null);
+export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
     const checked = props.checked === props.trueValue;
 
     const onClick = (event) => {
@@ -56,51 +53,34 @@ export const InputSwitch = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, InputSwitch.defaultProps);
     const className = classNames('p-inputswitch p-component', {
         'p-inputswitch-checked': checked,
         'p-disabled': props.disabled,
         'p-inputswitch-focus': focusedState
     }, props.className);
 
-    const inputSwitchProps = ObjectUtils.findDiffKeys(props, InputSwitch.defaultProps);
-
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}
-            role="checkbox" aria-checked={checked} {...inputSwitchProps}>
-            <div className="p-hidden-accessible">
-                <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} checked={checked} onChange={toggle}
-                    onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} disabled={props.disabled} role="switch" aria-checked={checked}
-                    aria-labelledby={props.ariaLabelledBy} />
+        <>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} role="checkbox" aria-checked={checked}>
+                <div className="p-hidden-accessible">
+                    <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} checked={checked} onChange={toggle}
+                        onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} disabled={props.disabled} role="switch" aria-checked={checked}
+                        aria-labelledby={props.ariaLabelledBy} />
+                </div>
+                <span className="p-inputswitch-slider"></span>
             </div>
-            <span className="p-inputswitch-slider"></span>
-        </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+InputSwitch.displayName = 'InputSwitch';
 InputSwitch.defaultProps = {
     __TYPE: 'InputSwitch',
     id: null,
@@ -119,24 +99,4 @@ InputSwitch.defaultProps = {
     onChange: null,
     onFocus: null,
     onBlur: null
-}
-
-InputSwitch.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    inputId: PropTypes.string,
-    name: PropTypes.string,
-    checked: PropTypes.any,
-    trueValue: PropTypes.any,
-    falseValue: PropTypes.any,
-    disabled: PropTypes.bool,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func
 }

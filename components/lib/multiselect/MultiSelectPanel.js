@@ -1,14 +1,14 @@
-import React, { forwardRef, memo, useRef } from 'react';
+import * as React from 'react';
 import { localeOption } from '../api/Api';
+import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
+import { classNames, ObjectUtils } from '../utils/Utils';
+import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { MultiSelectHeader } from './MultiSelectHeader';
 import { MultiSelectItem } from './MultiSelectItem';
-import { VirtualScroller } from '../virtualscroller/VirtualScroller';
-import { CSSTransition } from '../csstransition/CSSTransition';
-import { ObjectUtils, classNames } from '../utils/Utils';
 
-export const MultiSelectPanel = memo(forwardRef((props, ref) => {
-    const virtualScrollerRef = useRef(null);
+export const MultiSelectPanel = React.memo(React.forwardRef((props, ref) => {
+    const virtualScrollerRef = React.useRef(null);
 
     const onEnter = () => {
         props.onEnter(() => {
@@ -185,3 +185,5 @@ export const MultiSelectPanel = memo(forwardRef((props, ref) => {
 
     return <Portal element={element} appendTo={props.appendTo} />
 }));
+
+MultiSelectPanel.displayName = 'MultiSelectPanel';

@@ -1,9 +1,8 @@
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const LastPageLink = memo((props) => {
+export const LastPageLink = React.memo((props) => {
     const className = classNames('p-paginator-last p-paginator-element p-link', { 'p-disabled': props.disabled });
     const iconClassName = 'p-paginator-icon pi pi-angle-double-right';
     const element = (
@@ -29,17 +28,10 @@ export const LastPageLink = memo((props) => {
     return element;
 });
 
+LastPageLink.displayName = 'LastPageLink';
 LastPageLink.defaultProps = {
     __TYPE: 'LastPageLink',
     disabled: false,
     onClick: null,
     template: null
 }
-
-LastPageLink.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    disabled: PropTypes.bool,
-    onClick: PropTypes.func,
-    template: PropTypes.any
-}
-

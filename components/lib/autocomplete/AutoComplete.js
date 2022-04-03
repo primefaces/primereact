@@ -1,27 +1,25 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { AutoCompletePanel } from './AutoCompletePanel';
-import { InputText } from '../inputtext/InputText';
 import { Button } from '../button/Button';
-import { tip } from '../tooltip/Tooltip';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, UniqueComponentId, ZIndexUtils, IconUtils } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { AutoCompletePanel } from './AutoCompletePanel';
 
-export const AutoComplete = memo(forwardRef((props, ref) => {
-    const [idState, setIdState] = useState(props.id);
-    const [searchingState, setSearchingState] = useState(false);
-    const [focusedState, setFocusedState] = useState(false);
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const elementRef = useRef(null);
-    const overlayRef = useRef(null);
-    const tooltipRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const multiContainerRef = useRef(null);
-    const virtualScrollerRef = useRef(null);
-    const timeout = useRef(null);
-    const selectedItem = useRef(null);
+export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
+    const [idState, setIdState] = React.useState(props.id);
+    const [searchingState, setSearchingState] = React.useState(false);
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
+    const multiContainerRef = React.useRef(null);
+    const virtualScrollerRef = React.useRef(null);
+    const timeout = React.useRef(null);
+    const selectedItem = React.useRef(null);
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: elementRef, overlay: overlayRef, listener: (event, { type, valid }) => {
@@ -196,7 +194,9 @@ export const AutoComplete = memo(forwardRef((props, ref) => {
     }
 
     const onDropdownClick = (event) => {
-        inputRef.current.focus();
+        if (props.dropdownAutoFocus) {
+            inputRef.current.focus();
+        }
 
         if (props.dropdownMode === 'blank')
             search(event, '', 'dropdown');
@@ -409,22 +409,9 @@ export const AutoComplete = memo(forwardRef((props, ref) => {
         return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupChildren);
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
-
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
 
     useMountEffect(() => {
         if (!idState) {
@@ -454,15 +441,10 @@ export const AutoComplete = memo(forwardRef((props, ref) => {
             clearTimeout(timeout.current);
         }
 
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-
         ZIndexUtils.clear(overlayRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         search
     }));
 
@@ -554,6 +536,8 @@ export const AutoComplete = memo(forwardRef((props, ref) => {
     }
 
     const listId = idState + '_list';
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, AutoComplete.defaultProps);
     const className = classNames('p-autocomplete p-component p-inputwrapper', {
         'p-autocomplete-dd': props.dropdown,
         'p-autocomplete-multiple': props.multiple,
@@ -565,17 +549,21 @@ export const AutoComplete = memo(forwardRef((props, ref) => {
     const dropdown = createDropdown();
 
     return (
-        <span ref={elementRef} id={idState} style={props.style} className={className} aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-owns={listId}>
-            {input}
-            {loader}
-            {dropdown}
-            <AutoCompletePanel ref={overlayRef} virtualScrollerRef={virtualScrollerRef} {...props} listId={listId} onItemClick={selectItem} selectedItem={selectedItem}
-                onClick={onPanelClick} getOptionGroupLabel={getOptionGroupLabel} getOptionGroupChildren={getOptionGroupChildren}
-                in={overlayVisibleState} onEnter={onOverlayEnter} onEntering={onOverlayEntering} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited} />
-        </span>
+        <>
+            <span ref={elementRef} id={idState} style={props.style} className={className} aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-owns={listId} {...otherProps}>
+                {input}
+                {loader}
+                {dropdown}
+                <AutoCompletePanel ref={overlayRef} virtualScrollerRef={virtualScrollerRef} {...props} listId={listId} onItemClick={selectItem} selectedItem={selectedItem}
+                    onClick={onPanelClick} getOptionGroupLabel={getOptionGroupLabel} getOptionGroupChildren={getOptionGroupChildren}
+                    in={overlayVisibleState} onEnter={onOverlayEnter} onEntering={onOverlayEntering} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited} />
+            </span>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+AutoComplete.displayName = 'AutoComplete';
 AutoComplete.defaultProps = {
     __TYPE: 'AutoComplete',
     id: null,
@@ -594,6 +582,7 @@ AutoComplete.defaultProps = {
     scrollHeight: '200px',
     dropdown: false,
     dropdownMode: 'blank',
+    dropdownAutoFocus: true,
     multiple: false,
     minLength: 1,
     delay: 300,
@@ -636,66 +625,4 @@ AutoComplete.defaultProps = {
     onClear: null,
     onShow: null,
     onHide: null
-}
-
-AutoComplete.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    inputRef: PropTypes.any,
-    value: PropTypes.any,
-    name: PropTypes.string,
-    type: PropTypes.string,
-    suggestions: PropTypes.array,
-    field: PropTypes.string,
-    optionGroupLabel: PropTypes.string,
-    optionGroupChildren: PropTypes.string,
-    optionGroupTemplate: PropTypes.any,
-    forceSelection: PropTypes.bool,
-    autoHighlight: PropTypes.bool,
-    virtualScrollerOptions: PropTypes.object,
-    scrollHeight: PropTypes.string,
-    dropdown: PropTypes.bool,
-    dropdownMode: PropTypes.string,
-    multiple: PropTypes.bool,
-    minLength: PropTypes.number,
-    delay: PropTypes.number,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    inputId: PropTypes.string,
-    inputStyle: PropTypes.object,
-    inputClassName: PropTypes.string,
-    panelClassName: PropTypes.string,
-    panelStyle: PropTypes.object,
-    placeholder: PropTypes.string,
-    readOnly: PropTypes.bool,
-    disabled: PropTypes.bool,
-    maxLength: PropTypes.number,
-    size: PropTypes.number,
-    appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    tabIndex: PropTypes.number,
-    autoFocus: PropTypes.bool,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    ariaLabelledBy: PropTypes.string,
-    completeMethod: PropTypes.func,
-    itemTemplate: PropTypes.any,
-    selectedItemTemplate: PropTypes.any,
-    transitionOptions: PropTypes.object,
-    dropdownIcon: PropTypes.any,
-    removeIcon: PropTypes.any,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onSelect: PropTypes.func,
-    onUnselect: PropTypes.func,
-    onDropdownClick: PropTypes.func,
-    onClick: PropTypes.func,
-    onDblClick: PropTypes.func,
-    onMouseDown: PropTypes.func,
-    onKeyUp: PropTypes.func,
-    onKeyPress: PropTypes.func,
-    onContextMenu: PropTypes.func,
-    onClear: PropTypes.func,
-    onShow: PropTypes.func,
-    onHide: PropTypes.func
 }

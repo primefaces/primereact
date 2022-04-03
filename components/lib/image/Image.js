@@ -1,20 +1,19 @@
-import React, { forwardRef, memo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { DomHandler, classNames, ZIndexUtils, ObjectUtils } from '../utils/Utils';
 import { useUnmountEffect } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export const Image = memo(forwardRef((props, ref) => {
-    const [maskVisibleState, setMaskVisibleState] = useState(false);
-    const [previewVisibleState, setPreviewVisibleState] = useState(false);
-    const [rotateState, setRotateState] = useState(0);
-    const [scaleState, setScaleState] = useState(1);
-    const elementRef = useRef(null);
-    const maskRef = useRef(null);
-    const previewRef = useRef(null);
-    const previewClick = useRef(false);
+export const Image = React.memo(React.forwardRef((props, ref) => {
+    const [maskVisibleState, setMaskVisibleState] = React.useState(false);
+    const [previewVisibleState, setPreviewVisibleState] = React.useState(false);
+    const [rotateState, setRotateState] = React.useState(0);
+    const [scaleState, setScaleState] = React.useState(1);
+    const elementRef = React.useRef(null);
+    const maskRef = React.useRef(null);
+    const previewRef = React.useRef(null);
+    const previewClick = React.useRef(false);
 
     const onImageClick = () => {
         if (props.preview) {
@@ -146,6 +145,7 @@ export const Image = memo(forwardRef((props, ref) => {
     }
 
     const { src, alt, width, height } = props;
+    const otherProps = ObjectUtils.findDiffKeys(props, Image.defaultProps);
     const containerClassName = classNames('p-image p-component', props.className, {
         'p-image-preview-container': props.preview
     });
@@ -155,7 +155,7 @@ export const Image = memo(forwardRef((props, ref) => {
     const image = <img src={src} className={props.imageClassName} width={width} height={height} style={props.imageStyle} alt={alt} />;
 
     return (
-        <span ref={elementRef} className={containerClassName} style={props.style}>
+        <span ref={elementRef} className={containerClassName} style={props.style} {...otherProps}>
             {image}
             {preview}
             {maskVisibleState && <Portal element={element} appendTo={document.body} />}
@@ -163,6 +163,7 @@ export const Image = memo(forwardRef((props, ref) => {
     )
 }));
 
+Image.displayName = 'Image';
 Image.defaultProps = {
     __TYPE: 'Image',
     preview: false,
@@ -176,19 +177,4 @@ Image.defaultProps = {
     alt: null,
     width: null,
     height: null
-}
-
-Image.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    preview: PropTypes.bool,
-    className: PropTypes.string,
-    downloadable: PropTypes.bool,
-    style: PropTypes.object,
-    imageClassName: PropTypes.string,
-    imageStyle: PropTypes.object,
-    template: PropTypes.any,
-    src: PropTypes.string,
-    alt: PropTypes.string,
-    width: PropTypes.string,
-    height: PropTypes.string
 }

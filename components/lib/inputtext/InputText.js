@@ -1,13 +1,10 @@
-import React, { forwardRef, memo, useEffect, useMemo, useRef } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { KeyFilter } from '../keyfilter/KeyFilter';
-import { tip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const InputText = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(ref);
-    const tooltipRef = useRef(null);
+export const InputText = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(ref);
 
     const onKeyPress = (event) => {
         props.onKeyPress && props.onKeyPress(event);
@@ -31,43 +28,30 @@ export const InputText = memo(forwardRef((props, ref) => {
         }
     }
 
-    const isFilled = useMemo(() => (
+    const isFilled = React.useMemo(() => (
         ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (elementRef.current && ObjectUtils.isNotEmpty(elementRef.current.value))
     ), [props.value, props.defaultValue]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(elementRef, ref);
     }, [elementRef, ref]);
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
-    const inputProps = ObjectUtils.findDiffKeys(props, InputText.defaultProps);
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, InputText.defaultProps);
     const className = classNames('p-inputtext p-component', {
         'p-disabled': props.disabled,
         'p-filled': isFilled
     }, props.className);
 
-    return <input ref={elementRef} {...inputProps} className={className} onInput={onInput} onKeyPress={onKeyPress} />;
+    return (
+        <>
+            <input ref={elementRef} {...otherProps} className={className} onInput={onInput} onKeyPress={onKeyPress} />
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
+    )
 }));
 
+InputText.displayName = 'InputText';
 InputText.defaultProps = {
     __TYPE: 'InputText',
     keyfilter: null,
@@ -76,14 +60,4 @@ InputText.defaultProps = {
     tooltipOptions: null,
     onInput: null,
     onKeyPress: null
-}
-
-InputText.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    keyfilter: PropTypes.any,
-    validateOnly: PropTypes.bool,
-    tooltip: PropTypes.string,
-    tooltipOptions: PropTypes.object,
-    onInput: PropTypes.func,
-    onKeyPress: PropTypes.func
 }

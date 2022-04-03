@@ -1,15 +1,14 @@
-import React, { forwardRef, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Ripple } from '../ripple/Ripple';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { classNames, UniqueComponentId } from '../utils/Utils';
 import { useMountEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
-export const Fieldset = forwardRef((props, ref) => {
-    const [idState, setIdState] = useState(props.id);
-    const [collapsedState, setCollapsedState] = useState(props.collapsed);
+export const Fieldset = React.forwardRef((props, ref) => {
+    const [idState, setIdState] = React.useState(props.id);
+    const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
-    const contentRef = useRef(null);
+    const contentRef = React.useRef(null);
     const headerId = idState + '_header';
     const contentId = idState + '_content';
 
@@ -103,6 +102,7 @@ export const Fieldset = forwardRef((props, ref) => {
         }
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Fieldset.defaultProps);
     const className = classNames('p-fieldset p-component', {
         'p-fieldset-toggleable': props.toggleable
     }, props.className);
@@ -110,13 +110,14 @@ export const Fieldset = forwardRef((props, ref) => {
     const content = createContent();
 
     return (
-        <fieldset id={idState} className={className} style={props.style} onClick={props.onClick}>
+        <fieldset id={idState} className={className} style={props.style} {...otherProps} onClick={props.onClick}>
             {legend}
             {content}
         </fieldset>
     )
 });
 
+Fieldset.displayName = 'Fieldset';
 Fieldset.defaultProps = {
     __TYPE: 'Fieldset',
     id: null,
@@ -130,19 +131,4 @@ Fieldset.defaultProps = {
     onCollapse: null,
     onToggle: null,
     onClick: null
-};
-
-Fieldset.propTypes /* remove-proptypes */ = {
-    __TYPE: PropTypes.string,
-    id: PropTypes.string,
-    legend: PropTypes.any,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    toggleable: PropTypes.bool,
-    collapsed: PropTypes.bool,
-    transitionOptions: PropTypes.object,
-    onExpand: PropTypes.func,
-    onCollapse: PropTypes.func,
-    onToggle: PropTypes.func,
-    onClick: PropTypes.func
-};
+}
