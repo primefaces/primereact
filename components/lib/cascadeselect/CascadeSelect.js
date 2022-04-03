@@ -1,21 +1,21 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { CascadeSelectSub } from './CascadeSelectSub';
+import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils } from '../utils/Utils';
-import { useUpdateEffect, useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { CascadeSelectSub } from './CascadeSelectSub';
 
-export const CascadeSelect = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const elementRef = useRef(null);
-    const overlayRef = useRef(null);
-    const inputRef = useRef(null);
-    const labelRef = useRef(null);
-    const dirty = useRef(false);
-    const selectionPath = useRef(null);
+export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const inputRef = React.useRef(null);
+    const labelRef = React.useRef(null);
+    const dirty = React.useRef(false);
+    const selectionPath = React.useRef(null);
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: elementRef, overlay: overlayRef, listener: (event, { valid }) => {
@@ -181,7 +181,7 @@ export const CascadeSelect = memo(forwardRef((props, ref) => {
         DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
@@ -243,6 +243,7 @@ export const CascadeSelect = memo(forwardRef((props, ref) => {
     }
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, CascadeSelect.defaultProps);
         const className = classNames('p-cascadeselect p-component p-inputwrapper', {
             'p-disabled': props.disabled,
             'p-focus': focusedState,
@@ -256,7 +257,7 @@ export const CascadeSelect = memo(forwardRef((props, ref) => {
         const overlay = createOverlay();
 
         return (
-            <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
                 {keyboardHelper}
                 {labelElement}
                 {dropdownIcon}
@@ -270,6 +271,7 @@ export const CascadeSelect = memo(forwardRef((props, ref) => {
     return element;
 }));
 
+CascadeSelect.displayName = 'CascadeSelect';
 CascadeSelect.defaultProps = {
     __TYPE: 'CascadeSelect',
     id: null,

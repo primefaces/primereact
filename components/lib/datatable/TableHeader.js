@@ -1,13 +1,13 @@
-import React, { memo, useState } from 'react';
+import * as React from 'react';
+import { useMountEffect } from '../hooks/Hooks';
+import { classNames } from '../utils/Utils';
+import { ColumnFilter } from './ColumnFilter';
 import { HeaderCell } from './HeaderCell';
 import { HeaderCheckbox } from './HeaderCheckbox';
-import { ColumnFilter } from './ColumnFilter';
-import { classNames } from '../utils/Utils';
-import { useMountEffect } from '../hooks/Hooks';
 
-export const TableHeader = memo((props) => {
-    const [sortableDisabledFieldsState, setSortableDisabledFieldsState] = useState([]);
-    const [allSortableDisabledState, setAllSortableDisabledState] = useState(false);
+export const TableHeader = React.memo((props) => {
+    const [sortableDisabledFieldsState, setSortableDisabledFieldsState] = React.useState([]);
+    const [allSortableDisabledState, setAllSortableDisabledState] = React.useState(false);
     const isSingleSort = props.sortMode === 'single';
     const isMultipleSort = props.sortMode === 'multiple';
     const isAllSortableDisabled = isSingleSort && allSortableDisabledState;
@@ -142,3 +142,5 @@ export const TableHeader = memo((props) => {
         </thead>
     )
 });
+
+TableHeader.displayName = 'TableHeader';

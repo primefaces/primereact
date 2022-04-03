@@ -1,24 +1,23 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { ColorPickerPanel } from './ColorPickerPanel';
-import { tip } from '../tooltip/Tooltip';
+import { useEventListener, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils } from '../utils/Utils';
-import { useUnmountEffect, useEventListener, useOverlayListener, useUpdateEffect, useMountEffect } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { ColorPickerPanel } from './ColorPickerPanel';
 
-export const ColorPicker = memo(forwardRef((props, ref) => {
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const elementRef = useRef(null);
-    const overlayRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const tooltipRef = useRef(null);
-    const colorSelectorRef = useRef(null);
-    const colorHandleRef = useRef(null);
-    const hueHandleRef = useRef(null);
-    const hueViewRef = useRef(null);
-    const hueDragging = useRef(false);
-    const hsbValue = useRef(null);
-    const colorDragging = useRef(false);
+export const ColorPicker = React.memo(React.forwardRef((props, ref) => {
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
+    const colorSelectorRef = React.useRef(null);
+    const colorHandleRef = React.useRef(null);
+    const hueHandleRef = React.useRef(null);
+    const hueViewRef = React.useRef(null);
+    const hueDragging = React.useRef(false);
+    const hsbValue = React.useRef(null);
+    const colorDragging = React.useRef(false);
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: elementRef, overlay: overlayRef, listener: (event, { valid }) => {
@@ -438,22 +437,9 @@ export const ColorPicker = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
-
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
 
     useMountEffect(() => {
         updateHSBValue(props.value);
@@ -471,11 +457,6 @@ export const ColorPicker = memo(forwardRef((props, ref) => {
     });
 
     useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-
         ZIndexUtils.clear(overlayRef.current);
     });
 
@@ -528,6 +509,8 @@ export const ColorPicker = memo(forwardRef((props, ref) => {
         return null;
     }
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, ColorPicker.defaultProps);
     const className = classNames('p-colorpicker p-component', {
         'p-colorpicker-overlay': !props.inline
     }, props.className);
@@ -535,17 +518,21 @@ export const ColorPicker = memo(forwardRef((props, ref) => {
     const input = createInput();
 
     return (
-        <div ref={elementRef} id={props.id} style={props.style} className={className}>
-            {input}
-            <ColorPickerPanel ref={overlayRef} appendTo={props.appendTo} inline={props.inline} disabled={props.disabled} onClick={onPanelClick}
-                in={props.inline || overlayVisibleState} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited}
-                transitionOptions={props.transitionOptions}>
-                {content}
-            </ColorPickerPanel>
-        </div>
+        <>
+            <div ref={elementRef} id={props.id} style={props.style} className={className} {...otherProps}>
+                {input}
+                <ColorPickerPanel ref={overlayRef} appendTo={props.appendTo} inline={props.inline} disabled={props.disabled} onClick={onPanelClick}
+                    in={props.inline || overlayVisibleState} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited}
+                    transitionOptions={props.transitionOptions}>
+                    {content}
+                </ColorPickerPanel>
+            </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+ColorPicker.displayName = 'ColorPicker';
 ColorPicker.defaultProps = {
     __TYPE: 'ColorPicker',
     id: null,

@@ -1,11 +1,11 @@
-import React, { forwardRef, memo } from 'react';
-import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
 import { useTimeout } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const ToastMessage = memo(forwardRef((props, ref) => {
+export const ToastMessage = React.memo(React.forwardRef((props, ref) => {
     const { severity, content, summary, detail, closable, life, sticky,
-            className: _className, style, contentClassName: _contentClassName, contentStyle } = props.message;
+        className: _className, style, contentClassName: _contentClassName, contentStyle } = props.message;
 
     const [clearTimer] = useTimeout(() => {
         onClose();
@@ -75,3 +75,5 @@ export const ToastMessage = memo(forwardRef((props, ref) => {
         </div>
     )
 }));
+
+ToastMessage.displayName = 'ToastMessage';

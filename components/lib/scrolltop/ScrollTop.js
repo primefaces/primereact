@@ -1,14 +1,14 @@
-import React, { forwardRef, memo, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { Ripple } from '../ripple/Ripple';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { DomHandler, classNames, ZIndexUtils, IconUtils } from '../utils/Utils';
-import { useMountEffect, useUnmountEffect, useEventListener } from '../hooks/Hooks';
+import { useEventListener, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export const ScrollTop = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(false);
-    const scrollElementRef = useRef(null);
-    const helperRef = useRef(null);
+export const ScrollTop = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(false);
+    const scrollElementRef = React.useRef(null);
+    const helperRef = React.useRef(null);
     const isTargetParent = props.target === 'parent';
 
     const [bindParentScrollListener,] = useEventListener({
@@ -60,6 +60,7 @@ export const ScrollTop = memo(forwardRef((props, ref) => {
         ZIndexUtils.clear(scrollElementRef.current);
     });
 
+    const otherProps = ObjectUtils.findDiffKeys(props, ScrollTop.defaultProps);
     const className = classNames('p-scrolltop p-link p-component', {
         'p-scrolltop-sticky': props.target !== 'window'
     }, props.className);
@@ -68,7 +69,7 @@ export const ScrollTop = memo(forwardRef((props, ref) => {
         <>
             <CSSTransition nodeRef={scrollElementRef} classNames="p-scrolltop" in={visibleState} timeout={{ enter: 150, exit: 150 }} options={props.transitionOptions}
                 unmountOnExit onEnter={onEnter} onEntered={onEntered} onExited={onExited}>
-                <button ref={scrollElementRef} type="button" className={className} style={props.style} onClick={onClick}>
+                <button ref={scrollElementRef} type="button" className={className} style={props.style} {...otherProps} onClick={onClick}>
                     {IconUtils.getJSXIcon(props.icon, { className: 'p-scrolltop-icon' }, { props })}
                     <Ripple />
                 </button>
@@ -78,6 +79,7 @@ export const ScrollTop = memo(forwardRef((props, ref) => {
     )
 }));
 
+ScrollTop.displayName = 'ScrollTop';
 ScrollTop.defaultProps = {
     __TYPE: 'ScrollTop',
     target: 'window',

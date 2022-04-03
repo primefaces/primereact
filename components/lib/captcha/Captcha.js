@@ -1,10 +1,12 @@
-import React, { forwardRef, memo, useImperativeHandle, useRef } from 'react';
+import * as React from 'react';
 import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
+import { ObjectUtils } from '../utils/Utils';
 
-export const Captcha = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
-    const instance = useRef(null);
-    const recaptchaScript = useRef(null);
+export const Captcha = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
+    const instance = React.useRef(null);
+    const recaptchaScript = React.useRef(null);
+    const isCaptchaLoaded = React.useRef(false);
 
     const init = () => {
         instance.current = (window).grecaptcha.render(elementRef.current, {
@@ -60,27 +62,34 @@ export const Captcha = memo(forwardRef((props, ref) => {
     }
 
     useMountEffect(() => {
-        addRecaptchaScript();
+        if (!isCaptchaLoaded.current) {
+            addRecaptchaScript();
 
-        if ((window).grecaptcha) {
-            init();
+            if ((window).grecaptcha) {
+                init();
+            }
+
+            isCaptchaLoaded.current = true;
         }
     });
 
     useUnmountEffect(() => {
-        if (recaptchaScript.current) {
+        if (recaptchaScript.current && recaptchaScript.current.parentNode) {
             recaptchaScript.current.parentNode.removeChild(recaptchaScript.current);
         }
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         reset,
         getResponse
     }));
 
-    return <div ref={elementRef} id={props.id}></div>
+    const otherProps = ObjectUtils.findDiffKeys(props, Captcha.defaultProps);
+
+    return <div ref={elementRef} id={props.id} {...otherProps}></div>
 }));
 
+Captcha.displayName = 'Captcha';
 Captcha.defaultProps = {
     __TYPE: 'Captcha',
     id: null,

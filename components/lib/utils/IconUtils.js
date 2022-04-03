@@ -1,6 +1,6 @@
-import React from 'react';
-import ObjectUtils from './ObjectUtils';
+import * as React from 'react';
 import { classNames } from './ClassNames';
+import ObjectUtils from './ObjectUtils';
 
 export default class IconUtils {
 

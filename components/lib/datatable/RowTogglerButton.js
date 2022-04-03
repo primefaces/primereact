@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { classNames } from '../utils/Utils';
 
-export const RowTogglerButton = memo((props) => {
+export const RowTogglerButton = React.memo((props) => {
 
     const onClick = (event) => {
         props.onClick({
@@ -20,3 +20,5 @@ export const RowTogglerButton = memo((props) => {
         </button>
     )
 });
+
+RowTogglerButton.displayName = 'RowTogglerButton';

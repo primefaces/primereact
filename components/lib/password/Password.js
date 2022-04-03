@@ -1,30 +1,28 @@
-import React, { forwardRef, memo, useEffect, useMemo, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
-import { tip } from '../tooltip/Tooltip';
-import { InputText } from '../inputtext/InputText';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
-import { useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export const Password = memo(forwardRef((props, ref) => {
+export const Password = React.memo(React.forwardRef((props, ref) => {
     const promptLabel = props.promptLabel || localeOption('passwordPrompt');
     const weakLabel = props.weakLabel || localeOption('weak');
     const mediumLabel = props.mediumLabel || localeOption('medium');
     const strongLabel = props.strongLabel || localeOption('strong');
 
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const [meterState, setMeterState] = useState(null);
-    const [infoTextState, setInfoTextState] = useState(promptLabel);
-    const [focusedState, setFocusedState] = useState(false);
-    const [unmaskedState, setUnmaskedState] = useState(false);
-    const elementRef = useRef(null);
-    const overlayRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const tooltipRef = useRef(null);
-    const mediumCheckRegExp = useRef(new RegExp(props.mediumRegex));
-    const strongCheckRegExp = useRef(new RegExp(props.strongRegex));
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const [meterState, setMeterState] = React.useState(null);
+    const [infoTextState, setInfoTextState] = React.useState(promptLabel);
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [unmaskedState, setUnmaskedState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
+    const mediumCheckRegExp = React.useRef(new RegExp(props.mediumRegex));
+    const strongCheckRegExp = React.useRef(new RegExp(props.strongRegex));
     const type = unmaskedState ? 'text' : 'password';
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
@@ -33,7 +31,7 @@ export const Password = memo(forwardRef((props, ref) => {
         }, when: overlayVisibleState
     });
 
-    const isFilled = useMemo(() => (
+    const isFilled = React.useMemo(() => (
         ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (inputRef.current && ObjectUtils.isNotEmpty(inputRef.current.value))
     ), [props.value, props.defaultValue, inputRef]);
 
@@ -210,32 +208,19 @@ export const Password = memo(forwardRef((props, ref) => {
         return 0;
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: inputRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useEffect(() => {
+    React.useEffect(() => {
         mediumCheckRegExp.current = new RegExp(props.mediumRegex);
     }, [props.mediumRegex]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         strongCheckRegExp.current = new RegExp(props.strongRegex);
     }, [props.strongRegex]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (!isFilled && DomHandler.hasClass(elementRef.current, 'p-inputwrapper-filled')) {
             DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
         }
@@ -243,11 +228,6 @@ export const Password = memo(forwardRef((props, ref) => {
 
     useUnmountEffect(() => {
         ZIndexUtils.clear(overlayRef.current);
-
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
     });
 
     const createIcon = () => {
@@ -315,13 +295,14 @@ export const Password = memo(forwardRef((props, ref) => {
     return (
         <div ref={elementRef} id={props.id} className={className} style={props.style}>
             <InputText ref={inputRef} id={props.inputId} {...inputProps} type={type} className={inputClassName} style={props.inputStyle}
-                onFocus={onFocus} onBlur={onBlur} onKeyUp={onKeyup} onInput={onInput} />
+                onFocus={onFocus} onBlur={onBlur} onKeyUp={onKeyup} onInput={onInput} tooltip={props.tooltip} tooltipOptions={props.tooltipOptions} />
             {icon}
             {panel}
         </div>
     )
 }));
 
+Password.displayName = 'Password';
 Password.defaultProps = {
     __TYPE: 'Password',
     id: null,

@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { InputText } from '../inputtext/InputText';
 
-export const ListBoxHeader = memo((props) => {
+export const ListBoxHeader = React.memo((props) => {
 
     const onFilter = (event) => {
         if (props.onFilter) {
@@ -20,4 +20,6 @@ export const ListBoxHeader = memo((props) => {
             </div>
         </div>
     )
-})
+});
+
+ListBoxHeader.displayName = 'ListBoxHeader';

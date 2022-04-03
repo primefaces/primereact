@@ -1,13 +1,13 @@
-import React, { createRef, forwardRef, useState } from 'react';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { classNames, ObjectUtils, IconUtils, UniqueComponentId } from '../utils/Utils';
 import { useMountEffect } from '../hooks/Hooks';
+import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
 export const AccordionTab = () => { }
 
-export const Accordion = forwardRef((props, ref) => {
-    const [idState, setIdState] = useState(props.id);
-    const [activeIndexState, setActiveIndexState] = useState(null);
+export const Accordion = React.forwardRef((props, ref) => {
+    const [idState, setIdState] = React.useState(props.id);
+    const [activeIndexState, setActiveIndexState] = React.useState(null);
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
 
     const shouldUseTab = (tab) => tab && tab.props.__TYPE === 'AccordionTab';
@@ -79,7 +79,7 @@ export const Accordion = forwardRef((props, ref) => {
         const className = classNames('p-toggleable-content', tab.props.contentClassName, tab.props.className);
         const contentId = idState + '_content_' + index;
         const ariaLabelledby = idState + '_header_' + index;
-        const contentRef = createRef();
+        const contentRef = React.createRef();
 
         return (
             <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={selected} unmountOnExit options={props.transitionOptions}>
@@ -96,6 +96,7 @@ export const Accordion = forwardRef((props, ref) => {
         if (shouldUseTab(tab)) {
             const key = idState + '_' + index;
             const selected = isSelected(index);
+            const otherProps = ObjectUtils.findDiffKeys(tab.props, AccordionTab.defaultProps);
             const tabHeader = createTabHeader(tab, selected, index);
             const tabContent = createTabContent(tab, selected, index);
             const tabClassName = classNames('p-accordion-tab', {
@@ -103,7 +104,7 @@ export const Accordion = forwardRef((props, ref) => {
             });
 
             return (
-                <div key={key} className={tabClassName}>
+                <div key={key} className={tabClassName} {...otherProps}>
                     {tabHeader}
                     {tabContent}
                 </div>
@@ -117,16 +118,18 @@ export const Accordion = forwardRef((props, ref) => {
         return React.Children.map(props.children, createTab);
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Accordion.defaultProps);
     const className = classNames('p-accordion p-component', props.className);
     const tabs = createTabs();
 
     return (
-        <div id={idState} className={className} style={props.style}>
+        <div id={idState} className={className} style={props.style} {...otherProps}>
             {tabs}
         </div>
     )
 });
 
+AccordionTab.displayName = 'AccordionTab';
 AccordionTab.defaultProps = {
     __TYPE: 'AccordionTab',
     header: null,
@@ -140,6 +143,7 @@ AccordionTab.defaultProps = {
     contentClassName: null
 }
 
+Accordion.displayName = 'Accordion';
 Accordion.defaultProps = {
     __TYPE: 'Accordion',
     id: null,

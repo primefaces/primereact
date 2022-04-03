@@ -1,8 +1,8 @@
-import React, { memo, useState } from 'react';
+import * as React from 'react';
 import { classNames } from '../utils/Utils';
 
-export const RowCheckbox = memo((props) => {
-    const [focusedState, setFocusedState] = useState(false);
+export const RowCheckbox = React.memo((props) => {
+    const [focusedState, setFocusedState] = React.useState(false);
 
     const onFocus = () => {
         setFocusedState(true);
@@ -41,3 +41,5 @@ export const RowCheckbox = memo((props) => {
         </div>
     )
 });
+
+RowCheckbox.displayName = 'RowCheckbox';

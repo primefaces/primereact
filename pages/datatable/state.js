@@ -129,11 +129,12 @@ const DataTableStateDemo = () => {
 
     const renderHeader = (filtersKey) => {
         const filters = filtersMap[`${filtersKey}`].value;
+        const value = filters['global'] ? filters['global'].value : '';
 
         return (
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" value={filters['global'].value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
+                <InputText type="search" value={value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
             </span>
         );
     }
@@ -521,11 +522,12 @@ const DataTableStateDemo = () => {
 
     const renderHeader = (filtersKey) => {
         const filters = filtersMap[\`\${filtersKey}\`].value;
+        const value = filters['global'] ? filters['global'].value : '';
 
         return (
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" value={filters['global'].value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
+                <InputText type="search" value={value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
             </span>
         );
     }
@@ -703,11 +705,12 @@ const DataTableStateDemo = () => {
 
     const renderHeader = (filtersKey) => {
         const filters = filtersMap[\`\${filtersKey}\`].value;
+        const value = filters['global'] ? filters['global'].value : '';
 
         return (
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" value={filters['global'].value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
+                <InputText type="search" value={value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
             </span>
         );
     }
@@ -897,11 +900,12 @@ const DataTableStateDemo = () => {
 
     const renderHeader = (filtersKey) => {
         const filters = filtersMap[\`\${filtersKey}\`].value;
+        const value = filters['global'] ? filters['global'].value : '';
 
         return (
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" value={filters['global'].value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
+                <InputText type="search" value={value || ''} onChange={(e) => onGlobalFilterChange(e, filtersKey)} placeholder="Global Search" />
             </span>
         );
     }

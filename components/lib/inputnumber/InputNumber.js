@@ -1,31 +1,30 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { tip } from '../tooltip/Tooltip';
-import { Ripple } from '../ripple/Ripple';
+import * as React from 'react';
+import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
+import { Ripple } from '../ripple/Ripple';
+import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useUnmountEffect } from '../hooks/Hooks';
 
-export const InputNumber = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const elementRef = useRef(null);
-    const inputRef = useRef(null);
-    const tooltipRef = useRef(null);
-    const timer = useRef(null);
-    const lastValue = useRef(null);
+export const InputNumber = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const inputRef = React.useRef(null);
+    const timer = React.useRef(null);
+    const lastValue = React.useRef(null);
 
-    const numberFormat = useRef(null);
-    const groupChar = useRef(null);
-    const prefixChar = useRef(null);
-    const suffixChar = useRef(null);
-    const isSpecialChar = useRef(null);
-    const _numeral = useRef(null);
-    const _group = useRef(null);
-    const _minusSign = useRef(null);
-    const _currency = useRef(null);
-    const _decimal = useRef(null);
-    const _suffix = useRef(null);
-    const _prefix = useRef(null);
-    const _index = useRef(null);
+    const numberFormat = React.useRef(null);
+    const groupChar = React.useRef(null);
+    const prefixChar = React.useRef(null);
+    const suffixChar = React.useRef(null);
+    const isSpecialChar = React.useRef(null);
+    const _numeral = React.useRef(null);
+    const _group = React.useRef(null);
+    const _minusSign = React.useRef(null);
+    const _currency = React.useRef(null);
+    const _decimal = React.useRef(null);
+    const _suffix = React.useRef(null);
+    const _prefix = React.useRef(null);
+    const _index = React.useRef(null);
 
     const stacked = props.showButtons && props.buttonLayout === 'stacked';
     const horizontal = props.showButtons && props.buttonLayout === 'horizontal';
@@ -903,26 +902,13 @@ export const InputNumber = memo(forwardRef((props, ref) => {
         return numberFormat.current;
     }
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         getFormatter
     }));
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
-
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
 
     useMountEffect(() => {
         constructParser();
@@ -941,13 +927,6 @@ export const InputNumber = memo(forwardRef((props, ref) => {
     useUpdateEffect(() => {
         changeValue();
     }, [props.value]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
 
     const createInputElement = () => {
         const className = classNames('p-inputnumber-input', props.inputClassName);
@@ -1015,6 +994,8 @@ export const InputNumber = memo(forwardRef((props, ref) => {
         )
     }
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, InputNumber.defaultProps);
     const className = classNames('p-inputnumber p-component p-inputwrapper', {
         'p-inputwrapper-filled': props.value != null && props.value.toString().length > 0,
         'p-inputwrapper-focus': focusedState,
@@ -1026,13 +1007,17 @@ export const InputNumber = memo(forwardRef((props, ref) => {
     const buttonGroup = createButtonGroup();
 
     return (
-        <span ref={elementRef} id={props.id} className={className} style={props.style}>
-            {inputElement}
-            {buttonGroup}
-        </span>
+        <>
+            <span ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+                {inputElement}
+                {buttonGroup}
+            </span>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+InputNumber.displayName = 'InputNumber';
 InputNumber.defaultProps = {
     __TYPE: 'InputNumber',
     value: null,

@@ -1,16 +1,18 @@
-import React, { forwardRef, memo, useState } from 'react';
+import * as React from 'react';
+import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useEventListener } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const MenubarSub = memo(forwardRef((props, ref) => {
-    const [activeItemState, setActiveItemState] = useState(null);
+export const MenubarSub = React.memo(React.forwardRef((props, ref) => {
+    const [activeItemState, setActiveItemState] = React.useState(null);
 
-    const [bindDocumentClickListener, ] = useEventListener({ type: 'click', listener: (event) => {
-        if (ref && ref.current && !ref.current.contains(event.target)) {
-            setActiveItemState(null);
+    const [bindDocumentClickListener,] = useEventListener({
+        type: 'click', listener: (event) => {
+            if (ref && ref.current && !ref.current.contains(event.target)) {
+                setActiveItemState(null);
+            }
         }
-    }});
+    });
 
     const onItemMouseEnter = (event, item) => {
         if (item.disabled || props.mobileActive) {
@@ -236,3 +238,5 @@ export const MenubarSub = memo(forwardRef((props, ref) => {
         </ul>
     )
 }));
+
+MenubarSub.displayName = 'MenubarSub';

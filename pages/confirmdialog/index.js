@@ -69,6 +69,8 @@ const ConfirmDialogDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="card">
+                    <ConfirmDialog />
+
                     <h5>Basic</h5>
                     <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                     <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>

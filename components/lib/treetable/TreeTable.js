@@ -1,38 +1,38 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
-import { TreeTableHeader } from './TreeTableHeader';
+import { useEventListener } from '../hooks/Hooks';
+import { Paginator } from '../paginator/Paginator';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { TreeTableBody } from './TreeTableBody';
 import { TreeTableFooter } from './TreeTableFooter';
+import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableScrollableView } from './TreeTableScrollableView';
-import { Paginator } from '../paginator/Paginator';
-import { ObjectUtils, DomHandler, classNames } from '../utils/Utils';
-import { useEventListener } from '../hooks/Hooks';
 
-export const TreeTable = forwardRef((props, ref) => {
-    const [expandedKeysState, setExpandedKeysState] = useState(props.expandedKeys);
-    const [firstState, setFirstState] = useState(props.first);
-    const [rowsState, setRowsState] = useState(props.rows);
-    const [sortFieldState, setSortFieldState] = useState(props.sortField);
-    const [sortOrderState, setSortOrderState] = useState(props.sortOrder);
-    const [multiSortMetaState, setMultiSortMetaState] = useState(props.multiSortMeta);
-    const [filtersState, setFiltersState] = useState(props.filters);
-    const [columnOrderState, setColumnOrderState] = useState([]);
-    const elementRef = useRef(null);
-    const resizerHelperRef = useRef(null);
-    const reorderIndicatorUpRef = useRef(null);
-    const reorderIndicatorDownRef = useRef(null);
-    const columnResizing = useRef(null);
-    const resizeColumn = useRef(null);
-    const resizeColumnProps = useRef(null);
-    const lastResizerHelperX = useRef(0);
-    const iconWidth = useRef(0);
-    const iconHeight = useRef(0);
-    const draggedColumnEl = useRef(null);
-    const draggedColumn = useRef(null);
-    const dropPosition = useRef(null);
-    const columnSortable = useRef(null);
-    const columnSortFunction = useRef(null);
-    const columnField = useRef(null);
+export const TreeTable = React.forwardRef((props, ref) => {
+    const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
+    const [firstState, setFirstState] = React.useState(props.first);
+    const [rowsState, setRowsState] = React.useState(props.rows);
+    const [sortFieldState, setSortFieldState] = React.useState(props.sortField);
+    const [sortOrderState, setSortOrderState] = React.useState(props.sortOrder);
+    const [multiSortMetaState, setMultiSortMetaState] = React.useState(props.multiSortMeta);
+    const [filtersState, setFiltersState] = React.useState(props.filters);
+    const [columnOrderState, setColumnOrderState] = React.useState([]);
+    const elementRef = React.useRef(null);
+    const resizerHelperRef = React.useRef(null);
+    const reorderIndicatorUpRef = React.useRef(null);
+    const reorderIndicatorDownRef = React.useRef(null);
+    const columnResizing = React.useRef(null);
+    const resizeColumn = React.useRef(null);
+    const resizeColumnProps = React.useRef(null);
+    const lastResizerHelperX = React.useRef(0);
+    const iconWidth = React.useRef(0);
+    const iconHeight = React.useRef(0);
+    const draggedColumnEl = React.useRef(null);
+    const draggedColumn = React.useRef(null);
+    const dropPosition = React.useRef(null);
+    const columnSortable = React.useRef(null);
+    const columnSortFunction = React.useRef(null);
+    const columnField = React.useRef(null);
 
     const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({
         type: 'mousemove', listener: (event) => {
@@ -789,7 +789,7 @@ export const TreeTable = forwardRef((props, ref) => {
         return data;
     }
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         filter
     }));
 
@@ -907,6 +907,8 @@ export const TreeTable = forwardRef((props, ref) => {
     }
 
     const data = processData();
+
+    const otherProps = ObjectUtils.findDiffKeys(props, TreeTable.defaultProps);
     const className = classNames('p-treetable p-component', {
         'p-treetable-hoverable-rows': props.rowHover,
         'p-treetable-selectable': isRowSelectionMode(),
@@ -928,7 +930,7 @@ export const TreeTable = forwardRef((props, ref) => {
     const reorderIndicatorDown = props.reorderableColumns && <span ref={reorderIndicatorDownRef} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{ position: 'absolute', display: 'none' }} />;
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-scrollable-body">
+        <div ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-scrollable-body" {...otherProps}>
             {loader}
             {headerFacet}
             {paginatorTop}
@@ -942,6 +944,7 @@ export const TreeTable = forwardRef((props, ref) => {
     )
 });
 
+TreeTable.displayName = 'TreeTable';
 TreeTable.defaultProps = {
     __TYPE: 'TreeTable',
     id: null,

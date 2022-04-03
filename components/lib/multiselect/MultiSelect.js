@@ -1,20 +1,19 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
-import { tip } from '../tooltip/Tooltip';
-import { MultiSelectPanel } from './MultiSelectPanel';
+import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames, IconUtils } from '../utils/Utils';
-import { useUpdateEffect, useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { MultiSelectPanel } from './MultiSelectPanel';
 
-export const MultiSelect = memo(forwardRef((props, ref) => {
-    const [filterState, setFilterState] = useState('');
-    const [focusedState, setFocusedState] = useState(false);
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const elementRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const labelRef = useRef(null);
-    const overlayRef = useRef(null);
-    const tooltipRef = useRef(null);
+export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
+    const [filterState, setFilterState] = React.useState('');
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
+    const labelRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
     const hasFilter = filterState && filterState.trim().length > 0;
     const empty = ObjectUtils.isEmpty(props.value);
     const equalityKey = props.optionValue ? null : props.dataKey;
@@ -501,22 +500,9 @@ export const MultiSelect = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
-
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
 
     useUpdateEffect(() => {
         if (overlayVisibleState && hasFilter) {
@@ -526,11 +512,6 @@ export const MultiSelect = memo(forwardRef((props, ref) => {
 
     useUnmountEffect(() => {
         ZIndexUtils.clear(overlayRef.current);
-
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
     });
 
     const createClearIcon = () => {
@@ -558,6 +539,8 @@ export const MultiSelect = memo(forwardRef((props, ref) => {
 
     const visibleOptions = getVisibleOptions();
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, MultiSelect.defaultProps);
     const className = classNames('p-multiselect p-component p-inputwrapper', {
         'p-multiselect-chip': props.display === 'chip',
         'p-disabled': props.disabled,
@@ -570,26 +553,30 @@ export const MultiSelect = memo(forwardRef((props, ref) => {
     const clearIcon = createClearIcon();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} onClick={onClick} style={props.style}>
-            <div className="p-hidden-accessible">
-                <input ref={inputRef} id={props.inputId} name={props.name} readOnly type="text" onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}
-                    role="listbox" aria-labelledby={props.ariaLabelledBy} aria-expanded={overlayVisibleState} disabled={props.disabled} tabIndex={props.tabIndex} />
+        <>
+            <div ref={elementRef} id={props.id} style={props.style} className={className} {...otherProps} onClick={onClick}>
+                <div className="p-hidden-accessible">
+                    <input ref={inputRef} id={props.inputId} name={props.name} readOnly type="text" onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}
+                        role="listbox" aria-labelledby={props.ariaLabelledBy} aria-expanded={overlayVisibleState} disabled={props.disabled} tabIndex={props.tabIndex} />
+                </div>
+                {label}
+                {clearIcon}
+                <div className="p-multiselect-trigger">
+                    {IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}
+                </div>
+                <MultiSelectPanel ref={overlayRef} visibleOptions={visibleOptions} {...props} onClick={onPanelClick} onOverlayHide={hide}
+                    filterValue={filterState} hasFilter={hasFilter} onFilterInputChange={onFilterInputChange} onCloseClick={onCloseClick} onSelectAll={onSelectAll}
+                    getOptionLabel={getOptionLabel} getOptionRenderKey={getOptionRenderKey} isOptionDisabled={isOptionDisabled}
+                    getOptionGroupChildren={getOptionGroupChildren} getOptionGroupLabel={getOptionGroupLabel} getOptionGroupRenderKey={getOptionGroupRenderKey}
+                    isSelected={isSelected} getSelectedOptionIndex={getSelectedOptionIndex} isAllSelected={isAllSelected} onOptionSelect={onOptionSelect} allowOptionSelect={allowOptionSelect} onOptionKeyDown={onOptionKeyDown}
+                    in={overlayVisibleState} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited} />
             </div>
-            {label}
-            {clearIcon}
-            <div className="p-multiselect-trigger">
-                {IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}
-            </div>
-            <MultiSelectPanel ref={overlayRef} visibleOptions={visibleOptions} {...props} onClick={onPanelClick} onOverlayHide={hide}
-                filterValue={filterState} hasFilter={hasFilter} onFilterInputChange={onFilterInputChange} onCloseClick={onCloseClick} onSelectAll={onSelectAll}
-                getOptionLabel={getOptionLabel} getOptionRenderKey={getOptionRenderKey} isOptionDisabled={isOptionDisabled}
-                getOptionGroupChildren={getOptionGroupChildren} getOptionGroupLabel={getOptionGroupLabel} getOptionGroupRenderKey={getOptionGroupRenderKey}
-                isSelected={isSelected} getSelectedOptionIndex={getSelectedOptionIndex} isAllSelected={isAllSelected} onOptionSelect={onOptionSelect} allowOptionSelect={allowOptionSelect} onOptionKeyDown={onOptionKeyDown}
-                in={overlayVisibleState} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited} />
-        </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+MultiSelect.displayName = 'MultiSelect';
 MultiSelect.defaultProps = {
     __TYPE: 'MultiSelect',
     id: null,

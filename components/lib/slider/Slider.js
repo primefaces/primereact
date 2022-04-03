@@ -1,16 +1,16 @@
-import React, { forwardRef, memo, useRef } from 'react';
-import { DomHandler, classNames } from '../utils/Utils';
+import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const Slider = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
-    const handleIndex = useRef(0);
-    const sliderHandleClick = useRef(false);
-    const dragging = useRef(false);
-    const initX = useRef(0);
-    const initY = useRef(0);
-    const barWidth = useRef(0);
-    const barHeight = useRef(0);
+export const Slider = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
+    const handleIndex = React.useRef(0);
+    const sliderHandleClick = React.useRef(false);
+    const dragging = React.useRef(false);
+    const initX = React.useRef(0);
+    const initY = React.useRef(0);
+    const barWidth = React.useRef(0);
+    const barHeight = React.useRef(0);
     const value = props.range ? props.value || [0, 100] : props.value || 0;
     const horizontal = props.orientation === 'horizontal';
     const vertical = props.orientation === 'vertical';
@@ -242,6 +242,7 @@ export const Slider = memo(forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Slider.defaultProps);
     const className = classNames('p-slider p-component', props.className, {
         'p-disabled': props.disabled,
         'p-slider-horizontal': horizontal,
@@ -250,12 +251,13 @@ export const Slider = memo(forwardRef((props, ref) => {
     const content = props.range ? createRangeSlider() : createSingleSlider();
 
     return (
-        <div ref={elementRef} id={props.id} style={props.style} className={className} onClick={onBarClick}>
+        <div ref={elementRef} id={props.id} style={props.style} className={className} {...otherProps} onClick={onBarClick}>
             {content}
         </div>
     )
 }));
 
+Slider.displayName = 'Slider';
 Slider.defaultProps = {
     __TYPE: 'Slider',
     id: null,

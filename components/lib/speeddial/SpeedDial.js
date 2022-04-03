@@ -1,14 +1,14 @@
-import React, { forwardRef, memo, useImperativeHandle, useRef, useState } from 'react';
+import * as React from 'react';
 import { Button } from '../button/Button';
+import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { useMountEffect, useUpdateEffect, useEventListener } from '../hooks/Hooks';
 
-export const SpeedDial = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(false);
-    const isItemClicked = useRef(false);
-    const elementRef = useRef(null);
-    const listRef = useRef(null);
+export const SpeedDial = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(false);
+    const isItemClicked = React.useRef(false);
+    const elementRef = React.useRef(null);
+    const listRef = React.useRef(null);
     const visible = props.onVisibleChange ? props.visible : visibleState;
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
@@ -145,7 +145,7 @@ export const SpeedDial = memo(forwardRef((props, ref) => {
         }
     }, [visibleState]);
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         show,
         hide
     }));
@@ -235,6 +235,7 @@ export const SpeedDial = memo(forwardRef((props, ref) => {
         return null;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, SpeedDial.defaultProps);
     const className = classNames(`p-speeddial p-component p-speeddial-${props.type}`, {
         [`p-speeddial-direction-${props.direction}`]: props.type !== 'circle',
         'p-speeddial-opened': visible,
@@ -246,7 +247,7 @@ export const SpeedDial = memo(forwardRef((props, ref) => {
 
     return (
         <React.Fragment>
-            <div ref={elementRef} id={props.id} className={className} style={props.style}>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
                 {button}
                 {list}
             </div>
@@ -255,6 +256,7 @@ export const SpeedDial = memo(forwardRef((props, ref) => {
     )
 }));
 
+SpeedDial.displayName = 'SpeedDial';
 SpeedDial.defaultProps = {
     __TYPE: 'SpeedDial',
     id: null,

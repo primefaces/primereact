@@ -1,20 +1,20 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
-import { Ripple } from '../ripple/Ripple';
-import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ZIndexUtils, classNames, UniqueComponentId } from '../utils/Utils';
-import { useMountEffect, useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 
-export const OverlayPanel = forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(false);
-    const attributeSelector = useRef('');
-    const overlayRef = useRef(null);
-    const currentTargetRef = useRef(null);
-    const isPanelClicked = useRef(false);
-    const styleElement = useRef(null);
-    const overlayEventListener = useRef(null);
+export const OverlayPanel = React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(false);
+    const attributeSelector = React.useRef('');
+    const overlayRef = React.useRef(null);
+    const currentTargetRef = React.useRef(null);
+    const isPanelClicked = React.useRef(false);
+    const styleElement = React.useRef(null);
+    const overlayEventListener = React.useRef(null);
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: currentTargetRef, overlay: overlayRef, listener: (event, { type, valid }) => {
@@ -80,10 +80,8 @@ export const OverlayPanel = forwardRef((props, ref) => {
             setVisibleState(true);
 
             overlayEventListener.current = (e) => {
-                if (!isOutsideClicked(e.target)) {
-                    isPanelClicked.current = true;
-                }
-            };
+                !isOutsideClicked(e.target) && (isPanelClicked.current = true);
+            }
 
             OverlayService.on('overlay-click', overlayEventListener.current);
         }
@@ -175,7 +173,7 @@ export const OverlayPanel = forwardRef((props, ref) => {
         ZIndexUtils.clear(overlayRef.current);
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         toggle,
         show,
         hide
@@ -195,13 +193,14 @@ export const OverlayPanel = forwardRef((props, ref) => {
     }
 
     const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, OverlayPanel.defaultProps);
         const className = classNames('p-overlaypanel p-component', props.className);
         const closeIcon = createCloseIcon();
 
         return (
             <CSSTransition nodeRef={overlayRef} classNames="p-overlaypanel" in={visibleState} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
                 unmountOnExit onEnter={onEnter} onEntered={onEntered} onExit={onExit} onExited={onExited}>
-                <div ref={overlayRef} id={props.id} className={className} style={props.style} onClick={onPanelClick}>
+                <div ref={overlayRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
                     <div className="p-overlaypanel-content" onClick={onContentClick} onMouseDown={onContentClick}>
                         {props.children}
                     </div>
@@ -216,6 +215,7 @@ export const OverlayPanel = forwardRef((props, ref) => {
     return <Portal element={element} appendTo={props.appendTo} />
 });
 
+OverlayPanel.displayName = 'OverlayPanel';
 OverlayPanel.defaultProps = {
     __TYPE: 'OverlayPanel',
     id: null,

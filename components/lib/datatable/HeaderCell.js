@@ -1,12 +1,12 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
-import { HeaderCheckbox } from './HeaderCheckbox';
-import { ColumnFilter } from './ColumnFilter';
-import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
+import * as React from 'react';
 import { usePrevious } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { ColumnFilter } from './ColumnFilter';
+import { HeaderCheckbox } from './HeaderCheckbox';
 
-export const HeaderCell = memo((props) => {
-    const [styleObjectState, setStyleObjectState] = useState({});
-    const elementRef = useRef(null);
+export const HeaderCell = React.memo((props) => {
+    const [styleObjectState, setStyleObjectState] = React.useState({});
+    const elementRef = React.useRef(null);
     const prevColumn = usePrevious(props.column);
 
     const isBadgeVisible = () => {
@@ -177,7 +177,7 @@ export const HeaderCell = memo((props) => {
         }
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (getColumnProp('frozen')) {
             updateStickyPosition();
         }
@@ -302,3 +302,5 @@ export const HeaderCell = memo((props) => {
 
     return element;
 });
+
+HeaderCell.displayName = 'HeaderCell';

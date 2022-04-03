@@ -1,21 +1,21 @@
-import React, { forwardRef, memo, useRef } from 'react';
+import * as React from 'react';
 import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
 import { useMountEffect, useEventListener } from '../hooks/Hooks';
 
 export const SplitterPanel = () => { }
 
-export const Splitter = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
-    const gutterRef = useRef(null);
-    const size = useRef(null);
-    const dragging = useRef(null);
-    const startPos = useRef(null);
-    const prevPanelElement = useRef(null);
-    const nextPanelElement = useRef(null);
-    const prevPanelSize = useRef(null);
-    const nextPanelSize = useRef(null);
-    const prevPanelIndex = useRef(null);
-    const panelSizes = useRef(null);
+export const Splitter = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
+    const gutterRef = React.useRef(null);
+    const size = React.useRef(null);
+    const dragging = React.useRef(null);
+    const startPos = React.useRef(null);
+    const prevPanelElement = React.useRef(null);
+    const nextPanelElement = React.useRef(null);
+    const prevPanelSize = React.useRef(null);
+    const nextPanelSize = React.useRef(null);
+    const prevPanelIndex = React.useRef(null);
+    const panelSizes = React.useRef(null);
     const isStateful = props.stateKey != null;
 
     const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({ type: 'mousemove', listener: (event) => onResize(event) });
@@ -199,6 +199,7 @@ export const Splitter = memo(forwardRef((props, ref) => {
     });
 
     const createPanel = (panel, index) => {
+        const otherProps = ObjectUtils.findDiffKeys(panel.props, SplitterPanel.defaultProps);
         const panelClassName = classNames('p-splitter-panel', panel.props.className);
         const gutterStyle = props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' }
         const gutter = (index !== props.children.length - 1) && (
@@ -210,7 +211,7 @@ export const Splitter = memo(forwardRef((props, ref) => {
 
         return (
             <React.Fragment>
-                <div key={index} className={panelClassName} style={panel.props.style}>
+                <div key={index} className={panelClassName} style={panel.props.style} {...otherProps}>
                     {panel.props.children}
                 </div>
                 {gutter}
@@ -223,16 +224,18 @@ export const Splitter = memo(forwardRef((props, ref) => {
         return React.Children.map(props.children, createPanel);
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Splitter.defaultProps);
     const className = classNames(`p-splitter p-component p-splitter-${props.layout}`, props.className);
     const panels = createPanels();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}>
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
             {panels}
         </div>
     )
 }));
 
+SplitterPanel.displayName = 'SplitterPanel';
 SplitterPanel.defaultProps = {
     __TYPE: 'SplitterPanel',
     size: null,
@@ -241,6 +244,7 @@ SplitterPanel.defaultProps = {
     className: null
 }
 
+Splitter.displayName = 'Splitter';
 Splitter.defaultProps = {
     __TYPE: 'Splitter',
     id: null,

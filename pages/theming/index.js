@@ -109,7 +109,7 @@ primereact/resources/themes/rhea/theme.css
                 <p>Designer themes apply a global skin to the library, in case you need to change the style of a particular component, you may use a named class, CSS Modules or a CSS-in-JS solution like styled-jsx.</p>
 
                 <h6>Named Class</h6>
-                <p>A named class is bound to the className prop of a component and the CSS is included with an import. Note that, the css still is still bundled globally so prefer this approach 
+                <p>A named class is bound to the className prop of a component and the CSS is included with an import. Note that, the css still is still bundled globally so prefer this approach
                     if your application doesn't have a built-in solution to do CSS scoping.</p>
                 <i>custompanel.css</i>
 <CodeHighlight lang="css">
@@ -142,7 +142,7 @@ export default function PanelDemo() {
 </CodeHighlight>
 
                 <Panel header="Named ClassName" className="mypanel">
-                    <p class="p-0 m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <p className="p-0 m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -151,11 +151,11 @@ export default function PanelDemo() {
                 <h6>CSS Modules</h6>
                 <p>CSS modules allow importing a css file to your react component and refer the classes inside using a variable. Unfortunately CSS modules do not support cascaded classes to be applied to external components however attribute selectors
                     can be used as a common workaround. NextJS has built-in support for CSS modules allowing css files with <i>.module.css</i> suffix to be interpreted as modules.</p>
-                
+
                 <i>paneldemo.module.css</i>
 <CodeHighlight lang="css">
 {`
-.mypanel [class~="p-panel-header"] {
+.mypanel > [class~="p-panel-header"] {
     background-color: #07c4e8;
     color: #ffffff;
 }
@@ -182,14 +182,14 @@ export default function PanelDemo() {
 </CodeHighlight>
 
                 <Panel header="CSS Module" className={stylesModule.mypanel}>
-                    <p class="p-0 m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <p className="p-0 m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </Panel>
 
                 <h6>CSS-in-JS</h6>
-                <p>CSS-in-JS solutions are also popular to implement scoped css, as an example we'll be using <a href="https://github.com/vercel/styled-jsx">styled-jsx</a> to customize our panel. Note that use of <i>:global</i> does not make the styling global and only 
+                <p>CSS-in-JS solutions are also popular to implement scoped css, as an example we'll be using <a href="https://github.com/vercel/styled-jsx">styled-jsx</a> to customize our panel. Note that use of <i>:global</i> does not make the styling global and only
                 removes the namespacing from the inner element as it is enough to scope the main container element, in this case <i>.p-panel</i>.</p>
 
                 <CodeHighlight>
@@ -223,12 +223,12 @@ export default function PanelDemo() {
 
                 <style>{styles}</style>
                 <Panel header="Styled Component" className={className}>
-                    <p class="p-0 m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <p className="p-0 m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </Panel>
- 
+
                 <h5>Scaling</h5>
                 <p>PrimeReact utilizes rem units to make sure the components blend in with the rest of your UI perfectly. This also enables scaling, for example changing the size of the components
                     is easy as configuring the font size of your document. Code below sets the scale of the components based on 16px. If you reqire bigger or smaller components, just
@@ -252,11 +252,11 @@ html {
 </CodeHighlight>
 
                 <h5>PrimeFlex CSS</h5>
-                <p><a href="https://www.primefaces.org/primeflex/">PrimeFlex</a> is a lightweight responsive CSS utility 
-                library to accompany Prime UI libraries and static webpages as well. PrimeReact can be used with any CSS utility library like bootstrap and tailwind however PrimeFlex has benefits like integration with PrimeReact themes usign CSS variables so 
-                that colors classes e.g. <i>bg-blue-500</i> receive the color code from the PrimeReact theme being used. PrimeReact follows the CSS utility approach of PrimeFlex and currently does not provide an extended style property like <i>sx</i>. 
+                <p><a href="https://www.primefaces.org/primeflex/">PrimeFlex</a> is a lightweight responsive CSS utility
+                library to accompany Prime UI libraries and static webpages as well. PrimeReact can be used with any CSS utility library like bootstrap and tailwind however PrimeFlex has benefits like integration with PrimeReact themes usign CSS variables so
+                that colors classes e.g. <i>bg-blue-500</i> receive the color code from the PrimeReact theme being used. PrimeReact follows the CSS utility approach of PrimeFlex and currently does not provide an extended style property like <i>sx</i>.
                 Same approach is also utilized in <a href="https://www.primefaces.org/primeblocks-react">PrimeBlocks for PrimeReact</a> project as well.</p>
-                
+
                 <p>Here is an example to demonstrate how to align 3 buttons horizontally on bigger screens and display them as stacked on smaller ones.</p>
 
                 <div className="flex flex-column md:flex-row justify-content-between my-5">

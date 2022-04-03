@@ -1,13 +1,13 @@
-import React, { memo, useRef } from 'react';
-import { TreeTableBodyCell } from './TreeTableBodyCell';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, classNames } from '../utils/Utils';
+import { classNames, DomHandler } from '../utils/Utils';
+import { TreeTableBodyCell } from './TreeTableBodyCell';
 
-export const TreeTableRow = memo((props) => {
-    const elementRef = useRef(null);
-    const checkboxRef = useRef(null);
-    const checkboxBoxRef = useRef(null);
-    const nodeTouched = useRef(false);
+export const TreeTableRow = React.memo((props) => {
+    const elementRef = React.useRef(null);
+    const checkboxRef = React.useRef(null);
+    const checkboxBoxRef = React.useRef(null);
+    const nodeTouched = React.useRef(false);
     const expanded = props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false;
 
     const isLeaf = () => {
@@ -369,3 +369,5 @@ export const TreeTableRow = memo((props) => {
         </>
     )
 });
+
+TreeTableRow.displayName = 'TreeTableRow';

@@ -1,5 +1,6 @@
 export const Column = () => { }
 
+Column.displayName = 'Column';
 Column.defaultProps = {
     __TYPE: 'Column',
     columnKey: null,

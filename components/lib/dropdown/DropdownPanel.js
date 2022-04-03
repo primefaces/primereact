@@ -1,14 +1,14 @@
-import React, { forwardRef, memo, useRef } from 'react';
+import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { DropdownItem } from './DropdownItem';
-import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { Portal } from '../portal/Portal';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { DropdownItem } from './DropdownItem';
 
-export const DropdownPanel = memo(forwardRef((props, ref) => {
-    const virtualScrollerRef = useRef(null);
-    const filterInputRef = useRef(null);
+export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
+    const virtualScrollerRef = React.useRef(null);
+    const filterInputRef = React.useRef(null);
     const isEmptyFilter = !(props.visibleOptions && props.visibleOptions.length) && props.hasFilter;
 
     const onEnter = () => {
@@ -183,3 +183,5 @@ export const DropdownPanel = memo(forwardRef((props, ref) => {
 
     return <Portal element={element} appendTo={props.appendTo} />
 }));
+
+DropdownPanel.displayName = 'DropdownPanel';

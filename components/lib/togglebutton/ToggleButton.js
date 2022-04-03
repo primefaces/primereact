@@ -1,12 +1,10 @@
-import React, { forwardRef, memo, useEffect, useRef } from 'react';
-import { tip } from '../tooltip/Tooltip';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export const ToggleButton = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(null);
-    const tooltipRef = useRef(null);
+export const ToggleButton = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
     const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
     const hasIcon = props.onIcon && props.onIcon.length > 0 && props.offIcon && props.offIcon.length > 0;
     const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '&nbsp;';
@@ -35,26 +33,6 @@ export const ToggleButton = memo(forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
     const createIcon = () => {
         if (hasIcon) {
             const iconClassName = classNames('p-button-icon p-c', {
@@ -68,7 +46,9 @@ export const ToggleButton = memo(forwardRef((props, ref) => {
         return null;
     }
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const tabIndex = !props.disabled && props.tabIndex;
+    const otherProps = ObjectUtils.findDiffKeys(props, ToggleButton.defaultProps);
     const className = classNames('p-button p-togglebutton p-component', {
         'p-button-icon-only': hasIcon && !hasLabel,
         'p-highlight': props.checked,
@@ -77,16 +57,20 @@ export const ToggleButton = memo(forwardRef((props, ref) => {
     const iconElement = createIcon();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}
-            onClick={toggle} onFocus={props.onFocus} onBlur={props.onBlur} onKeyDown={onKeyDown}
-            tabIndex={tabIndex} aria-labelledby={props.ariaLabelledBy}>
-            {iconElement}
-            <span className="p-button-label">{label}</span>
-            <Ripple />
-        </div>
+        <>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}
+                onClick={toggle} onFocus={props.onFocus} onBlur={props.onBlur} onKeyDown={onKeyDown}
+                tabIndex={tabIndex} aria-labelledby={props.ariaLabelledBy}>
+                {iconElement}
+                <span className="p-button-label">{label}</span>
+                <Ripple />
+            </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+ToggleButton.displayName = 'ToggleButton';
 ToggleButton.defaultProps = {
     __TYPE: 'ToggleButton',
     id: null,

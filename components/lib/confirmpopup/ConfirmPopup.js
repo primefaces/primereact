@@ -1,58 +1,44 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
 import { Button } from '../button/Button';
-import { Portal } from '../portal/Portal';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils, IconUtils } from '../utils/Utils';
-import { useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export function confirmPopup(props) {
-    const appendTo = props.appendTo || document.body;
+export const confirmPopup = (props = {}) => {
+    props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
+    props.visible && OverlayService.emit('confirm-popup', props);
 
-    const confirmPopupWrapper = document.createDocumentFragment();
-    DomHandler.appendChild(confirmPopupWrapper, appendTo);
-
-    props = {...props, ...{ visible: props.visible === undefined ? true : props.visible }};
-
-    const confirmPopupEl = React.createElement(ConfirmPopup, props);
-    ReactDOM.render(confirmPopupEl, confirmPopupWrapper);
-
-    const updateConfirmPopup = (newProps) => {
-        props = { ...props, ...newProps };
-        ReactDOM.render(React.cloneElement(confirmPopupEl, props), confirmPopupWrapper);
-    };
-
-    return {
-        _destroy: () => {
-            ReactDOM.unmountComponentAtNode(confirmPopupWrapper);
-        },
-        show: () => {
-            updateConfirmPopup({ visible: true, onHide: () => {
-                updateConfirmPopup({ visible: false }); // reset
-            }});
-        },
-        hide: () => {
-            updateConfirmPopup({ visible: false });
-        },
-        update: (newProps) => {
-            updateConfirmPopup(newProps);
-        }
+    const show = (updatedProps = {}) => {
+        OverlayService.emit('confirm-popup', { ...props, ...updatedProps, ...{ visible: true } });
     }
+
+    const hide = () => {
+        OverlayService.emit('confirm-popup', { visible: false });
+    }
+
+    return [show, hide];
 }
 
-export const ConfirmPopup = memo(forwardRef((props, ref) => {
-    const [visibleState, setVisibleState] = useState(false);
-    const overlayRef = useRef(null);
-    const acceptBtnRef = useRef(null);
-    const isPanelClicked = useRef(false);
-    const overlayEventListener = useRef(null);
-    const acceptLabel = props.acceptLabel || localeOption('accept');
-    const rejectLabel = props.rejectLabel || localeOption('reject');
+export const ConfirmPopup = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(props.visible);
+    const [reshowState, setReshowState] = React.useState(false);
+    const overlayRef = React.useRef(null);
+    const acceptBtnRef = React.useRef(null);
+    const isPanelClicked = React.useRef(false);
+    const overlayEventListener = React.useRef(null);
+    const confirmProps = React.useRef(null);
+    const getCurrentProps = () => confirmProps.current || props;
+    const getPropValue = (key) => (confirmProps.current || props)[key];
+    const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
+
+    const acceptLabel = getPropValue('acceptLabel') || localeOption('accept');
+    const rejectLabel = getPropValue('rejectLabel') || localeOption('reject');
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
-        target: props.target, overlay: overlayRef, listener: (event, { type, valid }) => {
+        target: getPropValue('target'), overlay: overlayRef, listener: (event, { type, valid }) => {
             if (valid) {
                 (type === 'outside') ? !isPanelClicked.current && hide() : hide();
             }
@@ -61,35 +47,32 @@ export const ConfirmPopup = memo(forwardRef((props, ref) => {
         }, when: visibleState
     });
 
-    const onCloseClick = (event) => {
-        hide();
-        event.preventDefault();
-    }
-
     const onPanelClick = (event) => {
         isPanelClicked.current = true;
 
         OverlayService.emit('overlay-click', {
             originalEvent: event,
-            target: props.target
+            target: getPropValue('target')
         });
     }
 
     const accept = () => {
-        props.accept && props.accept();
+        callbackFromProp('accept');
         hide('accept');
     }
 
     const reject = () => {
-        props.reject && props.reject();
+        callbackFromProp('reject');
         hide('reject');
     }
 
     const show = () => {
         setVisibleState(true);
+        setReshowState(false);
+
         overlayEventListener.current = (e) => {
             !isOutsideClicked(e.target) && (isPanelClicked.current = true);
-        };
+        }
 
         OverlayService.on('overlay-click', overlayEventListener.current);
     }
@@ -98,7 +81,7 @@ export const ConfirmPopup = memo(forwardRef((props, ref) => {
         setVisibleState(false);
         OverlayService.off('overlay-click', overlayEventListener.current);
         overlayEventListener.current = null;
-        props.onHide && props.onHide(result);
+        callbackFromProp('onHide', result);
     }
 
     const onEnter = () => {
@@ -109,11 +92,11 @@ export const ConfirmPopup = memo(forwardRef((props, ref) => {
     const onEntered = () => {
         bindOverlayListener();
 
-        if (acceptBtnRef && acceptBtnRef.current) {
+        if (acceptBtnRef.current) {
             acceptBtnRef.current.focus();
         }
 
-        props.onShow && props.onShow();
+        callbackFromProp('onShow');
     }
 
     const onExit = () => {
@@ -122,14 +105,15 @@ export const ConfirmPopup = memo(forwardRef((props, ref) => {
 
     const onExited = () => {
         ZIndexUtils.clear(overlayRef.current);
+        isPanelClicked.current = false;
     }
 
     const align = () => {
-        if (props.target) {
-            DomHandler.absolutePosition(overlayRef.current, props.target);
+        if (getPropValue('target')) {
+            DomHandler.absolutePosition(overlayRef.current, getPropValue('target'));
 
             const containerOffset = DomHandler.getOffset(overlayRef.current);
-            const targetOffset = DomHandler.getOffset(props.target);
+            const targetOffset = DomHandler.getOffset(getPropValue('target'));
             let arrowLeft = 0;
 
             if (containerOffset.left < targetOffset.left) {
@@ -147,9 +131,40 @@ export const ConfirmPopup = memo(forwardRef((props, ref) => {
         return overlayRef && overlayRef.current && !(overlayRef.current.isSameNode(target) || overlayRef.current.contains(target));
     }
 
-    useEffect(() => {
-        setVisibleState(props.visible);
+    const confirm = (updatedProps) => {
+        if (updatedProps.tagKey === props.tagKey) {
+            const isVisibleChanged = visibleState !== updatedProps.visible;
+            const targetChanged = getPropValue('target') !== updatedProps.target;
+
+            if (targetChanged && !props.target) {
+                hide();
+                confirmProps.current = updatedProps;
+                setReshowState(true);
+            }
+            else if (isVisibleChanged) {
+                confirmProps.current = updatedProps;
+                updatedProps.visible ? show() : hide();
+            }
+        }
+    }
+
+    React.useEffect(() => {
+        props.visible ? show() : hide();
     }, [props.visible]);
+
+    React.useEffect(() => {
+        if (!props.target && !props.message) {
+            OverlayService.on('confirm-popup', confirm);
+        }
+
+        return () => {
+            OverlayService.off('confirm-popup', confirm);
+        }
+    }, [props.target]);
+
+    useUpdateEffect(() => {
+        reshowState && show();
+    }, [reshowState]);
 
     useUnmountEffect(() => {
         if (overlayEventListener.current) {
@@ -157,12 +172,18 @@ export const ConfirmPopup = memo(forwardRef((props, ref) => {
             overlayEventListener.current = null;
         }
 
+        OverlayService.off('confirm-popup', confirm);
         ZIndexUtils.clear(overlayRef.current);
     });
 
+    React.useImperativeHandle(ref, () => ({
+        confirm
+    }));
+
     const createContent = () => {
-        const message = ObjectUtils.getJSXElement(props.message, props);
-        const icon = IconUtils.getJSXIcon(props.icon, { className: 'p-confirm-popup-icon' }, { props });
+        const currentProps = getCurrentProps();
+        const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
+        const icon = IconUtils.getJSXIcon(getPropValue('icon'), { className: 'p-confirm-popup-icon' }, { props: currentProps });
 
         return (
             <div className="p-confirm-popup-content">
@@ -173,46 +194,47 @@ export const ConfirmPopup = memo(forwardRef((props, ref) => {
     }
 
     const createFooter = () => {
-        const acceptClassName = classNames('p-confirm-popup-accept p-button-sm', props.acceptClassName);
+        const acceptClassName = classNames('p-confirm-popup-accept p-button-sm', getPropValue('acceptClassName'));
         const rejectClassName = classNames('p-confirm-popup-reject p-button-sm', {
-            'p-button-text': !props.rejectClassName
-        }, props.rejectClassName);
+            'p-button-text': !getPropValue('rejectClassName')
+        }, getPropValue('rejectClassName'));
 
         const content = (
             <div className="p-confirm-popup-footer">
-                <Button label={rejectLabel} icon={props.rejectIcon} className={rejectClassName} onClick={reject} />
-                <Button ref={acceptBtnRef} label={acceptLabel} icon={props.acceptIcon} className={acceptClassName} onClick={accept} />
+                <Button label={rejectLabel} icon={getPropValue('rejectIcon')} className={rejectClassName} onClick={reject} />
+                <Button ref={acceptBtnRef} label={acceptLabel} icon={getPropValue('acceptIcon')} className={acceptClassName} onClick={accept} />
             </div>
         )
 
-        if (props.footer) {
+        if (getPropValue('footer')) {
             const defaultContentOptions = {
-                accept: accept,
-                reject: reject,
+                accept,
+                reject,
                 className: 'p-confirm-popup-footer',
                 acceptClassName,
                 rejectClassName,
                 acceptLabel,
                 rejectLabel,
                 element: content,
-                props
+                props: getCurrentProps()
             };
 
-            return ObjectUtils.getJSXElement(props.footer, defaultContentOptions);
+            return ObjectUtils.getJSXElement(getPropValue('footer'), defaultContentOptions);
         }
 
         return content;
     }
 
     const createElement = () => {
-        const className = classNames('p-confirm-popup p-component', props.className);
+        const otherProps = ObjectUtils.findDiffKeys(props, ConfirmPopup.defaultProps);
+        const className = classNames('p-confirm-popup p-component', getPropValue('className'));
         const content = createContent();
         const footer = createFooter();
 
         return (
-            <CSSTransition nodeRef={overlayRef} classNames="p-connected-overlay" in={visibleState} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
+            <CSSTransition nodeRef={overlayRef} classNames="p-connected-overlay" in={visibleState} timeout={{ enter: 120, exit: 100 }} options={getPropValue('transitionOptions')}
                 unmountOnExit onEnter={onEnter} onEntered={onEntered} onExit={onExit} onExited={onExited}>
-                <div ref={overlayRef} id={props.id} className={className} style={props.style} onClick={onPanelClick}>
+                <div ref={overlayRef} id={getPropValue('id')} className={className} style={getPropValue('style')} {...otherProps} onClick={onPanelClick}>
                     {content}
                     {footer}
                 </div>
@@ -222,11 +244,13 @@ export const ConfirmPopup = memo(forwardRef((props, ref) => {
 
     const element = createElement();
 
-    return <Portal element={element} appendTo={props.appendTo} visible={props.visible} />
+    return <Portal element={element} appendTo={getPropValue('appendTo')} visible={getPropValue('visible')} />
 }));
 
+ConfirmPopup.displayName = 'ConfirmPopup';
 ConfirmPopup.defaultProps = {
     __TYPE: 'ConfirmPopup',
+    tagKey: undefined,
     target: null,
     visible: false,
     message: null,

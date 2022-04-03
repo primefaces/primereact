@@ -1,20 +1,20 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { DomHandler, classNames } from '../utils/Utils';
+import * as React from 'react';
 import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const ScrollPanel = forwardRef((props, ref) => {
-    const containerRef = useRef(null);
-    const contentRef = useRef(null);
-    const xBarRef = useRef(null);
-    const yBarRef = useRef(null);
-    const isXBarClicked = useRef(false);
-    const isYBarClicked = useRef(false);
-    const lastPageX = useRef(null);
-    const lastPageY = useRef(null);
-    const scrollXRatio = useRef(null);
-    const scrollYRatio = useRef(null);
-    const frame = useRef(null);
-    const initialized = useRef(false);
+export const ScrollPanel = React.forwardRef((props, ref) => {
+    const containerRef = React.useRef(null);
+    const contentRef = React.useRef(null);
+    const xBarRef = React.useRef(null);
+    const yBarRef = React.useRef(null);
+    const isXBarClicked = React.useRef(false);
+    const isYBarClicked = React.useRef(false);
+    const lastPageX = React.useRef(null);
+    const lastPageY = React.useRef(null);
+    const scrollXRatio = React.useRef(null);
+    const scrollYRatio = React.useRef(null);
+    const frame = React.useRef(null);
+    const initialized = React.useRef(false);
 
     const calculateContainerHeight = () => {
         const containerStyles = getComputedStyle(containerRef.current);
@@ -148,14 +148,15 @@ export const ScrollPanel = forwardRef((props, ref) => {
         }
     });
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         refresh
     }));
 
+    const otherProps = ObjectUtils.findDiffKeys(props, ScrollPanel.defaultProps);
     const className = classNames('p-scrollpanel p-component', props.className);
 
     return (
-        <div ref={containerRef} id={props.id} className={className} style={props.style}>
+        <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>
             <div className="p-scrollpanel-wrapper">
                 <div ref={contentRef} className="p-scrollpanel-content" onScroll={moveBar} onMouseEnter={moveBar}>
                     {props.children}
@@ -167,6 +168,7 @@ export const ScrollPanel = forwardRef((props, ref) => {
     )
 });
 
+ScrollPanel.displayName = 'ScrollPanel';
 ScrollPanel.defaultProps = {
     __TYPE: 'ScrollPanel',
     id: null,

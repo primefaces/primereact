@@ -1,36 +1,14 @@
-import React, { forwardRef, memo, useEffect, useRef } from 'react';
-import { tip } from '../tooltip/Tooltip';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { ObjectUtils, classNames, IconUtils } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export const Button = memo(forwardRef((props, ref) => {
-    const elementRef = useRef(ref);
-    const tooltipRef = useRef(null);
+export const Button = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(ref);
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(elementRef, ref);
     }, [elementRef, ref]);
-
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
 
     const createIcon = () => {
         const icon = props.loading ? props.loadingIcon : props.icon;
@@ -60,8 +38,9 @@ export const Button = memo(forwardRef((props, ref) => {
         return null;
     }
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const disabled = props.disabled || props.loading;
-    const buttonProps = ObjectUtils.findDiffKeys(props, Button.defaultProps);
+    const otherProps = ObjectUtils.findDiffKeys(props, Button.defaultProps);
     const className = classNames('p-button p-component', props.className, {
         'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label,
         'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
@@ -76,16 +55,20 @@ export const Button = memo(forwardRef((props, ref) => {
     const badge = createBadge();
 
     return (
-        <button ref={elementRef} {...buttonProps} className={className} disabled={disabled}>
-            {icon}
-            {label}
-            {props.children}
-            {badge}
-            <Ripple />
-        </button>
+        <>
+            <button ref={elementRef} {...otherProps} className={className} disabled={disabled}>
+                {icon}
+                {label}
+                {props.children}
+                {badge}
+                <Ripple />
+            </button>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+Button.displayName = 'Button';
 Button.defaultProps = {
     __TYPE: 'Button',
     label: null,

@@ -1,13 +1,11 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { tip } from '../tooltip/Tooltip';
+import * as React from 'react';
+import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
 
-export const RadioButton = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const elementRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const tooltipRef = useRef(null);
+export const RadioButton = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
 
     const select = (e) => {
         inputRef.current.checked = true;
@@ -43,40 +41,22 @@ export const RadioButton = memo(forwardRef((props, ref) => {
         setFocusedState(false);
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (inputRef.current) {
             inputRef.current.checked = props.checked;
         }
     }, [props.checked]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
-
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         select
     }));
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, RadioButton.defaultProps);
     const className = classNames('p-radiobutton p-component', {
         'p-radiobutton-checked': props.checked,
         'p-radiobutton-disabled': props.disabled,
@@ -89,18 +69,22 @@ export const RadioButton = memo(forwardRef((props, ref) => {
     });
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
-            <div className="p-hidden-accessible">
-                <input ref={inputRef} id={props.inputId} type="radio" aria-labelledby={props.ariaLabelledBy} name={props.name} defaultChecked={props.checked}
-                    onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} required={props.required} tabIndex={props.tabIndex} />
+        <>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
+                <div className="p-hidden-accessible">
+                    <input ref={inputRef} id={props.inputId} type="radio" aria-labelledby={props.ariaLabelledBy} name={props.name} defaultChecked={props.checked}
+                        onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} required={props.required} tabIndex={props.tabIndex} />
+                </div>
+                <div className={boxClassName} role="radio" aria-checked={props.checked}>
+                    <div className="p-radiobutton-icon"></div>
+                </div>
             </div>
-            <div className={boxClassName} role="radio" aria-checked={props.checked}>
-                <div className="p-radiobutton-icon"></div>
-            </div>
-        </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+RadioButton.displayName = 'RadioButton';
 RadioButton.defaultProps = {
     __TYPE: 'RadioButton',
     id: null,

@@ -1,20 +1,20 @@
-import React, { forwardRef, memo, useImperativeHandle, useRef, useState } from 'react';
+import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { Ripple } from '../ripple/Ripple';
 import { Button } from '../button/Button';
 import { Messages } from '../messages/Messages';
 import { ProgressBar } from '../progressbar/ProgressBar';
-import { DomHandler, ObjectUtils, IconUtils, classNames } from '../utils/Utils';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export const FileUpload = memo(forwardRef((props, ref) => {
-    const [filesState, setFilesState] = useState([]);
-    const [progressState, setProgressState] = useState(0);
-    const [focusedState, setFocusedState] = useState(false);
-    const fileInputRef = useRef(null);
-    const messagesRef = useRef(null);
-    const contentRef = useRef(null);
-    const duplicateIEEvent = useRef(false);
-    const uploadedFileCount = useRef(0);
+export const FileUpload = React.memo(React.forwardRef((props, ref) => {
+    const [filesState, setFilesState] = React.useState([]);
+    const [progressState, setProgressState] = React.useState(0);
+    const [focusedState, setFocusedState] = React.useState(false);
+    const fileInputRef = React.useRef(null);
+    const messagesRef = React.useRef(null);
+    const contentRef = React.useRef(null);
+    const duplicateIEEvent = React.useRef(false);
+    const uploadedFileCount = React.useRef(0);
     const hasFiles = ObjectUtils.isNotEmpty(filesState);
     const chooseButtonLabel = props.chooseLabel || props.chooseOptions.label || localeOption('choose');
     const uploadButtonLabel = props.uploadLabel || props.uploadOptions.label || localeOption('upload');
@@ -294,7 +294,7 @@ export const FileUpload = memo(forwardRef((props, ref) => {
         hasFiles ? upload() : fileInputRef.current.click();
     }
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         upload,
         clear,
         formatSize
@@ -381,6 +381,7 @@ export const FileUpload = memo(forwardRef((props, ref) => {
     }
 
     const createAdvanced = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, FileUpload.defaultProps);
         const className = classNames('p-fileupload p-fileupload-advanced p-component', props.className);
         const headerClassName = classNames('p-fileupload-buttonbar', props.headerClassName);
         const contentClassName = classNames('p-fileupload-content', props.contentClassName);
@@ -425,7 +426,7 @@ export const FileUpload = memo(forwardRef((props, ref) => {
         }
 
         return (
-            <div id={props.id} className={className} style={props.style}>
+            <div id={props.id} className={className} style={props.style} {...otherProps}>
                 {header}
                 <div ref={contentRef} className={contentClassName} style={props.contentStyle}
                     onDragEnter={onDragEnter} onDragOver={onDragOver} onDragLeave={onDragLeave} onDrop={onDrop}>
@@ -440,6 +441,7 @@ export const FileUpload = memo(forwardRef((props, ref) => {
 
     const createBasic = () => {
         const chooseOptions = props.chooseOptions;
+        const otherProps = ObjectUtils.findDiffKeys(props, FileUpload.defaultProps);
         const className = classNames('p-fileupload p-fileupload-basic p-component', props.className);
         const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': hasFiles, 'p-disabled': props.disabled, 'p-focus': focusedState }, chooseOptions.className);
         const chooseIcon = chooseOptions.icon || classNames({ 'pi pi-plus': !chooseOptions.icon && (!hasFiles || props.auto), 'pi pi-upload': !chooseOptions.icon && hasFiles && !props.auto });
@@ -454,7 +456,7 @@ export const FileUpload = memo(forwardRef((props, ref) => {
         const input = !hasFiles && <input ref={fileInputRef} type="file" accept={props.accept} multiple={props.multiple} disabled={props.disabled} onChange={onFileSelect} />;
 
         return (
-            <div className={className} style={props.style}>
+            <div className={className} style={props.style} {...otherProps}>
                 <Messages ref={messagesRef} />
                 <span className={buttonClassName} style={chooseOptions.style} onMouseUp={onSimpleUploaderClick} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} tabIndex={0}>
                     {icon}
@@ -472,6 +474,7 @@ export const FileUpload = memo(forwardRef((props, ref) => {
         return createBasic();
 }));
 
+FileUpload.displayName = 'FileUpload';
 FileUpload.defaultProps = {
     __TYPE: 'FileUpload',
     id: null,

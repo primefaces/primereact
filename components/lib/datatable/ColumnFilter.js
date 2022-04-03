@@ -1,20 +1,20 @@
-import React, { memo, useRef, useState } from 'react';
-import PrimeReact, { localeOption, FilterOperator, FilterMatchMode } from '../api/Api';
-import { InputText } from '../inputtext/InputText';
-import { Dropdown } from '../dropdown/Dropdown';
+import * as React from 'react';
+import PrimeReact, { FilterMatchMode, FilterOperator, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { Dropdown } from '../dropdown/Dropdown';
+import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { useUpdateEffect, useUnmountEffect, useOverlayListener } from '../hooks/Hooks';
 
-export const ColumnFilter = memo((props) => {
-    const [overlayVisibleState, setOverlayVisibleState] = useState(false);
-    const overlayRef = useRef(null);
-    const iconRef = useRef(null);
-    const selfClick = useRef(false);
-    const overlayEventListener = useRef(null);
+export const ColumnFilter = React.memo((props) => {
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const overlayRef = React.useRef(null);
+    const iconRef = React.useRef(null);
+    const selfClick = React.useRef(false);
+    const overlayEventListener = React.useRef(null);
 
     const getColumnProp = (prop) => props.column.props[prop];
     const field = getColumnProp('filterField') || getColumnProp('field');
@@ -686,4 +686,6 @@ export const ColumnFilter = memo((props) => {
             {overlay}
         </div>
     )
-})
+});
+
+ColumnFilter.displayName = 'ColumnFilter';

@@ -1,14 +1,12 @@
-import React, { forwardRef, memo, useEffect, useMemo, useRef, useState } from 'react';
-import { tip } from '../tooltip/Tooltip';
+import * as React from 'react';
+import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
-import { useUnmountEffect } from '../hooks/Hooks';
 
-export const Chips = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const elementRef = useRef(null);
-    const listRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const tooltipRef = useRef(null);
+export const Chips = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const listRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
 
     const removeItem = (event, index) => {
         if (props.disabled && props.readOnly) {
@@ -145,7 +143,7 @@ export const Chips = memo(forwardRef((props, ref) => {
         return props.max && props.value && props.max === props.value.length;
     }
 
-    const isFilled = useMemo(() => {
+    const isFilled = React.useMemo(() => {
         return (props.value && props.value.length) || (inputRef.current && inputRef.current.value && inputRef.current.value.length);
     }, [props.value]);
 
@@ -153,30 +151,9 @@ export const Chips = memo(forwardRef((props, ref) => {
         return ObjectUtils.getPropValue(props.removable, { value, index, props });
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
-
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: inputRef.current,
-                targetContainer: listRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
-        }
-    });
 
     const createRemoveIcon = (value, index) => {
         if (!props.disabled && !props.readOnly && isRemovable(value, index)) {
@@ -229,6 +206,8 @@ export const Chips = memo(forwardRef((props, ref) => {
         )
     }
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, Chips.defaultProps);
     const className = classNames('p-chips p-component p-inputwrapper', {
         'p-inputwrapper-filled': isFilled,
         'p-inputwrapper-focus': focusedState
@@ -236,12 +215,16 @@ export const Chips = memo(forwardRef((props, ref) => {
     const list = createList();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style}>
-            {list}
-        </div>
+        <>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+                {list}
+            </div>
+            {hasTooltip && <Tooltip target={inputRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+Chips.displayName = 'Chips';
 Chips.defaultProps = {
     __TYPE: 'Chips',
     id: null,

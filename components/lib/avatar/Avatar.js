@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
-import { ObjectUtils, classNames, IconUtils } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export const Avatar = forwardRef((props, ref) => {
+export const Avatar = React.forwardRef((props, ref) => {
 
     const createContent = () => {
         if (props.label) {
@@ -17,6 +17,7 @@ export const Avatar = forwardRef((props, ref) => {
         return null;
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Avatar.defaultProps);
     const containerClassName = classNames('p-avatar p-component', {
         'p-avatar-image': props.image != null,
         'p-avatar-circle': props.shape === 'circle',
@@ -28,13 +29,14 @@ export const Avatar = forwardRef((props, ref) => {
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
     return (
-        <div className={containerClassName} style={props.style} onClick={props.onClick}>
+        <div className={containerClassName} style={props.style} {...otherProps}>
             {content}
             {props.children}
         </div>
     )
 });
 
+Avatar.displayName = 'Avatar';
 Avatar.defaultProps = {
     __TYPE: 'Avatar',
     label: null,
@@ -46,6 +48,5 @@ Avatar.defaultProps = {
     className: null,
     template: null,
     imageAlt: 'avatar',
-    onImageError: null,
-    onClick: null
+    onImageError: null
 }

@@ -1,14 +1,14 @@
-import React, { forwardRef, useEffect, useState, useRef } from 'react';
-import { Ripple } from '../ripple/Ripple';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ObjectUtils, classNames, IconUtils, UniqueComponentId } from '../utils/Utils';
 import { useMountEffect } from '../hooks/Hooks';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
-export const Panel = forwardRef((props, ref) => {
-    const [idState, setIdState] = useState(props.id);
-    const [collapsedState, setCollapsedState] = useState(props.collapsed);
+export const Panel = React.forwardRef((props, ref) => {
+    const [idState, setIdState] = React.useState(props.id);
+    const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
     const elementRef = useRef(ref);
-    const contentRef = useRef(null);
+    const contentRef = React.useRef(null);
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
     const headerId = idState + '_header';
     const contentId = idState + '_content';
@@ -125,6 +125,7 @@ export const Panel = forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Panel.defaultProps);
     const className = classNames('p-panel p-component', {
         'p-panel-toggleable': props.toggleable
     }, props.className);
@@ -132,13 +133,14 @@ export const Panel = forwardRef((props, ref) => {
     const content = createContent();
 
     return (
-        <div id={props.id} ref={elementRef} className={className} style={props.style}>
+        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
             {header}
             {content}
         </div>
     )
 });
 
+Panel.displayName = 'Panel';
 Panel.defaultProps = {
     __TYPE: 'Panel',
     id: null,

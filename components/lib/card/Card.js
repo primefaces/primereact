@@ -1,7 +1,7 @@
-import React, { forwardRef, useEffect, useRef } from 'react';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Card = forwardRef((props, ref) => {
+export const Card = React.forwardRef((props, ref) => {
 
     const elementRef = useRef(ref);
 
@@ -29,6 +29,7 @@ export const Card = forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Card.defaultProps);
     const className = classNames('p-card p-component', props.className);
     const header = createHeader();
     const body = createBody();
@@ -38,13 +39,14 @@ export const Card = forwardRef((props, ref) => {
     }, [elementRef, ref]);
 
     return (
-        <div id={props.id} ref={elementRef} className={className} style={props.style}>
+        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
             {header}
             {body}
         </div>
     )
 });
 
+Card.displayName = 'Card';
 Card.defaultProps = {
     __TYPE: 'Card',
     id: null,

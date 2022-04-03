@@ -1,13 +1,13 @@
-import React, { forwardRef, memo, useImperativeHandle, useRef, useState } from 'react';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { UITreeNode } from './UITreeNode';
-import { ObjectUtils, classNames } from '../utils/Utils';
 
-export const Tree = memo(forwardRef((props, ref) => {
-    const [filterValueState, setFilterValueState] = useState('');
-    const [expandedKeysState, setExpandedKeysState] = useState(props.expandedKeys);
-    const filteredNodes = useRef([]);
-    const dragState = useRef(null);
-    const filterChanged = useRef(false);
+export const Tree = React.memo(React.forwardRef((props, ref) => {
+    const [filterValueState, setFilterValueState] = React.useState('');
+    const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
+    const filteredNodes = React.useRef([]);
+    const dragState = React.useRef(null);
+    const filterChanged = React.useRef(false);
     const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
     const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
 
@@ -285,7 +285,7 @@ export const Tree = memo(forwardRef((props, ref) => {
         return matched;
     }
 
-    useImperativeHandle(ref, () => ({
+    React.useImperativeHandle(ref, () => ({
         filter
     }));
 
@@ -402,6 +402,7 @@ export const Tree = memo(forwardRef((props, ref) => {
         )
     }
 
+    const otherProps = ObjectUtils.findDiffKeys(props, Tree.defaultProps);
     const className = classNames('p-tree p-component', props.className, {
         'p-tree-selectable': props.selectionMode,
         'p-tree-loading': props.loading,
@@ -413,7 +414,7 @@ export const Tree = memo(forwardRef((props, ref) => {
     const footer = createFooter();
 
     return (
-        <div id={props.id} className={className} style={props.style}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {loader}
             {header}
             {content}
@@ -422,6 +423,7 @@ export const Tree = memo(forwardRef((props, ref) => {
     )
 }));
 
+Tree.displayName = 'Tree';
 Tree.defaultProps = {
     __TYPE: 'Tree',
     id: null,

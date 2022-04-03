@@ -1,11 +1,11 @@
-import { forwardRef, useRef } from 'react';
-import { DomHandler, ObjectUtils } from '../utils/Utils';
+import * as React from 'react';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 
-export const StyleClass = forwardRef((props, ref) => {
-    const targetRef = useRef(null);
-    const animating = useRef(false);
-    const elementRef = useRef(null);
+export const StyleClass = React.forwardRef((props, ref) => {
+    const targetRef = React.useRef(null);
+    const animating = React.useRef(false);
+    const elementRef = React.useRef(null);
 
     const [bindTargetEnterListener, unbindTargetEnterListener] = useEventListener({
         type: 'animationend', listener: () => {
@@ -172,6 +172,7 @@ export const StyleClass = forwardRef((props, ref) => {
     return props.children;
 });
 
+StyleClass.displayName = 'StyleClass';
 StyleClass.defaultProps = {
     __TYPE: 'StyleClass',
     nodeRef: null,

@@ -1,9 +1,9 @@
-import React, { forwardRef, memo } from 'react';
+import * as React from 'react';
+import { useTimeout } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames } from '../utils/Utils';
-import { useTimeout } from '../hooks/Hooks';
 
-export const UIMessage = memo(forwardRef((props, ref) => {
+export const UIMessage = React.memo(React.forwardRef((props, ref) => {
     const { severity, content, summary, detail, closable, life, sticky } = props.message;
 
     const [clearTimer] = useTimeout(() => {
@@ -71,3 +71,5 @@ export const UIMessage = memo(forwardRef((props, ref) => {
         </div>
     )
 }));
+
+UIMessage.displayName = 'UIMessage';

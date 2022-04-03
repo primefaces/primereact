@@ -1,13 +1,12 @@
-import React, { forwardRef, memo, useEffect, useRef, useState } from 'react';
-import { tip } from '../tooltip/Tooltip';
-import { ObjectUtils, classNames } from '../utils/Utils';
-import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
+import * as React from 'react';
+import { useMountEffect } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const MultiStateCheckbox = memo(forwardRef((props, ref) => {
-    const [focusedState, setFocusedState] = useState(false);
-    const elementRef = useRef(null);
-    const inputRef = useRef(props.inputRef);
-    const tooltipRef = useRef(null);
+export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
     const equalityKey = props.optionValue ? null : props.dataKey;
 
     const onClick = (event) => {
@@ -66,33 +65,13 @@ export const MultiStateCheckbox = memo(forwardRef((props, ref) => {
         return { option, index };
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
-
-    useEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.update({ content: props.tooltip, ...(props.tooltipOptions || {}) });
-        }
-        else if (props.tooltip) {
-            tooltipRef.current = tip({
-                target: elementRef.current,
-                content: props.tooltip,
-                options: props.tooltipOptions
-            });
-        }
-    }, [props.tooltip, props.tooltipOptions]);
 
     useMountEffect(() => {
         if (!props.empty && props.value === null) {
             toggle();
-        }
-    });
-
-    useUnmountEffect(() => {
-        if (tooltipRef.current) {
-            tooltipRef.current.destroy();
-            tooltipRef.current = null;
         }
     });
 
@@ -119,6 +98,8 @@ export const MultiStateCheckbox = memo(forwardRef((props, ref) => {
 
     const { option: selectedOption, index: selectedOptionIndex } = getSelectedOptionMap();
 
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, MultiStateCheckbox.defaultProps);
     const className = classNames('p-multistatecheckbox p-checkbox p-component', props.className);
     const boxClassName = classNames('p-checkbox-box', {
         'p-highlight': !!selectedOption,
@@ -128,18 +109,22 @@ export const MultiStateCheckbox = memo(forwardRef((props, ref) => {
     const icon = createIcon();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} onClick={onClick}>
-            <div className="p-hidden-accessible">
-                <input ref={inputRef} type="checkbox" aria-labelledby={props.ariaLabelledBy} id={props.inputId} name={props.name}
-                    onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} defaultChecked={!!selectedOption} />
+        <>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
+                <div className="p-hidden-accessible">
+                    <input ref={inputRef} type="checkbox" aria-labelledby={props.ariaLabelledBy} id={props.inputId} name={props.name}
+                        onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} defaultChecked={!!selectedOption} />
+                </div>
+                <div className={boxClassName} role="checkbox" aria-checked={!!selectedOption} style={selectedOption && selectedOption.style}>
+                    {icon}
+                </div>
             </div>
-            <div className={boxClassName} role="checkbox" aria-checked={!!selectedOption} style={selectedOption && selectedOption.style}>
-                {icon}
-            </div>
-        </div>
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
     )
 }));
 
+MultiStateCheckbox.displayName = 'MultiStateCheckbox';
 MultiStateCheckbox.defaultProps = {
     __TYPE: 'MultiStateCheckbox',
     id: null,

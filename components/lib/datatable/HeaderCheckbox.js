@@ -1,8 +1,8 @@
-import React, { memo, useState } from 'react';
+import * as React from 'react';
 import { classNames } from '../utils/Utils';
 
-export const HeaderCheckbox = memo((props) => {
-    const [focusedState, setFocusedState] = useState(false);
+export const HeaderCheckbox = React.memo((props) => {
+    const [focusedState, setFocusedState] = React.useState(false);
 
     const onFocus = () => {
         setFocusedState(true);
@@ -48,3 +48,5 @@ export const HeaderCheckbox = memo((props) => {
         </div>
     )
 });
+
+HeaderCheckbox.displayName = 'HeaderCheckbox';

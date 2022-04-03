@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { FooterCell } from './FooterCell';
 
-export const TableFooter = memo((props) => {
+export const TableFooter = React.memo((props) => {
 
     const hasFooter = () => {
         return props.footerColumnGroup ? true : (props.columns ? props.columns.some(col => col && col.props.footer) : false);
@@ -44,3 +44,5 @@ export const TableFooter = memo((props) => {
 
     return null;
 });
+
+TableFooter.displayName = 'TableFooter';

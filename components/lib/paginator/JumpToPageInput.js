@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { InputNumber } from '../inputnumber/InputNumber';
 import { ObjectUtils } from '../utils/Utils';
 
-export const JumpToPageInput = memo((props) => {
+export const JumpToPageInput = React.memo((props) => {
 
     const onChange = (event) => {
         if (props.onChange) {
@@ -29,6 +29,7 @@ export const JumpToPageInput = memo((props) => {
     return element;
 });
 
+JumpToPageInput.displayName = 'JumpToPageInput';
 JumpToPageInput.defaultProps = {
     __TYPE: 'JumbToPageInput',
     page: null,
