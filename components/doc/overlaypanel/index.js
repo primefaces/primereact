@@ -102,7 +102,7 @@ const OverlayPanelDemo = () => {
     const isMounted = useRef(false);
 
     useEffect(() => {
-        if (isMounted.current) {
+        if (isMounted.current && selectedProduct) {
             op.current.hide();
             toast.current.show({severity:'info', summary: 'Product Selected', detail: selectedProduct.name, life: 3000});
         }
@@ -186,7 +186,7 @@ type ProductItem = {
     const isMounted = useRef(false);
 
     useEffect(() => {
-      if (isMounted.current) {
+      if (isMounted.current && selectedProduct) {
         op.current?.hide();
         toast.current?.show({
           severity: "info",
@@ -300,7 +300,7 @@ const OverlayPanelDemo = () => {
     const isMounted = useRef(false);
 
     useEffect(() => {
-        if (isMounted.current) {
+        if (isMounted.current && selectedProduct) {
             op.current.hide();
             toast.current.show({severity:'info', summary: 'Product Selected', detail: selectedProduct.name, life: 3000});
         }

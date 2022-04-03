@@ -101,7 +101,6 @@ export const DataScroller = React.memo(React.forwardRef((props, ref) => {
         if (scrollFunction.current) {
             if (props.inline && contentRef.current) {
                 contentRef.current.removeEventListener('scroll', scrollFunction.current);
-                contentRef.current = null;
             }
             else if (!props.loader) {
                 window.removeEventListener('scroll', scrollFunction.current);

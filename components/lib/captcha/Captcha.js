@@ -6,6 +6,7 @@ export const Captcha = React.memo(React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
     const instance = React.useRef(null);
     const recaptchaScript = React.useRef(null);
+    const isCaptchaLoaded = React.useRef(false);
 
     const init = () => {
         instance.current = (window).grecaptcha.render(elementRef.current, {
@@ -61,15 +62,19 @@ export const Captcha = React.memo(React.forwardRef((props, ref) => {
     }
 
     useMountEffect(() => {
-        addRecaptchaScript();
+        if (!isCaptchaLoaded.current) {
+            addRecaptchaScript();
 
-        if ((window).grecaptcha) {
-            init();
+            if ((window).grecaptcha) {
+                init();
+            }
+
+            isCaptchaLoaded.current = true;
         }
     });
 
     useUnmountEffect(() => {
-        if (recaptchaScript.current) {
+        if (recaptchaScript.current && recaptchaScript.current.parentNode) {
             recaptchaScript.current.parentNode.removeChild(recaptchaScript.current);
         }
     });
