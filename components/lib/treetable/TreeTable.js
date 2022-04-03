@@ -908,7 +908,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
     const data = processData();
 
-    const otherProps = ObjectUtils.findDiffKeys(props, Toolbar.defaultProps);
+    const otherProps = ObjectUtils.findDiffKeys(props, TreeTable.defaultProps);
     const className = classNames('p-treetable p-component', {
         'p-treetable-hoverable-rows': props.rowHover,
         'p-treetable-selectable': isRowSelectionMode(),
