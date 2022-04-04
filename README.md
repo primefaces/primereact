@@ -56,8 +56,8 @@ In addition, components require PrimeIcons for icons and react-transition-group 
 
 ```javascript
 dependencies: {
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
 }
 ```
 
