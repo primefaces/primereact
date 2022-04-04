@@ -65,6 +65,8 @@ export class ConfirmPopupDemo extends Component {
                 <Toast ref={(el) => this.toast = el} />
 
                 <div className="card">
+                    <ConfirmPopup />
+
                     <h5>Basic</h5>
                     <Button onClick={this.confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                     <Button onClick={this.confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
@@ -126,6 +128,8 @@ const ConfirmPopupDemo = () => {
             <Toast ref={toast} />
 
             <div className="card">
+                <ConfirmPopup />
+
                 <h5>Basic</h5>
                 <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                 <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
@@ -186,6 +190,8 @@ const ConfirmPopupDemo = () => {
             <Toast ref={toast} />
 
             <div className="card">
+                <ConfirmPopup />
+
                 <h5>Basic</h5>
                 <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                 <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
@@ -250,6 +256,8 @@ const ConfirmPopupDemo = () => {
             <Toast ref={toast} />
 
             <div className="card">
+                <ConfirmPopup />
+
                 <h5>Basic</h5>
                 <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                 <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>

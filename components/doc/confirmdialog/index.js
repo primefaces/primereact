@@ -77,6 +77,8 @@ export class ConfirmDialogDemo extends Component {
                 <Toast ref={(el) => this.toast = el} />
 
                 <div className="card">
+                    <ConfirmDialog />
+
                     <h5>Basic</h5>
                     <Button onClick={this.confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                     <Button onClick={this.confirm2} icon="pi pi-times" label="Delete"></Button>
@@ -167,6 +169,8 @@ const ConfirmDialogDemo = () => {
             <Toast ref={toast} />
 
             <div className="card">
+                <ConfirmDialog />
+
                 <h5>Basic</h5>
                 <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                 <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
@@ -256,6 +260,8 @@ const ConfirmDialogDemo = () => {
             <Toast ref={toast} />
 
             <div className="card">
+                <ConfirmDialog />
+
                 <h5>Basic</h5>
                 <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                 <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
@@ -349,6 +355,8 @@ const ConfirmDialogDemo = () => {
             <Toast ref={toast} />
 
             <div className="card">
+                <ConfirmDialog />
+
                 <h5>Basic</h5>
                 <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                 <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
