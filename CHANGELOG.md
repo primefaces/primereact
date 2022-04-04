@@ -1,5 +1,43 @@
 # Changelog
 
+## [8.0.0-rc.1](https://github.com/primefaces/primereact/tree/8.0.0-rc.1) (2022-04-04)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/7.2.1...8.0.0-rc.1)
+
+**Breaking Changes:**
+
+- Converted Class components to functional Hooks components [\#2704](https://github.com/primefaces/primereact/issues/2704)
+- Improve confirmDialog and confirmPopup methods [\#2718](https://github.com/primefaces/primereact/issues/2718)
+
+**Implemented New Features and Enhancements:**
+
+- React 18 support [\#2360](https://github.com/primefaces/primereact/issues/2360)
+- Pass other standard element attributes to all components [\#2716](https://github.com/primefaces/primereact/issues/2716)
+- forwardRef is not implemented at Card and Panel [\#2709](https://github.com/primefaces/primereact/issues/2709)
+- Add panelContainerStyle and panelContainerClassName properties to TabView [\#2706](https://github.com/primefaces/primereact/issues/2706)
+- Add gutter property to DataView [\#2705](https://github.com/primefaces/primereact/issues/2705)
+- Calendar: show/hide TypeScript declarations [\#2685](https://github.com/primefaces/primereact/issues/2685)
+- AutoComplete: option to not focus input on dropdown click  [\#2679](https://github.com/primefaces/primereact/issues/2679)
+- Tooltip: onBeforeShow should be able to cancel showing [\#2653](https://github.com/primefaces/primereact/issues/2653)
+- Pass other standard element attributes to form components [\#2620](https://github.com/primefaces/primereact/issues/2620)
+- DataTable editingMeta is bound to row index, instead of row key [\#2609](https://github.com/primefaces/primereact/issues/2609)
+- Add inputId property to Chips [\#2717](https://github.com/primefaces/primereact/issues/2717)
+
+**Fixed bugs:**
+
+- The texts inside the cells are not copied in the dataTable [\#2710](https://github.com/primefaces/primereact/issues/2710)
+- Datatable re-order rows: can't reorder to last row when page is scrolled \(event.pageY \> 0\) [\#2703](https://github.com/primefaces/primereact/issues/2703)
+- Toast component throws error on show [\#2696](https://github.com/primefaces/primereact/issues/2696)
+- Tooltips crashing Chrome [\#2695](https://github.com/primefaces/primereact/issues/2695)
+- Row component does not pass down `className` and `style` props [\#2693](https://github.com/primefaces/primereact/issues/2693)
+- Issue with type definition of fileupload interface FileUploadRemoveParams [\#2681](https://github.com/primefaces/primereact/issues/2681)
+- v7.2.1 introduces "ReferenceError: PrimeReact is not defined" on sorting a DataView [\#2663](https://github.com/primefaces/primereact/issues/2663)
+- Tooltip autohide false not working on zIndexed parent [\#2658](https://github.com/primefaces/primereact/issues/2658)
+- Sidebar: onHide - closing on peripheral actions [\#2652](https://github.com/primefaces/primereact/issues/2652)
+- Typo in PrimeIcons Enum for ARROWS\_H and ARROWS\_V [\#2649](https://github.com/primefaces/primereact/issues/2649)
+- rowEditValidator validates the original data rather than the new one [\#2618](https://github.com/primefaces/primereact/issues/2618)
+- Tree component bug with functions onNodeClick and onNodeDoubleClick. Both of them not working  [\#2599](https://github.com/primefaces/primereact/issues/2599)
+
 ## [7.2.1](https://github.com/primefaces/primereact/tree/7.2.1) (2022-02-22)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/7.2.0...7.2.1)
