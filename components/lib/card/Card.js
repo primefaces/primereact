@@ -3,6 +3,8 @@ import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const Card = React.forwardRef((props, ref) => {
 
+    const elementRef = useRef(ref);
+
     const createHeader = () => {
         if (props.header) {
             return <div className="p-card-header">{ObjectUtils.getJSXElement(props.header, props)}</div>
@@ -32,8 +34,12 @@ export const Card = React.forwardRef((props, ref) => {
     const header = createHeader();
     const body = createBody();
 
+    useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
+
     return (
-        <div id={props.id} className={className} style={props.style} {...otherProps}>
+        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
             {header}
             {body}
         </div>
