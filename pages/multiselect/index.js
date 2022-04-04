@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MultiSelect } from '../../components/lib/multiselect/MultiSelect';
 import MultiSelectDoc from '../../components/doc/multiselect';
 import { Skeleton } from '../../components/lib/skeleton/Skeleton';
@@ -17,6 +17,8 @@ const MultiSelectDemo = () => {
     const [selectedItems1, setSelectedItems1] = useState(null);
     const [selectedItems2, setSelectedItems2] = useState(null);
     const [selectAll, setSelectAll] = useState(false);
+    const [items] = useState(Array.from({ length: 100000 }).map((_, i) => ({ label: `Item #${i}`, value: i })));
+    const loadLazyTimeout = useRef(null);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const cities = [
@@ -70,8 +72,6 @@ const MultiSelectDemo = () => {
         }
     ];
 
-    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: `Item #${i}`, value: i }));
-
     useEffect(() => {
         setLazyItems(Array.from({ length: 100000 }));
         setLazyLoading(false)
@@ -103,12 +103,12 @@ const MultiSelectDemo = () => {
     const onLazyLoad = (event) => {
         setLazyLoading(true);
 
-        if (loadLazyTimeout) {
-            clearTimeout(loadLazyTimeout);
+        if (loadLazyTimeout.current) {
+            clearTimeout(loadLazyTimeout.current);
         }
 
         //imitate delay of a backend call
-        loadLazyTimeout = setTimeout(() => {
+        loadLazyTimeout.current = setTimeout(() => {
             const { first, last } = event;
             const _lazyItems = [...lazyItems];
 
@@ -172,7 +172,7 @@ const MultiSelectDemo = () => {
                         itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
 
                     <h5>Virtual Scroll (100000 Items)</h5>
-                    <MultiSelect value={selectedItems1} options={items} onChange={(e) => { setSelectedItems1(e.value); setSelectAll(e.value.length === items.length) }} selectAll={selectAll} onSelectAll={(e) => { setSelectAll(!e.checked); setSelectedItems1(e.checked ? [] : items.map(item => item.value)) }} virtualScrollerOptions={{ itemSize: 43 }} placeholder="Select Item" />
+                    <MultiSelect value={selectedItems1} options={items} onChange={(e) => { setSelectedItems1(e.value); setSelectAll(e.value.length === items.length) }} selectAll={selectAll} onSelectAll={(e) => { setSelectAll(!e.checked); setSelectedItems1(e.checked ? [] : items.map(item => item.value)) }} virtualScrollerOptions={{ itemSize: 43 }} maxSelectedLabels={3} placeholder="Select Item" />
 
                     <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                     <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{
@@ -183,7 +183,7 @@ const MultiSelectDemo = () => {
                                 </div>
                             )
                         }
-                    }} placeholder="Select Item" showSelectAll={false} />
+                    }} maxSelectedLabels={3} placeholder="Select Item" showSelectAll={false} />
                 </div>
             </div>
 

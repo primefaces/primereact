@@ -75,7 +75,7 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
         'p-disabled': props.disabled,
         'p-focus': focusedState
     });
-    const icon = IconUtils.getJSXIcon(checked && props.icon, { className: 'p-checkbox-icon p-c' }, { props, checked });
+    const icon = IconUtils.getJSXIcon(checked ? props.icon : '', { className: 'p-checkbox-icon p-c' }, { props, checked });
 
     return (
         <>

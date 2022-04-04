@@ -22,6 +22,8 @@ export const MultiSelectHeader = React.memo((props) => {
                 checked: props.selectAll
             });
         }
+
+        event.preventDefault();
     }
 
     const createFilterElement = () => {
