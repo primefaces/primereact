@@ -204,8 +204,8 @@ primereact/resources/themes/rhea/theme.css
 <CodeHighlight lang="js">
 {`
 dependencies: {
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
 }
 `}
 </CodeHighlight>
@@ -281,11 +281,11 @@ PrimeReact.inputStyle = 'filled';
 import PrimeReact from 'primereact/api';
 
 PrimeReact.zIndex = {
-modal: 1100,    // dialog, sidebar
-overlay: 1000,  // dropdown, overlaypanel
-menu: 1000,     // overlay menus
-tooltip: 1100   // tooltip
-toast: 1200     // toast
+    modal: 1100,    // dialog, sidebar
+    overlay: 1000,  // dropdown, overlaypanel
+    menu: 1000,     // overlay menus
+    tooltip: 1100   // tooltip
+    toast: 1200     // toast
 }
 `}
 </CodeHighlight>
