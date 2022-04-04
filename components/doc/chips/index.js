@@ -236,6 +236,12 @@ customChip(item) {
                                     <td>Unique identifier of the component.</td>
                                 </tr>
                                 <tr>
+                                    <td>inputId</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Identifier of the focus input to match a label defined for the chips.</td>
+                                </tr>
+                                <tr>
                                     <td>name</td>
                                     <td>string</td>
                                     <td>null</td>

@@ -179,7 +179,7 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
     const createInput = () => {
         return (
             <li className="p-chips-input-token">
-                <input ref={inputRef} placeholder={props.placeholder} type="text" name={props.name} disabled={props.disabled || isMaxedOut()}
+                <input ref={inputRef} id={props.inputId} placeholder={props.placeholder} type="text" name={props.name} disabled={props.disabled || isMaxedOut()}
                     onKeyDown={onKeyDown} onPaste={onPaste} onFocus={onFocus} onBlur={onBlur} aria-labelledby={props.ariaLabelledBy}
                     readOnly={props.readOnly} />
             </li>
@@ -229,6 +229,7 @@ Chips.defaultProps = {
     __TYPE: 'Chips',
     id: null,
     inputRef: null,
+    inputId: null,
     name: null,
     placeholder: null,
     value: null,

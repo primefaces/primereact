@@ -33,6 +33,7 @@ interface ChipsChangeParams {
 export interface ChipsProps {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
+    inputId?: string;
     name?: string;
     placeholder?: string;
     value?: any[];
