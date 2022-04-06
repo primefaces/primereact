@@ -106,7 +106,12 @@ primereact/resources/themes/rhea/theme.css
                 </a>
 
                 <h5>Scoped Styling</h5>
-                <p>Designer themes apply a global skin to the library, in case you need to change the style of a particular component, you may use a named class, CSS Modules or a CSS-in-JS solution like styled-jsx.</p>
+                <p>Designer themes apply a global skin to the library, in case you need to change the style of a particular component, you may use a named class, CSS Modules or a CSS-in-JS solution like styled-jsx. 
+                    A video tutorial that goes through the alternatives below is available.</p>
+
+                <div className="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/3pO79DdPpiU" frameBorder="0" allowFullScreen="true" title="Scoped CSS with PrimeReact"></iframe>
+                </div>
 
                 <h6>Named Class</h6>
                 <p>A named class is bound to the className prop of a component and the CSS is included with an import. Note that, the css still is still bundled globally so prefer this approach
