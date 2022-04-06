@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { classNames } from '../lib/utils/ClassNames';
 import Topbar from './topbar';
 import NewsSection from '../news/newssection';
