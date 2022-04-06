@@ -133,4 +133,13 @@
             }
         }
     }
+
+    .layout-news {
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+        > i {
+            display: none;
+        }
+    }
 }
