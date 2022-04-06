@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { classNames } from '../lib/utils/ClassNames';
 import Topbar from './topbar';
-import News from './news';
+import NewsSection from '../news/newssection';
 import Menu from './menu';
 import Config from './config';
 import Footer from './footer';
@@ -15,13 +15,12 @@ export default function Layout(props) {
     const [inputStyle, setInputStyle] = useState('outlined');
     const [ripple, setRipple] = useState(false);
     const [sidebarActive, setSidebarActive] = useState(false);
-    const [newsActive, setNewsActive] = useState(false);
     const mounted = useRef(false);
     const storageKey = 'primereact';
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     const wrapperClassName = classNames('layout-wrapper', {
-        'layout-news-active': newsActive,
+        'layout-news-active': props.newsActive,
         'p-input-filled': inputStyle === 'filled',
         'p-ripple-disabled': ripple === false,
         'layout-wrapper-dark': props.dark,
@@ -51,42 +50,6 @@ export default function Layout(props) {
     const onRippleChange = (value) => {
         setRipple(value);
     }
-    const onNewsHide = () => {
-        setNewsActive(false);
-    }
-    const saveSettings = () => {
-        const now = new Date();
-        const settings = {newsActive};
-        const item = {
-            settings,
-            expiry: now.getTime() + 604800000
-        }
-        localStorage.setItem(storageKey, JSON.stringify(item));
-    }
-    const restoreSettings = () => {
-        const itemString = localStorage.getItem(storageKey);
-        if (itemString) {
-            const item = JSON.parse(itemString);
-            if (!isStorageExpired()) {
-                setNewsActive(item.settings.newsActive);
-            }
-        }
-    }
-    const isStorageExpired = () => {
-        const itemString = localStorage.getItem(storageKey);
-        if (!itemString) {
-            return true;
-        }
-        const item = JSON.parse(itemString);
-        const now = new Date();
-
-        if (now.getTime() > item.expiry) {
-            localStorage.removeItem(storageKey);
-            return true;
-        }
-
-        return false;
-    }
 
     useEffect(() => {
         if (sidebarActive)
@@ -94,16 +57,6 @@ export default function Layout(props) {
         else
             document.body.classList.remove('blocked-scroll');
     }, [sidebarActive]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
-        if (!mounted.current) {
-            restoreSettings();
-            mounted.current = true;
-        }
-        else {
-            saveSettings();
-        }
-    },[newsActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
     PrimeReact.ripple = true;
 
@@ -133,7 +86,7 @@ export default function Layout(props) {
                 <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
                 {/* eslint-enable */}
             </Head>
-            <News active={newsActive} onHide={onNewsHide}/>
+            {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
             <Topbar onMenuButtonClick={onMenuButtonClick} onThemeChange={onThemeChange} theme={props.theme} darkTheme={props.dark} versions={[]} />
             <Menu active={sidebarActive} onMenuItemClick={onMenuItemClick} darkTheme={props.dark} />
             <AppContentContext.Provider value={{

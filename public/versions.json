@@ -2,18 +2,15 @@
     "versions": [
         {
             "version": "v8.0.0",
-            "url": "https://www.primefaces.org/primereact",
-            "news": true
+            "url": "https://www.primefaces.org/primereact"
         },
         {
             "version": "v7.1.0",
-            "url": "https://www.primefaces.org/primereact-v7",
-            "news": true
+            "url": "https://www.primefaces.org/primereact-v7"
         },
         {
             "version": "v6.6.0",
-            "url": "https://www.primefaces.org/primereact-v6",
-            "news": true
+            "url": "https://www.primefaces.org/primereact-v6"
         },
         {
             "version": "v5.0.2",

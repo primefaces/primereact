@@ -4,15 +4,46 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import '../styles/demo/demo.scss';
 import Layout from '../components/layout/layout';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import fetchNews from '../service/NewsService';
 
 export default function MyApp({ Component }) {
     const [dark, setDark] = useState(false);
     const [theme, setTheme] = useState('lara-light-indigo');
+    const [newsActive, setNewsActive] = useState(false);
+    const storageKey = 'primereact';
+    const announcement = useRef(null);
+
+    useEffect(() => {
+        fetchNews().then(data => {
+            announcement.current = data;
+
+            const itemString = localStorage.getItem(storageKey);
+            if (itemString) {
+                const item = JSON.parse(itemString);
+                if (item.hiddenNews && item.hiddenNews !== data.id) {
+                    setNewsActive(true);
+                }
+            }
+            else {
+                setNewsActive(true);
+            }
+        });
+    }, []);
 
     const props = {
         dark: dark,
         theme: theme,
+        newsActive: newsActive,
+        announcement: announcement.current,
+        onNewsClose: () => {
+            setNewsActive(false);
+
+            const item = {
+                hiddenNews: announcement.current.id
+            };
+            localStorage.setItem(storageKey, JSON.stringify(item));
+        },
         onThemeChange: (newTheme, dark) => {
             setDark(dark);
             changeTheme(newTheme);
