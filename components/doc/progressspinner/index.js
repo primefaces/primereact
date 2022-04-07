@@ -130,7 +130,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
                     <p>Colors of the spinner can be changed by overriding the keyframes animation</p>
 <CodeHighlight lang="js">
 {`
-@keyframes ui-progress-spinner-color {
+@keyframes p-progress-spinner-color {
     100%,
     0% {
         stroke: #d62d20;
