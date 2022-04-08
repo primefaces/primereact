@@ -64,7 +64,7 @@ interface TreeSelectFilterValueChangeParams {
     value: string;
 }
 
-export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'|'value'> {
+export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'|'value' | 'ref'> {
     id?: string;
     value?: TreeSelectSelectionKeys;
     name?: string;

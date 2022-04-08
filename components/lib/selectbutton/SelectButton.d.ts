@@ -17,7 +17,7 @@ interface SelectButtonChangeParams {
     target: SelectButtonChangeTargetOptions;
 }
 
-export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'unselectable' | 'onChange'> {
+export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'unselectable' | 'onChange' | 'ref'> {
     id?: string;
     value?: any;
     options?: any[];
