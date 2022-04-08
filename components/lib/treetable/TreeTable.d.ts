@@ -95,7 +95,7 @@ interface TreeTableColReorderParams {
     columns: React.ReactElement;
 }
 
-export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onContextMenu' | 'onSelect'> {
+export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onContextMenu' | 'onSelect' | 'ref'> {
     id?: string;
     value?: TreeNode[];
     header?: React.ReactNode;

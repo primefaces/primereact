@@ -17,7 +17,7 @@ interface RadioButtonChangeParams {
     target: RadioButtonChangeTargetOptions;
 }
 
-export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
+export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     inputId?: string;
