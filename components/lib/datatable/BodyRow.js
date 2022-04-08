@@ -200,7 +200,7 @@ export const BodyRow = React.memo((props) => {
                 let dataKeyValue = String(ObjectUtils.resolveFieldData(data, dataKey));
                 editingRows = props.editingRows ? { ...props.editingRows } : {};
 
-                if (!editing) {
+                if (!isEditing) {
                     delete editingRows[dataKeyValue];
                     // if the key value was changed, stop editing for the new key value too
                     let newDataKeyValue = String(ObjectUtils.resolveFieldData(newData, dataKey));
