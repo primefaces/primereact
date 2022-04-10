@@ -1977,8 +1977,8 @@ PrimeReact.filterMatchModeOptions = {
 <CodeHighlight lang="js">
 {`
 const matchModes = [
-    {label: 'Starts With', FilterMatchMode.STARTS_WITH},
-    {label: 'Contains', FilterMatchMode.CONTAINS},
+    {label: 'Starts With', value: FilterMatchMode.STARTS_WITH},
+    {label: 'Contains', value: FilterMatchMode.CONTAINS},
 ];
 ...
 <Column field="name" header="Name" filterMatchModeOptions={matchModes} />
@@ -1995,9 +1995,9 @@ FilterService.register('myfilter', (a,b) => a === b);
 ...
 
 const matchModes = [
-    {label: 'My Filter', "myfilter"},
-    {label: 'Starts With', FilterMatchMode.STARTS_WITH},
-    {label: 'Contains', FilterMatchMode.CONTAINS},
+    {label: 'My Filter', value: "myfilter"},
+    {label: 'Starts With', value: FilterMatchMode.STARTS_WITH},
+    {label: 'Contains', value: FilterMatchMode.CONTAINS},
 ]
 `}
 </CodeHighlight>
