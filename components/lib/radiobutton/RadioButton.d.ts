@@ -33,6 +33,7 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     onChange?(e: RadioButtonChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class RadioButton extends React.Component<RadioButtonProps, any> {

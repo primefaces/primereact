@@ -13,6 +13,7 @@ export interface StyleClassProps {
     leaveToClassName?: string;
     hideOnOutsideClick?: boolean;
     toggleClassName?: string;
+    children?: React.ReactNode;
 }
 
 export declare class StyleClass extends React.Component<StyleClassProps, any> { }

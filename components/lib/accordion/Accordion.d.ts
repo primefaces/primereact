@@ -14,6 +14,7 @@ interface AccordionTabProps {
     headerTemplate?: AccordionTabHeaderTemplateType;
     contentStyle?: object;
     contentClassName?: string;
+    children?: React.ReactNode;
 }
 
 export declare class AccordionTab extends React.Component<AccordionTabProps, any> { }
@@ -37,6 +38,7 @@ export interface AccordionProps {
     onTabOpen?(e: AccordionEventParams): void;
     onTabClose?(e: AccordionEventParams): void;
     onTabChange?(e: AccordionEventParams): void;
+    children?: React.ReactNode;
 }
 
 // tslint:disable-next-line:max-classes-per-file

@@ -27,6 +27,7 @@ export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTM
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     onChange?(e: RatingChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Rating extends React.Component<RatingProps, any> { }

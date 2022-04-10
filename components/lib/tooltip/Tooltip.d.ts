@@ -7,6 +7,7 @@ export interface TooltipProps extends TooltipOptions {
     id?: string;
     target?: TooltipTargetType;
     content?: string;
+    children?: React.ReactNode;
 }
 
 export declare class Tooltip extends React.Component<TooltipProps, any> {

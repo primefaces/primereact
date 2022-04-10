@@ -23,6 +23,7 @@ export interface OverlayPanelProps {
     transitionOptions?: CSSTransitionProps;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class OverlayPanel extends React.Component<OverlayPanelProps, any> {

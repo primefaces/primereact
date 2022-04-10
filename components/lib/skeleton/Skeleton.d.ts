@@ -13,6 +13,7 @@ export interface SkeletonProps {
     animation?: SkeletonAnimationType;
     style?: object;
     className?: string;
+    children?: React.ReactNode;
 }
 
 export declare class Skeleton extends React.Component<SkeletonProps, any> { }

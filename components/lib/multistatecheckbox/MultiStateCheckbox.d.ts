@@ -53,6 +53,7 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     onChange?(e: MultiStateCheckboxChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class MultiStateCheckbox extends React.Component<MultiStateCheckboxProps, any> { }

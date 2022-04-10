@@ -28,6 +28,7 @@ export interface SplitButtonProps {
     onClick?(event: React.MouseEvent<HTMLElement>): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class SplitButton extends React.Component<SplitButtonProps, any> {

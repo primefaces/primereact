@@ -60,6 +60,7 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
     ariaLabelledBy?: string;
     onChange?(e: ListBoxChangeParams): void;
     onFilterValueChange?(e: ListBoxFilterValueChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class ListBox extends React.Component<ListBoxProps, any> { }

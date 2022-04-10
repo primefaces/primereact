@@ -19,6 +19,7 @@ export interface AvatarProps {
     imageAlt?: string;
     onImageError?(event: React.SyntheticEvent): void;
     onClick?(event: React.MouseEvent<HTMLElement>): void;
+    children?: React.ReactNode;
 }
 
 export declare class Avatar extends React.Component<AvatarProps, any> { }

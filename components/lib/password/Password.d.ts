@@ -48,6 +48,7 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
     onInput?(event: React.FormEvent<HTMLInputElement>, validatePattern: boolean): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class Password extends React.Component<PasswordProps, any> { }

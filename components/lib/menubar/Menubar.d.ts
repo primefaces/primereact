@@ -12,6 +12,7 @@ export interface MenubarProps {
     className?: string;
     start?: MenubarStartTemplate;
     end?: MenubarEndTemplate;
+    children?: React.ReactNode;
 }
 
 export declare class Menubar extends React.Component<MenubarProps, any> { }

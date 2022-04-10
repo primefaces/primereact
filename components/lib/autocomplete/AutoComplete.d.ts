@@ -105,6 +105,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     onClear?(event: React.SyntheticEvent): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class AutoComplete extends React.Component<AutoCompleteProps, any> {

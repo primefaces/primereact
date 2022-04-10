@@ -10,6 +10,7 @@ export interface ChartProps {
     height?: string;
     style?: object;
     className?: string;
+    children?: React.ReactNode;
 }
 
 export declare class Chart extends React.Component<ChartProps, any> {

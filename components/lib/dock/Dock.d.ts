@@ -22,6 +22,7 @@ export interface DockProps {
     magnification?: boolean;
     header?: DockHeaderType;
     footer?: DockFooterType;
+    children?: React.ReactNode;
 }
 
 export declare class Dock extends React.Component<DockProps, any> { }

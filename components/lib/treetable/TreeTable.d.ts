@@ -171,6 +171,7 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
     onColumnResizeEnd?(e: TreeTableColumnResizeEndParams): void;
     onColReorder?(e: TreeTableColReorderParams): void;
     onContextMenu?(e: TreeTableEventParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class TreeTable extends React.Component<TreeTableProps, any> {

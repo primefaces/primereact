@@ -12,6 +12,7 @@ export interface DividerProps {
     type?: DividerBorderType;
     style?: object;
     className?: string;
+    children?: React.ReactNode;
 }
 
 export declare class Divider extends React.Component<DividerProps, any> { }

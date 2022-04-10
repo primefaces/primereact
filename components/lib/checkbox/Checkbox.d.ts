@@ -41,6 +41,7 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
     onChange?(e: CheckboxChangeParams): void;
     onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
     onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
+    children?: React.ReactNode;
 }
 
 export declare class Checkbox extends React.Component<CheckboxProps, any> { }

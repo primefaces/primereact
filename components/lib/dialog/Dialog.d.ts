@@ -60,6 +60,7 @@ export interface DialogProps {
     onShow?(): void;
     onMaskClick?(e: React.MouseEvent<HTMLElement>): void;
     onClick?(e: React.MouseEvent<HTMLElement>): void;
+    children?: React.ReactNode;
 }
 
 export declare class Dialog extends React.Component<DialogProps, any> {

@@ -35,6 +35,7 @@ export interface ToastProps {
     onRemove?(message: ToastMessage): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class Toast extends React.Component<ToastProps, any> {

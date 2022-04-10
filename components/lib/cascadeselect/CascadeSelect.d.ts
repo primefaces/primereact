@@ -40,6 +40,7 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
     onBeforeHide?(): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class CascadeSelect extends React.Component<CascadeSelectProps, any> { }

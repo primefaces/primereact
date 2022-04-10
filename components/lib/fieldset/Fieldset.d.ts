@@ -18,6 +18,7 @@ export interface FieldsetProps {
     onCollapse?(event: React.MouseEvent<HTMLElement>): void;
     onToggle?(e: FieldsetToggleParams): void;
     onClick?(event: React.MouseEvent<HTMLElement>): void;
+    children?: React.ReactNode;
 }
 
 export declare class Fieldset extends React.Component<FieldsetProps, any> { }

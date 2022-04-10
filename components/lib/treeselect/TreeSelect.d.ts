@@ -106,6 +106,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     onNodeExpand?(e: TreeSelectEventNodeParams): void;
     onNodeCollapse?(e: TreeSelectEventNodeParams): void;
     onFilterValueChange?(e: TreeSelectFilterValueChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class TreeSelect extends React.Component<TreeSelectProps, any> { }

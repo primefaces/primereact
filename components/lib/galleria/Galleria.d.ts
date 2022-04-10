@@ -44,6 +44,7 @@ export interface GalleriaProps {
     onItemChange?(e: GalleriaItemChangeParams): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class Galleria extends React.Component<GalleriaProps, any> {

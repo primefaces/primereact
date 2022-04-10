@@ -28,6 +28,7 @@ export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<Reac
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     onChange?(e: TriStateCheckboxChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class TriStateCheckbox extends React.Component<TriStateCheckboxProps, any> { }

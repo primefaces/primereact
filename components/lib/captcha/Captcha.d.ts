@@ -10,6 +10,7 @@ export interface CaptchaProps {
     language?: string;
     onResponse?(response: any): void;
     onExpire?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class Captcha extends React.Component<CaptchaProps, any> {

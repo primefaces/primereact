@@ -40,6 +40,7 @@ export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
     onHide?(result: string): void;
     accept?(): void;
     reject?(): void;
+    children?: React.ReactNode;
 }
 
 interface ConfirmDialogReturn {

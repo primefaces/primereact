@@ -36,6 +36,7 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
     ariaLabelledBy?: string;
     itemTemplate?(option: any): React.ReactNode;
     onChange?(e: SelectButtonChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class SelectButton extends React.Component<SelectButtonProps, any> { }

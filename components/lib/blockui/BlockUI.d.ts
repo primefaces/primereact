@@ -13,6 +13,7 @@ export interface BlockUIProps {
     template?: BlockUITemplateType;
     onBlocked?(): void;
     onUnblocked?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class BlockUI extends React.Component<BlockUIProps, any> {

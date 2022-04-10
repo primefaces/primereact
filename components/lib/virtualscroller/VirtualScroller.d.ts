@@ -109,6 +109,7 @@ export interface VirtualScrollerProps {
     onScroll?(e: React.UIEvent<HTMLElement>): void;
     onScrollIndexChange?(e: VirtualScrollerChangeParams): void;
     onLazyLoad?(e: VirtualScrollerLazyParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class VirtualScroller extends React.Component<VirtualScrollerProps, any> {

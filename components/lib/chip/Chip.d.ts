@@ -13,6 +13,7 @@ export interface ChipProps {
     imageAlt?: string;
     onImageError?(event: React.SyntheticEvent): void;
     onRemove?(event: React.MouseEvent<HTMLElement>): void;
+    children?: React.ReactNode;
 }
 
 export declare class Chip extends React.Component<ChipProps, any> { }

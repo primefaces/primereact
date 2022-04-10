@@ -22,6 +22,7 @@ export interface MessagesProps {
     transitionOptions?: CSSTransitionProps;
     onRemove?(message: MessagesMessage): void;
     onClick?(message: MessagesMessage): void;
+    children?: React.ReactNode;
 }
 
 export declare class Messages extends React.Component<MessagesProps, any> {

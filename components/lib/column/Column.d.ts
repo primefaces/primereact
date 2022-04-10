@@ -245,6 +245,7 @@ export interface ColumnProps {
     cellEditValidator?(e: ColumnEventParams): boolean;
     onBeforeCellEditHide?(e: ColumnEventParams): void;
     onBeforeCellEditShow?(e: ColumnEventParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Column extends React.Component<ColumnProps, any> { }

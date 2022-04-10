@@ -17,6 +17,7 @@ export interface OrderListProps {
     dataKey?: string;
     onChange?(e: OrderListChangeParams): void;
     itemTemplate?(item: any): React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export declare class OrderList extends React.Component<OrderListProps, any> { }
