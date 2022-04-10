@@ -2305,10 +2305,10 @@ const requiredValidator = (e) => {
 
 <CodeHighlight>
 {`
-<DataTable value={products} editMode="row">
+<DataTable value={products} editMode="row" rowEditValidator={onRowEditValidator}>
     <Column field="code" header="Code" />
     <Column field="name" header="Name" />
-    <Column field="inventoryStatuses" header="Status" editor={statusEditor} onRowEditValidator={onRowEditValidator} />
+    <Column field="inventoryStatuses" header="Status" editor={statusEditor} />
     <Column rowEditor />
 </DataTable>
 `}
