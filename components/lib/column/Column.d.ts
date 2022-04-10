@@ -198,7 +198,7 @@ export interface ColumnProps {
     showFilterMatchModes?: boolean;
     showFilterMenuOptions?: boolean;
     showAddButton?: boolean;
-    filterMatchModeOptions?: ColumnFilterMatchModeOptions;
+    filterMatchModeOptions?: ColumnFilterMatchModeOptions[];
     maxConstraints?: number;
     filterMenuClassName?: string;
     filterMenuStyle?: object;
