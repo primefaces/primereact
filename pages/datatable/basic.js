@@ -16,35 +16,35 @@ const DataTableBasicDemo = () => {
         productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-        return (
-            <div>
-                <Head>
-                    <title>React Table Component - Basic</title>
-                    <meta name="description" content="DataTable requires a collection to display along with column components for the representation of the data." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable <span>Basic</span></h1>
-				        <p>DataTable requires a collection to display along with column components for the representation of the data.</p>
-                    </div>
-
-                    <DocActions github="datatable/basic.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Table Component - Basic</title>
+                <meta name="description" content="DataTable requires a collection to display along with column components for the representation of the data." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>DataTable <span>Basic</span></h1>
+                    <p>DataTable requires a collection to display along with column components for the representation of the data.</p>
                 </div>
 
-                <div className="content-section implementation">
-                <div className="card">
-                <DataTable value={products} responsiveLayout="scroll">
-                    <Column field="code" header="Code"></Column>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="category" header="Category"></Column>
-                    <Column field="quantity" header="Quantity"></Column>
-                </DataTable>
+                <DocActions github="datatable/basic.js" />
             </div>
-                </div>
 
-                <DataTableBasicDemoDoc></DataTableBasicDemoDoc>
+            <div className="content-section implementation">
+            <div className="card">
+            <DataTable value={products} responsiveLayout="scroll">
+                <Column field="code" header="Code"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="category" header="Category"></Column>
+                <Column field="quantity" header="Quantity"></Column>
+            </DataTable>
+        </div>
             </div>
-        );
+
+            <DataTableBasicDemoDoc></DataTableBasicDemoDoc>
+        </div>
+    );
 }
 
 export default DataTableBasicDemo;
