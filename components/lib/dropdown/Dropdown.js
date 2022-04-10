@@ -262,7 +262,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
 
         if (searchValue.current) {
             const searchIndex = getSelectedOptionIndex();
-            const newOption = props.optionGroupLabel ? searchOptionInGroup(searchIndex) : searchOption(++searchIndex);
+            const newOption = props.optionGroupLabel ? searchOptionInGroup(searchIndex) : searchOption(searchIndex + 1);
             if (newOption) {
                 selectItem({
                     originalEvent: event,
