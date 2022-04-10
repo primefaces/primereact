@@ -345,7 +345,7 @@ export class GalleriaAdvancedDemo extends Component {
 
     thumbnailTemplate(item) {
         return (
-            <div className="p-grid p-nogutter p-justify-center">
+            <div className="grid grid-nogutter justify-content-center">
                 <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />
             </div>
         );
