@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Steps = React.memo(React.forwardRef((props, ref) => {
 
@@ -39,10 +39,13 @@ export const Steps = React.memo(React.forwardRef((props, ref) => {
             'p-highlight p-steps-current': active,
             'p-disabled': disabled
         });
+        const iconClassName = classNames('p-menuitem-icon', item.icon);
+        const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props });
         const label = item.label && <span className="p-steps-title">{item.label}</span>;
         let content = (
             <a href={item.url || '#'} className="p-menuitem-link" role="presentation" target={item.target} onClick={event => itemClick(event, item, index)} tabIndex={tabIndex}>
                 <span className="p-steps-number">{index + 1}</span>
+                {icon}
                 {label}
             </a>
         );
@@ -53,6 +56,7 @@ export const Steps = React.memo(React.forwardRef((props, ref) => {
                 className: 'p-menuitem-link',
                 labelClassName: 'p-steps-title',
                 numberClassName: 'p-steps-number',
+                iconClassName,
                 element: content,
                 props,
                 tabIndex,

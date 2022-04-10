@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const TabMenu = React.memo(React.forwardRef((props, ref) => {
     const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
@@ -62,7 +62,7 @@ export const TabMenu = React.memo(React.forwardRef((props, ref) => {
             'p-disabled': disabled
         }, _className);
         const iconClassName = classNames('p-menuitem-icon', _icon);
-        const icon = _icon && <span className={iconClassName}></span>;
+        const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props });
         const label = _label && <span className="p-menuitem-text">{_label}</span>;
         let content = (
             <a href={url || '#'} className="p-menuitem-link" target={target} onClick={(event) => itemClick(event, item, index)} role="presentation">

@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
 export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -210,7 +210,7 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
             const className = classNames('p-menuitem', item.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames(item.icon, 'p-menuitem-icon');
-            const icon = item.icon && <span className={iconClassName}></span>;
+            const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props });
             const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
             let content = (
                 <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onLeafClick(event, item)} role="menuitem" aria-disabled={item.disabled}>
@@ -305,8 +305,7 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
     const createCategory = (category, index) => {
         const className = classNames('p-menuitem', { 'p-menuitem-active': category === activeItemState }, category.className);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': category.disabled });
-        const iconClassName = classNames('p-menuitem-icon', category.icon);
-        const icon = category.icon && <span className={iconClassName}></span>;
+        const icon = IconUtils.getJSXIcon(category.icon, { className: 'p-menuitem-icon' }, { props });
         const label = category.label && <span className="p-menuitem-text">{category.label}</span>;
         const itemContent = category.template ? ObjectUtils.getJSXElement(category.template, category) : null;
         const submenuIcon = createSubmenuIcon(category);

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const SplitButtonItem = React.memo((props) => {
 
@@ -23,7 +23,7 @@ export const SplitButtonItem = React.memo((props) => {
         const { disabled, icon: _icon, label: _label, template, url, target } = props.menuitem;
         const className = classNames('p-menuitem-link', { 'p-disabled': disabled });
         const iconClassName = classNames('p-menuitem-icon', _icon);
-        const icon = _icon && <span className={iconClassName}></span>;
+        const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props: props.splitButtonProps });
         const label = _label && <span className="p-menuitem-text">{_label}</span>;
         let content = (
             <a href={url || '#'} role="menuitem" className={className} target={target} onClick={onClick}>

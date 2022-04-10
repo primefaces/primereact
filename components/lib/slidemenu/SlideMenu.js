@@ -118,7 +118,7 @@ export const SlideMenu = React.memo(React.forwardRef((props, ref) => {
                 <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
                     <div className="p-slidemenu-wrapper" style={wrapperStyle}>
                         <div className="p-slidemenu-content" ref={slideMenuContent}>
-                            <SlideMenuSub model={props.model} root index={0} menuWidth={props.menuWidth} effectDuration={props.effectDuration}
+                            <SlideMenuSub menuProps={props} model={props.model} root index={0} menuWidth={props.menuWidth} effectDuration={props.effectDuration}
                                 level={levelState} parentActive={levelState === 0} onForward={navigateForward} />
                         </div>
                         {backward}

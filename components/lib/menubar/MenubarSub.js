@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const MenubarSub = React.memo(React.forwardRef((props, ref) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -168,7 +168,7 @@ export const MenubarSub = React.memo(React.forwardRef((props, ref) => {
 
     const createSubmenu = (item) => {
         if (item.items) {
-            return <MenubarSub model={item.items} mobileActive={props.mobileActive} onLeafClick={onLeafClick} onKeyDown={onChildItemKeyDown} parentActive={item === activeItemState} />
+            return <MenubarSub menuProps={props.menuProps} model={item.items} mobileActive={props.mobileActive} onLeafClick={onLeafClick} onKeyDown={onChildItemKeyDown} parentActive={item === activeItemState} />
         }
 
         return null;
@@ -180,7 +180,7 @@ export const MenubarSub = React.memo(React.forwardRef((props, ref) => {
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const submenuIconClassName = classNames('p-submenu-icon pi', { 'pi-angle-down': props.root, 'pi-angle-right': !props.root });
-        const icon = item.icon && <span className={iconClassName}></span>;
+        const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = createSubmenu(item);

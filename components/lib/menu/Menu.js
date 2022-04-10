@@ -4,7 +4,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
 export const Menu = React.memo(React.forwardRef((props, ref) => {
     const [visibleState, setVisibleState] = React.useState(!props.popup);
@@ -152,7 +152,7 @@ export const Menu = React.memo(React.forwardRef((props, ref) => {
         const className = classNames('p-menuitem', item.className);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled })
         const iconClassName = classNames('p-menuitem-icon', item.icon);
-        const icon = item.icon && <span className={iconClassName}></span>;
+        const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props });
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const tabIndex = item.disabled ? null : 0;
         const key = item.label + '_' + index;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
 
@@ -25,14 +25,14 @@ export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
         const home = props.home;
 
         if (home) {
-            const { icon, target, url, disabled, style, className: _className } = home;
+            const { icon: _icon, target, url, disabled, style, className: _className } = home;
             const className = classNames('p-breadcrumb-home', { 'p-disabled': disabled }, _className);
-            const iconClassName = classNames('p-menuitem-icon', icon);
+            const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props });
 
             return (
                 <li className={className} style={style}>
                     <a href={url || '#'} className="p-menuitem-link" aria-disabled={disabled} target={target} onClick={(event) => itemClick(event, home)}>
-                        <span className={iconClassName}></span>
+                        {icon}
                     </a>
                 </li>
             )
