@@ -23,7 +23,7 @@ const TimelineDemo = () => {
 
     const customizedMarker = (item) => {
         return (
-            <span className="custom-marker p-shadow-2" style={{ backgroundColor: item.color }}>
+            <span className="custom-marker shadow-1" style={{ backgroundColor: item.color }}>
                 <i className={item.icon}></i>
             </span>
         );
@@ -32,7 +32,7 @@ const TimelineDemo = () => {
     const customizedContent = (item) => {
         return (
             <Card title={item.status} subTitle={item.date}>
-                {item.image && <img src={`${contextPath}/images/product/${item.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="p-shadow-2" />}
+                {item.image && <img src={`${contextPath}/images/product/${item.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="shadow-1" />}
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                     quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                 <Button label="Read more" className="p-button-text"></Button>
