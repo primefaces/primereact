@@ -14,6 +14,7 @@ export interface TabMenuProps {
     style?: object;
     className?: string;
     onTabChange?(e: TabMenuTabChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class TabMenu extends React.Component<TabMenuProps, any> { }

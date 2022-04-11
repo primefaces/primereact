@@ -1052,7 +1052,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         let dataFieldValue = ObjectUtils.resolveFieldData(rowData, field);
         let filterConstraint = FilterService.filters[filterMatchMode];
 
-        return filterConstraint(dataFieldValue, filterValue, props.filterLocale, index);
+        return ObjectUtils.isFunction(filterConstraint) && filterConstraint(dataFieldValue, filterValue, props.filterLocale, index);
     }
 
     const cloneFilters = (filters) => {
@@ -1344,7 +1344,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         const multiSortMeta = [...getMultiSortMeta()];
         const groupRowSortField = getGroupRowSortField();
         const filters = d_filtersState;
-        const filtersStore = getFilters();
+        const filtersStore = (!props.onFilter && props.filters) || getFilters();
         const { items: processedData, columns } = options;
 
         return (

@@ -26,6 +26,7 @@ export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTM
     ariaLabelledBy?: string;
     onChange?(e: SliderChangeParams): void;
     onSlideEnd?(e: SliderSlideEndParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Slider extends React.Component<SliderProps, any> { }

@@ -7,6 +7,7 @@ export interface BreadCrumbProps {
     home?: MenuItem;
     style?: object;
     className?: string;
+    children?: React.ReactNode;
 }
 
 export declare class BreadCrumb extends React.Component<BreadCrumbProps, any> { }

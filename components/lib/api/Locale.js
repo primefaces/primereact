@@ -42,8 +42,8 @@ let locales = {
         medium: 'Medium',
         strong: 'Strong',
         passwordPrompt: 'Enter a password',
-        emptyFilterMessage: 'No results found',
-        emptyMessage: 'No available options'
+        emptyFilterMessage: 'No available options',
+        emptyMessage: 'No results found'
     }
 };
 

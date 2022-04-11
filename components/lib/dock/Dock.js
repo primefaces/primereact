@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Dock = React.memo(React.forwardRef((props, ref) => {
     const [currentIndexState, setCurrentIndexState] = React.useState(-3);
@@ -32,7 +32,7 @@ export const Dock = React.memo(React.forwardRef((props, ref) => {
         });
         const contentClassName = classNames('p-dock-action', { 'p-disabled': disabled });
         const iconClassName = classNames('p-dock-action-icon', _icon);
-        const icon = typeof _icon === 'string' ? <span className={iconClassName}></span> : ObjectUtils.getJSXElement(_icon, props);
+        const icon = IconUtils.getJSXIcon(_icon, { className: 'p-dock-action-icon' }, { props });
 
         let content = (
             <a href={url || '#'} role="menuitem" className={contentClassName} target={target} data-pr-tooltip={label} onClick={(e) => onItemClick(e, item)}>

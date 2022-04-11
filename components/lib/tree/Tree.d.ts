@@ -142,6 +142,7 @@ export interface TreeProps {
     onFilterValueChange?(e: TreeFilterValueChangeParams): void;
     onNodeClick?(e: TreeNodeClickParams): void;
     onNodeDoubleClick?(e: TreeNodeDoubleClickParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Tree extends React.Component<TreeProps, any> {

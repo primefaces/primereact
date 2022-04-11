@@ -32,6 +32,7 @@ export interface CarouselProps {
     containerClassName?: string;
     indicatorsContentClassName?: string;
     onPageChange?(e: CarouselPageChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Carousel extends React.Component<CarouselProps, any> { }

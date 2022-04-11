@@ -68,9 +68,9 @@ const items = [
                         </tr>
                         <tr>
                             <td>icon</td>
-                            <td>string</td>
+                            <td>any</td>
                             <td>null</td>
-                            <td>Icon of the item.</td>
+                            <td>Icon of the item. It can be a string, JSX.Element or method.</td>
                         </tr>
                         <tr>
                             <td>command</td>

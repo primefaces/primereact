@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button } from '../button/Button';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const SpeedDial = React.memo(React.forwardRef((props, ref) => {
     const [visibleState, setVisibleState] = React.useState(false);
@@ -155,7 +155,7 @@ export const SpeedDial = React.memo(React.forwardRef((props, ref) => {
         const { disabled, icon: _icon, label, template, url, target } = item;
         const contentClassName = classNames('p-speeddial-action', { 'p-disabled': disabled });
         const iconClassName = classNames('p-speeddial-action-icon', _icon);
-        const icon = _icon && <span className={iconClassName}></span>;
+        const icon = IconUtils.getJSXIcon(_icon, { className: 'p-speeddial-action-icon' }, { props });
         let content = (
             <a href={url || '#'} role="menuitem" className={contentClassName} target={target} data-pr-tooltip={label} onClick={(e) => onItemClick(e, item)}>
                 {icon}
@@ -198,6 +198,8 @@ export const SpeedDial = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createButton = () => {
+        const showIconVisible = (!visible && !!props.showIcon) || !props.hideIcon;
+        const hideIconVisible = visible && !!props.hideIcon;
         const className = classNames('p-speeddial-button p-button-rounded', {
             'p-speeddial-rotate': props.rotateAnimation && !props.hideIcon
         }, props.buttonClassName);
@@ -205,7 +207,8 @@ export const SpeedDial = React.memo(React.forwardRef((props, ref) => {
             [`${props.showIcon}`]: (!visible && !!props.showIcon) || !props.hideIcon,
             [`${props.hideIcon}`]: visible && !!props.hideIcon,
         });
-        const content = <Button type="button" style={props.buttonStyle} className={className} icon={iconClassName} onClick={onClick} disabled={props.disabled} />;
+        const icon = IconUtils.getJSXIcon(showIconVisible ? props.showIcon : (hideIconVisible ? props.hideIcon : null), undefined, { props });
+        const content = <Button type="button" style={props.buttonStyle} className={className} icon={icon} onClick={onClick} disabled={props.disabled} />;
 
         if (props.buttonTemplate) {
             const defaultContentOptions = {

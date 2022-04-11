@@ -10,6 +10,7 @@ export interface CardProps {
     subTitle?: CardTemplateTypes;
     style?: object;
     className?: string;
+    children?: React.ReactNode;
 }
 
 export declare class Card extends React.Component<CardProps, any> { }

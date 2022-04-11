@@ -10,6 +10,7 @@ export interface TagProps {
     icon?: IconType<TagProps>;
     style?: object;
     className?: string;
+    children?: React.ReactNode;
 }
 
 export declare class Tag extends React.Component<TagProps, any> { }

@@ -111,7 +111,7 @@ export const Menubar = React.memo(React.forwardRef((props, ref) => {
     const start = createStartContent();
     const end = createEndContent();
     const menuButton = createMenuButton();
-    const submenu = <MenubarSub ref={rootMenuRef} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} />;
+    const submenu = <MenubarSub ref={rootMenuRef} menuProps={props} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} />;
 
     return (
         <div id={props.id} className={className} style={props.style} {...otherProps}>

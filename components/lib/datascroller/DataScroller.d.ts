@@ -23,6 +23,7 @@ export interface DataScrollerProps {
     emptyMessage?: DataScrollerEmptyMessageType;
     onLazyLoad?(e: DataScrollerLazyLoadParams): void;
     itemTemplate?(item: any): React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export declare class DataScroller extends React.Component<DataScrollerProps, any> {

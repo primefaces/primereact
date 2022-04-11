@@ -14,6 +14,7 @@ export interface ImageProps {
     height?: string;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class Image extends React.Component<ImageProps, any> { }

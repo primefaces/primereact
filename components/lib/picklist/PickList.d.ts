@@ -36,6 +36,7 @@ export interface PickListProps {
     onMoveAllToTarget?(e: PickListEventParams): void;
     onSourceSelectionChange?(e: PickListEventParams): void;
     onTargetSelectionChange?(e: PickListEventParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class PickList extends React.Component<PickListProps, any> { }

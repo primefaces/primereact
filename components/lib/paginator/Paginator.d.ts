@@ -153,6 +153,7 @@ export interface PaginatorProps {
     currentPageReportTemplate?: string;
     dropdownAppendTo?: PaginatorAppendToType;
     onPageChange?(event: PaginatorPageState): void;
+    children?: React.ReactNode;
 }
 
 export declare class Paginator extends React.Component<PaginatorProps, any> { }

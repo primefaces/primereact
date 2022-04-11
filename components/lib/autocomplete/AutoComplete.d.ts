@@ -45,7 +45,7 @@ interface AutoCompleteCompleteMethodParams {
     query: string;
 }
 
-export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect'> {
+export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     value?: any;
@@ -105,6 +105,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     onClear?(event: React.SyntheticEvent): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class AutoComplete extends React.Component<AutoCompleteProps, any> {

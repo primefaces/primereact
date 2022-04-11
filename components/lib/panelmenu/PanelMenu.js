@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
-import { classNames, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { PanelMenuSub } from './PanelMenuSub';
 
 export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
@@ -86,8 +86,8 @@ export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
         const headerClassName = classNames('p-component p-panelmenu-header', { 'p-highlight': active, 'p-disabled': item.disabled });
         const submenuIconClassName = classNames('p-panelmenu-icon pi', { 'pi-chevron-right': !active, ' pi-chevron-down': active });
         const iconClassName = classNames('p-menuitem-icon', item.icon);
+        const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props });
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
-        const itemIcon = item.icon && <span className={iconClassName}></span>;
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const contentWrapperClassName = classNames('p-toggleable-content', { 'p-toggleable-content-collapsed': !active });
         const menuContentRef = React.createRef();
@@ -95,7 +95,7 @@ export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
             <a href={item.url || '#'} className="p-panelmenu-header-link" onClick={(e) => onItemClick(e, item)} aria-expanded={active}
                 id={headerId} aria-controls={contentId} aria-disabled={item.disabled}>
                 {submenuIcon}
-                {itemIcon}
+                {icon}
                 {label}
             </a>
         );
@@ -124,7 +124,7 @@ export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
                 <CSSTransition nodeRef={menuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit options={props.transitionOptions}>
                     <div ref={menuContentRef} className={contentWrapperClassName} role="region" id={contentId} aria-labelledby={headerId}>
                         <div className="p-panelmenu-content">
-                            <PanelMenuSub model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} />
+                            <PanelMenuSub menuProps={props} model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} />
                         </div>
                     </div>
                 </CSSTransition>

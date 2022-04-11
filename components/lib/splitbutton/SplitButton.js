@@ -87,7 +87,7 @@ export const SplitButton = React.memo(React.forwardRef((props, ref) => {
     const createItems = () => {
         if (props.model) {
             return props.model.map((menuitem, index) => {
-                return <SplitButtonItem menuitem={menuitem} key={index} onItemClick={onItemClick} />
+                return <SplitButtonItem splitButtonProps={props} menuitem={menuitem} key={index} onItemClick={onItemClick} />
             });
         }
 

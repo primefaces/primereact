@@ -873,11 +873,13 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
     const onInputBlur = (event) => {
         setFocusedState(false);
 
-        let currentValue = inputRef.current.value;
-        if (isValueChanged(currentValue, props.value)) {
-            let newValue = validateValue(parseValue(currentValue));
-            updateInputValue(newValue);
-            updateModel(event, newValue);
+        if (inputRef.current) {
+            let currentValue = inputRef.current.value;
+            if (isValueChanged(currentValue, props.value)) {
+                let newValue = validateValue(parseValue(currentValue));
+                updateInputValue(newValue);
+                updateModel(event, newValue);
+            }
         }
 
         props.onBlur && props.onBlur(event);

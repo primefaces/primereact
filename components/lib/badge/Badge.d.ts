@@ -10,6 +10,7 @@ export interface BadgeProps {
     size?: BadgeSizeType;
     style?: object;
     className?: string;
+    children?: React.ReactNode;
 }
 
 export declare class Badge extends React.Component<BadgeProps, any> { }

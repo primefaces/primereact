@@ -1977,8 +1977,8 @@ PrimeReact.filterMatchModeOptions = {
 <CodeHighlight lang="js">
 {`
 const matchModes = [
-    {label: 'Starts With', FilterMatchMode.STARTS_WITH},
-    {label: 'Contains', FilterMatchMode.CONTAINS},
+    {label: 'Starts With', value: FilterMatchMode.STARTS_WITH},
+    {label: 'Contains', value: FilterMatchMode.CONTAINS},
 ];
 ...
 <Column field="name" header="Name" filterMatchModeOptions={matchModes} />
@@ -1995,9 +1995,9 @@ FilterService.register('myfilter', (a,b) => a === b);
 ...
 
 const matchModes = [
-    {label: 'My Filter', "myfilter"},
-    {label: 'Starts With', FilterMatchMode.STARTS_WITH},
-    {label: 'Contains', FilterMatchMode.CONTAINS},
+    {label: 'My Filter', value: "myfilter"},
+    {label: 'Starts With', value: FilterMatchMode.STARTS_WITH},
+    {label: 'Contains', value: FilterMatchMode.CONTAINS},
 ]
 `}
 </CodeHighlight>
@@ -2305,10 +2305,10 @@ const requiredValidator = (e) => {
 
 <CodeHighlight>
 {`
-<DataTable value={products} editMode="row">
+<DataTable value={products} editMode="row" rowEditValidator={onRowEditValidator}>
     <Column field="code" header="Code" />
     <Column field="name" header="Name" />
-    <Column field="inventoryStatuses" header="Status" editor={statusEditor} onRowEditValidator={onRowEditValidator} />
+    <Column field="inventoryStatuses" header="Status" editor={statusEditor} />
     <Column rowEditor />
 </DataTable>
 `}

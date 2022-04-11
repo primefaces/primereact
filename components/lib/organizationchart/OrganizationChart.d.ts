@@ -32,6 +32,7 @@ export interface OrganizationChartProps {
     selectionChange?(node: OrganizationChartSelectionNodeDataType): void;
     onNodeSelect?(e: OrganizationChartNodeSelectParams): void;
     onNodeUnselect?(e: OrganizationChartNodeUnselectParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class OrganizationChart extends React.Component<OrganizationChartProps, any> { }

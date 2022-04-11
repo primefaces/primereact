@@ -42,6 +42,7 @@ export interface SpeedDialProps {
     onClick?(event: React.MouseEvent<HTMLElement>): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class SpeedDial extends React.Component<SpeedDialProps, any> {

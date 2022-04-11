@@ -8,6 +8,7 @@ export interface ToolbarProps {
     className?: string;
     left?: ToolbarTemplateType;
     right?: ToolbarTemplateType;
+    children?: React.ReactNode;
 }
 
 export declare class Toolbar extends React.Component<ToolbarProps, any> { }

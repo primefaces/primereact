@@ -95,7 +95,7 @@ interface TreeTableColReorderParams {
     columns: React.ReactElement;
 }
 
-export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onContextMenu' | 'onSelect'> {
+export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onContextMenu' | 'onSelect' | 'ref'> {
     id?: string;
     value?: TreeNode[];
     header?: React.ReactNode;
@@ -171,6 +171,7 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
     onColumnResizeEnd?(e: TreeTableColumnResizeEndParams): void;
     onColReorder?(e: TreeTableColReorderParams): void;
     onContextMenu?(e: TreeTableEventParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class TreeTable extends React.Component<TreeTableProps, any> {

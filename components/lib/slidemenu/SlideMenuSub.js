@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const SlideMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -35,7 +35,7 @@ export const SlideMenuSub = React.memo((props) => {
 
     const createSubmenu = (item) => {
         if (item.items) {
-            return <SlideMenuSub model={item.items} index={props.index + 1} menuWidth={props.menuWidth} effectDuration={props.effectDuration} onForward={props.onForward} parentActive={item === activeItemState} />
+            return <SlideMenuSub menuProps={props.menuProps} model={item.items} index={props.index + 1} menuWidth={props.menuWidth} effectDuration={props.effectDuration} onForward={props.onForward} parentActive={item === activeItemState} />
         }
 
         return null;
@@ -47,7 +47,7 @@ export const SlideMenuSub = React.memo((props) => {
         const className = classNames('p-menuitem', { 'p-menuitem-active': active, 'p-disabled': item.disabled }, item.className);
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const submenuIconClassName = 'p-submenu-icon pi pi-fw pi-angle-right';
-        const icon = item.icon && <span className={iconClassName}></span>;
+        const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = createSubmenu(item);

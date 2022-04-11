@@ -46,6 +46,7 @@ export interface InputMaskProps {
     onChange?(e: InputMaskChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
+    children?: React.ReactNode;
 }
 
 export declare class InputMask extends React.Component<InputMaskProps, any> { }

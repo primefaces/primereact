@@ -41,6 +41,7 @@ export interface PanelProps {
     onExpand?(event: React.SyntheticEvent): void;
     onCollapse?(event: React.SyntheticEvent): void;
     onToggle?(e: PanelToggleParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Panel extends React.Component<PanelProps, any> { }

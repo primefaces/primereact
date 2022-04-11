@@ -6,6 +6,7 @@ export interface TerminalProps {
     className?: string;
     welcomeMessage?: string;
     prompt?: string;
+    children?: React.ReactNode;
 }
 
 export declare class Terminal extends React.Component<TerminalProps, any> {}

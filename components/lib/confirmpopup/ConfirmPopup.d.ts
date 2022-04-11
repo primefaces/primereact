@@ -41,6 +41,7 @@ export interface ConfirmPopupProps {
     onHide?(result: string): void;
     accept?(): void;
     reject?(): void;
+    children?: React.ReactNode;
 }
 
 interface ConfirmPopupReturn {

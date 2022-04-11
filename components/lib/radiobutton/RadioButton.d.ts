@@ -17,7 +17,7 @@ interface RadioButtonChangeParams {
     target: RadioButtonChangeTargetOptions;
 }
 
-export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
+export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     inputId?: string;
@@ -33,6 +33,7 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     onChange?(e: RadioButtonChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class RadioButton extends React.Component<RadioButtonProps, any> {

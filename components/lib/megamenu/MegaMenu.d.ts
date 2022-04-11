@@ -9,6 +9,7 @@ export interface MegaMenuProps {
     style?: object;
     className?: string;
     orientation?: MegaMenuOrientationType;
+    children?: React.ReactNode;
 }
 
 export declare class MegaMenu extends React.Component<MegaMenuProps, any> { }

@@ -14,6 +14,7 @@ interface SplitterPanelProps {
     minSize?: number;
     style?: object;
     className?: string;
+    children?: React.ReactNode;
 }
 
 export declare class SplitterPanel extends React.Component<SplitterPanelProps, any> { }
@@ -27,6 +28,7 @@ export interface SplitterProps {
     stateKey?: string;
     stateStorage?: SplitterStateStorageType;
     onResizeEnd?(e: SplitterResizeEndParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Splitter extends React.Component<SplitterProps, any> { }

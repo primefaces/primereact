@@ -17,6 +17,7 @@ export interface TimelineProps {
     opposite?: TimelineTemplateType;
     marker?: TimelineTemplateType;
     content?: TimelineTemplateType;
+    children?: React.ReactNode;
 }
 
 export declare class Timeline extends React.Component<TimelineProps, any> { }

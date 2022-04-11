@@ -36,7 +36,7 @@ interface DropdownFilterParams {
     filter: string;
 }
 
-export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
+export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
     name?: string;
@@ -92,6 +92,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     onShow?(): void;
     onHide?(): void;
     onFilter?(e: DropdownFilterParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Dropdown extends React.Component<DropdownProps, any> { }

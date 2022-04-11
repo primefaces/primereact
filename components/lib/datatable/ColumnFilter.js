@@ -33,7 +33,7 @@ export const ColumnFilter = React.memo((props) => {
     });
 
     const hasFilter = () => {
-        return filterStoreModel && (filterStoreModel.operator ? !isFilterBlank(filterStoreModel.constraints[0].value) : !isFilterBlank(filterStoreModel.value));
+        return filterStoreModel && filterModel && (filterStoreModel.operator ? filterStoreModel.constraints[0].value !== filterModel.constraints[0].value : filterStoreModel.value !== filterModel.value);
     }
 
     const hasRowFilter = () => {
@@ -136,7 +136,7 @@ export const ColumnFilter = React.memo((props) => {
     const applyFilter = () => {
         const filterApplyClickCallback = getColumnProp('onFilterApplyClick');
 
-        filterApplyClickCallback && filterApplyClickCallback({ field: field, constraints: filterModel });
+        filterApplyClickCallback && filterApplyClickCallback({ field, constraints: filterModel });
         props.onFilterApply();
         hide();
     }
@@ -199,7 +199,7 @@ export const ColumnFilter = React.memo((props) => {
         let filters = { ...props.filters };
         filters[field].matchMode = matchMode;
 
-        filterMatchModeChangeCallback && filterMatchModeChangeCallback({ field: field, matchMode });
+        filterMatchModeChangeCallback && filterMatchModeChangeCallback({ field, matchMode });
         props.onFilterChange(filters);
         props.onFilterApply();
         hide();
@@ -249,7 +249,7 @@ export const ColumnFilter = React.memo((props) => {
         filters[field].operator = value;
         props.onFilterChange(filters);
 
-        filterOperationChangeCallback && filterOperationChangeCallback({ field: field, operator: value });
+        filterOperationChangeCallback && filterOperationChangeCallback({ field, operator: value });
         if (!getColumnProp('showApplyButton')) {
             props.onFilterApply();
         }
@@ -260,7 +260,7 @@ export const ColumnFilter = React.memo((props) => {
         let filters = { ...props.filters };
         filters[field].constraints[index].matchMode = value;
         props.onFilterChange(filters);
-        filterMatchModeChangeCallback && filterMatchModeChangeCallback({ field: field, matchMode: value, index: index });
+        filterMatchModeChangeCallback && filterMatchModeChangeCallback({ field, matchMode: value, index: index });
 
         if (!getColumnProp('showApplyButton')) {
             props.onFilterApply();
@@ -273,7 +273,7 @@ export const ColumnFilter = React.memo((props) => {
         let filters = { ...props.filters };
         let newConstraint = { value: null, matchMode: defaultConstraint.matchMode };
         filters[field].constraints.push(newConstraint);
-        filterConstraintAddCallback && filterConstraintAddCallback({ field: field, constraint: newConstraint });
+        filterConstraintAddCallback && filterConstraintAddCallback({ field, constraint: newConstraint });
         props.onFilterChange(filters);
 
         if (!getColumnProp('showApplyButton')) {
@@ -285,7 +285,7 @@ export const ColumnFilter = React.memo((props) => {
         const filterConstraintRemoveCallback = getColumnProp('onFilterConstraintRemove');
         let filters = { ...props.filters };
         let removedConstraint = filters[field].constraints.splice(index, 1);
-        filterConstraintRemoveCallback && filterConstraintRemoveCallback({ field: field, constraint: removedConstraint });
+        filterConstraintRemoveCallback && filterConstraintRemoveCallback({ field, constraint: removedConstraint });
         props.onFilterChange(filters);
 
         if (!getColumnProp('showApplyButton')) {
@@ -424,7 +424,7 @@ export const ColumnFilter = React.memo((props) => {
         const value = model ? model.value : null;
 
         return getColumnProp('filterElement') ?
-            ObjectUtils.getJSXElement(getColumnProp('filterElement'), { field: field, index, filterModel: model, value, filterApplyCallback: filterApplyCallback, filterCallback: filterCallback })
+            ObjectUtils.getJSXElement(getColumnProp('filterElement'), { field, index, filterModel: model, value, filterApplyCallback, filterCallback })
             : <InputText type={getColumnProp('filterType')} value={value || ''} onChange={(e) => onInputChange(e, index)} className="p-column-filter" placeholder={getColumnProp('filterPlaceholder')} maxLength={getColumnProp('filterMaxLength')} />;
     }
 
@@ -596,7 +596,7 @@ export const ColumnFilter = React.memo((props) => {
                 return <Button type="button" className="p-button-outlined p-button-sm" onClick={clearFilter} label={clearLabel} />
             }
 
-            return ObjectUtils.getJSXElement(getColumnProp('filterClear'), { field: field, filterModel: filterModel, filterClearCallback: clearFilter });
+            return ObjectUtils.getJSXElement(getColumnProp('filterClear'), { field, filterModel, filterClearCallback: clearFilter });
         }
 
         return null;
@@ -610,7 +610,7 @@ export const ColumnFilter = React.memo((props) => {
                 return <Button type="button" className="p-button-sm" onClick={applyFilter} label={applyLabel} />
             }
 
-            return ObjectUtils.getJSXElement(getColumnProp('filterApply'), { field: field, filterModel: filterModel, filterApplyCallback: applyFilter });
+            return ObjectUtils.getJSXElement(getColumnProp('filterApply'), { field, filterModel, filterApplyCallback: applyFilter });
         }
 
         return null
@@ -651,8 +651,8 @@ export const ColumnFilter = React.memo((props) => {
             'p-input-filled': PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': PrimeReact.ripple === false
         });
-        const filterHeader = ObjectUtils.getJSXElement(getColumnProp('filterHeader'), { field: field, filterModel: filterModel, filterApplyCallback: filterApplyCallback });
-        const filterFooter = ObjectUtils.getJSXElement(getColumnProp('filterFooter'), { field: field, filterModel: filterModel, filterApplyCallback: filterApplyCallback });
+        const filterHeader = ObjectUtils.getJSXElement(getColumnProp('filterHeader'), { field, filterModel, filterApplyCallback });
+        const filterFooter = ObjectUtils.getJSXElement(getColumnProp('filterFooter'), { field, filterModel, filterApplyCallback });
         const items = props.display === 'row' ? createRowItems() : createItems();
 
         return (

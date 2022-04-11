@@ -148,6 +148,7 @@ export interface CalendarProps {
     onClearButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class Calendar extends React.Component<CalendarProps, any> {

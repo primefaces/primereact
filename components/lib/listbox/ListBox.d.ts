@@ -28,7 +28,7 @@ interface ListBoxFilterValueChangeParams {
     value: any;
 }
 
-export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
+export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     value?: any;
     options?: any[];
@@ -60,6 +60,7 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
     ariaLabelledBy?: string;
     onChange?(e: ListBoxChangeParams): void;
     onFilterValueChange?(e: ListBoxFilterValueChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class ListBox extends React.Component<ListBoxProps, any> { }

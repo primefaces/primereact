@@ -16,6 +16,7 @@ export interface MenuProps {
     transitionOptions?: CSSTransitionProps;
     onShow?(e: React.SyntheticEvent): void;
     onHide?(e: React.SyntheticEvent): void;
+    children?: React.ReactNode;
 }
 
 export declare class Menu extends React.Component<MenuProps, any> {

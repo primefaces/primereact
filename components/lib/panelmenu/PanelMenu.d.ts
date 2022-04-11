@@ -9,6 +9,7 @@ export interface PanelMenuProps {
     className?: string;
     multiple?: boolean;
     transitionOptions?: CSSTransitionProps;
+    children?: React.ReactNode;
 }
 
 export declare class PanelMenu extends React.Component<PanelMenuProps, any> { }

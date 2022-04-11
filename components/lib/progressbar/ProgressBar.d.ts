@@ -14,6 +14,7 @@ export interface ProgressBarProps {
     mode?: ProgressBarModeType;
     color?: string;
     displayValueTemplate?(value: ProgressBarValueType): React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export declare class ProgressBar extends React.Component<ProgressBarProps, any> { }

@@ -35,6 +35,7 @@ export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.In
     onChange?(e: ToggleButtonChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLElement>): void;
     onBlur?(event: React.FocusEvent<HTMLElement>): void;
+    children?: React.ReactNode;
 }
 
 export declare class ToggleButton extends React.Component<ToggleButtonProps, any> { }

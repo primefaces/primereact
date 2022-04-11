@@ -69,6 +69,7 @@ export interface InputNumberProps {
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
+    children?: React.ReactNode;
 }
 
 export declare class InputNumber extends React.Component<InputNumberProps, any> {
