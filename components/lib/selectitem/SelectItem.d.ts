@@ -1,6 +1,6 @@
 import { IconType } from '../utils';
 
-export interface SelectItem {
+export default interface SelectItem {
     label?: string;
     value?: any;
     className?: string;

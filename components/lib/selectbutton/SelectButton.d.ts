@@ -1,7 +1,10 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import SelectItem from '../selectitem/SelectItem';
 
 type SelectButtonOptionDisabledType = string | ((option: any) => boolean);
+
+type SelectButtonOptionsType =  SelectItem[] | any[];
 
 interface SelectButtonChangeTargetOptions {
     name: string;
@@ -20,7 +23,7 @@ interface SelectButtonChangeParams {
 export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'unselectable' | 'onChange' | 'ref'> {
     id?: string;
     value?: any;
-    options?: any[];
+    options?: SelectButtonOptionsType;
     optionLabel?: string;
     optionValue?: string;
     optionDisabled?: SelectButtonOptionDisabledType;
