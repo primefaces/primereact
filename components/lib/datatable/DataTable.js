@@ -1052,7 +1052,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         let dataFieldValue = ObjectUtils.resolveFieldData(rowData, field);
         let filterConstraint = FilterService.filters[filterMatchMode];
 
-        return filterConstraint(dataFieldValue, filterValue, props.filterLocale, index);
+        return ObjectUtils.isFunction(filterConstraint) && filterConstraint(dataFieldValue, filterValue, props.filterLocale, index);
     }
 
     const cloneFilters = (filters) => {
