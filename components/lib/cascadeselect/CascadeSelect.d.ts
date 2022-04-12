@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { SelectItemOptionsType } from '../selectitem/SelectItem';
 
 type CascadeSelectItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
@@ -19,7 +20,7 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
     className?: string;
     value?: any;
     name?: string;
-    options?: any[];
+    options?: SelectItemOptionsType;
     optionLabel?: string;
     optionValue?: string;
     optionGroupLabel?: string;

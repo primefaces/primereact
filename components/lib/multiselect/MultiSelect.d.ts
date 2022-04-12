@@ -3,6 +3,7 @@ import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
 import { IconType } from '../utils';
 import { VirtualScrollerProps } from '../virtualscroller';
+import { SelectItemOptionsType } from '../selectitem/SelectItem';
 
 type MultiSelectOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
@@ -70,7 +71,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     inputRef?: React.Ref<HTMLSelectElement>;
     name?: string;
     value?: any;
-    options?: any[];
+    options?: SelectItemOptionsType;
     optionLabel?: string;
     optionValue?: string;
     optionDisabled?: MultiSelectOptionDisabledType;
