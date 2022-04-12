@@ -328,7 +328,7 @@ import { InputText } from 'primereact/inputtext';
                     <p>InputText has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.</p>
 
                     <h5>Properties</h5>
-                    <p>InputText passes any valid attribute to the underlying input element. Extended properties are as follows;</p>
+                    <p>InputText passes any valid attribute to the underlying <a href="https://devdocs.io/html/element/input" rel="noopener noreferrer" target="_blank">React HTMLInputElement</a> element. Extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
