@@ -7,7 +7,7 @@ export const AccordionTab = () => { }
 
 export const Accordion = React.forwardRef((props, ref) => {
     const [idState, setIdState] = React.useState(props.id);
-    const [activeIndexState, setActiveIndexState] = React.useState(null);
+    const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
 
     const shouldUseTab = (tab) => tab && tab.props.__TYPE === 'AccordionTab';
