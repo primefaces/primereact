@@ -4,8 +4,8 @@ import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
+import { DomHandler, ObjectUtils, classNames, mask, ZIndexUtils, UniqueComponentId } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, mask, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { CalendarPanel } from './CalendarPanel';
 
 export const Calendar = React.memo(React.forwardRef((props, ref) => {
@@ -15,6 +15,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
     const overlayRef = React.useRef(null);
     const inputRef = React.useRef(props.inputRef);
+    const tooltipRef = React.useRef(null);
     const navigation = React.useRef(null);
     const ignoreFocusFunctionality = React.useRef(false);
     const isKeydown = React.useRef(false);
@@ -24,8 +25,15 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     const overlayEventListener = React.useRef(null);
     const touchUIMaskClickListener = React.useRef(null);
     const isOverlayClicked = React.useRef(false);
+
+    const [currentView, setCurrentView] = React.useState('date')
+    const [currentMonth, setCurrentMonth] = React.useState(null);
+    const [currentYear, setCurrentYear] = React.useState(null);
+    const [yearOptions, setYearOptions] = React.useState([]);
+
     const previousValue = usePrevious(props.value);
     const visible = props.inline || (props.onVisibleChange ? props.visible : overlayVisibleState);
+    const attributeSelector = UniqueComponentId();
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: elementRef, overlay: overlayRef, listener: (event, { type, valid }) => {
@@ -262,9 +270,13 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             if (newViewDate.getMonth() === 0) {
                 newViewDate.setMonth(11);
                 newViewDate.setFullYear(newViewDate.getFullYear() - 1);
+                setCurrentMonth(11)
+                decrementYear();
+
             }
             else {
                 newViewDate.setMonth(newViewDate.getMonth() - 1);
+                setCurrentMonth(prevState => prevState - 1)
             }
         }
         else if (props.view === 'month') {
@@ -280,6 +292,13 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             }
 
             newViewDate.setFullYear(newYear);
+        }
+
+        if (currentView === 'month') {
+            decrementYear();
+        }
+        else if (currentView === 'year') {
+            decrementDecade();
         }
 
         updateViewDate(event, newViewDate);
@@ -300,9 +319,12 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             if (newViewDate.getMonth() === 11) {
                 newViewDate.setMonth(0);
                 newViewDate.setFullYear(newViewDate.getFullYear() + 1);
+                setCurrentMonth(0);
+                incrementYear();
             }
             else {
                 newViewDate.setMonth(newViewDate.getMonth() + 1);
+                setCurrentMonth(prevState => prevState + 1)
             }
         }
         else if (props.view === 'month') {
@@ -320,9 +342,45 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             newViewDate.setFullYear(newYear);
         }
 
+        if (currentView === 'month') {
+            incrementYear();
+        }
+        else if (currentView === 'year') {
+            incrementDecade();
+        }
+
+
         updateViewDate(event, newViewDate);
 
         event.preventDefault();
+    }
+
+    const populateYearOptions = (start, end) => {
+        let _yearOptions = [];
+
+        for (let i = start; i <= end; i++) {
+            yearOptions.push(i);
+        }
+
+        setYearOptions(_yearOptions)
+    }
+
+    const decrementYear = () => {
+        setCurrentYear(prevState => prevState - 1)
+
+        if (props.yearNavigator && currentYear < yearOptions[0]) {
+            let difference = yearOptions[yearOptions.length - 1] - yearOptions[0];
+            populateYearOptions(yearOptions[0] - difference, yearOptions[yearOptions.length - 1] - difference);
+        }
+    }
+
+    const incrementYear = () => {
+        setCurrentYear(prevState => prevState + 1)
+
+        if (props.yearNavigator && currentYear.current > yearOptions[yearOptions.length - 1]) {
+            let difference = yearOptions[yearOptions.length - 1] - yearOptions[0];
+            populateYearOptions(yearOptions[0] + difference, yearOptions[yearOptions.length - 1] + difference);
+        }
     }
 
     const onMonthDropdownChange = (event, value) => {
@@ -1038,6 +1096,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
+
     const onMonthCellKeydown = (event, index) => {
         const cell = event.currentTarget;
 
@@ -1224,15 +1283,62 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         updateInputfield(selectedValues);
     }
 
-    const onMonthSelect = (event, month) => {
-        onDateSelect(event, { year: getViewDate().getFullYear(), month: month, day: 1, selectable: true });
+    const decrementDecade = () => {
+        setCurrentYear(prevState => prevState - 10);
+    }
+
+    const incrementDecade = () => {
+        setCurrentYear(prevState => prevState + 10);
+    }
+
+    const switchToMonthView = (event) => {
+        setCurrentView('month')
+
+
         event.preventDefault();
+    }
+
+
+    const switchToYearView = (event) => {
+        setCurrentView('year');
+
+
+        event.preventDefault();
+    }
+
+    const onMonthSelect = (event, month) => {
+        if (props.view === 'month') {
+            onDateSelect(event, { year: currentYear, month: month, day: 1, selectable: true });
+            event.preventDefault();
+        }
+        else {
+            setCurrentMonth(month);
+            createMonthsMeta(month, currentYear);
+            setViewDateState(new Date(currentYear, month))
+            setCurrentView('date');
+            props.onMonthChange && props.onMonthChange({ month: month + 1, year: currentYear });
+
+        }
+    }
+
+
+    const onYearSelect = (event, year) => {
+
+        if (props.view === 'year') {
+            onDateSelect(event, { year: year, month: 0, day: 1, selectable: true });
+        }
+        else {
+            setCurrentYear(year)
+            setCurrentView('month')
+            props.onMonthChange && props.onMonthChange({ month: currentMonth + 1, year: year });
+        }
     }
 
     const updateModel = (event, value) => {
         if (props.onChange) {
             const newValue = (value && value instanceof Date) ? new Date(value.getTime()) : value;
             viewStateChanged.current = true;
+
 
             props.onChange({
                 originalEvent: event,
@@ -1297,6 +1403,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             const key = props.touchUI ? 'modal' : 'overlay';
             ZIndexUtils.set(key, overlayRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex[key]);
         }
+
         alignOverlay();
     }
 
@@ -1315,12 +1422,33 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         props.onHide && props.onHide();
     }
 
+    const appendDisabled = () => {
+        return props.appendTo === 'self' || props.inline;
+    }
+
     const alignOverlay = () => {
         if (props.touchUI) {
             enableModality();
         }
-        else {
-            DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+
+        else if (overlayRef && overlayRef.current && inputRef && inputRef.current) {
+            DomHandler.alignOverlay(overlayRef.current, inputRef.current, props.appendTo || PrimeReact.appendTo);
+
+            if (appendDisabled()) {
+                DomHandler.relativePosition(overlayRef.current, inputRef.current);
+            }
+            else {
+                if (currentView === 'date') {
+                    console.log("awdf")
+                    overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
+                    overlayRef.current.style.minWidth = DomHandler.getOuterWidth(inputRef.current) + 'px';
+                }
+                else {
+                    overlayRef.current.style.width = DomHandler.getOuterWidth(inputRef.current) + 'px';
+                }
+
+                DomHandler.absolutePosition(overlayRef.current, inputRef.current);
+            }
         }
     }
 
@@ -1680,13 +1808,32 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
-    const isMonthSelected = (month) => {
-        const viewDate = getViewDate();
+    const isComparable = () => {
+        return props.value != null && typeof props.value !== 'string';
+    }
 
-        if (props.value && props.value instanceof Date)
-            return props.value.getDate() === 1 && props.value.getMonth() === month && props.value.getFullYear() === viewDate.getFullYear();
-        else
-            return false;
+    const isMonthSelected = (month) => {
+        if (isComparable()) {
+            let value = isRangeSelection() ? props.value[0] : props.value;
+
+            return !isMultipleSelection() ? (value.getMonth() === month && value.getFullYear() === currentYear) : false;
+        }
+
+        return false;
+    }
+
+    const isYearSelected = (year) => {
+        if (isComparable()) {
+            let value = isRangeSelection() ? props.value[0] : props.value;
+
+            return !isMultipleSelection() && isComparable() ? (value.getFullYear() === year) : false;
+        }
+
+        return false;
+    }
+
+    const switchViewButtonDisabled = () => {
+        return props.numberOfMonths > 1 || props.disabled;
     }
 
     const isDateEquals = (value, dateMeta) => {
@@ -2195,9 +2342,21 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         validateDate(viewDate);
         setViewDateState(viewDate);
 
+        setCurrentMonth(viewDate.getMonth());
+        setCurrentYear(viewDate.getFullYear());
+        setCurrentView(props.view);
+
         if (props.inline) {
-            initFocusableCell();
+            overlayRef && overlayRef.current.setAttribute(attributeSelector, '');
+
+            if (!props.disabled) {
+                initFocusableCell();
+                if (props.numberOfMonths === 1) {
+                    overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
+                }
+            }
         }
+
         else if (props.mask) {
             mask(inputRef.current, {
                 mask: props.mask,
@@ -2236,7 +2395,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     }, [props.onViewDateChange, props.value]);
 
     useUpdateEffect(() => {
-        if (previousValue !== props.value && (!viewStateChanged.current || !visible)) {
+        if (previousValue !== props.value && (!viewStateChanged || !visible)) {
             updateInputfield(props.value);
         }
     }, [props.value, visible]);
@@ -2269,7 +2428,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     const createBackwardNavigator = (isVisible) => {
         const navigatorProps = isVisible ? { 'onClick': onPrevButtonClick, 'onKeyDown': e => onContainerButtonKeydown(e) } : { 'style': { visibility: 'hidden' } };
         return (
-            <button type="button" className="p-datepicker-prev p-link" {...navigatorProps}>
+            <button type="button" className="p-datepicker-prev" {...navigatorProps}>
                 <span className="p-datepicker-prev-icon pi pi-chevron-left"></span>
                 <Ripple />
             </button>
@@ -2279,7 +2438,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     const createForwardNavigator = (isVisible) => {
         const navigatorProps = isVisible ? { 'onClick': onNextButtonClick, 'onKeyDown': e => onContainerButtonKeydown(e) } : { 'style': { visibility: 'hidden' } };
         return (
-            <button type="button" className="p-datepicker-next p-link" {...navigatorProps}>
+            <button type="button" className="p-datepicker-next" {...navigatorProps}>
                 <span className="p-datepicker-next-icon pi pi-chevron-right"></span>
                 <Ripple />
             </button>
@@ -2319,7 +2478,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             return content;
         }
 
-        return <span className="p-datepicker-month">{monthNames[month]}</span>
+        return currentView === 'date' && <button className="p-datepicker-month p-link" onClick={switchToMonthView} disabled={switchViewButtonDisabled()} >{monthNames[currentMonth]}</button>
     }
 
     const createTitleYearElement = (year) => {
@@ -2362,17 +2521,33 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             return content;
         }
 
-        return <span className="p-datepicker-year">{year}</span>
+
+
+        return currentView !== 'year' && <button className="p-datepicker-year p-link" onClick={switchToYearView} disabled={switchViewButtonDisabled()} >{currentYear}</button>
+    }
+
+    const createTitleDecadeElement = () => {
+        if (currentView === 'year') {
+            return (
+                <span className='p-datepicker-decade'>
+                    {props.decadeTemplate ? props.decadeTemplate(yearPickerValues()) : <span>{`${yearPickerValues()[0]} - ${yearPickerValues()[yearPickerValues().length - 1]}`}</span>}
+                </span>
+            )
+        }
+
+        return null;
     }
 
     const createTitle = (monthMetaData) => {
         const month = createTitleMonthElement(monthMetaData.month);
         const year = createTitleYearElement(monthMetaData.year);
+        const decade = createTitleDecadeElement();
 
         return (
             <div className="p-datepicker-title">
                 {month}
                 {year}
+                {decade}
             </div>
         )
     }
@@ -2399,7 +2574,6 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
 
     const createDateCellContent = (date, className, groupIndex) => {
         const content = props.dateTemplate ? props.dateTemplate(date) : date.day;
-
         return (
             <span className={className} onClick={e => onDateSelect(e, date)} onKeyDown={e => onDateCellKeydown(e, date, groupIndex)}>
                 {content}
@@ -2450,7 +2624,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         const dates = createDates(monthMetaData, groupIndex);
 
         return (
-            <div className="p-datepicker-calendar-container">
+            currentView === 'date' && <div className="p-datepicker-calendar-container">
                 <table className="p-datepicker-calendar">
                     <thead>
                         <tr>
@@ -2470,6 +2644,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         const backwardNavigator = createBackwardNavigator((index === 0));
         const forwardNavigator = createForwardNavigator((props.numberOfMonths === 1) || (index === props.numberOfMonths - 1));
         const title = createTitle(monthMetaData);
+
         const dateViewGrid = createDateViewGrid(monthMetaData, weekDays, index);
         const header = props.headerTemplate ? props.headerTemplate() : null;
 
@@ -2504,6 +2679,8 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         return months;
     }
 
+
+
     const createMonthViewMonth = (index) => {
         const className = classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(index) });
         const monthNamesShort = localeOption('monthNamesShort', props.locale);
@@ -2526,11 +2703,32 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         return months;
     }
 
+    const monthPickerValues = () => {
+        let monthPickerValues = [];
+        const monthNamesShort = localeOption('monthNamesShort', props.locale);
+        for (let i = 0; i <= 11; i++) {
+            monthPickerValues.push(monthNamesShort[i]);
+        }
+
+        return monthPickerValues;
+    }
+
+    const yearPickerValues = () => {
+        let yearPickerValues = [];
+        let base = currentYear - (currentYear % 10);
+        for (let i = 0; i < 10; i++) {
+            yearPickerValues.push(base + i);
+        }
+
+        return yearPickerValues;
+    }
+
     const createMonthView = () => {
         const backwardNavigator = createBackwardNavigator(true);
         const forwardNavigator = createForwardNavigator(true);
         const yearElement = createTitleYearElement(getViewDate().getFullYear());
-        const months = createMonthViewMonths();
+        const decade = createTitleDecadeElement();
+
 
         return (
             <>
@@ -2540,19 +2738,18 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
                             {backwardNavigator}
                             <div className="p-datepicker-title">
                                 {yearElement}
+                                {decade}
                             </div>
                             {forwardNavigator}
                         </div>
                     </div>
-                </div>
-                <div className="p-monthpicker">
-                    {months}
                 </div>
             </>
         )
     }
 
     const createDatePicker = () => {
+
         if (!props.timeOnly) {
             if (props.view === 'date') {
                 return createDateView();
@@ -2794,6 +2991,38 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
+    const createMonthPicker = () => {
+        if (currentView === 'month') {
+            return <div className="p-monthpicker">
+                {
+                    monthPickerValues().map((m, i) => {
+                        return <span onClick={(event) => onMonthSelect(event, i)} key={`month${i + 1}`} className={classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i) })}>
+                            {m}
+                        </span>
+                    })
+                }
+            </div>
+        }
+
+        return null;
+    }
+
+    const createYearPicker = () => {
+        if (currentView === 'year') {
+            return <div className="p-yearpicker">
+                {
+                    yearPickerValues().map((y, i) => {
+                        return <span onClick={(event) => onYearSelect(event, y)} key={`year${i + 1}`} className={classNames('p-yearpicker-year', { 'p-highlight': isYearSelected(y) })}>
+                            {y}
+                        </span>
+                    })
+                }
+            </div>
+        }
+
+        return null;
+    }
+
     const otherProps = ObjectUtils.findDiffKeys(props, Calendar.defaultProps);
     const className = classNames('p-calendar p-component p-inputwrapper', props.className, {
         [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon,
@@ -2807,7 +3036,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         'p-disabled': props.disabled,
         'p-datepicker-timeonly': props.timeOnly,
         'p-datepicker-multiple-month': props.numberOfMonths > 1,
-        'p-datepicker-monthpicker': (props.view === 'month'),
+        'p-datepicker-monthpicker': (currentView === 'month'),
         'p-datepicker-touch-ui': props.touchUI
     });
     const content = createContent();
@@ -2815,6 +3044,8 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     const timePicker = createTimePicker();
     const buttonBar = createButtonBar();
     const footer = createFooter();
+    const monthPicker = createMonthPicker();
+    const yearPicker = createYearPicker();
 
     return (
         <span ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
@@ -2826,6 +3057,8 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
                 {timePicker}
                 {buttonBar}
                 {footer}
+                {monthPicker}
+                {yearPicker}
             </CalendarPanel>
         </span>
     )
@@ -2898,6 +3131,7 @@ Calendar.defaultProps = {
     tooltipOptions: null,
     ariaLabelledBy: null,
     dateTemplate: null,
+    decadeTemplate: null,
     headerTemplate: null,
     footerTemplate: null,
     monthNavigatorTemplate: null,
@@ -2913,5 +3147,6 @@ Calendar.defaultProps = {
     onTodayButtonClick: null,
     onClearButtonClick: null,
     onShow: null,
-    onHide: null
+    onHide: null,
+    onMonthChange: null
 }

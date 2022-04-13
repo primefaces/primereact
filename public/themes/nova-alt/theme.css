@@ -355,14 +355,16 @@
 .p-datepicker .p-datepicker-header .p-datepicker-title {
   line-height: 2rem;
 }
-.p-datepicker .p-datepicker-header .p-datepicker-title select {
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+  color: #333333;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  font-weight: 700;
+  padding: 0.5rem;
 }
-.p-datepicker .p-datepicker-header .p-datepicker-title select:focus {
-  outline: 0 none;
-  outline-offset: 0;
-  box-shadow: 0 0 0 0.2rem #8dcdff;
-  border-color: #007ad9;
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year:enabled:hover,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month:enabled:hover {
+  color: #007ad9;
 }
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
   margin-right: 0.5rem;
@@ -460,8 +462,20 @@
   color: #ffffff;
   background: #007ad9;
 }
+.p-datepicker .p-yearpicker {
+  margin: 0.857rem 0;
+}
+.p-datepicker .p-yearpicker .p-yearpicker-year {
+  padding: 0.5rem;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  border-radius: 3px;
+}
+.p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
+  color: #ffffff;
+  background: #007ad9;
+}
 .p-datepicker.p-datepicker-multiple-month .p-datepicker-group {
-  border-right: 1px solid #d8dae2;
+  border-left: 1px solid #d8dae2;
   padding-right: 0.857rem;
   padding-left: 0.857rem;
   padding-top: 0;
@@ -472,7 +486,7 @@
 }
 .p-datepicker.p-datepicker-multiple-month .p-datepicker-group:last-child {
   padding-right: 0;
-  border-right: 0 none;
+  border-left: 0 none;
 }
 .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):hover {
   background: #eaeaea;
@@ -482,10 +496,18 @@
   outline-offset: 0;
   box-shadow: 0 0 0 0.2rem #8dcdff;
 }
-.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-highlight):not(.p-disabled):hover {
+.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):not(.p-highlight):hover {
   background: #eaeaea;
 }
-.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-highlight):not(.p-disabled):focus {
+.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #8dcdff;
+}
+.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):not(.p-highlight):hover {
+  background: #eaeaea;
+}
+.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 0.2rem #8dcdff;
@@ -4549,7 +4571,23 @@
   .p-dock.p-dock-left .p-dock-container .p-dock-list, .p-dock.p-dock-right .p-dock-container .p-dock-list {
     margin: auto 0;
   }
-  .p-dock .p-dock-list .p-dock-item {
+  .p-dock.p-dock-magnification.p-dock-top .p-dock-item-second-prev,
+.p-dock.p-dock-magnification.p-dock-top .p-dock-item-second-next,
+.p-dock.p-dock-magnification.p-dock-top .p-dock-item-prev,
+.p-dock.p-dock-magnification.p-dock-top .p-dock-item-next,
+.p-dock.p-dock-magnification.p-dock-top .p-dock-item-current, .p-dock.p-dock-magnification.p-dock-bottom .p-dock-item-second-prev,
+.p-dock.p-dock-magnification.p-dock-bottom .p-dock-item-second-next,
+.p-dock.p-dock-magnification.p-dock-bottom .p-dock-item-prev,
+.p-dock.p-dock-magnification.p-dock-bottom .p-dock-item-next,
+.p-dock.p-dock-magnification.p-dock-bottom .p-dock-item-current, .p-dock.p-dock-magnification.p-dock-left .p-dock-item-second-prev,
+.p-dock.p-dock-magnification.p-dock-left .p-dock-item-second-next,
+.p-dock.p-dock-magnification.p-dock-left .p-dock-item-prev,
+.p-dock.p-dock-magnification.p-dock-left .p-dock-item-next,
+.p-dock.p-dock-magnification.p-dock-left .p-dock-item-current, .p-dock.p-dock-magnification.p-dock-right .p-dock-item-second-prev,
+.p-dock.p-dock-magnification.p-dock-right .p-dock-item-second-next,
+.p-dock.p-dock-magnification.p-dock-right .p-dock-item-prev,
+.p-dock.p-dock-magnification.p-dock-right .p-dock-item-next,
+.p-dock.p-dock-magnification.p-dock-right .p-dock-item-current {
     transform: none;
     margin: 0;
   }
@@ -5801,7 +5839,7 @@
   background: #007ad9;
 }
 .p-progressbar .p-progressbar-label {
-  color: #333333;
+  color: #ffffff;
   line-height: 24px;
 }
 

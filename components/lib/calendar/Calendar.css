@@ -1,6 +1,7 @@
 .p-calendar {
     position: relative;
     display: inline-flex;
+    max-width: 100%;
 }
 
 .p-calendar .p-inputtext {
@@ -50,9 +51,9 @@
 }
 
 .p-datepicker-inline {
-    display: inline-flex;
-    flex-direction: column;
+    display: inline-block;
     position: static;
+    overflow-x: auto;
 }
 
 /* Header */
@@ -74,6 +75,15 @@
     align-items: center;
     overflow: hidden;
     position: relative;
+}
+
+/* Multiple Month DatePicker */
+.p-datepicker-multiple-month .p-datepicker-group-container {
+    display: flex;
+}
+
+.p-datepicker-multiple-month .p-datepicker-group-container .p-datepicker-group {
+    flex: 1 1 auto;
 }
 
 /* Multiple Month DatePicker */
@@ -145,4 +155,15 @@
     left: 50%;
     min-width: 80vw;
     transform: translate(-50%, -50%);
+}
+
+/* Year Picker */
+.p-yearpicker-year {
+    width: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
 }
