@@ -17,7 +17,7 @@ export const DropdownItem = React.memo((props) => {
         'p-highlight': props.selected,
         'p-disabled': props.disabled,
         'p-dropdown-item-empty': (!props.label || props.label.length === 0)
-    }, props.option.className);
+    }, props.option && props.option.className);
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
 
     return (
