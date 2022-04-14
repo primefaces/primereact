@@ -107,6 +107,10 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
     }
 
     const updateModel = (event, value) => {
+        // #2176 only call change if value actually changed
+        if (selectedItem && selectedItem.current === value) {
+            return;
+        }
         if (props.onChange) {
             props.onChange({
                 originalEvent: event,
