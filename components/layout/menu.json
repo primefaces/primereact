@@ -117,7 +117,7 @@
             ],
             "children": [
                 {
-                    "name": "Guide",
+                    "name": "Overview",
                     "to": "/theming",
                     "meta": [
                         "guide"
@@ -146,6 +146,19 @@
                     "href": "https://www.primefaces.org/designer/api/primereact/7.0.0",
                     "meta": [
                         "sass api"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Accessibility",
+            "meta": ["accessibility"],
+            "children": [
+                {
+                    "name": "Overview",
+                    "to": "/accessibility",
+                    "meta": [
+                        "accessibility"
                     ]
                 }
             ]
