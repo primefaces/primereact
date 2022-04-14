@@ -69,7 +69,7 @@ export class CheckboxDemo extends Component {
                     <h5>Basic</h5>
                     <div className="field-checkbox">
                         <Checkbox inputId="binary" checked={this.state.checked} onChange={e => this.setState({ checked: e.checked })} />
-                        <label htmlFor="binary">{this.state.checked ? 'true' : 'false'}</label>
+                        <label htmlFor="binary">Remember Me</label>
                     </div>
 
                     <h5>Multiple</h5>
@@ -158,7 +158,7 @@ const CheckboxDemo = () => {
                 <h5>Basic</h5>
                 <div className="field-checkbox">
                     <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
-                    <label htmlFor="binary">{checked ? 'true' : 'false'}</label>
+                    <label htmlFor="binary">Remember Me</label>
                 </div>
 
                 <h5>Multiple</h5>
@@ -246,7 +246,7 @@ const CheckboxDemo = () => {
                 <h5>Basic</h5>
                 <div className="field-checkbox">
                     <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
-                    <label htmlFor="binary">{checked ? 'true' : 'false'}</label>
+                    <label htmlFor="binary">Remember Me</label>
                 </div>
 
                 <h5>Multiple</h5>
@@ -336,7 +336,7 @@ const CheckboxDemo = () => {
                 <h5>Basic</h5>
                 <div className="field-checkbox">
                     <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
-                    <label htmlFor="binary">{checked ? 'true' : 'false'}</label>
+                    <label htmlFor="binary">Remember Me</label>
                 </div>
 
                 <h5>Multiple</h5>
@@ -547,6 +547,12 @@ const onCityChange = (e) => {
                                     <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                                 </tr>
                                 <tr>
+                                    <td>ariaLabel</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Value that labels the element.</td>
+                                </tr>
+                                <tr>
                                     <td>ariaLabelledBy</td>
                                     <td>string</td>
                                     <td>null</td>
@@ -618,6 +624,23 @@ const onCityChange = (e) => {
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>Checkbox component uses a hidden native checkbox element internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> properties.</p>
+<CodeHighlight>
+{`
+<label htmlFor="chkbox1">Remember Me</label>
+<Checkbox inputId="chkbox1" onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+
+<span id="chkbox-label">Remember Me</span>
+<Checkbox aria-labelledby="chkbox-label" onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+
+<Checkbox onChange={e => setChecked(e.checked)} checked={checked} aria-label="Remember Me"></Checkbox>
+`}
+</CodeHighlight>
+                    <h6>Keyboard Support</h6>
+                    <p>Checkbox can receive focus using the <i>tab</i> key, while being focused <i>space</i> key is used to toggle the checked state.</p>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
