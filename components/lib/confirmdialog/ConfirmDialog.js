@@ -71,7 +71,8 @@ export const ConfirmDialog = React.memo(React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         props.visible ? show() : hide();
-    }, [props.visible]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.visible]); 
 
     React.useEffect(() => {
         if (!props.target && !props.message) {
@@ -81,6 +82,7 @@ export const ConfirmDialog = React.memo(React.forwardRef((props, ref) => {
         return () => {
             OverlayService.off('confirm-dialog', confirm);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.target]);
 
     useUpdateEffect(() => {
