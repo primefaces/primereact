@@ -270,11 +270,11 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
 
             // check if month can be navigated to by checking last day in month
             let testDate = new Date(newViewDate.getTime()),
-                minDate = this.props.minDate;
+                minDate = props.minDate;
             testDate.setMonth(testDate.getMonth() + 1);
             testDate.setHours(-1);
             if (minDate && minDate > testDate) {
-                this.setNavigationState(newViewDate);
+                setNavigationState(newViewDate);
                 event.preventDefault();
                 event.stopPropagation();
                 return;
@@ -321,9 +321,9 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             }
 
             // check if month can be navigated to by checking first day next month
-            let maxDate = this.props.maxDate;
+            let maxDate = props.maxDate;
             if (maxDate && maxDate < newViewDate) {
-                this.setNavigationState(newViewDate);
+                setNavigationState(newViewDate);
                 event.preventDefault();
                 event.stopPropagation();
                 return;
@@ -350,15 +350,15 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         event.stopPropagation();
     }
 
-    setNavigationState(newViewDate) {
-        if (this.props.view !== 'date' || !this.overlayRef) {
+    const setNavigationState = (newViewDate) => {
+        if (props.view !== 'date' || !overlayRef.current) {
             return;
         }
 
-        let navPrev = DomHandler.findSingle(this.overlayRef.current, '.p-datepicker-prev');
-        let navNext = DomHandler.findSingle(this.overlayRef.current, '.p-datepicker-next');
+        let navPrev = DomHandler.findSingle(overlayRef.current, '.p-datepicker-prev');
+        let navNext = DomHandler.findSingle(overlayRef.current, '.p-datepicker-next');
 
-        if (this.props.disabled) {
+        if (props.disabled) {
             DomHandler.addClass(navPrev, 'p-disabled');
             DomHandler.addClass(navNext, 'p-disabled');
             return;
@@ -366,7 +366,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
 
         // previous
         let testDate = new Date(newViewDate.getTime()),
-            minDate = this.props.minDate;
+            minDate = props.minDate;
         testDate.setMonth(testDate.getMonth()+1);
         testDate.setHours(-1);
         if (minDate && minDate > testDate) {
@@ -376,7 +376,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         }
 
         // next
-        let maxDate = this.props.maxDate;
+        let maxDate = props.maxDate;
         if (maxDate && maxDate < newViewDate) {
             DomHandler.addClass(navNext, 'p-disabled');
         } else {
@@ -890,7 +890,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         }
 
         // set state of navigator buttons
-        this.setNavigationState(value);
+        setNavigationState(value);
     }
 
     const updateTime = (event, hour, minute, second, millisecond) => {
