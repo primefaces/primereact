@@ -29,6 +29,8 @@ export const InputText = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onPaste = (event) => {
+        props.onPaste && props.onPaste(event);
+
         if (props.keyfilter) {
             KeyFilter.onPaste(event, props.keyfilter, props.validateOnly)
         }
