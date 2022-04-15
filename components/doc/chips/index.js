@@ -356,7 +356,7 @@ customChip(item) {
                                     <td>onAdd</td>
                                     <td>originalEvent: Browser event <br />
                             value: Added item value</td>
-                                    <td>Callback to invoke when a chip is added.</td>
+                                    <td>Callback to invoke when a chip is added. Return 'false' to prevent the item from being added.</td>
                                 </tr>
                                 <tr>
                                     <td>onRemove</td>
