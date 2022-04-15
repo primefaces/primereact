@@ -252,7 +252,6 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     const navBackward = (event) => {
         if (props.disabled) {
             event.preventDefault();
-            event.stopPropagation();
             return;
         }
 
@@ -276,7 +275,6 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             if (minDate && minDate > testDate) {
                 setNavigationState(newViewDate);
                 event.preventDefault();
-                event.stopPropagation();
                 return;
             }
         }
@@ -298,13 +296,11 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         updateViewDate(event, newViewDate);
 
         event.preventDefault();
-        event.stopPropagation();
     }
 
     const navForward = (event) => {
         if (props.disabled) {
             event.preventDefault();
-            event.stopPropagation();
             return;
         }
 
@@ -325,7 +321,6 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             if (maxDate && maxDate < newViewDate) {
                 setNavigationState(newViewDate);
                 event.preventDefault();
-                event.stopPropagation();
                 return;
             }
         }
@@ -347,7 +342,6 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         updateViewDate(event, newViewDate);
 
         event.preventDefault();
-        event.stopPropagation();
     }
 
     const setNavigationState = (newViewDate) => {
