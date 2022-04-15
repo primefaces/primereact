@@ -389,7 +389,7 @@ import { InputText } from 'primereact/inputtext';
 
                     <h5>Accessibility</h5>
                     <h6>Screen Reader</h6>
-                    <p>InputText component renders a native input html that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
+                    <p>InputText component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
 <CodeHighlight>
 {`
 <label htmlFor="firstname">Firstname</label>
