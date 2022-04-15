@@ -508,6 +508,14 @@ export default class DomHandler {
                 return styleDeclaration && (overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowX')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowY')));
             };
 
+            const addScrollableParent = (node) => {
+                if (node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9) { // nodeType 9 is for document element
+                    scrollableParents.push(window);
+                } else {
+                    scrollableParents.push(node);
+                }
+            };
+
             for (let parent of parents) {
                 let scrollSelectors = parent.nodeType === 1 && parent.dataset['scrollselectors'];
                 if (scrollSelectors) {
@@ -515,15 +523,20 @@ export default class DomHandler {
                     for (let selector of selectors) {
                         let el = this.findSingle(parent, selector);
                         if (el && overflowCheck(el)) {
-                            scrollableParents.push(el);
+                            addScrollableParent(el);
                         }
                     }
                 }
 
                 if (parent.nodeType !== 9 && overflowCheck(parent)) {
-                    scrollableParents.push(parent);
+                    addScrollableParent(parent);
                 }
             }
+        }
+
+        // if no parents make it the window
+        if (scrollableParents.length === 0) {
+            scrollableParents.push(window);
         }
 
         return scrollableParents;

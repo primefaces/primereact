@@ -27,7 +27,7 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
         }
     });
     const [bindOverlayScrollListener, unbindOverlayScrollListener] = useOverlayScrollListener({
-        target: targetRef, listener: event => {
+        target: target, listener: event => {
             listener && listener(event, { type: 'scroll', valid: true });
         }
     });
@@ -62,7 +62,6 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
 
     React.useEffect(() => {
         unbind();
-        // when && bind();
     }, [when]);
 
     useUnmountEffect(() => {
