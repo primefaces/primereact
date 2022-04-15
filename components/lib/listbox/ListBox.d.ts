@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { SelectItemOptionsType } from '../selectitem/SelectItem';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { VirtualScrollerProps } from '../virtualscroller';
 
@@ -31,7 +32,7 @@ interface ListBoxFilterValueChangeParams {
 export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     value?: any;
-    options?: any[];
+    options?: SelectItemOptionsType;
     optionLabel?: string;
     optionValue?: string;
     optionDisabled?: ListBoxOptionDisabledType;
