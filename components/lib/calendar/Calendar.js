@@ -1439,7 +1439,6 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             }
             else {
                 if (currentView === 'date') {
-                    console.log("awdf")
                     overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
                     overlayRef.current.style.minWidth = DomHandler.getOuterWidth(inputRef.current) + 'px';
                 }
