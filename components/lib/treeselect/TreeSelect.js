@@ -302,7 +302,6 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
             if (!selfChange.current) {
                 updateTreeState();
             }
-            scrollInView();
 
             selfChange.current = false;
         }
