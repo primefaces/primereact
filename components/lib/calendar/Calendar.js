@@ -266,17 +266,6 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             else {
                 newViewDate.setMonth(newViewDate.getMonth() - 1);
             }
-
-            // check if month can be navigated to by checking last day in month
-            let testDate = new Date(newViewDate.getTime()),
-                minDate = props.minDate;
-            testDate.setMonth(testDate.getMonth() + 1);
-            testDate.setHours(-1);
-            if (minDate && minDate > testDate) {
-                setNavigationState(newViewDate);
-                event.preventDefault();
-                return;
-            }
         }
         else if (props.view === 'month') {
             let currentYear = newViewDate.getFullYear();
@@ -315,14 +304,6 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             else {
                 newViewDate.setMonth(newViewDate.getMonth() + 1);
             }
-
-            // check if month can be navigated to by checking first day next month
-            let maxDate = props.maxDate;
-            if (maxDate && maxDate < newViewDate) {
-                setNavigationState(newViewDate);
-                event.preventDefault();
-                return;
-            }
         }
         else if (props.view === 'month') {
             let currentYear = newViewDate.getFullYear();
@@ -342,40 +323,6 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         updateViewDate(event, newViewDate);
 
         event.preventDefault();
-    }
-
-    const setNavigationState = (newViewDate) => {
-        if (props.view !== 'date' || !overlayRef.current) {
-            return;
-        }
-
-        let navPrev = DomHandler.findSingle(overlayRef.current, '.p-datepicker-prev');
-        let navNext = DomHandler.findSingle(overlayRef.current, '.p-datepicker-next');
-
-        if (props.disabled) {
-            DomHandler.addClass(navPrev, 'p-disabled');
-            DomHandler.addClass(navNext, 'p-disabled');
-            return;
-        }
-
-        // previous
-        let testDate = new Date(newViewDate.getTime()),
-            minDate = props.minDate;
-        testDate.setMonth(testDate.getMonth()+1);
-        testDate.setHours(-1);
-        if (minDate && minDate > testDate) {
-            DomHandler.addClass(navPrev, 'p-disabled');
-        } else {
-            DomHandler.removeClass(navPrev, 'p-disabled');
-        }
-
-        // next
-        let maxDate = props.maxDate;
-        if (maxDate && maxDate < newViewDate) {
-            DomHandler.addClass(navNext, 'p-disabled');
-        } else {
-            DomHandler.removeClass(navNext, 'p-disabled');
-        }
     }
 
     const onMonthDropdownChange = (event, value) => {
@@ -882,9 +829,6 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
 
             value.setMonth(viewMonthWithMinMax);
         }
-
-        // set state of navigator buttons
-        setNavigationState(value);
     }
 
     const updateTime = (event, hour, minute, second, millisecond) => {
