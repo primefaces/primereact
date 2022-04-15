@@ -154,6 +154,7 @@ export const InputMask = React.memo(React.forwardRef((props, ref) => {
                 value: getValue()
             });
         }
+        updateModel(e);
     }
 
     const onBlur = (e) => {
