@@ -631,12 +631,12 @@ const onCityChange = (e) => {
 <CodeHighlight>
 {`
 <label htmlFor="chkbox1">Remember Me</label>
-<Checkbox inputId="chkbox1" onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+<Checkbox inputId="chkbox1" />
 
-<span id="chkbox-label">Remember Me</span>
-<Checkbox aria-labelledby="chkbox-label" onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+<span id="chkbox2">Remember Me</span>
+<Checkbox aria-labelledby="chkbox2" />
 
-<Checkbox onChange={e => setChecked(e.checked)} checked={checked} aria-label="Remember Me"></Checkbox>
+<Checkbox aria-label="Remember Me" />
 `}
 </CodeHighlight>
                     <h6>Keyboard Support</h6>

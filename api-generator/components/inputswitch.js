@@ -30,6 +30,12 @@ const InputSwitchProps = [
         description: 'Name of the input element.'
     },
     {
+        name: 'tabIndex',
+        type: 'number',
+        default: 'null',
+        description: 'Index of the element in tabbing order.'
+    },
+    {
         name: 'checked',
         type: 'any',
         default: 'false',
@@ -64,6 +70,12 @@ const InputSwitchProps = [
         type: 'object',
         default: 'null',
         description: 'Configuration of the tooltip, refer to the tooltip documentation for more information.'
+    },
+    {
+        name: 'ariaLabel',
+        type: 'string',
+        default: 'null',
+        description: 'Used to define a string that labels the component.'
     },
     {
         name: 'ariaLabelledBy',

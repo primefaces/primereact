@@ -77,7 +77,7 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
                     <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} tabIndex={props.tabIndex} defaultChecked={checked} aria-labelledby={props.ariaLabelledBy} aria-label={props.ariaLabel}
                         onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} required={props.required} />
                 </div>
-                <div className={boxClass} role="checkbox" aria-checked={checked}>
+                <div className={boxClass}>
                     {icon}
                 </div>
             </div>
