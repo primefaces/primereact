@@ -318,8 +318,8 @@ import { InputText } from 'primereact/inputtext';
 <CodeHighlight>
 {`
 <span className="p-float-label">
-<InputText id="in" value={value} onChange={(e) => setValue(e.target.value)} />
-<label htmlFor="in">Username</label>
+    <InputText id="in" value={value} onChange={(e) => setValue(e.target.value)} />
+    <label htmlFor="in">Username</label>
 </span>
 `}
 </CodeHighlight>
@@ -386,6 +386,23 @@ import { InputText } from 'primereact/inputtext';
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>InputText component renders a native input html that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
+<CodeHighlight>
+{`
+<label htmlFor="firstname">Firstname</label>
+<InputText id="firstname" />
+
+<span id="lastname">Lastname</span>
+<InputText id="firstname" aria-labelledby="lastname" />
+
+<InputText aria-label="Age"/>
+`}
+</CodeHighlight>
+                    <h6>Keyboard Support</h6>
+                    <p>Checkbox can receive focus using the <i>tab</i> key.</p>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

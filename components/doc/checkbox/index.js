@@ -627,7 +627,7 @@ const onCityChange = (e) => {
 
                     <h5>Accessibility</h5>
                     <h6>Screen Reader</h6>
-                    <p>Checkbox component uses a hidden native checkbox element internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> properties.</p>
+                    <p>Checkbox component uses a hidden native checkbox element internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
 <CodeHighlight>
 {`
 <label htmlFor="chkbox1">Remember Me</label>
