@@ -188,6 +188,12 @@ import { InputSwitch } from 'primereact/inputswitch';
                                 <td>Name of the input element.</td>
                             </tr>
                             <tr>
+                                <td>tabIndex</td>
+                                <td>number</td>
+                                <td>null</td>
+                                <td>Index of the element in tabbing order.</td>
+                            </tr>
+                            <tr>
                                 <td>checked</td>
                                 <td>boolean</td>
                                 <td>false</td>
@@ -222,6 +228,12 @@ import { InputSwitch } from 'primereact/inputswitch';
                                 <td>object</td>
                                 <td>null</td>
                                 <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                            </tr>
+                            <tr>
+                                <td>ariaLabel</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Value that labels the element.</td>
                             </tr>
                             <tr>
                                 <td>ariaLabelledBy</td>
@@ -290,6 +302,23 @@ import { InputSwitch } from 'primereact/inputswitch';
                         </tbody>
                     </table>
                 </div>
+
+                <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>InputSwitch component uses a hidden native checkbox element with <i>switch</i> role internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
+<CodeHighlight>
+{`
+<label htmlFor="switch1">Remember Me</label>
+<InputSwitch inputId="switch1" />
+
+<span id="switch2">Remember Me</span>
+<InputSwitch aria-labelledby="switch2" />
+
+<InputSwitch aria-label="Remember Me" />
+`}
+</CodeHighlight>
+                    <h6>Keyboard Support</h6>
+                    <p>InputSwitch can receive focus using the <i>tab</i> key, while being focused <i>space</i> key is used to toggle the checked state.</p>
 
                 <h5>Dependencies</h5>
                 <p>None.</p>
