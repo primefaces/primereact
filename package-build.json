@@ -46,5 +46,6 @@
         "primeicons": "^5.0.0"
     },
     "sideEffects": false,
-    "unpkg": "primereact.all.min.js"
+    "unpkg": "primereact.all.min.js",
+    "jsdelivr": "primereact.all.min.js"
 }
