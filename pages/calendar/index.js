@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Calendar } from '../../components/lib/calendar/Calendar';
-import { Dropdown } from '../../components/lib/dropdown/Dropdown';
 import CalendarDoc from '../../components/doc/calendar';
 import { addLocale } from '../../components/lib/api/Locale';
 import { DocActions } from '../../components/doc/common/docactions';
