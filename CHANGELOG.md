@@ -1,5 +1,36 @@
 # Changelog
 
+## [8.0.0-rc.2](https://github.com/primefaces/primereact/tree/8.0.0-rc.2) (2022-04-18)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.0.0-rc.1...8.0.0-rc.2)
+
+**Implemented New Features and Enhancements:**
+
+- Calendar - Year and month picker enhancement [\#2748](https://github.com/primefaces/primereact/issues/2748)
+- Add icon template to Menu components [\#2733](https://github.com/primefaces/primereact/issues/2733)
+- Toast - Clear and then show doesn't clear existing messages [\#2668](https://github.com/primefaces/primereact/issues/2668)
+- Update PrimeFlex to 3.0.0 [\#2199](https://github.com/primefaces/primereact/issues/2199)
+- No default jsDelivr CDN file set [\#1426](https://github.com/primefaces/primereact/issues/1426)
+
+**Fixed bugs:**
+
+- TreeSelect - problem with scroll jumping [\#2752](https://github.com/primefaces/primereact/issues/2752)
+- If the item's className option is null, Dropdown will throw a JS exception. [\#2749](https://github.com/primefaces/primereact/issues/2749)
+- Dialog typescript error [\#2747](https://github.com/primefaces/primereact/issues/2747)
+- Accordion Multiple Tabs Opened [\#2739](https://github.com/primefaces/primereact/issues/2739)
+- Dropdown throws a JS exception related to searchIndex [\#2737](https://github.com/primefaces/primereact/issues/2737)
+- Attribute 'children' is missing in primereact 8.0.0-rc.1 [\#2732](https://github.com/primefaces/primereact/issues/2732)
+- InputNumber crash on onInputBlur [\#2729](https://github.com/primefaces/primereact/issues/2729)
+- Cannot edit DataTable row with the pencil button when onRowEditChange is set [\#2726](https://github.com/primefaces/primereact/issues/2726)
+- Custom component properties override remove `ref` [\#2721](https://github.com/primefaces/primereact/issues/2721)
+- DataTable: if custom filter is used then clear/reset filter functionality is not working. [\#2715](https://github.com/primefaces/primereact/issues/2715)
+- GMap onOverlayDragEnd event callback has access to outdated react states [\#2714](https://github.com/primefaces/primereact/issues/2714)
+- DataTable custom filter function breaks table [\#2702](https://github.com/primefaces/primereact/issues/2702)
+- InputMask: on Android does not fire onChange until focus lost [\#2686](https://github.com/primefaces/primereact/issues/2686)
+- \[BUG\]  InputText keyfilter [\#2214](https://github.com/primefaces/primereact/issues/2214)
+- Galleria Advanced sandbox links are wrong [\#2204](https://github.com/primefaces/primereact/issues/2204)
+- Toast component stale messages state issue, while quickly calling toastRef.show [\#1804](https://github.com/primefaces/primereact/issues/1804)
+
 ## [8.0.0-rc.1](https://github.com/primefaces/primereact/tree/8.0.0-rc.1) (2022-04-04)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/7.2.1...8.0.0-rc.1)
