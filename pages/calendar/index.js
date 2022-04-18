@@ -116,10 +116,7 @@ const CalendarDemo = () => {
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="time24">Time / 24h</label>
-                            <Calendar id="time24" value={date7} onChange={(e) => {
-                                setDate7(e.value)
-                                console.log('onChange')
-                                }} showTime showSeconds />
+                            <Calendar id="time24" value={date7} onChange={(e) => setDate7(e.value)} showTime showSeconds />
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="time12">Time / 12h</label>
