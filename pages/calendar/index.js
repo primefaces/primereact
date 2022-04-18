@@ -64,21 +64,6 @@ const CalendarDemo = () => {
         return date.day;
     }
 
-    const monthNavigatorTemplate = (e) => {
-        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} style={{ lineHeight: 1 }} />;
-    }
-
-    const yearNavigatorTemplate = (e) => {
-        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="ml-2" style={{ lineHeight: 1 }} />;
-    }
-
-    const onVisibleChange = (e) => {
-        setVisible(prevState => e.type === 'dateselect' || !prevState);
-        if (e.callback) {
-            e.callback();
-        }
-    }
-
     return (
         <div>
             <Head>
@@ -131,7 +116,10 @@ const CalendarDemo = () => {
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="time24">Time / 24h</label>
-                            <Calendar id="time24" value={date7} onChange={(e) => setDate7(e.value)} showTime showSeconds />
+                            <Calendar id="time24" value={date7} onChange={(e) => {
+                                setDate7(e.value)
+                                console.log('onChange')
+                                }} showTime showSeconds />
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="time12">Time / 12h</label>
@@ -142,8 +130,8 @@ const CalendarDemo = () => {
                             <Calendar id="monthpicker" value={date9} onChange={(e) => setDate9(e.value)} view="month" dateFormat="mm/yy" />
                         </div>
                         <div className="field col-12 md:col-4">
-                            <label htmlFor="monthpicker">Year Picker</label>
-                            <Calendar id="monthpicker" value={date10} onChange={(e) => setDate10(e.value)} view="year" dateFormat="mm/yy" />
+                            <label htmlFor="yearpicker">Year Picker</label>
+                            <Calendar id="yearpicker" value={date10} onChange={(e) => setDate10(e.value)} view="year" dateFormat="yy" />
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="multiplemonths">Multiple Months</label>
