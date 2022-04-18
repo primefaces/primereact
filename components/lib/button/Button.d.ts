@@ -15,7 +15,6 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
     disabled?: boolean;
     loading?: boolean;
     loadingIcon?: IconType<ButtonProps>;
-    ariaLabel?: string;
     children?: React.ReactNode;
 }
 
