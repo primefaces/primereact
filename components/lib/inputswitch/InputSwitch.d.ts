@@ -29,8 +29,6 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
     disabled?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabel?: string;
-    ariaLabelledBy?: string;
     onChange?(e: InputSwitchChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;

@@ -229,18 +229,6 @@ import { InputSwitch } from 'primereact/inputswitch';
                                 <td>null</td>
                                 <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                             </tr>
-                            <tr>
-                                <td>ariaLabel</td>
-                                <td>string</td>
-                                <td>null</td>
-                                <td>Value that labels the element.</td>
-                            </tr>
-                            <tr>
-                                <td>ariaLabelledBy</td>
-                                <td>string</td>
-                                <td>null</td>
-                                <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>

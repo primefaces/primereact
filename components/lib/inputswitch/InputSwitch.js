@@ -65,7 +65,7 @@ export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
                 <div className="p-hidden-accessible">
                     <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} checked={checked} onChange={toggle}
                         onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} role="switch" tabIndex={props.tabIndex} aria-checked={checked}
-                        aria-labelledby={props.ariaLabelledBy} aria-label={props.ariaLabel} />
+                        aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']} />
                 </div>
                 <span className="p-inputswitch-slider"></span>
             </div>
@@ -90,8 +90,8 @@ InputSwitch.defaultProps = {
     disabled: false,
     tooltip: null,
     tooltipOptions: null,
-    ariaLabelledBy: null,
-    ariaLabel: null,
+    'aria-label': null,
+    'aria-labelledby': null,
     onChange: null,
     onFocus: null,
     onBlur: null
