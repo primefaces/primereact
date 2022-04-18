@@ -9,7 +9,6 @@
 - Calendar - Year and month picker enhancement [\#2748](https://github.com/primefaces/primereact/issues/2748)
 - Add icon template to Menu components [\#2733](https://github.com/primefaces/primereact/issues/2733)
 - Toast - Clear and then show doesn't clear existing messages [\#2668](https://github.com/primefaces/primereact/issues/2668)
-- Update PrimeFlex to 3.0.0 [\#2199](https://github.com/primefaces/primereact/issues/2199)
 - No default jsDelivr CDN file set [\#1426](https://github.com/primefaces/primereact/issues/1426)
 
 **Fixed bugs:**
