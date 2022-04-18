@@ -25,6 +25,11 @@ interface CalendarChangeParams {
     target: CalendarChangeTargetOptions;
 }
 
+interface CalendarMonthChangeParams {
+    month: number;
+    year: number;
+}
+
 interface CalendarViewChangeParams {
     originalEvent: React.SyntheticEvent;
     value: Date;
@@ -133,6 +138,7 @@ export interface CalendarProps {
     ariaLabelledBy?: string;
     transitionOptions?: CSSTransitionProps;
     dateTemplate?(e: CalendarDateTemplateParams): React.ReactNode;
+    decadeTempate?(yearValues: number[]): React.ReactNode;
     headerTemplate?(): React.ReactNode;
     footerTemplate?(): React.ReactNode;
     monthNavigatorTemplate?(e: CalendarMonthNavigatorTemplateParams): React.ReactNode;
@@ -143,6 +149,7 @@ export interface CalendarProps {
     onInput?(event: React.FormEvent<HTMLInputElement>): void;
     onSelect?(e: CalendarSelectParams): void;
     onChange?(e: CalendarChangeParams): void;
+    onMonthChange(e: CalendarMonthChangeParams): void
     onViewDateChange?(e: CalendarViewChangeParams): void;
     onTodayButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
     onClearButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
