@@ -130,7 +130,10 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
 
     const formatValue = (value) => {
         if (value) {
-            if (props.selectedItemTemplate && (props.multiple ? isSelected(value) : findOptionIndex(value) > -1)) {
+            if (typeof value === "string") {
+                return value;
+            }
+            else if (props.selectedItemTemplate) {
                 const resolvedFieldData = ObjectUtils.getJSXElement(props.selectedItemTemplate, value);
                 return resolvedFieldData ? resolvedFieldData : value;
             }
