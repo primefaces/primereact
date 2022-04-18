@@ -149,7 +149,7 @@ export interface CalendarProps {
     onInput?(event: React.FormEvent<HTMLInputElement>): void;
     onSelect?(e: CalendarSelectParams): void;
     onChange?(e: CalendarChangeParams): void;
-    onMonthChange(e: CalendarMonthChangeParams): void
+    onMonthChange?(e: CalendarMonthChangeParams): void
     onViewDateChange?(e: CalendarViewChangeParams): void;
     onTodayButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
     onClearButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
