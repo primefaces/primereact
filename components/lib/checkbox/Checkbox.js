@@ -74,7 +74,7 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
         <>
             <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
                 <div className="p-hidden-accessible">
-                    <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} tabIndex={props.tabIndex} defaultChecked={checked} aria-labelledby={props.ariaLabelledBy} aria-label={props.ariaLabel}
+                    <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} tabIndex={props.tabIndex} defaultChecked={checked} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}
                         onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} required={props.required} />
                 </div>
                 <div className={boxClass}>
@@ -106,8 +106,8 @@ Checkbox.defaultProps = {
     icon: 'pi pi-check',
     tooltip: null,
     tooltipOptions: null,
-    ariaLabel: null,
-    ariaLabelledBy: null,
+    'aria-label': null,
+    'aria-labelledby': null,
     onChange: null,
     onMouseDown: null,
     onContextMenu: null

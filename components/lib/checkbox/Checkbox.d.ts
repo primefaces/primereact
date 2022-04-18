@@ -37,8 +37,6 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
     icon?: IconType<CheckboxProps>;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabel?: string;
-    ariaLabelledBy?: string;
     onChange?(e: CheckboxChangeParams): void;
     onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
     onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
