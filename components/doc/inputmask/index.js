@@ -307,6 +307,7 @@ import { InputMask } from 'primereact/inputmask';
                     </CodeHighlight>
 
                     <h5>Properties</h5>
+                    <p>InputMask passes any valid attribute to the underlying React HTMLInputElement element. Extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
