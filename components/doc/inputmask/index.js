@@ -475,7 +475,27 @@ import { InputMask } from 'primereact/inputmask';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Styling is same as <Link href="/inputtext"> inputtext component</Link>.</p>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-inputtext</td>
+                                    <td>Input element</td>
+                                </tr>
+                                <tr>
+                                    <td>p-inputmask</td>
+                                    <td>Input element</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <h5>Accessibility</h5>
                     <h6>Screen Reader</h6>
