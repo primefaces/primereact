@@ -31,7 +31,6 @@ export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.In
     tabIndex?: number;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string;
     onChange?(e: ToggleButtonChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLElement>): void;
     onBlur?(event: React.FocusEvent<HTMLElement>): void;
