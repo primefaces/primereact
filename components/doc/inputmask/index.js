@@ -474,7 +474,24 @@ import { InputMask } from 'primereact/inputmask';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Styling is same as <Link href="/inputtext"> inputtext component</Link>, for theming classes visit <Link href="/theming"> theming page.</Link></p>
+                    <p>Styling is same as <Link href="/inputtext"> inputtext component</Link>.</p>
+
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>InputMask component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
+<CodeHighlight>
+{`
+<label htmlFor="date">Date</label>
+<InputMask id="firstname" />
+
+<span id="phone">Phone</span>
+<InputMask id="phone" aria-labelledby="phone" />
+
+<InputMask aria-label="Age" />
+`}
+</CodeHighlight>
+                    <h6>Keyboard Support</h6>
+                    <p>InputMask can receive focus using the <i>tab</i> key.</p>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
