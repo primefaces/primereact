@@ -16,10 +16,10 @@ PrimeReact is available at npm, if you have an existing application run the foll
 
 ```
 // with npm
-npm install primereact
+npm install primereact primeicons
 
 // with yarn
-yarn add primereact
+yarn add primereact primeicons
 ```
 Please note that react >= 17.0.0 and react-dom >= 17.0.0 are peer dependencies and some components have optional dependencies.
 
