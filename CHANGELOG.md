@@ -1,5 +1,20 @@
 # Changelog
 
+## [8.0.0](https://github.com/primefaces/primereact/tree/8.0.0)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.0.0-rc.2...8.0.0)
+
+**Implemented New Features and Enhancements:**
+
+- Hooks: add useStorage hook [\#2773](https://github.com/primefaces/primereact/issues/2773)
+- Chips onAdd should check Input before added to value list [\#2232](https://github.com/primefaces/primereact/issues/2232)
+
+**Fixed bugs:**
+
+- Carousel v8.0.0-rc.2 Data and Navigation Unusable [\#2769](https://github.com/primefaces/primereact/issues/2769)
+- Calendar: onMonthChange is marked as required [\#2767](https://github.com/primefaces/primereact/issues/2767)
+- TreeSelect onSelect/onNodeUnselect wrong types and not firing [\#2768](https://github.com/primefaces/primereact/issues/2768)
+
 ## [8.0.0-rc.2](https://github.com/primefaces/primereact/tree/8.0.0-rc.2) (2022-04-18)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.0.0-rc.1...8.0.0-rc.2)
