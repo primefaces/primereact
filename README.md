@@ -54,12 +54,13 @@ Import all components and structures
 
 Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.
 
-In addition, components require PrimeIcons for icons and react-transition-group for animations. They are available as dependencies in the npm package of PrimeReact.
+In addition, components require PrimeIcons for icons and react-transition-group for animations. The react-transition-group is available as dependencies in the npm package of PrimeReact.
 
 ```javascript
 dependencies: {
     "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0"
+    "react-dom": "^17.0.0 || ^18.0.0",
+    "primeicons": "^5.0.0"
 }
 ```
 
