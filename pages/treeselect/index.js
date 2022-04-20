@@ -37,7 +37,7 @@ const TreeSelectDemo = () => {
             <div className="content-section implementation treeselect-demo">
                 <div className="card">
                     <h5>Single</h5>
-                    <TreeSelect value={selectedNodeKey1} options={nodes} onChange={(e) => setSelectedNodeKey1(e.value)} placeholder="Select Item"></TreeSelect>
+                    <TreeSelect value={selectedNodeKey1} options={nodes} onChange={(e) => setSelectedNodeKey1(e.value)}  onNodeSelect={(e) => console.log(e)} onNodeUnselect={(e) => console.log(e)} placeholder="Select Item"></TreeSelect>
 
                     <h5>Multiple</h5>
                     <TreeSelect value={selectedNodeKeys1} options={nodes} onChange={(e) => setSelectedNodeKeys1(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
