@@ -1,6 +1,7 @@
-import { DependencyList, EffectCallback, Ref } from 'react';
+import { Dispatch, DependencyList, EffectCallback, Ref } from 'react';
 
 export type TargetType = 'document' | 'window' | Ref<HTMLElement> | undefined;
+export type StorageType = 'local' | 'session';
 
 interface EventOptions {
     target?: TargetType;
@@ -31,3 +32,4 @@ export declare function useOverlayScrollListener(options: EventOptions): any[];
 export declare function useResizeListener(options: ResizeEventOptions): any[];
 export declare function useInterval(fn: any, delay?: number, when?: boolean): any[];
 export declare function useTimeout(fn: any, delay?: number, when?: boolean): any[];
+export declare function useStorage<S>(initialValue: S, key: string, storage?: StorageType): [S, Dispatch<SetStateAction<S>>];
