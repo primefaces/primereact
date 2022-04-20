@@ -28,7 +28,6 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
     const itemsContainerRef = React.useRef(null);
     const remainingItems = React.useRef(0);
     const allowAutoplay = React.useRef(!!props.autoplayInterval);
-    const circular = React.useRef(props.circular || !!props.autoplayInterval);
     const attributeSelector = React.useRef('');
     const swipeThreshold = React.useRef(20);
     const startPos = React.useRef(null);
@@ -41,6 +40,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
     const prevValue = usePrevious(props.value);
     const prevPage = usePrevious(props.page);
     const isVertical = props.orientation === 'vertical';
+    const circular = props.circular || !!props.autoplayInterval;
     const isCircular = circular && props.value.length >= numVisibleState;
     const isAutoplay = props.autoplayInterval && allowAutoplay.current;
     const currentPage = props.onPageChange ? props.page : pageState;
@@ -80,7 +80,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
         }
         else if (isCircular && pageState === 0 && dir === 1) {
             totalShiftedItems = 0;
-            page = (totalShiftedItems - 1);
+            page = (totalIndicators - 1);
         }
         else if (page === (totalIndicators - 1) && remainingItems.current > 0) {
             totalShiftedItems += ((remainingItems.current * -1) - (numScrollState * dir));
@@ -309,7 +309,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
             remainingItems.current = (props.value.length - numVisibleState) % numScrollState;
 
             let page = currentPage;
-            if (totalIndicators !== 0 && pageState >= totalIndicators) {
+            if (totalIndicators !== 0 && page >= totalIndicators) {
                 page = totalIndicators - 1;
 
                 if (props.onPageChange) {
@@ -513,7 +513,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
 
     const createIndicator = (index) => {
         const isActive = currentPage === index;
-        const key = 'p-carousel-indicator-' + index;
+        const key = 'carousel-indicator-' + index;
         const className = classNames('p-carousel-indicator', {
             'p-highlight': isActive
         });

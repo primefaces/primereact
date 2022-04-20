@@ -402,7 +402,7 @@ import { InputText } from 'primereact/inputtext';
 `}
 </CodeHighlight>
                     <h6>Keyboard Support</h6>
-                    <p>Checkbox can receive focus using the <i>tab</i> key.</p>
+                    <p>InputText can receive focus using the <i>tab</i> key.</p>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
