@@ -3,7 +3,24 @@ import * as React from 'react';
 export type TargetType = 'document' | 'window' | React.Ref<HTMLElement> | undefined;
 export type StorageType = 'local' | 'session';
 
+interface EventOptions {
+    target?: TargetType;
+    type?: string;
+    listener?(event: Event): void;
+    options?: any;
+    when?: boolean;
+}
 
+interface OverlayEventOptions {
+    target?: TargetType;
+    overlay?: TargetType;
+    listener?(event: Event, type?: string): void;
+    when?: boolean;
+}
+
+interface ResizeEventOptions {
+    listener?(event: Event): void;
+}
 
 export declare function usePrevious(value: any): any;
 export declare function useMountEffect(effect: React.EffectCallback): void;
