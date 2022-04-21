@@ -6,7 +6,7 @@ export default function NewsSection(props) {
             <div className="layout-news">
                 <i></i>
                 <div className="layout-news-content">
-                    <span className="layout-news-text">{props.announcement.content}</span>
+                    <span className="layout-news-text" title={props.announcement.content}>{props.announcement.content}</span>
                     <a className="layout-news-link" href={props.announcement.linkHref}>{props.announcement.linkText}</a>
                 </div>
                 <a className="layout-news-close" onClick={props.onClose}>
