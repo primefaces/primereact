@@ -284,7 +284,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
             event.preventDefault();
 
             const files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
-            const allowDrop = props.multiple || (files && files.length === 0);
+            const allowDrop = props.multiple || (ObjectUtils.isEmpty(filesState) && files && files.length === 1);
 
             allowDrop && onFileSelect(event);
         }
