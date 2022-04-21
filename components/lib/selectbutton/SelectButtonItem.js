@@ -24,7 +24,7 @@ export const SelectButtonItem = React.memo((props) => {
 
     const onKeyDown = (event) => {
         const keyCode = event.which;
-        if (keyCode === 32 || keyCode === 13) { //space and enter
+        if (keyCode === 32) {
             onClick(event);
             event.preventDefault();
         }
@@ -42,7 +42,7 @@ export const SelectButtonItem = React.memo((props) => {
     const content = createContent();
 
     return (
-        <div className={className} role="button" aria-label={props.label} aria-pressed={props.selected} aria-labelledby={props.ariaLabelledBy}
+        <div className={className} role="button" aria-label={props.label} aria-pressed={props.selected}
             onClick={onClick} onKeyDown={onKeyDown} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur}>
             {content}
             {!props.disabled && <Ripple />}

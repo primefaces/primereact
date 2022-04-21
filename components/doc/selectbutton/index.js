@@ -434,12 +434,6 @@ const itemTemplate = (option) => {
                                     <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                                 </tr>
                                 <tr>
-                                    <td>ariaLabelledBy</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
-                                </tr>
-                                <tr>
                                     <td>itemTemplate</td>
                                     <td>function</td>
                                     <td>null</td>
@@ -469,6 +463,14 @@ const itemTemplate = (option) => {
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>The container element that wraps the buttons has a <i>group</i> role whereas each button element uses <i>button</i> role and <i>aria-pressed</i> is updated depending on selection state. 
+                    Value to describe an option is implicitly set using the <i>aria-label</i> property.</p>
+
+                    <h6>Keyboard Support</h6>
+                    <p>Buttons can receive focus using the <i>tab</i> key, while being focused <i>space</i> key is used to toggle the checked state.</p>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

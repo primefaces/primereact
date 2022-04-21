@@ -123,7 +123,6 @@ SelectButton.defaultProps = {
     dataKey: null,
     tooltip: null,
     tooltipOptions: null,
-    ariaLabelledBy: null,
     itemTemplate: null,
     onChange: null
 }
