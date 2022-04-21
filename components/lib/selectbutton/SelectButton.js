@@ -83,7 +83,7 @@ export const SelectButton = React.memo(React.forwardRef((props, ref) => {
                 const key = optionLabel + '_' + index;
 
                 return <SelectButtonItem key={key} label={optionLabel} className={option.className} option={option} onClick={onOptionClick} template={props.itemTemplate}
-                    selected={selected} tabIndex={tabIndex} disabled={isDisabled} ariaLabelledBy={props.ariaLabelledBy} />
+                    selected={selected} tabIndex={tabIndex} disabled={isDisabled} />
             });
         }
 
