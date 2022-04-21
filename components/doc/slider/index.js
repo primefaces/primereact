@@ -302,16 +302,16 @@ import { Slider } from 'primereact/slider';
                                     <td>Orientation of the slider, valid values are horizontal and vertical.</td>
                                 </tr>
                                 <tr>
-                                <td>step</td>
-                                <td>number</td>
-                                <td>1</td>
-                                <td>Step factor to increment/decrement the value.</td>
+                                    <td>step</td>
+                                    <td>number</td>
+                                    <td>1</td>
+                                    <td>Step factor to increment/decrement the value.</td>
                                 </tr>
                                 <tr>
-                                <td>range</td>
-                                <td>boolean</td>
-                                <td>false</td>
-                                <td>When speficed, allows two boundary values to be picked.</td>
+                                    <td>range</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When speficed, allows two boundary values to be picked.</td>
                                 </tr>
                                 <tr>
                                     <td>style</td>
@@ -336,12 +336,6 @@ import { Slider } from 'primereact/slider';
                                     <td>number</td>
                                     <td>null</td>
                                     <td>Index of the element in tabbing order.</td>
-                                </tr>
-                                <tr>
-                                    <td>ariaLabelledBy</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -398,6 +392,22 @@ import { Slider } from 'primereact/slider';
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>Slider element component uses <i>slider</i> role on the handle in addition to the <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes. Value to describe the component can be defined using
+                    <i>aria-labelledby</i> and <i>aria-label</i> props.</p>
+<CodeHighlight>
+{`
+<span id="label_number">Number</span>
+<Slider aria-labelledby="label_number" />
+
+<Slider aria-label="Number" />
+`}
+</CodeHighlight>
+                    <h6>Keyboard Support</h6>
+                    <p>Slider can receive focus using the <i>tab</i> key, while being focused arrow keys can be used to control a slider. Horizontal sliders are used with <i>Left Arrow</i> and <i>Right Arrow</i> keys whereas
+                    vertical ones require <i>Up Arrow</i> and <i>Down Arrow</i> keys.</p>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

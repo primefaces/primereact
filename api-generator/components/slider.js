@@ -70,12 +70,6 @@ const SliderProps = [
         type: 'number',
         default: 'null',
         description: 'Index of the element in tabbing order.'
-    },
-    {
-        name: 'ariaLabelledBy',
-        type: 'string',
-        default: 'null',
-        description: 'Establishes relationships between the component and label(s) where its value should be one or more element IDs.'
     }
 ];
 
