@@ -278,16 +278,23 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onDrop = (event) => {
-        if (!props.disabled) {
-            DomHandler.removeClass(contentRef.current, 'p-fileupload-highlight');
-            event.stopPropagation();
-            event.preventDefault();
-
-            const files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
-            const allowDrop = props.multiple || (ObjectUtils.isEmpty(filesState) && files && files.length === 1);
-
-            allowDrop && onFileSelect(event);
+        if (props.disabled) {
+            return;
         }
+
+        DomHandler.removeClass(contentRef.current, 'p-fileupload-highlight');
+        event.stopPropagation();
+        event.preventDefault();
+
+        // give caller a chance to stop the drop
+        if (props.onBeforeDrop && props.onBeforeDrop(event) === false) {
+            return;
+        }
+
+        const files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
+        const allowDrop = props.multiple || (ObjectUtils.isEmpty(filesState) && files && files.length === 1);
+
+        allowDrop && onFileSelect(event);
     }
 
     const onSimpleUploaderClick = () => {
@@ -527,6 +534,7 @@ FileUpload.defaultProps = {
     progressBarTemplate: null,
     onBeforeUpload: null,
     onBeforeSend: null,
+    onBeforeDrop: null,
     onUpload: null,
     onError: null,
     onClear: null,
