@@ -554,7 +554,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
 
     useMountEffect(() => {
         if (props.autoFocus) {
-            DomHandler.focus(focusInputRef, false);
+            DomHandler.focus(focusInputRef, props.autoFocus);
         }
     });
 

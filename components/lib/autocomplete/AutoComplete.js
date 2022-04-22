@@ -199,7 +199,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
 
     const onDropdownClick = (event) => {
         if (props.dropdownAutoFocus) {
-            DomHandler.focus(inputRef, false);
+            DomHandler.focus(inputRef, props.dropdownAutoFocus);
         }
 
         if (props.dropdownMode === 'blank')
@@ -423,7 +423,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
         }
 
         if (props.autoFocus) {
-            DomHandler.focus(inputRef, false);
+            DomHandler.focus(inputRef, props.autoFocus);
         }
     });
 
