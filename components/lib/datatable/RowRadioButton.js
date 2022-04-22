@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { classNames } from '../utils/Utils';
+import { classNames, DomHandler } from '../utils/Utils';
 
 export const RowRadioButton = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -17,7 +17,7 @@ export const RowRadioButton = React.memo((props) => {
         if (!props.disabled) {
             props.onChange(event);
 
-            inputRef.current.focus();
+            DomHandler.focus(inputRef);
         }
     }
 

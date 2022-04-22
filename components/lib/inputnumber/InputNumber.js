@@ -3,7 +3,7 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const InputNumber = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -191,7 +191,7 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
 
     const onUpButtonMouseDown = (event) => {
         if (!props.disabled && !props.readOnly) {
-            inputRef.current.focus();
+            DomHandler.focus(inputRef);
             repeat(event, null, 1);
             event.preventDefault();
         }
@@ -223,7 +223,7 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
 
     const onDownButtonMouseDown = (event) => {
         if (!props.disabled && !props.readOnly) {
-            inputRef.current.focus();
+            DomHandler.focus(inputRef);
             repeat(event, null, -1);
 
             event.preventDefault();

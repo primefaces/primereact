@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -12,7 +12,7 @@ export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
     const onClick = (event) => {
         if (!props.disabled && !props.readOnly) {
             toggle(event);
-            inputRef.current.focus();
+            DomHandler.focus(inputRef);
         }
     }
 

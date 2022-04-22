@@ -2,7 +2,7 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
 
@@ -25,7 +25,7 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
     const onEntered = () => {
         props.onEntered(() => {
             if (props.filter && props.filterInputAutoFocus) {
-                filterInputRef.current.focus();
+                DomHandler.focus(filterInputRef, false);
             }
         });
     }
@@ -100,7 +100,7 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
 
     const createFilterClearIcon = () => {
         if (props.showFilterClear && props.filterValue) {
-            return <i className="p-dropdown-filter-clear-icon pi pi-times" onClick={() => props.onFilterClearIconClick(() => filterInputRef.current.focus())}></i>
+            return <i className="p-dropdown-filter-clear-icon pi pi-times" onClick={() => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef))}></i>
         }
 
         return null;

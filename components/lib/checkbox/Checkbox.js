@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Checkbox = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -29,7 +29,7 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
             });
 
             inputRef.current.checked = !checked;
-            inputRef.current.focus();
+            DomHandler.focus(inputRef);
         }
     }
 

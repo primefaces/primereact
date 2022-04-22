@@ -84,7 +84,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
             //escape
             case 27:
                 hide();
-                inputRef.current.focus();
+                DomHandler.focus(inputRef);
                 break;
 
             default:
@@ -105,8 +105,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
     const onClick = (event) => {
         if (!props.disabled && !isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon') && !isClearClicked(event)) {
             overlayVisibleState ? hide() : show();
-            inputRef.current.focus();
-
+            DomHandler.focus(inputRef);
             event.preventDefault();
         }
     }
@@ -267,7 +266,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
 
     const onCloseClick = (event) => {
         hide();
-        inputRef.current.focus();
+        DomHandler.focus(inputRef);
         event.preventDefault();
         event.stopPropagation();
     }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TerminalService } from '../terminalservice/TerminalService';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const Terminal = React.memo(React.forwardRef((props, ref) => {
     const [commandTextState, setCommandTextState] = React.useState('');
@@ -12,7 +12,7 @@ export const Terminal = React.memo(React.forwardRef((props, ref) => {
     const isEmitted = React.useRef(false);
 
     const onClick = () => {
-        inputRef.current.focus();
+        DomHandler.focus(inputRef);
     }
 
     const onInputChange = (e) => {
