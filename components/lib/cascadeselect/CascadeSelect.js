@@ -42,7 +42,8 @@ export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
     }
 
     const getOptionLabel = (option) => {
-        return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option;
+        const label = props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option;
+        return label || option;
     }
 
     const getOptionValue = (option) => {
