@@ -792,10 +792,10 @@ export default class DomHandler {
      * Focus an input element.
      * 
      * @param {MutableRefObject} inputRef the input reference
-     * @param {boolean} autoFocus flag to control whether to scroll to the element, false by default
+     * @param {boolean} scrollTo flag to control whether to scroll to the element, false by default
      */
-    static focus(inputRef, autoFocus) {
-        const preventScroll = ObjectUtils.isEmpty(autoFocus) ? true : !autoFocus;
+    static focus(inputRef, scrollTo) {
+        const preventScroll = ObjectUtils.isEmpty(scrollTo) ? true : !scrollTo;
         inputRef && inputRef.current && inputRef.current.focus({ preventScroll: preventScroll });
     }
 
