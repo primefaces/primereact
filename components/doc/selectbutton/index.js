@@ -53,7 +53,7 @@ export class SelectButtonDemo extends Component {
                     <SelectButton value={this.state.value2} options={this.paymentOptions} onChange={(e) => this.setState({ value2: e.value })} optionLabel="name" multiple />
 
                     <h5>Custom Content</h5>
-                    <SelectButton value={this.state.value3} options={this.justifyOptions} onChange={(e) => this.setState({ value3: e.value })} itemTemplate={this.justifyTemplate} />
+                    <SelectButton value={this.state.value3} options={this.justifyOptions} onChange={(e) => this.setState({ value3: e.value })} itemTemplate={this.justifyTemplate} optionLabel="value" />
                 </div>
             </div>
         );
@@ -98,7 +98,7 @@ const SelectButtonDemo = () => {
                 <SelectButton value={value2} options={paymentOptions} onChange={(e) => setValue2(e.value)} optionLabel="name" multiple />
 
                 <h5>Custom Content</h5>
-                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} />
+                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} optionLabel="value" />
             </div>
         </div>
     );
@@ -142,7 +142,7 @@ const SelectButtonDemo = () => {
                 <SelectButton value={value2} options={paymentOptions} onChange={(e) => setValue2(e.value)} optionLabel="name" multiple />
 
                 <h5>Custom Content</h5>
-                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} />
+                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} optionLabel="value" />
             </div>
         </div>
     );
@@ -189,7 +189,7 @@ const SelectButtonDemo = () => {
                 <SelectButton value={value2} options={paymentOptions} onChange={(e) => setValue2(e.value)} optionLabel="name" multiple />
 
                 <h5>Custom Content</h5>
-                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} />
+                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} optionLabel="value" />
             </div>
         </div>
     );
@@ -467,7 +467,8 @@ const itemTemplate = (option) => {
                     <h5>Accessibility</h5>
                     <h6>Screen Reader</h6>
                     <p>The container element that wraps the buttons has a <i>group</i> role whereas each button element uses <i>button</i> role and <i>aria-pressed</i> is updated depending on selection state. 
-                    Value to describe an option is implicitly set using the <i>aria-label</i> property.</p>
+                    Value to describe an option is automatically set using the <i>aria-label</i> property that refers to the label of an option so it is still suggested to define a label even the option display
+                    consists of presentational content like icons only.</p>
 
                     <h6>Keyboard Support</h6>
                     <div className="doc-tablewrapper">
