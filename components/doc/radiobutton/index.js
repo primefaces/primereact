@@ -325,12 +325,6 @@ import { RadioButton } from 'primereact/radiobutton';
                                     <td>null</td>
                                     <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                                 </tr>
-                                <tr>
-                                    <td>ariaLabelledBy</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -387,6 +381,25 @@ import { RadioButton } from 'primereact/radiobutton';
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>RadioButton component uses a hidden native radio button element internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
+<CodeHighlight>
+{`
+<label htmlFor="rb1">One</label>
+<RadioButton inputId="rb1" />
+
+<span id="rb2">Two</span>
+<RadioButton aria-labelledby="rb2" />
+
+<RadioButton aria-label="Three" />
+`}
+</CodeHighlight>
+                    <h6>Keyboard Support</h6>
+                    <p>RadioButton can receive focus using the <i>tab</i> key, the input to focus would be the checked one if there is no checked input then the first radion button receives focus. 
+                    While any of the radio buttons within the group has focus <i>left arrow</i>, <i>right arrow</i>, <i>up arrow</i> and <i>down arrow</i> keys can be used to navigate between the options. 
+                    If a focused radio button is not checked, <i>space</i> key can be used to check it.</p>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
