@@ -314,7 +314,26 @@ import { ToggleButton } from 'primereact/togglebutton';
 `}
 </CodeHighlight>
                     <h6>Keyboard Support</h6>
-                    <p>ToggleButton can receive focus using the <i>tab</i> key, while being focused <i>space</i> key is used to toggle the checked state.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the button.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Toggles the checked state.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

@@ -397,9 +397,44 @@ import { RadioButton } from 'primereact/radiobutton';
 `}
 </CodeHighlight>
                     <h6>Keyboard Support</h6>
-                    <p>RadioButton can receive focus using the <i>tab</i> key, the input to focus would be the checked one if there is no checked input then the first radion button receives focus. 
-                    While any of the radio buttons within the group has focus <i>left arrow</i>, <i>right arrow</i>, <i>up arrow</i> and <i>down arrow</i> keys can be used to navigate between the options. 
-                    If a focused radio button is not checked, <i>space</i> key can be used to check it.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the checked radio button, if there is none within the group then first radio button receives the focus.</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span className="inline-flex flex-column">
+                                            <i className="mb-1">left arrow</i>
+                                            <i>up arrow</i>
+                                        </span>
+                                    </td>
+                                    <td>Moves focus to the previous radio button, if there is none then last radio button receives the focus.</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span className="inline-flex flex-column">
+                                            <i className="mb-1">right arrow</i>
+                                            <i>down arrow</i>
+                                        </span>
+                                    </td>
+                                    <td>Moves focus to the previous radio button, if there is none then first radio button receives the focus.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>If the focused radio button is unchecked, changes the state to checked.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

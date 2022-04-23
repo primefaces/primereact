@@ -470,6 +470,26 @@ const itemTemplate = (option) => {
                     Value to describe an option is implicitly set using the <i>aria-label</i> property.</p>
 
                     <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the buttons.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Toggles the checked state of a button.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <p>Buttons can receive focus using the <i>tab</i> key, while being focused <i>space</i> key is used to toggle the checked state.</p>
 
                     <h5>Dependencies</h5>

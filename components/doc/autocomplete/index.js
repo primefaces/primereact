@@ -1170,11 +1170,48 @@ itemTemplate(item) {
 `}
 </CodeHighlight>
                     <h6>Keyboard Support</h6>
-                    <p>AutoComplete can receive focus using the <i>tab</i> key, while the popup is visible <i>left arrow</i> and <i>up arrow</i> keys allow
-                    highlighting a specific item. Pressing the <i>enter</i> selects the current highlighted item. For quick navigation between the items, <i>home</i> and <i>end</i> keys can be utilized
-                    to reach the beginning and the end of the list respectively. Hitting the <i>escape</i> key closes the popup panel.
-                    </p>
-
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the input element when popup is not visible. 
+                                        If the popup is open and an item is highlighted then popup gets closed, item gets selected and focus moves to the next focusable element.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Highlights the previous item if popup is visible.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>Highlights the next item if popup is visible.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Selects the highlighted item and closes the popup if popup is visible.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>home</i></td>
+                                    <td>Highlights the first item if popup is visible.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>end</i></td>
+                                    <td>Highlights the last item if popup is visible.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>Hides the popup.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
