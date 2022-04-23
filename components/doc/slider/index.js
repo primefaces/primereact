@@ -406,8 +406,8 @@ import { Slider } from 'primereact/slider';
 `}
 </CodeHighlight>
                     <h6>Keyboard Support</h6>
-                    <p>Slider can receive focus using the <i>tab</i> key, while being focused arrow keys can be used to control a slider. Horizontal sliders are used with <i>Left Arrow</i> and <i>Right Arrow</i> keys whereas
-                    vertical ones require <i>Up Arrow</i> and <i>Down Arrow</i> keys.</p>
+                    <p>Slider can receive focus using the <i>tab</i> key, while being focused arrow keys can be used to control a slider. <i>left arrow</i>, <i>up arrow</i> keys decrease the value
+                    and <i>right</i>, <i>up</i> keys are used to increase it. In addition <i>home</i> and <i>end</i> keys can be utilized to reach the minimum and maximum values respectively.</p>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
