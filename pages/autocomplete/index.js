@@ -137,20 +137,20 @@ const AutoCompleteDemo = () => {
             <div className="content-section implementation">
                 <div className="card">
                     <h5>Basic</h5>
-                    <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} />
+                    <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} aria-label="Countries" />
 
                     <h5>Grouped</h5>
-                    <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)} />
+                    <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)} aria-label="Cities" />
 
                     <h5>Dropdown, Templating and Force Selection</h5>
-                    <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown dropdownAutoFocus={false} forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
+                    <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown dropdownAutoFocus={false} forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} aria-label="Countries" />
 
                     <h5>Virtual Scroll (100000 Items)</h5>
-                    <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} />
+                    <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} aria-label="Items" />
 
                     <h5>Multiple</h5>
                     <span className="p-fluid">
-                        <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} />
+                        <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} aria-label="Countries" />
                     </span>
                 </div>
             </div>
