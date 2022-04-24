@@ -74,7 +74,11 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
             return;
         }
 
-        let currentFiles = filesState ? [...filesState] : [];
+        let currentFiles = [];
+        if (props.multiple) {
+            currentFiles = filesState ? [...filesState] : [];
+        }
+
         let selectedFiles = event.dataTransfer ? event.dataTransfer.files : event.target.files;
         for (let i = 0; i < selectedFiles.length; i++) {
             let file = selectedFiles[i];
