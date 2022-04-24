@@ -144,6 +144,9 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
 
     const upload = (files) => {
         files = files || filesState;
+        if (files && files.nativeEvent) {
+            files = filesState;
+        }
 
         if (props.customUpload) {
             if (props.fileLimit) {
