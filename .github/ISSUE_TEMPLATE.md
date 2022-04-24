@@ -10,7 +10,7 @@
 **Codesandbox Case (Bug Reports)**
 Please fork the codesandbox below and create a case demonstrating your bug report. Issues without a codesandbox have much less possibility to be reviewed.
 
-https://codesandbox.io/s/qjx332qq4
+https://codesandbox.io/s/primereact-test-forked-bbns8k
 
 **Current behavior**
 <!-- Describe how the bug manifests. -->
