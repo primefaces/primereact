@@ -499,6 +499,11 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
     const updateEditableLabel = (option) => {
         if (inputRef.current) {
             inputRef.current.value = (option ? getOptionLabel(option) : props.value || '');
+
+            // #1413 NVDA screenreader
+            if (focusInputRef.current) {
+                focusInputRef.current.value = inputRef.current.value;
+            }
         }
     }
 
@@ -539,6 +544,9 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
             const label = selectedOption ? getOptionLabel(selectedOption) : null;
             const value = label || props.value || '';
             inputRef.current.value = value;
+            if (focusInputRef.current) {
+                focusInputRef.current.value = value;
+            }
         }
     }
 
@@ -600,9 +608,13 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createKeyboardHelper = () => {
+        const value = ObjectUtils.isNotEmpty(selectedOption) ? getOptionLabel(selectedOption) : null;
+        if (props.editable) {
+            value = value || props.value || '';
+        }
         return (
             <div className="p-hidden-accessible">
-                <input ref={focusInputRef} id={props.inputId} type="text" readOnly aria-haspopup="listbox"
+                <input ref={focusInputRef} id={props.inputId} type="text" defaultValue={value} readOnly aria-haspopup="listbox"
                     onFocus={onInputFocus} onBlur={onInputBlur} onKeyDown={onInputKeyDown}
                     disabled={props.disabled} tabIndex={props.tabIndex} aria-label={props.ariaLabel} aria-labelledby={props.ariaLabelledBy} />
             </div>
