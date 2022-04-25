@@ -150,12 +150,26 @@ import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
 </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>MultiStateCheckbox is used as a controlled input with <i>value</i>, <i>options</i> and <i>onChange</i> properties.</p>
-<CodeHighlight>
+                    <p>MultiStateCheckbox is used as a controlled input with <i>value</i>, <i>options</i> and <i>onChange</i> properties. The <i>optionValue</i> field refers to the value of each option.</p>
+<CodeHighlight lang="js">
 {`
-<MultiStateCheckbox value={value} options={options} onChange={(e) => setValue(e.value)} />
+const [value, setValue] = useState('public');
+const options = [
+    { value: 'public', icon: 'pi pi-globe' },
+    { value: 'protected', icon: 'pi pi-lock-open' },
+    { value: 'private', icon: 'pi pi-lock' }
+];
 `}
 </CodeHighlight>
+
+<CodeHighlight>
+{`
+<MultiStateCheckbox value={value} options={options} onChange={(e) => setValue(e.value)} optionValue="value" />
+`}
+</CodeHighlight>
+
+                <h5>Icons</h5>
+                <p>Icon of each option is defined with the <i>icon</i> property of an option object. For templating use <i>iconTemplate</i> to render custom content inside the checkbox.</p>
 
                 <h5>Option</h5>
                 <div className="doc-tablewrapper">
