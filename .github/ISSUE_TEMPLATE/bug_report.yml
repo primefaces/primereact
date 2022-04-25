@@ -16,14 +16,12 @@ body:
       description: A clear and concise description of what the bug is.
     validations:
       required: true
-  - type: textarea
+  - type: markdown
     id: reproducer
     attributes:
       label: Reproducer
       description: |
         "Please fork the [CodeSandbox project](https://codesandbox.io/s/primereact-test-forked-bbns8k) and create a case demonstrating your bug report. Issues **without** a CodeSandbox have much less possibility to be reviewed."
-    validations:
-      required: false
   - type: dropdown
     id: react-version
     attributes:
@@ -48,6 +46,18 @@ body:
       label: Browser(s)
       placeholder: >
         all | Chrome XX | Firefox XX | IE XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      multiple: false
+      options:
+        - TypeScript
+        - ES5
+        - ES6
+        - ALL
+    validations:
+      required: true
   - type: textarea
     id: reproduce-steps
     attributes:
