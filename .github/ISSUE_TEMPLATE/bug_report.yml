@@ -24,6 +24,13 @@ body:
         Please fork the [CodeSandbox project](https://codesandbox.io/s/primereact-test-forked-bbns8k) and create a case demonstrating your bug report. Issues **without** a CodeSandbox have much less possibility to be reviewed.
     validations:
       required: false
+  - type: input
+    id: pr-version
+    attributes:
+      label: PrimeReact version
+      placeholder: x.x.x
+    validations:
+      required: true
   - type: dropdown
     id: react-version
     attributes:
@@ -33,13 +40,6 @@ body:
         - 16.x
         - 17.x
         - 18.x
-    validations:
-      required: true
-  - type: input
-    id: pr-version
-    attributes:
-      label: PrimeReact version
-      placeholder: x.x.x
     validations:
       required: true
   - type: dropdown
@@ -58,8 +58,9 @@ body:
     id: browsers
     attributes:
       label: Browser(s)
+      description: List specific browser(s) the problem occurs on or leave blank if ALL browsers
       placeholder: >
-        all | Chrome XX | Firefox XX | IE XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView
+        e.g. Safari 15, iOS 15.4, Chrome 90
   - type: textarea
     id: reproduce-steps
     attributes:
