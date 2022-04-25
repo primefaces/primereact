@@ -63,7 +63,7 @@ const MultiStateCheckboxProps = [
         name: 'readOnly',
         type: 'boolean',
         default: 'false',
-        description: 'When present, it specifies that the element value cannot be altered.'
+        description: 'When present, it specifies that the value cannot be changed.'
     },
     {
         name: 'empty',

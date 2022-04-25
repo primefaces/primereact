@@ -268,7 +268,7 @@ import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
                                 <td>readOnly</td>
                                 <td>boolean</td>
                                 <td>false</td>
-                                <td>When present, it specifies that the element value cannot be altered.</td>
+                                <td>When present, it specifies that the value cannot be changed.</td>
                             </tr>
                             <tr>
                                 <td>tabIndex</td>

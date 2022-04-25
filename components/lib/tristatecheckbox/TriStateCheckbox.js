@@ -8,7 +8,7 @@ export const TriStateCheckbox = React.memo(React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
 
     const onClick = (event) => {
-        if (!props.disabled) {
+        if (!props.disabled && !props.readOnly) {
             toggle(event);
         }
     }
@@ -88,6 +88,7 @@ TriStateCheckbox.defaultProps = {
     style: null,
     className: null,
     disabled: false,
+    readOnly: false,
     tabIndex: "0",
     'aria-label': null,
     'aria-labelledby': null,

@@ -30,6 +30,12 @@ const TriStateCheckboxProps = [
         description: 'When present, it specifies that the element value cannot be altered.'
     },
     {
+        name: 'readOnly',
+        type: 'boolean',
+        default: 'false',
+        description: 'When present, it specifies that the value cannot be changed.'
+    },
+    {
         name: 'tabIndex',
         type: 'number',
         default: '0',
