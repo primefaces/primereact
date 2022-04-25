@@ -1147,7 +1147,7 @@ export const DataTableDemo = () => {
                                     <td>filterMatchMode</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Defines filterMatchMode; "startsWith", "contains", "endsWidth", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".</td>
+                                    <td>Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".</td>
                                 </tr>
                                 <tr>
                                     <td>filterType</td>
