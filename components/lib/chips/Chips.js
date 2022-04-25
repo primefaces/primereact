@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
@@ -79,6 +80,10 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
             return;
         }
 
+        if (props.keyfilter) {
+            KeyFilter.onKeyPress(event, props.keyfilter)
+        }
+
         switch (event.which) {
             //backspace
             case 8:
@@ -127,6 +132,10 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
     const onPaste = (event) => {
         if (props.separator) {
             let pastedData = (event.clipboardData || window['clipboardData']).getData('Text');
+
+            if (props.keyfilter) {
+                KeyFilter.onPaste(event, props.keyfilter)
+            }
 
             if (pastedData) {
                 let values = props.value || [];
@@ -255,6 +264,7 @@ Chips.defaultProps = {
     separator: null,
     allowDuplicate: true,
     itemTemplate: null,
+    keyfilter: null,
     onAdd: null,
     onRemove: null,
     onChange: null,

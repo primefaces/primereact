@@ -216,6 +216,8 @@ customChip(item) {
 
 `}
 </CodeHighlight>
+                    <h5>KeyFilter</h5>
+                    <p>Chips has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.</p>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -330,6 +332,12 @@ customChip(item) {
                                     <td>function</td>
                                     <td>null</td>
                                     <td>Template function to return the content of a chip.</td>
+                                </tr>
+                                <tr>
+                                    <td>keyfilter</td>
+                                    <td>string/regex</td>
+                                    <td>null</td>
+                                    <td>Format definition of the keys to block.</td>
                                 </tr>
                             </tbody>
                         </table>
