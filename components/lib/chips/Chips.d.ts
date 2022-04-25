@@ -54,6 +54,7 @@ export interface ChipsProps {
     onChange?(e: ChipsChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
+    onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
     children?: React.ReactNode;
 }
 

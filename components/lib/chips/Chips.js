@@ -72,6 +72,13 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
         const inputValue = event.target.value;
         const values = props.value || [];
 
+        props.onKeyDown && props.onKeyDown(event);
+
+        // do not continue if the user defined keydown wants to prevent
+        if (event.defaultPrevented) {
+            return;
+        }
+
         switch (event.which) {
             //backspace
             case 8:
@@ -252,5 +259,6 @@ Chips.defaultProps = {
     onRemove: null,
     onChange: null,
     onFocus: null,
-    onBlur: null
+    onBlur: null,
+    onKeyDown: null
 }
