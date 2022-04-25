@@ -21,8 +21,8 @@ body:
     id: reproducer
     attributes:
       label: Reproducer
-      description: >
-      Please fork the [CodeSandbox project](https://codesandbox.io/s/primereact-test-forked-bbns8k) and create a case demonstrating your bug report. Issues **without** a CodeSandbox have much less possibility to be reviewed.
+      description: |
+        "Please fork the [CodeSandbox project](https://codesandbox.io/s/primereact-test-forked-bbns8k) and create a case demonstrating your bug report. Issues **without** a CodeSandbox have much less possibility to be reviewed."
     validations:
       required: false
   - type: dropdown
