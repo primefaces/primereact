@@ -6,22 +6,10 @@ const TriStateCheckboxProps = [
         description: 'Unique identifier of the element.'
     },
     {
-        name: 'inputId',
-        type: 'string',
-        default: 'null',
-        description: 'Unique identifier of the native checkbox element.'
-    },
-    {
         name: 'value',
         type: 'any',
         default: 'null',
         description: 'Value of the TriStateCheckbox.'
-    },
-    {
-        name: 'name',
-        type: 'string',
-        default: 'null',
-        description: 'Name of the checkbox element .'
     },
     {
         name: 'style',
@@ -42,6 +30,12 @@ const TriStateCheckboxProps = [
         description: 'When present, it specifies that the element value cannot be altered.'
     },
     {
+        name: 'tabIndex',
+        type: 'number',
+        default: '0',
+        description: 'Index of the element in tabbing order.'
+    },
+    {
         name: 'tooltip',
         type: 'any',
         default: 'null',
@@ -52,12 +46,6 @@ const TriStateCheckboxProps = [
         type: 'object',
         default: 'null',
         description: 'Configuration of the tooltip, refer to the tooltip documentation for more information.'
-    },
-    {
-        name: 'ariaLabelledBy',
-        type: 'string',
-        default: 'null',
-        description: 'Establishes relationships between the component and label(s) where its value should be one or more element IDs.'
     }
 ];
 
