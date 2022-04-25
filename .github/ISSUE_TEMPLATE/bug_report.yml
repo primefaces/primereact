@@ -1,0 +1,69 @@
+name: Bug report
+description: Create a report to help us improve
+title: "Component: Title"
+labels: "defect"
+assignees: "melloware"
+body:
+  - type: markdown
+    attributes:
+      # yamllint disable rule:line-length
+      value: >
+        ### There is no guarantee in receiving an immediate response in GitHub Issue Tracker, If you'd like to secure our response, you may consider *PrimeReact PRO Support* where support is provided within 4 business hours
+      # yamllint enable rule:line-length
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: reproducer
+    attributes:
+      label: Reproducer
+      description: >
+      Please fork the [CodeSandbox project](https://codesandbox.io/s/primereact-test-forked-bbns8k) and create a case demonstrating your bug report. Issues **without** a CodeSandbox have much less possibility to be reviewed.
+    validations:
+      required: false
+  - type: dropdown
+    id: react-version
+    attributes:
+      label: React version
+      multiple: false
+      options:
+        - 16.x
+        - 17.x
+        - 18.x
+    validations:
+      required: true
+  - type: input
+    id: pr-version
+    attributes:
+      label: PrimeReact version
+      placeholder: x.x.x
+    validations:
+      required: true
+  - type: input
+    id: browsers
+    attributes:
+      label: Browser(s)
+      placeholder: >
+        all | Chrome XX | Firefox XX | IE XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView
+  - type: textarea
+    id: reproduce-steps
+    attributes:
+      label: Steps to reproduce the behavior
+      placeholder: >
+        1. Go to '...'  
+        2. Click on '....'  
+        3. Scroll down to '....'  
+        4. See error
+    validations:
+      required: false
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: false
