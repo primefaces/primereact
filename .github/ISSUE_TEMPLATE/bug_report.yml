@@ -37,7 +37,6 @@ body:
       label: React version
       multiple: false
       options:
-        - 16.x
         - 17.x
         - 18.x
     validations:
@@ -67,9 +66,9 @@ body:
       label: Steps to reproduce the behavior
       description: A clear and concise description of how to make the issue happen.
       placeholder: >
-        1. Go to '...'  
-        2. Click on '....'  
-        3. Scroll down to '....'  
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
         4. See error
     validations:
       required: false
