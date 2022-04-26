@@ -18,6 +18,12 @@ const BreadCrumbProps = [
         description: 'MenuItem configuration for the home icon.'
     },
     {
+        name: 'homeTemplate',
+        type: 'function',
+        default: 'null',
+        description: 'Template function to render the Home icon.'
+    },
+    {
         name: 'style',
         type: 'string',
         default: 'null',

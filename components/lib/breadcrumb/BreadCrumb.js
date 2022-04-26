@@ -22,6 +22,7 @@ export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createHome = () => {
+        let element = null;
         const home = props.home;
 
         if (home) {
@@ -29,7 +30,7 @@ export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
             const className = classNames('p-breadcrumb-home', { 'p-disabled': disabled }, _className);
             const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props });
 
-            return (
+            element =  (
                 <li className={className} style={style}>
                     <a href={url || '#'} className="p-menuitem-link" aria-disabled={disabled} target={target} onClick={(event) => itemClick(event, home)}>
                         {icon}
@@ -38,7 +39,7 @@ export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
             )
         }
 
-        return null;
+        return props.homeTemplate ? ObjectUtils.getJSXElement(props.homeTemplate, props) : element;
     }
 
     const createSeparator = () => {
@@ -117,6 +118,7 @@ BreadCrumb.defaultProps = {
     id: null,
     model: null,
     home: null,
+    homeTemplate: null,
     style: null,
     className: null
 }
