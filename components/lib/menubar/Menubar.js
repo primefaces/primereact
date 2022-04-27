@@ -52,18 +52,6 @@ export const Menubar = React.memo(React.forwardRef((props, ref) => {
         useCustomContent
     }));
 
-    const createCustomContent = () => {
-        if (props.children) {
-            return (
-                <div className="p-menubar-custom">
-                    {props.children}
-                </div>
-            )
-        }
-
-        return null;
-    }
-
     const createStartContent = () => {
         if (props.start) {
             const start = ObjectUtils.getJSXElement(props.start, props);

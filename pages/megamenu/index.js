@@ -1,8 +1,10 @@
 import React from 'react';
 import { MegaMenu } from '../../components/lib/megamenu/MegaMenu';
+import { InputText } from '../../components/lib/inputtext/InputText';
 import MegaMenuDoc from '../../components/doc/megamenu';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import getConfig from 'next/config';
 
 const MegaMenuDemo = () => {
 
@@ -119,6 +121,10 @@ const MegaMenuDemo = () => {
         }
     ];
 
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+    const start = <img alt="logo" src={`${contextPath}/images/logo.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" />;
+
     return (
         <div>
             <Head>
@@ -136,7 +142,7 @@ const MegaMenuDemo = () => {
             <div className="content-section implementation">
                 <div className="card">
                     <h5>Horizontal</h5>
-                    <MegaMenu model={items} />
+                    <MegaMenu model={items} start={start} end={end} />
 
                     <h5>Vertical</h5>
                     <MegaMenu model={items} orientation="vertical" />

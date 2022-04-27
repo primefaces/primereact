@@ -38,6 +38,12 @@
     list-style: none;
 }
 
+.p-megamenu .p-megamenu-custom,
+.p-megamenu .p-megamenu-end {
+    margin-left: auto;
+    align-self: center;
+}
+
 /* Horizontal */
 .p-megamenu-horizontal .p-megamenu-root-list {
     display: flex;
