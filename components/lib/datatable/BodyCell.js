@@ -555,11 +555,11 @@ export const BodyCell = React.memo((props) => {
 
                 content = (
                     <>
-                        <button type="button" onClick={rowEditorProps.onSaveClick} className={rowEditorProps.saveClassName} tabIndex={props.tabIndex}>
+                        <button type="button" name="row-save" onClick={rowEditorProps.onSaveClick} className={rowEditorProps.saveClassName} tabIndex={props.tabIndex}>
                             <span className={rowEditorProps.saveIconClassName}></span>
                             <Ripple />
                         </button>
-                        <button type="button" onClick={rowEditorProps.onCancelClick} className={rowEditorProps.cancelClassName} tabIndex={props.tabIndex}>
+                        <button type="button" name="row-cancel" onClick={rowEditorProps.onCancelClick} className={rowEditorProps.cancelClassName} tabIndex={props.tabIndex}>
                             <span className={rowEditorProps.cancelIconClassName}></span>
                             <Ripple />
                         </button>
@@ -575,7 +575,7 @@ export const BodyCell = React.memo((props) => {
                 };
 
                 content = (
-                    <button type="button" onClick={rowEditorProps.onInitClick} className={rowEditorProps.initClassName} tabIndex={props.tabIndex}>
+                    <button type="button" name="row-edit" onClick={rowEditorProps.onInitClick} className={rowEditorProps.initClassName} tabIndex={props.tabIndex}>
                         <span className={rowEditorProps.initIconClassName}></span>
                         <Ripple />
                     </button>
