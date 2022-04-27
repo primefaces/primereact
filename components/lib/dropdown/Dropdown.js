@@ -104,16 +104,10 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
                 onUpKey(event);
                 break;
 
-            //space
+            //space and enter
             case 32:
-                overlayVisibleState ? hide() : show();
-
-                event.preventDefault();
-                break;
-
-            //enter
             case 13:
-                hide();
+                overlayVisibleState ? hide() : show();
                 event.preventDefault();
                 break;
 
