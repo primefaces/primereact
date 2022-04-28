@@ -670,6 +670,18 @@ export const SplitButtonDemo = () => {
                                     <td>ClassName of the menu dropdown button.</td>
                                 </tr>
                                 <tr>
+                                    <td>buttonProps</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Props for the main button, any prop is passed implicity to the button element.</td>
+                                </tr>
+                                <tr>
+                                    <td>menuButtonProps</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Props for the dropdown button, any prop is passed implicity to the dropdown button element.</td>
+                                </tr>
+                                <tr>
                                     <td>tabIndex</td>
                                     <td>number</td>
                                     <td>null</td>
@@ -767,6 +779,107 @@ export const SplitButtonDemo = () => {
                                 <tr>
                                     <td>p-menu</td>
                                     <td>Overlay menu.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>SplitButton component renders two native button elements, main button uses the label property to define <i>aria-label</i> by default which can be customized with <i>buttonProps</i>. 
+                    Dropdown button requires an explicit definition using <i>menuButtonProps</i> option and also includes <i>aria-haspopup</i>, <i>aria-expanded</i> for states along with <i>aria-controls</i> to define the relation between the popup and the button.</p>
+                    
+                    <p>The popup overlay uses <i>menu</i> role on the list and each action item has a <i>menuitem</i> role with an <i>aria-label</i> as the menuitem label. The id of the menu refers to the <i>aria-controls</i> of the dropdown button.</p>
+<CodeHighlight>
+{`
+<SplitButton buttonProps={{'aria-label': 'Default Action'}} menuButtonProps={{'aria-label': 'More Options'}} />
+`}
+</CodeHighlight>
+                    <h6>Main Button Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Activates the button.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Activates the button.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h6>Menu Button Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Toggles the visibility of the menu.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Toggles the visibility of the menu.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>Opens the menu and moves focus to the first item.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Opens the menu and moves focus to the last item.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h6>Menu Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Actives the menuitem, closes the menu and sets focus on the menu button.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>Closes the menu and sets focus on the menu button.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>Moves focus to the next item, if it is the last one then first item receives the focus.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Moves focus to the previous item, if it is the first one then last item receives the focus.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>home</i></td>
+                                    <td>Moves focus to the first item.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>end</i></td>
+                                    <td>Moves focus to the last item.</td>
                                 </tr>
                             </tbody>
                         </table>
