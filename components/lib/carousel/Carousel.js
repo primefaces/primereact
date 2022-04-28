@@ -42,9 +42,10 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
     const isVertical = props.orientation === 'vertical';
     const circular = props.circular || !!props.autoplayInterval;
     const isCircular = circular && props.value.length >= numVisibleState;
-    const isAutoplay = props.autoplayInterval && allowAutoplay.current;
     const currentPage = props.onPageChange ? props.page : pageState;
-    const totalIndicators = props.value ? Math.ceil((props.value.length - numVisibleState) / numScrollState) + 1 : 0;
+    let totalIndicators = props.value.length ? Math.ceil((props.value.length - numVisibleState) / numScrollState) + 1 : 0;
+    totalIndicators = totalIndicators <= 0 ? 0 : totalIndicators;
+    const isAutoplay = totalIndicators && props.autoplayInterval && allowAutoplay.current;
 
     const [bindWindowResizeListener,] = useResizeListener({
         listener: () => {
