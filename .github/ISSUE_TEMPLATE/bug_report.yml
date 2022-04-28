@@ -61,9 +61,11 @@ body:
       multiple: false
       options:
         - Create React App (CRA)
-        - NextJS
+        - Next.js
         - Remix
         - Vite
+        - Hydrogen
+        - Relay
         - Preact
     validations:
       required: true
