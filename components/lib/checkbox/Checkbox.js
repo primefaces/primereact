@@ -30,8 +30,6 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
 
             inputRef.current.checked = !checked;
             inputRef.current.focus();
-
-            event.preventDefault();
         }
     }
 
@@ -41,13 +39,6 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
 
     const onBlur = () => {
         setFocusedState(false);
-    }
-
-    const onKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            onClick(event);
-            event.preventDefault();
-        }
     }
 
     const isChecked = () => {
@@ -81,10 +72,10 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
         <>
             <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
                 <div className="p-hidden-accessible">
-                    <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} tabIndex={props.tabIndex} defaultChecked={checked} aria-labelledby={props.ariaLabelledBy}
-                        onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} required={props.required} />
+                    <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} tabIndex={props.tabIndex} defaultChecked={checked} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}
+                        onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} required={props.required} />
                 </div>
-                <div className={boxClass} role="checkbox" aria-checked={checked}>
+                <div className={boxClass}>
                     {icon}
                 </div>
             </div>
@@ -113,7 +104,8 @@ Checkbox.defaultProps = {
     icon: 'pi pi-check',
     tooltip: null,
     tooltipOptions: null,
-    ariaLabelledBy: null,
+    'aria-label': null,
+    'aria-labelledby': null,
     onChange: null,
     onMouseDown: null,
     onContextMenu: null

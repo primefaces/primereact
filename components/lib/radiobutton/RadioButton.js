@@ -72,10 +72,10 @@ export const RadioButton = React.memo(React.forwardRef((props, ref) => {
         <>
             <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
                 <div className="p-hidden-accessible">
-                    <input ref={inputRef} id={props.inputId} type="radio" aria-labelledby={props.ariaLabelledBy} name={props.name} defaultChecked={props.checked}
+                    <input ref={inputRef} id={props.inputId} type="radio" name={props.name} defaultChecked={props.checked} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}
                         onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} required={props.required} tabIndex={props.tabIndex} />
                 </div>
-                <div className={boxClassName} role="radio" aria-checked={props.checked}>
+                <div className={boxClassName}>
                     <div className="p-radiobutton-icon"></div>
                 </div>
             </div>
@@ -100,6 +100,7 @@ RadioButton.defaultProps = {
     tabIndex: null,
     tooltip: null,
     tooltipOptions: null,
-    ariaLabelledBy: null,
+    'aria-label': null,
+    'aria-labelledby': null,
     onChange: null
 }

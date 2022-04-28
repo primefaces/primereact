@@ -144,6 +144,12 @@ const ListBoxProps = [
         description: "Locale to use in filtering. The default locale is the host environment's current locale."
     },
     {
+        name: 'filterInputProps',
+        type: 'object',
+        default: 'undefined',
+        description: "Props for the filter input, any prop is passed implicity to the filter input element."
+    },
+    {
         name: 'tabIndex',
         type: 'number',
         default: 'null',

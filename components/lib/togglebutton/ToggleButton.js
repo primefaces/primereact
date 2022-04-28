@@ -27,7 +27,7 @@ export const ToggleButton = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onKeyDown = (event) => {
-        if (event.key === 'Enter') {
+        if (event.keyCode === 32) {
             toggle(event);
             event.preventDefault();
         }
@@ -60,7 +60,7 @@ export const ToggleButton = React.memo(React.forwardRef((props, ref) => {
         <>
             <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}
                 onClick={toggle} onFocus={props.onFocus} onBlur={props.onBlur} onKeyDown={onKeyDown}
-                tabIndex={tabIndex} aria-labelledby={props.ariaLabelledBy}>
+                tabIndex={tabIndex} role="button" aria-pressed={props.checked}>
                 {iconElement}
                 <span className="p-button-label">{label}</span>
                 <Ripple />
@@ -85,7 +85,6 @@ ToggleButton.defaultProps = {
     tabIndex: 0,
     tooltip: null,
     tooltipOptions: null,
-    ariaLabelledBy: null,
     onChange: null,
     onFocus: null,
     onBlur: null

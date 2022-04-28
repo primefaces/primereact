@@ -59,12 +59,16 @@ export const KeyFilter = {
         return e.charCode || e.keyCode || e.which;
     },
 
+    getRegex(keyfilter) {
+        return KeyFilter.DEFAULT_MASKS[keyfilter] ? KeyFilter.DEFAULT_MASKS[keyfilter] : keyfilter;
+    },
+
     onKeyPress(e, keyfilter, validateOnly) {
         if (validateOnly) {
             return;
         }
 
-        const regex = KeyFilter.DEFAULT_MASKS[keyfilter] ? KeyFilter.DEFAULT_MASKS[keyfilter] : keyfilter;
+        const regex = this.getRegex(keyfilter);
         const browser = DomHandler.getBrowser();
 
         if (e.ctrlKey || e.altKey) {
@@ -86,6 +90,23 @@ export const KeyFilter = {
         if (!regex.test(cc)) {
             e.preventDefault();
         }
+    },
+
+    onPaste(e, keyfilter, validateOnly) {
+        if (validateOnly) {
+            return;
+        }
+
+        const regex = this.getRegex(keyfilter);
+        const clipboard = e.clipboardData.getData("text");
+        
+        // loop over each letter pasted and if any fail prevent the paste
+        [...clipboard].forEach(c => {
+            if (!regex.test(c)) {
+               e.preventDefault();
+               return false;
+            }
+        });
     },
 
     validate(e, keyfilter) {

@@ -26,6 +26,8 @@ export const DataTable = React.forwardRef((props, ref) => {
     const wrapperRef = React.useRef(null);
     const reorderIndicatorUpRef = React.useRef(null);
     const reorderIndicatorDownRef = React.useRef(null);
+    const colReorderIconWidth = React.useRef(null);
+    const colReorderIconHeight = React.useRef(null);
     const resizeHelperRef = React.useRef(null);
     const draggedColumnElement = React.useRef(null);
     const draggedColumn = React.useRef(null);
@@ -605,8 +607,8 @@ export const DataTable = React.forwardRef((props, ref) => {
             return;
         }
 
-        colReorderIconWidth = DomHandler.getHiddenElementOuterWidth(reorderIndicatorUpRef.current);
-        colReorderIconHeight = DomHandler.getHiddenElementOuterHeight(reorderIndicatorUpRef.current);
+        colReorderIconWidth.current = DomHandler.getHiddenElementOuterWidth(reorderIndicatorUpRef.current);
+        colReorderIconHeight.current = DomHandler.getHiddenElementOuterHeight(reorderIndicatorUpRef.current);
 
         draggedColumn.current = column;
         draggedColumnElement.current = findParentHeader(event.currentTarget);
@@ -625,17 +627,17 @@ export const DataTable = React.forwardRef((props, ref) => {
                 const targetLeft = dropHeaderOffset.left - containerOffset.left;
                 const columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
 
-                reorderIndicatorUpRef.current.style.top = dropHeaderOffset.top - containerOffset.top - (colReorderIconHeight - 1) + 'px';
+                reorderIndicatorUpRef.current.style.top = dropHeaderOffset.top - containerOffset.top - (colReorderIconHeight.current - 1) + 'px';
                 reorderIndicatorDownRef.current.style.top = dropHeaderOffset.top - containerOffset.top + dropHeader.offsetHeight + 'px';
 
                 if (event.pageX > columnCenter) {
-                    reorderIndicatorUpRef.current.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(colReorderIconWidth / 2)) + 'px';
-                    reorderIndicatorDownRef.current.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(colReorderIconWidth / 2)) + 'px';
+                    reorderIndicatorUpRef.current.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(colReorderIconWidth.current / 2)) + 'px';
+                    reorderIndicatorDownRef.current.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(colReorderIconWidth.current / 2)) + 'px';
                     dropPosition.current = 1;
                 }
                 else {
-                    reorderIndicatorUpRef.current.style.left = (targetLeft - Math.ceil(colReorderIconWidth / 2)) + 'px';
-                    reorderIndicatorDownRef.current.style.left = (targetLeft - Math.ceil(colReorderIconWidth / 2)) + 'px';
+                    reorderIndicatorUpRef.current.style.left = (targetLeft - Math.ceil(colReorderIconWidth.current / 2)) + 'px';
+                    reorderIndicatorDownRef.current.style.left = (targetLeft - Math.ceil(colReorderIconWidth.current / 2)) + 'px';
                     dropPosition.current = -1;
                 }
 

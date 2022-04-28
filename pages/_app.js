@@ -16,17 +16,19 @@ export default function MyApp({ Component }) {
 
     useEffect(() => {
         fetchNews().then(data => {
-            announcement.current = data;
-
-            const itemString = localStorage.getItem(storageKey);
-            if (itemString) {
-                const item = JSON.parse(itemString);
-                if (item.hiddenNews && item.hiddenNews !== data.id) {
+            if (data) {
+                announcement.current = data;
+    
+                const itemString = localStorage.getItem(storageKey);
+                if (itemString) {
+                    const item = JSON.parse(itemString);
+                    if (item.hiddenNews && item.hiddenNews !== data.id) {
+                        setNewsActive(true);
+                    }
+                }
+                else {
                     setNewsActive(true);
                 }
-            }
-            else {
-                setNewsActive(true);
             }
         });
     }, []);
@@ -34,7 +36,7 @@ export default function MyApp({ Component }) {
     const props = {
         dark: dark,
         theme: theme,
-        newsActive: newsActive,
+        newsActive: newsActive && announcement.current,
         announcement: announcement.current,
         onNewsClose: () => {
             setNewsActive(false);

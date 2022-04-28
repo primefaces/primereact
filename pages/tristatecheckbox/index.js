@@ -26,7 +26,7 @@ const TriStateCheckboxDemo = () => {
             <div className="content-section implementation">
                 <div className="card">
                     <div className="field-checkbox m-0">
-                        <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
+                        <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} aria-label="Terms Accepted" />
                         <label>{String(value)}</label>
                     </div>
                 </div>

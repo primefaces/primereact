@@ -875,10 +875,10 @@ Vertical
                                     <td>Maximum boundary value.</td>
                                 </tr>
                                 <tr>
-                                <td>disabled</td>
-                                <td>boolean</td>
-                                <td>false</td>
-                                <td>When present, it specifies that the element should be disabled.</td>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the element should be disabled.</td>
                                 </tr>
                                 <tr>
                                     <td>required</td>

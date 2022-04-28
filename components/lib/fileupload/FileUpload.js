@@ -74,7 +74,11 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
             return;
         }
 
-        let currentFiles = filesState ? [...filesState] : [];
+        let currentFiles = [];
+        if (props.multiple) {
+            currentFiles = filesState ? [...filesState] : [];
+        }
+
         let selectedFiles = event.dataTransfer ? event.dataTransfer.files : event.target.files;
         for (let i = 0; i < selectedFiles.length; i++) {
             let file = selectedFiles[i];
@@ -140,6 +144,9 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
 
     const upload = (files) => {
         files = files || filesState;
+        if (files && files.nativeEvent) {
+            files = filesState;
+        }
 
         if (props.customUpload) {
             if (props.fileLimit) {
@@ -284,7 +291,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
             event.preventDefault();
 
             const files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
-            const allowDrop = props.multiple || (files && files.length === 0);
+            const allowDrop = props.multiple || (ObjectUtils.isEmpty(filesState) && files && files.length === 1);
 
             allowDrop && onFileSelect(event);
         }

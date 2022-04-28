@@ -83,7 +83,6 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     autoFocus?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string;
     completeMethod?(e: AutoCompleteCompleteMethodParams): void;
     itemTemplate?: AutoCompleteItemTemplateType;
     selectedItemTemplate?: AutoCompleteSelectedItemTemplateType;

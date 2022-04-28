@@ -41,7 +41,6 @@ export interface InputMaskProps {
     required?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string;
     onComplete?(e: InputMaskCompleteParams): void;
     onChange?(e: InputMaskChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;

@@ -22,13 +22,13 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
     className?: string;
     inputId?: string;
     name?: string;
+    tabIndex?: number;
     checked?: any;
     trueValue?: any;
     falseValue?: any;
     disabled?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string;
     onChange?(e: InputSwitchChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;

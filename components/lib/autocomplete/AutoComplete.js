@@ -107,6 +107,10 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
     }
 
     const updateModel = (event, value) => {
+        // #2176 only call change if value actually changed
+        if (selectedItem && selectedItem.current === value) {
+            return;
+        }
         if (props.onChange) {
             props.onChange({
                 originalEvent: event,
@@ -450,15 +454,16 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
 
     const createSimpleAutoComplete = () => {
         const value = formatValue(props.value);
-        const ariaControls = idState + '_list';
+        const ariaControls = overlayVisibleState ? idState + '_list' : null;
         const className = classNames('p-autocomplete-input', props.inputClassName, {
             'p-autocomplete-dd-input': props.dropdown
         });
 
         return (
-            <InputText ref={inputRef} id={props.inputId} type={props.type} name={props.name}
-                defaultValue={value} role="searchbox" aria-autocomplete="list" aria-controls={ariaControls}
-                aria-labelledby={props.ariaLabelledBy} className={className} style={props.inputStyle} autoComplete="off"
+            <InputText ref={inputRef} id={props.inputId} type={props.type} name={props.name} defaultValue={value} 
+                role="combobox" aria-autocomplete="list" aria-owns={ariaControls} aria-haspopup="listbox" aria-expanded={overlayVisibleState} 
+                aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}
+                className={className} style={props.inputStyle} autoComplete="off"
                 readOnly={props.readOnly} disabled={props.disabled} placeholder={props.placeholder} size={props.size}
                 maxLength={props.maxLength} tabIndex={props.tabIndex}
                 onBlur={onInputBlur} onFocus={onInputFocus} onChange={onInputChange}
@@ -485,12 +490,13 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createMultiInput = () => {
-        const ariaControls = idState + '_list';
+        const ariaControls = overlayVisibleState ? idState + '_list' : null;
 
         return (
             <li className="p-autocomplete-input-token">
                 <input ref={inputRef} type={props.type} disabled={props.disabled} placeholder={props.placeholder}
-                    role="searchbox" aria-autocomplete="list" aria-controls={ariaControls} aria-labelledby={props.ariaLabelledBy}
+                    role="combobox" aria-autocomplete="list" aria-owns={ariaControls} aria-haspopup="listbox" aria-expanded={overlayVisibleState} 
+                    aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}
                     autoComplete="off" tabIndex={props.tabIndex} onChange={onInputChange} id={props.inputId} name={props.name}
                     style={props.inputStyle} className={props.inputClassName} maxLength={props.maxLength}
                     onKeyUp={props.onKeyUp} onKeyDown={onInputKeyDown} onKeyPress={props.onKeyPress}
@@ -550,7 +556,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <span ref={elementRef} id={idState} style={props.style} className={className} aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-owns={listId} {...otherProps}>
+            <span ref={elementRef} id={idState} style={props.style} className={className} {...otherProps}>
                 {input}
                 {loader}
                 {dropdown}
@@ -603,13 +609,14 @@ AutoComplete.defaultProps = {
     autoFocus: false,
     tooltip: null,
     tooltipOptions: null,
-    ariaLabelledBy: null,
     completeMethod: null,
     itemTemplate: null,
     selectedItemTemplate: null,
     transitionOptions: null,
     dropdownIcon: 'pi pi-chevron-down',
     removeIcon: 'pi pi-times-circle',
+    'aria-label': null,
+    'aria-labelledby': null,
     onChange: null,
     onFocus: null,
     onBlur: null,

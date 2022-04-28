@@ -47,13 +47,16 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
             let values = props.value ? [...props.value] : [];
 
             if (props.allowDuplicate || values.indexOf(item) === -1) {
-                values.push(item);
-
+                let allowAddition = true;
                 if (props.onAdd) {
-                    props.onAdd({
+                    allowAddition = props.onAdd({
                         originalEvent: event,
                         value: item
                     });
+                }
+
+                if (allowAddition !== false) {
+                    values.push(item);
                 }
             }
 

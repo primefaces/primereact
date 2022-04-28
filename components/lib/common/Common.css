@@ -85,6 +85,10 @@
     user-select: none;
 }
 
+.p-link:disabled {
+	cursor: default;
+}
+
 /* Non react overlay animations */
 .p-connected-overlay {
     opacity: 0;

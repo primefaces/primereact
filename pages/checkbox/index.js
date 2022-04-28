@@ -62,7 +62,7 @@ const CheckboxDemo = () => {
                     <h5>Basic</h5>
                     <div className="field-checkbox">
                         <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
-                        <label htmlFor="binary">{checked ? 'true' : 'false'}</label>
+                        <label htmlFor="binary">Remember Me</label>
                     </div>
 
                     <h5>Multiple</h5>

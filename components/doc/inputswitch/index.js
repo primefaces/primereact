@@ -145,7 +145,7 @@ import { InputSwitch } from 'primereact/inputswitch';
 </CodeHighlight>
 
                 <h5>Properties</h5>
-                <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
+                <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
@@ -188,6 +188,12 @@ import { InputSwitch } from 'primereact/inputswitch';
                                 <td>Name of the input element.</td>
                             </tr>
                             <tr>
+                                <td>tabIndex</td>
+                                <td>number</td>
+                                <td>null</td>
+                                <td>Index of the element in tabbing order.</td>
+                            </tr>
+                            <tr>
                                 <td>checked</td>
                                 <td>boolean</td>
                                 <td>false</td>
@@ -222,12 +228,6 @@ import { InputSwitch } from 'primereact/inputswitch';
                                 <td>object</td>
                                 <td>null</td>
                                 <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
-                            </tr>
-                            <tr>
-                                <td>ariaLabelledBy</td>
-                                <td>string</td>
-                                <td>null</td>
-                                <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -291,6 +291,42 @@ import { InputSwitch } from 'primereact/inputswitch';
                     </table>
                 </div>
 
+                <h5>Accessibility</h5>
+                <h6>Screen Reader</h6>
+                <p>InputSwitch component uses a hidden native checkbox element with <i>switch</i> role internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
+<CodeHighlight>
+{`
+<label htmlFor="switch1">Remember Me</label>
+<InputSwitch inputId="switch1" />
+
+<span id="switch2">Remember Me</span>
+<InputSwitch aria-labelledby="switch2" />
+
+<InputSwitch aria-label="Remember Me" />
+`}
+</CodeHighlight>
+                <h6>Keyboard Support</h6>
+                <div className="doc-tablewrapper">
+                    <table className="doc-table">
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th>Function</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><i>tab</i></td>
+                                <td>Moves focus to the switch.</td>
+                            </tr>
+                            <tr>
+                                <td><i>space</i></td>
+                                <td>Toggles the checked state.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
                 <h5>Dependencies</h5>
                 <p>None.</p>
             </TabPanel>

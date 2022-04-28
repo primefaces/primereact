@@ -3,7 +3,7 @@ import { CodeHighlight } from '../../components/doc/common/codehighlight';
 import Head from 'next/head';
 
 const ColorsDemo = (props) => {
-    const colors = ['blue', 'green', 'yellow', 'cyan', 'pink', 'indigo', 'teal', 'orange', 'bluegray', 'purple', 'red', 'gray'];
+    const colors = ['blue', 'green', 'yellow', 'cyan', 'pink', 'indigo', 'teal', 'orange', 'bluegray', 'purple', 'red', 'gray', 'primary'];
     const shades = [0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
     const surfaces = ['ground','section','card','overlay','border','hover'];
 

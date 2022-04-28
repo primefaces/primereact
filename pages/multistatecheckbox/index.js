@@ -31,7 +31,7 @@ const MultiStateCheckboxDemo = () => {
             <div className="content-section implementation">
                 <div className="card">
                     <div className="field-checkbox m-0">
-                        <MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} />
+                        <MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} aria-label="Access Type" />
                         <label>{value}</label>
                     </div>
                 </div>

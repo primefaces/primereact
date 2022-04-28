@@ -162,28 +162,28 @@ const DataTablePaginatorDemo = () => {
                         paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10, 20, 50]}
                         paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="country.name" header="Country"></Column>
-                        <Column field="company" header="Company"></Column>
-                        <Column field="representative.name" header="Representative"></Column>
+                        <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                        <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                        <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                        <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                     </DataTable>
                 </div>
 
                 <div className="card">
                     <h5>Custom Paginator Template</h5>
                     <DataTable value={customers2} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1} responsiveLayout="scroll">
-                        <Column field="name" header="Name"></Column>
-                        <Column field="country.name" header="Country"></Column>
-                        <Column field="company" header="Company"></Column>
-                        <Column field="representative.name" header="Representative"></Column>
+                        <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                        <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                        <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                        <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                     </DataTable>
 
                     <DataTable value={customers3} paginator paginatorTemplate={template2} first={first2} rows={rows2} onPage={onCustomPage2}
                         paginatorClassName="justify-content-end" className="mt-6" responsiveLayout="scroll">
-                        <Column field="name" header="Name"></Column>
-                        <Column field="country.name" header="Country"></Column>
-                        <Column field="company" header="Company"></Column>
-                        <Column field="representative.name" header="Representative"></Column>
+                        <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                        <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                        <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                        <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                     </DataTable>
                 </div>
             </div>
@@ -362,28 +362,28 @@ export class DataTablePaginatorDemo extends Component {
                         paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
                         paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
-                        <Column field="name" header="Name"></Column>
-                        <Column field="country.name" header="Country"></Column>
-                        <Column field="company" header="Company"></Column>
-                        <Column field="representative.name" header="Representative"></Column>
+                        <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                        <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                        <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                        <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                     </DataTable>
                 </div>
 
                 <div className="card">
                     <h5>Custom Paginator Template</h5>
                     <DataTable value={this.state.customers2} paginator paginatorTemplate={template1} first={this.state.first1} rows={this.state.rows1} onPage={this.onCustomPage1} responsiveLayout="scroll">
-                        <Column field="name" header="Name"></Column>
-                        <Column field="country.name" header="Country"></Column>
-                        <Column field="company" header="Company"></Column>
-                        <Column field="representative.name" header="Representative"></Column>
+                        <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                        <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                        <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                        <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                     </DataTable>
 
                     <DataTable value={this.state.customers3} paginator paginatorTemplate={template2} first={this.state.first2} rows={this.state.rows2} onPage={this.onCustomPage2}
                         paginatorClassName="justify-content-end" className="mt-6" responsiveLayout="scroll">
-                        <Column field="name" header="Name"></Column>
-                        <Column field="country.name" header="Country"></Column>
-                        <Column field="company" header="Company"></Column>
-                        <Column field="representative.name" header="Representative"></Column>
+                        <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                        <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                        <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                        <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                     </DataTable>
                 </div>
             </div>
@@ -540,28 +540,28 @@ const DataTablePaginatorDemo = () => {
                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
                     paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country.name" header="Country"></Column>
-                    <Column field="company" header="Company"></Column>
-                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                    <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                    <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                    <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                 </DataTable>
             </div>
 
             <div className="card">
                 <h5>Custom Paginator Template</h5>
                 <DataTable value={customers2} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1} responsiveLayout="scroll">
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country.name" header="Country"></Column>
-                    <Column field="company" header="Company"></Column>
-                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                    <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                    <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                    <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                 </DataTable>
 
                 <DataTable value={customers3} paginator paginatorTemplate={template2} first={first2} rows={rows2} onPage={onCustomPage2}
                     paginatorClassName="justify-content-end" className="mt-6" responsiveLayout="scroll">
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country.name" header="Country"></Column>
-                    <Column field="company" header="Company"></Column>
-                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                    <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                    <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                    <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                 </DataTable>
             </div>
         </div>
@@ -717,28 +717,28 @@ const DataTablePaginatorDemo = () => {
                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
                     paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country.name" header="Country"></Column>
-                    <Column field="company" header="Company"></Column>
-                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                    <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                    <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                    <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                 </DataTable>
             </div>
 
             <div className="card">
                 <h5>Custom Paginator Template</h5>
                 <DataTable value={customers2} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1} responsiveLayout="scroll">
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country.name" header="Country"></Column>
-                    <Column field="company" header="Company"></Column>
-                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                    <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                    <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                    <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                 </DataTable>
 
                 <DataTable value={customers3} paginator paginatorTemplate={template2} first={first2} rows={rows2} onPage={onCustomPage2}
                     paginatorClassName="justify-content-end" className="mt-6" responsiveLayout="scroll">
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country.name" header="Country"></Column>
-                    <Column field="company" header="Company"></Column>
-                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                    <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                    <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                    <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                 </DataTable>
             </div>
         </div>
@@ -904,28 +904,28 @@ const DataTablePaginatorDemo = () => {
                     paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={10} rowsPerPageOptions={[10,20,50]}
                     paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}>
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country.name" header="Country"></Column>
-                    <Column field="company" header="Company"></Column>
-                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                    <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                    <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                    <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                 </DataTable>
             </div>
 
             <div className="card">
                 <h5>Custom Paginator Template</h5>
                 <DataTable value={customers2} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1} responsiveLayout="scroll">
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country.name" header="Country"></Column>
-                    <Column field="company" header="Company"></Column>
-                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                    <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                    <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                    <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                 </DataTable>
 
                 <DataTable value={customers3} paginator paginatorTemplate={template2} first={first2} rows={rows2} onPage={onCustomPage2}
                     paginatorClassName="justify-content-end" className="mt-6" responsiveLayout="scroll">
-                    <Column field="name" header="Name"></Column>
-                    <Column field="country.name" header="Country"></Column>
-                    <Column field="company" header="Company"></Column>
-                    <Column field="representative.name" header="Representative"></Column>
+                    <Column field="name" header="Name" style={{ width: '25%' }}></Column>
+                    <Column field="country.name" header="Country" style={{ width: '25%' }}></Column>
+                    <Column field="company" header="Company" style={{ width: '25%' }}></Column>
+                    <Column field="representative.name" header="Representative" style={{ width: '25%' }}></Column>
                 </DataTable>
             </div>
         </div>

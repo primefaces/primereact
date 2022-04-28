@@ -16,7 +16,6 @@ const DataTableTemplatingDemo = () => {
     const productService = new ProductService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-
     useEffect(() => {
         productService.getProductsSmall().then(data => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps

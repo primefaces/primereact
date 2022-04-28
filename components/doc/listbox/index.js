@@ -505,8 +505,8 @@ const cities = [
 
                     <h5>Selection</h5>
                     <p>Listbox allows selection of either single or multiple items. In single case, model should be a single object reference whereas in multiple case should be an array. Multiple items can either be selected
-                        using metaKey or toggled individually depending on the value of <i>metaKeySelection</i> property value which is true by default. On touch enabled
-                        devices metaKeySelection is turned off automatically.</p>
+                        using metaKey or toggled individually depending on the value of <i>metaKeySelection</i> property value which is false by default. On touch enabled
+                        devices metaKeySelection is turned on automatically even when enabled.</p>
 
 <CodeHighlight>
 {`
@@ -541,6 +541,13 @@ itemTemplate(option) {
 <ListBox value={city} options={cities} onChange={(e) => setCity(e.value)} filter />
 `}
 </CodeHighlight>
+
+                    <p>Filter input can be customized with the <i>filterInputProps</i> option that passes any property to the filter input element.</p>
+<CodeHighlight>
+{`
+<ListBox value={city} options={cities} onChange={(e) => setCity(e.value)} filter filterInputProps={{className:'p-3', maxLength: 10}}/>
+`}
+</CodeHighlight>                
 
                     <h5>Grouping</h5>
                     <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
@@ -788,6 +795,12 @@ const groupedCities = [
                                     <td>Locale to use in filtering. The default locale is the host environment's current locale.</td>
                                 </tr>
                                 <tr>
+                                    <td>filterInputProps</td>
+                                    <td>object</td>
+                                    <td>undefined</td>
+                                    <td>Props for the filter input, any prop is passed implicity to the filter input element.</td>
+                                </tr>
+                                <tr>
                                     <td>tabIndex</td>
                                     <td>number</td>
                                     <td>null</td>
@@ -874,6 +887,85 @@ const groupedCities = [
                                 <tr>
                                     <td>p-listbox-item</td>
                                     <td>An item in the list element.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>Value to describe the component can be provided  <i>aria-labelledby</i> or <i>aria-label</i> props. The list element has a <i>listbox</i> role with the <i>aria-multiselectable</i> attribute that sets to true when multiple selection is enabled.
+                    Each list item has an <i>option</i> role with <i>aria-selected</i> and <i>aria-disabled</i> as their attributes.</p>
+                    <p>If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the input element. Alternatively <i>filterPlaceholder</i> is usually utilized by the screen readers as well.</p>
+<CodeHighlight>
+{`
+<span id="lb">Options</span>
+<ListBox aria-labelledby="lb" />
+
+<ListBox aria-label="City" />
+`}
+</CodeHighlight>
+                    <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the first selected option, if there is none first option receives the focus.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Moves focus to the previous option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>Moves focus to the next option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Toggles the selected state of the focused item.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Toggles the selected state of the focused item.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>home</i></td>
+                                    <td>Moves focus to the first option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>end</i></td>
+                                    <td>Moves focus to the last option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>shift</i> + <i>down arrow</i></td>
+                                    <td>Moves focus to the next option and toggle the selection state.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>shift</i> + <i>up arrow</i></td>
+                                    <td>Moves focus to the previous option and toggle the selection state.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>shift</i> + <i>space</i></td>
+                                    <td>Selects the items between the most recently selected option and the focused option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>control</i> + <i>shift</i> + <i>home</i></td>
+                                    <td>Selects the focused options and all the options up to the first one.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>control</i> + <i>shift</i> + <i>end</i></td>
+                                    <td>Selects the focused options and all the options down to the first one.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>control</i> + <i>a</i></td>
+                                    <td>Selects all options</td>
                                 </tr>
                             </tbody>
                         </table>

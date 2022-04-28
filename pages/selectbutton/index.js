@@ -50,7 +50,7 @@ const SelectButtonDemo = () => {
                     <SelectButton value={value2} options={paymentOptions} onChange={(e) => setValue2(e.value)} optionLabel="name" multiple />
 
                     <h5>Custom Content</h5>
-                    <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} />
+                    <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} optionLabel="value" />
                 </div>
             </div>
 
