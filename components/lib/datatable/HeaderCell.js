@@ -271,7 +271,7 @@ export const HeaderCell = React.memo((props) => {
         const align = getColumnProp('alignHeader') || getColumnProp('align');
         const className = classNames(getColumnProp('headerClassName'), getColumnProp('className'), {
             'p-sortable-column': getColumnProp('sortable'),
-            'p-resizable-column': props.resizableColumns,
+            'p-resizable-column': props.resizableColumns && getColumnProp('resizeable'),
             'p-highlight': sortMeta.sorted,
             'p-frozen-column': getColumnProp('frozen'),
             'p-selection-column': getColumnProp('selectionMode'),

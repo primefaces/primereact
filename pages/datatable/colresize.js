@@ -39,7 +39,7 @@ const DataTableColResizeDemo = () => {
                     <DataTable value={products} resizableColumns columnResizeMode="fit" showGridlines responsiveLayout="scroll">
                         <Column field="code" header="Code" style={{width:'20%'}}/>
                         <Column field="name" header="Name" style={{width:'40%'}}/>
-                        <Column field="category" header="Category" style={{width:'20%'}}/>
+                        <Column field="category" header="Category (not resizable)" style={{width:'20%'}} resizeable={false} />
                         <Column field="quantity" header="Quantity" style={{width:'20%'}}/>
                     </DataTable>
                 </div>

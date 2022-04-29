@@ -1503,6 +1503,12 @@ export const DataTableDemo = () => {
                                     <td>null</td>
                                     <td>Used to defined reorderableColumns per column when reorderableColumns of table is enabled, defaults to value of reorderableColumns.</td>
                                 </tr>
+                                <tr>
+                                    <td>resizeable</td>
+                                    <td>boolean</td>
+                                    <td>null</td>
+                                    <td>Used to defined resizeableColumns per column when resizeableColumns of table is enabled, defaults to value of resizeableColumns.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
