@@ -8,6 +8,7 @@
     "build-lib": "NODE_ENV=production INPUT_DIR=components/lib/ OUTPUT_DIR=dist/ npm run build-package",
     "build-package": "rollup -c && gulp build-resources && npm run build-api",
     "build-api": "node ./api-generator/build-api.js",
+    "security-check": "npm audit --production --audit-level high",
     "start": "next start",
     "lint": "next lint"
   },
