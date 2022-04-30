@@ -116,12 +116,13 @@ export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
     const icon = createIcon();
     console.log(!!selectedOption);
     const ariaValueLabel = !!selectedOption ? getOptionAriaLabel(selectedOption) : ariaLabel('nullLabel');
+    const ariaChecked =  !!selectedOption ? 'true' : 'false';
 
     return (
         <>
             <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
                 <div className={boxClassName} style={selectedOption && selectedOption.style} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}
-                    role="checkbox" aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
+                    role="checkbox" aria-checked={ariaChecked} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
                     {icon}
                 </div>
                 {focusedState && <span className="p-sr-only" aria-live="polite">{ariaValueLabel}</span>}
