@@ -516,7 +516,7 @@ import { AvatarGroup } from 'primereact/avatargroup';
 </CodeHighlight>
 
                     <h5>Properties of Avatar</h5>
-                    <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>

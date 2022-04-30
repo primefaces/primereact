@@ -55,6 +55,7 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
     filterMatchMode?: string;
     filterPlaceholder?: string;
     filterLocale?: string;
+    filterInputProps?: any;
     tabIndex?: number;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;

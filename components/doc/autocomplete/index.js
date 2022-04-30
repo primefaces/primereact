@@ -141,20 +141,20 @@ export class AutoCompleteDemo extends Component {
         return (
             <div className="card">
                 <h5>Basic</h5>
-                <AutoComplete value={this.state.selectedCountry1} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" onChange={(e) => this.setState({ selectedCountry1: e.value })} />
+                <AutoComplete value={this.state.selectedCountry1} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" onChange={(e) => this.setState({ selectedCountry1: e.value })} aria-label="Countries" />
 
                 <h5>Grouped</h5>
-                <AutoComplete value={this.state.selectedCity} suggestions={this.state.filteredCities} completeMethod={this.searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={this.groupedItemTemplate} onChange={(e) => this.setState({ selectedCity: e.value })}/>
+                <AutoComplete value={this.state.selectedCity} suggestions={this.state.filteredCities} completeMethod={this.searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={this.groupedItemTemplate} onChange={(e) => this.setState({ selectedCity: e.value })} aria-label="Cities" />
 
                 <h5>Dropdown, Templating and Force Selection</h5>
-                <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown forceSelection itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} />
+                <AutoComplete value={this.state.selectedCountry2} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" dropdown forceSelection itemTemplate={this.itemTemplate} onChange={(e) => this.setState({ selectedCountry2: e.value })} aria-label="Countries" />
 
                 <h5>Virtual Scroll (100000 Items)</h5>
-                <AutoComplete value={this.state.selectedItem} suggestions={this.state.filteredItems} completeMethod={this.searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => this.setState({ selectedItem: e.value })} />
+                <AutoComplete value={this.state.selectedItem} suggestions={this.state.filteredItems} completeMethod={this.searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => this.setState({ selectedItem: e.value })} aria-label="Items" />
 
                 <h5>Multiple</h5>
                 <span className="p-fluid">
-                    <AutoComplete value={this.state.selectedCountries} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" multiple onChange={(e) => this.setState({ selectedCountries: e.value })} />
+                    <AutoComplete value={this.state.selectedCountries} suggestions={this.state.filteredCountries} completeMethod={this.searchCountry} field="name" multiple onChange={(e) => this.setState({ selectedCountries: e.value })} aria-label="Countries" />
                 </span>
             </div>
         )
@@ -284,20 +284,20 @@ export const AutoCompleteDemo = () => {
     return (
         <div className="card">
             <h5>Basic</h5>
-            <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} />
+            <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} aria-label="Countries" />
 
             <h5>Grouped</h5>
-            <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)}/>
+            <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)} aria-label="Cities"/>
 
             <h5>Dropdown, Templating and Force Selection</h5>
-            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
+            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} aria-label="Countries" />
 
             <h5>Virtual Scroll (100000 Items)</h5>
-            <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} />
+            <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} aria-label="Items" />
 
             <h5>Multiple</h5>
             <span className="p-fluid">
-                <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} />
+                <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} aria-label="Countries" />
             </span>
         </div>
     )
@@ -426,20 +426,20 @@ export const AutoCompleteDemo = () => {
     return (
         <div className="card">
             <h5>Basic</h5>
-            <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} />
+            <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} aria-label="Countries" />
 
             <h5>Grouped</h5>
-            <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)}/>
+            <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)} aria-label="Cities"/>
 
             <h5>Dropdown, Templating and Force Selection</h5>
-            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
+            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} aria-label="Countries" />
 
             <h5>Virtual Scroll (100000 Items)</h5>
-            <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} />
+            <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} aria-label="Items" />
 
             <h5>Multiple</h5>
             <span className="p-fluid">
-                <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} />
+                <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} aria-label="Countries" />
             </span>
         </div>
     )
@@ -571,20 +571,20 @@ const AutoCompleteDemo = () => {
     return (
         <div className="card">
             <h5>Basic</h5>
-            <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} />
+            <AutoComplete value={selectedCountry1} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry1(e.value)} aria-label="Countries" />
 
             <h5>Grouped</h5>
-            <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)}/>
+            <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)} aria-label="Cities"/>
 
             <h5>Dropdown, Templating and Force Selection</h5>
-            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} />
+            <AutoComplete value={selectedCountry2} suggestions={filteredCountries} completeMethod={searchCountry} field="name" dropdown forceSelection itemTemplate={itemTemplate} onChange={(e) => setSelectedCountry2(e.value)} aria-label="Countries" />
 
             <h5>Virtual Scroll (100000 Items)</h5>
-            <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} />
+            <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} aria-label="Items" />
 
             <h5>Multiple</h5>
             <span className="p-fluid">
-                <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} />
+                <AutoComplete value={selectedCountries} suggestions={filteredCountries} completeMethod={searchCountry} field="name" multiple onChange={(e) => setSelectedCountries(e.value)} aria-label="Countries" />
             </span>
         </div>
     )
@@ -960,12 +960,6 @@ itemTemplate(item) {
                                     <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                                 </tr>
                                 <tr>
-                                    <td>ariaLabelledBy</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
-                                </tr>
-                                <tr>
                                     <td>itemTemplate</td>
                                     <td>any</td>
                                     <td>null</td>
@@ -1158,6 +1152,66 @@ itemTemplate(item) {
                         </table>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element has <i>combobox</i> role
+                    in addition to <i>aria-autocomplete</i>, <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
+                    to instruct screen reader which option to read during keyboard navigation within the popup list.</p>
+                    <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has <i>option</i> role and an id to match the <i>aria-activedescendant</i> of the input element.</p>
+<CodeHighlight>
+{`
+<label htmlFor="ac1">Username</label>
+<AutoComplete inputId="ac1" />
+
+<span id="ac2">Email</span>
+<AutoComplete aria-labelledby="ac2" />
+
+<AutoComplete aria-label="City" />
+`}
+</CodeHighlight>
+                    <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the input element when popup is not visible. 
+                                        If the popup is open and an item is highlighted then popup gets closed, item gets selected and focus moves to the next focusable element.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Highlights the previous item if popup is visible.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>Highlights the next item if popup is visible.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Selects the highlighted item and closes the popup if popup is visible.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>home</i></td>
+                                    <td>Highlights the first item if popup is visible.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>end</i></td>
+                                    <td>Highlights the last item if popup is visible.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>Hides the popup.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>

@@ -474,6 +474,43 @@ import { Password } from 'primereact/password';
                         </table>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. Screen reader
+                    is notified about the changes to the strength of the password using a section that has <i>aria-live</i> while typing.</p>
+<CodeHighlight>
+{`
+<label htmlFor="pwd1">Password</label>
+<Password id="pwd1" />
+
+<span id="pwd1">Password</span>
+<Password aria-labelledby="pwd2" />
+
+<Password aria-label="Password"/>
+`}
+</CodeHighlight>
+                    <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the input.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>Hides the strength meter if open.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>

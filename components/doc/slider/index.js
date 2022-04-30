@@ -253,7 +253,7 @@ import { Slider } from 'primereact/slider';
 </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -395,7 +395,7 @@ import { Slider } from 'primereact/slider';
 
                     <h5>Accessibility</h5>
                     <h6>Screen Reader</h6>
-                    <p>Slider element component uses <i>slider</i> role on the handle in addition to the <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes. Value to describe the component can be defined using
+                    <p>Slider element component uses <i>slider</i> role on the handle in addition to the <i>aria-orientation</i>, <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes. Value to describe the component can be defined using
                     <i>aria-labelledby</i> and <i>aria-label</i> props.</p>
 <CodeHighlight>
 {`
@@ -406,8 +406,56 @@ import { Slider } from 'primereact/slider';
 `}
 </CodeHighlight>
                     <h6>Keyboard Support</h6>
-                    <p>Slider can receive focus using the <i>tab</i> key, while being focused arrow keys can be used to control a slider. Horizontal sliders are used with <i>Left Arrow</i> and <i>Right Arrow</i> keys whereas
-                    vertical ones require <i>Up Arrow</i> and <i>Down Arrow</i> keys.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the slider.</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span className="inline-flex flex-column">
+                                            <i className="mb-1">left arrow</i>
+                                            <i>up arrow</i>
+                                        </span>
+                                    </td>
+                                    <td>Decrements the value.</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span className="inline-flex flex-column">
+                                            <i className="mb-1">right arrow</i>
+                                            <i>down arrow</i>
+                                        </span>
+                                    </td>
+                                    <td>Increments the value.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>home</i></td>
+                                    <td>Set the minimum value.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>end</i></td>
+                                    <td>Set the maximum value.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>page up</i></td>
+                                    <td>Increments the value by 10 steps.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>page down</i></td>
+                                    <td>Decrements the value by 10 steps.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

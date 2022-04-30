@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.0.1](https://github.com/primefaces/primereact/tree/8.0.1) (2022-04-26)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.0.0...8.0.1)
+
+**Fixed bugs:**
+
+- Datatable: reorderableColumns isn't working [\#2784](https://github.com/primefaces/primereact/issues/2784)
+
 ## [8.0.0](https://github.com/primefaces/primereact/tree/8.0.0)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.0.0-rc.2...8.0.0)
