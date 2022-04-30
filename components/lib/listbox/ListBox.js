@@ -211,7 +211,7 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createHeader = () => {
-        return props.filter ? <ListBoxHeader filter={filteredValue} onFilter={onFilter} disabled={props.disabled} filterPlaceholder={props.filterPlaceholder} /> : null;
+        return props.filter ? <ListBoxHeader filter={filteredValue} onFilter={onFilter} disabled={props.disabled} filterPlaceholder={props.filterPlaceholder} filterInputProps={props.filterInputProps} /> : null;
     }
 
     const createGroupChildren = (optionGroup) => {
@@ -240,7 +240,7 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
 
             return (
                 <React.Fragment key={key}>
-                    <li className="p-listbox-item-group">
+                    <li className="p-listbox-item-group" role="group">
                         {groupContent}
                     </li>
                     {groupChildrenContent}
@@ -275,7 +275,7 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
                         const className = classNames('p-listbox-list', option.className);
 
                         return (
-                            <ul ref={option.contentRef} className={className} role="listbox" aria-multiselectable={props.multiple}>
+                            <ul ref={option.contentRef} className={className} role="listbox" aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
                                 {option.children}
                             </ul>
                         )
@@ -289,7 +289,7 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
             const items = createItems();
 
             return (
-                <ul className="p-listbox-list" role="listbox" aria-multiselectable={props.multiple}>
+                <ul className="p-listbox-list" role="listbox" aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
                     {items}
                 </ul>
             )
@@ -348,10 +348,12 @@ ListBox.defaultProps = {
     filterMatchMode: 'contains',
     filterPlaceholder: null,
     filterLocale: undefined,
+    filterInputProps: null,
     tabIndex: 0,
     tooltip: null,
     tooltipOptions: null,
-    ariaLabelledBy: null,
+    'aria-label': null,
+    'aria-labelledby': null,
     onChange: null,
     onFilterValueChange: null
 }

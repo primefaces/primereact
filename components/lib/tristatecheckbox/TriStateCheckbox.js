@@ -65,12 +65,13 @@ export const TriStateCheckbox = React.memo(React.forwardRef((props, ref) => {
         'pi pi-times': props.value === false
     });
     const ariaValueLabel = props.value ? ariaLabel('trueLabel') : (props.value === false ? ariaLabel('falseLabel') : ariaLabel('nullLabel'));
+    const ariaChecked = (props.value === null || props.value === undefined) ? 'mixed' : props.value.toString();
 
     return (
         <>
             <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
                 <div className={boxClassName} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}
-                    role="checkbox" aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
+                    role="checkbox" aria-checked={ariaChecked} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
                     <span className={iconClassName}></span>
                 </div>
                 {focusedState && <span className="p-sr-only" aria-live="polite">{ariaValueLabel}</span>}

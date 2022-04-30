@@ -1155,9 +1155,9 @@ itemTemplate(item) {
                     <h5>Accessibility</h5>
                     <h6>Screen Reader</h6>
                     <p>Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element has <i>combobox</i> role
-                    in addition to <i>aria-autocomplete</i>, <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-owns</i> and <i>aria-activedescendant</i> attribute is used
+                    in addition to <i>aria-autocomplete</i>, <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
                     to instruct screen reader which option to read during keyboard navigation within the popup list.</p>
-                    <p>The popup list has an id that refers to the <i>aria-owns</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has <i>option</i> role and an id to match the <i>aria-activedescendant</i> of the input element.</p>
+                    <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has <i>option</i> role and an id to match the <i>aria-activedescendant</i> of the input element.</p>
 <CodeHighlight>
 {`
 <label htmlFor="ac1">Username</label>
