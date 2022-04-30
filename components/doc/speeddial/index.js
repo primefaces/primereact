@@ -597,7 +597,7 @@ export const SpeedDialDemo = () => {
                     <p>Specifies the opening direction of actions. For the <strong>linear</strong> and <strong>semi-circle</strong> types; <i>up</i>, <i>down</i>, <i>left</i> and <i>right</i>. For the <strong>quarter-circle</strong> type; <i>up-left</i>, <i>up-right</i>, <i>down-left</i> and <i>down-right</i>.</p>
 
                     <h5>Properties</h5>
-                    <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
