@@ -917,7 +917,7 @@ const groupedCities = [
                             <tbody>
                                 <tr>
                                     <td><i>tab</i></td>
-                                    <td>Moves focus to the first selected option, if there is none first option receives the focus.</td>
+                                    <td>Moves focus to the first selected option, if there is none then first option receives the focus.</td>
                                 </tr>
                                 <tr>
                                     <td><i>up arrow</i></td>
@@ -945,11 +945,11 @@ const groupedCities = [
                                 </tr>
                                 <tr>
                                     <td><i>shift</i> + <i>down arrow</i></td>
-                                    <td>Moves focus to the next option and toggle the selection state.</td>
+                                    <td>Moves focus to the next option and toggles the selection state.</td>
                                 </tr>
                                 <tr>
                                     <td><i>shift</i> + <i>up arrow</i></td>
-                                    <td>Moves focus to the previous option and toggle the selection state.</td>
+                                    <td>Moves focus to the previous option and toggles the selection state.</td>
                                 </tr>
                                 <tr>
                                     <td><i>shift</i> + <i>space</i></td>
@@ -965,7 +965,7 @@ const groupedCities = [
                                 </tr>
                                 <tr>
                                     <td><i>control</i> + <i>a</i></td>
-                                    <td>Selects all options</td>
+                                    <td>Selects all options.</td>
                                 </tr>
                             </tbody>
                         </table>

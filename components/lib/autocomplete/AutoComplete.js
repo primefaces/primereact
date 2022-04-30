@@ -461,7 +461,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
 
         return (
             <InputText ref={inputRef} id={props.inputId} type={props.type} name={props.name} defaultValue={value} 
-                role="combobox" aria-autocomplete="list" aria-owns={ariaControls} aria-haspopup="listbox" aria-expanded={overlayVisibleState} 
+                role="combobox" aria-autocomplete="list" aria-controls={ariaControls} aria-haspopup="listbox" aria-expanded={overlayVisibleState} 
                 aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}
                 className={className} style={props.inputStyle} autoComplete="off"
                 readOnly={props.readOnly} disabled={props.disabled} placeholder={props.placeholder} size={props.size}
@@ -495,7 +495,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
         return (
             <li className="p-autocomplete-input-token">
                 <input ref={inputRef} type={props.type} disabled={props.disabled} placeholder={props.placeholder}
-                    role="combobox" aria-autocomplete="list" aria-owns={ariaControls} aria-haspopup="listbox" aria-expanded={overlayVisibleState} 
+                    role="combobox" aria-autocomplete="list" aria-controls={ariaControls} aria-haspopup="listbox" aria-expanded={overlayVisibleState} 
                     aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}
                     autoComplete="off" tabIndex={props.tabIndex} onChange={onInputChange} id={props.inputId} name={props.name}
                     style={props.inputStyle} className={props.inputClassName} maxLength={props.maxLength}

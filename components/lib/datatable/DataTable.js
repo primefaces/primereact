@@ -885,7 +885,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         let value = [...data];
 
         if (columnSortable.current && columnSortFunction.current) {
-            value = columnSortFunction({ field, order });
+            value = columnSortFunction.current({ field, order });
         }
         else {
             value.sort((data1, data2) => {
