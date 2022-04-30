@@ -426,7 +426,7 @@ import { RadioButton } from 'primereact/radiobutton';
                                             <i>down arrow</i>
                                         </span>
                                     </td>
-                                    <td>Moves focus to the previous radio button, if there is none then first radio button receives the focus.</td>
+                                    <td>Moves focus to the next radio button, if there is none then first radio button receives the focus.</td>
                                 </tr>
                                 <tr>
                                     <td><i>space</i></td>
