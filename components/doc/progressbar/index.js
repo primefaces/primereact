@@ -313,6 +313,7 @@ import { ProgressBar } from 'primereact/progressbar';
 </CodeHighlight>
 
                     <h5>Properties</h5>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -416,11 +417,26 @@ import { ProgressBar } from 'primereact/progressbar';
                             </tbody>
                         </table>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </div>
-                </TabPanel>
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>ProgressBar components uses <i>progressbar</i> role along with <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes. Value to describe the component can be defined using
+                    <i>aria-labelledby</i> and <i>aria-label</i> props.</p>
+<CodeHighlight>
+{`
+<span id="label_status">Status</span>
+<ProgressBar aria-labelledby="label_status" />
 
+<ProgressBar aria-label="Status" />
+`}
+</CodeHighlight>
+
+                    <h6>Keyboard Support</h6>
+                    <p>Not applicable.</p>
+
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </div>
+                </TabPanel>
                 {
                     useLiveEditorTabs({ name: 'ProgressBarDemo', sources: sources })
                 }
