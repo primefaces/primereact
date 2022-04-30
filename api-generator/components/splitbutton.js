@@ -66,6 +66,18 @@ const SplitButtonProps = [
         description: 'ClassName class of menu dropdown button.'
     },
     {
+        name: 'buttonProps',
+        type: 'object',
+        default: 'undefined',
+        description: "Props for the main button, any prop is passed implicity to the button element."
+    },
+    {
+        name: 'menuButtonProps',
+        type: 'object',
+        default: 'undefined',
+        description: "Props for the dropdown button, any prop is passed implicity to the dropdown button element."
+    },
+    {
         name: 'tabIndex',
         type: 'number',
         default: 'null',

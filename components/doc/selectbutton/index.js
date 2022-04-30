@@ -331,7 +331,7 @@ const itemTemplate = (option) => {
                     </div>
 
                     <h5>Properties</h5>
-                    <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>

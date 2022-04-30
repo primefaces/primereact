@@ -247,7 +247,7 @@ import { RadioButton } from 'primereact/radiobutton';
 </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -426,7 +426,7 @@ import { RadioButton } from 'primereact/radiobutton';
                                             <i>down arrow</i>
                                         </span>
                                     </td>
-                                    <td>Moves focus to the previous radio button, if there is none then first radio button receives the focus.</td>
+                                    <td>Moves focus to the next radio button, if there is none then first radio button receives the focus.</td>
                                 </tr>
                                 <tr>
                                     <td><i>space</i></td>

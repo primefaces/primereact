@@ -438,7 +438,7 @@ const onCityChange = (e) => {
 </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -520,7 +520,7 @@ const onCityChange = (e) => {
                                     <td>readOnly</td>
                                     <td>boolean</td>
                                     <td>false</td>
-                                    <td>When present, it specifies that the element cannot be typed.</td>
+                                    <td>When present, it specifies that the value cannot be changed.</td>
                                 </tr>
                                 <tr>
                                     <td>tabIndex</td>

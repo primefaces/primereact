@@ -393,7 +393,7 @@ export const Mention = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <div ref={elementRef} id={props.id} className={className} style={props.style}>
-            <InputTextarea ref={inputRef} id={props.inputId} {...inputProps} className={inputClassName} style={props.inputStyle}
+            <InputTextarea ref={inputRef} id={props.inputId} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']} className={inputClassName} style={props.inputStyle} {...inputProps} 
                 onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} onInput={onInput} onKeyUp={onKeyUp} onChange={onChange} />
             {panel}
         </div>
@@ -421,6 +421,8 @@ Mention.defaultProps = {
     headerTemplate: null,
     footerTemplate: null,
     itemTemplate: null,
+    'aria-label': null,
+    'aria-labelledby': null,
     transitionOptions: null,
     onChange: null,
     onInput: null,
