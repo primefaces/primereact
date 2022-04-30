@@ -110,7 +110,7 @@ const ListBoxDemo = () => {
                         optionGroupTemplate={groupedItemTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
 
                     <h5>Advanced with Templating, Filtering and Multiple Selection</h5>
-                    <ListBox value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} multiple filter optionLabel="name"
+                    <ListBox value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} multiple filter optionLabel="name" filterPlaceholder="Search countries"
                         itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
 
                     <h5>Virtual Scroll (100000 Items)</h5>
