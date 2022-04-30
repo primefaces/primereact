@@ -65,7 +65,7 @@ export const TriStateCheckbox = React.memo(React.forwardRef((props, ref) => {
         'pi pi-times': props.value === false
     });
     const ariaValueLabel = props.value ? ariaLabel('trueLabel') : (props.value === false ? ariaLabel('falseLabel') : ariaLabel('nullLabel'));
-    const ariaChecked = (props.value === null || props.value === undefined) ? 'mixed' : props.value.toString();
+    const ariaChecked = props.value ? 'true' : 'false';
 
     return (
         <>
