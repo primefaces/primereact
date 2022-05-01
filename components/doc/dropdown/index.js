@@ -1451,7 +1451,7 @@ const groupedCities = [
                     in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. If the editable option is enabled <i>aria-autocomplete</i> is also added. 
                     The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
                     to instruct screen reader which option to read during keyboard navigation within the popup list.</p>
-                    <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has <i>option</i> role and an id to match the <i>aria-activedescendant</i> of the input element.</p>
+                    <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has <i>option</i> role, an id to match the <i>aria-activedescendant</i> of the input element along with <i>aria-selected</i> and <i>aria-disabled</i> attributes.</p>
 <CodeHighlight>
 {`
 <span id="dd1">Options</span>
