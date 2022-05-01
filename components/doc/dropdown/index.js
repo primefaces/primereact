@@ -1485,12 +1485,12 @@ const groupedCities = [
                                     <td>Opens the popup.</td>
                                 </tr>
                                 <tr>
-                                    <td><i>up arrow</i></td>
-                                    <td>Opens the popup and moves visual focus to the last option.</td>
-                                </tr>
-                                <tr>
                                     <td><i>down arrow</i></td>
                                     <td>Opens the popup and moves visual focus to the first option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Opens the popup and moves visual focus to the last option.</td>
                                 </tr>
                                 <tr>
                                     <td><i>home</i></td>
@@ -1531,12 +1531,12 @@ const groupedCities = [
                                     <td>Closes the popup.</td>
                                 </tr>
                                 <tr>
-                                    <td><i>up arrow</i></td>
-                                    <td>Moves focus to the previous option, if there is none then visual focus does not change.</td>
-                                </tr>
-                                <tr>
                                     <td><i>down arrow</i></td>
                                     <td>Moves focus to the next option, if there is none then visual focus does not change.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Moves focus to the previous option, if there is none then visual focus does not change.</td>
                                 </tr>
                                 <tr>
                                     <td><i>right arrow</i></td>
@@ -1557,6 +1557,44 @@ const groupedCities = [
                                 <tr>
                                     <td><i>any printable character</i></td>
                                     <td>Moves focus to the option whose label starts with the characters being typed if dropdown is not editable.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h6>Filter Input Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Closes the popup and moves focus to the next focusable element.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>shift</i> + <i>tab</i></td>
+                                    <td>Closes the popup and moves focus dropdown element.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>Closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>Moves visual focus to the next option, if there is none then visual focus does not change.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Moves visual focus to the previous option, if there is none then visual focus does not change.</td>
                                 </tr>
                             </tbody>
                         </table>
