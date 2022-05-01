@@ -1445,6 +1445,121 @@ const groupedCities = [
                         </table>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The dropdown component has a <i>combobox</i> role
+                    in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. If the editable option is enabled <i>aria-autocomplete</i> is also added. 
+                    The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
+                    to instruct screen reader which option to read during keyboard navigation within the popup list.</p>
+                    <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has <i>option</i> role and an id to match the <i>aria-activedescendant</i> of the input element.</p>
+<CodeHighlight>
+{`
+<span id="dd1">Options</span>
+<Dropdown aria-labelledby="dd1" />
+
+<Dropdown aria-label="Options" />
+`}
+</CodeHighlight>
+                    <h6>Closed Dropdown Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the dropdown element.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Opens the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Opens the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Opens the popup and moves visual focus to the last option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>Opens the popup and moves visual focus to the first option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>home</i></td>
+                                    <td>Opens the popup and moves visual focus to the first option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>end</i></td>
+                                    <td>Opens the popup and moves visual focus to the last option.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h6>Listbox Popup Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Selects the focused option, closes the popup and moves focus to the next focusable element.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Selects the focused option and closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Selects the focused option and closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>Closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Moves focus to the previous option, if there is none then visual focus does not change.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>Moves focus to the next option, if there is none then visual focus does not change.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>right arrow</i></td>
+                                    <td>If the dropdown is editable, removes the visual focus from the current option and moves input cursor to one character left.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>left arrow</i></td>
+                                    <td>If the dropdown is editable, removes the visual focus from the current option and moves input cursor to one character right.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>home</i></td>
+                                    <td>If the dropdown is editable, moves input cursor at the end, if not then moves focus to the first option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>end</i></td>
+                                    <td>If the dropdown is editable, moves input cursor at the beginning, if not then moves focus to the last option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>any printable character</i></td>
+                                    <td>Moves focus to the option whose label starts with the characters being typed if dropdown is not editable.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
