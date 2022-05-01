@@ -1504,7 +1504,7 @@ const groupedCities = [
                         </table>
                     </div>
 
-                    <h6>Listbox Popup Keyboard Support</h6>
+                    <h6>Popup Listbox Keyboard Support</h6>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -1574,7 +1574,8 @@ const groupedCities = [
                             <tbody>
                                 <tr>
                                     <td><i>tab</i></td>
-                                    <td>Closes the popup and moves focus to the next focusable element.</td>
+                                    <td>Moves focus to the next focusable element within the popup, 
+                                        if there is none closes the popup and moves focus to the next focusable element in the tabbing order.</td>
                                 </tr>
                                 <tr>
                                     <td><i>shift</i> + <i>tab</i></td>

@@ -1418,10 +1418,230 @@ const groupedCities = [
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The multiselect component has a <i>combobox</i> role
+                    in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
+                    to instruct screen reader which option to read during keyboard navigation within the popup list.</p>
+                    <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role with <i>aria-multiselectable</i> enabled. Each list item has an <i>option</i> role, an id to match the <i>aria-activedescendant</i> along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-disabled</i> attributes.</p>
+
+                    <p>Checkbox component uses a hidden native checkbox element internally that is only visible to screen readers. Value to read is defined with the <i>toggleAll</i> key of the <i>aria</i>  property from the <Link href="/theming">locale</Link> API.</p>
+
+                    <p>If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the input element. Alternatively <i>filterPlaceholder</i> is usually utilized by the screen readers as well.</p>
+
+                    <p>Close button uses <i>close</i> key of the <i>aria</i>  property from the <Link href="/theming">locale</Link> API as the <i>aria-label</i>.</p>
+<CodeHighlight>
+{`
+<span id="dd1">Options</span>
+<MultiSelect aria-labelledby="dd1" />
+
+<MultiSelect aria-label="Options" />
+`}
+</CodeHighlight>
+
+                    <h6>Closed MultiSelect Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the multiselect element.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Opens the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Opens the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>Opens the popup, selected option receives focus and if there is none then first option gets focused.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Opens the popup, selected option receives focus and if there is none then last option gets focused.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>home</i></td>
+                                    <td>Opens the popup and moves visual focus to the first option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>end</i></td>
+                                    <td>Opens the popup and moves visual focus to the last option.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h6>Popup Listbox Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Selects the focused option, closes the popup and moves focus to the next focusable element.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Selects the focused option and closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Selects the focused option and closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>Closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>Moves focus to the next option, if there is none then visual focus does not change.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Moves focus to the previous option, if there is none then visual focus does not change.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>right arrow</i></td>
+                                    <td>If the dropdown is editable, removes the visual focus from the current option and moves input cursor to one character left.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>left arrow</i></td>
+                                    <td>If the dropdown is editable, removes the visual focus from the current option and moves input cursor to one character right.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>home</i></td>
+                                    <td>If the dropdown is editable, moves input cursor at the end, if not then moves focus to the first option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>end</i></td>
+                                    <td>If the dropdown is editable, moves input cursor at the beginning, if not then moves focus to the last option.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>any printable character</i></td>
+                                    <td>Moves focus to the option whose label starts with the characters being typed if dropdown is not editable.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h6>Toggle All Checkbox Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the next focusable element within the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>shift</i> + <i>tab</i></td>
+                                    <td>Closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Toggles the checked state.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>Closes the popup.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h6>Filter Input Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the close button.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>shift</i> + <i>tab</i></td>
+                                    <td>Moves focus to the header checkbox, 
+                                        if there is none closes the popup and moves focus to the multiselect element.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>Closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>Moves visual focus to the next option, if there is none then visual focus does not change.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Moves visual focus to the previous option, if there is none then visual focus does not change.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h6>Close Button Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the next focusable element, if there is none closes the popup and moves focus to the next focusable element</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>Closes the popup.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
                 </TabPanel>
                 {
                     useLiveEditorTabs({ name: 'MultiSelectDemo', sources: sources, extFiles: extFiles })
