@@ -24,6 +24,8 @@ export const ToggleButton = React.memo(React.forwardRef((props, ref) => {
                 }
             })
         }
+
+        props.onClick && props.onClick(e);
     }
 
     const onKeyDown = (event) => {
@@ -31,6 +33,8 @@ export const ToggleButton = React.memo(React.forwardRef((props, ref) => {
             toggle(event);
             event.preventDefault();
         }
+
+        props.onKeyDown && props.onKeyDown(event);
     }
 
     const createIcon = () => {
@@ -47,7 +51,6 @@ export const ToggleButton = React.memo(React.forwardRef((props, ref) => {
     }
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-    const tabIndex = !props.disabled && props.tabIndex;
     const otherProps = ObjectUtils.findDiffKeys(props, ToggleButton.defaultProps);
     const className = classNames('p-button p-togglebutton p-component', {
         'p-button-icon-only': hasIcon && !hasLabel,
@@ -58,13 +61,12 @@ export const ToggleButton = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}
-                onClick={toggle} onFocus={props.onFocus} onBlur={props.onBlur} onKeyDown={onKeyDown}
-                tabIndex={tabIndex} role="button" aria-pressed={props.checked}>
+            <button type='button' ref={elementRef} className={className} {...otherProps}
+                onClick={toggle} onKeyDown={onKeyDown} aria-pressed={props.checked}>
                 {iconElement}
                 <span className="p-button-label">{label}</span>
                 <Ripple />
-            </div>
+            </button>
             {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
         </>
     )
@@ -73,19 +75,16 @@ export const ToggleButton = React.memo(React.forwardRef((props, ref) => {
 ToggleButton.displayName = 'ToggleButton';
 ToggleButton.defaultProps = {
     __TYPE: 'ToggleButton',
-    id: null,
     onIcon: null,
     offIcon: null,
     onLabel: 'Yes',
     offLabel: 'No',
     iconPos: 'left',
-    style: null,
     className: null,
     checked: false,
-    tabIndex: 0,
     tooltip: null,
     tooltipOptions: null,
     onChange: null,
-    onFocus: null,
-    onBlur: null
+    onClick: null,
+    onKeyDown: null
 }

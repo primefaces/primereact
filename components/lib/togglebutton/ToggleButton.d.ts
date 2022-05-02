@@ -18,22 +18,16 @@ interface ToggleButtonChangeParams {
     target: ToggleButtonChangeTargetOptions;
 }
 
-export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
-    id?: string;
+export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'ref'|'onChange'> {
     onIcon?: IconType<ToggleButtonProps>;
     offIcon?: IconType<ToggleButtonProps>;
     onLabel?: string;
     offLabel?: string;
     iconPos?: ToggleButtonIconPositionType;
-    style?: object;
-    className?: string;
     checked?: boolean;
-    tabIndex?: number;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     onChange?(e: ToggleButtonChangeParams): void;
-    onFocus?(event: React.FocusEvent<HTMLElement>): void;
-    onBlur?(event: React.FocusEvent<HTMLElement>): void;
     children?: React.ReactNode;
 }
 

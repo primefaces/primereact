@@ -155,7 +155,7 @@ import { ToggleButton } from 'primereact/togglebutton';
 </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
+                    <p>ToggleButton passes any valid attribute to the underlying <a href="https://devdocs.io/html/element/button" rel="noopener noreferrer" target="_blank">React HTMLButtonElement</a> element. Extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -167,12 +167,6 @@ import { ToggleButton } from 'primereact/togglebutton';
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Unique identifier of the element.</td>
-                                </tr>
                                 <tr>
                                     <td>onIcon</td>
                                     <td>string</td>
@@ -196,18 +190,6 @@ import { ToggleButton } from 'primereact/togglebutton';
                                     <td>string</td>
                                     <td>no</td>
                                     <td>Label for the off state.</td>
-                                </tr>
-                                <tr>
-                                    <td>style</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Inline style of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>className</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Style class of the element.</td>
                                 </tr>
                                 <tr>
                                     <td>checked</td>
@@ -244,6 +226,7 @@ import { ToggleButton } from 'primereact/togglebutton';
                     </div>
 
                     <h5>Events</h5>
+                    <p>ToggleButton passes any valid attribute to the underlying <a href="https://devdocs.io/html/element/button" rel="noopener noreferrer" target="_blank">React HTMLButtonElement</a> element. Extended events are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -259,16 +242,6 @@ import { ToggleButton } from 'primereact/togglebutton';
                                     <td>event.originalEvent: Browser event <br />
                                         event.value: Value as the checked state.</td>
                                     <td>Callback to invoke on value change.</td>
-                                </tr>
-                                <tr>
-                                    <td>onFocus</td>
-                                    <td>event: Browser event</td>
-                                    <td>Callback to invoke when autocomplete gets focus.</td>
-                                </tr>
-                                <tr>
-                                    <td>onBlur</td>
-                                    <td>event: Browser event</td>
-                                    <td>Callback to invoke when autocomplete loses focus.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -328,8 +301,12 @@ import { ToggleButton } from 'primereact/togglebutton';
                                     <td>Moves focus to the button.</td>
                                 </tr>
                                 <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Activates the button.</td>
+                                </tr>
+                                <tr>
                                     <td><i>space</i></td>
-                                    <td>Toggles the checked state.</td>
+                                    <td>Activates the button.</td>
                                 </tr>
                             </tbody>
                         </table>
