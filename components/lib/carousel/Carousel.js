@@ -41,10 +41,10 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
     const prevPage = usePrevious(props.page);
     const isVertical = props.orientation === 'vertical';
     const circular = props.circular || !!props.autoplayInterval;
-    const isCircular = circular && props.value.length >= numVisibleState;
-    const isAutoplay = props.autoplayInterval && allowAutoplay.current;
+    const isCircular = circular && props.value && props.value.length >= numVisibleState;
     const currentPage = props.onPageChange ? props.page : pageState;
-    const totalIndicators = props.value ? Math.ceil((props.value.length - numVisibleState) / numScrollState) + 1 : 0;
+    const totalIndicators = props.value ? Math.max(Math.ceil((props.value.length - numVisibleState) / numScrollState) + 1, 0) : 0;
+    const isAutoplay = totalIndicators && props.autoplayInterval && allowAutoplay.current;
 
     const [bindWindowResizeListener,] = useResizeListener({
         listener: () => {
