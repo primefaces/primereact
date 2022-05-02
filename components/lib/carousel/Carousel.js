@@ -1,7 +1,8 @@
 import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { ariaLabel } from '../api/Api';
+import { Button } from '../button/Button';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
 const CarouselItem = React.memo((props) => {
@@ -486,10 +487,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
         });
 
         return (
-            <button type="button" className={className} onClick={navBackward} disabled={isDisabled}>
-                <span className={iconClassName}></span>
-                <Ripple />
-            </button>
+            <Button className={className} icon={iconClassName} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />
         )
     }
 
@@ -504,10 +502,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
         });
 
         return (
-            <button type="button" className={className} onClick={navForward} disabled={isDisabled}>
-                <span className={iconClassName}></span>
-                <Ripple />
-            </button>
+            <Button className={className} icon={iconClassName} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')} />
         )
     }
 
@@ -520,9 +515,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
 
         return (
             <li key={key} className={className}>
-                <button type="button" className="p-link" onClick={(e) => onDotClick(e, index)}>
-                    <Ripple />
-                </button>
+                <Button className="p-link" onClick={(e) => onDotClick(e, index)} aria-label={`${ariaLabel('pageLabel')} ${index + 1}`} />
             </li>
         )
     }
