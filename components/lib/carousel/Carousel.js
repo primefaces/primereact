@@ -487,7 +487,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
         });
 
         return (
-            <Button className={className} icon={iconClassName} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />
+            <Button type='button' className={className} icon={iconClassName} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />
         )
     }
 
@@ -502,7 +502,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
         });
 
         return (
-            <Button className={className} icon={iconClassName} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')} />
+            <Button type='button' className={className} icon={iconClassName} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')} />
         )
     }
 
@@ -515,7 +515,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
 
         return (
             <li key={key} className={className}>
-                <Button className="p-link" onClick={(e) => onDotClick(e, index)} aria-label={`${ariaLabel('pageLabel')} ${index + 1}`} />
+                <Button type='button' className="p-link" onClick={(e) => onDotClick(e, index)} aria-label={`${ariaLabel('pageLabel')} ${index + 1}`} />
             </li>
         )
     }
