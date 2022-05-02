@@ -7,7 +7,7 @@ export const PrevPageLink = React.memo((props) => {
     const className = classNames('p-paginator-prev p-paginator-element p-link', { 'p-disabled': props.disabled });
     const iconClassName = 'p-paginator-icon pi pi-angle-left';
     const element = (
-        <Button className={className} icon={iconClassName} onClick={props.onClick} disabled={props.disabled} aria-label={ariaLabel('previousPageLabel')}/>
+        <Button type='button' className={className} icon={iconClassName} onClick={props.onClick} disabled={props.disabled} aria-label={ariaLabel('previousPageLabel')}/>
     );
 
     if (props.template) {

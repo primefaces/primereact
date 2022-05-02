@@ -30,7 +30,7 @@ export const PageLinks = React.memo((props) => {
             });
 
             let element = (
-                <Button className={className} onClick={(e) => onPageLinkClick(e, pageLink)} aria-label={`${ariaLabel('pageLabel')} ${pageLink + 1}`}>
+                <Button type='button' className={className} onClick={(e) => onPageLinkClick(e, pageLink)} aria-label={`${ariaLabel('pageLabel')} ${pageLink + 1}`}>
                     {pageLink}
                 </Button>
             );
