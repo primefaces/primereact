@@ -331,8 +331,10 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onBlur = (event) => {
-        setFocusedState(false);
-        props.onBlur && props.onBlur(event);
+        if (!overlayVisibleState) {
+            setFocusedState(false);
+            props.onBlur && props.onBlur(event);
+        }
     }
 
     const isAllSelected = () => {
