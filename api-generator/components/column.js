@@ -285,7 +285,7 @@ const ColumnProps = [
         name: 'resizeable',
         type: 'boolean',
         default: 'true',
-        description: 'sed to defined resizeableColumns per column when resizeableColumns of table is enabled, defaults to value of resizeableColumns.'
+        description: 'Used to defined resizeableColumns per column when resizeableColumns of table is enabled, defaults to value of resizeableColumns.'
     }
 ];
 
