@@ -572,8 +572,7 @@ import { Knob } from 'primereact/knob';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
-                    </p>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
