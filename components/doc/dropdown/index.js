@@ -1447,13 +1447,13 @@ const groupedCities = [
 
                     <h5>Accessibility</h5>
                     <h6>Screen Reader</h6>
-                    <p>Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The dropdown component has a <i>combobox</i> role
+                    <p>Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The dropdown element has a <i>combobox</i> role
                     in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. If the editable option is enabled <i>aria-autocomplete</i> is also added. 
                     The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
                     to instruct screen reader which option to read during keyboard navigation within the popup list.</p>
-                    <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has an <i>option</i> role, an id to match the <i>aria-activedescendant</i> of the input element along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-disabled</i> attributes.</p>
+                    <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the <i>combobox</i> element and uses <i>listbox</i> as the role. Each list item has an <i>option</i> role, an id to match the <i>aria-activedescendant</i> of the input element along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-disabled</i> attributes.</p>
 
-                    <p>If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the input element. Alternatively <i>filterPlaceholder</i> is usually utilized by the screen readers as well.</p>
+                    <p>If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the filter input element.</p>
 <CodeHighlight>
 {`
 <span id="dd1">Options</span>
@@ -1477,28 +1477,16 @@ const groupedCities = [
                                     <td>Moves focus to the dropdown element.</td>
                                 </tr>
                                 <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Opens the popup.</td>
-                                </tr>
-                                <tr>
                                     <td><i>space</i></td>
-                                    <td>Opens the popup.</td>
+                                    <td>Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.</td>
                                 </tr>
                                 <tr>
                                     <td><i>down arrow</i></td>
-                                    <td>Opens the popup and moves visual focus to the first option.</td>
+                                    <td>Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.</td>
                                 </tr>
                                 <tr>
                                     <td><i>up arrow</i></td>
-                                    <td>Opens the popup and moves visual focus to the last option.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>home</i></td>
-                                    <td>Opens the popup and moves visual focus to the first option.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>end</i></td>
-                                    <td>Opens the popup and moves visual focus to the last option.</td>
+                                    <td>Opens the popup and moves visual focus to the selected option, if there is none then last option receives the focus.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1528,7 +1516,7 @@ const groupedCities = [
                                 </tr>
                                 <tr>
                                     <td><i>escape</i></td>
-                                    <td>Closes the popup.</td>
+                                    <td>Closes the popup, moves focus to the dropdown element.</td>
                                 </tr>
                                 <tr>
                                     <td><i>down arrow</i></td>
@@ -1575,11 +1563,11 @@ const groupedCities = [
                                 <tr>
                                     <td><i>tab</i></td>
                                     <td>Moves focus to the next focusable element within the popup, 
-                                        if there is none closes the popup and moves focus to the next focusable element in the tabbing order.</td>
+                                        if there is none, closes the popup and moves focus to the next focusable element in the tabbing order.</td>
                                 </tr>
                                 <tr>
                                     <td><i>shift</i> + <i>tab</i></td>
-                                    <td>Closes the popup and moves focus dropdown element.</td>
+                                    <td>Closes the popup and moves focus to the dropdown element.</td>
                                 </tr>
                                 <tr>
                                     <td><i>enter</i></td>
