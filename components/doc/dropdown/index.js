@@ -1449,7 +1449,7 @@ const groupedCities = [
                     <h6>Screen Reader</h6>
                     <p>Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The dropdown element has a <i>combobox</i> role
                     in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. If the editable option is enabled <i>aria-autocomplete</i> is also added. 
-                    The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
+                    The relation between the combobox and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
                     to instruct screen reader which option to read during keyboard navigation within the popup list.</p>
                     <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the <i>combobox</i> element and uses <i>listbox</i> as the role. Each list item has an <i>option</i> role, an id to match the <i>aria-activedescendant</i> of the input element along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-disabled</i> attributes.</p>
 
@@ -1492,7 +1492,7 @@ const groupedCities = [
                         </table>
                     </div>
 
-                    <h6>Popup Listbox Keyboard Support</h6>
+                    <h6>Popup Keyboard Support</h6>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -1502,9 +1502,13 @@ const groupedCities = [
                                 </tr>
                             </thead>
                             <tbody>
+                            <tr>
+                                <td><i>tab</i></td>
+                                    <td>Moves focus to the next focusable element in the popup, if there is none then first focusable element receives the focus.</td>
+                                </tr>
                                 <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Selects the focused option, closes the popup and moves focus to the next focusable element.</td>
+                                    <td><i>shift</i> + <i>tab</i></td>
+                                    <td>Moves focus to the previous focusable element in the popup, if there is none then last focusable element receives the focus.</td>
                                 </tr>
                                 <tr>
                                     <td><i>enter</i></td>
@@ -1561,29 +1565,12 @@ const groupedCities = [
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the next focusable element within the popup, 
-                                        if there is none, closes the popup and moves focus to the next focusable element in the tabbing order.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>shift</i> + <i>tab</i></td>
+                                    <td><i>enter</i></td>
                                     <td>Closes the popup and moves focus to the dropdown element.</td>
                                 </tr>
                                 <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Closes the popup.</td>
-                                </tr>
-                                <tr>
                                     <td><i>escape</i></td>
-                                    <td>Closes the popup.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>down arrow</i></td>
-                                    <td>Moves visual focus to the next option, if there is none then visual focus does not change.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>up arrow</i></td>
-                                    <td>Moves visual focus to the previous option, if there is none then visual focus does not change.</td>
+                                    <td>Closes the popup and moves focus to the dropdown element.</td>
                                 </tr>
                             </tbody>
                         </table>

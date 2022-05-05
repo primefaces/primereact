@@ -1423,8 +1423,8 @@ const groupedCities = [
                     <h5>Accessibility</h5>
                     <h6>Screen Reader</h6>
                     <p>Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The multiselect component has a <i>combobox</i> role
-                    in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> attribute that refers to the id of the popup listbox. 
-                    The popup listbox uses <i>listbox</i> as the role with <i>aria-multiselectable</i> enabled. Each list item has an <i>option</i> role along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-disabled</i> attributes.</p>
+                    in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the combobox and the popup is created with <i>aria-controls</i> attribute that refers to the id of the popup listbox.</p>
+                    <p>The popup listbox uses <i>listbox</i> as the role with <i>aria-multiselectable</i> enabled. Each list item has an <i>option</i> role along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-disabled</i> attributes.</p>
 
                     <p>Checkbox component at the header uses a hidden native checkbox element internally that is only visible to screen readers. Value to read is defined with the <i>toggleAll</i> key of the <i>aria</i>  property from the <Link href="/theming">locale</Link> API.</p>
 
@@ -1470,7 +1470,7 @@ const groupedCities = [
                         </table>
                     </div>
 
-                    <h6>Popup Listbox Keyboard Support</h6>
+                    <h6>Popup Keyboard Support</h6>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -1563,14 +1563,6 @@ const groupedCities = [
                                 <tr>
                                     <td><i>escape</i></td>
                                     <td>Closes the popup and moves focus to the multiselect element.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>down arrow</i></td>
-                                    <td>Moves visual focus to the next option, if there is none then visual focus does not change.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>up arrow</i></td>
-                                    <td>Moves visual focus to the previous option, if there is none then visual focus does not change.</td>
                                 </tr>
                             </tbody>
                         </table>
