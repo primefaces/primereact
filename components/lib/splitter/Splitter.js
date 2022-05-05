@@ -6,7 +6,8 @@ export const SplitterPanel = () => { }
 
 export const Splitter = React.memo(React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
-    const gutterRef = React.useRef(null);
+    const gutterRef = React.useRef();
+    const gutterRefs = React.useRef({});
     const size = React.useRef(null);
     const dragging = React.useRef(null);
     const startPos = React.useRef(null);
@@ -94,6 +95,7 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onResizeStart = (event, index) => {
+        gutterRef.current = gutterRefs.current[index];
         let pageX = event.type === 'touchstart' ? event.touches[0].pageX : event.pageX;
         let pageY = event.type === 'touchstart' ? event.touches[0].pageY : event.pageY;
         size.current = props.layout === 'horizontal' ? DomHandler.getWidth(elementRef.current) : DomHandler.getHeight(elementRef.current);
@@ -203,7 +205,7 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
         const panelClassName = classNames('p-splitter-panel', panel.props.className);
         const gutterStyle = props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' }
         const gutter = (index !== props.children.length - 1) && (
-            <div ref={gutterRef} className="p-splitter-gutter" style={gutterStyle} onMouseDown={event => onGutterMouseDown(event, index)}
+            <div ref={(el) => gutterRefs.current[index] = el} className="p-splitter-gutter" style={gutterStyle} onMouseDown={event => onGutterMouseDown(event, index)}
                 onTouchStart={event => onGutterTouchStart(event, index)} onTouchMove={event => onGutterTouchMove(event)} onTouchEnd={event => onGutterTouchEnd(event)}>
                 <div className="p-splitter-gutter-handle"></div>
             </div>
