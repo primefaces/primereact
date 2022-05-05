@@ -831,7 +831,7 @@ data() {
                         <h6>Screen Reader</h6>
                         <p>Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The treeselect element has a <i>combobox</i> role
                         in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the combobox and the popup is created with <i>aria-controls</i> that refers to the id of the popup.</p>
-                        <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the <i>combobox</i> element and uses <i>tree</i> as the role. Each list item has a <i>treeitem</i> role, an id to match the <i>aria-activedescendant</i> of the input element along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-expanded</i> attributes. The container
+                        <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the <i>combobox</i> element and uses <i>tree</i> as the role. Each list item has a <i>treeitem</i> role along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-expanded</i> attributes. The container
                         element of a treenode has the <i>group</i> role. The <i>aria-setsize</i>, <i>aria-posinset</i> and <i>aria-level</i> attributes are calculated implicitly and added to each treeitem.</p>
 
                         <p>If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the filter input element.</p>
@@ -843,7 +843,7 @@ data() {
     <Dropdown aria-label="Options" />
     `}
     </CodeHighlight>
-                        <h6>Closed TreeSelect Keyboard Support</h6>
+                        <h6>Closed State Keyboard Support</h6>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -859,7 +859,7 @@ data() {
                                     </tr>
                                     <tr>
                                         <td><i>space</i></td>
-                                        <td>Opens the popup and moves visual focus to the seleced treenode, if there is none then first treenode receives the focus.</td>
+                                        <td>Opens the popup and moves visual focus to the selected treenode, if there is none then first treenode receives the focus.</td>
                                     </tr>
                                     <tr>
                                         <td><i>down arrow</i></td>
@@ -914,14 +914,6 @@ data() {
                                     <tr>
                                         <td><i>left arrow</i></td>
                                         <td>If node is open, closes the node otherwise moves focus to the parent node.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>home</i></td>
-                                        <td>Moves focus to the first node.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>end</i></td>
-                                        <td>Moves focus to the last node.</td>
                                     </tr>
                                 </tbody>
                             </table>

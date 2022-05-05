@@ -1462,7 +1462,7 @@ const groupedCities = [
 <Dropdown aria-label="Options" />
 `}
 </CodeHighlight>
-                    <h6>Closed Dropdown Keyboard Support</h6>
+                    <h6>Closed State Keyboard Support</h6>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>

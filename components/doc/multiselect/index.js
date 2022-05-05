@@ -1440,7 +1440,7 @@ const groupedCities = [
 `}
 </CodeHighlight>
 
-                    <h6>Closed MultiSelect Keyboard Support</h6>
+                    <h6>Closed State Keyboard Support</h6>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
