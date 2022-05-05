@@ -189,10 +189,24 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
+    const onUpButtonTouchStart = (event) => {
+        if (!props.disabled && !props.readOnly) {
+            repeat(event, null, 1);
+            event.preventDefault();
+        }
+    }
+
     const onUpButtonMouseDown = (event) => {
         if (!props.disabled && !props.readOnly) {
             inputRef.current.focus();
             repeat(event, null, 1);
+            event.preventDefault();
+        }
+    }
+
+    const onUpButtonTouchEnd = () => {
+        if (!props.disabled && !props.readOnly) {
+            clearTimer();
             event.preventDefault();
         }
     }
@@ -218,6 +232,20 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
     const onUpButtonKeyDown = (event) => {
         if (!props.disabled && !props.readOnly && (event.keyCode === 32 || event.keyCode === 13)) {
             repeat(event, null, 1);
+        }
+    }
+
+    const onDownButtonTouchStart = (event) => {
+        if (!props.disabled && !props.readOnly) {
+            repeat(event, null, -1);
+            event.preventDefault();
+        }
+    }
+
+    const onDownButtonTouchEnd = () => {
+        if (!props.disabled && !props.readOnly) {
+            clearTimer();
+            event.preventDefault();
         }
     }
 
@@ -953,7 +981,8 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
 
         return (
             <button type="button" className={className} onMouseLeave={onUpButtonMouseLeave} onMouseDown={onUpButtonMouseDown} onMouseUp={onUpButtonMouseUp}
-                onKeyDown={onUpButtonKeyDown} onKeyUp={onUpButtonKeyUp} disabled={props.disabled} tabIndex={-1}>
+                onKeyDown={onUpButtonKeyDown} onKeyUp={onUpButtonKeyUp} onTouchStart={onUpButtonTouchStart} onTouchEnd={onUpButtonTouchEnd}
+                disabled={props.disabled} tabIndex={-1}>
                 <span className={icon}></span>
                 <Ripple />
             </button>
@@ -968,7 +997,8 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
 
         return (
             <button type="button" className={className} onMouseLeave={onDownButtonMouseLeave} onMouseDown={onDownButtonMouseDown} onMouseUp={onDownButtonMouseUp}
-                onKeyDown={onDownButtonKeyDown} onKeyUp={onDownButtonKeyUp} disabled={props.disabled} tabIndex={-1}>
+                onKeyDown={onDownButtonKeyDown} onKeyUp={onDownButtonKeyUp} onTouchStart={onDownButtonTouchStart} onTouchEnd={onDownButtonTouchEnd}
+                disabled={props.disabled} tabIndex={-1}>
                 <span className={icon}></span>
                 <Ripple />
             </button>
