@@ -789,14 +789,14 @@ export default class DomHandler {
     }
 
     /**
-     * Focus an input element.
+     * Focus an input element if it does not already have focus.
      * 
      * @param {MutableRefObject} inputRef the input reference
      * @param {boolean} scrollTo flag to control whether to scroll to the element, false by default
      */
     static focus(inputRef, scrollTo) {
         const preventScroll = ObjectUtils.isEmpty(scrollTo) ? true : !scrollTo;
-        inputRef && inputRef.current && inputRef.current.focus({ preventScroll: preventScroll });
+        inputRef && inputRef.current && document.activeElement !== inputRef.current && inputRef.current.focus({ preventScroll: preventScroll });
     }
 
     static getCursorOffset(el, prevText, nextText, currentText) {
