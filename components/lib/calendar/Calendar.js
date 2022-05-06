@@ -2439,7 +2439,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
-    const createTitleMonthElement = () => {
+    const createTitleMonthElement = (month) => {
         const monthNames = localeOption('monthNames', props.locale);
 
         if (props.monthNavigator && props.view !== 'month') {
@@ -2472,7 +2472,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             return content;
         }
 
-        return currentView === 'date' && <button className="p-datepicker-month p-link" onClick={switchToMonthView} disabled={switchViewButtonDisabled()} >{monthNames[currentMonth]}</button>
+        return currentView === 'date' && <button className="p-datepicker-month p-link" onClick={switchToMonthView} disabled={switchViewButtonDisabled()} >{monthNames[month]}</button>
     }
 
     const createTitleYearElement = () => {

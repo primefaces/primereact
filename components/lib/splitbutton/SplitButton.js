@@ -101,17 +101,17 @@ export const SplitButton = React.memo(React.forwardRef((props, ref) => {
     const menuButtonClassName = classNames('p-splitbutton-menubutton', props.menuButtonClassName);
     const buttonContent = props.buttonTemplate ? ObjectUtils.getJSXElement(props.buttonTemplate, props) : null;
     const items = createItems();
-    const panelId = idState + '_overlay';
+    const menuId = idState + '_menu';
 
     return (
         <>
             <div ref={elementRef} id={idState} className={className} style={props.style} {...otherProps}>
-                <Button ref={defaultButtonRef} type="button" className={buttonClassName} icon={props.icon} label={props.label} onClick={props.onClick} disabled={props.disabled} tabIndex={props.tabIndex}>
+                <Button ref={defaultButtonRef} type="button" className={buttonClassName} icon={props.icon} label={props.label} onClick={props.onClick} disabled={props.disabled} tabIndex={props.tabIndex} {...props.buttonProps}>
                     {buttonContent}
                 </Button>
                 <Button type="button" className={menuButtonClassName} icon={props.dropdownIcon} onClick={onDropdownButtonClick} disabled={props.disabled}
-                    aria-expanded={overlayVisibleState} aria-haspopup aria-owns={panelId} />
-                <SplitButtonPanel ref={overlayRef} appendTo={props.appendTo} id={panelId} menuStyle={props.menuStyle} menuClassName={props.menuClassName} onClick={onPanelClick}
+                    aria-expanded={overlayVisibleState} aria-haspopup="true" aria-controls={overlayVisibleState ? menuId : null} {...props.menuButtonProps} />
+                <SplitButtonPanel ref={overlayRef} appendTo={props.appendTo} menuId={menuId} menuStyle={props.menuStyle} menuClassName={props.menuClassName} onClick={onPanelClick}
                     in={overlayVisibleState} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited} transitionOptions={props.transitionOptions}>
                     {items}
                 </SplitButtonPanel>
@@ -135,6 +135,8 @@ SplitButton.defaultProps = {
     menuStyle: null,
     menuClassName: null,
     menuButtonClassName: null,
+    buttonProps: null,
+    menuButtonProps: null,
     tabIndex: null,
     appendTo: null,
     tooltip: null,

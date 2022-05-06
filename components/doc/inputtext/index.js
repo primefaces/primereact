@@ -402,7 +402,22 @@ import { InputText } from 'primereact/inputtext';
 `}
 </CodeHighlight>
                     <h6>Keyboard Support</h6>
-                    <p>InputText can receive focus using the <i>tab</i> key.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the input.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

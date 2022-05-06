@@ -1,15 +1,13 @@
 import * as React from 'react';
-import { Ripple } from '../ripple/Ripple';
+import { ariaLabel } from '../api/Api';
+import { Button } from '../button/Button';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const PrevPageLink = React.memo((props) => {
     const className = classNames('p-paginator-prev p-paginator-element p-link', { 'p-disabled': props.disabled });
     const iconClassName = 'p-paginator-icon pi pi-angle-left';
     const element = (
-        <button type="button" className={className} onClick={props.onClick} disabled={props.disabled}>
-            <span className={iconClassName}></span>
-            <Ripple />
-        </button>
+        <Button type='button' className={className} icon={iconClassName} onClick={props.onClick} disabled={props.disabled} aria-label={ariaLabel('previousPageLabel')}/>
     );
 
     if (props.template) {

@@ -18,7 +18,7 @@ export const ProgressBar = React.memo(React.forwardRef((props, ref) => {
         const label = createLabel();
 
         return (
-            <div role="progressbar" id={props.id} className={className} style={props.style} aria-valuemin="0" aria-valuenow={props.value} aria-valuemax="100" aria-label={props.value} {...otherProps}>
+            <div role="progressbar" id={props.id} className={className} style={props.style} aria-valuemin="0" aria-valuenow={props.value} aria-valuemax="100" {...otherProps}>
                 <div className="p-progressbar-value p-progressbar-value-animate" style={{ width: props.value + '%', display: 'block', backgroundColor: props.color }}></div>
                 {label}
             </div>

@@ -98,6 +98,18 @@ const FileUploadDemo = () => {
         )
     }
 
+    const customBase64Uploader = async (event) => {
+        // convert file to base64 encoded 
+        const file = event.files[0];
+        const reader = new FileReader();
+        let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
+        reader.readAsDataURL(blob); 
+        reader.onloadend = function () {
+            const base64data = reader.result;
+            console.log(base64data);
+        }
+    }
+
     const chooseOptions = { icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined' };
     const uploadOptions = { icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined' };
     const cancelOptions = { icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined' };
@@ -139,6 +151,9 @@ const FileUploadDemo = () => {
 
                     <h5>Basic with Auto</h5>
                     <FileUpload mode="basic" name="demo[]" url={uploadPath} accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+
+                    <h5>Custom (base64 encoded)</h5>
+                    <FileUpload mode="basic" name="demo[]" url={uploadPath} accept="image/*" customUpload uploadHandler={customBase64Uploader} />
                 </div>
             </div>
 

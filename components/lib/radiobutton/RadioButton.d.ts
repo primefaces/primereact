@@ -31,7 +31,6 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
     tabIndex?: number;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string;
     onChange?(e: RadioButtonChangeParams): void;
     children?: React.ReactNode;
 }

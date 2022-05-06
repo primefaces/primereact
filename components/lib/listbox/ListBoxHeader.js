@@ -15,7 +15,7 @@ export const ListBoxHeader = React.memo((props) => {
     return (
         <div className="p-listbox-header">
             <div className="p-listbox-filter-container">
-                <InputText type="text" value={props.filter} onChange={onFilter} className="p-listbox-filter" disabled={props.disabled} placeholder={props.filterPlaceholder} />
+                <InputText type="text" value={props.filter} onChange={onFilter} className="p-listbox-filter" disabled={props.disabled} placeholder={props.filterPlaceholder} {...props.filterInputProps} />
                 <span className="p-listbox-filter-icon pi pi-search"></span>
             </div>
         </div>

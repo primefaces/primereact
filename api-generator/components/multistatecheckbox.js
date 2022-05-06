@@ -6,12 +6,6 @@ const MultiStateCheckboxProps = [
         description: 'Unique identifier of the element.'
     },
     {
-        name: 'inputId',
-        type: 'string',
-        default: 'null',
-        description: 'Unique identifier of the native checkbox element.'
-    },
-    {
         name: 'value',
         type: 'any',
         default: 'null',
@@ -30,16 +24,22 @@ const MultiStateCheckboxProps = [
         description: 'Property name to use as the value of an option, defaults to the option itself when not defined.'
     },
     {
+        name: 'optionLabel',
+        type: 'string',
+        default: 'null',
+        description: 'Property name to refer to the option label, used by screen readers only. Defaults to optionValue.'
+    },
+    {
         name: 'iconTemplate',
         type: 'any',
         default: 'null',
         description: 'Template of icon for the selected option.'
     },
     {
-        name: 'name',
+        name: 'dataKey',
         type: 'string',
         default: 'null',
-        description: 'Name of the checkbox element .'
+        description: 'A property to uniquely match the value in options for better performance.'
     },
     {
         name: 'style',
@@ -63,7 +63,7 @@ const MultiStateCheckboxProps = [
         name: 'readOnly',
         type: 'boolean',
         default: 'false',
-        description: 'When present, it specifies that the element value cannot be altered.'
+        description: 'When present, it specifies that the value cannot be changed.'
     },
     {
         name: 'empty',
@@ -82,18 +82,6 @@ const MultiStateCheckboxProps = [
         type: 'object',
         default: 'null',
         description: 'Configuration of the tooltip, refer to the tooltip documentation for more information.'
-    },
-    {
-        name: 'ariaLabelledBy',
-        type: 'string',
-        default: 'null',
-        description: 'Establishes relationships between the component and label(s) where its value should be one or more element IDs.'
-    },
-    {
-        name: 'dataKey',
-        type: 'string',
-        default: 'null',
-        description: 'A property to uniquely match the value in options for better performance.'
     }
 ];
 
