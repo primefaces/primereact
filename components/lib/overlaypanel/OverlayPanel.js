@@ -150,7 +150,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
                 `
             }
 
-            styleElement.innerHTML = innerHTML;
+            styleElement.current.innerHTML = innerHTML;
         }
     }
 
