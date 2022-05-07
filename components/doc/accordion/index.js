@@ -858,7 +858,9 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                         </div>
 
                         <h5>Dependencies</h5>
-                        <p>None.</p>
+                        <ul>
+                            <li>react-transition-group</li>
+                        </ul>
                 </TabPanel>
 
                 {
