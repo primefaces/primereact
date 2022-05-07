@@ -319,15 +319,7 @@ const footer = <span>
 </CodeHighlight>
 
                     <h5>Keyboard Support</h5>
-                    <p>There are no built-in interactive elements however a card can be made tabbable with the <i>tabIndex</i> property.</p>
-
-<CodeHighlight>
-{`
-<Card role="region" tabIndex="0">
-    Content
-</Card>
-`}
-</CodeHighlight>
+                    <p>Component does not include any interactive elements.</p>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
