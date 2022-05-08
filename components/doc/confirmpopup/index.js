@@ -337,6 +337,7 @@ const confirm = (event) => {
 }
 
 <Button onClick={confirm} icon="pi pi-check" label="Confirm"></Button>
+<ConfirmPopup /> <!--required empty popup tag -->
 `}
 </CodeHighlight>
                     <h6>2. &lt;ConfirmPopup&gt; tag</h6>

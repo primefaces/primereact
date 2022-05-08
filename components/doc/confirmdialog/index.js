@@ -429,6 +429,7 @@ const confirm = () => {
 }
 
 <Button onClick={confirm} icon="pi pi-check" label="Confirm"></Button>
+<ConfirmDialog /> <!--required empty dialog tag -->
 `}
 </CodeHighlight>
 
