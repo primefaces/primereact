@@ -215,7 +215,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
     const scrollInView = () => {
         const highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
         if (highlightItem && highlightItem.scrollIntoView) {
-            highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });
+            highlightItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
         }
     }
 
