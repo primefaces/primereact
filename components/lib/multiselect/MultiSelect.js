@@ -486,7 +486,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
                 for (let optgroup of props.options) {
                     let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
                     if (filteredSubOptions && filteredSubOptions.length) {
-                        filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
+                        filteredGroups.push({ ...optgroup, ...{ [props.optionGroupChildren] : filteredSubOptions } });
                     }
                 }
                 return filteredGroups;
