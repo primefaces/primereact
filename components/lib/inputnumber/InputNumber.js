@@ -3,7 +3,7 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const InputNumber = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -182,7 +182,8 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
             let currentValue = parseValue(inputRef.current.value) || 0;
             let newValue = validateValue(currentValue + step);
 
-            updateInput(newValue, null, 'spin');
+            // touch devices trigger the keyboard to display because of setSelectionRange
+            !DomHandler.isTouchDevice() && updateInput(newValue, null, 'spin');
             updateModel(event, newValue);
 
             handleOnChange(event, currentValue, newValue);
@@ -198,7 +199,7 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
 
     const onUpButtonMouseDown = (event) => {
         if (!props.disabled && !props.readOnly) {
-            inputRef.current.focus();
+            props.autoFocus && inputRef.current.focus();
             repeat(event, null, 1);
             event.preventDefault();
         }
@@ -251,7 +252,7 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
 
     const onDownButtonMouseDown = (event) => {
         if (!props.disabled && !props.readOnly) {
-            inputRef.current.focus();
+            props.autoFocus && inputRef.current.focus();
             repeat(event, null, -1);
 
             event.preventDefault();
