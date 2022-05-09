@@ -439,7 +439,21 @@ const onChange = (e) => {
                                     <td>itemTemplate</td>
                                     <td>function</td>
                                     <td>null</td>
-                                    <td>Function that gets the option and returns the content for it.</td>
+                                    <td>Template that gets the options for both source and target items and returns the content for it.
+                                        Useful if you want the same template for both lists else use the custom <b>sourceItemTemplate</b> or <b>targetItemTemplate</b> properties.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>sourceItemTemplate</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Template that gets the options for the source items and returns the content for it.</td>
+                                </tr>
+                                <tr>
+                                    <td>targetItemTemplate</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Template that gets the options for the target items and returns the content for it.</td>
                                 </tr>
                                 <tr>
                                     <td>metaKeySelection</td>
