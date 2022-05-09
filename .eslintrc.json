@@ -3,6 +3,7 @@
   "rules": {
     "@next/next/no-img-element": "off",
     "react/display-name": "off",
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+    "no-console": 2
   }
 }
