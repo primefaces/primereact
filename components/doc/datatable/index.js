@@ -2524,6 +2524,18 @@ export const DataTableRowExpansionDemo = () => {
 `}
 </CodeHighlight>
 
+                    <p>You can choose which columns are <i>resizeable</i> per column.</p>
+<CodeHighlight>
+{`
+<DataTable value={products} resizableColumns>
+    <Column field="code" header="Code" style={{width:'20%'}}></Column>
+    <Column field="name" header="Name" style={{width:'40%'}}></Column>
+    <Column field="category" header="Category (not resizable)" style={{width:'20%'}} resizeable={false} />
+    <Column field="quantity" header="Quantity" style={{width:'30%'}}></Column>
+</DataTable>
+`}
+</CodeHighlight>
+
                     <h5>Column Reorder</h5>
                     <p>Columns can be reordered using drag drop by setting the <i>reorderableColumns</i> to true. <i>onColReorder</i> is a callback that is invoked when a column is reordered.
                         DataTable keeps the column order state internally using keys that identifies a column using the <i>field</i> property. If the column has no field, use columnKey instead.</p>
