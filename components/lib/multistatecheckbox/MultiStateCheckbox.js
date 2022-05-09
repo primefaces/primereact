@@ -114,7 +114,6 @@ export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
         'p-focus': focusedState
     }, selectedOption && selectedOption.className);
     const icon = createIcon();
-    console.log(!!selectedOption);
     const ariaValueLabel = !!selectedOption ? getOptionAriaLabel(selectedOption) : ariaLabel('nullLabel');
     const ariaChecked =  !!selectedOption ? 'true' : 'false';
 
