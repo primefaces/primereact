@@ -126,6 +126,7 @@ export interface CalendarProps {
     minDate?: Date;
     maxDate?: Date;
     maxDateCount?: number;
+    showOutliers?: boolean;
     showOtherMonths?: boolean;
     selectOtherMonths?: boolean;
     showButtonBar?: boolean;
