@@ -27,10 +27,10 @@ const SetupPage = () => {
 <CodeHighlight lang="js">
 {`
 // with npm
-npm install primereact
+npm install primereact primeicons
 
 // with yarn
-yarn add primereact
+yarn add primereact primeicons
 `}
 </CodeHighlight>
                 <p>Please note that <i>{`react >= 17.0.0`}</i> and <i>{`react-dom >= 17.0.0`}</i> are peer dependencies and some components have <Link href="#setup-configuration" scroll={false}><a>optional dependencies</a></Link>.</p>
@@ -199,13 +199,14 @@ primereact/resources/themes/rhea/theme.css
                 <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.</p>
                 <p>In addition, components require <Link href="/icons">PrimeIcons</Link> library for icons and
                         <a href="https://www.npmjs.com/package/react-transition-group" className="layout-content-link"> react-transition-group</a> for animations.
-                        They are available as dependencies in the npm package of PrimeReact.</p>
+                        The <a href="https://www.npmjs.com/package/react-transition-group" className="layout-content-link"> react-transition-group</a> is available as dependencies in the npm package of PrimeReact.</p>
 
 <CodeHighlight lang="js">
 {`
 dependencies: {
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0"
+    "primeicons": "^5.0.0"
 }
 `}
 </CodeHighlight>

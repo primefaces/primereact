@@ -1,23 +1,27 @@
 import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
+import { ariaLabel } from '../api/Api';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
     const elementRef = React.useRef(null);
-    const inputRef = React.useRef(props.inputRef);
     const equalityKey = props.optionValue ? null : props.dataKey;
 
     const onClick = (event) => {
         if (!props.disabled && !props.readOnly) {
             toggle(event);
-            inputRef.current.focus();
         }
     }
 
     const getOptionValue = (option) => {
         return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option;
+    }
+
+    const getOptionAriaLabel = (option) => {
+        const ariaField = props.optionLabel || props.optionValue;
+        return ariaField ? ObjectUtils.resolveFieldData(option, ariaField) : option;
     }
 
     const findNextOption = () => {
@@ -54,6 +58,13 @@ export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
         setFocusedState(false);
     }
 
+    const onKeyDown = (e) => {
+        if (e.keyCode === 32) {
+            toggle(e);
+            e.preventDefault();
+        }
+    }
+
     const getSelectedOptionMap = () => {
         let option, index;
 
@@ -64,10 +75,6 @@ export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
 
         return { option, index };
     }
-
-    React.useEffect(() => {
-        ObjectUtils.combinedRefs(inputRef, props.inputRef);
-    }, [inputRef, props.inputRef]);
 
     useMountEffect(() => {
         if (!props.empty && props.value === null) {
@@ -107,17 +114,17 @@ export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
         'p-focus': focusedState
     }, selectedOption && selectedOption.className);
     const icon = createIcon();
+    const ariaValueLabel = !!selectedOption ? getOptionAriaLabel(selectedOption) : ariaLabel('nullLabel');
+    const ariaChecked =  !!selectedOption ? 'true' : 'false';
 
     return (
         <>
             <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
-                <div className="p-hidden-accessible">
-                    <input ref={inputRef} type="checkbox" aria-labelledby={props.ariaLabelledBy} id={props.inputId} name={props.name}
-                        onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} defaultChecked={!!selectedOption} />
-                </div>
-                <div className={boxClassName} role="checkbox" aria-checked={!!selectedOption} style={selectedOption && selectedOption.style}>
+                <div className={boxClassName} style={selectedOption && selectedOption.style} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}
+                    role="checkbox" aria-checked={ariaChecked} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
                     {icon}
                 </div>
+                {focusedState && <span className="p-sr-only" aria-live="polite">{ariaValueLabel}</span>}
             </div>
             {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
         </>
@@ -128,21 +135,21 @@ MultiStateCheckbox.displayName = 'MultiStateCheckbox';
 MultiStateCheckbox.defaultProps = {
     __TYPE: 'MultiStateCheckbox',
     id: null,
-    inputRef: null,
-    inputId: null,
     value: null,
     options: null,
     optionValue: null,
+    optionLabel: null,
     iconTemplate: null,
     dataKey: null,
-    name: null,
     style: null,
     className: null,
     disabled: false,
     readOnly: false,
     empty: true,
+    tabIndex: "0",
+    'aria-label': null,
+    'aria-labelledby': null,
     tooltip: null,
     tooltipOptions: null,
-    ariaLabelledBy: null,
     onChange: null
 }

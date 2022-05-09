@@ -53,7 +53,7 @@ export class SelectButtonDemo extends Component {
                     <SelectButton value={this.state.value2} options={this.paymentOptions} onChange={(e) => this.setState({ value2: e.value })} optionLabel="name" multiple />
 
                     <h5>Custom Content</h5>
-                    <SelectButton value={this.state.value3} options={this.justifyOptions} onChange={(e) => this.setState({ value3: e.value })} itemTemplate={this.justifyTemplate} />
+                    <SelectButton value={this.state.value3} options={this.justifyOptions} onChange={(e) => this.setState({ value3: e.value })} itemTemplate={this.justifyTemplate} optionLabel="value" />
                 </div>
             </div>
         );
@@ -98,7 +98,7 @@ const SelectButtonDemo = () => {
                 <SelectButton value={value2} options={paymentOptions} onChange={(e) => setValue2(e.value)} optionLabel="name" multiple />
 
                 <h5>Custom Content</h5>
-                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} />
+                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} optionLabel="value" />
             </div>
         </div>
     );
@@ -142,7 +142,7 @@ const SelectButtonDemo = () => {
                 <SelectButton value={value2} options={paymentOptions} onChange={(e) => setValue2(e.value)} optionLabel="name" multiple />
 
                 <h5>Custom Content</h5>
-                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} />
+                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} optionLabel="value" />
             </div>
         </div>
     );
@@ -189,7 +189,7 @@ const SelectButtonDemo = () => {
                 <SelectButton value={value2} options={paymentOptions} onChange={(e) => setValue2(e.value)} optionLabel="name" multiple />
 
                 <h5>Custom Content</h5>
-                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} />
+                <SelectButton value={value3} options={justifyOptions} onChange={(e) => setValue3(e.value)} itemTemplate={justifyTemplate} optionLabel="value" />
             </div>
         </div>
     );
@@ -331,7 +331,7 @@ const itemTemplate = (option) => {
                     </div>
 
                     <h5>Properties</h5>
-                    <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -434,12 +434,6 @@ const itemTemplate = (option) => {
                                     <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
                                 </tr>
                                 <tr>
-                                    <td>ariaLabelledBy</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
-                                </tr>
-                                <tr>
                                     <td>itemTemplate</td>
                                     <td>function</td>
                                     <td>null</td>
@@ -469,6 +463,35 @@ const itemTemplate = (option) => {
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>The container element that wraps the buttons has a <i>group</i> role whereas each button element uses <i>button</i> role and <i>aria-pressed</i> is updated depending on selection state. 
+                    Value to describe an option is automatically set using the <i>aria-label</i> property that refers to the label of an option so it is still suggested to define a label even the option display
+                    consists of presentational content like icons only.</p>
+
+                    <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the buttons.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Toggles the checked state of a button.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Buttons can receive focus using the <i>tab</i> key, while being focused <i>space</i> key is used to toggle the checked state.</p>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

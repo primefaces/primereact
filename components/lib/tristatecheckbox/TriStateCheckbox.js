@@ -1,16 +1,15 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
+import { ariaLabel } from '../api/Api';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const TriStateCheckbox = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
     const elementRef = React.useRef(null);
-    const inputRef = React.useRef(props.inputRef);
 
     const onClick = (event) => {
-        if (!props.disabled) {
+        if (!props.disabled && !props.readOnly) {
             toggle(event);
-            inputRef.current.focus();
         }
     }
 
@@ -46,9 +45,12 @@ export const TriStateCheckbox = React.memo(React.forwardRef((props, ref) => {
         setFocusedState(false);
     }
 
-    React.useEffect(() => {
-        ObjectUtils.combinedRefs(inputRef, props.inputRef);
-    }, [inputRef, props.inputRef]);
+    const onKeyDown = (e) => {
+        if (e.keyCode === 32) {
+            toggle(e);
+            e.preventDefault();
+        }
+    }
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const otherProps = ObjectUtils.findDiffKeys(props, TriStateCheckbox.defaultProps);
@@ -62,17 +64,17 @@ export const TriStateCheckbox = React.memo(React.forwardRef((props, ref) => {
         'pi pi-check': props.value === true,
         'pi pi-times': props.value === false
     });
+    const ariaValueLabel = props.value ? ariaLabel('trueLabel') : (props.value === false ? ariaLabel('falseLabel') : ariaLabel('nullLabel'));
+    const ariaChecked = props.value ? 'true' : 'false';
 
     return (
         <>
             <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
-                <div className="p-hidden-accessible">
-                    <input ref={inputRef} type="checkbox" aria-labelledby={props.ariaLabelledBy} id={props.inputId} name={props.name}
-                        onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} defaultChecked={props.value} />
-                </div>
-                <div className={boxClassName} role="checkbox" aria-checked={props.value === true}>
+                <div className={boxClassName} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}
+                    role="checkbox" aria-checked={ariaChecked} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
                     <span className={iconClassName}></span>
                 </div>
+                {focusedState && <span className="p-sr-only" aria-live="polite">{ariaValueLabel}</span>}
             </div>
             {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
         </>
@@ -83,15 +85,15 @@ TriStateCheckbox.displayName = 'TriStateCheckbox';
 TriStateCheckbox.defaultProps = {
     __TYPE: 'TriStateCheckbox',
     id: null,
-    inputRef: null,
-    inputId: null,
     value: null,
-    name: null,
     style: null,
     className: null,
     disabled: false,
+    readOnly: false,
+    tabIndex: "0",
+    'aria-label': null,
+    'aria-labelledby': null,
     tooltip: null,
     tooltipOptions: null,
-    ariaLabelledBy: null,
     onChange: null
 }

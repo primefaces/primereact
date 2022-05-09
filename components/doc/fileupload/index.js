@@ -125,6 +125,18 @@ export class FileUploadDemo extends Component {
         )
     }
 
+    async customBase64Uploader(event) {
+        // convert file to base64 encoded 
+        const file = event.files[0];
+        const reader = new FileReader();
+        let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
+        reader.readAsDataURL(blob); 
+        reader.onloadend = function () {
+            const base64data = reader.result;
+            console.log(base64data);
+        }
+    }
+
     render() {
         const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
         const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
@@ -154,6 +166,9 @@ export class FileUploadDemo extends Component {
 
                     <h5>Basic with Auto</h5>
                     <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto chooseLabel="Browse" />
+
+                    <h5>Custom (base64 encoded)</h5>
+                    <FileUpload mode="basic" name="demo[]" url={uploadPath} accept="image/*" customUpload uploadHandler={customBase64Uploader} />
                 </div>
             </div>
         )
@@ -257,6 +272,18 @@ export const FileUploadDemo = () => {
         )
     }
 
+    const customBase64Uploader = async (event) => {
+        // convert file to base64 encoded 
+        const file = event.files[0];
+        const reader = new FileReader();
+        let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
+        reader.readAsDataURL(blob); 
+        reader.onloadend = function () {
+            const base64data = reader.result;
+            console.log(base64data);
+        }
+    }
+
     const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
     const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
     const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
@@ -285,6 +312,9 @@ export const FileUploadDemo = () => {
 
                 <h5>Basic with Auto</h5>
                 <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+
+                <h5>Custom (base64 encoded)</h5>
+                <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
             </div>
         </div>
     )
@@ -387,6 +417,18 @@ export const FileUploadDemo = () => {
         )
     }
 
+    const customBase64Uploader = async (event) => {
+        // convert file to base64 encoded 
+        const file = event.files[0];
+        const reader = new FileReader();
+        let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
+        reader.readAsDataURL(blob); 
+        reader.onloadend = function () {
+            const base64data = reader.result;
+            console.log(base64data);
+        }
+    }
+
     const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
     const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
     const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
@@ -415,6 +457,9 @@ export const FileUploadDemo = () => {
 
                 <h5>Basic with Auto</h5>
                 <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+
+                <h5>Custom (base64 encoded)</h5>
+                <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
             </div>
         </div>
     )
@@ -522,6 +567,18 @@ const FileUploadDemo = () => {
         )
     }
 
+    const customBase64Uploader = async (event) => {
+        // convert file to base64 encoded 
+        const file = event.files[0];
+        const reader = new FileReader();
+        let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
+        reader.readAsDataURL(blob); 
+        reader.onloadend = function () {
+            const base64data = reader.result;
+            console.log(base64data);
+        }
+    }
+
     const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
     const uploadOptions = {icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined'};
     const cancelOptions = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'};
@@ -550,6 +607,9 @@ const FileUploadDemo = () => {
 
                 <h5>Basic with Auto</h5>
                 <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+
+                <h5>Custom (base64 encoded)</h5>
+                <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
             </div>
         </div>
     )
@@ -941,6 +1001,11 @@ const buttonOptions = {
                                     event.formData: FormData object.</td>
                                 <td>Callback to invoke before file send begins to customize the request
                                     such as adding headers.</td>
+                            </tr>
+                            <tr>
+                                <td>onBeforeDrop</td>
+                                <td>event: DragEvent instance.</td>
+                                <td>Callback to invoke before files dropped. Return false from callback to prevent drop.</td>
                             </tr>
                             <tr>
                                 <td>onUpload</td>

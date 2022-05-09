@@ -10,18 +10,20 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
     const [filesState, setFilesState] = React.useState([]);
     const [progressState, setProgressState] = React.useState(0);
     const [focusedState, setFocusedState] = React.useState(false);
+    const [uploadingState, setUploadingState] = React.useState(false);
     const fileInputRef = React.useRef(null);
     const messagesRef = React.useRef(null);
     const contentRef = React.useRef(null);
     const duplicateIEEvent = React.useRef(false);
     const uploadedFileCount = React.useRef(0);
     const hasFiles = ObjectUtils.isNotEmpty(filesState);
+    const disabled =  props.disabled || uploadingState;
     const chooseButtonLabel = props.chooseLabel || props.chooseOptions.label || localeOption('choose');
     const uploadButtonLabel = props.uploadLabel || props.uploadOptions.label || localeOption('upload');
     const cancelButtonLabel = props.cancelLabel || props.cancelOptions.label || localeOption('cancel');
-    const chooseDisabled = props.disabled || (props.fileLimit && props.fileLimit <= filesState.length + uploadedFileCount);
-    const uploadDisabled = props.disabled || !hasFiles;
-    const cancelDisabled = props.disabled || !hasFiles;
+    const chooseDisabled = disabled || (props.fileLimit && props.fileLimit <= filesState.length + uploadedFileCount);
+    const uploadDisabled = disabled || !hasFiles;
+    const cancelDisabled = disabled || !hasFiles;
 
     const isImage = (file) => {
         return /^image\//.test(file.type);
@@ -74,7 +76,11 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
             return;
         }
 
-        let currentFiles = filesState ? [...filesState] : [];
+        let currentFiles = [];
+        if (props.multiple) {
+            currentFiles = filesState ? [...filesState] : [];
+        }
+
         let selectedFiles = event.dataTransfer ? event.dataTransfer.files : event.target.files;
         for (let i = 0; i < selectedFiles.length; i++) {
             let file = selectedFiles[i];
@@ -140,6 +146,9 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
 
     const upload = (files) => {
         files = files || filesState;
+        if (files && files.nativeEvent) {
+            files = filesState;
+        }
 
         if (props.customUpload) {
             if (props.fileLimit) {
@@ -157,6 +166,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
             }
         }
         else {
+            setUploadingState(true);
             let xhr = new XMLHttpRequest();
             let formData = new FormData();
 
@@ -188,6 +198,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
                     setProgressState(0);
+                    setUploadingState(false);
 
                     if (xhr.status >= 200 && xhr.status < 300) {
                         if (props.fileLimit) {
@@ -224,13 +235,13 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
             }
 
             xhr.withCredentials = props.withCredentials;
-
             xhr.send(formData);
         }
     }
 
     const clear = () => {
         setFilesState([]);
+        setUploadingState(false);
         props.onClear && props.onClear();
         clearInput();
     }
@@ -254,7 +265,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onDragEnter = (event) => {
-        if (!props.disabled) {
+        if (!disabled) {
             event.dataTransfer.dropEffect = 'copy';
             event.stopPropagation();
             event.preventDefault();
@@ -262,7 +273,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onDragOver = (event) => {
-        if (!props.disabled) {
+        if (!disabled) {
             event.dataTransfer.dropEffect = 'copy';
             DomHandler.addClass(contentRef.current, 'p-fileupload-highlight');
             event.stopPropagation();
@@ -271,27 +282,34 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onDragLeave = (event) => {
-        if (!props.disabled) {
+        if (!disabled) {
             event.dataTransfer.dropEffect = 'copy';
             DomHandler.removeClass(contentRef.current, 'p-fileupload-highlight');
         }
     }
 
     const onDrop = (event) => {
-        if (!props.disabled) {
-            DomHandler.removeClass(contentRef.current, 'p-fileupload-highlight');
-            event.stopPropagation();
-            event.preventDefault();
-
-            const files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
-            const allowDrop = props.multiple || (files && files.length === 0);
-
-            allowDrop && onFileSelect(event);
+        if (props.disabled) {
+            return;
         }
+
+        DomHandler.removeClass(contentRef.current, 'p-fileupload-highlight');
+        event.stopPropagation();
+        event.preventDefault();
+
+        // give caller a chance to stop the drop
+        if (props.onBeforeDrop && props.onBeforeDrop(event) === false) {
+            return;
+        }
+
+        const files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
+        const allowDrop = props.multiple || (ObjectUtils.isEmpty(filesState) && files && files.length === 1);
+
+        allowDrop && onFileSelect(event);
     }
 
     const onSimpleUploaderClick = () => {
-        hasFiles ? upload() : fileInputRef.current.click();
+        !disabled && hasFiles ? upload() : fileInputRef.current.click();
     }
 
     React.useImperativeHandle(ref, () => ({
@@ -303,7 +321,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
     const createChooseButton = () => {
         const { className, style, icon: _icon, iconOnly } = props.chooseOptions;
         const chooseClassName = classNames('p-button p-fileupload-choose p-component', {
-            'p-disabled': props.disabled,
+            'p-disabled': disabled,
             'p-focus': focusedState,
             'p-button-icon-only': iconOnly
         }, className);
@@ -326,7 +344,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
         const preview = isImage(file) ? <div><img alt={file.name} role="presentation" src={file.objectURL} width={props.previewWidth} /></div> : null;
         const fileName = <div className="p-fileupload-filename">{file.name}</div>;
         const size = <div>{formatSize(file.size)}</div>;
-        const removeButton = <div><Button type="button" icon="pi pi-times" onClick={(e) => remove(e, index)} /></div>
+        const removeButton = <div><Button type="button" icon="pi pi-times" onClick={(e) => remove(e, index)} disabled={disabled} /></div>
         let content = (
             <>
                 {preview}
@@ -443,7 +461,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
         const chooseOptions = props.chooseOptions;
         const otherProps = ObjectUtils.findDiffKeys(props, FileUpload.defaultProps);
         const className = classNames('p-fileupload p-fileupload-basic p-component', props.className);
-        const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': hasFiles, 'p-disabled': props.disabled, 'p-focus': focusedState }, chooseOptions.className);
+        const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': hasFiles, 'p-disabled': disabled, 'p-focus': focusedState }, chooseOptions.className);
         const chooseIcon = chooseOptions.icon || classNames({ 'pi pi-plus': !chooseOptions.icon && (!hasFiles || props.auto), 'pi pi-upload': !chooseOptions.icon && hasFiles && !props.auto });
         const labelClassName = 'p-button-label p-clickable';
         const chooseLabel = chooseOptions.iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: "&nbsp;" }} /> : <span className={labelClassName}>{chooseButtonLabel}</span>;
@@ -453,7 +471,7 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
             </span>
         );
         const icon = IconUtils.getJSXIcon(chooseIcon, { className: 'p-button-icon p-button-icon-left' }, { props, hasFiles });
-        const input = !hasFiles && <input ref={fileInputRef} type="file" accept={props.accept} multiple={props.multiple} disabled={props.disabled} onChange={onFileSelect} />;
+        const input = !hasFiles && <input ref={fileInputRef} type="file" accept={props.accept} multiple={props.multiple} disabled={disabled} onChange={onFileSelect} />;
 
         return (
             <div className={className} style={props.style} {...otherProps}>
@@ -527,6 +545,7 @@ FileUpload.defaultProps = {
     progressBarTemplate: null,
     onBeforeUpload: null,
     onBeforeSend: null,
+    onBeforeDrop: null,
     onUpload: null,
     onError: null,
     onClear: null,

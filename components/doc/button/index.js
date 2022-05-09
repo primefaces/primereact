@@ -1146,7 +1146,30 @@ import { Button } from 'primereact/button';
 `}
 </CodeHighlight>
                     <h6>Keyboard Support</h6>
-                    <p>Button can receive focus using the <i>tab</i> key and can be activated either with <i>enter</i> or <i>space</i> keys.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the button.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Activates the button.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Activates the button.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

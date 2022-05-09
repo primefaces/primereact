@@ -1,15 +1,16 @@
 {
   "name": "primereact",
   "private": false,
-  "version": "8.0.0-SNAPSHOT",
+  "version": "8.1.0-SNAPSHOT",
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
     "build-lib": "NODE_ENV=production INPUT_DIR=components/lib/ OUTPUT_DIR=dist/ npm run build-package",
     "build-package": "rollup -c && gulp build-resources && npm run build-api",
     "build-api": "node ./api-generator/build-api.js",
+    "security-check": "npm audit --production --audit-level critical",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint --max-warnings=0"
   },
   "dependencies": {
     "chart.js": "3.3.2",

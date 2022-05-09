@@ -8,7 +8,7 @@ const GetStartedSection = () => {
             </Link>
             <div className="box download-box font-medium p-3 px-4 mt-3 md:mt-0 md:ml-3 bg-transparent inline-flex align-items-center fadeinright animation-duration-2000 animation-ease-out">
                 <i className="download-icon pi pi-download mr-3"></i>
-                <span className="font-bold" style={{fontFamily:'monaco'}}>npm i primereact</span>
+                <span className="font-bold select-all" style={{fontFamily:'monaco, monospace'}}>npm i primereact primeicons</span>
             </div>
         </section>
     );

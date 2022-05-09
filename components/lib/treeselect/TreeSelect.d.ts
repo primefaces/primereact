@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TreeNode from '../treenode';
+import TreeEventNodeParams from '../tree';
 import { CSSTransitionProps } from '../csstransition';
 
 type TreeSelectSelectionModeType = 'single' | 'multiple' | 'checkbox';
@@ -54,9 +55,7 @@ interface TreeSelectCheckboxSelectionKeyType {
     partialChecked?: boolean;
 }
 
-interface TreeSelectEventNodeParams {
-    originalEvent: React.SyntheticEvent;
-    node: TreeNode;
+interface TreeSelectEventNodeParams extends TreeEventNodeParams {
 }
 
 interface TreeSelectFilterValueChangeParams {
@@ -101,8 +100,8 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     onShow?(): void;
     onHide?(): void;
     onChange?(e: TreeSelectChangeParams): void;
-    onNodeSelect?(node: TreeNode): void;
-    onNodeUnselect?(node: TreeNode): void;
+    onNodeSelect?(e: TreeSelectEventNodeParams): void;
+    onNodeUnselect?(e: TreeSelectEventNodeParams): void;
     onNodeExpand?(e: TreeSelectEventNodeParams): void;
     onNodeCollapse?(e: TreeSelectEventNodeParams): void;
     onFilterValueChange?(e: TreeSelectFilterValueChangeParams): void;

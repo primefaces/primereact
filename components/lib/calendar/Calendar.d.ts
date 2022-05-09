@@ -55,12 +55,13 @@ interface CalendarVisibleChangeParams {
     callback?(): void;
 }
 
-interface CalendarNavigatorTemplateChangeParams {
-    event: React.SyntheticEvent;
-    value: string | number | undefined | null;
-}
+type CalendarNavigatorTemplateChangeCallback = (
+    event: React.SyntheticEvent,
+    value: string | number | undefined | null
+) => void;
+
 interface CalendarNavigatorTemplateParams {
-    onChange(e: CalendarNavigatorTemplateChangeParams): void;
+    onChange: CalendarNavigatorTemplateChangeCallback;
     className: string;
     value: string | number | undefined | null;
     names: any[];
@@ -149,7 +150,7 @@ export interface CalendarProps {
     onInput?(event: React.FormEvent<HTMLInputElement>): void;
     onSelect?(e: CalendarSelectParams): void;
     onChange?(e: CalendarChangeParams): void;
-    onMonthChange(e: CalendarMonthChangeParams): void
+    onMonthChange?(e: CalendarMonthChangeParams): void
     onViewDateChange?(e: CalendarViewChangeParams): void;
     onTodayButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
     onClearButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;

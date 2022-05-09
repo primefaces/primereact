@@ -664,6 +664,19 @@ return (
 `}
 </CodeHighlight>
 
+        <h5>TypeScript</h5>
+        <p>If you are using TypeScript you should install the Google Maps types.</p>
+
+<CodeHighlight lang="js">
+{`
+// npm install types into devDependencies
+npm i -D @types/google.maps
+
+// yarn install types into devDependencies
+yarn add @types/google.maps --production=false
+`}
+</CodeHighlight>
+
         <h5>Overlays</h5>
         <p>GMap can display any type of overlay such as markers, polygons and circles. Overlay instances are bound using the overlays property array. Overlays are aware
         of binding so whenever the array changes, gmap updates itself.</p>

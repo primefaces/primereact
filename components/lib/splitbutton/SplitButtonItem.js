@@ -26,7 +26,7 @@ export const SplitButtonItem = React.memo((props) => {
         const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props: props.splitButtonProps });
         const label = _label && <span className="p-menuitem-text">{_label}</span>;
         let content = (
-            <a href={url || '#'} role="menuitem" className={className} target={target} onClick={onClick}>
+            <a href={url || '#'} role="menuitem" className={className} target={target} onClick={onClick} aria-label={_label}>
                 {icon}
                 {label}
             </a>

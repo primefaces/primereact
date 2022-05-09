@@ -150,12 +150,26 @@ import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
 </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>MultiStateCheckbox is used as a controlled input with <i>value</i>, <i>options</i> and <i>onChange</i> properties.</p>
-<CodeHighlight>
+                    <p>MultiStateCheckbox is used as a controlled input with <i>value</i>, <i>options</i> and <i>onChange</i> properties. The <i>optionValue</i> field refers to the value of each option.</p>
+<CodeHighlight lang="js">
 {`
-<MultiStateCheckbox value={value} options={options} onChange={(e) => setValue(e.value)} />
+const [value, setValue] = useState('public');
+const options = [
+    { value: 'public', icon: 'pi pi-globe' },
+    { value: 'protected', icon: 'pi pi-lock-open' },
+    { value: 'private', icon: 'pi pi-lock' }
+];
 `}
 </CodeHighlight>
+
+<CodeHighlight>
+{`
+<MultiStateCheckbox value={value} options={options} onChange={(e) => setValue(e.value)} optionValue="value" />
+`}
+</CodeHighlight>
+
+                <h5>Icons</h5>
+                <p>Icon of each option is defined with the <i>icon</i> property of an option object. For templating use <i>iconTemplate</i> to render custom content inside the checkbox.</p>
 
                 <h5>Option</h5>
                 <div className="doc-tablewrapper">
@@ -192,7 +206,7 @@ import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
                 </div>
 
                 <h5>Properties</h5>
-                <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
+                <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">
                         <thead>
@@ -209,12 +223,6 @@ import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
                                 <td>string</td>
                                 <td>null</td>
                                 <td>Unique identifier of the element.</td>
-                            </tr>
-                            <tr>
-                                <td>inputId</td>
-                                <td>string</td>
-                                <td>null</td>
-                                <td>Unique identifier of the native checkbox element.</td>
                             </tr>
                             <tr>
                                 <td>value</td>
@@ -235,16 +243,22 @@ import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
                                 <td>Property name to use as the value of an option, defaults to the option itself when not defined.</td>
                             </tr>
                             <tr>
+                                <td>optionLabel</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Property name to refer to the option label, used by screen readers only. Defaults to optionValue.</td>
+                            </tr>
+                            <tr>
                                 <td>iconTemplate</td>
                                 <td>any</td>
                                 <td>null</td>
                                 <td>Template of icon for the selected option.</td>
                             </tr>
                             <tr>
-                                <td>name</td>
+                                <td>dataKey</td>
                                 <td>string</td>
                                 <td>null</td>
-                                <td>Name of the checkbox element .</td>
+                                <td>A property to uniquely match the value in options for better performance.</td>
                             </tr>
                             <tr>
                                 <td>style</td>
@@ -268,7 +282,13 @@ import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
                                 <td>readOnly</td>
                                 <td>boolean</td>
                                 <td>false</td>
-                                <td>When present, it specifies that the element value cannot be altered.</td>
+                                <td>When present, it specifies that the value cannot be changed.</td>
+                            </tr>
+                            <tr>
+                                <td>tabIndex</td>
+                                <td>number</td>
+                                <td>null</td>
+                                <td>Index of the element in tabbing order.</td>
                             </tr>
                             <tr>
                                 <td>empty</td>
@@ -287,18 +307,6 @@ import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
                                 <td>object</td>
                                 <td>null</td>
                                 <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
-                            </tr>
-                            <tr>
-                                <td>ariaLabelledBy</td>
-                                <td>string</td>
-                                <td>null</td>
-                                <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
-                            </tr>
-                            <tr>
-                                <td>dataKey</td>
-                                <td>string</td>
-                                <td>null</td>
-                                <td>A property to uniquely match the value in options for better performance.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -356,6 +364,41 @@ import { MultiStateCheckbox } from 'primereact/multistatecheckbox';
                         </tbody>
                     </table>
                 </div>
+
+                <h5>Accessibility</h5>
+                    <h6>Screen Reader</h6>
+                    <p>MultiStateCheckbox component uses an element with <i>checkbox</i> role. Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Component adds an element with
+                     <i>aria-live</i> attribute that is only visible to screen readers to read the value displayed. Values to read are defined with the <i>optionLabel</i> property that defaults to <i>optionValue</i> if not defined. Unchecked state label on the other hand is
+                     retrieved from <i>nullLabel</i> key of the <i>aria</i>  property from the <Link href="/theming">locale</Link> API. This is an example of a custom accessibility implementation as there is no one to one mapping between the component design and the WCAG specification.</p>
+<CodeHighlight>
+{`
+<span id="chkbox1">Access Type</span>
+<MultiStateCheckbox aria-labelledby="chkbox1" />
+
+<TriStateCheckbox aria-label="Access Type" />
+`}
+</CodeHighlight>
+                    <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the checkbox.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Toggles between the values.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                 <h5>Dependencies</h5>
                 <p>None.</p>

@@ -150,17 +150,19 @@ export const PickList = React.memo(React.forwardRef((props, ref) => {
 
     const otherProps = ObjectUtils.findDiffKeys(props, PickList.defaultProps);
     const className = classNames('p-picklist p-component', props.className);
+    const sourceItemTemplate = props.sourceItemTemplate ? props.sourceItemTemplate : props.itemTemplate;
+    const targetItemTemplate = props.targetItemTemplate ? props.targetItemTemplate : props.itemTemplate;
 
     return (
         <div id={props.id} className={className} style={props.style} {...otherProps}>
             {props.showSourceControls && <PickListControls list={props.source} selection={sourceSelection} onReorder={onSourceReorder} className="p-picklist-source-controls" dataKey={props.dataKey} />}
 
-            <PickListSubList ref={sourceListElementRef} list={props.source} selection={sourceSelection} onSelectionChange={(e) => onSelectionChange(e, 'sourceSelection', props.onSourceSelectionChange)} itemTemplate={props.itemTemplate}
+            <PickListSubList ref={sourceListElementRef} list={props.source} selection={sourceSelection} onSelectionChange={(e) => onSelectionChange(e, 'sourceSelection', props.onSourceSelectionChange)} itemTemplate={sourceItemTemplate}
                 header={props.sourceHeader} style={props.sourceStyle} className="p-picklist-source-wrapper" listClassName="p-picklist-source" metaKeySelection={props.metaKeySelection} tabIndex={props.tabIndex} dataKey={props.dataKey} />
 
             <PickListTransferControls onTransfer={onTransfer} source={props.source} target={props.target} sourceSelection={sourceSelection} targetSelection={targetSelection} dataKey={props.dataKey} />
 
-            <PickListSubList ref={targetListElementRef} list={props.target} selection={targetSelection} onSelectionChange={(e) => onSelectionChange(e, 'targetSelection', props.onTargetSelectionChange)} itemTemplate={props.itemTemplate}
+            <PickListSubList ref={targetListElementRef} list={props.target} selection={targetSelection} onSelectionChange={(e) => onSelectionChange(e, 'targetSelection', props.onTargetSelectionChange)} itemTemplate={targetItemTemplate}
                 header={props.targetHeader} style={props.targetStyle} className="p-picklist-target-wrapper" listClassName="p-picklist-target" metaKeySelection={props.metaKeySelection} tabIndex={props.tabIndex} dataKey={props.dataKey} />
 
             {props.showTargetControls && <PickListControls list={props.target} selection={targetSelection} onReorder={onTargetReorder} className="p-picklist-target-controls" dataKey={props.dataKey} />}
@@ -189,6 +191,8 @@ PickList.defaultProps = {
     tabIndex: 0,
     dataKey: null,
     itemTemplate: null,
+    sourceItemTemplate: null,
+    targetItemTemplate: null,
     onChange: null,
     onMoveToSource: null,
     onMoveAllToSource: null,

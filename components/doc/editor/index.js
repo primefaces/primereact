@@ -213,7 +213,7 @@ const header = (
 </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -347,6 +347,9 @@ const header = (
                         </table>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <p>Quill performs generally well in terms of accessibility. The elements in the toolbar can be tabbed and have the necessary ARIA roles/attributes for screen readers. One known limitation is the lack of arrow key support
+                        for <a href="https://github.com/quilljs/quill/issues/1031">dropdowns</a> in the toolbar that may be overcome with a custom toolbar.</p>
 
                     <h5>Dependencies</h5>
                     <p><a href="http://quilljs.com">Quill</a> Editor 1.3+.</p>

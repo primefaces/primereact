@@ -30,5 +30,6 @@ jobs:
       run: |
         npm install
         npm run lint
+        npm run security-check
         npm run build-lib
 
