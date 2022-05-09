@@ -55,12 +55,13 @@ interface CalendarVisibleChangeParams {
     callback?(): void;
 }
 
-interface CalendarNavigatorTemplateChangeParams {
-    event: React.SyntheticEvent;
-    value: string | number | undefined | null;
-}
+type CalendarNavigatorTemplateChangeCallback = (
+    event: React.SyntheticEvent,
+    value: string | number | undefined | null
+) => void;
+
 interface CalendarNavigatorTemplateParams {
-    onChange(e: CalendarNavigatorTemplateChangeParams): void;
+    onChange: CalendarNavigatorTemplateChangeCallback;
     className: string;
     value: string | number | undefined | null;
     names: any[];
