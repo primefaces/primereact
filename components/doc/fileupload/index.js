@@ -1003,6 +1003,11 @@ const buttonOptions = {
                                     such as adding headers.</td>
                             </tr>
                             <tr>
+                                <td>onBeforeDrop</td>
+                                <td>event: DragEvent instance.</td>
+                                <td>Callback to invoke before files dropped. Return false from callback to prevent drop.</td>
+                            </tr>
+                            <tr>
                                 <td>onUpload</td>
                                 <td>event.xhr: XmlHttpRequest instance.<br />
                                     event.files: Uploaded files.</td>
