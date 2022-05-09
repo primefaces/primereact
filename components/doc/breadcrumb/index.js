@@ -202,12 +202,6 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
                                     <td>MenuItem configuration for the home icon.</td>
                                 </tr>
                                 <tr>
-                                    <td>homeTemplate</td>
-                                    <td>any</td>
-                                    <td>null</td>
-                                    <td>Template to use instead of home menu item to control the rendering and attributes of the home node.</td>
-                                </tr>
-                                <tr>
                                     <td>style</td>
                                     <td>string</td>
                                     <td>null</td>

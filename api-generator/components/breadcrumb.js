@@ -7,7 +7,7 @@ const BreadCrumbProps = [
     },
     {
         name: 'model',
-        type: 'array',
+        type: 'MenuItem[]',
         default: 'null',
         description: 'An array of menuitems.'
     },
@@ -16,12 +16,6 @@ const BreadCrumbProps = [
         type: 'MenuItem',
         default: 'null',
         description: 'MenuItem configuration for the home icon.'
-    },
-    {
-        name: 'homeTemplate',
-        type: 'function',
-        default: 'null',
-        description: 'Template function to render the Home icon.'
     },
     {
         name: 'style',
