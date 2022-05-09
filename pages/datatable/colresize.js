@@ -55,7 +55,7 @@ const DataTableColResizeDemo = () => {
                 </div>
 
                 <div className="card">
-                    <h5>Choose Resiable Columns</h5>
+                    <h5>Choose Resizable Columns</h5>
                     <DataTable value={products} resizableColumns columnResizeMode="fit" showGridlines responsiveLayout="scroll">
                         <Column field="code" header="Code" style={{width:'20%'}}/>
                         <Column field="name" header="Name" style={{width:'40%'}}/>
