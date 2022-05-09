@@ -152,7 +152,7 @@
 }
 
 .p-datatable-scrollable .p-virtualscroller > .p-datatable-table {
-    display: block;
+    display: inline-block; /* For Safari */
 }
 
 /* Resizable */
