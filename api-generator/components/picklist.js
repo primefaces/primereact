@@ -81,7 +81,19 @@ const PickListProps = [
         name: 'itemTemplate',
         type: 'function',
         default: 'null',
-        description: 'Function that gets the option and returns the content for it.'
+        description: 'Template function that gets the options for both source and target items and returns the content for it.'
+    },
+    {
+        name: 'sourceItemTemplate',
+        type: 'function',
+        default: 'null',
+        description: 'Template function that gets the options for the source items and returns the content for it.'
+    },
+    {
+        name: 'targetItemTemplate',
+        type: 'function',
+        default: 'null',
+        description: 'Template function that gets the options for the target items and returns the content for it.'
     },
     {
         name: 'metaKeySelection',

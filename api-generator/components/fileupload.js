@@ -215,6 +215,17 @@ const FileUploadEvents = [
         ]
     },
     {
+        name: 'onBeforeDrop',
+        description: 'Callback to invoke before files dropped. Return false from callback to prevent drop.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original browser event.'
+            },
+        ]
+    },
+    {
         name: 'onUpload',
         description: 'Callback to invoke when file upload is complete.',
         arguments: [

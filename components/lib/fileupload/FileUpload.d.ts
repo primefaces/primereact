@@ -114,6 +114,7 @@ interface FileUploadProps {
     progressBarTemplate?: FileUploadProgressBarTemplateType;
     onBeforeUpload?(e: FileUploadBeforeUploadParams): void;
     onBeforeSend?(e: FileUploadBeforeSendParams): void;
+    onBeforeDrop?(e: DragEvent): void;
     onUpload?(e: FileUploadUploadParams): void;
     onError?(e: FileUploadErrorParams): void;
     onClear?(): void;
