@@ -15,7 +15,7 @@ interface InputSwitchChangeParams {
     target: InputSwitchChangeTargetOptions;
 }
 
-export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
+export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     style?: object;
