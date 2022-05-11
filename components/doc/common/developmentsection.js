@@ -5,9 +5,7 @@ export const DevelopmentSection = React.memo((props) => {
 
     if (isProduction) {
         return (
-            <small>
-                * This section is under development. After the necessary tests and improvements are made, it will be shared with the users as soon as possible.
-            </small>
+            <p>This section is under development. After the necessary tests and improvements are made, it will be shared with the users as soon as possible.</p>
         )
     }
 

@@ -544,7 +544,7 @@ const confirm = (event) => {
                     <p>It is recommended to use a trigger component that can be accessed with keyboard such as a button, if not adding <i>tabIndex</i> would be necessary. ConfirmPopup
                     adds <i>aria-expanded</i> state attribute and <i>aria-controls</i> to the trigger so that the relation between the trigger and the popup is defined.</p>
 
-                    <h6>OverlayPanel Keyboard Support</h6>
+                    <h6>Overlay Keyboard Support</h6>
                     <p>When the popup gets opened, the first focusable element receives the focus and this can be customized by adding <i>autofocus</i> to an element within the popup.</p>
 
                     <div className="doc-tablewrapper">
