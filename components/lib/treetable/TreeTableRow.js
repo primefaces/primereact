@@ -321,7 +321,7 @@ export const TreeTableRow = React.memo((props) => {
         }
 
         return (
-            <TreeTableBodyCell key={column.props.columnKey || column.props.field} {...column.props} selectOnEdit={props.selectOnEdit} selected={isSelected()} node={props.node} rowIndex={props.rowIndex}>
+            <TreeTableBodyCell key={column.props.columnKey || column.props.field} {...column.props} column={column} selectOnEdit={props.selectOnEdit} selected={isSelected()} node={props.node} rowIndex={props.rowIndex}>
                 {toggler}
                 {checkbox}
             </TreeTableBodyCell>
