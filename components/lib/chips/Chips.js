@@ -80,10 +80,6 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
             return;
         }
 
-        if (props.keyfilter) {
-            KeyFilter.onKeyPress(event, props.keyfilter)
-        }
-
         switch (event.which) {
             //backspace
             case 8:
@@ -100,6 +96,9 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
                 break;
 
             default:
+                if (props.keyfilter) {
+                    KeyFilter.onKeyPress(event, props.keyfilter)
+                }
                 if (isMaxedOut()) {
                     event.preventDefault();
                 }
