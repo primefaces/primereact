@@ -741,6 +741,8 @@ itemTemplate(item) {
 }
 `}
 </CodeHighlight>
+                    <h5>KeyFilter</h5>
+                    <p>AutoComplete has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.</p>
 
                     <h5>Properties</h5>
                     <p>Standard HTMLSpanElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
@@ -947,6 +949,12 @@ itemTemplate(item) {
                                     <td>boolean</td>
                                     <td>false</td>
                                     <td>When present, it specifies that the component should automatically get focus on load.</td>
+                                </tr>
+                                <tr>
+                                    <td>keyfilter</td>
+                                    <td>string/regex</td>
+                                    <td>null</td>
+                                    <td>Format definition of the keys to block.</td>
                                 </tr>
                                 <tr>
                                     <td>tooltip</td>

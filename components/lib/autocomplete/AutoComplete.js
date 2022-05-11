@@ -3,6 +3,7 @@ import PrimeReact from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
+import { KeyFilter } from '../keyfilter/KeyFilter';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
@@ -297,6 +298,9 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
                     break;
 
                 default:
+                    if (props.keyfilter) {
+                        KeyFilter.onKeyPress(event, props.keyfilter)
+                    }
                     break;
             }
         }
@@ -321,6 +325,9 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
                     break;
 
                 default:
+                    if (props.keyfilter) {
+                        KeyFilter.onKeyPress(event, props.keyfilter)
+                    }
                     break;
             }
         }

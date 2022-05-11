@@ -186,6 +186,12 @@ const AutoCompleteProps = [
         description: 'When present, it specifies that the component should automatically get focus on load.'
     },
     {
+        name: 'keyfilter',
+        type: 'string/regex',
+        default: 'null',
+        description: 'Format definition of the keys to block.'
+    },
+    {
         name: 'tooltip',
         type: 'any',
         default: 'null',

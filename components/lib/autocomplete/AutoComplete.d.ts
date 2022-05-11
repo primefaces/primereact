@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import { KeyFilterType } from '../keyfilter';
 import { VirtualScrollerProps } from '../virtualscroller';
 import { CSSTransitionProps } from '../csstransition';
 import { IconType } from '../utils';
@@ -81,6 +82,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     appendTo?: AutoCompleteAppendToType;
     tabIndex?: number;
     autoFocus?: boolean;
+    keyfilter?: KeyFilterType;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     completeMethod?(e: AutoCompleteCompleteMethodParams): void;
