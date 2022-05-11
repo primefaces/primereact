@@ -34,11 +34,11 @@ export const StyleClass = React.forwardRef((props, ref) => {
     });
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
-        type: 'animationend', listener: (event) => {
-            if (getComputedStyle(targetRef.current).getPropertyValue('position') === 'static') {
+        type: 'click', listener: (event) => {
+            if (!isVisible(targetRef.current) || getComputedStyle(targetRef.current).getPropertyValue('position') === 'static') {
                 unbindDocumentClickListener();
             }
-            else if (!elementRef.current.isSameNode(event.target) && !elementRef.current.contains(event.target) && !targetRef.current.contains(event.target)) {
+            else if (isOutsideClick(event)) {
                 leave();
             }
         }, when: false
@@ -119,7 +119,9 @@ export const StyleClass = React.forwardRef((props, ref) => {
             }
         }
 
-        unbindDocumentClickListener();
+        if (props.hideOnOutsideClick) {
+            unbindDocumentClickListener();
+        }
     }
 
     const resolveTarget = () => {
@@ -154,6 +156,14 @@ export const StyleClass = React.forwardRef((props, ref) => {
         unbindClickListener();
         unbindDocumentClickListener();
         targetRef.current = null;
+    }
+
+    const isVisible = (target) => {
+        return target.offsetParent !== null;
+    }
+
+    const isOutsideClick = (event) => {
+        return !elementRef.current.isSameNode(event.target) && !elementRef.current.contains(event.target) && !targetRef.current.contains(event.target)
     }
 
     useMountEffect(() => {
