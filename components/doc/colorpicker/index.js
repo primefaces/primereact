@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const ColorPickerDoc = memo(() => {
 
@@ -353,6 +354,7 @@ import { ColorPicker } from 'primereact/colorpicker';
                     </div>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>Specification does not cover a color picker <a href="https://github.com/w3c/aria/issues/930">yet</a> and using a semantic native color picker is not consistent across browsers so currently component is not compatible with screen readers.
                     In the upcoming versions, text fields will be introduced below the slider section to be able to pick a color using accessible text boxes in hsl, rgba and hex formats.</p>
@@ -445,7 +447,7 @@ import { ColorPicker } from 'primereact/colorpicker';
                             </tbody>
                         </table>
                     </div>
-
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>

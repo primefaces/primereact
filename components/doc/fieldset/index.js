@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 export const FieldsetDoc  = memo(() => {
 
@@ -329,8 +330,9 @@ import { Fieldset } from 'primereact/fieldset';
                     </div>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
-                    <p>Fieldset component uses the semantic <i>fieldset</i> element. When toggleable option is enabled, a clickable element with <i>button</i> role is included inside the <i>legend</i> element, this button 
+                    <p>Fieldset component uses the semantic <i>fieldset</i> element. When toggleable option is enabled, a clickable element with <i>button</i> role is included inside the <i>legend</i> element, this button
                     has <i>aria-controls</i> to define the id of the content section along with <i>aria-expanded</i> for the visibility state. The value to read the button
                     defaults to the value of the <i>legend</i> property and can be customized by defining an <i>aria-label</i> or <i>aria-labelledby</i> via the <i>toggleButtonProps</i> property.</p>
                     <p>The content uses <i>region</i>, defines an id that matches the <i>aria-controls</i> of the content toggle button and <i>aria-labelledby</i> referring to the id of the header.</p>
@@ -364,7 +366,7 @@ import { Fieldset } from 'primereact/fieldset';
                             </tbody>
                         </table>
                     </div>
-
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
 

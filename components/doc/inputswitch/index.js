@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const InputSwitchDoc = memo(() => {
 
@@ -292,6 +293,7 @@ import { InputSwitch } from 'primereact/inputswitch';
                 </div>
 
                 <h5>Accessibility</h5>
+            <DevelopmentSection>
                 <h6>Screen Reader</h6>
                 <p>InputSwitch component uses a hidden native checkbox element with <i>switch</i> role internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
 <CodeHighlight>
@@ -326,7 +328,7 @@ import { InputSwitch } from 'primereact/inputswitch';
                         </tbody>
                     </table>
                 </div>
-                
+            </DevelopmentSection>
                 <h5>Dependencies</h5>
                 <p>None.</p>
             </TabPanel>

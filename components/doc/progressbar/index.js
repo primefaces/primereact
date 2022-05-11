@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const ProgressBarDoc = memo(() => {
 
@@ -418,6 +419,7 @@ import { ProgressBar } from 'primereact/progressbar';
                         </table>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>ProgressBar components uses <i>progressbar</i> role along with <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes. Value to describe the component can be defined using
                     <i>aria-labelledby</i> and <i>aria-label</i> props.</p>
@@ -432,7 +434,7 @@ import { ProgressBar } from 'primereact/progressbar';
 
                     <h6>Keyboard Support</h6>
                     <p>Not applicable.</p>
-
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </div>

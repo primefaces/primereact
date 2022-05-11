@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const TabViewDoc = memo(() => {
 
@@ -1179,7 +1180,8 @@ template: (options) => {
                         </table>
                     </div>
 
-                    <h5>Accessibility</h5>
+                        <h5>Accessibility</h5>
+                    <DevelopmentSection>
                         <h6>Screen Reader</h6>
                         <p>TabView container is defined with the <i>tablist</i> role, as any attribute is passed to the container element <i>aria-labelledby</i> can be optionally used to specify an element to describe the TabView. Each tab header
                         has a <i>tab</i> role along with <i>aria-selected</i> state attribute and <i>aria-controls</i> to refer to the corresponding tab content element. The content element of each tab has <i>tabpanel</i> role, an id to match the
@@ -1227,7 +1229,7 @@ template: (options) => {
                             </table>
                         </div>
 
-
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
 

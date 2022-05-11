@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const DeferredContentDoc = memo(() => {
 
@@ -315,6 +316,7 @@ import { DeferredContent } from 'primereact/deferredcontent';
                     <p>Component does not apply any styling.</p>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>DeferredContent can be utilized in many use cases as a result no role is enforced, in fact a role may not be necessary if the card is used for presentational purposes only.
                         Any valid attribute is passed to the container element so you have full control over the roles like <a href="https://www.w3.org/TR/wai-aria/#landmark" alt="Landmark Roles">landmark</a> and attributes like <i>aria-live</i>.
@@ -330,7 +332,7 @@ import { DeferredContent } from 'primereact/deferredcontent';
 
                     <h5>Keyboard Support</h5>
                     <p>Component does not include any interactive elements.</p>
-
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>

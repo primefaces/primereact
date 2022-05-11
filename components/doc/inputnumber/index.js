@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const InputNumberDoc = memo(() => {
 
@@ -1075,8 +1076,9 @@ Vertical
                     </div>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
-                    <p>Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. 
+                    <p>Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.
                     The input element uses <i>spinbutton</i> role in addition to the <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes.</p>
 <CodeHighlight>
 {`
@@ -1123,7 +1125,7 @@ Vertical
                             </tbody>
                         </table>
                     </div>
-
+                </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

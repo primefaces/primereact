@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const KnobDoc = memo(() => {
 
@@ -603,6 +604,7 @@ import { Knob } from 'primereact/knob';
                     </div>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>Knob element component uses <i>slider</i> role in addition to the <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes. Value to describe the component can be defined using
                     <i>aria-labelledby</i> and <i>aria-label</i> props.</p>
@@ -665,7 +667,7 @@ import { Knob } from 'primereact/knob';
                             </tbody>
                         </table>
                     </div>
-
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>

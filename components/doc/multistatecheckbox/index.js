@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const MultiStateCheckboxDoc = memo(() => {
 
@@ -365,7 +366,8 @@ const options = [
                     </table>
                 </div>
 
-                <h5>Accessibility</h5>
+                    <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>MultiStateCheckbox component uses an element with <i>checkbox</i> role. Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Component adds an element with
                      <i>aria-live</i> attribute that is only visible to screen readers to read the value displayed. Values to read are defined with the <i>optionLabel</i> property that defaults to <i>optionValue</i> if not defined. Unchecked state label on the other hand is
@@ -399,7 +401,7 @@ const options = [
                             </tbody>
                         </table>
                     </div>
-
+                </DevelopmentSection>
                 <h5>Dependencies</h5>
                 <p>None.</p>
             </TabPanel>

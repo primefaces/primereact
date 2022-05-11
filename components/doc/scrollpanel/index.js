@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const ScrollPanelDoc = memo(() => {
 
@@ -482,6 +483,7 @@ import { ScrollPanel } from 'primereact/scrollpanel';
                         </table>
 
                         <h5>Accessibility</h5>
+                    <DevelopmentSection>
                         <h6>Screen Reader</h6>
                         <p>Scrollbars of the ScrollPanel has a <i>scrollbar</i> role along with the <i>aria-controls</i> attribute that refers to the id of the scrollable content container and the <i>aria-orientation</i> to indicate the orientation of scrolling.</p>
 
@@ -514,7 +516,7 @@ import { ScrollPanel } from 'primereact/scrollpanel';
                                 </tbody>
                             </table>
                         </div>
-
+                    </DevelopmentSection>
                         <h5>Dependencies</h5>
                         <p>None.</p>
                     </div>

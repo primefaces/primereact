@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const ListBoxDoc = memo(() => {
 
@@ -547,7 +548,7 @@ itemTemplate(option) {
 {`
 <ListBox value={city} options={cities} onChange={(e) => setCity(e.value)} filter filterInputProps={{className:'p-3', maxLength: 10}}/>
 `}
-</CodeHighlight>                
+</CodeHighlight>
 
                     <h5>Grouping</h5>
                     <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
@@ -893,6 +894,7 @@ const groupedCities = [
                     </div>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>Value to describe the component can be provided  <i>aria-labelledby</i> or <i>aria-label</i> props. The list element has a <i>listbox</i> role with the <i>aria-multiselectable</i> attribute that sets to true when multiple selection is enabled.
                     Each list item has an <i>option</i> role with <i>aria-selected</i> and <i>aria-disabled</i> as their attributes.</p>
@@ -970,7 +972,7 @@ const groupedCities = [
                             </tbody>
                         </table>
                     </div>
-
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>

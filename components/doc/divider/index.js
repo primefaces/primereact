@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const DividerDoc = memo(() => {
 
@@ -717,7 +718,7 @@ import { Divider } from 'primereact/divider';
 <div>Content 4</div>
 `}
 </CodeHighlight>
-            
+
                 <h5>Properties</h5>
                 <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                 <div className="doc-tablewrapper">
@@ -814,12 +815,13 @@ import { Divider } from 'primereact/divider';
                 </div>
 
                 <h5>Accessibility</h5>
+            <DevelopmentSection>
                 <h6>Screen Reader</h6>
                 <p>Divider uses a <i>separator</i> role with <i>aria-orientation</i> set to either "horizontal" or "vertical".</p>
 
                 <h5>Keyboard Support</h5>
                 <p>Component does not include any interactive elements.</p>
-
+            </DevelopmentSection>
                 <h5>Dependencies</h5>
                 <p>None.</p>
             </TabPanel>

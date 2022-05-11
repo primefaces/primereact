@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const DropdownDoc = memo(() => {
 
@@ -1446,9 +1447,10 @@ const groupedCities = [
                     </div>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The dropdown element has a <i>combobox</i> role
-                    in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. If the editable option is enabled <i>aria-autocomplete</i> is also added. 
+                    in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. If the editable option is enabled <i>aria-autocomplete</i> is also added.
                     The relation between the combobox and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
                     to instruct screen reader which option to read during keyboard navigation within the popup list.</p>
                     <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the <i>combobox</i> element and uses <i>listbox</i> as the role. Each list item has an <i>option</i> role, an id to match the <i>aria-activedescendant</i> of the input element along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-disabled</i> attributes.</p>
@@ -1575,7 +1577,7 @@ const groupedCities = [
                             </tbody>
                         </table>
                     </div>
-
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>

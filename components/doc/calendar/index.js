@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const CalendarDoc = memo(() => {
 
@@ -1340,6 +1341,7 @@ const monthNavigatorTemplate = (options) => {
                         </table>
 
                         <h5>Accessibility</h5>
+                    <DevelopmentSection>
                         <h6>Screen Reader</h6>
                         <p>Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element has <i>combobox</i> role
                         in addition to <i>aria-autocomplete</i> as "none", <i>aria-haspopup</i> as "dialog" and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> attribute that refers to the id of the popup.</p>
@@ -1347,7 +1349,7 @@ const monthNavigatorTemplate = (options) => {
                         key of the aria property from the <Link href="/theming">locale</Link> API. This label is also used for the <i>aria-label</i> of the popup as well. When there is a value selected, it is formatted and appended to the label to be able to notify users
                         about the current value.</p>
 
-                        <p>Popup has a <i>dialog</i> role along with <i>aria-modal</i> and <i>aria-label</i>. The navigation buttons at the header has an <i>aria-label</i> retrieved from the <i>prevYear</i>, <i>nextYear</i>, <i>prevMonth</i>, <i>nextMonth</i>, 
+                        <p>Popup has a <i>dialog</i> role along with <i>aria-modal</i> and <i>aria-label</i>. The navigation buttons at the header has an <i>aria-label</i> retrieved from the <i>prevYear</i>, <i>nextYear</i>, <i>prevMonth</i>, <i>nextMonth</i>,
                         <i>prevDecade</i> and <i>nextDecade</i> keys of the locale aria API. Similarly month picker button uses the <i>chooseMonth</i> and year picker button uses the <i>chooseYear</i> keys.</p>
 
                         <p>Main date table uses <i>grid</i> role that contains th elements with <i>col</i> as the scope along with <i>abbr</i> tag resolving to the full name of the month. Each date cell has an <i>aria-label</i> referring to the full date value.
@@ -1520,7 +1522,7 @@ const monthNavigatorTemplate = (options) => {
                                 </tbody>
                             </table>
                         </div>
-
+                    </DevelopmentSection>
                         <h5>Dependencies</h5>
                         <p>None.</p>
                     </div>

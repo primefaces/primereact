@@ -3,6 +3,7 @@ import Link  from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const AutoCompleteDoc = memo(() => {
 
@@ -1153,6 +1154,7 @@ itemTemplate(item) {
                     </div>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element has <i>combobox</i> role
                     in addition to <i>aria-autocomplete</i>, <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
@@ -1182,7 +1184,7 @@ itemTemplate(item) {
                             <tbody>
                                 <tr>
                                     <td><i>tab</i></td>
-                                    <td>Moves focus to the input element when popup is not visible. 
+                                    <td>Moves focus to the input element when popup is not visible.
                                         If the popup is open and an item is highlighted then popup gets closed, item gets selected and focus moves to the next focusable element.</td>
                                 </tr>
                                 <tr>
@@ -1260,7 +1262,9 @@ itemTemplate(item) {
                             </tbody>
                         </table>
                     </div>
-                    
+                </DevelopmentSection>
+
+
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const AccordionDoc = memo(() => {
 
@@ -806,8 +807,9 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                         </div>
 
                         <h5>Accessibility</h5>
+                    <DevelopmentSection>
                         <h6>Screen Reader</h6>
-                        <p>Accordion header elements have a <i>button</i> role and use <i>aria-controls</i> to define the id of the content section along with <i>aria-expanded</i> for the visibility state. The value to read a header element 
+                        <p>Accordion header elements have a <i>button</i> role and use <i>aria-controls</i> to define the id of the content section along with <i>aria-expanded</i> for the visibility state. The value to read a header element
                         defaults to the value of the <i>header</i> property and can be customized by defining an <i>aria-label</i> or <i>aria-labelledby</i> via the <i>headerProps</i> property.</p>
                         <p>The content uses <i>region</i>, defines an id that matches the <i>aria-controls</i> of the header and <i>aria-labelledby</i> referring to the id of the header.</p>
 
@@ -856,7 +858,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                                 </tbody>
                             </table>
                         </div>
-
+                    </DevelopmentSection>
                         <h5>Dependencies</h5>
                         <ul>
                             <li>react-transition-group</li>

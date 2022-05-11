@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const RatingDoc = memo(() => {
 
@@ -318,6 +319,7 @@ import { Rating } from 'primereact/rating';
                     </div>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>Rating component internally uses radio buttons that are only visible to screen readers. The value to read for item is retrieved from the <Link href="/theming">locale</Link> API via <i>star</i> and <i>stars</i> of the <i>aria</i> property.</p>
 
@@ -361,7 +363,7 @@ import { Rating } from 'primereact/rating';
                             </tbody>
                         </table>
                     </div>
-
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
