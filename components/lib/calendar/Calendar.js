@@ -3048,10 +3048,10 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
                 transitionOptions={props.transitionOptions}>
                 {datePicker}
                 {timePicker}
-                {buttonBar}
-                {footer}
                 {monthPicker}
                 {yearPicker}
+                {buttonBar}
+                {footer}
             </CalendarPanel>
         </span>
     )
