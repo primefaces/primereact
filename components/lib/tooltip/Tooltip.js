@@ -172,7 +172,7 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
                     DomHandler.removeClass(elementRef.current, 'p-tooltip-active');
 
                     setVisibleState(false);
-                    setPositionState(props.position);
+                    setPositionState(getPosition(currentTargetRef.current));
                     currentTargetRef.current = null;
                     containerSize.current = null;
                     allowHide.current = true;
@@ -435,7 +435,7 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
     const createElement = () => {
         const otherProps = ObjectUtils.findDiffKeys(props, Tooltip.defaultProps);
         const tooltipClassName = classNames('p-tooltip p-component', {
-            [`p-tooltip-${positionState}`]: true
+            [`p-tooltip-${getPosition(currentTargetRef.current)}`]: true
         }, props.className);
         const empty = isTargetContentEmpty(currentTargetRef.current);
 
