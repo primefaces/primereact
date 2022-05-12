@@ -1503,6 +1503,12 @@ export const DataTableDemo = () => {
                                     <td>null</td>
                                     <td>Used to defined reorderableColumns per column when reorderableColumns of table is enabled, defaults to value of reorderableColumns.</td>
                                 </tr>
+                                <tr>
+                                    <td>resizeable</td>
+                                    <td>boolean</td>
+                                    <td>null</td>
+                                    <td>Used to defined resizeableColumns per column when resizeableColumns of table is enabled, defaults to value of resizeableColumns.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -2513,6 +2519,18 @@ export const DataTableRowExpansionDemo = () => {
     <Column field="code" header="Code" style={{width:'20%'}}></Column>
     <Column field="name" header="Name" style={{width:'40%'}}></Column>
     <Column field="category" header="Category" style={{width:'20%'}}></Column>
+    <Column field="quantity" header="Quantity" style={{width:'30%'}}></Column>
+</DataTable>
+`}
+</CodeHighlight>
+
+                    <p>You can choose which columns are <i>resizeable</i> per column.</p>
+<CodeHighlight>
+{`
+<DataTable value={products} resizableColumns>
+    <Column field="code" header="Code" style={{width:'20%'}}></Column>
+    <Column field="name" header="Name" style={{width:'40%'}}></Column>
+    <Column field="category" header="Category (not resizable)" style={{width:'20%'}} resizeable={false} />
     <Column field="quantity" header="Quantity" style={{width:'30%'}}></Column>
 </DataTable>
 `}

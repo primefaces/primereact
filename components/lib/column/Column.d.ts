@@ -235,6 +235,7 @@ export interface ColumnProps {
     rowEditor?: boolean;
     exportable?: boolean;
     reorderable?: boolean;
+    resizeable?: boolean;
     excludeGlobalFilter?: boolean;
     onCellEditInit?(e: ColumnEventParams): void;
     onCellEditComplete?(e: ColumnEventParams): void;
