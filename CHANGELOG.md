@@ -1,5 +1,52 @@
 # Changelog
 
+## [8.1.0](https://github.com/primefaces/primereact/tree/8.1.0) (2022-05-12)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.0.0...8.1.0)
+
+**Implemented New Features and Enhancements:**
+
+- Paginator: Accessible buttons [\#2827](https://github.com/primefaces/primereact/issues/2827)
+- FileUpload: Validate files before adding on drop [\#2690](https://github.com/primefaces/primereact/issues/2690)
+- PickList : Add itemTemplate for target and source lists [\#2606](https://github.com/primefaces/primereact/issues/2606)
+- Breadcrumb: home icon is not acccessible [\#2226](https://github.com/primefaces/primereact/issues/2226)
+- DataTable : Edit, save and cancel button do not have accessible names  [\#2128](https://github.com/primefaces/primereact/issues/2128)
+- SlideMenu: Performance enhancement [\#2060](https://github.com/primefaces/primereact/issues/2060)
+- Dropdown: once focused to the field Enter key is not displaying list [\#1929](https://github.com/primefaces/primereact/issues/1929)
+- DataTable: drop p-resizable-column for expander columns [\#1862](https://github.com/primefaces/primereact/issues/1862)
+- FileUpload: Disable buttons while uploading [\#1525](https://github.com/primefaces/primereact/issues/1525)
+- Carousel: Improve button accessibility [\#1432](https://github.com/primefaces/primereact/issues/1432)
+- Column: resizable/reorderable for individual column level [\#1367](https://github.com/primefaces/primereact/issues/1367)
+
+**Fixed bugs:**
+
+- Datatable: reorderableColumns isn't working [\#2784](https://github.com/primefaces/primereact/issues/2784)
+- InputSwitch: InputSwitchProps says incompatible type [\#2876](https://github.com/primefaces/primereact/issues/2876)
+- StyleClass: may fail to enter the element [\#2873](https://github.com/primefaces/primereact/issues/2873)
+- TreeTable: column parameter not passed to ColumnBodyOptions [\#2870](https://github.com/primefaces/primereact/issues/2870)
+- \[v8\] Importing CSS omitted from bundle when using import syntax [\#2868](https://github.com/primefaces/primereact/issues/2868)
+- Paginator: Wrong check triggers on example [\#2866](https://github.com/primefaces/primereact/issues/2866)
+- Header elements in DataTable with virtualScroller are not in the correct position on the scroll. [\#2861](https://github.com/primefaces/primereact/issues/2861)
+- MultiSelect: Does not properly filter with groups if not using children name "items" [\#2856](https://github.com/primefaces/primereact/issues/2856)
+- MultiSelect: Causes horizontal scroll to align with multiselect option panel when opening panel when an item is selected [\#2855](https://github.com/primefaces/primereact/issues/2855)
+- OverlayPanel: breakpoints property breaks app [\#2852](https://github.com/primefaces/primereact/issues/2852)
+- InputNumber: Touch and hold button spin doesn't work on iOS browser [\#2849](https://github.com/primefaces/primereact/issues/2849)
+- Calendar: Wrong month names in multiple months view [\#2845](https://github.com/primefaces/primereact/issues/2845)
+- Calendar: wrong typing for onClick event of navigatorTemplate [\#2844](https://github.com/primefaces/primereact/issues/2844)
+- InputNumber: On mobile, the focus on input makes using increment / decrement buttons difficult [\#2843](https://github.com/primefaces/primereact/issues/2843)
+- FileUploader: Converts event.files into SyntheticBaseEvent when in advanced mode [\#2836](https://github.com/primefaces/primereact/issues/2836)
+- Splitter: Changed behavior in 8.x, when more than two panels are are used [\#2830](https://github.com/primefaces/primereact/issues/2830)
+- DataTable: Custom sort functions throw errors in single sort mode [\#2821](https://github.com/primefaces/primereact/issues/2821)
+- ARIA: Lint Failures [\#2819](https://github.com/primefaces/primereact/issues/2819)
+- Carousel: Display issues when loading less items that the allocated slots [\#2814](https://github.com/primefaces/primereact/issues/2814)
+- PanelMenu: is closing and opening again when menu is reloaded [\#2804](https://github.com/primefaces/primereact/issues/2804)
+- FileUpload when multiple false, can still add more than 1 file [\#2792](https://github.com/primefaces/primereact/issues/2792)
+- FileUpload: removing the "multiple" tag drag and drop [\#2782](https://github.com/primefaces/primereact/issues/2782)
+- Checkbox does not work as expected when pressing the space key [\#2781](https://github.com/primefaces/primereact/issues/2781)
+- Calendar's navigator template onChange param not working [\#2646](https://github.com/primefaces/primereact/issues/2646)
+- Drag & drop is not working on FileUploader when multiple is false [\#2624](https://github.com/primefaces/primereact/issues/2624)
+- CascadeSelect shows nothing on selection if optionValue is given [\#2601](https://github.com/primefaces/primereact/issues/2601)
+
 ## [8.0.1](https://github.com/primefaces/primereact/tree/8.0.1) (2022-04-26)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.0.0...8.0.1)
