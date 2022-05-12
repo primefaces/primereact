@@ -45,7 +45,9 @@
         "@types/react-transition-group": "^4.4.1",
         "react-transition-group": "^4.4.1"
     },
-    "sideEffects": false,
+    "sideEffects": [
+        "**/*.css"
+    ],
     "unpkg": "primereact.all.min.js",
     "jsdelivr": "primereact.all.min.js"
 }
