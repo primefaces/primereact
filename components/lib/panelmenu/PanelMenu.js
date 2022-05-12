@@ -7,7 +7,7 @@ import { PanelMenuSub } from './PanelMenuSub';
 export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
     const [idState, setIdState] = React.useState(props.id);
     const [activeItemState, setActiveItemState] = React.useState(null);
-    const [animationDisabled, setAnimationDisabled] = React.useState(true)
+    const [animationDisabled, setAnimationDisabled] = React.useState(false);
     const headerId = idState + '_header';
     const contentId = idState + '_content';
 
@@ -81,7 +81,7 @@ export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
     });
 
     useUpdateEffect(() => {
-        setAnimationDisabled(true)
+        setAnimationDisabled(true);
         setActiveItemState(findActiveItem());
     }, [props.model]);
 
