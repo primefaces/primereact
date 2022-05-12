@@ -23,22 +23,37 @@ export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
 
     const createHome = () => {
         const home = props.home;
-
-        if (home) {
-            const { icon: _icon, target, url, disabled, style, className: _className } = home;
-            const className = classNames('p-breadcrumb-home', { 'p-disabled': disabled }, _className);
-            const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props });
-
-            return (
-                <li className={className} style={style}>
-                    <a href={url || '#'} className="p-menuitem-link" aria-disabled={disabled} target={target} onClick={(event) => itemClick(event, home)}>
-                        {icon}
-                    </a>
-                </li>
-            )
+        if (!home) {
+            return null;
         }
 
-        return null;
+        const { icon: _icon, target, url, disabled, style, className: _className, template } = home;
+        const className = classNames('p-breadcrumb-home', { 'p-disabled': disabled }, _className);
+        const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props });
+
+        let content = (
+            <a href={url || '#'} className="p-menuitem-link" aria-disabled={disabled} target={target} onClick={(event) => itemClick(event, home)}>
+                {icon}
+            </a>
+        )
+
+        if (template) {
+            const defaultContentOptions = {
+                onClick: (event) => itemClick(event, home),
+                className: 'p-menuitem-link',
+                labelClassName: 'p-menuitem-text',
+                element: content,
+                props
+            };
+
+            content = ObjectUtils.getJSXElement(template, home, defaultContentOptions);
+        }
+
+        return (
+            <li className={className} style={style}>
+                {content}
+            </li>
+        )
     }
 
     const createSeparator = () => {

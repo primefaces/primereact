@@ -7,7 +7,7 @@ const BreadCrumbProps = [
     },
     {
         name: 'model',
-        type: 'array',
+        type: 'MenuItem[]',
         default: 'null',
         description: 'An array of menuitems.'
     },

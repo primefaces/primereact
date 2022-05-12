@@ -191,7 +191,7 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
                                 </tr>
                                 <tr>
                                     <td>model</td>
-                                    <td>array</td>
+                                    <td>MenuItem[]</td>
                                     <td>null</td>
                                     <td>An array of menuitems.</td>
                                 </tr>
