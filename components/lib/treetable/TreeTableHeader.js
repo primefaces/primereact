@@ -142,8 +142,8 @@ export const TreeTableHeader = React.memo((props) => {
         }
     }
 
-    const getColumnProp = (...args) => {
-        return props.column ? typeof args[0] === 'string' ? props.column.props[args[0]] : (args[0] || props.column).props[args[1]] : null;
+    const getColumnProp = (column, ...args) => {
+        return column ? typeof args[0] === 'string' ? column.props[args[0]] : (args[0] || column).props[args[1]] : null;
     }
 
     const createSortIcon = (column, sorted, sortOrder) => {
@@ -215,7 +215,7 @@ export const TreeTableHeader = React.memo((props) => {
             const className = classNames(column.props.headerClassName || column.props.className, {
                 'p-sortable-column': column.props.sortable,
                 'p-highlight': sorted,
-                'p-resizable-column': props.resizableColumns && getColumnProp('resizeable')
+                'p-resizable-column': props.resizableColumns && getColumnProp(column, 'resizeable')
             });
 
             const resizer = createResizer(column);
