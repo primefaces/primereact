@@ -575,7 +575,6 @@ let items = [
                     </div>
                 </DevelopmentSection>
                     
-
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
