@@ -882,12 +882,12 @@ const items = [
                         </table>
                     </div>
 
-                    <h5>Accessibility</h5>
                 <DevelopmentSection>
+                    <h5>Accessibility</h5>
                     <h6>Screen Reader</h6>
                     <p>Menubar component uses the <i>menubar</i> role and the value to describe the menu can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Each list item has a <i>presentation</i> role
                     whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a menu uses the <i>menu</i> role with an <i>aria-labelledby</i> defined 
-                    as the id of the submenu root menuitem label. In addition, menuitems that open a submenu has <i>aria-haspopup</i>, <i>aria-expanded</i> and <i>aria-controls</i> to define the relation between the item and the submenu.</p>
+                    as the id of the submenu root menuitem label. In addition, menuitems that open a submenu have <i>aria-haspopup</i>, <i>aria-expanded</i> and <i>aria-controls</i> to define the relation between the item and the submenu.</p>
 
                     <p>In mobile viewports, a menu icon appears with a <i>button</i> role along with <i>aria-haspopup</i>, <i>aria-expanded</i> and <i>aria-controls</i> to manage the relation between the overlay menubar and the button. The value to 
                     describe the button can be defined <i>aria-label</i> or <i>aria-labelledby</i> specified using <i>buttonProps</i>, by default <i>navigation</i> key of the <i>aria</i> property from the <Link href="/theming">locale</Link> API as the <i>aria-label</i>.</p>
@@ -932,11 +932,11 @@ const items = [
                                 </tr>
                                 <tr>
                                     <td><i>right arrow</i></td>
-                                    <td>If focus is on a root element moves focus to the next menuitem otherwise opens a submenu if there is one available and moves focus to the first item.</td>
+                                    <td>If focus is on a root element, moves focus to the next menuitem otherwise opens a submenu if there is one available and moves focus to the first item.</td>
                                 </tr>
                                 <tr>
                                     <td><i>left arrow</i></td>
-                                    <td>If focus is on a root element moves focus to the previous menuitem otherwise closes a submenu and moves focus to the root item of the closed submenu.</td>
+                                    <td>If focus is on a root element, moves focus to the previous menuitem otherwise closes a submenu and moves focus to the root item of the closed submenu.</td>
                                 </tr>
                                 <tr>
                                     <td><i>home</i></td>
