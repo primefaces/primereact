@@ -1004,11 +1004,11 @@ const items = [
                                 </tr>
                                 <tr>
                                     <td><i>enter</i></td>
-                                    <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all opened overlay.</td>
+                                    <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
                                 </tr>
                                 <tr>
                                     <td><i>space</i></td>
-                                    <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all opened overlay.</td>
+                                    <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
                                 </tr>
                                 <tr>
                                     <td><i>escape</i></td>
