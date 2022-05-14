@@ -494,7 +494,7 @@ const interactiveItems = [
                             <tbody>
                                 <tr>
                                     <td><i>tab</i></td>
-                                    <td>Adds focus to the active step when focus moves in to the component, if there is already a focused tab header moves the focus out of the component based on the page tab sequence.</td>
+                                    <td>Adds focus to the active step when focus moves in to the component, if there is already a focused tab header then moves the focus out of the component based on the page tab sequence.</td>
                                 </tr>
                                 <tr>
                                     <td><i>enter</i></td>
