@@ -387,11 +387,11 @@ const items = [
                                 </tr>
                                 <tr>
                                     <td><i>home</i></td>
-                                    <td>Moves focus to the last header.</td>
+                                    <td>Moves focus to the first header.</td>
                                 </tr>
                                 <tr>
                                     <td><i>end</i></td>
-                                    <td>Moves focus to the first header.</td>
+                                    <td>Moves focus to the last header.</td>
                                 </tr>
                             </tbody>
                         </table>
