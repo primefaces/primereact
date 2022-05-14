@@ -166,7 +166,9 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
 
     const onOverlayEntering = () => {
         if (props.autoHighlight && props.suggestions && props.suggestions.length) {
-            DomHandler.addClass(overlayRef.current.firstChild.firstChild, 'p-highlight');
+            let element = overlayRef.current.firstChild;
+            element = props.virtualScrollerOptions ? element.firstChild.firstChild : element.firstChild;
+            DomHandler.addClass(element, 'p-highlight');
         }
     }
 
