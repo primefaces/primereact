@@ -886,7 +886,7 @@ const items = [
                 <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>Menubar component uses the <i>menubar</i> role and the value to describe the menu can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Each list item has a <i>presentation</i> role
-                    whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a menu uses the <i>menu</i> role with an <i>aria-labelledby</i> defined 
+                    whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a MenuBar uses the <i>menu</i> role with an <i>aria-labelledby</i> defined 
                     as the id of the submenu root menuitem label. In addition, menuitems that open a submenu have <i>aria-haspopup</i>, <i>aria-expanded</i> and <i>aria-controls</i> to define the relation between the item and the submenu.</p>
 
                     <p>In mobile viewports, a menu icon appears with a <i>button</i> role along with <i>aria-haspopup</i>, <i>aria-expanded</i> and <i>aria-controls</i> to manage the relation between the overlay menubar and the button. The value to 

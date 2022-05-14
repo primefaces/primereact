@@ -519,10 +519,10 @@ let items = [
                 <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>Menu component uses the <i>menu</i> role and the value to describe the menu can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Each list item has a <i>presentation</i> role
-                    whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a menu uses the <i>group</i> role with an <i>aria-labelledby</i> defined 
+                    whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a Menu uses the <i>group</i> role with an <i>aria-labelledby</i> defined 
                     as the id of the submenu root menuitem label.</p>
 
-                    <p>In popup mode, the menu component implicitly manages the <i>aria-expanded</i>, <i>aria-haspopup</i> and <i>aria-controls</i> attributes of the target element to define the relation between the target and the popup.</p>
+                    <p>In popup mode, the component implicitly manages the <i>aria-expanded</i>, <i>aria-haspopup</i> and <i>aria-controls</i> attributes of the target element to define the relation between the target and the popup.</p>
 
                     <h6>Keyboard Support</h6>
                     <div className="doc-tablewrapper">
