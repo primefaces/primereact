@@ -838,12 +838,12 @@ data() {
 
                         <p>If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the filter input element.</p>
     <CodeHighlight>
-    {`
-    <span id="dd1">Options</span>
-    <Dropdown aria-labelledby="dd1" />
+{`
+<span id="dd1">Options</span>
+<TreeSelect aria-labelledby="dd1" />
 
-    <Dropdown aria-label="Options" />
-    `}
+<TreeSelect aria-label="Options" />
+`}
     </CodeHighlight>
                         <h6>Closed State Keyboard Support</h6>
                         <div className="doc-tablewrapper">
