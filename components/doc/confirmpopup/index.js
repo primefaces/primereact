@@ -540,7 +540,7 @@ const confirm = (event) => {
                     <h5>Accessibility</h5>
                 <DevelopmentSection>
                     <h6>Screen Reader</h6>
-                    <p>ConfirmPopup component uses <i>dialog</i> role and since any attribute is passed to the root element you may define attributes like <i>aria-label</i> or <i>aria-labelledby</i> to describe the popup contents. In addition <i>aria-modal</i> is added since focus is kept within the popup.</p>
+                    <p>ConfirmPopup component uses <i>alertdialog</i> role and since any attribute is passed to the root element you may define attributes like <i>aria-label</i> or <i>aria-labelledby</i> to describe the popup contents. In addition <i>aria-modal</i> is added since focus is kept within the popup.</p>
                     <p>It is recommended to use a trigger component that can be accessed with keyboard such as a button, if not adding <i>tabIndex</i> would be necessary. ConfirmPopup
                     adds <i>aria-expanded</i> state attribute and <i>aria-controls</i> to the trigger so that the relation between the trigger and the popup is defined.</p>
 
