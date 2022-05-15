@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const ToastDoc = memo(() => {
 
@@ -848,12 +849,43 @@ toast.current.show({life: 5000, severity: 'error', summary: 'Error Message', det
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <ul>
-                            <li>react-transition-group</li>
-                        </ul>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>Toast component use <i>alert</i> role that implicitly defines <i>aria-live</i> as "assertive" and <i>aria-atomic</i> as "true".</p>
+
+                    <p>Close element is a <i>button</i> with an <i>aria-label</i> that refers to the <i>aria.close</i> property of the <Link href="/locale">locale</Link> API by default, you may use
+                    <i>closeButtonProps</i> to customize the element and override the default <i>aria-label</i>.</p>
+
+                    <h6>Close Button Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Closes the message.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Closes the message.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </DevelopmentSection>
+
+                    <h5>Dependencies</h5>
+                    <ul>
+                        <li>react-transition-group</li>
+                    </ul>
 
                 </TabPanel>
 
