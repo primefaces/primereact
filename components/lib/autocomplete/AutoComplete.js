@@ -166,8 +166,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
 
     const onOverlayEntering = () => {
         if (props.autoHighlight && props.suggestions && props.suggestions.length) {
-            let element = overlayRef.current.firstChild;
-            element = props.virtualScrollerOptions ? element.firstChild.firstChild : element.firstChild;
+            const element = getScrollableElement().firstChild.firstChild;
             DomHandler.addClass(element, 'p-highlight');
         }
     }
@@ -242,7 +241,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
                         if (nextElement) {
                             DomHandler.addClass(nextElement, 'p-highlight');
                             DomHandler.removeClass(highlightItem, 'p-highlight');
-                            DomHandler.scrollInView(overlayRef.current, nextElement);
+                            DomHandler.scrollInView(getScrollableElement(), nextElement);
                         }
                     }
                     else {
@@ -266,7 +265,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
                         if (previousElement) {
                             DomHandler.addClass(previousElement, 'p-highlight');
                             DomHandler.removeClass(highlightItem, 'p-highlight');
-                            DomHandler.scrollInView(overlayRef.current, previousElement);
+                            DomHandler.scrollInView(getScrollableElement(), previousElement);
                         }
                     }
 
@@ -405,6 +404,10 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
 
     const findOptionIndex = (option) => {
         return props.suggestions ? props.suggestions.findIndex(s => ObjectUtils.equals(s, option)) : -1;
+    }
+
+    const getScrollableElement = () => {
+        return virtualScrollerRef.current ? overlayRef.current.firstChild : overlayRef.current;
     }
 
     const getOptionGroupLabel = (optionGroup) => {
