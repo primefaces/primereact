@@ -890,7 +890,7 @@ const items = [
                     as the id of the submenu root menuitem label. In addition, menuitems that open a submenu have <i>aria-haspopup</i>, <i>aria-expanded</i> and <i>aria-controls</i> to define the relation between the item and the submenu.</p>
 
                     <p>In mobile viewports, a menu icon appears with a <i>button</i> role along with <i>aria-haspopup</i>, <i>aria-expanded</i> and <i>aria-controls</i> to manage the relation between the overlay menubar and the button. The value to 
-                    describe the button can be defined <i>aria-label</i> or <i>aria-labelledby</i> specified using <i>buttonProps</i>, by default <i>navigation</i> key of the <i>aria</i> property from the <Link href="/theming">locale</Link> API as the <i>aria-label</i>.</p>
+                    describe the button can be defined <i>aria-label</i> or <i>aria-labelledby</i> specified using <i>buttonProps</i>, by default <i>navigation</i> key of the <i>aria</i> property from the <Link href="/locale">locale</Link> API as the <i>aria-label</i>.</p>
 
                     <h6>Keyboard Support</h6>
                     <div className="doc-tablewrapper">

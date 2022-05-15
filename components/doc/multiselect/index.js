@@ -1428,11 +1428,11 @@ const groupedCities = [
                     in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the combobox and the popup is created with <i>aria-controls</i> attribute that refers to the id of the popup listbox.</p>
                     <p>The popup listbox uses <i>listbox</i> as the role with <i>aria-multiselectable</i> enabled. Each list item has an <i>option</i> role along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-disabled</i> attributes.</p>
 
-                    <p>Checkbox component at the header uses a hidden native checkbox element internally that is only visible to screen readers. Value to read is defined with the <i>toggleAll</i> key of the <i>aria</i>  property from the <Link href="/theming">locale</Link> API.</p>
+                    <p>Checkbox component at the header uses a hidden native checkbox element internally that is only visible to screen readers. Value to read is defined with the <i>toggleAll</i> key of the <i>aria</i>  property from the <Link href="/locale">locale</Link> API.</p>
 
                     <p>If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the input element.</p>
 
-                    <p>Close button uses <i>close</i> key of the <i>aria</i> property from the <Link href="/theming">locale</Link> API as the <i>aria-label</i> by default, this can be overriden with the <i>closeButtonProps</i>.</p>
+                    <p>Close button uses <i>close</i> key of the <i>aria</i> property from the <Link href="/locale">locale</Link> API as the <i>aria-label</i> by default, this can be overriden with the <i>closeButtonProps</i>.</p>
 <CodeHighlight>
 {`
 <span id="dd1">Options</span>
