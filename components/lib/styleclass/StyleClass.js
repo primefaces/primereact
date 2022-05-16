@@ -173,7 +173,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
     useUpdateEffect(() => {
         destroy();
         init();
-    }, [props.nodeRef]);
+    });
 
     useUnmountEffect(() => {
         destroy();
