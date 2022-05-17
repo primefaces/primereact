@@ -41,7 +41,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
             else if (isOutsideClick(event)) {
                 leave();
             }
-        }, when: false
+        }, when: props.hideOnOutsideClick
     });
 
     const [bindClickListener, unbindClickListener] = useEventListener({
@@ -94,7 +94,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
             }
         }
 
-        bindDocumentClickListener({ target: elementRef.current && elementRef.current.ownerDocument, when: props.hideOnOutsideClick });
+        bindDocumentClickListener({ target: elementRef.current && elementRef.current.ownerDocument });
     }
 
     const leave = () => {
@@ -171,8 +171,11 @@ export const StyleClass = React.forwardRef((props, ref) => {
     });
 
     useUpdateEffect(() => {
-        destroy();
         init();
+
+        return () => {
+            unbindClickListener();
+        }
     });
 
     useUnmountEffect(() => {
