@@ -19,7 +19,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
                 targetRef.current.style.maxHeight = '';
             }
             animating.current = false;
-        }, when: false
+        }
     });
 
     const [bindTargetLeaveListener, unbindTargetLeaveListener] = useEventListener({
@@ -30,7 +30,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
             }
             unbindTargetLeaveListener();
             animating.current = false;
-        }, when: false
+        }
     });
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
@@ -60,7 +60,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
                 else
                     leave();
             }
-        }, when: false
+        }
     });
 
     const enter = () => {
@@ -81,7 +81,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
                     DomHandler.removeClass(targetRef.current, props.enterClassName);
                 }
 
-                bindTargetEnterListener({ target: targetRef.current, when: true });
+                bindTargetEnterListener({ target: targetRef.current });
             }
         }
         else {
@@ -106,7 +106,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
                     DomHandler.removeClass(targetRef.current, props.leaveClassName);
                 }
 
-                bindTargetLeaveListener({ target: targetRef.current, when: true });
+                bindTargetLeaveListener({ target: targetRef.current });
             }
         }
         else {
@@ -149,7 +149,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
 
     const init = () => {
         elementRef.current = ObjectUtils.getRefElement(props.nodeRef);
-        bindClickListener({ target: elementRef.current, when: true });
+        bindClickListener({ target: elementRef.current });
     }
 
     const destroy = () => {
