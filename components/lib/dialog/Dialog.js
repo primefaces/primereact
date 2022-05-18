@@ -544,6 +544,8 @@ Dialog.defaultProps = {
     modal: true,
     onHide: null,
     onShow: null,
+    headerStyle: null,
+    headerClassName: null,
     contentStyle: null,
     contentClassName: null,
     closeOnEscape: true,
