@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const InplaceDoc = memo(() => {
 
@@ -487,10 +488,58 @@ const onOpen = () => {
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
                     </div>
+
+                    <h5>Accessibility</h5>
+                <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>Inplace uses <i>button</i> role in view mode by default, <i>displayProps</i> can be used for customizations like adding <i>aria-label</i> or <i>aria-labelledby</i> attributes to describe the content of the view mode or even overriding the default role.</p>
+                    <p>Closable inplace components displays a button with an <i>aria-label</i> that refers to the <i>aria.close</i> property of the <Link href="/locale">locale</Link> API by default, you may use
+                    <i>closeButtonProps</i> to customize the element and override the default <i>aria-label</i>.</p>
+
+                    <h6>View Mode Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Switches to content.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h6>Close Button Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Switches to display.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Switches to display.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </DevelopmentSection>
+
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
 
                 </TabPanel>
 
