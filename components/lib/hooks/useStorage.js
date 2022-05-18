@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as React from 'react';
-import { useEventListener } from '../hooks/Hooks';
+import { useEventListener } from './useEventListener';
 
 /**
  * Hook to wrap around useState that stores the value in the browser local/session storage.
@@ -12,7 +12,7 @@ import { useEventListener } from '../hooks/Hooks';
  */
 export const useStorage = (initialValue, key, storage = 'local') => {
 
-    // Since the local storage API isn't available in server-rendering environments, 
+    // Since the local storage API isn't available in server-rendering environments,
     // we check that typeof window !== 'undefined' to make SSR and SSG work properly.
     const storageAvailable = typeof window !== 'undefined';
 
@@ -22,7 +22,7 @@ export const useStorage = (initialValue, key, storage = 'local') => {
         target: 'window', type: 'storage', listener: event => {
             const area = storage === 'local' ? window.localStorage : window.sessionStorage;
             if (event.storageArea === area && event.key === key) {
-                setStoredValue(event.newValue ?? undefined);
+                setStoredValue(event.newValue || undefined);
             }
         }
     });
@@ -32,8 +32,8 @@ export const useStorage = (initialValue, key, storage = 'local') => {
             return initialValue;
         }
         try {
-            const item = storage === 'local' ? 
-                window.localStorage.getItem(key) : 
+            const item = storage === 'local' ?
+                window.localStorage.getItem(key) :
                 window.sessionStorage.getItem(key);
             return item ? JSON.parse(item) : initialValue;
         } catch (error) {
@@ -49,8 +49,8 @@ export const useStorage = (initialValue, key, storage = 'local') => {
             setStoredValue(valueToStore);
             if (storageAvailable) {
                 const serializedValue = JSON.stringify(valueToStore);
-                storage === 'local' ? 
-                   window.localStorage.setItem(key, serializedValue) : 
+                storage === 'local' ?
+                   window.localStorage.setItem(key, serializedValue) :
                    window.sessionStorage.setItem(key, serializedValue);
             }
         } catch (error) {
@@ -68,7 +68,7 @@ export const useStorage = (initialValue, key, storage = 'local') => {
 
 /**
  * Hook to wrap around useState that stores the value in the browser local storage.
- * 
+ *
  * @param {any} initialValue the initial value to store
  * @param {string} key the key to store the value in local storage
  * @returns a stateful value, and a function to update it.
@@ -79,7 +79,7 @@ export const useLocalStorage = (initialValue, key) => {
 
 /**
  * Hook to wrap around useState that stores the value in the browser session storage.
- * 
+ *
  * @param {any} initialValue the initial value to store
  * @param {string} key the key to store the value in session storage
  * @returns a stateful value, and a function to update it.
