@@ -322,7 +322,7 @@ import { Badge } from 'primereact/badge';
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
                         <h6>Screen Reader</h6>
-                        <p>Badge does not include any roles and attributes by default. Any attribute is passed to the root element so <i>aria-labelledby</i> or <i>aria-label</i> can be used to describe the component. If the badges are dynamic,
+                        <p>Badge does not include any roles and attributes by default, any attribute is passed to the root element so aria roles and attributes can be added if required. If the badges are dynamic,
                         <i>aria-live</i> may be utilized as well. In case badges need to be tabbable, <i>tabIndex</i> can be added to implement custom key handlers.</p>
 
                         <h5>Keyboard Support</h5>
