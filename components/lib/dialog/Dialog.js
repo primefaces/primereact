@@ -440,9 +440,10 @@ export const Dialog = React.forwardRef((props, ref) => {
             const icons = ObjectUtils.getJSXElement(props.icons, props);
             const header = ObjectUtils.getJSXElement(props.header, props);
             const headerId = idState + '_header';
+            const headerClassName = classNames('p-dialog-header', props.headerClassName);
 
             return (
-                <div ref={headerRef} className="p-dialog-header" onMouseDown={onDragStart}>
+                <div ref={headerRef} style={props.headerStyle} className={headerClassName} onMouseDown={onDragStart}>
                     <div id={headerId} className="p-dialog-title">{header}</div>
                     <div className="p-dialog-header-icons">
                         {icons}
