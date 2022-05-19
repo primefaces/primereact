@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 
-type ToastSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
+type ToastSeverityType = 'success' | 'info' | 'warn' | 'error';
 
 type ToastMessageType = ToastMessage | ToastMessage[];
 
