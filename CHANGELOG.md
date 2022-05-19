@@ -1,5 +1,24 @@
 # Changelog
 
+## [8.1.1](https://github.com/primefaces/primereact/tree/8.1.1) (2022-05-19)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.1.0...8.1.1)
+
+**Implemented New Features and Enhancements:**
+
+- Hooks: useStorage hook multi tab awareness [\#2887](https://github.com/primefaces/primereact/issues/2887)
+
+**Fixed bugs:**
+
+- The headerStyle and headerClassName are not applied to the Dialog [\#2905](https://github.com/primefaces/primereact/issues/2905)
+- StyleClass is not working as expected on PrimeBlocks pages [\#2900](https://github.com/primefaces/primereact/issues/2900)
+- Dropdown: Causes horizontal scroll to align with multiselect option panel when opening panel when an item is selected [\#2898](https://github.com/primefaces/primereact/issues/2898)
+- Autocomplete: Virtual Scroller incompatible with arrow keys navigation [\#2894](https://github.com/primefaces/primereact/issues/2894)
+- Autocomplete: Virtual Scroller incompatible with autoHighlight [\#2891](https://github.com/primefaces/primereact/issues/2891)
+- TreeTable: resizeableColumns stopped working in 8.1 [\#2889](https://github.com/primefaces/primereact/issues/2889)
+- TreeTableProps: type error in treetable.d.ts file [\#2881](https://github.com/primefaces/primereact/issues/2881)
+- Calendar: footer is displayed above year and month picker panels [\#2880](https://github.com/primefaces/primereact/issues/2880)
+
 ## [8.1.0](https://github.com/primefaces/primereact/tree/8.1.0) (2022-05-12)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.0.0...8.1.0)
