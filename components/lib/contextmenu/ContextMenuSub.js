@@ -117,7 +117,7 @@ export const ContextMenuSub = React.memo((props) => {
         }
 
         return (
-            <li key={key} role="none" className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>
+            <li key={key} role="none" id={item.id} className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>
                 {content}
                 {submenu}
             </li>

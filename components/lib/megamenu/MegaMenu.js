@@ -234,7 +234,7 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
             }
 
             return (
-                <li key={key} className={className} style={item.style} role="none">
+                <li key={key} id={item.id} className={className} style={item.style} role="none">
                     {content}
                 </li>
             )
@@ -249,7 +249,7 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
 
         return (
             <React.Fragment key={submenu.label}>
-                <li className={className} style={submenu.style} role="presentation">{submenu.label}</li>
+                <li id={submenu.id} className={className} style={submenu.style} role="presentation">{submenu.label}</li>
                 {items}
             </React.Fragment>
         )
@@ -312,7 +312,7 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
         const panel = createCategoryPanel(category);
 
         return (
-            <li key={category.label + '_' + index} className={className} style={category.style} onMouseEnter={e => onCategoryMouseEnter(e, category)} role="none">
+            <li key={category.label + '_' + index} id={category.id} className={className} style={category.style} onMouseEnter={e => onCategoryMouseEnter(e, category)} role="none">
                 <a href={category.url || '#'} className={linkClassName} target={category.target} onClick={e => onCategoryClick(e, category)} onKeyDown={e => onCategoryKeyDown(e, category)}
                     role="menuitem" aria-haspopup={category.items != null}>
                     {icon}
@@ -349,7 +349,6 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
 
         return null;
     }
-
 
     const otherProps = ObjectUtils.findDiffKeys(props, MegaMenu.defaultProps);
     const className = classNames('p-megamenu p-component', {
