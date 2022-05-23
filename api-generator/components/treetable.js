@@ -231,7 +231,7 @@ const TreeTableProps = [
         name: 'rowClassName',
         type: 'function',
         default: 'null',
-        description: `Function that takes the row data and returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.`
+        description: `Function that takes the row data and returns an object in "&#123;'styleclass' : condition&#125;" format to define a class name for a particular row.`
     },
     {
         name: 'loading',
