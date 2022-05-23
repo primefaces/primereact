@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FilterService } from '../api/Api';
+import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
@@ -110,6 +111,8 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onFilter = (event) => {
+        virtualScrollerRef.current && virtualScrollerRef.current.scrollToIndex(0);
+
         const { originalEvent, value } = event;
         if (props.onFilterValueChange) {
             props.onFilterValueChange({
@@ -142,9 +145,37 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
         return props.value.filter(val => !ObjectUtils.equals(val, getOptionValue(option), props.dataKey));
     }
 
+    const getSelectedOptionIndex = () => {
+        if (props.value != null && visibleOptions) {
+            if (props.optionGroupLabel) {
+                for (let i = 0; i < visibleOptions.length; i++) {
+                    let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(visibleOptions[i]));
+                    if (selectedOptionIndex !== -1) {
+                        return { group: i, option: selectedOptionIndex };
+                    }
+                }
+            }
+            else {
+                return findOptionIndexInList(props.value, visibleOptions);
+            }
+        }
+
+        return -1;
+    }
+
+    const equalityKey = () => {
+        return props.optionValue ? null : props.dataKey;
+    }
+
+    const findOptionIndexInList = (value, list) => {
+        const key = equalityKey();
+        return list.findIndex(item => ObjectUtils.equals(value, getOptionValue(item), key));
+    }
+
     const isSelected = (option) => {
-        let optionValue = getOptionValue(option);
-        return props.multiple && props.value ? props.value.some((val) => ObjectUtils.equals(val, optionValue, props.dataKey)) : ObjectUtils.equals(props.value, optionValue, props.dataKey);
+        const optionValue = getOptionValue(option);
+        const key = equalityKey();
+        return props.multiple && props.value ? props.value.some((val) => ObjectUtils.equals(val, optionValue, key)) : ObjectUtils.equals(props.value, optionValue, key);
     }
 
     const filter = (option) => {
@@ -209,6 +240,19 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
             return props.options;
         }
     }
+
+    const scrollToSelectedIndex = () => {
+        if (virtualScrollerRef.current) {
+            const selectedIndex = getSelectedOptionIndex();
+            if (selectedIndex !== -1) {
+                setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
+            }
+        }
+    }
+
+    useMountEffect(() => {
+        scrollToSelectedIndex();
+    });
 
     const createHeader = () => {
         return props.filter ? <ListBoxHeader filter={filteredValue} onFilter={onFilter} disabled={props.disabled} filterPlaceholder={props.filterPlaceholder} filterInputProps={props.filterInputProps} /> : null;
