@@ -1262,7 +1262,7 @@ const DataTableScrollDemo = () => {
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 {
-                    useLiveEditorTabs({ name: 'DataTableScrollDemo', sources: sources, service: 'CustomerService', data: 'customers-large,customers-xlarge', extFiles: extFiles })
+                    useLiveEditorTabs({ name: 'DataTableScrollDemo', sources: sources, service: 'CustomerService', data: 'customers-large,customers-medium', extFiles: extFiles })
                 }
             </TabView>
         </div>
