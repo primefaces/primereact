@@ -701,7 +701,7 @@ const responsiveOptions = [
                             </table>
                         </div>
 
-                        <h6>Paginator Keyboard Support</h6>
+                        <h6>Quick Navigation Keyboard Support</h6>
                         <div className="doc-tablewrapper">
                             <table className="doc-table">
                                 <thead>
@@ -713,31 +713,31 @@ const responsiveOptions = [
                                 <tbody>
                                     <tr>
                                         <td><i>tab</i></td>
-                                        <td>Moves focus through the active page link.</td>
+                                        <td>Moves focus through the active slide link.</td>
                                     </tr>
                                     <tr>
                                         <td><i>enter</i></td>
-                                        <td>Activates the focused page link.</td>
+                                        <td>Activates the focused slide link.</td>
                                     </tr>
                                     <tr>
                                         <td><i>space</i></td>
-                                        <td>Activates the focused page link.</td>
+                                        <td>Activates the focused slide link.</td>
                                     </tr>
                                     <tr>
                                         <td><i>right arrow</i></td>
-                                        <td>Moves focus to the next page link.</td>
+                                        <td>Moves focus to the next slide link.</td>
                                     </tr>
                                     <tr>
                                         <td><i>left arrow</i></td>
-                                        <td>Moves focus to the previous page link.</td>
+                                        <td>Moves focus to the previous slide link.</td>
                                     </tr>
                                     <tr>
                                         <td><i>home</i></td>
-                                        <td>Moves focus to the first page link.</td>
+                                        <td>Moves focus to the first slide link.</td>
                                     </tr>
                                     <tr>
                                         <td><i>end</i></td>
-                                        <td>Moves focus to the last page link.</td>
+                                        <td>Moves focus to the last slide link.</td>
                                     </tr>
                                 </tbody>
                             </table>
