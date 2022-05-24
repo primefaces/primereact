@@ -341,7 +341,7 @@ import { ScrollTop } from 'primereact/scrolltop';
                     <h5>Accessibility</h5>
                 <DevelopmentSection>
                     <h6>Screen Reader</h6>
-                    <p>ScrollTop uses a button element with an <i>aria-label</i> that refes to the <i>aria.scrollTop</i> property of the <Link href="/locale">locale</Link> API by default, you may use
+                    <p>ScrollTop uses a button element with an <i>aria-label</i> that refers to the <i>aria.scrollTop</i> property of the <Link href="/locale">locale</Link> API by default, you may use
                     your own aria roles and attributes as any valid attribute is passed to the button element implicitly.</p>
 
                     <h6>Keyboard Support</h6>
