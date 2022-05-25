@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
 import InputNumberDoc from '../../components/doc/inputnumber';
 import { DocActions } from '../../components/doc/common/docactions';
@@ -26,6 +26,13 @@ const InputNumberDemo = () => {
     const [value18, setValue18] = useState(10.50);
     const [value19, setValue19] = useState(25);
     const [value20, setValue20] = useState(50);
+
+
+    //  InputNumber : Id not available in the OnChange #2908
+    // const onChangeMethod = (myID)=>{
+    //   setValue8(myID.value);
+    // }
+
 
     return (
         <div>
@@ -79,6 +86,13 @@ const InputNumberDemo = () => {
                             <label htmlFor="locale-indian">Indian Locale</label>
                             <InputNumber inputId="locale-indian" value={value8} onValueChange={(e) => setValue8(e.value)} mode="decimal" locale="en-IN" minFractionDigits={2} />
                         </div>
+
+                    {/* InputNumber : Id not available in the OnChange #2908 */}
+                        {/* <div className="field col-12 md:col-3">
+                            <label htmlFor="locale-indian">Try Locale</label>
+                            <InputNumber id="myID" value={value8} onChange={onChangeMethod} mode="decimal" locale="en-IN" minFractionDigits={2} />
+                            {value8}
+                        </div> */}
                     </div>
 
                     <h5>Currency</h5>
