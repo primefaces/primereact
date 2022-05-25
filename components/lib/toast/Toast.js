@@ -55,7 +55,7 @@ export const Toast = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onExited = () => {
-        messagesState.length === 0 && ZIndexUtils.clear(containerRef.current);
+        messagesState.length === 1 && ZIndexUtils.clear(containerRef.current);
 
         props.onHide && props.onHide();
     }
