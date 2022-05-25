@@ -562,7 +562,7 @@ export const DataTable = React.forwardRef((props, ref) => {
 
         const { originalEvent: event, column } = e;
 
-        if (props.reorderableColumns && getColumnProp(column, 'reorderable') !== false) {
+        if (props.reorderableColumns && getColumnProp(column, 'reorderable') !== false && !getColumnProp(column, 'frozen')) {
             if (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA' || DomHandler.hasClass(event.target, 'p-column-resizer'))
                 event.currentTarget.draggable = false;
             else
@@ -616,9 +616,9 @@ export const DataTable = React.forwardRef((props, ref) => {
     }
 
     const onColumnHeaderDragOver = (e) => {
-        const { originalEvent: event } = e;
+        const { originalEvent: event, column } = e;
         const dropHeader = findParentHeader(event.currentTarget);
-        if (props.reorderableColumns && draggedColumnElement.current && dropHeader) {
+        if (props.reorderableColumns && draggedColumnElement.current && dropHeader && !getColumnProp(column, 'frozen')) {
             event.preventDefault();
 
             if (draggedColumnElement.current !== dropHeader) {
