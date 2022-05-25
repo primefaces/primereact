@@ -313,6 +313,7 @@ export const Password = React.memo(
                             className={`p-password-strength ${strength}`}
                             style={{ width }}
                         ></div>
+
                         <div className={`p-password-strength ${strength}`}>
                             {infoTextState}
                         </div>

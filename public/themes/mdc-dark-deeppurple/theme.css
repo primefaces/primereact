@@ -1453,14 +1453,17 @@
   background: rgba(206, 147, 216, 0.32);
 }
 .p-password-panel .p-password-meter .p-password-strength.weak {
-  background: #EF9A9A;
-}
-.p-password-panel .p-password-meter .p-password-strength.medium {
-  background: #FFF59D;
-}
-.p-password-panel .p-password-meter .p-password-strength.strong {
-  background: #C5E1A5;
-}
+    background: #EF9A9A;
+    color: #EF9A9A;
+  }
+  .p-password-panel .p-password-meter .p-password-strength.medium {
+    background: #FFF59D;
+    color: #FFF59D;
+  }
+  .p-password-panel .p-password-meter .p-password-strength.strong {
+    background: #C5E1A5;
+    color: #C5E1A5;
+  }
 
 .p-radiobutton {
   width: 20px;

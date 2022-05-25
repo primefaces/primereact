@@ -1429,14 +1429,17 @@
   background: #dee2e6;
 }
 .p-password-panel .p-password-meter .p-password-strength.weak {
-  background: #ea5455;
-}
-.p-password-panel .p-password-meter .p-password-strength.medium {
-  background: #ff9f42;
-}
-.p-password-panel .p-password-meter .p-password-strength.strong {
-  background: #29c76f;
-}
+    background: #ea5455;
+    color: #ea5455;
+  }
+  .p-password-panel .p-password-meter .p-password-strength.medium {
+    background: #ff9f42;
+    color: #ff9f42;
+  }
+  .p-password-panel .p-password-meter .p-password-strength.strong {
+    background: #29c76f;
+    color: #29c76f;
+  }
 
 .p-radiobutton {
   width: 22px;
