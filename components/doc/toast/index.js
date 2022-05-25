@@ -711,7 +711,16 @@ toast.current.show({life: 5000, severity: 'error', summary: 'Error Message', det
 
 <CodeHighlight>
 {`
-    toast.current.clear();
+toast.current.clear();
+`}
+</CodeHighlight>
+
+                    <h5>Replacing Messages</h5>
+                    <p><i>replace(newMessages)</i> method adds new messages after removing all old messages.</p>
+
+<CodeHighlight lang="js">
+{`
+toast.current.replace(newMessages);
 `}
 </CodeHighlight>
 
