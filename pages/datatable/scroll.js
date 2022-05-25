@@ -223,16 +223,16 @@ const DataTableScrollDemo = () => {
                     <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Balance" offLabel="Freeze Balance" style={{ flexGrow: 1, flexBasis: '12rem' }} />
 
                     <DataTable value={customers2} scrollable scrollHeight="400px" loading={loading} scrollDirection="both" className="mt-3">
-                        <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '160px' }} frozen></Column>
-                        <Column field="id" header="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
-                        <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="country.name" header="Country" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="date" header="Date" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="company" header="Company" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="status" header="Status" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="activity" header="Activity" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="representative.name" header="Representative" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="balance" header="Balance" body={balanceTemplate2} style={{ flexGrow: 1, flexBasis: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
+                        <Column field="name" header="Name" style={{ width: '160px' }} frozen></Column>
+                        <Column field="id" header="Id" style={{ width: '100px' }}></Column>
+                        <Column field="name" header="Name" style={{ width: '200px' }}></Column>
+                        <Column field="country.name" header="Country" style={{ width: '200px' }}></Column>
+                        <Column field="date" header="Date" style={{ width: '200px' }}></Column>
+                        <Column field="company" header="Company" style={{ width: '200px' }}></Column>
+                        <Column field="status" header="Status" style={{ width: '200px' }}></Column>
+                        <Column field="activity" header="Activity" style={{ width: '200px' }}></Column>
+                        <Column field="representative.name" header="Representative" style={{ width: '200px' }}></Column>
+                        <Column field="balance" header="Balance" body={balanceTemplate2} style={{ width: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
                     </DataTable>
                 </div>
 
@@ -487,16 +487,16 @@ export class DataTableScrollDemo extends Component {
                     <ToggleButton checked={this.state.balanceFrozen} onChange={(e) => this.setState({ balanceFrozen: e.value })} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Balance" offLabel="Freeze Balance" style={{ flexGrow: 1, flexBasis: '12rem' }} />
 
                     <DataTable value={this.state.customers2} scrollable scrollHeight="400px" loading={this.state.loading} scrollDirection="both" className="mt-3">
-                        <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '160px' }} frozen></Column>
-                        <Column field="id" header="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
-                        <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="country.name" header="Country" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="date" header="Date" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="company" header="Company" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="status" header="Status" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="activity" header="Activity" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="representative.name" header="Representative" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                        <Column field="balance" header="Balance" body={this.balanceTemplate2} style={{ flexGrow: 1, flexBasis: '120px' }} alignFrozen="right" frozen={this.state.balanceFrozen}></Column>
+                        <Column field="name" header="Name" style={{ width: '160px' }} frozen></Column>
+                        <Column field="id" header="Id" style={{ width: '100px' }}></Column>
+                        <Column field="name" header="Name" style={{ width: '200px' }}></Column>
+                        <Column field="country.name" header="Country" style={{ width: '200px' }}></Column>
+                        <Column field="date" header="Date" style={{ width: '200px' }}></Column>
+                        <Column field="company" header="Company" style={{ width: '200px' }}></Column>
+                        <Column field="status" header="Status" style={{ width: '200px' }}></Column>
+                        <Column field="activity" header="Activity" style={{ width: '200px' }}></Column>
+                        <Column field="representative.name" header="Representative" style={{ width: '200px' }}></Column>
+                        <Column field="balance" header="Balance" body={this.balanceTemplate2} style={{ width: '120px' }} alignFrozen="right" frozen={this.state.balanceFrozen}></Column>
                     </DataTable>
                 </div>
 
@@ -726,16 +726,16 @@ const DataTableScrollDemo = () => {
                 <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Balance" offLabel="Freeze Balance" style={{ flexGrow: 1, flexBasis: '12rem' }} />
 
                 <DataTable value={customers2} scrollable scrollHeight="400px" loading={loading} scrollDirection="both" className="mt-3">
-                    <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '160px' }} frozen></Column>
-                    <Column field="id" header="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
-                    <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="country.name" header="Country" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="date" header="Date" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="company" header="Company" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="status" header="Status" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="activity" header="Activity" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="representative.name" header="Representative" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="balance" header="Balance" body={balanceTemplate2} style={{ flexGrow: 1, flexBasis: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
+                    <Column field="name" header="Name" style={{ width: '160px' }} frozen></Column>
+                    <Column field="id" header="Id" style={{ width: '100px' }}></Column>
+                    <Column field="name" header="Name" style={{ width: '200px' }}></Column>
+                    <Column field="country.name" header="Country" style={{ width: '200px' }}></Column>
+                    <Column field="date" header="Date" style={{ width: '200px' }}></Column>
+                    <Column field="company" header="Company" style={{ width: '200px' }}></Column>
+                    <Column field="status" header="Status" style={{ width: '200px' }}></Column>
+                    <Column field="activity" header="Activity" style={{ width: '200px' }}></Column>
+                    <Column field="representative.name" header="Representative" style={{ width: '200px' }}></Column>
+                    <Column field="balance" header="Balance" body={balanceTemplate2} style={{ width: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
                 </DataTable>
             </div>
 
@@ -964,16 +964,16 @@ const DataTableScrollDemo = () => {
                 <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Balance" offLabel="Freeze Balance" style={{ flexGrow: 1, flexBasis: '12rem' }} />
 
                 <DataTable value={customers2} scrollable scrollHeight="400px" loading={loading} scrollDirection="both" className="mt-3">
-                    <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '160px' }} frozen></Column>
-                    <Column field="id" header="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
-                    <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="country.name" header="Country" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="date" header="Date" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="company" header="Company" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="status" header="Status" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="activity" header="Activity" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="representative.name" header="Representative" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="balance" header="Balance" body={balanceTemplate2} style={{ flexGrow: 1, flexBasis: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
+                    <Column field="name" header="Name" style={{ width: '160px' }} frozen></Column>
+                    <Column field="id" header="Id" style={{ width: '100px' }}></Column>
+                    <Column field="name" header="Name" style={{ width: '200px' }}></Column>
+                    <Column field="country.name" header="Country" style={{ width: '200px' }}></Column>
+                    <Column field="date" header="Date" style={{ width: '200px' }}></Column>
+                    <Column field="company" header="Company" style={{ width: '200px' }}></Column>
+                    <Column field="status" header="Status" style={{ width: '200px' }}></Column>
+                    <Column field="activity" header="Activity" style={{ width: '200px' }}></Column>
+                    <Column field="representative.name" header="Representative" style={{ width: '200px' }}></Column>
+                    <Column field="balance" header="Balance" body={balanceTemplate2} style={{ width: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
                 </DataTable>
             </div>
 
@@ -1212,16 +1212,16 @@ const DataTableScrollDemo = () => {
                 <ToggleButton checked={balanceFrozen} onChange={(e) => setBalanceFrozen(e.value)} onIcon="pi pi-lock" offIcon="pi pi-lock-open" onLabel="Unfreeze Balance" offLabel="Freeze Balance" style={{ flexGrow: 1, flexBasis: '12rem' }} />
 
                 <DataTable value={customers2} scrollable scrollHeight="400px" loading={loading} scrollDirection="both" className="mt-3">
-                    <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '160px' }} frozen></Column>
-                    <Column field="id" header="Id" style={{ flexGrow: 1, flexBasis: '100px' }}></Column>
-                    <Column field="name" header="Name" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="country.name" header="Country" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="date" header="Date" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="company" header="Company" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="status" header="Status" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="activity" header="Activity" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="representative.name" header="Representative" style={{ flexGrow: 1, flexBasis: '200px' }}></Column>
-                    <Column field="balance" header="Balance" body={balanceTemplate2} style={{ flexGrow: 1, flexBasis: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
+                    <Column field="name" header="Name" style={{ width: '160px' }} frozen></Column>
+                    <Column field="id" header="Id" style={{ width: '100px' }}></Column>
+                    <Column field="name" header="Name" style={{ width: '200px' }}></Column>
+                    <Column field="country.name" header="Country" style={{ width: '200px' }}></Column>
+                    <Column field="date" header="Date" style={{ width: '200px' }}></Column>
+                    <Column field="company" header="Company" style={{ width: '200px' }}></Column>
+                    <Column field="status" header="Status" style={{ width: '200px' }}></Column>
+                    <Column field="activity" header="Activity" style={{ width: '200px' }}></Column>
+                    <Column field="representative.name" header="Representative" style={{ width: '200px' }}></Column>
+                    <Column field="balance" header="Balance" body={balanceTemplate2} style={{ width: '120px' }} alignFrozen="right" frozen={balanceFrozen}></Column>
                 </DataTable>
             </div>
 
