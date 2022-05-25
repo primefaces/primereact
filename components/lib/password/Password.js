@@ -262,7 +262,7 @@ export const Password = React.memo(React.forwardRef((props, ref) => {
                 <div className="p-password-meter">
                     <div className={`p-password-strength ${strength}`} style={{ width }}></div>
                 </div>
-                <div className="p-password-info">
+                <div className={`p-password-strength-${strength}`}>
                     {infoTextState}
                 </div>
             </>
