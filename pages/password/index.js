@@ -55,8 +55,6 @@ const PasswordDemo = () => {
                     <h5>Templating</h5>
                     <Password value={value4} onChange={(e) => setValue4(e.target.value)} header={header} footer={footer} />
 
-                    <h4>InputNumber Deneme</h4>
-
 
                 </div>
             </div>
