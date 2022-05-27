@@ -435,7 +435,7 @@ import { OrderList } from 'primereact/orderlist';
                     <h5>Accessibility</h5>
                 <DevelopmentSection>
                     <h6>Screen Reader</h6>
-                    <p>Value to describe the component can be provided  <i>aria-labelledby</i> or <i>aria-label</i> props. The list element has a <i>listbox</i> role with the <i>aria-multiselectable</i> attribute.
+                    <p>Value to describe the listbox can be provided with <i>listProps</i> by passing <i>aria-labelledby</i> or <i>aria-label</i> props. The list element has a <i>listbox</i> role with the <i>aria-multiselectable</i> attribute.
                     Each list item has an <i>option</i> role with <i>aria-selected</i> and <i>aria-disabled</i> as their attributes.</p>
                     <p>Controls buttons are <i>button</i> elements with an <i>aria-label</i> that refers to the <i>aria.moveTop</i>, <i>aria.moveUp</i>, <i>aria.moveDown</i> and <i>aria.moveBottom</i> properties of the <Link href="/locale">locale</Link> API by default, alternatively you may use
                     <i>moveTopButtonProps</i>, <i>moveUpButtonProps</i>, <i>moveDownButtonProps</i> and <i>moveBottomButtonProps</i> to customize the buttons like overriding the default <i>aria-label</i> attributes.</p>
@@ -447,7 +447,7 @@ import { OrderList } from 'primereact/orderlist';
 <OrderList aria-label="City" />
 `}
 </CodeHighlight>
-                    <h6>Keyboard Support</h6>
+                    <h6>ListBox Keyboard Support</h6>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -508,6 +508,28 @@ import { OrderList } from 'primereact/orderlist';
                                 <tr>
                                     <td><i>control</i> + <i>a</i></td>
                                     <td>Selects all options.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h6>Buttons Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Executes button action.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Executes button action.</td>
                                 </tr>
                             </tbody>
                         </table>
