@@ -30,4 +30,5 @@ export interface MenuItem {
     className?: string;
     command?(e: MenuItemCommandParams): void;
     template?: MenuItemTemplateType;
+    data?: any;
 }
