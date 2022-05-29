@@ -117,7 +117,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     }
 
     const align = () => {
-        if (currentTargetRef.current) {
+        if (currentTargetRef.current && overlayRef.current) {
             DomHandler.absolutePosition(overlayRef.current, currentTargetRef.current);
 
             const containerOffset = DomHandler.getOffset(overlayRef.current);
