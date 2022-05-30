@@ -493,7 +493,6 @@ const itemTemplate = (option) => {
                             </tbody>
                         </table>
                     </div>
-                    <p>Buttons can receive focus using the <i>tab</i> key, while being focused <i>space</i> key is used to toggle the checked state.</p>
                 </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
