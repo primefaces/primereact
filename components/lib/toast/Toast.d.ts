@@ -41,4 +41,5 @@ export interface ToastProps {
 export declare class Toast extends React.Component<ToastProps, any> {
     public show(message: ToastMessageType): void;
     public clear(): void;
+    public replace(message: ToastMessageType): void;
 }

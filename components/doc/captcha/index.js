@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
-
+import { DevelopmentSection } from '../common/developmentsection';
 
 const CaptchaDoc  = memo(() => {
 
@@ -275,6 +275,11 @@ const showResponse = (response) => {
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                    <p>Refer to the <a alt="Recaptcha Accessibility "href="https://support.google.com/recaptcha/answer/6175971?hl=en">Recaptcha Accessibility</a> documentation for more information.</p>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>Google Recaptcha V2</p>

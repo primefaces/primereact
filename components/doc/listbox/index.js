@@ -931,11 +931,11 @@ const groupedCities = [
                                 </tr>
                                 <tr>
                                     <td><i>enter</i></td>
-                                    <td>Toggles the selected state of the focused item.</td>
+                                    <td>Toggles the selected state of the focused option.</td>
                                 </tr>
                                 <tr>
                                     <td><i>space</i></td>
-                                    <td>Toggles the selected state of the focused item.</td>
+                                    <td>Toggles the selected state of the focused option.</td>
                                 </tr>
                                 <tr>
                                     <td><i>home</i></td>

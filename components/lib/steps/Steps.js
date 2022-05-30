@@ -68,7 +68,7 @@ export const Steps = React.memo(React.forwardRef((props, ref) => {
         }
 
         return (
-            <li key={key} className={className} style={item.style} role="tab" aria-selected={active} aria-expanded={active}>
+            <li key={key} id={item.id} className={className} style={item.style} role="tab" aria-selected={active} aria-expanded={active}>
                 {content}
             </li>
         )

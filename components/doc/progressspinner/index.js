@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const ProgressSpinnerDoc = memo(() => {
 
@@ -226,6 +227,20 @@ import { ProgressSpinner } from 'primereact/progressspinner';
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>ProgressSpinner components uses <i>progressbar</i> role. Value to describe the component can be defined using <i>aria-labelledby</i> and <i>aria-label</i> props.</p>
+<CodeHighlight>
+{`
+<ProgressSpinner aria-label="Loading" />
+`}
+</CodeHighlight>
+
+                    <h6>Keyboard Support</h6>
+                    <p>Component does not include any interactive elements.</p>
+                </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

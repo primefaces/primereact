@@ -371,7 +371,7 @@ const options = [
                     <h6>Screen Reader</h6>
                     <p>MultiStateCheckbox component uses an element with <i>checkbox</i> role. Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Component adds an element with
                      <i>aria-live</i> attribute that is only visible to screen readers to read the value displayed. Values to read are defined with the <i>optionLabel</i> property that defaults to <i>optionValue</i> if not defined. Unchecked state label on the other hand is
-                     retrieved from <i>nullLabel</i> key of the <i>aria</i>  property from the <Link href="/theming">locale</Link> API. This is an example of a custom accessibility implementation as there is no one to one mapping between the component design and the WCAG specification.</p>
+                     retrieved from <i>nullLabel</i> key of the <i>aria</i>  property from the <Link href="/locale">locale</Link> API. This is an example of a custom accessibility implementation as there is no one to one mapping between the component design and the WCAG specification.</p>
 <CodeHighlight>
 {`
 <span id="chkbox1">Access Type</span>

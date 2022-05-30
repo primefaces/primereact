@@ -7,6 +7,7 @@ import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils
 export const Tooltip = React.memo(React.forwardRef((props, ref) => {
     const [visibleState, setVisibleState] = React.useState(false);
     const [positionState, setPositionState] = React.useState(props.position);
+    const [classNameState, setClassNameState] = React.useState('');
     const elementRef = React.useRef(null);
     const textRef = React.useRef(null);
     const currentTargetRef = React.useRef(null);
@@ -147,9 +148,9 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
                 applyDelay('showDelay', () => {
                     setVisibleState(true);
                     setPositionState(getPosition(currentTargetRef.current));
+                    setClassNameState(getTargetOption(currentTargetRef.current, 'classname'));
                     setTimeout(() => updateTooltipState(), 0);
                     sendCallback(props.onShow, { originalEvent: e, target: currentTargetRef.current });
-                    DomHandler.addClass(currentTargetRef.current, getTargetOption(currentTargetRef.current, 'classname'));
                 });
             };
         }
@@ -159,8 +160,6 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
         clearTimeouts();
 
         if (visibleState) {
-            DomHandler.removeClass(currentTargetRef.current, getTargetOption(currentTargetRef.current, 'classname'));
-
             const success = sendCallback(props.onBeforeHide, { originalEvent: e, target: currentTargetRef.current });
             if (success) {
                 applyDelay('hideDelay', () => {
@@ -173,6 +172,8 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
 
                     setVisibleState(false);
                     setPositionState(getPosition(currentTargetRef.current));
+                    setClassNameState('');
+
                     currentTargetRef.current = null;
                     containerSize.current = null;
                     allowHide.current = true;
@@ -436,7 +437,8 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
         const otherProps = ObjectUtils.findDiffKeys(props, Tooltip.defaultProps);
         const tooltipClassName = classNames('p-tooltip p-component', {
             [`p-tooltip-${getPosition(currentTargetRef.current)}`]: true
-        }, props.className);
+        }, props.className, classNameState);
+
         const empty = isTargetContentEmpty(currentTargetRef.current);
 
         return (

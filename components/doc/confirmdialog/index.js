@@ -598,7 +598,7 @@ const confirm = () => {
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
                     <h6>Screen Reader</h6>
-                    <p>ConfirmDialog component uses <i>dialog</i> role along with <i>aria-labelledby</i> referring to the header element however any attribute is passed to the root element so you may use <i>aria-labelledby</i> to override this default behavior. 
+                    <p>ConfirmDialog component uses <i>alertdialog</i> role along with <i>aria-labelledby</i> referring to the header element however any attribute is passed to the root element so you may use <i>aria-labelledby</i> to override this default behavior. 
                     In addition <i>aria-modal</i> is added since focus is kept within the popup.</p>
                     <p>It is recommended to use a trigger component that can be accessed with keyboard such as a button, if not adding <i>tabIndex</i> would be necessary.</p>
 

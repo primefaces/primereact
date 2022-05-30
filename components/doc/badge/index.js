@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const BadgeDoc = memo(() => {
 
@@ -317,6 +318,16 @@ import { Badge } from 'primereact/badge';
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>Badge does not include any roles and attributes by default, any attribute is passed to the root element so aria roles and attributes can be added if required. If the badges are dynamic,
+                        <i>aria-live</i> may be utilized as well. In case badges need to be tabbable, <i>tabIndex</i> can be added to implement custom key handlers.</p>
+
+                        <h5>Keyboard Support</h5>
+                        <p>Component does not include any interactive elements.</p>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

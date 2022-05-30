@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const SkeletonDoc  = memo( () => {
 
@@ -718,6 +719,16 @@ import { Skeleton } from 'primereact/skeleton';
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>Skeleton uses <i>aria-hidden</i> as "true" so that it gets ignored by screen readers, any valid attribute is passed to the root element so you may customize it further if required. If multiple skeletons are grouped inside a container, 
+                    you may use <i>aria-busy</i> on the container element as well to indicate the loading process.</p>
+
+                    <h5>Keyboard Support</h5>
+                    <p>Component does not include any interactive elements.</p>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

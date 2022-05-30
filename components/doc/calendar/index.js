@@ -1346,7 +1346,7 @@ const monthNavigatorTemplate = (options) => {
                         <p>Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element has <i>combobox</i> role
                         in addition to <i>aria-autocomplete</i> as "none", <i>aria-haspopup</i> as "dialog" and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> attribute that refers to the id of the popup.</p>
                         <p>The optional calendar button requires includes <i>aria-haspopup</i>, <i>aria-expanded</i> for states along with <i>aria-controls</i> to define the relation between the popup and the button. The value to read is retrieved from the <i>chooseDate</i>
-                        key of the aria property from the <Link href="/theming">locale</Link> API. This label is also used for the <i>aria-label</i> of the popup as well. When there is a value selected, it is formatted and appended to the label to be able to notify users
+                        key of the aria property from the <Link href="/locale">locale</Link> API. This label is also used for the <i>aria-label</i> of the popup as well. When there is a value selected, it is formatted and appended to the label to be able to notify users
                         about the current value.</p>
 
                         <p>Popup has a <i>dialog</i> role along with <i>aria-modal</i> and <i>aria-label</i>. The navigation buttons at the header has an <i>aria-label</i> retrieved from the <i>prevYear</i>, <i>nextYear</i>, <i>prevMonth</i>, <i>nextMonth</i>,

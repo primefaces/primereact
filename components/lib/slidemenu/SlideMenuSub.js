@@ -83,7 +83,7 @@ export const SlideMenuSub = React.memo((props) => {
         }
 
         return (
-            <li key={key} className={className} style={item.style}>
+            <li key={key} id={item.id} className={className} style={item.style}>
                 {content}
                 {submenu}
             </li>
