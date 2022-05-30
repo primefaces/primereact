@@ -2,7 +2,7 @@ import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
 import { VirtualScrollerProps } from '../virtualscroller';
-import { SelectItemOptionsType } from '../selectitem/SelectItem';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
 
 type DropdownOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
