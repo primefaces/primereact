@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SelectItemOptionsType } from '../selectitem/SelectItem';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { VirtualScrollerProps } from '../virtualscroller';
 

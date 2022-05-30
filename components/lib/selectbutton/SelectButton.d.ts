@@ -1,6 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
-import { SelectItemOptionsType } from '../selectitem/SelectItem';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
 
 type SelectButtonOptionDisabledType = string | ((option: any) => boolean);
 
