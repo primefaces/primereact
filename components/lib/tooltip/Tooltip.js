@@ -173,7 +173,6 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
                     setVisibleState(false);
                     setPositionState(getPosition(currentTargetRef.current));
                     setClassNameState('');
-
                     currentTargetRef.current = null;
                     containerSize.current = null;
                     allowHide.current = true;
@@ -438,7 +437,6 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
         const tooltipClassName = classNames('p-tooltip p-component', {
             [`p-tooltip-${getPosition(currentTargetRef.current)}`]: true
         }, props.className, classNameState);
-
         const empty = isTargetContentEmpty(currentTargetRef.current);
 
         return (
