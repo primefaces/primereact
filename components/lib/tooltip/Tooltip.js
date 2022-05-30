@@ -113,7 +113,7 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
             return;
         }
 
-        const updateTooltipState = () => {
+        const updateTooltipState = (position) => {
             updateText(currentTargetRef.current, () => {
                 if (props.autoZIndex && !ZIndexUtils.get(elementRef.current)) {
                     ZIndexUtils.set('tooltip', elementRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['tooltip']);
@@ -134,7 +134,7 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
                     };
                 }
 
-                align(currentTargetRef.current, { x: e.pageX, y: e.pageY });
+                align(currentTargetRef.current, { x: e.pageX, y: e.pageY }, position);
             });
         }
 
@@ -146,10 +146,13 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
             const success = sendCallback(props.onBeforeShow, { originalEvent: e, target: currentTargetRef.current });
             if (success) {
                 applyDelay('showDelay', () => {
+                    const position = getPosition(currentTargetRef.current);
+                    const classname = getTargetOption(currentTargetRef.current, 'classname');
+
                     setVisibleState(true);
-                    setPositionState(getPosition(currentTargetRef.current));
-                    setClassNameState(getTargetOption(currentTargetRef.current, 'classname'));
-                    setTimeout(() => updateTooltipState(), 0);
+                    setPositionState(position);
+                    setClassNameState(classname);
+                    updateTooltipState(position);
                     sendCallback(props.onShow, { originalEvent: e, target: currentTargetRef.current });
                 });
             };
@@ -182,8 +185,8 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
-    const align = (target, coordinate) => {
-        let left = 0, top = 0;
+    const align = (target, coordinate, position) => {
+        let left = 0, top = 0, currentPosition = (position || positionState);
 
         if (isMouseTrack(target) && coordinate) {
             const _containerSize = {
@@ -196,7 +199,7 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
 
             let { top: mouseTrackTop, left: mouseTrackLeft } = getMouseTrackPosition(target);
 
-            switch (positionState) {
+            switch (currentPosition) {
                 case 'left':
                     left -= (_containerSize.width + mouseTrackLeft);
                     top -= (_containerSize.height / 2) - mouseTrackTop;
@@ -230,33 +233,33 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
             DomHandler.addClass(elementRef.current, 'p-tooltip-active');
         }
         else {
-            const pos = DomHandler.findCollisionPosition(positionState);
+            const pos = DomHandler.findCollisionPosition(currentPosition);
             const my = (getTargetOption(target, 'my') || props.my || pos.my);
             const at = (getTargetOption(target, 'at') || props.at || pos.at);
 
             elementRef.current.style.padding = '0px';
 
-            DomHandler.flipfitCollision(elementRef.current, target, my, at, (currentPosition) => {
-                const { x: atX, y: atY } = currentPosition.at;
-                const { x: myX } = currentPosition.my;
-                const newPosition = props.at ? (atX !== 'center' && atX !== myX ? atX : atY) : currentPosition.at[`${pos.axis}`];
+            DomHandler.flipfitCollision(elementRef.current, target, my, at, (calculatedPosition) => {
+                const { x: atX, y: atY } = calculatedPosition.at;
+                const { x: myX } = calculatedPosition.my;
+                const newPosition = props.at ? (atX !== 'center' && atX !== myX ? atX : atY) : calculatedPosition.at[`${pos.axis}`];
 
                 elementRef.current.style.padding = '';
 
                 setPositionState(newPosition);
-                updateContainerPosition();
+                updateContainerPosition(newPosition);
                 DomHandler.addClass(elementRef.current, 'p-tooltip-active');
             });
         }
     }
 
-    const updateContainerPosition = () => {
+    const updateContainerPosition = (position) => {
         if (elementRef.current) {
             const style = getComputedStyle(elementRef.current);
 
-            if (positionState === 'left')
+            if (position === 'left')
                 elementRef.current.style.left = (parseFloat(style.left) - (parseFloat(style.paddingLeft) * 2)) + 'px';
-            else if (positionState === 'top')
+            else if (position === 'top')
                 elementRef.current.style.top = (parseFloat(style.top) - (parseFloat(style.paddingTop) * 2)) + 'px';
         }
     }
