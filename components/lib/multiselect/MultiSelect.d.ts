@@ -3,7 +3,7 @@ import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
 import { IconType } from '../utils';
 import { VirtualScrollerProps } from '../virtualscroller';
-import { SelectItemOptionsType } from '../selectitem/SelectItem';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
 
 type MultiSelectOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
