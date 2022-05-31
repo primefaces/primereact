@@ -1311,6 +1311,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             setCurrentMonth(month);
             createMonthsMeta(month, currentYear);
             const currentDate = new Date(getCurrentDateTime().getTime());
+            currentDate.setDate(1); // #2948 always set to 1st of month
             currentDate.setMonth(month);
             currentDate.setYear(currentYear);
 
