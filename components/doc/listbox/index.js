@@ -963,7 +963,7 @@ const groupedCities = [
                                 </tr>
                                 <tr>
                                     <td><i>control</i> + <i>shift</i> + <i>end</i></td>
-                                    <td>Selects the focused options and all the options down to the first one.</td>
+                                    <td>Selects the focused options and all the options down to the last one.</td>
                                 </tr>
                                 <tr>
                                     <td><i>control</i> + <i>a</i></td>
