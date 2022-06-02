@@ -291,6 +291,10 @@ import { Image } from 'primereact/image';
                                         <td><i>space</i></td>
                                         <td>Activates the button.</td>
                                     </tr>
+                                    <tr>
+                                        <td><i>esc</i></td>
+                                        <td>Closes the image preview.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
