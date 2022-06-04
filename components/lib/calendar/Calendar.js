@@ -945,6 +945,8 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             viewStateChanged.current = true;
             setViewDateState(value);
         }
+        setCurrentMonth(value.getMonth());
+        setCurrentYear(value.getFullYear());
     }
 
     const onDateCellKeydown = (event, date, groupIndex) => {
