@@ -424,7 +424,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
         let label;
 
         if (!empty && !props.fixedPlaceholder) {
-            if (props.maxSelectedLabels && props.value.length > props.maxSelectedLabels) {
+            if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value.length > props.maxSelectedLabels) {
                 return getSelectedItemsLabel();
             }
             else {
@@ -438,7 +438,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
     const getLabelContent = () => {
         if (props.selectedItemTemplate) {
             if (!empty) {
-                if (props.maxSelectedLabels && props.value.length > props.maxSelectedLabels) {
+                if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value.length > props.maxSelectedLabels) {
                     return getSelectedItemsLabel();
                 }
                 else {
