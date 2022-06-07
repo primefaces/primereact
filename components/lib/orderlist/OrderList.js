@@ -6,7 +6,7 @@ import { OrderListSubList } from './OrderListSubList';
 
 export const OrderList = React.memo(React.forwardRef((props, ref) => {
     const [selectionState, setSelectionState] = React.useState([]);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const reorderDirection = React.useRef(null);
 
     const onItemClick = (event) => {
@@ -109,6 +109,10 @@ export const OrderList = React.memo(React.forwardRef((props, ref) => {
             reorderDirection.current = null;
         }
     });
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const otherProps = ObjectUtils.findDiffKeys(props, OrderList.defaultProps);
     const className = classNames('p-orderlist p-component', props.className);

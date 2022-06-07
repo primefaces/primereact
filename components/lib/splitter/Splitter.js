@@ -5,7 +5,7 @@ import { useMountEffect, useEventListener } from '../hooks/Hooks';
 export const SplitterPanel = () => { }
 
 export const Splitter = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const gutterRef = React.useRef();
     const gutterRefs = React.useRef({});
     const size = React.useRef(null);
@@ -199,6 +199,10 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
             }
         }
     });
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const createPanel = (panel, index) => {
         const otherProps = ObjectUtils.findDiffKeys(panel.props, SplitterPanel.defaultProps);

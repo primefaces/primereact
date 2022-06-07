@@ -18,7 +18,7 @@ export const Password = React.memo(React.forwardRef((props, ref) => {
     const [infoTextState, setInfoTextState] = React.useState(promptLabel);
     const [focusedState, setFocusedState] = React.useState(false);
     const [unmaskedState, setUnmaskedState] = React.useState(false);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const overlayRef = React.useRef(null);
     const inputRef = React.useRef(props.inputRef);
     const mediumCheckRegExp = React.useRef(new RegExp(props.mediumRegex));
@@ -211,6 +211,10 @@ export const Password = React.memo(React.forwardRef((props, ref) => {
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     React.useEffect(() => {
         mediumCheckRegExp.current = new RegExp(props.mediumRegex);

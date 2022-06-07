@@ -12,7 +12,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
     const [viewDateState, setViewDateState] = React.useState(null);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const overlayRef = React.useRef(null);
     const inputRef = React.useRef(props.inputRef);
     const navigation = React.useRef(null);
@@ -2331,6 +2331,10 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     useMountEffect(() => {
         let viewDate = getViewDate(props.viewDate);

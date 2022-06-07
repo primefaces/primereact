@@ -9,7 +9,7 @@ const minRadians = 4 * Math.PI / 3;
 const maxRadians = -Math.PI / 3;
 
 export const Knob = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const enabled = !props.disabled && !props.readOnly;
 
     const [bindWindowMouseMoveListener, unbindWindowMouseMoveListener] = useEventListener({
@@ -129,6 +129,10 @@ export const Knob = React.memo(React.forwardRef((props, ref) => {
         unbindWindowTouchMoveListener();
         unbindWindowTouchEndListener();
     }
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const otherProps = ObjectUtils.findDiffKeys(props, Knob.defaultProps);
     const className = classNames('p-knob p-component', {

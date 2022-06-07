@@ -5,7 +5,11 @@ import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const TriStateCheckbox = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const onClick = (event) => {
         if (!props.disabled && !props.readOnly) {

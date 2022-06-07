@@ -3,7 +3,7 @@ import { useMountEffect, usePrevious, useUnmountEffect, useUpdateEffect } from '
 import { ObjectUtils } from '../utils/Utils';
 
 export const FullCalendar = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const config = React.useRef({});
     const calendar = React.useRef(null);
     const prevEvents = usePrevious(props.events);
@@ -65,6 +65,10 @@ export const FullCalendar = React.memo(React.forwardRef((props, ref) => {
             calendar.current.destroy();
         }
     });
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const otherProps = ObjectUtils.findDiffKeys(props, FullCalendar.defaultProps);
 

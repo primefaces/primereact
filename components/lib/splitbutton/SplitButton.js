@@ -11,7 +11,7 @@ import { SplitButtonPanel } from './SplitButtonPanel';
 export const SplitButton = React.memo(React.forwardRef((props, ref) => {
     const [idState, setIdState] = React.useState(props.id);
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const defaultButtonRef = React.useRef(null);
     const overlayRef = React.useRef(null);
 
@@ -83,6 +83,10 @@ export const SplitButton = React.memo(React.forwardRef((props, ref) => {
         show,
         hide
     }));
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const createItems = () => {
         if (props.model) {

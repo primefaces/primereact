@@ -10,7 +10,7 @@ export const Image = React.memo(React.forwardRef((props, ref) => {
     const [previewVisibleState, setPreviewVisibleState] = React.useState(false);
     const [rotateState, setRotateState] = React.useState(0);
     const [scaleState, setScaleState] = React.useState(1);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const maskRef = React.useRef(null);
     const previewRef = React.useRef(null);
     const previewClick = React.useRef(false);
@@ -89,6 +89,10 @@ export const Image = React.memo(React.forwardRef((props, ref) => {
     useUnmountEffect(() => {
         maskRef.current && ZIndexUtils.clear(maskRef.current);
     });
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const createPreview = () => {
         if (props.preview) {

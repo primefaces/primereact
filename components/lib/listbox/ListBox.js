@@ -9,7 +9,7 @@ import { ListBoxItem } from './ListBoxItem';
 
 export const ListBox = React.memo(React.forwardRef((props, ref) => {
     const [filterValueState, setFilterValueState] = React.useState('');
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const virtualScrollerRef = React.useRef(null);
     const optionTouched = React.useRef(false);
     const filteredValue = (props.onFilterValueChange ? props.filterValue : filterValueState) || '';
@@ -253,6 +253,10 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
     useMountEffect(() => {
         scrollToSelectedIndex();
     });
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const createHeader = () => {
         return props.filter ? <ListBoxHeader filter={filteredValue} onFilter={onFilter} disabled={props.disabled} filterPlaceholder={props.filterPlaceholder} filterInputProps={props.filterInputProps} /> : null;

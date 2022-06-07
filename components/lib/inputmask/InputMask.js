@@ -4,7 +4,7 @@ import { InputText } from '../inputtext/InputText';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const InputMask = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(props.inputRef);
     const firstNonMaskPos = React.useRef(null);
     const lastRequiredNonMaskPos = React.useRef(0);
     const tests = React.useRef([]);

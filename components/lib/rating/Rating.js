@@ -3,7 +3,7 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const Rating = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const enabled = !props.disabled && !props.readOnly;
     const tabIndex = enabled ? 0 : null;
 
@@ -75,6 +75,10 @@ export const Rating = React.memo(React.forwardRef((props, ref) => {
 
         return null;
     }
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const otherProps = ObjectUtils.findDiffKeys(props, Rating.defaultProps);

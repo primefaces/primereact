@@ -5,7 +5,7 @@ import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Checkbox = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const inputRef = React.useRef(props.inputRef);
 
     const onClick = (event) => {
@@ -48,6 +48,10 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     useUpdateEffect(() => {
         inputRef.current.checked = isChecked();

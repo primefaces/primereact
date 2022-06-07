@@ -4,7 +4,7 @@ import { classNames, ObjectUtils } from '../utils/Utils';
 import { SelectButtonItem } from './SelectButtonItem';
 
 export const SelectButton = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
 
     const onOptionClick = (event) => {
         if (props.disabled || isOptionDisabled(event.option)) {
@@ -89,6 +89,10 @@ export const SelectButton = React.memo(React.forwardRef((props, ref) => {
 
         return null;
     }
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const otherProps = ObjectUtils.findDiffKeys(props, SelectButton.defaultProps);

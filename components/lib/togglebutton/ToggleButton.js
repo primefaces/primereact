@@ -4,11 +4,15 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const ToggleButton = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
     const hasIcon = props.onIcon && props.onIcon.length > 0 && props.offIcon && props.offIcon.length > 0;
     const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '&nbsp;';
-    const icon = props.checked ? props.onIcon : props.offIcon
+    const icon = props.checked ? props.onIcon : props.offIcon;
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const toggle = (e) => {
         if (!props.disabled && props.onChange) {

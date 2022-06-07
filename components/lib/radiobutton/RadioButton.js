@@ -4,7 +4,7 @@ import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const RadioButton = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const inputRef = React.useRef(props.inputRef);
 
     const select = (e) => {
@@ -50,6 +50,10 @@ export const RadioButton = React.memo(React.forwardRef((props, ref) => {
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     React.useImperativeHandle(ref, () => ({
         select

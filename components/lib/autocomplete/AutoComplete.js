@@ -13,7 +13,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
     const [searchingState, setSearchingState] = React.useState(false);
     const [focusedState, setFocusedState] = React.useState(false);
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const overlayRef = React.useRef(null);
     const inputRef = React.useRef(props.inputRef);
     const multiContainerRef = React.useRef(null);
@@ -421,6 +421,10 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     useMountEffect(() => {
         if (!idState) {

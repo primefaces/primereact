@@ -8,7 +8,7 @@ import { ColorPickerPanel } from './ColorPickerPanel';
 
 export const ColorPicker = React.memo(React.forwardRef((props, ref) => {
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const overlayRef = React.useRef(null);
     const inputRef = React.useRef(props.inputRef);
     const colorSelectorRef = React.useRef(null);
@@ -440,6 +440,10 @@ export const ColorPicker = React.memo(React.forwardRef((props, ref) => {
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     useMountEffect(() => {
         updateHSBValue(props.value);

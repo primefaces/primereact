@@ -25,7 +25,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
     const [numScrollState, setNumScrollState] = React.useState(props.numScroll);
     const [totalShiftedItemsState, setTotalShiftedItemsState] = React.useState((props.page * props.numScroll) * -1);
     const [pageState, setPageState] = React.useState(props.page);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const itemsContainerRef = React.useRef(null);
     const remainingItems = React.useRef(0);
     const allowAutoplay = React.useRef(!!props.autoplayInterval);
@@ -382,6 +382,10 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
             stopAutoplay();
         }
     });
+ 
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const createItems = () => {
         if (props.value && props.value.length) {

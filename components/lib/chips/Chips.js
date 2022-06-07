@@ -4,7 +4,7 @@ import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const Chips = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const listRef = React.useRef(null);
     const inputRef = React.useRef(props.inputRef);
 
@@ -157,6 +157,10 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const createRemoveIcon = (value, index) => {
         if (!props.disabled && !props.readOnly && isRemovable(value, index)) {

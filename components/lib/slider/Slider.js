@@ -3,7 +3,7 @@ import { useEventListener } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const Slider = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const handleIndex = React.useRef(0);
     const sliderHandleClick = React.useRef(false);
     const dragging = React.useRef(false);
@@ -19,6 +19,10 @@ export const Slider = React.memo(React.forwardRef((props, ref) => {
     const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({ type: 'mouseup', listener: (event) => onDragEnd(event) });
     const [bindDocumentTouchMoveListener, unbindDocumentTouchMoveListener] = useEventListener({ type: 'touchmove', listener: (event) => onDrag(event) });
     const [bindDocumentTouchEndListener, unbindDocumentTouchEndListener] = useEventListener({ type: 'touchend', listener: (event) => onDragEnd(event) });
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const spin = (event, dir) => {
         const val = props.range ? value[handleIndex.current] : value;

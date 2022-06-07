@@ -4,7 +4,7 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ObjectUtils } from '../utils/Utils';
 
 export const GMap = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const map = React.useRef(null);
     const prevOverlays = React.useRef(null);
 
@@ -109,6 +109,10 @@ export const GMap = React.memo(React.forwardRef((props, ref) => {
             removeOverlays(prevOverlays.current);
         }
     });
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     React.useImperativeHandle(ref, () => ({
         getMap

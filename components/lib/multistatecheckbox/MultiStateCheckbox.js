@@ -6,7 +6,7 @@ import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const equalityKey = props.optionValue ? null : props.dataKey;
 
     const onClick = (event) => {
@@ -81,6 +81,10 @@ export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
             toggle();
         }
     });
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const createIcon = () => {
         const icon = (selectedOption && selectedOption.icon) || '';

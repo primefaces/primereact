@@ -3,7 +3,7 @@ import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 import { ObjectUtils } from '../utils/Utils';
 
 export const Captcha = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const instance = React.useRef(null);
     const recaptchaScript = React.useRef(null);
     const isCaptchaLoaded = React.useRef(false);
@@ -84,6 +84,10 @@ export const Captcha = React.memo(React.forwardRef((props, ref) => {
         reset,
         getResponse
     }));
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     const otherProps = ObjectUtils.findDiffKeys(props, Captcha.defaultProps);
 

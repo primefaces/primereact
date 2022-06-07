@@ -13,7 +13,7 @@ export const Galleria = React.memo(React.forwardRef((props, ref) => {
     const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
     const [slideShowActiveState, setSlideShowActiveState] = React.useState(false);
     const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const previewContentRef = React.useRef(null);
     const maskRef = React.useRef(null);
     const activeItemIndex = props.onItemChange ? props.activeIndex : activeIndexState;
@@ -92,6 +92,10 @@ export const Galleria = React.memo(React.forwardRef((props, ref) => {
     React.useEffect(() => {
         setNumVisibleState(props.numVisible);
     }, [props.numVisible]);
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     useUnmountEffect(() => {
         if (slideShowActiveState) {

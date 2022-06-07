@@ -7,7 +7,7 @@ import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const InputNumber = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const inputRef = React.useRef(null);
     const timer = React.useRef(null);
     const lastValue = React.useRef(null);
@@ -940,6 +940,10 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     useMountEffect(() => {
         constructParser();

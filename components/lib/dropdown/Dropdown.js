@@ -10,7 +10,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
     const [filterState, setFilterState] = React.useState('');
     const [focusedState, setFocusedState] = React.useState(false);
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const overlayRef = React.useRef(null);
     const inputRef = React.useRef(props.inputRef);
     const focusInputRef = React.useRef(null);
@@ -545,6 +545,10 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     useMountEffect(() => {
         if (props.autoFocus && focusInputRef.current) {
