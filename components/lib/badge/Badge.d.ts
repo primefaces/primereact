@@ -4,12 +4,10 @@ type BadgeSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
 
 type BadgeSizeType = 'normal' | 'large' | 'xlarge';
 
-export interface BadgeProps {
+export interface BadgeProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'ref'> {
     value?: any;
     severity?: BadgeSeverityType;
     size?: BadgeSizeType;
-    style?: object;
-    className?: string;
     children?: React.ReactNode;
 }
 
