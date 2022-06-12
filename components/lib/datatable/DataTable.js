@@ -1295,7 +1295,9 @@ export const DataTable = React.forwardRef((props, ref) => {
     }, [props.responsiveLayout]);
 
     useUpdateEffect(() => {
-        filter(props.globalFilter, 'global', 'contains');
+        if (props.globalFilter) {
+            filter(props.globalFilter, 'global', 'contains');
+        }
     }, [props.globalFilter]);
 
     useUnmountEffect(() => {
