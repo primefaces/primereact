@@ -7,7 +7,7 @@ type AvatarShapeType = 'square' | 'circle';
 
 type AvatarTemplateType = React.ReactNode | ((props: AvatarProps) => React.ReactNode);
 
-export interface AvatarProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface AvatarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     label?: string;
     icon?: IconType<AvatarProps>;
     image?: string;
