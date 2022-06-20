@@ -15,8 +15,8 @@ export const Editor = React.memo(React.forwardRef((props, ref) => {
     useMountEffect(() => {
         if (!isQuillLoaded.current) {
             import('quill').then((module) => {
-                if (module && module.default && DomHandler.isExist(contentRef.current)) {
-                    quill.current = new module.default(contentRef.current, {
+                if (module && DomHandler.isExist(contentRef.current)) {
+                    const configuration = {
                         modules: {
                             toolbar: props.showHeader ? toolbarRef.current : false,
                             ...props.modules
@@ -25,7 +25,15 @@ export const Editor = React.memo(React.forwardRef((props, ref) => {
                         readOnly: props.readOnly,
                         theme: props.theme,
                         formats: props.formats
-                    });
+                    };
+
+                    if (module.default) {
+                        // webpack
+                        quill.current = new module.default(contentRef.current, configuration);
+                    } else {
+                        // parceljs
+                        quill.current = new module(contentRef.current, configuration);
+                    }
 
                     if (props.value) {
                         quill.current.setContents(quill.current.clipboard.convert(props.value));
