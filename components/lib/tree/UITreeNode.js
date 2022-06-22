@@ -81,7 +81,14 @@ export const UITreeNode = React.memo((props) => {
                     focusNode(listElement.children[0]);
                 }
                 else {
-                    const nextNodeElement = nodeElement.nextElementSibling;
+                    let nextNodeElement = nodeElement.nextElementSibling;
+                    while (nextNodeElement) {
+                        if (!DomHandler.hasClass(nextNodeElement, 'p-treenode-droppoint')) {
+                            break;
+                        }
+                        nextNodeElement = nextNodeElement.nextElementSibling;
+                    }
+
                     if (nextNodeElement) {
                         focusNode(nextNodeElement);
                     }
@@ -159,7 +166,7 @@ export const UITreeNode = React.memo((props) => {
     }
 
     const focusNode = (element) => {
-        element.children[0].focus();
+        element && element.children[0] && element.children[0].focus();
     }
 
     const onClick = (event) => {
