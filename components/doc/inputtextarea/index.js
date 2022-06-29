@@ -233,7 +233,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
 <InputTextarea id="address1" />
 
 <span id="address2">Address 2</span>
-<InputTextarea id="address2" aria-labelledby="address2" />
+<InputTextarea aria-labelledby="address2" />
 
 <InputTextarea aria-label="Address Details"/>
 `}

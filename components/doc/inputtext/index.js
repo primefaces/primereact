@@ -398,7 +398,7 @@ import { InputText } from 'primereact/inputtext';
 <InputText id="firstname" />
 
 <span id="lastname">Lastname</span>
-<InputText id="firstname" aria-labelledby="lastname" />
+<InputText aria-labelledby="lastname" />
 
 <InputText aria-label="Age"/>
 `}
