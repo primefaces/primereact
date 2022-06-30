@@ -517,7 +517,9 @@ export const InputMask = React.memo(React.forwardRef((props, ref) => {
     useUpdateEffect(() => {
         init();
         caret(updateValue(true));
-        updateModel();
+        if (props.unmask) {
+            updateModel();
+        }
     }, [props.mask]);
 
     useUpdateEffect(() => {
