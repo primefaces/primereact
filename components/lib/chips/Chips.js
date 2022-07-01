@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
@@ -72,6 +73,13 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
         const inputValue = event.target.value;
         const values = props.value || [];
 
+        props.onKeyDown && props.onKeyDown(event);
+
+        // do not continue if the user defined keydown wants to prevent
+        if (event.defaultPrevented) {
+            return;
+        }
+
         switch (event.which) {
             //backspace
             case 8:
@@ -88,6 +96,9 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
                 break;
 
             default:
+                if (props.keyfilter) {
+                    KeyFilter.onKeyPress(event, props.keyfilter)
+                }
                 if (isMaxedOut()) {
                     event.preventDefault();
                 }
@@ -120,6 +131,10 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
     const onPaste = (event) => {
         if (props.separator) {
             let pastedData = (event.clipboardData || window['clipboardData']).getData('Text');
+
+            if (props.keyfilter) {
+                KeyFilter.onPaste(event, props.keyfilter)
+            }
 
             if (pastedData) {
                 let values = props.value || [];
@@ -252,9 +267,11 @@ Chips.defaultProps = {
     separator: null,
     allowDuplicate: true,
     itemTemplate: null,
+    keyfilter: null,
     onAdd: null,
     onRemove: null,
     onChange: null,
     onFocus: null,
-    onBlur: null
+    onBlur: null,
+    onKeyDown: null
 }

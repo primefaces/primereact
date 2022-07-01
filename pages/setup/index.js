@@ -380,14 +380,6 @@ PrimeReact.cssTransition = false; // Default value is true.
                 <h5>Typescript</h5>
                 <p>Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample <a href="https://github.com/primefaces/primereact-examples/tree/main/cra-basic-ts" className="layout-content-link">typescript-primereact</a> application with create-react-app is available as at github.</p>
 
-                <p>Note: A shorthand API is available to import APIs such as MenuModel and SelectItem.</p>
-<CodeHighlight lang="js">
-{`
-import { SelectItem } from 'primereact/api';
-import { MenuItem } from 'primereact/api';
-`}
-</CodeHighlight>
-
                 <h5>Next.js</h5>
                 <p>A <a href="https://github.com/primefaces/primereact-examples/tree/main/nextjs-basic" className="layout-content-link">sample application</a> based on Next.js is available at github.</p>
                 <div className="video-container">

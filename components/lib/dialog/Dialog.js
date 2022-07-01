@@ -291,7 +291,7 @@ export const Dialog = React.forwardRef((props, ref) => {
 
         if (props.modal) {
             let hasBlockScroll = document.primeDialogParams && document.primeDialogParams.some(param => param.hasBlockScroll);
-            if (!hasBlockScroll) {
+            if (hasBlockScroll) {
                 DomHandler.removeClass(document.body, 'p-overflow-hidden');
             }
         }

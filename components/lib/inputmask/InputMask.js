@@ -4,7 +4,7 @@ import { InputText } from '../inputtext/InputText';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const InputMask = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(props.inputRef);
+    const elementRef = React.useRef(ref);
     const firstNonMaskPos = React.useRef(null);
     const lastRequiredNonMaskPos = React.useRef(0);
     const tests = React.useRef([]);
@@ -506,8 +506,8 @@ export const InputMask = React.memo(React.forwardRef((props, ref) => {
     }
 
     React.useEffect(() => {
-        ObjectUtils.combinedRefs(elementRef, props.inputRef);
-    }, [elementRef, props.inputRef]);
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     useMountEffect(() => {
         init();
@@ -517,7 +517,9 @@ export const InputMask = React.memo(React.forwardRef((props, ref) => {
     useUpdateEffect(() => {
         init();
         caret(updateValue(true));
-        updateModel();
+        if (props.unmask) {
+            updateModel();
+        }
     }, [props.mask]);
 
     useUpdateEffect(() => {
@@ -541,7 +543,6 @@ InputMask.displayName = 'InputMask';
 InputMask.defaultProps = {
     __TYPE: 'InputMask',
     id: null,
-    inputRef: null,
     value: null,
     type: 'text',
     mask: null,
