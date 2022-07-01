@@ -1337,9 +1337,10 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     const updateModel = (event, value) => {
         if (props.onChange) {
             const newValue = (value && value instanceof Date) ? new Date(value.getTime()) : value;
+            const dirty = previousValue !== props.value;
             viewStateChanged.current = true;
 
-            props.onChange({
+            dirty && props.onChange({
                 originalEvent: event,
                 value: newValue,
                 stopPropagation: () => { },
