@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect } from '../hooks/Hooks';
+import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { PanelMenuSub } from './PanelMenuSub';
 
 export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
     const [idState, setIdState] = React.useState(props.id);
     const [activeItemState, setActiveItemState] = React.useState(null);
+    const [animationDisabled, setAnimationDisabled] = React.useState(false);
     const headerId = idState + '_header';
     const contentId = idState + '_content';
 
@@ -79,6 +80,15 @@ export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
         setActiveItemState(findActiveItem());
     });
 
+    useUpdateEffect(() => {
+        setAnimationDisabled(true);
+        setActiveItemState(findActiveItem());
+    }, [props.model]);
+
+    const onEnter = () => {
+        setAnimationDisabled(false);
+    }
+
     const createPanel = (item, index) => {
         const key = item.label + '_' + index;
         const active = isItemActive(item);
@@ -121,7 +131,7 @@ export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
                 <div className={headerClassName} style={item.style}>
                     {content}
                 </div>
-                <CSSTransition nodeRef={menuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit options={props.transitionOptions}>
+                <CSSTransition nodeRef={menuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} onEnter={onEnter} disabled={animationDisabled} in={active} unmountOnExit options={props.transitionOptions}>
                     <div ref={menuContentRef} className={contentWrapperClassName} role="region" id={contentId} aria-labelledby={headerId}>
                         <div className="p-panelmenu-content">
                             <PanelMenuSub menuProps={props} model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} />

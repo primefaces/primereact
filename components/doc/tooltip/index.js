@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const TooltipDoc = memo(() => {
 
@@ -912,7 +913,6 @@ import { Tooltip } from 'primereact/tooltip';
                         </table>
                     </div>
 
-
                     <h5>Tooltip Component Properties</h5>
                     <p>All options in <i>Tooltip Options</i> section can be used as a property. In addition;</p>
                     <div className="doc-tablewrapper">
@@ -998,6 +998,30 @@ import { Tooltip } from 'primereact/tooltip';
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>Tooltip component uses <i>tooltip</i> role and when it becomes visible the generated id of the tooltip is defined as the <i>aria-describedby</i> of the target.</p> 
+
+                    <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>Closes the tooltip when focus is on the target.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

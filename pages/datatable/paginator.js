@@ -40,7 +40,7 @@ const DataTablePaginatorDemo = () => {
     const onPageInputKeyDown = (event, options) => {
         if (event.key === 'Enter') {
             const page = parseInt(currentPage);
-            if (page < 0 || page > options.totalPages) {
+            if (page < 1 || page > options.totalPages) {
                 setPageInputTooltip(`Value must be between 1 and ${options.totalPages}.`);
             }
             else {
@@ -254,7 +254,7 @@ export class DataTablePaginatorDemo extends Component {
     onPageInputKeyDown(event, options) {
         if (event.key === 'Enter') {
             const page = parseInt(this.state.currentPage);
-            if (page < 0 || page > options.totalPages) {
+            if (page < 1 || page > options.totalPages) {
                 this.setState({ pageInputTooltip: \`Value must be between 1 and \${options.totalPages}.\`})
             }
             else {
@@ -432,7 +432,7 @@ const DataTablePaginatorDemo = () => {
     const onPageInputKeyDown = (event, options) => {
         if (event.key === 'Enter') {
             const page = parseInt(currentPage);
-            if (page < 0 || page > options.totalPages) {
+            if (page < 1 || page > options.totalPages) {
                 setPageInputTooltip(\`Value must be between 1 and \${options.totalPages}.\`);
             }
             else {
@@ -609,7 +609,7 @@ const DataTablePaginatorDemo = () => {
     const onPageInputKeyDown = (event, options) => {
         if (event.key === 'Enter') {
             const page = parseInt(currentPage);
-            if (page < 0 || page > options.totalPages) {
+            if (page < 1 || page > options.totalPages) {
                 setPageInputTooltip(\`Value must be between 1 and \${options.totalPages}.\`);
             }
             else {
@@ -796,7 +796,7 @@ const DataTablePaginatorDemo = () => {
     const onPageInputKeyDown = (event, options) => {
         if (event.key === 'Enter') {
             const page = parseInt(currentPage);
-            if (page < 0 || page > options.totalPages) {
+            if (page < 1 || page > options.totalPages) {
                 setPageInputTooltip(\`Value must be between 1 and \${options.totalPages}.\`);
             }
             else {

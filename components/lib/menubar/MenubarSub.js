@@ -210,7 +210,7 @@ export const MenubarSub = React.memo(React.forwardRef((props, ref) => {
         }
 
         return (
-            <li key={key} role="none" className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>
+            <li key={key} role="none" id={item.id} className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>
                 {content}
                 {submenu}
             </li>

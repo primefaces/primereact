@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 
-type ToastSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
+type ToastSeverityType = 'success' | 'info' | 'warn' | 'error';
 
 type ToastMessageType = ToastMessage | ToastMessage[];
 
@@ -41,4 +41,5 @@ export interface ToastProps {
 export declare class Toast extends React.Component<ToastProps, any> {
     public show(message: ToastMessageType): void;
     public clear(): void;
+    public replace(message: ToastMessageType): void;
 }

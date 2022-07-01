@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const RippleDoc = memo(() => {
 
@@ -285,6 +286,14 @@ import { Ripple } from 'primereact/ripple';
                             </tbody>
                         </table>
                     </div>
+
+                    <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>Ripple element has the <i>aria-hidden</i> attribute as true so that it gets ignored by the screen readers.</p>
+
+                    <h6>Keyboard Support</h6>
+                    <p>Component does not include any interactive elements.</p>
+                </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

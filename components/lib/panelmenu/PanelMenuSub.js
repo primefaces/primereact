@@ -132,7 +132,7 @@ export const PanelMenuSub = React.memo((props) => {
         }
 
         return (
-            <li key={key} className={className} style={item.style} role="none">
+            <li key={key} id={item.id} className={className} style={item.style} role="none">
                 {content}
                 {submenu}
             </li>

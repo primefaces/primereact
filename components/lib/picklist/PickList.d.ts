@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+type PickListItemTemplateType = React.ReactNode | ((item: any) => React.ReactNode);
+
 interface PickListEventParams {
     originalEvent: React.SyntheticEvent;
     value: any;
@@ -28,7 +30,9 @@ export interface PickListProps {
     metaKeySelection?: boolean;
     tabIndex?: number;
     dataKey?: string;
-    itemTemplate?(item: any): React.ReactNode;
+    itemTemplate?: PickListItemTemplateType;
+    sourceItemTemplate?: PickListItemTemplateType;
+    targetItemTemplate?: PickListItemTemplateType;
     onChange?(e: PickListChangeParams): void;
     onMoveToSource?(e: PickListEventParams): void;
     onMoveAllToSource?(e: PickListEventParams): void;

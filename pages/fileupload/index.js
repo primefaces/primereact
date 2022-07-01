@@ -106,6 +106,7 @@ const FileUploadDemo = () => {
         reader.readAsDataURL(blob); 
         reader.onloadend = function () {
             const base64data = reader.result;
+            // eslint-disable-next-line no-console
             console.log(base64data);
         }
     }

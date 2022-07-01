@@ -215,7 +215,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
     const scrollInView = () => {
         const highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
         if (highlightItem && highlightItem.scrollIntoView) {
-            highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });
+            highlightItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
         }
     }
 
@@ -424,7 +424,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
         let label;
 
         if (!empty && !props.fixedPlaceholder) {
-            if (props.maxSelectedLabels && props.value.length > props.maxSelectedLabels) {
+            if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value.length > props.maxSelectedLabels) {
                 return getSelectedItemsLabel();
             }
             else {
@@ -438,7 +438,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
     const getLabelContent = () => {
         if (props.selectedItemTemplate) {
             if (!empty) {
-                if (props.maxSelectedLabels && props.value.length > props.maxSelectedLabels) {
+                if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value.length > props.maxSelectedLabels) {
                     return getSelectedItemsLabel();
                 }
                 else {
@@ -486,7 +486,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
                 for (let optgroup of props.options) {
                     let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
                     if (filteredSubOptions && filteredSubOptions.length) {
-                        filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
+                        filteredGroups.push({ ...optgroup, ...{ [props.optionGroupChildren] : filteredSubOptions } });
                     }
                 }
                 return filteredGroups;

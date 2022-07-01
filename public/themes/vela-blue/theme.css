@@ -42,6 +42,7 @@
   --surface-hover:rgba(255,255,255,.03);
   --maskbg: rgba(0, 0, 0, 0.4);
   --focus-ring: 0 0 0 1px #93cbf9;
+  color-scheme: light dark;
 }
 
 * {
@@ -4343,7 +4344,7 @@
 .p-overlaypanel:before {
   border: solid transparent;
   border-color: rgba(48, 69, 98, 0);
-  border-bottom-color: #304562;
+  border-bottom-color: #2e425d;
 }
 .p-overlaypanel.p-overlaypanel-flipped:after {
   border-top-color: #1f2d40;
@@ -5088,7 +5089,6 @@
   border: 1px solid #304562;
   background: #1f2d40;
   color: rgba(255, 255, 255, 0.87);
-  margin-bottom: 0;
   border-top: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;

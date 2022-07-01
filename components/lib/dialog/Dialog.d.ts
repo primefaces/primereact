@@ -25,6 +25,8 @@ export interface DialogProps {
     draggable?: boolean;
     resizable?: boolean;
     modal?: boolean;
+    headerStyle?: object;
+    headerClassName?: string;
     contentStyle?: object;
     contentClassName?: string;
     closeOnEscape?: boolean;

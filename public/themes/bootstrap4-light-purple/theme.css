@@ -42,6 +42,7 @@
   --surface-hover:#e9ecef;
   --maskbg: rgba(0, 0, 0, 0.4);
   --focus-ring: 0 0 0 0.2rem rgba(136, 60, 174, 0.5);
+  color-scheme: light;
 }
 
 * {
@@ -5100,7 +5101,6 @@
   border: 1px solid #dee2e6;
   background: #ffffff;
   color: #212529;
-  margin-bottom: 0;
   border-top: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;

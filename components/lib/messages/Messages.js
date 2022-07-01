@@ -11,7 +11,7 @@ export const Messages = React.memo(React.forwardRef((props, ref) => {
 
     const show = (value) => {
         if (value) {
-            let messages = [];
+            let messages;
 
             if (Array.isArray(value)) {
                 for (let i = 0; i < value.length; i++) {
@@ -33,7 +33,8 @@ export const Messages = React.memo(React.forwardRef((props, ref) => {
     }
 
     const replace = (value) => {
-        setMessagesState(value);
+        const replaced = Array.isArray(value) ? value : [value];
+        setMessagesState(replaced);
     }
 
     const onClose = (message) => {

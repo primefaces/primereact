@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import { KeyFilterType } from '../keyfilter';
 
 type ChipsRemovableType = boolean | ((options: ChipsRemovableOptions) => boolean);
 
@@ -48,12 +49,14 @@ export interface ChipsProps {
     ariaLabelledBy?: string;
     separator?: string;
     allowDuplicate?: boolean;
+    keyfilter?: KeyFilterType;
     itemTemplate?(item: any): React.ReactNode;
     onAdd?(e: ChipsAddParams): void;
     onRemove?(e: ChipsRemoveParams): void;
     onChange?(e: ChipsChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
+    onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
     children?: React.ReactNode;
 }
 

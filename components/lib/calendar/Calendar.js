@@ -945,6 +945,53 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             viewStateChanged.current = true;
             setViewDateState(value);
         }
+        setCurrentMonth(value.getMonth());
+        setCurrentYear(value.getFullYear());
+    }
+
+    const setNavigationState = (newViewDate) => {
+        if (!props.showMinMaxRange || props.view !== 'date' || !overlayRef.current) {
+            return;
+        }
+
+        const navPrev = DomHandler.findSingle(overlayRef.current, '.p-datepicker-prev');
+        const navNext = DomHandler.findSingle(overlayRef.current, '.p-datepicker-next');
+
+        if (props.disabled) {
+            DomHandler.addClass(navPrev, 'p-disabled');
+            DomHandler.addClass(navNext, 'p-disabled');
+            return;
+        }
+
+        // previous (check first day of month at 00:00:00)
+        if (props.minDate) {
+            let firstDayOfMonth = new Date(newViewDate.getTime());
+            firstDayOfMonth.setDate(1);
+            firstDayOfMonth.setHours(0);
+            firstDayOfMonth.setMinutes(0);
+            firstDayOfMonth.setSeconds(0);
+            if (props.minDate > firstDayOfMonth) {
+                DomHandler.addClass(navPrev, 'p-disabled');
+            } else {
+                DomHandler.removeClass(navPrev, 'p-disabled');
+            }
+        }
+
+        // next (check last day of month at 11:59:59)
+        if (props.maxDate) {
+            let lastDayOfMonth = new Date(newViewDate.getTime());
+            lastDayOfMonth.setMonth(lastDayOfMonth.getMonth()+1);
+            lastDayOfMonth.setDate(1);
+            lastDayOfMonth.setHours(0);
+            lastDayOfMonth.setMinutes(0);
+            lastDayOfMonth.setSeconds(0)
+            lastDayOfMonth.setSeconds(-1);
+            if (props.maxDate < lastDayOfMonth) {
+                DomHandler.addClass(navNext, 'p-disabled');
+            } else {
+                DomHandler.removeClass(navNext, 'p-disabled');
+            }
+        }
     }
 
     const onDateCellKeydown = (event, date, groupIndex) => {
@@ -1311,6 +1358,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             setCurrentMonth(month);
             createMonthsMeta(month, currentYear);
             const currentDate = new Date(getCurrentDateTime().getTime());
+            currentDate.setDate(1); // #2948 always set to 1st of month
             currentDate.setMonth(month);
             currentDate.setYear(currentYear);
 
@@ -1334,9 +1382,10 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     const updateModel = (event, value) => {
         if (props.onChange) {
             const newValue = (value && value instanceof Date) ? new Date(value.getTime()) : value;
+            const dirty = previousValue !== props.value;
             viewStateChanged.current = true;
 
-            props.onChange({
+            dirty && props.onChange({
                 originalEvent: event,
                 value: newValue,
                 stopPropagation: () => { },
@@ -2399,7 +2448,10 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec]);
 
     useUpdateEffect(() => {
-        overlayRef.current && updateFocus();
+        if (overlayRef.current) {
+            setNavigationState(viewDateState);
+            updateFocus();
+        }
     });
 
     useUnmountEffect(() => {
@@ -2439,7 +2491,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
-    const createTitleMonthElement = () => {
+    const createTitleMonthElement = (month) => {
         const monthNames = localeOption('monthNames', props.locale);
 
         if (props.monthNavigator && props.view !== 'month') {
@@ -2472,7 +2524,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             return content;
         }
 
-        return currentView === 'date' && <button className="p-datepicker-month p-link" onClick={switchToMonthView} disabled={switchViewButtonDisabled()} >{monthNames[currentMonth]}</button>
+        return currentView === 'date' && <button className="p-datepicker-month p-link" onClick={switchToMonthView} disabled={switchViewButtonDisabled()} >{monthNames[month]}</button>
     }
 
     const createTitleYearElement = () => {
@@ -3048,10 +3100,10 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
                 transitionOptions={props.transitionOptions}>
                 {datePicker}
                 {timePicker}
-                {buttonBar}
-                {footer}
                 {monthPicker}
                 {yearPicker}
+                {buttonBar}
+                {footer}
             </CalendarPanel>
         </span>
     )
@@ -3112,6 +3164,7 @@ Calendar.defaultProps = {
     minDate: null,
     maxDate: null,
     maxDateCount: null,
+    showMinMaxRange: false,
     showOtherMonths: true,
     selectOtherMonths: false,
     showButtonBar: false,

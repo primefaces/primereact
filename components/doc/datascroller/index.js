@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const DataScrollerDoc = memo(() => {
 
@@ -524,10 +525,21 @@ const loadData = (event) => {
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>DataScroller uses a semantic list element to list the items. No specific role is enforced, still you may use any aria role and attributes
+                        as any valid attribute is passed to the container element. List element can be also customized for accessibility using <i>listProps</i> property.
+                    </p>
+
+                    <h5>Keyboard Support</h5>
+                    <p>Component does not include any built-in interactive elements.</p>
+
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                    </DevelopmentSection>
 
                 </TabPanel>
 

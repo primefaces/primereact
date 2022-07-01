@@ -32,4 +32,6 @@ export declare function useOverlayScrollListener(options: EventOptions): any[];
 export declare function useResizeListener(options: ResizeEventOptions): any[];
 export declare function useInterval(fn: any, delay?: number, when?: boolean): any[];
 export declare function useTimeout(fn: any, delay?: number, when?: boolean): any[];
-export declare function useStorage<S>(initialValue: S, key: string, storage?: StorageType): [S, React.Dispatch<React.SetStateAction<S>>];
+export declare function useStorage<S, K extends string = string>(initialValue: S, key: K, storage?: StorageType): [S, React.Dispatch<React.SetStateAction<S>>];
+export declare function useLocalStorage<S, K extends string = string>(initialValue: S, key: K): [S, React.Dispatch<React.SetStateAction<S>>];
+export declare function useSessionStorage<S, K extends string = string>(initialValue: S, key: K): [S, React.Dispatch<React.SetStateAction<S>>];

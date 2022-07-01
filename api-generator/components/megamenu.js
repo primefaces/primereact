@@ -28,6 +28,18 @@ const MegaMenuProps = [
         type: 'string',
         default: 'horizontal',
         description: 'Defines the orientation, valid values are horizontal and vertical.'
+    },
+    {
+        name: 'start',
+        type: 'any',
+        default: 'null',
+        description: 'The template of starting element.'
+    },
+    {
+        name: 'end',
+        type: 'any',
+        default: 'null',
+        description: 'The template of trailing element'
     }
 ];
 

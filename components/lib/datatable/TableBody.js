@@ -589,9 +589,11 @@ export const TableBody = React.memo((props) => {
 
     const onRowDragStart = (e) => {
         const { originalEvent: event, index } = e;
-        rowDragging.current = true;
-        draggedRowIndex.current = index;
-        event.dataTransfer.setData('text', 'b');    // For firefox
+        if (allowRowDrag(event)) {
+            rowDragging.current = true;
+            draggedRowIndex.current = index;
+            event.dataTransfer.setData('text', 'b');    // For firefox
+        }
     }
 
     const onRowDragOver = (e) => {

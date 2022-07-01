@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const InputTextDoc = memo(() => {
 
@@ -388,6 +389,7 @@ import { InputText } from 'primereact/inputtext';
                     </div>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>InputText component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
 <CodeHighlight>
@@ -396,7 +398,7 @@ import { InputText } from 'primereact/inputtext';
 <InputText id="firstname" />
 
 <span id="lastname">Lastname</span>
-<InputText id="firstname" aria-labelledby="lastname" />
+<InputText aria-labelledby="lastname" />
 
 <InputText aria-label="Age"/>
 `}
@@ -418,7 +420,7 @@ import { InputText } from 'primereact/inputtext';
                             </tbody>
                         </table>
                     </div>
-
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
