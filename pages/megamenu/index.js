@@ -123,7 +123,7 @@ const MegaMenuDemo = () => {
 
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const start = <img alt="logo" src={`${contextPath}/images/logo.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" />;
+    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
 
     return (
         <div>
@@ -142,10 +142,15 @@ const MegaMenuDemo = () => {
             <div className="content-section implementation">
                 <div className="card">
                     <h5>Horizontal</h5>
-                    <MegaMenu model={items} start={start} end={end} />
+                    <MegaMenu model={items} orientation="horizontal" />
 
                     <h5>Vertical</h5>
                     <MegaMenu model={items} orientation="vertical" />
+
+                    <h5>Templating</h5>
+                    <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+                    <br/>
+                    <MegaMenu model={items} orientation="vertical" start={start} end={end} />
                 </div>
             </div>
 
