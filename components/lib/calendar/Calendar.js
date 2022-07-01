@@ -948,7 +948,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     }
 
     const setNavigationState = (newViewDate) => {
-        if (!props.showOutliers || props.view !== 'date' || !overlayRef.current) {
+        if (!props.showMinMaxRange || props.view !== 'date' || !overlayRef.current) {
             return;
         }
 
@@ -3160,7 +3160,7 @@ Calendar.defaultProps = {
     minDate: null,
     maxDate: null,
     maxDateCount: null,
-    showOutliers: true,
+    showMinMaxRange: false,
     showOtherMonths: true,
     selectOtherMonths: false,
     showButtonBar: false,

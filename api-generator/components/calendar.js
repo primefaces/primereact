@@ -282,9 +282,9 @@ const CalendarProps = [
         description: 'Maximum number of selectable dates in multiple mode.'
     },
     {
-        name: 'showOutliers',
+        name: 'showMinMaxRange',
         type: 'boolean',
-        default: 'true',
+        default: 'false',
         description: 'Whether to allow navigation past min/max dates.'
     },
     {

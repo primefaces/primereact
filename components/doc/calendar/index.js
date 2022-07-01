@@ -1108,9 +1108,9 @@ const monthNavigatorTemplate = (options) => {
                                     <td>Maximum number of selectable dates in multiple mode.</td>
                                 </tr>
                                 <tr>
-                                    <td>showOutliers</td>
+                                    <td>showMinMaxRange</td>
                                     <td>boolean</td>
-                                    <td>true</td>
+                                    <td>false</td>
                                     <td>Whether to allow navigation past min/max dates.</td>
                                 </tr>
                                 <tr>
