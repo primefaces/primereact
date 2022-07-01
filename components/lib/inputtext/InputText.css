@@ -71,6 +71,7 @@
     transition-property: all;
     transition-timing-function: ease;
 }
+
 .p-float-label .p-focus .p-placeholder,
 .p-float-label input:focus::placeholder,
 .p-float-label .p-inputtext:focus::placeholder {
