@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IconType } from '../utils';
 
-type TagSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
+type TagSeverityType = 'success' | 'info' | 'warn' | 'error';
 
 export interface TagProps {
     value?: React.ReactNode;

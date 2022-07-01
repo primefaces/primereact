@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 
-type MessagesSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
+type MessagesSeverityType = 'success' | 'info' | 'warn' | 'error';
 
 type MessagesMessageType = MessagesMessage | MessagesMessage[];
 
