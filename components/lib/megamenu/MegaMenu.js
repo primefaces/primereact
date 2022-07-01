@@ -338,12 +338,28 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
-    const createCustomContent = () => {
-        if (props.children) {
+    const createStartContent = () => {
+        if (props.start) {
+            const start = ObjectUtils.getJSXElement(props.start, props);
+
             return (
-                <div className="p-megamenu-custom">
-                    {props.children}
-                </div>
+                <li className="p-megamenu-start">
+                    {start}
+                </li>
+            )
+        }
+
+        return null;
+    }
+
+    const createEndContent = () => {
+        if (props.end) {
+            const end = ObjectUtils.getJSXElement(props.end, props);
+
+            return (
+                <li className="p-megamenu-end">
+                    {end}
+                </li>
             )
         }
 
@@ -356,14 +372,16 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
         'p-megamenu-vertical': props.orientation === 'vertical'
     }, props.className);
     const menu = createMenu();
-    const customContent = createCustomContent();
+    const start = createStartContent();
+    const end = createEndContent();
 
     return (
         <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
             <ul className="p-megamenu-root-list" role="menubar">
+                {start}
                 {menu}
+                {end}
             </ul>
-            {customContent}
         </div>
     )
 }));
@@ -375,5 +393,7 @@ MegaMenu.defaultProps = {
     model: null,
     style: null,
     className: null,
-    orientation: 'horizontal'
+    orientation: 'horizontal',
+    start: null,
+    end: null
 }

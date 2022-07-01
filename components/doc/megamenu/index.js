@@ -133,6 +133,9 @@ export class MegaMenuDemo extends Component {
         ];
     }
 
+    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
+
     render() {
         return (
             <div>
@@ -142,6 +145,11 @@ export class MegaMenuDemo extends Component {
 
                     <h5>Vertical</h5>
                     <MegaMenu model={this.items} orientation="vertical" />
+
+                    <h5>Templating</h5>
+                    <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+                    <br/>
+                    <MegaMenu model={items} orientation="vertical" start={start} end={end} />
                 </div>
             </div>
         );
@@ -270,6 +278,9 @@ const MegaMenuDemo = () => {
         }
     ];
 
+    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
+
     return (
         <div>
             <div className="card">
@@ -278,6 +289,11 @@ const MegaMenuDemo = () => {
 
                 <h5>Vertical</h5>
                 <MegaMenu model={items} orientation="vertical" />
+
+                <h5>Templating</h5>
+                <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+                <br/>
+                <MegaMenu model={items} orientation="vertical" start={start} end={end} />
             </div>
         </div>
     );
@@ -405,6 +421,9 @@ const MegaMenuDemo = () => {
         }
     ];
 
+    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
+
     return (
         <div>
             <div className="card">
@@ -413,6 +432,11 @@ const MegaMenuDemo = () => {
 
                 <h5>Vertical</h5>
                 <MegaMenu model={items} orientation="vertical" />
+
+                <h5>Templating</h5>
+                <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+                <br/>
+                <MegaMenu model={items} orientation="vertical" start={start} end={end} />
             </div>
         </div>
     );
@@ -543,6 +567,9 @@ const MegaMenuDemo = () => {
         }
     ];
 
+    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
+
     return (
         <div>
             <div className="card">
@@ -551,6 +578,11 @@ const MegaMenuDemo = () => {
 
                 <h5>Vertical</h5>
                 <MegaMenu model={items} orientation="vertical" />
+
+                <h5>Templating</h5>
+                <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+                <br/>
+                <MegaMenu model={items} orientation="vertical" start={start} end={end} />
             </div>
         </div>
     );
@@ -714,13 +746,14 @@ const items = [
 </CodeHighlight>
 
                     <h5>Custom Content</h5>
-                    <p>Any content inside the megamenu will be displayed on the right side by default. You may use ".ui-megamenu-custom" style class to change the location of the content.</p>
+                    <p>The megamenu can display custom content by using the "start" and "end" properties.</p>
 <CodeHighlight>
 {`
-<MegaMenu model={items}>
-    <InputText placeholder="Search" type="text"/>
-    <Button label="Logout" icon="pi pi-power-off" style={{marginLeft:4}}/>
-</MegaMenu>
+<MegaMenu
+  model={items}
+  start={<InputText placeholder="Search" type="text"/>}
+  end={<Button label="Logout" icon="pi pi-power-off"/>}
+/>
 `}
 </CodeHighlight>
 
@@ -766,6 +799,18 @@ const items = [
                                     <td>horizontal</td>
                                     <td>Defines the orientation, valid values are horizontal and vertical.</td>
                                 </tr>
+                                <tr>
+                                    <td>start</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template of starting element.</td>
+                                </tr>
+                                <tr>
+                                    <td>end</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template of trailing element</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -786,7 +831,7 @@ const items = [
                                     <td>Container element.</td>
                                 </tr>
                                 <tr>
-                                    <td>p-menu-list</td>
+                                    <td>p-megamenu-root-list</td>
                                     <td>List element.</td>
                                 </tr>
                                 <tr>
