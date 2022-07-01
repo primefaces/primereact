@@ -24,6 +24,8 @@ export const DataTable = React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
     const tableRef = React.useRef(null);
     const wrapperRef = React.useRef(null);
+    const bodyRef = React.useRef(null);
+    const frozenBodyRef = React.useRef(null);
     const virtualScrollerRef = React.useRef(null);
     const reorderIndicatorUpRef = React.useRef(null);
     const reorderIndicatorDownRef = React.useRef(null);
@@ -496,8 +498,18 @@ export const DataTable = React.forwardRef((props, ref) => {
             }
             else if (props.columnResizeMode === 'expand') {
                 const tableWidth = tableRef.current.offsetWidth + delta + 'px';
-                tableRef.current.style.width = tableWidth;
-                tableRef.current.style.minWidth = tableWidth;
+                const updateTableWidth = (el) => {
+                    !!el && (el.style.width = el.style.minWidth = tableWidth);
+                }
+                updateTableWidth(tableRef.current);
+
+                if (!isVirtualScrollerDisabled()) {
+                    updateTableWidth(bodyRef.current);
+                    updateTableWidth(frozenBodyRef.current);
+                    if (wrapperRef.current) {
+                        updateTableWidth(DomHandler.findSingle(wrapperRef.current, '.p-virtualscroller-content'));
+                    }
+                }
 
                 resizeTableCells(newColumnWidth);
             }
@@ -1368,7 +1380,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         const { rows, columns, contentRef, className } = options;
 
         const frozenBody = props.frozenValue && (
-            <TableBody value={props.frozenValue} className="p-datatable-frozen-tbody" frozenRow
+            <TableBody ref={frozenBodyRef} value={props.frozenValue} className="p-datatable-frozen-tbody" frozenRow
                 tableProps={props} tableSelector={attributeSelectorState} columns={columns} selectionModeInColumn={selectionModeInColumn}
                 first={first} editingMeta={editingMetaState} onEditingMetaChange={onEditingMetaChange} tabIndex={props.tabIndex}
                 onRowClick={props.onRowClick} onRowDoubleClick={props.onRowDoubleClick} onCellClick={props.onCellClick}
@@ -1388,7 +1400,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                 isVirtualScrollerDisabled={true} />
         );
         const body = (
-            <TableBody value={dataToRender(rows)} className={className} empty={empty} frozenRow={false}
+            <TableBody ref={bodyRef} value={dataToRender(rows)} className={className} empty={empty} frozenRow={false}
                 tableProps={props} tableSelector={attributeSelectorState} columns={columns} selectionModeInColumn={selectionModeInColumn}
                 first={first} editingMeta={editingMetaState} onEditingMetaChange={onEditingMetaChange} tabIndex={props.tabIndex}
                 onRowClick={props.onRowClick} onRowDoubleClick={props.onRowDoubleClick} onCellClick={props.onCellClick}

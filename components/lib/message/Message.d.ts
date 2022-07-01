@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-type MessageSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
+type MessageSeverityType = 'success' | 'info' | 'warn' | 'error';
 
 type MessageContentType = React.ReactNode | ((props: MessageProps) => React.ReactNode);
 

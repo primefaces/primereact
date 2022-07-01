@@ -22,7 +22,6 @@ interface InputMaskChangeParams {
 
 export interface InputMaskProps {
     id?: string;
-    inputRef?: React.Ref<HTMLInputElement>;
     value?: string;
     type?: string;
     mask?: string;
