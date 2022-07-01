@@ -13,13 +13,19 @@ export const Chart = React.memo(React.forwardRef((props, ref) => {
                 chartRef.current = null;
             }
 
-            if (module && module.default) {
-                chartRef.current = new module.default(canvasRef.current, {
-                    type: props.type,
-                    data: props.data,
-                    options: props.options,
-                    plugins: props.plugins
-                });
+            const configuration = {
+                type: props.type,
+                data: props.data,
+                options: props.options,
+                plugins: props.plugins
+            };
+
+            if (module) {
+                if (module.default) {
+                    chartRef.current = new module.default(canvasRef.current, configuration);
+                } else {
+                    chartRef.current = new module(canvasRef.current, configuration);
+                }
             }
         });
     }

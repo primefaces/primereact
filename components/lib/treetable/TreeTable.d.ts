@@ -41,8 +41,8 @@ type TreeTableExpandedKeysType = {
 }
 
 interface TreeTableSortMeta {
-    sortField: string;
-    sortOrder: TreeTableSortOrderType;
+    field: string;
+    order: TreeTableSortOrderType;
 }
 
 interface TreeTableFilterMetaData {

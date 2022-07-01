@@ -26,6 +26,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const wrapperRef = React.useRef(null);
     const bodyRef = React.useRef(null);
     const frozenBodyRef = React.useRef(null);
+    const virtualScrollerRef = React.useRef(null);
     const reorderIndicatorUpRef = React.useRef(null);
     const reorderIndicatorDownRef = React.useRef(null);
     const colReorderIconWidth = React.useRef(null);
@@ -1443,7 +1444,7 @@ export const DataTable = React.forwardRef((props, ref) => {
 
         return (
             <div ref={wrapperRef} className="p-datatable-wrapper" style={{ maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }}>
-                <VirtualScroller {...virtualScrollerOptions} items={processedData} columns={columns} scrollHeight={props.scrollHeight}
+                <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerOptions} items={processedData} columns={columns} scrollHeight={props.scrollHeight}
                     disabled={_isVirtualScrollerDisabled} loaderDisabled showSpacer={false}
                     contentTemplate={(options) => {
                         const ref = (el) => { tableRef.current = el; options.spacerRef && options.spacerRef(el) };
