@@ -949,6 +949,51 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         setCurrentYear(value.getFullYear());
     }
 
+    const setNavigationState = (newViewDate) => {
+        if (!props.showMinMaxRange || props.view !== 'date' || !overlayRef.current) {
+            return;
+        }
+
+        const navPrev = DomHandler.findSingle(overlayRef.current, '.p-datepicker-prev');
+        const navNext = DomHandler.findSingle(overlayRef.current, '.p-datepicker-next');
+
+        if (props.disabled) {
+            DomHandler.addClass(navPrev, 'p-disabled');
+            DomHandler.addClass(navNext, 'p-disabled');
+            return;
+        }
+
+        // previous (check first day of month at 00:00:00)
+        if (props.minDate) {
+            let firstDayOfMonth = new Date(newViewDate.getTime());
+            firstDayOfMonth.setDate(1);
+            firstDayOfMonth.setHours(0);
+            firstDayOfMonth.setMinutes(0);
+            firstDayOfMonth.setSeconds(0);
+            if (props.minDate > firstDayOfMonth) {
+                DomHandler.addClass(navPrev, 'p-disabled');
+            } else {
+                DomHandler.removeClass(navPrev, 'p-disabled');
+            }
+        }
+
+        // next (check last day of month at 11:59:59)
+        if (props.maxDate) {
+            let lastDayOfMonth = new Date(newViewDate.getTime());
+            lastDayOfMonth.setMonth(lastDayOfMonth.getMonth()+1);
+            lastDayOfMonth.setDate(1);
+            lastDayOfMonth.setHours(0);
+            lastDayOfMonth.setMinutes(0);
+            lastDayOfMonth.setSeconds(0)
+            lastDayOfMonth.setSeconds(-1);
+            if (props.maxDate < lastDayOfMonth) {
+                DomHandler.addClass(navNext, 'p-disabled');
+            } else {
+                DomHandler.removeClass(navNext, 'p-disabled');
+            }
+        }
+    }
+
     const onDateCellKeydown = (event, date, groupIndex) => {
         const cellContent = event.currentTarget;
         const cell = cellContent.parentElement;
@@ -2403,7 +2448,10 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec]);
 
     useUpdateEffect(() => {
-        overlayRef.current && updateFocus();
+        if (overlayRef.current) {
+            setNavigationState(viewDateState);
+            updateFocus();
+        }
     });
 
     useUnmountEffect(() => {
@@ -3116,6 +3164,7 @@ Calendar.defaultProps = {
     minDate: null,
     maxDate: null,
     maxDateCount: null,
+    showMinMaxRange: false,
     showOtherMonths: true,
     selectOtherMonths: false,
     showButtonBar: false,
