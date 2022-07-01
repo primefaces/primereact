@@ -64,11 +64,6 @@
     font-size: 12px;
 }
 
-.p-float-label input:-webkit-autofill ~ label {
-    top: -20px;
-    font-size: 12px;
-}
-
 .p-float-label .p-placeholder,
 .p-float-label input::placeholder,
 .p-float-label .p-inputtext::placeholder {
