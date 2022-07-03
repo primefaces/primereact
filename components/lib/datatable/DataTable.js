@@ -861,8 +861,8 @@ export const DataTable = React.forwardRef((props, ref) => {
         return props.removableSort ? (props.defaultSortOrder === currentOrder ? currentOrder * -1 : 0) : currentOrder * -1;
     }
 
-    const compareValuesOnSort = (value1, value2) => {
-        return ObjectUtils.sort(value1, value2, 1, PrimeReact.locale);
+    const compareValuesOnSort = (value1, value2, order) => {
+        return ObjectUtils.sort(value1, value2, order, PrimeReact.locale);
     }
 
     const addSortMeta = (meta, multiSortMeta) => {
@@ -904,9 +904,8 @@ export const DataTable = React.forwardRef((props, ref) => {
             value.sort((data1, data2) => {
                 const value1 = ObjectUtils.resolveFieldData(data1, field);
                 const value2 = ObjectUtils.resolveFieldData(data2, field);
-                const result = compareValuesOnSort(value1, value2);
 
-                return (order * result);
+                return compareValuesOnSort(value1, value2, order);;
             });
         }
 
@@ -953,9 +952,7 @@ export const DataTable = React.forwardRef((props, ref) => {
             return (multiSortMeta.length - 1) > (index) ? (multisortField(data1, data2, multiSortMeta, index + 1)) : 0;
         }
 
-        const result = compareValuesOnSort(value1, value2);
-
-        return (multiSortMeta[index].order * result);
+        return compareValuesOnSort(value1, value2, multiSortMeta[index].order);
     }
 
     const onFilterChange = (filters) => {
