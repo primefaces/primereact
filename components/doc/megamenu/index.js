@@ -148,8 +148,6 @@ export class MegaMenuDemo extends Component {
 
                     <h5>Templating</h5>
                     <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
-                    <br/>
-                    <MegaMenu model={items} orientation="vertical" start={start} end={end} />
                 </div>
             </div>
         );
@@ -292,8 +290,6 @@ const MegaMenuDemo = () => {
 
                 <h5>Templating</h5>
                 <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
-                <br/>
-                <MegaMenu model={items} orientation="vertical" start={start} end={end} />
             </div>
         </div>
     );
@@ -435,8 +431,6 @@ const MegaMenuDemo = () => {
 
                 <h5>Templating</h5>
                 <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
-                <br/>
-                <MegaMenu model={items} orientation="vertical" start={start} end={end} />
             </div>
         </div>
     );
@@ -581,8 +575,6 @@ const MegaMenuDemo = () => {
 
                 <h5>Templating</h5>
                 <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
-                <br/>
-                <MegaMenu model={items} orientation="vertical" start={start} end={end} />
             </div>
         </div>
     );
@@ -858,7 +850,7 @@ const items = [
                 <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>MegaMenu component uses the <i>menubar</i> role along with <i>aria-orientation</i> and the value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Each list item has a <i>presentation</i> role
-                    whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a MegaMenu uses the <i>menu</i> role with an <i>aria-labelledby</i> defined 
+                    whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a MegaMenu uses the <i>menu</i> role with an <i>aria-labelledby</i> defined
                     as the id of the submenu root menuitem label. In addition, root menuitems that open a submenu have <i>aria-haspopup</i>, <i>aria-expanded</i> and <i>aria-controls</i> to define the relation between the item and the submenu.</p>
 
                     <h6>Keyboard Support</h6>

@@ -329,9 +329,13 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
     const createMenu = () => {
         if (props.model) {
             return (
-                props.model.map((item, index) => {
-                    return createCategory(item, index, true);
-                })
+                <ul className="p-megamenu-root-list" role="menubar">
+                    {
+                        props.model.map((item, index) => {
+                            return createCategory(item, index, true);
+                        })
+                    }
+                </ul>
             )
         }
 
@@ -343,9 +347,9 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
             const start = ObjectUtils.getJSXElement(props.start, props);
 
             return (
-                <li className="p-megamenu-start">
+                <div className="p-megamenu-start">
                     {start}
-                </li>
+                </div>
             )
         }
 
@@ -357,9 +361,9 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
             const end = ObjectUtils.getJSXElement(props.end, props);
 
             return (
-                <li className="p-megamenu-end">
+                <div className="p-megamenu-end">
                     {end}
-                </li>
+                </div>
             )
         }
 
@@ -377,11 +381,9 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
-            <ul className="p-megamenu-root-list" role="menubar">
-                {start}
-                {menu}
-                {end}
-            </ul>
+            {start}
+            {menu}
+            {end}
         </div>
     )
 }));
