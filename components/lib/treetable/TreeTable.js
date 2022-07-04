@@ -174,6 +174,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
         if (columnSortable.current && columnSortable.current === 'custom' && columnSortFunction.current) {
             value = columnSortFunction.current({
+                rowData: value,
                 field: getSortField(),
                 order: getSortOrder()
             });
