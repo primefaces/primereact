@@ -505,7 +505,7 @@ import { InputMask } from 'primereact/inputmask';
 <CodeHighlight>
 {`
 <label htmlFor="date">Date</label>
-<InputMask id="firstname" />
+<InputMask id="date" />
 
 <span id="phone">Phone</span>
 <InputMask id="phone" aria-labelledby="phone" />
