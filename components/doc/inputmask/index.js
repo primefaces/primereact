@@ -508,7 +508,7 @@ import { InputMask } from 'primereact/inputmask';
 <InputMask id="date" />
 
 <span id="phone">Phone</span>
-<InputMask id="phone" aria-labelledby="phone" />
+<InputMask aria-labelledby="phone" />
 
 <InputMask aria-label="Age" />
 `}
