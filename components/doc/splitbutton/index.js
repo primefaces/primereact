@@ -724,6 +724,18 @@ export const SplitButtonDemo = () => {
                                     <td>pi pi-chevron-down</td>
                                     <td>Icon class of the dropdown icon.</td>
                                 </tr>
+                                <tr>
+                                    <td>loading</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Display loading icon of the button</td>
+                                </tr>
+                                <tr>
+                                    <td>loadingIcon</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Name of the loading icon or JSX.Element for loading icon.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
