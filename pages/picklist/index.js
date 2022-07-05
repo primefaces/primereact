@@ -58,10 +58,9 @@ const PickListDemo = () => {
 
             <div className="content-section implementation picklist-demo">
                 <div className="card">
-                    <PickList source={source} target={target} itemTemplate={itemTemplate}
-                        sourceHeader="Available" targetHeader="Selected"
-                        sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
-                        onChange={onChange}></PickList>
+                    <PickList source={source} target={target} itemTemplate={itemTemplate} sourceHeader="Available" targetHeader="Selected"
+                        sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }} onChange={onChange}
+                        filterBy="name" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
                 </div>
             </div>
 

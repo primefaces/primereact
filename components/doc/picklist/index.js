@@ -65,10 +65,9 @@ export class PickListDemo extends Component {
         return (
             <div className="picklist-demo">
                 <div className="card">
-                    <PickList source={this.state.source} target={this.state.target} itemTemplate={this.itemTemplate}
-                        sourceHeader="Available" targetHeader="Selected"
-                        sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
-                        onChange={this.onChange}></PickList>
+                    <PickList source={this.state.source} target={this.state.target} itemTemplate={this.itemTemplate} sourceHeader="Available" targetHeader="Selected"
+                        sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }} onChange={this.onChange}
+                        filterBy="name" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
                 </div>
             </div>
         );
@@ -120,10 +119,9 @@ const PickListDemo = () => {
     return (
         <div className="picklist-demo">
             <div className="card">
-                <PickList source={source} target={target} itemTemplate={itemTemplate}
-                    sourceHeader="Available" targetHeader="Selected"
-                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
-                    onChange={onChange}></PickList>
+                <PickList source={source} target={target} itemTemplate={itemTemplate} sourceHeader="Available" targetHeader="Selected"
+                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }} onChange={onChange}
+                    filterBy="name" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
             </div>
         </div>
     );
@@ -174,10 +172,9 @@ const PickListDemo = () => {
     return (
         <div className="picklist-demo">
             <div className="card">
-                <PickList source={source} target={target} itemTemplate={itemTemplate}
-                    sourceHeader="Available" targetHeader="Selected"
-                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
-                    onChange={onChange}></PickList>
+                <PickList source={source} target={target} itemTemplate={itemTemplate} sourceHeader="Available" targetHeader="Selected"
+                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }} onChange={onChange}
+                    filterBy="name" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
             </div>
         </div>
     );
@@ -232,10 +229,9 @@ const PickListDemo = () => {
     return (
         <div className="picklist-demo">
             <div className="card">
-                <PickList source={source} target={target} itemTemplate={itemTemplate}
-                    sourceHeader="Available" targetHeader="Selected"
-                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
-                    onChange={onChange}></PickList>
+                <PickList source={source} target={target} itemTemplate={itemTemplate} sourceHeader="Available" targetHeader="Selected"
+                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }} onChange={onChange}
+                    filterBy="name" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
             </div>
         </div>
     );
@@ -464,6 +460,72 @@ const onChange = (e) => {
                         can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
                                 </tr>
                                 <tr>
+                                    <td>filterBy</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>When specified displays an input field to filter the items on keyup and decides which field to search (Accepts multiple fields with a comma).</td>
+                                </tr>
+                                <tr>
+                                    <td>filterMatchMode</td>
+                                    <td>string</td>
+                                    <td>contains</td>
+                                    <td>Defines how the items are filtered, valid values are "contains" (default) "startsWith", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt" and "gte".</td>
+                                </tr>
+                                <tr>
+                                    <td>filterLocale</td>
+                                    <td>string</td>
+                                    <td>undefined</td>
+                                    <td>Locale to use in filtering. The default locale is the host environment's current locale.</td>
+                                </tr>
+                                <tr>
+                                    <td>sourceFilterValue</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Filter value in the target list.</td>
+                                </tr>
+                                <tr>
+                                    <td>targetFilterValue</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Filter value in the source list.</td>
+                                </tr>
+                                <tr>
+                                    <td>showSourceFilter</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to show filter input for source list when filterBy is enabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>showTargetFilter</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to show filter input for target list when filterBy is enabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>sourceFilterPlaceholder</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Placeholder text on source filter input.</td>
+                                </tr>
+                                <tr>
+                                    <td>targetFilterPlaceholder</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Placeholder text on target filter input.</td>
+                                </tr>
+                                <tr>
+                                    <td>sourceFilterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template for the source filter content.</td>
+                                </tr>
+                                <tr>
+                                    <td>targetFilterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template for the target filter content.</td>
+                                </tr>
+                                <tr>
                                     <td>tabIndex</td>
                                     <td>number</td>
                                     <td>null</td>
@@ -533,6 +595,18 @@ const onChange = (e) => {
                             items: Selected items array</td>
                                     <td>Callback to invoke when items are selected within target list.</td>
                                 </tr>
+                                <tr>
+                                    <td>onSourceFilterChange</td>
+                                    <td>event.originalEvent: Browser event <br />
+                            event.value: Filtered value</td>
+                                    <td>Callback to invoke when items are filtered within source list.</td>
+                                </tr>
+                                <tr>
+                                    <td>onTargetFilterChange</td>
+                                    <td>event.originalEvent: Browser event <br />
+                            event.value: Filtered value</td>
+                                    <td>Callback to invoke when items are filtered within target list.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -584,7 +658,7 @@ const onChange = (e) => {
                     <h6>Screen Reader</h6>
                     <p>Value to describe the source listbox and target listbox can be provided with <i>sourceListProps</i> and <i>targetListProps</i> by passing <i>aria-labelledby</i> or <i>aria-label</i> props. The list elements has a <i>listbox</i> role with the <i>aria-multiselectable</i> attribute.
                     Each list item has an <i>option</i> role with <i>aria-selected</i> and <i>aria-disabled</i> as their attributes.</p>
-                    <p>Controls buttons are <i>button</i> elements with an <i>aria-label</i> that refers to the <i>aria.moveTop</i>, <i>aria.moveUp</i>, <i>aria.moveDown</i>, <i>aria.moveBottom</i>, 
+                    <p>Controls buttons are <i>button</i> elements with an <i>aria-label</i> that refers to the <i>aria.moveTop</i>, <i>aria.moveUp</i>, <i>aria.moveDown</i>, <i>aria.moveBottom</i>,
                     <i>aria.moveTo</i>, <i>aria.moveAllTo</i>, <i>aria.moveFrom</i> and <i>aria.moveAllFrom</i> properties of the <Link href="/locale">locale</Link> API by default, alternatively you may use
                     <i>moveTopButtonProps</i>, <i>moveUpButtonProps</i>, <i>moveDownButtonProps</i>, <i>moveToButtonProps</i>, <i>moveAllToButtonProps</i>, <i>moveFromButtonProps</i>, <i>moveFromButtonProps</i> and <i>moveAllFromButtonProps</i> to customize the buttons like overriding the default <i>aria-label</i> attributes.</p>
 <CodeHighlight>
@@ -685,7 +759,7 @@ const onChange = (e) => {
                 </DevelopmentSection>
 
                     </div>
-                    
+
                     <h5>Dependencies</h5>
                     <p>None.</p>
 
