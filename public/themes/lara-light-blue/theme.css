@@ -3525,6 +3525,19 @@
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
 }
+.p-picklist .p-picklist-filter-container {
+  padding: 1.25rem;
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-bottom: 0 none;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-input {
+  padding-right: 1.75rem;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-icon {
+  right: 0.75rem;
+  color: #6c757d;
+}
 .p-picklist .p-picklist-list {
   border: 1px solid #dee2e6;
   background: #ffffff;
