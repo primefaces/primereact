@@ -277,9 +277,9 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
                     if (highlightItem) {
                         selectHighlightItem(event, highlightItem);
                         hide();
+                        event.preventDefault();
                     }
 
-                    event.preventDefault();
                     break;
 
                 //escape
