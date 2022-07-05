@@ -152,10 +152,10 @@ export const Image = React.memo(React.forwardRef((props, ref) => {
     const element = createElement();
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : <i className="p-image-preview-icon pi pi-eye"></i>;
     const preview = createPreview();
-    const image = <img src={src} className={props.imageClassName} width={width} height={height} style={props.imageStyle} alt={alt} />;
+    const image = <img src={src} className={props.imageClassName} width={width} height={height} style={props.imageStyle} alt={alt} onError={props.onError} />;
 
     return (
-        <span ref={elementRef} className={containerClassName} style={props.style} {...otherProps}>
+        <span ref={elementRef} className={containerClassName} {...otherProps}>
             {image}
             {preview}
             {maskVisibleState && <Portal element={element} appendTo={document.body} />}
@@ -169,12 +169,12 @@ Image.defaultProps = {
     preview: false,
     className: null,
     downloadable: false,
-    style: null,
     imageStyle: null,
     imageClassName: null,
     template: null,
     src: null,
     alt: null,
     width: null,
-    height: null
+    height: null,
+    onError: null
 }
