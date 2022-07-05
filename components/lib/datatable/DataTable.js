@@ -898,14 +898,14 @@ export const DataTable = React.forwardRef((props, ref) => {
         let value = [...data];
 
         if (columnSortable.current && columnSortFunction.current) {
-            value = columnSortFunction.current({ field, order });
+            value = columnSortFunction.current({ rowData: value, field: field, order: order });
         }
         else {
             value.sort((data1, data2) => {
                 const value1 = ObjectUtils.resolveFieldData(data1, field);
                 const value2 = ObjectUtils.resolveFieldData(data2, field);
 
-                return compareValuesOnSort(value1, value2, order);;
+                return compareValuesOnSort(value1, value2, order);
             });
         }
 
@@ -933,7 +933,7 @@ export const DataTable = React.forwardRef((props, ref) => {
             const field = columnField.current;
             const order = meta ? meta.order : defaultSortOrder;
 
-            value = columnSortFunction.current({ field, order });
+            value = columnSortFunction.current({ rowData: value, field: field, order: order });
         }
         else {
             value.sort((data1, data2) => {

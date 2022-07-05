@@ -117,6 +117,7 @@ interface ColumnEventParams {
 }
 
 interface ColumnSortParams {
+    rowData: any;
     field: string;
     order: ColumnSortOrderType;
 }
