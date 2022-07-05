@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DomHandler, classNames, ObjectUtils } from '../utils/Utils';
-import { useMountEffect, useEventListener } from '../hooks/Hooks';
+import { useEventListener } from '../hooks/Hooks';
 
 export const SplitterPanel = () => { }
 
@@ -17,6 +17,7 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
     const nextPanelSize = React.useRef(null);
     const prevPanelIndex = React.useRef(null);
     const panelSizes = React.useRef(null);
+    const mounted = React.useRef(false);
     const isStateful = props.stateKey != null;
 
     const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({ type: 'mousemove', listener: (event) => onResize(event) });
@@ -74,7 +75,7 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
     }
 
     const saveState = () => {
-        getStorage().setItem(props.stateKey, JSON.stringify(panelSizes));
+        getStorage().setItem(props.stateKey, JSON.stringify(panelSizes.current));
     }
 
     const restoreState = () => {
@@ -85,7 +86,7 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
             panelSizes.current = JSON.parse(stateString);
             let children = [...elementRef.current.children].filter(child => DomHandler.hasClass(child, 'p-splitter-panel'));
             children.forEach((child, i) => {
-                child.style.flexBasis = 'calc(' + panelSizes[i] + '% - ' + ((props.children.length - 1) * props.gutterSize) + 'px)';
+                child.style.flexBasis = 'calc(' + panelSizes.current[i] + '% - ' + ((props.children.length - 1) * props.gutterSize) + 'px)';
             });
 
             return true;
@@ -139,7 +140,7 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
         if (props.onResizeEnd) {
             props.onResizeEnd({
                 originalEvent: event,
-                sizes: panelSizes
+                sizes: panelSizes.current
             })
         }
 
@@ -170,7 +171,7 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
         window.removeEventListener('touchend', onGutterTouchEnd);
     }
 
-    useMountEffect(() => {
+    React.useEffect(() => {
         let panelElements = [...elementRef.current.children].filter(child => DomHandler.hasClass(child, 'p-splitter-panel'));
         panelElements.map(panelElement => {
             if (panelElement.childNodes && ObjectUtils.isNotEmpty(DomHandler.find(panelElement, '.p-splitter'))) {
@@ -180,7 +181,7 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
 
         if (props.children && props.children.length) {
             let initialized = false;
-            if (isStateful) {
+            if (isStateful && !mounted.current) {
                 initialized = restoreState();
             }
 
@@ -196,8 +197,12 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
                 });
 
                 panelSizes.current = _panelSizes;
+
+                mounted.current && saveState();
             }
         }
+
+        mounted.current = true;
     });
 
     const createPanel = (panel, index) => {
