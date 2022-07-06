@@ -11,7 +11,7 @@ export const AutoCompletePanel = React.memo(React.forwardRef((props, ref) => {
         return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
     }
 
-    const createGroupChildren = (optionGroup, i) => {
+    const createGroupChildren = (optionGroup, i, style) => {
         const groupChildren = props.getOptionGroupChildren(optionGroup);
         return (
             groupChildren.map((item, j) => {
@@ -20,7 +20,7 @@ export const AutoCompletePanel = React.memo(React.forwardRef((props, ref) => {
                 const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, item, j) : props.field ? ObjectUtils.resolveFieldData(item, props.field) : item;
 
                 return (
-                    <li key={key} role="option" aria-selected={selected} className="p-autocomplete-item" onClick={(e) => props.onItemClick(e, item)} data-group={i} data-index={j}>
+                    <li key={key} role="option" aria-selected={selected} className="p-autocomplete-item" style={style} onClick={(e) => props.onItemClick(e, item)} data-group={i} data-index={j}>
                         {content}
                         <Ripple />
                     </li>
@@ -29,15 +29,16 @@ export const AutoCompletePanel = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
-    const createItem = (suggestion, index) => {
+    const createItem = (suggestion, index, scrollerOptions = {}) => {
+        const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
         if (props.optionGroupLabel) {
             const content = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, suggestion, index) : props.getOptionGroupLabel(suggestion);
-            const childrenContent = createGroupChildren(suggestion, index);
+            const childrenContent = createGroupChildren(suggestion, index, style);
             const key = index + '_' + getOptionGroupRenderKey(suggestion);
 
             return (
                 <React.Fragment key={key}>
-                    <li className="p-autocomplete-item-group">
+                    <li className="p-autocomplete-item-group" style={style}>
                         {content}
                     </li>
                     {childrenContent}
@@ -48,7 +49,7 @@ export const AutoCompletePanel = React.memo(React.forwardRef((props, ref) => {
             const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, index) : props.field ? ObjectUtils.resolveFieldData(suggestion, props.field) : suggestion;
 
             return (
-                <li key={index} role="option" aria-selected={props.selectedItem === suggestion} className="p-autocomplete-item" onClick={(e) => props.onItemClick(e, suggestion)}>
+                <li key={index} role="option" aria-selected={props.selectedItem === suggestion} className="p-autocomplete-item" style={style} onClick={(e) => props.onItemClick(e, suggestion)}>
                     {content}
                     <Ripple />
                 </li>
@@ -65,8 +66,9 @@ export const AutoCompletePanel = React.memo(React.forwardRef((props, ref) => {
             const virtualScrollerProps = {
                 ...props.virtualScrollerOptions, ...{
                     style: { ...props.virtualScrollerOptions.style, ...{ height: props.scrollHeight } },
+                    autoSize: true,
                     items: props.suggestions,
-                    itemTemplate: (item, options) => item && createItem(item, options.index),
+                    itemTemplate: (item, options) => item && createItem(item, options.index, options),
                     contentTemplate: (options) => {
                         const className = classNames('p-autocomplete-items', options.className);
 

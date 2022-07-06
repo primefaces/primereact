@@ -413,18 +413,20 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
-    const getSelectedOptionIndex = () => {
-        if (props.value != null && visibleOptions) {
+    const getSelectedOptionIndex = (options) => {
+        options = options || visibleOptions;
+
+        if (props.value != null && options) {
             if (props.optionGroupLabel) {
-                for (let i = 0; i < visibleOptions.length; i++) {
-                    let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(visibleOptions[i]));
+                for (let i = 0; i < options.length; i++) {
+                    let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(options[i]));
                     if (selectedOptionIndex !== -1) {
                         return { group: i, option: selectedOptionIndex };
                     }
                 }
             }
             else {
-                return findOptionIndexInList(props.value, visibleOptions);
+                return findOptionIndexInList(props.value, options);
             }
         }
 
@@ -537,9 +539,9 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
     }
 
     const getSelectedOption = () => {
-        const index = getSelectedOptionIndex();
+        const index = getSelectedOptionIndex(props.options);
 
-        return index !== -1 ? (props.optionGroupLabel ? getOptionGroupChildren(visibleOptions[index.group])[index.option] : visibleOptions[index]) : null;
+        return index !== -1 ? (props.optionGroupLabel ? getOptionGroupChildren(props.options[index.group])[index.option] : props.options[index]) : null;
     }
 
     React.useEffect(() => {

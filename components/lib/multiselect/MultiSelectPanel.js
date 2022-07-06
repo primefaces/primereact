@@ -54,7 +54,7 @@ export const MultiSelectPanel = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
-    const createGroupChildren = (optionGroup) => {
+    const createGroupChildren = (optionGroup, style) => {
         const groupChildren = props.getOptionGroupChildren(optionGroup);
 
         return (
@@ -66,7 +66,7 @@ export const MultiSelectPanel = React.memo(React.forwardRef((props, ref) => {
                 const selected = props.isSelected(option);
 
                 return (
-                    <MultiSelectItem key={optionKey} label={optionLabel} option={option} template={props.itemTemplate}
+                    <MultiSelectItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate}
                         selected={selected} onClick={props.onOptionSelect} onKeyDown={props.onOptionKeyDown} tabIndex={tabIndex} disabled={disabled} />
                 )
             })
@@ -83,15 +83,16 @@ export const MultiSelectPanel = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
-    const createItem = (option, index) => {
+    const createItem = (option, index, scrollerOptions = {}) => {
+        const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
         if (props.optionGroupLabel) {
             const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
-            const groupChildrenContent = createGroupChildren(option);
+            const groupChildrenContent = createGroupChildren(option, style);
             const key = index + '_' + props.getOptionGroupRenderKey(option);
 
             return (
                 <React.Fragment key={key}>
-                    <li className="p-multiselect-item-group">
+                    <li className="p-multiselect-item-group" style={style}>
                         {groupContent}
                     </li>
                     {groupChildrenContent}
@@ -106,7 +107,7 @@ export const MultiSelectPanel = React.memo(React.forwardRef((props, ref) => {
             const selected = props.isSelected(option);
 
             return (
-                <MultiSelectItem key={optionKey} label={optionLabel} option={option} template={props.itemTemplate}
+                <MultiSelectItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate}
                     selected={selected} onClick={props.onOptionSelect} onKeyDown={props.onOptionKeyDown} tabIndex={tabIndex} disabled={disabled} />
             )
         }
@@ -130,8 +131,9 @@ export const MultiSelectPanel = React.memo(React.forwardRef((props, ref) => {
                     style: { ...props.virtualScrollerOptions.style, ...{ height: props.scrollHeight } },
                     className: classNames('p-multiselect-items-wrapper', props.virtualScrollerOptions.className),
                     items: props.visibleOptions,
+                    autoSize: true,
                     onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: props.filterValue } }),
-                    itemTemplate: (item, options) => item && createItem(item, options.index),
+                    itemTemplate: (item, options) => item && createItem(item, options.index, options),
                     contentTemplate: (options) => {
                         const className = classNames('p-multiselect-items p-component', options.className);
                         const content = isEmptyFilter() ? createEmptyFilter() : options.children;

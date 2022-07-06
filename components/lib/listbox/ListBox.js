@@ -258,7 +258,7 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
         return props.filter ? <ListBoxHeader filter={filteredValue} onFilter={onFilter} disabled={props.disabled} filterPlaceholder={props.filterPlaceholder} filterInputProps={props.filterInputProps} /> : null;
     }
 
-    const createGroupChildren = (optionGroup) => {
+    const createGroupChildren = (optionGroup, style) => {
         const groupChildren = getOptionGroupChildren(optionGroup);
 
         return (
@@ -269,22 +269,23 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
                 const tabIndex = disabled ? null : props.tabIndex || 0;
 
                 return (
-                    <ListBoxItem key={optionKey} label={optionLabel} option={option} template={props.itemTemplate} selected={isSelected(option)}
+                    <ListBoxItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={isSelected(option)}
                         onClick={onOptionSelect} onTouchEnd={onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled} />
                 )
             })
         )
     }
 
-    const createItem = (option, index) => {
+    const createItem = (option, index, scrollerOptions = {}) => {
+        const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
         if (props.optionGroupLabel) {
             const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : getOptionGroupLabel(option);
-            const groupChildrenContent = createGroupChildren(option);
+            const groupChildrenContent = createGroupChildren(option, style);
             const key = index + '_' + getOptionGroupRenderKey(option);
 
             return (
                 <React.Fragment key={key}>
-                    <li className="p-listbox-item-group" role="group">
+                    <li className="p-listbox-item-group" style={style} role="group">
                         {groupContent}
                     </li>
                     {groupChildrenContent}
@@ -298,7 +299,7 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
             const tabIndex = disabled ? null : props.tabIndex || 0;
 
             return (
-                <ListBoxItem key={optionKey} label={optionLabel} option={option} template={props.itemTemplate} selected={isSelected(option)}
+                <ListBoxItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={isSelected(option)}
                     onClick={onOptionSelect} onTouchEnd={onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled} />
             )
         }
@@ -314,7 +315,7 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
                 ...props.virtualScrollerOptions, ...{
                     items: visibleOptions,
                     onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: visibleOptions } }),
-                    itemTemplate: (item, option) => item && createItem(item, option.index),
+                    itemTemplate: (item, options) => item && createItem(item, options.index, options),
                     contentTemplate: (option) => {
                         const className = classNames('p-listbox-list', option.className);
 

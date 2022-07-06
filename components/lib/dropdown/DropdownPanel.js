@@ -36,7 +36,7 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
         props.onFilterInputChange && props.onFilterInputChange(event);
     }
 
-    const createGroupChildren = (optionGroup) => {
+    const createGroupChildren = (optionGroup, style) => {
         const groupChildren = props.getOptionGroupChildren(optionGroup);
         return (
             groupChildren.map((option, j) => {
@@ -45,7 +45,7 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
                 const disabled = props.isOptionDisabled(option);
 
                 return (
-                    <DropdownItem key={optionKey} label={optionLabel} option={option} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} />
+                    <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} />
                 )
             })
         )
@@ -61,15 +61,16 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
-    const createItem = (option, index) => {
+    const createItem = (option, index, scrollerOptions = {}) => {
+        const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
         if (props.optionGroupLabel) {
             const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
-            const groupChildrenContent = createGroupChildren(option);
+            const groupChildrenContent = createGroupChildren(option, style);
             const key = index + '_' + props.getOptionGroupRenderKey(option);
 
             return (
                 <React.Fragment key={key}>
-                    <li className="p-dropdown-item-group">
+                    <li className="p-dropdown-item-group" style={style}>
                         {groupContent}
                     </li>
                     {groupChildrenContent}
@@ -82,7 +83,7 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
             const disabled = props.isOptionDisabled(option);
 
             return (
-                <DropdownItem key={optionKey} label={optionLabel} option={option} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} />
+                <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} />
             )
         }
     }
@@ -133,8 +134,9 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
                     style: { ...props.virtualScrollerOptions.style, ...{ height: props.scrollHeight } },
                     className: classNames('p-dropdown-items-wrapper', props.virtualScrollerOptions.className),
                     items: props.visibleOptions,
+                    autoSize: true,
                     onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: props.filterValue } }),
-                    itemTemplate: (item, options) => item && createItem(item, options.index),
+                    itemTemplate: (item, options) => item && createItem(item, options.index, options),
                     contentTemplate: (options) => {
                         const className = classNames('p-dropdown-items', options.className);
                         const content = isEmptyFilter ? createEmptyMessage() : options.children;

@@ -187,7 +187,7 @@ export class MultiSelectDemo extends Component {
                     <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                     <MultiSelect value={this.state.selectedItems2} options={this.state.lazyItems} onChange={(e) => this.setState({ selectedItems2: e.value })} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 43, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
                         return (
-                            <div className="flex align-items-center p-2" style={{ height: '34px' }}>
+                            <div className="flex align-items-center p-2" style={{ height: '43px' }}>
                                 <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
                             </div>
                         )}
@@ -362,7 +362,7 @@ const MultiSelectDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="flex align-items-center p-2" style={{ height: '34px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '43px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
                         </div>
                     )}
@@ -536,7 +536,7 @@ const MultiSelectDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="flex align-items-center p-2" style={{ height: '34px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '43px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
                         </div>
                     )}
@@ -715,7 +715,7 @@ const MultiSelectDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="flex align-items-center p-2" style={{ height: '34px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '43px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
                         </div>
                     )}

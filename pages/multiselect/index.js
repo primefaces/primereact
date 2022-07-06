@@ -178,7 +178,7 @@ const MultiSelectDemo = () => {
                     <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{
                         lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                             return (
-                                <div className="flex align-items-center p-2" style={{ height: '34px' }}>
+                                <div className="flex align-items-center p-2" style={{ height: '43px' }}>
                                     <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
                                 </div>
                             )
