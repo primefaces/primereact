@@ -24,6 +24,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     const overlayEventListener = React.useRef(null);
     const touchUIMaskClickListener = React.useRef(null);
     const isOverlayClicked = React.useRef(false);
+    const ignoreMaskChange = React.useRef(false);
 
     const [currentView, setCurrentView] = React.useState('date')
     const [currentMonth, setCurrentMonth] = React.useState(null);
@@ -735,7 +736,10 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         const currentHour = currentTime.getHours();
         const newHour = (currentHour >= 12) ? currentHour - 12 : currentHour + 12;
 
-        updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+        if (validateHour(convertTo24Hour(newHour, !(currentHour > 11)), currentTime)) {
+            updateTime(event, newHour, currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
+        }
+
         event.preventDefault();
     }
 
@@ -772,6 +776,14 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
 
     const isValidDate = (date) => {
         return date instanceof Date && !isNaN(date);
+    }
+
+    const convertTo24Hour = (hour, pm) => {
+        if (props.hourFormat == '12') {
+            return hour === 12 ? (pm ? 12 : 0) : (pm ? hour + 12 : hour);
+        }
+
+        return hour;
     }
 
     const validateHour = (hour, value) => {
@@ -1373,8 +1385,8 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             onDateSelect(event, { year: year, month: 0, day: 1, selectable: true });
         }
         else {
-            setCurrentYear(year)
-            setCurrentView('month')
+            setCurrentYear(year);
+            setCurrentView('month');
             props.onMonthChange && props.onMonthChange({ month: currentMonth + 1, year: year });
         }
     }
@@ -1382,10 +1394,9 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     const updateModel = (event, value) => {
         if (props.onChange) {
             const newValue = (value && value instanceof Date) ? new Date(value.getTime()) : value;
-            const dirty = previousValue !== props.value;
             viewStateChanged.current = true;
 
-            dirty && props.onChange({
+            props.onChange({
                 originalEvent: event,
                 value: newValue,
                 stopPropagation: () => { },
@@ -2399,12 +2410,17 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
                 }
             }
         }
-
         else if (props.mask) {
             mask(inputRef.current, {
                 mask: props.mask,
                 readOnly: props.readOnlyInput || props.disabled,
-                onChange: (e) => updateValueOnInput(e.originalEvent, e.value)
+                onChange: (e) => {
+                    !ignoreMaskChange.current && updateValueOnInput(e.originalEvent, e.value);
+                    ignoreMaskChange.current = false;
+                },
+                onBlur: () => {
+                    ignoreMaskChange.current = true;
+                }
             });
         }
 
