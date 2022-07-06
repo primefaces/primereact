@@ -314,7 +314,11 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
     }
 
     const matchesSearchValue = (option) => {
-        const label = getOptionLabel(option).toLocaleLowerCase(props.filterLocale);
+        let label = getOptionLabel(option);
+        if (!label) {
+            return false;
+        }
+        label = label.toLocaleLowerCase(props.filterLocale);
         return label.startsWith(searchValue.current.toLocaleLowerCase(props.filterLocale));
     }
 
