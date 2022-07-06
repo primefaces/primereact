@@ -29,7 +29,7 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
             });
 
             inputRef.current.checked = !checked;
-            DomHandler.focus(inputRef);
+            DomHandler.focus(inputRef.current);
         }
     }
 

@@ -52,7 +52,7 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
 
     const onClick = (event) => {
         if (!props.disabled && (!overlayRef.current || !overlayRef.current.contains(event.target)) && !DomHandler.hasClass(event.target, 'p-treeselect-close')) {
-            DomHandler.focus(focusInputRef);
+            DomHandler.focus(focusInputRef.current);
             overlayVisibleState ? hide() : show();
         }
     }
@@ -170,7 +170,7 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
         bindOverlayListener();
 
         if (props.filter && props.filterInputAutoFocus) {
-            DomHandler.focus(filterInputRef);
+            DomHandler.focus(filterInputRef.current, props.filterInputAutoFocus);
         }
 
         props.onShow && props.onShow();

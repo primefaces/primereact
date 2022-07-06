@@ -203,7 +203,7 @@ export const Mention = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onItemClick = (event, suggestion) => {
-        DomHandler.focus(inputRef);
+        DomHandler.focus(inputRef.current);
         selectItem(event, suggestion);
     }
 
@@ -393,7 +393,7 @@ export const Mention = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <div ref={elementRef} id={props.id} className={className} style={props.style}>
-            <InputTextarea ref={inputRef} id={props.inputId} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']} className={inputClassName} style={props.inputStyle} {...inputProps} 
+            <InputTextarea ref={inputRef} id={props.inputId} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']} className={inputClassName} style={props.inputStyle} {...inputProps}
                 onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} onInput={onInput} onKeyUp={onKeyUp} onChange={onChange} />
             {panel}
         </div>

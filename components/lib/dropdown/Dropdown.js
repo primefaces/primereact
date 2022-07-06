@@ -66,7 +66,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
             return;
         }
         else if (!overlayRef.current || !(overlayRef.current && overlayRef.current.contains(event.target))) {
-            DomHandler.focus(focusInputRef);
+            DomHandler.focus(focusInputRef.current);
             overlayVisibleState ? hide() : show();
         }
     }
@@ -345,7 +345,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
 
         if (!option.disabled) {
             selectItem(event);
-            DomHandler.focus(focusInputRef);
+            DomHandler.focus(focusInputRef.current);
         }
 
         hide();
@@ -550,7 +550,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
 
     useMountEffect(() => {
         if (props.autoFocus) {
-            DomHandler.focus(focusInputRef, props.autoFocus);
+            DomHandler.focus(focusInputRef.current, props.autoFocus);
         }
     });
 

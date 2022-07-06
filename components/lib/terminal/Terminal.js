@@ -12,7 +12,7 @@ export const Terminal = React.memo(React.forwardRef((props, ref) => {
     const isEmitted = React.useRef(false);
 
     const onClick = () => {
-        DomHandler.focus(inputRef);
+        DomHandler.focus(inputRef.current);
     }
 
     const onInputChange = (e) => {

@@ -199,7 +199,7 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
 
     const onUpButtonMouseDown = (event) => {
         if (!props.disabled && !props.readOnly) {
-            props.autoFocus && DomHandler.focus(inputRef, props.autoFocus);
+            props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
             repeat(event, null, 1);
             event.preventDefault();
         }
@@ -252,7 +252,7 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
 
     const onDownButtonMouseDown = (event) => {
         if (!props.disabled && !props.readOnly) {
-            props.autoFocus && DomHandler.focus(inputRef, props.autoFocus);
+            props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
             repeat(event, null, -1);
 
             event.preventDefault();

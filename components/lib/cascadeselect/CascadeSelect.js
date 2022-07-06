@@ -33,7 +33,7 @@ export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
 
         updateSelectionPath();
         hide();
-        DomHandler.focus(inputRef);
+        DomHandler.focus(inputRef.current);
     }
 
     const onOptionGroupSelect = (event) => {
@@ -96,7 +96,7 @@ export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
         }
 
         if (!overlayRef.current || !overlayRef.current.contains(event.target)) {
-            DomHandler.focus(inputRef);
+            DomHandler.focus(inputRef.current);
             overlayVisibleState ? hide() : show();
         }
     }
@@ -154,7 +154,7 @@ export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
     const hide = () => {
         props.onBeforeHide && props.onBeforeHide();
         setOverlayVisibleState(false);
-        DomHandler.focus(inputRef);
+        DomHandler.focus(inputRef.current);
     }
 
     const onOverlayEnter = () => {

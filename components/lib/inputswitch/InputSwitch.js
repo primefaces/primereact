@@ -14,7 +14,7 @@ export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
         }
 
         toggle(event);
-        DomHandler.focus(inputRef);
+        DomHandler.focus(inputRef.current);
 
         event.preventDefault();
     }

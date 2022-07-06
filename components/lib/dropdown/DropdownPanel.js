@@ -25,7 +25,7 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
     const onEntered = () => {
         props.onEntered(() => {
             if (props.filter && props.filterInputAutoFocus) {
-                DomHandler.focus(filterInputRef, false);
+                DomHandler.focus(filterInputRef.current, false);
             }
         });
     }
@@ -101,7 +101,7 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
 
     const createFilterClearIcon = () => {
         if (props.showFilterClear && props.filterValue) {
-            return <i className="p-dropdown-filter-clear-icon pi pi-times" onClick={() => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef))}></i>
+            return <i className="p-dropdown-filter-clear-icon pi pi-times" onClick={() => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))}></i>
         }
 
         return null;

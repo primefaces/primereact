@@ -17,7 +17,7 @@ export const RowRadioButton = React.memo((props) => {
         if (!props.disabled) {
             props.onChange(event);
 
-            DomHandler.focus(inputRef);
+            DomHandler.focus(inputRef.current);
         }
     }
 

@@ -1,5 +1,3 @@
-import { ObjectUtils } from "./Utils";
-
 export default class DomHandler {
 
     static innerWidth(el) {
@@ -790,13 +788,13 @@ export default class DomHandler {
 
     /**
      * Focus an input element if it does not already have focus.
-     * 
-     * @param {MutableRefObject} inputRef the input reference
+     *
+     * @param {HTMLElement} el a HTML element
      * @param {boolean} scrollTo flag to control whether to scroll to the element, false by default
      */
-    static focus(inputRef, scrollTo) {
-        const preventScroll = ObjectUtils.isEmpty(scrollTo) ? true : !scrollTo;
-        inputRef && inputRef.current && document.activeElement !== inputRef.current && inputRef.current.focus({ preventScroll: preventScroll });
+    static focus(el, scrollTo) {
+        const preventScroll = scrollTo === undefined ? true : !scrollTo;
+        el && document.activeElement !== el && el.focus({ preventScroll });
     }
 
     static getCursorOffset(el, prevText, nextText, currentText) {

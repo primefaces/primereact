@@ -122,7 +122,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     const reFocusInputField = () => {
         if (!props.inline && inputRef.current) {
             ignoreFocusFunctionality.current = true;
-            DomHandler.focus(inputRef);
+            DomHandler.focus(inputRef.current);
         }
     }
 

@@ -66,7 +66,7 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onWrapperClick = () => {
-        DomHandler.focus(inputRef);
+        DomHandler.focus(inputRef.current);
     }
 
     const onKeyDown = (event) => {
