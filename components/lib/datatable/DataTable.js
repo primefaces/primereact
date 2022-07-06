@@ -1374,7 +1374,7 @@ export const DataTable = React.forwardRef((props, ref) => {
 
     const createTableBody = (options, selectionModeInColumn, empty, isVirtualScrollerDisabled) => {
         const first = getFirst();
-        const { rows, columns, contentRef, className } = options;
+        const { rows, columns, contentRef, className, itemSize } = options;
 
         const frozenBody = props.frozenValue && (
             <TableBody ref={frozenBodyRef} value={props.frozenValue} className="p-datatable-frozen-tbody" frozenRow
@@ -1394,7 +1394,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                 cellClassName={props.cellClassName} responsiveLayout={props.responsiveLayout} selectionAutoFocus={props.selectionAutoFocus} isDataSelectable={props.isDataSelectable}
                 showSelectionElement={props.showSelectionElement} showRowReorderElement={props.showRowReorderElement}
                 expandedRowIcon={props.expandedRowIcon} collapsedRowIcon={props.collapsedRowIcon} rowClassName={props.rowClassName}
-                isVirtualScrollerDisabled={true} />
+                virtualScrollerOptions={options} isVirtualScrollerDisabled={true} />
         );
         const body = (
             <TableBody ref={bodyRef} value={dataToRender(rows)} className={className} empty={empty} frozenRow={false}
@@ -1441,7 +1441,8 @@ export const DataTable = React.forwardRef((props, ref) => {
 
         return (
             <div ref={wrapperRef} className="p-datatable-wrapper" style={{ maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }}>
-                <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerOptions} items={processedData} columns={columns} scrollHeight={props.scrollHeight}
+                <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerOptions} items={processedData} columns={columns}
+                    style={{ ...virtualScrollerOptions.style, ...{ height: props.scrollHeight !== 'flex' ? props.scrollHeight : undefined } }} scrollHeight={props.scrollHeight !== 'flex' ? undefined : '100%'}
                     disabled={_isVirtualScrollerDisabled} loaderDisabled showSpacer={false}
                     contentTemplate={(options) => {
                         const ref = (el) => { tableRef.current = el; options.spacerRef && options.spacerRef(el) };
