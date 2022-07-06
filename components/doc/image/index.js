@@ -207,6 +207,11 @@ import { Image } from 'primereact/image';
                                     <td>-</td>
                                     <td>Triggered when the preview overlay is hidden.</td>
                                 </tr>
+                                <tr>
+                                    <td>onError</td>
+                                    <td>event: Browser event</td>
+                                    <td>Triggered when the image fails to load.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
