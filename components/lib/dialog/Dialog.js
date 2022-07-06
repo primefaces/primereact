@@ -476,7 +476,7 @@ export const Dialog = React.forwardRef((props, ref) => {
 
     const createResizer = () => {
         if (props.resizable) {
-            return <div className="p-resizable-handle" style={{ zIndex: 90 }} onMouseDown={onResizeStart}></div>
+            return <span className="p-resizable-handle" style={{ zIndex: 90 }} onMouseDown={onResizeStart}></span>
         }
 
         return null;
