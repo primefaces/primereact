@@ -6016,10 +6016,6 @@
   color: #ffffff;
 }
 
-.p-virtualscroller-loading-icon {
-  font-size: 2rem;
-}
-
 /* Customizations to the designer theme should be defined here */
 .p-inputtext, .p-togglebutton, .p-selectbutton, .p-inputgroup {
   box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgba(0, 0, 0, 0.05);

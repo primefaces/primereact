@@ -40,3 +40,7 @@
     align-items: center;
     justify-content: center;
 }
+
+.p-virtualscroller-loading-icon {
+    font-size: 2rem;
+}
