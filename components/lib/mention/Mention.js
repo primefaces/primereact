@@ -203,7 +203,7 @@ export const Mention = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onItemClick = (event, suggestion) => {
-        inputRef.current.focus();
+        DomHandler.focus(inputRef);
         selectItem(event, suggestion);
     }
 

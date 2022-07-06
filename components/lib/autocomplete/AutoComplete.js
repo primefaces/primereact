@@ -101,7 +101,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
         }
 
         if (!preventInputFocus) {
-            inputRef.current.focus();
+            DomHandler.focus(inputRef);
             hide();
         }
     }
@@ -200,7 +200,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
 
     const onDropdownClick = (event) => {
         if (props.dropdownAutoFocus) {
-            inputRef.current.focus();
+            DomHandler.focus(inputRef, props.dropdownAutoFocus);
         }
 
         if (props.dropdownMode === 'blank')
@@ -383,7 +383,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onMultiContainerClick = (event) => {
-        inputRef.current.focus();
+        DomHandler.focus(inputRef);
 
         props.onClick && props.onClick(event);
     }
@@ -427,8 +427,8 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
             setIdState(UniqueComponentId());
         }
 
-        if (props.autoFocus && inputRef.current) {
-            inputRef.current.focus();
+        if (props.autoFocus) {
+            DomHandler.focus(inputRef, props.autoFocus);
         }
     });
 

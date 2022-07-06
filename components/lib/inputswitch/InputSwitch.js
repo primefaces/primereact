@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -14,7 +14,7 @@ export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
         }
 
         toggle(event);
-        inputRef.current.focus();
+        DomHandler.focus(inputRef);
 
         event.preventDefault();
     }

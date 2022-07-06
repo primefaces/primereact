@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const Chips = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -66,7 +66,7 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onWrapperClick = () => {
-        inputRef.current.focus();
+        DomHandler.focus(inputRef);
     }
 
     const onKeyDown = (event) => {
