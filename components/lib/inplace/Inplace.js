@@ -6,7 +6,7 @@ export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;
 
 export const Inplace = React.forwardRef((props, ref) => {
-    const [activeState, setActiveState] = React.useState(false);
+    const [activeState, setActiveState] = React.useState(props.active);
     const active = props.onToggle ? props.active : activeState;
 
     const shouldUseInplaceContent = (child) => child && child.props.__TYPE === 'InplaceContent';
