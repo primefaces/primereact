@@ -285,10 +285,6 @@ export const Tree = React.memo(React.forwardRef((props, ref) => {
         return matched;
     }
 
-    React.useImperativeHandle(ref, () => ({
-        filter
-    }));
-
     const createRootChild = (node, index, last) => {
         return (
             <UITreeNode key={node.key || node.label} node={node} index={index} last={last} path={String(index)} disabled={props.disabled} selectionMode={props.selectionMode}

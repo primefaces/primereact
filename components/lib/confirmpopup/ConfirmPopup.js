@@ -178,10 +178,6 @@ export const ConfirmPopup = React.memo(React.forwardRef((props, ref) => {
         ZIndexUtils.clear(overlayRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        confirm
-    }));
-
     const createContent = () => {
         const currentProps = getCurrentProps();
         const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);

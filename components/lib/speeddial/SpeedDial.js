@@ -145,11 +145,6 @@ export const SpeedDial = React.memo(React.forwardRef((props, ref) => {
         }
     }, [visibleState]);
 
-    React.useImperativeHandle(ref, () => ({
-        show,
-        hide
-    }));
-
     const createItem = (item, index) => {
         const style = getItemStyle(index);
         const { disabled, icon: _icon, label, template, url, target } = item;

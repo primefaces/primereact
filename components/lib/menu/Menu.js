@@ -121,12 +121,6 @@ export const Menu = React.memo(React.forwardRef((props, ref) => {
         ZIndexUtils.clear(menuRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        toggle,
-        show,
-        hide
-    }));
-
     const createSubmenu = (submenu, index) => {
         const key = submenu.label + '_' + index;
         const className = classNames('p-submenu-header', {

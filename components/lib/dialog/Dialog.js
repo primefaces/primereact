@@ -398,10 +398,6 @@ export const Dialog = React.forwardRef((props, ref) => {
         ZIndexUtils.clear(maskRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        resetPosition
-    }));
-
     const createCloseIcon = () => {
         if (props.closable) {
             return (

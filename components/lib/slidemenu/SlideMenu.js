@@ -85,12 +85,6 @@ export const SlideMenu = React.memo(React.forwardRef((props, ref) => {
         ZIndexUtils.clear(menuRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        toggle,
-        show,
-        hide
-    }));
-
     const createBackward = () => {
         const className = classNames('p-slidemenu-backward', {
             'p-hidden': levelState === 0

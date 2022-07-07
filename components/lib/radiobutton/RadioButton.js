@@ -51,10 +51,6 @@ export const RadioButton = React.memo(React.forwardRef((props, ref) => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
-    React.useImperativeHandle(ref, () => ({
-        select
-    }));
-
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const otherProps = ObjectUtils.findDiffKeys(props, RadioButton.defaultProps);
     const className = classNames('p-radiobutton p-component', {

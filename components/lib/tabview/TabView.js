@@ -145,10 +145,6 @@ export const TabView = React.forwardRef((props, ref) => {
         updateScrollBar(props.activeIndex);
     }, [props.activeIndex]);
 
-    React.useImperativeHandle(ref, () => ({
-        reset
-    }));
-
     const createTabHeader = (tab, index) => {
         const selected = isSelected(index);
         const { headerStyle, headerClassName, style: _style, className: _className, disabled, leftIcon, rightIcon, header, headerTemplate, closable } = tab.props;

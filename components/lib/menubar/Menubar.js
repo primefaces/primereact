@@ -47,11 +47,6 @@ export const Menubar = React.memo(React.forwardRef((props, ref) => {
         ZIndexUtils.clear(rootMenuRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        toggle,
-        useCustomContent
-    }));
-
     const createStartContent = () => {
         if (props.start) {
             const start = ObjectUtils.getJSXElement(props.start, props);

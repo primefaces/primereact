@@ -429,12 +429,6 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
         ZIndexUtils.clear(elementRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        updateTargetEvents,
-        loadTargetEvents,
-        unloadTargetEvents
-    }));
-
     const createElement = () => {
         const otherProps = ObjectUtils.findDiffKeys(props, Tooltip.defaultProps);
         const tooltipClassName = classNames('p-tooltip p-component', {

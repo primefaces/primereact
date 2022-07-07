@@ -42,12 +42,6 @@ export const Messages = React.memo(React.forwardRef((props, ref) => {
         props.onRemove && props.onRemove(message);
     }
 
-    React.useImperativeHandle(ref, () => ({
-        show,
-        replace,
-        clear
-    }));
-
     const otherProps = ObjectUtils.findDiffKeys(props, Messages.defaultProps);
 
     return (

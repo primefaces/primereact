@@ -101,14 +101,6 @@ export const Galleria = React.memo(React.forwardRef((props, ref) => {
         ZIndexUtils.clear(maskRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        show,
-        hide,
-        isAutoPlayActive,
-        startSlideShow,
-        stopSlideShow
-    }));
-
     const createHeader = () => {
         if (props.header) {
             return (

@@ -163,11 +163,6 @@ export const ContextMenu = React.memo(React.forwardRef((props, ref) => {
         ZIndexUtils.clear(menuRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        show,
-        hide
-    }));
-
     const createContextMenu = () => {
         const otherProps = ObjectUtils.findDiffKeys(props, ContextMenu.defaultProps);
         const className = classNames('p-contextmenu p-component', props.className);

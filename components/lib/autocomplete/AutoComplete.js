@@ -453,10 +453,6 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
         ZIndexUtils.clear(overlayRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        search
-    }));
-
     const createSimpleAutoComplete = () => {
         const value = formatValue(props.value);
         const ariaControls = overlayVisibleState ? idState + '_list' : null;

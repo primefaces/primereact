@@ -65,12 +65,6 @@ export const Toast = React.memo(React.forwardRef((props, ref) => {
         ZIndexUtils.clear(containerRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        show,
-        replace,
-        clear
-    }));
-
     const createElement = () => {
         const otherProps = ObjectUtils.findDiffKeys(props, Toast.defaultProps);
         const className = classNames('p-toast p-component p-toast-' + props.position, props.className);

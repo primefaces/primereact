@@ -2479,14 +2479,6 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         ZIndexUtils.clear(overlayRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        show,
-        hide,
-        getCurrentDateTime,
-        getViewDate,
-        updateViewDate
-    }));
-
     const createBackwardNavigator = (isVisible) => {
         const navigatorProps = isVisible ? { 'onClick': onPrevButtonClick, 'onKeyDown': e => onContainerButtonKeydown(e) } : { 'style': { visibility: 'hidden' } };
         return (

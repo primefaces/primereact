@@ -312,12 +312,6 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
         !disabled && hasFiles ? upload() : fileInputRef.current.click();
     }
 
-    React.useImperativeHandle(ref, () => ({
-        upload,
-        clear,
-        formatSize
-    }));
-
     const createChooseButton = () => {
         const { className, style, icon: _icon, iconOnly } = props.chooseOptions;
         const chooseClassName = classNames('p-button p-fileupload-choose p-component', {

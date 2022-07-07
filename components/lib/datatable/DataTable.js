@@ -1316,17 +1316,6 @@ export const DataTable = React.forwardRef((props, ref) => {
         destroyResponsiveStyle();
     });
 
-    React.useImperativeHandle(ref, () => ({
-        reset,
-        resetScroll,
-        exportCSV,
-        filter,
-        resetColumnOrder,
-        closeEditingCell,
-        restoreTableState,
-        clearState
-    }));
-
     const createLoader = () => {
         if (props.loading) {
             const iconClassName = classNames('p-datatable-loading-icon pi-spin', props.loadingIcon);

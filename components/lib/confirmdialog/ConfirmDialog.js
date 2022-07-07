@@ -93,10 +93,6 @@ export const ConfirmDialog = React.memo(React.forwardRef((props, ref) => {
         OverlayService.off('confirm-dialog', confirm);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        confirm
-    }));
-
     const createFooter = () => {
         const acceptClassName = classNames('p-confirm-dialog-accept', getPropValue('acceptClassName'));
         const rejectClassName = classNames('p-confirm-dialog-reject', {

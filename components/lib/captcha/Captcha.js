@@ -80,11 +80,6 @@ export const Captcha = React.memo(React.forwardRef((props, ref) => {
         }
     });
 
-    React.useImperativeHandle(ref, () => ({
-        reset,
-        getResponse
-    }));
-
     const otherProps = ObjectUtils.findDiffKeys(props, Captcha.defaultProps);
 
     return <div ref={elementRef} id={props.id} {...otherProps}></div>

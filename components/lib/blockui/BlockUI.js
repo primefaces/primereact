@@ -62,11 +62,6 @@ export const BlockUI = React.forwardRef((props, ref) => {
         ZIndexUtils.clear(maskRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        block,
-        unblock
-    }));
-
     const createMask = () => {
         if (visibleState) {
             const appendTo = props.fullScreen ? document.body : 'self';

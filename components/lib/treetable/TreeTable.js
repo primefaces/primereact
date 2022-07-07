@@ -790,10 +790,6 @@ export const TreeTable = React.forwardRef((props, ref) => {
         return data;
     }
 
-    React.useImperativeHandle(ref, () => ({
-        filter
-    }));
-
     const createTableHeader = (columns, columnGroup) => {
         const sortField = getSortField();
         const sortOrder = getSortOrder();

@@ -173,12 +173,6 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
         ZIndexUtils.clear(overlayRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        toggle,
-        show,
-        hide
-    }));
-
     const createCloseIcon = () => {
         if (props.showCloseIcon) {
             return (

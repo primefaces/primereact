@@ -148,10 +148,6 @@ export const ScrollPanel = React.forwardRef((props, ref) => {
         }
     });
 
-    React.useImperativeHandle(ref, () => ({
-        refresh
-    }));
-
     const otherProps = ObjectUtils.findDiffKeys(props, ScrollPanel.defaultProps);
     const className = classNames('p-scrollpanel p-component', props.className);
 

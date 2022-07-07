@@ -79,11 +79,6 @@ export const SplitButton = React.memo(React.forwardRef((props, ref) => {
         ZIndexUtils.clear(overlayRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        show,
-        hide
-    }));
-
     const createItems = () => {
         if (props.model) {
             return props.model.map((menuitem, index) => {

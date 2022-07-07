@@ -70,12 +70,6 @@ export const TieredMenu = React.memo(React.forwardRef((props, ref) => {
         ZIndexUtils.clear(menuRef.current);
     });
 
-    React.useImperativeHandle(ref, () => ({
-        toggle,
-        show,
-        hide
-    }));
-
     const createElement = () => {
         const otherProps = ObjectUtils.findDiffKeys(props, TieredMenu.defaultProps);
         const className = classNames('p-tieredmenu p-component', {
