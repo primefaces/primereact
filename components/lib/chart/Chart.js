@@ -35,7 +35,8 @@ export const Chart = React.memo(React.forwardRef((props, ref) => {
         getChart: () => chartRef.current,
         getBase64Image: () => chartRef.current.toBase64Image(),
         generateLegend: () => chartRef.current && chartRef.current.generateLegend(),
-        refresh: () => chartRef.current && chartRef.current.update()
+        refresh: () => chartRef.current && chartRef.current.update(),
+        ...props
     }));
 
     React.useEffect(() => {

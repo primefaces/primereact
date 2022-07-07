@@ -64,7 +64,8 @@ export const BlockUI = React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         block,
-        unblock
+        unblock,
+        ...props
     }));
 
     const createMask = () => {

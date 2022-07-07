@@ -45,7 +45,8 @@ export const Messages = React.memo(React.forwardRef((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         show,
         replace,
-        clear
+        clear,
+        ...props
     }));
 
     const otherProps = ObjectUtils.findDiffKeys(props, Messages.defaultProps);

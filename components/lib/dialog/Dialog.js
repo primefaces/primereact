@@ -399,7 +399,8 @@ export const Dialog = React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
-        resetPosition
+        resetPosition,
+        ...props
     }));
 
     const createCloseIcon = () => {

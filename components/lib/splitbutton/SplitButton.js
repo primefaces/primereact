@@ -81,7 +81,8 @@ export const SplitButton = React.memo(React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         show,
-        hide
+        hide,
+        ...props
     }));
 
     const createItems = () => {

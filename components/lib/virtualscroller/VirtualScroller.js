@@ -517,7 +517,8 @@ export const VirtualScroller = React.memo(React.forwardRef((props, ref) => {
         scrollTo,
         scrollToIndex,
         scrollInView,
-        getRenderedRange
+        getRenderedRange,
+        ...props
     }));
 
     const createLoaderItem = (index, extOptions = {}) => {

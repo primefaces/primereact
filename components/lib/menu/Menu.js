@@ -124,7 +124,8 @@ export const Menu = React.memo(React.forwardRef((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         toggle,
         show,
-        hide
+        hide,
+        ...props
     }));
 
     const createSubmenu = (submenu, index) => {

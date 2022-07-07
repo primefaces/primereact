@@ -142,7 +142,8 @@ export const DataScroller = React.memo(React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         load,
-        reset
+        reset,
+        ...props
     }));
 
     const createHeader = () => {

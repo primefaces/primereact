@@ -315,7 +315,8 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         upload,
         clear,
-        formatSize
+        formatSize,
+        ...props
     }));
 
     const createChooseButton = () => {
