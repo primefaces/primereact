@@ -1324,7 +1324,8 @@ export const DataTable = React.forwardRef((props, ref) => {
         resetColumnOrder,
         closeEditingCell,
         restoreTableState,
-        clearState
+        clearState,
+        ...props
     }));
 
     const createLoader = () => {

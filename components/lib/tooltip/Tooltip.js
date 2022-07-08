@@ -432,7 +432,8 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         updateTargetEvents,
         loadTargetEvents,
-        unloadTargetEvents
+        unloadTargetEvents,
+        ...props
     }));
 
     const createElement = () => {

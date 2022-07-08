@@ -454,7 +454,8 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
-        search
+        search,
+        ...props
     }));
 
     const createSimpleAutoComplete = () => {

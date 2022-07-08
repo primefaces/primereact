@@ -2484,7 +2484,8 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         hide,
         getCurrentDateTime,
         getViewDate,
-        updateViewDate
+        updateViewDate,
+        ...props
     }));
 
     const createBackwardNavigator = (isVisible) => {
