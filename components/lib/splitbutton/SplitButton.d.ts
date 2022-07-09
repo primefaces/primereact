@@ -11,7 +11,7 @@ export interface SplitButtonProps {
     label?: string;
     icon?: IconType<SplitButtonProps>;
     loading?: boolean;
-    loadingIcon?: IconType<ButtonProps>;
+    loadingIcon?: IconType<SplitButtonProps>;
     model?: MenuItem[];
     disabled?: boolean;
     style?: object;
