@@ -1387,7 +1387,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                 dragSelection={props.dragSelection} onContextMenu={props.onContextMenu} onContextMenuSelectionChange={props.onContextMenuSelectionChange}
                 metaKeySelection={props.metaKeySelection} selectionMode={props.selectionMode} cellSelection={props.cellSelection} contextMenuSelection={props.contextMenuSelection}
                 dataKey={props.dataKey} expandedRows={props.expandedRows} onRowCollapse={props.onRowCollapse} onRowExpand={props.onRowExpand} onRowToggle={props.onRowToggle}
-                editMode={props.editMode} editingRows={props.editingRows} onRowReorder={props.onRowReorder} scrollable={props.scrollable} rowGroupMode={props.rowGroupMode}
+                editMode={props.editMode} editingRows={props.editingRows} onRowReorder={props.onRowReorder} reorderableRows={props.reorderableRows} scrollable={props.scrollable} rowGroupMode={props.rowGroupMode}
                 groupRowsBy={props.groupRowsBy} expandableRowGroups={props.expandableRowGroups} loading={props.loading} emptyMessage={props.emptyMessage}
                 rowGroupHeaderTemplate={props.rowGroupHeaderTemplate} rowExpansionTemplate={props.rowExpansionTemplate} rowGroupFooterTemplate={props.rowGroupFooterTemplate}
                 onRowEditChange={props.onRowEditChange} compareSelectionBy={props.compareSelectionBy} selectOnEdit={props.selectOnEdit}
@@ -1407,7 +1407,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                 dragSelection={props.dragSelection} onContextMenu={props.onContextMenu} onContextMenuSelectionChange={props.onContextMenuSelectionChange}
                 metaKeySelection={props.metaKeySelection} selectionMode={props.selectionMode} cellSelection={props.cellSelection} contextMenuSelection={props.contextMenuSelection}
                 dataKey={props.dataKey} expandedRows={props.expandedRows} onRowCollapse={props.onRowCollapse} onRowExpand={props.onRowExpand} onRowToggle={props.onRowToggle}
-                editMode={props.editMode} editingRows={props.editingRows} onRowReorder={props.onRowReorder} scrollable={props.scrollable} rowGroupMode={props.rowGroupMode}
+                editMode={props.editMode} editingRows={props.editingRows} onRowReorder={props.onRowReorder} reorderableRows={props.reorderableRows} scrollable={props.scrollable} rowGroupMode={props.rowGroupMode}
                 groupRowsBy={props.groupRowsBy} expandableRowGroups={props.expandableRowGroups} loading={props.loading} emptyMessage={props.emptyMessage}
                 rowGroupHeaderTemplate={props.rowGroupHeaderTemplate} rowExpansionTemplate={props.rowExpansionTemplate} rowGroupFooterTemplate={props.rowGroupFooterTemplate}
                 onRowEditChange={props.onRowEditChange} compareSelectionBy={props.compareSelectionBy} selectOnEdit={props.selectOnEdit}
@@ -1634,6 +1634,7 @@ DataTable.defaultProps = {
     resizableColumns: false,
     columnResizeMode: 'fit',
     reorderableColumns: false,
+    reorderableRows: false,
     filters: null,
     globalFilter: null,
     filterDelay: 300,

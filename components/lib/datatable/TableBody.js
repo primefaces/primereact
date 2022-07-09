@@ -116,7 +116,7 @@ export const TableBody = React.memo(React.forwardRef((props, ref) => {
     }
 
     const allowRowDrag = (event) => {
-        return !allowCellSelection() && allowDrag(event);
+        return !allowCellSelection() && allowDrag(event) || props.reorderableRows;
     }
 
     const allowCellDrag = (event) => {

@@ -294,6 +294,12 @@ const DataTableProps = [
         description: 'When enabled, columns can be reordered using drag and drop.'
     },
     {
+        name: 'reorderableRows',
+        type: 'boolean',
+        default: 'false',
+        description: 'When enabled, rows can be reordered using drag and drop.'
+    },
+    {
         name: 'filters',
         type: 'array',
         default: 'null',
