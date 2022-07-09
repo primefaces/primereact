@@ -1325,6 +1325,9 @@ export const DataTable = React.forwardRef((props, ref) => {
         closeEditingCell,
         restoreTableState,
         clearState,
+        getElement: () => elementRef.current,
+        getTable: () => tableRef.current,
+        getVirtualScroller: () => virtualScrollerRef.current,
         ...props
     }));
 

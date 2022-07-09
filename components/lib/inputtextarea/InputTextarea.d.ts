@@ -8,4 +8,7 @@ export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.T
     children?: React.ReactNode;
 }
 
-export declare class InputTextarea extends React.Component<InputTextareaProps, any> { }
+export declare class InputTextarea extends React.Component<InputTextareaProps, any> { 
+    public getElement(): HTMLTextAreaElement;
+    public getInput(): HTMLTextAreaElement;
+}

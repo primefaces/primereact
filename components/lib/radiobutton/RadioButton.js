@@ -53,6 +53,8 @@ export const RadioButton = React.memo(React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         select,
+        getElement: () => elementRef.current,
+        getInput: () => inputRef.current,
         ...props
     }));
 

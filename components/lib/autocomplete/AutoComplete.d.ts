@@ -1,6 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
-import { VirtualScrollerProps } from '../virtualscroller';
+import { VirtualScrollerProps, VirtualScroller } from '../virtualscroller';
 import { CSSTransitionProps } from '../csstransition';
 import { IconType } from '../utils';
 
@@ -109,4 +109,8 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
 
 export declare class AutoComplete extends React.Component<AutoCompleteProps, any> {
     public search(event:React.SyntheticEvent, query:string, source: AutoCompleteSourceType): void;
+    public getElement(): HTMLSpanElement;
+    public getInput(): HTMLInputElement;
+    public getOverlay(): HTMLElement;
+    public getVirtualScroller(): VirtualScroller;
 }

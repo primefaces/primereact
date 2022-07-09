@@ -96,4 +96,9 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     children?: React.ReactNode;
 }
 
-export declare class Dropdown extends React.Component<DropdownProps, any> { }
+export declare class Dropdown extends React.Component<DropdownProps, any> { 
+    public getElement(): HTMLDivElement;
+    public getInput(): HTMLInputElement;
+    public getFocusInput(): HTMLInputElement;
+    public getOverlay(): HTMLElement;
+}

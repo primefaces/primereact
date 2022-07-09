@@ -2485,6 +2485,9 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         getCurrentDateTime,
         getViewDate,
         updateViewDate,
+        getElement: () => elementRef.current,
+        getOverlay: () => overlayRef.current,
+        getInput: () => inputRef.current,
         ...props
     }));
 

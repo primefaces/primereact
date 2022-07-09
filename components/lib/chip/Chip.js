@@ -2,6 +2,7 @@ import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Chip = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
     const [visibleState, setVisibleState] = React.useState(true);
 
     const onKeyDown = (event) => {
@@ -48,11 +49,16 @@ export const Chip = React.memo(React.forwardRef((props, ref) => {
         const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
         return (
-            <div className={className} style={props.style} {...otherProps}>
+            <div ref={elementRef} className={className} style={props.style} {...otherProps}>
                 {content}
             </div>
         )
     }
+
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
 
     return visibleState && createElement();
 }));

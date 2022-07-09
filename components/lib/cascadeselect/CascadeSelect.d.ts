@@ -44,4 +44,9 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
     children?: React.ReactNode;
 }
 
-export declare class CascadeSelect extends React.Component<CascadeSelectProps, any> { }
+export declare class CascadeSelect extends React.Component<CascadeSelectProps, any> { 
+    public getElement(): HTMLDivElement;
+    public getInput(): HTMLInputElement;
+    public getOverlay(): HTMLElement;
+    public getLabel(): HTMLSpanElement;
+}

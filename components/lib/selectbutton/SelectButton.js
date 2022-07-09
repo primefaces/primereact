@@ -90,6 +90,11 @@ export const SelectButton = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const otherProps = ObjectUtils.findDiffKeys(props, SelectButton.defaultProps);
     const className = classNames('p-selectbutton p-buttonset p-component', props.className);

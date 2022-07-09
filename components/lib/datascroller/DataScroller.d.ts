@@ -7,16 +7,13 @@ interface DataScrollerLazyLoadParams {
     rows: number;
 }
 
-export interface DataScrollerProps {
-    id?: string;
+export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     value?: any[];
     rows?: number;
     inline?: boolean;
     scrollHeight?: string;
     loader?: boolean;
     buffer?: number;
-    style?: object;
-    className?: string;
     header?: React.ReactNode;
     footer?: React.ReactNode;
     lazy?: boolean;
@@ -28,4 +25,5 @@ export interface DataScrollerProps {
 
 export declare class DataScroller extends React.Component<DataScrollerProps, any> {
     public load(): void;
+    public getElement(): HTMLDivElement;
 }

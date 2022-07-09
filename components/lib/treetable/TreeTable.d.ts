@@ -176,4 +176,5 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
 
 export declare class TreeTable extends React.Component<TreeTableProps, any> {
     public filter<T>(value: T, field: string, mode: TreeTableFilterMatchModeType): void;
+    public getElement(): HTMLDivElement;
 }

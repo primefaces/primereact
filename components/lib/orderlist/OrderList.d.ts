@@ -5,19 +5,17 @@ interface OrderListChangeParams {
     value: any;
 }
 
-export interface OrderListProps {
-    id?: string;
+export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     value?: any[];
     header?: React.ReactNode;
-    style?: object;
-    className?: string;
     listStyle?: object;
     dragdrop?: boolean;
-    tabIndex?: number;
     dataKey?: string;
     onChange?(e: OrderListChangeParams): void;
     itemTemplate?(item: any): React.ReactNode;
     children?: React.ReactNode;
 }
 
-export declare class OrderList extends React.Component<OrderListProps, any> { }
+export declare class OrderList extends React.Component<OrderListProps, any> { 
+    public getElement(): HTMLDivElement;
+}

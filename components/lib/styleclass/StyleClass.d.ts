@@ -16,4 +16,7 @@ export interface StyleClassProps {
     children?: React.ReactNode;
 }
 
-export declare class StyleClass extends React.Component<StyleClassProps, any> { }
+export declare class StyleClass extends React.Component<StyleClassProps, any> { 
+    public getElement(): HTMLElement;
+    public getTarget(): HTMLElement;
+}

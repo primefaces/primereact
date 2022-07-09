@@ -243,6 +243,11 @@ export const Slider = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     const otherProps = ObjectUtils.findDiffKeys(props, Slider.defaultProps);
     const className = classNames('p-slider p-component', props.className, {
         'p-disabled': props.disabled,
