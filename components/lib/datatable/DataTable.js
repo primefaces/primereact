@@ -1236,6 +1236,13 @@ export const DataTable = React.forwardRef((props, ref) => {
                 const sortField = (localState && localState.sortField) || getSortField();
                 const sortOrder = (localState && localState.sortOrder) || getSortOrder();
                 const multiSortMeta = (localState && localState.multiSortMeta) || getMultiSortMeta();
+                var columns = getColumns();
+                var sortColumn = columns.find((col) => col.props.field === sortField);
+
+                if (sortColumn) {
+                    columnSortable.current = sortColumn.props.sortable;
+                    columnSortFunction.current = sortColumn.props.sortFunction;
+                }
 
                 if (ObjectUtils.isNotEmpty(filters) || props.globalFilter) {
                     data = filterLocal(data, filters);
