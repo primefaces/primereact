@@ -1,13 +1,15 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from "../utils";
+import { IconType } from '../utils';
 
 type CalendarAppendToType = 'self' | HTMLElement | undefined | null;
 
 type CalendarVisibleType = 'outside' | 'dateselect' | undefined | null;
 
 type CalendarIconPosType = 'left' | 'right';
+
+type CalendarEventType = React.SyntheticEvent | undefined | null;
 
 interface CalendarChangeTargetOptions {
     name: string;
@@ -21,6 +23,11 @@ interface CalendarChangeParams {
     stopPropagation(): void;
     preventDefault(): void;
     target: CalendarChangeTargetOptions;
+}
+
+interface CalendarMonthChangeParams {
+    month: number;
+    year: number;
 }
 
 interface CalendarViewChangeParams {
@@ -48,12 +55,13 @@ interface CalendarVisibleChangeParams {
     callback?(): void;
 }
 
-interface CalendarNavigatorTemplateChangeParams {
-    event: React.SyntheticEvent;
-    value: string | number | undefined | null;
-}
+type CalendarNavigatorTemplateChangeCallback = (
+    event: React.SyntheticEvent,
+    value: string | number | undefined | null
+) => void;
+
 interface CalendarNavigatorTemplateParams {
-    onChange(e: CalendarNavigatorTemplateChangeParams): void;
+    onChange: CalendarNavigatorTemplateChangeCallback;
     className: string;
     value: string | number | undefined | null;
     names: any[];
@@ -118,6 +126,7 @@ export interface CalendarProps {
     minDate?: Date;
     maxDate?: Date;
     maxDateCount?: number;
+    showMinMaxRange?: boolean;
     showOtherMonths?: boolean;
     selectOtherMonths?: boolean;
     showButtonBar?: boolean;
@@ -131,6 +140,7 @@ export interface CalendarProps {
     ariaLabelledBy?: string;
     transitionOptions?: CSSTransitionProps;
     dateTemplate?(e: CalendarDateTemplateParams): React.ReactNode;
+    decadeTempate?(yearValues: number[]): React.ReactNode;
     headerTemplate?(): React.ReactNode;
     footerTemplate?(): React.ReactNode;
     monthNavigatorTemplate?(e: CalendarMonthNavigatorTemplateParams): React.ReactNode;
@@ -141,11 +151,19 @@ export interface CalendarProps {
     onInput?(event: React.FormEvent<HTMLInputElement>): void;
     onSelect?(e: CalendarSelectParams): void;
     onChange?(e: CalendarChangeParams): void;
+    onMonthChange?(e: CalendarMonthChangeParams): void
     onViewDateChange?(e: CalendarViewChangeParams): void;
     onTodayButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
     onClearButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
-export declare class Calendar extends React.Component<CalendarProps, any> { }
+export declare class Calendar extends React.Component<CalendarProps, any> {
+    public show(): void;
+    public hide(): void;
+    public getCurrentDateTime(): Date | Date[];
+    public getViewDate(): Date | Date[];
+    public updateViewDate(event: CalendarEventType, value: Date | Date[]): void;
+}

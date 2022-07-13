@@ -1,128 +1,117 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { classNames, ZIndexUtils } from '../utils/Utils';
-import { ToastMessage } from './ToastMessage';
+import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
-import { CSSTransition } from '../csstransition/CSSTransition';
 import PrimeReact from '../api/Api';
+import { CSSTransition } from '../csstransition/CSSTransition';
+import { useUnmountEffect } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { classNames, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { ToastMessage } from './ToastMessage';
 
 let messageIdx = 0;
 
-export class Toast extends Component {
+export const Toast = React.memo(React.forwardRef((props, ref) => {
+    const [messagesState, setMessagesState] = React.useState([]);
+    const containerRef = React.useRef(null);
 
-    static defaultProps = {
-        id: null,
-        className: null,
-        style: null,
-        baseZIndex: 0,
-        position: 'top-right',
-        transitionOptions: null,
-        onClick: null,
-        onRemove: null,
-        onShow: null,
-        onHide: null
-    }
-
-    static propTypes = {
-        id: PropTypes.string,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        baseZIndex: PropTypes.number,
-        position: PropTypes.string,
-        transitionOptions: PropTypes.object,
-        onClick: PropTypes.func,
-        onRemove: PropTypes.func,
-        onShow: PropTypes.func,
-        onHide: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            messages: []
-        };
-
-        this.onClose = this.onClose.bind(this);
-        this.onEntered = this.onEntered.bind(this);
-        this.onExited = this.onExited.bind(this);
-    }
-
-    show(value) {
+    const show = (value) => {
         if (value) {
-            if (value) {
-                let newMessages;
+            let messages;
 
-                if (Array.isArray(value)) {
-                    for (let i = 0; i < value.length; i++) {
-                        value[i].id = messageIdx++;
-                        newMessages = [...this.state.messages, ...value];
-                    }
+            if (Array.isArray(value)) {
+                for (let i = 0; i < value.length; i++) {
+                    value[i].id = messageIdx++;
+                    messages = [...messagesState, ...value];
                 }
-                else {
-                    value.id = messageIdx++;
-                    newMessages = this.state.messages ? [...this.state.messages, value] : [value];
-                }
-
-                this.state.messages.length === 0 && ZIndexUtils.set('toast', this.container, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['toast']);
-
-                this.setState({ messages: newMessages });
             }
+            else {
+                value.id = messageIdx++;
+                messages = messagesState ? [...messagesState, value] : [value];
+            }
+
+            messagesState.length === 0 && ZIndexUtils.set('toast', containerRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['toast']);
+
+            setMessagesState(messages);
         }
     }
 
-    clear() {
-        ZIndexUtils.clear(this.container);
-
-        this.setState({
-            messages: []
-        });
+    const clear = () => {
+        ZIndexUtils.clear(containerRef.current);
+        setMessagesState([]);
     }
 
-    onClose(message) {
-        let newMessages = this.state.messages.filter(msg => msg.id !== message.id);
-        this.setState({
-            messages: newMessages
-        });
-
-        if (this.props.onRemove) {
-            this.props.onRemove(message);
-        }
+    const replace = (value) => {
+        const replaced = Array.isArray(value) ? value : [value];
+        setMessagesState(replaced);
     }
 
-    onEntered() {
-        this.props.onShow && this.props.onShow();
+    const onClose = (message) => {
+        const messages = messagesState.filter(msg => msg.id !== message.id);
+        setMessagesState(messages);
+
+        props.onRemove && props.onRemove(message);
     }
 
-    onExited() {
-        this.state.messages.length === 0 && ZIndexUtils.clear(this.container);
-
-        this.props.onHide && this.props.onHide();
+    const onEntered = () => {
+        props.onShow && props.onShow();
     }
 
-    componentWillUnmount() {
-        ZIndexUtils.clear(this.container);
+    const onExited = () => {
+        messagesState.length === 1 && ZIndexUtils.clear(containerRef.current);
+
+        props.onHide && props.onHide();
     }
 
-    render() {
-        let className = classNames('p-toast p-component p-toast-' + this.props.position, this.props.className);
+    useUnmountEffect(() => {
+        ZIndexUtils.clear(containerRef.current);
+    });
+
+    React.useImperativeHandle(ref, () => ({
+        show,
+        replace,
+        clear,
+        ...props
+    }));
+
+    const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, Toast.defaultProps);
+        const className = classNames('p-toast p-component p-toast-' + props.position, props.className);
 
         return (
-            <div ref={(el) => { this.container = el; }} id={this.props.id} className={className} style={this.props.style}>
+            <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>
                 <TransitionGroup>
                     {
-                        this.state.messages.map((message) => {
+                        messagesState.map((message) => {
                             const messageRef = React.createRef();
 
                             return (
-                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={this.onEntered} onExited={this.onExited} options={this.props.transitionOptions}>
-                                    <ToastMessage ref={messageRef} message={message} onClick={this.props.onClick} onClose={this.onClose} />
+                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
+                                    <ToastMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} />
                                 </CSSTransition>
                             )
                         })
                     }
                 </TransitionGroup>
             </div>
-        );
+        )
     }
+
+    const element = createElement();
+
+    return <Portal element={element} appendTo={props.appendTo} />
+}));
+
+Toast.displayName = 'Toast';
+Toast.defaultProps = {
+    __TYPE: 'Toast',
+    id: null,
+    className: null,
+    style: null,
+    baseZIndex: 0,
+    position: 'top-right',
+    transitionOptions: null,
+    appendTo: 'self',
+    onClick: null,
+    onRemove: null,
+    onShow: null,
+    onHide: null
 }

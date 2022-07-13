@@ -1,218 +1,155 @@
-import React, { Component, createRef } from 'react';
-import PropTypes from 'prop-types';
-import { ObjectUtils, classNames } from '../utils/Utils';
-import { tip } from '../tooltip/Tooltip';
+import * as React from 'react';
+import { useMountEffect } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
+import { ariaLabel } from '../api/Api';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export class MultiStateCheckbox extends Component {
+export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const equalityKey = props.optionValue ? null : props.dataKey;
 
-    static defaultProps = {
-        id: null,
-        inputRef: null,
-        inputId: null,
-        value: null,
-        options: null,
-        optionValue: null,
-        iconTemplate: null,
-        dataKey: null,
-        name: null,
-        style: null,
-        className: null,
-        disabled: false,
-        readOnly: false,
-        empty: true,
-        tooltip: null,
-        tooltipOptions: null,
-        ariaLabelledBy: null,
-        onChange: null
-    };
-
-    static propTypes = {
-        id: PropTypes.string,
-        inputRef: PropTypes.any,
-        inputId: PropTypes.string,
-        value: PropTypes.any,
-        options: PropTypes.any,
-        optionValue: PropTypes.string,
-        iconTemplate: PropTypes.any,
-        dataKey: PropTypes.string,
-        name: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        disabled: PropTypes.bool,
-        readOnly: PropTypes.bool,
-        empty: PropTypes.bool,
-        tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object,
-        ariaLabelledBy: PropTypes.string,
-        onChange: PropTypes.func
-    }
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            focused: false
-        };
-
-        this.onClick = this.onClick.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
-
-        this.inputRef = createRef(this.props.inputRef);
-    }
-
-    onClick(event) {
-        if (!this.props.disabled && !this.props.readOnly) {
-            this.toggle(event);
-            this.inputRef.current.focus();
+    const onClick = (event) => {
+        if (!props.disabled && !props.readOnly) {
+            toggle(event);
         }
     }
 
-    getOptionValue(option) {
-        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : option;
+    const getOptionValue = (option) => {
+        return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option;
     }
 
-    equalityKey() {
-        return this.props.optionValue ? null : this.props.dataKey;
+    const getOptionAriaLabel = (option) => {
+        const ariaField = props.optionLabel || props.optionValue;
+        return ariaField ? ObjectUtils.resolveFieldData(option, ariaField) : option;
     }
 
-    findSelectedOptionMap() {
-        let option, index;
-
-        if (this.props.options) {
-            const key = this.equalityKey();
-            index = this.props.options.findIndex(option => ObjectUtils.equals(this.props.value, this.getOptionValue(option), key));
-            option = this.props.options[index];
-        }
-
-        return { option, index };
-    }
-
-    findNextOption() {
-        if (this.props.options) {
-            const { index } = this.findSelectedOptionMap();
-            return index === this.props.options.length - 1 ? (this.props.empty ? null : this.props.options[0]) : this.props.options[index + 1];
+    const findNextOption = () => {
+        if (props.options) {
+            return selectedOptionIndex === props.options.length - 1 ? (props.empty ? null : props.options[0]) : props.options[selectedOptionIndex + 1];
         }
 
         return null;
     }
 
-    toggle(event) {
-        let newValue = this.getOptionValue(this.findNextOption());
+    const toggle = (event) => {
+        if (props.onChange) {
+            const newValue = getOptionValue(findNextOption());
 
-        if (this.props.onChange) {
-            this.props.onChange({
+            props.onChange({
                 originalEvent: event,
                 value: newValue,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
+                    name: props.name,
+                    id: props.id,
                     value: newValue
                 }
-            })
+            });
         }
     }
 
-    onFocus() {
-        this.setState({ focused: true });
+    const onFocus = () => {
+        setFocusedState(true);
     }
 
-    onBlur() {
-        this.setState({ focused: false });
+    const onBlur = () => {
+        setFocusedState(false);
     }
 
-    updateInputRef() {
-        let ref = this.props.inputRef;
-
-        if (ref) {
-            if (typeof ref === 'function') {
-                ref(this.inputRef.current);
-            }
-            else {
-                ref.current = this.inputRef.current;
-            }
+    const onKeyDown = (e) => {
+        if (e.keyCode === 32) {
+            toggle(e);
+            e.preventDefault();
         }
     }
 
-    componentDidMount() {
-        this.updateInputRef();
+    const getSelectedOptionMap = () => {
+        let option, index;
 
-        if (this.props.tooltip && !this.props.disabled) {
-            this.renderTooltip();
+        if (props.options) {
+            index = props.options.findIndex(option => ObjectUtils.equals(props.value, getOptionValue(option), equalityKey));
+            option = props.options[index];
         }
 
-        if (!this.props.empty && this.props.value === null) {
-            this.toggle();
+        return { option, index };
+    }
+
+    useMountEffect(() => {
+        if (!props.empty && props.value === null) {
+            toggle();
         }
-    }
+    });
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
-            if (this.tooltip)
-                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
-            else
-                this.renderTooltip();
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
-        }
-    }
-
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.element,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
-    }
-
-    renderIcon(option) {
-        const icon = (option && option.icon) || '';
+    const createIcon = () => {
+        const icon = (selectedOption && selectedOption.icon) || '';
         const className = classNames('p-checkbox-icon p-c', {
             [`${icon}`]: true
         });
         const content = <span className={className}></span>;
 
-        if (this.props.iconTemplate) {
+        if (props.iconTemplate) {
             const defaultOptions = {
-                option,
+                option: selectedOption,
                 className,
                 element: content,
-                props: this.props
+                props
             }
 
-            return ObjectUtils.getJSXElement(this.props.iconTemplate, defaultOptions);
+            return ObjectUtils.getJSXElement(props.iconTemplate, defaultOptions);
         }
 
         return content;
     }
 
-    render() {
-        const { option } = this.findSelectedOptionMap();
-        const containerClassName = classNames('p-multistatecheckbox p-checkbox p-component', this.props.className);
-        const boxClassName = classNames('p-checkbox-box', {
-            'p-highlight': !!option,
-            'p-disabled': this.props.disabled,
-            'p-focus': this.state.focused
-        }, option && option.className);
-        const icon = this.renderIcon(option);
+    const { option: selectedOption, index: selectedOptionIndex } = getSelectedOptionMap();
 
-        return (
-            <div ref={el => this.element = el} id={this.props.id} className={containerClassName} style={this.props.style} onClick={this.onClick}>
-                <div className="p-hidden-accessible">
-                    <input ref={this.inputRef} type="checkbox" aria-labelledby={this.props.ariaLabelledBy} id={this.props.inputId} name={this.props.name}
-                           onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} readOnly={this.props.readOnly} defaultChecked={!!option} />
-                </div>
-                <div className={boxClassName} ref={el => this.box = el} role="checkbox" aria-checked={!!option} style={option && option.style}>
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, MultiStateCheckbox.defaultProps);
+    const className = classNames('p-multistatecheckbox p-checkbox p-component', props.className);
+    const boxClassName = classNames('p-checkbox-box', {
+        'p-highlight': !!selectedOption,
+        'p-disabled': props.disabled,
+        'p-focus': focusedState
+    }, selectedOption && selectedOption.className);
+    const icon = createIcon();
+    const ariaValueLabel = !!selectedOption ? getOptionAriaLabel(selectedOption) : ariaLabel('nullLabel');
+    const ariaChecked =  !!selectedOption ? 'true' : 'false';
+
+    return (
+        <>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
+                <div className={boxClassName} style={selectedOption && selectedOption.style} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}
+                    role="checkbox" aria-checked={ariaChecked} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
                     {icon}
                 </div>
+                {focusedState && <span className="p-sr-only" aria-live="polite">{ariaValueLabel}</span>}
             </div>
-        );
-    }
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
+    )
+}));
+
+MultiStateCheckbox.displayName = 'MultiStateCheckbox';
+MultiStateCheckbox.defaultProps = {
+    __TYPE: 'MultiStateCheckbox',
+    id: null,
+    value: null,
+    options: null,
+    optionValue: null,
+    optionLabel: null,
+    iconTemplate: null,
+    dataKey: null,
+    style: null,
+    className: null,
+    disabled: false,
+    readOnly: false,
+    empty: true,
+    tabIndex: "0",
+    'aria-label': null,
+    'aria-labelledby': null,
+    tooltip: null,
+    tooltipOptions: null,
+    onChange: null
 }

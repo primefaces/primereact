@@ -51,7 +51,7 @@ const SidebarProps = [
         name: 'dismissable',
         type: 'boolean',
         default: 'true',
-        description: 'Whether clicking outside closes the panel.'
+        description: 'Whether to dismiss sidebar on click of the mask.'
     },
     {
         name: 'showCloseIcon',
@@ -75,7 +75,7 @@ const SidebarProps = [
         name: 'modal',
         type: 'boolean',
         default: 'true',
-        description: 'Whether to a modal layer behind the sidebar.'
+        description: 'Whether to add a translucent overlay behind the sidebar.'
     },
     {
         name: 'appendTo',

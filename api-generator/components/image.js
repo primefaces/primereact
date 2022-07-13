@@ -6,6 +6,12 @@ const ImageProps = [
         description: 'Controls the preview functionality.'
     },
     {
+        name: 'downloadable',
+        type: 'boolean',
+        default: 'false',
+        description: 'Adds a download button to the preview control menu.'
+    },
+    {
         name: 'imageStyle',
         type: 'any',
         default: 'null',
@@ -29,6 +35,17 @@ const ImageEvents = [
         name: 'onHide',
         description: 'Triggered when the preview overlay is hidden.',
         arguments: []
+    },
+    {
+        name: 'onError',
+        description: 'Triggered when image has an error loading.',
+        arguments: [
+            {
+                name: 'event',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
     }
 ];
 

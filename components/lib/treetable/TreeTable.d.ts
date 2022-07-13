@@ -41,8 +41,8 @@ type TreeTableExpandedKeysType = {
 }
 
 interface TreeTableSortMeta {
-    sortField: string;
-    sortOrder: TreeTableSortOrderType;
+    field: string;
+    order: TreeTableSortOrderType;
 }
 
 interface TreeTableFilterMetaData {
@@ -95,7 +95,7 @@ interface TreeTableColReorderParams {
     columns: React.ReactElement;
 }
 
-export interface TreeTableProps {
+export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onContextMenu' | 'onSelect' | 'ref' | 'value'> {
     id?: string;
     value?: TreeNode[];
     header?: React.ReactNode;
@@ -153,6 +153,7 @@ export interface TreeTableProps {
     filterMode?: TreeTableFilterModeType;
     filterDelay?: number;
     filterLocale?: string;
+    rowHover?: boolean;
     showGridlines?: boolean;
     stripedRows?: boolean;
     rowClassName?(data: TreeNode): object;
@@ -170,6 +171,7 @@ export interface TreeTableProps {
     onColumnResizeEnd?(e: TreeTableColumnResizeEndParams): void;
     onColReorder?(e: TreeTableColReorderParams): void;
     onContextMenu?(e: TreeTableEventParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class TreeTable extends React.Component<TreeTableProps, any> {

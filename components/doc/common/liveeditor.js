@@ -4,7 +4,7 @@ import { CodeHighlight } from './codehighlight';
 import { TabPanel } from '../../lib/tabview/TabView';
 import pkg from '../../../package.json';
 
-const vPrimeReact = '^7.0.0'; // latest
+const vPrimeReact = '^8.0.0'; // latest
 
 let currentProps = {};
 
@@ -32,7 +32,7 @@ ReactDOM.render(<${name} />, rootElement);`,
         <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css" />
         <link rel="stylesheet" href="https://unpkg.com/primereact/resources/themes/lara-light-indigo/theme.css" />
         <link rel="stylesheet" href="https://unpkg.com/primereact/resources/primereact.min.css" />
-        <link rel="stylesheet" href="https://unpkg.com/primeflex@2.0.0/primeflex.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.2/primeflex.min.css" />
 
         <!-- Dependencies -->
         <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
@@ -77,14 +77,21 @@ export const useLiveEditorTabs = (props) => {
         )
     });
 
-    let tabs = Object.entries(props.sources).map(([key, value]) => {
+    let ordered_sources = {
+        'hooks': { ...props.sources.hooks },
+        'class': { ...props.sources.class },
+        'ts': { ...props.sources.ts },
+        'browser': {...props.sources.browser}
+    }
+
+    let tabs = Object.entries(ordered_sources).map(([key, value]) => {
         const { content: _c, imports: _i } = value;
         const content = key === 'browser' ? contents(props.name, _c, _i).browser : _c;
 
         return (
             <TabPanel key={key} header={value.tabName}>
                 {/* eslint-disable */}
-                <a style={{ color: 'var(--primary-color)', cursor: 'pointer' }} className="p-d-inline-block p-mb-1" onClick={() => liveEditor.postSandboxParameters(key)}>
+                <a style={{ color: 'var(--primary-color)', cursor: 'pointer' }} className="inline-block mb-1" onClick={() => liveEditor.postSandboxParameters(key)}>
                     <span>Edit in CodeSandbox</span>
                 </a>
                 {/* eslint-enable */}

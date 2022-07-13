@@ -1,41 +1,29 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import * as React from 'react';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export class Badge extends Component {
+export const Badge = React.memo(React.forwardRef((props, ref) => {
+    const otherProps = ObjectUtils.findDiffKeys(props, Badge.defaultProps);
+    const className = classNames('p-badge p-component', {
+        'p-badge-no-gutter': ObjectUtils.isNotEmpty(props.value) && String(props.value).length === 1,
+        'p-badge-dot': ObjectUtils.isEmpty(props.value),
+        'p-badge-lg': props.size === 'large',
+        'p-badge-xl': props.size === 'xlarge',
+        [`p-badge-${props.severity}`]: props.severity !== null
+    }, props.className);
 
-    static defaultProps = {
-        value: null,
-        severity: null,
-        size: null,
-        style: null,
-        className: null
-    }
+    return (
+        <span className={className} style={props.style} {...otherProps}>
+            {props.value}
+        </span>
+    )
+}));
 
-    static propTypes = {
-        value: PropTypes.any,
-        severity: PropTypes.string,
-        size: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.string
-    };
-
-    render() {
-        const badgeClassName = classNames('p-badge p-component', {
-            'p-badge-no-gutter': this.props.value && String(this.props.value).length === 1,
-            'p-badge-dot': !this.props.value,
-            'p-badge-lg': this.props.size === 'large',
-            'p-badge-xl': this.props.size === 'xlarge',
-            'p-badge-info': this.props.severity === 'info',
-            'p-badge-success': this.props.severity === 'success',
-            'p-badge-warning': this.props.severity === 'warning',
-            'p-badge-danger': this.props.severity === 'danger'
-        }, this.props.className);
-
-        return (
-            <span className={badgeClassName} style={this.props.style}>
-                {this.props.value}
-            </span>
-        );
-    }
+Badge.displayName = 'Badge';
+Badge.defaultProps = {
+    __TYPE: 'Badge',
+    value: null,
+    severity: null,
+    size: null,
+    style: null,
+    className: null
 }

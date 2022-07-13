@@ -231,7 +231,7 @@ const TreeTableProps = [
         name: 'rowClassName',
         type: 'function',
         default: 'null',
-        description: `Function that takes the row data and returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.`
+        description: `Function that takes the row data and returns an object in "&#123;'styleclass' : condition&#125;" format to define a class name for a particular row.`
     },
     {
         name: 'loading',
@@ -334,6 +334,12 @@ const TreeTableProps = [
         type: 'string',
         default: 'No records found',
         description: 'Text to display when there is no data.'
+    },
+    {
+        name: 'rowHover',
+        type: 'boolean',
+        default: 'false',
+        description: 'When enabled, background of the rows change on hover..'
     },
     {
         name: 'showGridlines',

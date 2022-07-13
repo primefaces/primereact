@@ -55,6 +55,7 @@ export interface MentionProps {
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class Mention extends React.Component<MentionProps, any> { }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from "../utils";
+import { IconType } from '../utils';
 
 type ConfirmPopupTemplateType = React.ReactNode | ((options: ConfirmPopupOptions) => React.ReactNode);
 
@@ -20,6 +20,7 @@ interface ConfirmPopupOptions {
 }
 
 export interface ConfirmPopupProps {
+    tagKey?: string;
     target?: HTMLElement;
     visible?: boolean;
     message?: ConfirmPopupTemplateType;
@@ -40,6 +41,7 @@ export interface ConfirmPopupProps {
     onHide?(result: string): void;
     accept?(): void;
     reject?(): void;
+    children?: React.ReactNode;
 }
 
 interface ConfirmPopupReturn {
@@ -47,6 +49,8 @@ interface ConfirmPopupReturn {
     hide(): void;
 }
 
-export declare class ConfirmPopup extends React.Component<ConfirmPopupProps, any> { }
+export declare class ConfirmPopup extends React.Component<ConfirmPopupProps, any> {
+    public confirm(props?: ConfirmPopupProps): void;
+}
 
 export declare function confirmPopup(props: ConfirmPopupProps): ConfirmPopupReturn;

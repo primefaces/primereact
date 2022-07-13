@@ -1,46 +1,29 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
+import { classNames } from '../utils/Utils';
 
-class ColorPickerPanelComponent extends Component {
+export const ColorPickerPanel = React.forwardRef((props, ref) => {
 
-    static defaultProps = {
-        appendTo: null,
-        inline: false,
-        disabled: false,
-        onClick: null
-    }
-
-    static propTypes = {
-        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        inline: PropTypes.bool,
-        disabled: PropTypes.bool,
-        onClick: PropTypes.func
-    }
-
-    renderElement() {
-        let className = classNames('p-colorpicker-panel', {
-            'p-colorpicker-overlay-panel': !this.props.inline,
-            'p-disabled': this.props.disabled
+    const createElement = () => {
+        const className = classNames('p-colorpicker-panel', {
+            'p-colorpicker-overlay-panel': !props.inline,
+            'p-disabled': props.disabled
         });
 
         return (
-            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
-                unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
-                <div ref={this.props.forwardRef} className={className} onClick={this.props.onClick}>
-                    {this.props.children}
+            <CSSTransition nodeRef={ref} classNames="p-connected-overlay" in={props.in} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
+                unmountOnExit onEnter={props.onEnter} onEntered={props.onEntered} onExit={props.onExit} onExited={props.onExited}>
+                <div ref={ref} className={className} onClick={props.onClick}>
+                    {props.children}
                 </div>
             </CSSTransition>
-        );
+        )
     }
 
-    render() {
-        let element = this.renderElement();
+    const element = createElement();
 
-        return this.props.inline ? element : <Portal element={element} appendTo={this.props.appendTo} />;
-    }
-}
+    return props.inline ? element : <Portal element={element} appendTo={props.appendTo} />;
+});
 
-export const ColorPickerPanel = React.forwardRef((props, ref) => <ColorPickerPanelComponent forwardRef={ref} {...props} />);
+ColorPickerPanel.displayName = 'ColorPickerPanel';

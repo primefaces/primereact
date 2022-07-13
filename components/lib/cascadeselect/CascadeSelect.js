@@ -1,222 +1,137 @@
-import React, { Component, createRef } from 'react';
-import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames, ConnectedOverlayScrollHandler, ZIndexUtils } from '../utils/Utils';
+import * as React from 'react';
+import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { CascadeSelectSub } from './CascadeSelectSub';
+import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import PrimeReact from '../api/Api';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { CascadeSelectSub } from './CascadeSelectSub';
 
-export class CascadeSelect extends Component {
+export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const inputRef = React.useRef(null);
+    const labelRef = React.useRef(null);
+    const dirty = React.useRef(false);
+    const selectionPath = React.useRef(null);
 
-    static defaultProps = {
-        id: null,
-        inputRef: null,
-        style: null,
-        className: null,
-        value: null,
-        name: null,
-        options: null,
-        optionLabel: null,
-        optionValue: null,
-        optionGroupLabel: null,
-        optionGroupChildren: null,
-        placeholder: null,
-        itemTemplate: null,
-        disabled: false,
-        dataKey: null,
-        inputId: null,
-        tabIndex: null,
-        ariaLabelledBy: null,
-        appendTo: null,
-        transitionOptions: null,
-        dropdownIcon: 'pi pi-chevron-down',
-        onChange: null,
-        onGroupChange: null,
-        onBeforeShow: null,
-        onBeforeHide: null,
-        onShow: null,
-        onHide: null
-    };
+    const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
+        target: elementRef, overlay: overlayRef, listener: (event, { valid }) => {
+            valid && hide();
+        }, when: overlayVisibleState
+    });
 
-    static propTypes = {
-        id: PropTypes.string,
-        inputRef: PropTypes.any,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        value: PropTypes.any,
-        name: PropTypes.string,
-        options: PropTypes.array,
-        optionLabel: PropTypes.string,
-        optionValue: PropTypes.string,
-        optionGroupLabel: PropTypes.string,
-        optionGroupChildren: PropTypes.array,
-        placeholder: PropTypes.string,
-        itemTemplate: PropTypes.any,
-        disabled: PropTypes.bool,
-        dataKey: PropTypes.string,
-        inputId: PropTypes.string,
-        tabIndex: PropTypes.number,
-        ariaLabelledBy: PropTypes.string,
-        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        transitionOptions: PropTypes.object,
-        dropdownIcon: PropTypes.string,
-        onChange: PropTypes.func,
-        onGroupChange: PropTypes.func,
-        onBeforeShow: PropTypes.func,
-        onBeforeHide: PropTypes.func,
-        onShow: PropTypes.func,
-        onHide: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            focused: false,
-            overlayVisible: false
-        };
-
-        this.dirty = false;
-        this.selectionPath = null;
-        this.overlayRef = createRef();
-        this.inputRef = createRef(this.props.inputRef);
-
-        this.hide = this.hide.bind(this);
-        this.onClick = this.onClick.bind(this);
-        this.onInputFocus = this.onInputFocus.bind(this);
-        this.onInputBlur = this.onInputBlur.bind(this);
-        this.onInputKeyDown = this.onInputKeyDown.bind(this);
-        this.onOverlayEnter = this.onOverlayEnter.bind(this);
-        this.onOverlayEntered = this.onOverlayEntered.bind(this);
-        this.onOverlayExit = this.onOverlayExit.bind(this);
-        this.onOverlayExited = this.onOverlayExited.bind(this);
-        this.onOptionSelect = this.onOptionSelect.bind(this);
-        this.onOptionGroupSelect = this.onOptionGroupSelect.bind(this);
-        this.onPanelClick = this.onPanelClick.bind(this);
-    }
-
-    onOptionSelect(event) {
-        if (this.props.onChange) {
-            this.props.onChange({
+    const onOptionSelect = (event) => {
+        if (props.onChange) {
+            props.onChange({
                 originalEvent: event,
                 value: event.value
             })
         }
 
-        this.updateSelectionPath();
-        this.hide();
-        this.inputRef.current.focus();
+        updateSelectionPath();
+        hide();
+        DomHandler.focus(inputRef.current);
     }
 
-    onOptionGroupSelect(event) {
-        this.dirty = true;
-
-        if (this.props.onGroupChange) {
-            this.props.onGroupChange(event);
-        }
+    const onOptionGroupSelect = (event) => {
+        dirty.current = true;
+        props.onGroupChange && props.onGroupChange(event);
     }
 
-    getOptionLabel(option) {
-        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option;
+    const getOptionLabel = (option) => {
+        const label = props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option;
+        return label || option;
     }
 
-    getOptionValue(option) {
-        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : option;
+    const getOptionValue = (option) => {
+        return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option;
     }
 
-    getOptionGroupChildren(optionGroup, level) {
-        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupChildren[level]);
+    const getOptionGroupChildren = (optionGroup, level) => {
+        return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupChildren[level]);
     }
 
-    isOptionGroup(option, level) {
-        return Object.prototype.hasOwnProperty.call(option, this.props.optionGroupChildren[level]);
+    const isOptionGroup = (option, level) => {
+        return Object.prototype.hasOwnProperty.call(option, props.optionGroupChildren[level]);
     }
 
-    updateSelectionPath() {
+    const updateSelectionPath = () => {
         let path;
-        if (this.props.value != null && this.props.options) {
-            for (let option of this.props.options) {
-                path = this.findModelOptionInGroup(option, 0);
+        if (props.value != null && props.options) {
+            for (let option of props.options) {
+                path = findModelOptionInGroup(option, 0);
                 if (path) {
                     break;
                 }
             }
         }
 
-        this.selectionPath = path;
+        selectionPath.current = path;
     }
 
-    findModelOptionInGroup(option, level) {
-        if (this.isOptionGroup(option, level)) {
+    const findModelOptionInGroup = (option, level) => {
+        if (isOptionGroup(option, level)) {
             let selectedOption;
-            for (let childOption of this.getOptionGroupChildren(option, level)) {
-                selectedOption = this.findModelOptionInGroup(childOption, level + 1);
+            for (let childOption of getOptionGroupChildren(option, level)) {
+                selectedOption = findModelOptionInGroup(childOption, level + 1);
                 if (selectedOption) {
                     selectedOption.unshift(option);
                     return selectedOption;
                 }
             }
         }
-        else if ((ObjectUtils.equals(this.props.value, this.getOptionValue(option), this.props.dataKey))) {
+        else if ((ObjectUtils.equals(props.value, getOptionValue(option), props.dataKey))) {
             return [option];
         }
 
         return null;
     }
 
-    onClick(event) {
-        if (this.props.disabled) {
+    const onClick = (event) => {
+        if (props.disabled) {
             return;
         }
 
-        const overlay = this.overlayRef ? this.overlayRef.current : null;
-        if (!overlay || !overlay.contains(event.target)) {
-            this.inputRef.current.focus();
-
-            if (this.state.overlayVisible) {
-                this.hide();
-            }
-            else {
-                this.show();
-            }
+        if (!overlayRef.current || !overlayRef.current.contains(event.target)) {
+            DomHandler.focus(inputRef.current);
+            overlayVisibleState ? hide() : show();
         }
     }
 
-    onInputFocus() {
-        this.setState({ focused: true });
+    const onInputFocus = () => {
+        setFocusedState(true);
     }
 
-    onInputBlur() {
-        this.setState({ focused: false });
+    const onInputBlur = () => {
+        setFocusedState(false);
     }
 
-    onInputKeyDown(event) {
+    const onInputKeyDown = (event) => {
         switch (event.which) {
             //down
             case 40:
-                if (this.state.overlayVisible) {
-                    DomHandler.findSingle(this.overlayRef.current, '.p-cascadeselect-item').children[0].focus();
+                if (overlayVisibleState) {
+                    DomHandler.findSingle(overlayRef.current, '.p-cascadeselect-item').children[0].focus();
                 }
-                else if (event.altKey && this.props.options && this.props.options.length) {
-                    this.show();
+                else if (event.altKey && props.options && props.options.length) {
+                    show();
                 }
                 event.preventDefault();
                 break;
 
             //space
             case 32:
-                if (this.state.overlayVisible)
-                    this.hide();
-                else
-                    this.show();
+                overlayVisibleState ? hide() : show();
 
                 event.preventDefault();
                 break;
 
             //tab
             case 9:
-                this.hide();
+                hide();
                 break;
 
             default:
@@ -224,229 +139,167 @@ export class CascadeSelect extends Component {
         }
     }
 
-    onPanelClick(event) {
+    const onPanelClick = (event) => {
         OverlayService.emit('overlay-click', {
             originalEvent: event,
-            target: this.container
+            target: elementRef.current
         });
     }
 
-    show() {
-        if (this.props.onBeforeShow) {
-            this.props.onBeforeShow();
-        }
-        this.setState({ overlayVisible: true });
+    const show = () => {
+        props.onBeforeShow && props.onBeforeShow();
+        setOverlayVisibleState(true);
     }
 
-    hide() {
-        if (this.props.onBeforeHide) {
-            this.props.onBeforeHide();
-        }
-        this.setState({ overlayVisible: false }, () => {
-            this.inputRef.current.focus();
-        });
+    const hide = () => {
+        props.onBeforeHide && props.onBeforeHide();
+        setOverlayVisibleState(false);
+        DomHandler.focus(inputRef.current);
     }
 
-    onOverlayEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
-        this.alignOverlay();
+    const onOverlayEnter = () => {
+        ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+        alignOverlay();
     }
 
-    onOverlayEntered() {
-        this.bindOutsideClickListener();
-        this.bindScrollListener();
-        this.bindResizeListener();
-
-        this.props.onShow && this.props.onShow();
+    const onOverlayEntered = () => {
+        bindOverlayListener();
+        props.onShow && props.onShow();
     }
 
-    onOverlayExit() {
-        this.unbindOutsideClickListener();
-        this.unbindScrollListener();
-        this.unbindResizeListener();
-        this.dirty = false;
+    const onOverlayExit = () => {
+        unbindOverlayListener();
+        dirty.current = false;
     }
 
-    onOverlayExited() {
-        ZIndexUtils.clear(this.overlayRef.current);
+    const onOverlayExited = () => {
+        ZIndexUtils.clear(overlayRef.current);
 
-        this.props.onHide && this.props.onHide();
+        props.onHide && props.onHide();
     }
 
-    alignOverlay() {
-        DomHandler.alignOverlay(this.overlayRef.current, this.label.parentElement, this.props.appendTo || PrimeReact.appendTo);
+    const alignOverlay = () => {
+        DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
     }
 
-    bindOutsideClickListener() {
-        if (!this.outsideClickListener) {
-            this.outsideClickListener = (event) => {
-                if (this.state.overlayVisible && this.isOutsideClicked(event)) {
-                    this.hide();
-                }
-            };
-            document.addEventListener('click', this.outsideClickListener);
-        }
-    }
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(inputRef, props.inputRef);
+    }, [inputRef, props.inputRef]);
 
-    unbindOutsideClickListener() {
-        if (this.outsideClickListener) {
-            document.removeEventListener('click', this.outsideClickListener);
-            this.outsideClickListener = null;
-        }
-    }
+    useUpdateEffect(() => {
+        updateSelectionPath();
+    }, [props.value]);
 
-    bindScrollListener() {
-        if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
-                if (this.state.overlayVisible) {
-                    this.hide();
-                }
-            });
-        }
+    useUnmountEffect(() => {
+        ZIndexUtils.clear(overlayRef.current);
+    });
 
-        this.scrollHandler.bindScrollListener();
-    }
-
-    unbindScrollListener() {
-        if (this.scrollHandler) {
-            this.scrollHandler.unbindScrollListener();
-        }
-    }
-
-    bindResizeListener() {
-        if (!this.resizeListener) {
-            this.resizeListener = () => {
-                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
-                    this.hide();
-                }
-            };
-            window.addEventListener('resize', this.resizeListener);
-        }
-    }
-
-    unbindResizeListener() {
-        if (this.resizeListener) {
-            window.removeEventListener('resize', this.resizeListener);
-            this.resizeListener = null;
-        }
-    }
-
-    isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target)
-            || (this.overlayRef && this.overlayRef.current.contains(event.target)));
-    }
-
-    updateInputRef() {
-        let ref = this.props.inputRef;
-
-        if (ref) {
-            if (typeof ref === 'function') {
-                ref(this.inputRef.current);
-            }
-            else {
-                ref.current = this.inputRef.current;
-            }
-        }
-    }
-
-    componentDidMount() {
-        this.updateInputRef();
-        this.updateSelectionPath();
-    }
-
-    componentWillUnmount() {
-        this.unbindOutsideClickListener();
-        this.unbindResizeListener();
-
-        if (this.scrollHandler) {
-            this.scrollHandler.destroy();
-            this.scrollHandler = null;
-        }
-
-        ZIndexUtils.clear(this.overlayRef.current);
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.value !== this.props.value) {
-            this.updateSelectionPath();
-        }
-    }
-
-    renderKeyboardHelper() {
-        const value = this.props.value ? this.getOptionLabel(this.props.value) : null;
+    const createKeyboardHelper = () => {
+        const value = props.value ? getOptionLabel(props.value) : undefined;
 
         return (
             <div className="p-hidden-accessible">
-                <input ref={this.inputRef} type="text" id={this.props.inputId} name={this.props.name} defaultValue={value} readOnly disabled={this.props.disabled}
-                    onFocus={this.onInputFocus} onBlur={this.onInputBlur} onKeyDown={this.onInputKeyDown}
-                    tabIndex={this.props.tabIndex} aria-haspopup="listbox" aria-labelledby={this.props.ariaLabelledBy} />
+                <input ref={inputRef} type="text" id={props.inputId} name={props.name} defaultValue={value} readOnly disabled={props.disabled}
+                    onFocus={onInputFocus} onBlur={onInputBlur} onKeyDown={onInputKeyDown}
+                    tabIndex={props.tabIndex} aria-haspopup="listbox" aria-labelledby={props.ariaLabelledBy} />
             </div>
-        );
+        )
     }
 
-    renderLabel() {
-        let label = this.props.value ? this.getOptionLabel(this.props.value) : this.props.placeholder || 'p-emptylabel';
-        let labelClassName = classNames('p-cascadeselect-label ', {
-            'p-placeholder': label === this.props.placeholder,
-            'p-cascadeselect-label-empty': !this.props.value && label === 'p-emptylabel'
+    const createLabel = () => {
+        const label = props.value ? getOptionLabel(props.value) : props.placeholder || 'p-emptylabel';
+        const labelClassName = classNames('p-cascadeselect-label ', {
+            'p-placeholder': label === props.placeholder,
+            'p-cascadeselect-label-empty': !props.value && label === 'p-emptylabel'
         });
 
-        return <span ref={(el) => this.label = el} className={labelClassName}>{label}</span>;
+        return <span ref={labelRef} className={labelClassName}>{label}</span>
     }
 
-    renderDropdownIcon() {
-        const iconClassName = classNames('p-cascadeselect-trigger-icon', this.props.dropdownIcon);
+    const createDropdownIcon = () => {
+        const iconClassName = classNames('p-cascadeselect-trigger-icon', props.dropdownIcon);
 
         return (
-            <div className="p-cascadeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={this.state.overlayVisible}>
+            <div className="p-cascadeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState}>
                 <span className={iconClassName}></span>
             </div>
-        );
+        )
     }
 
-    renderOverlay() {
+    const createOverlay = () => {
         const overlay = (
-            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
-                unmountOnExit onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
-                <div ref={this.overlayRef} className="p-cascadeselect-panel p-component" onClick={this.onPanelClick}>
+            <CSSTransition nodeRef={overlayRef} classNames="p-connected-overlay" in={overlayVisibleState} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
+                unmountOnExit onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited}>
+                <div ref={overlayRef} className="p-cascadeselect-panel p-component" onClick={onPanelClick}>
                     <div className="p-cascadeselect-items-wrapper">
-                        <CascadeSelectSub options={this.props.options} selectionPath={this.selectionPath} className={"p-cascadeselect-items"} optionLabel={this.props.optionLabel}
-                            optionValue={this.props.optionValue} level={0} optionGroupLabel={this.props.optionGroupLabel} optionGroupChildren={this.props.optionGroupChildren}
-                            onOptionSelect={this.onOptionSelect} onOptionGroupSelect={this.onOptionGroupSelect} root template={this.props.itemTemplate} onPanelHide={this.hide} />
+                        <CascadeSelectSub options={props.options} selectionPath={selectionPath.current} className={"p-cascadeselect-items"} optionLabel={props.optionLabel}
+                            optionValue={props.optionValue} level={0} optionGroupLabel={props.optionGroupLabel} optionGroupChildren={props.optionGroupChildren}
+                            onOptionSelect={onOptionSelect} onOptionGroupSelect={onOptionGroupSelect} root template={props.itemTemplate} onPanelHide={hide} />
                     </div>
                 </div>
             </CSSTransition>
         );
 
-        return <Portal element={overlay} appendTo={this.props.appendTo} />;
+        return <Portal element={overlay} appendTo={props.appendTo} />
     }
 
-    renderElement() {
-        let className = classNames('p-cascadeselect p-component p-inputwrapper', this.props.className, {
-            'p-disabled': this.props.disabled,
-            'p-focus': this.state.focused,
-            'p-inputwrapper-filled': this.props.value,
-            'p-inputwrapper-focus': this.state.focused || this.state.overlayVisible
-        });
+    const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, CascadeSelect.defaultProps);
+        const className = classNames('p-cascadeselect p-component p-inputwrapper', {
+            'p-disabled': props.disabled,
+            'p-focus': focusedState,
+            'p-inputwrapper-filled': props.value,
+            'p-inputwrapper-focus': focusedState || overlayVisibleState
+        }, props.className);
 
-        let keyboardHelper = this.renderKeyboardHelper();
-        let labelElement = this.renderLabel();
-        let dropdownIcon = this.renderDropdownIcon();
-        let overlay = this.renderOverlay();
+        const keyboardHelper = createKeyboardHelper();
+        const labelElement = createLabel();
+        const dropdownIcon = createDropdownIcon();
+        const overlay = createOverlay();
 
         return (
-            <div id={this.props.id} ref={(el) => this.container = el} className={className} style={this.props.style} onClick={this.onClick}>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
                 {keyboardHelper}
                 {labelElement}
                 {dropdownIcon}
                 {overlay}
             </div>
-        );
+        )
     }
 
-    render() {
-        const element = this.renderElement();
+    const element = createElement();
 
-        return element;
-    }
+    return element;
+}));
+
+CascadeSelect.displayName = 'CascadeSelect';
+CascadeSelect.defaultProps = {
+    __TYPE: 'CascadeSelect',
+    id: null,
+    inputRef: null,
+    style: null,
+    className: null,
+    value: null,
+    name: null,
+    options: null,
+    optionLabel: null,
+    optionValue: null,
+    optionGroupLabel: null,
+    optionGroupChildren: null,
+    placeholder: null,
+    itemTemplate: null,
+    disabled: false,
+    dataKey: null,
+    inputId: null,
+    tabIndex: null,
+    ariaLabelledBy: null,
+    appendTo: null,
+    transitionOptions: null,
+    dropdownIcon: 'pi pi-chevron-down',
+    onChange: null,
+    onGroupChange: null,
+    onBeforeShow: null,
+    onBeforeHide: null,
+    onShow: null,
+    onHide: null
 }

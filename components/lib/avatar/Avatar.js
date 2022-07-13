@@ -1,73 +1,52 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import {ObjectUtils, classNames, IconUtils} from '../utils/Utils';
+import * as React from 'react';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export class Avatar extends Component {
+export const Avatar = React.forwardRef((props, ref) => {
 
-    static defaultProps = {
-        label: null,
-        icon: null,
-        image: null,
-        size: 'normal',
-        shape: 'square',
-        style: null,
-        className: null,
-        template: null,
-        imageAlt: 'avatar',
-        onImageError: null,
-        onClick: null
-    }
-
-    static propTypes = {
-        label: PropTypes.string,
-        icon: PropTypes.any,
-        image: PropTypes.string,
-        size: PropTypes.string,
-        shape: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        template: PropTypes.any,
-        imageAlt: PropTypes.string,
-        onImageError: PropTypes.func,
-        onClick: PropTypes.func
-    };
-
-    renderContent() {
-        if (this.props.label) {
-            return <span className="p-avatar-text">{this.props.label}</span>;
+    const createContent = () => {
+        if (props.image) {
+            return <img src={props.image} alt={props.imageAlt} onError={props.onImageError}></img>
         }
-        else if (this.props.icon) {
-            return IconUtils.getJSXIcon(this.props.icon, { className: 'p-avatar-icon' }, { props: this.props });
+        else if (props.label) {
+            return <span className="p-avatar-text">{props.label}</span>
         }
-        else if (this.props.image) {
-            const onError = (e) => {
-                if (this.props.onImageError) {
-                    this.props.onImageError(e);
-                }
-            };
-
-            return <img src={this.props.image} alt={this.props.imageAlt} onError={onError}></img>
+        else if (props.icon) {
+            return IconUtils.getJSXIcon(props.icon, { className: 'p-avatar-icon' }, { props });
         }
 
         return null;
     }
 
-    render() {
-        const containerClassName = classNames('p-avatar p-component', {
-            'p-avatar-image': this.props.image != null,
-            'p-avatar-circle': this.props.shape === 'circle',
-            'p-avatar-lg': this.props.size === 'large',
-            'p-avatar-xl': this.props.size === 'xlarge',
-            'p-avatar-clickable': !!this.props.onClick
-        }, this.props.className);
+    const otherProps = ObjectUtils.findDiffKeys(props, Avatar.defaultProps);
+    const containerClassName = classNames('p-avatar p-component', {
+        'p-avatar-image': props.image != null,
+        'p-avatar-circle': props.shape === 'circle',
+        'p-avatar-lg': props.size === 'large',
+        'p-avatar-xl': props.size === 'xlarge',
+        'p-avatar-clickable': !!props.onClick
+    }, props.className);
 
-        const content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.props) : this.renderContent();
+    const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
-        return (
-            <div className={containerClassName} style={this.props.style} onClick={this.props.onClick}>
-                {content}
-                {this.props.children}
-            </div>
-        );
-    }
+    return (
+        <div className={containerClassName} style={props.style} {...otherProps}>
+            {content}
+            {props.children}
+        </div>
+    )
+});
+
+Avatar.displayName = 'Avatar';
+Avatar.defaultProps = {
+    __TYPE: 'Avatar',
+    label: null,
+    icon: null,
+    image: null,
+    size: 'normal',
+    shape: 'square',
+    style: null,
+    className: null,
+    template: null,
+    imageAlt: 'avatar',
+    onImageError: null
 }

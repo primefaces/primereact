@@ -1,210 +1,115 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { DomHandler, classNames, ConnectedOverlayScrollHandler, ZIndexUtils } from '../utils/Utils';
-import { TieredMenuSub } from './TieredMenuSub';
+import * as React from 'react';
+import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import PrimeReact from '../api/Api';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { TieredMenuSub } from './TieredMenuSub';
 
-export class TieredMenu extends Component {
+export const TieredMenu = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(!props.popup);
+    const menuRef = React.useRef(null)
+    const targetRef = React.useRef(null);
 
-    static defaultProps = {
-        id: null,
-        model: null,
-        popup: false,
-        style: null,
-        className: null,
-        autoZIndex: true,
-        baseZIndex: 0,
-        appendTo: null,
-        transitionOptions: null,
-        onShow: null,
-        onHide: null
-    };
+    const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
+        target: targetRef, overlay: menuRef, listener: (event, { valid }) => {
+            valid && hide(event);
+        }, when: visibleState
+    });
 
-    static propTypes = {
-        id: PropTypes.string,
-        model: PropTypes.array,
-        popup: PropTypes.bool,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        autoZIndex: PropTypes.bool,
-        baseZIndex: PropTypes.number,
-        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        transitionOptions: PropTypes.object,
-        onShow: PropTypes.func,
-        onHide: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            visible: !props.popup
-        };
-
-        this.onEnter = this.onEnter.bind(this);
-        this.onEntered = this.onEntered.bind(this);
-        this.onExit = this.onExit.bind(this);
-        this.onExited = this.onExited.bind(this);
-        this.onPanelClick = this.onPanelClick.bind(this);
-
-        this.menuRef = React.createRef();
-    }
-
-    onPanelClick(event) {
-        if (this.props.popup) {
+    const onPanelClick = (event) => {
+        if (props.popup) {
             OverlayService.emit('overlay-click', {
                 originalEvent: event,
-                target: this.target
+                target: targetRef.current
             });
         }
     }
 
-    toggle(event) {
-        if (this.props.popup) {
-            if (this.state.visible)
-                this.hide(event);
-            else
-                this.show(event);
+    const toggle = (event) => {
+        if (props.popup) {
+            visibleState ? hide(event) : show(event);
         }
     }
 
-    show(event) {
-        this.target = event.currentTarget;
-        let currentEvent = event;
-
-        this.setState({ visible: true }, () => {
-            if (this.props.onShow) {
-                this.props.onShow(currentEvent);
-            }
-        });
+    const show = (event) => {
+        targetRef.current = event.currentTarget;
+        setVisibleState(true);
+        props.onShow && props.onShow(event);
     }
 
-    hide(event) {
-        let currentEvent = event;
-        this.setState({ visible: false }, () => {
-            if (this.props.onHide) {
-                this.props.onHide(currentEvent);
-            }
-        });
+    const hide = (event) => {
+        targetRef.current = event.currentTarget;
+        setVisibleState(false);
+        props.onHide && props.onHide(event);
     }
 
-    onEnter() {
-        if (this.props.autoZIndex) {
-            ZIndexUtils.set('menu', this.menuRef.current, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex['menu']);
-        }
-        DomHandler.absolutePosition(this.menuRef.current, this.target);
-    }
-
-    onEntered() {
-        this.bindDocumentListeners();
-        this.bindScrollListener();
-    }
-
-    onExit() {
-        this.target = null;
-        this.unbindDocumentListeners();
-        this.unbindScrollListener();
-    }
-
-    onExited() {
-        ZIndexUtils.clear(this.menuRef.current);
-    }
-
-    bindDocumentListeners() {
-        this.bindDocumentClickListener();
-        this.bindDocumentResizeListener();
-    }
-
-    unbindDocumentListeners() {
-        this.unbindDocumentClickListener();
-        this.unbindDocumentResizeListener();
-    }
-
-    bindDocumentClickListener() {
-        if (!this.documentClickListener) {
-            this.documentClickListener = (event) => {
-                if (this.props.popup && this.state.visible && this.menuRef.current && !this.menuRef.current.contains(event.target)) {
-                    this.hide(event);
-                }
-            };
-
-            document.addEventListener('click', this.documentClickListener);
-        }
-    }
-
-    unbindDocumentClickListener() {
-        if (this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-            this.documentClickListener = null;
-        }
-    }
-
-    bindDocumentResizeListener() {
-        if (!this.documentResizeListener) {
-            this.documentResizeListener = (event) => {
-                if (this.state.visible && !DomHandler.isTouchDevice()) {
-                    this.hide(event);
-                }
-            };
-
-            window.addEventListener('resize', this.documentResizeListener);
-        }
-    }
-
-    unbindDocumentResizeListener() {
-        if (this.documentResizeListener) {
-            window.removeEventListener('resize', this.documentResizeListener);
-            this.documentResizeListener = null;
-        }
-    }
-
-    bindScrollListener() {
-        if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, (event) => {
-                if (this.state.visible) {
-                    this.hide(event);
-                }
-            });
+    const onEnter = () => {
+        if (props.autoZIndex) {
+            ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
         }
 
-        this.scrollHandler.bindScrollListener();
+        DomHandler.absolutePosition(menuRef.current, targetRef.current);
     }
 
-    unbindScrollListener() {
-        if (this.scrollHandler) {
-            this.scrollHandler.unbindScrollListener();
-        }
+    const onEntered = () => {
+        bindOverlayListener();
     }
 
-    componentWillUnmount() {
-        this.unbindDocumentListeners();
-        if (this.scrollHandler) {
-            this.scrollHandler.destroy();
-            this.scrollHandler = null;
-        }
-
-        ZIndexUtils.clear(this.menuRef.current);
+    const onExit = () => {
+        targetRef.current = null;
+        unbindOverlayListener();
     }
 
-    renderElement() {
-        const className = classNames('p-tieredmenu p-component', { 'p-tieredmenu-overlay': this.props.popup }, this.props.className);
+    const onExited = () => {
+        ZIndexUtils.clear(menuRef.current);
+    }
+
+    useUnmountEffect(() => {
+        ZIndexUtils.clear(menuRef.current);
+    });
+
+    React.useImperativeHandle(ref, () => ({
+        toggle,
+        show,
+        hide,
+        ...props
+    }));
+
+    const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, TieredMenu.defaultProps);
+        const className = classNames('p-tieredmenu p-component', {
+            'p-tieredmenu-overlay': props.popup
+        }, props.className);
 
         return (
-            <CSSTransition nodeRef={this.menuRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
-                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
-                <div ref={this.menuRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
-                    <TieredMenuSub model={this.props.model} root popup={this.props.popup} />
+            <CSSTransition nodeRef={menuRef} classNames="p-connected-overlay" in={visibleState} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
+                unmountOnExit onEnter={onEnter} onEntered={onEntered} onExit={onExit} onExited={onExited}>
+                <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
+                    <TieredMenuSub menuProps={props} model={props.model} root popup={props.popup} />
                 </div>
             </CSSTransition>
-        );
+        )
     }
 
-    render() {
-        const element = this.renderElement();
+    const element = createElement();
 
-        return this.props.popup ? <Portal element={element} appendTo={this.props.appendTo} /> : element;
-    }
+    return props.popup ? <Portal element={element} appendTo={props.appendTo} /> : element;
+}));
+
+TieredMenu.displayName = 'TieredMenu';
+TieredMenu.defaultProps = {
+    __TYPE: 'TieredMenu',
+    id: null,
+    model: null,
+    popup: false,
+    style: null,
+    className: null,
+    autoZIndex: true,
+    baseZIndex: 0,
+    appendTo: null,
+    transitionOptions: null,
+    onShow: null,
+    onHide: null
 }

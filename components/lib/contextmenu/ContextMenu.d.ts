@@ -16,6 +16,7 @@ export interface ContextMenuProps {
     transitionOptions?: CSSTransitionProps;
     onShow?(e: React.SyntheticEvent): void;
     onHide?(e: React.SyntheticEvent): void;
+    children?: React.ReactNode;
 }
 
 export declare class ContextMenu extends React.Component<ContextMenuProps, any> {

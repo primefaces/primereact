@@ -1,18 +1,16 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
-export class DividerDoc extends Component {
+const DividerDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
@@ -85,8 +83,8 @@ export class DividerDemo extends Component {
                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
                     <Divider align="left">
-                        <div className="p-d-inline-flex p-ai-center">
-                            <i className="pi pi-user p-mr-2"></i>
+                        <div className="inline-flex align-items-center">
+                            <i className="pi pi-user mr-2"></i>
                             <b>Icon</b>
                         </div>
                     </Divider>
@@ -114,7 +112,7 @@ export class DividerDemo extends Component {
 
                 <div className="card">
                     <h5>Vertical</h5>
-                    <div className="p-d-flex">
+                    <div className="flex">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                         ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -135,26 +133,26 @@ export class DividerDemo extends Component {
 
                 <div className="card">
                     <h5>Vertical with Content</h5>
-                    <div className="p-grid">
-                        <div className="p-col-5 p-d-flex p-ai-center p-jc-center">
+                    <div className="grid">
+                        <div className="col-5 flex align-items-center justify-content-center">
                             <div className="p-fluid">
-                                <div className="p-field">
+                                <div className="field">
                                     <label htmlFor="username">Username</label>
                                     <InputText id="username" type="text" />
                                 </div>
-                                <div className="p-field">
+                                <div className="field">
                                     <label htmlFor="password">Password</label>
                                     <InputText id="password" type="password" />
                                 </div>
                                 <Button label="Login"></Button>
                             </div>
                         </div>
-                        <div className="p-col-2">
+                        <div className="col-2">
                             <Divider layout="vertical">
                                 <b>OR</b>
                             </Divider>
                         </div>
-                        <div className="p-col-5 p-d-flex p-ai-center p-jc-center">
+                        <div className="col-5 flex align-items-center justify-content-center">
                             <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Button>
                         </div>
                     </div>
@@ -165,10 +163,10 @@ export class DividerDemo extends Component {
     }
 }
 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React from 'react';
 import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
@@ -241,8 +239,8 @@ const DividerDemo = () => {
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
                 <Divider align="left">
-                    <div className="p-d-inline-flex p-ai-center">
-                        <i className="pi pi-user p-mr-2"></i>
+                    <div className="inline-flex align-items-center">
+                        <i className="pi pi-user mr-2"></i>
                         <b>Icon</b>
                     </div>
                 </Divider>
@@ -270,7 +268,7 @@ const DividerDemo = () => {
 
             <div className="card">
                 <h5>Vertical</h5>
-                <div className="p-d-flex">
+                <div className="flex">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -291,26 +289,26 @@ const DividerDemo = () => {
 
             <div className="card">
                 <h5>Vertical with Content</h5>
-                <div className="p-grid">
-                    <div className="p-col-5 p-d-flex p-ai-center p-jc-center">
+                <div className="grid">
+                    <div className="col-5 flex align-items-center justify-content-center">
                         <div className="p-fluid">
-                            <div className="p-field">
+                            <div className="field">
                                 <label htmlFor="username">Username</label>
                                 <InputText id="username" type="text" />
                             </div>
-                            <div className="p-field">
+                            <div className="field">
                                 <label htmlFor="password">Password</label>
                                 <InputText id="password" type="password" />
                             </div>
                             <Button label="Login"></Button>
                         </div>
                     </div>
-                    <div className="p-col-2">
+                    <div className="col-2">
                         <Divider layout="vertical">
                             <b>OR</b>
                         </Divider>
                     </div>
-                    <div className="p-col-5 p-d-flex p-ai-center p-jc-center">
+                    <div className="col-5 flex align-items-center justify-content-center">
                         <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Button>
                     </div>
                 </div>
@@ -320,10 +318,10 @@ const DividerDemo = () => {
     );
 }
 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React from 'react';
 import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
@@ -396,8 +394,8 @@ const DividerDemo = () => {
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
                 <Divider align="left">
-                    <div className="p-d-inline-flex p-ai-center">
-                        <i className="pi pi-user p-mr-2"></i>
+                    <div className="inline-flex align-items-center">
+                        <i className="pi pi-user mr-2"></i>
                         <b>Icon</b>
                     </div>
                 </Divider>
@@ -425,7 +423,7 @@ const DividerDemo = () => {
 
             <div className="card">
                 <h5>Vertical</h5>
-                <div className="p-d-flex">
+                <div className="flex">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -446,26 +444,26 @@ const DividerDemo = () => {
 
             <div className="card">
                 <h5>Vertical with Content</h5>
-                <div className="p-grid">
-                    <div className="p-col-5 p-d-flex p-ai-center p-jc-center">
+                <div className="grid">
+                    <div className="col-5 flex align-items-center justify-content-center">
                         <div className="p-fluid">
-                            <div className="p-field">
+                            <div className="field">
                                 <label htmlFor="username">Username</label>
                                 <InputText id="username" type="text" />
                             </div>
-                            <div className="p-field">
+                            <div className="field">
                                 <label htmlFor="password">Password</label>
                                 <InputText id="password" type="password" />
                             </div>
                             <Button label="Login"></Button>
                         </div>
                     </div>
-                    <div className="p-col-2">
+                    <div className="col-2">
                         <Divider layout="vertical">
                             <b>OR</b>
                         </Divider>
                     </div>
-                    <div className="p-col-5 p-d-flex p-ai-center p-jc-center">
+                    <div className="col-5 flex align-items-center justify-content-center">
                         <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Button>
                     </div>
                 </div>
@@ -475,14 +473,14 @@ const DividerDemo = () => {
     );
 }
 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/divider/divider.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { Divider } = primereact.divider;
 const { InputText } = primereact.inputtext;
 const { Button } = primereact.button;
@@ -554,8 +552,8 @@ const DividerDemo = () => {
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
                 <Divider align="left">
-                    <div className="p-d-inline-flex p-ai-center">
-                        <i className="pi pi-user p-mr-2"></i>
+                    <div className="inline-flex align-items-center">
+                        <i className="pi pi-user mr-2"></i>
                         <b>Icon</b>
                     </div>
                 </Divider>
@@ -583,7 +581,7 @@ const DividerDemo = () => {
 
             <div className="card">
                 <h5>Vertical</h5>
-                <div className="p-d-flex">
+                <div className="flex">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -604,26 +602,26 @@ const DividerDemo = () => {
 
             <div className="card">
                 <h5>Vertical with Content</h5>
-                <div className="p-grid">
-                    <div className="p-col-5 p-d-flex p-ai-center p-jc-center">
+                <div className="grid">
+                    <div className="col-5 flex align-items-center justify-content-center">
                         <div className="p-fluid">
-                            <div className="p-field">
+                            <div className="field">
                                 <label htmlFor="username">Username</label>
                                 <InputText id="username" type="text" />
                             </div>
-                            <div className="p-field">
+                            <div className="field">
                                 <label htmlFor="password">Password</label>
                                 <InputText id="password" type="password" />
                             </div>
                             <Button label="Login"></Button>
                         </div>
                     </div>
-                    <div className="p-col-2">
+                    <div className="col-2">
                         <Divider layout="vertical">
                             <b>OR</b>
                         </Divider>
                     </div>
-                    <div className="p-col-5 p-d-flex p-ai-center p-jc-center">
+                    <div className="col-5 flex align-items-center justify-content-center">
                         <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Button>
                     </div>
                 </div>
@@ -633,23 +631,21 @@ const DividerDemo = () => {
     );
 }
                 `
-            }
-        };
+        }
     }
 
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                    <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Divider } from 'primereact/divider';
 `}
 </CodeHighlight>
 
-                    <h5>Import via CDN</h5>
+                <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -658,7 +654,7 @@ import { Divider } from 'primereact/divider';
 </CodeHighlight>
 
                 <h5>Getting Started</h5>
-				<p>Divider has two orientations defined with the <i>layout</i> property, default is "horizontal" and the alternative is "vertical".</p>
+                <p>Divider has two orientations defined with the <i>layout</i> property, default is "horizontal" and the alternative is "vertical".</p>
 <CodeHighlight>
 {`
 <div>Content 1</div>
@@ -666,6 +662,7 @@ import { Divider } from 'primereact/divider';
 <div>Content 2</div>
 `}
 </CodeHighlight>
+
                 <h5>Border Style</h5>
                 <p>Style of the border is configured with the <i>type</i> property and supports 3 values; default is "solid" and other possibilities are "dashed" and "dotted".</p>
 <CodeHighlight>
@@ -678,10 +675,9 @@ import { Divider } from 'primereact/divider';
 
                 <h5>Vertical Divider</h5>
                 <p>Vertical divider is enabled by setting the <i>layout</i> property as "vertical".</p>
-
 <CodeHighlight>
 {`
-<div className="p-d-flex">
+<div className="flex">
     <div>Content 1</div>
     <Divider layout="vertical" />
     <div>Content 2</div>
@@ -690,6 +686,7 @@ import { Divider } from 'primereact/divider';
 </div>
 `}
 </CodeHighlight>
+
                 <h5>Content</h5>
                 <p>Any content placed inside is rendered within the boundaries of the divider. In addition, location
                     of the content is configured with the <i>align</i> property. In horizontal layout, alignment options
@@ -700,8 +697,8 @@ import { Divider } from 'primereact/divider';
 <div>Content 1</div>
 
 <Divider align="left">
-    <div className="p-d-inline-flex p-ai-center">
-        <i className="pi pi-user p-mr-2"></i>
+    <div className="inline-flex align-items-center">
+        <i className="pi pi-user mr-2"></i>
         <b>Icon</b>
     </div>
 </Divider>
@@ -721,19 +718,20 @@ import { Divider } from 'primereact/divider';
 <div>Content 4</div>
 `}
 </CodeHighlight>
+
                 <h5>Properties</h5>
-                <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
-				<div className="doc-tablewrapper">
-					<table className="doc-table">
-						<thead>
+                <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
+                <div className="doc-tablewrapper">
+                    <table className="doc-table">
+                        <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Type</th>
                                 <th>Default</th>
                                 <th>Description</th>
                             </tr>
-						</thead>
-						<tbody>
+                        </thead>
+                        <tbody>
                             <tr>
                                 <td>align</td>
                                 <td>string</td>
@@ -753,21 +751,21 @@ import { Divider } from 'primereact/divider';
                                 <td>solid</td>
                                 <td>Border style type, default is "solid" and other options are "dashed" and "dotted".</td>
                             </tr>
-						</tbody>
-					</table>
-				</div>
+                        </tbody>
+                    </table>
+                </div>
 
-				<h5>Styling</h5>
-				<p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-				<div className="doc-tablewrapper">
-					<table className="doc-table">
-						<thead>
+                <h5>Styling</h5>
+                <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                <div className="doc-tablewrapper">
+                    <table className="doc-table">
+                        <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Element</th>
                             </tr>
-						</thead>
-						<tbody>
+                        </thead>
+                        <tbody>
                             <tr>
                                 <td>p-divider</td>
                                 <td>Container element.</td>
@@ -812,19 +810,28 @@ import { Divider } from 'primereact/divider';
                                 <td>p-divider-top</td>
                                 <td>Container element with content aligned to top.</td>
                             </tr>
-						</tbody>
-					</table>
-				</div>
+                        </tbody>
+                    </table>
+                </div>
 
-				<h5>Dependencies</h5>
-				<p>None.</p>
-                    </TabPanel>
+                <h5>Accessibility</h5>
+            <DevelopmentSection>
+                <h6>Screen Reader</h6>
+                <p>Divider uses a <i>separator</i> role with <i>aria-orientation</i> set to either "horizontal" or "vertical".</p>
 
-                    {
-                        useLiveEditorTabs({ name: 'DividerDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+                <h5>Keyboard Support</h5>
+                <p>Component does not include any interactive elements.</p>
+            </DevelopmentSection>
+                <h5>Dependencies</h5>
+                <p>None.</p>
+            </TabPanel>
+
+                {
+                    useLiveEditorTabs({ name: 'DividerDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default DividerDoc;

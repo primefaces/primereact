@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 
-type ToastSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
+type ToastSeverityType = 'success' | 'info' | 'warn' | 'error';
 
 type ToastMessageType = ToastMessage | ToastMessage[];
 
 type ToastPositionType = 'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-center' | 'top-left' | 'top-right' | 'bottom-center' | 'bottom-left' | 'bottom-right';
+
+type ToastAppendToType = 'self' | HTMLElement | undefined | null;
 
 export interface ToastMessage {
     severity?: ToastSeverityType;
@@ -28,13 +30,16 @@ export interface ToastProps {
     baseZIndex?: number;
     position?: ToastPositionType;
     transitionOptions?: CSSTransitionProps;
+    appendTo?: ToastAppendToType;
     onClick?(message: ToastMessage): void;
     onRemove?(message: ToastMessage): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class Toast extends React.Component<ToastProps, any> {
     public show(message: ToastMessageType): void;
     public clear(): void;
+    public replace(message: ToastMessageType): void;
 }

@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
-export class ColorPickerDoc extends Component {
+const ColorPickerDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { ColorPicker } from 'primereact/colorpicker';
 
@@ -40,10 +38,10 @@ export class ColorPickerDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { ColorPicker } from 'primereact/colorpicker';
 
@@ -64,10 +62,10 @@ const ColorPickerDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { ColorPicker } from 'primereact/colorpicker';
 
@@ -88,14 +86,14 @@ const ColorPickerDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/colorpicker/colorpicker.min.js"></script>`,
-                content: `
-const { useEffect, useState, useRef } = React;
+            content: `
+const { useState, useRef } = React;
 const { ColorPicker } = primereact.colorpicker;
 
 const ColorPickerDemo = () => {
@@ -118,7 +116,7 @@ const ColorPickerDemo = () => {
             }
         }
 
-        this.extFiles = {
+        const extFiles = {
             'index.css': `
 .p-colorpicker-panel .p-colorpicker-hue {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAACWCAIAAAC3uvTNAAAA7ElEQVRYw+2YUQqDQAxEh9GWuqV6Be9/JT88RN0VRUuv0ElBwhKY3yF5m90kLKd+mF/975r6geNyjm9Fy0kgqTJ6nqoIdGKczjmPJU5tZxA8wWPL7YOHKhZAlcmTAVVcxSCrMbfgqY/H6JEOoASPe56tgSrqLR7U2zWojwWjJ3jq47HEiZoGTwJxP1RRXw8y9RZfCMhbhTHOVTxXnUFtPJ5rGjzu35y2KfKGQxWT2K4TQL1d2zz6KAH1kRU8wfOXx+37qY3Hct+aDaqot2u7R/wMuDS3qnj0z0HqK4X/+kRNHdfUwFP2Nisqe/sFuUZiVjC9HCUAAAAASUVORK5CYII=)
@@ -128,25 +126,19 @@ const ColorPickerDemo = () => {
 }
             `
         }
-    }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { ColorPicker } from 'primereact/colorpicker';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -154,8 +146,8 @@ import { ColorPicker } from 'primereact/colorpicker';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>ColorPicker is used as a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
+                    <h5>Getting Started</h5>
+                    <p>ColorPicker is used as a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
 
 <CodeHighlight>
 {`
@@ -163,8 +155,8 @@ import { ColorPicker } from 'primereact/colorpicker';
 `}
 </CodeHighlight>
 
-                        <h5>Formats</h5>
-                        <p>Default color format to use in value binding is "hex" and other possible values are "rgb" and "hsb". Example below has 3 colorpickers having default values with different formats.</p>
+                    <h5>Formats</h5>
+                    <p>Default color format to use in value binding is "hex" and other possible values are "rgb" and "hsb". Example below has 3 colorpickers having default values with different formats.</p>
 
 <CodeHighlight>
 {`
@@ -176,201 +168,296 @@ import { ColorPicker } from 'primereact/colorpicker';
 `}
 </CodeHighlight>
 
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>value</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Value of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>defaultColor</td>
+                                    <td>string</td>
+                                    <td>ff0000</td>
+                                    <td>Default color to display when value is null.</td>
+                                </tr>
+                                <tr>
+                                    <td>inline</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether to display as an overlay or not.</td>
+                                </tr>
+                                <tr>
+                                    <td>format</td>
+                                    <td>string</td>
+                                    <td>hex</td>
+                                    <td>Format to use in value binding, supported formats are "hex", "rgb" and "hsb".</td>
+                                </tr>
+                                <tr>
+                                    <td>appendTo</td>
+                                    <td>DOM element | string</td>
+                                    <td>document.body</td>
+                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                </tr>
+                                <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the component should be disabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>tabIndex</td>
+                                    <td>number</td>
+                                    <td>null</td>
+                                    <td>Index of the element in tabbing order.</td>
+                                </tr>
+                                <tr>
+                                    <td>inputId</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Identifier of the focus input to match a label defined for the dropdown.</td>
+                                </tr>
+                                <tr>
+                                    <td>tooltip</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Content of the tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td>tooltipOptions</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                                </tr>
+                                <tr>
+                                    <td>transitionOptions</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>value</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Value of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>defaultColor</td>
-                                        <td>string</td>
-                                        <td>ff0000</td>
-                                        <td>Default color to display when value is null.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>inline</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Whether to display as an overlay or not.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>format</td>
-                                        <td>string</td>
-                                        <td>hex</td>
-                                        <td>Format to use in value binding, supported formats are "hex", "rgb" and "hsb".</td>
-                                    </tr>
-                                    <tr>
-                                        <td>appendTo</td>
-                                        <td>DOM element | string</td>
-                                        <td>document.body</td>
-                                        <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>disabled</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>When present, it specifies that the component should be disabled.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>tabIndex</td>
-                                        <td>number</td>
-                                        <td>null</td>
-                                        <td>Index of the element in tabbing order.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>inputId</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Identifier of the focus input to match a label defined for the dropdown.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>tooltip</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Content of the tooltip.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>tooltipOptions</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>transitionOptions</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onChange</td>
+                                    <td>value: Selected color value whose type depends on the format.</td>
+                                    <td>Callback to invoke when a color is selected.</td>
+                                </tr>
+                                <tr>
+                                    <td>onShow</td>
+                                    <td>-</td>
+                                    <td>Callback to invoke when overlay panel becomes visible.</td>
+                                </tr>
+                                <tr>
+                                    <td>onHide</td>
+                                    <td>-</td>
+                                    <td>Callback to invoke when overlay panel becomes hidden.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onChange</td>
-                                        <td>value: Selected color value whose type depends on the format.</td>
-                                        <td>Callback to invoke when a color is selected.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onShow</td>
-                                        <td>-</td>
-                                        <td>Callback to invoke when overlay panel becomes visible.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onHide</td>
-                                        <td>-</td>
-                                        <td>Callback to invoke when overlay panel becomes hidden.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-colorpicker</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-colorpicker-overlay</td>
+                                    <td>Container element in overlay mode.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-colorpicker-preview </td>
+                                    <td>Preview input in overlay mode.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-colorpicker-panel</td>
+                                    <td>Panel element of the colorpicker.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-colorpicker-content</td>
+                                    <td>Wrapper that contains color and hue sections.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-colorpicker-color-selector</td>
+                                    <td>Color selector container.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-colorpicker-color</td>
+                                    <td>Color element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-colorpicker-color-handle</td>
+                                    <td>Handle of the color element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-colorpicker-hue</td>
+                                    <td>Hue slider.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-colorpicker-hue-handle</td>
+                                    <td>Handle of the hue slider.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-colorpicker</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-colorpicker-overlay</td>
-                                        <td>Container element in overlay mode.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-colorpicker-preview </td>
-                                        <td>Preview input in overlay mode.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-colorpicker-panel</td>
-                                        <td>Panel element of the colorpicker.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-colorpicker-content</td>
-                                        <td>Wrapper that contains color and hue sections.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-colorpicker-color-selector</td>
-                                        <td>Color selector container.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-colorpicker-color</td>
-                                        <td>Color element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-colorpicker-color-handle</td>
-                                        <td>Handle of the color element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-colorpicker-hue</td>
-                                        <td>Hue slider.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-colorpicker-hue-handle</td>
-                                        <td>Handle of the hue slider.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Accessibility</h5>
+                <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>Specification does not cover a color picker <a href="https://github.com/w3c/aria/issues/930">yet</a> and using a semantic native color picker is not consistent across browsers so currently component is not compatible with screen readers.
+                    In the upcoming versions, text fields will be introduced below the slider section to be able to pick a color using accessible text boxes in hsl, rgba and hex formats.</p>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h6>Closed State Keyboard Support of Popup ColorPicker</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the color picker button.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Opens the popup and moves focus to the color slider.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                    {
-                        useLiveEditorTabs({ name: 'ColorPickerDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+                    <h6>Popup Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Selects the color and closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Selects the color and closes the popup.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>Closes the popup, moves focus to the input.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h6>Color Picker Slider</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>arrow keys</i></td>
+                                    <td>Changes color.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h6>Hue Slider</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span className="inline-flex flex-column">
+                                            <i className="mb-1">up arrow</i>
+                                            <i>down arrow</i>
+                                        </span>
+                                    </td>
+                                    <td>Changes hue.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </DevelopmentSection>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
+
+                {
+                    useLiveEditorTabs({ name: 'ColorPickerDemo', sources: sources, extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    )
+})
+
+export default ColorPickerDoc;

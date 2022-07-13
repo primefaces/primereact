@@ -1,113 +1,76 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
+import * as React from 'react';
+import { useUnmountEffect } from '../hooks/Hooks';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export class Chart extends Component {
+export const Chart = React.memo(React.forwardRef((props, ref) => {
+    const chartRef = React.useRef(null);
+    const canvasRef = React.useRef(null);
 
-    static defaultProps = {
-        id: null,
-        type: null,
-        data: null,
-        options: null,
-        plugins: null,
-        width: null,
-        height: null,
-        style: null,
-        className: null
-    }
-
-    static propTypes = {
-        id: PropTypes.string,
-        type: PropTypes.string,
-        data: PropTypes.object,
-        options: PropTypes.object,
-        plugins: PropTypes.array,
-        width: PropTypes.string,
-        height: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.string
-    };
-
-    initChart() {
+    const initChart = () => {
         import('chart.js/auto').then((module) => {
-            if (this.chart) {
-                this.chart.destroy();
-                this.chart = null;
+            if (chartRef.current) {
+                chartRef.current.destroy();
+                chartRef.current = null;
             }
 
-            if (module && module.default) {
-                this.chart = new module.default(this.canvas, {
-                    type: this.props.type,
-                    data: this.props.data,
-                    options: this.props.options,
-                    plugins: this.props.plugins
-                });
+            const configuration = {
+                type: props.type,
+                data: props.data,
+                options: props.options,
+                plugins: props.plugins
+            };
+
+            if (module) {
+                if (module.default) {
+                    chartRef.current = new module.default(canvasRef.current, configuration);
+                } else {
+                    chartRef.current = new module(canvasRef.current, configuration);
+                }
             }
         });
     }
 
-    getCanvas() {
-        return this.canvas;
-    }
+    React.useImperativeHandle(ref, () => ({
+        getCanvas: () => canvasRef.current,
+        getChart: () => chartRef.current,
+        getBase64Image: () => chartRef.current.toBase64Image(),
+        generateLegend: () => chartRef.current && chartRef.current.generateLegend(),
+        refresh: () => chartRef.current && chartRef.current.update(),
+        ...props
+    }));
 
-    getChart() {
-        return this.chart;
-    }
+    React.useEffect(() => {
+        initChart();
+    });
 
-    getBase64Image() {
-        return this.chart.toBase64Image();
-    }
-
-    generateLegend() {
-        if(this.chart) {
-            this.chart.generateLegend();
+    useUnmountEffect(() => {
+        if (chartRef.current) {
+            chartRef.current.destroy();
+            chartRef.current = null;
         }
-    }
+    });
 
-    refresh() {
-        if(this.chart) {
-            this.chart.update();
-        }
-    }
+    const otherProps = ObjectUtils.findDiffKeys(props, Chart.defaultProps);
+    const className = classNames('p-chart', props.className);
+    const style = Object.assign({ width: props.width, height: props.height }, props.style);
 
-    reinit() {
-        this.initChart();
-    }
+    return (
+        <div id={props.id} style={style} className={className} {...otherProps}>
+            <canvas ref={canvasRef} width={props.width} height={props.height}></canvas>
+        </div>
+    );
+}), (prevProps, nextProps) => prevProps.data === nextProps.data && prevProps.options === nextProps.options && prevProps.type === nextProps.type);
 
-    shouldComponentUpdate(nextProps) {
-        if (nextProps.data === this.props.data && nextProps.options === this.props.options && nextProps.type === this.props.type) {
-            return false;
-        }
-
-        return true;
-    }
-
-    componentDidMount() {
-        this.initChart();
-    }
-
-    componentDidUpdate() {
-        this.reinit();
-    }
-
-    componentWillUnmount() {
-        if (this.chart) {
-            this.chart.destroy();
-            this.chart = null;
-        }
-    }
-
-    render() {
-        let className = classNames('p-chart', this.props.className),
-            style = Object.assign({
-                width: this.props.width,
-                height: this.props.height
-            }, this.props.style);
-
-        return (
-            <div id={this.props.id} style={style} className={className}>
-                <canvas ref={(el) => {this.canvas = el;}} width={this.props.width} height={this.props.height}></canvas>
-            </div>
-        );
-    }
+Chart.displayName = 'Chart';
+Chart.defaultProps = {
+    __TYPE: 'Chart',
+    id: null,
+    type: null,
+    data: null,
+    options: null,
+    plugins: null,
+    width: null,
+    height: null,
+    style: null,
+    className: null
 }

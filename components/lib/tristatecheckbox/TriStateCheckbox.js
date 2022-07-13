@@ -1,160 +1,99 @@
-import React, { Component, createRef } from 'react';
-import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
-import { tip } from '../tooltip/Tooltip';
+import * as React from 'react';
+import { Tooltip } from '../tooltip/Tooltip';
+import { ariaLabel } from '../api/Api';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export class TriStateCheckbox extends Component {
+export const TriStateCheckbox = React.memo(React.forwardRef((props, ref) => {
+    const [focusedState, setFocusedState] = React.useState(false);
+    const elementRef = React.useRef(null);
 
-    static defaultProps = {
-        id: null,
-        inputRef: null,
-        inputId: null,
-        value: null,
-        name: null,
-        style: null,
-        className: null,
-        disabled: false,
-        tooltip: null,
-        tooltipOptions: null,
-        ariaLabelledBy: null,
-        onChange: null
-    };
-
-    static propTypes = {
-        id: PropTypes.string,
-        inputRef: PropTypes.any,
-        inputId: PropTypes.string,
-        value: PropTypes.bool,
-        name: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        disabled: PropTypes.bool,
-        tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object,
-        ariaLabelledBy: PropTypes.string,
-        onChange: PropTypes.func
-    }
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            focused: false
-        };
-
-        this.onClick = this.onClick.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
-
-        this.inputRef = createRef(this.props.inputRef);
-    }
-
-    onClick(event) {
-        if (!this.props.disabled) {
-            this.toggle(event);
-            this.inputRef.current.focus();
+    const onClick = (event) => {
+        if (!props.disabled && !props.readOnly) {
+            toggle(event);
         }
     }
 
-    toggle(event) {
+    const toggle = (event) => {
         let newValue;
-        if (this.props.value === null || this.props.value === undefined)
+        if (props.value === null || props.value === undefined)
             newValue = true;
-        else if (this.props.value === true)
+        else if (props.value === true)
             newValue = false;
-        else if (this.props.value === false)
+        else if (props.value === false)
             newValue = null;
 
-        if (this.props.onChange) {
-            this.props.onChange({
+        if (props.onChange) {
+            props.onChange({
                 originalEvent: event,
                 value: newValue,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
+                    name: props.name,
+                    id: props.id,
                     value: newValue
                 }
-            })
+            });
         }
     }
 
-    onFocus() {
-        this.setState({ focused: true });
+    const onFocus = () => {
+        setFocusedState(true);
     }
 
-    onBlur() {
-        this.setState({ focused: false });
+    const onBlur = () => {
+        setFocusedState(false);
     }
 
-    updateInputRef() {
-        let ref = this.props.inputRef;
-
-        if (ref) {
-            if (typeof ref === 'function') {
-                ref(this.inputRef.current);
-            }
-            else {
-                ref.current = this.inputRef.current;
-            }
+    const onKeyDown = (e) => {
+        if (e.keyCode === 32) {
+            toggle(e);
+            e.preventDefault();
         }
     }
 
-    componentDidMount() {
-        this.updateInputRef();
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, TriStateCheckbox.defaultProps);
+    const className = classNames('p-tristatecheckbox p-checkbox p-component', props.className);
+    const boxClassName = classNames('p-checkbox-box', {
+        'p-highlight': (props.value || !props.value) && props.value !== null,
+        'p-disabled': props.disabled,
+        'p-focus': focusedState
+    });
+    const iconClassName = classNames('p-checkbox-icon p-c', {
+        'pi pi-check': props.value === true,
+        'pi pi-times': props.value === false
+    });
+    const ariaValueLabel = props.value ? ariaLabel('trueLabel') : (props.value === false ? ariaLabel('falseLabel') : ariaLabel('nullLabel'));
+    const ariaChecked = props.value ? 'true' : 'false';
 
-        if (this.props.tooltip && !this.props.disabled) {
-            this.renderTooltip();
-        }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
-            if (this.tooltip)
-                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
-            else
-                this.renderTooltip();
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
-        }
-    }
-
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.element,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
-    }
-
-    render() {
-        let containerClass = classNames('p-tristatecheckbox p-checkbox p-component', this.props.className);
-        let boxClass = classNames('p-checkbox-box', {
-            'p-highlight': (this.props.value || !this.props.value) && this.props.value !== null,
-            'p-disabled': this.props.disabled,
-            'p-focus': this.state.focused
-        });
-        let iconClass = classNames('p-checkbox-icon p-c', {
-            'pi pi-check': this.props.value === true,
-            'pi pi-times': this.props.value === false
-        });
-
-        return (
-            <div ref={el => this.element = el} id={this.props.id} className={containerClass} style={this.props.style} onClick={this.onClick}>
-                <div className="p-hidden-accessible">
-                    <input ref={this.inputRef} type="checkbox" aria-labelledby={this.props.ariaLabelledBy} id={this.props.inputId} name={this.props.name}
-                           onFocus={this.onFocus} onBlur={this.onBlur} disabled={this.props.disabled} defaultChecked={this.props.value} />
+    return (
+        <>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
+                <div className={boxClassName} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}
+                    role="checkbox" aria-checked={ariaChecked} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
+                    <span className={iconClassName}></span>
                 </div>
-                <div className={boxClass} ref={el => this.box = el} role="checkbox" aria-checked={this.props.value === true}>
-                    <span className={iconClass}></span>
-                </div>
+                {focusedState && <span className="p-sr-only" aria-live="polite">{ariaValueLabel}</span>}
             </div>
-        );
-    }
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
+    )
+}));
+
+TriStateCheckbox.displayName = 'TriStateCheckbox';
+TriStateCheckbox.defaultProps = {
+    __TYPE: 'TriStateCheckbox',
+    id: null,
+    value: null,
+    style: null,
+    className: null,
+    disabled: false,
+    readOnly: false,
+    tabIndex: "0",
+    'aria-label': null,
+    'aria-labelledby': null,
+    tooltip: null,
+    tooltipOptions: null,
+    onChange: null
 }

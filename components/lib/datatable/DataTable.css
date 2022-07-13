@@ -38,7 +38,8 @@
     table-layout: auto;
 }
 
-.p-datatable-hoverable-rows .p-selectable-row {
+.p-datatable-selectable .p-selectable-row,
+.p-datatable-selectable-cell .p-selectable-cell {
     cursor: pointer;
 }
 
@@ -148,6 +149,10 @@
 
 .p-datatable-virtual-table {
     position: absolute;
+}
+
+.p-datatable-scrollable .p-virtualscroller > .p-datatable-table {
+    display: inline-block; /* For Safari */
 }
 
 /* Resizable */
@@ -312,4 +317,26 @@
     position: sticky;
     top: 0;
     left: 0;
+}
+
+/* Alignment */
+.p-datatable .p-datatable-thead > tr > th.p-align-left > .p-column-header-content,
+.p-datatable .p-datatable-tbody > tr > td.p-align-left,
+.p-datatable .p-datatable-tfoot > tr > td.p-align-left {
+    text-align: left;
+    justify-content: flex-start;
+}
+
+.p-datatable .p-datatable-thead > tr > th.p-align-right > .p-column-header-content,
+.p-datatable .p-datatable-tbody > tr > td.p-align-right,
+.p-datatable .p-datatable-tfoot > tr > td.p-align-right {
+    text-align: right;
+    justify-content: flex-end;
+}
+
+.p-datatable .p-datatable-thead > tr > th.p-align-center > .p-column-header-content,
+.p-datatable .p-datatable-tbody > tr > td.p-align-center,
+.p-datatable .p-datatable-tfoot > tr > td.p-align-center {
+    text-align: center;
+    justify-content: center;
 }

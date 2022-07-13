@@ -1,39 +1,23 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 
-class CalendarPanelComponent extends Component {
+export const CalendarPanel = React.forwardRef((props, ref) => {
 
-    static defaultProps = {
-        appendTo: null,
-        style: null,
-        className: null
-    };
-
-    static propTypes = {
-        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        style: PropTypes.object,
-        className: PropTypes.string
-    };
-
-    renderElement() {
+    const createElement = () => {
         return (
-            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
-                unmountOnExit onEnter={this.props.onEnter} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
-                <div ref={this.props.forwardRef} className={this.props.className} style={this.props.style} onClick={this.props.onClick} onMouseUp={this.props.onMouseUp}>
-                    {this.props.children}
+            <CSSTransition nodeRef={ref} classNames="p-connected-overlay" in={props.in} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
+                unmountOnExit onEnter={props.onEnter} onEntered={props.onEntered} onExit={props.onExit} onExited={props.onExited}>
+                <div ref={ref} className={props.className} style={props.style} onClick={props.onClick} onMouseUp={props.onMouseUp}>
+                    {props.children}
                 </div>
             </CSSTransition>
-        );
+        )
     }
 
-    render() {
-        let element = this.renderElement();
+    const element = createElement();
 
-        return this.props.inline ? element : <Portal element={element} appendTo={this.props.appendTo} />;
-    }
+    return props.inline ? element : <Portal element={element} appendTo={props.appendTo} />;
+});
 
-}
-
-export const CalendarPanel = React.forwardRef((props, ref) => <CalendarPanelComponent forwardRef={ref} {...props} />);
+CalendarPanel.displayName = 'CalendarPanel';

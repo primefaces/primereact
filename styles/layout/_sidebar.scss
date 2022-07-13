@@ -1,20 +1,23 @@
 .layout-sidebar {
     position: fixed;
     left: 0;
-    top: 70px;
-    height: calc(100% - 70px);
+    top: 0;
+    height: 100%;
     background-color: var(--surface-a);
     width: 250px;
-    border-right: 1px solid var(--surface-d);
     user-select: none;
     transition: transform .4s cubic-bezier(.05,.74,.2,.99);
     display: flex;
     flex-direction: column;
+    padding: 1rem 0;
+
+    .logo {
+        display: flex;
+        justify-content: center;
+    }
 
     .layout-sidebar-filter {
-        padding: 1.25rem 1rem;
-        border-bottom: 1px solid var(--surface-d);
-        background-color: var(--surface-a);
+        padding: 2rem;
 
         .layout-sidebar-filter-content {
             width: 100%;
@@ -35,24 +38,19 @@
     }
 
     .layout-menu {
-        padding: 0 1rem;
         overflow-y: auto;
         flex-grow: 1;
+        padding: 0 2rem 2rem 2rem;
 
         .menu-category {
             display: flex;
             align-items: center;
-            color: var(--text-color-secondary);
-            font-weight: 600;
+            color: var(--surface-900);
+            font-weight: 700;
             user-select: none;
-            padding: 1.5rem 0 1rem 0;
+            padding: .5rem .25rem;
             font-size: 0.857rem;
             text-transform: uppercase;
-            border-top: 1px solid var(--surface-d);
-
-            &:first-child {
-                border-top: 0 none;
-            }
 
             .layout-menu-badge {
                 padding: .14rem .5rem;
@@ -66,14 +64,13 @@
             display: flex;
             flex-direction: column;
 
-            a,
-            button {
+            a, button {
                 color: var(--text-color);
                 display: flex;
-                padding: .5rem;
-                border-radius: 3px;
-                cursor: pointer;
+                padding: .5rem .75rem;
+                border-radius: 10px;
                 align-items: center;
+                cursor: pointer;
 
                 .layout-menu-badge {
                     padding: .14rem .5rem;
@@ -82,18 +79,19 @@
                 }
 
                 &:hover {
-                    background-color: var(--surface-c);
+                    background-color: var(--surface-hover);
                 }
 
                 &:focus {
                     z-index: 1;
                     outline: 0 none;
                     transition: box-shadow .2s;
-                    box-shadow: 0 0 0 0.2em $focusBorderColor;
+                    box-shadow: var(--focus-ring);
                 }
 
                 &.router-link-exact-active {
                     font-weight: 700;
+                    color: var(--primary-color);
                 }
             }
 
@@ -130,7 +128,7 @@
                         background-color: transparent;
 
                         img {
-                            background-color: var(--surface-c);
+                            background-color: var(--surface-hover);
                         }
                     }
 

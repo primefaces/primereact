@@ -1,156 +1,43 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { FilterService } from '../api/Api';
-import { ObjectUtils, classNames } from '../utils/Utils';
-import { ListBoxItem } from './ListBoxItem';
-import { ListBoxHeader } from './ListBoxHeader';
-import { tip } from '../tooltip/Tooltip';
+import { useMountEffect } from '../hooks/Hooks';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
+import { ListBoxHeader } from './ListBoxHeader';
+import { ListBoxItem } from './ListBoxItem';
 
-export class ListBox extends Component {
+export const ListBox = React.memo(React.forwardRef((props, ref) => {
+    const [filterValueState, setFilterValueState] = React.useState('');
+    const elementRef = React.useRef(null);
+    const virtualScrollerRef = React.useRef(null);
+    const optionTouched = React.useRef(false);
+    const filteredValue = (props.onFilterValueChange ? props.filterValue : filterValueState) || '';
+    const hasFilter = filteredValue && filteredValue.trim().length > 0;
 
-    static defaultProps = {
-        id: null,
-        value: null,
-        options: null,
-        optionLabel: null,
-        optionValue: null,
-        optionDisabled: null,
-        optionGroupLabel: null,
-        optionGroupChildren: null,
-        optionGroupTemplate: null,
-        itemTemplate: null,
-        style: null,
-        listStyle: null,
-        listClassName: null,
-        className: null,
-        virtualScrollerOptions: null,
-        disabled: null,
-        dataKey: null,
-        multiple: false,
-        metaKeySelection: false,
-        filter: false,
-        filterBy: null,
-        filterValue: null,
-        filterMatchMode: 'contains',
-        filterPlaceholder: null,
-        filterLocale: undefined,
-        tabIndex: 0,
-        tooltip: null,
-        tooltipOptions: null,
-        ariaLabelledBy: null,
-        onChange: null,
-        onFilterValueChange: null
-    }
-
-    static propTypes = {
-        id: PropTypes.string,
-        value: PropTypes.any,
-        options: PropTypes.array,
-        optionLabel: PropTypes.string,
-        optionValue: PropTypes.string,
-        optionDisabled: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-        optionGroupLabel: PropTypes.string,
-        optionGroupChildren: PropTypes.string,
-        optionGroupTemplate: PropTypes.any,
-        itemTemplate: PropTypes.any,
-        style: PropTypes.object,
-        listStyle: PropTypes.object,
-        listClassName: PropTypes.string,
-        className: PropTypes.string,
-        virtualScrollerOptions: PropTypes.object,
-        disabled: PropTypes.bool,
-        dataKey: PropTypes.string,
-        multiple: PropTypes.bool,
-        metaKeySelection: PropTypes.bool,
-        filter: PropTypes.bool,
-        filterBy: PropTypes.string,
-        filterValue: PropTypes.string,
-        filterMatchMode: PropTypes.string,
-        filterPlaceholder: PropTypes.string,
-        filterLocale: PropTypes.string,
-        tabIndex: PropTypes.number,
-        tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object,
-        ariaLabelledBy: PropTypes.string,
-        onChange: PropTypes.func,
-        onFilterValueChange: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-        this.state = {};
-
-        if (!this.props.onFilterValueChange) {
-            this.state.filterValue = '';
-        }
-
-        this.onFilter = this.onFilter.bind(this);
-        this.onOptionSelect = this.onOptionSelect.bind(this);
-        this.onOptionTouchEnd = this.onOptionTouchEnd.bind(this);
-    }
-
-    componentDidMount() {
-        if (this.props.tooltip) {
-            this.renderTooltip();
-        }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
-            if (this.tooltip)
-                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
-            else
-                this.renderTooltip();
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
-        }
-    }
-
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.element,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
-    }
-
-    getFilterValue() {
-        return (this.props.onFilterValueChange ? this.props.filterValue : this.state.filterValue) || '';
-    }
-
-    onOptionSelect(event) {
+    const onOptionSelect = (event) => {
         const option = event.option;
-        if (this.props.disabled || this.isOptionDisabled(option)) {
+        if (props.disabled || isOptionDisabled(option)) {
             return;
         }
 
-        if (this.props.multiple)
-            this.onOptionSelectMultiple(event.originalEvent, option);
-        else
-            this.onOptionSelectSingle(event.originalEvent, option);
-
-        this.optionTouched = false;
+        props.multiple ? onOptionSelectMultiple(event.originalEvent, option) : onOptionSelectSingle(event.originalEvent, option);
+        optionTouched.current = false;
     }
 
-    onOptionTouchEnd() {
-        if (this.props.disabled) {
+    const onOptionTouchEnd = () => {
+        if (props.disabled) {
             return;
         }
 
-        this.optionTouched = true;
+        optionTouched.current = true;
     }
 
-    onOptionSelectSingle(event, option) {
-        let selected = this.isSelected(option);
+    const onOptionSelectSingle = (event, option) => {
+        let selected = isSelected(option);
         let valueChanged = false;
         let value = null;
-        let metaSelection = this.optionTouched ? false : this.props.metaKeySelection;
+        let metaSelection = optionTouched.current ? false : props.metaKeySelection;
 
         if (metaSelection) {
             let metaKey = (event.metaKey || event.ctrlKey);
@@ -162,174 +49,183 @@ export class ListBox extends Component {
                 }
             }
             else {
-                value = this.getOptionValue(option);
+                value = getOptionValue(option);
                 valueChanged = true;
             }
         }
         else {
-            value = selected ? null : this.getOptionValue(option);
+            value = selected ? null : getOptionValue(option);
             valueChanged = true;
         }
 
         if (valueChanged) {
-            this.updateModel(event, value);
+            updateModel(event, value);
         }
     }
 
-    onOptionSelectMultiple(event, option) {
-        let selected = this.isSelected(option);
+    const onOptionSelectMultiple = (event, option) => {
+        let selected = isSelected(option);
         let valueChanged = false;
         let value = null;
-        let metaSelection = this.optionTouched ? false : this.props.metaKeySelection;
+        let metaSelection = optionTouched ? false : props.metaKeySelection;
 
         if (metaSelection) {
             let metaKey = (event.metaKey || event.ctrlKey);
 
             if (selected) {
                 if (metaKey)
-                    value = this.removeOption(option);
+                    value = removeOption(option);
                 else
-                    value = [this.getOptionValue(option)];
+                    value = [getOptionValue(option)];
 
                 valueChanged = true;
             }
             else {
-                value = (metaKey) ? this.props.value || [] : [];
-                value = [...value, this.getOptionValue(option)];
+                value = (metaKey) ? props.value || [] : [];
+                value = [...value, getOptionValue(option)];
                 valueChanged = true;
             }
         }
         else {
             if (selected)
-                value = this.removeOption(option);
+                value = removeOption(option);
             else
-                value = [...this.props.value || [], this.getOptionValue(option)];
+                value = [...props.value || [], getOptionValue(option)];
 
             valueChanged = true;
         }
 
         if (valueChanged) {
-            this.props.onChange({
+            props.onChange({
                 originalEvent: event,
-                value: value,
+                value,
                 stopPropagation: () => { },
                 preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
-                    value: value
+                    name: props.name,
+                    id: props.id,
+                    value
                 }
             });
         }
     }
 
-    onFilter(event) {
+    const onFilter = (event) => {
+        virtualScrollerRef.current && virtualScrollerRef.current.scrollToIndex(0);
+
         const { originalEvent, value } = event;
-        if (this.props.onFilterValueChange) {
-            this.props.onFilterValueChange({
+        if (props.onFilterValueChange) {
+            props.onFilterValueChange({
                 originalEvent,
                 value
             });
         }
         else {
-            this.setState({ filterValue: value });
+            setFilterValueState(value);
         }
     }
 
-    updateModel(event, value) {
-        if (this.props.onChange) {
-            this.props.onChange({
+    const updateModel = (event, value) => {
+        if (props.onChange) {
+            props.onChange({
                 originalEvent: event,
-                value: value,
+                value,
                 stopPropagation: () => { },
                 preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
-                    value: value
+                    name: props.name,
+                    id: props.id,
+                    value
                 }
             });
         }
     }
 
-    removeOption(option) {
-        return this.props.value.filter(val => !ObjectUtils.equals(val, this.getOptionValue(option), this.props.dataKey));
+    const removeOption = (option) => {
+        return props.value.filter(val => !ObjectUtils.equals(val, getOptionValue(option), props.dataKey));
     }
 
-    isSelected(option) {
-        let selected = false;
-        let optionValue = this.getOptionValue(option);
-
-        if (this.props.multiple) {
-            if (this.props.value) {
-                for (let val of this.props.value) {
-                    if (ObjectUtils.equals(val, optionValue, this.props.dataKey)) {
-                        selected = true;
-                        break;
+    const getSelectedOptionIndex = () => {
+        if (props.value != null && visibleOptions) {
+            if (props.optionGroupLabel) {
+                for (let i = 0; i < visibleOptions.length; i++) {
+                    let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(visibleOptions[i]));
+                    if (selectedOptionIndex !== -1) {
+                        return { group: i, option: selectedOptionIndex };
                     }
                 }
             }
-        }
-        else {
-            selected = ObjectUtils.equals(this.props.value, optionValue, this.props.dataKey);
+            else {
+                return findOptionIndexInList(props.value, visibleOptions);
+            }
         }
 
-        return selected;
+        return -1;
     }
 
-    filter(option) {
-        let filterValue = this.getFilterValue().trim().toLocaleLowerCase(this.props.filterLocale);
-        let optionLabel = this.getOptionLabel(option).toLocaleLowerCase(this.props.filterLocale);
+    const equalityKey = () => {
+        return props.optionValue ? null : props.dataKey;
+    }
+
+    const findOptionIndexInList = (value, list) => {
+        const key = equalityKey();
+        return list.findIndex(item => ObjectUtils.equals(value, getOptionValue(item), key));
+    }
+
+    const isSelected = (option) => {
+        const optionValue = getOptionValue(option);
+        const key = equalityKey();
+        return props.multiple && props.value ? props.value.some((val) => ObjectUtils.equals(val, optionValue, key)) : ObjectUtils.equals(props.value, optionValue, key);
+    }
+
+    const filter = (option) => {
+        const filterValue = filteredValue.trim().toLocaleLowerCase(props.filterLocale);
+        const optionLabel = getOptionLabel(option).toLocaleLowerCase(props.filterLocale);
 
         return optionLabel.indexOf(filterValue) > -1;
     }
 
-    hasFilter() {
-        let filter = this.getFilterValue();
-        return filter && filter.trim().length > 0;
+    const getOptionLabel = (option) => {
+        return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : (option && option['label'] !== undefined ? option['label'] : option);
     }
 
-    getOptionLabel(option) {
-        return this.props.optionLabel ? ObjectUtils.resolveFieldData(option, this.props.optionLabel) : (option && option['label'] !== undefined ? option['label'] : option);
+    const getOptionValue = (option) => {
+        return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : (option && option['value'] !== undefined ? option['value'] : option);
     }
 
-    getOptionValue(option) {
-        return this.props.optionValue ? ObjectUtils.resolveFieldData(option, this.props.optionValue) : (option && option['value'] !== undefined ? option['value'] : option);
+    const getOptionRenderKey = (option) => {
+        return props.dataKey ? ObjectUtils.resolveFieldData(option, props.dataKey) : getOptionLabel(option);
     }
 
-    getOptionRenderKey(option) {
-        return this.props.dataKey ? ObjectUtils.resolveFieldData(option, this.props.dataKey) : this.getOptionLabel(option);
-    }
-
-    isOptionDisabled(option) {
-        if (this.props.optionDisabled) {
-            return ObjectUtils.isFunction(this.props.optionDisabled) ? this.props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, this.props.optionDisabled);
+    const isOptionDisabled = (option) => {
+        if (props.optionDisabled) {
+            return ObjectUtils.isFunction(props.optionDisabled) ? props.optionDisabled(option) : ObjectUtils.resolveFieldData(option, props.optionDisabled);
         }
 
         return (option && option['disabled'] !== undefined ? option['disabled'] : false);
     }
 
-    getOptionGroupRenderKey(optionGroup) {
-        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    const getOptionGroupRenderKey = (optionGroup) => {
+        return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
     }
 
-    getOptionGroupLabel(optionGroup) {
-        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    const getOptionGroupLabel = (optionGroup) => {
+        return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
     }
 
-    getOptionGroupChildren(optionGroup) {
-        return ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupChildren);
+    const getOptionGroupChildren = (optionGroup) => {
+        return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupChildren);
     }
 
-    getVisibleOptions() {
-        if (this.hasFilter()) {
-            let filterValue = this.getFilterValue().trim().toLocaleLowerCase(this.props.filterLocale)
-            let searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
+    const getVisibleOptions = () => {
+        if (hasFilter) {
+            const filterValue = filteredValue.trim().toLocaleLowerCase(props.filterLocale);
+            const searchFields = props.filterBy ? props.filterBy.split(',') : [props.optionLabel || 'label'];
 
-            if (this.props.optionGroupLabel) {
+            if (props.optionGroupLabel) {
                 let filteredGroups = [];
-                for (let optgroup of this.props.options) {
-                    let filteredSubOptions = FilterService.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+                for (let optgroup of props.options) {
+                    let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
                     if (filteredSubOptions && filteredSubOptions.length) {
                         filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
                     }
@@ -337,40 +233,59 @@ export class ListBox extends Component {
                 return filteredGroups;
             }
             else {
-                return FilterService.filter(this.props.options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+                return FilterService.filter(props.options, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
             }
         }
         else {
-            return this.props.options;
+            return props.options;
         }
     }
 
-    renderGroupChildren(optionGroup) {
-        const groupChildren = this.getOptionGroupChildren(optionGroup);
+    const scrollToSelectedIndex = () => {
+        if (virtualScrollerRef.current) {
+            const selectedIndex = getSelectedOptionIndex();
+            if (selectedIndex !== -1) {
+                setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
+            }
+        }
+    }
+
+    useMountEffect(() => {
+        scrollToSelectedIndex();
+    });
+
+    const createHeader = () => {
+        return props.filter ? <ListBoxHeader filter={filteredValue} onFilter={onFilter} disabled={props.disabled} filterPlaceholder={props.filterPlaceholder} filterInputProps={props.filterInputProps} /> : null;
+    }
+
+    const createGroupChildren = (optionGroup, style) => {
+        const groupChildren = getOptionGroupChildren(optionGroup);
+
         return (
             groupChildren.map((option, j) => {
-                let optionLabel = this.getOptionLabel(option);
-                let optionKey = j + '_' + this.getOptionRenderKey(option);
-                let disabled = this.isOptionDisabled(option)
-                let tabIndex = disabled ? null : this.props.tabIndex || 0;
+                const optionLabel = getOptionLabel(option);
+                const optionKey = j + '_' + getOptionRenderKey(option);
+                const disabled = isOptionDisabled(option)
+                const tabIndex = disabled ? null : props.tabIndex || 0;
 
                 return (
-                    <ListBoxItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
-                        onClick={this.onOptionSelect} onTouchEnd={this.onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled} />
-                );
+                    <ListBoxItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={isSelected(option)}
+                        onClick={onOptionSelect} onTouchEnd={onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled} />
+                )
             })
         )
     }
 
-    renderItem(option, index) {
-        if (this.props.optionGroupLabel) {
-            const groupContent = this.props.optionGroupTemplate ? ObjectUtils.getJSXElement(this.props.optionGroupTemplate, option, index) : this.getOptionGroupLabel(option);
-            const groupChildrenContent = this.renderGroupChildren(option);
-            const key = index + '_' + this.getOptionGroupRenderKey(option);
+    const createItem = (option, index, scrollerOptions = {}) => {
+        const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
+        if (props.optionGroupLabel) {
+            const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : getOptionGroupLabel(option);
+            const groupChildrenContent = createGroupChildren(option, style);
+            const key = index + '_' + getOptionGroupRenderKey(option);
 
             return (
                 <React.Fragment key={key}>
-                    <li className="p-listbox-item-group">
+                    <li className="p-listbox-item-group" style={style} role="group">
                         {groupContent}
                     </li>
                     {groupChildrenContent}
@@ -378,77 +293,112 @@ export class ListBox extends Component {
             )
         }
         else {
-            let optionLabel = this.getOptionLabel(option);
-            let optionKey = index + '_' + this.getOptionRenderKey(option);
-            let disabled = this.isOptionDisabled(option)
-            let tabIndex = disabled ? null : this.props.tabIndex || 0;
+            const optionLabel = getOptionLabel(option);
+            const optionKey = index + '_' + getOptionRenderKey(option);
+            const disabled = isOptionDisabled(option)
+            const tabIndex = disabled ? null : props.tabIndex || 0;
 
             return (
-                <ListBoxItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.isSelected(option)}
-                    onClick={this.onOptionSelect} onTouchEnd={this.onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled} />
-            );
+                <ListBoxItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={isSelected(option)}
+                    onClick={onOptionSelect} onTouchEnd={onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled} />
+            )
         }
     }
 
-    renderItems(visibleOptions) {
-        if (visibleOptions && visibleOptions.length) {
-            return visibleOptions.map((option, index) => this.renderItem(option, index));
-        }
-
-        return null;
+    const createItems = () => {
+        return visibleOptions ? visibleOptions.map(createItem) : null;
     }
 
-    renderList(visibleOptions) {
-        if (this.props.virtualScrollerOptions) {
-            const virtualScrollerProps = { ...this.props.virtualScrollerOptions, ...{
-                items: visibleOptions,
-                onLazyLoad: (event) => this.props.virtualScrollerOptions.onLazyLoad({...event, ...{ filter: this.getFilterValue() }}),
-                itemTemplate: (item, options) => item && this.renderItem(item, options.index),
-                contentTemplate: (options) => {
-                    const className = classNames('p-listbox-list', options.className);
+    const createList = () => {
+        if (props.virtualScrollerOptions) {
+            const virtualScrollerProps = {
+                ...props.virtualScrollerOptions, ...{
+                    items: visibleOptions,
+                    onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: visibleOptions } }),
+                    itemTemplate: (item, options) => item && createItem(item, options.index, options),
+                    contentTemplate: (option) => {
+                        const className = classNames('p-listbox-list', option.className);
 
-                    return (
-                        <ul ref={options.contentRef} className={className} role="listbox" aria-multiselectable={this.props.multiple}>
-                            {options.children}
-                        </ul>
-                    );
+                        return (
+                            <ul ref={option.contentRef} className={className} role="listbox" aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
+                                {option.children}
+                            </ul>
+                        )
+                    }
                 }
-            }};
+            };
 
-            return <VirtualScroller ref={(el) => this.virtualScrollerRef = el} {...virtualScrollerProps} />;
+            return <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerProps} />
         }
         else {
-            let items = this.renderItems(visibleOptions);
+            const items = createItems();
 
             return (
-                <ul className="p-listbox-list" role="listbox" aria-multiselectable={this.props.multiple}>
+                <ul className="p-listbox-list" role="listbox" aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
                     {items}
                 </ul>
-            );
+            )
         }
     }
 
-    render() {
-        const className = classNames('p-listbox p-component', {
-            'p-disabled': this.props.disabled
-        }, this.props.className);
-        const listClassName = classNames('p-listbox-list-wrapper', this.props.listClassName);
-        const visibleOptions = this.getVisibleOptions();
-        const list = this.renderList(visibleOptions);
+    const visibleOptions = getVisibleOptions();
 
-        let header;
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, ListBox.defaultProps);
+    const className = classNames('p-listbox p-component', {
+        'p-disabled': props.disabled
+    }, props.className);
+    const listClassName = classNames('p-listbox-list-wrapper', props.listClassName);
+    const list = createList();
+    const header = createHeader();
 
-        if (this.props.filter) {
-            header = <ListBoxHeader filter={this.getFilterValue()} onFilter={this.onFilter} disabled={this.props.disabled} filterPlaceholder={this.props.filterPlaceholder} />
-        }
-
-        return (
-            <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
+    return (
+        <>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
                 {header}
-                <div ref={(el) => this.wrapper = el} className={listClassName} style={this.props.listStyle}>
+                <div className={listClassName} style={props.listStyle}>
                     {list}
                 </div>
             </div>
-        );
-    }
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
+    )
+}));
+
+ListBox.displayName = 'ListBox';
+ListBox.defaultProps = {
+    __TYPE: 'ListBox',
+    id: null,
+    value: null,
+    options: null,
+    optionLabel: null,
+    optionValue: null,
+    optionDisabled: null,
+    optionGroupLabel: null,
+    optionGroupChildren: null,
+    optionGroupTemplate: null,
+    itemTemplate: null,
+    style: null,
+    listStyle: null,
+    listClassName: null,
+    className: null,
+    virtualScrollerOptions: null,
+    disabled: null,
+    dataKey: null,
+    multiple: false,
+    metaKeySelection: false,
+    filter: false,
+    filterBy: null,
+    filterValue: null,
+    filterMatchMode: 'contains',
+    filterPlaceholder: null,
+    filterLocale: undefined,
+    filterInputProps: null,
+    tabIndex: 0,
+    tooltip: null,
+    tooltipOptions: null,
+    'aria-label': null,
+    'aria-labelledby': null,
+    onChange: null,
+    onFilterValueChange: null
 }

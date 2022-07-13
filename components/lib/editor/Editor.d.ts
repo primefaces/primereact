@@ -13,7 +13,7 @@ interface EditorSelectionChangeParams {
     source: string;
 }
 
-export interface EditorProps {
+export interface EditorProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     id?: string;
     value?: string;
     style?: object;
@@ -28,6 +28,9 @@ export interface EditorProps {
     onTextChange?(e: EditorTextChangeParams): void;
     onSelectionChange?(e: EditorSelectionChangeParams): void;
     onLoad?(quill: any): void;
+    children?: React.ReactNode;
 }
 
-export declare class Editor extends React.Component<EditorProps, any> { }
+export declare class Editor extends React.Component<EditorProps, any> {
+    public getQuill(): any;
+}

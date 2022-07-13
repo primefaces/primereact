@@ -18,6 +18,18 @@ const SplitButtonProps = [
         description: 'Name of the icon.'
     },
     {
+        name: 'loadingIcon',
+        type: 'any',
+        default: 'null',
+        description: 'Name of the loading icon or JSX.Element for loading icon.'
+    },
+    {
+        name: 'loading',
+        type: 'boolean',
+        default: 'false',
+        description: 'Display loading icon of the button'
+    },
+    {
         name: 'model',
         type: 'object',
         default: 'null',
@@ -42,6 +54,12 @@ const SplitButtonProps = [
         description: 'ClassName of the component.'
     },
     {
+        name: 'buttonClassName',
+        type: 'string',
+        default: 'null',
+        description: 'ClassName of the button.'
+    },
+    {
         name: 'menuStyle',
         type: 'string',
         default: 'null',
@@ -52,6 +70,24 @@ const SplitButtonProps = [
         type: 'string',
         default: 'null',
         description: 'ClassName class of the overlay menu.'
+    },
+    {
+        name: 'menuButtonClassName',
+        type: 'string',
+        default: 'null',
+        description: 'ClassName class of menu dropdown button.'
+    },
+    {
+        name: 'buttonProps',
+        type: 'object',
+        default: 'undefined',
+        description: "Props for the main button, any prop is passed implicity to the button element."
+    },
+    {
+        name: 'menuButtonProps',
+        type: 'object',
+        default: 'undefined',
+        description: "Props for the dropdown button, any prop is passed implicity to the dropdown button element."
     },
     {
         name: 'tabIndex',

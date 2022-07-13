@@ -1,101 +1,82 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { UIMessage } from './UIMessage';
+import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { ObjectUtils } from '../utils/Utils';
+import { UIMessage } from './UIMessage';
 
 let messageIdx = 0;
 
-export class Messages extends Component {
+export const Messages = React.memo(React.forwardRef((props, ref) => {
+    const [messagesState, setMessagesState] = React.useState([]);
 
-    static defaultProps = {
-        id: null,
-        className: null,
-        style: null,
-        transitionOptions: null,
-        onRemove: null,
-        onClick: null
-    }
-
-    static propTypes = {
-        id: PropTypes.string,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        transitionOptions: PropTypes.object,
-        onRemove: PropTypes.func,
-        onClick: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            messages: []
-        }
-
-        this.onClose = this.onClose.bind(this);
-    }
-
-    show(value) {
+    const show = (value) => {
         if (value) {
-            let newMessages = [];
+            let messages;
 
             if (Array.isArray(value)) {
                 for (let i = 0; i < value.length; i++) {
                     value[i].id = messageIdx++;
-                    newMessages = [...this.state.messages, ...value];
+                    messages = [...messagesState, ...value];
                 }
             }
             else {
                 value.id = messageIdx++;
-                newMessages = this.state.messages ? [...this.state.messages, value] : [value];
+                messages = messagesState ? [...messagesState, value] : [value];
             }
 
-            this.setState({
-                messages: newMessages
-            });
+            setMessagesState(messages);
         }
     }
 
-    clear() {
-        this.setState({
-            messages: []
-        })
+    const clear = () => {
+        setMessagesState([]);
     }
 
-    replace(value) {
-        this.setState({
-            messages: [],
-        }, () => this.show(value));
+    const replace = (value) => {
+        const replaced = Array.isArray(value) ? value : [value];
+        setMessagesState(replaced);
     }
 
-    onClose(message) {
-        let newMessages = this.state.messages.filter(msg => msg.id !== message.id);
-        this.setState({
-            messages: newMessages
-        });
-
-        if (this.props.onRemove) {
-            this.props.onRemove(message);
-        }
+    const onClose = (message) => {
+        setMessagesState(messagesState.filter(msg => msg.id !== message.id));
+        props.onRemove && props.onRemove(message);
     }
 
-    render() {
-        return (
-            <div id={this.props.id} className={this.props.className} style={this.props.style}>
-                <TransitionGroup>
-                    {
-                        this.state.messages.map((message) => {
-                            const messageRef = React.createRef();
+    React.useImperativeHandle(ref, () => ({
+        show,
+        replace,
+        clear,
+        ...props
+    }));
 
-                            return (
-                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={this.props.transitionOptions}>
-                                    <UIMessage ref={messageRef} message={message} onClick={this.props.onClick} onClose={this.onClose} />
-                                </CSSTransition>
-                            )
-                        })
-                    }
-                </TransitionGroup>
-            </div>
-        );
-    }
+    const otherProps = ObjectUtils.findDiffKeys(props, Messages.defaultProps);
+
+    return (
+        <div id={props.id} className={props.className} style={props.style} {...otherProps}>
+            <TransitionGroup>
+                {
+                    messagesState.map((message) => {
+                        const messageRef = React.createRef();
+
+                        return (
+                            <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={props.transitionOptions}>
+                                <UIMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} />
+                            </CSSTransition>
+                        )
+                    })
+                }
+            </TransitionGroup>
+        </div>
+    )
+}));
+
+Messages.displayName = 'Messages';
+Messages.defaultProps = {
+    __TYPE: 'Messages',
+    id: null,
+    className: null,
+    style: null,
+    transitionOptions: null,
+    onRemove: null,
+    onClick: null
 }

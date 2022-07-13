@@ -19,6 +19,7 @@ export interface GMapProps {
     onOverlayDrag?(event: React.SyntheticEvent): void;
     onOverlayDragEnd?(event: React.SyntheticEvent): void;
     onOverlayClick?(e: GMapEventParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class GMap extends React.Component<GMapProps, any> { }

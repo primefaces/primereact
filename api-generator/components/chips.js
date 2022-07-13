@@ -82,7 +82,13 @@ const ChipsProps = [
         type: 'function',
         default: 'null',
         description: 'Template function to return the content of a chip.'
-    }
+    },
+    {
+        name: 'keyfilter',
+        type: 'string/regex',
+        default: 'null',
+        description: 'Format definition of the keys to block.'
+      },
 ];
 
 const ChipsEvents = [
@@ -150,7 +156,18 @@ const ChipsEvents = [
                 description: 'Browser event'
             }
         ]
-    }
+    },
+    {
+        name: 'onKeyDown',
+        description: 'Callback to invoke when the key pressed.',
+        arguments: [
+            {
+                name: 'originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            }
+        ]
+    },
 ];
 
 const ChipsStyles = [

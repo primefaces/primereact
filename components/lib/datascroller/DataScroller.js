@@ -1,219 +1,188 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import * as React from 'react';
 import { localeOption } from '../api/Api';
+import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export class DataScroller extends Component {
+export const DataScroller = React.memo(React.forwardRef((props, ref) => {
+    const [dataToRenderState, setDataToRenderState] = React.useState([]);
+    const contentRef = React.useRef(null);
+    const value = React.useRef(props.value);
+    const dataToRender = React.useRef([]);
+    const first = React.useRef(0);
+    const scrollFunction = React.useRef(null);
 
-    static defaultProps = {
-        id: null,
-        value: null,
-        rows: 0,
-        inline: false,
-        scrollHeight: null,
-        loader: false,
-        buffer: 0.9,
-        style: null,
-        className: null,
-        onLazyLoad: null,
-        emptyMessage: null,
-        itemTemplate: null,
-        header: null,
-        footer: null,
-        lazy: false
-    }
-
-    static propTypes = {
-        id: PropTypes.string,
-        value: PropTypes.array,
-        rows: PropTypes.number,
-        inline: PropTypes.bool,
-        scrollHeight: PropTypes.string,
-        loader: PropTypes.bool,
-        buffer: PropTypes.number,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        onLazyLoad: PropTypes.func,
-        emptyMessage: PropTypes.any,
-        itemTemplate: PropTypes.func,
-        header: PropTypes.any,
-        footer: PropTypes.any,
-        lazy: PropTypes.bool
-    }
-
-    constructor(props) {
-        super(props);
-        this.state = {};
-        this.dataToRender = [];
-        this.value = this.props.value;
-        this.first = 0;
-    }
-
-    handleDataChange() {
-        if (this.props.lazy) {
-            this.dataToRender = this.value;
-            this.setState({ dataToRender: this.dataToRender });
+    const handleDataChange = () => {
+        if (props.lazy) {
+            dataToRender.current = value.current;
+            setDataToRenderState([...dataToRender.current]);
         }
         else {
-            this.load();
+            load();
         }
     }
 
-    load() {
-        if (this.props.lazy) {
-            if (this.props.onLazyLoad) {
-                this.props.onLazyLoad(this.createLazyLoadMetadata());
+    const load = () => {
+        if (props.lazy) {
+            if (props.onLazyLoad) {
+                props.onLazyLoad(createLazyLoadMetadata());
             }
 
-            this.first = this.first + this.props.rows;
+            first.current += props.rows;
         }
         else {
-            if (this.value) {
-                for (let i = this.first; i < (this.first + this.props.rows); i++) {
-                    if (i >= this.value.length) {
+            if (value.current) {
+                for (let i = first.current; i < (first.current + props.rows); i++) {
+                    if (i >= value.current.length) {
                         break;
                     }
 
-                    this.dataToRender.push(this.value[i]);
+                    dataToRender.current.push(value.current[i]);
                 }
 
-                if (this.value.length !== 0) {
-                    this.first = this.first + this.props.rows;
+                if (value.current.length !== 0) {
+                    first.current += props.rows;
                 }
-                this.setState({ dataToRender: this.dataToRender });
+
+                setDataToRenderState([...dataToRender.current]);
             }
         }
     }
 
-    reset() {
-        this.first = 0;
-        this.dataToRender = [];
-        this.setState({ dataToRender: this.dataToRender });
-        this.load();
+    const reset = () => {
+        first.current = 0;
+        dataToRender.current = [];
+        setDataToRenderState([...dataToRender.current]);
+        load();
     }
 
-    isEmpty() {
-        return !this.dataToRender || (this.dataToRender.length === 0);
+    const isEmpty = () => {
+        return !dataToRender.current || (dataToRender.current.length === 0);
     }
 
-    createLazyLoadMetadata() {
+    const createLazyLoadMetadata = () => {
         return {
-            first: this.first,
-            rows: this.props.rows
+            first: first.current,
+            rows: props.rows
         };
     }
 
-    bindScrollListener() {
-        if (this.props.inline) {
-            this.scrollFunction = () => {
-                let scrollTop = this.contentElement.scrollTop,
-                    scrollHeight = this.contentElement.scrollHeight,
-                    viewportHeight = this.contentElement.clientHeight;
+    const bindScrollListener = () => {
+        if (props.inline) {
+            scrollFunction.current = () => {
+                let scrollTop = contentRef.current.scrollTop,
+                    scrollHeight = contentRef.current.scrollHeight,
+                    viewportHeight = contentRef.current.clientHeight;
 
-                if ((scrollTop >= ((scrollHeight * this.props.buffer) - (viewportHeight)))) {
-                    this.load();
+                if ((scrollTop >= ((scrollHeight * props.buffer) - (viewportHeight)))) {
+                    load();
                 }
             }
 
-            this.contentElement.addEventListener('scroll', this.scrollFunction);
+            contentRef.current.addEventListener('scroll', scrollFunction.current);
         }
         else {
-            this.scrollFunction = () => {
+            scrollFunction.current = () => {
                 let docBody = document.body,
                     docElement = document.documentElement,
                     scrollTop = (window.pageYOffset || document.documentElement.scrollTop),
                     winHeight = docElement.clientHeight,
                     docHeight = Math.max(docBody.scrollHeight, docBody.offsetHeight, winHeight, docElement.scrollHeight, docElement.offsetHeight);
 
-                if (scrollTop >= ((docHeight * this.props.buffer) - winHeight)) {
-                    this.load();
+                if (scrollTop >= ((docHeight * props.buffer) - winHeight)) {
+                    load();
                 }
             }
 
-            window.addEventListener('scroll', this.scrollFunction);
+            window.addEventListener('scroll', scrollFunction.current);
         }
     }
 
-    unbindScrollListener() {
-        if (this.scrollFunction) {
-            if (this.props.inline) {
-                this.contentElement.removeEventListener('scroll', this.scrollFunction);
-                this.contentElement = null;
+    const unbindScrollListener = () => {
+        if (scrollFunction.current) {
+            if (props.inline && contentRef.current) {
+                contentRef.current.removeEventListener('scroll', scrollFunction.current);
             }
-            else if (!this.props.loader) {
-                window.removeEventListener('scroll', this.scrollFunction);
+            else if (!props.loader) {
+                window.removeEventListener('scroll', scrollFunction.current);
             }
         }
 
-        this.scrollFunction = null;
+        scrollFunction.current = null;
     }
 
-    componentDidMount() {
-        this.load();
+    useMountEffect(() => {
+        load();
 
-        if (!this.props.loader) {
-            this.bindScrollListener();
+        if (!props.loader) {
+            bindScrollListener();
         }
-    }
+    });
 
-    componentDidUpdate(prevProps, prevState) {
-        let newValue = this.props.value;
-        if (newValue && this.value !== newValue) {
-            this.value = newValue;
+    useUpdateEffect(() => {
+        if (props.value) {
+            value.current = props.value;
 
-            this.first = 0;
-            this.dataToRender = [];
-            this.handleDataChange();
+            first.current = 0;
+            dataToRender.current = [];
+            handleDataChange();
         }
+    }, [props.value]);
 
-        if (prevProps.loader !== this.props.loader && this.props.loader) {
-            this.unbindScrollListener();
+    useUpdateEffect(() => {
+        if (props.loader) {
+            unbindScrollListener();
         }
-    }
+    }, [props.loader]);
 
-    componentWillUnmount() {
-        if (this.scrollFunction) {
-            this.unbindScrollListener();
+    useUnmountEffect(() => {
+        if (scrollFunction.current) {
+            unbindScrollListener();
         }
-    }
+    });
 
-    renderHeader() {
-        if (this.props.header) {
-            return <div className="p-datascroller-header">{this.props.header}</div>
+    React.useImperativeHandle(ref, () => ({
+        load,
+        reset,
+        ...props
+    }));
+
+    const createHeader = () => {
+        if (props.header) {
+            return <div className="p-datascroller-header">{props.header}</div>
         }
 
         return null;
     }
 
-    renderFooter() {
-        if (this.props.footer) {
-            return <div className="p-datascroller-footer">{this.props.footer}</div>
+    const createFooter = () => {
+        if (props.footer) {
+            return <div className="p-datascroller-footer">{props.footer}</div>
         }
 
         return null;
     }
 
-    renderItem(value, index) {
-        const content = this.props.itemTemplate ? this.props.itemTemplate(value) : value;
+    const createItem = (_value, index) => {
+        const content = props.itemTemplate ? props.itemTemplate(_value) : _value;
 
         return (
             <li key={index + '_datascrollitem'}>
                 {content}
             </li>
-        );
+        )
     }
 
-    renderEmptyMessage() {
-        const content = ObjectUtils.getJSXElement(this.props.emptyMessage, this.props) || localeOption('emptyMessage');
+    const createEmptyMessage = () => {
+        const content = ObjectUtils.getJSXElement(props.emptyMessage, props) || localeOption('emptyMessage');
 
-        return <li>{content}</li>;
+        return <li>{content}</li>
     }
 
-    renderContent() {
-        const content = this.state.dataToRender && this.state.dataToRender.length ? this.state.dataToRender.map((val, i) => this.renderItem(val, i)) : this.renderEmptyMessage();
+    const createContent = () => {
+        const content = ObjectUtils.isNotEmpty(dataToRenderState) ? dataToRenderState.map(createItem) : createEmptyMessage();
 
         return (
-            <div ref={(el) => this.contentElement = el} className="p-datascroller-content" style={{ 'maxHeight': this.props.scrollHeight }}>
+            <div ref={contentRef} className="p-datascroller-content" style={{ 'maxHeight': props.scrollHeight }}>
                 <ul className="p-datascroller-list">
                     {content}
                 </ul>
@@ -221,21 +190,40 @@ export class DataScroller extends Component {
         )
     }
 
-    render() {
-        const className = classNames('p-datascroller p-component', this.props.className, {
-            'p-datascroller-inline': this.props.inline
-        });
+    const otherProps = ObjectUtils.findDiffKeys(props, DataScroller.defaultProps);
+    const className = classNames('p-datascroller p-component', props.className, {
+        'p-datascroller-inline': props.inline
+    });
 
-        const header = this.renderHeader();
-        const footer = this.renderFooter();
-        const content = this.renderContent();
+    const header = createHeader();
+    const footer = createFooter();
+    const content = createContent();
 
-        return (
-            <div id={this.props.id} className={className}>
-                {header}
-                {content}
-                {footer}
-            </div>
-        );
-    }
+    return (
+        <div id={props.id} className={className} {...otherProps}>
+            {header}
+            {content}
+            {footer}
+        </div>
+    )
+}));
+
+DataScroller.displayName = 'DataScroller';
+DataScroller.defaultProps = {
+    __TYPE: 'DataScroller',
+    id: null,
+    value: null,
+    rows: 0,
+    inline: false,
+    scrollHeight: null,
+    loader: false,
+    buffer: 0.9,
+    style: null,
+    className: null,
+    onLazyLoad: null,
+    emptyMessage: null,
+    itemTemplate: null,
+    header: null,
+    footer: null,
+    lazy: false
 }

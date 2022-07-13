@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
 
 type CascadeSelectItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
@@ -12,14 +13,14 @@ interface CascadeSelectChangeParams {
 
 interface CascadeSelectGroupChangeParams extends CascadeSelectChangeParams { }
 
-export interface CascadeSelectProps {
+export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     style?: object;
     className?: string;
     value?: any;
     name?: string;
-    options?: any[];
+    options?: SelectItemOptionsType;
     optionLabel?: string;
     optionValue?: string;
     optionGroupLabel?: string;
@@ -40,6 +41,7 @@ export interface CascadeSelectProps {
     onBeforeHide?(): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class CascadeSelect extends React.Component<CascadeSelectProps, any> { }

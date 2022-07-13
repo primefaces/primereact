@@ -1,58 +1,41 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { InputNumber } from '../inputnumber/InputNumber';
 import { ObjectUtils } from '../utils/Utils';
 
-export class JumpToPageInput extends Component {
+export const JumpToPageInput = React.memo((props) => {
 
-    static defaultProps = {
-        page: null,
-        rows: null,
-        pageCount: null,
-        disabled: false,
-        template: null,
-        onChange: null
-    }
-
-    static propTypes = {
-        page: PropTypes.number,
-        rows: PropTypes.number,
-        pageCount: PropTypes.number,
-        disabled: PropTypes.bool,
-        template: PropTypes.any,
-        onChange: PropTypes.func
-    }
-
-    constructor(props) {
-        super(props)
-
-        this.onChange = this.onChange.bind(this);
-    }
-
-    onChange(event) {
-        if (this.props.onChange) {
-            this.props.onChange(this.props.rows * (event.value - 1), this.props.rows);
+    const onChange = (event) => {
+        if (props.onChange) {
+            props.onChange(props.rows * (event.value - 1), props.rows);
         }
     }
 
-    render() {
-        const value = this.props.pageCount > 0 ? this.props.page + 1 : 0;
-        const element = <InputNumber value={value} onChange={this.onChange} className="p-paginator-page-input" disabled={this.props.disabled} />;
+    const value = props.pageCount > 0 ? props.page + 1 : 0;
+    const element = <InputNumber value={value} onChange={onChange} className="p-paginator-page-input" disabled={props.disabled} />;
 
-        if (this.props.template) {
-            const defaultOptions = {
-                value,
-                onChange: this.onChange,
-                disabled: this.props.disabled,
-                className: 'p-paginator-page-input',
-                element,
-                props: this.props
-            };
+    if (props.template) {
+        const defaultOptions = {
+            value,
+            onChange: onChange,
+            disabled: props.disabled,
+            className: 'p-paginator-page-input',
+            element,
+            props
+        };
 
-            return ObjectUtils.getJSXElement(this.props.template, defaultOptions);
-        }
-
-        return element;
+        return ObjectUtils.getJSXElement(props.template, defaultOptions);
     }
 
+    return element;
+});
+
+JumpToPageInput.displayName = 'JumpToPageInput';
+JumpToPageInput.defaultProps = {
+    __TYPE: 'JumbToPageInput',
+    page: null,
+    rows: null,
+    pageCount: null,
+    disabled: false,
+    template: null,
+    onChange: null
 }

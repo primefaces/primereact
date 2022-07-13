@@ -1,6 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
-import {IconType} from "../utils";
+import { IconType } from '../utils';
 
 type MultiStateCheckboxOptionsType = MultiStateCheckboxOption[] | any[];
 
@@ -34,25 +34,24 @@ interface MultiStateCheckboxChangeParams {
     target: MultiStateCheckboxChangeTargetOptions;
 }
 
-export interface MultiStateCheckboxProps {
+export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
     id?: string;
-    inputRef?: React.Ref<HTMLInputElement>;
-    inputId?: string;
     value?: any;
     options?: MultiStateCheckboxOptionsType;
     optionValue?: string;
+    optionLabel?: string;
     iconTemplate?: MultiStateCheckboxIconTemplateType;
     dataKey?: string;
-    name?: string;
     style?: object;
     className?: string;
     disabled?: boolean;
     readOnly?: boolean;
+    tabIndex?: number;
     empty?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string;
     onChange?(e: MultiStateCheckboxChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class MultiStateCheckbox extends React.Component<MultiStateCheckboxProps, any> { }

@@ -1,86 +1,76 @@
-import React, { Component } from 'react';
-import { ObjectUtils, classNames } from '../utils/Utils';
-import { DropdownItem } from './DropdownItem';
+import * as React from 'react';
+import { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
-import { localeOption } from '../api/Api';
+import { DropdownItem } from './DropdownItem';
 
-class DropdownPanelComponent extends Component {
+export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
+    const virtualScrollerRef = React.useRef(null);
+    const filterInputRef = React.useRef(null);
+    const isEmptyFilter = !(props.visibleOptions && props.visibleOptions.length) && props.hasFilter;
 
-    constructor(props) {
-        super(props);
-
-        this.onEnter = this.onEnter.bind(this);
-        this.onEntered = this.onEntered.bind(this);
-        this.onFilterInputChange = this.onFilterInputChange.bind(this);
-    }
-
-    onEnter() {
-        this.props.onEnter(() => {
-            if (this.virtualScrollerRef) {
-                const selectedIndex = this.props.getSelectedOptionIndex();
+    const onEnter = () => {
+        props.onEnter(() => {
+            if (virtualScrollerRef.current) {
+                const selectedIndex = props.getSelectedOptionIndex();
                 if (selectedIndex !== -1) {
-                    this.virtualScrollerRef.scrollToIndex(selectedIndex);
+                    setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
                 }
             }
         });
     }
 
-    onEntered() {
-        this.props.onEntered(() => {
-            if (this.props.filter && this.props.filterInputAutoFocus) {
-                this.filterInput.focus();
+    const onEntered = () => {
+        props.onEntered(() => {
+            if (props.filter && props.filterInputAutoFocus) {
+                DomHandler.focus(filterInputRef.current, false);
             }
         });
     }
 
-    onFilterInputChange(event) {
-        if (this.virtualScrollerRef) {
-            this.virtualScrollerRef.scrollToIndex(0);
-        }
+    const onFilterInputChange = (event) => {
+        virtualScrollerRef.current && virtualScrollerRef.current.scrollToIndex(0);
 
-        this.props.onFilterInputChange && this.props.onFilterInputChange(event);
+        props.onFilterInputChange && props.onFilterInputChange(event);
     }
 
-    isEmptyFilter() {
-        return !(this.props.visibleOptions && this.props.visibleOptions.length) && this.props.hasFilter();
-    }
-
-    renderGroupChildren(optionGroup) {
-        const groupChildren = this.props.getOptionGroupChildren(optionGroup);
+    const createGroupChildren = (optionGroup, style) => {
+        const groupChildren = props.getOptionGroupChildren(optionGroup);
         return (
             groupChildren.map((option, j) => {
-                let optionLabel = this.props.getOptionLabel(option);
-                let optionKey = j + '_' + this.props.getOptionRenderKey(option);
-                let disabled = this.props.isOptionDisabled(option);
+                const optionLabel = props.getOptionLabel(option);
+                const optionKey = j + '_' + props.getOptionRenderKey(option);
+                const disabled = props.isOptionDisabled(option);
 
                 return (
-                    <DropdownItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.props.isSelected(option)} disabled={disabled} onClick={this.props.onOptionClick} />
-                );
+                    <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} />
+                )
             })
         )
     }
 
-    renderEmptyMessage(emptyMessage, isFilter) {
-        const message = ObjectUtils.getJSXElement(emptyMessage, this.props) || localeOption(isFilter ? 'emptyFilterMessage' : 'emptyMessage');
+    const createEmptyMessage = (emptyMessage, isFilter) => {
+        const message = ObjectUtils.getJSXElement(emptyMessage, props) || localeOption(isFilter ? 'emptyFilterMessage' : 'emptyMessage');
 
         return (
             <li className="p-dropdown-empty-message">
                 {message}
             </li>
-        );
+        )
     }
 
-    renderItem(option, index) {
-        if (this.props.optionGroupLabel) {
-            const groupContent = this.props.optionGroupTemplate ? ObjectUtils.getJSXElement(this.props.optionGroupTemplate, option, index) : this.props.getOptionGroupLabel(option);
-            const groupChildrenContent = this.renderGroupChildren(option);
-            const key = index + '_' + this.props.getOptionGroupRenderKey(option);
+    const createItem = (option, index, scrollerOptions = {}) => {
+        const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
+        if (props.optionGroupLabel) {
+            const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
+            const groupChildrenContent = createGroupChildren(option, style);
+            const key = index + '_' + props.getOptionGroupRenderKey(option);
 
             return (
                 <React.Fragment key={key}>
-                    <li className="p-dropdown-item-group">
+                    <li className="p-dropdown-item-group" style={style}>
                         {groupContent}
                     </li>
                     {groupChildrenContent}
@@ -88,111 +78,112 @@ class DropdownPanelComponent extends Component {
             )
         }
         else {
-            const optionLabel = this.props.getOptionLabel(option);
-            const optionKey = index + '_' + this.props.getOptionRenderKey(option);
-            const disabled = this.props.isOptionDisabled(option);
+            const optionLabel = props.getOptionLabel(option);
+            const optionKey = index + '_' + props.getOptionRenderKey(option);
+            const disabled = props.isOptionDisabled(option);
 
             return (
-                <DropdownItem key={optionKey} label={optionLabel} option={option} template={this.props.itemTemplate} selected={this.props.isSelected(option)} disabled={disabled} onClick={this.props.onOptionClick} />
-            );
+                <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} />
+            )
         }
     }
 
-    renderItems() {
-        if (this.props.visibleOptions && this.props.visibleOptions.length) {
-            return this.props.visibleOptions.map((option, index) => this.renderItem(option, index));
+    const createItems = () => {
+        if (ObjectUtils.isNotEmpty(props.visibleOptions)) {
+            return props.visibleOptions.map(createItem);
         }
-        else if (this.props.hasFilter()) {
-            return this.renderEmptyMessage(this.props.emptyFilterMessage, true);
+        else if (props.hasFilter) {
+            return createEmptyMessage(props.emptyFilterMessage, true);
         }
 
-        return this.renderEmptyMessage(this.props.emptyMessage);
+        return createEmptyMessage(props.emptyMessage);
     }
 
-    renderFilterClearIcon() {
-        if (this.props.showFilterClear && this.props.filterValue) {
-            return <i className="p-dropdown-filter-clear-icon pi pi-times" onClick={() => this.props.onFilterClearIconClick(() => this.filterInput.focus())}></i>
+    const createFilterClearIcon = () => {
+        if (props.showFilterClear && props.filterValue) {
+            return <i className="p-dropdown-filter-clear-icon pi pi-times" onClick={() => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))}></i>
         }
 
         return null;
     }
 
-    renderFilter() {
-        if (this.props.filter) {
-            const clearIcon = this.renderFilterClearIcon();
+    const createFilter = () => {
+        if (props.filter) {
+            const clearIcon = createFilterClearIcon();
             const containerClassName = classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon });
             return (
                 <div className="p-dropdown-header">
                     <div className={containerClassName}>
-                        <input ref={(el) => this.filterInput = el} type="text" autoComplete="off" className="p-dropdown-filter p-inputtext p-component" placeholder={this.props.filterPlaceholder}
-                            onKeyDown={this.props.onFilterInputKeyDown} onChange={this.onFilterInputChange} value={this.props.filterValue} />
+                        <input ref={filterInputRef} type="text" autoComplete="off" className="p-dropdown-filter p-inputtext p-component" placeholder={props.filterPlaceholder}
+                            onKeyDown={props.onFilterInputKeyDown} onChange={onFilterInputChange} value={props.filterValue} />
                         {clearIcon}
                         <i className="p-dropdown-filter-icon pi pi-search"></i>
                     </div>
                 </div>
-            );
+            )
         }
 
         return null;
     }
 
-    renderContent() {
-        if (this.props.virtualScrollerOptions) {
-            const virtualScrollerProps = { ...this.props.virtualScrollerOptions, ...{
-                style: {...this.props.virtualScrollerOptions.style, ...{ height: this.props.scrollHeight }},
-                className: classNames('p-dropdown-items-wrapper', this.props.virtualScrollerOptions.className),
-                items: this.props.visibleOptions,
-                onLazyLoad: (event) => this.props.virtualScrollerOptions.onLazyLoad({...event, ...{ filter: this.props.filterValue }}),
-                itemTemplate: (item, options) => item && this.renderItem(item, options.index),
-                contentTemplate: (options) => {
-                    const className = classNames('p-dropdown-items', options.className);
-                    const content = this.isEmptyFilter() ? this.renderEmptyMessage() : options.children;
+    const createContent = () => {
+        if (props.virtualScrollerOptions) {
+            const virtualScrollerProps = {
+                ...props.virtualScrollerOptions,
+                ...{
+                    style: { ...props.virtualScrollerOptions.style, ...{ height: props.scrollHeight } },
+                    className: classNames('p-dropdown-items-wrapper', props.virtualScrollerOptions.className),
+                    items: props.visibleOptions,
+                    autoSize: true,
+                    onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: props.filterValue } }),
+                    itemTemplate: (item, options) => item && createItem(item, options.index, options),
+                    contentTemplate: (options) => {
+                        const className = classNames('p-dropdown-items', options.className);
+                        const content = isEmptyFilter ? createEmptyMessage() : options.children;
 
-                    return (
-                        <ul ref={options.contentRef} className={className} role="listbox">
-                            {content}
-                        </ul>
-                    );
+                        return (
+                            <ul ref={options.contentRef} className={className} role="listbox">
+                                {content}
+                            </ul>
+                        )
+                    }
                 }
-            }};
+            };
 
-            return <VirtualScroller ref={(el) => this.virtualScrollerRef = el} {...virtualScrollerProps} />;
+            return <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerProps} />
         }
         else {
-            const items = this.renderItems();
+            const items = createItems();
 
             return (
-                <div className="p-dropdown-items-wrapper" style={{ maxHeight: this.props.scrollHeight || 'auto' }}>
+                <div className="p-dropdown-items-wrapper" style={{ maxHeight: props.scrollHeight || 'auto' }}>
                     <ul className="p-dropdown-items" role="listbox">
                         {items}
                     </ul>
                 </div>
-            );
+            )
         }
     }
 
-    renderElement() {
-        const className = classNames('p-dropdown-panel p-component', this.props.panelClassName);
-        const filter = this.renderFilter();
-        const content = this.renderContent();
+    const createElement = () => {
+        const className = classNames('p-dropdown-panel p-component', props.panelClassName);
+        const filter = createFilter();
+        const content = createContent();
 
         return (
-            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
-                unmountOnExit onEnter={this.onEnter} onEntering={this.props.onEntering} onEntered={this.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
-                <div ref={this.props.forwardRef} className={className} style={this.props.panelStyle} onClick={this.props.onClick}>
+            <CSSTransition nodeRef={ref} classNames="p-connected-overlay" in={props.in} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
+                unmountOnExit onEnter={onEnter} onEntering={props.onEntering} onEntered={onEntered} onExit={props.onExit} onExited={props.onExited}>
+                <div ref={ref} className={className} style={props.panelStyle} onClick={props.onClick}>
                     {filter}
                     {content}
                 </div>
             </CSSTransition>
-        );
+        )
     }
 
-    render() {
-        let element = this.renderElement();
+    const element = createElement();
 
-        return <Portal element={element} appendTo={this.props.appendTo} />;
-    }
+    return <Portal element={element} appendTo={props.appendTo} />
+}));
 
-}
-
-export const DropdownPanel = React.forwardRef((props, ref) => <DropdownPanelComponent forwardRef={ref} {...props} />);
+DropdownPanel.displayName = 'DropdownPanel';

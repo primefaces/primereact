@@ -1,64 +1,47 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { VirtualScroller } from '../../components/lib/virtualscroller/VirtualScroller';
 import { classNames } from '../../components/lib/utils/ClassNames';
 import { Skeleton } from '../../components/lib/skeleton/Skeleton';
-import { VirtualScrollerDoc } from '../../components/doc/virtualscroller';
+import VirtualScrollerDoc from '../../components/doc/virtualscroller';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class VirtualScrollerDemo extends Component {
+const VirtualScrollerDemo = () => {
+    const [lazyItems, setLazyItems] = useState([]);
+    const [lazyLoading, setLazyLoading] = useState(true);
+    const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => `Item #${i}`));
+    const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => `Item #${i}_${j}`)));
+    const [templateItems] = useState(Array.from({ length: 10000 }).map((_, i) => `Item #${i}`));
+    const loadLazyTimeout = useRef(null);
 
-    constructor(props) {
-        super(props);
+    useEffect(() => {
+        setLazyItems(Array.from({ length: 100000 }));
+        setLazyLoading(false);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-        this.state = {
-            lazyItems: []
-        };
+    const onLazyLoad = (event) => {
+        setLazyLoading(true);
 
-        this.basicItems = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
-        this.multiItems = Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => `Item #${i}_${j}`));
-        this.loadLazyTimeout = null;
-
-        this.basicItemTemplate = this.basicItemTemplate.bind(this);
-        this.basicLoadingTemplate = this.basicLoadingTemplate.bind(this);
-        this.multiItemTemplate = this.multiItemTemplate.bind(this);
-        this.itemTemplate = this.itemTemplate.bind(this);
-        this.loadingTemplate = this.loadingTemplate.bind(this);
-        this.onLazyLoad = this.onLazyLoad.bind(this);
-    }
-
-    componentDidMount() {
-        this.setState({
-            lazyItems: Array.from({ length: 100000 }),
-            lazyLoading: false
-        });
-    }
-
-    onLazyLoad(event) {
-        this.setState({ lazyLoading: true });
-
-        if (this.loadLazyTimeout) {
-            clearTimeout(this.loadLazyTimeout);
+        if (loadLazyTimeout.current) {
+            clearTimeout(loadLazyTimeout.current);
         }
 
         //imitate delay of a backend call
-        this.loadLazyTimeout = setTimeout(() => {
+        loadLazyTimeout.current = setTimeout(() => {
             const { first, last } = event;
-            const lazyItems = [...this.state.lazyItems];
+            const _lazyItems = [...lazyItems];
 
             for (let i = first; i < last; i++) {
-                lazyItems[i] = `Item #${i}`;
+                _lazyItems[i] = `Item #${i}`;
             }
 
-            this.setState({
-                lazyItems,
-                lazyLoading: false
-            });
+            setLazyItems(_lazyItems);
+            setLazyLoading(false);
         }, Math.random() * 1000 + 250);
     }
 
-    basicItemTemplate(item, options) {
-        const className = classNames('scroll-item p-p-2', {
+    const basicItemTemplate = (item, options) => {
+        const className = classNames('scroll-item p-2', {
             'odd': options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
@@ -66,8 +49,8 @@ export default class VirtualScrollerDemo extends Component {
         return <div className={className} style={style}>{item}</div>;
     }
 
-    basicLoadingTemplate(options) {
-        const className = classNames('scroll-item p-p-2', {
+    const basicLoadingTemplate = (options) => {
+        const className = classNames('scroll-item p-2', {
             'odd': options.odd
         });
 
@@ -78,8 +61,8 @@ export default class VirtualScrollerDemo extends Component {
         );
     }
 
-    multiItemTemplate(items, options) {
-        const className = classNames('scroll-item p-p-2', {
+    const multiItemTemplate = (items, options) => {
+        const className = classNames('scroll-item p-2', {
             'odd': options.odd
         });
 
@@ -94,7 +77,7 @@ export default class VirtualScrollerDemo extends Component {
         );
     }
 
-    itemTemplate(item, options) {
+    const itemTemplate = (item, options) => {
         const { index, count, first, last, even, odd } = options;
         const className = classNames('custom-scroll-item scroll-item', {
             'odd': odd
@@ -102,116 +85,116 @@ export default class VirtualScrollerDemo extends Component {
 
         return (
             <div className={className}>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}>{`Item: ${item}`}</div>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}>{`Index: ${index}`}</div>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}>{`Count: ${count}`}</div>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}>{`First: ${first}`}</div>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}>{`Last: ${last}`}</div>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}>{`Even: ${even}`}</div>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}>{`Odd: ${odd}`}</div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>{`Item: ${item}`}</div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>{`Index: ${index}`}</div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>{`Count: ${count}`}</div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>{`First: ${first}`}</div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>{`Last: ${last}`}</div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>{`Even: ${even}`}</div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>{`Odd: ${odd}`}</div>
             </div>
         )
     }
 
-    loadingTemplate(options) {
+    const loadingTemplate = (options) => {
         const className = classNames('custom-scroll-item scroll-item', {
             'odd': options.odd
         });
 
         return (
             <div className={className}>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}><Skeleton width="60%" height="1.2rem" /></div>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}><Skeleton width="50%" height="1.2rem" /></div>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}><Skeleton width="60%" height="1.2rem" /></div>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}><Skeleton width="50%" height="1.2rem" /></div>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}><Skeleton width="60%" height="1.2rem" /></div>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}><Skeleton width="50%" height="1.2rem" /></div>
-                <div className="p-d-flex p-ai-center p-px-2" style={{ height: '25px' }}><Skeleton width="60%" height="1.2rem" /></div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="60%" height="1.2rem" /></div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="50%" height="1.2rem" /></div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="60%" height="1.2rem" /></div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="50%" height="1.2rem" /></div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="60%" height="1.2rem" /></div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="50%" height="1.2rem" /></div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="60%" height="1.2rem" /></div>
             </div>
         );
     }
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React VirtualScroller Component</title>
-                    <meta name="description" content="VirtualScroller is a performant approach to handle huge data efficiently." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>VirtualScroller</h1>
-                        <p>VirtualScroller is a performant approach to handle huge data efficiently.</p>
-                    </div>
-
-                    <DocActions github="virtualscroller/index.js" />
+    return (
+        <div>
+            <Head>
+                <title>React VirtualScroller Component</title>
+                <meta name="description" content="VirtualScroller is a performant approach to handle huge data efficiently." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>VirtualScroller</h1>
+                    <p>VirtualScroller is a performant approach to handle huge data efficiently.</p>
                 </div>
 
-                <div className="content-section implementation virtualscroller-demo">
-                    <div className="card">
-                        <h5 className="p-mb-0">Basic</h5>
-                        <div className="p-d-flex p-ai-center p-flex-wrap">
-                            <div className="p-d-flex p-dir-col p-mr-3 p-mt-3">
-                                <h6>Vertical</h6>
-                                <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} />
-                            </div>
-                            <div className="p-d-flex p-dir-col p-mr-3 p-mt-3">
-                                <h6>Horizontal</h6>
-                                <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} orientation="horizontal" />
-                            </div>
-                            <div className="p-d-flex p-dir-col p-mt-3">
-                                <h6>Both</h6>
-                                <VirtualScroller items={this.multiItems} itemSize={[50, 100]} itemTemplate={this.multiItemTemplate} orientation="both" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <h5 className="p-mb-0">Scroll Delay</h5>
-                        <div className="p-d-flex p-ai-center p-flex-wrap">
-                            <div className="p-d-flex p-dir-col p-mr-3 p-mt-3">
-                                <h6>0ms Delay</h6>
-                                <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} />
-                            </div>
-                            <div className="p-d-flex p-dir-col p-mr-3 p-mt-3">
-                                <h6>150ms Delay</h6>
-                                <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} delay={150}/>
-                            </div>
-                            <div className="p-d-flex p-dir-col p-mt-3">
-                                <h6>250ms Delay</h6>
-                                <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} delay={250} />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <h5 className="p-mb-0">Loading</h5>
-                        <div className="p-d-flex p-ai-center p-flex-wrap">
-                            <div className="p-d-flex p-dir-col p-mr-3 p-mt-3">
-                                <h6>Basic</h6>
-                                <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} showLoader delay={250}/>
-                            </div>
-                            <div className="p-d-flex p-dir-col p-mt-3">
-                                <h6>Template</h6>
-                                <VirtualScroller items={this.basicItems} itemSize={50} itemTemplate={this.basicItemTemplate} showLoader delay={250} loadingTemplate={this.basicLoadingTemplate} />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <h5>Lazy</h5>
-                        <VirtualScroller items={this.state.lazyItems} itemSize={50} itemTemplate={this.basicItemTemplate} lazy onLazyLoad={this.onLazyLoad}
-                            showLoader loading={this.state.lazyLoading} />
-                    </div>
-
-                    <div className="card">
-                        <h5>Template</h5>
-                        <VirtualScroller items={this.basicItems} itemSize={25 * 7} itemTemplate={this.itemTemplate} showLoader delay={250} loadingTemplate={this.loadingTemplate} />
-                    </div>
-                </div>
-
-                <VirtualScrollerDoc />
+                <DocActions github="virtualscroller/index.js" />
             </div>
-        )
-    }
+
+            <div className="content-section implementation virtualscroller-demo">
+                <div className="card">
+                    <h5 className="mb-0">Basic</h5>
+                    <div className="flex align-items-center flex-wrap">
+                        <div className="flex flex-column mr-3 mt-3">
+                            <h6>Vertical</h6>
+                            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
+                        </div>
+                        <div className="flex flex-column mr-3 mt-3">
+                            <h6>Horizontal</h6>
+                            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} orientation="horizontal" />
+                        </div>
+                        <div className="flex flex-column mt-3">
+                            <h6>Both</h6>
+                            <VirtualScroller items={multiItems} itemSize={[50, 100]} itemTemplate={multiItemTemplate} orientation="both" />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="card">
+                    <h5 className="mb-0">Scroll Delay</h5>
+                    <div className="flex align-items-center flex-wrap">
+                        <div className="flex flex-column mr-3 mt-3">
+                            <h6>0ms Delay</h6>
+                            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} />
+                        </div>
+                        <div className="flex flex-column mr-3 mt-3">
+                            <h6>150ms Delay</h6>
+                            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={150} />
+                        </div>
+                        <div className="flex flex-column mt-3">
+                            <h6>250ms Delay</h6>
+                            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} delay={250} />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="card">
+                    <h5 className="mb-0">Loading</h5>
+                    <div className="flex align-items-center flex-wrap">
+                        <div className="flex flex-column mr-3 mt-3">
+                            <h6>Basic</h6>
+                            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} />
+                        </div>
+                        <div className="flex flex-column mt-3">
+                            <h6>Template</h6>
+                            <VirtualScroller items={basicItems} itemSize={50} itemTemplate={basicItemTemplate} showLoader delay={250} loadingTemplate={basicLoadingTemplate} />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="card">
+                    <h5>Lazy</h5>
+                    <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onLazyLoad={onLazyLoad}
+                        showLoader loading={lazyLoading} />
+                </div>
+
+                <div className="card">
+                    <h5>Template</h5>
+                    <VirtualScroller items={templateItems} itemSize={25 * 7} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
+                </div>
+            </div>
+
+            <VirtualScrollerDoc />
+        </div>
+    )
 }
+
+export default VirtualScrollerDemo;

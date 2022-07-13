@@ -1,14 +1,10 @@
 import * as React from 'react';
 import { DialogProps } from '../dialog';
-import {IconType} from "../utils";
+import { IconType } from '../utils';
 
 type ConfirmDialogTemplateType = React.ReactNode | ((options: ConfirmDialogOptions) => React.ReactNode);
 
 type ConfirmDialogAppendToType = 'self' | HTMLElement | undefined | null;
-
-interface ConfirmDialogBreakpoints {
-    [key: string]: string;
-}
 
 interface ConfirmDialogOptions {
     accept(): void;
@@ -22,7 +18,8 @@ interface ConfirmDialogOptions {
     [key: string]: any;
 }
 
-export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
+export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer'> {
+    tagKey?: string;
     visible?: boolean;
     message?: ConfirmDialogTemplateType;
     rejectLabel?: string;
@@ -35,10 +32,10 @@ export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
     appendTo?: ConfirmDialogAppendToType;
     className?: string;
     footer?: ConfirmDialogTemplateType;
-    breakpoints?: ConfirmDialogBreakpoints;
     onHide?(result: string): void;
     accept?(): void;
     reject?(): void;
+    children?: React.ReactNode;
 }
 
 interface ConfirmDialogReturn {
@@ -46,6 +43,8 @@ interface ConfirmDialogReturn {
     hide(): void;
 }
 
-export declare class ConfirmDialog extends React.Component<ConfirmDialogProps, any> { }
+export declare class ConfirmDialog extends React.Component<ConfirmDialogProps, any> {
+    public confirm(props?: ConfirmDialogProps): void;
+}
 
 export declare function confirmDialog(props: ConfirmDialogProps): ConfirmDialogReturn;

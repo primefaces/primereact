@@ -27,8 +27,7 @@
                         "demo",
                         "quickstart",
                         "starter"
-                    ],
-                    "badge": "new"
+                    ]
                 },
                 {
                     "name": "Locale",
@@ -118,7 +117,7 @@
             ],
             "children": [
                 {
-                    "name": "Guide",
+                    "name": "Overview",
                     "to": "/theming",
                     "meta": [
                         "guide"
@@ -144,7 +143,7 @@
                 },
                 {
                     "name": "SASS API",
-                    "href": "https://www.primefaces.org/designer/api/primereact/6.3.0",
+                    "href": "https://www.primefaces.org/designer/api/primereact/7.0.0",
                     "meta": [
                         "sass api"
                     ]
@@ -152,85 +151,49 @@
             ]
         },
         {
-            "name": "PrimeBlocks",
-            "meta": ["primeblocks"],
-            "banner": true,
-            "imageLight": "/images/banner-primeblocks.png",
-            "imageDark": "/images/banner-primeblocks-dark.png",
-            "href": "https://www.primefaces.org/primeblocks-react"
-        },
-        {
-            "name": "PrimeFlex 3.0",
-            "meta": ["primeflex"],
-            "banner": true,
-            "imageLight": "/images/banner-primeflex.svg",
-            "imageDark": "/images/banner-primeflex-dark.svg",
-            "href": "https://www.primefaces.org/primeflex"
-        },
-        {
-            "name": "PrimeFlex 2.0",
-            "meta": [
-                "primeflex"
-            ],
+            "name": "Accessibility",
+            "meta": ["accessibility"],
             "children": [
                 {
-                    "name": "Setup",
-                    "to": "/primeflex",
+                    "name": "Overview",
+                    "to": "/accessibility",
                     "meta": [
-                        "primeflex",
-                        "setup"
+                        "accessibility"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "PrimeBlocks",
+            "meta": ["primeblocks"],
+            "children": [
+                {
+                    "name": "Free Blocks",
+                    "href": "https://www.primefaces.org/primeblocks-react/#/free",
+                    "meta": [
+                        "free blocks"
                     ]
                 },
                 {
-                    "name": "Display",
-                    "to": "/display",
+                    "name": "All Blocks",
+                    "href": "https://www.primefaces.org/primeblocks-react",
                     "meta": [
-                        "display"
+                        "primeblocks"
                     ]
+                }
+            ]
+        },
+        {
+            "name": "PrimeFlex",
+            "meta": ["primeflex"],
+            "children": [
+                {
+                    "name": "PrimeFlex v3",
+                    "href": "https://www.primefaces.org/primeflex"
                 },
                 {
-                    "name": "Elevation",
-                    "to": "/elevation",
-                    "meta": [
-                        "elevation",
-                        "shadow"
-                    ]
-                },
-                {
-                    "name": "Flexbox",
-                    "to": "/flexbox",
-                    "meta": [
-                        "flexbox"
-                    ]
-                },
-                {
-                    "name": "FormLayout",
-                    "to": "/formlayout",
-                    "meta": [
-                        "formlayout"
-                    ]
-                },
-                {
-                    "name": "Grid System",
-                    "to": "/flexgrid",
-                    "meta": [
-                        "grid system",
-                        "flexgrid"
-                    ]
-                },
-                {
-                    "name": "Spacing",
-                    "to": "/spacing",
-                    "meta": [
-                        "spacing"
-                    ]
-                },
-                {
-                    "name": "Text",
-                    "to": "/text",
-                    "meta": [
-                        "text"
-                    ]
+                    "name": "PrimeFlex v2",
+                    "href": "https://github.com/primefaces/primeflex/wiki/PrimeFlex-v2"
                 }
             ]
         },
@@ -245,8 +208,7 @@
                     "to": "/icons",
                     "meta": [
                         "icons"
-                    ],
-                    "badge":"updated"
+                    ]
                 }
             ]
         },
@@ -545,7 +507,6 @@
                     "meta": [
                         "datatable"
                     ],
-                    "badge": "updated",
                     "children": [
                         {
                             "name": "Documentation",

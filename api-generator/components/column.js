@@ -24,6 +24,12 @@ const ColumnProps = [
         description: 'Property of a row data used for filtering, defaults to field.'
     },
     {
+        name: 'exportField',
+        type: 'string',
+        default: 'null',
+        description: 'Property of a row data used for exporting, defaults to field.'
+    },
+    {
         name: 'header',
         type: 'any',
         default: 'null',
@@ -272,8 +278,14 @@ const ColumnProps = [
     {
         name: 'reorderable',
         type: 'boolean',
-        default: 'null',
+        default: 'true',
         description: 'Used to defined reorderableColumns per column when reorderableColumns of table is enabled, defaults to value of reorderableColumns.'
+    },
+    {
+        name: 'resizeable',
+        type: 'boolean',
+        default: 'true',
+        description: 'Used to defined resizeableColumns per column when resizeableColumns of table is enabled, defaults to value of resizeableColumns.'
     }
 ];
 

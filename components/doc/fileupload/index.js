@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
-import { CodeHighlight } from '../common/codehighlight'; 
+import { CodeHighlight } from '../common/codehighlight';
 
-export class FileUploadDoc extends Component {
+const FileUploadDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
@@ -105,27 +102,39 @@ export class FileUploadDemo extends Component {
 
     itemTemplate(file, props) {
         return (
-            <div className="p-d-flex p-ai-center p-flex-wrap">
-                <div className="p-d-flex p-ai-center" style={{width: '40%'}}>
+            <div className="flex align-items-center flex-wrap">
+                <div className="flex align-items-center" style={{width: '40%'}}>
                     <img alt={file.name} role="presentation" src={file.objectURL} width={100} />
-                    <span className="p-d-flex p-dir-col p-text-left p-ml-3">
+                    <span className="flex flex-column text-left ml-3">
                         {file.name}
                         <small>{new Date().toLocaleDateString()}</small>
                     </span>
                 </div>
-                <Tag value={props.formatSize} severity="warning" className="p-px-3 p-py-2" />
-                <Button type="button" icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger p-ml-auto" onClick={() => this.onTemplateRemove(file, props.onRemove)} />
+                <Tag value={props.formatSize} severity="warning" className="px-3 py-2" />
+                <Button type="button" icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger ml-auto" onClick={() => this.onTemplateRemove(file, props.onRemove)} />
             </div>
         )
     }
 
     emptyTemplate() {
         return (
-            <div className="p-d-flex p-ai-center p-dir-col">
-                <i className="pi pi-image p-mt-3 p-p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
-                <span style={{'fontSize': '1.2em', color: 'var(--text-color-secondary)'}} className="p-my-5">Drag and Drop Image Here</span>
+            <div className="flex align-items-center flex-column">
+                <i className="pi pi-image mt-3 p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
+                <span style={{'fontSize': '1.2em', color: 'var(--text-color-secondary)'}} className="my-5">Drag and Drop Image Here</span>
             </div>
         )
+    }
+
+    async customBase64Uploader(event) {
+        // convert file to base64 encoded 
+        const file = event.files[0];
+        const reader = new FileReader();
+        let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
+        reader.readAsDataURL(blob); 
+        reader.onloadend = function () {
+            const base64data = reader.result;
+            console.log(base64data);
+        }
     }
 
     render() {
@@ -144,7 +153,7 @@ export class FileUploadDemo extends Component {
                 <div className="card">
                     <h5>Advanced</h5>
                     <FileUpload name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" onUpload={this.onUpload} multiple accept="image/*" maxFileSize={1000000}
-                        emptyTemplate={<p className="p-m-0">Drag and drop files to here to upload.</p>} />
+                        emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
 
                     <h5>Template</h5>
                     <FileUpload ref={(el) => this.fileUploadRef = el} name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" multiple accept="image/*" maxFileSize={1000000}
@@ -157,16 +166,19 @@ export class FileUploadDemo extends Component {
 
                     <h5>Basic with Auto</h5>
                     <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={this.onBasicUploadAuto} auto chooseLabel="Browse" />
+
+                    <h5>Custom (base64 encoded)</h5>
+                    <FileUpload mode="basic" name="demo[]" url={uploadPath} accept="image/*" customUpload uploadHandler={customBase64Uploader} />
                 </div>
             </div>
         )
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useRef, useState } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
@@ -237,27 +249,39 @@ export const FileUploadDemo = () => {
 
     const itemTemplate = (file, props) => {
         return (
-            <div className="p-d-flex p-ai-center p-flex-wrap">
-                <div className="p-d-flex p-ai-center" style={{width: '40%'}}>
+            <div className="flex align-items-center flex-wrap">
+                <div className="flex align-items-center" style={{width: '40%'}}>
                     <img alt={file.name} role="presentation" src={file.objectURL} width={100} />
-                    <span className="p-d-flex p-dir-col p-text-left p-ml-3">
+                    <span className="flex flex-column text-left ml-3">
                         {file.name}
                         <small>{new Date().toLocaleDateString()}</small>
                     </span>
                 </div>
-                <Tag value={props.formatSize} severity="warning" className="p-px-3 p-py-2" />
-                <Button type="button" icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger p-ml-auto" onClick={() => onTemplateRemove(file, props.onRemove)} />
+                <Tag value={props.formatSize} severity="warning" className="px-3 py-2" />
+                <Button type="button" icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger ml-auto" onClick={() => onTemplateRemove(file, props.onRemove)} />
             </div>
         )
     }
 
     const emptyTemplate = () => {
         return (
-            <div className="p-d-flex p-ai-center p-dir-col">
-                <i className="pi pi-image p-mt-3 p-p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
-                <span style={{'fontSize': '1.2em', color: 'var(--text-color-secondary)'}} className="p-my-5">Drag and Drop Image Here</span>
+            <div className="flex align-items-center flex-column">
+                <i className="pi pi-image mt-3 p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
+                <span style={{'fontSize': '1.2em', color: 'var(--text-color-secondary)'}} className="my-5">Drag and Drop Image Here</span>
             </div>
         )
+    }
+
+    const customBase64Uploader = async (event) => {
+        // convert file to base64 encoded 
+        const file = event.files[0];
+        const reader = new FileReader();
+        let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
+        reader.readAsDataURL(blob); 
+        reader.onloadend = function () {
+            const base64data = reader.result;
+            console.log(base64data);
+        }
     }
 
     const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
@@ -275,7 +299,7 @@ export const FileUploadDemo = () => {
             <div className="card">
                 <h5>Advanced</h5>
                 <FileUpload name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000}
-                    emptyTemplate={<p className="p-m-0">Drag and drop files to here to upload.</p>} />
+                    emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
 
                 <h5>Template</h5>
                 <FileUpload ref={fileUploadRef} name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" multiple accept="image/*" maxFileSize={1000000}
@@ -288,15 +312,18 @@ export const FileUploadDemo = () => {
 
                 <h5>Basic with Auto</h5>
                 <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+
+                <h5>Custom (base64 encoded)</h5>
+                <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
             </div>
         </div>
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useRef, useState } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
@@ -367,27 +394,39 @@ export const FileUploadDemo = () => {
 
     const itemTemplate = (file, props) => {
         return (
-            <div className="p-d-flex p-ai-center p-flex-wrap">
-                <div className="p-d-flex p-ai-center" style={{width: '40%'}}>
+            <div className="flex align-items-center flex-wrap">
+                <div className="flex align-items-center" style={{width: '40%'}}>
                     <img alt={file.name} role="presentation" src={file.objectURL} width={100} />
-                    <span className="p-d-flex p-dir-col p-text-left p-ml-3">
+                    <span className="flex flex-column text-left ml-3">
                         {file.name}
                         <small>{new Date().toLocaleDateString()}</small>
                     </span>
                 </div>
-                <Tag value={props.formatSize} severity="warning" className="p-px-3 p-py-2" />
-                <Button type="button" icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger p-ml-auto" onClick={() => onTemplateRemove(file, props.onRemove)} />
+                <Tag value={props.formatSize} severity="warning" className="px-3 py-2" />
+                <Button type="button" icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger ml-auto" onClick={() => onTemplateRemove(file, props.onRemove)} />
             </div>
         )
     }
 
     const emptyTemplate = () => {
         return (
-            <div className="p-d-flex p-ai-center p-dir-col">
-                <i className="pi pi-image p-mt-3 p-p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
-                <span style={{'fontSize': '1.2em', color: 'var(--text-color-secondary)'}} className="p-my-5">Drag and Drop Image Here</span>
+            <div className="flex align-items-center flex-column">
+                <i className="pi pi-image mt-3 p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
+                <span style={{'fontSize': '1.2em', color: 'var(--text-color-secondary)'}} className="my-5">Drag and Drop Image Here</span>
             </div>
         )
+    }
+
+    const customBase64Uploader = async (event) => {
+        // convert file to base64 encoded 
+        const file = event.files[0];
+        const reader = new FileReader();
+        let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
+        reader.readAsDataURL(blob); 
+        reader.onloadend = function () {
+            const base64data = reader.result;
+            console.log(base64data);
+        }
     }
 
     const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
@@ -405,7 +444,7 @@ export const FileUploadDemo = () => {
             <div className="card">
                 <h5>Advanced</h5>
                 <FileUpload name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000}
-                    emptyTemplate={<p className="p-m-0">Drag and drop files to here to upload.</p>} />
+                    emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
 
                 <h5>Template</h5>
                 <FileUpload ref={fileUploadRef} name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" multiple accept="image/*" maxFileSize={1000000}
@@ -418,21 +457,24 @@ export const FileUploadDemo = () => {
 
                 <h5>Basic with Auto</h5>
                 <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+
+                <h5>Custom (base64 encoded)</h5>
+                <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
             </div>
         </div>
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>
         <script src="https://unpkg.com/primereact/fileupload/fileupload.min.js"></script>
         <script src="https://unpkg.com/primereact/tag/tag.min.js"></script>`,
-                content: `
-const { useEffect, useState, useRef } = React;
+            content: `
+const { useState, useRef } = React;
 const { Toast } = primereact.toast;
 const { FileUpload } = primereact.fileupload;
 const { ProgressBar } = primereact.progressbar;
@@ -502,27 +544,39 @@ const FileUploadDemo = () => {
 
     const itemTemplate = (file, props) => {
         return (
-            <div className="p-d-flex p-ai-center p-flex-wrap">
-                <div className="p-d-flex p-ai-center" style={{width: '40%'}}>
+            <div className="flex align-items-center flex-wrap">
+                <div className="flex align-items-center" style={{width: '40%'}}>
                     <img alt={file.name} role="presentation" src={file.objectURL} width={100} />
-                    <span className="p-d-flex p-dir-col p-text-left p-ml-3">
+                    <span className="flex flex-column text-left ml-3">
                         {file.name}
                         <small>{new Date().toLocaleDateString()}</small>
                     </span>
                 </div>
-                <Tag value={props.formatSize} severity="warning" className="p-px-3 p-py-2" />
-                <Button type="button" icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger p-ml-auto" onClick={() => onTemplateRemove(file, props.onRemove)} />
+                <Tag value={props.formatSize} severity="warning" className="px-3 py-2" />
+                <Button type="button" icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger ml-auto" onClick={() => onTemplateRemove(file, props.onRemove)} />
             </div>
         )
     }
 
     const emptyTemplate = () => {
         return (
-            <div className="p-d-flex p-ai-center p-dir-col">
-                <i className="pi pi-image p-mt-3 p-p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
-                <span style={{'fontSize': '1.2em', color: 'var(--text-color-secondary)'}} className="p-my-5">Drag and Drop Image Here</span>
+            <div className="flex align-items-center flex-column">
+                <i className="pi pi-image mt-3 p-5" style={{'fontSize': '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)'}}></i>
+                <span style={{'fontSize': '1.2em', color: 'var(--text-color-secondary)'}} className="my-5">Drag and Drop Image Here</span>
             </div>
         )
+    }
+
+    const customBase64Uploader = async (event) => {
+        // convert file to base64 encoded 
+        const file = event.files[0];
+        const reader = new FileReader();
+        let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
+        reader.readAsDataURL(blob); 
+        reader.onloadend = function () {
+            const base64data = reader.result;
+            console.log(base64data);
+        }
     }
 
     const chooseOptions = {icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined'};
@@ -540,7 +594,7 @@ const FileUploadDemo = () => {
             <div className="card">
                 <h5>Advanced</h5>
                 <FileUpload name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000}
-                    emptyTemplate={<p className="p-m-0">Drag and drop files to here to upload.</p>} />
+                    emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
 
                 <h5>Template</h5>
                 <FileUpload ref={fileUploadRef} name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" multiple accept="image/*" maxFileSize={1000000}
@@ -553,6 +607,9 @@ const FileUploadDemo = () => {
 
                 <h5>Basic with Auto</h5>
                 <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+
+                <h5>Custom (base64 encoded)</h5>
+                <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" customUpload uploadHandler={customBase64Uploader} />
             </div>
         </div>
     )
@@ -561,36 +618,29 @@ const FileUploadDemo = () => {
             }
         };
 
-        this.extFiles = {
-            'public/upload.php': {
-                content: `
+    const extFiles = {
+        'public/upload.php': {
+            content: `
 <?php
 header ("Access-Control-Allow-Origin: *");
 echo '<p>Fake Upload Process</p>'; ?>
 
                 `
-            }
-        };
+        }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { FileUpload } from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -598,16 +648,16 @@ import { FileUpload } from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
-            <h5>Getting Started</h5>
-            <p>FileUpload requires a <i>url</i> property as the upload target and a <i>name</i> to identify the files at backend.</p>
+        <h5>Getting Started</h5>
+        <p>FileUpload requires a <i>url</i> property as the upload target and a <i>name</i> to identify the files at backend.</p>
 <CodeHighlight>
 {`
 <FileUpload name="demo" url="./upload"></FileUpload>
 `}
 </CodeHighlight>
 
-            <h5>Multiple Uploads</h5>
-            <p>Only one file can be selected at a time by default, to allow selecting multiple files at once enable <i>multiple</i> option.</p>
+        <h5>Multiple Uploads</h5>
+        <p>Only one file can be selected at a time by default, to allow selecting multiple files at once enable <i>multiple</i> option.</p>
 
 <CodeHighlight>
 {`
@@ -615,11 +665,11 @@ import { FileUpload } from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
-            <h5>DragDrop</h5>
-            <p>File selection can also be done by dragging and dropping from the filesystem to the content section of the component.</p>
+        <h5>DragDrop</h5>
+        <p>File selection can also be done by dragging and dropping from the filesystem to the content section of the component.</p>
 
-            <h5>Auto Uploads</h5>
-            <p>When <i>auto</i> property is enabled, upload begins as soon as file selection is completed or a file is dropped on the drop area.</p>
+        <h5>Auto Uploads</h5>
+        <p>When <i>auto</i> property is enabled, upload begins as soon as file selection is completed or a file is dropped on the drop area.</p>
 
 <CodeHighlight>
 {`
@@ -627,16 +677,16 @@ import { FileUpload } from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
-            <h5>File Types</h5>
-            <p>Selectable file types can be restricted with <i>accept</i> property, example below only allows images to be uploaded. Read more about other possible values <a href="https://www.w3schools.com/tags/att_input_accept.asp"> here</a>.</p>
+        <h5>File Types</h5>
+        <p>Selectable file types can be restricted with <i>accept</i> property, example below only allows images to be uploaded. Read more about other possible values <a href="https://www.w3schools.com/tags/att_input_accept.asp"> here</a>.</p>
 <CodeHighlight>
 {`
 <FileUpload name="demo[]" url="./upload" multiple accept="image/*" />
 `}
 </CodeHighlight>
 
-            <h5>File Size</h5>
-            <p>Maximium file size can be restricted using <i>maxFileSize</i> property defined in bytes.</p>
+        <h5>File Size</h5>
+        <p>Maximium file size can be restricted using <i>maxFileSize</i> property defined in bytes.</p>
 
 <CodeHighlight>
 {`
@@ -644,21 +694,21 @@ import { FileUpload } from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
-            <p>In order to customize the default messages use <i>invalidFileSizeMessageSummary</i> and <i>invalidFileSizeMessageDetail</i> options. In summary messages, {0} placeholder refers to the filename and in detail message, the file size.</p>
-            <ul>
-                <li>
-                    invalidFileSizeMessageSummary: '{0}: Invalid file size, '
-                </li>
-                <li>
-                    invalidFileSizeMessageDetail: string = 'maximum upload size is {0}.'
-                </li>
-            </ul>
+        <p>In order to customize the default messages use <i>invalidFileSizeMessageSummary</i> and <i>invalidFileSizeMessageDetail</i> options. In summary messages, {0} placeholder refers to the filename and in detail message, the file size.</p>
+        <ul>
+            <li>
+                invalidFileSizeMessageSummary: '{0}: Invalid file size, '
+            </li>
+            <li>
+                invalidFileSizeMessageDetail: string = 'maximum upload size is {0}.'
+            </li>
+        </ul>
 
-            <h5>Request Customization</h5>
-            <p>XHR request to upload the files can be customized using the onBeforeUpload callback that passes the xhr instance and FormData object as event parameters.</p>
+        <h5>Request Customization</h5>
+        <p>XHR request to upload the files can be customized using the onBeforeUpload callback that passes the xhr instance and FormData object as event parameters.</p>
 
-            <h5>Basic UI</h5>
-            <p>FileUpload basic mode provides a simpler UI as an alternative to advanced mode.</p>
+        <h5>Basic UI</h5>
+        <p>FileUpload basic mode provides a simpler UI as an alternative to advanced mode.</p>
 
 <CodeHighlight>
 {`
@@ -666,8 +716,8 @@ import { FileUpload } from 'primereact/fileupload';
 `}
 </CodeHighlight>
 
-            <h5>Custom Upload</h5>
-            <p>Uploading implementation can be overriden by enabling customUpload property and defining a custom upload handler event.</p>
+        <h5>Custom Upload</h5>
+        <p>Uploading implementation can be overriden by enabling customUpload property and defining a custom upload handler event.</p>
 <CodeHighlight>
 {`
 <FileUpload name="demo[]" url="./upload" customUpload uploadHandler={myUploader} />
@@ -681,8 +731,8 @@ const myUploader = (event) => {
 `}
 </CodeHighlight>
 
-            <h5>ItemTemplate</h5>
-            <p>Used to create custom item elements in the container.</p>
+        <h5>ItemTemplate</h5>
+        <p>Used to create custom item elements in the container.</p>
 <CodeHighlight>
 {`
 <FileUpload name="demo[]" url="./upload" itemTemplate={customItemTemplate} uploadHandler={myUploader} />
@@ -698,14 +748,16 @@ const customItemTemplate = (file, props) => {
     // options.sizeElement: The default size element in the container.
     // options.removeElement: The default remove element in the container.
     // options.formatSize: The formated size of file.
+    // options.files: Current files.
+    // options.index: The index of file in current files list.
     // options.element: Default element created by the component.
     // options.props: component props.
 }
 `}
 </CodeHighlight>
 
-            <h5>Button Options</h5>
-            <p>Used to customize choose, upload and cancel buttons.</p>
+        <h5>Button Options</h5>
+        <p>Used to customize choose, upload and cancel buttons.</p>
 <CodeHighlight lang="js">
 {`
 const chooseOptions = {label: 'Choose', icon: 'pi pi-fw pi-plus'};
@@ -729,339 +781,345 @@ const buttonOptions = {
 `}
 </CodeHighlight>
 
-            <h5>Properties</h5>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Default</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <h5>Properties</h5>
+                <div className="doc-tablewrapper">
+                    <table className="doc-table">
+                        <thead>
                         <tr>
-                            <td>id</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Unique identifier of the element.</td>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
                         </tr>
-                        <tr>
-                            <td>name</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Name of the request parameter to identify the files at backend.</td>
-                        </tr>
-                        <tr>
-                            <td>url</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Remote url to upload the files.</td>
-                        </tr>
-                        <tr>
-                            <td>mode</td>
-                            <td>string</td>
-                            <td>advanced</td>
-                            <td>Defines the UI of the component, possible values are "advanced" and "basic".</td>
-                        </tr>
-                        <tr>
-                            <td>multiple</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Used to select multiple files at once from file dialog.</td>
-                        </tr>
-                        <tr>
-                            <td>accept</td>
-                            <td>string</td>
-                            <td>false</td>
-                            <td>Pattern to restrict the allowed file types such as "image/*".</td>
-                        </tr>
-                        <tr>
-                            <td>disabled</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Disables the upload functionality.</td>
-                        </tr>
-                        <tr>
-                            <td>auto</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>When enabled, upload begins automatically after selection is completed.</td>
-                        </tr>
-                        <tr>
-                            <td>maxFileSize</td>
-                            <td>number</td>
-                            <td>null</td>
-                            <td>Maximum file size allowed in bytes.</td>
-                        </tr>
-                        <tr>
-                            <td>invalidFileSizeMessageSummary</td>
-                            <td>string</td>
-                            <td>"&#123;0&#125;: Invalid file size, "</td>
-                            <td>Summary message of the invalid fize size.</td>
-                        </tr>
-                        <tr>
-                            <td>invalidFileSizeMessageDetail</td>
-                            <td>string</td>
-                            <td>"maximum upload size is &#123;0&#125;."</td>
-                            <td>Detail message of the invalid fize size.</td>
-                        </tr>
-                        <tr>
-                            <td>style</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>Inline style of the component.</td>
-                        </tr>
-                        <tr>
-                            <td>className</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Style class of the component.</td>
-                        </tr>
-                        <tr>
-                            <td>withCredentials</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Cross-site Access-Control requests should be made using credentials such as cookies, authorization headers or TLS client certificates.</td>
-                        </tr>
-                        <tr>
-                            <td>previewWidth</td>
-                            <td>number</td>
-                            <td>50</td>
-                            <td>Width of the image thumbnail in pixels.</td>
-                        </tr>
-                        <tr>
-                            <td>chooseLabel</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Label of the choose button. Defaults to global value in Locale configuration.</td>
-                        </tr>
-                        <tr>
-                            <td>uploadLabel</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Label of the upload button. Defaults to global value in Locale configuration.</td>
-                        </tr>
-                        <tr>
-                            <td>cancelLabel</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Label of the cancel button. Defaults to global value in Locale configuration.</td>
-                        </tr>
-                        <tr>
-                            <td>chooseOptions</td>
-                            <td>object (OptionsType)</td>
-                            <td>null</td>
-                            <td>Options used to customize the choose button. These options have "label", "icon", "className" and "style" properties.</td>
-                        </tr>
-                        <tr>
-                            <td>uploadOptions</td>
-                            <td>object (OptionsType)</td>
-                            <td>null</td>
-                            <td>Options used to customize the upload button. These options have "label", "icon", "className" and "style" properties.</td>
-                        </tr>
-                        <tr>
-                            <td>cancelOptions</td>
-                            <td>object (OptionsType)</td>
-                            <td>null</td>
-                            <td>Options used to customize the cancel button. These options have "label", "icon", "className" and "style" properties.</td>
-                        </tr>
-                        <tr>
-                            <td>customUpload</td>
-                            <td>boolean</td>
-                            <td>false</td>
-                            <td>Whether to use the default upload or a manual implementation defined in uploadHandler callback.</td>
-                        </tr>
-                        <tr>
-                            <td>emptyTemplate</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>The template of empty content in the container.</td>
-                        </tr>
-                        <tr>
-                            <td>progressBarTemplate</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>The template of progressBar content in the container.</td>
-                        </tr>
-                        <tr>
-                            <td>itemTemplate</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>The template of each item content in the container.</td>
-                        </tr>
-                        <tr>
-                            <td>headerTemplate</td>
-                            <td>any</td>
-                            <td>null</td>
-                            <td>The template of the header.</td>
-                        </tr>
-                        <tr>
-                            <td>headerStyle</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>Inline style of the header.</td>
-                        </tr>
-                        <tr>
-                            <td>headerClassName</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Style class of the header.</td>
-                        </tr>
-                        <tr>
-                            <td>contentStyle</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>Inline style of the content.</td>
-                        </tr>
-                        <tr>
-                            <td>contentClassName</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Style class of the content.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>id</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Unique identifier of the element.</td>
+                            </tr>
+                            <tr>
+                                <td>name</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Name of the request parameter to identify the files at backend.</td>
+                            </tr>
+                            <tr>
+                                <td>url</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Remote url to upload the files.</td>
+                            </tr>
+                            <tr>
+                                <td>mode</td>
+                                <td>string</td>
+                                <td>advanced</td>
+                                <td>Defines the UI of the component, possible values are "advanced" and "basic".</td>
+                            </tr>
+                            <tr>
+                                <td>multiple</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>Used to select multiple files at once from file dialog.</td>
+                            </tr>
+                            <tr>
+                                <td>accept</td>
+                                <td>string</td>
+                                <td>false</td>
+                                <td>Pattern to restrict the allowed file types such as "image/*".</td>
+                            </tr>
+                            <tr>
+                                <td>disabled</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>Disables the upload functionality.</td>
+                            </tr>
+                            <tr>
+                                <td>auto</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>When enabled, upload begins automatically after selection is completed.</td>
+                            </tr>
+                            <tr>
+                                <td>maxFileSize</td>
+                                <td>number</td>
+                                <td>null</td>
+                                <td>Maximum file size allowed in bytes.</td>
+                            </tr>
+                            <tr>
+                                <td>invalidFileSizeMessageSummary</td>
+                                <td>string</td>
+                                <td>"&#123;0&#125;: Invalid file size, "</td>
+                                <td>Summary message of the invalid fize size.</td>
+                            </tr>
+                            <tr>
+                                <td>invalidFileSizeMessageDetail</td>
+                                <td>string</td>
+                                <td>"maximum upload size is &#123;0&#125;."</td>
+                                <td>Detail message of the invalid fize size.</td>
+                            </tr>
+                            <tr>
+                                <td>style</td>
+                                <td>object</td>
+                                <td>null</td>
+                                <td>Inline style of the component.</td>
+                            </tr>
+                            <tr>
+                                <td>className</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Style class of the component.</td>
+                            </tr>
+                            <tr>
+                                <td>withCredentials</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>Cross-site Access-Control requests should be made using credentials such as cookies, authorization headers or TLS client certificates.</td>
+                            </tr>
+                            <tr>
+                                <td>previewWidth</td>
+                                <td>number</td>
+                                <td>50</td>
+                                <td>Width of the image thumbnail in pixels.</td>
+                            </tr>
+                            <tr>
+                                <td>chooseLabel</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Label of the choose button. Defaults to global value in Locale configuration.</td>
+                            </tr>
+                            <tr>
+                                <td>uploadLabel</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Label of the upload button. Defaults to global value in Locale configuration.</td>
+                            </tr>
+                            <tr>
+                                <td>cancelLabel</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Label of the cancel button. Defaults to global value in Locale configuration.</td>
+                            </tr>
+                            <tr>
+                                <td>chooseOptions</td>
+                                <td>object (OptionsType)</td>
+                                <td>null</td>
+                                <td>Options used to customize the choose button. These options have "label", "icon", "className" and "style" properties.</td>
+                            </tr>
+                            <tr>
+                                <td>uploadOptions</td>
+                                <td>object (OptionsType)</td>
+                                <td>null</td>
+                                <td>Options used to customize the upload button. These options have "label", "icon", "className" and "style" properties.</td>
+                            </tr>
+                            <tr>
+                                <td>cancelOptions</td>
+                                <td>object (OptionsType)</td>
+                                <td>null</td>
+                                <td>Options used to customize the cancel button. These options have "label", "icon", "className" and "style" properties.</td>
+                            </tr>
+                            <tr>
+                                <td>customUpload</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>Whether to use the default upload or a manual implementation defined in uploadHandler callback.</td>
+                            </tr>
+                            <tr>
+                                <td>emptyTemplate</td>
+                                <td>any</td>
+                                <td>null</td>
+                                <td>The template of empty content in the container.</td>
+                            </tr>
+                            <tr>
+                                <td>progressBarTemplate</td>
+                                <td>any</td>
+                                <td>null</td>
+                                <td>The template of progressBar content in the container.</td>
+                            </tr>
+                            <tr>
+                                <td>itemTemplate</td>
+                                <td>any</td>
+                                <td>null</td>
+                                <td>The template of each item content in the container.</td>
+                            </tr>
+                            <tr>
+                                <td>headerTemplate</td>
+                                <td>any</td>
+                                <td>null</td>
+                                <td>The template of the header.</td>
+                            </tr>
+                            <tr>
+                                <td>headerStyle</td>
+                                <td>object</td>
+                                <td>null</td>
+                                <td>Inline style of the header.</td>
+                            </tr>
+                            <tr>
+                                <td>headerClassName</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Style class of the header.</td>
+                            </tr>
+                            <tr>
+                                <td>contentStyle</td>
+                                <td>object</td>
+                                <td>null</td>
+                                <td>Inline style of the content.</td>
+                            </tr>
+                            <tr>
+                                <td>contentClassName</td>
+                                <td>string</td>
+                                <td>null</td>
+                                <td>Style class of the content.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-            <h5>Events</h5>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Parameters</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>onBeforeUpload</td>
-                            <td>event.xhr: XmlHttpRequest instance. <br/>
-                                event.formData: FormData object.</td>
-                            <td>Callback to invoke before file upload begins to customize the request
-                                such as post parameters before the files.</td>
-                        </tr>
-						<tr>
-                            <td>onBeforeSend</td>
-                            <td>event.xhr: XmlHttpRequest instance. <br/>
-                                event.formData: FormData object.</td>
-                            <td>Callback to invoke before file send begins to customize the request
-                                such as adding headers.</td>
-                        </tr>
-                        <tr>
-                            <td>onUpload</td>
-                            <td>event.xhr: XmlHttpRequest instance.<br />
-                                event.files: Uploaded files.</td>
-                            <td>Callback to invoke when file upload is complete.</td>
-                        </tr>
-                        <tr>
-                            <td>onError</td>
-                            <td>event.xhr: XmlHttpRequest instance.<br />
-                                event.files: Files that are not uploaded.</td>
-                            <td>Callback to invoke if file upload fails.</td>
-                        </tr>
-                        <tr>
-                            <td>onClear</td>
-                            <td>-</td>
-                            <td>Callback to invoke when files in queue are removed without uploading.</td>
-                        </tr>
-                        <tr>
-                            <td>onSelect</td>
-                            <td>event.originalEvent: Original browser event. <br />
-                                event.files: List of selected files.</td>
-                            <td>Callback to invoke when files are selected.</td>
-                        </tr>
-                        <tr>
-                            <td>onProgress</td>
-                            <td>event.originalEvent: Original browser event. <br />
-                                event.progress: Calculated progress value.</td>
-                            <td>Callback to invoke when files are being uploaded.</td>
-                        </tr>
-                        <tr>
-                            <td>onValidationFail</td>
-                            <td>file: Invalid file.</td>
-                            <td>Callback to invoke when a validation file fails.</td>
-                        </tr>
-                        <tr>
-                            <td>uploadHandler</td>
-                            <td>event.files: List of selected files.<br />
-                                event.options: Handler options.</td>
-                            <td>Callback to invoke in custom upload mode to upload the files manually.</td>
-                        </tr>
-                        <tr>
-                            <td>onRemove</td>
-                            <td>event.originalEvent: Original browser event. <br />
-                                event.file: Selected file.</td>
-                            <td>Callback to invoke when a file is removed without uploading using clear button of a file.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h5>Methods</h5>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
+                <h5>Events</h5>
+                <div className="doc-tablewrapper">
+                    <table className="doc-table">
+                        <thead>
                         <tr>
                             <th>Name</th>
                             <th>Parameters</th>
                             <th>Description</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>upload</td>
-                            <td>-</td>
-                            <td>Uploads the selected files.</td>
-                        </tr>
-                        <tr>
-                            <td>clear</td>
-                            <td>-</td>
-                            <td>Clears the files list.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>onBeforeUpload</td>
+                                <td>event.xhr: XmlHttpRequest instance. <br/>
+                                    event.formData: FormData object.</td>
+                                <td>Callback to invoke before file upload begins to customize the request
+                                    such as post parameters before the files.</td>
+                            </tr>
+                            <tr>
+                                <td>onBeforeSend</td>
+                                <td>event.xhr: XmlHttpRequest instance. <br/>
+                                    event.formData: FormData object.</td>
+                                <td>Callback to invoke before file send begins to customize the request
+                                    such as adding headers.</td>
+                            </tr>
+                            <tr>
+                                <td>onBeforeDrop</td>
+                                <td>event: DragEvent instance.</td>
+                                <td>Callback to invoke before files dropped. Return false from callback to prevent drop.</td>
+                            </tr>
+                            <tr>
+                                <td>onUpload</td>
+                                <td>event.xhr: XmlHttpRequest instance.<br />
+                                    event.files: Uploaded files.</td>
+                                <td>Callback to invoke when file upload is complete.</td>
+                            </tr>
+                            <tr>
+                                <td>onError</td>
+                                <td>event.xhr: XmlHttpRequest instance.<br />
+                                    event.files: Files that are not uploaded.</td>
+                                <td>Callback to invoke if file upload fails.</td>
+                            </tr>
+                            <tr>
+                                <td>onClear</td>
+                                <td>-</td>
+                                <td>Callback to invoke when files in queue are removed without uploading.</td>
+                            </tr>
+                            <tr>
+                                <td>onSelect</td>
+                                <td>event.originalEvent: Original browser event. <br />
+                                    event.files: List of selected files.</td>
+                                <td>Callback to invoke when files are selected.</td>
+                            </tr>
+                            <tr>
+                                <td>onProgress</td>
+                                <td>event.originalEvent: Original browser event. <br />
+                                    event.progress: Calculated progress value.</td>
+                                <td>Callback to invoke when files are being uploaded.</td>
+                            </tr>
+                            <tr>
+                                <td>onValidationFail</td>
+                                <td>file: Invalid file.</td>
+                                <td>Callback to invoke when a validation file fails.</td>
+                            </tr>
+                            <tr>
+                                <td>uploadHandler</td>
+                                <td>event.files: List of selected files.<br />
+                                    event.options: Handler options.</td>
+                                <td>Callback to invoke in custom upload mode to upload the files manually.</td>
+                            </tr>
+                            <tr>
+                                <td>onRemove</td>
+                                <td>event.originalEvent: Original browser event. <br />
+                                    event.file: Selected file.</td>
+                                <td>Callback to invoke when a file is removed without uploading using clear button of a file.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-            <h5>Styling</h5>
-            <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Element</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>p-fileupload</td>
-                            <td>Container element.</td>
-                        </tr>
-                        <tr>
-                            <td>p-fileupload-buttonbar</td>
-                            <td>Header containing the buttons.</td>
-                        </tr>
-                        <tr>
-                            <td>p-fileupload-content</td>
-                            <td>Content section.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h5>Methods</h5>
+                <div className="doc-tablewrapper">
+                    <table className="doc-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Parameters</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>upload</td>
+                                <td>-</td>
+                                <td>Uploads the selected files.</td>
+                            </tr>
+                            <tr>
+                                <td>clear</td>
+                                <td>-</td>
+                                <td>Clears the files list.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                <h5>Dependencies</h5>
-                <p>None.</p>
-            </div>
+                <h5>Styling</h5>
+                <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                <div className="doc-tablewrapper">
+                    <table className="doc-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Element</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>p-fileupload</td>
+                                <td>Container element.</td>
+                            </tr>
+                            <tr>
+                                <td>p-fileupload-buttonbar</td>
+                                <td>Header containing the buttons.</td>
+                            </tr>
+                            <tr>
+                                <td>p-fileupload-content</td>
+                                <td>Content section.</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-            </TabPanel>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </div>
 
-            {
-                useLiveEditorTabs({ name: 'FileUploadDemo', sources: this.sources, extFiles: this.extFiles })
-            }
-        </TabView>
-    </div>
-        );
-    }
-}
+                </TabPanel>
+
+                {
+                    useLiveEditorTabs({ name: 'FileUploadDemo', sources: sources, extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    );
+})
+
+export default FileUploadDoc;

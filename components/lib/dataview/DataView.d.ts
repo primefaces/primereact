@@ -27,6 +27,7 @@ export interface DataViewLayoutOptionsProps {
     style?: object;
     className?: string;
     onChange(e: DataViewLayoutOptionsChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class DataViewLayoutOptions extends React.Component<DataViewLayoutOptionsProps, any> { }
@@ -60,8 +61,10 @@ export interface DataViewProps {
     lazy?: boolean;
     loading?: boolean;
     loadingIcon?: string;
+    gutter?: boolean;
     onPage?(e: DataViewPageParams): void;
     itemTemplate?(item: any, layout: DataViewLayoutType): React.ReactNode;
+    children?: React.ReactNode;
 }
 
 // tslint:disable-next-line:max-classes-per-file

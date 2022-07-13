@@ -12,6 +12,8 @@ type VirtualScrollerToType = 'to-start' | 'to-end';
 
 type VirtualScrollerLoadingTemplateType = React.ReactNode | ((options: VirtualScrollerLoadingTemplateOptions) => React.ReactNode);
 
+type VirtualScrollerLoaderIconTemplateType = React.ReactNode | ((options: VirtualScrollerLoaderIconTemplateOptions) => React.ReactNode);
+
 type VirtualScrollerItemTemplateType = React.ReactNode | ((item: any, options: VirtualScrollerTemplateOptions) => React.ReactNode);
 
 type VirtualScrollerContentTemplateType = React.ReactNode | ((options: VirtualScrollerContentTemplateOptions) => React.ReactNode);
@@ -57,6 +59,12 @@ interface VirtualScrollerLoadingTemplateOptions extends VirtualScrollerTemplateO
     [key: string]: any;
 }
 
+interface VirtualScrollerLoaderIconTemplateOptions {
+    className: string;
+    element: JSX.Element;
+    props: VirtualScrollerProps;
+}
+
 interface VirtualScrollerContentTemplateOptions {
     className: string;
     contentRef: any;
@@ -96,22 +104,27 @@ export interface VirtualScrollerProps {
     orientation?: VirtualScrollerOrientationType;
     numToleratedItems?: number;
     delay?: number;
+    resizeDelay?: number;
     lazy?: boolean;
     disabled?: boolean;
     loaderDisabled?: boolean;
     columns?: any;
     loading?: boolean;
+    autoSize?: boolean;
     showSpacer?: boolean;
     showLoader?: boolean;
     loadingTemplate?: VirtualScrollerLoadingTemplateType;
+    loaderIconTemplate?: VirtualScrollerLoaderIconTemplateType;
     itemTemplate?: VirtualScrollerItemTemplateType;
     contentTemplate?: VirtualScrollerContentTemplateType;
     onScroll?(e: React.UIEvent<HTMLElement>): void;
     onScrollIndexChange?(e: VirtualScrollerChangeParams): void;
     onLazyLoad?(e: VirtualScrollerLazyParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class VirtualScroller extends React.Component<VirtualScrollerProps, any> {
+    public getElementRef(): React.Ref<HTMLDivElement>;
     public scrollTo(options: VirtualScrollerOptionsType): void;
     public scrollToIndex(index: VirtualScrollerToIndexType, behavior?: VirtualScrollerScrollBehavior): void;
     public scrollInView(index: VirtualScrollerToIndexType, to: VirtualScrollerToType, behavior?: VirtualScrollerScrollBehavior): void;

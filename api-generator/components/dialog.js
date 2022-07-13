@@ -66,6 +66,18 @@ const DialogProps = [
         description: 'Keeps dialog in the viewport.'
     },
     {
+        name: 'headerStyle',
+        type: 'object',
+        default: 'null',
+        description: 'Style of the header section.'
+    },
+    {
+        name: 'headerClassName',
+        type: 'string',
+        default: 'null',
+        description: 'Style class of the header section.'
+    },
+    {
         name: 'contentStyle',
         type: 'object',
         default: 'null',

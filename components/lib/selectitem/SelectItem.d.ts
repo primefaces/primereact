@@ -1,4 +1,6 @@
-import {IconType} from "../utils";
+import { IconType } from '../utils';
+
+export type SelectItemOptionsType =  SelectItem[] | any[];
 
 export interface SelectItem {
     label?: string;

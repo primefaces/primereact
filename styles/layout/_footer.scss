@@ -1,10 +1,10 @@
 .layout-footer {
     font-size: 1rem;
     padding: 2rem;
-    background-color: var(--surface-a);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 
     a {
         color: var(--text-color);

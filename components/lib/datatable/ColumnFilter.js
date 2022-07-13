@@ -1,135 +1,108 @@
-import React, { Component } from 'react';
-import PrimeReact, { localeOption, FilterOperator } from '../api/Api';
-import { classNames, ConnectedOverlayScrollHandler, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import * as React from 'react';
+import PrimeReact, { FilterMatchMode, FilterOperator, localeOption } from '../api/Api';
+import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { Dropdown } from '../dropdown/Dropdown';
+import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { InputText } from '../inputtext/InputText';
-import { Dropdown } from '../dropdown/Dropdown';
-import { Button } from '../button/Button';
-import { FilterMatchMode } from '../api/FilterMatchMode';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export class ColumnFilter extends Component {
+export const ColumnFilter = React.memo((props) => {
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const overlayRef = React.useRef(null);
+    const iconRef = React.useRef(null);
+    const selfClick = React.useRef(false);
+    const overlayEventListener = React.useRef(null);
 
-    constructor(props) {
-        super(props);
+    const getColumnProp = (prop) => props.column.props[prop];
+    const field = getColumnProp('filterField') || getColumnProp('field');
+    const filterModel = props.filters[field];
+    const filterStoreModel = props.filtersStore && props.filtersStore[field];
 
-        this.state = {
-            overlayVisible: false
-        };
+    const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
+        target: iconRef, overlay: overlayRef, listener: (event, { type, valid }) => {
+            if (valid) {
+                (type === 'outside') ?
+                    (!selfClick.current && !isTargetClicked(event.target)) && hide() : hide();
+            }
 
-        this.overlayRef = React.createRef();
+            selfClick.current = false;
+        }, when: overlayVisibleState
+    });
 
-        this.filterCallback = this.filterCallback.bind(this);
-        this.filterApplyCallback = this.filterApplyCallback.bind(this);
-        this.onOperatorChange = this.onOperatorChange.bind(this);
-        this.addConstraint = this.addConstraint.bind(this);
-        this.clearFilter = this.clearFilter.bind(this);
-        this.applyFilter = this.applyFilter.bind(this);
-        this.onInputChange = this.onInputChange.bind(this);
-        this.toggleMenu = this.toggleMenu.bind(this);
-
-        this.onOverlayEnter = this.onOverlayEnter.bind(this);
-        this.onOverlayExit = this.onOverlayExit.bind(this);
-        this.onOverlayExited = this.onOverlayExited.bind(this);
-        this.onContentKeyDown = this.onContentKeyDown.bind(this);
-        this.onContentClick = this.onContentClick.bind(this);
-        this.onContentMouseDown = this.onContentMouseDown.bind(this);
+    const hasFilter = () => {
+        if (!filterStoreModel || !filterModel)
+            return false;
+        return filterStoreModel.operator ? 
+               !isFilterBlank(filterModel.constraints[0].value) && filterStoreModel.constraints[0].value !== filterModel.constraints[0].value :
+               !isFilterBlank(filterModel.value) && filterStoreModel.value !== filterModel.value;
     }
 
-    get field() {
-        return this.getColumnProp('filterField') || this.getColumnProp('field');
+    const hasRowFilter = () => {
+        return filterModel && !isFilterBlank(filterModel.value);
     }
 
-    get overlay() {
-        return this.overlayRef ? this.overlayRef.current : null;
-    }
-
-    get filterModel() {
-        return this.props.filters[this.field];
-    }
-
-    get filterStoreModel() {
-        return this.props.filtersStore[this.field];
-    }
-
-    hasFilter() {
-        if (this.props.filtersStore) {
-            const fieldFilter = this.props.filtersStore[this.field];
-
-            return fieldFilter && (fieldFilter.operator ? !this.isFilterBlank(fieldFilter.constraints[0].value) : !this.isFilterBlank(fieldFilter.value));
-        }
-
-        return false;
-    }
-
-    hasRowFilter() {
-        return this.filterModel && !this.isFilterBlank(this.filterModel.value);
-    }
-
-    isFilterBlank(filter) {
+    const isFilterBlank = (filter) => {
         return ObjectUtils.isEmpty(filter);
     }
 
-    isRowMatchModeSelected(matchMode) {
-        return this.filterModel && this.filterModel.matchMode === matchMode;
+    const isRowMatchModeSelected = (matchMode) => {
+        return filterModel && filterModel.matchMode === matchMode;
     }
 
-    showMenuButton() {
-        return this.getColumnProp('showFilterMenu') && (this.props.display === 'row' ? this.getColumnProp('dataType') !== 'boolean' : true);
+    const showMenuButton = () => {
+        return getColumnProp('showFilterMenu') && (props.display === 'row' ? getColumnProp('dataType') !== 'boolean' : true);
     }
 
-    matchModes() {
-        return this.getColumnProp('filterMatchModeOptions') || PrimeReact.filterMatchModeOptions[this.findDataType()].map(key => ({ label: localeOption(key), value: key }));
+    const matchModes = () => {
+        return getColumnProp('filterMatchModeOptions') || PrimeReact.filterMatchModeOptions[findDataType()].map(key => ({ label: localeOption(key), value: key }));
     }
 
-    isShowMatchModes() {
-        return this.getColumnProp('dataType') !== 'boolean' && this.getColumnProp('showFilterMatchModes') && this.matchModes() && this.getColumnProp('showFilterMenuOptions');
+    const isShowMatchModes = () => {
+        return getColumnProp('dataType') !== 'boolean' && getColumnProp('showFilterMatchModes') && matchModes() && getColumnProp('showFilterMenuOptions');
     }
 
-    isShowOperator() {
-        return this.getColumnProp('showFilterOperator') && this.filterModel && this.filterModel.operator && this.getColumnProp('showFilterMenuOptions');
+    const isShowOperator = () => {
+        return getColumnProp('showFilterOperator') && filterModel && filterModel.operator && getColumnProp('showFilterMenuOptions');
     }
 
-    showRemoveIcon() {
-        return this.fieldConstraints().length > 1;
+    const showRemoveIcon = () => {
+        return fieldConstraints().length > 1;
     }
 
-    isShowAddConstraint() {
-        return this.getColumnProp('showAddButton') && this.filterModel && this.filterModel.operator && (this.fieldConstraints() && this.fieldConstraints().length < this.getColumnProp('maxConstraints')) && this.getColumnProp('showFilterMenuOptions');
+    const isShowAddConstraint = () => {
+        return getColumnProp('showAddButton') && filterModel && filterModel.operator && (fieldConstraints() && fieldConstraints().length < getColumnProp('maxConstraints')) && getColumnProp('showFilterMenuOptions');
     }
 
-    isOutsideClicked(target) {
-        return !this.isTargetClicked(target) && this.overlayRef && this.overlayRef.current && !(this.overlayRef.current.isSameNode(target) || this.overlayRef.current.contains(target));
+    const isOutsideClicked = (target) => {
+        return !isTargetClicked(target) && overlayRef.current && !(overlayRef.current.isSameNode(target) || overlayRef.current.contains(target));
     }
 
-    isTargetClicked(target) {
-        return this.icon && (this.icon.isSameNode(target) || this.icon.contains(target));
+    const isTargetClicked = (target) => {
+        return iconRef.current && (iconRef.current.isSameNode(target) || iconRef.current.contains(target));
     }
 
-    getColumnProp(prop) {
-        return this.props.column.props[prop];
-    }
-
-    getDefaultConstraint() {
-        if (this.props.filtersStore && this.filterStoreModel) {
-            if (this.filterStoreModel.operator) {
+    const getDefaultConstraint = () => {
+        if (filterStoreModel) {
+            if (filterStoreModel.operator) {
                 return {
-                    matchMode: this.filterStoreModel.constraints[0].matchMode,
-                    operator: this.filterStoreModel.operator
+                    matchMode: filterStoreModel.constraints[0].matchMode,
+                    operator: filterStoreModel.operator
                 };
             }
             else {
                 return {
-                    matchMode: this.filterStoreModel.matchMode
+                    matchMode: filterStoreModel.matchMode
                 };
             }
         }
     }
 
-    findDataType() {
-        const dataType = this.getColumnProp('dataType');
-        const matchMode = this.getColumnProp('filterMatchMode');
+    const findDataType = () => {
+        const dataType = getColumnProp('dataType');
+        const matchMode = getColumnProp('filterMatchMode');
         const hasMatchMode = (key) => PrimeReact.filterMatchModeOptions[key].some(mode => mode === matchMode);
 
         if (matchMode === 'custom' && !hasMatchMode(dataType)) {
@@ -142,13 +115,12 @@ export class ColumnFilter extends Component {
         }
 
         return dataType;
-    };
+    }
 
-    clearFilter() {
-        const field = this.field;
-        const filterClearCallback = this.getColumnProp('onFilterClear');
-        const defaultConstraint = this.getDefaultConstraint();
-        let filters = { ...this.props.filters };
+    const clearFilter = () => {
+        const filterClearCallback = getColumnProp('onFilterClear');
+        const defaultConstraint = getDefaultConstraint();
+        let filters = { ...props.filters };
         if (filters[field].operator) {
             filters[field].constraints.splice(1);
             filters[field].operator = defaultConstraint.operator;
@@ -160,38 +132,38 @@ export class ColumnFilter extends Component {
         }
 
         filterClearCallback && filterClearCallback();
-        this.props.onFilterChange(filters);
-        this.props.onFilterApply();
-        this.hide();
+        props.onFilterChange(filters);
+        props.onFilterApply();
+        hide();
     }
 
-    applyFilter() {
-        const filterApplyClickCallback = this.getColumnProp('onFilterApplyClick');
+    const applyFilter = () => {
+        const filterApplyClickCallback = getColumnProp('onFilterApplyClick');
 
-        filterApplyClickCallback && filterApplyClickCallback({ field: this.field, constraints: this.filterModel });
-        this.props.onFilterApply();
-        this.hide();
+        filterApplyClickCallback && filterApplyClickCallback({ field, constraints: filterModel });
+        props.onFilterApply();
+        hide();
     }
 
-    toggleMenu() {
-        this.setState((prevState) => ({ overlayVisible: !prevState.overlayVisible }));
+    const toggleMenu = () => {
+        setOverlayVisibleState((prevVisible) => !prevVisible);
     }
 
-    onToggleButtonKeyDown(event) {
+    const onToggleButtonKeyDown = (event) => {
         switch (event.key) {
             case 'Escape':
             case 'Tab':
-                this.hide();
+                hide();
                 break;
 
             case 'ArrowDown':
-                if (this.state.overlayVisible) {
-                    const focusable = DomHandler.getFirstFocusableElement(this.overlay);
+                if (overlayVisibleState) {
+                    const focusable = DomHandler.getFirstFocusableElement(overlayRef.current);
                     focusable && focusable.focus();
                     event.preventDefault();
                 }
                 else if (event.altKey) {
-                    this.setState({ overlayVisible: true });
+                    setOverlayVisibleState(true);
                     event.preventDefault();
                 }
                 break;
@@ -201,48 +173,48 @@ export class ColumnFilter extends Component {
         }
     }
 
-    onContentKeyDown(event) {
+    const onContentKeyDown = (event) => {
         if (event.key === 'Escape') {
-            this.hide();
-            this.icon && this.icon.focus();
+            hide();
+            iconRef.current && iconRef.current.focus();
         }
     }
 
-    onInputChange(event, index) {
-        let filters = { ...this.props.filters };
+    const onInputChange = (event, index) => {
+        let filters = { ...props.filters };
         let value = event.target.value;
 
-        if (this.props.display === 'menu') {
-            filters[this.field].constraints[index].value = value;
+        if (props.display === 'menu') {
+            filters[field].constraints[index].value = value;
         }
         else {
-            filters[this.field].value = value;
+            filters[field].value = value;
         }
 
-        this.props.onFilterChange(filters);
+        props.onFilterChange(filters);
 
-        if (!this.getColumnProp('showApplyButton') || this.props.display === 'row') {
-            this.props.onFilterApply();
+        if (!getColumnProp('showApplyButton') || props.display === 'row') {
+            props.onFilterApply();
         }
     }
 
-    onRowMatchModeChange(matchMode) {
-        const filterMatchModeChangeCallback = this.getColumnProp('onFilterMatchModeChange');
-        let filters = { ...this.props.filters };
-        filters[this.field].matchMode = matchMode;
+    const onRowMatchModeChange = (matchMode) => {
+        const filterMatchModeChangeCallback = getColumnProp('onFilterMatchModeChange');
+        let filters = { ...props.filters };
+        filters[field].matchMode = matchMode;
 
-        filterMatchModeChangeCallback && filterMatchModeChangeCallback({ field: this.field, matchMode });
-        this.props.onFilterChange(filters);
-        this.props.onFilterApply();
-        this.hide();
+        filterMatchModeChangeCallback && filterMatchModeChangeCallback({ field, matchMode });
+        props.onFilterChange(filters);
+        props.onFilterApply();
+        hide();
     }
 
-    onRowMatchModeKeyDown(event, matchMode, clear) {
+    const onRowMatchModeKeyDown = (event, matchMode, clear) => {
         let item = event.target;
 
         switch (event.key) {
             case 'ArrowDown':
-                const nextItem = this.findNextItem(item);
+                const nextItem = findNextItem(item);
                 if (nextItem) {
                     item.removeAttribute('tabindex');
                     nextItem.tabIndex = 0;
@@ -253,7 +225,7 @@ export class ColumnFilter extends Component {
                 break;
 
             case 'ArrowUp':
-                const prevItem = this.findPrevItem(item);
+                const prevItem = findPrevItem(item);
                 if (prevItem) {
                     item.removeAttribute('tabindex');
                     prevItem.tabIndex = 0;
@@ -264,7 +236,7 @@ export class ColumnFilter extends Component {
                 break;
 
             case 'Enter':
-                clear ? this.clearFilter() : this.onRowMatchModeChange(matchMode.value);
+                clear ? clearFilter() : onRowMatchModeChange(matchMode.value);
 
                 event.preventDefault();
                 break;
@@ -274,257 +246,195 @@ export class ColumnFilter extends Component {
         }
     }
 
-    onOperatorChange(e) {
-        const filterOperationChangeCallback = this.getColumnProp('onFilterOperatorChange');
+    const onOperatorChange = (e) => {
+        const filterOperationChangeCallback = getColumnProp('onFilterOperatorChange');
         let value = e.value;
-        let filters = { ...this.props.filters };
-        filters[this.field].operator = value;
-        this.props.onFilterChange(filters);
+        let filters = { ...props.filters };
+        filters[field].operator = value;
+        props.onFilterChange(filters);
 
-        filterOperationChangeCallback && filterOperationChangeCallback({ field: this.field, operator: value });
-        if (!this.getColumnProp('showApplyButton')) {
-            this.props.onFilterApply();
+        filterOperationChangeCallback && filterOperationChangeCallback({ field, operator: value });
+        if (!getColumnProp('showApplyButton')) {
+            props.onFilterApply();
         }
     }
 
-    onMenuMatchModeChange(value, index) {
-        const filterMatchModeChangeCallback = this.getColumnProp('onFilterMatchModeChange');
-        let filters = { ...this.props.filters };
-        filters[this.field].constraints[index].matchMode = value;
-        this.props.onFilterChange(filters);
-        filterMatchModeChangeCallback && filterMatchModeChangeCallback({ field: this.field, matchMode: value, index: index });
+    const onMenuMatchModeChange = (value, index) => {
+        const filterMatchModeChangeCallback = getColumnProp('onFilterMatchModeChange');
+        let filters = { ...props.filters };
+        filters[field].constraints[index].matchMode = value;
+        props.onFilterChange(filters);
+        filterMatchModeChangeCallback && filterMatchModeChangeCallback({ field, matchMode: value, index: index });
 
-        if (!this.getColumnProp('showApplyButton')) {
-            this.props.onFilterApply();
+        if (!getColumnProp('showApplyButton')) {
+            props.onFilterApply();
         }
     }
 
-    addConstraint() {
-        const filterConstraintAddCallback = this.getColumnProp('onFilterConstraintAdd');
-        const defaultConstraint = this.getDefaultConstraint();
-        let filters = { ...this.props.filters };
+    const addConstraint = () => {
+        const filterConstraintAddCallback = getColumnProp('onFilterConstraintAdd');
+        const defaultConstraint = getDefaultConstraint();
+        let filters = { ...props.filters };
         let newConstraint = { value: null, matchMode: defaultConstraint.matchMode };
-        filters[this.field].constraints.push(newConstraint);
-        filterConstraintAddCallback && filterConstraintAddCallback({ field: this.field, constraint: newConstraint });
-        this.props.onFilterChange(filters);
+        filters[field].constraints.push(newConstraint);
+        filterConstraintAddCallback && filterConstraintAddCallback({ field, constraint: newConstraint });
+        props.onFilterChange(filters);
 
-        if (!this.getColumnProp('showApplyButton')) {
-            this.props.onFilterApply();
+        if (!getColumnProp('showApplyButton')) {
+            props.onFilterApply();
         }
     }
 
-    removeConstraint(index) {
-        const filterConstraintRemoveCallback = this.getColumnProp('onFilterConstraintRemove');
-        let filters = { ...this.props.filters };
-        let removedConstraint = filters[this.field].constraints.splice(index, 1);
-        filterConstraintRemoveCallback && filterConstraintRemoveCallback({ field: this.field, constraint: removedConstraint });
-        this.props.onFilterChange(filters);
+    const removeConstraint = (index) => {
+        const filterConstraintRemoveCallback = getColumnProp('onFilterConstraintRemove');
+        let filters = { ...props.filters };
+        let removedConstraint = filters[field].constraints.splice(index, 1);
+        filterConstraintRemoveCallback && filterConstraintRemoveCallback({ field, constraint: removedConstraint });
+        props.onFilterChange(filters);
 
-        if (!this.getColumnProp('showApplyButton')) {
-            this.props.onFilterApply();
+        if (!getColumnProp('showApplyButton')) {
+            props.onFilterApply();
         }
     }
 
-    findNextItem(item) {
-        let nextItem = item.nextElementSibling;
+    const findNextItem = (item) => {
+        const nextItem = item.nextElementSibling;
 
-        if (nextItem)
-            return DomHandler.hasClass(nextItem, 'p-column-filter-separator') ? this.findNextItem(nextItem) : nextItem;
-        else
-            return item.parentElement.firstElementChild;
+        return nextItem ? (DomHandler.hasClass(nextItem, 'p-column-filter-separator') ? findNextItem(nextItem) : nextItem) : item.parentElement.firstElementChild;
     }
 
-    findPrevItem(item) {
-        let prevItem = item.previousElementSibling;
+    const findPrevItem = (item) => {
+        const prevItem = item.previousElementSibling;
 
-        if (prevItem)
-            return DomHandler.hasClass(prevItem, 'p-column-filter-separator') ? this.findPrevItem(prevItem) : prevItem;
-        else
-            return item.parentElement.lastElementChild;
+        return prevItem ? (DomHandler.hasClass(prevItem, 'p-column-filter-separator') ? findPrevItem(prevItem) : prevItem) : item.parentElement.lastElementChild;
     }
 
-    hide() {
-        this.setState({ overlayVisible: false });
+    const hide = () => {
+        setOverlayVisibleState(false);
     }
 
-    onContentClick(event) {
-        this.selfClick = true;
+    const onContentClick = (event) => {
+        selfClick.current = true;
 
         OverlayService.emit('overlay-click', {
             originalEvent: event,
-            target: this.overlay
+            target: overlayRef.current
         });
     }
 
-    onContentMouseDown() {
-        this.selfClick = true;
+    const onContentMouseDown = () => {
+        selfClick.current = true;
     }
 
-    onOverlayEnter() {
-        ZIndexUtils.set('overlay', this.overlay, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
-        DomHandler.alignOverlay(this.overlay, this.icon, PrimeReact.appendTo, false);
-        this.bindOutsideClickListener();
-        this.bindScrollListener();
-        this.bindResizeListener();
+    const onOverlayEnter = () => {
+        ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+        DomHandler.alignOverlay(overlayRef.current, iconRef.current, PrimeReact.appendTo, false);
 
-        this.overlayEventListener = (e) => {
-            if (!this.isOutsideClicked(e.target)) {
-                this.selfClick = true;
+        overlayEventListener.current = (e) => {
+            if (!isOutsideClicked(e.target)) {
+                selfClick.current = true;
             }
         }
-        OverlayService.on('overlay-click', this.overlayEventListener);
+        OverlayService.on('overlay-click', overlayEventListener.current);
     }
 
-    onOverlayExit() {
-        this.onOverlayHide();
+    const onOverlayEntered = () => {
+        bindOverlayListener();
     }
 
-    onOverlayExited() {
-        ZIndexUtils.clear(this.overlay);
+    const onOverlayExit = () => {
+        onOverlayHide();
     }
 
-    onOverlayHide() {
-        this.unbindOutsideClickListener();
-        this.unbindResizeListener();
-        this.unbindScrollListener();
-        OverlayService.off('overlay-click', this.overlayEventListener);
-        this.overlayEventListener = null;
+    const onOverlayExited = () => {
+        ZIndexUtils.clear(overlayRef.current);
     }
 
-    bindOutsideClickListener() {
-        if (!this.outsideClickListener) {
-            this.outsideClickListener = (event) => {
-                if (!this.selfClick && this.isOutsideClicked(event.target)) {
-                    this.hide();
-                }
-                this.selfClick = false;
-            };
-            document.addEventListener('click', this.outsideClickListener);
-        }
+    const onOverlayHide = () => {
+        unbindOverlayListener();
+        OverlayService.off('overlay-click', overlayEventListener.current);
+        overlayEventListener.current = null;
+        selfClick.current = false;
     }
 
-    unbindOutsideClickListener() {
-        if (this.outsideClickListener) {
-            document.removeEventListener('click', this.outsideClickListener);
-            this.outsideClickListener = null;
-            this.selfClick = false;
-        }
+    const fieldConstraints = () => {
+        return filterModel ? filterModel.constraints || [filterModel] : [];
     }
 
-    bindScrollListener() {
-        if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.icon, () => {
-                if (this.state.overlayVisible) {
-                    this.hide();
-                }
-            });
-        }
-
-        this.scrollHandler.bindScrollListener();
+    const operator = () => {
+        return filterModel.operator;
     }
 
-    unbindScrollListener() {
-        if (this.scrollHandler) {
-            this.scrollHandler.unbindScrollListener();
-        }
-    }
-
-    bindResizeListener() {
-        if (!this.resizeListener) {
-            this.resizeListener = () => {
-                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
-                    this.hide();
-                }
-            };
-            window.addEventListener('resize', this.resizeListener);
-        }
-    }
-
-    unbindResizeListener() {
-        if (this.resizeListener) {
-            window.removeEventListener('resize', this.resizeListener);
-            this.resizeListener = null;
-        }
-    }
-
-    fieldConstraints() {
-        return this.filterModel ? this.filterModel.constraints || [this.filterModel] : [];
-    }
-
-    operator() {
-        return this.filterModel.operator;
-    }
-
-    operatorOptions() {
+    const operatorOptions = () => {
         return [
             { label: localeOption('matchAll'), value: FilterOperator.AND },
             { label: localeOption('matchAny'), value: FilterOperator.OR }
         ];
     }
 
-    noFilterLabel() {
+    const noFilterLabel = () => {
         return localeOption('noFilter');
     }
 
-    removeRuleButtonLabel() {
+    const removeRuleButtonLabel = () => {
         return localeOption('removeRule');
     }
 
-    addRuleButtonLabel() {
+    const addRuleButtonLabel = () => {
         return localeOption('addRule');
     }
 
-    clearButtonLabel() {
+    const clearButtonLabel = () => {
         return localeOption('clear');
     }
 
-    applyButtonLabel() {
+    const applyButtonLabel = () => {
         return localeOption('apply');
     }
 
-    filterCallback(value, index = 0) {
-        let filters = { ...this.props.filters };
-        let meta = filters[this.field];
+    const filterCallback = (value, index = 0) => {
+        let filters = { ...props.filters };
+        let meta = filters[field];
 
-        this.props.display === 'menu' && meta && meta.operator ? (filters[this.field].constraints[index].value = value) : (filters[this.field].value = value);
-        this.props.onFilterChange(filters);
+        props.display === 'menu' && meta && meta.operator ? (filters[field].constraints[index].value = value) : (filters[field].value = value);
+        props.onFilterChange(filters);
     }
 
-    filterApplyCallback(...args) {
-        args && this.filterCallback(args[0], args[1]);
+    const filterApplyCallback = (...args) => {
+        args && filterCallback(args[0], args[1]);
 
-        this.props.onFilterApply();
+        props.onFilterApply();
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.props.display === 'menu' && this.state.overlayVisible) {
-            DomHandler.alignOverlay(this.overlay, this.icon, PrimeReact.appendTo, false);
+    useUpdateEffect(() => {
+        if (props.display === 'menu' && overlayVisibleState) {
+            DomHandler.alignOverlay(overlayRef.current, iconRef.current, PrimeReact.appendTo, false);
         }
-    }
+    });
 
-    componentWillUnmount() {
-        if (this.overlayEventListener) {
-            OverlayService.off('overlay-click', this.overlayEventListener);
-            this.overlayEventListener = null;
+    useUnmountEffect(() => {
+        if (overlayEventListener.current) {
+            OverlayService.off('overlay-click', overlayEventListener.current);
+            overlayEventListener.current = null;
         }
 
-        if (this.overlay) {
-            ZIndexUtils.clear(this.overlay);
-            this.onOverlayHide();
+        if (overlayRef.current) {
+            ZIndexUtils.clear(overlayRef.current);
+            onOverlayHide();
         }
-    }
+    });
 
-    renderFilterElement(model, index) {
+    const createFilterElement = (model, index) => {
         const value = model ? model.value : null;
 
-        return this.getColumnProp('filterElement') ?
-            ObjectUtils.getJSXElement(this.getColumnProp('filterElement'), { field: this.field, index, filterModel: model, value, filterApplyCallback: this.filterApplyCallback, filterCallback: this.filterCallback })
-            : <InputText type={this.getColumnProp('filterType')} value={value || ''} onChange={(e) => this.onInputChange(e, index)} className="p-column-filter" placeholder={this.getColumnProp('filterPlaceholder')} maxLength={this.getColumnProp('filterMaxLength')} />;
+        return getColumnProp('filterElement') ?
+            ObjectUtils.getJSXElement(getColumnProp('filterElement'), { field, index, filterModel: model, value, filterApplyCallback, filterCallback })
+            : <InputText type={getColumnProp('filterType')} value={value || ''} onChange={(e) => onInputChange(e, index)} className="p-column-filter" placeholder={getColumnProp('filterPlaceholder')} maxLength={getColumnProp('filterMaxLength')} />;
     }
 
-    renderRowFilterElement() {
-        if (this.props.display === 'row') {
-            const content = this.renderFilterElement(this.filterModel, 0);
+    const createRowFilterElement = () => {
+        if (props.display === 'row') {
+            const content = createFilterElement(filterModel, 0);
 
             return (
                 <div className="p-fluid p-column-filter-element">
@@ -537,23 +447,19 @@ export class ColumnFilter extends Component {
         return null;
     }
 
-    renderMenuFilterElement(fieldConstraint, index) {
-        if (this.props.display === 'menu') {
-            return this.renderFilterElement(fieldConstraint, index);
-        }
-
-        return null;
+    const createMenuFilterElement = (fieldConstraint, index) => {
+        return props.display === 'menu' ? createFilterElement(fieldConstraint, index) : null;
     }
 
-    renderMenuButton() {
-        if (this.showMenuButton()) {
+    const createMenuButton = () => {
+        if (showMenuButton()) {
             const className = classNames('p-column-filter-menu-button p-link', {
-                'p-column-filter-menu-button-open': this.state.overlayVisible,
-                'p-column-filter-menu-button-active': this.hasFilter()
+                'p-column-filter-menu-button-open': overlayVisibleState,
+                'p-column-filter-menu-button-active': hasFilter()
             });
 
             return (
-                <button ref={(el) => this.icon = el} type="button" className={className} aria-haspopup aria-expanded={this.state.overlayVisible} onClick={this.toggleMenu} onKeyDown={this.onToggleButtonKeyDown}>
+                <button ref={iconRef} type="button" className={className} aria-haspopup aria-expanded={overlayVisibleState} onClick={toggleMenu} onKeyDown={onToggleButtonKeyDown}>
                     <span className="pi pi-filter-icon pi-filter"></span>
                 </button>
             )
@@ -562,14 +468,14 @@ export class ColumnFilter extends Component {
         return null;
     }
 
-    renderClearButton() {
-        if (this.getColumnProp('showClearButton') && this.props.display === 'row') {
+    const createClearButton = () => {
+        if (getColumnProp('showClearButton') && props.display === 'row') {
             const className = classNames('p-column-filter-clear-button p-link', {
-                'p-hidden-space': !this.hasRowFilter()
+                'p-hidden-space': !hasRowFilter()
             });
 
             return (
-                <button className={className} type="button" onClick={this.clearFilter}>
+                <button className={className} type="button" onClick={clearFilter}>
                     <span className="pi pi-filter-slash"></span>
                 </button>
             )
@@ -578,28 +484,28 @@ export class ColumnFilter extends Component {
         return null;
     }
 
-    renderRowItems() {
-        if (this.isShowMatchModes()) {
-            const matchModes = this.matchModes();
-            const noFilterLabel = this.noFilterLabel();
+    const createRowItems = () => {
+        if (isShowMatchModes()) {
+            const _matchModes = matchModes();
+            const _noFilterLabel = noFilterLabel();
 
             return (
                 <ul className="p-column-filter-row-items">
                     {
-                        matchModes.map((matchMode, i) => {
+                        _matchModes.map((matchMode, i) => {
                             const { value, label } = matchMode;
-                            const className = classNames('p-column-filter-row-item', { 'p-highlight': this.isRowMatchModeSelected(value) });
+                            const className = classNames('p-column-filter-row-item', { 'p-highlight': isRowMatchModeSelected(value) });
                             const tabIndex = i === 0 ? 0 : null;
 
                             return (
-                                <li className={className} key={label} onClick={() => this.onRowMatchModeChange(value)} onKeyDown={(e) => this.onRowMatchModeKeyDown(e, matchMode)} tabIndex={tabIndex}>
+                                <li className={className} key={label} onClick={() => onRowMatchModeChange(value)} onKeyDown={(e) => onRowMatchModeKeyDown(e, matchMode)} tabIndex={tabIndex}>
                                     {label}
                                 </li>
                             )
                         })
                     }
                     <li className="p-column-filter-separator"></li>
-                    <li className="p-column-filter-row-item" onClick={this.clearFilter} onKeyDown={(e) => this.onRowMatchModeKeyDown(e, null, true)}>{noFilterLabel}</li>
+                    <li className="p-column-filter-row-item" onClick={clearFilter} onKeyDown={(e) => onRowMatchModeKeyDown(e, null, true)}>{_noFilterLabel}</li>
                 </ul>
             )
         }
@@ -607,14 +513,14 @@ export class ColumnFilter extends Component {
         return null;
     }
 
-    renderOperator() {
-        if (this.isShowOperator()) {
-            const options = this.operatorOptions();
-            const value = this.operator();
+    const createOperator = () => {
+        if (isShowOperator()) {
+            const options = operatorOptions();
+            const value = operator();
 
             return (
                 <div className="p-column-filter-operator">
-                    <Dropdown options={options} value={value} onChange={this.onOperatorChange} className="p-column-filter-operator-dropdown" />
+                    <Dropdown options={options} value={value} onChange={onOperatorChange} className="p-column-filter-operator-dropdown" />
                 </div>
             )
         }
@@ -622,40 +528,40 @@ export class ColumnFilter extends Component {
         return null;
     }
 
-    renderMatchModeDropdown(constraint, index) {
-        if (this.isShowMatchModes()) {
-            const options = this.matchModes();
+    const createMatchModeDropdown = (constraint, index) => {
+        if (isShowMatchModes()) {
+            const options = matchModes();
 
             return (
-                <Dropdown options={options} value={constraint.matchMode} onChange={(e) => this.onMenuMatchModeChange(e.value, index)} className="p-column-filter-matchmode-dropdown" />
+                <Dropdown options={options} value={constraint.matchMode} onChange={(e) => onMenuMatchModeChange(e.value, index)} className="p-column-filter-matchmode-dropdown" />
             )
         }
 
         return null;
     }
 
-    renderRemoveButton(index) {
-        if (this.showRemoveIcon()) {
-            const removeRuleLabel = this.removeRuleButtonLabel();
+    const createRemoveButton = (index) => {
+        if (showRemoveIcon()) {
+            const removeRuleLabel = removeRuleButtonLabel();
 
             return (
-                <Button type="button" icon="pi pi-trash" className="p-column-filter-remove-button p-button-text p-button-danger p-button-sm" onClick={() => this.removeConstraint(index)} label={removeRuleLabel} />
+                <Button type="button" icon="pi pi-trash" className="p-column-filter-remove-button p-button-text p-button-danger p-button-sm" onClick={() => removeConstraint(index)} label={removeRuleLabel} />
             )
         }
 
         return null;
     }
 
-    renderConstraints() {
-        const fieldConstraints = this.fieldConstraints();
+    const createConstraints = () => {
+        const _fieldConstraints = fieldConstraints();
 
         return (
             <div className="p-column-filter-constraints">
                 {
-                    fieldConstraints.map((fieldConstraint, i) => {
-                        const matchModeDropdown = this.renderMatchModeDropdown(fieldConstraint, i)
-                        const menuFilterElement = this.renderMenuFilterElement(fieldConstraint, i);
-                        const removeButton = this.renderRemoveButton(i);
+                    _fieldConstraints.map((fieldConstraint, i) => {
+                        const matchModeDropdown = createMatchModeDropdown(fieldConstraint, i)
+                        const menuFilterElement = createMenuFilterElement(fieldConstraint, i);
+                        const removeButton = createRemoveButton(i);
 
                         return (
                             <div key={i} className="p-column-filter-constraint">
@@ -672,12 +578,13 @@ export class ColumnFilter extends Component {
         )
     }
 
-    renderAddRule() {
-        if (this.isShowAddConstraint()) {
-            const addRuleLabel = this.addRuleButtonLabel();
+    const createAddRule = () => {
+        if (isShowAddConstraint()) {
+            const addRuleLabel = addRuleButtonLabel();
+
             return (
                 <div className="p-column-filter-add-rule">
-                    <Button type="button" label={addRuleLabel} icon="pi pi-plus" className="p-column-filter-add-button p-button-text p-button-sm" onClick={this.addConstraint} />
+                    <Button type="button" label={addRuleLabel} icon="pi pi-plus" className="p-column-filter-add-button p-button-text p-button-sm" onClick={addConstraint} />
                 </div>
             )
         }
@@ -685,39 +592,37 @@ export class ColumnFilter extends Component {
         return null;
     }
 
-    renderFilterClearButton() {
-        if (this.getColumnProp('showClearButton')) {
-            if (!this.getColumnProp('filterClear')) {
-                const clearLabel = this.clearButtonLabel();
-                return (
-                    <Button type="button" className="p-button-outlined p-button-sm" onClick={this.clearFilter} label={clearLabel} />
-                )
+    const createFilterClearButton = () => {
+        if (getColumnProp('showClearButton')) {
+            if (!getColumnProp('filterClear')) {
+                const clearLabel = clearButtonLabel();
+
+                return <Button type="button" className="p-button-outlined p-button-sm" onClick={clearFilter} label={clearLabel} />
             }
 
-            return ObjectUtils.getJSXElement(this.getColumnProp('filterClear'), { field: this.field, filterModel: this.filterModel, filterClearCallback: this.clearFilter });
+            return ObjectUtils.getJSXElement(getColumnProp('filterClear'), { field, filterModel, filterClearCallback: clearFilter });
         }
 
         return null;
     }
 
-    renderFilterApplyButton() {
-        if (this.getColumnProp('showApplyButton')) {
-            if (!this.getColumnProp('filterApply')) {
-                const applyLabel = this.applyButtonLabel();
-                return (
-                    <Button type="button" className="p-button-sm" onClick={this.applyFilter} label={applyLabel} />
-                )
+    const createFilterApplyButton = () => {
+        if (getColumnProp('showApplyButton')) {
+            if (!getColumnProp('filterApply')) {
+                const applyLabel = applyButtonLabel();
+
+                return <Button type="button" className="p-button-sm" onClick={applyFilter} label={applyLabel} />
             }
 
-            return ObjectUtils.getJSXElement(this.getColumnProp('filterApply'), { field: this.field, filterModel: this.filterModel, filterApplyCallback: this.applyFilter });
+            return ObjectUtils.getJSXElement(getColumnProp('filterApply'), { field, filterModel, filterApplyCallback: applyFilter });
         }
 
         return null
     }
 
-    renderButtonBar() {
-        const clearButton = this.renderFilterClearButton();
-        const applyButton = this.renderFilterApplyButton();
+    const createButtonBar = () => {
+        const clearButton = createFilterClearButton();
+        const applyButton = createFilterApplyButton();
 
         return (
             <div className="p-column-filter-buttonbar">
@@ -727,11 +632,11 @@ export class ColumnFilter extends Component {
         )
     }
 
-    renderItems() {
-        const operator = this.renderOperator();
-        const constraints = this.renderConstraints();
-        const addRule = this.renderAddRule();
-        const buttonBar = this.renderButtonBar();
+    const createItems = () => {
+        const operator = createOperator();
+        const constraints = createConstraints();
+        const addRule = createAddRule();
+        const buttonBar = createButtonBar();
 
         return (
             <>
@@ -743,22 +648,22 @@ export class ColumnFilter extends Component {
         )
     }
 
-    renderOverlay() {
-        const style = this.getColumnProp('filterMenuStyle');
-        const className = classNames('p-column-filter-overlay p-component p-fluid', this.getColumnProp('filterMenuClassName'), {
-            'p-column-filter-overlay-menu': this.props.display === 'menu',
+    const createOverlay = () => {
+        const style = getColumnProp('filterMenuStyle');
+        const className = classNames('p-column-filter-overlay p-component p-fluid', getColumnProp('filterMenuClassName'), {
+            'p-column-filter-overlay-menu': props.display === 'menu',
             'p-input-filled': PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': PrimeReact.ripple === false
         });
-        const filterHeader = ObjectUtils.getJSXElement(this.getColumnProp('filterHeader'), { field: this.field, filterModel: this.filterModel, filterApplyCallback: this.filterApplyCallback });
-        const filterFooter = ObjectUtils.getJSXElement(this.getColumnProp('filterFooter'), { field: this.field, filterModel: this.filterModel, filterApplyCallback: this.filterApplyCallback });
-        const items = this.props.display === 'row' ? this.renderRowItems() : this.renderItems();
+        const filterHeader = ObjectUtils.getJSXElement(getColumnProp('filterHeader'), { field, filterModel, filterApplyCallback });
+        const filterFooter = ObjectUtils.getJSXElement(getColumnProp('filterFooter'), { field, filterModel, filterApplyCallback });
+        const items = props.display === 'row' ? createRowItems() : createItems();
 
         return (
             <Portal>
-                <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.overlayVisible} timeout={{ enter: 120, exit: 100 }}
-                    unmountOnExit onEnter={this.onOverlayEnter} onExit={this.onOverlayExit} onExited={this.onOverlayExited}>
-                    <div ref={this.overlayRef} style={style} className={className} onKeyDown={this.onContentKeyDown} onClick={this.onContentClick} onMouseDown={this.onContentMouseDown}>
+                <CSSTransition nodeRef={overlayRef} classNames="p-connected-overlay" in={overlayVisibleState} timeout={{ enter: 120, exit: 100 }}
+                    unmountOnExit onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited}>
+                    <div ref={overlayRef} style={style} className={className} onKeyDown={onContentKeyDown} onClick={onContentClick} onMouseDown={onContentMouseDown}>
                         {filterHeader}
                         {items}
                         {filterFooter}
@@ -768,23 +673,23 @@ export class ColumnFilter extends Component {
         )
     }
 
-    render() {
-        const className = classNames('p-column-filter p-fluid', {
-            'p-column-filter-row': this.props.display === 'row',
-            'p-column-filter-menu': this.props.display === 'menu'
-        });
-        const rowFilterElement = this.renderRowFilterElement();
-        const menuButton = this.renderMenuButton();
-        const clearButton = this.renderClearButton();
-        const overlay = this.renderOverlay();
+    const className = classNames('p-column-filter p-fluid', {
+        'p-column-filter-row': props.display === 'row',
+        'p-column-filter-menu': props.display === 'menu'
+    });
+    const rowFilterElement = createRowFilterElement();
+    const menuButton = createMenuButton();
+    const clearButton = createClearButton();
+    const overlay = createOverlay();
 
-        return (
-            <div className={className}>
-                {rowFilterElement}
-                {menuButton}
-                {clearButton}
-                {overlay}
-            </div>
-        )
-    }
-}
+    return (
+        <div className={className}>
+            {rowFilterElement}
+            {menuButton}
+            {clearButton}
+            {overlay}
+        </div>
+    )
+});
+
+ColumnFilter.displayName = 'ColumnFilter';

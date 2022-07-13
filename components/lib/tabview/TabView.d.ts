@@ -29,6 +29,7 @@ export interface TabPanelProps {
     headerClassName?: string;
     contentStyle?: object;
     contentClassName?: string;
+    children?: React.ReactNode;
 }
 
 export declare class TabPanel extends React.Component<TabPanelProps, any> { }
@@ -50,8 +51,11 @@ export interface TabViewProps {
     className?: string;
     renderActiveOnly?: boolean;
     scrollable?: boolean;
+    panelContainerStyle?: object;
+    panelContainerClassName?: string;
     onTabChange?(e: TabViewTabChangeParams): void;
     onTabClose?(e: TabViewTabCloseParams): void;
+    children?: React.ReactNode;
 }
 
 // tslint:disable-next-line:max-classes-per-file

@@ -34,6 +34,12 @@ const ToastProps = [
         type: 'object',
         default: 'null',
         description: 'The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.'
+    },
+    {
+        name: 'appendTo',
+        type: 'DOM element | string',
+        default: 'self',
+        description: "DOM element instance where the component should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located."
     }
 ];
 

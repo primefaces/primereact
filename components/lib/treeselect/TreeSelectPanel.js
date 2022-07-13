@@ -1,33 +1,31 @@
-import React, { Component } from 'react';
-import { classNames } from '../utils/Utils';
+import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
+import { classNames } from '../utils/Utils';
 
-class TreeSelectPanelComponent extends Component {
+export const TreeSelectPanel = React.forwardRef((props, ref) => {
 
-    renderElement() {
-        const className = classNames('p-treeselect-panel p-component', this.props.panelClassName);
+    const createElement = () => {
+        const wrapperStyle = { maxHeight: props.scrollHeight || 'auto' };
+        const className = classNames('p-treeselect-panel p-component', props.panelClassName);
 
         return (
-            <CSSTransition nodeRef={this.props.forwardRef} classNames="p-connected-overlay" in={this.props.in} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
-                unmountOnExit onEnter={this.props.onEnter} onEntering={this.props.onEntering} onEntered={this.props.onEntered} onExit={this.props.onExit} onExited={this.props.onExited}>
-                <div ref={this.props.forwardRef} className={className} style={this.props.panelStyle} onClick={this.props.onClick}>
-                    {this.props.header}
-                    <div className="p-treeselect-items-wrapper" style={{ maxHeight: this.props.scrollHeight || 'auto' }}>
-                        {this.props.children}
+            <CSSTransition nodeRef={ref} classNames="p-connected-overlay" in={props.in} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
+                unmountOnExit onEnter={props.onEnter} onEntering={props.onEntering} onEntered={props.onEntered} onExit={props.onExit} onExited={props.onExited}>
+                <div ref={ref} className={className} style={props.panelStyle} onClick={props.onClick}>
+                    {props.header}
+                    <div className="p-treeselect-items-wrapper" style={wrapperStyle}>
+                        {props.children}
                     </div>
-                    {this.props.footer}
+                    {props.footer}
                 </div>
             </CSSTransition>
-        );
+        )
     }
 
-    render() {
-        let element = this.renderElement();
+    const element = createElement();
 
-        return <Portal element={element} appendTo={this.props.appendTo} />;
-    }
+    return <Portal element={element} appendTo={props.appendTo} />
+});
 
-}
-
-export const TreeSelectPanel = React.forwardRef((props, ref) => <TreeSelectPanelComponent forwardRef={ref} {...props} />);
+TreeSelectPanel.displayName = 'TreeSelectPanel';

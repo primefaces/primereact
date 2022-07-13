@@ -1,6 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
-import {IconType} from "../utils";
+import { IconType } from '../utils';
 
 type ToggleButtonIconPositionType = 'left' | 'right';
 
@@ -18,7 +18,7 @@ interface ToggleButtonChangeParams {
     target: ToggleButtonChangeTargetOptions;
 }
 
-export interface ToggleButtonProps {
+export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
     id?: string;
     onIcon?: IconType<ToggleButtonProps>;
     offIcon?: IconType<ToggleButtonProps>;
@@ -31,10 +31,10 @@ export interface ToggleButtonProps {
     tabIndex?: number;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string;
     onChange?(e: ToggleButtonChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLElement>): void;
     onBlur?(event: React.FocusEvent<HTMLElement>): void;
+    children?: React.ReactNode;
 }
 
 export declare class ToggleButton extends React.Component<ToggleButtonProps, any> { }

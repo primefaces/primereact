@@ -1,168 +1,144 @@
-import React, { Component } from 'react';
-import { ObjectUtils, DomHandler, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export class TreeTableBodyCell extends Component {
+export const TreeTableBodyCell = (props) => {
+    const [editingState, setEditingState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const keyHelperRef = React.useRef(null);
+    const selfClick = React.useRef(false);
+    const overlayEventListener = React.useRef(null);
+    const tabIndexTimeout = React.useRef(null);
 
-    constructor(props) {
-        super(props);
+    const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
+        type: 'click', listener: (e) => {
+            if (!selfClick.current && isOutsideClicked(e.target)) {
+                switchCellToViewMode(e);
+            }
 
-        if (this.props.editor) {
-            this.state = {};
+            selfClick.current = false;
         }
+    });
 
-        this.onClick = this.onClick.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
-        this.onEditorFocus = this.onEditorFocus.bind(this);
-    }
+    const onClick = () => {
+        if (props.editor && !editingState && (props.selectOnEdit || (!props.selectOnEdit && props.selected))) {
+            selfClick.current = true;
 
-    onClick() {
-        if (this.props.editor && !this.state.editing && (this.props.selectOnEdit || (!this.props.selectOnEdit && this.props.selected))) {
-            this.selfClick = true;
+            setEditingState(true);
 
-            this.setState({
-                editing: true
-            }, () => {
-                this.bindDocumentEditListener();
+            bindDocumentClickListener();
 
-                this.overlayEventListener = (e) => {
-                    if (!this.isOutsideClicked(e.target)) {
-                        this.selfClick = true;
-                    }
-                };
-
-                OverlayService.on('overlay-click', this.overlayEventListener);
-            });
-        }
-    }
-
-    onKeyDown(event) {
-        if (event.which === 13 || event.which === 9) {
-            this.switchCellToViewMode(event);
-        }
-    }
-
-    bindDocumentEditListener() {
-        if (!this.documentEditListener) {
-            this.documentEditListener = (e) => {
-                if (!this.selfClick && this.isOutsideClicked(e.target)) {
-                    this.switchCellToViewMode(e);
+            overlayEventListener.current = (e) => {
+                if (!isOutsideClicked(e.target)) {
+                    selfClick.current = true;
                 }
-
-                this.selfClick = false;
             };
 
-            document.addEventListener('click', this.documentEditListener);
+            OverlayService.on('overlay-click', overlayEventListener.current);
         }
     }
 
-    isOutsideClicked(target) {
-        return this.container && !(this.container.isSameNode(target) || this.container.contains(target));
-    }
-
-    unbindDocumentEditListener() {
-        if(this.documentEditListener) {
-            document.removeEventListener('click', this.documentEditListener);
-            this.documentEditListener = null;
-            this.selfClick = false;
+    const onKeyDown = (event) => {
+        if (event.which === 13 || event.which === 9) {
+            switchCellToViewMode(event);
         }
     }
 
-    closeCell() {
+    const isOutsideClicked = (target) => {
+        return elementRef.current && !(elementRef.current.isSameNode(target) || elementRef.current.contains(target));
+    }
+
+    const closeCell = () => {
         /* When using the 'tab' key, the focus event of the next cell is not called in IE. */
         setTimeout(() => {
-            this.setState({
-                editing: false
-            }, () => {
-                this.unbindDocumentEditListener();
-                OverlayService.off('overlay-click', this.overlayEventListener);
-                this.overlayEventListener = null;
-            });
+            setEditingState(false);
+            unbindDocumentClickListener();
+            OverlayService.off('overlay-click', overlayEventListener.current);
+            overlayEventListener = null;
         }, 1);
     }
 
-    onEditorFocus(event) {
-        this.onClick(event);
+    const onEditorFocus = (event) => {
+        onClick(event);
     }
 
-    switchCellToViewMode(event) {
-        if (this.props.cellEditValidator) {
-            let valid = this.props.cellEditValidator({
+    const switchCellToViewMode = (event) => {
+        if (props.cellEditValidator) {
+            let valid = props.cellEditValidator({
                 originalEvent: event,
-                columnProps: this.props
+                columnProps: props
             });
 
-            if(valid) {
-                this.closeCell();
+            if (valid) {
+                closeCell();
             }
         }
         else {
-            this.closeCell();
+            closeCell();
         }
     }
 
-    componentDidUpdate() {
-        if (this.container && this.props.editor) {
-            clearTimeout(this.tabindexTimeout);
-            if (this.state && this.state.editing) {
-                let focusable = DomHandler.findSingle(this.container, 'input');
+    React.useEffect(() => {
+        if (elementRef.current && props.editor) {
+            clearTimeout(tabIndexTimeout.current);
+            if (editingState) {
+                let focusable = DomHandler.findSingle(elementRef.current, 'input');
                 if (focusable && document.activeElement !== focusable && !focusable.hasAttribute('data-isCellEditing')) {
                     focusable.setAttribute('data-isCellEditing', true);
                     focusable.focus();
                 }
 
-                this.keyHelper.tabIndex = -1;
+                keyHelperRef.current.tabIndex = -1;
             }
             else {
-                this.tabindexTimeout = setTimeout(() => {
-                    if (this.keyHelper) {
-                        this.keyHelper.setAttribute('tabindex', 0);
+                tabIndexTimeout.current = setTimeout(() => {
+                    if (keyHelperRef.current) {
+                        keyHelperRef.current.setAttribute('tabindex', 0);
                     }
                 }, 50);
             }
         }
+    });
+
+    useUnmountEffect(() => {
+        if (overlayEventListener.current) {
+            OverlayService.off('overlay-click', overlayEventListener.current);
+            overlayEventListener.current = null;
+        }
+    });
+
+    const className = classNames(props.bodyClassName || props.className, {
+        'p-editable-column': props.editor,
+        'p-cell-editing': props.editor ? editingState : false
+    });
+    const style = props.bodyStyle || props.style
+    let content;
+
+    if (editingState) {
+        if (props.editor)
+            content = ObjectUtils.getJSXElement(props.editor, { node: props.node, rowData: props.node.data, value: ObjectUtils.resolveFieldData(props.node.data, props.field), field: props.field, rowIndex: props.rowIndex, props });
+        else
+            throw new Error("Editor is not found on column.");
+    }
+    else {
+        if (props.body)
+            content = ObjectUtils.getJSXElement(props.body, props.node, { field: props.field, rowIndex: props.rowIndex, props });
+        else
+            content = ObjectUtils.resolveFieldData(props.node.data, props.field);
     }
 
-    componentWillUnmount() {
-        this.unbindDocumentEditListener();
+    /* eslint-disable */
+    const editorKeyHelper = props.editor && <a tabIndex={0} ref={keyHelperRef} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={onEditorFocus}><span></span></a>;
+    /* eslint-enable */
 
-        if (this.overlayEventListener) {
-            OverlayService.off('overlay-click', this.overlayEventListener);
-            this.overlayEventListener = null;
-        }
-    }
-
-    render() {
-        const className = classNames(this.props.bodyClassName||this.props.className, {
-            'p-editable-column': this.props.editor,
-            'p-cell-editing': this.props.editor ? this.state.editing : false
-        });
-        const style = this.props.bodyStyle || this.props.style
-        let content;
-
-        if(this.state && this.state.editing) {
-            if(this.props.editor)
-                content = ObjectUtils.getJSXElement(this.props.editor, { node: this.props.node, rowData: this.props.node.data, value: ObjectUtils.resolveFieldData(this.props.node.data, this.props.field), field: this.props.field, rowIndex: this.props.rowIndex, props: this.props });
-            else
-                throw new Error("Editor is not found on column.");
-        }
-        else {
-            if (this.props.body)
-                content = ObjectUtils.getJSXElement(this.props.body, this.props.node, { field: this.props.field, rowIndex: this.props.rowIndex, props: this.props });
-            else
-                content = ObjectUtils.resolveFieldData(this.props.node.data, this.props.field);
-        }
-
-        /* eslint-disable */
-        const editorKeyHelper = this.props.editor && <a tabIndex={0} ref={(el) => {this.keyHelper = el;}} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={this.onEditorFocus}><span></span></a>;
-        /* eslint-enable */
-
-        return (
-            <td ref={el => this.container = el} className={className} style={style} onClick={this.onClick} onKeyDown={this.onKeyDown}>
-                {this.props.children}
-                {editorKeyHelper}
-                {content}
-            </td>
-        );
-    }
+    return (
+        <td ref={elementRef} className={className} style={style} onClick={onClick} onKeyDown={onKeyDown}>
+            {props.children}
+            {editorKeyHelper}
+            {content}
+        </td>
+    )
 }
+
+TreeTableBodyCell.displayName = 'TreeTableBodyCell';

@@ -1,199 +1,165 @@
-import React, { Component, createRef } from 'react';
-import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames, ConnectedOverlayScrollHandler, ZIndexUtils } from '../utils/Utils';
-import { ColorPickerPanel } from './ColorPickerPanel';
-import { tip } from '../tooltip/Tooltip';
-import { OverlayService } from '../overlayservice/OverlayService';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { useEventListener, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { OverlayService } from '../overlayservice/OverlayService';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { ColorPickerPanel } from './ColorPickerPanel';
 
-export class ColorPicker extends Component {
+export const ColorPicker = React.memo(React.forwardRef((props, ref) => {
+    const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+    const elementRef = React.useRef(null);
+    const overlayRef = React.useRef(null);
+    const inputRef = React.useRef(props.inputRef);
+    const colorSelectorRef = React.useRef(null);
+    const colorHandleRef = React.useRef(null);
+    const hueHandleRef = React.useRef(null);
+    const hueViewRef = React.useRef(null);
+    const hueDragging = React.useRef(false);
+    const hsbValue = React.useRef(null);
+    const colorDragging = React.useRef(false);
 
-    static defaultProps = {
-        id: null,
-        inputRef: null,
-        value: null,
-        style: null,
-        className: null,
-        defaultColor: 'ff0000',
-        inline: false,
-        format: 'hex',
-        appendTo: null,
-        disabled: false,
-        tabIndex: null,
-        inputId: null,
-        tooltip: null,
-        tooltipOptions: null,
-        transitionOptions: null,
-        onChange: null,
-        onShow: null,
-        onHide: null
-    }
+    const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
+        target: elementRef, overlay: overlayRef, listener: (event, { valid }) => {
+            valid && hide();
+        }, when: overlayVisibleState
+    });
 
-    static propTypes = {
-        id: PropTypes.string,
-        inputRef: PropTypes.any,
-        value: PropTypes.any,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        defaultColor: PropTypes.string,
-        inline: PropTypes.bool,
-        format: PropTypes.string,
-        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        disabled: PropTypes.bool,
-        tabIndex: PropTypes.number,
-        inputId: PropTypes.string,
-        tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object,
-        transitionOptions: PropTypes.object,
-        onChange: PropTypes.func,
-        onShow: PropTypes.func,
-        onHide: PropTypes.func
-    }
+    const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({
+        type: 'mousemove', listener: event => {
+            colorDragging.current && pickColor(event);
+            hueDragging.current && pickHue(event);
+        }
+    });
 
-    constructor(props) {
-        super(props);
+    const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({
+        type: 'mouseup', listener: () => {
+            colorDragging.current = hueDragging.current = false;
+            DomHandler.removeClass(elementRef.current, 'p-colorpicker-dragging');
+            unbindDocumentMouseMoveListener();
+            unbindDocumentMouseUpListener();
+        }
+    });
 
-        this.state = {
-            overlayVisible: false
-        };
-
-        this.onInputClick = this.onInputClick.bind(this);
-        this.onInputKeydown = this.onInputKeydown.bind(this);
-        this.onOverlayEnter = this.onOverlayEnter.bind(this);
-        this.onOverlayEntered = this.onOverlayEntered.bind(this);
-        this.onOverlayExit = this.onOverlayExit.bind(this);
-        this.onOverlayExited = this.onOverlayExited.bind(this);
-        this.onPanelClick = this.onPanelClick.bind(this);
-        this.onColorMousedown = this.onColorMousedown.bind(this);
-        this.onHueMousedown = this.onHueMousedown.bind(this);
-        this.onColorDragStart = this.onColorDragStart.bind(this);
-        this.onHueDragStart = this.onHueDragStart.bind(this);
-        this.onDrag = this.onDrag.bind(this);
-        this.onDragEnd = this.onDragEnd.bind(this);
-
-        this.overlayRef = createRef();
-        this.inputRef = createRef(this.props.inputRef);
-    }
-
-    onPanelClick(event) {
-        if (!this.props.inline) {
+    const onPanelClick = (event) => {
+        if (!props.inline) {
             OverlayService.emit('overlay-click', {
                 originalEvent: event,
-                target: this.container
+                target: elementRef.current
             });
         }
     }
 
-    onHueMousedown(event) {
-        if (this.props.disabled) {
+    const onHueMousedown = (event) => {
+        if (props.disabled) {
             return;
         }
 
-        this.bindDragListeners();
-        this.onHueDragStart(event);
+        bindDragListeners();
+        onHueDragStart(event);
     }
 
-    onHueDragStart(event) {
-        if (this.props.disabled) {
+    const onHueDragStart = (event) => {
+        if (props.disabled) {
             return;
         }
 
-        this.hueDragging = true;
-        this.pickHue(event);
-        DomHandler.addClass(this.container, 'p-colorpicker-dragging');
+        hueDragging.current = true;
+        pickHue(event);
+        DomHandler.addClass(elementRef.current, 'p-colorpicker-dragging');
     }
 
-    pickHue(event) {
-        let top = this.hueView.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
-        this.hsbValue = this.validateHSB({
+    const pickHue = (event) => {
+        const top = hueViewRef.current.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
+        hsbValue.current = validateHSB({
             h: Math.floor(360 * (150 - Math.max(0, Math.min(150, ((event.pageY || event.changedTouches[0].pageY) - top)))) / 150),
             s: 100,
             b: 100
         });
 
-        this.updateColorSelector();
-        this.updateHue();
-        this.updateModel();
+        updateColorSelector();
+        updateHue();
+        updateModel();
     }
 
-    onColorMousedown(event) {
-        if (this.props.disabled) {
+    const onColorMousedown = (event) => {
+        if (props.disabled) {
             return;
         }
 
-        this.bindDragListeners();
-        this.onColorDragStart(event);
+        bindDragListeners();
+        onColorDragStart(event);
     }
 
-    onColorDragStart(event) {
-        if (this.props.disabled) {
+    const onColorDragStart = (event) => {
+        if (props.disabled) {
             return;
         }
 
-        this.colorDragging = true;
-        this.pickColor(event);
-        DomHandler.addClass(this.container, 'p-colorpicker-dragging');
+        colorDragging.current = true;
+        pickColor(event);
+        DomHandler.addClass(elementRef.current, 'p-colorpicker-dragging');
         event.preventDefault();
     }
 
-    onDrag(event) {
-        if (this.colorDragging) {
-            this.pickColor(event);
+    const onDrag = (event) => {
+        if (colorDragging.current) {
+            pickColor(event);
             event.preventDefault();
         }
 
-        if (this.hueDragging) {
-            this.pickHue(event);
+        if (hueDragging.current) {
+            pickHue(event);
             event.preventDefault();
         }
     }
 
-    onDragEnd() {
-        this.colorDragging = false;
-        this.hueDragging = false;
-        DomHandler.removeClass(this.container, 'p-colorpicker-dragging');
-        this.unbindDragListeners();
+    const onDragEnd = () => {
+        colorDragging.current = false;
+        hueDragging.current = false;
+        DomHandler.removeClass(elementRef.current, 'p-colorpicker-dragging');
+        unbindDragListeners();
     }
 
-    bindDragListeners() {
-        this.bindDocumentMouseMoveListener();
-        this.bindDocumentMouseUpListener();
+    const bindDragListeners = () => {
+        bindDocumentMouseMoveListener();
+        bindDocumentMouseUpListener();
     }
 
-    unbindDragListeners() {
-        this.unbindDocumentMouseMoveListener();
-        this.unbindDocumentMouseUpListener();
+    const unbindDragListeners = () => {
+        unbindDocumentMouseMoveListener();
+        unbindDocumentMouseUpListener();
     }
 
-    pickColor(event) {
-        let rect = this.colorSelector.getBoundingClientRect();
-        let top = rect.top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
-        let left = rect.left + document.body.scrollLeft;
-        let saturation = Math.floor(100 * (Math.max(0, Math.min(150, ((event.pageX || event.changedTouches[0].pageX)- left)))) / 150);
-        let brightness = Math.floor(100 * (150 - Math.max(0, Math.min(150, ((event.pageY || event.changedTouches[0].pageY) - top)))) / 150);
-        this.hsbValue = this.validateHSB({
-            h: this.hsbValue.h,
+    const pickColor = (event) => {
+        const rect = colorSelectorRef.current.getBoundingClientRect();
+        const top = rect.top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0);
+        const left = rect.left + document.body.scrollLeft;
+        const saturation = Math.floor(100 * (Math.max(0, Math.min(150, ((event.pageX || event.changedTouches[0].pageX) - left)))) / 150);
+        const brightness = Math.floor(100 * (150 - Math.max(0, Math.min(150, ((event.pageY || event.changedTouches[0].pageY) - top)))) / 150);
+        hsbValue.current = validateHSB({
+            h: hsbValue.current.h,
             s: saturation,
             b: brightness
         });
 
-        this.updateColorHandle();
-        this.updateInput();
-        this.updateModel();
+        updateColorHandle();
+        updateInput();
+        updateModel();
     }
 
-    updateModel() {
-        switch (this.props.format) {
+    const updateModel = () => {
+        switch (props.format) {
             case 'hex':
-                this.onChange(this.HSBtoHEX(this.hsbValue));
+                onChange(HSBtoHEX(hsbValue.current));
                 break;
 
             case 'rgb':
-                this.onChange(this.HSBtoRGB(this.hsbValue));
+                onChange(HSBtoRGB(hsbValue.current));
                 break;
 
             case 'hsb':
-                this.onChange(this.hsbValue);
+                onChange(hsbValue.current);
                 break;
 
             default:
@@ -201,17 +167,17 @@ export class ColorPicker extends Component {
         }
     }
 
-    toHSB(value) {
+    const toHSB = (value) => {
         let hsb;
 
         if (value) {
-            switch (this.props.format) {
+            switch (props.format) {
                 case 'hex':
-                    hsb = this.HEXtoHSB(value);
+                    hsb = HEXtoHSB(value);
                     break;
 
                 case 'rgb':
-                    hsb = this.RGBtoHSB(value);
+                    hsb = RGBtoHSB(value);
                     break;
 
                 case 'hsb':
@@ -223,121 +189,115 @@ export class ColorPicker extends Component {
             }
         }
         else {
-            hsb = this.HEXtoHSB(this.props.defaultColor);
+            hsb = HEXtoHSB(props.defaultColor);
         }
 
         return hsb;
     }
 
-    updateHSBValue(value) {
-        this.hsbValue = this.toHSB(value);
+    const updateHSBValue = (value) => {
+        hsbValue.current = toHSB(value);
     }
 
-    areHSBEqual(val1, val2) {
+    const areHSBEqual = (val1, val2) => {
         return val1.h === val2.h && val1.s === val2.s && val1.b === val2.b;
     }
 
-    onChange(value) {
-        if (this.props.onChange) {
-            this.props.onChange({
+    const onChange = (value) => {
+        if (props.onChange) {
+            props.onChange({
                 value: value,
                 stopPropagation: () => { },
                 preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
+                    name: props.name,
+                    id: props.id,
                     value: value
                 }
-            })
+            });
         }
     }
 
-    updateColorSelector() {
-        if (this.colorSelector) {
-            let hsbValue = this.validateHSB({
-                h: this.hsbValue.h,
+    const updateColorSelector = () => {
+        if (colorSelectorRef.current) {
+            let newHsbValue = validateHSB({
+                h: hsbValue.current.h,
                 s: 100,
                 b: 100
             });
-            this.colorSelector.style.backgroundColor = '#' + this.HSBtoHEX(hsbValue);
+
+            colorSelectorRef.current.style.backgroundColor = '#' + HSBtoHEX(newHsbValue);
         }
     }
 
-    updateColorHandle() {
-        if (this.colorHandle) {
-            this.colorHandle.style.left = Math.floor(150 * this.hsbValue.s / 100) + 'px';
-            this.colorHandle.style.top = Math.floor(150 * (100 - this.hsbValue.b) / 100) + 'px';
+    const updateColorHandle = () => {
+        if (colorHandleRef.current) {
+            colorHandleRef.current.style.left = Math.floor(150 * hsbValue.current.s / 100) + 'px';
+            colorHandleRef.current.style.top = Math.floor(150 * (100 - hsbValue.current.b) / 100) + 'px';
         }
     }
 
-    updateHue() {
-        if (this.hueHandle) {
-            this.hueHandle.style.top = Math.floor(150 - (150 * this.hsbValue.h / 360)) + 'px';
+    const updateHue = () => {
+        if (hueHandleRef.current) {
+            hueHandleRef.current.style.top = Math.floor(150 - (150 * hsbValue.current.h / 360)) + 'px';
         }
     }
 
-    updateInput() {
-        if (this.inputRef && this.inputRef.current) {
-            this.inputRef.current.style.backgroundColor = '#' + this.HSBtoHEX(this.hsbValue);
+    const updateInput = () => {
+        if (inputRef.current) {
+            inputRef.current.style.backgroundColor = '#' + HSBtoHEX(hsbValue.current);
         }
     }
 
-    show() {
-        this.setState({ overlayVisible: true });
+    const show = () => {
+        setOverlayVisibleState(true);
     }
 
-    hide() {
-        this.setState({ overlayVisible: false });
+    const hide = () => {
+        setOverlayVisibleState(false);
     }
 
-    onOverlayEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
-        this.alignOverlay();
+    const onOverlayEnter = () => {
+        ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+        alignOverlay();
     }
 
-    onOverlayEntered() {
-        this.bindDocumentClickListener();
-        this.bindScrollListener();
-        this.bindResizeListener();
+    const onOverlayEntered = () => {
+        bindOverlayListener();
 
-        this.props.onShow && this.props.onShow();
+        props.onShow && props.onShow();
     }
 
-    onOverlayExit() {
-        this.unbindDocumentClickListener();
-        this.unbindScrollListener();
-        this.unbindResizeListener();
+    const onOverlayExit = () => {
+        unbindOverlayListener();
     }
 
-    onOverlayExited() {
-        ZIndexUtils.clear(this.overlayRef.current);
+    const onOverlayExited = () => {
+        ZIndexUtils.clear(overlayRef.current);
 
-        this.props.onHide && this.props.onHide();
+        props.onHide && props.onHide();
     }
 
-    onInputClick() {
-        this.togglePanel();
+    const onInputClick = () => {
+        togglePanel();
     }
 
-    togglePanel() {
-        if (this.state.overlayVisible)
-            this.hide();
-        else
-            this.show();
+    const togglePanel = () => {
+        overlayVisibleState ? hide() : show();
     }
 
-    onInputKeydown(event) {
+    const onInputKeydown = (event) => {
         switch (event.which) {
             //space
             case 32:
-                this.togglePanel();
+                togglePanel();
                 event.preventDefault();
                 break;
 
             //escape and tab
             case 27:
             case 9:
-                this.hide();
+                hide();
                 break;
 
             default:
@@ -345,128 +305,23 @@ export class ColorPicker extends Component {
         }
     }
 
-    bindDocumentClickListener() {
-        if (!this.documentClickListener) {
-            this.documentClickListener = (event) => {
-                if (this.state.overlayVisible && this.isOutsideClicked(event)) {
-                    this.hide();
-                }
-            };
-            document.addEventListener('click', this.documentClickListener);
-        }
-    }
-
-    unbindDocumentClickListener() {
-        if (this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-            this.documentClickListener = null;
-        }
-    }
-
-    bindScrollListener() {
-        if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.container, () => {
-                if (this.state.overlayVisible) {
-                    this.hide();
-                }
-            });
-        }
-
-        this.scrollHandler.bindScrollListener();
-    }
-
-    unbindScrollListener() {
-        if (this.scrollHandler) {
-            this.scrollHandler.unbindScrollListener();
-        }
-    }
-
-    bindResizeListener() {
-        if (!this.resizeListener) {
-            this.resizeListener = () => {
-                if (this.state.overlayVisible && !DomHandler.isTouchDevice()) {
-                    this.hide();
-                }
-            };
-            window.addEventListener('resize', this.resizeListener);
-        }
-    }
-
-    unbindResizeListener() {
-        if (this.resizeListener) {
-            window.removeEventListener('resize', this.resizeListener);
-            this.resizeListener = null;
-        }
-    }
-
-    isOutsideClicked(event) {
-        return this.container && !(this.container.isSameNode(event.target) || this.container.contains(event.target)
-            || (this.overlayRef && this.overlayRef.current.contains(event.target)));
-    }
-
-    bindDocumentMouseMoveListener() {
-        if (!this.documentMouseMoveListener) {
-            this.documentMouseMoveListener = this.onDocumentMouseMove.bind(this);
-            document.addEventListener('mousemove', this.documentMouseMoveListener);
-        }
-    }
-
-    onDocumentMouseMove(event) {
-        if (this.colorDragging) {
-            this.pickColor(event);
-        }
-
-        if (this.hueDragging) {
-            this.pickHue(event);
-        }
-    }
-
-    unbindDocumentMouseMoveListener() {
-        if (this.documentMouseMoveListener) {
-            document.removeEventListener('mousemove', this.documentMouseMoveListener);
-            this.documentMouseMoveListener = null;
-        }
-    }
-
-    bindDocumentMouseUpListener() {
-        if (!this.documentMouseUpListener) {
-            this.documentMouseUpListener = this.onDocumentMouseUp.bind(this);
-            document.addEventListener('mouseup', this.documentMouseUpListener);
-        }
-    }
-
-    onDocumentMouseUp() {
-        this.colorDragging = false;
-        this.hueDragging = false;
-        DomHandler.removeClass(this.container, 'p-colorpicker-dragging');
-        this.unbindDocumentMouseMoveListener();
-        this.unbindDocumentMouseUpListener();
-    }
-
-    unbindDocumentMouseUpListener() {
-        if (this.documentMouseUpListener) {
-            document.removeEventListener('mouseup', this.documentMouseUpListener);
-            this.documentMouseUpListener = null;
-        }
-    }
-
-    validateHSB(hsb) {
+    const validateHSB = (hsb) => {
         return {
             h: Math.min(360, Math.max(0, hsb.h)),
             s: Math.min(100, Math.max(0, hsb.s)),
             b: Math.min(100, Math.max(0, hsb.b))
-        };
+        }
     }
 
-    validateRGB(rgb) {
+    const validateRGB = (rgb) => {
         return {
             r: Math.min(255, Math.max(0, rgb.r)),
             g: Math.min(255, Math.max(0, rgb.g)),
             b: Math.min(255, Math.max(0, rgb.b))
-        };
+        }
     }
 
-    validateHEX(hex) {
+    const validateHEX = (hex) => {
         let len = 6 - hex.length;
         if (len > 0) {
             let o = [];
@@ -479,16 +334,16 @@ export class ColorPicker extends Component {
         return hex;
     }
 
-    HEXtoRGB(hex) {
-        let hexValue = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
+    const HEXtoRGB = (hex) => {
+        const hexValue = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
         return { r: hexValue >> 16, g: (hexValue & 0x00FF00) >> 8, b: (hexValue & 0x0000FF) };
     }
 
-    HEXtoHSB(hex) {
-        return this.RGBtoHSB(this.HEXtoRGB(hex));
+    const HEXtoHSB = (hex) => {
+        return RGBtoHSB(HEXtoRGB(hex));
     }
 
-    RGBtoHSB(rgb) {
+    const RGBtoHSB = (rgb) => {
         let hsb = {
             h: 0,
             s: 0,
@@ -519,7 +374,7 @@ export class ColorPicker extends Component {
         return hsb;
     }
 
-    HSBtoRGB(hsb) {
+    const HSBtoRGB = (hsb) => {
         let rgb = {
             r: null, g: null, b: null
         };
@@ -549,7 +404,7 @@ export class ColorPicker extends Component {
         return { r: Math.round(rgb.r), g: Math.round(rgb.g), b: Math.round(rgb.b) };
     }
 
-    RGBtoHEX(rgb) {
+    const RGBtoHEX = (rgb) => {
         let hex = [
             rgb.r.toString(16),
             rgb.g.toString(16),
@@ -565,152 +420,137 @@ export class ColorPicker extends Component {
         return hex.join('');
     }
 
-    HSBtoHEX(hsb) {
-        return this.RGBtoHEX(this.HSBtoRGB(hsb));
+    const HSBtoHEX = (hsb) => {
+        return RGBtoHEX(HSBtoRGB(hsb));
     }
 
-    updateInputRef() {
-        let ref = this.props.inputRef;
+    const updateUI = () => {
+        updateHue();
+        updateColorHandle();
+        updateInput();
+        updateColorSelector();
+    }
 
-        if (ref) {
-            if (typeof ref === 'function') {
-                ref(this.inputRef.current);
-            }
-            else {
-                ref.current = this.inputRef.current;
-            }
+    const alignOverlay = () => {
+        if (inputRef.current) {
+            DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
         }
     }
 
-    componentDidMount() {
-        this.updateInputRef();
-        this.updateHSBValue(this.props.value);
-        this.updateUI();
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(inputRef, props.inputRef);
+    }, [inputRef, props.inputRef]);
 
-        if (this.props.tooltip) {
-            this.renderTooltip();
+    useMountEffect(() => {
+        updateHSBValue(props.value);
+        updateUI();
+    });
+
+    useUpdateEffect(() => {
+        if (!colorDragging.current && !hueDragging.current) {
+            updateHSBValue(props.value);
         }
-    }
+    }, [props.value]);
 
-    componentDidUpdate(prevProps) {
-        if (!this.colorDragging && !this.hueDragging && this.props.value !== prevProps.value) {
-            this.updateHSBValue(this.props.value);
-        }
+    useUpdateEffect(() => {
+        updateUI();
+    });
 
-        this.updateUI();
-        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
-            if (this.tooltip)
-                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
-            else
-                this.renderTooltip();
-        }
-    }
+    useUnmountEffect(() => {
+        ZIndexUtils.clear(overlayRef.current);
+    });
 
-    componentWillUnmount() {
-        this.unbindDocumentClickListener();
-        this.unbindDocumentMouseMoveListener();
-        this.unbindDocumentMouseUpListener();
-        this.unbindResizeListener();
-        if (this.scrollHandler) {
-            this.scrollHandler.destroy();
-            this.scrollHandler = null;
-        }
-
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
-        }
-
-        ZIndexUtils.clear(this.overlayRef.current);
-    }
-
-    updateUI() {
-        this.updateHue();
-        this.updateColorHandle();
-        this.updateInput();
-        this.updateColorSelector();
-    }
-
-    alignOverlay() {
-        if (this.inputRef && this.inputRef.current) {
-            DomHandler.alignOverlay(this.overlayRef.current, this.inputRef.current.parentElement, this.props.appendTo || PrimeReact.appendTo);
-        }
-    }
-
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.container,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
-    }
-
-    renderColorSelector() {
+    const createColorSelector = () => {
         return (
-            <div ref={(el) => this.colorSelector = el} className="p-colorpicker-color-selector" onMouseDown={this.onColorMousedown}
-                onTouchStart={this.onColorDragStart} onTouchMove={this.onDrag} onTouchEnd={this.onDragEnd}>
+            <div ref={colorSelectorRef} className="p-colorpicker-color-selector" onMouseDown={onColorMousedown}
+                onTouchStart={onColorDragStart} onTouchMove={onDrag} onTouchEnd={onDragEnd}>
                 <div className="p-colorpicker-color">
-                    <div ref={(el) => this.colorHandle = el} className="p-colorpicker-color-handle"></div>
+                    <div ref={colorHandleRef} className="p-colorpicker-color-handle"></div>
                 </div>
             </div>
-        );
+        )
     }
 
-    renderHue() {
+    const createHue = () => {
         return (
-            <div ref={(el) => this.hueView = el} className="p-colorpicker-hue" onMouseDown={this.onHueMousedown}
-                onTouchStart={this.onHueDragStart} onTouchMove={this.onDrag} onTouchEnd={this.onDragEnd}>
-                <div ref={(el) => this.hueHandle = el} className="p-colorpicker-hue-handle"></div>
+            <div ref={hueViewRef} className="p-colorpicker-hue" onMouseDown={onHueMousedown}
+                onTouchStart={onHueDragStart} onTouchMove={onDrag} onTouchEnd={onDragEnd}>
+                <div ref={hueHandleRef} className="p-colorpicker-hue-handle"></div>
             </div>
-        );
+        )
     }
 
-    renderContent() {
-        let colorSelector = this.renderColorSelector();
-        let hue = this.renderHue();
+    const createContent = () => {
+        const colorSelector = createColorSelector();
+        const hue = createHue();
 
         return (
             <div className="p-colorpicker-content">
                 {colorSelector}
                 {hue}
             </div>
-        );
+        )
     }
 
-    renderInput() {
-        if (!this.props.inline) {
-            let inputClassName = classNames('p-colorpicker-preview p-inputtext', {
-                'p-disabled': this.props.disabled
+    const createInput = () => {
+        if (!props.inline) {
+            const inputClassName = classNames('p-colorpicker-preview p-inputtext', {
+                'p-disabled': props.disabled
             });
 
-            let inputProps = ObjectUtils.findDiffKeys(this.props, ColorPicker.defaultProps);
+            const inputProps = ObjectUtils.findDiffKeys(props, ColorPicker.defaultProps);
 
             return (
-                <input ref={this.inputRef} type="text" className={inputClassName} readOnly id={this.props.inputId} tabIndex={this.props.tabIndex} disabled={this.props.disabled}
-                    onClick={this.onInputClick} onKeyDown={this.onInputKeydown} {...inputProps} />
-            );
+                <input ref={inputRef} type="text" className={inputClassName} readOnly id={props.inputId} tabIndex={props.tabIndex} disabled={props.disabled}
+                    onClick={onInputClick} onKeyDown={onInputKeydown} {...inputProps} />
+            )
         }
 
         return null;
     }
 
-    render() {
-        const containerClassName = classNames('p-colorpicker p-component', {
-            'p-colorpicker-overlay': !this.props.inline
-        }, this.props.className);
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, ColorPicker.defaultProps);
+    const className = classNames('p-colorpicker p-component', {
+        'p-colorpicker-overlay': !props.inline
+    }, props.className);
+    const content = createContent();
+    const input = createInput();
 
-        let content = this.renderContent();
-        let input = this.renderInput();
-
-        return (
-            <div ref={(el) => this.container = el} id={this.props.id} style={this.props.style} className={containerClassName}>
+    return (
+        <>
+            <div ref={elementRef} id={props.id} style={props.style} className={className} {...otherProps}>
                 {input}
-                <ColorPickerPanel ref={this.overlayRef} appendTo={this.props.appendTo} inline={this.props.inline} disabled={this.props.disabled} onClick={this.onPanelClick}
-                    in={this.props.inline || this.state.overlayVisible} onEnter={this.onOverlayEnter} onEntered={this.onOverlayEntered} onExit={this.onOverlayExit} onExited={this.onOverlayExited}
-                    transitionOptions={this.props.transitionOptions}>
+                <ColorPickerPanel ref={overlayRef} appendTo={props.appendTo} inline={props.inline} disabled={props.disabled} onClick={onPanelClick}
+                    in={props.inline || overlayVisibleState} onEnter={onOverlayEnter} onEntered={onOverlayEntered} onExit={onOverlayExit} onExited={onOverlayExited}
+                    transitionOptions={props.transitionOptions}>
                     {content}
                 </ColorPickerPanel>
             </div>
-        );
-    }
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
+    )
+}));
+
+ColorPicker.displayName = 'ColorPicker';
+ColorPicker.defaultProps = {
+    __TYPE: 'ColorPicker',
+    id: null,
+    inputRef: null,
+    value: null,
+    style: null,
+    className: null,
+    defaultColor: 'ff0000',
+    inline: false,
+    format: 'hex',
+    appendTo: null,
+    disabled: false,
+    tabIndex: null,
+    inputId: null,
+    tooltip: null,
+    tooltipOptions: null,
+    transitionOptions: null,
+    onChange: null,
+    onShow: null,
+    onHide: null
 }

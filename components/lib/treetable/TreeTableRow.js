@@ -1,191 +1,130 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { DomHandler, classNames } from '../utils/Utils';
-import { TreeTableBodyCell } from './TreeTableBodyCell';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler } from '../utils/Utils';
+import { TreeTableBodyCell } from './TreeTableBodyCell';
 
-export class TreeTableRow extends Component {
+export const TreeTableRow = React.memo((props) => {
+    const elementRef = React.useRef(null);
+    const checkboxRef = React.useRef(null);
+    const checkboxBoxRef = React.useRef(null);
+    const nodeTouched = React.useRef(false);
+    const expanded = props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false;
 
-    static defaultProps = {
-        node: null,
-        level: null,
-        columns: null,
-        expandedKeys: null,
-        contextMenuSelectionKey: null,
-        selectionMode: null,
-        selectionKeys: null,
-        metaKeySelection: true,
-        propagateSelectionUp: true,
-        propagateSelectionDown: true,
-        rowClassName: null,
-        onExpand: null,
-        onCollapse: null,
-        onToggle: null,
-        onRowClick: null,
-        onSelect: null,
-        onUnselect: null,
-        onSelectionChange: null,
-        onPropagateUp: null,
-        onContextMenuSelectionChange: null,
-        onContextMenu: null
+    const isLeaf = () => {
+        return props.node.leaf === false ? false : !(props.node.children && props.node.children.length);
     }
 
-    static propTypes = {
-        node: PropTypes.any,
-        level: PropTypes.number,
-        columns: PropTypes.array,
-        expandedKeys: PropTypes.object,
-        contextMenuSelectionKey: PropTypes.any,
-        selectionMode: PropTypes.string,
-        selectionKeys: PropTypes.any,
-        metaKeySelection: PropTypes.bool,
-        propagateSelectionUp: PropTypes.bool,
-        propagateSelectionDown: PropTypes.bool,
-        rowClassName: PropTypes.func,
-        onExpand: PropTypes.func,
-        onCollapse: PropTypes.func,
-        onToggle: PropTypes.func,
-        onRowClick: PropTypes.func,
-        onSelect: PropTypes.func,
-        onUnselect: PropTypes.func,
-        onSelectionChange: PropTypes.func,
-        onPropagateUp: PropTypes.func,
-        onContextMenuSelectionChange: PropTypes.func,
-        onContextMenu: PropTypes.func,
-    }
-
-    constructor(props) {
-        super(props);
-
-        this.onTogglerClick = this.onTogglerClick.bind(this);
-        this.onClick = this.onClick.bind(this);
-        this.onTouchEnd = this.onTouchEnd.bind(this);
-        this.propagateUp = this.propagateUp.bind(this);
-        this.onCheckboxChange = this.onCheckboxChange.bind(this);
-        this.onCheckboxFocus = this.onCheckboxFocus.bind(this);
-        this.onCheckboxBlur = this.onCheckboxBlur.bind(this);
-        this.onRightClick = this.onRightClick.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
-    }
-
-    isLeaf() {
-        return this.props.node.leaf === false ? false : !(this.props.node.children && this.props.node.children.length);
-    }
-
-    onTogglerClick(event) {
-        if (this.isExpanded())
-            this.collapse(event);
-        else
-            this.expand(event);
+    const onTogglerClick = (event) => {
+        expanded ? collapse(event) : expand(event);
 
         event.preventDefault();
         event.stopPropagation();
     }
 
-    expand(event) {
-        let expandedKeys = this.props.expandedKeys ? {...this.props.expandedKeys} : {};
-        expandedKeys[this.props.node.key] = true;
+    const expand = (event) => {
+        let expandedKeys = props.expandedKeys ? { ...props.expandedKeys } : {};
+        expandedKeys[props.node.key] = true;
 
-        this.props.onToggle({
+        props.onToggle({
             originalEvent: event,
             value: expandedKeys
         });
 
-        this.invokeToggleEvents(event, true);
+        invokeToggleEvents(event, true);
     }
 
-    collapse(event) {
-        let expandedKeys = {...this.props.expandedKeys};
-        delete expandedKeys[this.props.node.key];
+    const collapse = (event) => {
+        let expandedKeys = { ...props.expandedKeys };
+        delete expandedKeys[props.node.key];
 
-        this.props.onToggle({
+        props.onToggle({
             originalEvent: event,
             value: expandedKeys
         });
 
-        this.invokeToggleEvents(event, false);
+        invokeToggleEvents(event, false);
     }
 
-    invokeToggleEvents(event, expanded) {
+    const invokeToggleEvents = (event, expanded) => {
         if (expanded) {
-            if (this.props.onExpand) {
-                this.props.onExpand({
+            if (props.onExpand) {
+                props.onExpand({
                     originalEvent: event,
-                    node: this.props.node
+                    node: props.node
                 });
             }
         }
         else {
-            if (this.props.onCollapse) {
-                this.props.onCollapse({
+            if (props.onCollapse) {
+                props.onCollapse({
                     originalEvent: event,
-                    node: this.props.node
+                    node: props.node
                 });
             }
         }
     }
 
-    onClick(event) {
-        if (this.props.onRowClick) {
-            this.props.onRowClick(event, this.props.node);
+    const onClick = (event) => {
+        if (props.onRowClick) {
+            props.onRowClick(event, props.node);
         }
 
-        this.nodeTouched = false;
+        nodeTouched.current = false;
     }
 
-    onTouchEnd() {
-        this.nodeTouched = true;
+    const onTouchEnd = () => {
+        nodeTouched.current = true;
     }
 
-    onCheckboxChange(event) {
-        const checked = this.isChecked();
-        let selectionKeys = this.props.selectionKeys ? {...this.props.selectionKeys} : {};
+    const onCheckboxChange = (event) => {
+        const checked = isChecked();
+        let selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
 
         if (checked) {
-            if (this.props.propagateSelectionDown)
-                this.propagateDown(this.props.node, false, selectionKeys);
+            if (props.propagateSelectionDown)
+                propagateDown(props.node, false, selectionKeys);
             else
-                delete selectionKeys[this.props.node.key];
+                delete selectionKeys[props.node.key];
 
-            if (this.props.propagateSelectionUp && this.props.onPropagateUp) {
-                this.props.onPropagateUp({
+            if (props.propagateSelectionUp && props.onPropagateUp) {
+                props.onPropagateUp({
                     originalEvent: event,
                     check: false,
                     selectionKeys: selectionKeys
                 });
             }
 
-            if (this.props.onUnselect) {
-                this.props.onUnselect({
+            if (props.onUnselect) {
+                props.onUnselect({
                     originalEvent: event,
-                    node: this.props.node
+                    node: props.node
                 });
             }
         }
         else {
-            if (this.props.propagateSelectionDown)
-                this.propagateDown(this.props.node, true, selectionKeys);
+            if (props.propagateSelectionDown)
+                propagateDown(props.node, true, selectionKeys);
             else
-                selectionKeys[this.props.node.key] = {checked: true};
+                selectionKeys[props.node.key] = { checked: true };
 
-                if (this.props.propagateSelectionUp && this.props.onPropagateUp) {
-                    this.props.onPropagateUp({
-                        originalEvent: event,
-                        check: true,
-                        selectionKeys: selectionKeys
-                    });
-                }
-
-            if (this.props.onSelect) {
-                this.props.onSelect({
+            if (props.propagateSelectionUp && props.onPropagateUp) {
+                props.onPropagateUp({
                     originalEvent: event,
-                    node: this.props.node
+                    check: true,
+                    selectionKeys: selectionKeys
+                });
+            }
+
+            if (props.onSelect) {
+                props.onSelect({
+                    originalEvent: event,
+                    node: props.node
                 });
             }
         }
 
-        if (this.props.onSelectionChange) {
-            this.props.onSelectionChange({
+        if (props.onSelectionChange) {
+            props.onSelectionChange({
                 originalEvent: event,
                 value: selectionKeys
             })
@@ -194,79 +133,81 @@ export class TreeTableRow extends Component {
         DomHandler.clearSelection();
     }
 
-    onCheckboxFocus() {
-        DomHandler.addClass(this.checkboxBox, 'p-focus');
+    const onCheckboxFocus = () => {
+        DomHandler.addClass(checkboxBoxRef.current, 'p-focus');
+        DomHandler.addClass(checkboxRef.current, 'p-checkbox-focused');
     }
 
-    onCheckboxBlur() {
-        DomHandler.removeClass(this.checkboxBox, 'p-focus');
+    const onCheckboxBlur = () => {
+        DomHandler.removeClass(checkboxBoxRef.current, 'p-focus');
+        DomHandler.removeClass(checkboxRef.current, 'p-checkbox-focused');
     }
 
-    propagateUp(event) {
+    const propagateUp = (event) => {
         let check = event.check;
         let selectionKeys = event.selectionKeys;
         let checkedChildCount = 0;
         let childPartialSelected = false;
 
-        for(let child of this.props.node.children) {
-            if(selectionKeys[child.key] && selectionKeys[child.key].checked)
+        for (let child of props.node.children) {
+            if (selectionKeys[child.key] && selectionKeys[child.key].checked)
                 checkedChildCount++;
-            else if(selectionKeys[child.key] && selectionKeys[child.key].partialChecked)
+            else if (selectionKeys[child.key] && selectionKeys[child.key].partialChecked)
                 childPartialSelected = true;
         }
 
-        if(check && checkedChildCount === this.props.node.children.length) {
-            selectionKeys[this.props.node.key] = {checked: true, partialChecked: false};
+        if (check && checkedChildCount === props.node.children.length) {
+            selectionKeys[props.node.key] = { checked: true, partialChecked: false };
         }
         else {
             if (!check) {
-                delete selectionKeys[this.props.node.key];
+                delete selectionKeys[props.node.key];
             }
 
-            if(childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== this.props.node.children.length))
-                selectionKeys[this.props.node.key] = {checked: false, partialChecked: true};
+            if (childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== props.node.children.length))
+                selectionKeys[props.node.key] = { checked: false, partialChecked: true };
             else
-                selectionKeys[this.props.node.key] = {checked: false, partialChecked: false};
+                selectionKeys[props.node.key] = { checked: false, partialChecked: false };
         }
 
-        if (this.props.propagateSelectionUp && this.props.onPropagateUp) {
-            this.props.onPropagateUp(event);
+        if (props.propagateSelectionUp && props.onPropagateUp) {
+            props.onPropagateUp(event);
         }
     }
 
-    propagateDown(node, check, selectionKeys) {
-        if(check)
-            selectionKeys[node.key] = {checked: true, partialChecked: false};
+    const propagateDown = (node, check, selectionKeys) => {
+        if (check)
+            selectionKeys[node.key] = { checked: true, partialChecked: false };
         else
             delete selectionKeys[node.key];
 
         if (node.children && node.children.length) {
             for (let i = 0; i < node.children.length; i++) {
-                this.propagateDown(node.children[i], check, selectionKeys);
+                propagateDown(node.children[i], check, selectionKeys);
             }
         }
     }
 
-    onRightClick(event) {
+    const onRightClick = (event) => {
         DomHandler.clearSelection();
 
-        if (this.props.onContextMenuSelectionChange) {
-            this.props.onContextMenuSelectionChange({
+        if (props.onContextMenuSelectionChange) {
+            props.onContextMenuSelectionChange({
                 originalEvent: event,
-                value: this.props.node.key
+                value: props.node.key
             });
         }
 
-        if (this.props.onContextMenu) {
-            this.props.onContextMenu({
+        if (props.onContextMenu) {
+            props.onContextMenu({
                 originalEvent: event,
-                node: this.props.node
+                node: props.node
             });
         }
     }
 
-    onKeyDown(event) {
-        if (event.target === this.container) {
+    const onKeyDown = (event) => {
+        if (event.target === elementRef.current) {
             const rowElement = event.currentTarget;
 
             switch (event.which) {
@@ -278,7 +219,7 @@ export class TreeTableRow extends Component {
                     }
 
                     event.preventDefault();
-                break;
+                    break;
 
                 //up arrow
                 case 38:
@@ -288,84 +229,79 @@ export class TreeTableRow extends Component {
                     }
 
                     event.preventDefault();
-                break;
+                    break;
 
                 //right arrow
                 case 39:
-                    if (!this.isExpanded()) {
-                        this.expand(event);
+                    if (!expanded) {
+                        expand(event);
                     }
 
                     event.preventDefault();
-                break;
+                    break;
 
                 //left arrow
                 case 37:
-                    if (this.isExpanded()) {
-                        this.collapse(event);
+                    if (expanded) {
+                        collapse(event);
                     }
 
                     event.preventDefault();
-                break;
+                    break;
 
                 //enter
                 case 13:
-                    this.onClick(event);
+                    onClick(event);
                     event.preventDefault();
-                break;
+                    break;
 
                 default:
                     //no op
-                break;
+                    break;
             }
         }
     }
 
-    isExpanded() {
-        return this.props.expandedKeys ? this.props.expandedKeys[this.props.node.key] !== undefined : false;
-    }
-
-    isSelected() {
-        if ((this.props.selectionMode === 'single' || this.props.selectionMode === 'multiple') && this.props.selectionKeys)
-            return (this.props.selectionMode === 'single') ? this.props.selectionKeys === this.props.node.key : this.props.selectionKeys[this.props.node.key] !== undefined;
+    const isSelected = () => {
+        if ((props.selectionMode === 'single' || props.selectionMode === 'multiple') && props.selectionKeys)
+            return (props.selectionMode === 'single') ? props.selectionKeys === props.node.key : props.selectionKeys[props.node.key] !== undefined;
         else
             return false;
     }
 
-    isChecked() {
-        return this.props.selectionKeys ? this.props.selectionKeys[this.props.node.key] && this.props.selectionKeys[this.props.node.key].checked: false;
+    const isChecked = () => {
+        return props.selectionKeys ? props.selectionKeys[props.node.key] && props.selectionKeys[props.node.key].checked : false;
     }
 
-    isPartialChecked() {
-        return this.props.selectionKeys ? this.props.selectionKeys[this.props.node.key] && this.props.selectionKeys[this.props.node.key].partialChecked: false;
+    const isPartialChecked = () => {
+        return props.selectionKeys ? props.selectionKeys[props.node.key] && props.selectionKeys[props.node.key].partialChecked : false;
     }
 
-    renderToggler() {
-        const expanded = this.isExpanded();
-        const iconClassName = classNames('"p-treetable-toggler-icon pi pi-fw', {'pi-chevron-right': !expanded, 'pi-chevron-down': expanded});
-        const style = {marginLeft: this.props.level * 16 + 'px', visibility: (this.props.node.leaf === false || (this.props.node.children && this.props.node.children.length)) ? 'visible' : 'hidden'};
+    const createToggler = () => {
+        const iconClassName = classNames('p-treetable-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
+        const style = { marginLeft: props.level * 16 + 'px', visibility: (props.node.leaf === false || (props.node.children && props.node.children.length)) ? 'visible' : 'hidden' };
 
         return (
-            <button type="button" className="p-treetable-toggler p-link p-unselectable-text" onClick={this.onTogglerClick} tabIndex={-1} style={style}>
+            <button type="button" className="p-treetable-toggler p-link p-unselectable-text" onClick={onTogglerClick} tabIndex={-1} style={style}>
                 <i className={iconClassName}></i>
                 <Ripple />
             </button>
         );
     }
 
-    renderCheckbox() {
-        if (this.props.selectionMode === 'checkbox' && this.props.node.selectable !== false) {
-            const checked = this.isChecked();
-            const partialChecked = this.isPartialChecked();
-            const className = classNames('p-checkbox-box', {'p-highlight': checked, 'p-indeterminate': partialChecked});
-            const icon = classNames('p-checkbox-icon p-c', {'pi pi-check': checked, 'pi pi-minus': partialChecked});
+    const createCheckbox = () => {
+        if (props.selectionMode === 'checkbox' && props.node.selectable !== false) {
+            const checked = isChecked();
+            const partialChecked = isPartialChecked();
+            const className = classNames('p-checkbox-box', { 'p-highlight': checked, 'p-indeterminate': partialChecked });
+            const icon = classNames('p-checkbox-icon p-c', { 'pi pi-check': checked, 'pi pi-minus': partialChecked });
 
             return (
-                <div className="p-checkbox p-treetable-checkbox p-component" onClick={this.onCheckboxChange} role="checkbox" aria-checked={checked}>
+                <div className="p-checkbox p-treetable-checkbox p-component" ref={checkboxRef} onClick={onCheckboxChange} role="checkbox" aria-checked={checked}>
                     <div className="p-hidden-accessible">
-                        <input type="checkbox" onFocus={this.onCheckboxFocus} onBlur={this.onCheckboxBlur} />
+                        <input type="checkbox" onFocus={onCheckboxFocus} onBlur={onCheckboxBlur} />
                     </div>
-                    <div className={className} ref={el => this.checkboxBox = el}>
+                    <div className={className} ref={checkboxBoxRef}>
                         <span className={icon}></span>
                     </div>
                 </div>
@@ -376,35 +312,35 @@ export class TreeTableRow extends Component {
         }
     }
 
-    renderCell(column) {
+    const createCell = (column) => {
         let toggler, checkbox;
 
         if (column.props.expander) {
-            toggler = this.renderToggler();
-            checkbox = this.renderCheckbox();
+            toggler = createToggler();
+            checkbox = createCheckbox();
         }
 
         return (
-            <TreeTableBodyCell key={column.props.columnKey||column.props.field} {...column.props} selectOnEdit={this.props.selectOnEdit} selected={this.isSelected()} node={this.props.node} rowIndex={this.props.rowIndex}>
+            <TreeTableBodyCell key={column.props.columnKey || column.props.field} {...column.props} column={column} selectOnEdit={props.selectOnEdit} selected={isSelected()} node={props.node} rowIndex={props.rowIndex}>
                 {toggler}
                 {checkbox}
             </TreeTableBodyCell>
-        );
+        )
     }
 
-    renderChildren() {
-        if (this.isExpanded() && this.props.node.children) {
-            return this.props.node.children.map((childNode, index) => {
+    const createChildren = () => {
+        if (expanded && props.node.children) {
+            return props.node.children.map((childNode, index) => {
                 return (
-                    <TreeTableRow key={childNode.key||JSON.stringify(childNode.data)} level={this.props.level + 1} rowIndex={this.props.rowIndex + '_' + index}
-                        node={childNode} columns={this.props.columns} expandedKeys={this.props.expandedKeys} selectOnEdit={this.props.selectOnEdit}
-                        onToggle={this.props.onToggle} onExpand={this.props.onExpand} onCollapse={this.props.onCollapse}
-                        selectionMode={this.props.selectionMode} selectionKeys={this.props.selectionKeys} onSelectionChange={this.props.onSelectionChange}
-                        metaKeySelection={this.props.metaKeySelection} onRowClick={this.props.onRowClick} onSelect={this.props.onSelect} onUnselect={this.props.onUnselect}
-                        propagateSelectionUp={this.props.propagateSelectionUp} propagateSelectionDown={this.props.propagateSelectionDown} onPropagateUp={this.propagateUp}
-                        rowClassName={this.props.rowClassName}
-                        contextMenuSelectionKey={this.props.contextMenuSelectionKey} onContextMenuSelectionChange={this.props.onContextMenuSelectionChange} onContextMenu={this.props.onContextMenu} />
-                );
+                    <TreeTableRow key={childNode.key || JSON.stringify(childNode.data)} level={props.level + 1} rowIndex={props.rowIndex + '_' + index}
+                        node={childNode} columns={props.columns} expandedKeys={props.expandedKeys} selectOnEdit={props.selectOnEdit}
+                        onToggle={props.onToggle} onExpand={props.onExpand} onCollapse={props.onCollapse}
+                        selectionMode={props.selectionMode} selectionKeys={props.selectionKeys} onSelectionChange={props.onSelectionChange}
+                        metaKeySelection={props.metaKeySelection} onRowClick={props.onRowClick} onSelect={props.onSelect} onUnselect={props.onUnselect}
+                        propagateSelectionUp={props.propagateSelectionUp} propagateSelectionDown={props.propagateSelectionDown} onPropagateUp={propagateUp}
+                        rowClassName={props.rowClassName}
+                        contextMenuSelectionKey={props.contextMenuSelectionKey} onContextMenuSelectionChange={props.onContextMenuSelectionChange} onContextMenu={props.onContextMenu} />
+                )
             });
         }
         else {
@@ -412,26 +348,26 @@ export class TreeTableRow extends Component {
         }
     }
 
-    render() {
-        const cells = this.props.columns.map(col => this.renderCell(col));
-        const children =  this.renderChildren();
-        let className = {
-            'p-highlight': this.isSelected(),
-            'p-highlight-contextmenu': (this.props.contextMenuSelectionKey && this.props.contextMenuSelectionKey === this.props.node.key)
-        };
+    const cells = props.columns.map(createCell);
+    const children = createChildren();
+    let className = {
+        'p-highlight': isSelected(),
+        'p-highlight-contextmenu': (props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key)
+    };
 
-        if (this.props.rowClassName) {
-            let rowClassName = this.props.rowClassName(this.props.node);
-            className = {...className, ...rowClassName};
-        }
-
-        className = classNames(className, this.props.node.className);
-
-        return (
-            <>
-                <tr ref={el => this.container = el} tabIndex={0} className={className} style={this.props.node.style} onClick={this.onClick} onTouchEnd={this.onTouchEnd} onContextMenu={this.onRightClick} onKeyDown={this.onKeyDown}>{cells}</tr>
-                {children}
-            </>
-        );
+    if (props.rowClassName) {
+        let rowClassName = props.rowClassName(props.node);
+        className = { ...className, ...rowClassName };
     }
-}
+
+    className = classNames(className, props.node.className);
+
+    return (
+        <>
+            <tr ref={elementRef} tabIndex={0} className={className} style={props.node.style} onClick={onClick} onTouchEnd={onTouchEnd} onContextMenu={onRightClick} onKeyDown={onKeyDown}>{cells}</tr>
+            {children}
+        </>
+    )
+});
+
+TreeTableRow.displayName = 'TreeTableRow';

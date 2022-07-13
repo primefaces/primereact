@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { DataView, DataViewLayoutOptions } from '../../components/lib/dataview/DataView';
 import { TabView } from '../../components/lib/tabview/TabView';
 import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
@@ -9,62 +9,59 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 import getConfig from 'next/config';
 
-export default class DataViewLazyDemo extends Component {
+const DataViewLazyDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            products: null,
-            layout: 'grid',
-            loading: true,
-            first: 0,
-            totalRecords: 0
-        };
-        this.rows = 6;
+    const [products, setProducts] = useState(null);
+    const [layout, setLayout] = useState('grid');
+    const [loading, setLoading] = useState(true);
+    const [first, setFirst] = useState(0);
+    const [totalRecords, setTotalRecords] = useState(0);
+    const rows = useRef(6);
+    const datasource = useRef(null);
+    const isMounted = useRef(false);
+    const productService = new ProductService();
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-        this.productService = new ProductService();
-        this.itemTemplate = this.itemTemplate.bind(this);
-        this.onPage = this.onPage.bind(this);
-        this.contextPath = getConfig().publicRuntimeConfig.contextPath;
-    }
+    useEffect(() => {
+        if (isMounted.current) {
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
+        }
+    }, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    componentDidMount() {
+    useEffect(() => {
         setTimeout(() => {
-            this.productService.getProducts().then(data => {
-                this.datasource = data;
-                this.setState({
-                    totalRecords: data.length,
-                    products: this.datasource.slice(0, this.rows),
-                    loading: false
-                });
+            isMounted.current = true;
+            productService.getProducts().then(data => {
+                datasource.current = data;
+                setTotalRecords(data.length);
+                setProducts(datasource.current.slice(0, rows.current));
+                setLoading(false);
             });
         }, 1000);
-    }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    onPage(event) {
-        this.setState({
-            loading: true
-        });
+    const onPage = (event) => {
+        setLoading(true);
 
         //imitate delay of a backend call
         setTimeout(() => {
             const startIndex = event.first;
-            const endIndex = Math.min(event.first + this.rows, this.state.totalRecords - 1);
-            const newProducts = startIndex === endIndex ? this.datasource.slice(startIndex) : this.datasource.slice(startIndex, endIndex);
+            const endIndex = Math.min(event.first + rows.current, totalRecords - 1);
+            const newProducts = startIndex === endIndex ? datasource.current.slice(startIndex) : datasource.current.slice(startIndex, endIndex);
 
-            this.setState({
-                first: startIndex,
-                products: newProducts,
-                loading: false
-            });
+            setFirst(startIndex);
+            setProducts(newProducts);
+            setLoading(false);
         }, 1000);
     }
 
-    renderListItem(data) {
+    const renderListItem = (data) => {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
-                    <img src={`${this.contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                    <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
@@ -81,9 +78,9 @@ export default class DataViewLazyDemo extends Component {
         );
     }
 
-    renderGridItem(data) {
+    const renderGridItem = (data) => {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>
@@ -93,7 +90,7 @@ export default class DataViewLazyDemo extends Component {
                         <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="product-grid-item-content">
-                    <img src={`${this.contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                    <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
                         <Rating value={data.rating} readOnly cancel={false}></Rating>
@@ -107,79 +104,70 @@ export default class DataViewLazyDemo extends Component {
         );
     }
 
-    itemTemplate(product, layout) {
+    const itemTemplate = (product, layout) => {
         if (!product) {
             return;
         }
 
         if (layout === 'list')
-            return this.renderListItem(product);
+            return renderListItem(product);
         else if (layout === 'grid')
-            return this.renderGridItem(product);
+            return renderGridItem(product);
     }
 
-    renderHeader() {
+    const renderHeader = () => {
         let onOptionChange = (e) => {
-            this.setState({ loading: true }, () => {
-                setTimeout(() => {
-                    this.setState({
-                        loading: false,
-                        layout: e.value
-                    });
-                }, 1000);
-            });
+            setLoading(true);
+            setLayout(e.value);
         };
 
         return (
             <div style={{ textAlign: 'left' }}>
-                <DataViewLayoutOptions layout={this.state.layout} onChange={onOptionChange} />
+                <DataViewLayoutOptions layout={layout} onChange={onOptionChange} />
             </div>
         );
     }
 
-    render() {
-        const header = this.renderHeader();
+    const header = renderHeader();
 
-        return (
-            <div>
-                <Head>
-                    <title>React DataView Component - Lazy</title>
-                    <meta name="description" content="Lazy mode is handy to deal with large datasets." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataView <span>Lazy</span></h1>
-                        <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging, sorting and filtering happens. Sample belows imitates
-                        lazy paging by using an in memory list. It is also important to assign the logical number of rows to totalRecords by doing a projection query for paginator configuration so that paginator displays the UI assuming
-                            there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist.</p>
-                        </div>
-
-                    <DocActions github="dataview/lazy.js" />
-                </div>
-
-                <div className="content-section implementation dataview-demo">
-                    <div className="card">
-                        <DataView value={this.state.products} layout={this.state.layout} header={header}
-                                itemTemplate={this.itemTemplate} lazy paginator paginatorPosition={'both'} rows={this.rows}
-                                totalRecords={this.state.totalRecords} first={this.state.first} onPage={this.onPage} loading={this.state.loading} />
+    return (
+        <div>
+            <Head>
+                <title>React DataView Component - Lazy</title>
+                <meta name="description" content="Lazy mode is handy to deal with large datasets." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>DataView <span>Lazy</span></h1>
+                    <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging, sorting and filtering happens. Sample belows imitates
+                    lazy paging by using an in memory list. It is also important to assign the logical number of rows to totalRecords by doing a projection query for paginator configuration so that paginator displays the UI assuming
+                        there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist.</p>
                     </div>
-                </div>
 
-                <DataViewLazyDemoDoc />
+                <DocActions github="dataview/lazy.js" />
             </div>
-        );
-    }
+
+            <div className="content-section implementation dataview-demo">
+                <div className="card">
+                    <DataView value={products} layout={layout} header={header}
+                            itemTemplate={itemTemplate} lazy paginator paginatorPosition={'both'} rows={rows.current}
+                            totalRecords={totalRecords} first={first} onPage={onPage} loading={loading} />
+                </div>
+            </div>
+
+            <DataViewLazyDemoDoc />
+        </div>
+    );
 }
 
-export class DataViewLazyDemoDoc extends Component {
+export default DataViewLazyDemo;
 
-    constructor(props) {
-        super(props);
+export const DataViewLazyDemoDoc = memo(() => {
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { ProductService } from '../service/ProductService';
@@ -239,7 +227,7 @@ export class DataViewLazyDemo extends Component {
 
     renderListItem(data) {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
                     <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
@@ -260,7 +248,7 @@ export class DataViewLazyDemo extends Component {
 
     renderGridItem(data) {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>
@@ -329,10 +317,10 @@ export class DataViewLazyDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect, useRef } from 'react';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { ProductService } from '../service/ProductService';
@@ -378,7 +366,7 @@ const DataViewLazyDemo = () => {
         setTimeout(() => {
             const startIndex = event.first;
             const endIndex = Math.min(event.first + rows.current, totalRecords - 1);
-            const newProducts = startIndex === endIndex ? datasource.slice(startIndex) : datasource.slice(startIndex, endIndex);
+            const newProducts = startIndex === endIndex ? datasource.current.slice(startIndex) : datasource.current.slice(startIndex, endIndex);
 
             setFirst(startIndex);
             setProducts(newProducts);
@@ -388,7 +376,7 @@ const DataViewLazyDemo = () => {
 
     const renderListItem = (data) => {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
                     <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
@@ -409,7 +397,7 @@ const DataViewLazyDemo = () => {
 
     const renderGridItem = (data) => {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>
@@ -470,10 +458,10 @@ const DataViewLazyDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect, useRef } from 'react';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { ProductService } from '../service/ProductService';
@@ -529,7 +517,7 @@ const DataViewLazyDemo = () => {
 
     const renderListItem = (data) => {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
                     <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
@@ -550,7 +538,7 @@ const DataViewLazyDemo = () => {
 
     const renderGridItem = (data) => {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>
@@ -611,21 +599,21 @@ const DataViewLazyDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
-        <link rel="stylesheet" href="./DataViewDemo.css" />
-        <script src="./ProductService.js"></script>
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
+<link rel="stylesheet" href="./DataViewDemo.css" />
+<script src="./ProductService.js"></script>
 
-        <script src="https://unpkg.com/primereact/api/api.min.js"></script>
-        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
-        <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
-        <script src="https://unpkg.com/primereact/dataview/dataview.min.js"></script>
-        <script src="https://unpkg.com/primereact/button/button.min.js"></script>
-        <script src="https://unpkg.com/primereact/rating/rating.min.js"></script>`,
-                content: `
+<script src="https://unpkg.com/primereact/api/api.min.js"></script>
+<script src="https://unpkg.com/primereact/core/core.min.js"></script>
+<script src="https://unpkg.com/primereact/dropdown/dropdown.min.js"></script>
+<script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
+<script src="https://unpkg.com/primereact/dataview/dataview.min.js"></script>
+<script src="https://unpkg.com/primereact/button/button.min.js"></script>
+<script src="https://unpkg.com/primereact/rating/rating.min.js"></script>`,
+            content: `
 const { useEffect, useState, useRef } = React;
 const { DataView, DataViewLayoutOptions } = primereact.dataview;
 const { Button } = primereact.button;
@@ -679,7 +667,7 @@ const DataViewLazyDemo = () => {
 
     const renderListItem = (data) => {
         return (
-            <div className="p-col-12">
+            <div className="col-12">
                 <div className="product-list-item">
                     <img src={\`images/product/\${data.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
                     <div className="product-list-detail">
@@ -700,7 +688,7 @@ const DataViewLazyDemo = () => {
 
     const renderGridItem = (data) => {
         return (
-            <div className="p-col-12 p-md-4">
+            <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-top">
                         <div>
@@ -761,12 +749,12 @@ const DataViewLazyDemo = () => {
     );
 }
                 `
-            }
         }
+    }
 
-        this.extFiles = {
-            'demo/DataViewDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/DataViewDemo.css': {
+            content: `
 .dataview-demo .p-dropdown {
     width: 14rem;
     font-weight: normal;
@@ -889,23 +877,17 @@ const DataViewLazyDemo = () => {
     }
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'DataViewLazyDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    )
 
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'DataViewLazyDemo', sources: this.sources, service: 'ProductService', data: 'products', extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+})

@@ -1,18 +1,16 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
-export class MenubarDoc extends Component {
+const MenubarDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
@@ -152,7 +150,7 @@ export class MenubarDemo extends Component {
     }
 
     render() {
-        const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="p-mr-2"></img>;
+        const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
         const end = <InputText placeholder="Search" type="text" />;
 
         return (
@@ -165,10 +163,10 @@ export class MenubarDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
@@ -302,7 +300,7 @@ const MenubarDemo = () => {
         }
     ];
 
-    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="p-mr-2"></img>;
+    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
 
     return (
@@ -314,10 +312,10 @@ const MenubarDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
@@ -451,7 +449,7 @@ const MenubarDemo = () => {
         }
     ];
 
-    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="p-mr-2"></img>;
+    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
 
     return (
@@ -463,14 +461,14 @@ const MenubarDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/menubar/menubar.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { Menubar } = primereact.menubar;
 const { InputText } = primereact.inputtext;
 
@@ -603,7 +601,7 @@ const MenubarDemo = () => {
         }
     ];
 
-    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="p-mr-2"></img>;
+    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
 
     return (
@@ -615,27 +613,21 @@ const MenubarDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Menubar } from 'primereact/menubar';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -643,11 +635,11 @@ import { Menubar } from 'primereact/menubar';
 `}
 </CodeHighlight>
 
-                        <h5>MenuItem API</h5>
-                        <p>Menubar uses the common menu item api to define its items, visit <Link href="/menumodel"> MenuModel </Link> for details.</p>
+                    <h5>MenuItem API</h5>
+                    <p>Menubar uses the common menu item api to define its items, visit <Link href="/menumodel"> MenuModel </Link> for details.</p>
 
-                        <h5>Getting Started</h5>
-                        <p>Menubar requires nested menuitems as its model.</p>
+                    <h5>Getting Started</h5>
+                    <p>Menubar requires nested menuitems as its model.</p>
 <CodeHighlight>
 {`
 <Menubar model={items}/>
@@ -787,8 +779,8 @@ const items = [
 `}
 </CodeHighlight>
 
-                        <h5>Custom Content</h5>
-                        <p>The menubar can display custom content by using the "start" and "end" properties.</p>
+                    <h5>Custom Content</h5>
+                    <p>The menubar can display custom content by using the "start" and "end" properties.</p>
 <CodeHighlight>
 {`
 <Menubar
@@ -799,106 +791,176 @@ const items = [
 `}
 </CodeHighlight>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>model</td>
-                                        <td>array</td>
-                                        <td>null</td>
-                                        <td>An array of menuitems.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>start</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>The template of starting element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>end</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>The template of trailing element</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>model</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>An array of menuitems.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>start</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template of starting element.</td>
+                                </tr>
+                                <tr>
+                                    <td>end</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template of trailing element</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-menubar</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menu-list</td>
-                                        <td>List element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menuitem</td>
-                                        <td>Menuitem element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menuitem-text</td>
-                                        <td>Label of a menuitem.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-menuitem-icon</td>
-                                        <td>Icon of a menuitem.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-submenu-icon</td>
-                                        <td>Arrow icon of a submenu.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-menubar</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menu-list</td>
+                                    <td>List element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menuitem</td>
+                                    <td>Menuitem element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menuitem-text</td>
+                                    <td>Label of a menuitem.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-menuitem-icon</td>
+                                    <td>Icon of a menuitem.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-submenu-icon</td>
+                                    <td>Arrow icon of a submenu.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Accessibility</h5>
+                <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>Menubar component uses the <i>menubar</i> role and the value to describe the menu can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Each list item has a <i>presentation</i> role
+                    whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a MenuBar uses the <i>menu</i> role with an <i>aria-labelledby</i> defined 
+                    as the id of the submenu root menuitem label. In addition, menuitems that open a submenu have <i>aria-haspopup</i>, <i>aria-expanded</i> and <i>aria-controls</i> to define the relation between the item and the submenu.</p>
 
-                    {
-                        useLiveEditorTabs({ name: 'MenubarDemo', sources: this.sources })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+                    <p>In mobile viewports, a menu icon appears with a <i>button</i> role along with <i>aria-haspopup</i>, <i>aria-expanded</i> and <i>aria-controls</i> to manage the relation between the overlay menubar and the button. The value to 
+                    describe the button can be defined <i>aria-label</i> or <i>aria-labelledby</i> specified using <i>buttonProps</i>, by default <i>navigation</i> key of the <i>aria</i> property from the <Link href="/locale">locale</Link> API as the <i>aria-label</i>.</p>
+
+                    <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Add focus to the first item if focus moves in to the menu. If the focus is already within the menu, focus moves to the next focusable item in the page tab sequence.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>shift</i> + <i>tab</i></td>
+                                    <td>Add focus to the last item if focus moves in to the menu. If the focus is already within the menu, focus moves to the previous focusable item in the page tab sequence.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>If focus is inside a popup submenu, closes the submenu and moves focus to the root item of the closed submenu.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>If focus is on a root element, open a submenu and moves focus to the first element in the submenu otherwise moves focus to the next menuitem within the submenu.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>If focus is on a root element, opens a submenu and moves focus to the last element in the submenu otherwise moves focus to the previous menuitem within the submenu.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>right arrow</i></td>
+                                    <td>If focus is on a root element, moves focus to the next menuitem otherwise opens a submenu if there is one available and moves focus to the first item.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>left arrow</i></td>
+                                    <td>If focus is on a root element, moves focus to the previous menuitem otherwise closes a submenu and moves focus to the root item of the closed submenu.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>home</i></td>
+                                    <td>Moves focus to the first menuitem within the submenu.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>end</i></td>
+                                    <td>Moves focus to the last menuitem within the submenu.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </DevelopmentSection>
+
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
+
+                {
+                    useLiveEditorTabs({ name: 'MenubarDemo', sources: sources })
+                }
+            </TabView>
+        </div>
+    )
+})
+
+export default MenubarDoc;

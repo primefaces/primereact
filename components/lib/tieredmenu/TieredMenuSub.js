@@ -1,106 +1,51 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export class TieredMenuSub extends Component {
+export const TieredMenuSub = React.memo((props) => {
+    const [activeItemState, setActiveItemState] = React.useState(null);
+    const elementRef = React.useRef(null);
 
-    static defaultProps = {
-        model: null,
-        root: false,
-        className: null,
-        popup: false,
-        onLeafClick: null,
-        onKeyDown: null,
-        parentActive: false
-    };
-
-    static propTypes = {
-        model: PropTypes.any,
-        root: PropTypes.bool,
-        className: PropTypes.string,
-        popup: PropTypes.bool,
-        onLeafClick: PropTypes.func,
-        onKeyDown: PropTypes.func,
-        parentActive: PropTypes.bool
-    };
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            activeItem: null
-        };
-
-        this.onLeafClick = this.onLeafClick.bind(this);
-        this.onChildItemKeyDown = this.onChildItemKeyDown.bind(this);
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.parentActive && !this.props.parentActive) {
-            this.setState({
-                activeItem: null
-            });
+    const [bindDocumentClickListener,] = useEventListener({
+        type: 'click', listener: event => {
+            if (elementRef.current && !elementRef.current.contains(event.target)) {
+                setActiveItemState(null);
+            }
         }
+    });
 
-        if (this.props.parentActive && !this.props.root) {
-            this.position();
-        }
-    }
-
-    componentDidMount() {
-        if (!this.documentClickListener) {
-            this.documentClickListener = (event) => {
-                if (this.element && !this.element.contains(event.target)) {
-                    this.setState({activeItem: null});
-                }
-            };
-
-            document.addEventListener('click', this.documentClickListener);
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-            this.documentClickListener = null;
-        }
-    }
-
-    position() {
-        if (this.element) {
-            const parentItem = this.element.parentElement;
+    const position = () => {
+        if (elementRef.current) {
+            const parentItem = elementRef.current.parentElement;
             const containerOffset = DomHandler.getOffset(parentItem);
             const viewport = DomHandler.getViewport();
-            const sublistWidth = this.element.offsetParent ? this.element.offsetWidth : DomHandler.getHiddenElementOuterWidth(this.element);
+            const sublistWidth = elementRef.current.offsetParent ? elementRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(elementRef.current);
             const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
 
             if ((parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth) > (viewport.width - DomHandler.calculateScrollbarWidth())) {
-                DomHandler.addClass(this.element, 'p-submenu-list-flipped');
+                DomHandler.addClass(elementRef.current, 'p-submenu-list-flipped');
             }
         }
     }
 
-    onItemMouseEnter(event, item) {
+    const onItemMouseEnter = (event, item) => {
         if (item.disabled) {
             event.preventDefault();
             return;
         }
 
-        if (this.props.root) {
-            if (this.state.activeItem || this.props.popup) {
-                this.setState({
-                    activeItem: item
-                });
+        if (props.root) {
+            if (activeItemState || props.popup) {
+                setActiveItemState(item);
             }
         }
         else {
-            this.setState({
-                activeItem: item
-            });
+            setActiveItemState(item);
         }
     }
 
-    onItemClick(event, item) {
+    const onItemClick = (event, item) => {
         if (item.disabled) {
             event.preventDefault();
             return;
@@ -117,56 +62,42 @@ export class TieredMenuSub extends Component {
             });
         }
 
-        if (this.props.root) {
+        if (props.root) {
             if (item.items) {
-                if (this.state.activeItem && item === this.state.activeItem) {
-                    this.setState({
-                        activeItem: null
-                    });
-                }
-                else {
-                    this.setState({
-                        activeItem: item
-                    });
-                }
+                if (activeItemState && item === activeItemState)
+                    setActiveItemState(null);
+                else
+                    setActiveItemState(item);
             }
         }
 
         if (!item.items) {
-            this.onLeafClick();
+            onLeafClick();
         }
     }
 
-    onItemKeyDown(event, item) {
+    const onItemKeyDown = (event, item) => {
         let listItem = event.currentTarget.parentElement;
 
-        switch(event.which) {
+        switch (event.which) {
             //down
             case 40:
-                let nextItem = this.findNextItem(listItem);
-                if (nextItem) {
-                    nextItem.children[0].focus();
-                }
-
+                const nextItem = findNextItem(listItem);
+                nextItem && nextItem.children[0].focus();
                 event.preventDefault();
-            break;
+                break;
 
             //up
             case 38:
-                let prevItem = this.findPrevItem(listItem);
-                if (prevItem) {
-                    prevItem.children[0].focus();
-                }
-
+                const prevItem = findPrevItem(listItem);
+                prevItem && prevItem.children[0].focus();
                 event.preventDefault();
-            break;
+                break;
 
             //right
             case 39:
                 if (item.items) {
-                    this.setState({
-                        activeItem: item
-                    });
+                    setActiveItemState(item)
 
                     setTimeout(() => {
                         listItem.children[1].children[0].children[0].focus();
@@ -174,82 +105,81 @@ export class TieredMenuSub extends Component {
                 }
 
                 event.preventDefault();
-            break;
+                break;
 
             default:
-            break;
+                break;
         }
 
-        if (this.props.onKeyDown) {
-            this.props.onKeyDown(event, listItem);
-        }
+        props.onKeyDown && props.onKeyDown(event, listItem);
     }
 
-    onChildItemKeyDown(event, childListItem) {
+    const onChildItemKeyDown = (event, childListItem) => {
         //left
         if (event.which === 37) {
-            this.setState({activeItem: null});
+            setActiveItemState(null)
             childListItem.parentElement.previousElementSibling.focus();
         }
     }
 
-    findNextItem(item) {
-        let nextItem = item.nextElementSibling;
-
-        if (nextItem)
-            return DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? this.findNextItem(nextItem) : nextItem;
-        else
-            return null;
+    const findNextItem = (item) => {
+        const nextItem = item.nextElementSibling;
+        return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? findNextItem(nextItem) : nextItem) : null;
     }
 
-    findPrevItem(item) {
-        let prevItem = item.previousElementSibling;
-
-        if (prevItem)
-            return DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? this.findPrevItem(prevItem) : prevItem;
-        else
-            return null;
+    const findPrevItem = (item) => {
+        const prevItem = item.previousElementSibling;
+        return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
     }
 
-    onLeafClick() {
-        this.setState({
-            activeItem: null
-        });
+    const onLeafClick = () => {
+        setActiveItemState(null);
+        props.onLeafClick && props.onLeafClick();
+    }
 
-        if (this.props.onLeafClick) {
-            this.props.onLeafClick();
+    useMountEffect(() => {
+        bindDocumentClickListener();
+    });
+
+    useUpdateEffect(() => {
+        if (!props.parentActive) {
+            setActiveItemState(null);
         }
+
+        if (!props.root && props.parentActive) {
+            position();
+        }
+    }, [props.parentActive]);
+
+    const createSeparator = (index) => {
+        const key = 'separator_' + index;
+
+        return <li key={key} className="p-menu-separator" role="separator"></li>
     }
 
-    renderSeparator(index) {
-        return (
-            <li key={'separator_' + index} className="p-menu-separator" role="separator"></li>
-        );
-    }
-
-    renderSubmenu(item) {
-        if(item.items) {
-            return (
-                <TieredMenuSub model={item.items} onLeafClick={this.onLeafClick} popup={this.props.popup} onKeyDown={this.onChildItemKeyDown} parentActive={item === this.state.activeItem} />
-            );
+    const createSubmenu = (item) => {
+        if (item.items) {
+            return <TieredMenuSub menuProps={props.menuProps} model={item.items} onLeafClick={onLeafClick} popup={props.popup} onKeyDown={onChildItemKeyDown} parentActive={item === activeItemState} />
         }
 
         return null;
     }
 
-    renderMenuitem(item, index) {
-        const active = this.state.activeItem === item;
-        const className = classNames('p-menuitem', {'p-menuitem-active': active}, item.className);
-        const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
-        const iconClassName = classNames('p-menuitem-icon', item.icon);
+    const createMenuItem = (item, index) => {
+        const { id, className: _className, style, disabled, icon: _icon, label: _label, items, target, url, template } = item;
+        const key = _label + '_' + index;
+        const active = activeItemState === item;
+        const className = classNames('p-menuitem', { 'p-menuitem-active': active }, _className);
+        const linkClassName = classNames('p-menuitem-link', { 'p-disabled': disabled });
+        const iconClassName = classNames('p-menuitem-icon', _icon);
         const submenuIconClassName = 'p-submenu-icon pi pi-angle-right';
-        const icon = item.icon && <span className={iconClassName}></span>;
-        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
-        const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
-        const submenu = this.renderSubmenu(item);
+        const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
+        const label = _label && <span className="p-menuitem-text">{_label}</span>;
+        const submenuIcon = items && <span className={submenuIconClassName}></span>;
+        const submenu = createSubmenu(item);
         let content = (
-            <a href={item.url || '#'} className={linkClassName} target={item.target} role="menuitem" aria-haspopup={item.items != null}
-                onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)} aria-disabled={item.disabled}>
+            <a href={url || '#'} className={linkClassName} target={target} role="menuitem" aria-haspopup={items != null}
+                onClick={(event) => onItemClick(event, item)} onKeyDown={(event) => onItemKeyDown(event, item)} aria-disabled={disabled}>
                 {icon}
                 {label}
                 {submenuIcon}
@@ -257,57 +187,48 @@ export class TieredMenuSub extends Component {
             </a>
         );
 
-        if (item.template) {
+        if (template) {
             const defaultContentOptions = {
-                onClick: (event) => this.onItemClick(event, item),
-                onKeyDown: (event) => this.onItemKeyDown(event, item),
+                onClick: (event) => onItemClick(event, item),
+                onKeyDown: (event) => onItemKeyDown(event, item),
                 className: linkClassName,
                 labelClassName: 'p-menuitem-text',
                 iconClassName,
                 submenuIconClassName,
                 element: content,
-                props: this.props,
+                props,
                 active
             };
 
-            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+            content = ObjectUtils.getJSXElement(template, item, defaultContentOptions);
         }
 
         return (
-            <li key={item.label + '_' + index} className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)} role="none">
+            <li key={key} id={item} className={className} style={style} onMouseEnter={(event) => onItemMouseEnter(event, item)} role="none">
                 {content}
                 {submenu}
             </li>
-        );
+        )
     }
 
-    renderItem(item, index) {
-        if (item.separator)
-            return this.renderSeparator(index);
-        else
-            return this.renderMenuitem(item, index);
+    const createItem = (item, index) => {
+        return item.separator ? createSeparator(index) : createMenuItem(item, index);
     }
 
-    renderMenu() {
-        if (this.props.model) {
-            return (
-                this.props.model.map((item, index) => {
-                    return this.renderItem(item, index);
-                })
-            );
-        }
-
-        return null;
+    const createMenu = () => {
+        return props.model ? props.model.map(createItem) : null;
     }
 
-    render() {
-        const className = classNames({'p-submenu-list': !this.props.root});
-        const submenu = this.renderMenu();
+    const className = classNames({
+        'p-submenu-list': !props.root
+    });
+    const submenu = createMenu();
 
-        return (
-            <ul ref={el => this.element = el} className={className} role={this.props.root ? 'menubar' : 'menu'} aria-orientation="horizontal">
-                {submenu}
-            </ul>
-        );
-    }
-}
+    return (
+        <ul ref={elementRef} className={className} role={props.root ? 'menubar' : 'menu'} aria-orientation="horizontal">
+            {submenu}
+        </ul>
+    )
+});
+
+TieredMenuSub.displayName = 'TieredMenuSub';

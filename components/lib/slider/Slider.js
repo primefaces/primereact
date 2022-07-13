@@ -1,261 +1,182 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types';
-import { DomHandler, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { useEventListener } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
-export class Slider extends Component {
+export const Slider = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
+    const handleIndex = React.useRef(0);
+    const sliderHandleClick = React.useRef(false);
+    const dragging = React.useRef(false);
+    const initX = React.useRef(0);
+    const initY = React.useRef(0);
+    const barWidth = React.useRef(0);
+    const barHeight = React.useRef(0);
+    const value = props.range ? props.value || [0, 100] : props.value || 0;
+    const horizontal = props.orientation === 'horizontal';
+    const vertical = props.orientation === 'vertical';
 
-    static defaultProps = {
-        id: null,
-        value: null,
-        min: 0,
-        max: 100,
-        orientation: 'horizontal',
-        step: null,
-        range: false,
-        style: null,
-        className: null,
-        disabled: false,
-        tabIndex: 0,
-        ariaLabelledBy: null,
-        onChange: null,
-        onSlideEnd: null
-    }
+    const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({ type: 'mousemove', listener: (event) => onDrag(event) });
+    const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({ type: 'mouseup', listener: (event) => onDragEnd(event) });
+    const [bindDocumentTouchMoveListener, unbindDocumentTouchMoveListener] = useEventListener({ type: 'touchmove', listener: (event) => onDrag(event) });
+    const [bindDocumentTouchEndListener, unbindDocumentTouchEndListener] = useEventListener({ type: 'touchend', listener: (event) => onDragEnd(event) });
 
-    static propTypes = {
-        id: PropTypes.string,
-        value: PropTypes.any,
-        min: PropTypes.number,
-        max: PropTypes.number,
-        orientation: PropTypes.string,
-        step: PropTypes.number,
-        range: PropTypes.bool,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        disabled: PropTypes.bool,
-        tabIndex: PropTypes.number,
-        ariaLabelledBy: PropTypes.string,
-        onChange: PropTypes.func,
-        onSlideEnd: PropTypes.func
-    }
+    const spin = (event, dir) => {
+        const val = props.range ? value[handleIndex.current] : value;
+        const step = (props.step || 1) * dir;
 
-    constructor(props) {
-        super(props);
-
-        this.onBarClick = this.onBarClick.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
-
-        this.handleIndex = 0;
-    }
-
-    get value() {
-        return this.props.range ? this.props.value || [0, 100] : this.props.value || 0;
-    }
-
-    spin(event, dir) {
-        const value = this.props.range ? this.value[this.handleIndex] : this.value;
-        const step = (this.props.step || 1) * dir;
-
-        this.updateValue(event, value + step);
+        updateValue(event, val + step);
         event.preventDefault();
     }
 
-    onDragStart(event, index) {
-        if (this.props.disabled) {
+    const onDragStart = (event, index) => {
+        if (props.disabled) {
             return;
         }
 
-        this.dragging = true;
-        this.updateDomData();
-        this.sliderHandleClick = true;
-        this.handleIndex = index;
+        dragging.current = true;
+        updateDomData();
+        sliderHandleClick.current = true;
+        handleIndex.current = index;
         //event.preventDefault();
     }
 
-    onMouseDown(event, index) {
-        this.bindDragListeners();
-        this.onDragStart(event, index);
-    }
-
-    onTouchStart(event, index) {
-        this.bindTouchListeners();
-        this.onDragStart(event, index);
-    }
-
-    onKeyDown(event, index) {
-        if (this.props.disabled) {
-            return;
-        }
-
-        this.handleIndex = index;
-        const key = event.key;
-
-        if (key === 'ArrowRight' || key === 'ArrowUp') {
-            this.spin(event, 1);
-        }
-        else if (key === 'ArrowLeft' || key === 'ArrowDown') {
-            this.spin(event, -1);
-        }
-    }
-
-    onBarClick(event) {
-        if (this.props.disabled) {
-            return;
-        }
-
-        if (!this.sliderHandleClick) {
-            this.updateDomData();
-            const value = this.setValue(event);
-
-            if (this.props.onSlideEnd) {
-                this.props.onSlideEnd({ originalEvent: event, value });
-            }
-        }
-
-        this.sliderHandleClick = false;
-    }
-
-    onDrag(event) {
-        if (this.dragging) {
-            this.setValue(event);
+    const onDrag = (event) => {
+        if (dragging.current) {
+            setValue(event);
             event.preventDefault();
         }
     }
 
-    onDragEnd(event) {
-        if (this.dragging) {
-            this.dragging = false;
+    const onDragEnd = (event) => {
+        if (dragging.current) {
+            dragging.current = false;
 
-            if (this.props.onSlideEnd) {
-                this.props.onSlideEnd({ originalEvent: event, value: this.props.value });
-            }
+            props.onSlideEnd && props.onSlideEnd({ originalEvent: event, value: props.value });
 
-            this.unbindDragListeners();
-            this.unbindTouchListeners();
+            unbindDocumentMouseMoveListener();
+            unbindDocumentMouseUpListener();
+            unbindDocumentTouchMoveListener();
+            unbindDocumentTouchEndListener();
         }
     }
 
-    bindDragListeners() {
-        if (!this.dragListener) {
-            this.dragListener = this.onDrag.bind(this);
-            document.addEventListener('mousemove', this.dragListener);
+    const onMouseDown = (event, index) => {
+        bindDocumentMouseMoveListener();
+        bindDocumentMouseUpListener();
+        onDragStart(event, index);
+    }
+
+    const onTouchStart = (event, index) => {
+        bindDocumentTouchMoveListener();
+        bindDocumentTouchEndListener();
+        onDragStart(event, index);
+    }
+
+    const onKeyDown = (event, index) => {
+        if (props.disabled) {
+            return;
         }
 
-        if (!this.dragEndListener) {
-            this.dragEndListener = this.onDragEnd.bind(this);
-            document.addEventListener('mouseup', this.dragEndListener);
+        handleIndex.current = index;
+        const key = event.key;
+
+        if (key === 'ArrowRight' || key === 'ArrowUp') {
+            spin(event, 1);
+        }
+        else if (key === 'ArrowLeft' || key === 'ArrowDown') {
+            spin(event, -1);
         }
     }
 
-    unbindDragListeners() {
-        if (this.dragListener) {
-            document.removeEventListener('mousemove', this.dragListener);
-            this.dragListener = null;
+    const onBarClick = (event) => {
+        if (props.disabled) {
+            return;
         }
 
-        if (this.dragEndListener) {
-            document.removeEventListener('mouseup', this.dragEndListener)
-            this.dragEndListener = null;
+        if (!sliderHandleClick.current) {
+            updateDomData();
+            const value = setValue(event);
+
+            props.onSlideEnd && props.onSlideEnd({ originalEvent: event, value });
         }
+
+        sliderHandleClick.current = false;
     }
 
-    bindTouchListeners() {
-        if (!this.dragListener) {
-            this.dragListener = this.onDrag.bind(this);
-            document.addEventListener('touchmove', this.dragListener);
-        }
-
-        if (!this.dragEndListener) {
-            this.dragEndListener = this.onDragEnd.bind(this);
-            document.addEventListener('touchend', this.dragEndListener);
-        }
+    const updateDomData = () => {
+        const rect = elementRef.current.getBoundingClientRect();
+        initX.current = rect.left + DomHandler.getWindowScrollLeft();
+        initY.current = rect.top + DomHandler.getWindowScrollTop();
+        barWidth.current = elementRef.current.offsetWidth;
+        barHeight.current = elementRef.current.offsetHeight;
     }
 
-    unbindTouchListeners() {
-        if (this.dragListener) {
-            document.removeEventListener('touchmove', this.dragListener);
-            this.dragListener = null;
-        }
-
-        if (this.dragEndListener) {
-            document.removeEventListener('touchend', this.dragEndListener)
-            this.dragEndListener = null;
-        }
-    }
-
-    updateDomData() {
-        let rect = this.el.getBoundingClientRect();
-        this.initX = rect.left + DomHandler.getWindowScrollLeft();
-        this.initY = rect.top + DomHandler.getWindowScrollTop();
-        this.barWidth = this.el.offsetWidth;
-        this.barHeight = this.el.offsetHeight;
-    }
-
-    setValue(event) {
+    const setValue = (event) => {
         let handleValue;
         let pageX = event.touches ? event.touches[0].pageX : event.pageX;
         let pageY = event.touches ? event.touches[0].pageY : event.pageY;
 
-        if (this.props.orientation === 'horizontal')
-            handleValue = ((pageX - this.initX) * 100) / (this.barWidth);
+        if (horizontal)
+            handleValue = ((pageX - initX.current) * 100) / (barWidth.current);
         else
-            handleValue = (((this.initY + this.barHeight) - pageY) * 100) / (this.barHeight);
+            handleValue = (((initY.current + barHeight.current) - pageY) * 100) / (barHeight.current);
 
-        let newValue = (this.props.max - this.props.min) * (handleValue / 100) + this.props.min;
+        let newValue = (props.max - props.min) * (handleValue / 100) + props.min;
 
-        if (this.props.step) {
-            const oldValue = this.props.range ? this.value[this.handleIndex] : this.value;
+        if (props.step) {
+            const oldValue = props.range ? value[handleIndex.current] : value;
             const diff = (newValue - oldValue);
 
             if (diff < 0)
-                newValue = oldValue + Math.ceil(newValue / this.props.step - oldValue / this.props.step) * this.props.step;
+                newValue = oldValue + Math.ceil(newValue / props.step - oldValue / props.step) * props.step;
             else if (diff > 0)
-                newValue = oldValue + Math.floor(newValue / this.props.step - oldValue / this.props.step) * this.props.step;
+                newValue = oldValue + Math.floor(newValue / props.step - oldValue / props.step) * props.step;
         }
         else {
             newValue = Math.floor(newValue);
         }
 
-        return this.updateValue(event, newValue);
+        return updateValue(event, newValue);
     }
 
-    updateValue(event, value) {
-        let parsedValue = parseFloat(value.toFixed(10));
+    const updateValue = (event, val) => {
+        let parsedValue = parseFloat(val.toFixed(10));
         let newValue = parsedValue;
 
-        if (this.props.range) {
-            if (this.handleIndex === 0) {
-                if (parsedValue < this.props.min)
-                    parsedValue = this.props.min;
-                else if (parsedValue > this.value[1])
-                    parsedValue = this.value[1];
+        if (props.range) {
+            if (handleIndex.current === 0) {
+                if (parsedValue < props.min)
+                    parsedValue = props.min;
+                else if (parsedValue > value[1])
+                    parsedValue = value[1];
             }
             else {
-                if (parsedValue > this.props.max)
-                    parsedValue = this.props.max;
-                else if (parsedValue < this.value[0])
-                    parsedValue = this.value[0];
+                if (parsedValue > props.max)
+                    parsedValue = props.max;
+                else if (parsedValue < value[0])
+                    parsedValue = value[0];
             }
 
-            newValue = [...this.value];
-            newValue[this.handleIndex] = parsedValue;
+            newValue = [...value];
+            newValue[handleIndex.current] = parsedValue;
 
-            if (this.props.onChange) {
-                this.props.onChange({
+            if (props.onChange) {
+                props.onChange({
                     originalEvent: event,
                     value: newValue
                 });
             }
         }
         else {
-            if (parsedValue < this.props.min)
-                parsedValue = this.props.min;
-            else if (parsedValue > this.props.max)
-                parsedValue = this.props.max;
+            if (parsedValue < props.min)
+                parsedValue = props.min;
+            else if (parsedValue > props.max)
+                parsedValue = props.max;
 
             newValue = parsedValue;
 
-            if (this.props.onChange) {
-                this.props.onChange({
+            if (props.onChange) {
+                props.onChange({
                     originalEvent: event,
                     value: newValue
                 });
@@ -265,32 +186,31 @@ export class Slider extends Component {
         return newValue;
     }
 
-    componentWillUnmount() {
-        this.unbindDragListeners();
-        this.unbindTouchListeners();
-    }
-
-    renderHandle(leftValue, bottomValue, index) {
-        const handleClassName = classNames('p-slider-handle', {
+    const createHandle = (leftValue, bottomValue, index) => {
+        const style = {
+            transition: dragging.current ? 'none' : null,
+            left: leftValue !== null && (leftValue + '%'),
+            bottom: bottomValue && (bottomValue + '%')
+        };
+        const className = classNames('p-slider-handle', {
             'p-slider-handle-start': index === 0,
             'p-slider-handle-end': index === 1,
-            'p-slider-handle-active': this.handleIndex === index
+            'p-slider-handle-active': handleIndex.current === index
         });
 
         return (
-            <span onMouseDown={event => this.onMouseDown(event, index)} onTouchStart={event => this.onTouchStart(event, index)} onKeyDown={event => this.onKeyDown(event, index)} tabIndex={this.props.tabIndex}
-                className={handleClassName} style={{ transition: this.dragging ? 'none' : null, left: leftValue !== null && (leftValue + '%'), bottom: bottomValue && (bottomValue + '%') }}
-                role="slider" aria-valuemin={this.props.min} aria-valuemax={this.props.max} aria-valuenow={leftValue || bottomValue} aria-labelledby={this.props.ariaLabelledBy}></span>
-        );
+            <span className={className} style={style} tabIndex={props.tabIndex} role="slider"
+                onMouseDown={(event) => onMouseDown(event, index)} onTouchStart={(event) => onTouchStart(event, index)} onKeyDown={(event) => onKeyDown(event, index)}
+                aria-valuemin={props.min} aria-valuemax={props.max} aria-valuenow={leftValue || bottomValue} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}
+                aria-orientation={props.orientation}></span>
+        )
     }
 
-    renderRangeSlider() {
-        let values = this.value;
-        let horizontal = (this.props.orientation === 'horizontal');
-        const handleValueStart = (values[0] < this.props.min ? 0 : values[0] - this.props.min) * 100 / (this.props.max - this.props.min);
-        const handleValueEnd = (values[1] > this.props.max ? 100 : values[1] - this.props.min) * 100 / (this.props.max - this.props.min);
-        const rangeStartHandle = horizontal ? this.renderHandle(handleValueStart, null, 0) : this.renderHandle(null, handleValueStart, 0);
-        const rangeEndHandle = horizontal ? this.renderHandle(handleValueEnd, null, 1) : this.renderHandle(null, handleValueEnd, 1);
+    const createRangeSlider = () => {
+        const handleValueStart = (value[0] < props.min ? 0 : value[0] - props.min) * 100 / (props.max - props.min);
+        const handleValueEnd = (value[1] > props.max ? 100 : value[1] - props.min) * 100 / (props.max - props.min);
+        const rangeStartHandle = horizontal ? createHandle(handleValueStart, null, 0) : createHandle(null, handleValueStart, 0);
+        const rangeEndHandle = horizontal ? createHandle(handleValueEnd, null, 1) : createHandle(null, handleValueEnd, 1);
         const rangeStyle = horizontal ? { left: handleValueStart + '%', width: (handleValueEnd - handleValueStart) + '%' } : { bottom: handleValueStart + '%', height: (handleValueEnd - handleValueStart) + '%' };
 
         return (
@@ -302,42 +222,58 @@ export class Slider extends Component {
         )
     }
 
-    renderSingleSlider() {
-        let value = this.value;
+    const createSingleSlider = () => {
         let handleValue;
 
-        if (value < this.props.min)
+        if (value < props.min)
             handleValue = 0;
-        else if (value > this.props.max)
+        else if (value > props.max)
             handleValue = 100;
         else
-            handleValue = (value - this.props.min) * 100 / (this.props.max - this.props.min);
+            handleValue = (value - props.min) * 100 / (props.max - props.min);
 
-        const rangeStyle = this.props.orientation === 'horizontal' ? { width: handleValue + '%' } : { height: handleValue + '%' };
-        const handle = this.props.orientation === 'horizontal' ? this.renderHandle(handleValue, null, null) : this.renderHandle(null, handleValue, null);
+        const rangeStyle = horizontal ? { width: handleValue + '%' } : { height: handleValue + '%' };
+        const handle = horizontal ? createHandle(handleValue, null, null) : createHandle(null, handleValue, null);
 
         return (
             <>
                 <span className="p-slider-range" style={rangeStyle}></span>
                 {handle}
             </>
-        );
+        )
     }
 
-    render() {
-        const className = classNames('p-slider p-component', this.props.className, {
-            'p-disabled': this.props.disabled,
-            'p-slider-horizontal': this.props.orientation === 'horizontal',
-            'p-slider-vertical': this.props.orientation === 'vertical'
-        });
+    const otherProps = ObjectUtils.findDiffKeys(props, Slider.defaultProps);
+    const className = classNames('p-slider p-component', props.className, {
+        'p-disabled': props.disabled,
+        'p-slider-horizontal': horizontal,
+        'p-slider-vertical': vertical
+    });
+    const content = props.range ? createRangeSlider() : createSingleSlider();
 
-        const content = this.props.range ? this.renderRangeSlider() : this.renderSingleSlider();
+    return (
+        <div ref={elementRef} id={props.id} style={props.style} className={className} {...otherProps} onClick={onBarClick}>
+            {content}
+        </div>
+    )
+}));
 
-        return (
-            <div id={this.props.id} ref={el => this.el = el} style={this.props.style} className={className} onClick={this.onBarClick}>
-                {content}
-            </div>
-        );
-    }
-
+Slider.displayName = 'Slider';
+Slider.defaultProps = {
+    __TYPE: 'Slider',
+    id: null,
+    value: null,
+    min: 0,
+    max: 100,
+    orientation: 'horizontal',
+    step: null,
+    range: false,
+    style: null,
+    className: null,
+    disabled: false,
+    tabIndex: 0,
+    onChange: null,
+    onSlideEnd: null,
+    'aria-label': null,
+    'aria-labelledby': null
 }

@@ -1,150 +1,85 @@
-import React, { Component, createRef } from 'react';
-import PropTypes from 'prop-types';
-import { ObjectUtils, classNames, IconUtils } from '../utils/Utils';
-import { tip } from '../tooltip/Tooltip';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export class ButtonComponent extends Component {
+export const Button = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(ref);
 
-    static defaultProps = {
-        label: null,
-        icon: null,
-        iconPos: 'left',
-        badge: null,
-        badgeClassName: null,
-        tooltip: null,
-        tooltipOptions: null,
-        forwardRef: null,
-        disabled: false,
-        loading: false,
-        loadingIcon: 'pi pi-spinner pi-spin'
-    }
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
-    static propTypes = {
-        label: PropTypes.string,
-        icon: PropTypes.any,
-        iconPos: PropTypes.string,
-        badge: PropTypes.string,
-        badgeClassName: PropTypes.string,
-        tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object,
-        forwardRef: PropTypes.any,
-        disabled: PropTypes.bool,
-        loading: PropTypes.bool,
-        loadingIcon: PropTypes.any
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.elementRef = createRef(this.props.forwardRef);
-    }
-
-    updateForwardRef() {
-        let ref = this.props.forwardRef;
-
-        if (ref) {
-            if (typeof ref === 'function') {
-                ref(this.elementRef.current);
-            }
-            else {
-                ref.current = this.elementRef.current;
-            }
-        }
-    }
-
-    isDisabled() {
-        return this.props.disabled || this.props.loading;
-    }
-
-    componentDidMount() {
-        this.updateForwardRef();
-
-        if (this.props.tooltip) {
-            this.renderTooltip();
-        }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
-            if (this.tooltip)
-                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
-            else
-                this.renderTooltip();
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
-        }
-    }
-
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.elementRef.current,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
+    const createIcon = () => {
+        const icon = props.loading ? props.loadingIcon : props.icon;
+        const className = classNames('p-button-icon p-c', {
+            'p-button-loading-icon': props.loading,
+            [`p-button-icon-${props.iconPos}`]: props.label
         });
+
+        return IconUtils.getJSXIcon(icon, { className }, { props });
     }
 
-    renderIcon() {
-        let icon = this.props.loading ? this.props.loadingIcon : this.props.icon;
-        let className = classNames('p-button-icon p-c', {
-            'p-button-loading-icon': this.props.loading,
-            'p-button-icon-left': this.props.iconPos === 'left' && this.props.label,
-            'p-button-icon-right': this.props.iconPos === 'right' && this.props.label,
-            'p-button-icon-top': this.props.iconPos === 'top' && this.props.label,
-            'p-button-icon-bottom': this.props.iconPos === 'bottom' && this.props.label,
-        });
-        return IconUtils.getJSXIcon(icon, { className }, { props: this.props });
-    }
-
-    renderLabel() {
-        if (this.props.label) {
-            return <span className="p-button-label p-c">{this.props.label}</span>;
+    const createLabel = () => {
+        if (props.label) {
+            return <span className="p-button-label p-c">{props.label}</span>
         }
 
-        return !this.props.children && !this.props.label && <span className="p-button-label p-c" dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+        return !props.children && !props.label && <span className="p-button-label p-c" dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
     }
 
-    renderBadge() {
-        if (this.props.badge) {
-            const badgeClassName = classNames('p-badge', this.props.badgeClassName);
+    const createBadge = () => {
+        if (props.badge) {
+            const badgeClassName = classNames('p-badge', props.badgeClassName);
 
-            return <span className={badgeClassName}>{this.props.badge}</span>
+            return <span className={badgeClassName}>{props.badge}</span>
         }
 
         return null;
     }
 
-    render() {
-        let disabled = this.isDisabled();
-        let className = classNames('p-button p-component', this.props.className, {
-            'p-button-icon-only': (this.props.icon || (this.props.loading && this.props.loadingIcon)) && !this.props.label,
-            'p-button-vertical': (this.props.iconPos === 'top' || this.props.iconPos === 'bottom') && this.props.label,
-            'p-disabled': disabled,
-            'p-button-loading': this.props.loading,
-            'p-button-loading-label-only': this.props.loading && !this.props.icon && this.props.label,
-            [`p-button-loading-${this.props.iconPos}`]: this.props.loading && this.props.loadingIcon && this.props.label
-        });
-        let icon = this.renderIcon();
-        let label = this.renderLabel();
-        let badge = this.renderBadge();
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const disabled = props.disabled || props.loading;
+    const otherProps = ObjectUtils.findDiffKeys(props, Button.defaultProps);
+    const className = classNames('p-button p-component', props.className, {
+        'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label,
+        'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
+        'p-disabled': disabled,
+        'p-button-loading': props.loading,
+        'p-button-loading-label-only': props.loading && !props.icon && props.label,
+        [`p-button-loading-${props.iconPos}`]: props.loading && props.loadingIcon && props.label
+    });
 
-        let buttonProps = ObjectUtils.findDiffKeys(this.props, ButtonComponent.defaultProps);
+    const icon = createIcon();
+    const label = createLabel();
+    const badge = createBadge();
+    const defaultAriaLabel = (props.label ? props.label + (props.badge ? ' ' + props.badge : '') : props['aria-label']);
 
-        return (
-            <button ref={this.elementRef} {...buttonProps} className={className} disabled={disabled}>
+    return (
+        <>
+            <button ref={elementRef} aria-label={defaultAriaLabel} {...otherProps} className={className} disabled={disabled}>
                 {icon}
                 {label}
-                {this.props.children}
+                {props.children}
                 {badge}
                 <Ripple />
             </button>
-        );
-    }
-}
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
+    )
+}));
 
-export const Button = React.forwardRef((props, ref) => <ButtonComponent forwardRef={ref} {...props} />);
+Button.displayName = 'Button';
+Button.defaultProps = {
+    __TYPE: 'Button',
+    label: null,
+    icon: null,
+    iconPos: 'left',
+    badge: null,
+    badgeClassName: null,
+    tooltip: null,
+    tooltipOptions: null,
+    disabled: false,
+    loading: false,
+    loadingIcon: 'pi pi-spinner pi-spin'
+}

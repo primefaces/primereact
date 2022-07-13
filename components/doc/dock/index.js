@@ -1,18 +1,16 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
-export class DockDoc extends Component {
+const DockDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import PrimeReact from 'primereact/api';
 import { Dock } from 'primereact/dock';
@@ -361,10 +359,10 @@ export class DockDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import PrimeReact from 'primereact/api';
 import { Dock } from 'primereact/dock';
@@ -389,9 +387,6 @@ export const DockDemo = () => {
     const toast = useRef(null);
     const toast2 = useRef(null);
     const galleria = useRef(null);
-
-    const nodeService = new NodeService();
-    const galleriaService = new PhotoService();
 
     const imgPath = 'images/dock';
     const imgErrorPath = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png';
@@ -648,6 +643,9 @@ export const DockDemo = () => {
     useEffect(() => {
         TerminalService.on('command', commandHandler);
 
+        const nodeService = new NodeService();
+        const galleriaService = new PhotoService();
+
         galleriaService.getImages().then(data => setImages(data));
         nodeService.getTreeNodes().then(data => setNodes(data));
 
@@ -708,10 +706,10 @@ export const DockDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect } from 'react';
 import PrimeReact from 'primereact/api';
 import { Dock } from 'primereact/dock';
@@ -737,9 +735,6 @@ export const DockDemo = () => {
     const toast2 = useRef<any>(null);
     const galleria = useRef<any>(null);
 
-    const nodeService = new NodeService();
-    const galleriaService = new PhotoService();
-
     const imgPath = 'images/dock';
     const imgErrorPath = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png';
 
@@ -995,6 +990,9 @@ export const DockDemo = () => {
     useEffect(() => {
         TerminalService.on('command', commandHandler);
 
+        const nodeService = new NodeService();
+        const galleriaService = new PhotoService();
+
         galleriaService.getImages().then(data => setImages(data));
         nodeService.getTreeNodes().then(data => setNodes(data));
 
@@ -1055,10 +1053,10 @@ export const DockDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./DockDemo.css" />
         <script src="./NodeService.js"></script>
         <script src="./PhotoService.js"></script>
@@ -1069,7 +1067,7 @@ export const DockDemo = () => {
         <script src="https://unpkg.com/primereact/galleria/galleria.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>
         <script src="https://unpkg.com/primereact/menubar/menubar.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState, useRef } = React;
 const PrimeReact = primereact.api;
 const { Dock } = primereact.dock;
@@ -1092,9 +1090,6 @@ const DockDemo = () => {
     const toast2 = useRef(null);
     const galleria = useRef(null);
 
-    const nodeService = new NodeService();
-    const galleriaService = new PhotoService();
-
     const imgPath = 'images/dock';
     const imgErrorPath = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png';
 
@@ -1350,6 +1345,9 @@ const DockDemo = () => {
     useEffect(() => {
         TerminalService.on('command', commandHandler);
 
+        const nodeService = new NodeService();
+        const galleriaService = new PhotoService();
+
         galleriaService.getImages().then(data => setImages(data));
         nodeService.getTreeNodes().then(data => setNodes(data));
 
@@ -1413,9 +1411,9 @@ const DockDemo = () => {
             }
         }
 
-        this.extFiles = {
-            'demo/DockDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/DockDemo.css': {
+            content: `
 .dock-demo .dock-window {
     width: 100%;
     height: 450px;
@@ -1493,27 +1491,21 @@ const DockDemo = () => {
     background-color: var(--surface-900);
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Dock } from 'primereact/dock';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -1521,8 +1513,8 @@ import { Dock } from 'primereact/dock';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>Dock is a navigation component consisting of menuitems. It has a collection of additional options defined by the <i>model</i> property.</p>
+                    <h5>Getting Started</h5>
+                    <p>Dock is a navigation component consisting of menuitems. It has a collection of additional options defined by the <i>model</i> property.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -1557,111 +1549,165 @@ export const DockDemo = () => {
 `}
 </CodeHighlight>
 
-                        <h5>MenuModel API</h5>
-                        <p>Dock uses the common MenuModel API to define the items, visit <Link href="/menumodel">MenuModel API</Link> for details.</p>
+                    <h5>MenuModel API</h5>
+                    <p>Dock uses the common MenuModel API to define the items, visit <Link href="/menumodel">MenuModel API</Link> for details.</p>
 
-                        <h5>Properties</h5>
-                        <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>model</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>MenuModel instance to define the action items.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>position</td>
-                                        <td>string</td>
-                                        <td>bottom</td>
-                                        <td>Position of element. Valid values are 'bottom', 'top', 'left' and 'right'.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>header</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Template of header element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>footer</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Template of footer element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>magnification</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Whether to allow scale animation.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>model</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>MenuModel instance to define the action items.</td>
+                                </tr>
+                                <tr>
+                                    <td>position</td>
+                                    <td>string</td>
+                                    <td>bottom</td>
+                                    <td>Position of element. Valid values are 'bottom', 'top', 'left' and 'right'.</td>
+                                </tr>
+                                <tr>
+                                    <td>header</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template of header element.</td>
+                                </tr>
+                                <tr>
+                                    <td>footer</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template of footer element.</td>
+                                </tr>
+                                <tr>
+                                    <td>magnification</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Whether to allow scale animation.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-dock</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-dock-list</td>
-                                        <td>List of items.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-dock-item</td>
-                                        <td>Each items in list.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-dock</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-dock-list</td>
+                                    <td>List of items.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-dock-item</td>
+                                    <td>Each items in list.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Accessibility</h5>
+                <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>Dock component uses the <i>menu</i> role with the <i>aria-orientation</i> and the value to describe the menu can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Each list item has a <i>presentation</i> role
+                    whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled.</p>
 
-                    {
-                        useLiveEditorTabs({ name: 'DockDemo', sources: this.sources, service: 'NodeService, PhotoService', extFiles: this.extFiles })
-                    }
+                    <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Add focus to the first item if focus moves in to the menu. If the focus is already within the menu, focus moves to the next focusable item in the page tab sequence.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>shift</i> + <i>tab</i></td>
+                                    <td>Add focus to the last item if focus moves in to the menu. If the focus is already within the menu, focus moves to the previous focusable item in the page tab sequence.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Activates the focused menuitem.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Activates the focused menuitem.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>Moves focus to the next menuitem in vertical layout.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>Moves focus to the previous menuitem in vertical layout.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>home</i></td>
+                                    <td>Moves focus to the first menuitem in horizontal layout.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>end</i></td>
+                                    <td>Moves focus to the last menuitem in horizontal layout.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </DevelopmentSection>
 
-                </TabView>
-            </div>
-        )
-    }
-}
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
+
+                {
+                    useLiveEditorTabs({ name: 'DockDemo', sources: sources, service: 'NodeService, PhotoService', extFiles: extFiles })
+                }
+
+            </TabView>
+        </div>
+    )
+})
+
+export default DockDoc;

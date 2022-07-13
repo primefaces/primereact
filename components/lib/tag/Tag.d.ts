@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {IconType} from "../utils";
+import { IconType } from '../utils';
 
-type TagSeverityType = 'success' | 'info' | 'warning' | 'danger' | (string & {});
+type TagSeverityType = 'success' | 'info' | 'warning' | 'danger';
 
 export interface TagProps {
     value?: React.ReactNode;
@@ -10,6 +10,7 @@ export interface TagProps {
     icon?: IconType<TagProps>;
     style?: object;
     className?: string;
+    children?: React.ReactNode;
 }
 
 export declare class Tag extends React.Component<TagProps, any> { }

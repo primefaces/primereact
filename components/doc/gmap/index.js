@@ -1,21 +1,15 @@
-import React, {Component} from 'react';
+import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
-export class GMapDoc extends Component {
+const GMapDoc = memo(() => {
 
-    shouldComponentUpdate(){
-        return false;
-    }
-
-    constructor(props){
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Sources',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Sources',
+            content: `
 import React, { Component } from 'react';
 import { GMap } from 'primereact/gmap';
 import { Dialog } from 'primereact/dialog';
@@ -148,18 +142,18 @@ export class GMapDemo extends Component {
                 }
 
                 <Dialog header="New Location" visible={this.state.dialogVisible} width="300px" modal footer={footer} onHide={this.onHide}>
-                    <div className="p-grid p-fluid">
-                        <div className="p-col-2" style={{paddingTop:'.75em'}}><label htmlFor="title">Label</label></div>
-                        <div className="p-col-10"><InputText type="text" id="title" value={this.state.markerTitle} onChange={(e) => this.setState({markerTitle: e.target.value})} /></div>
+                    <div className="grid p-fluid">
+                        <div className="col-2" style={{paddingTop:'.75em'}}><label htmlFor="title">Label</label></div>
+                        <div className="col-10"><InputText type="text" id="title" value={this.state.markerTitle} onChange={(e) => this.setState({markerTitle: e.target.value})} /></div>
 
-                        <div className="p-col-2" style={{paddingTop:'.75em'}}>Lat</div>
-                        <div className="p-col-10"><InputText readOnly value={this.state.selectedPosition ? this.state.selectedPosition.lat() : ''} /></div>
+                        <div className="col-2" style={{paddingTop:'.75em'}}>Lat</div>
+                        <div className="col-10"><InputText readOnly value={this.state.selectedPosition ? this.state.selectedPosition.lat() : ''} /></div>
 
-                        <div className="p-col-2" style={{paddingTop:'.75em'}}>Lng</div>
-                        <div className="p-col-10"><InputText readOnly value={this.state.selectedPosition ? this.state.selectedPosition.lng() : ''} /></div>
+                        <div className="col-2" style={{paddingTop:'.75em'}}>Lng</div>
+                        <div className="col-10"><InputText readOnly value={this.state.selectedPosition ? this.state.selectedPosition.lng() : ''} /></div>
 
-                        <div className="p-col-2" style={{paddingTop:'.75em'}}><label htmlFor="drg">Drag</label></div>
-                        <div className="p-col-10"><Checkbox checked={this.state.draggableMarker} onChange={(event) => this.setState({draggableMarker: event.checked})}/></div>
+                        <div className="col-2" style={{paddingTop:'.75em'}}><label htmlFor="drg">Drag</label></div>
+                        <div className="col-10"><Checkbox checked={this.state.draggableMarker} onChange={(event) => this.setState({draggableMarker: event.checked})}/></div>
                     </div>
                 </Dialog>
             </div>
@@ -167,10 +161,10 @@ export class GMapDemo extends Component {
     }
 }
 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useEffect, useState, useRef } from 'react';
 import { GMap } from 'primereact/gmap';
 import { Dialog } from 'primereact/dialog';
@@ -288,28 +282,28 @@ const GMapDemo = () => {
             }
 
             <Dialog header="New Location" visible={dialogVisible} width="300px" modal footer={footer} onHide={onHide}>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-2" style={{paddingTop:'.75em'}}><label htmlFor="title">Label</label></div>
-                    <div className="p-col-10"><InputText type="text" id="title" value={markerTitle} onChange={(e) => setMarkerTitle(e.target.value)} /></div>
+                <div className="grid p-fluid">
+                    <div className="col-2" style={{paddingTop:'.75em'}}><label htmlFor="title">Label</label></div>
+                    <div className="col-10"><InputText type="text" id="title" value={markerTitle} onChange={(e) => setMarkerTitle(e.target.value)} /></div>
 
-                    <div className="p-col-2" style={{paddingTop:'.75em'}}>Lat</div>
-                    <div className="p-col-10"><InputText readOnly value={selectedPosition ? selectedPosition.lat() : ''} /></div>
+                    <div className="col-2" style={{paddingTop:'.75em'}}>Lat</div>
+                    <div className="col-10"><InputText readOnly value={selectedPosition ? selectedPosition.lat() : ''} /></div>
 
-                    <div className="p-col-2" style={{paddingTop:'.75em'}}>Lng</div>
-                    <div className="p-col-10"><InputText readOnly value={selectedPosition ? selectedPosition.lng() : ''} /></div>
+                    <div className="col-2" style={{paddingTop:'.75em'}}>Lng</div>
+                    <div className="col-10"><InputText readOnly value={selectedPosition ? selectedPosition.lng() : ''} /></div>
 
-                    <div className="p-col-2" style={{paddingTop:'.75em'}}><label htmlFor="drg">Drag</label></div>
-                    <div className="p-col-10"><Checkbox checked={draggableMarker} onChange={(event) => setDraggableMarker(event.checked)}/></div>
+                    <div className="col-2" style={{paddingTop:'.75em'}}><label htmlFor="drg">Drag</label></div>
+                    <div className="col-10"><Checkbox checked={draggableMarker} onChange={(event) => setDraggableMarker(event.checked)}/></div>
                 </div>
             </Dialog>
         </div>
     );
 }
 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useEffect, useState, useRef } from 'react';
 import { GMap } from 'primereact/gmap';
 import { Dialog } from 'primereact/dialog';
@@ -427,34 +421,34 @@ const GMapDemo = () => {
             }
 
             <Dialog header="New Location" visible={dialogVisible} width="300px" modal footer={footer} onHide={onHide}>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-2" style={{paddingTop:'.75em'}}><label htmlFor="title">Label</label></div>
-                    <div className="p-col-10"><InputText type="text" id="title" value={markerTitle} onChange={(e) => setMarkerTitle(e.target.value)} /></div>
+                <div className="grid p-fluid">
+                    <div className="col-2" style={{paddingTop:'.75em'}}><label htmlFor="title">Label</label></div>
+                    <div className="col-10"><InputText type="text" id="title" value={markerTitle} onChange={(e) => setMarkerTitle(e.target.value)} /></div>
 
-                    <div className="p-col-2" style={{paddingTop:'.75em'}}>Lat</div>
-                    <div className="p-col-10"><InputText readOnly value={selectedPosition ? selectedPosition.lat() : ''} /></div>
+                    <div className="col-2" style={{paddingTop:'.75em'}}>Lat</div>
+                    <div className="col-10"><InputText readOnly value={selectedPosition ? selectedPosition.lat() : ''} /></div>
 
-                    <div className="p-col-2" style={{paddingTop:'.75em'}}>Lng</div>
-                    <div className="p-col-10"><InputText readOnly value={selectedPosition ? selectedPosition.lng() : ''} /></div>
+                    <div className="col-2" style={{paddingTop:'.75em'}}>Lng</div>
+                    <div className="col-10"><InputText readOnly value={selectedPosition ? selectedPosition.lng() : ''} /></div>
 
-                    <div className="p-col-2" style={{paddingTop:'.75em'}}><label htmlFor="drg">Drag</label></div>
-                    <div className="p-col-10"><Checkbox checked={draggableMarker} onChange={(event) => setDraggableMarker(event.checked)}/></div>
+                    <div className="col-2" style={{paddingTop:'.75em'}}><label htmlFor="drg">Drag</label></div>
+                    <div className="col-10"><Checkbox checked={draggableMarker} onChange={(event) => setDraggableMarker(event.checked)}/></div>
                 </div>
             </Dialog>
         </div>
     );
 }
 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="./GoogleMaps.js"></script>
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/gmap/gmap.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState, useRef } = React;
 const { GMap } = primereact.gmap;
 const { Dialog } = primereact.dialog;
@@ -571,30 +565,30 @@ const GMapDemo = () => {
             }
 
             <Dialog header="New Location" visible={dialogVisible} width="300px" modal footer={footer} onHide={onHide}>
-                <div className="p-grid p-fluid">
-                    <div className="p-col-2" style={{paddingTop:'.75em'}}><label htmlFor="title">Label</label></div>
-                    <div className="p-col-10"><InputText type="text" id="title" value={markerTitle} onChange={(e) => setMarkerTitle(e.target.value)} /></div>
+                <div className="grid p-fluid">
+                    <div className="col-2" style={{paddingTop:'.75em'}}><label htmlFor="title">Label</label></div>
+                    <div className="col-10"><InputText type="text" id="title" value={markerTitle} onChange={(e) => setMarkerTitle(e.target.value)} /></div>
 
-                    <div className="p-col-2" style={{paddingTop:'.75em'}}>Lat</div>
-                    <div className="p-col-10"><InputText readOnly value={selectedPosition ? selectedPosition.lat() : ''} /></div>
+                    <div className="col-2" style={{paddingTop:'.75em'}}>Lat</div>
+                    <div className="col-10"><InputText readOnly value={selectedPosition ? selectedPosition.lat() : ''} /></div>
 
-                    <div className="p-col-2" style={{paddingTop:'.75em'}}>Lng</div>
-                    <div className="p-col-10"><InputText readOnly value={selectedPosition ? selectedPosition.lng() : ''} /></div>
+                    <div className="col-2" style={{paddingTop:'.75em'}}>Lng</div>
+                    <div className="col-10"><InputText readOnly value={selectedPosition ? selectedPosition.lng() : ''} /></div>
 
-                    <div className="p-col-2" style={{paddingTop:'.75em'}}><label htmlFor="drg">Drag</label></div>
-                    <div className="p-col-10"><Checkbox checked={draggableMarker} onChange={(event) => setDraggableMarker(event.checked)}/></div>
+                    <div className="col-2" style={{paddingTop:'.75em'}}><label htmlFor="drg">Drag</label></div>
+                    <div className="col-10"><Checkbox checked={draggableMarker} onChange={(event) => setDraggableMarker(event.checked)}/></div>
                 </div>
             </Dialog>
         </div>
     );
 }
                 `
-            }
         }
+    }
 
-        this.extFiles = {
-            'demo/GoogleMaps.js': {
-                content: `
+    const extFiles = {
+        'demo/GoogleMaps.js': {
+            content: `
 export const loadGoogleMaps = (callback) => {
     const existingScript = document.getElementById('googleMaps');
 
@@ -633,23 +627,21 @@ export const removeGoogleMaps = () => {
     }
 };
                 `
-            }
         }
     }
 
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { GMap } from 'primereact/gmap';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -657,8 +649,8 @@ import { GMap } from 'primereact/gmap';
 `}
 </CodeHighlight>
 
-            <h5>Getting Started</h5>
-            <p>A map is initialized with options and dimensions. Refer to the google maps api for the list of available options.</p>
+                    <h5>Getting Started</h5>
+                    <p>A map is initialized with options and dimensions. Refer to the google maps api for the list of available options.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -673,9 +665,22 @@ return (
 `}
 </CodeHighlight>
 
-            <h5>Overlays</h5>
-            <p>GMap can display any type of overlay such as markers, polygons and circles. Overlay instances are bound using the overlays property array. Overlays are aware
-            of binding so whenever the array changes, gmap updates itself.</p>
+                    <h5>TypeScript</h5>
+                    <p>If you are using TypeScript you should install the Google Maps types.</p>
+
+<CodeHighlight lang="js">
+{`
+// npm install types into devDependencies
+npm i -D @types/google.maps
+
+// yarn install types into devDependencies
+yarn add @types/google.maps --production=false
+`}
+</CodeHighlight>
+
+                    <h5>Overlays</h5>
+                    <p>GMap can display any type of overlay such as markers, polygons and circles. Overlay instances are bound using the overlays property array. Overlays are aware
+                    of binding so whenever the array changes, gmap updates itself.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -702,8 +707,9 @@ return (
 `}
 </CodeHighlight>
 
-            <h5>Events</h5>
-            <p>GMap provides common callbacks to hook into events including map click, overlay click and overlay dragging.</p>
+                    <h5>Events</h5>
+                    <p>GMap provides common callbacks to hook into events including map click, overlay click and overlay dragging.</p>
+
 <CodeHighlight lang="js">
 {`
 const onMapClick = (event) => {
@@ -737,9 +743,9 @@ return (
 `}
 </CodeHighlight>
 
-            <h5>Google Maps API</h5>
-            <p>In case you need to access the map instance directly, use the getMap() method. In the following example, this.gmap.getMap() will provide the map instance. Alternative
-            is using onMapReady event as it passes the map instance as a parameter.</p>
+                    <h5>Google Maps API</h5>
+                    <p>In case you need to access the map instance directly, use the getMap() method. In the following example, this.gmap.getMap() will provide the map instance. Alternative
+                    is using onMapReady event as it passes the map instance as a parameter.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -754,117 +760,121 @@ return (
 `}
 </CodeHighlight>
 
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                                <tbody>
+                                <tr>
+                                    <td>options</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Google Maps API configuration object.</td>
+                                </tr>
+                                <tr>
+                                    <td>overlays</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>An array of overlays to display.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the component.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <h5>Properties</h5>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Default</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                        <tbody>
-                        <tr>
-                            <td>options</td>
-                            <td>object</td>
-                            <td>null</td>
-                            <td>Google Maps API configuration object.</td>
-                        </tr>
-                        <tr>
-                            <td>overlays</td>
-                            <td>array</td>
-                            <td>null</td>
-                            <td>An array of overlays to display.</td>
-                        </tr>
-                        <tr>
-                            <td>style</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Inline style of the component.</td>
-                        </tr>
-                        <tr>
-                            <td>className</td>
-                            <td>string</td>
-                            <td>null</td>
-                            <td>Style class of the component.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onMapClick</td>
+                                    <td>event: Google Maps MouseEvent</td>
+                                    <td>Callback to invoke when map is clicked except markers.</td>
+                                </tr>
+                                <tr>
+                                    <td>onMapDragEnd</td>
+                                    <td>-</td>
+                                    <td>Callback to invoke when map drag (i.e. pan) has ended.</td>
+                                </tr>
+                                <tr>
+                                    <td>onMapReady</td>
+                                    <td>event.map: Google Maps Instance</td>
+                                    <td>Callback to invoke when the map is ready to be used.</td>
+                                </tr>
+                                <tr>
+                                    <td>onOverlayClick</td>
+                                    <td>originalEvent: Google Maps MouseEvent <br />
+                                        overlay: Clicked overlay <br />
+                                        map: Map instance <br /></td>
+                                    <td>Callback to invoke when an overlay is clicked.</td>
+                                </tr>
+                                <tr>
+                                    <td>onOverlayDragStart</td>
+                                    <td>event: Google Maps MouseEvent</td>
+                                    <td>Callback to invoke when an overlay drag starts.</td>
+                                </tr>
+                                <tr>
+                                    <td>onOverlayDrag</td>
+                                    <td>event: Google Maps MouseEvent</td>
+                                    <td>Callback to invoke when an overlay is being dragged.</td>
+                                </tr>
+                                <tr>
+                                    <td>onOverlayDragEnd</td>
+                                    <td>event: Google Maps MouseEvent</td>
+                                    <td>Callback to invoke when an overlay drag ends.</td>
+                                </tr>
+                                <tr>
+                                    <td>onZoomChanged</td>
+                                    <td>-</td>
+                                    <td>Callback to invoke when zoom level has changed.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <h5>Events</h5>
-            <div className="doc-tablewrapper">
-                <table className="doc-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Parameters</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>onMapClick</td>
-                            <td>event: Google Maps MouseEvent</td>
-                            <td>Callback to invoke when map is clicked except markers.</td>
-                        </tr>
-                        <tr>
-                            <td>onMapDragEnd</td>
-                            <td>-</td>
-                            <td>Callback to invoke when map drag (i.e. pan) has ended.</td>
-                        </tr>
-                        <tr>
-                            <td>onMapReady</td>
-                            <td>event.map: Google Maps Instance</td>
-                            <td>Callback to invoke when the map is ready to be used.</td>
-                        </tr>
-                        <tr>
-                            <td>onOverlayClick</td>
-                            <td>originalEvent: Google Maps MouseEvent <br />
-                                overlay: Clicked overlay <br />
-                                map: Map instance <br /></td>
-                            <td>Callback to invoke when an overlay is clicked.</td>
-                        </tr>
-                        <tr>
-                            <td>onOverlayDragStart</td>
-                            <td>event: Google Maps MouseEvent</td>
-                            <td>Callback to invoke when an overlay drag starts.</td>
-                        </tr>
-                        <tr>
-                            <td>onOverlayDrag</td>
-                            <td>event: Google Maps MouseEvent</td>
-                            <td>Callback to invoke when an overlay is being dragged.</td>
-                        </tr>
-                        <tr>
-                            <td>onOverlayDragEnd</td>
-                            <td>event: Google Maps MouseEvent</td>
-                            <td>Callback to invoke when an overlay drag ends.</td>
-                        </tr>
-                        <tr>
-                            <td>onZoomChanged</td>
-                            <td>-</td>
-                            <td>Callback to invoke when zoom level has changed.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <h5>Styling</h5>
+                    <p>Component does not apply any styling.</p>
 
-            <h5>Styling</h5>
-            <p>Component does not apply any styling.</p>
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <p>Refer to the <a href="https://support.google.com/maps/answer/6396990?hl=en&co=GENIE.Platform%3DDesktop">Google Maps documentation</a> for more information about accessibility.</p>
+                    </DevelopmentSection>
 
+                    <h5>Dependencies</h5>
+                    <p>Google Maps script.</p>
 
-            <h5>Dependencies</h5>
-            <p>Google Maps script.</p>
+                </TabPanel>
+                {
+                    useLiveEditorTabs({ name: 'GMapDemo', sources: sources, extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    );
+})
 
-            </TabPanel>
-                    {
-                        useLiveEditorTabs({ name: 'GMapDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        );
-    }
-}
+export default GMapDoc;

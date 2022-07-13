@@ -1,117 +1,108 @@
-import React, { Component } from 'react';
+import React, { useState, useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from '../../components/lib/confirmdialog/ConfirmDialog';
 import { Button } from '../../components/lib/button/Button';
 import { Toast } from '../../components/lib/toast/Toast';
-import { ConfirmDialogDoc } from '../../components/doc/confirmdialog';
+import ConfirmDialogDoc from '../../components/doc/confirmdialog';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class ConfirmDialogDemo extends Component {
+const ConfirmDialogDemo = () => {
 
-    constructor(props) {
-        super(props);
+    const [visible, setVisible] = useState(false);
+    const toast = useRef(null);
 
-        this.state = {
-            visible: false
-        };
-
-        this.accept = this.accept.bind(this);
-        this.reject = this.reject.bind(this);
-        this.confirm1 = this.confirm1.bind(this);
-        this.confirm2 = this.confirm2.bind(this);
-        this.confirmPosition = this.confirmPosition.bind(this);
+    const accept = () => {
+        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
     }
 
-    accept() {
-        this.toast.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+    const reject = () => {
+        toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
     }
 
-    reject() {
-        this.toast.show({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-    }
-
-    confirm1() {
+    const confirm1 = () => {
         confirmDialog({
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
-            accept: this.accept,
-            reject: this.reject
+            accept,
+            reject
         });
-    }
+    };
 
-    confirm2() {
+    const confirm2 = () => {
         confirmDialog({
             message: 'Do you want to delete this record?',
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
-            accept: this.accept,
-            reject: this.reject
+            accept,
+            reject
         });
-    }
+    };
 
-    confirmPosition(position) {
+    const confirmPosition = (position) => {
         confirmDialog({
             message: 'Do you want to delete this record?',
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             position,
-            accept: this.accept,
-            reject: this.reject
+            accept,
+            reject
         });
-    }
+    };
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React Confirmation Dialog Component</title>
-                    <meta name="description" content="ConfirmDialog uses a Dialog UI with confirmDialog method or ConfirmDialog tag" />
-                </Head>
-                <div className="content-section introduction">
-                    <div>
-                        <h1>ConfirmDialog</h1>
-                        <p>ConfirmDialog uses a Dialog UI with <b>confirmDialog</b> method or <b>&lt;ConfirmDialog&gt;</b> tag.</p>
-                    </div>
-                    <DocActions github="confirmdialog/index.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Confirmation Dialog Component</title>
+                <meta name="description" content="ConfirmDialog uses a Dialog UI with confirmDialog method or ConfirmDialog tag" />
+            </Head>
+            <div className="content-section introduction">
+                <div>
+                    <h1>ConfirmDialog</h1>
+                    <p>ConfirmDialog uses a Dialog UI with <b>confirmDialog</b> method or <b>&lt;ConfirmDialog&gt;</b> tag.</p>
                 </div>
-
-                <div className="content-section implementation">
-                    <Toast ref={(el) => this.toast = el} />
-
-                    <div className="card">
-                        <h5>Basic</h5>
-                        <Button onClick={this.confirm1} icon="pi pi-check" label="Confirm" className="p-mr-2"></Button>
-                        <Button onClick={this.confirm2} icon="pi pi-times" label="Delete"></Button>
-
-                        <h5>Position</h5>
-                        <div className="p-grid">
-                            <div className="p-col-12">
-                                <Button onClick={() => this.confirmPosition('left')} icon="pi pi-arrow-right" label="Left" className="p-button-help p-mr-2"></Button>
-                                <Button onClick={() => this.confirmPosition('right')} icon="pi pi-arrow-left" label="Right" className="p-button-help"></Button>
-                            </div>
-                            <div className="p-col-12">
-                                <Button onClick={() => this.confirmPosition('top-left')} icon="pi pi-arrow-down" label="TopLeft" className="p-button-warning p-mr-2"></Button>
-                                <Button onClick={() => this.confirmPosition('top')} icon="pi pi-arrow-down" label="Top" className="p-button-warning p-mr-2"></Button>
-                                <Button onClick={() => this.confirmPosition('top-right')} icon="pi pi-arrow-down" label="TopRight" className="p-button-warning"></Button>
-                            </div>
-                            <div className="p-col-12">
-                                <Button onClick={() => this.confirmPosition('bottom-left')} icon="pi pi-arrow-up" label="BottomLeft" className="p-button-success p-mr-2"></Button>
-                                <Button onClick={() => this.confirmPosition('bottom')} icon="pi pi-arrow-up" label="Bottom" className="p-button-success p-mr-2"></Button>
-                                <Button onClick={() => this.confirmPosition('bottom-right')} icon="pi pi-arrow-up" label="BottomRight" className="p-button-success"></Button>
-                            </div>
-                        </div>
-
-                        <h5>Using ConfirmDialog tag</h5>
-                        <ConfirmDialog visible={this.state.visible} onHide={() => this.setState({ visible: false })} message="Are you sure you want to proceed?"
-                            header="Confirmation" icon="pi pi-exclamation-triangle" accept={this.accept} reject={this.reject} />
-                        <Button onClick={() => this.setState({ visible: true })} icon="pi pi-check" label="Confirm" />
-                    </div>
-                </div>
-
-                <ConfirmDialogDoc />
+                <DocActions github="confirmdialog/index.js" />
             </div>
-        )
-    }
+
+            <div className="content-section implementation">
+                <Toast ref={toast} />
+
+                <div className="card">
+                    <ConfirmDialog />
+
+                    <h5>Basic</h5>
+                    <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
+                    <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
+
+                    <h5>Position</h5>
+                    <div className="grid">
+                        <div className="col-12">
+                            <Button onClick={() => confirmPosition('left')} icon="pi pi-arrow-right" label="Left" className="p-button-help mr-2"></Button>
+                            <Button onClick={() => confirmPosition('right')} icon="pi pi-arrow-left" label="Right" className="p-button-help"></Button>
+                        </div>
+                        <div className="col-12">
+                            <Button onClick={() => confirmPosition('top-left')} icon="pi pi-arrow-down-right" label="TopLeft" className="p-button-warning mr-2"></Button>
+                            <Button onClick={() => confirmPosition('top')} icon="pi pi-arrow-down" label="Top" className="p-button-warning mr-2"></Button>
+                            <Button onClick={() => confirmPosition('top-right')} icon="pi pi-arrow-down-left" label="TopRight" className="p-button-warning"></Button>
+                        </div>
+                        <div className="col-12">
+                            <Button onClick={() => confirmPosition('bottom-left')} icon="pi pi-arrow-up-right" label="BottomLeft" className="p-button-success mr-2"></Button>
+                            <Button onClick={() => confirmPosition('bottom')} icon="pi pi-arrow-up" label="Bottom" className="p-button-success mr-2"></Button>
+                            <Button onClick={() => confirmPosition('bottom-right')} icon="pi pi-arrow-up-left" label="BottomRight" className="p-button-success"></Button>
+                        </div>
+                    </div>
+
+                    <h5>Using ConfirmDialog tag</h5>
+                    <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
+                        header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
+                    <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
+                </div>
+            </div>
+
+            <ConfirmDialogDoc />
+        </div>
+    )
 }
+
+export default ConfirmDialogDemo;

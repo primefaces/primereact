@@ -15,6 +15,7 @@ export interface StepsProps {
     style?: object;
     className?: string;
     onSelect?(e: StepsSelectParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Steps extends React.Component<StepsProps, any> { }

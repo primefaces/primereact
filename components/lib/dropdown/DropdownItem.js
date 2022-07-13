@@ -1,57 +1,31 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export class DropdownItem extends Component {
+export const DropdownItem = React.memo((props) => {
 
-    static defaultProps = {
-        option: null,
-        label: null,
-        template: null,
-        selected: false,
-        disabled: false,
-        onClick: null
-    };
-
-    static propTypes = {
-        option: PropTypes.any,
-        label: PropTypes.any,
-        template: PropTypes.any,
-        selected: PropTypes.bool,
-        disabled: PropTypes.bool,
-        onClick: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.onClick = this.onClick.bind(this);
-    }
-
-    onClick(event) {
-        if(this.props.onClick) {
-            this.props.onClick({
+    const onClick = (event) => {
+        if (props.onClick) {
+            props.onClick({
                 originalEvent: event,
-                option: this.props.option
+                option: props.option
             })
         }
     }
 
-    render() {
-        let className = classNames('p-dropdown-item', {
-            'p-highlight': this.props.selected,
-            'p-disabled': this.props.disabled,
-            'p-dropdown-item-empty': (!this.props.label || this.props.label.length === 0)
-        }, this.props.option.className);
-        let content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.props.option) : this.props.label;
+    const className = classNames('p-dropdown-item', {
+        'p-highlight': props.selected,
+        'p-disabled': props.disabled,
+        'p-dropdown-item-empty': (!props.label || props.label.length === 0)
+    }, props.option && props.option.className);
+    const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
 
-        return (
-            <li className={className} onClick={this.onClick} aria-label={this.props.label} key={this.props.label} role="option" aria-selected={this.props.selected}>
-                {content}
-                <Ripple />
-            </li>
-        );
-    }
-}
+    return (
+        <li className={className} style={props.style} onClick={onClick} aria-label={props.label} key={props.label} role="option" aria-selected={props.selected}>
+            {content}
+            <Ripple />
+        </li>
+    )
+});
 
+DropdownItem.displayName = 'DropdownItem';

@@ -11,7 +11,7 @@ interface SliderChangeParams {
 
 interface SliderSlideEndParams extends SliderChangeParams { }
 
-export interface SliderProps {
+export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value' | 'ref'> {
     id?: string;
     value?: SliderValueType;
     min?: number;
@@ -26,6 +26,7 @@ export interface SliderProps {
     ariaLabelledBy?: string;
     onChange?(e: SliderChangeParams): void;
     onSlideEnd?(e: SliderSlideEndParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Slider extends React.Component<SliderProps, any> { }

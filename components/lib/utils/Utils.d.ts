@@ -2,6 +2,10 @@ import React from "react";
 
 export declare function classNames(...args: any[]): string | undefined;
 
+/**
+ * Use 'useOverlayScrollListener' hook instead
+ * @deprecated since version 8.0.0
+ */
 export declare class ConnectedOverlayScrollHandler {
     constructor(element: any, listener?: () => void);
     bindScrollListener(): void;
@@ -12,6 +16,7 @@ export declare class ConnectedOverlayScrollHandler {
 export declare class DomHandler {
     static innerWidth(el: HTMLElement): number;
     static width(el: HTMLElement): number;
+    static getBrowserLanguage(): string;
     static getWindowScrollTop(): number;
     static getWindowScrollLeft(): number;
     static getOuterWidth(el: HTMLElement, margin: boolean): number;
@@ -61,11 +66,16 @@ export declare class DomHandler {
     static getFocusableElements(el: HTMLElement, selector?: string): any[];
     static getFirstFocusableElement(el: HTMLElement, selector?: string): any;
     static getLastFocusableElement(el: HTMLElement, selector?: string): any;
+    static focus(el: HTMLElement, scrollTo?: boolean): void;
     static getCursorOffset(el: HTMLElement, prevText?: string, nextText?: string, currentText?: string): { top: any; left: any; };
     static invokeElementMethod(el: HTMLElement, methodName: string, arg: any): void;
     static isClickable(el: HTMLElement): boolean;
     static applyStyle(el: HTMLElement, style: any): void;
     static exportCSV(csv: any, filename: string): void;
+    static saveAs(file: { name: string, url: any }): boolean;
+    static createInlineStyle(nonce: string): HTMLElement;
+    static removeInlineStyle(styleElement: HTMLElement): HTMLElement | null;
+    static getTargetElement(target: any): HTMLElement | null;
 }
 
 export declare function EventBus(): {
@@ -93,9 +103,11 @@ export declare class ObjectUtils {
     static getJSXElement(obj: any, ...params: any[]): any;
     static getPropValue(obj: any, ...params: any[]): any;
     static getRefElement(ref: any): any;
+    static combinedRefs(innerRef: any, forwardRef: any): void;
     static removeAccents(str: any): string;
     static isEmpty(value: any): boolean;
     static isNotEmpty(value: any): boolean;
+    static sort(value1: any, value2: any, order: number, locale: string | string[]): number;
 }
 
 export declare class IconUtils {

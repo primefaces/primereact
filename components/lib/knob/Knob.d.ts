@@ -4,7 +4,7 @@ interface KnobChangeParams {
     value: number;
 }
 
-export interface KnobProps {
+export interface KnobProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
     id?: string;
     style?: object;
     className?: string;
@@ -23,6 +23,7 @@ export interface KnobProps {
     textColor?: string;
     valueTemplate?: string;
     onChange?(e: KnobChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Knob extends React.Component<KnobProps, any> { }

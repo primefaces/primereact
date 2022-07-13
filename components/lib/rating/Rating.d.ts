@@ -15,7 +15,7 @@ interface RatingChangeParams {
     target: RatingChangeTargetOptions;
 }
 
-export interface RatingProps {
+export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
     id?: string;
     value?: number;
     disabled?: boolean;
@@ -27,6 +27,7 @@ export interface RatingProps {
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     onChange?(e: RatingChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Rating extends React.Component<RatingProps, any> { }

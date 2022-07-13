@@ -1,18 +1,16 @@
-import React, {Component} from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
-export class TimelineDoc extends Component {
+const TimelineDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Timeline } from 'primereact/timeline';
 import { Card } from 'primereact/card';
@@ -39,7 +37,7 @@ export class TimelineDemo extends Component {
     render() {
         const customizedMarker = (item) => {
             return (
-                <span className="custom-marker p-shadow-2" style={{ backgroundColor: item.color }}>
+                <span className="custom-marker shadow-1" style={{ backgroundColor: item.color }}>
                     <i className={item.icon}></i>
                 </span>
             );
@@ -48,7 +46,7 @@ export class TimelineDemo extends Component {
         const customizedContent = (item) => {
             return (
                 <Card title={item.status} subTitle={item.date}>
-                    { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="p-shadow-2" />}
+                    { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="shadow-1" />}
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                         quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                     <Button label="Read more" className="p-button-text"></Button>
@@ -99,10 +97,10 @@ export class TimelineDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useRef } from 'react';
 import { Timeline } from 'primereact/timeline';
 import { Card } from 'primereact/card';
@@ -123,7 +121,7 @@ const TimelineDemo = () => {
 
     const customizedMarker = (item) => {
         return (
-            <span className="custom-marker p-shadow-2" style={{ backgroundColor: item.color }}>
+            <span className="custom-marker shadow-1" style={{ backgroundColor: item.color }}>
                 <i className={item.icon}></i>
             </span>
         );
@@ -132,7 +130,7 @@ const TimelineDemo = () => {
     const customizedContent = (item) => {
         return (
             <Card title={item.status} subTitle={item.date}>
-                { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="p-shadow-2" />}
+                { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="shadow-1" />}
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                     quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                 <Button label="Read more" className="p-button-text"></Button>
@@ -182,10 +180,10 @@ const TimelineDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useRef } from 'react';
 import { Timeline } from 'primereact/timeline';
 import { Card } from 'primereact/card';
@@ -207,7 +205,7 @@ const TieredMenuDemo = () => {
 
     const customizedMarker = (item) => {
         return (
-            <span className="custom-marker p-shadow-2" style={{ backgroundColor: item.color }}>
+            <span className="custom-marker shadow-1" style={{ backgroundColor: item.color }}>
                 <i className={item.icon}></i>
             </span>
         );
@@ -216,7 +214,7 @@ const TieredMenuDemo = () => {
     const customizedContent = (item) => {
         return (
             <Card title={item.status} subTitle={item.date}>
-                { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="p-shadow-2" />}
+                { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="shadow-1" />}
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                     quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                 <Button label="Read more" className="p-button-text"></Button>
@@ -266,17 +264,17 @@ const TieredMenuDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <link rel="stylesheet" href="./TimelineDemo.css" />
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/timeline/timeline.min.js"></script>
         <script src="https://unpkg.com/primereact/card/card.min.js"></script>`,
-                content: `
-const { useEffect, useState, useRef } = React;
+            content: `
+const { useState, useRef } = React;
 const { Timeline } = primereact.timeline;
 const { Card } = primereact.card;
 const { Button } = primereact.button;
@@ -295,7 +293,7 @@ const TimelineDemo = () => {
 
     const customizedMarker = (item) => {
         return (
-            <span className="custom-marker p-shadow-2" style={{ backgroundColor: item.color }}>
+            <span className="custom-marker shadow-1" style={{ backgroundColor: item.color }}>
                 <i className={item.icon}></i>
             </span>
         );
@@ -304,7 +302,7 @@ const TimelineDemo = () => {
     const customizedContent = (item) => {
         return (
             <Card title={item.status} subTitle={item.date}>
-                { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="p-shadow-2" />}
+                { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="shadow-1" />}
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                     quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                 <Button label="Read more" className="p-button-text"></Button>
@@ -354,12 +352,12 @@ const TimelineDemo = () => {
     );
 }
                 `
-            }
         }
+    }
 
-        this.extFiles = {
-            'demo/TimelineDemo.css': {
-                content: `
+    const extFiles = {
+        'demo/TimelineDemo.css': {
+            content: `
 .timeline-demo .custom-marker {
     display: flex;
     width: 2rem;
@@ -391,27 +389,21 @@ const TimelineDemo = () => {
     }
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                <TabPanel header="Documentation">
+                    <h5>Import via Module</h5>
 <CodeHighlight lang="js">
 {`
 import { Timeline } from 'primereact/timeline';
 `}
 </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
+                    <h5>Import via CDN</h5>
 <CodeHighlight>
 {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -419,9 +411,9 @@ import { Timeline } from 'primereact/timeline';
 `}
 </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>Timeline receives the events with the <i>value</i> property as a collection of arbitrary objects. In addition, <i>content</i> property is required to display the representation of an event.
-                            Example below is a sample events array that is used throughout the documentation.</p>
+                    <h5>Getting Started</h5>
+                    <p>Timeline receives the events with the <i>value</i> property as a collection of arbitrary objects. In addition, <i>content</i> property is required to display the representation of an event.
+                        Example below is a sample events array that is used throughout the documentation.</p>
 <CodeHighlight lang="js">
 {`
 const events = [
@@ -439,183 +431,195 @@ const events = [
 `}
 </CodeHighlight>
 
-                        <h5>Layout</h5>
-                        <p>Default layout of the timeline is vertical, setting <i>layout</i> to "horizontal" displays the items horizontally.</p>
+                    <h5>Layout</h5>
+                    <p>Default layout of the timeline is vertical, setting <i>layout</i> to "horizontal" displays the items horizontally.</p>
 <CodeHighlight>
 {`
 <Timeline value={events} layout="horizontal" content={(item) => item.status} />
 `}
 </CodeHighlight>
 
-                        <h5>Alignment</h5>
-                        <p>Location of the timeline bar is defined using the <i>align</i> property.</p>
+                    <h5>Alignment</h5>
+                    <p>Location of the timeline bar is defined using the <i>align</i> property.</p>
 <CodeHighlight>
 {`
 <Timeline value={events} align="right" content={(item) => item.status} />
 `}
 </CodeHighlight>
 
-                        <p>In addition, the "alternate" alignment option make the contents take turns around the timeline bar.</p>
+                    <p>In addition, the "alternate" alignment option make the contents take turns around the timeline bar.</p>
 <CodeHighlight>
 {`
 <Timeline value={events} align="alternate" content={(item) => item.status} />
 `}
 </CodeHighlight>
 
-                        <h5>Opposite</h5>
-                        <p>Content to be placed at the other side of the bar is defined with the <i>opposite</i> property.</p>
+                    <h5>Opposite</h5>
+                    <p>Content to be placed at the other side of the bar is defined with the <i>opposite</i> property.</p>
 <CodeHighlight>
 {`
 <Timeline value={events} opposite={(item) => item.status} content={(item) => <small className="p-text-secondary">{item.date}</small>} />
 `}
 </CodeHighlight>
 
-                        <h5>Custom Markers</h5>
-                        <p><i>marker</i> property allows placing a custom event marker instead of the default one. Below is an example with custom markers and content.</p>
+                    <h5>Custom Markers</h5>
+                    <p><i>marker</i> property allows placing a custom event marker instead of the default one. Below is an example with custom markers and content.</p>
 <CodeHighlight>
 {`
 <Timeline value={events} marker={(item) => <i className={item.icon}></i>} content={(item) => item.status}} />
 `}
 </CodeHighlight>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>value</td>
-                                        <td>array</td>
-                                        <td>null</td>
-                                        <td>An array of events to display.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>align</td>
-                                        <td>string</td>
-                                        <td>left</td>
-                                        <td>Position of the timeline bar relative to the content. Valid values are "left", "right for vertical layout and "top", "bottom" for horizontal layout.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>layout</td>
-                                        <td>string</td>
-                                        <td>vertical</td>
-                                        <td>Orientation of the timeline, valid values are "vertical" and "horizontal".</td>
-                                    </tr>
-                                    <tr>
-                                        <td>dataKey</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Name of the field that uniquely identifies the a record in the data.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Inline style of the component.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the component.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>value</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>An array of events to display.</td>
+                                </tr>
+                                <tr>
+                                    <td>align</td>
+                                    <td>string</td>
+                                    <td>left</td>
+                                    <td>Position of the timeline bar relative to the content. Valid values are "left", "right for vertical layout and "top", "bottom" for horizontal layout.</td>
+                                </tr>
+                                <tr>
+                                    <td>layout</td>
+                                    <td>string</td>
+                                    <td>vertical</td>
+                                    <td>Orientation of the timeline, valid values are "vertical" and "horizontal".</td>
+                                </tr>
+                                <tr>
+                                    <td>dataKey</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Name of the field that uniquely identifies the a record in the data.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the component.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-timeline</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-timeline-left</td>
-                                        <td>Container element when alignment is left.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-timeline-right</td>
-                                        <td>Container element when alignment is right.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-timeline-top</td>
-                                        <td>Container element when alignment is top.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-timeline-bottom</td>
-                                        <td>Container element when alignment is bottom.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-timeline-alternate</td>
-                                        <td>Container element when alignment is alternating.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-timeline-vertical</td>
-                                        <td>Container element of a vertical timeline.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-timeline-horizontal</td>
-                                        <td>Container element of a horizontal timeline.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-timeline-event</td>
-                                        <td>Event element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-timeline-event-opposite</td>
-                                        <td>Opposite of an event content.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-timeline-event-content</td>
-                                        <td>Event content.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-timeline-event-separator</td>
-                                        <td>Separator element of an event.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-timeline-event-marker</td>
-                                        <td>Marker element of an event.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-timeline-event-connector</td>
-                                        <td>Connector element of an event.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-timeline</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-timeline-left</td>
+                                    <td>Container element when alignment is left.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-timeline-right</td>
+                                    <td>Container element when alignment is right.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-timeline-top</td>
+                                    <td>Container element when alignment is top.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-timeline-bottom</td>
+                                    <td>Container element when alignment is bottom.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-timeline-alternate</td>
+                                    <td>Container element when alignment is alternating.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-timeline-vertical</td>
+                                    <td>Container element of a vertical timeline.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-timeline-horizontal</td>
+                                    <td>Container element of a horizontal timeline.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-timeline-event</td>
+                                    <td>Event element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-timeline-event-opposite</td>
+                                    <td>Opposite of an event content.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-timeline-event-content</td>
+                                    <td>Event content.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-timeline-event-separator</td>
+                                    <td>Separator element of an event.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-timeline-event-marker</td>
+                                    <td>Marker element of an event.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-timeline-event-connector</td>
+                                    <td>Connector element of an event.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
-                    </TabPanel>
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>Timeline uses a semantic ordered list element to list the events. No specific role is enforced, still you may use any aria role and attributes
+                        as any valid attribute is passed to the list element.
+                    </p>
 
-                    {
-                        useLiveEditorTabs({ name: 'TimelineDemo', sources: this.sources, extFiles: this.extFiles })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+                    <h5>Keyboard Support</h5>
+                    <p>Component does not include any interactive elements.</p>
+                </DevelopmentSection>
+
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
+                </TabPanel>
+
+                {
+                    useLiveEditorTabs({ name: 'TimelineDemo', sources: sources, extFiles: extFiles })
+                }
+            </TabView>
+        </div>
+    )
+})
+
+export default TimelineDoc;

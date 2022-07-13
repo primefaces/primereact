@@ -1,48 +1,48 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { FooterCell } from './FooterCell';
 
-export class TableFooter extends Component {
+export const TableFooter = React.memo((props) => {
 
-    hasFooter() {
-        return this.props.footerColumnGroup ? true : (this.props.columns ? this.props.columns.some(col => col && col.props.footer) : false);
+    const hasFooter = () => {
+        return props.footerColumnGroup ? true : (props.columns ? props.columns.some(col => col && col.props.footer) : false);
     }
 
-    renderGroupFooterCells(row) {
+    const createGroupFooterCells = (row) => {
         const columns = React.Children.toArray(row.props.children);
 
-        return this.renderFooterCells(columns);
+        return createFooterCells(columns);
     }
 
-    renderFooterCells(columns) {
+    const createFooterCells = (columns) => {
         return React.Children.map(columns, (col, i) => {
             const isVisible = col ? !col.props.hidden : true;
             const key = col ? col.props.columnKey || col.props.field || i : i;
 
-            return isVisible && <FooterCell key={key} tableProps={this.props.tableProps} column={col} />;
+            return isVisible && <FooterCell key={key} tableProps={props.tableProps} column={col} />;
         })
     }
 
-    renderContent() {
-        if (this.props.footerColumnGroup) {
-            const rows = React.Children.toArray(this.props.footerColumnGroup.props.children);
+    const createContent = () => {
+        if (props.footerColumnGroup) {
+            const rows = React.Children.toArray(props.footerColumnGroup.props.children);
 
-            return rows.map((row, i) => <tr key={i} role="row">{this.renderGroupFooterCells(row)}</tr>);
+            return rows.map((row, i) => <tr key={i} role="row">{createGroupFooterCells(row)}</tr>);
         }
 
-        return <tr role="row">{this.renderFooterCells(this.props.columns)}</tr>;
+        return <tr role="row">{createFooterCells(props.columns)}</tr>;
     }
 
-    render() {
-        if (this.hasFooter()) {
-            let content = this.renderContent();
+    if (hasFooter()) {
+        const content = createContent();
 
-            return (
-                <tfoot className="p-datatable-tfoot">
-                    {content}
-                </tfoot>
-            )
-        }
-
-        return null;
+        return (
+            <tfoot className="p-datatable-tfoot">
+                {content}
+            </tfoot>
+        )
     }
-}
+
+    return null;
+});
+
+TableFooter.displayName = 'TableFooter';

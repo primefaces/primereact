@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { TreeTable } from '../../components/lib/treetable/TreeTable';
 import { ContextMenu } from '../../components/lib/contextmenu/ContextMenu';
 import { Toast } from '../../components/lib/toast/Toast';
@@ -9,93 +9,86 @@ import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
-export default class TreeTableContextMenuDemo extends Component {
+const TreeTableContextMenuDemo = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodes: [],
-            expandedKeys: {},
-            selectedNodeKey: null
-        };
-
-        this.menu = [
-            {
-                label: 'View Key',
-                icon: 'pi pi-search',
-                command: () => {
-                    this.toast.show({ severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey });
-                }
-            },
-            {
-                label: 'Toggle',
-                icon: 'pi pi-cog',
-                command: () => {
-                    let expandedKeys = { ...this.state.expandedKeys };
-                    if (expandedKeys[this.state.selectedNodeKey])
-                        delete expandedKeys[this.state.selectedNodeKey];
-                    else
-                        expandedKeys[this.state.selectedNodeKey] = true;
-
-                    this.setState({ expandedKeys: expandedKeys });
-                }
+    const [nodes, setNodes] = useState([]);
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const [selectedNodeKey, setSelectedNodeKey] = useState(null);
+    const toast = useRef(null);
+    const cm = useRef(null);
+    const menu = [
+        {
+            label: 'View Key',
+            icon: 'pi pi-search',
+            command: () => {
+                toast.current.show({ severity: 'success', summary: 'Node Key', detail: selectedNodeKey });
             }
-        ];
+        },
+        {
+            label: 'Toggle',
+            icon: 'pi pi-cog',
+            command: () => {
+                let _expandedKeys = { ...expandedKeys };
+                if (_expandedKeys[selectedNodeKey])
+                    delete _expandedKeys[selectedNodeKey];
+                else
+                    _expandedKeys[selectedNodeKey] = true;
 
-        this.nodeservice = new NodeService();
-    }
+                setExpandedKeys(_expandedKeys);
+            }
+        }
+    ];
 
-    componentDidMount() {
-        this.nodeservice.getTreeTableNodes().then(data => this.setState({ nodes: data }));
-    }
+    const nodeservice = new NodeService();
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>React TreeTable Component - ContextMenu</title>
-                    <meta name="description" content="TreeTable has exclusive integration with ContextMenu." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>TreeTable <span>ContextMenu</span></h1>
-                        <p>TreeTable has exclusive integration with ContextMenu.</p>
-                    </div>
+    useEffect(() => {
+        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-                    <DocActions github="treetable/contextmenu.js" />
+    return (
+        <div>
+            <Head>
+                <title>React TreeTable Component - ContextMenu</title>
+                <meta name="description" content="TreeTable has exclusive integration with ContextMenu." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>TreeTable <span>ContextMenu</span></h1>
+                    <p>TreeTable has exclusive integration with ContextMenu.</p>
                 </div>
 
-                <div className="content-section implementation">
-                    <Toast ref={(el) => this.toast = el} />
-
-                    <ContextMenu model={this.menu} ref={el => this.cm = el} onHide={() => this.setState({ selectedNodeKey: null })} />
-
-                    <div className="card">
-                        <TreeTable value={this.state.nodes} expandedKeys={this.state.expandedKeys} onToggle={e => this.setState({ expandedKeys: e.value })}
-                            contextMenuSelectionKey={this.state.selectedNodeKey} onContextMenuSelectionChange={event => this.setState({ selectedNodeKey: event.value })}
-                            onContextMenu={event => this.cm.show(event.originalEvent)}>
-                            <Column field="name" header="Name" expander></Column>
-                            <Column field="size" header="Size"></Column>
-                            <Column field="type" header="Type"></Column>
-                        </TreeTable>
-                    </div>
-                </div>
-
-                <TreeTableContextMenuDemoDoc />
+                <DocActions github="treetable/contextmenu.js" />
             </div>
-        )
-    }
+
+            <div className="content-section implementation">
+                <Toast ref={toast} />
+
+                <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)} />
+
+                <div className="card">
+                    <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
+                        contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
+                        onContextMenu={event => cm.current.show(event.originalEvent)}>
+                        <Column field="name" header="Name" expander></Column>
+                        <Column field="size" header="Size"></Column>
+                        <Column field="type" header="Type"></Column>
+                    </TreeTable>
+                </div>
+            </div>
+
+            <TreeTableContextMenuDemoDoc />
+        </div>
+    )
 }
 
-class TreeTableContextMenuDemoDoc extends Component {
+export default TreeTableContextMenuDemo;
 
-    constructor(props) {
-        super(props);
+const TreeTableContextMenuDemoDoc = memo(() => {
 
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { ContextMenu } from 'primereact/contextmenu';
@@ -164,10 +157,10 @@ export class TreeTableContextMenuDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState, useEffect, useRef } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { ContextMenu } from 'primereact/contextmenu';
@@ -186,7 +179,7 @@ const TreeTableContextMenuDemo = () => {
             label: 'View Key',
             icon: 'pi pi-search',
             command: () => {
-                toast.current.show({ severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey });
+                toast.current.show({ severity: 'success', summary: 'Node Key', detail: selectedNodeKey });
             }
         },
         {
@@ -229,10 +222,10 @@ const TreeTableContextMenuDemo = () => {
     )
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState, useEffect, useRef } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { ContextMenu } from 'primereact/contextmenu';
@@ -251,7 +244,7 @@ const TreeTableContextMenuDemo = () => {
             label: 'View Key',
             icon: 'pi pi-search',
             command: () => {
-                toast.current.show({ severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey });
+                toast.current.show({ severity: 'success', summary: 'Node Key', detail: selectedNodeKey });
             }
         },
         {
@@ -294,10 +287,10 @@ const TreeTableContextMenuDemo = () => {
     )
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="./NodeService.js"></script>
 
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
@@ -306,7 +299,7 @@ const TreeTableContextMenuDemo = () => {
         <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>
         <script src="https://unpkg.com/primereact/contextmenu/contextmenu.min.js"></script>
         <script src="https://unpkg.com/primereact/toast/toast.min.js"></script>`,
-                content: `
+            content: `
 const { useEffect, useState, useRef } = React;
 const { Column } = primereact.column;
 const { TreeTable } = primereact.treetable;
@@ -324,7 +317,7 @@ const TreeTableContextMenuDemo = () => {
             label: 'View Key',
             icon: 'pi pi-search',
             command: () => {
-                toast.current.show({ severity: 'success', summary: 'Node Key', detail: this.state.selectedNodeKey });
+                toast.current.show({ severity: 'success', summary: 'Node Key', detail: selectedNodeKey });
             }
         },
         {
@@ -367,23 +360,16 @@ const TreeTableContextMenuDemo = () => {
     )
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
-        return (
-            <div className="content-section documentation" id="app-doc">
-                <TabView>
-                    {
-                        useLiveEditorTabs({ name: 'TreeTableContextMenuDemo', sources: this.sources, service: 'NodeService', data: 'treetablenodes' })
-                    }
-                </TabView>
-            </div>
-        )
-    }
-}
+    return (
+        <div className="content-section documentation" id="app-doc">
+            <TabView>
+                {
+                    useLiveEditorTabs({ name: 'TreeTableContextMenuDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })
+                }
+            </TabView>
+        </div>
+    )
+})

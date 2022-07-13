@@ -31,7 +31,7 @@ export default function Menu(props) {
         const badge = item.badge;
         if (badge) {
             return (
-                <span className={classNames('layout-menu-badge p-tag p-tag-rounded p-ml-2 p-text-uppercase', { [`${badge}`]: true, 'p-tag-success': badge === 'new', 'p-tag-info': badge === 'updated' })}>{badge}</span>
+                <span className={classNames('layout-menu-badge p-tag p-tag-rounded ml-2 uppercase', { [`${badge}`]: true, 'p-tag-success': badge === 'new', 'p-tag-info': badge === 'updated' })}>{badge}</span>
             );
         }
 
@@ -224,11 +224,16 @@ export default function Menu(props) {
     const menuItems = renderMenu();
     const showClearIcon = filteredMenu.length !== MenuData.data.length;
     const sidebarClassName = classNames('layout-sidebar', { 'active': props.active });
-    const filterContentClassName = classNames('layout-sidebar-filter-content p-input-filled p-input-icon-left p-fluid', { 'p-input-icon-right': showClearIcon });
+    const filterContentClassName = classNames('layout-sidebar-filter-content p-input-icon-left p-fluid', { 'p-input-icon-right': showClearIcon });
     const searchInput = useRef();
 
     return (
         <div className={sidebarClassName} role="navigation">
+            <Link href="/">
+                <a className="logo" aria-label="PrimeReact logo">
+                    <img alt="logo" src={`${contextPath}/images/primereact-logo${props.darkTheme ? '-light' : '-dark'}.svg`} />
+                </a>
+            </Link>
             <div className="layout-sidebar-filter">
                 <div className={filterContentClassName}>
                     <i className="pi pi-search" />

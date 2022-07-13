@@ -1,5 +1,6 @@
-import { Component } from 'react';
+export const ColumnGroup = () => { }
 
-export class ColumnGroup extends Component {
-    
+ColumnGroup.displayName = 'ColumnGroup';
+ColumnGroup.defaultProps = {
+    __TYPE: 'ColumnGroup'
 }

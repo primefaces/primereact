@@ -1,45 +1,35 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { ObjectUtils, classNames } from '../utils/Utils';
-import { Ripple } from '../ripple/Ripple';
+import * as React from 'react';
+import { ariaLabel } from '../api/Api';
+import { Button } from '../button/Button';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export class PrevPageLink extends Component {
+export const PrevPageLink = React.memo((props) => {
+    const className = classNames('p-paginator-prev p-paginator-element p-link', { 'p-disabled': props.disabled });
+    const iconClassName = 'p-paginator-icon pi pi-angle-left';
+    const element = (
+        <Button type='button' className={className} icon={iconClassName} onClick={props.onClick} disabled={props.disabled} aria-label={ariaLabel('previousPageLabel')}/>
+    );
 
-    static defaultProps = {
-        disabled: false,
-        onClick: null,
-        template: null
+    if (props.template) {
+        const defaultOptions = {
+            onClick: props.onClick,
+            className,
+            iconClassName,
+            disabled: props.disabled,
+            element,
+            props
+        };
+
+        return ObjectUtils.getJSXElement(props.template, defaultOptions);
     }
 
-    static propTypes = {
-        disabled: PropTypes.bool,
-        onClick: PropTypes.func,
-        template: PropTypes.any
-    }
+    return element;
+});
 
-    render() {
-        const className = classNames('p-paginator-prev p-paginator-element p-link', { 'p-disabled': this.props.disabled });
-        const iconClassName = 'p-paginator-icon pi pi-angle-left';
-        const element = (
-            <button type="button" className={className} onClick={this.props.onClick} disabled={this.props.disabled}>
-                <span className={iconClassName}></span>
-                <Ripple />
-            </button>
-        );
-
-        if (this.props.template) {
-            const defaultOptions = {
-                onClick: this.props.onClick,
-                className,
-                iconClassName,
-                disabled: this.props.disabled,
-                element,
-                props: this.props
-            };
-
-            return ObjectUtils.getJSXElement(this.props.template, defaultOptions);
-        }
-
-        return element;
-    }
+PrevPageLink.displayName = 'PrevPageLink';
+PrevPageLink.defaultProps = {
+    __TYPE: 'PrevPageLink',
+    disabled: false,
+    onClick: null,
+    template: null
 }

@@ -1,65 +1,29 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { Portal } from '../portal/Portal';
+import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { Portal } from '../portal/Portal';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export class BlockUI extends Component {
+export const BlockUI = React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(props.blocked);
+    const maskRef = React.useRef(null);
 
-    static defaultProps = {
-        id: null,
-        blocked: false,
-        fullScreen: false,
-        baseZIndex: 0,
-        autoZIndex: true,
-        style: null,
-        className: null,
-        template: null,
-        onBlocked: null,
-        onUnblocked: null
-    };
-
-    static propTypes = {
-        id: PropTypes.string,
-        blocked: PropTypes.bool,
-        fullScreen: PropTypes.bool,
-        baseZIndex: PropTypes.number,
-        autoZIndex: PropTypes.bool,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        template: PropTypes.any,
-        onBlocked: PropTypes.func,
-        onUnblocked: PropTypes.func
-    };
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            visible: props.blocked
-        };
-
-        this.block = this.block.bind(this);
-        this.unblock = this.unblock.bind(this);
-        this.onPortalMounted = this.onPortalMounted.bind(this);
+    const block = () => {
+        setVisibleState(true);
     }
 
-    block() {
-        this.setState({ visible: true });
-    }
-
-    unblock() {
+    const unblock = () => {
         const callback = () => {
-            this.setState({ visible: false }, () => {
-                this.props.fullScreen && DomHandler.removeClass(document.body, 'p-overflow-hidden');
-                this.props.onUnblocked && this.props.onUnblocked();
-            });
-        };
+            setVisibleState(false);
 
-        if (this.mask) {
-            DomHandler.addClass(this.mask, 'p-component-overlay-leave');
-            this.mask.addEventListener('animationend', () => {
-                ZIndexUtils.clear(this.mask);
+            props.fullScreen && DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            props.onUnblocked && props.onUnblocked();
+        }
+
+        if (maskRef.current) {
+            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+            maskRef.current.addEventListener('animationend', () => {
+                ZIndexUtils.clear(maskRef.current);
                 callback();
             });
         }
@@ -68,68 +32,83 @@ export class BlockUI extends Component {
         }
     }
 
-    onPortalMounted() {
-        if (this.props.fullScreen) {
+    const onPortalMounted = () => {
+        if (props.fullScreen) {
             DomHandler.addClass(document.body, 'p-overflow-hidden');
             document.activeElement.blur();
         }
 
-        if (this.props.autoZIndex) {
-            const key = this.props.fullScreen ? 'modal' : 'overlay';
-            ZIndexUtils.set(key, this.mask, PrimeReact.autoZIndex, this.props.baseZIndex || PrimeReact.zIndex[key]);
+        if (props.autoZIndex) {
+            const key = props.fullScreen ? 'modal' : 'overlay';
+            ZIndexUtils.set(key, maskRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex[key]);
         }
 
-        this.props.onBlocked && this.props.onBlocked();
+        props.onBlocked && props.onBlocked();
     }
 
-    renderMask() {
-        if (this.state.visible) {
+    useMountEffect(() => {
+        visibleState && block();
+    });
+
+    useUpdateEffect(() => {
+        props.blocked ? block() : unblock();
+    }, [props.blocked]);
+
+    useUnmountEffect(() => {
+        if (props.fullScreen) {
+            DomHandler.removeClass(document.body, 'p-overflow-hidden');
+        }
+
+        ZIndexUtils.clear(maskRef.current);
+    });
+
+    React.useImperativeHandle(ref, () => ({
+        block,
+        unblock,
+        ...props
+    }));
+
+    const createMask = () => {
+        if (visibleState) {
+            const appendTo = props.fullScreen ? document.body : 'self';
             const className = classNames('p-blockui p-component-overlay p-component-overlay-enter', {
-                'p-blockui-document': this.props.fullScreen
-            }, this.props.className);
-            const content = this.props.template ? ObjectUtils.getJSXElement(this.props.template, this.props) : null;
+                'p-blockui-document': props.fullScreen
+            }, props.className);
+            const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : null;
             const mask = (
-                <div ref={(el) => this.mask = el} className={className} style={this.props.style}>
+                <div ref={maskRef} className={className} style={props.style}>
                     {content}
                 </div>
             );
 
-            return (
-                <Portal element={mask} appendTo={this.props.fullScreen ? document.body : 'self'} onMounted={this.onPortalMounted} />
-            );
+            return <Portal element={mask} appendTo={appendTo} onMounted={onPortalMounted} />
         }
 
         return null;
     }
 
-    componentDidMount() {
-        if (this.state.visible) {
-            this.block();
-        }
-    }
+    const otherProps = ObjectUtils.findDiffKeys(props, BlockUI.defaultProps);
+    const mask = createMask();
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.blocked !== this.props.blocked) {
-            this.props.blocked ? this.block() : this.unblock();
-        }
-    }
+    return (
+        <div id={props.id} className="p-blockui-container" {...otherProps}>
+            {props.children}
+            {mask}
+        </div>
+    )
+});
 
-    componentWillUnmount() {
-        if (this.props.fullScreen) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
-        }
-
-        ZIndexUtils.clear(this.mask);
-    }
-
-    render() {
-        const mask = this.renderMask();
-
-        return (
-            <div ref={(el) => this.container = el} id={this.props.id} className="p-blockui-container">
-                {this.props.children}
-                {mask}
-            </div>
-        );
-    }
+BlockUI.displayName = 'BlockUI';
+BlockUI.defaultProps = {
+    __TYPE: 'BlockUI',
+    id: null,
+    blocked: false,
+    fullScreen: false,
+    baseZIndex: 0,
+    autoZIndex: true,
+    style: null,
+    className: null,
+    template: null,
+    onBlocked: null,
+    onUnblocked: null
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
-import {IconType} from "../utils";
+import { IconType } from '../utils';
 
 type SpeedDialDirectionType = 'up' | 'down' | 'left' | 'right' | 'up-left' | 'up-right' | 'down-left' | 'down-right';
 
@@ -42,6 +42,7 @@ export interface SpeedDialProps {
     onClick?(event: React.MouseEvent<HTMLElement>): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class SpeedDial extends React.Component<SpeedDialProps, any> {

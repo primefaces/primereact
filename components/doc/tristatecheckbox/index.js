@@ -1,18 +1,16 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
-export class TriStateCheckboxDoc extends Component {
+const TriStateCheckboxDoc = memo(() => {
 
-    constructor(props) {
-        super(props);
-
-        this.sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        'class': {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
@@ -30,7 +28,7 @@ export class TriStateCheckboxDemo extends Component {
         return (
             <div>
                 <div className="card">
-                    <div className="p-field-checkbox p-m-0">
+                    <div className="field-checkbox m-0">
                         <TriStateCheckbox value={this.state.value} onChange={(e) => this.setState({value: e.value})} />
                         <label>{String(this.state.value)}</label>
                     </div>
@@ -40,10 +38,10 @@ export class TriStateCheckboxDemo extends Component {
     }
 }
                 `
-            },
-            'hooks': {
-                tabName: 'Hooks Source',
-                content: `
+        },
+        'hooks': {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useState } from 'react';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
@@ -53,7 +51,7 @@ const TriStateCheckboxDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-field-checkbox p-m-0">
+                <div className="field-checkbox m-0">
                     <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
                     <label>{String(value)}</label>
                 </div>
@@ -62,10 +60,10 @@ const TriStateCheckboxDemo = () => {
     );
 }
                 `
-            },
-            'ts': {
-                tabName: 'TS Source',
-                content: `
+        },
+        'ts': {
+            tabName: 'TS Source',
+            content: `
 import React, { useState } from 'react';
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
@@ -75,7 +73,7 @@ const TriStateCheckboxDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-field-checkbox p-m-0">
+                <div className="field-checkbox m-0">
                     <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
                     <label>{String(value)}</label>
                 </div>
@@ -84,14 +82,14 @@ const TriStateCheckboxDemo = () => {
     );
 }
                 `
-            },
-            'browser': {
-                tabName: 'Browser Source',
-                imports: `
+        },
+        'browser': {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/tristatecheckbox/tristatecheckbox.min.js"></script>`,
-                content: `
-const { useEffect, useState } = React;
+            content: `
+const { useState } = React;
 const { TriStateCheckbox } = primereact.tristatecheckbox;
 
 const TriStateCheckboxDemo = () => {
@@ -100,7 +98,7 @@ const TriStateCheckboxDemo = () => {
     return (
         <div>
             <div className="card">
-                <div className="p-field-checkbox p-m-0">
+                <div className="field-checkbox m-0">
                     <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
                     <label>{String(value)}</label>
                 </div>
@@ -109,15 +107,9 @@ const TriStateCheckboxDemo = () => {
     );
 }
                 `
-            }
         }
     }
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
-    render() {
         return (
             <div className="content-section documentation" id="app-doc">
                 <TabView>
@@ -146,6 +138,7 @@ import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 </CodeHighlight>
 
                     <h5>Properties</h5>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -164,22 +157,10 @@ import { TriStateCheckbox } from 'primereact/tristatecheckbox';
                                     <td>Unique identifier of the element.</td>
                                 </tr>
                                 <tr>
-                                    <td>inputId</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Unique identifier of the native checkbox element.</td>
-                                </tr>
-                                <tr>
                                     <td>value</td>
                                     <td>any</td>
                                     <td>null</td>
                                     <td>Value of the TriStateCheckbox.</td>
-                                </tr>
-                                <tr>
-                                    <td>name</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Name of the checkbox element .</td>
                                 </tr>
                                 <tr>
                                     <td>style</td>
@@ -200,6 +181,18 @@ import { TriStateCheckbox } from 'primereact/tristatecheckbox';
                                     <td>When present, it specifies that the element value cannot be altered.</td>
                                 </tr>
                                 <tr>
+                                    <td>readOnly</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the value cannot be changed.</td>
+                                </tr>
+                                <tr>
+                                    <td>tabIndex</td>
+                                    <td>number</td>
+                                    <td>null</td>
+                                    <td>Index of the element in tabbing order.</td>
+                                </tr>
+                                <tr>
                                     <td>tooltip</td>
                                     <td>any</td>
                                     <td>null</td>
@@ -210,12 +203,6 @@ import { TriStateCheckbox } from 'primereact/tristatecheckbox';
                                     <td>object</td>
                                     <td>null</td>
                                     <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
-                                </tr>
-                                <tr>
-                                    <td>ariaLabelledBy</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -274,15 +261,52 @@ import { TriStateCheckbox } from 'primereact/tristatecheckbox';
                         </table>
                     </div>
 
+                    <h5>Accessibility</h5>
+                <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>TriStateCheckbox component uses an element with <i>checkbox</i> role. Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Component adds an element with
+                     <i>aria-live</i> attribute that is only visible to screen readers to read the value displayed. Values to read are defined with the <i>trueLabel</i>, <i>falseLabel</i> and <i>nullLabel</i> keys of the <i>aria</i>
+                        property from the <Link href="/locale">locale</Link> API. This is an example of a custom accessibility implementation as there is no one to one mapping between the component design and the WCAG specification.</p>
+<CodeHighlight>
+{`
+<span id="chkbox1">Remember Me</span>
+<TriStateCheckbox aria-labelledby="chkbox1" />
+
+<TriStateCheckbox aria-label="Remember Me" />
+`}
+</CodeHighlight>
+                    <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the checkbox.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Toggles between the values.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
                 {
-                    useLiveEditorTabs({ name: 'TriStateCheckboxDemo', sources: this.sources })
+                    useLiveEditorTabs({ name: 'TriStateCheckboxDemo', sources: sources })
                 }
             </TabView>
         </div>
-        )
-    }
-}
+    )
+})
+
+export default TriStateCheckboxDoc;

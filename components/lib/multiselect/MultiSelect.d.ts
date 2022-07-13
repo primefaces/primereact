@@ -3,6 +3,7 @@ import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
 import { IconType } from '../utils';
 import { VirtualScrollerProps } from '../virtualscroller';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
 
 type MultiSelectOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
@@ -65,12 +66,12 @@ interface MultiSelectAllParams {
     checked: boolean;
 }
 
-export interface MultiSelectProps {
+export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
     name?: string;
     value?: any;
-    options?: any[];
+    options?: SelectItemOptionsType;
     optionLabel?: string;
     optionValue?: string;
     optionDisabled?: MultiSelectOptionDisabledType;
@@ -121,6 +122,7 @@ export interface MultiSelectProps {
     onHide?(): void;
     onFilter?(e: MultiSelectFilterParams): void;
     onSelectAll?(e: MultiSelectAllParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class MultiSelect extends React.Component<MultiSelectProps, any> { }

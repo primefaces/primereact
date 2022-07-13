@@ -22,7 +22,6 @@ interface InputMaskChangeParams {
 
 export interface InputMaskProps {
     id?: string;
-    inputRef?: React.Ref<HTMLInputElement>;
     value?: string;
     type?: string;
     mask?: string;
@@ -41,11 +40,11 @@ export interface InputMaskProps {
     required?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string;
     onComplete?(e: InputMaskCompleteParams): void;
     onChange?(e: InputMaskChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
+    children?: React.ReactNode;
 }
 
 export declare class InputMask extends React.Component<InputMaskProps, any> { }

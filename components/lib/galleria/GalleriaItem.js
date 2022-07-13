@@ -1,153 +1,140 @@
-import React, { Component } from 'react';
-import { classNames } from '../utils/Utils';
+import * as React from 'react';
+import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
+import { classNames } from '../utils/Utils';
 
-class GalleriaItemComponent extends Component {
+export const GalleriaItem = React.memo(React.forwardRef((props, ref) => {
 
-    constructor(props) {
-        super(props);
+    const next = () => {
+        const nextItemIndex = props.activeItemIndex + 1;
 
-        this.navForward = this.navForward.bind(this);
-        this.navBackward = this.navBackward.bind(this);
-        this.next = this.next.bind(this);
-        this.prev = this.prev.bind(this);
-    }
-
-    step(index) {
-        if (this.itemsContainer) {
-            this.itemsContainer.style.transform = this.isVertical() ? `translate3d(0, ${index * 100}%, 0)` : `translate3d(${index * 100}%, 0, 0)`;
-            this.itemsContainer.style.transition = 'transform 500ms ease 0s';
-        }
-    }
-
-    next() {
-        let nextItemIndex = this.props.activeItemIndex + 1;
-
-        this.props.onActiveItemChange({
-            index: this.props.circular && (this.props.value.length - 1) === this.props.activeItemIndex ? 0 : nextItemIndex
+        props.onActiveItemChange({
+            index: props.circular && (props.value.length - 1) === props.activeItemIndex ? 0 : nextItemIndex
         });
     }
 
-    prev() {
-        let prevItemIndex = this.props.activeItemIndex !== 0 ? this.props.activeItemIndex - 1 : 0;
+    const prev = () => {
+        const prevItemIndex = props.activeItemIndex !== 0 ? props.activeItemIndex - 1 : 0;
 
-        this.props.onActiveItemChange({
-            index: this.props.circular && this.props.activeItemIndex === 0 ? this.props.value.length - 1 : prevItemIndex
+        props.onActiveItemChange({
+            index: props.circular && props.activeItemIndex === 0 ? props.value.length - 1 : prevItemIndex
         });
     }
 
-    stopSlideShow() {
-        if (this.props.slideShowActive && this.props.stopSlideShow) {
-            this.props.stopSlideShow();
+    const stopSlideShow = () => {
+        if (props.slideShowActive && props.stopSlideShow) {
+            props.stopSlideShow();
         }
     }
 
-    navBackward(e) {
-        this.stopSlideShow();
-        this.prev();
+    const navBackward = (e) => {
+        stopSlideShow();
+        prev();
 
         if (e && e.cancelable) {
             e.preventDefault();
         }
     }
 
-    navForward(e) {
-        this.stopSlideShow();
-        this.next();
+    const navForward = (e) => {
+        stopSlideShow();
+        next();
 
         if (e && e.cancelable) {
             e.preventDefault();
         }
     }
 
-    onIndicatorClick(index) {
-        this.stopSlideShow();
-        this.props.onActiveItemChange({
+    const onIndicatorClick = (index) => {
+        stopSlideShow();
+        props.onActiveItemChange({
             index
         });
     }
 
-    onIndicatorMouseEnter(index) {
-        if (this.props.changeItemOnIndicatorHover) {
-            this.stopSlideShow();
+    const onIndicatorMouseEnter = (index) => {
+        if (props.changeItemOnIndicatorHover) {
+            stopSlideShow();
 
-            this.props.onActiveItemChange({
+            props.onActiveItemChange({
                 index
             });
         }
     }
 
-    onIndicatorKeyDown(event, index) {
+    const onIndicatorKeyDown = (event, index) => {
         if (event.which === 13) {
-            this.stopSlideShow();
+            stopSlideShow();
 
-            this.props.onActiveItemChange({
+            props.onActiveItemChange({
                 index
             });
         }
     }
 
-    componentDidMount() {
-        if (this.props.autoPlay) {
-            this.props.startSlideShow();
+    useMountEffect(() => {
+        if (props.autoPlay) {
+            props.startSlideShow();
         }
-    }
+    });
 
-    renderBackwardNavigator() {
-        if (this.props.showItemNavigators) {
-            let isDisabled = !this.props.circular && this.props.activeItemIndex === 0;
-            let buttonClassName = classNames('p-galleria-item-prev p-galleria-item-nav p-link', {
+    const createBackwardNavigator = () => {
+        if (props.showItemNavigators) {
+            const isDisabled = !props.circular && props.activeItemIndex === 0;
+            const buttonClassName = classNames('p-galleria-item-prev p-galleria-item-nav p-link', {
                 'p-disabled': isDisabled
             });
 
             return (
-                <button type="button" className={buttonClassName} onClick={this.navBackward} disabled={isDisabled}>
+                <button type="button" className={buttonClassName} onClick={navBackward} disabled={isDisabled}>
                     <span className="p-galleria-item-prev-icon pi pi-chevron-left"></span>
                     <Ripple />
                 </button>
-            );
+            )
         }
 
         return null;
     }
 
-    renderForwardNavigator() {
-        if (this.props.showItemNavigators) {
-            let isDisabled = !this.props.circular && this.props.activeItemIndex === (this.props.value.length - 1);
-            let buttonClassName = classNames('p-galleria-item-next p-galleria-item-nav p-link', {
+    const createForwardNavigator = () => {
+        if (props.showItemNavigators) {
+            const isDisabled = !props.circular && props.activeItemIndex === (props.value.length - 1);
+            const buttonClassName = classNames('p-galleria-item-next p-galleria-item-nav p-link', {
                 'p-disabled': isDisabled
             });
 
             return (
-                <button type="button" className={buttonClassName} onClick={this.navForward} disabled={isDisabled}>
+                <button type="button" className={buttonClassName} onClick={navForward} disabled={isDisabled}>
                     <span className="p-galleria-item-next-icon pi pi-chevron-right"></span>
                     <Ripple />
                 </button>
-            );
+            )
         }
 
         return null;
     }
 
-    renderCaption() {
-        if (this.props.caption) {
-            const content = this.props.caption(this.props.value[this.props.activeItemIndex]);
+    const createCaption = () => {
+        if (props.caption) {
+            const content = props.caption(props.value[props.activeItemIndex]);
+
             return (
                 <div className="p-galleria-caption">
-                    { content}
+                    {content}
                 </div>
-            );
+            )
         }
 
         return null;
     }
 
-    renderIndicator(index) {
-        let indicator = this.props.indicator && this.props.indicator(index);
-        let isActive = this.props.activeItemIndex === index;
-        let indicatorItemClassName = classNames('p-galleria-indicator', {
+    const createIndicator = (index) => {
+        const key = 'p-galleria-indicator-' + index;
+        const isActive = props.activeItemIndex === index;
+        const className = classNames('p-galleria-indicator', {
             'p-highlight': isActive
         });
+        let indicator = props.indicator && props.indicator(index);
 
         if (!indicator) {
             indicator = (
@@ -158,54 +145,52 @@ class GalleriaItemComponent extends Component {
         }
 
         return (
-            <li className={indicatorItemClassName} key={'p-galleria-indicator-' + index} tabIndex={0}
-                onClick={() => this.onIndicatorClick(index)} onMouseEnter={() => this.onIndicatorMouseEnter(index)} onKeyDown={(e) => this.onIndicatorKeyDown(e, index)}>
-                { indicator}
+            <li className={className} key={key} tabIndex={0}
+                onClick={() => onIndicatorClick(index)} onMouseEnter={() => onIndicatorMouseEnter(index)} onKeyDown={(e) => onIndicatorKeyDown(e, index)}>
+                {indicator}
             </li>
-        );
+        )
     }
 
-    renderIndicators() {
-        if (this.props.showIndicators) {
-            const indicatorsContentClassName = classNames('p-galleria-indicators p-reset', this.props.indicatorsContentClassName);
+    const createIndicators = () => {
+        if (props.showIndicators) {
+            const className = classNames('p-galleria-indicators p-reset', props.indicatorsContentClassName);
             let indicators = [];
 
-            for (let i = 0; i < this.props.value.length; i++) {
-                indicators.push(this.renderIndicator(i));
+            for (let i = 0; i < props.value.length; i++) {
+                indicators.push(createIndicator(i));
             }
 
             return (
-                <ul className={indicatorsContentClassName}>
-                    { indicators}
+                <ul className={className}>
+                    {indicators}
                 </ul>
-            );
+            )
         }
 
         return null;
     }
 
-    render() {
-        const content = this.props.itemTemplate && this.props.itemTemplate(this.props.value[this.props.activeItemIndex]);
-        const backwardNavigator = this.renderBackwardNavigator();
-        const forwardNavigator = this.renderForwardNavigator();
-        const caption = this.renderCaption();
-        const indicators = this.renderIndicators();
+    const content = props.itemTemplate && props.itemTemplate(props.value[props.activeItemIndex]);
+    const backwardNavigator = createBackwardNavigator();
+    const forwardNavigator = createForwardNavigator();
+    const caption = createCaption();
+    const indicators = createIndicators();
 
-        return (
-            <div ref={(el) => this.props.forwardRef(el)} className="p-galleria-item-wrapper">
-                <div className="p-galleria-item-container">
-                    {backwardNavigator}
-                    <div className="p-galleria-item">
-                        {content}
-                    </div>
-                    {forwardNavigator}
-                    {caption}
+    return (
+        <div ref={ref} className="p-galleria-item-wrapper">
+            <div className="p-galleria-item-container">
+                {backwardNavigator}
+                <div className="p-galleria-item">
+                    {content}
                 </div>
-
-                {indicators}
+                {forwardNavigator}
+                {caption}
             </div>
-        );
-    }
-}
 
-export const GalleriaItem = React.forwardRef((props, ref) => <GalleriaItemComponent forwardRef={ref} {...props} />);
+            {indicators}
+        </div>
+    )
+}));
+
+GalleriaItem.displayName = 'GalleriaItem';

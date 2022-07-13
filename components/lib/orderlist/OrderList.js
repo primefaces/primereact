@@ -1,100 +1,51 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import { useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { OrderListControls } from './OrderListControls';
 import { OrderListSubList } from './OrderListSubList';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 
-export class OrderList extends Component {
+export const OrderList = React.memo(React.forwardRef((props, ref) => {
+    const [selectionState, setSelectionState] = React.useState([]);
+    const elementRef = React.useRef(null);
+    const reorderDirection = React.useRef(null);
 
-    static defaultProps = {
-        id: null,
-        value: null,
-        header: null,
-        style: null,
-        className: null,
-        listStyle: null,
-        dragdrop: false,
-        tabIndex: 0,
-        dataKey: null,
-        onChange: null,
-        itemTemplate: null
+    const onItemClick = (event) => {
+        const metaKey = (event.originalEvent.metaKey || event.originalEvent.ctrlKey);
+        const index = ObjectUtils.findIndexInList(event.value, selectionState, props.dataKey);
+        const selected = (index !== -1);
+        let newSelection;
+
+        if (selected)
+            newSelection = metaKey ? selectionState.filter((_, i) => i !== index) : [event.value];
+        else
+            newSelection = metaKey ? [...selectionState, event.value] : [event.value];
+
+        setSelectionState(newSelection);
     }
 
-    static propTypes = {
-        id: PropTypes.string,
-        value: PropTypes.array,
-        header: PropTypes.string,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        listStyle: PropTypes.object,
-        dragdrop: PropTypes.bool,
-        tabIndex: PropTypes.number,
-        dataKey: PropTypes.string,
-        onChange: PropTypes.func,
-        itemTemplate: PropTypes.func
-    }
+    const onItemKeyDown = (event) => {
+        const originalEvent = event.originalEvent;
+        const listItem = originalEvent.currentTarget;
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            selection: []
-        };
-
-        this.onItemClick = this.onItemClick.bind(this);
-        this.onItemKeyDown = this.onItemKeyDown.bind(this);
-        this.onReorder = this.onReorder.bind(this);
-    }
-
-    onItemClick(event) {
-        let metaKey = (event.originalEvent.metaKey || event.originalEvent.ctrlKey);
-        let index = ObjectUtils.findIndexInList(event.value, this.state.selection, this.props.dataKey);
-        let selected = (index !== -1);
-        let selection;
-
-        if (selected) {
-            if (metaKey)
-                selection = this.state.selection.filter((val, i) => i !== index);
-            else
-                selection = [event.value];
-        }
-        else {
-            if (metaKey)
-                selection = [...this.state.selection, event.value];
-            else
-                selection = [event.value];
-        }
-
-        this.setState({ selection: selection });
-    }
-
-    onItemKeyDown(event) {
-        let listItem = event.originalEvent.currentTarget;
-
-        switch (event.originalEvent.which) {
+        switch (originalEvent.which) {
             //down
             case 40:
-                let nextItem = this.findNextItem(listItem);
-                if (nextItem) {
-                    nextItem.focus();
-                }
-
-                event.originalEvent.preventDefault();
+                const nextItem = findNextItem(listItem);
+                nextItem && nextItem.focus();
+                originalEvent.preventDefault();
                 break;
 
             //up
             case 38:
-                let prevItem = this.findPrevItem(listItem);
-                if (prevItem) {
-                    prevItem.focus();
-                }
-
-                event.originalEvent.preventDefault();
+                const prevItem = findPrevItem(listItem);
+                prevItem && prevItem.focus();
+                originalEvent.preventDefault();
                 break;
 
             //enter
             case 13:
-                this.onItemClick(event);
-                event.originalEvent.preventDefault();
+                onItemClick(event);
+                originalEvent.preventDefault();
                 break;
 
             default:
@@ -102,61 +53,48 @@ export class OrderList extends Component {
         }
     }
 
-    findNextItem(item) {
-        let nextItem = item.nextElementSibling;
-
-        if (nextItem)
-            return !DomHandler.hasClass(nextItem, 'p-orderlist-item') ? this.findNextItem(nextItem) : nextItem;
-        else
-            return null;
+    const findNextItem = (item) => {
+        const nextItem = item.nextElementSibling;
+        return nextItem ? (!DomHandler.hasClass(nextItem, 'p-orderlist-item') ? findNextItem(nextItem) : nextItem) : null;
     }
 
-    findPrevItem(item) {
-        let prevItem = item.previousElementSibling;
-
-        if (prevItem)
-            return !DomHandler.hasClass(prevItem, 'p-orderlist-item') ? this.findPrevItem(prevItem) : prevItem;
-        else
-            return null;
+    const findPrevItem = (item) => {
+        const prevItem = item.previousElementSibling;
+        return prevItem ? (!DomHandler.hasClass(prevItem, 'p-orderlist-item') ? findPrevItem(prevItem) : prevItem) : null;
     }
 
-    onReorder(event) {
-        if (this.props.onChange) {
-            this.props.onChange({
+    const onReorder = (event) => {
+        if (props.onChange) {
+            props.onChange({
                 event: event.originalEvent,
                 value: event.value
             });
         }
 
-        this.reorderDirection = event.direction;
+        reorderDirection.current = event.direction;
     }
 
-    componentDidUpdate() {
-        if (this.reorderDirection) {
-            this.updateListScroll();
-            this.reorderDirection = null;
-        }
-    }
-
-    updateListScroll() {
-        let listItems = DomHandler.find(this.subList.listElement, '.p-orderlist-item.p-highlight');
+    const updateListScroll = () => {
+        const list = DomHandler.findSingle(elementRef.current, '.p-orderlist-list');
+        const listItems = DomHandler.find(list, '.p-orderlist-item.p-highlight');
 
         if (listItems && listItems.length) {
-            switch (this.reorderDirection) {
+            switch (reorderDirection.current) {
                 case 'up':
-                    DomHandler.scrollInView(this.subList.listElement, listItems[0]);
+                    DomHandler.scrollInView(list, listItems[0]);
                     break;
 
                 case 'top':
-                    this.subList.listElement.scrollTop = 0;
+                    list.scrollTop = 0;
                     break;
 
                 case 'down':
-                    DomHandler.scrollInView(this.subList.listElement, listItems[listItems.length - 1]);
+                    DomHandler.scrollInView(list, listItems[listItems.length - 1]);
                     break;
 
                 case 'bottom':
-                    this.subList.listElement.scrollTop = this.subList.listElement.scrollHeight;
+                    /* TODO: improve this code block */
+                    setTimeout(() => list.scrollTop = list.scrollHeight, 100);
                     break;
 
                 default:
@@ -165,17 +103,38 @@ export class OrderList extends Component {
         }
     }
 
-    render() {
-        let className = classNames('p-orderlist p-component', this.props.className);
+    useUpdateEffect(() => {
+        if (reorderDirection.current) {
+            updateListScroll();
+            reorderDirection.current = null;
+        }
+    });
 
-        return (
-            <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
-                <OrderListControls value={this.props.value} selection={this.state.selection} onReorder={this.onReorder} dataKey={this.props.dataKey} />
-                <OrderListSubList ref={(el) => this.subList = el} value={this.props.value} selection={this.state.selection} onItemClick={this.onItemClick} onItemKeyDown={this.onItemKeyDown}
-                    itemTemplate={this.props.itemTemplate} header={this.props.header} listStyle={this.props.listStyle} dataKey={this.props.dataKey}
-                    dragdrop={this.props.dragdrop} onDragStart={this.onDragStart} onDragEnter={this.onDragEnter} onDragEnd={this.onDragEnd} onDragLeave={this.onDragEnter} onDrop={this.onDrop}
-                    onChange={this.props.onChange} tabIndex={this.props.tabIndex} />
-            </div>
-        );
-    }
+    const otherProps = ObjectUtils.findDiffKeys(props, OrderList.defaultProps);
+    const className = classNames('p-orderlist p-component', props.className);
+
+    return (
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+            <OrderListControls value={props.value} selection={selectionState} onReorder={onReorder} dataKey={props.dataKey} />
+            <OrderListSubList value={props.value} selection={selectionState} onItemClick={onItemClick} onItemKeyDown={onItemKeyDown}
+                itemTemplate={props.itemTemplate} header={props.header} listStyle={props.listStyle} dataKey={props.dataKey}
+                dragdrop={props.dragdrop} onChange={props.onChange} tabIndex={props.tabIndex} />
+        </div>
+    )
+}));
+
+OrderList.displayName = 'OrderList';
+OrderList.defaultProps = {
+    __TYPE: 'OrderList',
+    id: null,
+    value: null,
+    header: null,
+    style: null,
+    className: null,
+    listStyle: null,
+    dragdrop: false,
+    tabIndex: 0,
+    dataKey: null,
+    onChange: null,
+    itemTemplate: null
 }

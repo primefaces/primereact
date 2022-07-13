@@ -16,12 +16,17 @@ export interface InplaceProps {
     onOpen?(event: React.MouseEvent<HTMLElement>): void;
     onClose?(event: React.MouseEvent<HTMLElement>): void;
     onToggle?(e: InplaceToggleParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Inplace extends React.Component<InplaceProps, any> { }
 
 // tslint:disable-next-line:max-classes-per-file
-export declare class InplaceDisplay extends React.Component { }
+export declare class InplaceDisplay extends React.Component {
+    children?: React.ReactNode;
+}
 
 // tslint:disable-next-line:max-classes-per-file
-export declare class InplaceContent extends React.Component { }
+export declare class InplaceContent extends React.Component {
+    children?: React.ReactNode;
+}

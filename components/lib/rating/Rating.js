@@ -1,55 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { classNames } from '../utils/Utils';
-import { tip } from '../tooltip/Tooltip';
+import * as React from 'react';
+import { Tooltip } from '../tooltip/Tooltip';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
-export class Rating extends Component {
+export const Rating = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
+    const enabled = !props.disabled && !props.readOnly;
+    const tabIndex = enabled ? 0 : null;
 
-    static defaultProps = {
-        id: null,
-        value: null,
-        disabled: false,
-        readOnly: false,
-        stars: 5,
-        cancel: true,
-        style: null,
-        className: null,
-        tooltip: null,
-        tooltipOptions: null,
-        onChange: null
-    }
-
-    static propTypes = {
-        id: PropTypes.string,
-        value: PropTypes.number,
-        disabled: PropTypes.bool,
-        readOnly: PropTypes.bool,
-        stars: PropTypes.number,
-        cancel: PropTypes.bool,
-        style: PropTypes.object,
-        className: PropTypes.string,
-        tooltip: PropTypes.string,
-        tooltipOptions: PropTypes.object,
-        onChange: PropTypes.func
-    }
-
-    constructor(props) {
-        super(props);
-        this.clear = this.clear.bind(this);
-        this.onStarKeyDown = this.onStarKeyDown.bind(this);
-        this.onCancelKeyDown = this.onCancelKeyDown.bind(this);
-    }
-
-    rate(event, i) {
-        if (!this.props.readOnly && !this.props.disabled && this.props.onChange) {
-            this.props.onChange({
+    const rate = (event, i) => {
+        if (enabled && props.onChange) {
+            props.onChange({
                 originalEvent: event,
                 value: i,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
+                    name: props.name,
+                    id: props.id,
                     value: i
                 }
             });
@@ -58,16 +25,16 @@ export class Rating extends Component {
         event.preventDefault();
     }
 
-    clear(event) {
-        if (!this.props.readOnly && !this.props.disabled && this.props.onChange) {
-            this.props.onChange({
+    const clear = (event) => {
+        if (enabled && props.onChange) {
+            props.onChange({
                 originalEvent: event,
                 value: null,
-                stopPropagation : () =>{},
-                preventDefault : () =>{},
+                stopPropagation: () => { },
+                preventDefault: () => { },
                 target: {
-                    name: this.props.name,
-                    id: this.props.id,
+                    name: props.name,
+                    id: props.id,
                     value: null
                 }
             });
@@ -76,103 +43,71 @@ export class Rating extends Component {
         event.preventDefault();
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextProps.value === this.props.value && nextProps.disabled === this.props.disabled) {
-            return false;
-        }
-
-        return true;
-    }
-
-    onStarKeyDown(event, value) {
+    const onStarKeyDown = (event, value) => {
         if (event.key === 'Enter') {
-            this.rate(event, value);
+            rate(event, value);
         }
     }
 
-    onCancelKeyDown(event) {
+    const onCancelKeyDown = (event) => {
         if (event.key === 'Enter') {
-            this.clear(event);
+            clear(event);
         }
     }
 
-    getFocusIndex() {
-        return (this.props.disabled || this.props.readOnly) ? null : 0;
-    }
-
-    componentDidMount() {
-        if (this.props.tooltip) {
-            this.renderTooltip();
-        }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
-            if (this.tooltip)
-                this.tooltip.update({ content: this.props.tooltip, ...(this.props.tooltipOptions || {}) });
-            else
-                this.renderTooltip();
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.tooltip) {
-            this.tooltip.destroy();
-            this.tooltip = null;
-        }
-    }
-
-    renderTooltip() {
-        this.tooltip = tip({
-            target: this.element,
-            content: this.props.tooltip,
-            options: this.props.tooltipOptions
-        });
-    }
-
-    renderStars() {
-        let starsArray = [];
-        for (let i = 0; i < this.props.stars; i++) {
-            starsArray[i] = i + 1;
-        }
-
-        let stars = starsArray.map((value) => {
-            let iconClass = classNames('p-rating-icon', {
-                'pi pi-star': (!this.props.value || value > this.props.value),
-                'pi pi-star-fill': (value <= this.props.value)
+    const createStars = () => {
+        return Array.from({ length: props.stars }, (_, i) => i + 1).map((value) => {
+            const iconClassName = classNames('p-rating-icon', {
+                'pi pi-star': (!props.value || value > props.value),
+                'pi pi-star-fill': (value <= props.value)
             });
 
             return (
-                <span className={iconClass} onClick={(e) => this.rate(e, value)} key={value} tabIndex={this.getFocusIndex()} onKeyDown={(e) => this.onStarKeyDown(e, value)}></span>
-            );
+                <span className={iconClassName} onClick={(e) => rate(e, value)} key={value} tabIndex={tabIndex} onKeyDown={(e) => onStarKeyDown(e, value)}></span>
+            )
         });
-
-        return stars;
     }
 
-    renderCancelIcon() {
-        if (this.props.cancel) {
-            return (
-                <span className="p-rating-icon p-rating-cancel pi pi-ban" onClick={this.clear} tabIndex={this.getFocusIndex()}   onKeyDown={this.onCancelKeyDown}></span>
-            );
+    const createCancelIcon = () => {
+        if (props.cancel) {
+            return <span className="p-rating-icon p-rating-cancel pi pi-ban" onClick={clear} tabIndex={tabIndex} onKeyDown={onCancelKeyDown}></span>
         }
 
         return null;
     }
 
-    render() {
-        let className = classNames('p-rating', {
-            'p-disabled': this.props.disabled,
-            'p-rating-readonly': this.props.readOnly
-        }, this.props.className);
-        let cancelIcon = this.renderCancelIcon();
-        let stars = this.renderStars();
+    const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+    const otherProps = ObjectUtils.findDiffKeys(props, Rating.defaultProps);
+    const className = classNames('p-rating', {
+        'p-disabled': props.disabled,
+        'p-readonly': props.readOnly
+    }, props.className);
+    const cancelIcon = createCancelIcon();
+    const stars = createStars();
 
-        return (
-            <div ref={(el) => this.element = el} id={this.props.id} className={className} style={this.props.style}>
+    return (
+        <>
+            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
                 {cancelIcon}
                 {stars}
             </div>
-        );
-    }
+            {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+        </>
+    )
+}));
+
+Rating.displayName = 'Rating';
+Rating.defaultProps = {
+    __TYPE: 'Rating',
+    id: null,
+    value: null,
+    disabled: false,
+    readOnly: false,
+    stars: 5,
+    cancel: true,
+    style: null,
+    className: null,
+    tooltip: null,
+    tooltipOptions: null,
+    onChange: null
 }

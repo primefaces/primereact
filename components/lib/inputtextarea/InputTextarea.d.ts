@@ -5,6 +5,7 @@ export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.T
     autoResize?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
+    children?: React.ReactNode;
 }
 
 export declare class InputTextarea extends React.Component<InputTextareaProps, any> { }

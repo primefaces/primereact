@@ -228,6 +228,18 @@ const DataTableProps = [
         description: 'Determines whether the cell editor will be opened when clicking to select any row on Selection and Cell Edit modes.'
     },
     {
+        name: 'selectionPageOnly',
+        type: 'boolean',
+        default: 'false',
+        description: 'When enabled with paginator and checkbox selection mode, the select all checkbox in the header will select all rows on the current page.'
+    },
+    {
+        name: 'selectionAutoFocus',
+        type: 'boolean',
+        default: 'true',
+        description: 'When a selectable row is clicked on RadioButton and Checkbox selection, it automatically decides whether to focus on elements such as checkbox or radio.'
+    },
+    {
         name: 'headerColumnGroup',
         type: 'ColumnGroup',
         default: 'null',
@@ -375,13 +387,13 @@ const DataTableProps = [
         name: 'rowClassName',
         type: 'function',
         default: 'null',
-        description: `Function that takes the row data and <br/> returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.`
+        description: `Function that takes the row data and <br/> returns an object in "&#123;'styleclass' : condition&#125;" format to define a class name for a particular row.`
     },
     {
         name: 'cellClassName',
         type: 'function',
         default: 'null',
-        description: `Function that takes the cell data and <br/> returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.`
+        description: `Function that takes the cell data and <br/> returns an object in "&#123;'styleclass' : condition&#125;" format to define a class name for a particular cell.`
     },
     {
         name: 'rowGroupHeaderTemplate',
@@ -478,6 +490,12 @@ const DataTableProps = [
         type: 'function',
         default: 'null',
         description: 'Function that returns a boolean by passing the row data to decide if the row reorder element should be displayed per row.'
+    },
+    {
+        name: 'isDataSelectable',
+        type: 'function',
+        default: 'null',
+        description: 'Function that returns a boolean to decide whether the data should be selectable.'
     },
     {
         name: 'customSaveState',

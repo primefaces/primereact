@@ -1,375 +1,277 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames, ZIndexUtils, ConnectedOverlayScrollHandler, IconUtils } from '../utils/Utils';
+import * as React from 'react';
+import PrimeReact, { localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import PrimeReact, { localeOption } from '../api/Api';
+import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
-export function confirmPopup(props) {
-    let appendTo = props.appendTo || document.body;
+export const confirmPopup = (props = {}) => {
+    props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
+    props.visible && OverlayService.emit('confirm-popup', props);
 
-    let confirmPopupWrapper = document.createDocumentFragment();
-    DomHandler.appendChild(confirmPopupWrapper, appendTo);
-
-    props = {...props, ...{visible: props.visible === undefined ? true : props.visible}};
-
-    let confirmPopupEl = React.createElement(ConfirmPopup, props);
-    ReactDOM.render(confirmPopupEl, confirmPopupWrapper);
-
-    let updateConfirmPopup = (newProps) => {
-        props = { ...props, ...newProps };
-        ReactDOM.render(React.cloneElement(confirmPopupEl, props), confirmPopupWrapper);
-    };
-
-    return {
-        _destroy: () => {
-            ReactDOM.unmountComponentAtNode(confirmPopupWrapper);
-        },
-        show: () => {
-            updateConfirmPopup({ visible: true, onHide: () => {
-                updateConfirmPopup({ visible: false }); // reset
-            }});
-        },
-        hide: () => {
-            updateConfirmPopup({ visible: false });
-        },
-        update: (newProps) => {
-            updateConfirmPopup(newProps);
-        }
+    const show = (updatedProps = {}) => {
+        OverlayService.emit('confirm-popup', { ...props, ...updatedProps, ...{ visible: true } });
     }
+
+    const hide = () => {
+        OverlayService.emit('confirm-popup', { visible: false });
+    }
+
+    return [show, hide];
 }
 
-export class ConfirmPopup extends Component {
+export const ConfirmPopup = React.memo(React.forwardRef((props, ref) => {
+    const [visibleState, setVisibleState] = React.useState(props.visible);
+    const [reshowState, setReshowState] = React.useState(false);
+    const overlayRef = React.useRef(null);
+    const acceptBtnRef = React.useRef(null);
+    const isPanelClicked = React.useRef(false);
+    const overlayEventListener = React.useRef(null);
+    const confirmProps = React.useRef(null);
+    const getCurrentProps = () => confirmProps.current || props;
+    const getPropValue = (key) => (confirmProps.current || props)[key];
+    const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
 
-    static defaultProps = {
-        target: null,
-        visible: false,
-        message: null,
-        rejectLabel: null,
-        acceptLabel: null,
-        icon: null,
-        rejectIcon: null,
-        acceptIcon: null,
-        rejectClassName: null,
-        acceptClassName: null,
-        className: null,
-        style: null,
-        appendTo: null,
-        dismissable: true,
-        footer: null,
-        onShow: null,
-        onHide: null,
-        accept: null,
-        reject: null,
-        transitionOptions: null
-    }
+    const acceptLabel = getPropValue('acceptLabel') || localeOption('accept');
+    const rejectLabel = getPropValue('rejectLabel') || localeOption('reject');
 
-    static propTypes = {
-        target: PropTypes.any,
-        visible: PropTypes.bool,
-        message: PropTypes.any,
-        rejectLabel: PropTypes.string,
-        acceptLabel: PropTypes.string,
-        icon: PropTypes.any,
-        rejectIcon: PropTypes.any,
-        acceptIcon: PropTypes.any,
-        rejectClassName: PropTypes.string,
-        acceptClassName: PropTypes.string,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        appendTo: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-        dismissable: PropTypes.bool,
-        footer: PropTypes.any,
-        onShow: PropTypes.func,
-        onHide: PropTypes.func,
-        accept: PropTypes.func,
-        reject: PropTypes.func,
-        transitionOptions: PropTypes.object
-    }
+    const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
+        target: getPropValue('target'), overlay: overlayRef, listener: (event, { type, valid }) => {
+            if (valid) {
+                (type === 'outside') ? !isPanelClicked.current && hide() : hide();
+            }
 
-    constructor(props) {
-        super(props);
+            isPanelClicked.current = false;
+        }, when: visibleState
+    });
 
-        this.state = {
-            visible: false
-        };
-
-        this.reject = this.reject.bind(this);
-        this.accept = this.accept.bind(this);
-        this.hide = this.hide.bind(this);
-        this.onCloseClick = this.onCloseClick.bind(this);
-        this.onPanelClick = this.onPanelClick.bind(this);
-        this.onEnter = this.onEnter.bind(this);
-        this.onEntered = this.onEntered.bind(this);
-        this.onExit = this.onExit.bind(this);
-        this.onExited = this.onExited.bind(this);
-
-        this.overlayRef = React.createRef();
-        this.acceptBtnRef = React.createRef();
-    }
-
-    acceptLabel() {
-        return this.props.acceptLabel || localeOption('accept');
-    }
-
-    rejectLabel() {
-        return this.props.rejectLabel || localeOption('reject');
-    }
-
-    bindDocumentClickListener() {
-        if(!this.documentClickListener && this.props.dismissable) {
-            this.documentClickListener = (event) => {
-                if (!this.isPanelClicked && this.isOutsideClicked(event.target)) {
-                    this.hide();
-                }
-
-                this.isPanelClicked = false;
-            };
-
-            document.addEventListener('click', this.documentClickListener);
-        }
-    }
-
-    unbindDocumentClickListener() {
-        if(this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-            this.documentClickListener = null;
-        }
-    }
-
-    bindScrollListener() {
-        if (!this.scrollHandler) {
-            this.scrollHandler = new ConnectedOverlayScrollHandler(this.props.target, () => {
-                if (this.state.visible) {
-                    this.hide();
-                }
-            });
-        }
-
-        this.scrollHandler.bindScrollListener();
-    }
-
-    unbindScrollListener() {
-        if (this.scrollHandler) {
-            this.scrollHandler.unbindScrollListener();
-        }
-    }
-
-    bindResizeListener() {
-        if (!this.resizeListener) {
-            this.resizeListener = () => {
-                if (this.state.visible && !DomHandler.isTouchDevice()) {
-                    this.hide();
-                }
-            };
-            window.addEventListener('resize', this.resizeListener);
-        }
-    }
-
-    unbindResizeListener() {
-        if (this.resizeListener) {
-            window.removeEventListener('resize', this.resizeListener);
-            this.resizeListener = null;
-        }
-    }
-
-    isOutsideClicked(target) {
-        return this.overlayRef && this.overlayRef.current && !(this.overlayRef.current.isSameNode(target) || this.overlayRef.current.contains(target));
-    }
-
-    onCloseClick(event) {
-        this.hide();
-
-        event.preventDefault();
-    }
-
-    onPanelClick(event) {
-        this.isPanelClicked = true;
+    const onPanelClick = (event) => {
+        isPanelClicked.current = true;
 
         OverlayService.emit('overlay-click', {
             originalEvent: event,
-            target: this.props.target
+            target: getPropValue('target')
         });
     }
 
-    accept() {
-        if (this.props.accept) {
-            this.props.accept();
+    const accept = () => {
+        callbackFromProp('accept');
+        hide('accept');
+    }
+
+    const reject = () => {
+        callbackFromProp('reject');
+        hide('reject');
+    }
+
+    const show = () => {
+        setVisibleState(true);
+        setReshowState(false);
+
+        overlayEventListener.current = (e) => {
+            !isOutsideClicked(e.target) && (isPanelClicked.current = true);
         }
 
-        this.hide('accept');
+        OverlayService.on('overlay-click', overlayEventListener.current);
     }
 
-    reject() {
-        if (this.props.reject) {
-            this.props.reject();
+    const hide = (result) => {
+        setVisibleState(false);
+        OverlayService.off('overlay-click', overlayEventListener.current);
+        overlayEventListener.current = null;
+        callbackFromProp('onHide', result);
+    }
+
+    const onEnter = () => {
+        ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+        align();
+    }
+
+    const onEntered = () => {
+        bindOverlayListener();
+
+        if (acceptBtnRef.current) {
+            acceptBtnRef.current.focus();
         }
 
-        this.hide('reject');
+        callbackFromProp('onShow');
     }
 
-    show() {
-        this.setState({ visible: true }, () => {
-            this.overlayEventListener = (e) => {
-                if (!this.isOutsideClicked(e.target)) {
-                    this.isPanelClicked = true;
-                }
-            };
-
-            OverlayService.on('overlay-click', this.overlayEventListener);
-        });
+    const onExit = () => {
+        unbindOverlayListener();
     }
 
-    hide(result) {
-        this.setState({ visible: false }, () => {
-            OverlayService.off('overlay-click', this.overlayEventListener);
-            this.overlayEventListener = null;
-
-            if (this.props.onHide) {
-                this.props.onHide(result);
-            }
-        });
+    const onExited = () => {
+        ZIndexUtils.clear(overlayRef.current);
+        isPanelClicked.current = false;
     }
 
-    onEnter() {
-        ZIndexUtils.set('overlay', this.overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
-        this.align();
-    }
+    const align = () => {
+        if (getPropValue('target')) {
+            DomHandler.absolutePosition(overlayRef.current, getPropValue('target'));
 
-    onEntered() {
-        this.bindDocumentClickListener();
-        this.bindScrollListener();
-        this.bindResizeListener();
-
-        if (this.acceptBtnRef && this.acceptBtnRef.current) {
-            this.acceptBtnRef.current.focus();
-        }
-
-        this.props.onShow && this.props.onShow();
-    }
-
-    onExit() {
-        this.unbindDocumentClickListener();
-        this.unbindScrollListener();
-        this.unbindResizeListener();
-    }
-
-    onExited() {
-        ZIndexUtils.clear(this.overlayRef.current);
-    }
-
-    align() {
-        if (this.props.target) {
-            DomHandler.absolutePosition(this.overlayRef.current, this.props.target);
-
-            const containerOffset = DomHandler.getOffset(this.overlayRef.current);
-            const targetOffset = DomHandler.getOffset(this.props.target);
+            const containerOffset = DomHandler.getOffset(overlayRef.current);
+            const targetOffset = DomHandler.getOffset(getPropValue('target'));
             let arrowLeft = 0;
 
             if (containerOffset.left < targetOffset.left) {
                 arrowLeft = targetOffset.left - containerOffset.left;
             }
-            this.overlayRef.current.style.setProperty('--overlayArrowLeft', `${arrowLeft}px`);
+            overlayRef.current.style.setProperty('--overlayArrowLeft', `${arrowLeft}px`);
 
             if (containerOffset.top < targetOffset.top) {
-                DomHandler.addClass(this.overlayRef.current, 'p-confirm-popup-flipped');
+                DomHandler.addClass(overlayRef.current, 'p-confirm-popup-flipped');
             }
         }
     }
 
-    componentDidMount() {
-        if (this.props.visible) {
-            this.setState({ visible: true });
+    const isOutsideClicked = (target) => {
+        return overlayRef && overlayRef.current && !(overlayRef.current.isSameNode(target) || overlayRef.current.contains(target));
+    }
+
+    const confirm = (updatedProps) => {
+        if (updatedProps.tagKey === props.tagKey) {
+            const isVisibleChanged = visibleState !== updatedProps.visible;
+            const targetChanged = getPropValue('target') !== updatedProps.target;
+
+            if (targetChanged && !props.target) {
+                hide();
+                confirmProps.current = updatedProps;
+                setReshowState(true);
+            }
+            else if (isVisibleChanged) {
+                confirmProps.current = updatedProps;
+                updatedProps.visible ? show() : hide();
+            }
         }
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.visible !== this.props.visible) {
-            this.setState({ visible: this.props.visible });
-        }
-    }
+    React.useEffect(() => {
+        props.visible ? show() : hide();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.visible]);
 
-    componentWillUnmount() {
-        this.unbindDocumentClickListener();
-        this.unbindResizeListener();
-        if (this.scrollHandler) {
-            this.scrollHandler.destroy();
-            this.scrollHandler = null;
+    React.useEffect(() => {
+        if (!props.target && !props.message) {
+            OverlayService.on('confirm-popup', confirm);
         }
 
-        if (this.overlayEventListener) {
-            OverlayService.off('overlay-click', this.overlayEventListener);
-            this.overlayEventListener = null;
+        return () => {
+            OverlayService.off('confirm-popup', confirm);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.target]);
+
+    useUpdateEffect(() => {
+        reshowState && show();
+    }, [reshowState]);
+
+    useUnmountEffect(() => {
+        if (overlayEventListener.current) {
+            OverlayService.off('overlay-click', overlayEventListener.current);
+            overlayEventListener.current = null;
         }
 
-        ZIndexUtils.clear(this.overlayRef.current);
-    }
+        OverlayService.off('confirm-popup', confirm);
+        ZIndexUtils.clear(overlayRef.current);
+    });
 
-    renderContent() {
-        const message = ObjectUtils.getJSXElement(this.props.message, this.props);
+    React.useImperativeHandle(ref, () => ({
+        confirm,
+        ...props
+    }));
+
+    const createContent = () => {
+        const currentProps = getCurrentProps();
+        const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
+        const icon = IconUtils.getJSXIcon(getPropValue('icon'), { className: 'p-confirm-popup-icon' }, { props: currentProps });
 
         return (
             <div className="p-confirm-popup-content">
-                {IconUtils.getJSXIcon(this.props.icon, { className: 'p-confirm-popup-icon' }, { props: this.props })}
+                {icon}
                 <span className="p-confirm-popup-message">{message}</span>
             </div>
-        );
+        )
     }
 
-    renderFooter() {
-        const acceptClassName = classNames('p-confirm-popup-accept p-button-sm', this.props.acceptClassName);
+    const createFooter = () => {
+        const acceptClassName = classNames('p-confirm-popup-accept p-button-sm', getPropValue('acceptClassName'));
         const rejectClassName = classNames('p-confirm-popup-reject p-button-sm', {
-            'p-button-text': !this.props.rejectClassName
-        }, this.props.rejectClassName);
+            'p-button-text': !getPropValue('rejectClassName')
+        }, getPropValue('rejectClassName'));
 
         const content = (
             <div className="p-confirm-popup-footer">
-                <Button label={this.rejectLabel()} icon={this.props.rejectIcon} className={rejectClassName} onClick={this.reject} />
-                <Button ref={this.acceptBtnRef} label={this.acceptLabel()} icon={this.props.acceptIcon} className={acceptClassName} onClick={this.accept} />
+                <Button label={rejectLabel} icon={getPropValue('rejectIcon')} className={rejectClassName} onClick={reject} />
+                <Button ref={acceptBtnRef} label={acceptLabel} icon={getPropValue('acceptIcon')} className={acceptClassName} onClick={accept} />
             </div>
         )
 
-        if (this.props.footer) {
+        if (getPropValue('footer')) {
             const defaultContentOptions = {
-                accept: this.accept,
-                reject: this.reject,
+                accept,
+                reject,
                 className: 'p-confirm-popup-footer',
                 acceptClassName,
                 rejectClassName,
-                acceptLabel: this.acceptLabel(),
-                rejectLabel: this.rejectLabel(),
+                acceptLabel,
+                rejectLabel,
                 element: content,
-                props: this.props
+                props: getCurrentProps()
             };
 
-            return ObjectUtils.getJSXElement(this.props.footer, defaultContentOptions);
+            return ObjectUtils.getJSXElement(getPropValue('footer'), defaultContentOptions);
         }
 
         return content;
     }
 
-    renderElement() {
-        const className = classNames('p-confirm-popup p-component', this.props.className);
-        const content = this.renderContent();
-        const footer = this.renderFooter();
+    const createElement = () => {
+        const otherProps = ObjectUtils.findDiffKeys(props, ConfirmPopup.defaultProps);
+        const className = classNames('p-confirm-popup p-component', getPropValue('className'));
+        const content = createContent();
+        const footer = createFooter();
 
         return (
-            <CSSTransition nodeRef={this.overlayRef} classNames="p-connected-overlay" in={this.state.visible} timeout={{ enter: 120, exit: 100 }} options={this.props.transitionOptions}
-                unmountOnExit onEnter={this.onEnter} onEntered={this.onEntered} onExit={this.onExit} onExited={this.onExited}>
-                <div ref={this.overlayRef} id={this.props.id} className={className} style={this.props.style} onClick={this.onPanelClick}>
+            <CSSTransition nodeRef={overlayRef} classNames="p-connected-overlay" in={visibleState} timeout={{ enter: 120, exit: 100 }} options={getPropValue('transitionOptions')}
+                unmountOnExit onEnter={onEnter} onEntered={onEntered} onExit={onExit} onExited={onExited}>
+                <div ref={overlayRef} id={getPropValue('id')} className={className} style={getPropValue('style')} {...otherProps} onClick={onPanelClick}>
                     {content}
                     {footer}
                 </div>
             </CSSTransition>
-        );
+        )
     }
 
-    render() {
-        let element = this.renderElement();
+    const element = createElement();
 
-        return <Portal element={element} appendTo={this.props.appendTo} visible={this.props.visible} />;
-    }
+    return <Portal element={element} appendTo={getPropValue('appendTo')} visible={getPropValue('visible')} />
+}));
+
+ConfirmPopup.displayName = 'ConfirmPopup';
+ConfirmPopup.defaultProps = {
+    __TYPE: 'ConfirmPopup',
+    tagKey: undefined,
+    target: null,
+    visible: false,
+    message: null,
+    rejectLabel: null,
+    acceptLabel: null,
+    icon: null,
+    rejectIcon: null,
+    acceptIcon: null,
+    rejectClassName: null,
+    acceptClassName: null,
+    className: null,
+    style: null,
+    appendTo: null,
+    dismissable: true,
+    footer: null,
+    onShow: null,
+    onHide: null,
+    accept: null,
+    reject: null,
+    transitionOptions: null
 }

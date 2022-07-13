@@ -6,7 +6,8 @@ export interface ProgressSpinnerProps {
     className?: string;
     strokeWidth?: string;
     fill?: string;
-    animationDuration?: string
+    animationDuration?: string;
+    children?: React.ReactNode;
 }
 
 export declare class ProgressSpinner extends React.Component<ProgressSpinnerProps, any> { }

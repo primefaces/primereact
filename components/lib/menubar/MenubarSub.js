@@ -1,75 +1,36 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import * as React from 'react';
+import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
-export class MenubarSubComponent extends Component {
+export const MenubarSub = React.memo(React.forwardRef((props, ref) => {
+    const [activeItemState, setActiveItemState] = React.useState(null);
 
-    static defaultProps = {
-        model: null,
-        root: false,
-        className: null,
-        popup: false,
-        onLeafClick: null,
-        onKeyDown: null,
-        parentActive: false,
-        mobileActive: false,
-        forwardRef: null
-    };
-
-    static propTypes = {
-        model: PropTypes.any,
-        root: PropTypes.bool,
-        className: PropTypes.string,
-        popup: PropTypes.bool,
-        onLeafClick: PropTypes.func,
-        onKeyDown: PropTypes.func,
-        parentActive: PropTypes.bool,
-        mobileActive: PropTypes.bool,
-        forwardRef: PropTypes.any
-    };
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            activeItem: null
-        };
-
-        this.onLeafClick = this.onLeafClick.bind(this);
-        this.onChildItemKeyDown = this.onChildItemKeyDown.bind(this);
-    }
-
-    getElementRef(el) {
-        this.element = el;
-
-        if (this.props.forwardRef) {
-            return this.props.forwardRef(el);
+    const [bindDocumentClickListener,] = useEventListener({
+        type: 'click', listener: (event) => {
+            if (ref && ref.current && !ref.current.contains(event.target)) {
+                setActiveItemState(null);
+            }
         }
+    });
 
-        return this.element;
-    }
-
-    onItemMouseEnter(event, item) {
-        if (item.disabled || this.props.mobileActive) {
+    const onItemMouseEnter = (event, item) => {
+        if (item.disabled || props.mobileActive) {
             event.preventDefault();
             return;
         }
 
-        if (this.props.root) {
-            if (this.state.activeItem || this.props.popup) {
-                this.setState({
-                    activeItem: item
-                });
+        if (props.root) {
+            if (activeItemState || props.popup) {
+                setActiveItemState(item);
             }
         }
         else {
-            this.setState({
-                activeItem: item
-            });
+            setActiveItemState(item);
         }
     }
 
-    onItemClick(event, item) {
+    const onItemClick = (event, item) => {
         if (item.disabled) {
             event.preventDefault();
             return;
@@ -86,213 +47,146 @@ export class MenubarSubComponent extends Component {
             });
         }
 
-
-        if (item.items) {
-            if (this.state.activeItem && item === this.state.activeItem) {
-                this.setState({
-                    activeItem: null
-                });
-            }
-            else {
-                this.setState({
-                    activeItem: item
-                });
-            }
-        }
-        else {
-            this.onLeafClick();
-        }
+        if (item.items)
+            (activeItemState && item === activeItemState) ? setActiveItemState(null) : setActiveItemState(item);
+        else
+            onLeafClick();
     }
 
-    onItemKeyDown(event, item) {
-        let listItem = event.currentTarget.parentElement;
+    const onItemKeyDown = (event, item) => {
+        const listItem = event.currentTarget.parentElement;
 
-        switch(event.which) {
+        switch (event.which) {
             //down
             case 40:
-                if (this.props.root) {
-                    if (item.items) {
-                        this.expandSubmenu(item, listItem);
-                    }
-                }
-                else {
-                    this.navigateToNextItem(listItem);
-                }
+                if (props.root)
+                    item.items && expandSubmenu(item, listItem);
+                else
+                    navigateToNextItem(listItem);
 
                 event.preventDefault();
-            break;
+                break;
 
             //up
             case 38:
-                if (!this.props.root) {
-                    this.navigateToPrevItem(listItem);
-                }
-
+                (!props.root) && navigateToPrevItem(listItem);
                 event.preventDefault();
-            break;
+                break;
 
             //right
             case 39:
-                if (this.props.root) {
-                    let nextItem = this.findNextItem(listItem);
-                    if (nextItem) {
-                        nextItem.children[0].focus();
-                    }
+                if (props.root) {
+                    const nextItem = findNextItem(listItem);
+                    nextItem && nextItem.children[0].focus();
                 }
                 else {
-                    if (item.items) {
-                        this.expandSubmenu(item, listItem);
-                    }
+                    item.items && expandSubmenu(item, listItem);
                 }
 
                 event.preventDefault();
-            break;
+                break;
 
             //left
             case 37:
-                if (this.props.root) {
-                    this.navigateToPrevItem(listItem);
-                }
-
+                props.root && navigateToPrevItem(listItem);
                 event.preventDefault();
-            break;
+                break;
 
             default:
-            break;
+                break;
         }
 
-        if (this.props.onKeyDown) {
-            this.props.onKeyDown(event, listItem);
-        }
+        props.onKeyDown && props.onKeyDown(event, listItem);
     }
 
-    onChildItemKeyDown(event, childListItem) {
-        if (this.props.root) {
+    const onChildItemKeyDown = (event, childListItem) => {
+        if (props.root) {
             //up
             if (event.which === 38 && childListItem.previousElementSibling == null) {
-                this.collapseMenu(childListItem);
+                collapseMenu(childListItem);
             }
         }
         else {
             //left
             if (event.which === 37) {
-                this.collapseMenu(childListItem);
+                collapseMenu(childListItem);
             }
         }
     }
 
-    expandSubmenu(item, listItem) {
-        this.setState({
-            activeItem: item
-        });
+    const expandSubmenu = (item, listItem) => {
+        setActiveItemState(item);
 
         setTimeout(() => {
             listItem.children[1].children[0].children[0].focus();
         }, 50);
     }
 
-    collapseMenu(listItem) {
-        this.setState({activeItem: null});
+    const collapseMenu = (listItem) => {
+        setActiveItemState(null);
         listItem.parentElement.previousElementSibling.focus();
     }
 
-    navigateToNextItem(listItem) {
-        let nextItem = this.findNextItem(listItem);
-        if (nextItem) {
-            nextItem.children[0].focus();
-        }
+    const navigateToNextItem = (listItem) => {
+        const nextItem = findNextItem(listItem);
+        nextItem && nextItem.children[0].focus();
     }
 
-    navigateToPrevItem(listItem) {
-        let prevItem = this.findPrevItem(listItem);
-        if (prevItem) {
-            prevItem.children[0].focus();
-        }
+    const navigateToPrevItem = (listItem) => {
+        const prevItem = findPrevItem(listItem);
+        prevItem && prevItem.children[0].focus();
     }
 
-    findNextItem(item) {
-        let nextItem = item.nextElementSibling;
-
-        if (nextItem)
-            return DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? this.findNextItem(nextItem) : nextItem;
-        else
-            return null;
+    const findNextItem = (item) => {
+        const nextItem = item.nextElementSibling;
+        return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? findNextItem(nextItem) : nextItem) : null;
     }
 
-    findPrevItem(item) {
-        let prevItem = item.previousElementSibling;
-
-        if (prevItem)
-            return DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? this.findPrevItem(prevItem) : prevItem;
-        else
-            return null;
+    const findPrevItem = (item) => {
+        const prevItem = item.previousElementSibling;
+        return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
     }
 
-    onLeafClick() {
-        this.setState({
-            activeItem: null
-        });
-
-        if (this.props.onLeafClick) {
-            this.props.onLeafClick();
-        }
+    const onLeafClick = () => {
+        setActiveItemState(null);
+        props.onLeafClick && props.onLeafClick();
     }
 
-    componentDidMount() {
-        if (!this.documentClickListener) {
-            this.documentClickListener = (event) => {
-                if (this.element && !this.element.contains(event.target)) {
-                    this.setState({activeItem: null});
-                }
-            };
+    useMountEffect(() => {
+        bindDocumentClickListener();
+    });
 
-            document.addEventListener('click', this.documentClickListener);
-        }
+    useUpdateEffect(() => {
+        !props.parentActive && setActiveItemState(null);
+    }, [props.parentActive]);
+
+    const createSeparator = (index) => {
+        const key = 'separator_' + index;
+
+        return <li key={key} className="p-menu-separator" role="separator"></li>
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.parentActive && !this.props.parentActive) {
-            this.setState({
-                activeItem: null
-            });
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.documentClickListener) {
-            document.removeEventListener('click', this.documentClickListener);
-            this.documentClickListener = null;
-        }
-    }
-
-    renderSeparator(index) {
-        return (
-            <li key={'separator_' + index} className="p-menu-separator" role="separator"></li>
-        );
-    }
-
-    renderSubmenu(item) {
+    const createSubmenu = (item) => {
         if (item.items) {
-            return (
-                <MenubarSub model={item.items} mobileActive={this.props.mobileActive} onLeafClick={this.onLeafClick} onKeyDown={this.onChildItemKeyDown} parentActive={item === this.state.activeItem} />
-            );
+            return <MenubarSub menuProps={props.menuProps} model={item.items} mobileActive={props.mobileActive} onLeafClick={onLeafClick} onKeyDown={onChildItemKeyDown} parentActive={item === activeItemState} />
         }
 
         return null;
     }
 
-    renderMenuitem(item, index) {
-        const className = classNames('p-menuitem', {'p-menuitem-active': this.state.activeItem === item}, item.className);
-        const linkClassName = classNames('p-menuitem-link', {'p-disabled': item.disabled});
+    const createMenuitem = (item, index) => {
+        const key = item.label + '_' + index;
+        const className = classNames('p-menuitem', { 'p-menuitem-active': activeItemState === item }, item.className);
+        const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
         const iconClassName = classNames('p-menuitem-icon', item.icon);
-        const submenuIconClassName = classNames('p-submenu-icon pi', {'pi-angle-down': this.props.root, 'pi-angle-right': !this.props.root});
-        const icon = item.icon && <span className={iconClassName}></span>;
+        const submenuIconClassName = classNames('p-submenu-icon pi', { 'pi-angle-down': props.root, 'pi-angle-right': !props.root });
+        const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
-        const submenu = this.renderSubmenu(item);
+        const submenu = createSubmenu(item);
         let content = (
             <a href={item.url || '#'} role="menuitem" className={linkClassName} target={item.target} aria-haspopup={item.items != null}
-                onClick={(event) => this.onItemClick(event, item)} onKeyDown={(event) => this.onItemKeyDown(event, item)}>
+                onClick={(event) => onItemClick(event, item)} onKeyDown={(event) => onItemKeyDown(event, item)}>
                 {icon}
                 {label}
                 {submenuIcon}
@@ -302,56 +196,47 @@ export class MenubarSubComponent extends Component {
 
         if (item.template) {
             const defaultContentOptions = {
-                onClick: (event) => this.onItemClick(event, item),
-                onKeyDown: (event) => this.onItemKeyDown(event, item),
+                onClick: (event) => onItemClick(event, item),
+                onKeyDown: (event) => onItemKeyDown(event, item),
                 className: linkClassName,
                 labelClassName: 'p-menuitem-text',
                 iconClassName,
                 submenuIconClassName,
                 element: content,
-                props: this.props
+                props
             };
 
             content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
         }
 
         return (
-            <li key={item.label + '_' + index} role="none" className={className} style={item.style} onMouseEnter={(event) => this.onItemMouseEnter(event, item)}>
+            <li key={key} role="none" id={item.id} className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>
                 {content}
                 {submenu}
             </li>
-        );
+        )
     }
 
-    renderItem(item, index) {
-        if (item.separator)
-            return this.renderSeparator(index);
-        else
-            return this.renderMenuitem(item, index);
+    const createItem = (item, index) => {
+        return item.separator ? createSeparator(index) : createMenuitem(item, index);
     }
 
-    renderMenu() {
-        if (this.props.model) {
-            return (
-                this.props.model.map((item, index) => {
-                    return this.renderItem(item, index);
-                })
-            );
-        }
-
-        return null;
+    const createMenu = () => {
+        return props.model ? props.model.map(createItem) : null;
     }
 
-    render() {
-        const className = classNames({'p-submenu-list': !this.props.root, 'p-menubar-root-list': this.props.root});
-        const submenu = this.renderMenu();
+    const role = props.root ? 'menubar' : 'menu';
+    const className = classNames({
+        'p-submenu-list': !props.root,
+        'p-menubar-root-list': props.root
+    });
+    const submenu = createMenu();
 
-        return (
-            <ul ref={(el) => this.getElementRef(el)} className={className} role={this.props.root ? 'menubar' : 'menu'}>
-                {submenu}
-            </ul>
-        );
-    }
-}
+    return (
+        <ul ref={ref} className={className} role={role}>
+            {submenu}
+        </ul>
+    )
+}));
 
-export const MenubarSub = React.forwardRef((props, ref) => <MenubarSubComponent forwardRef={ref} {...props}/>);
+MenubarSub.displayName = 'MenubarSub';
