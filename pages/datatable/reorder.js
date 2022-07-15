@@ -56,7 +56,7 @@ const DataTableReorderDemo = () => {
                 <Toast ref={toast}></Toast>
 
                 <div className="card">
-                    <DataTable value={products} reorderableColumns onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
+                    <DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
                         <Column rowReorder style={{ width: '3em' }} />
                         {dynamicColumns}
                     </DataTable>
@@ -127,7 +127,7 @@ export class DataTableReorderDemo extends Component {
                 <Toast ref={(el) => { this.toast = el; }}></Toast>
 
                 <div className="card">
-                    <DataTable value={this.state.products} reorderableColumns onRowReorder={this.onRowReorder} onColReorder={this.onColReorder} responsiveLayout="scroll">
+                    <DataTable value={this.state.products} reorderableColumns reorderableRows onRowReorder={this.onRowReorder} onColReorder={this.onColReorder} responsiveLayout="scroll">
                         <Column rowReorder style={{width: '3em'}} />
                         {dynamicColumns}
                     </DataTable>
@@ -181,7 +181,7 @@ const DataTableReorderDemo = () => {
             <Toast ref={toast}></Toast>
 
             <div className="card">
-                <DataTable value={products} reorderableColumns onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
+                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
                     <Column rowReorder style={{width: '3em'}} />
                     {dynamicColumns}
                 </DataTable>
@@ -241,7 +241,7 @@ const DataTableReorderDemo = () => {
             <Toast ref={toast}></Toast>
 
             <div className="card">
-                <DataTable value={products} reorderableColumns onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
+                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
                     <Column rowReorder style={{width: '3em'}} />
                     {dynamicColumns}
                 </DataTable>
@@ -309,7 +309,7 @@ const DataTableReorderDemo = () => {
             <Toast ref={toast}></Toast>
 
             <div className="card">
-                <DataTable value={products} reorderableColumns onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
+                <DataTable value={products} reorderableColumns reorderableRows onRowReorder={onRowReorder} onColReorder={onColReorder} responsiveLayout="scroll">
                     <Column rowReorder style={{width: '3em'}} />
                     {dynamicColumns}
                 </DataTable>

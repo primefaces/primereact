@@ -282,6 +282,7 @@ export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.Input
     resizableColumns?: boolean;
     columnResizeMode?: DataTableColumnResizeModeType;
     reorderableColumns?: boolean;
+    reorderableRows?: boolean;
     filters?: DataTableFilterMeta;
     globalFilter?: DataTableGlobalFilterType;
     filterDelay?: number;

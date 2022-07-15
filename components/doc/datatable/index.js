@@ -3213,6 +3213,12 @@ export const DataTableStateDemo = () => {
                                     <td>When enabled, columns can be reordered using drag and drop.</td>
                                 </tr>
                                 <tr>
+                                    <td>reorderableRows</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When enabled, rows can be reordered using drag and drop.</td>
+                                </tr>
+                                <tr>
                                     <td>filters</td>
                                     <td>array</td>
                                     <td>null</td>
