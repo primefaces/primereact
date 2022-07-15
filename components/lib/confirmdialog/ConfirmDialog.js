@@ -72,7 +72,7 @@ export const ConfirmDialog = React.memo(React.forwardRef((props, ref) => {
     React.useEffect(() => {
         props.visible ? show() : hide();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.visible]); 
+    }, [props.visible]);
 
     React.useEffect(() => {
         if (!props.target && !props.message) {
@@ -153,7 +153,7 @@ ConfirmDialog.displayName = 'ConfirmDialog';
 ConfirmDialog.defaultProps = {
     __TYPE: 'ConfirmDialog',
     tagKey: undefined,
-    visible: false,
+    visible: undefined,
     message: null,
     rejectLabel: null,
     acceptLabel: null,
