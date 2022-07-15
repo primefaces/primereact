@@ -10,10 +10,7 @@ const PrimeReactChart = React.memo(React.forwardRef((props, ref) => {
     const canvasRef = React.useRef(null);
 
     const initChart = () => {
-        if (chartRef.current) {
-            chartRef.current.destroy();
-            chartRef.current = null;
-        }
+        destroyChart();
 
         const configuration = {
             type: props.type,
@@ -27,6 +24,7 @@ const PrimeReactChart = React.memo(React.forwardRef((props, ref) => {
         }
         else {
             import('chart.js/auto').then((module) => {
+                destroyChart();
                 if (module) {
                     if (module.default) {
                          // WebPack
@@ -38,6 +36,13 @@ const PrimeReactChart = React.memo(React.forwardRef((props, ref) => {
                 }
             });
         }    
+    }
+
+    const destroyChart = () => {
+        if (chartRef.current) {
+            chartRef.current.destroy();
+            chartRef.current = null;
+        }
     }
 
     React.useImperativeHandle(ref, () => ({
@@ -54,10 +59,7 @@ const PrimeReactChart = React.memo(React.forwardRef((props, ref) => {
     });
 
     useUnmountEffect(() => {
-        if (chartRef.current) {
-            chartRef.current.destroy();
-            chartRef.current = null;
-        }
+        destroyChart();
     });
 
     const otherProps = ObjectUtils.findDiffKeys(props, PrimeReactChart.defaultProps);
