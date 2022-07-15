@@ -2393,6 +2393,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     }, [inputRef, props.inputRef]);
 
     useMountEffect(() => {
+        let unbindMaskEvents = null;
         let viewDate = getViewDate(props.viewDate);
         validateDate(viewDate);
         setViewDateState(viewDate);
@@ -2412,7 +2413,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             }
         }
         else if (props.mask) {
-            mask(inputRef.current, {
+            unbindMaskEvents = mask(inputRef.current, {
                 mask: props.mask,
                 readOnly: props.readOnlyInput || props.disabled,
                 onChange: (e) => {
@@ -2422,11 +2423,15 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
                 onBlur: () => {
                     ignoreMaskChange.current = true;
                 }
-            });
+            }).unbindEvents;
         }
 
         if (props.value) {
             updateInputfield(props.value);
+        }
+
+        return () => {
+            props.mask && unbindMaskEvents();
         }
     });
 
