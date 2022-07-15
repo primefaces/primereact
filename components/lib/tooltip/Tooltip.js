@@ -14,6 +14,7 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
     const containerSize = React.useRef(null);
     const allowHide = React.useRef(true);
     const timeouts = React.useRef({});
+    const currentMouseEvent = React.useRef(null);
 
     const [bindWindowResizeListener, unbindWindowResizeListener] = useResizeListener({
         listener: (event) => {
@@ -104,6 +105,33 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
+    const updateTooltipState = (position) => {
+        updateText(currentTargetRef.current, () => {
+            const { pageX: x, pageY: y } = currentMouseEvent.current;
+
+            if (props.autoZIndex && !ZIndexUtils.get(elementRef.current)) {
+                ZIndexUtils.set('tooltip', elementRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['tooltip']);
+            }
+
+            elementRef.current.style.left = '';
+            elementRef.current.style.top = '';
+
+            // GitHub #2695 disable pointer events when autohiding
+            if (isAutoHide()) {
+                elementRef.current.style.pointerEvents = 'none';
+            }
+
+            if (isMouseTrack(currentTargetRef.current) && !containerSize.current) {
+                containerSize.current = {
+                    width: DomHandler.getOuterWidth(elementRef.current),
+                    height: DomHandler.getOuterHeight(elementRef.current)
+                };
+            }
+
+            align(currentTargetRef.current, { x, y }, position);
+        });
+    }
+
     const show = (e) => {
         currentTargetRef.current = e.currentTarget;
         const disabled = isDisabled(currentTargetRef.current);
@@ -113,30 +141,7 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
             return;
         }
 
-        const updateTooltipState = (position) => {
-            updateText(currentTargetRef.current, () => {
-                if (props.autoZIndex && !ZIndexUtils.get(elementRef.current)) {
-                    ZIndexUtils.set('tooltip', elementRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['tooltip']);
-                }
-
-                elementRef.current.style.left = '';
-                elementRef.current.style.top = '';
-
-                // GitHub #2695 disable pointer events when autohiding
-                if (isAutoHide()) {
-                    elementRef.current.style.pointerEvents = 'none';
-                }
-
-                if (isMouseTrack(currentTargetRef.current) && !containerSize.current) {
-                    containerSize.current = {
-                        width: DomHandler.getOuterWidth(elementRef.current),
-                        height: DomHandler.getOuterHeight(elementRef.current)
-                    };
-                }
-
-                align(currentTargetRef.current, { x: e.pageX, y: e.pageY }, position);
-            });
-        }
+        currentMouseEvent.current = e;
 
         if (visibleState) {
             applyDelay('updateDelay', updateTooltipState);
@@ -146,13 +151,7 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
             const success = sendCallback(props.onBeforeShow, { originalEvent: e, target: currentTargetRef.current });
             if (success) {
                 applyDelay('showDelay', () => {
-                    const position = getPosition(currentTargetRef.current);
-                    const classname = getTargetOption(currentTargetRef.current, 'classname');
-
                     setVisibleState(true);
-                    setPositionState(position);
-                    setClassNameState(classname);
-                    updateTooltipState(position);
                     sendCallback(props.onShow, { originalEvent: e, target: currentTargetRef.current });
                 });
             };
@@ -174,11 +173,6 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
                     DomHandler.removeClass(elementRef.current, 'p-tooltip-active');
 
                     setVisibleState(false);
-                    setPositionState(props.position);
-                    setClassNameState('');
-                    currentTargetRef.current = null;
-                    containerSize.current = null;
-                    allowHide.current = true;
                     sendCallback(props.onHide, { originalEvent: e, target: currentTargetRef.current });
                 });
             }
@@ -402,8 +396,21 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
 
     useUpdateEffect(() => {
         if (visibleState) {
+            const position = getPosition(currentTargetRef.current);
+            const classname = getTargetOption(currentTargetRef.current, 'classname');
+            setPositionState(position);
+            setClassNameState(classname);
+            updateTooltipState(position);
+
             bindWindowResizeListener();
             bindOverlayScrollListener();
+        }
+        else {
+            setPositionState(props.position);
+            setClassNameState('');
+            currentTargetRef.current = null;
+            containerSize.current = null;
+            allowHide.current = true;
         }
 
         return () => {
