@@ -125,6 +125,11 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
+    const resetFilter = () => {
+        setFilterValueState('');
+        props.onFilter && props.onFilter({ filter: '' });
+    }
+
     const updateModel = (event, value) => {
         if (props.onChange) {
             props.onChange({
@@ -255,7 +260,7 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
     });
 
     const createHeader = () => {
-        return props.filter ? <ListBoxHeader filter={filteredValue} onFilter={onFilter} disabled={props.disabled} filterPlaceholder={props.filterPlaceholder} filterInputProps={props.filterInputProps} /> : null;
+        return props.filter ? <ListBoxHeader filter={filteredValue} onFilter={onFilter} resetFilter={resetFilter} filterTemplate={props.filterTemplate} disabled={props.disabled} filterPlaceholder={props.filterPlaceholder} filterInputProps={props.filterInputProps} /> : null;
     }
 
     const createGroupChildren = (optionGroup, style) => {
@@ -388,6 +393,7 @@ ListBox.defaultProps = {
     multiple: false,
     metaKeySelection: false,
     filter: false,
+    filterTemplate: null,
     filterBy: null,
     filterValue: null,
     filterMatchMode: 'contains',

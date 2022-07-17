@@ -878,6 +878,12 @@ export const TreeContextMenuDemo = () => {
                                     <td>Template of toggler element.</td>
                                 </tr>
                                 <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template of filter element.</td>
+                                </tr>
+                                <tr>
                                     <td>showHeader</td>
                                     <td>boolean</td>
                                     <td>true</td>

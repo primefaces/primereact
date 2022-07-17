@@ -2,7 +2,7 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
 
@@ -10,6 +10,10 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
     const virtualScrollerRef = React.useRef(null);
     const filterInputRef = React.useRef(null);
     const isEmptyFilter = !(props.visibleOptions && props.visibleOptions.length) && props.hasFilter;
+    const filterOptions = {
+        filter: (e) => onFilterInputChange(e),
+        reset: () => props.resetFilter()
+    };
 
     const onEnter = () => {
         props.onEnter(() => {
@@ -24,7 +28,7 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
 
     const onEntered = () => {
         props.onEntered(() => {
-            if (props.filter && props.filterInputAutoFocus) {
+            if (props.filter && props.filterInputAutoFocus && filterInputRef) {
                 DomHandler.focus(filterInputRef.current, false);
             }
         });
@@ -32,7 +36,6 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
 
     const onFilterInputChange = (event) => {
         virtualScrollerRef.current && virtualScrollerRef.current.scrollToIndex(0);
-
         props.onFilterInputChange && props.onFilterInputChange(event);
     }
 
@@ -111,14 +114,33 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
         if (props.filter) {
             const clearIcon = createFilterClearIcon();
             const containerClassName = classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon });
+            let content = (
+                <div className={containerClassName}>
+                    <input ref={filterInputRef} type="text" autoComplete="off" className="p-dropdown-filter p-inputtext p-component" placeholder={props.filterPlaceholder}
+                        onKeyDown={props.onFilterInputKeyDown} onChange={onFilterInputChange} value={props.filterValue} />
+                        {clearIcon}
+                    <i className="p-dropdown-filter-icon pi pi-search"></i>
+                </div>
+            )
+
+            if (props.filterTemplate) {
+                const defaultContentOptions = {
+                    className: containerClassName,
+                    element: content,
+                    filterOptions: filterOptions,
+                    filterInputKeyDown: props.onFilterInputKeyDown,
+                    filterInputChange: onFilterInputChange,
+                    filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                    clearIcon: clearIcon,
+                    props,
+                };
+                
+                content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
+            }
+
             return (
                 <div className="p-dropdown-header">
-                    <div className={containerClassName}>
-                        <input ref={filterInputRef} type="text" autoComplete="off" className="p-dropdown-filter p-inputtext p-component" placeholder={props.filterPlaceholder}
-                            onKeyDown={props.onFilterInputKeyDown} onChange={onFilterInputChange} value={props.filterValue} />
-                        {clearIcon}
-                        <i className="p-dropdown-filter-icon pi pi-search"></i>
-                    </div>
+                    {content}
                 </div>
             )
         }
@@ -134,7 +156,6 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
                     style: { ...props.virtualScrollerOptions.style, ...{ height: props.scrollHeight } },
                     className: classNames('p-dropdown-items-wrapper', props.virtualScrollerOptions.className),
                     items: props.visibleOptions,
-                    autoSize: true,
                     onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: props.filterValue } }),
                     itemTemplate: (item, options) => item && createItem(item, options.index, options),
                     contentTemplate: (options) => {

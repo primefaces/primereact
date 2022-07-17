@@ -301,6 +301,59 @@ import { OrderList } from 'primereact/orderlist';
 <OrderList value={products} itemTemplate={itemTemplate} dragdrop onChange={(e) => setProducts(e.value)}></OrderList>
 `}
 </CodeHighlight>
+                    <h5>Filtering</h5>
+                    <p>Items can be filtered using an input field by enabling the <i>filter</i> property. By default filtering is done against
+                        label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
+                        to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
+
+<CodeHighlight>
+{`
+<OrderList value={products} filter filterBy="name" />
+`}
+</CodeHighlight>
+
+                    <h5>Custom Content</h5>
+                    <p>For custom content support define an <i>itemTemplate</i> function that gets the item instance as a parameter and returns the content. For custom filter support define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.</p>
+
+<CodeHighlight lang="js">
+{`
+const [filterValue, setFilterValue] = useState('');
+const filterInputRef = useRef();
+
+const itemTemplate = (item) => {
+    // custom content
+}
+
+const filterTemplate = (options) => {
+    let {filterOptions} = options;
+
+    return (
+        <div className="flex gap-2">
+            <InputText value={filterValue} ref={filterInputRef} onChange={(e) => myFilterFunction(e, filterOptions)} />
+            <Button label="Reset" onClick={() => myResetFunction(filterOptions)} />
+        </div>
+    )
+}
+
+const myResetFunction = (options) => {
+    setFilterValue('');
+    options.reset();
+    filterInputRef && filterInputRef.current.focus()
+}
+
+const myFilterFunction = (event, options) => {
+    let _filterValue = event.target.value;
+    setFilterValue(_filterValue);
+    options.filter(event);
+}
+`}
+</CodeHighlight>
+
+<CodeHighlight>
+{`
+<OrderList value={products} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
+`}
+</CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -375,6 +428,42 @@ import { OrderList } from 'primereact/orderlist';
                                     <td>Function that gets an item in the list and returns the content for it.</td>
                                 </tr>
                                 <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template of filter element.</td>
+                                </tr>
+                                <tr>
+                                    <td>filter</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When specified, displays an input field to filter the items on keyup.</td>
+                                </tr>
+                                <tr>
+                                    <td>filterBy</td>
+                                    <td>string</td>
+                                    <td>label</td>
+                                    <td>When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.</td>
+                                </tr>
+                                <tr>
+                                    <td>filterMatchMode</td>
+                                    <td>string</td>
+                                    <td>contains</td>
+                                    <td>Defines how the items are filtered, valid values are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</td>
+                                </tr>
+                                <tr>
+                                    <td>filterPlaceholder</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Placeholder text to show when filter input is empty.</td>
+                                </tr>
+                                <tr>
+                                    <td>filterLocale</td>
+                                    <td>string</td>
+                                    <td>undefined</td>
+                                    <td>Locale to use in filtering. The default locale is the host environment's current locale.</td>
+                                </tr>
+                                <tr>
                                     <td>tabIndex</td>
                                     <td>number</td>
                                     <td>null</td>
@@ -400,6 +489,32 @@ import { OrderList } from 'primereact/orderlist';
                                     <td>event.originalEvent: Browser event <br />
                                         event.value: Reordered list</td>
                                     <td>Callback to invoke when list is reordered.</td>
+                                </tr>
+                                <tr>
+                                    <td>onFilter</td>
+                                    <td>event.originalEvent: Original event <br />
+                                        event.filter: Value of the filter input</td>
+                                    <td>Callback to invoke when the value is filtered.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5>Methods</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>resetFilter</td>
+                                    <td>-</td>
+                                    <td>Reset the options filter.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -427,6 +542,18 @@ import { OrderList } from 'primereact/orderlist';
                                 <tr>
                                     <td>p-orderlist-item</td>
                                     <td>An item in the list</td>
+                                </tr>
+                                <tr>
+                                    <td>p-orderlist-filter-container</td>
+                                    <td>Container of filter input.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-orderlist-filter</td>
+                                    <td>Filter element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-orderlist-filter-icon</td>
+                                    <td>Filter icon.</td>
                                 </tr>
                             </tbody>
                         </table>

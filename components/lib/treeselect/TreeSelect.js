@@ -23,6 +23,10 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
     const hasNoOptions = ObjectUtils.isEmpty(props.options);
     const isSingleSelectionMode = props.selectionMode === 'single';
     const isCheckboxSelectionMode = props.selectionMode === 'checkbox';
+    const filterOptions = {
+        filter: (e) => onFilterInputChange(e),
+        reset: () => resetFilter()
+    };
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: elementRef, overlay: overlayRef, listener: (event, { valid }) => {
@@ -400,16 +404,34 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
         if (props.filter) {
             const filterValue = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
 
-            return (
+            let filterContent = (
                 <div className="p-treeselect-filter-container">
                     <input ref={filterInputRef} type="text" value={filterValue} autoComplete="off" className="p-treeselect-filter p-inputtext p-component" placeholder={props.filterPlaceholder}
                         onKeyDown={onFilterInputKeyDown} onChange={onFilterInputChange} disabled={props.disabled} />
                     <span className="p-treeselect-filter-icon pi pi-search"></span>
                 </div>
             )
-        }
 
-        return null;
+            if (props.filterTemplate) {
+                const defaultContentOptions = {
+                    className: 'p-treeselect-filter-container',
+                    element: filterContent,
+                    filterOptions: filterOptions,
+                    filterInputKeyDown: onFilterInputKeyDown,
+                    filterInputChange: onFilterInputChange,
+                    filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                    props,
+                };
+
+                filterContent = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
+            }
+    
+            return (
+                <>
+                    {filterContent}
+                </>
+            );
+        }
     }
 
     const createHeader = () => {
@@ -509,6 +531,7 @@ TreeSelect.defaultProps = {
     transitionOptions: null,
     dropdownIcon: 'pi pi-chevron-down',
     filter: false,
+    filterTemplate: null,
     filterValue: null,
     filterBy: 'label',
     filterMode: 'lenient',

@@ -10,6 +10,8 @@ type DropdownValueTemplateType = React.ReactNode | ((option: any, props: Dropdow
 
 type DropdownItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
+type DropdownFilterTemplateType = React.ReactNode | ((options: DropdownFilterOptions) => React.ReactNode);
+
 type DropdownEmptyMessageType = React.ReactNode | ((props: DropdownProps) => React.ReactNode);
 
 type DropdownEmptyFilterMessageType = React.ReactNode | ((props: DropdownProps) => React.ReactNode);
@@ -37,6 +39,11 @@ interface DropdownFilterParams {
     filter: string;
 }
 
+interface DropdownFilterOptions {
+    filter?: (value?: KeyboardEvent) => void;
+    reset?: () => void;
+}
+
 export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
@@ -50,6 +57,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     optionGroupChildren?: string;
     optionGroupTemplate?: DropdownOptionGroupTemplateType;
     valueTemplate?: DropdownValueTemplateType;
+    filterTemplate?: DropdownFilterTemplateType;
     itemTemplate?: DropdownItemTemplateType;
     style?: object;
     className?: string;

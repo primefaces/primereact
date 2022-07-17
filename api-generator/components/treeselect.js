@@ -138,6 +138,12 @@ const TreeSelectProps = [
         description: 'The template of footer.'
     },
     {
+        name: 'filterTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'The template of filter element'
+    },
+    {
         name: 'transitionOptions',
         type: 'object',
         default: 'null',

@@ -8,6 +8,8 @@ type ListBoxOptionGroupTemplateType = React.ReactNode | ((option: any, index: nu
 
 type ListBoxItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
+type ListBoxFilterTemplateType = React.ReactNode | ((options: ListBoxFilterOptions) => React.ReactNode);
+
 type ListBoxOptionDisabledType = string | ((option: any) => boolean);
 
 interface ListBoxChangeTargetOptions {
@@ -29,6 +31,11 @@ interface ListBoxFilterValueChangeParams {
     value: any;
 }
 
+interface ListBoxFilterOptions {
+    filter?: (value?: KeyboardEvent) => void;
+    reset?: () => void;
+}
+
 export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     value?: any;
@@ -40,6 +47,7 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
     optionGroupChildren?: string;
     optionGroupTemplate?: ListBoxOptionGroupTemplateType;
     itemTemplate?: ListBoxItemTemplateType;
+    filterTemplate?: ListBoxFilterTemplateType;
     style?: object;
     listStyle?: object;
     listClassName?: string;

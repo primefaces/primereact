@@ -7,6 +7,10 @@ export const OrderListSubList = React.memo((props) => {
     const draggedItemIndex = React.useRef(null);
     const dragOverItemIndex = React.useRef(null);
     const listElementRef = React.useRef(null);
+    const filterOptions = {
+        filter: (e) => props.onFilterInputChange(e),
+        reset: () => props.resetFilter()
+    };
 
     const isSelected = (item) => {
         return ObjectUtils.findIndexInList(item, props.selection, props.dataKey) !== -1;
@@ -62,6 +66,14 @@ export const OrderListSubList = React.memo((props) => {
                 listElementRef.current.scrollTop += 15;
             else if (topDiff < 25 && topDiff > 0)
                 listElementRef.current.scrollTop -= 15;
+        }
+    }
+
+
+    const onFilterInputKeyDown = (event) => {
+        //enter
+        if (event.which === 13) {
+            event.preventDefault();
         }
     }
 
@@ -121,12 +133,50 @@ export const OrderListSubList = React.memo((props) => {
         )
     }
 
+    const createFilter = () => {
+        if (props.filter) {
+            let content = (
+                <div className="p-orderlist-filter">
+                    <input type="text" value={props.filterValue} onChange={props.onFilter} onKeyDown={onFilterInputKeyDown} placeholder={props.placeholder} className="p-orderlist-filter-input p-inputtext p-component" />
+                    <span className="p-orderlist-filter-icon pi pi-search"></span>
+                </div>
+            );
+
+            if (props.filterTemplate) {
+                const defaultContentOptions = {
+                    className: 'p-orderlist-filter',
+                    inputProps: {
+                        inputClassName: 'p-orderlist-filter-input p-inputtext p-component',
+                        onChange: props.onFilter,
+                        onKeyDown: onFilterInputKeyDown,
+                    },
+                    filterOptions: filterOptions,
+                    iconClassName: 'p-orderlist-filter-icon pi pi-search',
+                    element: content,
+                    props
+                };
+
+                content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
+            }
+
+            return (
+                <div className="p-orderlist-filter-container">
+                    {content}
+                </div>
+            );
+        }
+
+        return null;
+    }
+
     const header = createHeader();
+    const filter = createFilter();
     const list = createList();
 
     return (
         <div className="p-orderlist-list-container">
             {header}
+            {filter}
             {list}
         </div>
     )

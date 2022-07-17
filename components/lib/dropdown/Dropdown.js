@@ -675,7 +675,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
                 {clearIcon}
                 {dropdownIcon}
                 <DropdownPanel ref={overlayRef} visibleOptions={visibleOptions} {...props} appendTo={appendTo} onClick={onPanelClick} onOptionClick={onOptionClick}
-                    filterValue={filterState} hasFilter={hasFilter} onFilterClearIconClick={onFilterClearIconClick} onFilterInputKeyDown={onFilterInputKeyDown} onFilterInputChange={onFilterInputChange}
+                    filterValue={filterState} hasFilter={hasFilter} onFilterClearIconClick={onFilterClearIconClick} resetFilter={resetFilter} onFilterInputKeyDown={onFilterInputKeyDown} onFilterInputChange={onFilterInputChange}
                     getOptionLabel={getOptionLabel} getOptionRenderKey={getOptionRenderKey} isOptionDisabled={isOptionDisabled}
                     getOptionGroupChildren={getOptionGroupChildren} getOptionGroupLabel={getOptionGroupLabel} getOptionGroupRenderKey={getOptionGroupRenderKey}
                     isSelected={isSelected} getSelectedOptionIndex={getSelectedOptionIndex}
@@ -700,6 +700,7 @@ Dropdown.defaultProps = {
     optionGroupLabel: null,
     optionGroupChildren: null,
     optionGroupTemplate: null,
+    filterTemplate: null,
     valueTemplate: null,
     itemTemplate: null,
     style: null,
