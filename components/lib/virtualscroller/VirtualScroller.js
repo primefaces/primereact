@@ -605,7 +605,7 @@ export const VirtualScroller = React.memo(React.forwardRef((props, ref) => {
                 contentRef: (el) => contentRef.current = ObjectUtils.getRefElement(el),
                 spacerRef: (el) => spacerRef.current = ObjectUtils.getRefElement(el),
                 stickyRef: (el) => stickyRef.current = ObjectUtils.getRefElement(el),
-                items: loadedItems,
+                items: loadedItems(),
                 getItemOptions: (index) => getOptions(index),
                 children: items,
                 element: content,
