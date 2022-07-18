@@ -5,6 +5,7 @@ import { Portal } from '../portal/Portal';
 import { classNames, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
+import { DomHandler } from '../utils/Utils';
 
 export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
     const virtualScrollerRef = React.useRef(null);
@@ -28,7 +29,7 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
 
     const onEntered = () => {
         props.onEntered(() => {
-            if (props.filter && props.filterInputAutoFocus && filterInputRef) {
+            if (props.filter && props.filterInputAutoFocus) {
                 DomHandler.focus(filterInputRef.current, false);
             }
         });
