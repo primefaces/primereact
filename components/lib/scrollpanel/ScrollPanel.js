@@ -150,10 +150,6 @@ export const ScrollPanel = React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         refresh,
-        getElement: () => containerRef.current,
-        getContent: () => contentRef.current,
-        getXBar: () => xBarRef.current,
-        getYBar: () => yBarRef.current,
         ...props
     }));
 

@@ -26,6 +26,4 @@ export interface KnobProps extends Omit<React.DetailedHTMLProps<React.InputHTMLA
     children?: React.ReactNode;
 }
 
-export declare class Knob extends React.Component<KnobProps, any> { 
-    public getElement(): HTMLDivElement;
-}
+export declare class Knob extends React.Component<KnobProps, any> { }

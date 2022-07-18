@@ -437,15 +437,6 @@ export const ColorPicker = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
-    React.useImperativeHandle(ref, () => ({
-        show,
-        hide,
-        getElement: () => elementRef.current,
-        getOverlay: () => overlayRef.current,
-        getInput: () => inputRef.current,
-        ...props
-    }));
-
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);

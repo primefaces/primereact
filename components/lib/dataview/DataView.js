@@ -40,7 +40,6 @@ export const DataViewItem = React.memo((props) => {
 export const DataView = React.memo(React.forwardRef((props, ref) => {
     const [firstState, setFirstState] = React.useState(props.first);
     const [rowsState, setRowsState] = React.useState(props.rows);
-    const elementRef = React.useRef(null);
     const first = props.onPage ? props.first : firstState;
     const rows = props.onPage ? props.rows : rowsState;
 
@@ -196,11 +195,6 @@ export const DataView = React.memo(React.forwardRef((props, ref) => {
         return data;
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     const data = processData();
 
     const otherProps = ObjectUtils.findDiffKeys(props, DataView.defaultProps);
@@ -216,7 +210,7 @@ export const DataView = React.memo(React.forwardRef((props, ref) => {
     const content = createContent(data);
 
     return (
-        <div id={props.id} ref={elementRef} style={props.style} className={className} {...otherProps}>
+        <div id={props.id} style={props.style} className={className} {...otherProps}>
             {loader}
             {header}
             {topPaginator}

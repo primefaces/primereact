@@ -2,7 +2,6 @@ import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const ProgressBar = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
 
     const createLabel = () => {
         if (props.showValue && props.value != null) {
@@ -19,7 +18,7 @@ export const ProgressBar = React.memo(React.forwardRef((props, ref) => {
         const label = createLabel();
 
         return (
-            <div role="progressbar" id={props.id} ref={elementRef} className={className} style={props.style} aria-valuemin="0" aria-valuenow={props.value} aria-valuemax="100" {...otherProps}>
+            <div role="progressbar" id={props.id} className={className} style={props.style} aria-valuemin="0" aria-valuenow={props.value} aria-valuemax="100" {...otherProps}>
                 <div className="p-progressbar-value p-progressbar-value-animate" style={{ width: props.value + '%', display: 'block', backgroundColor: props.color }}></div>
                 {label}
             </div>
@@ -31,18 +30,13 @@ export const ProgressBar = React.memo(React.forwardRef((props, ref) => {
         const className = classNames('p-progressbar p-component p-progressbar-indeterminate', props.className);
 
         return (
-            <div role="progressbar" id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
+            <div role="progressbar" id={props.id} className={className} style={props.style} {...otherProps}>
                 <div className="p-progressbar-indeterminate-container">
                     <div className="p-progressbar-value p-progressbar-value-animate" style={{ backgroundColor: props.color }}></div>
                 </div>
             </div>
         )
     }
-
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
 
     if (props.mode === 'determinate')
         return createDeterminate();

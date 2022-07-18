@@ -4,9 +4,12 @@ import { CSSTransitionProps } from '../csstransition';
 
 type TieredMenuAppendToType = 'self' | HTMLElement | undefined | null;
 
-export interface TieredMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface TieredMenuProps {
+    id?: string;
     model?: MenuItem[];
     popup?: boolean;
+    style?: object;
+    className?: string;
     autoZIndex?: boolean;
     baseZIndex?: number;
     appendTo?: TieredMenuAppendToType;
@@ -18,5 +21,4 @@ export interface TieredMenuProps extends Omit<React.DetailedHTMLProps<React.HTML
 
 export declare class TieredMenu extends React.Component<TieredMenuProps, any> {
     public toggle(event: React.SyntheticEvent): void;
-    public getElement(): HTMLDivElement;
 }

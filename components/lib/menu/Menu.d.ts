@@ -4,9 +4,12 @@ import { CSSTransitionProps } from '../csstransition';
 
 type MenuAppendToType = 'self' | HTMLElement | undefined | null;
 
-export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface MenuProps {
+    id?: string;
     model?: MenuItem[];
     popup?: boolean;
+    style?: object;
+    className?: string;
     autoZIndex?: boolean;
     baseZIndex?: number;
     appendTo?: MenuAppendToType;
@@ -20,6 +23,4 @@ export declare class Menu extends React.Component<MenuProps, any> {
     public toggle(event: React.SyntheticEvent): void;
     public show(event: React.SyntheticEvent): void;
     public hide(event: React.SyntheticEvent): void;
-    public getElement(): HTMLDivElement;
-    public getTarget(): EventTarget | null;
 }

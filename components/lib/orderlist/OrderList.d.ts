@@ -12,11 +12,15 @@ interface OrderListFilterOptions {
     reset?: () => void;
 }
 
-export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface OrderListProps {
+    id?: string;
     value?: any[];
     header?: React.ReactNode;
+    style?: object;
+    className?: string;
     listStyle?: object;
     dragdrop?: boolean;
+    tabIndex?: number;
     dataKey?: string;
     filter?: boolean;
     filterBy?: string;
@@ -29,6 +33,4 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     children?: React.ReactNode;
 }
 
-export declare class OrderList extends React.Component<OrderListProps, any> { 
-    public getElement(): HTMLDivElement;
-}
+export declare class OrderList extends React.Component<OrderListProps, any> { }

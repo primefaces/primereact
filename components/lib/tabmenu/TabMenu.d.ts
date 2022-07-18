@@ -7,13 +7,14 @@ interface TabMenuTabChangeParams {
     index: number;
 }
 
-export interface TabMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface TabMenuProps {
+    id?: string;
     model?: MenuItem[];
     activeIndex?: number;
+    style?: object;
+    className?: string;
     onTabChange?(e: TabMenuTabChangeParams): void;
     children?: React.ReactNode;
 }
 
-export declare class TabMenu extends React.Component<TabMenuProps, any> { 
-    public getElement(): HTMLDivElement;
-}
+export declare class TabMenu extends React.Component<TabMenuProps, any> { }

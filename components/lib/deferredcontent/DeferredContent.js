@@ -32,11 +32,6 @@ export const DeferredContent = React.forwardRef((props, ref) => {
         props.onLoad && props.onLoad(event);
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     useMountEffect(() => {
         if (!loadedState) {
             shouldLoad() ? load() : bindScrollListener();

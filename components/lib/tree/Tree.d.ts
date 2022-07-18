@@ -155,5 +155,4 @@ export interface TreeProps {
 
 export declare class Tree extends React.Component<TreeProps, any> {
     public filter<T>(value: T): void;
-    public getElement(): HTMLDivElement;
 }

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const Timeline = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
 
     const getKey = (item, index) => {
         return props.dataKey ? ObjectUtils.resolveFieldData(item, props.dataKey) : `pr_id__${index}`;
@@ -32,11 +31,6 @@ export const Timeline = React.memo(React.forwardRef((props, ref) => {
         });
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     const otherProps = ObjectUtils.findDiffKeys(props, Timeline.defaultProps);
     const className = classNames('p-timeline p-component', {
         [`p-timeline-${props.align}`]: true,
@@ -46,7 +40,7 @@ export const Timeline = React.memo(React.forwardRef((props, ref) => {
     const events = createEvents();
 
     return (
-        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {events}
         </div>
     )

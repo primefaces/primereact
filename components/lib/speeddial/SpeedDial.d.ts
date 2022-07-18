@@ -17,9 +17,12 @@ interface SpeedDialButtonOptions {
     visible: boolean;
 }
 
-export interface SpeedDialProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface SpeedDialProps {
+    id?: string;
     model?: MenuItem[];
     visible?: boolean;
+    style?: object;
+    className?: string;
     direction?: SpeedDialDirectionType;
     transitionDelay?: number;
     type?: SpeedDialType;
@@ -45,5 +48,4 @@ export interface SpeedDialProps extends Omit<React.DetailedHTMLProps<React.HTMLA
 export declare class SpeedDial extends React.Component<SpeedDialProps, any> {
     public show(): void;
     public hide(): void;
-    public getElement(): HTMLDivElement;
 }

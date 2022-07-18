@@ -44,8 +44,11 @@ interface TabViewTabCloseParams {
     index: number;
 }
 
-export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface TabViewProps {
+    id?: string;
     activeIndex?: number;
+    style?: object;
+    className?: string;
     renderActiveOnly?: boolean;
     scrollable?: boolean;
     panelContainerStyle?: object;
@@ -58,5 +61,4 @@ export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 // tslint:disable-next-line:max-classes-per-file
 export declare class TabView extends React.Component<TabViewProps, any> {
     public reset(): void;
-    public getElement(): HTMLDivElement;
 }

@@ -20,6 +20,4 @@ export interface AvatarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttr
     children?: React.ReactNode;
 }
 
-export declare class Avatar extends React.Component<AvatarProps, any> { 
-    public getElement(): HTMLDivElement;
-}
+export declare class Avatar extends React.Component<AvatarProps, any> { }

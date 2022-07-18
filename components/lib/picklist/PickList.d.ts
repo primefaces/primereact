@@ -72,6 +72,4 @@ export interface PickListProps {
     children?: React.ReactNode;
 }
 
-export declare class PickList extends React.Component<PickListProps, any> { 
-    public getElement(): HTMLDivElement;
-}
+export declare class PickList extends React.Component<PickListProps, any> { }

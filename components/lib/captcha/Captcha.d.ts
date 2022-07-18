@@ -1,10 +1,12 @@
 import * as React from 'react';
 
-export interface CaptchaProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface CaptchaProps {
+    id?: string;
     siteKey?: string;
     theme?: string;
     type?: string;
     size?: string;
+    tabIndex?: number;
     language?: string;
     onResponse?(response: any): void;
     onExpire?(): void;
@@ -14,5 +16,4 @@ export interface CaptchaProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 export declare class Captcha extends React.Component<CaptchaProps, any> {
     public reset(): void;
     public getResponse(): any;
-    public getElement(): HTMLDivElement;
 }

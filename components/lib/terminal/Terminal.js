@@ -54,11 +54,6 @@ export const Terminal = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     React.useEffect(() => {
         const response = (res) => {
             if (commandsState && commandsState.length > 0) {

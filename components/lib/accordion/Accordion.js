@@ -8,7 +8,6 @@ export const AccordionTab = () => { }
 export const Accordion = React.forwardRef((props, ref) => {
     const [idState, setIdState] = React.useState(props.id);
     const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
-    const elementRef = React.useRef(null);
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
 
     const shouldUseTab = (tab) => tab && tab.props.__TYPE === 'AccordionTab';
@@ -46,11 +45,6 @@ export const Accordion = React.forwardRef((props, ref) => {
     const isSelected = (index) => {
         return props.multiple ? (activeIndex && activeIndex.some(i => i === index)) : activeIndex === index;
     }
-
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
 
     useMountEffect(() => {
         if (!idState) {
@@ -129,7 +123,7 @@ export const Accordion = React.forwardRef((props, ref) => {
     const tabs = createTabs();
 
     return (
-        <div id={idState} ref={elementRef} className={className} style={props.style} {...otherProps}>
+        <div id={idState} className={className} style={props.style} {...otherProps}>
             {tabs}
         </div>
     )

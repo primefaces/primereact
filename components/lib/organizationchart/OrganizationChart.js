@@ -3,7 +3,6 @@ import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { OrganizationChartNode } from './OrganizationChartNode';
 
 export const OrganizationChart = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
     const root = props.value && props.value.length ? props.value[0] : null;
 
     const onNodeClick = (event, node) => {
@@ -62,16 +61,11 @@ export const OrganizationChart = React.memo(React.forwardRef((props, ref) => {
         return findIndexInSelection(node) !== -1;
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     const otherProps = ObjectUtils.findDiffKeys(props, OrganizationChart.defaultProps);
     const className = classNames('p-organizationchart p-component', props.className);
 
     return (
-        <div id={props.id} ref={elementRef} style={props.style} className={className} {...otherProps}>
+        <div id={props.id} style={props.style} className={className} {...otherProps}>
             <OrganizationChartNode node={root} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={onNodeClick} isSelected={isSelected} />
         </div>
     )

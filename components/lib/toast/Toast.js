@@ -69,7 +69,6 @@ export const Toast = React.memo(React.forwardRef((props, ref) => {
         show,
         replace,
         clear,
-        getElement: () => containerRef.current,
         ...props
     }));
 

@@ -6,9 +6,11 @@ interface GMapEventParams {
     map: any;
 }
 
-export interface GMapProps  extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface GMapProps {
     options?: object;
     overlays?: any[];
+    style?: object;
+    className?: string;
     onMapReady?(map: any): void;
     onMapClick?(event: React.SyntheticEvent): void;
     onMapDragEnd?(): void;
@@ -20,7 +22,4 @@ export interface GMapProps  extends Omit<React.DetailedHTMLProps<React.HTMLAttri
     children?: React.ReactNode;
 }
 
-export declare class GMap extends React.Component<GMapProps, any> { 
-    public getMap(): any;
-    public getElement(): HTMLDivElement;
-}
+export declare class GMap extends React.Component<GMapProps, any> { }

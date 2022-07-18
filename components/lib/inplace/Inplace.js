@@ -7,7 +7,6 @@ export const InplaceContent = (props) => props.children;
 
 export const Inplace = React.forwardRef((props, ref) => {
     const [activeState, setActiveState] = React.useState(props.active);
-    const elementRef = React.useRef(null);
     const active = props.onToggle ? props.active : activeState;
 
     const shouldUseInplaceContent = (child) => child && child.props.__TYPE === 'InplaceContent';
@@ -98,11 +97,6 @@ export const Inplace = React.forwardRef((props, ref) => {
         );
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     const otherProps = ObjectUtils.findDiffKeys(props, Inplace.defaultProps);
     const children = createChildren();
     const className = classNames('p-inplace p-component', {
@@ -110,7 +104,7 @@ export const Inplace = React.forwardRef((props, ref) => {
     }, props.className);
 
     return (
-        <div ref={elementRef} className={className} {...otherProps}>
+        <div className={className} {...otherProps}>
             {children}
         </div>
     )

@@ -182,14 +182,6 @@ export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
         DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        getOverlay: () => overlayRef.current,
-        getInput: () => inputRef.current,
-        getLabel: () => labelRef.current,
-        ...props
-    }));
-
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);

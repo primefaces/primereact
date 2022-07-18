@@ -19,5 +19,4 @@ export declare class Chart extends React.Component<ChartProps, any> {
     public getBase64Image(): any;
     public generateLegend(): string;
     public refresh(): void;
-    public getElement(): HTMLDivElement;
 }

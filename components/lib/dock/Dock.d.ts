@@ -13,7 +13,10 @@ interface DockHeaderTemplateOptions {
 
 interface DockFooterTemplateOptions extends DockHeaderTemplateOptions {}
 
-export interface DockProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface DockProps {
+    id?: string;
+    style?: object;
+    className?: string;
     model?: MenuItem[];
     position?: DockPositionType;
     magnification?: boolean;
@@ -22,6 +25,4 @@ export interface DockProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
     children?: React.ReactNode;
 }
 
-export declare class Dock extends React.Component<DockProps, any> { 
-    public getElement(): HTMLDivElement;
-}
+export declare class Dock extends React.Component<DockProps, any> { }

@@ -15,7 +15,4 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
     children?: React.ReactNode;
 }
 
-export declare class Image extends React.Component<ImageProps, any> { 
-    public getElement(): HTMLSpanElement;
-    public getImage(): HTMLImageElement;
-}
+export declare class Image extends React.Component<ImageProps, any> { }

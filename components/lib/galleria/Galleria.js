@@ -107,8 +107,6 @@ export const Galleria = React.memo(React.forwardRef((props, ref) => {
         isAutoPlayActive,
         startSlideShow,
         stopSlideShow,
-        getElement: () => elementRef.current,
-        getPreviewContent: () => previewContentRef.current,
         ...props
     }));
 

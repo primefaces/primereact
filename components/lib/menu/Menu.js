@@ -125,8 +125,6 @@ export const Menu = React.memo(React.forwardRef((props, ref) => {
         toggle,
         show,
         hide,
-        getElement: () => menuRef.current,
-        getTarget: () => targetRef.current,
         ...props
     }));
 

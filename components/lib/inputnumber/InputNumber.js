@@ -935,8 +935,6 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         getFormatter,
-        getElement: () => elementRef.current,
-        getInput: () => elementRef.current,
         ...props
     }));
 

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Avatar = React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
 
     const createContent = () => {
         if (props.image) {
@@ -18,11 +17,6 @@ export const Avatar = React.forwardRef((props, ref) => {
         return null;
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     const otherProps = ObjectUtils.findDiffKeys(props, Avatar.defaultProps);
     const containerClassName = classNames('p-avatar p-component', {
         'p-avatar-image': props.image != null,
@@ -35,7 +29,7 @@ export const Avatar = React.forwardRef((props, ref) => {
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
     return (
-        <div ref={elementRef} className={containerClassName} style={props.style} {...otherProps}>
+        <div className={containerClassName} style={props.style} {...otherProps}>
             {content}
             {props.children}
         </div>

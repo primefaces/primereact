@@ -6,7 +6,6 @@ import { classNames, ObjectUtils } from '../utils/Utils';
 const ChartJS = function() {try {return Chart;} catch {return null;}}();
 
 const PrimeReactChart = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
     const chartRef = React.useRef(null);
     const canvasRef = React.useRef(null);
 
@@ -50,7 +49,6 @@ const PrimeReactChart = React.memo(React.forwardRef((props, ref) => {
         getCanvas: () => canvasRef.current,
         getChart: () => chartRef.current,
         getBase64Image: () => chartRef.current.toBase64Image(),
-        getElement: () => elementRef.current,
         generateLegend: () => chartRef.current && chartRef.current.generateLegend(),
         refresh: () => chartRef.current && chartRef.current.update(),
         ...props
@@ -69,7 +67,7 @@ const PrimeReactChart = React.memo(React.forwardRef((props, ref) => {
     const style = Object.assign({ width: props.width, height: props.height }, props.style);
 
     return (
-        <div id={props.id} ref={elementRef} style={style} className={className} {...otherProps}>
+        <div id={props.id} style={style} className={className} {...otherProps}>
             <canvas ref={canvasRef} width={props.width} height={props.height}></canvas>
         </div>
     );
