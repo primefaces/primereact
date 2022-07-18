@@ -50,6 +50,7 @@ export interface ChipsProps {
     separator?: string;
     allowDuplicate?: boolean;
     keyfilter?: KeyFilterType;
+    addOnBlur: boolean;
     itemTemplate?(item: any): React.ReactNode;
     onAdd?(e: ChipsAddParams): void;
     onRemove?(e: ChipsRemoveParams): void;
