@@ -886,7 +886,7 @@ const countryOptionTemplate = (option) => {
                                     <td>Hides the popup and moves focus to the next tabbable element.</td>
                                 </tr>
                                 <tr>
-                                    <td><i>tab</i></td>
+                                    <td><i>shift</i> + <i>tab</i></td>
                                     <td>Hides the popup and moves focus to the previous tabbable element.</td>
                                 </tr>
                                 <tr>

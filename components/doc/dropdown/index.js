@@ -897,16 +897,19 @@ const cities = [
 </CodeHighlight>
 
                     <h5>Custom Content</h5>
-                    <p>Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content.</p>
+                    <p>Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content. For custom filter support define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.</p>
 <CodeHighlight>
 {`
 <Dropdown value={selectedCountry} options={countries} onChange={(e) => setSelectedCountry(e.value)} optionLabel="name" placeholder="Select a Country"
-    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} filter filterTemplate={filterTemplate}/>
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
+const [filterValue, setFilterValue] = useState('');
+const filterInputRef = useRef();
+
 const selectedCountryTemplate = (option, props) => {
     if (option) {
         return (
@@ -931,6 +934,29 @@ const countryOptionTemplate = (option) => {
             <div>{option.name}</div>
         </div>
     );
+}
+
+const filterTemplate = (options) => {
+    let {filterOptions} = options;
+
+    return (
+        <div className="flex gap-2">
+            <InputText value={filterValue} ref={filterInputRef} onChange={(e) => myFilterFunction(e, filterOptions)} />
+            <Button label="Reset" onClick={() => myResetFunction(filterOptions)} />
+        </div>
+    )
+}
+
+const myResetFunction = (options) => {
+    setFilterValue('');
+    options.reset();
+    filterInputRef && filterInputRef.current.focus()
+}
+
+const myFilterFunction = (event, options) => {
+    let _filterValue = event.target.value;
+    setFilterValue(_filterValue);
+    options.filter(event);
 }
 `}
 </CodeHighlight>
@@ -1100,6 +1126,12 @@ const groupedCities = [
                                     <td>any</td>
                                     <td>null</td>
                                     <td>The template of items.</td>
+                                </tr>
+                                <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template of filter element.</td>
                                 </tr>
                                 <tr>
                                     <td>optionGroupTemplate</td>
@@ -1351,6 +1383,12 @@ const groupedCities = [
                                     <td>onBlur</td>
                                     <td>event: Browser event.</td>
                                     <td>Callback to invoke when the element loses focus.</td>
+                                </tr>
+                                <tr>
+                                    <td>onFilter</td>
+                                    <td>event.originalEvent: Original event <br />
+                                        event.filter: Value of the filter input</td>
+                                    <td>Callback to invoke when the value is filtered.</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -54,6 +54,12 @@ const ListBoxProps = [
         description: 'Custom template for the items.'
     },
     {
+        name: 'filterTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'Custom template for the filter element.'
+    },
+    {
         name: 'optionGroupTemplate',
         type: 'any',
         default: 'null',

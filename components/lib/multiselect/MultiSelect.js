@@ -573,7 +573,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
                     {IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}
                 </div>
                 <MultiSelectPanel ref={overlayRef} visibleOptions={visibleOptions} {...props} onClick={onPanelClick} onOverlayHide={hide}
-                    filterValue={filterState} hasFilter={hasFilter} onFilterInputChange={onFilterInputChange} onCloseClick={onCloseClick} onSelectAll={onSelectAll}
+                    filterValue={filterState} hasFilter={hasFilter} onFilterInputChange={onFilterInputChange} resetFilter={resetFilter} onCloseClick={onCloseClick} onSelectAll={onSelectAll}
                     getOptionLabel={getOptionLabel} getOptionRenderKey={getOptionRenderKey} isOptionDisabled={isOptionDisabled}
                     getOptionGroupChildren={getOptionGroupChildren} getOptionGroupLabel={getOptionGroupLabel} getOptionGroupRenderKey={getOptionGroupRenderKey}
                     isSelected={isSelected} getSelectedOptionIndex={getSelectedOptionIndex} isAllSelected={isAllSelected} onOptionSelect={onOptionSelect} allowOptionSelect={allowOptionSelect} onOptionKeyDown={onOptionKeyDown}
@@ -598,6 +598,7 @@ MultiSelect.defaultProps = {
     optionGroupLabel: null,
     optionGroupChildren: null,
     optionGroupTemplate: null,
+    filterTemplate: null,
     display: 'comma',
     style: null,
     className: null,

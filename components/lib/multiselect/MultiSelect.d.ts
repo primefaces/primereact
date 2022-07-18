@@ -11,6 +11,8 @@ type MultiSelectItemTemplateType = React.ReactNode | ((option: any) => React.Rea
 
 type MultiSelectSelectedItemTemplateType = React.ReactNode | ((value: any) => React.ReactNode);
 
+type MultiSelectFilterTemplateType = React.ReactNode | ((options: MultiSelectFilterOptions) => React.ReactNode);
+
 type MultiSelectEmptyFilterMessageType = React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
 
 type MultiSelectDisplayType = 'comma' | 'chip';
@@ -66,6 +68,11 @@ interface MultiSelectAllParams {
     checked: boolean;
 }
 
+interface MultiSelectFilterOptions {
+    filter?: (event?: KeyboardEvent) => void;
+    reset?: () => void;
+}
+
 export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
@@ -107,6 +114,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     selectedItemsLabel?: string;
     ariaLabelledBy?: string;
     itemTemplate?: MultiSelectItemTemplateType;
+    filterTemplate?: MultiSelectFilterTemplateType;
     selectedItemTemplate?: MultiSelectSelectedItemTemplateType;
     panelHeaderTemplate?: MultiSelectPanelHeaderTemplateType;
     panelFooterTemplate?: MultiSelectPanelFooterTemplateType;

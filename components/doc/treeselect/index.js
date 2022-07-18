@@ -467,11 +467,47 @@ data() {
 </CodeHighlight>
 
                     <h5>Templating</h5>
-                    <p>Label of an option is used as the display text of an item by default, for custom content support define a <i>valueTemplate</i> that gets the selected nodes as a parameter.
+                    <p>Label of an option is used as the display text of an item by default, for custom content support define a <i>valueTemplate</i> that gets the selected nodes as a parameter. 
+                    For custom filter support define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.
                     In addition <i>header</i>, <i>footer</i> and <i>emptyMessage</i> templates are provided for further customization.</p>
 <CodeHighlight>
 {`
-<TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} valueTemplate={<span>Custom Content</span>} placeholder="Select Items" />
+const [filterValue, setFilterValue] = useState('');
+const filterInputRef = useRef();
+
+const valueTemplate = () => {
+    return (
+        <span>Custom Content</span>
+    )
+}
+
+const filterTemplate = (options) => {
+    let {filterOptions} = options;
+
+    return (
+        <div className="flex gap-2">
+            <InputText value={filterValue} ref={filterInputRef} onChange={(e) => myFilterFunction(e, filterOptions)} />
+            <Button label="Reset" onClick={() => myResetFunction(filterOptions)} />
+        </div>
+    )
+}
+
+const myResetFunction = (options) => {
+    setFilterValue('');
+    options.reset();
+    filterInputRef && filterInputRef.current.focus()
+}
+
+const myFilterFunction = (event, options) => {
+    let _filterValue = event.target.value;
+    setFilterValue(_filterValue);
+    options.filter(event);
+}
+`}
+</CodeHighlight>
+<CodeHighlight>
+{`
+<TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} valueTemplate={valueTemplate} placeholder="Select Items" filter filterTemplate={filterTemplate}/>
 `}
 </CodeHighlight>
 
@@ -631,6 +667,12 @@ data() {
                                     <td>any</td>
                                     <td>null</td>
                                     <td>The template of selected values.</td>
+                                </tr>
+                                <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template for filter element.</td>
                                 </tr>
                                 <tr>
                                     <td>panelHeaderTemplate</td>

@@ -2,33 +2,48 @@ import * as React from 'react';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Chart = React.memo(React.forwardRef((props, ref) => {
+// GitHub #3059 wrapper if loaded by script tag
+const ChartJS = function() {try {return Chart;} catch {return null;}}();
+
+const PrimeReactChart = React.memo(React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
     const chartRef = React.useRef(null);
     const canvasRef = React.useRef(null);
 
     const initChart = () => {
-        import('chart.js/auto').then((module) => {
-            if (chartRef.current) {
-                chartRef.current.destroy();
-                chartRef.current = null;
-            }
+        destroyChart();
 
-            const configuration = {
-                type: props.type,
-                data: props.data,
-                options: props.options,
-                plugins: props.plugins
-            };
-
-            if (module) {
-                if (module.default) {
-                    chartRef.current = new module.default(canvasRef.current, configuration);
-                } else {
-                    chartRef.current = new module(canvasRef.current, configuration);
+        const configuration = {
+            type: props.type,
+            data: props.data,
+            options: props.options,
+            plugins: props.plugins
+        };
+        if (ChartJS) {
+            // GitHub #3059 loaded by script only
+            chartRef.current = new ChartJS(canvasRef.current, configuration);
+        }
+        else {
+            import('chart.js/auto').then((module) => {
+                destroyChart();
+                if (module) {
+                    if (module.default) {
+                         // WebPack
+                        chartRef.current = new module.default(canvasRef.current, configuration);
+                    } else {
+                        // ParcelJS
+                        chartRef.current = new module(canvasRef.current, configuration);
+                    }
                 }
-            }
-        });
+            });
+        }    
+    }
+
+    const destroyChart = () => {
+        if (chartRef.current) {
+            chartRef.current.destroy();
+            chartRef.current = null;
+        }
     }
 
     React.useImperativeHandle(ref, () => ({
@@ -46,13 +61,10 @@ export const Chart = React.memo(React.forwardRef((props, ref) => {
     });
 
     useUnmountEffect(() => {
-        if (chartRef.current) {
-            chartRef.current.destroy();
-            chartRef.current = null;
-        }
+        destroyChart();
     });
 
-    const otherProps = ObjectUtils.findDiffKeys(props, Chart.defaultProps);
+    const otherProps = ObjectUtils.findDiffKeys(props, PrimeReactChart.defaultProps);
     const className = classNames('p-chart', props.className);
     const style = Object.assign({ width: props.width, height: props.height }, props.style);
 
@@ -63,8 +75,8 @@ export const Chart = React.memo(React.forwardRef((props, ref) => {
     );
 }), (prevProps, nextProps) => prevProps.data === nextProps.data && prevProps.options === nextProps.options && prevProps.type === nextProps.type);
 
-Chart.displayName = 'Chart';
-Chart.defaultProps = {
+PrimeReactChart.displayName = 'Chart';
+PrimeReactChart.defaultProps = {
     __TYPE: 'Chart',
     id: null,
     type: null,
@@ -76,3 +88,5 @@ Chart.defaultProps = {
     style: null,
     className: null
 }
+
+export { PrimeReactChart as Chart };

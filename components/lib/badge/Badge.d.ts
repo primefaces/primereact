@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-type BadgeSeverityType = 'success' | 'info' | 'warn' | 'error';
+type BadgeSeverityType = 'success' | 'info' | 'warning' | 'danger';
 
 type BadgeSizeType = 'normal' | 'large' | 'xlarge';
 

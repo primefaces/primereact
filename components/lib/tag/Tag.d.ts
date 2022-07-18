@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IconType } from '../utils';
 
-type TagSeverityType = 'success' | 'info' | 'warn' | 'error';
+type TagSeverityType = 'success' | 'info' | 'warning' | 'danger';
 
 export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'ref'> {
     value?: React.ReactNode;

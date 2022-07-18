@@ -30,6 +30,7 @@ export const RadioButton = React.memo(React.forwardRef((props, ref) => {
 
             inputRef.current.checked = !props.checked;
             DomHandler.focus(inputRef.current);
+            e.preventDefault();
         }
     }
 

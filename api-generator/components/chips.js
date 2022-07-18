@@ -88,7 +88,13 @@ const ChipsProps = [
         type: 'string/regex',
         default: 'null',
         description: 'Format definition of the keys to block.'
-      },
+    },
+    {
+        name: 'addOnBlur',
+        type: 'boolean',
+        default: 'null',
+        description: 'Whether to add an item when the input loses focus.'
+    },
 ];
 
 const ChipsEvents = [

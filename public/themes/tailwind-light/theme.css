@@ -3378,6 +3378,19 @@
   border-top-right-radius: 0.375rem;
   border-top-left-radius: 0.375rem;
 }
+.p-orderlist .p-orderlist-filter-container {
+  padding: 1.25rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-bottom: 0 none;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-input {
+  padding-right: 1.75rem;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-icon {
+  right: 0.75rem;
+  color: #71717A;
+}
 .p-orderlist .p-orderlist-list {
   border: 1px solid #e5e7eb;
   background: #ffffff;

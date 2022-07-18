@@ -36,7 +36,7 @@ const ChipsDemo = () => {
             <div className="content-section implementation p-fluid">
                 <div className="card p-fluid">
                     <h5>Basic</h5>
-                    <Chips value={values1} onChange={(e) => setValues1(e.value)} />
+                    <Chips value={values1} onChange={(e) => setValues1(e.value)}/>
 
                     <h5>Comma Separator</h5>
                     <Chips value={values2} onChange={(e) => setValues2(e.value)} separator="," />

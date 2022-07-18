@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { useUpdateEffect } from '../hooks/Hooks';
+import { FilterService } from '../api/Api';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { OrderListControls } from './OrderListControls';
 import { OrderListSubList } from './OrderListSubList';
 
 export const OrderList = React.memo(React.forwardRef((props, ref) => {
     const [selectionState, setSelectionState] = React.useState([]);
+    const [filterValueState, setFilterValueState] = React.useState('');
+    const hasFilter = ObjectUtils.isNotEmpty(filterValueState);
     const elementRef = React.useRef(null);
     const reorderDirection = React.useRef(null);
 
@@ -51,6 +54,46 @@ export const OrderList = React.memo(React.forwardRef((props, ref) => {
             default:
                 break;
         }
+    }
+
+    const onFilter = (event) => {
+        let _filterValue = event.target.value;
+        setFilterValueState(_filterValue);
+
+        if (props.onFilter) {
+            props.onFilter({
+                originalEvent: event,
+                value: _filterValue
+            })
+        }
+    }
+
+    const resetFilter = () => {
+        setFilterValueState('');
+        props.onFilter && props.onFilter({ filter: '' });
+    }
+
+    const onFilterInputChange = (event) => {
+        const filter = event.target.value;
+
+        setFilterValueState(filter);
+
+        if (props.onFilter) {
+            props.onFilter({
+                originalEvent: event,
+                filter
+            });
+        }
+    }
+
+    const getVisibleList = () => {
+        if (hasFilter) {
+            const filterValue = filterValueState.trim().toLocaleLowerCase(props.filterLocale);
+            const searchFields = props.filterBy ? props.filterBy.split(',') : [];
+            return FilterService.filter(props.value, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+        }
+
+        return props.value;
     }
 
     const findNextItem = (item) => {
@@ -117,12 +160,13 @@ export const OrderList = React.memo(React.forwardRef((props, ref) => {
 
     const otherProps = ObjectUtils.findDiffKeys(props, OrderList.defaultProps);
     const className = classNames('p-orderlist p-component', props.className);
+    const visibleList = getVisibleList();
 
     return (
         <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
-            <OrderListControls value={props.value} selection={selectionState} onReorder={onReorder} dataKey={props.dataKey} />
-            <OrderListSubList value={props.value} selection={selectionState} onItemClick={onItemClick} onItemKeyDown={onItemKeyDown}
-                itemTemplate={props.itemTemplate} header={props.header} listStyle={props.listStyle} dataKey={props.dataKey}
+            <OrderListControls value={visibleList} selection={selectionState} onReorder={onReorder} dataKey={props.dataKey} />
+            <OrderListSubList value={visibleList} selection={selectionState} onItemClick={onItemClick} onItemKeyDown={onItemKeyDown} onFilterInputChange={onFilterInputChange}
+                itemTemplate={props.itemTemplate} filter={props.filter} onFilter={onFilter} resetFilter={resetFilter} filterTemplate={props.filterTemplate} header={props.header} listStyle={props.listStyle} dataKey={props.dataKey}
                 dragdrop={props.dragdrop} onChange={props.onChange} tabIndex={props.tabIndex} />
         </div>
     )
@@ -141,5 +185,12 @@ OrderList.defaultProps = {
     tabIndex: 0,
     dataKey: null,
     onChange: null,
-    itemTemplate: null
+    itemTemplate: null,
+    filter: false,
+    filterBy: null,
+    filterMatchMode: 'contains',
+    filterLocale: undefined,
+    filterPlaceholder: null,
+    filterTemplate: null,
+    onFilter: null
 }
