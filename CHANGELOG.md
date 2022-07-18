@@ -1,5 +1,36 @@
 # Changelog
 
+## [8.3.0](https://github.com/primefaces/primereact/tree/8.3.0) (2022-07-18)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.2.0...8.3.0)
+
+**Implemented New Features and Enhancements:**
+
+- Charts: Explicit import of chart.js dependency doesn't allow for single pages with inline scripting [\#3059](https://github.com/primefaces/primereact/issues/3059)
+- FilterTemplate support for components [\#3039](https://github.com/primefaces/primereact/issues/3039)
+
+**Fixed bugs:**
+
+- maxDate & minDate are broken in month-picker on Calendar [\#3076](https://github.com/primefaces/primereact/issues/3076)
+- Chips: UX issue [\#3072](https://github.com/primefaces/primereact/issues/3072)
+- Tooltip: positioned incorrectly in React 18 [\#3065](https://github.com/primefaces/primereact/issues/3065)
+- Calendar: decade selection can't be changed [\#3064](https://github.com/primefaces/primereact/issues/3064)
+- ConfirmDialog: mismatch in new version [\#3063](https://github.com/primefaces/primereact/issues/3063)
+- Calendar triggers onChange event twice when typing in React 18 Strict Mode [\#3062](https://github.com/primefaces/primereact/issues/3062)
+- Tag/Badge: SeverityType incorrect [\#3056](https://github.com/primefaces/primereact/issues/3056)
+- Checkbox/RadioButton: stops working in labels [\#3054](https://github.com/primefaces/primereact/issues/3054)
+- DataTable: Checkbox Row Selection and VirtualScroller not working simultaneously [\#3053](https://github.com/primefaces/primereact/issues/3053)
+- Datatable: Filter icon gets highlighted without even applying the filter  [\#3051](https://github.com/primefaces/primereact/issues/3051)
+- SplitButton: TypeScript Error "Cannot Find Name 'ButtonProps'" [\#3048](https://github.com/primefaces/primereact/issues/3048)
+- DataTable: DataTable row reorder is not working [\#3046](https://github.com/primefaces/primereact/issues/3046)
+- FileUpload: ref property does not show all the props [\#3045](https://github.com/primefaces/primereact/issues/3045)
+- Dropdown: hard to identify error on non matching label [\#3038](https://github.com/primefaces/primereact/issues/3038)
+- DataTable: custom filter icon is not updating [\#2976](https://github.com/primefaces/primereact/issues/2976)
+- Components: Cannot access ref [\#2963](https://github.com/primefaces/primereact/issues/2963)
+- InputNumber : Id not available in the OnChange [\#2908](https://github.com/primefaces/primereact/issues/2908)
+- Hooks: useImperativeHandle is preventing the default behaviour of useRef hook [\#2893](https://github.com/primefaces/primereact/issues/2893)
+- DataTable ignores sortFunction and sortField for initial sorting [\#2514](https://github.com/primefaces/primereact/issues/2514)
+
 ## [8.2.0](https://github.com/primefaces/primereact/tree/8.2.0) (2022-07-06)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.1.1...8.2.0)
