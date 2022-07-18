@@ -156,6 +156,7 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
                     style: { ...props.virtualScrollerOptions.style, ...{ height: props.scrollHeight } },
                     className: classNames('p-dropdown-items-wrapper', props.virtualScrollerOptions.className),
                     items: props.visibleOptions,
+                    autoSize: true,
                     onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: props.filterValue } }),
                     itemTemplate: (item, options) => item && createItem(item, options.index, options),
                     contentTemplate: (options) => {
