@@ -40,7 +40,7 @@ interface DropdownFilterParams {
 }
 
 interface DropdownFilterOptions {
-    filter?: (value?: KeyboardEvent) => void;
+    filter?: (event?: KeyboardEvent) => void;
     reset?: () => void;
 }
 

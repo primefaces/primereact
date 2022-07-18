@@ -69,7 +69,7 @@ interface MultiSelectAllParams {
 }
 
 interface MultiSelectFilterOptions {
-    filter?: (value?: KeyboardEvent) => void;
+    filter?: (event?: KeyboardEvent) => void;
     reset?: () => void;
 }
 

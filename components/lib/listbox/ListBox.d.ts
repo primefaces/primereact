@@ -32,7 +32,7 @@ interface ListBoxFilterValueChangeParams {
 }
 
 interface ListBoxFilterOptions {
-    filter?: (value?: KeyboardEvent) => void;
+    filter?: (event?: KeyboardEvent) => void;
     reset?: () => void;
 }
 

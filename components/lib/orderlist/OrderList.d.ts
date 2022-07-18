@@ -8,7 +8,7 @@ interface OrderListChangeParams {
 }
 
 interface OrderListFilterOptions {
-    filter?: (value?: KeyboardEvent) => void;
+    filter?: (event?: KeyboardEvent) => void;
     reset?: () => void;
 }
 

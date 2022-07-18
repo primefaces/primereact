@@ -66,7 +66,7 @@ interface TreeSelectFilterValueChangeParams {
 }
 
 interface TreeSelectFilterOptions {
-    filter?: (value?: KeyboardEvent) => void;
+    filter?: (event?: KeyboardEvent) => void;
     reset?: () => void;
 }
 

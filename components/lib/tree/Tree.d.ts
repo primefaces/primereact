@@ -102,7 +102,7 @@ interface TreeNodeClickParams {
 }
 
 interface TreeFilterOptions {
-    filter?: (value?: KeyboardEvent) => void;
+    filter?: (event?: KeyboardEvent) => void;
     reset?: () => void;
 }
 
