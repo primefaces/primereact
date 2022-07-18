@@ -18,35 +18,32 @@ export const ListBoxHeader = React.memo((props) => {
     }
 
     const createHeader = () => {
-        if (props.filter) {
-            let content = (
-                <div className="p-listbox-filter-container">
-                    <InputText type="text" value={props.filter} onChange={onFilter} className="p-listbox-filter" disabled={props.disabled} placeholder={props.filterPlaceholder} {...props.filterInputProps} />
-                    <span className="p-listbox-filter-icon pi pi-search"></span>
-                </div>
-            );
 
-            if (props.filterTemplate) {
-                const defaultContentOptions = {
-                    className: 'p-listbox-filter-container',
-                    element: content,
-                    filterOptions: filterOptions,
-                    filterInputChange: onFilter,
-                    filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
-                    props,
-                };
-    
-                content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
-            } 
+        let content = (
+            <div className="p-listbox-filter-container">
+                <InputText type="text" value={props.filter} onChange={onFilter} className="p-listbox-filter" disabled={props.disabled} placeholder={props.filterPlaceholder} {...props.filterInputProps} />
+                <span className="p-listbox-filter-icon pi pi-search"></span>
+            </div>
+        );
 
-            return (
-                <div className="p-listbox-header">
-                    {content}
-                </div>
-            );
-        }
+        if (props.filterTemplate) {
+            const defaultContentOptions = {
+                className: 'p-listbox-filter-container',
+                element: content,
+                filterOptions: filterOptions,
+                filterInputChange: onFilter,
+                filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                props,
+            };
 
-        return null;
+            content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
+        } 
+
+        return (
+            <div className="p-listbox-header">
+                {content}
+            </div>
+        );
     }
 
     const content = createHeader();
