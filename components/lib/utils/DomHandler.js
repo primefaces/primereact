@@ -1,6 +1,7 @@
 export default class DomHandler {
 
     static innerWidth(el) {
+        el = this.getElement(el);
         if (el) {
             let width = el.offsetWidth;
             let style = getComputedStyle(el);
@@ -12,6 +13,7 @@ export default class DomHandler {
     }
 
     static width(el) {
+        el = this.getElement(el);
         if (el) {
             let width = el.offsetWidth;
             let style = getComputedStyle(el);
@@ -42,6 +44,7 @@ export default class DomHandler {
     }
 
     static getOuterWidth(el, margin) {
+        el = this.getElement(el);
         if (el) {
             let width = el.offsetWidth || el.getBoundingClientRect().width;
 
@@ -56,6 +59,7 @@ export default class DomHandler {
     }
 
     static getOuterHeight(el, margin) {
+        el = this.getElement(el);
         if (el) {
             let height = el.offsetHeight || el.getBoundingClientRect().height;
 
@@ -70,6 +74,7 @@ export default class DomHandler {
     }
 
     static getClientHeight(el, margin) {
+        el = this.getElement(el);
         if (el) {
             let height = el.clientHeight;
 
@@ -84,6 +89,7 @@ export default class DomHandler {
     }
 
     static getClientWidth(el, margin) {
+        el = this.getElement(el);
         if (el) {
             let width = el.clientWidth;
 
@@ -109,6 +115,7 @@ export default class DomHandler {
     }
 
     static getOffset(el) {
+        el = this.getElement(el);
         if (el) {
             let rect = el.getBoundingClientRect();
 
@@ -125,6 +132,7 @@ export default class DomHandler {
     }
 
     static index(element) {
+        element = this.getElement(element);
         if (element) {
             let children = element.parentNode.childNodes;
             let num = 0;
@@ -137,6 +145,7 @@ export default class DomHandler {
     }
 
     static addMultipleClasses(element, className) {
+        element = this.getElement(element);
         if (element && className) {
             if (element.classList) {
                 let styles = className.split(' ');
@@ -155,6 +164,7 @@ export default class DomHandler {
     }
 
     static removeMultipleClasses(element, className) {
+        element = this.getElement(element);
         if (element && className) {
             if (element.classList) {
                 let styles = className.split(' ');
@@ -173,6 +183,7 @@ export default class DomHandler {
     }
 
     static addClass(element, className) {
+        element = this.getElement(element);
         if (element && className) {
             if (element.classList)
                 element.classList.add(className);
@@ -182,6 +193,7 @@ export default class DomHandler {
     }
 
     static removeClass(element, className) {
+        element = this.getElement(element);
         if (element && className) {
             if (element.classList)
                 element.classList.remove(className);
@@ -191,6 +203,7 @@ export default class DomHandler {
     }
 
     static hasClass(element, className) {
+        element = this.getElement(element);
         if (element) {
             if (element.classList)
                 return element.classList.contains(className);
@@ -200,10 +213,12 @@ export default class DomHandler {
     }
 
     static find(element, selector) {
+        element = this.getElement(element);
         return element ? Array.from(element.querySelectorAll(selector)) : [];
     }
 
     static findSingle(element, selector) {
+        element = this.getElement(element);
         if (element) {
             return element.querySelector(selector);
         }
@@ -211,6 +226,7 @@ export default class DomHandler {
     }
 
     static getHeight(el) {
+        el = this.getElement(el);
         if (el) {
             let height = el.offsetHeight;
             let style = getComputedStyle(el);
@@ -223,6 +239,7 @@ export default class DomHandler {
     }
 
     static getWidth(el) {
+        el = this.getElement(el);
         if (el) {
             let width = el.offsetWidth;
             let style = getComputedStyle(el);
@@ -247,7 +264,9 @@ export default class DomHandler {
     }
 
     static absolutePosition(element, target) {
+        element = this.getElement(element);
         if (element) {
+            target = this.getElement(target);
             let elementDimensions = element.offsetParent ? { width: element.offsetWidth, height: element.offsetHeight } : this.getHiddenElementDimensions(element)
             let elementOuterHeight = elementDimensions.height;
             let elementOuterWidth = elementDimensions.width;
@@ -283,7 +302,9 @@ export default class DomHandler {
     }
 
     static relativePosition(element, target) {
+        element = this.getElement(element);
         if (element) {
+            target = this.getElement(target);
             let elementDimensions = element.offsetParent ? { width: element.offsetWidth, height: element.offsetHeight } : this.getHiddenElementDimensions(element);
             const targetHeight = target.offsetHeight;
             const targetOffset = target.getBoundingClientRect();
@@ -322,6 +343,8 @@ export default class DomHandler {
     }
 
     static flipfitCollision(element, target, my = 'left top', at = 'left bottom', callback) {
+        element = this.getElement(element);
+        target = this.getElement(target);
         if (element && target) {
             const targetOffset = target.getBoundingClientRect();
             const viewport = this.getViewport();
@@ -494,10 +517,12 @@ export default class DomHandler {
     }
 
     static getParents(element, parents = []) {
+        element = this.getElement(element);
         return element['parentNode'] === null ? parents : this.getParents(element.parentNode, parents.concat([element.parentNode]));
     }
 
     static getScrollableParents(element) {
+        element = this.getElement(element);
         let scrollableParents = [];
 
         if (element) {
@@ -530,6 +555,7 @@ export default class DomHandler {
     }
 
     static getHiddenElementOuterHeight(element) {
+        element = this.getElement(element);
         if (element) {
             element.style.visibility = 'hidden';
             element.style.display = 'block';
@@ -543,6 +569,7 @@ export default class DomHandler {
     }
 
     static getHiddenElementOuterWidth(element) {
+        element = this.getElement(element);
         if (element) {
             element.style.visibility = 'hidden';
             element.style.display = 'block';
@@ -557,6 +584,7 @@ export default class DomHandler {
 
     static getHiddenElementDimensions(element) {
         let dimensions = {};
+        element = this.getElement(element);
         if (element) {
             element.style.visibility = 'hidden';
             element.style.display = 'block';
@@ -569,6 +597,7 @@ export default class DomHandler {
     }
 
     static fadeIn(element, duration) {
+        element = this.getElement(element);
         if (element) {
             element.style.opacity = 0;
 
@@ -589,6 +618,7 @@ export default class DomHandler {
     }
 
     static fadeOut(element, duration) {
+        element = this.getElement(element);
         if (element) {
             let opacity = 1,
                 interval = 50,
@@ -628,6 +658,8 @@ export default class DomHandler {
     }
 
     static appendChild(element, target) {
+        element = this.getElement(element);
+        target = this.getElement(target);
         if (this.isElement(target))
             target.appendChild(element);
         else if (target.el && target.el.nativeElement)
@@ -637,6 +669,8 @@ export default class DomHandler {
     }
 
     static removeChild(element, target) {
+        element = this.getElement(element);
+        target = this.getElement(target);
         if (this.isElement(target))
             target.removeChild(element);
         else if (target.el && target.el.nativeElement)
@@ -651,7 +685,18 @@ export default class DomHandler {
         );
     }
 
+    static getElement(element) {
+        if (!element) return null;
+
+        // if already and HTMLElement just return it
+        if (this.isElement(element)) return element;
+
+        // this is a Ref object of a component so return its HTMLElement
+        return element.getElement();
+    }
+
     static scrollInView(container, item) {
+        container = this.getElement(container);
         let borderTopValue = getComputedStyle(container).getPropertyValue('borderTopWidth');
         let borderTop = borderTopValue ? parseFloat(borderTopValue) : 0;
         let paddingTopValue = getComputedStyle(container).getPropertyValue('paddingTop');
@@ -689,6 +734,7 @@ export default class DomHandler {
     }
 
     static calculateScrollbarWidth(el) {
+        el = this.getElement(el);
         if (el) {
             let style = getComputedStyle(el);
             return (el.offsetWidth - el.clientWidth - parseFloat(style.borderLeftWidth) - parseFloat(style.borderRightWidth));
@@ -746,10 +792,12 @@ export default class DomHandler {
     }
 
     static isVisible(element) {
+        element = this.getElement(element);
         return element && element.offsetParent != null;
     }
 
     static isExist(element) {
+        element = this.getElement(element);
         return element !== null && typeof (element) !== 'undefined' && element.nodeName && element.parentNode;
     }
 
@@ -758,6 +806,7 @@ export default class DomHandler {
     }
 
     static getFocusableElements(element, selector = '') {
+        element = this.getElement(element);
         let focusableElements = DomHandler.find(element, `button:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
                 [href][clientHeight][clientWidth]:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
                 input:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
@@ -777,11 +826,13 @@ export default class DomHandler {
     }
 
     static getFirstFocusableElement(element, selector) {
+        element = this.getElement(element);
         const focusableElements = DomHandler.getFocusableElements(element, selector);
         return focusableElements.length > 0 ? focusableElements[0] : null;
     }
 
     static getLastFocusableElement(element, selector) {
+        element = this.getElement(element);
         const focusableElements = DomHandler.getFocusableElements(element, selector);
         return focusableElements.length > 0 ? focusableElements[focusableElements.length - 1] : null;
     }
@@ -793,11 +844,13 @@ export default class DomHandler {
      * @param {boolean} scrollTo flag to control whether to scroll to the element, false by default
      */
     static focus(el, scrollTo) {
+        el = this.getElement(el);
         const preventScroll = scrollTo === undefined ? true : !scrollTo;
         el && document.activeElement !== el && el.focus({ preventScroll });
     }
 
     static getCursorOffset(el, prevText, nextText, currentText) {
+        el = this.getElement(el);
         if (el) {
             let style = getComputedStyle(el);
             let ghostDiv = document.createElement('div');
@@ -841,10 +894,12 @@ export default class DomHandler {
     }
 
     static invokeElementMethod(element, methodName, args) {
+        element = this.getElement(element);
         (element)[methodName].apply(element, args);
     }
 
     static isClickable(element) {
+        element = this.getElement(element);
         const targetNode = element.nodeName;
         const parentNode = element.parentElement && element.parentElement.nodeName;
 
@@ -856,6 +911,7 @@ export default class DomHandler {
     }
 
     static applyStyle(element, style) {
+        element = this.getElement(element);
         if (typeof style === 'string') {
             element.style.cssText = this.style;
         }
