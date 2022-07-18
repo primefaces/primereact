@@ -66,6 +66,12 @@ const DropdownProps = [
         description: 'The template of items.'
     },
     {
+        name: 'filterTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'The template of filter element.'
+    },
+    {
         name: 'optionGroupTemplate',
         type: 'any',
         default: 'null',
@@ -335,6 +341,22 @@ const DropdownEvents = [
                 name: 'event',
                 type: 'object',
                 description: 'Browser event'
+            }
+        ]
+    },
+    {
+        name: 'onFilter',
+        description: 'Callback to invoke when the value is filtered.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original event'
+            },
+            {
+                name: 'event.filter',
+                type: 'any',
+                description: 'Value of the filter input'
             }
         ]
     }

@@ -516,18 +516,44 @@ const cities = [
 </CodeHighlight>
 
                     <h5>Custom Content</h5>
-                    <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate property. Its value can be JSXElement, function or string.</p>
+                    <p>Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> property. Its value can be JSXElement, function or string.  For custom filter support, define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.</p>
 
 <CodeHighlight>
 {`
-<ListBox value={city} options={cities} onChange={(e) => setCity(e.value)} itemTemplate={itemTemplate} />
+<ListBox value={city} options={cities} onChange={(e) => setCity(e.value)} itemTemplate={itemTemplate} filter filterTemplate={filterTemplate}/>
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
+const [filterValue, setFilterValue] = useState('');
+const filterInputRef = React.useRef();
+
 itemTemplate(option) {
     // custom item content
+}
+
+const filterTemplate = (options) => {
+    let {filterOptions} = options;
+
+    return (
+        <div className="flex flex-column gap-2">
+            <InputText value={filterValue} ref={filterInputRef} onChange={(e) => myFilterFunction(e, filterOptions)} />
+            <Button label="Reset" onClick={() => myResetFunction(filterOptions)} />
+        </div>
+    )
+}
+
+const myResetFunction = (options) => {
+    setFilterValue('');
+    options.reset();
+    filterInputRef && filterInputRef.current.focus()
+}
+
+const myFilterFunction = (event, options) => {
+    let _filterValue = event.target.value;
+    setFilterValue(_filterValue);
+    options.filter(event);
 }
 `}
 </CodeHighlight>
@@ -703,6 +729,12 @@ const groupedCities = [
                                     <td>any</td>
                                     <td>null</td>
                                     <td>Custom template for the items.</td>
+                                </tr>
+                                <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Custom template for the filter element.</td>
                                 </tr>
                                 <tr>
                                     <td>optionGroupTemplate</td>

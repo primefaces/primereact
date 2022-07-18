@@ -3343,6 +3343,19 @@
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
 }
+.p-orderlist .p-orderlist-filter-container {
+  padding: 1.25rem;
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-bottom: 0 none;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-input {
+  padding-right: 1.75rem;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-icon {
+  right: 0.75rem;
+  color: #6c757d;
+}
 .p-orderlist .p-orderlist-list {
   border: 1px solid #dee2e6;
   background: #ffffff;

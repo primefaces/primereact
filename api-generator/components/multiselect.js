@@ -186,6 +186,12 @@ const MultiSelectProps = [
         description: 'Function that gets the option and returns the content for it.'
     },
     {
+        name: 'filterTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'The template of filter element.'
+    },
+    {
         name: 'optionGroupTemplate',
         type: 'any',
         default: 'null',

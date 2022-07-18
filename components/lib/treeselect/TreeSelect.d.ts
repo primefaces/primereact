@@ -13,6 +13,8 @@ type TreeSelectFilterModeType = 'lenient' | 'strict';
 
 type TreeSelectValueTemplateType = React.ReactNode | ((selectedNodes: TreeNode | TreeNode[], props: TreeSelectProps) => React.ReactNode);
 
+type TreeSelectFilterTemplateType = React.ReactNode | ((options: TreeSelectFilterOptions) => React.ReactNode);
+
 type TreeSelectPanelHeaderTemplateType = React.ReactNode | ((options: TreeSelectPanelHeaderTemplateOptions) => React.ReactNode);
 
 type TreeSelectPanelFooterTemplateType = React.ReactNode | ((props: TreeSelectProps) => React.ReactNode);
@@ -63,6 +65,11 @@ interface TreeSelectFilterValueChangeParams {
     value: string;
 }
 
+interface TreeSelectFilterOptions {
+    filter?: (event?: KeyboardEvent) => void;
+    reset?: () => void;
+}
+
 export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'|'value' | 'ref'> {
     id?: string;
     value?: TreeSelectSelectionKeys;
@@ -87,6 +94,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     valueTemplate?: TreeSelectValueTemplateType;
     panelHeaderTemplate?: TreeSelectPanelHeaderTemplateType;
     panelFooterTemplate?: TreeSelectPanelFooterTemplateType;
+    filterTemplate?: TreeSelectFilterTemplateType;
     transitionOptions?: CSSTransitionProps;
     dropdownIcon?: string;
     filter?: boolean;

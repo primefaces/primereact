@@ -570,16 +570,18 @@ export const TreeLazyDemo = () => {
 </CodeHighlight>
 
                     <h5>Templating</h5>
-                    <p><i>label</i> property of a node is used to display as the content by default. Templating is supported as well with the <i>nodeTemplate</i> callback that gets the node instance and returns JSX. Example
+                    <p><i>label</i> property of a node is used to display as the content by default. Templating is supported as well with the <i>nodeTemplate</i> callback that gets the node instance and returns JSX.  For custom filter support define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element. Example
         below is a sample tree based navigation of React docs.</p>
 <CodeHighlight lang="js">
 {`
-import React, { Component } from 'react';
+import React, { Component, useState, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 
 export const TreeTemplatingDemo = () => {
 
     const [nodes, setNodes] = useState(createNavigation());
+    const [filterValue, setFilterValue] = useState('');
+    const filterInputRef = useRef();
 
     const createNavigation = () => {
         return [
@@ -620,8 +622,31 @@ export const TreeTemplatingDemo = () => {
         )
     }
 
+    const filterTemplate = (options) => {
+        let {filterOptions} = options;
+    
+        return (
+            <div className="flex gap-2">
+                <InputText value={filterValue} ref={filterInputRef} onChange={(e) => myFilterFunction(e, filterOptions)} />
+                <Button label="Reset" onClick={() => myResetFunction(filterOptions)} />
+            </div>
+        )
+    }
+    
+    const myResetFunction = (options) => {
+        setFilterValue('');
+        options.reset();
+        filterInputRef && filterInputRef.current.focus()
+    }
+    
+    const myFilterFunction = (event, options) => {
+        let _filterValue = event.target.value;
+        setFilterValue(_filterValue);
+        options.filter(event);
+    }
+
     return (
-        <Tree value={nodes} nodeTemplate={nodeTemplate} />
+        <Tree value={nodes} nodeTemplate={nodeTemplate} filter filterTemplate={filterTemplate}/>
     )
 }
 `}
@@ -872,10 +897,22 @@ export const TreeContextMenuDemo = () => {
                                     <td>Template of node element.</td>
                                 </tr>
                                 <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template of filter element.</td>
+                                </tr>
+                                <tr>
                                     <td>togglerTemplate</td>
                                     <td>any</td>
                                     <td>null</td>
                                     <td>Template of toggler element.</td>
+                                </tr>
+                                <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template of filter element.</td>
                                 </tr>
                                 <tr>
                                     <td>showHeader</td>
