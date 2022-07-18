@@ -2,6 +2,7 @@ import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const Badge = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
     const otherProps = ObjectUtils.findDiffKeys(props, Badge.defaultProps);
     const className = classNames('p-badge p-component', {
         'p-badge-no-gutter': ObjectUtils.isNotEmpty(props.value) && String(props.value).length === 1,
@@ -11,8 +12,13 @@ export const Badge = React.memo(React.forwardRef((props, ref) => {
         [`p-badge-${props.severity}`]: props.severity !== null
     }, props.className);
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     return (
-        <span className={className} style={props.style} {...otherProps}>
+        <span ref={elementRef} className={className} style={props.style} {...otherProps}>
             {props.value}
         </span>
     )

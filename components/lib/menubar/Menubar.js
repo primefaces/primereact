@@ -6,6 +6,7 @@ import { MenubarSub } from './MenubarSub';
 
 export const Menubar = React.memo(React.forwardRef((props, ref) => {
     const [mobileActiveState, setMobileActiveState] = React.useState(false);
+    const elementRef = React.useRef(null);
     const rootMenuRef = React.useRef(null);
     const menuButtonRef = React.useRef(null);
 
@@ -50,6 +51,9 @@ export const Menubar = React.memo(React.forwardRef((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         toggle,
         useCustomContent,
+        getElement: () => elementRef.current,
+        getRootMenu: () => rootMenuRef.current,
+        getMenuButton: () => menuButtonRef.current,
         ...props
     }));
 

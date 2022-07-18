@@ -2,6 +2,7 @@ import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const Divider = React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
     const horizontal = props.layout === 'horizontal';
     const vertical = props.layout === 'vertical';
     const otherProps = ObjectUtils.findDiffKeys(props, Divider.defaultProps);
@@ -13,8 +14,13 @@ export const Divider = React.forwardRef((props, ref) => {
         'p-divider-bottom': vertical && props.align === 'bottom',
     }, props.className);
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     return (
-        <div className={className} style={props.style} role="separator" {...otherProps}>
+        <div ref={elementRef} className={className} style={props.style} role="separator" {...otherProps}>
             <div className="p-divider-content">
                 {props.children}
             </div>

@@ -440,6 +440,8 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
         updateTargetEvents,
         loadTargetEvents,
         unloadTargetEvents,
+        getElement: () => elementRef.current,
+        getTarget: () => currentTargetRef.current,
         ...props
     }));
 

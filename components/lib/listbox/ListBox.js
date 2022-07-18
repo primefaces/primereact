@@ -255,6 +255,12 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        getVirtualScroller: () => virtualScrollerRef.current,
+        ...props
+    }));
+
     useMountEffect(() => {
         scrollToSelectedIndex();
     });

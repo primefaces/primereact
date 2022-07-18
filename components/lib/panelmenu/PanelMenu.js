@@ -8,6 +8,7 @@ export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
     const [idState, setIdState] = React.useState(props.id);
     const [activeItemState, setActiveItemState] = React.useState(null);
     const [animationDisabled, setAnimationDisabled] = React.useState(false);
+    const elementRef = React.useRef(null);
     const headerId = idState + '_header';
     const contentId = idState + '_content';
 
@@ -71,6 +72,11 @@ export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
     const isItemActive = (item) => {
         return activeItemState && (props.multiple ? activeItemState.indexOf(item) > -1 : activeItemState === item);
     }
+
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
 
     useMountEffect(() => {
         if (!idState) {
@@ -151,7 +157,7 @@ export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
     const panels = createPanels();
 
     return (
-        <div id={props.id} className={className} style={props.style} {...otherProps}>
+        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
             {panels}
         </div>
     )

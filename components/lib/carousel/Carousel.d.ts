@@ -12,14 +12,11 @@ interface CarouselPageChangeParams {
     page: number;
 }
 
-export interface CarouselProps {
-    id?: string;
+export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     value?: any[];
     page?: number;
     header?: React.ReactNode;
     footer?: React.ReactNode;
-    style?: object;
-    className?: string;
     itemTemplate?(item: any): React.ReactNode;
     circular?: boolean;
     autoplayInterval?: number;
@@ -35,4 +32,6 @@ export interface CarouselProps {
     children?: React.ReactNode;
 }
 
-export declare class Carousel extends React.Component<CarouselProps, any> { }
+export declare class Carousel extends React.Component<CarouselProps, any> {
+    public getElement(): HTMLDivElement;
+ }

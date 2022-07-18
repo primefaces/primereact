@@ -76,6 +76,11 @@ export const MultiStateCheckbox = React.memo(React.forwardRef((props, ref) => {
         return { option, index };
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     useMountEffect(() => {
         if (!props.empty && props.value === null) {
             toggle();

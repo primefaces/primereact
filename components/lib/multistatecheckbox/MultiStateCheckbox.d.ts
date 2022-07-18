@@ -34,19 +34,15 @@ interface MultiStateCheckboxChangeParams {
     target: MultiStateCheckboxChangeTargetOptions;
 }
 
-export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
-    id?: string;
+export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     value?: any;
     options?: MultiStateCheckboxOptionsType;
     optionValue?: string;
     optionLabel?: string;
     iconTemplate?: MultiStateCheckboxIconTemplateType;
     dataKey?: string;
-    style?: object;
-    className?: string;
     disabled?: boolean;
     readOnly?: boolean;
-    tabIndex?: number;
     empty?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
@@ -54,4 +50,6 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
     children?: React.ReactNode;
 }
 
-export declare class MultiStateCheckbox extends React.Component<MultiStateCheckboxProps, any> { }
+export declare class MultiStateCheckbox extends React.Component<MultiStateCheckboxProps, any> { 
+    public getElement(): HTMLDivElement;
+}

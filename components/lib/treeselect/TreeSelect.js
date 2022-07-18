@@ -281,6 +281,11 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
         return selectedNodes;
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     useMountEffect(() => {
         updateTreeState();
     });

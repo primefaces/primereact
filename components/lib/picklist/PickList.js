@@ -11,6 +11,7 @@ export const PickList = React.memo(React.forwardRef((props, ref) => {
     const [targetSelectionState, setTargetSelectionState] = React.useState([]);
     const [sourceFilterValueState, setSourceFilterValueState] = React.useState('');
     const [targetFilterValueState, setTargetFilterValueState] = React.useState('');
+    const elementRef = React.useRef(null);
     const sourceListElementRef = React.useRef(null);
     const targetListElementRef = React.useRef(null);
     const reorderedListElementRef = React.useRef(null);
@@ -181,6 +182,11 @@ export const PickList = React.memo(React.forwardRef((props, ref) => {
         return FilterService.filter(list, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     useUpdateEffect(() => {
         if (reorderedListElementRef.current) {
             handleScrollPosition(reorderedListElementRef.current, reorderDirection.current);
@@ -197,7 +203,7 @@ export const PickList = React.memo(React.forwardRef((props, ref) => {
     const targetList = getVisibleList(props.target, 'target');
 
     return (
-        <div id={props.id} className={className} style={props.style} {...otherProps}>
+        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
             {props.showSourceControls && <PickListControls list={props.source} selection={sourceSelection} onReorder={onSourceReorder} className="p-picklist-source-controls" dataKey={props.dataKey} />}
 
             <PickListSubList ref={sourceListElementRef} type="source" list={sourceList} selection={sourceSelection} onSelectionChange={(e) => onSelectionChange(e, 'sourceSelection', props.onSourceSelectionChange)} itemTemplate={sourceItemTemplate}

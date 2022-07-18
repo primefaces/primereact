@@ -1,6 +1,7 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
+import { InputText } from '../inputtext';
 
 type PasswordHeaderType = React.ReactNode | ((props: PasswordProps) => React.ReactNode);
 
@@ -20,7 +21,6 @@ type PasswordIconType = React.ReactNode | ((e: PasswordIconParams) => React.Reac
 type PasswordAppendToType = 'self' | HTMLElement | undefined | null;
 
 export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput'|'ref'> {
-    id?: string;
     inputId?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     promptLabel?: string;
@@ -38,8 +38,6 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
     icon?: PasswordIconType;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    style?: object;
-    className?: string;
     inputStyle?: object;
     inputClassName?: string;
     panelStyle?: object;
@@ -51,4 +49,8 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
     children?: React.ReactNode;
 }
 
-export declare class Password extends React.Component<PasswordProps, any> { }
+export declare class Password extends React.Component<PasswordProps, any> { 
+    public getElement(): HTMLDivElement;
+    public getInput(): InputText;
+    public getOverlay(): HTMLElement;
+}

@@ -12,16 +12,13 @@ interface GalleriaItemChangeParams {
     index: number;
 }
 
-export interface GalleriaProps {
-    id?: string;
+export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     value?: any[];
     activeIndex?: number;
     fullScreen?: boolean;
     item?(item: any): React.ReactNode;
     thumbnail?(item: any): React.ReactNode;
     indicator?(index: number): React.ReactNode;
-    className?: string;
-    style?: object;
     header?: React.ReactNode;
     footer?: React.ReactNode;
     numVisible?: number;
@@ -53,4 +50,5 @@ export declare class Galleria extends React.Component<GalleriaProps, any> {
     public isAutoPlayActive(): boolean;
     public startSlideShow(): void;
     public stopSlideShow(): void;
+    public getElement(): HTMLDivElement;
 }

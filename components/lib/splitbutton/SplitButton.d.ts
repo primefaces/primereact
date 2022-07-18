@@ -6,23 +6,19 @@ import { IconType, TemplateType } from '../utils';
 
 type SplitButtonAppendToType = 'self' | HTMLElement | undefined | null;
 
-export interface SplitButtonProps {
-    id?: string;
+export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     label?: string;
     icon?: IconType<SplitButtonProps>;
     loading?: boolean;
     loadingIcon?: IconType<SplitButtonProps>;
     model?: MenuItem[];
     disabled?: boolean;
-    style?: object;
-    className?: string;
     buttonClassName?: string;
     menuStyle?: object;
     menuClassName?: string;
     menuButtonClassName?: string;
     buttonProps?: any;
     menuButtonProps?: any;
-    tabIndex?: number;
     appendTo?: SplitButtonAppendToType;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
@@ -38,4 +34,5 @@ export interface SplitButtonProps {
 export declare class SplitButton extends React.Component<SplitButtonProps, any> {
     public show(): void;
     public hide(): void;
+    public getElement(): HTMLDivElement;
 }

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { InputText, InputTextProps } from '../inputtext';
 import TooltipOptions from '../tooltip/tooltipoptions';
 
 interface InputMaskCompleteParams {
@@ -20,23 +21,13 @@ interface InputMaskChangeParams {
     target: InputMaskChangeTargetOptions;
 }
 
-export interface InputMaskProps {
-    id?: string;
-    value?: string;
-    type?: string;
+export interface InputMaskProps extends InputTextProps {
     mask?: string;
     slotChar?: string;
     autoClear?: boolean;
     unmask?: boolean;
-    style?: object;
-    className?: string;
-    placeholder?: string;
-    size?: number;
-    maxLength?: number;
-    tabIndex?: number;
     disabled?: boolean;
     readOnly?: boolean;
-    name?: string;
     required?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
@@ -47,4 +38,6 @@ export interface InputMaskProps {
     children?: React.ReactNode;
 }
 
-export declare class InputMask extends React.Component<InputMaskProps, any> { }
+export declare class InputMask extends React.Component<InputMaskProps, any> { 
+    public getElement(): InputText;
+}

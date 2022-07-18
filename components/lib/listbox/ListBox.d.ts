@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
-import { VirtualScrollerProps } from '../virtualscroller';
+import { VirtualScrollerProps, VirtualScroller } from '../virtualscroller';
 
 
 type ListBoxOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
@@ -37,7 +37,6 @@ interface ListBoxFilterOptions {
 }
 
 export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
-    id?: string;
     value?: any;
     options?: SelectItemOptionsType;
     optionLabel?: string;
@@ -48,10 +47,8 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
     optionGroupTemplate?: ListBoxOptionGroupTemplateType;
     itemTemplate?: ListBoxItemTemplateType;
     filterTemplate?: ListBoxFilterTemplateType;
-    style?: object;
     listStyle?: object;
     listClassName?: string;
-    className?: string;
     virtualScrollerOptions?: VirtualScrollerProps;
     disabled?: boolean;
     dataKey?: string;
@@ -64,7 +61,6 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
     filterPlaceholder?: string;
     filterLocale?: string;
     filterInputProps?: any;
-    tabIndex?: number;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
@@ -73,4 +69,7 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
     children?: React.ReactNode;
 }
 
-export declare class ListBox extends React.Component<ListBoxProps, any> { }
+export declare class ListBox extends React.Component<ListBoxProps, any> { 
+    public getElement(): HTMLDivElement;
+    public getVirtualScroller(): VirtualScroller;
+}

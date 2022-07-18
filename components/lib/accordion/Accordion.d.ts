@@ -26,11 +26,8 @@ interface AccordionEventParams {
     index: number;
 }
 
-export interface AccordionProps {
-    id?: string;
+export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     activeIndex?: AccordionActiveIndexType;
-    className?: string;
-    style?: object;
     multiple?: boolean;
     expandIcon?: IconType<AccordionProps>;
     collapseIcon?: IconType<AccordionProps>;
@@ -42,4 +39,6 @@ export interface AccordionProps {
 }
 
 // tslint:disable-next-line:max-classes-per-file
-export declare class Accordion extends React.Component<AccordionProps, any> { }
+export declare class Accordion extends React.Component<AccordionProps, any> { 
+    public getElement(): HTMLDivElement;
+}

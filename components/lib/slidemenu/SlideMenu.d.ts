@@ -4,12 +4,9 @@ import { CSSTransitionProps } from '../csstransition';
 
 type SlideMenuAppendToType = 'self' | HTMLElement | undefined | null;
 
-export interface SlideMenuProps {
-    id?: string;
+export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     model?: MenuItem[];
     popup?: boolean;
-    style?: object;
-    className?: string;
     easing?: string;
     effectDuration?: number;
     backLabel?: string;
@@ -28,4 +25,5 @@ export declare class SlideMenu extends React.Component<SlideMenuProps, any> {
     public show(event: React.SyntheticEvent): void;
     public hide(event: React.SyntheticEvent): void;
     public toggle(event: React.SyntheticEvent): void;
+    public getElement(): HTMLDivElement;
 }

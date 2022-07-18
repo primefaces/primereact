@@ -4,6 +4,7 @@ import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const TabMenu = React.memo(React.forwardRef((props, ref) => {
     const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
+    const elementRef = React.useRef(null);
     const inkbarRef = React.useRef(null);
     const navRef = React.useRef(null);
     const tabsRef = React.useRef({});
@@ -48,6 +49,11 @@ export const TabMenu = React.memo(React.forwardRef((props, ref) => {
         inkbarRef.current.style.width = DomHandler.getWidth(tabHeader) + 'px';
         inkbarRef.current.style.left = DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(navRef.current).left + 'px';
     }
+
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
 
     React.useEffect(() => {
         updateInkBar();
@@ -104,7 +110,7 @@ export const TabMenu = React.memo(React.forwardRef((props, ref) => {
         const items = createItems();
 
         return (
-            <div id={props.id} className={className} style={props.style} {...otherProps}>
+            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
                 <ul ref={navRef} className="p-tabmenu-nav p-reset" role="tablist">
                     {items}
                     <li ref={inkbarRef} className="p-tabmenu-ink-bar"></li>
