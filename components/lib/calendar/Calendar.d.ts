@@ -165,5 +165,8 @@ export declare class Calendar extends React.Component<CalendarProps, any> {
     public hide(): void;
     public getCurrentDateTime(): Date | Date[];
     public getViewDate(): Date | Date[];
+    public getElement(): HTMLSpanElement;
+    public getInput(): HTMLInputElement;
+    public getOverlay(): HTMLElement;
     public updateViewDate(event: CalendarEventType, value: Date | Date[]): void;
 }

@@ -505,6 +505,11 @@ export const InputMask = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     React.useEffect(() => {
         ObjectUtils.combinedRefs(elementRef, ref);
     }, [elementRef, ref]);

@@ -177,6 +177,12 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
         return ObjectUtils.getPropValue(props.removable, { value, index, props });
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        getInput: () => inputRef.current,
+        ...props
+    }));
+
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);

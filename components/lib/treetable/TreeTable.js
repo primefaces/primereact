@@ -792,6 +792,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         filter,
+        getElement: () => elementRef.current,
         ...props
     }));
 

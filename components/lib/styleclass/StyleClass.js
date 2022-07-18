@@ -166,6 +166,12 @@ export const StyleClass = React.forwardRef((props, ref) => {
         return !elementRef.current.isSameNode(event.target) && !elementRef.current.contains(event.target) && !targetRef.current.contains(event.target)
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        getTarget: () => targetRef.current,
+        ...props
+    }));
+
     useMountEffect(() => {
         init();
     });

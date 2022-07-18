@@ -85,6 +85,13 @@ export const Sidebar = React.forwardRef((props, ref) => {
         }
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => sidebarRef.current,
+        gteMask: () => maskRef.current,
+        getCloseIcon: () => closeIconRef.current,
+        ...props
+    }));
+
     useMountEffect(() => {
         if (props.visible) {
             setMaskVisibleState(true);

@@ -26,13 +26,10 @@ interface PanelToggleParams {
     value: boolean;
 }
 
-export interface PanelProps {
-    id?: string;
+export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     header?: React.ReactNode;
     headerTemplate?: PanelHeaderTemplateType;
     toggleable?: boolean;
-    style?: object;
-    className?: string;
     collapsed?: boolean;
     expandIcon?: IconType<PanelProps>;
     collapseIcon?: IconType<PanelProps>;
@@ -44,4 +41,7 @@ export interface PanelProps {
     children?: React.ReactNode;
 }
 
-export declare class Panel extends React.Component<PanelProps, any> { }
+export declare class Panel extends React.Component<PanelProps, any> { 
+    public getElement(): HTMLDivElement;
+    public getContent(): HTMLDivElement;
+}

@@ -3,14 +3,11 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const Editor = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
     const contentRef = React.useRef(null);
     const toolbarRef = React.useRef(null);
     const quill = React.useRef(null);
     const isQuillLoaded = React.useRef(false);
-
-    const getQuill = () => {
-        return quill.current;
-    }
 
     useMountEffect(() => {
         if (!isQuillLoaded.current) {
@@ -86,7 +83,10 @@ export const Editor = React.memo(React.forwardRef((props, ref) => {
     }, [props.value]);
 
     React.useImperativeHandle(ref, () => ({
-        getQuill,
+        getQuill: () => quill.current,
+        getElement: () => elementRef.current,
+        getContent: () => contentRef.current,
+        getToolbar: () => toolbarRef.current,
         ...props
     }));
 
@@ -154,7 +154,7 @@ export const Editor = React.memo(React.forwardRef((props, ref) => {
     const content = <div ref={contentRef} className="p-editor-content" style={props.style}></div>
 
     return (
-        <div id={props.id} className={className} {...otherProps}>
+        <div id={props.id} ref={elementRef} className={className} {...otherProps}>
             {header}
             {content}
         </div>

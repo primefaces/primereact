@@ -2,6 +2,7 @@ import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const Message = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
 
     const createContent = () => {
         if (props.content) {
@@ -24,6 +25,11 @@ export const Message = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     const otherProps = ObjectUtils.findDiffKeys(props, Message.defaultProps);
     const className = classNames('p-inline-message p-component', {
         'p-inline-message-info': props.severity === 'info',
@@ -35,7 +41,7 @@ export const Message = React.memo(React.forwardRef((props, ref) => {
     const content = createContent();
 
     return (
-        <div id={props.id} className={className} style={props.style} {...otherProps} role="alert" aria-live="polite">
+        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps} role="alert" aria-live="polite">
             {content}
         </div>
     )

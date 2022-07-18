@@ -49,6 +49,11 @@ export const ScrollTop = React.memo(React.forwardRef((props, ref) => {
         props.onHide && props.onHide();
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => scrollElementRef.current,
+        ...props
+    }));
+
     useMountEffect(() => {
         if (props.target === 'window')
             bindDocumentScrollListener();

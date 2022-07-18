@@ -2,14 +2,13 @@ import * as React from 'react';
 import { MenuItem } from '../menuitem';
 import { CSSTransitionProps } from '../csstransition';
 
-export interface PanelMenuProps {
-    id?: string;
+export interface PanelMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     model?: MenuItem[];
-    style?: object;
-    className?: string;
     multiple?: boolean;
     transitionOptions?: CSSTransitionProps;
     children?: React.ReactNode;
 }
 
-export declare class PanelMenu extends React.Component<PanelMenuProps, any> { }
+export declare class PanelMenu extends React.Component<PanelMenuProps, any> { 
+    public getElement(): HTMLDivElement;
+}

@@ -286,6 +286,11 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     useMountEffect(() => {
         if (elementRef.current) {
             attributeSelector.current = UniqueComponentId();
