@@ -16,15 +16,17 @@ interface TriStateCheckboxChangeParams {
 }
 
 export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value'> {
+    id?: string;
     value?: boolean | undefined | null;
+    style?: object;
+    className?: string;
     disabled?: boolean;
     readOnly?: boolean;
+    tabIndex?: number;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     onChange?(e: TriStateCheckboxChangeParams): void;
     children?: React.ReactNode;
 }
 
-export declare class TriStateCheckbox extends React.Component<TriStateCheckboxProps, any> { 
-    public getElement(): HTMLDivElement;
-}
+export declare class TriStateCheckbox extends React.Component<TriStateCheckboxProps, any> { }

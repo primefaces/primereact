@@ -11,9 +11,12 @@ interface OverlayPanelBreakpoints {
     [key: string]: string;
 }
 
-export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface OverlayPanelProps {
+    id?: string;
     dismissable?: boolean;
     showCloseIcon?: boolean;
+    style?: object;
+    className?: string;
     appendTo?: OverlayPanelAppendToType;
     ariaCloseLabel?: string;
     breakpoints?: OverlayPanelBreakpoints;
@@ -27,5 +30,4 @@ export declare class OverlayPanel extends React.Component<OverlayPanelProps, any
     public toggle(event: OverlayPanelEventType, target?: OverlayPanelTargetType): void;
     public show(event: OverlayPanelEventType, target: OverlayPanelTargetType): void;
     public hide(): void;
-    public getElement(): HTMLDivElement;
 }

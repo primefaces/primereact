@@ -31,7 +31,8 @@ interface ChipsChangeParams {
     target: ChipsChangeTargetOptions;
 }
 
-export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onFocus' | 'onBlur' | 'onKeyDown' |'ref'> {
+export interface ChipsProps {
+    id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     inputId?: string;
     name?: string;
@@ -41,6 +42,8 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
     disabled?: boolean;
     readOnly?: boolean;
     removable?: ChipsRemovableType;
+    style?: object;
+    className?: string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
@@ -58,7 +61,4 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
     children?: React.ReactNode;
 }
 
-export declare class Chips extends React.Component<ChipsProps, any> {
-    public getElement(): HTMLDivElement;
-    public getInput(): HTMLInputElement;
- }
+export declare class Chips extends React.Component<ChipsProps, any> { }

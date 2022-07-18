@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { InputText } from '../inputtext/inputtext';
 import TooltipOptions from '../tooltip/tooltipoptions';
 
 interface InputNumberValueChangeTargetOptions {
@@ -21,7 +20,7 @@ interface InputNumberChangeParams {
     value: number | null;
 }
 
-export interface InputNumberProps  extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'ref'> {
+export interface InputNumberProps {
     value?: number | null;
     inputRef?: React.Ref<HTMLInputElement>;
     format?: boolean;
@@ -41,6 +40,7 @@ export interface InputNumberProps  extends Omit<React.DetailedHTMLProps<React.HT
     useGrouping?: boolean;
     minFractionDigits?: number;
     maxFractionDigits?: number;
+    id?: string;
     name?: string;
     type?: string;
     allowEmpty?: boolean;
@@ -55,6 +55,8 @@ export interface InputNumberProps  extends Omit<React.DetailedHTMLProps<React.HT
     placeholder?: string;
     readOnly?: boolean;
     size?: number;
+    style?: object;
+    className?: string;
     inputId?: string;
     autoFocus?: boolean;
     inputStyle?: object;
@@ -72,6 +74,4 @@ export interface InputNumberProps  extends Omit<React.DetailedHTMLProps<React.HT
 
 export declare class InputNumber extends React.Component<InputNumberProps, any> {
     public getFormatter(): any;
-    public getElement(): HTMLSpanElement;
-    public getInput(): InputText;
 }

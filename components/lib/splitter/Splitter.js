@@ -171,11 +171,6 @@ export const Splitter = React.memo(React.forwardRef((props, ref) => {
         window.removeEventListener('touchend', onGutterTouchEnd);
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     React.useEffect(() => {
         let panelElements = [...elementRef.current.children].filter(child => DomHandler.hasClass(child, 'p-splitter-panel'));
         panelElements.map(panelElement => {

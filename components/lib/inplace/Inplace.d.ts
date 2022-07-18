@@ -5,10 +5,13 @@ interface InplaceToggleParams {
     value: boolean;
 }
 
-export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface InplaceProps {
+    style?: object;
+    className?: string;
     active?: boolean;
     closable?: boolean;
     disabled?: boolean;
+    tabIndex?: number;
     ariaLabel?: string;
     onOpen?(event: React.MouseEvent<HTMLElement>): void;
     onClose?(event: React.MouseEvent<HTMLElement>): void;
@@ -16,9 +19,7 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     children?: React.ReactNode;
 }
 
-export declare class Inplace extends React.Component<InplaceProps, any> { 
-    public getElement(): HTMLDivElement;
-}
+export declare class Inplace extends React.Component<InplaceProps, any> { }
 
 // tslint:disable-next-line:max-classes-per-file
 export declare class InplaceDisplay extends React.Component {

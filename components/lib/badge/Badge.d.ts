@@ -11,6 +11,4 @@ export interface BadgeProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
     children?: React.ReactNode;
 }
 
-export declare class Badge extends React.Component<BadgeProps, any> {
-    public getElement(): HTMLSpanElement;
- }
+export declare class Badge extends React.Component<BadgeProps, any> { }

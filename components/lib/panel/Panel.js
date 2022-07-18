@@ -44,12 +44,6 @@ export const Panel = React.forwardRef((props, ref) => {
         props.onCollapse && props.onCollapse(event);
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        getContent: () => contentRef.current,
-        ...props
-    }));
-
     React.useEffect(() => {
         ObjectUtils.combinedRefs(elementRef, ref);
     }, [elementRef, ref]);

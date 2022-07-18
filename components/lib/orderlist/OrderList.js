@@ -146,11 +146,6 @@ export const OrderList = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     useUpdateEffect(() => {
         if (reorderDirection.current) {
             updateListScroll();

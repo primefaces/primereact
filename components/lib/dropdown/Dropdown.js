@@ -548,16 +548,6 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
         return index !== -1 ? (props.optionGroupLabel ? getOptionGroupChildren(props.options[index.group])[index.option] : props.options[index]) : null;
     }
 
-    React.useImperativeHandle(ref, () => ({
-        show,
-        hide,
-        getElement: () => elementRef.current,
-        getOverlay: () => overlayRef.current,
-        getInput: () => inputRef.current,
-        getFocusInput: () => focusInputRef.current,
-        ...props
-    }));
-
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);

@@ -4,7 +4,6 @@ import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Dock = React.memo(React.forwardRef((props, ref) => {
     const [currentIndexState, setCurrentIndexState] = React.useState(-3);
-    const elementRef = React.useRef(null);
 
     const onListMouseLeave = () => {
         setCurrentIndexState(-3);
@@ -102,11 +101,6 @@ export const Dock = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     const otherProps = ObjectUtils.findDiffKeys(props, Dock.defaultProps);
     const className = classNames(`p-dock p-component p-dock-${props.position}`, {
         'p-dock-magnification': props.magnification
@@ -116,7 +110,7 @@ export const Dock = React.memo(React.forwardRef((props, ref) => {
     const footer = createFooter();
 
     return (
-        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             <div className="p-dock-container">
                 {header}
                 {list}

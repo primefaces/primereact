@@ -46,12 +46,6 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
         return props.checked === props.trueValue;
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        getInput: () => inputRef.current,
-        ...props
-    }));
-
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);

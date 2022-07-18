@@ -47,12 +47,6 @@ export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
         props.onBlur && props.onBlur(event);
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        getInput: () => elementRef.current,
-        ...props
-    }));
-
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);

@@ -83,7 +83,6 @@ export const Captcha = React.memo(React.forwardRef((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         reset,
         getResponse,
-        getElement: () => elementRef.current,
         ...props
     }));
 

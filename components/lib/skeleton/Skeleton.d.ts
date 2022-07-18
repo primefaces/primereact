@@ -4,16 +4,16 @@ type SkeletonShapeType = 'rectangle' | 'circle';
 
 type SkeletonAnimationType = 'wave' | 'none';
 
-export interface SkeletonProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface SkeletonProps {
     shape?: SkeletonShapeType;
     size?: string;
     width?: string;
     height?: string;
     borderRadius?: string;
     animation?: SkeletonAnimationType;
+    style?: object;
+    className?: string;
     children?: React.ReactNode;
 }
 
-export declare class Skeleton extends React.Component<SkeletonProps, any> { 
-    public getElement(): HTMLDivElement;
-}
+export declare class Skeleton extends React.Component<SkeletonProps, any> { }

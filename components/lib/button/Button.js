@@ -38,11 +38,6 @@ export const Button = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const disabled = props.disabled || props.loading;
     const otherProps = ObjectUtils.findDiffKeys(props, Button.defaultProps);

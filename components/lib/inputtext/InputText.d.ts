@@ -11,7 +11,4 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
     children?: React.ReactNode;
 }
 
-export declare class InputText extends React.Component<InputTextProps, any> { 
-    public getElement(): HTMLInputElement;
-    public getInput(): HTMLInputElement;
-}
+export declare class InputText extends React.Component<InputTextProps, any> { }

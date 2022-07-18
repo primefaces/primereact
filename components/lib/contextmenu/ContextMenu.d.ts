@@ -4,8 +4,11 @@ import { CSSTransitionProps } from '../csstransition';
 
 type ContextMenuAppendToType = 'self' | HTMLElement | undefined | null;
 
-export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface ContextMenuProps {
+    id?: string;
     model?: MenuItem[];
+    style?: object;
+    className?: string;
     global?: boolean;
     autoZIndex?: boolean;
     baseZIndex?: number;
@@ -19,5 +22,4 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
 export declare class ContextMenu extends React.Component<ContextMenuProps, any> {
     public show(event: React.SyntheticEvent): void;
     public hide(event: React.SyntheticEvent): void;
-    public getElement(): HTMLDivElement;
 }

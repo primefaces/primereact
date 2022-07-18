@@ -167,11 +167,6 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
         return columnClass;
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     useMountEffect(() => {
         bindDocumentClickListener();
     });

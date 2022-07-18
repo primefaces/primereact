@@ -33,7 +33,4 @@ export interface EditorProps extends React.DetailedHTMLProps<React.InputHTMLAttr
 
 export declare class Editor extends React.Component<EditorProps, any> {
     public getQuill(): any;
-    public getElement(): HTMLDivElement;
-    public getContent(): HTMLDivElement;
-    public getToolbar(): HTMLDivElement;
 }

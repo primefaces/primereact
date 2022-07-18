@@ -89,7 +89,6 @@ export const SlideMenu = React.memo(React.forwardRef((props, ref) => {
         toggle,
         show,
         hide,
-        getElement: () => menuRef.current,
         ...props
     }));
 

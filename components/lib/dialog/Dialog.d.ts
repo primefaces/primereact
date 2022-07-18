@@ -67,10 +67,4 @@ export interface DialogProps {
 
 export declare class Dialog extends React.Component<DialogProps, any> {
     public resetPosition(): void;
-    public getElement(): HTMLDivElement;
-    public getMask(): HTMLDivElement;
-    public getContent(): HTMLDivElement;
-    public getHeader(): HTMLDivElement;
-    public getFooter(): HTMLDivElement;
-    public getCloseButton(): HTMLButtonElement;
 }

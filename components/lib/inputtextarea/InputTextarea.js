@@ -71,12 +71,6 @@ export const InputTextarea = React.memo(React.forwardRef((props, ref) => {
         ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (elementRef.current && ObjectUtils.isNotEmpty(elementRef.current.value))
     ), [props.value, props.defaultValue]);
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        getInput: () => elementRef.current,
-        ...props
-    }));
-
     React.useEffect(() => {
         ObjectUtils.combinedRefs(elementRef, ref);
     }, [elementRef, ref]);

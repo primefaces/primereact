@@ -18,6 +18,4 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
     children?: React.ReactNode;
 }
 
-export declare class Button extends React.Component<ButtonProps, any> { 
-    public getElement(): HTMLButtonElement;
-}
+export declare class Button extends React.Component<ButtonProps, any> { }

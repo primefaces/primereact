@@ -6,13 +6,13 @@ type DividerLayoutType = 'vertical' | 'horizontal';
 
 type DividerBorderType = 'solid' | 'dashed' | 'dotted';
 
-export interface DividerProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface DividerProps {
     align?: DividerAlignType;
     layout?: DividerLayoutType;
     type?: DividerBorderType;
+    style?: object;
+    className?: string;
     children?: React.ReactNode;
 }
 
-export declare class Divider extends React.Component<DividerProps, any> { 
-    public getElement(): HTMLDivElement;
-}
+export declare class Divider extends React.Component<DividerProps, any> { }

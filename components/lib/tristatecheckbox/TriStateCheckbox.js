@@ -52,11 +52,6 @@ export const TriStateCheckbox = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
     const otherProps = ObjectUtils.findDiffKeys(props, TriStateCheckbox.defaultProps);
     const className = classNames('p-tristatecheckbox p-checkbox p-component', props.className);

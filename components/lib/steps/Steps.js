@@ -2,7 +2,6 @@ import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Steps = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
 
     const itemClick = (event, item, index) => {
         if (props.readOnly || item.disabled) {
@@ -89,11 +88,6 @@ export const Steps = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     const otherProps = ObjectUtils.findDiffKeys(props, Steps.defaultProps);
     const className = classNames('p-steps p-component', {
         'p-readonly': props.readOnly
@@ -101,7 +95,7 @@ export const Steps = React.memo(React.forwardRef((props, ref) => {
     const items = createItems();
 
     return (
-        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {items}
         </div>
     )

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
 
     const itemClick = (event, item) => {
         if (item.disabled) {
@@ -111,11 +110,6 @@ export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     const otherProps = ObjectUtils.findDiffKeys(props, BreadCrumb.defaultProps);
     const className = classNames('p-breadcrumb p-component', props.className);
     const home = createHome();
@@ -123,7 +117,7 @@ export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
     const separator = createSeparator();
 
     return (
-        <nav id={props.id} ref={elementRef} className={className} style={props.style} aria-label="Breadcrumb" {...otherProps}>
+        <nav id={props.id} className={className} style={props.style} aria-label="Breadcrumb" {...otherProps}>
             <ul>
                 {home}
                 {separator}

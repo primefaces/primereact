@@ -5,7 +5,6 @@ import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const DataScroller = React.memo(React.forwardRef((props, ref) => {
     const [dataToRenderState, setDataToRenderState] = React.useState([]);
-    const elementRef = React.useRef(null);
     const contentRef = React.useRef(null);
     const value = React.useRef(props.value);
     const dataToRender = React.useRef([]);
@@ -144,8 +143,6 @@ export const DataScroller = React.memo(React.forwardRef((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         load,
         reset,
-        getElement: () => elementRef.current,
-        getContent: () => contentRef.current,
         ...props
     }));
 
@@ -203,7 +200,7 @@ export const DataScroller = React.memo(React.forwardRef((props, ref) => {
     const content = createContent();
 
     return (
-        <div id={props.id} ref={elementRef} className={className} {...otherProps}>
+        <div id={props.id} className={className} {...otherProps}>
             {header}
             {content}
             {footer}

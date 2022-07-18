@@ -35,7 +35,4 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
     children?: React.ReactNode;
 }
 
-export declare class InputSwitch extends React.Component<InputSwitchProps, any> { 
-    public getElement(): HTMLDivElement;
-    public getInput(): HTMLInputElement;
-}
+export declare class InputSwitch extends React.Component<InputSwitchProps, any> { }

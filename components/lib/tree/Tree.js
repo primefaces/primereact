@@ -5,7 +5,6 @@ import { UITreeNode } from './UITreeNode';
 export const Tree = React.memo(React.forwardRef((props, ref) => {
     const [filterValueState, setFilterValueState] = React.useState('');
     const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
-    const elementRef = React.useRef(null);
     const filteredNodes = React.useRef([]);
     const dragState = React.useRef(null);
     const filterChanged = React.useRef(false);
@@ -296,7 +295,6 @@ export const Tree = React.memo(React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         filter,
-        getElement: () => elementRef.current,
         ...props
     }));
 
@@ -444,7 +442,7 @@ export const Tree = React.memo(React.forwardRef((props, ref) => {
     const footer = createFooter();
 
     return (
-        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
+        <div id={props.id} className={className} style={props.style} {...otherProps}>
             {loader}
             {header}
             {content}

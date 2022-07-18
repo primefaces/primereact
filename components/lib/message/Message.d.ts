@@ -6,13 +6,14 @@ type MessageContentType = React.ReactNode | ((props: MessageProps) => React.Reac
 
 type MessageTextType = React.ReactNode | ((props: MessageProps) => React.ReactNode);
 
-export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface MessageProps {
+    id?: string;
+    className?: string;
+    style?: object;
     text?: MessageTextType;
     severity?: MessageSeverityType;
     content?: MessageContentType;
     children?: React.ReactNode;
 }
 
-export declare class Message extends React.Component<MessageProps, any> { 
-    public getElement(): HTMLDivElement;
-}
+export declare class Message extends React.Component<MessageProps, any> { }

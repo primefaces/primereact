@@ -5,15 +5,14 @@ type MenubarStartTemplate = React.ReactNode | ((props: MenubarProps) => React.Re
 
 type MenubarEndTemplate = React.ReactNode | ((props: MenubarProps) => React.ReactNode);
 
-export interface MenubarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface MenubarProps {
+    id?: string;
     model?: MenuItem[];
+    style?: object;
+    className?: string;
     start?: MenubarStartTemplate;
     end?: MenubarEndTemplate;
     children?: React.ReactNode;
 }
 
-export declare class Menubar extends React.Component<MenubarProps, any> { 
-    public getElement(): HTMLDivElement;
-    public getRootMenu(): HTMLElement;
-    public getMenuButton(): HTMLElement;
-}
+export declare class Menubar extends React.Component<MenubarProps, any> { }

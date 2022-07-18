@@ -8,14 +8,15 @@ type MegaMenuStartTemplate = React.ReactNode | ((props: MegaMenuProps) => React.
 type MegaMenuEndTemplate = React.ReactNode | ((props: MegaMenuProps) => React.ReactNode);
 
 
-export interface MegaMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface MegaMenuProps {
+    id?: string;
     model?: MenuItem[];
+    style?: object;
+    className?: string;
     orientation?: MegaMenuOrientationType;
     start?: MegaMenuStartTemplate;
     end?: MegaMenuEndTemplate;
     children?: React.ReactNode;
 }
 
-export declare class MegaMenu extends React.Component<MegaMenuProps, any> { 
-    public getElement(): HTMLDivElement;
-}
+export declare class MegaMenu extends React.Component<MegaMenuProps, any> { }

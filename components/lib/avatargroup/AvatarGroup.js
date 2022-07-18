@@ -2,17 +2,11 @@ import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const AvatarGroup = React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
     const otherProps = ObjectUtils.findDiffKeys(props, AvatarGroup.defaultProps);
     const className = classNames('p-avatar-group p-component', props.className);
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
-
     return (
-        <div ref={elementRef} className={className} style={props.style} {...otherProps}>
+        <div className={className} style={props.style} {...otherProps}>
             {props.children}
         </div>
     )

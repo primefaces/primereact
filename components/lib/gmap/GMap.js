@@ -112,7 +112,6 @@ export const GMap = React.memo(React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         getMap,
-        getElement: () => elementRef.current,
         ...props
     }));
 

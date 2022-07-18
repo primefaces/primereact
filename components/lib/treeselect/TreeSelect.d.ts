@@ -71,12 +71,16 @@ interface TreeSelectFilterOptions {
 }
 
 export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'|'value' | 'ref'> {
+    id?: string;
     value?: TreeSelectSelectionKeys;
     name?: string;
+    style?: object;
+    className?: string;
     disabled?: boolean;
     options?: TreeNode[];
     scrollHeight?: string;
     placeholder?: string;
+    tabIndex?: number;
     inputId?: string;
     ariaLabel?: string;
     ariaLabelledBy?: string;
@@ -112,6 +116,4 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     children?: React.ReactNode;
 }
 
-export declare class TreeSelect extends React.Component<TreeSelectProps, any> { 
-    public getElement(): HTMLDivElement;
-}
+export declare class TreeSelect extends React.Component<TreeSelectProps, any> { }
