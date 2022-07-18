@@ -340,6 +340,12 @@ customChip(item) {
                                     <td>null</td>
                                     <td>Format definition of the keys to block.</td>
                                 </tr>
+                                <tr>
+                                    <td>addOnBlur</td>
+                                    <td>boolean</td>
+                                    <td>null</td>
+                                    <td>Whether to add an item when the input loses focus.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

@@ -153,6 +153,14 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onBlur = (event) => {
+        if (props.addOnBlur) {
+            const inputValue = event.target.value;
+            const values = props.value || [];
+    
+            if (inputValue && inputValue.trim().length && (!props.max || props.max > values.length)) {
+                addItem(event, inputValue, true);
+            }
+        }
         setFocusedState(false);
         props.onBlur && props.onBlur(event);
     }
@@ -264,6 +272,7 @@ Chips.defaultProps = {
     allowDuplicate: true,
     itemTemplate: null,
     keyfilter: null,
+    addOnBlur: null,
     onAdd: null,
     onRemove: null,
     onChange: null,
