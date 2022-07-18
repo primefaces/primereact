@@ -3385,6 +3385,12 @@
   color: rgba(255, 255, 255, 0.87);
   background: rgba(165, 180, 252, 0.16);
 }
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even) {
+  background: rgba(255, 255, 255, 0.01);
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even):hover {
+  background: rgba(255, 255, 255, 0.03);
+}
 
 @media screen and (max-width: 769px) {
   .p-orderlist {

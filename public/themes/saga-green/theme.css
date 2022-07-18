@@ -3385,6 +3385,12 @@
   color: #495057;
   background: #E8F5E9;
 }
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even) {
+  background: #e9ecef;
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even):hover {
+  background: #e9ecef;
+}
 
 @media screen and (max-width: 769px) {
   .p-orderlist {
