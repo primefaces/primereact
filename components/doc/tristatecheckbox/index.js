@@ -293,6 +293,10 @@ import { TriStateCheckbox } from 'primereact/tristatecheckbox';
                                     <td><i>space</i></td>
                                     <td>Toggles between the values.</td>
                                 </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>Toggles between the values.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
