@@ -2751,7 +2751,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createMonthViewMonth = (index) => {
-        const className = classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(index) });
+        const className = classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(index), 'p-disabled': !isSelectable(1, index, currentYear) });
         const monthNamesShort = localeOption('monthNamesShort', props.locale);
         const monthName = monthNamesShort[index];
 
@@ -3064,7 +3064,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             return <div className="p-monthpicker">
                 {
                     monthPickerValues().map((m, i) => {
-                        return <span onClick={(event) => onMonthSelect(event, i)} key={`month${i + 1}`} className={classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i) })}>
+                        return <span onClick={(event) => onMonthSelect(event, i)} key={`month${i + 1}`} className={classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(1, i, currentYear) })}>
                             {m}
                         </span>
                     })
