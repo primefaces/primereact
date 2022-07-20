@@ -19,7 +19,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: currentTargetRef, overlay: overlayRef, listener: (event, { type, valid }) => {
             if (valid) {
-                (type === 'outside') ? !isPanelClicked.current && hide() : hide();
+                (type === 'outside') ? props.dismissable && !isPanelClicked.current && hide() : hide();
             }
 
             isPanelClicked.current = false;
