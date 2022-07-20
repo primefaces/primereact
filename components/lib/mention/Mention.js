@@ -310,7 +310,7 @@ export const Mention = React.memo(React.forwardRef((props, ref) => {
 
     const isFilled = React.useMemo(() => (
         ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (inputRef.current && ObjectUtils.isNotEmpty(inputRef.current.value))
-    ), [props.value, props.defaultValue, inputRef]);
+    ), [props.value, props.defaultValue, inputRef.current?.value]);
 
     React.useImperativeHandle(ref, () => ({
         show,

@@ -38,7 +38,7 @@ export const InputText = React.memo(React.forwardRef((props, ref) => {
 
     const isFilled = React.useMemo(() => (
         ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (elementRef.current && ObjectUtils.isNotEmpty(elementRef.current.value))
-    ), [props.value, props.defaultValue]);
+    ), [props.value, props.defaultValue, elementRef.current?.value]);
 
     React.useEffect(() => {
         ObjectUtils.combinedRefs(elementRef, ref);
