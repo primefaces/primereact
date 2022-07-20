@@ -746,7 +746,12 @@ export default class DomHandler {
     }
 
     static isVisible(element) {
-        return element && element.offsetParent != null;
+        // https://stackoverflow.com/a/59096915/502366 (in future use IntersectionObserver)
+        return element && ( 
+            element.clientHeight !== 0 ||
+            element.getClientRects().length !== 0 ||
+            getComputedStyle(element).display !== 'none'
+        );
     }
 
     static isExist(element) {

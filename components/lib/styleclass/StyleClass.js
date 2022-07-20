@@ -55,10 +55,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
                     DomHandler.addClass(targetRef.current, props.toggleClassName);
             }
             else {
-                if (targetRef.current.offsetParent === null)
-                    enter();
-                else
-                    leave();
+                DomHandler.isVisible(targetRef.current) ? leave() : enter();
             }
         }
     });
