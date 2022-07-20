@@ -33,7 +33,7 @@ export const Password = React.memo(React.forwardRef((props, ref) => {
 
     const currentValue = inputRef.current && inputRef.current.value;
     const isFilled = React.useMemo(() => (
-        ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (ObjectUtils.isNotEmpty(currentValue))
+        ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || ObjectUtils.isNotEmpty(currentValue)
     ), [props.value, props.defaultValue, currentValue]);
 
     const updateLabels = () => {

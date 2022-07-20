@@ -69,7 +69,7 @@ export const InputTextarea = React.memo(React.forwardRef((props, ref) => {
 
     const currentValue = elementRef.current && elementRef.current.value;
     const isFilled = React.useMemo(() => (
-        ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (ObjectUtils.isNotEmpty(currentValue))
+        ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || ObjectUtils.isNotEmpty(currentValue)
     ), [props.value, props.defaultValue, currentValue]);
 
     React.useEffect(() => {
