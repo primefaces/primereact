@@ -308,7 +308,7 @@ export const Tooltip = React.memo(React.forwardRef((props, ref) => {
     }
 
     const clearTimeouts = () => {
-        Object.keys(timeouts.current).forEach((t) => clearTimeout(t));
+        Object.values(timeouts.current).forEach((t) => clearTimeout(t));
     }
 
     const getTarget = (target) => {
