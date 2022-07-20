@@ -2,20 +2,26 @@ import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Avatar = React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
 
     const createContent = () => {
-        if (props.label) {
+        if (props.image) {
+            return <img src={props.image} alt={props.imageAlt} onError={props.onImageError}></img>
+        }
+        else if (props.label) {
             return <span className="p-avatar-text">{props.label}</span>
         }
         else if (props.icon) {
             return IconUtils.getJSXIcon(props.icon, { className: 'p-avatar-icon' }, { props });
         }
-        else if (props.image) {
-            return <img src={props.image} alt={props.imageAlt} onError={props.onImageError}></img>
-        }
 
         return null;
     }
+
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
 
     const otherProps = ObjectUtils.findDiffKeys(props, Avatar.defaultProps);
     const containerClassName = classNames('p-avatar p-component', {
@@ -29,7 +35,7 @@ export const Avatar = React.forwardRef((props, ref) => {
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
     return (
-        <div className={containerClassName} style={props.style} {...otherProps}>
+        <div ref={elementRef} className={containerClassName} style={props.style} {...otherProps}>
             {content}
             {props.children}
         </div>

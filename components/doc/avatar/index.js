@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const AvatarDoc = memo(() => {
 
@@ -516,7 +517,7 @@ import { AvatarGroup } from 'primereact/avatargroup';
 </CodeHighlight>
 
                     <h5>Properties of Avatar</h5>
-                    <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -662,6 +663,16 @@ import { AvatarGroup } from 'primereact/avatargroup';
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>Avatar does not include any roles and attributes by default. Any attribute is passed to the root element so you may add a role like <i>img</i> along with <i>aria-labelledby</i> or <i>aria-label</i> to describe the component. 
+                        In case avatars need to be tabbable, <i>tabIndex</i> can be added as well to implement custom key handlers.</p>
+
+                        <h5>Keyboard Support</h5>
+                        <p>Component does not include any interactive elements.</p>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

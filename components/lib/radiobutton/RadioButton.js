@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const RadioButton = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -29,7 +29,8 @@ export const RadioButton = React.memo(React.forwardRef((props, ref) => {
             });
 
             inputRef.current.checked = !props.checked;
-            inputRef.current.focus();
+            DomHandler.focus(inputRef.current);
+            e.preventDefault();
         }
     }
 
@@ -52,7 +53,10 @@ export const RadioButton = React.memo(React.forwardRef((props, ref) => {
     }, [inputRef, props.inputRef]);
 
     React.useImperativeHandle(ref, () => ({
-        select
+        select,
+        getElement: () => elementRef.current,
+        getInput: () => inputRef.current,
+        ...props
     }));
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);

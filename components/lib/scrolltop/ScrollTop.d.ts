@@ -19,4 +19,6 @@ export interface ScrollTopProps {
     children?: React.ReactNode;
 }
 
-export declare class ScrollTop extends React.Component<ScrollTopProps, any> { }
+export declare class ScrollTop extends React.Component<ScrollTopProps, any> { 
+    public getElement(): HTMLButtonElement;
+}

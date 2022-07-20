@@ -8,10 +8,11 @@ let messageIdx = 0;
 
 export const Messages = React.memo(React.forwardRef((props, ref) => {
     const [messagesState, setMessagesState] = React.useState([]);
+    const elementRef = React.useRef(null);
 
     const show = (value) => {
         if (value) {
-            let messages = [];
+            let messages;
 
             if (Array.isArray(value)) {
                 for (let i = 0; i < value.length; i++) {
@@ -33,7 +34,8 @@ export const Messages = React.memo(React.forwardRef((props, ref) => {
     }
 
     const replace = (value) => {
-        setMessagesState(value);
+        const replaced = Array.isArray(value) ? value : [value];
+        setMessagesState(replaced);
     }
 
     const onClose = (message) => {
@@ -44,13 +46,15 @@ export const Messages = React.memo(React.forwardRef((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         show,
         replace,
-        clear
+        clear,
+        getElement: () => elementRef.current,
+        ...props
     }));
 
     const otherProps = ObjectUtils.findDiffKeys(props, Messages.defaultProps);
 
     return (
-        <div id={props.id} className={props.className} style={props.style} {...otherProps}>
+        <div id={props.id} ref={elementRef} className={props.className} style={props.style} {...otherProps}>
             <TransitionGroup>
                 {
                     messagesState.map((message) => {

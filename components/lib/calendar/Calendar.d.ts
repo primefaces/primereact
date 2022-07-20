@@ -55,12 +55,13 @@ interface CalendarVisibleChangeParams {
     callback?(): void;
 }
 
-interface CalendarNavigatorTemplateChangeParams {
-    event: React.SyntheticEvent;
-    value: string | number | undefined | null;
-}
+type CalendarNavigatorTemplateChangeCallback = (
+    event: React.SyntheticEvent,
+    value: string | number | undefined | null
+) => void;
+
 interface CalendarNavigatorTemplateParams {
-    onChange(e: CalendarNavigatorTemplateChangeParams): void;
+    onChange: CalendarNavigatorTemplateChangeCallback;
     className: string;
     value: string | number | undefined | null;
     names: any[];
@@ -125,6 +126,7 @@ export interface CalendarProps {
     minDate?: Date;
     maxDate?: Date;
     maxDateCount?: number;
+    showMinMaxRange?: boolean;
     showOtherMonths?: boolean;
     selectOtherMonths?: boolean;
     showButtonBar?: boolean;
@@ -163,5 +165,8 @@ export declare class Calendar extends React.Component<CalendarProps, any> {
     public hide(): void;
     public getCurrentDateTime(): Date | Date[];
     public getViewDate(): Date | Date[];
+    public getElement(): HTMLSpanElement;
+    public getInput(): HTMLInputElement;
+    public getOverlay(): HTMLElement;
     public updateViewDate(event: CalendarEventType, value: Date | Date[]): void;
 }

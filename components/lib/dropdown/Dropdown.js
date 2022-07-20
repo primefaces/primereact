@@ -66,7 +66,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
             return;
         }
         else if (!overlayRef.current || !(overlayRef.current && overlayRef.current.contains(event.target))) {
-            focusInputRef.current.focus();
+            DomHandler.focus(focusInputRef.current);
             overlayVisibleState ? hide() : show();
         }
     }
@@ -314,7 +314,11 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
     }
 
     const matchesSearchValue = (option) => {
-        const label = getOptionLabel(option).toLocaleLowerCase(props.filterLocale);
+        let label = getOptionLabel(option);
+        if (!label) {
+            return false;
+        }
+        label = label.toLocaleLowerCase(props.filterLocale);
         return label.startsWith(searchValue.current.toLocaleLowerCase(props.filterLocale));
     }
 
@@ -345,7 +349,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
 
         if (!option.disabled) {
             selectItem(event);
-            focusInputRef.current.focus();
+            DomHandler.focus(focusInputRef.current);
         }
 
         hide();
@@ -413,18 +417,20 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
-    const getSelectedOptionIndex = () => {
-        if (props.value != null && visibleOptions) {
+    const getSelectedOptionIndex = (options) => {
+        options = options || visibleOptions;
+
+        if (props.value != null && options) {
             if (props.optionGroupLabel) {
-                for (let i = 0; i < visibleOptions.length; i++) {
-                    let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(visibleOptions[i]));
+                for (let i = 0; i < options.length; i++) {
+                    let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(options[i]));
                     if (selectedOptionIndex !== -1) {
                         return { group: i, option: selectedOptionIndex };
                     }
                 }
             }
             else {
-                return findOptionIndexInList(props.value, visibleOptions);
+                return findOptionIndexInList(props.value, options);
             }
         }
 
@@ -486,7 +492,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
     const scrollInView = () => {
         const highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
         if (highlightItem && highlightItem.scrollIntoView) {
-            highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });
+            highlightItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
         }
     }
 
@@ -537,18 +543,28 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
     }
 
     const getSelectedOption = () => {
-        const index = getSelectedOptionIndex();
+        const index = getSelectedOptionIndex(props.options);
 
-        return index !== -1 ? (props.optionGroupLabel ? getOptionGroupChildren(visibleOptions[index.group])[index.option] : visibleOptions[index]) : null;
+        return index !== -1 ? (props.optionGroupLabel ? getOptionGroupChildren(props.options[index.group])[index.option] : props.options[index]) : null;
     }
+
+    React.useImperativeHandle(ref, () => ({
+        show,
+        hide,
+        getElement: () => elementRef.current,
+        getOverlay: () => overlayRef.current,
+        getInput: () => inputRef.current,
+        getFocusInput: () => focusInputRef.current,
+        ...props
+    }));
 
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
 
     useMountEffect(() => {
-        if (props.autoFocus && focusInputRef.current) {
-            focusInputRef.current.focus();
+        if (props.autoFocus) {
+            DomHandler.focus(focusInputRef.current, props.autoFocus);
         }
     });
 
@@ -673,7 +689,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
                 {clearIcon}
                 {dropdownIcon}
                 <DropdownPanel ref={overlayRef} visibleOptions={visibleOptions} {...props} appendTo={appendTo} onClick={onPanelClick} onOptionClick={onOptionClick}
-                    filterValue={filterState} hasFilter={hasFilter} onFilterClearIconClick={onFilterClearIconClick} onFilterInputKeyDown={onFilterInputKeyDown} onFilterInputChange={onFilterInputChange}
+                    filterValue={filterState} hasFilter={hasFilter} onFilterClearIconClick={onFilterClearIconClick} resetFilter={resetFilter} onFilterInputKeyDown={onFilterInputKeyDown} onFilterInputChange={onFilterInputChange}
                     getOptionLabel={getOptionLabel} getOptionRenderKey={getOptionRenderKey} isOptionDisabled={isOptionDisabled}
                     getOptionGroupChildren={getOptionGroupChildren} getOptionGroupLabel={getOptionGroupLabel} getOptionGroupRenderKey={getOptionGroupRenderKey}
                     isSelected={isSelected} getSelectedOptionIndex={getSelectedOptionIndex}
@@ -698,6 +714,7 @@ Dropdown.defaultProps = {
     optionGroupLabel: null,
     optionGroupChildren: null,
     optionGroupTemplate: null,
+    filterTemplate: null,
     valueTemplate: null,
     itemTemplate: null,
     style: null,

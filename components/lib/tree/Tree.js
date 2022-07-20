@@ -5,12 +5,17 @@ import { UITreeNode } from './UITreeNode';
 export const Tree = React.memo(React.forwardRef((props, ref) => {
     const [filterValueState, setFilterValueState] = React.useState('');
     const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
+    const elementRef = React.useRef(null);
     const filteredNodes = React.useRef([]);
     const dragState = React.useRef(null);
     const filterChanged = React.useRef(false);
     const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
     const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
-
+    const filterOptions = {
+        filter: (e) => onFilterInputChange(e),
+        reset: () => resetFilter()
+    };
+    
     const getRootNode = () => {
         return (props.filter && filteredNodes.current) ? filteredNodes.current : props.value;
     }
@@ -285,8 +290,14 @@ export const Tree = React.memo(React.forwardRef((props, ref) => {
         return matched;
     }
 
+    const resetFilter = () => {
+        setFilterValueState('');
+    }
+
     React.useImperativeHandle(ref, () => ({
-        filter
+        filter,
+        getElement: () => elementRef.current,
+        ...props
     }));
 
     const createRootChild = (node, index, last) => {
@@ -347,14 +358,33 @@ export const Tree = React.memo(React.forwardRef((props, ref) => {
     const createFilter = () => {
         if (props.filter) {
             const value = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
-
-            return (
+            let content = (
                 <div className="p-tree-filter-container">
                     <input type="text" value={value} autoComplete="off" className="p-tree-filter p-inputtext p-component" placeholder={props.filterPlaceholder}
                         onKeyDown={onFilterInputKeyDown} onChange={onFilterInputChange} disabled={props.disabled} />
                     <span className="p-tree-filter-icon pi pi-search"></span>
                 </div>
-            )
+            );
+
+            if (props.filterTemplate) {
+                const defaultContentOptions = {
+                    className: 'p-tree-filter-container',
+                    element: content,
+                    filterOptions: filterOptions,
+                    filterInputKeyDown: onFilterInputKeyDown,
+                    filterInputChange: onFilterInputChange,
+                    filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                    props,
+                };
+                
+                content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
+            }
+
+            return (
+                <>
+                    {content}
+                </>
+            );
         }
 
         return null;
@@ -414,7 +444,7 @@ export const Tree = React.memo(React.forwardRef((props, ref) => {
     const footer = createFooter();
 
     return (
-        <div id={props.id} className={className} style={props.style} {...otherProps}>
+        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
             {loader}
             {header}
             {content}
@@ -454,6 +484,7 @@ Tree.defaultProps = {
     filterMode: 'lenient',
     filterPlaceholder: null,
     filterLocale: undefined,
+    filterTemplate: null,
     nodeTemplate: null,
     togglerTemplate: null,
     onSelect: null,

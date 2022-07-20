@@ -72,7 +72,7 @@ export const ListBoxItem = React.memo((props) => {
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
 
     return (
-        <li className={className} onClick={onClick} onTouchEnd={onTouchEnd} onKeyDown={onKeyDown} tabIndex="-1"
+        <li className={className} style={props.style} onClick={onClick} onTouchEnd={onTouchEnd} onKeyDown={onKeyDown} tabIndex="-1"
             aria-label={props.label} key={props.label} role="option" aria-selected={props.selected} aria-disabled={props.disabled}>
             {content}
             <Ripple />

@@ -1,10 +1,8 @@
 import * as React from 'react';
 
-export interface ImageProps {
+export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'ref'> {
     preview?: boolean;
-    className?: string;
     downloadable?: boolean;
-    style?: string;
     imageStyle?: string;
     imageClassName?: string;
     template?: any;
@@ -17,4 +15,7 @@ export interface ImageProps {
     children?: React.ReactNode;
 }
 
-export declare class Image extends React.Component<ImageProps, any> { }
+export declare class Image extends React.Component<ImageProps, any> { 
+    public getElement(): HTMLSpanElement;
+    public getImage(): HTMLImageElement;
+}

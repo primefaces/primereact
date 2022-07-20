@@ -3,20 +3,17 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const Editor = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
     const contentRef = React.useRef(null);
     const toolbarRef = React.useRef(null);
     const quill = React.useRef(null);
     const isQuillLoaded = React.useRef(false);
 
-    const getQuill = () => {
-        return quill.current;
-    }
-
     useMountEffect(() => {
         if (!isQuillLoaded.current) {
             import('quill').then((module) => {
-                if (module && module.default && DomHandler.isExist(contentRef.current)) {
-                    quill.current = new module.default(contentRef.current, {
+                if (module && DomHandler.isExist(contentRef.current)) {
+                    const configuration = {
                         modules: {
                             toolbar: props.showHeader ? toolbarRef.current : false,
                             ...props.modules
@@ -25,7 +22,15 @@ export const Editor = React.memo(React.forwardRef((props, ref) => {
                         readOnly: props.readOnly,
                         theme: props.theme,
                         formats: props.formats
-                    });
+                    };
+
+                    if (module.default) {
+                        // webpack
+                        quill.current = new module.default(contentRef.current, configuration);
+                    } else {
+                        // parceljs
+                        quill.current = new module(contentRef.current, configuration);
+                    }
 
                     if (props.value) {
                         quill.current.setContents(quill.current.clipboard.convert(props.value));
@@ -78,7 +83,11 @@ export const Editor = React.memo(React.forwardRef((props, ref) => {
     }, [props.value]);
 
     React.useImperativeHandle(ref, () => ({
-        getQuill
+        getQuill: () => quill.current,
+        getElement: () => elementRef.current,
+        getContent: () => contentRef.current,
+        getToolbar: () => toolbarRef.current,
+        ...props
     }));
 
     const createToolbarHeader = () => {
@@ -145,7 +154,7 @@ export const Editor = React.memo(React.forwardRef((props, ref) => {
     const content = <div ref={contentRef} className="p-editor-content" style={props.style}></div>
 
     return (
-        <div id={props.id} className={className} {...otherProps}>
+        <div id={props.id} ref={elementRef} className={className} {...otherProps}>
             {header}
             {content}
         </div>

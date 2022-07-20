@@ -2,14 +2,11 @@ import * as React from 'react';
 
 type CardTemplateTypes = React.ReactNode | ((props: CardProps) => React.ReactNode);
 
-export interface CardProps {
-    id?: string;
+export interface CardProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     header?: CardTemplateTypes;
     footer?: CardTemplateTypes;
     title?: CardTemplateTypes;
     subTitle?: CardTemplateTypes;
-    style?: object;
-    className?: string;
     children?: React.ReactNode;
 }
 

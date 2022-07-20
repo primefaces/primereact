@@ -8,7 +8,7 @@ import Head from 'next/head';
 
 const VirtualScrollerDemo = () => {
     const [lazyItems, setLazyItems] = useState([]);
-    const [lazyLoading, setLazyLoading] = useState(false);
+    const [lazyLoading, setLazyLoading] = useState(true);
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => `Item #${i}`));
     const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => `Item #${i}_${j}`)));
     const [templateItems] = useState(Array.from({ length: 10000 }).map((_, i) => `Item #${i}`));

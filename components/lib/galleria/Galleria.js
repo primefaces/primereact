@@ -106,7 +106,10 @@ export const Galleria = React.memo(React.forwardRef((props, ref) => {
         hide,
         isAutoPlayActive,
         startSlideShow,
-        stopSlideShow
+        stopSlideShow,
+        getElement: () => elementRef.current,
+        getPreviewContent: () => previewContentRef.current,
+        ...props
     }));
 
     const createHeader = () => {

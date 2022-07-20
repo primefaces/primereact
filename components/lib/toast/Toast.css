@@ -12,6 +12,10 @@
     flex: 1 1 auto;
 }
 
+.p-toast-detail {
+    overflow-wrap: anywhere;
+}
+
 .p-toast-top-right {
 	top: 20px;
 	right: 20px;

@@ -101,7 +101,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
         }
 
         if (!preventInputFocus) {
-            inputRef.current.focus();
+            DomHandler.focus(inputRef.current);
             hide();
         }
     }
@@ -166,7 +166,8 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
 
     const onOverlayEntering = () => {
         if (props.autoHighlight && props.suggestions && props.suggestions.length) {
-            DomHandler.addClass(overlayRef.current.firstChild.firstChild, 'p-highlight');
+            const element = getScrollableElement().firstChild.firstChild;
+            DomHandler.addClass(element, 'p-highlight');
         }
     }
 
@@ -199,7 +200,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
 
     const onDropdownClick = (event) => {
         if (props.dropdownAutoFocus) {
-            inputRef.current.focus();
+            DomHandler.focus(inputRef.current, props.dropdownAutoFocus);
         }
 
         if (props.dropdownMode === 'blank')
@@ -240,7 +241,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
                         if (nextElement) {
                             DomHandler.addClass(nextElement, 'p-highlight');
                             DomHandler.removeClass(highlightItem, 'p-highlight');
-                            DomHandler.scrollInView(overlayRef.current, nextElement);
+                            DomHandler.scrollInView(getScrollableElement(), nextElement);
                         }
                     }
                     else {
@@ -264,7 +265,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
                         if (previousElement) {
                             DomHandler.addClass(previousElement, 'p-highlight');
                             DomHandler.removeClass(highlightItem, 'p-highlight');
-                            DomHandler.scrollInView(overlayRef.current, previousElement);
+                            DomHandler.scrollInView(getScrollableElement(), previousElement);
                         }
                     }
 
@@ -276,9 +277,9 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
                     if (highlightItem) {
                         selectHighlightItem(event, highlightItem);
                         hide();
+                        event.preventDefault();
                     }
 
-                    event.preventDefault();
                     break;
 
                 //escape
@@ -382,7 +383,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onMultiContainerClick = (event) => {
-        inputRef.current.focus();
+        DomHandler.focus(inputRef.current);
 
         props.onClick && props.onClick(event);
     }
@@ -405,6 +406,10 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
         return props.suggestions ? props.suggestions.findIndex(s => ObjectUtils.equals(s, option)) : -1;
     }
 
+    const getScrollableElement = () => {
+        return virtualScrollerRef.current ? overlayRef.current.firstChild : overlayRef.current;
+    }
+
     const getOptionGroupLabel = (optionGroup) => {
         return props.optionGroupLabel ? ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel) : optionGroup;
     }
@@ -422,8 +427,8 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
             setIdState(UniqueComponentId());
         }
 
-        if (props.autoFocus && inputRef.current) {
-            inputRef.current.focus();
+        if (props.autoFocus) {
+            DomHandler.focus(inputRef.current, props.autoFocus);
         }
     });
 
@@ -449,7 +454,12 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
-        search
+        search,
+        getElement: () => elementRef.current,
+        getOverlay: () => overlayRef.current,
+        getInput: () => inputRef.current,
+        getVirtualScroller: () => virtualScrollerRef.current,
+        ...props
     }));
 
     const createSimpleAutoComplete = () => {
@@ -460,8 +470,8 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
         });
 
         return (
-            <InputText ref={inputRef} id={props.inputId} type={props.type} name={props.name} defaultValue={value} 
-                role="combobox" aria-autocomplete="list" aria-owns={ariaControls} aria-haspopup="listbox" aria-expanded={overlayVisibleState} 
+            <InputText ref={inputRef} id={props.inputId} type={props.type} name={props.name} defaultValue={value}
+                role="combobox" aria-autocomplete="list" aria-controls={ariaControls} aria-haspopup="listbox" aria-expanded={overlayVisibleState}
                 aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}
                 className={className} style={props.inputStyle} autoComplete="off"
                 readOnly={props.readOnly} disabled={props.disabled} placeholder={props.placeholder} size={props.size}
@@ -495,7 +505,7 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
         return (
             <li className="p-autocomplete-input-token">
                 <input ref={inputRef} type={props.type} disabled={props.disabled} placeholder={props.placeholder}
-                    role="combobox" aria-autocomplete="list" aria-owns={ariaControls} aria-haspopup="listbox" aria-expanded={overlayVisibleState} 
+                    role="combobox" aria-autocomplete="list" aria-controls={ariaControls} aria-haspopup="listbox" aria-expanded={overlayVisibleState}
                     aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}
                     autoComplete="off" tabIndex={props.tabIndex} onChange={onInputChange} id={props.inputId} name={props.name}
                     style={props.inputStyle} className={props.inputClassName} maxLength={props.maxLength}

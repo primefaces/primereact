@@ -25,6 +25,8 @@ export interface DialogProps {
     draggable?: boolean;
     resizable?: boolean;
     modal?: boolean;
+    headerStyle?: object;
+    headerClassName?: string;
     contentStyle?: object;
     contentClassName?: string;
     closeOnEscape?: boolean;
@@ -65,4 +67,10 @@ export interface DialogProps {
 
 export declare class Dialog extends React.Component<DialogProps, any> {
     public resetPosition(): void;
+    public getElement(): HTMLDivElement;
+    public getMask(): HTMLDivElement;
+    public getContent(): HTMLDivElement;
+    public getHeader(): HTMLDivElement;
+    public getFooter(): HTMLDivElement;
+    public getCloseButton(): HTMLButtonElement;
 }

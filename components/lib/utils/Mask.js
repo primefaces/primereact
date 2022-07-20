@@ -154,11 +154,8 @@ export function mask(el, options) {
 
     const onBlur = (e) => {
         checkVal();
+        options.onBlur && options.onBlur(e);
         updateModel(e);
-
-        if (options.onBlur) {
-            options.onBlur(e);
-        }
 
         if (el.value !== focusText) {
             let event = document.createEvent('HTMLEvents');

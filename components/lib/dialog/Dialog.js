@@ -291,7 +291,7 @@ export const Dialog = React.forwardRef((props, ref) => {
 
         if (props.modal) {
             let hasBlockScroll = document.primeDialogParams && document.primeDialogParams.some(param => param.hasBlockScroll);
-            if (!hasBlockScroll) {
+            if (hasBlockScroll) {
                 DomHandler.removeClass(document.body, 'p-overflow-hidden');
             }
         }
@@ -399,7 +399,14 @@ export const Dialog = React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
-        resetPosition
+        resetPosition,
+        getElement: () => dialogRef.current,
+        getMask: () => maskRef.current,
+        getContent: () => contentRef.current,
+        getHeader: () => headerRef.current,
+        getFooter: () => footerRef.current,
+        getCloseButton: () => closeRef.current,
+        ...props
     }));
 
     const createCloseIcon = () => {
@@ -440,9 +447,10 @@ export const Dialog = React.forwardRef((props, ref) => {
             const icons = ObjectUtils.getJSXElement(props.icons, props);
             const header = ObjectUtils.getJSXElement(props.header, props);
             const headerId = idState + '_header';
+            const headerClassName = classNames('p-dialog-header', props.headerClassName);
 
             return (
-                <div ref={headerRef} className="p-dialog-header" onMouseDown={onDragStart}>
+                <div ref={headerRef} style={props.headerStyle} className={headerClassName} onMouseDown={onDragStart}>
                     <div id={headerId} className="p-dialog-title">{header}</div>
                     <div className="p-dialog-header-icons">
                         {icons}
@@ -475,7 +483,7 @@ export const Dialog = React.forwardRef((props, ref) => {
 
     const createResizer = () => {
         if (props.resizable) {
-            return <div className="p-resizable-handle" style={{ zIndex: 90 }} onMouseDown={onResizeStart}></div>
+            return <span className="p-resizable-handle" style={{ zIndex: 90 }} onMouseDown={onResizeStart}></span>
         }
 
         return null;
@@ -543,6 +551,8 @@ Dialog.defaultProps = {
     modal: true,
     onHide: null,
     onShow: null,
+    headerStyle: null,
+    headerClassName: null,
     contentStyle: null,
     contentClassName: null,
     closeOnEscape: true,

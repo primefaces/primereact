@@ -81,7 +81,9 @@ export const SplitButton = React.memo(React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         show,
-        hide
+        hide,
+        getElement: () => elementRef.current,
+        ...props
     }));
 
     const createItems = () => {
@@ -106,7 +108,7 @@ export const SplitButton = React.memo(React.forwardRef((props, ref) => {
     return (
         <>
             <div ref={elementRef} id={idState} className={className} style={props.style} {...otherProps}>
-                <Button ref={defaultButtonRef} type="button" className={buttonClassName} icon={props.icon} label={props.label} onClick={props.onClick} disabled={props.disabled} tabIndex={props.tabIndex} {...props.buttonProps}>
+                <Button ref={defaultButtonRef} type="button" className={buttonClassName} icon={props.icon} loading={props.loading} loadingIcon={props.loadingIcon} label={props.label} onClick={props.onClick} disabled={props.disabled} tabIndex={props.tabIndex} {...props.buttonProps}>
                     {buttonContent}
                 </Button>
                 <Button type="button" className={menuButtonClassName} icon={props.dropdownIcon} onClick={onDropdownButtonClick} disabled={props.disabled}
@@ -127,6 +129,8 @@ SplitButton.defaultProps = {
     id: null,
     label: null,
     icon: null,
+    loading: false,
+    loadingIcon: 'pi pi-spinner pi-spin',
     model: null,
     disabled: null,
     style: null,

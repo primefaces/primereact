@@ -23,6 +23,10 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
     const hasNoOptions = ObjectUtils.isEmpty(props.options);
     const isSingleSelectionMode = props.selectionMode === 'single';
     const isCheckboxSelectionMode = props.selectionMode === 'checkbox';
+    const filterOptions = {
+        filter: (e) => onFilterInputChange(e),
+        reset: () => resetFilter()
+    };
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: elementRef, overlay: overlayRef, listener: (event, { valid }) => {
@@ -52,7 +56,7 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
 
     const onClick = (event) => {
         if (!props.disabled && (!overlayRef.current || !overlayRef.current.contains(event.target)) && !DomHandler.hasClass(event.target, 'p-treeselect-close')) {
-            focusInputRef.current.focus();
+            DomHandler.focus(focusInputRef.current);
             overlayVisibleState ? hide() : show();
         }
     }
@@ -170,7 +174,7 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
         bindOverlayListener();
 
         if (props.filter && props.filterInputAutoFocus) {
-            filterInputRef.current.focus();
+            DomHandler.focus(filterInputRef.current, props.filterInputAutoFocus);
         }
 
         props.onShow && props.onShow();
@@ -276,6 +280,11 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
 
         return selectedNodes;
     }
+
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
 
     useMountEffect(() => {
         updateTreeState();
@@ -400,16 +409,34 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
         if (props.filter) {
             const filterValue = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
 
-            return (
+            let filterContent = (
                 <div className="p-treeselect-filter-container">
                     <input ref={filterInputRef} type="text" value={filterValue} autoComplete="off" className="p-treeselect-filter p-inputtext p-component" placeholder={props.filterPlaceholder}
                         onKeyDown={onFilterInputKeyDown} onChange={onFilterInputChange} disabled={props.disabled} />
                     <span className="p-treeselect-filter-icon pi pi-search"></span>
                 </div>
             )
-        }
 
-        return null;
+            if (props.filterTemplate) {
+                const defaultContentOptions = {
+                    className: 'p-treeselect-filter-container',
+                    element: filterContent,
+                    filterOptions: filterOptions,
+                    filterInputKeyDown: onFilterInputKeyDown,
+                    filterInputChange: onFilterInputChange,
+                    filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                    props,
+                };
+
+                filterContent = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
+            }
+    
+            return (
+                <>
+                    {filterContent}
+                </>
+            );
+        }
     }
 
     const createHeader = () => {
@@ -509,6 +536,7 @@ TreeSelect.defaultProps = {
     transitionOptions: null,
     dropdownIcon: 'pi pi-chevron-down',
     filter: false,
+    filterTemplate: null,
     filterValue: null,
     filterBy: 'label',
     filterMode: 'lenient',

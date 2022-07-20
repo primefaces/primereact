@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 
-type ToastSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
+type ToastSeverityType = 'success' | 'info' | 'warn' | 'error';
 
 type ToastMessageType = ToastMessage | ToastMessage[];
 
@@ -23,10 +23,7 @@ export interface ToastMessage {
     contentStyle?: object;
 }
 
-export interface ToastProps {
-    id?: string;
-    className?: string;
-    style?: object;
+export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     baseZIndex?: number;
     position?: ToastPositionType;
     transitionOptions?: CSSTransitionProps;
@@ -41,4 +38,6 @@ export interface ToastProps {
 export declare class Toast extends React.Component<ToastProps, any> {
     public show(message: ToastMessageType): void;
     public clear(): void;
+    public replace(message: ToastMessageType): void;
+    public getElement(): HTMLDivElement;
 }

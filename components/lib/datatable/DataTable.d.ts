@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Column } from '../column';
 import { PaginatorTemplate } from '../paginator';
-import { VirtualScrollerProps } from '../virtualscroller/virtualscroller';
+import { VirtualScrollerProps, VirtualScroller } from '../virtualscroller/virtualscroller';
 
 type DataTableHeaderTemplateType = React.ReactNode | ((options: DataTableHeaderTemplateOptions) => React.ReactNode);
 
@@ -282,6 +282,7 @@ export interface DataTableProps extends Omit<React.DetailedHTMLProps<React.Input
     resizableColumns?: boolean;
     columnResizeMode?: DataTableColumnResizeModeType;
     reorderableColumns?: boolean;
+    reorderableRows?: boolean;
     filters?: DataTableFilterMeta;
     globalFilter?: DataTableGlobalFilterType;
     filterDelay?: number;
@@ -371,4 +372,7 @@ export declare class DataTable extends React.Component<DataTableProps, any> {
     public closeEditingCell(): void;
     public restoreTableState(state: any): void;
     public clearState(): void;
+    public getElement(): HTMLDivElement;
+    public getTable(): HTMLTableElement;
+    public getVirtualScroller(): VirtualScroller;
 }

@@ -42,6 +42,7 @@
   --surface-hover:#4c4c4c;
   --maskbg: rgba(0, 0, 0, 0.4);
   --focus-ring: 0 0 0 0.1rem white;
+  color-scheme: dark;
 }
 
 * {
@@ -1062,7 +1063,7 @@
 .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
   background: #F06292;
 }
-.p-inputswitch.p-invalid {
+.p-inputswitch.p-invalid .p-inputswitch-slider {
   border-color: #e57373;
 }
 
@@ -3354,6 +3355,19 @@
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
+.p-orderlist .p-orderlist-filter-container {
+  padding: 0.857rem 1rem;
+  background: #323232;
+  border: 1px solid #191919;
+  border-bottom: 0 none;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-input {
+  padding-right: 1.429rem;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-icon {
+  right: 0.429rem;
+  color: #888888;
+}
 .p-orderlist .p-orderlist-list {
   border: 1px solid #191919;
   background: #323232;
@@ -3382,6 +3396,12 @@
 .p-orderlist .p-orderlist-list .p-orderlist-item.p-highlight {
   color: #212529;
   background: #F48FB1;
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even) {
+  background: #323232;
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even):hover {
+  background: #4c4c4c;
 }
 
 @media screen and (max-width: 960px) {
@@ -3535,6 +3555,19 @@
   border-bottom: 0 none;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
+}
+.p-picklist .p-picklist-filter-container {
+  padding: 0.857rem 1rem;
+  background: #323232;
+  border: 1px solid #191919;
+  border-bottom: 0 none;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-input {
+  padding-right: 1.429rem;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-icon {
+  right: 0.429rem;
+  color: #888888;
 }
 .p-picklist .p-picklist-list {
   border: 1px solid #191919;
@@ -4277,6 +4310,10 @@
   color: #dedede;
   padding: 1rem;
 }
+.p-dialog .p-dialog-content:last-of-type {
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
 .p-dialog .p-dialog-footer {
   border-top: 1px solid #191919;
   background: #323232;
@@ -4330,7 +4367,7 @@
 .p-overlaypanel:before {
   border: solid transparent;
   border-color: rgba(25, 25, 25, 0);
-  border-bottom-color: #191919;
+  border-bottom-color: #181818;
 }
 .p-overlaypanel.p-overlaypanel-flipped:after {
   border-top-color: #323232;
@@ -5075,7 +5112,6 @@
   border: 1px solid #191919;
   background: #323232;
   color: #dedede;
-  margin-bottom: 2px;
   border-top: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
@@ -5929,10 +5965,6 @@
 .p-tag.p-tag-danger {
   background-color: #E57373;
   color: #212529;
-}
-
-.p-virtualscroller-loading-icon {
-  font-size: 2rem;
 }
 
 /* Customizations to the designer theme should be defined here */

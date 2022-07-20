@@ -786,6 +786,17 @@ export default class DomHandler {
         return focusableElements.length > 0 ? focusableElements[focusableElements.length - 1] : null;
     }
 
+    /**
+     * Focus an input element if it does not already have focus.
+     *
+     * @param {HTMLElement} el a HTML element
+     * @param {boolean} scrollTo flag to control whether to scroll to the element, false by default
+     */
+    static focus(el, scrollTo) {
+        const preventScroll = scrollTo === undefined ? true : !scrollTo;
+        el && document.activeElement !== el && el.focus({ preventScroll });
+    }
+
     static getCursorOffset(el, prevText, nextText, currentText) {
         if (el) {
             let style = getComputedStyle(el);

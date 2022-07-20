@@ -17,6 +17,7 @@ interface MenuItemOptions {
 type MenuItemTemplateType = React.ReactNode | ((item: MenuItem, options: MenuItemOptions) => React.ReactNode);
 
 export interface MenuItem {
+    id?: string;
     label?: string;
     icon?: any;
     url?: string;
@@ -29,4 +30,5 @@ export interface MenuItem {
     className?: string;
     command?(e: MenuItemCommandParams): void;
     template?: MenuItemTemplateType;
+    data?: any;
 }

@@ -132,6 +132,12 @@ const TreeProps = [
         description: 'Template of toggler element.'
     },
     {
+        name: 'filterTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'Template of filter element.'
+    },
+    {
         name: 'showHeader',
         type: 'boolean',
         default: 'true',

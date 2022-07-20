@@ -114,6 +114,7 @@ interface FileUploadProps {
     progressBarTemplate?: FileUploadProgressBarTemplateType;
     onBeforeUpload?(e: FileUploadBeforeUploadParams): void;
     onBeforeSend?(e: FileUploadBeforeSendParams): void;
+    onBeforeDrop?(e: DragEvent): void;
     onUpload?(e: FileUploadUploadParams): void;
     onError?(e: FileUploadErrorParams): void;
     onClear?(): void;
@@ -129,4 +130,6 @@ export declare class FileUpload extends React.Component<FileUploadProps, any> {
     public upload(): void;
     public clear(): void;
     public formatSize(bytes: number): number;
+    public getElement(): HTMLElement;
+    public getInput(): HTMLInputElement;
 }

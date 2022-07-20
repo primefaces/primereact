@@ -17,12 +17,12 @@ export const DocActions = (props) => {
 
     const items = [
         {
-            label: 'Class Source Demo',
-            command: () => liveEditor.current.postSandboxParameters('class')
-        },
-        {
             label: 'Hooks Source Demo',
             command: () => liveEditor.current.postSandboxParameters('hooks')
+        },
+        {
+            label: 'Class Source Demo',
+            command: () => liveEditor.current.postSandboxParameters('class')
         },
         {
             label: 'TS Source Demo',

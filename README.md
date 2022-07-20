@@ -102,3 +102,9 @@ import 'primeicons/primeicons.css';
 ## TypeScript
 
 Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample [typescript-primereact application](https://github.com/primefaces/primereact-examples/tree/main/cra-basic-ts) is available as well at github.
+
+## Contributors
+
+<a href="https://github.com/primefaces/primereact/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=primefaces/primereact" />
+</a>

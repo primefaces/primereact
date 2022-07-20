@@ -7,15 +7,14 @@ interface StepsSelectParams {
     index: number;
 }
 
-export interface StepsProps {
-    id?: string;
+export interface StepsProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     model: MenuItem[];
     activeIndex?: number;
     readOnly?: boolean;
-    style?: object;
-    className?: string;
     onSelect?(e: StepsSelectParams): void;
     children?: React.ReactNode;
 }
 
-export declare class Steps extends React.Component<StepsProps, any> { }
+export declare class Steps extends React.Component<StepsProps, any> { 
+    public getElement(): HTMLDivElement;
+}

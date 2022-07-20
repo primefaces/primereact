@@ -7,7 +7,7 @@ import { useOverlayListener } from './useOverlayListener';
 import { useOverlayScrollListener } from './useOverlayScrollListener';
 import { useResizeListener } from './useResizeListener';
 import { useInterval } from './useInterval';
-import { useStorage } from './useStorage';
+import { useStorage, useLocalStorage, useSessionStorage } from './useStorage';
 import { useTimeout } from './useTimeout';
 
-export { usePrevious, useMountEffect, useUpdateEffect, useUnmountEffect, useEventListener, useOverlayListener, useOverlayScrollListener, useResizeListener, useInterval, useStorage, useTimeout };
+export { usePrevious, useMountEffect, useUpdateEffect, useUnmountEffect, useEventListener, useOverlayListener, useOverlayScrollListener, useResizeListener, useInterval, useStorage, useLocalStorage, useSessionStorage, useTimeout };

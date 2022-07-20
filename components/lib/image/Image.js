@@ -11,6 +11,7 @@ export const Image = React.memo(React.forwardRef((props, ref) => {
     const [rotateState, setRotateState] = React.useState(0);
     const [scaleState, setScaleState] = React.useState(1);
     const elementRef = React.useRef(null);
+    const imageRef = React.useRef(null);
     const maskRef = React.useRef(null);
     const previewRef = React.useRef(null);
     const previewClick = React.useRef(false);
@@ -144,6 +145,12 @@ export const Image = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        getImage: () => imageRef.current,
+        ...props
+    }));
+
     const { src, alt, width, height } = props;
     const otherProps = ObjectUtils.findDiffKeys(props, Image.defaultProps);
     const containerClassName = classNames('p-image p-component', props.className, {
@@ -152,10 +159,10 @@ export const Image = React.memo(React.forwardRef((props, ref) => {
     const element = createElement();
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : <i className="p-image-preview-icon pi pi-eye"></i>;
     const preview = createPreview();
-    const image = <img src={src} className={props.imageClassName} width={width} height={height} style={props.imageStyle} alt={alt} />;
+    const image = <img ref={imageRef} src={src} className={props.imageClassName} width={width} height={height} style={props.imageStyle} alt={alt} onError={props.onError} />;
 
     return (
-        <span ref={elementRef} className={containerClassName} style={props.style} {...otherProps}>
+        <span ref={elementRef} className={containerClassName} {...otherProps}>
             {image}
             {preview}
             {maskVisibleState && <Portal element={element} appendTo={document.body} />}
@@ -169,12 +176,12 @@ Image.defaultProps = {
     preview: false,
     className: null,
     downloadable: false,
-    style: null,
     imageStyle: null,
     imageClassName: null,
     template: null,
     src: null,
     alt: null,
     width: null,
-    height: null
+    height: null,
+    onError: null
 }

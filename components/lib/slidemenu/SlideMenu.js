@@ -88,7 +88,9 @@ export const SlideMenu = React.memo(React.forwardRef((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         toggle,
         show,
-        hide
+        hide,
+        getElement: () => menuRef.current,
+        ...props
     }));
 
     const createBackward = () => {

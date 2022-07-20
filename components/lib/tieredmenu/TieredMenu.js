@@ -73,7 +73,9 @@ export const TieredMenu = React.memo(React.forwardRef((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         toggle,
         show,
-        hide
+        hide,
+        getElement: () => menuRef.current,
+        ...props
     }));
 
     const createElement = () => {

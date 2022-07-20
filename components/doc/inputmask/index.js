@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const InputMaskDoc = memo(() => {
 
@@ -498,15 +499,16 @@ import { InputMask } from 'primereact/inputmask';
                     </div>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>InputMask component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
 <CodeHighlight>
 {`
 <label htmlFor="date">Date</label>
-<InputMask id="firstname" />
+<InputMask id="date" />
 
 <span id="phone">Phone</span>
-<InputMask id="phone" aria-labelledby="phone" />
+<InputMask aria-labelledby="phone" />
 
 <InputMask aria-label="Age" />
 `}
@@ -528,7 +530,7 @@ import { InputMask } from 'primereact/inputmask';
                             </tbody>
                         </table>
                     </div>
-
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>

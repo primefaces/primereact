@@ -5,10 +5,10 @@ import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyRow } from './BodyRow';
 import { RowTogglerButton } from './RowTogglerButton';
 
-export const TableBody = React.memo((props) => {
+export const TableBody = React.memo(React.forwardRef((props, ref) => {
     const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = React.useState({});
     const elementRef = React.useRef(null);
-    const ref = React.useCallback((el) => {
+    const refCallback = React.useCallback((el) => {
         elementRef.current = el;
         props.virtualScrollerContentRef && props.virtualScrollerContentRef(el);
     }, [props]);
@@ -116,7 +116,7 @@ export const TableBody = React.memo((props) => {
     }
 
     const allowRowDrag = (event) => {
-        return !allowCellSelection() && allowDrag(event);
+        return !allowCellSelection() && allowDrag(event) || props.reorderableRows;
     }
 
     const allowCellDrag = (event) => {
@@ -589,9 +589,11 @@ export const TableBody = React.memo((props) => {
 
     const onRowDragStart = (e) => {
         const { originalEvent: event, index } = e;
-        rowDragging.current = true;
-        draggedRowIndex.current = index;
-        event.dataTransfer.setData('text', 'b');    // For firefox
+        if (allowRowDrag(event)) {
+            rowDragging.current = true;
+            draggedRowIndex.current = index;
+            event.dataTransfer.setData('text', 'b');    // For firefox
+        }
     }
 
     const onRowDragOver = (e) => {
@@ -927,10 +929,10 @@ export const TableBody = React.memo((props) => {
     const content = props.empty ? createEmptyContent() : createContent();
 
     return (
-        <tbody ref={ref} className={className}>
+        <tbody ref={refCallback} className={className}>
             {content}
         </tbody>
     )
-});
+}));
 
 TableBody.displayName = 'TableBody';

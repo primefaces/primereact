@@ -6,11 +6,8 @@ interface FieldsetToggleParams {
     value: boolean;
 }
 
-export interface FieldsetProps {
-    id?: string;
+export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLFieldSetElement>, HTMLFieldSetElement>, 'ref'> {
     legend?: React.ReactNode;
-    className?: string;
-    style?: object;
     toggleable?: boolean;
     collapsed?: boolean;
     transitionOptions?: CSSTransitionProps;
@@ -21,4 +18,7 @@ export interface FieldsetProps {
     children?: React.ReactNode;
 }
 
-export declare class Fieldset extends React.Component<FieldsetProps, any> { }
+export declare class Fieldset extends React.Component<FieldsetProps, any> { 
+    public getElement(): HTMLFieldSetElement;
+    public getContent(): HTMLDivElement;
+}

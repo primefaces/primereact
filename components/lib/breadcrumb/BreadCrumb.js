@@ -2,6 +2,7 @@ import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
 
     const itemClick = (event, item) => {
         if (item.disabled) {
@@ -25,15 +26,31 @@ export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
         const home = props.home;
 
         if (home) {
-            const { icon: _icon, target, url, disabled, style, className: _className } = home;
+            const { icon: _icon, target, url, disabled, style, className: _className, template } = home;
             const className = classNames('p-breadcrumb-home', { 'p-disabled': disabled }, _className);
             const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props });
 
+            let content = (
+                <a href={url || '#'} className="p-menuitem-link" aria-disabled={disabled} target={target} onClick={(event) => itemClick(event, home)}>
+                    {icon}
+                </a>
+            )
+
+            if (template) {
+                const defaultContentOptions = {
+                    onClick: (event) => itemClick(event, home),
+                    className: 'p-menuitem-link',
+                    labelClassName: 'p-menuitem-text',
+                    element: content,
+                    props
+                };
+
+                content = ObjectUtils.getJSXElement(template, home, defaultContentOptions);
+            }
+
             return (
                 <li className={className} style={style}>
-                    <a href={url || '#'} className="p-menuitem-link" aria-disabled={disabled} target={target} onClick={(event) => itemClick(event, home)}>
-                        {icon}
-                    </a>
+                    {content}
                 </li>
             )
         }
@@ -94,6 +111,11 @@ export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     const otherProps = ObjectUtils.findDiffKeys(props, BreadCrumb.defaultProps);
     const className = classNames('p-breadcrumb p-component', props.className);
     const home = createHome();
@@ -101,7 +123,7 @@ export const BreadCrumb = React.memo(React.forwardRef((props, ref) => {
     const separator = createSeparator();
 
     return (
-        <nav id={props.id} className={className} style={props.style} aria-label="Breadcrumb" {...otherProps}>
+        <nav id={props.id} ref={elementRef} className={className} style={props.style} aria-label="Breadcrumb" {...otherProps}>
             <ul>
                 {home}
                 {separator}

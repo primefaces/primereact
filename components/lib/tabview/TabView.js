@@ -11,6 +11,7 @@ export const TabView = React.forwardRef((props, ref) => {
     const [forwardIsDisabledState, setForwardIsDisabledState] = React.useState(false);
     const [hiddenTabsState, setHiddenTabsState] = React.useState([]);
     const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
+    const elementRef = React.useRef(null);
     const contentRef = React.useRef(null);
     const navRef = React.useRef(null);
     const inkbarRef = React.useRef(null);
@@ -146,7 +147,9 @@ export const TabView = React.forwardRef((props, ref) => {
     }, [props.activeIndex]);
 
     React.useImperativeHandle(ref, () => ({
-        reset
+        reset,
+        getElement: () => elementRef.current,
+        ...props
     }));
 
     const createTabHeader = (tab, index) => {
@@ -284,7 +287,7 @@ export const TabView = React.forwardRef((props, ref) => {
     const nextButton = createNextButton();
 
     return (
-        <div className={className} {...otherProps}>
+        <div ref={elementRef} className={className} {...otherProps}>
             <div className="p-tabview-nav-container">
                 {prevButton}
                 {navigator}

@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const TreeSelectDoc = memo(() => {
 
@@ -466,11 +467,47 @@ data() {
 </CodeHighlight>
 
                     <h5>Templating</h5>
-                    <p>Label of an option is used as the display text of an item by default, for custom content support define a <i>valueTemplate</i> that gets the selected nodes as a parameter.
+                    <p>Label of an option is used as the display text of an item by default, for custom content support define a <i>valueTemplate</i> that gets the selected nodes as a parameter. 
+                    For custom filter support define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.
                     In addition <i>header</i>, <i>footer</i> and <i>emptyMessage</i> templates are provided for further customization.</p>
 <CodeHighlight>
 {`
-<TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} valueTemplate={<span>Custom Content</span>} placeholder="Select Items" />
+const [filterValue, setFilterValue] = useState('');
+const filterInputRef = useRef();
+
+const valueTemplate = () => {
+    return (
+        <span>Custom Content</span>
+    )
+}
+
+const filterTemplate = (options) => {
+    let {filterOptions} = options;
+
+    return (
+        <div className="flex gap-2">
+            <InputText value={filterValue} ref={filterInputRef} onChange={(e) => myFilterFunction(e, filterOptions)} />
+            <Button label="Reset" onClick={() => myResetFunction(filterOptions)} />
+        </div>
+    )
+}
+
+const myResetFunction = (options) => {
+    setFilterValue('');
+    options.reset();
+    filterInputRef && filterInputRef.current.focus()
+}
+
+const myFilterFunction = (event, options) => {
+    let _filterValue = event.target.value;
+    setFilterValue(_filterValue);
+    options.filter(event);
+}
+`}
+</CodeHighlight>
+<CodeHighlight>
+{`
+<TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} valueTemplate={valueTemplate} placeholder="Select Items" filter filterTemplate={filterTemplate}/>
 `}
 </CodeHighlight>
 
@@ -630,6 +667,12 @@ data() {
                                     <td>any</td>
                                     <td>null</td>
                                     <td>The template of selected values.</td>
+                                </tr>
+                                <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template for filter element.</td>
                                 </tr>
                                 <tr>
                                     <td>panelHeaderTemplate</td>
@@ -827,6 +870,148 @@ data() {
                             </tbody>
                         </table>
 
+                        <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The treeselect element has a <i>combobox</i> role
+                        in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the combobox and the popup is created with <i>aria-controls</i> that refers to the id of the popup.</p>
+                        <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the <i>combobox</i> element and uses <i>tree</i> as the role. Each list item has a <i>treeitem</i> role along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-expanded</i> attributes. 
+                        In checkbox selection, <i>aria-checked</i> is used instead of <i>aria-selected</i>. Checkbox and toggle icons are hidden from screen readers as their parent element with <i>treeitem</i> role and attributes are used instead for readers and keyboard support.
+                        The container element of a treenode has the <i>group</i> role. The <i>aria-setsize</i>, <i>aria-posinset</i> and <i>aria-level</i> attributes are calculated implicitly and added to each treeitem.</p>
+
+                        <p>If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the filter input element.</p>
+    <CodeHighlight>
+{`
+<span id="dd1">Options</span>
+<TreeSelect aria-labelledby="dd1" />
+
+<TreeSelect aria-label="Options" />
+`}
+    </CodeHighlight>
+                        <h6>Closed State Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><i>tab</i></td>
+                                        <td>Moves focus to the treeselect element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>space</i></td>
+                                        <td>Opens the popup and moves visual focus to the selected treenode, if there is none then first treenode receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>down arrow</i></td>
+                                        <td>Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Popup Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><i>tab</i></td>
+                                        <td>Moves focus to the next focusable element in the popup, if there is none then first focusable element receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>shift</i> + <i>tab</i></td>
+                                        <td>Moves focus to the previous focusable element in the popup, if there is none then last focusable element receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>enter</i></td>
+                                        <td>Selects the focused option, closes the popup if selection mode is single.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>space</i></td>
+                                        <td>Selects the focused option, closes the popup if selection mode is single.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>escape</i></td>
+                                        <td>Closes the popup, moves focus to the treeselect element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>down arrow</i></td>
+                                        <td>Moves focus to the next treenode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>up arrow</i></td>
+                                        <td>Moves focus to the previous treenode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>right arrow</i></td>
+                                        <td>If node is closed, opens the node otherwise moves focus to the first child node.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>left arrow</i></td>
+                                        <td>If node is open, closes the node otherwise moves focus to the parent node.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Filter Input Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><i>enter</i></td>
+                                        <td>Closes the popup and moves focus to the treeselect element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>escape</i></td>
+                                        <td>Closes the popup and moves focus to the treeselect element.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Close Button Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><i>enter</i></td>
+                                        <td>Closes the popup and moves focus to the treeselect element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>space</i></td>
+                                        <td>Closes the popup and moves focus to the treeselect element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>escape</i></td>
+                                        <td>Closes the popup and moves focus to the treeselect element.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
                         <h5>Dependencies</h5>
                         <p>None.</p>
                     </div>

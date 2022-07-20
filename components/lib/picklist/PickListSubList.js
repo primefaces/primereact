@@ -85,6 +85,23 @@ export const PickListSubList = React.memo(React.forwardRef((props, ref) => {
         return ObjectUtils.findIndexInList(item, props.selection, props.dataKey) !== -1;
     }
 
+    const onFilter = (event) => {
+        if (props.onFilter) {
+            props.onFilter({
+                originalEvent: event,
+                value: event.target.value,
+                type: props.type
+            });
+        }
+    }
+
+    const onFilterInputKeyDown = (event) => {
+        //enter
+        if (event.which === 13) {
+            event.preventDefault();
+        }
+    }
+
     React.useImperativeHandle(ref, () => ({
         listElementRef
     }));
@@ -110,6 +127,41 @@ export const PickListSubList = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
+    const createFilter = () => {
+        if (props.showFilter) {
+            let content = (
+                <div className="p-picklist-filter">
+                    <input type="text" value={props.filterValue} onChange={onFilter} onKeyDown={onFilterInputKeyDown} placeholder={props.placeholder} className="p-picklist-filter-input p-inputtext p-component" />
+                    <span className="p-picklist-filter-icon pi pi-search"></span>
+                </div>
+            );
+
+            if (props.filterTemplate) {
+                const defaultContentOptions = {
+                    className: 'p-picklist-filter',
+                    inputProps: {
+                        className: 'p-picklist-filter-input p-inputtext p-component',
+                        onChange: onFilter,
+                        onKeyDown: onFilterInputKeyDown,
+                    },
+                    iconClassName: 'p-picklist-filter-icon pi pi-search',
+                    element: content,
+                    props
+                };
+
+                content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
+            }
+
+            return (
+                <div className="p-picklist-filter-container">
+                    {content}
+                </div>
+            )
+        }
+
+        return null;
+    }
+
     const createList = () => {
         const items = createItems();
         const className = classNames('p-picklist-list', props.listClassName);
@@ -122,11 +174,13 @@ export const PickListSubList = React.memo(React.forwardRef((props, ref) => {
 
     const className = classNames('p-picklist-list-wrapper', props.className);
     const header = createHeader();
+    const filter = createFilter();
     const list = createList();
 
     return (
         <div ref={listElementRef} className={className}>
             {header}
+            {filter}
             {list}
         </div>
     )

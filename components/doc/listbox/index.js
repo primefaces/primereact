@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const ListBoxDoc = memo(() => {
 
@@ -515,18 +516,44 @@ const cities = [
 </CodeHighlight>
 
                     <h5>Custom Content</h5>
-                    <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate property. Its value can be JSXElement, function or string.</p>
+                    <p>Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> property. Its value can be JSXElement, function or string.  For custom filter support, define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.</p>
 
 <CodeHighlight>
 {`
-<ListBox value={city} options={cities} onChange={(e) => setCity(e.value)} itemTemplate={itemTemplate} />
+<ListBox value={city} options={cities} onChange={(e) => setCity(e.value)} itemTemplate={itemTemplate} filter filterTemplate={filterTemplate}/>
 `}
 </CodeHighlight>
 
 <CodeHighlight lang="js">
 {`
+const [filterValue, setFilterValue] = useState('');
+const filterInputRef = React.useRef();
+
 itemTemplate(option) {
     // custom item content
+}
+
+const filterTemplate = (options) => {
+    let {filterOptions} = options;
+
+    return (
+        <div className="flex flex-column gap-2">
+            <InputText value={filterValue} ref={filterInputRef} onChange={(e) => myFilterFunction(e, filterOptions)} />
+            <Button label="Reset" onClick={() => myResetFunction(filterOptions)} />
+        </div>
+    )
+}
+
+const myResetFunction = (options) => {
+    setFilterValue('');
+    options.reset();
+    filterInputRef && filterInputRef.current.focus()
+}
+
+const myFilterFunction = (event, options) => {
+    let _filterValue = event.target.value;
+    setFilterValue(_filterValue);
+    options.filter(event);
 }
 `}
 </CodeHighlight>
@@ -547,7 +574,7 @@ itemTemplate(option) {
 {`
 <ListBox value={city} options={cities} onChange={(e) => setCity(e.value)} filter filterInputProps={{className:'p-3', maxLength: 10}}/>
 `}
-</CodeHighlight>                
+</CodeHighlight>
 
                     <h5>Grouping</h5>
                     <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
@@ -702,6 +729,12 @@ const groupedCities = [
                                     <td>any</td>
                                     <td>null</td>
                                     <td>Custom template for the items.</td>
+                                </tr>
+                                <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Custom template for the filter element.</td>
                                 </tr>
                                 <tr>
                                     <td>optionGroupTemplate</td>
@@ -893,6 +926,7 @@ const groupedCities = [
                     </div>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
                     <p>Value to describe the component can be provided  <i>aria-labelledby</i> or <i>aria-label</i> props. The list element has a <i>listbox</i> role with the <i>aria-multiselectable</i> attribute that sets to true when multiple selection is enabled.
                     Each list item has an <i>option</i> role with <i>aria-selected</i> and <i>aria-disabled</i> as their attributes.</p>
@@ -917,7 +951,7 @@ const groupedCities = [
                             <tbody>
                                 <tr>
                                     <td><i>tab</i></td>
-                                    <td>Moves focus to the first selected option, if there is none first option receives the focus.</td>
+                                    <td>Moves focus to the first selected option, if there is none then first option receives the focus.</td>
                                 </tr>
                                 <tr>
                                     <td><i>up arrow</i></td>
@@ -929,11 +963,11 @@ const groupedCities = [
                                 </tr>
                                 <tr>
                                     <td><i>enter</i></td>
-                                    <td>Toggles the selected state of the focused item.</td>
+                                    <td>Toggles the selected state of the focused option.</td>
                                 </tr>
                                 <tr>
                                     <td><i>space</i></td>
-                                    <td>Toggles the selected state of the focused item.</td>
+                                    <td>Toggles the selected state of the focused option.</td>
                                 </tr>
                                 <tr>
                                     <td><i>home</i></td>
@@ -945,11 +979,11 @@ const groupedCities = [
                                 </tr>
                                 <tr>
                                     <td><i>shift</i> + <i>down arrow</i></td>
-                                    <td>Moves focus to the next option and toggle the selection state.</td>
+                                    <td>Moves focus to the next option and toggles the selection state.</td>
                                 </tr>
                                 <tr>
                                     <td><i>shift</i> + <i>up arrow</i></td>
-                                    <td>Moves focus to the previous option and toggle the selection state.</td>
+                                    <td>Moves focus to the previous option and toggles the selection state.</td>
                                 </tr>
                                 <tr>
                                     <td><i>shift</i> + <i>space</i></td>
@@ -961,16 +995,16 @@ const groupedCities = [
                                 </tr>
                                 <tr>
                                     <td><i>control</i> + <i>shift</i> + <i>end</i></td>
-                                    <td>Selects the focused options and all the options down to the first one.</td>
+                                    <td>Selects the focused options and all the options down to the last one.</td>
                                 </tr>
                                 <tr>
                                     <td><i>control</i> + <i>a</i></td>
-                                    <td>Selects all options</td>
+                                    <td>Selects all options.</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>

@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const Chips = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -65,12 +66,19 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onWrapperClick = () => {
-        inputRef.current.focus();
+        DomHandler.focus(inputRef.current);
     }
 
     const onKeyDown = (event) => {
         const inputValue = event.target.value;
         const values = props.value || [];
+
+        props.onKeyDown && props.onKeyDown(event);
+
+        // do not continue if the user defined keydown wants to prevent
+        if (event.defaultPrevented) {
+            return;
+        }
 
         switch (event.which) {
             //backspace
@@ -88,6 +96,9 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
                 break;
 
             default:
+                if (props.keyfilter) {
+                    KeyFilter.onKeyPress(event, props.keyfilter)
+                }
                 if (isMaxedOut()) {
                     event.preventDefault();
                 }
@@ -121,6 +132,10 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
         if (props.separator) {
             let pastedData = (event.clipboardData || window['clipboardData']).getData('Text');
 
+            if (props.keyfilter) {
+                KeyFilter.onPaste(event, props.keyfilter)
+            }
+
             if (pastedData) {
                 let values = props.value || [];
                 let pastedValues = pastedData.split(props.separator);
@@ -138,6 +153,14 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onBlur = (event) => {
+        if (props.addOnBlur) {
+            const inputValue = event.target.value;
+            const values = props.value || [];
+    
+            if (inputValue && inputValue.trim().length && (!props.max || props.max > values.length)) {
+                addItem(event, inputValue, true);
+            }
+        }
         setFocusedState(false);
         props.onBlur && props.onBlur(event);
     }
@@ -153,6 +176,12 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
     const isRemovable = (value, index) => {
         return ObjectUtils.getPropValue(props.removable, { value, index, props });
     }
+
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        getInput: () => inputRef.current,
+        ...props
+    }));
 
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
@@ -248,9 +277,12 @@ Chips.defaultProps = {
     separator: null,
     allowDuplicate: true,
     itemTemplate: null,
+    keyfilter: null,
+    addOnBlur: null,
     onAdd: null,
     onRemove: null,
     onChange: null,
     onFocus: null,
-    onBlur: null
+    onBlur: null,
+    onKeyDown: null
 }

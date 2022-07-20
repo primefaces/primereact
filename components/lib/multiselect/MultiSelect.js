@@ -84,7 +84,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
             //escape
             case 27:
                 hide();
-                inputRef.current.focus();
+                DomHandler.focus(inputRef.current);
                 break;
 
             default:
@@ -105,8 +105,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
     const onClick = (event) => {
         if (!props.disabled && !isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon') && !isClearClicked(event)) {
             overlayVisibleState ? hide() : show();
-            inputRef.current.focus();
-
+            DomHandler.focus(inputRef.current);
             event.preventDefault();
         }
     }
@@ -215,7 +214,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
     const scrollInView = () => {
         const highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
         if (highlightItem && highlightItem.scrollIntoView) {
-            highlightItem.scrollIntoView({ block: 'nearest', inline: 'start' });
+            highlightItem.scrollIntoView({ block: 'nearest', inline: 'nearest' });
         }
     }
 
@@ -267,7 +266,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
 
     const onCloseClick = (event) => {
         hide();
-        inputRef.current.focus();
+        DomHandler.focus(inputRef.current);
         event.preventDefault();
         event.stopPropagation();
     }
@@ -424,7 +423,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
         let label;
 
         if (!empty && !props.fixedPlaceholder) {
-            if (props.maxSelectedLabels && props.value.length > props.maxSelectedLabels) {
+            if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value.length > props.maxSelectedLabels) {
                 return getSelectedItemsLabel();
             }
             else {
@@ -438,7 +437,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
     const getLabelContent = () => {
         if (props.selectedItemTemplate) {
             if (!empty) {
-                if (props.maxSelectedLabels && props.value.length > props.maxSelectedLabels) {
+                if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value.length > props.maxSelectedLabels) {
                     return getSelectedItemsLabel();
                 }
                 else {
@@ -486,7 +485,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
                 for (let optgroup of props.options) {
                     let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
                     if (filteredSubOptions && filteredSubOptions.length) {
-                        filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
+                        filteredGroups.push({ ...optgroup, ...{ [props.optionGroupChildren] : filteredSubOptions } });
                     }
                 }
                 return filteredGroups;
@@ -499,6 +498,15 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
             return props.options;
         }
     }
+
+    React.useImperativeHandle(ref, () => ({
+        show,
+        hide,
+        getElement: () => elementRef.current,
+        getOverlay: () => overlayRef.current,
+        getInput: () => inputRef.current,
+        ...props
+    }));
 
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
@@ -565,7 +573,7 @@ export const MultiSelect = React.memo(React.forwardRef((props, ref) => {
                     {IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}
                 </div>
                 <MultiSelectPanel ref={overlayRef} visibleOptions={visibleOptions} {...props} onClick={onPanelClick} onOverlayHide={hide}
-                    filterValue={filterState} hasFilter={hasFilter} onFilterInputChange={onFilterInputChange} onCloseClick={onCloseClick} onSelectAll={onSelectAll}
+                    filterValue={filterState} hasFilter={hasFilter} onFilterInputChange={onFilterInputChange} resetFilter={resetFilter} onCloseClick={onCloseClick} onSelectAll={onSelectAll}
                     getOptionLabel={getOptionLabel} getOptionRenderKey={getOptionRenderKey} isOptionDisabled={isOptionDisabled}
                     getOptionGroupChildren={getOptionGroupChildren} getOptionGroupLabel={getOptionGroupLabel} getOptionGroupRenderKey={getOptionGroupRenderKey}
                     isSelected={isSelected} getSelectedOptionIndex={getSelectedOptionIndex} isAllSelected={isAllSelected} onOptionSelect={onOptionSelect} allowOptionSelect={allowOptionSelect} onOptionKeyDown={onOptionKeyDown}
@@ -590,6 +598,7 @@ MultiSelect.defaultProps = {
     optionGroupLabel: null,
     optionGroupChildren: null,
     optionGroupTemplate: null,
+    filterTemplate: null,
     display: 'comma',
     style: null,
     className: null,

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { SelectItemOptionsType } from '../selectitem/SelectItem';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
 
 type CascadeSelectItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
@@ -44,4 +44,9 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
     children?: React.ReactNode;
 }
 
-export declare class CascadeSelect extends React.Component<CascadeSelectProps, any> { }
+export declare class CascadeSelect extends React.Component<CascadeSelectProps, any> { 
+    public getElement(): HTMLDivElement;
+    public getInput(): HTMLInputElement;
+    public getOverlay(): HTMLElement;
+    public getLabel(): HTMLSpanElement;
+}

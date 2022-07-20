@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const VirtualScrollerDoc = memo(() => {
 
@@ -40,7 +41,7 @@ export class VirtualScrollerDemo extends Component {
     componentDidMount() {
         this.setState({
             lazyItems: Array.from({ length: 100000 }),
-            lazyLoading: false
+            lazyLoading: true
         });
     }
 
@@ -221,7 +222,7 @@ import './VirtualScrollerDemo.css';
 
 const VirtualScrollerDemo = () => {
     const [lazyItems, setLazyItems] = useState([]);
-    const [lazyLoading, setLazyLoading] = useState(false);
+    const [lazyLoading, setLazyLoading] = useState(true);
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
     const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`)));
     const [templateItems] = useState(Array.from({ length: 10000 }).map((_, i) => \`Item #\${i}\`));
@@ -405,7 +406,7 @@ import './VirtualScrollerDemo.css';
 
 const VirtualScrollerDemo = () => {
     const [lazyItems, setLazyItems] = useState([]);
-    const [lazyLoading, setLazyLoading] = useState(false);
+    const [lazyLoading, setLazyLoading] = useState(true);
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
     const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`)));
     const [templateItems] = useState(Array.from({ length: 10000 }).map((_, i) => \`Item #\${i}\`));
@@ -595,7 +596,7 @@ const { Skeleton } = primereact.skeleton;
 
 const VirtualScrollerDemo = () => {
     const [lazyItems, setLazyItems] = useState([]);
-    const [lazyLoading, setLazyLoading] = useState(false);
+    const [lazyLoading, setLazyLoading] = useState(true);
     const [basicItems] = useState(Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`));
     const [multiItems] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => \`Item #\${i}_\${j}\`)));
     const [templateItems] = useState(Array.from({ length: 10000 }).map((_, i) => \`Item #\${i}\`));
@@ -1036,6 +1037,12 @@ const itemTemplate = (item, options) => {
                                     <td>Delay in scroll before new data is loaded.</td>
                                 </tr>
                                 <tr>
+                                    <td>resizeDelay</td>
+                                    <td>number</td>
+                                    <td>10</td>
+                                    <td>Delay after window's resize finishes.</td>
+                                </tr>
+                                <tr>
                                     <td>lazy</td>
                                     <td>boolean</td>
                                     <td>false</td>
@@ -1060,6 +1067,12 @@ const itemTemplate = (item, options) => {
                                     <td>Whether the data is loaded.</td>
                                 </tr>
                                 <tr>
+                                    <td>autoSize</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether to dynamically change the height or width of scrollable container.</td>
+                                </tr>
+                                <tr>
                                     <td>showSpacer</td>
                                     <td>boolean</td>
                                     <td>true</td>
@@ -1076,6 +1089,12 @@ const itemTemplate = (item, options) => {
                                     <td>any</td>
                                     <td>null</td>
                                     <td>The template of loader.</td>
+                                </tr>
+                                <tr>
+                                    <td>loaderIconTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template of loader's icon.</td>
                                 </tr>
                                 <tr>
                                     <td>itemTemplate</td>
@@ -1169,6 +1188,11 @@ const itemTemplate = (item, options) => {
                                     <td>-</td>
                                     <td>Returns the range of items added to the DOM.</td>
                                 </tr>
+                                <tr>
+                                    <td>getElementRef</td>
+                                    <td>-</td>
+                                    <td>Returns the reference of virtualScroller's container.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -1199,6 +1223,17 @@ const itemTemplate = (item, options) => {
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>VirtualScroller uses a semantic list element to list the items. No specific role is enforced, still you may use any aria role and attributes
+                        as any valid attribute is passed to the container element. List element can be also customized for accessibility using <i>listProps</i> property.
+                    </p>
+
+                    <h5>Keyboard Support</h5>
+                    <p>Component does not include any built-in interactive elements.</p>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

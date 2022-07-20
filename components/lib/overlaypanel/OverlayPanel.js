@@ -117,7 +117,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     }
 
     const align = () => {
-        if (currentTargetRef.current) {
+        if (currentTargetRef.current && overlayRef.current) {
             DomHandler.absolutePosition(overlayRef.current, currentTargetRef.current);
 
             const containerOffset = DomHandler.getOffset(overlayRef.current);
@@ -150,7 +150,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
                 `
             }
 
-            styleElement.innerHTML = innerHTML;
+            styleElement.current.innerHTML = innerHTML;
         }
     }
 
@@ -176,7 +176,9 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         toggle,
         show,
-        hide
+        hide,
+        getElement: () => overlayRef.current,
+        ...props
     }));
 
     const createCloseIcon = () => {

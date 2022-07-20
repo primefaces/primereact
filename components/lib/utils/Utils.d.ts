@@ -66,6 +66,7 @@ export declare class DomHandler {
     static getFocusableElements(el: HTMLElement, selector?: string): any[];
     static getFirstFocusableElement(el: HTMLElement, selector?: string): any;
     static getLastFocusableElement(el: HTMLElement, selector?: string): any;
+    static focus(el: HTMLElement, scrollTo?: boolean): void;
     static getCursorOffset(el: HTMLElement, prevText?: string, nextText?: string, currentText?: string): { top: any; left: any; };
     static invokeElementMethod(el: HTMLElement, methodName: string, arg: any): void;
     static isClickable(el: HTMLElement): boolean;

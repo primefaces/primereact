@@ -21,11 +21,8 @@ interface OrganizationChartNodeData {
     label?: string;
 }
 
-export interface OrganizationChartProps {
-    id?: string;
+export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     value?: OrganizationChartNodeData[];
-    style?: object;
-    className?: string;
     selectionMode?: OrganizationChartSelectionModeType;
     selection?: OrganizationChartSelectionNodeDataType;
     nodeTemplate?(node: OrganizationChartNodeData): React.ReactNode;
@@ -35,4 +32,6 @@ export interface OrganizationChartProps {
     children?: React.ReactNode;
 }
 
-export declare class OrganizationChart extends React.Component<OrganizationChartProps, any> { }
+export declare class OrganizationChart extends React.Component<OrganizationChartProps, any> { 
+    public getElement(): HTMLDivElement;
+}

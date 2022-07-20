@@ -6,10 +6,6 @@ type ConfirmDialogTemplateType = React.ReactNode | ((options: ConfirmDialogOptio
 
 type ConfirmDialogAppendToType = 'self' | HTMLElement | undefined | null;
 
-interface ConfirmDialogBreakpoints {
-    [key: string]: string;
-}
-
 interface ConfirmDialogOptions {
     accept(): void;
     reject(): void;
@@ -22,7 +18,7 @@ interface ConfirmDialogOptions {
     [key: string]: any;
 }
 
-export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
+export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer'> {
     tagKey?: string;
     visible?: boolean;
     message?: ConfirmDialogTemplateType;
@@ -36,7 +32,6 @@ export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide'> {
     appendTo?: ConfirmDialogAppendToType;
     className?: string;
     footer?: ConfirmDialogTemplateType;
-    breakpoints?: ConfirmDialogBreakpoints;
     onHide?(result: string): void;
     accept?(): void;
     reject?(): void;

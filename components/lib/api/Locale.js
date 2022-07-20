@@ -47,7 +47,12 @@ let locales = {
         aria: {
             trueLabel: 'True',
             falseLabel: 'False',
-            nullLabel: 'Not Selected'
+            nullLabel: 'Not Selected',
+            pageLabel: 'Page',
+            firstPageLabel: 'First Page',
+            lastPageLabel: 'Last Page',
+            nextPageLabel: 'Next Page',
+            previousPageLabel: 'Previous Page'
         }
     }
 };

@@ -3,13 +3,15 @@ import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
 import { IconType } from '../utils';
 import { VirtualScrollerProps } from '../virtualscroller';
-import { SelectItemOptionsType } from '../selectitem/SelectItem';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
 
 type MultiSelectOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
 type MultiSelectItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
 type MultiSelectSelectedItemTemplateType = React.ReactNode | ((value: any) => React.ReactNode);
+
+type MultiSelectFilterTemplateType = React.ReactNode | ((options: MultiSelectFilterOptions) => React.ReactNode);
 
 type MultiSelectEmptyFilterMessageType = React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
 
@@ -66,6 +68,11 @@ interface MultiSelectAllParams {
     checked: boolean;
 }
 
+interface MultiSelectFilterOptions {
+    filter?: (event?: KeyboardEvent) => void;
+    reset?: () => void;
+}
+
 export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
@@ -107,6 +114,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     selectedItemsLabel?: string;
     ariaLabelledBy?: string;
     itemTemplate?: MultiSelectItemTemplateType;
+    filterTemplate?: MultiSelectFilterTemplateType;
     selectedItemTemplate?: MultiSelectSelectedItemTemplateType;
     panelHeaderTemplate?: MultiSelectPanelHeaderTemplateType;
     panelFooterTemplate?: MultiSelectPanelFooterTemplateType;
@@ -125,4 +133,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     children?: React.ReactNode;
 }
 
-export declare class MultiSelect extends React.Component<MultiSelectProps, any> { }
+export declare class MultiSelect extends React.Component<MultiSelectProps, any> { 
+    public show(): void;
+    public hide(): void;
+    public getElement(): HTMLDivElement;
+    public getInput(): HTMLInputElement;
+    public getOverlay(): HTMLElement;
+}

@@ -24,6 +24,9 @@ export const DataTable = React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
     const tableRef = React.useRef(null);
     const wrapperRef = React.useRef(null);
+    const bodyRef = React.useRef(null);
+    const frozenBodyRef = React.useRef(null);
+    const virtualScrollerRef = React.useRef(null);
     const reorderIndicatorUpRef = React.useRef(null);
     const reorderIndicatorDownRef = React.useRef(null);
     const colReorderIconWidth = React.useRef(null);
@@ -495,8 +498,18 @@ export const DataTable = React.forwardRef((props, ref) => {
             }
             else if (props.columnResizeMode === 'expand') {
                 const tableWidth = tableRef.current.offsetWidth + delta + 'px';
-                tableRef.current.style.width = tableWidth;
-                tableRef.current.style.minWidth = tableWidth;
+                const updateTableWidth = (el) => {
+                    !!el && (el.style.width = el.style.minWidth = tableWidth);
+                }
+                updateTableWidth(tableRef.current);
+
+                if (!isVirtualScrollerDisabled()) {
+                    updateTableWidth(bodyRef.current);
+                    updateTableWidth(frozenBodyRef.current);
+                    if (wrapperRef.current) {
+                        updateTableWidth(DomHandler.findSingle(wrapperRef.current, '.p-virtualscroller-content'));
+                    }
+                }
 
                 resizeTableCells(newColumnWidth);
             }
@@ -562,7 +575,7 @@ export const DataTable = React.forwardRef((props, ref) => {
 
         const { originalEvent: event, column } = e;
 
-        if (props.reorderableColumns && getColumnProp(column, 'reorderable') !== false) {
+        if (props.reorderableColumns && getColumnProp(column, 'reorderable') !== false && !getColumnProp(column, 'frozen')) {
             if (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA' || DomHandler.hasClass(event.target, 'p-column-resizer'))
                 event.currentTarget.draggable = false;
             else
@@ -616,9 +629,9 @@ export const DataTable = React.forwardRef((props, ref) => {
     }
 
     const onColumnHeaderDragOver = (e) => {
-        const { originalEvent: event } = e;
+        const { originalEvent: event, column } = e;
         const dropHeader = findParentHeader(event.currentTarget);
-        if (props.reorderableColumns && draggedColumnElement.current && dropHeader) {
+        if (props.reorderableColumns && draggedColumnElement.current && dropHeader && !getColumnProp(column, 'frozen')) {
             event.preventDefault();
 
             if (draggedColumnElement.current !== dropHeader) {
@@ -848,8 +861,8 @@ export const DataTable = React.forwardRef((props, ref) => {
         return props.removableSort ? (props.defaultSortOrder === currentOrder ? currentOrder * -1 : 0) : currentOrder * -1;
     }
 
-    const compareValuesOnSort = (value1, value2) => {
-        return ObjectUtils.sort(value1, value2, 1, PrimeReact.locale);
+    const compareValuesOnSort = (value1, value2, order) => {
+        return ObjectUtils.sort(value1, value2, order, PrimeReact.locale);
     }
 
     const addSortMeta = (meta, multiSortMeta) => {
@@ -885,15 +898,14 @@ export const DataTable = React.forwardRef((props, ref) => {
         let value = [...data];
 
         if (columnSortable.current && columnSortFunction.current) {
-            value = columnSortFunction({ field, order });
+            value = columnSortFunction.current({ rowData: value, field: field, order: order });
         }
         else {
             value.sort((data1, data2) => {
                 const value1 = ObjectUtils.resolveFieldData(data1, field);
                 const value2 = ObjectUtils.resolveFieldData(data2, field);
-                const result = compareValuesOnSort(value1, value2);
 
-                return (order * result);
+                return compareValuesOnSort(value1, value2, order);
             });
         }
 
@@ -921,7 +933,7 @@ export const DataTable = React.forwardRef((props, ref) => {
             const field = columnField.current;
             const order = meta ? meta.order : defaultSortOrder;
 
-            value = columnSortFunction.current({ field, order });
+            value = columnSortFunction.current({ rowData: value, field: field, order: order });
         }
         else {
             value.sort((data1, data2) => {
@@ -940,9 +952,7 @@ export const DataTable = React.forwardRef((props, ref) => {
             return (multiSortMeta.length - 1) > (index) ? (multisortField(data1, data2, multiSortMeta, index + 1)) : 0;
         }
 
-        const result = compareValuesOnSort(value1, value2);
-
-        return (multiSortMeta[index].order * result);
+        return compareValuesOnSort(value1, value2, multiSortMeta[index].order);
     }
 
     const onFilterChange = (filters) => {
@@ -1226,6 +1236,13 @@ export const DataTable = React.forwardRef((props, ref) => {
                 const sortField = (localState && localState.sortField) || getSortField();
                 const sortOrder = (localState && localState.sortOrder) || getSortOrder();
                 const multiSortMeta = (localState && localState.multiSortMeta) || getMultiSortMeta();
+                const columns = getColumns();
+                const sortColumn = columns.find((col) => col.props.field === sortField);
+
+                if (sortColumn) {
+                    columnSortable.current = sortColumn.props.sortable;
+                    columnSortFunction.current = sortColumn.props.sortFunction;
+                }
 
                 if (ObjectUtils.isNotEmpty(filters) || props.globalFilter) {
                     data = filterLocal(data, filters);
@@ -1295,7 +1312,9 @@ export const DataTable = React.forwardRef((props, ref) => {
     }, [props.responsiveLayout]);
 
     useUpdateEffect(() => {
-        filter(props.globalFilter, 'global', 'contains');
+        if (props.globalFilter) {
+            filter(props.globalFilter, 'global', 'contains');
+        }
     }, [props.globalFilter]);
 
     useUnmountEffect(() => {
@@ -1312,7 +1331,11 @@ export const DataTable = React.forwardRef((props, ref) => {
         resetColumnOrder,
         closeEditingCell,
         restoreTableState,
-        clearState
+        clearState,
+        getElement: () => elementRef.current,
+        getTable: () => tableRef.current,
+        getVirtualScroller: () => virtualScrollerRef.current,
+        ...props
     }));
 
     const createLoader = () => {
@@ -1362,10 +1385,10 @@ export const DataTable = React.forwardRef((props, ref) => {
 
     const createTableBody = (options, selectionModeInColumn, empty, isVirtualScrollerDisabled) => {
         const first = getFirst();
-        const { rows, columns, contentRef, className } = options;
+        const { rows, columns, contentRef, className, itemSize } = options;
 
         const frozenBody = props.frozenValue && (
-            <TableBody value={props.frozenValue} className="p-datatable-frozen-tbody" frozenRow
+            <TableBody ref={frozenBodyRef} value={props.frozenValue} className="p-datatable-frozen-tbody" frozenRow
                 tableProps={props} tableSelector={attributeSelectorState} columns={columns} selectionModeInColumn={selectionModeInColumn}
                 first={first} editingMeta={editingMetaState} onEditingMetaChange={onEditingMetaChange} tabIndex={props.tabIndex}
                 onRowClick={props.onRowClick} onRowDoubleClick={props.onRowDoubleClick} onCellClick={props.onCellClick}
@@ -1374,7 +1397,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                 dragSelection={props.dragSelection} onContextMenu={props.onContextMenu} onContextMenuSelectionChange={props.onContextMenuSelectionChange}
                 metaKeySelection={props.metaKeySelection} selectionMode={props.selectionMode} cellSelection={props.cellSelection} contextMenuSelection={props.contextMenuSelection}
                 dataKey={props.dataKey} expandedRows={props.expandedRows} onRowCollapse={props.onRowCollapse} onRowExpand={props.onRowExpand} onRowToggle={props.onRowToggle}
-                editMode={props.editMode} editingRows={props.editingRows} onRowReorder={props.onRowReorder} scrollable={props.scrollable} rowGroupMode={props.rowGroupMode}
+                editMode={props.editMode} editingRows={props.editingRows} onRowReorder={props.onRowReorder} reorderableRows={props.reorderableRows} scrollable={props.scrollable} rowGroupMode={props.rowGroupMode}
                 groupRowsBy={props.groupRowsBy} expandableRowGroups={props.expandableRowGroups} loading={props.loading} emptyMessage={props.emptyMessage}
                 rowGroupHeaderTemplate={props.rowGroupHeaderTemplate} rowExpansionTemplate={props.rowExpansionTemplate} rowGroupFooterTemplate={props.rowGroupFooterTemplate}
                 onRowEditChange={props.onRowEditChange} compareSelectionBy={props.compareSelectionBy} selectOnEdit={props.selectOnEdit}
@@ -1382,10 +1405,10 @@ export const DataTable = React.forwardRef((props, ref) => {
                 cellClassName={props.cellClassName} responsiveLayout={props.responsiveLayout} selectionAutoFocus={props.selectionAutoFocus} isDataSelectable={props.isDataSelectable}
                 showSelectionElement={props.showSelectionElement} showRowReorderElement={props.showRowReorderElement}
                 expandedRowIcon={props.expandedRowIcon} collapsedRowIcon={props.collapsedRowIcon} rowClassName={props.rowClassName}
-                isVirtualScrollerDisabled={true} />
+                virtualScrollerOptions={options} isVirtualScrollerDisabled={true} />
         );
         const body = (
-            <TableBody value={dataToRender(rows)} className={className} empty={empty} frozenRow={false}
+            <TableBody ref={bodyRef} value={dataToRender(rows)} className={className} empty={empty} frozenRow={false}
                 tableProps={props} tableSelector={attributeSelectorState} columns={columns} selectionModeInColumn={selectionModeInColumn}
                 first={first} editingMeta={editingMetaState} onEditingMetaChange={onEditingMetaChange} tabIndex={props.tabIndex}
                 onRowClick={props.onRowClick} onRowDoubleClick={props.onRowDoubleClick} onCellClick={props.onCellClick}
@@ -1394,7 +1417,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                 dragSelection={props.dragSelection} onContextMenu={props.onContextMenu} onContextMenuSelectionChange={props.onContextMenuSelectionChange}
                 metaKeySelection={props.metaKeySelection} selectionMode={props.selectionMode} cellSelection={props.cellSelection} contextMenuSelection={props.contextMenuSelection}
                 dataKey={props.dataKey} expandedRows={props.expandedRows} onRowCollapse={props.onRowCollapse} onRowExpand={props.onRowExpand} onRowToggle={props.onRowToggle}
-                editMode={props.editMode} editingRows={props.editingRows} onRowReorder={props.onRowReorder} scrollable={props.scrollable} rowGroupMode={props.rowGroupMode}
+                editMode={props.editMode} editingRows={props.editingRows} onRowReorder={props.onRowReorder} reorderableRows={props.reorderableRows} scrollable={props.scrollable} rowGroupMode={props.rowGroupMode}
                 groupRowsBy={props.groupRowsBy} expandableRowGroups={props.expandableRowGroups} loading={props.loading} emptyMessage={props.emptyMessage}
                 rowGroupHeaderTemplate={props.rowGroupHeaderTemplate} rowExpansionTemplate={props.rowExpansionTemplate} rowGroupFooterTemplate={props.rowGroupFooterTemplate}
                 onRowEditChange={props.onRowEditChange} compareSelectionBy={props.compareSelectionBy} selectOnEdit={props.selectOnEdit}
@@ -1429,7 +1452,8 @@ export const DataTable = React.forwardRef((props, ref) => {
 
         return (
             <div ref={wrapperRef} className="p-datatable-wrapper" style={{ maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }}>
-                <VirtualScroller {...virtualScrollerOptions} items={processedData} columns={columns} scrollHeight={props.scrollHeight}
+                <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerOptions} items={processedData} columns={columns}
+                    style={{ ...virtualScrollerOptions.style, ...{ height: props.scrollHeight !== 'flex' ? props.scrollHeight : undefined } }} scrollHeight={props.scrollHeight !== 'flex' ? undefined : '100%'}
                     disabled={_isVirtualScrollerDisabled} loaderDisabled showSpacer={false}
                     contentTemplate={(options) => {
                         const ref = (el) => { tableRef.current = el; options.spacerRef && options.spacerRef(el) };
@@ -1620,6 +1644,7 @@ DataTable.defaultProps = {
     resizableColumns: false,
     columnResizeMode: 'fit',
     reorderableColumns: false,
+    reorderableRows: false,
     filters: null,
     globalFilter: null,
     filterDelay: 300,

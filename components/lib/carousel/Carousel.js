@@ -1,7 +1,8 @@
 import * as React from 'react';
 import PrimeReact from '../api/Api';
+import { ariaLabel } from '../api/Api';
+import { Button } from '../button/Button';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
 const CarouselItem = React.memo((props) => {
@@ -41,10 +42,10 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
     const prevPage = usePrevious(props.page);
     const isVertical = props.orientation === 'vertical';
     const circular = props.circular || !!props.autoplayInterval;
-    const isCircular = circular && props.value.length >= numVisibleState;
-    const isAutoplay = props.autoplayInterval && allowAutoplay.current;
+    const isCircular = circular && props.value && props.value.length >= numVisibleState;
     const currentPage = props.onPageChange ? props.page : pageState;
-    const totalIndicators = props.value ? Math.ceil((props.value.length - numVisibleState) / numScrollState) + 1 : 0;
+    const totalIndicators = props.value ? Math.max(Math.ceil((props.value.length - numVisibleState) / numScrollState) + 1, 0) : 0;
+    const isAutoplay = totalIndicators && props.autoplayInterval && allowAutoplay.current;
 
     const [bindWindowResizeListener,] = useResizeListener({
         listener: () => {
@@ -285,6 +286,11 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     useMountEffect(() => {
         if (elementRef.current) {
             attributeSelector.current = UniqueComponentId();
@@ -486,10 +492,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
         });
 
         return (
-            <button type="button" className={className} onClick={navBackward} disabled={isDisabled}>
-                <span className={iconClassName}></span>
-                <Ripple />
-            </button>
+            <Button type='button' className={className} icon={iconClassName} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />
         )
     }
 
@@ -504,10 +507,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
         });
 
         return (
-            <button type="button" className={className} onClick={navForward} disabled={isDisabled}>
-                <span className={iconClassName}></span>
-                <Ripple />
-            </button>
+            <Button type='button' className={className} icon={iconClassName} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')} />
         )
     }
 
@@ -520,9 +520,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
 
         return (
             <li key={key} className={className}>
-                <button type="button" className="p-link" onClick={(e) => onDotClick(e, index)}>
-                    <Ripple />
-                </button>
+                <Button type='button' className="p-link" onClick={(e) => onDotClick(e, index)} aria-label={`${ariaLabel('pageLabel')} ${index + 1}`} />
             </li>
         )
     }

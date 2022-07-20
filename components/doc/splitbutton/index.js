@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const SplitButtonDoc = memo(() => {
 
@@ -723,6 +724,18 @@ export const SplitButtonDemo = () => {
                                     <td>pi pi-chevron-down</td>
                                     <td>Icon class of the dropdown icon.</td>
                                 </tr>
+                                <tr>
+                                    <td>loading</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Display loading icon of the button</td>
+                                </tr>
+                                <tr>
+                                    <td>loadingIcon</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Name of the loading icon or JSX.Element for loading icon.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -785,10 +798,11 @@ export const SplitButtonDemo = () => {
                     </div>
 
                     <h5>Accessibility</h5>
+                <DevelopmentSection>
                     <h6>Screen Reader</h6>
-                    <p>SplitButton component renders two native button elements, main button uses the label property to define <i>aria-label</i> by default which can be customized with <i>buttonProps</i>. 
-                    Dropdown button requires an explicit definition using <i>menuButtonProps</i> option and also includes <i>aria-haspopup</i>, <i>aria-expanded</i> for states along with <i>aria-controls</i> to define the relation between the popup and the button.</p>
-                    
+                    <p>SplitButton component renders two native button elements, main button uses the label property to define <i>aria-label</i> by default which can be customized with <i>buttonProps</i>.
+                    Dropdown button requires an explicit definition to describe it using <i>menuButtonProps</i> option and also includes <i>aria-haspopup</i>, <i>aria-expanded</i> for states along with <i>aria-controls</i> to define the relation between the popup and the button.</p>
+
                     <p>The popup overlay uses <i>menu</i> role on the list and each action item has a <i>menuitem</i> role with an <i>aria-label</i> as the menuitem label. The id of the menu refers to the <i>aria-controls</i> of the dropdown button.</p>
 <CodeHighlight>
 {`
@@ -884,7 +898,7 @@ export const SplitButtonDemo = () => {
                             </tbody>
                         </table>
                     </div>
-
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
