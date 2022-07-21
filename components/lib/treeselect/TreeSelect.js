@@ -473,7 +473,7 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createFooter = () => {
-        return ObjectUtils.getJSXElement(props.footer, props);
+        return ObjectUtils.getJSXElement(props.panelFooterTemplate, props);
     }
 
     const selectedNodes = getSelectedNodes();
