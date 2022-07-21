@@ -246,6 +246,9 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
         }
 
         const char = event.key;
+        if (char === 'Shift' || char === 'Control' || char === 'Alt') {
+            return;
+        }
 
         if (currentSearchChar.current === char)
             searchValue.current = char;
