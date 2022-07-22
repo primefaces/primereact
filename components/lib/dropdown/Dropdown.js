@@ -597,7 +597,7 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
 
     const createHiddenSelect = () => {
         const placeHolderOption = <option value="">{props.placeholder}</option>;
-        const option = selectedOption ? <option value={selectedOption.value}>{getOptionLabel(selectedOption)}</option> : null;
+        const option = selectedOption ? <option value={selectedOption.value} selected>{getOptionLabel(selectedOption)}</option> : null;
 
         return (
             <div className="p-hidden-accessible p-dropdown-hidden-select">
