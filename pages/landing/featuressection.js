@@ -7,12 +7,12 @@ const FeaturesSection = (props) => {
         <section className="landing-features py-8">
             <div className="section-header">Features</div>
             <p className="section-detail">PrimeReact is the most complete solution for your UI requirements.</p>
-            <div className="grid mt-7 pad-section" style={{backgroundImage:`url(${contextPath}/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize:'cover'}}>
+            <div className="grid grid-nogutter mt-7 pad-section" style={{backgroundImage:`url(${contextPath}/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize:'cover'}}>
                 <div className="col-12 md:col-6 xl:col-3 flex justify-content-center p-3">
                     <div className="box p-4 w-full">
                         <img src={`${contextPath}/images/landing-new/features/icon-components.svg`} alt="components icon" className="block mb-3"/>
-                        <div className="font-semibold mb-3 text-lg">90+ UI Components</div>
-                        <p className="m-0 text-secondary font-medium">The ultimate set of UI Components to assist you with 90+ impressive React Components.</p>
+                        <div className="font-semibold mb-3 text-lg">80+ UI Components</div>
+                        <p className="m-0 text-secondary font-medium">The ultimate set of UI Components to assist you with 80+ impressive React Components.</p>
                     </div>
                 </div>
                 <div className="col-12 md:col-6 xl:col-3 flex justify-content-center p-3">
@@ -33,7 +33,7 @@ const FeaturesSection = (props) => {
                     <div className="box p-4 w-full">
                         <img src={`${contextPath}/images/landing-new/features/icon-accessibility.svg`} alt="components icon" className="block mb-3"/>
                         <div className="font-semibold mb-3 text-lg">Accessibility</div>
-                        <p className="m-0 text-secondary font-medium">The ultimate set of UI Components to assist you with 90+ impressive React Components.</p>
+                        <p className="m-0 text-secondary font-medium">The ultimate set of UI Components to assist you with 80+ impressive React Components.</p>
                     </div>
                 </div>
                 <div className="col-12 md:col-6 xl:col-3 flex justify-content-center p-3">

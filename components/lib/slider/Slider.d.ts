@@ -11,21 +11,20 @@ interface SliderChangeParams {
 
 interface SliderSlideEndParams extends SliderChangeParams { }
 
-export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value'> {
-    id?: string;
+export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value' | 'ref'> {
     value?: SliderValueType;
     min?: number;
     max?: number;
     orientation?: SliderOrientationType;
     step?: number;
     range?: boolean;
-    style?: object;
-    className?: string;
     disabled?: boolean;
-    tabIndex?: number;
     ariaLabelledBy?: string;
     onChange?(e: SliderChangeParams): void;
     onSlideEnd?(e: SliderSlideEndParams): void;
+    children?: React.ReactNode;
 }
 
-export declare class Slider extends React.Component<SliderProps, any> { }
+export declare class Slider extends React.Component<SliderProps, any> { 
+    public getElement(): HTMLDivElement;
+}

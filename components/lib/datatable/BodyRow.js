@@ -200,7 +200,7 @@ export const BodyRow = React.memo((props) => {
                 let dataKeyValue = String(ObjectUtils.resolveFieldData(data, dataKey));
                 editingRows = props.editingRows ? { ...props.editingRows } : {};
 
-                if (!editing) {
+                if (!isEditing) {
                     delete editingRows[dataKeyValue];
                     // if the key value was changed, stop editing for the new key value too
                     let newDataKeyValue = String(ObjectUtils.resolveFieldData(newData, dataKey));
@@ -316,11 +316,12 @@ export const BodyRow = React.memo((props) => {
         'p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.index }),
         'p-row-odd': props.index % 2 !== 0
     });
+    const style = { height: props.virtualScrollerOptions ? props.virtualScrollerOptions.itemSize : undefined };
     const content = createContent();
     const tabIndex = getTabIndex();
 
     return (
-        <tr role="row" tabIndex={tabIndex} className={className} onMouseDown={onMouseDown} onMouseUp={onMouseUp}
+        <tr role="row" tabIndex={tabIndex} className={className} style={style} onMouseDown={onMouseDown} onMouseUp={onMouseUp}
             onClick={onClick} onDoubleClick={onDoubleClick} onContextMenu={onRightClick} onTouchEnd={onTouchEnd} onKeyDown={onKeyDown}
             onDragStart={onDragStart} onDragOver={onDragOver} onDragLeave={onDragLeave} onDragEnd={onDragEnd} onDrop={onDrop}>
             {content}

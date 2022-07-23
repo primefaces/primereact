@@ -27,12 +27,12 @@ export interface DataViewLayoutOptionsProps {
     style?: object;
     className?: string;
     onChange(e: DataViewLayoutOptionsChangeParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class DataViewLayoutOptions extends React.Component<DataViewLayoutOptionsProps, any> { }
 
-export interface DataViewProps {
-    id?: string;
+export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     header?: React.ReactNode;
     footer?: React.ReactNode;
     value?: any[];
@@ -55,15 +55,16 @@ export interface DataViewProps {
     emptyMessage?: string;
     sortField?: string;
     sortOrder?: DataViewSortOrderType;
-    style?: object;
-    className?: string;
     lazy?: boolean;
     loading?: boolean;
     loadingIcon?: string;
     gutter?: boolean;
     onPage?(e: DataViewPageParams): void;
     itemTemplate?(item: any, layout: DataViewLayoutType): React.ReactNode;
+    children?: React.ReactNode;
 }
 
 // tslint:disable-next-line:max-classes-per-file
-export declare class DataView extends React.Component<DataViewProps, any> { }
+export declare class DataView extends React.Component<DataViewProps, any> {
+    public getElement(): HTMLDivElement;
+}

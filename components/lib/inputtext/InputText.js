@@ -28,6 +28,14 @@ export const InputText = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
+    const onPaste = (event) => {
+        props.onPaste && props.onPaste(event);
+
+        if (props.keyfilter) {
+            KeyFilter.onPaste(event, props.keyfilter, props.validateOnly)
+        }
+    }
+
     const isFilled = React.useMemo(() => (
         ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (elementRef.current && ObjectUtils.isNotEmpty(elementRef.current.value))
     ), [props.value, props.defaultValue]);
@@ -45,7 +53,7 @@ export const InputText = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <>
-            <input ref={elementRef} {...otherProps} className={className} onInput={onInput} onKeyPress={onKeyPress} />
+            <input ref={elementRef} {...otherProps} className={className} onInput={onInput} onKeyPress={onKeyPress} onPaste={onPaste} />
             {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
         </>
     )
@@ -59,5 +67,6 @@ InputText.defaultProps = {
     tooltip: null,
     tooltipOptions: null,
     onInput: null,
-    onKeyPress: null
+    onKeyPress: null,
+    onPaste: null
 }

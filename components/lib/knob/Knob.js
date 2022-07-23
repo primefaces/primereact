@@ -130,6 +130,11 @@ export const Knob = React.memo(React.forwardRef((props, ref) => {
         unbindWindowTouchEndListener();
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     const otherProps = ObjectUtils.findDiffKeys(props, Knob.defaultProps);
     const className = classNames('p-knob p-component', {
         'p-disabled': props.disabled,

@@ -16,17 +16,17 @@ interface RatingChangeParams {
 }
 
 export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
-    id?: string;
     value?: number;
     disabled?: boolean;
     readOnly?: boolean;
     stars?: number;
     cancel?: boolean;
-    style?: object;
-    className?: string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     onChange?(e: RatingChangeParams): void;
+    children?: React.ReactNode;
 }
 
-export declare class Rating extends React.Component<RatingProps, any> { }
+export declare class Rating extends React.Component<RatingProps, any> { 
+    public getElement(): HTMLDivElement;
+}

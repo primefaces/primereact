@@ -17,11 +17,11 @@ export const DropdownItem = React.memo((props) => {
         'p-highlight': props.selected,
         'p-disabled': props.disabled,
         'p-dropdown-item-empty': (!props.label || props.label.length === 0)
-    }, props.option.className);
+    }, props.option && props.option.className);
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
 
     return (
-        <li className={className} onClick={onClick} aria-label={props.label} key={props.label} role="option" aria-selected={props.selected}>
+        <li className={className} style={props.style} onClick={onClick} aria-label={props.label} key={props.label} role="option" aria-selected={props.selected}>
             {content}
             <Ripple />
         </li>

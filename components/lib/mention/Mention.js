@@ -203,7 +203,7 @@ export const Mention = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onItemClick = (event, suggestion) => {
-        inputRef.current.focus();
+        DomHandler.focus(inputRef.current);
         selectItem(event, suggestion);
     }
 
@@ -312,6 +312,15 @@ export const Mention = React.memo(React.forwardRef((props, ref) => {
         ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (inputRef.current && ObjectUtils.isNotEmpty(inputRef.current.value))
     ), [props.value, props.defaultValue, inputRef]);
 
+    React.useImperativeHandle(ref, () => ({
+        show,
+        hide,
+        getElement: () => elementRef.current,
+        getOverlay: () => overlayRef.current,
+        getInput: () => inputRef.current,
+        ...props
+    }));
+
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
     }, [inputRef, props.inputRef]);
@@ -393,7 +402,7 @@ export const Mention = React.memo(React.forwardRef((props, ref) => {
 
     return (
         <div ref={elementRef} id={props.id} className={className} style={props.style}>
-            <InputTextarea ref={inputRef} id={props.inputId} {...inputProps} className={inputClassName} style={props.inputStyle}
+            <InputTextarea ref={inputRef} id={props.inputId} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']} className={inputClassName} style={props.inputStyle} {...inputProps}
                 onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} onInput={onInput} onKeyUp={onKeyUp} onChange={onChange} />
             {panel}
         </div>
@@ -421,6 +430,8 @@ Mention.defaultProps = {
     headerTemplate: null,
     footerTemplate: null,
     itemTemplate: null,
+    'aria-label': null,
+    'aria-labelledby': null,
     transitionOptions: null,
     onChange: null,
     onInput: null,

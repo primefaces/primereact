@@ -1,22 +1,34 @@
 import * as React from 'react';
 
+type OrderListFilterTemplateType = React.ReactNode | ((options: OrderListFilterOptions) => React.ReactNode);
+
 interface OrderListChangeParams {
     originalEvent: React.SyntheticEvent;
     value: any;
 }
 
-export interface OrderListProps {
-    id?: string;
-    value?: any[];
-    header?: React.ReactNode;
-    style?: object;
-    className?: string;
-    listStyle?: object;
-    dragdrop?: boolean;
-    tabIndex?: number;
-    dataKey?: string;
-    onChange?(e: OrderListChangeParams): void;
-    itemTemplate?(item: any): React.ReactNode;
+interface OrderListFilterOptions {
+    filter?: (event?: KeyboardEvent) => void;
+    reset?: () => void;
 }
 
-export declare class OrderList extends React.Component<OrderListProps, any> { }
+export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+    value?: any[];
+    header?: React.ReactNode;
+    listStyle?: object;
+    dragdrop?: boolean;
+    dataKey?: string;
+    filter?: boolean;
+    filterBy?: string;
+    filterMatchMode?: string;
+    filterPlaceholder?: string;
+    filterLocale?: string;
+    filterTemplate?: OrderListFilterTemplateType;
+    onChange?(e: OrderListChangeParams): void;
+    itemTemplate?(item: any): React.ReactNode;
+    children?: React.ReactNode;
+}
+
+export declare class OrderList extends React.Component<OrderListProps, any> { 
+    public getElement(): HTMLDivElement;
+}

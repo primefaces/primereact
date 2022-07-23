@@ -18,18 +18,14 @@ export const Toast = React.memo(React.forwardRef((props, ref) => {
             let messages;
 
             if (Array.isArray(value)) {
-                const currentMessages = [...value];
-                for (let i = 0; i < currentMessages.length; i++) {
-                    const message = { ...currentMessages[i] };
-                    message.id = messageIdx++;
-                    currentMessages[i] = message;
+                for (let i = 0; i < value.length; i++) {
+                    value[i].id = messageIdx++;
+                    messages = [...messagesState, ...value];
                 }
-                messages = [...messagesState, ...currentMessages];
             }
             else {
-                const currentMessage = { ...value };
-                currentMessage.id = messageIdx++;
-                messages = messagesState ? [...messagesState, currentMessage] : [currentMessage];
+                value.id = messageIdx++;
+                messages = messagesState ? [...messagesState, value] : [value];
             }
 
             messagesState.length === 0 && ZIndexUtils.set('toast', containerRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['toast']);
@@ -41,6 +37,11 @@ export const Toast = React.memo(React.forwardRef((props, ref) => {
     const clear = () => {
         ZIndexUtils.clear(containerRef.current);
         setMessagesState([]);
+    }
+
+    const replace = (value) => {
+        const replaced = Array.isArray(value) ? value : [value];
+        setMessagesState(replaced);
     }
 
     const onClose = (message) => {
@@ -55,7 +56,7 @@ export const Toast = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onExited = () => {
-        messagesState.length === 0 && ZIndexUtils.clear(containerRef.current);
+        messagesState.length === 1 && ZIndexUtils.clear(containerRef.current);
 
         props.onHide && props.onHide();
     }
@@ -66,7 +67,10 @@ export const Toast = React.memo(React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         show,
-        clear
+        replace,
+        clear,
+        getElement: () => containerRef.current,
+        ...props
     }));
 
     const createElement = () => {

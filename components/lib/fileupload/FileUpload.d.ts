@@ -76,7 +76,7 @@ interface FileUploadHandlerParam extends FileUploadFilesParam {
     options: FileUploadHandlerOptions;
 }
 
-interface FileUploadRemoveParams { 
+interface FileUploadRemoveParams {
     originalEvent: React.SyntheticEvent;
     file: File;
 }
@@ -114,6 +114,7 @@ interface FileUploadProps {
     progressBarTemplate?: FileUploadProgressBarTemplateType;
     onBeforeUpload?(e: FileUploadBeforeUploadParams): void;
     onBeforeSend?(e: FileUploadBeforeSendParams): void;
+    onBeforeDrop?(e: DragEvent): void;
     onUpload?(e: FileUploadUploadParams): void;
     onError?(e: FileUploadErrorParams): void;
     onClear?(): void;
@@ -122,10 +123,13 @@ interface FileUploadProps {
     onValidationFail?(file: File): void;
     uploadHandler?(e: FileUploadHandlerParam): void;
     onRemove?(e: FileUploadRemoveParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class FileUpload extends React.Component<FileUploadProps, any> {
     public upload(): void;
     public clear(): void;
     public formatSize(bytes: number): number;
+    public getElement(): HTMLElement;
+    public getInput(): HTMLInputElement;
 }

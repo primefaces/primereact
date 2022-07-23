@@ -150,6 +150,7 @@ export const ConfirmPopup = React.memo(React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         props.visible ? show() : hide();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.visible]);
 
     React.useEffect(() => {
@@ -160,6 +161,7 @@ export const ConfirmPopup = React.memo(React.forwardRef((props, ref) => {
         return () => {
             OverlayService.off('confirm-popup', confirm);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.target]);
 
     useUpdateEffect(() => {
@@ -177,7 +179,8 @@ export const ConfirmPopup = React.memo(React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
-        confirm
+        confirm,
+        ...props
     }));
 
     const createContent = () => {

@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const TreeDoc = memo(() => {
 
@@ -569,16 +570,18 @@ export const TreeLazyDemo = () => {
 </CodeHighlight>
 
                     <h5>Templating</h5>
-                    <p><i>label</i> property of a node is used to display as the content by default. Templating is supported as well with the <i>nodeTemplate</i> callback that gets the node instance and returns JSX. Example
+                    <p><i>label</i> property of a node is used to display as the content by default. Templating is supported as well with the <i>nodeTemplate</i> callback that gets the node instance and returns JSX.  For custom filter support define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element. Example
         below is a sample tree based navigation of React docs.</p>
 <CodeHighlight lang="js">
 {`
-import React, { Component } from 'react';
+import React, { Component, useState, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 
 export const TreeTemplatingDemo = () => {
 
     const [nodes, setNodes] = useState(createNavigation());
+    const [filterValue, setFilterValue] = useState('');
+    const filterInputRef = useRef();
 
     const createNavigation = () => {
         return [
@@ -619,8 +622,31 @@ export const TreeTemplatingDemo = () => {
         )
     }
 
+    const filterTemplate = (options) => {
+        let {filterOptions} = options;
+    
+        return (
+            <div className="flex gap-2">
+                <InputText value={filterValue} ref={filterInputRef} onChange={(e) => myFilterFunction(e, filterOptions)} />
+                <Button label="Reset" onClick={() => myResetFunction(filterOptions)} />
+            </div>
+        )
+    }
+    
+    const myResetFunction = (options) => {
+        setFilterValue('');
+        options.reset();
+        filterInputRef && filterInputRef.current.focus()
+    }
+    
+    const myFilterFunction = (event, options) => {
+        let _filterValue = event.target.value;
+        setFilterValue(_filterValue);
+        options.filter(event);
+    }
+
     return (
-        <Tree value={nodes} nodeTemplate={nodeTemplate} />
+        <Tree value={nodes} nodeTemplate={nodeTemplate} filter filterTemplate={filterTemplate}/>
     )
 }
 `}
@@ -871,10 +897,22 @@ export const TreeContextMenuDemo = () => {
                                     <td>Template of node element.</td>
                                 </tr>
                                 <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template of filter element.</td>
+                                </tr>
+                                <tr>
                                     <td>togglerTemplate</td>
                                     <td>any</td>
                                     <td>null</td>
                                     <td>Template of toggler element.</td>
+                                </tr>
+                                <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template of filter element.</td>
                                 </tr>
                                 <tr>
                                     <td>showHeader</td>
@@ -1091,10 +1129,68 @@ export const TreeContextMenuDemo = () => {
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The root list element has a <i>tree</i> role whereas 
+                        each list item has a <i>treeitem</i> role along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-expanded</i> attributes. In checkbox selection, <i>aria-checked</i> is used instead of <i>aria-selected</i>. The container
+                        element of a treenode has the <i>group</i> role. Checkbox and toggle icons are hidden from screen readers as their parent element with <i>treeitem</i> role and attributes are used instead for readers and keyboard support. The <i>aria-setsize</i>, <i>aria-posinset</i> and <i>aria-level</i> attributes are calculated implicitly and added to each treeitem.</p>
+
+                        <h6>Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><i>tab</i></td>
+                                        <td>Moves focus to the first selected node when focus enters the component, if there is none then first element receives the focus. If focus is already inside the component, moves focus to the next
+                                            focusable element in the page tab sequence.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>shift</i> + <i>tab</i></td>
+                                        <td>Moves focus to the last selected node when focus enters the component, if there is none then first element receives the focus. If focus is already inside the component, moves focus to the previous
+                                            focusable element in the page tab sequence.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>enter</i></td>
+                                        <td>Selects the focused treenode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>space</i></td>
+                                        <td>Selects the focused treenode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>down arrow</i></td>
+                                        <td>Moves focus to the next treenode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>up arrow</i></td>
+                                        <td>Moves focus to the previous treenode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>right arrow</i></td>
+                                        <td>If node is closed, opens the node otherwise moves focus to the first child node.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>left arrow</i></td>
+                                        <td>If node is open, closes the node otherwise moves focus to the parent node.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
+
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
 
                 </TabPanel>
 

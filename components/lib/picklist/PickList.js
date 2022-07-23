@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FilterService } from '../api/Api';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { PickListControls } from './PickListControls';
@@ -8,12 +9,20 @@ import { PickListTransferControls } from './PickListTransferControls';
 export const PickList = React.memo(React.forwardRef((props, ref) => {
     const [sourceSelectionState, setSourceSelectionState] = React.useState([]);
     const [targetSelectionState, setTargetSelectionState] = React.useState([]);
+    const [sourceFilterValueState, setSourceFilterValueState] = React.useState('');
+    const [targetFilterValueState, setTargetFilterValueState] = React.useState('');
+    const elementRef = React.useRef(null);
     const sourceListElementRef = React.useRef(null);
     const targetListElementRef = React.useRef(null);
     const reorderedListElementRef = React.useRef(null);
     const reorderDirection = React.useRef(null);
     const sourceSelection = props.onSourceSelectionChange ? props.sourceSelection : sourceSelectionState;
     const targetSelection = props.onTargetSelectionChange ? props.targetSelection : targetSelectionState;
+    const sourceFilteredValue = props.onSourceFilterChange ? props.sourceFilterValue : sourceFilterValueState;
+    const targetFilteredValue = props.onTargetFilterChange ? props.targetFilterValue : targetFilterValueState;
+    const hasFilterBy = ObjectUtils.isNotEmpty(props.filterBy);
+    const showSourceFilter = hasFilterBy && props.showSourceFilter;
+    const showTargetFilter = hasFilterBy && props.showTargetFilter;
 
     const onSourceReorder = (event) => {
         handleChange(event, event.value, props.target);
@@ -140,6 +149,44 @@ export const PickList = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
+    const onFilter = (event) => {
+        const { originalEvent, value, type } = event;
+        const [ setFilterState, onFilterChange ] = type === 'source' ? [setSourceFilterValueState, props.onSourceFilterChange] : [setTargetFilterValueState, props.onTargetFilterChange];
+
+        if (onFilterChange) {
+            onFilterChange({ originalEvent, value });
+        }
+        else {
+            setFilterState(value);
+        }
+    }
+
+    const getVisibleList = (list, type) => {
+        const [filteredValue, filterCallback] = type === 'source' ? [sourceFilteredValue, filterSource] : [targetFilteredValue, filterTarget];
+        return hasFilterBy && ObjectUtils.isNotEmpty(filteredValue) ? filterCallback(filteredValue) : list;
+    }
+
+    const filterSource = (value = '') => {
+        const filteredValue = value.trim().toLocaleLowerCase(props.filterLocale);
+        return filter(props.source, filteredValue);
+    }
+
+    const filterTarget = (value = '') => {
+        const filteredValue = value.trim().toLocaleLowerCase(props.filterLocale);
+        return filter(props.target, filteredValue);
+    }
+
+    const filter = (list, filterValue) => {
+        const searchFields = hasFilterBy ? props.filterBy.split(',') : [];
+
+        return FilterService.filter(list, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
+    }
+
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     useUpdateEffect(() => {
         if (reorderedListElementRef.current) {
             handleScrollPosition(reorderedListElementRef.current, reorderDirection.current);
@@ -150,21 +197,26 @@ export const PickList = React.memo(React.forwardRef((props, ref) => {
 
     const otherProps = ObjectUtils.findDiffKeys(props, PickList.defaultProps);
     const className = classNames('p-picklist p-component', props.className);
+    const sourceItemTemplate = props.sourceItemTemplate ? props.sourceItemTemplate : props.itemTemplate;
+    const targetItemTemplate = props.targetItemTemplate ? props.targetItemTemplate : props.itemTemplate;
+    const sourceList = getVisibleList(props.source, 'source');
+    const targetList = getVisibleList(props.target, 'target');
 
     return (
-        <div id={props.id} className={className} style={props.style} {...otherProps}>
+        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
             {props.showSourceControls && <PickListControls list={props.source} selection={sourceSelection} onReorder={onSourceReorder} className="p-picklist-source-controls" dataKey={props.dataKey} />}
 
-            <PickListSubList ref={sourceListElementRef} list={props.source} selection={sourceSelection} onSelectionChange={(e) => onSelectionChange(e, 'sourceSelection', props.onSourceSelectionChange)} itemTemplate={props.itemTemplate}
-                header={props.sourceHeader} style={props.sourceStyle} className="p-picklist-source-wrapper" listClassName="p-picklist-source" metaKeySelection={props.metaKeySelection} tabIndex={props.tabIndex} dataKey={props.dataKey} />
+            <PickListSubList ref={sourceListElementRef} type="source" list={sourceList} selection={sourceSelection} onSelectionChange={(e) => onSelectionChange(e, 'sourceSelection', props.onSourceSelectionChange)} itemTemplate={sourceItemTemplate}
+                header={props.sourceHeader} style={props.sourceStyle} className="p-picklist-source-wrapper" listClassName="p-picklist-source" metaKeySelection={props.metaKeySelection} tabIndex={props.tabIndex} dataKey={props.dataKey}
+                filterValue={sourceFilteredValue} onFilter={onFilter} showFilter={showSourceFilter} placeholder={props.sourceFilterPlaceholder} template={props.sourceFilterTemplate} />
 
-            <PickListTransferControls onTransfer={onTransfer} source={props.source} target={props.target} sourceSelection={sourceSelection} targetSelection={targetSelection} dataKey={props.dataKey} />
+            <PickListTransferControls onTransfer={onTransfer} source={props.source} visibleSourceList={sourceList} target={props.target} visibleTargetList={targetList} sourceSelection={sourceSelection} targetSelection={targetSelection} dataKey={props.dataKey} />
 
-            <PickListSubList ref={targetListElementRef} list={props.target} selection={targetSelection} onSelectionChange={(e) => onSelectionChange(e, 'targetSelection', props.onTargetSelectionChange)} itemTemplate={props.itemTemplate}
-                header={props.targetHeader} style={props.targetStyle} className="p-picklist-target-wrapper" listClassName="p-picklist-target" metaKeySelection={props.metaKeySelection} tabIndex={props.tabIndex} dataKey={props.dataKey} />
+            <PickListSubList ref={targetListElementRef} type="target" list={targetList} selection={targetSelection} onSelectionChange={(e) => onSelectionChange(e, 'targetSelection', props.onTargetSelectionChange)} itemTemplate={targetItemTemplate}
+                header={props.targetHeader} style={props.targetStyle} className="p-picklist-target-wrapper" listClassName="p-picklist-target" metaKeySelection={props.metaKeySelection} tabIndex={props.tabIndex} dataKey={props.dataKey}
+                filterValue={targetFilteredValue} onFilter={onFilter} showFilter={showTargetFilter} placeholder={props.targetFilterPlaceholder} template={props.targetFilterTemplate}/>
 
             {props.showTargetControls && <PickListControls list={props.target} selection={targetSelection} onReorder={onTargetReorder} className="p-picklist-target-controls" dataKey={props.dataKey} />}
-
         </div>
     );
 }));
@@ -186,14 +238,29 @@ PickList.defaultProps = {
     showSourceControls: true,
     showTargetControls: true,
     metaKeySelection: true,
+    filterBy: null,
+    filterMatchMode: 'contains',
+    filterLocale: undefined,
+    sourceFilterValue: null,
+    targetFilterValue: null,
+    showSourceFilter: true,
+    showTargetFilter: true,
+    sourceFilterPlaceholder: null,
+    targetFilterPlaceholder: null,
+    sourceFilterTemplate: null,
+    targetFilterTemplate: null,
     tabIndex: 0,
     dataKey: null,
     itemTemplate: null,
+    sourceItemTemplate: null,
+    targetItemTemplate: null,
     onChange: null,
     onMoveToSource: null,
     onMoveAllToSource: null,
     onMoveToTarget: null,
     onMoveAllToTarget: null,
     onSourceSelectionChange: null,
-    onTargetSelectionChange: null
+    onTargetSelectionChange: null,
+    onSourceFilterChange: null,
+    onTargetFilterChange: null
 }

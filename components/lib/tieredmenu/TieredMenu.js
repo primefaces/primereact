@@ -73,7 +73,9 @@ export const TieredMenu = React.memo(React.forwardRef((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         toggle,
         show,
-        hide
+        hide,
+        getElement: () => menuRef.current,
+        ...props
     }));
 
     const createElement = () => {
@@ -86,7 +88,7 @@ export const TieredMenu = React.memo(React.forwardRef((props, ref) => {
             <CSSTransition nodeRef={menuRef} classNames="p-connected-overlay" in={visibleState} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
                 unmountOnExit onEnter={onEnter} onEntered={onEntered} onExit={onExit} onExited={onExited}>
                 <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                    <TieredMenuSub model={props.model} root popup={props.popup} />
+                    <TieredMenuSub menuProps={props} model={props.model} root popup={props.popup} />
                 </div>
             </CSSTransition>
         )

@@ -23,6 +23,9 @@ export interface KnobProps extends Omit<React.DetailedHTMLProps<React.InputHTMLA
     textColor?: string;
     valueTemplate?: string;
     onChange?(e: KnobChangeParams): void;
+    children?: React.ReactNode;
 }
 
-export declare class Knob extends React.Component<KnobProps, any> { }
+export declare class Knob extends React.Component<KnobProps, any> { 
+    public getElement(): HTMLDivElement;
+}

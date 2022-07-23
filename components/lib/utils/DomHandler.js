@@ -746,7 +746,12 @@ export default class DomHandler {
     }
 
     static isVisible(element) {
-        return element && element.offsetParent != null;
+        // https://stackoverflow.com/a/59096915/502366 (in future use IntersectionObserver)
+        return element && ( 
+            element.clientHeight !== 0 ||
+            element.getClientRects().length !== 0 ||
+            getComputedStyle(element).display !== 'none'
+        );
     }
 
     static isExist(element) {
@@ -784,6 +789,17 @@ export default class DomHandler {
     static getLastFocusableElement(element, selector) {
         const focusableElements = DomHandler.getFocusableElements(element, selector);
         return focusableElements.length > 0 ? focusableElements[focusableElements.length - 1] : null;
+    }
+
+    /**
+     * Focus an input element if it does not already have focus.
+     *
+     * @param {HTMLElement} el a HTML element
+     * @param {boolean} scrollTo flag to control whether to scroll to the element, false by default
+     */
+    static focus(el, scrollTo) {
+        const preventScroll = scrollTo === undefined ? true : !scrollTo;
+        el && document.activeElement !== el && el.focus({ preventScroll });
     }
 
     static getCursorOffset(el, prevText, nextText, currentText) {

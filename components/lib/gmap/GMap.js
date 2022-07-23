@@ -75,6 +75,25 @@ export const GMap = React.memo(React.forwardRef((props, ref) => {
         });
     }
 
+    const removeOverlays = (overlays) => {
+        if (overlays) {
+            for (let overlay of overlays) {
+                overlay.setMap(null);
+                unbindOverlayEvents(overlay);
+            }
+        }
+    }
+
+    const unbindOverlayEvents = (overlay) => {
+        google.maps.event.clearListeners(overlay, 'click');
+
+        if (overlay.getDraggable()) {
+            google.maps.event.clearListeners(overlay, 'dragstart');
+            google.maps.event.clearListeners(overlay, 'drag');
+            google.maps.event.clearListeners(overlay, 'dragend');
+        }
+    }
+
     const getMap = () => {
         return map.current;
     }
@@ -84,18 +103,17 @@ export const GMap = React.memo(React.forwardRef((props, ref) => {
     });
 
     useUpdateEffect(() => {
-        if (prevOverlays.current) {
-            for (let overlay of prevOverlays.current) {
-                google.maps.event.clearInstanceListeners(overlay);
-                overlay.setMap(null);
-            }
-        }
-
         initOverlays(props.overlays);
-    }, [props.overlays]);
+
+        return () => {
+            removeOverlays(prevOverlays.current);
+        }
+    });
 
     React.useImperativeHandle(ref, () => ({
-        getMap
+        getMap,
+        getElement: () => elementRef.current,
+        ...props
     }));
 
     const otherProps = ObjectUtils.findDiffKeys(props, GMap.defaultProps);

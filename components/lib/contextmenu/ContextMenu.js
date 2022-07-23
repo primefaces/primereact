@@ -165,7 +165,9 @@ export const ContextMenu = React.memo(React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         show,
-        hide
+        hide,
+        getElement: () => menuRef.current,
+        ...props
     }));
 
     const createContextMenu = () => {
@@ -176,7 +178,7 @@ export const ContextMenu = React.memo(React.forwardRef((props, ref) => {
             <CSSTransition nodeRef={menuRef} classNames="p-contextmenu" in={visibleState} timeout={{ enter: 250, exit: 0 }} options={props.transitionOptions}
                 unmountOnExit onEnter={onEnter} onEntered={onEntered} onExit={onExit} onExited={onExited}>
                 <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onMenuClick} onMouseEnter={onMenuMouseEnter}>
-                    <ContextMenuSub model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} />
+                    <ContextMenuSub menuProps={props} model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} />
                 </div>
             </CSSTransition>
         )

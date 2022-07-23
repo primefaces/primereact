@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Analytics from '../components/layout/analytics';
 import getConfig from 'next/config';
+import NewsSection from '../components/news/newssection';
 import HeaderSection from './landing/headersection';
 import HeroSection from './landing/herosection';
 import ComponentSection from './landing/componentsection';
@@ -17,7 +18,7 @@ import { useEffect, useState } from 'react';
 export default function Home(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [tableTheme, setTableTheme] = useState('lara-light-indigo');
-    const rootClassName = classNames('landing', {'landing-light': !props.dark, 'landing-dark': props.dark});
+    const rootClassName = classNames('landing', {'landing-light': !props.dark, 'landing-dark': props.dark, 'landing-news-active': props.newsActive});
     const toggleColorScheme = () => {
         const darkMode = !props.dark;
         const newTheme = darkMode ? 'lara-dark-indigo': 'lara-light-indigo';
@@ -65,6 +66,7 @@ export default function Home(props) {
                 {/* eslint-enable */}
             </Head>
             <div className="landing-intro">
+                {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
                 <HeaderSection dark={props.dark} onToggleColorScheme={toggleColorScheme} />
                 <HeroSection />
             </div>

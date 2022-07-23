@@ -1,6 +1,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://badge.fury.io/js/primereact.svg)](https://badge.fury.io/js/primereact)
+[![Actions CI](https://github.com/primefaces/primereact/workflows/NodeJS%20CI/badge.svg)](https://github.com/primefaces/primereact/actions/workflows/node.js.yml)
 [![Discord Chat](https://img.shields.io/discord/557940238991753223.svg?color=7289da&label=chat&logo=discord)](https://discord.gg/gzKFYnpmCY)
+[![Stackoverflow](https://img.shields.io/badge/StackOverflow-primereact-chocolate.svg)](https://stackoverflow.com/questions/tagged/primereact)
 
 [![PrimeReact Hero](https://www.primefaces.org/wp-content/uploads/2021/12/primereact-release-7.jpeg)](https://www.primefaces.org/primereact)
 
@@ -14,10 +16,10 @@ PrimeReact is available at npm, if you have an existing application run the foll
 
 ```
 // with npm
-npm install primereact
+npm install primereact primeicons
 
 // with yarn
-yarn add primereact
+yarn add primereact primeicons
 ```
 Please note that react >= 17.0.0 and react-dom >= 17.0.0 are peer dependencies and some components have optional dependencies.
 
@@ -52,12 +54,13 @@ Import all components and structures
 
 Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.
 
-In addition, components require PrimeIcons for icons and react-transition-group for animations. They are available as dependencies in the npm package of PrimeReact.
+In addition, components require PrimeIcons for icons and react-transition-group for animations. The react-transition-group is available as dependencies in the npm package of PrimeReact.
 
 ```javascript
 dependencies: {
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0",
+    "primeicons": "^5.0.0"
 }
 ```
 
@@ -99,3 +102,9 @@ import 'primeicons/primeicons.css';
 ## TypeScript
 
 Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample [typescript-primereact application](https://github.com/primefaces/primereact-examples/tree/main/cra-basic-ts) is available as well at github.
+
+## Contributors
+
+<a href="https://github.com/primefaces/primereact/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=primefaces/primereact" />
+</a>

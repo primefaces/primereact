@@ -142,7 +142,7 @@ const DesignerSection = (props) => {
                                     <span className="p-inputgroup-addon">
                                         <i className="pi pi-calendar"></i>
                                     </span>
-                                    <InputMask inputId="date" placeholder="mm/dd/yyyy" mask="99/99/9999" slotChar="mm/dd/yyyy" />
+                                    <InputMask id="date" placeholder="mm/dd/yyyy" mask="99/99/9999" slotChar="mm/dd/yyyy" />
                                 </div>
                             </div>
                             <div className="field col-12 xl:col-6">

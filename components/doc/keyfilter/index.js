@@ -1,7 +1,9 @@
 import React, { memo } from 'react';
+import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const KeyFilterDoc = memo(() => {
 
@@ -265,6 +267,10 @@ import { InputText } from 'primereact/inputtext';
 `}
 </CodeHighlight>
 
+                    <h5>Accessibility</h5>
+                <DevelopmentSection>
+                    <p>Refer to <Link href="/inputtext">InputText</Link> for accessibility as KeyFilter is a built-in add-on of the InputText.</p>
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>

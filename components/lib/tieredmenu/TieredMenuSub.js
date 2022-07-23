@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const TieredMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -159,21 +159,21 @@ export const TieredMenuSub = React.memo((props) => {
 
     const createSubmenu = (item) => {
         if (item.items) {
-            return <TieredMenuSub model={item.items} onLeafClick={onLeafClick} popup={props.popup} onKeyDown={onChildItemKeyDown} parentActive={item === activeItemState} />
+            return <TieredMenuSub menuProps={props.menuProps} model={item.items} onLeafClick={onLeafClick} popup={props.popup} onKeyDown={onChildItemKeyDown} parentActive={item === activeItemState} />
         }
 
         return null;
     }
 
     const createMenuItem = (item, index) => {
-        const { className: _className, style, disabled, icon: _icon, label: _label, items, target, url, template } = item;
+        const { id, className: _className, style, disabled, icon: _icon, label: _label, items, target, url, template } = item;
         const key = _label + '_' + index;
         const active = activeItemState === item;
         const className = classNames('p-menuitem', { 'p-menuitem-active': active }, _className);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': disabled });
         const iconClassName = classNames('p-menuitem-icon', _icon);
         const submenuIconClassName = 'p-submenu-icon pi pi-angle-right';
-        const icon = _icon && <span className={iconClassName}></span>;
+        const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
         const label = _label && <span className="p-menuitem-text">{_label}</span>;
         const submenuIcon = items && <span className={submenuIconClassName}></span>;
         const submenu = createSubmenu(item);
@@ -204,7 +204,7 @@ export const TieredMenuSub = React.memo((props) => {
         }
 
         return (
-            <li key={key} className={className} style={style} onMouseEnter={(event) => onItemMouseEnter(event, item)} role="none">
+            <li key={key} id={item} className={className} style={style} onMouseEnter={(event) => onItemMouseEnter(event, item)} role="none">
                 {content}
                 {submenu}
             </li>

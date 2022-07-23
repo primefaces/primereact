@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const InputMaskDoc = memo(() => {
 
@@ -307,6 +308,7 @@ import { InputMask } from 'primereact/inputmask';
                     </CodeHighlight>
 
                     <h5>Properties</h5>
+                    <p>InputMask passes any valid attribute to the underlying React HTMLInputElement element. Extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -474,8 +476,61 @@ import { InputMask } from 'primereact/inputmask';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Styling is same as <Link href="/inputtext"> inputtext component</Link>, for theming classes visit <Link href="/theming"> theming page.</Link></p>
+                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-inputtext</td>
+                                    <td>Input element</td>
+                                </tr>
+                                <tr>
+                                    <td>p-inputmask</td>
+                                    <td>Input element</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
+                    <h5>Accessibility</h5>
+                <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>InputMask component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
+<CodeHighlight>
+{`
+<label htmlFor="date">Date</label>
+<InputMask id="date" />
+
+<span id="phone">Phone</span>
+<InputMask aria-labelledby="phone" />
+
+<InputMask aria-label="Age" />
+`}
+</CodeHighlight>
+                    <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the input.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>

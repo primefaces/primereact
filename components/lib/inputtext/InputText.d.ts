@@ -8,6 +8,10 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     onInput?(event: React.FormEvent<HTMLInputElement>, validatePattern: boolean): void;
+    children?: React.ReactNode;
 }
 
-export declare class InputText extends React.Component<InputTextProps, any> { }
+export declare class InputText extends React.Component<InputTextProps, any> { 
+    public getElement(): HTMLInputElement;
+    public getInput(): HTMLInputElement;
+}

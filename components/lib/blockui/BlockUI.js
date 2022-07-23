@@ -6,6 +6,7 @@ import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils
 
 export const BlockUI = React.forwardRef((props, ref) => {
     const [visibleState, setVisibleState] = React.useState(props.blocked);
+    const elementRef = React.useRef(null);
     const maskRef = React.useRef(null);
 
     const block = () => {
@@ -64,7 +65,9 @@ export const BlockUI = React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         block,
-        unblock
+        unblock,
+        getElement: () => elementRef.current,
+        ...props
     }));
 
     const createMask = () => {
@@ -90,7 +93,7 @@ export const BlockUI = React.forwardRef((props, ref) => {
     const mask = createMask();
 
     return (
-        <div id={props.id} className="p-blockui-container" {...otherProps}>
+        <div id={props.id} ref={elementRef} className="p-blockui-container" {...otherProps}>
             {props.children}
             {mask}
         </div>

@@ -69,7 +69,7 @@ export const Ripple = React.memo(React.forwardRef(() => {
         }
     });
 
-    return PrimeReact.ripple ? (<span ref={inkRef} className="p-ink" onAnimationEnd={onAnimationEnd}></span>) : null;
+    return PrimeReact.ripple ? (<span role="presentation" ref={inkRef} className="p-ink" onAnimationEnd={onAnimationEnd}></span>) : null;
 }));
 
 Ripple.displayName = 'Ripple';

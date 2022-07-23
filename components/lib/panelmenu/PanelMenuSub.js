@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const PanelMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -87,7 +87,7 @@ export const PanelMenuSub = React.memo((props) => {
             return (
                 <CSSTransition nodeRef={submenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
                     <div ref={submenuRef} className={className}>
-                        <PanelMenuSub model={item.items} multiple={props.multiple} />
+                        <PanelMenuSub menuProps={props.menuProps} model={item.items} multiple={props.multiple} />
                     </div>
                 </CSSTransition>
             );
@@ -103,7 +103,7 @@ export const PanelMenuSub = React.memo((props) => {
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const submenuIconClassName = classNames('p-panelmenu-icon pi pi-fw', { 'pi-angle-right': !active, 'pi-angle-down': active });
-        const icon = item.icon && <span className={iconClassName}></span>;
+        const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = createSubmenu(item, active);
@@ -132,7 +132,7 @@ export const PanelMenuSub = React.memo((props) => {
         }
 
         return (
-            <li key={key} className={className} style={item.style} role="none">
+            <li key={key} id={item.id} className={className} style={item.style} role="none">
                 {content}
                 {submenu}
             </li>

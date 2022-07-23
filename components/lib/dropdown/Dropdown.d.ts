@@ -2,12 +2,15 @@ import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
 import { VirtualScrollerProps } from '../virtualscroller';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
 
 type DropdownOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
 type DropdownValueTemplateType = React.ReactNode | ((option: any, props: DropdownProps) => React.ReactNode);
 
 type DropdownItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
+
+type DropdownFilterTemplateType = React.ReactNode | ((options: DropdownFilterOptions) => React.ReactNode);
 
 type DropdownEmptyMessageType = React.ReactNode | ((props: DropdownProps) => React.ReactNode);
 
@@ -36,12 +39,17 @@ interface DropdownFilterParams {
     filter: string;
 }
 
-export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
+interface DropdownFilterOptions {
+    filter?: (event?: KeyboardEvent) => void;
+    reset?: () => void;
+}
+
+export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
     name?: string;
     value?: any;
-    options?: any[];
+    options?: SelectItemOptionsType;
     optionLabel?: string;
     optionValue?: string;
     optionDisabled?: DropdownOptionDisabledType;
@@ -49,6 +57,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     optionGroupChildren?: string;
     optionGroupTemplate?: DropdownOptionGroupTemplateType;
     valueTemplate?: DropdownValueTemplateType;
+    filterTemplate?: DropdownFilterTemplateType;
     itemTemplate?: DropdownItemTemplateType;
     style?: object;
     className?: string;
@@ -92,6 +101,12 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     onShow?(): void;
     onHide?(): void;
     onFilter?(e: DropdownFilterParams): void;
+    children?: React.ReactNode;
 }
 
-export declare class Dropdown extends React.Component<DropdownProps, any> { }
+export declare class Dropdown extends React.Component<DropdownProps, any> { 
+    public getElement(): HTMLDivElement;
+    public getInput(): HTMLInputElement;
+    public getFocusInput(): HTMLInputElement;
+    public getOverlay(): HTMLElement;
+}

@@ -16,6 +16,9 @@ export interface ScrollTopProps {
     transitionOptions?: CSSTransitionProps;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
-export declare class ScrollTop extends React.Component<ScrollTopProps, any> { }
+export declare class ScrollTop extends React.Component<ScrollTopProps, any> { 
+    public getElement(): HTMLButtonElement;
+}

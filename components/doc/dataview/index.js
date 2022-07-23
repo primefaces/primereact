@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const DataViewDoc = memo(() => {
 
@@ -693,7 +694,7 @@ import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 
 <CodeHighlight lang="js">
 {`
-npm install primeflex@2.0.0
+npm install primeflex
 `}
 </CodeHighlight>
 
@@ -1107,10 +1108,41 @@ const onSortChange = (event) => {
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
                     </div>
+
+                    <h5>Accessibility</h5>
+                <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>The container element that wraps the layout options buttons has a <i>group</i> role whereas each button element uses <i>button</i> role and <i>aria-pressed</i> is updated depending on selection state.
+                    Values to describe the buttons are derived from the <i>aria.listView</i> and <i>aria.gridView</i> properties of the <Link href="/locale">locale</Link> API respectively.</p>
+
+                    <p>Refer to <Link href="/paginator">paginator</Link> accessibility documentation for the paginator of the component.</p>
+
+                    <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the buttons.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Toggles the checked state of a button.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </DevelopmentSection>
+
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
 
                 </TabPanel>
 

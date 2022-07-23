@@ -138,21 +138,22 @@ interface PaginatorTemplateOptions {
 
 export type PaginatorTemplate = string | PaginatorTemplateOptions;
 
-export interface PaginatorProps {
+export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     totalRecords?: number;
     rows?: number;
     first?: number;
     pageLinkSize?: number;
     rowsPerPageOptions?: number[];
     alwaysShow?: boolean;
-    style?: object;
-    className?: string;
     template?: PaginatorTemplate;
     leftContent?: React.ReactNode;
     rightContent?: React.ReactNode;
     currentPageReportTemplate?: string;
     dropdownAppendTo?: PaginatorAppendToType;
     onPageChange?(event: PaginatorPageState): void;
+    children?: React.ReactNode;
 }
 
-export declare class Paginator extends React.Component<PaginatorProps, any> { }
+export declare class Paginator extends React.Component<PaginatorProps, any> { 
+    public getElement(): HTMLDivElement;
+}

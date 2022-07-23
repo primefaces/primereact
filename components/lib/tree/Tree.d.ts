@@ -11,6 +11,8 @@ type TreeFilterModeType = 'lenient' | 'strict';
 
 type TreeHeaderTemplateType = React.ReactNode | ((options: TreeHeaderTemplateOptions) => React.ReactNode);
 
+type TreeFilterTemplateType = React.ReactNode | ((options: TreeFilterOptions) => React.ReactNode);
+
 type TreeFooterTemplateType = React.ReactNode | ((props: TreeProps) => React.ReactNode);
 
 type TreeNodeTemplateType = React.ReactNode | ((node: TreeNode, options: TreeNodeTemplateOptions) => React.ReactNode);
@@ -99,6 +101,11 @@ interface TreeNodeClickParams {
     node: TreeNode;
 }
 
+interface TreeFilterOptions {
+    filter?: (event?: KeyboardEvent) => void;
+    reset?: () => void;
+}
+
 interface TreeNodeDoubleClickParams extends TreeNodeClickParams {}
 
 export interface TreeProps {
@@ -121,6 +128,7 @@ export interface TreeProps {
     dragdropScope?: string;
     header?: TreeHeaderTemplateType;
     footer?: TreeFooterTemplateType;
+    filterTemplate?: TreeFilterTemplateType;
     showHeader?: boolean;
     filter?: boolean;
     filterValue?: string;
@@ -142,8 +150,10 @@ export interface TreeProps {
     onFilterValueChange?(e: TreeFilterValueChangeParams): void;
     onNodeClick?(e: TreeNodeClickParams): void;
     onNodeDoubleClick?(e: TreeNodeDoubleClickParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Tree extends React.Component<TreeProps, any> {
     public filter<T>(value: T): void;
+    public getElement(): HTMLDivElement;
 }

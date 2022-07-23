@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 
 export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -167,6 +167,11 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
         return columnClass;
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     useMountEffect(() => {
         bindDocumentClickListener();
     });
@@ -210,7 +215,7 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
             const className = classNames('p-menuitem', item.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames(item.icon, 'p-menuitem-icon');
-            const icon = item.icon && <span className={iconClassName}></span>;
+            const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props });
             const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
             let content = (
                 <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onLeafClick(event, item)} role="menuitem" aria-disabled={item.disabled}>
@@ -234,7 +239,7 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
             }
 
             return (
-                <li key={key} className={className} style={item.style} role="none">
+                <li key={key} id={item.id} className={className} style={item.style} role="none">
                     {content}
                 </li>
             )
@@ -249,7 +254,7 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
 
         return (
             <React.Fragment key={submenu.label}>
-                <li className={className} style={submenu.style} role="presentation">{submenu.label}</li>
+                <li id={submenu.id} className={className} style={submenu.style} role="presentation">{submenu.label}</li>
                 {items}
             </React.Fragment>
         )
@@ -305,15 +310,14 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
     const createCategory = (category, index) => {
         const className = classNames('p-menuitem', { 'p-menuitem-active': category === activeItemState }, category.className);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': category.disabled });
-        const iconClassName = classNames('p-menuitem-icon', category.icon);
-        const icon = category.icon && <span className={iconClassName}></span>;
+        const icon = IconUtils.getJSXIcon(category.icon, { className: 'p-menuitem-icon' }, { props });
         const label = category.label && <span className="p-menuitem-text">{category.label}</span>;
         const itemContent = category.template ? ObjectUtils.getJSXElement(category.template, category) : null;
         const submenuIcon = createSubmenuIcon(category);
         const panel = createCategoryPanel(category);
 
         return (
-            <li key={category.label + '_' + index} className={className} style={category.style} onMouseEnter={e => onCategoryMouseEnter(e, category)} role="none">
+            <li key={category.label + '_' + index} id={category.id} className={className} style={category.style} onMouseEnter={e => onCategoryMouseEnter(e, category)} role="none">
                 <a href={category.url || '#'} className={linkClassName} target={category.target} onClick={e => onCategoryClick(e, category)} onKeyDown={e => onCategoryKeyDown(e, category)}
                     role="menuitem" aria-haspopup={category.items != null}>
                     {icon}
@@ -330,20 +334,26 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
     const createMenu = () => {
         if (props.model) {
             return (
-                props.model.map((item, index) => {
-                    return createCategory(item, index, true);
-                })
+                <ul className="p-megamenu-root-list" role="menubar">
+                    {
+                        props.model.map((item, index) => {
+                            return createCategory(item, index, true);
+                        })
+                    }
+                </ul>
             )
         }
 
         return null;
     }
 
-    const createCustomContent = () => {
-        if (props.children) {
+    const createStartContent = () => {
+        if (props.start) {
+            const start = ObjectUtils.getJSXElement(props.start, props);
+
             return (
-                <div className="p-megamenu-custom">
-                    {props.children}
+                <div className="p-megamenu-start">
+                    {start}
                 </div>
             )
         }
@@ -351,6 +361,19 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
         return null;
     }
 
+    const createEndContent = () => {
+        if (props.end) {
+            const end = ObjectUtils.getJSXElement(props.end, props);
+
+            return (
+                <div className="p-megamenu-end">
+                    {end}
+                </div>
+            )
+        }
+
+        return null;
+    }
 
     const otherProps = ObjectUtils.findDiffKeys(props, MegaMenu.defaultProps);
     const className = classNames('p-megamenu p-component', {
@@ -358,14 +381,14 @@ export const MegaMenu = React.memo(React.forwardRef((props, ref) => {
         'p-megamenu-vertical': props.orientation === 'vertical'
     }, props.className);
     const menu = createMenu();
-    const customContent = createCustomContent();
+    const start = createStartContent();
+    const end = createEndContent();
 
     return (
         <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
-            <ul className="p-megamenu-root-list" role="menubar">
-                {menu}
-            </ul>
-            {customContent}
+            {start}
+            {menu}
+            {end}
         </div>
     )
 }));
@@ -377,5 +400,7 @@ MegaMenu.defaultProps = {
     model: null,
     style: null,
     className: null,
-    orientation: 'horizontal'
+    orientation: 'horizontal',
+    start: null,
+    end: null
 }

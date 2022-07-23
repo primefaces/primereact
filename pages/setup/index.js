@@ -27,10 +27,10 @@ const SetupPage = () => {
 <CodeHighlight lang="js">
 {`
 // with npm
-npm install primereact
+npm install primereact primeicons
 
 // with yarn
-yarn add primereact
+yarn add primereact primeicons
 `}
 </CodeHighlight>
                 <p>Please note that <i>{`react >= 17.0.0`}</i> and <i>{`react-dom >= 17.0.0`}</i> are peer dependencies and some components have <Link href="#setup-configuration" scroll={false}><a>optional dependencies</a></Link>.</p>
@@ -199,13 +199,14 @@ primereact/resources/themes/rhea/theme.css
                 <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.</p>
                 <p>In addition, components require <Link href="/icons">PrimeIcons</Link> library for icons and
                         <a href="https://www.npmjs.com/package/react-transition-group" className="layout-content-link"> react-transition-group</a> for animations.
-                        They are available as dependencies in the npm package of PrimeReact.</p>
+                        The <a href="https://www.npmjs.com/package/react-transition-group" className="layout-content-link"> react-transition-group</a> is available as dependencies in the npm package of PrimeReact.</p>
 
 <CodeHighlight lang="js">
 {`
 dependencies: {
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
+    "primeicons": "^5.0.0"
 }
 `}
 </CodeHighlight>
@@ -281,11 +282,11 @@ PrimeReact.inputStyle = 'filled';
 import PrimeReact from 'primereact/api';
 
 PrimeReact.zIndex = {
-modal: 1100,    // dialog, sidebar
-overlay: 1000,  // dropdown, overlaypanel
-menu: 1000,     // overlay menus
-tooltip: 1100   // tooltip
-toast: 1200     // toast
+    modal: 1100,    // dialog, sidebar
+    overlay: 1000,  // dropdown, overlaypanel
+    menu: 1000,     // overlay menus
+    tooltip: 1100   // tooltip
+    toast: 1200     // toast
 }
 `}
 </CodeHighlight>
@@ -378,14 +379,6 @@ PrimeReact.cssTransition = false; // Default value is true.
 
                 <h5>Typescript</h5>
                 <p>Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample <a href="https://github.com/primefaces/primereact-examples/tree/main/cra-basic-ts" className="layout-content-link">typescript-primereact</a> application with create-react-app is available as at github.</p>
-
-                <p>Note: A shorthand API is available to import APIs such as MenuModel and SelectItem.</p>
-<CodeHighlight lang="js">
-{`
-import { SelectItem } from 'primereact/api';
-import { MenuItem } from 'primereact/api';
-`}
-</CodeHighlight>
 
                 <h5>Next.js</h5>
                 <p>A <a href="https://github.com/primefaces/primereact-examples/tree/main/nextjs-basic" className="layout-content-link">sample application</a> based on Next.js is available at github.</p>

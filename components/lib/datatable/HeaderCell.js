@@ -269,14 +269,15 @@ export const HeaderCell = React.memo((props) => {
         const sortMeta = getSortMeta();
         const style = getStyle();
         const align = getColumnProp('alignHeader') || getColumnProp('align');
+        const frozen = getColumnProp('frozen');
         const className = classNames(getColumnProp('headerClassName'), getColumnProp('className'), {
             'p-sortable-column': getColumnProp('sortable'),
-            'p-resizable-column': props.resizableColumns,
+            'p-resizable-column': props.resizableColumns && getColumnProp('resizeable'),
             'p-highlight': sortMeta.sorted,
-            'p-frozen-column': getColumnProp('frozen'),
+            'p-frozen-column': frozen,
             'p-selection-column': getColumnProp('selectionMode'),
             'p-sortable-disabled': getColumnProp('sortable') && _isSortableDisabled,
-            'p-reorderable-column': props.reorderableColumns && getColumnProp('reorderable'),
+            'p-reorderable-column': props.reorderableColumns && getColumnProp('reorderable') && !frozen,
             [`p-align-${align}`]: !!align
         });
         const tabIndex = getColumnProp('sortable') && !_isSortableDisabled ? props.tabIndex : null;

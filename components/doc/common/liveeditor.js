@@ -4,7 +4,7 @@ import { CodeHighlight } from './codehighlight';
 import { TabPanel } from '../../lib/tabview/TabView';
 import pkg from '../../../package.json';
 
-const vPrimeReact = '^7.0.0'; // latest
+const vPrimeReact = '^8.0.0'; // latest
 
 let currentProps = {};
 

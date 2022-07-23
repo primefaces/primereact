@@ -14,6 +14,7 @@ interface AccordionTabProps {
     headerTemplate?: AccordionTabHeaderTemplateType;
     contentStyle?: object;
     contentClassName?: string;
+    children?: React.ReactNode;
 }
 
 export declare class AccordionTab extends React.Component<AccordionTabProps, any> { }
@@ -25,11 +26,8 @@ interface AccordionEventParams {
     index: number;
 }
 
-export interface AccordionProps {
-    id?: string;
+export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     activeIndex?: AccordionActiveIndexType;
-    className?: string;
-    style?: object;
     multiple?: boolean;
     expandIcon?: IconType<AccordionProps>;
     collapseIcon?: IconType<AccordionProps>;
@@ -37,7 +35,10 @@ export interface AccordionProps {
     onTabOpen?(e: AccordionEventParams): void;
     onTabClose?(e: AccordionEventParams): void;
     onTabChange?(e: AccordionEventParams): void;
+    children?: React.ReactNode;
 }
 
 // tslint:disable-next-line:max-classes-per-file
-export declare class Accordion extends React.Component<AccordionProps, any> { }
+export declare class Accordion extends React.Component<AccordionProps, any> { 
+    public getElement(): HTMLDivElement;
+}

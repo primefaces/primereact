@@ -7,7 +7,7 @@ export default class IconUtils {
     static getJSXIcon(icon, iconProps = {}, options = {}) {
         let content = null;
 
-        if (icon) {
+        if (icon !== null) {
             const iconType = typeof icon;
             const className = classNames(iconProps.className, iconType === 'string' && icon);
             content = <span {...iconProps} className={className}></span>;

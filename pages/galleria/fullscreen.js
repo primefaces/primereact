@@ -229,7 +229,7 @@ export class GalleriaFullScreenDemo extends Component {
                         activeIndex={this.state.activeIndex} onItemChange={(e) => this.setState({ activeIndex: e.index })}
                         circular fullScreen showItemNavigators showThumbnails={false} item={this.itemTemplate} thumbnail={this.thumbnailTemplate} />
 
-                    <div className="p-grid" style={{ maxWidth: '400px' }}>
+                    <div className="grid" style={{ maxWidth: '400px' }}>
                         {
                             this.state.images && this.state.images.map((image, index) => {
                                 let imgEl = <img src={image.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={image.alt} style={{ cursor: 'pointer' }} onClick={() => {
@@ -237,7 +237,7 @@ export class GalleriaFullScreenDemo extends Component {
                                 }} />
 
                                 return (
-                                    <div className="p-col-3" key={index}>
+                                    <div className="col-3" key={index}>
                                         {imgEl}
                                     </div>
                                 )

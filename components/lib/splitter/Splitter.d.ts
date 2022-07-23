@@ -14,19 +14,20 @@ interface SplitterPanelProps {
     minSize?: number;
     style?: object;
     className?: string;
+    children?: React.ReactNode;
 }
 
 export declare class SplitterPanel extends React.Component<SplitterPanelProps, any> { }
 
-export interface SplitterProps {
-    id?: string;
-    className?: string;
-    style?: object;
+export interface SplitterProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     layout?: SplitterLayoutType;
     gutterSize?: number;
     stateKey?: string;
     stateStorage?: SplitterStateStorageType;
     onResizeEnd?(e: SplitterResizeEndParams): void;
+    children?: React.ReactNode;
 }
 
-export declare class Splitter extends React.Component<SplitterProps, any> { }
+export declare class Splitter extends React.Component<SplitterProps, any> { 
+    public getElement(): HTMLDivElement;
+}

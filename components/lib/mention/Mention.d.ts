@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { InputTextarea } from '../inputtextarea';
 
 type MentionTriggerType = string | string[];
 
@@ -27,12 +28,9 @@ interface MentionSelectParams {
     suggestion: any;
 }
 
-export interface MentionProps {
-    id?: string;
+export interface MentionProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onInput' | 'onFocus' | 'onBlur' | 'ref'> {
     inputId?: string;
     inputRef?: React.Ref<HTMLInputElement>;
-    style?: object;
-    className?: string;
     trigger?: MentionTriggerType;
     suggestions?: any[];
     field?: MentionFieldType;
@@ -55,6 +53,11 @@ export interface MentionProps {
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
-export declare class Mention extends React.Component<MentionProps, any> { }
+export declare class Mention extends React.Component<MentionProps, any> { 
+    public getElement(): HTMLDivElement;
+    public getInput(): InputTextarea;
+    public getOverlay(): HTMLElement;
+}

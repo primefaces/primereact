@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const CheckboxDoc = memo(() => {
 
@@ -69,7 +70,7 @@ export class CheckboxDemo extends Component {
                     <h5>Basic</h5>
                     <div className="field-checkbox">
                         <Checkbox inputId="binary" checked={this.state.checked} onChange={e => this.setState({ checked: e.checked })} />
-                        <label htmlFor="binary">{this.state.checked ? 'true' : 'false'}</label>
+                        <label htmlFor="binary">Remember Me</label>
                     </div>
 
                     <h5>Multiple</h5>
@@ -158,7 +159,7 @@ const CheckboxDemo = () => {
                 <h5>Basic</h5>
                 <div className="field-checkbox">
                     <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
-                    <label htmlFor="binary">{checked ? 'true' : 'false'}</label>
+                    <label htmlFor="binary">Remember Me</label>
                 </div>
 
                 <h5>Multiple</h5>
@@ -246,7 +247,7 @@ const CheckboxDemo = () => {
                 <h5>Basic</h5>
                 <div className="field-checkbox">
                     <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
-                    <label htmlFor="binary">{checked ? 'true' : 'false'}</label>
+                    <label htmlFor="binary">Remember Me</label>
                 </div>
 
                 <h5>Multiple</h5>
@@ -336,7 +337,7 @@ const CheckboxDemo = () => {
                 <h5>Basic</h5>
                 <div className="field-checkbox">
                     <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
-                    <label htmlFor="binary">{checked ? 'true' : 'false'}</label>
+                    <label htmlFor="binary">Remember Me</label>
                 </div>
 
                 <h5>Multiple</h5>
@@ -438,7 +439,7 @@ const onCityChange = (e) => {
 </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -520,7 +521,7 @@ const onCityChange = (e) => {
                                     <td>readOnly</td>
                                     <td>boolean</td>
                                     <td>false</td>
-                                    <td>When present, it specifies that the element cannot be typed.</td>
+                                    <td>When present, it specifies that the value cannot be changed.</td>
                                 </tr>
                                 <tr>
                                     <td>tabIndex</td>
@@ -545,12 +546,6 @@ const onCityChange = (e) => {
                                     <td>object</td>
                                     <td>null</td>
                                     <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
-                                </tr>
-                                <tr>
-                                    <td>ariaLabelledBy</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Establishes relationships between the component and label(s) where its value should be one or more element IDs.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -619,6 +614,43 @@ const onCityChange = (e) => {
                         </table>
                     </div>
 
+                    <h5>Accessibility</h5>
+                <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>Checkbox component uses a hidden native checkbox element internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
+<CodeHighlight>
+{`
+<label htmlFor="chkbox1">Remember Me</label>
+<Checkbox inputId="chkbox1" />
+
+<span id="chkbox2">Remember Me</span>
+<Checkbox aria-labelledby="chkbox2" />
+
+<Checkbox aria-label="Remember Me" />
+`}
+</CodeHighlight>
+                    <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Moves focus to the checkbox.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>Toggles the checked state.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>

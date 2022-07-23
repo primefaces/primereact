@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const TabMenu = React.memo(React.forwardRef((props, ref) => {
     const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
+    const elementRef = React.useRef(null);
     const inkbarRef = React.useRef(null);
     const navRef = React.useRef(null);
     const tabsRef = React.useRef({});
@@ -49,6 +50,11 @@ export const TabMenu = React.memo(React.forwardRef((props, ref) => {
         inkbarRef.current.style.left = DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(navRef.current).left + 'px';
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     React.useEffect(() => {
         updateInkBar();
     });
@@ -62,7 +68,7 @@ export const TabMenu = React.memo(React.forwardRef((props, ref) => {
             'p-disabled': disabled
         }, _className);
         const iconClassName = classNames('p-menuitem-icon', _icon);
-        const icon = _icon && <span className={iconClassName}></span>;
+        const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props });
         const label = _label && <span className="p-menuitem-text">{_label}</span>;
         let content = (
             <a href={url || '#'} className="p-menuitem-link" target={target} onClick={(event) => itemClick(event, item, index)} role="presentation">
@@ -104,7 +110,7 @@ export const TabMenu = React.memo(React.forwardRef((props, ref) => {
         const items = createItems();
 
         return (
-            <div id={props.id} className={className} style={props.style} {...otherProps}>
+            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
                 <ul ref={navRef} className="p-tabmenu-nav p-reset" role="tablist">
                     {items}
                     <li ref={inkbarRef} className="p-tabmenu-ink-bar"></li>

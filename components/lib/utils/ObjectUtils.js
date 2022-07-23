@@ -190,12 +190,15 @@ export default class ObjectUtils {
     static sort(value1, value2, order = 1, locale) {
         let result = null;
 
-        if (value1 == null && value2 != null)
-            result = -1;
-        else if (value1 != null && value2 == null)
-            result = 1;
-        else if (value1 == null && value2 == null)
+        const emptyValue1 = this.isEmpty(value1); 
+        const emptyValue2 = this.isEmpty(value2);
+
+        if (emptyValue1 && emptyValue2)
             result = 0;
+        else if (emptyValue1)
+            result = order; // sort nulls at bottom like Excel
+        else if (emptyValue2)
+            result = -order; // sort nulls at bottom like Excel
         else if (typeof value1 === 'string' && typeof value2 === 'string')
             result = value1.localeCompare(value2, locale, { numeric: true });
         else

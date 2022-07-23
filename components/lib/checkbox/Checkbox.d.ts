@@ -19,7 +19,7 @@ interface CheckboxChangeParams {
     target: CheckboxChangeTargetOptions;
 }
 
-export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
+export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     inputId?: string;
@@ -37,10 +37,13 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
     icon?: IconType<CheckboxProps>;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string;
     onChange?(e: CheckboxChangeParams): void;
     onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
     onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
+    children?: React.ReactNode;
 }
 
-export declare class Checkbox extends React.Component<CheckboxProps, any> { }
+export declare class Checkbox extends React.Component<CheckboxProps, any> {
+    public getElement(): HTMLDivElement;
+    public getInput(): HTMLInputElement;
+ }

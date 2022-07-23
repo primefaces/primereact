@@ -29,6 +29,7 @@ export interface TabPanelProps {
     headerClassName?: string;
     contentStyle?: object;
     contentClassName?: string;
+    children?: React.ReactNode;
 }
 
 export declare class TabPanel extends React.Component<TabPanelProps, any> { }
@@ -43,20 +44,19 @@ interface TabViewTabCloseParams {
     index: number;
 }
 
-export interface TabViewProps {
-    id?: string;
+export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     activeIndex?: number;
-    style?: object;
-    className?: string;
     renderActiveOnly?: boolean;
     scrollable?: boolean;
     panelContainerStyle?: object;
     panelContainerClassName?: string;
     onTabChange?(e: TabViewTabChangeParams): void;
     onTabClose?(e: TabViewTabCloseParams): void;
+    children?: React.ReactNode;
 }
 
 // tslint:disable-next-line:max-classes-per-file
 export declare class TabView extends React.Component<TabViewProps, any> {
     public reset(): void;
+    public getElement(): HTMLDivElement;
 }

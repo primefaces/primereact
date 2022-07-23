@@ -37,7 +37,8 @@ export const FooterCell = React.memo((props) => {
                 styleObject['left'] = left + 'px';
             }
 
-            setStyleObjectState(styleObject);
+            const isSameStyle = styleObjectState['left'] === styleObject['left'] && styleObjectState['right'] === styleObject['right'];
+            !isSameStyle && setStyleObjectState(styleObject);
         }
     }
 

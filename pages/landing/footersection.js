@@ -84,7 +84,7 @@ const FooterSection = (props) => {
 
             <hr className="section-divider mt-8"></hr>
 
-            <div className="flex justify-content-between py-6">
+            <div className="flex flex-wrap justify-content-between py-6">
                 <span>
                     <img src={`${contextPath}/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" />
                 </span>

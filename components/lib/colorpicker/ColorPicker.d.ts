@@ -47,6 +47,13 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
     onChange?(e: ColorPickerChangeParams): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
-export declare class ColorPicker extends React.Component<ColorPickerProps, any> { }
+export declare class ColorPicker extends React.Component<ColorPickerProps, any> {
+    public show(): void;
+    public hide(): void;
+    public getElement(): HTMLDivElement;
+    public getInput(): HTMLInputElement;
+    public getOverlay(): HTMLElement;
+ }

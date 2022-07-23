@@ -47,6 +47,7 @@ export const Captcha = React.memo(React.forwardRef((props, ref) => {
             script.defer = true;
             script.onload = () => {
                 if (!(window).grecaptcha) {
+                    // eslint-disable-next-line no-console
                     console.warn('Recaptcha is not loaded');
                     return;
                 }
@@ -81,7 +82,9 @@ export const Captcha = React.memo(React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         reset,
-        getResponse
+        getResponse,
+        getElement: () => elementRef.current,
+        ...props
     }));
 
     const otherProps = ObjectUtils.findDiffKeys(props, Captcha.defaultProps);

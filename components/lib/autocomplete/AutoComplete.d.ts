@@ -1,6 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
-import { VirtualScrollerProps } from '../virtualscroller';
+import { VirtualScrollerProps, VirtualScroller } from '../virtualscroller';
 import { CSSTransitionProps } from '../csstransition';
 import { IconType } from '../utils';
 
@@ -45,7 +45,7 @@ interface AutoCompleteCompleteMethodParams {
     query: string;
 }
 
-export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect'> {
+export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     value?: any;
@@ -83,7 +83,6 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     autoFocus?: boolean;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
-    ariaLabelledBy?: string;
     completeMethod?(e: AutoCompleteCompleteMethodParams): void;
     itemTemplate?: AutoCompleteItemTemplateType;
     selectedItemTemplate?: AutoCompleteSelectedItemTemplateType;
@@ -105,8 +104,13 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
     onClear?(event: React.SyntheticEvent): void;
     onShow?(): void;
     onHide?(): void;
+    children?: React.ReactNode;
 }
 
 export declare class AutoComplete extends React.Component<AutoCompleteProps, any> {
     public search(event:React.SyntheticEvent, query:string, source: AutoCompleteSourceType): void;
+    public getElement(): HTMLSpanElement;
+    public getInput(): HTMLInputElement;
+    public getOverlay(): HTMLElement;
+    public getVirtualScroller(): VirtualScroller;
 }

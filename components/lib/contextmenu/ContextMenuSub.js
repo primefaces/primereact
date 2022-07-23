@@ -2,7 +2,7 @@ import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const ContextMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -34,7 +34,7 @@ export const ContextMenuSub = React.memo((props) => {
         if (item.command) {
             item.command({
                 originalEvent: event,
-                item: item
+                item
             });
         }
 
@@ -74,7 +74,7 @@ export const ContextMenuSub = React.memo((props) => {
 
     const createSubmenu = (item) => {
         if (item.items) {
-            return <ContextMenuSub model={item.items} resetMenu={item !== activeItemState} onLeafClick={props.onLeafClick} />
+            return <ContextMenuSub menuProps={props.menuProps} model={item.items} resetMenu={item !== activeItemState} onLeafClick={props.onLeafClick} />
         }
 
         return null;
@@ -87,7 +87,7 @@ export const ContextMenuSub = React.memo((props) => {
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const submenuIconClassName = 'p-submenu-icon pi pi-angle-right';
-        const icon = item.icon && <span className={iconClassName}></span>;
+        const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = createSubmenu(item);
@@ -117,7 +117,7 @@ export const ContextMenuSub = React.memo((props) => {
         }
 
         return (
-            <li key={key} role="none" className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>
+            <li key={key} role="none" id={item.id} className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>
                 {content}
                 {submenu}
             </li>

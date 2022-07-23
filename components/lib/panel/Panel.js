@@ -7,6 +7,7 @@ import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/
 export const Panel = React.forwardRef((props, ref) => {
     const [idState, setIdState] = React.useState(props.id);
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
+    const elementRef = React.useRef(ref);
     const contentRef = React.useRef(null);
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
     const headerId = idState + '_header';
@@ -42,6 +43,16 @@ export const Panel = React.forwardRef((props, ref) => {
 
         props.onCollapse && props.onCollapse(event);
     }
+
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        getContent: () => contentRef.current,
+        ...props
+    }));
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     useMountEffect(() => {
         if (!idState) {
@@ -128,7 +139,7 @@ export const Panel = React.forwardRef((props, ref) => {
     const content = createContent();
 
     return (
-        <div id={props.id} className={className} style={props.style} {...otherProps}>
+        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
             {header}
             {content}
         </div>

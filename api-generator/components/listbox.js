@@ -54,6 +54,12 @@ const ListBoxProps = [
         description: 'Custom template for the items.'
     },
     {
+        name: 'filterTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'Custom template for the filter element.'
+    },
+    {
         name: 'optionGroupTemplate',
         type: 'any',
         default: 'null',
@@ -142,6 +148,12 @@ const ListBoxProps = [
         type: 'string',
         default: 'undefined',
         description: "Locale to use in filtering. The default locale is the host environment's current locale."
+    },
+    {
+        name: 'filterInputProps',
+        type: 'object',
+        default: 'undefined',
+        description: "Props for the filter input, any prop is passed implicity to the filter input element."
     },
     {
         name: 'tabIndex',

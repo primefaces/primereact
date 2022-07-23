@@ -1,9 +1,9 @@
 {
     "name": "primereact",
-    "version": "8.0.0-rc.1",
+    "version": "9.0.0",
     "private": false,
     "author": "PrimeTek Informatics",
-    "description": "PrimeReact is an open source UI library for React featuring a rich set of 90+ components, a theme designer, various theme alternatives such as Material, Bootstrap, Tailwind, premium templates and professional support. In addition, it integrates with PrimeBlock, which has 280+ ready to use UI blocks to build spectacular applications in no time.",
+    "description": "PrimeReact is an open source UI library for React featuring a rich set of 80+ components, a theme designer, various theme alternatives such as Material, Bootstrap, Tailwind, premium templates and professional support. In addition, it integrates with PrimeBlock, which has 280+ ready to use UI blocks to build spectacular applications in no time.",
     "homepage": "https://www.primefaces.org/primereact",
     "repository": {
         "type": "git",
@@ -33,7 +33,8 @@
     "peerDependencies": {
         "@types/react": "^17.0.0 || ^18.0.0",
         "react": "^17.0.0 || ^18.0.0",
-        "react-dom": "^17.0.0 || ^18.0.0"
+        "react-dom": "^17.0.0 || ^18.0.0",
+        "primeicons": "^5.0.0"
     },
     "peerDependenciesMeta": {
         "@types/react": {
@@ -42,9 +43,11 @@
     },
     "dependencies": {
         "@types/react-transition-group": "^4.4.1",
-        "react-transition-group": "^4.4.1",
-        "primeicons": "^5.0.0"
+        "react-transition-group": "^4.4.1"
     },
-    "sideEffects": false,
-    "unpkg": "primereact.all.min.js"
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "unpkg": "primereact.all.min.js",
+    "jsdelivr": "primereact.all.min.js"
 }

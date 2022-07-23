@@ -81,13 +81,91 @@ const PickListProps = [
         name: 'itemTemplate',
         type: 'function',
         default: 'null',
-        description: 'Function that gets the option and returns the content for it.'
+        description: 'Template function that gets the options for both source and target items and returns the content for it.'
+    },
+    {
+        name: 'sourceItemTemplate',
+        type: 'function',
+        default: 'null',
+        description: 'Template function that gets the options for the source items and returns the content for it.'
+    },
+    {
+        name: 'targetItemTemplate',
+        type: 'function',
+        default: 'null',
+        description: 'Template function that gets the options for the target items and returns the content for it.'
     },
     {
         name: 'metaKeySelection',
         type: 'boolean',
         default: 'true',
         description: 'Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
+    },
+    {
+        name: 'filterBy',
+        type: 'string',
+        default: 'null',
+        description: 'When specified displays an input field to filter the items on keyup and decides which field to search (Accepts multiple fields with a comma).'
+    },
+    {
+        name: 'filterMatchMode',
+        type: 'string',
+        default: 'contains',
+        description: 'Defines how the items are filtered, valid values are "contains" (default) "startsWith", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt" and "gte".'
+    },
+    {
+        name: 'filterLocale',
+        type: 'string',
+        default: 'undefined',
+        description: "Locale to use in filtering. The default locale is the host environment's current locale."
+    },
+    {
+        name: 'sourceFilterValue',
+        type: 'string',
+        default: 'null',
+        description: 'Filter value in the target list.'
+    },
+    {
+        name: 'targetFilterValue',
+        type: 'string',
+        default: 'null',
+        description: 'Filter value in the source list.'
+    },
+    {
+        name: 'showSourceFilter',
+        type: 'boolean',
+        default: 'true',
+        description: 'Whether to show filter input for source list when filterBy is enabled.'
+    },
+    {
+        name: 'showTargetFilter',
+        type: 'boolean',
+        default: 'true',
+        description: 'Whether to show filter input for target list when filterBy is enabled.'
+    },
+    {
+        name: 'sourceFilterPlaceholder',
+        type: 'string',
+        default: 'null',
+        description: 'Placeholder text on source filter input.'
+    },
+    {
+        name: 'targetFilterPlaceholder',
+        type: 'string',
+        default: 'null',
+        description: 'Placeholder text on target filter input.'
+    },
+    {
+        name: 'sourceFilterTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'Template for the source filter content.'
+    },
+    {
+        name: 'targetFilterTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'Template for the target filter content.'
     },
     {
         name: 'tabIndex',
@@ -218,6 +296,38 @@ const PickListEvents = [
                 name: 'items',
                 type: 'any',
                 description: 'Selected items array'
+            }
+        ]
+    },
+    {
+        name: 'onSourceFilterChange',
+        description: 'Callback to invoke when items are filtered within source list.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Filtered value'
+            }
+        ]
+    },
+    {
+        name: 'onTargetFilterChange',
+        description: 'Callback to invoke when items are filtered within target list.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.value',
+                type: 'any',
+                description: 'Filtered value'
             }
         ]
     }

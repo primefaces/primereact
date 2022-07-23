@@ -33,7 +33,7 @@ export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
 
         updateSelectionPath();
         hide();
-        inputRef.current.focus();
+        DomHandler.focus(inputRef.current);
     }
 
     const onOptionGroupSelect = (event) => {
@@ -42,7 +42,8 @@ export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
     }
 
     const getOptionLabel = (option) => {
-        return props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option;
+        const label = props.optionLabel ? ObjectUtils.resolveFieldData(option, props.optionLabel) : option;
+        return label || option;
     }
 
     const getOptionValue = (option) => {
@@ -95,7 +96,7 @@ export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
         }
 
         if (!overlayRef.current || !overlayRef.current.contains(event.target)) {
-            inputRef.current.focus();
+            DomHandler.focus(inputRef.current);
             overlayVisibleState ? hide() : show();
         }
     }
@@ -153,7 +154,7 @@ export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
     const hide = () => {
         props.onBeforeHide && props.onBeforeHide();
         setOverlayVisibleState(false);
-        inputRef.current.focus();
+        DomHandler.focus(inputRef.current);
     }
 
     const onOverlayEnter = () => {
@@ -180,6 +181,14 @@ export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
     const alignOverlay = () => {
         DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
     }
+
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        getOverlay: () => overlayRef.current,
+        getInput: () => inputRef.current,
+        getLabel: () => labelRef.current,
+        ...props
+    }));
 
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);

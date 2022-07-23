@@ -28,8 +28,12 @@ export interface EditorProps extends React.DetailedHTMLProps<React.InputHTMLAttr
     onTextChange?(e: EditorTextChangeParams): void;
     onSelectionChange?(e: EditorSelectionChangeParams): void;
     onLoad?(quill: any): void;
+    children?: React.ReactNode;
 }
 
 export declare class Editor extends React.Component<EditorProps, any> {
     public getQuill(): any;
+    public getElement(): HTMLDivElement;
+    public getContent(): HTMLDivElement;
+    public getToolbar(): HTMLDivElement;
 }

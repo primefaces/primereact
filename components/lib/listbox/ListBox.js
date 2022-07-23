@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FilterService } from '../api/Api';
+import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
@@ -110,6 +111,8 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onFilter = (event) => {
+        virtualScrollerRef.current && virtualScrollerRef.current.scrollToIndex(0);
+
         const { originalEvent, value } = event;
         if (props.onFilterValueChange) {
             props.onFilterValueChange({
@@ -120,6 +123,11 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
         else {
             setFilterValueState(value);
         }
+    }
+
+    const resetFilter = () => {
+        setFilterValueState('');
+        props.onFilter && props.onFilter({ filter: '' });
     }
 
     const updateModel = (event, value) => {
@@ -142,9 +150,37 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
         return props.value.filter(val => !ObjectUtils.equals(val, getOptionValue(option), props.dataKey));
     }
 
+    const getSelectedOptionIndex = () => {
+        if (props.value != null && visibleOptions) {
+            if (props.optionGroupLabel) {
+                for (let i = 0; i < visibleOptions.length; i++) {
+                    let selectedOptionIndex = findOptionIndexInList(props.value, getOptionGroupChildren(visibleOptions[i]));
+                    if (selectedOptionIndex !== -1) {
+                        return { group: i, option: selectedOptionIndex };
+                    }
+                }
+            }
+            else {
+                return findOptionIndexInList(props.value, visibleOptions);
+            }
+        }
+
+        return -1;
+    }
+
+    const equalityKey = () => {
+        return props.optionValue ? null : props.dataKey;
+    }
+
+    const findOptionIndexInList = (value, list) => {
+        const key = equalityKey();
+        return list.findIndex(item => ObjectUtils.equals(value, getOptionValue(item), key));
+    }
+
     const isSelected = (option) => {
-        let optionValue = getOptionValue(option);
-        return props.multiple && props.value ? props.value.some((val) => ObjectUtils.equals(val, optionValue, props.dataKey)) : ObjectUtils.equals(props.value, optionValue, props.dataKey);
+        const optionValue = getOptionValue(option);
+        const key = equalityKey();
+        return props.multiple && props.value ? props.value.some((val) => ObjectUtils.equals(val, optionValue, key)) : ObjectUtils.equals(props.value, optionValue, key);
     }
 
     const filter = (option) => {
@@ -210,11 +246,30 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
-    const createHeader = () => {
-        return props.filter ? <ListBoxHeader filter={filteredValue} onFilter={onFilter} disabled={props.disabled} filterPlaceholder={props.filterPlaceholder} /> : null;
+    const scrollToSelectedIndex = () => {
+        if (virtualScrollerRef.current) {
+            const selectedIndex = getSelectedOptionIndex();
+            if (selectedIndex !== -1) {
+                setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
+            }
+        }
     }
 
-    const createGroupChildren = (optionGroup) => {
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        getVirtualScroller: () => virtualScrollerRef.current,
+        ...props
+    }));
+
+    useMountEffect(() => {
+        scrollToSelectedIndex();
+    });
+
+    const createHeader = () => {
+        return props.filter ? <ListBoxHeader filter={filteredValue} onFilter={onFilter} resetFilter={resetFilter} filterTemplate={props.filterTemplate} disabled={props.disabled} filterPlaceholder={props.filterPlaceholder} filterInputProps={props.filterInputProps} /> : null;
+    }
+
+    const createGroupChildren = (optionGroup, style) => {
         const groupChildren = getOptionGroupChildren(optionGroup);
 
         return (
@@ -225,22 +280,23 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
                 const tabIndex = disabled ? null : props.tabIndex || 0;
 
                 return (
-                    <ListBoxItem key={optionKey} label={optionLabel} option={option} template={props.itemTemplate} selected={isSelected(option)}
+                    <ListBoxItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={isSelected(option)}
                         onClick={onOptionSelect} onTouchEnd={onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled} />
                 )
             })
         )
     }
 
-    const createItem = (option, index) => {
+    const createItem = (option, index, scrollerOptions = {}) => {
+        const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
         if (props.optionGroupLabel) {
             const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : getOptionGroupLabel(option);
-            const groupChildrenContent = createGroupChildren(option);
+            const groupChildrenContent = createGroupChildren(option, style);
             const key = index + '_' + getOptionGroupRenderKey(option);
 
             return (
                 <React.Fragment key={key}>
-                    <li className="p-listbox-item-group">
+                    <li className="p-listbox-item-group" style={style} role="group">
                         {groupContent}
                     </li>
                     {groupChildrenContent}
@@ -254,7 +310,7 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
             const tabIndex = disabled ? null : props.tabIndex || 0;
 
             return (
-                <ListBoxItem key={optionKey} label={optionLabel} option={option} template={props.itemTemplate} selected={isSelected(option)}
+                <ListBoxItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={isSelected(option)}
                     onClick={onOptionSelect} onTouchEnd={onOptionTouchEnd} tabIndex={tabIndex} disabled={disabled} />
             )
         }
@@ -270,12 +326,12 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
                 ...props.virtualScrollerOptions, ...{
                     items: visibleOptions,
                     onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: visibleOptions } }),
-                    itemTemplate: (item, option) => item && createItem(item, option.index),
+                    itemTemplate: (item, options) => item && createItem(item, options.index, options),
                     contentTemplate: (option) => {
                         const className = classNames('p-listbox-list', option.className);
 
                         return (
-                            <ul ref={option.contentRef} className={className} role="listbox" aria-multiselectable={props.multiple}>
+                            <ul ref={option.contentRef} className={className} role="listbox" aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
                                 {option.children}
                             </ul>
                         )
@@ -289,7 +345,7 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
             const items = createItems();
 
             return (
-                <ul className="p-listbox-list" role="listbox" aria-multiselectable={props.multiple}>
+                <ul className="p-listbox-list" role="listbox" aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
                     {items}
                 </ul>
             )
@@ -343,15 +399,18 @@ ListBox.defaultProps = {
     multiple: false,
     metaKeySelection: false,
     filter: false,
+    filterTemplate: null,
     filterBy: null,
     filterValue: null,
     filterMatchMode: 'contains',
     filterPlaceholder: null,
     filterLocale: undefined,
+    filterInputProps: null,
     tabIndex: 0,
     tooltip: null,
     tooltipOptions: null,
-    ariaLabelledBy: null,
+    'aria-label': null,
+    'aria-labelledby': null,
     onChange: null,
     onFilterValueChange: null
 }

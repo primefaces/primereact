@@ -23,7 +23,13 @@ export const FullCalendar = React.memo(React.forwardRef((props, ref) => {
         });
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     useMountEffect(() => {
+        // eslint-disable-next-line no-console
         console.warn("FullCalendar component is deprecated. Use FullCalendar component of '@fullcalendar/react' package.");
 
         config.current = {

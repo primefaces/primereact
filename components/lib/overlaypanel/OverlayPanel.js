@@ -19,7 +19,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
         target: currentTargetRef, overlay: overlayRef, listener: (event, { type, valid }) => {
             if (valid) {
-                (type === 'outside') ? !isPanelClicked.current && hide() : hide();
+                (type === 'outside') ? props.dismissable && !isPanelClicked.current && hide() : hide();
             }
 
             isPanelClicked.current = false;
@@ -117,7 +117,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     }
 
     const align = () => {
-        if (currentTargetRef.current) {
+        if (currentTargetRef.current && overlayRef.current) {
             DomHandler.absolutePosition(overlayRef.current, currentTargetRef.current);
 
             const containerOffset = DomHandler.getOffset(overlayRef.current);
@@ -150,7 +150,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
                 `
             }
 
-            styleElement.innerHTML = innerHTML;
+            styleElement.current.innerHTML = innerHTML;
         }
     }
 
@@ -176,7 +176,9 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         toggle,
         show,
-        hide
+        hide,
+        getElement: () => overlayRef.current,
+        ...props
     }));
 
     const createCloseIcon = () => {

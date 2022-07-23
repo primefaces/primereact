@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
 
 type SelectButtonOptionDisabledType = string | ((option: any) => boolean);
 
@@ -17,10 +18,9 @@ interface SelectButtonChangeParams {
     target: SelectButtonChangeTargetOptions;
 }
 
-export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'unselectable' | 'onChange'> {
-    id?: string;
+export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'unselectable' | 'onChange' | 'ref'> {
     value?: any;
-    options?: any[];
+    options?: SelectItemOptionsType;
     optionLabel?: string;
     optionValue?: string;
     optionDisabled?: SelectButtonOptionDisabledType;
@@ -28,14 +28,15 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
     multiple?: boolean;
     unselectable?: boolean;
     disabled?: boolean;
-    style?: object;
-    className?: string;
     dataKey?: string;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     itemTemplate?(option: any): React.ReactNode;
     onChange?(e: SelectButtonChangeParams): void;
+    children?: React.ReactNode;
 }
 
-export declare class SelectButton extends React.Component<SelectButtonProps, any> { }
+export declare class SelectButton extends React.Component<SelectButtonProps, any> { 
+    public getElement(): HTMLDivElement;
+}

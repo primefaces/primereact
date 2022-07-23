@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -14,7 +14,7 @@ export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
         }
 
         toggle(event);
-        inputRef.current.focus();
+        DomHandler.focus(inputRef.current);
 
         event.preventDefault();
     }
@@ -47,11 +47,11 @@ export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
         props.onBlur && props.onBlur(event);
     }
 
-    const onKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            onClick(event);
-        }
-    }
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        getInput: () => elementRef.current,
+        ...props
+    }));
 
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
@@ -62,7 +62,7 @@ export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
     const className = classNames('p-inputswitch p-component', {
         'p-inputswitch-checked': checked,
         'p-disabled': props.disabled,
-        'p-inputswitch-focus': focusedState
+        'p-focus': focusedState
     }, props.className);
 
     return (
@@ -70,8 +70,8 @@ export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
             <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} role="checkbox" aria-checked={checked}>
                 <div className="p-hidden-accessible">
                     <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} checked={checked} onChange={toggle}
-                        onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} disabled={props.disabled} role="switch" aria-checked={checked}
-                        aria-labelledby={props.ariaLabelledBy} />
+                        onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} role="switch" tabIndex={props.tabIndex} aria-checked={checked}
+                        aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']} />
                 </div>
                 <span className="p-inputswitch-slider"></span>
             </div>
@@ -89,13 +89,15 @@ InputSwitch.defaultProps = {
     className: null,
     inputId: null,
     name: null,
+    tabIndex: null,
     checked: false,
     trueValue: true,
     falseValue: false,
     disabled: false,
     tooltip: null,
     tooltipOptions: null,
-    ariaLabelledBy: null,
+    'aria-label': null,
+    'aria-labelledby': null,
     onChange: null,
     onFocus: null,
     onBlur: null

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const MegaMenuDoc = memo(() => {
 
@@ -132,6 +133,9 @@ export class MegaMenuDemo extends Component {
         ];
     }
 
+    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
+
     render() {
         return (
             <div>
@@ -141,6 +145,9 @@ export class MegaMenuDemo extends Component {
 
                     <h5>Vertical</h5>
                     <MegaMenu model={this.items} orientation="vertical" />
+
+                    <h5>Templating</h5>
+                    <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
                 </div>
             </div>
         );
@@ -269,6 +276,9 @@ const MegaMenuDemo = () => {
         }
     ];
 
+    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
+
     return (
         <div>
             <div className="card">
@@ -277,6 +287,9 @@ const MegaMenuDemo = () => {
 
                 <h5>Vertical</h5>
                 <MegaMenu model={items} orientation="vertical" />
+
+                <h5>Templating</h5>
+                <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
             </div>
         </div>
     );
@@ -404,6 +417,9 @@ const MegaMenuDemo = () => {
         }
     ];
 
+    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
+
     return (
         <div>
             <div className="card">
@@ -412,6 +428,9 @@ const MegaMenuDemo = () => {
 
                 <h5>Vertical</h5>
                 <MegaMenu model={items} orientation="vertical" />
+
+                <h5>Templating</h5>
+                <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
             </div>
         </div>
     );
@@ -542,6 +561,9 @@ const MegaMenuDemo = () => {
         }
     ];
 
+    const start = <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" style={{width: '12rem'}} />;
+
     return (
         <div>
             <div className="card">
@@ -550,6 +572,9 @@ const MegaMenuDemo = () => {
 
                 <h5>Vertical</h5>
                 <MegaMenu model={items} orientation="vertical" />
+
+                <h5>Templating</h5>
+                <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
             </div>
         </div>
     );
@@ -713,13 +738,14 @@ const items = [
 </CodeHighlight>
 
                     <h5>Custom Content</h5>
-                    <p>Any content inside the megamenu will be displayed on the right side by default. You may use ".ui-megamenu-custom" style class to change the location of the content.</p>
+                    <p>The megamenu can display custom content by using the "start" and "end" properties.</p>
 <CodeHighlight>
 {`
-<MegaMenu model={items}>
-    <InputText placeholder="Search" type="text"/>
-    <Button label="Logout" icon="pi pi-power-off" style={{marginLeft:4}}/>
-</MegaMenu>
+<MegaMenu
+  model={items}
+  start={<InputText placeholder="Search" type="text"/>}
+  end={<Button label="Logout" icon="pi pi-power-off"/>}
+/>
 `}
 </CodeHighlight>
 
@@ -765,6 +791,18 @@ const items = [
                                     <td>horizontal</td>
                                     <td>Defines the orientation, valid values are horizontal and vertical.</td>
                                 </tr>
+                                <tr>
+                                    <td>start</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template of starting element.</td>
+                                </tr>
+                                <tr>
+                                    <td>end</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template of trailing element</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -785,7 +823,7 @@ const items = [
                                     <td>Container element.</td>
                                 </tr>
                                 <tr>
-                                    <td>p-menu-list</td>
+                                    <td>p-megamenu-root-list</td>
                                     <td>List element.</td>
                                 </tr>
                                 <tr>
@@ -807,6 +845,72 @@ const items = [
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>MegaMenu component uses the <i>menubar</i> role along with <i>aria-orientation</i> and the value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Each list item has a <i>presentation</i> role
+                    whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a MegaMenu uses the <i>menu</i> role with an <i>aria-labelledby</i> defined
+                    as the id of the submenu root menuitem label. In addition, root menuitems that open a submenu have <i>aria-haspopup</i>, <i>aria-expanded</i> and <i>aria-controls</i> to define the relation between the item and the submenu.</p>
+
+                    <h6>Keyboard Support</h6>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Function</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i>tab</i></td>
+                                    <td>Add focus to the first item if focus moves in to the menu. If the focus is already within the menu, focus moves to the next focusable item in the page tab sequence.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>shift</i> + <i>tab</i></td>
+                                    <td>Add focus to the last item if focus moves in to the menu. If the focus is already within the menu, focus moves to the previous focusable item in the page tab sequence.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>enter</i></td>
+                                    <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>space</i></td>
+                                    <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>escape</i></td>
+                                    <td>If focus is inside a popup submenu, closes the submenu and moves focus to the root item of the closed submenu.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>down arrow</i></td>
+                                    <td>If focus is on a root element, open a submenu and moves focus to the first element in the submenu otherwise moves focus to the next menuitem within the submenu.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>up arrow</i></td>
+                                    <td>If focus is on a root element, opens a submenu and moves focus to the last element in the submenu otherwise moves focus to the previous menuitem within the submenu.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>right arrow</i></td>
+                                    <td>If focus is on a root element, moves focus to the next menuitem. If the focus in inside a submenu, moves focus to the first menuitem of the next menu group.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>left arrow</i></td>
+                                    <td>If focus is on a root element, moves focus to the previous menuitem. If the focus in inside a submenu, moves focus to the first menuitem of the previous menu group.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>home</i></td>
+                                    <td>Moves focus to the first menuitem within the submenu.</td>
+                                </tr>
+                                <tr>
+                                    <td><i>end</i></td>
+                                    <td>Moves focus to the last menuitem within the submenu.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

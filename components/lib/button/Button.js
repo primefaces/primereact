@@ -53,10 +53,11 @@ export const Button = React.memo(React.forwardRef((props, ref) => {
     const icon = createIcon();
     const label = createLabel();
     const badge = createBadge();
+    const defaultAriaLabel = (props.label ? props.label + (props.badge ? ' ' + props.badge : '') : props['aria-label']);
 
     return (
         <>
-            <button ref={elementRef} {...otherProps} className={className} disabled={disabled}>
+            <button ref={elementRef} aria-label={defaultAriaLabel} {...otherProps} className={className} disabled={disabled}>
                 {icon}
                 {label}
                 {props.children}

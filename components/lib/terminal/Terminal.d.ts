@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-export interface TerminalProps {
-    id?: string;
-    style?: object;
-    className?: string;
+export interface TerminalProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     welcomeMessage?: string;
     prompt?: string;
+    children?: React.ReactNode;
 }
 
-export declare class Terminal extends React.Component<TerminalProps, any> {}
+export declare class Terminal extends React.Component<TerminalProps, any> {
+    public getElement(): HTMLDivElement;
+}

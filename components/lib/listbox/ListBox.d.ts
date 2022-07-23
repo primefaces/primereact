@@ -1,11 +1,14 @@
 import * as React from 'react';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
-import { VirtualScrollerProps } from '../virtualscroller';
+import { VirtualScrollerProps, VirtualScroller } from '../virtualscroller';
 
 
 type ListBoxOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
 type ListBoxItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
+
+type ListBoxFilterTemplateType = React.ReactNode | ((options: ListBoxFilterOptions) => React.ReactNode);
 
 type ListBoxOptionDisabledType = string | ((option: any) => boolean);
 
@@ -28,10 +31,14 @@ interface ListBoxFilterValueChangeParams {
     value: any;
 }
 
-export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'> {
-    id?: string;
+interface ListBoxFilterOptions {
+    filter?: (event?: KeyboardEvent) => void;
+    reset?: () => void;
+}
+
+export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     value?: any;
-    options?: any[];
+    options?: SelectItemOptionsType;
     optionLabel?: string;
     optionValue?: string;
     optionDisabled?: ListBoxOptionDisabledType;
@@ -39,10 +46,9 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
     optionGroupChildren?: string;
     optionGroupTemplate?: ListBoxOptionGroupTemplateType;
     itemTemplate?: ListBoxItemTemplateType;
-    style?: object;
+    filterTemplate?: ListBoxFilterTemplateType;
     listStyle?: object;
     listClassName?: string;
-    className?: string;
     virtualScrollerOptions?: VirtualScrollerProps;
     disabled?: boolean;
     dataKey?: string;
@@ -54,12 +60,16 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
     filterMatchMode?: string;
     filterPlaceholder?: string;
     filterLocale?: string;
-    tabIndex?: number;
+    filterInputProps?: any;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
     onChange?(e: ListBoxChangeParams): void;
     onFilterValueChange?(e: ListBoxFilterValueChangeParams): void;
+    children?: React.ReactNode;
 }
 
-export declare class ListBox extends React.Component<ListBoxProps, any> { }
+export declare class ListBox extends React.Component<ListBoxProps, any> { 
+    public getElement(): HTMLDivElement;
+    public getVirtualScroller(): VirtualScroller;
+}

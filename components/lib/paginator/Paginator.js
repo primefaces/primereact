@@ -11,6 +11,7 @@ import { PrevPageLink } from './PrevPageLink';
 import { RowsPerPageDropdown } from './RowsPerPageDropdown';
 
 export const Paginator = React.memo(React.forwardRef((props, ref) => {
+    const elementRef = React.useRef(null);
     const rppChanged = React.useRef(false);
     const page = Math.floor(props.first / props.rows);
     const pageCount = Math.ceil(props.totalRecords / props.rows);
@@ -94,6 +95,11 @@ export const Paginator = React.memo(React.forwardRef((props, ref) => {
 
         changePage(0, rows);
     }
+
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
 
     useUpdateEffect(() => {
         if (!rppChanged.current) {
@@ -191,7 +197,7 @@ export const Paginator = React.memo(React.forwardRef((props, ref) => {
         const rightElement = rightContent && <div className="p-paginator-right-content">{rightContent}</div>;
 
         return (
-            <div className={className} style={props.style} {...otherProps}>
+            <div ref={elementRef} className={className} style={props.style} {...otherProps}>
                 {leftElement}
                 {elements}
                 {rightElement}

@@ -1,15 +1,16 @@
 import * as React from 'react';
 
-type BadgeSeverityType = 'success' | 'info' | 'warn' | 'error' | (string & {});
+type BadgeSeverityType = 'success' | 'info' | 'warning' | 'danger';
 
 type BadgeSizeType = 'normal' | 'large' | 'xlarge';
 
-export interface BadgeProps {
+export interface BadgeProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'ref'> {
     value?: any;
     severity?: BadgeSeverityType;
     size?: BadgeSizeType;
-    style?: object;
-    className?: string;
+    children?: React.ReactNode;
 }
 
-export declare class Badge extends React.Component<BadgeProps, any> { }
+export declare class Badge extends React.Component<BadgeProps, any> {
+    public getElement(): HTMLSpanElement;
+ }

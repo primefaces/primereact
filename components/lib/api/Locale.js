@@ -42,8 +42,18 @@ let locales = {
         medium: 'Medium',
         strong: 'Strong',
         passwordPrompt: 'Enter a password',
-        emptyFilterMessage: 'No results found',
-        emptyMessage: 'No available options'
+        emptyFilterMessage: 'No available options',
+        emptyMessage: 'No results found',
+        aria: {
+            trueLabel: 'True',
+            falseLabel: 'False',
+            nullLabel: 'Not Selected',
+            pageLabel: 'Page',
+            firstPageLabel: 'First Page',
+            lastPageLabel: 'Last Page',
+            nextPageLabel: 'Next Page',
+            previousPageLabel: 'Previous Page'
+        }
     }
 };
 
@@ -80,9 +90,20 @@ function localeOption(key, locale) {
     }
 }
 
+function ariaLabel(key) {
+    const _locale = PrimeReact.locale;
+
+    try {
+        return localeOptions(_locale)['aria'][key];
+    }
+    catch(error) {
+        throw new Error(`The ${key} option is not found in the current locale('${_locale}').`);
+    }
+}
+
 function localeOptions(locale) {
     const _locale = locale || PrimeReact.locale;
     return locales[_locale];
 }
 
-export { locale, addLocale, updateLocaleOption, updateLocaleOptions, localeOption, localeOptions };
+export { locale, addLocale, updateLocaleOption, updateLocaleOptions, localeOption, localeOptions, ariaLabel };

@@ -42,6 +42,7 @@
   --surface-hover:rgba(255,255,255,.04);
   --maskbg: rgba(0, 0, 0, 0.4);
   --focus-ring: 0 0 0 1px #f0e6f5;
+  color-scheme: dark;
 }
 
 * {
@@ -222,6 +223,16 @@
   --red-700:#9a2530;
   --red-800:#791d26;
   --red-900:#58151c;
+  --primary-50:#fcfafd;
+  --primary-100:#f0e6f6;
+  --primary-200:#e5d3ee;
+  --primary-300:#d9bfe7;
+  --primary-400:#ceacdf;
+  --primary-500:#c298d8;
+  --primary-600:#a581b8;
+  --primary-700:#886a97;
+  --primary-800:#6b5477;
+  --primary-900:#4e3d56;
 }
 
 .p-autocomplete .p-autocomplete-loader {
@@ -355,14 +366,16 @@
 .p-datepicker .p-datepicker-header .p-datepicker-title {
   line-height: 2rem;
 }
-.p-datepicker .p-datepicker-header .p-datepicker-title select {
-  transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+  color: rgba(255, 255, 255, 0.87);
+  transition: color 0.15s, box-shadow 0.15s;
+  font-weight: 600;
+  padding: 0.5rem;
 }
-.p-datepicker .p-datepicker-header .p-datepicker-title select:focus {
-  outline: 0 none;
-  outline-offset: 0;
-  box-shadow: 0 0 0 1px #f0e6f5;
-  border-color: #c298d8;
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year:enabled:hover,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month:enabled:hover {
+  color: #c298d8;
 }
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
   margin-right: 0.5rem;
@@ -460,8 +473,20 @@
   color: #151515;
   background: #c298d8;
 }
+.p-datepicker .p-yearpicker {
+  margin: 0.5rem 0;
+}
+.p-datepicker .p-yearpicker .p-yearpicker-year {
+  padding: 0.5rem;
+  transition: box-shadow 0.15s;
+  border-radius: 4px;
+}
+.p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
+  color: #151515;
+  background: #c298d8;
+}
 .p-datepicker.p-datepicker-multiple-month .p-datepicker-group {
-  border-right: 1px solid #3f4b5b;
+  border-left: 1px solid #3f4b5b;
   padding-right: 0;
   padding-left: 0;
   padding-top: 0;
@@ -472,7 +497,7 @@
 }
 .p-datepicker.p-datepicker-multiple-month .p-datepicker-group:last-child {
   padding-right: 0;
-  border-right: 0 none;
+  border-left: 0 none;
 }
 .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):hover {
   background: rgba(255, 255, 255, 0.04);
@@ -482,10 +507,18 @@
   outline-offset: 0;
   box-shadow: 0 0 0 1px #f0e6f5;
 }
-.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-highlight):not(.p-disabled):hover {
+.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):not(.p-highlight):hover {
   background: rgba(255, 255, 255, 0.04);
 }
-.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-highlight):not(.p-disabled):focus {
+.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 1px #f0e6f5;
+}
+.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):not(.p-highlight):hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 1px #f0e6f5;
@@ -1030,7 +1063,7 @@
 .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
   background: #c298d8;
 }
-.p-inputswitch.p-invalid {
+.p-inputswitch.p-invalid .p-inputswitch-slider {
   border-color: #f19ea6;
 }
 
@@ -3322,6 +3355,19 @@
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 }
+.p-orderlist .p-orderlist-filter-container {
+  padding: 1rem 1.25rem;
+  background: #2a323d;
+  border: 1px solid #3f4b5b;
+  border-bottom: 0 none;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-input {
+  padding-right: 1.75rem;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-icon {
+  right: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
 .p-orderlist .p-orderlist-list {
   border: 1px solid #3f4b5b;
   background: #2a323d;
@@ -3350,6 +3396,12 @@
 .p-orderlist .p-orderlist-list .p-orderlist-item.p-highlight {
   color: #151515;
   background: #c298d8;
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even):hover {
+  background: rgba(255, 255, 255, 0.04);
 }
 
 @media screen and (max-width: 769px) {
@@ -3503,6 +3555,19 @@
   border-bottom: 0 none;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
+}
+.p-picklist .p-picklist-filter-container {
+  padding: 1rem 1.25rem;
+  background: #2a323d;
+  border: 1px solid #3f4b5b;
+  border-bottom: 0 none;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-input {
+  padding-right: 1.75rem;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-icon {
+  right: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
 }
 .p-picklist .p-picklist-list {
   border: 1px solid #3f4b5b;
@@ -4270,6 +4335,10 @@
   color: rgba(255, 255, 255, 0.87);
   padding: 1rem;
 }
+.p-dialog .p-dialog-content:last-of-type {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
 .p-dialog .p-dialog-footer {
   border-top: 1px solid #3f4b5b;
   background: #2a323d;
@@ -4323,7 +4392,7 @@
 .p-overlaypanel:before {
   border: solid transparent;
   border-color: rgba(63, 75, 91, 0);
-  border-bottom-color: #3f4b5b;
+  border-bottom-color: #3c4756;
 }
 .p-overlaypanel.p-overlaypanel-flipped:after {
   border-top-color: #2a323d;
@@ -4574,7 +4643,23 @@
   .p-dock.p-dock-left .p-dock-container .p-dock-list, .p-dock.p-dock-right .p-dock-container .p-dock-list {
     margin: auto 0;
   }
-  .p-dock .p-dock-list .p-dock-item {
+  .p-dock.p-dock-magnification.p-dock-top .p-dock-item-second-prev,
+.p-dock.p-dock-magnification.p-dock-top .p-dock-item-second-next,
+.p-dock.p-dock-magnification.p-dock-top .p-dock-item-prev,
+.p-dock.p-dock-magnification.p-dock-top .p-dock-item-next,
+.p-dock.p-dock-magnification.p-dock-top .p-dock-item-current, .p-dock.p-dock-magnification.p-dock-bottom .p-dock-item-second-prev,
+.p-dock.p-dock-magnification.p-dock-bottom .p-dock-item-second-next,
+.p-dock.p-dock-magnification.p-dock-bottom .p-dock-item-prev,
+.p-dock.p-dock-magnification.p-dock-bottom .p-dock-item-next,
+.p-dock.p-dock-magnification.p-dock-bottom .p-dock-item-current, .p-dock.p-dock-magnification.p-dock-left .p-dock-item-second-prev,
+.p-dock.p-dock-magnification.p-dock-left .p-dock-item-second-next,
+.p-dock.p-dock-magnification.p-dock-left .p-dock-item-prev,
+.p-dock.p-dock-magnification.p-dock-left .p-dock-item-next,
+.p-dock.p-dock-magnification.p-dock-left .p-dock-item-current, .p-dock.p-dock-magnification.p-dock-right .p-dock-item-second-prev,
+.p-dock.p-dock-magnification.p-dock-right .p-dock-item-second-next,
+.p-dock.p-dock-magnification.p-dock-right .p-dock-item-prev,
+.p-dock.p-dock-magnification.p-dock-right .p-dock-item-next,
+.p-dock.p-dock-magnification.p-dock-right .p-dock-item-current {
     transform: none;
     margin: 0;
   }
@@ -5052,7 +5137,6 @@
   border: 1px solid #3f4b5b;
   background: #2a323d;
   color: rgba(255, 255, 255, 0.87);
-  margin-bottom: 0;
   border-top: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
@@ -5850,7 +5934,7 @@
   background: #c298d8;
 }
 .p-progressbar .p-progressbar-label {
-  color: rgba(255, 255, 255, 0.87);
+  color: #151515;
   line-height: 1.5rem;
 }
 
@@ -5930,10 +6014,6 @@
 .p-tag.p-tag-danger {
   background-color: #f19ea6;
   color: #151515;
-}
-
-.p-virtualscroller-loading-icon {
-  font-size: 2rem;
 }
 
 /* Vendor extensions to the designer enhanced bootstrap compatibility */

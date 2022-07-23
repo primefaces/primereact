@@ -60,6 +60,12 @@ const VirtualScrollerProps = [
         description: 'Delay in scroll before new data is loaded.'
     },
     {
+        name: 'resizeDelay',
+        type: 'number',
+        default: '10',
+        description: 'Delay after window\'s resize finishes.'
+    },
+    {
         name: 'lazy',
         type: 'boolean',
         default: 'false',
@@ -72,10 +78,22 @@ const VirtualScrollerProps = [
         description: 'Whether to show loader.'
     },
     {
+        name: 'autoSize',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether to dynamically change the height or width of scrollable container.'
+    },
+    {
         name: 'loadingTemplate',
         type: 'any',
         default: 'null',
         description: 'The template of loader.'
+    },
+    {
+        name: 'loaderIconTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'The template of loader\'s icon.'
     },
     {
         name: 'itemTemplate',

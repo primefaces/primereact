@@ -201,7 +201,8 @@ export const Slider = React.memo(React.forwardRef((props, ref) => {
         return (
             <span className={className} style={style} tabIndex={props.tabIndex} role="slider"
                 onMouseDown={(event) => onMouseDown(event, index)} onTouchStart={(event) => onTouchStart(event, index)} onKeyDown={(event) => onKeyDown(event, index)}
-                aria-valuemin={props.min} aria-valuemax={props.max} aria-valuenow={leftValue || bottomValue} aria-labelledby={props.ariaLabelledBy}></span>
+                aria-valuemin={props.min} aria-valuemax={props.max} aria-valuenow={leftValue || bottomValue} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}
+                aria-orientation={props.orientation}></span>
         )
     }
 
@@ -242,6 +243,11 @@ export const Slider = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     const otherProps = ObjectUtils.findDiffKeys(props, Slider.defaultProps);
     const className = classNames('p-slider p-component', props.className, {
         'p-disabled': props.disabled,
@@ -271,7 +277,8 @@ Slider.defaultProps = {
     className: null,
     disabled: false,
     tabIndex: 0,
-    ariaLabelledBy: null,
     onChange: null,
-    onSlideEnd: null
+    onSlideEnd: null,
+    'aria-label': null,
+    'aria-labelledby': null
 }

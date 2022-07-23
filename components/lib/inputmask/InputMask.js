@@ -4,7 +4,7 @@ import { InputText } from '../inputtext/InputText';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const InputMask = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const firstNonMaskPos = React.useRef(null);
     const lastRequiredNonMaskPos = React.useRef(0);
     const tests = React.useRef([]);
@@ -154,6 +154,7 @@ export const InputMask = React.memo(React.forwardRef((props, ref) => {
                 value: getValue()
             });
         }
+        updateModel(e);
     }
 
     const onBlur = (e) => {
@@ -504,9 +505,14 @@ export const InputMask = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        ...props
+    }));
+
     React.useEffect(() => {
-        ObjectUtils.combinedRefs(elementRef, props.inputRef);
-    }, [elementRef, props.inputRef]);
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     useMountEffect(() => {
         init();
@@ -516,7 +522,9 @@ export const InputMask = React.memo(React.forwardRef((props, ref) => {
     useUpdateEffect(() => {
         init();
         caret(updateValue(true));
-        updateModel();
+        if (props.unmask) {
+            updateModel();
+        }
     }, [props.mask]);
 
     useUpdateEffect(() => {
@@ -532,7 +540,7 @@ export const InputMask = React.memo(React.forwardRef((props, ref) => {
         <InputText ref={elementRef} id={props.id} type={props.type} name={props.name} style={props.style} className={className} {...otherProps} placeholder={props.placeholder}
             size={props.size} maxLength={props.maxLength} tabIndex={props.tabIndex} disabled={props.disabled} readOnly={props.readOnly}
             onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} onKeyPress={onKeyPress} onInput={onInput} onPaste={handleInputChange}
-            required={props.required} aria-labelledby={props.ariaLabelledBy} tooltip={props.tooltip} tooltipOptions={props.tooltipOptions} />
+            required={props.required} tooltip={props.tooltip} tooltipOptions={props.tooltipOptions} />
     )
 }));
 
@@ -540,7 +548,6 @@ InputMask.displayName = 'InputMask';
 InputMask.defaultProps = {
     __TYPE: 'InputMask',
     id: null,
-    inputRef: null,
     value: null,
     type: 'text',
     mask: null,
@@ -559,7 +566,6 @@ InputMask.defaultProps = {
     required: false,
     tooltip: null,
     tooltipOptions: null,
-    ariaLabelledBy: null,
     onComplete: null,
     onChange: null,
     onFocus: null,

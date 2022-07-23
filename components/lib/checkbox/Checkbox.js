@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Checkbox = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -29,8 +29,7 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
             });
 
             inputRef.current.checked = !checked;
-            inputRef.current.focus();
-
+            DomHandler.focus(inputRef.current);
             event.preventDefault();
         }
     }
@@ -43,16 +42,15 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
         setFocusedState(false);
     }
 
-    const onKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            onClick(event);
-            event.preventDefault();
-        }
-    }
-
     const isChecked = () => {
         return props.checked === props.trueValue;
     }
+
+    React.useImperativeHandle(ref, () => ({
+        getElement: () => elementRef.current,
+        getInput: () => inputRef.current,
+        ...props
+    }));
 
     React.useEffect(() => {
         ObjectUtils.combinedRefs(inputRef, props.inputRef);
@@ -75,16 +73,16 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
         'p-disabled': props.disabled,
         'p-focus': focusedState
     });
-    const icon = IconUtils.getJSXIcon(checked && props.icon, { className: 'p-checkbox-icon p-c' }, { props, checked });
+    const icon = IconUtils.getJSXIcon(checked ? props.icon : '', { className: 'p-checkbox-icon p-c' }, { props, checked });
 
     return (
         <>
             <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
                 <div className="p-hidden-accessible">
-                    <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} tabIndex={props.tabIndex} defaultChecked={checked} aria-labelledby={props.ariaLabelledBy}
-                        onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} required={props.required} />
+                    <input ref={inputRef} type="checkbox" id={props.inputId} name={props.name} tabIndex={props.tabIndex} defaultChecked={checked} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}
+                        onFocus={onFocus} onBlur={onBlur} disabled={props.disabled} readOnly={props.readOnly} required={props.required} />
                 </div>
-                <div className={boxClass} role="checkbox" aria-checked={checked}>
+                <div className={boxClass}>
                     {icon}
                 </div>
             </div>
@@ -113,7 +111,8 @@ Checkbox.defaultProps = {
     icon: 'pi pi-check',
     tooltip: null,
     tooltipOptions: null,
-    ariaLabelledBy: null,
+    'aria-label': null,
+    'aria-labelledby': null,
     onChange: null,
     onMouseDown: null,
     onContextMenu: null

@@ -117,6 +117,7 @@ interface ColumnEventParams {
 }
 
 interface ColumnSortParams {
+    rowData: any;
     field: string;
     order: ColumnSortOrderType;
 }
@@ -198,7 +199,7 @@ export interface ColumnProps {
     showFilterMatchModes?: boolean;
     showFilterMenuOptions?: boolean;
     showAddButton?: boolean;
-    filterMatchModeOptions?: ColumnFilterMatchModeOptions;
+    filterMatchModeOptions?: ColumnFilterMatchModeOptions[];
     maxConstraints?: number;
     filterMenuClassName?: string;
     filterMenuStyle?: object;
@@ -235,6 +236,7 @@ export interface ColumnProps {
     rowEditor?: boolean;
     exportable?: boolean;
     reorderable?: boolean;
+    resizeable?: boolean;
     excludeGlobalFilter?: boolean;
     onCellEditInit?(e: ColumnEventParams): void;
     onCellEditComplete?(e: ColumnEventParams): void;
@@ -245,6 +247,7 @@ export interface ColumnProps {
     cellEditValidator?(e: ColumnEventParams): boolean;
     onBeforeCellEditHide?(e: ColumnEventParams): void;
     onBeforeCellEditShow?(e: ColumnEventParams): void;
+    children?: React.ReactNode;
 }
 
 export declare class Column extends React.Component<ColumnProps, any> { }

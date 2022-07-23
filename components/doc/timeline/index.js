@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const TimelineDoc = memo(() => {
 
@@ -36,7 +37,7 @@ export class TimelineDemo extends Component {
     render() {
         const customizedMarker = (item) => {
             return (
-                <span className="custom-marker p-shadow-2" style={{ backgroundColor: item.color }}>
+                <span className="custom-marker shadow-1" style={{ backgroundColor: item.color }}>
                     <i className={item.icon}></i>
                 </span>
             );
@@ -45,7 +46,7 @@ export class TimelineDemo extends Component {
         const customizedContent = (item) => {
             return (
                 <Card title={item.status} subTitle={item.date}>
-                    { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="p-shadow-2" />}
+                    { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="shadow-1" />}
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                         quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                     <Button label="Read more" className="p-button-text"></Button>
@@ -120,7 +121,7 @@ const TimelineDemo = () => {
 
     const customizedMarker = (item) => {
         return (
-            <span className="custom-marker p-shadow-2" style={{ backgroundColor: item.color }}>
+            <span className="custom-marker shadow-1" style={{ backgroundColor: item.color }}>
                 <i className={item.icon}></i>
             </span>
         );
@@ -129,7 +130,7 @@ const TimelineDemo = () => {
     const customizedContent = (item) => {
         return (
             <Card title={item.status} subTitle={item.date}>
-                { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="p-shadow-2" />}
+                { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="shadow-1" />}
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                     quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                 <Button label="Read more" className="p-button-text"></Button>
@@ -204,7 +205,7 @@ const TieredMenuDemo = () => {
 
     const customizedMarker = (item) => {
         return (
-            <span className="custom-marker p-shadow-2" style={{ backgroundColor: item.color }}>
+            <span className="custom-marker shadow-1" style={{ backgroundColor: item.color }}>
                 <i className={item.icon}></i>
             </span>
         );
@@ -213,7 +214,7 @@ const TieredMenuDemo = () => {
     const customizedContent = (item) => {
         return (
             <Card title={item.status} subTitle={item.date}>
-                { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="p-shadow-2" />}
+                { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="shadow-1" />}
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                     quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                 <Button label="Read more" className="p-button-text"></Button>
@@ -292,7 +293,7 @@ const TimelineDemo = () => {
 
     const customizedMarker = (item) => {
         return (
-            <span className="custom-marker p-shadow-2" style={{ backgroundColor: item.color }}>
+            <span className="custom-marker shadow-1" style={{ backgroundColor: item.color }}>
                 <i className={item.icon}></i>
             </span>
         );
@@ -301,7 +302,7 @@ const TimelineDemo = () => {
     const customizedContent = (item) => {
         return (
             <Card title={item.status} subTitle={item.date}>
-                { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="p-shadow-2" />}
+                { item.image && <img src={\`images/product/\${item.image}\`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="shadow-1" />}
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                     quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
                 <Button label="Read more" className="p-button-text"></Button>
@@ -597,6 +598,17 @@ const events = [
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                    <h6>Screen Reader</h6>
+                    <p>Timeline uses a semantic ordered list element to list the events. No specific role is enforced, still you may use any aria role and attributes
+                        as any valid attribute is passed to the list element.
+                    </p>
+
+                    <h5>Keyboard Support</h5>
+                    <p>Component does not include any interactive elements.</p>
+                </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>

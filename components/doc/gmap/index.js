@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const GMapDoc = memo(() => {
 
@@ -648,8 +649,8 @@ import { GMap } from 'primereact/gmap';
 `}
 </CodeHighlight>
 
-        <h5>Getting Started</h5>
-        <p>A map is initialized with options and dimensions. Refer to the google maps api for the list of available options.</p>
+                    <h5>Getting Started</h5>
+                    <p>A map is initialized with options and dimensions. Refer to the google maps api for the list of available options.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -664,9 +665,22 @@ return (
 `}
 </CodeHighlight>
 
-        <h5>Overlays</h5>
-        <p>GMap can display any type of overlay such as markers, polygons and circles. Overlay instances are bound using the overlays property array. Overlays are aware
-        of binding so whenever the array changes, gmap updates itself.</p>
+                    <h5>TypeScript</h5>
+                    <p>If you are using TypeScript you should install the Google Maps types.</p>
+
+<CodeHighlight lang="js">
+{`
+// npm install types into devDependencies
+npm i -D @types/google.maps
+
+// yarn install types into devDependencies
+yarn add @types/google.maps --production=false
+`}
+</CodeHighlight>
+
+                    <h5>Overlays</h5>
+                    <p>GMap can display any type of overlay such as markers, polygons and circles. Overlay instances are bound using the overlays property array. Overlays are aware
+                    of binding so whenever the array changes, gmap updates itself.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -693,8 +707,9 @@ return (
 `}
 </CodeHighlight>
 
-        <h5>Events</h5>
-        <p>GMap provides common callbacks to hook into events including map click, overlay click and overlay dragging.</p>
+                    <h5>Events</h5>
+                    <p>GMap provides common callbacks to hook into events including map click, overlay click and overlay dragging.</p>
+
 <CodeHighlight lang="js">
 {`
 const onMapClick = (event) => {
@@ -728,9 +743,9 @@ return (
 `}
 </CodeHighlight>
 
-        <h5>Google Maps API</h5>
-        <p>In case you need to access the map instance directly, use the getMap() method. In the following example, this.gmap.getMap() will provide the map instance. Alternative
-        is using onMapReady event as it passes the map instance as a parameter.</p>
+                    <h5>Google Maps API</h5>
+                    <p>In case you need to access the map instance directly, use the getMap() method. In the following example, this.gmap.getMap() will provide the map instance. Alternative
+                    is using onMapReady event as it passes the map instance as a parameter.</p>
 
 <CodeHighlight lang="js">
 {`
@@ -745,111 +760,115 @@ return (
 `}
 </CodeHighlight>
 
-        <h5>Properties</h5>
-        <div className="doc-tablewrapper">
-            <table className="doc-table">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Default</th>
-                    <th>Description</th>
-                </tr>
-                </thead>
-                    <tbody>
-                    <tr>
-                        <td>options</td>
-                        <td>object</td>
-                        <td>null</td>
-                        <td>Google Maps API configuration object.</td>
-                    </tr>
-                    <tr>
-                        <td>overlays</td>
-                        <td>array</td>
-                        <td>null</td>
-                        <td>An array of overlays to display.</td>
-                    </tr>
-                    <tr>
-                        <td>style</td>
-                        <td>string</td>
-                        <td>null</td>
-                        <td>Inline style of the component.</td>
-                    </tr>
-                    <tr>
-                        <td>className</td>
-                        <td>string</td>
-                        <td>null</td>
-                        <td>Style class of the component.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                                <tbody>
+                                <tr>
+                                    <td>options</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Google Maps API configuration object.</td>
+                                </tr>
+                                <tr>
+                                    <td>overlays</td>
+                                    <td>array</td>
+                                    <td>null</td>
+                                    <td>An array of overlays to display.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the component.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-        <h5>Events</h5>
-        <div className="doc-tablewrapper">
-            <table className="doc-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Parameters</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>onMapClick</td>
-                        <td>event: Google Maps MouseEvent</td>
-                        <td>Callback to invoke when map is clicked except markers.</td>
-                    </tr>
-                    <tr>
-                        <td>onMapDragEnd</td>
-                        <td>-</td>
-                        <td>Callback to invoke when map drag (i.e. pan) has ended.</td>
-                    </tr>
-                    <tr>
-                        <td>onMapReady</td>
-                        <td>event.map: Google Maps Instance</td>
-                        <td>Callback to invoke when the map is ready to be used.</td>
-                    </tr>
-                    <tr>
-                        <td>onOverlayClick</td>
-                        <td>originalEvent: Google Maps MouseEvent <br />
-                            overlay: Clicked overlay <br />
-                            map: Map instance <br /></td>
-                        <td>Callback to invoke when an overlay is clicked.</td>
-                    </tr>
-                    <tr>
-                        <td>onOverlayDragStart</td>
-                        <td>event: Google Maps MouseEvent</td>
-                        <td>Callback to invoke when an overlay drag starts.</td>
-                    </tr>
-                    <tr>
-                        <td>onOverlayDrag</td>
-                        <td>event: Google Maps MouseEvent</td>
-                        <td>Callback to invoke when an overlay is being dragged.</td>
-                    </tr>
-                    <tr>
-                        <td>onOverlayDragEnd</td>
-                        <td>event: Google Maps MouseEvent</td>
-                        <td>Callback to invoke when an overlay drag ends.</td>
-                    </tr>
-                    <tr>
-                        <td>onZoomChanged</td>
-                        <td>-</td>
-                        <td>Callback to invoke when zoom level has changed.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onMapClick</td>
+                                    <td>event: Google Maps MouseEvent</td>
+                                    <td>Callback to invoke when map is clicked except markers.</td>
+                                </tr>
+                                <tr>
+                                    <td>onMapDragEnd</td>
+                                    <td>-</td>
+                                    <td>Callback to invoke when map drag (i.e. pan) has ended.</td>
+                                </tr>
+                                <tr>
+                                    <td>onMapReady</td>
+                                    <td>event.map: Google Maps Instance</td>
+                                    <td>Callback to invoke when the map is ready to be used.</td>
+                                </tr>
+                                <tr>
+                                    <td>onOverlayClick</td>
+                                    <td>originalEvent: Google Maps MouseEvent <br />
+                                        overlay: Clicked overlay <br />
+                                        map: Map instance <br /></td>
+                                    <td>Callback to invoke when an overlay is clicked.</td>
+                                </tr>
+                                <tr>
+                                    <td>onOverlayDragStart</td>
+                                    <td>event: Google Maps MouseEvent</td>
+                                    <td>Callback to invoke when an overlay drag starts.</td>
+                                </tr>
+                                <tr>
+                                    <td>onOverlayDrag</td>
+                                    <td>event: Google Maps MouseEvent</td>
+                                    <td>Callback to invoke when an overlay is being dragged.</td>
+                                </tr>
+                                <tr>
+                                    <td>onOverlayDragEnd</td>
+                                    <td>event: Google Maps MouseEvent</td>
+                                    <td>Callback to invoke when an overlay drag ends.</td>
+                                </tr>
+                                <tr>
+                                    <td>onZoomChanged</td>
+                                    <td>-</td>
+                                    <td>Callback to invoke when zoom level has changed.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-        <h5>Styling</h5>
-        <p>Component does not apply any styling.</p>
+                    <h5>Styling</h5>
+                    <p>Component does not apply any styling.</p>
 
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <p>Refer to the <a href="https://support.google.com/maps/answer/6396990?hl=en&co=GENIE.Platform%3DDesktop">Google Maps documentation</a> for more information about accessibility.</p>
+                    </DevelopmentSection>
 
-        <h5>Dependencies</h5>
-        <p>Google Maps script.</p>
+                    <h5>Dependencies</h5>
+                    <p>Google Maps script.</p>
 
-        </TabPanel>
+                </TabPanel>
                 {
                     useLiveEditorTabs({ name: 'GMapDemo', sources: sources, extFiles: extFiles })
                 }

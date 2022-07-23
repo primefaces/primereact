@@ -2,7 +2,7 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils, DomHandler } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
 
@@ -10,6 +10,10 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
     const virtualScrollerRef = React.useRef(null);
     const filterInputRef = React.useRef(null);
     const isEmptyFilter = !(props.visibleOptions && props.visibleOptions.length) && props.hasFilter;
+    const filterOptions = {
+        filter: (e) => onFilterInputChange(e),
+        reset: () => props.resetFilter()
+    };
 
     const onEnter = () => {
         props.onEnter(() => {
@@ -25,18 +29,17 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
     const onEntered = () => {
         props.onEntered(() => {
             if (props.filter && props.filterInputAutoFocus) {
-                filterInputRef.current.focus();
+                DomHandler.focus(filterInputRef.current, false);
             }
         });
     }
 
     const onFilterInputChange = (event) => {
         virtualScrollerRef.current && virtualScrollerRef.current.scrollToIndex(0);
-
         props.onFilterInputChange && props.onFilterInputChange(event);
     }
 
-    const createGroupChildren = (optionGroup) => {
+    const createGroupChildren = (optionGroup, style) => {
         const groupChildren = props.getOptionGroupChildren(optionGroup);
         return (
             groupChildren.map((option, j) => {
@@ -45,7 +48,7 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
                 const disabled = props.isOptionDisabled(option);
 
                 return (
-                    <DropdownItem key={optionKey} label={optionLabel} option={option} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} />
+                    <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} />
                 )
             })
         )
@@ -61,15 +64,16 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
         )
     }
 
-    const createItem = (option, index) => {
+    const createItem = (option, index, scrollerOptions = {}) => {
+        const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
         if (props.optionGroupLabel) {
             const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
-            const groupChildrenContent = createGroupChildren(option);
+            const groupChildrenContent = createGroupChildren(option, style);
             const key = index + '_' + props.getOptionGroupRenderKey(option);
 
             return (
                 <React.Fragment key={key}>
-                    <li className="p-dropdown-item-group">
+                    <li className="p-dropdown-item-group" style={style}>
                         {groupContent}
                     </li>
                     {groupChildrenContent}
@@ -82,7 +86,7 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
             const disabled = props.isOptionDisabled(option);
 
             return (
-                <DropdownItem key={optionKey} label={optionLabel} option={option} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} />
+                <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} />
             )
         }
     }
@@ -100,7 +104,7 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
 
     const createFilterClearIcon = () => {
         if (props.showFilterClear && props.filterValue) {
-            return <i className="p-dropdown-filter-clear-icon pi pi-times" onClick={() => props.onFilterClearIconClick(() => filterInputRef.current.focus())}></i>
+            return <i className="p-dropdown-filter-clear-icon pi pi-times" onClick={() => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))}></i>
         }
 
         return null;
@@ -110,14 +114,33 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
         if (props.filter) {
             const clearIcon = createFilterClearIcon();
             const containerClassName = classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon });
+            let content = (
+                <div className={containerClassName}>
+                    <input ref={filterInputRef} type="text" autoComplete="off" className="p-dropdown-filter p-inputtext p-component" placeholder={props.filterPlaceholder}
+                        onKeyDown={props.onFilterInputKeyDown} onChange={onFilterInputChange} value={props.filterValue} />
+                        {clearIcon}
+                    <i className="p-dropdown-filter-icon pi pi-search"></i>
+                </div>
+            )
+
+            if (props.filterTemplate) {
+                const defaultContentOptions = {
+                    className: containerClassName,
+                    element: content,
+                    filterOptions: filterOptions,
+                    filterInputKeyDown: props.onFilterInputKeyDown,
+                    filterInputChange: onFilterInputChange,
+                    filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                    clearIcon: clearIcon,
+                    props,
+                };
+                
+                content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
+            }
+
             return (
                 <div className="p-dropdown-header">
-                    <div className={containerClassName}>
-                        <input ref={filterInputRef} type="text" autoComplete="off" className="p-dropdown-filter p-inputtext p-component" placeholder={props.filterPlaceholder}
-                            onKeyDown={props.onFilterInputKeyDown} onChange={onFilterInputChange} value={props.filterValue} />
-                        {clearIcon}
-                        <i className="p-dropdown-filter-icon pi pi-search"></i>
-                    </div>
+                    {content}
                 </div>
             )
         }
@@ -133,8 +156,9 @@ export const DropdownPanel = React.memo(React.forwardRef((props, ref) => {
                     style: { ...props.virtualScrollerOptions.style, ...{ height: props.scrollHeight } },
                     className: classNames('p-dropdown-items-wrapper', props.virtualScrollerOptions.className),
                     items: props.visibleOptions,
+                    autoSize: true,
                     onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: props.filterValue } }),
-                    itemTemplate: (item, options) => item && createItem(item, options.index),
+                    itemTemplate: (item, options) => item && createItem(item, options.index, options),
                     contentTemplate: (options) => {
                         const className = classNames('p-dropdown-items', options.className);
                         const content = isEmptyFilter ? createEmptyMessage() : options.children;

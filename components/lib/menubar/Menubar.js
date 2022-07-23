@@ -6,6 +6,7 @@ import { MenubarSub } from './MenubarSub';
 
 export const Menubar = React.memo(React.forwardRef((props, ref) => {
     const [mobileActiveState, setMobileActiveState] = React.useState(false);
+    const elementRef = React.useRef(null);
     const rootMenuRef = React.useRef(null);
     const menuButtonRef = React.useRef(null);
 
@@ -49,20 +50,12 @@ export const Menubar = React.memo(React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         toggle,
-        useCustomContent
+        useCustomContent,
+        getElement: () => elementRef.current,
+        getRootMenu: () => rootMenuRef.current,
+        getMenuButton: () => menuButtonRef.current,
+        ...props
     }));
-
-    const createCustomContent = () => {
-        if (props.children) {
-            return (
-                <div className="p-menubar-custom">
-                    {props.children}
-                </div>
-            )
-        }
-
-        return null;
-    }
 
     const createStartContent = () => {
         if (props.start) {
@@ -111,7 +104,7 @@ export const Menubar = React.memo(React.forwardRef((props, ref) => {
     const start = createStartContent();
     const end = createEndContent();
     const menuButton = createMenuButton();
-    const submenu = <MenubarSub ref={rootMenuRef} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} />;
+    const submenu = <MenubarSub ref={rootMenuRef} menuProps={props} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} />;
 
     return (
         <div id={props.id} className={className} style={props.style} {...otherProps}>
