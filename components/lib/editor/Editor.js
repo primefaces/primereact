@@ -62,25 +62,35 @@ export const Editor = React.memo(React.forwardRef((props, ref) => {
             quill.current.setContents(quill.current.clipboard.convert(props.value));
         }
 
-quill.current.on('text-change', ((delta, oldContents, source) => {
-                        let firstChild = contentRef.current.children[0];
-                        let html = firstChild ? firstChild.innerHTML : null;
-                        let text = quill.current.getText();
+        quill.current.on('text-change', (delta, oldContents, source) => {
+            let firstChild = contentRef.current.children[0];
+            let html = firstChild ? firstChild.innerHTML : null;
+            let text = quill.current.getText();
 
-                        if (html === '<p><br></p>') {
-                           html = null;
-                        }
+            if (html === '<p><br></p>') {
+               html = null;
+            }
 
-                        // GitHub #2271 prevent infinite loop on clipboard paste of HTML
-                        if (source === "api") {
-                            const htmlValue = editorElement.children[0];
-                            const editorValue = document.createElement("div");
-                            editorValue.innerHTML = props.value || "";
-                            // this is necessary because Quill rearranged style elements
-                            if (DomHandler.isEqualElement(htmlValue, editorValue)) {
-                                return;
-                            }
-                        }
+            // GitHub #2271 prevent infinite loop on clipboard paste of HTML
+            if (source === "api") {
+                const htmlValue = contentRef.current.children[0];
+                const editorValue = document.createElement("div");
+                editorValue.innerHTML = props.value || "";
+                // this is necessary because Quill rearranged style elements
+                if (DomHandler.isEqualElement(htmlValue, editorValue)) {
+                    return;
+                }
+            }
+
+            if (props.onTextChange) {
+                props.onTextChange({
+                    htmlValue: html,
+                    textValue: text,
+                    delta: delta,
+                    source: source
+                });
+            }
+        });
 
         quill.current.on('selection-change', (range, oldRange, source) => {
             if (props.onSelectionChange) {
