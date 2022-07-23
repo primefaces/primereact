@@ -2,6 +2,8 @@ import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
+const QuillJS = function() {try {return Quill;} catch {return null;}}();
+
 export const Editor = React.memo(React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
     const contentRef = React.useRef(null);
@@ -11,68 +13,83 @@ export const Editor = React.memo(React.forwardRef((props, ref) => {
 
     useMountEffect(() => {
         if (!isQuillLoaded.current) {
-            import('quill').then((module) => {
-                if (module && DomHandler.isExist(contentRef.current)) {
-                    const configuration = {
-                        modules: {
-                            toolbar: props.showHeader ? toolbarRef.current : false,
-                            ...props.modules
-                        },
-                        placeholder: props.placeholder,
-                        readOnly: props.readOnly,
-                        theme: props.theme,
-                        formats: props.formats
-                    };
+            const configuration = {
+                modules: {
+                    toolbar: props.showHeader ? toolbarRef.current : false,
+                    ...props.modules
+                },
+                placeholder: props.placeholder,
+                readOnly: props.readOnly,
+                theme: props.theme,
+                formats: props.formats
+            };
 
-                    if (module.default) {
-                        // webpack
-                        quill.current = new module.default(contentRef.current, configuration);
-                    } else {
-                        // parceljs
-                        quill.current = new module(contentRef.current, configuration);
-                    }
+            if (QuillJS) {
+                // GitHub #3097 loaded by script only
+                quill.current = new Quill(contentRef.current, configuration);
+                initQuill();
 
-                    if (props.value) {
-                        quill.current.setContents(quill.current.clipboard.convert(props.value));
-                    }
-
-                    quill.current.on('text-change', (delta, source) => {
-                        let firstChild = contentRef.current.children[0];
-                        let html = firstChild ? firstChild.innerHTML : null;
-                        let text = quill.current.getText();
-                        if (html === '<p><br></p>') {
-                            html = null;
-                        }
-
-                        if (props.onTextChange) {
-                            props.onTextChange({
-                                htmlValue: html,
-                                textValue: text,
-                                delta: delta,
-                                source: source
-                            });
-                        }
-                    });
-
-                    quill.current.on('selection-change', (range, oldRange, source) => {
-                        if (props.onSelectionChange) {
-                            props.onSelectionChange({
-                                range: range,
-                                oldRange: oldRange,
-                                source: source
-                            });
-                        }
-                    });
-                }
-            }).then(() => {
                 if (quill.current && quill.current.getModule('toolbar')) {
                     props.onLoad && props.onLoad(quill.current);
                 }
-            });
+            }
+            else {
+                import('quill').then((module) => {
+                    if (module && DomHandler.isExist(contentRef.current)) {
+                        if (module.default) {
+                            // webpack
+                            quill.current = new module.default(contentRef.current, configuration);
+                        } else {
+                            // parceljs
+                            quill.current = new module(contentRef.current, configuration);
+                        }
+    
+                        initQuill();
+                    }
+                }).then(() => {
+                    if (quill.current && quill.current.getModule('toolbar')) {
+                        props.onLoad && props.onLoad(quill.current);
+                    }
+                });
+            }
 
             isQuillLoaded.current = true;
         }
     });
+
+    const initQuill = () => {
+        if (props.value) {
+            quill.current.setContents(quill.current.clipboard.convert(props.value));
+        }
+
+        quill.current.on('text-change', (delta, source) => {
+            let firstChild = contentRef.current.children[0];
+            let html = firstChild ? firstChild.innerHTML : null;
+            let text = quill.current.getText();
+            if (html === '<p><br></p>') {
+                html = null;
+            }
+
+            if (props.onTextChange) {
+                props.onTextChange({
+                    htmlValue: html,
+                    textValue: text,
+                    delta: delta,
+                    source: source
+                });
+            }
+        });
+
+        quill.current.on('selection-change', (range, oldRange, source) => {
+            if (props.onSelectionChange) {
+                props.onSelectionChange({
+                    range: range,
+                    oldRange: oldRange,
+                    source: source
+                });
+            }
+        });
+    }
 
     useUpdateEffect(() => {
         if (quill.current && !quill.current.hasFocus()) {
