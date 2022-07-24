@@ -68,13 +68,11 @@ export const KeyFilter = {
             return;
         }
 
-        const regex = this.getRegex(keyfilter);
-        const browser = DomHandler.getBrowser();
-
         if (e.ctrlKey || e.altKey) {
             return;
         }
 
+        const browser = DomHandler.getBrowser();
         const k = this.getKey(e);
         if (browser.mozilla && (this.isNavKeyPress(e) || k === KeyFilter.KEYS.BACKSPACE || (k === KeyFilter.KEYS.DELETE && e.charCode === 0))) {
             return;
@@ -87,7 +85,8 @@ export const KeyFilter = {
             return;
         }
 
-        if (!regex.test(cc)) {
+        const regex = this.getRegex(keyfilter);
+        if (!regex.test(e.key)) {
             e.preventDefault();
         }
     },
