@@ -228,7 +228,7 @@ const items = [
 
 <CodeHighlight>
 {`
-<TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.value)}/>
+<TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}/>
 `}
 </CodeHighlight>
 
