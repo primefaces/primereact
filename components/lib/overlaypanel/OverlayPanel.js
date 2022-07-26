@@ -174,11 +174,11 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
+        props,
         toggle,
         show,
         hide,
-        getElement: () => overlayRef.current,
-        ...props
+        getElement: () => overlayRef.current
     }));
 
     const createCloseIcon = () => {

@@ -2486,6 +2486,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
+        props,
         show,
         hide,
         getCurrentDateTime,
@@ -2493,8 +2494,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         updateViewDate,
         getElement: () => elementRef.current,
         getOverlay: () => overlayRef.current,
-        getInput: () => inputRef.current,
-        ...props
+        getInput: () => inputRef.current
     }));
 
     const createBackwardNavigator = (isVisible) => {

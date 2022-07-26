@@ -7,8 +7,8 @@ export const AvatarGroup = React.forwardRef((props, ref) => {
     const className = classNames('p-avatar-group p-component', props.className);
 
     React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
+        props,
+        getElement: () => elementRef.current
     }));
 
     return (

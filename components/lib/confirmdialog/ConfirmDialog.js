@@ -94,8 +94,8 @@ export const ConfirmDialog = React.memo(React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
-        confirm,
-        ...props
+        props,
+        confirm
     }));
 
     const createFooter = () => {

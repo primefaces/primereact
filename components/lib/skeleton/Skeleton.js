@@ -13,8 +13,8 @@ export const Skeleton = React.memo(React.forwardRef((props, ref) => {
     }, props.className);
 
     React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
+        props,
+        getElement: () => elementRef.current
     }));
 
     return <div ref={elementRef} style={style} className={className} {...otherProps}></div>

@@ -178,9 +178,9 @@ export const Chips = React.memo(React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
+        props,
         getElement: () => elementRef.current,
-        getInput: () => inputRef.current,
-        ...props
+        getInput: () => inputRef.current
     }));
 
     React.useEffect(() => {

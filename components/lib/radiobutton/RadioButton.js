@@ -53,10 +53,10 @@ export const RadioButton = React.memo(React.forwardRef((props, ref) => {
     }, [inputRef, props.inputRef]);
 
     React.useImperativeHandle(ref, () => ({
+        props,
         select,
         getElement: () => elementRef.current,
-        getInput: () => inputRef.current,
-        ...props
+        getInput: () => inputRef.current
     }));
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);

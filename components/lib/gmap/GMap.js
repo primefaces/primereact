@@ -111,9 +111,9 @@ export const GMap = React.memo(React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
+        props,
         getMap,
-        getElement: () => elementRef.current,
-        ...props
+        getElement: () => elementRef.current
     }));
 
     const otherProps = ObjectUtils.findDiffKeys(props, GMap.defaultProps);

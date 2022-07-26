@@ -48,9 +48,9 @@ export const InputSwitch = React.memo(React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
+        props,
         getElement: () => elementRef.current,
-        getInput: () => elementRef.current,
-        ...props
+        getInput: () => elementRef.current
     }));
 
     React.useEffect(() => {

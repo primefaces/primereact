@@ -1324,6 +1324,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
+        props,
         reset,
         resetScroll,
         exportCSV,
@@ -1334,8 +1335,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         clearState,
         getElement: () => elementRef.current,
         getTable: () => tableRef.current,
-        getVirtualScroller: () => virtualScrollerRef.current,
-        ...props
+        getVirtualScroller: () => virtualScrollerRef.current
     }));
 
     const createLoader = () => {

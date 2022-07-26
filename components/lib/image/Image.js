@@ -146,9 +146,9 @@ export const Image = React.memo(React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
+        props,
         getElement: () => elementRef.current,
-        getImage: () => imageRef.current,
-        ...props
+        getImage: () => imageRef.current
     }));
 
     const { src, alt, width, height } = props;

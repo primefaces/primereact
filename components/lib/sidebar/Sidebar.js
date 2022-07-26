@@ -86,10 +86,10 @@ export const Sidebar = React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
+        props,
         getElement: () => sidebarRef.current,
         gteMask: () => maskRef.current,
-        getCloseIcon: () => closeIconRef.current,
-        ...props
+        getCloseIcon: () => closeIconRef.current
     }));
 
     useMountEffect(() => {

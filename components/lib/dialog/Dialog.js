@@ -399,14 +399,14 @@ export const Dialog = React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
+        props,
         resetPosition,
         getElement: () => dialogRef.current,
         getMask: () => maskRef.current,
         getContent: () => contentRef.current,
         getHeader: () => headerRef.current,
         getFooter: () => footerRef.current,
-        getCloseButton: () => closeRef.current,
-        ...props
+        getCloseButton: () => closeRef.current
     }));
 
     const createCloseIcon = () => {

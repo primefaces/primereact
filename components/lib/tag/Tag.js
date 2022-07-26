@@ -11,8 +11,8 @@ export const Tag = React.forwardRef((props, ref) => {
     const icon = IconUtils.getJSXIcon(props.icon, { className: 'p-tag-icon' }, { props });
 
     React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
+        props,
+        getElement: () => elementRef.current
     }));
 
     return (

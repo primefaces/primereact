@@ -313,12 +313,12 @@ export const Mention = React.memo(React.forwardRef((props, ref) => {
     ), [props.value, props.defaultValue, inputRef]);
 
     React.useImperativeHandle(ref, () => ({
+        props,
         show,
         hide,
         getElement: () => elementRef.current,
         getOverlay: () => overlayRef.current,
-        getInput: () => inputRef.current,
-        ...props
+        getInput: () => inputRef.current
     }));
 
     React.useEffect(() => {

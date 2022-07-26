@@ -77,8 +77,8 @@ export const Rating = React.memo(React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
+        props,
+        getElement: () => elementRef.current
     }));
 
     const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);

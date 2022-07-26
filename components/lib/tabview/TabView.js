@@ -147,9 +147,9 @@ export const TabView = React.forwardRef((props, ref) => {
     }, [props.activeIndex]);
 
     React.useImperativeHandle(ref, () => ({
+        props,
         reset,
-        getElement: () => elementRef.current,
-        ...props
+        getElement: () => elementRef.current
     }));
 
     const createTabHeader = (tab, index) => {

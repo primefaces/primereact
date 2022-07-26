@@ -66,11 +66,11 @@ export const Toast = React.memo(React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
+        props,
         show,
         replace,
         clear,
-        getElement: () => containerRef.current,
-        ...props
+        getElement: () => containerRef.current
     }));
 
     const createElement = () => {

@@ -19,8 +19,8 @@ export const Avatar = React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
+        props,
+        getElement: () => elementRef.current
     }));
 
     const otherProps = ObjectUtils.findDiffKeys(props, Avatar.defaultProps);

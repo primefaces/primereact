@@ -111,11 +111,11 @@ export const Editor = React.memo(React.forwardRef((props, ref) => {
     }, [props.value]);
 
     React.useImperativeHandle(ref, () => ({
+        props,
         getQuill: () => quill.current,
         getElement: () => elementRef.current,
         getContent: () => contentRef.current,
-        getToolbar: () => toolbarRef.current,
-        ...props
+        getToolbar: () => toolbarRef.current
     }));
 
     const createToolbarHeader = () => {

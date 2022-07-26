@@ -164,9 +164,9 @@ export const StyleClass = React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
+        props,
         getElement: () => elementRef.current,
-        getTarget: () => targetRef.current,
-        ...props
+        getTarget: () => targetRef.current
     }));
 
     useMountEffect(() => {

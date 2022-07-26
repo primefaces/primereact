@@ -454,12 +454,12 @@ export const AutoComplete = React.memo(React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
+        props,
         search,
         getElement: () => elementRef.current,
         getOverlay: () => overlayRef.current,
         getInput: () => inputRef.current,
-        getVirtualScroller: () => virtualScrollerRef.current,
-        ...props
+        getVirtualScroller: () => virtualScrollerRef.current
     }));
 
     const createSimpleAutoComplete = () => {

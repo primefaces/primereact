@@ -7,8 +7,8 @@ export const ProgressSpinner = React.memo(React.forwardRef((props, ref) => {
     const className = classNames('p-progress-spinner', props.className);
 
     React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
+        props,
+        getElement: () => elementRef.current
     }));
 
     return (

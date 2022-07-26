@@ -15,8 +15,8 @@ export const Divider = React.forwardRef((props, ref) => {
     }, props.className);
 
     React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
+        props,
+        getElement: () => elementRef.current
     }));
 
     return (

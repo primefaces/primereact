@@ -183,11 +183,11 @@ export const CascadeSelect = React.memo(React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
+        props,
         getElement: () => elementRef.current,
         getOverlay: () => overlayRef.current,
         getInput: () => inputRef.current,
-        getLabel: () => labelRef.current,
-        ...props
+        getLabel: () => labelRef.current
     }));
 
     React.useEffect(() => {

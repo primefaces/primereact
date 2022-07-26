@@ -45,9 +45,9 @@ export const Panel = React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
+        props,
         getElement: () => elementRef.current,
-        getContent: () => contentRef.current,
-        ...props
+        getContent: () => contentRef.current
     }));
 
     React.useEffect(() => {
