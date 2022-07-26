@@ -552,13 +552,13 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
+        props,
         show,
         hide,
         getElement: () => elementRef.current,
         getOverlay: () => overlayRef.current,
         getInput: () => inputRef.current,
-        getFocusInput: () => focusInputRef.current,
-        ...props
+        getFocusInput: () => focusInputRef.current
     }));
 
     React.useEffect(() => {

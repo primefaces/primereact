@@ -50,8 +50,8 @@ export const ScrollTop = React.memo(React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
-        getElement: () => scrollElementRef.current,
-        ...props
+        props,
+        getElement: () => elementRef.current
     }));
 
     useMountEffect(() => {

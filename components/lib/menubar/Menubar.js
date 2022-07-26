@@ -49,12 +49,12 @@ export const Menubar = React.memo(React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
+        props,
         toggle,
         useCustomContent,
         getElement: () => elementRef.current,
         getRootMenu: () => rootMenuRef.current,
-        getMenuButton: () => menuButtonRef.current,
-        ...props
+        getMenuButton: () => menuButtonRef.current
     }));
 
     const createStartContent = () => {

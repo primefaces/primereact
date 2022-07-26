@@ -47,13 +47,13 @@ const PrimeReactChart = React.memo(React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
+        props,
         getCanvas: () => canvasRef.current,
         getChart: () => chartRef.current,
         getBase64Image: () => chartRef.current.toBase64Image(),
         getElement: () => elementRef.current,
         generateLegend: () => chartRef.current && chartRef.current.generateLegend(),
-        refresh: () => chartRef.current && chartRef.current.update(),
-        ...props
+        refresh: () => chartRef.current && chartRef.current.update()
     }));
 
     React.useEffect(() => {

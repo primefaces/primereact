@@ -791,9 +791,9 @@ export const TreeTable = React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
+        props,
         filter,
-        getElement: () => elementRef.current,
-        ...props
+        getElement: () => elementRef.current
     }));
 
     const createTableHeader = (columns, columnGroup) => {

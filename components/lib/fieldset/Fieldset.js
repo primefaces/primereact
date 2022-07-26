@@ -104,9 +104,9 @@ export const Fieldset = React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
+        props,
         getElement: () => elementRef.current,
-        getContent: () => contentRef.current,
-        ...props
+        getContent: () => contentRef.current
     }));
 
     const otherProps = ObjectUtils.findDiffKeys(props, Fieldset.defaultProps);

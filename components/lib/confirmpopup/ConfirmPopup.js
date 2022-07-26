@@ -179,8 +179,8 @@ export const ConfirmPopup = React.memo(React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
-        confirm,
-        ...props
+        props,
+        confirm
     }));
 
     const createContent = () => {

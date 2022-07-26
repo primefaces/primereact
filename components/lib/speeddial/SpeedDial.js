@@ -146,10 +146,10 @@ export const SpeedDial = React.memo(React.forwardRef((props, ref) => {
     }, [visibleState]);
 
     React.useImperativeHandle(ref, () => ({
+        props,
         show,
         hide,
-        getElement: () => elementRef.current,
-        ...props
+        getElement: () => elementRef.current
     }));
 
     const createItem = (item, index) => {

@@ -40,8 +40,8 @@ export const ProgressBar = React.memo(React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
+        props,
+        getElement: () => elementRef.current
     }));
 
     if (props.mode === 'determinate')

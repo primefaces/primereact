@@ -164,10 +164,10 @@ export const ContextMenu = React.memo(React.forwardRef((props, ref) => {
     });
 
     React.useImperativeHandle(ref, () => ({
+        props,
         show,
         hide,
-        getElement: () => menuRef.current,
-        ...props
+        getElement: () => menuRef.current
     }));
 
     const createContextMenu = () => {

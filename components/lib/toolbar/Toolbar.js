@@ -9,8 +9,8 @@ export const Toolbar = React.memo(React.forwardRef((props, ref) => {
     const right = ObjectUtils.getJSXElement(props.right, props);
 
     React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
+        props,
+        getElement: () => elementRef.current
     }));
 
     return (

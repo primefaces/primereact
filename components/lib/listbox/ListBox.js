@@ -256,9 +256,9 @@ export const ListBox = React.memo(React.forwardRef((props, ref) => {
     }
 
     React.useImperativeHandle(ref, () => ({
+        props,
         getElement: () => elementRef.current,
-        getVirtualScroller: () => virtualScrollerRef.current,
-        ...props
+        getVirtualScroller: () => virtualScrollerRef.current
     }));
 
     useMountEffect(() => {
