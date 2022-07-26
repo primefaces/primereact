@@ -151,6 +151,19 @@
             ]
         },
         {
+            "name": "UI Kit",
+            "meta": ["uikit"],
+            "children": [
+                {
+                    "name": "Figma",
+                    "to": "/UI Kit",
+                    "meta": [
+                        "figma"
+                    ]
+                }
+            ]
+        },
+        {
             "name": "Accessibility",
             "meta": ["accessibility"],
             "children": [
