@@ -156,7 +156,7 @@
             "children": [
                 {
                     "name": "Figma",
-                    "to": "/UI Kit",
+                    "to": "/uikit",
                     "meta": [
                         "figma"
                     ]
