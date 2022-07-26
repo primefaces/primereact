@@ -341,8 +341,9 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
                 }
                 break;
 
-            //enter
+            //enter and tab
             case 13:
+            case 9:
                 newValueStr = validateValue(parseValue(inputValue));
                 inputRef.current.value = formatValue(newValueStr);
                 inputRef.current.setAttribute('aria-valuenow', newValueStr);
