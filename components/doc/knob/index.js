@@ -634,7 +634,7 @@ import { Knob } from 'primereact/knob';
                                     <td>
                                         <span className="inline-flex flex-column">
                                             <i className="mb-1">left arrow</i>
-                                            <i>up arrow</i>
+                                            <i>down arrow</i>
                                         </span>
                                     </td>
                                     <td>Decrements the value.</td>
@@ -643,7 +643,7 @@ import { Knob } from 'primereact/knob';
                                     <td>
                                         <span className="inline-flex flex-column">
                                             <i className="mb-1">right arrow</i>
-                                            <i>down arrow</i>
+                                            <i>up arrow</i>
                                         </span>
                                     </td>
                                     <td>Increments the value.</td>
