@@ -1442,6 +1442,8 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
             overlayEventListener.current = null;
         };
 
+        props.touchUI && disableModality();
+
         if (props.onVisibleChange) {
             props.onVisibleChange({
                 visible: false,
@@ -1516,6 +1518,7 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
 
             touchUIMaskClickListener.current = () => {
                 disableModality();
+                hide();
             };
             touchUIMask.current.addEventListener('click', touchUIMaskClickListener.current);
 
@@ -1534,10 +1537,12 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     }
 
     const destroyMask = () => {
-        touchUIMask.current.removeEventListener('click', touchUIMaskClickListener.current);
-        touchUIMaskClickListener.current = null;
-        document.body.removeChild(touchUIMask.current);
-        touchUIMask.current = null;
+        if (touchUIMask.current) {
+            touchUIMask.current.removeEventListener('click', touchUIMaskClickListener.current);
+            touchUIMaskClickListener.current = null;
+            document.body.removeChild(touchUIMask.current);
+            touchUIMask.current = null;
+        }
 
         let bodyChildren = document.body.children;
         let hasBlockerMasks;
