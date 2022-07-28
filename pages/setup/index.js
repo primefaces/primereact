@@ -321,6 +321,16 @@ PrimeReact.cssTransition = false; // Default value is true.
 `}
 </CodeHighlight>
 
+                <h5>nullSortOrder</h5>
+                <p>Used to determine how NULL values are sorted.  A value of <i>1</i> means sort like Excel with all NULL values at the bottom of the list.
+                   A value of <i>-1</i> sorts NULL at the top of the list in ascending mode and at the bottom of the list in descending mode.</p>
+<CodeHighlight lang="js">
+{`
+import PrimeReact from 'primereact/api';
+
+PrimeReact.nullSortOrder = -1; // Default value is 1 for Excel like sorting.
+`}
+</CodeHighlight>
                 <h5>Locale</h5>
                 <p>PrimeReact provides a Locale API to support i18n and l7n, visit the <Link href="/locale">Locale</Link> documentation for more information.</p>
 

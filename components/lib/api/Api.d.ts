@@ -27,6 +27,7 @@ interface APIOptions {
     autoZIndex?: boolean;
     zIndex?: ZIndexOptions;
     filterMatchModeOptions?: FilterMatchModeOptions;
+    nullSortOrder?: number;
 }
 
 declare const PrimeReact: APIOptions;
