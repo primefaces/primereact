@@ -611,7 +611,7 @@ import { InputNumber } from 'primereact/inputnumber';
 <CodeHighlight>
 {`
 <InputNumber value={value1} onValueChange={(e) => setValue1(e.value)} mode="decimal" minFractionDigits={2} />
-<InputNumber value={value2} onValueChange={(e) => setValue2(e.value)} mode="decimal" minFractionDigits={2} maxFracionDigits={2} />
+<InputNumber value={value2} onValueChange={(e) => setValue2(e.value)} mode="decimal" minFractionDigits={2} maxFractionDigits={2} />
 `}
 </CodeHighlight>
 
