@@ -16,6 +16,10 @@
     display: flex;
 }
 
+.p-sidebar:not([class*="p-sidebar-"]){
+    display: none;
+}
+
 .p-sidebar-mask.p-component-overlay {
     pointer-events: auto;
 }
