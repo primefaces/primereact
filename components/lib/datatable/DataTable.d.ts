@@ -87,8 +87,7 @@ interface DataTableEditingRows {
     [key: string]: boolean;
 }
 
-interface DataTableRowToggleParams {
-    data: any[];
+interface DataTableRowToggleParams extends DataTableExpandedRows {
 }
 
 interface DataTableColumnResizeEndParams {
