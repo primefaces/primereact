@@ -308,9 +308,10 @@ export const Mention = React.memo(React.forwardRef((props, ref) => {
         }
     }
 
+    const currentValue = inputRef.current && inputRef.current.value;
     const isFilled = React.useMemo(() => (
-        ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || (inputRef.current && ObjectUtils.isNotEmpty(inputRef.current.value))
-    ), [props.value, props.defaultValue, inputRef]);
+        ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || ObjectUtils.isNotEmpty(currentValue)
+    ), [props.value, props.defaultValue, currentValue]);
 
     React.useImperativeHandle(ref, () => ({
         props,
