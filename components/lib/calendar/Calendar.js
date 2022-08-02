@@ -975,7 +975,13 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         // previous (check first day of month at 00:00:00)
         if (props.minDate) {
             let firstDayOfMonth = new Date(newViewDate.getTime());
-            firstDayOfMonth.setDate(1);
+            if (firstDayOfMonth.getMonth() === 0) {
+                firstDayOfMonth.setMonth(11, 1);
+                firstDayOfMonth.setFullYear(firstDayOfMonth.getFullYear() - 1);
+            }
+            else {
+                firstDayOfMonth.setMonth(firstDayOfMonth.getMonth() - 1, 1);
+            }
             firstDayOfMonth.setHours(0);
             firstDayOfMonth.setMinutes(0);
             firstDayOfMonth.setSeconds(0);
@@ -989,8 +995,13 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
         // next (check last day of month at 11:59:59)
         if (props.maxDate) {
             let lastDayOfMonth = new Date(newViewDate.getTime());
-            lastDayOfMonth.setMonth(lastDayOfMonth.getMonth()+1);
-            lastDayOfMonth.setDate(1);
+            if (lastDayOfMonth.getMonth() === 11) {
+                lastDayOfMonth.setMonth(0, 1);
+                lastDayOfMonth.setFullYear(lastDayOfMonth.getFullYear() + 1);
+            }
+            else {
+                lastDayOfMonth.setMonth(lastDayOfMonth.getMonth() + 1, 1);
+            }
             lastDayOfMonth.setHours(0);
             lastDayOfMonth.setMinutes(0);
             lastDayOfMonth.setSeconds(0)
