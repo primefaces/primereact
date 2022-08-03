@@ -29,6 +29,7 @@ jobs:
     - name: Build
       run: |
         npm install
+        npm run type-check
         npm run lint
         npm run security-check
         npm run build-lib

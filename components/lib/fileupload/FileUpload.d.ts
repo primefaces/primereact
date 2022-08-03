@@ -82,7 +82,7 @@ interface FileUploadRemoveParams {
 }
 
 interface FileUploadProps {
-    id?: string;
+    id?: void;
     name?: string;
     url?: string;
     mode?: FileUploadModeType;
@@ -130,6 +130,7 @@ export declare class FileUpload extends React.Component<FileUploadProps, any> {
     public upload(): void;
     public clear(): void;
     public formatSize(bytes: number): number;
+    public onFileSelect(event: FileUploadSelectParams): void;
     public getElement(): HTMLElement;
     public getInput(): HTMLInputElement;
 }

@@ -21,7 +21,7 @@ interface InputMaskChangeParams {
     target: InputMaskChangeTargetOptions;
 }
 
-export interface InputMaskProps extends InputTextProps {
+export interface InputMaskProps  extends Omit<InputTextProps, 'onChange'> {
     mask?: string;
     slotChar?: string;
     autoClear?: boolean;
@@ -38,6 +38,6 @@ export interface InputMaskProps extends InputTextProps {
     children?: React.ReactNode;
 }
 
-export declare class InputMask extends React.Component<InputMaskProps, any> { 
+export declare class InputMask extends React.Component<InputMaskProps, any> {
     public getElement(): InputText;
 }
