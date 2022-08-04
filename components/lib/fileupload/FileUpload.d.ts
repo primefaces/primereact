@@ -115,6 +115,7 @@ interface FileUploadProps {
     onBeforeUpload?(e: FileUploadBeforeUploadParams): void;
     onBeforeSend?(e: FileUploadBeforeSendParams): void;
     onBeforeDrop?(e: DragEvent): void;
+    onBeforeSelect?(e: FileUploadSelectParams): void;
     onUpload?(e: FileUploadUploadParams): void;
     onError?(e: FileUploadErrorParams): void;
     onClear?(): void;

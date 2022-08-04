@@ -126,11 +126,11 @@ export class FileUploadDemo extends Component {
     }
 
     async customBase64Uploader(event) {
-        // convert file to base64 encoded 
+        // convert file to base64 encoded
         const file = event.files[0];
         const reader = new FileReader();
         let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
-        reader.readAsDataURL(blob); 
+        reader.readAsDataURL(blob);
         reader.onloadend = function () {
             const base64data = reader.result;
             console.log(base64data);
@@ -273,11 +273,11 @@ export const FileUploadDemo = () => {
     }
 
     const customBase64Uploader = async (event) => {
-        // convert file to base64 encoded 
+        // convert file to base64 encoded
         const file = event.files[0];
         const reader = new FileReader();
         let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
-        reader.readAsDataURL(blob); 
+        reader.readAsDataURL(blob);
         reader.onloadend = function () {
             const base64data = reader.result;
             console.log(base64data);
@@ -418,11 +418,11 @@ export const FileUploadDemo = () => {
     }
 
     const customBase64Uploader = async (event) => {
-        // convert file to base64 encoded 
+        // convert file to base64 encoded
         const file = event.files[0];
         const reader = new FileReader();
         let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
-        reader.readAsDataURL(blob); 
+        reader.readAsDataURL(blob);
         reader.onloadend = function () {
             const base64data = reader.result;
             console.log(base64data);
@@ -568,11 +568,11 @@ const FileUploadDemo = () => {
     }
 
     const customBase64Uploader = async (event) => {
-        // convert file to base64 encoded 
+        // convert file to base64 encoded
         const file = event.files[0];
         const reader = new FileReader();
         let blob = await fetch(file.objectURL).then(r => r.blob()); //blob:url
-        reader.readAsDataURL(blob); 
+        reader.readAsDataURL(blob);
         reader.onloadend = function () {
             const base64data = reader.result;
             console.log(base64data);
@@ -1008,6 +1008,12 @@ const buttonOptions = {
                                 <td>Callback to invoke before files dropped. Return false from callback to prevent drop.</td>
                             </tr>
                             <tr>
+                                <td>onBeforeSelect</td>
+                                <td>event.originalEvent: Original browser event. <br />
+                                    event.target.files: List of selected files.</td>
+                                <td>Callback to invoke before files are selected. Return false from callback to prevent selection.</td>
+                            </tr>
+                            <tr>
                                 <td>onUpload</td>
                                 <td>event.xhr: XmlHttpRequest instance.<br />
                                     event.files: Uploaded files.</td>
@@ -1027,7 +1033,7 @@ const buttonOptions = {
                             <tr>
                                 <td>onSelect</td>
                                 <td>event.originalEvent: Original browser event. <br />
-                                    event.files: List of selected files.</td>
+                                    event.target.files: List of selected files.</td>
                                 <td>Callback to invoke when files are selected.</td>
                             </tr>
                             <tr>

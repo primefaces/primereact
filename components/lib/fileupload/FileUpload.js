@@ -71,6 +71,11 @@ export const FileUpload = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onFileSelect = (event) => {
+        // give caller a chance to stop the selection
+        if (props.onBeforeSelect && props.onBeforeSelect(event) === false) {
+            return;
+        }
+
         if (event.type !== 'drop' && isIE11() && duplicateIEEvent.current) {
             duplicateIEEvent.current = false;
             return;
@@ -549,6 +554,7 @@ FileUpload.defaultProps = {
     onBeforeUpload: null,
     onBeforeSend: null,
     onBeforeDrop: null,
+    onBeforeSelect: null,
     onUpload: null,
     onError: null,
     onClear: null,
