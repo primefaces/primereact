@@ -226,6 +226,22 @@ const FileUploadEvents = [
         ]
     },
     {
+        name: 'onBeforeSelect',
+        description: 'Callback to invoke before files are selected. Return false from callback to prevent selection.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original browser event.'
+            },
+            {
+                name: 'event.target.files',
+                type: 'any',
+                description: 'List of selected files.'
+            }
+        ]
+    },
+    {
         name: 'onUpload',
         description: 'Callback to invoke when file upload is complete.',
         arguments: [
