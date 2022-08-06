@@ -41,7 +41,7 @@ const SidebarDemo = () => {
 
             <div className="content-section implementation">
                 <div className="card">
-                    <Sidebar visible={visibleLeft} onHide={() => setVisibleLeft(false)}>
+                    <Sidebar visible={visibleLeft} onHide={() => setVisibleLeft(false)} modal={false} dismissable>
                         <h3>Left Sidebar</h3>
                     </Sidebar>
 
