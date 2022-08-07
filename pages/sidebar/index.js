@@ -53,7 +53,7 @@ const SidebarDemo = () => {
                         <h3>Top Sidebar</h3>
                     </Sidebar>
 
-                    <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)}>
+                    <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)} modal={false} dismissable>
                         <h3>Bottom Sidebar</h3>
                     </Sidebar>
 

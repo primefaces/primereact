@@ -22,6 +22,22 @@ export const Sidebar = React.forwardRef((props, ref) => {
             }
         }
     });
+  
+    const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
+        type: 'click', listener: event => {
+             if (event.which === 2) { // left click
+                 return;
+             }
+
+             if (isOutsideClicked(event)) {
+                 onClose(event);
+             }
+        }
+    });
+  
+    const isOutsideClicked = (event) => {
+        return sidebarRef && sidebarRef.current && !sidebarRef.current.contains(event.target);
+    }
 
     const getPositionClass = () => {
         const positions = ['left', 'right', 'top', 'bottom'];
@@ -71,6 +87,10 @@ export const Sidebar = React.forwardRef((props, ref) => {
         if (props.closeOnEscape) {
             bindDocumentEscapeListener();
         }
+      
+        if (props.dismissable && !props.modal) {
+            bindDocumentClickListener();
+        }
 
         if (props.blockScroll) {
             DomHandler.addClass(document.body, 'p-overflow-hidden');
@@ -79,6 +99,7 @@ export const Sidebar = React.forwardRef((props, ref) => {
 
     const disableDocumentSettings = () => {
         unbindDocumentEscapeListener();
+        unbindDocumentClickListener();
 
         if (props.blockScroll) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');

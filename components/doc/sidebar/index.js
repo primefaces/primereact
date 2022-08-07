@@ -55,7 +55,7 @@ export class SidebarDemo extends Component {
                         <h3>Top Sidebar</h3>
                     </Sidebar>
 
-                    <Sidebar visible={this.state.visibleBottom} position="bottom" onHide={() => this.setState({ visibleBottom: false })}>
+                    <Sidebar visible={this.state.visibleBottom} position="bottom" onHide={() => this.setState({ visibleBottom: false })} modal={false} dismissable>
                         <h3>Bottom Sidebar</h3>
                     </Sidebar>
 
@@ -121,7 +121,7 @@ const SidebarDemo = () => {
                     <h3>Top Sidebar</h3>
                 </Sidebar>
 
-                <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)}>
+                <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)} modal={false} dismissable>
                     <h3>Bottom Sidebar</h3>
                 </Sidebar>
 
@@ -186,7 +186,7 @@ const SidebarDemo = () => {
                     <h3>Top Sidebar</h3>
                 </Sidebar>
 
-                <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)}>
+                <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)} modal={false} dismissable>
                     <h3>Bottom Sidebar</h3>
                 </Sidebar>
 
@@ -254,7 +254,7 @@ const SidebarDemo = () => {
                     <h3>Top Sidebar</h3>
                 </Sidebar>
 
-                <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)}>
+                <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)} modal={false} dismissable>
                     <h3>Bottom Sidebar</h3>
                 </Sidebar>
 
