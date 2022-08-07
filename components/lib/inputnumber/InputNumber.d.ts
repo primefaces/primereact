@@ -21,7 +21,7 @@ interface InputNumberChangeParams {
     value: number | null;
 }
 
-export interface InputNumberProps  extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'ref'> {
+export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'ref'> {
     value?: number | null;
     inputRef?: React.Ref<HTMLInputElement>;
     format?: boolean;
@@ -51,7 +51,6 @@ export interface InputNumberProps  extends Omit<React.DetailedHTMLProps<React.HT
     required?: boolean;
     tabIndex?: number;
     pattern?: string;
-    inputMode?: string;
     placeholder?: string;
     readOnly?: boolean;
     size?: number;

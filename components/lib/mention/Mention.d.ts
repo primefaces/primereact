@@ -28,7 +28,7 @@ interface MentionSelectParams {
     suggestion: any;
 }
 
-export interface MentionProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onInput' | 'onFocus' | 'onBlur' | 'ref'> {
+export interface MentionProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onSelect' | 'onChange' | 'onInput' | 'onFocus' | 'onBlur' | 'ref'> {
     inputId?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     trigger?: MentionTriggerType;
@@ -56,7 +56,7 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.InputHT
     children?: React.ReactNode;
 }
 
-export declare class Mention extends React.Component<MentionProps, any> { 
+export declare class Mention extends React.Component<MentionProps, any> {
     public getElement(): HTMLDivElement;
     public getInput(): InputTextarea;
     public getOverlay(): HTMLElement;

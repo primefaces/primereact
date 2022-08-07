@@ -7,7 +7,7 @@ interface StepsSelectParams {
     index: number;
 }
 
-export interface StepsProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface StepsProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onSelect' | 'ref'> {
     model: MenuItem[];
     activeIndex?: number;
     readOnly?: boolean;
@@ -15,6 +15,6 @@ export interface StepsProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
     children?: React.ReactNode;
 }
 
-export declare class Steps extends React.Component<StepsProps, any> { 
+export declare class Steps extends React.Component<StepsProps, any> {
     public getElement(): HTMLDivElement;
 }

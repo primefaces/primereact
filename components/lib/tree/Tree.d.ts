@@ -78,7 +78,7 @@ interface TreeSelectionParams {
     value: TreeSelectionKeys;
 }
 
-interface TreeEventNodeParams {
+export interface TreeEventNodeParams {
     originalEvent: React.SyntheticEvent;
     node: TreeNode;
 }

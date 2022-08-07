@@ -57,7 +57,9 @@ interface TreeSelectCheckboxSelectionKeyType {
     partialChecked?: boolean;
 }
 
-interface TreeSelectEventNodeParams extends TreeEventNodeParams {
+interface TreeSelectEventNodeParams {
+    originalEvent: React.SyntheticEvent;
+    node: TreeNode;
 }
 
 interface TreeSelectFilterValueChangeParams {
@@ -112,6 +114,6 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     children?: React.ReactNode;
 }
 
-export declare class TreeSelect extends React.Component<TreeSelectProps, any> { 
+export declare class TreeSelect extends React.Component<TreeSelectProps, any> {
     public getElement(): HTMLDivElement;
 }
