@@ -80,7 +80,7 @@ export const DataView = React.memo(React.forwardRef((props, ref) => {
             value.sort((data1, data2) => {
                 let value1 = ObjectUtils.resolveFieldData(data1, props.sortField);
                 let value2 = ObjectUtils.resolveFieldData(data2, props.sortField);
-                return ObjectUtils.sort(value1, value2, props.sortOrder, PrimeReact.locale);
+                return ObjectUtils.sort(value1, value2, props.sortOrder, PrimeReact.locale, PrimeReact.nullSortOrder);
             });
 
             return value;

@@ -261,7 +261,7 @@ export const Carousel = React.memo(React.forwardRef((props, ref) => {
             responsiveOptions.current.sort((data1, data2) => {
                 const value1 = data1.breakpoint;
                 const value2 = data2.breakpoint;
-                return ObjectUtils.sort(value1, value2, -1, PrimeReact.locale);
+                return ObjectUtils.sort(value1, value2, -1, PrimeReact.locale, PrimeReact.nullSortOrder);
             });
 
             for (let i = 0; i < responsiveOptions.current.length; i++) {
