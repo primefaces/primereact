@@ -32,5 +32,4 @@ jobs:
         npm run lint
         npm run security-check
         npm run build-lib
-        npm run type-check
 
