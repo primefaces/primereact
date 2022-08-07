@@ -184,7 +184,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 const sortField = getSortField();
                 const value1 = ObjectUtils.resolveFieldData(node1.data, sortField);
                 const value2 = ObjectUtils.resolveFieldData(node2.data, sortField);
-                return ObjectUtils.sort(value1, value2, getSortOrder(), PrimeReact.locale);
+                return ObjectUtils.sort(value1, value2, getSortOrder(), PrimeReact.locale, PrimeReact.nullSortOrder);
             });
 
             for (let i = 0; i < value.length; i++) {

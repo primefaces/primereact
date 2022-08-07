@@ -862,7 +862,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     }
 
     const compareValuesOnSort = (value1, value2, order) => {
-        return ObjectUtils.sort(value1, value2, order, PrimeReact.locale);
+        return ObjectUtils.sort(value1, value2, order, PrimeReact.locale, PrimeReact.nullSortOrder);
     }
 
     const addSortMeta = (meta, multiSortMeta) => {

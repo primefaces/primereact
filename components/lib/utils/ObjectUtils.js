@@ -1,5 +1,3 @@
-import PrimeReact from '../api/Api';
-
 export default class ObjectUtils {
 
     static equals(obj1, obj2, field) {
@@ -189,10 +187,10 @@ export default class ObjectUtils {
         return !this.isEmpty(value);
     }
 
-    static sort(value1, value2, order = 1, locale) {
+    static sort(value1, value2, order = 1, locale, nullSortOrder = 1) {
         let result = null;
 
-        const emptyValue1 = this.isEmpty(value1); 
+        const emptyValue1 = this.isEmpty(value1);
         const emptyValue2 = this.isEmpty(value2);
 
         if (emptyValue1 && emptyValue2)
@@ -207,7 +205,7 @@ export default class ObjectUtils {
             result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
 
         // nullSortOrder == 1 means Excel like sort nulls at bottom
-        const nullSortOrder = PrimeReact.nullSortOrder === 1 ? order: PrimeReact.nullSortOrder;
-        return nullSortOrder * result;
+        const finalSortOrder = nullSortOrder === 1 ? order: nullSortOrder;
+        return finalSortOrder * result;
     }
 }
