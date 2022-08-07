@@ -82,7 +82,7 @@ interface FileUploadRemoveParams {
 }
 
 interface FileUploadProps {
-    id?: void;
+    id?: string;
     name?: string;
     url?: string;
     mode?: FileUploadModeType;
