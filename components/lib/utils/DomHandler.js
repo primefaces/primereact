@@ -197,6 +197,7 @@ export default class DomHandler {
             else
                 return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
         }
+        return false;
     }
 
     static find(element, selector) {
@@ -747,7 +748,7 @@ export default class DomHandler {
 
     static isVisible(element) {
         // https://stackoverflow.com/a/59096915/502366 (in future use IntersectionObserver)
-        return element && ( 
+        return element && (
             element.clientHeight !== 0 ||
             element.getClientRects().length !== 0 ||
             getComputedStyle(element).display !== 'none'
