@@ -175,17 +175,17 @@ const DropdownDemo = () => {
             <div className="content-section implementation dropdown-demo">
                 <div className="card">
                     <h5>Basic</h5>
-                    <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" placeholder="Select a City" />
+                    <Dropdown value={selectedCity1} options={cities} onChange={onCityChange} optionLabel="name" optionValue="code" placeholder="Select a City" />
 
                     <h5>Editable</h5>
-                    <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
+                    <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" optionValue="code" editable />
 
                     <h5>Grouped</h5>
                     <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
                         optionGroupTemplate={groupedItemTemplate} />
 
                     <h5>Advanced with Templating, Filtering and Clear Icon</h5>
-                    <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
+                    <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" optionValue="code" filter showClear filterBy="name" placeholder="Select a Country"
                         valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
 
                     <h5>Virtual Scroll (100000 Items)</h5>
