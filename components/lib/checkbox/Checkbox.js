@@ -11,24 +11,26 @@ export const Checkbox = React.memo(React.forwardRef((props, ref) => {
     const onClick = (event) => {
         if (!props.disabled && !props.readOnly && props.onChange) {
             const checked = isChecked();
-            const value = checked ? props.falseValue : props.trueValue;
 
-            props.onChange({
-                originalEvent: event,
-                value: props.value,
-                checked: value,
-                stopPropagation: () => { },
-                preventDefault: () => { },
-                target: {
-                    type: 'checkbox',
-                    name: props.name,
-                    id: props.id,
+            if (inputRef.current.checked === checked) {
+                const value = checked ? props.falseValue : props.trueValue;
+                props.onChange({
+                    originalEvent: event,
                     value: props.value,
                     checked: value,
-                }
-            });
+                    stopPropagation: () => { },
+                    preventDefault: () => { },
+                    target: {
+                        type: 'checkbox',
+                        name: props.name,
+                        id: props.id,
+                        value: props.value,
+                        checked: value,
+                    }
+                });
+                inputRef.current.checked = !checked;
+            }
 
-            inputRef.current.checked = !checked;
             DomHandler.focus(inputRef.current);
             event.preventDefault();
         }

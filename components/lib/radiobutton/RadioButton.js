@@ -14,21 +14,26 @@ export const RadioButton = React.memo(React.forwardRef((props, ref) => {
 
     const onClick = (e) => {
         if (!props.disabled && props.onChange) {
-            props.onChange({
-                originalEvent: e,
-                value: props.value,
-                checked: !props.checked,
-                stopPropagation: () => { },
-                preventDefault: () => { },
-                target: {
-                    name: props.name,
-                    id: props.id,
+            const checked = props.checked;
+            if (inputRef.current.checked === checked) {
+                const value = !checked
+                props.onChange({
+                    originalEvent: e,
                     value: props.value,
-                    checked: !props.checked
-                }
-            });
+                    checked: value,
+                    stopPropagation: () => { },
+                    preventDefault: () => { },
+                    target: {
+                        type: 'radio',
+                        name: props.name,
+                        id: props.id,
+                        value: props.value,
+                        checked: value,
+                    }
+                });
+                inputRef.current.checked = value;
+            }
 
-            inputRef.current.checked = !props.checked;
             DomHandler.focus(inputRef.current);
             e.preventDefault();
         }

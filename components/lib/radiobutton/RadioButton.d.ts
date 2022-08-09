@@ -2,6 +2,7 @@ import * as React from 'react';
 import TooltipOptions from '../tooltip/tooltipoptions';
 
 interface RadioButtonChangeTargetOptions {
+    type: string;
     name: string;
     id: string;
     value: any;
