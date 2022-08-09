@@ -3,7 +3,7 @@ import TooltipOptions from '../tooltip/tooltipoptions';
 import { IconType } from '../utils';
 
 interface CheckboxChangeTargetOptions {
-    type: 'checkbox';
+    type: string;
     name: string;
     id: string;
     value: any;
