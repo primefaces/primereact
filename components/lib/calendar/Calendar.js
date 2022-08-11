@@ -2452,6 +2452,10 @@ export const Calendar = React.memo(React.forwardRef((props, ref) => {
     });
 
     useUpdateEffect(() => {
+        setCurrentView(props.view);
+    }, [props.view])
+
+    useUpdateEffect(() => {
         if (!props.onViewDateChange && !viewStateChanged.current) {
             let propValue = props.value;
             if (Array.isArray(propValue)) {
