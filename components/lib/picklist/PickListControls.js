@@ -3,10 +3,10 @@ import { Button } from '../button/Button';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const PickListControls = React.memo((props) => {
-    const moveDisabled = !props.selection.length;
+    const moveDisabled = !props.selection || !props.selection.length;
 
     const moveUp = (event) => {
-        let selectedItems = props.selection;
+        const selectedItems = props.selection;
 
         if (selectedItems && selectedItems.length) {
             let list = [...props.list];

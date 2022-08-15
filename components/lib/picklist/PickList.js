@@ -16,8 +16,8 @@ export const PickList = React.memo(React.forwardRef((props, ref) => {
     const targetListElementRef = React.useRef(null);
     const reorderedListElementRef = React.useRef(null);
     const reorderDirection = React.useRef(null);
-    const sourceSelection = props.onSourceSelectionChange ? props.sourceSelection : sourceSelectionState;
-    const targetSelection = props.onTargetSelectionChange ? props.targetSelection : targetSelectionState;
+    const sourceSelection = props.sourceSelection ? props.sourceSelection : sourceSelectionState;
+    const targetSelection = props.targetSelection ? props.targetSelection : targetSelectionState;
     const sourceFilteredValue = props.onSourceFilterChange ? props.sourceFilterValue : sourceFilterValueState;
     const targetFilteredValue = props.onTargetFilterChange ? props.targetFilterValue : targetFilterValueState;
     const hasFilterBy = ObjectUtils.isNotEmpty(props.filterBy);
@@ -77,39 +77,44 @@ export const PickList = React.memo(React.forwardRef((props, ref) => {
     const onTransfer = (event) => {
         const { originalEvent, source, target, direction } = event;
 
+        let selectedValue = [];
         switch (direction) {
             case 'toTarget':
+                selectedValue = sourceSelection;
                 if (props.onMoveToTarget) {
                     props.onMoveToTarget({
                         originalEvent,
-                        value: sourceSelection
+                        value: selectedValue
                     })
                 }
                 break;
 
             case 'allToTarget':
+                selectedValue = props.source;
                 if (props.onMoveAllToTarget) {
                     props.onMoveAllToTarget({
                         originalEvent,
-                        value: props.source
+                        value: selectedValue
                     })
                 }
                 break;
 
             case 'toSource':
+                selectedValue = targetSelection;
                 if (props.onMoveToSource) {
                     props.onMoveToSource({
                         originalEvent,
-                        value: targetSelection
+                        value: selectedValue
                     })
                 }
                 break;
 
             case 'allToSource':
+                selectedValue = props.target;
                 if (props.onMoveAllToSource) {
                     props.onMoveAllToSource({
                         originalEvent,
-                        value: props.target
+                        value: selectedValue
                     })
                 }
                 break;
@@ -118,8 +123,8 @@ export const PickList = React.memo(React.forwardRef((props, ref) => {
                 break;
         }
 
-        onSelectionChange({ originalEvent, value: [] }, 'sourceSelection', props.onSourceSelectionChange);
-        onSelectionChange({ originalEvent, value: [] }, 'targetSelection', props.onTargetSelectionChange);
+        onSelectionChange({ originalEvent, value: selectedValue }, 'sourceSelection', props.onSourceSelectionChange);
+        onSelectionChange({ originalEvent, value: selectedValue }, 'targetSelection', props.onTargetSelectionChange);
         handleChange(event, source, target);
     }
 
@@ -131,14 +136,13 @@ export const PickList = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onSelectionChange = (e, stateKey, callback) => {
+        if (stateKey === 'sourceSelection')
+            setSourceSelectionState(e.value);
+        else
+            setTargetSelectionState(e.value);
+
         if (callback) {
             callback(e);
-        }
-        else {
-            if (stateKey === 'sourceSelection')
-                setSourceSelectionState(e.value);
-            else
-                setTargetSelectionState(e.value);
         }
 
         if (ObjectUtils.isNotEmpty(sourceSelection) && stateKey === 'targetSelection') {
