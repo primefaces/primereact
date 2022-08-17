@@ -57,9 +57,7 @@ interface TreeSelectCheckboxSelectionKeyType {
     partialChecked?: boolean;
 }
 
-interface TreeSelectEventNodeParams {
-    originalEvent: React.SyntheticEvent;
-    node: TreeNode;
+interface TreeSelectEventNodeParams extends TreeEventNodeParams {
 }
 
 interface TreeSelectFilterValueChangeParams {
@@ -70,6 +68,15 @@ interface TreeSelectFilterValueChangeParams {
 interface TreeSelectFilterOptions {
     filter?: (event?: KeyboardEvent) => void;
     reset?: () => void;
+}
+
+interface TreeSelectExpandedKeysType {
+    [key: string]: boolean;
+}
+
+interface TreeSelectExpandedParams {
+    originalEvent: React.SyntheticEvent;
+    value: TreeSelectExpandedKeysType;
 }
 
 export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'|'value' | 'ref'> {
@@ -87,6 +94,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     panelClassName?: string;
     appendTo?: TreeSelectAppendToType;
     emptyMessage?: string;
+    expandedKeys?: TreeSelectExpandedKeysType;
     display?: TreeSelectDisplayType;
     metaKeySelection?: boolean;
     valueTemplate?: TreeSelectValueTemplateType;
@@ -106,6 +114,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     onShow?(): void;
     onHide?(): void;
     onChange?(e: TreeSelectChangeParams): void;
+    onToggle?(e: TreeSelectExpandedParams): void;
     onNodeSelect?(e: TreeSelectEventNodeParams): void;
     onNodeUnselect?(e: TreeSelectEventNodeParams): void;
     onNodeExpand?(e: TreeSelectEventNodeParams): void;
@@ -114,6 +123,6 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     children?: React.ReactNode;
 }
 
-export declare class TreeSelect extends React.Component<TreeSelectProps, any> {
+export declare class TreeSelect extends React.Component<TreeSelectProps, any> { 
     public getElement(): HTMLDivElement;
 }
