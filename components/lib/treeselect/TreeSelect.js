@@ -10,7 +10,7 @@ import { TreeSelectPanel } from './TreeSelectPanel';
 export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
     const [focusedState, setFocusedState] = React.useState(false);
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
-    const [expandedKeysState, setExpandedKeysState] = React.useState({});
+    const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
     const [filterValueState, setFilterValueState] = React.useState('');
     const elementRef = React.useRef(null);
     const overlayRef = React.useRef(null);
@@ -18,6 +18,7 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
     const focusInputRef = React.useRef(null);
     const triggerRef = React.useRef(null);
     const selfChange = React.useRef(null);
+    const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
     const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
     const isValueEmpty = ObjectUtils.isEmpty(props.value);
     const hasNoOptions = ObjectUtils.isEmpty(props.options);
@@ -89,7 +90,12 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
     }
 
     const onNodeToggle = (e) => {
-        setExpandedKeysState(e.value);
+        if (props.onToggle) {
+            props.onToggle(e);
+        }
+        else {
+            setExpandedKeysState(e.value);
+        }
     }
 
     const onFilterValueChange = (e) => {
@@ -388,7 +394,7 @@ export const TreeSelect = React.memo(React.forwardRef((props, ref) => {
             <>
                 <Tree value={props.options} selectionMode={props.selectionMode} selectionKeys={props.value} metaKeySelection={props.metaKeySelection}
                     onSelectionChange={onSelectionChange} onSelect={onNodeSelect} onUnselect={onNodeUnselect}
-                    expandedKeys={expandedKeysState} onToggle={onNodeToggle}
+                    expandedKeys={expandedKeys} onToggle={onNodeToggle}
                     onExpand={props.onNodeExpand} onCollapse={props.onNodeCollapse}
                     filter={props.filter} filterValue={filteredValue} filterBy={props.filterBy} filterMode={props.filterMode}
                     filterPlaceholder={props.filterPlaceholder} filterLocale={props.filterLocale} showHeader={false} onFilterValueChange={onFilterValueChange}>
@@ -524,6 +530,7 @@ TreeSelect.defaultProps = {
     ariaLabel: null,
     ariaLabelledBy: null,
     selectionMode: 'single',
+    expandedKeys: null,
     panelStyle: null,
     panelClassName: null,
     appendTo: null,

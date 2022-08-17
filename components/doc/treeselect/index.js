@@ -1,17 +1,17 @@
-import React, { memo } from 'react';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
-import { CodeHighlight } from '../common/codehighlight';
-import { DevelopmentSection } from '../common/developmentsection';
+import React, { memo } from "react";
+import { TabView, TabPanel } from "../../lib/tabview/TabView";
+import { useLiveEditorTabs } from "../common/liveeditor";
+import { CodeHighlight } from "../common/codehighlight";
+import { DevelopmentSection } from "../common/developmentsection";
 
 const TreeSelectDoc = memo(() => {
-
     const sources = {
-        'class': {
-            tabName: 'Class Source',
+        class: {
+            tabName: "Class Source",
             content: `
 import React, { Component } from 'react';
 import { TreeSelect } from 'primereact/treeselect';
+import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
 import './TreeSelectDemo.css';
 
@@ -26,9 +26,36 @@ export class TreeSelectDemo extends Component {
             selectedNodeKey3: '0-1',
             selectedNodeKeys1: null,
             selectedNodeKeys2: null
+            expandedKeys: {}
         };
 
         this.nodeService = new NodeService();
+        this.expandAll = this.expandAll.bind(this);
+        this.collapseAll = this.collapseAll.bind(this);
+        this.expandNode = this.expandNode.bind(this);
+    }
+
+    expandAll() {
+        let expandedKeys = {};
+        for (let node of this.state.nodes) {
+            this.expandNode(node, expandedKeys);
+        }
+
+        this.setState({ expandedKeys });
+    }
+
+    collapseAll() {
+        this.setState({ expandedKeys: {} });
+    }
+
+    expandNode(node, expandedKeys) {
+        if (node.children && node.children.length) {
+            expandedKeys[node.key] = true;
+
+            for (let child of node.children) {
+                this.expandNode(child, expandedKeys);
+            }
+        }
     }
 
     componentDidMount() {
@@ -38,33 +65,91 @@ export class TreeSelectDemo extends Component {
     render() {
         return (
             <div className="treeselect-demo">
-                <div className="card">
+               <div className="card">
                     <h5>Single</h5>
-                    <TreeSelect value={this.state.selectedNodeKey1} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey1: e.value })} placeholder="Select Item"></TreeSelect>
+                    <TreeSelect
+                        value={selectedNodeKey1}
+                        expandedKeys={expandedKeys}
+                        options={nodes}
+                        onToggle={(e) => setExpandedKeys(e.value)}
+                        onChange={(e) => setSelectedNodeKey1(e.value)}
+                        placeholder="Select Item"
+                    ></TreeSelect>
 
                     <h5>Multiple</h5>
-                    <TreeSelect value={this.state.selectedNodeKeys1} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKeys1: e.value })} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
+                    <TreeSelect
+                        value={selectedNodeKeys1}
+                        expandedKeys={expandedKeys}
+                        options={nodes}
+                        onToggle={(e) => setExpandedKeys(e.value)}
+                        onChange={(e) => setSelectedNodeKeys1(e.value)}
+                        selectionMode="multiple"
+                        metaKeySelection={false}
+                        placeholder="Select Items"
+                    ></TreeSelect>
 
                     <h5>Checkbox</h5>
-                    <TreeSelect value={this.state.selectedNodeKeys2} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKeys2: e.value })} display="chip" selectionMode="checkbox" placeholder="Select Items"></TreeSelect>
+                    <TreeSelect
+                        value={selectedNodeKeys2}
+                        expandedKeys={expandedKeys}
+                        options={nodes}
+                        onToggle={(e) => setExpandedKeys(e.value)}
+                        onChange={(e) => setSelectedNodeKeys2(e.value)}
+                        display="chip"
+                        selectionMode="checkbox"
+                        placeholder="Select Items"
+                    ></TreeSelect>
 
                     <h5>Filter</h5>
-                    <TreeSelect value={this.state.selectedNodeKey2} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey2: e.value })} filter placeholder="Select Items"></TreeSelect>
+                    <TreeSelect
+                        value={selectedNodeKey2}
+                        expandedKeys={expandedKeys}
+                        options={nodes}
+                        onToggle={(e) => setExpandedKeys(e.value)}
+                        onChange={(e) => setSelectedNodeKey2(e.value)}
+                        filter
+                        placeholder="Select Items"
+                    ></TreeSelect>
 
                     <h5>Initial Value</h5>
-                    <TreeSelect value={this.state.selectedNodeKey3} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey3: e.value })} placeholder="Select Item"></TreeSelect>
+                    <TreeSelect
+                        value={selectedNodeKey3}
+                        expandedKeys={expandedKeys}
+                        options={nodes}
+                        onToggle={(e) => setExpandedKeys(e.value)}
+                        onChange={(e) => setSelectedNodeKey3(e.value)}
+                        placeholder="Select Item"
+                    ></TreeSelect>
+
+                    <h5>Programmatic Control</h5>
+                    <div className="mb-4">
+                        <Button
+                            type="button"
+                            icon="pi pi-plus"
+                            label="Expand All"
+                            onClick={expandAll}
+                            className="mr-2"
+                        />
+                        <Button
+                            type="button"
+                            icon="pi pi-minus"
+                            label="Collapse All"
+                            onClick={collapseAll}
+                        />
+                    </div>
                 </div>
             </div>
         )
     }
 }
-                `
+                `,
         },
-        'hooks': {
-            tabName: 'Hooks Source',
+        hooks: {
+            tabName: "Hooks Source",
             content: `
 import React, { useState, useEffect } from 'react';
 import { TreeSelect } from 'primereact/treeselect';
+import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
 import './TreeSelectDemo.css';
 
@@ -76,6 +161,30 @@ const TreeSelectDemo = () => {
     const [selectedNodeKeys1, setSelectedNodeKeys1] = useState(null);
     const [selectedNodeKeys2, setSelectedNodeKeys2] = useState(null);
     const nodeService = new NodeService();
+    const [expandedKeys, setExpandedKeys] = useState({});
+
+    const expandAll = () => {
+        let _expandedKeys = {};
+        for (let node of nodes) {
+            expandNode(node, _expandedKeys);
+        }
+
+        setExpandedKeys(_expandedKeys);
+    };
+
+    const collapseAll = () => {
+        setExpandedKeys({});
+    };
+
+    const expandNode = (node, _expandedKeys) => {
+        if (node.children && node.children.length) {
+            _expandedKeys[node.key] = true;
+
+            for (let child of node.children) {
+                expandNode(child, _expandedKeys);
+            }
+        }
+    };
 
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
@@ -83,32 +192,90 @@ const TreeSelectDemo = () => {
 
     return (
         <div className="treeselect-demo">
-            <div className="card">
-                <h5>Single</h5>
-                <TreeSelect value={selectedNodeKey1} options={nodes} onChange={(e) => setSelectedNodeKey1(e.value)} placeholder="Select Item"></TreeSelect>
+        <div className="card">
+        <h5>Single</h5>
+        <TreeSelect
+            value={selectedNodeKey1}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKey1(e.value)}
+            placeholder="Select Item"
+        ></TreeSelect>
 
-                <h5>Multiple</h5>
-                <TreeSelect value={selectedNodeKeys1} options={nodes} onChange={(e) => setSelectedNodeKeys1(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
+        <h5>Multiple</h5>
+        <TreeSelect
+            value={selectedNodeKeys1}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKeys1(e.value)}
+            selectionMode="multiple"
+            metaKeySelection={false}
+            placeholder="Select Items"
+        ></TreeSelect>
 
-                <h5>Checkbox</h5>
-                <TreeSelect value={selectedNodeKeys2} options={nodes} onChange={(e) => setSelectedNodeKeys2(e.value)} display="chip" selectionMode="checkbox" placeholder="Select Items"></TreeSelect>
+        <h5>Checkbox</h5>
+        <TreeSelect
+            value={selectedNodeKeys2}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKeys2(e.value)}
+            display="chip"
+            selectionMode="checkbox"
+            placeholder="Select Items"
+        ></TreeSelect>
 
-                <h5>Filter</h5>
-                <TreeSelect value={selectedNodeKey2} options={nodes} onChange={(e) => setSelectedNodeKey2(e.value)} filter placeholder="Select Items"></TreeSelect>
+        <h5>Filter</h5>
+        <TreeSelect
+            value={selectedNodeKey2}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKey2(e.value)}
+            filter
+            placeholder="Select Items"
+        ></TreeSelect>
 
-                <h5>Initial Value</h5>
-                <TreeSelect value={selectedNodeKey3} options={nodes} onChange={(e) => setSelectedNodeKey3(e.value)} placeholder="Select Item"></TreeSelect>
-            </div>
+        <h5>Initial Value</h5>
+        <TreeSelect
+            value={selectedNodeKey3}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKey3(e.value)}
+            placeholder="Select Item"
+        ></TreeSelect>
+
+        <h5>Programmatic Control</h5>
+        <div className="mb-4">
+            <Button
+                type="button"
+                icon="pi pi-plus"
+                label="Expand All"
+                onClick={expandAll}
+                className="mr-2"
+            />
+            <Button
+                type="button"
+                icon="pi pi-minus"
+                label="Collapse All"
+                onClick={collapseAll}
+            />
+        </div>
+    </div>
         </div>
     );
 }
-                `
+                `,
         },
-        'ts': {
-            tabName: 'TS Source',
+        ts: {
+            tabName: "TS Source",
             content: `
 import React, { useState, useEffect } from 'react';
 import { TreeSelect } from 'primereact/treeselect';
+import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
 import './TreeSelectDemo.css';
 
@@ -120,45 +287,125 @@ const TreeSelectDemo = () => {
     const [selectedNodeKeys1, setSelectedNodeKeys1] = useState(null);
     const [selectedNodeKeys2, setSelectedNodeKeys2] = useState(null);
     const nodeService = new NodeService();
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const expandAll = () => {
+        let _expandedKeys = {};
+        for (let node of nodes) {
+            expandNode(node, _expandedKeys);
+        }
 
+        setExpandedKeys(_expandedKeys);
+    };
+
+    const collapseAll = () => {
+        setExpandedKeys({});
+    };
+
+    const expandNode = (node, _expandedKeys) => {
+        if (node.children && node.children.length) {
+            _expandedKeys[node.key] = true;
+
+            for (let child of node.children) {
+                expandNode(child, _expandedKeys);
+            }
+        }
+    };
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="treeselect-demo">
-            <div className="card">
-                <h5>Single</h5>
-                <TreeSelect value={selectedNodeKey1} options={nodes} onChange={(e) => setSelectedNodeKey1(e.value)} placeholder="Select Item"></TreeSelect>
+        <div className="card">
+        <h5>Single</h5>
+        <TreeSelect
+            value={selectedNodeKey1}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKey1(e.value)}
+            placeholder="Select Item"
+        ></TreeSelect>
 
-                <h5>Multiple</h5>
-                <TreeSelect value={selectedNodeKeys1} options={nodes} onChange={(e) => setSelectedNodeKeys1(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
+        <h5>Multiple</h5>
+        <TreeSelect
+            value={selectedNodeKeys1}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKeys1(e.value)}
+            selectionMode="multiple"
+            metaKeySelection={false}
+            placeholder="Select Items"
+        ></TreeSelect>
 
-                <h5>Checkbox</h5>
-                <TreeSelect value={selectedNodeKeys2} options={nodes} onChange={(e) => setSelectedNodeKeys2(e.value)} display="chip" selectionMode="checkbox" placeholder="Select Items"></TreeSelect>
+        <h5>Checkbox</h5>
+        <TreeSelect
+            value={selectedNodeKeys2}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKeys2(e.value)}
+            display="chip"
+            selectionMode="checkbox"
+            placeholder="Select Items"
+        ></TreeSelect>
 
-                <h5>Filter</h5>
-                <TreeSelect value={selectedNodeKey2} options={nodes} onChange={(e) => setSelectedNodeKey2(e.value)} filter placeholder="Select Items"></TreeSelect>
+        <h5>Filter</h5>
+        <TreeSelect
+            value={selectedNodeKey2}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKey2(e.value)}
+            filter
+            placeholder="Select Items"
+        ></TreeSelect>
 
-                <h5>Initial Value</h5>
-                <TreeSelect value={selectedNodeKey3} options={nodes} onChange={(e) => setSelectedNodeKey3(e.value)} placeholder="Select Item"></TreeSelect>
-            </div>
+        <h5>Initial Value</h5>
+        <TreeSelect
+            value={selectedNodeKey3}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKey3(e.value)}
+            placeholder="Select Item"
+        ></TreeSelect>
+
+        <h5>Programmatic Control</h5>
+        <div className="mb-4">
+            <Button
+                type="button"
+                icon="pi pi-plus"
+                label="Expand All"
+                onClick={expandAll}
+                className="mr-2"
+            />
+            <Button
+                type="button"
+                icon="pi pi-minus"
+                label="Collapse All"
+                onClick={collapseAll}
+            />
+        </div>
+    </div>
         </div>
     );
 }
-                `
+                `,
         },
-        'browser': {
-            tabName: 'Browser Source',
+        browser: {
+            tabName: "Browser Source",
             imports: `
         <link rel="stylesheet" href="./TreeSelectDemo.css" />
         <script src="./NodeService.js"></script>
 
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/treeselect/treeselect.min.js"></script>`,
+        <script src="https://unpkg.com/primereact/treeselect/treeselect.min.js"></script> <script src="https://unpkg.com/primereact/button/button.min.js"></script>`,
             content: `
 const { useEffect, useState } = React;
 const { TreeSelect } = primereact.treeselect;
+const { Button } = primereact.button;
 
 const TreeSelectDemo = () => {
     const [nodes, setNodes] = useState(null);
@@ -168,38 +415,117 @@ const TreeSelectDemo = () => {
     const [selectedNodeKeys1, setSelectedNodeKeys1] = useState(null);
     const [selectedNodeKeys2, setSelectedNodeKeys2] = useState(null);
     const nodeService = new NodeService();
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const expandAll = () => {
+        let _expandedKeys = {};
+        for (let node of nodes) {
+            expandNode(node, _expandedKeys);
+        }
 
+        setExpandedKeys(_expandedKeys);
+    };
+
+    const collapseAll = () => {
+        setExpandedKeys({});
+    };
+
+    const expandNode = (node, _expandedKeys) => {
+        if (node.children && node.children.length) {
+            _expandedKeys[node.key] = true;
+
+            for (let child of node.children) {
+                expandNode(child, _expandedKeys);
+            }
+        }
+    };
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="treeselect-demo">
-            <div className="card">
-                <h5>Single</h5>
-                <TreeSelect value={selectedNodeKey1} options={nodes} onChange={(e) => setSelectedNodeKey1(e.value)} placeholder="Select Item"></TreeSelect>
+        <div className="card">
+        <h5>Single</h5>
+        <TreeSelect
+            value={selectedNodeKey1}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKey1(e.value)}
+            placeholder="Select Item"
+        ></TreeSelect>
 
-                <h5>Multiple</h5>
-                <TreeSelect value={selectedNodeKeys1} options={nodes} onChange={(e) => setSelectedNodeKeys1(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
+        <h5>Multiple</h5>
+        <TreeSelect
+            value={selectedNodeKeys1}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKeys1(e.value)}
+            selectionMode="multiple"
+            metaKeySelection={false}
+            placeholder="Select Items"
+        ></TreeSelect>
 
-                <h5>Checkbox</h5>
-                <TreeSelect value={selectedNodeKeys2} options={nodes} onChange={(e) => setSelectedNodeKeys2(e.value)} display="chip" selectionMode="checkbox" placeholder="Select Items"></TreeSelect>
+        <h5>Checkbox</h5>
+        <TreeSelect
+            value={selectedNodeKeys2}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKeys2(e.value)}
+            display="chip"
+            selectionMode="checkbox"
+            placeholder="Select Items"
+        ></TreeSelect>
 
-                <h5>Filter</h5>
-                <TreeSelect value={selectedNodeKey2} options={nodes} onChange={(e) => setSelectedNodeKey2(e.value)} filter placeholder="Select Items"></TreeSelect>
+        <h5>Filter</h5>
+        <TreeSelect
+            value={selectedNodeKey2}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKey2(e.value)}
+            filter
+            placeholder="Select Items"
+        ></TreeSelect>
 
-                <h5>Initial Value</h5>
-                <TreeSelect value={selectedNodeKey3} options={nodes} onChange={(e) => setSelectedNodeKey3(e.value)} placeholder="Select Item"></TreeSelect>
-            </div>
+        <h5>Initial Value</h5>
+        <TreeSelect
+            value={selectedNodeKey3}
+            expandedKeys={expandedKeys}
+            options={nodes}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKey3(e.value)}
+            placeholder="Select Item"
+        ></TreeSelect>
+
+        <h5>Programmatic Control</h5>
+        <div className="mb-4">
+            <Button
+                type="button"
+                icon="pi pi-plus"
+                label="Expand All"
+                onClick={expandAll}
+                className="mr-2"
+            />
+            <Button
+                type="button"
+                icon="pi pi-minus"
+                label="Collapse All"
+                onClick={collapseAll}
+            />
+        </div>
+    </div>
         </div>
     );
 }
-                `
-        }
+                `,
+        },
     };
 
     const extFiles = {
-        'demo/TreeSelectDemo.css': {
+        "demo/TreeSelectDemo.css": {
             content: `
 .treeselect-demo .p-treeselect {
     width: 20rem;
@@ -209,41 +535,48 @@ const TreeSelectDemo = () => {
         width: 100%;
     }
 }
-                `
-        }
-    }
+                `,
+        },
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { TreeSelect } from 'primereact/treeselect';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/treeselect/treeselect.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>TreeSelect component requires an array of TreeNode objects as its <i>options</i> and keys of the nodes as its value.</p>
+                    <p>
+                        TreeSelect component requires an array of TreeNode
+                        objects as its <i>options</i> and keys of the nodes as
+                        its value.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} placeholder="Select Item"></TreeSelect>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>In example below, nodes are retrieved from a remote data source.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        In example below, nodes are retrieved from a remote data
+                        source.
+                    </p>
+                    <CodeHighlight lang="js">
+                        {`
 export const TreeSelectDemo = () => {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
@@ -258,10 +591,10 @@ export const TreeSelectDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 export class NodeService {
 
     getTreeNodes() {
@@ -270,11 +603,11 @@ export class NodeService {
 
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <p>The json response sample would be as following.</p>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 {
     "root": [
         {
@@ -330,7 +663,7 @@ export class NodeService {
     ]
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>TreeNode API utilized by the TreeSelect</h5>
                     <div className="doc-tablewrapper">
@@ -366,7 +699,10 @@ export class NodeService {
                                     <td>icon</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Icon of the node to display next to content.</td>
+                                    <td>
+                                        Icon of the node to display next to
+                                        content.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>children</td>
@@ -390,24 +726,86 @@ export class NodeService {
                                     <td>selectable</td>
                                     <td>boolean</td>
                                     <td>null</td>
-                                    <td>Whether the node is selectable when selection mode is enabled.</td>
+                                    <td>
+                                        Whether the node is selectable when
+                                        selection mode is enabled.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>leaf</td>
                                     <td>boolean</td>
                                     <td>null</td>
-                                    <td>Specifies if the node has children. Used in lazy loading.</td>
+                                    <td>
+                                        Specifies if the node has children. Used
+                                        in lazy loading.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
+
+                    <h5>Controlled vs Uncontrolled</h5>
+                    <p>Tree expansion state is managed in two ways, in uncontrolled mode only initial expanded state of a node can be defined using <i>expandedKeys</i> property whereas in controlled mode <i>expandedKeys</i>
+                        property along with <i>onToggle</i> properties are used for full control over the state. If you need to expand or collapse the state of nodes programmatically then controlled mode should be used. Example below demonstrates
+                        both cases;</p>
+
+                    <CodeHighlight lang="js">
+                        {`
+import React, { Component } from 'react';
+import { TreeSelect } from 'primereact/treeselect';
+import { Button } from 'primereact/button';
+import { NodeService } from '../service/NodeService';
+
+export const TreeSelectDemo = () => {
+
+    const [nodes, setNodes] = useState(null);
+    const [expandedKeys, setExpandedKeys] = useState({});
+
+    useEffect(() => {
+        nodeService = new NodeService();
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, [])
+
+    const toggleMovies = () => {
+        let expandedKeys = {...expandedKeys};
+        if (expandedKeys['2'])
+            delete expandedKeys['2'];
+        else
+            expandedKeys['2'] = true;
+
+        setExpandedKeys(expandedKeys);
+    }
+
+    return (
+        <div>
+            <h3 className="first">Uncontrolled</h5>
+            <TreeSelect value={nodes} />
+
+            <h5>Controlled</h5>
+            <Button onClick={toggleMovies} label="Toggle Movies" />
+            <TreeSelect value={nodes} expandedKeys={expandedKeys}
+                onToggle={e => setExpandedKeys(e.value)} style={{marginTop: '.5em'}} />
+        </div>
+    )
+}
+`}
+                    </CodeHighlight>
                     <h5>Selection</h5>
-                    <p>TreeSelect supports "single", "multiple" and "checkbox" selection modes. Define <i>selectionMode</i>, <i>value</i> and <i>onChange</i> properties to control the selection. In single mode, selectionKeys should
-        be a single value whereas in multiple or checkbox modes an object is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i> property. Note that
-        in touch enabled devices, Tree does not require metaKey.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        TreeSelect supports "single", "multiple" and "checkbox"
+                        selection modes. Define <i>selectionMode</i>,
+                        <i>value</i> and <i>onChange</i> properties to control
+                        the selection. In single mode, selectionKeys should be a
+                        single value whereas in multiple or checkbox modes an
+                        object is required. By default in multiple selection
+                        mode, metaKey is necessary to add to existing selections
+                        however this can be configured with
+                        <i>metaKeySelection</i> property. Note that in touch
+                        enabled devices, Tree does not require metaKey.
+                    </p>
+                    <CodeHighlight lang="js">
+                        {`
 import React, {Component} from 'react';
 import {TreeSelect} from 'primereact/treeselect';
 import {NodeService} from '../service/NodeService';
@@ -438,15 +836,23 @@ export const TreeSelectionDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Value Format</h5>
-                    <p>Value passed to and from the TreeSelect via the value property should be a an object with key-value pairs where key is the node key and
-                        value is a boolean to indicate selection. On the other hand
-                    in "checkbox" mode, instead of a boolean, value should be an object that has "checked" and "partialChecked" properties to represent the checked state of a node. Best way to clarify it is prepopulating a TreeSelect with an existing value.</p>
+                    <p>
+                        Value passed to and from the TreeSelect via the value
+                        property should be a an object with key-value pairs
+                        where key is the node key and value is a boolean to
+                        indicate selection. On the other hand in "checkbox"
+                        mode, instead of a boolean, value should be an object
+                        that has "checked" and "partialChecked" properties to
+                        represent the checked state of a node. Best way to
+                        clarify it is prepopulating a TreeSelect with an
+                        existing value.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 data() {
     return {
         selectedNodeKey1: '2-1',
@@ -456,22 +862,35 @@ data() {
     }
 },
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Chips Display</h5>
-                    <p>A comma separated list is used by default to display selected items whereas alternative chip mode is provided using the <i>display</i> property to visualize the items as tokens.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        A comma separated list is used by default to display
+                        selected items whereas alternative chip mode is provided
+                        using the <i>display</i> property to visualize the items
+                        as tokens.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <TreeSelect value={selectedNodeKeys} display="chip" options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} selectionMode="multiple" placeholder="Select Items" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Templating</h5>
-                    <p>Label of an option is used as the display text of an item by default, for custom content support define a <i>valueTemplate</i> that gets the selected nodes as a parameter. 
-                    For custom filter support define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.
-                    In addition <i>header</i>, <i>footer</i> and <i>emptyMessage</i> templates are provided for further customization.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Label of an option is used as the display text of an
+                        item by default, for custom content support define a
+                        <i>valueTemplate</i> that gets the selected nodes as a
+                        parameter. For custom filter support define a
+                        <i>filterTemplate</i> function that gets the option
+                        instance as a parameter and returns the content for the
+                        filter element. In addition <i>header</i>, <i>footer</i>
+                        and <i>emptyMessage</i> templates are provided for
+                        further customization.
+                    </p>
+                    <CodeHighlight>
+                        {`
 const [filterValue, setFilterValue] = useState('');
 const filterInputRef = useRef();
 
@@ -504,32 +923,46 @@ const myFilterFunction = (event, options) => {
     options.filter(event);
 }
 `}
-</CodeHighlight>
-<CodeHighlight>
-{`
+                    </CodeHighlight>
+                    <CodeHighlight>
+                        {`
 <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} valueTemplate={valueTemplate} placeholder="Select Items" filter filterTemplate={filterTemplate}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Filtering</h5>
-                    <p>Filtering is enabled by setting the <i>filter</i> property to true, by default label property of a node
-                    is used to compare against the value in the text field, in order to customize which field(s) should be used during search define <i>filterBy</i> property.</p>
+                    <p>
+                        Filtering is enabled by setting the <i>filter</i>
+                        property to true, by default label property of a node is
+                        used to compare against the value in the text field, in
+                        order to customize which field(s) should be used during
+                        search define <i>filterBy</i> property.
+                    </p>
 
-                    <p>In addition <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the other hand,
-                    in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.</p>
+                    <p>
+                        In addition <i>filterMode</i> specifies the filtering
+                        strategy. In <b>lenient</b> mode when the query matches
+                        a node, children of the node are not searched further as
+                        all descendants of the node are included. On the other
+                        hand, in <b>strict</b> mode when the query matches a
+                        node, filtering continues on all descendants.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 <TreeSelect options={nodes} filter />
 
 <TreeSelect options={nodes} filter filterBy="data.name,data.age" />
 
 <TreeSelect options={nodes} filter filterMode="strict" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
+                    <p>
+                        Any valid attribute is passed to the root element
+                        implicitly, extended properties are as follows;
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -551,7 +984,10 @@ const myFilterFunction = (event, options) => {
                                     <td>value</td>
                                     <td>any</td>
                                     <td>null</td>
-                                    <td>A single or an object of keys to control the selection state.</td>
+                                    <td>
+                                        A single or an object of keys to control
+                                        the selection state.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>name</td>
@@ -575,7 +1011,10 @@ const myFilterFunction = (event, options) => {
                                     <td>disabled</td>
                                     <td>boolean</td>
                                     <td>false</td>
-                                    <td>When present, it specifies that the component should be disabled.</td>
+                                    <td>
+                                        When present, it specifies that the
+                                        component should be disabled.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>options</td>
@@ -587,7 +1026,9 @@ const myFilterFunction = (event, options) => {
                                     <td>scrollHeight</td>
                                     <td>string</td>
                                     <td>400px</td>
-                                    <td>Maximum height of the options panel.</td>
+                                    <td>
+                                        Maximum height of the options panel.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>placeholder</td>
@@ -599,7 +1040,9 @@ const myFilterFunction = (event, options) => {
                                     <td>tabIndex</td>
                                     <td>number</td>
                                     <td>null</td>
-                                    <td>Index of the element in tabbing order.</td>
+                                    <td>
+                                        Index of the element in tabbing order.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>inputId</td>
@@ -611,7 +1054,10 @@ const myFilterFunction = (event, options) => {
                                     <td>ariaLabel</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Used to define a string that labels the component.</td>
+                                    <td>
+                                        Used to define a string that labels the
+                                        component.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>ariaLabelledBy</td>
@@ -623,44 +1069,72 @@ const myFilterFunction = (event, options) => {
                                     <td>selectionMode</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Defines the selection mode, valid values "single", "multiple", and "checkbox".</td>
+                                    <td>
+                                        Defines the selection mode, valid values
+                                        "single", "multiple", and "checkbox".
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>panelClassName</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Style class of the overlay panel element.</td>
+                                    <td>
+                                        Style class of the overlay panel
+                                        element.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>panelStyle</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Inline style of the overlay panel element.</td>
+                                    <td>
+                                        Inline style of the overlay panel
+                                        element.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>appendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay
+                                        panel should be mounted. Valid values
+                                        are any DOM Element and 'self'. The
+                                        <i>self</i> value is used to render a
+                                        component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>emptyMessage</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Text to display when there is no data.</td>
+                                    <td>
+                                        Text to display when there is no data.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>display</td>
                                     <td>string</td>
                                     <td>comma</td>
-                                    <td>Defines how the selected items are displayed, valid values are "comma" and "chip".</td>
+                                    <td>
+                                        Defines how the selected items are
+                                        displayed, valid values are "comma" and
+                                        "chip".
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>metaKeySelection</td>
                                     <td>boolean</td>
                                     <td>true</td>
-                                    <td>Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item
-                                        can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
+                                    <td>
+                                        Defines how multiple items can be
+                                        selected, when true metaKey needs to be
+                                        pressed to select or unselect an item
+                                        and when set to false selection of each
+                                        item can be toggled individually. On
+                                        touch enabled devices, metaKeySelection
+                                        is turned off automatically.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>valueTemplate</td>
@@ -690,7 +1164,18 @@ const myFilterFunction = (event, options) => {
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of
+                                        <a
+                                            href="https://reactcommunity.org/react-transition-group/css-transition"
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                        >
+                                            CSSTransition
+                                        </a>
+                                        can be customized, except for "nodeRef"
+                                        and "in" properties.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>dropdownIcon</td>
@@ -702,49 +1187,77 @@ const myFilterFunction = (event, options) => {
                                     <td>filter</td>
                                     <td>boolean</td>
                                     <td>false</td>
-                                    <td>When specified, displays an input field to filter the items.</td>
+                                    <td>
+                                        When specified, displays an input field
+                                        to filter the items.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>filterValue</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>When filtering is enabled, the value of input field.</td>
+                                    <td>
+                                        When filtering is enabled, the value of
+                                        input field.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>filterBy</td>
                                     <td>string</td>
                                     <td>label</td>
-                                    <td>When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.</td>
+                                    <td>
+                                        When filtering is enabled, filterBy
+                                        decides which field or fields (comma
+                                        separated) to search against.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>filterMode</td>
                                     <td>string</td>
                                     <td>lenient</td>
-                                    <td>Mode for filtering valid values are "lenient" and "strict". Default is lenient.</td>
+                                    <td>
+                                        Mode for filtering valid values are
+                                        "lenient" and "strict". Default is
+                                        lenient.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>filterPlaceholder</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>Placeholder text to show when filter input is empty.</td>
+                                    <td>
+                                        Placeholder text to show when filter
+                                        input is empty.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>filterLocale</td>
                                     <td>string</td>
                                     <td>undefined</td>
-                                    <td>Locale to use in filtering. The default locale is the host environment's current locale.</td>
+                                    <td>
+                                        Locale to use in filtering. The default
+                                        locale is the host environment's current
+                                        locale.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>filterInputAutoFocus</td>
                                     <td>boolean</td>
                                     <td>true</td>
-                                    <td>When the panel is opened, it specifies that the filter input should focus automatically.</td>
+                                    <td>
+                                        When the panel is opened, it specifies
+                                        that the filter input should focus
+                                        automatically.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>resetFilterOnHide</td>
                                     <td>boolean</td>
                                     <td>false</td>
-                                    <td>Clears the filter value when hiding the dropdown.</td>
+                                    <td>
+                                        Clears the filter value when hiding the
+                                        dropdown.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -764,49 +1277,102 @@ const myFilterFunction = (event, options) => {
                                 <tr>
                                     <td>onShow</td>
                                     <td>-</td>
-                                    <td>Callback to invoke when the overlay is shown.</td>
+                                    <td>
+                                        Callback to invoke when the overlay is
+                                        shown.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>onHide</td>
                                     <td>-</td>
-                                    <td>Callback to invoke when the overlay is hidden.</td>
+                                    <td>
+                                        Callback to invoke when the overlay is
+                                        hidden.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>event.originalEvent: browser event <br />
-                                    event.value: Selected node key(s).</td>
-                                    <td>Callback to invoke when selection changes.</td>
+                                    <td>
+                                        event.originalEvent: browser event
+                                        <br />
+                                        event.value: Selected node key(s).
+                                    </td>
+                                    <td>
+                                        Callback to invoke when selection
+                                        changes.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>onToggle</td>
+                                    <td>
+                                        event.originalEvent: browser event
+                                        <br />
+                                        event.node: Toggled node instance.
+                                    </td>
+                                    <td>
+                                        Callback to invoke when a node is
+                                        toggled.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>onNodeSelect</td>
-                                    <td>event.originalEvent: browser event <br />
-                                    event.node: Selected node instance.</td>
-                                    <td>Callback to invoke when a node is selected.</td>
+                                    <td>
+                                        event.originalEvent: browser event
+                                        <br />
+                                        event.node: Selected node instance.
+                                    </td>
+                                    <td>
+                                        Callback to invoke when a node is
+                                        selected.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>onNodeUnselect</td>
-                                    <td>event.originalEvent: browser event <br />
-                                    event.node: Unselected node instance.</td>
-                                    <td>Callback to invoke when a node is unselected.</td>
+                                    <td>
+                                        event.originalEvent: browser event
+                                        <br />
+                                        event.node: Unselected node instance.
+                                    </td>
+                                    <td>
+                                        Callback to invoke when a node is
+                                        unselected.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>onNodeExpand</td>
-                                    <td>event.originalEvent: browser event <br />
-                                    event.node: Expanded node instance.</td>
-                                    <td>Callback to invoke when a node is expanded.</td>
+                                    <td>
+                                        event.originalEvent: browser event
+                                        <br />
+                                        event.node: Expanded node instance.
+                                    </td>
+                                    <td>
+                                        Callback to invoke when a node is
+                                        expanded.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>onNodeCollapse</td>
-                                    <td>event.originalEvent: browser event <br />
-                                    event.node: Collapsed node instance.</td>
-                                    <td>Callback to invoke when a node is collapsed.</td>
+                                    <td>
+                                        event.originalEvent: browser event
+                                        <br />
+                                        event.node: Collapsed node instance.
+                                    </td>
+                                    <td>
+                                        Callback to invoke when a node is
+                                        collapsed.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>onFilterValueChange</td>
-                                    <td>event.originalEvent: Browser event <br/>
-                                        event.value: the filtered value <br/>
+                                    <td>
+                                        event.originalEvent: Browser event
+                                        <br />
+                                        event.value: the filtered value <br />
                                     </td>
-                                    <td>Callback to invoke when filter value changes.</td>
+                                    <td>
+                                        Callback to invoke when filter value
+                                        changes.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -849,7 +1415,10 @@ const myFilterFunction = (event, options) => {
                                 </tr>
                                 <tr>
                                     <td>p-treeselect-label-container</td>
-                                    <td>Container of the label to display selected items.</td>
+                                    <td>
+                                        Container of the label to display
+                                        selected items.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>p-treeselect-label</td>
@@ -871,159 +1440,290 @@ const myFilterFunction = (event, options) => {
                         </table>
 
                         <h5>Accessibility</h5>
-                    <DevelopmentSection>
-                        <h6>Screen Reader</h6>
-                        <p>Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The treeselect element has a <i>combobox</i> role
-                        in addition to <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the combobox and the popup is created with <i>aria-controls</i> that refers to the id of the popup.</p>
-                        <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the <i>combobox</i> element and uses <i>tree</i> as the role. Each list item has a <i>treeitem</i> role along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-expanded</i> attributes. 
-                        In checkbox selection, <i>aria-checked</i> is used instead of <i>aria-selected</i>. Checkbox and toggle icons are hidden from screen readers as their parent element with <i>treeitem</i> role and attributes are used instead for readers and keyboard support.
-                        The container element of a treenode has the <i>group</i> role. The <i>aria-setsize</i>, <i>aria-posinset</i> and <i>aria-level</i> attributes are calculated implicitly and added to each treeitem.</p>
+                        <DevelopmentSection>
+                            <h6>Screen Reader</h6>
+                            <p>
+                                Value to describe the component can either be
+                                provided with <i>aria-labelledby</i> or
+                                <i>aria-label</i> props. The treeselect element
+                                has a <i>combobox</i> role in addition to
+                                <i>aria-haspopup</i> and <i>aria-expanded</i>
+                                attributes. The relation between the combobox
+                                and the popup is created with
+                                <i>aria-controls</i> that refers to the id of
+                                the popup.
+                            </p>
+                            <p>
+                                The popup list has an id that refers to the
+                                <i>aria-controls</i> attribute of the
+                                <i>combobox</i> element and uses <i>tree</i> as
+                                the role. Each list item has a <i>treeitem</i>
+                                role along with <i>aria-label</i>,
+                                <i>aria-selected</i> and <i>aria-expanded</i>
+                                attributes. In checkbox selection,
+                                <i>aria-checked</i> is used instead of
+                                <i>aria-selected</i>. Checkbox and toggle icons
+                                are hidden from screen readers as their parent
+                                element with <i>treeitem</i> role and attributes
+                                are used instead for readers and keyboard
+                                support. The container element of a treenode has
+                                the <i>group</i> role. The <i>aria-setsize</i>,
+                                <i>aria-posinset</i> and <i>aria-level</i>
+                                attributes are calculated implicitly and added
+                                to each treeitem.
+                            </p>
 
-                        <p>If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the filter input element.</p>
-    <CodeHighlight>
-{`
+                            <p>
+                                If filtering is enabled, <i>filterInputProps</i>
+                                can be defined to give <i>aria-*</i> props to
+                                the filter input element.
+                            </p>
+                            <CodeHighlight>
+                                {`
 <span id="dd1">Options</span>
 <TreeSelect aria-labelledby="dd1" />
 
 <TreeSelect aria-label="Options" />
 `}
-    </CodeHighlight>
-                        <h6>Closed State Keyboard Support</h6>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Key</th>
-                                        <th>Function</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><i>tab</i></td>
-                                        <td>Moves focus to the treeselect element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>space</i></td>
-                                        <td>Opens the popup and moves visual focus to the selected treenode, if there is none then first treenode receives the focus.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>down arrow</i></td>
-                                        <td>Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            </CodeHighlight>
+                            <h6>Closed State Keyboard Support</h6>
+                            <div className="doc-tablewrapper">
+                                <table className="doc-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Key</th>
+                                            <th>Function</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <i>tab</i>
+                                            </td>
+                                            <td>
+                                                Moves focus to the treeselect
+                                                element.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>space</i>
+                                            </td>
+                                            <td>
+                                                Opens the popup and moves visual
+                                                focus to the selected treenode,
+                                                if there is none then first
+                                                treenode receives the focus.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>down arrow</i>
+                                            </td>
+                                            <td>
+                                                Opens the popup and moves visual
+                                                focus to the selected option, if
+                                                there is none then first option
+                                                receives the focus.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                        <h6>Popup Keyboard Support</h6>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Key</th>
-                                        <th>Function</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><i>tab</i></td>
-                                        <td>Moves focus to the next focusable element in the popup, if there is none then first focusable element receives the focus.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>shift</i> + <i>tab</i></td>
-                                        <td>Moves focus to the previous focusable element in the popup, if there is none then last focusable element receives the focus.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>enter</i></td>
-                                        <td>Selects the focused option, closes the popup if selection mode is single.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>space</i></td>
-                                        <td>Selects the focused option, closes the popup if selection mode is single.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>escape</i></td>
-                                        <td>Closes the popup, moves focus to the treeselect element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>down arrow</i></td>
-                                        <td>Moves focus to the next treenode.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>up arrow</i></td>
-                                        <td>Moves focus to the previous treenode.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>right arrow</i></td>
-                                        <td>If node is closed, opens the node otherwise moves focus to the first child node.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>left arrow</i></td>
-                                        <td>If node is open, closes the node otherwise moves focus to the parent node.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            <h6>Popup Keyboard Support</h6>
+                            <div className="doc-tablewrapper">
+                                <table className="doc-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Key</th>
+                                            <th>Function</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <i>tab</i>
+                                            </td>
+                                            <td>
+                                                Moves focus to the next
+                                                focusable element in the popup,
+                                                if there is none then first
+                                                focusable element receives the
+                                                focus.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>shift</i> + <i>tab</i>
+                                            </td>
+                                            <td>
+                                                Moves focus to the previous
+                                                focusable element in the popup,
+                                                if there is none then last
+                                                focusable element receives the
+                                                focus.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>enter</i>
+                                            </td>
+                                            <td>
+                                                Selects the focused option,
+                                                closes the popup if selection
+                                                mode is single.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>space</i>
+                                            </td>
+                                            <td>
+                                                Selects the focused option,
+                                                closes the popup if selection
+                                                mode is single.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>escape</i>
+                                            </td>
+                                            <td>
+                                                Closes the popup, moves focus to
+                                                the treeselect element.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>down arrow</i>
+                                            </td>
+                                            <td>
+                                                Moves focus to the next
+                                                treenode.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>up arrow</i>
+                                            </td>
+                                            <td>
+                                                Moves focus to the previous
+                                                treenode.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>right arrow</i>
+                                            </td>
+                                            <td>
+                                                If node is closed, opens the
+                                                node otherwise moves focus to
+                                                the first child node.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>left arrow</i>
+                                            </td>
+                                            <td>
+                                                If node is open, closes the node
+                                                otherwise moves focus to the
+                                                parent node.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                        <h6>Filter Input Keyboard Support</h6>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Key</th>
-                                        <th>Function</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><i>enter</i></td>
-                                        <td>Closes the popup and moves focus to the treeselect element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>escape</i></td>
-                                        <td>Closes the popup and moves focus to the treeselect element.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            <h6>Filter Input Keyboard Support</h6>
+                            <div className="doc-tablewrapper">
+                                <table className="doc-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Key</th>
+                                            <th>Function</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <i>enter</i>
+                                            </td>
+                                            <td>
+                                                Closes the popup and moves focus
+                                                to the treeselect element.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>escape</i>
+                                            </td>
+                                            <td>
+                                                Closes the popup and moves focus
+                                                to the treeselect element.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                        <h6>Close Button Keyboard Support</h6>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Key</th>
-                                        <th>Function</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><i>enter</i></td>
-                                        <td>Closes the popup and moves focus to the treeselect element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>space</i></td>
-                                        <td>Closes the popup and moves focus to the treeselect element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>escape</i></td>
-                                        <td>Closes the popup and moves focus to the treeselect element.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </DevelopmentSection>
+                            <h6>Close Button Keyboard Support</h6>
+                            <div className="doc-tablewrapper">
+                                <table className="doc-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Key</th>
+                                            <th>Function</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <i>enter</i>
+                                            </td>
+                                            <td>
+                                                Closes the popup and moves focus
+                                                to the treeselect element.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>space</i>
+                                            </td>
+                                            <td>
+                                                Closes the popup and moves focus
+                                                to the treeselect element.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>escape</i>
+                                            </td>
+                                            <td>
+                                                Closes the popup and moves focus
+                                                to the treeselect element.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </DevelopmentSection>
                         <h5>Dependencies</h5>
                         <p>None.</p>
                     </div>
-
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'TreeSelectDemo', sources: sources, service: 'NodeService', data: 'treenodes', extFiles: extFiles })
-                }
+                {useLiveEditorTabs({
+                    name: "TreeSelectDemo",
+                    sources: sources,
+                    service: "NodeService",
+                    data: "treenodes",
+                    extFiles: extFiles,
+                })}
             </TabView>
         </div>
     );
-})
+});
 
 export default TreeSelectDoc;
