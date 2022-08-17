@@ -57,7 +57,9 @@ interface TreeSelectCheckboxSelectionKeyType {
     partialChecked?: boolean;
 }
 
-interface TreeSelectEventNodeParams extends TreeEventNodeParams {
+interface TreeSelectEventNodeParams  {
+    originalEvent: React.SyntheticEvent;
+    node: TreeNode;
 }
 
 interface TreeSelectFilterValueChangeParams {
