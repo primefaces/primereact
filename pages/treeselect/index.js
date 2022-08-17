@@ -13,6 +13,7 @@ const TreeSelectDemo = () => {
     const [selectedNodeKey3, setSelectedNodeKey3] = useState('0-1');
     const [selectedNodeKeys1, setSelectedNodeKeys1] = useState(null);
     const [selectedNodeKeys2, setSelectedNodeKeys2] = useState(null);
+    const [selectedNodeKeys3, setSelectedNodeKeys3] = useState(null);
     const nodeService = new NodeService();
     const [expandedKeys, setExpandedKeys] = useState({});
     
@@ -57,13 +58,11 @@ const TreeSelectDemo = () => {
             </div>
 
             <div className="content-section implementation treeselect-demo">
-                <div className="card">
+            <div className="card">
                     <h5>Single</h5>
                     <TreeSelect
                         value={selectedNodeKey1}
-                        expandedKeys={expandedKeys}
                         options={nodes}
-                        onToggle={(e) => setExpandedKeys(e.value)}
                         onChange={(e) => setSelectedNodeKey1(e.value)}
                         placeholder="Select Item"
                     ></TreeSelect>
@@ -71,9 +70,7 @@ const TreeSelectDemo = () => {
                     <h5>Multiple</h5>
                     <TreeSelect
                         value={selectedNodeKeys1}
-                        expandedKeys={expandedKeys}
                         options={nodes}
-                        onToggle={(e) => setExpandedKeys(e.value)}
                         onChange={(e) => setSelectedNodeKeys1(e.value)}
                         selectionMode="multiple"
                         metaKeySelection={false}
@@ -83,9 +80,7 @@ const TreeSelectDemo = () => {
                     <h5>Checkbox</h5>
                     <TreeSelect
                         value={selectedNodeKeys2}
-                        expandedKeys={expandedKeys}
                         options={nodes}
-                        onToggle={(e) => setExpandedKeys(e.value)}
                         onChange={(e) => setSelectedNodeKeys2(e.value)}
                         display="chip"
                         selectionMode="checkbox"
@@ -95,9 +90,7 @@ const TreeSelectDemo = () => {
                     <h5>Filter</h5>
                     <TreeSelect
                         value={selectedNodeKey2}
-                        expandedKeys={expandedKeys}
                         options={nodes}
-                        onToggle={(e) => setExpandedKeys(e.value)}
                         onChange={(e) => setSelectedNodeKey2(e.value)}
                         filter
                         placeholder="Select Items"
@@ -106,15 +99,23 @@ const TreeSelectDemo = () => {
                     <h5>Initial Value</h5>
                     <TreeSelect
                         value={selectedNodeKey3}
-                        expandedKeys={expandedKeys}
                         options={nodes}
-                        onToggle={(e) => setExpandedKeys(e.value)}
                         onChange={(e) => setSelectedNodeKey3(e.value)}
                         placeholder="Select Item"
                     ></TreeSelect>
 
                     <h5>Programmatic Control</h5>
-                    <div className="mb-4">
+                    <TreeSelect
+                        value={selectedNodeKeys3}
+                        options={nodes}
+                        expandedKeys={expandedKeys}
+                        onToggle={(e) => setExpandedKeys(e.value)}
+                        onChange={(e) => setSelectedNodeKeys3(e.value)}
+                        display="chip"
+                        selectionMode="checkbox"
+                        placeholder="Select Items"
+                    ></TreeSelect>
+                    <div className="mb-4 mt-2" >
                         <Button
                             type="button"
                             icon="pi pi-plus"
