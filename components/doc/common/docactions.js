@@ -2,12 +2,14 @@ import React, { useEffect, useContext } from 'react';
 import { useRef } from 'react';
 import { Button } from '../../lib/button/Button';
 import { Menu } from '../../lib/menu/Menu';
+import { Toast } from '../../lib/toast/Toast';
 import DomHandler from '../../lib/utils/DomHandler';
 import { useLiveEditor } from './liveeditor';
 import AppContentContext from '../../../components/layout/appcontentcontext';
 
 export const DocActions = (props) => {
     const menu = useRef(null);
+    const toast = useRef(null);
     const liveEditor = useRef(null);
     const context = useContext(AppContentContext);
 
@@ -20,19 +22,23 @@ export const DocActions = (props) => {
     const items = [
         {
             label: 'Hooks Source Demo',
-            command: () => liveEditor.current.postSandboxParameters('hooks')
+            className: props.showHooksSource === false ? 'hidden' : '',
+            command: () => liveEditor.current.postSandboxParameters('hooks', toast)
         },
         {
             label: 'Class Source Demo',
-            command: () => liveEditor.current.postSandboxParameters('class')
+            className: props.showClassSource === false ? 'hidden' : '',
+            command: () => liveEditor.current.postSandboxParameters('class', toast)
         },
         {
             label: 'TS Source Demo',
-            command: () => liveEditor.current.postSandboxParameters('ts')
+            className: props.showTsSource === false ? 'hidden' : '',
+            command: () => liveEditor.current.postSandboxParameters('ts', toast)
         },
         {
             label: 'Browser Source Demo',
-            command: () => liveEditor.current.postSandboxParameters('browser')
+            className: props.showBrowserSource === false ? 'hidden' : '',
+            command: () => liveEditor.current.postSandboxParameters('browser', toast)
         }
     ];
 
@@ -61,6 +67,8 @@ export const DocActions = (props) => {
     }
 
     return (
+        <>
+        <Toast ref={toast} />
         <div className="app-demoactions flex align-items-end justify-content-end mt-3">
             <Button className="p-button-text p-button-rounded p-button-plain p-button-lg p-button-icon-only" onClick={toggleMenu}>
                 <svg role="img" viewBox="0 0 24 24" width={17} height={17} fill={'var(--text-color-secondary)'} style={{ display: 'block' }}>
@@ -76,6 +84,7 @@ export const DocActions = (props) => {
             <Button icon="pi pi-info-circle" className="p-button-text p-button-rounded p-button-plain p-button-lg ml-2" onClick={scrollToDocs} ></Button>
             <Menu ref={menu} model={items} popup style={{ width: '14rem' }} />
         </div>
+        </>
     )
 }
 

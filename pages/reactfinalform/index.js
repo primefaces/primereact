@@ -90,7 +90,7 @@ const ReactFinalFormDemo = () => {
 
                 </div>
 
-                <DocActions github="validate/index.js" />
+                <DocActions github="validate/index.js" showClassSource={false} showBrowserSource={false}/>
             </div>
 
             <div className="content-section implementation form-demo">

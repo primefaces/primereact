@@ -382,6 +382,9 @@ ${extIndexCSS}
 
     const getSandboxParameters = (sourceType) => {
         let { name, sources, dependencies } = props;
+        if (!sources[sourceType]) {
+            return null;
+        }
         let extension = '.js';
         let serviceExtension = extension;
         let extDependencies = dependencies || {};
@@ -485,14 +488,19 @@ ${extIndexCSS}
     }
 
     return {
-        postSandboxParameters(sourceType) {
+        postSandboxParameters(sourceType, toast) {
+            const sandboxParameters = getSandboxParameters(sourceType);
+            if (!sandboxParameters) {
+                toast.current.show({severity: 'warn', summary: 'Not Available', detail: 'That code sandbox demonstration is not available!'});
+                return;
+            }
             fetch('https://codesandbox.io/api/v1/sandboxes/define?json=1', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(getSandboxParameters(sourceType))
+                body: JSON.stringify(sandboxParameters)
             })
                 .then(response => response.json())
                 .then(data => window.open(`https://codesandbox.io/s/${data.sandbox_id}`, '_blank'));
