@@ -22,18 +22,22 @@ export const DocActions = (props) => {
     const items = [
         {
             label: 'Hooks Source Demo',
+            className: props.showHooksSource === false ? 'hidden' : '',
             command: () => liveEditor.current.postSandboxParameters('hooks', toast)
         },
         {
             label: 'Class Source Demo',
+            className: props.showClassSource === false ? 'hidden' : '',
             command: () => liveEditor.current.postSandboxParameters('class', toast)
         },
         {
             label: 'TS Source Demo',
+            className: props.showTsSource === false ? 'hidden' : '',
             command: () => liveEditor.current.postSandboxParameters('ts', toast)
         },
         {
             label: 'Browser Source Demo',
+            className: props.showBrowserSource === false ? 'hidden' : '',
             command: () => liveEditor.current.postSandboxParameters('browser', toast)
         }
     ];

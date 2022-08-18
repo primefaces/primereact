@@ -98,7 +98,7 @@ const FormikFormDemo = () => {
                     <p>PrimeReact components can be easily used/integrated with <a href="https://formik.org/">Formik</a>. In this example, a register panel is simulated using Formik.</p>
                 </div>
 
-                <DocActions github="formik/index.js" />
+                <DocActions github="formik/index.js" showClassSource={false} showBrowserSource={false}/>
             </div>
             <div className="content-section implementation form-demo">
                 <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>

@@ -73,7 +73,7 @@ const ReactHookFormDemo = () => {
                     <p>PrimeReact components can be easily used/integrated with <a href="https://react-hook-form.com/">React Hook Form</a>. In this example, a register panel is simulated using React Hook Form.</p>
                 </div>
 
-                <DocActions github="validate/index.js" />
+                <DocActions github="validate/index.js" showClassSource={false} showBrowserSource={false} />
             </div>
 
             <div className="content-section implementation form-demo">
