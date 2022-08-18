@@ -82,7 +82,22 @@ export const Dropdown = React.memo(React.forwardRef((props, ref) => {
 
     const onInputBlur = (event) => {
         setFocusedState(false);
-        props.onBlur && props.onBlur(event);
+
+        if (props.onBlur) {
+            setTimeout(() => {
+                props.onBlur({
+                    originalEvent: event.originalEvent,
+                    value: inputRef.current.value,
+                    stopPropagation: () => { },
+                    preventDefault: () => { },
+                    target: {
+                        name: props.name,
+                        id: props.id,
+                        value: inputRef.current.value,
+                    }
+                });
+            }, 200);
+        }
     }
 
     const onPanelClick = (event) => {
