@@ -938,7 +938,7 @@ export const InputNumber = React.memo(React.forwardRef((props, ref) => {
         props,
         getFormatter,
         getElement: () => elementRef.current,
-        getInput: () => elementRef.current
+        getInput: () => inputRef.current
     }));
 
     React.useEffect(() => {
