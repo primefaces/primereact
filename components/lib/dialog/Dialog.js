@@ -32,6 +32,7 @@ export const Dialog = React.forwardRef((props, ref) => {
     const [bindDocumentDragEndListener, unbindDocumentDragEndListener] = useEventListener({ type: 'mouseup', target: () => window.document, listener: (event) => onDragEnd(event) });
 
     const onClose = (event) => {
+        DomHandler.removeClass(document.body, 'p-overflow-hidden');
         props.onHide();
         event.preventDefault();
     }
