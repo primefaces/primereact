@@ -15,22 +15,24 @@ export default function MyApp({ Component }) {
     const announcement = useRef(null);
 
     useEffect(() => {
-        fetchNews().then(data => {
-            if (data) {
-                announcement.current = data;
-    
-                const itemString = localStorage.getItem(storageKey);
-                if (itemString) {
-                    const item = JSON.parse(itemString);
-                    if (item.hiddenNews && item.hiddenNews !== data.id) {
+        if (process.env.NODE_ENV === 'production') {
+            fetchNews().then(data => {
+                if (data) {
+                    announcement.current = data;
+
+                    const itemString = localStorage.getItem(storageKey);
+                    if (itemString) {
+                        const item = JSON.parse(itemString);
+                        if (item.hiddenNews && item.hiddenNews !== data.id) {
+                            setNewsActive(true);
+                        }
+                    }
+                    else {
                         setNewsActive(true);
                     }
                 }
-                else {
-                    setNewsActive(true);
-                }
-            }
-        });
+            });
+        }
     }, []);
 
     const props = {
@@ -64,7 +66,7 @@ export default function MyApp({ Component }) {
             linkElement.remove();
             cloneLinkElement.setAttribute('id', elementId);
         });
-        
+
         linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
         setTheme(newTheme);
     }
@@ -79,5 +81,5 @@ export default function MyApp({ Component }) {
             </Layout>
         )
     }
-    
+
 }
