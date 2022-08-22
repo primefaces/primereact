@@ -153,8 +153,11 @@ export const SpeedDial = React.memo(React.forwardRef((props, ref) => {
     }));
 
     const createItem = (item, index) => {
+        if (item.visible === false) {
+            return null;
+        }
         const style = getItemStyle(index);
-        const { disabled, icon: _icon, label, template, url, target } = item;
+        const { disabled, visible, icon: _icon, label, template, url, target } = item;
         const contentClassName = classNames('p-speeddial-action', { 'p-disabled': disabled });
         const iconClassName = classNames('p-speeddial-action-icon', _icon);
         const icon = IconUtils.getJSXIcon(_icon, { className: 'p-speeddial-action-icon' }, { props });

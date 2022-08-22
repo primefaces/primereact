@@ -96,6 +96,9 @@ export const PanelMenu = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createPanel = (item, index) => {
+        if (item.visible === false) {
+            return null;
+        }
         const key = item.label + '_' + index;
         const active = isItemActive(item);
         const className = classNames('p-panelmenu-panel', item.className);

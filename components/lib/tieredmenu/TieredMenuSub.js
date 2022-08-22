@@ -166,7 +166,10 @@ export const TieredMenuSub = React.memo((props) => {
     }
 
     const createMenuItem = (item, index) => {
-        const { id, className: _className, style, disabled, icon: _icon, label: _label, items, target, url, template } = item;
+        const { id, className: _className, style, disabled, visible, icon: _icon, label: _label, items, target, url, template } = item;
+        if (visible === false) {
+            return null;
+        }
         const key = _label + '_' + index;
         const active = activeItemState === item;
         const className = classNames('p-menuitem', { 'p-menuitem-active': active }, _className);
@@ -197,7 +200,8 @@ export const TieredMenuSub = React.memo((props) => {
                 submenuIconClassName,
                 element: content,
                 props,
-                active
+                active,
+                disabled
             };
 
             content = ObjectUtils.getJSXElement(template, item, defaultContentOptions);

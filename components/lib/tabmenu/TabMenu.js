@@ -60,7 +60,10 @@ export const TabMenu = React.memo(React.forwardRef((props, ref) => {
     });
 
     const createMenuItem = (item, index) => {
-        const { className: _className, style, disabled, icon: _icon, label: _label, template, url, target } = item;
+        const { className: _className, style, disabled, visible, icon: _icon, label: _label, template, url, target } = item;
+        if (visible === false) {
+            return null;
+        }
         const key = _label + '_' + index;
         const active = isSelected(index);
         const className = classNames('p-tabmenuitem', {
@@ -87,7 +90,8 @@ export const TabMenu = React.memo(React.forwardRef((props, ref) => {
                 element: content,
                 props,
                 active,
-                index
+                index,
+                disabled
             };
 
             content = ObjectUtils.getJSXElement(template, item, defaultContentOptions);

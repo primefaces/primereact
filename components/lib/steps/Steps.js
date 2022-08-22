@@ -32,9 +32,13 @@ export const Steps = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createItem = (item, index) => {
+        if (item.visible === false) {
+            return null;
+        }
         const key = item.label + '_' + index;
         const active = index === props.activeIndex;
         const disabled = (item.disabled || (index !== props.activeIndex && props.readOnly));
+        const visible = item.visible;
         const tabIndex = disabled ? -1 : '';
         const className = classNames('p-steps-item', item.className, {
             'p-highlight p-steps-current': active,

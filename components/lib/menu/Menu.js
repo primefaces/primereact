@@ -131,6 +131,9 @@ export const Menu = React.memo(React.forwardRef((props, ref) => {
     }));
 
     const createSubmenu = (submenu, index) => {
+        if (submenu.visible === false) {
+            return null;
+        }
         const key = submenu.label + '_' + index;
         const className = classNames('p-submenu-header', {
             'p-disabled': submenu.disabled
@@ -152,6 +155,9 @@ export const Menu = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createMenuItem = (item, index) => {
+        if (item.visible === false) {
+            return null;
+        }
         const className = classNames('p-menuitem', item.className);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled })
         const iconClassName = classNames('p-menuitem-icon', item.icon);

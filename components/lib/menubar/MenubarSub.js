@@ -175,6 +175,9 @@ export const MenubarSub = React.memo(React.forwardRef((props, ref) => {
     }
 
     const createMenuitem = (item, index) => {
+        if (item.visible === false) {
+            return null;
+        }
         const key = item.label + '_' + index;
         const className = classNames('p-menuitem', { 'p-menuitem-active': activeItemState === item }, item.className);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
