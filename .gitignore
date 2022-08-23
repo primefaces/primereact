@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+/vscode
+/.vscode
 /idea
 /.idea
 /.sass-cache
