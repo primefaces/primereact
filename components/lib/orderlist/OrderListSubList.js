@@ -14,7 +14,7 @@ export const OrderListSubList = React.memo((props) => {
 
     const isSelected = (item) => {
         return ObjectUtils.findIndexInList(item, props.selection, props.dataKey) !== -1;
-    }
+    };
 
     const onDragStart = (event, index) => {
         dragging.current = true;
@@ -22,7 +22,7 @@ export const OrderListSubList = React.memo((props) => {
         if (props.dragdropScope) {
             event.dataTransfer.setData('text', 'orderlist');
         }
-    }
+    };
 
     const onDragOver = (event, index) => {
         if (draggedItemIndex.current !== index && draggedItemIndex.current + 1 !== index) {
@@ -30,15 +30,15 @@ export const OrderListSubList = React.memo((props) => {
             DomHandler.addClass(event.target, 'p-orderlist-droppoint-highlight');
             event.preventDefault();
         }
-    }
+    };
 
     const onDragLeave = (event) => {
         dragOverItemIndex.current = null;
         DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
-    }
+    };
 
     const onDrop = (event) => {
-        let dropIndex = (draggedItemIndex.current > dragOverItemIndex.current) ? dragOverItemIndex.current : (dragOverItemIndex.current === 0) ? 0 : dragOverItemIndex.current - 1;
+        let dropIndex = draggedItemIndex.current > dragOverItemIndex.current ? dragOverItemIndex.current : dragOverItemIndex.current === 0 ? 0 : dragOverItemIndex.current - 1;
         let value = [...props.value];
         ObjectUtils.reorderArray(value, draggedItemIndex.current, dropIndex);
         dragOverItemIndex.current = null;
@@ -50,40 +50,37 @@ export const OrderListSubList = React.memo((props) => {
                 value: value
             });
         }
-    }
+    };
 
     const onDragEnd = (event) => {
         dragging.current = false;
-    }
+    };
 
     const onListMouseMove = (event) => {
         if (dragging.current) {
             const offsetY = listElementRef.current.getBoundingClientRect().top + DomHandler.getWindowScrollTop();
-            const bottomDiff = (offsetY + listElementRef.current.clientHeight) - event.pageY;
-            const topDiff = (event.pageY - offsetY);
+            const bottomDiff = offsetY + listElementRef.current.clientHeight - event.pageY;
+            const topDiff = event.pageY - offsetY;
 
-            if (bottomDiff < 25 && bottomDiff > 0)
-                listElementRef.current.scrollTop += 15;
-            else if (topDiff < 25 && topDiff > 0)
-                listElementRef.current.scrollTop -= 15;
+            if (bottomDiff < 25 && bottomDiff > 0) listElementRef.current.scrollTop += 15;
+            else if (topDiff < 25 && topDiff > 0) listElementRef.current.scrollTop -= 15;
         }
-    }
-
+    };
 
     const onFilterInputKeyDown = (event) => {
         //enter
         if (event.which === 13) {
             event.preventDefault();
         }
-    }
+    };
 
     const createDropPoint = (index, key) => {
-        return <li key={key} className="p-orderlist-droppoint" onDragOver={(e) => onDragOver(e, index + 1)} onDragLeave={onDragLeave} onDrop={onDrop}></li>
-    }
+        return <li key={key} className="p-orderlist-droppoint" onDragOver={(e) => onDragOver(e, index + 1)} onDragLeave={onDragLeave} onDrop={onDrop}></li>;
+    };
 
     const createHeader = () => {
         return props.header ? <div className="p-orderlist-header">{props.header}</div> : null;
-    }
+    };
 
     const createItems = () => {
         if (props.value) {
@@ -95,9 +92,18 @@ export const OrderListSubList = React.memo((props) => {
                 if (props.dragdrop) {
                     let items = [
                         createDropPoint(i, key + '_droppoint'),
-                        <li key={key} className={itemClassName} onClick={(e) => props.onItemClick({ originalEvent: e, value: item, index: i })}
-                            onKeyDown={(e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i })} role="option" aria-selected={isSelected(item)}
-                            draggable="true" onDragStart={(e) => onDragStart(e, i)} onDragEnd={onDragEnd} tabIndex={props.tabIndex}>
+                        <li
+                            key={key}
+                            className={itemClassName}
+                            onClick={(e) => props.onItemClick({ originalEvent: e, value: item, index: i })}
+                            onKeyDown={(e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i })}
+                            role="option"
+                            aria-selected={isSelected(item)}
+                            draggable="true"
+                            onDragStart={(e) => onDragStart(e, i)}
+                            onDragEnd={onDragEnd}
+                            tabIndex={props.tabIndex}
+                        >
                             {content}
                             <Ripple />
                         </li>
@@ -108,20 +114,26 @@ export const OrderListSubList = React.memo((props) => {
                     }
 
                     return items;
-                }
-                else {
+                } else {
                     return (
-                        <li key={key} className={itemClassName} role="option" aria-selected={isSelected(item)}
+                        <li
+                            key={key}
+                            className={itemClassName}
+                            role="option"
+                            aria-selected={isSelected(item)}
                             onClick={(e) => props.onItemClick({ originalEvent: e, value: item, index: i })}
                             onKeyDown={(e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i })}
-                            tabIndex={props.tabIndex}>{content}</li>
-                    )
+                            tabIndex={props.tabIndex}
+                        >
+                            {content}
+                        </li>
+                    );
                 }
             });
         }
 
         return null;
-    }
+    };
 
     const createList = () => {
         const items = createItems();
@@ -130,8 +142,8 @@ export const OrderListSubList = React.memo((props) => {
             <ul ref={listElementRef} className="p-orderlist-list" style={props.listStyle} onDragOver={onListMouseMove} role="listbox" aria-multiselectable>
                 {items}
             </ul>
-        )
-    }
+        );
+    };
 
     const createFilter = () => {
         if (props.filter) {
@@ -148,7 +160,7 @@ export const OrderListSubList = React.memo((props) => {
                     inputProps: {
                         inputClassName: 'p-orderlist-filter-input p-inputtext p-component',
                         onChange: props.onFilter,
-                        onKeyDown: onFilterInputKeyDown,
+                        onKeyDown: onFilterInputKeyDown
                     },
                     filterOptions: filterOptions,
                     iconClassName: 'p-orderlist-filter-icon pi pi-search',
@@ -159,15 +171,11 @@ export const OrderListSubList = React.memo((props) => {
                 content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
             }
 
-            return (
-                <div className="p-orderlist-filter-container">
-                    {content}
-                </div>
-            );
+            return <div className="p-orderlist-filter-container">{content}</div>;
         }
 
         return null;
-    }
+    };
 
     const header = createHeader();
     const filter = createFilter();
@@ -179,7 +187,7 @@ export const OrderListSubList = React.memo((props) => {
             {filter}
             {list}
         </div>
-    )
+    );
 });
 
 OrderListSubList.displayName = 'OrderListSubList';

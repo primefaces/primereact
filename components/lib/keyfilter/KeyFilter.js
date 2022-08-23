@@ -1,5 +1,4 @@
 export const KeyFilter = {
-
     /* eslint-disable */
     DEFAULT_MASKS: {
         pint: /[\d]/,
@@ -44,13 +43,13 @@ export const KeyFilter = {
         }
 
         const regex = this.getRegex(keyfilter);
-        const clipboard = e.clipboardData.getData("text");
-        
+        const clipboard = e.clipboardData.getData('text');
+
         // loop over each letter pasted and if any fail prevent the paste
-        [...clipboard].forEach(c => {
+        [...clipboard].forEach((c) => {
             if (!regex.test(c)) {
-               e.preventDefault();
-               return false;
+                e.preventDefault();
+                return false;
             }
         });
     },
@@ -65,4 +64,4 @@ export const KeyFilter = {
 
         return validatePattern;
     }
-}
+};

@@ -10,16 +10,14 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const InplaceDemo = () => {
-
     const [text, setText] = useState('');
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-
     const onOpen = () => {
-        productService.getProductsSmall().then(data => setProducts(data));
-    }
+        productService.getProductsSmall().then((data) => setProducts(data));
+    };
 
     return (
         <div>
@@ -40,9 +38,7 @@ const InplaceDemo = () => {
                 <div className="card">
                     <h5>Input</h5>
                     <Inplace closable>
-                        <InplaceDisplay>
-                            {text || 'Click to Edit'}
-                        </InplaceDisplay>
+                        <InplaceDisplay>{text || 'Click to Edit'}</InplaceDisplay>
                         <InplaceContent>
                             <InputText value={text} onChange={(e) => setText(e.target.value)} autoFocus />
                         </InplaceContent>
@@ -57,15 +53,13 @@ const InplaceDemo = () => {
                             </span>
                         </InplaceDisplay>
                         <InplaceContent>
-                            <img alt="Nature" src={`${contextPath}/images/nature/nature1.jpg`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
+                            <img alt="Nature" src={`${contextPath}/images/nature/nature1.jpg`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} />
                         </InplaceContent>
                     </Inplace>
 
                     <h5>Lazy Data</h5>
                     <Inplace onOpen={onOpen}>
-                        <InplaceDisplay>
-                            View Data
-                        </InplaceDisplay>
+                        <InplaceDisplay>View Data</InplaceDisplay>
                         <InplaceContent>
                             <DataTable value={products}>
                                 <Column field="code" header="Code"></Column>
@@ -80,7 +74,7 @@ const InplaceDemo = () => {
 
             <InplaceDoc></InplaceDoc>
         </div>
-    )
-}
+    );
+};
 
 export default InplaceDemo;

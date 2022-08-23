@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const TimelineDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -98,7 +97,7 @@ export class TimelineDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useRef } from 'react';
@@ -181,7 +180,7 @@ const TimelineDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useRef } from 'react';
@@ -265,7 +264,7 @@ const TieredMenuDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./TimelineDemo.css" />
@@ -353,7 +352,7 @@ const TimelineDemo = () => {
 }
                 `
         }
-    }
+    };
 
     const extFiles = {
         'demo/TimelineDemo.css': {
@@ -390,32 +389,34 @@ const TimelineDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Timeline } from 'primereact/timeline';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/timeline/timeline.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Timeline receives the events with the <i>value</i> property as a collection of arbitrary objects. In addition, <i>content</i> property is required to display the representation of an event.
-                        Example below is a sample events array that is used throughout the documentation.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        Timeline receives the events with the <i>value</i> property as a collection of arbitrary objects. In addition, <i>content</i> property is required to display the representation of an event. Example below is a sample events
+                        array that is used throughout the documentation.
+                    </p>
+                    <CodeHighlight lang="js">
+                        {`
 const events = [
     { status: 'Ordered', date: '15/10/2020 10:30', icon: 'pi pi-shopping-cart', color: '#9C27B0', image: 'game-controller.jpg' },
     { status: 'Processing', date: '15/10/2020 14:00', icon: 'pi pi-cog', color: '#673AB7' },
@@ -423,52 +424,60 @@ const events = [
     { status: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' }
 ];
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Timeline value={events} content={(item) => item.status} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Layout</h5>
-                    <p>Default layout of the timeline is vertical, setting <i>layout</i> to "horizontal" displays the items horizontally.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Default layout of the timeline is vertical, setting <i>layout</i> to "horizontal" displays the items horizontally.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Timeline value={events} layout="horizontal" content={(item) => item.status} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Alignment</h5>
-                    <p>Location of the timeline bar is defined using the <i>align</i> property.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Location of the timeline bar is defined using the <i>align</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Timeline value={events} align="right" content={(item) => item.status} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <p>In addition, the "alternate" alignment option make the contents take turns around the timeline bar.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Timeline value={events} align="alternate" content={(item) => item.status} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Opposite</h5>
-                    <p>Content to be placed at the other side of the bar is defined with the <i>opposite</i> property.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Content to be placed at the other side of the bar is defined with the <i>opposite</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Timeline value={events} opposite={(item) => item.status} content={(item) => <small className="p-text-secondary">{item.date}</small>} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Custom Markers</h5>
-                    <p><i>marker</i> property allows placing a custom event marker instead of the default one. Below is an example with custom markers and content.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        <i>marker</i> property allows placing a custom event marker instead of the default one. Below is an example with custom markers and content.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Timeline value={events} marker={(item) => <i className={item.icon}></i>} content={(item) => item.status}} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -529,7 +538,9 @@ const events = [
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -601,25 +612,21 @@ const events = [
 
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Timeline uses a semantic ordered list element to list the events. No specific role is enforced, still you may use any aria role and attributes
-                        as any valid attribute is passed to the list element.
-                    </p>
+                        <h6>Screen Reader</h6>
+                        <p>Timeline uses a semantic ordered list element to list the events. No specific role is enforced, still you may use any aria role and attributes as any valid attribute is passed to the list element.</p>
 
-                    <h5>Keyboard Support</h5>
-                    <p>Component does not include any interactive elements.</p>
-                </DevelopmentSection>
+                        <h5>Keyboard Support</h5>
+                        <p>Component does not include any interactive elements.</p>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'TimelineDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'TimelineDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default TimelineDoc;

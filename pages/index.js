@@ -18,25 +18,21 @@ import { useEffect, useState } from 'react';
 export default function Home(props) {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [tableTheme, setTableTheme] = useState('lara-light-indigo');
-    const rootClassName = classNames('landing', {'landing-light': !props.dark, 'landing-dark': props.dark, 'landing-news-active': props.newsActive});
+    const rootClassName = classNames('landing', { 'landing-light': !props.dark, 'landing-dark': props.dark, 'landing-news-active': props.newsActive });
     const toggleColorScheme = () => {
         const darkMode = !props.dark;
-        const newTheme = darkMode ? 'lara-dark-indigo': 'lara-light-indigo';
+        const newTheme = darkMode ? 'lara-dark-indigo' : 'lara-light-indigo';
         props.onThemeChange(newTheme, darkMode);
     };
 
     useEffect(() => {
-        if (props.dark)
-            setTableTheme(tableTheme.replace('light','dark'));
-        else
-            setTableTheme(tableTheme.replace('dark','light'));
+        if (props.dark) setTableTheme(tableTheme.replace('light', 'dark'));
+        else setTableTheme(tableTheme.replace('dark', 'light'));
     }, [props.dark]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        if (props.dark)
-            props.onThemeChange('lara-dark-indigo', true);
-        else
-            props.onThemeChange('lara-light-indigo', false);
+        if (props.dark) props.onThemeChange('lara-dark-indigo', true);
+        else props.onThemeChange('lara-light-indigo', false);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -84,4 +80,4 @@ export default function Home(props) {
 
 Home.getLayout = function getLayout(page) {
     return page;
-}
+};

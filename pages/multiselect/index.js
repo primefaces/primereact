@@ -7,7 +7,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const MultiSelectDemo = () => {
-
     const [lazyItems, setLazyItems] = useState([]);
     const [lazyLoading, setLazyLoading] = useState(false);
     const [selectedCities1, setSelectedCities1] = useState(null);
@@ -44,7 +43,8 @@ const MultiSelectDemo = () => {
 
     const groupedCities = [
         {
-            label: 'Germany', code: 'DE',
+            label: 'Germany',
+            code: 'DE',
             items: [
                 { label: 'Berlin', value: 'Berlin' },
                 { label: 'Frankfurt', value: 'Frankfurt' },
@@ -53,7 +53,8 @@ const MultiSelectDemo = () => {
             ]
         },
         {
-            label: 'USA', code: 'US',
+            label: 'USA',
+            code: 'US',
             items: [
                 { label: 'Chicago', value: 'Chicago' },
                 { label: 'Los Angeles', value: 'Los Angeles' },
@@ -62,7 +63,8 @@ const MultiSelectDemo = () => {
             ]
         },
         {
-            label: 'Japan', code: 'JP',
+            label: 'Japan',
+            code: 'JP',
             items: [
                 { label: 'Kyoto', value: 'Kyoto' },
                 { label: 'Osaka', value: 'Osaka' },
@@ -74,31 +76,40 @@ const MultiSelectDemo = () => {
 
     useEffect(() => {
         setLazyItems(Array.from({ length: 100000 }));
-        setLazyLoading(false)
+        setLazyLoading(false);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
 
     const countryTemplate = (option) => {
         return (
             <div className="country-item">
-                <img alt={option.name} src={`${contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
+                <img
+                    alt={option.name}
+                    src={`${contextPath}/images/flag/flag_placeholder.png`}
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    className={`flag flag-${option.code.toLowerCase()}`}
+                />
                 <div>{option.name}</div>
             </div>
         );
-    }
+    };
 
     const selectedCountriesTemplate = (option) => {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src={`${contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
+                    <img
+                        alt={option.name}
+                        src={`${contextPath}/images/flag/flag_placeholder.png`}
+                        onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                        className={`flag flag-${option.code.toLowerCase()}`}
+                    />
                     <div>{option.name}</div>
                 </div>
             );
         }
 
-        return "Select Countries";
-    }
+        return 'Select Countries';
+    };
 
     const onLazyLoad = (event) => {
         setLazyLoading(true);
@@ -119,7 +130,7 @@ const MultiSelectDemo = () => {
             setLazyItems(_lazyItems);
             setLazyLoading(false);
         }, Math.random() * 1000 + 250);
-    }
+    };
 
     const panelFooterTemplate = () => {
         const selectedItems = selectedCountries;
@@ -129,16 +140,21 @@ const MultiSelectDemo = () => {
                 <b>{length}</b> item{length > 1 ? 's' : ''} selected.
             </div>
         );
-    }
+    };
 
     const groupedItemTemplate = (option) => {
         return (
             <div className="flex align-items-center country-item">
-                <img alt={option.label} src={`${contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
+                <img
+                    alt={option.label}
+                    src={`${contextPath}/images/flag/flag_placeholder.png`}
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    className={`flag flag-${option.code.toLowerCase()}`}
+                />
                 <div>{option.label}</div>
             </div>
         );
-    }
+    };
 
     return (
         <div>
@@ -164,32 +180,79 @@ const MultiSelectDemo = () => {
                     <MultiSelect value={selectedCities2} options={cities} onChange={(e) => setSelectedCities2(e.value)} optionLabel="name" placeholder="Select a City" display="chip" />
 
                     <h5>Grouped</h5>
-                    <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
-                        optionGroupTemplate={groupedItemTemplate} placeholder="Select Cities" />
+                    <MultiSelect
+                        value={selectedGroupedCities}
+                        options={groupedCities}
+                        onChange={(e) => setSelectedGroupedCities(e.value)}
+                        optionLabel="label"
+                        optionGroupLabel="label"
+                        optionGroupChildren="items"
+                        optionGroupTemplate={groupedItemTemplate}
+                        placeholder="Select Cities"
+                    />
 
                     <h5>Advanced with Templating and Filtering</h5>
-                    <MultiSelect value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
-                        itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
+                    <MultiSelect
+                        value={selectedCountries}
+                        options={countries}
+                        onChange={(e) => setSelectedCountries(e.value)}
+                        optionLabel="name"
+                        placeholder="Select Countries"
+                        filter
+                        className="multiselect-custom"
+                        itemTemplate={countryTemplate}
+                        selectedItemTemplate={selectedCountriesTemplate}
+                        panelFooterTemplate={panelFooterTemplate}
+                    />
 
                     <h5>Virtual Scroll (100000 Items)</h5>
-                    <MultiSelect value={selectedItems1} options={items} onChange={(e) => { setSelectedItems1(e.value); setSelectAll(e.value.length === items.length) }} selectAll={selectAll} onSelectAll={(e) => { setSelectAll(!e.checked); setSelectedItems1(e.checked ? [] : items.map(item => item.value)) }} virtualScrollerOptions={{ itemSize: 43 }} maxSelectedLabels={3} placeholder="Select Item" />
+                    <MultiSelect
+                        value={selectedItems1}
+                        options={items}
+                        onChange={(e) => {
+                            setSelectedItems1(e.value);
+                            setSelectAll(e.value.length === items.length);
+                        }}
+                        selectAll={selectAll}
+                        onSelectAll={(e) => {
+                            setSelectAll(!e.checked);
+                            setSelectedItems1(e.checked ? [] : items.map((item) => item.value));
+                        }}
+                        virtualScrollerOptions={{ itemSize: 43 }}
+                        maxSelectedLabels={3}
+                        placeholder="Select Item"
+                    />
 
                     <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                    <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{
-                        lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
-                            return (
-                                <div className="flex align-items-center p-2" style={{ height: '43px' }}>
-                                    <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
-                                </div>
-                            )
-                        }
-                    }} maxSelectedLabels={3} placeholder="Select Item" showSelectAll={false} />
+                    <MultiSelect
+                        value={selectedItems2}
+                        options={lazyItems}
+                        onChange={(e) => setSelectedItems2(e.value)}
+                        virtualScrollerOptions={{
+                            lazy: true,
+                            onLazyLoad: onLazyLoad,
+                            itemSize: 43,
+                            showLoader: true,
+                            loading: lazyLoading,
+                            delay: 250,
+                            loadingTemplate: (options) => {
+                                return (
+                                    <div className="flex align-items-center p-2" style={{ height: '43px' }}>
+                                        <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
+                                    </div>
+                                );
+                            }
+                        }}
+                        maxSelectedLabels={3}
+                        placeholder="Select Item"
+                        showSelectAll={false}
+                    />
                 </div>
             </div>
 
             <MultiSelectDoc />
         </div>
     );
-}
+};
 
 export default MultiSelectDemo;

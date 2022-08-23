@@ -12,9 +12,8 @@ const DataTableStripedDemo = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
 
     return (
         <div>
@@ -24,8 +23,12 @@ const DataTableStripedDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>Striped Rows</span></h1>
-                    <p>Adding <b>stripedRows</b> displays rows with alternating colors.</p>
+                    <h1>
+                        DataTable <span>Striped Rows</span>
+                    </h1>
+                    <p>
+                        Adding <b>stripedRows</b> displays rows with alternating colors.
+                    </p>
                 </div>
 
                 <DocActions github="datatable/striped.js" />
@@ -45,14 +48,13 @@ const DataTableStripedDemo = () => {
             <DataTableStripedDemoDoc />
         </div>
     );
-}
+};
 
 export default DataTableStripedDemo;
 
 export const DataTableStripedDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -93,7 +95,7 @@ export class DataTableStripedDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -124,7 +126,7 @@ const DataTableStripedDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -155,7 +157,7 @@ const DataTableStripedDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./ProductService.js"></script>
@@ -193,15 +195,11 @@ const DataTableStripedDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableStripedDemo', sources: sources, service: 'ProductService', data: 'products-small' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableStripedDemo', sources: sources, service: 'ProductService', data: 'products-small' })}</TabView>
         </div>
-    )
-})
+    );
+});

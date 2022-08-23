@@ -27,13 +27,18 @@ const ReactHookFormDemo = () => {
         date: null,
         country: null,
         accept: false
-    }
+    };
 
     useEffect(() => {
-        countryservice.getCountries().then(data => setCountries(data));
+        countryservice.getCountries().then((data) => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
+    const {
+        control,
+        formState: { errors },
+        handleSubmit,
+        reset
+    } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
         setFormData(data);
@@ -43,10 +48,14 @@ const ReactHookFormDemo = () => {
     };
 
     const getFormErrorMessage = (name) => {
-        return errors[name] && <small className="p-error">{errors[name].message}</small>
+        return errors[name] && <small className="p-error">{errors[name].message}</small>;
     };
 
-    const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
+    const dialogFooter = (
+        <div className="flex justify-content-center">
+            <Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} />
+        </div>
+    );
     const passwordHeader = <h6>Pick a password</h6>;
     const passwordFooter = (
         <React.Fragment>
@@ -70,10 +79,12 @@ const ReactHookFormDemo = () => {
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>React Hook Form</h1>
-                    <p>PrimeReact components can be easily used/integrated with <a href="https://react-hook-form.com/">React Hook Form</a>. In this example, a register panel is simulated using React Hook Form.</p>
+                    <p>
+                        PrimeReact components can be easily used/integrated with <a href="https://react-hook-form.com/">React Hook Form</a>. In this example, a register panel is simulated using React Hook Form.
+                    </p>
                 </div>
 
-                <DocActions github="validate/index.js" />
+                <DocActions github="validate/index.js" showClassSource={false} showBrowserSource={false} />
             </div>
 
             <div className="content-section implementation form-demo">
@@ -93,55 +104,69 @@ const ReactHookFormDemo = () => {
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                             <div className="field">
                                 <span className="p-float-label">
-                                    <Controller name="name" control={control} rules={{ required: 'Name is required.' }} render={({ field, fieldState }) => (
-                                        <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
-                                    )} />
-                                    <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>Name*</label>
+                                    <Controller
+                                        name="name"
+                                        control={control}
+                                        rules={{ required: 'Name is required.' }}
+                                        render={({ field, fieldState }) => <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />}
+                                    />
+                                    <label htmlFor="name" className={classNames({ 'p-error': errors.name })}>
+                                        Name*
+                                    </label>
                                 </span>
                                 {getFormErrorMessage('name')}
                             </div>
                             <div className="field">
                                 <span className="p-float-label p-input-icon-right">
                                     <i className="pi pi-envelope" />
-                                    <Controller name="email" control={control}
-                                        rules={{ required: 'Email is required.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' }}}
-                                        render={({ field, fieldState }) => (
-                                            <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
-                                    )} />
-                                    <label htmlFor="email" className={classNames({ 'p-error': !!errors.email })}>Email*</label>
+                                    <Controller
+                                        name="email"
+                                        control={control}
+                                        rules={{ required: 'Email is required.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' } }}
+                                        render={({ field, fieldState }) => <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />}
+                                    />
+                                    <label htmlFor="email" className={classNames({ 'p-error': !!errors.email })}>
+                                        Email*
+                                    </label>
                                 </span>
                                 {getFormErrorMessage('email')}
                             </div>
                             <div className="field">
                                 <span className="p-float-label">
-                                    <Controller name="password" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
-                                        <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
-                                    )} />
-                                    <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Password*</label>
+                                    <Controller
+                                        name="password"
+                                        control={control}
+                                        rules={{ required: 'Password is required.' }}
+                                        render={({ field, fieldState }) => <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />}
+                                    />
+                                    <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>
+                                        Password*
+                                    </label>
                                 </span>
                                 {getFormErrorMessage('password')}
                             </div>
                             <div className="field">
                                 <span className="p-float-label">
-                                    <Controller name="date" control={control} render={({ field }) => (
-                                        <Calendar id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />
-                                    )} />
+                                    <Controller name="date" control={control} render={({ field }) => <Calendar id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />} />
                                     <label htmlFor="date">Birthday</label>
                                 </span>
                             </div>
                             <div className="field">
                                 <span className="p-float-label">
-                                    <Controller name="country" control={control} render={({ field }) => (
-                                        <Dropdown id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} options={countries} optionLabel="name" />
-                                    )} />
+                                    <Controller name="country" control={control} render={({ field }) => <Dropdown id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} options={countries} optionLabel="name" />} />
                                     <label htmlFor="country">Country</label>
                                 </span>
                             </div>
                             <div className="field-checkbox">
-                                <Controller name="accept" control={control} rules={{ required: true }} render={({ field, fieldState }) => (
-                                    <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />
-                                )} />
-                                <label htmlFor="accept" className={classNames({ 'p-error': errors.accept })}>I agree to the terms and conditions*</label>
+                                <Controller
+                                    name="accept"
+                                    control={control}
+                                    rules={{ required: true }}
+                                    render={({ field, fieldState }) => <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />}
+                                />
+                                <label htmlFor="accept" className={classNames({ 'p-error': errors.accept })}>
+                                    I agree to the terms and conditions*
+                                </label>
                             </div>
 
                             <Button type="submit" label="Submit" className="mt-2" />
@@ -153,12 +178,11 @@ const ReactHookFormDemo = () => {
             <ReactHookFormDoc />
         </div>
     );
-}
+};
 
 const ReactHookFormDoc = React.memo(() => {
-
     const sources = {
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useEffect, useState } from 'react';
@@ -299,7 +323,7 @@ export const ReactHookFormDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useEffect, useState } from 'react';
@@ -467,17 +491,13 @@ export const ReactHookFormDemo = () => {
 }
             `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'ReactHookFormDemo', sources, service: 'CountryService', data: 'countries', extFiles, dependencies: { 'react-hook-form': '^7.8.4' } })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'ReactHookFormDemo', sources, service: 'CountryService', data: 'countries', extFiles, dependencies: { 'react-hook-form': '^7.8.4' } })}</TabView>
         </div>
-    )
+    );
 });
 
 export default ReactHookFormDemo;

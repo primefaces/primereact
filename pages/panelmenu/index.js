@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const PanelMenuDemo = () => {
-
     const items = [
         {
             label: 'File',
@@ -146,6 +145,6 @@ const PanelMenuDemo = () => {
             <PanelMenuDoc />
         </div>
     );
-}
+};
 
 export default PanelMenuDemo;

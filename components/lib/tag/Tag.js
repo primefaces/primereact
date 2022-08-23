@@ -4,15 +4,19 @@ import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 export const Tag = React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
     const otherProps = ObjectUtils.findDiffKeys(props, Tag.defaultProps);
-    const className = classNames('p-tag p-component', {
-        [`p-tag-${props.severity}`]: props.severity !== null,
-        'p-tag-rounded': props.rounded
-    }, props.className);
+    const className = classNames(
+        'p-tag p-component',
+        {
+            [`p-tag-${props.severity}`]: props.severity !== null,
+            'p-tag-rounded': props.rounded
+        },
+        props.className
+    );
     const icon = IconUtils.getJSXIcon(props.icon, { className: 'p-tag-icon' }, { props });
 
     React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
+        props,
+        getElement: () => elementRef.current
     }));
 
     return (
@@ -21,7 +25,7 @@ export const Tag = React.forwardRef((props, ref) => {
             <span className="p-tag-value">{props.value}</span>
             <span>{props.children}</span>
         </span>
-    )
+    );
 });
 
 Tag.displayName = 'Tag';
@@ -33,4 +37,4 @@ Tag.defaultProps = {
     icon: null,
     style: null,
     className: null
-}
+};

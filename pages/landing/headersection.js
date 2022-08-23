@@ -6,50 +6,48 @@ import { classNames } from '../../components/lib/utils/ClassNames';
 const HeaderSection = (props) => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [menuActive, setMenuActive] = useState(false);
-    const colorSchemeIcon = classNames('pi', {'pi-sun': props.dark, 'pi-moon': !props.dark});
+    const colorSchemeIcon = classNames('pi', { 'pi-sun': props.dark, 'pi-moon': !props.dark });
     const containerElement = useRef(null);
     const changeColorScheme = () => {
         props.onToggleColorScheme();
-    }
-    const headerClassName = classNames('landing-header pad-section', {'landing-header-active': menuActive});
+    };
+    const headerClassName = classNames('landing-header pad-section', { 'landing-header-active': menuActive });
 
     const scrollListener = useRef();
     const bindScrollListener = () => {
         scrollListener.current = () => {
             if (containerElement && containerElement.current) {
-                if (window.scrollY > 0)
-                    containerElement.current.classList.add('landing-header-sticky');
-                else
-                    containerElement.current.classList.remove('landing-header-sticky');
+                if (window.scrollY > 0) containerElement.current.classList.add('landing-header-sticky');
+                else containerElement.current.classList.remove('landing-header-sticky');
             }
-        }
+        };
         window.addEventListener('scroll', scrollListener.current);
-    }
+    };
 
     const unbindScrollListener = () => {
         if (scrollListener.current) {
             window.removeEventListener('scroll', scrollListener.current);
             scrollListener.current = null;
         }
-    }
+    };
 
     useEffect(() => {
         bindScrollListener();
         return function unbind() {
             unbindScrollListener();
-        }
+        };
     }, []);
 
     useEffect(() => {
         if (scrollListener.current) {
             scrollListener.current();
         }
-     });
+    });
 
     return (
         <section ref={containerElement} className={headerClassName}>
             <span>
-                <img src={`${contextPath}/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" className="landing-header-logo"/>
+                <img src={`${contextPath}/images/primereact-logo-${props.dark ? 'light' : 'dark'}.svg`} alt="primereact logo" className="landing-header-logo" />
             </span>
 
             <div className="flex align-items-center">
@@ -98,6 +96,6 @@ const HeaderSection = (props) => {
             </div>
         </section>
     );
-}
+};
 
 export default HeaderSection;

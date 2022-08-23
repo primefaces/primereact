@@ -6,12 +6,11 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const CaptchaDemo = (props) => {
-
     const toast = useRef(null);
 
     const showResponse = () => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
-    }
+    };
 
     return (
         <div>
@@ -38,7 +37,7 @@ const CaptchaDemo = (props) => {
 
             <CaptchaDoc />
         </div>
-    )
-}
+    );
+};
 
 export default CaptchaDemo;

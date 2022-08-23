@@ -17,7 +17,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const DockDemo = () => {
-
     const [displayTerminal, setDisplayTerminal] = useState(false);
     const [displayFinder, setDisplayFinder] = useState(false);
     const [images, setImages] = useState(null);
@@ -34,46 +33,46 @@ const DockDemo = () => {
     const dockItems = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={`${imgPath}/finder.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            icon: () => <img alt="Finder" src={`${imgPath}/finder.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
-                setDisplayFinder(true)
+                setDisplayFinder(true);
             }
         },
         {
             label: 'Terminal',
-            icon: () => <img alt="Finder" src={`${imgPath}/terminal.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            icon: () => <img alt="Finder" src={`${imgPath}/terminal.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
-                setDisplayTerminal(true)
+                setDisplayTerminal(true);
             }
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={`${imgPath}/appstore.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            icon: () => <img alt="App Store" src={`${imgPath}/appstore.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'error', summary: 'An unexpected error occurred while signing in.', detail: 'UNTRUSTED_CERT_TITLE' });
             }
         },
         {
             label: 'Safari',
-            icon: () => <img alt="Finder" src={`${imgPath}/safari.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            icon: () => <img alt="Finder" src={`${imgPath}/safari.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'warn', summary: 'Safari has stopped working' });
             }
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={`${imgPath}/photos.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            icon: () => <img alt="Photos" src={`${imgPath}/photos.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 galleria.current.show();
             }
         },
         {
             label: 'GitHub',
-            icon: () => <img alt="Settings" src={`${imgPath}/github.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            icon: () => <img alt="Settings" src={`${imgPath}/github.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={`${imgPath}/trash.png`} onError={(e) => e.target.src = imgErrorPath} width="100%" />,
+            icon: () => <img alt="trash" src={`${imgPath}/trash.png`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />,
             command: () => {
                 toast.current.show({ severity: 'info', summary: 'Empty Trash' });
             }
@@ -83,19 +82,19 @@ const DockDemo = () => {
     const dockBasicItems = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={`${imgPath}/finder.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+            icon: () => <img alt="Finder" src={`${imgPath}/finder.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={`${imgPath}/appstore.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+            icon: () => <img alt="App Store" src={`${imgPath}/appstore.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={`${imgPath}/photos.svg`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+            icon: () => <img alt="Photos" src={`${imgPath}/photos.svg`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={`${imgPath}/trash.png`} onError={(e) => e.target.src = imgErrorPath} width="100%" />
+            icon: () => <img alt="trash" src={`${imgPath}/trash.png`} onError={(e) => (e.target.src = imgErrorPath)} width="100%" />
         }
     ];
 
@@ -118,8 +117,7 @@ const DockDemo = () => {
                         {
                             label: 'Video',
                             icon: 'pi pi-fw pi-video'
-                        },
-
+                        }
                     ]
                 },
                 {
@@ -153,8 +151,7 @@ const DockDemo = () => {
                 {
                     label: 'Justify',
                     icon: 'pi pi-fw pi-align-justify'
-                },
-
+                }
             ]
         },
         {
@@ -162,13 +159,11 @@ const DockDemo = () => {
             items: [
                 {
                     label: 'New',
-                    icon: 'pi pi-fw pi-user-plus',
-
+                    icon: 'pi pi-fw pi-user-plus'
                 },
                 {
                     label: 'Delete',
-                    icon: 'pi pi-fw pi-user-minus',
-
+                    icon: 'pi pi-fw pi-user-minus'
                 },
                 {
                     label: 'Search',
@@ -243,7 +238,7 @@ const DockDemo = () => {
 
     const itemTemplate = (item) => {
         return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
-    }
+    };
 
     const commandHandler = (text) => {
         let response;
@@ -274,20 +269,18 @@ const DockDemo = () => {
 
         if (response) {
             TerminalService.emit('response', response);
-        }
-        else {
+        } else {
             TerminalService.emit('clear');
         }
-    }
-
+    };
 
     useEffect(() => {
         TerminalService.on('command', commandHandler);
 
         const nodeService = new NodeService();
         const galleriaService = new PhotoService();
-        galleriaService.getImages().then(data => setImages(data));
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        galleriaService.getImages().then((data) => setImages(data));
+        nodeService.getTreeNodes().then((data) => setNodes(data));
 
         PrimeReact.appendTo = 'self';
 
@@ -296,7 +289,7 @@ const DockDemo = () => {
 
             // reset
             PrimeReact.appendTo = null;
-        }
+        };
     }, []);
 
     const start = <i className="pi pi-apple"></i>;
@@ -328,7 +321,7 @@ const DockDemo = () => {
 
             <div className="content-section implementation dock-demo">
                 <h5>Basic</h5>
-                <div className="dock-window" style={{backgroundImage: `url(${contextPath}/images/dock/window.jpg)`}}>
+                <div className="dock-window" style={{ backgroundImage: `url(${contextPath}/images/dock/window.jpg)` }}>
                     <Dock model={dockBasicItems} position="bottom" />
                     <Dock model={dockBasicItems} position="top" />
                     <Dock model={dockBasicItems} position="left" />
@@ -339,7 +332,7 @@ const DockDemo = () => {
                 <Tooltip className="dark-tooltip" target=".dock-advanced .p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
 
                 <Menubar model={menubarItems} start={start} end={end} />
-                <div className="dock-window dock-advanced" style={{backgroundImage: `url(${contextPath}/images/dock/window.jpg)`}}>
+                <div className="dock-window dock-advanced" style={{ backgroundImage: `url(${contextPath}/images/dock/window.jpg)` }}>
                     <Toast ref={toast} />
                     <Toast ref={toast2} position="top-center" />
 
@@ -353,15 +346,13 @@ const DockDemo = () => {
                         <Tree value={nodes} />
                     </Dialog>
 
-                    <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={2} style={{ width: '400px' }}
-                        circular fullScreen showThumbnails={false} showItemNavigators item={itemTemplate} />
+                    <Galleria ref={galleria} value={images} responsiveOptions={responsiveOptions} numVisible={2} style={{ width: '400px' }} circular fullScreen showThumbnails={false} showItemNavigators item={itemTemplate} />
                 </div>
-
             </div>
 
             <DockDoc />
         </div>
-    )
-}
+    );
+};
 
 export default DockDemo;

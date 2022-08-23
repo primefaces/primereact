@@ -20,14 +20,14 @@ const TreeTableSelectionDemo = () => {
 
     const onSelect = (event) => {
         toast.current.show({ severity: 'info', summary: 'Node Selected', detail: event.node.data.name });
-    }
+    };
 
     const onUnselect = (event) => {
         toast.current.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.data.name });
-    }
+    };
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -38,7 +38,9 @@ const TreeTableSelectionDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>TreeTable <span>Selection</span></h1>
+                    <h1>
+                        TreeTable <span>Selection</span>
+                    </h1>
                     <p>TreeTable supports single, multiple and checkbox based selection modes.</p>
                 </div>
 
@@ -50,7 +52,7 @@ const TreeTableSelectionDemo = () => {
 
                 <div className="card">
                     <h5>Single</h5>
-                    <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey1} onSelectionChange={e => setSelectedNodeKey1(e.value)}>
+                    <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey1} onSelectionChange={(e) => setSelectedNodeKey1(e.value)}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -59,7 +61,7 @@ const TreeTableSelectionDemo = () => {
 
                 <div className="card">
                     <h5>Multiple</h5>
-                    <TreeTable value={nodes} selectionMode="multiple" selectionKeys={selectedNodeKeys1} onSelectionChange={e => setSelectedNodeKeys1(e.value)} metaKeySelection={false}>
+                    <TreeTable value={nodes} selectionMode="multiple" selectionKeys={selectedNodeKeys1} onSelectionChange={(e) => setSelectedNodeKeys1(e.value)} metaKeySelection={false}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -68,7 +70,7 @@ const TreeTableSelectionDemo = () => {
 
                 <div className="card">
                     <h5>Multiple with MetaKey</h5>
-                    <TreeTable value={nodes} selectionMode="multiple" selectionKeys={selectedNodeKeys2} onSelectionChange={e => setSelectedNodeKeys2(e.value)} metaKeySelection>
+                    <TreeTable value={nodes} selectionMode="multiple" selectionKeys={selectedNodeKeys2} onSelectionChange={(e) => setSelectedNodeKeys2(e.value)} metaKeySelection>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -77,8 +79,7 @@ const TreeTableSelectionDemo = () => {
 
                 <div className="card">
                     <h5>Events</h5>
-                    <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey2} onSelectionChange={e => setSelectedNodeKey2(e.value)}
-                        onSelect={onSelect} onUnselect={onUnselect}>
+                    <TreeTable value={nodes} selectionMode="single" selectionKeys={selectedNodeKey2} onSelectionChange={(e) => setSelectedNodeKey2(e.value)} onSelect={onSelect} onUnselect={onUnselect}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -87,7 +88,7 @@ const TreeTableSelectionDemo = () => {
 
                 <div className="card">
                     <h5>Checkbox</h5>
-                    <TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys3} onSelectionChange={e => setSelectedNodeKeys3(e.value)}>
+                    <TreeTable value={nodes} selectionMode="checkbox" selectionKeys={selectedNodeKeys3} onSelectionChange={(e) => setSelectedNodeKeys3(e.value)}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -97,15 +98,14 @@ const TreeTableSelectionDemo = () => {
 
             <TreeTableSelectionDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeTableSelectionDemo;
 
 const TreeTableSelectionDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -200,7 +200,7 @@ export class TreeTableSelectionDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -285,7 +285,7 @@ const TreeTableSelectionDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -370,7 +370,7 @@ const TreeTableSelectionDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./NodeService.js"></script>
@@ -462,15 +462,11 @@ const TreeTableSelectionDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeTableSelectionDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeTableSelectionDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })}</TabView>
         </div>
-    )
-})
+    );
+});

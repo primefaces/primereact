@@ -25,24 +25,21 @@ export function mask(el, options) {
 
         if (typeof first === 'number') {
             begin = first;
-            end = (typeof last === 'number') ? last : begin;
+            end = typeof last === 'number' ? last : begin;
             if (el.setSelectionRange) {
                 el.setSelectionRange(begin, end);
-            }
-            else if (el['createTextRange']) {
+            } else if (el['createTextRange']) {
                 range = el['createTextRange']();
                 range.collapse(true);
                 range.moveEnd('character', end);
                 range.moveStart('character', begin);
                 range.select();
             }
-        }
-        else {
+        } else {
             if (el.setSelectionRange) {
                 begin = el.selectionStart;
                 end = el.selectionEnd;
-            }
-            else if (document['selection'] && document['selection'].createRange) {
+            } else if (document['selection'] && document['selection'].createRange) {
                 range = document['selection'].createRange();
                 begin = 0 - range.duplicate().moveStart('character', -100000);
                 end = begin + range.text.length;
@@ -50,7 +47,7 @@ export function mask(el, options) {
 
             return { begin: begin, end: end };
         }
-    }
+    };
 
     const isCompleted = () => {
         for (let i = firstNonMaskPos; i <= lastRequiredNonMaskPos; i++) {
@@ -60,28 +57,28 @@ export function mask(el, options) {
         }
 
         return true;
-    }
+    };
 
     const getPlaceholder = (i) => {
         if (i < options.slotChar.length) {
             return options.slotChar.charAt(i);
         }
         return options.slotChar.charAt(0);
-    }
+    };
 
     const getValue = () => {
         return options.unmask ? getUnmaskedValue() : el && el.value;
-    }
+    };
 
     const seekNext = (pos) => {
         while (++pos < len && !tests[pos]);
         return pos;
-    }
+    };
 
     const seekPrev = (pos) => {
         while (--pos >= 0 && !tests[pos]);
         return pos;
-    }
+    };
 
     const shiftL = (begin, end) => {
         let i, j;
@@ -104,7 +101,7 @@ export function mask(el, options) {
         }
         writeBuffer();
         caret(Math.max(firstNonMaskPos, begin));
-    }
+    };
 
     const shiftR = (pos) => {
         let i, c, j, t;
@@ -121,7 +118,7 @@ export function mask(el, options) {
                 }
             }
         }
-    }
+    };
 
     const handleAndroidInput = (e) => {
         let curVal = el.value;
@@ -129,17 +126,14 @@ export function mask(el, options) {
         if (oldVal && oldVal.length && oldVal.length > curVal.length) {
             // a deletion or backspace happened
             checkVal(true);
-            while (pos.begin > 0 && !tests[pos.begin - 1])
-                pos.begin--;
+            while (pos.begin > 0 && !tests[pos.begin - 1]) pos.begin--;
             if (pos.begin === 0) {
-                while (pos.begin < firstNonMaskPos && !tests[pos.begin])
-                    pos.begin++;
+                while (pos.begin < firstNonMaskPos && !tests[pos.begin]) pos.begin++;
             }
             caret(pos.begin, pos.begin);
         } else {
             checkVal(true);
-            while (pos.begin < len && !tests[pos.begin])
-                pos.begin++;
+            while (pos.begin < len && !tests[pos.begin]) pos.begin++;
 
             caret(pos.begin, pos.begin);
         }
@@ -150,7 +144,7 @@ export function mask(el, options) {
                 value: getValue()
             });
         }
-    }
+    };
 
     const onBlur = (e) => {
         checkVal();
@@ -162,7 +156,7 @@ export function mask(el, options) {
             event.initEvent('change', true, false);
             el.dispatchEvent(event);
         }
-    }
+    };
 
     const onKeyDown = (e) => {
         if (options.readOnly) {
@@ -182,7 +176,6 @@ export function mask(el, options) {
             begin = pos.begin;
             end = pos.end;
 
-
             if (end - begin === 0) {
                 begin = k !== 46 ? seekPrev(begin) : (end = seekNext(begin - 1));
                 end = k === 46 ? seekNext(end) : end;
@@ -193,16 +186,18 @@ export function mask(el, options) {
             updateModel(e);
 
             e.preventDefault();
-        } else if (k === 13) { // enter
+        } else if (k === 13) {
+            // enter
             onBlur(e);
             updateModel(e);
-        } else if (k === 27) { // escape
+        } else if (k === 27) {
+            // escape
             el.value = focusText;
             caret(0, checkVal());
             updateModel(e);
             e.preventDefault();
         }
-    }
+    };
 
     const onKeyPress = (e) => {
         if (options.readOnly) {
@@ -216,7 +211,8 @@ export function mask(el, options) {
             next,
             completed;
 
-        if (e.ctrlKey || e.altKey || e.metaKey || k < 32) {//Ignore
+        if (e.ctrlKey || e.altKey || e.metaKey || k < 32) {
+            //Ignore
             return;
         } else if (k && k !== 13) {
             if (pos.end - pos.begin !== 0) {
@@ -260,7 +256,7 @@ export function mask(el, options) {
                 value: getValue()
             });
         }
-    }
+    };
 
     const clearBuffer = (start, end) => {
         let i;
@@ -269,11 +265,11 @@ export function mask(el, options) {
                 buffer[i] = getPlaceholder(i);
             }
         }
-    }
+    };
 
     const writeBuffer = () => {
         el.value = buffer.join('');
-    }
+    };
 
     const checkVal = (allow) => {
         //try to place characters where they belong
@@ -325,8 +321,8 @@ export function mask(el, options) {
             writeBuffer();
             el.value = el.value.substring(0, lastMatch + 1);
         }
-        return (partialPosition ? i : firstNonMaskPos);
-    }
+        return partialPosition ? i : firstNonMaskPos;
+    };
 
     const onFocus = (e) => {
         if (options.readOnly) {
@@ -345,25 +341,22 @@ export function mask(el, options) {
                 return;
             }
             writeBuffer();
-            if (pos === options.mask.replace("?", "").length) {
+            if (pos === options.mask.replace('?', '').length) {
                 caret(0, pos);
             } else {
                 caret(pos);
             }
-
         }, 10);
 
         if (options.onFocus) {
             options.onFocus(e);
         }
-    }
+    };
 
     const onInput = (event) => {
-        if (androidChrome)
-            handleAndroidInput(event);
-        else
-            handleInputChange(event);
-    }
+        if (androidChrome) handleAndroidInput(event);
+        else handleInputChange(event);
+    };
 
     const handleInputChange = (e) => {
         if (options.readOnly) {
@@ -379,7 +372,7 @@ export function mask(el, options) {
                 value: getValue()
             });
         }
-    }
+    };
 
     const getUnmaskedValue = () => {
         let unmaskedBuffer = [];
@@ -391,17 +384,17 @@ export function mask(el, options) {
         }
 
         return unmaskedBuffer.join('');
-    }
+    };
 
     const updateModel = (e) => {
         if (options.onChange) {
             let val = getValue().replace(options.slotChar, '');
             options.onChange({
                 originalEvent: e,
-                value: (defaultBuffer !== val) ? val : ''
+                value: defaultBuffer !== val ? val : ''
             });
         }
-    }
+    };
 
     const bindEvents = () => {
         el.addEventListener('focus', onFocus);
@@ -410,7 +403,7 @@ export function mask(el, options) {
         el.addEventListener('keypress', onKeyPress);
         el.addEventListener('input', onInput);
         el.addEventListener('paste', handleInputChange);
-    }
+    };
 
     const unbindEvents = () => {
         el.removeEventListener('focus', onFocus);
@@ -419,7 +412,7 @@ export function mask(el, options) {
         el.removeEventListener('keypress', onKeyPress);
         el.removeEventListener('input', onInput);
         el.removeEventListener('paste', handleInputChange);
-    }
+    };
 
     const init = () => {
         tests = [];
@@ -427,8 +420,8 @@ export function mask(el, options) {
         len = options.mask.length;
         firstNonMaskPos = null;
         defs = {
-            '9': '[0-9]',
-            'a': '[A-Za-z]',
+            9: '[0-9]',
+            a: '[A-Za-z]',
             '*': '[A-Za-z0-9]'
         };
 
@@ -441,8 +434,7 @@ export function mask(el, options) {
             if (c === '?') {
                 len--;
                 partialPosition = i;
-            }
-            else if (defs[c]) {
+            } else if (defs[c]) {
                 tests.push(new RegExp(defs[c]));
                 if (firstNonMaskPos === null) {
                     firstNonMaskPos = tests.length - 1;
@@ -450,8 +442,7 @@ export function mask(el, options) {
                 if (i < partialPosition) {
                     lastRequiredNonMaskPos = tests.length - 1;
                 }
-            }
-            else {
+            } else {
                 tests.push(null);
             }
         }
@@ -460,10 +451,8 @@ export function mask(el, options) {
         for (let i = 0; i < maskTokens.length; i++) {
             let c = maskTokens[i];
             if (c !== '?') {
-                if (defs[c])
-                    buffer.push(getPlaceholder(i));
-                else
-                    buffer.push(c);
+                if (defs[c]) buffer.push(getPlaceholder(i));
+                else buffer.push(c);
             }
         }
 
@@ -481,5 +470,5 @@ export function mask(el, options) {
         unbindEvents,
         updateModel,
         getValue
-    }
+    };
 }

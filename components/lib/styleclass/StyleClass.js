@@ -8,7 +8,8 @@ export const StyleClass = React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
 
     const [bindTargetEnterListener, unbindTargetEnterListener] = useEventListener({
-        type: 'animationend', listener: () => {
+        type: 'animationend',
+        listener: () => {
             DomHandler.removeClass(targetRef.current, props.enterActiveClassName);
             if (props.enterToClassName) {
                 DomHandler.addClass(targetRef.current, props.enterToClassName);
@@ -23,7 +24,8 @@ export const StyleClass = React.forwardRef((props, ref) => {
     });
 
     const [bindTargetLeaveListener, unbindTargetLeaveListener] = useEventListener({
-        type: 'animationend', listener: () => {
+        type: 'animationend',
+        listener: () => {
             DomHandler.removeClass(targetRef.current, props.leaveActiveClassName);
             if (props.leaveToClassName) {
                 DomHandler.addClass(targetRef.current, props.leaveToClassName);
@@ -34,27 +36,26 @@ export const StyleClass = React.forwardRef((props, ref) => {
     });
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
-        type: 'click', listener: (event) => {
+        type: 'click',
+        listener: (event) => {
             if (!isVisible(targetRef.current) || getComputedStyle(targetRef.current).getPropertyValue('position') === 'static') {
                 unbindDocumentClickListener();
-            }
-            else if (isOutsideClick(event)) {
+            } else if (isOutsideClick(event)) {
                 leave();
             }
-        }, when: props.hideOnOutsideClick
+        },
+        when: props.hideOnOutsideClick
     });
 
     const [bindClickListener, unbindClickListener] = useEventListener({
-        type: 'click', listener: () => {
+        type: 'click',
+        listener: () => {
             targetRef.current = resolveTarget();
 
             if (props.toggleClassName) {
-                if (DomHandler.hasClass(targetRef.current, props.toggleClassName))
-                    DomHandler.removeClass(targetRef.current, props.toggleClassName);
-                else
-                    DomHandler.addClass(targetRef.current, props.toggleClassName);
-            }
-            else {
+                if (DomHandler.hasClass(targetRef.current, props.toggleClassName)) DomHandler.removeClass(targetRef.current, props.toggleClassName);
+                else DomHandler.addClass(targetRef.current, props.toggleClassName);
+            } else {
                 DomHandler.isVisible(targetRef.current) ? leave() : enter();
             }
         }
@@ -80,8 +81,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
 
                 bindTargetEnterListener({ target: targetRef.current });
             }
-        }
-        else {
+        } else {
             if (props.enterClassName) {
                 DomHandler.removeClass(targetRef.current, props.enterClassName);
             }
@@ -92,7 +92,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
         }
 
         bindDocumentClickListener({ target: elementRef.current && elementRef.current.ownerDocument });
-    }
+    };
 
     const leave = () => {
         if (props.leaveActiveClassName) {
@@ -105,8 +105,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
 
                 bindTargetLeaveListener({ target: targetRef.current });
             }
-        }
-        else {
+        } else {
             if (props.leaveClassName) {
                 DomHandler.removeClass(targetRef.current, props.leaveClassName);
             }
@@ -119,7 +118,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
         if (props.hideOnOutsideClick) {
             unbindDocumentClickListener();
         }
-    }
+    };
 
     const resolveTarget = () => {
         if (targetRef.current) {
@@ -142,31 +141,31 @@ export const StyleClass = React.forwardRef((props, ref) => {
             default:
                 return document.querySelector(props.selector);
         }
-    }
+    };
 
     const init = () => {
         elementRef.current = ObjectUtils.getRefElement(props.nodeRef);
         bindClickListener({ target: elementRef.current });
-    }
+    };
 
     const destroy = () => {
         unbindClickListener();
         unbindDocumentClickListener();
         targetRef.current = null;
-    }
+    };
 
     const isVisible = (target) => {
         return target.offsetParent !== null;
-    }
+    };
 
     const isOutsideClick = (event) => {
-        return !elementRef.current.isSameNode(event.target) && !elementRef.current.contains(event.target) && !targetRef.current.contains(event.target)
-    }
+        return !elementRef.current.isSameNode(event.target) && !elementRef.current.contains(event.target) && !targetRef.current.contains(event.target);
+    };
 
     React.useImperativeHandle(ref, () => ({
+        props,
         getElement: () => elementRef.current,
-        getTarget: () => targetRef.current,
-        ...props
+        getTarget: () => targetRef.current
     }));
 
     useMountEffect(() => {
@@ -178,7 +177,7 @@ export const StyleClass = React.forwardRef((props, ref) => {
 
         return () => {
             unbindClickListener();
-        }
+        };
     });
 
     useUnmountEffect(() => {
@@ -201,4 +200,4 @@ StyleClass.defaultProps = {
     leaveToClassName: null,
     hideOnOutsideClick: false,
     toggleClassName: null
-}
+};

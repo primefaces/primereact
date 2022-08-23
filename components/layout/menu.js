@@ -2,9 +2,9 @@ import Link from 'next/link';
 import { classNames } from '../lib/utils/ClassNames';
 import { CSSTransition } from 'react-transition-group';
 import React, { useRef, useState } from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { InputText } from '../lib/inputtext/InputText';
-import MenuData from "./menu.json";
+import MenuData from './menu.json';
 import getConfig from 'next/config';
 
 export default function Menu(props) {
@@ -17,7 +17,7 @@ export default function Menu(props) {
         let _activeSubmenus = { ...activeSubmenus };
         _activeSubmenus[name] = _activeSubmenus[name] ? false : true;
         setActiveSubmenus(_activeSubmenus);
-    }
+    };
 
     const isSubmenuActive = (name) => {
         if (activeSubmenus.hasOwnProperty(name)) {
@@ -25,18 +25,16 @@ export default function Menu(props) {
         }
 
         return false;
-    }
+    };
 
     const renderBadge = (item) => {
         const badge = item.badge;
         if (badge) {
-            return (
-                <span className={classNames('layout-menu-badge p-tag p-tag-rounded ml-2 uppercase', { [`${badge}`]: true, 'p-tag-success': badge === 'new', 'p-tag-info': badge === 'updated' })}>{badge}</span>
-            );
+            return <span className={classNames('layout-menu-badge p-tag p-tag-rounded ml-2 uppercase', { [`${badge}`]: true, 'p-tag-success': badge === 'new', 'p-tag-info': badge === 'updated' })}>{badge}</span>;
         }
 
         return null;
-    }
+    };
 
     const renderLink = (item, linkProps) => {
         const { name, to, href } = item;
@@ -49,17 +47,26 @@ export default function Menu(props) {
         );
 
         if (href)
-            return <a href={href} role="menuitem" target="_blank" rel="noopener noreferrer" onClick={props.onMenuItemClick}>{content}</a>
+            return (
+                <a href={href} role="menuitem" target="_blank" rel="noopener noreferrer" onClick={props.onMenuItemClick}>
+                    {content}
+                </a>
+            );
         else if (!to)
-            return <button type="button" className="p-link" {...linkProps}>{content}</button>
+            return (
+                <button type="button" className="p-link" {...linkProps}>
+                    {content}
+                </button>
+            );
 
         return (
             <Link href={to}>
-                <a className={(to === router.pathname) ? 'router-link-exact-active router-link-active' : undefined}
-                    onClick={props.onMenuItemClick}>{content}</a>
+                <a className={to === router.pathname ? 'router-link-exact-active router-link-active' : undefined} onClick={props.onMenuItemClick}>
+                    {content}
+                </a>
             </Link>
         );
-    }
+    };
 
     const renderCategorySubmenuItems = (item, submenuKey) => {
         const cSubmenuRef = React.createRef();
@@ -68,84 +75,76 @@ export default function Menu(props) {
             <CSSTransition nodeRef={cSubmenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={isSubmenuActive(item.name) || item.expanded} unmountOnExit>
                 <div ref={cSubmenuRef} className="p-toggleable-content">
                     <ul role="menu">
-                        {
-                            item.children.map((item, index) => {
-                                const link = renderLink(item);
-                                return (
-                                    <li role="menuitem" key={`menuitem_${submenuKey}_${index}`}>
-                                        {link}
-                                    </li>
-                                );
-                            })
-                        }
+                        {item.children.map((item, index) => {
+                            const link = renderLink(item);
+                            return (
+                                <li role="menuitem" key={`menuitem_${submenuKey}_${index}`}>
+                                    {link}
+                                </li>
+                            );
+                        })}
                     </ul>
                 </div>
             </CSSTransition>
         );
-    }
+    };
 
     const renderCategoryItem = (menuitem, menuitemIndex) => {
         if (menuitem.children) {
             return (
                 <>
-                    {
-                        menuitem.children.map((item, index) => {
-                            const submenuKey = `${menuitemIndex}_${index}`;
-                            const link = renderLink(item, { onClick: () => toggleSubmenu(item.name) });
+                    {menuitem.children.map((item, index) => {
+                        const submenuKey = `${menuitemIndex}_${index}`;
+                        const link = renderLink(item, { onClick: () => toggleSubmenu(item.name) });
 
-                            return (
-                                <React.Fragment key={`menuitem_${submenuKey}`}>
-                                    {link}
-                                    {item.children && renderCategorySubmenuItems(item, submenuKey)}
-                                </React.Fragment>
-                            )
-                        })
-                    }
+                        return (
+                            <React.Fragment key={`menuitem_${submenuKey}`}>
+                                {link}
+                                {item.children && renderCategorySubmenuItems(item, submenuKey)}
+                            </React.Fragment>
+                        );
+                    })}
                 </>
             );
         }
 
         return null;
-    }
+    };
 
     const renderMenu = () => {
         return (
             <>
-                {
-                    filteredMenu.map((menuitem, index) => {
-                        const categoryItem = renderCategoryItem(menuitem, index);
-                        const badge = renderBadge(menuitem);
+                {filteredMenu.map((menuitem, index) => {
+                    const categoryItem = renderCategoryItem(menuitem, index);
+                    const badge = renderBadge(menuitem);
 
-                        return (
-                            <React.Fragment key={`category_${index}`}>
-                                <div className="menu-category">
-                                    {menuitem.name}
-                                    {badge}
-                                </div>
-                                {menuitem.children && <div className="menu-items">
-                                    {categoryItem}
-                                </div>}
-                                {menuitem.banner && <div className="menu-image menu-banner">
+                    return (
+                        <React.Fragment key={`category_${index}`}>
+                            <div className="menu-category">
+                                {menuitem.name}
+                                {badge}
+                            </div>
+                            {menuitem.children && <div className="menu-items">{categoryItem}</div>}
+                            {menuitem.banner && (
+                                <div className="menu-image menu-banner">
                                     <a href={menuitem.href}>
                                         <img src={contextPath + (props.darkTheme ? menuitem.imageDark : menuitem.imageLight)} alt="banner" />
                                     </a>
-                                </div>}
-                            </React.Fragment>
-                        )
-                    })
-                }
+                                </div>
+                            )}
+                        </React.Fragment>
+                    );
+                })}
             </>
         );
-    }
+    };
 
     const onSearchInputChange = (event) => {
         if (!MenuData.data) {
             setFilteredMenu([]);
-        }
-        else if (!event.target.value) {
+        } else if (!event.target.value) {
             setFilteredMenu(MenuData.data);
-        }
-        else if (MenuData.data) {
+        } else if (MenuData.data) {
             const searchVal = event.target.value && event.target.value.toLowerCase();
             let _filteredMenu = [];
             for (let item of MenuData.data) {
@@ -157,7 +156,7 @@ export default function Menu(props) {
 
             setFilteredMenu(_filteredMenu);
         }
-    }
+    };
 
     const findFilteredItems = (item, searchVal) => {
         if (item) {
@@ -179,7 +178,7 @@ export default function Menu(props) {
                 return true;
             }
         }
-    }
+    };
 
     const isFilterMatched = (item, searchVal) => {
         let matched = false;
@@ -192,38 +191,37 @@ export default function Menu(props) {
         }
 
         return matched;
-    }
+    };
 
     const onFilterOnOptions = (item, searchVal, optionKeys) => {
         if (item && optionKeys) {
             const isMatched = (val) => {
                 if (searchVal.indexOf('&') < 0) {
                     return val.toLowerCase().indexOf(searchVal) > -1;
-                }
-                else {
-                    return searchVal.split('&').some(s => !!s && val.toLowerCase().indexOf(s) > -1);
+                } else {
+                    return searchVal.split('&').some((s) => !!s && val.toLowerCase().indexOf(s) > -1);
                 }
             };
 
-            return optionKeys.some(optionKey => {
+            return optionKeys.some((optionKey) => {
                 const value = item[optionKey];
 
-                return value && (typeof value === 'string' ? isMatched(value) : value.filter(meta => isMatched(meta)).length > 0);
+                return value && (typeof value === 'string' ? isMatched(value) : value.filter((meta) => isMatched(meta)).length > 0);
             });
         }
 
         return false;
-    }
+    };
 
     const resetFilter = () => {
         setFilteredMenu(MenuData.data);
         searchInput.current.value = '';
         searchInput.current.focus();
-    }
+    };
 
     const menuItems = renderMenu();
     const showClearIcon = filteredMenu.length !== MenuData.data.length;
-    const sidebarClassName = classNames('layout-sidebar', { 'active': props.active });
+    const sidebarClassName = classNames('layout-sidebar', { active: props.active });
     const filterContentClassName = classNames('layout-sidebar-filter-content p-input-icon-left p-fluid', { 'p-input-icon-right': showClearIcon });
     const searchInput = useRef();
 

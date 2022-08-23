@@ -27,7 +27,7 @@ const TreeLazyDemo = () => {
                 leaf: false
             }
         ];
-    }
+    };
 
     const loadOnExpand = (event) => {
         if (!event.node.children) {
@@ -50,7 +50,7 @@ const TreeLazyDemo = () => {
                 setLoading(false);
             }, 500);
         }
-    }
+    };
 
     useEffect(() => {
         setTimeout(() => {
@@ -67,7 +67,9 @@ const TreeLazyDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Tree <span>Lazy</span></h1>
+                    <h1>
+                        Tree <span>Lazy</span>
+                    </h1>
                     <p>Lazy loading is useful when dealing with huge datasets.</p>
                 </div>
 
@@ -82,15 +84,14 @@ const TreeLazyDemo = () => {
 
             <TreeLazyDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeLazyDemo;
 
 export const TreeLazyDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -176,7 +177,7 @@ export class TreeLazyDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -246,7 +247,7 @@ const TreeLazyDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -316,7 +317,7 @@ const TreeLazyDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
@@ -390,15 +391,11 @@ const TreeLazyDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeLazyDemo', sources: sources })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeLazyDemo', sources: sources })}</TabView>
         </div>
     );
-})
+});

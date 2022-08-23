@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const BadgeDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -48,7 +47,7 @@ export class BadgeDemo extends Component {
 }
 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -86,7 +85,7 @@ export const BadgeDemo = () => {
 }
 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -124,7 +123,7 @@ export const BadgeDemo = () => {
 }
 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
@@ -166,7 +165,7 @@ const BadgeDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
@@ -176,20 +175,23 @@ const BadgeDemo = () => {
                     <p>Badge can be used as a component.</p>
 
                     <h6>Component</h6>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Badge } from 'primereact/badge';
 `}
-</CodeHighlight>
-                    <p>Content of the badge is specified using the <i>value</i> property.</p>
-<CodeHighlight>
-{`
+                    </CodeHighlight>
+                    <p>
+                        Content of the badge is specified using the <i>value</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Badge value="2"></Badge>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Severities</h5>
-                    <p>Different color options are available as severity levels. When used as a component use the <i>severity</i> property
-                    to apply a severity.</p>
+                    <p>
+                        Different color options are available as severity levels. When used as a component use the <i>severity</i> property to apply a severity.
+                    </p>
 
                     <ul>
                         <li>success</li>
@@ -197,17 +199,19 @@ import { Badge } from 'primereact/badge';
                         <li>warning</li>
                         <li>danger</li>
                     </ul>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Badge value="2" severity="success"></Badge>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Button Badges</h5>
-                    <p>Buttons provide integrated badge support with the <i>badge</i> and <i>badgeClass</i> properties.</p>
+                    <p>
+                        Buttons provide integrated badge support with the <i>badge</i> and <i>badgeClass</i> properties.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Button type="button" label="Emails">
     <Badge value="2"></Badge>
 </Button>
@@ -216,23 +220,25 @@ import { Badge } from 'primereact/badge';
     <Badge value="8" severity="danger">
 </Button>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Sizes</h5>
-                    <p>Badge sizes are adjusted with the <i>size</i> property that accepts "large" and "xlarge" as the possible alternatives to the default size.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Badge sizes are adjusted with the <i>size</i> property that accepts "large" and "xlarge" as the possible alternatives to the default size.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Badge value="2"></Badge>
 <Badge value="4" size="large" severity="warning"></Badge>
 <Badge value="6" size="xlarge" severity="success"></Badge>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <p>In addition, when placed inside another element, badge sizes can also derive their size from their parent.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <h1>Heading 1 <Badge value="New"></Badge></h1>
 <h2>Heading 2 <Badge value="New"></Badge></h2>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
@@ -269,14 +275,16 @@ import { Badge } from 'primereact/badge';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -322,8 +330,10 @@ import { Badge } from 'primereact/badge';
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
                         <h6>Screen Reader</h6>
-                        <p>Badge does not include any roles and attributes by default, any attribute is passed to the root element so aria roles and attributes can be added if required. If the badges are dynamic,
-                        <i>aria-live</i> may be utilized as well. In case badges need to be tabbable, <i>tabIndex</i> can be added to implement custom key handlers.</p>
+                        <p>
+                            Badge does not include any roles and attributes by default, any attribute is passed to the root element so aria roles and attributes can be added if required. If the badges are dynamic,
+                            <i>aria-live</i> may be utilized as well. In case badges need to be tabbable, <i>tabIndex</i> can be added to implement custom key handlers.
+                        </p>
 
                         <h5>Keyboard Support</h5>
                         <p>Component does not include any interactive elements.</p>
@@ -333,12 +343,10 @@ import { Badge } from 'primereact/badge';
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'BadgeDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'BadgeDemo', sources: sources })}
             </TabView>
         </div>
     );
-})
+});
 
 export default BadgeDoc;

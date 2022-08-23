@@ -30,10 +30,10 @@ const DataTableExportDemo = () => {
         { field: 'quantity', header: 'Quantity' }
     ];
 
-    const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
+    const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const importCSV = (e) => {
@@ -47,8 +47,8 @@ const DataTableExportDemo = () => {
             const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
-            let _importedCols = cols.map(col => ({ field: col, header: toCapitalize(col.replace(/['"]+/g, '')) }));
-            let _importedData = data.map(d => {
+            let _importedCols = cols.map((col) => ({ field: col, header: toCapitalize(col.replace(/['"]+/g, '')) }));
+            let _importedData = data.map((d) => {
                 d = d.split(',');
                 return cols.reduce((obj, c, i) => {
                     obj[c] = d[i].replace(/['"]+/g, '');
@@ -61,12 +61,12 @@ const DataTableExportDemo = () => {
         };
 
         reader.readAsText(file, 'UTF-8');
-    }
+    };
 
     const importExcel = (e) => {
         const file = e.files[0];
 
-        import('xlsx').then(xlsx => {
+        import('xlsx').then((xlsx) => {
             const reader = new FileReader();
             reader.onload = (e) => {
                 const wb = xlsx.read(e.target.result, { type: 'array' });
@@ -78,8 +78,8 @@ const DataTableExportDemo = () => {
                 const cols = data[0];
                 data.shift();
 
-                let _importedCols = cols.map(col => ({ field: col, header: toCapitalize(col) }));
-                let _importedData = data.map(d => {
+                let _importedCols = cols.map((col) => ({ field: col, header: toCapitalize(col) }));
+                let _importedData = data.map((d) => {
                     return cols.reduce((obj, c, i) => {
                         obj[c] = d[i];
                         return obj;
@@ -92,11 +92,11 @@ const DataTableExportDemo = () => {
 
             reader.readAsArrayBuffer(file);
         });
-    }
+    };
 
     const exportCSV = (selectionOnly) => {
         dt.current.exportCSV({ selectionOnly });
-    }
+    };
 
     const exportPdf = () => {
         import('jspdf').then((jsPDF) => {
@@ -123,40 +123,36 @@ const DataTableExportDemo = () => {
     const saveAsExcelFile = (buffer, fileName) => {
         import('file-saver').then((module) => {
             if (module && module.default) {
-                let EXCEL_TYPE =
-                    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+                let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
                 let EXCEL_EXTENSION = '.xlsx';
                 const data = new Blob([buffer], {
                     type: EXCEL_TYPE
                 });
 
-                module.default.saveAs(
-                    data,
-                    fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
-                );
+                module.default.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
             }
         });
     };
 
     const toCapitalize = (s) => {
         return s.charAt(0).toUpperCase() + s.slice(1);
-    }
+    };
 
     const clear = () => {
         setImportedData([]);
         setSelectedImportedData([]);
         setImportedCols([{ field: '', header: 'Header' }]);
-    }
+    };
 
     const onImportSelectionChange = (e) => {
         setSelectedImportedData(e.value);
-        const detail = e.value.map(d => Object.values(d)[0]).join(', ');
+        const detail = e.value.map((d) => Object.values(d)[0]).join(', ');
         toast.current.show({ severity: 'info', summary: 'Data Selected', detail, life: 3000 });
-    }
+    };
 
     const onSelectionChange = (e) => {
         setSelectedProducts(e.value);
-    }
+    };
 
     const header = (
         <div className="flex align-items-center export-buttons">
@@ -175,7 +171,9 @@ const DataTableExportDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>Import/Export</span></h1>
+                    <h1>
+                        DataTable <span>Import/Export</span>
+                    </h1>
                     <p>DataTable can export its data to various formats.</p>
                 </div>
 
@@ -190,16 +188,33 @@ const DataTableExportDemo = () => {
 
                     <div className="flex align-items-center py-2">
                         <FileUpload chooseOptions={{ label: 'CSV', icon: 'pi pi-file' }} mode="basic" name="demo[]" auto url={uploadPath} accept=".csv" className="mr-2" onUpload={importCSV} />
-                        <FileUpload chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }} mode="basic" name="demo[]" auto url={uploadPath}
-                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="mr-2" onUpload={importExcel} />
+                        <FileUpload
+                            chooseOptions={{ label: 'Excel', icon: 'pi pi-file-excel', className: 'p-button-success' }}
+                            mode="basic"
+                            name="demo[]"
+                            auto
+                            url={uploadPath}
+                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                            className="mr-2"
+                            onUpload={importExcel}
+                        />
                         <Button type="button" label="Clear" icon="pi pi-times" onClick={clear} className="p-button-info ml-auto" />
                     </div>
 
-                    <DataTable value={importedData} emptyMessage="No data" paginator rows={10} alwaysShowPaginator={false} responsiveLayout="scroll"
-                        selectionMode="multiple" selection={selectedImportedData} onSelectionChange={onImportSelectionChange}>
-                        {
-                            importedCols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
-                        }
+                    <DataTable
+                        value={importedData}
+                        emptyMessage="No data"
+                        paginator
+                        rows={10}
+                        alwaysShowPaginator={false}
+                        responsiveLayout="scroll"
+                        selectionMode="multiple"
+                        selection={selectedImportedData}
+                        onSelectionChange={onImportSelectionChange}
+                    >
+                        {importedCols.map((col, index) => (
+                            <Column key={index} field={col.field} header={col.header} />
+                        ))}
                     </DataTable>
                 </div>
 
@@ -208,11 +223,10 @@ const DataTableExportDemo = () => {
 
                     <Tooltip target=".export-buttons>button" position="bottom" />
 
-                    <DataTable ref={dt} value={products} header={header} dataKey="id" responsiveLayout="scroll"
-                        selectionMode="multiple" selection={selectedProducts} onSelectionChange={onSelectionChange}>
-                        {
-                            cols.map((col, index) => <Column key={index} field={col.field} header={col.header} />)
-                        }
+                    <DataTable ref={dt} value={products} header={header} dataKey="id" responsiveLayout="scroll" selectionMode="multiple" selection={selectedProducts} onSelectionChange={onSelectionChange}>
+                        {cols.map((col, index) => (
+                            <Column key={index} field={col.field} header={col.header} />
+                        ))}
                     </DataTable>
                 </div>
             </div>
@@ -220,14 +234,13 @@ const DataTableExportDemo = () => {
             <DataTableExportDemoDoc></DataTableExportDemoDoc>
         </div>
     );
-}
+};
 
 export default DataTableExportDemo;
 
 export const DataTableExportDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -450,7 +463,7 @@ export class DataTableExportDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -648,7 +661,7 @@ export const DataTableExportDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -846,7 +859,7 @@ export const DataTableExportDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./ProductService.js"></script>
@@ -1068,19 +1081,20 @@ echo '<p>Fake Upload Process</p>'; ?>
 
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
-                {
-                    useLiveEditorTabs({
-                        name: 'DataTableExportDemo', sources: sources, service: 'ProductService', data: 'products-small',
-                        dependencies: { 'jspdf': '2.5.1', 'jspdf-autotable': '3.5.23', 'xlsx': '0.18.5', 'file-saver': '2.0.5' },
-                        extFiles: extFiles
-                    })
-                }
+                {useLiveEditorTabs({
+                    name: 'DataTableExportDemo',
+                    sources: sources,
+                    service: 'ProductService',
+                    data: 'products-small',
+                    dependencies: { jspdf: '2.5.1', 'jspdf-autotable': '3.5.23', xlsx: '0.18.5', 'file-saver': '2.0.5' },
+                    extFiles: extFiles
+                })}
             </TabView>
         </div>
-    )
-})
+    );
+});

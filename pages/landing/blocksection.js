@@ -6,7 +6,7 @@ const BlockSection = () => {
     const [animationClass, setAnimationClass] = useState('');
 
     useEffect(() => {
-        setAnimationClass("blocks-animation");
+        setAnimationClass('blocks-animation');
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -384,6 +384,6 @@ const BlockSection = () => {
             </section>
         </section>
     );
-}
+};
 
 export default BlockSection;

@@ -15,12 +15,12 @@ const TreeTableFilterDemo = () => {
     const nodeservice = new NodeService();
 
     const treeTableFuncMap = {
-        'globalFilter1': setGlobalFilter1,
-        'globalFilter2': setGlobalFilter2
+        globalFilter1: setGlobalFilter1,
+        globalFilter2: setGlobalFilter2
     };
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const getHeader = (globalFilterKey) => {
@@ -32,7 +32,7 @@ const TreeTableFilterDemo = () => {
                 </div>
             </div>
         );
-    }
+    };
 
     let header1 = getHeader('globalFilter1');
     let header2 = getHeader('globalFilter2');
@@ -45,10 +45,14 @@ const TreeTableFilterDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>TreeTable <span>Filter</span></h1>
-                    <p>Filtering is enabled by setting the filter property as true in column object. Default match mode is "startsWith" and this can be configured using filterMatchMode
-                        property of column object that also accepts "contains", "endsWith", "equals", "in" and "custom". An optional global filter feature is available to search all fields with a keyword.
-                        By default input fields are generated as filter elements and using templating any component can be used as a filter.</p>
+                    <h1>
+                        TreeTable <span>Filter</span>
+                    </h1>
+                    <p>
+                        Filtering is enabled by setting the filter property as true in column object. Default match mode is "startsWith" and this can be configured using filterMatchMode property of column object that also accepts "contains",
+                        "endsWith", "equals", "in" and "custom". An optional global filter feature is available to search all fields with a keyword. By default input fields are generated as filter elements and using templating any component can be
+                        used as a filter.
+                    </p>
                 </div>
 
                 <DocActions github="treetable/filter.js" />
@@ -76,15 +80,14 @@ const TreeTableFilterDemo = () => {
 
             <TreeTableFilterDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeTableFilterDemo;
 
 const TreeTableFilterDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -149,7 +152,7 @@ export class TreeTableFilterDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -211,7 +214,7 @@ const TreeTableFilterDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -273,7 +276,7 @@ const TreeTableFilterDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./NodeService.js"></script>
@@ -343,15 +346,11 @@ const TreeTableFilterDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeTableFilterDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeTableFilterDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })}</TabView>
         </div>
-    )
-})
+    );
+});

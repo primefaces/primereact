@@ -5,10 +5,9 @@ import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
-const SkeletonDoc  = memo( () => {
-
+const SkeletonDoc = memo(() => {
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from "react";
@@ -149,7 +148,7 @@ export class SkeletonDemo extends Component {
 }
 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -287,7 +286,7 @@ export const SkeletonDemo = () => {
 }
 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from "react";
@@ -425,7 +424,7 @@ export const SkeletonDemo = () => {
 }
 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./SkeletonDemo.css" />
@@ -583,63 +582,71 @@ const SkeletonDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Skeleton } from 'primereact/skeleton';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/skeleton/skeleton.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>Skeleton displays a rectangle in its simplest form.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Skeleton />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Circle</h5>
-                    <p>The other option is the circle by setting <i>shape</i> property as "circle".</p>
-<CodeHighlight>
-{`
+                    <p>
+                        The other option is the circle by setting <i>shape</i> property as "circle".
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Skeleton shape="circle" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Size</h5>
-                    <p>In order to customize the size, use <i>width</i> and <i>height</i> properties for rectangles and <i>size</i> for Circle and Square shapes.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        In order to customize the size, use <i>width</i> and <i>height</i> properties for rectangles and <i>size</i> for Circle and Square shapes.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Skeleton width="100%" height="2rem" />
 <Skeleton shape="circle" size="50px" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Border Radius</h5>
-                    <p>The default border radius of a rectangle is specified by the theme and can be overriden using the <i>borderRadius</i> property.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        The default border radius of a rectangle is specified by the theme and can be overriden using the <i>borderRadius</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Skeleton borderRadius="16px" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Animation</h5>
-                    <p>Animation can be turned of by setting <i>animation</i> to "none".</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Animation can be turned of by setting <i>animation</i> to "none".
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Skeleton animation="none" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
@@ -694,7 +701,9 @@ import { Skeleton } from 'primereact/skeleton';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -722,23 +731,23 @@ import { Skeleton } from 'primereact/skeleton';
 
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Skeleton uses <i>aria-hidden</i> as "true" so that it gets ignored by screen readers, any valid attribute is passed to the root element so you may customize it further if required. If multiple skeletons are grouped inside a container, 
-                    you may use <i>aria-busy</i> on the container element as well to indicate the loading process.</p>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Skeleton uses <i>aria-hidden</i> as "true" so that it gets ignored by screen readers, any valid attribute is passed to the root element so you may customize it further if required. If multiple skeletons are grouped inside
+                            a container, you may use <i>aria-busy</i> on the container element as well to indicate the loading process.
+                        </p>
 
-                    <h5>Keyboard Support</h5>
-                    <p>Component does not include any interactive elements.</p>
+                        <h5>Keyboard Support</h5>
+                        <p>Component does not include any interactive elements.</p>
                     </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
-                {
-                    useLiveEditorTabs({ name: 'SkeletonDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'SkeletonDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default SkeletonDoc;

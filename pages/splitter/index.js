@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const SplitterDemo = () => {
-
     return (
         <div>
             <Head>
@@ -24,24 +23,16 @@ const SplitterDemo = () => {
                 <div className="card">
                     <h5>Horizontal</h5>
                     <Splitter style={{ height: '300px' }} className="mb-5">
-                        <SplitterPanel className="flex align-items-center justify-content-center">
-                            Panel 1
-                        </SplitterPanel>
-                        <SplitterPanel className="flex align-items-center justify-content-center">
-                            Panel 2
-                        </SplitterPanel>
+                        <SplitterPanel className="flex align-items-center justify-content-center">Panel 1</SplitterPanel>
+                        <SplitterPanel className="flex align-items-center justify-content-center">Panel 2</SplitterPanel>
                     </Splitter>
                 </div>
 
                 <div className="card">
                     <h5>Vertical</h5>
                     <Splitter style={{ height: '300px' }} layout="vertical">
-                        <SplitterPanel className="flex align-items-center justify-content-center">
-                            Panel 1
-                        </SplitterPanel>
-                        <SplitterPanel className="flex align-items-center justify-content-center">
-                            Panel 2
-                        </SplitterPanel>
+                        <SplitterPanel className="flex align-items-center justify-content-center">Panel 1</SplitterPanel>
+                        <SplitterPanel className="flex align-items-center justify-content-center">Panel 2</SplitterPanel>
                     </Splitter>
                 </div>
 
@@ -74,7 +65,7 @@ const SplitterDemo = () => {
 
             <SplitterDoc />
         </div>
-    )
-}
+    );
+};
 
 export default SplitterDemo;

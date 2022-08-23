@@ -1,29 +1,27 @@
 import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Toolbar = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
-    const otherProps = ObjectUtils.findDiffKeys(props, Toolbar.defaultProps);
-    const toolbarClass = classNames('p-toolbar p-component', props.className);
-    const left = ObjectUtils.getJSXElement(props.left, props);
-    const right = ObjectUtils.getJSXElement(props.right, props);
+export const Toolbar = React.memo(
+    React.forwardRef((props, ref) => {
+        const elementRef = React.useRef(null);
+        const otherProps = ObjectUtils.findDiffKeys(props, Toolbar.defaultProps);
+        const toolbarClass = classNames('p-toolbar p-component', props.className);
+        const left = ObjectUtils.getJSXElement(props.left, props);
+        const right = ObjectUtils.getJSXElement(props.right, props);
 
-    React.useImperativeHandle(ref, () => ({
-        getElement: () => elementRef.current,
-        ...props
-    }));
+        React.useImperativeHandle(ref, () => ({
+            props,
+            getElement: () => elementRef.current
+        }));
 
-    return (
-        <div id={props.id} ref={elementRef} className={toolbarClass} style={props.style} role="toolbar" {...otherProps}>
-            <div className="p-toolbar-group-left">
-                {left}
+        return (
+            <div id={props.id} ref={elementRef} className={toolbarClass} style={props.style} role="toolbar" {...otherProps}>
+                <div className="p-toolbar-group-left">{left}</div>
+                <div className="p-toolbar-group-right">{right}</div>
             </div>
-            <div className="p-toolbar-group-right">
-                {right}
-            </div>
-        </div>
-    )
-}));
+        );
+    })
+);
 
 Toolbar.displayName = 'Toolbar';
 Toolbar.defaultProps = {
@@ -33,4 +31,4 @@ Toolbar.defaultProps = {
     className: null,
     left: null,
     right: null
-}
+};

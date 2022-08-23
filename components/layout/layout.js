@@ -29,31 +29,29 @@ export default function Layout(props) {
     });
     const onMenuButtonClick = () => {
         setSidebarActive(true);
-    }
+    };
     const onMenuItemClick = () => {
         setSidebarActive(false);
-    }
+    };
     const onMaskClick = () => {
         setSidebarActive(false);
-    }
+    };
     const onThemeChange = (event) => {
         if (event.theme.startsWith('md')) {
             setRipple(true);
         }
         props.onThemeChange(event.theme, event.dark);
-    }
+    };
     const onInputStyleChange = (value) => {
         setInputStyle(value);
-    }
+    };
     const onRippleChange = (value) => {
         setRipple(value);
-    }
+    };
 
     useEffect(() => {
-        if (sidebarActive)
-            document.body.classList.add('blocked-scroll');
-        else
-            document.body.classList.remove('blocked-scroll');
+        if (sidebarActive) document.body.classList.add('blocked-scroll');
+        else document.body.classList.remove('blocked-scroll');
     }, [sidebarActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
     PrimeReact.ripple = true;
@@ -87,23 +85,24 @@ export default function Layout(props) {
             {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
             <Topbar onMenuButtonClick={onMenuButtonClick} onThemeChange={onThemeChange} theme={props.theme} darkTheme={props.dark} versions={[]} />
             <Menu active={sidebarActive} onMenuItemClick={onMenuItemClick} darkTheme={props.dark} />
-            <AppContentContext.Provider value={{
+            <AppContentContext.Provider
+                value={{
                     ripple: ripple,
                     inputStyle: inputStyle,
                     darkTheme: props.dark,
                     onInputStyleChange: onInputStyleChange,
                     onRippleChange: onRippleChange
-                }}>
+                }}
+            >
                 <div className="layout-content">
                     <div className="layout-content-inner">
                         {props.children}
                         <Footer></Footer>
                     </div>
                 </div>
-                <Config ripple={ripple} onRippleChange={onRippleChange}
-                        inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} />
+                <Config ripple={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} />
             </AppContentContext.Provider>
             <div className={maskClassName} onClick={onMaskClick}></div>
         </div>
-    )
+    );
 }

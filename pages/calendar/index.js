@@ -6,14 +6,13 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const CalendarDemo = () => {
-
     let today = new Date();
     let month = today.getMonth();
     let year = today.getFullYear();
-    let prevMonth = (month === 0) ? 11 : month - 1;
-    let prevYear = (prevMonth === 11) ? year - 1 : year;
-    let nextMonth = (month === 11) ? 0 : month + 1;
-    let nextYear = (nextMonth === 0) ? year + 1 : year;
+    let prevMonth = month === 0 ? 11 : month - 1;
+    let prevYear = prevMonth === 11 ? year - 1 : year;
+    let nextMonth = month === 11 ? 0 : month + 1;
+    let nextYear = nextMonth === 0 ? year + 1 : year;
 
     const [date1, setDate1] = useState(null);
     const [date2, setDate2] = useState(null);
@@ -55,13 +54,11 @@ const CalendarDemo = () => {
 
     const dateTemplate = (date) => {
         if (date.day > 10 && date.day < 15) {
-            return (
-                <strong style={{ textDecoration: 'line-through' }}>{date.day}</strong>
-            );
+            return <strong style={{ textDecoration: 'line-through' }}>{date.day}</strong>;
         }
 
         return date.day;
-    }
+    };
 
     return (
         <div>
@@ -131,7 +128,7 @@ const CalendarDemo = () => {
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="multiplemonths">Multiple Months</label>
-                            <Calendar id="multiplemonths" value={date11} onChange={(e) => setDate11(e.value)} numberOfMonths={3}/>
+                            <Calendar id="multiplemonths" value={date11} onChange={(e) => setDate11(e.value)} numberOfMonths={3} />
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="datetemplate">Date Template</label>
@@ -151,6 +148,6 @@ const CalendarDemo = () => {
             <CalendarDoc></CalendarDoc>
         </div>
     );
-}
+};
 
 export default CalendarDemo;

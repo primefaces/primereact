@@ -1,5 +1,39 @@
 # Changelog
 
+## [8.4.0](https://github.com/primefaces/primereact/tree/8.4.0) (2022-08-22)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/8.3.0...8.4.0)
+
+**Implemented New Features and Enhancements:**
+
+- FileUpload: Needed Event: onBeforeSelect [\#3134](https://github.com/primefaces/primereact/issues/3134)
+- DataTable: Add setting to sort null records at the beginning when in ascending order like old versions of PrimeReact [\#3114](https://github.com/primefaces/primereact/issues/3114)
+
+**Fixed bugs:**
+
+- Dialog: blockScroll not working [\#3166](https://github.com/primefaces/primereact/issues/3166)
+- InputNumber: getInput\(\) returns the wrong reference [\#3161](https://github.com/primefaces/primereact/issues/3161)
+- Calendar: does not change "view" dynamicly [\#3153](https://github.com/primefaces/primereact/issues/3153)
+- DataTable.restoreTableState does not restore column width [\#3150](https://github.com/primefaces/primereact/issues/3150)
+- RadioButton/Checkbox: onChange event is called for each click [\#3148](https://github.com/primefaces/primereact/issues/3148)
+- PickList - Selection Change properties throw errors [\#3147](https://github.com/primefaces/primereact/issues/3147)
+- Calendar: Min/Max fixes ported from PrimeFaces [\#3125](https://github.com/primefaces/primereact/issues/3125)
+- Calendar: TouchUI dismissal issues [\#3111](https://github.com/primefaces/primereact/issues/3111)
+- InputNumber: Tab does not fire update events, meaning inputNumbers do not call callbacks in datatables [\#3109](https://github.com/primefaces/primereact/issues/3109)
+- Tree: Custom filter broken due to overwritten props in useImperativeHandle hook. [\#3107](https://github.com/primefaces/primereact/issues/3107)
+- Chips: keyfilter [\#3100](https://github.com/primefaces/primereact/issues/3100)
+- Editor: Explicit import of quill.js dependency doesn't allow for single pages with inline scripting [\#3097](https://github.com/primefaces/primereact/issues/3097)
+- Dropdown: Required attribute doesn't work [\#3092](https://github.com/primefaces/primereact/issues/3092)
+- TreeSelect: props.panelFooterTemplate doesn't work [\#3088](https://github.com/primefaces/primereact/issues/3088)
+- Tooltip: If the the mouse hover ends before showDelay is reached, then the tooltip won't go away. [\#3083](https://github.com/primefaces/primereact/issues/3083)
+- Mention, InputText, InputTextArea and Password do not maintain p-filled properly [\#3081](https://github.com/primefaces/primereact/issues/3081)
+- StyleClass: Bug with "position: fixed" on chromium family only, firefox works OK [\#3080](https://github.com/primefaces/primereact/issues/3080)
+- OverlayPanel: Dismissable is ignored [\#3070](https://github.com/primefaces/primereact/issues/3070)
+- FileUpload: Ability to add file from variable [\#3044](https://github.com/primefaces/primereact/issues/3044)
+- Editor: 'Maximum update depth exceeded' on pasting formatted text [\#2271](https://github.com/primefaces/primereact/issues/2271)
+- Dropdown: Wrong event value on OnBlur [\#2224](https://github.com/primefaces/primereact/issues/2224)
+- Dropdown: search functionality can't find item starting with "+" key [\#2202](https://github.com/primefaces/primereact/issues/2202)
+
 ## [8.3.0](https://github.com/primefaces/primereact/tree/8.3.0) (2022-07-18)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.2.0...8.3.0)
