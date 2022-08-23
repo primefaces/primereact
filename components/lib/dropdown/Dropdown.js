@@ -618,7 +618,7 @@ export const Dropdown = React.memo(
             return (
                 <div className="p-hidden-accessible p-dropdown-hidden-select">
                     <select ref={inputRef} required={props.required} defaultValue={option.value} name={props.name} tabIndex={-1} aria-hidden="true">
-                        <option value={option.value}>{option.label}</option>;
+                        <option value={option.value}>{option.label}</option>
                     </select>
                 </div>
             );
