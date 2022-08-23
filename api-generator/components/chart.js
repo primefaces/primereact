@@ -55,13 +55,9 @@ const ChartProps = [
     }
 ];
 
-const ChartEvents = [
+const ChartEvents = [];
 
-];
-
-const ChartStyles = [
-
-];
+const ChartStyles = [];
 
 module.exports = {
     chart: {

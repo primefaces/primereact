@@ -31,9 +31,7 @@ const BreadCrumbProps = [
     }
 ];
 
-const BreadCrumbEvents = [
-
-];
+const BreadCrumbEvents = [];
 
 const BreadCrumbStyles = [
     { name: 'p-breadcrumb', description: 'Container element.' },

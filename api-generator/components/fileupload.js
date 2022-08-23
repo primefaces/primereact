@@ -222,7 +222,7 @@ const FileUploadEvents = [
                 name: 'event.originalEvent',
                 type: 'object',
                 description: 'Original browser event.'
-            },
+            }
         ]
     },
     {

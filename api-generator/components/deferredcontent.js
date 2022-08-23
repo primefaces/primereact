@@ -1,6 +1,4 @@
-const DeferredContentProps = [
-
-];
+const DeferredContentProps = [];
 
 const DeferredContentEvents = [
     {
@@ -16,9 +14,7 @@ const DeferredContentEvents = [
     }
 ];
 
-const DeferredContentStyles = [
-
-];
+const DeferredContentStyles = [];
 
 module.exports = {
     deferredcontent: {

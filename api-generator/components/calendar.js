@@ -514,7 +514,6 @@ const CalendarEvents = [
             }
         ]
     }
-
 ];
 
 const CalendarStyles = [

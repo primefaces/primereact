@@ -202,7 +202,7 @@ const MentionStyles = [
     { name: 'p-mention', description: 'Container element.' },
     { name: 'p-mention-panel', description: 'Overlay panel of suggestions.' },
     { name: 'p-mention-items', description: 'List container of suggestions.' },
-    { name: 'p-mention-item', description: 'List item of a suggestion.' },
+    { name: 'p-mention-item', description: 'List item of a suggestion.' }
 ];
 
 module.exports = {

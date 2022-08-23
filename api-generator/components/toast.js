@@ -52,7 +52,7 @@ const ToastEvents = [
                 name: 'message',
                 type: 'any',
                 description: 'Removed message'
-            },
+            }
         ]
     },
     {
@@ -63,7 +63,7 @@ const ToastEvents = [
                 name: 'message',
                 type: 'any',
                 description: 'Clicked message'
-            },
+            }
         ]
     },
     {

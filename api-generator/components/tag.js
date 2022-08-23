@@ -25,9 +25,7 @@ const TagProps = [
     }
 ];
 
-const TagEvents = [
-
-];
+const TagEvents = [];
 
 const TagStyles = [
     { name: 'p-tag', description: 'Tag element' },

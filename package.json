@@ -10,8 +10,8 @@
         "build-api": "node ./api-generator/build-api.js",
         "build-check": "npm run lint && npm run format-check && npm run type-check && npm run security-check",
         "security-check": "npm audit --production --audit-level high",
-        "format-check": "prettier --check \"{components,pages,service}/**/*.{js,ts,tsx}\"",
-        "format": "prettier --write \"{components,pages,service}/**/*.{js,ts,tsx}\"",
+        "format-check": "prettier --check \"{components,pages,service,api-generator}/**/*.{js,ts,tsx}\"",
+        "format": "prettier --write \"{components,pages,service,api-generator}/**/*.{js,ts,tsx}\"",
         "start": "next start",
         "lint": "next lint --max-warnings=0",
         "type-check": "tsc"

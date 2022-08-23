@@ -1,8 +1,9 @@
 # Ignore artifacts:
 build
 coverage
-api-generator
+dist
 out
 public
 styles
 node_modules
+.vscode

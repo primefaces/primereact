@@ -66,7 +66,7 @@ const ProgressBarEvents = [
                 description: 'TODO'
             }
         ]
-    },
+    }
 ];
 
 const ProgressBarStyles = [

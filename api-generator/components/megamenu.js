@@ -43,9 +43,7 @@ const MegaMenuProps = [
     }
 ];
 
-const MegaMenuEvents = [
-
-];
+const MegaMenuEvents = [];
 
 const MegaMenuStyles = [
     { name: 'p-megamenu', description: 'Container element.' },
