@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Accordion, AccordionTab } from '../../components/lib/accordion/Accordion';
-import AccordionDoc from '../../components/doc/accordion';
-import { Button } from '../../components/lib/button/Button';
-import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
+import React, { useState } from 'react';
+import AccordionDoc from '../../components/doc/accordion';
+import { DocActions } from '../../components/doc/common/docactions';
+import { Accordion, AccordionTab } from '../../components/lib/accordion/Accordion';
+import { Button } from '../../components/lib/button/Button';
 
 const AccordionDemo = () => {
     const [activeIndex, setActiveIndex] = useState(null);

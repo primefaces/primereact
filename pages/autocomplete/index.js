@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { AutoComplete } from '../../components/lib/autocomplete/AutoComplete';
-import { CountryService } from '../../service/CountryService';
+import getConfig from 'next/config';
+import Head from 'next/head';
+import React, { useEffect, useState } from 'react';
 import AutoCompleteDoc from '../../components/doc/autocomplete';
 import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
-import getConfig from 'next/config';
+import { AutoComplete } from '../../components/lib/autocomplete/AutoComplete';
+import { CountryService } from '../../service/CountryService';
 
 const AutoCompleteDemo = () => {
     const [countries, setCountries] = useState([]);
