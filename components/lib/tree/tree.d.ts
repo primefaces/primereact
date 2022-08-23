@@ -84,7 +84,7 @@ export interface TreeEventNodeParams {
 }
 
 interface TreeDragDropParams {
-    originalEvent: React.SyntheticEvent,
+    originalEvent: React.SyntheticEvent;
     value: TreeNode[];
     dragNode: TreeNode;
     dropNode: TreeNode;

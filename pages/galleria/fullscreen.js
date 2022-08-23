@@ -9,7 +9,6 @@ import getConfig from 'next/config';
 import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 
 const GalleriaFullScreenDemo = () => {
-
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const galleriaService = new PhotoService();
@@ -53,16 +52,16 @@ const GalleriaFullScreenDemo = () => {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        galleriaService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
         return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
-    }
+    };
 
     const thumbnailTemplate = (item) => {
         return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />;
-    }
+    };
 
     return (
         <div>
@@ -72,7 +71,9 @@ const GalleriaFullScreenDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Galleria <span>FullScreen</span></h1>
+                    <h1>
+                        Galleria <span>FullScreen</span>
+                    </h1>
                     <p>In fullscreen mode content covers the whole page over a mask.</p>
                 </div>
 
@@ -82,40 +83,69 @@ const GalleriaFullScreenDemo = () => {
             <div className="content-section implementation">
                 <div className="card">
                     <h5>With Thumbnails</h5>
-                    <Galleria ref={galleria1} value={images} responsiveOptions={responsiveOptions2} numVisible={9} style={{ maxWidth: '50%' }}
-                        circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
+                    <Galleria ref={galleria1} value={images} responsiveOptions={responsiveOptions2} numVisible={9} style={{ maxWidth: '50%' }} circular fullScreen showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
 
                     <Button label="Show" icon="pi pi-external-link" onClick={() => galleria1.current.show()} />
                 </div>
 
                 <div className="card">
                     <h5>Without Thumbnails</h5>
-                    <Galleria ref={galleria2} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
-                        circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
+                    <Galleria
+                        ref={galleria2}
+                        value={images}
+                        responsiveOptions={responsiveOptions}
+                        numVisible={7}
+                        style={{ maxWidth: '850px' }}
+                        circular
+                        fullScreen
+                        showItemNavigators
+                        showThumbnails={false}
+                        item={itemTemplate}
+                        thumbnail={thumbnailTemplate}
+                    />
 
                     <Button label="Show" icon="pi pi-external-link" onClick={() => galleria2.current.show()} />
                 </div>
 
                 <div className="card">
                     <h5>Custom Content</h5>
-                    <Galleria ref={galleria3} value={images} responsiveOptions={responsiveOptions} numVisible={7} style={{ maxWidth: '850px' }}
-                        activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)}
-                        circular fullScreen showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
+                    <Galleria
+                        ref={galleria3}
+                        value={images}
+                        responsiveOptions={responsiveOptions}
+                        numVisible={7}
+                        style={{ maxWidth: '850px' }}
+                        activeIndex={activeIndex}
+                        onItemChange={(e) => setActiveIndex(e.index)}
+                        circular
+                        fullScreen
+                        showItemNavigators
+                        showThumbnails={false}
+                        item={itemTemplate}
+                        thumbnail={thumbnailTemplate}
+                    />
 
                     <div className="grid" style={{ maxWidth: '400px' }}>
-                        {
-                            images && images.map((image, index) => {
-                                let imgEl = <img src={`${contextPath}/${image.thumbnailImageSrc}`} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
-                                    () => {setActiveIndex(index); galleria3.current.show()}
-                                } />
+                        {images &&
+                            images.map((image, index) => {
+                                let imgEl = (
+                                    <img
+                                        src={`${contextPath}/${image.thumbnailImageSrc}`}
+                                        alt={image.alt}
+                                        style={{ cursor: 'pointer' }}
+                                        onClick={() => {
+                                            setActiveIndex(index);
+                                            galleria3.current.show();
+                                        }}
+                                    />
+                                );
 
                                 return (
                                     <div className="col-3" key={index}>
                                         {imgEl}
                                     </div>
-                                )
-                            })
-                        }
+                                );
+                            })}
                     </div>
                 </div>
             </div>
@@ -123,14 +153,13 @@ const GalleriaFullScreenDemo = () => {
             <GalleriaFullScreenDemoDoc></GalleriaFullScreenDemoDoc>
         </div>
     );
-}
+};
 
 export default GalleriaFullScreenDemo;
 
 export const GalleriaFullScreenDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -251,7 +280,7 @@ export class GalleriaFullScreenDemo extends Component {
 }
             `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -359,7 +388,7 @@ const GalleriaFullScreenDemo = () => {
 }
             `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -467,7 +496,7 @@ const GalleriaFullScreenDemo = () => {
 }
                         `
         },
-        'browser' : {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./PhotoService.js"></script>
@@ -579,16 +608,11 @@ const GalleriaFullScreenDemo = () => {
     }
                     `
         }
-
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'GalleriaFullScreenDemo', sources: sources, service: 'PhotoService', data: 'photos'})
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'GalleriaFullScreenDemo', sources: sources, service: 'PhotoService', data: 'photos' })}</TabView>
         </div>
-    )
-})
+    );
+});

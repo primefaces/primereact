@@ -8,14 +8,12 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const DataTableGridLinesDemo = () => {
-
     const [products, setProducts] = useState(null);
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
 
     return (
         <div>
@@ -25,8 +23,12 @@ const DataTableGridLinesDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>GridLines</span></h1>
-                    <p>Enabling <b>showGridlines</b> displays borders between cells. Note: Some themes may always display gridlines by design.</p>
+                    <h1>
+                        DataTable <span>GridLines</span>
+                    </h1>
+                    <p>
+                        Enabling <b>showGridlines</b> displays borders between cells. Note: Some themes may always display gridlines by design.
+                    </p>
                 </div>
 
                 <DocActions github="datatable/gridlines.js" />
@@ -46,14 +48,13 @@ const DataTableGridLinesDemo = () => {
             <DataTableGridLinesDemoDoc />
         </div>
     );
-}
+};
 
 export default DataTableGridLinesDemo;
 
 export const DataTableGridLinesDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -94,7 +95,7 @@ export class DataTableGridLinesDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -125,7 +126,7 @@ const DataTableGridLinesDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -156,7 +157,7 @@ const DataTableGridLinesDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./ProductService.js"></script>
@@ -194,16 +195,11 @@ const DataTableGridLinesDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableGridLinesDemo', sources: sources, service: 'ProductService', data: 'products-small' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableGridLinesDemo', sources: sources, service: 'ProductService', data: 'products-small' })}</TabView>
         </div>
-    )
-
-})
+    );
+});

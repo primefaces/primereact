@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const InputTextareaDemo = () => {
-
     const [value1, setValue1] = useState('');
     const [value2, setValue2] = useState('');
     const [value3, setValue3] = useState('');
@@ -40,7 +39,7 @@ const InputTextareaDemo = () => {
 
             <InputTextareaDoc />
         </div>
-    )
-}
+    );
+};
 
 export default InputTextareaDemo;

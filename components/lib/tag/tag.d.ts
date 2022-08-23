@@ -11,6 +11,6 @@ export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttribu
     children?: React.ReactNode;
 }
 
-export declare class Tag extends React.Component<TagProps, any> { 
+export declare class Tag extends React.Component<TagProps, any> {
     public getElement(): HTMLSpanElement;
 }

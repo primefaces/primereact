@@ -5,4 +5,4 @@ export interface ColumnGroupProps {
     children?: React.ReactNode;
 }
 
-export declare class ColumnGroup extends React.Component<ColumnGroupProps, any> { }
+export declare class ColumnGroup extends React.Component<ColumnGroupProps, any> {}

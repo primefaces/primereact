@@ -5,8 +5,12 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const CheckboxDemo = () => {
-
-    const categories = [{ name: 'Accounting', key: 'A' }, { name: 'Marketing', key: 'M' }, { name: 'Production', key: 'P' }, { name: 'Research', key: 'R' }];
+    const categories = [
+        { name: 'Accounting', key: 'A' },
+        { name: 'Marketing', key: 'M' },
+        { name: 'Production', key: 'P' },
+        { name: 'Research', key: 'R' }
+    ];
     const [checked, setChecked] = useState(false);
     const [cities, setCities] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState(categories.slice(1, 3));
@@ -16,8 +20,7 @@ const CheckboxDemo = () => {
 
         if (e.checked) {
             _selectedCategories.push(e.value);
-        }
-        else {
+        } else {
             for (let i = 0; i < _selectedCategories.length; i++) {
                 const selectedCategory = _selectedCategories[i];
 
@@ -29,19 +32,16 @@ const CheckboxDemo = () => {
         }
 
         setSelectedCategories(_selectedCategories);
-    }
-
+    };
 
     const onCityChange = (e) => {
         let selectedCities = [...cities];
 
-        if (e.checked)
-            selectedCities.push(e.value);
-        else
-            selectedCities.splice(selectedCities.indexOf(e.value), 1);
+        if (e.checked) selectedCities.push(e.value);
+        else selectedCities.splice(selectedCities.indexOf(e.value), 1);
 
         setCities(selectedCities);
-    }
+    };
 
     return (
         <div>
@@ -61,7 +61,7 @@ const CheckboxDemo = () => {
                 <div className="card">
                     <h5>Basic</h5>
                     <div className="field-checkbox">
-                        <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
+                        <Checkbox inputId="binary" checked={checked} onChange={(e) => setChecked(e.checked)} />
                         <label htmlFor="binary">Remember Me</label>
                     </div>
 
@@ -84,22 +84,20 @@ const CheckboxDemo = () => {
                     </div>
 
                     <h5>Dynamic Values, Preselection, Value Binding and Disabled Option</h5>
-                    {
-                        categories.map((category) => {
-                            return (
-                                <div key={category.key} className="field-checkbox">
-                                    <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} disabled={category.key === 'R'} />
-                                    <label htmlFor={category.key}>{category.name}</label>
-                                </div>
-                            )
-                        })
-                    }
+                    {categories.map((category) => {
+                        return (
+                            <div key={category.key} className="field-checkbox">
+                                <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} disabled={category.key === 'R'} />
+                                <label htmlFor={category.key}>{category.name}</label>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 
             <CheckboxDoc />
         </div>
-    )
-}
+    );
+};
 
 export default CheckboxDemo;

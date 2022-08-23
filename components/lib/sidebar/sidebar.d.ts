@@ -28,7 +28,7 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     children?: React.ReactNode;
 }
 
-export declare class Sidebar extends React.Component<SidebarProps, any> { 
+export declare class Sidebar extends React.Component<SidebarProps, any> {
     public getElement(): HTMLDivElement;
     public getMask(): HTMLElement;
     public getCloseIcon(): HTMLButtonElement;

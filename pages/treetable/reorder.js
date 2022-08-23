@@ -8,12 +8,11 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeTableColReorderDemo = () => {
-
     const [nodes, setNodes] = useState([]);
     const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -24,7 +23,9 @@ const TreeTableColReorderDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>TreeTable <span>Column Reorder</span></h1>
+                    <h1>
+                        TreeTable <span>Column Reorder</span>
+                    </h1>
                     <p>Order of the columns can be changed using drag and drop.</p>
                 </div>
 
@@ -43,15 +44,14 @@ const TreeTableColReorderDemo = () => {
 
             <TreeTableColReorderDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeTableColReorderDemo;
 
 const TreeTableColReorderDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -89,7 +89,7 @@ export class TreeTableColReorderDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -119,7 +119,7 @@ const TreeTableColReorderDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -149,7 +149,7 @@ const TreeTableColReorderDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
 <script src="./NodeService.js"></script>
@@ -185,15 +185,11 @@ const TreeTableColReorderDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeTableColReorderDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeTableColReorderDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })}</TabView>
         </div>
-    )
-})
+    );
+});

@@ -6,7 +6,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeSelectDemo = () => {
-
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKey1, setSelectedNodeKey1] = useState(null);
     const [selectedNodeKey2, setSelectedNodeKey2] = useState(null);
@@ -16,7 +15,7 @@ const TreeSelectDemo = () => {
     const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        nodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -55,7 +54,7 @@ const TreeSelectDemo = () => {
 
             <TreeSelectDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeSelectDemo;

@@ -33,6 +33,6 @@ export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.In
     children?: React.ReactNode;
 }
 
-export declare class ToggleButton extends React.Component<ToggleButtonProps, any> { 
+export declare class ToggleButton extends React.Component<ToggleButtonProps, any> {
     public getElement(): HTMLDivElement;
 }

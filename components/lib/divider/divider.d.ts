@@ -13,6 +13,6 @@ export interface DividerProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     children?: React.ReactNode;
 }
 
-export declare class Divider extends React.Component<DividerProps, any> { 
+export declare class Divider extends React.Component<DividerProps, any> {
     public getElement(): HTMLDivElement;
 }

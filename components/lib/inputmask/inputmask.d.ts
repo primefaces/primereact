@@ -21,7 +21,7 @@ interface InputMaskChangeParams {
     target: InputMaskChangeTargetOptions;
 }
 
-export interface InputMaskProps  extends Omit<InputTextProps, 'onChange'> {
+export interface InputMaskProps extends Omit<InputTextProps, 'onChange'> {
     mask?: string;
     slotChar?: string;
     autoClear?: boolean;

@@ -4,9 +4,8 @@ import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 
 const StyleClassDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -50,7 +49,7 @@ export class StyleClassDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useRef } from 'react';
@@ -88,7 +87,7 @@ const StyleClassDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useRef } from 'react';
@@ -126,7 +125,7 @@ const StyleClassDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./StyleClassDemo.css" />
@@ -168,7 +167,7 @@ const StyleClassDemo = () => {
 }
                 `
         }
-    }
+    };
 
     const extFiles = {
         'demo/StyleClassDemo.css': {
@@ -208,42 +207,48 @@ const StyleClassDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { StyleClass } from 'primereact/styleclass';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/styleclass/styleclass.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Required prop <i>nodeRef</i> needs to be bind to target's ref which is DOM element. StyleClass has two modes, <i>toggleClassName</i> to simply add-remove a class and enter/leave animations.</p>
+                    <p>
+                        Required prop <i>nodeRef</i> needs to be bind to target's ref which is DOM element. StyleClass has two modes, <i>toggleClassName</i> to simply add-remove a class and enter/leave animations.
+                    </p>
 
-                    <p><b>ToggleClass</b></p>
-<CodeHighlight>
-{`
+                    <p>
+                        <b>ToggleClass</b>
+                    </p>
+                    <CodeHighlight>
+                        {`
 <StyleClass nodeRef={toggleBtnRef} selector="@next" toggleClassName="p-disabled">
     <Button ref={toggleBtnRef} label="Toggle p-disabled" />
 </StyleClass>
 <InputText className="block mt-3" />
 `}
-</CodeHighlight>
-                    <p><b>Enter/Leave Animation</b></p>
-<CodeHighlight>
-{`
+                    </CodeHighlight>
+                    <p>
+                        <b>Enter/Leave Animation</b>
+                    </p>
+                    <CodeHighlight>
+                        {`
 <StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="hidden" enterActiveClassName="my-fadein">
     <Button ref={openBtnRef} label="Show" className="mr-2" />
 </StyleClass>
@@ -254,9 +259,11 @@ import { StyleClass } from 'primereact/styleclass';
 
 <div className="box hidden">Content</div>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Target</h5>
-                    <p>Target element is defined with the <i>selector</i> prop that can either be a valid css query or one of the keywords below.</p>
+                    <p>
+                        Target element is defined with the <i>selector</i> prop that can either be a valid css query or one of the keywords below.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -368,12 +375,10 @@ import { StyleClass } from 'primereact/styleclass';
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'StyleClassDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'StyleClassDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default StyleClassDoc;

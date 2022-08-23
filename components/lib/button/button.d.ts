@@ -4,7 +4,7 @@ import { IconType } from '../utils';
 
 type ButtonPositionType = 'top' | 'bottom' | 'left' | 'right';
 
-export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'disabled'|'ref'> {
+export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'disabled' | 'ref'> {
     label?: string;
     icon?: IconType<ButtonProps>;
     iconPos?: ButtonPositionType;
@@ -18,6 +18,6 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
     children?: React.ReactNode;
 }
 
-export declare class Button extends React.Component<ButtonProps, any> { 
+export declare class Button extends React.Component<ButtonProps, any> {
     public getElement(): HTMLButtonElement;
 }

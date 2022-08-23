@@ -20,7 +20,7 @@ type PasswordIconType = React.ReactNode | ((e: PasswordIconParams) => React.Reac
 
 type PasswordAppendToType = 'self' | HTMLElement | undefined | null;
 
-export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput'|'ref'> {
+export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput' | 'ref'> {
     inputId?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     promptLabel?: string;
@@ -49,7 +49,7 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
     children?: React.ReactNode;
 }
 
-export declare class Password extends React.Component<PasswordProps, any> { 
+export declare class Password extends React.Component<PasswordProps, any> {
     public getElement(): HTMLDivElement;
     public getInput(): InputText;
     public getOverlay(): HTMLElement;

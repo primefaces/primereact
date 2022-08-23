@@ -3,7 +3,7 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
-export const TabPanel = () => { }
+export const TabPanel = () => {};
 
 export const TabView = React.forwardRef((props, ref) => {
     const [idState, setIdState] = React.useState(props.id);
@@ -24,7 +24,7 @@ export const TabView = React.forwardRef((props, ref) => {
 
     const shouldUseTab = (tab, index) => {
         return tab && tab.props.__TYPE === 'TabPanel' && hiddenTabsState.every((_i) => _i !== index);
-    }
+    };
 
     const findVisibleActiveTab = (i) => {
         const tabsInfo = React.Children.map(props.children, (tab, index) => {
@@ -34,7 +34,7 @@ export const TabView = React.forwardRef((props, ref) => {
         });
 
         return tabsInfo.find(({ tab, index }) => !tab.props.disabled && index >= i) || tabsInfo.reverse().find(({ tab, index }) => !tab.props.disabled && i > index);
-    }
+    };
 
     const onTabHeaderClose = (event, index) => {
         setHiddenTabsState([...hiddenTabsState, index]);
@@ -44,14 +44,12 @@ export const TabView = React.forwardRef((props, ref) => {
         }
 
         event.preventDefault();
-    }
+    };
 
     const onTabHeaderClick = (event, tab, index) => {
         if (!tab.props.disabled) {
-            if (props.onTabChange)
-                props.onTabChange({ originalEvent: event, index });
-            else
-                setActiveIndexState(index);
+            if (props.onTabChange) props.onTabChange({ originalEvent: event, index });
+            else setActiveIndexState(index);
         }
 
         updateScrollBar(index);
@@ -59,20 +57,20 @@ export const TabView = React.forwardRef((props, ref) => {
         if (event) {
             event.preventDefault();
         }
-    }
+    };
 
     const onKeyDown = (event, tab, index) => {
         if (event.code === 'Enter') {
             onTabHeaderClick(event, tab, index);
         }
-    }
+    };
 
     const updateInkBar = () => {
         const tabHeader = tabsRef.current[`tab_${activeIndex}`];
 
         inkbarRef.current.style.width = DomHandler.getWidth(tabHeader) + 'px';
         inkbarRef.current.style.left = DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(navRef.current).left + 'px';
-    }
+    };
 
     const updateScrollBar = (index) => {
         let tabHeader = tabsRef.current[`tab_${index}`];
@@ -80,7 +78,7 @@ export const TabView = React.forwardRef((props, ref) => {
         if (tabHeader && tabHeader.scrollIntoView) {
             tabHeader.scrollIntoView({ block: 'nearest' });
         }
-    }
+    };
 
     const updateButtonState = () => {
         const { scrollLeft, scrollWidth } = contentRef.current;
@@ -88,23 +86,23 @@ export const TabView = React.forwardRef((props, ref) => {
 
         setBackwardIsDisabledState(scrollLeft === 0);
         setForwardIsDisabledState(scrollLeft === scrollWidth - width);
-    }
+    };
 
     const onScroll = (event) => {
         props.scrollable && updateButtonState();
         event.preventDefault();
-    }
+    };
 
     const getVisibleButtonWidths = () => {
-        return [prevBtnRef.current, nextBtnRef.current].reduce((acc, el) => el ? acc + DomHandler.getWidth(el) : acc, 0);
-    }
+        return [prevBtnRef.current, nextBtnRef.current].reduce((acc, el) => (el ? acc + DomHandler.getWidth(el) : acc), 0);
+    };
 
     const navBackward = () => {
         const width = DomHandler.getWidth(contentRef.current) - getVisibleButtonWidths();
         const pos = contentRef.current.scrollLeft - width;
 
         contentRef.current.scrollLeft = pos <= 0 ? 0 : pos;
-    }
+    };
 
     const navForward = () => {
         const width = DomHandler.getWidth(contentRef.current) - getVisibleButtonWidths();
@@ -112,18 +110,16 @@ export const TabView = React.forwardRef((props, ref) => {
         const lastPos = contentRef.current.scrollWidth - width;
 
         contentRef.current.scrollLeft = pos >= lastPos ? lastPos : pos;
-    }
+    };
 
     const reset = () => {
         setBackwardIsDisabledState(true);
         setForwardIsDisabledState(false);
         setHiddenTabsState([]);
 
-        if (props.onTabChange)
-            props.onTabChange({ index: activeIndex });
-        else
-            setActiveIndexState(props.activeIndex);
-    }
+        if (props.onTabChange) props.onTabChange({ index: activeIndex });
+        else setActiveIndexState(props.activeIndex);
+    };
 
     React.useEffect(() => {
         updateInkBar();
@@ -163,12 +159,11 @@ export const TabView = React.forwardRef((props, ref) => {
         const leftIconElement = leftIcon && <i className={leftIcon}></i>;
         const titleElement = <span className="p-tabview-title">{header}</span>;
         const rightIconElement = rightIcon && <i className={rightIcon}></i>;
-        const closableIconElement = closable && <i className="p-tabview-close pi pi-times" onClick={(e) => onTabHeaderClose(e, index)}></i>
+        const closableIconElement = closable && <i className="p-tabview-close pi pi-times" onClick={(e) => onTabHeaderClose(e, index)}></i>;
 
         let content = (
             // eslint-disable /
-            <a role="tab" className="p-tabview-nav-link" onClick={(e) => onTabHeaderClick(e, tab, index)} id={headerId} onKeyDown={(e) => onKeyDown(e, tab, index)}
-                aria-controls={ariaControls} aria-selected={selected} tabIndex={tabIndex}>
+            <a role="tab" className="p-tabview-nav-link" onClick={(e) => onTabHeaderClick(e, tab, index)} id={headerId} onKeyDown={(e) => onKeyDown(e, tab, index)} aria-controls={ariaControls} aria-selected={selected} tabIndex={tabIndex}>
                 {leftIconElement}
                 {titleElement}
                 {rightIconElement}
@@ -198,21 +193,19 @@ export const TabView = React.forwardRef((props, ref) => {
         }
 
         return (
-            <li ref={(el) => tabsRef.current[`tab_${index}`] = el} className={className} style={style} role="presentation">
+            <li ref={(el) => (tabsRef.current[`tab_${index}`] = el)} className={className} style={style} role="presentation">
                 {content}
             </li>
-        )
-    }
+        );
+    };
 
     const createTabHeaders = () => {
-        return (
-            React.Children.map(props.children, (tab, index) => {
-                if (shouldUseTab(tab, index)) {
-                    return createTabHeader(tab, index);
-                }
-            })
-        );
-    }
+        return React.Children.map(props.children, (tab, index) => {
+            if (shouldUseTab(tab, index)) {
+                return createTabHeader(tab, index);
+            }
+        });
+    };
 
     const createNavigator = () => {
         const headers = createTabHeaders();
@@ -224,8 +217,8 @@ export const TabView = React.forwardRef((props, ref) => {
                     <li ref={inkbarRef} className="p-tabview-ink-bar"></li>
                 </ul>
             </div>
-        )
-    }
+        );
+    };
 
     const createContent = () => {
         const className = classNames('p-tabview-panels', props.panelContainerClassName);
@@ -240,9 +233,9 @@ export const TabView = React.forwardRef((props, ref) => {
 
                 return (
                     <div {...otherProps} id={contentId} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={style} role="tabpanel">
-                        {!props.renderActiveOnly ? tab.props.children : (selected && tab.props.children)}
+                        {!props.renderActiveOnly ? tab.props.children : selected && tab.props.children}
                     </div>
-                )
+                );
             }
         });
 
@@ -250,8 +243,8 @@ export const TabView = React.forwardRef((props, ref) => {
             <div className={className} style={props.panelContainerStyle}>
                 {contents}
             </div>
-        )
-    }
+        );
+    };
 
     const createPrevButton = () => {
         if (props.scrollable && !backwardIsDisabledState) {
@@ -260,11 +253,11 @@ export const TabView = React.forwardRef((props, ref) => {
                     <span className="pi pi-chevron-left"></span>
                     <Ripple />
                 </button>
-            )
+            );
         }
 
         return null;
-    }
+    };
 
     const createNextButton = () => {
         if (props.scrollable && !forwardIsDisabledState) {
@@ -273,14 +266,18 @@ export const TabView = React.forwardRef((props, ref) => {
                     <span className="pi pi-chevron-right"></span>
                     <Ripple />
                 </button>
-            )
+            );
         }
-    }
+    };
 
     const otherProps = ObjectUtils.findDiffKeys(props, TabView.defaultProps);
-    const className = classNames('p-tabview p-component', {
-        'p-tabview-scrollable': props.scrollable
-    }, props.className);
+    const className = classNames(
+        'p-tabview p-component',
+        {
+            'p-tabview-scrollable': props.scrollable
+        },
+        props.className
+    );
     const navigator = createNavigator();
     const content = createContent();
     const prevButton = createPrevButton();
@@ -295,7 +292,7 @@ export const TabView = React.forwardRef((props, ref) => {
             </div>
             {content}
         </div>
-    )
+    );
 });
 
 TabPanel.displayName = 'TabPanel';
@@ -313,7 +310,7 @@ TabPanel.defaultProps = {
     headerClassName: null,
     contentStyle: null,
     contentClassName: null
-}
+};
 
 TabView.displayName = 'TabView';
 TabView.defaultProps = {
@@ -328,4 +325,4 @@ TabView.defaultProps = {
     scrollable: false,
     panelContainerStyle: null,
     panelContainerClassName: null
-}
+};

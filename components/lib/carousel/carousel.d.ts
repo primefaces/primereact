@@ -34,4 +34,4 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 
 export declare class Carousel extends React.Component<CarouselProps, any> {
     public getElement(): HTMLDivElement;
- }
+}

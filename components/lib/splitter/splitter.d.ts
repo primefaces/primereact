@@ -17,7 +17,7 @@ interface SplitterPanelProps {
     children?: React.ReactNode;
 }
 
-export declare class SplitterPanel extends React.Component<SplitterPanelProps, any> { }
+export declare class SplitterPanel extends React.Component<SplitterPanelProps, any> {}
 
 export interface SplitterProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     layout?: SplitterLayoutType;
@@ -28,6 +28,6 @@ export interface SplitterProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     children?: React.ReactNode;
 }
 
-export declare class Splitter extends React.Component<SplitterProps, any> { 
+export declare class Splitter extends React.Component<SplitterProps, any> {
     public getElement(): HTMLDivElement;
 }

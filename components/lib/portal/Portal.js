@@ -39,4 +39,4 @@ Portal.defaultProps = {
     visible: false,
     onMounted: null,
     onUnmounted: null
-}
+};

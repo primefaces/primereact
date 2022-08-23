@@ -8,12 +8,11 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeTableStyleDemo = () => {
-
     const [nodes, setNodes] = useState([]);
     const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const sizeTemplate = (node) => {
@@ -21,11 +20,11 @@ const TreeTableStyleDemo = () => {
         let fontWeight = parseInt(size, 10) > 75 ? 'bold' : 'normal';
 
         return <span style={{ fontWeight: fontWeight }}>{size}</span>;
-    }
+    };
 
     const rowClassName = (node) => {
-        return { 'p-highlight': (node.children && node.children.length === 3) };
-    }
+        return { 'p-highlight': node.children && node.children.length === 3 };
+    };
 
     return (
         <div>
@@ -35,7 +34,9 @@ const TreeTableStyleDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>TreeTable <span>Styling</span></h1>
+                    <h1>
+                        TreeTable <span>Styling</span>
+                    </h1>
                     <p>Particular rows and cells can be styled based on data.</p>
                 </div>
 
@@ -55,16 +56,14 @@ const TreeTableStyleDemo = () => {
 
             <TreeTableStyleDemoDoc />
         </div>
-    )
-
-}
+    );
+};
 
 export default TreeTableStyleDemo;
 
 const TreeTableStyleDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -116,7 +115,7 @@ export class TreeTableStyleDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -158,7 +157,7 @@ const TreeTableStyleDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -200,7 +199,7 @@ const TreeTableStyleDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./NodeService.js"></script>
@@ -248,16 +247,11 @@ const TreeTableStyleDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeTableStyleDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeTableStyleDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })}</TabView>
         </div>
-    )
-
-})
+    );
+});

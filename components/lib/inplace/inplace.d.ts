@@ -16,7 +16,7 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     children?: React.ReactNode;
 }
 
-export declare class Inplace extends React.Component<InplaceProps, any> { 
+export declare class Inplace extends React.Component<InplaceProps, any> {
     public getElement(): HTMLDivElement;
 }
 

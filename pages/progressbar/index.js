@@ -6,7 +6,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const ProgressBarDemo = () => {
-
     const [value1, setValue1] = useState(0);
     const toast = useRef(null);
     const interval = useRef(null);
@@ -17,7 +16,7 @@ const ProgressBarDemo = () => {
                 {value}/<b>100</b>
             </React.Fragment>
         );
-    }
+    };
 
     useEffect(() => {
         let val = value1;
@@ -38,7 +37,7 @@ const ProgressBarDemo = () => {
                 clearInterval(interval.current);
                 interval.current = null;
             }
-        }
+        };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -77,6 +76,6 @@ const ProgressBarDemo = () => {
             <ProgressBarDoc />
         </div>
     );
-}
+};
 
 export default ProgressBarDemo;

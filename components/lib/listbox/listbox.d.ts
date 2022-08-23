@@ -3,7 +3,6 @@ import { SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { VirtualScrollerProps, VirtualScroller } from '../virtualscroller';
 
-
 type ListBoxOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
 type ListBoxItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);

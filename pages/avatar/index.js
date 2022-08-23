@@ -116,14 +116,11 @@ const AvatarDemo = () => {
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
 
             <AvatarDoc />
         </div>
     );
-}
+};
 
 export default AvatarDemo;

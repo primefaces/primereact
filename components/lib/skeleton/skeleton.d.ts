@@ -14,6 +14,6 @@ export interface SkeletonProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     children?: React.ReactNode;
 }
 
-export declare class Skeleton extends React.Component<SkeletonProps, any> { 
+export declare class Skeleton extends React.Component<SkeletonProps, any> {
     public getElement(): HTMLDivElement;
 }

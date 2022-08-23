@@ -56,4 +56,4 @@ export declare class ColorPicker extends React.Component<ColorPickerProps, any> 
     public getElement(): HTMLDivElement;
     public getInput(): HTMLInputElement;
     public getOverlay(): HTMLElement;
- }
+}

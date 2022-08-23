@@ -117,7 +117,7 @@ interface PaginatorCurrentPageReportOptions {
 
 interface PaginatorJumpToPageInputOptions {
     value: number;
-    onChange(first:number, rows: number): void;
+    onChange(first: number, rows: number): void;
     disabled: boolean;
     className: string;
     element: JSX.Element;
@@ -154,6 +154,6 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     children?: React.ReactNode;
 }
 
-export declare class Paginator extends React.Component<PaginatorProps, any> { 
+export declare class Paginator extends React.Component<PaginatorProps, any> {
     public getElement(): HTMLDivElement;
 }

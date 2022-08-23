@@ -25,6 +25,6 @@ export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<Reac
     children?: React.ReactNode;
 }
 
-export declare class TriStateCheckbox extends React.Component<TriStateCheckboxProps, any> { 
+export declare class TriStateCheckbox extends React.Component<TriStateCheckboxProps, any> {
     public getElement(): HTMLDivElement;
 }

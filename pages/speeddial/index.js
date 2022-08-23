@@ -8,7 +8,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 const SpeedDialDemo = () => {
-
     const toast = useRef(null);
 
     const items = [
@@ -42,14 +41,14 @@ const SpeedDialDemo = () => {
                             <span className="p-speeddial-action-icon pi pi-upload"></span>
                         </a>
                     </Link>
-                )
+                );
             }
         },
         {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
-                window.location.href = 'https://facebook.github.io/react/'
+                window.location.href = 'https://facebook.github.io/react/';
             }
         }
     ];
@@ -125,7 +124,7 @@ const SpeedDialDemo = () => {
 
             <SpeedDialDoc />
         </div>
-    )
-}
+    );
+};
 
 export default SpeedDialDemo;

@@ -7,6 +7,6 @@ export interface ProgressSpinnerProps extends Omit<React.DetailedHTMLProps<React
     children?: React.ReactNode;
 }
 
-export declare class ProgressSpinner extends React.Component<ProgressSpinnerProps, any> { 
+export declare class ProgressSpinner extends React.Component<ProgressSpinnerProps, any> {
     public getElement(): HTMLDivElement;
 }

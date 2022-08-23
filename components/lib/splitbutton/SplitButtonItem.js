@@ -2,7 +2,6 @@ import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const SplitButtonItem = React.memo((props) => {
-
     const onClick = (e) => {
         if (props.menuitem.command) {
             props.menuitem.command({ originalEvent: e, item: props.menuitem });
@@ -13,11 +12,11 @@ export const SplitButtonItem = React.memo((props) => {
         }
 
         e.preventDefault();
-    }
+    };
 
     const createSeparator = () => {
-        return <li className="p-menu-separator" role="separator"></li>
-    }
+        return <li className="p-menu-separator" role="separator"></li>;
+    };
 
     const createMenuitem = () => {
         const { disabled, icon: _icon, label: _label, template, url, target } = props.menuitem;
@@ -40,7 +39,7 @@ export const SplitButtonItem = React.memo((props) => {
                 iconClassName,
                 element: content,
                 props
-            }
+            };
 
             content = ObjectUtils.getJSXElement(template, props.menuitem, defaultContentOptions);
         }
@@ -49,12 +48,12 @@ export const SplitButtonItem = React.memo((props) => {
             <li className="p-menuitem" role="none">
                 {content}
             </li>
-        )
-    }
+        );
+    };
 
     const createItem = () => {
         return props.menuitem.separator ? createSeparator() : createMenuitem();
-    }
+    };
 
     const item = createItem();
 

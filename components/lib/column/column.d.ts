@@ -58,7 +58,7 @@ interface ColumnBodyExpanderOptions {
 }
 
 interface ColumnBodyRowEditorOptions {
-    editing: boolean,
+    editing: boolean;
     onSaveClick?(e: any): void;
     saveClassName?: string;
     saveIconClassName?: string;
@@ -166,7 +166,7 @@ interface ColumnFilterParams {
         filterMeta: object | undefined | null;
         filterField: string;
         props: ColumnProps;
-    }
+    };
 }
 
 interface ColumnFilterMatchModeOptions {
@@ -250,4 +250,4 @@ export interface ColumnProps {
     children?: React.ReactNode;
 }
 
-export declare class Column extends React.Component<ColumnProps, any> { }
+export declare class Column extends React.Component<ColumnProps, any> {}

@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const CarouselDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -97,7 +96,7 @@ export class CarouselDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -175,7 +174,7 @@ const CarouselDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -253,7 +252,7 @@ const CarouselDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./CarouselDemo.css" />
@@ -335,8 +334,8 @@ const CarouselDemo = () => {
     );
 }
                 `
-            }
         }
+    };
 
     const extFiles = {
         'demo/CarouselDemo.css': {
@@ -355,63 +354,66 @@ const CarouselDemo = () => {
 }
                 `
         }
-    }
+    };
 
-        return (
+    return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Carousel } from 'primereact/carousel';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/carousel/carousel.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>Carousel requires a collection of items as its value along with a template to render each item.</p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Carousel value={products} itemTemplate={itemTemplate}></Carousel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 const itemTemplate = (product) => {
     // return content;
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Items per page and Scroll Items</h5>
-                    <p>Number of items per page is defined using the <i>numVisible</i> property whereas number of items to scroll is defined with the <i>numScroll</i> property.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Number of items per page is defined using the <i>numVisible</i> property whereas number of items to scroll is defined with the <i>numScroll</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Carousel value={products} itemTemplate={itemTemplate} numVisible={3} numScroll={1}></Carousel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Responsive</h5>
-                    <p>For responsive design, <i>numVisible</i> and <i>numScroll</i> can be defined using the <i>responsiveOptions</i> property that should be an array of
-        objects whose breakpoint defines the max-width to apply the settings.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        For responsive design, <i>numVisible</i> and <i>numScroll</i> can be defined using the <i>responsiveOptions</i> property that should be an array of objects whose breakpoint defines the max-width to apply the settings.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Carousel value={products} itemTemplate={itemTemplate} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions}></Carousel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 const responsiveOptions = [
     {
         breakpoint: '1024px',
@@ -430,45 +432,56 @@ const responsiveOptions = [
     }
 ];
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Header and Footer</h5>
-                    <p>Custom content projection is available using the <i>header</i> and <i>footer</i> properties.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Custom content projection is available using the <i>header</i> and <i>footer</i> properties.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Carousel value={products} itemTemplate={itemTemplate} header={<h1>Header</h1>}></Carousel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Orientation</h5>
-                    <p>Default layout of the Carousel is horizontal, other possible option is the vertical mode that is configured with the <i>orientation</i> property.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Default layout of the Carousel is horizontal, other possible option is the vertical mode that is configured with the <i>orientation</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Carousel value={products} itemTemplate={itemTemplate} orientation="vertical"></Carousel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>AutoPlay and Circular</h5>
-                    <p>When <i>autoplayInterval</i> is defined in milliseconds, items are scrolled automatically. In addition, for infinite scrolling <i>circular</i> property needs to be enabled. Note that in autoplay mode, circular is enabled by default.</p>
+                    <p>
+                        When <i>autoplayInterval</i> is defined in milliseconds, items are scrolled automatically. In addition, for infinite scrolling <i>circular</i> property needs to be enabled. Note that in autoplay mode, circular is enabled by
+                        default.
+                    </p>
 
                     <h5>Controlled vs Uncontrolled</h5>
-                    <p>In controlled mode, <i>page</i> and <i>onPageChange</i> properties need to be defined to control the first visible item.</p>
+                    <p>
+                        In controlled mode, <i>page</i> and <i>onPageChange</i> properties need to be defined to control the first visible item.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Carousel value={products} itemTemplate={itemTemplate} page={page} onPageChange={(e) => setPage(e.page)}></Carousel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Uncontrolled</h5>
-                    <p>In uncontrolled mode, no additional properties are required. Initial page can be provided using the <i>page</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
-            need to update the first visible item index, prefer to use the component as controlled.</p>
+                    <p>
+                        In uncontrolled mode, no additional properties are required. Initial page can be provided using the <i>page</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you
+                        programmatically need to update the first visible item index, prefer to use the component as controlled.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Carousel value={products} itemTemplate={itemTemplate}></Carousel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -664,16 +677,24 @@ const responsiveOptions = [
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
                         <h6>Screen Reader</h6>
-                        <p>Carousel uses <i>region</i> role and since any attribute is passed to the main container element, attributes such as <i>aria-label</i> and <i>aria-roledescription</i> can be used as well. The slides container has <i>aria-live</i> attribute 
-                        set as "polite" if carousel is not in autoplay mode, otherwise "off" would be the value in autoplay.</p>
+                        <p>
+                            Carousel uses <i>region</i> role and since any attribute is passed to the main container element, attributes such as <i>aria-label</i> and <i>aria-roledescription</i> can be used as well. The slides container has{' '}
+                            <i>aria-live</i> attribute set as "polite" if carousel is not in autoplay mode, otherwise "off" would be the value in autoplay.
+                        </p>
 
-                        <p>A slide has a <i>group</i> role with an aria-label that refers to the <i>aria.slideNumber</i> property of the <Link href="/locale">locale</Link> API. Similarly <i>aria.slide</i> is used as the <i>aria-roledescription</i> of the item.
-                        Inactive slides are hidden from the readers with <i>aria-hidden</i>.</p>
+                        <p>
+                            A slide has a <i>group</i> role with an aria-label that refers to the <i>aria.slideNumber</i> property of the <Link href="/locale">locale</Link> API. Similarly <i>aria.slide</i> is used as the <i>aria-roledescription</i>{' '}
+                            of the item. Inactive slides are hidden from the readers with <i>aria-hidden</i>.
+                        </p>
 
-                        <p>Next and Previous navigators are button elements with <i>aria-label</i> attributes referring to the <i>aria.nextPageLabel</i> and <i>aria.firstPageLabel</i> properties of the <Link href="/locale">locale</Link> API by default respectively, 
-                        you may still use your own aria roles and attributes as any valid attribute is passed to the button elements implicitly by using <i>nextButtonProps</i> and <i>prevButtonProps</i>.</p>
+                        <p>
+                            Next and Previous navigators are button elements with <i>aria-label</i> attributes referring to the <i>aria.nextPageLabel</i> and <i>aria.firstPageLabel</i> properties of the <Link href="/locale">locale</Link> API by
+                            default respectively, you may still use your own aria roles and attributes as any valid attribute is passed to the button elements implicitly by using <i>nextButtonProps</i> and <i>prevButtonProps</i>.
+                        </p>
 
-                        <p>Quick navigation elements are button elements with an <i>aria-label</i> attribute referring to the <i>aria.pageLabel</i>  of the <Link href="/locale">locale</Link> API. Current page is marked with <i>aria-current</i>.</p>
+                        <p>
+                            Quick navigation elements are button elements with an <i>aria-label</i> attribute referring to the <i>aria.pageLabel</i> of the <Link href="/locale">locale</Link> API. Current page is marked with <i>aria-current</i>.
+                        </p>
 
                         <h6>Next/Prev Keyboard Support</h6>
                         <div className="doc-tablewrapper">
@@ -686,15 +707,21 @@ const responsiveOptions = [
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><i>tab</i></td>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
                                         <td>Moves focus through interactive elements in the carousel.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>enter</i></td>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
                                         <td>Activates navigation.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>space</i></td>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
                                         <td>Activates navigation.</td>
                                     </tr>
                                 </tbody>
@@ -712,31 +739,45 @@ const responsiveOptions = [
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><i>tab</i></td>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
                                         <td>Moves focus through the active slide link.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>enter</i></td>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
                                         <td>Activates the focused slide link.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>space</i></td>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
                                         <td>Activates the focused slide link.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>right arrow</i></td>
+                                        <td>
+                                            <i>right arrow</i>
+                                        </td>
                                         <td>Moves focus to the next slide link.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>left arrow</i></td>
+                                        <td>
+                                            <i>left arrow</i>
+                                        </td>
                                         <td>Moves focus to the previous slide link.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>home</i></td>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
                                         <td>Moves focus to the first slide link.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>end</i></td>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
                                         <td>Moves focus to the last slide link.</td>
                                     </tr>
                                 </tbody>
@@ -746,15 +787,12 @@ const responsiveOptions = [
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
-
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'CarouselDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'CarouselDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default CarouselDoc;

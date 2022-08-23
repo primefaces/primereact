@@ -10,7 +10,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const DataViewLazyDemo = () => {
-
     const [products, setProducts] = useState(null);
     const [layout, setLayout] = useState('grid');
     const [loading, setLoading] = useState(true);
@@ -33,7 +32,7 @@ const DataViewLazyDemo = () => {
     useEffect(() => {
         setTimeout(() => {
             isMounted.current = true;
-            productService.getProducts().then(data => {
+            productService.getProducts().then((data) => {
                 datasource.current = data;
                 setTotalRecords(data.length);
                 setProducts(datasource.current.slice(0, rows.current));
@@ -55,18 +54,19 @@ const DataViewLazyDemo = () => {
             setProducts(newProducts);
             setLoading(false);
         }, 1000);
-    }
+    };
 
     const renderListItem = (data) => {
         return (
             <div className="col-12">
                 <div className="product-list-item">
-                    <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                    <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
                         <Rating value={data.rating} readOnly cancel={false}></Rating>
-                        <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
+                        <i className="pi pi-tag product-category-icon"></i>
+                        <span className="product-category">{data.category}</span>
                     </div>
                     <div className="product-list-action">
                         <span className="product-price">${data.price}</span>
@@ -76,7 +76,7 @@ const DataViewLazyDemo = () => {
                 </div>
             </div>
         );
-    }
+    };
 
     const renderGridItem = (data) => {
         return (
@@ -90,7 +90,7 @@ const DataViewLazyDemo = () => {
                         <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="product-grid-item-content">
-                    <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                        <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
                         <Rating value={data.rating} readOnly cancel={false}></Rating>
@@ -102,18 +102,16 @@ const DataViewLazyDemo = () => {
                 </div>
             </div>
         );
-    }
+    };
 
     const itemTemplate = (product, layout) => {
         if (!product) {
             return;
         }
 
-        if (layout === 'list')
-            return renderListItem(product);
-        else if (layout === 'grid')
-            return renderGridItem(product);
-    }
+        if (layout === 'list') return renderListItem(product);
+        else if (layout === 'grid') return renderGridItem(product);
+    };
 
     const renderHeader = () => {
         let onOptionChange = (e) => {
@@ -126,7 +124,7 @@ const DataViewLazyDemo = () => {
                 <DataViewLayoutOptions layout={layout} onChange={onOptionChange} />
             </div>
         );
-    }
+    };
 
     const header = renderHeader();
 
@@ -138,34 +136,35 @@ const DataViewLazyDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataView <span>Lazy</span></h1>
-                    <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging, sorting and filtering happens. Sample belows imitates
-                    lazy paging by using an in memory list. It is also important to assign the logical number of rows to totalRecords by doing a projection query for paginator configuration so that paginator displays the UI assuming
-                        there are actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist.</p>
-                    </div>
+                    <h1>
+                        DataView <span>Lazy</span>
+                    </h1>
+                    <p>
+                        Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging, sorting and filtering happens. Sample belows imitates
+                        lazy paging by using an in memory list. It is also important to assign the logical number of rows to totalRecords by doing a projection query for paginator configuration so that paginator displays the UI assuming there are
+                        actually records of totalRecords size although in reality they aren't as in lazy mode, only the records that are displayed on the current page exist.
+                    </p>
+                </div>
 
                 <DocActions github="dataview/lazy.js" />
             </div>
 
             <div className="content-section implementation dataview-demo">
                 <div className="card">
-                    <DataView value={products} layout={layout} header={header}
-                            itemTemplate={itemTemplate} lazy paginator paginatorPosition={'both'} rows={rows.current}
-                            totalRecords={totalRecords} first={first} onPage={onPage} loading={loading} />
+                    <DataView value={products} layout={layout} header={header} itemTemplate={itemTemplate} lazy paginator paginatorPosition={'both'} rows={rows.current} totalRecords={totalRecords} first={first} onPage={onPage} loading={loading} />
                 </div>
             </div>
 
             <DataViewLazyDemoDoc />
         </div>
     );
-}
+};
 
 export default DataViewLazyDemo;
 
 export const DataViewLazyDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -318,7 +317,7 @@ export class DataViewLazyDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -459,7 +458,7 @@ const DataViewLazyDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -600,7 +599,7 @@ const DataViewLazyDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
 <link rel="stylesheet" href="./DataViewDemo.css" />
@@ -750,7 +749,7 @@ const DataViewLazyDemo = () => {
 }
                 `
         }
-    }
+    };
 
     const extFiles = {
         'demo/DataViewDemo.css': {
@@ -878,16 +877,11 @@ const DataViewLazyDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataViewLazyDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataViewLazyDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })}</TabView>
         </div>
-    )
-
-})
+    );
+});

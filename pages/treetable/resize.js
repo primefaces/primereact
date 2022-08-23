@@ -8,12 +8,11 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeTableColResizeDemo = () => {
-
     const [nodes, setNodes] = useState([]);
     const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -24,9 +23,13 @@ const TreeTableColResizeDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>TreeTable <span>Column Resize</span></h1>
-                    <p>Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand".
-                        Fit is the default one and the overall table width does not change when a column is resized whereas in "expand" mode, table width also changes along with the column width.</p>
+                    <h1>
+                        TreeTable <span>Column Resize</span>
+                    </h1>
+                    <p>
+                        Columns can be resized using drag drop by setting the resizableColumns to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized
+                        whereas in "expand" mode, table width also changes along with the column width.
+                    </p>
                 </div>
 
                 <DocActions github="treetable/resize.js" />
@@ -72,15 +75,14 @@ const TreeTableColResizeDemo = () => {
 
             <TreeTableColResizeDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeTableColResizeDemo;
 
 const TreeTableColResizeDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -146,7 +148,7 @@ export class TreeTableColResizeDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -204,7 +206,7 @@ const TreeTableColResizeDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -254,7 +256,7 @@ const TreeTableColResizeDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./NodeService.js"></script>
@@ -318,16 +320,11 @@ const TreeTableColResizeDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeTableColResizeDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeTableColResizeDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })}</TabView>
         </div>
-    )
-
-})
+    );
+});

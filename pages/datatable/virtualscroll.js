@@ -9,7 +9,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const DataTableVirtualScrollDemo = () => {
-
     const carService = new CarService();
     const [cars, setCars] = useState(Array.from({ length: 100000 }).map((_, i) => carService.generateCar(i + 1)));
     const [virtualCars, setVirtualCars] = useState(Array.from({ length: 100000 }));
@@ -37,15 +36,15 @@ const DataTableVirtualScrollDemo = () => {
             setVirtualCars(_virtualCars);
             setLazyLoading(false);
         }, Math.random() * 1000 + 250);
-    }
+    };
 
     const loadingTemplate = (options) => {
         return (
-            <div className="flex align-items-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }} >
+            <div className="flex align-items-center" style={{ height: '17px', flexGrow: '1', overflow: 'hidden' }}>
                 <Skeleton width={options.cellEven ? (options.field === 'year' ? '30%' : '40%') : '60%'} height="1rem" />
             </div>
-        )
-    }
+        );
+    };
 
     return (
         <div>
@@ -55,7 +54,9 @@ const DataTableVirtualScrollDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>VirtualScroll</span></h1>
+                    <h1>
+                        DataTable <span>VirtualScroll</span>
+                    </h1>
                     <p>VirtualScroller is a performant approach to handle huge data efficiently.</p>
                 </div>
 
@@ -89,14 +90,13 @@ const DataTableVirtualScrollDemo = () => {
             <DataTableVirtualScrollDemoDoc />
         </div>
     );
-}
+};
 
 export default DataTableVirtualScrollDemo;
 
 export const DataTableVirtualScrollDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -185,7 +185,7 @@ export class DataTableVirtualScrollDemo extends Component {
 }
 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -261,7 +261,7 @@ const DataTableVirtualScrollDemo = () => {
 }
 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -337,7 +337,7 @@ const DataTableVirtualScrollDemo = () => {
 }
 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./CarService.js"></script>
@@ -421,15 +421,11 @@ const DataTableVirtualScrollDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableVirtualScrollDemo', sources: sources, service: 'CarService' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableVirtualScrollDemo', sources: sources, service: 'CarService' })}</TabView>
         </div>
-    )
-})
+    );
+});

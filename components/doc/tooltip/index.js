@@ -5,9 +5,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const TooltipDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -133,7 +132,7 @@ export class TooltipDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -251,7 +250,7 @@ const TooltipDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -369,7 +368,7 @@ const TooltipDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./TooltipDemo.css" />
@@ -548,57 +547,64 @@ const TooltipDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import to use it as a component</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Tooltip } from 'primereact/tooltip';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Getting Started</h5>
-                    <p>Tooltip functionality is integrated within the the components that have support such as inputtext or buttons. Content is defined with the <i>tooltip</i> property.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Tooltip functionality is integrated within the the components that have support such as inputtext or buttons. Content is defined with the <i>tooltip</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" />
 <Button type="button" label="Save" icon="pi pi-check" tooltip="Click to proceed" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Position</h5>
-                    <p>There are four choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left". Position is
-                    specified using <i>tooltipOptions</i> property.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        There are four choices to position the tooltip, default value is "right" and alternatives are "top", "bottom", "left". Position is specified using <i>tooltipOptions</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{position: 'right'}}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Events</h5>
                     <p>Tooltip gets displayed on hover event of its target by default, other option is the focus event to display and blur to hide.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{event: 'focus'}}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Delay</h5>
-                    <p>Tooltip is displayed or hidden instantly by default however you may add delays using <i>showDelay</i> and <i>hideDelay</i> properties which accept a number value in terms of milliseconds.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Tooltip is displayed or hidden instantly by default however you may add delays using <i>showDelay</i> and <i>hideDelay</i> properties which accept a number value in terms of milliseconds.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <InputText type="text" placeholder="Right" tooltip="Enter your username" tooltipOptions={{showDelay: 1000, hideDelay: 300}}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Disabled Elements</h5>
-                    <p>By default disabled elements like <i>button</i> do not trigger user interactions. So for such issues, a disabled element is usually wrapped with an html element like span and the Tooltip wrapper is set to the element.
-                    If this operation is requested by the Tooltip component, the <i>showOnDisabled</i> property can be used. This is an optional use.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        By default disabled elements like <i>button</i> do not trigger user interactions. So for such issues, a disabled element is usually wrapped with an html element like span and the Tooltip wrapper is set to the element. If this
+                        operation is requested by the Tooltip component, the <i>showOnDisabled</i> property can be used. This is an optional use.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Tooltip target=".disabled-button" />
 <span className="disabled-button" data-pr-tooltip="A Disabled Button">
     <Button type="button" label="Save" icon="pi pi-check" disabled />
@@ -606,7 +612,7 @@ import { Tooltip } from 'primereact/tooltip';
 
 <Button type="button" label="Save" icon="pi pi-check" disabled tooltip="A Disabled Button" tooltipOptions={{ showOnDisabled: true }} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Tooltip Options</h5>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
@@ -647,7 +653,9 @@ import { Tooltip } from 'primereact/tooltip';
                                     <td>appendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>position</td>
@@ -677,13 +685,17 @@ import { Tooltip } from 'primereact/tooltip';
                                     <td>showEvent</td>
                                     <td>string</td>
                                     <td>mouseenter</td>
-                                    <td>Event to show the tooltip if the <i>event</i> property is empty.</td>
+                                    <td>
+                                        Event to show the tooltip if the <i>event</i> property is empty.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>hideEvent</td>
                                     <td>string</td>
                                     <td>mouseleave</td>
-                                    <td>Event to hide the tooltip if the <i>event</i> property is empty.</td>
+                                    <td>
+                                        Event to hide the tooltip if the <i>event</i> property is empty.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>autoZIndex</td>
@@ -707,13 +719,17 @@ import { Tooltip } from 'primereact/tooltip';
                                     <td>mouseTrackTop</td>
                                     <td>number</td>
                                     <td>5</td>
-                                    <td>Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.</td>
+                                    <td>
+                                        Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>mouseTrackLeft</td>
                                     <td>number</td>
                                     <td>5</td>
-                                    <td>Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.</td>
+                                    <td>
+                                        Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>showDelay</td>
@@ -774,26 +790,28 @@ import { Tooltip } from 'primereact/tooltip';
                     </div>
 
                     <h5>Global Tooltip</h5>
-                    <p>It is used to bind the same properties to more than one element. Each element can have its own <i>{`data-pr-{options}`}</i> properties. In this way, options can be customized among themselves. Using the <i>data-pr-tooltip</i> property on any element, the text to be displayed in the tooltip is determined.
-                        The target property is required for the global tooltip. It can be a selector, DOM element or selector array.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        It is used to bind the same properties to more than one element. Each element can have its own <i>{`data-pr-{options}`}</i> properties. In this way, options can be customized among themselves. Using the <i>data-pr-tooltip</i>{' '}
+                        property on any element, the text to be displayed in the tooltip is determined. The target property is required for the global tooltip. It can be a selector, DOM element or selector array.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Tooltip target=".customClassName" mouseTrack mouseTrackLeft={10} />
 
 <img className="customClassName" data-pr-tooltip="PrimeReact-Logo" data-pr-position="left" alt="logo" src="showcase/images/logo.png" height="80px"/>
 <div className="customClassName" data-pr-tooltip="This is a div element" data-pr-position="right" style={{ width: '50px', height: '50px', border: '1px solid black' }} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Custom Content</h5>
                     <p>The tooltip can display custom content by using JSX elements in its children.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Tooltip target=".customClassName">
     // Content
 </Tooltip>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Target Element Options</h5>
                     <div className="doc-tablewrapper">
@@ -853,13 +871,17 @@ import { Tooltip } from 'primereact/tooltip';
                                     <td>data-pr-showevent</td>
                                     <td>string</td>
                                     <td>mouseenter</td>
-                                    <td>Event to show the tooltip if the <i>event</i> property is empty.</td>
+                                    <td>
+                                        Event to show the tooltip if the <i>event</i> property is empty.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>data-pr-hideevent</td>
                                     <td>string</td>
                                     <td>mouseleave</td>
-                                    <td>Event to hide the tooltip if the <i>event</i> property is empty.</td>
+                                    <td>
+                                        Event to hide the tooltip if the <i>event</i> property is empty.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>data-pr-mousetrack</td>
@@ -871,13 +893,17 @@ import { Tooltip } from 'primereact/tooltip';
                                     <td>data-pr-mousetracktop</td>
                                     <td>number</td>
                                     <td>5</td>
-                                    <td>Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.</td>
+                                    <td>
+                                        Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>data-pr-mousetrackleft</td>
                                     <td>number</td>
                                     <td>5</td>
-                                    <td>Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.</td>
+                                    <td>
+                                        Defines top position of the tooltip in relation to the mouse when the <i>mouseTrack</i> is enabled.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>data-pr-showdelay</td>
@@ -914,7 +940,9 @@ import { Tooltip } from 'primereact/tooltip';
                     </div>
 
                     <h5>Tooltip Component Properties</h5>
-                    <p>All options in <i>Tooltip Options</i> section can be used as a property. In addition;</p>
+                    <p>
+                        All options in <i>Tooltip Options</i> section can be used as a property. In addition;
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -935,11 +963,11 @@ import { Tooltip } from 'primereact/tooltip';
                             </tbody>
                         </table>
                     </div>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Tooltip target=".customClassName" mouseTrack mouseTrackLeft={10} showDelay={100}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Methods</h5>
                     <div className="doc-tablewrapper">
@@ -955,8 +983,10 @@ import { Tooltip } from 'primereact/tooltip';
                                 <tr>
                                     <td>updateTargetEvents</td>
                                     <td>target: target element. (Default: current target)</td>
-                                    <td>Used to reload target events. In some cases, the target element can be hidden initially. <br />
-                                    Later, when this element becomes visible, it will be necessary to bind tooltip events to this element.</td>
+                                    <td>
+                                        Used to reload target events. In some cases, the target element can be hidden initially. <br />
+                                        Later, when this element becomes visible, it will be necessary to bind tooltip events to this element.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>loadTargetEvents</td>
@@ -1001,38 +1031,40 @@ import { Tooltip } from 'primereact/tooltip';
 
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Tooltip component uses <i>tooltip</i> role and when it becomes visible the generated id of the tooltip is defined as the <i>aria-describedby</i> of the target.</p> 
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Tooltip component uses <i>tooltip</i> role and when it becomes visible the generated id of the tooltip is defined as the <i>aria-describedby</i> of the target.
+                        </p>
 
-                    <h6>Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>escape</i></td>
-                                    <td>Closes the tooltip when focus is on the target.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        <h6>Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Closes the tooltip when focus is on the target.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'TooltipDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'TooltipDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default TooltipDoc;

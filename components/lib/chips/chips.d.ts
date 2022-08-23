@@ -15,7 +15,7 @@ interface ChipsAddParams {
     value: any;
 }
 
-interface ChipsRemoveParams extends ChipsAddParams { }
+interface ChipsRemoveParams extends ChipsAddParams {}
 
 interface ChipsChangeTargetOptions {
     name: string;
@@ -31,7 +31,7 @@ interface ChipsChangeParams {
     target: ChipsChangeTargetOptions;
 }
 
-export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onFocus' | 'onBlur' | 'onKeyDown' |'ref'> {
+export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onFocus' | 'onBlur' | 'onKeyDown' | 'ref'> {
     inputRef?: React.Ref<HTMLInputElement>;
     inputId?: string;
     name?: string;
@@ -61,4 +61,4 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
 export declare class Chips extends React.Component<ChipsProps, any> {
     public getElement(): HTMLDivElement;
     public getInput(): HTMLInputElement;
- }
+}

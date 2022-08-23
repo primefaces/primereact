@@ -2,21 +2,20 @@ import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const Card = React.forwardRef((props, ref) => {
-
     const elementRef = React.useRef(ref);
 
     const createHeader = () => {
         if (props.header) {
-            return <div className="p-card-header">{ObjectUtils.getJSXElement(props.header, props)}</div>
+            return <div className="p-card-header">{ObjectUtils.getJSXElement(props.header, props)}</div>;
         }
 
         return null;
-    }
+    };
 
     const createBody = () => {
-        const title = props.title && <div className="p-card-title">{ObjectUtils.getJSXElement(props.title, props)}</div>
-        const subTitle = props.subTitle && <div className="p-card-subtitle">{ObjectUtils.getJSXElement(props.subTitle, props)}</div>
-        const children = props.children && <div className="p-card-content">{props.children}</div>
+        const title = props.title && <div className="p-card-title">{ObjectUtils.getJSXElement(props.title, props)}</div>;
+        const subTitle = props.subTitle && <div className="p-card-subtitle">{ObjectUtils.getJSXElement(props.subTitle, props)}</div>;
+        const children = props.children && <div className="p-card-content">{props.children}</div>;
         const footer = props.footer && <div className="p-card-footer">{ObjectUtils.getJSXElement(props.footer, props)}</div>;
 
         return (
@@ -26,8 +25,8 @@ export const Card = React.forwardRef((props, ref) => {
                 {children}
                 {footer}
             </div>
-        )
-    }
+        );
+    };
 
     React.useEffect(() => {
         ObjectUtils.combinedRefs(elementRef, ref);
@@ -43,7 +42,7 @@ export const Card = React.forwardRef((props, ref) => {
             {header}
             {body}
         </div>
-    )
+    );
 });
 
 Card.displayName = 'Card';
@@ -56,4 +55,4 @@ Card.defaultProps = {
     subTitle: null,
     style: null,
     className: null
-}
+};

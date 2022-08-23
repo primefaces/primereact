@@ -27,6 +27,6 @@ export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTM
     children?: React.ReactNode;
 }
 
-export declare class Rating extends React.Component<RatingProps, any> { 
+export declare class Rating extends React.Component<RatingProps, any> {
     public getElement(): HTMLDivElement;
 }

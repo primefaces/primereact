@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export declare function classNames(...args: any[]): string | undefined;
 
@@ -23,8 +23,8 @@ export declare class DomHandler {
     static getOuterHeight(el: HTMLElement, margin: boolean): number;
     static getClientHeight(el: HTMLElement, margin: boolean): number;
     static getClientWidth(el: HTMLElement, margin: boolean): number;
-    static getViewport(): { width: number; height: number; };
-    static getOffset(el: HTMLElement): { top: any; left: any; };
+    static getViewport(): { width: number; height: number };
+    static getOffset(el: HTMLElement): { top: any; left: any };
     static index(el: HTMLElement): number;
     static addMultipleClasses(el: HTMLElement, className: string): void;
     static removeMultipleClasses(el: HTMLElement, className: string): void;
@@ -44,7 +44,7 @@ export declare class DomHandler {
     static getScrollableParents(el: HTMLElement): any[];
     static getHiddenElementOuterHeight(el: HTMLElement): number;
     static getHiddenElementOuterWidth(el: HTMLElement): number;
-    static getHiddenElementDimensions(el: HTMLElement): { width?: number; height?: number; };
+    static getHiddenElementDimensions(el: HTMLElement): { width?: number; height?: number };
     static fadeIn(el: HTMLElement, duration: number): void;
     static fadeOut(el: HTMLElement, duration: number): void;
     static getUserAgent(): string;
@@ -59,7 +59,7 @@ export declare class DomHandler {
     static clearSelection(): void;
     static calculateScrollbarWidth(el: HTMLElement): number;
     static getBrowser(): object;
-    static resolveUserAgent(): { browser: string; version: string; };
+    static resolveUserAgent(): { browser: string; version: string };
     static isVisible(el: HTMLElement): boolean;
     static isExist(el: HTMLElement): boolean;
     static hasDOM(): boolean;
@@ -67,12 +67,12 @@ export declare class DomHandler {
     static getFirstFocusableElement(el: HTMLElement, selector?: string): any;
     static getLastFocusableElement(el: HTMLElement, selector?: string): any;
     static focus(el: HTMLElement, scrollTo?: boolean): void;
-    static getCursorOffset(el: HTMLElement, prevText?: string, nextText?: string, currentText?: string): { top: any; left: any; };
+    static getCursorOffset(el: HTMLElement, prevText?: string, nextText?: string, currentText?: string): { top: any; left: any };
     static invokeElementMethod(el: HTMLElement, methodName: string, arg: any): void;
     static isClickable(el: HTMLElement): boolean;
     static applyStyle(el: HTMLElement, style: any): void;
     static exportCSV(csv: any, filename: string): void;
-    static saveAs(file: { name: string, url: any }): boolean;
+    static saveAs(file: { name: string; url: any }): boolean;
     static createInlineStyle(nonce: string): HTMLElement;
     static removeInlineStyle(styleElement: HTMLElement): HTMLElement | null;
     static getTargetElement(target: any): HTMLElement | null;
@@ -82,15 +82,18 @@ export declare function EventBus(): {
     on(type: string, fn: any): void;
     emit(type: string, evt?: any): void;
     off(type: string, fn: any): void;
-}
+};
 
-export declare function mask(el: HTMLElement, options: object): {
+export declare function mask(
+    el: HTMLElement,
+    options: object
+): {
     init(): void;
     bindEvents(): void;
     unbindEvents(): void;
     updateModel(e: React.SyntheticEvent): void;
     getValue(): string;
-}
+};
 
 export declare class ObjectUtils {
     static equals(obj1: any, obj2: any, field: string): boolean;

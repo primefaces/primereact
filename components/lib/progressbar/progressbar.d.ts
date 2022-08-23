@@ -14,6 +14,6 @@ export interface ProgressBarProps extends Omit<React.DetailedHTMLProps<React.HTM
     children?: React.ReactNode;
 }
 
-export declare class ProgressBar extends React.Component<ProgressBarProps, any> { 
+export declare class ProgressBar extends React.Component<ProgressBarProps, any> {
     public getElement(): HTMLDivElement;
 }

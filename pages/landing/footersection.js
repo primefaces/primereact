@@ -16,7 +16,9 @@ const FooterSection = (props) => {
                             </Link>
                         </li>
                         <li className="mb-4">
-                            <a href="https://github.com/primefaces/primereact-examples" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Examples</a>
+                            <a href="https://github.com/primefaces/primereact-examples" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">
+                                Examples
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -24,10 +26,14 @@ const FooterSection = (props) => {
                     <ul className="list-none p-0 m-0">
                         <li className="font-bold mb-5">Support</li>
                         <li className="mb-4">
-                            <a href="https://forum.primefaces.org/viewforum.php?f=57" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Forum</a>
+                            <a href="https://forum.primefaces.org/viewforum.php?f=57" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">
+                                Forum
+                            </a>
                         </li>
                         <li className="mb-4">
-                            <a href="https://discord.gg/gzKFYnpmCY" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Discord</a>
+                            <a href="https://discord.gg/gzKFYnpmCY" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">
+                                Discord
+                            </a>
                         </li>
                         <li className="mb-4">
                             <Link href="/support">
@@ -40,25 +46,39 @@ const FooterSection = (props) => {
                     <ul className="list-none p-0 m-0">
                         <li className="font-bold mt-5 lg:mt-0 mb-5">Resources</li>
                         <li className="mb-4">
-                            <a href="https://www.youtube.com/channel/UCTgmp69aBOlLnPEqlUyetWw" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">PrimeTV</a>
+                            <a href="https://www.youtube.com/channel/UCTgmp69aBOlLnPEqlUyetWw" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">
+                                PrimeTV
+                            </a>
                         </li>
                         <li className="mb-4">
-                            <a href="https://www.primefaces.org/store/" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Store</a>
+                            <a href="https://www.primefaces.org/store/" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">
+                                Store
+                            </a>
                         </li>
                         <li className="mb-4">
-                            <a href="https://github.com/primefaces/primereact" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Source Code</a>
+                            <a href="https://github.com/primefaces/primereact" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">
+                                Source Code
+                            </a>
                         </li>
                         <li className="mb-4">
-                            <a href="https://twitter.com/primereact" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Twitter</a>
+                            <a href="https://twitter.com/primereact" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">
+                                Twitter
+                            </a>
                         </li>
                         <li className="mb-4">
-                            <a href="https://www.primefaces.org/newsletter" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Newsletter</a>
+                            <a href="https://www.primefaces.org/newsletter" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">
+                                Newsletter
+                            </a>
                         </li>
                         <li className="mb-4">
-                            <a href="https://gear.primefaces.org/" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">PrimeGear</a>
+                            <a href="https://gear.primefaces.org/" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">
+                                PrimeGear
+                            </a>
                         </li>
                         <li className="mb-4">
-                            <a href="mailto:contact@primetek.com.tr" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Contact Us</a>
+                            <a href="mailto:contact@primetek.com.tr" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">
+                                Contact Us
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -71,7 +91,9 @@ const FooterSection = (props) => {
                             </Link>
                         </li>
                         <li className="mb-4">
-                            <a href="https://www.primefaces.org/designer/primereact" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">Designer</a>
+                            <a href="https://www.primefaces.org/designer/primereact" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">
+                                Designer
+                            </a>
                         </li>
                         <li className="mb-4">
                             <Link href="/colors">
@@ -102,6 +124,6 @@ const FooterSection = (props) => {
             </div>
         </section>
     );
-}
+};
 
 export default FooterSection;

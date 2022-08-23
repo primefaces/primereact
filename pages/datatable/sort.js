@@ -13,16 +13,16 @@ const DataTableSortDemo = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    }
+    };
 
     const priceBodyTemplate = (rowData) => {
         return formatCurrency(rowData.price);
-    }
+    };
 
     return (
         <div>
@@ -32,9 +32,10 @@ const DataTableSortDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>Sort</span></h1>
-                    <p>Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and
-                        used with metaKey.</p>
+                    <h1>
+                        DataTable <span>Sort</span>
+                    </h1>
+                    <p>Enabling sortable property on a column is enough to make a column sortable. Multiple column sorting is enabled using sortMode property and used with metaKey.</p>
                 </div>
 
                 <DocActions github="datatable/sort.js" />
@@ -102,14 +103,13 @@ const DataTableSortDemo = () => {
             <DataTableSortDemoDoc></DataTableSortDemoDoc>
         </div>
     );
-}
+};
 
 export default DataTableSortDemo;
 
 export const DataTableSortDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -208,7 +208,7 @@ export class DataTableSortDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -296,7 +296,7 @@ const DataTableSortDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -384,7 +384,7 @@ const DataTableSortDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./ProductService.js"></script>
@@ -479,16 +479,11 @@ const DataTableSortDemo = () => {
 }
                 `
         }
-    }
-
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableSortDemo', sources: sources, service: 'ProductService', data: 'products-small' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableSortDemo', sources: sources, service: 'ProductService', data: 'products-small' })}</TabView>
         </div>
-    )
-})
+    );
+});

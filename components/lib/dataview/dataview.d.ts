@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PaginatorTemplate } from '../paginator';
 
-type DataViewLayoutType = 'list' | 'grid' | (string & {});
+type DataViewLayoutType = 'list' | 'grid' | (string & Record<string, unknown>);
 
 type DataViewPaginatorPositionType = 'top' | 'bottom' | 'both';
 
@@ -30,7 +30,7 @@ export interface DataViewLayoutOptionsProps {
     children?: React.ReactNode;
 }
 
-export declare class DataViewLayoutOptions extends React.Component<DataViewLayoutOptionsProps, any> { }
+export declare class DataViewLayoutOptions extends React.Component<DataViewLayoutOptionsProps, any> {}
 
 export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     header?: React.ReactNode;

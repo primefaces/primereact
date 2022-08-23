@@ -3,13 +3,12 @@ import { Ripple } from '../ripple/Ripple';
 import { classNames } from '../utils/Utils';
 
 export const RowTogglerButton = React.memo((props) => {
-
     const onClick = (event) => {
         props.onClick({
             originalEvent: event,
             data: props.rowData
-        })
-    }
+        });
+    };
 
     const iconClassName = classNames('p-row-toggler-icon', props.expanded ? props.expandedRowIcon : props.collapsedRowIcon);
 
@@ -18,7 +17,7 @@ export const RowTogglerButton = React.memo((props) => {
             <span className={iconClassName}></span>
             <Ripple />
         </button>
-    )
+    );
 });
 
 RowTogglerButton.displayName = 'RowTogglerButton';

@@ -41,7 +41,7 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
     children?: React.ReactNode;
 }
 
-export declare class Panel extends React.Component<PanelProps, any> { 
+export declare class Panel extends React.Component<PanelProps, any> {
     public getElement(): HTMLDivElement;
     public getContent(): HTMLDivElement;
 }

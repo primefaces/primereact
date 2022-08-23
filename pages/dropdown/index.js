@@ -7,7 +7,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const DropdownDemo = () => {
-
     const [lazyItems, setLazyItems] = useState([]);
     const [lazyLoading, setLazyLoading] = useState(false);
     const [selectedCity1, setSelectedCity1] = useState(null);
@@ -43,7 +42,8 @@ const DropdownDemo = () => {
 
     const groupedCities = [
         {
-            label: 'Germany', code: 'DE',
+            label: 'Germany',
+            code: 'DE',
             items: [
                 { label: 'Berlin', value: 'Berlin' },
                 { label: 'Frankfurt', value: 'Frankfurt' },
@@ -52,7 +52,8 @@ const DropdownDemo = () => {
             ]
         },
         {
-            label: 'USA', code: 'US',
+            label: 'USA',
+            code: 'US',
             items: [
                 { label: 'Chicago', value: 'Chicago' },
                 { label: 'Los Angeles', value: 'Los Angeles' },
@@ -61,7 +62,8 @@ const DropdownDemo = () => {
             ]
         },
         {
-            label: 'Japan', code: 'JP',
+            label: 'Japan',
+            code: 'JP',
             items: [
                 { label: 'Kyoto', value: 'Kyoto' },
                 { label: 'Osaka', value: 'Osaka' },
@@ -80,27 +82,27 @@ const DropdownDemo = () => {
 
     const onCityChange = (e) => {
         setSelectedCity1(e.value);
-    }
+    };
 
     const onCityChange2 = (e) => {
         setSelectedCity2(e.value);
-    }
+    };
 
     const onCountryChange = (e) => {
         setSelectedCountry(e.value);
-    }
+    };
 
     const onGroupedCityChange = (e) => {
         setSelectedGroupedCity(e.value);
-    }
+    };
 
     const onItemChange = (e) => {
         setSelectedItem(e.value);
-    }
+    };
 
     const onLazyItemChange = (e) => {
-        setSelectedItem2(e.value)
-    }
+        setSelectedItem2(e.value);
+    };
 
     const onLazyLoad = (event) => {
         setLazyLoading(true);
@@ -121,42 +123,53 @@ const DropdownDemo = () => {
             setLazyItems(_lazyItems);
             setLazyLoading(false);
         }, Math.random() * 1000 + 250);
-    }
+    };
 
     const selectedCountryTemplate = (option, props) => {
         if (option) {
             return (
                 <div className="country-item country-item-value">
-                    <img alt={option.name} src={`${contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
+                    <img
+                        alt={option.name}
+                        src={`${contextPath}/images/flag/flag_placeholder.png`}
+                        onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                        className={`flag flag-${option.code.toLowerCase()}`}
+                    />
                     <div>{option.name}</div>
                 </div>
             );
         }
 
-        return (
-            <span>
-                {props.placeholder}
-            </span>
-        );
-    }
+        return <span>{props.placeholder}</span>;
+    };
 
     const countryOptionTemplate = (option) => {
         return (
             <div className="country-item">
-                <img alt={option.name} src={`${contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
+                <img
+                    alt={option.name}
+                    src={`${contextPath}/images/flag/flag_placeholder.png`}
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    className={`flag flag-${option.code.toLowerCase()}`}
+                />
                 <div>{option.name}</div>
             </div>
         );
-    }
+    };
 
     const groupedItemTemplate = (option) => {
         return (
             <div className="flex align-items-center country-item">
-                <img alt={option.label} src={`${contextPath}/images/flag/flag_placeholder.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className={`flag flag-${option.code.toLowerCase()}`} />
+                <img
+                    alt={option.label}
+                    src={`${contextPath}/images/flag/flag_placeholder.png`}
+                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                    className={`flag flag-${option.code.toLowerCase()}`}
+                />
                 <div>{option.label}</div>
             </div>
         );
-    }
+    };
 
     return (
         <div>
@@ -181,32 +194,53 @@ const DropdownDemo = () => {
                     <Dropdown value={selectedCity2} options={cities} onChange={onCityChange2} optionLabel="name" editable />
 
                     <h5>Grouped</h5>
-                    <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
-                        optionGroupTemplate={groupedItemTemplate} />
+                    <Dropdown value={selectedGroupedCity} options={groupedCities} onChange={onGroupedCityChange} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} />
 
                     <h5>Advanced with Templating, Filtering and Clear Icon</h5>
-                    <Dropdown value={selectedCountry} options={countries} onChange={onCountryChange} optionLabel="name" filter showClear filterBy="name" placeholder="Select a Country"
-                        valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+                    <Dropdown
+                        value={selectedCountry}
+                        options={countries}
+                        onChange={onCountryChange}
+                        optionLabel="name"
+                        filter
+                        showClear
+                        filterBy="name"
+                        placeholder="Select a Country"
+                        valueTemplate={selectedCountryTemplate}
+                        itemTemplate={countryOptionTemplate}
+                    />
 
                     <h5>Virtual Scroll (100000 Items)</h5>
                     <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item" />
 
                     <h5>Virtual Scroll (100000 Items) and Lazy</h5>
-                    <Dropdown value={selectedItem2} options={lazyItems} onChange={onLazyItemChange} virtualScrollerOptions={{
-                        lazy: true, onLazyLoad: onLazyLoad, itemSize: 38, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
-                            return (
-                                <div className="flex align-items-center p-2" style={{ height: '38px' }}>
-                                    <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
-                                </div>
-                            )
-                        }
-                    }} placeholder="Select Item" />
+                    <Dropdown
+                        value={selectedItem2}
+                        options={lazyItems}
+                        onChange={onLazyItemChange}
+                        virtualScrollerOptions={{
+                            lazy: true,
+                            onLazyLoad: onLazyLoad,
+                            itemSize: 38,
+                            showLoader: true,
+                            loading: lazyLoading,
+                            delay: 250,
+                            loadingTemplate: (options) => {
+                                return (
+                                    <div className="flex align-items-center p-2" style={{ height: '38px' }}>
+                                        <Skeleton width={options.even ? '60%' : '50%'} height="1rem" />
+                                    </div>
+                                );
+                            }
+                        }}
+                        placeholder="Select Item"
+                    />
                 </div>
             </div>
 
             <DropdownDoc />
         </div>
     );
-}
+};
 
 export default DropdownDemo;

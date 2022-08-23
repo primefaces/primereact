@@ -16,7 +16,7 @@ export default function MyApp({ Component }) {
 
     useEffect(() => {
         if (process.env.NODE_ENV === 'production') {
-            fetchNews().then(data => {
+            fetchNews().then((data) => {
                 if (data) {
                     announcement.current = data;
 
@@ -26,8 +26,7 @@ export default function MyApp({ Component }) {
                         if (item.hiddenNews && item.hiddenNews !== data.id) {
                             setNewsActive(true);
                         }
-                    }
-                    else {
+                    } else {
                         setNewsActive(true);
                     }
                 }
@@ -52,7 +51,7 @@ export default function MyApp({ Component }) {
             setDark(dark);
             changeTheme(newTheme);
         }
-    }
+    };
 
     const changeTheme = (newTheme) => {
         const elementId = 'theme-link';
@@ -69,17 +68,15 @@ export default function MyApp({ Component }) {
 
         linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
         setTheme(newTheme);
-    }
+    };
 
     if (Component.getLayout) {
         return Component.getLayout(<Component {...props} />);
-    }
-    else {
+    } else {
         return (
             <Layout {...props}>
-                <Component {...props}/>
+                <Component {...props} />
             </Layout>
-        )
+        );
     }
-
 }

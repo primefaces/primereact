@@ -12,7 +12,7 @@ export interface MenubarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     children?: React.ReactNode;
 }
 
-export declare class Menubar extends React.Component<MenubarProps, any> { 
+export declare class Menubar extends React.Component<MenubarProps, any> {
     public getElement(): HTMLDivElement;
     public getRootMenu(): HTMLElement;
     public getMenuButton(): HTMLElement;

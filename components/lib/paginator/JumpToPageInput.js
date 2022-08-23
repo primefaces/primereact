@@ -3,12 +3,11 @@ import { InputNumber } from '../inputnumber/InputNumber';
 import { ObjectUtils } from '../utils/Utils';
 
 export const JumpToPageInput = React.memo((props) => {
-
     const onChange = (event) => {
         if (props.onChange) {
             props.onChange(props.rows * (event.value - 1), props.rows);
         }
-    }
+    };
 
     const value = props.pageCount > 0 ? props.page + 1 : 0;
     const element = <InputNumber value={value} onChange={onChange} className="p-paginator-page-input" disabled={props.disabled} />;
@@ -38,4 +37,4 @@ JumpToPageInput.defaultProps = {
     disabled: false,
     template: null,
     onChange: null
-}
+};

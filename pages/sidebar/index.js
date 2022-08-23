@@ -6,7 +6,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const SidebarDemo = () => {
-
     const [visibleLeft, setVisibleLeft] = useState(false);
     const [visibleRight, setVisibleRight] = useState(false);
     const [visibleTop, setVisibleTop] = useState(false);
@@ -75,9 +74,8 @@ const SidebarDemo = () => {
             </div>
 
             <SidebarDoc />
-
         </div>
-    )
-}
+    );
+};
 
 export default SidebarDemo;

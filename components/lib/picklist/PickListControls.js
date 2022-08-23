@@ -20,8 +20,7 @@ export const PickListControls = React.memo((props) => {
                     const temp = list[selectedItemIndex - 1];
                     list[selectedItemIndex - 1] = movedItem;
                     list[selectedItemIndex] = temp;
-                }
-                else {
+                } else {
                     break;
                 }
             }
@@ -34,7 +33,7 @@ export const PickListControls = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     const moveTop = (event) => {
         const selectedItems = props.selection;
@@ -49,8 +48,7 @@ export const PickListControls = React.memo((props) => {
                 if (selectedItemIndex !== 0) {
                     const movedItem = list.splice(selectedItemIndex, 1)[0];
                     list.unshift(movedItem);
-                }
-                else {
+                } else {
                     break;
                 }
             }
@@ -63,7 +61,7 @@ export const PickListControls = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     const moveDown = (event) => {
         const selectedItems = props.selection;
@@ -75,13 +73,12 @@ export const PickListControls = React.memo((props) => {
                 const selectedItem = selectedItems[i];
                 const selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list, props.dataKey);
 
-                if (selectedItemIndex !== (list.length - 1)) {
+                if (selectedItemIndex !== list.length - 1) {
                     const movedItem = list[selectedItemIndex];
                     const temp = list[selectedItemIndex + 1];
                     list[selectedItemIndex + 1] = movedItem;
                     list[selectedItemIndex] = temp;
-                }
-                else {
+                } else {
                     break;
                 }
             }
@@ -94,7 +91,7 @@ export const PickListControls = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     const moveBottom = (event) => {
         const selectedItems = props.selection;
@@ -106,11 +103,10 @@ export const PickListControls = React.memo((props) => {
                 const selectedItem = selectedItems[i];
                 const selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, list, props.dataKey);
 
-                if (selectedItemIndex !== (list.length - 1)) {
+                if (selectedItemIndex !== list.length - 1) {
                     const movedItem = list.splice(selectedItemIndex, 1)[0];
                     list.push(movedItem);
-                }
-                else {
+                } else {
                     break;
                 }
             }
@@ -123,7 +119,7 @@ export const PickListControls = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     const className = classNames('p-picklist-buttons', props.className);
 
@@ -134,7 +130,7 @@ export const PickListControls = React.memo((props) => {
             <Button disabled={moveDisabled} type="button" icon="pi pi-angle-down" onClick={moveDown}></Button>
             <Button disabled={moveDisabled} type="button" icon="pi pi-angle-double-down" onClick={moveBottom}></Button>
         </div>
-    )
+    );
 });
 
 PickListControls.displayName = 'PickListControls';

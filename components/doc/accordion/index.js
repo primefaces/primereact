@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const AccordionDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -139,7 +138,7 @@ export class AccordionDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -261,7 +260,7 @@ export const AccordionDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -382,8 +381,8 @@ export const AccordionDemo = () => {
     )
 }
                 `
-            },
-        'browser': {
+        },
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./AccordionDemo.css" />
@@ -508,8 +507,8 @@ const AccordionDemo = () => {
     )
 }
                 `
-            }
-        };
+        }
+    };
 
     const extFiles = {
         'demo/AccordionDemo.css': {
@@ -528,35 +527,37 @@ const AccordionDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
-                        <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <h5>Import via Module</h5>
+                    <CodeHighlight lang="js">
+                        {`
 import { Accordion, AccordionTab } from 'primereact/accordion';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                        <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <h5>Import via CDN</h5>
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/accordion/accordion.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                        <h5>Getting Started</h5>
-                        <p>Accordion element consists of one or more AccordionTab elements and can either be used as a Controlled or Uncontrolled component.</p>
+                    <h5>Getting Started</h5>
+                    <p>Accordion element consists of one or more AccordionTab elements and can either be used as a Controlled or Uncontrolled component.</p>
 
-                        <h5>Controlled Component</h5>
-                        <p>In controlled mode, <i>activeIndex</i> and <i>onTabChange</i> properties need to be defined to control the state.</p>
+                    <h5>Controlled Component</h5>
+                    <p>
+                        In controlled mode, <i>activeIndex</i> and <i>onTabChange</i> properties need to be defined to control the state.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Accordion activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
     <AccordionTab header="Header I">
         Content I
@@ -569,14 +570,16 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
     </AccordionTab>
 </Accordion>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                        <h5>Uncontrolled</h5>
-                        <p>In uncontrolled mode, no additional properties are required. Initial active tab can be provided using the <i>activeIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
-                need to update the active tab, prefer to use the component as controlled.</p>
+                    <h5>Uncontrolled</h5>
+                    <p>
+                        In uncontrolled mode, no additional properties are required. Initial active tab can be provided using the <i>activeIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further
+                        updates. If you programmatically need to update the active tab, prefer to use the component as controlled.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Accordion>
     <AccordionTab header="Header I">
         Content I
@@ -589,12 +592,14 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
     </AccordionTab>
 </Accordion>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                        <h5>Multiple</h5>
-                        <p>By default only one tab at a time can be active, enabling <i>multiple</i> property changes this behavior to allow multiple tabs be active at the same time.</p>
-<CodeHighlight>
-{`
+                    <h5>Multiple</h5>
+                    <p>
+                        By default only one tab at a time can be active, enabling <i>multiple</i> property changes this behavior to allow multiple tabs be active at the same time.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Accordion multiple>
     <AccordionTab header="Header I">
         Content I
@@ -607,211 +612,226 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
     </AccordionTab>
 </Accordion>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                        <h5>Properties For AccordionTab</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>header</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Orientation of tab headers.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>disabled</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>Whether the tab is disabled.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the tab header and content.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the tab header and content.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>headerStyle</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the tab header.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>headerClassName</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the tab header.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>headerTemplate</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Template of the tab header.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>contentStyle</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the tab content.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>contentClassName</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the tab content.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties For AccordionTab</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>header</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Orientation of tab headers.</td>
+                                </tr>
+                                <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether the tab is disabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the tab header and content.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the tab header and content.</td>
+                                </tr>
+                                <tr>
+                                    <td>headerStyle</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the tab header.</td>
+                                </tr>
+                                <tr>
+                                    <td>headerClassName</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the tab header.</td>
+                                </tr>
+                                <tr>
+                                    <td>headerTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template of the tab header.</td>
+                                </tr>
+                                <tr>
+                                    <td>contentStyle</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the tab content.</td>
+                                </tr>
+                                <tr>
+                                    <td>contentClassName</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the tab content.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Properties</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Default</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Unique identifier of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>activeIndex</td>
-                                        <td>any</td>
-                                        <td>null</td>
-                                        <td>Active index or indexes of the element. Use an array of numbers for multiple indexes. the "multiple" prop must be set to true in order to specify multiple indexes.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>className</td>
-                                        <td>string</td>
-                                        <td>null</td>
-                                        <td>Style class of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>style</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>Inline style of the element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>multiple</td>
-                                        <td>boolean</td>
-                                        <td>false</td>
-                                        <td>When enabled, multiple tabs can be activated at the same time.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>expandIcon</td>
-                                        <td>string</td>
-                                        <td>pi pi-chevron-right</td>
-                                        <td>Icon of a collapsed tab.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>collapseIcon</td>
-                                        <td>string</td>
-                                        <td>pi pi-chevron-down</td>
-                                        <td>Icon of an expanded tab.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>transitionOptions</td>
-                                        <td>object</td>
-                                        <td>null</td>
-                                        <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Properties</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>activeIndex</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Active index or indexes of the element. Use an array of numbers for multiple indexes. the "multiple" prop must be set to true in order to specify multiple indexes.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>multiple</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When enabled, multiple tabs can be activated at the same time.</td>
+                                </tr>
+                                <tr>
+                                    <td>expandIcon</td>
+                                    <td>string</td>
+                                    <td>pi pi-chevron-right</td>
+                                    <td>Icon of a collapsed tab.</td>
+                                </tr>
+                                <tr>
+                                    <td>collapseIcon</td>
+                                    <td>string</td>
+                                    <td>pi pi-chevron-down</td>
+                                    <td>Icon of an expanded tab.</td>
+                                </tr>
+                                <tr>
+                                    <td>transitionOptions</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Events</h5>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Parameters</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>onTabOpen</td>
-                                        <td>event.originalEvent: browser event  <br />
-                                            event.index: Index or indexes of the tab (number or array of numbers).
-                                        </td>
-                                        <td>Callback to invoke when a tab gets expanded.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onTabClose</td>
-                                        <td>event.originalEvent: browser event  <br />
-                                            event.index: Index of the tab
-                                        </td>
-                                        <td>Callback to invoke when an active tab is collapsed by clicking on the header.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>onTabChange</td>
-                                        <td>event.originalEvent: browser event  <br />
-                                            event.index: Index of the tab
-                                        </td>
-                                        <td>Callback to invoke when state of the accordion changes.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Events</h5>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>onTabOpen</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.index: Index or indexes of the tab (number or array of numbers).
+                                    </td>
+                                    <td>Callback to invoke when a tab gets expanded.</td>
+                                </tr>
+                                <tr>
+                                    <td>onTabClose</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.index: Index of the tab
+                                    </td>
+                                    <td>Callback to invoke when an active tab is collapsed by clicking on the header.</td>
+                                </tr>
+                                <tr>
+                                    <td>onTabChange</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.index: Index of the tab
+                                    </td>
+                                    <td>Callback to invoke when state of the accordion changes.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Styling</h5>
-                        <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Element</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>p-accordion</td>
-                                        <td>Container element.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-accordion-header</td>
-                                        <td>Header of a tab.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>p-accordion-content</td>
-                                        <td>Container of a tab.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h5>Styling</h5>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p-accordion</td>
+                                    <td>Container element.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-accordion-header</td>
+                                    <td>Header of a tab.</td>
+                                </tr>
+                                <tr>
+                                    <td>p-accordion-content</td>
+                                    <td>Container of a tab.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h5>Accessibility</h5>
+                    <h5>Accessibility</h5>
                     <DevelopmentSection>
                         <h6>Screen Reader</h6>
-                        <p>Accordion header elements have a <i>button</i> role and use <i>aria-controls</i> to define the id of the content section along with <i>aria-expanded</i> for the visibility state. The value to read a header element
-                        defaults to the value of the <i>header</i> property and can be customized by defining an <i>aria-label</i> or <i>aria-labelledby</i> via the <i>headerProps</i> property.</p>
-                        <p>The content uses <i>region</i> role, defines an id that matches the <i>aria-controls</i> of the header and <i>aria-labelledby</i> referring to the id of the header.</p>
+                        <p>
+                            Accordion header elements have a <i>button</i> role and use <i>aria-controls</i> to define the id of the content section along with <i>aria-expanded</i> for the visibility state. The value to read a header element defaults
+                            to the value of the <i>header</i> property and can be customized by defining an <i>aria-label</i> or <i>aria-labelledby</i> via the <i>headerProps</i> property.
+                        </p>
+                        <p>
+                            The content uses <i>region</i> role, defines an id that matches the <i>aria-controls</i> of the header and <i>aria-labelledby</i> referring to the id of the header.
+                        </p>
 
                         <h6>Header Keyboard Support</h6>
                         <div className="doc-tablewrapper">
@@ -824,53 +844,67 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><i>tab</i></td>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
                                         <td>Moves focus to the next the focusable element in the page tab sequence.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>shift</i> + <i>tab</i></td>
+                                        <td>
+                                            <i>shift</i> + <i>tab</i>
+                                        </td>
                                         <td>Moves focus to the previous the focusable element in the page tab sequence.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>enter</i></td>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
                                         <td>Toggles the visibility of the content.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>space</i></td>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
                                         <td>Toggles the visibility of the content.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>down arrow</i></td>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
                                         <td>Moves focus to the next header.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>up arrow</i></td>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
                                         <td>Moves focus to the previous header.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>home</i></td>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
                                         <td>Moves focus to the first header.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>end</i></td>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
                                         <td>Moves focus to the last header.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </DevelopmentSection>
-                        <h5>Dependencies</h5>
-                        <ul>
-                            <li>react-transition-group</li>
-                        </ul>
+                    <h5>Dependencies</h5>
+                    <ul>
+                        <li>react-transition-group</li>
+                    </ul>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'AccordionDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'AccordionDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default AccordionDoc;

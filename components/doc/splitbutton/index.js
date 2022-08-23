@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const SplitButtonDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -133,7 +132,7 @@ export class SplitButtonDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useRef } from 'react';
@@ -250,7 +249,7 @@ const SplitButtonDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useRef } from 'react';
@@ -367,7 +366,7 @@ const SplitButtonDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -488,31 +487,33 @@ const SplitButtonDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { SplitButton } from 'primereact/splitbutton';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/splitbutton/splitbutton.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>SplitButton has a default command button and a collection of additional options defined by the <i>model</i> property.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        SplitButton has a default command button and a collection of additional options defined by the <i>model</i> property.
+                    </p>
+                    <CodeHighlight lang="js">
+                        {`
 export const SplitButtonDemo = () => {
 
     const items = [
@@ -556,10 +557,12 @@ export const SplitButtonDemo = () => {
 }
 
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>MenuModel API</h5>
-                    <p>SplitButton uses the common MenuModel API to define the items, visit <Link href="/menumodel">MenuModel API</Link> for details.</p>
+                    <p>
+                        SplitButton uses the common MenuModel API to define the items, visit <Link href="/menumodel">MenuModel API</Link> for details.
+                    </p>
 
                     <h5>Severity</h5>
                     <p>Different color options are available as severity levels.</p>
@@ -572,8 +575,8 @@ export const SplitButtonDemo = () => {
                         <li>.p-button-danger</li>
                     </ul>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <SplitButton label="Primary" />
 <SplitButton label="Secondary" className="p-button-secondary" model={items} />
 <SplitButton label="Success" className="p-button-success" model={items} />
@@ -582,15 +585,15 @@ export const SplitButtonDemo = () => {
 <SplitButton label="Danger" className="p-button-danger" model={items} />
 
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Raised and Rounded Buttons</h5>
                     <p>SplitButton can be raised by having "p-button-raised" style class and similarly borders can be made rounded using "p-button-rounded" class.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <SplitButton label="Proceed" className="p-button-raised p-button-rounded" model={items} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -692,7 +695,9 @@ export const SplitButtonDemo = () => {
                                     <td>appendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>tooltip</td>
@@ -716,7 +721,13 @@ export const SplitButtonDemo = () => {
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>dropdownIcon</td>
@@ -771,7 +782,9 @@ export const SplitButtonDemo = () => {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -798,117 +811,144 @@ export const SplitButtonDemo = () => {
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>SplitButton component renders two native button elements, main button uses the label property to define <i>aria-label</i> by default which can be customized with <i>buttonProps</i>.
-                    Dropdown button requires an explicit definition to describe it using <i>menuButtonProps</i> option and also includes <i>aria-haspopup</i>, <i>aria-expanded</i> for states along with <i>aria-controls</i> to define the relation between the popup and the button.</p>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            SplitButton component renders two native button elements, main button uses the label property to define <i>aria-label</i> by default which can be customized with <i>buttonProps</i>. Dropdown button requires an explicit
+                            definition to describe it using <i>menuButtonProps</i> option and also includes <i>aria-haspopup</i>, <i>aria-expanded</i> for states along with <i>aria-controls</i> to define the relation between the popup and the button.
+                        </p>
 
-                    <p>The popup overlay uses <i>menu</i> role on the list and each action item has a <i>menuitem</i> role with an <i>aria-label</i> as the menuitem label. The id of the menu refers to the <i>aria-controls</i> of the dropdown button.</p>
-<CodeHighlight>
-{`
+                        <p>
+                            The popup overlay uses <i>menu</i> role on the list and each action item has a <i>menuitem</i> role with an <i>aria-label</i> as the menuitem label. The id of the menu refers to the <i>aria-controls</i> of the dropdown
+                            button.
+                        </p>
+                        <CodeHighlight>
+                            {`
 <SplitButton buttonProps={{'aria-label': 'Default Action'}} menuButtonProps={{'aria-label': 'More Options'}} />
 `}
-</CodeHighlight>
-                    <h6>Main Button Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Activates the button.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Activates the button.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        </CodeHighlight>
+                        <h6>Main Button Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Activates the button.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Activates the button.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <h6>Menu Button Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Toggles the visibility of the menu.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Toggles the visibility of the menu.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>down arrow</i></td>
-                                    <td>Opens the menu and moves focus to the first item.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>up arrow</i></td>
-                                    <td>Opens the menu and moves focus to the last item.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        <h6>Menu Button Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Toggles the visibility of the menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Toggles the visibility of the menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>Opens the menu and moves focus to the first item.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>Opens the menu and moves focus to the last item.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <h6>Menu Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Actives the menuitem, closes the menu and sets focus on the menu button.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>escape</i></td>
-                                    <td>Closes the menu and sets focus on the menu button.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>down arrow</i></td>
-                                    <td>Moves focus to the next item, if it is the last one then first item receives the focus.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>up arrow</i></td>
-                                    <td>Moves focus to the previous item, if it is the first one then last item receives the focus.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>home</i></td>
-                                    <td>Moves focus to the first item.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>end</i></td>
-                                    <td>Moves focus to the last item.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        <h6>Menu Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Actives the menuitem, closes the menu and sets focus on the menu button.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Closes the menu and sets focus on the menu button.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>Moves focus to the next item, if it is the last one then first item receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>Moves focus to the previous item, if it is the first one then last item receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
+                                        <td>Moves focus to the first item.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
+                                        <td>Moves focus to the last item.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'SplitButtonDemo', sources: sources })
-                }
-            </TabView >
+                {useLiveEditorTabs({ name: 'SplitButtonDemo', sources: sources })}
+            </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default SplitButtonDoc;

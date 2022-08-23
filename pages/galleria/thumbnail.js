@@ -8,7 +8,6 @@ import getConfig from 'next/config';
 import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 
 const GalleriaThumbnailDemo = () => {
-
     const [images, setImages] = useState(null);
     const galleriaService = new PhotoService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -40,16 +39,16 @@ const GalleriaThumbnailDemo = () => {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        galleriaService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
-        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
-    }
+        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+    };
 
     const thumbnailTemplate = (item) => {
-        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
-    }
+        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+    };
 
     return (
         <div>
@@ -59,7 +58,9 @@ const GalleriaThumbnailDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Galleria <span>Thumbnail</span></h1>
+                    <h1>
+                        Galleria <span>Thumbnail</span>
+                    </h1>
                     <p>Thumbnails represent a smaller version of the actual content.</p>
                 </div>
 
@@ -69,40 +70,35 @@ const GalleriaThumbnailDemo = () => {
             <div className="content-section implementation">
                 <div className="card">
                     <h5>Positioned at Bottom</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-                        item={itemTemplate} thumbnail={thumbnailTemplate} />
+                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
                 </div>
 
                 <div className="card">
                     <h5>Positioned at Left</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions2} numVisible={4} thumbnailsPosition="left" style={{ maxWidth: '640px' }}
-                        item={itemTemplate} thumbnail={thumbnailTemplate} />
+                    <Galleria value={images} responsiveOptions={responsiveOptions2} numVisible={4} thumbnailsPosition="left" style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
                 </div>
 
                 <div className="card">
                     <h5>Positioned at Right</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions2} numVisible={4} thumbnailsPosition="right" style={{ maxWidth: '640px' }}
-                        item={itemTemplate} thumbnail={thumbnailTemplate} />
+                    <Galleria value={images} responsiveOptions={responsiveOptions2} numVisible={4} thumbnailsPosition="right" style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
                 </div>
 
                 <div className="card">
                     <h5>Positioned at Top</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} thumbnailsPosition="top" style={{ maxWidth: '640px' }}
-                        item={itemTemplate} thumbnail={thumbnailTemplate} />
+                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} thumbnailsPosition="top" style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
                 </div>
             </div>
 
             <GalleriaThumbnailDemoDoc></GalleriaThumbnailDemoDoc>
         </div>
     );
-}
+};
 
 export default GalleriaThumbnailDemo;
 
 export const GalleriaThumbnailDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -193,7 +189,7 @@ export class GalleriaThumbnailDemo extends Component {
 }
             `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, memo } from 'react';
@@ -273,7 +269,7 @@ const GalleriaThumbnailDemo = () => {
 }
             `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, memo } from 'react';
@@ -353,7 +349,7 @@ const GalleriaThumbnailDemo = () => {
 }
                         `
         },
-        'browser' : {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./PhotoService.js"></script>
@@ -435,16 +431,11 @@ const GalleriaThumbnailDemo = () => {
     }
                     `
         }
-
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'GalleriaThumbnailDemo', sources: sources, service: 'PhotoService', data: 'photos' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'GalleriaThumbnailDemo', sources: sources, service: 'PhotoService', data: 'photos' })}</TabView>
         </div>
-    )
-})
+    );
+});
