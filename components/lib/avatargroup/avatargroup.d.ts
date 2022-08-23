@@ -4,6 +4,6 @@ export interface AvatarGroupProps extends Omit<React.DetailedHTMLProps<React.HTM
     children?: React.ReactNode;
 }
 
-export declare class AvatarGroup extends React.Component<AvatarGroupProps, any> { 
+export declare class AvatarGroup extends React.Component<AvatarGroupProps, any> {
     public getElement(): HTMLDivElement;
 }

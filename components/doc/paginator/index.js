@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const PaginatorDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -229,7 +228,7 @@ export class PaginatorDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -424,7 +423,7 @@ const PaginatorDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -619,7 +618,7 @@ const PaginatorDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./PaginatorDemo.css" />
@@ -829,66 +828,67 @@ const PaginatorDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { Paginator } from 'primereact/paginator';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/paginator/paginator.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Paginator is used as a controlled component with <i>first</i>, <i>rows</i> (optional) and <i>onPageChange</i> properties.</p>
+                    <p>
+                        Paginator is used as a controlled component with <i>first</i>, <i>rows</i> (optional) and <i>onPageChange</i> properties.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Paginator first={first} rows={rows} onPageChange={(e) => setFirst(e.first)}></Paginator>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Rows and TotalRecords</h5>
                     <p>Rows and TotalRecords define how many pages the paginator should display. Paginator below will have 10 pages.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Paginator rows={10} totalRecords={120} first={first} onPageChange={(e) => setFirst(e.first)}></Paginator>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Rows Per Page</h5>
-                    <p>Number of items per page can be changed by the user using a dropdown if you define rowsPerPageOptions as an array of possible values. In this case,
-                    rows property should also be updated
-            </p>
-<CodeHighlight lang="js">
-{`
+                    <p>Number of items per page can be changed by the user using a dropdown if you define rowsPerPageOptions as an array of possible values. In this case, rows property should also be updated</p>
+                    <CodeHighlight lang='js'>
+                        {`
 const onPageChange = (e) => {
     setFirst(e.first);
     setRows(e.rows);
 }
 `}
-</CodeHighlight>
-<CodeHighlight>
-{`
+                    </CodeHighlight>
+                    <CodeHighlight>
+                        {`
 <Paginator first={first} rows={rows} totalRecords={120} rowsPerPageOptions={[10,20,30]} onPageChange={onPageChange}></Paginator>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Template</h5>
-                    <p>Paginator elements can be customized using the template property using the predefined keys, default value is
-                    "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown". Here are the available elements that
-        can be placed inside a paginator.</p>
+                    <p>
+                        Paginator elements can be customized using the template property using the predefined keys, default value is "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown". Here are the available elements
+                        that can be placed inside a paginator.
+                    </p>
 
                     <ul>
                         <li>FirstPageLink</li>
@@ -901,9 +901,11 @@ const onPageChange = (e) => {
                         <li>CurrentPageReport</li>
                     </ul>
 
-                    <p>The pagination element is fully customizable. To make special paginators, an object can be given to the <i>template</i> property as below.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        The pagination element is fully customizable. To make special paginators, an object can be given to the <i>template</i> property as below.
+                    </p>
+                    <CodeHighlight lang='js'>
+                        {`
 const template = {
     layout: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown CurrentPageReport', // The above keys can be set in the desired order.
     'FirstPageLink': (options) => {
@@ -987,16 +989,15 @@ const template = {
     }
 };
 `}
-</CodeHighlight>
-<CodeHighlight>
-{`
+                    </CodeHighlight>
+                    <CodeHighlight>
+                        {`
 <Paginator template={template} first={this.state.customFirst} rows={this.state.customRows} totalRecords={120} onPageChange={this.onCustomPageChange}></Paginator>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>CurrentPageReport</h5>
-                    <p>Current page report item in the itemplate displays information about the pagination state. Default value is (&#123;currentPage&#125; of &#123;totalPages&#125;)
-            whereas available placeholders are the following;</p>
+                    <p>Current page report item in the itemplate displays information about the pagination state. Default value is (&#123;currentPage&#125; of &#123;totalPages&#125;) whereas available placeholders are the following;</p>
                     <ul>
                         <li>&#123;currentPage&#125;</li>
                         <li>&#123;totalPages&#125;</li>
@@ -1007,8 +1008,8 @@ const template = {
                     </ul>
 
                     <h5>Properties</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1082,22 +1083,23 @@ const template = {
                                     <td>currentPageReportTemplate</td>
                                     <td>string</td>
                                     <td>(&#123;currentPage&#125; of &#123;totalPages&#125;)</td>
-                                    <td>Template of the current page report element. Available placeholders are
-                                    &#123;currentPage&#125;,&#123;totalPages&#125;,&#123;rows&#125;,&#123;first&#125;,&#123;last&#125; and &#123;totalRecords&#125;</td>
+                                    <td>Template of the current page report element. Available placeholders are &#123;currentPage&#125;,&#123;totalPages&#125;,&#123;rows&#125;,&#123;first&#125;,&#123;last&#125; and &#123;totalRecords&#125;</td>
                                 </tr>
                                 <tr>
                                     <td>dropdownAppendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1108,12 +1110,13 @@ const template = {
                             <tbody>
                                 <tr>
                                     <td>onPageChange</td>
-                                    <td>event.page: New page number <br />
-                            event.first: Index of first record <br />
-                            event.rows: Number of rows to display in new page <br />
-                            event.page: Index of the new page <br />
-                            event.pageCount: Total number of pages
-                        </td>
+                                    <td>
+                                        event.page: New page number <br />
+                                        event.first: Index of first record <br />
+                                        event.rows: Number of rows to display in new page <br />
+                                        event.page: Index of the new page <br />
+                                        event.pageCount: Total number of pages
+                                    </td>
                                     <td>Callback to invoke when page changes, the event object contains information about the new state.</td>
                                 </tr>
                             </tbody>
@@ -1121,9 +1124,11 @@ const template = {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1170,23 +1175,36 @@ const template = {
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
                         <h6>Screen Reader</h6>
-                        <p>Paginator is placed inside a <i>nav</i> element to indicate a navigation section. All of the paginator elements can be customized using templating however the default behavious is listed below.</p>
-                        
-                        <p>First, previous, next and last page navigators elements with <i>aria-label</i> attributes referring to the <i>aria.firstPageLabel</i>, <i>aria.prevPageLabel</i>, <i>aria.nextPageLabel</i> and <i>aria.lastPageLabel</i> 
-                        properties of the <Link href="/locale">locale</Link> API respectively.</p>
+                        <p>
+                            Paginator is placed inside a <i>nav</i> element to indicate a navigation section. All of the paginator elements can be customized using templating however the default behavious is listed below.
+                        </p>
 
-                        <p>Page links are also button elements with an <i>aria-label</i> attribute derived from the <i>aria.pageLabel</i> of the <Link href="/locale">locale</Link> API. Current page is marked with <i>aria-current</i> set to "page" as well.</p>
+                        <p>
+                            First, previous, next and last page navigators elements with <i>aria-label</i> attributes referring to the <i>aria.firstPageLabel</i>, <i>aria.prevPageLabel</i>, <i>aria.nextPageLabel</i> and <i>aria.lastPageLabel</i>
+                            properties of the <Link href='/locale'>locale</Link> API respectively.
+                        </p>
 
-                        <p>Current page report uses <i>aria-live="polite"</i> to instruct screen reader about the changes to the pagination state.</p>
+                        <p>
+                            Page links are also button elements with an <i>aria-label</i> attribute derived from the <i>aria.pageLabel</i> of the <Link href='/locale'>locale</Link> API. Current page is marked with <i>aria-current</i> set to "page" as
+                            well.
+                        </p>
 
-                        <p>Rows per page dropdown internally uses a dropdown component, refer to the <Link href="/dropdown">dropdown</Link> documentation for accessibility details. Additionally, the dropdown uses an <i>aria-label</i>
-                        from the <i>aria.rowsPerPage</i> property of the <Link href="/locale">locale</Link> API.</p>
+                        <p>
+                            Current page report uses <i>aria-live="polite"</i> to instruct screen reader about the changes to the pagination state.
+                        </p>
 
-                        <p>Jump to page input is an <i>input</i> element with an <i>aria-label</i> that refers to the <i>aria.jumpToPage</i> property of the <Link href="/locale">locale</Link> API.</p>
+                        <p>
+                            Rows per page dropdown internally uses a dropdown component, refer to the <Link href='/dropdown'>dropdown</Link> documentation for accessibility details. Additionally, the dropdown uses an <i>aria-label</i>
+                            from the <i>aria.rowsPerPage</i> property of the <Link href='/locale'>locale</Link> API.
+                        </p>
+
+                        <p>
+                            Jump to page input is an <i>input</i> element with an <i>aria-label</i> that refers to the <i>aria.jumpToPage</i> property of the <Link href='/locale'>locale</Link> API.
+                        </p>
 
                         <h6>Keyboard Support</h6>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1195,15 +1213,21 @@ const template = {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><i>tab</i></td>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
                                         <td>Moves focus through the paginator elements.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>enter</i></td>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
                                         <td>Executes the paginator element action.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>space</i></td>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
                                         <td>Executes the paginator element action.</td>
                                     </tr>
                                 </tbody>
@@ -1211,19 +1235,19 @@ const template = {
                         </div>
 
                         <h6>Rows Per Page Dropdown Keyboard Support</h6>
-                        <p>Refer to the <Link href="/dropdown">dropdown</Link> documentation for more details about keyboard support.</p>
+                        <p>
+                            Refer to the <Link href='/dropdown'>dropdown</Link> documentation for more details about keyboard support.
+                        </p>
                     </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'PaginatorDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'PaginatorDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default PaginatorDoc;

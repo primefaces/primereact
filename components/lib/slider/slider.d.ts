@@ -9,7 +9,7 @@ interface SliderChangeParams {
     value: SliderValueType;
 }
 
-interface SliderSlideEndParams extends SliderChangeParams { }
+interface SliderSlideEndParams extends SliderChangeParams {}
 
 export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value' | 'ref'> {
     value?: SliderValueType;
@@ -25,6 +25,6 @@ export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTM
     children?: React.ReactNode;
 }
 
-export declare class Slider extends React.Component<SliderProps, any> { 
+export declare class Slider extends React.Component<SliderProps, any> {
     public getElement(): HTMLDivElement;
 }

@@ -72,7 +72,7 @@ interface TreeSelectFilterOptions {
     reset?: () => void;
 }
 
-export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange'|'value' | 'ref'> {
+export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value' | 'ref'> {
     value?: TreeSelectSelectionKeys;
     name?: string;
     disabled?: boolean;

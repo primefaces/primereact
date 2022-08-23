@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 export const ChipsDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -53,7 +52,7 @@ export class ChipsDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -90,7 +89,7 @@ const ChipsDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -127,7 +126,7 @@ const ChipsDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -167,45 +166,49 @@ const ChipsDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { Chips } from 'primereact/chips';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/chips/chips.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Chips requires an array as its <i>value</i> and <i>onChange</i> callback to update the model.</p>
+                    <p>
+                        Chips requires an array as its <i>value</i> and <i>onChange</i> callback to update the model.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Chips value={value} onChange={(e) => setValue(e.value)}></Chips>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Custom Content</h5>
-                    <p>A chip is customized using <i>itemTemplate</i> function where value is passed to return JSX.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        A chip is customized using <i>itemTemplate</i> function where value is passed to return JSX.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Chips value={value} onChange={(e) => setValue(e.value)} itemTemplate={customChip}></Chips>
 `}
-</CodeHighlight>
-<CodeHighlight lang="js">
-{`
+                    </CodeHighlight>
+                    <CodeHighlight lang='js'>
+                        {`
 customChip(item) {
     return (
         <div>
@@ -216,13 +219,15 @@ customChip(item) {
 }
 
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>KeyFilter</h5>
-                    <p>Chips has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.</p>
+                    <p>
+                        Chips has built-in key filtering support to block certain keys, refer to <Link href='/keyfilter'>keyfilter</Link> page for more information.
+                    </p>
 
                     <h5>Properties</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -351,8 +356,8 @@ customChip(item) {
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -363,20 +368,26 @@ customChip(item) {
                             <tbody>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>originalEvent: Browser event <br />
-                            value: New value of the component</td>
+                                    <td>
+                                        originalEvent: Browser event <br />
+                                        value: New value of the component
+                                    </td>
                                     <td>Callback to invoke when a chip is added or removed.</td>
                                 </tr>
                                 <tr>
                                     <td>onAdd</td>
-                                    <td>originalEvent: Browser event <br />
-                            value: Added item value</td>
+                                    <td>
+                                        originalEvent: Browser event <br />
+                                        value: Added item value
+                                    </td>
                                     <td>Callback to invoke when a chip is added. Return 'false' to prevent the item from being added.</td>
                                 </tr>
                                 <tr>
                                     <td>onRemove</td>
-                                    <td>originalEvent: Browser event <br />
-                            value: Removed item value</td>
+                                    <td>
+                                        originalEvent: Browser event <br />
+                                        value: Removed item value
+                                    </td>
                                     <td>Callback to invoke when a chip is removed.</td>
                                 </tr>
                                 <tr>
@@ -399,9 +410,11 @@ customChip(item) {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -434,12 +447,14 @@ customChip(item) {
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.
-                    Chip list uses <i>listbox</i> role with <i>aria-orientation</i> set to horizontal whereas each chip has the <i>option</i> role with <i>aria-label</i> set to the label of the chip.</p>
-<CodeHighlight>
-{`
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. Chip list uses <i>listbox</i> role with{' '}
+                            <i>aria-orientation</i> set to horizontal whereas each chip has the <i>option</i> role with <i>aria-label</i> set to the label of the chip.
+                        </p>
+                        <CodeHighlight>
+                            {`
 <label htmlFor="chips1">Tags</label>
 <Chips inputId="chips1" />
 
@@ -448,73 +463,85 @@ customChip(item) {
 
 <Chips aria-label="Tags" />
 `}
-</CodeHighlight>
-                    <h6>Input Field Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the input element</td>
-                                </tr>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Adds a new chips using the input field value.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>backspace</i></td>
-                                    <td>Deletes the previous chip if the input field is empty.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>left arrow</i></td>
-                                    <td>Moves focus to the previous chip if available and input field is empty.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        </CodeHighlight>
+                        <h6>Input Field Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the input element</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Adds a new chips using the input field value.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>backspace</i>
+                                        </td>
+                                        <td>Deletes the previous chip if the input field is empty.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>left arrow</i>
+                                        </td>
+                                        <td>Moves focus to the previous chip if available and input field is empty.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <h6>Chip Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>left arrow</i></td>
-                                    <td>Moves focus to the previous chip if available.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>right arrow</i></td>
-                                    <td>Moves focus to the next chip, if there is none then input field receives the focus.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>backspace</i></td>
-                                    <td>Deletes the chips and adds focus to the input field.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        <h6>Chip Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>left arrow</i>
+                                        </td>
+                                        <td>Moves focus to the previous chip if available.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>right arrow</i>
+                                        </td>
+                                        <td>Moves focus to the next chip, if there is none then input field receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>backspace</i>
+                                        </td>
+                                        <td>Deletes the chips and adds focus to the input field.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'ChipsDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'ChipsDemo', sources: sources })}
             </TabView>
         </div>
     );
-})
+});
 
 export default ChipsDoc;

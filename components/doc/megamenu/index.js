@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const MegaMenuDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -155,7 +154,7 @@ export class MegaMenuDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -296,7 +295,7 @@ const MegaMenuDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -437,7 +436,7 @@ const MegaMenuDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -581,33 +580,35 @@ const MegaMenuDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { MegaMenu } from 'primereact/megamenu';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/megamenu/megamenu.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>MenuItem API</h5>
-                    <p>MegaMenu uses the common menu item api to define its items, visit <Link href="/menumodel">  MenuModel </Link> for details.</p>
+                    <p>
+                        MegaMenu uses the common menu item api to define its items, visit <Link href='/menumodel'> MenuModel </Link> for details.
+                    </p>
                     <p>MegaMenu requires a collection of menuitems as its model.</p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const items = [
     {
         label: 'Videos', icon: 'pi pi-fw pi-video',
@@ -721,37 +722,37 @@ const items = [
     }
 ]
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <MegaMenu model={items} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Orientation</h5>
                     <p>Default orientation is "horizontal" with "vertical" as the alternative.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <MegaMenu model={items} orientation="vertical"/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Custom Content</h5>
                     <p>The megamenu can display custom content by using the "start" and "end" properties.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <MegaMenu
   model={items}
   start={<InputText placeholder="Search" type="text"/>}
   end={<Button label="Logout" icon="pi pi-power-off"/>}
 />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -808,9 +809,11 @@ const items = [
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -847,81 +850,104 @@ const items = [
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>MegaMenu component uses the <i>menubar</i> role along with <i>aria-orientation</i> and the value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Each list item has a <i>presentation</i> role
-                    whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a MegaMenu uses the <i>menu</i> role with an <i>aria-labelledby</i> defined
-                    as the id of the submenu root menuitem label. In addition, root menuitems that open a submenu have <i>aria-haspopup</i>, <i>aria-expanded</i> and <i>aria-controls</i> to define the relation between the item and the submenu.</p>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            MegaMenu component uses the <i>menubar</i> role along with <i>aria-orientation</i> and the value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Each list item has a{' '}
+                            <i>presentation</i> role whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a MegaMenu
+                            uses the <i>menu</i> role with an <i>aria-labelledby</i> defined as the id of the submenu root menuitem label. In addition, root menuitems that open a submenu have <i>aria-haspopup</i>, <i>aria-expanded</i> and{' '}
+                            <i>aria-controls</i> to define the relation between the item and the submenu.
+                        </p>
 
-                    <h6>Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Add focus to the first item if focus moves in to the menu. If the focus is already within the menu, focus moves to the next focusable item in the page tab sequence.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>shift</i> + <i>tab</i></td>
-                                    <td>Add focus to the last item if focus moves in to the menu. If the focus is already within the menu, focus moves to the previous focusable item in the page tab sequence.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>escape</i></td>
-                                    <td>If focus is inside a popup submenu, closes the submenu and moves focus to the root item of the closed submenu.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>down arrow</i></td>
-                                    <td>If focus is on a root element, open a submenu and moves focus to the first element in the submenu otherwise moves focus to the next menuitem within the submenu.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>up arrow</i></td>
-                                    <td>If focus is on a root element, opens a submenu and moves focus to the last element in the submenu otherwise moves focus to the previous menuitem within the submenu.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>right arrow</i></td>
-                                    <td>If focus is on a root element, moves focus to the next menuitem. If the focus in inside a submenu, moves focus to the first menuitem of the next menu group.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>left arrow</i></td>
-                                    <td>If focus is on a root element, moves focus to the previous menuitem. If the focus in inside a submenu, moves focus to the first menuitem of the previous menu group.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>home</i></td>
-                                    <td>Moves focus to the first menuitem within the submenu.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>end</i></td>
-                                    <td>Moves focus to the last menuitem within the submenu.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        <h6>Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Add focus to the first item if focus moves in to the menu. If the focus is already within the menu, focus moves to the next focusable item in the page tab sequence.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>tab</i>
+                                        </td>
+                                        <td>Add focus to the last item if focus moves in to the menu. If the focus is already within the menu, focus moves to the previous focusable item in the page tab sequence.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>If focus is inside a popup submenu, closes the submenu and moves focus to the root item of the closed submenu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>If focus is on a root element, open a submenu and moves focus to the first element in the submenu otherwise moves focus to the next menuitem within the submenu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>If focus is on a root element, opens a submenu and moves focus to the last element in the submenu otherwise moves focus to the previous menuitem within the submenu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>right arrow</i>
+                                        </td>
+                                        <td>If focus is on a root element, moves focus to the next menuitem. If the focus in inside a submenu, moves focus to the first menuitem of the next menu group.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>left arrow</i>
+                                        </td>
+                                        <td>If focus is on a root element, moves focus to the previous menuitem. If the focus in inside a submenu, moves focus to the first menuitem of the previous menu group.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
+                                        <td>Moves focus to the first menuitem within the submenu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
+                                        <td>Moves focus to the last menuitem within the submenu.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'MegaMenuDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'MegaMenuDemo', sources: sources })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default MegaMenuDoc;

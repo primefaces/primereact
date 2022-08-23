@@ -38,7 +38,7 @@ interface TreeTableCheckboxSelectionKeyType {
 
 type TreeTableExpandedKeysType = {
     [key: string]: boolean;
-}
+};
 
 interface TreeTableSortMeta {
     field: string;

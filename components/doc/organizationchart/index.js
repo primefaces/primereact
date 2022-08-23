@@ -5,9 +5,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const OrganizationChartDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -158,7 +157,7 @@ export class OrganizationChartDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -297,7 +296,7 @@ const OrganizationChartDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -436,7 +435,7 @@ const OrganizationChartDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./OrganizationChartDemo.css" />
@@ -579,7 +578,7 @@ const OrganizationChartDemo = () => {
 }
                 `
         }
-    }
+    };
 
     const extFiles = {
         'demo/OrganizationChartDemo.css': {
@@ -627,31 +626,31 @@ const OrganizationChartDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { OrganizationChart } from 'primereact/organizationchart';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/organizationchart/organizationchart.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>OrganizationChart requires a model of TreeNode as its value.</p>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 export const OrganizationChartDemo = () => {
 
     const data = [{
@@ -690,19 +689,19 @@ export const OrganizationChartDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Templating</h5>
                     <p>Label of the treenode is displayed inside the node content by default and templating enables further customization.</p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <OrganizationChart value={data} nodeTemplate={nodeTemplate}></OrganizationChart>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 
 const nodeTemplate = (node) => {
     if (node.type === "person") {
@@ -722,22 +721,25 @@ const nodeTemplate = (node) => {
     }
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Expand/Collapse State</h5>
                     <p>In order to display a treenode as expanded by default, set "expanded" property as true in your model.</p>
 
                     <h5>Selection</h5>
-                    <p>OrganizationChart supports two selection methods; single or multiple. Selection is enabled by setting <i>selectionMode</i> property to the corresponding mode, defining <i>selection</i> property along with <i>selectionChange</i> callback.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        OrganizationChart supports two selection methods; single or multiple. Selection is enabled by setting <i>selectionMode</i> property to the corresponding mode, defining <i>selection</i> property along with{' '}
+                        <i>selectionChange</i> callback.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <OrganizationChart value={data} selectionMode="single" selection={selectedNode} onSelectionChange={event => setSelectedNode(event.data)}></OrganizationChart>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -794,8 +796,8 @@ const nodeTemplate = (node) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -806,20 +808,26 @@ const nodeTemplate = (node) => {
                             <tbody>
                                 <tr>
                                     <td>onNodeSelect</td>
-                                    <td>event.originalEvent: browser event <br />
-                                event.node: Selected node instance.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Selected node instance.
+                                    </td>
                                     <td>Callback to invoke when a node is selected.</td>
                                 </tr>
                                 <tr>
                                     <td>onNodeUnselect</td>
-                                    <td>event.originalEvent: browser event <br />
-                                event.node: Unselected node instance.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Unselected node instance.
+                                    </td>
                                     <td>Callback to invoke when a node is unselected.</td>
                                 </tr>
                                 <tr>
                                     <td>onSelectionChange</td>
-                                    <td>event.originalEvent: browser event <br />
-                                event.data: New selection.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.data: New selection.
+                                    </td>
                                     <td>Callback to invoke when node selection changes.</td>
                                 </tr>
                             </tbody>
@@ -828,8 +836,8 @@ const nodeTemplate = (node) => {
 
                     <h5>Styling</h5>
                     <p>Following is the list of structural style classes.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -870,49 +878,54 @@ const nodeTemplate = (node) => {
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Component currently uses a table based implementation and does not provide high level of screen reader support, 
-                        a nested list implementation replacement is planned with aria roles and attributes aligned to a tree widget for high level of reader support in the upcoming versions.</p>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Component currently uses a table based implementation and does not provide high level of screen reader support, a nested list implementation replacement is planned with aria roles and attributes aligned to a tree widget
+                            for high level of reader support in the upcoming versions.
+                        </p>
 
-                    <h6>Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus through the focusable elements within the chart.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Toggles the expanded state of a node.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Toggles the expanded state of a node.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        <h6>Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus through the focusable elements within the chart.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Toggles the expanded state of a node.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Toggles the expanded state of a node.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
-
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'OrganizationChartDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'OrganizationChartDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default OrganizationChartDoc;

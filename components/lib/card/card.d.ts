@@ -10,4 +10,4 @@ export interface CardProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
     children?: React.ReactNode;
 }
 
-export declare class Card extends React.Component<CardProps, any> { }
+export declare class Card extends React.Component<CardProps, any> {}

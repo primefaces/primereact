@@ -5,6 +5,6 @@ export interface DeferredContentProps extends Omit<React.DetailedHTMLProps<React
     children?: React.ReactNode;
 }
 
-export declare class DeferredContent extends React.Component<DeferredContentProps, any> { 
+export declare class DeferredContent extends React.Component<DeferredContentProps, any> {
     public getElement(): HTMLDivElement;
 }

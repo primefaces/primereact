@@ -4,7 +4,7 @@ import { ObjectUtils } from '../utils/Utils';
 
 export const RowsPerPageDropdown = React.memo((props) => {
     const hasOptions = props.options && props.options.length > 0;
-    const options = hasOptions ? props.options.map(opt => ({ label: String(opt), value: opt })) : [];
+    const options = hasOptions ? props.options.map((opt) => ({ label: String(opt), value: opt })) : [];
     const element = hasOptions ? <Dropdown value={props.value} options={options} onChange={props.onChange} appendTo={props.appendTo} disabled={props.disabled} /> : null;
 
     if (props.template) {
@@ -18,7 +18,7 @@ export const RowsPerPageDropdown = React.memo((props) => {
             totalRecords: props.totalRecords,
             disabled: props.disabled,
             element,
-            props,
+            props
         };
 
         return ObjectUtils.getJSXElement(props.template, defaultOptions);
@@ -39,4 +39,4 @@ RowsPerPageDropdown.defaultProps = {
     onChange: null,
     template: null,
     disabled: false
-}
+};

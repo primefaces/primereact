@@ -11,7 +11,7 @@ export const BlockUI = React.forwardRef((props, ref) => {
 
     const block = () => {
         setVisibleState(true);
-    }
+    };
 
     const unblock = () => {
         const callback = () => {
@@ -19,7 +19,7 @@ export const BlockUI = React.forwardRef((props, ref) => {
 
             props.fullScreen && DomHandler.removeClass(document.body, 'p-overflow-hidden');
             props.onUnblocked && props.onUnblocked();
-        }
+        };
 
         if (maskRef.current) {
             DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
@@ -27,11 +27,10 @@ export const BlockUI = React.forwardRef((props, ref) => {
                 ZIndexUtils.clear(maskRef.current);
                 callback();
             });
-        }
-        else {
+        } else {
             callback();
         }
-    }
+    };
 
     const onPortalMounted = () => {
         if (props.fullScreen) {
@@ -45,7 +44,7 @@ export const BlockUI = React.forwardRef((props, ref) => {
         }
 
         props.onBlocked && props.onBlocked();
-    }
+    };
 
     useMountEffect(() => {
         visibleState && block();
@@ -73,9 +72,13 @@ export const BlockUI = React.forwardRef((props, ref) => {
     const createMask = () => {
         if (visibleState) {
             const appendTo = props.fullScreen ? document.body : 'self';
-            const className = classNames('p-blockui p-component-overlay p-component-overlay-enter', {
-                'p-blockui-document': props.fullScreen
-            }, props.className);
+            const className = classNames(
+                'p-blockui p-component-overlay p-component-overlay-enter',
+                {
+                    'p-blockui-document': props.fullScreen
+                },
+                props.className
+            );
             const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : null;
             const mask = (
                 <div ref={maskRef} className={className} style={props.style}>
@@ -83,21 +86,21 @@ export const BlockUI = React.forwardRef((props, ref) => {
                 </div>
             );
 
-            return <Portal element={mask} appendTo={appendTo} onMounted={onPortalMounted} />
+            return <Portal element={mask} appendTo={appendTo} onMounted={onPortalMounted} />;
         }
 
         return null;
-    }
+    };
 
     const otherProps = ObjectUtils.findDiffKeys(props, BlockUI.defaultProps);
     const mask = createMask();
 
     return (
-        <div id={props.id} ref={elementRef} className="p-blockui-container" {...otherProps}>
+        <div id={props.id} ref={elementRef} className='p-blockui-container' {...otherProps}>
             {props.children}
             {mask}
         </div>
-    )
+    );
 });
 
 BlockUI.displayName = 'BlockUI';
@@ -113,4 +116,4 @@ BlockUI.defaultProps = {
     template: null,
     onBlocked: null,
     onUnblocked: null
-}
+};

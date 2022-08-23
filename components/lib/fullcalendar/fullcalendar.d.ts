@@ -9,6 +9,6 @@ export interface FullCalendarProps {
     children?: React.ReactNode;
 }
 
-export declare class FullCalendar extends React.Component<FullCalendarProps, any> { 
+export declare class FullCalendar extends React.Component<FullCalendarProps, any> {
     public getElement(): HTMLDivElement;
 }

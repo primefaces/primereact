@@ -17,12 +17,12 @@ export const useOverlayScrollListener = ({ target, listener, options, when = tru
         }
 
         if (!listenerRef.current && targetRef.current) {
-            const nodes = scrollableParents.current = DomHandler.getScrollableParents(targetRef.current);
+            const nodes = (scrollableParents.current = DomHandler.getScrollableParents(targetRef.current));
 
-            listenerRef.current = event => listener && listener(event);
+            listenerRef.current = (event) => listener && listener(event);
             nodes.forEach((node) => node.addEventListener('scroll', listenerRef.current, options));
         }
-    }
+    };
 
     const unbind = () => {
         if (listenerRef.current) {
@@ -31,13 +31,12 @@ export const useOverlayScrollListener = ({ target, listener, options, when = tru
 
             listenerRef.current = null;
         }
-    }
+    };
 
     React.useEffect(() => {
         if (when) {
             targetRef.current = DomHandler.getTargetElement(target);
-        }
-        else {
+        } else {
             unbind();
             targetRef.current = null;
         }
@@ -55,5 +54,5 @@ export const useOverlayScrollListener = ({ target, listener, options, when = tru
     });
 
     return [bind, unbind];
-}
+};
 /* eslint-enable */

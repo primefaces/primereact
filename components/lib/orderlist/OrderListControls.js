@@ -3,7 +3,6 @@ import { Button } from '../button/Button';
 import { ObjectUtils } from '../utils/Utils';
 
 export const OrderListControls = React.memo((props) => {
-
     const moveUp = (event) => {
         if (props.selection) {
             let value = [...props.value];
@@ -17,8 +16,7 @@ export const OrderListControls = React.memo((props) => {
                     const temp = value[selectedItemIndex - 1];
                     value[selectedItemIndex - 1] = movedItem;
                     value[selectedItemIndex] = temp;
-                }
-                else {
+                } else {
                     break;
                 }
             }
@@ -31,7 +29,7 @@ export const OrderListControls = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     const moveTop = (event) => {
         if (props.selection) {
@@ -44,8 +42,7 @@ export const OrderListControls = React.memo((props) => {
                 if (selectedItemIndex !== 0) {
                     const movedItem = value.splice(selectedItemIndex, 1)[0];
                     value.unshift(movedItem);
-                }
-                else {
+                } else {
                     break;
                 }
             }
@@ -58,7 +55,7 @@ export const OrderListControls = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     const moveDown = (event) => {
         if (props.selection) {
@@ -68,13 +65,12 @@ export const OrderListControls = React.memo((props) => {
                 const selectedItem = props.selection[i];
                 const selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value, props.dataKey);
 
-                if (selectedItemIndex !== (value.length - 1)) {
+                if (selectedItemIndex !== value.length - 1) {
                     const movedItem = value[selectedItemIndex];
                     const temp = value[selectedItemIndex + 1];
                     value[selectedItemIndex + 1] = movedItem;
                     value[selectedItemIndex] = temp;
-                }
-                else {
+                } else {
                     break;
                 }
             }
@@ -87,7 +83,7 @@ export const OrderListControls = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     const moveBottom = (event) => {
         if (props.selection) {
@@ -97,11 +93,10 @@ export const OrderListControls = React.memo((props) => {
                 let selectedItem = props.selection[i];
                 let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value, props.dataKey);
 
-                if (selectedItemIndex !== (value.length - 1)) {
+                if (selectedItemIndex !== value.length - 1) {
                     const movedItem = value.splice(selectedItemIndex, 1)[0];
                     value.push(movedItem);
-                }
-                else {
+                } else {
                     break;
                 }
             }
@@ -114,16 +109,16 @@ export const OrderListControls = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     return (
-        <div className="p-orderlist-controls">
-            <Button type="button" icon="pi pi-angle-up" onClick={moveUp}></Button>
-            <Button type="button" icon="pi pi-angle-double-up" onClick={moveTop}></Button>
-            <Button type="button" icon="pi pi-angle-down" onClick={moveDown}></Button>
-            <Button type="button" icon="pi pi-angle-double-down" onClick={moveBottom}></Button>
+        <div className='p-orderlist-controls'>
+            <Button type='button' icon='pi pi-angle-up' onClick={moveUp}></Button>
+            <Button type='button' icon='pi pi-angle-double-up' onClick={moveTop}></Button>
+            <Button type='button' icon='pi pi-angle-down' onClick={moveDown}></Button>
+            <Button type='button' icon='pi pi-angle-double-down' onClick={moveBottom}></Button>
         </div>
-    )
+    );
 });
 
 OrderListControls.displayName = 'OrderListControls';

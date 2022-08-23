@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const ConfirmPopupDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -83,7 +82,7 @@ export class ConfirmPopupDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useRef } from 'react';
@@ -145,7 +144,7 @@ const ConfirmPopupDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useRef } from 'react';
@@ -206,8 +205,8 @@ const ConfirmPopupDemo = () => {
     )
 }
                 `
-            },
-        'browser': {
+        },
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -273,35 +272,37 @@ const ConfirmPopupDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { ConfirmPopup } from 'primereact/confirmpopup'; // To use <ConfirmPopup> tag
 import { confirmPopup } from 'primereact/confirmpopup'; // To use confirmPopup method
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/confirmpopup/confirmpopup.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>There are two ways to display confirm popup. One of them is to use the <i>confirmPopup</i> method and the other is to use the <i>&lt;ConfirmPopup&gt;</i> tag.
-                        These independently create popup element. It supports the same properties in both. <i>target</i> property is mandatory to align the popup to its caller.</p>
+                    <p>
+                        There are two ways to display confirm popup. One of them is to use the <i>confirmPopup</i> method and the other is to use the <i>&lt;ConfirmPopup&gt;</i> tag. These independently create popup element. It supports the same
+                        properties in both. <i>target</i> property is mandatory to align the popup to its caller.
+                    </p>
 
                     <h6>1. confirmPopup method</h6>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const confirm = (event) => {
     confirmPopup({
         target: event.currentTarget,
@@ -314,11 +315,13 @@ const confirm = (event) => {
 
 <Button onClick={confirm} icon="pi pi-check" label="Confirm"></Button>
 `}
-</CodeHighlight>
-                    <p>The confirmPopup method returns an object incudes <i>hide</i> and <i>show</i> methods. The component can be shown or hidden by using this object at any time.</p>
+                    </CodeHighlight>
+                    <p>
+                        The confirmPopup method returns an object incudes <i>hide</i> and <i>show</i> methods. The component can be shown or hidden by using this object at any time.
+                    </p>
 
- <CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const confirm = (event) => {
     const myConfirm = confirmPopup({
         target: event.currentTarget,
@@ -340,22 +343,24 @@ const confirm = (event) => {
 <Button onClick={confirm} icon="pi pi-check" label="Confirm"></Button>
 <ConfirmPopup /> <!--required empty popup tag -->
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h6>2. &lt;ConfirmPopup&gt; tag</h6>
-                    <p>ConfirmPopup is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.</p>
+                    <p>
+                        ConfirmPopup is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <ConfirmPopup target={document.getElementById('button')} visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
     icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
 
 <Button id="button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -441,7 +446,9 @@ const confirm = (event) => {
                                     <td>appendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>style</td>
@@ -459,15 +466,21 @@ const confirm = (event) => {
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -489,8 +502,10 @@ const confirm = (event) => {
 
                                 <tr>
                                     <td>onHide</td>
-                                    <td>result: Indicates with which selection the popup was closed. <br />
-                                        Valid values are 'accept', 'reject' and undefined (outside click).</td>
+                                    <td>
+                                        result: Indicates with which selection the popup was closed. <br />
+                                        Valid values are 'accept', 'reject' and undefined (outside click).
+                                    </td>
                                     <td>Callback to invoke when confirm popup is hidden.</td>
                                 </tr>
                                 <tr>
@@ -503,9 +518,11 @@ const confirm = (event) => {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'>theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -538,72 +555,87 @@ const confirm = (event) => {
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>ConfirmPopup component uses <i>alertdialog</i> role and since any attribute is passed to the root element you may define attributes like <i>aria-label</i> or <i>aria-labelledby</i> to describe the popup contents. In addition <i>aria-modal</i> is added since focus is kept within the popup.</p>
-                    <p>It is recommended to use a trigger component that can be accessed with keyboard such as a button, if not adding <i>tabIndex</i> would be necessary. ConfirmPopup
-                    adds <i>aria-expanded</i> state attribute and <i>aria-controls</i> to the trigger so that the relation between the trigger and the popup is defined.</p>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            ConfirmPopup component uses <i>alertdialog</i> role and since any attribute is passed to the root element you may define attributes like <i>aria-label</i> or <i>aria-labelledby</i> to describe the popup contents. In
+                            addition <i>aria-modal</i> is added since focus is kept within the popup.
+                        </p>
+                        <p>
+                            It is recommended to use a trigger component that can be accessed with keyboard such as a button, if not adding <i>tabIndex</i> would be necessary. ConfirmPopup adds <i>aria-expanded</i> state attribute and{' '}
+                            <i>aria-controls</i> to the trigger so that the relation between the trigger and the popup is defined.
+                        </p>
 
-                    <h6>Overlay Keyboard Support</h6>
-                    <p>When the popup gets opened, the first focusable element receives the focus and this can be customized by adding <i>autofocus</i> to an element within the popup.</p>
+                        <h6>Overlay Keyboard Support</h6>
+                        <p>
+                            When the popup gets opened, the first focusable element receives the focus and this can be customized by adding <i>autofocus</i> to an element within the popup.
+                        </p>
 
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the next the focusable element within the popup.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>shift</i> + <i>tab</i></td>
-                                    <td>Moves focus to the previous the focusable element within the popup.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>escape</i></td>
-                                    <td>Closes the popup and moves focus to the trigger.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the next the focusable element within the popup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the previous the focusable element within the popup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Closes the popup and moves focus to the trigger.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <h6>Buttons Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Triggers the action, closes the popup and moves focus to the trigger.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Triggers the action, closes the popup and moves focus to the trigger.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        <h6>Buttons Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Triggers the action, closes the popup and moves focus to the trigger.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Triggers the action, closes the popup and moves focus to the trigger.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'ConfirmPopupDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'ConfirmPopupDemo', sources: sources })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default ConfirmPopupDoc;

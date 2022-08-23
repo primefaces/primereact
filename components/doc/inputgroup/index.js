@@ -3,9 +3,8 @@ import { TabView } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 
 const InputGroupDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -139,7 +138,7 @@ export class InputGroupDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hook Source',
             content: `
 import React, { useState } from 'react';
@@ -265,7 +264,7 @@ const InputGroupDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -391,7 +390,7 @@ const InputGroupDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
@@ -523,18 +522,13 @@ const InputGroupDemo = () => {
 }
                 `
         }
-    }
-
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'InputGroupDemo', sources: sources })
-                }
-            </TabView>
+        <div className='content-section documentation' id='app-doc'>
+            <TabView>{useLiveEditorTabs({ name: 'InputGroupDemo', sources: sources })}</TabView>
         </div>
     );
-})
+});
 
 export default InputGroupDoc;

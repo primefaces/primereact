@@ -5,9 +5,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const SelectButtonDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -62,7 +61,7 @@ export class SelectButtonDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -106,7 +105,7 @@ const SelectButtonDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -150,7 +149,7 @@ const SelectButtonDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -197,36 +196,39 @@ const SelectButtonDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { SelectButton } from 'primereact/selectbutton';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/selectbutton/selectbutton.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Dropdown is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
-                    of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
-                    whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. In addition,
-                    options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.</p>
+                    <p>
+                        Dropdown is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives of how to define the options property; One way is providing a collection
+                        of <i>SelectItem</i> instances having label-value pairs whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. In
+                        addition, options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.
+                    </p>
 
-                    <p><b>Options as SelectItems</b></p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        <b>Options as SelectItems</b>
+                    </p>
+                    <CodeHighlight lang='js'>
+                        {`
 const citySelectItems = [
     {label: 'New York', value: 'NY'},
     {label: 'Rome', value: 'RM'},
@@ -235,17 +237,19 @@ const citySelectItems = [
     {label: 'Paris', value: 'PRS'}
 ];
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <SelectButton value={city} options={citySelectItems} onChange={(e) => setValue(e.value)}></SelectButton>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p><b>Options as any type</b></p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        <b>Options as any type</b>
+                    </p>
+                    <CodeHighlight lang='js'>
+                        {`
 const cities = [
     {name: 'New York', code: 'NY'},
     {name: 'Rome', code: 'RM'},
@@ -254,40 +258,46 @@ const cities = [
     {name: 'Paris', code: 'PRS'}
 ];
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <SelectButton optionLabel="name" value={city} options={cities} onChange={(e) => setValue(e.value)}></SelectButton>
 <SelectButton optionLabel="name" optionValue="code" value={city} options={cities} onChange={(e) => setValue(e.value)}></SelectButton>
 `}
-</CodeHighlight>
-                    <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
+                    </CodeHighlight>
+                    <p>
+                        When <i>optionValue</i> is not defined, value of an option refers to the option object itself.
+                    </p>
 
                     <h5>Multiple</h5>
-                    <p>SelectButton allows selecting only one item by default and setting <i>multiple</i> option enables choosing more than one item. In multiple case, model property should be an array.</p>
+                    <p>
+                        SelectButton allows selecting only one item by default and setting <i>multiple</i> option enables choosing more than one item. In multiple case, model property should be an array.
+                    </p>
 
                     <h5>Custom Content</h5>
-                    <p>Options support templating using the <i>itemTemplate</i> property that references a function to render the content. Notice
-                    the usage of optionLabel, although it is not rendered visually, it is still required to be used as the list key.</p>
+                    <p>
+                        Options support templating using the <i>itemTemplate</i> property that references a function to render the content. Notice the usage of optionLabel, although it is not rendered visually, it is still required to be used as the
+                        list key.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <SelectButton optionLabel="name" optionValue="code" value={city} options={cities} onChange={(e) => setValue(e.value)} itemTemplate={itemTemplate} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const itemTemplate = (option) => {
     // custom item content
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>SelectItem API</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -333,8 +343,8 @@ const itemTemplate = (option) => {
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -445,8 +455,8 @@ const itemTemplate = (option) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -457,8 +467,10 @@ const itemTemplate = (option) => {
                             <tbody>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>event.originalEvent: browser event <br />
-                                        event.value: Single value or an array of values that are selected.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.value: Single value or an array of values that are selected.
+                                    </td>
                                     <td>Callback to invoke on value change.</td>
                                 </tr>
                             </tbody>
@@ -466,44 +478,47 @@ const itemTemplate = (option) => {
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>The container element that wraps the buttons has a <i>group</i> role whereas each button element uses <i>button</i> role and <i>aria-pressed</i> is updated depending on selection state.
-                    Value to describe an option is automatically set using the <i>aria-label</i> property that refers to the label of an option so it is still suggested to define a label even the option display
-                    consists of presentational content like icons only.</p>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            The container element that wraps the buttons has a <i>group</i> role whereas each button element uses <i>button</i> role and <i>aria-pressed</i> is updated depending on selection state. Value to describe an option is
+                            automatically set using the <i>aria-label</i> property that refers to the label of an option so it is still suggested to define a label even the option display consists of presentational content like icons only.
+                        </p>
 
-                    <h6>Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the buttons.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Toggles the checked state of a button.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        <h6>Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the buttons.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Toggles the checked state of a button.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'SelectButtonDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'SelectButtonDemo', sources: sources })}
             </TabView>
         </div>
     );
-})
+});
 
 export default SelectButtonDoc;

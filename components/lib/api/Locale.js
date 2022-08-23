@@ -1,7 +1,7 @@
 import PrimeReact from './PrimeReact';
 
 let locales = {
-    'en': {
+    en: {
         startsWith: 'Starts with',
         contains: 'Contains',
         notContains: 'Not contains',
@@ -31,9 +31,9 @@ let locales = {
         cancel: 'Cancel',
         dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-        dayNamesMin: ['Su','Mo','Tu','We','Th','Fr','Sa'],
-        monthNames: ['January','February','March','April','May','June','July','August','September','October','November','December'],
-        monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        dayNamesMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         today: 'Today',
         weekHeader: 'Wk',
         firstDayOfWeek: 0,
@@ -63,7 +63,7 @@ function locale(locale) {
     return {
         locale: PrimeReact.locale,
         options: locales[PrimeReact.locale]
-    }
+    };
 }
 
 function addLocale(locale, options) {
@@ -84,8 +84,7 @@ function localeOption(key, locale) {
 
     try {
         return localeOptions(_locale)[key];
-    }
-    catch(error) {
+    } catch (error) {
         throw new Error(`The ${key} option is not found in the current locale('${_locale}').`);
     }
 }
@@ -95,8 +94,7 @@ function ariaLabel(key) {
 
     try {
         return localeOptions(_locale)['aria'][key];
-    }
-    catch(error) {
+    } catch (error) {
         throw new Error(`The ${key} option is not found in the current locale('${_locale}').`);
     }
 }

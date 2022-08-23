@@ -13,8 +13,8 @@ export const TableHeader = React.memo((props) => {
     const isAllSortableDisabled = isSingleSort && allSortableDisabledState;
 
     const isColumnSorted = (column) => {
-        return props.sortField !== null ? (column.props.field === props.sortField || column.props.sortField === props.sortField) : false;
-    }
+        return props.sortField !== null ? column.props.field === props.sortField || column.props.sortField === props.sortField : false;
+    };
 
     const updateSortableDisabled = () => {
         if (isSingleSort || (isMultipleSort && props.onSortChange)) {
@@ -33,15 +33,15 @@ export const TableHeader = React.memo((props) => {
             setSortableDisabledFieldsState(sortableDisabledFields);
             setAllSortableDisabledState(allSortableDisabled);
         }
-    }
+    };
 
     const onSortableChange = () => {
         updateSortableDisabled();
-    }
+    };
 
     const onCheckboxChange = (e) => {
         props.onColumnCheckboxChange(e, props.value);
-    }
+    };
 
     useMountEffect(() => {
         updateSortableDisabled();
@@ -51,45 +51,73 @@ export const TableHeader = React.memo((props) => {
         const columns = React.Children.toArray(row.props.children);
 
         return createHeaderCells(columns);
-    }
+    };
 
     const createHeaderCells = (columns) => {
         return React.Children.map(columns, (col, i) => {
             const isVisible = col ? !col.props.hidden : true;
             const key = col ? col.props.columnKey || col.props.field || i : i;
 
-            return isVisible && (
-                <HeaderCell key={key} value={props.value} tableProps={props.tableProps} column={col} tabIndex={props.tabIndex} empty={props.empty} resizableColumns={props.resizableColumns} groupRowsBy={props.groupRowsBy} groupRowSortField={props.groupRowSortField}
-                    sortMode={props.sortMode} sortField={props.sortField} sortOrder={props.sortOrder} multiSortMeta={props.multiSortMeta} allSortableDisabled={isAllSortableDisabled} onSortableChange={onSortableChange} sortableDisabledFields={sortableDisabledFieldsState}
-                    filterDisplay={props.filterDisplay} filters={props.filters} filtersStore={props.filtersStore} onFilterChange={props.onFilterChange} onFilterApply={props.onFilterApply}
-                    onColumnMouseDown={props.onColumnMouseDown} onColumnDragStart={props.onColumnDragStart} onColumnDragOver={props.onColumnDragOver} onColumnDragLeave={props.onColumnDragLeave} onColumnDrop={props.onColumnDrop}
-                    onColumnResizeStart={props.onColumnResizeStart} onColumnResizerClick={props.onColumnResizerClick} onColumnResizerDoubleClick={props.onColumnResizerDoubleClick}
-                    showSelectAll={props.showSelectAll} allRowsSelected={props.allRowsSelected} onColumnCheckboxChange={onCheckboxChange} reorderableColumns={props.reorderableColumns} onSortChange={props.onSortChange} />
-            )
+            return (
+                isVisible && (
+                    <HeaderCell
+                        key={key}
+                        value={props.value}
+                        tableProps={props.tableProps}
+                        column={col}
+                        tabIndex={props.tabIndex}
+                        empty={props.empty}
+                        resizableColumns={props.resizableColumns}
+                        groupRowsBy={props.groupRowsBy}
+                        groupRowSortField={props.groupRowSortField}
+                        sortMode={props.sortMode}
+                        sortField={props.sortField}
+                        sortOrder={props.sortOrder}
+                        multiSortMeta={props.multiSortMeta}
+                        allSortableDisabled={isAllSortableDisabled}
+                        onSortableChange={onSortableChange}
+                        sortableDisabledFields={sortableDisabledFieldsState}
+                        filterDisplay={props.filterDisplay}
+                        filters={props.filters}
+                        filtersStore={props.filtersStore}
+                        onFilterChange={props.onFilterChange}
+                        onFilterApply={props.onFilterApply}
+                        onColumnMouseDown={props.onColumnMouseDown}
+                        onColumnDragStart={props.onColumnDragStart}
+                        onColumnDragOver={props.onColumnDragOver}
+                        onColumnDragLeave={props.onColumnDragLeave}
+                        onColumnDrop={props.onColumnDrop}
+                        onColumnResizeStart={props.onColumnResizeStart}
+                        onColumnResizerClick={props.onColumnResizerClick}
+                        onColumnResizerDoubleClick={props.onColumnResizerDoubleClick}
+                        showSelectAll={props.showSelectAll}
+                        allRowsSelected={props.allRowsSelected}
+                        onColumnCheckboxChange={onCheckboxChange}
+                        reorderableColumns={props.reorderableColumns}
+                        onSortChange={props.onSortChange}
+                    />
+                )
+            );
         });
-    }
+    };
 
     const createCheckbox = (selectionMode) => {
         if (props.showSelectAll && selectionMode === 'multiple') {
             const allRowsSelected = props.allRowsSelected(props.value);
 
-            return (
-                <HeaderCheckbox checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} />
-            )
+            return <HeaderCheckbox checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} />;
         }
 
         return null;
-    }
+    };
 
     const createFilter = (column, filter) => {
         if (filter) {
-            return (
-                <ColumnFilter display="row" column={column} filters={props.filters} filtersStore={props.filtersStore} onFilterChange={props.onFilterChange} onFilterApply={props.onFilterApply} />
-            )
+            return <ColumnFilter display='row' column={column} filters={props.filters} filtersStore={props.filtersStore} onFilterChange={props.onFilterChange} onFilterApply={props.onFilterApply} />;
         }
 
         return null;
-    }
+    };
 
     const createFilterCells = () => {
         return React.Children.map(props.columns, (col, i) => {
@@ -108,39 +136,38 @@ export const TableHeader = React.memo((props) => {
                         {checkbox}
                         {filterRow}
                     </th>
-                )
+                );
             }
 
             return null;
         });
-    }
+    };
 
     const createContent = () => {
         if (props.headerColumnGroup) {
             const rows = React.Children.toArray(props.headerColumnGroup.props.children);
 
-            return rows.map((row, i) => <tr key={i} role="row">{createGroupHeaderCells(row)}</tr>);
-        }
-        else {
-            const headerRow = <tr role="row">{createHeaderCells(props.columns)}</tr>;
-            const filterRow = props.filterDisplay === 'row' && <tr role="row">{createFilterCells()}</tr>;
+            return rows.map((row, i) => (
+                <tr key={i} role='row'>
+                    {createGroupHeaderCells(row)}
+                </tr>
+            ));
+        } else {
+            const headerRow = <tr role='row'>{createHeaderCells(props.columns)}</tr>;
+            const filterRow = props.filterDisplay === 'row' && <tr role='row'>{createFilterCells()}</tr>;
 
             return (
                 <>
                     {headerRow}
                     {filterRow}
                 </>
-            )
+            );
         }
-    }
+    };
 
     const content = createContent();
 
-    return (
-        <thead className="p-datatable-thead">
-            {content}
-        </thead>
-    )
+    return <thead className='p-datatable-thead'>{content}</thead>;
 });
 
 TableHeader.displayName = 'TableHeader';

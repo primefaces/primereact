@@ -1,14 +1,13 @@
 import React, { memo } from 'react';
-import Link  from 'next/link';
+import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const AutoCompleteDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -163,7 +162,7 @@ export class AutoCompleteDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -305,7 +304,7 @@ export const AutoCompleteDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -446,8 +445,8 @@ export const AutoCompleteDemo = () => {
     )
 }
                 `
-            },
-        'browser': {
+        },
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./CountryService.js"></script>
@@ -591,41 +590,41 @@ const AutoCompleteDemo = () => {
     )
 }
                 `
-            }
         }
-
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { AutoComplete } from 'primereact/autocomplete';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/autocomplete/autocomplete.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>AutoComplete is used as a controlled component with <i>value</i> and <i>onChange</i> properties. In addition, the component
-                        requires a list of <i>suggestions</i> and a <i>completeMethod</i> to query the results.</p>
+                    <p>
+                        AutoComplete is used as a controlled component with <i>value</i> and <i>onChange</i> properties. In addition, the component requires a list of <i>suggestions</i> and a <i>completeMethod</i> to query the results.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <AutoComplete value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry(e.value)} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const countries = // datasource
 
 const searchCountry = (event) => {
@@ -639,43 +638,48 @@ render() {
     );
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Dropdown</h5>
-                    <p>Enabling <i>dropdown</i> property displays a button next to the input field where click behavior of the button is defined using
-                        dropdownMode property that takes "blank" or "current" as possible values.
-                        "blank" is the default mode to send a query with an empty string whereas
-                        "current" setting sends a query with the current value of the input.</p>
+                    <p>
+                        Enabling <i>dropdown</i> property displays a button next to the input field where click behavior of the button is defined using dropdownMode property that takes "blank" or "current" as possible values. "blank" is the default
+                        mode to send a query with an empty string whereas "current" setting sends a query with the current value of the input.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <AutoComplete dropdown value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Multiple Mode</h5>
-                    <p>Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Multiple mode is enabled using <i>multiple</i> property used to select more than one value from the autocomplete. In this case, value reference should be an array.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <AutoComplete multiple value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Objects</h5>
-                    <p>AutoComplete can also work with objects using the  <i>field</i> property that defines the label to display
-                    as a suggestion. The value passed to the model would still be the object instance of a suggestion.
-                    Here is an example with a Country object that has name and code fields such as &#123;name:"United States",code:"USA"&#125;.</p>
+                    <p>
+                        AutoComplete can also work with objects using the <i>field</i> property that defines the label to display as a suggestion. The value passed to the model would still be the object instance of a suggestion. Here is an example
+                        with a Country object that has name and code fields such as &#123;name:"United States",code:"USA"&#125;.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Grouping</h5>
-                    <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
+                    </p>
+                    <CodeHighlight>
+                        {`
 const groupedCities = [
     {
         label: 'Germany', code: 'DE',
@@ -706,46 +710,53 @@ const groupedCities = [
     }
 ];
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <AutoComplete value={selectedCity} suggestions={filteredCities} completeMethod={searchCity} field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} onChange={(e) => setSelectedCity(e.value)}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Force Selection</h5>
-                    <p>ForceSelection mode validates the manual input to check whether it also exists in the suggestions list, if not the input value is cleared
-                    to make sure the value passed to the model is always one of the suggestions. Simply enable <i>forceSelection</i> to enforce that input is always from the suggestion list.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        ForceSelection mode validates the manual input to check whether it also exists in the suggestions list, if not the input value is cleared to make sure the value passed to the model is always one of the suggestions. Simply
+                        enable <i>forceSelection</i> to enforce that input is always from the suggestion list.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <AutoComplete forceSelection value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Templating</h5>
-                    <p>Custom content can be displayed using <i>itemTemplate</i> property that references a function or JSXElement or string which gets
-                    the suggestion option and returns an element. Similarly <i>selectedItemTemplate</i> property is available
-                    to customize the chips in multiple mode using the same approach.</p>
+                    <p>
+                        Custom content can be displayed using <i>itemTemplate</i> property that references a function or JSXElement or string which gets the suggestion option and returns an element. Similarly <i>selectedItemTemplate</i> property is
+                        available to customize the chips in multiple mode using the same approach.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <AutoComplete value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 itemTemplate(item) {
     //return custom element
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <p>Standard HTMLSpanElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Standard HTMLSpanElement properties are passed to the wrapping div element.
+                        <br />
+                        In addition the component uses these properties:
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -807,8 +818,7 @@ itemTemplate(item) {
                                     <td>forceSelection</td>
                                     <td>boolean</td>
                                     <td>false</td>
-                                    <td>When present, autocomplete clears the manual input if it does not match of the suggestions to force only
-                                    accepting values from the suggestions.</td>
+                                    <td>When present, autocomplete clears the manual input if it does not match of the suggestions to force only accepting values from the suggestions.</td>
                                 </tr>
                                 <tr>
                                     <td>autoHighlight</td>
@@ -934,7 +944,9 @@ itemTemplate(item) {
                                     <td>appendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>tabIndex</td>
@@ -982,7 +994,13 @@ itemTemplate(item) {
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>dropdownIcon</td>
@@ -1000,15 +1018,17 @@ itemTemplate(item) {
                                     <td>virtualScrollerOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>Whether to use the virtualScroller feature. The properties of <Link href="/virtualscroller">VirtualScroller</Link> component can be used like an object in it.</td>
+                                    <td>
+                                        Whether to use the virtualScroller feature. The properties of <Link href='/virtualscroller'>VirtualScroller</Link> component can be used like an object in it.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1027,8 +1047,10 @@ itemTemplate(item) {
                                 </tr>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>event.originalEvent: Browser event <br />
-                                        event.value: Value of the component</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.value: Value of the component
+                                    </td>
                                     <td>Callback to invoke when autocomplete value changes.</td>
                                 </tr>
                                 <tr>
@@ -1043,14 +1065,18 @@ itemTemplate(item) {
                                 </tr>
                                 <tr>
                                     <td>onSelect</td>
-                                    <td>event.originalEvent: Browser event <br />
-                                        event.value: Value of the component</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.value: Value of the component
+                                    </td>
                                     <td>Callback to invoke when a suggestion is selected.</td>
                                 </tr>
                                 <tr>
                                     <td>onUnselect</td>
-                                    <td>event.originalEvent: Browser event <br />
-                                        event.value: Value of the component</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.value: Value of the component
+                                    </td>
                                     <td>Callback to invoke when a selected value is removed.</td>
                                 </tr>
                                 <tr>
@@ -1112,8 +1138,8 @@ itemTemplate(item) {
 
                     <h5>Styling</h5>
                     <p>Following is the list of structural style classes</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1154,15 +1180,22 @@ itemTemplate(item) {
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element has <i>combobox</i> role
-                    in addition to <i>aria-autocomplete</i>, <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used
-                    to instruct screen reader which option to read during keyboard navigation within the popup list.</p>
-                    <p>In multiple mode, chip list uses <i>listbox</i> role with <i>aria-orientation</i> set to horizontal whereas each chip has the <i>option</i> role with <i>aria-label</i> set to the label of the chip.</p>
-                    <p>The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has <i>option</i> role and an id to match the <i>aria-activedescendant</i> of the input element.</p>
-<CodeHighlight>
-{`
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element has <i>combobox</i> role in addition
+                            to <i>aria-autocomplete</i>, <i>aria-haspopup</i> and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> and <i>aria-activedescendant</i> attribute is used to
+                            instruct screen reader which option to read during keyboard navigation within the popup list.
+                        </p>
+                        <p>
+                            In multiple mode, chip list uses <i>listbox</i> role with <i>aria-orientation</i> set to horizontal whereas each chip has the <i>option</i> role with <i>aria-label</i> set to the label of the chip.
+                        </p>
+                        <p>
+                            The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has <i>option</i> role and an id to match the <i>aria-activedescendant</i>{' '}
+                            of the input element.
+                        </p>
+                        <CodeHighlight>
+                            {`
 <label htmlFor="ac1">Username</label>
 <AutoComplete inputId="ac1" />
 
@@ -1171,110 +1204,130 @@ itemTemplate(item) {
 
 <AutoComplete aria-label="City" />
 `}
-</CodeHighlight>
-                    <h6>Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the input element when popup is not visible.
-                                        If the popup is open and an item is highlighted then popup gets closed, item gets selected and focus moves to the next focusable element.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>up arrow</i></td>
-                                    <td>Highlights the previous item if popup is visible.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>down arrow</i></td>
-                                    <td>Highlights the next item if popup is visible.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Selects the highlighted item and closes the popup if popup is visible.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>home</i></td>
-                                    <td>Highlights the first item if popup is visible.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>end</i></td>
-                                    <td>Highlights the last item if popup is visible.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>escape</i></td>
-                                    <td>Hides the popup.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        </CodeHighlight>
+                        <h6>Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the input element when popup is not visible. If the popup is open and an item is highlighted then popup gets closed, item gets selected and focus moves to the next focusable element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>Highlights the previous item if popup is visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>Highlights the next item if popup is visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Selects the highlighted item and closes the popup if popup is visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
+                                        <td>Highlights the first item if popup is visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
+                                        <td>Highlights the last item if popup is visible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Hides the popup.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <h6>Chips Input Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>backspace</i></td>
-                                    <td>Deletes the previous chip if the input field is empty.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>left arrow</i></td>
-                                    <td>Moves focus to the previous chip if available and input field is empty.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        <h6>Chips Input Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>backspace</i>
+                                        </td>
+                                        <td>Deletes the previous chip if the input field is empty.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>left arrow</i>
+                                        </td>
+                                        <td>Moves focus to the previous chip if available and input field is empty.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <h6>Chip Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>left arrow</i></td>
-                                    <td>Moves focus to the previous chip if available.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>right arrow</i></td>
-                                    <td>Moves focus to the next chip, if there is none then input field receives the focus.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>backspace</i></td>
-                                    <td>Deletes the chips and adds focus to the input field.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
-
+                        <h6>Chip Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>left arrow</i>
+                                        </td>
+                                        <td>Moves focus to the previous chip if available.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>right arrow</i>
+                                        </td>
+                                        <td>Moves focus to the next chip, if there is none then input field receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>backspace</i>
+                                        </td>
+                                        <td>Deletes the chips and adds focus to the input field.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'AutoCompleteDemo', sources: sources, service: 'CountryService', data: 'countries' })
-                }
+                {useLiveEditorTabs({ name: 'AutoCompleteDemo', sources: sources, service: 'CountryService', data: 'countries' })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default AutoCompleteDoc;

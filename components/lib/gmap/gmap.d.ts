@@ -6,7 +6,7 @@ interface GMapEventParams {
     map: any;
 }
 
-export interface GMapProps  extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface GMapProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     options?: object;
     overlays?: any[];
     onMapReady?(map: any): void;
@@ -20,7 +20,7 @@ export interface GMapProps  extends Omit<React.DetailedHTMLProps<React.HTMLAttri
     children?: React.ReactNode;
 }
 
-export declare class GMap extends React.Component<GMapProps, any> { 
+export declare class GMap extends React.Component<GMapProps, any> {
     public getMap(): any;
     public getElement(): HTMLDivElement;
 }

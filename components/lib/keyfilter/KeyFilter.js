@@ -1,7 +1,6 @@
 import { DomHandler } from '../utils/Utils';
 
 export const KeyFilter = {
-
     /* eslint-disable */
     DEFAULT_MASKS: {
         pint: /[\d]/,
@@ -33,12 +32,12 @@ export const KeyFilter = {
         63277: 34, // page down
         63272: 46, // delete
         63273: 36, // home
-        63275: 35  // end
+        63275: 35 // end
     },
 
     isNavKeyPress(e) {
         let k = e.keyCode;
-        k = DomHandler.getBrowser().safari ? (KeyFilter.SAFARI_KEYS[k] || k) : k;
+        k = DomHandler.getBrowser().safari ? KeyFilter.SAFARI_KEYS[k] || k : k;
 
         return (k >= 33 && k <= 40) || k === KeyFilter.KEYS.RETURN || k === KeyFilter.KEYS.TAB || k === KeyFilter.KEYS.ESC;
     },
@@ -46,13 +45,12 @@ export const KeyFilter = {
     isSpecialKey(e) {
         let k = e.keyCode;
 
-        return k === 9 || k === 13 || k === 27 || k === 16 || k === 17 || (k >= 18 && k <= 20) ||
-            (DomHandler.getBrowser().opera && !e.shiftKey && (k === 8 || (k >= 33 && k <= 35) || (k >= 36 && k <= 39) || (k >= 44 && k <= 45)));
+        return k === 9 || k === 13 || k === 27 || k === 16 || k === 17 || (k >= 18 && k <= 20) || (DomHandler.getBrowser().opera && !e.shiftKey && (k === 8 || (k >= 33 && k <= 35) || (k >= 36 && k <= 39) || (k >= 44 && k <= 45)));
     },
 
     getKey(e) {
         let k = e.keyCode || e.charCode;
-        return DomHandler.getBrowser().safari ? (KeyFilter.SAFARI_KEYS[k] || k) : k;
+        return DomHandler.getBrowser().safari ? KeyFilter.SAFARI_KEYS[k] || k : k;
     },
 
     getCharCode(e) {
@@ -97,13 +95,13 @@ export const KeyFilter = {
         }
 
         const regex = this.getRegex(keyfilter);
-        const clipboard = e.clipboardData.getData("text");
-        
+        const clipboard = e.clipboardData.getData('text');
+
         // loop over each letter pasted and if any fail prevent the paste
-        [...clipboard].forEach(c => {
+        [...clipboard].forEach((c) => {
             if (!regex.test(c)) {
-               e.preventDefault();
-               return false;
+                e.preventDefault();
+                return false;
             }
         });
     },
@@ -118,4 +116,4 @@ export const KeyFilter = {
 
         return validatePattern;
     }
-}
+};

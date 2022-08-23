@@ -7,23 +7,23 @@ function handler() {
 
         zIndexes.push({ key, value: newZIndex });
         return newZIndex;
-    }
+    };
 
     const revertZIndex = (zIndex) => {
-        zIndexes = zIndexes.filter(obj => obj.value !== zIndex);
-    }
+        zIndexes = zIndexes.filter((obj) => obj.value !== zIndex);
+    };
 
     const getCurrentZIndex = (key, autoZIndex) => {
         return getLastZIndex(key, autoZIndex).value;
-    }
+    };
 
     const getLastZIndex = (key, autoZIndex, baseZIndex = 0) => {
-        return [...zIndexes].reverse().find(obj => (autoZIndex ? true : obj.key === key)) || { key, value: baseZIndex };
-    }
+        return [...zIndexes].reverse().find((obj) => (autoZIndex ? true : obj.key === key)) || { key, value: baseZIndex };
+    };
 
     const getZIndex = (el) => {
-        return el ? parseInt(el.style.zIndex, 10) || 0 : 0
-    }
+        return el ? parseInt(el.style.zIndex, 10) || 0 : 0;
+    };
 
     return {
         get: getZIndex,

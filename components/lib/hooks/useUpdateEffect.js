@@ -11,5 +11,5 @@ export const useUpdateEffect = (fn, deps) => {
 
         return fn && fn();
     }, deps);
-}
+};
 /* eslint-enable */

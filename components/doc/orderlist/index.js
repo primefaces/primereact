@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const OrderListDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -65,7 +64,7 @@ export class OrderListDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -111,7 +110,7 @@ const OrderListDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -157,7 +156,7 @@ const OrderListDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./OrderListDemo.css" />
@@ -262,61 +261,68 @@ const OrderListDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { OrderList } from 'primereact/orderlist';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/orderlist/orderlist.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and <i>onChange</i>
-                            callback to update the value after reorder.
+                    <p>
+                        OrderList requires an array as its value, a template for its content where each item in the array can be accessed inside the template and <i>onChange</i>
+                        callback to update the value after reorder.
                     </p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <OrderList value={products} itemTemplate={itemTemplate} header="Products" onChange={(e) => setProducts(e.value)}></OrderList>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>DragDrop</h5>
-                    <p>Items can be reordered using drag and drop by enabling <i>dragdrop</i> property.</p>
+                    <p>
+                        Items can be reordered using drag and drop by enabling <i>dragdrop</i> property.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <OrderList value={products} itemTemplate={itemTemplate} dragdrop onChange={(e) => setProducts(e.value)}></OrderList>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Filtering</h5>
-                    <p>Items can be filtered using an input field by enabling the <i>filter</i> property. By default filtering is done against
-                        label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
-                        to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
+                    <p>
+                        Items can be filtered using an input field by enabling the <i>filter</i> property. By default filtering is done against label of the items and <i>filterBy</i> property is available to choose one or more properties of the
+                        options. In addition <i>filterMatchMode</i> can be utilized to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <OrderList value={products} filter filterBy="name" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Custom Content</h5>
-                    <p>For custom content support define an <i>itemTemplate</i> function that gets the item instance as a parameter and returns the content. For custom filter support define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.</p>
+                    <p>
+                        For custom content support define an <i>itemTemplate</i> function that gets the item instance as a parameter and returns the content. For custom filter support define a <i>filterTemplate</i> function that gets the option
+                        instance as a parameter and returns the content for the filter element.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const [filterValue, setFilterValue] = useState('');
 const filterInputRef = useRef();
 
@@ -347,24 +353,24 @@ const myFilterFunction = (event, options) => {
     options.filter(event);
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <OrderList value={products} header="List of Products" dataKey="id" itemTemplate={itemTemplate} filter filterBy="name" filterTemplate={filterTemplate}></OrderList>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Default</th>
-                                <th>Description</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -474,26 +480,30 @@ const myFilterFunction = (event, options) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Parameters</th>
-                                <th>Description</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>event.originalEvent: Browser event <br />
-                                        event.value: Reordered list</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.value: Reordered list
+                                    </td>
                                     <td>Callback to invoke when list is reordered.</td>
                                 </tr>
                                 <tr>
                                     <td>onFilter</td>
-                                    <td>event.originalEvent: Original event <br />
-                                        event.filter: Value of the filter input</td>
+                                    <td>
+                                        event.originalEvent: Original event <br />
+                                        event.filter: Value of the filter input
+                                    </td>
                                     <td>Callback to invoke when the value is filtered.</td>
                                 </tr>
                             </tbody>
@@ -501,8 +511,8 @@ const myFilterFunction = (event, options) => {
                     </div>
 
                     <h5>Methods</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -521,9 +531,11 @@ const myFilterFunction = (event, options) => {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -560,119 +572,152 @@ const myFilterFunction = (event, options) => {
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Value to describe the listbox can be provided with <i>listProps</i> by passing <i>aria-labelledby</i> or <i>aria-label</i> props. The list element has a <i>listbox</i> role with the <i>aria-multiselectable</i> attribute.
-                    Each list item has an <i>option</i> role with <i>aria-selected</i> and <i>aria-disabled</i> as their attributes.</p>
-                    <p>Controls buttons are <i>button</i> elements with an <i>aria-label</i> that refers to the <i>aria.moveTop</i>, <i>aria.moveUp</i>, <i>aria.moveDown</i> and <i>aria.moveBottom</i> properties of the <Link href="/locale">locale</Link> API by default, alternatively you may use
-                    <i>moveTopButtonProps</i>, <i>moveUpButtonProps</i>, <i>moveDownButtonProps</i> and <i>moveBottomButtonProps</i> to customize the buttons like overriding the default <i>aria-label</i> attributes.</p>
-<CodeHighlight>
-{`
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Value to describe the listbox can be provided with <i>listProps</i> by passing <i>aria-labelledby</i> or <i>aria-label</i> props. The list element has a <i>listbox</i> role with the <i>aria-multiselectable</i> attribute.
+                            Each list item has an <i>option</i> role with <i>aria-selected</i> and <i>aria-disabled</i> as their attributes.
+                        </p>
+                        <p>
+                            Controls buttons are <i>button</i> elements with an <i>aria-label</i> that refers to the <i>aria.moveTop</i>, <i>aria.moveUp</i>, <i>aria.moveDown</i> and <i>aria.moveBottom</i> properties of the{' '}
+                            <Link href='/locale'>locale</Link> API by default, alternatively you may use
+                            <i>moveTopButtonProps</i>, <i>moveUpButtonProps</i>, <i>moveDownButtonProps</i> and <i>moveBottomButtonProps</i> to customize the buttons like overriding the default <i>aria-label</i> attributes.
+                        </p>
+                        <CodeHighlight>
+                            {`
 <span id="lb">Options</span>
 <OrderList aria-labelledby="lb" />
 
 <OrderList aria-label="City" />
 `}
-</CodeHighlight>
-                    <h6>ListBox Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the first selected option, if there is none then first option receives the focus.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>up arrow</i></td>
-                                    <td>Moves focus to the previous option.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>down arrow</i></td>
-                                    <td>Moves focus to the next option.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Toggles the selected state of the focused option.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Toggles the selected state of the focused option.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>home</i></td>
-                                    <td>Moves focus to the first option.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>end</i></td>
-                                    <td>Moves focus to the last option.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>shift</i> + <i>down arrow</i></td>
-                                    <td>Moves focus to the next option and toggles the selection state.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>shift</i> + <i>up arrow</i></td>
-                                    <td>Moves focus to the previous option and toggles the selection state.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>shift</i> + <i>space</i></td>
-                                    <td>Selects the items between the most recently selected option and the focused option.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>control</i> + <i>shift</i> + <i>home</i></td>
-                                    <td>Selects the focused options and all the options up to the first one.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>control</i> + <i>shift</i> + <i>end</i></td>
-                                    <td>Selects the focused options and all the options down to the first one.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>control</i> + <i>a</i></td>
-                                    <td>Selects all options.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        </CodeHighlight>
+                        <h6>ListBox Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the first selected option, if there is none then first option receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>Moves focus to the previous option.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>Moves focus to the next option.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Toggles the selected state of the focused option.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Toggles the selected state of the focused option.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
+                                        <td>Moves focus to the first option.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
+                                        <td>Moves focus to the last option.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>down arrow</i>
+                                        </td>
+                                        <td>Moves focus to the next option and toggles the selection state.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>up arrow</i>
+                                        </td>
+                                        <td>Moves focus to the previous option and toggles the selection state.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>space</i>
+                                        </td>
+                                        <td>Selects the items between the most recently selected option and the focused option.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>control</i> + <i>shift</i> + <i>home</i>
+                                        </td>
+                                        <td>Selects the focused options and all the options up to the first one.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>control</i> + <i>shift</i> + <i>end</i>
+                                        </td>
+                                        <td>Selects the focused options and all the options down to the first one.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>control</i> + <i>a</i>
+                                        </td>
+                                        <td>Selects all options.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <h6>Buttons Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Executes button action.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Executes button action.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        <h6>Buttons Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Executes button action.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Executes button action.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'OrderListDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'OrderListDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default OrderListDoc;

@@ -32,7 +32,7 @@ export interface TabPanelProps {
     children?: React.ReactNode;
 }
 
-export declare class TabPanel extends React.Component<TabPanelProps, any> { }
+export declare class TabPanel extends React.Component<TabPanelProps, any> {}
 
 interface TabViewTabChangeParams {
     originalEvent: React.SyntheticEvent;

@@ -5,9 +5,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const RippleDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -50,7 +49,7 @@ export class RippleDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -86,7 +85,7 @@ const RippleDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -122,7 +121,7 @@ const RippleDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./RippleDemo.css" />
@@ -200,70 +199,77 @@ const RippleDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Getting Started</h5>
-                    <p>Ripple effect is an optional animation for the supported components such as buttons. It is disabled by default and needs to be enabled at
-                        your app's main container (e.g. App.js) using the <i>PrimeReact</i> class.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        Ripple effect is an optional animation for the supported components such as buttons. It is disabled by default and needs to be enabled at your app's main container (e.g. App.js) using the <i>PrimeReact</i> class.
+                    </p>
+                    <CodeHighlight lang='js'>
+                        {`
 PrimeReact.ripple = true;
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p><span className="font-bold">Note</span>: That would be it to enable ripple on PrimeReact components, next section describes how to use it with your own components and standard elements.</p>
+                    <p>
+                        <span className='font-bold'>Note</span>: That would be it to enable ripple on PrimeReact components, next section describes how to use it with your own components and standard elements.
+                    </p>
 
                     <h5>Usage</h5>
-                    <p>Ripple is a component that needs to be imported and activated using <i>PrimeReact.ripple = true</i></p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        Ripple is a component that needs to be imported and activated using <i>PrimeReact.ripple = true</i>
+                    </p>
+                    <CodeHighlight lang='js'>
+                        {`
 import { Ripple } from 'primereact/ripple';
 
 <div className="p-ripple">
     <Ripple />
 </div>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Styling</h5>
-                    <p>Default styling of the animation adds a shade of white. This can easily be customized using css that changes the color of <i>.p-ink</i> element.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Default styling of the animation adds a shade of white. This can easily be customized using css that changes the color of <i>.p-ink</i> element.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <div className="p-ripple purple">
     <Ripple />
 </div>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="css">
-{`
+                    <CodeHighlight lang='css'>
+                        {`
 .p-ripple.purple .p-ink {
     background: rgba(256,39,176,.3);
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Styling</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -288,23 +294,23 @@ import { Ripple } from 'primereact/ripple';
                     </div>
 
                     <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Ripple element has the <i>aria-hidden</i> attribute as true so that it gets ignored by the screen readers.</p>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Ripple element has the <i>aria-hidden</i> attribute as true so that it gets ignored by the screen readers.
+                        </p>
 
-                    <h6>Keyboard Support</h6>
-                    <p>Component does not include any interactive elements.</p>
-                </DevelopmentSection>
+                        <h6>Keyboard Support</h6>
+                        <p>Component does not include any interactive elements.</p>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'RippleDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'RippleDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default RippleDoc;

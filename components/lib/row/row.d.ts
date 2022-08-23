@@ -6,4 +6,4 @@ export interface RowProps {
     children?: React.ReactNode;
 }
 
-export declare class Row extends React.Component<RowProps, any> { }
+export declare class Row extends React.Component<RowProps, any> {}

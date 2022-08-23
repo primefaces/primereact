@@ -11,7 +11,7 @@ interface OrganizationChartNodeSelectParams {
     node: OrganizationChartNodeDataType;
 }
 
-interface OrganizationChartNodeUnselectParams extends OrganizationChartNodeSelectParams { }
+interface OrganizationChartNodeUnselectParams extends OrganizationChartNodeSelectParams {}
 
 interface OrganizationChartNodeData {
     className?: string;
@@ -32,6 +32,6 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
     children?: React.ReactNode;
 }
 
-export declare class OrganizationChart extends React.Component<OrganizationChartProps, any> { 
+export declare class OrganizationChart extends React.Component<OrganizationChartProps, any> {
     public getElement(): HTMLDivElement;
 }

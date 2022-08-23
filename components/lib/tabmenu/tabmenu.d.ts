@@ -14,6 +14,6 @@ export interface TabMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     children?: React.ReactNode;
 }
 
-export declare class TabMenu extends React.Component<TabMenuProps, any> { 
+export declare class TabMenu extends React.Component<TabMenuProps, any> {
     public getElement(): HTMLDivElement;
 }

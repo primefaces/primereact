@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const TabViewDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -224,7 +223,7 @@ export class TabViewDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -427,7 +426,7 @@ const TabViewDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -630,7 +629,7 @@ const TabViewDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./TabViewDemo.css" />
@@ -856,35 +855,37 @@ const TabViewDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { TabView, TabPanel } from 'primereact/tabview';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/tabview/tabview.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>Tabview element consists of one or more TabPanel elements and can either be used as a Controlled or Uncontrolled component.</p>
 
                     <h5>Controlled Component</h5>
-                    <p>In controlled mode, <i>activeIndex</i> and <i>onTabChange</i> properties need to be defined to control the state.</p>
+                    <p>
+                        In controlled mode, <i>activeIndex</i> and <i>onTabChange</i> properties need to be defined to control the state.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 const [activeIndex, setActiveIndex] = useState(0);
 
 <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
@@ -899,14 +900,16 @@ const [activeIndex, setActiveIndex] = useState(0);
     </TabPanel>
 </TabView>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Uncontrolled</h5>
-                    <p>In uncontrolled mode, no additional properties are required. Initial active tab can be provided using the <i>activeIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further updates. If you programmatically
-            need to update the active tab, prefer to use the component as controlled.</p>
+                    <p>
+                        In uncontrolled mode, no additional properties are required. Initial active tab can be provided using the <i>activeIndex</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further
+                        updates. If you programmatically need to update the active tab, prefer to use the component as controlled.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <TabView>
     <TabPanel header="Header I">
         Content I
@@ -919,22 +922,24 @@ const [activeIndex, setActiveIndex] = useState(0);
     </TabPanel>
 </TabView>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Header Template</h5>
-                    <p>The header element is fully customizable on TabPanel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        The header element is fully customizable on TabPanel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.
+                    </p>
+                    <CodeHighlight lang='js'>
+                        {`
 <TabView>
     <TabPanel header="Header I" headerTemplate={template}>
         Content I
     </TabPanel>
 </TabView>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-    {`
+                    <CodeHighlight lang='js'>
+                        {`
 template: (options) => {
     // options.className: Style class of the default header element.
     // options.titleClassName: Style class of the title element.
@@ -949,11 +954,11 @@ template: (options) => {
     // options.ariaControls: The value of aria-controls property.
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties For TabPanel</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1040,8 +1045,8 @@ template: (options) => {
                     </div>
 
                     <h5>Properties For TabView</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1104,8 +1109,8 @@ template: (options) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1116,9 +1121,10 @@ template: (options) => {
                             <tbody>
                                 <tr>
                                     <td>onTabChange</td>
-                                    <td>event.originalEvent: Browser event  <br />
-                            event.index: Index of the selected tab
-                        </td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.index: Index of the selected tab
+                                    </td>
                                     <td>Callback to invoke when an active tab is changed.</td>
                                 </tr>
                             </tbody>
@@ -1126,8 +1132,8 @@ template: (options) => {
                     </div>
 
                     <h5>Methods</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1146,9 +1152,11 @@ template: (options) => {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1180,16 +1188,18 @@ template: (options) => {
                         </table>
                     </div>
 
-                        <h5>Accessibility</h5>
+                    <h5>Accessibility</h5>
                     <DevelopmentSection>
                         <h6>Screen Reader</h6>
-                        <p>TabView container is defined with the <i>tablist</i> role, as any attribute is passed to the container element <i>aria-labelledby</i> can be optionally used to specify an element to describe the TabView. Each tab header
-                        has a <i>tab</i> role along with <i>aria-selected</i> state attribute and <i>aria-controls</i> to refer to the corresponding tab content element. The content element of each tab has <i>tabpanel</i> role, an id to match the
-                        <i>aria-controls</i> of the header and <i>aria-labelledby</i> reference to the header as the accessible name.</p>
+                        <p>
+                            TabView container is defined with the <i>tablist</i> role, as any attribute is passed to the container element <i>aria-labelledby</i> can be optionally used to specify an element to describe the TabView. Each tab header
+                            has a <i>tab</i> role along with <i>aria-selected</i> state attribute and <i>aria-controls</i> to refer to the corresponding tab content element. The content element of each tab has <i>tabpanel</i> role, an id to match the
+                            <i>aria-controls</i> of the header and <i>aria-labelledby</i> reference to the header as the accessible name.
+                        </p>
 
                         <h6>Tab Header Keyboard Support</h6>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1198,49 +1208,59 @@ template: (options) => {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><i>tab</i></td>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
                                         <td>Moves focus through the header.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>enter</i></td>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
                                         <td>Activates the focused tab header.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>space</i></td>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
                                         <td>Activates the focused tab header.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>right arrow</i></td>
+                                        <td>
+                                            <i>right arrow</i>
+                                        </td>
                                         <td>Moves focus to the next header.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>left arrow</i></td>
+                                        <td>
+                                            <i>left arrow</i>
+                                        </td>
                                         <td>Moves focus to the previous header.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>home</i></td>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
                                         <td>Moves focus to the last header.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>end</i></td>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
                                         <td>Moves focus to the first header.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-
                     </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
-
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'TabViewDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'TabViewDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default TabViewDoc;

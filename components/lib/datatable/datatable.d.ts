@@ -181,13 +181,13 @@ interface DataTableSelectParams {
     type: DataTableSelectType;
 }
 
-interface DataTableUnselectParams extends DataTableSelectParams { }
+interface DataTableUnselectParams extends DataTableSelectParams {}
 
 interface DataTableExportFunctionParams {
     data: any;
     field: string;
     rowData: any;
-    column: Column
+    column: Column;
 }
 
 interface DataTableColReorderParams {

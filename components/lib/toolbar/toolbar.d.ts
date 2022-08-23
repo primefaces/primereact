@@ -8,6 +8,6 @@ export interface ToolbarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     children?: React.ReactNode;
 }
 
-export declare class Toolbar extends React.Component<ToolbarProps, any> { 
+export declare class Toolbar extends React.Component<ToolbarProps, any> {
     public getElement(): HTMLDivElement;
 }

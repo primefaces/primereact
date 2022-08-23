@@ -7,6 +7,6 @@ export interface BreadCrumbProps extends Omit<React.DetailedHTMLProps<React.HTML
     children?: React.ReactNode;
 }
 
-export declare class BreadCrumb extends React.Component<BreadCrumbProps, any> { 
+export declare class BreadCrumb extends React.Component<BreadCrumbProps, any> {
     public getElement(): HTMLElement;
 }

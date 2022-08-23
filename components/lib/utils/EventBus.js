@@ -4,10 +4,8 @@ export default function EventBus() {
     return {
         on(type, handler) {
             let handlers = allHandlers.get(type);
-            if (!handlers)
-                handlers = [handler];
-            else
-                handlers.push(handler);
+            if (!handlers) handlers = [handler];
+            else handlers.push(handler);
 
             allHandlers.set(type, handlers);
         },
@@ -17,7 +15,7 @@ export default function EventBus() {
         },
         emit(type, evt) {
             let handlers = allHandlers.get(type);
-            handlers && handlers.slice().forEach(handler => handler(evt));
+            handlers && handlers.slice().forEach((handler) => handler(evt));
         }
-    }
+    };
 }

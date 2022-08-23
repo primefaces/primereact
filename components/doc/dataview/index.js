@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const DataViewDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -151,7 +150,7 @@ export class DataViewDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -279,7 +278,7 @@ const DataViewDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -407,7 +406,7 @@ const DataViewDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./DataViewDemo.css" />
@@ -540,7 +539,7 @@ const DataViewDemo = () => {
 }
                 `
         }
-    }
+    };
 
     const extFiles = {
         'demo/DataViewDemo.css': {
@@ -668,41 +667,47 @@ const DataViewDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/dataview/dataview.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Layout of the DataView is managed by the <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> that can be downloaded from npm.</p>
+                    <p>
+                        Layout of the DataView is managed by the <a href='https://github.com/primefaces/primeflex'>PrimeFlex</a> that can be downloaded from npm.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 npm install primeflex
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>DataView requires a collection of items as its value and one or more templates depending on the layout mode e.g. <i>list</i> and <i>grid</i>. </p>
+                    <p>
+                        DataView requires a collection of items as its value and one or more templates depending on the layout mode e.g. <i>list</i> and <i>grid</i>.{' '}
+                    </p>
 
-                    <p>DataView has two layout modes; <i>list</i> and <i>grid</i> where <i>itemTemplate</i> function is called by passing the item to render along with the layout mode.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        DataView has two layout modes; <i>list</i> and <i>grid</i> where <i>itemTemplate</i> function is called by passing the item to render along with the layout mode.
+                    </p>
+                    <CodeHighlight lang='js'>
+                        {`
 const itemTemplate = (data, layout) => {
     if (layout === 'list') {
         return (
@@ -718,26 +723,26 @@ const itemTemplate = (data, layout) => {
 }
 
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <DataView value={products} layout={layout} itemTemplate={itemTemplate}></DataView>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>DataViewLayoutOptions</h5>
                     <p>DataViewLayoutOptions is a helper component to choose between layout modes. This component is used in controlled manner to manage the state of layout orientation.</p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties of DataViewLayoutOptions</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -782,8 +787,8 @@ const itemTemplate = (data, layout) => {
                     </div>
 
                     <h5>Events of DataViewLayoutOptions</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -794,7 +799,8 @@ const itemTemplate = (data, layout) => {
                             <tbody>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>event.originalEvent:  browser event  <br/>
+                                    <td>
+                                        event.originalEvent: browser event <br />
                                         event.value = layout mode e.g. "list" or "grid"
                                     </td>
                                     <td>Callback to invoke when layout mode is changed.</td>
@@ -804,31 +810,39 @@ const itemTemplate = (data, layout) => {
                     </div>
 
                     <h5>Paginator</h5>
-                    <p>Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number
-                        of page links to display. Visit the <Link href="/paginator"> paginator</Link> paginator component for more information about the available properties.</p>
+                    <p>
+                        Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display. Visit the <Link href='/paginator'> paginator</Link>{' '}
+                        paginator component for more information about the available properties.
+                    </p>
 
-                    <p>Pagination can either be used in Controlled or Uncontrolled manner. In controlled mode, <i>first</i> and <i>onPage</i> properties needs to be defined to control the pagination state.</p>
+                    <p>
+                        Pagination can either be used in Controlled or Uncontrolled manner. In controlled mode, <i>first</i> and <i>onPage</i> properties needs to be defined to control the pagination state.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <DataView value={products} layout={layout} itemTemplate={itemTemplate} paginator rows={10} first={first} onPage={(e) => setFirst(e.first)}></DataView>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>In uncontrolled mode, only <i>paginator</i> property needs to be enabled. Initial page state can be still be provided using the <i>first</i> property in uncontrolled mode however
-                    it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the paginator, prefer to use the component as controlled.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        In uncontrolled mode, only <i>paginator</i> property needs to be enabled. Initial page state can be still be provided using the <i>first</i> property in uncontrolled mode however it is evaluated at initial rendering and
+                        ignored in further updates. If you programmatically need to update the paginator, prefer to use the component as controlled.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <DataView value={products} layout={layout} itemTemplate={itemTemplate} paginator rows={10}></DataView>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Sorting</h5>
-                    <p><i>sortField</i> and <i>sortOrder</i> properties are available for sorting functionality, for flexibility there is no built-in UI available so that a custom UI can be used for the sorting element.
-                        Here is an example that uses a dropdown where simply updating the sortField-sortOrder bindings of the DataView initiates sorting.</p>
+                    <p>
+                        <i>sortField</i> and <i>sortOrder</i> properties are available for sorting functionality, for flexibility there is no built-in UI available so that a custom UI can be used for the sorting element. Here is an example that uses
+                        a dropdown where simply updating the sortField-sortOrder bindings of the DataView initiates sorting.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const sortOptions = [
     {label: 'Price High to Low', value: '!price'},
     {label: 'Price Low to High', value: 'price'},
@@ -845,10 +859,10 @@ const header = (
 <DataView value={products} header={header} sortOrder={sortOrder} sortField={sortField} />
 
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight className="js">
-{`
+                    <CodeHighlight className='js'>
+                        {`
 const onSortChange = (event) => {
     const value = event.value;
 
@@ -864,16 +878,18 @@ const onSortChange = (event) => {
     }
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Lazy Loading</h5>
-                    <p>Lazy loading is useful to deal with huge datasets, in order to implement lazy loading use the pagination in controlled mode and utilize the <i>onPage</i> callback to load your data from the backend.
-                    Pagination in this case needs to display the logical number of records so bind this value to the <i>totalRecords</i> property so that paginator can display itself according to the total records although you'd only
-                    need to load the data of the current page. Refer to <Link href="/datatable/lazy">DataTable</Link> lazy loading for a sample implementation.</p>
+                    <p>
+                        Lazy loading is useful to deal with huge datasets, in order to implement lazy loading use the pagination in controlled mode and utilize the <i>onPage</i> callback to load your data from the backend. Pagination in this case
+                        needs to display the logical number of records so bind this value to the <i>totalRecords</i> property so that paginator can display itself according to the total records although you'd only need to load the data of the current
+                        page. Refer to <Link href='/datatable/lazy'>DataTable</Link> lazy loading for a sample implementation.
+                    </p>
 
                     <h5>Properties</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -959,7 +975,9 @@ const onSortChange = (event) => {
                                     <td>paginatorTemplate</td>
                                     <td>string|object</td>
                                     <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
-                                    <td>Template of the paginator. For details, refer to the template section of the <Link href="/paginator">paginator documentation</Link> for further options.</td>
+                                    <td>
+                                        Template of the paginator. For details, refer to the template section of the <Link href='/paginator'>paginator documentation</Link> for further options.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>paginatorLeft</td>
@@ -995,7 +1013,9 @@ const onSortChange = (event) => {
                                     <td>paginatorDropdownAppendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>emptyMessage</td>
@@ -1050,21 +1070,23 @@ const onSortChange = (event) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Parameters</th>
-                                <th>Description</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>onPage</td>
-                                    <td>event.originalEvent: Browser event <br />
+                                    <td>
+                                        event.originalEvent: Browser event <br />
                                         event.first: Index of the first records on page. <br />
-                                        event.rows: Number of records to display per page.</td>
+                                        event.rows: Number of records to display per page.
+                                    </td>
                                     <td>Callback to invoke on pagination.</td>
                                 </tr>
                             </tbody>
@@ -1072,14 +1094,16 @@ const onSortChange = (event) => {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -1111,47 +1135,52 @@ const onSortChange = (event) => {
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>The container element that wraps the layout options buttons has a <i>group</i> role whereas each button element uses <i>button</i> role and <i>aria-pressed</i> is updated depending on selection state.
-                    Values to describe the buttons are derived from the <i>aria.listView</i> and <i>aria.gridView</i> properties of the <Link href="/locale">locale</Link> API respectively.</p>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            The container element that wraps the layout options buttons has a <i>group</i> role whereas each button element uses <i>button</i> role and <i>aria-pressed</i> is updated depending on selection state. Values to describe
+                            the buttons are derived from the <i>aria.listView</i> and <i>aria.gridView</i> properties of the <Link href='/locale'>locale</Link> API respectively.
+                        </p>
 
-                    <p>Refer to <Link href="/paginator">paginator</Link> accessibility documentation for the paginator of the component.</p>
+                        <p>
+                            Refer to <Link href='/paginator'>paginator</Link> accessibility documentation for the paginator of the component.
+                        </p>
 
-                    <h6>Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the buttons.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Toggles the checked state of a button.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        <h6>Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the buttons.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Toggles the checked state of a button.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
-
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'DataViewDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'DataViewDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default DataViewDoc;

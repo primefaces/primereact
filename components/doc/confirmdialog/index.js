@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const ConfirmDialogDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -113,7 +112,7 @@ export class ConfirmDialogDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useRef } from 'react';
@@ -204,7 +203,7 @@ const ConfirmDialogDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useRef } from 'react';
@@ -295,7 +294,7 @@ const ConfirmDialogDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -390,35 +389,37 @@ const ConfirmDialogDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { ConfirmDialog } from 'primereact/confirmdialog'; // To use <ConfirmDialog> tag
 import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/confirmdialog/confirmdialog.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>There are two ways to display confirm dialog. One of them is to use the <i>confirmDialog</i> method and the other is to use the <i>&lt;ConfirmDialog&gt;</i> tag.
-                        These independently create dialog element. It supports the same properties in both.</p>
+                    <p>
+                        There are two ways to display confirm dialog. One of them is to use the <i>confirmDialog</i> method and the other is to use the <i>&lt;ConfirmDialog&gt;</i> tag. These independently create dialog element. It supports the same
+                        properties in both.
+                    </p>
 
                     <h6>1. confirmDialog method</h6>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const confirm = () => {
     confirmDialog({
         message: 'Are you sure you want to proceed?',
@@ -432,33 +433,37 @@ const confirm = () => {
 <Button onClick={confirm} icon="pi pi-check" label="Confirm"></Button>
 <ConfirmDialog /> <!--required empty dialog tag -->
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h6>2. &lt;ConfirmDialog&gt; tag</h6>
-                    <p>ConfirmDialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.</p>
+                    <p>
+                        ConfirmDialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
     header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
 
 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Responsive</h5>
-                    <p>ConfirmDialog width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 50vw and below 961px, width would be 75vw and finally below 641px width becomes
-                    100%. The value of <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        ConfirmDialog width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 50vw and below 961px, width would be 75vw and finally below 641px width becomes 100%. The value
+                        of <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <ConfirmDialog breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '50vw'}} ... />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <p>These properties are extended from Dialog properties.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -545,8 +550,8 @@ const confirm = () => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -568,8 +573,10 @@ const confirm = () => {
 
                                 <tr>
                                     <td>onHide</td>
-                                    <td>result: Indicates with which selection the dialog was closed. <br />
-                                        Valid values are 'accept', 'reject' and undefined (using close icon).</td>
+                                    <td>
+                                        result: Indicates with which selection the dialog was closed. <br />
+                                        Valid values are 'accept', 'reject' and undefined (using close icon).
+                                    </td>
                                     <td>Callback to invoke when confirm dialog is hidden.</td>
                                 </tr>
                             </tbody>
@@ -577,9 +584,11 @@ const confirm = () => {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'>theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -597,16 +606,22 @@ const confirm = () => {
 
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>ConfirmDialog component uses <i>alertdialog</i> role along with <i>aria-labelledby</i> referring to the header element however any attribute is passed to the root element so you may use <i>aria-labelledby</i> to override this default behavior. 
-                    In addition <i>aria-modal</i> is added since focus is kept within the popup.</p>
-                    <p>It is recommended to use a trigger component that can be accessed with keyboard such as a button, if not adding <i>tabIndex</i> would be necessary.</p>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            ConfirmDialog component uses <i>alertdialog</i> role along with <i>aria-labelledby</i> referring to the header element however any attribute is passed to the root element so you may use <i>aria-labelledby</i> to override
+                            this default behavior. In addition <i>aria-modal</i> is added since focus is kept within the popup.
+                        </p>
+                        <p>
+                            It is recommended to use a trigger component that can be accessed with keyboard such as a button, if not adding <i>tabIndex</i> would be necessary.
+                        </p>
 
-                    <p>When <i>confirm</i> function is used and a trigger is passed as a parameter, 
-                    ConfirmDialog adds <i>aria-expanded</i> state attribute and <i>aria-controls</i> to the trigger so that the relation between the trigger and the popup is defined.</p>
+                        <p>
+                            When <i>confirm</i> function is used and a trigger is passed as a parameter, ConfirmDialog adds <i>aria-expanded</i> state attribute and <i>aria-controls</i> to the trigger so that the relation between the trigger and the
+                            popup is defined.
+                        </p>
 
-<CodeHighlight lang="js">
-{`
+                        <CodeHighlight lang='js'>
+                            {`
 const confirm = (event) => {
     confirmDialog({
         trigger: event.currentTarget,
@@ -622,78 +637,88 @@ const confirm = (event) => {
 
 <ConfirmDialog />
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
-                    <p>If the dialog is controlled with the <i>visible</i> property <i>aria-expanded</i> and <i>aria-controls</i> need to be handled explicitly.</p>
+                        <p>
+                            If the dialog is controlled with the <i>visible</i> property <i>aria-expanded</i> and <i>aria-controls</i> need to be handled explicitly.
+                        </p>
 
-<CodeHighlight>
-{`
+                        <CodeHighlight>
+                            {`
 <ConfirmDialog id="dlg_confirmation" visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
     header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
 
 <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" aria-controls={visible ? 'dlg_confirmation' : null} aria-expanded={visible ? true : false} />
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
-                    <h6>Overlay Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the next the focusable element within the popup.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>shift</i> + <i>tab</i></td>
-                                    <td>Moves focus to the previous the focusable element within the popup.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>escape</i></td>
-                                    <td>Closes the popup and moves focus to the trigger.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        <h6>Overlay Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the next the focusable element within the popup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the previous the focusable element within the popup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Closes the popup and moves focus to the trigger.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <h6>Buttons Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Triggers the action, closes the popup and moves focus to the trigger.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Triggers the action, closes the popup and moves focus to the trigger.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        <h6>Buttons Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Triggers the action, closes the popup and moves focus to the trigger.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Triggers the action, closes the popup and moves focus to the trigger.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'ConfirmDialogDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'ConfirmDialogDemo', sources: sources })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default ConfirmDialogDoc;

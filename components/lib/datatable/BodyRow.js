@@ -8,58 +8,55 @@ export const BodyRow = React.memo((props) => {
 
     const isFocusable = () => {
         return props.selectionMode && props.selectionModeInColumn !== 'single' && props.selectionModeInColumn !== 'multiple';
-    }
+    };
 
     const isGrouped = (column) => {
         if (props.groupRowsBy && getColumnProp(column, 'field')) {
-            return Array.isArray(props.groupRowsBy) ?
-                props.groupRowsBy.indexOf(column.props.field) > -1 :
-                props.groupRowsBy === column.props.field;
+            return Array.isArray(props.groupRowsBy) ? props.groupRowsBy.indexOf(column.props.field) > -1 : props.groupRowsBy === column.props.field;
         }
 
         return false;
-    }
+    };
 
     const equals = (data1, data2) => {
-        return props.compareSelectionBy === 'equals' ? (data1 === data2) : ObjectUtils.equals(data1, data2, props.dataKey);
-    }
+        return props.compareSelectionBy === 'equals' ? data1 === data2 : ObjectUtils.equals(data1, data2, props.dataKey);
+    };
 
     const getColumnProp = (col, prop) => {
         return col ? col.props[prop] : null;
-    }
+    };
 
     const getTabIndex = () => {
         return isFocusable() && !props.allowCellSelection ? (props.index === 0 ? props.tabIndex : -1) : null;
-    }
+    };
 
     const findIndex = (collection, rowData) => {
-        return (collection || []).findIndex(data => equals(rowData, data));
-    }
+        return (collection || []).findIndex((data) => equals(rowData, data));
+    };
 
     const changeTabIndex = (currentRow, nextRow) => {
         if (currentRow && nextRow) {
             currentRow.tabIndex = -1;
             nextRow.tabIndex = props.tabIndex;
         }
-    }
+    };
 
     const findNextSelectableRow = (row) => {
         const nextRow = row.nextElementSibling;
 
         return nextRow ? (DomHandler.hasClass(nextRow, 'p-selectable-row') ? nextRow : findNextSelectableRow(nextRow)) : null;
-    }
+    };
 
     const findPrevSelectableRow = (row) => {
         const prevRow = row.previousElementSibling;
 
         return prevRow ? (DomHandler.hasClass(prevRow, 'p-selectable-row') ? prevRow : findPrevSelectableRow(prevRow)) : null;
-    }
+    };
 
     const shouldRenderBodyCell = (value, column, i) => {
         if (getColumnProp(column, 'hidden')) {
             return false;
-        }
-        else if (props.rowGroupMode && props.rowGroupMode === 'rowspan' && isGrouped(column)) {
+        } else if (props.rowGroupMode && props.rowGroupMode === 'rowspan' && isGrouped(column)) {
             let prevRowData = value[i - 1];
             if (prevRowData) {
                 const currentRowFieldData = ObjectUtils.resolveFieldData(value[i], getColumnProp(column, 'field'));
@@ -70,7 +67,7 @@ export const BodyRow = React.memo((props) => {
         }
 
         return true;
-    }
+    };
 
     const calculateRowGroupSize = (value, column, index) => {
         if (isGrouped(column)) {
@@ -83,34 +80,32 @@ export const BodyRow = React.memo((props) => {
                 let nextRowData = value[++index];
                 if (nextRowData) {
                     nextRowFieldData = ObjectUtils.resolveFieldData(nextRowData, getColumnProp(column, 'field'));
-                }
-                else {
+                } else {
                     break;
                 }
             }
 
             return groupRowSpan === 1 ? null : groupRowSpan;
-        }
-        else {
+        } else {
             return null;
         }
-    }
+    };
 
     const onClick = (event) => {
         props.onRowClick({ originalEvent: event, data: props.rowData, index: props.index });
-    }
+    };
 
     const onDoubleClick = (event) => {
         props.onRowDoubleClick({ originalEvent: event, data: props.rowData, index: props.index });
-    }
+    };
 
     const onRightClick = (event) => {
         props.onRowRightClick({ originalEvent: event, data: props.rowData, index: props.index });
-    }
+    };
 
     const onTouchEnd = (event) => {
         props.onRowTouchEnd(event);
-    }
+    };
 
     const onKeyDown = (event) => {
         if (isFocusable() && !props.allowCellSelection) {
@@ -160,35 +155,35 @@ export const BodyRow = React.memo((props) => {
                     break;
             }
         }
-    }
+    };
 
     const onMouseDown = (event) => {
         props.onRowMouseDown({ originalEvent: event, data: props.rowData, index: props.index });
-    }
+    };
 
     const onMouseUp = (event) => {
         props.onRowMouseUp({ originalEvent: event, data: props.rowData, index: props.index });
-    }
+    };
 
     const onDragStart = (event) => {
         props.onRowDragStart({ originalEvent: event, data: props.rowData, index: props.index });
-    }
+    };
 
     const onDragOver = (event) => {
         props.onRowDragOver({ originalEvent: event, data: props.rowData, index: props.index });
-    }
+    };
 
     const onDragLeave = (event) => {
         props.onRowDragLeave({ originalEvent: event, data: props.rowData, index: props.index });
-    }
+    };
 
     const onDragEnd = (event) => {
         props.onRowDragEnd({ originalEvent: event, data: props.rowData, index: props.index });
-    }
+    };
 
     const onDrop = (event) => {
         props.onRowDrop({ originalEvent: event, data: props.rowData, index: props.index });
-    }
+    };
 
     const onEditChange = (e, isEditing) => {
         if (props.onRowEditChange) {
@@ -205,19 +200,15 @@ export const BodyRow = React.memo((props) => {
                     // if the key value was changed, stop editing for the new key value too
                     let newDataKeyValue = String(ObjectUtils.resolveFieldData(newData, dataKey));
                     delete editingRows[newDataKeyValue];
-                }
-                else {
+                } else {
                     editingRows[dataKeyValue] = true;
                 }
-            }
-            else {
+            } else {
                 let editingRowIndex = findIndex(props.editingRows, data);
                 editingRows = props.editingRows ? [...props.editingRows] : [];
 
-                if (editingRowIndex !== -1)
-                    editingRows = editingRows.filter((val, i) => i !== editingRowIndex);
-                else
-                    editingRows.push(data);
+                if (editingRowIndex !== -1) editingRows = editingRows.filter((val, i) => i !== editingRowIndex);
+                else editingRows.push(data);
             }
 
             props.onRowEditChange({
@@ -225,11 +216,10 @@ export const BodyRow = React.memo((props) => {
                 data: editingRows,
                 index
             });
-        }
-        else {
+        } else {
             setEditingState(isEditing);
         }
-    }
+    };
 
     const onEditInit = (e) => {
         const { originalEvent: event } = e;
@@ -245,7 +235,7 @@ export const BodyRow = React.memo((props) => {
         onEditChange(e, true);
 
         event.preventDefault();
-    }
+    };
 
     const onEditSave = (e) => {
         const { originalEvent: event, newData } = e;
@@ -269,7 +259,7 @@ export const BodyRow = React.memo((props) => {
         }
 
         event.preventDefault();
-    }
+    };
 
     const onEditCancel = (e) => {
         const { originalEvent: event } = e;
@@ -285,7 +275,7 @@ export const BodyRow = React.memo((props) => {
         onEditChange(e, false);
 
         event.preventDefault();
-    }
+    };
 
     const createContent = () => {
         return props.columns.map((col, i) => {
@@ -294,20 +284,53 @@ export const BodyRow = React.memo((props) => {
                 const rowSpan = props.rowGroupMode === 'rowspan' ? calculateRowGroupSize(props.value, col, props.index) : null;
 
                 return (
-                    <BodyCell key={key} value={props.value} tableProps={props.tableProps} tableSelector={props.tableSelector} column={col} rowData={props.rowData} rowIndex={props.index} index={i} rowSpan={rowSpan} dataKey={props.dataKey}
-                        editing={editing} editingMeta={props.editingMeta} editMode={props.editMode} onRowEditInit={onEditInit} onRowEditSave={onEditSave} onRowEditCancel={onEditCancel} onEditingMetaChange={props.onEditingMetaChange}
-                        onRowToggle={props.onRowToggle} selection={props.selection} allowCellSelection={props.allowCellSelection} compareSelectionBy={props.compareSelectionBy} selectOnEdit={props.selectOnEdit} selected={props.selected}
-                        onClick={props.onCellClick} onMouseDown={props.onCellMouseDown} onMouseUp={props.onCellMouseUp} tabIndex={props.tabIndex}
-                        cellClassName={props.cellClassName} responsiveLayout={props.responsiveLayout} frozenRow={props.frozenRow} isSelectable={props.isSelectable}
-                        showSelectionElement={props.showSelectionElement} showRowReorderElement={props.showRowReorderElement} onRadioChange={props.onRadioChange} onCheckboxChange={props.onCheckboxChange}
-                        expanded={props.expanded} expandedRowIcon={props.expandedRowIcon} collapsedRowIcon={props.collapsedRowIcon}
-                        virtualScrollerOptions={props.virtualScrollerOptions} />
-                )
+                    <BodyCell
+                        key={key}
+                        value={props.value}
+                        tableProps={props.tableProps}
+                        tableSelector={props.tableSelector}
+                        column={col}
+                        rowData={props.rowData}
+                        rowIndex={props.index}
+                        index={i}
+                        rowSpan={rowSpan}
+                        dataKey={props.dataKey}
+                        editing={editing}
+                        editingMeta={props.editingMeta}
+                        editMode={props.editMode}
+                        onRowEditInit={onEditInit}
+                        onRowEditSave={onEditSave}
+                        onRowEditCancel={onEditCancel}
+                        onEditingMetaChange={props.onEditingMetaChange}
+                        onRowToggle={props.onRowToggle}
+                        selection={props.selection}
+                        allowCellSelection={props.allowCellSelection}
+                        compareSelectionBy={props.compareSelectionBy}
+                        selectOnEdit={props.selectOnEdit}
+                        selected={props.selected}
+                        onClick={props.onCellClick}
+                        onMouseDown={props.onCellMouseDown}
+                        onMouseUp={props.onCellMouseUp}
+                        tabIndex={props.tabIndex}
+                        cellClassName={props.cellClassName}
+                        responsiveLayout={props.responsiveLayout}
+                        frozenRow={props.frozenRow}
+                        isSelectable={props.isSelectable}
+                        showSelectionElement={props.showSelectionElement}
+                        showRowReorderElement={props.showRowReorderElement}
+                        onRadioChange={props.onRadioChange}
+                        onCheckboxChange={props.onCheckboxChange}
+                        expanded={props.expanded}
+                        expandedRowIcon={props.expandedRowIcon}
+                        collapsedRowIcon={props.collapsedRowIcon}
+                        virtualScrollerOptions={props.virtualScrollerOptions}
+                    />
+                );
             }
 
             return null;
-        })
-    }
+        });
+    };
 
     const rowClassName = ObjectUtils.getPropValue(props.rowClassName, props.rowData, { props: props.tableProps });
     const className = classNames(rowClassName, {
@@ -321,12 +344,27 @@ export const BodyRow = React.memo((props) => {
     const tabIndex = getTabIndex();
 
     return (
-        <tr role="row" tabIndex={tabIndex} className={className} style={style} onMouseDown={onMouseDown} onMouseUp={onMouseUp}
-            onClick={onClick} onDoubleClick={onDoubleClick} onContextMenu={onRightClick} onTouchEnd={onTouchEnd} onKeyDown={onKeyDown}
-            onDragStart={onDragStart} onDragOver={onDragOver} onDragLeave={onDragLeave} onDragEnd={onDragEnd} onDrop={onDrop}>
+        <tr
+            role='row'
+            tabIndex={tabIndex}
+            className={className}
+            style={style}
+            onMouseDown={onMouseDown}
+            onMouseUp={onMouseUp}
+            onClick={onClick}
+            onDoubleClick={onDoubleClick}
+            onContextMenu={onRightClick}
+            onTouchEnd={onTouchEnd}
+            onKeyDown={onKeyDown}
+            onDragStart={onDragStart}
+            onDragOver={onDragOver}
+            onDragLeave={onDragLeave}
+            onDragEnd={onDragEnd}
+            onDrop={onDrop}
+        >
             {content}
         </tr>
-    )
+    );
 });
 
 BodyRow.displayName = 'BodyRow';

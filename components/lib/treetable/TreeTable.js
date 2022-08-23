@@ -35,7 +35,8 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const columnField = React.useRef(null);
 
     const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({
-        type: 'mousemove', listener: (event) => {
+        type: 'mousemove',
+        listener: (event) => {
             if (columnResizing.current) {
                 onColumnResize(event);
             }
@@ -43,7 +44,8 @@ export const TreeTable = React.forwardRef((props, ref) => {
     });
 
     const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({
-        type: 'mouseup', listener: (event) => {
+        type: 'mouseup',
+        listener: (event) => {
             if (columnResizing.current) {
                 columnResizing.current = false;
                 onColumnResizeEnd(event);
@@ -54,21 +56,19 @@ export const TreeTable = React.forwardRef((props, ref) => {
     const onToggle = (event) => {
         if (props.onToggle) {
             props.onToggle(event);
-        }
-        else {
+        } else {
             setExpandedKeysState(event.value);
         }
-    }
+    };
 
     const onPageChange = (event) => {
         if (props.onPage) {
             props.onPage(event);
-        }
-        else {
+        } else {
             setFirstState(event.first);
             setRowsState(event.rows);
         }
-    }
+    };
 
     const onSort = (event) => {
         let sortField = event.sortField;
@@ -85,7 +85,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
             multiSortMeta = [...getMultiSortMeta()];
 
             if (multiSortMeta && multiSortMeta instanceof Array) {
-                const sortMeta = multiSortMeta.find(sortMeta => sortMeta.field === sortField);
+                const sortMeta = multiSortMeta.find((sortMeta) => sortMeta.field === sortField);
                 sortOrder = sortMeta ? getCalculatedSortOrder(sortMeta.order) : sortOrder;
             }
 
@@ -97,17 +97,15 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 }
 
                 addSortMeta(newMetaData, multiSortMeta);
-            }
-            else if (props.removableSort && multiSortMeta) {
+            } else if (props.removableSort && multiSortMeta) {
                 removeSortMeta(newMetaData, multiSortMeta);
             }
 
             eventMeta = {
                 multiSortMeta
             };
-        }
-        else {
-            sortOrder = (getSortField() === sortField) ? getCalculatedSortOrder(getSortOrder()) : sortOrder;
+        } else {
+            sortOrder = getSortField() === sortField ? getCalculatedSortOrder(getSortOrder()) : sortOrder;
 
             if (props.removableSort) {
                 sortField = sortOrder ? sortField : null;
@@ -121,18 +119,17 @@ export const TreeTable = React.forwardRef((props, ref) => {
 
         if (props.onSort) {
             props.onSort(eventMeta);
-        }
-        else {
+        } else {
             setFirstState(0);
             setSortFieldState(eventMeta.sortField);
             setSortOrderState(eventMeta.sortOrder);
             setMultiSortMetaState(eventMeta.multiSortMeta);
         }
-    }
+    };
 
     const getCalculatedSortOrder = (currentOrder) => {
         return props.removableSort ? (props.defaultSortOrder === currentOrder ? currentOrder * -1 : 0) : currentOrder * -1;
-    }
+    };
 
     const addSortMeta = (meta, multiSortMeta) => {
         let index = -1;
@@ -143,11 +140,9 @@ export const TreeTable = React.forwardRef((props, ref) => {
             }
         }
 
-        if (index >= 0)
-            multiSortMeta[index] = meta;
-        else
-            multiSortMeta.push(meta);
-    }
+        if (index >= 0) multiSortMeta[index] = meta;
+        else multiSortMeta.push(meta);
+    };
 
     const removeSortMeta = (meta, multiSortMeta) => {
         let index = -1;
@@ -163,11 +158,11 @@ export const TreeTable = React.forwardRef((props, ref) => {
         }
 
         multiSortMeta = multiSortMeta.length > 0 ? multiSortMeta : null;
-    }
+    };
 
     const sortSingle = (data) => {
         return sortNodes(data);
-    }
+    };
 
     const sortNodes = (data) => {
         let value = [...data];
@@ -178,8 +173,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 field: getSortField(),
                 order: getSortOrder()
             });
-        }
-        else {
+        } else {
             value.sort((node1, node2) => {
                 const sortField = getSortField();
                 const value1 = ObjectUtils.resolveFieldData(node1.data, sortField);
@@ -195,16 +189,14 @@ export const TreeTable = React.forwardRef((props, ref) => {
         }
 
         return value;
-    }
+    };
 
     const sortMultiple = (data) => {
         let multiSortMeta = getMultiSortMeta();
 
-        if (multiSortMeta)
-            return sortMultipleNodes(data, multiSortMeta);
-        else
-            return data;
-    }
+        if (multiSortMeta) return sortMultipleNodes(data, multiSortMeta);
+        else return data;
+    };
 
     const sortMultipleNodes = (data, multiSortMeta) => {
         let value = [...data];
@@ -219,33 +211,27 @@ export const TreeTable = React.forwardRef((props, ref) => {
         }
 
         return value;
-    }
+    };
 
     const multisortField = (node1, node2, multiSortMeta, index) => {
         const value1 = ObjectUtils.resolveFieldData(node1.data, multiSortMeta[index].field);
         const value2 = ObjectUtils.resolveFieldData(node2.data, multiSortMeta[index].field);
         let result = null;
 
-        if (value1 == null && value2 != null)
-            result = -1;
-        else if (value1 != null && value2 == null)
-            result = 1;
-        else if (value1 == null && value2 == null)
-            result = 0;
+        if (value1 == null && value2 != null) result = -1;
+        else if (value1 != null && value2 == null) result = 1;
+        else if (value1 == null && value2 == null) result = 0;
         else {
             if (value1 === value2) {
-                return (multiSortMeta.length - 1) > (index) ? (multisortField(node1, node2, multiSortMeta, index + 1)) : 0;
-            }
-            else {
-                if ((typeof value1 === 'string' || value1 instanceof String) && (typeof value2 === 'string' || value2 instanceof String))
-                    return (multiSortMeta[index].order * value1.localeCompare(value2, PrimeReact.locale, { numeric: true }));
-                else
-                    result = (value1 < value2) ? -1 : 1;
+                return multiSortMeta.length - 1 > index ? multisortField(node1, node2, multiSortMeta, index + 1) : 0;
+            } else {
+                if ((typeof value1 === 'string' || value1 instanceof String) && (typeof value2 === 'string' || value2 instanceof String)) return multiSortMeta[index].order * value1.localeCompare(value2, PrimeReact.locale, { numeric: true });
+                else result = value1 < value2 ? -1 : 1;
             }
         }
 
-        return (multiSortMeta[index].order * result);
-    }
+        return multiSortMeta[index].order * result;
+    };
 
     const filter = (value, field, mode) => {
         onFilter({
@@ -253,61 +239,56 @@ export const TreeTable = React.forwardRef((props, ref) => {
             field: field,
             matchMode: mode
         });
-    }
+    };
 
     const onFilter = (event) => {
         let filters = getFilters();
         let newFilters = filters ? { ...filters } : {};
 
-        if (!isFilterBlank(event.value))
-            newFilters[event.field] = { value: event.value, matchMode: event.matchMode };
-        else if (newFilters[event.field])
-            delete newFilters[event.field];
+        if (!isFilterBlank(event.value)) newFilters[event.field] = { value: event.value, matchMode: event.matchMode };
+        else if (newFilters[event.field]) delete newFilters[event.field];
 
         if (props.onFilter) {
             props.onFilter({
                 filters: newFilters
             });
-        }
-        else {
+        } else {
             setFirstState(0);
             setFiltersState(newFilters);
         }
-    }
+    };
 
     const hasFilter = () => {
         return ObjectUtils.isNotEmpty(getFilters());
-    }
+    };
 
     const isFilterBlank = (filter) => {
         if (filter !== null && filter !== undefined) {
-            if ((typeof filter === 'string' && filter.trim().length === 0) || (filter instanceof Array && filter.length === 0))
-                return true;
-            else
-                return false;
+            if ((typeof filter === 'string' && filter.trim().length === 0) || (filter instanceof Array && filter.length === 0)) return true;
+            else return false;
         }
         return true;
-    }
+    };
 
     const onColumnResizeStart = (event) => {
         let containerLeft = DomHandler.getOffset(elementRef.current).left;
         resizeColumn.current = event.columnEl;
         resizeColumnProps.current = event.column;
         columnResizing.current = true;
-        lastResizerHelperX.current = (event.originalEvent.pageX - containerLeft + elementRef.current.scrollLeft);
+        lastResizerHelperX.current = event.originalEvent.pageX - containerLeft + elementRef.current.scrollLeft;
 
         bindColumnResizeEvents();
-    }
+    };
 
     const onColumnResize = (event) => {
         let containerLeft = DomHandler.getOffset(elementRef.current).left;
         DomHandler.addClass(elementRef.current, 'p-unselectable-text');
         resizerHelperRef.current.style.height = elementRef.current.offsetHeight + 'px';
         resizerHelperRef.current.style.top = 0 + 'px';
-        resizerHelperRef.current.style.left = (event.pageX - containerLeft + elementRef.current.scrollLeft) + 'px';
+        resizerHelperRef.current.style.left = event.pageX - containerLeft + elementRef.current.scrollLeft + 'px';
 
         resizerHelperRef.current.style.display = 'block';
-    }
+    };
 
     const onColumnResizeEnd = (event) => {
         let delta = resizerHelperRef.current.offsetLeft - lastResizerHelperX.current;
@@ -331,16 +312,14 @@ export const TreeTable = React.forwardRef((props, ref) => {
                         resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
                         resizeColGroup(scrollableBodyTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
                         resizeColGroup(scrollableFooterTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
-                    }
-                    else {
+                    } else {
                         resizeColumn.current.style.width = newColumnWidth + 'px';
                         if (nextColumn) {
                             nextColumn.style.width = nextColumnWidth + 'px';
                         }
                     }
                 }
-            }
-            else if (props.columnResizeMode === 'expand') {
+            } else if (props.columnResizeMode === 'expand') {
                 if (props.scrollable) {
                     let scrollableView = findParentScrollableView(resizeColumn.current);
                     let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-body-table');
@@ -356,8 +335,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                     resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, null);
                     resizeColGroup(scrollableBodyTable, resizeColumnIndex, newColumnWidth, null);
                     resizeColGroup(scrollableFooterTable, resizeColumnIndex, newColumnWidth, null);
-                }
-                else {
+                } else {
                     table.style.width = table.offsetWidth + delta + 'px';
                     resizeColumn.current.style.width = newColumnWidth + 'px';
                 }
@@ -378,7 +356,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
         DomHandler.removeClass(elementRef.current, 'p-unselectable-text');
 
         unbindColumnResizeEvents();
-    }
+    };
 
     const findParentScrollableView = (column) => {
         if (column) {
@@ -388,11 +366,10 @@ export const TreeTable = React.forwardRef((props, ref) => {
             }
 
             return parent;
-        }
-        else {
+        } else {
             return null;
         }
-    }
+    };
 
     const resizeColGroup = (table, resizeColumnIndex, newColumnWidth, nextColumnWidth) => {
         if (table) {
@@ -406,22 +383,21 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 if (nextCol && nextColumnWidth) {
                     nextCol.style.width = nextColumnWidth + 'px';
                 }
-            }
-            else {
-                throw new Error("Scrollable tables require a colgroup to support resizable columns");
+            } else {
+                throw new Error('Scrollable tables require a colgroup to support resizable columns');
             }
         }
-    }
+    };
 
     const bindColumnResizeEvents = () => {
         bindDocumentMouseMoveListener();
         bindDocumentMouseUpListener();
-    }
+    };
 
     const unbindColumnResizeEvents = () => {
         unbindDocumentMouseMoveListener();
         unbindDocumentMouseUpListener();
-    }
+    };
 
     const onColumnDragStart = (e) => {
         const { originalEvent: event, column } = e;
@@ -437,7 +413,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
         draggedColumnEl.current = findParentHeader(event.currentTarget);
         draggedColumn.current = column;
         event.dataTransfer.setData('text', 'b'); // Firefox requires this to make dragging possible
-    }
+    };
 
     const onColumnDragOver = (e) => {
         const event = e.originalEvent;
@@ -456,13 +432,12 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 reorderIndicatorDownRef.current.style.top = dropHeaderOffset.top - containerOffset.top + dropHeader.offsetHeight + 'px';
 
                 if (event.pageX > columnCenter) {
-                    reorderIndicatorUpRef.current.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(iconWidth.current / 2)) + 'px';
-                    reorderIndicatorDownRef.current.style.left = (targetLeft + dropHeader.offsetWidth - Math.ceil(iconWidth.current / 2)) + 'px';
+                    reorderIndicatorUpRef.current.style.left = targetLeft + dropHeader.offsetWidth - Math.ceil(iconWidth.current / 2) + 'px';
+                    reorderIndicatorDownRef.current.style.left = targetLeft + dropHeader.offsetWidth - Math.ceil(iconWidth.current / 2) + 'px';
                     dropPosition.current = 1;
-                }
-                else {
-                    reorderIndicatorUpRef.current.style.left = (targetLeft - Math.ceil(iconWidth.current / 2)) + 'px';
-                    reorderIndicatorDownRef.current.style.left = (targetLeft - Math.ceil(iconWidth.current / 2)) + 'px';
+                } else {
+                    reorderIndicatorUpRef.current.style.left = targetLeft - Math.ceil(iconWidth.current / 2) + 'px';
+                    reorderIndicatorDownRef.current.style.left = targetLeft - Math.ceil(iconWidth.current / 2) + 'px';
                     dropPosition.current = -1;
                 }
 
@@ -470,7 +445,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 reorderIndicatorDownRef.current.style.display = 'block';
             }
         }
-    }
+    };
 
     const onColumnDragLeave = (e) => {
         const event = e.originalEvent;
@@ -479,7 +454,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
             reorderIndicatorUpRef.current.style.display = 'none';
             reorderIndicatorDownRef.current.style.display = 'none';
         }
-    }
+    };
 
     const onColumnDrop = (e) => {
         const { originalEvent: event, column } = e;
@@ -488,14 +463,14 @@ export const TreeTable = React.forwardRef((props, ref) => {
         if (draggedColumnEl.current) {
             let dragIndex = DomHandler.index(draggedColumnEl.current);
             let dropIndex = DomHandler.index(findParentHeader(event.currentTarget));
-            let allowDrop = (dragIndex !== dropIndex);
+            let allowDrop = dragIndex !== dropIndex;
             if (allowDrop && ((dropIndex - dragIndex === 1 && dropPosition.current === -1) || (dragIndex - dropIndex === 1 && dropPosition.current === 1))) {
                 allowDrop = false;
             }
 
             if (allowDrop) {
                 let columns = columnOrderState ? getColumns() : React.Children.toArray(props.children);
-                let isSameColumn = (col1, col2) => (col1.props.columnKey || col2.props.columnKey) ? ObjectUtils.equals(col1, col2, 'props.columnKey') : ObjectUtils.equals(col1, col2, 'props.field');
+                let isSameColumn = (col1, col2) => (col1.props.columnKey || col2.props.columnKey ? ObjectUtils.equals(col1, col2, 'props.columnKey') : ObjectUtils.equals(col1, col2, 'props.field'));
                 let dragColIndex = columns.findIndex((child) => isSameColumn(child, draggedColumn.current));
                 let dropColIndex = columns.findIndex((child) => isSameColumn(child, column));
 
@@ -531,13 +506,12 @@ export const TreeTable = React.forwardRef((props, ref) => {
             draggedColumnEl.current = null;
             dropPosition.current = null;
         }
-    }
+    };
 
     const findParentHeader = (element) => {
         if (element.nodeName === 'TH') {
             return element;
-        }
-        else {
+        } else {
             let parent = element.parentElement;
             while (parent.nodeName !== 'TH') {
                 parent = parent.parentElement;
@@ -545,35 +519,35 @@ export const TreeTable = React.forwardRef((props, ref) => {
             }
             return parent;
         }
-    }
+    };
 
     const getExpandedKeys = () => {
         return props.onToggle ? props.expandedKeys : expandedKeysState;
-    }
+    };
 
     const getFirst = () => {
         return props.onPage ? props.first : firstState;
-    }
+    };
 
     const getRows = () => {
         return props.onPage ? props.rows : rowsState;
-    }
+    };
 
     const getSortField = () => {
         return props.onSort ? props.sortField : sortFieldState;
-    }
+    };
 
     const getSortOrder = () => {
         return props.onSort ? props.sortOrder : sortOrderState;
-    }
+    };
 
     const getMultiSortMeta = () => {
         return (props.onSort ? props.multiSortMeta : multiSortMetaState) || [];
-    }
+    };
 
     const getFilters = () => {
         return props.onFilter ? props.filters : filtersState;
-    }
+    };
 
     const findColumnByKey = (columns, key) => {
         if (columns && columns.length) {
@@ -586,7 +560,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
         }
 
         return null;
-    }
+    };
 
     const getColumns = () => {
         let columns = React.Children.toArray(props.children);
@@ -601,33 +575,35 @@ export const TreeTable = React.forwardRef((props, ref) => {
                     }
                 }
 
-                return [...orderedColumns, ...columns.filter((item) => {
-                    return orderedColumns.indexOf(item) < 0;
-                })];
-            }
-            else {
+                return [
+                    ...orderedColumns,
+                    ...columns.filter((item) => {
+                        return orderedColumns.indexOf(item) < 0;
+                    })
+                ];
+            } else {
                 return columns;
             }
         }
 
         return null;
-    }
+    };
 
     const getTotalRecords = (data) => {
         return props.lazy ? props.totalRecords : data ? data.length : 0;
-    }
+    };
 
     const isSingleSelectionMode = () => {
         return props.selectionMode && props.selectionMode === 'single';
-    }
+    };
 
     const isMultipleSelectionMode = () => {
         return props.selectionMode && props.selectionMode === 'multiple';
-    }
+    };
 
     const isRowSelectionMode = () => {
         return isSingleSelectionMode() || isMultipleSelectionMode();
-    }
+    };
 
     const getFrozenColumns = (columns) => {
         let frozenColumns = null;
@@ -640,7 +616,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
         }
 
         return frozenColumns;
-    }
+    };
 
     const getScrollableColumns = (columns) => {
         let scrollableColumns = null;
@@ -653,7 +629,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
         }
 
         return scrollableColumns;
-    }
+    };
 
     const filterLocal = (value) => {
         let filteredNodes = [];
@@ -689,8 +665,10 @@ export const TreeTable = React.forwardRef((props, ref) => {
                     };
 
                     paramsWithoutNode = { filterField, filterValue, filterConstraint, isStrictMode, options };
-                    if ((isStrictMode && !(findFilteredNodes(copyNode, paramsWithoutNode) || isFilterMatched(copyNode, paramsWithoutNode))) ||
-                        (!isStrictMode && !(isFilterMatched(copyNode, paramsWithoutNode) || findFilteredNodes(copyNode, paramsWithoutNode)))) {
+                    if (
+                        (isStrictMode && !(findFilteredNodes(copyNode, paramsWithoutNode) || isFilterMatched(copyNode, paramsWithoutNode))) ||
+                        (!isStrictMode && !(isFilterMatched(copyNode, paramsWithoutNode) || findFilteredNodes(copyNode, paramsWithoutNode)))
+                    ) {
                         localMatch = false;
                     }
 
@@ -705,8 +683,10 @@ export const TreeTable = React.forwardRef((props, ref) => {
                     filterValue = props.globalFilter;
                     filterConstraint = FilterService.filters['contains'];
                     paramsWithoutNode = { filterField, filterValue, filterConstraint, isStrictMode };
-                    if ((isStrictMode && (findFilteredNodes(copyNodeForGlobal, paramsWithoutNode) || isFilterMatched(copyNodeForGlobal, paramsWithoutNode))) ||
-                        (!isStrictMode && (isFilterMatched(copyNodeForGlobal, paramsWithoutNode) || findFilteredNodes(copyNodeForGlobal, paramsWithoutNode)))) {
+                    if (
+                        (isStrictMode && (findFilteredNodes(copyNodeForGlobal, paramsWithoutNode) || isFilterMatched(copyNodeForGlobal, paramsWithoutNode))) ||
+                        (!isStrictMode && (isFilterMatched(copyNodeForGlobal, paramsWithoutNode) || findFilteredNodes(copyNodeForGlobal, paramsWithoutNode)))
+                    ) {
                         globalMatch = true;
                         copyNode = copyNodeForGlobal;
                     }
@@ -724,7 +704,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
         }
 
         return filteredNodes;
-    }
+    };
 
     const findFilteredNodes = (node, paramsWithoutNode) => {
         if (node) {
@@ -745,7 +725,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 return true;
             }
         }
-    }
+    };
 
     const isFilterMatched = (node, { filterField, filterValue, filterConstraint, isStrictMode, options }) => {
         let matched = false;
@@ -759,11 +739,11 @@ export const TreeTable = React.forwardRef((props, ref) => {
         }
 
         return matched;
-    }
+    };
 
     const isNodeLeaf = (node) => {
         return node.leaf === false ? false : !(node.children && node.children.length);
-    }
+    };
 
     const processData = () => {
         let data = props.value || [];
@@ -779,16 +759,14 @@ export const TreeTable = React.forwardRef((props, ref) => {
                 }
 
                 if (sortField || ObjectUtils.isNotEmpty(multiSortMeta)) {
-                    if (props.sortMode === 'single')
-                        data = sortSingle(data);
-                    else if (props.sortMode === 'multiple')
-                        data = sortMultiple(data);
+                    if (props.sortMode === 'single') data = sortSingle(data);
+                    else if (props.sortMode === 'multiple') data = sortMultiple(data);
                 }
             }
         }
 
         return data;
-    }
+    };
 
     React.useImperativeHandle(ref, () => ({
         props,
@@ -803,55 +781,94 @@ export const TreeTable = React.forwardRef((props, ref) => {
         const filters = getFilters();
 
         return (
-            <TreeTableHeader columns={columns} columnGroup={columnGroup} tabIndex={props.tabIndex}
-                onSort={onSort} sortField={sortField} sortOrder={sortOrder} multiSortMeta={multiSortMeta}
-                resizableColumns={props.resizableColumns} onResizeStart={onColumnResizeStart}
-                reorderableColumns={props.reorderableColumns} onDragStart={onColumnDragStart}
-                onDragOver={onColumnDragOver} onDragLeave={onColumnDragLeave} onDrop={onColumnDrop}
-                onFilter={onFilter} filters={filters} filterDelay={props.filterDelay} />
-        )
-    }
+            <TreeTableHeader
+                columns={columns}
+                columnGroup={columnGroup}
+                tabIndex={props.tabIndex}
+                onSort={onSort}
+                sortField={sortField}
+                sortOrder={sortOrder}
+                multiSortMeta={multiSortMeta}
+                resizableColumns={props.resizableColumns}
+                onResizeStart={onColumnResizeStart}
+                reorderableColumns={props.reorderableColumns}
+                onDragStart={onColumnDragStart}
+                onDragOver={onColumnDragOver}
+                onDragLeave={onColumnDragLeave}
+                onDrop={onColumnDrop}
+                onFilter={onFilter}
+                filters={filters}
+                filterDelay={props.filterDelay}
+            />
+        );
+    };
 
     const createTableFooter = (columns, columnGroup) => {
-        return (
-            <TreeTableFooter columns={columns} columnGroup={columnGroup} />
-        )
-    }
+        return <TreeTableFooter columns={columns} columnGroup={columnGroup} />;
+    };
 
     const createTableBody = (value, columns) => {
         return (
-            <TreeTableBody value={value} columns={columns} expandedKeys={getExpandedKeys()} selectOnEdit={props.selectOnEdit}
-                onToggle={onToggle} onExpand={props.onExpand} onCollapse={props.onCollapse}
-                paginator={props.paginator} first={getFirst()} rows={getRows()}
-                selectionMode={props.selectionMode} selectionKeys={props.selectionKeys} onSelectionChange={props.onSelectionChange}
-                metaKeySelection={props.metaKeySelection} onRowClick={props.onRowClick} onSelect={props.onSelect} onUnselect={props.onUnselect}
-                propagateSelectionUp={props.propagateSelectionUp} propagateSelectionDown={props.propagateSelectionDown}
-                lazy={props.lazy} rowClassName={props.rowClassName} emptyMessage={props.emptyMessage} loading={props.loading}
-                contextMenuSelectionKey={props.contextMenuSelectionKey} onContextMenuSelectionChange={props.onContextMenuSelectionChange} onContextMenu={props.onContextMenu} />
-        )
-    }
+            <TreeTableBody
+                value={value}
+                columns={columns}
+                expandedKeys={getExpandedKeys()}
+                selectOnEdit={props.selectOnEdit}
+                onToggle={onToggle}
+                onExpand={props.onExpand}
+                onCollapse={props.onCollapse}
+                paginator={props.paginator}
+                first={getFirst()}
+                rows={getRows()}
+                selectionMode={props.selectionMode}
+                selectionKeys={props.selectionKeys}
+                onSelectionChange={props.onSelectionChange}
+                metaKeySelection={props.metaKeySelection}
+                onRowClick={props.onRowClick}
+                onSelect={props.onSelect}
+                onUnselect={props.onUnselect}
+                propagateSelectionUp={props.propagateSelectionUp}
+                propagateSelectionDown={props.propagateSelectionDown}
+                lazy={props.lazy}
+                rowClassName={props.rowClassName}
+                emptyMessage={props.emptyMessage}
+                loading={props.loading}
+                contextMenuSelectionKey={props.contextMenuSelectionKey}
+                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                onContextMenu={props.onContextMenu}
+            />
+        );
+    };
 
     const createPaginator = (position, totalRecords) => {
         const className = classNames('p-paginator-' + position, props.paginatorClassName);
 
         return (
-            <Paginator first={getFirst()} rows={getRows()} pageLinkSize={props.pageLinkSize} className={className}
-                onPageChange={onPageChange} template={props.paginatorTemplate}
-                totalRecords={totalRecords} rowsPerPageOptions={props.rowsPerPageOptions} currentPageReportTemplate={props.currentPageReportTemplate}
-                leftContent={props.paginatorLeft} rightContent={props.paginatorRight} alwaysShow={props.alwaysShowPaginator} dropdownAppendTo={props.paginatorDropdownAppendTo} />
-        )
-    }
+            <Paginator
+                first={getFirst()}
+                rows={getRows()}
+                pageLinkSize={props.pageLinkSize}
+                className={className}
+                onPageChange={onPageChange}
+                template={props.paginatorTemplate}
+                totalRecords={totalRecords}
+                rowsPerPageOptions={props.rowsPerPageOptions}
+                currentPageReportTemplate={props.currentPageReportTemplate}
+                leftContent={props.paginatorLeft}
+                rightContent={props.paginatorRight}
+                alwaysShow={props.alwaysShowPaginator}
+                dropdownAppendTo={props.paginatorDropdownAppendTo}
+            />
+        );
+    };
 
     const createScrollableView = (value, columns, frozen, headerColumnGroup, footerColumnGroup) => {
         const header = createTableHeader(columns, headerColumnGroup);
         const footer = createTableFooter(columns, footerColumnGroup);
         const body = createTableBody(value, columns);
 
-        return (
-            <TreeTableScrollableView columns={columns} header={header} body={body} footer={footer}
-                scrollHeight={props.scrollHeight} frozen={frozen} frozenWidth={props.frozenWidth} />
-        )
-    }
+        return <TreeTableScrollableView columns={columns} header={header} body={body} footer={footer} scrollHeight={props.scrollHeight} frozen={frozen} frozenWidth={props.frozenWidth} />;
+    };
 
     const createScrollableTable = (value) => {
         const columns = getColumns();
@@ -865,12 +882,12 @@ export const TreeTable = React.forwardRef((props, ref) => {
         scrollableView = createScrollableView(value, scrollableColumns, false, props.headerColumnGroup, props.footerColumnGroup);
 
         return (
-            <div className="p-treetable-scrollable-wrapper">
+            <div className='p-treetable-scrollable-wrapper'>
                 {frozenView}
                 {scrollableView}
             </div>
-        )
-    }
+        );
+    };
 
     const createRegularTable = (value) => {
         const columns = getColumns();
@@ -879,61 +896,65 @@ export const TreeTable = React.forwardRef((props, ref) => {
         const body = createTableBody(value, columns);
 
         return (
-            <div className="p-treetable-wrapper">
+            <div className='p-treetable-wrapper'>
                 <table style={props.tableStyle} className={props.tableClassName}>
                     {header}
                     {footer}
                     {body}
                 </table>
             </div>
-        )
-    }
+        );
+    };
 
     const createTable = (value) => {
         return props.scrollable ? createScrollableTable(value) : createRegularTable(value);
-    }
+    };
 
     const createLoader = () => {
         if (props.loading) {
             const iconClassName = classNames('p-treetable-loading-icon pi-spin', props.loadingIcon);
 
             return (
-                <div className="p-treetable-loading">
-                    <div className="p-treetable-loading-overlay p-component-overlay">
+                <div className='p-treetable-loading'>
+                    <div className='p-treetable-loading-overlay p-component-overlay'>
                         <i className={iconClassName}></i>
                     </div>
                 </div>
-            )
+            );
         }
 
         return null;
-    }
+    };
 
     const data = processData();
 
     const otherProps = ObjectUtils.findDiffKeys(props, TreeTable.defaultProps);
-    const className = classNames('p-treetable p-component', {
-        'p-treetable-hoverable-rows': props.rowHover,
-        'p-treetable-selectable': isRowSelectionMode(),
-        'p-treetable-resizable': props.resizableColumns,
-        'p-treetable-resizable-fit': (props.resizableColumns && props.columnResizeMode === 'fit'),
-        'p-treetable-auto-layout': props.autoLayout,
-        'p-treetable-striped': props.stripedRows,
-        'p-treetable-gridlines': props.showGridlines
-    }, props.className);
+    const className = classNames(
+        'p-treetable p-component',
+        {
+            'p-treetable-hoverable-rows': props.rowHover,
+            'p-treetable-selectable': isRowSelectionMode(),
+            'p-treetable-resizable': props.resizableColumns,
+            'p-treetable-resizable-fit': props.resizableColumns && props.columnResizeMode === 'fit',
+            'p-treetable-auto-layout': props.autoLayout,
+            'p-treetable-striped': props.stripedRows,
+            'p-treetable-gridlines': props.showGridlines
+        },
+        props.className
+    );
     const table = createTable(data);
     const totalRecords = getTotalRecords(data);
-    const headerFacet = props.header && <div className="p-treetable-header">{props.header}</div>;
-    const footerFacet = props.footer && <div className="p-treetable-footer">{props.footer}</div>;
+    const headerFacet = props.header && <div className='p-treetable-header'>{props.header}</div>;
+    const footerFacet = props.footer && <div className='p-treetable-footer'>{props.footer}</div>;
     const paginatorTop = props.paginator && props.paginatorPosition !== 'bottom' && createPaginator('top', totalRecords);
     const paginatorBottom = props.paginator && props.paginatorPosition !== 'top' && createPaginator('bottom', totalRecords);
     const loader = createLoader();
-    const resizeHelper = props.resizableColumns && <div ref={resizerHelperRef} className="p-column-resizer-helper" style={{ display: 'none' }}></div>;
-    const reorderIndicatorUp = props.reorderableColumns && <span ref={reorderIndicatorUpRef} className="pi pi-arrow-down p-datatable-reorder-indicator-up" style={{ position: 'absolute', display: 'none' }} />
-    const reorderIndicatorDown = props.reorderableColumns && <span ref={reorderIndicatorDownRef} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={{ position: 'absolute', display: 'none' }} />;
+    const resizeHelper = props.resizableColumns && <div ref={resizerHelperRef} className='p-column-resizer-helper' style={{ display: 'none' }}></div>;
+    const reorderIndicatorUp = props.reorderableColumns && <span ref={reorderIndicatorUpRef} className='pi pi-arrow-down p-datatable-reorder-indicator-up' style={{ position: 'absolute', display: 'none' }} />;
+    const reorderIndicatorDown = props.reorderableColumns && <span ref={reorderIndicatorDownRef} className='pi pi-arrow-up p-datatable-reorder-indicator-down' style={{ position: 'absolute', display: 'none' }} />;
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors=".p-treetable-scrollable-body" {...otherProps}>
+        <div ref={elementRef} id={props.id} className={className} style={props.style} data-scrollselectors='.p-treetable-scrollable-body' {...otherProps}>
             {loader}
             {headerFacet}
             {paginatorTop}
@@ -944,7 +965,7 @@ export const TreeTable = React.forwardRef((props, ref) => {
             {reorderIndicatorUp}
             {reorderIndicatorDown}
         </div>
-    )
+    );
 });
 
 TreeTable.displayName = 'TreeTable';
@@ -1025,4 +1046,4 @@ TreeTable.defaultProps = {
     onColumnResizeEnd: null,
     onColReorder: null,
     onContextMenu: null
-}
+};

@@ -11,7 +11,7 @@ interface CascadeSelectChangeParams {
     value: any;
 }
 
-interface CascadeSelectGroupChangeParams extends CascadeSelectChangeParams { }
+interface CascadeSelectGroupChangeParams extends CascadeSelectChangeParams {}
 
 export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
@@ -44,7 +44,7 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
     children?: React.ReactNode;
 }
 
-export declare class CascadeSelect extends React.Component<CascadeSelectProps, any> { 
+export declare class CascadeSelect extends React.Component<CascadeSelectProps, any> {
     public getElement(): HTMLDivElement;
     public getInput(): HTMLInputElement;
     public getOverlay(): HTMLElement;

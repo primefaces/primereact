@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const InputTextDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -83,7 +82,7 @@ export class InputTextDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -150,7 +149,7 @@ const InputTextDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -216,8 +215,8 @@ const InputTextDemo = () => {
     )
 }
                 `
-            },
-        'browser': {
+        },
+        browser: {
             tabName: 'Browser Source',
             imports: `
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>`,
@@ -286,52 +285,64 @@ const InputTextDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { InputText } from 'primereact/inputtext';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>InputText is used as a controlled input with <i>value</i> and <i>onChange</i> properties.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        InputText is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <InputText value={value} onChange={(e) => setValue(e.target.value)} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Float Label</h5>
-                    <p>A floating label is implemented by wrapping the input and the label inside a container having <i>.p-float-label</i> style class.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        A floating label is implemented by wrapping the input and the label inside a container having <i>.p-float-label</i> style class.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <span className="p-float-label">
     <InputText id="in" value={value} onChange={(e) => setValue(e.target.value)} />
     <label htmlFor="in">Username</label>
 </span>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>KeyFilter</h5>
-                    <p>InputText has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.</p>
+                    <p>
+                        InputText has built-in key filtering support to block certain keys, refer to <Link href='/keyfilter'>keyfilter</Link> page for more information.
+                    </p>
 
                     <h5>Properties</h5>
-                    <p>InputText passes any valid attribute to the underlying <a href="https://devdocs.io/html/element/input" rel="noopener noreferrer" target="_blank">React HTMLInputElement</a> element. Extended properties are as follows;</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        InputText passes any valid attribute to the underlying{' '}
+                        <a href='https://devdocs.io/html/element/input' rel='noopener noreferrer' target='_blank'>
+                            React HTMLInputElement
+                        </a>{' '}
+                        element. Extended properties are as follows;
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -370,9 +381,11 @@ import { InputText } from 'primereact/inputtext';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'>theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -389,11 +402,14 @@ import { InputText } from 'primereact/inputtext';
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>InputText component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
-<CodeHighlight>
-{`
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            InputText component renders a native input element that implicitly includes any passed prop. Value to describe the component can either be provided via <i>label</i> tag combined with <i>id</i> prop or using{' '}
+                            <i>aria-labelledby</i>, <i>aria-label</i> props.
+                        </p>
+                        <CodeHighlight>
+                            {`
 <label htmlFor="firstname">Firstname</label>
 <InputText id="firstname" />
 
@@ -402,36 +418,35 @@ import { InputText } from 'primereact/inputtext';
 
 <InputText aria-label="Age"/>
 `}
-</CodeHighlight>
-                    <h6>Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the input.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        </CodeHighlight>
+                        <h6>Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the input.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'InputTextDemo', sources: sources })
-                }
-
+                {useLiveEditorTabs({ name: 'InputTextDemo', sources: sources })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default InputTextDoc;

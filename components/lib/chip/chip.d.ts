@@ -16,4 +16,4 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
 
 export declare class Chip extends React.Component<ChipProps, any> {
     public getElement(): HTMLDivElement;
- }
+}

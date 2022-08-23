@@ -4,10 +4,9 @@ import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
-const CaptchaDoc  = memo(() => {
-
+const CaptchaDoc = memo(() => {
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -39,7 +38,7 @@ export class CaptchaDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useRef } from 'react';
@@ -65,7 +64,7 @@ const CaptchaDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useRef } from 'react';
@@ -91,7 +90,7 @@ const CaptchaDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -121,56 +120,57 @@ const CaptchaDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { Captcha } from 'primereact/captcha';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/captcha/captcha.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>Captcha is used with a siteKey and a callback to verify the response.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Captcha siteKey="YOUR_SITE_KEY" onResponse={showResponse}></Captcha>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Verification</h5>
-                    <p>In order to ensure if a response token is valid, verification against recaptcha api needs to be done at backend. <a href="https://developers.google.com/recaptcha/docs/verify">Read more</a> at
-                    official documentation.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        In order to ensure if a response token is valid, verification against recaptcha api needs to be done at backend. <a href='https://developers.google.com/recaptcha/docs/verify'>Read more</a> at official documentation.
+                    </p>
+                    <CodeHighlight lang='js'>
+                        {`
 const showResponse = (response) => {
 //call to a backend to verify against recaptcha with private key
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <p>In addition, include the captcha widget resource to your page.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -227,8 +227,8 @@ const showResponse = (response) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -252,8 +252,8 @@ const showResponse = (response) => {
                     </div>
 
                     <h5>Methods</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -278,19 +278,23 @@ const showResponse = (response) => {
 
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
-                    <p>Refer to the <a alt="Recaptcha Accessibility "href="https://support.google.com/recaptcha/answer/6175971?hl=en">Recaptcha Accessibility</a> documentation for more information.</p>
+                        <p>
+                            Refer to the{' '}
+                            <a alt='Recaptcha Accessibility ' href='https://support.google.com/recaptcha/answer/6175971?hl=en'>
+                                Recaptcha Accessibility
+                            </a>{' '}
+                            documentation for more information.
+                        </p>
                     </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>Google Recaptcha V2</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'CaptchaDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'CaptchaDemo', sources: sources })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default CaptchaDoc;

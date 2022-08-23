@@ -3,7 +3,6 @@ import { Ripple } from '../ripple/Ripple';
 import { classNames } from '../utils/Utils';
 
 export const PickListItem = React.memo((props) => {
-
     const onClick = (event) => {
         if (props.onClick) {
             props.onClick({
@@ -11,7 +10,7 @@ export const PickListItem = React.memo((props) => {
                 value: props.value
             });
         }
-    }
+    };
 
     const onKeyDown = (event) => {
         if (props.onKeyDown) {
@@ -20,19 +19,23 @@ export const PickListItem = React.memo((props) => {
                 value: props.value
             });
         }
-    }
+    };
 
     const content = props.template ? props.template(props.value) : props.value;
-    const className = classNames('p-picklist-item', {
-        'p-highlight': props.selected
-    }, props.className);
+    const className = classNames(
+        'p-picklist-item',
+        {
+            'p-highlight': props.selected
+        },
+        props.className
+    );
 
     return (
-        <li className={className} onClick={onClick} onKeyDown={onKeyDown} tabIndex={props.tabIndex} role="option" aria-selected={props.selected}>
+        <li className={className} onClick={onClick} onKeyDown={onKeyDown} tabIndex={props.tabIndex} role='option' aria-selected={props.selected}>
             {content}
             <Ripple />
         </li>
-    )
+    );
 });
 
 PickListItem.displayName = 'PickListItem';

@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const CardDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -45,7 +44,7 @@ export class CardDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -80,7 +79,7 @@ const CardDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -115,7 +114,7 @@ const CardDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -153,52 +152,54 @@ const CardDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { Card } from 'primereact/card';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/card/card.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>Card is used as a container.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Card>
     Content
 </Card>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Title</h5>
-                    <p>Title text of the card is provided using the <i>title</i> property whereas <strong>subTitle</strong> property is available for additional information about the card. Both of these properties accept JSX as well.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Title text of the card is provided using the <i>title</i> property whereas <strong>subTitle</strong> property is available for additional information about the card. Both of these properties accept JSX as well.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Card title="Title" subTitle="SubTitle">
     Content
 </Card>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Header and Footer</h5>
                     <p>Header and Footer sections are defined using the properties of the same name.</p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 const header = <img alt="Card" src='images/usercard.png'/>;
 const footer = <span>
     <Button label="Save" icon="pi pi-check" style={{marginRight: '.25em'}}/>
@@ -209,11 +210,11 @@ const footer = <span>
     Content
 </Card>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -270,9 +271,11 @@ const footer = <span>
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'>theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -305,34 +308,36 @@ const footer = <span>
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>A card can be utilized in many use cases as a result no role is enforced, in fact a role may not be necessary if the card is used for presentational purposes only.
-                        Any valid attribute is passed to the container element so if you require to use one of the <a href="https://www.w3.org/TR/wai-aria/#landmark" alt="Landmark Roles">landmark</a> roles
-                        like <i>region</i>, you may use the <i>role</i> property.
-                    </p>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            A card can be utilized in many use cases as a result no role is enforced, in fact a role may not be necessary if the card is used for presentational purposes only. Any valid attribute is passed to the container element so
+                            if you require to use one of the{' '}
+                            <a href='https://www.w3.org/TR/wai-aria/#landmark' alt='Landmark Roles'>
+                                landmark
+                            </a>{' '}
+                            roles like <i>region</i>, you may use the <i>role</i> property.
+                        </p>
 
-<CodeHighlight>
-{`
+                        <CodeHighlight>
+                            {`
 <Card role="region">
     Content
 </Card>
 `}
-</CodeHighlight>
+                        </CodeHighlight>
 
-                    <h5>Keyboard Support</h5>
-                    <p>Component does not include any interactive elements.</p>
-                </DevelopmentSection>
+                        <h5>Keyboard Support</h5>
+                        <p>Component does not include any interactive elements.</p>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'CardDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'CardDemo', sources: sources })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default CardDoc;

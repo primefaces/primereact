@@ -17,6 +17,6 @@ export interface TimelineProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     children?: React.ReactNode;
 }
 
-export declare class Timeline extends React.Component<TimelineProps, any> { 
+export declare class Timeline extends React.Component<TimelineProps, any> {
     public getElement(): HTMLDivElement;
 }

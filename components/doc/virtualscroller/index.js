@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const VirtualScrollerDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -211,7 +210,7 @@ export class VirtualScrollerDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useEffect, useState, useRef } from 'react';
@@ -395,7 +394,7 @@ const VirtualScrollerDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useEffect, useState, useRef } from 'react';
@@ -579,7 +578,7 @@ const VirtualScrollerDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
     <link rel="stylesheet" href="./VirtualScrollerDemo.css" />
@@ -769,7 +768,7 @@ const VirtualScrollerDemo = () => {
 }
                 `
         }
-    }
+    };
 
     const extFiles = {
         'demo/VirtualScrollerDemo.css': {
@@ -804,39 +803,43 @@ const VirtualScrollerDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { VirtualScroller } from 'primereact/virtualscroller';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/virtualscroller/virtualscroller.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>VirtualScroller is used to display huge data. It periodically adds special elements defined according to the scroll's position to the DOM.
-                        The <i>itemSize</i> and <i>itemTemplate</i> properties are required on component. In addition, an initial array is required based on the total number of items to display.<br />
-                        VirtualScroller automatically calculates how many items will be displayed in the view according to <i>itemSize</i> using a specified scroll height. Its scroll height can be adjusted with <i>scrollHeight</i> property or height property of CSS.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        VirtualScroller is used to display huge data. It periodically adds special elements defined according to the scroll's position to the DOM. The <i>itemSize</i> and <i>itemTemplate</i> properties are required on component. In
+                        addition, an initial array is required based on the total number of items to display.
+                        <br />
+                        VirtualScroller automatically calculates how many items will be displayed in the view according to <i>itemSize</i> using a specified scroll height. Its scroll height can be adjusted with <i>scrollHeight</i> property or height
+                        property of CSS.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const items = Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`);
 
 const itemTemplate = (item, options) => {
@@ -852,21 +855,22 @@ const itemTemplate = (item, options) => {
     return <div style={{ height: '50px' }}>{item}</div>;
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Loader</h5>
-                    <p>VirtualScroller has a special loader. It can be activated with the <i>showLoader</i> property.
-                        In addition, <i>loadingTemplate</i> can be used to add custom loaders to item elements.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        VirtualScroller has a special loader. It can be activated with the <i>showLoader</i> property. In addition, <i>loadingTemplate</i> can be used to add custom loaders to item elements.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} showLoader delay={250} />
 
 <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} showLoader delay={250} loadingTemplate={loadingTemplate} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const loadingTemplate = (options) => {
     // options.index: Index of the item.
     // options.count: Total numbers of items.
@@ -884,20 +888,22 @@ const loadingTemplate = (options) => {
     );
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Lazy</h5>
-                    <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking <i>onLazyLoad</i> callback.</p>
+                    <p>
+                        Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking <i>onLazyLoad</i> callback.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={itemTemplate} lazy onLazyLoad={onLazyLoad}
     showLoader loading={lazyLoading} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const onLazyLoad = (event) => {
     setLazyLoading(true);
 
@@ -919,19 +925,21 @@ const onLazyLoad = (event) => {
     }, Math.random() * 1000 + 250);
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Content Template</h5>
-                    <p>VirtualScroller has a HTML div element to wrap the all items. But in some cases, it may be desirable to define a completely special wrapper element instead of the HTML div element. The <i>contentTemplate</i> property can be used for this.
-                    This will be especially necessary to maintain the DOM layout and provide accessibility.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        VirtualScroller has a HTML div element to wrap the all items. But in some cases, it may be desirable to define a completely special wrapper element instead of the HTML div element. The <i>contentTemplate</i> property can be
+                        used for this. This will be especially necessary to maintain the DOM layout and provide accessibility.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <VirtualScroller items={items} itemSize={50} itemTemplate={itemTemplate} contentTemplate={contentTemplate} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const contentTemplate = (options) => {
     // options.className: Class name of wrapper element.
     // options.contentRef: Ref of wrapper element.
@@ -961,10 +969,10 @@ const itemTemplate = (item, options) => {
     return <li role="option" style={{ height: '50px' }}>{item}</li>
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Properties</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1026,9 +1034,11 @@ const itemTemplate = (item, options) => {
                                     <td>numToleratedItems</td>
                                     <td>number</td>
                                     <td>null</td>
-                                    <td>Determines how many additional elements to add to the DOM outside of the view. <br />
+                                    <td>
+                                        Determines how many additional elements to add to the DOM outside of the view. <br />
                                         According to the scrolls made up and down, extra items are added in a certain algorithm in the form of multiples of this number. <br />
-                                        Default value is half the number of items shown in the view.</td>
+                                        Default value is half the number of items shown in the view.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>delay</td>
@@ -1113,8 +1123,8 @@ const itemTemplate = (item, options) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1130,14 +1140,18 @@ const itemTemplate = (item, options) => {
                                 </tr>
                                 <tr>
                                     <td>onScrollIndexChange</td>
-                                    <td>event.first: First index of the new data range to be loaded.<br/>
+                                    <td>
+                                        event.first: First index of the new data range to be loaded.
+                                        <br />
                                         event.last: Last index of the new data range to be loaded.
                                     </td>
                                     <td>Callback to invoke when scroll position and item's range in view changes.</td>
                                 </tr>
                                 <tr>
                                     <td>onLazyLoad</td>
-                                    <td>event.first: First index of the new data range to be loaded.<br/>
+                                    <td>
+                                        event.first: First index of the new data range to be loaded.
+                                        <br />
                                         event.last: Last index of the new data range to be loaded.
                                     </td>
                                     <td>Callback to invoke in lazy mode to load new data.</td>
@@ -1147,8 +1161,8 @@ const itemTemplate = (item, options) => {
                     </div>
 
                     <h5>Methods</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1198,9 +1212,11 @@ const itemTemplate = (item, options) => {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'>theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1226,26 +1242,24 @@ const itemTemplate = (item, options) => {
 
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>VirtualScroller uses a semantic list element to list the items. No specific role is enforced, still you may use any aria role and attributes
-                        as any valid attribute is passed to the container element. List element can be also customized for accessibility using <i>listProps</i> property.
-                    </p>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            VirtualScroller uses a semantic list element to list the items. No specific role is enforced, still you may use any aria role and attributes as any valid attribute is passed to the container element. List element can be
+                            also customized for accessibility using <i>listProps</i> property.
+                        </p>
 
-                    <h5>Keyboard Support</h5>
-                    <p>Component does not include any built-in interactive elements.</p>
+                        <h5>Keyboard Support</h5>
+                        <p>Component does not include any built-in interactive elements.</p>
                     </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
-
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'VirtualScrollerDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'VirtualScrollerDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default VirtualScrollerDoc;

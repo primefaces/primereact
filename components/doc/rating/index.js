@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const RatingDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -47,7 +46,7 @@ export class RatingDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -77,7 +76,7 @@ const RatingDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -107,7 +106,7 @@ const RatingDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -140,58 +139,64 @@ const RatingDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { Rating } from 'primereact/rating';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/rating/rating.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Rating is used a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
+                    <p>
+                        Rating is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Rating value={value} onChange={(e) => setValue(e.value)} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Number of Stars</h5>
-                    <p>Number of stars to display is defined with <i>stars</i> property, default is 5.</p>
+                    <p>
+                        Number of stars to display is defined with <i>stars</i> property, default is 5.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Rating value={value} onChange={(e) => setValue(e.value)} stars={5} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Cancel</h5>
-                    <p>A cancel icon is displayed to reset the value by default, set <i>cancel</i> as false to remove this option.</p>
+                    <p>
+                        A cancel icon is displayed to reset the value by default, set <i>cancel</i> as false to remove this option.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Rating value={value} onChange={(e) => setValue(e.value)} cancel={5} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -266,8 +271,8 @@ import { Rating } from 'primereact/rating';
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -278,7 +283,8 @@ import { Rating } from 'primereact/rating';
                             <tbody>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>event.originalEvent: Browser event <br />
+                                    <td>
+                                        event.originalEvent: Browser event <br />
                                         event.value: selected value
                                     </td>
                                     <td>Callback to invoke on value change.</td>
@@ -289,8 +295,8 @@ import { Rating } from 'primereact/rating';
 
                     <h5>Styling</h5>
                     <p>Following is the list of structural style classes</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -319,61 +325,66 @@ import { Rating } from 'primereact/rating';
                     </div>
 
                     <h5>Accessibility</h5>
-                <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Rating component internally uses radio buttons that are only visible to screen readers. The value to read for item is retrieved from the <Link href="/locale">locale</Link> API via <i>star</i> and <i>stars</i> of the <i>aria</i> property.</p>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Rating component internally uses radio buttons that are only visible to screen readers. The value to read for item is retrieved from the <Link href='/locale'>locale</Link> API via <i>star</i> and <i>stars</i> of the{' '}
+                            <i>aria</i> property.
+                        </p>
 
-                    <h6>Keyboard Support</h6>
-                    <p>Keyboard interaction is derived from the native browser handling of radio buttons in a group.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>Moves focus to the star representing the value, if there is none then first star receives the focus.</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span className="inline-flex flex-column">
-                                            <i className="mb-1">left arrow</i>
-                                            <i>up arrow</i>
-                                        </span>
-                                    </td>
-                                    <td>Moves focus to the previous star, if there is none then last radio button receives the focus.</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span className="inline-flex flex-column">
-                                            <i className="mb-1">right arrow</i>
-                                            <i>down arrow</i>
-                                        </span>
-                                    </td>
-                                    <td>Moves focus to the next star, if there is none then first star receives the focus.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>If the focused star does not represent the value, changes the value to the star value.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        <h6>Keyboard Support</h6>
+                        <p>Keyboard interaction is derived from the native browser handling of radio buttons in a group.</p>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the star representing the value, if there is none then first star receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span className='inline-flex flex-column'>
+                                                <i className='mb-1'>left arrow</i>
+                                                <i>up arrow</i>
+                                            </span>
+                                        </td>
+                                        <td>Moves focus to the previous star, if there is none then last radio button receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span className='inline-flex flex-column'>
+                                                <i className='mb-1'>right arrow</i>
+                                                <i>down arrow</i>
+                                            </span>
+                                        </td>
+                                        <td>Moves focus to the next star, if there is none then first star receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>If the focused star does not represent the value, changes the value to the star value.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'RatingDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'RatingDemo', sources: sources })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default RatingDoc;

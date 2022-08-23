@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const BlockUIDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -93,7 +92,7 @@ export class BlockUIDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -162,7 +161,7 @@ export const BlockUIDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -231,7 +230,7 @@ export const BlockUIDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./BlockUIDemo.css" />
@@ -304,8 +303,8 @@ const BlockUIDemo = () => {
     )
 }
                 `
-            }
         }
+    };
 
     const extFiles = {
         'demo/BlockUIDemo.css': {
@@ -319,34 +318,35 @@ const BlockUIDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { BlockUI } from 'primereact/blockui';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/blockui/blockui.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>BlockUI is controlled using the <i>blocked</i> property, by default target element to block is the child component. In example below, panel gets blocked
-                        with a mask when blockedPanel is enabled and gets unblock when the bound variable is set to false.
+                    <p>
+                        BlockUI is controlled using the <i>blocked</i> property, by default target element to block is the child component. In example below, panel gets blocked with a mask when blockedPanel is enabled and gets unblock when the bound
+                        variable is set to false.
                     </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 export const BlockUIDemo = () => {
 
     const [blockedPanel, setBlockedPanel] = useState(false);
@@ -368,22 +368,24 @@ export const BlockUIDemo = () => {
     );
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Full Screen</h5>
-                    <p>In full screen mode, instead of a particular element, the whole document gets blocked. Set <i>fullScreen</i> as true in order to enable this functionality.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        In full screen mode, instead of a particular element, the whole document gets blocked. Set <i>fullScreen</i> as true in order to enable this functionality.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <BlockUI blocked={blockedPanel} fullScreen>
     // content
 </BlockUI>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -446,8 +448,8 @@ export const BlockUIDemo = () => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -471,9 +473,11 @@ export const BlockUIDemo = () => {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'>theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -496,8 +500,10 @@ export const BlockUIDemo = () => {
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
                         <h6>Screen Reader</h6>
-                        <p>BlockUI manages <i>aria-busy</i> state attribute when the UI gets blocked and unblocked. Any valid attribute is passed to the root element so additional attributes 
-                        like <i>role</i> and <i>aria-live</i> can be used to define live regions.</p>
+                        <p>
+                            BlockUI manages <i>aria-busy</i> state attribute when the UI gets blocked and unblocked. Any valid attribute is passed to the root element so additional attributes like <i>role</i> and <i>aria-live</i> can be used to
+                            define live regions.
+                        </p>
 
                         <h5>Keyboard Support</h5>
                         <p>Component does not include any interactive elements.</p>
@@ -507,13 +513,10 @@ export const BlockUIDemo = () => {
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'BlockUIDemo', sources: sources, extFiles: extFiles })
-                }
-
+                {useLiveEditorTabs({ name: 'BlockUIDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default BlockUIDoc;

@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const ContextMenuDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -165,7 +164,7 @@ export class ContextMenuDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useRef } from 'react';
@@ -316,7 +315,7 @@ const ContextMenuDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useRef } from 'react';
@@ -467,7 +466,7 @@ const ContextMenuDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -621,34 +620,36 @@ const ContextMenuDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { ContextMenu } from 'primereact/contextmenu';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/contextmenu/contextmenu.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>MenuItem API</h5>
-                    <p>ContextMenu uses the common menu item api to define its items, visit <Link href="/menumodel"> MenuModel </Link> for details.</p>
+                    <p>
+                        ContextMenu uses the common menu item api to define its items, visit <Link href='/menumodel'> MenuModel </Link> for details.
+                    </p>
 
                     <h5>Getting Started</h5>
                     <p>Menu requires a collection of menuitems as its model.</p>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const items = [
     {
        label:'File',
@@ -781,37 +782,36 @@ const items = [
     }
  ];
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <ContextMenu model={items}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Document Menu</h5>
                     <p>Setting global property attaches the context menu to the document.</p>
 
-
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <ContextMenu global model={items}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Element Menu</h5>
                     <p>ContextMenu is attached to a custom element manually using the reference and calling the show(event) method.</p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <ContextMenu model={imageItems} ref={cm}></ContextMenu>
 <img src="images/logo.png" alt="Logo" style={{width: '80px'}} onContextMenu={(e) => cm.current.show(e)}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -867,21 +867,29 @@ const items = [
                                     <td>appendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <h5>Methods</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -905,8 +913,8 @@ const items = [
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -930,9 +938,11 @@ const items = [
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -970,77 +980,97 @@ const items = [
 
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>ContextMenu component uses the <i>menubar</i> role with <i>aria-orientation</i> set to "vertical" and the value to describe the menu can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Each list item has a <i>presentation</i> role
-                    whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a ContextMenu uses the <i>menu</i> role with an <i>aria-labelledby</i> defined 
-                    as the id of the submenu root menuitem label. In addition, menuitems that open a submenu have <i>aria-haspopup</i>, <i>aria-expanded</i> and <i>aria-controls</i> to define the relation between the item and the submenu.</p>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            ContextMenu component uses the <i>menubar</i> role with <i>aria-orientation</i> set to "vertical" and the value to describe the menu can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. Each list
+                            item has a <i>presentation</i> role whereas anchor elements have a <i>menuitem</i> role with <i>aria-label</i> referring to the label of the item and <i>aria-disabled</i> defined if the item is disabled. A submenu within a
+                            ContextMenu uses the <i>menu</i> role with an <i>aria-labelledby</i> defined as the id of the submenu root menuitem label. In addition, menuitems that open a submenu have <i>aria-haspopup</i>, <i>aria-expanded</i> and{' '}
+                            <i>aria-controls</i> to define the relation between the item and the submenu.
+                        </p>
 
-                    <h6>Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>tab</i></td>
-                                    <td>When focus is in the menu, closes the context menu and moves focus to the next focusable element in the page sequence.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>escape</i></td>
-                                    <td>Closes the context menu.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>down arrow</i></td>
-                                    <td>If focus is not inside the menu and menu is open, add focus to the first item. If an item is already focused, moves focus to the next menuitem within the submenu.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>up arrow</i></td>
-                                    <td>If focus is not inside the menu and menu is open, add focus to the last item. If an item is already focused, moves focus to the next menuitem within the submenu.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>right arrow</i></td>
-                                    <td>Opens a submenu if there is one available and moves focus to the first item.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>left arrow</i></td>
-                                    <td>Closes a submenu and moves focus to the root item of the closed submenu.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>home</i></td>
-                                    <td>Moves focus to the first menuitem within the submenu.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>end</i></td>
-                                    <td>Moves focus to the last menuitem within the submenu.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </DevelopmentSection>
+                        <h6>Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>When focus is in the menu, closes the context menu and moves focus to the next focusable element in the page sequence.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>If menuitem has a submenu, toggles the visibility of the submenu otherwise activates the menuitem and closes all open overlays.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Closes the context menu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>If focus is not inside the menu and menu is open, add focus to the first item. If an item is already focused, moves focus to the next menuitem within the submenu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>If focus is not inside the menu and menu is open, add focus to the last item. If an item is already focused, moves focus to the next menuitem within the submenu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>right arrow</i>
+                                        </td>
+                                        <td>Opens a submenu if there is one available and moves focus to the first item.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>left arrow</i>
+                                        </td>
+                                        <td>Closes a submenu and moves focus to the root item of the closed submenu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
+                                        <td>Moves focus to the first menuitem within the submenu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
+                                        <td>Moves focus to the last menuitem within the submenu.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'ContextMenuDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'ContextMenuDemo', sources: sources })}
             </TabView>
         </div>
-    )
-
-})
+    );
+});
 
 export default ContextMenuDoc;

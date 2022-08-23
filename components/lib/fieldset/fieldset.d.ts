@@ -18,7 +18,7 @@ export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     children?: React.ReactNode;
 }
 
-export declare class Fieldset extends React.Component<FieldsetProps, any> { 
+export declare class Fieldset extends React.Component<FieldsetProps, any> {
     public getElement(): HTMLFieldSetElement;
     public getContent(): HTMLDivElement;
 }

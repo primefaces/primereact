@@ -9,6 +9,6 @@ export interface PanelMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     children?: React.ReactNode;
 }
 
-export declare class PanelMenu extends React.Component<PanelMenuProps, any> { 
+export declare class PanelMenu extends React.Component<PanelMenuProps, any> {
     public getElement(): HTMLDivElement;
 }

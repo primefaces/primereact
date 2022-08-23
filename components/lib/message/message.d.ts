@@ -13,6 +13,6 @@ export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     children?: React.ReactNode;
 }
 
-export declare class Message extends React.Component<MessageProps, any> { 
+export declare class Message extends React.Component<MessageProps, any> {
     public getElement(): HTMLDivElement;
 }

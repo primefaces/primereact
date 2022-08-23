@@ -17,7 +17,7 @@ interface AccordionTabProps {
     children?: React.ReactNode;
 }
 
-export declare class AccordionTab extends React.Component<AccordionTabProps, any> { }
+export declare class AccordionTab extends React.Component<AccordionTabProps, any> {}
 
 type AccordionActiveIndexType = number | number[] | undefined | null;
 
@@ -39,6 +39,6 @@ export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLA
 }
 
 // tslint:disable-next-line:max-classes-per-file
-export declare class Accordion extends React.Component<AccordionProps, any> { 
+export declare class Accordion extends React.Component<AccordionProps, any> {
     public getElement(): HTMLDivElement;
 }

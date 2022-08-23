@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const TreeTableDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -71,7 +70,7 @@ export class TreeTableDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -125,7 +124,7 @@ const TreeTableDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -179,7 +178,7 @@ const TreeTableDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
     <script src="./NodeService.js"></script>
@@ -237,37 +236,39 @@ const TreeTableDemo = () => {
     );
 }
                 `
-            }
-    }
+        }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { Column } from 'primereact/column';
 import { TreeTable } from 'primereact/treetable';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/column/column.min.js"></script>
 <script src="https://unpkg.com/primereact/treetable/treetable.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>TreeTable component requires an array of TreeNode objects as its <i>value</i> and columns defined with one or more Column components.</p>
+                    <p>
+                        TreeTable component requires an array of TreeNode objects as its <i>value</i> and columns defined with one or more Column components.
+                    </p>
 
                     <h5>TreeNode API</h5>
                     <p>Following properties of the API are currently utilized by the TreeTable.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -324,9 +325,9 @@ import { TreeTable } from 'primereact/treetable';
                     </div>
 
                     <p>Here is a sample json response to serve as the datasource of the TreeTable.</p>
-                        <div style={{ height: '400px', overflow: 'auto' }}>
-<CodeHighlight lang="js">
-{`
+                    <div style={{ height: '400px', overflow: 'auto' }}>
+                        <CodeHighlight lang='js'>
+                            {`
 {
     "root":
     [
@@ -681,14 +682,13 @@ import { TreeTable } from 'primereact/treetable';
     ]
 }
 `}
-</CodeHighlight>
-                        </div>
+                        </CodeHighlight>
+                    </div>
 
-                    <p>Throughout the samples, a NodeService would be used to connect to a server to fetch the nodes.
-                    Note that this is only for demo purposes, TreeTable does not have any restrictions on how data is provided.</p>
+                    <p>Throughout the samples, a NodeService would be used to connect to a server to fetch the nodes. Note that this is only for demo purposes, TreeTable does not have any restrictions on how data is provided.</p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 export class NodeService {
 
     getTreeTableNodes() {
@@ -698,12 +698,14 @@ export class NodeService {
 
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>Following sample TreeTable has 3 columns and retrieves the data from the service on componentDidMount. Notice the <i>expander</i> property
-                    in the name column to indicate that this column displays an icon to toggle the child nodes.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        Following sample TreeTable has 3 columns and retrieves the data from the service on componentDidMount. Notice the <i>expander</i> property in the name column to indicate that this column displays an icon to toggle the child
+                        nodes.
+                    </p>
+                    <CodeHighlight lang='js'>
+                        {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -727,11 +729,11 @@ export const TreeTableDemo = () => {
     );
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <p>Dynamic columns are also possible by creating the column component dynamically.</p>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -763,12 +765,12 @@ export const TreeTableDemo = () => {
     );
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Column Component</h5>
                     <p>Column component defines various options that are utilized by the TreeTable to specify corresponding features.</p>
 
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -987,12 +989,14 @@ export const TreeTableDemo = () => {
                     </div>
 
                     <h5>Controlled vs Uncontrolled</h5>
-                    <p>Expansion state is managed in two ways, in uncontrolled mode only initial expanded state of a node can be defined using <i>expandedKeys</i> property whereas in controlled mode <i>expandedKeys</i>
-                    property along with <i>onToggle</i> properties are used for full control over the state. If you need to expand or collapse the state of nodes programmatically then controlled mode should be used. Example below demonstrates
-                    both cases;</p>
+                    <p>
+                        Expansion state is managed in two ways, in uncontrolled mode only initial expanded state of a node can be defined using <i>expandedKeys</i> property whereas in controlled mode <i>expandedKeys</i>
+                        property along with <i>onToggle</i> properties are used for full control over the state. If you need to expand or collapse the state of nodes programmatically then controlled mode should be used. Example below demonstrates
+                        both cases;
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1040,20 +1044,23 @@ export class TreeTableDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Table Layout</h5>
-                    <p>Default table-layout is fixed meaning the cell widths do not depend on their content. If you require cells to scale based on their contents
-                        set <i>autoLayout</i> property to true. Note that auto layout cannot be supported in Scrollable or Resizable columns.
+                    <p>
+                        Default table-layout is fixed meaning the cell widths do not depend on their content. If you require cells to scale based on their contents set <i>autoLayout</i> property to true. Note that auto layout cannot be supported in
+                        Scrollable or Resizable columns.
                     </p>
 
                     <h5>Templates</h5>
-                    <p>Field data of a corresponding row is displayed as the cell content by default, this can be customized using templating where current row data and column properties are passed to the body template.
-                        On the other hand, <i>header</i> and <i>footer</i> properties of a column are used to define the content of these sections by accepting either simple string values or JSX for advanced content. Similarly TreeTable itself
-                        also provides <i>header</i> and <i>footer</i> properties for the main header and footer of the table.</p>
+                    <p>
+                        Field data of a corresponding row is displayed as the cell content by default, this can be customized using templating where current row data and column properties are passed to the body template. On the other hand,{' '}
+                        <i>header</i> and <i>footer</i> properties of a column are used to define the content of these sections by accepting either simple string values or JSX for advanced content. Similarly TreeTable itself also provides{' '}
+                        <i>header</i> and <i>footer</i> properties for the main header and footer of the table.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1091,13 +1098,15 @@ export const TreeTableTemplatingDemo = () => {
     }
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Column Group</h5>
-                    <p>Columns can be grouped at header and footer sections by defining a ColumnGroup component as the <i>headerColumnGroup</i> and <i>footerColumnGroup</i> properties.</p>
+                    <p>
+                        Columns can be grouped at header and footer sections by defining a ColumnGroup component as the <i>headerColumnGroup</i> and <i>footerColumnGroup</i> properties.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1308,16 +1317,20 @@ export const TreeTableColGroupDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Pagination</h5>
-                    <p>Pagination is enabled by setting <i>paginator</i> property to true, <i>rows</i> property defines the number of rows per page and optionally <i>pageLinks</i> specify the the number of page links to display.
-                    See <Link href="/paginator">paginator</Link> component for more information about further customization options such as <i>paginatorTemplate</i>.</p>
+                    <p>
+                        Pagination is enabled by setting <i>paginator</i> property to true, <i>rows</i> property defines the number of rows per page and optionally <i>pageLinks</i> specify the the number of page links to display. See{' '}
+                        <Link href='/paginator'>paginator</Link> component for more information about further customization options such as <i>paginatorTemplate</i>.
+                    </p>
 
-                    <p>Pagination can either be used in <b>Controlled</b> or <b>Uncontrolled</b> manner. In controlled mode, <i>first</i> and <i>onPage</i> properties need to be defined to control the paginator state.</p>
+                    <p>
+                        Pagination can either be used in <b>Controlled</b> or <b>Uncontrolled</b> manner. In controlled mode, <i>first</i> and <i>onPage</i> properties need to be defined to control the paginator state.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1341,13 +1354,15 @@ export const TreeTablePageDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>In uncontrolled mode, only <i>paginator</i> and <i>rows</i> need to be enabled. Index of the first record can be still be provided using the <i>first</i> property in uncontrolled mode however
-                    it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the paginator state, prefer to use the component as controlled.</p>
+                    <p>
+                        In uncontrolled mode, only <i>paginator</i> and <i>rows</i> need to be enabled. Index of the first record can be still be provided using the <i>first</i> property in uncontrolled mode however it is evaluated at initial
+                        rendering and ignored in further updates. If you programmatically need to update the paginator state, prefer to use the component as controlled.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1370,11 +1385,13 @@ export const TreeTablePageDemo = () => {
 
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>Elements of the paginator can be customized using the <i>paginatorTemplate</i> by the TreeTable. Refer to the template section of the <Link href="/paginator"> paginator documentation</Link> for further options.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Elements of the paginator can be customized using the <i>paginatorTemplate</i> by the TreeTable. Refer to the template section of the <Link href='/paginator'> paginator documentation</Link> for further options.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <TreeTable value={nodes} paginator rows={10}
     paginatorTemplate="RowsPerPageDropdown PageLinks FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink">
     <Column field="name" header="Name" expander></Column>
@@ -1382,106 +1399,117 @@ export const TreeTablePageDemo = () => {
     <Column field="type" header="Type"></Column>
 </TreeTable>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Sorting</h5>
-                    <p>Enabling <i>sortable</i> property at column component would be enough to make a column sortable. The property to use when sorting is <i>field</i> by default and can be customized using <i>sortField</i>.</p>
+                    <p>
+                        Enabling <i>sortable</i> property at column component would be enough to make a column sortable. The property to use when sorting is <i>field</i> by default and can be customized using <i>sortField</i>.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Column field="name" header="Name" sortable />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>By default sorting is executed on the clicked column only. To enable multiple field sorting, set <i>sortMode</i> property to "multiple" and use metakey when clicking on another column.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        By default sorting is executed on the clicked column only. To enable multiple field sorting, set <i>sortMode</i> property to "multiple" and use metakey when clicking on another column.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <TreeTable value={nodes} sortMode="multiple">
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>In case you'd like to display the table as sorted per a single column by default on mount, use <i>sortField</i> and <i>sortOrder</i> properties in <b>Controlled</b> or <b>Uncontrolled</b> manner.
-                    In controlled mode, <i>sortField</i>, <i>sortOrder</i> and <i>onSort</i> properties need to be defined to control the sorting state.</p>
+                    <p>
+                        In case you'd like to display the table as sorted per a single column by default on mount, use <i>sortField</i> and <i>sortOrder</i> properties in <b>Controlled</b> or <b>Uncontrolled</b> manner. In controlled mode,{' '}
+                        <i>sortField</i>, <i>sortOrder</i> and <i>onSort</i> properties need to be defined to control the sorting state.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <TreeTable value={nodes} sortField={sortField} sortOrder={sortOrder} onSort={(e) => {setSortField(e.sortField); setSortOrder(e.sortOrder}}>
     <Column field="name" header="Name" expander sortable></Column>
     <Column field="size" header="Size" sortable></Column>
     <Column field="type" header="Type" sortable></Column>
 </TreeTable>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>In multiple mode, use the <i>multiSortMeta</i> property and bind an array of SortMeta objects instead.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        In multiple mode, use the <i>multiSortMeta</i> property and bind an array of SortMeta objects instead.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <TreeTable value={nodes} multiSortMeta={multiSortMeta} onSort={(e) => setMultiSortMeta(e.multiSortMeta)}>
     <Column field="name" header="Name" expander sortable></Column>
     <Column field="size" header="Size" sortable></Column>
     <Column field="type" header="Type" sortable></Column>
 </TreeTable>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 let multiSortMeta = [];
 multiSortMeta.push({field: 'year', order: 1});
 multiSortMeta.push({field: 'brand', order: -1});
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>In uncontrolled mode, no additional properties need to be enabled. Initial sort field can be still be provided using the <i>sortField</i> property in uncontrolled mode however
-                    it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the sorting state, prefer to use the component as controlled.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        In uncontrolled mode, no additional properties need to be enabled. Initial sort field can be still be provided using the <i>sortField</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored
+                        in further updates. If you programmatically need to update the sorting state, prefer to use the component as controlled.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <TreeTable value={nodes} sortField="year">
     <Column field="name" header="Name" expander sortable></Column>
     <Column field="size" header="Size" sortable></Column>
     <Column field="type" header="Type" sortable></Column>
 </TreeTable>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <p>To customize sorting algorithm, set sortable option to custom and define a sortFunction that sorts the list.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <TreeTable value={nodes} sortField="year">
     <Column field="name" header="Name" expander sortable></Column>
     <Column field="size" header="Size" sortable="custom" sortFunction={mysort}></Column>
     <Column field="type" header="Type" sortable></Column>
 </TreeTable>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 mysort(event) {
     //event.field = Field to sort
     //event.order = Sort order
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Filtering</h5>
-                    <p>Filtering is enabled by setting the <i>filter</i> property on a column. <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the other hand,
-                    in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.</p>
+                    <p>
+                        Filtering is enabled by setting the <i>filter</i> property on a column. <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as
+                        all descendants of the node are included. On the other hand, in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <TreeTable value={nodes}>
     <Column field="name" header="Name" expander filter></Column>
     <Column field="size" header="Size" filter></Column>
     <Column field="type" header="Type" filter></Column>
 </TreeTable>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>An optional global filter feature is available to search all fields with the same keyword,
-                                    to implement this place an input component whose value is bound to the globalFilter property of the TreeTable.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>An optional global filter feature is available to search all fields with the same keyword, to implement this place an input component whose value is bound to the globalFilter property of the TreeTable.</p>
+                    <CodeHighlight lang='js'>
+                        {`
 export const TreeTableFilterDemo = () => {
 
     const [nodes, setNodes] = useState{[]};
@@ -1506,13 +1534,15 @@ export const TreeTableFilterDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>In case you'd like to display the table as filtered by default on mount, use <i>filters</i> property in <b>Controlled</b> or <b>Uncontrolled</b> manner.
-                                In controlled mode, <i>filters</i> and <i>onFilter</i> properties need to be defined to control the filtering state.</p>
+                    <p>
+                        In case you'd like to display the table as filtered by default on mount, use <i>filters</i> property in <b>Controlled</b> or <b>Uncontrolled</b> manner. In controlled mode, <i>filters</i> and <i>onFilter</i> properties need to
+                        be defined to control the filtering state.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 export const TreeTableDefaultFilteredDemo = () => {
 
     const [nodes, setNodes] = useState([]);
@@ -1538,13 +1568,17 @@ export const TreeTableDefaultFilteredDemo = () => {
     }
 }
 `}
-</CodeHighlight>
-                    <p>In uncontrolled filtering, no additional properties need to be enabled. Initial filtering can be still be provided using the <i>filters</i> property in uncontrolled mode however
-                            it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the filtering state, prefer to use the component as controlled.</p>
+                    </CodeHighlight>
+                    <p>
+                        In uncontrolled filtering, no additional properties need to be enabled. Initial filtering can be still be provided using the <i>filters</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored
+                        in further updates. If you programmatically need to update the filtering state, prefer to use the component as controlled.
+                    </p>
 
-                    <p>Custom filtering is implemented by setting the <i>filterMatchMode</i> property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        Custom filtering is implemented by setting the <i>filterMatchMode</i> property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.
+                    </p>
+                    <CodeHighlight lang='js'>
+                        {`
 export const TreeTableFilterDemo = () => {
 
     const [nodes, setNodes] = useState([]);
@@ -1569,18 +1603,19 @@ export const TreeTableFilterDemo = () => {
     }
 }
 `}
-</CodeHighlight>
-
+                    </CodeHighlight>
 
                     <h5>Selection</h5>
-                    <p>TreeTable supports single, multiple and checkbox selection modes. Define <i>selectionMode</i>, <i>selectionKeys</i> and <i>onSelectionChange</i> properties to control the selection. In single mode, selectionKeys should
-                    be a single value whereas in multiple or checkbox modes an array is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i> property. Note that
-                    in touch enabled devices, TreeTable does not require metaKey.</p>
+                    <p>
+                        TreeTable supports single, multiple and checkbox selection modes. Define <i>selectionMode</i>, <i>selectionKeys</i> and <i>onSelectionChange</i> properties to control the selection. In single mode, selectionKeys should be a
+                        single value whereas in multiple or checkbox modes an array is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i>{' '}
+                        property. Note that in touch enabled devices, TreeTable does not require metaKey.
+                    </p>
 
                     <p>Example below demonstrates all cases along with the available callbacks to listen events such as node selection.</p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1662,14 +1697,16 @@ export const TreeTableSelectionDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Lazy</h5>
-                    <p>Lazy loading is implemented using the <i>onExpand</i> event by adding children to the expanded node. <i>leaf</i> property should be enabled to indicate the node has children but not yet loaded. Here is a in-memory demo
-                    that loads generated nodes on expand event to imitate a remote call with a timeout. Notice the usage of <i>loading</i> property as well to give users a feedback about the loading process.</p>
+                    <p>
+                        Lazy loading is implemented using the <i>onExpand</i> event by adding children to the expanded node. <i>leaf</i> property should be enabled to indicate the node has children but not yet loaded. Here is a in-memory demo that
+                        loads generated nodes on expand event to imitate a remote call with a timeout. Notice the usage of <i>loading</i> property as well to give users a feedback about the loading process.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1766,15 +1803,17 @@ export const TreeTableLazyDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Incell Editing</h5>
-                    <p>Incell editing feature provides a way to quickly edit data inside the table. A cell editor is defined using the <i>editor</i> property
-                    that refers to a function to return an input element for the editing. Clicking outside the cell or hitting enter key closes the cell, however this may not be desirable if the input is invalid. In order
-                    to decide whether to keep the cell open or not, provide a <i>cellEditValidator</i> function that validates the value.</p>
+                    <p>
+                        Incell editing feature provides a way to quickly edit data inside the table. A cell editor is defined using the <i>editor</i> property that refers to a function to return an input element for the editing. Clicking outside the
+                        cell or hitting enter key closes the cell, however this may not be desirable if the input is invalid. In order to decide whether to keep the cell open or not, provide a <i>cellEditValidator</i> function that validates the
+                        value.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1842,14 +1881,16 @@ export const TreeTableEditDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>ContextMenu</h5>
-                    <p>One or more ContextMenu instances can be attached to nodes. Similar to selection, separate <i>contextMenuSelectionKey</i> and <i>onContextMenuSelectionChange</i> properties are necesary to manage the selected node with
-                    right click. In addition, a context menu can either be displayed at <i>onContextMenu</i> event. Since this event also passes the node instance, you may choose to display a different context menu for a particular node.</p>
+                    <p>
+                        One or more ContextMenu instances can be attached to nodes. Similar to selection, separate <i>contextMenuSelectionKey</i> and <i>onContextMenuSelectionChange</i> properties are necesary to manage the selected node with right
+                        click. In addition, a context menu can either be displayed at <i>onContextMenu</i> event. Since this event also passes the node instance, you may choose to display a different context menu for a particular node.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -1909,13 +1950,15 @@ export const TreeTableContextMenuDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Column Resize</h5>
-                    <p>Columns can be resized using drag drop by setting the <i>resizableColumns</i> to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is resized.
-                        In "expand" mode, table width also changes along with the column width. <i>onColumnResizeEnd</i> is a callback that passes the resized column header as a parameter.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Columns can be resized using drag drop by setting the <i>resizableColumns</i> to true. There are two resize modes; "fit" and "expand". Fit is the default one and the overall table width does not change when a column is
+                        resized. In "expand" mode, table width also changes along with the column width. <i>onColumnResizeEnd</i> is a callback that passes the resized column header as a parameter.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <h5>Fit Mode</h5>
 <TreeTable value={nodes} resizableColumns columnResizeMode="fit">
     <Column field="name" header="Name" expander></Column>
@@ -1930,60 +1973,66 @@ export const TreeTableContextMenuDemo = () => {
     <Column field="type" header="Type"></Column>
 </TreeTable>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <p>It is important to note that when you need to change column widths, since table width is 100%, giving fixed pixel widths does not work well as browsers scale them, instead give percentage widths.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <TreeTable value={nodes} resizableColumns>
     <Column field="name" header="Name" expander style={{width:'50%'}}></Column>
     <Column field="size" header="Size" style={{width:'30%'}}></Column>
     <Column field="type" header="Type" style={{width:'20%'}}></Column>
 </TreeTable>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Column Reorder</h5>
-                    <p>Columns can be reordered using drag drop by setting the <i>reorderableColumns</i> to true. <i>onColReorder</i> is a callback that is invoked when a column is reordered.
-                    TreeTable keeps the column order state internally using keys that identifies a column using the <i>field</i> property. If the column has no field, use columnKey instead.</p>
+                    <p>
+                        Columns can be reordered using drag drop by setting the <i>reorderableColumns</i> to true. <i>onColReorder</i> is a callback that is invoked when a column is reordered. TreeTable keeps the column order state internally using
+                        keys that identifies a column using the <i>field</i> property. If the column has no field, use columnKey instead.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <TreeTable value={nodes} reorderableColumns>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
 </TreeTable>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Scrolling</h5>
-                    <p>TreeTable supports both horizontal and vertical scrolling as well as frozen columns. Vertical scrolling is enabled using <i>scrollable</i> property and <i>scrollHeight</i> to define the viewport height.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        TreeTable supports both horizontal and vertical scrolling as well as frozen columns. Vertical scrolling is enabled using <i>scrollable</i> property and <i>scrollHeight</i> to define the viewport height.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <TreeTable value={nodes} scrollable scrollHeight="200px">
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
 </TreeTable>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <p>Horizontal Scrolling requires a width of DataTable to be defined and explicit widths on columns.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <TreeTable value={nodes} scrollable style={{width: '600px'}}>
     <Column field="name" header="Name" expander style={{width:'350px'}}></Column>
     <Column field="size" header="Size" style={{width:'350px'}}></Column>
     <Column field="type" header="Type" style={{width:'350px'}}></Column>
 </TreeTable>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>Certain columns can be frozen by using the <i>frozen</i> property of the column component. Widths of the frozen section is specified by the <i>frozenWidth</i> property.</p>
+                    <p>
+                        Certain columns can be frozen by using the <i>frozen</i> property of the column component. Widths of the frozen section is specified by the <i>frozenWidth</i> property.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <TreeTable value={nodes} scrollable frozenWidth="200px" scrollHeight="250px">
     <Column field="name" header="Name" expander frozen style={{width:'250px'}}></Column>
     <Column field="size" header="Size" style={{width:'250px'}}></Column>
@@ -1994,27 +2043,29 @@ export const TreeTableContextMenuDemo = () => {
     <Column field="type" header="Type" style={{width:'250px'}}></Column>
 </TreeTable>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <p>Note that frozen columns are enabled, frozen and scrollable cells may have content with varying height which leads to misalignment. Provide fixed height to cells to avoid alignment issues.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <TreeTable value={nodes} scrollable frozenWidth="200px" scrollHeight="250px">
     <Column field="name" header="Name" expander frozen style={{width:'250px', height: '25px'}}></Column>
     <Column field="size" header="Size" style={{width:'250px', height: '25px'}}></Column>
     <Column field="type" header="Type" style={{width:'250px', height: '25px'}}></Column>
 </TreeTable>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>When using frozen columns with column grouping, use <i>frozenHeaderColumnGroup</i> and <i>frozenFooterColumnGroup</i> properties along with
-                    <i>headerColumnGroup</i> and <i>footerColumnGroup</i>.</p>
+                    <p>
+                        When using frozen columns with column grouping, use <i>frozenHeaderColumnGroup</i> and <i>frozenFooterColumnGroup</i> properties along with
+                        <i>headerColumnGroup</i> and <i>footerColumnGroup</i>.
+                    </p>
 
                     <h5>Responsive</h5>
                     <p>TreeTable columns are displayed as stacked in responsive mode if the screen size becomes smaller than a certain breakpoint value. Here is a sample implementation;</p>
 
-<CodeHighlight lang="css">
-{`
+                    <CodeHighlight lang='css'>
+                        {`
 .p-col-d {
     display: table-cell;
 }
@@ -2033,10 +2084,10 @@ export const TreeTableContextMenuDemo = () => {
     }
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
@@ -2072,12 +2123,12 @@ export const TreeTableResponsiveDemo = () => {
 
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -2169,7 +2220,9 @@ export const TreeTableResponsiveDemo = () => {
                                     <td>paginatorTemplate</td>
                                     <td>string|object</td>
                                     <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
-                                    <td>Template of the paginator. For details, refer to the template section of the <Link href="/paginator">paginator documentation</Link> for further options.</td>
+                                    <td>
+                                        Template of the paginator. For details, refer to the template section of the <Link href='/paginator'>paginator documentation</Link> for further options.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>paginatorLeft</td>
@@ -2199,15 +2252,18 @@ export const TreeTableResponsiveDemo = () => {
                                     <td>currentPageReportTemplate</td>
                                     <td>string</td>
                                     <td>({`{currentPage} of {totalPages}`})</td>
-                                    <td>Template of the current page report element. Available placeholders are
-                                    {` {currentPage}, {totalPages}, {rows}, {first}, {last} and {totalRecords}`}
-                                </td>
+                                    <td>
+                                        Template of the current page report element. Available placeholders are
+                                        {` {currentPage}, {totalPages}, {rows}, {first}, {last} and {totalRecords}`}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>paginatorDropdownAppendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>first</td>
@@ -2291,8 +2347,10 @@ export const TreeTableResponsiveDemo = () => {
                                     <td>metaKeySelection</td>
                                     <td>boolean</td>
                                     <td>true</td>
-                                    <td>Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item
-                                        can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
+                                    <td>
+                                        Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On
+                                        touch enabled devices, metaKeySelection is turned off automatically.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>selectOnEdit</td>
@@ -2449,8 +2507,8 @@ export const TreeTableResponsiveDemo = () => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -2461,33 +2519,43 @@ export const TreeTableResponsiveDemo = () => {
                             <tbody>
                                 <tr>
                                     <td>onExpand</td>
-                                    <td>event.originalEvent: browser event <br />
-                                        event.node: Expanded node instance.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Expanded node instance.
+                                    </td>
                                     <td>Callback to invoke when a node is expanded.</td>
                                 </tr>
                                 <tr>
                                     <td>onCollapse</td>
-                                    <td>event.originalEvent: browser event <br />
-                                        event.node: Collapsed node instance.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Collapsed node instance.
+                                    </td>
                                     <td>Callback to invoke when a node is collapsed.</td>
                                 </tr>
                                 <tr>
                                     <td>onToggle</td>
-                                    <td>event.originalEvent: browser event <br />
-                                        event.node: Toggled node instance.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Toggled node instance.
+                                    </td>
                                     <td>Callback to invoke when a node is toggled.</td>
                                 </tr>
                                 <tr>
                                     <td>onPage</td>
-                                    <td>event.first: Index of the first row. <br />
-                                        event.rows: Rows per page.</td>
+                                    <td>
+                                        event.first: Index of the first row. <br />
+                                        event.rows: Rows per page.
+                                    </td>
                                     <td>Callback to invoke on pagination.</td>
                                 </tr>
                                 <tr>
                                     <td>onSort</td>
-                                    <td>event.sortField: Field to sort against. <br />
+                                    <td>
+                                        event.sortField: Field to sort against. <br />
                                         event.sortOrder: Sort order as integer. <br />
-                                        event.multiSortMeta: MultiSort metadata.</td>
+                                        event.multiSortMeta: MultiSort metadata.
+                                    </td>
                                     <td>Callback to invoke on sort.</td>
                                 </tr>
                                 <tr>
@@ -2497,53 +2565,69 @@ export const TreeTableResponsiveDemo = () => {
                                 </tr>
                                 <tr>
                                     <td>onSelect</td>
-                                    <td>event.originalEvent: browser event <br />
-                                        event.node: Selected node instance.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Selected node instance.
+                                    </td>
                                     <td>Callback to invoke when a node is selected.</td>
                                 </tr>
                                 <tr>
                                     <td>onUnselect</td>
-                                    <td>event.originalEvent: browser event <br />
-                                        event.node: Unselected node instance.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Unselected node instance.
+                                    </td>
                                     <td>Callback to invoke when a node is unselected.</td>
                                 </tr>
                                 <tr>
                                     <td>onRowClick</td>
-                                    <td>event.originalEvent: Browser event <br />
-                                        event.data: Clicked row data</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.data: Clicked row data
+                                    </td>
                                     <td>Callback to invoke when a row is clicked.</td>
                                 </tr>
                                 <tr>
                                     <td>onSelectionChange</td>
-                                    <td>event.originalEvent: browser event <br />
-                                        event.value: Selected node key(s).</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.value: Selected node key(s).
+                                    </td>
                                     <td>Callback to invoke when selection changes.</td>
                                 </tr>
                                 <tr>
                                     <td>onContextMenuSelectionChange</td>
-                                    <td>event.originalEvent: browser event <br />
-                                        event.value: Selected node key.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.value: Selected node key.
+                                    </td>
                                     <td>Callback to invoke when selection changes with a context menu.</td>
                                 </tr>
                                 <tr>
                                     <td>onColumnResizeEnd</td>
-                                    <td>event.element: DOM element of the resized column.
-                                        event.column: Properties of the resized column.<br />
-                                        event.delta: Change in column width</td>
+                                    <td>
+                                        event.element: DOM element of the resized column. event.column: Properties of the resized column.
+                                        <br />
+                                        event.delta: Change in column width
+                                    </td>
                                     <td>Callback to invoke when a column is resized.</td>
                                 </tr>
                                 <tr>
                                     <td>onColReorder</td>
-                                    <td>event.originalEvent: Browser event <br />
+                                    <td>
+                                        event.originalEvent: Browser event <br />
                                         event.dragIndex: Index of the dragged column <br />
                                         event.dropIndex: Index of the dropped column <br />
-                                        event.columns: Columns array after reorder.</td>
+                                        event.columns: Columns array after reorder.
+                                    </td>
                                     <td>Callback to invoke when a column is reordered.</td>
                                 </tr>
                                 <tr>
                                     <td>onContextMenu</td>
-                                    <td>event.originalEvent: Original event instance. <br />
-                                        event.data: Collapsed row data</td>
+                                    <td>
+                                        event.originalEvent: Original event instance. <br />
+                                        event.data: Collapsed row data
+                                    </td>
                                     <td>Callback to invoke when a context menu is clicked.</td>
                                 </tr>
                             </tbody>
@@ -2551,9 +2635,11 @@ export const TreeTableResponsiveDemo = () => {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -2608,21 +2694,29 @@ export const TreeTableResponsiveDemo = () => {
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
                         <h6>Screen Reader</h6>
-                        <p>DataTable uses a <i>treegrid</i> element whose attributes can be extended with the <i>tableProps</i> option. This property allows passing aria roles and attributes like <i>aria-label</i> and <i>aria-describedby</i> to define the table for readers. Default
-                        role of the table is <i>table</i>. Header, body and footer elements use <i>rowgroup</i>, rows use <i>row</i> role, header cells have <i>columnheader</i> and body cells use <i>cell</i> roles. Sortable headers utilizer <i>aria-sort</i> attribute
-                        either set to "ascending" or "descending".</p>
+                        <p>
+                            DataTable uses a <i>treegrid</i> element whose attributes can be extended with the <i>tableProps</i> option. This property allows passing aria roles and attributes like <i>aria-label</i> and <i>aria-describedby</i> to
+                            define the table for readers. Default role of the table is <i>table</i>. Header, body and footer elements use <i>rowgroup</i>, rows use <i>row</i> role, header cells have <i>columnheader</i> and body cells use <i>cell</i>{' '}
+                            roles. Sortable headers utilizer <i>aria-sort</i> attribute either set to "ascending" or "descending".
+                        </p>
 
-                        <p>Row elements manage <i>aria-expanded</i> for state along with <i>aria-posinset</i>, <i>aria-setsize</i> and <i>aria-level</i> attribute to define the hierachy.</p>
+                        <p>
+                            Row elements manage <i>aria-expanded</i> for state along with <i>aria-posinset</i>, <i>aria-setsize</i> and <i>aria-level</i> attribute to define the hierachy.
+                        </p>
 
-                        <p>When selection is enabled, <i>aria-selected</i> is set to true on a row. In checkbox mode, the built-in checkbox component use <i>checkbox</i> role with <i>aria-checked</i> state attribute.</p>
+                        <p>
+                            When selection is enabled, <i>aria-selected</i> is set to true on a row. In checkbox mode, the built-in checkbox component use <i>checkbox</i> role with <i>aria-checked</i> state attribute.
+                        </p>
 
                         <p>Editable cells use custom templating so you need to manage aria roles and attributes manually if required.</p>
 
-                        <p>Paginator is a standalone component used inside the DataTable, refer to the <Link href="/paginator">paginator</Link> for more information about the accessibility features.</p>
- 
+                        <p>
+                            Paginator is a standalone component used inside the DataTable, refer to the <Link href='/paginator'>paginator</Link> for more information about the accessibility features.
+                        </p>
+
                         <h6>Sortable Headers Keyboard Support</h6>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -2631,15 +2725,21 @@ export const TreeTableResponsiveDemo = () => {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><i>tab</i></td>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
                                         <td>Moves through the headers.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>enter</i></td>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
                                         <td>Sorts the column.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>space</i></td>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
                                         <td>Sorts the column.</td>
                                     </tr>
                                 </tbody>
@@ -2647,8 +2747,8 @@ export const TreeTableResponsiveDemo = () => {
                         </div>
 
                         <h6>Keyboard Support</h6>
-                        <div className="doc-tablewrapper">
-                            <table className="doc-table">
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -2657,39 +2757,57 @@ export const TreeTableResponsiveDemo = () => {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><i>tab</i></td>
-                                        <td>Moves focus to the first selected node when focus enters the component, if there is none then first element receives the focus. If focus is already inside the component, moves focus to the next
-                                            focusable element in the page tab sequence.
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>
+                                            Moves focus to the first selected node when focus enters the component, if there is none then first element receives the focus. If focus is already inside the component, moves focus to the next focusable
+                                            element in the page tab sequence.
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><i>shift</i> + <i>tab</i></td>
-                                        <td>Moves focus to the last selected node when focus enters the component, if there is none then first element receives the focus. If focus is already inside the component, moves focus to the previous
-                                            focusable element in the page tab sequence.
+                                        <td>
+                                            <i>shift</i> + <i>tab</i>
+                                        </td>
+                                        <td>
+                                            Moves focus to the last selected node when focus enters the component, if there is none then first element receives the focus. If focus is already inside the component, moves focus to the previous focusable
+                                            element in the page tab sequence.
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><i>enter</i></td>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
                                         <td>Selects the focused treenode.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>space</i></td>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
                                         <td>Selects the focused treenode.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>down arrow</i></td>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
                                         <td>Moves focus to the next treenode.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>up arrow</i></td>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
                                         <td>Moves focus to the previous treenode.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>right arrow</i></td>
+                                        <td>
+                                            <i>right arrow</i>
+                                        </td>
                                         <td>If node is closed, opens the node otherwise moves focus to the first child node.</td>
                                     </tr>
                                     <tr>
-                                        <td><i>left arrow</i></td>
+                                        <td>
+                                            <i>left arrow</i>
+                                        </td>
                                         <td>If node is open, closes the node otherwise moves focus to the parent node.</td>
                                     </tr>
                                 </tbody>
@@ -2699,15 +2817,12 @@ export const TreeTableResponsiveDemo = () => {
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
-
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'TreeTableDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })
-                }
+                {useLiveEditorTabs({ name: 'TreeTableDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })}
             </TabView>
         </div>
     );
-})
+});
 
 export default TreeTableDoc;

@@ -29,6 +29,6 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     children?: React.ReactNode;
 }
 
-export declare class OrderList extends React.Component<OrderListProps, any> { 
+export declare class OrderList extends React.Component<OrderListProps, any> {
     public getElement(): HTMLDivElement;
 }

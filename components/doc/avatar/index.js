@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const AvatarDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -116,7 +115,7 @@ export class AvatarDemo extends Component {
 }
 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -222,7 +221,7 @@ export const AvatarDemo = () => {
 }
 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -328,7 +327,7 @@ export const AvatarDemo = () => {
 }
 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -439,49 +438,53 @@ const AvatarDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { Avatar } from 'primereact/avatar';
 import { AvatarGroup } from 'primereact/avatargroup';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/avatar/avatar.min.js"></script>
 <script src="https://unpkg.com/primereact/avatargroup/avatargroup.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>Avatar has three built-in display modes; "label", "icon" and "image".</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Avatar label="P" />
 <Avatar icon="pi pi-search" />
 <Avatar image="user.png" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Sizes</h5>
-                    <p><i>size</i> property defines the size of the Avatar with "large" and "xlarge" as possible values.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        <i>size</i> property defines the size of the Avatar with "large" and "xlarge" as possible values.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Avatar label="P" size="large"/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>AvatarGroup</h5>
-                    <p>A set of Avatars can be displayed together using the <i>AvatarGroup</i> component.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        A set of Avatars can be displayed together using the <i>AvatarGroup</i> component.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <AvatarGroup>
     <Avatar label="P" />
     <Avatar icon="pi pi-search" />
@@ -489,37 +492,41 @@ import { AvatarGroup } from 'primereact/avatargroup';
     <Avatar label="+2" />
 </AvatarGroup>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Shape</h5>
-                    <p>Avatar comes in two different styles specified with the <i>shape</i> property, "square" is the default and "circle" is the alternative.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Avatar comes in two different styles specified with the <i>shape</i> property, "square" is the default and "circle" is the alternative.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Avatar label="P" shape="circle"/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Badge</h5>
-                    <p>A badge can be added to an Avatar with the <Link href="/badge">Badge</Link> component.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        A badge can be added to an Avatar with the <Link href='/badge'>Badge</Link> component.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Avatar image="user.png" size="xlarge">
     <Badge value="4" severity="danger" />
 </Avatar>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Templating</h5>
                     <p>Content can easily be customized with the default slot instead of using the built-in modes.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Avatar>
    Content
 </Avatar>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties of Avatar</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -579,8 +586,8 @@ import { AvatarGroup } from 'primereact/avatargroup';
                     <p>Any property as style and class are passed to the main container element. There are no additional properties.</p>
 
                     <h5>Events</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -604,9 +611,11 @@ import { AvatarGroup } from 'primereact/avatargroup';
                     </div>
 
                     <h5>Styling of Avatar</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -647,8 +656,8 @@ import { AvatarGroup } from 'primereact/avatargroup';
                     </div>
 
                     <h5>Styling of AvatarGroup</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -667,8 +676,10 @@ import { AvatarGroup } from 'primereact/avatargroup';
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
                         <h6>Screen Reader</h6>
-                        <p>Avatar does not include any roles and attributes by default. Any attribute is passed to the root element so you may add a role like <i>img</i> along with <i>aria-labelledby</i> or <i>aria-label</i> to describe the component. 
-                        In case avatars need to be tabbable, <i>tabIndex</i> can be added as well to implement custom key handlers.</p>
+                        <p>
+                            Avatar does not include any roles and attributes by default. Any attribute is passed to the root element so you may add a role like <i>img</i> along with <i>aria-labelledby</i> or <i>aria-label</i> to describe the
+                            component. In case avatars need to be tabbable, <i>tabIndex</i> can be added as well to implement custom key handlers.
+                        </p>
 
                         <h5>Keyboard Support</h5>
                         <p>Component does not include any interactive elements.</p>
@@ -678,12 +689,10 @@ import { AvatarGroup } from 'primereact/avatargroup';
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'AvatarDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'AvatarDemo', sources: sources })}
             </TabView>
         </div>
     );
-})
+});
 
 export default AvatarDoc;

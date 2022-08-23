@@ -4,7 +4,6 @@ import { Portal } from '../portal/Portal';
 import { classNames } from '../utils/Utils';
 
 export const ColorPickerPanel = React.forwardRef((props, ref) => {
-
     const createElement = () => {
         const className = classNames('p-colorpicker-panel', {
             'p-colorpicker-overlay-panel': !props.inline,
@@ -12,14 +11,24 @@ export const ColorPickerPanel = React.forwardRef((props, ref) => {
         });
 
         return (
-            <CSSTransition nodeRef={ref} classNames="p-connected-overlay" in={props.in} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
-                unmountOnExit onEnter={props.onEnter} onEntered={props.onEntered} onExit={props.onExit} onExited={props.onExited}>
+            <CSSTransition
+                nodeRef={ref}
+                classNames='p-connected-overlay'
+                in={props.in}
+                timeout={{ enter: 120, exit: 100 }}
+                options={props.transitionOptions}
+                unmountOnExit
+                onEnter={props.onEnter}
+                onEntered={props.onEntered}
+                onExit={props.onExit}
+                onExited={props.onExited}
+            >
                 <div ref={ref} className={className} onClick={props.onClick}>
                     {props.children}
                 </div>
             </CSSTransition>
-        )
-    }
+        );
+    };
 
     const element = createElement();
 

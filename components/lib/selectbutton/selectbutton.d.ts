@@ -37,6 +37,6 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
     children?: React.ReactNode;
 }
 
-export declare class SelectButton extends React.Component<SelectButtonProps, any> { 
+export declare class SelectButton extends React.Component<SelectButtonProps, any> {
     public getElement(): HTMLDivElement;
 }

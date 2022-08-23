@@ -1,56 +1,55 @@
 import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const ProgressBar = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
+export const ProgressBar = React.memo(
+    React.forwardRef((props, ref) => {
+        const elementRef = React.useRef(null);
 
-    const createLabel = () => {
-        if (props.showValue && props.value != null) {
-            const label = props.displayValueTemplate ? props.displayValueTemplate(props.value) : props.value + props.unit;
-            return <div className="p-progressbar-label">{label}</div>
-        }
+        const createLabel = () => {
+            if (props.showValue && props.value != null) {
+                const label = props.displayValueTemplate ? props.displayValueTemplate(props.value) : props.value + props.unit;
+                return <div className='p-progressbar-label'>{label}</div>;
+            }
 
-        return null;
-    }
+            return null;
+        };
 
-    const createDeterminate = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, ProgressBar.defaultProps);
-        const className = classNames('p-progressbar p-component p-progressbar-determinate', props.className);
-        const label = createLabel();
+        const createDeterminate = () => {
+            const otherProps = ObjectUtils.findDiffKeys(props, ProgressBar.defaultProps);
+            const className = classNames('p-progressbar p-component p-progressbar-determinate', props.className);
+            const label = createLabel();
 
-        return (
-            <div role="progressbar" id={props.id} ref={elementRef} className={className} style={props.style} aria-valuemin="0" aria-valuenow={props.value} aria-valuemax="100" {...otherProps}>
-                <div className="p-progressbar-value p-progressbar-value-animate" style={{ width: props.value + '%', display: 'block', backgroundColor: props.color }}></div>
-                {label}
-            </div>
-        )
-    }
-
-    const createIndeterminate = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, ProgressBar.defaultProps);
-        const className = classNames('p-progressbar p-component p-progressbar-indeterminate', props.className);
-
-        return (
-            <div role="progressbar" id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
-                <div className="p-progressbar-indeterminate-container">
-                    <div className="p-progressbar-value p-progressbar-value-animate" style={{ backgroundColor: props.color }}></div>
+            return (
+                <div role='progressbar' id={props.id} ref={elementRef} className={className} style={props.style} aria-valuemin='0' aria-valuenow={props.value} aria-valuemax='100' {...otherProps}>
+                    <div className='p-progressbar-value p-progressbar-value-animate' style={{ width: props.value + '%', display: 'block', backgroundColor: props.color }}></div>
+                    {label}
                 </div>
-            </div>
-        )
-    }
+            );
+        };
 
-    React.useImperativeHandle(ref, () => ({
-        props,
-        getElement: () => elementRef.current
-    }));
+        const createIndeterminate = () => {
+            const otherProps = ObjectUtils.findDiffKeys(props, ProgressBar.defaultProps);
+            const className = classNames('p-progressbar p-component p-progressbar-indeterminate', props.className);
 
-    if (props.mode === 'determinate')
-        return createDeterminate();
-    else if (props.mode === 'indeterminate')
-        return createIndeterminate();
-    else
-        throw new Error(props.mode + " is not a valid mode for the ProgressBar. Valid values are 'determinate' and 'indeterminate'");
-}));
+            return (
+                <div role='progressbar' id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
+                    <div className='p-progressbar-indeterminate-container'>
+                        <div className='p-progressbar-value p-progressbar-value-animate' style={{ backgroundColor: props.color }}></div>
+                    </div>
+                </div>
+            );
+        };
+
+        React.useImperativeHandle(ref, () => ({
+            props,
+            getElement: () => elementRef.current
+        }));
+
+        if (props.mode === 'determinate') return createDeterminate();
+        else if (props.mode === 'indeterminate') return createIndeterminate();
+        else throw new Error(props.mode + " is not a valid mode for the ProgressBar. Valid values are 'determinate' and 'indeterminate'");
+    })
+);
 
 ProgressBar.displayName = 'ProgressBar';
 ProgressBar.defaultProps = {
@@ -64,4 +63,4 @@ ProgressBar.defaultProps = {
     mode: 'determinate',
     displayValueTemplate: null,
     color: null
-}
+};

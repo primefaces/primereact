@@ -1,4 +1,4 @@
-export const Column = () => { }
+export const Column = () => {};
 
 Column.displayName = 'Column';
 Column.defaultProps = {
@@ -77,4 +77,4 @@ Column.defaultProps = {
     exportable: true,
     reorderable: true,
     resizeable: true
-}
+};

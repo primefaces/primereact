@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const MessagesDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -114,10 +113,10 @@ export class MessagesDemo extends Component {
     }
 }
                 `
-    },
-    'hooks': {
-        tabName: 'Hooks Source',
-        content: `
+        },
+        hooks: {
+            tabName: 'Hooks Source',
+            content: `
 import React, { useEffect, useRef } from 'react';
 import { Messages } from 'primereact/messages';
 import { Message } from 'primereact/message';
@@ -215,10 +214,10 @@ const MessagesDemo = () => {
     )
 }
                 `
-    },
-    'ts': {
-        tabName: 'TS Source',
-        content: `
+        },
+        ts: {
+            tabName: 'TS Source',
+            content: `
 import React, { useEffect, useRef } from 'react';
 import { Messages } from 'primereact/messages';
 import { Message } from 'primereact/message';
@@ -316,14 +315,14 @@ const MessagesDemo = () => {
     )
 }
                 `
-    },
-    'browser': {
-        tabName: 'Browser Source',
-        imports: `
+        },
+        browser: {
+            tabName: 'Browser Source',
+            imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
         <script src="https://unpkg.com/primereact/messages/messages.min.js"></script>
         <script src="https://unpkg.com/primereact/message/message.min.js"></script>`,
-        content: `
+            content: `
 const { useEffect, useState, useRef } = React;
 const { Messages } = primereact.messages;
 const { Message } = primereact.message;
@@ -422,50 +421,52 @@ const MessagesDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
-        <div className="content-section documentation" id="app-doc">
+        <div className='content-section documentation' id='app-doc'>
             <TabView>
-                <TabPanel header="Documentation">
+                <TabPanel header='Documentation'>
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 import { Messages } from 'primereact/messages';
 import { Message } from 'primereact/message';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/messages/messages.min.js"></script>
 <script src="https://unpkg.com/primereact/message/message.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>A single message is specified by the Message interface in PrimeReact that defines various properties such as severity,
-            summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Messages instance.</p>
+                    <p>
+                        A single message is specified by the Message interface in PrimeReact that defines various properties such as severity, summary and detail. Messages are displayed by using the <i>show</i> method on the ref of the Messages
+                        instance.
+                    </p>
 
                     <p>Note that for animations, messages requires react-transition-group package.</p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Messages ref={messages}></Messages>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 messages.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Message API</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -534,8 +535,8 @@ messages.current.show({severity: 'success', summary: 'Success Message', detail: 
                     <h5>Showing Messages</h5>
                     <p>Show method accepts either a single message or an array of messages.</p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Messages ref={messages}></Messages>
 
 <Button onClick={showSuccess} label="Success" className="p-button-success" />
@@ -544,10 +545,10 @@ messages.current.show({severity: 'success', summary: 'Success Message', detail: 
 <Button onClick={showError} label="Error" className="p-button-danger" />
 <Button onClick={showMultiple} label="Multiple" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 const showSuccess = () => {
 messages.current.show({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
 }
@@ -572,54 +573,62 @@ messages.current.show([
 ]);
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Clearing Messages</h5>
-                    <p><i>clear()</i> method removes all messages.</p>
+                    <p>
+                        <i>clear()</i> method removes all messages.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 messages.current.clear();
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Replacing Messages</h5>
-                    <p><i>replace(newMessages)</i> method adds new messages after removing all old messages.</p>
+                    <p>
+                        <i>replace(newMessages)</i> method adds new messages after removing all old messages.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 messages.current.replace(newMessages);
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Closable</h5>
-                    <p>Messages are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set <i>closable</i> to false.</p>
+                    <p>
+                        Messages are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set <i>closable</i> to false.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 messages.current.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Sticky</h5>
-                    <p>Messages are cleared automatically after the timeout defined by <i>life</i> property which is 3 seconds by default. Use <i>sticky</i> mode to make them stay until
-            they are manually removed.</p>
+                    <p>
+                        Messages are cleared automatically after the timeout defined by <i>life</i> property which is 3 seconds by default. Use <i>sticky</i> mode to make them stay until they are manually removed.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang='js'>
+                        {`
 //sticky
 messages.current.show({ sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 
 //automatically removed after 5 seconds
 messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
 `}
-</CodeHighlight>
-
+                    </CodeHighlight>
 
                     <h5>Message Component</h5>
-                    <p>Message component is useful in cases where a single message needs to be displayed related to an element such as forms. It has two properties, <i>severity</i> and <i>text</i> of the message.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Message component is useful in cases where a single message needs to be displayed related to an element such as forms. It has two properties, <i>severity</i> and <i>text</i> of the message.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <h5>Inline Message CSS</h5>
 <p>CSS helpers to display inline messages mostly within forms.</p>
 <Message severity="info" text="PrimeNG Rocks"></Message>
@@ -627,11 +636,11 @@ messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message',
 <Message severity="warn" text="Are you sure?"></Message>
 <Message severity="error" text="Field is required"></Message>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties of Message</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -688,8 +697,8 @@ messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message',
                     </div>
 
                     <h5>Properties of Messages</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -721,15 +730,21 @@ messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message',
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <h5>Events of Messages</h5>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -753,9 +768,11 @@ messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message',
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                    </p>
+                    <div className='doc-tablewrapper'>
+                        <table className='doc-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -805,49 +822,54 @@ messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message',
 
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>Message components use <i>alert</i> role that implicitly defines <i>aria-live</i> as "assertive" and <i>aria-atomic</i> as "true". Since any attribute is passed
-                    to the root element, attributes like <i>aria-labelledby</i> and <i>aria-label</i> can optionally be used as well.</p>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Message components use <i>alert</i> role that implicitly defines <i>aria-live</i> as "assertive" and <i>aria-atomic</i> as "true". Since any attribute is passed to the root element, attributes like <i>aria-labelledby</i>{' '}
+                            and <i>aria-label</i> can optionally be used as well.
+                        </p>
 
-                    <p>Close element is a <i>button</i> with an <i>aria-label</i> that refers to the <i>aria.close</i> property of the <Link href="/locale">locale</Link> API by default, you may use
-                    <i>closeButtonProps</i> to customize the element and override the default <i>aria-label</i>.</p>
+                        <p>
+                            Close element is a <i>button</i> with an <i>aria-label</i> that refers to the <i>aria.close</i> property of the <Link href='/locale'>locale</Link> API by default, you may use
+                            <i>closeButtonProps</i> to customize the element and override the default <i>aria-label</i>.
+                        </p>
 
-                    <h6>Close Button Keyboard Support</h6>
-                    <div className="doc-tablewrapper">
-                        <table className="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Function</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><i>enter</i></td>
-                                    <td>Closes the message.</td>
-                                </tr>
-                                <tr>
-                                    <td><i>space</i></td>
-                                    <td>Closes the message.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        <h6>Close Button Keyboard Support</h6>
+                        <div className='doc-tablewrapper'>
+                            <table className='doc-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Closes the message.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Closes the message.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <ul>
                         <li>react-transition-group</li>
                     </ul>
-
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'MessagesDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'MessagesDemo', sources: sources })}
             </TabView>
         </div>
     );
-})
+});
 
 export default MessagesDoc;

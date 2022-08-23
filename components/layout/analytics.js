@@ -15,12 +15,12 @@ export default function Analytics() {
         return () => {
             router.events.off('routeChangeComplete', handleRouteChange);
         };
-      }, [router.events]);
+    }, [router.events]);
 
     return (
         <>
-            <Script strategy="lazyOnload" src="https://www.googletagmanager.com/gtag/js?id=UA-93461466-1" />
-            <Script id="ga-analytics" strategy="lazyOnload">
+            <Script strategy='lazyOnload' src='https://www.googletagmanager.com/gtag/js?id=UA-93461466-1' />
+            <Script id='ga-analytics' strategy='lazyOnload'>
                 {`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}

@@ -35,7 +35,7 @@ declare const PrimeReact: APIOptions;
 export default PrimeReact;
 
 // Locale
-export declare function locale(locale: string): { locale: string, options: object };
+export declare function locale(locale: string): { locale: string; options: object };
 export declare function addLocale(locale: string, options: object): void;
 export declare function updateLocaleOption(key: string, value: any, locale: string): void;
 export declare function updateLocaleOptions(options: object, locale: string): void;
@@ -136,7 +136,7 @@ export interface PrimeIconsOptions {
     readonly ENVELOPE: string;
     readonly EURO: string;
     readonly EXCLAMATION_CIRCLE: string;
-    readonly EXCLAMATION_TRIANGLE : string;
+    readonly EXCLAMATION_TRIANGLE: string;
     readonly EXTERNAL_LINK: string;
     readonly EYE: string;
     readonly EYE_SLASH: string;
@@ -337,6 +337,6 @@ export declare namespace FilterService {
         dateIsNot(value: any, filter: string): boolean;
         dateBefore(value: any, filter: string): boolean;
         dateAfter(value: any, filter: string): boolean;
-    }
+    };
     export function register(rule: string, fn: (...arg: any[]) => boolean): void;
 }

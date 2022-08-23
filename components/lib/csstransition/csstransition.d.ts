@@ -3,6 +3,6 @@ import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-
 
 export type CSSTransitionProps<Ref extends undefined | HTMLElement = undefined> = ReactCSSTransitionProps<Ref> & {
     disabled?: boolean;
-}
+};
 
-export declare class CSSTransition<Ref extends undefined | HTMLElement> extends React.Component<CSSTransitionProps<Ref>, any> { }
+export declare class CSSTransition<Ref extends undefined | HTMLElement> extends React.Component<CSSTransitionProps<Ref>, any> {}

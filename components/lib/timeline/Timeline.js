@@ -1,56 +1,61 @@
 import * as React from 'react';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
-export const Timeline = React.memo(React.forwardRef((props, ref) => {
-    const elementRef = React.useRef(null);
+export const Timeline = React.memo(
+    React.forwardRef((props, ref) => {
+        const elementRef = React.useRef(null);
 
-    const getKey = (item, index) => {
-        return props.dataKey ? ObjectUtils.resolveFieldData(item, props.dataKey) : `pr_id__${index}`;
-    }
+        const getKey = (item, index) => {
+            return props.dataKey ? ObjectUtils.resolveFieldData(item, props.dataKey) : `pr_id__${index}`;
+        };
 
-    const createEvents = () => {
-        return props.value && props.value.map((item, index) => {
-            const opposite = ObjectUtils.getJSXElement(props.opposite, item, index);
-            const marker = ObjectUtils.getJSXElement(props.marker, item, index) || <div className="p-timeline-event-marker"></div>;
-            const connector = index !== (props.value.length - 1) && <div className="p-timeline-event-connector"></div>;
-            const content = ObjectUtils.getJSXElement(props.content, item, index);
-
+        const createEvents = () => {
             return (
-                <div key={getKey(item, index)} className="p-timeline-event">
-                    <div className="p-timeline-event-opposite">
-                        {opposite}
-                    </div>
-                    <div className="p-timeline-event-separator">
-                        {marker}
-                        {connector}
-                    </div>
-                    <div className="p-timeline-event-content">
-                        {content}
-                    </div>
-                </div>
-            )
-        });
-    }
+                props.value &&
+                props.value.map((item, index) => {
+                    const opposite = ObjectUtils.getJSXElement(props.opposite, item, index);
+                    const marker = ObjectUtils.getJSXElement(props.marker, item, index) || <div className='p-timeline-event-marker'></div>;
+                    const connector = index !== props.value.length - 1 && <div className='p-timeline-event-connector'></div>;
+                    const content = ObjectUtils.getJSXElement(props.content, item, index);
 
-    React.useImperativeHandle(ref, () => ({
-        props,
-        getElement: () => elementRef.current
-    }));
+                    return (
+                        <div key={getKey(item, index)} className='p-timeline-event'>
+                            <div className='p-timeline-event-opposite'>{opposite}</div>
+                            <div className='p-timeline-event-separator'>
+                                {marker}
+                                {connector}
+                            </div>
+                            <div className='p-timeline-event-content'>{content}</div>
+                        </div>
+                    );
+                })
+            );
+        };
 
-    const otherProps = ObjectUtils.findDiffKeys(props, Timeline.defaultProps);
-    const className = classNames('p-timeline p-component', {
-        [`p-timeline-${props.align}`]: true,
-        [`p-timeline-${props.layout}`]: true
-    }, props.className);
+        React.useImperativeHandle(ref, () => ({
+            props,
+            getElement: () => elementRef.current
+        }));
 
-    const events = createEvents();
+        const otherProps = ObjectUtils.findDiffKeys(props, Timeline.defaultProps);
+        const className = classNames(
+            'p-timeline p-component',
+            {
+                [`p-timeline-${props.align}`]: true,
+                [`p-timeline-${props.layout}`]: true
+            },
+            props.className
+        );
 
-    return (
-        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
-            {events}
-        </div>
-    )
-}));
+        const events = createEvents();
+
+        return (
+            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
+                {events}
+            </div>
+        );
+    })
+);
 
 Timeline.displayName = 'Timeline';
 Timeline.defaultProps = {
@@ -65,4 +70,4 @@ Timeline.defaultProps = {
     opposite: null,
     marker: null,
     content: null
-}
+};

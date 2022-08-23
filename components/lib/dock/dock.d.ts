@@ -22,6 +22,6 @@ export interface DockProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
     children?: React.ReactNode;
 }
 
-export declare class Dock extends React.Component<DockProps, any> { 
+export declare class Dock extends React.Component<DockProps, any> {
     public getElement(): HTMLDivElement;
 }

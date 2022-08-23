@@ -17,28 +17,31 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     const overlayEventListener = React.useRef(null);
 
     const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
-        target: currentTargetRef, overlay: overlayRef, listener: (event, { type, valid }) => {
+        target: currentTargetRef,
+        overlay: overlayRef,
+        listener: (event, { type, valid }) => {
             if (valid) {
-                (type === 'outside') ? props.dismissable && !isPanelClicked.current && hide() : hide();
+                type === 'outside' ? props.dismissable && !isPanelClicked.current && hide() : hide();
             }
 
             isPanelClicked.current = false;
-        }, when: visibleState
+        },
+        when: visibleState
     });
 
     const isOutsideClicked = (target) => {
         return overlayRef && overlayRef.current && !(overlayRef.current.isSameNode(target) || overlayRef.current.contains(target));
-    }
+    };
 
     const hasTargetChanged = (event, target) => {
         return currentTargetRef.current != null && currentTargetRef.current !== (target || event.currentTarget || event.target);
-    }
+    };
 
     const onCloseClick = (event) => {
         hide();
 
         event.preventDefault();
-    }
+    };
 
     const onPanelClick = (event) => {
         isPanelClicked.current = true;
@@ -47,11 +50,11 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
             originalEvent: event,
             target: currentTargetRef.current
         });
-    }
+    };
 
     const onContentClick = () => {
         isPanelClicked.current = true;
-    }
+    };
 
     const toggle = (event, target) => {
         if (visibleState) {
@@ -64,57 +67,55 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
                     show(event, currentTargetRef.current);
                 }, 200);
             }
-        }
-        else {
+        } else {
             show(event, target);
         }
-    }
+    };
 
     const show = (event, target) => {
         currentTargetRef.current = target || event.currentTarget || event.target;
 
         if (visibleState) {
             align();
-        }
-        else {
+        } else {
             setVisibleState(true);
 
             overlayEventListener.current = (e) => {
                 !isOutsideClicked(e.target) && (isPanelClicked.current = true);
-            }
+            };
 
             OverlayService.on('overlay-click', overlayEventListener.current);
         }
-    }
+    };
 
     const hide = () => {
         setVisibleState(false);
 
         OverlayService.off('overlay-click', overlayEventListener.current);
         overlayEventListener.current = null;
-    }
+    };
 
     const onEnter = () => {
         overlayRef.current.setAttribute(attributeSelector.current, '');
         ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
         align();
-    }
+    };
 
     const onEntered = () => {
         bindOverlayListener();
 
         props.onShow && props.onShow();
-    }
+    };
 
     const onExit = () => {
         unbindOverlayListener();
-    }
+    };
 
     const onExited = () => {
         ZIndexUtils.clear(overlayRef.current);
 
         props.onHide && props.onHide();
-    }
+    };
 
     const align = () => {
         if (currentTargetRef.current && overlayRef.current) {
@@ -133,7 +134,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
                 DomHandler.addClass(overlayRef.current, 'p-overlaypanel-flipped');
             }
         }
-    }
+    };
 
     const createStyle = () => {
         if (!styleElement.current) {
@@ -147,12 +148,12 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
                             width: ${props.breakpoints[breakpoint]} !important;
                         }
                     }
-                `
+                `;
             }
 
             styleElement.current.innerHTML = innerHTML;
         }
-    }
+    };
 
     useMountEffect(() => {
         attributeSelector.current = UniqueComponentId();
@@ -184,15 +185,15 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     const createCloseIcon = () => {
         if (props.showCloseIcon) {
             return (
-                <button type="button" className="p-overlaypanel-close p-link" onClick={onCloseClick} aria-label={props.ariaCloseLabel}>
-                    <span className="p-overlaypanel-close-icon pi pi-times"></span>
+                <button type='button' className='p-overlaypanel-close p-link' onClick={onCloseClick} aria-label={props.ariaCloseLabel}>
+                    <span className='p-overlaypanel-close-icon pi pi-times'></span>
                     <Ripple />
                 </button>
-            )
+            );
         }
 
         return null;
-    }
+    };
 
     const createElement = () => {
         const otherProps = ObjectUtils.findDiffKeys(props, OverlayPanel.defaultProps);
@@ -200,21 +201,31 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
         const closeIcon = createCloseIcon();
 
         return (
-            <CSSTransition nodeRef={overlayRef} classNames="p-overlaypanel" in={visibleState} timeout={{ enter: 120, exit: 100 }} options={props.transitionOptions}
-                unmountOnExit onEnter={onEnter} onEntered={onEntered} onExit={onExit} onExited={onExited}>
+            <CSSTransition
+                nodeRef={overlayRef}
+                classNames='p-overlaypanel'
+                in={visibleState}
+                timeout={{ enter: 120, exit: 100 }}
+                options={props.transitionOptions}
+                unmountOnExit
+                onEnter={onEnter}
+                onEntered={onEntered}
+                onExit={onExit}
+                onExited={onExited}
+            >
                 <div ref={overlayRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                    <div className="p-overlaypanel-content" onClick={onContentClick} onMouseDown={onContentClick}>
+                    <div className='p-overlaypanel-content' onClick={onContentClick} onMouseDown={onContentClick}>
                         {props.children}
                     </div>
                     {closeIcon}
                 </div>
             </CSSTransition>
-        )
-    }
+        );
+    };
 
     const element = createElement();
 
-    return <Portal element={element} appendTo={props.appendTo} />
+    return <Portal element={element} appendTo={props.appendTo} />;
 });
 
 OverlayPanel.displayName = 'OverlayPanel';
@@ -231,4 +242,4 @@ OverlayPanel.defaultProps = {
     transitionOptions: null,
     onShow: null,
     onHide: null
-}
+};

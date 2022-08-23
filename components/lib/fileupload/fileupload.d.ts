@@ -8,7 +8,7 @@ interface FileUploadOptionsType {
     icon?: IconType<FileUploadProps>;
     iconOnly?: boolean;
     className?: string;
-    style?: object
+    style?: object;
 }
 
 interface FileUploadHeaderTemplateOptions {
@@ -29,8 +29,8 @@ interface ItemTemplateOptions {
     sizeElement: JSX.Element;
     removeElement: JSX.Element;
     formatSize: string;
-    files: File[],
-    index: number,
+    files: File[];
+    index: number;
     element: JSX.Element;
     props: FileUploadProps;
 }
@@ -46,7 +46,7 @@ interface FileUploadBeforeUploadParams {
     formData: FormData;
 }
 
-interface FileUploadBeforeSendParams extends FileUploadBeforeUploadParams { }
+interface FileUploadBeforeSendParams extends FileUploadBeforeUploadParams {}
 
 interface FileUploadFilesParam {
     files: File[];
@@ -56,7 +56,7 @@ interface FileUploadUploadParams extends FileUploadFilesParam {
     xhr: XMLHttpRequest;
 }
 
-interface FileUploadErrorParams extends FileUploadUploadParams { }
+interface FileUploadErrorParams extends FileUploadUploadParams {}
 
 interface FileUploadSelectParams extends FileUploadFilesParam {
     originalEvent: React.SyntheticEvent;

@@ -20,11 +20,11 @@ export const TreeTableBody = React.memo((props) => {
         }
 
         return rows;
-    }
+    };
 
     const isExpandedKey = (key) => {
         return props.expandedKeys && !!props.expandedKeys[key];
-    }
+    };
 
     const onRowClick = (event, node) => {
         if (props.onRowClick) {
@@ -44,13 +44,13 @@ export const TreeTableBody = React.memo((props) => {
             const selected = isSelected(node);
             const metaSelection = props.metaKeySelection;
             const flatKeys = flattenizeTree();
-            const rowIndex = flatKeys.findIndex(key => key === node.key);
+            const rowIndex = flatKeys.findIndex((key) => key === node.key);
 
             if (isMultipleSelectionMode && event.shiftKey) {
                 DomHandler.clearSelection();
 
                 // find first selected row
-                const anchorRowIndex = flatKeys.findIndex(key => props.selectionKeys[key]);
+                const anchorRowIndex = flatKeys.findIndex((key) => props.selectionKeys[key]);
                 const rangeStart = Math.min(rowIndex, anchorRowIndex);
                 const rangeEnd = Math.max(rowIndex, anchorRowIndex);
 
@@ -60,18 +60,16 @@ export const TreeTableBody = React.memo((props) => {
                     const rowKey = flatKeys[i];
                     selectionKeys[rowKey] = true;
                 }
-            }
-            else {
+            } else {
                 //anchorRowIndex = rowIndex;
 
                 if (metaSelection) {
-                    let metaKey = (event.metaKey || event.ctrlKey);
+                    let metaKey = event.metaKey || event.ctrlKey;
 
                     if (selected && metaKey) {
                         if (isSingleSelectionMode) {
                             selectionKeys = null;
-                        }
-                        else {
+                        } else {
                             selectionKeys = { ...props.selectionKeys };
                             delete selectionKeys[node.key];
                         }
@@ -82,13 +80,11 @@ export const TreeTableBody = React.memo((props) => {
                                 node: node
                             });
                         }
-                    }
-                    else {
+                    } else {
                         if (isSingleSelectionMode) {
                             selectionKeys = node.key;
-                        }
-                        else if (isMultipleSelectionMode) {
-                            selectionKeys = !metaKey ? {} : (props.selectionKeys ? { ...props.selectionKeys } : {});
+                        } else if (isMultipleSelectionMode) {
+                            selectionKeys = !metaKey ? {} : props.selectionKeys ? { ...props.selectionKeys } : {};
                             selectionKeys[node.key] = true;
                         }
 
@@ -99,8 +95,7 @@ export const TreeTableBody = React.memo((props) => {
                             });
                         }
                     }
-                }
-                else {
+                } else {
                     if (isSingleSelectionMode) {
                         if (selected) {
                             selectionKeys = null;
@@ -111,8 +106,7 @@ export const TreeTableBody = React.memo((props) => {
                                     node: node
                                 });
                             }
-                        }
-                        else {
+                        } else {
                             selectionKeys = node.key;
 
                             if (props.onSelect) {
@@ -122,8 +116,7 @@ export const TreeTableBody = React.memo((props) => {
                                 });
                             }
                         }
-                    }
-                    else {
+                    } else {
                         if (selected) {
                             selectionKeys = { ...props.selectionKeys };
                             delete selectionKeys[node.key];
@@ -134,8 +127,7 @@ export const TreeTableBody = React.memo((props) => {
                                     node: node
                                 });
                             }
-                        }
-                        else {
+                        } else {
                             selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
                             selectionKeys[node.key] = true;
 
@@ -154,76 +146,85 @@ export const TreeTableBody = React.memo((props) => {
                 props.onSelectionChange({
                     originalEvent: event,
                     value: selectionKeys
-                })
+                });
             }
         }
-    }
+    };
 
     const isSelected = (node) => {
-        if ((isSingleSelectionMode || isMultipleSelectionMode) && props.selectionKeys)
-            return (isSingleSelectionMode) ? props.selectionKeys === node.key : props.selectionKeys[node.key] !== undefined;
-        else
-            return false;
-    }
+        if ((isSingleSelectionMode || isMultipleSelectionMode) && props.selectionKeys) return isSingleSelectionMode ? props.selectionKeys === node.key : props.selectionKeys[node.key] !== undefined;
+        else return false;
+    };
 
     const createRow = (node, index) => {
         return (
-            <TreeTableRow key={node.key || JSON.stringify(node.data)} level={0} rowIndex={index} selectOnEdit={props.selectOnEdit}
-                node={node} columns={props.columns} expandedKeys={props.expandedKeys}
-                onToggle={props.onToggle} onExpand={props.onExpand} onCollapse={props.onCollapse}
-                selectionMode={props.selectionMode} selectionKeys={props.selectionKeys} onSelectionChange={props.onSelectionChange}
-                metaKeySelection={props.metaKeySelection} onRowClick={onRowClick} onSelect={props.onSelect} onUnselect={props.onUnselect}
-                propagateSelectionUp={props.propagateSelectionUp} propagateSelectionDown={props.propagateSelectionDown}
+            <TreeTableRow
+                key={node.key || JSON.stringify(node.data)}
+                level={0}
+                rowIndex={index}
+                selectOnEdit={props.selectOnEdit}
+                node={node}
+                columns={props.columns}
+                expandedKeys={props.expandedKeys}
+                onToggle={props.onToggle}
+                onExpand={props.onExpand}
+                onCollapse={props.onCollapse}
+                selectionMode={props.selectionMode}
+                selectionKeys={props.selectionKeys}
+                onSelectionChange={props.onSelectionChange}
+                metaKeySelection={props.metaKeySelection}
+                onRowClick={onRowClick}
+                onSelect={props.onSelect}
+                onUnselect={props.onUnselect}
+                propagateSelectionUp={props.propagateSelectionUp}
+                propagateSelectionDown={props.propagateSelectionDown}
                 rowClassName={props.rowClassName}
-                contextMenuSelectionKey={props.contextMenuSelectionKey} onContextMenuSelectionChange={props.onContextMenuSelectionChange} onContextMenu={props.onContextMenu} />
-        )
-    }
+                contextMenuSelectionKey={props.contextMenuSelectionKey}
+                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                onContextMenu={props.onContextMenu}
+            />
+        );
+    };
 
     const createRows = () => {
         if (props.paginator && !props.lazy) {
             let rpp = props.rows || 0;
             let startIndex = props.first || 0;
-            let endIndex = (startIndex + rpp);
+            let endIndex = startIndex + rpp;
             let rows = [];
 
             for (let i = startIndex; i < endIndex; i++) {
                 let rowData = props.value[i];
-                if (rowData)
-                    rows.push(createRow(props.value[i]));
-                else
-                    break;
+                if (rowData) rows.push(createRow(props.value[i]));
+                else break;
             }
 
             return rows;
-        }
-        else {
+        } else {
             return props.value.map(createRow);
         }
-    }
+    };
 
     const createEmptyMessage = () => {
         if (props.loading) {
             return null;
-        }
-        else {
+        } else {
             const colSpan = props.columns ? props.columns.length : null;
             const content = props.emptyMessage || localeOption('emptyMessage');
 
             return (
                 <tr>
-                    <td className="p-treetable-emptymessage" colSpan={colSpan}>{content}</td>
+                    <td className='p-treetable-emptymessage' colSpan={colSpan}>
+                        {content}
+                    </td>
                 </tr>
-            )
+            );
         }
-    }
+    };
 
-    const content = (props.value && props.value.length) ? createRows() : createEmptyMessage();
+    const content = props.value && props.value.length ? createRows() : createEmptyMessage();
 
-    return (
-        <tbody className="p-treetable-tbody">
-            {content}
-        </tbody>
-    )
+    return <tbody className='p-treetable-tbody'>{content}</tbody>;
 });
 
 TreeTableBody.displayName = 'TreeTableBody';

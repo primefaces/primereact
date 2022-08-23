@@ -33,7 +33,7 @@ interface AutoCompleteSelectParams {
     value: any;
 }
 
-interface AutoCompleteUnselectParams extends AutoCompleteSelectParams { }
+interface AutoCompleteUnselectParams extends AutoCompleteSelectParams {}
 
 interface AutoCompleteDropdownClickParams {
     originalEvent: React.SyntheticEvent;
@@ -108,7 +108,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.In
 }
 
 export declare class AutoComplete extends React.Component<AutoCompleteProps, any> {
-    public search(event:React.SyntheticEvent, query:string, source: AutoCompleteSourceType): void;
+    public search(event: React.SyntheticEvent, query: string, source: AutoCompleteSourceType): void;
     public getElement(): HTMLSpanElement;
     public getInput(): HTMLInputElement;
     public getOverlay(): HTMLElement;

@@ -9,16 +9,13 @@ export const PanelMenuSub = React.memo((props) => {
     const findActiveItem = () => {
         if (props.model) {
             if (props.multiple) {
-                return props.model.filter(item => item.expanded);
-            }
-            else {
+                return props.model.filter((item) => item.expanded);
+            } else {
                 let activeItem = null;
-                props.model.forEach(item => {
+                props.model.forEach((item) => {
                     if (item.expanded) {
-                        if (!activeItem)
-                            activeItem = item;
-                        else
-                            item.expanded = false;
+                        if (!activeItem) activeItem = item;
+                        else item.expanded = false;
                     }
                 });
 
@@ -27,7 +24,7 @@ export const PanelMenuSub = React.memo((props) => {
         }
 
         return null;
-    }
+    };
 
     const onItemClick = (event, item) => {
         if (item.disabled) {
@@ -51,21 +48,20 @@ export const PanelMenuSub = React.memo((props) => {
 
         if (active) {
             item.expanded = false;
-            setActiveItemState(props.multiple ? activeItem.filter(a_item => a_item !== item) : null)
-        }
-        else {
+            setActiveItemState(props.multiple ? activeItem.filter((a_item) => a_item !== item) : null);
+        } else {
             if (!props.multiple && activeItem) {
                 activeItem.expanded = false;
             }
 
             item.expanded = true;
-            setActiveItemState(props.multiple ? [...(activeItem || []), item] : item)
+            setActiveItemState(props.multiple ? [...(activeItem || []), item] : item);
         }
-    }
+    };
 
     const isItemActive = (item) => {
         return activeItemState && (props.multiple ? activeItemState.indexOf(item) > -1 : activeItemState === item);
-    }
+    };
 
     useMountEffect(() => {
         setActiveItemState(findActiveItem());
@@ -74,8 +70,8 @@ export const PanelMenuSub = React.memo((props) => {
     const createSeparator = (index) => {
         const key = 'separator_' + index;
 
-        return <li key={key} className="p-menu-separator"></li>
-    }
+        return <li key={key} className='p-menu-separator'></li>;
+    };
 
     const createSubmenu = (item, active) => {
         const className = classNames('p-toggleable-content', {
@@ -85,7 +81,7 @@ export const PanelMenuSub = React.memo((props) => {
 
         if (item.items) {
             return (
-                <CSSTransition nodeRef={submenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
+                <CSSTransition nodeRef={submenuRef} classNames='p-toggleable-content' timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
                     <div ref={submenuRef} className={className}>
                         <PanelMenuSub menuProps={props.menuProps} model={item.items} multiple={props.multiple} />
                     </div>
@@ -94,7 +90,7 @@ export const PanelMenuSub = React.memo((props) => {
         }
 
         return null;
-    }
+    };
 
     const createMenuItem = (item, index) => {
         const key = item.label + '_' + index;
@@ -104,11 +100,11 @@ export const PanelMenuSub = React.memo((props) => {
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const submenuIconClassName = classNames('p-panelmenu-icon pi pi-fw', { 'pi-angle-right': !active, 'pi-angle-down': active });
         const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
-        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const label = item.label && <span className='p-menuitem-text'>{item.label}</span>;
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = createSubmenu(item, active);
         let content = (
-            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onItemClick(event, item, index)} role="menuitem" aria-disabled={item.disabled}>
+            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onItemClick(event, item, index)} role='menuitem' aria-disabled={item.disabled}>
                 {submenuIcon}
                 {icon}
                 {label}
@@ -132,29 +128,29 @@ export const PanelMenuSub = React.memo((props) => {
         }
 
         return (
-            <li key={key} id={item.id} className={className} style={item.style} role="none">
+            <li key={key} id={item.id} className={className} style={item.style} role='none'>
                 {content}
                 {submenu}
             </li>
-        )
-    }
+        );
+    };
 
     const createItem = (item, index) => {
         return item.separator ? createSeparator(index) : createMenuItem(item, index);
-    }
+    };
 
     const createMenu = () => {
         return props.model ? props.model.map(createItem) : null;
-    }
+    };
 
     const className = classNames('p-submenu-list', props.className);
     const menu = createMenu();
 
     return (
-        <ul className={className} role="tree">
+        <ul className={className} role='tree'>
             {menu}
         </ul>
-    )
+    );
 });
 
 PanelMenuSub.displayName = 'PanelMenuSub';
