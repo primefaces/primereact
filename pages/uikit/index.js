@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import Head from 'next/head';
 import getConfig from 'next/config';
+import Head from 'next/head';
+import React from 'react';
 
 const UIKitPage = (props) => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
