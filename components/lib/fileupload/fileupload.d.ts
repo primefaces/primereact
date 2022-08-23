@@ -134,4 +134,5 @@ export declare class FileUpload extends React.Component<FileUploadProps, any> {
     public onFileSelect(event: FileUploadSelectParams): void;
     public getElement(): HTMLElement;
     public getInput(): HTMLInputElement;
+    public getFiles(): File[];
 }
