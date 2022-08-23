@@ -1,5 +1,3 @@
-import { DomHandler } from '../utils/Utils';
-
 export const KeyFilter = {
     /* eslint-disable */
     DEFAULT_MASKS: {
@@ -15,48 +13,6 @@ export const KeyFilter = {
     },
     /* eslint-enable */
 
-    KEYS: {
-        TAB: 9,
-        RETURN: 13,
-        ESC: 27,
-        BACKSPACE: 8,
-        DELETE: 46
-    },
-
-    SAFARI_KEYS: {
-        63234: 37, // left
-        63235: 39, // right
-        63232: 38, // up
-        63233: 40, // down
-        63276: 33, // page up
-        63277: 34, // page down
-        63272: 46, // delete
-        63273: 36, // home
-        63275: 35 // end
-    },
-
-    isNavKeyPress(e) {
-        let k = e.keyCode;
-        k = DomHandler.getBrowser().safari ? KeyFilter.SAFARI_KEYS[k] || k : k;
-
-        return (k >= 33 && k <= 40) || k === KeyFilter.KEYS.RETURN || k === KeyFilter.KEYS.TAB || k === KeyFilter.KEYS.ESC;
-    },
-
-    isSpecialKey(e) {
-        let k = e.keyCode;
-
-        return k === 9 || k === 13 || k === 27 || k === 16 || k === 17 || (k >= 18 && k <= 20) || (DomHandler.getBrowser().opera && !e.shiftKey && (k === 8 || (k >= 33 && k <= 35) || (k >= 36 && k <= 39) || (k >= 44 && k <= 45)));
-    },
-
-    getKey(e) {
-        let k = e.keyCode || e.charCode;
-        return DomHandler.getBrowser().safari ? KeyFilter.SAFARI_KEYS[k] || k : k;
-    },
-
-    getCharCode(e) {
-        return e.charCode || e.keyCode || e.which;
-    },
-
     getRegex(keyfilter) {
         return KeyFilter.DEFAULT_MASKS[keyfilter] ? KeyFilter.DEFAULT_MASKS[keyfilter] : keyfilter;
     },
@@ -70,16 +26,8 @@ export const KeyFilter = {
             return;
         }
 
-        const browser = DomHandler.getBrowser();
-        const k = this.getKey(e);
-        if (browser.mozilla && (this.isNavKeyPress(e) || k === KeyFilter.KEYS.BACKSPACE || (k === KeyFilter.KEYS.DELETE && e.charCode === 0))) {
-            return;
-        }
-
-        const c = this.getCharCode(e);
-        const cc = String.fromCharCode(c);
-
-        if (browser.mozilla && (this.isSpecialKey(e) || !cc)) {
+        const isPrintableKey = e.key.length === 1;
+        if (!isPrintableKey) {
             return;
         }
 
