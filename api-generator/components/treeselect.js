@@ -84,6 +84,12 @@ const TreeSelectProps = [
         description: 'Defines the selection mode, valid values "single", "multiple", and "checkbox".'
     },
     {
+        name: 'expandedKeys',
+        type: 'array',
+        default: 'null',
+        description: 'An array of keys to represent the state of the tree expansion state in controlled mode.'
+    },
+    {
         name: 'panelClassName',
         type: 'string',
         default: 'null',
@@ -230,6 +236,22 @@ const TreeSelectEvents = [
                 name: 'event.value',
                 type: 'any',
                 description: 'Selected node key(s).'
+            }
+        ]
+    },
+    {
+        name: 'onToggle',
+        description: 'Callback to invoke when a node is toggled.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Browser event'
+            },
+            {
+                name: 'event.node',
+                type: 'any',
+                description: 'Toggled node instance.'
             }
         ]
     },

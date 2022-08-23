@@ -1,7 +1,6 @@
 import * as React from 'react';
-import TreeNode from '../treenode';
-import TreeEventNodeParams from '../tree';
 import { CSSTransitionProps } from '../csstransition';
+import TreeNode from '../treenode';
 
 type TreeSelectSelectionModeType = 'single' | 'multiple' | 'checkbox';
 
@@ -62,6 +61,15 @@ interface TreeSelectEventNodeParams {
     node: TreeNode;
 }
 
+interface TreeSelectExpandedKeysType {
+    [key: string]: boolean;
+}
+
+interface TreeSelectExpandedParams {
+    originalEvent: React.SyntheticEvent;
+    value: TreeSelectExpandedKeysType;
+}
+
 interface TreeSelectFilterValueChangeParams {
     originalEvent: React.FormEvent<HTMLInputElement>;
     value: string;
@@ -87,6 +95,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     panelClassName?: string;
     appendTo?: TreeSelectAppendToType;
     emptyMessage?: string;
+    expandedKeys?: TreeSelectExpandedKeysType;
     display?: TreeSelectDisplayType;
     metaKeySelection?: boolean;
     valueTemplate?: TreeSelectValueTemplateType;
@@ -106,6 +115,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
     onShow?(): void;
     onHide?(): void;
     onChange?(e: TreeSelectChangeParams): void;
+    onToggle?(e: TreeSelectExpandedParams): void;
     onNodeSelect?(e: TreeSelectEventNodeParams): void;
     onNodeUnselect?(e: TreeSelectEventNodeParams): void;
     onNodeExpand?(e: TreeSelectEventNodeParams): void;

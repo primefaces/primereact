@@ -11,7 +11,7 @@ export const TreeSelect = React.memo(
     React.forwardRef((props, ref) => {
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
-        const [expandedKeysState, setExpandedKeysState] = React.useState({});
+        const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
         const [filterValueState, setFilterValueState] = React.useState('');
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
@@ -19,6 +19,7 @@ export const TreeSelect = React.memo(
         const focusInputRef = React.useRef(null);
         const triggerRef = React.useRef(null);
         const selfChange = React.useRef(null);
+        const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
         const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
         const isValueEmpty = ObjectUtils.isEmpty(props.value);
         const hasNoOptions = ObjectUtils.isEmpty(props.options);
@@ -93,7 +94,11 @@ export const TreeSelect = React.memo(
         };
 
         const onNodeToggle = (e) => {
-            setExpandedKeysState(e.value);
+            if (props.onToggle) {
+                props.onToggle(e);
+            } else {
+                setExpandedKeysState(e.value);
+            }
         };
 
         const onFilterValueChange = (e) => {
@@ -402,7 +407,7 @@ export const TreeSelect = React.memo(
                         onSelectionChange={onSelectionChange}
                         onSelect={onNodeSelect}
                         onUnselect={onNodeUnselect}
-                        expandedKeys={expandedKeysState}
+                        expandedKeys={expandedKeys}
                         onToggle={onNodeToggle}
                         onExpand={props.onNodeExpand}
                         onCollapse={props.onNodeCollapse}
@@ -563,6 +568,7 @@ TreeSelect.defaultProps = {
     ariaLabel: null,
     ariaLabelledBy: null,
     selectionMode: 'single',
+    expandedKeys: null,
     panelStyle: null,
     panelClassName: null,
     appendTo: null,

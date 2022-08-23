@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const TreeSelectDoc = memo(() => {
     const sources = {
@@ -11,6 +11,7 @@ const TreeSelectDoc = memo(() => {
             content: `
 import React, { Component } from 'react';
 import { TreeSelect } from 'primereact/treeselect';
+import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
 import './TreeSelectDemo.css';
 
@@ -24,10 +25,38 @@ export class TreeSelectDemo extends Component {
             selectedNodeKey2: null,
             selectedNodeKey3: '0-1',
             selectedNodeKeys1: null,
-            selectedNodeKeys2: null
+            selectedNodeKeys2: null,
+            selectedNodeKeys3: null,
+            expandedKeys: {}
         };
 
         this.nodeService = new NodeService();
+        this.expandAll = this.expandAll.bind(this);
+        this.collapseAll = this.collapseAll.bind(this);
+        this.expandNode = this.expandNode.bind(this);
+    }
+
+    expandAll() {
+        let expandedKeys = {};
+        for (let node of this.state.nodes) {
+            this.expandNode(node, expandedKeys);
+        }
+
+        this.setState({ expandedKeys });
+    }
+
+    collapseAll() {
+        this.setState({ expandedKeys: {} });
+    }
+
+    expandNode(node, expandedKeys) {
+        if (node.children && node.children.length) {
+            expandedKeys[node.key] = true;
+
+            for (let child of node.children) {
+                this.expandNode(child, expandedKeys);
+            }
+        }
     }
 
     componentDidMount() {
@@ -37,21 +66,48 @@ export class TreeSelectDemo extends Component {
     render() {
         return (
             <div className="treeselect-demo">
-                <div className="card">
-                    <h5>Single</h5>
-                    <TreeSelect value={this.state.selectedNodeKey1} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey1: e.value })} placeholder="Select Item"></TreeSelect>
+               <div className="card">
+               <h5>Single</h5>
+               <TreeSelect value={this.state.selectedNodeKey1} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey1: e.value })} placeholder="Select Item"></TreeSelect>
 
-                    <h5>Multiple</h5>
-                    <TreeSelect value={this.state.selectedNodeKeys1} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKeys1: e.value })} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
+               <h5>Multiple</h5>
+               <TreeSelect value={this.state.selectedNodeKeys1} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKeys1: e.value })} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
 
-                    <h5>Checkbox</h5>
-                    <TreeSelect value={this.state.selectedNodeKeys2} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKeys2: e.value })} display="chip" selectionMode="checkbox" placeholder="Select Items"></TreeSelect>
+               <h5>Checkbox</h5>
+               <TreeSelect value={this.state.selectedNodeKeys2} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKeys2: e.value })} display="chip" selectionMode="checkbox" placeholder="Select Items"></TreeSelect>
 
-                    <h5>Filter</h5>
-                    <TreeSelect value={this.state.selectedNodeKey2} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey2: e.value })} filter placeholder="Select Items"></TreeSelect>
+               <h5>Filter</h5>
+               <TreeSelect value={this.state.selectedNodeKey2} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey2: e.value })} filter placeholder="Select Items"></TreeSelect>
 
-                    <h5>Initial Value</h5>
-                    <TreeSelect value={this.state.selectedNodeKey3} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey3: e.value })} placeholder="Select Item"></TreeSelect>
+               <h5>Initial Value</h5>
+               <TreeSelect value={this.state.selectedNodeKey3} options={this.state.nodes} onChange={(e) => this.setState({ selectedNodeKey3: e.value })} placeholder="Select Item"></TreeSelect>
+
+                    <h5>Programmatic Control</h5>
+                         <TreeSelect
+                            value={selectedNodeKeys}
+                            options={nodes}
+                            expandedKeys={expandedKeys}
+                            onToggle={(e) => setExpandedKeys(e.value)}
+                            onChange={(e) => setSelectedNodeKey3(e.value)}
+                            display="chip"
+                            selectionMode="checkbox"
+                            placeholder="Select Items"
+                        ></TreeSelect>
+                        <div className="mb-4 mt-2">
+                        <Button
+                            type="button"
+                            icon="pi pi-plus"
+                            label="Expand All"
+                            onClick={expandAll}
+                            className="mr-2"
+                        />
+                        <Button
+                            type="button"
+                            icon="pi pi-minus"
+                            label="Collapse All"
+                            onClick={collapseAll}
+                        />
+                    </div>
                 </div>
             </div>
         )
@@ -64,6 +120,7 @@ export class TreeSelectDemo extends Component {
             content: `
 import React, { useState, useEffect } from 'react';
 import { TreeSelect } from 'primereact/treeselect';
+import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
 import './TreeSelectDemo.css';
 
@@ -74,7 +131,32 @@ const TreeSelectDemo = () => {
     const [selectedNodeKey3, setSelectedNodeKey3] = useState('0-1');
     const [selectedNodeKeys1, setSelectedNodeKeys1] = useState(null);
     const [selectedNodeKeys2, setSelectedNodeKeys2] = useState(null);
+    const [selectedNodeKeys3, setSelectedNodeKeys3] = useState(null);
     const nodeService = new NodeService();
+    const [expandedKeys, setExpandedKeys] = useState({});
+
+    const expandAll = () => {
+        let _expandedKeys = {};
+        for (let node of nodes) {
+            expandNode(node, _expandedKeys);
+        }
+
+        setExpandedKeys(_expandedKeys);
+    };
+
+    const collapseAll = () => {
+        setExpandedKeys({});
+    };
+
+    const expandNode = (node, _expandedKeys) => {
+        if (node.children && node.children.length) {
+            _expandedKeys[node.key] = true;
+
+            for (let child of node.children) {
+                expandNode(child, _expandedKeys);
+            }
+        }
+    };
 
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
@@ -82,22 +164,49 @@ const TreeSelectDemo = () => {
 
     return (
         <div className="treeselect-demo">
-            <div className="card">
-                <h5>Single</h5>
-                <TreeSelect value={selectedNodeKey1} options={nodes} onChange={(e) => setSelectedNodeKey1(e.value)} placeholder="Select Item"></TreeSelect>
+        <div className="card">
+        <h5>Single</h5>
+        <TreeSelect value={selectedNodeKey1} options={nodes} onChange={(e) => setSelectedNodeKey1(e.value)} placeholder="Select Item"></TreeSelect>
 
-                <h5>Multiple</h5>
-                <TreeSelect value={selectedNodeKeys1} options={nodes} onChange={(e) => setSelectedNodeKeys1(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
+        <h5>Multiple</h5>
+        <TreeSelect value={selectedNodeKeys1} options={nodes} onChange={(e) => setSelectedNodeKeys1(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
 
-                <h5>Checkbox</h5>
-                <TreeSelect value={selectedNodeKeys2} options={nodes} onChange={(e) => setSelectedNodeKeys2(e.value)} display="chip" selectionMode="checkbox" placeholder="Select Items"></TreeSelect>
+        <h5>Checkbox</h5>
+        <TreeSelect value={selectedNodeKeys2} options={nodes} onChange={(e) => setSelectedNodeKeys2(e.value)} display="chip" selectionMode="checkbox" placeholder="Select Items"></TreeSelect>
 
-                <h5>Filter</h5>
-                <TreeSelect value={selectedNodeKey2} options={nodes} onChange={(e) => setSelectedNodeKey2(e.value)} filter placeholder="Select Items"></TreeSelect>
+        <h5>Filter</h5>
+        <TreeSelect value={selectedNodeKey2} options={nodes} onChange={(e) => setSelectedNodeKey2(e.value)} filter placeholder="Select Items"></TreeSelect>
 
-                <h5>Initial Value</h5>
-                <TreeSelect value={selectedNodeKey3} options={nodes} onChange={(e) => setSelectedNodeKey3(e.value)} placeholder="Select Item"></TreeSelect>
-            </div>
+        <h5>Initial Value</h5>
+        <TreeSelect value={selectedNodeKey3} options={nodes} onChange={(e) => setSelectedNodeKey3(e.value)} placeholder="Select Item"></TreeSelect>
+
+                    <h5>Programmatic Control</h5>
+                    <TreeSelect
+                        value={selectedNodeKeys3}
+                        options={nodes}
+                        expandedKeys={expandedKeys}
+                        onToggle={(e) => setExpandedKeys(e.value)}
+                        onChange={(e) => setSelectedNodeKeys3(e.value)}
+                        display="chip"
+                        selectionMode="checkbox"
+                        placeholder="Select Items"
+                          ></TreeSelect>
+                       <div className="mb-4 mt-2" >
+                        <Button
+                            type="button"
+                            icon="pi pi-plus"
+                            label="Expand All"
+                            onClick={expandAll}
+                            className="mr-2"
+                        />
+                        <Button
+                            type="button"
+                            icon="pi pi-minus"
+                            label="Collapse All"
+                            onClick={collapseAll}
+                        />
+                    </div>
+                </div>
         </div>
     );
 }
@@ -108,6 +217,7 @@ const TreeSelectDemo = () => {
             content: `
 import React, { useState, useEffect } from 'react';
 import { TreeSelect } from 'primereact/treeselect';
+import { Button } from 'primereact/button';
 import { NodeService } from '../service/NodeService';
 import './TreeSelectDemo.css';
 
@@ -118,30 +228,80 @@ const TreeSelectDemo = () => {
     const [selectedNodeKey3, setSelectedNodeKey3] = useState('0-1');
     const [selectedNodeKeys1, setSelectedNodeKeys1] = useState(null);
     const [selectedNodeKeys2, setSelectedNodeKeys2] = useState(null);
+    const [selectedNodeKeys3, setSelectedNodeKeys3] = useState(null);
     const nodeService = new NodeService();
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const expandAll = () => {
+        let _expandedKeys = {};
+        for (let node of nodes) {
+            expandNode(node, _expandedKeys);
+        }
 
+        setExpandedKeys(_expandedKeys);
+    };
+
+    const collapseAll = () => {
+        setExpandedKeys({});
+    };
+
+    const expandNode = (node, _expandedKeys) => {
+        if (node.children && node.children.length) {
+            _expandedKeys[node.key] = true;
+
+            for (let child of node.children) {
+                expandNode(child, _expandedKeys);
+            }
+        }
+    };
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="treeselect-demo">
-            <div className="card">
-                <h5>Single</h5>
-                <TreeSelect value={selectedNodeKey1} options={nodes} onChange={(e) => setSelectedNodeKey1(e.value)} placeholder="Select Item"></TreeSelect>
+        <div className="card">
+        <h5>Single</h5>
+        <TreeSelect value={selectedNodeKey1} options={nodes} onChange={(e) => setSelectedNodeKey1(e.value)} placeholder="Select Item"></TreeSelect>
 
-                <h5>Multiple</h5>
-                <TreeSelect value={selectedNodeKeys1} options={nodes} onChange={(e) => setSelectedNodeKeys1(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
+        <h5>Multiple</h5>
+        <TreeSelect value={selectedNodeKeys1} options={nodes} onChange={(e) => setSelectedNodeKeys1(e.value)} selectionMode="multiple" metaKeySelection={false} placeholder="Select Items"></TreeSelect>
 
-                <h5>Checkbox</h5>
-                <TreeSelect value={selectedNodeKeys2} options={nodes} onChange={(e) => setSelectedNodeKeys2(e.value)} display="chip" selectionMode="checkbox" placeholder="Select Items"></TreeSelect>
+        <h5>Checkbox</h5>
+        <TreeSelect value={selectedNodeKeys2} options={nodes} onChange={(e) => setSelectedNodeKeys2(e.value)} display="chip" selectionMode="checkbox" placeholder="Select Items"></TreeSelect>
 
-                <h5>Filter</h5>
-                <TreeSelect value={selectedNodeKey2} options={nodes} onChange={(e) => setSelectedNodeKey2(e.value)} filter placeholder="Select Items"></TreeSelect>
+        <h5>Filter</h5>
+        <TreeSelect value={selectedNodeKey2} options={nodes} onChange={(e) => setSelectedNodeKey2(e.value)} filter placeholder="Select Items"></TreeSelect>
 
-                <h5>Initial Value</h5>
-                <TreeSelect value={selectedNodeKey3} options={nodes} onChange={(e) => setSelectedNodeKey3(e.value)} placeholder="Select Item"></TreeSelect>
-            </div>
+        <h5>Initial Value</h5>
+        <TreeSelect value={selectedNodeKey3} options={nodes} onChange={(e) => setSelectedNodeKey3(e.value)} placeholder="Select Item"></TreeSelect>
+
+                    <h5>Programmatic Control</h5>
+                    <TreeSelect
+                        value={selectedNodeKeys3}
+                        options={nodes}
+                        expandedKeys={expandedKeys}
+                        onToggle={(e) => setExpandedKeys(e.value)}
+                        onChange={(e) => setSelectedNodeKeys3(e.value)}
+                        display="chip"
+                        selectionMode="checkbox"
+                        placeholder="Select Items"
+                    ></TreeSelect>
+                    <div className="mb-4 mt-2" >
+                        <Button
+                            type="button"
+                            icon="pi pi-plus"
+                            label="Expand All"
+                            onClick={expandAll}
+                            className="mr-2"
+                        />
+                        <Button
+                            type="button"
+                            icon="pi pi-minus"
+                            label="Collapse All"
+                            onClick={collapseAll}
+                        />
+                    </div>
+                </div>
         </div>
     );
 }
@@ -150,14 +310,15 @@ const TreeSelectDemo = () => {
         browser: {
             tabName: 'Browser Source',
             imports: `
-        <link rel="stylesheet" href="./TreeSelectDemo.css" />
-        <script src="./NodeService.js"></script>
+            <link rel="stylesheet" href="./TreeSelectDemo.css" />
+            <script src="./NodeService.js"></script>
 
-        <script src="https://unpkg.com/primereact/core/core.min.js"></script>
-        <script src="https://unpkg.com/primereact/treeselect/treeselect.min.js"></script>`,
+            <script src="https://unpkg.com/primereact/core/core.min.js"></script>
+            <script src="https://unpkg.com/primereact/treeselect/treeselect.min.js"></script>`,
             content: `
 const { useEffect, useState } = React;
 const { TreeSelect } = primereact.treeselect;
+const { Button } = primereact.button;
 
 const TreeSelectDemo = () => {
     const [nodes, setNodes] = useState(null);
@@ -167,15 +328,37 @@ const TreeSelectDemo = () => {
     const [selectedNodeKeys1, setSelectedNodeKeys1] = useState(null);
     const [selectedNodeKeys2, setSelectedNodeKeys2] = useState(null);
     const nodeService = new NodeService();
+    const [expandedKeys, setExpandedKeys] = useState({});
+    const expandAll = () => {
+        let _expandedKeys = {};
+        for (let node of nodes) {
+            expandNode(node, _expandedKeys);
+        }
 
+        setExpandedKeys(_expandedKeys);
+    };
+
+    const collapseAll = () => {
+        setExpandedKeys({});
+    };
+
+    const expandNode = (node, _expandedKeys) => {
+        if (node.children && node.children.length) {
+            _expandedKeys[node.key] = true;
+
+            for (let child of node.children) {
+                expandNode(child, _expandedKeys);
+            }
+        }
+    };
     useEffect(() => {
         nodeService.getTreeNodes().then(data => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="treeselect-demo">
-            <div className="card">
-                <h5>Single</h5>
+        <div className="card">
+        <h5>Single</h5>
                 <TreeSelect value={selectedNodeKey1} options={nodes} onChange={(e) => setSelectedNodeKey1(e.value)} placeholder="Select Item"></TreeSelect>
 
                 <h5>Multiple</h5>
@@ -189,7 +372,34 @@ const TreeSelectDemo = () => {
 
                 <h5>Initial Value</h5>
                 <TreeSelect value={selectedNodeKey3} options={nodes} onChange={(e) => setSelectedNodeKey3(e.value)} placeholder="Select Item"></TreeSelect>
-            </div>
+
+        <h5>Programmatic Control</h5>
+        <TreeSelect
+            value={selectedNodeKeys3}
+            options={nodes}
+            expandedKeys={expandedKeys}
+            onToggle={(e) => setExpandedKeys(e.value)}
+            onChange={(e) => setSelectedNodeKeys3(e.value)}
+            display="chip"
+            selectionMode="checkbox"
+            placeholder="Select Items"
+        ></TreeSelect>
+             <div className="mb-4 mt-2" >
+            <Button
+                type="button"
+                icon="pi pi-plus"
+                label="Expand All"
+                onClick={expandAll}
+                className="mr-2"
+            />
+            <Button
+                type="button"
+                icon="pi pi-minus"
+                label="Collapse All"
+                onClick={collapseAll}
+            />
+             </div>
+         </div>
         </div>
     );
 }
@@ -403,6 +613,55 @@ export class NodeService {
                         </table>
                     </div>
 
+                    <h5>Controlled vs Uncontrolled</h5>
+                    <p>
+                        Tree expansion state is managed in two ways, in uncontrolled mode only initial expanded state of a node can be defined using <i>expandedKeys</i> property whereas in controlled mode <i>expandedKeys</i>
+                        property along with <i>onToggle</i> properties are used for full control over the state. If you need to expand or collapse the state of nodes programmatically then controlled mode should be used. Example below demonstrates
+                        both cases;
+                    </p>
+
+                    <CodeHighlight lang="js">
+                        {`
+import React, { Component } from 'react';
+import { TreeSelect } from 'primereact/treeselect';
+import { Button } from 'primereact/button';
+import { NodeService } from '../service/NodeService';
+
+export const TreeSelectDemo = () => {
+
+    const [nodes, setNodes] = useState(null);
+    const [expandedKeys, setExpandedKeys] = useState({});
+
+    useEffect(() => {
+        nodeService = new NodeService();
+        nodeService.getTreeNodes().then(data => setNodes(data));
+    }, [])
+
+    const toggleMovies = () => {
+        let expandedKeys = {...expandedKeys};
+        if (expandedKeys['2'])
+            delete expandedKeys['2'];
+        else
+            expandedKeys['2'] = true;
+
+        setExpandedKeys(expandedKeys);
+    }
+
+    return (
+        <div>
+            <h3 className="first">Uncontrolled</h5>
+            <TreeSelect value={nodes} />
+
+            <h5>Controlled</h5>
+            <Button onClick={toggleMovies} label="Toggle Movies" />
+            <TreeSelect value={nodes} expandedKeys={expandedKeys}
+                onToggle={e => setExpandedKeys(e.value)} style={{marginTop: '.5em'}} />
+        </div>
+    )
+}
+`}
+                    </CodeHighlight>
+
                     <h5>Selection</h5>
                     <p>
                         TreeSelect supports "single", "multiple" and "checkbox" selection modes. Define <i>selectionMode</i>, <i>value</i> and <i>onChange</i> properties to control the selection. In single mode, selectionKeys should be a single value
@@ -452,12 +711,12 @@ export const TreeSelectionDemo = () => {
                     <CodeHighlight lang="js">
                         {`
 data() {
-    return {
-        selectedNodeKey1: '2-1',
-        selectedNodeKey2: {'1-1': true, '0-0-0': true},
-        selectedNodeKey3: {'1': {checked: true, partialChecked: true}, '1-0': {checked: true}}
-        nodes: null
-    }
+return {
+selectedNodeKey1: '2-1',
+selectedNodeKey2: {'1-1': true, '0-0-0': true},
+selectedNodeKey3: {'1': {checked: true, partialChecked: true}, '1-0': {checked: true}}
+nodes: null
+}
 },
 `}
                     </CodeHighlight>
@@ -478,6 +737,7 @@ data() {
                         <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element. In addition <i>header</i>, <i>footer</i> and <i>emptyMessage</i> templates are provided for further
                         customization.
                     </p>
+
                     <CodeHighlight>
                         {`
 const [filterValue, setFilterValue] = useState('');
@@ -800,6 +1060,14 @@ const myFilterFunction = (event, options) => {
                                         event.value: Selected node key(s).
                                     </td>
                                     <td>Callback to invoke when selection changes.</td>
+                                </tr>
+                                <tr>
+                                    <td>onToggle</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Toggled node instance.
+                                    </td>
+                                    <td>Callback to invoke when a node is toggled.</td>
                                 </tr>
                                 <tr>
                                     <td>onNodeSelect</td>
