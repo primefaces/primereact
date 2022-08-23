@@ -129,51 +129,51 @@ export const Editor = React.memo(
                 return null;
             } else if (props.headerTemplate) {
                 return (
-                    <div ref={toolbarRef} className='p-editor-toolbar'>
+                    <div ref={toolbarRef} className="p-editor-toolbar">
                         {props.headerTemplate}
                     </div>
                 );
             } else {
                 return (
-                    <div ref={toolbarRef} className='p-editor-toolbar'>
-                        <span className='ql-formats'>
-                            <select className='ql-header' defaultValue='0'>
-                                <option value='1'>Heading</option>
-                                <option value='2'>Subheading</option>
-                                <option value='0'>Normal</option>
+                    <div ref={toolbarRef} className="p-editor-toolbar">
+                        <span className="ql-formats">
+                            <select className="ql-header" defaultValue="0">
+                                <option value="1">Heading</option>
+                                <option value="2">Subheading</option>
+                                <option value="0">Normal</option>
                             </select>
-                            <select className='ql-font'>
+                            <select className="ql-font">
                                 <option></option>
-                                <option value='serif'></option>
-                                <option value='monospace'></option>
+                                <option value="serif"></option>
+                                <option value="monospace"></option>
                             </select>
                         </span>
-                        <span className='ql-formats'>
-                            <button type='button' className='ql-bold' aria-label='Bold'></button>
-                            <button type='button' className='ql-italic' aria-label='Italic'></button>
-                            <button type='button' className='ql-underline' aria-label='Underline'></button>
+                        <span className="ql-formats">
+                            <button type="button" className="ql-bold" aria-label="Bold"></button>
+                            <button type="button" className="ql-italic" aria-label="Italic"></button>
+                            <button type="button" className="ql-underline" aria-label="Underline"></button>
                         </span>
-                        <span className='ql-formats'>
-                            <select className='ql-color'></select>
-                            <select className='ql-background'></select>
+                        <span className="ql-formats">
+                            <select className="ql-color"></select>
+                            <select className="ql-background"></select>
                         </span>
-                        <span className='ql-formats'>
-                            <button type='button' className='ql-list' value='ordered' aria-label='Ordered List'></button>
-                            <button type='button' className='ql-list' value='bullet' aria-label='Unordered List'></button>
-                            <select className='ql-align'>
+                        <span className="ql-formats">
+                            <button type="button" className="ql-list" value="ordered" aria-label="Ordered List"></button>
+                            <button type="button" className="ql-list" value="bullet" aria-label="Unordered List"></button>
+                            <select className="ql-align">
                                 <option defaultValue></option>
-                                <option value='center'></option>
-                                <option value='right'></option>
-                                <option value='justify'></option>
+                                <option value="center"></option>
+                                <option value="right"></option>
+                                <option value="justify"></option>
                             </select>
                         </span>
-                        <span className='ql-formats'>
-                            <button type='button' className='ql-link' aria-label='Insert Link'></button>
-                            <button type='button' className='ql-image' aria-label='Insert Image'></button>
-                            <button type='button' className='ql-code-block' aria-label='Insert Code Block'></button>
+                        <span className="ql-formats">
+                            <button type="button" className="ql-link" aria-label="Insert Link"></button>
+                            <button type="button" className="ql-image" aria-label="Insert Image"></button>
+                            <button type="button" className="ql-code-block" aria-label="Insert Code Block"></button>
                         </span>
-                        <span className='ql-formats'>
-                            <button type='button' className='ql-clean' aria-label='Remove Styles'></button>
+                        <span className="ql-formats">
+                            <button type="button" className="ql-clean" aria-label="Remove Styles"></button>
                         </span>
                     </div>
                 );
@@ -183,7 +183,7 @@ export const Editor = React.memo(
         const otherProps = ObjectUtils.findDiffKeys(props, Editor.defaultProps);
         const className = classNames('p-component p-editor-container', props.className);
         const header = createToolbarHeader();
-        const content = <div ref={contentRef} className='p-editor-content' style={props.style}></div>;
+        const content = <div ref={contentRef} className="p-editor-content" style={props.style}></div>;
 
         return (
             <div id={props.id} ref={elementRef} className={className} {...otherProps}>

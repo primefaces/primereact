@@ -52,9 +52,9 @@ export const Fieldset = React.forwardRef((props, ref) => {
 
     const createContent = () => {
         return (
-            <CSSTransition nodeRef={contentRef} classNames='p-toggleable-content' timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={props.transitionOptions}>
-                <div ref={contentRef} id={contentId} className='p-toggleable-content' aria-hidden={collapsed} role='region' aria-labelledby={headerId}>
-                    <div className='p-fieldset-content'>{props.children}</div>
+            <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={props.transitionOptions}>
+                <div ref={contentRef} id={contentId} className="p-toggleable-content" aria-hidden={collapsed} role="region" aria-labelledby={headerId}>
+                    <div className="p-fieldset-content">{props.children}</div>
                 </div>
             </CSSTransition>
         );
@@ -80,14 +80,14 @@ export const Fieldset = React.forwardRef((props, ref) => {
             return (
                 <a href={'#' + contentId} aria-controls={contentId} id={headerId} aria-expanded={!collapsed} tabIndex={props.toggleable ? null : -1}>
                     {toggleIcon}
-                    <span className='p-fieldset-legend-text'>{props.legend}</span>
+                    <span className="p-fieldset-legend-text">{props.legend}</span>
                     <Ripple />
                 </a>
             );
         }
 
         return (
-            <span className='p-fieldset-legend-text' id={headerId}>
+            <span className="p-fieldset-legend-text" id={headerId}>
                 {props.legend}
             </span>
         );
@@ -98,7 +98,7 @@ export const Fieldset = React.forwardRef((props, ref) => {
             const legendContent = createLegendContent();
 
             return (
-                <legend className='p-fieldset-legend p-unselectable-text' onClick={toggle}>
+                <legend className="p-fieldset-legend p-unselectable-text" onClick={toggle}>
                     {legendContent}
                 </legend>
             );

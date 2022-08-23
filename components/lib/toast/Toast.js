@@ -84,7 +84,7 @@ export const Toast = React.memo(
                             const messageRef = React.createRef();
 
                             return (
-                                <CSSTransition nodeRef={messageRef} key={message.id} classNames='p-toast-message' unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
+                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
                                     <ToastMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} />
                                 </CSSTransition>
                             );

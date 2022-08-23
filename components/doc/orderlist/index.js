@@ -264,11 +264,11 @@ const OrderListDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { OrderList } from 'primereact/orderlist';
 `}
@@ -321,7 +321,7 @@ import { OrderList } from 'primereact/orderlist';
                         instance as a parameter and returns the content for the filter element.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const [filterValue, setFilterValue] = useState('');
 const filterInputRef = useRef();
@@ -362,8 +362,8 @@ const myFilterFunction = (event, options) => {
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -480,8 +480,8 @@ const myFilterFunction = (event, options) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -511,8 +511,8 @@ const myFilterFunction = (event, options) => {
                     </div>
 
                     <h5>Methods</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -532,10 +532,10 @@ const myFilterFunction = (event, options) => {
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -580,7 +580,7 @@ const myFilterFunction = (event, options) => {
                         </p>
                         <p>
                             Controls buttons are <i>button</i> elements with an <i>aria-label</i> that refers to the <i>aria.moveTop</i>, <i>aria.moveUp</i>, <i>aria.moveDown</i> and <i>aria.moveBottom</i> properties of the{' '}
-                            <Link href='/locale'>locale</Link> API by default, alternatively you may use
+                            <Link href="/locale">locale</Link> API by default, alternatively you may use
                             <i>moveTopButtonProps</i>, <i>moveUpButtonProps</i>, <i>moveDownButtonProps</i> and <i>moveBottomButtonProps</i> to customize the buttons like overriding the default <i>aria-label</i> attributes.
                         </p>
                         <CodeHighlight>
@@ -592,8 +592,8 @@ const myFilterFunction = (event, options) => {
 `}
                         </CodeHighlight>
                         <h6>ListBox Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -684,8 +684,8 @@ const myFilterFunction = (event, options) => {
                         </div>
 
                         <h6>Buttons Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

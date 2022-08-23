@@ -54,7 +54,7 @@ export const DropdownPanel = React.memo(
         const createEmptyMessage = (emptyMessage, isFilter) => {
             const message = ObjectUtils.getJSXElement(emptyMessage, props) || localeOption(isFilter ? 'emptyFilterMessage' : 'emptyMessage');
 
-            return <li className='p-dropdown-empty-message'>{message}</li>;
+            return <li className="p-dropdown-empty-message">{message}</li>;
         };
 
         const createItem = (option, index, scrollerOptions = {}) => {
@@ -66,7 +66,7 @@ export const DropdownPanel = React.memo(
 
                 return (
                     <React.Fragment key={key}>
-                        <li className='p-dropdown-item-group' style={style}>
+                        <li className="p-dropdown-item-group" style={style}>
                             {groupContent}
                         </li>
                         {groupChildrenContent}
@@ -93,7 +93,7 @@ export const DropdownPanel = React.memo(
 
         const createFilterClearIcon = () => {
             if (props.showFilterClear && props.filterValue) {
-                return <i className='p-dropdown-filter-clear-icon pi pi-times' onClick={() => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))}></i>;
+                return <i className="p-dropdown-filter-clear-icon pi pi-times" onClick={() => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))}></i>;
             }
 
             return null;
@@ -107,16 +107,16 @@ export const DropdownPanel = React.memo(
                     <div className={containerClassName}>
                         <input
                             ref={filterInputRef}
-                            type='text'
-                            autoComplete='off'
-                            className='p-dropdown-filter p-inputtext p-component'
+                            type="text"
+                            autoComplete="off"
+                            className="p-dropdown-filter p-inputtext p-component"
                             placeholder={props.filterPlaceholder}
                             onKeyDown={props.onFilterInputKeyDown}
                             onChange={onFilterInputChange}
                             value={props.filterValue}
                         />
                         {clearIcon}
-                        <i className='p-dropdown-filter-icon pi pi-search'></i>
+                        <i className="p-dropdown-filter-icon pi pi-search"></i>
                     </div>
                 );
 
@@ -135,7 +135,7 @@ export const DropdownPanel = React.memo(
                     content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
                 }
 
-                return <div className='p-dropdown-header'>{content}</div>;
+                return <div className="p-dropdown-header">{content}</div>;
             }
 
             return null;
@@ -157,7 +157,7 @@ export const DropdownPanel = React.memo(
                             const content = isEmptyFilter ? createEmptyMessage() : options.children;
 
                             return (
-                                <ul ref={options.contentRef} className={className} role='listbox'>
+                                <ul ref={options.contentRef} className={className} role="listbox">
                                     {content}
                                 </ul>
                             );
@@ -170,8 +170,8 @@ export const DropdownPanel = React.memo(
                 const items = createItems();
 
                 return (
-                    <div className='p-dropdown-items-wrapper' style={{ maxHeight: props.scrollHeight || 'auto' }}>
-                        <ul className='p-dropdown-items' role='listbox'>
+                    <div className="p-dropdown-items-wrapper" style={{ maxHeight: props.scrollHeight || 'auto' }}>
+                        <ul className="p-dropdown-items" role="listbox">
                             {items}
                         </ul>
                     </div>
@@ -187,7 +187,7 @@ export const DropdownPanel = React.memo(
             return (
                 <CSSTransition
                     nodeRef={ref}
-                    classNames='p-connected-overlay'
+                    classNames="p-connected-overlay"
                     in={props.in}
                     timeout={{ enter: 120, exit: 100 }}
                     options={props.transitionOptions}

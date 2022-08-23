@@ -441,11 +441,11 @@ const AvatarDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Avatar } from 'primereact/avatar';
 import { AvatarGroup } from 'primereact/avatargroup';
@@ -504,7 +504,7 @@ import { AvatarGroup } from 'primereact/avatargroup';
                     </CodeHighlight>
                     <h5>Badge</h5>
                     <p>
-                        A badge can be added to an Avatar with the <Link href='/badge'>Badge</Link> component.
+                        A badge can be added to an Avatar with the <Link href="/badge">Badge</Link> component.
                     </p>
                     <CodeHighlight>
                         {`
@@ -525,8 +525,8 @@ import { AvatarGroup } from 'primereact/avatargroup';
 
                     <h5>Properties of Avatar</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -586,8 +586,8 @@ import { AvatarGroup } from 'primereact/avatargroup';
                     <p>Any property as style and class are passed to the main container element. There are no additional properties.</p>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -612,10 +612,10 @@ import { AvatarGroup } from 'primereact/avatargroup';
 
                     <h5>Styling of Avatar</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -656,8 +656,8 @@ import { AvatarGroup } from 'primereact/avatargroup';
                     </div>
 
                     <h5>Styling of AvatarGroup</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>

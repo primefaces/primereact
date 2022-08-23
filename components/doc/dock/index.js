@@ -1494,11 +1494,11 @@ const DockDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Dock } from 'primereact/dock';
 `}
@@ -1517,7 +1517,7 @@ import { Dock } from 'primereact/dock';
                         Dock is a navigation component consisting of menuitems. It has a collection of additional options defined by the <i>model</i> property.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DockDemo = () => {
 
@@ -1552,13 +1552,13 @@ export const DockDemo = () => {
 
                     <h5>MenuModel API</h5>
                     <p>
-                        Dock uses the common MenuModel API to define the items, visit <Link href='/menumodel'>MenuModel API</Link> for details.
+                        Dock uses the common MenuModel API to define the items, visit <Link href="/menumodel">MenuModel API</Link> for details.
                     </p>
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1622,10 +1622,10 @@ export const DockDemo = () => {
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'>theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1658,8 +1658,8 @@ export const DockDemo = () => {
                         </p>
 
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

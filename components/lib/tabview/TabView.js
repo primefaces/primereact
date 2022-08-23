@@ -157,13 +157,13 @@ export const TabView = React.forwardRef((props, ref) => {
         const ariaControls = idState + '_content_' + index;
         const tabIndex = disabled ? null : 0;
         const leftIconElement = leftIcon && <i className={leftIcon}></i>;
-        const titleElement = <span className='p-tabview-title'>{header}</span>;
+        const titleElement = <span className="p-tabview-title">{header}</span>;
         const rightIconElement = rightIcon && <i className={rightIcon}></i>;
-        const closableIconElement = closable && <i className='p-tabview-close pi pi-times' onClick={(e) => onTabHeaderClose(e, index)}></i>;
+        const closableIconElement = closable && <i className="p-tabview-close pi pi-times" onClick={(e) => onTabHeaderClose(e, index)}></i>;
 
         let content = (
             // eslint-disable /
-            <a role='tab' className='p-tabview-nav-link' onClick={(e) => onTabHeaderClick(e, tab, index)} id={headerId} onKeyDown={(e) => onKeyDown(e, tab, index)} aria-controls={ariaControls} aria-selected={selected} tabIndex={tabIndex}>
+            <a role="tab" className="p-tabview-nav-link" onClick={(e) => onTabHeaderClick(e, tab, index)} id={headerId} onKeyDown={(e) => onKeyDown(e, tab, index)} aria-controls={ariaControls} aria-selected={selected} tabIndex={tabIndex}>
                 {leftIconElement}
                 {titleElement}
                 {rightIconElement}
@@ -193,7 +193,7 @@ export const TabView = React.forwardRef((props, ref) => {
         }
 
         return (
-            <li ref={(el) => (tabsRef.current[`tab_${index}`] = el)} className={className} style={style} role='presentation'>
+            <li ref={(el) => (tabsRef.current[`tab_${index}`] = el)} className={className} style={style} role="presentation">
                 {content}
             </li>
         );
@@ -211,10 +211,10 @@ export const TabView = React.forwardRef((props, ref) => {
         const headers = createTabHeaders();
 
         return (
-            <div ref={contentRef} id={idState} className='p-tabview-nav-content' style={props.style} onScroll={onScroll}>
-                <ul ref={navRef} className='p-tabview-nav' role='tablist'>
+            <div ref={contentRef} id={idState} className="p-tabview-nav-content" style={props.style} onScroll={onScroll}>
+                <ul ref={navRef} className="p-tabview-nav" role="tablist">
                     {headers}
-                    <li ref={inkbarRef} className='p-tabview-ink-bar'></li>
+                    <li ref={inkbarRef} className="p-tabview-ink-bar"></li>
                 </ul>
             </div>
         );
@@ -232,7 +232,7 @@ export const TabView = React.forwardRef((props, ref) => {
                 const otherProps = ObjectUtils.findDiffKeys(tab.props, TabPanel.defaultProps);
 
                 return (
-                    <div {...otherProps} id={contentId} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={style} role='tabpanel'>
+                    <div {...otherProps} id={contentId} aria-labelledby={ariaLabelledBy} aria-hidden={!selected} className={className} style={style} role="tabpanel">
                         {!props.renderActiveOnly ? tab.props.children : selected && tab.props.children}
                     </div>
                 );
@@ -249,8 +249,8 @@ export const TabView = React.forwardRef((props, ref) => {
     const createPrevButton = () => {
         if (props.scrollable && !backwardIsDisabledState) {
             return (
-                <button ref={prevBtnRef} className='p-tabview-nav-prev p-tabview-nav-btn p-link' onClick={navBackward} type='button'>
-                    <span className='pi pi-chevron-left'></span>
+                <button ref={prevBtnRef} className="p-tabview-nav-prev p-tabview-nav-btn p-link" onClick={navBackward} type="button">
+                    <span className="pi pi-chevron-left"></span>
                     <Ripple />
                 </button>
             );
@@ -262,8 +262,8 @@ export const TabView = React.forwardRef((props, ref) => {
     const createNextButton = () => {
         if (props.scrollable && !forwardIsDisabledState) {
             return (
-                <button ref={nextBtnRef} className='p-tabview-nav-next p-tabview-nav-btn p-link' onClick={navForward} type='button'>
-                    <span className='pi pi-chevron-right'></span>
+                <button ref={nextBtnRef} className="p-tabview-nav-next p-tabview-nav-btn p-link" onClick={navForward} type="button">
+                    <span className="pi pi-chevron-right"></span>
                     <Ripple />
                 </button>
             );
@@ -285,7 +285,7 @@ export const TabView = React.forwardRef((props, ref) => {
 
     return (
         <div ref={elementRef} className={className} {...otherProps}>
-            <div className='p-tabview-nav-container'>
+            <div className="p-tabview-nav-container">
                 {prevButton}
                 {navigator}
                 {nextButton}

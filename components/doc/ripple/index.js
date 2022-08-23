@@ -202,11 +202,11 @@ const RippleDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
@@ -223,21 +223,21 @@ import { Ripple } from 'primereact/ripple';
                     <p>
                         Ripple effect is an optional animation for the supported components such as buttons. It is disabled by default and needs to be enabled at your app's main container (e.g. App.js) using the <i>PrimeReact</i> class.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 PrimeReact.ripple = true;
 `}
                     </CodeHighlight>
 
                     <p>
-                        <span className='font-bold'>Note</span>: That would be it to enable ripple on PrimeReact components, next section describes how to use it with your own components and standard elements.
+                        <span className="font-bold">Note</span>: That would be it to enable ripple on PrimeReact components, next section describes how to use it with your own components and standard elements.
                     </p>
 
                     <h5>Usage</h5>
                     <p>
                         Ripple is a component that needs to be imported and activated using <i>PrimeReact.ripple = true</i>
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Ripple } from 'primereact/ripple';
 
@@ -259,7 +259,7 @@ import { Ripple } from 'primereact/ripple';
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='css'>
+                    <CodeHighlight lang="css">
                         {`
 .p-ripple.purple .p-ink {
     background: rgba(256,39,176,.3);
@@ -268,8 +268,8 @@ import { Ripple } from 'primereact/ripple';
                     </CodeHighlight>
 
                     <h5>Styling</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>

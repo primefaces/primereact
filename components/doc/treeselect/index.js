@@ -213,11 +213,11 @@ const TreeSelectDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { TreeSelect } from 'primereact/treeselect';
 `}
@@ -243,7 +243,7 @@ import { TreeSelect } from 'primereact/treeselect';
                     </CodeHighlight>
 
                     <p>In example below, nodes are retrieved from a remote data source.</p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const TreeSelectDemo = () => {
     const [nodes, setNodes] = useState(null);
@@ -261,7 +261,7 @@ export const TreeSelectDemo = () => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export class NodeService {
 
@@ -274,7 +274,7 @@ export class NodeService {
                     </CodeHighlight>
 
                     <p>The json response sample would be as following.</p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 {
     "root": [
@@ -334,8 +334,8 @@ export class NodeService {
                     </CodeHighlight>
 
                     <h5>TreeNode API utilized by the TreeSelect</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -409,7 +409,7 @@ export class NodeService {
                         whereas in multiple or checkbox modes an object is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i> property. Note
                         that in touch enabled devices, Tree does not require metaKey.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, {Component} from 'react';
 import {TreeSelect} from 'primereact/treeselect';
@@ -449,7 +449,7 @@ export const TreeSelectionDemo = () => {
                         a boolean, value should be an object that has "checked" and "partialChecked" properties to represent the checked state of a node. Best way to clarify it is prepopulating a TreeSelect with an existing value.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 data() {
     return {
@@ -530,7 +530,7 @@ const myFilterFunction = (event, options) => {
                         hand, in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 <TreeSelect options={nodes} filter />
 
@@ -542,8 +542,8 @@ const myFilterFunction = (event, options) => {
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -708,7 +708,7 @@ const myFilterFunction = (event, options) => {
                                     <td>null</td>
                                     <td>
                                         The properties of{' '}
-                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
                                             CSSTransition
                                         </a>{' '}
                                         can be customized, except for "nodeRef" and "in" properties.
@@ -773,8 +773,8 @@ const myFilterFunction = (event, options) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -846,8 +846,8 @@ const myFilterFunction = (event, options) => {
                     </div>
 
                     <h5>Methods</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -867,8 +867,8 @@ const myFilterFunction = (event, options) => {
 
                     <h5>Styling</h5>
                     <p>Following is the list of structural style classes</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -929,8 +929,8 @@ const myFilterFunction = (event, options) => {
 `}
                             </CodeHighlight>
                             <h6>Closed State Keyboard Support</h6>
-                            <div className='doc-tablewrapper'>
-                                <table className='doc-table'>
+                            <div className="doc-tablewrapper">
+                                <table className="doc-table">
                                     <thead>
                                         <tr>
                                             <th>Key</th>
@@ -961,8 +961,8 @@ const myFilterFunction = (event, options) => {
                             </div>
 
                             <h6>Popup Keyboard Support</h6>
-                            <div className='doc-tablewrapper'>
-                                <table className='doc-table'>
+                            <div className="doc-tablewrapper">
+                                <table className="doc-table">
                                     <thead>
                                         <tr>
                                             <th>Key</th>
@@ -1029,8 +1029,8 @@ const myFilterFunction = (event, options) => {
                             </div>
 
                             <h6>Filter Input Keyboard Support</h6>
-                            <div className='doc-tablewrapper'>
-                                <table className='doc-table'>
+                            <div className="doc-tablewrapper">
+                                <table className="doc-table">
                                     <thead>
                                         <tr>
                                             <th>Key</th>
@@ -1055,8 +1055,8 @@ const myFilterFunction = (event, options) => {
                             </div>
 
                             <h6>Close Button Keyboard Support</h6>
-                            <div className='doc-tablewrapper'>
-                                <table className='doc-table'>
+                            <div className="doc-tablewrapper">
+                                <table className="doc-table">
                                     <thead>
                                         <tr>
                                             <th>Key</th>

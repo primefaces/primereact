@@ -198,11 +198,11 @@ const ScrollTopDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { ScrollTop } from 'primereact/scrolltop';
 `}
@@ -247,8 +247,8 @@ import { ScrollTop } from 'primereact/scrolltop';
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -288,7 +288,7 @@ import { ScrollTop } from 'primereact/scrolltop';
                                     <td>null</td>
                                     <td>
                                         The properties of{' '}
-                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
                                             CSSTransition
                                         </a>{' '}
                                         can be customized, except for "nodeRef" and "in" properties.
@@ -299,8 +299,8 @@ import { ScrollTop } from 'primereact/scrolltop';
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -325,10 +325,10 @@ import { ScrollTop } from 'primereact/scrolltop';
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'>theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -352,13 +352,13 @@ import { ScrollTop } from 'primereact/scrolltop';
                     <DevelopmentSection>
                         <h6>Screen Reader</h6>
                         <p>
-                            ScrollTop uses a button element with an <i>aria-label</i> that refers to the <i>aria.scrollTop</i> property of the <Link href='/locale'>locale</Link> API by default, you may use your own aria roles and attributes as any
+                            ScrollTop uses a button element with an <i>aria-label</i> that refers to the <i>aria.scrollTop</i> property of the <Link href="/locale">locale</Link> API by default, you may use your own aria roles and attributes as any
                             valid attribute is passed to the button element implicitly.
                         </p>
 
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

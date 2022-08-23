@@ -167,11 +167,11 @@ const EditorDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Editor } from 'primereact/editor';
 `}
@@ -198,7 +198,7 @@ import { Editor } from 'primereact/editor';
 
                     <h5>Toolbar</h5>
                     <p>
-                        Editor provides a default toolbar with common options, to customize it define your elements with the <i>headerTemplate</i>. Refer to <a href='http://quilljs.com/docs/modules/toolbar/'>Quill documentation</a> for available
+                        Editor provides a default toolbar with common options, to customize it define your elements with the <i>headerTemplate</i>. Refer to <a href="http://quilljs.com/docs/modules/toolbar/">Quill documentation</a> for available
                         controls.
                     </p>
 
@@ -218,8 +218,8 @@ const header = (
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -270,7 +270,7 @@ const header = (
                                     <td>object</td>
                                     <td>null</td>
                                     <td>
-                                        Modules configuration, see <a href='http://quilljs.com/docs/modules/'>here</a> for available options.
+                                        Modules configuration, see <a href="http://quilljs.com/docs/modules/">here</a> for available options.
                                     </td>
                                 </tr>
                                 <tr>
@@ -278,7 +278,7 @@ const header = (
                                     <td>string[]</td>
                                     <td>null</td>
                                     <td>
-                                        Whitelist of formats to display, see <a href='http://quilljs.com/docs/formats/'>here</a> for available options.
+                                        Whitelist of formats to display, see <a href="http://quilljs.com/docs/formats/">here</a> for available options.
                                     </td>
                                 </tr>
                                 <tr>
@@ -292,8 +292,8 @@ const header = (
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -337,15 +337,15 @@ const header = (
                     </div>
 
                     <p>
-                        Refer to <a href='http://beta.quilljs.com/docs/api/#events'>Quill documentation</a> for more information.
+                        Refer to <a href="http://beta.quilljs.com/docs/api/#events">Quill documentation</a> for more information.
                     </p>
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -373,15 +373,15 @@ const header = (
                     <DevelopmentSection>
                         <p>
                             Quill performs generally well in terms of accessibility. The elements in the toolbar can be tabbed and have the necessary ARIA roles/attributes for screen readers. One known limitation is the lack of arrow key support for{' '}
-                            <a href='https://github.com/quilljs/quill/issues/1031'>dropdowns</a> in the toolbar that may be overcome with a custom toolbar.
+                            <a href="https://github.com/quilljs/quill/issues/1031">dropdowns</a> in the toolbar that may be overcome with a custom toolbar.
                         </p>
                     </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>
-                        <a href='http://quilljs.com'>Quill</a> Editor 1.3+.
+                        <a href="http://quilljs.com">Quill</a> Editor 1.3+.
                     </p>
                     <p>Resources of quill needs to be added to your application.</p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 npm install quill
 `}

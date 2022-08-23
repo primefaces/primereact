@@ -238,11 +238,11 @@ const DeferredContentDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { DeferredContent } from 'primereact/deferredcontent';
 `}
@@ -289,11 +289,11 @@ import { DeferredContent } from 'primereact/deferredcontent';
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>Component has no attributes.</div>
+                    <div className="doc-tablewrapper">Component has no attributes.</div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -320,7 +320,7 @@ import { DeferredContent } from 'primereact/deferredcontent';
                         <p>
                             DeferredContent can be utilized in many use cases as a result no role is enforced, in fact a role may not be necessary if the card is used for presentational purposes only. Any valid attribute is passed to the container
                             element so you have full control over the roles like{' '}
-                            <a href='https://www.w3.org/TR/wai-aria/#landmark' alt='Landmark Roles'>
+                            <a href="https://www.w3.org/TR/wai-aria/#landmark" alt="Landmark Roles">
                                 landmark
                             </a>{' '}
                             and attributes like <i>aria-live</i>.

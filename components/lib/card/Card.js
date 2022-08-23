@@ -6,20 +6,20 @@ export const Card = React.forwardRef((props, ref) => {
 
     const createHeader = () => {
         if (props.header) {
-            return <div className='p-card-header'>{ObjectUtils.getJSXElement(props.header, props)}</div>;
+            return <div className="p-card-header">{ObjectUtils.getJSXElement(props.header, props)}</div>;
         }
 
         return null;
     };
 
     const createBody = () => {
-        const title = props.title && <div className='p-card-title'>{ObjectUtils.getJSXElement(props.title, props)}</div>;
-        const subTitle = props.subTitle && <div className='p-card-subtitle'>{ObjectUtils.getJSXElement(props.subTitle, props)}</div>;
-        const children = props.children && <div className='p-card-content'>{props.children}</div>;
-        const footer = props.footer && <div className='p-card-footer'>{ObjectUtils.getJSXElement(props.footer, props)}</div>;
+        const title = props.title && <div className="p-card-title">{ObjectUtils.getJSXElement(props.title, props)}</div>;
+        const subTitle = props.subTitle && <div className="p-card-subtitle">{ObjectUtils.getJSXElement(props.subTitle, props)}</div>;
+        const children = props.children && <div className="p-card-content">{props.children}</div>;
+        const footer = props.footer && <div className="p-card-footer">{ObjectUtils.getJSXElement(props.footer, props)}</div>;
 
         return (
-            <div className='p-card-body'>
+            <div className="p-card-body">
                 {title}
                 {subTitle}
                 {children}

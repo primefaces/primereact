@@ -530,11 +530,11 @@ const AccordionDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Accordion, AccordionTab } from 'primereact/accordion';
 `}
@@ -615,8 +615,8 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                     </CodeHighlight>
 
                     <h5>Properties For AccordionTab</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -685,8 +685,8 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                     </div>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -744,7 +744,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                                     <td>null</td>
                                     <td>
                                         The properties of{' '}
-                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
                                             CSSTransition
                                         </a>{' '}
                                         can be customized, except for "nodeRef" and "in" properties.
@@ -755,8 +755,8 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -795,10 +795,10 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -834,8 +834,8 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
                         </p>
 
                         <h6>Header Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

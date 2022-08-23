@@ -806,11 +806,11 @@ const VirtualScrollerDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { VirtualScroller } from 'primereact/virtualscroller';
 `}
@@ -838,7 +838,7 @@ import { VirtualScroller } from 'primereact/virtualscroller';
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const items = Array.from({ length: 100000 }).map((_, i) => \`Item #\${i}\`);
 
@@ -869,7 +869,7 @@ const itemTemplate = (item, options) => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const loadingTemplate = (options) => {
     // options.index: Index of the item.
@@ -902,7 +902,7 @@ const loadingTemplate = (options) => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const onLazyLoad = (event) => {
     setLazyLoading(true);
@@ -938,7 +938,7 @@ const onLazyLoad = (event) => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const contentTemplate = (options) => {
     // options.className: Class name of wrapper element.
@@ -971,8 +971,8 @@ const itemTemplate = (item, options) => {
 `}
                     </CodeHighlight>
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1123,8 +1123,8 @@ const itemTemplate = (item, options) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1161,8 +1161,8 @@ const itemTemplate = (item, options) => {
                     </div>
 
                     <h5>Methods</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1213,10 +1213,10 @@ const itemTemplate = (item, options) => {
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'>theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>

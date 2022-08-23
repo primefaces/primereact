@@ -33,7 +33,7 @@ export const SlideMenuSub = React.memo((props) => {
     const createSeparator = (index) => {
         const key = 'separator_' + index;
 
-        return <li key={key} className='p-menu-separator'></li>;
+        return <li key={key} className="p-menu-separator"></li>;
     };
 
     const createSubmenu = (item, index) => {
@@ -56,11 +56,11 @@ export const SlideMenuSub = React.memo((props) => {
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const submenuIconClassName = 'p-submenu-icon pi pi-fw pi-angle-right';
         const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
-        const label = item.label && <span className='p-menuitem-text'>{item.label}</span>;
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = createSubmenu(item, index);
         let content = (
-            <a href={item.url || '#'} className='p-menuitem-link' target={item.target} onClick={(event) => onItemClick(event, item, index)} aria-disabled={item.disabled}>
+            <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => onItemClick(event, item, index)} aria-disabled={item.disabled}>
                 {icon}
                 {label}
                 {submenuIcon}

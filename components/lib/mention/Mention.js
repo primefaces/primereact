@@ -346,7 +346,7 @@ export const Mention = React.memo(
             const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, { trigger: triggerState ? triggerState.key : '', index }) : formatValue(suggestion);
 
             return (
-                <li key={key} className='p-mention-item' onClick={(e) => onItemClick(e, suggestion)}>
+                <li key={key} className="p-mention-item" onClick={(e) => onItemClick(e, suggestion)}>
                     {content}
                     <Ripple />
                 </li>
@@ -358,7 +358,7 @@ export const Mention = React.memo(
                 const items = props.suggestions.map(createItem);
 
                 return (
-                    <ul ref={listRef} className='p-mention-items'>
+                    <ul ref={listRef} className="p-mention-items">
                         {items}
                     </ul>
                 );
@@ -377,7 +377,7 @@ export const Mention = React.memo(
             const panel = (
                 <CSSTransition
                     nodeRef={overlayRef}
-                    classNames='p-connected-overlay'
+                    classNames="p-connected-overlay"
                     in={overlayVisibleState}
                     timeout={{ enter: 120, exit: 100 }}
                     options={props.transitionOptions}
@@ -396,7 +396,7 @@ export const Mention = React.memo(
                 </CSSTransition>
             );
 
-            return <Portal element={panel} appendTo='self' />;
+            return <Portal element={panel} appendTo="self" />;
         };
 
         const className = classNames(

@@ -629,11 +629,11 @@ const OrganizationChartDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { OrganizationChart } from 'primereact/organizationchart';
 `}
@@ -649,7 +649,7 @@ import { OrganizationChart } from 'primereact/organizationchart';
 
                     <h5>Getting Started</h5>
                     <p>OrganizationChart requires a model of TreeNode as its value.</p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const OrganizationChartDemo = () => {
 
@@ -700,7 +700,7 @@ export const OrganizationChartDemo = () => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 
 const nodeTemplate = (node) => {
@@ -738,8 +738,8 @@ const nodeTemplate = (node) => {
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -796,8 +796,8 @@ const nodeTemplate = (node) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -836,8 +836,8 @@ const nodeTemplate = (node) => {
 
                     <h5>Styling</h5>
                     <p>Following is the list of structural style classes.</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -886,8 +886,8 @@ const nodeTemplate = (node) => {
                         </p>
 
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

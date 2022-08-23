@@ -7,7 +7,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const ConfirmPopupDemo = () => {
-
     const [visible, setVisible] = useState(false);
     const toast = useRef(null);
     const button = useRef(null);
@@ -66,15 +65,14 @@ const ConfirmPopupDemo = () => {
                     <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
 
                     <h5>Using ConfirmPopup tag</h5>
-                    <ConfirmPopup target={button.current} visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
-                        icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
+                    <ConfirmPopup target={button.current} visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
                     <Button ref={button} onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
                 </div>
             </div>
 
             <ConfirmPopupDoc />
         </div>
-    )
-}
+    );
+};
 
 export default ConfirmPopupDemo;

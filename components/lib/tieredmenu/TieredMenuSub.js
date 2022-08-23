@@ -152,7 +152,7 @@ export const TieredMenuSub = React.memo((props) => {
     const createSeparator = (index) => {
         const key = 'separator_' + index;
 
-        return <li key={key} className='p-menu-separator' role='separator'></li>;
+        return <li key={key} className="p-menu-separator" role="separator"></li>;
     };
 
     const createSubmenu = (item) => {
@@ -172,11 +172,11 @@ export const TieredMenuSub = React.memo((props) => {
         const iconClassName = classNames('p-menuitem-icon', _icon);
         const submenuIconClassName = 'p-submenu-icon pi pi-angle-right';
         const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
-        const label = _label && <span className='p-menuitem-text'>{_label}</span>;
+        const label = _label && <span className="p-menuitem-text">{_label}</span>;
         const submenuIcon = items && <span className={submenuIconClassName}></span>;
         const submenu = createSubmenu(item);
         let content = (
-            <a href={url || '#'} className={linkClassName} target={target} role='menuitem' aria-haspopup={items != null} onClick={(event) => onItemClick(event, item)} onKeyDown={(event) => onItemKeyDown(event, item)} aria-disabled={disabled}>
+            <a href={url || '#'} className={linkClassName} target={target} role="menuitem" aria-haspopup={items != null} onClick={(event) => onItemClick(event, item)} onKeyDown={(event) => onItemKeyDown(event, item)} aria-disabled={disabled}>
                 {icon}
                 {label}
                 {submenuIcon}
@@ -201,7 +201,7 @@ export const TieredMenuSub = React.memo((props) => {
         }
 
         return (
-            <li key={key} id={item} className={className} style={style} onMouseEnter={(event) => onItemMouseEnter(event, item)} role='none'>
+            <li key={key} id={item} className={className} style={style} onMouseEnter={(event) => onItemMouseEnter(event, item)} role="none">
                 {content}
                 {submenu}
             </li>
@@ -222,7 +222,7 @@ export const TieredMenuSub = React.memo((props) => {
     const submenu = createMenu();
 
     return (
-        <ul ref={elementRef} className={className} role={props.root ? 'menubar' : 'menu'} aria-orientation='horizontal'>
+        <ul ref={elementRef} className={className} role={props.root ? 'menubar' : 'menu'} aria-orientation="horizontal">
             {submenu}
         </ul>
     );

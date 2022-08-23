@@ -4,9 +4,9 @@ import { DevelopmentSection } from '../common/developmentsection';
 
 const ChartDoc = () => {
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <h5>Import via Module</h5>
-            <CodeHighlight lang='js'>
+            <CodeHighlight lang="js">
                 {`
 import { Chart } from 'primereact/chart';
 `}
@@ -22,11 +22,11 @@ import { Chart } from 'primereact/chart';
 
             <h5>Getting Started</h5>
             <p>
-                Chart component is a wrapper around on <a href='https://www.chartjs.org/docs/3.3.2/'>Chart.js 3.3.2+</a> so chart.js needs to be included in your project. For a complete documentation and samples please refer to the{' '}
-                <a href='https://www.chartjs.org/'>chart.js website</a>.
+                Chart component is a wrapper around on <a href="https://www.chartjs.org/docs/3.3.2/">Chart.js 3.3.2+</a> so chart.js needs to be included in your project. For a complete documentation and samples please refer to the{' '}
+                <a href="https://www.chartjs.org/">chart.js website</a>.
             </p>
 
-            <CodeHighlight lang='js'>
+            <CodeHighlight lang="js">
                 {`
 npm install chart.js
 `}
@@ -48,7 +48,7 @@ npm install chart.js
 `}
             </CodeHighlight>
 
-            <CodeHighlight lang='js'>
+            <CodeHighlight lang="js">
                 {`
 const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -82,7 +82,7 @@ const data = {
 `}
             </CodeHighlight>
 
-            <CodeHighlight lang='js'>
+            <CodeHighlight lang="js">
                 {`
 const options = {
     plugins: {
@@ -102,8 +102,8 @@ const options = {
             </CodeHighlight>
 
             <h5>Properties</h5>
-            <div className='doc-tablewrapper'>
-                <table className='doc-table'>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -172,8 +172,8 @@ const options = {
             </div>
 
             <h5>Methods</h5>
-            <div className='doc-tablewrapper'>
-                <table className='doc-table'>
+            <div className="doc-tablewrapper">
+                <table className="doc-table">
                     <thead>
                         <tr>
                             <th>Name</th>

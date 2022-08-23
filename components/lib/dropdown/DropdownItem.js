@@ -24,7 +24,7 @@ export const DropdownItem = React.memo((props) => {
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
 
     return (
-        <li className={className} style={props.style} onClick={onClick} aria-label={props.label} key={props.label} role='option' aria-selected={props.selected}>
+        <li className={className} style={props.style} onClick={onClick} aria-label={props.label} key={props.label} role="option" aria-selected={props.selected}>
             {content}
             <Ripple />
         </li>

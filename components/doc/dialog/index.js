@@ -636,11 +636,11 @@ const DialogDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Dialog } from 'primereact/dialog';
 `}
@@ -715,8 +715,8 @@ const myIcon = (
                     </p>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -932,7 +932,7 @@ const myIcon = (
                                     <td>null</td>
                                     <td>
                                         The properties of{' '}
-                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
                                             CSSTransition
                                         </a>{' '}
                                         can be customized, except for "nodeRef" and "in" properties.
@@ -943,8 +943,8 @@ const myIcon = (
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1017,10 +1017,10 @@ const myIcon = (
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1070,7 +1070,7 @@ const myIcon = (
                             Trigger element also requires <i>aria-expanded</i> and <i>aria-controls</i> to be handled explicitly.
                         </p>
                         <p>
-                            Close element is a <i>button</i> with an <i>aria-label</i> that refers to the <i>aria.close</i> property of the <Link href='/locale'>locale</Link> API by default, you may use
+                            Close element is a <i>button</i> with an <i>aria-label</i> that refers to the <i>aria.close</i> property of the <Link href="/locale">locale</Link> API by default, you may use
                             <i>closeButtonProps</i> to customize the element and override the default <i>aria-label</i>.
                         </p>
 
@@ -1085,8 +1085,8 @@ const myIcon = (
                         </CodeHighlight>
 
                         <h6>Overlay Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1119,8 +1119,8 @@ const myIcon = (
                         </div>
 
                         <h6>Close Button Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

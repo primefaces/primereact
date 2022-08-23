@@ -93,11 +93,11 @@ export const useLiveEditorTabs = (props) => {
         return (
             <TabPanel key={key} header={value.tabName}>
                 {/* eslint-disable */}
-                <a style={{ color: 'var(--primary-color)', cursor: 'pointer' }} className='inline-block mb-1' onClick={() => liveEditor.postSandboxParameters(key)}>
+                <a style={{ color: 'var(--primary-color)', cursor: 'pointer' }} className="inline-block mb-1" onClick={() => liveEditor.postSandboxParameters(key)}>
                     <span>Edit in CodeSandbox</span>
                 </a>
                 {/* eslint-enable */}
-                <CodeHighlight lang='js'>{content}</CodeHighlight>
+                <CodeHighlight lang="js">{content}</CodeHighlight>
 
                 {extFiles}
             </TabPanel>
@@ -109,8 +109,8 @@ export const useLiveEditorTabs = (props) => {
         serviceArr.forEach((s, i) => {
             tabs.push(
                 <TabPanel key={`${s}_${i}`} header={`${s}.js`}>
-                    <CodeHighlight lang='js'>{services[s]}</CodeHighlight>
-                    <span className='liveEditorHelperText'>* This code is different for the 'Browser Source'.</span>
+                    <CodeHighlight lang="js">{services[s]}</CodeHighlight>
+                    <span className="liveEditorHelperText">* This code is different for the 'Browser Source'.</span>
                 </TabPanel>
             );
         });
@@ -121,7 +121,7 @@ export const useLiveEditorTabs = (props) => {
         dataArr.forEach((d, i) => {
             tabs.push(
                 <TabPanel key={`${d}_${i}`} header={`${d}.json`}>
-                    <CodeHighlight lang='js' style={{ maxHeight: '500px' }}>
+                    <CodeHighlight lang="js" style={{ maxHeight: '500px' }}>
                         {data[d]}
                     </CodeHighlight>
                 </TabPanel>

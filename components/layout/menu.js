@@ -48,13 +48,13 @@ export default function Menu(props) {
 
         if (href)
             return (
-                <a href={href} role='menuitem' target='_blank' rel='noopener noreferrer' onClick={props.onMenuItemClick}>
+                <a href={href} role="menuitem" target="_blank" rel="noopener noreferrer" onClick={props.onMenuItemClick}>
                     {content}
                 </a>
             );
         else if (!to)
             return (
-                <button type='button' className='p-link' {...linkProps}>
+                <button type="button" className="p-link" {...linkProps}>
                     {content}
                 </button>
             );
@@ -72,13 +72,13 @@ export default function Menu(props) {
         const cSubmenuRef = React.createRef();
 
         return (
-            <CSSTransition nodeRef={cSubmenuRef} classNames='p-toggleable-content' timeout={{ enter: 1000, exit: 450 }} in={isSubmenuActive(item.name) || item.expanded} unmountOnExit>
-                <div ref={cSubmenuRef} className='p-toggleable-content'>
-                    <ul role='menu'>
+            <CSSTransition nodeRef={cSubmenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={isSubmenuActive(item.name) || item.expanded} unmountOnExit>
+                <div ref={cSubmenuRef} className="p-toggleable-content">
+                    <ul role="menu">
                         {item.children.map((item, index) => {
                             const link = renderLink(item);
                             return (
-                                <li role='menuitem' key={`menuitem_${submenuKey}_${index}`}>
+                                <li role="menuitem" key={`menuitem_${submenuKey}_${index}`}>
                                     {link}
                                 </li>
                             );
@@ -120,15 +120,15 @@ export default function Menu(props) {
 
                     return (
                         <React.Fragment key={`category_${index}`}>
-                            <div className='menu-category'>
+                            <div className="menu-category">
                                 {menuitem.name}
                                 {badge}
                             </div>
-                            {menuitem.children && <div className='menu-items'>{categoryItem}</div>}
+                            {menuitem.children && <div className="menu-items">{categoryItem}</div>}
                             {menuitem.banner && (
-                                <div className='menu-image menu-banner'>
+                                <div className="menu-image menu-banner">
                                     <a href={menuitem.href}>
-                                        <img src={contextPath + (props.darkTheme ? menuitem.imageDark : menuitem.imageLight)} alt='banner' />
+                                        <img src={contextPath + (props.darkTheme ? menuitem.imageDark : menuitem.imageLight)} alt="banner" />
                                     </a>
                                 </div>
                             )}
@@ -226,20 +226,20 @@ export default function Menu(props) {
     const searchInput = useRef();
 
     return (
-        <div className={sidebarClassName} role='navigation'>
-            <Link href='/'>
-                <a className='logo' aria-label='PrimeReact logo'>
-                    <img alt='logo' src={`${contextPath}/images/primereact-logo${props.darkTheme ? '-light' : '-dark'}.svg`} />
+        <div className={sidebarClassName} role="navigation">
+            <Link href="/">
+                <a className="logo" aria-label="PrimeReact logo">
+                    <img alt="logo" src={`${contextPath}/images/primereact-logo${props.darkTheme ? '-light' : '-dark'}.svg`} />
                 </a>
             </Link>
-            <div className='layout-sidebar-filter'>
+            <div className="layout-sidebar-filter">
                 <div className={filterContentClassName}>
-                    <i className='pi pi-search' />
-                    <InputText ref={searchInput} type='text' onChange={onSearchInputChange} placeholder='Search' aria-label='Search input' autoComplete='off' />
-                    {showClearIcon && <i className='clear-icon pi pi-times' onClick={resetFilter} />}
+                    <i className="pi pi-search" />
+                    <InputText ref={searchInput} type="text" onChange={onSearchInputChange} placeholder="Search" aria-label="Search input" autoComplete="off" />
+                    {showClearIcon && <i className="clear-icon pi pi-times" onClick={resetFilter} />}
                 </div>
             </div>
-            <div className='layout-menu' role='menubar'>
+            <div className="layout-menu" role="menubar">
                 {menuItems}
             </div>
         </div>

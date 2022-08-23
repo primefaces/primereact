@@ -125,10 +125,10 @@ export const PickListControls = React.memo((props) => {
 
     return (
         <div className={className}>
-            <Button disabled={moveDisabled} type='button' icon='pi pi-angle-up' onClick={moveUp}></Button>
-            <Button disabled={moveDisabled} type='button' icon='pi pi-angle-double-up' onClick={moveTop}></Button>
-            <Button disabled={moveDisabled} type='button' icon='pi pi-angle-down' onClick={moveDown}></Button>
-            <Button disabled={moveDisabled} type='button' icon='pi pi-angle-double-down' onClick={moveBottom}></Button>
+            <Button disabled={moveDisabled} type="button" icon="pi pi-angle-up" onClick={moveUp}></Button>
+            <Button disabled={moveDisabled} type="button" icon="pi pi-angle-double-up" onClick={moveTop}></Button>
+            <Button disabled={moveDisabled} type="button" icon="pi pi-angle-down" onClick={moveDown}></Button>
+            <Button disabled={moveDisabled} type="button" icon="pi pi-angle-double-down" onClick={moveBottom}></Button>
         </div>
     );
 });

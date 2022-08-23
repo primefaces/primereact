@@ -451,9 +451,9 @@ export const Tooltip = React.memo(
             const empty = isTargetContentEmpty(currentTargetRef.current);
 
             return (
-                <div id={props.id} ref={elementRef} className={tooltipClassName} style={props.style} role='tooltip' aria-hidden={visibleState} {...otherProps} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-                    <div className='p-tooltip-arrow'></div>
-                    <div ref={textRef} className='p-tooltip-text'>
+                <div id={props.id} ref={elementRef} className={tooltipClassName} style={props.style} role="tooltip" aria-hidden={visibleState} {...otherProps} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+                    <div className="p-tooltip-arrow"></div>
+                    <div ref={textRef} className="p-tooltip-text">
                         {empty && props.children}
                     </div>
                 </div>

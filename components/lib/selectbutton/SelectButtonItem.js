@@ -31,7 +31,7 @@ export const SelectButtonItem = React.memo((props) => {
     };
 
     const createContent = () => {
-        return props.template ? ObjectUtils.getJSXElement(props.template, props.option) : <span className='p-button-label p-c'>{props.label}</span>;
+        return props.template ? ObjectUtils.getJSXElement(props.template, props.option) : <span className="p-button-label p-c">{props.label}</span>;
     };
 
     const className = classNames(
@@ -46,7 +46,7 @@ export const SelectButtonItem = React.memo((props) => {
     const content = createContent();
 
     return (
-        <div className={className} role='button' aria-label={props.label} aria-pressed={props.selected} onClick={onClick} onKeyDown={onKeyDown} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur}>
+        <div className={className} role="button" aria-label={props.label} aria-pressed={props.selected} onClick={onClick} onKeyDown={onKeyDown} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur}>
             {content}
             {!props.disabled && <Ripple />}
         </div>

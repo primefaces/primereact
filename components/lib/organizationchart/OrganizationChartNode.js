@@ -20,11 +20,11 @@ export const OrganizationChartNode = React.memo((props) => {
 
     const createChildNodes = () => {
         return (
-            <tr style={{ visibility }} className='p-organizationchart-nodes'>
+            <tr style={{ visibility }} className="p-organizationchart-nodes">
                 {node.children &&
                     node.children.map((child, index) => {
                         return (
-                            <td key={index} colSpan='2'>
+                            <td key={index} colSpan="2">
                                 <OrganizationChartNode node={child} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={props.onNodeClick} isSelected={props.isSelected} />
                             </td>
                         );
@@ -37,10 +37,10 @@ export const OrganizationChartNode = React.memo((props) => {
         const nodeChildLength = node.children && node.children.length;
 
         return (
-            <tr style={{ visibility }} className='p-organizationchart-lines'>
+            <tr style={{ visibility }} className="p-organizationchart-lines">
                 {node.children && node.children.length === 1 && (
                     <td colSpan={colspan}>
-                        <div className='p-organizationchart-line-down'></div>
+                        <div className="p-organizationchart-line-down"></div>
                     </td>
                 )}
                 {node.children &&
@@ -64,9 +64,9 @@ export const OrganizationChartNode = React.memo((props) => {
 
     const createLinesDown = () => {
         return (
-            <tr style={{ visibility }} className='p-organizationchart-lines'>
+            <tr style={{ visibility }} className="p-organizationchart-lines">
                 <td colSpan={colspan}>
-                    <div className='p-organizationchart-line-down'></div>
+                    <div className="p-organizationchart-line-down"></div>
                 </td>
             </tr>
         );
@@ -81,7 +81,7 @@ export const OrganizationChartNode = React.memo((props) => {
 
             return (
                 /* eslint-disable */
-                <a href='#' className='p-node-toggler' onClick={(e) => toggleNode(e, node)}>
+                <a href="#" className="p-node-toggler" onClick={(e) => toggleNode(e, node)}>
                     <i className={toggleIconClassName}></i>
                 </a>
                 /* eslint-enable */
@@ -127,7 +127,7 @@ export const OrganizationChartNode = React.memo((props) => {
     const childNodes = createChildNodes();
 
     return (
-        <table className='p-organizationchart-table'>
+        <table className="p-organizationchart-table">
             <tbody>
                 {nodeContent}
                 {linesDown}

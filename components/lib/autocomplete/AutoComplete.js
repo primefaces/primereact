@@ -470,16 +470,16 @@ export const AutoComplete = React.memo(
                     type={props.type}
                     name={props.name}
                     defaultValue={value}
-                    role='combobox'
-                    aria-autocomplete='list'
+                    role="combobox"
+                    aria-autocomplete="list"
                     aria-controls={ariaControls}
-                    aria-haspopup='listbox'
+                    aria-haspopup="listbox"
                     aria-expanded={overlayVisibleState}
                     aria-labelledby={props['aria-labelledby']}
                     aria-label={props['aria-label']}
                     className={className}
                     style={props.inputStyle}
-                    autoComplete='off'
+                    autoComplete="off"
                     readOnly={props.readOnly}
                     disabled={props.disabled}
                     placeholder={props.placeholder}
@@ -505,8 +505,8 @@ export const AutoComplete = React.memo(
                 return props.value.map((val, index) => {
                     const key = index + 'multi-item';
                     return (
-                        <li key={key} className='p-autocomplete-token p-highlight'>
-                            <span className='p-autocomplete-token-label'>{formatValue(val)}</span>
+                        <li key={key} className="p-autocomplete-token p-highlight">
+                            <span className="p-autocomplete-token-label">{formatValue(val)}</span>
                             {!props.disabled && IconUtils.getJSXIcon(props.removeIcon, { className: 'p-autocomplete-token-icon', onClick: (e) => removeItem(e, index) }, { props })}
                         </li>
                     );
@@ -520,20 +520,20 @@ export const AutoComplete = React.memo(
             const ariaControls = overlayVisibleState ? idState + '_list' : null;
 
             return (
-                <li className='p-autocomplete-input-token'>
+                <li className="p-autocomplete-input-token">
                     <input
                         ref={inputRef}
                         type={props.type}
                         disabled={props.disabled}
                         placeholder={props.placeholder}
-                        role='combobox'
-                        aria-autocomplete='list'
+                        role="combobox"
+                        aria-autocomplete="list"
                         aria-controls={ariaControls}
-                        aria-haspopup='listbox'
+                        aria-haspopup="listbox"
                         aria-expanded={overlayVisibleState}
                         aria-labelledby={props['aria-labelledby']}
                         aria-label={props['aria-label']}
-                        autoComplete='off'
+                        autoComplete="off"
                         tabIndex={props.tabIndex}
                         onChange={onInputChange}
                         id={props.inputId}
@@ -568,7 +568,7 @@ export const AutoComplete = React.memo(
 
         const createDropdown = () => {
             if (props.dropdown) {
-                return <Button type='button' icon={props.dropdownIcon} className='p-autocomplete-dropdown' disabled={props.disabled} onClick={onDropdownClick} />;
+                return <Button type="button" icon={props.dropdownIcon} className="p-autocomplete-dropdown" disabled={props.disabled} onClick={onDropdownClick} />;
             }
 
             return null;
@@ -576,7 +576,7 @@ export const AutoComplete = React.memo(
 
         const createLoader = () => {
             if (searchingState) {
-                return <i className='p-autocomplete-loader pi pi-spinner pi-spin'></i>;
+                return <i className="p-autocomplete-loader pi pi-spinner pi-spin"></i>;
             }
 
             return null;

@@ -113,7 +113,7 @@ export const TableHeader = React.memo((props) => {
 
     const createFilter = (column, filter) => {
         if (filter) {
-            return <ColumnFilter display='row' column={column} filters={props.filters} filtersStore={props.filtersStore} onFilterChange={props.onFilterChange} onFilterApply={props.onFilterApply} />;
+            return <ColumnFilter display="row" column={column} filters={props.filters} filtersStore={props.filtersStore} onFilterChange={props.onFilterChange} onFilterApply={props.onFilterApply} />;
         }
 
         return null;
@@ -148,13 +148,13 @@ export const TableHeader = React.memo((props) => {
             const rows = React.Children.toArray(props.headerColumnGroup.props.children);
 
             return rows.map((row, i) => (
-                <tr key={i} role='row'>
+                <tr key={i} role="row">
                     {createGroupHeaderCells(row)}
                 </tr>
             ));
         } else {
-            const headerRow = <tr role='row'>{createHeaderCells(props.columns)}</tr>;
-            const filterRow = props.filterDisplay === 'row' && <tr role='row'>{createFilterCells()}</tr>;
+            const headerRow = <tr role="row">{createHeaderCells(props.columns)}</tr>;
+            const filterRow = props.filterDisplay === 'row' && <tr role="row">{createFilterCells()}</tr>;
 
             return (
                 <>
@@ -167,7 +167,7 @@ export const TableHeader = React.memo((props) => {
 
     const content = createContent();
 
-    return <thead className='p-datatable-thead'>{content}</thead>;
+    return <thead className="p-datatable-thead">{content}</thead>;
 });
 
 TableHeader.displayName = 'TableHeader';

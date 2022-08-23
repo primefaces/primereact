@@ -594,11 +594,11 @@ const AutoCompleteDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { AutoComplete } from 'primereact/autocomplete';
 `}
@@ -623,7 +623,7 @@ import { AutoComplete } from 'primereact/autocomplete';
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const countries = // datasource
 
@@ -741,7 +741,7 @@ const groupedCities = [
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 itemTemplate(item) {
     //return custom element
@@ -755,8 +755,8 @@ itemTemplate(item) {
                         <br />
                         In addition the component uses these properties:
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -996,7 +996,7 @@ itemTemplate(item) {
                                     <td>null</td>
                                     <td>
                                         The properties of{' '}
-                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
                                             CSSTransition
                                         </a>{' '}
                                         can be customized, except for "nodeRef" and "in" properties.
@@ -1019,7 +1019,7 @@ itemTemplate(item) {
                                     <td>object</td>
                                     <td>null</td>
                                     <td>
-                                        Whether to use the virtualScroller feature. The properties of <Link href='/virtualscroller'>VirtualScroller</Link> component can be used like an object in it.
+                                        Whether to use the virtualScroller feature. The properties of <Link href="/virtualscroller">VirtualScroller</Link> component can be used like an object in it.
                                     </td>
                                 </tr>
                             </tbody>
@@ -1027,8 +1027,8 @@ itemTemplate(item) {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1138,8 +1138,8 @@ itemTemplate(item) {
 
                     <h5>Styling</h5>
                     <p>Following is the list of structural style classes</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1206,8 +1206,8 @@ itemTemplate(item) {
 `}
                         </CodeHighlight>
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1262,8 +1262,8 @@ itemTemplate(item) {
                         </div>
 
                         <h6>Chips Input Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1288,8 +1288,8 @@ itemTemplate(item) {
                         </div>
 
                         <h6>Chip Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

@@ -79,13 +79,13 @@ export const ScrollTop = React.memo(
 
         return (
             <>
-                <CSSTransition nodeRef={scrollElementRef} classNames='p-scrolltop' in={visibleState} timeout={{ enter: 150, exit: 150 }} options={props.transitionOptions} unmountOnExit onEnter={onEnter} onEntered={onEntered} onExited={onExited}>
-                    <button ref={scrollElementRef} type='button' className={className} style={props.style} {...otherProps} onClick={onClick}>
+                <CSSTransition nodeRef={scrollElementRef} classNames="p-scrolltop" in={visibleState} timeout={{ enter: 150, exit: 150 }} options={props.transitionOptions} unmountOnExit onEnter={onEnter} onEntered={onEntered} onExited={onExited}>
+                    <button ref={scrollElementRef} type="button" className={className} style={props.style} {...otherProps} onClick={onClick}>
                         {IconUtils.getJSXIcon(props.icon, { className: 'p-scrolltop-icon' }, { props })}
                         <Ripple />
                     </button>
                 </CSSTransition>
-                {isTargetParent && <span ref={helperRef} className='p-scrolltop-helper'></span>}
+                {isTargetParent && <span ref={helperRef} className="p-scrolltop-helper"></span>}
             </>
         );
     })

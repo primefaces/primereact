@@ -635,11 +635,11 @@ const TieredMenuDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { TieredMenu } from 'primereact/tieredmenu';
 `}
@@ -655,12 +655,12 @@ import { TieredMenu } from 'primereact/tieredmenu';
 
                     <h5>MenuItem API</h5>
                     <p>
-                        TieredMenu uses the common menu item api to define its items, visit <Link href='/menumodel'> MenuModel </Link> for details.
+                        TieredMenu uses the common menu item api to define its items, visit <Link href="/menumodel"> MenuModel </Link> for details.
                     </p>
 
                     <h5>Getting Started</h5>
                     <p>Menu requires a collection of menuitems as its model.</p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const items = [
     {
@@ -813,8 +813,8 @@ const items = [
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -880,7 +880,7 @@ const items = [
                                     <td>null</td>
                                     <td>
                                         The properties of{' '}
-                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
                                             CSSTransition
                                         </a>{' '}
                                         can be customized, except for "nodeRef" and "in" properties.
@@ -891,8 +891,8 @@ const items = [
                     </div>
 
                     <h5>Methods</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -921,8 +921,8 @@ const items = [
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -947,10 +947,10 @@ const items = [
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1001,8 +1001,8 @@ const items = [
                         </p>
 
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

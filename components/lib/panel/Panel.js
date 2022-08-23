@@ -66,7 +66,7 @@ export const Panel = React.forwardRef((props, ref) => {
             const toggleIcon = collapsed ? props.expandIcon : props.collapseIcon;
 
             return (
-                <button className='p-panel-header-icon p-panel-toggler p-link' onClick={toggle} id={buttonId} aria-controls={contentId} aria-expanded={!collapsed} role='tab'>
+                <button className="p-panel-header-icon p-panel-toggler p-link" onClick={toggle} id={buttonId} aria-controls={contentId} aria-expanded={!collapsed} role="tab">
                     {IconUtils.getJSXIcon(toggleIcon, undefined, { props, collapsed })}
                     <Ripple />
                 </button>
@@ -81,18 +81,18 @@ export const Panel = React.forwardRef((props, ref) => {
         const icons = ObjectUtils.getJSXElement(props.icons, props);
         const togglerElement = createToggleIcon();
         const titleElement = (
-            <span className='p-panel-title' id={headerId}>
+            <span className="p-panel-title" id={headerId}>
                 {header}
             </span>
         );
         const iconsElement = (
-            <div className='p-panel-icons'>
+            <div className="p-panel-icons">
                 {icons}
                 {togglerElement}
             </div>
         );
         const content = (
-            <div className='p-panel-header'>
+            <div className="p-panel-header">
                 {titleElement}
                 {iconsElement}
             </div>
@@ -124,9 +124,9 @@ export const Panel = React.forwardRef((props, ref) => {
 
     const createContent = () => {
         return (
-            <CSSTransition nodeRef={contentRef} classNames='p-toggleable-content' timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={props.transitionOptions}>
-                <div ref={contentRef} className='p-toggleable-content' aria-hidden={collapsed} role='region' id={contentId} aria-labelledby={headerId}>
-                    <div className='p-panel-content'>{props.children}</div>
+            <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={props.transitionOptions}>
+                <div ref={contentRef} className="p-toggleable-content" aria-hidden={collapsed} role="region" id={contentId} aria-labelledby={headerId}>
+                    <div className="p-panel-content">{props.children}</div>
                 </div>
             </CSSTransition>
         );

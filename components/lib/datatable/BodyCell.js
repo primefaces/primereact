@@ -500,7 +500,7 @@ export const BodyCell = React.memo((props) => {
             [`p-align-${align}`]: !!align
         });
         const style = getStyle();
-        const title = props.responsiveLayout === 'stack' && <span className='p-column-title'>{ObjectUtils.getJSXElement(header, { props: props.tableProps })}</span>;
+        const title = props.responsiveLayout === 'stack' && <span className="p-column-title">{ObjectUtils.getJSXElement(header, { props: props.tableProps })}</span>;
 
         if (selectionMode) {
             const showSelection = props.showSelectionElement ? props.showSelectionElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
@@ -524,7 +524,7 @@ export const BodyCell = React.memo((props) => {
             };
 
             content = (
-                <button className={expanderProps.className} onClick={expanderProps.onClick} type='button' aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex}>
+                <button className={expanderProps.className} onClick={expanderProps.onClick} type="button" aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex}>
                     <span className={expanderProps.iconClassName}></span>
                     <Ripple />
                 </button>
@@ -550,11 +550,11 @@ export const BodyCell = React.memo((props) => {
 
                 content = (
                     <>
-                        <button type='button' name='row-save' onClick={rowEditorProps.onSaveClick} className={rowEditorProps.saveClassName} tabIndex={props.tabIndex}>
+                        <button type="button" name="row-save" onClick={rowEditorProps.onSaveClick} className={rowEditorProps.saveClassName} tabIndex={props.tabIndex}>
                             <span className={rowEditorProps.saveIconClassName}></span>
                             <Ripple />
                         </button>
-                        <button type='button' name='row-cancel' onClick={rowEditorProps.onCancelClick} className={rowEditorProps.cancelClassName} tabIndex={props.tabIndex}>
+                        <button type="button" name="row-cancel" onClick={rowEditorProps.onCancelClick} className={rowEditorProps.cancelClassName} tabIndex={props.tabIndex}>
                             <span className={rowEditorProps.cancelIconClassName}></span>
                             <Ripple />
                         </button>
@@ -569,7 +569,7 @@ export const BodyCell = React.memo((props) => {
                 };
 
                 content = (
-                    <button type='button' name='row-edit' onClick={rowEditorProps.onInitClick} className={rowEditorProps.initClassName} tabIndex={props.tabIndex}>
+                    <button type="button" name="row-edit" onClick={rowEditorProps.onInitClick} className={rowEditorProps.initClassName} tabIndex={props.tabIndex}>
                         <span className={rowEditorProps.initIconClassName}></span>
                         <Ripple />
                     </button>
@@ -600,7 +600,7 @@ export const BodyCell = React.memo((props) => {
         if (!isRowEditor && editor) {
             /* eslint-disable */
             editorKeyHelper = (
-                <a tabIndex='0' ref={keyHelperRef} className='p-cell-editor-key-helper p-hidden-accessible' onFocus={onEditorFocus}>
+                <a tabIndex="0" ref={keyHelperRef} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={onEditorFocus}>
                     <span></span>
                 </a>
             );
@@ -608,7 +608,7 @@ export const BodyCell = React.memo((props) => {
         }
 
         return (
-            <td ref={elementRef} style={style} className={className} rowSpan={props.rowSpan} tabIndex={tabIndex} role='cell' onClick={onClick} onKeyDown={onKeyDown} onBlur={onBlur} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+            <td ref={elementRef} style={style} className={className} rowSpan={props.rowSpan} tabIndex={tabIndex} role="cell" onClick={onClick} onKeyDown={onKeyDown} onBlur={onBlur} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
                 {editorKeyHelper}
                 {title}
                 {content}

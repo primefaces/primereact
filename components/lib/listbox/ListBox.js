@@ -303,7 +303,7 @@ export const ListBox = React.memo(
 
                 return (
                     <React.Fragment key={key}>
-                        <li className='p-listbox-item-group' style={style} role='group'>
+                        <li className="p-listbox-item-group" style={style} role="group">
                             {groupContent}
                         </li>
                         {groupChildrenContent}
@@ -348,7 +348,7 @@ export const ListBox = React.memo(
                             const className = classNames('p-listbox-list', option.className);
 
                             return (
-                                <ul ref={option.contentRef} className={className} role='listbox' aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
+                                <ul ref={option.contentRef} className={className} role="listbox" aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
                                     {option.children}
                                 </ul>
                             );
@@ -361,7 +361,7 @@ export const ListBox = React.memo(
                 const items = createItems();
 
                 return (
-                    <ul className='p-listbox-list' role='listbox' aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
+                    <ul className="p-listbox-list" role="listbox" aria-multiselectable={props.multiple} aria-labelledby={props['aria-labelledby']} aria-label={props['aria-label']}>
                         {items}
                     </ul>
                 );

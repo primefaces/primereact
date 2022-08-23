@@ -530,11 +530,11 @@ const SpeedDialDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { SpeedDial } from 'primereact/speeddial';
 `}
@@ -554,7 +554,7 @@ import { SpeedDial } from 'primereact/speeddial';
                         according to the container element with the position type style.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const SpeedDialDemo = () => {
 
@@ -591,7 +591,7 @@ export const SpeedDialDemo = () => {
 
                     <h5>MenuModel API</h5>
                     <p>
-                        SpeedDial uses the common MenuModel API to define the items, visit <Link href='/menumodel'>MenuModel API</Link> for details.
+                        SpeedDial uses the common MenuModel API to define the items, visit <Link href="/menumodel">MenuModel API</Link> for details.
                     </p>
 
                     <h5>Type</h5>
@@ -607,8 +607,8 @@ export const SpeedDialDemo = () => {
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -743,8 +743,8 @@ export const SpeedDialDemo = () => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -779,10 +779,10 @@ export const SpeedDialDemo = () => {
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'>theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -833,8 +833,8 @@ export const SpeedDialDemo = () => {
                         </CodeHighlight>
 
                         <h6>Menu Button Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -871,8 +871,8 @@ export const SpeedDialDemo = () => {
                         </div>
 
                         <h6>Menu Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

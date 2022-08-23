@@ -118,7 +118,7 @@ export const Galleria = React.memo(
 
         const createHeader = () => {
             if (props.header) {
-                return <div className='p-galleria-header'>{props.header}</div>;
+                return <div className="p-galleria-header">{props.header}</div>;
             }
 
             return null;
@@ -126,7 +126,7 @@ export const Galleria = React.memo(
 
         const createFooter = () => {
             if (props.footer) {
-                return <div className='p-galleria-footer'>{props.footer}</div>;
+                return <div className="p-galleria-footer">{props.footer}</div>;
             }
 
             return null;
@@ -149,8 +149,8 @@ export const Galleria = React.memo(
             );
 
             const closeIcon = props.fullScreen && (
-                <button type='button' className='p-galleria-close p-link' onClick={hide}>
-                    <span className='p-galleria-close-icon pi pi-times'></span>
+                <button type="button" className="p-galleria-close p-link" onClick={hide}>
+                    <span className="p-galleria-close-icon pi pi-times"></span>
                     <Ripple />
                 </button>
             );
@@ -161,7 +161,7 @@ export const Galleria = React.memo(
                 <div ref={elementRef} id={props.id} className={galleriaClassName} style={props.style} {...otherProps}>
                     {closeIcon}
                     {header}
-                    <div className='p-galleria-content'>
+                    <div className="p-galleria-content">
                         <GalleriaItem
                             ref={previewContentRef}
                             value={props.value}
@@ -217,7 +217,7 @@ export const Galleria = React.memo(
                     <div ref={maskRef} className={maskClassName}>
                         <CSSTransition
                             nodeRef={elementRef}
-                            classNames='p-galleria'
+                            classNames="p-galleria"
                             in={visibleState}
                             timeout={{ enter: 150, exit: 150 }}
                             options={props.transitionOptions}

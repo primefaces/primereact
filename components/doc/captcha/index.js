@@ -123,11 +123,11 @@ const CaptchaDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Captcha } from 'primereact/captcha';
 `}
@@ -151,9 +151,9 @@ import { Captcha } from 'primereact/captcha';
 
                     <h5>Verification</h5>
                     <p>
-                        In order to ensure if a response token is valid, verification against recaptcha api needs to be done at backend. <a href='https://developers.google.com/recaptcha/docs/verify'>Read more</a> at official documentation.
+                        In order to ensure if a response token is valid, verification against recaptcha api needs to be done at backend. <a href="https://developers.google.com/recaptcha/docs/verify">Read more</a> at official documentation.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const showResponse = (response) => {
 //call to a backend to verify against recaptcha with private key
@@ -169,8 +169,8 @@ const showResponse = (response) => {
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -227,8 +227,8 @@ const showResponse = (response) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -252,8 +252,8 @@ const showResponse = (response) => {
                     </div>
 
                     <h5>Methods</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -280,7 +280,7 @@ const showResponse = (response) => {
                     <DevelopmentSection>
                         <p>
                             Refer to the{' '}
-                            <a alt='Recaptcha Accessibility ' href='https://support.google.com/recaptcha/answer/6175971?hl=en'>
+                            <a alt="Recaptcha Accessibility " href="https://support.google.com/recaptcha/answer/6175971?hl=en">
                                 Recaptcha Accessibility
                             </a>{' '}
                             documentation for more information.

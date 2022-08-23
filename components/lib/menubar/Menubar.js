@@ -61,7 +61,7 @@ export const Menubar = React.memo(
             if (props.start) {
                 const start = ObjectUtils.getJSXElement(props.start, props);
 
-                return <div className='p-menubar-start'>{start}</div>;
+                return <div className="p-menubar-start">{start}</div>;
             }
 
             return null;
@@ -71,7 +71,7 @@ export const Menubar = React.memo(
             if (props.end) {
                 const end = ObjectUtils.getJSXElement(props.end, props);
 
-                return <div className='p-menubar-end'>{end}</div>;
+                return <div className="p-menubar-end">{end}</div>;
             }
 
             return null;
@@ -80,8 +80,8 @@ export const Menubar = React.memo(
         const createMenuButton = () => {
             /* eslint-disable */
             const button = (
-                <a ref={menuButtonRef} href={'#'} role='button' tabIndex={0} className='p-menubar-button' onClick={toggle}>
-                    <i className='pi pi-bars' />
+                <a ref={menuButtonRef} href={'#'} role="button" tabIndex={0} className="p-menubar-button" onClick={toggle}>
+                    <i className="pi pi-bars" />
                 </a>
             );
             /* eslint-enable */

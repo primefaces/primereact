@@ -114,7 +114,7 @@ export const SplitButton = React.memo(
                 <div ref={elementRef} id={idState} className={className} style={props.style} {...otherProps}>
                     <Button
                         ref={defaultButtonRef}
-                        type='button'
+                        type="button"
                         className={buttonClassName}
                         icon={props.icon}
                         loading={props.loading}
@@ -128,13 +128,13 @@ export const SplitButton = React.memo(
                         {buttonContent}
                     </Button>
                     <Button
-                        type='button'
+                        type="button"
                         className={menuButtonClassName}
                         icon={props.dropdownIcon}
                         onClick={onDropdownButtonClick}
                         disabled={props.disabled}
                         aria-expanded={overlayVisibleState}
-                        aria-haspopup='true'
+                        aria-haspopup="true"
                         aria-controls={overlayVisibleState ? menuId : null}
                         {...props.menuButtonProps}
                     />

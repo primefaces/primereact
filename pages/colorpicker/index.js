@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const ColorPickerDemo = () => {
-
     const [color1, setColor1] = useState(null);
     const [color2, setColor2] = useState('1976D2');
 
@@ -35,7 +34,7 @@ const ColorPickerDemo = () => {
 
             <ColorPickerDoc />
         </div>
-    )
-}
+    );
+};
 
 export default ColorPickerDemo;

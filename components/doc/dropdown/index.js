@@ -817,11 +817,11 @@ const DropdownDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Dropdown } from 'primereact/dropdown';
 `}
@@ -844,7 +844,7 @@ import { Dropdown } from 'primereact/dropdown';
                     <p>
                         <b>Options as SelectItems</b>
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const citySelectItems = [
     {label: 'New York', value: 'NY'},
@@ -865,7 +865,7 @@ const citySelectItems = [
                     <p>
                         <b>Options as any type</b>
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const cities = [
     {name: 'New York', code: 'NY'},
@@ -915,7 +915,7 @@ const cities = [
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const [filterValue, setFilterValue] = useState('');
 const filterInputRef = useRef();
@@ -1015,8 +1015,8 @@ const groupedCities = [
 `}
                     </CodeHighlight>
                     <h5>SelectItem API</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1062,8 +1062,8 @@ const groupedCities = [
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1339,7 +1339,7 @@ const groupedCities = [
                                     <td>null</td>
                                     <td>
                                         The properties of{' '}
-                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
                                             CSSTransition
                                         </a>{' '}
                                         can be customized, except for "nodeRef" and "in" properties.
@@ -1362,7 +1362,7 @@ const groupedCities = [
                                     <td>object</td>
                                     <td>null</td>
                                     <td>
-                                        Whether to use the virtualScroller feature. The properties of <Link href='/virtualscroller'>VirtualScroller</Link> component can be used like an object in it.
+                                        Whether to use the virtualScroller feature. The properties of <Link href="/virtualscroller">VirtualScroller</Link> component can be used like an object in it.
                                     </td>
                                 </tr>
                             </tbody>
@@ -1370,8 +1370,8 @@ const groupedCities = [
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1421,8 +1421,8 @@ const groupedCities = [
                     </div>
 
                     <h5>Methods</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1457,10 +1457,10 @@ const groupedCities = [
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1537,8 +1537,8 @@ const groupedCities = [
 `}
                         </CodeHighlight>
                         <h6>Closed State Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1575,8 +1575,8 @@ const groupedCities = [
                         </div>
 
                         <h6>Popup Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1661,8 +1661,8 @@ const groupedCities = [
                         </div>
 
                         <h6>Filter Input Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

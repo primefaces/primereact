@@ -34,7 +34,7 @@ export const RowCheckbox = React.memo((props) => {
 
     return (
         <div className={className} onClick={onClick}>
-            <div className={boxClassName} role='checkbox' aria-checked={props.checked} tabIndex={tabIndex} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur}>
+            <div className={boxClassName} role="checkbox" aria-checked={props.checked} tabIndex={tabIndex} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur}>
                 <span className={iconClassName}></span>
             </div>
         </div>

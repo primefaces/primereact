@@ -426,7 +426,7 @@ export const ColumnFilter = React.memo((props) => {
         return getColumnProp('filterElement') ? (
             ObjectUtils.getJSXElement(getColumnProp('filterElement'), { field, index, filterModel: model, value, filterApplyCallback, filterCallback })
         ) : (
-            <InputText type={getColumnProp('filterType')} value={value || ''} onChange={(e) => onInputChange(e, index)} className='p-column-filter' placeholder={getColumnProp('filterPlaceholder')} maxLength={getColumnProp('filterMaxLength')} />
+            <InputText type={getColumnProp('filterType')} value={value || ''} onChange={(e) => onInputChange(e, index)} className="p-column-filter" placeholder={getColumnProp('filterPlaceholder')} maxLength={getColumnProp('filterMaxLength')} />
         );
     };
 
@@ -434,7 +434,7 @@ export const ColumnFilter = React.memo((props) => {
         if (props.display === 'row') {
             const content = createFilterElement(filterModel, 0);
 
-            return <div className='p-fluid p-column-filter-element'>{content}</div>;
+            return <div className="p-fluid p-column-filter-element">{content}</div>;
         }
 
         return null;
@@ -452,8 +452,8 @@ export const ColumnFilter = React.memo((props) => {
             });
 
             return (
-                <button ref={iconRef} type='button' className={className} aria-haspopup aria-expanded={overlayVisibleState} onClick={toggleMenu} onKeyDown={onToggleButtonKeyDown}>
-                    <span className='pi pi-filter-icon pi-filter'></span>
+                <button ref={iconRef} type="button" className={className} aria-haspopup aria-expanded={overlayVisibleState} onClick={toggleMenu} onKeyDown={onToggleButtonKeyDown}>
+                    <span className="pi pi-filter-icon pi-filter"></span>
                 </button>
             );
         }
@@ -468,8 +468,8 @@ export const ColumnFilter = React.memo((props) => {
             });
 
             return (
-                <button className={className} type='button' onClick={clearFilter}>
-                    <span className='pi pi-filter-slash'></span>
+                <button className={className} type="button" onClick={clearFilter}>
+                    <span className="pi pi-filter-slash"></span>
                 </button>
             );
         }
@@ -483,7 +483,7 @@ export const ColumnFilter = React.memo((props) => {
             const _noFilterLabel = noFilterLabel();
 
             return (
-                <ul className='p-column-filter-row-items'>
+                <ul className="p-column-filter-row-items">
                     {_matchModes.map((matchMode, i) => {
                         const { value, label } = matchMode;
                         const className = classNames('p-column-filter-row-item', { 'p-highlight': isRowMatchModeSelected(value) });
@@ -495,8 +495,8 @@ export const ColumnFilter = React.memo((props) => {
                             </li>
                         );
                     })}
-                    <li className='p-column-filter-separator'></li>
-                    <li className='p-column-filter-row-item' onClick={clearFilter} onKeyDown={(e) => onRowMatchModeKeyDown(e, null, true)}>
+                    <li className="p-column-filter-separator"></li>
+                    <li className="p-column-filter-row-item" onClick={clearFilter} onKeyDown={(e) => onRowMatchModeKeyDown(e, null, true)}>
                         {_noFilterLabel}
                     </li>
                 </ul>
@@ -512,8 +512,8 @@ export const ColumnFilter = React.memo((props) => {
             const value = operator();
 
             return (
-                <div className='p-column-filter-operator'>
-                    <Dropdown options={options} value={value} onChange={onOperatorChange} className='p-column-filter-operator-dropdown' />
+                <div className="p-column-filter-operator">
+                    <Dropdown options={options} value={value} onChange={onOperatorChange} className="p-column-filter-operator-dropdown" />
                 </div>
             );
         }
@@ -525,7 +525,7 @@ export const ColumnFilter = React.memo((props) => {
         if (isShowMatchModes()) {
             const options = matchModes();
 
-            return <Dropdown options={options} value={constraint.matchMode} onChange={(e) => onMenuMatchModeChange(e.value, index)} className='p-column-filter-matchmode-dropdown' />;
+            return <Dropdown options={options} value={constraint.matchMode} onChange={(e) => onMenuMatchModeChange(e.value, index)} className="p-column-filter-matchmode-dropdown" />;
         }
 
         return null;
@@ -535,7 +535,7 @@ export const ColumnFilter = React.memo((props) => {
         if (showRemoveIcon()) {
             const removeRuleLabel = removeRuleButtonLabel();
 
-            return <Button type='button' icon='pi pi-trash' className='p-column-filter-remove-button p-button-text p-button-danger p-button-sm' onClick={() => removeConstraint(index)} label={removeRuleLabel} />;
+            return <Button type="button" icon="pi pi-trash" className="p-column-filter-remove-button p-button-text p-button-danger p-button-sm" onClick={() => removeConstraint(index)} label={removeRuleLabel} />;
         }
 
         return null;
@@ -545,14 +545,14 @@ export const ColumnFilter = React.memo((props) => {
         const _fieldConstraints = fieldConstraints();
 
         return (
-            <div className='p-column-filter-constraints'>
+            <div className="p-column-filter-constraints">
                 {_fieldConstraints.map((fieldConstraint, i) => {
                     const matchModeDropdown = createMatchModeDropdown(fieldConstraint, i);
                     const menuFilterElement = createMenuFilterElement(fieldConstraint, i);
                     const removeButton = createRemoveButton(i);
 
                     return (
-                        <div key={i} className='p-column-filter-constraint'>
+                        <div key={i} className="p-column-filter-constraint">
                             {matchModeDropdown}
                             {menuFilterElement}
                             <div>{removeButton}</div>
@@ -568,8 +568,8 @@ export const ColumnFilter = React.memo((props) => {
             const addRuleLabel = addRuleButtonLabel();
 
             return (
-                <div className='p-column-filter-add-rule'>
-                    <Button type='button' label={addRuleLabel} icon='pi pi-plus' className='p-column-filter-add-button p-button-text p-button-sm' onClick={addConstraint} />
+                <div className="p-column-filter-add-rule">
+                    <Button type="button" label={addRuleLabel} icon="pi pi-plus" className="p-column-filter-add-button p-button-text p-button-sm" onClick={addConstraint} />
                 </div>
             );
         }
@@ -582,7 +582,7 @@ export const ColumnFilter = React.memo((props) => {
             if (!getColumnProp('filterClear')) {
                 const clearLabel = clearButtonLabel();
 
-                return <Button type='button' className='p-button-outlined p-button-sm' onClick={clearFilter} label={clearLabel} />;
+                return <Button type="button" className="p-button-outlined p-button-sm" onClick={clearFilter} label={clearLabel} />;
             }
 
             return ObjectUtils.getJSXElement(getColumnProp('filterClear'), { field, filterModel, filterClearCallback: clearFilter });
@@ -596,7 +596,7 @@ export const ColumnFilter = React.memo((props) => {
             if (!getColumnProp('filterApply')) {
                 const applyLabel = applyButtonLabel();
 
-                return <Button type='button' className='p-button-sm' onClick={applyFilter} label={applyLabel} />;
+                return <Button type="button" className="p-button-sm" onClick={applyFilter} label={applyLabel} />;
             }
 
             return ObjectUtils.getJSXElement(getColumnProp('filterApply'), { field, filterModel, filterApplyCallback: applyFilter });
@@ -610,7 +610,7 @@ export const ColumnFilter = React.memo((props) => {
         const applyButton = createFilterApplyButton();
 
         return (
-            <div className='p-column-filter-buttonbar'>
+            <div className="p-column-filter-buttonbar">
                 {clearButton}
                 {applyButton}
             </div>
@@ -648,7 +648,7 @@ export const ColumnFilter = React.memo((props) => {
             <Portal>
                 <CSSTransition
                     nodeRef={overlayRef}
-                    classNames='p-connected-overlay'
+                    classNames="p-connected-overlay"
                     in={overlayVisibleState}
                     timeout={{ enter: 120, exit: 100 }}
                     unmountOnExit

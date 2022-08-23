@@ -29,7 +29,7 @@ export const PageLinks = React.memo((props) => {
             });
 
             let element = (
-                <Button type='button' className={className} onClick={(e) => onPageLinkClick(e, pageLink)} aria-label={`${ariaLabel('pageLabel')} ${pageLink + 1}`}>
+                <Button type="button" className={className} onClick={(e) => onPageLinkClick(e, pageLink)} aria-label={`${ariaLabel('pageLabel')} ${pageLink + 1}`}>
                     {pageLink}
                 </Button>
             );
@@ -56,7 +56,7 @@ export const PageLinks = React.memo((props) => {
         });
     }
 
-    return <span className='p-paginator-pages'>{elements}</span>;
+    return <span className="p-paginator-pages">{elements}</span>;
 });
 
 PageLinks.displayName = 'PageLinks';

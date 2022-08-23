@@ -156,7 +156,7 @@ export const TreeTableHeader = React.memo((props) => {
 
     const createResizer = (column) => {
         if (props.resizableColumns) {
-            return <span className='p-column-resizer p-clickable' onMouseDown={(e) => onResizerMouseDown(e, column)} />;
+            return <span className="p-column-resizer p-clickable" onMouseDown={(e) => onResizerMouseDown(e, column)} />;
         } else {
             return null;
         }
@@ -164,7 +164,7 @@ export const TreeTableHeader = React.memo((props) => {
 
     const createSortBadge = (sortMetaDataIndex) => {
         if (sortMetaDataIndex !== -1 && props.multiSortMeta && props.multiSortMeta.length > 1) {
-            return <span className='p-sortable-column-badge'>{sortMetaDataIndex + 1}</span>;
+            return <span className="p-sortable-column-badge">{sortMetaDataIndex + 1}</span>;
         }
 
         return null;
@@ -179,7 +179,7 @@ export const TreeTableHeader = React.memo((props) => {
                     onInput={(e) => onFilterInput(e, column)}
                     type={props.filterType}
                     defaultValue={props.filters && props.filters[column.props.field] ? props.filters[column.props.field].value : null}
-                    className='p-column-filter'
+                    className="p-column-filter"
                     placeholder={column.props.filterPlaceholder}
                     maxLength={column.props.filterMaxLength}
                 />
@@ -239,7 +239,7 @@ export const TreeTableHeader = React.memo((props) => {
                     onDrop={(e) => onDrop(e, column)}
                 >
                     {resizer}
-                    <span className='p-column-title'>{column.props.header}</span>
+                    <span className="p-column-title">{column.props.header}</span>
                     {sortIconElement}
                     {sortBadge}
                     {filterElement}
@@ -280,7 +280,7 @@ export const TreeTableHeader = React.memo((props) => {
 
     const content = props.columnGroup ? createColumnGroup() : createColumns(props.columns);
 
-    return <thead className='p-treetable-thead'>{content}</thead>;
+    return <thead className="p-treetable-thead">{content}</thead>;
 });
 
 TreeTableHeader.displayName = 'TreeTableHeader';

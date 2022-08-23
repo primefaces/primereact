@@ -217,14 +217,14 @@ export const Splitter = React.memo(
             const gutter = index !== props.children.length - 1 && (
                 <div
                     ref={(el) => (gutterRefs.current[index] = el)}
-                    className='p-splitter-gutter'
+                    className="p-splitter-gutter"
                     style={gutterStyle}
                     onMouseDown={(event) => onGutterMouseDown(event, index)}
                     onTouchStart={(event) => onGutterTouchStart(event, index)}
                     onTouchMove={(event) => onGutterTouchMove(event)}
                     onTouchEnd={(event) => onGutterTouchEnd(event)}
                 >
-                    <div className='p-splitter-gutter-handle'></div>
+                    <div className="p-splitter-gutter-handle"></div>
                 </div>
             );
 

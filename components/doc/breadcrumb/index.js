@@ -124,11 +124,11 @@ const BreadCrumbDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { BreadCrumb } from 'primereact/breadcrumb';
 `}
@@ -144,13 +144,13 @@ import { BreadCrumb } from 'primereact/breadcrumb';
 
                     <h5>MenuModel API</h5>
                     <p>
-                        BreadCrumb uses the common menumodel api to define its items, visit <Link href='/menumodel'> MenuModel </Link> for details.
+                        BreadCrumb uses the common menumodel api to define its items, visit <Link href="/menumodel"> MenuModel </Link> for details.
                     </p>
 
                     <h5>Getting Started</h5>
                     <p>BreadCrumb requires a collection of menuitems as its model.</p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const items = [
     { label: 'Categories' },
@@ -174,8 +174,8 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -221,10 +221,10 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>

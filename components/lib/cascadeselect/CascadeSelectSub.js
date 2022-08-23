@@ -165,7 +165,7 @@ export const CascadeSelectSub = React.memo((props) => {
             return (
                 <CascadeSelectSub
                     options={options}
-                    className='p-cascadeselect-sublist'
+                    className="p-cascadeselect-sublist"
                     selectionPath={props.selectionPath}
                     optionLabel={props.optionLabel}
                     optionValue={props.optionValue}
@@ -195,13 +195,13 @@ export const CascadeSelectSub = React.memo((props) => {
             option.className
         );
         const submenu = createSubmenu(option);
-        const content = props.template ? ObjectUtils.getJSXElement(props.template, getOptionValue(option)) : <span className='p-cascadeselect-item-text'>{getOptionLabelToRender(option)}</span>;
-        const optionGroup = isOptionGroup(option) && <span className='p-cascadeselect-group-icon pi pi-angle-right' />;
+        const content = props.template ? ObjectUtils.getJSXElement(props.template, getOptionValue(option)) : <span className="p-cascadeselect-item-text">{getOptionLabelToRender(option)}</span>;
+        const optionGroup = isOptionGroup(option) && <span className="p-cascadeselect-group-icon pi pi-angle-right" />;
         const key = getOptionLabelToRender(option) + '_' + index;
 
         return (
-            <li key={key} className={className} style={option.style} role='none'>
-                <div className='p-cascadeselect-item-content' onClick={(event) => onOptionClick(event, option)} tabIndex={0} onKeyDown={(event) => onKeyDown(event, option)}>
+            <li key={key} className={className} style={option.style} role="none">
+                <div className="p-cascadeselect-item-content" onClick={(event) => onOptionClick(event, option)} tabIndex={0} onKeyDown={(event) => onKeyDown(event, option)}>
                     {content}
                     {optionGroup}
                     <Ripple />
@@ -219,7 +219,7 @@ export const CascadeSelectSub = React.memo((props) => {
     const submenu = createMenu();
 
     return (
-        <ul ref={elementRef} className={className} role='listbox' aria-orientation='horizontal'>
+        <ul ref={elementRef} className={className} role="listbox" aria-orientation="horizontal">
             {submenu}
         </ul>
     );

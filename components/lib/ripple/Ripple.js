@@ -70,7 +70,7 @@ export const Ripple = React.memo(
             }
         });
 
-        return PrimeReact.ripple ? <span role='presentation' ref={inkRef} className='p-ink' onAnimationEnd={onAnimationEnd}></span> : null;
+        return PrimeReact.ripple ? <span role="presentation" ref={inkRef} className="p-ink" onAnimationEnd={onAnimationEnd}></span> : null;
     })
 );
 

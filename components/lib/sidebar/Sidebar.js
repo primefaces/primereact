@@ -147,8 +147,8 @@ export const Sidebar = React.forwardRef((props, ref) => {
     const createCloseIcon = () => {
         if (props.showCloseIcon) {
             return (
-                <button type='button' ref={closeIconRef} className='p-sidebar-close p-sidebar-icon p-link' onClick={onClose} aria-label={props.ariaCloseLabel}>
-                    <span className='p-sidebar-close-icon pi pi-times' />
+                <button type="button" ref={closeIconRef} className="p-sidebar-close p-sidebar-icon p-link" onClick={onClose} aria-label={props.ariaCloseLabel}>
+                    <span className="p-sidebar-close-icon pi pi-times" />
                     <Ripple />
                 </button>
             );
@@ -186,13 +186,13 @@ export const Sidebar = React.forwardRef((props, ref) => {
 
         return (
             <div ref={maskRef} style={props.maskStyle} className={maskClassName} onMouseDown={onMaskClick}>
-                <CSSTransition nodeRef={sidebarRef} classNames='p-sidebar' in={visibleState} timeout={transitionTimeout} options={props.transitionOptions} unmountOnExit onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
-                    <div ref={sidebarRef} id={props.id} className={className} style={props.style} {...otherProps} role='complementary'>
-                        <div className='p-sidebar-header'>
+                <CSSTransition nodeRef={sidebarRef} classNames="p-sidebar" in={visibleState} timeout={transitionTimeout} options={props.transitionOptions} unmountOnExit onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
+                    <div ref={sidebarRef} id={props.id} className={className} style={props.style} {...otherProps} role="complementary">
+                        <div className="p-sidebar-header">
                             {icons}
                             {closeIcon}
                         </div>
-                        <div className='p-sidebar-content'>{props.children}</div>
+                        <div className="p-sidebar-content">{props.children}</div>
                     </div>
                 </CSSTransition>
             </div>

@@ -6,7 +6,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const StepsDemo = () => {
-
     const [activeIndex, setActiveIndex] = useState(1);
     const toast = useRef(null);
 
@@ -37,7 +36,6 @@ const StepsDemo = () => {
         }
     ];
 
-
     return (
         <div>
             <Head>
@@ -67,6 +65,6 @@ const StepsDemo = () => {
             <StepsDoc />
         </div>
     );
-}
+};
 
 export default StepsDemo;

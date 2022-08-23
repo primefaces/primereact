@@ -86,8 +86,8 @@ export const GalleriaItem = React.memo(
                 });
 
                 return (
-                    <button type='button' className={buttonClassName} onClick={navBackward} disabled={isDisabled}>
-                        <span className='p-galleria-item-prev-icon pi pi-chevron-left'></span>
+                    <button type="button" className={buttonClassName} onClick={navBackward} disabled={isDisabled}>
+                        <span className="p-galleria-item-prev-icon pi pi-chevron-left"></span>
                         <Ripple />
                     </button>
                 );
@@ -104,8 +104,8 @@ export const GalleriaItem = React.memo(
                 });
 
                 return (
-                    <button type='button' className={buttonClassName} onClick={navForward} disabled={isDisabled}>
-                        <span className='p-galleria-item-next-icon pi pi-chevron-right'></span>
+                    <button type="button" className={buttonClassName} onClick={navForward} disabled={isDisabled}>
+                        <span className="p-galleria-item-next-icon pi pi-chevron-right"></span>
                         <Ripple />
                     </button>
                 );
@@ -118,7 +118,7 @@ export const GalleriaItem = React.memo(
             if (props.caption) {
                 const content = props.caption(props.value[props.activeItemIndex]);
 
-                return <div className='p-galleria-caption'>{content}</div>;
+                return <div className="p-galleria-caption">{content}</div>;
             }
 
             return null;
@@ -134,7 +134,7 @@ export const GalleriaItem = React.memo(
 
             if (!indicator) {
                 indicator = (
-                    <button type='button' tabIndex={-1} className='p-link'>
+                    <button type="button" tabIndex={-1} className="p-link">
                         <Ripple />
                     </button>
                 );
@@ -169,10 +169,10 @@ export const GalleriaItem = React.memo(
         const indicators = createIndicators();
 
         return (
-            <div ref={ref} className='p-galleria-item-wrapper'>
-                <div className='p-galleria-item-container'>
+            <div ref={ref} className="p-galleria-item-wrapper">
+                <div className="p-galleria-item-container">
                     {backwardNavigator}
-                    <div className='p-galleria-item'>{content}</div>
+                    <div className="p-galleria-item">{content}</div>
                     {forwardNavigator}
                     {caption}
                 </div>

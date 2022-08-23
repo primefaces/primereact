@@ -70,7 +70,7 @@ export const PanelMenuSub = React.memo((props) => {
     const createSeparator = (index) => {
         const key = 'separator_' + index;
 
-        return <li key={key} className='p-menu-separator'></li>;
+        return <li key={key} className="p-menu-separator"></li>;
     };
 
     const createSubmenu = (item, active) => {
@@ -81,7 +81,7 @@ export const PanelMenuSub = React.memo((props) => {
 
         if (item.items) {
             return (
-                <CSSTransition nodeRef={submenuRef} classNames='p-toggleable-content' timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
+                <CSSTransition nodeRef={submenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
                     <div ref={submenuRef} className={className}>
                         <PanelMenuSub menuProps={props.menuProps} model={item.items} multiple={props.multiple} />
                     </div>
@@ -100,11 +100,11 @@ export const PanelMenuSub = React.memo((props) => {
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const submenuIconClassName = classNames('p-panelmenu-icon pi pi-fw', { 'pi-angle-right': !active, 'pi-angle-down': active });
         const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
-        const label = item.label && <span className='p-menuitem-text'>{item.label}</span>;
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = createSubmenu(item, active);
         let content = (
-            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onItemClick(event, item, index)} role='menuitem' aria-disabled={item.disabled}>
+            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onItemClick(event, item, index)} role="menuitem" aria-disabled={item.disabled}>
                 {submenuIcon}
                 {icon}
                 {label}
@@ -128,7 +128,7 @@ export const PanelMenuSub = React.memo((props) => {
         }
 
         return (
-            <li key={key} id={item.id} className={className} style={item.style} role='none'>
+            <li key={key} id={item.id} className={className} style={item.style} role="none">
                 {content}
                 {submenu}
             </li>
@@ -147,7 +147,7 @@ export const PanelMenuSub = React.memo((props) => {
     const menu = createMenu();
 
     return (
-        <ul className={className} role='tree'>
+        <ul className={className} role="tree">
             {menu}
         </ul>
     );

@@ -288,11 +288,11 @@ const InputTextDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { InputText } from 'primereact/inputtext';
 `}
@@ -330,19 +330,19 @@ import { InputText } from 'primereact/inputtext';
 
                     <h5>KeyFilter</h5>
                     <p>
-                        InputText has built-in key filtering support to block certain keys, refer to <Link href='/keyfilter'>keyfilter</Link> page for more information.
+                        InputText has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.
                     </p>
 
                     <h5>Properties</h5>
                     <p>
                         InputText passes any valid attribute to the underlying{' '}
-                        <a href='https://devdocs.io/html/element/input' rel='noopener noreferrer' target='_blank'>
+                        <a href="https://devdocs.io/html/element/input" rel="noopener noreferrer" target="_blank">
                             React HTMLInputElement
                         </a>{' '}
                         element. Extended properties are as follows;
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -382,10 +382,10 @@ import { InputText } from 'primereact/inputtext';
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'>theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -420,8 +420,8 @@ import { InputText } from 'primereact/inputtext';
 `}
                         </CodeHighlight>
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

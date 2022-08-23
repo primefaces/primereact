@@ -390,7 +390,7 @@ export const Carousel = React.memo(
                         const end = index === clonedElements.length - 1;
                         const key = index + '_scloned';
 
-                        return <CarouselItem key={key} className='p-carousel-item-cloned' template={props.itemTemplate} item={item} active={isActive} start={start} end={end} />;
+                        return <CarouselItem key={key} className="p-carousel-item-cloned" template={props.itemTemplate} item={item} active={isActive} start={start} end={end} />;
                     });
 
                     clonedElements = props.value.slice(0, numVisibleState);
@@ -400,7 +400,7 @@ export const Carousel = React.memo(
                         const end = index === clonedElements.length - 1;
                         const key = index + '_fcloned';
 
-                        return <CarouselItem key={key} className='p-carousel-item-cloned' template={props.itemTemplate} item={item} active={isActive} start={start} end={end} />;
+                        return <CarouselItem key={key} className="p-carousel-item-cloned" template={props.itemTemplate} item={item} active={isActive} start={start} end={end} />;
                     });
                 }
 
@@ -426,7 +426,7 @@ export const Carousel = React.memo(
 
         const createHeader = () => {
             if (props.header) {
-                return <div className='p-carousel-header'>{props.header}</div>;
+                return <div className="p-carousel-header">{props.header}</div>;
             }
 
             return null;
@@ -434,7 +434,7 @@ export const Carousel = React.memo(
 
         const createFooter = () => {
             if (props.footer) {
-                return <div className='p-carousel-footer'>{props.footer}</div>;
+                return <div className="p-carousel-footer">{props.footer}</div>;
             }
 
             return null;
@@ -450,8 +450,8 @@ export const Carousel = React.memo(
             return (
                 <div className={className}>
                     {backwardNavigator}
-                    <div className='p-carousel-items-content' style={{ height: height }} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
-                        <div ref={itemsContainerRef} className='p-carousel-items-container' onTransitionEnd={onTransitionEnd}>
+                    <div className="p-carousel-items-content" style={{ height: height }} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
+                        <div ref={itemsContainerRef} className="p-carousel-items-container" onTransitionEnd={onTransitionEnd}>
                             {items}
                         </div>
                     </div>
@@ -470,7 +470,7 @@ export const Carousel = React.memo(
                 'pi-chevron-up': isVertical
             });
 
-            return <Button type='button' className={className} icon={iconClassName} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />;
+            return <Button type="button" className={className} icon={iconClassName} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />;
         };
 
         const createForwardNavigator = () => {
@@ -483,7 +483,7 @@ export const Carousel = React.memo(
                 'pi-chevron-down': isVertical
             });
 
-            return <Button type='button' className={className} icon={iconClassName} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')} />;
+            return <Button type="button" className={className} icon={iconClassName} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')} />;
         };
 
         const createIndicator = (index) => {
@@ -495,7 +495,7 @@ export const Carousel = React.memo(
 
             return (
                 <li key={key} className={className}>
-                    <Button type='button' className='p-link' onClick={(e) => onDotClick(e, index)} aria-label={`${ariaLabel('pageLabel')} ${index + 1}`} />
+                    <Button type="button" className="p-link" onClick={(e) => onDotClick(e, index)} aria-label={`${ariaLabel('pageLabel')} ${index + 1}`} />
                 </li>
             );
         };

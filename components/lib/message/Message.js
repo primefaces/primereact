@@ -21,7 +21,7 @@ export const Message = React.memo(
             return (
                 <>
                     <span className={icon}></span>
-                    <span className='p-inline-message-text'>{text}</span>
+                    <span className="p-inline-message-text">{text}</span>
                 </>
             );
         };
@@ -46,7 +46,7 @@ export const Message = React.memo(
         const content = createContent();
 
         return (
-            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps} role='alert' aria-live='polite'>
+            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps} role="alert" aria-live="polite">
                 {content}
             </div>
         );

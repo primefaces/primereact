@@ -192,9 +192,9 @@ export const ConfirmPopup = React.memo(
             const icon = IconUtils.getJSXIcon(getPropValue('icon'), { className: 'p-confirm-popup-icon' }, { props: currentProps });
 
             return (
-                <div className='p-confirm-popup-content'>
+                <div className="p-confirm-popup-content">
                     {icon}
-                    <span className='p-confirm-popup-message'>{message}</span>
+                    <span className="p-confirm-popup-message">{message}</span>
                 </div>
             );
         };
@@ -210,7 +210,7 @@ export const ConfirmPopup = React.memo(
             );
 
             const content = (
-                <div className='p-confirm-popup-footer'>
+                <div className="p-confirm-popup-footer">
                     <Button label={rejectLabel} icon={getPropValue('rejectIcon')} className={rejectClassName} onClick={reject} />
                     <Button ref={acceptBtnRef} label={acceptLabel} icon={getPropValue('acceptIcon')} className={acceptClassName} onClick={accept} />
                 </div>
@@ -244,7 +244,7 @@ export const ConfirmPopup = React.memo(
             return (
                 <CSSTransition
                     nodeRef={overlayRef}
-                    classNames='p-connected-overlay'
+                    classNames="p-connected-overlay"
                     in={visibleState}
                     timeout={{ enter: 120, exit: 100 }}
                     options={getPropValue('transitionOptions')}

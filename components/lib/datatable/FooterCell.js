@@ -58,7 +58,7 @@ export const FooterCell = React.memo((props) => {
     const content = ObjectUtils.getJSXElement(getColumnProp('footer'), { props: props.tableProps });
 
     return (
-        <td ref={elementRef} style={style} className={className} role='cell' colSpan={colSpan} rowSpan={rowSpan}>
+        <td ref={elementRef} style={style} className={className} role="cell" colSpan={colSpan} rowSpan={rowSpan}>
             {content}
         </td>
     );

@@ -439,11 +439,11 @@ const ListBoxDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { ListBox } from 'primereact/listbox';
 `}
@@ -467,7 +467,7 @@ import { ListBox } from 'primereact/listbox';
                     <p>
                         <b>Options as SelectItems</b>
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const citySelectItems = [
     {label: 'New York', value: 'NY'},
@@ -488,7 +488,7 @@ const citySelectItems = [
                     <p>
                         <b>Options as any type</b>
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const cities = [
     {name: 'New York', code: 'NY'},
@@ -534,7 +534,7 @@ const cities = [
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const [filterValue, setFilterValue] = useState('');
 const filterInputRef = React.useRef();
@@ -634,8 +634,8 @@ const groupedCities = [
                     </CodeHighlight>
 
                     <h5>SelectItem API</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -680,8 +680,8 @@ const groupedCities = [
                     </div>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -873,7 +873,7 @@ const groupedCities = [
                                     <td>object</td>
                                     <td>null</td>
                                     <td>
-                                        Whether to use the virtualScroller feature. The properties of <Link href='/virtualscroller'>VirtualScroller</Link> component can be used like an object in it.
+                                        Whether to use the virtualScroller feature. The properties of <Link href="/virtualscroller">VirtualScroller</Link> component can be used like an object in it.
                                     </td>
                                 </tr>
                             </tbody>
@@ -881,8 +881,8 @@ const groupedCities = [
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -913,10 +913,10 @@ const groupedCities = [
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -967,8 +967,8 @@ const groupedCities = [
 `}
                         </CodeHighlight>
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

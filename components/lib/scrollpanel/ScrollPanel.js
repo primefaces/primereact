@@ -158,13 +158,13 @@ export const ScrollPanel = React.forwardRef((props, ref) => {
 
     return (
         <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>
-            <div className='p-scrollpanel-wrapper'>
-                <div ref={contentRef} className='p-scrollpanel-content' onScroll={moveBar} onMouseEnter={moveBar}>
+            <div className="p-scrollpanel-wrapper">
+                <div ref={contentRef} className="p-scrollpanel-content" onScroll={moveBar} onMouseEnter={moveBar}>
                     {props.children}
                 </div>
             </div>
-            <div ref={xBarRef} className='p-scrollpanel-bar p-scrollpanel-bar-x' onMouseDown={onXBarMouseDown}></div>
-            <div ref={yBarRef} className='p-scrollpanel-bar p-scrollpanel-bar-y' onMouseDown={onYBarMouseDown}></div>
+            <div ref={xBarRef} className="p-scrollpanel-bar p-scrollpanel-bar-x" onMouseDown={onXBarMouseDown}></div>
+            <div ref={yBarRef} className="p-scrollpanel-bar p-scrollpanel-bar-y" onMouseDown={onYBarMouseDown}></div>
         </div>
     );
 });

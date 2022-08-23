@@ -7,7 +7,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeTablePageDemo = () => {
-
     const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
@@ -46,7 +45,9 @@ const TreeTablePageDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>TreeTable <span>Page</span></h1>
+                    <h1>
+                        TreeTable <span>Page</span>
+                    </h1>
                     <p>Pagination is enabled by setting paginator property to true and defining a rows property to specify the number of rows per page.</p>
                 </div>
 
@@ -65,15 +66,14 @@ const TreeTablePageDemo = () => {
 
             <TreeTablePageDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeTablePageDemo;
 
 const TreeTablePageDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -135,7 +135,7 @@ export class TreeTablePageDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -187,7 +187,7 @@ const TreeTablePageDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -239,7 +239,7 @@ const TreeTablePageDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
@@ -297,15 +297,11 @@ const TreeTablePageDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeTablePageDemo', sources: sources })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeTablePageDemo', sources: sources })}</TabView>
         </div>
-    )
-})
+    );
+});

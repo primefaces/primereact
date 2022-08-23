@@ -15,7 +15,7 @@ export const SplitButtonItem = React.memo((props) => {
     };
 
     const createSeparator = () => {
-        return <li className='p-menu-separator' role='separator'></li>;
+        return <li className="p-menu-separator" role="separator"></li>;
     };
 
     const createMenuitem = () => {
@@ -23,9 +23,9 @@ export const SplitButtonItem = React.memo((props) => {
         const className = classNames('p-menuitem-link', { 'p-disabled': disabled });
         const iconClassName = classNames('p-menuitem-icon', _icon);
         const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props: props.splitButtonProps });
-        const label = _label && <span className='p-menuitem-text'>{_label}</span>;
+        const label = _label && <span className="p-menuitem-text">{_label}</span>;
         let content = (
-            <a href={url || '#'} role='menuitem' className={className} target={target} onClick={onClick} aria-label={_label}>
+            <a href={url || '#'} role="menuitem" className={className} target={target} onClick={onClick} aria-label={_label}>
                 {icon}
                 {label}
             </a>
@@ -45,7 +45,7 @@ export const SplitButtonItem = React.memo((props) => {
         }
 
         return (
-            <li className='p-menuitem' role='none'>
+            <li className="p-menuitem" role="none">
                 {content}
             </li>
         );

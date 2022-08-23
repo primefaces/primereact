@@ -209,11 +209,11 @@ const SliderDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Slider } from 'primereact/slider';
 `}
@@ -260,8 +260,8 @@ import { Slider } from 'primereact/slider';
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -348,8 +348,8 @@ import { Slider } from 'primereact/slider';
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -380,10 +380,10 @@ import { Slider } from 'primereact/slider';
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -420,8 +420,8 @@ import { Slider } from 'primereact/slider';
 `}
                         </CodeHighlight>
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -437,8 +437,8 @@ import { Slider } from 'primereact/slider';
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span className='inline-flex flex-column'>
-                                                <i className='mb-1'>left arrow</i>
+                                            <span className="inline-flex flex-column">
+                                                <i className="mb-1">left arrow</i>
                                                 <i>up arrow</i>
                                             </span>
                                         </td>
@@ -446,8 +446,8 @@ import { Slider } from 'primereact/slider';
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span className='inline-flex flex-column'>
-                                                <i className='mb-1'>right arrow</i>
+                                            <span className="inline-flex flex-column">
+                                                <i className="mb-1">right arrow</i>
                                                 <i>down arrow</i>
                                             </span>
                                         </td>

@@ -831,11 +831,11 @@ const PaginatorDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Paginator } from 'primereact/paginator';
 `}
@@ -870,7 +870,7 @@ import { Paginator } from 'primereact/paginator';
 
                     <h5>Rows Per Page</h5>
                     <p>Number of items per page can be changed by the user using a dropdown if you define rowsPerPageOptions as an array of possible values. In this case, rows property should also be updated</p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const onPageChange = (e) => {
     setFirst(e.first);
@@ -904,7 +904,7 @@ const onPageChange = (e) => {
                     <p>
                         The pagination element is fully customizable. To make special paginators, an object can be given to the <i>template</i> property as below.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const template = {
     layout: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown CurrentPageReport', // The above keys can be set in the desired order.
@@ -1008,8 +1008,8 @@ const template = {
                     </ul>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1098,8 +1098,8 @@ const template = {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1125,10 +1125,10 @@ const template = {
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1181,11 +1181,11 @@ const template = {
 
                         <p>
                             First, previous, next and last page navigators elements with <i>aria-label</i> attributes referring to the <i>aria.firstPageLabel</i>, <i>aria.prevPageLabel</i>, <i>aria.nextPageLabel</i> and <i>aria.lastPageLabel</i>
-                            properties of the <Link href='/locale'>locale</Link> API respectively.
+                            properties of the <Link href="/locale">locale</Link> API respectively.
                         </p>
 
                         <p>
-                            Page links are also button elements with an <i>aria-label</i> attribute derived from the <i>aria.pageLabel</i> of the <Link href='/locale'>locale</Link> API. Current page is marked with <i>aria-current</i> set to "page" as
+                            Page links are also button elements with an <i>aria-label</i> attribute derived from the <i>aria.pageLabel</i> of the <Link href="/locale">locale</Link> API. Current page is marked with <i>aria-current</i> set to "page" as
                             well.
                         </p>
 
@@ -1194,17 +1194,17 @@ const template = {
                         </p>
 
                         <p>
-                            Rows per page dropdown internally uses a dropdown component, refer to the <Link href='/dropdown'>dropdown</Link> documentation for accessibility details. Additionally, the dropdown uses an <i>aria-label</i>
-                            from the <i>aria.rowsPerPage</i> property of the <Link href='/locale'>locale</Link> API.
+                            Rows per page dropdown internally uses a dropdown component, refer to the <Link href="/dropdown">dropdown</Link> documentation for accessibility details. Additionally, the dropdown uses an <i>aria-label</i>
+                            from the <i>aria.rowsPerPage</i> property of the <Link href="/locale">locale</Link> API.
                         </p>
 
                         <p>
-                            Jump to page input is an <i>input</i> element with an <i>aria-label</i> that refers to the <i>aria.jumpToPage</i> property of the <Link href='/locale'>locale</Link> API.
+                            Jump to page input is an <i>input</i> element with an <i>aria-label</i> that refers to the <i>aria.jumpToPage</i> property of the <Link href="/locale">locale</Link> API.
                         </p>
 
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1236,7 +1236,7 @@ const template = {
 
                         <h6>Rows Per Page Dropdown Keyboard Support</h6>
                         <p>
-                            Refer to the <Link href='/dropdown'>dropdown</Link> documentation for more details about keyboard support.
+                            Refer to the <Link href="/dropdown">dropdown</Link> documentation for more details about keyboard support.
                         </p>
                     </DevelopmentSection>
 

@@ -550,11 +550,11 @@ const TooltipDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import to use it as a component</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Tooltip } from 'primereact/tooltip';
 `}
@@ -614,8 +614,8 @@ import { Tooltip } from 'primereact/tooltip';
 `}
                     </CodeHighlight>
                     <h5>Tooltip Options</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -814,8 +814,8 @@ import { Tooltip } from 'primereact/tooltip';
                     </CodeHighlight>
 
                     <h5>Target Element Options</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -943,8 +943,8 @@ import { Tooltip } from 'primereact/tooltip';
                     <p>
                         All options in <i>Tooltip Options</i> section can be used as a property. In addition;
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -970,8 +970,8 @@ import { Tooltip } from 'primereact/tooltip';
                     </CodeHighlight>
 
                     <h5>Methods</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1004,8 +1004,8 @@ import { Tooltip } from 'primereact/tooltip';
 
                     <h5>Styling</h5>
                     <p>Following is the list of structural style classes</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1037,8 +1037,8 @@ import { Tooltip } from 'primereact/tooltip';
                         </p>
 
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

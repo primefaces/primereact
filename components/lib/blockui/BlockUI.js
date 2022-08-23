@@ -96,7 +96,7 @@ export const BlockUI = React.forwardRef((props, ref) => {
     const mask = createMask();
 
     return (
-        <div id={props.id} ref={elementRef} className='p-blockui-container' {...otherProps}>
+        <div id={props.id} ref={elementRef} className="p-blockui-container" {...otherProps}>
             {props.children}
             {mask}
         </div>

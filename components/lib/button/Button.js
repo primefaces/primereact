@@ -23,10 +23,10 @@ export const Button = React.memo(
 
         const createLabel = () => {
             if (props.label) {
-                return <span className='p-button-label p-c'>{props.label}</span>;
+                return <span className="p-button-label p-c">{props.label}</span>;
             }
 
-            return !props.children && !props.label && <span className='p-button-label p-c' dangerouslySetInnerHTML={{ __html: '&nbsp;' }}></span>;
+            return !props.children && !props.label && <span className="p-button-label p-c" dangerouslySetInnerHTML={{ __html: '&nbsp;' }}></span>;
         };
 
         const createBadge = () => {

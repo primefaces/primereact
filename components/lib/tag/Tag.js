@@ -22,7 +22,7 @@ export const Tag = React.forwardRef((props, ref) => {
     return (
         <span ref={elementRef} className={className} style={props.style} {...otherProps}>
             {icon}
-            <span className='p-tag-value'>{props.value}</span>
+            <span className="p-tag-value">{props.value}</span>
             <span>{props.children}</span>
         </span>
     );

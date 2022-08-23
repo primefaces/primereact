@@ -295,11 +295,11 @@ const PickListDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { PickList } from 'primereact/picklist';
 `}
@@ -345,8 +345,8 @@ const onChange = (e) => {
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -547,8 +547,8 @@ const onChange = (e) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -636,10 +636,10 @@ const onChange = (e) => {
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -687,7 +687,7 @@ const onChange = (e) => {
                             </p>
                             <p>
                                 Controls buttons are <i>button</i> elements with an <i>aria-label</i> that refers to the <i>aria.moveTop</i>, <i>aria.moveUp</i>, <i>aria.moveDown</i>, <i>aria.moveBottom</i>,<i>aria.moveTo</i>, <i>aria.moveAllTo</i>,{' '}
-                                <i>aria.moveFrom</i> and <i>aria.moveAllFrom</i> properties of the <Link href='/locale'>locale</Link> API by default, alternatively you may use
+                                <i>aria.moveFrom</i> and <i>aria.moveAllFrom</i> properties of the <Link href="/locale">locale</Link> API by default, alternatively you may use
                                 <i>moveTopButtonProps</i>, <i>moveUpButtonProps</i>, <i>moveDownButtonProps</i>, <i>moveToButtonProps</i>, <i>moveAllToButtonProps</i>, <i>moveFromButtonProps</i>, <i>moveFromButtonProps</i> and{' '}
                                 <i>moveAllFromButtonProps</i> to customize the buttons like overriding the default <i>aria-label</i> attributes.
                             </p>
@@ -700,8 +700,8 @@ const onChange = (e) => {
 `}
                             </CodeHighlight>
                             <h6>ListBox Keyboard Support</h6>
-                            <div className='doc-tablewrapper'>
-                                <table className='doc-table'>
+                            <div className="doc-tablewrapper">
+                                <table className="doc-table">
                                     <thead>
                                         <tr>
                                             <th>Key</th>
@@ -792,8 +792,8 @@ const onChange = (e) => {
                             </div>
 
                             <h6>Buttons Keyboard Support</h6>
-                            <div className='doc-tablewrapper'>
-                                <table className='doc-table'>
+                            <div className="doc-tablewrapper">
+                                <table className="doc-table">
                                     <thead>
                                         <tr>
                                             <th>Key</th>

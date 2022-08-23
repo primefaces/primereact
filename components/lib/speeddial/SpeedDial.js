@@ -154,7 +154,7 @@ export const SpeedDial = React.memo(
             const iconClassName = classNames('p-speeddial-action-icon', _icon);
             const icon = IconUtils.getJSXIcon(_icon, { className: 'p-speeddial-action-icon' }, { props });
             let content = (
-                <a href={url || '#'} role='menuitem' className={contentClassName} target={target} data-pr-tooltip={label} onClick={(e) => onItemClick(e, item)}>
+                <a href={url || '#'} role="menuitem" className={contentClassName} target={target} data-pr-tooltip={label} onClick={(e) => onItemClick(e, item)}>
                     {icon}
                     <Ripple />
                 </a>
@@ -174,7 +174,7 @@ export const SpeedDial = React.memo(
             }
 
             return (
-                <li key={index} className='p-speeddial-item' style={style} role='none'>
+                <li key={index} className="p-speeddial-item" style={style} role="none">
                     {content}
                 </li>
             );
@@ -188,7 +188,7 @@ export const SpeedDial = React.memo(
             const items = createItems();
 
             return (
-                <ul ref={listRef} className='p-speeddial-list' role='menu'>
+                <ul ref={listRef} className="p-speeddial-list" role="menu">
                     {items}
                 </ul>
             );
@@ -209,7 +209,7 @@ export const SpeedDial = React.memo(
                 [`${props.hideIcon}`]: visible && !!props.hideIcon
             });
             const icon = IconUtils.getJSXIcon(showIconVisible ? props.showIcon : hideIconVisible ? props.hideIcon : null, undefined, { props });
-            const content = <Button type='button' style={props.buttonStyle} className={className} icon={icon} onClick={onClick} disabled={props.disabled} />;
+            const content = <Button type="button" style={props.buttonStyle} className={className} icon={icon} onClick={onClick} disabled={props.disabled} />;
 
             if (props.buttonTemplate) {
                 const defaultContentOptions = {

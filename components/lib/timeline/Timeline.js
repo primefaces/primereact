@@ -14,18 +14,18 @@ export const Timeline = React.memo(
                 props.value &&
                 props.value.map((item, index) => {
                     const opposite = ObjectUtils.getJSXElement(props.opposite, item, index);
-                    const marker = ObjectUtils.getJSXElement(props.marker, item, index) || <div className='p-timeline-event-marker'></div>;
-                    const connector = index !== props.value.length - 1 && <div className='p-timeline-event-connector'></div>;
+                    const marker = ObjectUtils.getJSXElement(props.marker, item, index) || <div className="p-timeline-event-marker"></div>;
+                    const connector = index !== props.value.length - 1 && <div className="p-timeline-event-connector"></div>;
                     const content = ObjectUtils.getJSXElement(props.content, item, index);
 
                     return (
-                        <div key={getKey(item, index)} className='p-timeline-event'>
-                            <div className='p-timeline-event-opposite'>{opposite}</div>
-                            <div className='p-timeline-event-separator'>
+                        <div key={getKey(item, index)} className="p-timeline-event">
+                            <div className="p-timeline-event-opposite">{opposite}</div>
+                            <div className="p-timeline-event-separator">
                                 {marker}
                                 {connector}
                             </div>
-                            <div className='p-timeline-event-content'>{content}</div>
+                            <div className="p-timeline-event-content">{content}</div>
                         </div>
                     );
                 })

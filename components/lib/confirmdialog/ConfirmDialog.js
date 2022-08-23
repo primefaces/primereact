@@ -143,7 +143,7 @@ export const ConfirmDialog = React.memo(
             return (
                 <Dialog visible={visibleState} {...otherProps} className={className} footer={footer} onHide={hide} breakpoints={getPropValue('breakpoints')}>
                     {icon}
-                    <span className='p-confirm-dialog-message'>{message}</span>
+                    <span className="p-confirm-dialog-message">{message}</span>
                 </Dialog>
             );
         };

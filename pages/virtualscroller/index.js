@@ -38,20 +38,24 @@ const VirtualScrollerDemo = () => {
             setLazyItems(_lazyItems);
             setLazyLoading(false);
         }, Math.random() * 1000 + 250);
-    }
+    };
 
     const basicItemTemplate = (item, options) => {
         const className = classNames('scroll-item p-2', {
-            'odd': options.odd
+            odd: options.odd
         });
         const style = options.props.orientation === 'horizontal' ? { width: '50px' } : { height: '50px' };
 
-        return <div className={className} style={style}>{item}</div>;
-    }
+        return (
+            <div className={className} style={style}>
+                {item}
+            </div>
+        );
+    };
 
     const basicLoadingTemplate = (options) => {
         const className = classNames('scroll-item p-2', {
-            'odd': options.odd
+            odd: options.odd
         });
 
         return (
@@ -59,28 +63,30 @@ const VirtualScrollerDemo = () => {
                 <Skeleton width={options.even ? '60%' : '50%'} height="1.3rem" />
             </div>
         );
-    }
+    };
 
     const multiItemTemplate = (items, options) => {
         const className = classNames('scroll-item p-2', {
-            'odd': options.odd
+            odd: options.odd
         });
 
         return (
             <div className={className} style={{ height: '50px' }}>
-                {
-                    items.map((item, i) => {
-                        return <div key={i} style={{ width: '100px' }}>{item}</div>
-                    })
-                }
+                {items.map((item, i) => {
+                    return (
+                        <div key={i} style={{ width: '100px' }}>
+                            {item}
+                        </div>
+                    );
+                })}
             </div>
         );
-    }
+    };
 
     const itemTemplate = (item, options) => {
         const { index, count, first, last, even, odd } = options;
         const className = classNames('custom-scroll-item scroll-item', {
-            'odd': odd
+            odd: odd
         });
 
         return (
@@ -93,26 +99,40 @@ const VirtualScrollerDemo = () => {
                 <div className="flex align-items-center px-2" style={{ height: '25px' }}>{`Even: ${even}`}</div>
                 <div className="flex align-items-center px-2" style={{ height: '25px' }}>{`Odd: ${odd}`}</div>
             </div>
-        )
-    }
+        );
+    };
 
     const loadingTemplate = (options) => {
         const className = classNames('custom-scroll-item scroll-item', {
-            'odd': options.odd
+            odd: options.odd
         });
 
         return (
             <div className={className}>
-                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="60%" height="1.2rem" /></div>
-                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="50%" height="1.2rem" /></div>
-                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="60%" height="1.2rem" /></div>
-                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="50%" height="1.2rem" /></div>
-                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="60%" height="1.2rem" /></div>
-                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="50%" height="1.2rem" /></div>
-                <div className="flex align-items-center px-2" style={{ height: '25px' }}><Skeleton width="60%" height="1.2rem" /></div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>
+                    <Skeleton width="60%" height="1.2rem" />
+                </div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>
+                    <Skeleton width="50%" height="1.2rem" />
+                </div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>
+                    <Skeleton width="60%" height="1.2rem" />
+                </div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>
+                    <Skeleton width="50%" height="1.2rem" />
+                </div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>
+                    <Skeleton width="60%" height="1.2rem" />
+                </div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>
+                    <Skeleton width="50%" height="1.2rem" />
+                </div>
+                <div className="flex align-items-center px-2" style={{ height: '25px' }}>
+                    <Skeleton width="60%" height="1.2rem" />
+                </div>
             </div>
         );
-    }
+    };
 
     return (
         <div>
@@ -182,8 +202,7 @@ const VirtualScrollerDemo = () => {
 
                 <div className="card">
                     <h5>Lazy</h5>
-                    <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onLazyLoad={onLazyLoad}
-                        showLoader loading={lazyLoading} />
+                    <VirtualScroller items={lazyItems} itemSize={50} itemTemplate={basicItemTemplate} lazy onLazyLoad={onLazyLoad} showLoader loading={lazyLoading} />
                 </div>
 
                 <div className="card">
@@ -194,7 +213,7 @@ const VirtualScrollerDemo = () => {
 
             <VirtualScrollerDoc />
         </div>
-    )
-}
+    );
+};
 
 export default VirtualScrollerDemo;

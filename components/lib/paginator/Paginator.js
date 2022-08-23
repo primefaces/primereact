@@ -203,8 +203,8 @@ export const Paginator = React.memo(
             const rightContent = ObjectUtils.getJSXElement(props.rightContent, props);
 
             const elements = createElements();
-            const leftElement = leftContent && <div className='p-paginator-left-content'>{leftContent}</div>;
-            const rightElement = rightContent && <div className='p-paginator-right-content'>{rightContent}</div>;
+            const leftElement = leftContent && <div className="p-paginator-left-content">{leftContent}</div>;
+            const rightElement = rightContent && <div className="p-paginator-right-content">{rightContent}</div>;
 
             return (
                 <div ref={elementRef} className={className} style={props.style} {...otherProps}>

@@ -11,7 +11,7 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
         return (
             <CSSTransition
                 nodeRef={ref}
-                classNames='p-connected-overlay'
+                classNames="p-connected-overlay"
                 in={props.in}
                 timeout={{ enter: 120, exit: 100 }}
                 options={props.transitionOptions}
@@ -24,7 +24,7 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
             >
                 <div ref={ref} className={className} style={props.panelStyle} onClick={props.onClick}>
                     {props.header}
-                    <div className='p-treeselect-items-wrapper' style={wrapperStyle}>
+                    <div className="p-treeselect-items-wrapper" style={wrapperStyle}>
                         {props.children}
                     </div>
                     {props.footer}

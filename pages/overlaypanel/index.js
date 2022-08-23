@@ -11,7 +11,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const OverlayPanelDemo = () => {
-
     const [products, setProducts] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const productService = new ProductService();
@@ -19,7 +18,6 @@ const OverlayPanelDemo = () => {
     const toast = useRef(null);
     const isMounted = useRef(false);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
 
     useEffect(() => {
         if (isMounted.current && selectedProduct) {
@@ -30,24 +28,24 @@ const OverlayPanelDemo = () => {
 
     useEffect(() => {
         isMounted.current = true;
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    }
+    };
 
     const onProductSelect = (e) => {
         setSelectedProduct(e.value);
-    }
+    };
 
     const imageBody = (rowData) => {
-        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
-    }
+        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="product-image" />;
+    };
 
     const priceBody = (rowData) => {
         return formatCurrency(rowData.price);
-    }
+    };
 
     return (
         <div>
@@ -70,8 +68,7 @@ const OverlayPanelDemo = () => {
                     <Button type="button" icon="pi pi-search" label={selectedProduct ? selectedProduct.name : 'Select a Product'} onClick={(e) => op.current.toggle(e)} aria-haspopup aria-controls="overlay_panel" className="select-product-button" />
 
                     <OverlayPanel ref={op} showCloseIcon id="overlay_panel" style={{ width: '450px' }} className="overlaypanel-demo">
-                        <DataTable value={products} selectionMode="single" paginator rows={5}
-                            selection={selectedProduct} onSelectionChange={onProductSelect}>
+                        <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={onProductSelect}>
                             <Column field="name" header="Name" sortable />
                             <Column header="Image" body={imageBody} />
                             <Column field="price" header="Price" sortable body={priceBody} />
@@ -82,7 +79,7 @@ const OverlayPanelDemo = () => {
 
             <OverlayPanelDoc />
         </div>
-    )
-}
+    );
+};
 
 export default OverlayPanelDemo;

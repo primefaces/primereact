@@ -43,10 +43,10 @@ export const Steps = React.memo(
             });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props });
-            const label = item.label && <span className='p-steps-title'>{item.label}</span>;
+            const label = item.label && <span className="p-steps-title">{item.label}</span>;
             let content = (
-                <a href={item.url || '#'} className='p-menuitem-link' role='presentation' target={item.target} onClick={(event) => itemClick(event, item, index)} tabIndex={tabIndex}>
-                    <span className='p-steps-number'>{index + 1}</span>
+                <a href={item.url || '#'} className="p-menuitem-link" role="presentation" target={item.target} onClick={(event) => itemClick(event, item, index)} tabIndex={tabIndex}>
+                    <span className="p-steps-number">{index + 1}</span>
                     {icon}
                     {label}
                 </a>
@@ -70,7 +70,7 @@ export const Steps = React.memo(
             }
 
             return (
-                <li key={key} id={item.id} className={className} style={item.style} role='tab' aria-selected={active} aria-expanded={active}>
+                <li key={key} id={item.id} className={className} style={item.style} role="tab" aria-selected={active} aria-expanded={active}>
                     {content}
                 </li>
             );
@@ -80,7 +80,7 @@ export const Steps = React.memo(
             if (props.model) {
                 const items = props.model.map(createItem);
 
-                return <ul role='tablist'>{items}</ul>;
+                return <ul role="tablist">{items}</ul>;
             }
 
             return null;

@@ -24,8 +24,8 @@ export const Divider = React.forwardRef((props, ref) => {
     }));
 
     return (
-        <div ref={elementRef} className={className} style={props.style} role='separator' {...otherProps}>
-            <div className='p-divider-content'>{props.children}</div>
+        <div ref={elementRef} className={className} style={props.style} role="separator" {...otherProps}>
+            <div className="p-divider-content">{props.children}</div>
         </div>
     );
 });

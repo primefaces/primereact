@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const RatingDemo = () => {
-
     const [val1, setVal1] = useState(null);
     const [val2, setVal2] = useState(null);
 
@@ -42,7 +41,7 @@ const RatingDemo = () => {
 
             <RatingDoc />
         </div>
-    )
-}
+    );
+};
 
 export default RatingDemo;

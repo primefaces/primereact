@@ -950,11 +950,11 @@ const DataTableDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { DataTable } from 'primereact/datatable';
 `}
@@ -976,7 +976,7 @@ import { DataTable } from 'primereact/datatable';
                         not have any restrictions on how data is provided.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export default class ProductService {
 
@@ -996,7 +996,7 @@ export default class ProductService {
                     </CodeHighlight>
 
                     <p>Following sample datatable has 4 columns and retrieves the data from a service on componentDidMount.</p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTableDemo = () => {
 
@@ -1021,7 +1021,7 @@ export const DataTableDemo = () => {
                     </CodeHighlight>
 
                     <p>Dynamic columns are also possible by creating the column component dynamically.</p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTableDemo = () => {
 
@@ -1056,8 +1056,8 @@ export const DataTableDemo = () => {
                     <p>Column component defines various options to specify corresponding features.</p>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1528,7 +1528,7 @@ export const DataTableDemo = () => {
                         <i>header</i> and <i>footer</i> properties for the main header and footer of the table.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTableTemplatingDemo = () => {
 
@@ -1585,7 +1585,7 @@ export const DataTableTemplatingDemo = () => {
                     <h5>Size</h5>
                     <p>In addition to the regular table, a smal and a large version are available with different paddings.</p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 <DataTable value={products} header="Small Table" size="small">
     <Column field="code" header="Code"></Column>
@@ -1615,7 +1615,7 @@ export const DataTableTemplatingDemo = () => {
                         Columns can be grouped at header and footer sections by defining a ColumnGroup component as the <i>headerColumnGroup</i> and <i>footerColumnGroup</i> properties.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import {DataTable} from 'primereact/datatable';
@@ -1718,13 +1718,13 @@ export const DataTableColGroupDemo = () => {
                     <h5>Pagination</h5>
                     <p>
                         Pagination is enabled by setting <i>paginator</i> property to true, <i>rows</i> property defines the number of rows per page and optionally <i>pageLinks</i> specify the the number of page links to display. See{' '}
-                        <Link href='/paginator'>paginator</Link> component for more information about further customization options such as <i>paginator template</i>.
+                        <Link href="/paginator">paginator</Link> component for more information about further customization options such as <i>paginator template</i>.
                     </p>
 
                     <p>
                         Pagination can either be used in <b>Controlled</b> or <b>Uncontrolled</b> manner. In controlled mode, <i>first</i> and <i>onPage</i> properties need to be defined to control the paginator state.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTablePaginatorDemo = () => {
 
@@ -1752,7 +1752,7 @@ export const DataTablePaginatorDemo = () => {
                         In uncontrolled mode, only <i>paginator</i> and <i>rows</i> need to be enabled. Index of the first record can be still be provided using the <i>first</i> property in uncontrolled mode however it is evaluated at initial
                         rendering and ignored in further updates. If you programmatically need to update the paginator state, prefer to use the component as controlled.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTablePaginatorDemo = () => {
 
@@ -1776,7 +1776,7 @@ export const DataTablePaginatorDemo = () => {
                     </CodeHighlight>
 
                     <p>
-                        Elements of the paginator can be customized using the <i>paginatorTemplate</i> by the DataTable. Refer to the template section of the <Link href='/paginator'> paginator documentation</Link> for further options.
+                        Elements of the paginator can be customized using the <i>paginatorTemplate</i> by the DataTable. Refer to the template section of the <Link href="/paginator"> paginator documentation</Link> for further options.
                     </p>
                     <CodeHighlight>
                         {`
@@ -1847,7 +1847,7 @@ const onSort = (e) => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 let multiSortMeta = [];
 multiSortMeta.push({field: 'code', order: 1});
@@ -1883,7 +1883,7 @@ multiSortMeta.push({field: 'name', order: -1});
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const mysort = (event) => {
     //event.field = Field to sort
@@ -1913,7 +1913,7 @@ const mysort = (event) => {
                         <i>filterApplyCallback</i>, use value to populate the filter with your own form components and call the filterCallback with the event of your choice like onInput, onChange, onClick. FilterCallback adds new values in hidden
                         'filters' state in DataTable and when filterApplyCallback is called, data is filtered. The filterApplyCallback method can be used directly if you want to filter by value directly.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const DataTableFilterDemo = () => {
     const [customers, setCustomers] = useState(null);
@@ -1953,7 +1953,7 @@ const DataTableFilterDemo = () => {
                     <h6>Multiple Constraints</h6>
                     <p>In "menu" display, it is possible to add more constraints to a same filter. In this case, metadata could be an array of constraints. The operator defines whether all or any of the constraints should match.</p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const filters = {
     'name': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
@@ -1963,7 +1963,7 @@ const filters = {
 
                     <h6>Populate Filters</h6>
                     <p>Providing a filters with predefined values would be enough to display the table as filtered by default. This approach can also be used to clear filters progammatically.</p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const filters = {
     'name': {operator: FilterOperator.AND, constraints: [
@@ -1979,7 +1979,7 @@ const filters = {
                         Depending on the <i>dataType</i> of the column, suitable match modes are displayed. Default configuration is available at <i>PrimeReact.filterMatchModeOptions</i> which can be used to customize the modes globally for all
                         tables.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 PrimeReact.filterMatchModeOptions = {
     text: [
@@ -2011,7 +2011,7 @@ PrimeReact.filterMatchModeOptions = {
                     <p>
                         If you need to override the match modes for a particular column use the <i>filterMatchModeOptions</i> property and provide an array with label-value pairs.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const matchModes = [
     {label: 'Starts With', value: FilterMatchMode.STARTS_WITH},
@@ -2026,7 +2026,7 @@ const matchModes = [
                     <p>
                         Custom filtering is implemented using the <i>FilterService</i>, first register your filter and add it to your <i>filterMatchModeOptions</i>.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import {FilterService} from 'primereact/api';
 
@@ -2045,7 +2045,7 @@ const matchModes = [
                         By default, input fields are used as filter elements and this can be customized using the <i>filterElement</i> property of the Column that calls the filter function of the table instance by passing the value, field and the
                         match mode.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTableCustomFilterDemo = () => {
 
@@ -2090,7 +2090,7 @@ export const DataTableCustomFilterDemo = () => {
                         be defined to control the filtering state.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTableDefaultFilteredDemo = () => {
 
@@ -2156,7 +2156,7 @@ export const DataTableDefaultFilteredDemo = () => {
 
                     <p>In single mode, selection binding is an object reference.</p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTableSelectionDemo = () => {
 
@@ -2198,7 +2198,7 @@ export const DataTableSelectionDemo = () => {
                         dragSelection property. In this way, a range of rows or cells can be selected.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTableSelectionDemo = () => {
 
@@ -2298,7 +2298,7 @@ export const DataTableSelectionDemo = () => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const onEditorValueChange = (props, value) => {
     let updatedProducts = [...props.value];
@@ -2350,7 +2350,7 @@ const statusEditor = (props) => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const requiredValidator = (e) => {
     let props = e.columnProps;
@@ -2374,7 +2374,7 @@ const requiredValidator = (e) => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const onRowEditValidator = (rowData) => {
     let value = rowData['inventoryStatuses'];
@@ -2388,7 +2388,7 @@ const onRowEditValidator = (rowData) => {
                         DataTable provides exclusive integration with ContextMenu. <i>contextMenuSelection</i> and <i>onContextMenuSelectionChange</i> are used to get a reference of the the selected row and <i>onContextMenu</i> callback is utilized
                         to display a particular context menu.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTableContextMenuDemo = () => {
 
@@ -2453,7 +2453,7 @@ export const DataTableContextMenuDemo = () => {
                         Using expandable rows with a dataKey is suggested for better performance.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTableRowExpansionDemo = () => {
 
@@ -2638,7 +2638,7 @@ export const DataTableRowExpansionDemo = () => {
 
                     <h5>Data Export</h5>
                     <p>DataTable can export its data in CSV format using exportCSV() method.</p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTableExportDemo = () => {
 
@@ -2675,7 +2675,7 @@ export const DataTableExportDemo = () => {
                         <i>rowGroupHeaderTemplate</i> property should be defined to provide the content of the header and optionally <i>rowGroupFooterTemplate</i> is available to provide a footer for the group.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const DataTableRowGroupDemo = () => {
 
@@ -2793,7 +2793,7 @@ const DataTableRowGroupDemo = () => {
 
                     <h6>Full Page Scroll</h6>
                     <p>
-                        FlexScroll can also be used for cases where scrollable viewport should be responsive with respect to the window size. See the <router-link to='/datatable/flexscroll'>full page</router-link> demo for an example.
+                        FlexScroll can also be used for cases where scrollable viewport should be responsive with respect to the window size. See the <router-link to="/datatable/flexscroll">full page</router-link> demo for an example.
                     </p>
                     <CodeHighlight>
                         {`
@@ -2887,7 +2887,7 @@ const DataTableRowGroupDemo = () => {
                     <h6>Scrollable RowGroup</h6>
                     <p>
                         Row groups with subheaders have exclusive support for filtering, when the table scrolls the subheaders stay fixed as long as their data are still displayed. No additional configuration is required to enable this feature. View
-                        the <router-link to='/datatable/rowgroup'>Row Group</router-link> demo for an example.
+                        the <router-link to="/datatable/rowgroup">Row Group</router-link> demo for an example.
                     </p>
 
                     <h5>Lazy Loading</h5>
@@ -2900,7 +2900,7 @@ const DataTableRowGroupDemo = () => {
                     <p>
                         In lazy mode, pagination, sorting and filtering must be used in controlled mode in addition to enabling <i>lazy</i> property. Here is a sample paging implementation with in memory data.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTableLazyDemo = () => {
 
@@ -2956,7 +2956,7 @@ export const DataTableLazyDemo = () => {
                         resizing, column reordering, row expansion and row selection.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const DataTableStateDemo = () => {
 
@@ -2991,7 +2991,7 @@ export const DataTableStateDemo = () => {
                     <h6>Scroll Layout</h6>
                     <p>
                         Set <i>responsiveLayout</i> to scroll to enabled this layout. Note that, when scroll mode is enabled table-layout automatically switches to auto from fixed as a result table widths are likely to differ and resizable columns
-                        are not supported. Read more about <a href='https://www.w3schools.com/cssref/pr_tab_table-layout.asp'>table-layout</a> for more details.
+                        are not supported. Read more about <a href="https://www.w3schools.com/cssref/pr_tab_table-layout.asp">table-layout</a> for more details.
                     </p>
 
                     <CodeHighlight>
@@ -3014,8 +3014,8 @@ export const DataTableStateDemo = () => {
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -3104,7 +3104,7 @@ export const DataTableStateDemo = () => {
                                         FirstPageLink PrevPageLink PageLinks <br /> NextPageLink LastPageLink RowsPerPageDropdown
                                     </td>
                                     <td>
-                                        Template of the paginator. For details, refer to the template section of the <Link href='/paginator'>paginator documentation</Link> for further options.
+                                        Template of the paginator. For details, refer to the template section of the <Link href="/paginator">paginator documentation</Link> for further options.
                                     </td>
                                 </tr>
                                 <tr>
@@ -3374,7 +3374,7 @@ export const DataTableStateDemo = () => {
                                     <td>object</td>
                                     <td>null</td>
                                     <td>
-                                        Whether to use the virtualScroller feature. The properties of <Link href='/virtualscroller'>VirtualScroller</Link> component can be used like an object in it.
+                                        Whether to use the virtualScroller feature. The properties of <Link href="/virtualscroller">VirtualScroller</Link> component can be used like an object in it.
                                         <br />
                                         <b>Note:</b> Currently only vertical orientation mode is supported.
                                     </td>
@@ -3601,8 +3601,8 @@ export const DataTableStateDemo = () => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -3853,8 +3853,8 @@ export const DataTableStateDemo = () => {
                     </div>
 
                     <h5>Methods</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -3908,10 +3908,10 @@ export const DataTableStateDemo = () => {
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -4014,13 +4014,13 @@ export const DataTableStateDemo = () => {
 
                         <p>
                             Built-in checkbox and radiobutton components for row selection use <i>checkbox</i> and <i>radiobutton</i> roles respectively with <i>aria-checked</i> state attribute. The label to describe them is retrieved from the
-                            <i>aria.selectRow</i> and <i>aria.unselectRow</i> properties of the <Link href='/locale'>locale</Link> API. Similarly header checkbox uses <i>selectAll</i> and <i>unselectAll</i> keys. When a row is selected,{' '}
+                            <i>aria.selectRow</i> and <i>aria.unselectRow</i> properties of the <Link href="/locale">locale</Link> API. Similarly header checkbox uses <i>selectAll</i> and <i>unselectAll</i> keys. When a row is selected,{' '}
                             <i>aria-selected</i> is set to true on a row.
                         </p>
 
                         <p>
                             The element to expand or collapse a row is a <i>button</i> with <i>aria-expanded</i> and <i>aria-controls</i> properties. Value to describe the buttons is derived from <i>aria.expandRow</i> and <i>aria.collapseRow</i>{' '}
-                            properties of the <Link href='/locale'>locale</Link> API.
+                            properties of the <Link href="/locale">locale</Link> API.
                         </p>
 
                         <p>
@@ -4038,7 +4038,7 @@ export const DataTableStateDemo = () => {
                         </p>
 
                         <p>
-                            Paginator is a standalone component used inside the DataTable, refer to the <Link href='/paginator'>paginator</Link> for more information about the accessibility features.
+                            Paginator is a standalone component used inside the DataTable, refer to the <Link href="/paginator">paginator</Link> for more information about the accessibility features.
                         </p>
 
                         <h5>Sortable Headers Keyboard Support</h5>
@@ -4047,8 +4047,8 @@ export const DataTableStateDemo = () => {
                         </p>
 
                         <h6>Sortable Headers Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -4079,8 +4079,8 @@ export const DataTableStateDemo = () => {
                         </div>
 
                         <h6>Filter Menu Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -4105,8 +4105,8 @@ export const DataTableStateDemo = () => {
                         </div>
 
                         <h6>Selection Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

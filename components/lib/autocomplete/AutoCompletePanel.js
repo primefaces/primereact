@@ -19,7 +19,7 @@ export const AutoCompletePanel = React.memo(
                 const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, item, j) : props.field ? ObjectUtils.resolveFieldData(item, props.field) : item;
 
                 return (
-                    <li key={key} role='option' aria-selected={selected} className='p-autocomplete-item' style={style} onClick={(e) => props.onItemClick(e, item)} data-group={i} data-index={j}>
+                    <li key={key} role="option" aria-selected={selected} className="p-autocomplete-item" style={style} onClick={(e) => props.onItemClick(e, item)} data-group={i} data-index={j}>
                         {content}
                         <Ripple />
                     </li>
@@ -36,7 +36,7 @@ export const AutoCompletePanel = React.memo(
 
                 return (
                     <React.Fragment key={key}>
-                        <li className='p-autocomplete-item-group' style={style}>
+                        <li className="p-autocomplete-item-group" style={style}>
                             {content}
                         </li>
                         {childrenContent}
@@ -46,7 +46,7 @@ export const AutoCompletePanel = React.memo(
                 const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, index) : props.field ? ObjectUtils.resolveFieldData(suggestion, props.field) : suggestion;
 
                 return (
-                    <li key={index} role='option' aria-selected={props.selectedItem === suggestion} className='p-autocomplete-item' style={style} onClick={(e) => props.onItemClick(e, suggestion)}>
+                    <li key={index} role="option" aria-selected={props.selectedItem === suggestion} className="p-autocomplete-item" style={style} onClick={(e) => props.onItemClick(e, suggestion)}>
                         {content}
                         <Ripple />
                     </li>
@@ -71,7 +71,7 @@ export const AutoCompletePanel = React.memo(
                             const className = classNames('p-autocomplete-items', options.className);
 
                             return (
-                                <ul ref={options.contentRef} className={className} role='listbox' id={props.listId}>
+                                <ul ref={options.contentRef} className={className} role="listbox" id={props.listId}>
                                     {options.children}
                                 </ul>
                             );
@@ -84,7 +84,7 @@ export const AutoCompletePanel = React.memo(
                 const items = createItems();
 
                 return (
-                    <ul className='p-autocomplete-items' role='listbox' id={props.listId}>
+                    <ul className="p-autocomplete-items" role="listbox" id={props.listId}>
                         {items}
                     </ul>
                 );
@@ -99,7 +99,7 @@ export const AutoCompletePanel = React.memo(
             return (
                 <CSSTransition
                     nodeRef={ref}
-                    classNames='p-connected-overlay'
+                    classNames="p-connected-overlay"
                     in={props.in}
                     timeout={{ enter: 120, exit: 100 }}
                     options={props.transitionOptions}

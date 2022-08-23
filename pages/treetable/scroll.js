@@ -8,12 +8,11 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeTableScrollDemo = () => {
-
     const [nodes, setNodes] = useState([]);
     const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -24,7 +23,9 @@ const TreeTableScrollDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>TreeTable <span>Scroll</span></h1>
+                    <h1>
+                        TreeTable <span>Scroll</span>
+                    </h1>
                     <p>Scrolling data is available horizontally, vertically or both with optional support for frozen columns.</p>
                 </div>
 
@@ -75,15 +76,14 @@ const TreeTableScrollDemo = () => {
 
             <TreeTableScrollDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeTableScrollDemo;
 
 const TreeTableScrollDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -153,7 +153,7 @@ export class TreeTableScrollDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -215,7 +215,7 @@ const TreeTableScrollDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -277,7 +277,7 @@ const TreeTableScrollDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./NodeService.js"></script>
@@ -345,15 +345,11 @@ const TreeTableScrollDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeTableScrollDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeTableScrollDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })}</TabView>
         </div>
-    )
-})
+    );
+});

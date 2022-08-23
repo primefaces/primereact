@@ -583,11 +583,11 @@ const CalendarDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Calendar } from 'primereact/calendar';
 `}
@@ -681,7 +681,7 @@ import { Calendar } from 'primereact/calendar';
 
                     <h5>Locale</h5>
                     <p>
-                        Translations for the calendar are defined with the <Link href='/locale'>Locale API</Link>.
+                        Translations for the calendar are defined with the <Link href="/locale">Locale API</Link>.
                     </p>
 
                     <h5>Time</h5>
@@ -753,7 +753,7 @@ import { Calendar } from 'primereact/calendar';
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 dateTemplate(date) {
     if (date.day > 10 && date.day < 15) {
@@ -799,7 +799,7 @@ dateTemplate(date) {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const monthNavigatorTemplate = (options) => {
     // options.onChange: Change event for the default element.
@@ -832,8 +832,8 @@ const monthNavigatorTemplate = (options) => {
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1239,7 +1239,7 @@ const monthNavigatorTemplate = (options) => {
                                     <td>null</td>
                                     <td>
                                         The properties of{' '}
-                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
                                             CSSTransition
                                         </a>{' '}
                                         can be customized, except for "nodeRef" and "in" properties.
@@ -1250,8 +1250,8 @@ const monthNavigatorTemplate = (options) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1334,10 +1334,10 @@ const monthNavigatorTemplate = (options) => {
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1408,7 +1408,7 @@ const monthNavigatorTemplate = (options) => {
                         <p>
                             The optional calendar button requires includes <i>aria-haspopup</i>, <i>aria-expanded</i> for states along with <i>aria-controls</i> to define the relation between the popup and the button. The value to read is retrieved
                             from the <i>chooseDate</i>
-                            key of the aria property from the <Link href='/locale'>locale</Link> API. This label is also used for the <i>aria-label</i> of the popup as well. When there is a value selected, it is formatted and appended to the label to
+                            key of the aria property from the <Link href="/locale">locale</Link> API. This label is also used for the <i>aria-label</i> of the popup as well. When there is a value selected, it is formatted and appended to the label to
                             be able to notify users about the current value.
                         </p>
 
@@ -1443,8 +1443,8 @@ const monthNavigatorTemplate = (options) => {
 `}
                         </CodeHighlight>
                         <h6>Choose Date Button Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1469,8 +1469,8 @@ const monthNavigatorTemplate = (options) => {
                         </div>
 
                         <h6>Popup Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1501,8 +1501,8 @@ const monthNavigatorTemplate = (options) => {
                         </div>
 
                         <h6>Header Buttons Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1527,8 +1527,8 @@ const monthNavigatorTemplate = (options) => {
                         </div>
 
                         <h6>Date Grid Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1613,8 +1613,8 @@ const monthNavigatorTemplate = (options) => {
                         </div>
 
                         <h6>Footer Buttons Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

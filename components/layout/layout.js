@@ -60,24 +60,24 @@ export default function Layout(props) {
         <div className={wrapperClassName}>
             <Analytics />
             <Head>
-                <base href='/'></base>
+                <base href="/"></base>
                 <title>PrimeReact - React UI Component Library</title>
-                <meta charSet='UTF-8' />
-                <meta name='description' content='The ultimate collection of design-agnostic, flexible and accessible React UI Components.' />
-                <meta name='robots' content='index, follow' />
-                <meta name='viewport' content='initial-scale=1, width=device-width' />
-                <meta name='twitter:card' content='summary_large_image' />
-                <meta name='twitter:site' content='@primereact' />
-                <meta name='twitter:title' content='PrimeReact | React UI Component Library' />
-                <meta name='twitter:description' content='The ultimate collection of design-agnostic, flexible and accessible React UI Components.' />
-                <meta property='og:type' content='website'></meta>
-                <meta property='og:title' content='PrimeReact | React UI Component Library'></meta>
-                <meta property='og:url' content='https://www.primefaces.org/primereact'></meta>
-                <meta property='og:description' content='The ultimate collection of design-agnostic, flexible and accessible React UI Components.' />
-                <meta property='og:image' content='https://www.primefaces.org/static/social/primereact-preview.jpg'></meta>
-                <meta property='og:ttl' content='604800'></meta>
-                <link rel='icon' href={`${contextPath}/images/favicon.ico`} type='image/x-icon'></link>
-                <link rel='stylesheet' href={`${contextPath}/styles/flags.css`}></link>
+                <meta charSet="UTF-8" />
+                <meta name="description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
+                <meta name="robots" content="index, follow" />
+                <meta name="viewport" content="initial-scale=1, width=device-width" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:site" content="@primereact" />
+                <meta name="twitter:title" content="PrimeReact | React UI Component Library" />
+                <meta name="twitter:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
+                <meta property="og:type" content="website"></meta>
+                <meta property="og:title" content="PrimeReact | React UI Component Library"></meta>
+                <meta property="og:url" content="https://www.primefaces.org/primereact"></meta>
+                <meta property="og:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
+                <meta property="og:image" content="https://www.primefaces.org/static/social/primereact-preview.jpg"></meta>
+                <meta property="og:ttl" content="604800"></meta>
+                <link rel="icon" href={`${contextPath}/images/favicon.ico`} type="image/x-icon"></link>
+                <link rel="stylesheet" href={`${contextPath}/styles/flags.css`}></link>
                 {/* eslint-disable */}
                 <script src={`${contextPath}/scripts/prism/prism.js`} data-manual></script>
                 {/* eslint-enable */}
@@ -94,8 +94,8 @@ export default function Layout(props) {
                     onRippleChange: onRippleChange
                 }}
             >
-                <div className='layout-content'>
-                    <div className='layout-content-inner'>
+                <div className="layout-content">
+                    <div className="layout-content-inner">
                         {props.children}
                         <Footer></Footer>
                     </div>

@@ -210,11 +210,11 @@ const StyleClassDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { StyleClass } from 'primereact/styleclass';
 `}
@@ -264,8 +264,8 @@ import { StyleClass } from 'primereact/styleclass';
                     <p>
                         Target element is defined with the <i>selector</i> prop that can either be a valid css query or one of the keywords below.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -293,8 +293,8 @@ import { StyleClass } from 'primereact/styleclass';
                         </table>
                     </div>
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>

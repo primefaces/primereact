@@ -29,8 +29,8 @@ export const ToastMessage = React.memo(
         const createCloseIcon = () => {
             if (closable !== false) {
                 return (
-                    <button type='button' className='p-toast-icon-close p-link' onClick={onClose}>
-                        <span className='p-toast-icon-close-icon pi pi-times'></span>
+                    <button type="button" className="p-toast-icon-close p-link" onClick={onClose}>
+                        <span className="p-toast-icon-close-icon pi pi-times"></span>
                         <Ripple />
                     </button>
                 );
@@ -53,9 +53,9 @@ export const ToastMessage = React.memo(
                     contentEl || (
                         <>
                             <span className={iconClassName}></span>
-                            <div className='p-toast-message-text'>
-                                <span className='p-toast-summary'>{summary}</span>
-                                {detail && <div className='p-toast-detail'>{detail}</div>}
+                            <div className="p-toast-message-text">
+                                <span className="p-toast-summary">{summary}</span>
+                                {detail && <div className="p-toast-detail">{detail}</div>}
                             </div>
                         </>
                     )
@@ -77,7 +77,7 @@ export const ToastMessage = React.memo(
         const closeIcon = createCloseIcon();
 
         return (
-            <div ref={ref} className={className} style={style} role='alert' aria-live='assertive' aria-atomic='true' onClick={onClick}>
+            <div ref={ref} className={className} style={style} role="alert" aria-live="assertive" aria-atomic="true" onClick={onClick}>
                 <div className={contentClassName} style={contentStyle}>
                     {message}
                     {closeIcon}

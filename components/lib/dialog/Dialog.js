@@ -403,8 +403,8 @@ export const Dialog = React.forwardRef((props, ref) => {
     const createCloseIcon = () => {
         if (props.closable) {
             return (
-                <button ref={closeRef} type='button' className='p-dialog-header-icon p-dialog-header-close p-link' aria-label={props.ariaCloseIconLabel} onClick={onClose}>
-                    <span className='p-dialog-header-close-icon pi pi-times'></span>
+                <button ref={closeRef} type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={props.ariaCloseIconLabel} onClick={onClose}>
+                    <span className="p-dialog-header-close-icon pi pi-times"></span>
                     <Ripple />
                 </button>
             );
@@ -421,7 +421,7 @@ export const Dialog = React.forwardRef((props, ref) => {
 
         if (props.maximizable) {
             return (
-                <button type='button' className='p-dialog-header-icon p-dialog-header-maximize p-link' onClick={toggleMaximize}>
+                <button type="button" className="p-dialog-header-icon p-dialog-header-maximize p-link" onClick={toggleMaximize}>
                     <span className={iconClassName}></span>
                     <Ripple />
                 </button>
@@ -442,10 +442,10 @@ export const Dialog = React.forwardRef((props, ref) => {
 
             return (
                 <div ref={headerRef} style={props.headerStyle} className={headerClassName} onMouseDown={onDragStart}>
-                    <div id={headerId} className='p-dialog-title'>
+                    <div id={headerId} className="p-dialog-title">
                         {header}
                     </div>
-                    <div className='p-dialog-header-icons'>
+                    <div className="p-dialog-header-icons">
                         {icons}
                         {maximizeIcon}
                         {closeIcon}
@@ -473,7 +473,7 @@ export const Dialog = React.forwardRef((props, ref) => {
 
         return (
             footer && (
-                <div ref={footerRef} className='p-dialog-footer'>
+                <div ref={footerRef} className="p-dialog-footer">
                     {footer}
                 </div>
             )
@@ -482,7 +482,7 @@ export const Dialog = React.forwardRef((props, ref) => {
 
     const createResizer = () => {
         if (props.resizable) {
-            return <span className='p-resizable-handle' style={{ zIndex: 90 }} onMouseDown={onResizeStart}></span>;
+            return <span className="p-resizable-handle" style={{ zIndex: 90 }} onMouseDown={onResizeStart}></span>;
         }
 
         return null;
@@ -519,8 +519,8 @@ export const Dialog = React.forwardRef((props, ref) => {
 
         return (
             <div ref={maskRef} style={props.maskStyle} className={maskClassName} onClick={onMaskClick}>
-                <CSSTransition nodeRef={dialogRef} classNames='p-dialog' timeout={transitionTimeout} in={visibleState} options={props.transitionOptions} unmountOnExit onEnter={onEnter} onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
-                    <div ref={dialogRef} id={idState} className={className} style={props.style} onClick={props.onClick} role='dialog' {...otherProps} aria-labelledby={headerId} aria-describedby={contentId} aria-modal={props.modal}>
+                <CSSTransition nodeRef={dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={visibleState} options={props.transitionOptions} unmountOnExit onEnter={onEnter} onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
+                    <div ref={dialogRef} id={idState} className={className} style={props.style} onClick={props.onClick} role="dialog" {...otherProps} aria-labelledby={headerId} aria-describedby={contentId} aria-modal={props.modal}>
                         {header}
                         {content}
                         {footer}

@@ -572,11 +572,11 @@ const InputNumberDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { InputNumber } from 'primereact/inputnumber';
 `}
@@ -622,7 +622,7 @@ import { InputNumber } from 'primereact/inputnumber';
 
                     <p>
                         <i>locale</i> option is available to set the localization information such as grouping and decimal symbols where default value is the browser locale. Locales are defined per{' '}
-                        <a href='https://tools.ietf.org/html/rfc5646'>BCP Language Tag</a>.
+                        <a href="https://tools.ietf.org/html/rfc5646">BCP Language Tag</a>.
                     </p>
                     <CodeHighlight>
                         {`
@@ -722,8 +722,8 @@ Vertical
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -793,7 +793,7 @@ Vertical
                                     <td>best fit</td>
                                     <td>
                                         The locale matching algorithm to use. Possible values are "lookup" and "best fit"; the default is "best fit". See{' '}
-                                        <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_negotiation'>Locale Negotation</a> for details.
+                                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_negotiation">Locale Negotation</a> for details.
                                     </td>
                                 </tr>
                                 <tr>
@@ -819,7 +819,7 @@ Vertical
                                     <td>string</td>
                                     <td>null</td>
                                     <td>
-                                        The currency to use in currency formatting. Possible values are the <a href='https://www.currency-iso.org/en/home/tables/table-a1.html'>ISO 4217 currency codes</a>, such as "USD" for the US dollar, "EUR" for
+                                        The currency to use in currency formatting. Possible values are the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency codes</a>, such as "USD" for the US dollar, "EUR" for
                                         the euro, or "CNY" for the Chinese RMB. There is no default value; if the style is "currency", the currency property must be provided.
                                     </td>
                                 </tr>
@@ -844,7 +844,7 @@ Vertical
                                     <td>null</td>
                                     <td>
                                         The minimum number of fraction digits to use. Possible values are from 0 to 20; the default for plain number and percent formatting is 0; the default for currency formatting is the number of minor unit digits
-                                        provided by the <a href='https://www.currency-iso.org/en/home/tables/table-a1.html'>ISO 4217 currency code list</a> (2 if the list doesn't provide that information).
+                                        provided by the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency code list</a> (2 if the list doesn't provide that information).
                                     </td>
                                 </tr>
                                 <tr>
@@ -853,7 +853,7 @@ Vertical
                                     <td>null</td>
                                     <td>
                                         The maximum number of fraction digits to use. Possible values are from 0 to 20; the default for plain number formatting is the larger of minimumFractionDigits and 3; the default for currency formatting is the
-                                        larger of minimumFractionDigits and the number of minor unit digits provided by the <a href='https://www.currency-iso.org/en/home/tables/table-a1.html'>ISO 4217 currency code list</a>
+                                        larger of minimumFractionDigits and the number of minor unit digits provided by the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency code list</a>
                                         (2 if the list doesn't provide that information).
                                     </td>
                                 </tr>
@@ -1006,8 +1006,8 @@ Vertical
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1053,10 +1053,10 @@ Vertical
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1124,8 +1124,8 @@ Vertical
                         </CodeHighlight>
 
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

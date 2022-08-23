@@ -32,8 +32,8 @@ export const UIMessage = React.memo(
         const createCloseIcon = () => {
             if (closable !== false) {
                 return (
-                    <button type='button' className='p-message-close p-link' onClick={onClose}>
-                        <i className='p-message-close-icon pi pi-times'></i>
+                    <button type="button" className="p-message-close p-link" onClick={onClose}>
+                        <i className="p-message-close-icon pi pi-times"></i>
                         <Ripple />
                     </button>
                 );
@@ -55,8 +55,8 @@ export const UIMessage = React.memo(
                     content || (
                         <>
                             <span className={icon}></span>
-                            <span className='p-message-summary'>{summary}</span>
-                            <span className='p-message-detail'>{detail}</span>
+                            <span className="p-message-summary">{summary}</span>
+                            <span className="p-message-detail">{detail}</span>
                         </>
                     )
                 );
@@ -71,7 +71,7 @@ export const UIMessage = React.memo(
 
         return (
             <div ref={ref} className={className} onClick={onClick}>
-                <div className='p-message-wrapper'>
+                <div className="p-message-wrapper">
                     {message}
                     {closeIcon}
                 </div>

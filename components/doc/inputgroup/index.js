@@ -525,7 +525,7 @@ const InputGroupDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>{useLiveEditorTabs({ name: 'InputGroupDemo', sources: sources })}</TabView>
         </div>
     );

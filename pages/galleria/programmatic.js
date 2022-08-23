@@ -9,9 +9,8 @@ import getConfig from 'next/config';
 import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 
 const GalleriaProgrammaticDemo = () => {
-
     const [images, setImages] = useState(null);
-    const [activeIndex, setActiveIndex] = useState(0)
+    const [activeIndex, setActiveIndex] = useState(0);
     const galleriaService = new PhotoService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
@@ -31,25 +30,24 @@ const GalleriaProgrammaticDemo = () => {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        galleriaService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const next = () => {
-        setActiveIndex(prevState => (prevState === images.length - 1) ? 0 : prevState + 1)
-    }
+        setActiveIndex((prevState) => (prevState === images.length - 1 ? 0 : prevState + 1));
+    };
 
     const prev = () => {
-        setActiveIndex(prevState => (prevState === images.length + 1) ? 0 : prevState - 1)
-
-    }
+        setActiveIndex((prevState) => (prevState === images.length + 1 ? 0 : prevState - 1));
+    };
 
     const itemTemplate = (item) => {
         return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
-    }
+    };
 
     const thumbnailTemplate = (item) => {
         return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />;
-    }
+    };
 
     return (
         <div>
@@ -59,8 +57,12 @@ const GalleriaProgrammaticDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Galleria <span>Programmatic</span></h1>
-                    <p>Galleria can be controlled programmatically using the <b>activeIndex</b> property.</p>
+                    <h1>
+                        Galleria <span>Programmatic</span>
+                    </h1>
+                    <p>
+                        Galleria can be controlled programmatically using the <b>activeIndex</b> property.
+                    </p>
                 </div>
 
                 <DocActions github="galleria/programmatic.js" />
@@ -73,23 +75,29 @@ const GalleriaProgrammaticDemo = () => {
                         <Button icon="pi pi-plus" onClick={next} className="p-button-secondary ml-2" />
                     </div>
 
-                    <Galleria value={images} activeIndex={activeIndex} onItemChange={(e) => setActiveIndex(e.index)} responsiveOptions={responsiveOptions} numVisible={5}
-                        item={itemTemplate} thumbnail={thumbnailTemplate} style={{ maxWidth: '640px' }} />
+                    <Galleria
+                        value={images}
+                        activeIndex={activeIndex}
+                        onItemChange={(e) => setActiveIndex(e.index)}
+                        responsiveOptions={responsiveOptions}
+                        numVisible={5}
+                        item={itemTemplate}
+                        thumbnail={thumbnailTemplate}
+                        style={{ maxWidth: '640px' }}
+                    />
                 </div>
             </div>
 
             <GalleriaProgrammaticDemoDoc />
         </div>
     );
-
-}
+};
 
 export default GalleriaProgrammaticDemo;
 
 export const GalleriaProgrammaticDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -169,7 +177,7 @@ export class GalleriaProgrammaticDemo extends Component {
 }
             `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -235,7 +243,7 @@ const GalleriaProgrammaticDemo = () => {
 }
             `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -301,7 +309,7 @@ const GalleriaProgrammaticDemo = () => {
 }
                         `
         },
-        'browser' : {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./PhotoService.js"></script>
@@ -371,16 +379,11 @@ const GalleriaProgrammaticDemo = () => {
     }
                     `
         }
-
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'GalleriaProgrammaticDemo', sources: sources, service: 'PhotoService', data: 'photos' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'GalleriaProgrammaticDemo', sources: sources, service: 'PhotoService', data: 'photos' })}</TabView>
         </div>
-    )
-})
+    );
+});

@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const ProgressSpinnerDemo = () => {
-
     return (
         <div>
             <Head>
@@ -34,6 +33,6 @@ const ProgressSpinnerDemo = () => {
             <ProgressSpinnerDoc />
         </div>
     );
-}
+};
 
 export default ProgressSpinnerDemo;

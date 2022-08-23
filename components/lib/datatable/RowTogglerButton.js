@@ -13,7 +13,7 @@ export const RowTogglerButton = React.memo((props) => {
     const iconClassName = classNames('p-row-toggler-icon', props.expanded ? props.expandedRowIcon : props.collapsedRowIcon);
 
     return (
-        <button type='button' onClick={onClick} className='p-row-toggler p-link' tabIndex={props.tabIndex}>
+        <button type="button" onClick={onClick} className="p-row-toggler p-link" tabIndex={props.tabIndex}>
             <span className={iconClassName}></span>
             <Ripple />
         </button>

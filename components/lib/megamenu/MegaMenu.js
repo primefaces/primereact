@@ -192,7 +192,7 @@ export const MegaMenu = React.memo(
 
         const createSeparator = (index) => {
             const key = 'separator_' + index;
-            return <li key={key} className='p-menu-separator' role='separator'></li>;
+            return <li key={key} className="p-menu-separator" role="separator"></li>;
         };
 
         const createSubmenuIcon = (item) => {
@@ -217,9 +217,9 @@ export const MegaMenu = React.memo(
                 const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
                 const iconClassName = classNames(item.icon, 'p-menuitem-icon');
                 const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props });
-                const label = item.label && <span className='p-menuitem-text'>{item.label}</span>;
+                const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
                 let content = (
-                    <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onLeafClick(event, item)} role='menuitem' aria-disabled={item.disabled}>
+                    <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onLeafClick(event, item)} role="menuitem" aria-disabled={item.disabled}>
                         {icon}
                         {label}
                         <Ripple />
@@ -240,7 +240,7 @@ export const MegaMenu = React.memo(
                 }
 
                 return (
-                    <li key={key} id={item.id} className={className} style={item.style} role='none'>
+                    <li key={key} id={item.id} className={className} style={item.style} role="none">
                         {content}
                     </li>
                 );
@@ -259,7 +259,7 @@ export const MegaMenu = React.memo(
 
             return (
                 <React.Fragment key={submenu.label}>
-                    <li id={submenu.id} className={className} style={submenu.style} role='presentation'>
+                    <li id={submenu.id} className={className} style={submenu.style} role="presentation">
                         {submenu.label}
                     </li>
                     {items}
@@ -277,7 +277,7 @@ export const MegaMenu = React.memo(
 
             return (
                 <div key={key} className={columnClassName}>
-                    <ul className='p-megamenu-submenu' role='menu'>
+                    <ul className="p-megamenu-submenu" role="menu">
                         {submenus}
                     </ul>
                 </div>
@@ -301,8 +301,8 @@ export const MegaMenu = React.memo(
                 const columns = createColumns(category);
 
                 return (
-                    <div className='p-megamenu-panel'>
-                        <div className='p-megamenu-grid'>{columns}</div>
+                    <div className="p-megamenu-panel">
+                        <div className="p-megamenu-grid">{columns}</div>
                     </div>
                 );
             }
@@ -314,20 +314,20 @@ export const MegaMenu = React.memo(
             const className = classNames('p-menuitem', { 'p-menuitem-active': category === activeItemState }, category.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': category.disabled });
             const icon = IconUtils.getJSXIcon(category.icon, { className: 'p-menuitem-icon' }, { props });
-            const label = category.label && <span className='p-menuitem-text'>{category.label}</span>;
+            const label = category.label && <span className="p-menuitem-text">{category.label}</span>;
             const itemContent = category.template ? ObjectUtils.getJSXElement(category.template, category) : null;
             const submenuIcon = createSubmenuIcon(category);
             const panel = createCategoryPanel(category);
 
             return (
-                <li key={category.label + '_' + index} id={category.id} className={className} style={category.style} onMouseEnter={(e) => onCategoryMouseEnter(e, category)} role='none'>
+                <li key={category.label + '_' + index} id={category.id} className={className} style={category.style} onMouseEnter={(e) => onCategoryMouseEnter(e, category)} role="none">
                     <a
                         href={category.url || '#'}
                         className={linkClassName}
                         target={category.target}
                         onClick={(e) => onCategoryClick(e, category)}
                         onKeyDown={(e) => onCategoryKeyDown(e, category)}
-                        role='menuitem'
+                        role="menuitem"
                         aria-haspopup={category.items != null}
                     >
                         {icon}
@@ -344,7 +344,7 @@ export const MegaMenu = React.memo(
         const createMenu = () => {
             if (props.model) {
                 return (
-                    <ul className='p-megamenu-root-list' role='menubar'>
+                    <ul className="p-megamenu-root-list" role="menubar">
                         {props.model.map((item, index) => {
                             return createCategory(item, index, true);
                         })}
@@ -359,7 +359,7 @@ export const MegaMenu = React.memo(
             if (props.start) {
                 const start = ObjectUtils.getJSXElement(props.start, props);
 
-                return <div className='p-megamenu-start'>{start}</div>;
+                return <div className="p-megamenu-start">{start}</div>;
             }
 
             return null;
@@ -369,7 +369,7 @@ export const MegaMenu = React.memo(
             if (props.end) {
                 const end = ObjectUtils.getJSXElement(props.end, props);
 
-                return <div className='p-megamenu-end'>{end}</div>;
+                return <div className="p-megamenu-end">{end}</div>;
             }
 
             return null;

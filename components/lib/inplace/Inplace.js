@@ -65,7 +65,7 @@ export const Inplace = React.forwardRef((props, ref) => {
 
     const createCloseButton = () => {
         if (props.closable) {
-            return <Button type='button' className='p-inplace-content-close' icon='pi pi-times' onClick={close} />;
+            return <Button type="button" className="p-inplace-content-close" icon="pi pi-times" onClick={close} />;
         }
 
         return null;
@@ -76,7 +76,7 @@ export const Inplace = React.forwardRef((props, ref) => {
         const closeButton = createCloseButton();
 
         return (
-            <div className='p-inplace-content' {...otherProps}>
+            <div className="p-inplace-content" {...otherProps}>
                 {content}
                 {closeButton}
             </div>

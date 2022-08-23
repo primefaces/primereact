@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const KeyFilterDemo = () => {
-
     return (
         <div>
             <Head>
@@ -61,7 +60,7 @@ const KeyFilterDemo = () => {
 
             <KeyFilterDoc />
         </div>
-    )
-}
+    );
+};
 
 export default KeyFilterDemo;

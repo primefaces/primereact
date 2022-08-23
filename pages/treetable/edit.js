@@ -13,7 +13,7 @@ const TreeTableEditDemo = () => {
     const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onEditorValueChange = (options, value) => {
@@ -22,7 +22,7 @@ const TreeTableEditDemo = () => {
         editedNode.data[options.field] = value;
 
         setNodes(newNodes);
-    }
+    };
 
     const findNodeByKey = (nodes, key) => {
         let path = key.split('-');
@@ -35,29 +35,26 @@ const TreeTableEditDemo = () => {
         }
 
         return node;
-    }
+    };
 
     const inputTextEditor = (options) => {
-        return (
-            <InputText type="text" value={options.rowData[options.field]}
-                onChange={(e) => onEditorValueChange(options, e.target.value)} />
-        );
-    }
+        return <InputText type="text" value={options.rowData[options.field]} onChange={(e) => onEditorValueChange(options, e.target.value)} />;
+    };
 
     const sizeEditor = (options) => {
         return inputTextEditor(options);
-    }
+    };
 
     const typeEditor = (options) => {
         return inputTextEditor(options);
-    }
+    };
 
     const requiredValidator = (e) => {
         let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
-    }
+    };
 
     return (
         <div>
@@ -67,7 +64,9 @@ const TreeTableEditDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>TreeTable <span>Edit</span></h1>
+                    <h1>
+                        TreeTable <span>Edit</span>
+                    </h1>
                     <p>Incell editing provides a quick and user friendly way to manipulate data.</p>
                 </div>
 
@@ -86,15 +85,14 @@ const TreeTableEditDemo = () => {
 
             <TreeTableEditDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeTableEditDemo;
 
 const TreeTableEditDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -183,7 +181,7 @@ export class TreeTableEditDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -258,7 +256,7 @@ const TreeTableEditDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -333,7 +331,7 @@ const TreeTableEditDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
     <link rel="stylesheet" href="./TreeTableDemo.css" />
@@ -415,7 +413,7 @@ const TreeTableEditDemo = () => {
 }
                 `
         }
-    }
+    };
 
     const extFiles = {
         'demo/TreeTableDemo.css': {
@@ -426,15 +424,11 @@ const TreeTableEditDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeTableEditDemo', sources: sources, service: 'NodeService', data: 'treetablenodes', extFiles: extFiles })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeTableEditDemo', sources: sources, service: 'NodeService', data: 'treetablenodes', extFiles: extFiles })}</TabView>
         </div>
-    )
-})
+    );
+});

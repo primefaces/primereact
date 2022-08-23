@@ -148,7 +148,7 @@ export const DataScroller = React.memo(
 
         const createHeader = () => {
             if (props.header) {
-                return <div className='p-datascroller-header'>{props.header}</div>;
+                return <div className="p-datascroller-header">{props.header}</div>;
             }
 
             return null;
@@ -156,7 +156,7 @@ export const DataScroller = React.memo(
 
         const createFooter = () => {
             if (props.footer) {
-                return <div className='p-datascroller-footer'>{props.footer}</div>;
+                return <div className="p-datascroller-footer">{props.footer}</div>;
             }
 
             return null;
@@ -178,8 +178,8 @@ export const DataScroller = React.memo(
             const content = ObjectUtils.isNotEmpty(dataToRenderState) ? dataToRenderState.map(createItem) : createEmptyMessage();
 
             return (
-                <div ref={contentRef} className='p-datascroller-content' style={{ maxHeight: props.scrollHeight }}>
-                    <ul className='p-datascroller-list'>{content}</ul>
+                <div ref={contentRef} className="p-datascroller-content" style={{ maxHeight: props.scrollHeight }}>
+                    <ul className="p-datascroller-list">{content}</ul>
                 </div>
             );
         };

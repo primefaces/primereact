@@ -339,7 +339,7 @@ export const FileUpload = React.memo(
             );
             const labelClassName = 'p-button-label p-clickable';
             const label = iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span className={labelClassName}>{chooseButtonLabel}</span>;
-            const input = <input ref={fileInputRef} type='file' onChange={onFileSelect} multiple={props.multiple} accept={props.accept} disabled={chooseDisabled} />;
+            const input = <input ref={fileInputRef} type="file" onChange={onFileSelect} multiple={props.multiple} accept={props.accept} disabled={chooseDisabled} />;
             const icon = IconUtils.getJSXIcon(_icon || 'pi pi-fw pi-plus', { className: 'p-button-icon p-button-icon-left p-clickable' }, { props });
             return (
                 <span className={chooseClassName} style={style} onClick={choose} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} tabIndex={0}>
@@ -355,14 +355,14 @@ export const FileUpload = React.memo(
             const key = file.name + file.type + file.size;
             const preview = isImage(file) ? (
                 <div>
-                    <img alt={file.name} role='presentation' src={file.objectURL} width={props.previewWidth} />
+                    <img alt={file.name} role="presentation" src={file.objectURL} width={props.previewWidth} />
                 </div>
             ) : null;
-            const fileName = <div className='p-fileupload-filename'>{file.name}</div>;
+            const fileName = <div className="p-fileupload-filename">{file.name}</div>;
             const size = <div>{formatSize(file.size)}</div>;
             const removeButton = (
                 <div>
-                    <Button type='button' icon='pi pi-times' onClick={(e) => remove(e, index)} disabled={disabled} />
+                    <Button type="button" icon="pi pi-times" onClick={(e) => remove(e, index)} disabled={disabled} />
                 </div>
             );
             let content = (
@@ -390,7 +390,7 @@ export const FileUpload = React.memo(
             }
 
             return (
-                <div className='p-fileupload-row' key={key}>
+                <div className="p-fileupload-row" key={key}>
                     {content}
                 </div>
             );
@@ -399,7 +399,7 @@ export const FileUpload = React.memo(
         const createFiles = () => {
             const content = filesState.map(createFile);
 
-            return <div className='p-fileupload-files'>{content}</div>;
+            return <div className="p-fileupload-files">{content}</div>;
         };
 
         const createEmptyContent = () => {
@@ -429,8 +429,8 @@ export const FileUpload = React.memo(
                 const uploadLabel = !uploadOptions.iconOnly ? uploadButtonLabel : '';
                 const cancelLabel = !cancelOptions.iconOnly ? cancelButtonLabel : '';
 
-                uploadButton = <Button type='button' label={uploadLabel} icon={uploadOptions.icon || 'pi pi-upload'} onClick={upload} disabled={uploadDisabled} style={uploadOptions.style} className={uploadOptions.className} />;
-                cancelButton = <Button type='button' label={cancelLabel} icon={cancelOptions.icon || 'pi pi-times'} onClick={clear} disabled={cancelDisabled} style={cancelOptions.style} className={cancelOptions.className} />;
+                uploadButton = <Button type="button" label={uploadLabel} icon={uploadOptions.icon || 'pi pi-upload'} onClick={upload} disabled={uploadDisabled} style={uploadOptions.style} className={uploadOptions.className} />;
+                cancelButton = <Button type="button" label={cancelLabel} icon={cancelOptions.icon || 'pi pi-times'} onClick={clear} disabled={cancelDisabled} style={cancelOptions.style} className={cancelOptions.className} />;
             }
 
             if (hasFiles) {
@@ -482,7 +482,7 @@ export const FileUpload = React.memo(
             const chooseLabel = chooseOptions.iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span className={labelClassName}>{chooseButtonLabel}</span>;
             const label = props.auto ? chooseLabel : <span className={labelClassName}>{hasFiles ? filesState[0].name : chooseLabel}</span>;
             const icon = IconUtils.getJSXIcon(chooseIcon, { className: 'p-button-icon p-button-icon-left' }, { props, hasFiles });
-            const input = !hasFiles && <input ref={fileInputRef} type='file' accept={props.accept} multiple={props.multiple} disabled={disabled} onChange={onFileSelect} />;
+            const input = !hasFiles && <input ref={fileInputRef} type="file" accept={props.accept} multiple={props.multiple} disabled={disabled} onChange={onFileSelect} />;
 
             return (
                 <div className={className} style={props.style} {...otherProps}>

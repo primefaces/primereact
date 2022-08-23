@@ -85,11 +85,11 @@ export const RadioButton = React.memo(
         return (
             <>
                 <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
-                    <div className='p-hidden-accessible'>
+                    <div className="p-hidden-accessible">
                         <input
                             ref={inputRef}
                             id={props.inputId}
-                            type='radio'
+                            type="radio"
                             name={props.name}
                             defaultChecked={props.checked}
                             aria-labelledby={props['aria-labelledby']}
@@ -102,7 +102,7 @@ export const RadioButton = React.memo(
                         />
                     </div>
                     <div className={boxClassName}>
-                        <div className='p-radiobutton-icon'></div>
+                        <div className="p-radiobutton-icon"></div>
                     </div>
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}

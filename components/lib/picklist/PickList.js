@@ -205,19 +205,19 @@ export const PickList = React.memo(
 
         return (
             <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
-                {props.showSourceControls && <PickListControls list={props.source} selection={sourceSelection} onReorder={onSourceReorder} className='p-picklist-source-controls' dataKey={props.dataKey} />}
+                {props.showSourceControls && <PickListControls list={props.source} selection={sourceSelection} onReorder={onSourceReorder} className="p-picklist-source-controls" dataKey={props.dataKey} />}
 
                 <PickListSubList
                     ref={sourceListElementRef}
-                    type='source'
+                    type="source"
                     list={sourceList}
                     selection={sourceSelection}
                     onSelectionChange={(e) => onSelectionChange(e, 'sourceSelection', props.onSourceSelectionChange)}
                     itemTemplate={sourceItemTemplate}
                     header={props.sourceHeader}
                     style={props.sourceStyle}
-                    className='p-picklist-source-wrapper'
-                    listClassName='p-picklist-source'
+                    className="p-picklist-source-wrapper"
+                    listClassName="p-picklist-source"
                     metaKeySelection={props.metaKeySelection}
                     tabIndex={props.tabIndex}
                     dataKey={props.dataKey}
@@ -241,15 +241,15 @@ export const PickList = React.memo(
 
                 <PickListSubList
                     ref={targetListElementRef}
-                    type='target'
+                    type="target"
                     list={targetList}
                     selection={targetSelection}
                     onSelectionChange={(e) => onSelectionChange(e, 'targetSelection', props.onTargetSelectionChange)}
                     itemTemplate={targetItemTemplate}
                     header={props.targetHeader}
                     style={props.targetStyle}
-                    className='p-picklist-target-wrapper'
-                    listClassName='p-picklist-target'
+                    className="p-picklist-target-wrapper"
+                    listClassName="p-picklist-target"
                     metaKeySelection={props.metaKeySelection}
                     tabIndex={props.tabIndex}
                     dataKey={props.dataKey}
@@ -260,7 +260,7 @@ export const PickList = React.memo(
                     template={props.targetFilterTemplate}
                 />
 
-                {props.showTargetControls && <PickListControls list={props.target} selection={targetSelection} onReorder={onTargetReorder} className='p-picklist-target-controls' dataKey={props.dataKey} />}
+                {props.showTargetControls && <PickListControls list={props.target} selection={targetSelection} onReorder={onTargetReorder} className="p-picklist-target-controls" dataKey={props.dataKey} />}
             </div>
         );
     })

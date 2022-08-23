@@ -10,7 +10,7 @@ export const SplitButtonPanel = React.forwardRef((props, ref) => {
         return (
             <CSSTransition
                 nodeRef={ref}
-                classNames='p-connected-overlay'
+                classNames="p-connected-overlay"
                 in={props.in}
                 timeout={{ enter: 120, exit: 100 }}
                 options={props.transitionOptions}
@@ -21,7 +21,7 @@ export const SplitButtonPanel = React.forwardRef((props, ref) => {
                 onExited={props.onExited}
             >
                 <div ref={ref} className={className} style={props.menuStyle} onClick={props.onClick}>
-                    <ul id={props.menuId} className='p-menu-list p-reset' role='menu'>
+                    <ul id={props.menuId} className="p-menu-list p-reset" role="menu">
                         {props.children}
                     </ul>
                 </div>

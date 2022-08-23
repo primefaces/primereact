@@ -185,8 +185,8 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     const createCloseIcon = () => {
         if (props.showCloseIcon) {
             return (
-                <button type='button' className='p-overlaypanel-close p-link' onClick={onCloseClick} aria-label={props.ariaCloseLabel}>
-                    <span className='p-overlaypanel-close-icon pi pi-times'></span>
+                <button type="button" className="p-overlaypanel-close p-link" onClick={onCloseClick} aria-label={props.ariaCloseLabel}>
+                    <span className="p-overlaypanel-close-icon pi pi-times"></span>
                     <Ripple />
                 </button>
             );
@@ -203,7 +203,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
         return (
             <CSSTransition
                 nodeRef={overlayRef}
-                classNames='p-overlaypanel'
+                classNames="p-overlaypanel"
                 in={visibleState}
                 timeout={{ enter: 120, exit: 100 }}
                 options={props.transitionOptions}
@@ -214,7 +214,7 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
                 onExited={onExited}
             >
                 <div ref={overlayRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                    <div className='p-overlaypanel-content' onClick={onContentClick} onMouseDown={onContentClick}>
+                    <div className="p-overlaypanel-content" onClick={onContentClick} onMouseDown={onContentClick}>
                         {props.children}
                     </div>
                     {closeIcon}

@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const SelectButtonDemo = () => {
-
     const [value1, setValue1] = useState('Off');
     const [value2, setValue2] = useState(null);
     const [value3, setValue3] = useState(null);
@@ -24,7 +23,7 @@ const SelectButtonDemo = () => {
 
     const justifyTemplate = (option) => {
         return <i className={option.icon}></i>;
-    }
+    };
 
     return (
         <div>
@@ -57,6 +56,6 @@ const SelectButtonDemo = () => {
             <SelectButtonDoc />
         </div>
     );
-}
+};
 
 export default SelectButtonDemo;

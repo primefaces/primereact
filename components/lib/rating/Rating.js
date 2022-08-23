@@ -69,7 +69,7 @@ export const Rating = React.memo(
 
         const createCancelIcon = () => {
             if (props.cancel) {
-                return <span className='p-rating-icon p-rating-cancel pi pi-ban' onClick={clear} tabIndex={tabIndex} onKeyDown={onCancelKeyDown}></span>;
+                return <span className="p-rating-icon p-rating-cancel pi pi-ban" onClick={clear} tabIndex={tabIndex} onKeyDown={onCancelKeyDown}></span>;
             }
 
             return null;

@@ -939,7 +939,7 @@ export const InputNumber = React.memo(
                     ref={inputRef}
                     id={props.inputId}
                     style={props.inputStyle}
-                    role='spinbutton'
+                    role="spinbutton"
                     className={className}
                     defaultValue={valueToRender}
                     type={props.type}
@@ -983,7 +983,7 @@ export const InputNumber = React.memo(
 
             return (
                 <button
-                    type='button'
+                    type="button"
                     className={className}
                     onMouseLeave={onUpButtonMouseLeave}
                     onMouseDown={onUpButtonMouseDown}
@@ -1013,7 +1013,7 @@ export const InputNumber = React.memo(
 
             return (
                 <button
-                    type='button'
+                    type="button"
                     className={className}
                     onMouseLeave={onDownButtonMouseLeave}
                     onMouseDown={onDownButtonMouseDown}
@@ -1037,7 +1037,7 @@ export const InputNumber = React.memo(
 
             if (stacked) {
                 return (
-                    <span className='p-inputnumber-button-group'>
+                    <span className="p-inputnumber-button-group">
                         {upButton}
                         {downButton}
                     </span>

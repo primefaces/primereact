@@ -495,9 +495,9 @@ export const ColorPicker = React.memo(
 
         const createColorSelector = () => {
             return (
-                <div ref={colorSelectorRef} className='p-colorpicker-color-selector' onMouseDown={onColorMousedown} onTouchStart={onColorDragStart} onTouchMove={onDrag} onTouchEnd={onDragEnd}>
-                    <div className='p-colorpicker-color'>
-                        <div ref={colorHandleRef} className='p-colorpicker-color-handle'></div>
+                <div ref={colorSelectorRef} className="p-colorpicker-color-selector" onMouseDown={onColorMousedown} onTouchStart={onColorDragStart} onTouchMove={onDrag} onTouchEnd={onDragEnd}>
+                    <div className="p-colorpicker-color">
+                        <div ref={colorHandleRef} className="p-colorpicker-color-handle"></div>
                     </div>
                 </div>
             );
@@ -505,8 +505,8 @@ export const ColorPicker = React.memo(
 
         const createHue = () => {
             return (
-                <div ref={hueViewRef} className='p-colorpicker-hue' onMouseDown={onHueMousedown} onTouchStart={onHueDragStart} onTouchMove={onDrag} onTouchEnd={onDragEnd}>
-                    <div ref={hueHandleRef} className='p-colorpicker-hue-handle'></div>
+                <div ref={hueViewRef} className="p-colorpicker-hue" onMouseDown={onHueMousedown} onTouchStart={onHueDragStart} onTouchMove={onDrag} onTouchEnd={onDragEnd}>
+                    <div ref={hueHandleRef} className="p-colorpicker-hue-handle"></div>
                 </div>
             );
         };
@@ -516,7 +516,7 @@ export const ColorPicker = React.memo(
             const hue = createHue();
 
             return (
-                <div className='p-colorpicker-content'>
+                <div className="p-colorpicker-content">
                     {colorSelector}
                     {hue}
                 </div>
@@ -531,7 +531,7 @@ export const ColorPicker = React.memo(
 
                 const inputProps = ObjectUtils.findDiffKeys(props, ColorPicker.defaultProps);
 
-                return <input ref={inputRef} type='text' className={inputClassName} readOnly id={props.inputId} tabIndex={props.tabIndex} disabled={props.disabled} onClick={onInputClick} onKeyDown={onInputKeydown} {...inputProps} />;
+                return <input ref={inputRef} type="text" className={inputClassName} readOnly id={props.inputId} tabIndex={props.tabIndex} disabled={props.disabled} onClick={onInputClick} onKeyDown={onInputKeydown} {...inputProps} />;
             }
 
             return null;

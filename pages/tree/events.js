@@ -8,31 +8,30 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeEventsDemo = () => {
-
     const [nodes, setNodes] = useState([]);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     const toast = useRef(null);
     const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        nodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onExpand = (event) => {
         toast.current.show({ severity: 'success', summary: 'Node Expanded', detail: event.node.label });
-    }
+    };
 
     const onCollapse = (event) => {
         toast.current.show({ severity: 'success', summary: 'Node Collapsed', detail: event.node.label });
-    }
+    };
 
     const onSelect = (event) => {
         toast.current.show({ severity: 'info', summary: 'Node Selected', detail: event.node.label });
-    }
+    };
 
     const onUnselect = (event) => {
         toast.current.show({ severity: 'info', summary: 'Node Unselected', detail: event.node.label });
-    }
+    };
 
     return (
         <div>
@@ -42,7 +41,9 @@ const TreeEventsDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Tree <span>Events</span></h1>
+                    <h1>
+                        Tree <span>Events</span>
+                    </h1>
                     <p>An event is provided each type of user interaction such as expand, collapse and selection.</p>
                 </div>
 
@@ -53,22 +54,20 @@ const TreeEventsDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="card">
-                    <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={e => setSelectedNodeKey(e.value)}
-                        onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} />
+                    <Tree value={nodes} selectionMode="single" selectionKeys={selectedNodeKey} onSelectionChange={(e) => setSelectedNodeKey(e.value)} onExpand={onExpand} onCollapse={onCollapse} onSelect={onSelect} onUnselect={onUnselect} />
                 </div>
             </div>
 
             <TreeEventsDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeEventsDemo;
 
 export const TreeEventsDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -128,7 +127,7 @@ export class TreeEventsDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -175,7 +174,7 @@ const TreeEventsDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -222,7 +221,7 @@ const TreeEventsDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./NodeService.js"></script>
@@ -275,16 +274,11 @@ const TreeEventsDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeEventsDemo', sources: sources, service: 'NodeService', data: 'treenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeEventsDemo', sources: sources, service: 'NodeService', data: 'treenodes' })}</TabView>
         </div>
     );
-
-})
+});

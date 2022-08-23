@@ -107,9 +107,9 @@ export const Terminal = React.memo(
 
             return (
                 <div key={key}>
-                    <span className='p-terminal-prompt'>{props.prompt}&nbsp;</span>
-                    <span className='p-terminal-command'>{text}</span>
-                    <div className='p-terminal-response'>{response}</div>
+                    <span className="p-terminal-prompt">{props.prompt}&nbsp;</span>
+                    <span className="p-terminal-command">{text}</span>
+                    <div className="p-terminal-response">{response}</div>
                 </div>
             );
         };
@@ -117,14 +117,14 @@ export const Terminal = React.memo(
         const createContent = () => {
             const content = commandsState.map(createCommand);
 
-            return <div className='p-terminal-content'>{content}</div>;
+            return <div className="p-terminal-content">{content}</div>;
         };
 
         const createPromptContainer = () => {
             return (
-                <div className='p-terminal-prompt-container'>
-                    <span className='p-terminal-prompt'>{props.prompt}&nbsp;</span>
-                    <input ref={inputRef} type='text' value={commandTextState} className='p-terminal-input' autoComplete='off' onChange={onInputChange} onKeyDown={onInputKeyDown} />
+                <div className="p-terminal-prompt-container">
+                    <span className="p-terminal-prompt">{props.prompt}&nbsp;</span>
+                    <input ref={inputRef} type="text" value={commandTextState} className="p-terminal-input" autoComplete="off" onChange={onInputChange} onKeyDown={onInputKeyDown} />
                 </div>
             );
         };

@@ -189,7 +189,7 @@ export const Chips = React.memo(
 
         const createRemoveIcon = (value, index) => {
             if (!props.disabled && !props.readOnly && isRemovable(value, index)) {
-                return <span className='p-chips-token-icon pi pi-times-circle' onClick={(event) => removeItem(event, index)}></span>;
+                return <span className="p-chips-token-icon pi pi-times-circle" onClick={(event) => removeItem(event, index)}></span>;
             }
 
             return null;
@@ -197,11 +197,11 @@ export const Chips = React.memo(
 
         const createItem = (value, index) => {
             const content = props.itemTemplate ? props.itemTemplate(value) : value;
-            const label = <span className='p-chips-token-label'>{content}</span>;
+            const label = <span className="p-chips-token-label">{content}</span>;
             const icon = createRemoveIcon(value, index);
 
             return (
-                <li key={index} className='p-chips-token p-highlight'>
+                <li key={index} className="p-chips-token p-highlight">
                     {label}
                     {icon}
                 </li>
@@ -210,12 +210,12 @@ export const Chips = React.memo(
 
         const createInput = () => {
             return (
-                <li className='p-chips-input-token'>
+                <li className="p-chips-input-token">
                     <input
                         ref={inputRef}
                         id={props.inputId}
                         placeholder={props.placeholder}
-                        type='text'
+                        type="text"
                         name={props.name}
                         disabled={props.disabled || isMaxedOut()}
                         onKeyDown={onKeyDown}

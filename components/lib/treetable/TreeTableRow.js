@@ -267,7 +267,7 @@ export const TreeTableRow = React.memo((props) => {
         const style = { marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' };
 
         return (
-            <button type='button' className='p-treetable-toggler p-link p-unselectable-text' onClick={onTogglerClick} tabIndex={-1} style={style}>
+            <button type="button" className="p-treetable-toggler p-link p-unselectable-text" onClick={onTogglerClick} tabIndex={-1} style={style}>
                 <i className={iconClassName}></i>
                 <Ripple />
             </button>
@@ -282,9 +282,9 @@ export const TreeTableRow = React.memo((props) => {
             const icon = classNames('p-checkbox-icon p-c', { 'pi pi-check': checked, 'pi pi-minus': partialChecked });
 
             return (
-                <div className='p-checkbox p-treetable-checkbox p-component' ref={checkboxRef} onClick={onCheckboxChange} role='checkbox' aria-checked={checked}>
-                    <div className='p-hidden-accessible'>
-                        <input type='checkbox' onFocus={onCheckboxFocus} onBlur={onCheckboxBlur} />
+                <div className="p-checkbox p-treetable-checkbox p-component" ref={checkboxRef} onClick={onCheckboxChange} role="checkbox" aria-checked={checked}>
+                    <div className="p-hidden-accessible">
+                        <input type="checkbox" onFocus={onCheckboxFocus} onBlur={onCheckboxBlur} />
                     </div>
                     <div className={className} ref={checkboxBoxRef}>
                         <span className={icon}></span>

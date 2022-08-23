@@ -265,17 +265,17 @@ export const Password = React.memo(
                 ObjectUtils.getJSXElement(props.content, props)
             ) : (
                 <>
-                    <div className='p-password-meter'>
+                    <div className="p-password-meter">
                         <div className={`p-password-strength ${strength}`} style={{ width }}></div>
                     </div>
-                    <div className='p-password-info'>{infoTextState}</div>
+                    <div className="p-password-info">{infoTextState}</div>
                 </>
             );
 
             const panel = (
                 <CSSTransition
                     nodeRef={overlayRef}
-                    classNames='p-connected-overlay'
+                    classNames="p-connected-overlay"
                     in={overlayVisibleState}
                     timeout={{ enter: 120, exit: 100 }}
                     options={props.transitionOptions}

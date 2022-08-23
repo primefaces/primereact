@@ -86,7 +86,7 @@ export const TreeTableScrollableView = React.memo((props) => {
         if (ObjectUtils.isNotEmpty(props.columns)) {
             const cols = props.columns.map((col, i) => <col key={col.field + '_' + i} />);
 
-            return <colgroup className='p-treetable-scrollable-colgroup'>{cols}</colgroup>;
+            return <colgroup className="p-treetable-scrollable-colgroup">{cols}</colgroup>;
         } else {
             return null;
         }
@@ -100,23 +100,23 @@ export const TreeTableScrollableView = React.memo((props) => {
 
     return (
         <div className={className} style={{ width: width, left: left }} ref={elementRef}>
-            <div className='p-treetable-scrollable-header' ref={scrollHeaderRef} onScroll={onHeaderScroll}>
-                <div className='p-treetable-scrollable-header-box' ref={scrollHeaderBoxRef}>
-                    <table className='p-treetable-scrollable-header-table'>
+            <div className="p-treetable-scrollable-header" ref={scrollHeaderRef} onScroll={onHeaderScroll}>
+                <div className="p-treetable-scrollable-header-box" ref={scrollHeaderBoxRef}>
+                    <table className="p-treetable-scrollable-header-table">
                         {colGroup}
                         {props.header}
                     </table>
                 </div>
             </div>
-            <div className='p-treetable-scrollable-body' ref={scrollBodyRef} style={scrollableBodyStyle} onScroll={onBodyScroll}>
-                <table ref={scrollTableRef} style={{ top: '0' }} className='p-treetable-scrollable-body-table'>
+            <div className="p-treetable-scrollable-body" ref={scrollBodyRef} style={scrollableBodyStyle} onScroll={onBodyScroll}>
+                <table ref={scrollTableRef} style={{ top: '0' }} className="p-treetable-scrollable-body-table">
                     {colGroup}
                     {props.body}
                 </table>
             </div>
-            <div className='p-treetable-scrollable-footer' ref={scrollFooterRef}>
-                <div className='p-treetable-scrollable-footer-box' ref={scrollFooterBoxRef}>
-                    <table className='p-treetable-scrollable-footer-table'>
+            <div className="p-treetable-scrollable-footer" ref={scrollFooterRef}>
+                <div className="p-treetable-scrollable-footer-box" ref={scrollFooterBoxRef}>
+                    <table className="p-treetable-scrollable-footer-table">
                         {colGroup}
                         {props.footer}
                     </table>

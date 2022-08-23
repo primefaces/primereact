@@ -41,8 +41,8 @@ export const MultiSelectItem = React.memo((props) => {
     const tabIndex = props.disabled ? null : props.tabIndex || 0;
 
     return (
-        <li className={className} style={props.style} onClick={onClick} tabIndex={tabIndex} onKeyDown={onKeyDown} role='option' aria-selected={props.selected}>
-            <div className='p-checkbox p-component'>
+        <li className={className} style={props.style} onClick={onClick} tabIndex={tabIndex} onKeyDown={onKeyDown} role="option" aria-selected={props.selected}>
+            <div className="p-checkbox p-component">
                 <div className={checkboxClassName}>
                     <span className={checkboxIcon}></span>
                 </div>

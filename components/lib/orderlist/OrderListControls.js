@@ -112,11 +112,11 @@ export const OrderListControls = React.memo((props) => {
     };
 
     return (
-        <div className='p-orderlist-controls'>
-            <Button type='button' icon='pi pi-angle-up' onClick={moveUp}></Button>
-            <Button type='button' icon='pi pi-angle-double-up' onClick={moveTop}></Button>
-            <Button type='button' icon='pi pi-angle-down' onClick={moveDown}></Button>
-            <Button type='button' icon='pi pi-angle-double-down' onClick={moveBottom}></Button>
+        <div className="p-orderlist-controls">
+            <Button type="button" icon="pi pi-angle-up" onClick={moveUp}></Button>
+            <Button type="button" icon="pi pi-angle-double-up" onClick={moveTop}></Button>
+            <Button type="button" icon="pi pi-angle-down" onClick={moveDown}></Button>
+            <Button type="button" icon="pi pi-angle-double-down" onClick={moveBottom}></Button>
         </div>
     );
 });

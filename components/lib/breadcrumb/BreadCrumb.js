@@ -32,7 +32,7 @@ export const BreadCrumb = React.memo(
                 const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props });
 
                 let content = (
-                    <a href={url || '#'} className='p-menuitem-link' aria-disabled={disabled} target={target} onClick={(event) => itemClick(event, home)}>
+                    <a href={url || '#'} className="p-menuitem-link" aria-disabled={disabled} target={target} onClick={(event) => itemClick(event, home)}>
                         {icon}
                     </a>
                 );
@@ -60,14 +60,14 @@ export const BreadCrumb = React.memo(
         };
 
         const createSeparator = () => {
-            return <li className='p-breadcrumb-chevron pi pi-chevron-right'></li>;
+            return <li className="p-breadcrumb-chevron pi pi-chevron-right"></li>;
         };
 
         const createMenuitem = (item) => {
             const className = classNames(item.className, { 'p-disabled': item.disabled });
-            const label = item.label && <span className='p-menuitem-text'>{item.label}</span>;
+            const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
             let content = (
-                <a href={item.url || '#'} className='p-menuitem-link' target={item.target} onClick={(event) => itemClick(event, item)} aria-disabled={item.disabled}>
+                <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => itemClick(event, item)} aria-disabled={item.disabled}>
                     {label}
                 </a>
             );
@@ -124,7 +124,7 @@ export const BreadCrumb = React.memo(
         const separator = createSeparator();
 
         return (
-            <nav id={props.id} ref={elementRef} className={className} style={props.style} aria-label='Breadcrumb' {...otherProps}>
+            <nav id={props.id} ref={elementRef} className={className} style={props.style} aria-label="Breadcrumb" {...otherProps}>
                 <ul>
                     {home}
                     {separator}

@@ -5,12 +5,11 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const InputTextDemo = () => {
-
-    const [value1,setValue1] = useState('');
-    const [value2,setValue2] = useState('');
-    const [value3,setValue3] = useState('');
-    const [value4,setValue4] = useState('');
-    const [value5,setValue5] = useState('');
+    const [value1, setValue1] = useState('');
+    const [value2, setValue2] = useState('');
+    const [value3, setValue3] = useState('');
+    const [value4, setValue4] = useState('');
+    const [value5, setValue5] = useState('');
 
     return (
         <div>
@@ -35,7 +34,7 @@ const InputTextDemo = () => {
 
                     <h5>Floating Label</h5>
                     <span className="p-float-label">
-                        <InputText id="username"value={value2} onChange={(e) => setValue2(e.target.value)} />
+                        <InputText id="username" value={value2} onChange={(e) => setValue2(e.target.value)} />
                         <label htmlFor="username">Username</label>
                     </span>
 
@@ -53,16 +52,24 @@ const InputTextDemo = () => {
 
                     <h5>Help Text</h5>
                     <div className="field">
-                        <label htmlFor="username1" className="block">Username</label>
+                        <label htmlFor="username1" className="block">
+                            Username
+                        </label>
                         <InputText id="username1" aria-describedby="username1-help" className="block" />
-                        <small id="username1-help" className="block">Enter your username to reset your password.</small>
+                        <small id="username1-help" className="block">
+                            Enter your username to reset your password.
+                        </small>
                     </div>
 
                     <h5>Invalid</h5>
                     <div className="field">
-                        <label htmlFor="username2" className="block">Username</label>
+                        <label htmlFor="username2" className="block">
+                            Username
+                        </label>
                         <InputText id="username2" aria-describedby="username2-help" className="p-invalid block" />
-                        <small id="username2-help" className="p-error block">Username is not available.</small>
+                        <small id="username2-help" className="p-error block">
+                            Username is not available.
+                        </small>
                     </div>
 
                     <h5>Disabled</h5>
@@ -79,7 +86,7 @@ const InputTextDemo = () => {
 
             <InputTextDoc />
         </div>
-    )
-}
+    );
+};
 
 export default InputTextDemo;

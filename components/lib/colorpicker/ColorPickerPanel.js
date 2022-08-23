@@ -13,7 +13,7 @@ export const ColorPickerPanel = React.forwardRef((props, ref) => {
         return (
             <CSSTransition
                 nodeRef={ref}
-                classNames='p-connected-overlay'
+                classNames="p-connected-overlay"
                 in={props.in}
                 timeout={{ enter: 120, exit: 100 }}
                 options={props.transitionOptions}

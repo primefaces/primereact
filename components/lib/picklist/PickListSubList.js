@@ -105,7 +105,7 @@ export const PickListSubList = React.memo(
 
         const createHeader = () => {
             if (props.header) {
-                return <div className='p-picklist-header'>{ObjectUtils.getJSXElement(props.header, props)}</div>;
+                return <div className="p-picklist-header">{ObjectUtils.getJSXElement(props.header, props)}</div>;
             }
 
             return null;
@@ -127,9 +127,9 @@ export const PickListSubList = React.memo(
         const createFilter = () => {
             if (props.showFilter) {
                 let content = (
-                    <div className='p-picklist-filter'>
-                        <input type='text' value={props.filterValue} onChange={onFilter} onKeyDown={onFilterInputKeyDown} placeholder={props.placeholder} className='p-picklist-filter-input p-inputtext p-component' />
-                        <span className='p-picklist-filter-icon pi pi-search'></span>
+                    <div className="p-picklist-filter">
+                        <input type="text" value={props.filterValue} onChange={onFilter} onKeyDown={onFilterInputKeyDown} placeholder={props.placeholder} className="p-picklist-filter-input p-inputtext p-component" />
+                        <span className="p-picklist-filter-icon pi pi-search"></span>
                     </div>
                 );
 
@@ -149,7 +149,7 @@ export const PickListSubList = React.memo(
                     content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
                 }
 
-                return <div className='p-picklist-filter-container'>{content}</div>;
+                return <div className="p-picklist-filter-container">{content}</div>;
             }
 
             return null;
@@ -159,7 +159,7 @@ export const PickListSubList = React.memo(
             const items = createItems();
             const className = classNames('p-picklist-list', props.listClassName);
             return (
-                <ul className={className} style={props.style} role='listbox' aria-multiselectable>
+                <ul className={className} style={props.style} role="listbox" aria-multiselectable>
                     {items}
                 </ul>
             );

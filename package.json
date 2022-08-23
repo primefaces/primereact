@@ -9,8 +9,8 @@
         "build-package": "rollup -c && gulp build-resources && npm run build-api",
         "build-api": "node ./api-generator/build-api.js",
         "security-check": "npm audit --production --audit-level high",
-        "format-check": "prettier --check \"{components, pages, services}/**/*.{js,ts,tsx}\"",
-        "format": "prettier --write \"{components, pages, services}/**/*.{js,ts,tsx}\"",
+        "format-check": "prettier --check \"{components,pages,service}/**/*.{js,ts,tsx}\"",
+        "format": "prettier --write \"{components,pages,service}/**/*.{js,ts,tsx}\"",
         "start": "next start",
         "lint": "next lint --max-warnings=0",
         "type-check": "tsc"

@@ -20,12 +20,12 @@ export const DataViewLayoutOptions = React.memo((props) => {
 
     return (
         <div id={props.id} style={props.style} className={className} {...otherProps}>
-            <button type='button' className={buttonListClass} onClick={(event) => changeLayout(event, 'list')}>
-                <i className='pi pi-bars'></i>
+            <button type="button" className={buttonListClass} onClick={(event) => changeLayout(event, 'list')}>
+                <i className="pi pi-bars"></i>
                 <Ripple />
             </button>
-            <button type='button' className={buttonGridClass} onClick={(event) => changeLayout(event, 'grid')}>
-                <i className='pi pi-th-large'></i>
+            <button type="button" className={buttonGridClass} onClick={(event) => changeLayout(event, 'grid')}>
+                <i className="pi pi-th-large"></i>
                 <Ripple />
             </button>
         </div>
@@ -105,7 +105,7 @@ export const DataView = React.memo(
                 let iconClassName = classNames('p-dataview-loading-icon pi-spin', props.loadingIcon);
 
                 return (
-                    <div className='p-dataview-loading-overlay p-component-overlay'>
+                    <div className="p-dataview-loading-overlay p-component-overlay">
                         <i className={iconClassName}></i>
                     </div>
                 );
@@ -134,7 +134,7 @@ export const DataView = React.memo(
             if (!props.loading) {
                 const content = props.emptyMessage || localeOption('emptyMessage');
 
-                return <div className='p-col-12 col-12 p-dataview-emptymessage'>{content}</div>;
+                return <div className="p-col-12 col-12 p-dataview-emptymessage">{content}</div>;
             }
 
             return null;
@@ -142,7 +142,7 @@ export const DataView = React.memo(
 
         const createHeader = () => {
             if (props.header) {
-                return <div className='p-dataview-header'>{props.header}</div>;
+                return <div className="p-dataview-header">{props.header}</div>;
             }
 
             return null;
@@ -150,7 +150,7 @@ export const DataView = React.memo(
 
         const createFooter = () => {
             if (props.footer) {
-                return <div className='p-dataview-footer'>{props.footer}</div>;
+                return <div className="p-dataview-footer">{props.footer}</div>;
             }
 
             return null;
@@ -186,7 +186,7 @@ export const DataView = React.memo(
             });
 
             return (
-                <div className='p-dataview-content'>
+                <div className="p-dataview-content">
                     <div className={gridClassName}>{items}</div>
                 </div>
             );

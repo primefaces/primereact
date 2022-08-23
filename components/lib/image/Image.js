@@ -95,7 +95,7 @@ export const Image = React.memo(
         const createPreview = () => {
             if (props.preview) {
                 return (
-                    <div className='p-image-preview-indicator' onClick={onImageClick}>
+                    <div className="p-image-preview-indicator" onClick={onImageClick}>
                         {content}
                     </div>
                 );
@@ -111,32 +111,32 @@ export const Image = React.memo(
             // const rotateClassName = 'p-image-preview-rotate-' + rotateScale;
 
             return (
-                <div ref={maskRef} className='p-image-mask p-component-overlay p-component-overlay-enter' onClick={onMaskClick}>
-                    <div className='p-image-toolbar'>
+                <div ref={maskRef} className="p-image-mask p-component-overlay p-component-overlay-enter" onClick={onMaskClick}>
+                    <div className="p-image-toolbar">
                         {downloadable && (
-                            <button className='p-image-action p-link' onClick={onDownload} type='button'>
-                                <i className='pi pi-download'></i>
+                            <button className="p-image-action p-link" onClick={onDownload} type="button">
+                                <i className="pi pi-download"></i>
                             </button>
                         )}
-                        <button className='p-image-action p-link' onClick={rotateRight} type='button'>
-                            <i className='pi pi-refresh'></i>
+                        <button className="p-image-action p-link" onClick={rotateRight} type="button">
+                            <i className="pi pi-refresh"></i>
                         </button>
-                        <button className='p-image-action p-link' onClick={rotateLeft} type='button'>
-                            <i className='pi pi-undo'></i>
+                        <button className="p-image-action p-link" onClick={rotateLeft} type="button">
+                            <i className="pi pi-undo"></i>
                         </button>
-                        <button className='p-image-action p-link' onClick={zoomOut} type='button' disabled={zoomDisabled}>
-                            <i className='pi pi-search-minus'></i>
+                        <button className="p-image-action p-link" onClick={zoomOut} type="button" disabled={zoomDisabled}>
+                            <i className="pi pi-search-minus"></i>
                         </button>
-                        <button className='p-image-action p-link' onClick={zoomIn} type='button' disabled={zoomDisabled}>
-                            <i className='pi pi-search-plus'></i>
+                        <button className="p-image-action p-link" onClick={zoomIn} type="button" disabled={zoomDisabled}>
+                            <i className="pi pi-search-plus"></i>
                         </button>
-                        <button className='p-image-action p-link' type='button'>
-                            <i className='pi pi-times'></i>
+                        <button className="p-image-action p-link" type="button">
+                            <i className="pi pi-times"></i>
                         </button>
                     </div>
                     <CSSTransition
                         nodeRef={previewRef}
-                        classNames='p-image-preview'
+                        classNames="p-image-preview"
                         in={previewVisibleState}
                         timeout={{ enter: 150, exit: 150 }}
                         unmountOnExit
@@ -147,7 +147,7 @@ export const Image = React.memo(
                         onExited={onExited}
                     >
                         <div ref={previewRef}>
-                            <img src={props.src} className='p-image-preview' style={imagePreviewStyle} onClick={onPreviewImageClick} alt={props.alt} />
+                            <img src={props.src} className="p-image-preview" style={imagePreviewStyle} onClick={onPreviewImageClick} alt={props.alt} />
                         </div>
                     </CSSTransition>
                 </div>
@@ -166,7 +166,7 @@ export const Image = React.memo(
             'p-image-preview-container': props.preview
         });
         const element = createElement();
-        const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : <i className='p-image-preview-icon pi pi-eye'></i>;
+        const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : <i className="p-image-preview-icon pi pi-eye"></i>;
         const preview = createPreview();
         const image = <img ref={imageRef} src={src} className={props.imageClassName} width={width} height={height} style={props.imageStyle} alt={alt} onError={props.onError} />;
 

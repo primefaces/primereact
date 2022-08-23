@@ -312,11 +312,11 @@ const DataScrollerDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { DataScroller } from 'primereact/datascroller';
 `}
@@ -340,7 +340,7 @@ import { DataScroller } from 'primereact/datascroller';
 <DataScroller value={products} itemTemplate={itemTemplate} rows={10}></DataScroller>
 `}
                     </CodeHighlight>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const itemTemplate = (item) => {
     // custom item content
@@ -371,7 +371,7 @@ const itemTemplate = (item) => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const loadData = (event) => {
     //event.first = First row offset
@@ -382,8 +382,8 @@ const loadData = (event) => {
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -476,8 +476,8 @@ const loadData = (event) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -500,8 +500,8 @@ const loadData = (event) => {
 
                     <h5>Styling</h5>
                     <p>Following is the list of structural style classes</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>

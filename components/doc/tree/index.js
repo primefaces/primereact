@@ -260,11 +260,11 @@ const TreeDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Tree } from 'primereact/tree';
 `}
@@ -283,8 +283,8 @@ import { Tree } from 'primereact/tree';
                     </p>
 
                     <h5>TreeNode API</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -370,7 +370,7 @@ import { Tree } from 'primereact/tree';
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const data: [
     {
@@ -434,7 +434,7 @@ const data: [
                         both cases;
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import { Tree } from 'primereact/tree';
@@ -482,7 +482,7 @@ export const TreeDemo = () => {
                         value whereas in multiple or checkbox modes an array is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i> property.
                         Note that in touch enabled devices, Tree does not require metaKey.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
@@ -525,7 +525,7 @@ export const TreeSelectionDemo = () => {
                         Lazy loading is implemented using the <i>onExpand</i> event by adding children to the expanded node. <i>leaf</i> property should be enabled to indicate the node has children but not yet loaded. Here is a in-memory demo that
                         loads generated nodes on expand event to imitate a remote call with a timeout. Notice the usage of <i>loading</i> property as well to give users a feedback about the loading process.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
@@ -581,7 +581,7 @@ export const TreeLazyDemo = () => {
                         <i>label</i> property of a node is used to display as the content by default. Templating is supported as well with the <i>nodeTemplate</i> callback that gets the node instance and returns JSX. For custom filter support define
                         a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element. Example below is a sample tree based navigation of React docs.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component, useState, useRef } from 'react';
 import { Tree } from 'primereact/tree';
@@ -666,7 +666,7 @@ export const TreeTemplatingDemo = () => {
                         Tree nodes can be reordered using dragdrop by setting <i>dragdropScope</i> property to a unique variable and updating the new value at <i>onDragDrop</i> callback. The value of the dragdropScope must be unique to provide
                         intervention from other draggable elements on the page.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
@@ -701,7 +701,7 @@ export const TreeDragDropDemo = () => {
                         hand, in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 <Tree value={nodes} filter />
 
@@ -717,7 +717,7 @@ export const TreeDragDropDemo = () => {
                         click. In addition, a context menu can either be displayed at <i>onContextMenu</i> event. Since this event also passes the node instance, you may choose to display a different context menu for a particular node.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import {Tree} from 'primereact/tree'
@@ -775,8 +775,8 @@ export const TreeContextMenuDemo = () => {
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -986,8 +986,8 @@ export const TreeContextMenuDemo = () => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1097,8 +1097,8 @@ export const TreeContextMenuDemo = () => {
                     </div>
 
                     <h5>Methods</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1118,8 +1118,8 @@ export const TreeContextMenuDemo = () => {
 
                     <h5>Styling</h5>
                     <p>Following is the list of structural style classes</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1182,8 +1182,8 @@ export const TreeContextMenuDemo = () => {
                         </p>
 
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

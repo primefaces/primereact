@@ -391,11 +391,11 @@ const KnobDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Knob } from 'primereact/knob';
 `}
@@ -460,8 +460,8 @@ import { Knob } from 'primereact/knob';
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -560,8 +560,8 @@ import { Knob } from 'primereact/knob';
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -581,10 +581,10 @@ import { Knob } from 'primereact/knob';
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -628,8 +628,8 @@ import { Knob } from 'primereact/knob';
 `}
                         </CodeHighlight>
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -645,8 +645,8 @@ import { Knob } from 'primereact/knob';
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span className='inline-flex flex-column'>
-                                                <i className='mb-1'>left arrow</i>
+                                            <span className="inline-flex flex-column">
+                                                <i className="mb-1">left arrow</i>
                                                 <i>down arrow</i>
                                             </span>
                                         </td>
@@ -654,8 +654,8 @@ import { Knob } from 'primereact/knob';
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span className='inline-flex flex-column'>
-                                                <i className='mb-1'>right arrow</i>
+                                            <span className="inline-flex flex-column">
+                                                <i className="mb-1">right arrow</i>
                                                 <i>up arrow</i>
                                             </span>
                                         </td>

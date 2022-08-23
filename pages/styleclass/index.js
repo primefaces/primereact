@@ -7,7 +7,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const StyleClassDemo = () => {
-
     const toggleBtnRef = useRef(null);
     const openBtnRef = useRef(null);
     const closeBtnRef = useRef(null);
@@ -50,7 +49,7 @@ const StyleClassDemo = () => {
 
             <StyleClassDoc />
         </div>
-    )
-}
+    );
+};
 
 export default StyleClassDemo;

@@ -22,7 +22,7 @@ const FormikFormDemo = () => {
     const countryservice = new CountryService();
 
     useEffect(() => {
-        countryservice.getCountries().then(data => setCountries(data));
+        countryservice.getCountries().then((data) => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formik = useFormik({
@@ -43,8 +43,7 @@ const FormikFormDemo = () => {
 
             if (!data.email) {
                 errors.email = 'Email is required.';
-            }
-            else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
                 errors.email = 'Invalid email address. E.g. example@email.com';
             }
 
@@ -71,7 +70,11 @@ const FormikFormDemo = () => {
         return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
     };
 
-    const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
+    const dialogFooter = (
+        <div className="flex justify-content-center">
+            <Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} />
+        </div>
+    );
     const passwordHeader = <h6>Pick a password</h6>;
     const passwordFooter = (
         <React.Fragment>
@@ -95,10 +98,12 @@ const FormikFormDemo = () => {
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>Formik</h1>
-                    <p>PrimeReact components can be easily used/integrated with <a href="https://formik.org/">Formik</a>. In this example, a register panel is simulated using Formik.</p>
+                    <p>
+                        PrimeReact components can be easily used/integrated with <a href="https://formik.org/">Formik</a>. In this example, a register panel is simulated using Formik.
+                    </p>
                 </div>
 
-                <DocActions github="formik/index.js" showClassSource={false} showBrowserSource={false}/>
+                <DocActions github="formik/index.js" showClassSource={false} showBrowserSource={false} />
             </div>
             <div className="content-section implementation form-demo">
                 <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
@@ -118,7 +123,9 @@ const FormikFormDemo = () => {
                             <div className="field">
                                 <span className="p-float-label">
                                     <InputText id="name" name="name" value={formik.values.name} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
-                                    <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}>Name*</label>
+                                    <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}>
+                                        Name*
+                                    </label>
                                 </span>
                                 {getFormErrorMessage('name')}
                             </div>
@@ -126,15 +133,27 @@ const FormikFormDemo = () => {
                                 <span className="p-float-label p-input-icon-right">
                                     <i className="pi pi-envelope" />
                                     <InputText id="email" name="email" value={formik.values.email} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('email') })} />
-                                    <label htmlFor="email" className={classNames({ 'p-error': isFormFieldValid('email') })}>Email*</label>
+                                    <label htmlFor="email" className={classNames({ 'p-error': isFormFieldValid('email') })}>
+                                        Email*
+                                    </label>
                                 </span>
                                 {getFormErrorMessage('email')}
                             </div>
                             <div className="field">
                                 <span className="p-float-label">
-                                    <Password id="password" name="password" value={formik.values.password} onChange={formik.handleChange} toggleMask
-                                        className={classNames({ 'p-invalid': isFormFieldValid('password') })} header={passwordHeader} footer={passwordFooter} />
-                                    <label htmlFor="password" className={classNames({ 'p-error': isFormFieldValid('password') })}>Password*</label>
+                                    <Password
+                                        id="password"
+                                        name="password"
+                                        value={formik.values.password}
+                                        onChange={formik.handleChange}
+                                        toggleMask
+                                        className={classNames({ 'p-invalid': isFormFieldValid('password') })}
+                                        header={passwordHeader}
+                                        footer={passwordFooter}
+                                    />
+                                    <label htmlFor="password" className={classNames({ 'p-error': isFormFieldValid('password') })}>
+                                        Password*
+                                    </label>
                                 </span>
                                 {getFormErrorMessage('password')}
                             </div>
@@ -152,7 +171,9 @@ const FormikFormDemo = () => {
                             </div>
                             <div className="field-checkbox">
                                 <Checkbox inputId="accept" name="accept" checked={formik.values.accept} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('accept') })} />
-                                <label htmlFor="accept" className={classNames({ 'p-error': isFormFieldValid('accept') })}>I agree to the terms and conditions*</label>
+                                <label htmlFor="accept" className={classNames({ 'p-error': isFormFieldValid('accept') })}>
+                                    I agree to the terms and conditions*
+                                </label>
                             </div>
 
                             <Button type="submit" label="Submit" className="mt-2" />
@@ -164,12 +185,11 @@ const FormikFormDemo = () => {
             <FormikFormDoc />
         </div>
     );
-}
+};
 
 const FormikFormDoc = React.memo(() => {
-
     const sources = {
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useEffect, useState } from 'react';
@@ -322,7 +342,7 @@ export const FormikFormDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useEffect, useState } from 'react';
@@ -502,17 +522,13 @@ export const FormikFormDemo = () => {
 }
             `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'FormikFormDemo', sources, service: 'CountryService', data: 'countries', extFiles, dependencies: { 'formik': '^2.2.6' } })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'FormikFormDemo', sources, service: 'CountryService', data: 'countries', extFiles, dependencies: { formik: '^2.2.6' } })}</TabView>
         </div>
-    )
+    );
 });
 
 export default FormikFormDemo;

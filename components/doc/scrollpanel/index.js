@@ -327,11 +327,11 @@ const ScrollPanelDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { ScrollPanel } from 'primereact/scrollpanel';
 `}
@@ -371,7 +371,7 @@ import { ScrollPanel } from 'primereact/scrollpanel';
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='scss'>
+                    <CodeHighlight lang="scss">
                         {`
 .custom .p-scrollpanel-wrapper {
     border-right: 9px solid #f4f4f4;
@@ -390,8 +390,8 @@ import { ScrollPanel } from 'primereact/scrollpanel';
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -424,8 +424,8 @@ import { ScrollPanel } from 'primereact/scrollpanel';
                     </div>
 
                     <h5>Methods</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -445,10 +445,10 @@ import { ScrollPanel } from 'primereact/scrollpanel';
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -492,8 +492,8 @@ import { ScrollPanel } from 'primereact/scrollpanel';
                             </p>
 
                             <h6>Header Keyboard Support</h6>
-                            <div className='doc-tablewrapper'>
-                                <table className='doc-table'>
+                            <div className="doc-tablewrapper">
+                                <table className="doc-table">
                                     <thead>
                                         <tr>
                                             <th>Key</th>

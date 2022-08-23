@@ -345,7 +345,7 @@ export const BodyRow = React.memo((props) => {
 
     return (
         <tr
-            role='row'
+            role="row"
             tabIndex={tabIndex}
             className={className}
             style={style}

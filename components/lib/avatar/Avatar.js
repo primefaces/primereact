@@ -8,7 +8,7 @@ export const Avatar = React.forwardRef((props, ref) => {
         if (props.image) {
             return <img src={props.image} alt={props.imageAlt} onError={props.onImageError}></img>;
         } else if (props.label) {
-            return <span className='p-avatar-text'>{props.label}</span>;
+            return <span className="p-avatar-text">{props.label}</span>;
         } else if (props.icon) {
             return IconUtils.getJSXIcon(props.icon, { className: 'p-avatar-icon' }, { props });
         }

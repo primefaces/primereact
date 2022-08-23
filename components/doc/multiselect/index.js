@@ -756,11 +756,11 @@ const MultiSelectDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { MultiSelect } from 'primereact/multiselect';
 `}
@@ -784,7 +784,7 @@ import { MultiSelect } from 'primereact/multiselect';
                     <p>
                         <b>Options as SelectItems</b>
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const citySelectItems = [
     {label: 'New York', value: 'NY'},
@@ -805,7 +805,7 @@ const citySelectItems = [
                     <p>
                         <b>Options as any type</b>
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const cities = [
     {name: 'New York', code: 'NY'},
@@ -849,7 +849,7 @@ const cities = [
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const [filterValue, setFilterValue] = useState('');
 const filterInputRef = useRef();
@@ -892,7 +892,7 @@ const myFilterFunction = (event, options) => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 selectedItemTemplate(option) {
     // custom selected item content
@@ -909,7 +909,7 @@ selectedItemTemplate(option) {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 panelHeaderTemplate(options) {
     // options.className: Style class of the panel header.
@@ -988,8 +988,8 @@ const groupedCities = [
                     </CodeHighlight>
 
                     <h5>SelectItem API</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1035,8 +1035,8 @@ const groupedCities = [
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1306,7 +1306,7 @@ const groupedCities = [
                                     <td>null</td>
                                     <td>
                                         The properties of{' '}
-                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
                                             CSSTransition
                                         </a>{' '}
                                         can be customized, except for "nodeRef" and "in" properties.
@@ -1329,7 +1329,7 @@ const groupedCities = [
                                     <td>object</td>
                                     <td>null</td>
                                     <td>
-                                        Whether to use the virtualScroller feature. The properties of <Link href='/virtualscroller'>VirtualScroller</Link> component can be used like an object in it.
+                                        Whether to use the virtualScroller feature. The properties of <Link href="/virtualscroller">VirtualScroller</Link> component can be used like an object in it.
                                     </td>
                                 </tr>
                                 <tr>
@@ -1349,8 +1349,8 @@ const groupedCities = [
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1412,8 +1412,8 @@ const groupedCities = [
                     </div>
 
                     <h5>Methods</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1433,10 +1433,10 @@ const groupedCities = [
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1505,7 +1505,7 @@ const groupedCities = [
 
                         <p>
                             Checkbox component at the header uses a hidden native checkbox element internally that is only visible to screen readers. Value to read is defined with the <i>selectAll</i> and <i>unselectAll</i> keys of the <i>aria</i>{' '}
-                            property from the <Link href='/locale'>locale</Link> API.
+                            property from the <Link href="/locale">locale</Link> API.
                         </p>
 
                         <p>
@@ -1513,7 +1513,7 @@ const groupedCities = [
                         </p>
 
                         <p>
-                            Close button uses <i>close</i> key of the <i>aria</i> property from the <Link href='/locale'>locale</Link> API as the <i>aria-label</i> by default, this can be overriden with the <i>closeButtonProps</i>.
+                            Close button uses <i>close</i> key of the <i>aria</i> property from the <Link href="/locale">locale</Link> API as the <i>aria-label</i> by default, this can be overriden with the <i>closeButtonProps</i>.
                         </p>
                         <CodeHighlight>
                             {`
@@ -1525,8 +1525,8 @@ const groupedCities = [
                         </CodeHighlight>
 
                         <h6>Closed State Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1563,8 +1563,8 @@ const groupedCities = [
                         </div>
 
                         <h6>Popup Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1637,8 +1637,8 @@ const groupedCities = [
                         </div>
 
                         <h6>Toggle All Checkbox Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1663,8 +1663,8 @@ const groupedCities = [
                         </div>
 
                         <h6>Filter Input Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -1689,8 +1689,8 @@ const groupedCities = [
                         </div>
 
                         <h6>Close Button Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

@@ -95,7 +95,7 @@ export const TieredMenu = React.memo(
             return (
                 <CSSTransition
                     nodeRef={menuRef}
-                    classNames='p-connected-overlay'
+                    classNames="p-connected-overlay"
                     in={visibleState}
                     timeout={{ enter: 120, exit: 100 }}
                     options={props.transitionOptions}

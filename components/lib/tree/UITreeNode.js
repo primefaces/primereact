@@ -512,7 +512,7 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const createLabel = () => {
-        let content = <span className='p-treenode-label'>{props.node.label}</span>;
+        let content = <span className="p-treenode-label">{props.node.label}</span>;
 
         if (props.nodeTemplate) {
             const defaultContentOptions = {
@@ -537,8 +537,8 @@ export const UITreeNode = React.memo((props) => {
             const icon = classNames('p-checkbox-icon p-c', { 'pi pi-check': checked, 'pi pi-minus': partialChecked });
 
             return (
-                <div className='p-checkbox p-component'>
-                    <div className={className} role='checkbox' aria-checked={checked}>
+                <div className="p-checkbox p-component">
+                    <div className={className} role="checkbox" aria-checked={checked}>
                         <span className={icon}></span>
                     </div>
                 </div>
@@ -563,7 +563,7 @@ export const UITreeNode = React.memo((props) => {
     const createToggler = () => {
         const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
         let content = (
-            <button type='button' className='p-tree-toggler p-link' tabIndex={-1} onClick={onTogglerClick}>
+            <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={onTogglerClick}>
                 <span className={iconClassName}></span>
                 <Ripple />
             </button>
@@ -587,7 +587,7 @@ export const UITreeNode = React.memo((props) => {
 
     const createDropPoint = (position) => {
         if (props.dragdropScope) {
-            return <li className='p-treenode-droppoint' onDrop={(event) => onDropPoint(event, position)} onDragOver={onDropPointDragOver} onDragEnter={onDropPointDragEnter} onDragLeave={onDropPointDragLeave}></li>;
+            return <li className="p-treenode-droppoint" onDrop={(event) => onDropPoint(event, position)} onDragOver={onDropPointDragOver} onDragEnter={onDropPointDragEnter} onDragLeave={onDropPointDragLeave}></li>;
         }
 
         return null;
@@ -626,7 +626,7 @@ export const UITreeNode = React.memo((props) => {
                 onDragEnd={onDragEnd}
                 tabIndex={tabIndex}
                 onKeyDown={onNodeKeyDown}
-                role='treeitem'
+                role="treeitem"
                 aria-posinset={props.index + 1}
                 aria-expanded={expanded}
                 aria-selected={checked || selected}
@@ -642,7 +642,7 @@ export const UITreeNode = React.memo((props) => {
     const createChildren = () => {
         if (ObjectUtils.isNotEmpty(props.node.children) && expanded) {
             return (
-                <ul className='p-treenode-children' role='group'>
+                <ul className="p-treenode-children" role="group">
                     {props.node.children.map((childNode, index) => {
                         return (
                             <UITreeNode

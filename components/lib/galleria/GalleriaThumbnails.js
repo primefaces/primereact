@@ -36,7 +36,7 @@ const GalleriaThumbnailItem = React.memo((props) => {
 
     return (
         <div className={className}>
-            <div className='p-galleria-thumbnail-item-content' tabIndex={tabIndex} onClick={onItemClick} onKeyDown={onItemKeyDown}>
+            <div className="p-galleria-thumbnail-item-content" tabIndex={tabIndex} onClick={onItemClick} onKeyDown={onItemKeyDown}>
                 {content}
             </div>
         </div>
@@ -364,10 +364,10 @@ export const GalleriaThumbnails = React.memo(
             const forwardNavigator = createForwardNavigator();
 
             return (
-                <div className='p-galleria-thumbnail-container'>
+                <div className="p-galleria-thumbnail-container">
                     {backwardNavigator}
-                    <div className='p-galleria-thumbnail-items-container' style={{ height: height }}>
-                        <div ref={itemsContainerRef} className='p-galleria-thumbnail-items' onTransitionEnd={onTransitionEnd} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
+                    <div className="p-galleria-thumbnail-items-container" style={{ height: height }}>
+                        <div ref={itemsContainerRef} className="p-galleria-thumbnail-items" onTransitionEnd={onTransitionEnd} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
                             {items}
                         </div>
                     </div>
@@ -378,7 +378,7 @@ export const GalleriaThumbnails = React.memo(
 
         const content = createContent();
 
-        return <div className='p-galleria-thumbnail-wrapper'>{content}</div>;
+        return <div className="p-galleria-thumbnail-wrapper">{content}</div>;
     })
 );
 

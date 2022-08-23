@@ -75,11 +75,11 @@ export const OrderListSubList = React.memo((props) => {
     };
 
     const createDropPoint = (index, key) => {
-        return <li key={key} className='p-orderlist-droppoint' onDragOver={(e) => onDragOver(e, index + 1)} onDragLeave={onDragLeave} onDrop={onDrop}></li>;
+        return <li key={key} className="p-orderlist-droppoint" onDragOver={(e) => onDragOver(e, index + 1)} onDragLeave={onDragLeave} onDrop={onDrop}></li>;
     };
 
     const createHeader = () => {
-        return props.header ? <div className='p-orderlist-header'>{props.header}</div> : null;
+        return props.header ? <div className="p-orderlist-header">{props.header}</div> : null;
     };
 
     const createItems = () => {
@@ -97,9 +97,9 @@ export const OrderListSubList = React.memo((props) => {
                             className={itemClassName}
                             onClick={(e) => props.onItemClick({ originalEvent: e, value: item, index: i })}
                             onKeyDown={(e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i })}
-                            role='option'
+                            role="option"
                             aria-selected={isSelected(item)}
-                            draggable='true'
+                            draggable="true"
                             onDragStart={(e) => onDragStart(e, i)}
                             onDragEnd={onDragEnd}
                             tabIndex={props.tabIndex}
@@ -119,7 +119,7 @@ export const OrderListSubList = React.memo((props) => {
                         <li
                             key={key}
                             className={itemClassName}
-                            role='option'
+                            role="option"
                             aria-selected={isSelected(item)}
                             onClick={(e) => props.onItemClick({ originalEvent: e, value: item, index: i })}
                             onKeyDown={(e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i })}
@@ -139,7 +139,7 @@ export const OrderListSubList = React.memo((props) => {
         const items = createItems();
 
         return (
-            <ul ref={listElementRef} className='p-orderlist-list' style={props.listStyle} onDragOver={onListMouseMove} role='listbox' aria-multiselectable>
+            <ul ref={listElementRef} className="p-orderlist-list" style={props.listStyle} onDragOver={onListMouseMove} role="listbox" aria-multiselectable>
                 {items}
             </ul>
         );
@@ -148,9 +148,9 @@ export const OrderListSubList = React.memo((props) => {
     const createFilter = () => {
         if (props.filter) {
             let content = (
-                <div className='p-orderlist-filter'>
-                    <input type='text' value={props.filterValue} onChange={props.onFilter} onKeyDown={onFilterInputKeyDown} placeholder={props.placeholder} className='p-orderlist-filter-input p-inputtext p-component' />
-                    <span className='p-orderlist-filter-icon pi pi-search'></span>
+                <div className="p-orderlist-filter">
+                    <input type="text" value={props.filterValue} onChange={props.onFilter} onKeyDown={onFilterInputKeyDown} placeholder={props.placeholder} className="p-orderlist-filter-input p-inputtext p-component" />
+                    <span className="p-orderlist-filter-icon pi pi-search"></span>
                 </div>
             );
 
@@ -171,7 +171,7 @@ export const OrderListSubList = React.memo((props) => {
                 content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
             }
 
-            return <div className='p-orderlist-filter-container'>{content}</div>;
+            return <div className="p-orderlist-filter-container">{content}</div>;
         }
 
         return null;
@@ -182,7 +182,7 @@ export const OrderListSubList = React.memo((props) => {
     const list = createList();
 
     return (
-        <div className='p-orderlist-list-container'>
+        <div className="p-orderlist-list-container">
             {header}
             {filter}
             {list}

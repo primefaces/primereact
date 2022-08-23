@@ -190,7 +190,7 @@ export const Slider = React.memo(
                     className={className}
                     style={style}
                     tabIndex={props.tabIndex}
-                    role='slider'
+                    role="slider"
                     onMouseDown={(event) => onMouseDown(event, index)}
                     onTouchStart={(event) => onTouchStart(event, index)}
                     onKeyDown={(event) => onKeyDown(event, index)}
@@ -213,7 +213,7 @@ export const Slider = React.memo(
 
             return (
                 <>
-                    <span className='p-slider-range' style={rangeStyle}></span>
+                    <span className="p-slider-range" style={rangeStyle}></span>
                     {rangeStartHandle}
                     {rangeEndHandle}
                 </>
@@ -232,7 +232,7 @@ export const Slider = React.memo(
 
             return (
                 <>
-                    <span className='p-slider-range' style={rangeStyle}></span>
+                    <span className="p-slider-range" style={rangeStyle}></span>
                     {handle}
                 </>
             );

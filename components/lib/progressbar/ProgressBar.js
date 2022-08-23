@@ -8,7 +8,7 @@ export const ProgressBar = React.memo(
         const createLabel = () => {
             if (props.showValue && props.value != null) {
                 const label = props.displayValueTemplate ? props.displayValueTemplate(props.value) : props.value + props.unit;
-                return <div className='p-progressbar-label'>{label}</div>;
+                return <div className="p-progressbar-label">{label}</div>;
             }
 
             return null;
@@ -20,8 +20,8 @@ export const ProgressBar = React.memo(
             const label = createLabel();
 
             return (
-                <div role='progressbar' id={props.id} ref={elementRef} className={className} style={props.style} aria-valuemin='0' aria-valuenow={props.value} aria-valuemax='100' {...otherProps}>
-                    <div className='p-progressbar-value p-progressbar-value-animate' style={{ width: props.value + '%', display: 'block', backgroundColor: props.color }}></div>
+                <div role="progressbar" id={props.id} ref={elementRef} className={className} style={props.style} aria-valuemin="0" aria-valuenow={props.value} aria-valuemax="100" {...otherProps}>
+                    <div className="p-progressbar-value p-progressbar-value-animate" style={{ width: props.value + '%', display: 'block', backgroundColor: props.color }}></div>
                     {label}
                 </div>
             );
@@ -32,9 +32,9 @@ export const ProgressBar = React.memo(
             const className = classNames('p-progressbar p-component p-progressbar-indeterminate', props.className);
 
             return (
-                <div role='progressbar' id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
-                    <div className='p-progressbar-indeterminate-container'>
-                        <div className='p-progressbar-value p-progressbar-value-animate' style={{ backgroundColor: props.color }}></div>
+                <div role="progressbar" id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
+                    <div className="p-progressbar-indeterminate-container">
+                        <div className="p-progressbar-value p-progressbar-value-animate" style={{ backgroundColor: props.color }}></div>
                     </div>
                 </div>
             );

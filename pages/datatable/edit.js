@@ -13,7 +13,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const DataTableEditDemo = () => {
-
     const [products1, setProducts1] = useState(null);
     const [products2, setProducts2] = useState(null);
     const [products3, setProducts3] = useState(null);
@@ -35,10 +34,10 @@ const DataTableEditDemo = () => {
     ];
 
     const dataTableFuncMap = {
-        'products1': setProducts1,
-        'products2': setProducts2,
-        'products3': setProducts3,
-        'products4': setProducts4
+        products1: setProducts1,
+        products2: setProducts2,
+        products3: setProducts3,
+        products4: setProducts4
     };
 
     const productService = new ProductService();
@@ -51,8 +50,8 @@ const DataTableEditDemo = () => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const fetchProductData = (productStateKey) => {
-        productService.getProductsSmall().then(data => dataTableFuncMap[`${productStateKey}`](data));
-    }
+        productService.getProductsSmall().then((data) => dataTableFuncMap[`${productStateKey}`](data));
+    };
 
     const isPositiveInteger = (val) => {
         let str = String(val);
@@ -60,10 +59,10 @@ const DataTableEditDemo = () => {
         if (!str) {
             return false;
         }
-        str = str.replace(/^0+/, "") || "0";
+        str = str.replace(/^0+/, '') || '0';
         let n = Math.floor(Number(str));
         return n !== Infinity && String(n) === str && n >= 0;
-    }
+    };
 
     const getStatusLabel = (status) => {
         switch (status) {
@@ -79,7 +78,7 @@ const DataTableEditDemo = () => {
             default:
                 return 'NA';
         }
-    }
+    };
 
     const onCellEditComplete = (e) => {
         let { rowData, newValue, field, originalEvent: event } = e;
@@ -87,20 +86,16 @@ const DataTableEditDemo = () => {
         switch (field) {
             case 'quantity':
             case 'price':
-                if (isPositiveInteger(newValue))
-                    rowData[field] = newValue;
-                else
-                    event.preventDefault();
+                if (isPositiveInteger(newValue)) rowData[field] = newValue;
+                else event.preventDefault();
                 break;
 
             default:
-                if (newValue.trim().length > 0)
-                    rowData[field] = newValue;
-                else
-                    event.preventDefault();
+                if (newValue.trim().length > 0) rowData[field] = newValue;
+                else event.preventDefault();
                 break;
         }
-    }
+    };
 
     const onRowEditComplete1 = (e) => {
         let _products2 = [...products2];
@@ -109,7 +104,7 @@ const DataTableEditDemo = () => {
         _products2[index] = newData;
 
         setProducts2(_products2);
-    }
+    };
 
     const onRowEditComplete2 = (e) => {
         let _products3 = [...products3];
@@ -118,49 +113,53 @@ const DataTableEditDemo = () => {
         _products3[index] = newData;
 
         setProducts3(_products3);
-    }
+    };
 
     const onRowEditChange = (e) => {
         setEditingRows(e.data);
-    }
+    };
 
     const setActiveRowIndex = (index) => {
         let _editingRows = { ...editingRows, ...{ [`${products3[index].id}`]: true } };
         setEditingRows(_editingRows);
-    }
+    };
 
     const cellEditor = (options) => {
-        if (options.field === 'price')
-            return priceEditor(options);
-        else
-            return textEditor(options);
-    }
+        if (options.field === 'price') return priceEditor(options);
+        else return textEditor(options);
+    };
 
     const textEditor = (options) => {
         return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
-    }
+    };
 
     const statusEditor = (options) => {
         return (
-            <Dropdown value={options.value} options={statuses} optionLabel="label" optionValue="value"
-                onChange={(e) => options.editorCallback(e.value)} placeholder="Select a Status"
+            <Dropdown
+                value={options.value}
+                options={statuses}
+                optionLabel="label"
+                optionValue="value"
+                onChange={(e) => options.editorCallback(e.value)}
+                placeholder="Select a Status"
                 itemTemplate={(option) => {
-                    return <span className={`product-badge status-${option.value.toLowerCase()}`}>{option.label}</span>
-                }} />
+                    return <span className={`product-badge status-${option.value.toLowerCase()}`}>{option.label}</span>;
+                }}
+            />
         );
-    }
+    };
 
     const priceEditor = (options) => {
-        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />
-    }
+        return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} mode="currency" currency="USD" locale="en-US" />;
+    };
 
     const statusBodyTemplate = (rowData) => {
         return getStatusLabel(rowData.inventoryStatus);
-    }
+    };
 
     const priceBodyTemplate = (rowData) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(rowData.price);
-    }
+    };
 
     return (
         <div>
@@ -170,7 +169,9 @@ const DataTableEditDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>Edit</span></h1>
+                    <h1>
+                        DataTable <span>Edit</span>
+                    </h1>
                     <p>Cell and Row editing provides a rapid and user friendly way to manipulate data.</p>
                 </div>
 
@@ -184,12 +185,9 @@ const DataTableEditDemo = () => {
                     <h5>Cell Editing</h5>
                     <p>Validations, dynamic columns and reverting values with the escape key.</p>
                     <DataTable value={products1} editMode="cell" className="editable-cells-table" responsiveLayout="scroll">
-                        {
-                            columns.map(({ field, header }) => {
-                                return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate}
-                                    editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
-                            })
-                        }
+                        {columns.map(({ field, header }) => {
+                            return <Column key={field} field={field} header={header} style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate} editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />;
+                        })}
                     </DataTable>
                 </div>
 
@@ -226,12 +224,21 @@ const DataTableEditDemo = () => {
                 <div className="card p-fluid">
                     <h5>Cell Editing with Sorting and Filter</h5>
                     <DataTable value={products4} editMode="cell" className="editable-cells-table" filterDisplay="row" responsiveLayout="scroll">
-                        {
-                            columns.map(({ field, header }) => {
-                                return <Column key={field} field={field} header={header} filter sortable style={{ width: '25%' }} body={field === 'price' && priceBodyTemplate}
-                                    editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />
-                            })
-                        }
+                        {columns.map(({ field, header }) => {
+                            return (
+                                <Column
+                                    key={field}
+                                    field={field}
+                                    header={header}
+                                    filter
+                                    sortable
+                                    style={{ width: '25%' }}
+                                    body={field === 'price' && priceBodyTemplate}
+                                    editor={(options) => cellEditor(options)}
+                                    onCellEditComplete={onCellEditComplete}
+                                />
+                            );
+                        })}
                     </DataTable>
                 </div>
             </div>
@@ -239,14 +246,13 @@ const DataTableEditDemo = () => {
             <DataTableEditDemoDoc></DataTableEditDemoDoc>
         </div>
     );
-}
+};
 
 export default DataTableEditDemo;
 
 const DataTableEditDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -480,7 +486,7 @@ export class DataTableEditDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -706,7 +712,7 @@ const DataTableEditDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -932,7 +938,7 @@ const DataTableEditDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./DataTableDemo.css" />
@@ -1181,15 +1187,11 @@ const DataTableEditDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableEditDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableEditDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })}</TabView>
         </div>
-    )
-})
+    );
+});

@@ -178,7 +178,7 @@ export const ContextMenu = React.memo(
             return (
                 <CSSTransition
                     nodeRef={menuRef}
-                    classNames='p-contextmenu'
+                    classNames="p-contextmenu"
                     in={visibleState}
                     timeout={{ enter: 250, exit: 0 }}
                     options={props.transitionOptions}

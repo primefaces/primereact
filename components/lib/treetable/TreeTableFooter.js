@@ -48,7 +48,7 @@ export const TreeTableFooter = React.memo((props) => {
     const content = props.columnGroup ? createColumnGroup() : createColumns(props.columns);
 
     if (hasFooter()) {
-        return <tfoot className='p-treetable-tfoot'>{content}</tfoot>;
+        return <tfoot className="p-treetable-tfoot">{content}</tfoot>;
     } else {
         return null;
     }

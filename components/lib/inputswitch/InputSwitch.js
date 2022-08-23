@@ -72,11 +72,11 @@ export const InputSwitch = React.memo(
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} role='checkbox' aria-checked={checked}>
-                    <div className='p-hidden-accessible'>
+                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} role="checkbox" aria-checked={checked}>
+                    <div className="p-hidden-accessible">
                         <input
                             ref={inputRef}
-                            type='checkbox'
+                            type="checkbox"
                             id={props.inputId}
                             name={props.name}
                             checked={checked}
@@ -84,14 +84,14 @@ export const InputSwitch = React.memo(
                             onFocus={onFocus}
                             onBlur={onBlur}
                             disabled={props.disabled}
-                            role='switch'
+                            role="switch"
                             tabIndex={props.tabIndex}
                             aria-checked={checked}
                             aria-labelledby={props['aria-labelledby']}
                             aria-label={props['aria-label']}
                         />
                     </div>
-                    <span className='p-inputswitch-slider'></span>
+                    <span className="p-inputswitch-slider"></span>
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
             </>

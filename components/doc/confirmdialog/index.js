@@ -392,11 +392,11 @@ const ConfirmDialogDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { ConfirmDialog } from 'primereact/confirmdialog'; // To use <ConfirmDialog> tag
 import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialog method
@@ -418,7 +418,7 @@ import { confirmDialog } from 'primereact/confirmdialog'; // To use confirmDialo
                     </p>
 
                     <h6>1. confirmDialog method</h6>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const confirm = () => {
     confirmDialog({
@@ -462,8 +462,8 @@ const confirm = () => {
 
                     <h5>Properties</h5>
                     <p>These properties are extended from Dialog properties.</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -550,8 +550,8 @@ const confirm = () => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -585,10 +585,10 @@ const confirm = () => {
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'>theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -620,7 +620,7 @@ const confirm = () => {
                             popup is defined.
                         </p>
 
-                        <CodeHighlight lang='js'>
+                        <CodeHighlight lang="js">
                             {`
 const confirm = (event) => {
     confirmDialog({
@@ -653,8 +653,8 @@ const confirm = (event) => {
                         </CodeHighlight>
 
                         <h6>Overlay Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -685,8 +685,8 @@ const confirm = (event) => {
                         </div>
 
                         <h6>Buttons Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

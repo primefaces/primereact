@@ -464,8 +464,8 @@ export const MultiSelect = React.memo(
                         const icon = !props.disabled && IconUtils.getJSXIcon(props.removeIcon, { className: 'p-multiselect-token-icon', onClick: (e) => removeChip(e, val) }, { props });
 
                         return (
-                            <div className='p-multiselect-token' key={label}>
-                                <span className='p-multiselect-token-label'>{label}</span>
+                            <div className="p-multiselect-token" key={label}>
+                                <span className="p-multiselect-token-label">{label}</span>
                                 {icon}
                             </div>
                         );
@@ -523,7 +523,7 @@ export const MultiSelect = React.memo(
 
         const createClearIcon = () => {
             if (!empty && props.showClear && !props.disabled) {
-                return <i className='p-multiselect-clear-icon pi pi-times' onClick={(e) => updateModel(e, null)}></i>;
+                return <i className="p-multiselect-clear-icon pi pi-times" onClick={(e) => updateModel(e, null)}></i>;
             }
 
             return null;
@@ -538,7 +538,7 @@ export const MultiSelect = React.memo(
             });
 
             return (
-                <div ref={labelRef} className='p-multiselect-label-container'>
+                <div ref={labelRef} className="p-multiselect-label-container">
                     <div className={className}>{content || props.placeholder || 'empty'}</div>
                 </div>
             );
@@ -566,17 +566,17 @@ export const MultiSelect = React.memo(
         return (
             <>
                 <div ref={elementRef} id={props.id} style={props.style} className={className} {...otherProps} onClick={onClick}>
-                    <div className='p-hidden-accessible'>
+                    <div className="p-hidden-accessible">
                         <input
                             ref={inputRef}
                             id={props.inputId}
                             name={props.name}
                             readOnly
-                            type='text'
+                            type="text"
                             onFocus={onFocus}
                             onBlur={onBlur}
                             onKeyDown={onKeyDown}
-                            role='listbox'
+                            role="listbox"
                             aria-labelledby={props.ariaLabelledBy}
                             aria-expanded={overlayVisibleState}
                             disabled={props.disabled}
@@ -585,7 +585,7 @@ export const MultiSelect = React.memo(
                     </div>
                     {label}
                     {clearIcon}
-                    <div className='p-multiselect-trigger'>{IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}</div>
+                    <div className="p-multiselect-trigger">{IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}</div>
                     <MultiSelectPanel
                         ref={overlayRef}
                         visibleOptions={visibleOptions}

@@ -100,7 +100,7 @@ export const SelectButton = React.memo(
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} role='group'>
+                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} role="group">
                     {items}
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}

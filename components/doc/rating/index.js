@@ -142,11 +142,11 @@ const RatingDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Rating } from 'primereact/rating';
 `}
@@ -195,8 +195,8 @@ import { Rating } from 'primereact/rating';
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -271,8 +271,8 @@ import { Rating } from 'primereact/rating';
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -295,8 +295,8 @@ import { Rating } from 'primereact/rating';
 
                     <h5>Styling</h5>
                     <p>Following is the list of structural style classes</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -328,14 +328,14 @@ import { Rating } from 'primereact/rating';
                     <DevelopmentSection>
                         <h6>Screen Reader</h6>
                         <p>
-                            Rating component internally uses radio buttons that are only visible to screen readers. The value to read for item is retrieved from the <Link href='/locale'>locale</Link> API via <i>star</i> and <i>stars</i> of the{' '}
+                            Rating component internally uses radio buttons that are only visible to screen readers. The value to read for item is retrieved from the <Link href="/locale">locale</Link> API via <i>star</i> and <i>stars</i> of the{' '}
                             <i>aria</i> property.
                         </p>
 
                         <h6>Keyboard Support</h6>
                         <p>Keyboard interaction is derived from the native browser handling of radio buttons in a group.</p>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -351,8 +351,8 @@ import { Rating } from 'primereact/rating';
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span className='inline-flex flex-column'>
-                                                <i className='mb-1'>left arrow</i>
+                                            <span className="inline-flex flex-column">
+                                                <i className="mb-1">left arrow</i>
                                                 <i>up arrow</i>
                                             </span>
                                         </td>
@@ -360,8 +360,8 @@ import { Rating } from 'primereact/rating';
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span className='inline-flex flex-column'>
-                                                <i className='mb-1'>right arrow</i>
+                                            <span className="inline-flex flex-column">
+                                                <i className="mb-1">right arrow</i>
                                                 <i>down arrow</i>
                                             </span>
                                         </td>

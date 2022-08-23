@@ -81,10 +81,10 @@ export const ListBoxItem = React.memo((props) => {
             onClick={onClick}
             onTouchEnd={onTouchEnd}
             onKeyDown={onKeyDown}
-            tabIndex='-1'
+            tabIndex="-1"
             aria-label={props.label}
             key={props.label}
-            role='option'
+            role="option"
             aria-selected={props.selected}
             aria-disabled={props.disabled}
         >

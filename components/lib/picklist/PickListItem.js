@@ -31,7 +31,7 @@ export const PickListItem = React.memo((props) => {
     );
 
     return (
-        <li className={className} onClick={onClick} onKeyDown={onKeyDown} tabIndex={props.tabIndex} role='option' aria-selected={props.selected}>
+        <li className={className} onClick={onClick} onKeyDown={onKeyDown} tabIndex={props.tabIndex} role="option" aria-selected={props.selected}>
             {content}
             <Ripple />
         </li>

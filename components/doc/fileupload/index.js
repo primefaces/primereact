@@ -629,11 +629,11 @@ echo '<p>Fake Upload Process</p>'; ?>
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { FileUpload } from 'primereact/fileupload';
 `}
@@ -685,7 +685,7 @@ import { FileUpload } from 'primereact/fileupload';
                     <h5>File Types</h5>
                     <p>
                         Selectable file types can be restricted with <i>accept</i> property, example below only allows images to be uploaded. Read more about other possible values{' '}
-                        <a href='https://www.w3schools.com/tags/att_input_accept.asp'> here</a>.
+                        <a href="https://www.w3schools.com/tags/att_input_accept.asp"> here</a>.
                     </p>
                     <CodeHighlight>
                         {`
@@ -732,7 +732,7 @@ import { FileUpload } from 'primereact/fileupload';
 <FileUpload name="demo[]" url="./upload" customUpload uploadHandler={myUploader} />
 `}
                     </CodeHighlight>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const myUploader = (event) => {
     //event.files == files to upload
@@ -747,7 +747,7 @@ const myUploader = (event) => {
 <FileUpload name="demo[]" url="./upload" itemTemplate={customItemTemplate} uploadHandler={myUploader} />
 `}
                     </CodeHighlight>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const customItemTemplate = (file, props) => {
     // file: Current file object.
@@ -767,7 +767,7 @@ const customItemTemplate = (file, props) => {
 
                     <h5>Button Options</h5>
                     <p>Used to customize choose, upload and cancel buttons.</p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const chooseOptions = {label: 'Choose', icon: 'pi pi-fw pi-plus'};
 const uploadOptions = {label: 'Uplaod', icon: 'pi pi-upload', className: 'p-button-success'};
@@ -779,7 +779,7 @@ const cancelOptions = {label: 'Cancel', icon: 'pi pi-times', className: 'p-butto
 <FileUpload name="demo[]" url="./upload" chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} uploadHandler={myUploader} />
 `}
                     </CodeHighlight>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const buttonOptions = {
     // label: The label of button.
@@ -791,8 +791,8 @@ const buttonOptions = {
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -987,8 +987,8 @@ const buttonOptions = {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1092,8 +1092,8 @@ const buttonOptions = {
                     </div>
 
                     <h5>Methods</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1118,10 +1118,10 @@ const buttonOptions = {
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>

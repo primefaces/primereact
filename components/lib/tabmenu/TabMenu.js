@@ -73,9 +73,9 @@ export const TabMenu = React.memo(
             );
             const iconClassName = classNames('p-menuitem-icon', _icon);
             const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props });
-            const label = _label && <span className='p-menuitem-text'>{_label}</span>;
+            const label = _label && <span className="p-menuitem-text">{_label}</span>;
             let content = (
-                <a href={url || '#'} className='p-menuitem-link' target={target} onClick={(event) => itemClick(event, item, index)} role='presentation'>
+                <a href={url || '#'} className="p-menuitem-link" target={target} onClick={(event) => itemClick(event, item, index)} role="presentation">
                     {icon}
                     {label}
                     <Ripple />
@@ -98,7 +98,7 @@ export const TabMenu = React.memo(
             }
 
             return (
-                <li ref={tabsRef.current[`tab_${index}`]} key={key} className={className} style={style} role='tab' aria-selected={active} aria-expanded={active} aria-disabled={disabled}>
+                <li ref={tabsRef.current[`tab_${index}`]} key={key} className={className} style={style} role="tab" aria-selected={active} aria-expanded={active} aria-disabled={disabled}>
                     {content}
                 </li>
             );
@@ -115,9 +115,9 @@ export const TabMenu = React.memo(
 
             return (
                 <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
-                    <ul ref={navRef} className='p-tabmenu-nav p-reset' role='tablist'>
+                    <ul ref={navRef} className="p-tabmenu-nav p-reset" role="tablist">
                         {items}
-                        <li ref={inkbarRef} className='p-tabmenu-ink-bar'></li>
+                        <li ref={inkbarRef} className="p-tabmenu-ink-bar"></li>
                     </ul>
                 </div>
             );

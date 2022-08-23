@@ -26,19 +26,19 @@ export const TableFooter = React.memo((props) => {
             const rows = React.Children.toArray(props.footerColumnGroup.props.children);
 
             return rows.map((row, i) => (
-                <tr key={i} role='row'>
+                <tr key={i} role="row">
                     {createGroupFooterCells(row)}
                 </tr>
             ));
         }
 
-        return <tr role='row'>{createFooterCells(props.columns)}</tr>;
+        return <tr role="row">{createFooterCells(props.columns)}</tr>;
     };
 
     if (hasFooter()) {
         const content = createContent();
 
-        return <tfoot className='p-datatable-tfoot'>{content}</tfoot>;
+        return <tfoot className="p-datatable-tfoot">{content}</tfoot>;
     }
 
     return null;

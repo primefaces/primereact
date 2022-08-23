@@ -214,7 +214,7 @@ export const TreeTableBody = React.memo((props) => {
 
             return (
                 <tr>
-                    <td className='p-treetable-emptymessage' colSpan={colSpan}>
+                    <td className="p-treetable-emptymessage" colSpan={colSpan}>
                         {content}
                     </td>
                 </tr>
@@ -224,7 +224,7 @@ export const TreeTableBody = React.memo((props) => {
 
     const content = props.value && props.value.length ? createRows() : createEmptyMessage();
 
-    return <tbody className='p-treetable-tbody'>{content}</tbody>;
+    return <tbody className="p-treetable-tbody">{content}</tbody>;
 });
 
 TreeTableBody.displayName = 'TreeTableBody';

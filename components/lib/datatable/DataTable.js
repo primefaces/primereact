@@ -1325,7 +1325,7 @@ export const DataTable = React.forwardRef((props, ref) => {
             const iconClassName = classNames('p-datatable-loading-icon pi-spin', props.loadingIcon);
 
             return (
-                <div className='p-datatable-loading-overlay p-component-overlay'>
+                <div className="p-datatable-loading-overlay p-component-overlay">
                     <i className={iconClassName} />
                 </div>
             );
@@ -1337,7 +1337,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const createHeader = () => {
         if (props.header) {
             const content = ObjectUtils.getJSXElement(props.header, { props });
-            return <div className='p-datatable-header'>{content}</div>;
+            return <div className="p-datatable-header">{content}</div>;
         }
 
         return null;
@@ -1398,7 +1398,7 @@ export const DataTable = React.forwardRef((props, ref) => {
             <TableBody
                 ref={frozenBodyRef}
                 value={props.frozenValue}
-                className='p-datatable-frozen-tbody'
+                className="p-datatable-frozen-tbody"
                 frozenRow
                 tableProps={props}
                 tableSelector={attributeSelectorState}
@@ -1560,7 +1560,7 @@ export const DataTable = React.forwardRef((props, ref) => {
         const virtualScrollerOptions = props.virtualScrollerOptions || {};
 
         return (
-            <div ref={wrapperRef} className='p-datatable-wrapper' style={{ maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }}>
+            <div ref={wrapperRef} className="p-datatable-wrapper" style={{ maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }}>
                 <VirtualScroller
                     ref={virtualScrollerRef}
                     {...virtualScrollerOptions}
@@ -1582,7 +1582,7 @@ export const DataTable = React.forwardRef((props, ref) => {
                         const tableFooter = createTableFooter(options);
 
                         return (
-                            <table ref={ref} style={props.tableStyle} className={tableClassName} role='table'>
+                            <table ref={ref} style={props.tableStyle} className={tableClassName} role="table">
                                 {tableHeader}
                                 {tableBody}
                                 {tableFooter}
@@ -1597,7 +1597,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const createFooter = () => {
         if (props.footer) {
             const content = ObjectUtils.getJSXElement(props.footer, { props });
-            return <div className='p-datatable-footer'>{content}</div>;
+            return <div className="p-datatable-footer">{content}</div>;
         }
 
         return null;
@@ -1643,7 +1643,7 @@ export const DataTable = React.forwardRef((props, ref) => {
 
     const createResizeHelper = () => {
         if (props.resizableColumns) {
-            return <div ref={resizeHelperRef} className='p-column-resizer-helper' style={{ display: 'none' }}></div>;
+            return <div ref={resizeHelperRef} className="p-column-resizer-helper" style={{ display: 'none' }}></div>;
         }
 
         return null;
@@ -1654,8 +1654,8 @@ export const DataTable = React.forwardRef((props, ref) => {
             const style = { position: 'absolute', display: 'none' };
             return (
                 <>
-                    <span ref={reorderIndicatorUpRef} className='pi pi-arrow-down p-datatable-reorder-indicator-up' style={style}></span>
-                    <span ref={reorderIndicatorDownRef} className='pi pi-arrow-up p-datatable-reorder-indicator-down' style={style}></span>
+                    <span ref={reorderIndicatorUpRef} className="pi pi-arrow-down p-datatable-reorder-indicator-up" style={style}></span>
+                    <span ref={reorderIndicatorDownRef} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={style}></span>
                 </>
             );
         }
@@ -1706,7 +1706,7 @@ export const DataTable = React.forwardRef((props, ref) => {
     const reorderIndicators = createReorderIndicators();
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} data-scrollselectors='.p-datatable-wrapper'>
+        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} data-scrollselectors=".p-datatable-wrapper">
             {loader}
             {header}
             {paginatorTop}

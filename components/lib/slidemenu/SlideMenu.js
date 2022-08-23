@@ -104,7 +104,7 @@ export const SlideMenu = React.memo(
 
             return (
                 <div ref={backward} className={className} onClick={navigateBack}>
-                    <span className='p-slidemenu-backward-icon pi pi-fw pi-chevron-left'></span>
+                    <span className="p-slidemenu-backward-icon pi pi-fw pi-chevron-left"></span>
                     <span>{props.backLabel}</span>
                 </div>
             );
@@ -125,7 +125,7 @@ export const SlideMenu = React.memo(
             return (
                 <CSSTransition
                     nodeRef={menuRef}
-                    classNames='p-connected-overlay'
+                    classNames="p-connected-overlay"
                     in={!props.popup || visibleState}
                     timeout={{ enter: 120, exit: 100 }}
                     options={props.transitionOptions}
@@ -136,8 +136,8 @@ export const SlideMenu = React.memo(
                     onExited={onExited}
                 >
                     <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                        <div className='p-slidemenu-wrapper' style={wrapperStyle}>
-                            <div className='p-slidemenu-content' ref={slideMenuContent}>
+                        <div className="p-slidemenu-wrapper" style={wrapperStyle}>
+                            <div className="p-slidemenu-content" ref={slideMenuContent}>
                                 <SlideMenuSub menuProps={props} model={props.model} root index={0} menuWidth={props.menuWidth} effectDuration={props.effectDuration} level={levelState} parentActive={levelState === 0} onForward={navigateForward} />
                             </div>
                             {backward}

@@ -169,11 +169,11 @@ const ChipsDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Chips } from 'primereact/chips';
 `}
@@ -207,7 +207,7 @@ import { Chips } from 'primereact/chips';
 <Chips value={value} onChange={(e) => setValue(e.value)} itemTemplate={customChip}></Chips>
 `}
                     </CodeHighlight>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 customChip(item) {
     return (
@@ -222,12 +222,12 @@ customChip(item) {
                     </CodeHighlight>
                     <h5>KeyFilter</h5>
                     <p>
-                        Chips has built-in key filtering support to block certain keys, refer to <Link href='/keyfilter'>keyfilter</Link> page for more information.
+                        Chips has built-in key filtering support to block certain keys, refer to <Link href="/keyfilter">keyfilter</Link> page for more information.
                     </p>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -356,8 +356,8 @@ customChip(item) {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -411,10 +411,10 @@ customChip(item) {
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -465,8 +465,8 @@ customChip(item) {
 `}
                         </CodeHighlight>
                         <h6>Input Field Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -503,8 +503,8 @@ customChip(item) {
                         </div>
 
                         <h6>Chip Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

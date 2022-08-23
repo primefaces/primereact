@@ -79,11 +79,11 @@ export const ToggleButton = React.memo(
                     onBlur={props.onBlur}
                     onKeyDown={onKeyDown}
                     tabIndex={tabIndex}
-                    role='button'
+                    role="button"
                     aria-pressed={props.checked}
                 >
                     {iconElement}
-                    <span className='p-button-label'>{label}</span>
+                    <span className="p-button-label">{label}</span>
                     <Ripple />
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}

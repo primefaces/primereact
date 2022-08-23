@@ -137,7 +137,7 @@ export const MultiStateCheckbox = React.memo(
                         onFocus={onFocus}
                         onBlur={onBlur}
                         onKeyDown={onKeyDown}
-                        role='checkbox'
+                        role="checkbox"
                         aria-checked={ariaChecked}
                         aria-labelledby={props['aria-labelledby']}
                         aria-label={props['aria-label']}
@@ -145,7 +145,7 @@ export const MultiStateCheckbox = React.memo(
                         {icon}
                     </div>
                     {focusedState && (
-                        <span className='p-sr-only' aria-live='polite'>
+                        <span className="p-sr-only" aria-live="polite">
                             {ariaValueLabel}
                         </span>
                     )}

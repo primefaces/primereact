@@ -147,7 +147,7 @@ export const Menu = React.memo(
 
             return (
                 <React.Fragment key={key}>
-                    <li className={className} style={submenu.style} role='presentation'>
+                    <li className={className} style={submenu.style} role="presentation">
                         {submenu.label}
                     </li>
                     {items}
@@ -158,7 +158,7 @@ export const Menu = React.memo(
         const createSeparator = (index) => {
             const key = 'separator_' + index;
 
-            return <li key={key} className='p-menu-separator' role='separator'></li>;
+            return <li key={key} className="p-menu-separator" role="separator"></li>;
         };
 
         const createMenuItem = (item, index) => {
@@ -166,14 +166,14 @@ export const Menu = React.memo(
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props });
-            const label = item.label && <span className='p-menuitem-text'>{item.label}</span>;
+            const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
             const tabIndex = item.disabled ? null : 0;
             const key = item.label + '_' + index;
             let content = (
                 <a
                     href={item.url || '#'}
                     className={linkClassName}
-                    role='menuitem'
+                    role="menuitem"
                     target={item.target}
                     onClick={(event) => onItemClick(event, item)}
                     onKeyDown={(event) => onItemKeyDown(event, item)}
@@ -201,7 +201,7 @@ export const Menu = React.memo(
             }
 
             return (
-                <li key={key} className={className} style={item.style} role='none'>
+                <li key={key} className={className} style={item.style} role="none">
                     {content}
                 </li>
             );
@@ -230,7 +230,7 @@ export const Menu = React.memo(
                 return (
                     <CSSTransition
                         nodeRef={menuRef}
-                        classNames='p-connected-overlay'
+                        classNames="p-connected-overlay"
                         in={visibleState}
                         timeout={{ enter: 120, exit: 100 }}
                         options={props.transitionOptions}
@@ -241,7 +241,7 @@ export const Menu = React.memo(
                         onExited={onExited}
                     >
                         <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                            <ul className='p-menu-list p-reset' role='menu'>
+                            <ul className="p-menu-list p-reset" role="menu">
                                 {menuitems}
                             </ul>
                         </div>

@@ -70,12 +70,12 @@ export const Accordion = React.forwardRef((props, ref) => {
         const headerId = idState + '_header_' + index;
         const ariaControls = idState + '_content_' + index;
         const tabIndex = tab.props.disabled ? -1 : null;
-        const header = tab.props.headerTemplate ? ObjectUtils.getJSXElement(tab.props.headerTemplate, tab.props) : <span className='p-accordion-header-text'>{tab.props.header}</span>;
+        const header = tab.props.headerTemplate ? ObjectUtils.getJSXElement(tab.props.headerTemplate, tab.props) : <span className="p-accordion-header-text">{tab.props.header}</span>;
         const icon = IconUtils.getJSXIcon(selected ? props.collapseIcon : props.expandIcon, { className: 'p-accordion-toggle-icon' }, { props, selected });
 
         return (
             <div className={className} style={style}>
-                <a href={'#' + ariaControls} id={headerId} className='p-accordion-header-link' aria-controls={ariaControls} role='tab' aria-expanded={selected} onClick={(e) => onTabHeaderClick(e, tab, index)} tabIndex={tabIndex}>
+                <a href={'#' + ariaControls} id={headerId} className="p-accordion-header-link" aria-controls={ariaControls} role="tab" aria-expanded={selected} onClick={(e) => onTabHeaderClick(e, tab, index)} tabIndex={tabIndex}>
                     {icon}
                     {header}
                 </a>
@@ -91,9 +91,9 @@ export const Accordion = React.forwardRef((props, ref) => {
         const contentRef = React.createRef();
 
         return (
-            <CSSTransition nodeRef={contentRef} classNames='p-toggleable-content' timeout={{ enter: 1000, exit: 450 }} in={selected} unmountOnExit options={props.transitionOptions}>
-                <div ref={contentRef} id={contentId} className={className} style={style} role='region' aria-labelledby={ariaLabelledby}>
-                    <div className='p-accordion-content'>{tab.props.children}</div>
+            <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={selected} unmountOnExit options={props.transitionOptions}>
+                <div ref={contentRef} id={contentId} className={className} style={style} role="region" aria-labelledby={ariaLabelledby}>
+                    <div className="p-accordion-content">{tab.props.children}</div>
                 </div>
             </CSSTransition>
         );

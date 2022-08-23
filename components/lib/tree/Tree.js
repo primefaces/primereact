@@ -337,7 +337,7 @@ export const Tree = React.memo(
                 const contentClass = classNames('p-tree-container', props.contentClassName);
 
                 return (
-                    <ul className={contentClass} role='tree' aria-label={props.ariaLabel} aria-labelledby={props.ariaLabelledBy} style={props.contentStyle}>
+                    <ul className={contentClass} role="tree" aria-label={props.ariaLabel} aria-labelledby={props.ariaLabelledBy} style={props.contentStyle}>
                         {rootNodes}
                     </ul>
                 );
@@ -351,7 +351,7 @@ export const Tree = React.memo(
                 const icon = classNames('p-tree-loading-icon pi-spin', props.loadingIcon);
 
                 return (
-                    <div className='p-tree-loading-overlay p-component-overlay'>
+                    <div className="p-tree-loading-overlay p-component-overlay">
                         <i className={icon} />
                     </div>
                 );
@@ -364,18 +364,18 @@ export const Tree = React.memo(
             if (props.filter) {
                 const value = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
                 let content = (
-                    <div className='p-tree-filter-container'>
+                    <div className="p-tree-filter-container">
                         <input
-                            type='text'
+                            type="text"
                             value={value}
-                            autoComplete='off'
-                            className='p-tree-filter p-inputtext p-component'
+                            autoComplete="off"
+                            className="p-tree-filter p-inputtext p-component"
                             placeholder={props.filterPlaceholder}
                             onKeyDown={onFilterInputKeyDown}
                             onChange={onFilterInputChange}
                             disabled={props.disabled}
                         />
-                        <span className='p-tree-filter-icon pi pi-search'></span>
+                        <span className="p-tree-filter-icon pi pi-search"></span>
                     </div>
                 );
 
@@ -421,7 +421,7 @@ export const Tree = React.memo(
                     content = ObjectUtils.getJSXElement(props.header, defaultContentOptions);
                 }
 
-                return <div className='p-tree-header'>{content}</div>;
+                return <div className="p-tree-header">{content}</div>;
             }
 
             return null;
@@ -430,7 +430,7 @@ export const Tree = React.memo(
         const createFooter = () => {
             const content = ObjectUtils.getJSXElement(props.footer, props);
 
-            return <div className='p-tree-footer'>{content}</div>;
+            return <div className="p-tree-footer">{content}</div>;
         };
 
         const otherProps = ObjectUtils.findDiffKeys(props, Tree.defaultProps);

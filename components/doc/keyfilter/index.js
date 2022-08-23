@@ -218,11 +218,11 @@ const KeyFilterDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { InputText } from 'primereact/inputtext';
 `}
@@ -271,7 +271,7 @@ import { InputText } from 'primereact/inputtext';
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
                         <p>
-                            Refer to <Link href='/inputtext'>InputText</Link> for accessibility as KeyFilter is a built-in add-on of the InputText.
+                            Refer to <Link href="/inputtext">InputText</Link> for accessibility as KeyFilter is a built-in add-on of the InputText.
                         </p>
                     </DevelopmentSection>
                     <h5>Dependencies</h5>

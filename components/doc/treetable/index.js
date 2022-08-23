@@ -240,11 +240,11 @@ const TreeTableDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Column } from 'primereact/column';
 import { TreeTable } from 'primereact/treetable';
@@ -267,8 +267,8 @@ import { TreeTable } from 'primereact/treetable';
 
                     <h5>TreeNode API</h5>
                     <p>Following properties of the API are currently utilized by the TreeTable.</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -326,7 +326,7 @@ import { TreeTable } from 'primereact/treetable';
 
                     <p>Here is a sample json response to serve as the datasource of the TreeTable.</p>
                     <div style={{ height: '400px', overflow: 'auto' }}>
-                        <CodeHighlight lang='js'>
+                        <CodeHighlight lang="js">
                             {`
 {
     "root":
@@ -687,7 +687,7 @@ import { TreeTable } from 'primereact/treetable';
 
                     <p>Throughout the samples, a NodeService would be used to connect to a server to fetch the nodes. Note that this is only for demo purposes, TreeTable does not have any restrictions on how data is provided.</p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export class NodeService {
 
@@ -704,7 +704,7 @@ export class NodeService {
                         Following sample TreeTable has 3 columns and retrieves the data from the service on componentDidMount. Notice the <i>expander</i> property in the name column to indicate that this column displays an icon to toggle the child
                         nodes.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
@@ -732,7 +732,7 @@ export const TreeTableDemo = () => {
                     </CodeHighlight>
 
                     <p>Dynamic columns are also possible by creating the column component dynamically.</p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
@@ -769,8 +769,8 @@ export const TreeTableDemo = () => {
                     <h5>Column Component</h5>
                     <p>Column component defines various options that are utilized by the TreeTable to specify corresponding features.</p>
 
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -995,7 +995,7 @@ export const TreeTableDemo = () => {
                         both cases;
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
@@ -1059,7 +1059,7 @@ export class TreeTableDemo = () => {
                         <i>header</i> and <i>footer</i> properties for the main header and footer of the table.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
@@ -1105,7 +1105,7 @@ export const TreeTableTemplatingDemo = () => {
                         Columns can be grouped at header and footer sections by defining a ColumnGroup component as the <i>headerColumnGroup</i> and <i>footerColumnGroup</i> properties.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
@@ -1322,14 +1322,14 @@ export const TreeTableColGroupDemo = () => {
                     <h5>Pagination</h5>
                     <p>
                         Pagination is enabled by setting <i>paginator</i> property to true, <i>rows</i> property defines the number of rows per page and optionally <i>pageLinks</i> specify the the number of page links to display. See{' '}
-                        <Link href='/paginator'>paginator</Link> component for more information about further customization options such as <i>paginatorTemplate</i>.
+                        <Link href="/paginator">paginator</Link> component for more information about further customization options such as <i>paginatorTemplate</i>.
                     </p>
 
                     <p>
                         Pagination can either be used in <b>Controlled</b> or <b>Uncontrolled</b> manner. In controlled mode, <i>first</i> and <i>onPage</i> properties need to be defined to control the paginator state.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
@@ -1361,7 +1361,7 @@ export const TreeTablePageDemo = () => {
                         rendering and ignored in further updates. If you programmatically need to update the paginator state, prefer to use the component as controlled.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
@@ -1388,7 +1388,7 @@ export const TreeTablePageDemo = () => {
                     </CodeHighlight>
 
                     <p>
-                        Elements of the paginator can be customized using the <i>paginatorTemplate</i> by the TreeTable. Refer to the template section of the <Link href='/paginator'> paginator documentation</Link> for further options.
+                        Elements of the paginator can be customized using the <i>paginatorTemplate</i> by the TreeTable. Refer to the template section of the <Link href="/paginator"> paginator documentation</Link> for further options.
                     </p>
                     <CodeHighlight>
                         {`
@@ -1449,7 +1449,7 @@ export const TreeTablePageDemo = () => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 let multiSortMeta = [];
 multiSortMeta.push({field: 'year', order: 1});
@@ -1482,7 +1482,7 @@ multiSortMeta.push({field: 'brand', order: -1});
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 mysort(event) {
     //event.field = Field to sort
@@ -1508,7 +1508,7 @@ mysort(event) {
                     </CodeHighlight>
 
                     <p>An optional global filter feature is available to search all fields with the same keyword, to implement this place an input component whose value is bound to the globalFilter property of the TreeTable.</p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const TreeTableFilterDemo = () => {
 
@@ -1541,7 +1541,7 @@ export const TreeTableFilterDemo = () => {
                         be defined to control the filtering state.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const TreeTableDefaultFilteredDemo = () => {
 
@@ -1577,7 +1577,7 @@ export const TreeTableDefaultFilteredDemo = () => {
                     <p>
                         Custom filtering is implemented by setting the <i>filterMatchMode</i> property as "custom" and providing a function that takes the data value along with the filter value to return a boolean.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 export const TreeTableFilterDemo = () => {
 
@@ -1614,7 +1614,7 @@ export const TreeTableFilterDemo = () => {
 
                     <p>Example below demonstrates all cases along with the available callbacks to listen events such as node selection.</p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
@@ -1705,7 +1705,7 @@ export const TreeTableSelectionDemo = () => {
                         loads generated nodes on expand event to imitate a remote call with a timeout. Notice the usage of <i>loading</i> property as well to give users a feedback about the loading process.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
@@ -1812,7 +1812,7 @@ export const TreeTableLazyDemo = () => {
                         value.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
@@ -1889,7 +1889,7 @@ export const TreeTableEditDemo = () => {
                         click. In addition, a context menu can either be displayed at <i>onContextMenu</i> event. Since this event also passes the node instance, you may choose to display a different context menu for a particular node.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
@@ -2064,7 +2064,7 @@ export const TreeTableContextMenuDemo = () => {
                     <h5>Responsive</h5>
                     <p>TreeTable columns are displayed as stacked in responsive mode if the screen size becomes smaller than a certain breakpoint value. Here is a sample implementation;</p>
 
-                    <CodeHighlight lang='css'>
+                    <CodeHighlight lang="css">
                         {`
 .p-col-d {
     display: table-cell;
@@ -2086,7 +2086,7 @@ export const TreeTableContextMenuDemo = () => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import React, { Component } from 'react';
 import { TreeTable } from 'primereact/treetable';
@@ -2127,8 +2127,8 @@ export const TreeTableResponsiveDemo = () => {
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -2221,7 +2221,7 @@ export const TreeTableResponsiveDemo = () => {
                                     <td>string|object</td>
                                     <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
                                     <td>
-                                        Template of the paginator. For details, refer to the template section of the <Link href='/paginator'>paginator documentation</Link> for further options.
+                                        Template of the paginator. For details, refer to the template section of the <Link href="/paginator">paginator documentation</Link> for further options.
                                     </td>
                                 </tr>
                                 <tr>
@@ -2507,8 +2507,8 @@ export const TreeTableResponsiveDemo = () => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -2636,10 +2636,10 @@ export const TreeTableResponsiveDemo = () => {
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -2711,12 +2711,12 @@ export const TreeTableResponsiveDemo = () => {
                         <p>Editable cells use custom templating so you need to manage aria roles and attributes manually if required.</p>
 
                         <p>
-                            Paginator is a standalone component used inside the DataTable, refer to the <Link href='/paginator'>paginator</Link> for more information about the accessibility features.
+                            Paginator is a standalone component used inside the DataTable, refer to the <Link href="/paginator">paginator</Link> for more information about the accessibility features.
                         </p>
 
                         <h6>Sortable Headers Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -2747,8 +2747,8 @@ export const TreeTableResponsiveDemo = () => {
                         </div>
 
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

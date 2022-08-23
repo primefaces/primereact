@@ -630,11 +630,11 @@ export const removeGoogleMaps = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { GMap } from 'primereact/gmap';
 `}
@@ -651,7 +651,7 @@ import { GMap } from 'primereact/gmap';
                     <h5>Getting Started</h5>
                     <p>A map is initialized with options and dimensions. Refer to the google maps api for the list of available options.</p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const options = {
     center: {lat: 36.890257, lng: 30.707417},
@@ -667,7 +667,7 @@ return (
                     <h5>TypeScript</h5>
                     <p>If you are using TypeScript you should install the Google Maps types.</p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 // npm install types into devDependencies
 npm i -D @types/google.maps
@@ -680,7 +680,7 @@ yarn add @types/google.maps --production=false
                     <h5>Overlays</h5>
                     <p>GMap can display any type of overlay such as markers, polygons and circles. Overlay instances are bound using the overlays property array. Overlays are aware of binding so whenever the array changes, gmap updates itself.</p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const options = {
     center: {lat: 36.890257, lng: 30.707417},
@@ -708,7 +708,7 @@ return (
                     <h5>Events</h5>
                     <p>GMap provides common callbacks to hook into events including map click, overlay click and overlay dragging.</p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const onMapClick = (event) => {
     //event: MouseEvent of Google Maps api
@@ -747,7 +747,7 @@ return (
                         a parameter.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const options = {
     center: {lat: 36.890257, lng: 30.707417},
@@ -761,8 +761,8 @@ return (
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -801,8 +801,8 @@ return (
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -865,7 +865,7 @@ return (
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
                         <p>
-                            Refer to the <a href='https://support.google.com/maps/answer/6396990?hl=en&co=GENIE.Platform%3DDesktop'>Google Maps documentation</a> for more information about accessibility.
+                            Refer to the <a href="https://support.google.com/maps/answer/6396990?hl=en&co=GENIE.Platform%3DDesktop">Google Maps documentation</a> for more information about accessibility.
                         </p>
                     </DevelopmentSection>
 

@@ -41,8 +41,8 @@ export const HeaderCheckbox = React.memo((props) => {
     const tabIndex = props.disabled ? null : 0;
 
     return (
-        <div className='p-checkbox p-component' onClick={onClick}>
-            <div className={boxClassName} role='checkbox' aria-checked={props.checked} tabIndex={tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}>
+        <div className="p-checkbox p-component" onClick={onClick}>
+            <div className={boxClassName} role="checkbox" aria-checked={props.checked} tabIndex={tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}>
                 <span className={iconClassName}></span>
             </div>
         </div>

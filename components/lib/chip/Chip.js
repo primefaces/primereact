@@ -25,14 +25,14 @@ export const Chip = React.memo(
             let content = [];
 
             if (props.image) {
-                content.push(<img key='image' src={props.image} alt={props.imageAlt} onError={props.onImageError}></img>);
+                content.push(<img key="image" src={props.image} alt={props.imageAlt} onError={props.onImageError}></img>);
             } else if (props.icon) {
                 content.push(IconUtils.getJSXIcon(props.icon, { key: 'icon', className: 'p-chip-icon' }, { props }));
             }
 
             if (props.label) {
                 content.push(
-                    <span key='label' className='p-chip-text'>
+                    <span key="label" className="p-chip-text">
                         {props.label}
                     </span>
                 );

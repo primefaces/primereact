@@ -208,10 +208,10 @@ export const CascadeSelect = React.memo(
             const value = props.value ? getOptionLabel(props.value) : undefined;
 
             return (
-                <div className='p-hidden-accessible'>
+                <div className="p-hidden-accessible">
                     <input
                         ref={inputRef}
-                        type='text'
+                        type="text"
                         id={props.inputId}
                         name={props.name}
                         defaultValue={value}
@@ -221,7 +221,7 @@ export const CascadeSelect = React.memo(
                         onBlur={onInputBlur}
                         onKeyDown={onInputKeyDown}
                         tabIndex={props.tabIndex}
-                        aria-haspopup='listbox'
+                        aria-haspopup="listbox"
                         aria-labelledby={props.ariaLabelledBy}
                     />
                 </div>
@@ -246,7 +246,7 @@ export const CascadeSelect = React.memo(
             const iconClassName = classNames('p-cascadeselect-trigger-icon', props.dropdownIcon);
 
             return (
-                <div className='p-cascadeselect-trigger' role='button' aria-haspopup='listbox' aria-expanded={overlayVisibleState}>
+                <div className="p-cascadeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState}>
                     <span className={iconClassName}></span>
                 </div>
             );
@@ -256,7 +256,7 @@ export const CascadeSelect = React.memo(
             const overlay = (
                 <CSSTransition
                     nodeRef={overlayRef}
-                    classNames='p-connected-overlay'
+                    classNames="p-connected-overlay"
                     in={overlayVisibleState}
                     timeout={{ enter: 120, exit: 100 }}
                     options={props.transitionOptions}
@@ -266,8 +266,8 @@ export const CascadeSelect = React.memo(
                     onExit={onOverlayExit}
                     onExited={onOverlayExited}
                 >
-                    <div ref={overlayRef} className='p-cascadeselect-panel p-component' onClick={onPanelClick}>
-                        <div className='p-cascadeselect-items-wrapper'>
+                    <div ref={overlayRef} className="p-cascadeselect-panel p-component" onClick={onPanelClick}>
+                        <div className="p-cascadeselect-items-wrapper">
                             <CascadeSelectSub
                                 options={props.options}
                                 selectionPath={selectionPath.current}

@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const ToggleButtonDemo = () => {
-
     const [checked1, setChecked1] = useState(false);
     const [checked2, setChecked2] = useState(false);
 
@@ -37,6 +36,6 @@ const ToggleButtonDemo = () => {
             <ToggleButtonDoc />
         </div>
     );
-}
+};
 
 export default ToggleButtonDemo;

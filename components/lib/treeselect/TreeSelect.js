@@ -323,12 +323,12 @@ export const TreeSelect = React.memo(
 
         const createKeyboardHelper = () => {
             return (
-                <div className='p-hidden-accessible'>
+                <div className="p-hidden-accessible">
                     <input
                         ref={focusInputRef}
-                        role='listbox'
+                        role="listbox"
                         id={props.inputId}
-                        type='text'
+                        type="text"
                         readOnly
                         aria-expanded={overlayVisibleState}
                         onFocus={onInputFocus}
@@ -362,8 +362,8 @@ export const TreeSelect = React.memo(
                             {selectedNodes &&
                                 selectedNodes.map((node, index) => {
                                     return (
-                                        <div className='p-treeselect-token' key={`${node.key}_${index}`}>
-                                            <span className='p-treeselect-token-label'>{node.label}</span>
+                                        <div className="p-treeselect-token" key={`${node.key}_${index}`}>
+                                            <span className="p-treeselect-token-label">{node.label}</span>
                                         </div>
                                     );
                                 })}
@@ -375,7 +375,7 @@ export const TreeSelect = React.memo(
             }
 
             return (
-                <div className='p-treeselect-label-container'>
+                <div className="p-treeselect-label-container">
                     <div className={labelClassName}>{content}</div>
                 </div>
             );
@@ -385,7 +385,7 @@ export const TreeSelect = React.memo(
             const iconClassName = classNames('p-treeselect-trigger-icon p-clickable', props.dropdownIcon);
 
             return (
-                <div ref={triggerRef} className='p-treeselect-trigger' role='button' aria-haspopup='listbox' aria-expanded={overlayVisibleState}>
+                <div ref={triggerRef} className="p-treeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState}>
                     <span className={iconClassName}></span>
                 </div>
             );
@@ -416,7 +416,7 @@ export const TreeSelect = React.memo(
                         onFilterValueChange={onFilterValueChange}
                     ></Tree>
 
-                    {hasNoOptions && <div className='p-treeselect-empty-message'>{props.emptyMessage || localeOption('emptyMessage')}</div>}
+                    {hasNoOptions && <div className="p-treeselect-empty-message">{props.emptyMessage || localeOption('emptyMessage')}</div>}
                 </>
             );
         };
@@ -426,19 +426,19 @@ export const TreeSelect = React.memo(
                 const filterValue = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
 
                 let filterContent = (
-                    <div className='p-treeselect-filter-container'>
+                    <div className="p-treeselect-filter-container">
                         <input
                             ref={filterInputRef}
-                            type='text'
+                            type="text"
                             value={filterValue}
-                            autoComplete='off'
-                            className='p-treeselect-filter p-inputtext p-component'
+                            autoComplete="off"
+                            className="p-treeselect-filter p-inputtext p-component"
                             placeholder={props.filterPlaceholder}
                             onKeyDown={onFilterInputKeyDown}
                             onChange={onFilterInputChange}
                             disabled={props.disabled}
                         />
-                        <span className='p-treeselect-filter-icon pi pi-search'></span>
+                        <span className="p-treeselect-filter-icon pi pi-search"></span>
                     </div>
                 );
 
@@ -463,13 +463,13 @@ export const TreeSelect = React.memo(
         const createHeader = () => {
             const filterElement = createFilterElement();
             const closeElement = (
-                <button type='button' className='p-treeselect-close p-link' onClick={hide}>
-                    <span className='p-treeselect-close-icon pi pi-times'></span>
+                <button type="button" className="p-treeselect-close p-link" onClick={hide}>
+                    <span className="p-treeselect-close-icon pi pi-times"></span>
                     <Ripple />
                 </button>
             );
             const content = (
-                <div className='p-treeselect-header'>
+                <div className="p-treeselect-header">
                     {filterElement}
                     {closeElement}
                 </div>

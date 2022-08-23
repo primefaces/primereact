@@ -773,8 +773,8 @@ export const TableBody = React.memo(
                 const content = ObjectUtils.getJSXElement(props.emptyMessage, { props: props.tableProps, frozen: props.frozenRow }) || localeOption('emptyMessage');
 
                 return (
-                    <tr className='p-datatable-emptymessage' role='row'>
-                        <td colSpan={colSpan} role='cell'>
+                    <tr className="p-datatable-emptymessage" role="row">
+                        <td colSpan={colSpan} role="cell">
                             {content}
                         </td>
                     </tr>
@@ -791,10 +791,10 @@ export const TableBody = React.memo(
                 const content = ObjectUtils.getJSXElement(props.rowGroupHeaderTemplate, rowData, { index, props: props.tableProps });
 
                 return (
-                    <tr className='p-rowgroup-header' style={style} role='row'>
+                    <tr className="p-rowgroup-header" style={style} role="row">
                         <td colSpan={colSpan}>
                             {toggler}
-                            <span className='p-rowgroup-header-name'>{content}</span>
+                            <span className="p-rowgroup-header-name">{content}</span>
                         </td>
                     </tr>
                 );
@@ -882,8 +882,8 @@ export const TableBody = React.memo(
                 const id = `${props.tableSelector}_content_${index}_expanded`;
 
                 return (
-                    <tr id={id} className='p-datatable-row-expansion' role='row'>
-                        <td role='cell' colSpan={colSpan}>
+                    <tr id={id} className="p-datatable-row-expansion" role="row">
+                        <td role="cell" colSpan={colSpan}>
                             {content}
                         </td>
                     </tr>
@@ -898,7 +898,7 @@ export const TableBody = React.memo(
                 const content = ObjectUtils.getJSXElement(props.rowGroupFooterTemplate, rowData, { index, colSpan, props: props.tableProps });
 
                 return (
-                    <tr className='p-rowgroup-footer' role='row'>
+                    <tr className="p-rowgroup-footer" role="row">
                         {content}
                     </tr>
                 );

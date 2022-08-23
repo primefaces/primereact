@@ -209,11 +209,11 @@ const GalleriaDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Galleria } from 'primereact/galleria';
 `}
@@ -235,7 +235,7 @@ import { Galleria } from 'primereact/galleria';
 <Galleria value={images} item={itemTemplate} thumbnail={thumbnailTemplate}></Galleria>
 `}
                     </CodeHighlight>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const itemTemplate = (item) => {
     // custom item content
@@ -269,7 +269,7 @@ const thumbnailTemplate = (item) => {
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const responsiveOptions = [
     {
@@ -325,8 +325,8 @@ const responsiveOptions = [
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -510,7 +510,7 @@ const responsiveOptions = [
                                     <td>null</td>
                                     <td>
                                         The properties of{' '}
-                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
                                             CSSTransition
                                         </a>{' '}
                                         can be customized, except for "nodeRef" and "in" properties.
@@ -521,8 +521,8 @@ const responsiveOptions = [
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -552,8 +552,8 @@ const responsiveOptions = [
 
                     <h5>Styling</h5>
                     <p>Following is the list of structural style classes</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -610,27 +610,27 @@ const responsiveOptions = [
                         </p>
 
                         <p>
-                            A slide has a <i>group</i> role with an aria-label that refers to the <i>aria.slideNumber</i> property of the <Link href='/locale'>locale</Link> API. Similarly <i>aria.slide</i> is used as the <i>aria-roledescription</i>{' '}
+                            A slide has a <i>group</i> role with an aria-label that refers to the <i>aria.slideNumber</i> property of the <Link href="/locale">locale</Link> API. Similarly <i>aria.slide</i> is used as the <i>aria-roledescription</i>{' '}
                             of the item. Inactive slides are hidden from the readers with <i>aria-hidden</i>.
                         </p>
 
                         <p>
-                            Next and Previous navigators are button elements with <i>aria-label</i> attributes referring to the <i>aria.nextPageLabel</i> and <i>aria.firstPageLabel</i> properties of the <Link href='/locale'>locale</Link> API by
+                            Next and Previous navigators are button elements with <i>aria-label</i> attributes referring to the <i>aria.nextPageLabel</i> and <i>aria.firstPageLabel</i> properties of the <Link href="/locale">locale</Link> API by
                             default respectively, you may still use your own aria roles and attributes as any valid attribute is passed to the button elements implicitly by using <i>nextButtonProps</i> and <i>prevButtonProps</i>.
                         </p>
 
                         <p>
                             Quick navigation elements and thumnbails follow the tab pattern. They are placed inside an element with a <i>tablist</i> role whereas each item has a <i>tab</i> role with <i>aria-selected</i> and <i>aria-controls</i>{' '}
-                            attributes. The <i>aria-label</i> attribute of a quick navigation item refers to the <i>aria.pageLabel</i> of the <Link href='/locale'>locale</Link> API. Current page is marked with <i>aria-current</i>.
+                            attributes. The <i>aria-label</i> attribute of a quick navigation item refers to the <i>aria.pageLabel</i> of the <Link href="/locale">locale</Link> API. Current page is marked with <i>aria-current</i>.
                         </p>
 
                         <p>
-                            In full screen mode, modal element uses <i>dialog</i> role with <i>aria-modal</i> enabled. The close button retrieves <i>aria-label</i> from the <i>aria.close</i> property of the <Link href='/locale'>locale</Link> API.
+                            In full screen mode, modal element uses <i>dialog</i> role with <i>aria-modal</i> enabled. The close button retrieves <i>aria-label</i> from the <i>aria.close</i> property of the <Link href="/locale">locale</Link> API.
                         </p>
 
                         <h6>Next/Prev Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
@@ -661,8 +661,8 @@ const responsiveOptions = [
                         </div>
 
                         <h6>Quick Navigation Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

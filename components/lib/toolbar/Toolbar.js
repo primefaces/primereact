@@ -15,9 +15,9 @@ export const Toolbar = React.memo(
         }));
 
         return (
-            <div id={props.id} ref={elementRef} className={toolbarClass} style={props.style} role='toolbar' {...otherProps}>
-                <div className='p-toolbar-group-left'>{left}</div>
-                <div className='p-toolbar-group-right'>{right}</div>
+            <div id={props.id} ref={elementRef} className={toolbarClass} style={props.style} role="toolbar" {...otherProps}>
+                <div className="p-toolbar-group-left">{left}</div>
+                <div className="p-toolbar-group-right">{right}</div>
             </div>
         );
     })

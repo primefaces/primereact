@@ -158,7 +158,7 @@ export const MenubarSub = React.memo(
         const createSeparator = (index) => {
             const key = 'separator_' + index;
 
-            return <li key={key} className='p-menu-separator' role='separator'></li>;
+            return <li key={key} className="p-menu-separator" role="separator"></li>;
         };
 
         const createSubmenu = (item) => {
@@ -176,11 +176,11 @@ export const MenubarSub = React.memo(
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const submenuIconClassName = classNames('p-submenu-icon pi', { 'pi-angle-down': props.root, 'pi-angle-right': !props.root });
             const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
-            const label = item.label && <span className='p-menuitem-text'>{item.label}</span>;
+            const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
             const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
             const submenu = createSubmenu(item);
             let content = (
-                <a href={item.url || '#'} role='menuitem' className={linkClassName} target={item.target} aria-haspopup={item.items != null} onClick={(event) => onItemClick(event, item)} onKeyDown={(event) => onItemKeyDown(event, item)}>
+                <a href={item.url || '#'} role="menuitem" className={linkClassName} target={item.target} aria-haspopup={item.items != null} onClick={(event) => onItemClick(event, item)} onKeyDown={(event) => onItemKeyDown(event, item)}>
                     {icon}
                     {label}
                     {submenuIcon}
@@ -204,7 +204,7 @@ export const MenubarSub = React.memo(
             }
 
             return (
-                <li key={key} role='none' id={item.id} className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>
+                <li key={key} role="none" id={item.id} className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>
                     {content}
                     {submenu}
                 </li>

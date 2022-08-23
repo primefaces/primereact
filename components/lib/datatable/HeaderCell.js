@@ -187,7 +187,7 @@ export const HeaderCell = React.memo((props) => {
 
     const createResizer = () => {
         if (props.resizableColumns && !getColumnProp('frozen')) {
-            return <span className='p-column-resizer' onMouseDown={onResizerMouseDown} onClick={onResizerClick} onDoubleClick={onResizerDoubleClick}></span>;
+            return <span className="p-column-resizer" onMouseDown={onResizerMouseDown} onClick={onResizerClick} onDoubleClick={onResizerDoubleClick}></span>;
         }
 
         return null;
@@ -196,7 +196,7 @@ export const HeaderCell = React.memo((props) => {
     const createTitle = () => {
         const title = ObjectUtils.getJSXElement(getColumnProp('header'), { props: props.tableProps });
 
-        return <span className='p-column-title'>{title}</span>;
+        return <span className="p-column-title">{title}</span>;
     };
 
     const createSortIcon = ({ sorted, sortOrder }) => {
@@ -214,7 +214,7 @@ export const HeaderCell = React.memo((props) => {
         if (metaIndex !== -1 && isBadgeVisible()) {
             const value = props.groupRowsBy && props.groupRowsBy === props.groupRowSortField ? metaIndex : metaIndex + 1;
 
-            return <span className='p-sortable-column-badge'>{value}</span>;
+            return <span className="p-sortable-column-badge">{value}</span>;
         }
 
         return null;
@@ -232,7 +232,7 @@ export const HeaderCell = React.memo((props) => {
 
     const createFilter = () => {
         if (props.filterDisplay === 'menu' && getColumnProp('filter')) {
-            return <ColumnFilter display='menu' column={props.column} filters={props.filters} onFilterChange={props.onFilterChange} onFilterApply={props.onFilterApply} filtersStore={props.filtersStore} />;
+            return <ColumnFilter display="menu" column={props.column} filters={props.filters} onFilterChange={props.onFilterChange} onFilterApply={props.onFilterApply} filtersStore={props.filtersStore} />;
         }
 
         return null;
@@ -246,7 +246,7 @@ export const HeaderCell = React.memo((props) => {
         const filter = createFilter();
 
         return (
-            <div className='p-column-header-content'>
+            <div className="p-column-header-content">
                 {title}
                 {sortIcon}
                 {badge}
@@ -286,7 +286,7 @@ export const HeaderCell = React.memo((props) => {
                 style={style}
                 className={className}
                 tabIndex={tabIndex}
-                role='columnheader'
+                role="columnheader"
                 onClick={onClick}
                 onKeyDown={onKeyDown}
                 onMouseDown={onMouseDown}

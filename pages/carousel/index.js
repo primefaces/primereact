@@ -8,7 +8,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const CarouselDemo = () => {
-
     const [products, setProducts] = useState([]);
     const responsiveOptions = [
         {
@@ -32,7 +31,7 @@ const CarouselDemo = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data.slice(0, 9)));
+        productService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const productTemplate = (product) => {
@@ -40,7 +39,7 @@ const CarouselDemo = () => {
             <div className="product-item">
                 <div className="product-item-content">
                     <div className="mb-3">
-                        <img src={`${contextPath}/images/product/${product.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.name} className="product-image" />
+                        <img src={`${contextPath}/images/product/${product.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={product.name} className="product-image" />
                     </div>
                     <div>
                         <h4 className="mb-1">{product.name}</h4>
@@ -55,7 +54,7 @@ const CarouselDemo = () => {
                 </div>
             </div>
         );
-    }
+    };
 
     return (
         <div>
@@ -73,24 +72,31 @@ const CarouselDemo = () => {
 
             <div className="content-section implementation carousel-demo">
                 <div className="card">
-                    <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions}
-                        itemTemplate={productTemplate} header={<h5>Basic</h5>} />
+                    <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} itemTemplate={productTemplate} header={<h5>Basic</h5>} />
                 </div>
 
                 <div className="card">
-                    <Carousel value={products} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions} className="custom-carousel" circular
-                        autoplayInterval={3000} itemTemplate={productTemplate} header={<h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>} />
+                    <Carousel
+                        value={products}
+                        numVisible={3}
+                        numScroll={1}
+                        responsiveOptions={responsiveOptions}
+                        className="custom-carousel"
+                        circular
+                        autoplayInterval={3000}
+                        itemTemplate={productTemplate}
+                        header={<h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>}
+                    />
                 </div>
 
                 <div className="card">
-                    <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px"
-                        itemTemplate={productTemplate} header={<h5>Vertical</h5>} style={{ maxWidth: '400px', marginTop: '2em' }} />
+                    <Carousel value={products} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="360px" itemTemplate={productTemplate} header={<h5>Vertical</h5>} style={{ maxWidth: '400px', marginTop: '2em' }} />
                 </div>
             </div>
 
             <CarouselDoc />
         </div>
     );
-}
+};
 
 export default CarouselDemo;

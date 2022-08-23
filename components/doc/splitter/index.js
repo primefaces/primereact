@@ -267,11 +267,11 @@ const SplitterDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 `}
@@ -404,8 +404,8 @@ import { Splitter, SplitterPanel } from 'primereact/splitter';
 
                     <h5>Properties of SplitterPanel</h5>
                     <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -445,8 +445,8 @@ import { Splitter, SplitterPanel } from 'primereact/splitter';
 
                     <h5>Properties of Splitter</h5>
                     <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -503,8 +503,8 @@ import { Splitter, SplitterPanel } from 'primereact/splitter';
                     </div>
 
                     <h5>Events of Splitter</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -527,8 +527,8 @@ import { Splitter, SplitterPanel } from 'primereact/splitter';
 
                     <h5>Styling</h5>
                     <p>Following is the list of structural style classes</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -576,8 +576,8 @@ import { Splitter, SplitterPanel } from 'primereact/splitter';
                         </p>
 
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

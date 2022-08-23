@@ -616,8 +616,8 @@ export const Dropdown = React.memo(
             }
 
             return (
-                <div className='p-hidden-accessible p-dropdown-hidden-select'>
-                    <select ref={inputRef} required={props.required} defaultValue={option.value} name={props.name} tabIndex={-1} aria-hidden='true'>
+                <div className="p-hidden-accessible p-dropdown-hidden-select">
+                    <select ref={inputRef} required={props.required} defaultValue={option.value} name={props.name} tabIndex={-1} aria-hidden="true">
                         <option value={option.value}>{option.label}</option>;
                     </select>
                 </div>
@@ -626,13 +626,13 @@ export const Dropdown = React.memo(
 
         const createKeyboardHelper = () => {
             return (
-                <div className='p-hidden-accessible'>
+                <div className="p-hidden-accessible">
                     <input
                         ref={focusInputRef}
                         id={props.inputId}
-                        type='text'
+                        type="text"
                         readOnly
-                        aria-haspopup='listbox'
+                        aria-haspopup="listbox"
                         onFocus={onInputFocus}
                         onBlur={onInputBlur}
                         onKeyDown={onInputKeyDown}
@@ -654,9 +654,9 @@ export const Dropdown = React.memo(
                 return (
                     <input
                         ref={inputRef}
-                        type='text'
+                        type="text"
                         defaultValue={value}
-                        className='p-dropdown-label p-inputtext'
+                        className="p-dropdown-label p-inputtext"
                         disabled={props.disabled}
                         placeholder={props.placeholder}
                         maxLength={props.maxLength}
@@ -665,7 +665,7 @@ export const Dropdown = React.memo(
                         onBlur={onInputBlur}
                         aria-label={props.ariaLabel}
                         aria-labelledby={props.ariaLabelledBy}
-                        aria-haspopup='listbox'
+                        aria-haspopup="listbox"
                     />
                 );
             } else {
@@ -685,7 +685,7 @@ export const Dropdown = React.memo(
 
         const createClearIcon = () => {
             if (props.value != null && props.showClear && !props.disabled) {
-                return <i className='p-dropdown-clear-icon pi pi-times' onClick={clear}></i>;
+                return <i className="p-dropdown-clear-icon pi pi-times" onClick={clear}></i>;
             }
 
             return null;
@@ -695,7 +695,7 @@ export const Dropdown = React.memo(
             const iconClassName = classNames('p-dropdown-trigger-icon p-clickable', props.dropdownIcon);
 
             return (
-                <div className='p-dropdown-trigger' role='button' aria-haspopup='listbox' aria-expanded={overlayVisibleState}>
+                <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState}>
                     <span className={iconClassName}></span>
                 </div>
             );

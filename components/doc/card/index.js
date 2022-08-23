@@ -155,11 +155,11 @@ const CardDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Card } from 'primereact/card';
 `}
@@ -213,8 +213,8 @@ const footer = <span>
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -272,10 +272,10 @@ const footer = <span>
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'>theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -313,7 +313,7 @@ const footer = <span>
                         <p>
                             A card can be utilized in many use cases as a result no role is enforced, in fact a role may not be necessary if the card is used for presentational purposes only. Any valid attribute is passed to the container element so
                             if you require to use one of the{' '}
-                            <a href='https://www.w3.org/TR/wai-aria/#landmark' alt='Landmark Roles'>
+                            <a href="https://www.w3.org/TR/wai-aria/#landmark" alt="Landmark Roles">
                                 landmark
                             </a>{' '}
                             roles like <i>region</i>, you may use the <i>role</i> property.

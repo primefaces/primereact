@@ -37,7 +37,7 @@ export const Dock = React.memo(
             const icon = IconUtils.getJSXIcon(_icon, { className: 'p-dock-action-icon' }, { props });
 
             let content = (
-                <a href={url || '#'} role='menuitem' className={contentClassName} target={target} data-pr-tooltip={label} onClick={(e) => onItemClick(e, item)}>
+                <a href={url || '#'} role="menuitem" className={contentClassName} target={target} data-pr-tooltip={label} onClick={(e) => onItemClick(e, item)}>
                     {icon}
                     <Ripple />
                 </a>
@@ -57,7 +57,7 @@ export const Dock = React.memo(
             }
 
             return (
-                <li key={index} className={className} role='none' onMouseEnter={() => onItemMouseEnter(index)}>
+                <li key={index} className={className} role="none" onMouseEnter={() => onItemMouseEnter(index)}>
                     {content}
                 </li>
             );
@@ -70,7 +70,7 @@ export const Dock = React.memo(
         const createHeader = () => {
             if (props.header) {
                 const header = ObjectUtils.getJSXElement(props.header, { props });
-                return <div className='p-dock-header'>{header}</div>;
+                return <div className="p-dock-header">{header}</div>;
             }
 
             return null;
@@ -80,7 +80,7 @@ export const Dock = React.memo(
             const items = createItems();
 
             return (
-                <ul className='p-dock-list' role='menu' onMouseLeave={onListMouseLeave}>
+                <ul className="p-dock-list" role="menu" onMouseLeave={onListMouseLeave}>
                     {items}
                 </ul>
             );
@@ -89,7 +89,7 @@ export const Dock = React.memo(
         const createFooter = () => {
             if (props.footer) {
                 const footer = ObjectUtils.getJSXElement(props.footer, { props });
-                return <div className='p-dock-footer'>{footer}</div>;
+                return <div className="p-dock-footer">{footer}</div>;
             }
 
             return null;
@@ -114,7 +114,7 @@ export const Dock = React.memo(
 
         return (
             <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
-                <div className='p-dock-container'>
+                <div className="p-dock-container">
                     {header}
                     {list}
                     {footer}

@@ -55,7 +55,7 @@ export const MultiSelectPanel = React.memo(
             if (props.panelFooterTemplate) {
                 const content = ObjectUtils.getJSXElement(props.panelFooterTemplate, props, props.onOverlayHide);
 
-                return <div className='p-multiselect-footer'>{content}</div>;
+                return <div className="p-multiselect-footer">{content}</div>;
             }
 
             return null;
@@ -91,7 +91,7 @@ export const MultiSelectPanel = React.memo(
         const createEmptyFilter = () => {
             const emptyFilterMessage = ObjectUtils.getJSXElement(props.emptyFilterMessage, props) || localeOption('emptyFilterMessage');
 
-            return <li className='p-multiselect-empty-message'>{emptyFilterMessage}</li>;
+            return <li className="p-multiselect-empty-message">{emptyFilterMessage}</li>;
         };
 
         const createItem = (option, index, scrollerOptions = {}) => {
@@ -103,7 +103,7 @@ export const MultiSelectPanel = React.memo(
 
                 return (
                     <React.Fragment key={key}>
-                        <li className='p-multiselect-item-group' style={style}>
+                        <li className="p-multiselect-item-group" style={style}>
                             {groupContent}
                         </li>
                         {groupChildrenContent}
@@ -159,7 +159,7 @@ export const MultiSelectPanel = React.memo(
                             const content = isEmptyFilter() ? createEmptyFilter() : options.children;
 
                             return (
-                                <ul ref={options.contentRef} className={className} role='listbox' aria-multiselectable>
+                                <ul ref={options.contentRef} className={className} role="listbox" aria-multiselectable>
                                     {content}
                                 </ul>
                             );
@@ -172,8 +172,8 @@ export const MultiSelectPanel = React.memo(
                 const items = createItems();
 
                 return (
-                    <div className='p-multiselect-items-wrapper' style={{ maxHeight: props.scrollHeight }}>
-                        <ul className='p-multiselect-items p-component' role='listbox' aria-multiselectable>
+                    <div className="p-multiselect-items-wrapper" style={{ maxHeight: props.scrollHeight }}>
+                        <ul className="p-multiselect-items p-component" role="listbox" aria-multiselectable>
                             {items}
                         </ul>
                     </div>
@@ -197,7 +197,7 @@ export const MultiSelectPanel = React.memo(
             return (
                 <CSSTransition
                     nodeRef={ref}
-                    classNames='p-connected-overlay'
+                    classNames="p-connected-overlay"
                     in={props.in}
                     timeout={{ enter: 120, exit: 100 }}
                     options={props.transitionOptions}

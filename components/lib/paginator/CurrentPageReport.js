@@ -19,7 +19,7 @@ export const CurrentPageReport = React.memo((props) => {
         .replace('{rows}', report.rows)
         .replace('{totalRecords}', report.totalRecords);
 
-    const element = <span className='p-paginator-current'>{text}</span>;
+    const element = <span className="p-paginator-current">{text}</span>;
 
     if (props.template) {
         const defaultOptions = {

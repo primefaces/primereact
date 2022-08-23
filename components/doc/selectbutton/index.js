@@ -199,11 +199,11 @@ const SelectButtonDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { SelectButton } from 'primereact/selectbutton';
 `}
@@ -227,7 +227,7 @@ import { SelectButton } from 'primereact/selectbutton';
                     <p>
                         <b>Options as SelectItems</b>
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const citySelectItems = [
     {label: 'New York', value: 'NY'},
@@ -248,7 +248,7 @@ const citySelectItems = [
                     <p>
                         <b>Options as any type</b>
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const cities = [
     {name: 'New York', code: 'NY'},
@@ -287,7 +287,7 @@ const cities = [
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const itemTemplate = (option) => {
     // custom item content
@@ -296,8 +296,8 @@ const itemTemplate = (option) => {
                     </CodeHighlight>
 
                     <h5>SelectItem API</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -343,8 +343,8 @@ const itemTemplate = (option) => {
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -455,8 +455,8 @@ const itemTemplate = (option) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -486,8 +486,8 @@ const itemTemplate = (option) => {
                         </p>
 
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

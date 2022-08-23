@@ -2405,8 +2405,8 @@ export const Calendar = React.memo(
         const createBackwardNavigator = (isVisible) => {
             const navigatorProps = isVisible ? { onClick: onPrevButtonClick, onKeyDown: (e) => onContainerButtonKeydown(e) } : { style: { visibility: 'hidden' } };
             return (
-                <button type='button' className='p-datepicker-prev' {...navigatorProps}>
-                    <span className='p-datepicker-prev-icon pi pi-chevron-left'></span>
+                <button type="button" className="p-datepicker-prev" {...navigatorProps}>
+                    <span className="p-datepicker-prev-icon pi pi-chevron-left"></span>
                     <Ripple />
                 </button>
             );
@@ -2415,8 +2415,8 @@ export const Calendar = React.memo(
         const createForwardNavigator = (isVisible) => {
             const navigatorProps = isVisible ? { onClick: onNextButtonClick, onKeyDown: (e) => onContainerButtonKeydown(e) } : { style: { visibility: 'hidden' } };
             return (
-                <button type='button' className='p-datepicker-next' {...navigatorProps}>
-                    <span className='p-datepicker-next-icon pi pi-chevron-right'></span>
+                <button type="button" className="p-datepicker-next" {...navigatorProps}>
+                    <span className="p-datepicker-next-icon pi pi-chevron-right"></span>
                     <Ripple />
                 </button>
             );
@@ -2433,7 +2433,7 @@ export const Calendar = React.memo(
                     .filter((option) => !!option);
                 const displayedMonthNames = displayedMonthOptions.map((option) => option.label);
                 const content = (
-                    <select className='p-datepicker-month' onChange={(e) => onMonthDropdownChange(e, e.target.value)} value={viewMonth}>
+                    <select className="p-datepicker-month" onChange={(e) => onMonthDropdownChange(e, e.target.value)} value={viewMonth}>
                         {displayedMonthOptions.map((option) => (
                             <option key={option.label} value={option.value}>
                                 {option.label}
@@ -2461,7 +2461,7 @@ export const Calendar = React.memo(
 
             return (
                 currentView === 'date' && (
-                    <button className='p-datepicker-month p-link' onClick={switchToMonthView} disabled={switchViewButtonDisabled()}>
+                    <button className="p-datepicker-month p-link" onClick={switchToMonthView} disabled={switchViewButtonDisabled()}>
                         {monthNames[month]}
                     </button>
                 )
@@ -2483,7 +2483,7 @@ export const Calendar = React.memo(
                 const viewYear = viewDate.getFullYear();
                 const displayedYearNames = yearOptions.filter((year) => !(props.minDate && props.minDate.getFullYear() > year) && !(props.maxDate && props.maxDate.getFullYear() < year));
                 const content = (
-                    <select className='p-datepicker-year' onChange={(e) => onYearDropdownChange(e, e.target.value)} value={viewYear}>
+                    <select className="p-datepicker-year" onChange={(e) => onYearDropdownChange(e, e.target.value)} value={viewYear}>
                         {displayedYearNames.map((year) => (
                             <option key={year} value={year}>
                                 {year}
@@ -2512,7 +2512,7 @@ export const Calendar = React.memo(
 
             return (
                 currentView !== 'year' && (
-                    <button className='p-datepicker-year p-link' onClick={switchToYearView} disabled={switchViewButtonDisabled()}>
+                    <button className="p-datepicker-year p-link" onClick={switchToYearView} disabled={switchViewButtonDisabled()}>
                         {currentYear}
                     </button>
                 )
@@ -2523,7 +2523,7 @@ export const Calendar = React.memo(
             const years = yearPickerValues();
 
             if (currentView === 'year') {
-                return <span className='p-datepicker-decade'>{props.decadeTemplate ? props.decadeTemplate(years) : <span>{`${yearPickerValues()[0]} - ${yearPickerValues()[yearPickerValues().length - 1]}`}</span>}</span>;
+                return <span className="p-datepicker-decade">{props.decadeTemplate ? props.decadeTemplate(years) : <span>{`${yearPickerValues()[0]} - ${yearPickerValues()[yearPickerValues().length - 1]}`}</span>}</span>;
             }
 
             return null;
@@ -2535,7 +2535,7 @@ export const Calendar = React.memo(
             const decade = createTitleDecadeElement();
 
             return (
-                <div className='p-datepicker-title'>
+                <div className="p-datepicker-title">
                     {month}
                     {year}
                     {decade}
@@ -2545,14 +2545,14 @@ export const Calendar = React.memo(
 
         const createDayNames = (weekDays) => {
             const dayNames = weekDays.map((weekDay, index) => (
-                <th key={`${weekDay}-${index}`} scope='col'>
+                <th key={`${weekDay}-${index}`} scope="col">
                     <span>{weekDay}</span>
                 </th>
             ));
 
             if (props.showWeek) {
                 const weekHeader = (
-                    <th scope='col' key='wn' className='p-datepicker-weekheader p-disabled'>
+                    <th scope="col" key="wn" className="p-datepicker-weekheader p-disabled">
                         <span>{localeOption('weekHeader', props.locale)}</span>
                     </th>
                 );
@@ -2589,8 +2589,8 @@ export const Calendar = React.memo(
 
             if (props.showWeek) {
                 const weekNumberCell = (
-                    <td key={'wn' + weekNumber} className='p-datepicker-weeknumber'>
-                        <span className='p-disabled'>{weekNumber}</span>
+                    <td key={'wn' + weekNumber} className="p-datepicker-weeknumber">
+                        <span className="p-disabled">{weekNumber}</span>
                     </td>
                 );
 
@@ -2610,8 +2610,8 @@ export const Calendar = React.memo(
 
             return (
                 currentView === 'date' && (
-                    <div className='p-datepicker-calendar-container'>
-                        <table className='p-datepicker-calendar'>
+                    <div className="p-datepicker-calendar-container">
+                        <table className="p-datepicker-calendar">
                             <thead>
                                 <tr>{dayNames}</tr>
                             </thead>
@@ -2632,8 +2632,8 @@ export const Calendar = React.memo(
             const header = props.headerTemplate ? props.headerTemplate() : null;
 
             return (
-                <div key={monthMetaData.month} className='p-datepicker-group'>
-                    <div className='p-datepicker-header'>
+                <div key={monthMetaData.month} className="p-datepicker-group">
+                    <div className="p-datepicker-header">
                         {header}
                         {backwardNavigator}
                         {title}
@@ -2647,7 +2647,7 @@ export const Calendar = React.memo(
         const createMonths = (monthsMetaData) => {
             const groups = monthsMetaData.map(createMonth);
 
-            return <div className='p-datepicker-group-container'>{groups}</div>;
+            return <div className="p-datepicker-group-container">{groups}</div>;
         };
 
         const createDateView = () => {
@@ -2708,11 +2708,11 @@ export const Calendar = React.memo(
 
             return (
                 <>
-                    <div className='p-datepicker-group-container'>
-                        <div className='p-datepicker-group'>
-                            <div className='p-datepicker-header'>
+                    <div className="p-datepicker-group-container">
+                        <div className="p-datepicker-group">
+                            <div className="p-datepicker-header">
                                 {backwardNavigator}
-                                <div className='p-datepicker-title'>
+                                <div className="p-datepicker-title">
                                     {yearElement}
                                     {decade}
                                 </div>
@@ -2748,28 +2748,28 @@ export const Calendar = React.memo(
             const hourDisplay = hour < 10 ? '0' + hour : hour;
 
             return (
-                <div className='p-hour-picker'>
+                <div className="p-hour-picker">
                     <button
-                        type='button'
-                        className='p-link'
+                        type="button"
+                        className="p-link"
                         onMouseDown={(e) => onTimePickerElementMouseDown(e, 0, 1)}
                         onMouseUp={onTimePickerElementMouseUp}
                         onMouseLeave={onTimePickerElementMouseLeave}
                         onKeyDown={(e) => onContainerButtonKeydown(e)}
                     >
-                        <span className='pi pi-chevron-up'></span>
+                        <span className="pi pi-chevron-up"></span>
                         <Ripple />
                     </button>
                     <span>{hourDisplay}</span>
                     <button
-                        type='button'
-                        className='p-link'
+                        type="button"
+                        className="p-link"
                         onMouseDown={(e) => onTimePickerElementMouseDown(e, 0, -1)}
                         onMouseUp={onTimePickerElementMouseUp}
                         onMouseLeave={onTimePickerElementMouseLeave}
                         onKeyDown={(e) => onContainerButtonKeydown(e)}
                     >
-                        <span className='pi pi-chevron-down'></span>
+                        <span className="pi pi-chevron-down"></span>
                         <Ripple />
                     </button>
                 </div>
@@ -2782,28 +2782,28 @@ export const Calendar = React.memo(
             const minuteDisplay = minute < 10 ? '0' + minute : minute;
 
             return (
-                <div className='p-minute-picker'>
+                <div className="p-minute-picker">
                     <button
-                        type='button'
-                        className='p-link'
+                        type="button"
+                        className="p-link"
                         onMouseDown={(e) => onTimePickerElementMouseDown(e, 1, 1)}
                         onMouseUp={onTimePickerElementMouseUp}
                         onMouseLeave={onTimePickerElementMouseLeave}
                         onKeyDown={(e) => onContainerButtonKeydown(e)}
                     >
-                        <span className='pi pi-chevron-up'></span>
+                        <span className="pi pi-chevron-up"></span>
                         <Ripple />
                     </button>
                     <span>{minuteDisplay}</span>
                     <button
-                        type='button'
-                        className='p-link'
+                        type="button"
+                        className="p-link"
                         onMouseDown={(e) => onTimePickerElementMouseDown(e, 1, -1)}
                         onMouseUp={onTimePickerElementMouseUp}
                         onMouseLeave={onTimePickerElementMouseLeave}
                         onKeyDown={(e) => onContainerButtonKeydown(e)}
                     >
-                        <span className='pi pi-chevron-down'></span>
+                        <span className="pi pi-chevron-down"></span>
                         <Ripple />
                     </button>
                 </div>
@@ -2817,28 +2817,28 @@ export const Calendar = React.memo(
                 const secondDisplay = second < 10 ? '0' + second : second;
 
                 return (
-                    <div className='p-second-picker'>
+                    <div className="p-second-picker">
                         <button
-                            type='button'
-                            className='p-link'
+                            type="button"
+                            className="p-link"
                             onMouseDown={(e) => onTimePickerElementMouseDown(e, 2, 1)}
                             onMouseUp={onTimePickerElementMouseUp}
                             onMouseLeave={onTimePickerElementMouseLeave}
                             onKeyDown={(e) => onContainerButtonKeydown(e)}
                         >
-                            <span className='pi pi-chevron-up'></span>
+                            <span className="pi pi-chevron-up"></span>
                             <Ripple />
                         </button>
                         <span>{secondDisplay}</span>
                         <button
-                            type='button'
-                            className='p-link'
+                            type="button"
+                            className="p-link"
                             onMouseDown={(e) => onTimePickerElementMouseDown(e, 2, -1)}
                             onMouseUp={onTimePickerElementMouseUp}
                             onMouseLeave={onTimePickerElementMouseLeave}
                             onKeyDown={(e) => onContainerButtonKeydown(e)}
                         >
-                            <span className='pi pi-chevron-down'></span>
+                            <span className="pi pi-chevron-down"></span>
                             <Ripple />
                         </button>
                     </div>
@@ -2855,28 +2855,28 @@ export const Calendar = React.memo(
                 const millisecondDisplay = millisecond < 100 ? (millisecond < 10 ? '00' : '0') + millisecond : millisecond;
 
                 return (
-                    <div className='p-millisecond-picker'>
+                    <div className="p-millisecond-picker">
                         <button
-                            type='button'
-                            className='p-link'
+                            type="button"
+                            className="p-link"
                             onMouseDown={(e) => onTimePickerElementMouseDown(e, 3, 1)}
                             onMouseUp={onTimePickerElementMouseUp}
                             onMouseLeave={onTimePickerElementMouseLeave}
                             onKeyDown={(e) => onContainerButtonKeydown(e)}
                         >
-                            <span className='pi pi-chevron-up'></span>
+                            <span className="pi pi-chevron-up"></span>
                             <Ripple />
                         </button>
                         <span>{millisecondDisplay}</span>
                         <button
-                            type='button'
-                            className='p-link'
+                            type="button"
+                            className="p-link"
                             onMouseDown={(e) => onTimePickerElementMouseDown(e, 3, -1)}
                             onMouseUp={onTimePickerElementMouseUp}
                             onMouseLeave={onTimePickerElementMouseLeave}
                             onKeyDown={(e) => onContainerButtonKeydown(e)}
                         >
-                            <span className='pi pi-chevron-down'></span>
+                            <span className="pi pi-chevron-down"></span>
                             <Ripple />
                         </button>
                     </div>
@@ -2893,14 +2893,14 @@ export const Calendar = React.memo(
                 const display = hour > 11 ? 'PM' : 'AM';
 
                 return (
-                    <div className='p-ampm-picker'>
-                        <button type='button' className='p-link' onClick={toggleAmPm}>
-                            <span className='pi pi-chevron-up'></span>
+                    <div className="p-ampm-picker">
+                        <button type="button" className="p-link" onClick={toggleAmPm}>
+                            <span className="pi pi-chevron-up"></span>
                             <Ripple />
                         </button>
                         <span>{display}</span>
-                        <button type='button' className='p-link' onClick={toggleAmPm}>
-                            <span className='pi pi-chevron-down'></span>
+                        <button type="button" className="p-link" onClick={toggleAmPm}>
+                            <span className="pi pi-chevron-down"></span>
                             <Ripple />
                         </button>
                     </div>
@@ -2912,7 +2912,7 @@ export const Calendar = React.memo(
 
         const createSeparator = (separator) => {
             return (
-                <div className='p-separator'>
+                <div className="p-separator">
                     <span>{separator}</span>
                 </div>
             );
@@ -2921,7 +2921,7 @@ export const Calendar = React.memo(
         const createTimePicker = () => {
             if ((props.showTime || props.timeOnly) && currentView === 'date') {
                 return (
-                    <div className='p-timepicker'>
+                    <div className="p-timepicker">
                         {createHourPicker()}
                         {createSeparator(':')}
                         {createMinutePicker()}
@@ -2945,13 +2945,13 @@ export const Calendar = React.memo(
                         ref={inputRef}
                         id={props.inputId}
                         name={props.name}
-                        type='text'
+                        type="text"
                         className={props.inputClassName}
                         style={props.inputStyle}
                         readOnly={props.readOnlyInput}
                         disabled={props.disabled}
                         required={props.required}
-                        autoComplete='off'
+                        autoComplete="off"
                         placeholder={props.placeholder}
                         tabIndex={props.tabIndex}
                         onInput={onUserInput}
@@ -2971,7 +2971,7 @@ export const Calendar = React.memo(
 
         const createButton = () => {
             if (props.showIcon) {
-                return <Button type='button' icon={props.icon} onClick={onButtonClick} tabIndex='-1' disabled={props.disabled} className='p-datepicker-trigger' />;
+                return <Button type="button" icon={props.icon} onClick={onButtonClick} tabIndex="-1" disabled={props.disabled} className="p-datepicker-trigger" />;
             }
 
             return null;
@@ -3005,9 +3005,9 @@ export const Calendar = React.memo(
                 const { today, clear } = localeOptions(props.locale);
 
                 return (
-                    <div className='p-datepicker-buttonbar'>
-                        <Button type='button' label={today} onClick={onTodayButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={todayClassName} />
-                        <Button type='button' label={clear} onClick={onClearButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={clearClassName} />
+                    <div className="p-datepicker-buttonbar">
+                        <Button type="button" label={today} onClick={onTodayButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={todayClassName} />
+                        <Button type="button" label={clear} onClick={onClearButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={clearClassName} />
                     </div>
                 );
             }
@@ -3019,7 +3019,7 @@ export const Calendar = React.memo(
             if (props.footerTemplate) {
                 const content = props.footerTemplate();
 
-                return <div className='p-datepicker-footer'>{content}</div>;
+                return <div className="p-datepicker-footer">{content}</div>;
             }
 
             return null;
@@ -3028,7 +3028,7 @@ export const Calendar = React.memo(
         const createMonthPicker = () => {
             if (currentView === 'month') {
                 return (
-                    <div className='p-monthpicker'>
+                    <div className="p-monthpicker">
                         {monthPickerValues().map((m, i) => {
                             return (
                                 <span onClick={(event) => onMonthSelect(event, i)} key={`month${i + 1}`} className={classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(1, i, currentYear) })}>
@@ -3046,7 +3046,7 @@ export const Calendar = React.memo(
         const createYearPicker = () => {
             if (currentView === 'year') {
                 return (
-                    <div className='p-yearpicker'>
+                    <div className="p-yearpicker">
                         {yearPickerValues().map((y, i) => {
                             return (
                                 <span onClick={(event) => onYearSelect(event, y)} key={`year${i + 1}`} className={classNames('p-yearpicker-year', { 'p-highlight': isYearSelected(y) })}>

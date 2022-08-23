@@ -124,7 +124,7 @@ export const TreeTableBodyCell = (props) => {
 
     /* eslint-disable */
     const editorKeyHelper = props.editor && (
-        <a tabIndex={0} ref={keyHelperRef} className='p-cell-editor-key-helper p-hidden-accessible' onFocus={onEditorFocus}>
+        <a tabIndex={0} ref={keyHelperRef} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={onEditorFocus}>
             <span></span>
         </a>
     );

@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TriStateCheckboxDemo = () => {
-
     const [value, setValue] = useState(null);
 
     return (
@@ -35,6 +34,6 @@ const TriStateCheckboxDemo = () => {
             <TriStateCheckboxDoc />
         </div>
     );
-}
+};
 
 export default TriStateCheckboxDemo;

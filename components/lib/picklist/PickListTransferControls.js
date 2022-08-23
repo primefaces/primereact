@@ -96,10 +96,10 @@ export const PickListTransferControls = React.memo((props) => {
 
     return (
         <div className={className}>
-            <Button disabled={moveRightDisabled} type='button' icon='pi pi-angle-right' onClick={moveRight}></Button>
-            <Button disabled={moveAllRightDisabled} type='button' icon='pi pi-angle-double-right' onClick={moveAllRight}></Button>
-            <Button disabled={moveLeftDisabled} type='button' icon='pi pi-angle-left' onClick={moveLeft}></Button>
-            <Button disabled={moveAllLeftDisabled} type='button' icon='pi pi-angle-double-left' onClick={moveAllLeft}></Button>
+            <Button disabled={moveRightDisabled} type="button" icon="pi pi-angle-right" onClick={moveRight}></Button>
+            <Button disabled={moveAllRightDisabled} type="button" icon="pi pi-angle-double-right" onClick={moveAllRight}></Button>
+            <Button disabled={moveLeftDisabled} type="button" icon="pi pi-angle-left" onClick={moveLeft}></Button>
+            <Button disabled={moveAllLeftDisabled} type="button" icon="pi pi-angle-double-left" onClick={moveAllLeft}></Button>
         </div>
     );
 });

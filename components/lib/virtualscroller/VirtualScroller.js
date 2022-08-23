@@ -509,7 +509,7 @@ export const VirtualScroller = React.memo(
                     'p-component-overlay': !props.loadingTemplate
                 });
 
-                let content = <i className='p-virtualscroller-loading-icon pi pi-spinner pi-spin'></i>;
+                let content = <i className="p-virtualscroller-loading-icon pi pi-spinner pi-spin"></i>;
 
                 if (props.loadingTemplate) {
                     content = loaderArrState.map((_, index) => {
@@ -533,7 +533,7 @@ export const VirtualScroller = React.memo(
 
         const createSpacer = () => {
             if (props.showSpacer) {
-                return <div ref={spacerRef} className='p-virtualscroller-spacer'></div>;
+                return <div ref={spacerRef} className="p-virtualscroller-spacer"></div>;
             }
 
             return null;

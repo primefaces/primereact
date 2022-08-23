@@ -670,11 +670,11 @@ const DataViewDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 `}
@@ -690,10 +690,10 @@ import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 
                     <h5>Getting Started</h5>
                     <p>
-                        Layout of the DataView is managed by the <a href='https://github.com/primefaces/primeflex'>PrimeFlex</a> that can be downloaded from npm.
+                        Layout of the DataView is managed by the <a href="https://github.com/primefaces/primeflex">PrimeFlex</a> that can be downloaded from npm.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 npm install primeflex
 `}
@@ -706,7 +706,7 @@ npm install primeflex
                     <p>
                         DataView has two layout modes; <i>list</i> and <i>grid</i> where <i>itemTemplate</i> function is called by passing the item to render along with the layout mode.
                     </p>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const itemTemplate = (data, layout) => {
     if (layout === 'list') {
@@ -741,8 +741,8 @@ const itemTemplate = (data, layout) => {
                     </CodeHighlight>
 
                     <h5>Properties of DataViewLayoutOptions</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -787,8 +787,8 @@ const itemTemplate = (data, layout) => {
                     </div>
 
                     <h5>Events of DataViewLayoutOptions</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -811,7 +811,7 @@ const itemTemplate = (data, layout) => {
 
                     <h5>Paginator</h5>
                     <p>
-                        Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display. Visit the <Link href='/paginator'> paginator</Link>{' '}
+                        Pagination is enabled by setting paginator property to true, rows attribute defines the number of rows per page and pageLinks specify the the number of page links to display. Visit the <Link href="/paginator"> paginator</Link>{' '}
                         paginator component for more information about the available properties.
                     </p>
 
@@ -841,7 +841,7 @@ const itemTemplate = (data, layout) => {
                         a dropdown where simply updating the sortField-sortOrder bindings of the DataView initiates sorting.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const sortOptions = [
     {label: 'Price High to Low', value: '!price'},
@@ -861,7 +861,7 @@ const header = (
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight className='js'>
+                    <CodeHighlight className="js">
                         {`
 const onSortChange = (event) => {
     const value = event.value;
@@ -884,12 +884,12 @@ const onSortChange = (event) => {
                     <p>
                         Lazy loading is useful to deal with huge datasets, in order to implement lazy loading use the pagination in controlled mode and utilize the <i>onPage</i> callback to load your data from the backend. Pagination in this case
                         needs to display the logical number of records so bind this value to the <i>totalRecords</i> property so that paginator can display itself according to the total records although you'd only need to load the data of the current
-                        page. Refer to <Link href='/datatable/lazy'>DataTable</Link> lazy loading for a sample implementation.
+                        page. Refer to <Link href="/datatable/lazy">DataTable</Link> lazy loading for a sample implementation.
                     </p>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -976,7 +976,7 @@ const onSortChange = (event) => {
                                     <td>string|object</td>
                                     <td>FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown</td>
                                     <td>
-                                        Template of the paginator. For details, refer to the template section of the <Link href='/paginator'>paginator documentation</Link> for further options.
+                                        Template of the paginator. For details, refer to the template section of the <Link href="/paginator">paginator documentation</Link> for further options.
                                     </td>
                                 </tr>
                                 <tr>
@@ -1070,8 +1070,8 @@ const onSortChange = (event) => {
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1095,10 +1095,10 @@ const onSortChange = (event) => {
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1139,16 +1139,16 @@ const onSortChange = (event) => {
                         <h6>Screen Reader</h6>
                         <p>
                             The container element that wraps the layout options buttons has a <i>group</i> role whereas each button element uses <i>button</i> role and <i>aria-pressed</i> is updated depending on selection state. Values to describe
-                            the buttons are derived from the <i>aria.listView</i> and <i>aria.gridView</i> properties of the <Link href='/locale'>locale</Link> API respectively.
+                            the buttons are derived from the <i>aria.listView</i> and <i>aria.gridView</i> properties of the <Link href="/locale">locale</Link> API respectively.
                         </p>
 
                         <p>
-                            Refer to <Link href='/paginator'>paginator</Link> accessibility documentation for the paginator of the component.
+                            Refer to <Link href="/paginator">paginator</Link> accessibility documentation for the paginator of the component.
                         </p>
 
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

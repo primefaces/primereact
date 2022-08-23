@@ -10,7 +10,7 @@ export const JumpToPageInput = React.memo((props) => {
     };
 
     const value = props.pageCount > 0 ? props.page + 1 : 0;
-    const element = <InputNumber value={value} onChange={onChange} className='p-paginator-page-input' disabled={props.disabled} />;
+    const element = <InputNumber value={value} onChange={onChange} className="p-paginator-page-input" disabled={props.disabled} />;
 
     if (props.template) {
         const defaultOptions = {

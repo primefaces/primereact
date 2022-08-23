@@ -500,11 +500,11 @@ const ToastDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { Toast } from 'primereact/toast';
 `}
@@ -532,15 +532,15 @@ import { Toast } from 'primereact/toast';
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 `}
                     </CodeHighlight>
 
                     <h5>Message API</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -645,7 +645,7 @@ toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Or
 `}
                     </CodeHighlight>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 showSuccess() {
     toast.current.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
@@ -676,7 +676,7 @@ showMultiple() {
                     <h5>Closable</h5>
                     <p>Toasts are closable by default resulting in a close icon being displayed on top right corner. In order to disable closable messages, set closable to false.</p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 toast.current.show({closable: false, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
 `}
@@ -687,7 +687,7 @@ toast.current.show({closable: false, severity: 'error', summary: 'Error Message'
                         Messages are cleared automatically after the timeout defined by <i>life</i> property which is 3 seconds by default. Use <i>sticky</i> mode to make them stay until they are manually removed.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 //sticky
 toast.current.show({sticky: true, severity: 'error', summary: 'Error Message', detail: 'Validation failed'});
@@ -724,15 +724,15 @@ toast.current.clear();
                         <i>replace(newMessages)</i> method adds new messages after removing all old messages.
                     </p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 toast.current.replace(newMessages);
 `}
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -778,7 +778,7 @@ toast.current.replace(newMessages);
                                     <td>null</td>
                                     <td>
                                         The properties of{' '}
-                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
                                             CSSTransition
                                         </a>{' '}
                                         can be customized, except for "nodeRef" and "in" properties.
@@ -797,8 +797,8 @@ toast.current.replace(newMessages);
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -833,10 +833,10 @@ toast.current.replace(newMessages);
 
                     <h5>Styling</h5>
                     <p>
-                        Following is the list of structural style classes, for theming classes visit <Link href='/theming'> theming</Link> page.
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
                     </p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -884,13 +884,13 @@ toast.current.replace(newMessages);
                         </p>
 
                         <p>
-                            Close element is a <i>button</i> with an <i>aria-label</i> that refers to the <i>aria.close</i> property of the <Link href='/locale'>locale</Link> API by default, you may use
+                            Close element is a <i>button</i> with an <i>aria-label</i> that refers to the <i>aria.close</i> property of the <Link href="/locale">locale</Link> API by default, you may use
                             <i>closeButtonProps</i> to customize the element and override the default <i>aria-label</i>.
                         </p>
 
                         <h6>Close Button Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>

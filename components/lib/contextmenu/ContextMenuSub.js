@@ -68,7 +68,7 @@ export const ContextMenuSub = React.memo((props) => {
     });
 
     const createSeparator = (index) => {
-        return <li key={'separator_' + index} className='p-menu-separator' role='separator'></li>;
+        return <li key={'separator_' + index} className="p-menu-separator" role="separator"></li>;
     };
 
     const createSubmenu = (item) => {
@@ -87,11 +87,11 @@ export const ContextMenuSub = React.memo((props) => {
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const submenuIconClassName = 'p-submenu-icon pi pi-angle-right';
         const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
-        const label = item.label && <span className='p-menuitem-text'>{item.label}</span>;
+        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
         const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = createSubmenu(item);
         let content = (
-            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onItemClick(event, item, index)} role='menuitem' aria-haspopup={item.items != null} aria-disabled={item.disabled}>
+            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onItemClick(event, item, index)} role="menuitem" aria-haspopup={item.items != null} aria-disabled={item.disabled}>
                 {icon}
                 {label}
                 {submenuIcon}
@@ -115,7 +115,7 @@ export const ContextMenuSub = React.memo((props) => {
         }
 
         return (
-            <li key={key} role='none' id={item.id} className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>
+            <li key={key} role="none" id={item.id} className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>
                 {content}
                 {submenu}
             </li>
@@ -136,7 +136,7 @@ export const ContextMenuSub = React.memo((props) => {
     const submenu = createMenu();
 
     return (
-        <CSSTransition nodeRef={submenuRef} classNames='p-contextmenusub' in={active} timeout={{ enter: 0, exit: 0 }} unmountOnExit onEnter={onEnter}>
+        <CSSTransition nodeRef={submenuRef} classNames="p-contextmenusub" in={active} timeout={{ enter: 0, exit: 0 }} unmountOnExit onEnter={onEnter}>
             <ul ref={submenuRef} className={className}>
                 {submenu}
             </ul>

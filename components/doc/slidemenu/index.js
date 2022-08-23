@@ -639,11 +639,11 @@ const SlideMenuDemo = () => {
     };
 
     return (
-        <div className='content-section documentation' id='app-doc'>
+        <div className="content-section documentation" id="app-doc">
             <TabView>
-                <TabPanel header='Documentation'>
+                <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 import { SlideMenu } from 'primereact/slidemenu';
 `}
@@ -659,13 +659,13 @@ import { SlideMenu } from 'primereact/slidemenu';
 
                     <h5>MenuItem API</h5>
                     <p>
-                        Menu uses the common menumodel api to define its items, visit <Link href='/menumodel'> MenuModel API</Link> for details.
+                        Menu uses the common menumodel api to define its items, visit <Link href="/menumodel"> MenuModel API</Link> for details.
                     </p>
 
                     <h5>Getting Started</h5>
                     <p>Menu requires a collection of menuitems as its model.</p>
 
-                    <CodeHighlight lang='js'>
+                    <CodeHighlight lang="js">
                         {`
 const items = [
     {
@@ -819,7 +819,7 @@ const items = [
 
                     <h5>Effects</h5>
                     <p>
-                        The easing function to use is "ease-out" by default which can be customized using easing property. See <a href='http://www.w3schools.com/cssref/css3_pr_transition-timing-function.asp'>here</a> for possible alternative values.
+                        The easing function to use is "ease-out" by default which can be customized using easing property. See <a href="http://www.w3schools.com/cssref/css3_pr_transition-timing-function.asp">here</a> for possible alternative values.
                     </p>
 
                     <CodeHighlight>
@@ -829,8 +829,8 @@ const items = [
                     </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -926,7 +926,7 @@ const items = [
                                     <td>null</td>
                                     <td>
                                         The properties of{' '}
-                                        <a href='https://reactcommunity.org/react-transition-group/css-transition' rel='noopener noreferrer' target='_blank'>
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
                                             CSSTransition
                                         </a>{' '}
                                         can be customized, except for "nodeRef" and "in" properties.
@@ -937,8 +937,8 @@ const items = [
                     </div>
 
                     <h5>Methods</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -967,8 +967,8 @@ const items = [
                     </div>
 
                     <h5>Events</h5>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -993,8 +993,8 @@ const items = [
 
                     <h5>Styling</h5>
                     <p>Following is the list of structural style classes.</p>
-                    <div className='doc-tablewrapper'>
-                        <table className='doc-table'>
+                    <div className="doc-tablewrapper">
+                        <table className="doc-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -1057,8 +1057,8 @@ const items = [
                         </p>
 
                         <h6>Keyboard Support</h6>
-                        <div className='doc-tablewrapper'>
-                            <table className='doc-table'>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
                                 <thead>
                                     <tr>
                                         <th>Key</th>
