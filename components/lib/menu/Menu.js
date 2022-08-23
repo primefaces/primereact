@@ -162,6 +162,9 @@ export const Menu = React.memo(
         };
 
         const createMenuItem = (item, index) => {
+            if (item.visible === false) {
+                return null;
+            }
             const className = classNames('p-menuitem', item.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);

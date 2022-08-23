@@ -93,6 +93,9 @@ export const PanelMenuSub = React.memo((props) => {
     };
 
     const createMenuItem = (item, index) => {
+        if (item.visible === false) {
+            return null;
+        }
         const key = item.label + '_' + index;
         const active = isItemActive(item);
         const className = classNames('p-menuitem', item.className);
