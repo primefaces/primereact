@@ -1,6 +1,6 @@
+import Head from 'next/head';
 import React, { memo } from 'react';
 import { CodeHighlight } from '../../components/doc/common/codehighlight';
-import Head from 'next/head';
 
 const MenuModelDemo = () => {
     return (
@@ -99,6 +99,12 @@ const items = [
                             <td>boolean</td>
                             <td>false</td>
                             <td>When set as true, disables the menuitem.</td>
+                        </tr>
+                        <tr>
+                            <td>visible</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>When set as false, hides the menu item.</td>
                         </tr>
                         <tr>
                             <td>target</td>

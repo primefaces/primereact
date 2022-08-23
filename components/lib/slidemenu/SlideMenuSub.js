@@ -50,6 +50,9 @@ export const SlideMenuSub = React.memo((props) => {
     };
 
     const createMenuitem = (item, index) => {
+        if (item.visible === false) {
+            return null;
+        }
         const key = createKey(item, index);
         const active = activeItemState === item;
         const className = classNames('p-menuitem', { 'p-menuitem-active': active, 'p-disabled': item.disabled }, item.className);

@@ -24,6 +24,7 @@ export interface MenuItem {
     items?: MenuItem[] | MenuItem[][];
     expanded?: boolean;
     disabled?: boolean;
+    visible?: boolean;
     target?: string;
     separator?: boolean;
     style?: object;

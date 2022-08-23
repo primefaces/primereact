@@ -148,6 +148,9 @@ export const SpeedDial = React.memo(
         }));
 
         const createItem = (item, index) => {
+            if (item.visible === false) {
+                return null;
+            }
             const style = getItemStyle(index);
             const { disabled, icon: _icon, label, template, url, target } = item;
             const contentClassName = classNames('p-speeddial-action', { 'p-disabled': disabled });

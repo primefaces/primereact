@@ -80,6 +80,9 @@ export const ContextMenuSub = React.memo((props) => {
     };
 
     const createMenuItem = (item, index) => {
+        if (item.visible === false) {
+            return null;
+        }
         const active = activeItemState === item;
         const key = item.label + '_' + index;
         const className = classNames('p-menuitem', { 'p-menuitem-active': active }, item.className);

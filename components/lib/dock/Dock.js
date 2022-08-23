@@ -24,6 +24,9 @@ export const Dock = React.memo(
         };
 
         const createItem = (item, index) => {
+            if (item.visible === false) {
+                return null;
+            }
             const { disabled, icon: _icon, label, template, url, target } = item;
             const className = classNames('p-dock-item', {
                 'p-dock-item-second-prev': currentIndexState - 2 === index,

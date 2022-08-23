@@ -60,6 +60,9 @@ export const TabMenu = React.memo(
         });
 
         const createMenuItem = (item, index) => {
+            if (item.visible === false) {
+                return null;
+            }
             const { className: _className, style, disabled, icon: _icon, label: _label, template, url, target } = item;
             const key = _label + '_' + index;
             const active = isSelected(index);
@@ -91,7 +94,8 @@ export const TabMenu = React.memo(
                     element: content,
                     props,
                     active,
-                    index
+                    index,
+                    disabled
                 };
 
                 content = ObjectUtils.getJSXElement(template, item, defaultContentOptions);

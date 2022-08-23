@@ -209,6 +209,9 @@ export const MegaMenu = React.memo(
         };
 
         const createSubmenuItem = (item, index) => {
+            if (item.visible === false) {
+                return null;
+            }
             if (item.separator) {
                 return createSeparator(index);
             } else {

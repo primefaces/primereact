@@ -33,6 +33,9 @@ export const Steps = React.memo(
         };
 
         const createItem = (item, index) => {
+            if (item.visible === false) {
+                return null;
+            }
             const key = item.label + '_' + index;
             const active = index === props.activeIndex;
             const disabled = item.disabled || (index !== props.activeIndex && props.readOnly);
