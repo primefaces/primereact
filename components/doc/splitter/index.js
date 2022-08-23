@@ -596,11 +596,11 @@ import { Splitter, SplitterPanel } from 'primereact/splitter';
                                 </tr>
                                 <tr>
                                     <td><i>left arrow</i></td>
-                                    <td>Moves a vertical splitter to the left.</td>
+                                    <td>Moves a horizontal splitter to the left.</td>
                                 </tr>
                                 <tr>
                                     <td><i>right arrow</i></td>
-                                    <td>Moves a vertical splitter to the right.</td>
+                                    <td>Moves a horizontal splitter to the right.</td>
                                 </tr>
                             </tbody>
                         </table>
