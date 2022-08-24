@@ -86,15 +86,16 @@ export const Dropdown = React.memo(
 
             if (props.onBlur) {
                 setTimeout(() => {
+                    const currentValue = inputRef.current ? inputRef.current.value : undefined;
                     props.onBlur({
                         originalEvent: event.originalEvent,
-                        value: inputRef.current.value,
+                        value: currentValue,
                         stopPropagation: () => {},
                         preventDefault: () => {},
                         target: {
                             name: props.name,
                             id: props.id,
-                            value: inputRef.current.value
+                            value: currentValue
                         }
                     });
                 }, 200);
