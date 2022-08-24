@@ -5,6 +5,7 @@ daysUntilStale: 90
 daysUntilClose: 7
 # Issues with these labels will never be considered stale
 exemptLabels:
+    - 'Core Team'
     - 'good first issue'
     - 'question'
     - 'Resolution: Help Wanted'
