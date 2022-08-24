@@ -33,8 +33,8 @@ export const Chips = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: values,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => { },
+                    preventDefault: () => { },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -114,8 +114,8 @@ export const Chips = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: items,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => { },
+                    preventDefault: () => { },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -169,9 +169,8 @@ export const Chips = React.memo(
             return props.max && props.value && props.max === props.value.length;
         };
 
-        const isFilled = React.useMemo(() => {
-            return (props.value && props.value.length) || (inputRef.current && inputRef.current.value && inputRef.current.value.length);
-        }, [props.value]);
+        const currentValue = inputRef.current && inputRef.current.value;
+        const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(currentValue), [props.value, currentValue]);
 
         const isRemovable = (value, index) => {
             return ObjectUtils.getPropValue(props.removable, { value, index, props });
