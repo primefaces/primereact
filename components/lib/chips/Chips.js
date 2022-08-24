@@ -33,8 +33,8 @@ export const Chips = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: values,
-                    stopPropagation: () => { },
-                    preventDefault: () => { },
+                    stopPropagation: () => {},
+                    preventDefault: () => {},
                     target: {
                         name: props.name,
                         id: props.id,
@@ -114,8 +114,8 @@ export const Chips = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: items,
-                    stopPropagation: () => { },
-                    preventDefault: () => { },
+                    stopPropagation: () => {},
+                    preventDefault: () => {},
                     target: {
                         name: props.name,
                         id: props.id,
