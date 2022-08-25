@@ -347,11 +347,14 @@ export const Dialog = React.forwardRef((props, ref) => {
     };
 
     useMountEffect(() => {
+        const unqiueId = UniqueComponentId();
         if (!idState) {
-            setIdState(UniqueComponentId());
+            setIdState(unqiueId);
         }
 
-        attributeSelector.current = UniqueComponentId();
+        if (!attributeSelector.current) {
+            attributeSelector.current = unqiueId;
+        }
 
         if (props.visible) {
             setMaskVisibleState(true);
