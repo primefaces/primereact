@@ -32,7 +32,6 @@ export const Dialog = React.forwardRef((props, ref) => {
     const [bindDocumentDragEndListener, unbindDocumentDragEndListener] = useEventListener({ type: 'mouseup', target: () => window.document, listener: (event) => onDragEnd(event) });
 
     const onClose = (event) => {
-        DomHandler.removeClass(document.body, 'p-overflow-hidden');
         props.onHide();
         event.preventDefault();
     };
@@ -260,6 +259,9 @@ export const Dialog = React.forwardRef((props, ref) => {
     const onExiting = () => {
         if (props.modal) {
             DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+        }
+        if (props.blockScroll) {
+            DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
     };
 
