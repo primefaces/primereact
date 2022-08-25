@@ -1,6 +1,6 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/tooltipoptions';
 import { KeyFilterType } from '../keyfilter';
+import TooltipOptions from '../tooltip/tooltipoptions';
 
 export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput' | 'ref'> {
     keyfilter?: KeyFilterType;
@@ -11,7 +11,4 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
     children?: React.ReactNode;
 }
 
-export declare class InputText extends React.Component<InputTextProps, any> {
-    public getElement(): HTMLInputElement;
-    public getInput(): HTMLInputElement;
-}
+export declare class InputText extends React.Component<InputTextProps, any> {}
