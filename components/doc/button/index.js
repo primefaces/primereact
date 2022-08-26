@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const ButtonDoc = memo(() => {
     const sources = {
@@ -1090,6 +1090,18 @@ import { Button } from 'primereact/button';
                                     <td>object</td>
                                     <td>null</td>
                                     <td>Configuration of the tooltip, refer to the tooltip documentation for more information.</td>
+                                </tr>
+                                <tr>
+                                    <td>disabled</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>When present, it specifies that the element should be disabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>visible</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>When present, it specifies that the element should be visible.</td>
                                 </tr>
                                 <tr>
                                     <td>loading</td>

@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
-import { CSSTransitionProps } from '../csstransition';
 import { IconType, TemplateType } from '../utils';
 
 type SplitButtonAppendToType = 'self' | HTMLElement | undefined | null;
@@ -13,6 +13,7 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
     loadingIcon?: IconType<SplitButtonProps>;
     model?: MenuItem[];
     disabled?: boolean;
+    visible?: boolean;
     buttonClassName?: string;
     menuStyle?: object;
     menuClassName?: string;

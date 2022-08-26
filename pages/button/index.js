@@ -1,8 +1,8 @@
+import Head from 'next/head';
 import React, { useState } from 'react';
-import { Button } from '../../components/lib/button/Button';
 import ButtonDoc from '../../components/doc/button';
 import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { Button } from '../../components/lib/button/Button';
 
 const ButtonDemo = () => {
     const [loading1, setLoading1] = useState(false);
