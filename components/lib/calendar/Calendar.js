@@ -4,8 +4,8 @@ import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, mask, ZIndexUtils, UniqueComponentId } from '../utils/Utils';
 import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, mask, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { CalendarPanel } from './CalendarPanel';
 
 export const Calendar = React.memo(
@@ -1681,7 +1681,7 @@ export const Calendar = React.memo(
                     if (props.minDate.getMonth() > month) {
                         validMin = false;
                     } else if (props.minDate.getMonth() === month) {
-                        if (props.minDate.getDate() > day) {
+                        if (day > 0 && props.minDate.getDate() > day) {
                             validMin = false;
                         }
                     }
@@ -1695,7 +1695,7 @@ export const Calendar = React.memo(
                     if (props.maxDate.getMonth() < month) {
                         validMax = false;
                     } else if (props.maxDate.getMonth() === month) {
-                        if (props.maxDate.getDate() < day) {
+                        if (day > 0 && props.maxDate.getDate() < day) {
                             validMax = false;
                         }
                     }
@@ -3031,7 +3031,7 @@ export const Calendar = React.memo(
                     <div className="p-monthpicker">
                         {monthPickerValues().map((m, i) => {
                             return (
-                                <span onClick={(event) => onMonthSelect(event, i)} key={`month${i + 1}`} className={classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(1, i, currentYear) })}>
+                                <span onClick={(event) => onMonthSelect(event, i)} key={`month${i + 1}`} className={classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(0, i, currentYear) })}>
                                     {m}
                                 </span>
                             );
