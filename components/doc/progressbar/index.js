@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const ProgressBarDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -81,7 +81,7 @@ export class ProgressBarDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -145,7 +145,7 @@ const ProgressBarDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -209,7 +209,7 @@ const ProgressBarDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -278,41 +278,44 @@ const ProgressBarDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { ProgressBar } from 'primereact/progressbar';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>ProgressBar has two modes; "determinate" (default) and "indeterminate". In determinate mode, a value between 0 and 100 is required to display the progress.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <ProgressBar value={value} />
 `}
-</CodeHighlight>
-                    <p>Indeterminate is simplly enabled using <i>mode</i> property.</p>
-<CodeHighlight>
-{`
+                    </CodeHighlight>
+                    <p>
+                        Indeterminate is simplly enabled using <i>mode</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <ProgressBar mode="indeterminate" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -383,7 +386,9 @@ import { ProgressBar } from 'primereact/progressbar';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -416,17 +421,33 @@ import { ProgressBar } from 'primereact/progressbar';
                             </tbody>
                         </table>
 
+                        <h5>Accessibility</h5>
+                        <DevelopmentSection>
+                            <h6>Screen Reader</h6>
+                            <p>
+                                ProgressBar components uses <i>progressbar</i> role along with <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes. Value to describe the component can be defined using
+                                <i>aria-labelledby</i> and <i>aria-label</i> props.
+                            </p>
+                            <CodeHighlight>
+                                {`
+<span id="label_status">Status</span>
+<ProgressBar aria-labelledby="label_status" />
+
+<ProgressBar aria-label="Status" />
+`}
+                            </CodeHighlight>
+
+                            <h6>Keyboard Support</h6>
+                            <p>Not applicable.</p>
+                        </DevelopmentSection>
                         <h5>Dependencies</h5>
                         <p>None.</p>
                     </div>
                 </TabPanel>
-
-                {
-                    useLiveEditorTabs({ name: 'ProgressBarDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'ProgressBarDemo', sources: sources })}
             </TabView>
         </div>
     );
-})
+});
 
 export default ProgressBarDoc;

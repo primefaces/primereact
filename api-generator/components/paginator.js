@@ -99,7 +99,7 @@ const PaginatorEvents = [
                 description: 'Total number of pages'
             }
         ]
-    },
+    }
 ];
 
 const PaginatorStyles = [

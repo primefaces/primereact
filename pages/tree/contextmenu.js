@@ -9,7 +9,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeContextMenuDemo = () => {
-
     const [nodes, setNodes] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
@@ -28,10 +27,8 @@ const TreeContextMenuDemo = () => {
             icon: 'pi pi-cog',
             command: () => {
                 let _expandedKeys = { ...expandedKeys };
-                if (_expandedKeys[selectedNodeKey])
-                    delete _expandedKeys[selectedNodeKey];
-                else
-                    _expandedKeys[selectedNodeKey] = true;
+                if (_expandedKeys[selectedNodeKey]) delete _expandedKeys[selectedNodeKey];
+                else _expandedKeys[selectedNodeKey] = true;
 
                 setExpandedKeys(_expandedKeys);
             }
@@ -41,7 +38,7 @@ const TreeContextMenuDemo = () => {
     const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        nodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -52,7 +49,9 @@ const TreeContextMenuDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Tree <span>ContextMenu</span></h1>
+                    <h1>
+                        Tree <span>ContextMenu</span>
+                    </h1>
                     <p>Tree has exclusive integration with the ContextMenu component with support for different menus depending on the node.</p>
                 </div>
 
@@ -65,23 +64,27 @@ const TreeContextMenuDemo = () => {
                 <ContextMenu model={menu} ref={cm} onHide={() => setSelectedNodeKey(null)} />
 
                 <div className="card">
-                    <Tree value={nodes} expandedKeys={expandedKeys} onToggle={e => setExpandedKeys(e.value)}
-                        contextMenuSelectionKey={selectedNodeKey} onContextMenuSelectionChange={event => setSelectedNodeKey(event.value)}
-                        onContextMenu={event => cm.current.show(event.originalEvent)} />
+                    <Tree
+                        value={nodes}
+                        expandedKeys={expandedKeys}
+                        onToggle={(e) => setExpandedKeys(e.value)}
+                        contextMenuSelectionKey={selectedNodeKey}
+                        onContextMenuSelectionChange={(event) => setSelectedNodeKey(event.value)}
+                        onContextMenu={(event) => cm.current.show(event.originalEvent)}
+                    />
                 </div>
             </div>
 
             <TreeContextMenuDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeContextMenuDemo;
 
 export const TreeContextMenuDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
             import React, {Component} from 'react';
@@ -148,7 +151,7 @@ export const TreeContextMenuDemoDoc = memo(() => {
 }
             `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
             import React, {useState, useEffect, useRef} from 'react';
@@ -208,7 +211,7 @@ const TreeContextMenuDemo = () => {
 }
             `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
             import React, {useState, useEffect, useRef} from 'react';
@@ -268,7 +271,7 @@ const TreeContextMenuDemo = () => {
 }
             `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
             <script src="./NodeService.js"></script>
@@ -335,15 +338,11 @@ const TreeContextMenuDemo = () => {
 }
             `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeContextMenuDemo', sources: sources, service: 'NodeService', data: 'treenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeContextMenuDemo', sources: sources, service: 'NodeService', data: 'treenodes' })}</TabView>
         </div>
     );
-})
+});

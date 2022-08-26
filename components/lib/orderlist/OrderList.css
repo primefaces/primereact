@@ -27,6 +27,20 @@
     position: relative;
 }
 
+.p-orderlist-filter {
+    position: relative;
+}
+
+.p-orderlist-filter-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5rem;
+}
+
+.p-orderlist-filter-input {
+    width: 100%;
+}
+
 .p-orderlist.p-state-disabled .p-orderlist-item,
 .p-orderlist.p-state-disabled .p-button {
     cursor: default;

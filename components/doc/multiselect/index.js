@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const MultiSelectDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -186,7 +186,7 @@ export class MultiSelectDemo extends Component {
                     <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                     <MultiSelect value={this.state.selectedItems2} options={this.state.lazyItems} onChange={(e) => this.setState({ selectedItems2: e.value })} virtualScrollerOptions={{ lazy: true, onLazyLoad: this.onLazyLoad, itemSize: 43, showLoader: true, loading: this.state.lazyLoading, delay: 250, loadingTemplate: (options) => {
                         return (
-                            <div className="flex align-items-center p-2" style={{ height: '34px' }}>
+                            <div className="flex align-items-center p-2" style={{ height: '43px' }}>
                                 <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
                             </div>
                         )}
@@ -198,7 +198,7 @@ export class MultiSelectDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -361,7 +361,7 @@ const MultiSelectDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="flex align-items-center p-2" style={{ height: '34px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '43px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
                         </div>
                     )}
@@ -372,7 +372,7 @@ const MultiSelectDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -535,7 +535,7 @@ const MultiSelectDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="flex align-items-center p-2" style={{ height: '34px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '43px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
                         </div>
                     )}
@@ -546,7 +546,7 @@ const MultiSelectDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./MultiSelectDemo.css" />
@@ -714,7 +714,7 @@ const MultiSelectDemo = () => {
                 <h5>Virtual Scroll (100000 Items) and Lazy</h5>
                 <MultiSelect value={selectedItems2} options={lazyItems} onChange={(e) => setSelectedItems2(e.value)} virtualScrollerOptions={{ lazy: true, onLazyLoad: onLazyLoad, itemSize: 43, showLoader: true, loading: lazyLoading, delay: 250, loadingTemplate: (options) => {
                     return (
-                        <div className="flex align-items-center p-2" style={{ height: '34px' }}>
+                        <div className="flex align-items-center p-2" style={{ height: '43px' }}>
                             <Skeleton width={options.even ? '70%' : '60%'} height="1.5rem" />
                         </div>
                     )}
@@ -725,7 +725,7 @@ const MultiSelectDemo = () => {
 }
                 `
         }
-    }
+    };
 
     const extFiles = {
         'demo/MultiSelectDemo.css': {
@@ -753,36 +753,39 @@ const MultiSelectDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { MultiSelect } from 'primereact/multiselect';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/multiselect/multiselect.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>MultiSelect is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives
-                    of how to define the options property; One way is providing a collection of <i>SelectItem</i> instances having label-value pairs
-                    whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. In addition,
-                    options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.</p>
+                    <p>
+                        MultiSelect is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives of how to define the options property; One way is providing a
+                        collection of <i>SelectItem</i> instances having label-value pairs whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value
+                        field pair. In addition, options can be simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.
+                    </p>
 
-                    <p><b>Options as SelectItems</b></p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        <b>Options as SelectItems</b>
+                    </p>
+                    <CodeHighlight lang="js">
+                        {`
 const citySelectItems = [
     {label: 'New York', value: 'NY'},
     {label: 'Rome', value: 'RM'},
@@ -791,17 +794,19 @@ const citySelectItems = [
     {label: 'Paris', value: 'PRS'}
 ];
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <MultiSelect value={cities} options={citySelectItems} onChange={(e) => setCities(e.value)} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p><b>Options as any type</b></p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        <b>Options as any type</b>
+                    </p>
+                    <CodeHighlight lang="js">
+                        {`
 const cities = [
     {name: 'New York', code: 'NY'},
     {name: 'Rome', code: 'RM'},
@@ -810,65 +815,102 @@ const cities = [
     {name: 'Paris', code: 'PRS'}
 ];
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <MultiSelect optionLabel="name" value={cities} options={cities} onChange={(e) => setCities(e.value)} />
 <MultiSelect optionLabel="name" optionValue="code" value={cities} options={cities} onChange={(e) => setCities(e.value)} />
 `}
-        </CodeHighlight>
-                    <p>When <i>optionValue</i> is not defined, value of an option refers to the option object itself.</p>
+                    </CodeHighlight>
+                    <p>
+                        When <i>optionValue</i> is not defined, value of an option refers to the option object itself.
+                    </p>
 
                     <h5>Chips Display</h5>
-                    <p>A comma separated list is used by default to display selected items whereas alternative chip mode is provided using the <i>display</i> property to visualize the items as tokens.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        A comma separated list is used by default to display selected items whereas alternative chip mode is provided using the <i>display</i> property to visualize the items as tokens.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <MultiSelect display="chip" optionLabel="name" value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Custom Content</h5>
-                    <p>Label of an option is used as the display text of an item by default, for custom content support define an itemTemplate function that gets the option as a parameter and returns the content.</p>
+                    <p>
+                        Label of an option is used as the display text of an item by default, for custom content support define an <i>itemTemplate</i> function that gets the option instance as a parameter and returns the content. For custom filter
+                        support define a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element.
+                    </p>
 
-<CodeHighlight>
-{`
-<MultiSelect value={cities} options={citySelectItems} onChange={(e) => setCities(e.value)} itemTemplate={itemTemplate} />
+                    <CodeHighlight>
+                        {`
+<MultiSelect value={cities} options={citySelectItems} onChange={(e) => setCities(e.value)} itemTemplate={itemTemplate} filter filterTemplate={filterTemplate}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
+const [filterValue, setFilterValue] = useState('');
+const filterInputRef = useRef();
+
 itemTemplate(option) {
     // custom item content
 }
-`}
-</CodeHighlight>
-                    <p><i>selectedItemTemplate</i> can be used to customize the selected values display instead of the default comma separated list.</p>
 
-<CodeHighlight>
-{`
+const filterTemplate = (options) => {
+    let {filterOptions} = options;
+
+    return (
+        <div className="flex gap-2">
+            <InputText value={filterValue} ref={filterInputRef} onChange={(e) => myFilterFunction(e, filterOptions)} />
+            <Button label="Reset" onClick={() => myResetFunction(filterOptions)} />
+        </div>
+    )
+}
+
+const myResetFunction = (options) => {
+    setFilterValue('');
+    options.reset();
+    filterInputRef && filterInputRef.current.focus()
+}
+
+const myFilterFunction = (event, options) => {
+    let _filterValue = event.target.value;
+    setFilterValue(_filterValue);
+    options.filter(event);
+}
+`}
+                    </CodeHighlight>
+                    <p>
+                        <i>selectedItemTemplate</i> can be used to customize the selected values display instead of the default comma separated list.
+                    </p>
+
+                    <CodeHighlight>
+                        {`
 <MultiSelect value={cities} options={citySelectItems} onChange={(e) => setCities(e.value)} selectedItemTemplate={selectedItemTemplate} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 selectedItemTemplate(option) {
     // custom selected item content
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>In addition <i>panelHeaderTemplate</i> and <i>panelFooterTemplate</i> can be used to customize the header and footer of panel.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        In addition <i>panelHeaderTemplate</i> and <i>panelFooterTemplate</i> can be used to customize the header and footer of panel.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <MultiSelect value={cities} options={citySelectItems} onChange={(e) => setCities(e.value)} panelHeaderTemplate={panelHeaderTemplate} panelFooterTemplate={panelFooterTemplate} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 panelHeaderTemplate(options) {
     // options.className: Style class of the panel header.
     // options.checkboxElement: Default checkbox element created by the component.
@@ -887,12 +929,14 @@ panelFooterTemplate(options) {
     // options.props: component props.
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Grouping</h5>
-                    <p>Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Options groups are specified with the <i>optionGroupLabel</i> and <i>optionGroupChildren</i> properties.
+                    </p>
+                    <CodeHighlight>
+                        {`
 const groupedCities = [
     {
         label: 'Germany', code: 'DE',
@@ -923,24 +967,25 @@ const groupedCities = [
     }
 ];
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <MultiSelect value={selectedGroupedCities} options={groupedCities} onChange={(e) => setSelectedGroupedCities(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Filtering</h5>
-                    <p>Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against
-                        label of the items and <i>filterBy</i> property is available to choose one or more properties of the options. In addition <i>filterMatchMode</i> can be utilized
-                        to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".</p>
+                    <p>
+                        Options can be filtered using an input field in the overlay by enabling the <i>filter</i> property. By default filtering is done against label of the items and <i>filterBy</i> property is available to choose one or more
+                        properties of the options. In addition <i>filterMatchMode</i> can be utilized to define the filtering algorithm, valid options are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <MultiSelect value={cities} options={citySelectItems} onChange={(e) => setCities(e.value)} filter/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>SelectItem API</h5>
                     <div className="doc-tablewrapper">
@@ -989,16 +1034,16 @@ const groupedCities = [
                     </div>
 
                     <h5>Properties</h5>
-                    <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Default</th>
-                                <th>Description</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -1188,6 +1233,12 @@ const groupedCities = [
                                     <td>Function that gets the option and returns the content for it.</td>
                                 </tr>
                                 <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>The template of filter element.</td>
+                                </tr>
+                                <tr>
                                     <td>optionGroupTemplate</td>
                                     <td>any</td>
                                     <td>null</td>
@@ -1215,7 +1266,9 @@ const groupedCities = [
                                     <td>appendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>maxSelectedLabels</td>
@@ -1251,7 +1304,13 @@ const groupedCities = [
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>dropdownIcon</td>
@@ -1269,7 +1328,9 @@ const groupedCities = [
                                     <td>virtualScrollerOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>Whether to use the virtualScroller feature. The properties of <Link href="/virtualscroller">VirtualScroller</Link> component can be used like an object in it.</td>
+                                    <td>
+                                        Whether to use the virtualScroller feature. The properties of <Link href="/virtualscroller">VirtualScroller</Link> component can be used like an object in it.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>showSelectAll</td>
@@ -1291,17 +1352,20 @@ const groupedCities = [
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Parameters</th>
-                                <th>Description</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>event.originalEvent: Browser event<br />
-                                        event.value: Current selected values<br />
+                                    <td>
+                                        event.originalEvent: Browser event
+                                        <br />
+                                        event.value: Current selected values
+                                        <br />
                                     </td>
                                     <td>Callback to invoke when value changes.</td>
                                 </tr>
@@ -1327,14 +1391,20 @@ const groupedCities = [
                                 </tr>
                                 <tr>
                                     <td>onFilter</td>
-                                    <td>event.originalEvent: Browser event<br />
-                                        event.filter: Filter value.</td>
+                                    <td>
+                                        event.originalEvent: Browser event
+                                        <br />
+                                        event.filter: Filter value.
+                                    </td>
                                     <td>Callback to invoke on filtering.</td>
                                 </tr>
                                 <tr>
                                     <td>onSelectAll</td>
-                                    <td>event.originalEvent: Browser event<br />
-                                        event.checked: Whether all data is selected.</td>
+                                    <td>
+                                        event.originalEvent: Browser event
+                                        <br />
+                                        event.checked: Whether all data is selected.
+                                    </td>
                                     <td>Callback to invoke when all data is selected.</td>
                                 </tr>
                             </tbody>
@@ -1345,11 +1415,11 @@ const groupedCities = [
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Parameters</th>
-                                <th>Description</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -1362,7 +1432,9 @@ const groupedCities = [
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -1418,17 +1490,243 @@ const groupedCities = [
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The multiselect component has a <i>combobox</i> role in addition to <i>aria-haspopup</i> and{' '}
+                            <i>aria-expanded</i> attributes. The relation between the combobox and the popup is created with <i>aria-controls</i> attribute that refers to the id of the popup listbox.
+                        </p>
+                        <p>
+                            The popup listbox uses <i>listbox</i> as the role with <i>aria-multiselectable</i> enabled. Each list item has an <i>option</i> role along with <i>aria-label</i>, <i>aria-selected</i> and <i>aria-disabled</i> attributes.
+                        </p>
+
+                        <p>
+                            Checkbox component at the header uses a hidden native checkbox element internally that is only visible to screen readers. Value to read is defined with the <i>selectAll</i> and <i>unselectAll</i> keys of the <i>aria</i>{' '}
+                            property from the <Link href="/locale">locale</Link> API.
+                        </p>
+
+                        <p>
+                            If filtering is enabled, <i>filterInputProps</i> can be defined to give <i>aria-*</i> props to the input element.
+                        </p>
+
+                        <p>
+                            Close button uses <i>close</i> key of the <i>aria</i> property from the <Link href="/locale">locale</Link> API as the <i>aria-label</i> by default, this can be overriden with the <i>closeButtonProps</i>.
+                        </p>
+                        <CodeHighlight>
+                            {`
+<span id="dd1">Options</span>
+<MultiSelect aria-labelledby="dd1" />
+
+<MultiSelect aria-label="Options" />
+`}
+                        </CodeHighlight>
+
+                        <h6>Closed State Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the multiselect element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>Opens the popup and moves visual focus to the selected option, if there is none then first option receives the focus.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Popup Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the next focusable element in the popup, if there is none then first focusable element receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the previous focusable element in the popup, if there is none then last focusable element receives the focus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Toggles the selection state of the focused option.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Toggles the selection state of the focused option.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Closes the popup, moves focus to the multiselect element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>Moves focus to the next option, if there is none then visual focus does not change.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>Moves focus to the previous option, if there is none then visual focus does not change.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
+                                        <td>Moves focus to the first option.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
+                                        <td>Moves focus to the last option.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>any printable character</i>
+                                        </td>
+                                        <td>Moves focus to the option whose label starts with the characters being typed if dropdown is not editable.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Toggle All Checkbox Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Toggles the checked state.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Closes the popup.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Filter Input Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Closes the popup and moves focus to the multiselect element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Closes the popup and moves focus to the multiselect element.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Close Button Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Closes the popup and moves focus to the multiselect element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Closes the popup and moves focus to the multiselect element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Closes the popup and moves focus to the multiselect element.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
                 </TabPanel>
-                {
-                    useLiveEditorTabs({ name: 'MultiSelectDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'MultiSelectDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default MultiSelectDoc;

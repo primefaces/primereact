@@ -9,7 +9,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const InputGroupDemo = () => {
-
     const [checked1, setChecked1] = useState(false);
     const [checked2, setChecked2] = useState(false);
     const [radioValue1, setRadioValue1] = useState('');
@@ -138,6 +137,6 @@ const InputGroupDemo = () => {
             <InputGroupDoc />
         </div>
     );
-}
+};
 
 export default InputGroupDemo;

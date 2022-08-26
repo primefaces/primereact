@@ -60,6 +60,42 @@ const OrderListProps = [
         description: 'Function that gets an item in the list and returns the content for it.'
     },
     {
+        name: 'filterTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'The template of filter element.'
+    },
+    {
+        name: 'filter',
+        type: 'boolean',
+        default: 'false',
+        description: 'When specified, displays an input field to filter the items on keyup.'
+    },
+    {
+        name: 'filterBy',
+        type: 'string',
+        default: 'label',
+        description: 'When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.'
+    },
+    {
+        name: 'filterMatchMode',
+        type: 'string',
+        default: 'contains',
+        description: 'Defines how the items are filtered, valid values are "contains" (default), "startsWith", "endsWith", "equals" and "notEquals".'
+    },
+    {
+        name: 'filterPlaceholder',
+        type: 'string',
+        default: 'null',
+        description: 'Placeholder text to show when filter input is empty.'
+    },
+    {
+        name: 'filterLocale',
+        type: 'string',
+        default: 'undefined',
+        description: "Locale to use in filtering. The default locale is the host environment's current locale."
+    },
+    {
         name: 'tabIndex',
         type: 'number',
         default: 'null',
@@ -83,13 +119,32 @@ const OrderListEvents = [
                 description: 'Reordered list'
             }
         ]
+    },
+    {
+        name: 'onFilter',
+        description: 'Callback to invoke when the value is filtered.',
+        arguments: [
+            {
+                name: 'event.originalEvent',
+                type: 'object',
+                description: 'Original event'
+            },
+            {
+                name: 'event.filter',
+                type: 'any',
+                description: 'Value of the filter input'
+            }
+        ]
     }
 ];
 
 const OrderListStyles = [
     { name: 'p-orderlist', description: 'Container element.' },
     { name: 'p-orderlist-list', description: 'List container.' },
-    { name: 'p-orderlist-item', description: 'An item in the list' }
+    { name: 'p-orderlist-item', description: 'An item in the list' },
+    { name: 'p-orderlist-filter-container', description: 'Container of filter input.' },
+    { name: 'p-orderlist-filter', description: 'Filter element.' },
+    { name: 'p-orderlist-filter-icon', description: 'Icon of the filter element.' }
 ];
 
 module.exports = {

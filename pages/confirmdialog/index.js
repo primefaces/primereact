@@ -7,17 +7,16 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const ConfirmDialogDemo = () => {
-
     const [visible, setVisible] = useState(false);
     const toast = useRef(null);
 
     const accept = () => {
         toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-    }
+    };
 
     const reject = () => {
         toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-    }
+    };
 
     const confirm1 = () => {
         confirmDialog({
@@ -60,7 +59,9 @@ const ConfirmDialogDemo = () => {
             <div className="content-section introduction">
                 <div>
                     <h1>ConfirmDialog</h1>
-                    <p>ConfirmDialog uses a Dialog UI with <b>confirmDialog</b> method or <b>&lt;ConfirmDialog&gt;</b> tag.</p>
+                    <p>
+                        ConfirmDialog uses a Dialog UI with <b>confirmDialog</b> method or <b>&lt;ConfirmDialog&gt;</b> tag.
+                    </p>
                 </div>
                 <DocActions github="confirmdialog/index.js" />
             </div>
@@ -94,15 +95,14 @@ const ConfirmDialogDemo = () => {
                     </div>
 
                     <h5>Using ConfirmDialog tag</h5>
-                    <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?"
-                        header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
+                    <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" header="Confirmation" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
                     <Button onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
                 </div>
             </div>
 
             <ConfirmDialogDoc />
         </div>
-    )
-}
+    );
+};
 
 export default ConfirmDialogDemo;

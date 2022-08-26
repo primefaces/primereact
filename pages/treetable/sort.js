@@ -8,13 +8,12 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeTableSortDemo = () => {
-
     const [nodes1, setNodes1] = useState([]);
     const [nodes2, setNodes2] = useState([]);
     const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => {
+        nodeservice.getTreeTableNodes().then((data) => {
             setNodes1(data);
 
             let _nodes2 = data;
@@ -38,7 +37,9 @@ const TreeTableSortDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>TreeTable <span>Sort</span></h1>
+                    <h1>
+                        TreeTable <span>Sort</span>
+                    </h1>
                     <p>TreeTable supports both single column and multiple column sorting.</p>
                 </div>
 
@@ -68,14 +69,13 @@ const TreeTableSortDemo = () => {
             <TreeTableSortDemoDoc />
         </div>
     );
-}
+};
 
 export default TreeTableSortDemo;
 
 const TreeTableSortDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -140,7 +140,7 @@ export class TreeTableSortDemo extends Component {
 }
             `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -194,7 +194,7 @@ const TreeTableSortDemo = () => {
 }
             `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -248,7 +248,7 @@ const TreeTableSortDemo = () => {
 }
             `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
             <script src="./NodeService.js"></script>
@@ -308,16 +308,11 @@ const TreeTableSortDemo = () => {
 }
             `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeTableSortDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeTableSortDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })}</TabView>
         </div>
-    )
-
-})
+    );
+});

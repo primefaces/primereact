@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const CheckboxDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -108,7 +108,7 @@ export class CheckboxDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -196,7 +196,7 @@ const CheckboxDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -284,7 +284,7 @@ const CheckboxDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>`,
@@ -374,38 +374,40 @@ const CheckboxDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Checkbox } from 'primereact/checkbox';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Checkbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Checkbox is used as a controlled input with <i>checked</i> and <i>onChange</i> properties.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Multiple Values</h5>
                     <p>Multiple checkboxes can be grouped using a list of values.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <div className="col-12">
     <Checkbox inputId="cb1" value="New York" onChange={onCityChange} checked={cities.includes('New York')}></Checkbox>
     <label htmlFor="cb1" className="p-checkbox-label">New York</label>
@@ -419,10 +421,10 @@ import { Checkbox } from 'primereact/checkbox';
     <label htmlFor="cb3" className="p-checkbox-label">Los Angeles</label>
 </div>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 const [cities, setCities] = useState([]);
 
 const onCityChange = (e) => {
@@ -435,10 +437,10 @@ const onCityChange = (e) => {
     setCities(selectedCities);
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -520,7 +522,7 @@ const onCityChange = (e) => {
                                     <td>readOnly</td>
                                     <td>boolean</td>
                                     <td>false</td>
-                                    <td>When present, it specifies that the element cannot be typed.</td>
+                                    <td>When present, it specifies that the value cannot be changed.</td>
                                 </tr>
                                 <tr>
                                     <td>tabIndex</td>
@@ -563,9 +565,11 @@ const onCityChange = (e) => {
                             <tbody>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>event.originalEvent: Original event <br />
-                                    event.value: Value of the checkbox <br />
-                                    event.checked: Checked state as a boolean.</td>
+                                    <td>
+                                        event.originalEvent: Original event <br />
+                                        event.value: Value of the checkbox <br />
+                                        event.checked: Checked state as a boolean.
+                                    </td>
                                     <td>Callback to invoke on value change</td>
                                 </tr>
                                 <tr>
@@ -583,7 +587,9 @@ const onCityChange = (e) => {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -614,10 +620,14 @@ const onCityChange = (e) => {
                     </div>
 
                     <h5>Accessibility</h5>
-                    <h6>Screen Reader</h6>
-                    <p>Checkbox component uses a hidden native checkbox element internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props.</p>
-<CodeHighlight>
-{`
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Checkbox component uses a hidden native checkbox element internally that is only visible to screen readers. Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or
+                            using <i>aria-labelledby</i>, <i>aria-label</i> props.
+                        </p>
+                        <CodeHighlight>
+                            {`
 <label htmlFor="chkbox1">Remember Me</label>
 <Checkbox inputId="chkbox1" />
 
@@ -626,20 +636,41 @@ const onCityChange = (e) => {
 
 <Checkbox aria-label="Remember Me" />
 `}
-</CodeHighlight>
-                    <h6>Keyboard Support</h6>
-                    <p>Checkbox can receive focus using the <i>tab</i> key, while being focused <i>space</i> key is used to toggle the checked state.</p>
-
+                        </CodeHighlight>
+                        <h6>Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the checkbox.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Toggles the checked state.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'CheckboxDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'CheckboxDemo', sources: sources })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default CheckboxDoc;

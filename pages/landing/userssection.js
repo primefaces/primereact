@@ -72,6 +72,6 @@ const UsersSection = (props) => {
             </div>
         </section>
     );
-}
+};
 
 export default UsersSection;

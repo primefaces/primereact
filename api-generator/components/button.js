@@ -55,9 +55,7 @@ const ButtonProps = [
     }
 ];
 
-const ButtonEvents = [
-
-];
+const ButtonEvents = [];
 
 const ButtonStyles = [
     { name: 'p-button', description: 'Button element' },

@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const PanelDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -72,7 +72,7 @@ export class PanelDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -128,7 +128,7 @@ const PanelDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -184,7 +184,7 @@ const PanelDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
     <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -243,31 +243,31 @@ const PanelDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Panel } from 'primereact/panel';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/panel/panel.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>Panel is a container component that accepts content as its children.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Panel header="Header">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -275,17 +275,23 @@ import { Panel } from 'primereact/panel';
         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </Panel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p><i>header</i> propery also can be used to provide custom content as JSX.</p>
+                    <p>
+                        <i>header</i> propery also can be used to provide custom content as JSX.
+                    </p>
 
                     <h5>Toggleable</h5>
-                    <p>Content of the panel can be expanded and collapsed using <i>toggleable</i> option. A toggleable panel can either be used as a Controlled or Uncontrolled component.</p>
+                    <p>
+                        Content of the panel can be expanded and collapsed using <i>toggleable</i> option. A toggleable panel can either be used as a Controlled or Uncontrolled component.
+                    </p>
 
-                    <p>In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties needs to be defined to control the collapsed state.</p>
+                    <p>
+                        In controlled mode, <i>collapsed</i> and <i>onToggle</i> properties needs to be defined to control the collapsed state.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Panel header="Header" toggleable collapsed={panelCollapsed} onToggle={(e) => setPanelCollapsed(e.value)}>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -293,13 +299,15 @@ import { Panel } from 'primereact/panel';
         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </Panel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>In uncontrolled mode, only <i>toggleable</i> property needs to be enabled. Initial state can be still be provided using the <i>collapsed</i> property in uncontrolled mode however
-                    it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the collapsed state, prefer to use the component as controlled.</p>
+                    <p>
+                        In uncontrolled mode, only <i>toggleable</i> property needs to be enabled. Initial state can be still be provided using the <i>collapsed</i> property in uncontrolled mode however it is evaluated at initial rendering and
+                        ignored in further updates. If you programmatically need to update the collapsed state, prefer to use the component as controlled.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Panel header="Header" toggleable>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -307,12 +315,14 @@ import { Panel } from 'primereact/panel';
         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </Panel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Header Template</h5>
-                    <p>The header element is fully customizable on Panel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        The header element is fully customizable on Panel. To make special header, an object can be given to the <i>headerTemplate</i> property as below.
+                    </p>
+                    <CodeHighlight lang="js">
+                        {`
 <Panel headerTemplate={template} toggleable>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -320,10 +330,10 @@ import { Panel } from 'primereact/panel';
         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </Panel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-    {`
+                    <CodeHighlight lang="js">
+                        {`
 template: (options) => {
     // options.className: Style class of the default header element.
     // options.titleClassName: Style class of the title element.
@@ -339,7 +349,7 @@ template: (options) => {
     // options.collapsed: Whether the panel is collapsed.
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -405,7 +415,13 @@ template: (options) => {
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -415,11 +431,11 @@ template: (options) => {
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Parameters</th>
-                                <th>Description</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -434,7 +450,8 @@ template: (options) => {
                                 </tr>
                                 <tr>
                                     <td>onToggle</td>
-                                    <td>event.originalEvent: browser event <br />
+                                    <td>
+                                        event.originalEvent: browser event <br />
                                         event.value: collapsed state as a boolean
                                     </td>
                                     <td>Callback to invoke when a tab gets expanded.</td>
@@ -444,7 +461,9 @@ template: (options) => {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -476,21 +495,67 @@ template: (options) => {
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <ul>
-                            <li>react-transition-group</li>
-                        </ul>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Toggleable panels use a content toggle button at the header that has <i>aria-controls</i> to define the id of the content section along with <i>aria-expanded</i> for the visibility state. The value to read the button
+                            defaults to the value of the <i>header</i> property and can be customized by defining an <i>aria-label</i> or <i>aria-labelledby</i> via the <i>toggleButtonProps</i> property.
+                        </p>
+                        <p>
+                            The content uses <i>region</i>, defines an id that matches the <i>aria-controls</i> of the content toggle button and <i>aria-labelledby</i> referring to the id of the header.
+                        </p>
+
+                        <h6>Content Toggle Button Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the next the focusable element in the page tab sequence.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the previous the focusable element in the page tab sequence.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Toggles the visibility of the content.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Toggles the visibility of the content.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
+                    <h5>Dependencies</h5>
+                    <ul>
+                        <li>react-transition-group</li>
+                    </ul>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'PanelDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'PanelDemo', sources: sources })}
             </TabView>
         </div>
     );
-})
+});
 
 export default PanelDoc;

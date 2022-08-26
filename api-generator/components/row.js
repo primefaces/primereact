@@ -1,14 +1,8 @@
-const RowProps = [
+const RowProps = [];
 
-];
+const RowEvents = [];
 
-const RowEvents = [
-
-];
-
-const RowStyles = [
-
-];
+const RowStyles = [];
 
 module.exports = {
     row: {

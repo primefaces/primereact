@@ -6,7 +6,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TerminalDemo = () => {
-
     const commandHandler = (text) => {
         let response;
         let argsIndex = text.indexOf(' ');
@@ -36,20 +35,18 @@ const TerminalDemo = () => {
 
         if (response) {
             TerminalService.emit('response', response);
-        }
-        else {
+        } else {
             TerminalService.emit('clear');
         }
-    }
+    };
 
     useEffect(() => {
         TerminalService.on('command', commandHandler);
 
         return () => {
             TerminalService.off('command', commandHandler);
-        }
-    }, [])
-
+        };
+    }, []);
 
     return (
         <div>
@@ -68,14 +65,16 @@ const TerminalDemo = () => {
 
             <div className="content-section implementation terminal-demo">
                 <div className="card">
-                    <p>Enter "<strong>date</strong>" to display the current date, "<strong>greet {'{0}'}</strong>" for a message, "<strong>random</strong>" to get a random number and "<strong>clear</strong>" to clear all commands.</p>
+                    <p>
+                        Enter "<strong>date</strong>" to display the current date, "<strong>greet {'{0}'}</strong>" for a message, "<strong>random</strong>" to get a random number and "<strong>clear</strong>" to clear all commands.
+                    </p>
                     <Terminal welcomeMessage="Welcome to PrimeReact" prompt="primereact $" />
                 </div>
             </div>
 
             <TerminalDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TerminalDemo;

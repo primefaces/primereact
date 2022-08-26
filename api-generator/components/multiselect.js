@@ -186,6 +186,12 @@ const MultiSelectProps = [
         description: 'Function that gets the option and returns the content for it.'
     },
     {
+        name: 'filterTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'The template of filter element.'
+    },
+    {
         name: 'optionGroupTemplate',
         type: 'any',
         default: 'null',
@@ -318,11 +324,11 @@ const MultiSelectEvents = [
     },
     {
         name: 'onShow',
-        description: 'Callback to invoke when overlay panel becomes visible.',
+        description: 'Callback to invoke when overlay panel becomes visible.'
     },
     {
         name: 'onHide',
-        description: 'Callback to invoke when overlay panel becomes hidden.',
+        description: 'Callback to invoke when overlay panel becomes hidden.'
     },
     {
         name: 'onFilter',

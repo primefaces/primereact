@@ -42,6 +42,7 @@
   --surface-hover:#e9ecef;
   --maskbg: rgba(0, 0, 0, 0.4);
   --focus-ring: 0 0 0 0.2rem rgba(136, 60, 174, 0.5);
+  color-scheme: light;
 }
 
 * {
@@ -222,6 +223,16 @@
   --red-700:#9a2530;
   --red-800:#791d26;
   --red-900:#58151c;
+  --primary-50:#f9f5fb;
+  --primary-100:#e2d0ec;
+  --primary-200:#ccabdc;
+  --primary-300:#b586cd;
+  --primary-400:#9f61bd;
+  --primary-500:#883cae;
+  --primary-600:#743394;
+  --primary-700:#5f2a7a;
+  --primary-800:#4b2160;
+  --primary-900:#361846;
 }
 
 .p-autocomplete .p-autocomplete-loader {
@@ -1052,7 +1063,7 @@
 .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
   background: #883cae;
 }
-.p-inputswitch.p-invalid {
+.p-inputswitch.p-invalid .p-inputswitch-slider {
   border-color: #dc3545;
 }
 
@@ -2765,7 +2776,8 @@
   background: #efefef;
 }
 .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-thead,
-.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot {
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot, .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-thead,
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-tfoot {
   background-color: #ffffff;
 }
 .p-datatable .p-datatable-loading-icon {
@@ -3344,6 +3356,19 @@
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 }
+.p-orderlist .p-orderlist-filter-container {
+  padding: 1rem 1.25rem;
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-bottom: 0 none;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-input {
+  padding-right: 1.75rem;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-icon {
+  right: 0.75rem;
+  color: #495057;
+}
 .p-orderlist .p-orderlist-list {
   border: 1px solid #dee2e6;
   background: #ffffff;
@@ -3372,6 +3397,12 @@
 .p-orderlist .p-orderlist-list .p-orderlist-item.p-highlight {
   color: #ffffff;
   background: #883cae;
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even) {
+  background: rgba(0, 0, 0, 0.05);
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even):hover {
+  background: #e9ecef;
 }
 
 @media screen and (max-width: 769px) {
@@ -3525,6 +3556,19 @@
   border-bottom: 0 none;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
+}
+.p-picklist .p-picklist-filter-container {
+  padding: 1rem 1.25rem;
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-bottom: 0 none;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-input {
+  padding-right: 1.75rem;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-icon {
+  right: 0.75rem;
+  color: #495057;
 }
 .p-picklist .p-picklist-list {
   border: 1px solid #dee2e6;
@@ -4291,6 +4335,10 @@
   background: #ffffff;
   color: #212529;
   padding: 1rem;
+}
+.p-dialog .p-dialog-content:last-of-type {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 .p-dialog .p-dialog-footer {
   border-top: 1px solid #e9ecef;
@@ -5090,7 +5138,6 @@
   border: 1px solid #dee2e6;
   background: #ffffff;
   color: #212529;
-  margin-bottom: 0;
   border-top: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
@@ -5968,10 +6015,6 @@
 .p-tag.p-tag-danger {
   background-color: #dc3545;
   color: #ffffff;
-}
-
-.p-virtualscroller-loading-icon {
-  font-size: 2rem;
 }
 
 /* Vendor extensions to the designer enhanced bootstrap compatibility */

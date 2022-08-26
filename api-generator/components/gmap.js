@@ -114,9 +114,7 @@ const GMapEvents = [
     }
 ];
 
-const GMapStyles = [
-
-];
+const GMapStyles = [];
 
 module.exports = {
     gmap: {

@@ -6,7 +6,6 @@ import { Button } from '../../components/lib/button/Button';
 import Head from 'next/head';
 
 const KnobDemo = () => {
-
     const [value1, setValue1] = useState(0);
     const [value2, setValue2] = useState(50);
     const [value3, setValue3] = useState(75);
@@ -25,14 +24,14 @@ const KnobDemo = () => {
         setValue10(value);
         setDisabledIncrementBtn(value === 100);
         setDisabledDecrementBtn(false);
-    }
+    };
 
     const decrement = () => {
         const value = value10 - 1;
         setValue10(value);
         setDisabledIncrementBtn(false);
         setDisabledDecrementBtn(value === 0);
-    }
+    };
 
     return (
         <div>
@@ -74,7 +73,7 @@ const KnobDemo = () => {
                         </div>
                         <div className="field col-12 md:col-4">
                             <h5 className="mt-3">Template</h5>
-                            <Knob value={value6} valueTemplate={"{value}%"} onChange={(e) => setValue6(e.value)} />
+                            <Knob value={value6} valueTemplate={'{value}%'} onChange={(e) => setValue6(e.value)} />
                         </div>
                         <div className="field col-12 md:col-4">
                             <h5 className="mt-3">Stroke</h5>
@@ -86,7 +85,7 @@ const KnobDemo = () => {
                         </div>
                         <div className="field col-12 md:col-4">
                             <h5 className="mt-3">Color</h5>
-                            <Knob value={value9} valueColor={"SlateGray"} rangeColor={"MediumTurquoise"} onChange={(e) => setValue9(e.value)} />
+                            <Knob value={value9} valueColor={'SlateGray'} rangeColor={'MediumTurquoise'} onChange={(e) => setValue9(e.value)} />
                         </div>
                     </div>
                 </div>
@@ -101,7 +100,7 @@ const KnobDemo = () => {
 
             <KnobDoc />
         </div>
-    )
-}
+    );
+};
 
 export default KnobDemo;

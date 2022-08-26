@@ -8,12 +8,11 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const DataTableBasicDemo = () => {
-
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -24,7 +23,9 @@ const DataTableBasicDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>Basic</span></h1>
+                    <h1>
+                        DataTable <span>Basic</span>
+                    </h1>
                     <p>DataTable requires a collection to display along with column components for the representation of the data.</p>
                 </div>
 
@@ -45,14 +46,13 @@ const DataTableBasicDemo = () => {
             <DataTableBasicDemoDoc></DataTableBasicDemoDoc>
         </div>
     );
-}
+};
 
 export default DataTableBasicDemo;
 
 export const DataTableBasicDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -92,7 +92,7 @@ export class DataTableBasicDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -123,7 +123,7 @@ const DataTableBasicDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -154,7 +154,7 @@ const DataTableBasicDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
 <script src="./ProductService.js"></script>
@@ -192,16 +192,11 @@ const DataTableBasicDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableBasicDemo', sources: sources, service: 'ProductService', data: 'products-small' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableBasicDemo', sources: sources, service: 'ProductService', data: 'products-small' })}</TabView>
         </div>
-    )
-
-})
+    );
+});

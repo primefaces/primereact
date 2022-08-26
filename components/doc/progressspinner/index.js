@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const ProgressSpinnerDoc = memo(() => {
-
-        const sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        class: {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
@@ -31,7 +31,7 @@ export class ProgressSpinnerDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -52,7 +52,7 @@ const ProgressSpinnerDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -73,7 +73,7 @@ const ProgressSpinnerDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -97,39 +97,39 @@ const ProgressSpinnerDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { ProgressSpinner } from 'primereact/progressspinner';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/progressspinner/progressspinner.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>ProgressSpinner is defined using ProgressSpinner element.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <ProgressSpinner/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Colors</h5>
                     <p>Colors of the spinner can be changed by overriding the keyframes animation</p>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 @keyframes p-progress-spinner-color {
     100%,
     0% {
@@ -147,7 +147,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
     }
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -201,14 +201,16 @@ import { ProgressSpinner } from 'primereact/progressspinner';
                         </table>
                     </div>
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Element</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Element</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -227,16 +229,30 @@ import { ProgressSpinner } from 'primereact/progressspinner';
                         </table>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            ProgressSpinner components uses <i>progressbar</i> role. Value to describe the component can be defined using <i>aria-labelledby</i> and <i>aria-label</i> props.
+                        </p>
+                        <CodeHighlight>
+                            {`
+<ProgressSpinner aria-label="Loading" />
+`}
+                        </CodeHighlight>
+
+                        <h6>Keyboard Support</h6>
+                        <p>Component does not include any interactive elements.</p>
+                    </DevelopmentSection>
+
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'ProgressSpinnerDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'ProgressSpinnerDemo', sources: sources })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default ProgressSpinnerDoc;

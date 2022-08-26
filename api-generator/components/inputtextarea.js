@@ -19,11 +19,9 @@ const InputTextareaProps = [
     }
 ];
 
-const InputTextareaEvents = [
+const InputTextareaEvents = [];
 
-];
-
-const InputTextareaStyles = [ { name: 'p-inputtextarea', description: 'Textarea element' } ];
+const InputTextareaStyles = [{ name: 'p-inputtextarea', description: 'Textarea element' }];
 
 module.exports = {
     inputtextarea: {

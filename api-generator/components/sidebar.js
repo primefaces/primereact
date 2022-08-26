@@ -75,7 +75,7 @@ const SidebarProps = [
         name: 'modal',
         type: 'boolean',
         default: 'true',
-        description: 'Whether to a modal layer behind the sidebar.'
+        description: 'Whether to add a translucent overlay behind the sidebar.'
     },
     {
         name: 'appendTo',

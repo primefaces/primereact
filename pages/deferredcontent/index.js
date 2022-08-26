@@ -10,19 +10,18 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const DeferredContentDemo = () => {
-
     const toast = useRef(null);
     const [products, setProducts] = useState(null);
     const productService = new ProductService();
 
     const onImageLoad = () => {
         toast.current.show({ severity: 'success', summary: 'Image Initialized', detail: 'Scroll down to load the datatable' });
-    }
+    };
 
     const onDataLoad = () => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
         toast.current.show({ severity: 'success', summary: 'Data Initialized', detail: 'Render Completed' });
-    }
+    };
 
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
@@ -31,7 +30,6 @@ const DeferredContentDemo = () => {
             <Head>
                 <title>React Deferred Content Component</title>
                 <meta name="description" content="DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll." />
-
             </Head>
             <div className="content-section introduction">
                 <div>
@@ -45,12 +43,10 @@ const DeferredContentDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="card">
-                    <div style={{ height: '800px' }}>
-                        Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.
-                    </div>
+                    <div style={{ height: '800px' }}>Scroll down to lazy load an image and the DataTable which initiates a query that is not executed on initial page load to speed up load performance.</div>
 
                     <DeferredContent onLoad={onImageLoad}>
-                        <img src={`${contextPath}/images/galleria/galleria1.jpg`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt="Prime" />
+                        <img src={`${contextPath}/images/galleria/galleria1.jpg`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Prime" />
                     </DeferredContent>
 
                     <div style={{ height: '500px' }}></div>
@@ -68,7 +64,7 @@ const DeferredContentDemo = () => {
 
             <DeferredContentDoc />
         </div>
-    )
-}
+    );
+};
 
 export default DeferredContentDemo;

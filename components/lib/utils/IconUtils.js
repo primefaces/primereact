@@ -3,7 +3,6 @@ import { classNames } from './ClassNames';
 import ObjectUtils from './ObjectUtils';
 
 export default class IconUtils {
-
     static getJSXIcon(icon, iconProps = {}, options = {}) {
         let content = null;
 

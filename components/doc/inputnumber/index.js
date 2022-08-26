@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const InputNumberDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -153,7 +153,7 @@ export class InputNumberDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -291,7 +291,7 @@ const InputNumberDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -429,7 +429,7 @@ const InputNumberDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>`,
@@ -569,54 +569,63 @@ const InputNumberDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { InputNumber } from 'primereact/inputnumber';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>InputNumber is used as a controlled input with <i>value</i> and <i>onValueChange</i> properties. Component always provides a number type although formatting on the input is a string.</p>
+                    <p>
+                        InputNumber is used as a controlled input with <i>value</i> and <i>onValueChange</i> properties. Component always provides a number type although formatting on the input is a string.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <InputNumber value={value} onValueChange={(e) => setValue(e.value)} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Decimal Mode</h5>
-                    <p>Format is defined using the <i>mode</i> property, "decimal" is the default value allowing only integers when there is no other configuration.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Format is defined using the <i>mode</i> property, "decimal" is the default value allowing only integers when there is no other configuration.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <InputNumber value={value} onValueChange={(e) => setValue(e.value)}  mode="decimal" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>Fractions are configured with the <i>minFractionDigits</i> property. Optionally <i>maxFractionDigits</i> can be used to defined a boundary for the maximum digits.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Fractions are configured with the <i>minFractionDigits</i> property. Optionally <i>maxFractionDigits</i> can be used to defined a boundary for the maximum digits.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <InputNumber value={value1} onValueChange={(e) => setValue1(e.value)} mode="decimal" minFractionDigits={2} />
-<InputNumber value={value2} onValueChange={(e) => setValue2(e.value)} mode="decimal" minFractionDigits={2} maxFracionDigits={2} />
+<InputNumber value={value2} onValueChange={(e) => setValue2(e.value)} mode="decimal" minFractionDigits={2} maxFractionDigits={2} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p><i>locale</i> option is available to set the localization information such as grouping and decimal symbols where default value is the browser locale. Locales are defined per <a href="https://tools.ietf.org/html/rfc5646">BCP Language Tag</a>.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        <i>locale</i> option is available to set the localization information such as grouping and decimal symbols where default value is the browser locale. Locales are defined per{' '}
+                        <a href="https://tools.ietf.org/html/rfc5646">BCP Language Tag</a>.
+                    </p>
+                    <CodeHighlight>
+                        {`
 User Locale
 <InputNumber value={value1} onValueChange={(e) => setValue1(e.value)} mode="decimal" minFractionDigits={2} />
 
@@ -629,13 +638,15 @@ German Locale
 Indian Locale
 <InputNumber value={value4} onValueChange={(e) => setValue4(e.value)} mode="decimal" locale="en-IN" minFractionDigits={2} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Currency</h5>
-                    <p>Currency formatting is specified by setting the <i>mode</i> option to currency and <i>currency</i> property. In addition <i>currencyDisplay</i> option
-                    allows how the currency is displayed, valid values are "symbol" (default) or "code".</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Currency formatting is specified by setting the <i>mode</i> option to currency and <i>currency</i> property. In addition <i>currencyDisplay</i> option allows how the currency is displayed, valid values are "symbol" (default)
+                        or "code".
+                    </p>
+                    <CodeHighlight>
+                        {`
 United States
 <InputNumber value={value1} onValueChange={(e) => setValue1(e.value)} mode="currency" currency="USD" locale="en-US" />
 
@@ -648,12 +659,14 @@ India
 Japan
 <InputNumber value={value4} onValueChange={(e) => setValue4(e.value)} mode="currency" currency="JPY" locale="jp-JP"/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Prefix and Suffix</h5>
-                    <p>Custom texts e.g. units can be placed before or after the input section with the <i>prefix</i> and <i>suffix</i> properties.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Custom texts e.g. units can be placed before or after the input section with the <i>prefix</i> and <i>suffix</i> properties.
+                    </p>
+                    <CodeHighlight>
+                        {`
 Mile
 <InputNumber value={value1} onValueChange={(e) => setValue1(e.value)} suffix=" mi" />
 
@@ -666,13 +679,15 @@ Expiry
 Temperature
 <InputNumber value={value4} onValueChange={(e) => setValue4(e.value)} prefix="&uarr; " suffix="℃" min={0} max={40} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Buttons</h5>
-                    <p>Spinner buttons is enabled using the <i>showButtons</i> options and layout is defined with the <i>buttonLayout</i>. Default value is "stacked" whereas
-                    "horizontal" and "stacked" are alternatives. Note that even there are no buttons, up and down arrow keys can be used to spin the values with keyboard.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Spinner buttons is enabled using the <i>showButtons</i> options and layout is defined with the <i>buttonLayout</i>. Default value is "stacked" whereas "horizontal" and "stacked" are alternatives. Note that even there are no
+                        buttons, up and down arrow keys can be used to spin the values with keyboard.
+                    </p>
+                    <CodeHighlight>
+                        {`
 Stacked
 <InputNumber value={value1} onValueChange={(e) => setValue1(e.value)} showButtons mode="currency" currency="USD" />
 
@@ -684,24 +699,27 @@ Vertical
 <InputNumber value={value3} onValueChange={(e) => setValue3(e.value)} mode="decimal" showButtons buttonLayout="vertical" style={{width: '6em'}}
     decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Step</h5>
-                    <p>Step factor is 1 by default and can be customized with <i>step</i> option.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Step factor is 1 by default and can be customized with <i>step</i> option.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <InputNumber value={value} onValueChange={(e) => setValue(e.value)} step={0.25} />
 `}
-</CodeHighlight>
-
+                    </CodeHighlight>
 
                     <h5>Min and Max Boundaries</h5>
-                    <p>Value to be entered can be restricted by configuring the <i>min</i> and <i>max</i> options.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Value to be entered can be restricted by configuring the <i>min</i> and <i>max</i> options.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <InputNumber value={value} onValueChange={(e) => setValue1(e.value)} min={0} max={100} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -773,8 +791,9 @@ Vertical
                                     <td>localeMatcher</td>
                                     <td>string</td>
                                     <td>best fit</td>
-                                    <td>The locale matching algorithm to use. Possible values are "lookup" and "best fit"; the default is "best fit".
-                                        See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_negotiation">Locale Negotation</a> for details.
+                                    <td>
+                                        The locale matching algorithm to use. Possible values are "lookup" and "best fit"; the default is "best fit". See{' '}
+                                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_negotiation">Locale Negotation</a> for details.
                                     </td>
                                 </tr>
                                 <tr>
@@ -799,16 +818,19 @@ Vertical
                                     <td>currency</td>
                                     <td>string</td>
                                     <td>null</td>
-                                    <td>The currency to use in currency formatting. Possible values are the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency codes</a>,
-                                        such as "USD" for the US dollar, "EUR" for the euro, or "CNY" for the Chinese RMB.
-                                        There is no default value; if the style is "currency", the currency property must be provided.</td>
+                                    <td>
+                                        The currency to use in currency formatting. Possible values are the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency codes</a>, such as "USD" for the US dollar, "EUR" for
+                                        the euro, or "CNY" for the Chinese RMB. There is no default value; if the style is "currency", the currency property must be provided.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>currencyDisplay</td>
                                     <td>string</td>
                                     <td>symbol</td>
-                                    <td>How to display the currency in currency formatting. Possible values are "symbol" to use a localized currency symbol such as €,
-                                        ü"code" to use the ISO currency code, "name" to use a localized currency name such as "dollar"; the default is "symbol".</td>
+                                    <td>
+                                        How to display the currency in currency formatting. Possible values are "symbol" to use a localized currency symbol such as €, ü"code" to use the ISO currency code, "name" to use a localized currency name such
+                                        as "dollar"; the default is "symbol".
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>useGrouping</td>
@@ -820,17 +842,20 @@ Vertical
                                     <td>minFractionDigits</td>
                                     <td>number</td>
                                     <td>null</td>
-                                    <td>The minimum number of fraction digits to use. Possible values are from 0 to 20; the default for plain number and percent formatting is 0; the default for currency formatting is the number of
-                                        minor unit digits provided by the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency code list</a> (2 if the list doesn't provide that information).</td>
+                                    <td>
+                                        The minimum number of fraction digits to use. Possible values are from 0 to 20; the default for plain number and percent formatting is 0; the default for currency formatting is the number of minor unit digits
+                                        provided by the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency code list</a> (2 if the list doesn't provide that information).
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>maxFractionDigits</td>
                                     <td>number</td>
                                     <td>null</td>
-                                    <td>The maximum number of fraction digits to use. Possible values are from 0 to 20; the default for plain
-                                        number formatting is the larger of minimumFractionDigits and 3; the default for currency formatting
-                                        is the larger of minimumFractionDigits and the number of minor unit digits provided by the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency code list</a>
-                                        (2 if the list doesn't provide that information).</td>
+                                    <td>
+                                        The maximum number of fraction digits to use. Possible values are from 0 to 20; the default for plain number formatting is the larger of minimumFractionDigits and 3; the default for currency formatting is the
+                                        larger of minimumFractionDigits and the number of minor unit digits provided by the <a href="https://www.currency-iso.org/en/home/tables/table-a1.html">ISO 4217 currency code list</a>
+                                        (2 if the list doesn't provide that information).
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>id</td>
@@ -993,14 +1018,18 @@ Vertical
                             <tbody>
                                 <tr>
                                     <td>onValueChange</td>
-                                    <td>event.originalEvent: Browser event <br />
-                                        event.value: New value</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.value: New value
+                                    </td>
                                     <td>Callback to invoke after validation check and value change.</td>
                                 </tr>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>event.originalEvent: Browser event <br />
-                                        event.value: New value</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.value: New value
+                                    </td>
                                     <td>Callback to invoke on value change.</td>
                                 </tr>
                                 <tr>
@@ -1023,7 +1052,9 @@ Vertical
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -1069,21 +1100,82 @@ Vertical
                                     <td>p-inputnumber-button-icon</td>
                                     <td>Button icon</td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element uses <i>spinbutton</i> role in
+                            addition to the <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes.
+                        </p>
+                        <CodeHighlight>
+                            {`
+<label htmlFor="price">Price</label>
+<InputNumber inputId="price" />
+
+<span id="label_number">Number</span>
+<InputNumber aria-labelledby="label_number" />
+
+<InputNumber aria-label="Number" />
+`}
+                        </CodeHighlight>
+
+                        <h6>Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the input.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>Increments the value.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>Decrements the value.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
+                                        <td>Set the minimum value if provided.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
+                                        <td>Set the maximum value if provided.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
 
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'InputNumberDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'InputNumberDemo', sources: sources })}
             </TabView>
         </div>
     );
-})
+});
 
 export default InputNumberDoc;

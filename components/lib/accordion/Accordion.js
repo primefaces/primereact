@@ -3,11 +3,12 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 
-export const AccordionTab = () => { }
+export const AccordionTab = () => {};
 
 export const Accordion = React.forwardRef((props, ref) => {
     const [idState, setIdState] = React.useState(props.id);
     const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
+    const elementRef = React.useRef(null);
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
 
     const shouldUseTab = (tab) => tab && tab.props.__TYPE === 'AccordionTab';
@@ -19,9 +20,8 @@ export const Accordion = React.forwardRef((props, ref) => {
 
             if (props.multiple) {
                 const indexes = activeIndex || [];
-                newActiveIndex = selected ? indexes.filter(i => i !== index) : [...indexes, index];
-            }
-            else {
+                newActiveIndex = selected ? indexes.filter((i) => i !== index) : [...indexes, index];
+            } else {
                 newActiveIndex = selected ? null : index;
             }
 
@@ -33,18 +33,22 @@ export const Accordion = React.forwardRef((props, ref) => {
                     originalEvent: event,
                     index: newActiveIndex
                 });
-            }
-            else {
+            } else {
                 setActiveIndexState(newActiveIndex);
             }
         }
 
         event.preventDefault();
-    }
+    };
 
     const isSelected = (index) => {
-        return props.multiple ? (activeIndex && activeIndex.some(i => i === index)) : activeIndex === index;
-    }
+        return props.multiple ? activeIndex && activeIndex.some((i) => i === index) : activeIndex === index;
+    };
+
+    React.useImperativeHandle(ref, () => ({
+        props,
+        getElement: () => elementRef.current
+    }));
 
     useMountEffect(() => {
         if (!idState) {
@@ -54,10 +58,15 @@ export const Accordion = React.forwardRef((props, ref) => {
 
     const createTabHeader = (tab, selected, index) => {
         const style = { ...(tab.props.style || {}), ...(tab.props.headerStyle || {}) };
-        const className = classNames('p-accordion-header', {
-            'p-highlight': selected,
-            'p-disabled': tab.props.disabled
-        }, tab.props.headerClassName, tab.props.className);
+        const className = classNames(
+            'p-accordion-header',
+            {
+                'p-highlight': selected,
+                'p-disabled': tab.props.disabled
+            },
+            tab.props.headerClassName,
+            tab.props.className
+        );
         const headerId = idState + '_header_' + index;
         const ariaControls = idState + '_content_' + index;
         const tabIndex = tab.props.disabled ? -1 : null;
@@ -71,8 +80,8 @@ export const Accordion = React.forwardRef((props, ref) => {
                     {header}
                 </a>
             </div>
-        )
-    }
+        );
+    };
 
     const createTabContent = (tab, selected, index) => {
         const style = { ...(tab.props.style || {}), ...(tab.props.contentStyle || {}) };
@@ -84,13 +93,11 @@ export const Accordion = React.forwardRef((props, ref) => {
         return (
             <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={selected} unmountOnExit options={props.transitionOptions}>
                 <div ref={contentRef} id={contentId} className={className} style={style} role="region" aria-labelledby={ariaLabelledby}>
-                    <div className="p-accordion-content">
-                        {tab.props.children}
-                    </div>
+                    <div className="p-accordion-content">{tab.props.children}</div>
                 </div>
             </CSSTransition>
-        )
-    }
+        );
+    };
 
     const createTab = (tab, index) => {
         if (shouldUseTab(tab)) {
@@ -108,25 +115,25 @@ export const Accordion = React.forwardRef((props, ref) => {
                     {tabHeader}
                     {tabContent}
                 </div>
-            )
+            );
         }
 
         return null;
-    }
+    };
 
     const createTabs = () => {
         return React.Children.map(props.children, createTab);
-    }
+    };
 
     const otherProps = ObjectUtils.findDiffKeys(props, Accordion.defaultProps);
     const className = classNames('p-accordion p-component', props.className);
     const tabs = createTabs();
 
     return (
-        <div id={idState} className={className} style={props.style} {...otherProps}>
+        <div id={idState} ref={elementRef} className={className} style={props.style} {...otherProps}>
             {tabs}
         </div>
-    )
+    );
 });
 
 AccordionTab.displayName = 'AccordionTab';
@@ -141,7 +148,7 @@ AccordionTab.defaultProps = {
     headerTemplate: null,
     contentStyle: null,
     contentClassName: null
-}
+};
 
 Accordion.displayName = 'Accordion';
 Accordion.defaultProps = {
@@ -157,4 +164,4 @@ Accordion.defaultProps = {
     onTabOpen: null,
     onTabClose: null,
     onTabChange: null
-}
+};

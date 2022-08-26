@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const MultiStateCheckboxDemo = () => {
-
     const [value, setValue] = useState('public');
     const options = [
         { value: 'public', icon: 'pi pi-globe' },
@@ -31,7 +30,7 @@ const MultiStateCheckboxDemo = () => {
             <div className="content-section implementation">
                 <div className="card">
                     <div className="field-checkbox m-0">
-                        <MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} />
+                        <MultiStateCheckbox value={value} options={options} optionValue="value" onChange={(e) => setValue(e.value)} aria-label="Access Type" />
                         <label>{value}</label>
                     </div>
                 </div>
@@ -40,6 +39,6 @@ const MultiStateCheckboxDemo = () => {
             <MultiStateCheckboxDoc />
         </div>
     );
-}
+};
 
 export default MultiStateCheckboxDemo;

@@ -10,25 +10,25 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const DataScrollerLoaderDemo = () => {
-
     const [products, setProducts] = useState([]);
     const ds = useRef(null);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProducts().then(data => setProducts(data));
+        productService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (data) => {
         return (
             <div className="product-item">
-                <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
                     <Rating value={data.rating} readOnly cancel={false}></Rating>
-                    <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
+                    <i className="pi pi-tag product-category-icon"></i>
+                    <span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">
                     <span className="product-price">${data.price}</span>
@@ -37,7 +37,7 @@ const DataScrollerLoaderDemo = () => {
                 </div>
             </div>
         );
-    }
+    };
 
     const footer = <Button type="text" icon="pi pi-plus" label="Load" onClick={() => ds.current.load()} />;
 
@@ -49,7 +49,9 @@ const DataScrollerLoaderDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataScroller <span>Loader</span></h1>
+                    <h1>
+                        DataScroller <span>Loader</span>
+                    </h1>
                     <p>Instead of scrolling, a custom element can be used to load data.</p>
                 </div>
 
@@ -58,22 +60,20 @@ const DataScrollerLoaderDemo = () => {
 
             <div className="content-section implementation datascroller-demo">
                 <div className="card">
-                    <DataScroller ref={ds } value={products} itemTemplate={itemTemplate} rows={5}
-                        loader footer={footer} header="Click Load Button at Footer to Load More" />
+                    <DataScroller ref={ds} value={products} itemTemplate={itemTemplate} rows={5} loader footer={footer} header="Click Load Button at Footer to Load More" />
                 </div>
             </div>
 
             <DataScrollerLoaderDoc />
         </div>
     );
-}
+};
 
 export default DataScrollerLoaderDemo;
 
 export const DataScrollerLoaderDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -134,7 +134,7 @@ export class DataScrollerLoaderDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -185,7 +185,7 @@ const DataScrollerLoaderDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -237,7 +237,7 @@ const DataScrollerLoaderDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
 <link rel="stylesheet" href="./DataScrollerDemo.css" />
@@ -295,7 +295,7 @@ const DataScrollerLoaderDemo = () => {
 }
                 `
         }
-    }
+    };
 
     const extFiles = {
         'demo/DataScrollerDemo.css': {
@@ -390,16 +390,11 @@ const DataScrollerLoaderDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataScrollerLoaderDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataScrollerLoaderDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })}</TabView>
         </div>
     );
-
-})
+});

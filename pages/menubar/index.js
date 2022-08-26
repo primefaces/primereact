@@ -7,7 +7,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const MenubarDemo = () => {
-
     const items = [
         {
             label: 'File',
@@ -24,8 +23,7 @@ const MenubarDemo = () => {
                         {
                             label: 'Video',
                             icon: 'pi pi-fw pi-video'
-                        },
-
+                        }
                     ]
                 },
                 {
@@ -60,8 +58,7 @@ const MenubarDemo = () => {
                 {
                     label: 'Justify',
                     icon: 'pi pi-fw pi-align-justify'
-                },
-
+                }
             ]
         },
         {
@@ -70,13 +67,11 @@ const MenubarDemo = () => {
             items: [
                 {
                     label: 'New',
-                    icon: 'pi pi-fw pi-user-plus',
-
+                    icon: 'pi pi-fw pi-user-plus'
                 },
                 {
                     label: 'Delete',
-                    icon: 'pi pi-fw pi-user-minus',
-
+                    icon: 'pi pi-fw pi-user-minus'
                 },
                 {
                     label: 'Search',
@@ -137,7 +132,7 @@ const MenubarDemo = () => {
     ];
 
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const start = <img alt="logo" src={`${contextPath}/images/logo.png`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src={`${contextPath}/images/logo.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
 
     return (
@@ -162,6 +157,6 @@ const MenubarDemo = () => {
             <MenubarDoc />
         </div>
     );
-}
+};
 
 export default MenubarDemo;

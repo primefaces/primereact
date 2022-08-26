@@ -54,6 +54,12 @@ const ListBoxProps = [
         description: 'Custom template for the items.'
     },
     {
+        name: 'filterTemplate',
+        type: 'any',
+        default: 'null',
+        description: 'Custom template for the filter element.'
+    },
+    {
         name: 'optionGroupTemplate',
         type: 'any',
         default: 'null',
@@ -105,7 +111,8 @@ const ListBoxProps = [
         name: 'metaKeySelection',
         type: 'boolean',
         default: 'true',
-        description: 'Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
+        description:
+            'Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
     },
     {
         name: 'filter',
@@ -142,6 +149,12 @@ const ListBoxProps = [
         type: 'string',
         default: 'undefined',
         description: "Locale to use in filtering. The default locale is the host environment's current locale."
+    },
+    {
+        name: 'filterInputProps',
+        type: 'object',
+        default: 'undefined',
+        description: 'Props for the filter input, any prop is passed implicity to the filter input element.'
     },
     {
         name: 'tabIndex',

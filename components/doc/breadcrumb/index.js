@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const BreadCrumbDoc = memo(() => {
-
-        const sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        class: {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 
@@ -37,7 +37,7 @@ export class BreadCrumbDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -64,7 +64,7 @@ const BreadCrumbDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -91,7 +91,7 @@ const BreadCrumbDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -121,35 +121,37 @@ const BreadCrumbDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { BreadCrumb } from 'primereact/breadcrumb';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/breadcrumb/breadcrumb.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>MenuModel API</h5>
-                    <p>BreadCrumb uses the common menumodel api to define its items, visit <Link href="/menumodel"> MenuModel </Link> for details.</p>
+                    <p>
+                        BreadCrumb uses the common menumodel api to define its items, visit <Link href="/menumodel"> MenuModel </Link> for details.
+                    </p>
 
                     <h5>Getting Started</h5>
                     <p>BreadCrumb requires a collection of menuitems as its model.</p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 const items = [
     { label: 'Categories' },
     { label: 'Sports' },
@@ -163,13 +165,13 @@ const items = [
 
 const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <BreadCrumb model={items} home={home}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -191,7 +193,7 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
                                 </tr>
                                 <tr>
                                     <td>model</td>
-                                    <td>array</td>
+                                    <td>MenuItem[]</td>
                                     <td>null</td>
                                     <td>An array of menuitems.</td>
                                 </tr>
@@ -218,7 +220,9 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -248,16 +252,26 @@ const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' 
                         </table>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Breadcrumb uses the <i>nav</i> element and since any attribute is passed to the root implicitly <i>aria-labelledby</i> or <i>aria-label</i> can be used to describe the component. Inside an ordered list is used where the
+                            list item separators have <i>aria-hidden</i> to be able to ignored by the screen readers. If the last link represents the current route, <i>aria-current</i> is added with "page" as the value.
+                        </p>
+
+                        <h6>Keyboard Support</h6>
+                        <p>No special keyboard interaction is needed, all menuitems are focusable based on the page tab sequence.</p>
+                    </DevelopmentSection>
+
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'BreadCrumbDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'BreadCrumbDemo', sources: sources })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default BreadCrumbDoc;

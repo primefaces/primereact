@@ -10,7 +10,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const DataViewDemo = () => {
-
     const [products, setProducts] = useState(null);
     const [layout, setLayout] = useState('grid');
     const [sortKey, setSortKey] = useState(null);
@@ -18,14 +17,14 @@ const DataViewDemo = () => {
     const [sortField, setSortField] = useState(null);
     const sortOptions = [
         { label: 'Price High to Low', value: '!price' },
-        { label: 'Price Low to High', value: 'price' },
+        { label: 'Price Low to High', value: 'price' }
     ];
 
     const productService = new ProductService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        productService.getProducts().then(data => setProducts(data));
+        productService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSortChange = (event) => {
@@ -35,24 +34,24 @@ const DataViewDemo = () => {
             setSortOrder(-1);
             setSortField(value.substring(1, value.length));
             setSortKey(value);
-        }
-        else {
+        } else {
             setSortOrder(1);
             setSortField(value);
             setSortKey(value);
         }
-    }
+    };
 
     const renderListItem = (data) => {
         return (
             <div className="col-12">
                 <div className="product-list-item">
-                    <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                    <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
                     <div className="product-list-detail">
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
                         <Rating value={data.rating} readOnly cancel={false}></Rating>
-                        <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
+                        <i className="pi pi-tag product-category-icon"></i>
+                        <span className="product-category">{data.category}</span>
                     </div>
                     <div className="product-list-action">
                         <span className="product-price">${data.price}</span>
@@ -62,7 +61,7 @@ const DataViewDemo = () => {
                 </div>
             </div>
         );
-    }
+    };
 
     const renderGridItem = (data) => {
         return (
@@ -76,7 +75,7 @@ const DataViewDemo = () => {
                         <span className={`product-badge status-${data.inventoryStatus.toLowerCase()}`}>{data.inventoryStatus}</span>
                     </div>
                     <div className="product-grid-item-content">
-                        <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                        <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
                         <div className="product-name">{data.name}</div>
                         <div className="product-description">{data.description}</div>
                         <Rating value={data.rating} readOnly cancel={false}></Rating>
@@ -88,19 +87,16 @@ const DataViewDemo = () => {
                 </div>
             </div>
         );
-    }
+    };
 
     const itemTemplate = (product, layout) => {
         if (!product) {
             return;
         }
 
-        if (layout === 'list')
-            return renderListItem(product);
-        else if (layout === 'grid')
-            return renderGridItem(product);
-    }
-
+        if (layout === 'list') return renderListItem(product);
+        else if (layout === 'grid') return renderGridItem(product);
+    };
 
     const renderHeader = () => {
         return (
@@ -113,7 +109,7 @@ const DataViewDemo = () => {
                 </div>
             </div>
         );
-    }
+    };
 
     const header = renderHeader();
 
@@ -134,15 +130,13 @@ const DataViewDemo = () => {
 
             <div className="content-section implementation dataview-demo">
                 <div className="card">
-                    <DataView value={products} layout={layout} header={header}
-                        itemTemplate={itemTemplate} paginator rows={9}
-                        sortOrder={sortOrder} sortField={sortField} />
+                    <DataView value={products} layout={layout} header={header} itemTemplate={itemTemplate} paginator rows={9} sortOrder={sortOrder} sortField={sortField} />
                 </div>
             </div>
 
             <DataViewDoc />
         </div>
     );
-}
+};
 
 export default DataViewDemo;

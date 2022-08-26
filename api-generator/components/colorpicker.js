@@ -99,11 +99,11 @@ const ColorPickerEvents = [
     },
     {
         name: 'onShow',
-        description: 'Callback to invoke when overlay panel becomes visible.',
+        description: 'Callback to invoke when overlay panel becomes visible.'
     },
     {
         name: 'onHide',
-        description: 'Callback to invoke when overlay panel becomes hidden.',
+        description: 'Callback to invoke when overlay panel becomes hidden.'
     }
 ];
 

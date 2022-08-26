@@ -42,6 +42,7 @@
   --surface-hover:hsla(0,0%,100%,.04);
   --maskbg: rgba(0, 0, 0, 0.32);
   --focus-ring: none;
+  color-scheme: dark;
 }
 
 /* roboto-regular - latin-ext_latin */
@@ -246,6 +247,16 @@
   --red-700:#ab2f26;
   --red-800:#86251e;
   --red-900:#621b16;
+  --primary-50:#fdfafd;
+  --primary-100:#f3e5f6;
+  --primary-200:#ead1ee;
+  --primary-300:#e1bce7;
+  --primary-400:#d7a8df;
+  --primary-500:#ce93d8;
+  --primary-600:#af7db8;
+  --primary-700:#906797;
+  --primary-800:#715177;
+  --primary-900:#523b56;
 }
 
 .p-autocomplete .p-autocomplete-loader {
@@ -1072,7 +1083,7 @@
 .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
   background: rgba(206, 147, 216, 0.5);
 }
-.p-inputswitch.p-invalid {
+.p-inputswitch.p-invalid .p-inputswitch-slider {
   border-color: #f44435;
 }
 
@@ -2777,7 +2788,8 @@
   background: #1e1e1e;
 }
 .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-thead,
-.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot {
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot, .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-thead,
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-tfoot {
   background-color: #1e1e1e;
 }
 .p-datatable .p-datatable-loading-icon {
@@ -3356,6 +3368,19 @@
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 }
+.p-orderlist .p-orderlist-filter-container {
+  padding: 0.75rem;
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 0 none;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-input {
+  padding-right: 1.75rem;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-icon {
+  right: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
 .p-orderlist .p-orderlist-list {
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #1e1e1e;
@@ -3384,6 +3409,12 @@
 .p-orderlist .p-orderlist-list .p-orderlist-item.p-highlight {
   color: #CE93D8;
   background: rgba(206, 147, 216, 0.16);
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even):hover {
+  background: rgba(255, 255, 255, 0.04);
 }
 
 @media screen and (max-width: 769px) {
@@ -3537,6 +3568,19 @@
   border-bottom: 0 none;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
+}
+.p-picklist .p-picklist-filter-container {
+  padding: 0.75rem;
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 0 none;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-input {
+  padding-right: 1.75rem;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-icon {
+  right: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
 }
 .p-picklist .p-picklist-list {
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -4304,6 +4348,10 @@
   color: rgba(255, 255, 255, 0.87);
   padding: 0 1.25rem 1.25rem 1.25rem;
 }
+.p-dialog .p-dialog-content:last-of-type {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
 .p-dialog .p-dialog-footer {
   border-top: 0 none;
   background: #262626;
@@ -4357,7 +4405,7 @@
 .p-overlaypanel:before {
   border: solid transparent;
   border-color: rgba(38, 38, 38, 0);
-  border-bottom-color: #262626;
+  border-bottom-color: #242424;
 }
 .p-overlaypanel.p-overlaypanel-flipped:after {
   border-top-color: #262626;
@@ -5102,7 +5150,6 @@
   border: 0 none;
   background: #1e1e1e;
   color: rgba(255, 255, 255, 0.87);
-  margin-bottom: 0;
   border-top: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
@@ -5980,10 +6027,6 @@
 .p-tag.p-tag-danger {
   background-color: #EF9A9A;
   color: #212121;
-}
-
-.p-virtualscroller-loading-icon {
-  font-size: 2rem;
 }
 
 .p-accordion .p-accordion-tab {

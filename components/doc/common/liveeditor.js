@@ -4,12 +4,12 @@ import { CodeHighlight } from './codehighlight';
 import { TabPanel } from '../../lib/tabview/TabView';
 import pkg from '../../../package.json';
 
-const vPrimeReact = '^7.0.0'; // latest
+const vPrimeReact = '^8.0.0'; // latest
 
 let currentProps = {};
 
 const contents = (name, content, imports) => ({
-    'js': `import 'primeicons/primeicons.css';
+    js: `import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
@@ -19,7 +19,7 @@ ${content}
 const rootElement = document.getElementById("root");
 ReactDOM.render(<${name} />, rootElement);`,
 
-    'browser': `
+    browser: `
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -61,28 +61,30 @@ export const useLiveEditorTabs = (props) => {
 
     const liveEditor = useLiveEditor();
 
-    let extFiles = props.extFiles && Object.entries(props.extFiles).map(([key, value], i) => {
-        if (key === 'index.css') {
-            return null;
-        }
+    let extFiles =
+        props.extFiles &&
+        Object.entries(props.extFiles).map(([key, value], i) => {
+            if (key === 'index.css') {
+                return null;
+            }
 
-        const lang = key.indexOf('.css') !== -1 ? 'css' : 'js';
-        return (
-            <CodeHighlight key={`${key}_${i}`} lang={lang}>
-{`
+            const lang = key.indexOf('.css') !== -1 ? 'css' : 'js';
+            return (
+                <CodeHighlight key={`${key}_${i}`} lang={lang}>
+                    {`
 /* ${key.replace('demo/', '')} */
 `}
-                {value.content}
-            </CodeHighlight>
-        )
-    });
+                    {value.content}
+                </CodeHighlight>
+            );
+        });
 
     let ordered_sources = {
-        'hooks': { ...props.sources.hooks },
-        'class': { ...props.sources.class },
-        'ts': { ...props.sources.ts },
-        'browser': {...props.sources.browser}
-    }
+        hooks: { ...props.sources.hooks },
+        class: { ...props.sources.class },
+        ts: { ...props.sources.ts },
+        browser: { ...props.sources.browser }
+    };
 
     let tabs = Object.entries(ordered_sources).map(([key, value]) => {
         const { content: _c, imports: _i } = value;
@@ -95,9 +97,7 @@ export const useLiveEditorTabs = (props) => {
                     <span>Edit in CodeSandbox</span>
                 </a>
                 {/* eslint-enable */}
-                <CodeHighlight lang="js">
-                    {content}
-                </CodeHighlight>
+                <CodeHighlight lang="js">{content}</CodeHighlight>
 
                 {extFiles}
             </TabPanel>
@@ -105,21 +105,19 @@ export const useLiveEditorTabs = (props) => {
     });
 
     if (props.service) {
-        const serviceArr = props.service.replace(/\s/g,'').split(',');
+        const serviceArr = props.service.replace(/\s/g, '').split(',');
         serviceArr.forEach((s, i) => {
             tabs.push(
                 <TabPanel key={`${s}_${i}`} header={`${s}.js`}>
-                    <CodeHighlight lang="js">
-                        {services[s]}
-                    </CodeHighlight>
+                    <CodeHighlight lang="js">{services[s]}</CodeHighlight>
                     <span className="liveEditorHelperText">* This code is different for the 'Browser Source'.</span>
                 </TabPanel>
-            )
+            );
         });
     }
 
     if (props.data) {
-        const dataArr = props.data.replace(/\s/g,'').split(',');
+        const dataArr = props.data.replace(/\s/g, '').split(',');
         dataArr.forEach((d, i) => {
             tabs.push(
                 <TabPanel key={`${d}_${i}`} header={`${d}.json`}>
@@ -127,12 +125,12 @@ export const useLiveEditorTabs = (props) => {
                         {data[d]}
                     </CodeHighlight>
                 </TabPanel>
-            )
+            );
         });
     }
 
     return tabs;
-}
+};
 
 export const useLiveEditor = () => {
     const props = currentProps;
@@ -144,7 +142,7 @@ export const useLiveEditor = () => {
         delete _extFiles['index.css'];
 
         let extFiles = {};
-        Object.entries(_extFiles).forEach(([k, v]) => extFiles[`${rootPath}${k}`] = v);
+        Object.entries(_extFiles).forEach(([k, v]) => (extFiles[`${rootPath}${k}`] = v));
 
         const dependencies = pkg ? pkg.dependencies : {};
 
@@ -153,20 +151,23 @@ export const useLiveEditor = () => {
                 'package.json': {
                     content: {
                         main: `${rootPath}demo/${nameWithExt}`,
-                        dependencies: isBrowser ? {} : {
-                            ...extDependencies,
-                            'react': dependencies['react'],
-                            'react-dom': dependencies['react-dom'],
-                            'react-transition-group': dependencies['react-transition-group'],
-                            'primereact': vPrimeReact, // latest
-                            'primeflex': dependencies['primeflex'],
-                            'primeicons': dependencies['primeicons']
-                        }
+                        dependencies: isBrowser
+                            ? {}
+                            : {
+                                  ...extDependencies,
+                                  react: dependencies['react'],
+                                  'react-dom': dependencies['react-dom'],
+                                  'react-transition-group': dependencies['react-transition-group'],
+                                  primereact: vPrimeReact, // latest
+                                  primeflex: dependencies['primeflex'],
+                                  primeicons: dependencies['primeicons']
+                              }
                     }
                 },
                 'index.html': {
-                    content: isBrowser ? `<meta http-equiv="refresh" content="0;url=demo/${nameWithExt}" />` :
-                    `<div id="root"></div>
+                    content: isBrowser
+                        ? `<meta http-equiv="refresh" content="0;url=demo/${nameWithExt}" />`
+                        : `<div id="root"></div>
 
                     <!-- Added to show icons in the editor -->
                     <link rel="stylesheet" href="https://unpkg.com/primeicons@${dependencies['primeicons'].replace(/[\^|~]/gi, '')}/primeicons.css">`
@@ -372,16 +373,19 @@ img.flag {
     width:30px
 }
 ${extIndexCSS}
-                    `,
+                    `
                 },
                 ...files,
                 ...extFiles
             }
-        }
+        };
     };
 
     const getSandboxParameters = (sourceType) => {
         let { name, sources, dependencies } = props;
+        if (!sources[sourceType]) {
+            return null;
+        }
         let extension = '.js';
         let serviceExtension = extension;
         let extDependencies = dependencies || {};
@@ -393,21 +397,19 @@ ${extIndexCSS}
 
         _files[`sandbox.config.json`] = {
             content: {
-                "infiniteLoopProtection": false
+                infiniteLoopProtection: false
             }
-        }
+        };
 
         if (sourceType === 'class' || sourceType === 'hooks') {
             extension = serviceExtension = '.js';
             content = js;
-        }
-        else if (sourceType === 'ts') {
+        } else if (sourceType === 'ts') {
             extension = serviceExtension = '.tsx';
             content = js;
 
             _files[`tsconfig.json`] = {
-                content:
-                    `{
+                content: `{
 "compilerOptions": {
     "target": "es5",
     "lib": [
@@ -432,20 +434,19 @@ ${extIndexCSS}
     "src"
 ]
 }`
-            }
+            };
 
             extDependencies = {
                 ...extDependencies,
-                "@types/node": "10.12.24",
-                "@types/react": "16.8.2",
-                "@types/react-dom": "16.8.0",
-                "@types/react-transition-group": "^4.2.4",
-                "@types/classnames": "^2.2.10",
-                "react-scripts": "2.1.3",
-                "typescript": "3.3.3"
-            }
-        }
-        else if (sourceType === 'browser') {
+                '@types/node': '10.12.24',
+                '@types/react': '16.8.2',
+                '@types/react-dom': '16.8.0',
+                '@types/react-transition-group': '^4.2.4',
+                '@types/classnames': '^2.2.10',
+                'react-scripts': '2.1.3',
+                typescript: '3.3.3'
+            };
+        } else if (sourceType === 'browser') {
             extension = '.html';
             content = browser;
             rootPath = '';
@@ -455,47 +456,52 @@ ${extIndexCSS}
 
         _files[`${rootPath}demo/${name}${extension}`] = {
             content
-        }
+        };
 
         if (props.service) {
-            const serviceArr = props.service.replace(/\s/g,'').split(',');
-            serviceArr.forEach(s => {
+            const serviceArr = props.service.replace(/\s/g, '').split(',');
+            serviceArr.forEach((s) => {
                 const path = `${rootPath}${sourceType === 'browser' ? 'demo' : 'service'}/${s}${serviceExtension}`;
                 const content = sourceType === 'browser' ? services[s].replace('export class', 'class') : services[s];
 
                 _files[path] = {
                     content
-                }
+                };
             });
         }
 
         if (props.data) {
-            const dataArr = props.data.replace(/\s/g,'').split(',');
-            dataArr.forEach(d => {
+            const dataArr = props.data.replace(/\s/g, '').split(',');
+            dataArr.forEach((d) => {
                 const path = `${sourceType === 'browser' ? 'demo' : 'public'}/data/${d}.json`;
                 const content = data[d];
 
                 _files[path] = {
                     content
-                }
+                };
             });
         }
 
         return createSandboxParameters(`${name}${extension}`, _files, extDependencies, sourceType, rootPath);
-    }
+    };
 
     return {
-        postSandboxParameters(sourceType) {
+        postSandboxParameters(sourceType, toast) {
+            const sandboxParameters = getSandboxParameters(sourceType);
+            if (!sandboxParameters) {
+                toast.current.show({ severity: 'warn', summary: 'Not Available', detail: 'That code sandbox demonstration is not available!' });
+                return;
+            }
             fetch('https://codesandbox.io/api/v1/sandboxes/define?json=1', {
-                method: "POST",
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    Accept: 'application/json'
                 },
-                body: JSON.stringify(getSandboxParameters(sourceType))
+                body: JSON.stringify(sandboxParameters)
             })
-                .then(response => response.json())
-                .then(data => window.open(`https://codesandbox.io/s/${data.sandbox_id}`, '_blank'));
+                .then((response) => response.json())
+                .then((data) => window.open(`https://codesandbox.io/s/${data.sandbox_id}`, '_blank'));
         }
-    }
-}
+    };
+};

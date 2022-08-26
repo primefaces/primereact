@@ -1,4 +1,4 @@
-export const Column = () => { }
+export const Column = () => {};
 
 Column.displayName = 'Column';
 Column.defaultProps = {
@@ -75,5 +75,6 @@ Column.defaultProps = {
     rowReorderIcon: 'pi pi-bars',
     rowEditor: false,
     exportable: true,
-    reorderable: true
-}
+    reorderable: true,
+    resizeable: true
+};

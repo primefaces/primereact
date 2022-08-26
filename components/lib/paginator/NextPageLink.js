@@ -1,16 +1,12 @@
 import * as React from 'react';
-import { Ripple } from '../ripple/Ripple';
+import { ariaLabel } from '../api/Api';
+import { Button } from '../button/Button';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const NextPageLink = React.memo((props) => {
     const className = classNames('p-paginator-next p-paginator-element p-link', { 'p-disabled': props.disabled });
     const iconClassName = 'p-paginator-icon pi pi-angle-right';
-    const element = (
-        <button type="button" className={className} onClick={props.onClick} disabled={props.disabled}>
-            <span className={iconClassName}></span>
-            <Ripple />
-        </button>
-    );
+    const element = <Button type="button" className={className} icon={iconClassName} onClick={props.onClick} disabled={props.disabled} aria-label={ariaLabel('nextPageLabel')} />;
 
     if (props.template) {
         const defaultOptions = {
@@ -34,4 +30,4 @@ NextPageLink.defaultProps = {
     disabled: false,
     onClick: null,
     template: null
-}
+};

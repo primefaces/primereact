@@ -6,11 +6,11 @@ export const HeaderCheckbox = React.memo((props) => {
 
     const onFocus = () => {
         setFocusedState(true);
-    }
+    };
 
     const onBlur = () => {
         setFocusedState(false);
-    }
+    };
 
     const onClick = (event) => {
         if (!props.disabled) {
@@ -21,14 +21,14 @@ export const HeaderCheckbox = React.memo((props) => {
                 checked: !props.checked
             });
         }
-    }
+    };
 
     const onKeyDown = (event) => {
         if (event.code === 'Space') {
             onClick(event);
             event.preventDefault();
         }
-    }
+    };
 
     const boxClassName = classNames('p-checkbox-box p-component', {
         'p-highlight': props.checked,
@@ -46,7 +46,7 @@ export const HeaderCheckbox = React.memo((props) => {
                 <span className={iconClassName}></span>
             </div>
         </div>
-    )
+    );
 });
 
 HeaderCheckbox.displayName = 'HeaderCheckbox';

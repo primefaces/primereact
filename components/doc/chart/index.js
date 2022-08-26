@@ -1,49 +1,55 @@
 import React from 'react';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const ChartDoc = () => {
-
     return (
         <div className="content-section documentation" id="app-doc">
             <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+            <CodeHighlight lang="js">
+                {`
 import { Chart } from 'primereact/chart';
 `}
-</CodeHighlight>
+            </CodeHighlight>
 
             <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+            <CodeHighlight>
+                {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/chart/chart.min.js"></script>
 `}
-</CodeHighlight>
+            </CodeHighlight>
 
             <h5>Getting Started</h5>
-            <p>Chart component is a wrapper around on <a href="https://www.chartjs.org/docs/3.3.2/">Chart.js 3.3.2+</a> so chart.js needs to be included in your project.
-            For a complete documentation and samples please refer to the <a href="https://www.chartjs.org/">chart.js website</a>.</p>
+            <p>
+                Chart component is a wrapper around on <a href="https://www.chartjs.org/docs/3.3.2/">Chart.js 3.3.2+</a> so chart.js needs to be included in your project. For a complete documentation and samples please refer to the{' '}
+                <a href="https://www.chartjs.org/">chart.js website</a>.
+            </p>
 
-<CodeHighlight lang="js">
-{`
+            <CodeHighlight lang="js">
+                {`
 npm install chart.js
 `}
-</CodeHighlight>
+            </CodeHighlight>
 
             <h5>Chart Types</h5>
-            <p>Chart type is defined using the <i>type</i> property. Currently there are 6 options available; "pie", "doughtnut", "line", "bar", "radar" and "polarArea".</p>
+            <p>
+                Chart type is defined using the <i>type</i> property. Currently there are 6 options available; "pie", "doughtnut", "line", "bar", "radar" and "polarArea".
+            </p>
 
             <h5>Data</h5>
-            <p>Data of a chart is provided using a binding to the <i>data</i> property, each type has its own format of data. Here is an example of a line chart.</p>
+            <p>
+                Data of a chart is provided using a binding to the <i>data</i> property, each type has its own format of data. Here is an example of a line chart.
+            </p>
 
-<CodeHighlight>
-{`
+            <CodeHighlight>
+                {`
 <Chart type="line" data={data} />
 `}
-</CodeHighlight>
+            </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+            <CodeHighlight lang="js">
+                {`
 const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
@@ -62,20 +68,22 @@ const data = {
     ]
 };
 `}
-</CodeHighlight>
+            </CodeHighlight>
 
             <h5>Options</h5>
-            <p>While a series can be customized per dataset, general chart options are defined with options property.
-                Example below adds a title and customizes the legend position of the chart. For all available options refer to the charts.js documentation.</p>
+            <p>
+                While a series can be customized per dataset, general chart options are defined with options property. Example below adds a title and customizes the legend position of the chart. For all available options refer to the charts.js
+                documentation.
+            </p>
 
-<CodeHighlight>
-{`
+            <CodeHighlight>
+                {`
 <Chart type="line" data={data} options={options} />
 `}
-</CodeHighlight>
+            </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+            <CodeHighlight lang="js">
+                {`
 const options = {
     plugins: {
         title: {
@@ -91,7 +99,7 @@ const options = {
     };
 }
 `}
-</CodeHighlight>
+            </CodeHighlight>
 
             <h5>Properties</h5>
             <div className="doc-tablewrapper">
@@ -182,8 +190,25 @@ const options = {
                     </tbody>
                 </table>
             </div>
+
+            <h5>Accessibility</h5>
+            <DevelopmentSection>
+                <p>
+                    Chart components internally use <i>canvas</i> element, refer to the <a>Chart.js accessibility</a> guide for more information. The canvas element can be customized with <i>canvasProps</i> property to define aria roles and
+                    properties, in addition any content inside the component is directly passed as a child of the canvas to be able to provide fallback content like a table.
+                </p>
+                <CodeHighlight>
+                    {`
+<Chart type="line" data={data} canvasProps={{'role': 'img', 'aria-label': 'Data'}} />
+
+<Chart type="line" data={data}>
+    <DataTable />
+</Chart>
+`}
+                </CodeHighlight>
+            </DevelopmentSection>
         </div>
-    )
-}
+    );
+};
 
 export default ChartDoc;

@@ -23,7 +23,7 @@ let chartData = {
             data: [40, 59, 40, 50, 56, 40, 70],
             fill: true,
             borderColor: '#03C4E8',
-            tension: .4,
+            tension: 0.4,
             backgroundColor: 'rgba(3, 196, 232, .2)'
         }
     ]
@@ -41,7 +41,7 @@ let chartOptions = {
                 display: false
             },
             min: 0,
-            max: 100,
+            max: 100
         },
         x: {
             ticks: {
@@ -55,31 +55,33 @@ const ComponentSection = () => {
     const [category, setCategory] = useState('C');
     const [nodes, setNodes] = useState(null);
     const [switchValue, setSwitchValue] = useState(true);
-    const [rangeValues, setRangeValues] = useState([20,80]);
+    const [rangeValues, setRangeValues] = useState([20, 80]);
     const [dateValue, setDateValue] = useState(null);
     const [selectButtonValue, setSelectButtonValue] = useState(1);
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const nodeService = new NodeService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const items = [
-        {label: 'Home', icon: 'pi pi-fw pi-home'},
-        {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
-        {label: 'Settings', icon: 'pi pi-fw pi-cog'}
+        { label: 'Home', icon: 'pi pi-fw pi-home' },
+        { label: 'Calendar', icon: 'pi pi-fw pi-calendar' },
+        { label: 'Settings', icon: 'pi pi-fw pi-cog' }
     ];
     const selectButtonOptions = [
-        {name: 'Prime', value: 1},
-        {name: 'React', value: 2},
-        {name: 'Themes', value: 3}
+        { name: 'Prime', value: 1 },
+        { name: 'React', value: 2 },
+        { name: 'Themes', value: 3 }
     ];
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        nodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <section className="landing-components py-8">
             <div className="section-header">Components</div>
-            <p className="section-detail"><span className="font-bold text-900">Over 80</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.</p>
+            <p className="section-detail">
+                <span className="font-bold text-900">Over 80</span> React UI Components with top-notch quality to help you implement all your UI requirements in style.
+            </p>
             <div className="flex justify-content-center mt-4">
                 <a href="https://www.primefaces.org/primeblocks-react" className="font-semibold p-3 border-round flex align-items-center linkbox active">
                     <span>Get Started</span>
@@ -98,15 +100,21 @@ const ComponentSection = () => {
                         <div className="flex justify-content-between">
                             <div className="flex align-items-center">
                                 <RadioButton inputId="category1" value="C" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'C'} />
-                                <label htmlFor="category1" className="ml-2 font-medium">Clothing</label>
+                                <label htmlFor="category1" className="ml-2 font-medium">
+                                    Clothing
+                                </label>
                             </div>
                             <div className="flex align-items-center">
                                 <RadioButton inputId="category2" value="F" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'F'} />
-                                <label htmlFor="category2" className="ml-2 font-medium">Fitness</label>
+                                <label htmlFor="category2" className="ml-2 font-medium">
+                                    Fitness
+                                </label>
                             </div>
                             <div className="flex align-items-center">
                                 <RadioButton inputId="category3" value="E" name="radiovalue" onChange={(e) => setCategory(e.value)} checked={category === 'E'} />
-                                <label htmlFor="category3" className="ml-2 font-medium">Electronics</label>
+                                <label htmlFor="category3" className="ml-2 font-medium">
+                                    Electronics
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -114,38 +122,38 @@ const ComponentSection = () => {
                         <Chart type="line" data={chartData} options={chartOptions} />
                     </div>
                     <div className="box p-4 mb-5">
-                        <TabMenu model={items} activeIndex={activeTabIndex} onTabChange={(e) => setActiveTabIndex(e.index)}/>
+                        <TabMenu model={items} activeIndex={activeTabIndex} onTabChange={(e) => setActiveTabIndex(e.index)} />
                     </div>
                     <div className="box p-4">
                         <ul className="list-none p-0 m-0">
                             <li className="flex align-items-center mb-3">
                                 <img src={`${contextPath}/images/landing-new/avatar-1.svg`} alt="avatar 1" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Darrel Steward</span>
-                                <ProgressBar value={15} showValue={false} className="w-10rem ml-auto mr-3" style={{height:'.5rem'}} />
+                                <ProgressBar value={15} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">15%</span>
                             </li>
                             <li className="flex align-items-center mb-3">
                                 <img src={`${contextPath}/images/landing-new/avatar-2.svg`} alt="avatar 2" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Albert Flores</span>
-                                <ProgressBar value={85} showValue={false} className="w-10rem ml-auto mr-3" style={{height:'.5rem'}} />
+                                <ProgressBar value={85} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">85%</span>
                             </li>
                             <li className="flex align-items-center mb-3">
                                 <img src={`${contextPath}/images/landing-new/avatar-3.svg`} alt="avatar 3" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Kathryn Murphy</span>
-                                <ProgressBar value={50} showValue={false} className="w-10rem ml-auto mr-3" style={{height:'.5rem'}} />
+                                <ProgressBar value={50} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">50%</span>
                             </li>
                             <li className="flex align-items-center mb-3">
                                 <img src={`${contextPath}/images/landing-new/avatar-4.svg`} alt="avatar 4" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Cody Fisher</span>
-                                <ProgressBar value={75} showValue={false} className="w-10rem ml-auto mr-3" style={{height:'.5rem'}} />
+                                <ProgressBar value={75} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">75%</span>
                             </li>
                             <li className="flex align-items-center mb-3">
                                 <img src={`${contextPath}/images/landing-new/avatar-5.svg`} alt="avatar 5" className="w-2rem h-2rem mr-3" />
                                 <span className="font-medium">Brandon Atkinson</span>
-                                <ProgressBar value={60} showValue={false} className="w-10rem ml-auto mr-3" style={{height:'.5rem'}} />
+                                <ProgressBar value={60} showValue={false} className="w-10rem ml-auto mr-3" style={{ height: '.5rem' }} />
                                 <span className="text-secondary font-medium">60%</span>
                             </li>
                         </ul>
@@ -153,8 +161,8 @@ const ComponentSection = () => {
                 </div>
                 <div className="flex flex-column justify-content-start px-3 z-1">
                     <div className="box p-4 mb-5">
-                        <div className="surface-card mb-4 w-20rem text-center p-5" style={{borderRadius:'10px'}}>
-                            <img src={`${contextPath}/images/landing-new/watch.png`} alt="Watch"/>
+                        <div className="surface-card mb-4 w-20rem text-center p-5" style={{ borderRadius: '10px' }}>
+                            <img src={`${contextPath}/images/landing-new/watch.png`} alt="Watch" />
                         </div>
                         <div className="flex align-items-center mb-4">
                             <div className="flex flex-column">
@@ -182,7 +190,7 @@ const ComponentSection = () => {
                 <div className="flex flex-column px-3 py-5 z-1">
                     <div className="box p-4 mb-5">
                         <div className="flex justify-content-center">
-                            <Slider value={rangeValues} onChange={(e) => setRangeValues(e.value)} range className="w-20rem"/>
+                            <Slider value={rangeValues} onChange={(e) => setRangeValues(e.value)} range className="w-20rem" />
                         </div>
                     </div>
                     <div className="box p-4 mb-5">
@@ -197,7 +205,7 @@ const ComponentSection = () => {
                                 </div>
                             </li>
                             <li className="flex">
-                                <a className="flex align-items-center p-3 w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
+                                <a className="flex align-items-center p-3 w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{ borderRadius: '10px' }}>
                                     <i className="pi pi-home text-xl mr-3"></i>
                                     <span className="flex flex-column">
                                         <span className="font-bold mb-1">Dashboard</span>
@@ -206,7 +214,7 @@ const ComponentSection = () => {
                                 </a>
                             </li>
                             <li className="flex">
-                                <a className="flex align-items-center p-3 w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
+                                <a className="flex align-items-center p-3 w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{ borderRadius: '10px' }}>
                                     <i className="pi pi-envelope text-xl mr-3"></i>
                                     <span className="flex flex-column">
                                         <span className="font-bold mb-1">Inbox</span>
@@ -216,7 +224,7 @@ const ComponentSection = () => {
                                 </a>
                             </li>
                             <li className="flex">
-                                <a className="flex align-items-center p-3 w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{borderRadius:'10px'}}>
+                                <a className="flex align-items-center p-3 w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{ borderRadius: '10px' }}>
                                     <i className="pi pi-cog text-xl mr-3"></i>
                                     <span className="flex flex-column">
                                         <span className="font-bold mb-1">Profile</span>
@@ -235,6 +243,6 @@ const ComponentSection = () => {
             </div>
         </section>
     );
-}
+};
 
 export default ComponentSection;

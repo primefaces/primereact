@@ -17,44 +17,44 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
      * @param {boolean} options.valid It is controlled by PrimeReact. It is determined whether it is valid or not according to some custom validation.
      */
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
-        type: 'click', listener: event => {
-            listener && listener(event, { type: 'outside', valid: (event.which !== 3) && isOutsideClicked(event) });
+        type: 'click',
+        listener: (event) => {
+            listener && listener(event, { type: 'outside', valid: event.which !== 3 && isOutsideClicked(event) });
         }
     });
     const [bindWindowResizeListener, unbindWindowResizeListener] = useResizeListener({
-        listener: event => {
+        listener: (event) => {
             listener && listener(event, { type: 'resize', valid: !DomHandler.isTouchDevice() });
         }
     });
     const [bindOverlayScrollListener, unbindOverlayScrollListener] = useOverlayScrollListener({
-        target: targetRef, listener: event => {
+        target: targetRef,
+        listener: (event) => {
             listener && listener(event, { type: 'scroll', valid: true });
         }
     });
 
     const isOutsideClicked = (event) => {
-        return targetRef.current && !(targetRef.current.isSameNode(event.target) || targetRef.current.contains(event.target)
-            || (overlayRef.current && overlayRef.current.contains(event.target)));
-    }
+        return targetRef.current && !(targetRef.current.isSameNode(event.target) || targetRef.current.contains(event.target) || (overlayRef.current && overlayRef.current.contains(event.target)));
+    };
 
     const bind = () => {
         bindDocumentClickListener();
         bindWindowResizeListener();
         bindOverlayScrollListener();
-    }
+    };
 
     const unbind = () => {
         unbindDocumentClickListener();
         unbindWindowResizeListener();
         unbindOverlayScrollListener();
-    }
+    };
 
     React.useEffect(() => {
         if (when) {
             targetRef.current = DomHandler.getTargetElement(target);
             overlayRef.current = DomHandler.getTargetElement(overlay);
-        }
-        else {
+        } else {
             unbind();
             targetRef.current = overlayRef.current = null;
         }
@@ -70,5 +70,5 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
     });
 
     return [bind, unbind];
-}
+};
 /* eslint-enable */

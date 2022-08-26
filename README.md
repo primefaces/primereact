@@ -16,10 +16,10 @@ PrimeReact is available at npm, if you have an existing application run the foll
 
 ```
 // with npm
-npm install primereact
+npm install primereact primeicons
 
 // with yarn
-yarn add primereact
+yarn add primereact primeicons
 ```
 Please note that react >= 17.0.0 and react-dom >= 17.0.0 are peer dependencies and some components have optional dependencies.
 
@@ -54,12 +54,13 @@ Import all components and structures
 
 Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.
 
-In addition, components require PrimeIcons for icons and react-transition-group for animations. They are available as dependencies in the npm package of PrimeReact.
+In addition, components require PrimeIcons for icons and react-transition-group for animations. The react-transition-group is available as dependencies in the npm package of PrimeReact.
 
 ```javascript
 dependencies: {
     "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0"
+    "react-dom": "^17.0.0 || ^18.0.0",
+    "primeicons": "^5.0.0"
 }
 ```
 
@@ -101,3 +102,9 @@ import 'primeicons/primeicons.css';
 ## TypeScript
 
 Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample [typescript-primereact application](https://github.com/primefaces/primereact-examples/tree/main/cra-basic-ts) is available as well at github.
+
+## Contributors
+
+<a href="https://github.com/primefaces/primereact/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=primefaces/primereact" />
+</a>

@@ -6,67 +6,70 @@ import { UIMessage } from './UIMessage';
 
 let messageIdx = 0;
 
-export const Messages = React.memo(React.forwardRef((props, ref) => {
-    const [messagesState, setMessagesState] = React.useState([]);
+export const Messages = React.memo(
+    React.forwardRef((props, ref) => {
+        const [messagesState, setMessagesState] = React.useState([]);
+        const elementRef = React.useRef(null);
 
-    const show = (value) => {
-        if (value) {
-            let messages = [];
+        const show = (value) => {
+            if (value) {
+                let messages;
 
-            if (Array.isArray(value)) {
-                for (let i = 0; i < value.length; i++) {
-                    value[i].id = messageIdx++;
-                    messages = [...messagesState, ...value];
+                if (Array.isArray(value)) {
+                    for (let i = 0; i < value.length; i++) {
+                        value[i].id = messageIdx++;
+                        messages = [...messagesState, ...value];
+                    }
+                } else {
+                    value.id = messageIdx++;
+                    messages = messagesState ? [...messagesState, value] : [value];
                 }
+
+                setMessagesState(messages);
             }
-            else {
-                value.id = messageIdx++;
-                messages = messagesState ? [...messagesState, value] : [value];
-            }
+        };
 
-            setMessagesState(messages);
-        }
-    }
+        const clear = () => {
+            setMessagesState([]);
+        };
 
-    const clear = () => {
-        setMessagesState([]);
-    }
+        const replace = (value) => {
+            const replaced = Array.isArray(value) ? value : [value];
+            setMessagesState(replaced);
+        };
 
-    const replace = (value) => {
-        setMessagesState(value);
-    }
+        const onClose = (message) => {
+            setMessagesState(messagesState.filter((msg) => msg.id !== message.id));
+            props.onRemove && props.onRemove(message);
+        };
 
-    const onClose = (message) => {
-        setMessagesState(messagesState.filter(msg => msg.id !== message.id));
-        props.onRemove && props.onRemove(message);
-    }
+        React.useImperativeHandle(ref, () => ({
+            props,
+            show,
+            replace,
+            clear,
+            getElement: () => elementRef.current
+        }));
 
-    React.useImperativeHandle(ref, () => ({
-        show,
-        replace,
-        clear
-    }));
+        const otherProps = ObjectUtils.findDiffKeys(props, Messages.defaultProps);
 
-    const otherProps = ObjectUtils.findDiffKeys(props, Messages.defaultProps);
-
-    return (
-        <div id={props.id} className={props.className} style={props.style} {...otherProps}>
-            <TransitionGroup>
-                {
-                    messagesState.map((message) => {
+        return (
+            <div id={props.id} ref={elementRef} className={props.className} style={props.style} {...otherProps}>
+                <TransitionGroup>
+                    {messagesState.map((message) => {
                         const messageRef = React.createRef();
 
                         return (
                             <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={props.transitionOptions}>
                                 <UIMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} />
                             </CSSTransition>
-                        )
-                    })
-                }
-            </TransitionGroup>
-        </div>
-    )
-}));
+                        );
+                    })}
+                </TransitionGroup>
+            </div>
+        );
+    })
+);
 
 Messages.displayName = 'Messages';
 Messages.defaultProps = {
@@ -77,4 +80,4 @@ Messages.defaultProps = {
     transitionOptions: null,
     onRemove: null,
     onClick: null
-}
+};

@@ -26,7 +26,7 @@ export const Panel = React.forwardRef((props, ref) => {
         }
 
         event.preventDefault();
-    }
+    };
 
     const expand = (event) => {
         if (!props.onToggle) {
@@ -34,7 +34,7 @@ export const Panel = React.forwardRef((props, ref) => {
         }
 
         props.onExpand && props.onExpand(event);
-    }
+    };
 
     const collapse = (event) => {
         if (!props.onToggle) {
@@ -42,7 +42,13 @@ export const Panel = React.forwardRef((props, ref) => {
         }
 
         props.onCollapse && props.onCollapse(event);
-    }
+    };
+
+    React.useImperativeHandle(ref, () => ({
+        props,
+        getElement: () => elementRef.current,
+        getContent: () => contentRef.current
+    }));
 
     React.useEffect(() => {
         ObjectUtils.combinedRefs(elementRef, ref);
@@ -64,17 +70,21 @@ export const Panel = React.forwardRef((props, ref) => {
                     {IconUtils.getJSXIcon(toggleIcon, undefined, { props, collapsed })}
                     <Ripple />
                 </button>
-            )
+            );
         }
 
         return null;
-    }
+    };
 
     const createHeader = () => {
         const header = ObjectUtils.getJSXElement(props.header, props);
         const icons = ObjectUtils.getJSXElement(props.icons, props);
         const togglerElement = createToggleIcon();
-        const titleElement = <span className="p-panel-title" id={headerId}>{header}</span>;
+        const titleElement = (
+            <span className="p-panel-title" id={headerId}>
+                {header}
+            </span>
+        );
         const iconsElement = (
             <div className="p-panel-icons">
                 {icons}
@@ -105,30 +115,31 @@ export const Panel = React.forwardRef((props, ref) => {
             };
 
             return ObjectUtils.getJSXElement(props.headerTemplate, defaultContentOptions);
-        }
-        else if (props.header || props.toggleable) {
+        } else if (props.header || props.toggleable) {
             return content;
         }
 
         return null;
-    }
+    };
 
     const createContent = () => {
         return (
             <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={props.transitionOptions}>
                 <div ref={contentRef} className="p-toggleable-content" aria-hidden={collapsed} role="region" id={contentId} aria-labelledby={headerId}>
-                    <div className="p-panel-content">
-                        {props.children}
-                    </div>
+                    <div className="p-panel-content">{props.children}</div>
                 </div>
             </CSSTransition>
-        )
-    }
+        );
+    };
 
     const otherProps = ObjectUtils.findDiffKeys(props, Panel.defaultProps);
-    const className = classNames('p-panel p-component', {
-        'p-panel-toggleable': props.toggleable
-    }, props.className);
+    const className = classNames(
+        'p-panel p-component',
+        {
+            'p-panel-toggleable': props.toggleable
+        },
+        props.className
+    );
     const header = createHeader();
     const content = createContent();
 
@@ -137,7 +148,7 @@ export const Panel = React.forwardRef((props, ref) => {
             {header}
             {content}
         </div>
-    )
+    );
 });
 
 Panel.displayName = 'Panel';
@@ -157,4 +168,4 @@ Panel.defaultProps = {
     onExpand: null,
     onCollapse: null,
     onToggle: null
-}
+};

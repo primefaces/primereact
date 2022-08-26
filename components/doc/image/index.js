@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const ImageDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -31,7 +31,7 @@ export class ImageDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -53,7 +53,7 @@ const ImageDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -75,7 +75,7 @@ const ImageDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -100,48 +100,51 @@ const ImageDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Image } from 'primereact/image';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/image/image.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Image is used as the native <i>img</i> element and supports all properties that the native element has.</p>
+                    <p>
+                        Image is used as the native <i>img</i> element and supports all properties that the native element has.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Image src="image1.png" alt="Image Text" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Preview</h5>
                     <p>Preview mode displays a modal layer when the image is clicked that provides transformation options such as rotating and zooming.</p>
 
                     <h5>Templating</h5>
-                    <p>An eye icon is displayed by default when the image is hovered in preview mode. Use the<i>template</i>prop for custom content.</p>
+                    <p>
+                        An eye icon is displayed by default when the image is hovered in preview mode. Use the<i>template</i>prop for custom content.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Image src="image1.png" template="Preview Content" alt="Image Text" />
 `}
-</CodeHighlight>
-
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <p>Image passes any valid attribute to the underlying img element, additional attribute is the following.</p>
@@ -206,12 +209,19 @@ import { Image } from 'primereact/image';
                                     <td>-</td>
                                     <td>Triggered when the preview overlay is hidden.</td>
                                 </tr>
+                                <tr>
+                                    <td>onError</td>
+                                    <td>event: Browser event</td>
+                                    <td>Triggered when the image fails to load.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -255,19 +265,72 @@ import { Image } from 'primereact/image';
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            The preview button is a native <i>button</i> element with an <i>aria-label</i> that refers to the <i>aria.zoomImage</i> property of the <Link href="/locale">locale</Link> API by default, with <i>previewButtonProps</i>
+                            you may use your own aria roles and attributes as any valid attribute is passed to the button element implicitly.
+                        </p>
+
+                        <p>
+                            When preview is active, <i>dialog</i> role with <i>aria-modal</i> is applied to the overlay image container.
+                        </p>
+
+                        <p>
+                            Button controls use <i>aria.rotateRight</i>, <i>aria.rotateLeft</i>, <i>aria.zoomIn</i>, <i>aria.zoomOut</i> and <i>aria.close</i> from the <Link href="/locale">locale</Link> API as <i>aria-label</i>.
+                        </p>
+
+                        <h6>ButtonBar Keyboard Support</h6>
+                        <p>When preview is activated, close button receives the initial focus.</p>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus through button bar.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Activates the button.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Activates the button.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>esc</i>
+                                        </td>
+                                        <td>Closes the image preview.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
+
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'ImageDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'ImageDemo', sources: sources })}
             </TabView>
         </div>
     );
-})
+});
 
 export default ImageDoc;

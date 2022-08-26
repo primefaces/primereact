@@ -7,7 +7,9 @@ export const DeferredContent = React.forwardRef((props, ref) => {
     const elementRef = React.useRef(null);
 
     const [bindScrollListener, unbindScrollListener] = useEventListener({
-        target: 'window', type: 'scroll', listener: () => {
+        target: 'window',
+        type: 'scroll',
+        listener: () => {
             if (shouldLoad()) {
                 load();
                 unbindScrollListener();
@@ -18,19 +20,23 @@ export const DeferredContent = React.forwardRef((props, ref) => {
     const shouldLoad = () => {
         if (loadedState) {
             return false;
-        }
-        else {
+        } else {
             const rect = elementRef.current.getBoundingClientRect();
             const winHeight = document.documentElement.clientHeight;
 
-            return (winHeight >= rect.top);
+            return winHeight >= rect.top;
         }
-    }
+    };
 
     const load = (event) => {
         setLoadedState(true);
         props.onLoad && props.onLoad(event);
-    }
+    };
+
+    React.useImperativeHandle(ref, () => ({
+        props,
+        getElement: () => elementRef.current
+    }));
 
     useMountEffect(() => {
         if (!loadedState) {
@@ -44,11 +50,11 @@ export const DeferredContent = React.forwardRef((props, ref) => {
         <div ref={elementRef} {...otherProps}>
             {loadedState && props.children}
         </div>
-    )
+    );
 });
 
 DeferredContent.displayName = 'DeferredContent';
 DeferredContent.defaultProps = {
     __TYPE: 'DeferredContent',
     onload: null
-}
+};
