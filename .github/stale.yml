@@ -3,6 +3,8 @@
 daysUntilStale: 90
 # Number of days of inactivity before a stale issue is closed
 daysUntilClose: 7
+# Set to true to ignore issues in a milestone (defaults to false)
+exemptMilestones: true
 # Issues with these labels will never be considered stale
 exemptLabels:
     - 'Core Team'
