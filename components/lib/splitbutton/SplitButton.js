@@ -100,6 +100,10 @@ export const SplitButton = React.memo(
             return null;
         };
 
+        if (props.visible === false) {
+            return null;
+        }
+
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ObjectUtils.findDiffKeys(props, SplitButton.defaultProps);
         const className = classNames('p-splitbutton p-component', props.className, { 'p-disabled': props.disabled });

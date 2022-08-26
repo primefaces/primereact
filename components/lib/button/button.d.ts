@@ -13,6 +13,7 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     disabled?: boolean;
+    visible?: boolean;
     loading?: boolean;
     loadingIcon?: IconType<ButtonProps>;
     children?: React.ReactNode;

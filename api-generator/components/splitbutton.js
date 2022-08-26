@@ -42,6 +42,12 @@ const SplitButtonProps = [
         description: 'When present, it specifies that the component should be disabled.'
     },
     {
+        name: 'visible',
+        type: 'boolean',
+        default: 'true',
+        description: 'When present, it specifies that the element should be visible.'
+    },
+    {
         name: 'style',
         type: 'string',
         default: 'null',

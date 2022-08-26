@@ -11,6 +11,10 @@ export const Button = React.memo(
             ObjectUtils.combinedRefs(elementRef, ref);
         }, [elementRef, ref]);
 
+        if (props.visible === false) {
+            return null;
+        }
+
         const createIcon = () => {
             const icon = props.loading ? props.loadingIcon : props.icon;
             const className = classNames('p-button-icon p-c', {
