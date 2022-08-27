@@ -78,7 +78,7 @@ export const Menubar = React.memo(
         };
 
         const createMenuButton = () => {
-            if (props.model.length < 1) {
+            if (props.model && props.model.length < 1) {
                 return null;
             }
             /* eslint-disable */
