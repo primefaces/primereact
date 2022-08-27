@@ -78,6 +78,9 @@ export const Menubar = React.memo(
         };
 
         const createMenuButton = () => {
+            if (props.model && props.model.length < 1) {
+                return null;
+            }
             /* eslint-disable */
             const button = (
                 <a ref={menuButtonRef} href={'#'} role="button" tabIndex={0} className="p-menubar-button" onClick={toggle}>
