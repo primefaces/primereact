@@ -85,7 +85,9 @@ export const ConfirmPopup = React.memo(
             setVisibleState(false);
             OverlayService.off('overlay-click', overlayEventListener.current);
             overlayEventListener.current = null;
-            callbackFromProp('onHide', result);
+            if (result) {
+                callbackFromProp('onHide', result);
+            }
         };
 
         const onEnter = () => {

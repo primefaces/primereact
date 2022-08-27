@@ -117,7 +117,11 @@ export default class ObjectUtils {
     }
 
     static getPropValue(obj, ...params) {
-        return this.isFunction(obj) ? obj(...params) : obj;
+        let methodParams = params;
+        if (params && params.length === 1) {
+            methodParams = params[0];
+        }
+        return this.isFunction(obj) ? obj(...methodParams) : obj;
     }
 
     static getRefElement(ref) {
