@@ -12,7 +12,7 @@ interface SelectButtonChangeTargetOptions<TOption> {
 
 interface SelectButtonChangeParams<TOption> {
     originalEvent: React.SyntheticEvent;
-    value: any;
+    value: TOption;
     stopPropagation(): void;
     preventDefault(): void;
     target: SelectButtonChangeTargetOptions<TOption>;
