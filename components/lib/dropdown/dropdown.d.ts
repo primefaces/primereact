@@ -4,34 +4,34 @@ import { CSSTransitionProps } from '../csstransition';
 import { VirtualScrollerProps } from '../virtualscroller';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 
-type DropdownOptionGroupTemplateType<TOption> = React.ReactNode | ((option: TOption, index: number) => React.ReactNode);
+type DropdownOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
-type DropdownValueTemplateType<TOption> = React.ReactNode | ((option: TOption, props: DropdownProps<TOption>) => React.ReactNode);
+type DropdownValueTemplateType = React.ReactNode | ((option: any, props: DropdownProps) => React.ReactNode);
 
-type DropdownItemTemplateType<TOption> = React.ReactNode | ((option: TOption) => React.ReactNode);
+type DropdownItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
 type DropdownFilterTemplateType = React.ReactNode | ((options: DropdownFilterOptions) => React.ReactNode);
 
-type DropdownEmptyMessageType<TOption> = React.ReactNode | ((props: DropdownProps<TOption>) => React.ReactNode);
+type DropdownEmptyMessageType = React.ReactNode | ((props: DropdownProps) => React.ReactNode);
 
-type DropdownEmptyFilterMessageType<TOption> = React.ReactNode | ((props: DropdownProps<TOption>) => React.ReactNode);
+type DropdownEmptyFilterMessageType = React.ReactNode | ((props: DropdownProps) => React.ReactNode);
 
-type DropdownOptionDisabledType<TOption> = string | ((option: TOption) => boolean);
+type DropdownOptionDisabledType = string | ((option: any) => boolean);
 
 type DropdownAppendToType = 'self' | HTMLElement | undefined | null;
 
-interface DropdownChangeTargetOptions<TOption> {
+interface DropdownChangeTargetOptions {
     name: string;
     id: string;
-    value: TOption;
+    value: any;
 }
 
-interface DropdownChangeParams<TOption> {
+interface DropdownChangeParams {
     originalEvent: React.SyntheticEvent;
     value: any;
     stopPropagation(): void;
     preventDefault(): void;
-    target: DropdownChangeTargetOptions<TOption>;
+    target: DropdownChangeTargetOptions;
 }
 
 interface DropdownFilterParams {
@@ -44,21 +44,21 @@ interface DropdownFilterOptions {
     reset?: () => void;
 }
 
-export interface DropdownProps<TOption> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
     name?: string;
     value?: any;
-    options?: SelectItemOptionsType<TOption>;
+    options?: SelectItemOptionsType;
     optionLabel?: string;
     optionValue?: string;
-    optionDisabled?: DropdownOptionDisabledType<TOption>;
+    optionDisabled?: DropdownOptionDisabledType;
     optionGroupLabel?: string;
     optionGroupChildren?: string;
-    optionGroupTemplate?: DropdownOptionGroupTemplateType<TOption>;
-    valueTemplate?: DropdownValueTemplateType<TOption>;
+    optionGroupTemplate?: DropdownOptionGroupTemplateType;
+    valueTemplate?: DropdownValueTemplateType;
     filterTemplate?: DropdownFilterTemplateType;
-    itemTemplate?: DropdownItemTemplateType<TOption>;
+    itemTemplate?: DropdownItemTemplateType;
     style?: object;
     className?: string;
     virtualScrollerOptions?: VirtualScrollerProps;
@@ -68,8 +68,8 @@ export interface DropdownProps<TOption> extends Omit<React.DetailedHTMLProps<Rea
     filterMatchMode?: string;
     filterPlaceholder?: string;
     filterLocale?: string;
-    emptyMessage?: DropdownEmptyMessageType<TOption>;
-    emptyFilterMessage?: DropdownEmptyFilterMessageType<TOption>;
+    emptyMessage?: DropdownEmptyMessageType;
+    emptyFilterMessage?: DropdownEmptyFilterMessageType;
     editable?: boolean;
     placeholder?: string;
     required?: boolean;
@@ -93,7 +93,7 @@ export interface DropdownProps<TOption> extends Omit<React.DetailedHTMLProps<Rea
     transitionOptions?: CSSTransitionProps;
     dropdownIcon?: string;
     showOnFocus?: boolean;
-    onChange?(e: DropdownChangeParams<TOption>): void;
+    onChange?(e: DropdownChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
@@ -104,7 +104,7 @@ export interface DropdownProps<TOption> extends Omit<React.DetailedHTMLProps<Rea
     children?: React.ReactNode;
 }
 
-export declare class Dropdown<TOption> extends React.Component<DropdownProps<TOption>, any> {
+export declare class Dropdown extends React.Component<DropdownProps, any> {
     public getElement(): HTMLDivElement;
     public getInput(): HTMLInputElement;
     public getFocusInput(): HTMLInputElement;

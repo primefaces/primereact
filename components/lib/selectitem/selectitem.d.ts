@@ -1,6 +1,6 @@
 import { IconType } from '../utils';
 
-export type SelectItemOptionsType<TOption> = SelectItem[] | TOption[];
+export type SelectItemOptionsType = SelectItem[] | any[];
 
 export interface SelectItem {
     label?: string;
