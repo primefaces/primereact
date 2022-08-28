@@ -2,31 +2,31 @@ import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 
-type CascadeSelectItemTemplateType<TOption> = React.ReactNode | ((option: TOption) => React.ReactNode);
+type CascadeSelectItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
 type CascadeSelectAppendToType = 'self' | HTMLElement | undefined | null;
 
-interface CascadeSelectChangeParams<TOption> {
+interface CascadeSelectChangeParams {
     originalEvent: React.SyntheticEvent;
-    value: TOption;
+    value: any;
 }
 
-interface CascadeSelectGroupChangeParams<TOption> extends CascadeSelectChangeParams<TOption> {}
+interface CascadeSelectGroupChangeParams extends CascadeSelectChangeParams {}
 
-export interface CascadeSelectProps<TOption> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLInputElement>;
     style?: object;
     className?: string;
     value?: any;
     name?: string;
-    options?: SelectItemOptionsType<TOption>;
+    options?: SelectItemOptionsType;
     optionLabel?: string;
     optionValue?: string;
     optionGroupLabel?: string;
     optionGroupChildren?: string[];
     placeholder?: string;
-    itemTemplate?: CascadeSelectItemTemplateType<TOption>;
+    itemTemplate?: CascadeSelectItemTemplateType;
     disabled?: boolean;
     dataKey?: string;
     inputId?: string;
@@ -35,8 +35,8 @@ export interface CascadeSelectProps<TOption> extends Omit<React.DetailedHTMLProp
     appendTo?: CascadeSelectAppendToType;
     transitionOptions?: CSSTransitionProps;
     dropdownIcon?: string;
-    onChange?(e: CascadeSelectChangeParams<TOption>): void;
-    onGroupChange?(e: CascadeSelectGroupChangeParams<TOption>): void;
+    onChange?(e: CascadeSelectChangeParams): void;
+    onGroupChange?(e: CascadeSelectGroupChangeParams): void;
     onBeforeShow?(): void;
     onBeforeHide?(): void;
     onShow?(): void;
@@ -44,7 +44,7 @@ export interface CascadeSelectProps<TOption> extends Omit<React.DetailedHTMLProp
     children?: React.ReactNode;
 }
 
-export declare class CascadeSelect<TOption> extends React.Component<CascadeSelectProps<TOption>, any> {
+export declare class CascadeSelect extends React.Component<CascadeSelectProps, any> {
     public getElement(): HTMLDivElement;
     public getInput(): HTMLInputElement;
     public getOverlay(): HTMLElement;

@@ -5,15 +5,15 @@ import { IconType } from '../utils';
 import { VirtualScrollerProps } from '../virtualscroller';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 
-type MultiSelectOptionGroupTemplateType<TOption> = React.ReactNode | ((option: TOption, index: number) => React.ReactNode);
+type MultiSelectOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
-type MultiSelectItemTemplateType<TOption> = React.ReactNode | ((option: TOption) => React.ReactNode);
+type MultiSelectItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
-type MultiSelectSelectedItemTemplateType<TOption> = React.ReactNode | ((value: TOption) => React.ReactNode);
+type MultiSelectSelectedItemTemplateType = React.ReactNode | ((value: any) => React.ReactNode);
 
 type MultiSelectFilterTemplateType = React.ReactNode | ((options: MultiSelectFilterOptions) => React.ReactNode);
 
-type MultiSelectEmptyFilterMessageType<TOption> = React.ReactNode | ((props: MultiSelectProps<TOption>) => React.ReactNode);
+type MultiSelectEmptyFilterMessageType = React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
 
 type MultiSelectDisplayType = 'comma' | 'chip';
 
@@ -22,7 +22,7 @@ interface MultiSelectHeaderCheckboxChangeParams {
     checked: boolean;
 }
 
-interface MultiSelectPanelHeaderTemplateParams<TOption> {
+interface MultiSelectPanelHeaderTemplateParams {
     className: string;
     checkboxElement: HTMLElement;
     checked: boolean;
@@ -33,29 +33,29 @@ interface MultiSelectPanelHeaderTemplateParams<TOption> {
     closeIconClassName: string;
     onCloseClick(event: React.MouseEvent<HTMLElement>): void;
     element: JSX.Element;
-    props: MultiSelectProps<TOption>;
+    props: MultiSelectProps;
 }
 
-type MultiSelectPanelHeaderTemplateType<TOption> = React.ReactNode | ((e: MultiSelectPanelHeaderTemplateParams<TOption>) => React.ReactNode);
+type MultiSelectPanelHeaderTemplateType = React.ReactNode | ((e: MultiSelectPanelHeaderTemplateParams) => React.ReactNode);
 
-type MultiSelectPanelFooterTemplateType<TOption> = React.ReactNode | ((props: MultiSelectProps<TOption>, hide: () => void) => React.ReactNode);
+type MultiSelectPanelFooterTemplateType = React.ReactNode | ((props: MultiSelectProps, hide: () => void) => React.ReactNode);
 
-type MultiSelectOptionDisabledType<TOption> = string | ((option: TOption) => boolean);
+type MultiSelectOptionDisabledType = string | ((option: any) => boolean);
 
 type MultiSelectAppendToType = 'self' | HTMLElement | undefined | null;
 
-interface MultiSelectChangeTargetOptions<TOption> {
+interface MultiSelectChangeTargetOptions {
     name: string;
     id: string;
-    value: TOption;
+    value: any;
 }
 
-interface MultiSelectChangeParams<TOption> {
+interface MultiSelectChangeParams {
     originalEvent: React.SyntheticEvent;
-    value: TOption;
+    value: any;
     stopPropagation(): void;
     preventDefault(): void;
-    target: MultiSelectChangeTargetOptions<TOption>;
+    target: MultiSelectChangeTargetOptions;
 }
 
 interface MultiSelectFilterParams {
@@ -73,18 +73,18 @@ interface MultiSelectFilterOptions {
     reset?: () => void;
 }
 
-export interface MultiSelectProps<TOption> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
     name?: string;
     value?: any;
-    options?: SelectItemOptionsType<TOption>;
+    options?: SelectItemOptionsType;
     optionLabel?: string;
     optionValue?: string;
-    optionDisabled?: MultiSelectOptionDisabledType<TOption>;
+    optionDisabled?: MultiSelectOptionDisabledType;
     optionGroupLabel?: string;
     optionGroupChildren?: string;
-    optionGroupTemplate?: MultiSelectOptionGroupTemplateType<TOption>;
+    optionGroupTemplate?: MultiSelectOptionGroupTemplateType;
     display?: MultiSelectDisplayType;
     style?: object;
     className?: string;
@@ -101,7 +101,7 @@ export interface MultiSelectProps<TOption> extends Omit<React.DetailedHTMLProps<
     filterMatchMode?: string;
     filterPlaceholder?: string;
     filterLocale?: string;
-    emptyFilterMessage?: MultiSelectEmptyFilterMessageType<TOption>;
+    emptyFilterMessage?: MultiSelectEmptyFilterMessageType;
     resetFilterOnHide?: boolean;
     tabIndex?: number;
     dataKey?: string;
@@ -113,17 +113,17 @@ export interface MultiSelectProps<TOption> extends Omit<React.DetailedHTMLProps<
     selectionLimit?: number;
     selectedItemsLabel?: string;
     ariaLabelledBy?: string;
-    itemTemplate?: MultiSelectItemTemplateType<TOption>;
+    itemTemplate?: MultiSelectItemTemplateType;
     filterTemplate?: MultiSelectFilterTemplateType;
-    selectedItemTemplate?: MultiSelectSelectedItemTemplateType<TOption>;
-    panelHeaderTemplate?: MultiSelectPanelHeaderTemplateType<TOption>;
-    panelFooterTemplate?: MultiSelectPanelFooterTemplateType<TOption>;
+    selectedItemTemplate?: MultiSelectSelectedItemTemplateType;
+    panelHeaderTemplate?: MultiSelectPanelHeaderTemplateType;
+    panelFooterTemplate?: MultiSelectPanelFooterTemplateType;
     transitionOptions?: CSSTransitionProps;
-    dropdownIcon?: IconType<MultiSelectProps<TOption>>;
-    removeIcon?: IconType<MultiSelectProps<TOption>>;
+    dropdownIcon?: IconType<MultiSelectProps>;
+    removeIcon?: IconType<MultiSelectProps>;
     showSelectAll?: boolean;
     selectAll?: boolean;
-    onChange?(e: MultiSelectChangeParams<TOption>): void;
+    onChange?(e: MultiSelectChangeParams): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onShow?(): void;
@@ -133,7 +133,7 @@ export interface MultiSelectProps<TOption> extends Omit<React.DetailedHTMLProps<
     children?: React.ReactNode;
 }
 
-export declare class MultiSelect<TOption> extends React.Component<MultiSelectProps<TOption>, any> {
+export declare class MultiSelect extends React.Component<MultiSelectProps, any> {
     public show(): void;
     public hide(): void;
     public getElement(): HTMLDivElement;
