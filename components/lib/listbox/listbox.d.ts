@@ -3,31 +3,31 @@ import { SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { VirtualScrollerProps, VirtualScroller } from '../virtualscroller';
 
-type ListBoxOptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
+type ListBoxOptionGroupTemplateType<TOption> = React.ReactNode | ((option: TOption, index: number) => React.ReactNode);
 
-type ListBoxItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
+type ListBoxItemTemplateType<TOption> = React.ReactNode | ((option: TOption) => React.ReactNode);
 
 type ListBoxFilterTemplateType = React.ReactNode | ((options: ListBoxFilterOptions) => React.ReactNode);
 
-type ListBoxOptionDisabledType = string | ((option: any) => boolean);
+type ListBoxOptionDisabledType<TOption> = string | ((option: TOption) => boolean);
 
-interface ListBoxChangeTargetOptions {
+interface ListBoxChangeTargetOptions<TOption> {
     name: string;
     id: string;
-    value: any;
+    value: TOption;
 }
 
-interface ListBoxChangeParams {
+interface ListBoxChangeParams<TOption> {
     originalEvent: React.SyntheticEvent;
-    value: any;
+    value: TOption;
     stopPropagation(): void;
     preventDefault(): void;
-    target: ListBoxChangeTargetOptions;
+    target: ListBoxChangeTargetOptions<TOption>;
 }
 
-interface ListBoxFilterValueChangeParams {
+interface ListBoxFilterValueChangeParams<TOption> {
     originalEvent: React.SyntheticEvent;
-    value: any;
+    value: TOption;
 }
 
 interface ListBoxFilterOptions {
@@ -35,16 +35,16 @@ interface ListBoxFilterOptions {
     reset?: () => void;
 }
 
-export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface ListBoxProps<TOption> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     value?: any;
-    options?: SelectItemOptionsType;
+    options?: SelectItemOptionsType<TOption>;
     optionLabel?: string;
     optionValue?: string;
-    optionDisabled?: ListBoxOptionDisabledType;
+    optionDisabled?: ListBoxOptionDisabledType<TOption>;
     optionGroupLabel?: string;
     optionGroupChildren?: string;
-    optionGroupTemplate?: ListBoxOptionGroupTemplateType;
-    itemTemplate?: ListBoxItemTemplateType;
+    optionGroupTemplate?: ListBoxOptionGroupTemplateType<TOption>;
+    itemTemplate?: ListBoxItemTemplateType<TOption>;
     filterTemplate?: ListBoxFilterTemplateType;
     listStyle?: object;
     listClassName?: string;
@@ -63,12 +63,12 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onChange?(e: ListBoxChangeParams): void;
-    onFilterValueChange?(e: ListBoxFilterValueChangeParams): void;
+    onChange?(e: ListBoxChangeParams<TOption>): void;
+    onFilterValueChange?(e: ListBoxFilterValueChangeParams<TOption>): void;
     children?: React.ReactNode;
 }
 
-export declare class ListBox extends React.Component<ListBoxProps, any> {
+export declare class ListBox<TOption> extends React.Component<ListBoxProps<TOption>, any> {
     public getElement(): HTMLDivElement;
     public getVirtualScroller(): VirtualScroller;
 }
