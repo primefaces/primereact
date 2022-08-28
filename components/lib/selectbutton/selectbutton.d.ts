@@ -1,29 +1,29 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/tooltipoptions';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
+import TooltipOptions from '../tooltip/tooltipoptions';
 
-type SelectButtonOptionDisabledType = string | ((option: any) => boolean);
+type SelectButtonOptionDisabledType<TOption> = string | ((option: TOption) => boolean);
 
-interface SelectButtonChangeTargetOptions {
+interface SelectButtonChangeTargetOptions<TOption> {
     name: string;
     id: string;
-    value: any;
+    value: TOption;
 }
 
-interface SelectButtonChangeParams {
+interface SelectButtonChangeParams<TOption> {
     originalEvent: React.SyntheticEvent;
-    value: any;
+    value: TOption;
     stopPropagation(): void;
     preventDefault(): void;
-    target: SelectButtonChangeTargetOptions;
+    target: SelectButtonChangeTargetOptions<TOption>;
 }
 
-export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'unselectable' | 'onChange' | 'ref'> {
-    value?: any;
-    options?: SelectItemOptionsType;
+export interface SelectButtonProps<TOption> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'value' | 'unselectable' | 'onChange' | 'ref'> {
+    value?: string | number | ReadonlyArray<string> | ReadonlyArray<number> | TOption | ReadonlyArray<TOption> | undefined;
+    options?: SelectItemOptionsType<TOption>;
     optionLabel?: string;
     optionValue?: string;
-    optionDisabled?: SelectButtonOptionDisabledType;
+    optionDisabled?: SelectButtonOptionDisabledType<TOption>;
     tabIndex?: number;
     multiple?: boolean;
     unselectable?: boolean;
@@ -32,11 +32,11 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    itemTemplate?(option: any): React.ReactNode;
-    onChange?(e: SelectButtonChangeParams): void;
+    itemTemplate?(option: TOption): React.ReactNode;
+    onChange?(e: SelectButtonChangeParams<TOption>): void;
     children?: React.ReactNode;
 }
 
-export declare class SelectButton extends React.Component<SelectButtonProps, any> {
+export declare class SelectButton<TOption> extends React.Component<SelectButtonProps<TOption>, any> {
     public getElement(): HTMLDivElement;
 }
