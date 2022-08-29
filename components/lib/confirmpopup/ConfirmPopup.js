@@ -19,7 +19,7 @@ export const confirmPopup = (props = {}) => {
         OverlayService.emit('confirm-popup', { visible: false });
     };
 
-    return [show, hide];
+    return { show, hide };
 };
 
 export const ConfirmPopup = React.memo(
