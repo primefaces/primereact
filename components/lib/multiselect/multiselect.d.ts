@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { SelectItemOptionsType } from '../selectitem/selectitem';
+import { NestedKeyOf, SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { IconType } from '../utils';
 import { VirtualScrollerProps } from '../virtualscroller';
@@ -94,10 +94,6 @@ interface MultiSelectFilterOptions {
     filter?: (event?: KeyboardEvent) => void;
     reset?: () => void;
 }
-
-type NestedKeyOf<ObjectType> = {
-    [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}` : `${Key}`;
-}[keyof ObjectType & (string | number)];
 
 export interface MultiSelectProps<TOption, TValue = undefined, TGroupLabel = undefined, TGroupChildren = undefined> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'value' | 'onChange' | 'ref'> {
     id?: string;

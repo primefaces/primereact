@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SelectItemOptionsType } from '../selectitem/selectitem';
+import { NestedKeyOf, SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
 import { VirtualScrollerProps, VirtualScroller } from '../virtualscroller';
 
@@ -78,12 +78,10 @@ interface ListBoxFilterOptions {
     filter?: (event?: KeyboardEvent) => void;
     reset?: () => void;
 }
-type NestedKeyOf<ObjectType> = {
-    [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}` : `${Key}`;
-}[keyof ObjectType & (string | number)];
+
 export interface ListBoxProps<TOption, TValue = undefined, TMultiple = undefined, TGroupLabel = undefined, TGroupChildren = undefined>
     extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'multiple' | 'value' | 'onChange' | 'ref'> {
-    value?: ListBoxValueType<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren>;
+    value?: ReadonlyArray<string> | ListBoxValueType<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren>;
     options?: SelectItemOptionsType<TOption>;
     optionLabel?: NestedKeyOf<TOption> | Omit<NestedKeyOf<TOption>, string>;
     optionValue?: TValue | Omit<TValue, string>;

@@ -1,3 +1,4 @@
+import { NestedKeyOf } from './../selectitem/selectitem.d';
 import * as React from 'react';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 import TooltipOptions from '../tooltip/tooltipoptions';
@@ -33,10 +34,6 @@ interface SelectButtonChangeParams<TOption, TValue, TMultiple> {
     preventDefault(): void;
     target: SelectButtonChangeTargetOptions<TOption>;
 }
-
-type NestedKeyOf<ObjectType> = {
-    [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}` : `${Key}`;
-}[keyof ObjectType & (string | number)];
 
 export interface SelectButtonProps<TOption, TValue = undefined, TMultiple = undefined> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'value' | 'multiple' | 'unselectable' | 'onChange' | 'ref'> {
     value?: string | number | ReadonlyArray<string> | ReadonlyArray<number> | SelectButtonValue<TOption, TValue, TMultiple> | ReadonlyArray<TOption> | undefined;
