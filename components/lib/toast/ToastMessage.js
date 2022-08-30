@@ -5,7 +5,8 @@ import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const ToastMessage = React.memo(
     React.forwardRef((props, ref) => {
-        const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle } = props.message;
+        const messageInfo = props.messageInfo;
+        const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle } = messageInfo.message;
 
         const [clearTimer] = useTimeout(
             () => {
@@ -17,12 +18,12 @@ export const ToastMessage = React.memo(
 
         const onClose = () => {
             clearTimer();
-            props.onClose && props.onClose(props.message);
+            props.onClose && props.onClose(messageInfo);
         };
 
         const onClick = (event) => {
             if (props.onClick && !(DomHandler.hasClass(event.target, 'p-toast-icon-close') || DomHandler.hasClass(event.target, 'p-toast-icon-close-icon'))) {
-                props.onClick(props.message);
+                props.onClick(messageInfo.message);
             }
         };
 
@@ -40,8 +41,8 @@ export const ToastMessage = React.memo(
         };
 
         const createMessage = () => {
-            if (props.message) {
-                const contentEl = ObjectUtils.getJSXElement(content, { ...props, onClose });
+            if (messageInfo) {
+                const contentEl = ObjectUtils.getJSXElement(content, { message: messageInfo.message, onClick, onClose });
                 const iconClassName = classNames('p-toast-message-icon pi', {
                     'pi-info-circle': severity === 'info',
                     'pi-exclamation-triangle': severity === 'warn',

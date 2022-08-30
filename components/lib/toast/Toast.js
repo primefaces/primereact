@@ -19,13 +19,16 @@ export const Toast = React.memo(
                 let messages;
 
                 if (Array.isArray(value)) {
-                    for (let i = 0; i < value.length; i++) {
-                        value[i].id = messageIdx++;
-                        messages = [...messagesState, ...value];
-                    }
+                    const multipleMessages = value.reduce((acc, message) => {
+                        acc.push({ _pId: messageIdx++, message });
+
+                        return acc;
+                    }, []);
+
+                    messages = messagesState ? [...messagesState, ...multipleMessages] : multipleMessages;
                 } else {
-                    value.id = messageIdx++;
-                    messages = messagesState ? [...messagesState, value] : [value];
+                    const message = { _pId: messageIdx++, message: value };
+                    messages = messagesState ? [...messagesState, message] : [message];
                 }
 
                 messagesState.length === 0 && ZIndexUtils.set('toast', containerRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['toast']);
@@ -44,11 +47,11 @@ export const Toast = React.memo(
             setMessagesState(replaced);
         };
 
-        const onClose = (message) => {
-            const messages = messagesState.filter((msg) => msg.id !== message.id);
+        const onClose = (messageInfo) => {
+            const messages = messagesState.filter((msg) => msg._pId !== messageInfo._pId);
             setMessagesState(messages);
 
-            props.onRemove && props.onRemove(message);
+            props.onRemove && props.onRemove(messageInfo.message);
         };
 
         const onEntered = () => {
@@ -80,12 +83,12 @@ export const Toast = React.memo(
             return (
                 <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>
                     <TransitionGroup>
-                        {messagesState.map((message) => {
+                        {messagesState.map((messageInfo) => {
                             const messageRef = React.createRef();
 
                             return (
-                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
-                                    <ToastMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} />
+                                <CSSTransition nodeRef={messageRef} key={messageInfo._pId} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
+                                    <ToastMessage ref={messageRef} messageInfo={messageInfo} onClick={props.onClick} onClose={onClose} />
                                 </CSSTransition>
                             );
                         })}

@@ -19,7 +19,7 @@ export const confirmDialog = (props = {}) => {
         OverlayService.emit('confirm-dialog', { visible: false });
     };
 
-    return [show, hide];
+    return { show, hide };
 };
 
 export const ConfirmDialog = React.memo(
