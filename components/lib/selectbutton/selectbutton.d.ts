@@ -10,23 +10,25 @@ interface SelectButtonChangeTargetOptions<TOption> {
     value: TOption;
 }
 
+type SelectButtonValue<TOption, TValue, TMultiple> = TMultiple extends undefined
+    ? TValue extends undefined
+        ? TOption extends { value: any }
+            ? TOption['value']
+            : TOption
+        : TValue extends keyof TOption
+        ? TOption[TValue]
+        : any
+    : TValue extends undefined
+    ? TOption extends { value: any }
+        ? TOption['value'][]
+        : TOption[]
+    : TValue extends keyof TOption
+    ? TOption[TValue][]
+    : any[];
+
 interface SelectButtonChangeParams<TOption, TValue, TMultiple> {
     originalEvent: React.SyntheticEvent;
-    value: TMultiple extends undefined
-        ? TValue extends undefined
-            ? TOption extends { value: any }
-                ? TOption['value']
-                : TOption
-            : TValue extends keyof TOption
-            ? TOption[TValue]
-            : any
-        : TValue extends undefined
-        ? TOption extends { value: any }
-            ? TOption['value'][]
-            : TOption[]
-        : TValue extends keyof TOption
-        ? TOption[TValue][]
-        : any[];
+    value: SelectButtonValue<TOption, TValue, TMultiple>;
     stopPropagation(): void;
     preventDefault(): void;
     target: SelectButtonChangeTargetOptions<TOption>;
@@ -37,7 +39,7 @@ type NestedKeyOf<ObjectType> = {
 }[keyof ObjectType & (string | number)];
 
 export interface SelectButtonProps<TOption, TValue = undefined, TMultiple = undefined> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'value' | 'multiple' | 'unselectable' | 'onChange' | 'ref'> {
-    value?: string | number | ReadonlyArray<string> | ReadonlyArray<number> | TOption | ReadonlyArray<TOption> | undefined;
+    value?: string | number | ReadonlyArray<string> | ReadonlyArray<number> | SelectButtonValue<TOption, TValue, TMultiple> | ReadonlyArray<TOption> | undefined;
     options?: SelectItemOptionsType<TOption>;
     optionLabel?: NestedKeyOf<TOption> | Omit<NestedKeyOf<TOption>, string>;
     optionValue?: TValue | Omit<TValue, string>;
@@ -46,7 +48,7 @@ export interface SelectButtonProps<TOption, TValue = undefined, TMultiple = unde
     multiple?: TMultiple;
     unselectable?: boolean;
     disabled?: boolean;
-    dataKey?: string;
+    dataKey?: NestedKeyOf<TOption> | Omit<NestedKeyOf<TOption>, string>;
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;

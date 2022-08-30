@@ -1,8 +1,8 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
-import { VirtualScrollerProps } from '../virtualscroller';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
+import TooltipOptions from '../tooltip/tooltipoptions';
+import { VirtualScrollerProps } from '../virtualscroller';
 
 type DropdownOptionGroupTemplateType<TOption> = React.ReactNode | ((option: TOption, index: number) => React.ReactNode);
 
@@ -20,15 +20,37 @@ type DropdownOptionDisabledType<TOption> = string | ((option: TOption) => boolea
 
 type DropdownAppendToType = 'self' | HTMLElement | undefined | null;
 
+type DropdownValue<TOption, TValue, TGroupLabel, TGroupChildren> = TGroupLabel extends undefined
+    ? TValue extends undefined
+        ? TOption extends { value: any }
+            ? TOption['value']
+            : TOption
+        : TValue extends keyof TOption
+        ? TOption[TValue]
+        : any
+    : TGroupChildren extends keyof TOption
+    ? TValue extends undefined
+        ? TOption[TGroupChildren] extends { value: any }[]
+            ? TOption[TGroupChildren][0]['value']
+            : TOption[TGroupChildren] extends any[]
+            ? TOption[TGroupChildren][0]
+            : any
+        : TOption[TGroupChildren] extends any[]
+        ? TValue extends keyof TOption[TGroupChildren][0]
+            ? TOption[TGroupChildren][0][TValue]
+            : any
+        : any
+    : any;
+
 interface DropdownChangeTargetOptions<TOption> {
     name: string;
     id: string;
     value: TOption;
 }
 
-interface DropdownChangeParams<TOption> {
+interface DropdownChangeParams<TOption, TValue, TGroupLabel, TGroupChildren> {
     originalEvent: React.SyntheticEvent;
-    value: any;
+    value: DropdownValue<TOption, TValue, TGroupLabel, TGroupChildren>;
     stopPropagation(): void;
     preventDefault(): void;
     target: DropdownChangeTargetOptions<TOption>;
@@ -43,18 +65,21 @@ interface DropdownFilterOptions {
     filter?: (event?: KeyboardEvent) => void;
     reset?: () => void;
 }
+type NestedKeyOf<ObjectType> = {
+    [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}` : `${Key}`;
+}[keyof ObjectType & (string | number)];
 
-export interface DropdownProps<TOption> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface DropdownProps<TOption, TValue = undefined, TGroupLabel = undefined, TGroupChildren = undefined> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'value' | 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
     name?: string;
-    value?: any;
+    value?: string | number | DropdownValue<TOption, TValue, TGroupLabel, TGroupChildren> | undefined;
     options?: SelectItemOptionsType<TOption>;
-    optionLabel?: string;
-    optionValue?: string;
+    optionLabel?: NestedKeyOf<TOption> | Omit<NestedKeyOf<TOption>, string>;
+    optionValue?: TValue | Omit<TValue, string>;
     optionDisabled?: DropdownOptionDisabledType<TOption>;
-    optionGroupLabel?: string;
-    optionGroupChildren?: string;
+    optionGroupLabel?: TGroupLabel | Omit<NestedKeyOf<TGroupLabel>, string>;
+    optionGroupChildren?: TGroupChildren | Omit<NestedKeyOf<TGroupChildren>, string>;
     optionGroupTemplate?: DropdownOptionGroupTemplateType<TOption>;
     valueTemplate?: DropdownValueTemplateType<TOption>;
     filterTemplate?: DropdownFilterTemplateType;
@@ -93,7 +118,7 @@ export interface DropdownProps<TOption> extends Omit<React.DetailedHTMLProps<Rea
     transitionOptions?: CSSTransitionProps;
     dropdownIcon?: string;
     showOnFocus?: boolean;
-    onChange?(e: DropdownChangeParams<TOption>): void;
+    onChange?(e: DropdownChangeParams<TOption, TValue, TGroupLabel, TGroupChildren>): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
@@ -104,7 +129,12 @@ export interface DropdownProps<TOption> extends Omit<React.DetailedHTMLProps<Rea
     children?: React.ReactNode;
 }
 
-export declare class Dropdown<TOption> extends React.Component<DropdownProps<TOption>, any> {
+export declare class Dropdown<
+    TOption,
+    TValue extends NestedKeyOf<TOption> | undefined = undefined,
+    TGroupLabel extends NestedKeyOf<TOption> | undefined = undefined,
+    TGroupChildren extends NestedKeyOf<TOption> | undefined = undefined
+> extends React.Component<DropdownProps<TOption, TValue, TGroupLabel, TGroupChildren>, any> {
     public getElement(): HTMLDivElement;
     public getInput(): HTMLInputElement;
     public getFocusInput(): HTMLInputElement;

@@ -11,15 +11,59 @@ type ListBoxFilterTemplateType = React.ReactNode | ((options: ListBoxFilterOptio
 
 type ListBoxOptionDisabledType<TOption> = string | ((option: TOption) => boolean);
 
+type ListBoxValueType<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren> = TMultiple extends undefined
+    ? TGroupLabel extends undefined
+        ? TValue extends undefined
+            ? TOption extends { value: any }
+                ? TOption['value']
+                : TOption
+            : TValue extends keyof TOption
+            ? TOption[TValue]
+            : any
+        : TGroupChildren extends keyof TOption
+        ? TValue extends undefined
+            ? TOption[TGroupChildren] extends { value: any }[]
+                ? TOption[TGroupChildren][0]['value']
+                : TOption[TGroupChildren] extends any[]
+                ? TOption[TGroupChildren][0]
+                : any
+            : TOption[TGroupChildren] extends any[]
+            ? TValue extends keyof TOption[TGroupChildren][0]
+                ? TOption[TGroupChildren][0][TValue]
+                : any
+            : any
+        : any
+    : TGroupLabel extends undefined
+    ? TValue extends undefined
+        ? TOption extends { value: any }
+            ? TOption['value'][]
+            : TOption[]
+        : TValue extends keyof TOption
+        ? TOption[TValue][]
+        : any[]
+    : TGroupChildren extends keyof TOption
+    ? TValue extends undefined
+        ? TOption[TGroupChildren] extends { value: any }[]
+            ? TOption[TGroupChildren][0]['value'][]
+            : TOption[TGroupChildren] extends any[]
+            ? TOption[TGroupChildren][0]
+            : any[]
+        : TOption[TGroupChildren] extends any[]
+        ? TValue extends keyof TOption[TGroupChildren][0]
+            ? TOption[TGroupChildren][0][TValue][]
+            : any[]
+        : any[]
+    : any[];
+
 interface ListBoxChangeTargetOptions<TOption> {
     name: string;
     id: string;
     value: TOption;
 }
 
-interface ListBoxChangeParams<TOption> {
+interface ListBoxChangeParams<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren> {
     originalEvent: React.SyntheticEvent;
-    value: TOption;
+    value: ListBoxValueType<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren>;
     stopPropagation(): void;
     preventDefault(): void;
     target: ListBoxChangeTargetOptions<TOption>;
@@ -34,15 +78,18 @@ interface ListBoxFilterOptions {
     filter?: (event?: KeyboardEvent) => void;
     reset?: () => void;
 }
-
-export interface ListBoxProps<TOption> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
-    value?: any;
+type NestedKeyOf<ObjectType> = {
+    [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}` : `${Key}`;
+}[keyof ObjectType & (string | number)];
+export interface ListBoxProps<TOption, TValue = undefined, TMultiple = undefined, TGroupLabel = undefined, TGroupChildren = undefined>
+    extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'multiple' | 'value' | 'onChange' | 'ref'> {
+    value?: ListBoxValueType<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren>;
     options?: SelectItemOptionsType<TOption>;
-    optionLabel?: string;
-    optionValue?: string;
+    optionLabel?: NestedKeyOf<TOption> | Omit<NestedKeyOf<TOption>, string>;
+    optionValue?: TValue | Omit<TValue, string>;
     optionDisabled?: ListBoxOptionDisabledType<TOption>;
-    optionGroupLabel?: string;
-    optionGroupChildren?: string;
+    optionGroupLabel?: TGroupLabel | Omit<NestedKeyOf<TGroupLabel>, string>;
+    optionGroupChildren?: TGroupChildren | Omit<NestedKeyOf<TGroupChildren>, string>;
     optionGroupTemplate?: ListBoxOptionGroupTemplateType<TOption>;
     itemTemplate?: ListBoxItemTemplateType<TOption>;
     filterTemplate?: ListBoxFilterTemplateType;
@@ -50,8 +97,8 @@ export interface ListBoxProps<TOption> extends Omit<React.DetailedHTMLProps<Reac
     listClassName?: string;
     virtualScrollerOptions?: VirtualScrollerProps;
     disabled?: boolean;
-    dataKey?: string;
-    multiple?: boolean;
+    dataKey?: NestedKeyOf<TOption> | Omit<NestedKeyOf<TOption>, string>;
+    multiple?: TMultiple;
     metaKeySelection?: boolean;
     filter?: boolean;
     filterBy?: string;
@@ -63,12 +110,18 @@ export interface ListBoxProps<TOption> extends Omit<React.DetailedHTMLProps<Reac
     tooltip?: string;
     tooltipOptions?: TooltipOptions;
     ariaLabelledBy?: string;
-    onChange?(e: ListBoxChangeParams<TOption>): void;
+    onChange?(e: ListBoxChangeParams<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren>): void;
     onFilterValueChange?(e: ListBoxFilterValueChangeParams<TOption>): void;
     children?: React.ReactNode;
 }
 
-export declare class ListBox<TOption> extends React.Component<ListBoxProps<TOption>, any> {
+export declare class ListBox<
+    TOption,
+    TValue extends NestedKeyOf<TOption> | undefined = undefined,
+    TMultiple = undefined,
+    TGroupLabel extends NestedKeyOf<TOption> | undefined = undefined,
+    TGroupChildren extends NestedKeyOf<TOption> | undefined = undefined
+> extends React.Component<ListBoxProps<TOption, TValue, TMultiple, TGroupLabel, TGroupChildren>, any> {
     public getElement(): HTMLDivElement;
     public getVirtualScroller(): VirtualScroller;
 }

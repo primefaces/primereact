@@ -1,9 +1,9 @@
 import * as React from 'react';
-import TooltipOptions from '../tooltip/tooltipoptions';
 import { CSSTransitionProps } from '../csstransition';
+import { SelectItemOptionsType } from '../selectitem/selectitem';
+import TooltipOptions from '../tooltip/tooltipoptions';
 import { IconType } from '../utils';
 import { VirtualScrollerProps } from '../virtualscroller';
-import { SelectItemOptionsType } from '../selectitem/selectitem';
 
 type MultiSelectOptionGroupTemplateType<TOption> = React.ReactNode | ((option: TOption, index: number) => React.ReactNode);
 
@@ -36,6 +36,28 @@ interface MultiSelectPanelHeaderTemplateParams<TOption> {
     props: MultiSelectProps<TOption>;
 }
 
+type MultiSelectValue<TOption, TValue, TGroupLabel, TGroupChildren> = TGroupLabel extends undefined
+    ? TValue extends undefined
+        ? TOption extends { value: any }
+            ? TOption['value'][]
+            : TOption[]
+        : TValue extends keyof TOption
+        ? TOption[TValue][]
+        : any[]
+    : TGroupChildren extends keyof TOption
+    ? TValue extends undefined
+        ? TOption[TGroupChildren] extends { value: any }[]
+            ? TOption[TGroupChildren][0]['value'][]
+            : TOption[TGroupChildren] extends any[]
+            ? TOption[TGroupChildren][0][]
+            : any[]
+        : TOption[TGroupChildren] extends any[]
+        ? TValue extends keyof TOption[TGroupChildren][0]
+            ? TOption[TGroupChildren][0][TValue][]
+            : any[]
+        : any[]
+    : any[];
+
 type MultiSelectPanelHeaderTemplateType<TOption> = React.ReactNode | ((e: MultiSelectPanelHeaderTemplateParams<TOption>) => React.ReactNode);
 
 type MultiSelectPanelFooterTemplateType<TOption> = React.ReactNode | ((props: MultiSelectProps<TOption>, hide: () => void) => React.ReactNode);
@@ -50,9 +72,9 @@ interface MultiSelectChangeTargetOptions<TOption> {
     value: TOption;
 }
 
-interface MultiSelectChangeParams<TOption> {
+interface MultiSelectChangeParams<TOption, TValue, TGroupLabel, TGroupChildren> {
     originalEvent: React.SyntheticEvent;
-    value: TOption;
+    value: MultiSelectValue<TOption, TValue, TGroupLabel, TGroupChildren>;
     stopPropagation(): void;
     preventDefault(): void;
     target: MultiSelectChangeTargetOptions<TOption>;
@@ -73,17 +95,21 @@ interface MultiSelectFilterOptions {
     reset?: () => void;
 }
 
-export interface MultiSelectProps<TOption> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+type NestedKeyOf<ObjectType> = {
+    [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}` : `${Key}`;
+}[keyof ObjectType & (string | number)];
+
+export interface MultiSelectProps<TOption, TValue = undefined, TGroupLabel = undefined, TGroupChildren = undefined> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'value' | 'onChange' | 'ref'> {
     id?: string;
     inputRef?: React.Ref<HTMLSelectElement>;
     name?: string;
-    value?: any;
+    value?: string | number | ReadonlyArray<string> | ReadonlyArray<number> | MultiSelectValue<TOption, TValue, TGroupLabel, TGroupChildren> | ReadonlyArray<TOption> | undefined;
     options?: SelectItemOptionsType<TOption>;
-    optionLabel?: string;
-    optionValue?: string;
+    optionLabel?: NestedKeyOf<TOption> | Omit<NestedKeyOf<TOption>, string>;
+    optionValue?: TValue | Omit<TValue, string>;
     optionDisabled?: MultiSelectOptionDisabledType<TOption>;
-    optionGroupLabel?: string;
-    optionGroupChildren?: string;
+    optionGroupLabel?: TGroupLabel | Omit<NestedKeyOf<TGroupLabel>, string>;
+    optionGroupChildren?: TGroupChildren | Omit<NestedKeyOf<TGroupChildren>, string>;
     optionGroupTemplate?: MultiSelectOptionGroupTemplateType<TOption>;
     display?: MultiSelectDisplayType;
     style?: object;
@@ -104,7 +130,7 @@ export interface MultiSelectProps<TOption> extends Omit<React.DetailedHTMLProps<
     emptyFilterMessage?: MultiSelectEmptyFilterMessageType<TOption>;
     resetFilterOnHide?: boolean;
     tabIndex?: number;
-    dataKey?: string;
+    dataKey?: NestedKeyOf<TOption> | Omit<NestedKeyOf<TOption>, string>;
     inputId?: string;
     appendTo?: MultiSelectAppendToType;
     tooltip?: string;
@@ -119,11 +145,11 @@ export interface MultiSelectProps<TOption> extends Omit<React.DetailedHTMLProps<
     panelHeaderTemplate?: MultiSelectPanelHeaderTemplateType<TOption>;
     panelFooterTemplate?: MultiSelectPanelFooterTemplateType<TOption>;
     transitionOptions?: CSSTransitionProps;
-    dropdownIcon?: IconType<MultiSelectProps<TOption>>;
-    removeIcon?: IconType<MultiSelectProps<TOption>>;
+    dropdownIcon?: IconType<MultiSelectProps<TOption, TValue, TGroupLabel, TGroupChildren>>;
+    removeIcon?: IconType<MultiSelectProps<TOption, TValue, TGroupLabel, TGroupChildren>>;
     showSelectAll?: boolean;
     selectAll?: boolean;
-    onChange?(e: MultiSelectChangeParams<TOption>): void;
+    onChange?(e: MultiSelectChangeParams<TOption, TValue, TGroupLabel, TGroupChildren>): void;
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     onShow?(): void;
@@ -133,7 +159,12 @@ export interface MultiSelectProps<TOption> extends Omit<React.DetailedHTMLProps<
     children?: React.ReactNode;
 }
 
-export declare class MultiSelect<TOption> extends React.Component<MultiSelectProps<TOption>, any> {
+export declare class MultiSelect<
+    TOption,
+    TValue extends NestedKeyOf<TOption> | undefined = undefined,
+    TGroupLabel extends NestedKeyOf<TOption> | undefined = undefined,
+    TGroupChildren extends NestedKeyOf<TOption> | undefined = undefined
+> extends React.Component<MultiSelectProps<TOption, TValue, TGroupLabel, TGroupChildren>, any> {
     public show(): void;
     public hide(): void;
     public getElement(): HTMLDivElement;
