@@ -5,35 +5,38 @@ export const Message = React.memo(
     React.forwardRef((props, ref) => {
         const elementRef = React.useRef(null);
 
+        
+        React.useImperativeHandle(ref, () => ({
+            props,
+            getElement: () => elementRef.current
+        }));
+
         const createIcon = () => {
             return IconUtils.getJSXIcon(props.icon, { ...props.iconProps });
         };
 
         const createContent = () => {
+            const customIcon = createIcon();
             if (props.content) {
                 return ObjectUtils.getJSXElement(props.content, props);
             }
 
             const text = ObjectUtils.getJSXElement(props.text, props);
             const icon = classNames('p-inline-message-icon pi', {
-                '': props.severity === 'info',
-                '': props.severity === 'warn',
-                '': props.severity === 'error',
-                '': props.severity === 'success'
+                'pi-info-circle': props.severity === 'info',
+                'pi-exclamation-triangle': props.severity === 'warn',
+                'pi-times-circle': props.severity === 'error',
+                'pi-check': props.severity === 'success'
             });
+
 
             return (
                 <>
-                    <span className={icon}></span>
+                    {props.icon ? <span className='p-inline-message-icon'>{customIcon}</span> : <span className={icon}></span>}
                     <span className="p-inline-message-text">{text}</span>
                 </>
             );
         };
-
-        React.useImperativeHandle(ref, () => ({
-            props,
-            getElement: () => elementRef.current
-        }));
 
         const otherProps = ObjectUtils.findDiffKeys(props, Message.defaultProps);
         const className = classNames(
@@ -48,11 +51,9 @@ export const Message = React.memo(
             props.className
         );
         const content = createContent();
-        const icon = createIcon();
 
         return (
             <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps} role="alert" aria-live="polite">
-                {icon}
                 {content}
             </div>
         );
@@ -68,7 +69,7 @@ Message.defaultProps = {
     text: null,
     severity: null,
     content: null,
-    icon: 'pi pi-info-circle',
+    icon: null,
     iconProps: null,
     iconPos: 'left'
 };

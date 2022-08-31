@@ -7,6 +7,8 @@ import MessagesDoc from '../../components/doc/messages';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 import getConfig from 'next/config';
+import * as CustomImage from './custom-icon-active.png';
+import Image from 'next/image';
 
 const MessagesDemo = () => {
     const msgs1 = useRef(null);
@@ -82,7 +84,7 @@ const MessagesDemo = () => {
                             <Message severity="info" text="Message Content" />
                         </div>
                         <div className="col-12 md:col-3">
-                            <Message severity="success" icon="pi pi-check" text="Message Content" />
+                            <Message severity="success" icon={<Image src={CustomImage} width="20px" height="20px"/>} text="Message Content" />
                         </div>
                         <div className="col-12 md:col-3">
                             <Message severity="warn" icon="pi pi-exclamation-triangle" text="Message Content" />

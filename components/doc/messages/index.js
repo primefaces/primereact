@@ -15,6 +15,9 @@ import { Messages } from 'primereact/messages';
 import { Message } from 'primereact/message';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
+import getConfig from 'next/config';
+import * as CustomImage from './custom-icon-active.png';
+import Image from 'next/image';
 
 export class MessagesDemo extends Component {
 
@@ -82,7 +85,7 @@ export class MessagesDemo extends Component {
                             <Message severity="success" text="Message Content" />
                         </div>
                         <div className="col-12 md:col-3">
-                            <Message severity="warn" text="Message Content" />
+                            <Message severity="warn" icon={<Image src={CustomImage} width="20px" height="20px"/>} text="Message Content" />
                         </div>
                         <div className="col-12 md:col-3">
                             <Message severity="error" text="Message Content" />
@@ -118,49 +121,71 @@ export class MessagesDemo extends Component {
             tabName: 'Hooks Source',
             content: `
 import React, { useEffect, useRef } from 'react';
-import { Messages } from 'primereact/messages';
-import { Message } from 'primereact/message';
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
-
+import { Messages } from '../../components/lib/messages/Messages';
+import { Message } from '../../components/lib/message/Message';
+import { InputText } from '../../components/lib/inputtext/InputText';
+import { Button } from '../../components/lib/button/Button';
+import MessagesDoc from '../../components/doc/messages';
+import { DocActions } from '../../components/doc/common/docactions';
+import Head from 'next/head';
+import getConfig from 'next/config';
+import * as CustomImage from './custom-icon-active.png';
+import Image from 'next/image';
+            
 const MessagesDemo = () => {
-    const msgs1 = useRef(null);
-    const msgs2 = useRef(null);
-    const msgs3 = useRef(null);
+const msgs1 = useRef(null);
+const msgs2 = useRef(null);
+const msgs3 = useRef(null);
+const contextPath = getConfig().publicRuntimeConfig.contextPath;
+            
+useEffect(() => {
+    msgs1.current.show([
+        { severity: 'success', icon: 'pi pi-apple', summary: 'Success', detail: 'Message Content', sticky: true },
+        { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
+        { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
+        { severity: 'error', summary: 'Error', detail: 'Message Content', sticky: true }
+    ]);
 
-    useEffect(() => {
-        msgs1.current.show([
-            { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
-            { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
-            { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
-            { severity: 'error', summary: 'Error', detail: 'Message Content', sticky: true }
-        ]);
+    msgs3.current.show({
+        severity: 'info',
+        sticky: true,
+        content: (
+            <React.Fragment>
+                <img alt="logo" src={"$'{contextPath}/images/logo.png"} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width="32" />
+                <div className="ml-2">Always bet on Prime.</div>
+            </React.Fragment>
+        )
+    });
+}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-        msgs3.current.show({
-            severity: 'info', sticky: true, content: (
-                <React.Fragment>
-                    <img alt="logo" src="showcase/images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} width="32" />
-                    <div className="ml-2">Always bet on Prime.</div>
-                </React.Fragment>
-            )
-        });
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+const addMessages = () => {
+    msgs2.current.show([
+        { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
+        { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
+        { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
+        { severity: 'error', summary: 'Error', detail: 'Message Content', sticky: true }
+    ]);
+};
 
-    const addMessages = () => {
-        msgs2.current.show([
-            { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
-            { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
-            { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
-            { severity: 'error', summary: 'Error', detail: 'Message Content', sticky: true }
-        ]);
-    }
+const clearMessages = () => {
+    msgs2.current.clear();
+};
 
-    const clearMessages = () => {
-        msgs2.current.clear();
-    }
+return (
+    <div>
+        <Head>
+            <title>React Messages Component</title>
+            <meta name="description" content="Messages is used to display inline messages with various severities." />
+        </Head>
+        <div className="content-section introduction">
+            <div>
+                <h1>Messages</h1>
+                <p>Messages is used to display inline messages with various severities.</p>
+            </div>
+            <DocActions github="messages/index.js" />
+        </div>
 
-    return (
-        <div>
+        <div className="content-section implementation">
             <div className="card">
                 <h5>Severities</h5>
                 <Messages ref={msgs1} />
@@ -181,24 +206,28 @@ const MessagesDemo = () => {
                         <Message severity="info" text="Message Content" />
                     </div>
                     <div className="col-12 md:col-3">
-                        <Message severity="success" text="Message Content" />
+                        <Message severity="success" icon={<Image src={CustomImage} width="20px" height="20px"/>} text="Message Content" />
                     </div>
                     <div className="col-12 md:col-3">
-                        <Message severity="warn" text="Message Content" />
+                        <Message severity="warn" icon="pi pi-exclamation-triangle" text="Message Content" />
                     </div>
                     <div className="col-12 md:col-3">
-                        <Message severity="error" text="Message Content" />
+                        <Message severity="error" icon="pi pi-times-circle" text="Message Content" />
                     </div>
                 </div>
 
                 <h5>Validation Message</h5>
                 <div className="formgroup-inline mb-2">
-                    <label htmlFor="username1" className="p-sr-only">Username</label>
+                    <label htmlFor="username1" className="p-sr-only">
+                        Username
+                    </label>
                     <InputText id="username1" placeholder="Username" className="p-invalid mr-2" />
                     <Message severity="error" text="Username is required" />
                 </div>
                 <div className="formgroup-inline">
-                    <label htmlFor="email" className="p-sr-only">email</label>
+                    <label htmlFor="email" className="p-sr-only">
+                        email
+                    </label>
                     <InputText id="email" placeholder="Email" className="p-invalid mr-2" />
                     <Message severity="error" />
                 </div>
@@ -207,13 +236,17 @@ const MessagesDemo = () => {
                 <div className="field p-fluid">
                     <label htmlFor="username2">Username</label>
                     <InputText id="username2" aria-describedby="username-help" className="p-invalid mr-2" />
-                    <small id="username-help" className="p-error">Username is not available.</small>
+                    <small id="username-help" className="p-error">
+                        Username is not available.
+                    </small>
                 </div>
             </div>
         </div>
-    )
-}
-                `
+    </div>
+);
+};
+
+`
         },
         ts: {
             tabName: 'TS Source',
@@ -223,6 +256,9 @@ import { Messages } from 'primereact/messages';
 import { Message } from 'primereact/message';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
+import getConfig from 'next/config';
+import * as CustomImage from './custom-icon-active.png';
+import Image from 'next/image';
 
 const MessagesDemo = () => {
     const msgs1 = useRef(null);
@@ -285,7 +321,7 @@ const MessagesDemo = () => {
                         <Message severity="success" text="Message Content" />
                     </div>
                     <div className="col-12 md:col-3">
-                        <Message severity="warn" text="Message Content" />
+                        <Message severity="warn" icon={<Image src={CustomImage} width="20px" height="20px"/>} text="Message Content" />
                     </div>
                     <div className="col-12 md:col-3">
                         <Message severity="error" text="Message Content" />
@@ -387,10 +423,10 @@ const MessagesDemo = () => {
                         <Message severity="info" text="Message Content" />
                     </div>
                     <div className="col-12 md:col-3">
-                        <Message severity="success" text="Message Content" />
+                        <Message severity="success" icon={<Image src={CustomImage} width="20px" height="20px"/>} width="20px" height="20px" />
                     </div>
                     <div className="col-12 md:col-3">
-                        <Message severity="warn" text="Message Content" />
+                        <Message severity="warn" icon="pi pi-exclamation-triangle" text="Message Content" />
                     </div>
                     <div className="col-12 md:col-3">
                         <Message severity="error" text="Message Content" />
@@ -719,12 +755,6 @@ messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message',
                                     <td>string</td>
                                     <td>null</td>
                                     <td>Unique identifier of the element.</td>
-                                </tr>
-                                <tr>
-                                    <td>icon</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>Customize icon class of icon attributes</td>
                                 </tr>
                                 <tr>
                                     <td>className</td>
