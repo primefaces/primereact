@@ -70,5 +70,5 @@ Message.defaultProps = {
     content: null,
     icon: 'pi pi-info-circle',
     iconProps: null,
-    iconPos: 'left',
+    iconPos: 'left'
 };

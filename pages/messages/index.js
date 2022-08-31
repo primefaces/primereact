@@ -8,7 +8,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 import getConfig from 'next/config';
 
-
 const MessagesDemo = () => {
     const msgs1 = useRef(null);
     const msgs2 = useRef(null);
@@ -79,7 +78,7 @@ const MessagesDemo = () => {
                     <h5>Inline Message</h5>
                     <p>Message component is used to display inline messages mostly within forms.</p>
                     <div className="grid">
-                    <div className="col-12 md:col-3">
+                        <div className="col-12 md:col-3">
                             <Message severity="info" text="Message Content" />
                         </div>
                         <div className="col-12 md:col-3">
