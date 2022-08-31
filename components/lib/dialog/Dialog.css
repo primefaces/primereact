@@ -16,6 +16,10 @@
     display: flex;
 }
 
+.p-dialog:not([class*='p-dialog-']) {
+    display: none;
+}
+
 .p-dialog-mask.p-component-overlay {
     pointer-events: auto;
 }

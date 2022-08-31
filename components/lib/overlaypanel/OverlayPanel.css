@@ -3,6 +3,10 @@
     margin-top: 10px;
 }
 
+.p-overlaypanel:not([class*='p-overlaypanel-']) {
+    display: none;
+}
+
 .p-overlaypanel-flipped {
     margin-top: 0;
     margin-bottom: 10px;
