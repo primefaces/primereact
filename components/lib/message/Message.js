@@ -1,9 +1,13 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Message = React.memo(
     React.forwardRef((props, ref) => {
         const elementRef = React.useRef(null);
+
+        const createIcon = () => {
+            return IconUtils.getJSXIcon(props.icon, { ...props.iconProps });
+        };
 
         const createContent = () => {
             if (props.content) {
@@ -12,10 +16,10 @@ export const Message = React.memo(
 
             const text = ObjectUtils.getJSXElement(props.text, props);
             const icon = classNames('p-inline-message-icon pi', {
-                'pi-info-circle': props.severity === 'info',
-                'pi-exclamation-triangle': props.severity === 'warn',
-                'pi-times-circle': props.severity === 'error',
-                'pi-check': props.severity === 'success'
+                '': props.severity === 'info',
+                '': props.severity === 'warn',
+                '': props.severity === 'error',
+                '': props.severity === 'success'
             });
 
             return (
@@ -44,9 +48,11 @@ export const Message = React.memo(
             props.className
         );
         const content = createContent();
+        const icon = createIcon();
 
         return (
             <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps} role="alert" aria-live="polite">
+                {icon}
                 {content}
             </div>
         );
@@ -60,6 +66,9 @@ Message.defaultProps = {
     className: null,
     style: null,
     text: null,
-    severity: 'info',
-    content: null
+    severity: null,
+    content: null,
+    icon: 'pi pi-info-circle',
+    iconProps: null,
+    iconPos: 'left',
 };

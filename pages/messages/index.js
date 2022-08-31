@@ -8,6 +8,7 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 import getConfig from 'next/config';
 
+
 const MessagesDemo = () => {
     const msgs1 = useRef(null);
     const msgs2 = useRef(null);
@@ -16,7 +17,7 @@ const MessagesDemo = () => {
 
     useEffect(() => {
         msgs1.current.show([
-            { severity: 'success', summary: 'Success', detail: 'Message Content', sticky: true },
+            { severity: 'success', icon: 'pi pi-apple', summary: 'Success', detail: 'Message Content', sticky: true },
             { severity: 'info', summary: 'Info', detail: 'Message Content', sticky: true },
             { severity: 'warn', summary: 'Warning', detail: 'Message Content', sticky: true },
             { severity: 'error', summary: 'Error', detail: 'Message Content', sticky: true }
@@ -78,17 +79,17 @@ const MessagesDemo = () => {
                     <h5>Inline Message</h5>
                     <p>Message component is used to display inline messages mostly within forms.</p>
                     <div className="grid">
-                        <div className="col-12 md:col-3">
+                    <div className="col-12 md:col-3">
                             <Message severity="info" text="Message Content" />
                         </div>
                         <div className="col-12 md:col-3">
-                            <Message severity="success" text="Message Content" />
+                            <Message severity="success" icon="pi pi-check" text="Message Content" />
                         </div>
                         <div className="col-12 md:col-3">
-                            <Message severity="warn" text="Message Content" />
+                            <Message severity="warn" icon="pi pi-exclamation-triangle" text="Message Content" />
                         </div>
                         <div className="col-12 md:col-3">
-                            <Message severity="error" text="Message Content" />
+                            <Message severity="error" icon="pi pi-times-circle" text="Message Content" />
                         </div>
                     </div>
 

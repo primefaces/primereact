@@ -663,6 +663,12 @@ messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message',
                                     <td>Style class of the element.</td>
                                 </tr>
                                 <tr>
+                                    <td>icon</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Customize icon class of icon attributes</td>
+                                </tr>
+                                <tr>
                                     <td>style</td>
                                     <td>string</td>
                                     <td>null</td>
@@ -713,6 +719,12 @@ messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message',
                                     <td>string</td>
                                     <td>null</td>
                                     <td>Unique identifier of the element.</td>
+                                </tr>
+                                <tr>
+                                    <td>icon</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Customize icon class of icon attributes</td>
                                 </tr>
                                 <tr>
                                     <td>className</td>
