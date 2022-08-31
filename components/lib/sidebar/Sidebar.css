@@ -16,6 +16,7 @@
     display: flex;
 }
 
+/* Github #3122: Prevent animation flickering */
 .p-sidebar:not([class*="p-sidebar-"]){
     display: none;
 }
