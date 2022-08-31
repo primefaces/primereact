@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const OverlayPanelDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -81,7 +81,7 @@ export class OverlayPanelDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -150,7 +150,7 @@ const OverlayPanelDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -272,7 +272,7 @@ type ProductItem = {
   };
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./OverlayPanelDemo.css" />
@@ -363,73 +363,74 @@ const OverlayPanelDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { OverlayPanel } from 'primereact/overlaypanel';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/overlaypanel/overlaypanel.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>OverlayPanel is accessed via its reference where visibility is controlled using toggle, show and hide methods.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Button type="button" label="Basic" onClick={(e) => op.current.toggle(e)} />
 
 <OverlayPanel ref={op}>
     // Content
 </OverlayPanel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Dismissable and CloseIcon</h5>
-                    <p>Clicking outside the overlay hides the panel, setting dismissable to false disables this behavior.
-                    Additionally enablign showCloseIcon property displays a close icon at the top right corner to close the panel.</p>
+                    <p>Clicking outside the overlay hides the panel, setting dismissable to false disables this behavior. Additionally enablign showCloseIcon property displays a close icon at the top right corner to close the panel.</p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <OverlayPanel ref={op} showCloseIcon dismissable>
     // Content
 </OverlayPanel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Responsive</h5>
-                    <p>OverlayPanel width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 450px and below 961px, width would be 75vw and finally below 641px width becomes
-                        100%. The value of <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.</p>
+                    <p>
+                        OverlayPanel width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 450px and below 961px, width would be 75vw and finally below 641px width becomes 100%. The value
+                        of <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <OverlayPanel ref={op} breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '450px'}}>
     // Content
 </OverlayPanel>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Default</th>
-                                <th>Description</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -466,7 +467,9 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                                     <td>appendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>ariaCloseLabel</td>
@@ -484,7 +487,13 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -494,11 +503,11 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Parameters</th>
-                                <th>Description</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -533,8 +542,10 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                                 </tr>
                                 <tr>
                                     <td>show</td>
-                                    <td>event: Browser event <br />
-                                        target: Optional target if event.target should not be used</td>
+                                    <td>
+                                        event: Browser event <br />
+                                        target: Optional target if event.target should not be used
+                                    </td>
                                     <td>Shows the overlay.</td>
                                 </tr>
                                 <tr>
@@ -547,7 +558,9 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -571,18 +584,90 @@ import { OverlayPanel } from 'primereact/overlaypanel';
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
                     </div>
+
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            OverlayPanel component uses <i>dialog</i> role and since any attribute is passed to the root element you may define attributes like <i>aria-label</i> or <i>aria-labelledby</i> to describe the popup contents. In addition{' '}
+                            <i>aria-modal</i> is added since focus is kept within the popup.
+                        </p>
+                        <p>
+                            It is recommended to use a trigger component that can be accessed with keyboard such as a button, if not adding <i>tabIndex</i> would be necessary. OverlayPanel adds <i>aria-expanded</i> state attribute and{' '}
+                            <i>aria-controls</i> to the trigger so that the relation between the trigger and the popup is defined.
+                        </p>
+
+                        <h6>OverlayPanel Keyboard Support</h6>
+                        <p>
+                            When the popup gets opened, the first focusable element receives the focus and this can be customized by adding <i>autofocus</i> to an element within the popup.
+                        </p>
+
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the next the focusable element within the popup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the previous the focusable element within the popup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Closes the popup and moves focus to the trigger.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Close Button Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Closes the popup and moves focus to the trigger.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Closes the popup and moves focus to the trigger.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'OverlayPanelDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'OverlayPanelDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default OverlayPanelDoc;

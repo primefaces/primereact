@@ -8,6 +8,7 @@ export const Fieldset = React.forwardRef((props, ref) => {
     const [idState, setIdState] = React.useState(props.id);
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
+    const elementRef = React.useRef(null);
     const contentRef = React.useRef(null);
     const headerId = idState + '_header';
     const contentId = idState + '_content';
@@ -25,7 +26,7 @@ export const Fieldset = React.forwardRef((props, ref) => {
         }
 
         event.preventDefault();
-    }
+    };
 
     const expand = (event) => {
         if (!props.onToggle) {
@@ -33,7 +34,7 @@ export const Fieldset = React.forwardRef((props, ref) => {
         }
 
         props.onExpand && props.onExpand(event);
-    }
+    };
 
     const collapse = (event) => {
         if (!props.onToggle) {
@@ -41,25 +42,23 @@ export const Fieldset = React.forwardRef((props, ref) => {
         }
 
         props.onCollapse && props.onCollapse(event);
-    }
+    };
 
     useMountEffect(() => {
         if (!props.id) {
             setIdState(UniqueComponentId());
         }
-    })
+    });
 
     const createContent = () => {
         return (
             <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={props.transitionOptions}>
                 <div ref={contentRef} id={contentId} className="p-toggleable-content" aria-hidden={collapsed} role="region" aria-labelledby={headerId}>
-                    <div className="p-fieldset-content">
-                        {props.children}
-                    </div>
+                    <div className="p-fieldset-content">{props.children}</div>
                 </div>
             </CSSTransition>
-        )
-    }
+        );
+    };
 
     const createToggleIcon = () => {
         if (props.toggleable) {
@@ -68,11 +67,11 @@ export const Fieldset = React.forwardRef((props, ref) => {
                 'pi-minus': !collapsed
             });
 
-            return <span className={className}></span>
+            return <span className={className}></span>;
         }
 
         return null;
-    }
+    };
 
     const createLegendContent = () => {
         if (props.toggleable) {
@@ -84,11 +83,15 @@ export const Fieldset = React.forwardRef((props, ref) => {
                     <span className="p-fieldset-legend-text">{props.legend}</span>
                     <Ripple />
                 </a>
-            )
+            );
         }
 
-        return <span className="p-fieldset-legend-text" id={headerId}>{props.legend}</span>
-    }
+        return (
+            <span className="p-fieldset-legend-text" id={headerId}>
+                {props.legend}
+            </span>
+        );
+    };
 
     const createLegend = () => {
         if (props.legend != null || props.toggleable) {
@@ -98,23 +101,33 @@ export const Fieldset = React.forwardRef((props, ref) => {
                 <legend className="p-fieldset-legend p-unselectable-text" onClick={toggle}>
                     {legendContent}
                 </legend>
-            )
+            );
         }
-    }
+    };
+
+    React.useImperativeHandle(ref, () => ({
+        props,
+        getElement: () => elementRef.current,
+        getContent: () => contentRef.current
+    }));
 
     const otherProps = ObjectUtils.findDiffKeys(props, Fieldset.defaultProps);
-    const className = classNames('p-fieldset p-component', {
-        'p-fieldset-toggleable': props.toggleable
-    }, props.className);
+    const className = classNames(
+        'p-fieldset p-component',
+        {
+            'p-fieldset-toggleable': props.toggleable
+        },
+        props.className
+    );
     const legend = createLegend();
     const content = createContent();
 
     return (
-        <fieldset id={idState} className={className} style={props.style} {...otherProps} onClick={props.onClick}>
+        <fieldset id={idState} ref={elementRef} className={className} style={props.style} {...otherProps} onClick={props.onClick}>
             {legend}
             {content}
         </fieldset>
-    )
+    );
 });
 
 Fieldset.displayName = 'Fieldset';
@@ -131,4 +144,4 @@ Fieldset.defaultProps = {
     onCollapse: null,
     onToggle: null,
     onClick: null
-}
+};

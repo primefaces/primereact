@@ -42,6 +42,7 @@
   --surface-hover:rgba(255,255,255,.03);
   --maskbg: rgba(0, 0, 0, 0.4);
   --focus-ring: 0 0 0 1px #cf95d9;
+  color-scheme: dark;
 }
 
 * {
@@ -222,6 +223,16 @@
   --red-700:#b32d23;
   --red-800:#8c231c;
   --red-900:#661a14;
+  --primary-50:#fcf7fc;
+  --primary-100:#eedbf2;
+  --primary-200:#e1bee7;
+  --primary-300:#d4a1dd;
+  --primary-400:#c785d2;
+  --primary-500:#ba68c8;
+  --primary-600:#9e58aa;
+  --primary-700:#82498c;
+  --primary-800:#66396e;
+  --primary-900:#4a2a50;
 }
 
 .p-autocomplete .p-autocomplete-loader {
@@ -355,14 +366,16 @@
 .p-datepicker .p-datepicker-header .p-datepicker-title {
   line-height: 2rem;
 }
-.p-datepicker .p-datepicker-header .p-datepicker-title select {
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+  color: rgba(255, 255, 255, 0.87);
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  font-weight: 600;
+  padding: 0.5rem;
 }
-.p-datepicker .p-datepicker-header .p-datepicker-title select:focus {
-  outline: 0 none;
-  outline-offset: 0;
-  box-shadow: 0 0 0 1px #cf95d9;
-  border-color: #BA68C8;
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year:enabled:hover,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month:enabled:hover {
+  color: #BA68C8;
 }
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
   margin-right: 0.5rem;
@@ -460,8 +473,20 @@
   color: rgba(255, 255, 255, 0.87);
   background: rgba(186, 104, 200, 0.16);
 }
+.p-datepicker .p-yearpicker {
+  margin: 0.5rem 0;
+}
+.p-datepicker .p-yearpicker .p-yearpicker-year {
+  padding: 0.5rem;
+  transition: box-shadow 0.2s;
+  border-radius: 3px;
+}
+.p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
+  color: rgba(255, 255, 255, 0.87);
+  background: rgba(186, 104, 200, 0.16);
+}
 .p-datepicker.p-datepicker-multiple-month .p-datepicker-group {
-  border-right: 1px solid #383838;
+  border-left: 1px solid #383838;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   padding-top: 0;
@@ -472,7 +497,7 @@
 }
 .p-datepicker.p-datepicker-multiple-month .p-datepicker-group:last-child {
   padding-right: 0;
-  border-right: 0 none;
+  border-left: 0 none;
 }
 .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):hover {
   background: rgba(255, 255, 255, 0.03);
@@ -482,10 +507,18 @@
   outline-offset: 0;
   box-shadow: 0 0 0 1px #cf95d9;
 }
-.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-highlight):not(.p-disabled):hover {
+.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):not(.p-highlight):hover {
   background: rgba(255, 255, 255, 0.03);
 }
-.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-highlight):not(.p-disabled):focus {
+.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 1px #cf95d9;
+}
+.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):not(.p-highlight):hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 1px #cf95d9;
@@ -1026,7 +1059,7 @@
 .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
   background: #b052c0;
 }
-.p-inputswitch.p-invalid {
+.p-inputswitch.p-invalid .p-inputswitch-slider {
   border-color: #ef9a9a;
 }
 
@@ -2731,7 +2764,8 @@
   background: #1e1e1e;
 }
 .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-thead,
-.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot {
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot, .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-thead,
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-tfoot {
   background-color: #1e1e1e;
 }
 .p-datatable .p-datatable-loading-icon {
@@ -3310,6 +3344,19 @@
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
+.p-orderlist .p-orderlist-filter-container {
+  padding: 1rem;
+  background: #1e1e1e;
+  border: 1px solid #383838;
+  border-bottom: 0 none;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-input {
+  padding-right: 1.5rem;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-icon {
+  right: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+}
 .p-orderlist .p-orderlist-list {
   border: 1px solid #383838;
   background: #1e1e1e;
@@ -3338,6 +3385,12 @@
 .p-orderlist .p-orderlist-list .p-orderlist-item.p-highlight {
   color: rgba(255, 255, 255, 0.87);
   background: rgba(186, 104, 200, 0.16);
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even) {
+  background: rgba(255, 255, 255, 0.01);
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even):hover {
+  background: rgba(255, 255, 255, 0.03);
 }
 
 @media screen and (max-width: 960px) {
@@ -3491,6 +3544,19 @@
   border-bottom: 0 none;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
+}
+.p-picklist .p-picklist-filter-container {
+  padding: 1rem;
+  background: #1e1e1e;
+  border: 1px solid #383838;
+  border-bottom: 0 none;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-input {
+  padding-right: 1.5rem;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-icon {
+  right: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
 }
 .p-picklist .p-picklist-list {
   border: 1px solid #383838;
@@ -4258,6 +4324,10 @@
   color: rgba(255, 255, 255, 0.87);
   padding: 0 1.5rem 2rem 1.5rem;
 }
+.p-dialog .p-dialog-content:last-of-type {
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
 .p-dialog .p-dialog-footer {
   border-top: 0 none;
   background: #1e1e1e;
@@ -4311,7 +4381,7 @@
 .p-overlaypanel:before {
   border: solid transparent;
   border-color: rgba(56, 56, 56, 0);
-  border-bottom-color: #383838;
+  border-bottom-color: #353535;
 }
 .p-overlaypanel.p-overlaypanel-flipped:after {
   border-top-color: #1e1e1e;
@@ -5056,7 +5126,6 @@
   border: 1px solid #383838;
   background: #1e1e1e;
   color: rgba(255, 255, 255, 0.87);
-  margin-bottom: 0;
   border-top: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
@@ -5854,7 +5923,7 @@
   background: #BA68C8;
 }
 .p-progressbar .p-progressbar-label {
-  color: rgba(255, 255, 255, 0.87);
+  color: #ffffff;
   line-height: 1.5rem;
 }
 
@@ -5934,10 +6003,6 @@
 .p-tag.p-tag-danger {
   background-color: #F48FB1;
   color: #121212;
-}
-
-.p-virtualscroller-loading-icon {
-  font-size: 2rem;
 }
 
 /* Customizations to the designer theme should be defined here */

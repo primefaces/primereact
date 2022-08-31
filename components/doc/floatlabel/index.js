@@ -3,9 +3,8 @@ import { TabView } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 
 const FloatLabelDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -264,7 +263,7 @@ export class FloatLabelDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -512,7 +511,7 @@ const FloatLabelDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -760,7 +759,7 @@ const FloatLabelDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./CountryService.js"></script>
@@ -1025,18 +1024,13 @@ const FloatLabelDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'FloatLabelDemo', sources: sources, service: 'CountryService, NodeService', data: 'countries, treenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'FloatLabelDemo', sources: sources, service: 'CountryService, NodeService', data: 'countries, treenodes' })}</TabView>
         </div>
     );
-
-})
+});
 
 export default FloatLabelDoc;

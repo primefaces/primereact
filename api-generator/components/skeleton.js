@@ -37,9 +37,7 @@ const SkeletonProps = [
     }
 ];
 
-const SkeletonEvents = [
-
-];
+const SkeletonEvents = [];
 
 const SkeletonStyles = [
     { name: 'p-skeleton', description: 'Container element.' },

@@ -1,10 +1,6 @@
-const RippleProps = [
+const RippleProps = [];
 
-];
-
-const RippleEvents = [
-
-];
+const RippleEvents = [];
 
 const RippleStyles = [
     { name: 'p-ripple', description: 'Host element.' },

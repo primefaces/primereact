@@ -1,12 +1,13 @@
 import React, { memo } from 'react';
+import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const KeyFilterDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, {Component} from 'react';
@@ -59,7 +60,7 @@ export class KeyFilterDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -110,7 +111,7 @@ const KeyFilterDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -161,7 +162,7 @@ const KeyFilterDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>`,
@@ -214,35 +215,37 @@ const KeyFilterDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { InputText } from 'primereact/inputtext';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>KeyFilter property is integrated in input components such as InputText using the <i>keyfilter</i> property. The value of the filter
-                        can either a built-in regular expression or a custom one. Following input only accepts integers.</p>
+                    <p>
+                        KeyFilter property is integrated in input components such as InputText using the <i>keyfilter</i> property. The value of the filter can either a built-in regular expression or a custom one. Following input only accepts
+                        integers.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <InputText keyfilter="int" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Built-in Filters</h5>
                     <p>Commonly used cases have their own built-in shortcuts.</p>
@@ -259,22 +262,26 @@ import { InputText } from 'primereact/inputtext';
 
                     <h5>Custom Filter</h5>
                     <p>A custom filter is enabled by binding a regular expression, an example that blocks special characters would be;</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <InputText keyfilter={/^[^#<>*!]+$/}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <p>
+                            Refer to <Link href="/inputtext">InputText</Link> for accessibility as KeyFilter is a built-in add-on of the InputText.
+                        </p>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'KeyFilterDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'KeyFilterDemo', sources: sources })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default KeyFilterDoc;

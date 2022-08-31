@@ -7,7 +7,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeDemo = () => {
-
     const [nodes, setNodes] = useState(null);
     const [expandedKeys, setExpandedKeys] = useState({});
     const nodeService = new NodeService();
@@ -19,11 +18,11 @@ const TreeDemo = () => {
         }
 
         setExpandedKeys(_expandedKeys);
-    }
+    };
 
     const collapseAll = () => {
         setExpandedKeys({});
-    }
+    };
 
     const expandNode = (node, _expandedKeys) => {
         if (node.children && node.children.length) {
@@ -33,10 +32,10 @@ const TreeDemo = () => {
                 expandNode(child, _expandedKeys);
             }
         }
-    }
+    };
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        nodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -64,14 +63,13 @@ const TreeDemo = () => {
                         <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
                         <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
                     </div>
-                    <Tree value={nodes} expandedKeys={expandedKeys}
-                        onToggle={e => setExpandedKeys(e.value)} />
+                    <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} />
                 </div>
             </div>
 
             <TreeDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeDemo;

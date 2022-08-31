@@ -5,8 +5,12 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const RadioButtonDemo = () => {
-
-    const categories = [{ name: 'Accounting', key: 'A' }, { name: 'Marketing', key: 'M' }, { name: 'Production', key: 'P' }, { name: 'Research', key: 'R' }];
+    const categories = [
+        { name: 'Accounting', key: 'A' },
+        { name: 'Marketing', key: 'M' },
+        { name: 'Production', key: 'P' },
+        { name: 'Research', key: 'R' }
+    ];
     const [city, setCity] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(categories[1]);
 
@@ -46,22 +50,20 @@ const RadioButtonDemo = () => {
                     </div>
 
                     <h5>Dynamic Values, Preselection, Value Binding and Disabled Option</h5>
-                    {
-                        categories.map((category) => {
-                            return (
-                                <div key={category.key} className="field-radiobutton">
-                                    <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} disabled={category.key === 'R'} />
-                                    <label htmlFor={category.key}>{category.name}</label>
-                                </div>
-                            )
-                        })
-                    }
+                    {categories.map((category) => {
+                        return (
+                            <div key={category.key} className="field-radiobutton">
+                                <RadioButton inputId={category.key} name="category" value={category} onChange={(e) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} disabled={category.key === 'R'} />
+                                <label htmlFor={category.key}>{category.name}</label>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 
             <RadioButtonDoc />
         </div>
-    )
-}
+    );
+};
 
 export default RadioButtonDemo;

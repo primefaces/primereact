@@ -37,13 +37,9 @@ const MessageProps = [
     }
 ];
 
-const MessageEvents = [
+const MessageEvents = [];
 
-];
-
-const MessageStyles = [
-
-];
+const MessageStyles = [];
 
 module.exports = {
     message: {

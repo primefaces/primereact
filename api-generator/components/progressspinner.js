@@ -37,9 +37,7 @@ const ProgressSpinnerProps = [
     }
 ];
 
-const ProgressSpinnerEvents = [
-
-];
+const ProgressSpinnerEvents = [];
 
 const ProgressSpinnerStyles = [
     { name: 'p-progress-spinner', description: 'Container element.' },

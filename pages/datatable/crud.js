@@ -20,7 +20,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const DataTableCrudDemo = () => {
-
     let emptyProduct = {
         id: null,
         name: '',
@@ -47,45 +46,44 @@ const DataTableCrudDemo = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        productService.getProducts().then(data => setProducts(data));
+        productService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    }
+    };
 
     const openNew = () => {
         setProduct(emptyProduct);
         setSubmitted(false);
         setProductDialog(true);
-    }
+    };
 
     const hideDialog = () => {
         setSubmitted(false);
         setProductDialog(false);
-    }
+    };
 
     const hideDeleteProductDialog = () => {
         setDeleteProductDialog(false);
-    }
+    };
 
     const hideDeleteProductsDialog = () => {
         setDeleteProductsDialog(false);
-    }
+    };
 
     const saveProduct = () => {
         setSubmitted(true);
 
         if (product.name.trim()) {
             let _products = [...products];
-            let _product = {...product};
+            let _product = { ...product };
             if (product.id) {
                 const index = findIndexById(product.id);
 
                 _products[index] = _product;
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
-            }
-            else {
+            } else {
                 _product.id = createId();
                 _product.image = 'product-placeholder.svg';
                 _products.push(_product);
@@ -96,25 +94,25 @@ const DataTableCrudDemo = () => {
             setProductDialog(false);
             setProduct(emptyProduct);
         }
-    }
+    };
 
     const editProduct = (product) => {
-        setProduct({...product});
+        setProduct({ ...product });
         setProductDialog(true);
-    }
+    };
 
     const confirmDeleteProduct = (product) => {
         setProduct(product);
         setDeleteProductDialog(true);
-    }
+    };
 
     const deleteProduct = () => {
-        let _products = products.filter(val => val.id !== product.id);
+        let _products = products.filter((val) => val.id !== product.id);
         setProducts(_products);
         setDeleteProductDialog(false);
         setProduct(emptyProduct);
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
-    }
+    };
 
     const findIndexById = (id) => {
         let index = -1;
@@ -126,7 +124,7 @@ const DataTableCrudDemo = () => {
         }
 
         return index;
-    }
+    };
 
     const createId = () => {
         let id = '';
@@ -135,7 +133,7 @@ const DataTableCrudDemo = () => {
             id += chars.charAt(Math.floor(Math.random() * chars.length));
         }
         return id;
-    }
+    };
 
     const importCSV = (e) => {
         const file = e.files[0];
@@ -148,10 +146,10 @@ const DataTableCrudDemo = () => {
             const cols = data[0].replace(/['"]+/g, '').split(',');
             data.shift();
 
-            const importedData = data.map(d => {
+            const importedData = data.map((d) => {
                 d = d.split(',');
                 const processedData = cols.reduce((obj, c, i) => {
-                    c = c === 'Status' ? 'inventoryStatus' : (c === 'Reviews' ? 'rating' : c.toLowerCase());
+                    c = c === 'Status' ? 'inventoryStatus' : c === 'Reviews' ? 'rating' : c.toLowerCase();
                     obj[c] = d[i].replace(/['"]+/g, '');
                     (c === 'price' || c === 'rating') && (obj[c] = parseFloat(obj[c]));
                     return obj;
@@ -167,45 +165,45 @@ const DataTableCrudDemo = () => {
         };
 
         reader.readAsText(file, 'UTF-8');
-    }
+    };
 
     const exportCSV = () => {
         dt.current.exportCSV();
-    }
+    };
 
     const confirmDeleteSelected = () => {
         setDeleteProductsDialog(true);
-    }
+    };
 
     const deleteSelectedProducts = () => {
-        let _products = products.filter(val => !selectedProducts.includes(val));
+        let _products = products.filter((val) => !selectedProducts.includes(val));
         setProducts(_products);
         setDeleteProductsDialog(false);
         setSelectedProducts(null);
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
-    }
+    };
 
     const onCategoryChange = (e) => {
-        let _product = {...product};
+        let _product = { ...product };
         _product['category'] = e.value;
         setProduct(_product);
-    }
+    };
 
     const onInputChange = (e, name) => {
         const val = (e.target && e.target.value) || '';
-        let _product = {...product};
+        let _product = { ...product };
         _product[`${name}`] = val;
 
         setProduct(_product);
-    }
+    };
 
     const onInputNumberChange = (e, name) => {
         const val = e.value || 0;
-        let _product = {...product};
+        let _product = { ...product };
         _product[`${name}`] = val;
 
         setProduct(_product);
-    }
+    };
 
     const leftToolbarTemplate = () => {
         return (
@@ -213,8 +211,8 @@ const DataTableCrudDemo = () => {
                 <Button label="New" icon="pi pi-plus" className="p-button-success mr-2" onClick={openNew} />
                 <Button label="Delete" icon="pi pi-trash" className="p-button-danger" onClick={confirmDeleteSelected} disabled={!selectedProducts || !selectedProducts.length} />
             </React.Fragment>
-        )
-    }
+        );
+    };
 
     const rightToolbarTemplate = () => {
         return (
@@ -222,24 +220,24 @@ const DataTableCrudDemo = () => {
                 <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="mr-2 inline-block" onUpload={importCSV} />
                 <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
             </React.Fragment>
-        )
-    }
+        );
+    };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`images/product/${rowData.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
-    }
+        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="product-image" />;
+    };
 
     const priceBodyTemplate = (rowData) => {
         return formatCurrency(rowData.price);
-    }
+    };
 
     const ratingBodyTemplate = (rowData) => {
         return <Rating value={rowData.rating} readOnly cancel={false} />;
-    }
+    };
 
     const statusBodyTemplate = (rowData) => {
         return <span className={`product-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>;
-    }
+    };
 
     const actionBodyTemplate = (rowData) => {
         return (
@@ -248,7 +246,7 @@ const DataTableCrudDemo = () => {
                 <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => confirmDeleteProduct(rowData)} />
             </React.Fragment>
         );
-    }
+    };
 
     const header = (
         <div className="table-header">
@@ -278,116 +276,138 @@ const DataTableCrudDemo = () => {
         </React.Fragment>
     );
 
-        return (
-            <div>
-                <Head>
-                    <title>React Table Component - Crud</title>
-                    <meta name="description" content="A CRUD implementation using various PrimeReact components." />
-                </Head>
-                <div className="content-section introduction">
-                    <div className="feature-intro">
-                        <h1>DataTable <span>Crud</span></h1>
-                        <p>This samples demonstrates a CRUD implementation using various PrimeReact components.</p>
-                    </div>
-
-                    <DocActions github="datatable/crud.js" />
+    return (
+        <div>
+            <Head>
+                <title>React Table Component - Crud</title>
+                <meta name="description" content="A CRUD implementation using various PrimeReact components." />
+            </Head>
+            <div className="content-section introduction">
+                <div className="feature-intro">
+                    <h1>
+                        DataTable <span>Crud</span>
+                    </h1>
+                    <p>This samples demonstrates a CRUD implementation using various PrimeReact components.</p>
                 </div>
 
-                <div className="content-section implementation datatable-crud-demo">
-                    <Toast ref={toast} />
-
-                    <div className="card">
-                        <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
-
-                        <DataTable ref={dt} value={products} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)}
-                            dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
-                            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-                            globalFilter={globalFilter} header={header} responsiveLayout="scroll">
-                            <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
-                            <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column>
-                            <Column field="name" header="Name" sortable style={{ minWidth: '16rem' }}></Column>
-                            <Column field="image" header="Image" body={imageBodyTemplate}></Column>
-                            <Column field="price" header="Price" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
-                            <Column field="category" header="Category" sortable style={{ minWidth: '10rem' }}></Column>
-                            <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
-                            <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
-                            <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
-                        </DataTable>
-                    </div>
-
-                    <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-                        {product.image && <img src={`${contextPath}/images/product/${product.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image block m-auto pb-3" />}
-                        <div className="field">
-                            <label htmlFor="name">Name</label>
-                            <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
-                            {submitted && !product.name && <small className="p-error">Name is required.</small>}
-                        </div>
-                        <div className="field">
-                            <label htmlFor="description">Description</label>
-                            <InputTextarea id="description" value={product.description} onChange={(e) => onInputChange(e, 'description')} required rows={3} cols={20} />
-                        </div>
-
-                        <div className="field">
-                            <label className="mb-3">Category</label>
-                            <div className="formgrid grid">
-                                <div className="field-radiobutton col-6">
-                                    <RadioButton inputId="category1" name="category" value="Accessories" onChange={onCategoryChange} checked={product.category === 'Accessories'} />
-                                    <label htmlFor="category1">Accessories</label>
-                                </div>
-                                <div className="field-radiobutton col-6">
-                                    <RadioButton inputId="category2" name="category" value="Clothing" onChange={onCategoryChange} checked={product.category === 'Clothing'} />
-                                    <label htmlFor="category2">Clothing</label>
-                                </div>
-                                <div className="field-radiobutton col-6">
-                                    <RadioButton inputId="category3" name="category" value="Electronics" onChange={onCategoryChange} checked={product.category === 'Electronics'} />
-                                    <label htmlFor="category3">Electronics</label>
-                                </div>
-                                <div className="field-radiobutton col-6">
-                                    <RadioButton inputId="category4" name="category" value="Fitness" onChange={onCategoryChange} checked={product.category === 'Fitness'} />
-                                    <label htmlFor="category4">Fitness</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="formgrid grid">
-                            <div className="field col">
-                                <label htmlFor="price">Price</label>
-                                <InputNumber id="price" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
-                            </div>
-                            <div className="field col">
-                                <label htmlFor="quantity">Quantity</label>
-                                <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
-                            </div>
-                        </div>
-                    </Dialog>
-
-                    <Dialog visible={deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
-                        <div className="confirmation-content">
-                            <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                            {product && <span>Are you sure you want to delete <b>{product.name}</b>?</span>}
-                        </div>
-                    </Dialog>
-
-                    <Dialog visible={deleteProductsDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
-                        <div className="confirmation-content">
-                            <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                            {product && <span>Are you sure you want to delete the selected products?</span>}
-                        </div>
-                    </Dialog>
-                </div>
-
-                <DataTableCrudDoc />
+                <DocActions github="datatable/crud.js" />
             </div>
-        );
-}
 
-export default  DataTableCrudDemo;
+            <div className="content-section implementation datatable-crud-demo">
+                <Toast ref={toast} />
+
+                <div className="card">
+                    <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+
+                    <DataTable
+                        ref={dt}
+                        value={products}
+                        selection={selectedProducts}
+                        onSelectionChange={(e) => setSelectedProducts(e.value)}
+                        dataKey="id"
+                        paginator
+                        rows={10}
+                        rowsPerPageOptions={[5, 10, 25]}
+                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+                        globalFilter={globalFilter}
+                        header={header}
+                        responsiveLayout="scroll"
+                    >
+                        <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
+                        <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column>
+                        <Column field="name" header="Name" sortable style={{ minWidth: '16rem' }}></Column>
+                        <Column field="image" header="Image" body={imageBodyTemplate}></Column>
+                        <Column field="price" header="Price" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
+                        <Column field="category" header="Category" sortable style={{ minWidth: '10rem' }}></Column>
+                        <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                        <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column>
+                        <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
+                    </DataTable>
+                </div>
+
+                <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
+                    {product.image && (
+                        <img
+                            src={`${contextPath}/images/product/${product.image}`}
+                            onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                            alt={product.image}
+                            className="product-image block m-auto pb-3"
+                        />
+                    )}
+                    <div className="field">
+                        <label htmlFor="name">Name</label>
+                        <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
+                        {submitted && !product.name && <small className="p-error">Name is required.</small>}
+                    </div>
+                    <div className="field">
+                        <label htmlFor="description">Description</label>
+                        <InputTextarea id="description" value={product.description} onChange={(e) => onInputChange(e, 'description')} required rows={3} cols={20} />
+                    </div>
+
+                    <div className="field">
+                        <label className="mb-3">Category</label>
+                        <div className="formgrid grid">
+                            <div className="field-radiobutton col-6">
+                                <RadioButton inputId="category1" name="category" value="Accessories" onChange={onCategoryChange} checked={product.category === 'Accessories'} />
+                                <label htmlFor="category1">Accessories</label>
+                            </div>
+                            <div className="field-radiobutton col-6">
+                                <RadioButton inputId="category2" name="category" value="Clothing" onChange={onCategoryChange} checked={product.category === 'Clothing'} />
+                                <label htmlFor="category2">Clothing</label>
+                            </div>
+                            <div className="field-radiobutton col-6">
+                                <RadioButton inputId="category3" name="category" value="Electronics" onChange={onCategoryChange} checked={product.category === 'Electronics'} />
+                                <label htmlFor="category3">Electronics</label>
+                            </div>
+                            <div className="field-radiobutton col-6">
+                                <RadioButton inputId="category4" name="category" value="Fitness" onChange={onCategoryChange} checked={product.category === 'Fitness'} />
+                                <label htmlFor="category4">Fitness</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="formgrid grid">
+                        <div className="field col">
+                            <label htmlFor="price">Price</label>
+                            <InputNumber id="price" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
+                        </div>
+                        <div className="field col">
+                            <label htmlFor="quantity">Quantity</label>
+                            <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
+                        </div>
+                    </div>
+                </Dialog>
+
+                <Dialog visible={deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
+                    <div className="confirmation-content">
+                        <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
+                        {product && (
+                            <span>
+                                Are you sure you want to delete <b>{product.name}</b>?
+                            </span>
+                        )}
+                    </div>
+                </Dialog>
+
+                <Dialog visible={deleteProductsDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
+                    <div className="confirmation-content">
+                        <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
+                        {product && <span>Are you sure you want to delete the selected products?</span>}
+                    </div>
+                </Dialog>
+            </div>
+
+            <DataTableCrudDoc />
+        </div>
+    );
+};
+
+export default DataTableCrudDemo;
 
 export const DataTableCrudDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -800,7 +820,7 @@ export class DataTableCrudDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -1166,7 +1186,7 @@ const DataTableCrudDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -1531,8 +1551,8 @@ const DataTableCrudDemo = () => {
     );
 }
                 `
-            },
-        'browser': {
+        },
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./DataTableDemo.css" />
@@ -1963,15 +1983,11 @@ const DataTableCrudDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableCrudDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableCrudDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })}</TabView>
         </div>
-    )
-})
+    );
+});

@@ -70,18 +70,6 @@ const InputSwitchProps = [
         type: 'object',
         default: 'null',
         description: 'Configuration of the tooltip, refer to the tooltip documentation for more information.'
-    },
-    {
-        name: 'ariaLabel',
-        type: 'string',
-        default: 'null',
-        description: 'Used to define a string that labels the component.'
-    },
-    {
-        name: 'ariaLabelledBy',
-        type: 'string',
-        default: 'null',
-        description: 'Establishes relationships between the component and label(s) where its value should be one or more element IDs.'
     }
 ];
 

@@ -3,7 +3,6 @@ import { Ripple } from '../ripple/Ripple';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const MultiSelectItem = React.memo((props) => {
-
     const onClick = (event) => {
         if (props.onClick) {
             props.onClick({
@@ -13,7 +12,7 @@ export const MultiSelectItem = React.memo((props) => {
         }
 
         event.preventDefault();
-    }
+    };
 
     const onKeyDown = (event) => {
         if (props.onKeyDown) {
@@ -22,12 +21,16 @@ export const MultiSelectItem = React.memo((props) => {
                 option: props.option
             });
         }
-    }
+    };
 
-    const className = classNames('p-multiselect-item', {
-        'p-highlight': props.selected,
-        'p-disabled': props.disabled
-    }, props.option.className);
+    const className = classNames(
+        'p-multiselect-item',
+        {
+            'p-highlight': props.selected,
+            'p-disabled': props.disabled
+        },
+        props.option.className
+    );
     const checkboxClassName = classNames('p-checkbox-box', {
         'p-highlight': props.selected
     });
@@ -38,7 +41,7 @@ export const MultiSelectItem = React.memo((props) => {
     const tabIndex = props.disabled ? null : props.tabIndex || 0;
 
     return (
-        <li className={className} onClick={onClick} tabIndex={tabIndex} onKeyDown={onKeyDown} role="option" aria-selected={props.selected}>
+        <li className={className} style={props.style} onClick={onClick} tabIndex={tabIndex} onKeyDown={onKeyDown} role="option" aria-selected={props.selected}>
             <div className="p-checkbox p-component">
                 <div className={checkboxClassName}>
                     <span className={checkboxIcon}></span>
@@ -47,7 +50,7 @@ export const MultiSelectItem = React.memo((props) => {
             <span>{content}</span>
             <Ripple />
         </li>
-    )
+    );
 });
 
 MultiSelectItem.displayName = 'MultiSelectItem';

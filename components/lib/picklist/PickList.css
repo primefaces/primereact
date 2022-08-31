@@ -26,3 +26,17 @@
     overflow: hidden;
     position: relative;
 }
+
+.p-picklist-filter {
+    position: relative;
+}
+
+.p-picklist-filter-icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5rem;
+}
+
+.p-picklist-filter-input {
+    width: 100%;
+}

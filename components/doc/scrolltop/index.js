@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const ScrollTopDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -49,7 +49,7 @@ export class ScrollTopDemo extends Component {
 }
 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -89,7 +89,7 @@ export const ScrollTopDemo = () => {
 }
 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -129,7 +129,7 @@ export const ScrollTopDemo = () => {
 }
 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./ScrollTopDemo.css" />
@@ -195,55 +195,58 @@ const ScrollTopDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { ScrollTop } from 'primereact/scrolltop';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/scrolltop/scrolltop.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>Without any configuration, ScrollTop listens window scroll.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <ScrollTop />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Threshold</h5>
-                    <p>When the vertical scroll position reaches a certain value, ScrollTop gets displayed. This value is
-                        defined with the <i>threshold</i> property that defaults to 400.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        When the vertical scroll position reaches a certain value, ScrollTop gets displayed. This value is defined with the <i>threshold</i> property that defaults to 400.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <ScrollTop threshold={200} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Target Element</h5>
-                    <p>ScrollTop can also be assigned to its parent element by setting <i>target</i> as "parent".</p>
-<CodeHighlight>
-{`
+                    <p>
+                        ScrollTop can also be assigned to its parent element by setting <i>target</i> as "parent".
+                    </p>
+                    <CodeHighlight>
+                        {`
 <div style={{height: '400px', overflow: 'auto'}}>
     Content that overflows to container
     <ScrollTop />
 </div>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <p>Any property as style and class are passed to the main container element. Following are the additional properties to configure the component.</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -283,7 +286,13 @@ import { ScrollTop } from 'primereact/scrolltop';
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -293,11 +302,11 @@ import { ScrollTop } from 'primereact/scrolltop';
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Parameters</th>
-                                <th>Description</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>
@@ -315,7 +324,9 @@ import { ScrollTop } from 'primereact/scrolltop';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -337,16 +348,49 @@ import { ScrollTop } from 'primereact/scrolltop';
                         </table>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            ScrollTop uses a button element with an <i>aria-label</i> that refers to the <i>aria.scrollTop</i> property of the <Link href="/locale">locale</Link> API by default, you may use your own aria roles and attributes as any
+                            valid attribute is passed to the button element implicitly.
+                        </p>
+
+                        <h6>Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Scrolls to top.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Scrolls to top.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
+
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'ScrollTopDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'ScrollTopDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default ScrollTopDoc;

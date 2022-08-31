@@ -81,13 +81,15 @@ const InputNumberProps = [
         name: 'currency',
         type: 'string',
         default: 'null',
-        description: 'The currency to use in currency formatting. Possible values are the ISO 4217 currency codes, such as "USD" for the US dollar, "EUR" for the euro, or "CNY" for the Chinese RMB. There is no default value; if the style is "currency", the currency property must be provided.'
+        description:
+            'The currency to use in currency formatting. Possible values are the ISO 4217 currency codes, such as "USD" for the US dollar, "EUR" for the euro, or "CNY" for the Chinese RMB. There is no default value; if the style is "currency", the currency property must be provided.'
     },
     {
         name: 'currencyDisplay',
         type: 'string',
         default: 'symbol',
-        description: 'How to display the currency in currency formatting. Possible values are "symbol" to use a localized currency symbol such as €, ü"code" to use the ISO currency code, "name" to use a localized currency name such as "dollar"; the default is "symbol".'
+        description:
+            'How to display the currency in currency formatting. Possible values are "symbol" to use a localized currency symbol such as €, ü"code" to use the ISO currency code, "name" to use a localized currency name such as "dollar"; the default is "symbol".'
     },
     {
         name: 'useGrouping',
@@ -99,13 +101,15 @@ const InputNumberProps = [
         name: 'minFractionDigits',
         type: 'number',
         default: 'null',
-        description: 'The minimum number of fraction digits to use. Possible values are from 0 to 20; the default for plain number and percent formatting is 0; the default for currency formatting is the number of minor unit digits provided by the ISO 4217 currency code list (2 if the list doesn\'t provide that information).'
+        description:
+            "The minimum number of fraction digits to use. Possible values are from 0 to 20; the default for plain number and percent formatting is 0; the default for currency formatting is the number of minor unit digits provided by the ISO 4217 currency code list (2 if the list doesn't provide that information)."
     },
     {
         name: 'maxFractionDigits',
         type: 'number',
         default: 'null',
-        description: 'The maximum number of fraction digits to use. Possible values are from 0 to 20; the default for plain number formatting is the larger of minimumFractionDigits and 3; the default for currency formatting is the larger of minimumFractionDigits and the number of minor unit digits provided by the ISO 4217 currency code list(2 if the list doesn\'t provide that information).'
+        description:
+            "The maximum number of fraction digits to use. Possible values are from 0 to 20; the default for plain number formatting is the larger of minimumFractionDigits and 3; the default for currency formatting is the larger of minimumFractionDigits and the number of minor unit digits provided by the ISO 4217 currency code list(2 if the list doesn't provide that information)."
     },
     {
         name: 'id',
@@ -126,10 +130,10 @@ const InputNumberProps = [
         description: 'Type of the input element.'
     },
     {
-        name: "allowEmpty",
-        type: "boolean",
-        default: "true",
-        description: "Determines whether the input field is empty."
+        name: 'allowEmpty',
+        type: 'boolean',
+        default: 'true',
+        description: 'Determines whether the input field is empty.'
     },
     {
         name: 'step',

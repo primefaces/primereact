@@ -3,12 +3,11 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
-
+import { DevelopmentSection } from '../common/developmentsection';
 
 const EditorDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -52,7 +51,7 @@ export class EditorDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -88,7 +87,7 @@ const EditorDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -124,7 +123,7 @@ const EditorDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/quill/dist/quill.min.js"></script>
@@ -165,41 +164,46 @@ const EditorDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Editor } from 'primereact/editor';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/editor/editor.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Editor is used as a controlled component with <i>value</i> and <i>onTextChange</i> properties.</p>
+                    <p>
+                        Editor is used as a controlled component with <i>value</i> and <i>onTextChange</i> properties.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Editor style={{height:'320px'}} value={text} onTextChange={(e) => setText(e.htmlValue)} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Toolbar</h5>
-                    <p>Editor provides a default toolbar with common options, to customize it define your elements with the <i>headerTemplate</i>. Refer to <a href="http://quilljs.com/docs/modules/toolbar/">Quill documentation</a> for available controls.</p>
+                    <p>
+                        Editor provides a default toolbar with common options, to customize it define your elements with the <i>headerTemplate</i>. Refer to <a href="http://quilljs.com/docs/modules/toolbar/">Quill documentation</a> for available
+                        controls.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 const header = (
     <span className="ql-formats">
         <button className="ql-bold" aria-label="Bold"></button>
@@ -210,10 +214,10 @@ const header = (
 
 <Editor style={{height:'320px'}} value={text} onTextChange={(e) => setText(e.htmlValue)} headerTemplate={header}/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
-                    <p>Standard HTMLDivElement properties are passed to the wrapping div element.<br/>In addition the component uses these properties:</p>
+                    <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -265,13 +269,17 @@ const header = (
                                     <td>modules</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>Modules configuration, see <a href="http://quilljs.com/docs/modules/">here</a> for available options.</td>
+                                    <td>
+                                        Modules configuration, see <a href="http://quilljs.com/docs/modules/">here</a> for available options.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>formats</td>
                                     <td>string[]</td>
                                     <td>null</td>
-                                    <td>Whitelist of formats to display, see <a href="http://quilljs.com/docs/formats/">here</a> for available options.</td>
+                                    <td>
+                                        Whitelist of formats to display, see <a href="http://quilljs.com/docs/formats/">here</a> for available options.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>headerTemplate</td>
@@ -296,17 +304,27 @@ const header = (
                             <tbody>
                                 <tr>
                                     <td>onTextChange</td>
-                                    <td>event.delta: Representation of the change.<br />
-                                    event.source: Source of change. Will be either "user" or "api".<br />
-                                    event.htmlValue: Current value as html.<br />
-                                    event.textValue: Current value as text.<br /></td>
+                                    <td>
+                                        event.delta: Representation of the change.
+                                        <br />
+                                        event.source: Source of change. Will be either "user" or "api".
+                                        <br />
+                                        event.htmlValue: Current value as html.
+                                        <br />
+                                        event.textValue: Current value as text.
+                                        <br />
+                                    </td>
                                     <td>Callback to invoke when text of editor changes.</td>
                                 </tr>
                                 <tr>
                                     <td>onSelectionChange</td>
-                                    <td>event.range: Object with index and length keys indicating where the selection exists.<br />
-                                    event.oldRange: Object with index and length keys indicating where the previous selection was.<br />
-                                    event.source: Source of change. Will be either "user" or "api".</td>
+                                    <td>
+                                        event.range: Object with index and length keys indicating where the selection exists.
+                                        <br />
+                                        event.oldRange: Object with index and length keys indicating where the previous selection was.
+                                        <br />
+                                        event.source: Source of change. Will be either "user" or "api".
+                                    </td>
                                     <td>Callback to invoke when selected text of editor changes.</td>
                                 </tr>
                                 <tr>
@@ -318,10 +336,14 @@ const header = (
                         </table>
                     </div>
 
-                    <p>Refer to <a href="http://beta.quilljs.com/docs/api/#events">Quill documentation</a> for more information.</p>
+                    <p>
+                        Refer to <a href="http://beta.quilljs.com/docs/api/#events">Quill documentation</a> for more information.
+                    </p>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -347,23 +369,29 @@ const header = (
                         </table>
                     </div>
 
-
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <p>
+                            Quill performs generally well in terms of accessibility. The elements in the toolbar can be tabbed and have the necessary ARIA roles/attributes for screen readers. One known limitation is the lack of arrow key support for{' '}
+                            <a href="https://github.com/quilljs/quill/issues/1031">dropdowns</a> in the toolbar that may be overcome with a custom toolbar.
+                        </p>
+                    </DevelopmentSection>
                     <h5>Dependencies</h5>
-                    <p><a href="http://quilljs.com">Quill</a> Editor 1.3+.</p>
+                    <p>
+                        <a href="http://quilljs.com">Quill</a> Editor 1.3+.
+                    </p>
                     <p>Resources of quill needs to be added to your application.</p>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 npm install quill
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'EditorDemo', sources: sources, dependencies: { "quill": "1.3.7" } })
-                }
+                {useLiveEditorTabs({ name: 'EditorDemo', sources: sources, dependencies: { quill: '1.3.7' } })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default EditorDoc;

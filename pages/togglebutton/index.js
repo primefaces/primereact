@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const ToggleButtonDemo = () => {
-
     const [checked1, setChecked1] = useState(false);
     const [checked2, setChecked2] = useState(false);
 
@@ -27,16 +26,16 @@ const ToggleButtonDemo = () => {
             <div className="content-section implementation">
                 <div className="card">
                     <h5>Basic</h5>
-                    <ToggleButton checked={checked1} onChange={(e) => setChecked1(e.value)} onIcon="pi pi-check" offIcon="pi pi-times" />
+                    <ToggleButton checked={checked1} onChange={(e) => setChecked1(e.value)} onIcon="pi pi-check" offIcon="pi pi-times" className="w-full sm:w-10rem" aria-label="Confirmation" />
 
                     <h5>Customized</h5>
-                    <ToggleButton checked={checked2} onChange={(e) => setChecked2(e.value)} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" style={{ width: '10em' }} />
+                    <ToggleButton checked={checked2} onChange={(e) => setChecked2(e.value)} onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" className="w-full sm:w-10rem" aria-label="Confirmation" />
                 </div>
             </div>
 
             <ToggleButtonDoc />
         </div>
     );
-}
+};
 
 export default ToggleButtonDemo;

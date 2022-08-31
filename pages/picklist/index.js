@@ -7,26 +7,25 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const PickListDemo = () => {
-
     const [source, setSource] = useState([]);
     const [target, setTarget] = useState([]);
     const productService = new ProductService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setSource(data));
+        productService.getProductsSmall().then((data) => setSource(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onChange = (event) => {
         setSource(event.source);
         setTarget(event.target);
-    }
+    };
 
     const itemTemplate = (item) => {
         return (
             <div className="product-item">
                 <div className="image-container">
-                    <img src={`${contextPath}/images/product/${item.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} />
+                    <img src={`${contextPath}/images/product/${item.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={item.name} />
                 </div>
                 <div className="product-list-detail">
                     <h5 className="mb-2">{item.name}</h5>
@@ -39,7 +38,7 @@ const PickListDemo = () => {
                 </div>
             </div>
         );
-    }
+    };
 
     return (
         <div>
@@ -58,16 +57,25 @@ const PickListDemo = () => {
 
             <div className="content-section implementation picklist-demo">
                 <div className="card">
-                    <PickList source={source} target={target} itemTemplate={itemTemplate}
-                        sourceHeader="Available" targetHeader="Selected"
-                        sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
-                        onChange={onChange}></PickList>
+                    <PickList
+                        source={source}
+                        target={target}
+                        itemTemplate={itemTemplate}
+                        sourceHeader="Available"
+                        targetHeader="Selected"
+                        sourceStyle={{ height: '342px' }}
+                        targetStyle={{ height: '342px' }}
+                        onChange={onChange}
+                        filterBy="name"
+                        sourceFilterPlaceholder="Search by name"
+                        targetFilterPlaceholder="Search by name"
+                    />
                 </div>
             </div>
 
             <PickListDoc />
         </div>
     );
-}
+};
 
 export default PickListDemo;

@@ -26,7 +26,7 @@ const TreeTableLazyDemo = () => {
 
         for (let i = 0; i < rows; i++) {
             let node = {
-                key: (first + i),
+                key: first + i,
                 data: {
                     name: 'Item ' + (first + i),
                     size: Math.floor(Math.random() * 1000) + 1 + 'kb',
@@ -39,7 +39,7 @@ const TreeTableLazyDemo = () => {
         }
 
         return nodes;
-    }
+    };
 
     const onExpand = (event) => {
         if (!event.node.children) {
@@ -55,7 +55,7 @@ const TreeTableLazyDemo = () => {
                             name: lazyNode.data.name + ' - 0',
                             size: Math.floor(Math.random() * 1000) + 1 + 'kb',
                             type: 'File'
-                        },
+                        }
                     },
                     {
                         data: {
@@ -66,7 +66,7 @@ const TreeTableLazyDemo = () => {
                     }
                 ];
 
-                let _nodes = nodes.map(node => {
+                let _nodes = nodes.map((node) => {
                     if (node.key === event.node.key) {
                         node = lazyNode;
                     }
@@ -78,7 +78,7 @@ const TreeTableLazyDemo = () => {
                 setNodes(_nodes);
             }, 250);
         }
-    }
+    };
 
     const onPage = (event) => {
         setLoading(true);
@@ -90,7 +90,7 @@ const TreeTableLazyDemo = () => {
             setNodes(loadNodes(event.first, event.rows));
             setLoading(false);
         }, 500);
-    }
+    };
 
     return (
         <div>
@@ -100,9 +100,13 @@ const TreeTableLazyDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>TreeTable <span>Lazy</span></h1>
-                    <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging or sorting.
-                        In addition, children of a node can be loaded on demand at onNodeExpand event as well. Sample belows imitates lazy paging by using an in memory list.</p>
+                    <h1>
+                        TreeTable <span>Lazy</span>
+                    </h1>
+                    <p>
+                        Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking corresponding callbacks everytime paging or sorting. In addition, children of a node can be loaded
+                        on demand at onNodeExpand event as well. Sample belows imitates lazy paging by using an in memory list.
+                    </p>
                 </div>
 
                 <DocActions github="treetable/lazy.js" />
@@ -110,8 +114,7 @@ const TreeTableLazyDemo = () => {
 
             <div className="content-section implementation">
                 <div className="card">
-                    <TreeTable value={nodes} lazy paginator totalRecords={totalRecords}
-                        first={first} rows={rows} onPage={onPage} onExpand={onExpand} loading={loading}>
+                    <TreeTable value={nodes} lazy paginator totalRecords={totalRecords} first={first} rows={rows} onPage={onPage} onExpand={onExpand} loading={loading}>
                         <Column field="name" header="Name" expander></Column>
                         <Column field="size" header="Size"></Column>
                         <Column field="type" header="Type"></Column>
@@ -121,15 +124,14 @@ const TreeTableLazyDemo = () => {
 
             <TreeTableLazyDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeTableLazyDemo;
 
 const TreeTableLazyDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -258,7 +260,7 @@ export class TreeTableLazyDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -366,7 +368,7 @@ const TreeTableLazyDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -474,7 +476,7 @@ const TreeTableLazyDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
@@ -588,15 +590,11 @@ const TreeTableLazyDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeTableLazyDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeTableLazyDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })}</TabView>
         </div>
-    )
-})
+    );
+});

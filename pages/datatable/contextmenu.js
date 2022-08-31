@@ -10,40 +10,39 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const DataTableContextMenuDemo = () => {
-
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const toast = useRef(null);
     const cm = useRef(null);
     const menuModel = [
-        {label: 'View', icon: 'pi pi-fw pi-search', command: () => viewProduct(selectedProduct)},
-        {label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct)}
+        { label: 'View', icon: 'pi pi-fw pi-search', command: () => viewProduct(selectedProduct) },
+        { label: 'Delete', icon: 'pi pi-fw pi-times', command: () => deleteProduct(selectedProduct) }
     ];
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const viewProduct = (product) => {
-        toast.current.show({severity: 'info', summary: 'Product Selected', detail: product.name});
-    }
+        toast.current.show({ severity: 'info', summary: 'Product Selected', detail: product.name });
+    };
 
     const deleteProduct = (product) => {
         let _products = [...products];
         _products = _products.filter((p) => p.id !== product.id);
 
-        toast.current.show({severity: 'error', summary: 'Product Deleted', detail: product.name});
+        toast.current.show({ severity: 'error', summary: 'Product Deleted', detail: product.name });
         setProducts(_products);
-    }
+    };
 
     const formatCurrency = (value) => {
-        return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
-    }
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    };
 
     const priceBodyTemplate = (rowData) => {
         return formatCurrency(rowData.price);
-    }
+    };
 
     return (
         <div>
@@ -53,7 +52,9 @@ const DataTableContextMenuDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>ContextMenu</span></h1>
+                    <h1>
+                        DataTable <span>ContextMenu</span>
+                    </h1>
                     <p>DataTable has exclusive integration with ContextMenu.</p>
                 </div>
 
@@ -63,12 +64,10 @@ const DataTableContextMenuDemo = () => {
             <div className="content-section implementation">
                 <Toast ref={toast}></Toast>
 
-                <ContextMenu model={menuModel} ref={cm} onHide={() => setSelectedProduct(null)}/>
+                <ContextMenu model={menuModel} ref={cm} onHide={() => setSelectedProduct(null)} />
 
                 <div className="card">
-                    <DataTable value={products} contextMenuSelection={selectedProduct}
-                        onContextMenuSelectionChange={e => setSelectedProduct(e.value)}
-                        onContextMenu={e => cm.current.show(e.originalEvent)} responsiveLayout="scroll">
+                    <DataTable value={products} contextMenuSelection={selectedProduct} onContextMenuSelectionChange={(e) => setSelectedProduct(e.value)} onContextMenu={(e) => cm.current.show(e.originalEvent)} responsiveLayout="scroll">
                         <Column field="code" header="Code"></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="category" header="Category"></Column>
@@ -80,14 +79,13 @@ const DataTableContextMenuDemo = () => {
             <DataTableContextMenuDemoDoc></DataTableContextMenuDemoDoc>
         </div>
     );
-}
+};
 
 export default DataTableContextMenuDemo;
 
 export const DataTableContextMenuDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -165,7 +163,7 @@ export class DataTableContextMenuDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -231,7 +229,7 @@ const DataTableContextMenuDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -297,7 +295,7 @@ const DataTableContextMenuDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
 <script src="./ProductService.js"></script>
@@ -372,15 +370,11 @@ const DataTableContextMenuDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableContextMenuDemo', sources: sources, service: 'ProductService', data: 'products-small' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableContextMenuDemo', sources: sources, service: 'ProductService', data: 'products-small' })}</TabView>
         </div>
-    )
-})
+    );
+});

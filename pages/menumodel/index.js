@@ -1,33 +1,31 @@
+import Head from 'next/head';
 import React, { memo } from 'react';
 import { CodeHighlight } from '../../components/doc/common/codehighlight';
-import Head from 'next/head';
 
 const MenuModelDemo = () => {
-        return (
-            <div>
-                <Head>
-                    <title>MenuModel - PrimeReact</title>
-                    <meta name="description" content="PrimeReact menus components share a common api to specify the menuitems and submenus." />
-                </Head>
-                <div className="content-section introduction">
-                    <div>
-                        <h1>MenuModel API</h1>
-                        <p>PrimeReact menus components share a common api to specify the menuitems and submenus.</p>
-                    </div>
+    return (
+        <div>
+            <Head>
+                <title>MenuModel - PrimeReact</title>
+                <meta name="description" content="PrimeReact menus components share a common api to specify the menuitems and submenus." />
+            </Head>
+            <div className="content-section introduction">
+                <div>
+                    <h1>MenuModel API</h1>
+                    <p>PrimeReact menus components share a common api to specify the menuitems and submenus.</p>
                 </div>
-
-                <MenuModelDoc />
             </div>
-        )
-}
+
+            <MenuModelDoc />
+        </div>
+    );
+};
 export default MenuModelDemo;
 
 const MenuModelDoc = memo(() => {
-
-
     return (
         <div className="content-section documentation" id="app-doc">
-            <h3 style={{marginTop: 0}}>MenuItem</h3>
+            <h3 style={{ marginTop: 0 }}>MenuItem</h3>
             <p>Core of the API is the MenuItem class that defines various options such as the label, icon and children of an item in a menu.</p>
             <CodeHighlight lang="js">
                 {`
@@ -45,7 +43,7 @@ const items = [
 ]
 
 `}
-</CodeHighlight>
+            </CodeHighlight>
 
             <p>MenuItem provides the following properties. Note that not all of them may be utilized by the corresponding menu component.</p>
 
@@ -103,6 +101,12 @@ const items = [
                             <td>When set as true, disables the menuitem.</td>
                         </tr>
                         <tr>
+                            <td>visible</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>When set as false, hides the menu item.</td>
+                        </tr>
+                        <tr>
                             <td>target</td>
                             <td>string</td>
                             <td>null</td>
@@ -138,8 +142,8 @@ const items = [
 
             <h3>Template</h3>
             <p>Used to create custom menuitem elements.</p>
-<CodeHighlight lang="js">
-{`
+            <CodeHighlight lang="js">
+                {`
 const items =
 [
     {
@@ -157,10 +161,10 @@ const items =
 ];
 
 `}
-</CodeHighlight>
+            </CodeHighlight>
 
-<CodeHighlight lang="js">
-    {`
+            <CodeHighlight lang="js">
+                {`
 template: (item, options) => {
     // item: Current item object.
     // options.onClick: Click event for the default element.
@@ -173,12 +177,12 @@ template: (item, options) => {
     // Note: Extra options may come according to the components.
 }
 `}
-</CodeHighlight>
+            </CodeHighlight>
 
-                <h3>Command</h3>
-                <p>The function to invoke when an item is clicked is defined using the command property.</p>
-<CodeHighlight lang="js">
-    {`
+            <h3>Command</h3>
+            <p>The function to invoke when an item is clicked is defined using the command property.</p>
+            <CodeHighlight lang="js">
+                {`
 const items =
 [
     {
@@ -192,12 +196,12 @@ const items =
 ];
 
 `}
-</CodeHighlight>
+            </CodeHighlight>
 
             <h3>Navigation</h3>
             <p>Navigation is specified using url property for external links or using command function for internal router.</p>
-<CodeHighlight lang="js">
-{`
+            <CodeHighlight lang="js">
+                {`
 const items =
 [
     {
@@ -215,7 +219,7 @@ const items =
 ];
 
 `}
-</CodeHighlight>
+            </CodeHighlight>
         </div>
-    )
-})
+    );
+});

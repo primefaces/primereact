@@ -1,11 +1,10 @@
+import Head from 'next/head';
 import React, { useState } from 'react';
-import { Button } from '../../components/lib/button/Button';
 import ButtonDoc from '../../components/doc/button';
 import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { Button } from '../../components/lib/button/Button';
 
 const ButtonDemo = () => {
-
     const [loading1, setLoading1] = useState(false);
     const [loading2, setLoading2] = useState(false);
 
@@ -15,7 +14,7 @@ const ButtonDemo = () => {
         setTimeout(() => {
             setLoading1(false);
         }, 2000);
-    }
+    };
 
     const onLoadingClick2 = () => {
         setLoading2(true);
@@ -23,7 +22,7 @@ const ButtonDemo = () => {
         setTimeout(() => {
             setLoading2(false);
         }, 2000);
-    }
+    };
 
     return (
         <div>
@@ -48,7 +47,7 @@ const ButtonDemo = () => {
                     <Button label="Link" className="p-button-link" />
 
                     <h5>Icons</h5>
-                    <Button icon="pi pi-check" />
+                    <Button icon="pi pi-check" aria-label="Submit" />
                     <Button label="Submit" icon="pi pi-check" />
                     <Button label="Submit" icon="pi pi-check" iconPos="right" />
 
@@ -116,32 +115,32 @@ const ButtonDemo = () => {
                     <Button label="Danger" className="p-button-outlined p-button-danger" />
 
                     <h5>Rounded Icon Buttons</h5>
-                    <Button icon="pi pi-bookmark" className="p-button-rounded p-button-secondary" />
-                    <Button icon="pi pi-search" className="p-button-rounded p-button-success" />
-                    <Button icon="pi pi-user" className="p-button-rounded p-button-info" />
-                    <Button icon="pi pi-bell" className="p-button-rounded p-button-warning" />
-                    <Button icon="pi pi-heart" className="p-button-rounded p-button-help" />
-                    <Button icon="pi pi-times" className="p-button-rounded p-button-danger" />
-                    <Button icon="pi pi-check" className="p-button-rounded" />
+                    <Button icon="pi pi-bookmark" className="p-button-rounded p-button-secondary" aria-label="Bookmark" />
+                    <Button icon="pi pi-search" className="p-button-rounded p-button-success" aria-label="Search" />
+                    <Button icon="pi pi-user" className="p-button-rounded p-button-info" aria-label="User" />
+                    <Button icon="pi pi-bell" className="p-button-rounded p-button-warning" aria-label="Notification" />
+                    <Button icon="pi pi-heart" className="p-button-rounded p-button-help" aria-label="Favorite" />
+                    <Button icon="pi pi-times" className="p-button-rounded p-button-danger" aria-label="Cancel" />
+                    <Button icon="pi pi-check" className="p-button-rounded" aria-label="Filter" />
 
                     <h5>Rounded Text Icon Buttons</h5>
-                    <Button icon="pi pi-check" className="p-button-rounded p-button-text" />
-                    <Button icon="pi pi-bookmark" className="p-button-rounded p-button-secondary p-button-text" />
-                    <Button icon="pi pi-search" className="p-button-rounded p-button-success p-button-text" />
-                    <Button icon="pi pi-user" className="p-button-rounded p-button-info p-button-text" />
-                    <Button icon="pi pi-bell" className="p-button-rounded p-button-warning p-button-text" />
-                    <Button icon="pi pi-heart" className="p-button-rounded p-button-help p-button-text" />
-                    <Button icon="pi pi-times" className="p-button-rounded p-button-danger p-button-text" />
-                    <Button icon="pi pi-filter" className="p-button-rounded p-button-text p-button-plain" />
+                    <Button icon="pi pi-check" className="p-button-rounded p-button-text" aria-label="Submit" />
+                    <Button icon="pi pi-bookmark" className="p-button-rounded p-button-secondary p-button-text" aria-label="Bookmark" />
+                    <Button icon="pi pi-search" className="p-button-rounded p-button-success p-button-text" aria-label="Search" />
+                    <Button icon="pi pi-user" className="p-button-rounded p-button-info p-button-text" aria-label="User" />
+                    <Button icon="pi pi-bell" className="p-button-rounded p-button-warning p-button-text" aria-label="Notification" />
+                    <Button icon="pi pi-heart" className="p-button-rounded p-button-help p-button-text" aria-label="Favorite" />
+                    <Button icon="pi pi-times" className="p-button-rounded p-button-danger p-button-text" aria-label="Cancel" />
+                    <Button icon="pi pi-filter" className="p-button-rounded p-button-text p-button-plain" aria-label="Filter" />
 
                     <h5>Rounded and Outlined Icon Buttons</h5>
-                    <Button icon="pi pi-check" className="p-button-rounded p-button-outlined" />
-                    <Button icon="pi pi-bookmark" className="p-button-rounded p-button-secondary p-button-outlined" />
-                    <Button icon="pi pi-search" className="p-button-rounded p-button-success p-button-outlined" />
-                    <Button icon="pi pi-user" className="p-button-rounded p-button-info p-button-outlined" />
-                    <Button icon="pi pi-bell" className="p-button-rounded p-button-warning p-button-outlined" />
-                    <Button icon="pi pi-heart" className="p-button-rounded p-button-help p-button-outlined" />
-                    <Button icon="pi pi-times" className="p-button-rounded p-button-danger p-button-outlined" />
+                    <Button icon="pi pi-check" className="p-button-rounded p-button-outlined" aria-label="Submit" />
+                    <Button icon="pi pi-bookmark" className="p-button-rounded p-button-secondary p-button-outlined" aria-label="Bookmark" />
+                    <Button icon="pi pi-search" className="p-button-rounded p-button-success p-button-outlined" aria-label="Search" />
+                    <Button icon="pi pi-user" className="p-button-rounded p-button-info p-button-outlined" aria-label="User" />
+                    <Button icon="pi pi-bell" className="p-button-rounded p-button-warning p-button-outlined" aria-label="Notification" />
+                    <Button icon="pi pi-heart" className="p-button-rounded p-button-help p-button-outlined" aria-label="Favorite" />
+                    <Button icon="pi pi-times" className="p-button-rounded p-button-danger p-button-outlined" aria-label="Cancel" />
 
                     <h5>Badges</h5>
                     <Button type="button" label="Emails" badge="8" />
@@ -161,35 +160,35 @@ const ButtonDemo = () => {
 
                     <h5>Template</h5>
                     <div className="template">
-                        <Button className="google p-0">
+                        <Button className="google p-0" aria-label="Google">
                             <i className="pi pi-google px-2"></i>
                             <span className="px-3">Google</span>
                         </Button>
-                        <Button className="youtube p-0">
+                        <Button className="youtube p-0" aria-label="Youtube">
                             <i className="pi pi-youtube px-2"></i>
                             <span className="px-3">Youtube</span>
                         </Button>
-                        <Button className="vimeo p-0">
+                        <Button className="vimeo p-0" aria-label="Vimeo">
                             <i className="pi pi-vimeo px-2"></i>
                             <span className="px-3">Vimeo</span>
                         </Button>
-                        <Button className="facebook p-0">
+                        <Button className="facebook p-0" aria-label="Facebook">
                             <i className="pi pi-facebook px-2"></i>
                             <span className="px-3">Facebook</span>
                         </Button>
-                        <Button className="twitter p-0">
+                        <Button className="twitter p-0" aria-label="Twitter">
                             <i className="pi pi-twitter px-2"></i>
                             <span className="px-3">Twitter</span>
                         </Button>
-                        <Button className="slack p-0">
+                        <Button className="slack p-0" aria-label="Slack">
                             <i className="pi pi-slack px-2"></i>
                             <span className="px-3">Slack</span>
                         </Button>
-                        <Button className="amazon p-0">
+                        <Button className="amazon p-0" aria-label="Amazon">
                             <i className="pi pi-amazon px-2"></i>
                             <span className="px-3">Amazon</span>
                         </Button>
-                        <Button className="discord p-0">
+                        <Button className="discord p-0" aria-label="Discord">
                             <i className="pi pi-discord px-2"></i>
                             <span className="px-3">Discord</span>
                         </Button>
@@ -199,7 +198,7 @@ const ButtonDemo = () => {
 
             <ButtonDoc></ButtonDoc>
         </div>
-    )
-}
+    );
+};
 
 export default ButtonDemo;

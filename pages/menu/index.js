@@ -8,7 +8,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 const MenuDemo = () => {
-
     const menu = useRef(null);
     const toast = useRef(null);
 
@@ -86,7 +85,7 @@ const MenuDemo = () => {
 
             <MenuDoc />
         </div>
-    )
-}
+    );
+};
 
 export default MenuDemo;

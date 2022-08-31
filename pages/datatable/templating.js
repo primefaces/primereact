@@ -11,35 +11,33 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const DataTableTemplatingDemo = () => {
-
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    }
+    };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
-    }
+        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="product-image" />;
+    };
 
     const priceBodyTemplate = (rowData) => {
         return formatCurrency(rowData.price);
-    }
+    };
 
     const ratingBodyTemplate = (rowData) => {
         return <Rating value={rowData.rating} readOnly cancel={false} />;
-    }
+    };
 
     const statusBodyTemplate = (rowData) => {
         return <span className={`product-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>;
-    }
+    };
 
     const header = (
         <div className="table-header">
@@ -57,7 +55,9 @@ const DataTableTemplatingDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>Templating</span></h1>
+                    <h1>
+                        DataTable <span>Templating</span>
+                    </h1>
                     <p>Custom content at header, body and footer sections are supported via templating.</p>
                 </div>
 
@@ -80,14 +80,13 @@ const DataTableTemplatingDemo = () => {
             <DataTableTemplatingDemoDoc></DataTableTemplatingDemoDoc>
         </div>
     );
-}
+};
 
 export default DataTableTemplatingDemo;
 
 export const DataTableTemplatingDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -165,7 +164,7 @@ export class DataTableTemplatingDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -229,7 +228,7 @@ const DataTableTemplatingDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -293,7 +292,7 @@ const DataTableTemplatingDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
     <link rel="stylesheet" href="./DataTableDemo.css" />
@@ -383,15 +382,11 @@ const DataTableTemplatingDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableTemplatingDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableTemplatingDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })}</TabView>
         </div>
-    )
-})
+    );
+});

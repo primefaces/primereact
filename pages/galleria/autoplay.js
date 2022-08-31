@@ -8,8 +8,7 @@ import getConfig from 'next/config';
 import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 
 const GalleriaAutoPlayDemo = () => {
-
-    const [images, setImages] = useState(null)
+    const [images, setImages] = useState(null);
     const galleriaService = new PhotoService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
@@ -29,16 +28,16 @@ const GalleriaAutoPlayDemo = () => {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        galleriaService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
         return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
-    }
+    };
 
     const thumbnailTemplate = (item) => {
         return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />;
-    }
+    };
 
     return (
         <div>
@@ -48,7 +47,9 @@ const GalleriaAutoPlayDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Galleria <span>AutoPlay</span></h1>
+                    <h1>
+                        Galleria <span>AutoPlay</span>
+                    </h1>
                     <p>AutoPlay mode is used to implement slideshows.</p>
                 </div>
 
@@ -57,22 +58,20 @@ const GalleriaAutoPlayDemo = () => {
 
             <div className="content-section implementation">
                 <div className="card">
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-                        item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
+                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} item={itemTemplate} thumbnail={thumbnailTemplate} circular autoPlay transitionInterval={2000} />
                 </div>
             </div>
 
             <GalleriaAutoPlayDemoDoc />
         </div>
     );
-}
+};
 
 export default GalleriaAutoPlayDemo;
 
 export const GalleriaAutoPlayDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -133,7 +132,7 @@ export class GalleriaAutoPlayDemo extends Component {
 }
             `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -183,7 +182,7 @@ const GalleriaAutoPlayDemo = () => {
 }
             `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -233,7 +232,7 @@ const GalleriaAutoPlayDemo = () => {
 }
                         `
         },
-        'browser' : {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./PhotoService.js"></script>
@@ -286,16 +285,11 @@ const GalleriaAutoPlayDemo = () => {
     }
                     `
         }
-
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'GalleriaAutoPlayDemo', sources: sources, service: 'PhotoService', data: 'photos' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'GalleriaAutoPlayDemo', sources: sources, service: 'PhotoService', data: 'photos' })}</TabView>
         </div>
-    )
-})
+    );
+});

@@ -2,11 +2,11 @@ import React, { memo } from 'react';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const TreeDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -77,7 +77,7 @@ export class TreeDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -136,7 +136,7 @@ const TreeDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -195,7 +195,7 @@ const TreeDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./NodeService.js"></script>
@@ -257,28 +257,30 @@ const TreeDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Tree } from 'primereact/tree';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Tree component requires an array of TreeNode objects as its <i>value</i>.</p>
+                    <p>
+                        Tree component requires an array of TreeNode objects as its <i>value</i>.
+                    </p>
 
                     <h5>TreeNode API</h5>
                     <div className="doc-tablewrapper">
@@ -362,14 +364,14 @@ import { Tree } from 'primereact/tree';
                         </table>
                     </div>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Tree value={data} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 const data: [
     {
         "key": "0",
@@ -423,15 +425,17 @@ const data: [
     }
 ]
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Controlled vs Uncontrolled</h5>
-                    <p>Tree expansion state is managed in two ways, in uncontrolled mode only initial expanded state of a node can be defined using <i>expandedKeys</i> property whereas in controlled mode <i>expandedKeys</i>
+                    <p>
+                        Tree expansion state is managed in two ways, in uncontrolled mode only initial expanded state of a node can be defined using <i>expandedKeys</i> property whereas in controlled mode <i>expandedKeys</i>
                         property along with <i>onToggle</i> properties are used for full control over the state. If you need to expand or collapse the state of nodes programmatically then controlled mode should be used. Example below demonstrates
-                        both cases;</p>
+                        both cases;
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import React, { Component } from 'react';
 import { Tree } from 'primereact/tree';
 import { Button } from 'primereact/button';
@@ -470,14 +474,16 @@ export const TreeDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Selection</h5>
-                    <p>Tree supports single, multiple and checkbox selection modes. Define <i>selectionMode</i>, <i>selectionKeys</i> and <i>onSelectionChange</i> properties to control the selection. In single mode, selectionKeys should
-        be a single value whereas in multiple or checkbox modes an array is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i> property. Note that
-        in touch enabled devices, Tree does not require metaKey.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        Tree supports single, multiple and checkbox selection modes. Define <i>selectionMode</i>, <i>selectionKeys</i> and <i>onSelectionChange</i> properties to control the selection. In single mode, selectionKeys should be a single
+                        value whereas in multiple or checkbox modes an array is required. By default in multiple selection mode, metaKey is necessary to add to existing selections however this can be configured with <i>metaKeySelection</i> property.
+                        Note that in touch enabled devices, Tree does not require metaKey.
+                    </p>
+                    <CodeHighlight lang="js">
+                        {`
 import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
 import {NodeService} from '../service/NodeService';
@@ -512,13 +518,15 @@ export const TreeSelectionDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Lazy</h5>
-                    <p>Lazy loading is implemented using the <i>onExpand</i> event by adding children to the expanded node. <i>leaf</i> property should be enabled to indicate the node has children but not yet loaded. Here is a in-memory demo
-        that loads generated nodes on expand event to imitate a remote call with a timeout. Notice the usage of <i>loading</i> property as well to give users a feedback about the loading process.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        Lazy loading is implemented using the <i>onExpand</i> event by adding children to the expanded node. <i>leaf</i> property should be enabled to indicate the node has children but not yet loaded. Here is a in-memory demo that
+                        loads generated nodes on expand event to imitate a remote call with a timeout. Notice the usage of <i>loading</i> property as well to give users a feedback about the loading process.
+                    </p>
+                    <CodeHighlight lang="js">
+                        {`
 import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
 import {NodeService} from '../service/NodeService';
@@ -566,19 +574,23 @@ export const TreeLazyDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Templating</h5>
-                    <p><i>label</i> property of a node is used to display as the content by default. Templating is supported as well with the <i>nodeTemplate</i> callback that gets the node instance and returns JSX. Example
-        below is a sample tree based navigation of React docs.</p>
-<CodeHighlight lang="js">
-{`
-import React, { Component } from 'react';
+                    <p>
+                        <i>label</i> property of a node is used to display as the content by default. Templating is supported as well with the <i>nodeTemplate</i> callback that gets the node instance and returns JSX. For custom filter support define
+                        a <i>filterTemplate</i> function that gets the option instance as a parameter and returns the content for the filter element. Example below is a sample tree based navigation of React docs.
+                    </p>
+                    <CodeHighlight lang="js">
+                        {`
+import React, { Component, useState, useRef } from 'react';
 import { Tree } from 'primereact/tree';
 
 export const TreeTemplatingDemo = () => {
 
     const [nodes, setNodes] = useState(createNavigation());
+    const [filterValue, setFilterValue] = useState('');
+    const filterInputRef = useRef();
 
     const createNavigation = () => {
         return [
@@ -619,18 +631,43 @@ export const TreeTemplatingDemo = () => {
         )
     }
 
+    const filterTemplate = (options) => {
+        let {filterOptions} = options;
+    
+        return (
+            <div className="flex gap-2">
+                <InputText value={filterValue} ref={filterInputRef} onChange={(e) => myFilterFunction(e, filterOptions)} />
+                <Button label="Reset" onClick={() => myResetFunction(filterOptions)} />
+            </div>
+        )
+    }
+    
+    const myResetFunction = (options) => {
+        setFilterValue('');
+        options.reset();
+        filterInputRef && filterInputRef.current.focus()
+    }
+    
+    const myFilterFunction = (event, options) => {
+        let _filterValue = event.target.value;
+        setFilterValue(_filterValue);
+        options.filter(event);
+    }
+
     return (
-        <Tree value={nodes} nodeTemplate={nodeTemplate} />
+        <Tree value={nodes} nodeTemplate={nodeTemplate} filter filterTemplate={filterTemplate}/>
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>DragDrop</h5>
-                    <p>Tree nodes can be reordered using dragdrop by setting <i>dragdropScope</i> property to a unique variable and updating the new value at <i>onDragDrop</i> callback. The value of the dragdropScope must be unique to provide
-        intervention from other draggable elements on the page.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>
+                        Tree nodes can be reordered using dragdrop by setting <i>dragdropScope</i> property to a unique variable and updating the new value at <i>onDragDrop</i> callback. The value of the dragdropScope must be unique to provide
+                        intervention from other draggable elements on the page.
+                    </p>
+                    <CodeHighlight lang="js">
+                        {`
 import React, {Component} from 'react';
 import {Tree} from 'primereact/tree';
 import {NodeService} from '../service/NodeService';
@@ -651,31 +688,37 @@ export const TreeDragDropDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Filtering</h5>
-                    <p>Filtering is enabled by setting the <i>filter</i> property to true, by default label property of a node
-        is used to compare against the value in the text field, in order to customize which field(s) should be used during search define <i>filterBy</i> property.</p>
+                    <p>
+                        Filtering is enabled by setting the <i>filter</i> property to true, by default label property of a node is used to compare against the value in the text field, in order to customize which field(s) should be used during search
+                        define <i>filterBy</i> property.
+                    </p>
 
-                    <p>In addition <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the other hand,
-                in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.</p>
+                    <p>
+                        In addition <i>filterMode</i> specifies the filtering strategy. In <b>lenient</b> mode when the query matches a node, children of the node are not searched further as all descendants of the node are included. On the other
+                        hand, in <b>strict</b> mode when the query matches a node, filtering continues on all descendants.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 <Tree value={nodes} filter />
 
 <Tree value={nodes} filter filterBy="data.name,data.age" />
 
 <Tree value={nodes} filter filterMode="strict" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>ContextMenu</h5>
-                    <p>One or more ContextMenu instances can be attached to nodes. Similar to selection, separate <i>contextMenuSelectionKey</i> and <i>onContextMenuSelectionChange</i> properties are necesary to manage the selected node with
-        right click. In addition, a context menu can either be displayed at <i>onContextMenu</i> event. Since this event also passes the node instance, you may choose to display a different context menu for a particular node.</p>
+                    <p>
+                        One or more ContextMenu instances can be attached to nodes. Similar to selection, separate <i>contextMenuSelectionKey</i> and <i>onContextMenuSelectionChange</i> properties are necesary to manage the selected node with right
+                        click. In addition, a context menu can either be displayed at <i>onContextMenu</i> event. Since this event also passes the node instance, you may choose to display a different context menu for a particular node.
+                    </p>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import React, { Component } from 'react';
 import {Tree} from 'primereact/tree'
 import {ContextMenu} from 'primereact/contextmenu';
@@ -729,7 +772,7 @@ export const TreeContextMenuDemo = () => {
     )
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -807,8 +850,10 @@ export const TreeContextMenuDemo = () => {
                                     <td>metaKeySelection</td>
                                     <td>boolean</td>
                                     <td>true</td>
-                                    <td>Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item
-                            can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
+                                    <td>
+                                        Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled
+                                        devices, metaKeySelection is turned off automatically.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>propagateSelectionUp</td>
@@ -871,10 +916,22 @@ export const TreeContextMenuDemo = () => {
                                     <td>Template of node element.</td>
                                 </tr>
                                 <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template of filter element.</td>
+                                </tr>
+                                <tr>
                                     <td>togglerTemplate</td>
                                     <td>any</td>
                                     <td>null</td>
                                     <td>Template of toggler element.</td>
+                                </tr>
+                                <tr>
+                                    <td>filterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template of filter element.</td>
                                 </tr>
                                 <tr>
                                     <td>showHeader</td>
@@ -941,76 +998,97 @@ export const TreeContextMenuDemo = () => {
                             <tbody>
                                 <tr>
                                     <td>onSelect</td>
-                                    <td>event.originalEvent: browser event <br />
-                            event.node: Selected node instance.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Selected node instance.
+                                    </td>
                                     <td>Callback to invoke when a node is selected.</td>
                                 </tr>
                                 <tr>
                                     <td>onUnselect</td>
-                                    <td>event.originalEvent: browser event <br />
-                            event.node: Unselected node instance.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Unselected node instance.
+                                    </td>
                                     <td>Callback to invoke when a node is unselected.</td>
                                 </tr>
                                 <tr>
                                     <td>onExpand</td>
-                                    <td>event.originalEvent: browser event <br />
-                            event.node: Expanded node instance.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Expanded node instance.
+                                    </td>
                                     <td>Callback to invoke when a node is expanded.</td>
                                 </tr>
                                 <tr>
                                     <td>onCollapse</td>
-                                    <td>event.originalEvent: browser event <br />
-                            event.node: Collapsed node instance.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Collapsed node instance.
+                                    </td>
                                     <td>Callback to invoke when a node is collapsed.</td>
                                 </tr>
                                 <tr>
                                     <td>onSelectionChange</td>
-                                    <td>event.originalEvent: browser event <br />
-                            event.value: Selected node key(s).</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.value: Selected node key(s).
+                                    </td>
                                     <td>Callback to invoke when selection changes.</td>
                                 </tr>
                                 <tr>
                                     <td>onContextMenuSelectionChange</td>
-                                    <td>event.originalEvent: browser event <br />
-                            event.value: Selected node key.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.value: Selected node key.
+                                    </td>
                                     <td>Callback to invoke when selection changes with a context menu.</td>
                                 </tr>
                                 <tr>
                                     <td>onToggle</td>
-                                    <td>event.originalEvent: browser event <br />
-                            event.node: Toggled node instance.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Toggled node instance.
+                                    </td>
                                     <td>Callback to invoke when a node is toggled.</td>
                                 </tr>
                                 <tr>
                                     <td>onDragDrop</td>
-                                    <td>event.originalEvent: browser event <br />
-                            event.value: New value after the dragdrop.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.value: New value after the dragdrop.
+                                    </td>
                                     <td>Callback to invoke when a node is selected.</td>
                                 </tr>
                                 <tr>
                                     <td>onContextMenu</td>
-                                    <td>event.originalEvent: browser event <br />
-                            event.node: Selected node instance.</td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.node: Selected node instance.
+                                    </td>
                                     <td>Callback to invoke when a node is selected with a context menu.</td>
                                 </tr>
                                 <tr>
                                     <td>onFilterValueChange</td>
-                                    <td>event.originalEvent: Browser event <br/>
-                                        event.value: the filtered value <br/>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.value: the filtered value <br />
                                     </td>
                                     <td>Callback to invoke when filter value changes.</td>
                                 </tr>
                                 <tr>
                                     <td>onNodeClick</td>
-                                    <td>event.originalEvent: Browser event <br/>
-                                        event.node: the current node <br/>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.node: the current node <br />
                                     </td>
                                     <td>Callback to invoke when the node is clicked.</td>
                                 </tr>
                                 <tr>
                                     <td>onNodeDoubleClick</td>
-                                    <td>event.originalEvent: Browser event <br/>
-                                        event.node: the current node <br/>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.node: the current node <br />
                                     </td>
                                     <td>Callback to invoke when the node is double-clicked.</td>
                                 </tr>
@@ -1091,19 +1169,95 @@ export const TreeContextMenuDemo = () => {
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Value to describe the component can either be provided with <i>aria-labelledby</i> or <i>aria-label</i> props. The root list element has a <i>tree</i> role whereas each list item has a <i>treeitem</i> role along with{' '}
+                            <i>aria-label</i>, <i>aria-selected</i> and <i>aria-expanded</i> attributes. In checkbox selection, <i>aria-checked</i> is used instead of <i>aria-selected</i>. The container element of a treenode has the <i>group</i>{' '}
+                            role. Checkbox and toggle icons are hidden from screen readers as their parent element with <i>treeitem</i> role and attributes are used instead for readers and keyboard support. The <i>aria-setsize</i>,{' '}
+                            <i>aria-posinset</i> and <i>aria-level</i> attributes are calculated implicitly and added to each treeitem.
+                        </p>
+
+                        <h6>Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>
+                                            Moves focus to the first selected node when focus enters the component, if there is none then first element receives the focus. If focus is already inside the component, moves focus to the next focusable
+                                            element in the page tab sequence.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>tab</i>
+                                        </td>
+                                        <td>
+                                            Moves focus to the last selected node when focus enters the component, if there is none then first element receives the focus. If focus is already inside the component, moves focus to the previous focusable
+                                            element in the page tab sequence.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Selects the focused treenode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Selects the focused treenode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>Moves focus to the next treenode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>Moves focus to the previous treenode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>right arrow</i>
+                                        </td>
+                                        <td>If node is closed, opens the node otherwise moves focus to the first child node.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>left arrow</i>
+                                        </td>
+                                        <td>If node is open, closes the node otherwise moves focus to the parent node.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
+
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'TreeDemo', sources: sources, service: 'NodeService', data: 'treenodes' })
-                }
+                {useLiveEditorTabs({ name: 'TreeDemo', sources: sources, service: 'NodeService', data: 'treenodes' })}
             </TabView>
         </div>
     );
-})
+});
 
 export default TreeDoc;

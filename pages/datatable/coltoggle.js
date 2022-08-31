@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo} from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { DataTable } from '../../components/lib/datatable/DataTable';
 import { Column } from '../../components/lib/column/Column';
 import { ProductService } from '../../service/ProductService';
@@ -9,11 +9,10 @@ import { MultiSelect } from '../../components/lib/multiselect/MultiSelect';
 import Head from 'next/head';
 
 const DataTableColTogglerDemo = () => {
-
     const columns = [
-        {field: 'name', header: 'Name'},
-        {field: 'category', header: 'Category'},
-        {field: 'quantity', header: 'Quantity'}
+        { field: 'name', header: 'Name' },
+        { field: 'category', header: 'Category' },
+        { field: 'quantity', header: 'Quantity' }
     ];
 
     const [selectedColumns, setSelectedColumns] = useState(columns);
@@ -21,22 +20,22 @@ const DataTableColTogglerDemo = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onColumnToggle = (event) => {
         let selectedColumns = event.value;
-        let orderedSelectedColumns = columns.filter(col => selectedColumns.some(sCol => sCol.field === col.field));
+        let orderedSelectedColumns = columns.filter((col) => selectedColumns.some((sCol) => sCol.field === col.field));
         setSelectedColumns(orderedSelectedColumns);
-    }
+    };
 
     const header = (
-        <div style={{ textAlign:'left' }}>
-            <MultiSelect value={selectedColumns} options={columns} optionLabel="header" onChange={onColumnToggle} style={{width:'20em'}}/>
+        <div style={{ textAlign: 'left' }}>
+            <MultiSelect value={selectedColumns} options={columns} optionLabel="header" onChange={onColumnToggle} style={{ width: '20em' }} />
         </div>
     );
 
-    const columnComponents = selectedColumns.map(col=> {
+    const columnComponents = selectedColumns.map((col) => {
         return <Column key={col.field} field={col.field} header={col.header} />;
     });
 
@@ -48,7 +47,9 @@ const DataTableColTogglerDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>Column Toggler</span></h1>
+                    <h1>
+                        DataTable <span>Column Toggler</span>
+                    </h1>
                     <p>MultiSelect component can be used to implement column toggler functionality.</p>
                 </div>
 
@@ -67,14 +68,13 @@ const DataTableColTogglerDemo = () => {
             <DataTableColTogglerDemoDoc></DataTableColTogglerDemoDoc>
         </div>
     );
-}
+};
 
 export default DataTableColTogglerDemo;
 
 export const DataTableColTogglerDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -138,7 +138,7 @@ export class DataTableColTogglerDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -191,7 +191,7 @@ const DataTableColTogglerDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -244,7 +244,7 @@ const DataTableColTogglerDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
 <script src="./ProductService.js"></script>
@@ -305,15 +305,11 @@ const DataTableColTogglerDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableColTogglerDemo', sources: sources, service: 'ProductService', data: 'products-small' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableColTogglerDemo', sources: sources, service: 'ProductService', data: 'products-small' })}</TabView>
         </div>
-    )
-})
+    );
+});

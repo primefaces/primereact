@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import { Calendar } from '../../components/lib/calendar/Calendar';
-import { Dropdown } from '../../components/lib/dropdown/Dropdown';
 import CalendarDoc from '../../components/doc/calendar';
 import { addLocale } from '../../components/lib/api/Locale';
 import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const CalendarDemo = () => {
-
     let today = new Date();
     let month = today.getMonth();
     let year = today.getFullYear();
-    let prevMonth = (month === 0) ? 11 : month - 1;
-    let prevYear = (prevMonth === 11) ? year - 1 : year;
-    let nextMonth = (month === 11) ? 0 : month + 1;
-    let nextYear = (nextMonth === 0) ? year + 1 : year;
+    let prevMonth = month === 0 ? 11 : month - 1;
+    let prevYear = prevMonth === 11 ? year - 1 : year;
+    let nextMonth = month === 11 ? 0 : month + 1;
+    let nextYear = nextMonth === 0 ? year + 1 : year;
 
     const [date1, setDate1] = useState(null);
     const [date2, setDate2] = useState(null);
@@ -30,12 +28,8 @@ const CalendarDemo = () => {
     const [date12, setDate12] = useState(null);
     const [date13, setDate13] = useState(null);
     const [date14, setDate14] = useState(null);
-    const [date15, setDate15] = useState(null);
-    const [date16, setDate16] = useState(null);
-    const [date17, setDate17] = useState(null);
     const [dates1, setDates1] = useState(null);
     const [dates2, setDates2] = useState(null);
-    const [visible, setVisible] = useState(false);
 
     let minDate = new Date();
     minDate.setMonth(prevMonth);
@@ -60,28 +54,11 @@ const CalendarDemo = () => {
 
     const dateTemplate = (date) => {
         if (date.day > 10 && date.day < 15) {
-            return (
-                <strong style={{ textDecoration: 'line-through' }}>{date.day}</strong>
-            );
+            return <strong style={{ textDecoration: 'line-through' }}>{date.day}</strong>;
         }
 
         return date.day;
-    }
-
-    const monthNavigatorTemplate = (e) => {
-        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} style={{ lineHeight: 1 }} />;
-    }
-
-    const yearNavigatorTemplate = (e) => {
-        return <Dropdown value={e.value} options={e.options} onChange={(event) => e.onChange(event.originalEvent, event.value)} className="ml-2" style={{ lineHeight: 1 }} />;
-    }
-
-    const onVisibleChange = (e) => {
-        setVisible(e.type === 'dateselect' || !visible);
-        if (e.callback) {
-            e.callback();
-        }
-    }
+    };
 
     return (
         <div>
@@ -106,12 +83,12 @@ const CalendarDemo = () => {
                             <Calendar id="basic" value={date1} onChange={(e) => setDate1(e.value)} />
                         </div>
                         <div className="field col-12 md:col-4">
-                            <label htmlFor="icon">Icon</label>
-                            <Calendar id="icon" value={date2} onChange={(e) => setDate2(e.value)} showIcon />
+                            <label htmlFor="basic">Date Format</label>
+                            <Calendar id="basic" value={date2} onChange={(e) => setDate2(e.value)} dateFormat="mm-dd-yy" />
                         </div>
                         <div className="field col-12 md:col-4">
-                            <label htmlFor="spanish">Spanish</label>
-                            <Calendar id="spanish" value={date3} onChange={(e) => setDate3(e.value)} locale="es" dateFormat="dd/mm/yy" />
+                            <label htmlFor="icon">Icon</label>
+                            <Calendar id="icon" value={date3} onChange={(e) => setDate3(e.value)} showIcon />
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="minmax">Min / Max</label>
@@ -120,10 +97,6 @@ const CalendarDemo = () => {
                         <div className="field col-12 md:col-4">
                             <label htmlFor="disableddays">Disabled Days</label>
                             <Calendar id="disableddays" value={date5} onChange={(e) => setDate5(e.value)} disabledDates={invalidDates} disabledDays={[0, 6]} readOnlyInput />
-                        </div>
-                        <div className="field col-12 md:col-4">
-                            <label htmlFor="navigators">Navigators</label>
-                            <Calendar id="navigators" value={date6} onChange={(e) => setDate6(e.value)} monthNavigator yearNavigator yearRange="2010:2030" />
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="multiple">Multiple</label>
@@ -135,19 +108,23 @@ const CalendarDemo = () => {
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="buttonbar">Button Bar</label>
-                            <Calendar id="buttonbar" value={date7} onChange={(e) => setDate7(e.value)} showButtonBar />
+                            <Calendar id="buttonbar" value={date6} onChange={(e) => setDate6(e.value)} showButtonBar />
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="time24">Time / 24h</label>
-                            <Calendar id="time24" value={date8} onChange={(e) => setDate8(e.value)} showTime showSeconds />
+                            <Calendar id="time24" value={date7} onChange={(e) => setDate7(e.value)} showTime showSeconds />
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="time12">Time / 12h</label>
-                            <Calendar id="time12" value={date9} onChange={(e) => setDate9(e.value)} timeOnly hourFormat="12" />
+                            <Calendar id="time12" value={date8} onChange={(e) => setDate8(e.value)} timeOnly hourFormat="12" />
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="monthpicker">Month Picker</label>
-                            <Calendar id="monthpicker" value={date10} onChange={(e) => setDate10(e.value)} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030" />
+                            <Calendar id="monthpicker" value={date9} onChange={(e) => setDate9(e.value)} view="month" dateFormat="mm/yy" />
+                        </div>
+                        <div className="field col-12 md:col-4">
+                            <label htmlFor="yearpicker">Year Picker</label>
+                            <Calendar id="yearpicker" value={date10} onChange={(e) => setDate10(e.value)} view="year" dateFormat="yy" />
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="multiplemonths">Multiple Months</label>
@@ -161,29 +138,16 @@ const CalendarDemo = () => {
                             <label htmlFor="touchUI">TouchUI</label>
                             <Calendar id="touchUI" value={date13} onChange={(e) => setDate13(e.value)} touchUI />
                         </div>
-                        <div className="field col-12 md:col-4">
-                            <label htmlFor="mask">Mask</label>
-                            <Calendar id="mask" value={date14} onChange={(e) => setDate14(e.value)} mask="99/99/9999" />
-                        </div>
-                        <div className="field col-12 md:col-4">
-                            <label htmlFor="controlled">Visibility Control</label>
-                            <Calendar id="controlled" value={date15} onChange={(e) => setDate15(e.value)} visible={visible} onVisibleChange={onVisibleChange} />
-                        </div>
-                        <div className="field col-12 md:col-4">
-                            <label htmlFor="navigatorstemplate">Navigators Template</label>
-                            <Calendar id="navigatorstemplate" value={date16} onChange={(e) => setDate16(e.value)} monthNavigator yearNavigator yearRange="2010:2030"
-                                monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate} />
-                        </div>
                     </div>
 
                     <h5>Inline</h5>
-                    <Calendar value={date17} onChange={(e) => setDate17(e.value)} inline showWeek />
+                    <Calendar value={date14} onChange={(e) => setDate14(e.value)} inline showWeek />
                 </div>
             </div>
 
             <CalendarDoc></CalendarDoc>
         </div>
     );
-}
+};
 
 export default CalendarDemo;

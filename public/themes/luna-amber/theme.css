@@ -42,6 +42,7 @@
   --surface-hover:#4c4c4c;
   --maskbg: rgba(0, 0, 0, 0.4);
   --focus-ring: 0 0 0 0.1rem white;
+  color-scheme: dark;
 }
 
 * {
@@ -222,6 +223,16 @@
   --red-700:#971d0d;
   --red-800:#77170a;
   --red-900:#561108;
+  --primary-50:#fffdf9;
+  --primary-100:#fff8e1;
+  --primary-200:#fff2c9;
+  --primary-300:#ffecb2;
+  --primary-400:#ffe69a;
+  --primary-500:#ffe082;
+  --primary-600:#d9be6f;
+  --primary-700:#b39d5b;
+  --primary-800:#8c7b48;
+  --primary-900:#665a34;
 }
 
 .p-autocomplete .p-autocomplete-loader {
@@ -355,14 +366,16 @@
 .p-datepicker .p-datepicker-header .p-datepicker-title {
   line-height: 2rem;
 }
-.p-datepicker .p-datepicker-header .p-datepicker-title select {
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+  color: #dedede;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  font-weight: 700;
+  padding: 0.5rem;
 }
-.p-datepicker .p-datepicker-header .p-datepicker-title select:focus {
-  outline: 0 none;
-  outline-offset: 0;
-  box-shadow: 0 0 0 0.1rem white;
-  border-color: #FFE082;
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year:enabled:hover,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month:enabled:hover {
+  color: #FFE082;
 }
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
   margin-right: 0.5rem;
@@ -460,8 +473,20 @@
   color: #212529;
   background: #FFE082;
 }
+.p-datepicker .p-yearpicker {
+  margin: 0.857rem 0;
+}
+.p-datepicker .p-yearpicker .p-yearpicker-year {
+  padding: 0.5rem;
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-radius: 3px;
+}
+.p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
+  color: #212529;
+  background: #FFE082;
+}
 .p-datepicker.p-datepicker-multiple-month .p-datepicker-group {
-  border-right: 1px solid #4b4b4b;
+  border-left: 1px solid #4b4b4b;
   padding-right: 0.857rem;
   padding-left: 0.857rem;
   padding-top: 0;
@@ -472,7 +497,7 @@
 }
 .p-datepicker.p-datepicker-multiple-month .p-datepicker-group:last-child {
   padding-right: 0;
-  border-right: 0 none;
+  border-left: 0 none;
 }
 .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):hover {
   background: #4c4c4c;
@@ -482,10 +507,18 @@
   outline-offset: 0;
   box-shadow: 0 0 0 0.1rem white;
 }
-.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-highlight):not(.p-disabled):hover {
+.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):not(.p-highlight):hover {
   background: #4c4c4c;
 }
-.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-highlight):not(.p-disabled):focus {
+.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.1rem white;
+}
+.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):not(.p-highlight):hover {
+  background: #4c4c4c;
+}
+.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 0.1rem white;
@@ -1030,7 +1063,7 @@
 .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
   background: #FFD54F;
 }
-.p-inputswitch.p-invalid {
+.p-inputswitch.p-invalid .p-inputswitch-slider {
   border-color: #e57373;
 }
 
@@ -2743,7 +2776,8 @@
   background: #191919;
 }
 .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-thead,
-.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot {
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot, .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-thead,
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-tfoot {
   background-color: #252525;
 }
 .p-datatable .p-datatable-loading-icon {
@@ -3322,6 +3356,19 @@
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
+.p-orderlist .p-orderlist-filter-container {
+  padding: 0.857rem 1rem;
+  background: #323232;
+  border: 1px solid #191919;
+  border-bottom: 0 none;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-input {
+  padding-right: 1.429rem;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-icon {
+  right: 0.429rem;
+  color: #888888;
+}
 .p-orderlist .p-orderlist-list {
   border: 1px solid #191919;
   background: #323232;
@@ -3350,6 +3397,12 @@
 .p-orderlist .p-orderlist-list .p-orderlist-item.p-highlight {
   color: #212529;
   background: #FFE082;
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even) {
+  background: #323232;
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even):hover {
+  background: #4c4c4c;
 }
 
 @media screen and (max-width: 960px) {
@@ -3503,6 +3556,19 @@
   border-bottom: 0 none;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
+}
+.p-picklist .p-picklist-filter-container {
+  padding: 0.857rem 1rem;
+  background: #323232;
+  border: 1px solid #191919;
+  border-bottom: 0 none;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-input {
+  padding-right: 1.429rem;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-icon {
+  right: 0.429rem;
+  color: #888888;
 }
 .p-picklist .p-picklist-list {
   border: 1px solid #191919;
@@ -4245,6 +4311,10 @@
   color: #dedede;
   padding: 1rem;
 }
+.p-dialog .p-dialog-content:last-of-type {
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
 .p-dialog .p-dialog-footer {
   border-top: 1px solid #191919;
   background: #323232;
@@ -4298,7 +4368,7 @@
 .p-overlaypanel:before {
   border: solid transparent;
   border-color: rgba(25, 25, 25, 0);
-  border-bottom-color: #191919;
+  border-bottom-color: #181818;
 }
 .p-overlaypanel.p-overlaypanel-flipped:after {
   border-top-color: #323232;
@@ -5043,7 +5113,6 @@
   border: 1px solid #191919;
   background: #323232;
   color: #dedede;
-  margin-bottom: 2px;
   border-top: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
@@ -5817,7 +5886,7 @@
   background: #FFE082;
 }
 .p-progressbar .p-progressbar-label {
-  color: #dedede;
+  color: #212529;
   line-height: 24px;
 }
 
@@ -5897,10 +5966,6 @@
 .p-tag.p-tag-danger {
   background-color: #E57373;
   color: #212529;
-}
-
-.p-virtualscroller-loading-icon {
-  font-size: 2rem;
 }
 
 /* Customizations to the designer theme should be defined here */

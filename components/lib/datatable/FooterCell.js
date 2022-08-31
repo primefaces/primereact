@@ -7,14 +7,14 @@ export const FooterCell = React.memo((props) => {
 
     const getColumnProp = (prop) => {
         return props.column.props[prop];
-    }
+    };
 
     const getStyle = () => {
         const footerStyle = getColumnProp('footerStyle');
         const columnStyle = getColumnProp('style');
 
         return getColumnProp('frozen') ? Object.assign({}, columnStyle, footerStyle, styleObjectState) : Object.assign({}, columnStyle, footerStyle);
-    }
+    };
 
     const updateStickyPosition = () => {
         if (getColumnProp('frozen')) {
@@ -27,8 +27,7 @@ export const FooterCell = React.memo((props) => {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
                 }
                 styleObject['right'] = right + 'px';
-            }
-            else {
+            } else {
                 let left = 0;
                 let prev = elementRef.current.previousElementSibling;
                 if (prev) {
@@ -37,9 +36,10 @@ export const FooterCell = React.memo((props) => {
                 styleObject['left'] = left + 'px';
             }
 
-            setStyleObjectState(styleObject);
+            const isSameStyle = styleObjectState['left'] === styleObject['left'] && styleObjectState['right'] === styleObject['right'];
+            !isSameStyle && setStyleObjectState(styleObject);
         }
-    }
+    };
 
     React.useEffect(() => {
         if (getColumnProp('frozen')) {
@@ -61,7 +61,7 @@ export const FooterCell = React.memo((props) => {
         <td ref={elementRef} style={style} className={className} role="cell" colSpan={colSpan} rowSpan={rowSpan}>
             {content}
         </td>
-    )
+    );
 });
 
 FooterCell.displayName = 'FooterCell';

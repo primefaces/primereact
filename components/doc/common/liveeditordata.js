@@ -1,5 +1,5 @@
 const services = {
-    'CountryService': `
+    CountryService: `
 export class CountryService {
 
     getCountries() {
@@ -8,7 +8,7 @@ export class CountryService {
     }
 }
     `,
-    'CustomerService': `
+    CustomerService: `
 export class CustomerService {
 
     getCustomersSmall() {
@@ -37,7 +37,7 @@ export class CustomerService {
     }
 }
     `,
-    'EventService': `
+    EventService: `
 export class EventService {
 
     getEvents() {
@@ -46,7 +46,7 @@ export class EventService {
     }
 }
     `,
-    'NodeService': `
+    NodeService: `
 export class NodeService {
 
     getTreeTableNodes() {
@@ -60,7 +60,7 @@ export class NodeService {
     }
 }
     `,
-    'PhotoService': `
+    PhotoService: `
 export class PhotoService {
 
     getImages() {
@@ -69,7 +69,7 @@ export class PhotoService {
     }
 }
     `,
-    'ProductService': `
+    ProductService: `
 export class ProductService {
 
     getProductsSmall() {
@@ -85,7 +85,7 @@ export class ProductService {
     }
 }
     `,
-    'CarService': `
+    CarService: `
 export class CarService {
 
     brands = ['Vapid', 'Carson', 'Kitano', 'Dabver', 'Ibex', 'Morello', 'Akira', 'Titan', 'Dover', 'Norma'];
@@ -126,10 +126,10 @@ export class CarService {
     }
 }
     `
-}
+};
 
 const data = {
-    'countries': `
+    countries: `
 {
     "data": [
         {"name": "Afghanistan", "code": "AF"},
@@ -343,7 +343,7 @@ const data = {
         {"name": "Sweden", "code": "SE"},
         {"name": "Switzerland", "code": "CH"},
         {"name": "Syrian Arab Republic", "code": "SY"},
-        {"name": "Taiwan, Province of China", "code": "TW"},
+        {"name": "Taiwan, Republic of China", "code": "TW"},
         {"name": "Tajikistan", "code": "TJ"},
         {"name": "Tanzania, United Republic of", "code": "TZ"},
         {"name": "Thailand", "code": "TH"},
@@ -378,7 +378,7 @@ const data = {
     ]
 }
     `,
-    'events': `
+    events: `
 {
     "data": [
         {"id": 1,"title": "All Day Event","start": "2017-02-01"},
@@ -396,7 +396,7 @@ const data = {
     ]
 }
     `,
-    'photos': `
+    photos: `
 {
     "data":[
         {"itemImageSrc": "images/galleria/galleria1.jpg","thumbnailImageSrc": "images/galleria/galleria1s.jpg","alt": "Description for Image 1","title": "Title 1"},
@@ -417,7 +417,7 @@ const data = {
     ]
 }
     `,
-    'treenodes': `
+    treenodes: `
 {
     "root": [
         {
@@ -473,7 +473,7 @@ const data = {
     ]
 }
 `,
-    'treetablenodes': `
+    treetablenodes: `
 {
     "root":
     [
@@ -13532,7 +13532,7 @@ const data = {
     ]
 }
     `,
-    'products': `
+    products: `
 {
     "data": [
         {"id": "1000","code": "f230fh0g3","name": "Bamboo Watch","description": "Product Description","image": "bamboo-watch.jpg","price": 65,"category": "Accessories","quantity": 24,"inventoryStatus": "INSTOCK","rating": 5},
@@ -13635,7 +13635,7 @@ const data = {
         {"id": "1009","code": "cm230f032","name": "Gaming Set","description": "Product Description","image": "gaming-set.jpg","price": 299,"category": "Electronics","quantity": 63,"inventoryStatus": "INSTOCK","rating": 3,"orders": [{"id": "10000","productCode": "cm230f032","date": "2020-06-24","amount": 299,"quantity": 1,"customer": "Kadeem Mujtaba","status": "PENDING"},{"id": "10001","productCode": "cm230f032","date": "2020-05-11","amount": 299,"quantity": 1,"customer": "Ashley Wickens","status": "DELIVERED"},{"id": "10002","productCode": "cm230f032","date": "2019-02-07","amount": 299,"quantity": 1,"customer": "Julie Johnson","status": "DELIVERED"},{"id": "10003","productCode": "cm230f032","date": "2020-04-26","amount": 299,"quantity": 1,"customer": "Tony Costa","status": "CANCELLED"}]}
     ]
 }
-    `,
-}
+    `
+};
 
 export { services, data };

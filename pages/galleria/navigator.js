@@ -8,38 +8,36 @@ import getConfig from 'next/config';
 import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 
 const GalleriaNavigatorDemo = () => {
+    const [images, setImages] = useState(null);
+    const galleriaService = new PhotoService();
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-        const [images, setImages] = useState(null)
-        const galleriaService = new PhotoService();
-        const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
-        const responsiveOptions = [
-            {
-                breakpoint: '1024px',
-                numVisible: 5
-            },
-            {
-                breakpoint: '768px',
-                numVisible: 3
-            },
-            {
-                breakpoint: '560px',
-                numVisible: 1
-            }
-        ];
-
+    const responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 5
+        },
+        {
+            breakpoint: '768px',
+            numVisible: 3
+        },
+        {
+            breakpoint: '560px',
+            numVisible: 1
+        }
+    ];
 
     useEffect(() => {
-         galleriaService.getImages().then(data => setImages(data));
+        galleriaService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
         return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
-    }
+    };
 
     const thumbnailTemplate = (item) => {
         return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />;
-    }
+    };
 
     return (
         <div>
@@ -49,7 +47,9 @@ const GalleriaNavigatorDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Galleria <span>Navigator</span></h1>
+                    <h1>
+                        Galleria <span>Navigator</span>
+                    </h1>
                     <p>Combining item navigators, thumbnails and indicators provide various UI alternatives.</p>
                 </div>
 
@@ -59,40 +59,47 @@ const GalleriaNavigatorDemo = () => {
             <div className="content-section implementation">
                 <div className="card">
                     <h5>Item Navigators and Thumbnails</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
-                        showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
+                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }} showItemNavigators item={itemTemplate} thumbnail={thumbnailTemplate} />
                 </div>
 
                 <div className="card">
                     <h5>Item Navigators without Thumbnails</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
-                        showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
+                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }} showItemNavigators showThumbnails={false} item={itemTemplate} thumbnail={thumbnailTemplate} />
                 </div>
 
                 <div className="card">
                     <h5>Item Navigators on Hover</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
-                        showItemNavigators showItemNavigatorsOnHover item={itemTemplate} thumbnail={thumbnailTemplate} />
+                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }} showItemNavigators showItemNavigatorsOnHover item={itemTemplate} thumbnail={thumbnailTemplate} />
                 </div>
 
                 <div className="card">
                     <h5>Item Navigators and Indicators</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} circular style={{ maxWidth: '640px' }}
-                        showItemNavigators showThumbnails={false} showItemNavigatorsOnHover showIndicators item={itemTemplate} thumbnail={thumbnailTemplate} />
+                    <Galleria
+                        value={images}
+                        responsiveOptions={responsiveOptions}
+                        numVisible={5}
+                        circular
+                        style={{ maxWidth: '640px' }}
+                        showItemNavigators
+                        showThumbnails={false}
+                        showItemNavigatorsOnHover
+                        showIndicators
+                        item={itemTemplate}
+                        thumbnail={thumbnailTemplate}
+                    />
                 </div>
             </div>
 
             <GalleriaNavigatorDemoDoc />
         </div>
     );
-}
+};
 
 export default GalleriaNavigatorDemo;
 
 export const GalleriaNavigatorDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -172,7 +179,7 @@ export class GalleriaNavigatorDemo extends Component {
 }
             `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -242,7 +249,7 @@ const GalleriaNavigatorDemo = () => {
 }
             `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -312,7 +319,7 @@ const GalleriaNavigatorDemo = () => {
 }
                         `
         },
-        'browser' : {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./PhotoService.js"></script>
@@ -385,16 +392,11 @@ const GalleriaNavigatorDemo = () => {
 }
                     `
         }
-
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'GalleriaNavigatorDemo', sources: sources, service: 'PhotoService', data: 'photos'})
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'GalleriaNavigatorDemo', sources: sources, service: 'PhotoService', data: 'photos' })}</TabView>
         </div>
-    )
-})
+    );
+});

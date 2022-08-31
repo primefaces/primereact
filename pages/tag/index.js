@@ -48,6 +48,6 @@ const TagDemo = () => {
             <TagDoc />
         </div>
     );
-}
+};
 
 export default TagDemo;

@@ -9,7 +9,6 @@ import getConfig from 'next/config';
 import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 
 const GalleriaIndicatorDemo = () => {
-
     const [images, setImages] = useState(null);
     const [images2, setImages2] = useState(null);
 
@@ -32,24 +31,23 @@ const GalleriaIndicatorDemo = () => {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => {setImages(data); setImages2(data.slice(0, 5))})
+        galleriaService.getImages().then((data) => {
+            setImages(data);
+            setImages2(data.slice(0, 5));
+        });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
         return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
-    }
+    };
 
     const thumbnailTemplate = (item) => {
-        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
-    }
+        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+    };
 
     const indicatorTemplate = (index) => {
-        return (
-            <span className="indicator-text">
-                {index + 1}
-            </span>
-        )
-    }
+        return <span className="indicator-text">{index + 1}</span>;
+    };
 
     return (
         <div>
@@ -59,7 +57,9 @@ const GalleriaIndicatorDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Galleria <span>Indicator</span></h1>
+                    <h1>
+                        Galleria <span>Indicator</span>
+                    </h1>
                     <p>Indicators allow quick navigation between the items.</p>
                 </div>
 
@@ -69,59 +69,96 @@ const GalleriaIndicatorDemo = () => {
             <div className="content-section implementation galleria-demo">
                 <div className="card">
                     <h5>Indicators with Click Event</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-                        showThumbnails={false} showIndicators item={itemTemplate} />
+                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} showThumbnails={false} showIndicators item={itemTemplate} />
                 </div>
 
                 <div className="card">
                     <h5>Indicators with Hover Event</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-                        showThumbnails={false} showIndicators changeItemOnIndicatorHover item={itemTemplate} />
+                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} showThumbnails={false} showIndicators changeItemOnIndicatorHover item={itemTemplate} />
                 </div>
 
                 <div className="card">
                     <h5>Inside Content</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-                        showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem item={itemTemplate} />
+                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem item={itemTemplate} />
                 </div>
 
                 <div className="card">
                     <h5>Positioned at Top</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-                        showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem indicatorsPosition="top" item={itemTemplate} />
+                    <Galleria
+                        value={images}
+                        responsiveOptions={responsiveOptions}
+                        numVisible={5}
+                        style={{ maxWidth: '640px' }}
+                        showThumbnails={false}
+                        showIndicators
+                        changeItemOnIndicatorHover
+                        showIndicatorsOnItem
+                        indicatorsPosition="top"
+                        item={itemTemplate}
+                    />
                 </div>
 
                 <div className="card">
                     <h5>Positioned at Left</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-                        showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem indicatorsPosition="left" item={itemTemplate} />
+                    <Galleria
+                        value={images}
+                        responsiveOptions={responsiveOptions}
+                        numVisible={5}
+                        style={{ maxWidth: '640px' }}
+                        showThumbnails={false}
+                        showIndicators
+                        changeItemOnIndicatorHover
+                        showIndicatorsOnItem
+                        indicatorsPosition="left"
+                        item={itemTemplate}
+                    />
                 </div>
 
                 <div className="card">
                     <h5>Positioned at Right</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }}
-                        showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem indicatorsPosition="right" item={itemTemplate} />
+                    <Galleria
+                        value={images}
+                        responsiveOptions={responsiveOptions}
+                        numVisible={5}
+                        style={{ maxWidth: '640px' }}
+                        showThumbnails={false}
+                        showIndicators
+                        changeItemOnIndicatorHover
+                        showIndicatorsOnItem
+                        indicatorsPosition="right"
+                        item={itemTemplate}
+                    />
                 </div>
 
                 <div className="card">
                     <h5>Indicator Template</h5>
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={5} style={{ maxWidth: '640px' }} className="custom-indicator-galleria"
-                        showThumbnails={false} showIndicators changeItemOnIndicatorHover showIndicatorsOnItem indicatorsPosition="left" item={itemTemplate} indicator={indicatorTemplate} />
+                    <Galleria
+                        value={images}
+                        responsiveOptions={responsiveOptions}
+                        numVisible={5}
+                        style={{ maxWidth: '640px' }}
+                        className="custom-indicator-galleria"
+                        showThumbnails={false}
+                        showIndicators
+                        changeItemOnIndicatorHover
+                        showIndicatorsOnItem
+                        indicatorsPosition="left"
+                        item={itemTemplate}
+                        indicator={indicatorTemplate}
+                    />
                 </div>
             </div>
 
             <GalleriaIndicatorDemoDoc></GalleriaIndicatorDemoDoc>
         </div>
     );
-
-}
+};
 
 export default GalleriaIndicatorDemo;
 
 export const GalleriaIndicatorDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -235,7 +272,7 @@ export class GalleriaIndicatorDemo extends Component {
 }
             `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, } from 'react';
@@ -335,7 +372,7 @@ const GalleriaIndicatorDemo = () => {
 }
             `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, } from 'react';
@@ -435,7 +472,7 @@ const GalleriaIndicatorDemo = () => {
 }
                         `
         },
-        'browser' : {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./GalleriaDemo.css" />
@@ -539,11 +576,10 @@ const GalleriaIndicatorDemo = () => {
     }
                     `
         }
-
-    }
+    };
 
     const extFiles = {
-        'demo/GalleriaDemo.css' : {
+        'demo/GalleriaDemo.css': {
             content: `
 .galleria-demo .custom-indicator-galleria .indicator-text {
     color: #e9ecef;
@@ -554,15 +590,11 @@ const GalleriaIndicatorDemo = () => {
 }
     `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'GalleriaIndicatorDemo', sources: sources, service: 'PhotoService', data: 'photos', extFiles: extFiles })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'GalleriaIndicatorDemo', sources: sources, service: 'PhotoService', data: 'photos', extFiles: extFiles })}</TabView>
         </div>
-    )
-})
+    );
+});
