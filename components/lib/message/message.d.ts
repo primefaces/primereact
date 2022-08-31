@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { IconType } from '../utils';
 
 type MessageSeverityType = 'success' | 'info' | 'warn' | 'error';
 
@@ -11,6 +12,8 @@ export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
     severity?: MessageSeverityType;
     content?: MessageContentType;
     children?: React.ReactNode;
+    icon?: IconType<MessageProps>;
+    iconProps?: React.HTMLAttributes<HTMLSpanElement>;
 }
 
 export declare class Message extends React.Component<MessageProps, any> {
