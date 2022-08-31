@@ -5,7 +5,6 @@ export const Message = React.memo(
     React.forwardRef((props, ref) => {
         const elementRef = React.useRef(null);
 
-        
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
@@ -29,10 +28,9 @@ export const Message = React.memo(
                 'pi-check': props.severity === 'success'
             });
 
-
             return (
                 <>
-                    {props.icon ? <span className='p-inline-message-icon'>{customIcon}</span> : <span className={icon}></span>}
+                    {props.icon ? <span className="p-inline-message-icon">{customIcon}</span> : <span className={icon}></span>}
                     <span className="p-inline-message-text">{text}</span>
                 </>
             );
