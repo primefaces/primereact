@@ -84,7 +84,7 @@ const MessagesDemo = () => {
                             <Message severity="info" text="Message Content" />
                         </div>
                         <div className="col-12 md:col-3">
-                            <Message severity="success" icon={<Image src={CustomImage} width="20px" height="20px" />} text="Message Content" />
+                            <Message severity="success" icon={<Image src={CustomImage} alt="custom-image" width="20px" height="20px" />} text="Message Content" />
                         </div>
                         <div className="col-12 md:col-3">
                             <Message severity="warn" icon="pi pi-exclamation-triangle" text="Message Content" />
