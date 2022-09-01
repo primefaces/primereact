@@ -34,6 +34,12 @@ const MessageProps = [
         type: 'element',
         default: 'null',
         description: 'Template of the message.'
+    },
+    {
+        name: 'icon',
+        type: 'string',
+        default: 'Based on severity',
+        description: 'Icon for the message. If not set it will default to severity icon.'
     }
 ];
 

@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const MessagesDoc = memo(() => {
     const sources = {
@@ -691,6 +691,12 @@ messages.current.show({ life: 5000, severity: 'error', summary: 'Error Message',
                                     <td>element</td>
                                     <td>null</td>
                                     <td>Template of the message.</td>
+                                </tr>
+                                <tr>
+                                    <td>icon</td>
+                                    <td>string</td>
+                                    <td>based on severity</td>
+                                    <td>Icon for the message. If not set it will default to severity icon.</td>
                                 </tr>
                             </tbody>
                         </table>

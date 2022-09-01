@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Message = React.memo(
     React.forwardRef((props, ref) => {
@@ -11,16 +11,20 @@ export const Message = React.memo(
             }
 
             const text = ObjectUtils.getJSXElement(props.text, props);
-            const icon = classNames('p-inline-message-icon pi', {
-                'pi-info-circle': props.severity === 'info',
-                'pi-exclamation-triangle': props.severity === 'warn',
-                'pi-times-circle': props.severity === 'error',
-                'pi-check': props.severity === 'success'
-            });
+            let iconValue = props.icon;
+            if (!iconValue) {
+                iconValue = classNames('pi', {
+                    'pi-info-circle': props.severity === 'info',
+                    'pi-exclamation-triangle': props.severity === 'warn',
+                    'pi-times-circle': props.severity === 'error',
+                    'pi-check': props.severity === 'success'
+                });
+            }
+            const icon = IconUtils.getJSXIcon(iconValue, { className: 'p-inline-message-icon' }, { props });
 
             return (
                 <>
-                    <span className={icon}></span>
+                    {icon}
                     <span className="p-inline-message-text">{text}</span>
                 </>
             );
@@ -60,6 +64,7 @@ Message.defaultProps = {
     className: null,
     style: null,
     text: null,
+    icon: null,
     severity: 'info',
     content: null
 };

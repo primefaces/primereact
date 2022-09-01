@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/utils';
 
 type MessagesSeverityType = 'success' | 'info' | 'warn' | 'error';
 
@@ -13,6 +14,7 @@ export interface MessagesMessage {
     closable?: boolean;
     sticky?: boolean;
     life?: number;
+    icon?: IconType<MessagesProps>;
 }
 
 export interface MessagesProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
