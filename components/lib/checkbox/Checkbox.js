@@ -11,9 +11,11 @@ export const Checkbox = React.memo(
 
         const onClick = (event) => {
             if (!props.disabled && !props.readOnly && props.onChange) {
-                const checked = isChecked();
-
-                if (inputRef.current.checked === checked) {
+                const checked = props.checked;
+                const checkboxClicked = event.target instanceof HTMLDivElement || event.target instanceof HTMLSpanElement;
+                const isInputToggled = event.target === inputRef.current;
+                const isCheckboxToggled = checkboxClicked && inputRef.current.checked === checked;
+                if (isInputToggled || isCheckboxToggled) {
                     const value = checked ? props.falseValue : props.trueValue;
                     props.onChange({
                         originalEvent: event,

@@ -16,7 +16,11 @@ export const RadioButton = React.memo(
         const onClick = (e) => {
             if (!props.disabled && props.onChange) {
                 const checked = props.checked;
-                if (inputRef.current.checked === checked) {
+                const radioClicked = e.target instanceof HTMLDivElement;
+                const inputClicked = e.target === inputRef.current;
+                const isInputToggled = inputClicked && inputRef.current.checked !== checked;
+                const isRadioToggled = radioClicked && inputRef.current.checked === checked;
+                if (isInputToggled || isRadioToggled) {
                     const value = !checked;
                     props.onChange({
                         originalEvent: e,
