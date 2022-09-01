@@ -52,7 +52,7 @@ export const RadioButton = React.memo(
             if (event.code === 'Space') {
                 onClick(event);
             }
-        }
+        };
 
         React.useEffect(() => {
             if (inputRef.current) {

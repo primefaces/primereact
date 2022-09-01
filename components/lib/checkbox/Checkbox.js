@@ -49,7 +49,7 @@ export const Checkbox = React.memo(
             if (event.code === 'Space') {
                 onClick(event);
             }
-        }
+        };
 
         const isChecked = () => {
             return props.checked === props.trueValue;
