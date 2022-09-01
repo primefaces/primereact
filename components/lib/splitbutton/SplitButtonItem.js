@@ -19,7 +19,7 @@ export const SplitButtonItem = React.memo((props) => {
     };
 
     const createMenuitem = () => {
-        if (item.visible === false) {
+        if (props.menuitem.visible === false) {
             return null;
         }
         const { disabled, icon: _icon, label: _label, template, url, target } = props.menuitem;
