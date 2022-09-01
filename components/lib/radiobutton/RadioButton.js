@@ -48,6 +48,12 @@ export const RadioButton = React.memo(
             setFocusedState(false);
         };
 
+        const onKeyDown = (event) => {
+            if (event.code === 'Space') {
+                onClick(event);
+            }
+        };
+
         React.useEffect(() => {
             if (inputRef.current) {
                 inputRef.current.checked = props.checked;
@@ -96,6 +102,7 @@ export const RadioButton = React.memo(
                             aria-label={props['aria-label']}
                             onFocus={onFocus}
                             onBlur={onBlur}
+                            onKeyDown={onKeyDown}
                             disabled={props.disabled}
                             required={props.required}
                             tabIndex={props.tabIndex}
