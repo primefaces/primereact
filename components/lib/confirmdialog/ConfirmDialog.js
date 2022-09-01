@@ -48,11 +48,9 @@ export const ConfirmDialog = React.memo(
             setVisibleState(true);
         };
 
-        const hide = (result) => {
+        const hide = (result = 'cancel') => {
             setVisibleState(false);
-            if (result) {
-                callbackFromProp('onHide', result);
-            }
+            callbackFromProp('onHide', result);
         };
 
         const confirm = (updatedProps) => {
