@@ -46,7 +46,7 @@ export const Checkbox = React.memo(
         };
 
         const onKeyDown = (event) => {
-            if (event.code === 'Enter') {
+            if (event.code === 'Space') {
                 onClick(event);
             }
         }
