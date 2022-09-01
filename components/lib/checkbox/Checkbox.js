@@ -45,6 +45,12 @@ export const Checkbox = React.memo(
             setFocusedState(false);
         };
 
+        const onKeyDown = (event) => {
+            if (event.code === 'Enter') {
+                onClick(event);
+            }
+        }
+
         const isChecked = () => {
             return props.checked === props.trueValue;
         };
@@ -97,6 +103,7 @@ export const Checkbox = React.memo(
                             aria-label={props['aria-label']}
                             onFocus={onFocus}
                             onBlur={onBlur}
+                            onKeyDown={onKeyDown}
                             disabled={props.disabled}
                             readOnly={props.readOnly}
                             required={props.required}
