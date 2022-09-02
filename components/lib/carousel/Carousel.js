@@ -531,7 +531,7 @@ export const Carousel = React.memo(
                 {header}
                 <div className={contentClassName}>
                     {content}
-                    {props.showIndicators ? indicators : null}
+                    {!props.showIndicators ? indicators : null}
                 </div>
                 {footer}
             </div>
