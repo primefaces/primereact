@@ -59,7 +59,7 @@ interface FileUploadUploadParams extends FileUploadFilesParam {
 interface FileUploadErrorParams extends FileUploadUploadParams {}
 
 interface FileUploadSelectParams extends FileUploadFilesParam {
-    originalEvent: React.SyntheticEvent;
+    originalEvent: React.ChangeEvent<HTMLInputElement> | DragEvent;
 }
 
 interface FileUploadProgressParams {

@@ -73,7 +73,7 @@ export const FileUpload = React.memo(
 
         const onFileSelect = (event) => {
             // give caller a chance to stop the selection
-            if (props.onBeforeSelect && props.onBeforeSelect(event) === false) {
+            if (props.onBeforeSelect && props.onBeforeSelect({ originalEvent: event, files: filesState }) === false) {
                 return;
             }
 
