@@ -9,93 +9,99 @@ import { ToastMessage } from './ToastMessage';
 
 let messageIdx = 0;
 
-export const Toast = React.memo(React.forwardRef((props, ref) => {
-    const [messagesState, setMessagesState] = React.useState([]);
-    const containerRef = React.useRef(null);
+export const Toast = React.memo(
+    React.forwardRef((props, ref) => {
+        const [messagesState, setMessagesState] = React.useState([]);
+        const containerRef = React.useRef(null);
 
-    const show = (value) => {
-        if (value) {
-            let messages;
+        const show = (value) => {
+            if (value) {
+                let messages;
 
-            if (Array.isArray(value)) {
-                const currentMessages = [...value];
-                for (let i = 0; i < currentMessages.length; i++) {
-                    const message = { ...currentMessages[i] };
-                    message.id = messageIdx++;
-                    currentMessages[i] = message;
+                if (Array.isArray(value)) {
+                    const multipleMessages = value.reduce((acc, message) => {
+                        acc.push({ _pId: messageIdx++, message });
+
+                        return acc;
+                    }, []);
+
+                    messages = messagesState ? [...messagesState, ...multipleMessages] : multipleMessages;
+                } else {
+                    const message = { _pId: messageIdx++, message: value };
+                    messages = messagesState ? [...messagesState, message] : [message];
                 }
-                messages = [...messagesState, ...currentMessages];
-            }
-            else {
-                const currentMessage = { ...value };
-                currentMessage.id = messageIdx++;
-                messages = messagesState ? [...messagesState, currentMessage] : [currentMessage];
-            }
 
-            messagesState.length === 0 && ZIndexUtils.set('toast', containerRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['toast']);
+                messagesState.length === 0 && ZIndexUtils.set('toast', containerRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['toast']);
 
+                setMessagesState(messages);
+            }
+        };
+
+        const clear = () => {
+            ZIndexUtils.clear(containerRef.current);
+            setMessagesState([]);
+        };
+
+        const replace = (value) => {
+            const replaced = Array.isArray(value) ? value : [value];
+            setMessagesState(replaced);
+        };
+
+        const onClose = (messageInfo) => {
+            const messages = messagesState.filter((msg) => msg._pId !== messageInfo._pId);
             setMessagesState(messages);
-        }
-    }
 
-    const clear = () => {
-        ZIndexUtils.clear(containerRef.current);
-        setMessagesState([]);
-    }
+            props.onRemove && props.onRemove(messageInfo.message);
+        };
 
-    const onClose = (message) => {
-        const messages = messagesState.filter(msg => msg.id !== message.id);
-        setMessagesState(messages);
+        const onEntered = () => {
+            props.onShow && props.onShow();
+        };
 
-        props.onRemove && props.onRemove(message);
-    }
+        const onExited = () => {
+            messagesState.length === 1 && ZIndexUtils.clear(containerRef.current);
 
-    const onEntered = () => {
-        props.onShow && props.onShow();
-    }
+            props.onHide && props.onHide();
+        };
 
-    const onExited = () => {
-        messagesState.length === 0 && ZIndexUtils.clear(containerRef.current);
+        useUnmountEffect(() => {
+            ZIndexUtils.clear(containerRef.current);
+        });
 
-        props.onHide && props.onHide();
-    }
+        React.useImperativeHandle(ref, () => ({
+            props,
+            show,
+            replace,
+            clear,
+            getElement: () => containerRef.current
+        }));
 
-    useUnmountEffect(() => {
-        ZIndexUtils.clear(containerRef.current);
-    });
+        const createElement = () => {
+            const otherProps = ObjectUtils.findDiffKeys(props, Toast.defaultProps);
+            const className = classNames('p-toast p-component p-toast-' + props.position, props.className);
 
-    React.useImperativeHandle(ref, () => ({
-        show,
-        clear
-    }));
-
-    const createElement = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, Toast.defaultProps);
-        const className = classNames('p-toast p-component p-toast-' + props.position, props.className);
-
-        return (
-            <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>
-                <TransitionGroup>
-                    {
-                        messagesState.map((message) => {
+            return (
+                <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>
+                    <TransitionGroup>
+                        {messagesState.map((messageInfo) => {
                             const messageRef = React.createRef();
 
                             return (
-                                <CSSTransition nodeRef={messageRef} key={message.id} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
-                                    <ToastMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} />
+                                <CSSTransition nodeRef={messageRef} key={messageInfo._pId} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
+                                    <ToastMessage ref={messageRef} messageInfo={messageInfo} onClick={props.onClick} onClose={onClose} />
                                 </CSSTransition>
-                            )
-                        })
-                    }
-                </TransitionGroup>
-            </div>
-        )
-    }
+                            );
+                        })}
+                    </TransitionGroup>
+                </div>
+            );
+        };
 
-    const element = createElement();
+        const element = createElement();
 
-    return <Portal element={element} appendTo={props.appendTo} />
-}));
+        return <Portal element={element} appendTo={props.appendTo} />;
+    })
+);
 
 Toast.displayName = 'Toast';
 Toast.defaultProps = {
@@ -111,4 +117,4 @@ Toast.defaultProps = {
     onRemove: null,
     onShow: null,
     onHide: null
-}
+};

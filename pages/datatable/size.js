@@ -8,14 +8,12 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const DataTableSizeDemo = () => {
-
     const [products, setProducts] = useState(null);
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
 
     return (
         <div>
@@ -25,7 +23,9 @@ const DataTableSizeDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>Size</span></h1>
+                    <h1>
+                        DataTable <span>Size</span>
+                    </h1>
                     <p>In addition to a regular table, alternatives with alternative sizes are available.</p>
                 </div>
 
@@ -64,14 +64,13 @@ const DataTableSizeDemo = () => {
             <DataTableSizeDemoDoc />
         </div>
     );
-}
+};
 
 export default DataTableSizeDemo;
 
 export const DataTableSizeDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -130,7 +129,7 @@ export class DataTableSizeDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -179,7 +178,7 @@ const DataTableSizeDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -228,7 +227,7 @@ const DataTableSizeDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
     <script src="./ProductService.js"></script>
@@ -284,16 +283,11 @@ const DataTableSizeDemo = () => {
 }
                 `
         }
-    }
-
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableSizeDemo', sources: sources, service: 'ProductService', data: 'products-small' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableSizeDemo', sources: sources, service: 'ProductService', data: 'products-small' })}</TabView>
         </div>
-    )
-})
+    );
+});

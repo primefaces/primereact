@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const CalendarDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -160,7 +160,7 @@ export class CalendarDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -299,7 +299,7 @@ const CalendarDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -438,7 +438,7 @@ const CalendarDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -580,7 +580,7 @@ const CalendarDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
@@ -602,7 +602,9 @@ import { Calendar } from 'primereact/calendar';
                     </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.</p>
+                    <p>
+                        Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                    </p>
 
                     <CodeHighlight>
                         {`
@@ -611,7 +613,9 @@ import { Calendar } from 'primereact/calendar';
                     </CodeHighlight>
 
                     <h5>Popup and Inline</h5>
-                    <p>Calendar is displayed in a popup by default whereas <i>inline</i> property needs to be enabled for inline mode.</p>
+                    <p>
+                        Calendar is displayed in a popup by default whereas <i>inline</i> property needs to be enabled for inline mode.
+                    </p>
 
                     <CodeHighlight>
                         {`
@@ -620,9 +624,11 @@ import { Calendar } from 'primereact/calendar';
                     </CodeHighlight>
 
                     <h5>View Date</h5>
-                    <p><i>viewDate</i> defines the date whose month and year are used to display the calendar. By default calendar uses value to render the view and falls back to today's date when value is not defined. In case you'd like
-                        to display a different month/year use <i>viewDate</i>. The usage of this property can either be controlled or uncontrolled. In controlled mode, <i>onViewDateChange</i> is required to manage the viewDate whereas in
-                        uncontrolled mode, viewDate is used only once in initial rendering and ignored in updates. If you'd like to change the displayed month/year programmatically, use the onViewDateChange in controlled mode.</p>
+                    <p>
+                        <i>viewDate</i> defines the date whose month and year are used to display the calendar. By default calendar uses value to render the view and falls back to today's date when value is not defined. In case you'd like to display
+                        a different month/year use <i>viewDate</i>. The usage of this property can either be controlled or uncontrolled. In controlled mode, <i>onViewDateChange</i> is required to manage the viewDate whereas in uncontrolled mode,
+                        viewDate is used only once in initial rendering and ignored in updates. If you'd like to change the displayed month/year programmatically, use the onViewDateChange in controlled mode.
+                    </p>
                     <CodeHighlight>
                         {`
 <Calendar value={dates} onChange={(e) => setDate(e.value)} viewDate={viewDate} onViewDateChange={(e) => setViewDate(e.value)}></Calendar>
@@ -630,9 +636,11 @@ import { Calendar } from 'primereact/calendar';
                     </CodeHighlight>
 
                     <h5>Selection Mode</h5>
-                    <p>Calendar offers "single" (default), "multiple" and "range" selection types controlled via the <i>selectionMode</i> property. In single, mode the bound value should be an array whereas in multiple
-                        case an array is required. Third alternative is the range mode that allows selecting a range based on an array of two values where first value is the start date and second value
-                        is the end date. <strong>Note:</strong> Time picker is supported in range mode but not in multiple mode.</p>
+                    <p>
+                        Calendar offers "single" (default), "multiple" and "range" selection types controlled via the <i>selectionMode</i> property. In single, mode the bound value should be an array whereas in multiple case an array is required.
+                        Third alternative is the range mode that allows selecting a range based on an array of two values where first value is the start date and second value is the end date. <strong>Note:</strong> Time picker is supported in range
+                        mode but not in multiple mode.
+                    </p>
                     <CodeHighlight>
                         {`
 <Calendar selectionMode="multiple" value={dates} onChange={(e) => setDates(e.value)}></Calendar>
@@ -640,7 +648,9 @@ import { Calendar } from 'primereact/calendar';
                     </CodeHighlight>
 
                     <h5>DateFormat</h5>
-                    <p>Default date format is "mm/dd/yy" which can be customized using the <i>dateFormat</i> property.</p>
+                    <p>
+                        Default date format is "mm/dd/yy" which can be customized using the <i>dateFormat</i> property.
+                    </p>
 
                     <CodeHighlight>
                         {`
@@ -670,11 +680,15 @@ import { Calendar } from 'primereact/calendar';
                     </ul>
 
                     <h5>Locale</h5>
-                    <p>Translations for the calendar are defined with the <Link href="/locale">Locale API</Link>.</p>
+                    <p>
+                        Translations for the calendar are defined with the <Link href="/locale">Locale API</Link>.
+                    </p>
 
                     <h5>Time</h5>
-                    <p>TimePicker is enabled with <i>showTime</i> property and <i>hourFormat</i> is used to select the 24 (default) or 12 hour mode. Optionally enabling <i>timeOnly</i>
-                        displays a calendare with time controls only.</p>
+                    <p>
+                        TimePicker is enabled with <i>showTime</i> property and <i>hourFormat</i> is used to select the 24 (default) or 12 hour mode. Optionally enabling <i>timeOnly</i>
+                        displays a calendare with time controls only.
+                    </p>
 
                     <CodeHighlight>
                         {`
@@ -685,7 +699,9 @@ import { Calendar } from 'primereact/calendar';
                     </CodeHighlight>
 
                     <h5>Date Restriction</h5>
-                    <p>To disable entering dates manually, set <i>readOnlyInput</i> to true and to restrict selectable date ranges use <i>minDate</i> and <i>maxDate</i> options.</p>
+                    <p>
+                        To disable entering dates manually, set <i>readOnlyInput</i> to true and to restrict selectable date ranges use <i>minDate</i> and <i>maxDate</i> options.
+                    </p>
 
                     <CodeHighlight>
                         {`
@@ -694,8 +710,10 @@ import { Calendar } from 'primereact/calendar';
                     </CodeHighlight>
 
                     <h5>Disable specific dates and/or days</h5>
-                    <p>Specific dates or days can be disabled as well, in this case set <i>readOnlyInput</i> to true and to restrict selectable dates use <i>disabledDates</i> and/or <i>disabledDays</i> options. <i>disabledDates</i>
-                        property should be an array of dates and <i>disabledDays</i> should be an array of disabled weekdays.</p>
+                    <p>
+                        Specific dates or days can be disabled as well, in this case set <i>readOnlyInput</i> to true and to restrict selectable dates use <i>disabledDates</i> and/or <i>disabledDays</i> options. <i>disabledDates</i>
+                        property should be an array of dates and <i>disabledDays</i> should be an array of disabled weekdays.
+                    </p>
 
                     <CodeHighlight>
                         {`
@@ -704,7 +722,9 @@ import { Calendar } from 'primereact/calendar';
                     </CodeHighlight>
 
                     <h5>Button Bar</h5>
-                    <p>Button bar displays today and clear buttons and activated using the <i>showButtonBar</i> property.</p>
+                    <p>
+                        Button bar displays today and clear buttons and activated using the <i>showButtonBar</i> property.
+                    </p>
                     <CodeHighlight>
                         {`
 <Calendar value={date} onChange={(e) => setDate(e.value)} showButtonBar></Calendar>
@@ -712,7 +732,9 @@ import { Calendar } from 'primereact/calendar';
                     </CodeHighlight>
 
                     <h5>Multiple Months</h5>
-                    <p>Displaying multiple months is enabled by setting <i>numberOfMonths</i> property to a value greater than 1.</p>
+                    <p>
+                        Displaying multiple months is enabled by setting <i>numberOfMonths</i> property to a value greater than 1.
+                    </p>
                     <CodeHighlight>
                         {`
 <Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3}></Calendar>
@@ -720,8 +742,10 @@ import { Calendar } from 'primereact/calendar';
                     </CodeHighlight>
 
                     <h5>Date Template</h5>
-                    <p>Date cell contents can be templated using the <i>dateTemplate</i> property that returns the content of a cell. This is a handy feature to highlight specific dates. Note that the
-                        variable passed to the template is not a date instance but a metadata object to represent a Date with "day", "month", "year", "otherMonth", "today" and "selectable" properties to represent the date. Example below changes the styling of dates between 10 and 15.</p>
+                    <p>
+                        Date cell contents can be templated using the <i>dateTemplate</i> property that returns the content of a cell. This is a handy feature to highlight specific dates. Note that the variable passed to the template is not a date
+                        instance but a metadata object to represent a Date with "day", "month", "year", "otherMonth", "today" and "selectable" properties to represent the date. Example below changes the styling of dates between 10 and 15.
+                    </p>
 
                     <CodeHighlight>
                         {`
@@ -745,7 +769,9 @@ dateTemplate(date) {
                     </CodeHighlight>
 
                     <h5>Header and Footer</h5>
-                    <p>The <i>headerTemplate</i> and <i>footerTemplate</i> properties are available to place custom content at these sections.</p>
+                    <p>
+                        The <i>headerTemplate</i> and <i>footerTemplate</i> properties are available to place custom content at these sections.
+                    </p>
                     <CodeHighlight>
                         {`
 <Calendar value={date} onChange={(e) => setDate(e.value)} headerTemplate={() => <Button label="Custom Button" />} footerTemplate={() => <div>Footer Content</div>} />
@@ -753,8 +779,10 @@ dateTemplate(date) {
                     </CodeHighlight>
 
                     <h5>Month and Year Navigator</h5>
-                    <p>Navigators are used to quickly change the displayed month and year using dropdowns. Enabling <i>monthNavigator</i> displays a dropdown with months whereas <i>yearNavigator</i> along with <i>yearRange</i> displays
-                        available years. Format of the <i>yearRange</i> is "startYear:endYear".</p>
+                    <p>
+                        Navigators are used to quickly change the displayed month and year using dropdowns. Enabling <i>monthNavigator</i> displays a dropdown with months whereas <i>yearNavigator</i> along with <i>yearRange</i> displays available
+                        years. Format of the <i>yearRange</i> is "startYear:endYear".
+                    </p>
 
                     <CodeHighlight>
                         {`
@@ -762,7 +790,9 @@ dateTemplate(date) {
 `}
                     </CodeHighlight>
                     <h5>Navigator Templates</h5>
-                    <p>The <i>monthNavigatorTemplate</i> and <i>yearNavigatorTemplate</i> properties are available to place custom content at the navigator sections.</p>
+                    <p>
+                        The <i>monthNavigatorTemplate</i> and <i>yearNavigatorTemplate</i> properties are available to place custom content at the navigator sections.
+                    </p>
                     <CodeHighlight>
                         {`
 <Calendar value={date} onChange={(e) => setDate(e.value)} monthNavigator yearNavigator yearRange="2010:2030" monthNavigatorTemplate={this.monthNavigatorTemplate} />
@@ -784,7 +814,9 @@ const monthNavigatorTemplate = (options) => {
                     </CodeHighlight>
 
                     <h5>Month Picker</h5>
-                    <p>Month picker is used to select month and year only without the date, set <i>view</i> mode as "month" to activate month picker.</p>
+                    <p>
+                        Month picker is used to select month and year only without the date, set <i>view</i> mode as "month" to activate month picker.
+                    </p>
                     <CodeHighlight>
                         {`
 <Calendar value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" yearNavigator yearRange="2010:2030"/>
@@ -798,7 +830,6 @@ const monthNavigatorTemplate = (options) => {
 <Calendar value={date} onChange={(e) => setDate(e.value)} touchUI />
 `}
                     </CodeHighlight>
-
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -871,7 +902,6 @@ const monthNavigatorTemplate = (options) => {
                                     <td>object</td>
                                     <td>null</td>
                                     <td>Inline style of the input element.</td>
-
                                 </tr>
                                 <tr>
                                     <td>inputClassName</td>
@@ -961,7 +991,7 @@ const monthNavigatorTemplate = (options) => {
                                     <td>view</td>
                                     <td>string</td>
                                     <td>date</td>
-                                    <td>Type of view to display, valid valids are "date" for datepicker and "month" for month picker.</td>
+                                    <td>Type of view to display, valid values are "date" for datepicker and "month" for month picker.</td>
                                 </tr>
                                 <tr>
                                     <td>touchUI</td>
@@ -1066,16 +1096,20 @@ const monthNavigatorTemplate = (options) => {
                                     <td>Style class of the datetimepicker panel.</td>
                                 </tr>
                                 <tr>
-                                    <td style={{textDecoration: 'line-through'}}>monthNavigator</td>
+                                    <td style={{ textDecoration: 'line-through' }}>monthNavigator</td>
                                     <td>boolean</td>
                                     <td>false</td>
-                                    <td>Whether the month should be rendered as a dropdown instead of text. <br /> <br />  <b> Deprecated: </b> Navigator is always on</td>
+                                    <td>
+                                        Whether the month should be rendered as a dropdown instead of text. <br /> <br /> <b> Deprecated: </b> Navigator is always on
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td style={{textDecoration: 'line-through'}}>yearNavigator</td>
+                                    <td style={{ textDecoration: 'line-through' }}>yearNavigator</td>
                                     <td>boolean</td>
                                     <td>false</td>
-                                    <td>Whether the year should be rendered as a dropdown instead of text. <br /> <br /> <b> Deprecated: </b> Navigator is always on.</td>
+                                    <td>
+                                        Whether the year should be rendered as a dropdown instead of text. <br /> <br /> <b> Deprecated: </b> Navigator is always on.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>disabledDates</td>
@@ -1106,6 +1140,12 @@ const monthNavigatorTemplate = (options) => {
                                     <td>number</td>
                                     <td>null</td>
                                     <td>Maximum number of selectable dates in multiple mode.</td>
+                                </tr>
+                                <tr>
+                                    <td>showMinMaxRange</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether to allow navigation past min/max dates.</td>
                                 </tr>
                                 <tr>
                                     <td>showOtherMonths</td>
@@ -1153,7 +1193,9 @@ const monthNavigatorTemplate = (options) => {
                                     <td>appendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>tooltip</td>
@@ -1195,7 +1237,13 @@ const monthNavigatorTemplate = (options) => {
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1229,14 +1277,18 @@ const monthNavigatorTemplate = (options) => {
                                 </tr>
                                 <tr>
                                     <td>onSelect</td>
-                                    <td>originalEvent: Browser event <br />
-                                        value: Selected date</td>
+                                    <td>
+                                        originalEvent: Browser event <br />
+                                        value: Selected date
+                                    </td>
                                     <td>Callback to invoke when a date is selected.</td>
                                 </tr>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>originalEvent: Browser event <br />
-                                        value: New date</td>
+                                    <td>
+                                        originalEvent: Browser event <br />
+                                        value: New date
+                                    </td>
                                     <td>Callback to invoke when value changes.</td>
                                 </tr>
                                 <tr>
@@ -1251,8 +1303,10 @@ const monthNavigatorTemplate = (options) => {
                                 </tr>
                                 <tr>
                                     <td>onViewDateChange</td>
-                                    <td>originalEvent: Browser event <br />
-                                        value: New date</td>
+                                    <td>
+                                        originalEvent: Browser event <br />
+                                        value: New date
+                                    </td>
                                     <td>Callback to invoke when the displayed month/year is changed.</td>
                                 </tr>
                                 <tr>
@@ -1267,7 +1321,8 @@ const monthNavigatorTemplate = (options) => {
                                 </tr>
                                 <tr>
                                     <td>onVisibleChange</td>
-                                    <td>event.visible: Whether the overlay is visible  <br />
+                                    <td>
+                                        event.visible: Whether the overlay is visible <br />
                                         event.type: Action type when the overlay is visible/hidden <br />
                                         event.callback: It is used to refocus the input field in some cases when the overlay is hidden.
                                     </td>
@@ -1278,7 +1333,9 @@ const monthNavigatorTemplate = (options) => {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -1338,19 +1395,258 @@ const monthNavigatorTemplate = (options) => {
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element has <i>combobox</i> role in addition
+                            to <i>aria-autocomplete</i> as "none", <i>aria-haspopup</i> as "dialog" and <i>aria-expanded</i> attributes. The relation between the input and the popup is created with <i>aria-controls</i> attribute that refers to the id
+                            of the popup.
+                        </p>
+                        <p>
+                            The optional calendar button requires includes <i>aria-haspopup</i>, <i>aria-expanded</i> for states along with <i>aria-controls</i> to define the relation between the popup and the button. The value to read is retrieved
+                            from the <i>chooseDate</i>
+                            key of the aria property from the <Link href="/locale">locale</Link> API. This label is also used for the <i>aria-label</i> of the popup as well. When there is a value selected, it is formatted and appended to the label to
+                            be able to notify users about the current value.
+                        </p>
+
+                        <p>
+                            Popup has a <i>dialog</i> role along with <i>aria-modal</i> and <i>aria-label</i>. The navigation buttons at the header has an <i>aria-label</i> retrieved from the <i>prevYear</i>, <i>nextYear</i>, <i>prevMonth</i>,{' '}
+                            <i>nextMonth</i>,<i>prevDecade</i> and <i>nextDecade</i> keys of the locale aria API. Similarly month picker button uses the <i>chooseMonth</i> and year picker button uses the <i>chooseYear</i> keys.
+                        </p>
+
+                        <p>
+                            Main date table uses <i>grid</i> role that contains th elements with <i>col</i> as the scope along with <i>abbr</i> tag resolving to the full name of the month. Each date cell has an <i>aria-label</i> referring to the full
+                            date value. Buttons at the footer utilize their readable labels as <i>aria-label</i> as well. Selected date also receives the <i>aria-selected</i> attribute.
+                        </p>
+
+                        <p>
+                            Timepicker spinner buttons get their labels for <i>aria-label</i> from the aria locale API using the <i>prevHour</i>, <i>nextHour</i>, <i>prevMinute</i>, <i>nextMinute</i>, <i>prevSecond</i>, <i>nextSecond</i>, <i>am</i>{' '}
+                            and <i>pm</i> keys.
+                        </p>
+
+                        <p>
+                            Calendar also includes a hidden section that is only available to screen readers with <i>aria-live</i> as "polite". This element is updated when the selected date changes to instruct the user about the current date
+                            selected.
+                        </p>
+                        <CodeHighlight>
+                            {`
+<label htmlFor="date1">Date</label>
+<Calendar inputId="date1" />
+
+<span id="date2">Date</span>
+<Calendar aria-labelledby="date2" />
+
+<Calendar aria-label="Date" />
+`}
+                        </CodeHighlight>
+                        <h6>Choose Date Button Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Opens popup and moves focus to the selected date, if there is none focuses on today.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Opens popup and moves focus to the selected date, if there is none focuses on today.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Popup Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>Closes the popup and moves focus to the input element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the next focusable element within the popup.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the next focusable element within the popup.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Header Buttons Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Triggers the button action.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Triggers the button action.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Date Grid Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Selects the date, closes the popup and moves focus to the input element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Selects the date, closes the popup and moves focus to the input element.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>up arrow</i>
+                                        </td>
+                                        <td>Moves focus to the same day of the previous week.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>down arrow</i>
+                                        </td>
+                                        <td>Moves focus to the same day of the next week.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>right arrow</i>
+                                        </td>
+                                        <td>Moves focus to the next day.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>left arrow</i>
+                                        </td>
+                                        <td>Moves focus to the previous day.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>home</i>
+                                        </td>
+                                        <td>Moves focus to the first day of the current week.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>end</i>
+                                        </td>
+                                        <td>Moves focus to the last day of the current week.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>page up</i>
+                                        </td>
+                                        <td>Changes the date to previous month in date picker mode. Moves to previous year in month picker mode and previous decade in year picker.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>page up</i>
+                                        </td>
+                                        <td>Changes the date to previous year in date picker mode. Has no effect in month or year picker</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>page down</i>
+                                        </td>
+                                        <td>Changes the date to next month in date picker mode. Moves to next year in month picker mode and next decade in year picker.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>page down</i>
+                                        </td>
+                                        <td>Changes the date to next year in date picker mode. Has no effect in month or year picker</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Footer Buttons Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Triggers the button action.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Triggers the button action.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
+
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'CalendarDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'CalendarDemo', sources: sources })}
             </TabView>
         </div>
     );
-})
+});
 
 export default CalendarDoc;

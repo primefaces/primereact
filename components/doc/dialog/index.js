@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const DialogDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -166,7 +166,7 @@ export class DialogDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -314,7 +314,7 @@ const DialogDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -462,7 +462,7 @@ const DialogDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./DialogDemo.css" />
@@ -613,7 +613,7 @@ const DialogDemo = () => {
 }
                 `
         }
-    }
+    };
 
     const extFiles = {
         'demo/DialogDemo.css': {
@@ -633,30 +633,32 @@ const DialogDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Dialog } from 'primereact/dialog';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Dialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Dialog is used as a container and visibility is managed with <i>visible</i> property where <i>onHide</i> event is required to update the visibility state.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayBasic')} />
 
 <Dialog header="Header" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => onHide('displayBasic')}>
@@ -666,13 +668,14 @@ import { Dialog } from 'primereact/dialog';
     cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </Dialog>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Header and Footer</h5>
-                    <p>Header and Footer sections are defined using properties with the same name that accept simple strings or JSX for custom content. In addition <i>icons</i> property enables
-        adding more icons at the header section.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Header and Footer sections are defined using properties with the same name that accept simple strings or JSX for custom content. In addition <i>icons</i> property enables adding more icons at the header section.
+                    </p>
+                    <CodeHighlight>
+                        {`
 const footer = (
     <div>
         <Button label="Yes" icon="pi pi-check" onClick={onHide} />
@@ -690,22 +693,26 @@ const myIcon = (
     Content
 </Dialog>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Responsive</h5>
-                    <p>Dialog width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 50vw and below 961px, width would be 75vw and finally below 641px width becomes
-                        100%. The value of <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.</p>
+                    <p>
+                        Dialog width can be adjusted per screen size with the <i>breakpoints</i> option. In example below, default width is set to 50vw and below 961px, width would be 75vw and finally below 641px width becomes 100%. The value of{' '}
+                        <i>breakpoints</i> should be an object literal whose keys are the maximum screen sizes and values are the widths per screen.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Dialog visible={visible} onHide={onHide} breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '50vw'}}>
     Content
 </Dialog>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Dynamic Content</h5>
-                    <p>Dynamic content may move the dialog boundaries outside of the viewport. Common solution is defining max-height via <i>contentStyle</i> so longer content displays a scrollbar.</p>
+                    <p>
+                        Dynamic content may move the dialog boundaries outside of the viewport. Common solution is defining max-height via <i>contentStyle</i> so longer content displays a scrollbar.
+                    </p>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -786,6 +793,18 @@ const myIcon = (
                                     <td>Keeps dialog in the viewport.</td>
                                 </tr>
                                 <tr>
+                                    <td>headerStyle</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Style of the header section.</td>
+                                </tr>
+                                <tr>
+                                    <td>headerClassName</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Style class of the header section.</td>
+                                </tr>
+                                <tr>
                                     <td>contentStyle</td>
                                     <td>object</td>
                                     <td>null</td>
@@ -855,7 +874,9 @@ const myIcon = (
                                     <td>appendTo</td>
                                     <td>DOM element | string</td>
                                     <td>document.body</td>
-                                    <td>DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.</td>
+                                    <td>
+                                        DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a component where it is located.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>baseZIndex</td>
@@ -909,7 +930,13 @@ const myIcon = (
                                     <td>transitionOptions</td>
                                     <td>object</td>
                                     <td>null</td>
-                                    <td>The properties of <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">CSSTransition</a> can be customized, except for "nodeRef" and "in" properties.</td>
+                                    <td>
+                                        The properties of{' '}
+                                        <a href="https://reactcommunity.org/react-transition-group/css-transition" rel="noopener noreferrer" target="_blank">
+                                            CSSTransition
+                                        </a>{' '}
+                                        can be customized, except for "nodeRef" and "in" properties.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -938,7 +965,8 @@ const myIcon = (
                                 </tr>
                                 <tr>
                                     <td>onMaximize</td>
-                                    <td>event.originalEvent: Browser event  <br />
+                                    <td>
+                                        event.originalEvent: Browser event <br />
                                         event.maximized: Whether to show the dialog or not on fullscreen.
                                     </td>
                                     <td>Callback to invoke when toggle maximize icon is clicked.</td>
@@ -988,7 +1016,9 @@ const myIcon = (
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -1024,19 +1054,104 @@ const myIcon = (
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Dialog component uses <i>dialog</i> role along with <i>aria-labelledby</i> referring to the header element however any attribute is passed to the root element so you may use <i>aria-labelledby</i> to override this default
+                            behavior. In addition <i>aria-modal</i> is added since focus is kept within the popup.
+                        </p>
+                        <p>
+                            It is recommended to use a trigger component that can be accessed with keyboard such as a button, if not adding <i>tabIndex</i> would be necessary.
+                        </p>
+                        <p>
+                            Trigger element also requires <i>aria-expanded</i> and <i>aria-controls</i> to be handled explicitly.
+                        </p>
+                        <p>
+                            Close element is a <i>button</i> with an <i>aria-label</i> that refers to the <i>aria.close</i> property of the <Link href="/locale">locale</Link> API by default, you may use
+                            <i>closeButtonProps</i> to customize the element and override the default <i>aria-label</i>.
+                        </p>
+
+                        <CodeHighlight>
+                            {`
+<Button label="Show" icon="pi pi-external-link" onClick={() => setVisible(true)} aria-controls={visible ? 'dlg' : null} aria-expanded={visible ? true : false} />
+
+<Dialog id="dlg" header="Header" visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)}>
+    <p>Content</p>
+</Dialog>
+`}
+                        </CodeHighlight>
+
+                        <h6>Overlay Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the next the focusable element within the dialog.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>shift</i> + <i>tab</i>
+                                        </td>
+                                        <td>Moves focus to the previous the focusable element within the dialog.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>escape</i>
+                                        </td>
+                                        <td>
+                                            Closes the dialog if <i>closeOnEscape</i> is true.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Close Button Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Closes the dialog.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Closes the dialog.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'DialogDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'DialogDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default DialogDoc;

@@ -201,7 +201,8 @@ const TreeTableProps = [
         name: 'metaKeySelection',
         type: 'boolean',
         default: 'true',
-        description: 'Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
+        description:
+            'Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
     },
     {
         name: 'selectOnEdit',
@@ -231,7 +232,7 @@ const TreeTableProps = [
         name: 'rowClassName',
         type: 'function',
         default: 'null',
-        description: `Function that takes the row data and returns an object in "&#123;'styleclass' : condition&#125;" format to define a classname for a particular now.`
+        description: `Function that takes the row data and returns an object in "&#123;'styleclass' : condition&#125;" format to define a class name for a particular row.`
     },
     {
         name: 'loading',

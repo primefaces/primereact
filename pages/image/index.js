@@ -7,7 +7,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const ImageDemo = () => {
-
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
@@ -20,7 +19,9 @@ const ImageDemo = () => {
                 <div>
                     <div className="feature-intro">
                         <h1>Image</h1>
-                        <p>Displays an image with preview and tranformation options. For multiple image, see <Link href="/galleria">Galleria</Link>.</p>
+                        <p>
+                            Displays an image with preview and tranformation options. For multiple image, see <Link href="/galleria">Galleria</Link>.
+                        </p>
                     </div>
                 </div>
                 <DocActions github="image/index.js" />
@@ -38,7 +39,7 @@ const ImageDemo = () => {
 
             <ImageDoc></ImageDoc>
         </div>
-    )
-}
+    );
+};
 
 export default ImageDemo;

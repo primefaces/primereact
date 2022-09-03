@@ -8,7 +8,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const DataTableDynamicDemo = () => {
-
     const [products, setProducts] = useState([]);
     const columns = [
         { field: 'code', header: 'Code' },
@@ -20,7 +19,7 @@ const DataTableDynamicDemo = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const dynamicColumns = columns.map((col, i) => {
@@ -35,7 +34,9 @@ const DataTableDynamicDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>Dynamic Columns</span></h1>
+                    <h1>
+                        DataTable <span>Dynamic Columns</span>
+                    </h1>
                     <p>Columns can be defined dynamically.</p>
                 </div>
 
@@ -53,14 +54,13 @@ const DataTableDynamicDemo = () => {
             <DataTableDynamicDemoDoc></DataTableDynamicDemoDoc>
         </div>
     );
-}
+};
 
 export default DataTableDynamicDemo;
 
 const DataTableDynamicDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -109,7 +109,7 @@ export class DataTableDynamicDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -148,7 +148,7 @@ const DataTableDynamicDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -187,7 +187,7 @@ const DataTableDynamicDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./ProductService.js"></script>
@@ -233,15 +233,11 @@ const DataTableDynamicDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableDynamicDemo', sources: sources, service: 'ProductService', data: 'products-small' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableDynamicDemo', sources: sources, service: 'ProductService', data: 'products-small' })}</TabView>
         </div>
-    )
-})
+    );
+});

@@ -19,9 +19,7 @@ const BadgeProps = [
     }
 ];
 
-const BadgeEvents = [
-
-];
+const BadgeEvents = [];
 
 const BadgeStyles = [
     { name: 'p-badge', description: 'Badge element' },

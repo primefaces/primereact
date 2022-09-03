@@ -8,7 +8,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const TimelineDemo = () => {
-
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const events1 = [
         { status: 'Ordered', date: '15/10/2020 10:30', icon: 'pi pi-shopping-cart', color: '#9C27B0', image: 'game-controller.jpg' },
@@ -17,9 +16,7 @@ const TimelineDemo = () => {
         { status: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' }
     ];
 
-    const events2 = [
-        '2020', '2021', '2022', '2023'
-    ];
+    const events2 = ['2020', '2021', '2022', '2023'];
 
     const customizedMarker = (item) => {
         return (
@@ -32,9 +29,11 @@ const TimelineDemo = () => {
     const customizedContent = (item) => {
         return (
             <Card title={item.status} subTitle={item.date}>
-                {item.image && <img src={`${contextPath}/images/product/${item.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.name} width={200} className="shadow-1" />}
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                    quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
+                {item.image && <img src={`${contextPath}/images/product/${item.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={item.name} width={200} className="shadow-1" />}
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+                    quas!
+                </p>
                 <Button label="Read more" className="p-button-text"></Button>
             </Card>
         );
@@ -96,7 +95,6 @@ const TimelineDemo = () => {
             <TimelineDoc />
         </div>
     );
-
-}
+};
 
 export default TimelineDemo;

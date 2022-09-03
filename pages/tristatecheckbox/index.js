@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TriStateCheckboxDemo = () => {
-
     const [value, setValue] = useState(null);
 
     return (
@@ -26,7 +25,7 @@ const TriStateCheckboxDemo = () => {
             <div className="content-section implementation">
                 <div className="card">
                     <div className="field-checkbox m-0">
-                        <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} />
+                        <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} aria-label="Terms Accepted" />
                         <label>{String(value)}</label>
                     </div>
                 </div>
@@ -35,6 +34,6 @@ const TriStateCheckboxDemo = () => {
             <TriStateCheckboxDoc />
         </div>
     );
-}
+};
 
 export default TriStateCheckboxDemo;

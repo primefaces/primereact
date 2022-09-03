@@ -21,7 +21,7 @@ const ToolbarDemo = () => {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
-                window.location.href = 'https://reactjs.org/'
+                window.location.href = 'https://reactjs.org/';
             }
         },
         {
@@ -39,7 +39,6 @@ const ToolbarDemo = () => {
             }
         }
     ];
-
 
     const leftContents = (
         <React.Fragment>
@@ -79,6 +78,6 @@ const ToolbarDemo = () => {
             <ToolbarDoc />
         </div>
     );
-}
+};
 
 export default ToolbarDemo;

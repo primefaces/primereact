@@ -13,28 +13,24 @@ const DataTableStyleDemo = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const rowClass = (data) => {
         return {
             'row-accessories': data.category === 'Accessories'
-        }
-    }
+        };
+    };
 
     const stockBodyTemplate = (rowData) => {
         const stockClassName = classNames({
-            'outofstock': rowData.quantity === 0,
-            'lowstock': rowData.quantity > 0 && rowData.quantity < 10,
-            'instock': rowData.quantity > 10
+            outofstock: rowData.quantity === 0,
+            lowstock: rowData.quantity > 0 && rowData.quantity < 10,
+            instock: rowData.quantity > 10
         });
 
-        return (
-            <div className={stockClassName}>
-                {rowData.quantity}
-            </div>
-        );
-    }
+        return <div className={stockClassName}>{rowData.quantity}</div>;
+    };
 
     return (
         <div>
@@ -44,7 +40,9 @@ const DataTableStyleDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>Styling</span></h1>
+                    <h1>
+                        DataTable <span>Styling</span>
+                    </h1>
                     <p>Particular rows and cells can be styled based on data.</p>
                 </div>
 
@@ -65,14 +63,13 @@ const DataTableStyleDemo = () => {
             <DataTableStyleDemoDoc></DataTableStyleDemoDoc>
         </div>
     );
-}
+};
 
 export default DataTableStyleDemo;
 
 export const DataTableStyleDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -137,7 +134,7 @@ export class DataTableStyleDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -190,7 +187,7 @@ const DataTableStyleDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -243,7 +240,7 @@ const DataTableStyleDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./DataTableDemo.css" />
@@ -329,15 +326,11 @@ const DataTableStyleDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableStyleDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableStyleDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })}</TabView>
         </div>
-    )
-})
+    );
+});

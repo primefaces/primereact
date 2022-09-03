@@ -3,6 +3,11 @@
     margin-top: 10px;
 }
 
+/* Github #3122: Prevent animation flickering */
+.p-overlaypanel:not([class*='p-overlaypanel-']) {
+    display: none;
+}
+
 .p-overlaypanel-flipped {
     margin-top: 0;
     margin-bottom: 10px;

@@ -18,19 +18,16 @@ const IconsPage = () => {
         }
 
         if (icons) {
-            setFilteredIcons(icons.filter(it => it.icon.tags[0].indexOf(event.target.value) !== -1));
+            setFilteredIcons(icons.filter((it) => it.icon.tags[0].indexOf(event.target.value) !== -1));
         }
-    }
+    };
 
     useEffect(() => {
-        (new IconService()).getIcons().then(data => {
+        new IconService().getIcons().then((data) => {
             data.sort((icon1, icon2) => {
-                if(icon1.properties.name < icon2.properties.name)
-                    return -1;
-                else if(icon1.properties.name < icon2.properties.name)
-                    return 1;
-                else
-                    return 0;
+                if (icon1.properties.name < icon2.properties.name) return -1;
+                else if (icon1.properties.name < icon2.properties.name) return 1;
+                else return 0;
             });
 
             setIcons(data);
@@ -47,37 +44,40 @@ const IconsPage = () => {
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>Icons</h1>
-                    <p>PrimeReact components internally use <a href="https://github.com/primefaces/primeicons">PrimeIcons</a> library, the official icons suite from <a href="https://www.primetek.com.tr">PrimeTek</a>.</p>
+                    <p>
+                        PrimeReact components internally use <a href="https://github.com/primefaces/primeicons">PrimeIcons</a> library, the official icons suite from <a href="https://www.primetek.com.tr">PrimeTek</a>.
+                    </p>
                 </div>
             </div>
 
             <div className="content-section documentation icons-page">
                 <h5 style={{ marginTop: 0 }}>Download</h5>
                 <p>PrimeIcons is available at npm, run the following command to download it to your project.</p>
-<CodeHighlight lang="js">
-{`
+                <CodeHighlight lang="js">
+                    {`
 npm install primeicons
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
                 <p>Then import the library.</p>
 
-<CodeHighlight lang="js">
-{`
+                <CodeHighlight lang="js">
+                    {`
 import 'primeicons/primeicons.css';
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
                 <h5>Getting Started</h5>
-                <p>PrimeIcons use the <strong>pi pi-&#123;icon&#125;</strong> syntax such as <strong>pi pi-check</strong>.
-                A standalone icon can be displayed using an element such as <i>i</i> or <i>span</i></p>
+                <p>
+                    PrimeIcons use the <strong>pi pi-&#123;icon&#125;</strong> syntax such as <strong>pi pi-check</strong>. A standalone icon can be displayed using an element such as <i>i</i> or <i>span</i>
+                </p>
 
-<CodeHighlight>
-{`
+                <CodeHighlight>
+                    {`
 <i className="pi pi-check mr-2"></i>
 <i className="pi pi-times"></i>
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
                 <i className="pi pi-check  mr-2"></i>
                 <i className="pi pi-times"></i>
@@ -85,37 +85,37 @@ import 'primeicons/primeicons.css';
                 <h5>Size</h5>
                 <p>Size of the icons can easily be changed using font-size property.</p>
 
-<CodeHighlight>
-{`
+                <CodeHighlight>
+                    {`
 <i className="pi pi-check"></i>
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
                 <i className="pi pi-check"></i>
 
-<CodeHighlight>
-{`
+                <CodeHighlight>
+                    {`
 <i className="pi pi-check" style={{'fontSize': '2em'}}></i>
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
-                <i className="pi pi-check" style={{ 'fontSize': '2em' }}></i>
+                <i className="pi pi-check" style={{ fontSize: '2em' }}></i>
 
                 <h5>Spinning Animation</h5>
                 <p>Special pi-spin class applies infinite rotate to an icon.</p>
-<CodeHighlight>
-{`
+                <CodeHighlight>
+                    {`
 <i className="pi pi-spin pi-spinner" style={{'fontSize': '2em'}}></i>
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
-                <i className="pi pi-spin pi-spinner" style={{ 'fontSize': '2em' }}></i>
+                <i className="pi pi-spin pi-spinner" style={{ fontSize: '2em' }}></i>
 
                 <h5>Constants</h5>
                 <p>PrimeIcons constants API is provided to easily choose an icon e.g. when defining a menu model.</p>
 
-<CodeHighlight lang="js">
-{`
+                <CodeHighlight lang="js">
+                    {`
 import { PrimeIcons } from 'primereact/api';
 import { Menu } from 'primereact/menu';
 
@@ -141,29 +141,32 @@ const MenuDemo = () => {
     return <Menu model={items} />
 }
 `}
-</CodeHighlight>
+                </CodeHighlight>
                 <h5>List of Icons</h5>
-                <p>Here is the current list of PrimeIcons, more icons will be added periodically. You may also <a href="https://github.com/primefaces/primeicons/issues">request new icons</a> at the issue tracker.</p>
+                <p>
+                    Here is the current list of PrimeIcons, more icons will be added periodically. You may also <a href="https://github.com/primefaces/primeicons/issues">request new icons</a> at the issue tracker.
+                </p>
 
                 <InputText className="icon-filter" placeholder="Search an icon" onChange={onFilter} />
 
                 <div className="grid icons-list">
-                    {
-                        filteredIcons && filteredIcons.map(iconMeta => {
+                    {filteredIcons &&
+                        filteredIcons.map((iconMeta) => {
                             const { icon, properties } = iconMeta;
 
-                            return icon.tags.indexOf('deprecate') === -1 && (
-                                <div className="col-12 md:col-2 mb-4" key={properties.name}>
-                                    <i className={"pi pi-" + properties.name}></i>
-                                    <div>pi-{properties.name}</div>
-                                </div>
+                            return (
+                                icon.tags.indexOf('deprecate') === -1 && (
+                                    <div className="col-12 md:col-2 mb-4" key={properties.name}>
+                                        <i className={'pi pi-' + properties.name}></i>
+                                        <div>pi-{properties.name}</div>
+                                    </div>
+                                )
                             );
-                        })
-                    }
+                        })}
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default IconsPage;

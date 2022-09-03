@@ -19,13 +19,9 @@ const FullCalendarProps = [
     }
 ];
 
-const FullCalendarEvents = [
+const FullCalendarEvents = [];
 
-];
-
-const FullCalendarStyles = [
-
-];
+const FullCalendarStyles = [];
 
 module.exports = {
     fullcalendar: {

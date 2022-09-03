@@ -25,13 +25,9 @@ const DataViewLayoutOptionsProps = [
     }
 ];
 
-const DataViewLayoutOptionsEvents = [
+const DataViewLayoutOptionsEvents = [];
 
-];
-
-const DataViewLayoutOptionsStyles = [
-
-];
+const DataViewLayoutOptionsStyles = [];
 
 module.exports = {
     dataviewlayoutoptions: {

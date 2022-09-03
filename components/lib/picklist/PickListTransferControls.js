@@ -3,10 +3,10 @@ import { Button } from '../button/Button';
 import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const PickListTransferControls = React.memo((props) => {
-    const moveRightDisabled = ObjectUtils.isEmpty(props.sourceSelection);
-    const moveLeftDisabled = ObjectUtils.isEmpty(props.targetSelection);
-    const moveAllRightDisabled = ObjectUtils.isEmpty(props.source);
-    const moveAllLeftDisabled = ObjectUtils.isEmpty(props.target);
+    const moveRightDisabled = ObjectUtils.isEmpty(props.sourceSelection) || ObjectUtils.isEmpty(props.visibleSourceList);
+    const moveLeftDisabled = ObjectUtils.isEmpty(props.targetSelection) || ObjectUtils.isEmpty(props.visibleTargetList);
+    const moveAllRightDisabled = ObjectUtils.isEmpty(props.visibleSourceList);
+    const moveAllLeftDisabled = ObjectUtils.isEmpty(props.visibleTargetList);
 
     const moveRight = (event) => {
         const selection = props.sourceSelection;
@@ -32,12 +32,12 @@ export const PickListTransferControls = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     const moveAllRight = (event) => {
         if (props.source) {
-            let targetList = [...props.target, ...props.source];
-            let sourceList = [];
+            let targetList = [...props.target, ...props.visibleSourceList];
+            let sourceList = props.source.filter((s) => !props.visibleSourceList.some((vs) => vs === s));
 
             if (props.onTransfer) {
                 props.onTransfer({
@@ -48,7 +48,7 @@ export const PickListTransferControls = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     const moveLeft = (event) => {
         const selection = props.targetSelection;
@@ -74,12 +74,12 @@ export const PickListTransferControls = React.memo((props) => {
                 });
             }
         }
-    }
+    };
 
     const moveAllLeft = (event) => {
         if (props.source) {
-            let sourceList = [...props.source, ...props.target];
-            let targetList = [];
+            let sourceList = [...props.source, ...props.visibleTargetList];
+            let targetList = props.target.filter((t) => !props.visibleTargetList.some((vt) => vt === t));
 
             if (props.onTransfer) {
                 props.onTransfer({
@@ -87,10 +87,10 @@ export const PickListTransferControls = React.memo((props) => {
                     source: sourceList,
                     target: targetList,
                     direction: 'allToSource'
-                })
+                });
             }
         }
-    }
+    };
 
     const className = classNames('p-picklist-buttons p-picklist-transfer-buttons', props.className);
 
@@ -101,7 +101,7 @@ export const PickListTransferControls = React.memo((props) => {
             <Button disabled={moveLeftDisabled} type="button" icon="pi pi-angle-left" onClick={moveLeft}></Button>
             <Button disabled={moveAllLeftDisabled} type="button" icon="pi pi-angle-double-left" onClick={moveAllLeft}></Button>
         </div>
-    )
+    );
 });
 
 PickListTransferControls.displayName = 'PickListTransferControls';

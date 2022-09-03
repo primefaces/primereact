@@ -9,7 +9,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 
-
 const GalleriaAdvancedDemo = () => {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -18,7 +17,7 @@ const GalleriaAdvancedDemo = () => {
     const [isFullScreen, setFullScreen] = useState(false);
     const galleriaService = new PhotoService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const galleria = useRef(null)
+    const galleria = useRef(null);
 
     const responsiveOptions = [
         {
@@ -40,81 +39,77 @@ const GalleriaAdvancedDemo = () => {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        galleriaService.getImages().then((data) => setImages(data));
         bindDocumentListeners();
 
         return () => unbindDocumentListeners();
-    },[]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        setAutoPlayActive(galleria.current.isAutoPlayActive())
-    },[isAutoPlayActive]);
+        setAutoPlayActive(galleria.current.isAutoPlayActive());
+    }, [isAutoPlayActive]);
 
     const onThumbnailChange = (event) => {
-        setActiveIndex(event.index)
-    }
+        setActiveIndex(event.index);
+    };
 
     const onItemChange = (event) => {
-        setActiveIndex(event.index)
-    }
+        setActiveIndex(event.index);
+    };
 
     const toggleFullScreen = () => {
         if (isFullScreen) {
             closeFullScreen();
-        }
-        else {
+        } else {
             openFullScreen();
         }
-    }
+    };
 
     const onFullScreenChange = () => {
-        setFullScreen(prevState => !prevState )
-    }
+        setFullScreen((prevState) => !prevState);
+    };
 
     const openFullScreen = () => {
         let elem = document.querySelector('.custom-galleria');
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
-        }
-        else if (elem.mozRequestFullScreen) { /* Firefox */
+        } else if (elem.mozRequestFullScreen) {
+            /* Firefox */
             elem.mozRequestFullScreen();
-        }
-        else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        } else if (elem.webkitRequestFullscreen) {
+            /* Chrome, Safari & Opera */
             elem.webkitRequestFullscreen();
-        }
-        else if (elem.msRequestFullscreen) { /* IE/Edge */
+        } else if (elem.msRequestFullscreen) {
+            /* IE/Edge */
             elem.msRequestFullscreen();
         }
-    }
+    };
 
     const closeFullScreen = () => {
         if (document.exitFullscreen) {
             document.exitFullscreen();
-        }
-        else if (document.mozCancelFullScreen) {
+        } else if (document.mozCancelFullScreen) {
             document.mozCancelFullScreen();
-        }
-        else if (document.webkitExitFullscreen) {
+        } else if (document.webkitExitFullscreen) {
             document.webkitExitFullscreen();
-        }
-        else if (document.msExitFullscreen) {
+        } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
         }
-    }
+    };
 
     const bindDocumentListeners = () => {
-        document.addEventListener("fullscreenchange", onFullScreenChange);
-        document.addEventListener("mozfullscreenchange", onFullScreenChange);
-        document.addEventListener("webkitfullscreenchange", onFullScreenChange);
-        document.addEventListener("msfullscreenchange", onFullScreenChange);
-    }
+        document.addEventListener('fullscreenchange', onFullScreenChange);
+        document.addEventListener('mozfullscreenchange', onFullScreenChange);
+        document.addEventListener('webkitfullscreenchange', onFullScreenChange);
+        document.addEventListener('msfullscreenchange', onFullScreenChange);
+    };
 
     const unbindDocumentListeners = () => {
-        document.removeEventListener("fullscreenchange", onFullScreenChange);
-        document.removeEventListener("mozfullscreenchange", onFullScreenChange);
-        document.removeEventListener("webkitfullscreenchange", onFullScreenChange);
-        document.removeEventListener("msfullscreenchange", onFullScreenChange);
-    }
+        document.removeEventListener('fullscreenchange', onFullScreenChange);
+        document.removeEventListener('mozfullscreenchange', onFullScreenChange);
+        document.removeEventListener('webkitfullscreenchange', onFullScreenChange);
+        document.removeEventListener('msfullscreenchange', onFullScreenChange);
+    };
 
     const thumbnailTemplate = (item) => {
         return (
@@ -122,15 +117,15 @@ const GalleriaAdvancedDemo = () => {
                 <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />
             </div>
         );
-    }
+    };
 
     const itemTemplate = (item) => {
         if (isFullScreen) {
-            return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} />
+            return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} />;
         }
 
-        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
-    }
+        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+    };
 
     const renderFooter = () => {
         let autoPlayClassName = classNames('pi', {
@@ -145,34 +140,36 @@ const GalleriaAdvancedDemo = () => {
 
         return (
             <div className="custom-galleria-footer">
-                <Button icon="pi pi-list" onClick={() => setShowThumbnails(prevState => !prevState)} />
-                <Button icon={autoPlayClassName} onClick={() => {
-                    if (!isAutoPlayActive) {
-                        galleria.current.startSlideShow();
-                        setAutoPlayActive(true)
-                    }
-                    else {
-                        galleria.current.stopSlideShow();
-                        setAutoPlayActive(false)
-                    }
-                }} />
-                {
-                    images && (
-                        <span className="title-container">
-                            <span>{activeIndex + 1}/{images.length}</span>
-                            <span className="title">{images[activeIndex].title}</span>
-                            <span>{images[activeIndex].alt}</span>
+                <Button icon="pi pi-list" onClick={() => setShowThumbnails((prevState) => !prevState)} />
+                <Button
+                    icon={autoPlayClassName}
+                    onClick={() => {
+                        if (!isAutoPlayActive) {
+                            galleria.current.startSlideShow();
+                            setAutoPlayActive(true);
+                        } else {
+                            galleria.current.stopSlideShow();
+                            setAutoPlayActive(false);
+                        }
+                    }}
+                />
+                {images && (
+                    <span className="title-container">
+                        <span>
+                            {activeIndex + 1}/{images.length}
                         </span>
-                    )
-                }
+                        <span className="title">{images[activeIndex].title}</span>
+                        <span>{images[activeIndex].alt}</span>
+                    </span>
+                )}
                 <Button icon={fullScreenClassName} onClick={() => toggleFullScreen()} className="fullscreen-button" />
             </div>
         );
-    }
+    };
 
     const footer = renderFooter();
     const galleriaClassName = classNames('custom-galleria', {
-        'fullscreen': isFullScreen
+        fullscreen: isFullScreen
     });
 
     return (
@@ -183,7 +180,9 @@ const GalleriaAdvancedDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Galleria <span>Advanced</span></h1>
+                    <h1>
+                        Galleria <span>Advanced</span>
+                    </h1>
                     <p>Galleria can be extended further to implement complex requirements.</p>
                 </div>
 
@@ -192,25 +191,38 @@ const GalleriaAdvancedDemo = () => {
 
             <div className="content-section implementation galleria-demo">
                 <div className="card">
-                    <Galleria ref={galleria} value={images} activeIndex={activeIndex} onItemChange={onItemChange}
-                        showThumbnails={showThumbnails} showItemNavigators showItemNavigatorsOnHover
-                        numVisible={5} circular autoPlay transitionInterval={3000} responsiveOptions={responsiveOptions}
-                        item={itemTemplate} thumbnail={thumbnailTemplate} footer={footer}
-                        style={{ maxWidth: '640px' }} className={galleriaClassName} />
+                    <Galleria
+                        ref={galleria}
+                        value={images}
+                        activeIndex={activeIndex}
+                        onItemChange={onItemChange}
+                        showThumbnails={showThumbnails}
+                        showItemNavigators
+                        showItemNavigatorsOnHover
+                        numVisible={5}
+                        circular
+                        autoPlay
+                        transitionInterval={3000}
+                        responsiveOptions={responsiveOptions}
+                        item={itemTemplate}
+                        thumbnail={thumbnailTemplate}
+                        footer={footer}
+                        style={{ maxWidth: '640px' }}
+                        className={galleriaClassName}
+                    />
                 </div>
             </div>
 
             <GalleriaAdvancedDemoDoc />
         </div>
     );
-}
+};
 
 export default GalleriaAdvancedDemo;
 
 export const GalleriaAdvancedDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -420,7 +432,7 @@ export class GalleriaAdvancedDemo extends Component {
 }
             `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useRef, useEffect, useState } from 'react';
@@ -610,7 +622,7 @@ const GalleriaAdvancedDemo = () => {
 }
             `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useRef, useEffect, useState } from 'react';
@@ -800,7 +812,7 @@ const GalleriaAdvancedDemo = () => {
 }
                         `
         },
-        'browser' : {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./GalleriaAdvancedDemo.css" />
@@ -998,11 +1010,10 @@ const GalleriaAdvancedDemo = () => {
     }
                     `
         }
-
-    }
+    };
 
     const extFiles = {
-        'demo/GalleriaAdvancedDemo.css' : {
+        'demo/GalleriaAdvancedDemo.css': {
             content: `
 .galleria-demo .custom-galleria.fullscreen {
     display: flex;
@@ -1052,15 +1063,11 @@ const GalleriaAdvancedDemo = () => {
 }
     `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'GalleriaAdvancedDemo', sources: sources, service: 'PhotoService', data: 'photos', extFiles: extFiles })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'GalleriaAdvancedDemo', sources: sources, service: 'PhotoService', data: 'photos', extFiles: extFiles })}</TabView>
         </div>
-    )
-})
+    );
+});

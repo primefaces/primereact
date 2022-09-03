@@ -3,9 +3,8 @@ import { TabView } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 
 const InvalidDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -210,7 +209,7 @@ export class InvalidDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -406,7 +405,7 @@ const InvalidDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -602,7 +601,7 @@ const InvalidDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./CountryService.js"></script>
@@ -815,17 +814,13 @@ const InvalidDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'InvalidDemo', sources: sources, service: 'CountryService, NodeService', data: 'countries, treenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'InvalidDemo', sources: sources, service: 'CountryService, NodeService', data: 'countries, treenodes' })}</TabView>
         </div>
     );
-})
+});
 
 export default InvalidDoc;

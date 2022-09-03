@@ -7,12 +7,11 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeDragDropDemo = () => {
-
     const [nodes, setNodes] = useState(null);
     const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        nodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -23,7 +22,9 @@ const TreeDragDropDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Tree <span>DragDrop</span></h1>
+                    <h1>
+                        Tree <span>DragDrop</span>
+                    </h1>
                     <p>Nodes can be reordered using drag and drop.</p>
                 </div>
                 <DocActions github="tree/dragdrop.js" />
@@ -31,21 +32,20 @@ const TreeDragDropDemo = () => {
 
             <div className="content-section implementation">
                 <div className="card">
-                    <Tree value={nodes} dragdropScope="demo" onDragDrop={event => setNodes(event.value)} />
+                    <Tree value={nodes} dragdropScope="demo" onDragDrop={(event) => setNodes(event.value)} />
                 </div>
             </div>
 
             <TreeDragDropDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeDragDropDemo;
 
 export const TreeDragDropDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -79,7 +79,7 @@ export class TreeDragDropDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -104,7 +104,7 @@ const TreeDragDropDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -129,7 +129,7 @@ const TreeDragDropDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./NodeService.js"></script>
@@ -159,15 +159,11 @@ const TreeDragDropDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeDragDropDemo', sources: sources, service: 'NodeService', data: 'treenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeDragDropDemo', sources: sources, service: 'NodeService', data: 'treenodes' })}</TabView>
         </div>
     );
-})
+});

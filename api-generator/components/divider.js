@@ -19,9 +19,7 @@ const DividerProps = [
     }
 ];
 
-const DividerEvents = [
-
-];
+const DividerEvents = [];
 
 const DividerStyles = [
     { name: 'p-divider', description: 'Container element.' },

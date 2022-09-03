@@ -7,7 +7,6 @@ import { DocActions } from '../../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const DoughnutChartDemo = memo(() => {
-
     const context = useContext(AppContentContext);
 
     const [chartData] = useState({
@@ -15,17 +14,10 @@ const DoughnutChartDemo = memo(() => {
         datasets: [
             {
                 data: [300, 50, 100],
-                backgroundColor: [
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56"
-                ],
-                hoverBackgroundColor: [
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56"
-                ]
-            }]
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+            }
+        ]
     });
 
     const [lightOptions] = useState({
@@ -72,15 +64,14 @@ const DoughnutChartDemo = memo(() => {
 
             <DoughnutChartDemoDoc></DoughnutChartDemoDoc>
         </div>
-    )
-})
+    );
+});
 
 export default DoughnutChartDemo;
 
 const DoughnutChartDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -130,7 +121,7 @@ export class DoughnutChartDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -173,7 +164,7 @@ const DoughnutChartDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -216,15 +207,11 @@ const DoughnutChartDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DoughnutChartDemo', sources: sources, dependencies: { 'chart.js': '3.3.2' } })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DoughnutChartDemo', sources: sources, dependencies: { 'chart.js': '3.3.2' } })}</TabView>
         </div>
-    )
-})
+    );
+});

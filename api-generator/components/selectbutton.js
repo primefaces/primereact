@@ -90,12 +90,6 @@ const SelectButtonProps = [
         description: 'Configuration of the tooltip, refer to the tooltip documentation for more information.'
     },
     {
-        name: 'ariaLabelledBy',
-        type: 'string',
-        default: 'null',
-        description: 'Establishes relationships between the component and label(s) where its value should be one or more element IDs.'
-    },
-    {
         name: 'itemTemplate',
         type: 'function',
         default: 'null',
@@ -122,9 +116,7 @@ const SelectButtonEvents = [
     }
 ];
 
-const SelectButtonStyles = [
-
-];
+const SelectButtonStyles = [];
 
 module.exports = {
     selectbutton: {

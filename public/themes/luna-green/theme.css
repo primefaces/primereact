@@ -42,6 +42,7 @@
   --surface-hover:#4c4c4c;
   --maskbg: rgba(0, 0, 0, 0.4);
   --focus-ring: 0 0 0 0.1rem white;
+  color-scheme: dark;
 }
 
 * {
@@ -222,6 +223,16 @@
   --red-700:#971d0d;
   --red-800:#77170a;
   --red-900:#561108;
+  --primary-50:#fcfefb;
+  --primary-100:#f1f8e9;
+  --primary-200:#e6f2d8;
+  --primary-300:#dbecc7;
+  --primary-400:#d0e7b6;
+  --primary-500:#c5e1a5;
+  --primary-600:#a7bf8c;
+  --primary-700:#8a9e74;
+  --primary-800:#6c7c5b;
+  --primary-900:#4f5a42;
 }
 
 .p-autocomplete .p-autocomplete-loader {
@@ -1052,7 +1063,7 @@
 .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
   background: #AED581;
 }
-.p-inputswitch.p-invalid {
+.p-inputswitch.p-invalid .p-inputswitch-slider {
   border-color: #e57373;
 }
 
@@ -2765,7 +2776,8 @@
   background: #191919;
 }
 .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-thead,
-.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot {
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot, .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-thead,
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-tfoot {
   background-color: #252525;
 }
 .p-datatable .p-datatable-loading-icon {
@@ -3344,6 +3356,19 @@
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
+.p-orderlist .p-orderlist-filter-container {
+  padding: 0.857rem 1rem;
+  background: #323232;
+  border: 1px solid #191919;
+  border-bottom: 0 none;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-input {
+  padding-right: 1.429rem;
+}
+.p-orderlist .p-orderlist-filter-container .p-orderlist-filter-icon {
+  right: 0.429rem;
+  color: #888888;
+}
 .p-orderlist .p-orderlist-list {
   border: 1px solid #191919;
   background: #323232;
@@ -3372,6 +3397,12 @@
 .p-orderlist .p-orderlist-list .p-orderlist-item.p-highlight {
   color: #212529;
   background: #C5E1A5;
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even) {
+  background: #323232;
+}
+.p-orderlist.p-orderlist-striped .p-orderlist-list .p-orderlist-item:nth-child(even):hover {
+  background: #4c4c4c;
 }
 
 @media screen and (max-width: 960px) {
@@ -3525,6 +3556,19 @@
   border-bottom: 0 none;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
+}
+.p-picklist .p-picklist-filter-container {
+  padding: 0.857rem 1rem;
+  background: #323232;
+  border: 1px solid #191919;
+  border-bottom: 0 none;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-input {
+  padding-right: 1.429rem;
+}
+.p-picklist .p-picklist-filter-container .p-picklist-filter-icon {
+  right: 0.429rem;
+  color: #888888;
 }
 .p-picklist .p-picklist-list {
   border: 1px solid #191919;
@@ -4267,6 +4311,10 @@
   color: #dedede;
   padding: 1rem;
 }
+.p-dialog .p-dialog-content:last-of-type {
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
 .p-dialog .p-dialog-footer {
   border-top: 1px solid #191919;
   background: #323232;
@@ -4320,7 +4368,7 @@
 .p-overlaypanel:before {
   border: solid transparent;
   border-color: rgba(25, 25, 25, 0);
-  border-bottom-color: #191919;
+  border-bottom-color: #181818;
 }
 .p-overlaypanel.p-overlaypanel-flipped:after {
   border-top-color: #323232;
@@ -5065,7 +5113,6 @@
   border: 1px solid #191919;
   background: #323232;
   color: #dedede;
-  margin-bottom: 2px;
   border-top: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
@@ -5919,10 +5966,6 @@
 .p-tag.p-tag-danger {
   background-color: #E57373;
   color: #212529;
-}
-
-.p-virtualscroller-loading-icon {
-  font-size: 2rem;
 }
 
 /* Customizations to the designer theme should be defined here */

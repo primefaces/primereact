@@ -6,7 +6,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const SliderDemo = () => {
-
     const [value1, setValue1] = useState(null);
     const [value2, setValue2] = useState(50);
     const [value3, setValue3] = useState(20);
@@ -44,7 +43,9 @@ const SliderDemo = () => {
                     <h5>Decimal Step: {value4}</h5>
                     <Slider value={value4} onChange={(e) => setValue4(e.value)} step={0.5} />
 
-                    <h5>Range: [{value5[0]}, {value5[1]}]</h5>
+                    <h5>
+                        Range: [{value5[0]}, {value5[1]}]
+                    </h5>
                     <Slider value={value5} onChange={(e) => setValue5(e.value)} range />
 
                     <h5>Vertical: {value6}</h5>
@@ -55,6 +56,6 @@ const SliderDemo = () => {
             <SliderDoc />
         </div>
     );
-}
+};
 
 export default SliderDemo;

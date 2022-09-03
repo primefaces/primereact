@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const PickListDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -64,10 +64,9 @@ export class PickListDemo extends Component {
         return (
             <div className="picklist-demo">
                 <div className="card">
-                    <PickList source={this.state.source} target={this.state.target} itemTemplate={this.itemTemplate}
-                        sourceHeader="Available" targetHeader="Selected"
-                        sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
-                        onChange={this.onChange}></PickList>
+                    <PickList source={this.state.source} target={this.state.target} itemTemplate={this.itemTemplate} sourceHeader="Available" targetHeader="Selected"
+                        sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }} onChange={this.onChange}
+                        filterBy="name" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
                 </div>
             </div>
         );
@@ -75,7 +74,7 @@ export class PickListDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -119,17 +118,16 @@ const PickListDemo = () => {
     return (
         <div className="picklist-demo">
             <div className="card">
-                <PickList source={source} target={target} itemTemplate={itemTemplate}
-                    sourceHeader="Available" targetHeader="Selected"
-                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
-                    onChange={onChange}></PickList>
+                <PickList source={source} target={target} itemTemplate={itemTemplate} sourceHeader="Available" targetHeader="Selected"
+                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }} onChange={onChange}
+                    filterBy="name" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
             </div>
         </div>
     );
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -173,17 +171,16 @@ const PickListDemo = () => {
     return (
         <div className="picklist-demo">
             <div className="card">
-                <PickList source={source} target={target} itemTemplate={itemTemplate}
-                    sourceHeader="Available" targetHeader="Selected"
-                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
-                    onChange={onChange}></PickList>
+                <PickList source={source} target={target} itemTemplate={itemTemplate} sourceHeader="Available" targetHeader="Selected"
+                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }} onChange={onChange}
+                    filterBy="name" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
             </div>
         </div>
     );
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./PickListDemo.css" />
@@ -231,10 +228,9 @@ const PickListDemo = () => {
     return (
         <div className="picklist-demo">
             <div className="card">
-                <PickList source={source} target={target} itemTemplate={itemTemplate}
-                    sourceHeader="Available" targetHeader="Selected"
-                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
-                    onChange={onChange}></PickList>
+                <PickList source={source} target={target} itemTemplate={itemTemplate} sourceHeader="Available" targetHeader="Selected"
+                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }} onChange={onChange}
+                    filterBy="name" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
             </div>
         </div>
     );
@@ -296,54 +292,57 @@ const PickListDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { PickList } from 'primereact/picklist';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/picklist/picklist.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>PickList requires two arrays as <i>source</i> and <i>target</i> lists, an <i>itemTemplate</i> for the item content and <i>onChange</i> callback to update the value after reorder or transfer.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        PickList requires two arrays as <i>source</i> and <i>target</i> lists, an <i>itemTemplate</i> for the item content and <i>onChange</i> callback to update the value after reorder or transfer.
+                    </p>
+                    <CodeHighlight>
+                        {`
 const onChange = (e) => {
     setSource(e.source);
     setTarget(e.target);
 }
 `}
-</CodeHighlight>
-<CodeHighlight>
-{`
+                    </CodeHighlight>
+                    <CodeHighlight>
+                        {`
 <PickList source={source} target={target} itemTemplate={itemTemplate}
     onChange={onChange} />
 `}
-</CodeHighlight>
-
+                    </CodeHighlight>
 
                     <h5>Headers</h5>
-                    <p><i>sourceHeader</i> and <i>targetHeader</i> properties are used to define captions for the lists that accept simple strings or JSX for custom content.</p>
+                    <p>
+                        <i>sourceHeader</i> and <i>targetHeader</i> properties are used to define captions for the lists that accept simple strings or JSX for custom content.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <PickList source={source} target={target} itemTemplate={itemTemplate}
     onChange={onChange} sourceHeader="Available" targetHeader="Seleced"/>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -439,14 +438,97 @@ const onChange = (e) => {
                                     <td>itemTemplate</td>
                                     <td>function</td>
                                     <td>null</td>
-                                    <td>Function that gets the option and returns the content for it.</td>
+                                    <td>
+                                        Template that gets the options for both source and target items and returns the content for it. Useful if you want the same template for both lists else use the custom <b>sourceItemTemplate</b> or{' '}
+                                        <b>targetItemTemplate</b> properties.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>sourceItemTemplate</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Template that gets the options for the source items and returns the content for it.</td>
+                                </tr>
+                                <tr>
+                                    <td>targetItemTemplate</td>
+                                    <td>function</td>
+                                    <td>null</td>
+                                    <td>Template that gets the options for the target items and returns the content for it.</td>
                                 </tr>
                                 <tr>
                                     <td>metaKeySelection</td>
                                     <td>boolean</td>
                                     <td>true</td>
-                                    <td>Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item
-                        can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.</td>
+                                    <td>
+                                        Defines how multiple items can be selected, when true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled
+                                        devices, metaKeySelection is turned off automatically.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>filterBy</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>When specified displays an input field to filter the items on keyup and decides which field to search (Accepts multiple fields with a comma).</td>
+                                </tr>
+                                <tr>
+                                    <td>filterMatchMode</td>
+                                    <td>string</td>
+                                    <td>contains</td>
+                                    <td>Defines how the items are filtered, valid values are "contains" (default) "startsWith", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt" and "gte".</td>
+                                </tr>
+                                <tr>
+                                    <td>filterLocale</td>
+                                    <td>string</td>
+                                    <td>undefined</td>
+                                    <td>Locale to use in filtering. The default locale is the host environment's current locale.</td>
+                                </tr>
+                                <tr>
+                                    <td>sourceFilterValue</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Filter value in the target list.</td>
+                                </tr>
+                                <tr>
+                                    <td>targetFilterValue</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Filter value in the source list.</td>
+                                </tr>
+                                <tr>
+                                    <td>showSourceFilter</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to show filter input for source list when filterBy is enabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>showTargetFilter</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to show filter input for target list when filterBy is enabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>sourceFilterPlaceholder</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Placeholder text on source filter input.</td>
+                                </tr>
+                                <tr>
+                                    <td>targetFilterPlaceholder</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>Placeholder text on target filter input.</td>
+                                </tr>
+                                <tr>
+                                    <td>sourceFilterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template for the source filter content.</td>
+                                </tr>
+                                <tr>
+                                    <td>targetFilterTemplate</td>
+                                    <td>any</td>
+                                    <td>null</td>
+                                    <td>Template for the target filter content.</td>
                                 </tr>
                                 <tr>
                                     <td>tabIndex</td>
@@ -477,53 +559,85 @@ const onChange = (e) => {
                             <tbody>
                                 <tr>
                                     <td>onChange</td>
-                                    <td>event.originalEvent: Browser event <br />
-                            event.source: Source list  <br />
-                            event.target: Target list </td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.source: Source list <br />
+                                        event.target: Target list{' '}
+                                    </td>
                                     <td>Callback to invoke when items are moved from source to target.</td>
                                 </tr>
                                 <tr>
                                     <td>onMoveToSource</td>
-                                    <td>event.originalEvent: Browser event <br />
-                            event.value: Moved items</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.value: Moved items
+                                    </td>
                                     <td>Callback to invoke when items are moved from target to source.</td>
                                 </tr>
                                 <tr>
                                     <td>onMoveAllToSource</td>
-                                    <td>event.originalEvent: Browser event <br />
-                            event.value: Moved items</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.value: Moved items
+                                    </td>
                                     <td>Callback to invoke when all items are moved from target to source.</td>
                                 </tr>
                                 <tr>
                                     <td>onMoveToTarget</td>
-                                    <td>event.originalEvent: Browser event <br />
-                            event.value: Moved items</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.value: Moved items
+                                    </td>
                                     <td>Callback to invoke when items are moved from source to target.</td>
                                 </tr>
                                 <tr>
                                     <td>onMoveAllToTarget</td>
-                                    <td>event.originalEvent: Browser event <br />
-                            event.value: Moved items</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.value: Moved items
+                                    </td>
                                     <td>Callback to invoke when all items are moved from source to target.</td>
                                 </tr>
                                 <tr>
                                     <td>onSourceSelectionChange</td>
-                                    <td>event.originalEvent: Browser event <br />
-                            items: Selected items array</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        items: Selected items array
+                                    </td>
                                     <td>Callback to invoke when items are selected within source list.</td>
                                 </tr>
                                 <tr>
                                     <td>onTargetSelectionChange</td>
-                                    <td>event.originalEvent: Browser event <br />
-                            items: Selected items array</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        items: Selected items array
+                                    </td>
                                     <td>Callback to invoke when items are selected within target list.</td>
+                                </tr>
+                                <tr>
+                                    <td>onSourceFilterChange</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.value: Filtered value
+                                    </td>
+                                    <td>Callback to invoke when items are filtered within source list.</td>
+                                </tr>
+                                <tr>
+                                    <td>onTargetFilterChange</td>
+                                    <td>
+                                        event.originalEvent: Browser event <br />
+                                        event.value: Filtered value
+                                    </td>
+                                    <td>Callback to invoke when items are filtered within target list.</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -564,18 +678,155 @@ const onChange = (e) => {
                             </tbody>
                         </table>
 
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
+                        <h5>Accessibility</h5>
+                        <DevelopmentSection>
+                            <h6>Screen Reader</h6>
+                            <p>
+                                Value to describe the source listbox and target listbox can be provided with <i>sourceListProps</i> and <i>targetListProps</i> by passing <i>aria-labelledby</i> or <i>aria-label</i> props. The list elements has a{' '}
+                                <i>listbox</i> role with the <i>aria-multiselectable</i> attribute. Each list item has an <i>option</i> role with <i>aria-selected</i> and <i>aria-disabled</i> as their attributes.
+                            </p>
+                            <p>
+                                Controls buttons are <i>button</i> elements with an <i>aria-label</i> that refers to the <i>aria.moveTop</i>, <i>aria.moveUp</i>, <i>aria.moveDown</i>, <i>aria.moveBottom</i>,<i>aria.moveTo</i>, <i>aria.moveAllTo</i>,{' '}
+                                <i>aria.moveFrom</i> and <i>aria.moveAllFrom</i> properties of the <Link href="/locale">locale</Link> API by default, alternatively you may use
+                                <i>moveTopButtonProps</i>, <i>moveUpButtonProps</i>, <i>moveDownButtonProps</i>, <i>moveToButtonProps</i>, <i>moveAllToButtonProps</i>, <i>moveFromButtonProps</i>, <i>moveFromButtonProps</i> and{' '}
+                                <i>moveAllFromButtonProps</i> to customize the buttons like overriding the default <i>aria-label</i> attributes.
+                            </p>
+                            <CodeHighlight>
+                                {`
+<span id="lb">Options</span>
+<OrderList aria-labelledby="lb" />
+
+<OrderList aria-label="City" />
+`}
+                            </CodeHighlight>
+                            <h6>ListBox Keyboard Support</h6>
+                            <div className="doc-tablewrapper">
+                                <table className="doc-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Key</th>
+                                            <th>Function</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <i>tab</i>
+                                            </td>
+                                            <td>Moves focus to the first selected option, if there is none then first option receives the focus.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>up arrow</i>
+                                            </td>
+                                            <td>Moves focus to the previous option.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>down arrow</i>
+                                            </td>
+                                            <td>Moves focus to the next option.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>enter</i>
+                                            </td>
+                                            <td>Toggles the selected state of the focused option.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>space</i>
+                                            </td>
+                                            <td>Toggles the selected state of the focused option.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>home</i>
+                                            </td>
+                                            <td>Moves focus to the first option.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>end</i>
+                                            </td>
+                                            <td>Moves focus to the last option.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>shift</i> + <i>down arrow</i>
+                                            </td>
+                                            <td>Moves focus to the next option and toggles the selection state.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>shift</i> + <i>up arrow</i>
+                                            </td>
+                                            <td>Moves focus to the previous option and toggles the selection state.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>shift</i> + <i>space</i>
+                                            </td>
+                                            <td>Selects the items between the most recently selected option and the focused option.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>control</i> + <i>shift</i> + <i>home</i>
+                                            </td>
+                                            <td>Selects the focused options and all the options up to the first one.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>control</i> + <i>shift</i> + <i>end</i>
+                                            </td>
+                                            <td>Selects the focused options and all the options down to the first one.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>control</i> + <i>a</i>
+                                            </td>
+                                            <td>Selects all options.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h6>Buttons Keyboard Support</h6>
+                            <div className="doc-tablewrapper">
+                                <table className="doc-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Key</th>
+                                            <th>Function</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <i>enter</i>
+                                            </td>
+                                            <td>Executes button action.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>space</i>
+                                            </td>
+                                            <td>Executes button action.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </DevelopmentSection>
                     </div>
 
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'PickListDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'PickListDemo', sources: sources, service: 'ProductService', data: 'products-small', extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default PickListDoc;

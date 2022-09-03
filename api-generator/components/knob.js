@@ -96,7 +96,7 @@ const KnobEvents = [
                 description: 'New value'
             }
         ]
-    },
+    }
 ];
 
 const KnobStyles = [

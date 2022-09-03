@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const InplaceDoc = memo(() => {
-
-        const sources = {
-            'class': {
-                tabName: 'Class Source',
-                content: `
+    const sources = {
+        class: {
+            tabName: 'Class Source',
+            content: `
 import React, { Component } from 'react';
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace';
 import { InputText } from 'primereact/inputtext';
@@ -82,7 +82,7 @@ export class InplaceDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -147,7 +147,7 @@ const InplaceDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -212,7 +212,7 @@ const InplaceDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
     <script src="./ProductService.js"></script>
@@ -283,34 +283,35 @@ const InplaceDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Inplace } from 'primereact/inplace';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/inplace/inplace.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Inplace requires InplaceDisplay and InplaceContent component as children to define the content to display in each state. Active state of the inplace
-            can either be managed as a Controlled or Uncontrolled component.</p>
+                    <p>Inplace requires InplaceDisplay and InplaceContent component as children to define the content to display in each state. Active state of the inplace can either be managed as a Controlled or Uncontrolled component.</p>
 
-                    <p>In controlled mode, <i>active</i> and <i>onToggle</i> properties need to be defined to control the active state.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        In controlled mode, <i>active</i> and <i>onToggle</i> properties need to be defined to control the active state.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Inplace active={active} onToggle={(e) => setActive(e.value)}>
     <InplaceDisplay>
         Click to Edit
@@ -320,13 +321,15 @@ import { Inplace } from 'primereact/inplace';
     </InplaceContent>
 </Inplace>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-                    <p>In uncontrolled mode, no additional properties are required. Initial state can be still be provided using the <i>active</i> property in uncontrolled mode however
-            it is evaluated at initial rendering and ignored in further updates. If you programmatically need to update the active state, prefer to use the component as controlled.</p>
+                    <p>
+                        In uncontrolled mode, no additional properties are required. Initial state can be still be provided using the <i>active</i> property in uncontrolled mode however it is evaluated at initial rendering and ignored in further
+                        updates. If you programmatically need to update the active state, prefer to use the component as controlled.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Inplace>
     <InplaceDisplay>
         Click to Edit
@@ -336,12 +339,14 @@ import { Inplace } from 'primereact/inplace';
     </InplaceContent>
 </Inplace>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Closable</h5>
-                    <p><i>closable</i> property is handy within forms as it enables to get back to output mode after editing is completed using a button displayed next to the form field.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        <i>closable</i> property is handy within forms as it enables to get back to output mode after editing is completed using a button displayed next to the form field.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Inplace closable>
     <InplaceDisplay>
         Click to Edit
@@ -351,13 +356,12 @@ import { Inplace } from 'primereact/inplace';
     </InplaceContent>
 </Inplace>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Lazy Loading</h5>
-                    <p>Inplace allows lazy loading content so that the content gets initialized after getting opened instead of on load. Here is an example that loads, data of a table
-                    if the user decides to open the inplace.</p>
-<CodeHighlight lang="js">
-{`
+                    <p>Inplace allows lazy loading content so that the content gets initialized after getting opened instead of on load. Here is an example that loads, data of a table if the user decides to open the inplace.</p>
+                    <CodeHighlight lang="js">
+                        {`
 const onOpen = () => {
     productService.getProductsSmall().then(data => setProducts(data));
 }
@@ -376,7 +380,7 @@ const onOpen = () => {
     </InplaceContent>
 </Inplace>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -453,9 +457,10 @@ const onOpen = () => {
                                 </tr>
                                 <tr>
                                     <td>onToggle</td>
-                                    <td>event.originalEvent: browser event <br />
-                            event.value: active state as a boolean
-                        </td>
+                                    <td>
+                                        event.originalEvent: browser event <br />
+                                        event.value: active state as a boolean
+                                    </td>
                                     <td>Callback to invoke when inplace is opened or closed.</td>
                                 </tr>
                             </tbody>
@@ -463,7 +468,9 @@ const onOpen = () => {
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -487,19 +494,78 @@ const onOpen = () => {
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h5>Dependencies</h5>
-                        <p>None.</p>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Inplace component defines <i>aria-live</i> as "polite" by default, since any valid attribute is passed to the main container aria roles and attributes of the root element can be customized easily.
+                        </p>
+                        <p>
+                            Display element uses <i>button</i> role in view mode by default, <i>displayProps</i> can be used for customizations like adding <i>aria-label</i> or <i>aria-labelledby</i> attributes to describe the content of the view
+                            mode or even overriding the default role.
+                        </p>
+                        <p>
+                            Closable inplace components displays a button with an <i>aria-label</i> that refers to the <i>aria.close</i> property of the <Link href="/locale">locale</Link> API by default, you may use
+                            <i>closeButtonProps</i> to customize the element and override the default <i>aria-label</i>.
+                        </p>
+
+                        <h6>View Mode Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Switches to content.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6>Close Button Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>enter</i>
+                                        </td>
+                                        <td>Switches to display.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i>space</i>
+                                        </td>
+                                        <td>Switches to display.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
+
+                    <h5>Dependencies</h5>
+                    <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'InplaceDemo', sources: sources, service: 'ProductService', data: 'products-small' })
-                }
+                {useLiveEditorTabs({ name: 'InplaceDemo', sources: sources, service: 'ProductService', data: 'products-small' })}
             </TabView>
         </div>
     );
-})
+});
 
 export default InplaceDoc;

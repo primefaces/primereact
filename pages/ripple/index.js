@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const RippleDemo = () => {
-
     return (
         <div>
             <Head>
@@ -45,6 +44,6 @@ const RippleDemo = () => {
             <RippleDoc />
         </div>
     );
-}
+};
 
 export default RippleDemo;

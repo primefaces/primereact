@@ -1,5 +1,5 @@
 import React from 'react';
-import Link  from 'next/link';
+import Link from 'next/link';
 import { CodeHighlight } from '../../components/doc/common/codehighlight';
 import Head from 'next/head';
 import getConfig from 'next/config';
@@ -22,39 +22,53 @@ const SetupPage = () => {
 
             <div className="content-section documentation">
                 <h3>Module Loader</h3>
-                <p>PrimeReact is available at <a href="https://www.npmjs.com/package/primereact">npm</a>, if you have an existing application run the following commands to download it to your project.</p>
+                <p>
+                    PrimeReact is available at <a href="https://www.npmjs.com/package/primereact">npm</a>, if you have an existing application run the following commands to download it to your project.
+                </p>
 
-<CodeHighlight lang="js">
-{`
+                <CodeHighlight lang="js">
+                    {`
 // with npm
-npm install primereact
+npm install primereact primeicons
 
 // with yarn
-yarn add primereact
+yarn add primereact primeicons
 `}
-</CodeHighlight>
-                <p>Please note that <i>{`react >= 17.0.0`}</i> and <i>{`react-dom >= 17.0.0`}</i> are peer dependencies and some components have <Link href="#setup-configuration" scroll={false}><a>optional dependencies</a></Link>.</p>
+                </CodeHighlight>
+                <p>
+                    Please note that <i>{`react >= 17.0.0`}</i> and <i>{`react-dom >= 17.0.0`}</i> are peer dependencies and some components have{' '}
+                    <Link href="#setup-configuration" scroll={false}>
+                        <a>optional dependencies</a>
+                    </Link>
+                    .
+                </p>
 
                 <p>Import path is available in the documentation of the corresponding component.</p>
 
-<CodeHighlight lang="js">
-{`
+                <CodeHighlight lang="js">
+                    {`
 // import { ComponentName } from 'primereact/{componentname}';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
-                <p>Finally you'll be able to utilize the component in your application. See the <Link href="#setup-styles" scroll={false}><a>Styles</a></Link> section to apply styling.</p>
-<CodeHighlight>
-{`
+                <p>
+                    Finally you'll be able to utilize the component in your application. See the{' '}
+                    <Link href="#setup-styles" scroll={false}>
+                        <a>Styles</a>
+                    </Link>{' '}
+                    section to apply styling.
+                </p>
+                <CodeHighlight>
+                    {`
 <Dialog visible={state} onHide={() => setState(false)}>
     // content
 </Dialog>
 
 <Button label="Show" onClick={() => setState(true)} />
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
                 <p>Watch the video tutorial that goes through these steps.</p>
                 <div className="video-container">
@@ -62,10 +76,12 @@ import { Button } from 'primereact/button';
                 </div>
 
                 <h3>Script Tag</h3>
-                <p>Other alternative is utilizing the components directly within the browser with the <i>iife</i> build. Note that PrimeReact does not provide a <i>umd</i> build.
-                The core.min.js is required. It includes shared components and structures; utils, api, ripple, portal, keyfilter, tooltip, virtualscroller, terminalservice, overlayservice, checkbox, button, inputtext, inputnumber, messages, progressbar, dropdown, dialog, paginator and tree.</p>
-<CodeHighlight lang="js">
-{`
+                <p>
+                    Other alternative is utilizing the components directly within the browser with the <i>iife</i> build. Note that PrimeReact does not provide a <i>umd</i> build. The core.min.js is required. It includes shared components and
+                    structures; utils, api, ripple, portal, keyfilter, tooltip, virtualscroller, terminalservice, overlayservice, checkbox, button, inputtext, inputnumber, messages, progressbar, dropdown, dialog, paginator and tree.
+                </p>
+                <CodeHighlight lang="js">
+                    {`
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,32 +134,30 @@ import { Button } from 'primereact/button';
 </body>
 </html>
 `}
-</CodeHighlight>
+                </CodeHighlight>
                 <p>Import all components and structures</p>
-<CodeHighlight>
-{`
+                <CodeHighlight>
+                    {`
 <script src="https://unpkg.com/primereact/primereact.all.min.js"></script>
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
                 <h3 id="setup-styles">Styles</h3>
-                <p>The css dependencies are as follows, note that you may change the theme with another one of your choice. If you are using a bundler such as webpack with a css loader you
-                may import them to your main application component.</p>
+                <p>The css dependencies are as follows, note that you may change the theme with another one of your choice. If you are using a bundler such as webpack with a css loader you may import them to your main application component.</p>
 
-<CodeHighlight lang="js">
-{`
+                <CodeHighlight lang="js">
+                    {`
 import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
-            <h5>Free Themes</h5>
-            <p>PrimeReact ships with various free themes to choose from.</p>
-<div className="h-20rem overflow-auto">
-
-<CodeHighlight lang="js">
-{`
+                <h5>Free Themes</h5>
+                <p>PrimeReact ships with various free themes to choose from.</p>
+                <div className="h-20rem overflow-auto">
+                    <CodeHighlight lang="js">
+                        {`
 primereact/resources/themes/bootstrap4-light-blue/theme.css
 primereact/resources/themes/bootstrap4-light-purple/theme.css
 primereact/resources/themes/bootstrap4-dark-blue/theme.css
@@ -187,28 +201,41 @@ primereact/resources/themes/luna-green/theme.css
 primereact/resources/themes/luna-pink/theme.css
 primereact/resources/themes/rhea/theme.css
 `}
-</CodeHighlight>
-</div>
+                    </CodeHighlight>
+                </div>
 
                 <h5>PrimeFlex</h5>
-                <p>PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more. Although it is not required, it is highly
-                recommended to add PrimeFlex as it is likely to need such utilities when developing applications. View the <Link href="/primeflex">PrimeFlex</Link> section for the installation.</p>
+                <p>
+                    PrimeFlex is a CSS utility library featuring various helpers such as a grid system, flexbox, spacing, elevation and more. Although it is not required, it is highly recommended to add PrimeFlex as it is likely to need such
+                    utilities when developing applications. View the <Link href="/primeflex">PrimeFlex</Link> section for the installation.
+                </p>
 
                 <h3 id="setup-configuration">Configuration</h3>
                 <h5>Dependencies</h5>
                 <p>Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.</p>
-                <p>In addition, components require <Link href="/icons">PrimeIcons</Link> library for icons and
-                        <a href="https://www.npmjs.com/package/react-transition-group" className="layout-content-link"> react-transition-group</a> for animations.
-                        They are available as dependencies in the npm package of PrimeReact.</p>
+                <p>
+                    In addition, components require <Link href="/icons">PrimeIcons</Link> library for icons and
+                    <a href="https://www.npmjs.com/package/react-transition-group" className="layout-content-link">
+                        {' '}
+                        react-transition-group
+                    </a>{' '}
+                    for animations. The{' '}
+                    <a href="https://www.npmjs.com/package/react-transition-group" className="layout-content-link">
+                        {' '}
+                        react-transition-group
+                    </a>{' '}
+                    is available as dependencies in the npm package of PrimeReact.
+                </p>
 
-<CodeHighlight lang="js">
-{`
+                <CodeHighlight lang="js">
+                    {`
 dependencies: {
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0"
+    "primeicons": "^5.0.0"
 }
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
                 <h6>Optional</h6>
                 <p>Here is the list of components with 3rd party dependencies.</p>
@@ -246,38 +273,45 @@ dependencies: {
                     <small>* Deprecated</small>
                 </div>
 
-
                 <h5>Ripple</h5>
-                <p>Ripple is an optional animation for the supported components such as buttons. It is disabled by default and needs to be enabled at
-                    your app's entry file (e.g. App.js) using the <i>PrimeReact</i> variable.
+                <p>
+                    Ripple is an optional animation for the supported components such as buttons. It is disabled by default and needs to be enabled at your app's entry file (e.g. App.js) using the <i>PrimeReact</i> variable.
                 </p>
-<CodeHighlight lang="js">
-{`
+                <CodeHighlight lang="js">
+                    {`
 import PrimeReact from 'primereact/api';
 
 PrimeReact.ripple = true;
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
                 <h5>Outlined vs Filled Input Styles</h5>
-                <p>Input fields come in two styles, default is <i>outlined</i> with borders around the field whereas <i>filled</i> alternative adds a background color
-                to the field. Applying <i>p-input-filled</i> to an ancestor of an input enables the filled style. If you prefer to use filled inputs in the entire application,
-                use a global container such as the document body or the application element to apply the style class. Note that in case you add it to the application element, components that are teleported to the document body such as Dialog
-                will not be able to display filled inputs as they are not a descendant of the application root element in the DOM tree, to resolve this case set inputStyle to 'filled' at PrimeReact configuration as well.</p>
-<CodeHighlight lang="js">
-{`
+                <p>
+                    Input fields come in two styles, default is <i>outlined</i> with borders around the field whereas <i>filled</i> alternative adds a background color to the field. Applying <i>p-input-filled</i> to an ancestor of an input enables
+                    the filled style. If you prefer to use filled inputs in the entire application, use a global container such as the document body or the application element to apply the style class. Note that in case you add it to the application
+                    element, components that are teleported to the document body such as Dialog will not be able to display filled inputs as they are not a descendant of the application root element in the DOM tree, to resolve this case set
+                    inputStyle to 'filled' at PrimeReact configuration as well.
+                </p>
+                <CodeHighlight lang="js">
+                    {`
 import PrimeReact from 'primereact/api';
 
 PrimeReact.inputStyle = 'filled';
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
                 <h5>ZIndex Layering</h5>
-                <p>ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. Still there may be cases where you'd like to configure
-                the configure default values such as a custom layout where header section is fixed. In a case like this, dropdown needs to be displayed below the application header but a modal dialog should be displayed above. PrimeReact configuration
-                offers the <i>zIndex</i> property to customize the default values for <a href="https://github.com/primefaces/primereact/issues/1924" className="layout-content-link">components categories</a>. Default values are described below and can be customized when setting up PrimeReact.</p>
-<CodeHighlight lang="js">
-{`
+                <p>
+                    ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. Still there may be cases where you'd like to configure the configure default values such as a
+                    custom layout where header section is fixed. In a case like this, dropdown needs to be displayed below the application header but a modal dialog should be displayed above. PrimeReact configuration offers the <i>zIndex</i> property
+                    to customize the default values for{' '}
+                    <a href="https://github.com/primefaces/primereact/issues/1924" className="layout-content-link">
+                        components categories
+                    </a>
+                    . Default values are described below and can be customized when setting up PrimeReact.
+                </p>
+                <CodeHighlight lang="js">
+                    {`
 import PrimeReact from 'primereact/api';
 
 PrimeReact.zIndex = {
@@ -288,40 +322,58 @@ PrimeReact.zIndex = {
     toast: 1200     // toast
 }
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
                 <p>The ZIndex of all components is increased according to their groups in harmony with each other. If false, each group increments its ZIndex within itself.</p>
-<CodeHighlight lang="js">
-{`
+                <CodeHighlight lang="js">
+                    {`
 import PrimeReact from 'primereact/api';
 
 PrimeReact.autoZIndex = true;
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
                 <h5>AppendTo</h5>
-                <p>On the all overlay components, the panels can be mounted into its component or DOM element instance using this option. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a panel where component is located.
-                The appendTo property of any overlay component can be used to customize it.</p>
-<CodeHighlight lang="js">
-{`
+                <p>
+                    On the all overlay components, the panels can be mounted into its component or DOM element instance using this option. Valid values are any DOM Element and 'self'. The <i>self</i> value is used to render a panel where component is
+                    located. The appendTo property of any overlay component can be used to customize it.
+                </p>
+                <CodeHighlight lang="js">
+                    {`
 import PrimeReact from 'primereact/api';
 
 PrimeReact.appendTo = 'self'; // Default value is null(document.body).
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
                 <h5>cssTransition</h5>
-                <p>Used to determine whether the <i>react-transition-group API</i> is enabled in all overlay components.</p>
-<CodeHighlight lang="js">
-{`
+                <p>
+                    Used to determine whether the <i>react-transition-group API</i> is enabled in all overlay components.
+                </p>
+                <CodeHighlight lang="js">
+                    {`
 import PrimeReact from 'primereact/api';
 
 PrimeReact.cssTransition = false; // Default value is true.
 `}
-</CodeHighlight>
+                </CodeHighlight>
 
+                <h5>nullSortOrder</h5>
+                <p>
+                    Used to determine how NULL values are sorted. A value of <i>1</i> means sort like Excel with all NULL values at the bottom of the list. A value of <i>-1</i> sorts NULL at the top of the list in ascending mode and at the bottom of
+                    the list in descending mode.
+                </p>
+                <CodeHighlight lang="js">
+                    {`
+import PrimeReact from 'primereact/api';
+
+PrimeReact.nullSortOrder = -1; // Default value is 1 for Excel like sorting.
+`}
+                </CodeHighlight>
                 <h5>Locale</h5>
-                <p>PrimeReact provides a Locale API to support i18n and l7n, visit the <Link href="/locale">Locale</Link> documentation for more information.</p>
+                <p>
+                    PrimeReact provides a Locale API to support i18n and l7n, visit the <Link href="/locale">Locale</Link> documentation for more information.
+                </p>
 
                 <h5>Browser Support</h5>
                 <div className="doc-tablewrapper">
@@ -330,31 +382,31 @@ PrimeReact.cssTransition = false; // Default value is true.
                             <tr>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`${contextPath}/images/browsers/edge.svg`} alt="edge" style={{width: '1.5rem'}} className="mr-2" />
+                                        <img src={`${contextPath}/images/browsers/edge.svg`} alt="edge" style={{ width: '1.5rem' }} className="mr-2" />
                                         Edge
                                     </div>
                                 </th>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`${contextPath}/images/browsers/firefox.svg`} alt="firefox" style={{width: '1.5rem'}} className="mr-2" />
+                                        <img src={`${contextPath}/images/browsers/firefox.svg`} alt="firefox" style={{ width: '1.5rem' }} className="mr-2" />
                                         Firefox
                                     </div>
                                 </th>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`${contextPath}/images/browsers/chrome.svg`} alt="chrome" style={{width: '1.5rem'}} className="mr-2" />
+                                        <img src={`${contextPath}/images/browsers/chrome.svg`} alt="chrome" style={{ width: '1.5rem' }} className="mr-2" />
                                         Chrome
                                     </div>
                                 </th>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`${contextPath}/images/browsers/safari.svg`} alt="safari" style={{width: '1.5rem'}} className="mr-2" />
+                                        <img src={`${contextPath}/images/browsers/safari.svg`} alt="safari" style={{ width: '1.5rem' }} className="mr-2" />
                                         Safari
                                     </div>
                                 </th>
                                 <th>
                                     <div className="flex align-items-center">
-                                        <img src={`${contextPath}/images/browsers/opera.svg`} alt="opera" style={{width: '1.5rem'}} className="mr-2" />
+                                        <img src={`${contextPath}/images/browsers/opera.svg`} alt="opera" style={{ width: '1.5rem' }} className="mr-2" />
                                         Opera
                                     </div>
                                 </th>
@@ -374,27 +426,37 @@ PrimeReact.cssTransition = false; // Default value is true.
 
                 <h3>Samples</h3>
                 <h5>Quickstart</h5>
-                <p>An <a href="https://github.com/primefaces/primereact-examples/tree/main/cra-basic" className="layout-content-link">example application</a> based on create-react-app is available at github.</p>
+                <p>
+                    An{' '}
+                    <a href="https://github.com/primefaces/primereact-examples/tree/main/cra-basic" className="layout-content-link">
+                        example application
+                    </a>{' '}
+                    based on create-react-app is available at github.
+                </p>
 
                 <h5>Typescript</h5>
-                <p>Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample <a href="https://github.com/primefaces/primereact-examples/tree/main/cra-basic-ts" className="layout-content-link">typescript-primereact</a> application with create-react-app is available as at github.</p>
-
-                <p>Note: A shorthand API is available to import APIs such as MenuModel and SelectItem.</p>
-<CodeHighlight lang="js">
-{`
-import { SelectItem } from 'primereact/api';
-import { MenuItem } from 'primereact/api';
-`}
-</CodeHighlight>
+                <p>
+                    Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample{' '}
+                    <a href="https://github.com/primefaces/primereact-examples/tree/main/cra-basic-ts" className="layout-content-link">
+                        typescript-primereact
+                    </a>{' '}
+                    application with create-react-app is available as at github.
+                </p>
 
                 <h5>Next.js</h5>
-                <p>A <a href="https://github.com/primefaces/primereact-examples/tree/main/nextjs-basic" className="layout-content-link">sample application</a> based on Next.js is available at github.</p>
+                <p>
+                    A{' '}
+                    <a href="https://github.com/primefaces/primereact-examples/tree/main/nextjs-basic" className="layout-content-link">
+                        sample application
+                    </a>{' '}
+                    based on Next.js is available at github.
+                </p>
                 <div className="video-container">
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/OrRffCobuts" frameBorder="0" allowFullScreen title="Getting Started With NextJs"></iframe>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default SetupPage;

@@ -25,24 +25,22 @@ const TreeTableColTogglerDemo = () => {
     const nodeservice = new NodeService();
 
     useEffect(() => {
-        nodeservice.getTreeTableNodes().then(data => setNodes(data));
+        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onColumnToggle = (event) => {
         setCols(event.value);
-    }
+    };
 
     const header = (
         <div style={{ textAlign: 'left' }}>
-            <MultiSelect value={cols} options={colOptions} onChange={onColumnToggle}
-                style={{ width: '250px' }} />
+            <MultiSelect value={cols} options={colOptions} onChange={onColumnToggle} style={{ width: '250px' }} />
         </div>
     );
 
     const _columns = cols.map((col, i) => {
         return <Column key={col.field} field={col.field} header={col.header} />;
     });
-
 
     return (
         <div>
@@ -52,7 +50,9 @@ const TreeTableColTogglerDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>TreeTable <span>Column Toggler</span></h1>
+                    <h1>
+                        TreeTable <span>Column Toggler</span>
+                    </h1>
                     <p>MultiSelect component can be used to implement column toggler functionality.</p>
                 </div>
 
@@ -70,16 +70,14 @@ const TreeTableColTogglerDemo = () => {
 
             <TreeTableColTogglerDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeTableColTogglerDemo;
 
 const TreeTableColTogglerDemoDoc = memo(() => {
-
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
             import React, {Component} from 'react';
@@ -145,7 +143,7 @@ const TreeTableColTogglerDemoDoc = memo(() => {
 }
             `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
             import React, {useState, useEffect} from 'react';
@@ -202,7 +200,7 @@ const TreeTableColTogglerDemo = () => {
 }
             `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
             import React, {useState, useEffect} from 'react';
@@ -259,7 +257,7 @@ const TreeTableColTogglerDemo = () => {
 }
             `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
             <script src="./NodeService.js"></script>
@@ -323,15 +321,11 @@ const TreeTableColTogglerDemo = () => {
 }
             `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeTableColTogglerDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeTableColTogglerDemo', sources: sources, service: 'NodeService', data: 'treetablenodes' })}</TabView>
         </div>
-    )
-})
+    );
+});

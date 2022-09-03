@@ -43,13 +43,9 @@ const AccordionTabProps = [
     }
 ];
 
-const AccordionTabEvents = [
+const AccordionTabEvents = [];
 
-];
-
-const AccordionTabStyles = [
-
-];
+const AccordionTabStyles = [];
 
 module.exports = {
     accordiontab: {

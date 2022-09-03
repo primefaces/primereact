@@ -15,7 +15,7 @@ export default function Analytics() {
         return () => {
             router.events.off('routeChangeComplete', handleRouteChange);
         };
-      }, [router.events]);
+    }, [router.events]);
 
     return (
         <>

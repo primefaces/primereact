@@ -6,7 +6,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TabMenuDemo = () => {
-
     const [activeIndex, setActiveIndex] = useState(3);
 
     const items = [
@@ -52,6 +51,6 @@ const TabMenuDemo = () => {
             <TabMenuDoc />
         </div>
     );
-}
+};
 
 export default TabMenuDemo;

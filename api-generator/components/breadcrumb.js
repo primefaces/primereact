@@ -7,7 +7,7 @@ const BreadCrumbProps = [
     },
     {
         name: 'model',
-        type: 'array',
+        type: 'MenuItem[]',
         default: 'null',
         description: 'An array of menuitems.'
     },
@@ -31,9 +31,7 @@ const BreadCrumbProps = [
     }
 ];
 
-const BreadCrumbEvents = [
-
-];
+const BreadCrumbEvents = [];
 
 const BreadCrumbStyles = [
     { name: 'p-breadcrumb', description: 'Container element.' },

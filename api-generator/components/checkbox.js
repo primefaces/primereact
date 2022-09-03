@@ -69,7 +69,7 @@ const CheckboxProps = [
         name: 'readOnly',
         type: 'boolean',
         default: 'false',
-        description: 'When present, it specifies that the element cannot be typed.'
+        description: 'When present, it specifies that the value cannot be changed.'
     },
     {
         name: 'tabIndex',

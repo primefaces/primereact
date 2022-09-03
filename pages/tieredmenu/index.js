@@ -6,8 +6,7 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TieredMenuDemo = () => {
-
-    const menu = useRef(null)
+    const menu = useRef(null);
 
     const items = [
         {
@@ -25,7 +24,7 @@ const TieredMenuDemo = () => {
                         {
                             label: 'Video',
                             icon: 'pi pi-fw pi-video'
-                        },
+                        }
                     ]
                 },
                 {
@@ -60,8 +59,7 @@ const TieredMenuDemo = () => {
                 {
                     label: 'Justify',
                     icon: 'pi pi-fw pi-align-justify'
-                },
-
+                }
             ]
         },
         {
@@ -70,13 +68,11 @@ const TieredMenuDemo = () => {
             items: [
                 {
                     label: 'New',
-                    icon: 'pi pi-fw pi-user-plus',
-
+                    icon: 'pi pi-fw pi-user-plus'
                 },
                 {
                     label: 'Delete',
-                    icon: 'pi pi-fw pi-user-minus',
-
+                    icon: 'pi pi-fw pi-user-minus'
                 },
                 {
                     label: 'Search',
@@ -166,6 +162,6 @@ const TieredMenuDemo = () => {
             <TieredMenuDoc />
         </div>
     );
-}
+};
 
 export default TieredMenuDemo;

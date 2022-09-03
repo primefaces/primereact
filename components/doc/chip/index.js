@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { TabView, TabPanel } from '../../lib/tabview/TabView';
 import { useLiveEditorTabs } from '../common/liveeditor';
 import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
 
 const ChipDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -58,7 +58,7 @@ export class ChipDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -106,7 +106,7 @@ const ChipDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -154,7 +154,7 @@ const ChipDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./ChipDemo.css" />
@@ -206,7 +206,7 @@ const ChipDemo = () => {
 }
                 `
         }
-    }
+    };
     const extFiles = {
         'demo/ChipDemo.css': {
             content: `
@@ -216,56 +216,60 @@ const ChipDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Chip } from 'primereact/chip';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/chip/chip.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
                     <p>Chip can display labels, icons and images.</p>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Chip label="Text Only" />
 <Chip label="Text with icon" icon="pi pi-check" />
 <Chip label="Text with image" image="user.png" />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Removable</h5>
-                    <p>Setting <i>removable</i> property displays an icon to close the chip, the optional <i>onRemove</i>
-                    event is available to get notified when a chip is hidden.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Setting <i>removable</i> property displays an icon to close the chip, the optional <i>onRemove</i>
+                        event is available to get notified when a chip is hidden.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Chip label="Text" removable />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Templating</h5>
-                    <p>Content can easily be customized with the <i>template</i> property instead of using the built-in modes.</p>
+                    <p>
+                        Content can easily be customized with the <i>template</i> property instead of using the built-in modes.
+                    </p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Chip template="Content" />
 <Chip template={<span>Content<span>} />
 <Chip template={(props) => <span>Content<span>} />
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -363,7 +367,9 @@ import { Chip } from 'primereact/chip';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -393,16 +399,43 @@ import { Chip } from 'primereact/chip';
                         </table>
                     </div>
 
+                    <h5>Accessibility</h5>
+                    <DevelopmentSection>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            Chip uses the <i>label</i> property as the default <i>aria-label</i>, since any attribute is passed to the root element <i>aria-labelledby</i> or <i>aria-label</i> can be used to override the default behavior. Removable
+                            chips have a <i>tabIndex</i> and focusable with the tab key.
+                        </p>
+
+                        <h6>Keyboard Support</h6>
+                        <div className="doc-tablewrapper">
+                            <table className="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i>backspace</i>
+                                        </td>
+                                        <td>Hides removable.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </DevelopmentSection>
+
                     <h5>Dependencies</h5>
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'ChipDemo', sources: sources, extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'ChipDemo', sources: sources, extFiles: extFiles })}
             </TabView>
         </div>
-    )
-})
+    );
+});
 
 export default ChipDoc;

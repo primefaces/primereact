@@ -18,7 +18,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const InvalidDemo = () => {
-
     const [countries, setCountries] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
     const [nodes, setNodes] = useState(null);
@@ -64,8 +63,7 @@ const InvalidDemo = () => {
                         { cname: 'Brisbane', code: 'A-BR' },
                         { cname: 'Townsville', code: 'A-TO' }
                     ]
-                },
-
+                }
             ]
         },
         {
@@ -85,8 +83,7 @@ const InvalidDemo = () => {
                         { cname: 'Ottawa', code: 'C-OT' },
                         { cname: 'Toronto', code: 'C-TO' }
                     ]
-                },
-
+                }
             ]
         },
         {
@@ -123,8 +120,8 @@ const InvalidDemo = () => {
     ];
 
     useEffect(() => {
-        countryservice.getCountries().then(data => setCountries(data));
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        countryservice.getCountries().then((data) => setCountries(data));
+        nodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const searchCountry = (event) => {
@@ -134,7 +131,7 @@ const InvalidDemo = () => {
             });
             setFilteredCountries(results);
         }, 250);
-    }
+    };
 
     return (
         <div>
@@ -180,7 +177,16 @@ const InvalidDemo = () => {
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="cascadeselect">CascadeSelect</label>
-                            <CascadeSelect inputId="cascadeselect" value={value10} options={cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={(e) => setValue10(e.value)} className="p-invalid" />
+                            <CascadeSelect
+                                inputId="cascadeselect"
+                                value={value10}
+                                options={cascadeSelectCountries}
+                                optionLabel="cname"
+                                optionGroupLabel="name"
+                                optionGroupChildren={['states', 'cities']}
+                                onChange={(e) => setValue10(e.value)}
+                                className="p-invalid"
+                            />
                         </div>
                         <div className="field col-12 md:col-4">
                             <label htmlFor="dropdown">Dropdown</label>
@@ -209,6 +215,6 @@ const InvalidDemo = () => {
             <InvalidDoc />
         </div>
     );
-}
+};
 
 export default InvalidDemo;

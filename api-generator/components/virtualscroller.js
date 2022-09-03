@@ -51,13 +51,20 @@ const VirtualScrollerProps = [
         name: 'numToleratedItems',
         type: 'number',
         default: 'null',
-        description: 'Determines how many additional elements to add to the DOM outside of the view.According to the scrolls made up and down, extra items are added in a certain algorithm in the form of multiples of this number.Default value is half the number of items shown in the view.'
+        description:
+            'Determines how many additional elements to add to the DOM outside of the view.According to the scrolls made up and down, extra items are added in a certain algorithm in the form of multiples of this number.Default value is half the number of items shown in the view.'
     },
     {
         name: 'delay',
         type: 'number',
         default: '0',
         description: 'Delay in scroll before new data is loaded.'
+    },
+    {
+        name: 'resizeDelay',
+        type: 'number',
+        default: '10',
+        description: "Delay after window's resize finishes."
     },
     {
         name: 'lazy',
@@ -72,10 +79,22 @@ const VirtualScrollerProps = [
         description: 'Whether to show loader.'
     },
     {
+        name: 'autoSize',
+        type: 'boolean',
+        default: 'false',
+        description: 'Whether to dynamically change the height or width of scrollable container.'
+    },
+    {
         name: 'loadingTemplate',
         type: 'any',
         default: 'null',
         description: 'The template of loader.'
+    },
+    {
+        name: 'loaderIconTemplate',
+        type: 'any',
+        default: 'null',
+        description: "The template of loader's icon."
     },
     {
         name: 'itemTemplate',
@@ -87,7 +106,7 @@ const VirtualScrollerProps = [
         name: 'contentTemplate',
         type: 'any',
         default: 'null',
-        description: 'The template of item\'s wrapper element.'
+        description: "The template of item's wrapper element."
     }
 ];
 
@@ -105,7 +124,7 @@ const VirtualScrollerEvents = [
     },
     {
         name: 'onScrollIndexChange',
-        description: 'Callback to invoke when scroll position and item\'s range in view changes.',
+        description: "Callback to invoke when scroll position and item's range in view changes.",
         arguments: [
             {
                 name: 'event.first',
