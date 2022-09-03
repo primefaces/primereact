@@ -509,6 +509,11 @@ export const Dropdown = React.memo(
         const updateEditableLabel = (option) => {
             if (inputRef.current) {
                 inputRef.current.value = option ? getOptionLabel(option) : props.value || '';
+
+                // #1413 NVDA screenreader
+                if (focusInputRef.current) {
+                    focusInputRef.current.value = inputRef.current.value;
+                }
             }
         };
 
@@ -549,6 +554,10 @@ export const Dropdown = React.memo(
                 const label = selectedOption ? getOptionLabel(selectedOption) : null;
                 const value = label || props.value || '';
                 inputRef.current.value = value;
+                // #1413 NVDA screenreader
+                if (focusInputRef.current) {
+                    focusInputRef.current.value = value;
+                }
             }
         };
 
@@ -626,11 +635,16 @@ export const Dropdown = React.memo(
         };
 
         const createKeyboardHelper = () => {
+            const value = ObjectUtils.isNotEmpty(selectedOption) ? getOptionLabel(selectedOption) : null;
+            if (props.editable) {
+                value = value || props.value || '';
+            }
             return (
                 <div className="p-hidden-accessible">
                     <input
                         ref={focusInputRef}
                         id={props.inputId}
+                        defaultValue={value}
                         type="text"
                         readOnly
                         aria-haspopup="listbox"
