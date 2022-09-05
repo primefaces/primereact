@@ -1,14 +1,14 @@
+import getConfig from 'next/config';
+import Head from 'next/head';
 import React, { useState } from 'react';
-import { InputText } from '../../components/lib/inputtext/InputText';
+import { DocActions } from '../../components/doc/common/docactions';
+import TooltipDoc from '../../components/doc/tooltip';
+import { Badge } from '../../components/lib/badge/Badge';
 import { Button } from '../../components/lib/button/Button';
-import { Tooltip } from '../../components/lib/tooltip/Tooltip';
+import { InputText } from '../../components/lib/inputtext/InputText';
 import { Knob } from '../../components/lib/knob/Knob';
 import { Slider } from '../../components/lib/slider/Slider';
-import { Badge } from '../../components/lib/badge/Badge';
-import TooltipDoc from '../../components/doc/tooltip';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
-import getConfig from 'next/config';
+import { Tooltip } from '../../components/lib/tooltip/Tooltip';
 
 const TooltipDemo = () => {
     const [saveBtnTooltipText, setSaveBtnTooltipText] = useState('Click to proceed');

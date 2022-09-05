@@ -64,21 +64,25 @@ export const Tooltip = React.memo(
         };
 
         const getEvents = (target) => {
-            let showEvent = getTargetOption(target, 'showevent') || props.showEvent;
-            let hideEvent = getTargetOption(target, 'hideevent') || props.hideEvent;
+            let showEvents = [getTargetOption(target, 'showevent') || props.showEvent];
+            let hideEvents = [getTargetOption(target, 'hideevent') || props.hideEvent];
 
             if (isMouseTrack(target)) {
-                showEvent = 'mousemove';
-                hideEvent = 'mouseleave';
+                showEvents = ['mousemove'];
+                hideEvents = ['mouseleave'];
             } else {
                 const event = getTargetOption(target, 'event') || props.event;
                 if (event === 'focus') {
-                    showEvent = 'focus';
-                    hideEvent = 'blur';
+                    showEvents = ['focus'];
+                    hideEvents = ['blur'];
+                }
+                if (event === 'both') {
+                    showEvents = ['focus', 'mouseenter'];
+                    hideEvents = ['blur', 'mouseleave'];
                 }
             }
 
-            return { showEvent, hideEvent };
+            return { showEvents, hideEvents };
         };
 
         const getPosition = (target) => {
@@ -271,19 +275,19 @@ export const Tooltip = React.memo(
 
         const bindTargetEvent = (target) => {
             if (target) {
-                const { showEvent, hideEvent } = getEvents(target);
+                const { showEvents, hideEvents } = getEvents(target);
                 const currentTarget = getTarget(target);
-                currentTarget.addEventListener(showEvent, show);
-                currentTarget.addEventListener(hideEvent, hide);
+                showEvents.forEach((event) => currentTarget.addEventListener(event, show));
+                hideEvents.forEach((event) => currentTarget.addEventListener(event, hide));
             }
         };
 
         const unbindTargetEvent = (target) => {
             if (target) {
-                const { showEvent, hideEvent } = getEvents(target);
+                const { showEvents, hideEvents } = getEvents(target);
                 const currentTarget = getTarget(target);
-                currentTarget.removeEventListener(showEvent, show);
-                currentTarget.removeEventListener(hideEvent, hide);
+                showEvents.forEach((event) => currentTarget.removeEventListener(event, show));
+                hideEvents.forEach((event) => currentTarget.removeEventListener(event, hide));
             }
         };
 
