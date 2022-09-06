@@ -19,6 +19,8 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     footer?: React.ReactNode;
     itemTemplate?(item: any): React.ReactNode;
     circular?: boolean;
+    showNavigators?: boolean;
+    showIndicators?: boolean;
     autoplayInterval?: number;
     numVisible?: number;
     numScroll?: number;
@@ -30,8 +32,6 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     indicatorsContentClassName?: string;
     onPageChange?(e: CarouselPageChangeParams): void;
     children?: React.ReactNode;
-    showNavigators: boolean;
-    showIndicators: boolean;
 }
 
 export declare class Carousel extends React.Component<CarouselProps, any> {

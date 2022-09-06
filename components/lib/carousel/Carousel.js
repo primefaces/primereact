@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
-import { ariaLabel } from '../api/Api';
+import PrimeReact, { ariaLabel } from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
@@ -449,41 +448,49 @@ export const Carousel = React.memo(
 
             return (
                 <div className={className}>
-                    {props.showNavigators ? backwardNavigator : null}
+                    {backwardNavigator}
                     <div className="p-carousel-items-content" style={{ height: height }} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
                         <div ref={itemsContainerRef} className="p-carousel-items-container" onTransitionEnd={onTransitionEnd}>
                             {items}
                         </div>
                     </div>
-                    {props.showNavigators ? forwardNavigator : null}
+                    {forwardNavigator}
                 </div>
             );
         };
 
         const createBackwardNavigator = () => {
-            const isDisabled = (!circular || (props.value && props.value.length < numVisibleState)) && currentPage === 0;
-            const className = classNames('p-carousel-prev p-link', {
-                'p-disabled': isDisabled
-            });
-            const iconClassName = classNames('p-carousel-prev-icon pi', {
-                'pi-chevron-left': !isVertical,
-                'pi-chevron-up': isVertical
-            });
+            if (props.showNavigators) {
+                const isDisabled = (!circular || (props.value && props.value.length < numVisibleState)) && currentPage === 0;
+                const className = classNames('p-carousel-prev p-link', {
+                    'p-disabled': isDisabled
+                });
+                const iconClassName = classNames('p-carousel-prev-icon pi', {
+                    'pi-chevron-left': !isVertical,
+                    'pi-chevron-up': isVertical
+                });
 
-            return <Button type="button" className={className} icon={iconClassName} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />;
+                return <Button type="button" className={className} icon={iconClassName} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')} />;
+            }
+
+            return null;
         };
 
         const createForwardNavigator = () => {
-            const isDisabled = (!circular || (props.value && props.value.length < numVisibleState)) && (currentPage === totalIndicators - 1 || totalIndicators === 0);
-            const className = classNames('p-carousel-next p-link', {
-                'p-disabled': isDisabled
-            });
-            const iconClassName = classNames('p-carousel-next-icon pi', {
-                'pi-chevron-right': !isVertical,
-                'pi-chevron-down': isVertical
-            });
+            if (props.showNavigators) {
+                const isDisabled = (!circular || (props.value && props.value.length < numVisibleState)) && (currentPage === totalIndicators - 1 || totalIndicators === 0);
+                const className = classNames('p-carousel-next p-link', {
+                    'p-disabled': isDisabled
+                });
+                const iconClassName = classNames('p-carousel-next-icon pi', {
+                    'pi-chevron-right': !isVertical,
+                    'pi-chevron-down': isVertical
+                });
 
-            return <Button type="button" className={className} icon={iconClassName} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')} />;
+                return <Button type="button" className={className} icon={iconClassName} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')} />;
+            }
+
+            return null;
         };
 
         const createIndicator = (index) => {
@@ -501,14 +508,18 @@ export const Carousel = React.memo(
         };
 
         const createIndicators = () => {
-            const className = classNames('p-carousel-indicators p-reset', props.indicatorsContentClassName);
-            let indicators = [];
+            if (props.showIndicators) {
+                const className = classNames('p-carousel-indicators p-reset', props.indicatorsContentClassName);
+                let indicators = [];
 
-            for (let i = 0; i < totalIndicators; i++) {
-                indicators.push(createIndicator(i));
+                for (let i = 0; i < totalIndicators; i++) {
+                    indicators.push(createIndicator(i));
+                }
+
+                return <ul className={className}>{indicators}</ul>;
             }
 
-            return <ul className={className}>{indicators}</ul>;
+            return null;
         };
 
         const otherProps = ObjectUtils.findDiffKeys(props, Carousel.defaultProps);
@@ -531,7 +542,7 @@ export const Carousel = React.memo(
                 {header}
                 <div className={contentClassName}>
                     {content}
-                    {!props.showIndicators ? indicators : null}
+                    {indicators}
                 </div>
                 {footer}
             </div>
@@ -553,6 +564,8 @@ Carousel.defaultProps = {
     className: null,
     itemTemplate: null,
     circular: false,
+    showIndicators: true,
+    showNavigators: true,
     autoplayInterval: 0,
     numVisible: 1,
     numScroll: 1,
@@ -562,7 +575,5 @@ Carousel.defaultProps = {
     contentClassName: null,
     containerClassName: null,
     indicatorsContentClassName: null,
-    onPageChange: null,
-    showIndicators: false,
-    showNavigators: true
+    onPageChange: null
 };

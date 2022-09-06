@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const CarouselDoc = memo(() => {
     const sources = {
@@ -552,7 +552,7 @@ const responsiveOptions = [
                                 <tr>
                                     <td>showIndicators</td>
                                     <td>boolean</td>
-                                    <td>false</td>
+                                    <td>true</td>
                                     <td>Whether to display indicator container.</td>
                                 </tr>
                                 <tr>

@@ -56,7 +56,7 @@ const CarouselProps = [
     {
         name: 'showIndicators',
         type: 'boolean',
-        default: 'false',
+        default: 'true',
         description: 'Whether to display indicator container.'
     },
     {
