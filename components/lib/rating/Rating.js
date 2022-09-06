@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 
 export const Rating = React.memo(
     React.forwardRef((props, ref) => {
@@ -56,20 +56,26 @@ export const Rating = React.memo(
             }
         };
 
-        const createStars = () => {
+        const createIcons = () => {
             return Array.from({ length: props.stars }, (_, i) => i + 1).map((value) => {
-                const iconClassName = classNames('p-rating-icon', {
-                    'pi pi-star': !props.value || value > props.value,
-                    'pi pi-star-fill': value <= props.value
-                });
-
-                return <span className={iconClassName} onClick={(e) => rate(e, value)} key={value} tabIndex={tabIndex} onKeyDown={(e) => onStarKeyDown(e, value)}></span>;
+                const icon = value <= props.value ? { class: props.onIcon, props: props.onIconProps } : { class: props.offIcon, props: props.offIconProps };
+                const content = IconUtils.getJSXIcon(icon.class, { ...icon.props });
+                return (
+                    <span key={value} className="p-rating-icon" tabIndex={tabIndex} onClick={(e) => rate(e, value)} onKeyDown={(e) => onStarKeyDown(e, value)}>
+                        {content}
+                    </span>
+                );
             });
         };
 
         const createCancelIcon = () => {
             if (props.cancel) {
-                return <span className="p-rating-icon p-rating-cancel pi pi-ban" onClick={clear} tabIndex={tabIndex} onKeyDown={onCancelKeyDown}></span>;
+                const content = IconUtils.getJSXIcon(props.cancelIcon, { ...props.cancelIconProps });
+                return (
+                    <span className="p-rating-icon" onClick={clear} tabIndex={tabIndex} onKeyDown={onCancelKeyDown}>
+                        {content}
+                    </span>
+                );
             }
 
             return null;
@@ -91,13 +97,13 @@ export const Rating = React.memo(
             props.className
         );
         const cancelIcon = createCancelIcon();
-        const stars = createStars();
+        const icons = createIcons();
 
         return (
             <>
                 <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
                     {cancelIcon}
-                    {stars}
+                    {icons}
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
             </>
@@ -118,5 +124,11 @@ Rating.defaultProps = {
     className: null,
     tooltip: null,
     tooltipOptions: null,
-    onChange: null
+    onChange: null,
+    onIcon: 'pi pi-star-fill',
+    offIcon: 'pi pi-star',
+    cancelIcon: 'p-rating-icon p-rating-cancel pi pi-ban',
+    cancelIconProps: null,
+    onIconProps: null,
+    offIconProps: null
 };
