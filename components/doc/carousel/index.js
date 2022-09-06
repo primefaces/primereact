@@ -550,6 +550,24 @@ const responsiveOptions = [
                                     <td>Defines if scrolling would be infinite.</td>
                                 </tr>
                                 <tr>
+                                    <td>showIndicators</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Whether to display indicator container.</td>
+                                </tr>
+                                <tr>
+                                    <td>showNavigators</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Whether to display navigation buttons in container.</td>
+                                </tr>
+                                <tr>
+                                    <td>circular</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Defines if scrolling would be infinite.</td>
+                                </tr>
+                                <tr>
                                     <td>autoplayInterval</td>
                                     <td>number</td>
                                     <td>null</td>

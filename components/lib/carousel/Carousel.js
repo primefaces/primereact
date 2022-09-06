@@ -449,13 +449,13 @@ export const Carousel = React.memo(
 
             return (
                 <div className={className}>
-                    {backwardNavigator}
+                    {props.showNavigators ? backwardNavigator : null}
                     <div className="p-carousel-items-content" style={{ height: height }} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
                         <div ref={itemsContainerRef} className="p-carousel-items-container" onTransitionEnd={onTransitionEnd}>
                             {items}
                         </div>
                     </div>
-                    {forwardNavigator}
+                    {props.showNavigators ? forwardNavigator : null}
                 </div>
             );
         };
@@ -531,7 +531,7 @@ export const Carousel = React.memo(
                 {header}
                 <div className={contentClassName}>
                     {content}
-                    {indicators}
+                    {!props.showIndicators ? indicators : null}
                 </div>
                 {footer}
             </div>
@@ -562,5 +562,7 @@ Carousel.defaultProps = {
     contentClassName: null,
     containerClassName: null,
     indicatorsContentClassName: null,
-    onPageChange: null
+    onPageChange: null,
+    showIndicators: false,
+    showNavigators: true
 };

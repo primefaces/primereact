@@ -30,6 +30,8 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     indicatorsContentClassName?: string;
     onPageChange?(e: CarouselPageChangeParams): void;
     children?: React.ReactNode;
+    showNavigators: boolean;
+    showIndicators: boolean;
 }
 
 export declare class Carousel extends React.Component<CarouselProps, any> {
