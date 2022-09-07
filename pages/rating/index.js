@@ -17,7 +17,7 @@ const RatingDemo = () => {
         <div>
             <Head>
                 <title>React Rating Component</title>
-                <meta name="description" content="Rating components is a star based selection input." />
+                <meta name="description" content="Rating component is a star based selection input." />
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
