@@ -1505,7 +1505,7 @@
 }
 
 .p-rating {
-  gap: 0.25rem;
+  gap: 0.5rem;
 }
 .p-rating .p-rating-item .p-rating-icon {
   color: #dedede;
@@ -2775,7 +2775,8 @@
   background: #191919;
 }
 .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-thead,
-.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot {
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot, .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-thead,
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-tfoot {
   background-color: #252525;
 }
 .p-datatable .p-datatable-loading-icon {

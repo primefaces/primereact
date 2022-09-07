@@ -1532,7 +1532,7 @@
 }
 
 .p-rating {
-  gap: 0.25rem;
+  gap: 0.5rem;
 }
 .p-rating .p-rating-item .p-rating-icon {
   color: #3f3f46;
@@ -2798,7 +2798,8 @@
   background: #fafafa;
 }
 .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-thead,
-.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot {
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot, .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-thead,
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-tfoot {
   background-color: #fafafa;
 }
 .p-datatable .p-datatable-loading-icon {

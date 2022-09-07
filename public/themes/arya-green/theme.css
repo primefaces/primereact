@@ -1497,7 +1497,7 @@
 }
 
 .p-rating {
-  gap: 0.25rem;
+  gap: 0.5rem;
 }
 .p-rating .p-rating-item .p-rating-icon {
   color: rgba(255, 255, 255, 0.87);
@@ -2763,7 +2763,8 @@
   background: #1e1e1e;
 }
 .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-thead,
-.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot {
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table > .p-datatable-tfoot, .p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-thead,
+.p-datatable.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table > .p-datatable-tfoot {
   background-color: #1e1e1e;
 }
 .p-datatable .p-datatable-loading-icon {

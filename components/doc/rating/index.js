@@ -46,18 +46,18 @@ export class RatingDemo extends Component {
                         value={this.state.val3}
                         onChange={(e) => this.setState({ val3: e.value })}
                         cancelIcon={
-                            <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="20px" height="20px" />
+                            <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />
                         }
                         onIcon={
                             <img
                                 src={\`images/rating/custom-icon-active.png\`}
                                 onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
                                 alt="custom-image-active"
-                                width="20px"
-                                height="20px"
+                                width="25px"
+                                height="25px"
                             />
                         }
-                        offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="20px" height="20px" />}
+                        offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
                     />
                 </div>
             </div>
@@ -97,18 +97,18 @@ const RatingDemo = () => {
                     value={val3}
                     onChange={(e) => setVal3(e.value)}
                     cancelIcon={
-                        <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="20px" height="20px" />
+                        <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />
                     }
                     onIcon={
                         <img
                             src={\`images/rating/custom-icon-active.png\`}
                             onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
                             alt="custom-image-active"
-                            width="20px"
-                            height="20px"
+                            width="25px"
+                            height="25px"
                         />
                     }
-                    offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="20px" height="20px" />}
+                    offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
                 />
             </div>
         </div>
@@ -147,18 +147,18 @@ const RatingDemo = () => {
                     value={val3}
                     onChange={(e) => setVal3(e.value)}
                     cancelIcon={
-                        <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="20px" height="20px" />
+                        <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />
                     }
                     onIcon={
                         <img
                             src={\`images/rating/custom-icon-active.png\`}
                             onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
                             alt="custom-image-active"
-                            width="20px"
-                            height="20px"
+                            width="25px"
+                            height="25px"
                         />
                     }
-                    offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="20px" height="20px" />}
+                    offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
                 />
             </div>
         </div>
@@ -200,18 +200,18 @@ const RatingDemo = () => {
                     value={val3}
                     onChange={(e) => setVal3(e.value)}
                     cancelIcon={
-                        <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="20px" height="20px" />
+                        <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />
                     }
                     onIcon={
                         <img
                             src={\`images/rating/custom-icon-active.png\`}
                             onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
                             alt="custom-image-active"
-                            width="20px"
-                            height="20px"
+                            width="25px"
+                            height="25px"
                         />
                     }
-                    offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="20px" height="20px" />}
+                    offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
                 />
             </div>
         </div>
