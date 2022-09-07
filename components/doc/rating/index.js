@@ -12,6 +12,10 @@ const RatingDoc = memo(() => {
             content: `
 import React, { Component } from 'react';
 import { Rating } from 'primereact/rating';
+import * as CustomImage from './custom-icon.png';
+import * as CustomImageActive from './custom-icon-active.png';
+import * as CustomCancelImage from './cancel.png';
+import Image from 'next/image';
 
 export class RatingDemo extends Component {
 
@@ -20,26 +24,32 @@ export class RatingDemo extends Component {
 
         this.state = {
             val1: null,
-            val2: null
+            val2: null,
+            val3: null
         };
     }
 
     render() {
         return (
             <div>
-                <div className="card">
-                    <h5>Basic {this.state.val1}</h5>
-                    <Rating value={this.state.val1} onChange={(e) => this.setState({val1: e.value})} />
-
-                    <h5>Without Cancel</h5>
-                    <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({val2: e.value})} />
-
-                    <h5>ReadOnly</h5>
-                    <Rating value={5} readOnly stars={10} cancel={false} />
-
-                    <h5>Disabled</h5>
-                    <Rating value={8} disabled stars={10} />
-                </div>
+            <div className="card">
+            <h5>Basic {this.state.val1}</h5>
+            <Rating value={this.state.val1} onChange={(e) => this.setState({val1: e.value})} />
+            <h5>Without Cancel</h5>
+            <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({val2: e.value})} />
+            <h5>ReadOnly</h5>
+            <Rating value={5} readOnly stars={10} cancel={false} />
+            <h5>Disabled</h5>
+            <Rating value={8} disabled stars={10} />
+            <h5>Customization</h5>
+            <Rating
+                value={this.state.val3}
+                onIcon={<Image src={CustomImageActive} alt="custom-image-active" width="30px" height="30px" />}
+                offIcon={<Image src={CustomImage} alt="custom-image" width="30px" height="30px" />}
+                onChange={(e) => this.setState({val3: e.value})}
+                cancelIcon={<Image src={CustomCancelImage} alt="custom-cancel-image" width="30px" height="30px" />}
+            />
+        </div>
             </div>
         )
     }
@@ -51,26 +61,36 @@ export class RatingDemo extends Component {
             content: `
 import React, { useState } from 'react';
 import { Rating } from 'primereact/rating';
+import * as CustomImage from './custom-icon.png';
+import * as CustomImageActive from './custom-icon-active.png';
+import * as CustomCancelImage from './cancel.png';
+import Image from 'next/image';
 
 const RatingDemo = () => {
     const [val1, setVal1] = useState(null);
     const [val2, setVal2] = useState(null);
+    const [val3, setVal3] = useState(null);
 
     return (
         <div>
-            <div className="card">
-                <h5>Basic {val1}</h5>
-                <Rating value={val1} onChange={(e) => setVal1(e.value)} />
-
-                <h5>Without Cancel</h5>
-                <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
-
-                <h5>ReadOnly</h5>
-                <Rating value={5} readOnly stars={10} cancel={false} />
-
-                <h5>Disabled</h5>
-                <Rating value={8} disabled stars={10} />
-            </div>
+        <div className="card">
+        <h5>Basic {val1}</h5>
+        <Rating value={val1} onChange={(e) => setVal1(e.value)} />
+        <h5>Without Cancel</h5>
+        <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
+        <h5>ReadOnly</h5>
+        <Rating value={5} readOnly stars={10} cancel={false} />
+        <h5>Disabled</h5>
+        <Rating value={8} disabled stars={10} />
+        <h5>Customization</h5>
+        <Rating
+            value={val3}
+            onIcon={<Image src={CustomImageActive} alt="custom-image-active" width="30px" height="30px" />}
+            offIcon={<Image src={CustomImage} alt="custom-image" width="30px" height="30px" />}
+            onChange={(e) => setVal3(e.value)}
+            cancelIcon={<Image src={CustomCancelImage} alt="custom-cancel-image" width="30px" height="30px" />}
+        />
+    </div>
         </div>
     )
 }
@@ -81,26 +101,35 @@ const RatingDemo = () => {
             content: `
 import React, { useState } from 'react';
 import { Rating } from 'primereact/rating';
+import * as CustomImage from './custom-icon.png';
+import * as CustomImageActive from './custom-icon-active.png';
+import * as CustomCancelImage from './cancel.png';
+import Image from 'next/image';
 
 const RatingDemo = () => {
     const [val1, setVal1] = useState(null);
     const [val2, setVal2] = useState(null);
+    const [val3, setVal3] = useState(null);
 
     return (
         <div>
-            <div className="card">
-                <h5>Basic {val1}</h5>
-                <Rating value={val1} onChange={(e) => setVal1(e.value)} />
-
-                <h5>Without Cancel</h5>
-                <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
-
-                <h5>ReadOnly</h5>
-                <Rating value={5} readOnly stars={10} cancel={false} />
-
-                <h5>Disabled</h5>
-                <Rating value={8} disabled stars={10} />
-            </div>
+        <h5>Basic {val1}</h5>
+        <Rating value={val1} onChange={(e) => setVal1(e.value)} />
+        <h5>Without Cancel</h5>
+        <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
+        <h5>ReadOnly</h5>
+        <Rating value={5} readOnly stars={10} cancel={false} />
+        <h5>Disabled</h5>
+        <Rating value={8} disabled stars={10} />
+        <h5>Customization</h5>
+        <Rating
+            value={val3}
+            onIcon={<Image src={CustomImageActive} alt="custom-image-active" width="30px" height="30px" />}
+            offIcon={<Image src={CustomImage} alt="custom-image" width="30px" height="30px" />}
+            onChange={(e) => setVal3(e.value)}
+            cancelIcon={<Image src={CustomCancelImage} alt="custom-cancel-image" width="30px" height="30px" />}
+        />
+    </div>
         </div>
     )
 }
@@ -114,26 +143,35 @@ const RatingDemo = () => {
             content: `
 const { useState } = React;
 const { Rating } = primereact.rating;
+import * as CustomImage from './custom-icon.png';
+import * as CustomImageActive from './custom-icon-active.png';
+import * as CustomCancelImage from './cancel.png';
+import Image from 'next/image';
 
 const RatingDemo = () => {
     const [val1, setVal1] = useState(null);
     const [val2, setVal2] = useState(null);
+    const [val3, setVal3] = useState(null);
 
     return (
         <div>
-            <div className="card">
-                <h5>Basic {val1}</h5>
-                <Rating value={val1} onChange={(e) => setVal1(e.value)} />
-
-                <h5>Without Cancel</h5>
-                <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
-
-                <h5>ReadOnly</h5>
-                <Rating value={5} readOnly stars={10} cancel={false} />
-
-                <h5>Disabled</h5>
-                <Rating value={8} disabled stars={10} />
-            </div>
+        <h5>Basic {val1}</h5>
+        <Rating value={val1} onChange={(e) => setVal1(e.value)} />
+        <h5>Without Cancel</h5>
+        <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
+        <h5>ReadOnly</h5>
+        <Rating value={5} readOnly stars={10} cancel={false} />
+        <h5>Disabled</h5>
+        <Rating value={8} disabled stars={10} />
+        <h5>Customization</h5>
+        <Rating
+            value={val3}
+            onIcon={<Image src={CustomImageActive} alt="custom-image-active" width="30px" height="30px" />}
+            offIcon={<Image src={CustomImage} alt="custom-image" width="30px" height="30px" />}
+            onChange={(e) => setVal3(e.value)}
+            cancelIcon={<Image src={CustomCancelImage} alt="custom-cancel-image" width="30px" height="30px" />}
+        />
+    </div>
         </div>
     )
 }
@@ -184,12 +222,29 @@ import { Rating } from 'primereact/rating';
 
                     <h5>Cancel</h5>
                     <p>
-                        A cancel icon is displayed to reset the value by default, set <i>cancel</i> as false to remove this option.
+                        A cancel icon is displayed to reset the value by default, set <i>cancel</i> as false to remove this option, default is <span style={{ color: '#CC7E09' }}>'pi pi-ban'</span>.{' '}
                     </p>
 
                     <CodeHighlight>
                         {`
-<Rating value={value} onChange={(e) => setValue(e.value)} cancel={5} />
+<Rating value={value} onChange={(e) => setValue(e.value)} cancel={false} />
+`}
+                    </CodeHighlight>
+
+                    <h5>Custom Icons</h5>
+                    <p>
+                        Custom icons are used to override the default icons with these properties;
+                        <i>onIcon</i>
+                        <i>offIcon</i>
+                        <i>onIconClass</i>
+                        <i>offIconClass</i>
+                        <i>cancelIcon</i>
+                        <i>cancelIconProps</i>, default is <span style={{ color: '#CC7E09' }}>'pi pi-star'</span>.
+                    </p>
+
+                    <CodeHighlight>
+                        {`
+<Rating value={value} onIcon={<Image src={CustomImageActive} />} offIcon={<Image src={CustomImage} />} cancelIcon={<Image src={CustomCancelImage} />} onChange={(e) => setValue(e.value)} />
 `}
                     </CodeHighlight>
 
@@ -243,6 +298,18 @@ import { Rating } from 'primereact/rating';
                                     <td>When specified a cancel icon is displayed to allow removing the value.</td>
                                 </tr>
                                 <tr>
+                                    <td>cancelIcon</td>
+                                    <td>string</td>
+                                    <td>pi pi-ban</td>
+                                    <td>ClassName of the cancel icon component.</td>
+                                </tr>
+                                <tr>
+                                    <td>cancelIconProps</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Properties of the cancel icon.</td>
+                                </tr>
+                                <tr>
                                     <td>style</td>
                                     <td>object</td>
                                     <td>null</td>
@@ -253,6 +320,30 @@ import { Rating } from 'primereact/rating';
                                     <td>string</td>
                                     <td>null</td>
                                     <td>ClassName of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>onIcon</td>
+                                    <td>string</td>
+                                    <td>pi pi-star-fill</td>
+                                    <td>ClassName of the on icon component.</td>
+                                </tr>
+                                <tr>
+                                    <td>offIcon</td>
+                                    <td>string</td>
+                                    <td>pi pi-star</td>
+                                    <td>ClassName of the off icon component.</td>
+                                </tr>
+                                <tr>
+                                    <td>onIconProps</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Properties of the on icon.</td>
+                                </tr>
+                                <tr>
+                                    <td>offIconProps</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Properties of the off icon.</td>
                                 </tr>
                                 <tr>
                                     <td>tooltip</td>
