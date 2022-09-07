@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import { Rating } from '../../components/lib/rating/Rating';
-import RatingDoc from '../../components/doc/rating';
-import { DocActions } from '../../components/doc/common/docactions';
+import getConfig from 'next/config';
 import Head from 'next/head';
-import * as CustomImage from './custom-icon.png';
-import * as CustomImageActive from './custom-icon-active.png';
-import * as CustomCancelImage from './cancel.png';
-import Image from 'next/image';
+import React, { useState } from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
+import RatingDoc from '../../components/doc/rating';
+import { Rating } from '../../components/lib/rating/Rating';
 
 const RatingDemo = () => {
     const [val1, setVal1] = useState(null);
     const [val2, setVal2] = useState(null);
     const [val3, setVal3] = useState(null);
+
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
         <div>
@@ -22,7 +21,7 @@ const RatingDemo = () => {
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>Rating</h1>
-                    <p>Rating componentsis a star based selection input.</p>
+                    <p>Rating component is a star based selection input.</p>
                 </div>
 
                 <DocActions github="rating/index.js" />
@@ -42,13 +41,23 @@ const RatingDemo = () => {
                     <h5>Disabled</h5>
                     <Rating value={8} disabled stars={10} />
 
-                    <h5>Customization</h5>
+                    <h5>Template</h5>
                     <Rating
                         value={val3}
-                        onIcon={<Image src={CustomImageActive} alt="custom-image-active" width="30px" height="30px" />}
-                        offIcon={<Image src={CustomImage} alt="custom-image" width="30px" height="30px" />}
                         onChange={(e) => setVal3(e.value)}
-                        cancelIcon={<Image src={CustomCancelImage} alt="custom-cancel-image" width="30px" height="30px" />}
+                        cancelIcon={
+                            <img src={`${contextPath}/images/rating/cancel.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="20px" height="20px" />
+                        }
+                        onIcon={
+                            <img
+                                src={`${contextPath}/images/rating/custom-icon-active.png`}
+                                onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                                alt="custom-image-active"
+                                width="20px"
+                                height="20px"
+                            />
+                        }
+                        offIcon={<img src={`${contextPath}/images/rating/custom-icon.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="20px" height="20px" />}
                     />
                 </div>
             </div>

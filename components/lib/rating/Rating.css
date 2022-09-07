@@ -3,10 +3,12 @@
     align-items: center;
 }
 
-.p-rating-icon {
+.p-rating-item {
+    display: flex;
+    align-items: center;
     cursor: pointer;
 }
 
-.p-rating.p-readonly .p-rating-icon {
+.p-rating.p-readonly .p-rating-item {
     cursor: default;
 }

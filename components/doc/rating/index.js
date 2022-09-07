@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const RatingDoc = memo(() => {
     const sources = {
@@ -12,10 +12,6 @@ const RatingDoc = memo(() => {
             content: `
 import React, { Component } from 'react';
 import { Rating } from 'primereact/rating';
-import * as CustomImage from './custom-icon.png';
-import * as CustomImageActive from './custom-icon-active.png';
-import * as CustomCancelImage from './cancel.png';
-import Image from 'next/image';
 
 export class RatingDemo extends Component {
 
@@ -32,24 +28,38 @@ export class RatingDemo extends Component {
     render() {
         return (
             <div>
-            <div className="card">
-            <h5>Basic {this.state.val1}</h5>
-            <Rating value={this.state.val1} onChange={(e) => this.setState({val1: e.value})} />
-            <h5>Without Cancel</h5>
-            <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({val2: e.value})} />
-            <h5>ReadOnly</h5>
-            <Rating value={5} readOnly stars={10} cancel={false} />
-            <h5>Disabled</h5>
-            <Rating value={8} disabled stars={10} />
-            <h5>Customization</h5>
-            <Rating
-                value={this.state.val3}
-                onIcon={<Image src={CustomImageActive} alt="custom-image-active" width="30px" height="30px" />}
-                offIcon={<Image src={CustomImage} alt="custom-image" width="30px" height="30px" />}
-                onChange={(e) => this.setState({val3: e.value})}
-                cancelIcon={<Image src={CustomCancelImage} alt="custom-cancel-image" width="30px" height="30px" />}
-            />
-        </div>
+                <div className="card">
+                    <h5>Basic {this.state.val1}</h5>
+                    <Rating value={this.state.val1} onChange={(e) => this.setState({ val1: e.value })} />
+
+                    <h5>Without Cancel</h5>
+                    <Rating value={this.state.val2} cancel={false} onChange={(e) => this.setState({ val2: e.value })} />
+
+                    <h5>ReadOnly</h5>
+                    <Rating value={5} readOnly stars={10} cancel={false} />
+
+                    <h5>Disabled</h5>
+                    <Rating value={8} disabled stars={10} />
+
+                    <h5>Template</h5>
+                    <Rating
+                        value={this.state.val3}
+                        onChange={(e) => this.setState({ val3: e.value })}
+                        cancelIcon={
+                            <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="20px" height="20px" />
+                        }
+                        onIcon={
+                            <img
+                                src={\`images/rating/custom-icon-active.png\`}
+                                onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                                alt="custom-image-active"
+                                width="20px"
+                                height="20px"
+                            />
+                        }
+                        offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="20px" height="20px" />}
+                    />
+                </div>
             </div>
         )
     }
@@ -61,10 +71,6 @@ export class RatingDemo extends Component {
             content: `
 import React, { useState } from 'react';
 import { Rating } from 'primereact/rating';
-import * as CustomImage from './custom-icon.png';
-import * as CustomImageActive from './custom-icon-active.png';
-import * as CustomCancelImage from './cancel.png';
-import Image from 'next/image';
 
 const RatingDemo = () => {
     const [val1, setVal1] = useState(null);
@@ -73,24 +79,38 @@ const RatingDemo = () => {
 
     return (
         <div>
-        <div className="card">
-        <h5>Basic {val1}</h5>
-        <Rating value={val1} onChange={(e) => setVal1(e.value)} />
-        <h5>Without Cancel</h5>
-        <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
-        <h5>ReadOnly</h5>
-        <Rating value={5} readOnly stars={10} cancel={false} />
-        <h5>Disabled</h5>
-        <Rating value={8} disabled stars={10} />
-        <h5>Customization</h5>
-        <Rating
-            value={val3}
-            onIcon={<Image src={CustomImageActive} alt="custom-image-active" width="30px" height="30px" />}
-            offIcon={<Image src={CustomImage} alt="custom-image" width="30px" height="30px" />}
-            onChange={(e) => setVal3(e.value)}
-            cancelIcon={<Image src={CustomCancelImage} alt="custom-cancel-image" width="30px" height="30px" />}
-        />
-    </div>
+            <div className="card">
+                <h5>Basic {val1}</h5>
+                <Rating value={val1} onChange={(e) => setVal1(e.value)} />
+
+                <h5>Without Cancel</h5>
+                <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
+
+                <h5>ReadOnly</h5>
+                <Rating value={5} readOnly stars={10} cancel={false} />
+
+                <h5>Disabled</h5>
+                <Rating value={8} disabled stars={10} />
+
+                <h5>Template</h5>
+                <Rating
+                    value={val3}
+                    onChange={(e) => setVal3(e.value)}
+                    cancelIcon={
+                        <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="20px" height="20px" />
+                    }
+                    onIcon={
+                        <img
+                            src={\`images/rating/custom-icon-active.png\`}
+                            onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                            alt="custom-image-active"
+                            width="20px"
+                            height="20px"
+                        />
+                    }
+                    offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="20px" height="20px" />}
+                />
+            </div>
         </div>
     )
 }
@@ -101,10 +121,6 @@ const RatingDemo = () => {
             content: `
 import React, { useState } from 'react';
 import { Rating } from 'primereact/rating';
-import * as CustomImage from './custom-icon.png';
-import * as CustomImageActive from './custom-icon-active.png';
-import * as CustomCancelImage from './cancel.png';
-import Image from 'next/image';
 
 const RatingDemo = () => {
     const [val1, setVal1] = useState(null);
@@ -113,23 +129,38 @@ const RatingDemo = () => {
 
     return (
         <div>
-        <h5>Basic {val1}</h5>
-        <Rating value={val1} onChange={(e) => setVal1(e.value)} />
-        <h5>Without Cancel</h5>
-        <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
-        <h5>ReadOnly</h5>
-        <Rating value={5} readOnly stars={10} cancel={false} />
-        <h5>Disabled</h5>
-        <Rating value={8} disabled stars={10} />
-        <h5>Customization</h5>
-        <Rating
-            value={val3}
-            onIcon={<Image src={CustomImageActive} alt="custom-image-active" width="30px" height="30px" />}
-            offIcon={<Image src={CustomImage} alt="custom-image" width="30px" height="30px" />}
-            onChange={(e) => setVal3(e.value)}
-            cancelIcon={<Image src={CustomCancelImage} alt="custom-cancel-image" width="30px" height="30px" />}
-        />
-    </div>
+            <div className="card">
+                <h5>Basic {val1}</h5>
+                <Rating value={val1} onChange={(e) => setVal1(e.value)} />
+
+                <h5>Without Cancel</h5>
+                <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
+
+                <h5>ReadOnly</h5>
+                <Rating value={5} readOnly stars={10} cancel={false} />
+
+                <h5>Disabled</h5>
+                <Rating value={8} disabled stars={10} />
+
+                <h5>Template</h5>
+                <Rating
+                    value={val3}
+                    onChange={(e) => setVal3(e.value)}
+                    cancelIcon={
+                        <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="20px" height="20px" />
+                    }
+                    onIcon={
+                        <img
+                            src={\`images/rating/custom-icon-active.png\`}
+                            onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                            alt="custom-image-active"
+                            width="20px"
+                            height="20px"
+                        />
+                    }
+                    offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="20px" height="20px" />}
+                />
+            </div>
         </div>
     )
 }
@@ -143,10 +174,6 @@ const RatingDemo = () => {
             content: `
 const { useState } = React;
 const { Rating } = primereact.rating;
-import * as CustomImage from './custom-icon.png';
-import * as CustomImageActive from './custom-icon-active.png';
-import * as CustomCancelImage from './cancel.png';
-import Image from 'next/image';
 
 const RatingDemo = () => {
     const [val1, setVal1] = useState(null);
@@ -155,23 +182,38 @@ const RatingDemo = () => {
 
     return (
         <div>
-        <h5>Basic {val1}</h5>
-        <Rating value={val1} onChange={(e) => setVal1(e.value)} />
-        <h5>Without Cancel</h5>
-        <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
-        <h5>ReadOnly</h5>
-        <Rating value={5} readOnly stars={10} cancel={false} />
-        <h5>Disabled</h5>
-        <Rating value={8} disabled stars={10} />
-        <h5>Customization</h5>
-        <Rating
-            value={val3}
-            onIcon={<Image src={CustomImageActive} alt="custom-image-active" width="30px" height="30px" />}
-            offIcon={<Image src={CustomImage} alt="custom-image" width="30px" height="30px" />}
-            onChange={(e) => setVal3(e.value)}
-            cancelIcon={<Image src={CustomCancelImage} alt="custom-cancel-image" width="30px" height="30px" />}
-        />
-    </div>
+            <div className="card">
+                <h5>Basic {val1}</h5>
+                <Rating value={val1} onChange={(e) => setVal1(e.value)} />
+
+                <h5>Without Cancel</h5>
+                <Rating value={val2} cancel={false} onChange={(e) => setVal2(e.value)} />
+
+                <h5>ReadOnly</h5>
+                <Rating value={5} readOnly stars={10} cancel={false} />
+
+                <h5>Disabled</h5>
+                <Rating value={8} disabled stars={10} />
+
+                <h5>Template</h5>
+                <Rating
+                    value={val3}
+                    onChange={(e) => setVal3(e.value)}
+                    cancelIcon={
+                        <img src={\`images/rating/cancel.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="20px" height="20px" />
+                    }
+                    onIcon={
+                        <img
+                            src={\`images/rating/custom-icon-active.png\`}
+                            onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                            alt="custom-image-active"
+                            width="20px"
+                            height="20px"
+                        />
+                    }
+                    offIcon={<img src={\`images/rating/custom-icon.png\`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="20px" height="20px" />}
+                />
+            </div>
         </div>
     )
 }
@@ -222,7 +264,7 @@ import { Rating } from 'primereact/rating';
 
                     <h5>Cancel</h5>
                     <p>
-                        A cancel icon is displayed to reset the value by default, set <i>cancel</i> as false to remove this option, default is <span style={{ color: '#CC7E09' }}>'pi pi-ban'</span>.{' '}
+                        A cancel icon is displayed to reset the value by default, set <i>cancel</i> as false to remove this option.
                     </p>
 
                     <CodeHighlight>
@@ -233,18 +275,12 @@ import { Rating } from 'primereact/rating';
 
                     <h5>Custom Icons</h5>
                     <p>
-                        Custom icons are used to override the default icons with these properties;
-                        <i>onIcon</i>
-                        <i>offIcon</i>
-                        <i>onIconClass</i>
-                        <i>offIconClass</i>
-                        <i>cancelIcon</i>
-                        <i>cancelIconProps</i>, default is <span style={{ color: '#CC7E09' }}>'pi pi-star'</span>.
+                        Custom icons are used to override the default icons with <i>onIcon</i>, <i>offIcon</i> and <i>cancelIcon</i> properties.
                     </p>
 
                     <CodeHighlight>
                         {`
-<Rating value={value} onIcon={<Image src={CustomImageActive} />} offIcon={<Image src={CustomImage} />} cancelIcon={<Image src={CustomCancelImage} />} onChange={(e) => setValue(e.value)} />
+<Rating value={value} onIcon="pi pi-circle-fill" offIcon="pi-circle" onChange={(e) => setValue(e.value)} />
 `}
                     </CodeHighlight>
 
@@ -286,6 +322,18 @@ import { Rating } from 'primereact/rating';
                                     <td>When present, changing the value is not possible.</td>
                                 </tr>
                                 <tr>
+                                    <td>style</td>
+                                    <td>object</td>
+                                    <td>null</td>
+                                    <td>Inline style of the component.</td>
+                                </tr>
+                                <tr>
+                                    <td>className</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>ClassName of the component.</td>
+                                </tr>
+                                <tr>
                                     <td>stars</td>
                                     <td>number</td>
                                     <td>5</td>
@@ -308,18 +356,6 @@ import { Rating } from 'primereact/rating';
                                     <td>object</td>
                                     <td>null</td>
                                     <td>Properties of the cancel icon.</td>
-                                </tr>
-                                <tr>
-                                    <td>style</td>
-                                    <td>object</td>
-                                    <td>null</td>
-                                    <td>Inline style of the component.</td>
-                                </tr>
-                                <tr>
-                                    <td>className</td>
-                                    <td>string</td>
-                                    <td>null</td>
-                                    <td>ClassName of the component.</td>
                                 </tr>
                                 <tr>
                                     <td>onIcon</td>
@@ -400,16 +436,16 @@ import { Rating } from 'primereact/rating';
                                     <td>Container element</td>
                                 </tr>
                                 <tr>
-                                    <td>p-rating-star</td>
-                                    <td>Star element</td>
+                                    <td>p-rating-item</td>
+                                    <td>Each item element</td>
                                 </tr>
                                 <tr>
-                                    <td>p-rating-star-on</td>
-                                    <td>Selected star element.</td>
+                                    <td>p-rating-item-active</td>
+                                    <td>Selected item elements.</td>
                                 </tr>
                                 <tr>
-                                    <td>p-rating-cancel</td>
-                                    <td>Cancel icon.</td>
+                                    <td>p-rating-cancel-item</td>
+                                    <td>Cancel item element.</td>
                                 </tr>
                             </tbody>
                         </table>

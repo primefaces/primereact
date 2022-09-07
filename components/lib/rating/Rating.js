@@ -58,23 +58,25 @@ export const Rating = React.memo(
 
         const createIcons = () => {
             return Array.from({ length: props.stars }, (_, i) => i + 1).map((value) => {
-                const icon = value <= props.value ? { class: props.onIcon, props: props.onIconProps } : { class: props.offIcon, props: props.offIconProps };
-                const content = IconUtils.getJSXIcon(icon.class, { ...icon.props });
+                const active = value <= props.value;
+                const className = classNames('p-rating-item', { 'p-rating-item-active': active });
+                const icon = active ? { type: props.onIcon, props: props.onIconProps } : { type: props.offIcon, props: props.offIconProps };
+                const content = IconUtils.getJSXIcon(icon.type, { className: 'p-rating-icon', ...icon.props }, { props });
                 return (
-                    <span key={value} className="p-rating-icon" tabIndex={tabIndex} onClick={(e) => rate(e, value)} onKeyDown={(e) => onStarKeyDown(e, value)}>
+                    <div key={value} className={className} tabIndex={tabIndex} onClick={(e) => rate(e, value)} onKeyDown={(e) => onStarKeyDown(e, value)}>
                         {content}
-                    </span>
+                    </div>
                 );
             });
         };
 
         const createCancelIcon = () => {
             if (props.cancel) {
-                const content = IconUtils.getJSXIcon(props.cancelIcon, { ...props.cancelIconProps });
+                const content = IconUtils.getJSXIcon(props.cancelIcon, { className: 'p-rating-icon p-rating-cancel', ...props.cancelIconProps }, { props });
                 return (
-                    <span className="p-rating-icon" onClick={clear} tabIndex={tabIndex} onKeyDown={onCancelKeyDown}>
+                    <div className="p-rating-item p-rating-cancel-item" onClick={clear} tabIndex={tabIndex} onKeyDown={onCancelKeyDown}>
                         {content}
-                    </span>
+                    </div>
                 );
             }
 
@@ -127,7 +129,7 @@ Rating.defaultProps = {
     onChange: null,
     onIcon: 'pi pi-star-fill',
     offIcon: 'pi pi-star',
-    cancelIcon: 'p-rating-icon p-rating-cancel pi pi-ban',
+    cancelIcon: 'pi pi-ban',
     cancelIconProps: null,
     onIconProps: null,
     offIconProps: null

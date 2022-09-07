@@ -24,6 +24,18 @@ const RatingProps = [
         description: 'When present, changing the value is not possible.'
     },
     {
+        name: 'style',
+        type: 'object',
+        default: 'null',
+        description: 'Inline style of the component.'
+    },
+    {
+        name: 'className',
+        type: 'string',
+        default: 'null',
+        description: 'ClassName of the component.'
+    },
+    {
         name: 'stars',
         type: 'number',
         default: '5',
@@ -46,18 +58,6 @@ const RatingProps = [
         type: 'object',
         default: 'null',
         description: 'Properties of the cancel icon.'
-    },
-    {
-        name: 'style',
-        type: 'object',
-        default: 'null',
-        description: 'Inline style of the component.'
-    },
-    {
-        name: 'className',
-        type: 'string',
-        default: 'null',
-        description: 'ClassName of the component.'
     },
     {
         name: 'onIcon',
