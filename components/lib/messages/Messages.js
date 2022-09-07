@@ -13,7 +13,7 @@ export const Messages = React.memo(
 
         const show = (value) => {
             if (value) {
-                let messages;
+                const messages = assignIdentifiers(value, true);
 
                 if (Array.isArray(value)) {
                     for (let i = 0; i < value.length; i++) {
@@ -29,12 +29,34 @@ export const Messages = React.memo(
             }
         };
 
+        const assignIdentifiers = (value, copy) => {
+            let messages;
+            if (Array.isArray(value)) {
+                for (let i = 0; i < value.length; i++) {
+                    value[i].id = messageIdx++;
+                    if (copy) {
+                        messages = [...messagesState, ...value];
+                    } else {
+                        messages = value;
+                    }
+                }
+            } else {
+                value.id = messageIdx++;
+                if (copy) {
+                    messages = messagesState ? [...messagesState, value] : [value];
+                } else {
+                    messages = [value];
+                }
+            }
+            return messages;
+        };
+
         const clear = () => {
             setMessagesState([]);
         };
 
         const replace = (value) => {
-            const replaced = Array.isArray(value) ? value : [value];
+            const replaced = assignIdentifiers(value, false);
             setMessagesState(replaced);
         };
 
