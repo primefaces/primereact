@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Api';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
@@ -504,11 +505,17 @@ export const BodyCell = React.memo((props) => {
 
         if (selectionMode) {
             const showSelection = props.showSelectionElement ? props.showSelectionElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
+            let label;
+            if (showSelection) {
+                const ariaLabelField = props.selectionAriaLabel || props.tableProps.dataKey;
+                const ariaLabelText = ObjectUtils.resolveFieldData(props.rowData, ariaLabelField);
+                label = `${props.selected ? ariaLabel('unselectLabel') : ariaLabel('selectLabel')} ${ariaLabelText}`;
+            }
 
             content = showSelection && (
                 <>
-                    {selectionMode === 'single' && <RowRadioButton checked={props.selected} onChange={onRadioChange} tabIndex={props.tabIndex} tableSelector={props.tableSelector} />}
-                    {selectionMode === 'multiple' && <RowCheckbox checked={props.selected} onChange={onCheckboxChange} tabIndex={props.tabIndex} />}
+                    {selectionMode === 'single' && <RowRadioButton checked={props.selected} onChange={onRadioChange} tabIndex={props.tabIndex} tableSelector={props.tableSelector} ariaLabel={label} />}
+                    {selectionMode === 'multiple' && <RowCheckbox checked={props.selected} onChange={onCheckboxChange} tabIndex={props.tabIndex} ariaLabel={label} />}
                 </>
             );
         } else if (rowReorder) {

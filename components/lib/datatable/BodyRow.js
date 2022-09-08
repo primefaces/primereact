@@ -304,6 +304,7 @@ export const BodyRow = React.memo((props) => {
                         onEditingMetaChange={props.onEditingMetaChange}
                         onRowToggle={props.onRowToggle}
                         selection={props.selection}
+                        selectionAriaLabel={props.tableProps.selectionAriaLabel}
                         allowCellSelection={props.allowCellSelection}
                         compareSelectionBy={props.compareSelectionBy}
                         selectOnEdit={props.selectOnEdit}

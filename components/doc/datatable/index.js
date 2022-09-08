@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const DataTableDoc = memo(() => {
     const sources = {
@@ -229,7 +229,7 @@ export class DataTableDemo extends Component {
                         filters={this.state.filters} filterDisplay="menu" loading={this.state.loading} responsiveLayout="scroll"
                         globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                        <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                        <Column selectionMode="multiple" selectionAriaLabel="name" headerStyle={{ width: '3em' }}></Column>
                         <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
                         <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={this.countryBodyTemplate} filter filterPlaceholder="Search by country" />
                         <Column header="Agent" sortable sortField="representative.name" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '14rem' }} body={this.representativeBodyTemplate}
@@ -448,7 +448,7 @@ const DataTableDemo = () => {
                     filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
                     globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                    <Column selectionMode="multiple" selectionAriaLabel="name" headerStyle={{ width: '3em' }}></Column>
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
                     <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
                     <Column header="Agent" sortable sortField="representative.name" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
@@ -666,7 +666,7 @@ const DataTableDemo = () => {
                     filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
                     globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                    <Column selectionMode="multiple" selectionAriaLabel="name" headerStyle={{ width: '3em' }}></Column>
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
                     <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
                     <Column header="Agent" sortable sortField="representative.name" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
@@ -892,7 +892,7 @@ const DataTableDemo = () => {
                     filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
                     globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                    <Column selectionMode="multiple" selectionAriaLabel="name" headerStyle={{ width: '3em' }}></Column>
                     <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
                     <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
                     <Column header="Agent" sortable sortField="representative.name" filterField="representative" showFilterMatchModes={false} filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '14rem' }} body={representativeBodyTemplate}
@@ -3228,6 +3228,14 @@ export const DataTableStateDemo = () => {
                                     <td>any</td>
                                     <td>null</td>
                                     <td>Selected row in single mode or an array of values in multiple mode.</td>
+                                </tr>
+                                <tr>
+                                    <td>selectionAriaLabel</td>
+                                    <td>string</td>
+                                    <td>null</td>
+                                    <td>
+                                        A field property from the row to add "Select {field}" and "Unselect {field}" ARIA labels to checkbox/radio buttons.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>contextMenuSelection</td>

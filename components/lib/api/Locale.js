@@ -9,6 +9,7 @@ let locales = {
         equals: 'Equals',
         notEquals: 'Not equals',
         noFilter: 'No Filter',
+        filter: 'Filter',
         lt: 'Less than',
         lte: 'Less than or equal to',
         gt: 'Greater than',
@@ -52,7 +53,9 @@ let locales = {
             firstPageLabel: 'First Page',
             lastPageLabel: 'Last Page',
             nextPageLabel: 'Next Page',
-            previousPageLabel: 'Previous Page'
+            previousPageLabel: 'Previous Page',
+            selectLabel: 'Select',
+            unselectLabel: 'Unselect'
         }
     }
 };

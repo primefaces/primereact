@@ -198,6 +198,12 @@ const DataTableProps = [
         description: 'Selected row in single mode or an array of values in multiple mode.'
     },
     {
+        name: 'selectionAriaLabel',
+        type: 'string',
+        default: 'null',
+        description: 'A field property from the row to add "Select {field}" and "Unselect {field}" ARIA labels to checkbox/radio buttons.'
+    },
+    {
         name: 'contextMenuSelection',
         type: 'any',
         default: 'null',

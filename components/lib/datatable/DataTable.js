@@ -1756,6 +1756,7 @@ DataTable.defaultProps = {
     dragSelection: false,
     cellSelection: false,
     selection: null,
+    selectionAriaLabel: null,
     onSelectionChange: null,
     contextMenuSelection: null,
     onContextMenuSelectionChange: null,
