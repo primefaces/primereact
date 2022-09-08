@@ -2330,6 +2330,7 @@ export const Calendar = React.memo(
 
             if (props.value) {
                 updateInputfield(props.value);
+                setValue(props.value);
             }
 
             return () => {
@@ -2343,24 +2344,7 @@ export const Calendar = React.memo(
 
         useUpdateEffect(() => {
             if (!props.onViewDateChange && !viewStateChanged.current) {
-                let propValue = props.value;
-                if (Array.isArray(propValue)) {
-                    propValue = propValue[0];
-                }
-
-                let prevPropValue = previousValue;
-                if (Array.isArray(prevPropValue)) {
-                    prevPropValue = prevPropValue[0];
-                }
-
-                if ((!prevPropValue && propValue) || (propValue && propValue instanceof Date && propValue.getTime() !== prevPropValue.getTime())) {
-                    let viewDate = props.viewDate && isValidDate(props.viewDate) ? props.viewDate : propValue && isValidDate(propValue) ? propValue : new Date();
-
-                    validateDate(viewDate);
-
-                    setViewDateState(viewDate);
-                    viewStateChanged.current = true;
-                }
+                setValue(props.value);
             }
         }, [props.onViewDateChange, props.value]);
 
@@ -2401,6 +2385,26 @@ export const Calendar = React.memo(
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current
         }));
+
+        const setValue = (propValue) => {
+            if (Array.isArray(propValue)) {
+                propValue = propValue[0];
+            }
+
+            let prevPropValue = previousValue;
+            if (Array.isArray(prevPropValue)) {
+                prevPropValue = prevPropValue[0];
+            }
+
+            if ((!prevPropValue && propValue) || (propValue && propValue instanceof Date && propValue.getTime() !== prevPropValue.getTime())) {
+                let viewDate = props.viewDate && isValidDate(props.viewDate) ? props.viewDate : propValue && isValidDate(propValue) ? propValue : new Date();
+
+                validateDate(viewDate);
+
+                setViewDateState(viewDate);
+                viewStateChanged.current = true;
+            }
+        };
 
         const createBackwardNavigator = (isVisible) => {
             const navigatorProps = isVisible ? { onClick: onPrevButtonClick, onKeyDown: (e) => onContainerButtonKeydown(e) } : { style: { visibility: 'hidden' } };
