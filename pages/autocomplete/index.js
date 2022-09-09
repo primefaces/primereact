@@ -174,10 +174,21 @@ const AutoCompleteDemo = () => {
                         itemTemplate={itemTemplate}
                         onChange={(e) => setSelectedCountry2(e.value)}
                         aria-label="Countries"
+                        dropdownAriaLabel="Select Country"
                     />
 
                     <h5>Virtual Scroll (100000 Items)</h5>
-                    <AutoComplete value={selectedItem} suggestions={filteredItems} completeMethod={searchItems} virtualScrollerOptions={{ itemSize: 38 }} field="label" dropdown onChange={(e) => setSelectedItem(e.value)} aria-label="Items" />
+                    <AutoComplete
+                        value={selectedItem}
+                        suggestions={filteredItems}
+                        completeMethod={searchItems}
+                        virtualScrollerOptions={{ itemSize: 38 }}
+                        field="label"
+                        dropdown
+                        onChange={(e) => setSelectedItem(e.value)}
+                        aria-label="Items"
+                        dropdownAriaLabel="Select Item"
+                    />
 
                     <h5>Multiple</h5>
                     <span className="p-fluid">
