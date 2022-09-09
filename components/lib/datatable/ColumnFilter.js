@@ -368,6 +368,10 @@ export const ColumnFilter = React.memo((props) => {
         ];
     };
 
+    const filterLabel = () => {
+        return localeOption('filter');
+    };
+
     const noFilterLabel = () => {
         return localeOption('noFilter');
     };
@@ -450,12 +454,9 @@ export const ColumnFilter = React.memo((props) => {
                 'p-column-filter-menu-button-open': overlayVisibleState,
                 'p-column-filter-menu-button-active': hasFilter()
             });
+            const label = filterLabel();
 
-            return (
-                <button ref={iconRef} type="button" className={className} aria-haspopup aria-expanded={overlayVisibleState} onClick={toggleMenu} onKeyDown={onToggleButtonKeyDown}>
-                    <span className="pi pi-filter-icon pi-filter"></span>
-                </button>
-            );
+            return <Button ref={iconRef} type="button" icon="pi pi-filter-icon pi-filter" className={className} aria-haspopup aria-expanded={overlayVisibleState} onClick={toggleMenu} onKeyDown={onToggleButtonKeyDown} aria-label={label} />;
         }
 
         return null;
@@ -466,12 +467,9 @@ export const ColumnFilter = React.memo((props) => {
             const className = classNames('p-column-filter-clear-button p-link', {
                 'p-hidden-space': !hasRowFilter()
             });
+            const clearLabel = clearButtonLabel();
 
-            return (
-                <button className={className} type="button" onClick={clearFilter}>
-                    <span className="pi pi-filter-slash"></span>
-                </button>
-            );
+            return <Button ref={iconRef} type="button" icon="pi pi-filter-slash" className={className} onClick={clearFilter} aria-label={clearLabel} />;
         }
 
         return null;

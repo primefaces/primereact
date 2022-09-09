@@ -694,9 +694,10 @@ export const Dropdown = React.memo(
 
         const createDropdownIcon = () => {
             const iconClassName = classNames('p-dropdown-trigger-icon p-clickable', props.dropdownIcon);
+            const ariaLabel = props.placeholder || props.ariaLabel;
 
             return (
-                <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState}>
+                <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-label={ariaLabel}>
                     <span className={iconClassName}></span>
                 </div>
             );
