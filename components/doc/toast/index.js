@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
 import Link from 'next/link';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { useLiveEditorTabs } from '../common/liveeditor';
+import React, { memo } from 'react';
+import { TabPanel, TabView } from '../../lib/tabview/TabView';
 import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
+import { useLiveEditorTabs } from '../common/liveeditor';
 
 const ToastDoc = memo(() => {
     const sources = {
@@ -826,6 +826,16 @@ toast.current.replace(newMessages);
                                     <td>onHide</td>
                                     <td>-</td>
                                     <td>Callback to invoke when message becomes hidden.</td>
+                                </tr>
+                                <tr>
+                                    <td>onMouseEnter</td>
+                                    <td>event: Mouse Event </td>
+                                    <td>Callback to invoke when a message gets focus with mouse.</td>
+                                </tr>
+                                <tr>
+                                    <td>onMouseLeave</td>
+                                    <td>event: Mouse Event </td>
+                                    <td>Callback to invoke when a message loses focus with mouse.</td>
                                 </tr>
                             </tbody>
                         </table>
