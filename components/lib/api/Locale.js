@@ -20,6 +20,7 @@ let locales = {
         dateAfter: 'Date is after',
         custom: 'Custom',
         clear: 'Clear',
+        close: 'Close',
         apply: 'Apply',
         matchAll: 'Match All',
         matchAny: 'Match Any',

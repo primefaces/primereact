@@ -98,7 +98,7 @@ export const Toast = React.memo(
 
                             return (
                                 <CSSTransition nodeRef={messageRef} key={messageInfo._pId} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
-                                    <ToastMessage ref={messageRef} messageInfo={messageInfo} onClick={props.onClick} onClose={onClose} />
+                                    <ToastMessage ref={messageRef} messageInfo={messageInfo} onClick={props.onClick} onClose={onClose} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
                                 </CSSTransition>
                             );
                         })}
@@ -126,5 +126,7 @@ Toast.defaultProps = {
     onClick: null,
     onRemove: null,
     onShow: null,
-    onHide: null
+    onHide: null,
+    onMouseEnter: null,
+    onMouseLeave: null
 };
