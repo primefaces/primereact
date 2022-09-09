@@ -5,13 +5,13 @@ import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/
 
 export const AccordionTab = () => {};
 
+const shouldUseTab = (tab) => tab && tab.props.__TYPE === 'AccordionTab';
+
 export const Accordion = React.forwardRef((props, ref) => {
     const [idState, setIdState] = React.useState(props.id);
     const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
     const elementRef = React.useRef(null);
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
-
-    const shouldUseTab = (tab) => tab && tab.props.__TYPE === 'AccordionTab';
 
     const onTabHeaderClick = (event, tab, index) => {
         if (!tab.props.disabled) {
@@ -55,6 +55,10 @@ export const Accordion = React.forwardRef((props, ref) => {
             setIdState(UniqueComponentId());
         }
     });
+
+    if (!idState) {
+        return null;
+    }
 
     const createTabHeader = (tab, selected, index) => {
         const style = { ...(tab.props.style || {}), ...(tab.props.headerStyle || {}) };
