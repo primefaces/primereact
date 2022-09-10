@@ -19,9 +19,7 @@ const ScrollPanelProps = [
     }
 ];
 
-const ScrollPanelEvents = [
-
-];
+const ScrollPanelEvents = [];
 
 const ScrollPanelStyles = [
     { name: 'p-scrollpanel', description: 'Container element.' },

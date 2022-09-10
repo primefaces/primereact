@@ -5,16 +5,9 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const BreadCrumbDemo = () => {
+    const items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
 
-    const items = [
-        { label: 'Computer' },
-        { label: 'Notebook' },
-        { label: 'Accessories' },
-        { label: 'Backpacks' },
-        { label: 'Item' }
-    ];
-
-    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' }
+    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact/showcase' };
 
     return (
         <div>
@@ -39,6 +32,6 @@ const BreadCrumbDemo = () => {
             <BreadCrumbDoc />
         </div>
     );
-}
+};
 
 export default BreadCrumbDemo;

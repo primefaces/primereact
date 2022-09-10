@@ -1,11 +1,11 @@
 import * as React from 'react';
+import { localeOption } from '../api/Api';
+import { Button } from '../button/Button';
 import { Checkbox } from '../checkbox/Checkbox';
 import { InputText } from '../inputtext/InputText';
-import { Ripple } from '../ripple/Ripple';
-import { ObjectUtils, classNames } from '../utils/Utils';
+import { classNames, ObjectUtils } from '../utils/Utils';
 
 export const MultiSelectHeader = React.memo((props) => {
-
     const filterOptions = {
         filter: (e) => onFilter(e),
         reset: () => props.resetFilter()
@@ -18,7 +18,7 @@ export const MultiSelectHeader = React.memo((props) => {
                 query: event.target.value
             });
         }
-    }
+    };
 
     const onSelectAll = (event) => {
         if (props.onSelectAll) {
@@ -29,15 +29,14 @@ export const MultiSelectHeader = React.memo((props) => {
         }
 
         event.preventDefault();
-    }
+    };
 
     const createFilterElement = () => {
         if (props.filter) {
             const containerClassName = classNames('p-multiselect-filter-container');
             let content = (
                 <div className={containerClassName}>
-                    <InputText type="text" role="textbox" value={props.filterValue} onChange={onFilter}
-                        className="p-multiselect-filter" placeholder={props.filterPlaceholder} />
+                    <InputText type="text" role="textbox" value={props.filterValue} onChange={onFilter} className="p-multiselect-filter" placeholder={props.filterPlaceholder} />
                     <span className="p-multiselect-filter-icon pi pi-search"></span>
                 </div>
             );
@@ -49,30 +48,21 @@ export const MultiSelectHeader = React.memo((props) => {
                     filterOptions: filterOptions,
                     onFilter: onFilter,
                     filterIconClassName: 'p-multeselect-filter-icon pi pi-search',
-                    props,
+                    props
                 };
 
                 content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
             }
-        
-            return (
-                <>
-                    {content}
-                </>
-            );
+
+            return <>{content}</>;
         }
 
         return null;
-    }
+    };
 
     const filterElement = createFilterElement();
     const checkboxElement = props.showSelectAll && <Checkbox checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} />;
-    const closeElement = (
-        <button type="button" className="p-multiselect-close p-link" onClick={props.onClose}>
-            <span className="p-multiselect-close-icon pi pi-times"></span>
-            <Ripple />
-        </button>
-    );
+    const closeElement = <Button type="button" className="p-multiselect-close p-link" icon="p-multiselect-close-icon pi pi-times" onClick={props.onClose} aria-label={localeOption('close')} />;
     const element = (
         <div className="p-multiselect-header">
             {checkboxElement}
@@ -94,7 +84,7 @@ export const MultiSelectHeader = React.memo((props) => {
             onCloseClick: props.onClose,
             element,
             props
-        }
+        };
 
         return ObjectUtils.getJSXElement(props.template, defaultOptions);
     }

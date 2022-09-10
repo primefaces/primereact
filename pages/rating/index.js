@@ -1,24 +1,27 @@
-import React, { useState } from 'react';
-import { Rating } from '../../components/lib/rating/Rating';
-import RatingDoc from '../../components/doc/rating';
-import { DocActions } from '../../components/doc/common/docactions';
+import getConfig from 'next/config';
 import Head from 'next/head';
+import React, { useState } from 'react';
+import { DocActions } from '../../components/doc/common/docactions';
+import RatingDoc from '../../components/doc/rating';
+import { Rating } from '../../components/lib/rating/Rating';
 
 const RatingDemo = () => {
-
     const [val1, setVal1] = useState(null);
     const [val2, setVal2] = useState(null);
+    const [val3, setVal3] = useState(null);
+
+    const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
     return (
         <div>
             <Head>
                 <title>React Rating Component</title>
-                <meta name="description" content="Rating componentsis a star based selection input." />
+                <meta name="description" content="Rating component is a star based selection input." />
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
                     <h1>Rating</h1>
-                    <p>Rating componentsis a star based selection input.</p>
+                    <p>Rating component is a star based selection input.</p>
                 </div>
 
                 <DocActions github="rating/index.js" />
@@ -37,12 +40,31 @@ const RatingDemo = () => {
 
                     <h5>Disabled</h5>
                     <Rating value={8} disabled stars={10} />
+
+                    <h5>Template</h5>
+                    <Rating
+                        value={val3}
+                        onChange={(e) => setVal3(e.value)}
+                        cancelIcon={
+                            <img src={`${contextPath}/images/rating/cancel.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-cancel-image" width="25px" height="25px" />
+                        }
+                        onIcon={
+                            <img
+                                src={`${contextPath}/images/rating/custom-icon-active.png`}
+                                onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
+                                alt="custom-image-active"
+                                width="25px"
+                                height="25px"
+                            />
+                        }
+                        offIcon={<img src={`${contextPath}/images/rating/custom-icon.png`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="custom-image" width="25px" height="25px" />}
+                    />
                 </div>
             </div>
 
             <RatingDoc />
         </div>
-    )
-}
+    );
+};
 
 export default RatingDemo;

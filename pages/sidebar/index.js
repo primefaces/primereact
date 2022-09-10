@@ -6,7 +6,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const SidebarDemo = () => {
-
     const [visibleLeft, setVisibleLeft] = useState(false);
     const [visibleRight, setVisibleRight] = useState(false);
     const [visibleTop, setVisibleTop] = useState(false);
@@ -53,7 +52,7 @@ const SidebarDemo = () => {
                         <h3>Top Sidebar</h3>
                     </Sidebar>
 
-                    <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)}>
+                    <Sidebar visible={visibleBottom} position="bottom" onHide={() => setVisibleBottom(false)} modal={false} dismissable>
                         <h3>Bottom Sidebar</h3>
                     </Sidebar>
 
@@ -75,9 +74,8 @@ const SidebarDemo = () => {
             </div>
 
             <SidebarDoc />
-
         </div>
-    )
-}
+    );
+};
 
 export default SidebarDemo;

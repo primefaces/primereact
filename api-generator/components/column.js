@@ -412,9 +412,7 @@ const ColumnEvents = [
     }
 ];
 
-const ColumnStyles = [
-
-];
+const ColumnStyles = [];
 
 module.exports = {
     column: {

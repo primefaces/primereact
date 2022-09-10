@@ -234,6 +234,12 @@ const AutoCompleteProps = [
         description: 'Icon class of the dropdown icon.'
     },
     {
+        name: 'dropdownAriaLabel',
+        type: 'string',
+        default: 'null',
+        description: 'ARIA label for the dropdown button. Defaults to placeholder then Locale "choose" label.'
+    },
+    {
         name: 'virtualScrollerOptions',
         type: 'object',
         default: 'null',

@@ -13,16 +13,16 @@ const DataTableResponsiveDemo = () => {
     const productService = new ProductService();
 
     useEffect(() => {
-        productService.getProductsSmall().then(data => setProducts(data));
+        productService.getProductsSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const statusTemplate = (rowData) => {
-        return <span className={`product-badge status-${(rowData.inventoryStatus ? rowData.inventoryStatus.toLowerCase() : '')}`}>{rowData.inventoryStatus}</span>;
-    }
+        return <span className={`product-badge status-${rowData.inventoryStatus ? rowData.inventoryStatus.toLowerCase() : ''}`}>{rowData.inventoryStatus}</span>;
+    };
 
     const ratingTemplate = (rowData) => {
-        return <Rating value={rowData.rating} readOnly cancel={false} />
-    }
+        return <Rating value={rowData.rating} readOnly cancel={false} />;
+    };
 
     return (
         <div>
@@ -32,9 +32,10 @@ const DataTableResponsiveDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>Responsive</span></h1>
-                    <p>DataTable responsive layout can be achieved in two ways;
-                        first approach is displaying a horizontal scrollbar for smaller screens and second one is defining a breakpoint to display the cells of a row as stacked.</p>
+                    <h1>
+                        DataTable <span>Responsive</span>
+                    </h1>
+                    <p>DataTable responsive layout can be achieved in two ways; first approach is displaying a horizontal scrollbar for smaller screens and second one is defining a breakpoint to display the cells of a row as stacked.</p>
                 </div>
 
                 <DocActions github="datatable/responsive.js" />
@@ -67,14 +68,13 @@ const DataTableResponsiveDemo = () => {
             <DataTableResponsiveDemoDoc></DataTableResponsiveDemoDoc>
         </div>
     );
-}
+};
 
 export default DataTableResponsiveDemo;
 
 export const DataTableResponsiveDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -139,7 +139,7 @@ export class DataTableResponsiveDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -192,7 +192,7 @@ const DataTableResponsiveDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -245,7 +245,7 @@ const DataTableResponsiveDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./ProductService.js"></script>
@@ -307,15 +307,11 @@ const DataTableResponsiveDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableResponsiveDemo', sources: sources, service: 'ProductService', data: 'products-small' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableResponsiveDemo', sources: sources, service: 'ProductService', data: 'products-small' })}</TabView>
         </div>
-    )
-})
+    );
+});

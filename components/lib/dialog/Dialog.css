@@ -16,6 +16,11 @@
     display: flex;
 }
 
+/* Github #3122: Prevent animation flickering */
+.p-dialog:not([class*='p-dialog-']) {
+    display: none;
+}
+
 .p-dialog-mask.p-component-overlay {
     pointer-events: auto;
 }

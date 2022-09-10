@@ -198,6 +198,12 @@ const DataTableProps = [
         description: 'Selected row in single mode or an array of values in multiple mode.'
     },
     {
+        name: 'selectionAriaLabel',
+        type: 'string',
+        default: 'null',
+        description: 'A field property from the row to add "Select {field}" and "Unselect {field}" ARIA labels to checkbox/radio buttons.'
+    },
+    {
         name: 'contextMenuSelection',
         type: 'any',
         default: 'null',
@@ -219,7 +225,8 @@ const DataTableProps = [
         name: 'metaKeySelection',
         type: 'boolean',
         default: 'true',
-        description: 'Defines whether metaKey is requred or not for the selection.When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
+        description:
+            'Defines whether metaKey is requred or not for the selection.When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.'
     },
     {
         name: 'selectOnEdit',

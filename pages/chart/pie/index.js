@@ -7,7 +7,6 @@ import { DocActions } from '../../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const PieChartDemo = () => {
-
     const context = useContext(AppContentContext);
 
     const [chartData] = useState({
@@ -15,16 +14,8 @@ const PieChartDemo = () => {
         datasets: [
             {
                 data: [300, 50, 100],
-                backgroundColor: [
-                    "#42A5F5",
-                    "#66BB6A",
-                    "#FFA726"
-                ],
-                hoverBackgroundColor: [
-                    "#64B5F6",
-                    "#81C784",
-                    "#FFB74D"
-                ]
+                backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726'],
+                hoverBackgroundColor: ['#64B5F6', '#81C784', '#FFB74D']
             }
         ]
     });
@@ -73,15 +64,14 @@ const PieChartDemo = () => {
 
             <PieChartDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default PieChartDemo;
 
 const PieChartDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -132,7 +122,7 @@ export class PieChartDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -176,7 +166,7 @@ const PieChartDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -220,15 +210,11 @@ const PieChartDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'PieChartDemo', sources: sources, dependencies: { 'chart.js': '3.3.2' } })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'PieChartDemo', sources: sources, dependencies: { 'chart.js': '3.3.2' } })}</TabView>
         </div>
-    )
-})
+    );
+});

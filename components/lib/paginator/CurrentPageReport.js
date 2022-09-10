@@ -11,12 +11,13 @@ export const CurrentPageReport = React.memo((props) => {
         totalRecords: props.totalRecords
     };
 
-    const text = props.reportTemplate.replace("{currentPage}", report.currentPage)
-        .replace("{totalPages}", report.totalPages)
-        .replace("{first}", report.first)
-        .replace("{last}", report.last)
-        .replace("{rows}", report.rows)
-        .replace("{totalRecords}", report.totalRecords);
+    const text = props.reportTemplate
+        .replace('{currentPage}', report.currentPage)
+        .replace('{totalPages}', report.totalPages)
+        .replace('{first}', report.first)
+        .replace('{last}', report.last)
+        .replace('{rows}', report.rows)
+        .replace('{totalRecords}', report.totalRecords);
 
     const element = <span className="p-paginator-current">{text}</span>;
 
@@ -46,4 +47,4 @@ CurrentPageReport.defaultProps = {
     totalRecords: null,
     reportTemplate: '({currentPage} of {totalPages})',
     template: null
-}
+};

@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const ChipsDemo = () => {
-
     const [values1, setValues1] = useState([]);
     const [values2, setValues2] = useState([]);
     const [values3, setValues3] = useState([]);
@@ -17,7 +16,7 @@ const ChipsDemo = () => {
                 <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
             </div>
         );
-    }
+    };
 
     return (
         <div>
@@ -36,7 +35,7 @@ const ChipsDemo = () => {
             <div className="content-section implementation p-fluid">
                 <div className="card p-fluid">
                     <h5>Basic</h5>
-                    <Chips value={values1} onChange={(e) => setValues1(e.value)}/>
+                    <Chips value={values1} onChange={(e) => setValues1(e.value)} />
 
                     <h5>Comma Separator</h5>
                     <Chips value={values2} onChange={(e) => setValues2(e.value)} separator="," />
@@ -48,7 +47,7 @@ const ChipsDemo = () => {
 
             <ChipsDoc />
         </div>
-    )
-}
+    );
+};
 
 export default ChipsDemo;

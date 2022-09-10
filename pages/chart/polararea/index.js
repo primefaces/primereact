@@ -7,34 +7,17 @@ import { DocActions } from '../../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const PolarAreaChartDemo = memo(() => {
-
     const context = useContext(AppContentContext);
 
     const [chartData] = useState({
-        datasets: [{
-            data: [
-                11,
-                16,
-                7,
-                3,
-                14
-            ],
-            backgroundColor: [
-                "#42A5F5",
-                "#66BB6A",
-                "#FFA726",
-                "#26C6DA",
-                "#7E57C2"
-            ],
-            label: 'My dataset'
-        }],
-        labels: [
-            "Red",
-            "Green",
-            "Yellow",
-            "Grey",
-            "Blue"
-        ]
+        datasets: [
+            {
+                data: [11, 16, 7, 3, 14],
+                backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726', '#26C6DA', '#7E57C2'],
+                label: 'My dataset'
+            }
+        ],
+        labels: ['Red', 'Green', 'Yellow', 'Grey', 'Blue']
     });
 
     const [lightOptions] = useState({
@@ -95,15 +78,14 @@ const PolarAreaChartDemo = memo(() => {
 
             <PolarAreaChartDemoDoc></PolarAreaChartDemoDoc>
         </div>
-    )
-})
+    );
+});
 
 export default PolarAreaChartDemo;
 
 const PolarAreaChartDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -169,7 +151,7 @@ export class PolarAreaChartDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -228,7 +210,7 @@ const PolarAreaChartDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -287,15 +269,11 @@ const PolarAreaChartDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'PolarAreaChartDemo', sources: sources, dependencies: { 'chart.js': '3.3.2' } })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'PolarAreaChartDemo', sources: sources, dependencies: { 'chart.js': '3.3.2' } })}</TabView>
         </div>
-    )
-})
+    );
+});

@@ -8,7 +8,6 @@ import getConfig from 'next/config';
 import { useLiveEditorTabs } from '../../components/doc/common/liveeditor';
 
 const GalleriaResponsiveDemo = () => {
-
     const [images, setImages] = useState(null);
 
     const galleriaService = new PhotoService();
@@ -34,16 +33,16 @@ const GalleriaResponsiveDemo = () => {
     ];
 
     useEffect(() => {
-        galleriaService.getImages().then(data => setImages(data));
+        galleriaService.getImages().then((data) => setImages(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
-        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />
-    }
+        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+    };
 
     const thumbnailTemplate = (item) => {
-        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />
-    }
+        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />;
+    };
 
     return (
         <div>
@@ -53,8 +52,12 @@ const GalleriaResponsiveDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Galleria <span>Responsive</span></h1>
-                    <p>Galleria responsiveness is defined with the <b>responsiveOptions</b> property.</p>
+                    <h1>
+                        Galleria <span>Responsive</span>
+                    </h1>
+                    <p>
+                        Galleria responsiveness is defined with the <b>responsiveOptions</b> property.
+                    </p>
                 </div>
 
                 <DocActions github="galleria/responsive.js" />
@@ -62,22 +65,20 @@ const GalleriaResponsiveDemo = () => {
 
             <div className="content-section implementation">
                 <div className="card">
-                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={7} circular style={{ maxWidth: '800px' }}
-                        item={itemTemplate} thumbnail={thumbnailTemplate} />
+                    <Galleria value={images} responsiveOptions={responsiveOptions} numVisible={7} circular style={{ maxWidth: '800px' }} item={itemTemplate} thumbnail={thumbnailTemplate} />
                 </div>
             </div>
 
             <GalleriaResponsiveDemoDoc></GalleriaResponsiveDemoDoc>
         </div>
     );
-}
+};
 
 export default GalleriaResponsiveDemo;
 
 export const GalleriaResponsiveDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -142,7 +143,7 @@ export class GalleriaResponsiveDemo extends Component {
 }
             `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -197,7 +198,7 @@ const GalleriaResponsiveDemo = () => {
 }
             `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -252,7 +253,7 @@ const GalleriaResponsiveDemo = () => {
 }
                         `
         },
-        'browser' : {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./PhotoService.js"></script>
@@ -310,16 +311,11 @@ const GalleriaResponsiveDemo = () => {
     }
                     `
         }
-
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'GalleriaResponsiveDemo', sources: sources, service: 'PhotoService', data: 'photos'})
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'GalleriaResponsiveDemo', sources: sources, service: 'PhotoService', data: 'photos' })}</TabView>
         </div>
-    )
-})
+    );
+});

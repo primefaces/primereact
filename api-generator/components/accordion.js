@@ -113,7 +113,7 @@ const AccordionStyles = [
         name: 'p-accordion-content',
         description: 'Container of a tab.'
     }
-]
+];
 
 module.exports = {
     accordion: {

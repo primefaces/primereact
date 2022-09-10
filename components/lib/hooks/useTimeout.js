@@ -20,8 +20,7 @@ export const useTimeout = (fn, delay = 0, when = true) => {
         if (when) {
             timeout.current = setTimeout(callback, delay);
             return clear;
-        }
-        else {
+        } else {
             clear();
         }
     }, [delay, when]);
@@ -31,5 +30,5 @@ export const useTimeout = (fn, delay = 0, when = true) => {
     });
 
     return [clear];
-}
+};
 /* eslint-enable */

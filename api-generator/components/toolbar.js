@@ -31,9 +31,7 @@ const ToolbarProps = [
     }
 ];
 
-const ToolbarEvents = [
-
-];
+const ToolbarEvents = [];
 
 const ToolbarStyles = [
     { name: 'p-toolbar', description: 'Main container element.' },

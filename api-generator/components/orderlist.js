@@ -144,7 +144,7 @@ const OrderListStyles = [
     { name: 'p-orderlist-item', description: 'An item in the list' },
     { name: 'p-orderlist-filter-container', description: 'Container of filter input.' },
     { name: 'p-orderlist-filter', description: 'Filter element.' },
-    { name: 'p-orderlist-filter-icon', description: 'Icon of the filter element.' },
+    { name: 'p-orderlist-filter-icon', description: 'Icon of the filter element.' }
 ];
 
 module.exports = {

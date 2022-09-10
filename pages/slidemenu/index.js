@@ -6,7 +6,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const SlideMenuDemo = () => {
-
     const menu = useRef(null);
     const items = [
         {
@@ -24,8 +23,7 @@ const SlideMenuDemo = () => {
                         {
                             label: 'Video',
                             icon: 'pi pi-fw pi-video'
-                        },
-
+                        }
                     ]
                 },
                 {
@@ -60,8 +58,7 @@ const SlideMenuDemo = () => {
                 {
                     label: 'Justify',
                     icon: 'pi pi-fw pi-align-justify'
-                },
-
+                }
             ]
         },
         {
@@ -70,13 +67,11 @@ const SlideMenuDemo = () => {
             items: [
                 {
                     label: 'New',
-                    icon: 'pi pi-fw pi-user-plus',
-
+                    icon: 'pi pi-fw pi-user-plus'
                 },
                 {
                     label: 'Delete',
-                    icon: 'pi pi-fw pi-user-minus',
-
+                    icon: 'pi pi-fw pi-user-minus'
                 },
                 {
                     label: 'Search',
@@ -166,7 +161,7 @@ const SlideMenuDemo = () => {
 
             <SlideMenuDoc />
         </div>
-    )
-}
+    );
+};
 
 export default SlideMenuDemo;

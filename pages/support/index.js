@@ -22,8 +22,10 @@ const SupportPage = () => {
                 <div className="col-12 md:col-6">
                     <div className="card support-box">
                         <h5>Community Support</h5>
-                        <p><a href="https://forum.primefaces.org/viewforum.php?f=35">Forum</a> and <a href="https://discord.gg/gzKFYnpmCY">Discord</a> are where the community users gather to seek support, post topics and discuss the technology. PrimeTek does not
-                            guarantee response at forum and discord although they are monitored and maintained by our staff. If you need to secure our response within 1 business day, you may consider PrimeReact PRO support.</p>
+                        <p>
+                            <a href="https://forum.primefaces.org/viewforum.php?f=35">Forum</a> and <a href="https://discord.gg/gzKFYnpmCY">Discord</a> are where the community users gather to seek support, post topics and discuss the technology.
+                            PrimeTek does not guarantee response at forum and discord although they are monitored and maintained by our staff. If you need to secure our response within 1 business day, you may consider PrimeReact PRO support.
+                        </p>
                     </div>
                 </div>
 
@@ -31,11 +33,14 @@ const SupportPage = () => {
                     <div className="flex flex-column justify-content-center card support-box pro" style={{ backgroundImage: `url(${contextPath}/images/pro-effect.png)` }}>
                         <div>
                             <h5>PrimeReact PRO Support</h5>
-                            <p>PrimeReact PRO is a term based commercial support service. With the exclusive services of Pro account,
-                                you no longer need to post your questions in the community forum and your issues to community issue tracker.
-                                With PrimeReact PRO, it's easy to support, tune and add features to PrimeReact as if it were an in-house framework.</p>
+                            <p>
+                                PrimeReact PRO is a term based commercial support service. With the exclusive services of Pro account, you no longer need to post your questions in the community forum and your issues to community issue tracker. With
+                                PrimeReact PRO, it's easy to support, tune and add features to PrimeReact as if it were an in-house framework.
+                            </p>
                         </div>
-                        <a className="action-button" href="mailto:PrimeReact@primetek.com.tr">GET A QUOTE</a>
+                        <a className="action-button" href="mailto:PrimeReact@primetek.com.tr">
+                            GET A QUOTE
+                        </a>
                     </div>
                 </div>
             </div>
@@ -48,8 +53,7 @@ const SupportPage = () => {
                             <div className="dot">&nbsp;</div>
                             <div className="flex flex-column pl-3">
                                 <h6>Access to pro.primefaces.org</h6>
-                                <p>PRO means high-touch support. Contact us directly from a private JIRA with unlimited support tickets!
-                                </p>
+                                <p>PRO means high-touch support. Contact us directly from a private JIRA with unlimited support tickets!</p>
                             </div>
                         </div>
                     </div>
@@ -85,7 +89,9 @@ const SupportPage = () => {
                             <div className="dot color-3">&nbsp;</div>
                             <div className="flex flex-column pl-3">
                                 <h6>Theme Designer</h6>
-                                <p><a href="https://www.primefaces.org/designer-react">Designer</a> is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer. </p>
+                                <p>
+                                    <a href="https://www.primefaces.org/designer-react">Designer</a> is the ultimate tool to create your own PrimeReact experience powered by a SASS based theme engine with 500+ variables and a Visual Designer.{' '}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -103,7 +109,9 @@ const SupportPage = () => {
                             <div className="dot color-6">&nbsp;</div>
                             <div className="flex flex-column pl-3">
                                 <h6>PrimeBlocks</h6>
-                                <p>An enterprise license for all of the ready to use <a href="https://www.primefaces.org/primeblocks-react">UI blocks</a> to build spectacular applications in no time.</p>
+                                <p>
+                                    An enterprise license for all of the ready to use <a href="https://www.primefaces.org/primeblocks-react">UI blocks</a> to build spectacular applications in no time.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -149,7 +157,10 @@ const SupportPage = () => {
             <div className="content-section section-newfeatures">
                 <h5>Enhancement Credits</h5>
                 <div className="flex mb-4">
-                    <p>New feature and enhancement requests are not available in core services and provided via a credit model instead. When you have a feature request we provide an estimate, if you confirm we deliver your request within an estimated timeframe and deduct the amount of work from your credits.</p>
+                    <p>
+                        New feature and enhancement requests are not available in core services and provided via a credit model instead. When you have a feature request we provide an estimate, if you confirm we deliver your request within an
+                        estimated timeframe and deduct the amount of work from your credits.
+                    </p>
                 </div>
                 <div className="grid">
                     <div className="col-6 ld:col-3">
@@ -208,11 +219,14 @@ const SupportPage = () => {
                     </div>
                 </div>
                 <div className="flex mt-4">
-                    <p>You can purchase additional credits along with the subscription and also anytime during your subscription period. If your subscription term ends with unused credits, they will be added to your new subscription term in case you extend.</p>
+                    <p>
+                        You can purchase additional credits along with the subscription and also anytime during your subscription period. If your subscription term ends with unused credits, they will be added to your new subscription term in case you
+                        extend.
+                    </p>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default SupportPage;

@@ -10,25 +10,24 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const DataScrollerInlineDemo = () => {
-
     const [products, setProducts] = useState([]);
     const productService = new ProductService();
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
-
     useEffect(() => {
-        productService.getProducts().then(data => setProducts(data));
+        productService.getProducts().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (data) => {
         return (
             <div className="product-item">
-                <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={data.name} />
+                <img src={`${contextPath}/images/product/${data.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={data.name} />
                 <div className="product-detail">
                     <div className="product-name">{data.name}</div>
                     <div className="product-description">{data.description}</div>
                     <Rating value={data.rating} readOnly cancel={false}></Rating>
-                    <i className="pi pi-tag product-category-icon"></i><span className="product-category">{data.category}</span>
+                    <i className="pi pi-tag product-category-icon"></i>
+                    <span className="product-category">{data.category}</span>
                 </div>
                 <div className="product-action">
                     <span className="product-price">${data.price}</span>
@@ -37,7 +36,7 @@ const DataScrollerInlineDemo = () => {
                 </div>
             </div>
         );
-    }
+    };
 
     return (
         <div>
@@ -47,7 +46,9 @@ const DataScrollerInlineDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataScroller <span>Inline</span></h1>
+                    <h1>
+                        DataScroller <span>Inline</span>
+                    </h1>
                     <p>DataScroller can listen scroll event of itself rather than document in inline mode.</p>
                 </div>
 
@@ -63,14 +64,13 @@ const DataScrollerInlineDemo = () => {
             <DataScrollerInlineDoc></DataScrollerInlineDoc>
         </div>
     );
-}
+};
 
 export default DataScrollerInlineDemo;
 
 export const DataScrollerInlineDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -128,7 +128,7 @@ export class DataScrollerInlineDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -175,7 +175,7 @@ const DataScrollerInlineDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -222,7 +222,7 @@ const DataScrollerInlineDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
 <link rel="stylesheet" href="./DataScrollerDemo.css" />
@@ -276,7 +276,7 @@ const DataScrollerInlineDemo = () => {
 }
                 `
         }
-    }
+    };
 
     const extFiles = {
         'demo/DataScrollerDemo.css': {
@@ -371,15 +371,11 @@ const DataScrollerInlineDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataScrollerInlineDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataScrollerInlineDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })}</TabView>
         </div>
     );
-})
+});

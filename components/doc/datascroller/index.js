@@ -5,9 +5,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const DataScrollerDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -66,7 +65,7 @@ export class DataScrollerDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -114,7 +113,7 @@ const DataScrollerDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -162,7 +161,7 @@ const DataScrollerDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./DataScrollerDemo.css" />
@@ -215,7 +214,7 @@ const DataScrollerDemo = () => {
 }
                 `
         }
-    }
+    };
 
     const extFiles = {
         'demo/DataScrollerDemo.css': {
@@ -310,72 +309,77 @@ const DataScrollerDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { DataScroller } from 'primereact/datascroller';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/datascroller/datascroller.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>DataScroller requires a collection of items as its value, number of rows to load and a template content to display. Here is a sample DataScroller that displays a
-            list of cars where each load event adds 10 more rows if available.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        DataScroller requires a collection of items as its value, number of rows to load and a template content to display. Here is a sample DataScroller that displays a list of cars where each load event adds 10 more rows if
+                        available.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <DataScroller value={products} itemTemplate={itemTemplate} rows={10}></DataScroller>
 `}
-</CodeHighlight>
-<CodeHighlight lang="js">
-                            {`
+                    </CodeHighlight>
+                    <CodeHighlight lang="js">
+                        {`
 const itemTemplate = (item) => {
     // custom item content
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Inline</h5>
-                    <p>By default DataScroller listens to the scroll event of window, the alternative is the inline mode where container of the DataScroller element itself is used as the event target. Set <i>inline</i> option to true to enable this mode.</p>
-<CodeHighlight>
-    {`
+                    <p>
+                        By default DataScroller listens to the scroll event of window, the alternative is the inline mode where container of the DataScroller element itself is used as the event target. Set <i>inline</i> option to true to enable this
+                        mode.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <DataScroller value={products} itemTemplate={itemTemplate} rows={10} inline></DataScroller>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Lazy Loading</h5>
-                    <p>Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking
-                    onLazyLoad callback everytime paging happens. To implement lazy loading,
-        enable <i>lazy</i> property and provide a method callback using <i>onLazyLoad</i> that actually loads the data from a remote datasource. onLazyLoad gets an event object
-        that contains information about what to load.</p>
+                    <p>
+                        Lazy mode is handy to deal with large datasets, instead of loading the entire data, small chunks of data is loaded by invoking onLazyLoad callback everytime paging happens. To implement lazy loading, enable <i>lazy</i>{' '}
+                        property and provide a method callback using <i>onLazyLoad</i> that actually loads the data from a remote datasource. onLazyLoad gets an event object that contains information about what to load.
+                    </p>
 
-<CodeHighlight>
-    {`
+                    <CodeHighlight>
+                        {`
 <DataScroller value={products} itemTemplate={itemTemplate} rows={10} lazy onLazyLoad={loadData}></DataScroller>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 const loadData = (event) => {
     //event.first = First row offset
     //event.rows = Number of rows per page
     //add more records to the cars array
 }
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <div className="doc-tablewrapper">
@@ -484,8 +488,10 @@ const loadData = (event) => {
                             <tbody>
                                 <tr>
                                     <td>onLazyLoad</td>
-                                    <td>event.first = First row offset <br />
-                            event.rows = Number of rows per page <br /></td>
+                                    <td>
+                                        event.first = First row offset <br />
+                                        event.rows = Number of rows per page <br />
+                                    </td>
                                     <td>Callback to invoke in lazy mode to load new data.</td>
                                 </tr>
                             </tbody>
@@ -529,26 +535,24 @@ const loadData = (event) => {
 
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
-                    <h6>Screen Reader</h6>
-                    <p>DataScroller uses a semantic list element to list the items. No specific role is enforced, still you may use any aria role and attributes
-                        as any valid attribute is passed to the container element. List element can be also customized for accessibility using <i>listProps</i> property.
-                    </p>
+                        <h6>Screen Reader</h6>
+                        <p>
+                            DataScroller uses a semantic list element to list the items. No specific role is enforced, still you may use any aria role and attributes as any valid attribute is passed to the container element. List element can be also
+                            customized for accessibility using <i>listProps</i> property.
+                        </p>
 
-                    <h5>Keyboard Support</h5>
-                    <p>Component does not include any built-in interactive elements.</p>
+                        <h5>Keyboard Support</h5>
+                        <p>Component does not include any built-in interactive elements.</p>
 
-                    <h5>Dependencies</h5>
-                    <p>None.</p>
+                        <h5>Dependencies</h5>
+                        <p>None.</p>
                     </DevelopmentSection>
-
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'DataScrollerDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })
-                }
+                {useLiveEditorTabs({ name: 'DataScrollerDemo', sources: sources, service: 'ProductService', data: 'products', extFiles: extFiles })}
             </TabView>
         </div>
     );
-})
+});
 
 export default DataScrollerDoc;

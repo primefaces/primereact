@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const MultiStateCheckboxDemo = () => {
-
     const [value, setValue] = useState('public');
     const options = [
         { value: 'public', icon: 'pi pi-globe' },
@@ -40,6 +39,6 @@ const MultiStateCheckboxDemo = () => {
             <MultiStateCheckboxDoc />
         </div>
     );
-}
+};
 
 export default MultiStateCheckboxDemo;

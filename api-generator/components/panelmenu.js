@@ -37,9 +37,7 @@ const PanelMenuProps = [
     }
 ];
 
-const PanelMenuEvents = [
-
-];
+const PanelMenuEvents = [];
 
 const PanelMenuStyles = [
     { name: 'p-panelmenu', description: 'Container element.' },

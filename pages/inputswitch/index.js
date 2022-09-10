@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const InputSwitchDemo = () => {
-
     const [checked1, setChecked1] = useState(false);
     const [checked2, setChecked2] = useState(true);
 
@@ -36,6 +35,6 @@ const InputSwitchDemo = () => {
             <InputSwitchDoc></InputSwitchDoc>
         </div>
     );
-}
+};
 
 export default InputSwitchDemo;

@@ -6,13 +6,17 @@ export const Divider = React.forwardRef((props, ref) => {
     const horizontal = props.layout === 'horizontal';
     const vertical = props.layout === 'vertical';
     const otherProps = ObjectUtils.findDiffKeys(props, Divider.defaultProps);
-    const className = classNames(`p-divider p-component p-divider-${props.layout} p-divider-${props.type}`, {
-        'p-divider-left': horizontal && (!props.align || props.align === 'left'),
-        'p-divider-right': horizontal && props.align === 'right',
-        'p-divider-center': (horizontal && props.align === 'center') || (vertical && (!props.align || props.align === 'center')),
-        'p-divider-top': vertical && props.align === 'top',
-        'p-divider-bottom': vertical && props.align === 'bottom',
-    }, props.className);
+    const className = classNames(
+        `p-divider p-component p-divider-${props.layout} p-divider-${props.type}`,
+        {
+            'p-divider-left': horizontal && (!props.align || props.align === 'left'),
+            'p-divider-right': horizontal && props.align === 'right',
+            'p-divider-center': (horizontal && props.align === 'center') || (vertical && (!props.align || props.align === 'center')),
+            'p-divider-top': vertical && props.align === 'top',
+            'p-divider-bottom': vertical && props.align === 'bottom'
+        },
+        props.className
+    );
 
     React.useImperativeHandle(ref, () => ({
         props,
@@ -21,11 +25,9 @@ export const Divider = React.forwardRef((props, ref) => {
 
     return (
         <div ref={elementRef} className={className} style={props.style} role="separator" {...otherProps}>
-            <div className="p-divider-content">
-                {props.children}
-            </div>
+            <div className="p-divider-content">{props.children}</div>
         </div>
-    )
+    );
 });
 
 Divider.displayName = 'Divider';
@@ -36,4 +38,4 @@ Divider.defaultProps = {
     type: 'solid',
     style: null,
     className: null
-}
+};

@@ -7,7 +7,6 @@ import { DocActions } from '../../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const BarChartDemo = () => {
-
     const context = useContext(AppContentContext);
 
     const [basicData] = useState({
@@ -28,75 +27,50 @@ const BarChartDemo = () => {
 
     const [multiAxisData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            label: 'Dataset 1',
-            backgroundColor: [
-                '#EC407A',
-                '#AB47BC',
-                '#42A5F5',
-                '#7E57C2',
-                '#66BB6A',
-                '#FFCA28',
-                '#26A69A'
-            ],
-            yAxisID: 'y',
-            data: [65, 59, 80, 81, 56, 55, 10]
-        }, {
-            label: 'Dataset 2',
-            backgroundColor: '#78909C',
-            yAxisID: 'y1',
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }]
+        datasets: [
+            {
+                label: 'Dataset 1',
+                backgroundColor: ['#EC407A', '#AB47BC', '#42A5F5', '#7E57C2', '#66BB6A', '#FFCA28', '#26A69A'],
+                yAxisID: 'y',
+                data: [65, 59, 80, 81, 56, 55, 10]
+            },
+            {
+                label: 'Dataset 2',
+                backgroundColor: '#78909C',
+                yAxisID: 'y1',
+                data: [28, 48, 40, 19, 86, 27, 90]
+            }
+        ]
     });
 
     const [stackedData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            type: 'bar',
-            label: 'Dataset 1',
-            backgroundColor: '#42A5F5',
-            data: [
-                50,
-                25,
-                12,
-                48,
-                90,
-                76,
-                42
-            ]
-        }, {
-            type: 'bar',
-            label: 'Dataset 2',
-            backgroundColor: '#66BB6A',
-            data: [
-                21,
-                84,
-                24,
-                75,
-                37,
-                65,
-                34
-            ]
-        }, {
-            type: 'bar',
-            label: 'Dataset 3',
-            backgroundColor: '#FFA726',
-            data: [
-                41,
-                52,
-                24,
-                74,
-                23,
-                21,
-                32
-            ]
-        }]
+        datasets: [
+            {
+                type: 'bar',
+                label: 'Dataset 1',
+                backgroundColor: '#42A5F5',
+                data: [50, 25, 12, 48, 90, 76, 42]
+            },
+            {
+                type: 'bar',
+                label: 'Dataset 2',
+                backgroundColor: '#66BB6A',
+                data: [21, 84, 24, 75, 37, 65, 34]
+            },
+            {
+                type: 'bar',
+                label: 'Dataset 3',
+                backgroundColor: '#FFA726',
+                data: [41, 52, 24, 74, 23, 21, 32]
+            }
+        ]
     });
 
     const getLightTheme = () => {
         let basicOptions = {
             maintainAspectRatio: false,
-            aspectRatio: .8,
+            aspectRatio: 0.8,
             plugins: {
                 legend: {
                     labels: {
@@ -127,7 +101,7 @@ const BarChartDemo = () => {
         let horizontalOptions = {
             indexAxis: 'y',
             maintainAspectRatio: false,
-            aspectRatio: .8,
+            aspectRatio: 0.8,
             plugins: {
                 legend: {
                     labels: {
@@ -157,7 +131,7 @@ const BarChartDemo = () => {
 
         let stackedOptions = {
             maintainAspectRatio: false,
-            aspectRatio: .8,
+            aspectRatio: 0.8,
             plugins: {
                 tooltips: {
                     mode: 'index',
@@ -193,7 +167,7 @@ const BarChartDemo = () => {
 
         let multiAxisOptions = {
             maintainAspectRatio: false,
-            aspectRatio: .8,
+            aspectRatio: 0.8,
             plugins: {
                 legend: {
                     labels: {
@@ -249,13 +223,13 @@ const BarChartDemo = () => {
             horizontalOptions,
             stackedOptions,
             multiAxisOptions
-        }
-    }
+        };
+    };
 
     const getDarkTheme = () => {
         let basicOptions = {
             maintainAspectRatio: false,
-            aspectRatio: .8,
+            aspectRatio: 0.8,
             plugins: {
                 legend: {
                     labels: {
@@ -286,7 +260,7 @@ const BarChartDemo = () => {
         let horizontalOptions = {
             indexAxis: 'y',
             maintainAspectRatio: false,
-            aspectRatio: .8,
+            aspectRatio: 0.8,
             plugins: {
                 legend: {
                     labels: {
@@ -316,7 +290,7 @@ const BarChartDemo = () => {
 
         let stackedOptions = {
             maintainAspectRatio: false,
-            aspectRatio: .8,
+            aspectRatio: 0.8,
             plugins: {
                 legend: {
                     labels: {
@@ -352,7 +326,7 @@ const BarChartDemo = () => {
 
         let multiAxisOptions = {
             maintainAspectRatio: false,
-            aspectRatio: .8,
+            aspectRatio: 0.8,
             plugins: {
                 legend: {
                     labels: {
@@ -408,12 +382,12 @@ const BarChartDemo = () => {
             horizontalOptions,
             stackedOptions,
             multiAxisOptions
-        }
-    }
+        };
+    };
 
     const [options] = useState({
-        'light': getLightTheme(),
-        'dark': getDarkTheme()
+        light: getLightTheme(),
+        dark: getDarkTheme()
     });
 
     const { basicOptions, horizontalOptions, multiAxisOptions, stackedOptions } = options[`${context.darkTheme ? 'dark' : 'light'}`];
@@ -456,15 +430,14 @@ const BarChartDemo = () => {
 
             <BarChartDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default BarChartDemo;
 
 const BarChartDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -750,7 +723,7 @@ export class BarChartDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState } from 'react';
@@ -1027,7 +1000,7 @@ const BarChartDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState } from 'react';
@@ -1304,15 +1277,11 @@ const BarChartDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'BarChartDemo', sources: sources, dependencies: { 'chart.js': '3.3.2' } })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'BarChartDemo', sources: sources, dependencies: { 'chart.js': '3.3.2' } })}</TabView>
         </div>
-    )
+    );
 });

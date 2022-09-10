@@ -94,7 +94,7 @@ const ChipsProps = [
         type: 'boolean',
         default: 'null',
         description: 'Whether to add an item when the input loses focus.'
-    },
+    }
 ];
 
 const ChipsEvents = [
@@ -173,7 +173,7 @@ const ChipsEvents = [
                 description: 'Browser event'
             }
         ]
-    },
+    }
 ];
 
 const ChipsStyles = [

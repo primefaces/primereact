@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const InputNumberDemo = () => {
-
     const [value1, setValue1] = useState(42723);
     const [value2, setValue2] = useState(58151);
     const [value3, setValue3] = useState(2351.35);
@@ -23,7 +22,7 @@ const InputNumberDemo = () => {
     const [value15, setValue15] = useState(10);
     const [value16, setValue16] = useState(20);
     const [value17, setValue17] = useState(20);
-    const [value18, setValue18] = useState(10.50);
+    const [value18, setValue18] = useState(10.5);
     const [value19, setValue19] = useState(25);
     const [value20, setValue20] = useState(50);
 
@@ -129,8 +128,20 @@ const InputNumberDemo = () => {
                         </div>
                         <div className="field col-12 md:col-3">
                             <label htmlFor="horizontal">Horizontal with Step</label>
-                            <InputNumber inputId="horizontal" value={value18} onValueChange={(e) => setValue18(e.value)} showButtons buttonLayout="horizontal" step={0.25}
-                                decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" mode="currency" currency="EUR" />
+                            <InputNumber
+                                inputId="horizontal"
+                                value={value18}
+                                onValueChange={(e) => setValue18(e.value)}
+                                showButtons
+                                buttonLayout="horizontal"
+                                step={0.25}
+                                decrementButtonClassName="p-button-danger"
+                                incrementButtonClassName="p-button-success"
+                                incrementButtonIcon="pi pi-plus"
+                                decrementButtonIcon="pi pi-minus"
+                                mode="currency"
+                                currency="EUR"
+                            />
                         </div>
                         <div className="field col-12 md:col-3">
                             <label htmlFor="minmax-buttons">Min-Max Boundaries</label>
@@ -140,9 +151,22 @@ const InputNumberDemo = () => {
 
                     <div className="grid">
                         <div className="field col-12 md:col-3">
-                            <label htmlFor="vertical" style={{ display: 'block' }}>Vertical</label>
-                            <InputNumber inputId="vertical" value={value19} onValueChange={(e) => setValue19(e.value)} mode="decimal" showButtons buttonLayout="vertical" style={{ width: '4rem' }}
-                                decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
+                            <label htmlFor="vertical" style={{ display: 'block' }}>
+                                Vertical
+                            </label>
+                            <InputNumber
+                                inputId="vertical"
+                                value={value19}
+                                onValueChange={(e) => setValue19(e.value)}
+                                mode="decimal"
+                                showButtons
+                                buttonLayout="vertical"
+                                style={{ width: '4rem' }}
+                                decrementButtonClassName="p-button-secondary"
+                                incrementButtonClassName="p-button-secondary"
+                                incrementButtonIcon="pi pi-plus"
+                                decrementButtonIcon="pi pi-minus"
+                            />
                         </div>
                     </div>
                 </div>
@@ -151,6 +175,6 @@ const InputNumberDemo = () => {
             <InputNumberDoc />
         </div>
     );
-}
+};
 
 export default InputNumberDemo;

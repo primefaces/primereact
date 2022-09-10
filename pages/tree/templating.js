@@ -8,25 +8,25 @@ import Head from 'next/head';
 const TreeTemplatingDemo = () => {
     const nodes = [
         {
-            key: "0",
+            key: '0',
             label: 'Installation',
             children: [
-                { key: "0-0", label: 'Getting Started', url: 'https://reactjs.org/docs/getting-started.html' },
-                { key: "0-1", label: 'Add React', url: 'https://reactjs.org/docs/add-react-to-a-website.html' },
-                { key: "0-2", label: 'Create an App', url: 'https://reactjs.org/docs/create-a-new-react-app.html' },
-                { key: "0-3", label: 'CDN Links', url: 'https://reactjs.org/docs/cdn-links.html' }
+                { key: '0-0', label: 'Getting Started', url: 'https://reactjs.org/docs/getting-started.html' },
+                { key: '0-1', label: 'Add React', url: 'https://reactjs.org/docs/add-react-to-a-website.html' },
+                { key: '0-2', label: 'Create an App', url: 'https://reactjs.org/docs/create-a-new-react-app.html' },
+                { key: '0-3', label: 'CDN Links', url: 'https://reactjs.org/docs/cdn-links.html' }
             ]
         },
         {
-            key: "1",
+            key: '1',
             label: 'Main Concepts',
             children: [
-                { key: "1-0", label: 'Hello World', url: 'https://reactjs.org/docs/hello-world.html' },
-                { key: "1-1", label: 'Introducing JSX', url: 'https://reactjs.org/docs/introducing-jsx.html' },
-                { key: "1-2", label: 'Rendering Elements', url: 'https://reactjs.org/docs/rendering-elements.html' },
-                { key: "1-3", label: 'Components and Props', url: 'https://reactjs.org/docs/components-and-props.html' },
-                { key: "1-4", label: 'State and LifeCycle', url: 'https://reactjs.org/docs/state-and-lifecycle.html' },
-                { key: "1-5", label: 'Handling Events', url: 'https://reactjs.org/docs/handling-events.html' }
+                { key: '1-0', label: 'Hello World', url: 'https://reactjs.org/docs/hello-world.html' },
+                { key: '1-1', label: 'Introducing JSX', url: 'https://reactjs.org/docs/introducing-jsx.html' },
+                { key: '1-2', label: 'Rendering Elements', url: 'https://reactjs.org/docs/rendering-elements.html' },
+                { key: '1-3', label: 'Components and Props', url: 'https://reactjs.org/docs/components-and-props.html' },
+                { key: '1-4', label: 'State and LifeCycle', url: 'https://reactjs.org/docs/state-and-lifecycle.html' },
+                { key: '1-5', label: 'Handling Events', url: 'https://reactjs.org/docs/handling-events.html' }
             ]
         }
     ];
@@ -38,12 +38,8 @@ const TreeTemplatingDemo = () => {
             label = <a href={node.url}>{node.label}</a>;
         }
 
-        return (
-            <span className={options.className}>
-                {label}
-            </span>
-        )
-    }
+        return <span className={options.className}>{label}</span>;
+    };
 
     return (
         <div>
@@ -53,7 +49,9 @@ const TreeTemplatingDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Tree <span>Templating</span></h1>
+                    <h1>
+                        Tree <span>Templating</span>
+                    </h1>
                     <p>Tree nodes can be customized to display custom content.</p>
                 </div>
 
@@ -68,15 +66,14 @@ const TreeTemplatingDemo = () => {
 
             <TreeTemplatingDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeTemplatingDemo;
 
 export const TreeTemplatingDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -140,7 +137,7 @@ export class TreeTemplatingDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -196,7 +193,7 @@ const TreeTemplatingDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -252,7 +249,7 @@ const TreeTemplatingDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/api/api.min.js"></script>
@@ -312,15 +309,11 @@ const TreeTemplatingDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeTemplatingDemo', sources: sources })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeTemplatingDemo', sources: sources })}</TabView>
         </div>
     );
-})
+});

@@ -116,9 +116,7 @@ const SelectButtonEvents = [
     }
 ];
 
-const SelectButtonStyles = [
-
-];
+const SelectButtonStyles = [];
 
 module.exports = {
     selectbutton: {

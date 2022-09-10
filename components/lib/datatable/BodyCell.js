@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Api';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
@@ -19,16 +20,18 @@ export const BodyCell = React.memo((props) => {
 
     const getColumnProp = (prop) => (props.column ? props.column.props[prop] : null);
     const field = getColumnProp('field') || `field_${props.index}`;
-    const editingKey = props.dataKey ? (props.rowData[props.dataKey] || props.rowIndex) : props.rowIndex;
+    const editingKey = props.dataKey ? props.rowData[props.dataKey] || props.rowIndex : props.rowIndex;
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
-        type: 'click', listener: (e) => {
+        type: 'click',
+        listener: (e) => {
             if (!selfClick.current && isOutsideClicked(e.target)) {
                 switchCellToViewMode(e, true);
             }
 
             selfClick.current = false;
-        }, options: true
+        },
+        options: true
     });
 
     if (props.editMode === 'row' && props.editing !== editingState) {
@@ -37,34 +40,34 @@ export const BodyCell = React.memo((props) => {
 
     const isEditable = () => {
         return getColumnProp('editor');
-    }
+    };
 
     const isSelected = () => {
-        return props.selection ? (props.selection instanceof Array ? findIndex(props.selection) > -1 : equals(props.selection)) : false
-    }
+        return props.selection ? (props.selection instanceof Array ? findIndex(props.selection) > -1 : equals(props.selection)) : false;
+    };
 
     const equalsData = (data) => {
-        return props.compareSelectionBy === 'equals' ? (data === props.rowData) : ObjectUtils.equals(data, props.rowData, props.dataKey);
-    }
+        return props.compareSelectionBy === 'equals' ? data === props.rowData : ObjectUtils.equals(data, props.rowData, props.dataKey);
+    };
 
     const equals = (selectedCell) => {
         return (selectedCell.rowIndex === props.rowIndex || equalsData(selectedCell.rowData)) && (selectedCell.field === field || selectedCell.cellIndex === props.index);
-    }
+    };
 
     const isOutsideClicked = (target) => {
         return elementRef.current && !(elementRef.current.isSameNode(target) || elementRef.current.contains(target));
-    }
+    };
 
     const getVirtualScrollerOption = (option) => {
         return props.virtualScrollerOptions ? props.virtualScrollerOptions[option] : null;
-    }
+    };
 
     const getStyle = () => {
         const bodyStyle = getColumnProp('bodyStyle');
         const columnStyle = getColumnProp('style');
 
         return getColumnProp('frozen') ? Object.assign({}, columnStyle, bodyStyle, styleObjectState) : Object.assign({}, columnStyle, bodyStyle);
-    }
+    };
 
     const getCellParams = () => {
         return {
@@ -76,32 +79,32 @@ export const BodyCell = React.memo((props) => {
             selected: isSelected(),
             column: props.column,
             props
-        }
-    }
+        };
+    };
 
     const getCellCallbackParams = (event) => {
         const params = getCellParams();
         return {
             originalEvent: event,
             ...params
-        }
-    }
+        };
+    };
 
     const resolveFieldData = (data) => {
         return ObjectUtils.resolveFieldData(data || props.rowData, field);
-    }
+    };
 
     const getEditingRowData = () => {
         return props.editingMeta && props.editingMeta[editingKey] ? props.editingMeta[editingKey].data : props.rowData;
-    }
+    };
 
     const getTabIndex = (cellSelected) => {
-        return props.allowCellSelection ? (cellSelected ? 0 : (props.rowIndex === 0 && props.index === 0 ? props.tabIndex : -1)) : null;
-    }
+        return props.allowCellSelection ? (cellSelected ? 0 : props.rowIndex === 0 && props.index === 0 ? props.tabIndex : -1) : null;
+    };
 
     const findIndex = (collection) => {
-        return (collection || []).findIndex(data => equals(data));
-    }
+        return (collection || []).findIndex((data) => equals(data));
+    };
 
     const closeCell = (event) => {
         const params = getCellCallbackParams(event);
@@ -119,7 +122,7 @@ export const BodyCell = React.memo((props) => {
             overlayEventListener.current = null;
             selfClick.current = false;
         }, 1);
-    }
+    };
 
     const switchCellToViewMode = (event, submit) => {
         const callbackParams = getCellCallbackParams(event);
@@ -146,44 +149,43 @@ export const BodyCell = React.memo((props) => {
             }
 
             closeCell(event);
-        }
-        else {
+        } else {
             event.preventDefault();
         }
-    }
+    };
 
     const findNextSelectableCell = (cell) => {
         const nextCell = cell.nextElementSibling;
 
         return nextCell ? (DomHandler.hasClass(nextCell, 'p-selectable-cell') ? nextCell : findNextSelectableCell(nextCell)) : null;
-    }
+    };
 
     const findPrevSelectableCell = (cell) => {
         const prevCell = cell.previousElementSibling;
 
         return prevCell ? (DomHandler.hasClass(prevCell, 'p-selectable-cell') ? prevCell : findPrevSelectableCell(prevCell)) : null;
-    }
+    };
 
     const findDownSelectableCell = (cell) => {
         const downRow = cell.parentElement.nextElementSibling;
         const downCell = downRow ? downRow.children[props.index] : null;
 
         return downRow && downCell ? (DomHandler.hasClass(downRow, 'p-selectable-row') && DomHandler.hasClass(downCell, 'p-selectable-cell') ? downCell : findDownSelectableCell(downCell)) : null;
-    }
+    };
 
     const findUpSelectableCell = (cell) => {
         const upRow = cell.parentElement.previousElementSibling;
         const upCell = upRow ? upRow.children[props.index] : null;
 
         return upRow && upCell ? (DomHandler.hasClass(upRow, 'p-selectable-row') && DomHandler.hasClass(upCell, 'p-selectable-cell') ? upCell : findUpSelectableCell(upCell)) : null;
-    }
+    };
 
     const changeTabIndex = (currentCell, nextCell) => {
         if (currentCell && nextCell) {
             currentCell.tabIndex = -1;
             nextCell.tabIndex = props.tabIndex;
         }
-    }
+    };
 
     const focusOnElement = () => {
         clearTimeout(tabindexTimeout.current);
@@ -195,7 +197,7 @@ export const BodyCell = React.memo((props) => {
 
             keyHelperRef.current && (keyHelperRef.current.tabIndex = editingState ? -1 : 0);
         }, 1);
-    }
+    };
 
     const focusOnInit = () => {
         clearTimeout(initFocusTimeout.current);
@@ -203,7 +205,7 @@ export const BodyCell = React.memo((props) => {
             const focusableEl = props.editMode === 'row' ? DomHandler.findSingle(elementRef.current, '.p-row-editor-init') : null;
             focusableEl && focusableEl.focus();
         }, 1);
-    }
+    };
 
     const updateStickyPosition = () => {
         if (getColumnProp('frozen')) {
@@ -216,8 +218,7 @@ export const BodyCell = React.memo((props) => {
                     right = DomHandler.getOuterWidth(next) + parseFloat(next.style.right || 0);
                 }
                 styleObject['right'] = right + 'px';
-            }
-            else {
+            } else {
                 let left = 0;
                 let prev = elementRef.current.previousElementSibling;
                 if (prev) {
@@ -229,7 +230,7 @@ export const BodyCell = React.memo((props) => {
             const isSameStyle = styleObjectState['left'] === styleObject['left'] && styleObjectState['right'] === styleObject['right'];
             !isSameStyle && setStyleObjectState(styleObject);
         }
-    }
+    };
 
     const editorCallback = (val) => {
         let editingRowData = { ...editingRowDataState };
@@ -239,7 +240,7 @@ export const BodyCell = React.memo((props) => {
 
         // update editing meta for complete methods on row mode
         props.editingMeta[editingKey].data[field] = val;
-    }
+    };
 
     const onClick = (event) => {
         const params = getCellCallbackParams(event);
@@ -280,25 +281,27 @@ export const BodyCell = React.memo((props) => {
         if (props.allowCellSelection && props.onClick) {
             props.onClick(params);
         }
-    }
+    };
 
     const onMouseDown = (event) => {
         const params = getCellCallbackParams(event);
         props.onMouseDown && props.onMouseDown(params);
-    }
+    };
 
     const onMouseUp = (event) => {
         const params = getCellCallbackParams(event);
         props.onMouseUp && props.onMouseUp(params);
-    }
+    };
 
     const onKeyDown = (event) => {
         if (props.editMode !== 'row') {
-            if (event.which === 13 || event.which === 9) { // tab || enter
+            if (event.which === 13 || event.which === 9) {
+                // tab || enter
                 switchCellToViewMode(event, true);
             }
 
-            if (event.which === 27) { // escape
+            if (event.which === 27) {
+                // escape
                 switchCellToViewMode(event, false);
             }
         }
@@ -372,7 +375,7 @@ export const BodyCell = React.memo((props) => {
                     break;
             }
         }
-    }
+    };
 
     const onBlur = (event) => {
         selfClick.current = false;
@@ -380,11 +383,11 @@ export const BodyCell = React.memo((props) => {
         if (props.editMode !== 'row' && editingState && getColumnProp('cellEditValidatorEvent') === 'blur') {
             switchCellToViewMode(event, true);
         }
-    }
+    };
 
     const onEditorFocus = (event) => {
         onClick(event);
-    }
+    };
 
     const onRadioChange = (event) => {
         props.onRadioChange({
@@ -392,7 +395,7 @@ export const BodyCell = React.memo((props) => {
             data: props.rowData,
             index: props.rowIndex
         });
-    }
+    };
 
     const onCheckboxChange = (event) => {
         props.onCheckboxChange({
@@ -400,7 +403,7 @@ export const BodyCell = React.memo((props) => {
             data: props.rowData,
             index: props.rowIndex
         });
-    }
+    };
 
     const onRowToggle = (event) => {
         props.onRowToggle({
@@ -409,21 +412,21 @@ export const BodyCell = React.memo((props) => {
         });
 
         event.preventDefault();
-    }
+    };
 
     const onRowEditInit = (event) => {
         props.onRowEditInit({ originalEvent: event, data: props.rowData, newData: getEditingRowData(), field: field, index: props.rowIndex });
-    }
+    };
 
     const onRowEditSave = (event) => {
         props.onRowEditSave({ originalEvent: event, data: props.rowData, newData: getEditingRowData(), field: field, index: props.rowIndex });
         focusOnInit();
-    }
+    };
 
     const onRowEditCancel = (event) => {
         props.onRowEditCancel({ originalEvent: event, data: props.rowData, newData: getEditingRowData(), field: field, index: props.rowIndex });
         focusOnInit();
-    }
+    };
 
     React.useEffect(() => {
         if (getColumnProp('frozen')) {
@@ -461,7 +464,7 @@ export const BodyCell = React.memo((props) => {
         const options = getVirtualScrollerOption('getLoaderOptions')(props.rowIndex, {
             cellIndex: props.index,
             cellFirst: props.index === 0,
-            cellLast: props.index === (getVirtualScrollerOption('columns').length - 1),
+            cellLast: props.index === getVirtualScrollerOption('columns').length - 1,
             cellEven: props.index % 2 === 0,
             cellOdd: props.index % 2 !== 0,
             column: props.column,
@@ -469,12 +472,8 @@ export const BodyCell = React.memo((props) => {
         });
         const content = ObjectUtils.getJSXElement(getVirtualScrollerOption('loadingTemplate'), options);
 
-        return (
-            <td>
-                {content}
-            </td>
-        )
-    }
+        return <td>{content}</td>;
+    };
 
     const createElement = () => {
         let content, editorKeyHelper;
@@ -506,19 +505,23 @@ export const BodyCell = React.memo((props) => {
 
         if (selectionMode) {
             const showSelection = props.showSelectionElement ? props.showSelectionElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
+            let label;
+            if (showSelection) {
+                const ariaLabelField = props.selectionAriaLabel || props.tableProps.dataKey;
+                const ariaLabelText = ObjectUtils.resolveFieldData(props.rowData, ariaLabelField);
+                label = `${props.selected ? ariaLabel('unselectLabel') : ariaLabel('selectLabel')} ${ariaLabelText}`;
+            }
 
             content = showSelection && (
                 <>
-                    {selectionMode === 'single' && <RowRadioButton checked={props.selected} onChange={onRadioChange} tabIndex={props.tabIndex} tableSelector={props.tableSelector} />}
-                    {selectionMode === 'multiple' && <RowCheckbox checked={props.selected} onChange={onCheckboxChange} tabIndex={props.tabIndex} />}
+                    {selectionMode === 'single' && <RowRadioButton checked={props.selected} onChange={onRadioChange} tabIndex={props.tabIndex} tableSelector={props.tableSelector} ariaLabel={label} />}
+                    {selectionMode === 'multiple' && <RowCheckbox checked={props.selected} onChange={onCheckboxChange} tabIndex={props.tabIndex} ariaLabel={label} />}
                 </>
-            )
-        }
-        else if (rowReorder) {
+            );
+        } else if (rowReorder) {
             const showReorder = props.showRowReorderElement ? props.showRowReorderElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
             content = showReorder && <i className={classNames('p-datatable-reorderablerow-handle', getColumnProp('rowReorderIcon'))}></i>;
-        }
-        else if (expander) {
+        } else if (expander) {
             const iconClassName = classNames('p-row-toggler-icon', props.expanded ? props.expandedRowIcon : props.collapsedRowIcon);
             const ariaControls = `${props.tableSelector}_content_${props.rowIndex}_expanded`;
             const expanderProps = {
@@ -538,8 +541,7 @@ export const BodyCell = React.memo((props) => {
                 expanderProps['element'] = content;
                 content = ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, expander: expanderProps });
             }
-        }
-        else if (isRowEditor && rowEditor) {
+        } else if (isRowEditor && rowEditor) {
             let rowEditorProps = {};
 
             if (editingState) {
@@ -565,8 +567,7 @@ export const BodyCell = React.memo((props) => {
                         </button>
                     </>
                 );
-            }
-            else {
+            } else {
                 rowEditorProps = {
                     editing: false,
                     onInitClick: onRowEditInit,
@@ -586,32 +587,41 @@ export const BodyCell = React.memo((props) => {
                 rowEditorProps['element'] = content;
                 content = ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, rowEditor: rowEditorProps });
             }
-        }
-        else if (body && !editingState) {
+        } else if (body && !editingState) {
             content = body ? ObjectUtils.getJSXElement(body, props.rowData, { column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps }) : value;
-        }
-        else if (editor && editingState) {
-            content = ObjectUtils.getJSXElement(editor, { rowData: editingRowDataState, value: resolveFieldData(editingRowDataState), column: props.column, field: field, rowIndex: props.rowIndex, frozenRow: props.frozenRow, props: props.tableProps, editorCallback });
-        }
-        else {
+        } else if (editor && editingState) {
+            content = ObjectUtils.getJSXElement(editor, {
+                rowData: editingRowDataState,
+                value: resolveFieldData(editingRowDataState),
+                column: props.column,
+                field: field,
+                rowIndex: props.rowIndex,
+                frozenRow: props.frozenRow,
+                props: props.tableProps,
+                editorCallback
+            });
+        } else {
             content = value;
         }
 
         if (!isRowEditor && editor) {
             /* eslint-disable */
-            editorKeyHelper = <a tabIndex="0" ref={keyHelperRef} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={onEditorFocus}><span></span></a>;
+            editorKeyHelper = (
+                <a tabIndex="0" ref={keyHelperRef} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={onEditorFocus}>
+                    <span></span>
+                </a>
+            );
             /* eslint-enable */
         }
 
         return (
-            <td ref={elementRef} style={style} className={className} rowSpan={props.rowSpan} tabIndex={tabIndex} role="cell" onClick={onClick} onKeyDown={onKeyDown}
-                onBlur={onBlur} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+            <td ref={elementRef} style={style} className={className} rowSpan={props.rowSpan} tabIndex={tabIndex} role="cell" onClick={onClick} onKeyDown={onKeyDown} onBlur={onBlur} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
                 {editorKeyHelper}
                 {title}
                 {content}
             </td>
-        )
-    }
+        );
+    };
 
     return getVirtualScrollerOption('loading') ? createLoading() : createElement();
 });

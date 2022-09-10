@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const InputMaskDemo = () => {
-
     const [val1, setVal1] = useState();
     const [val2, setVal2] = useState();
     const [val3, setVal3] = useState();
@@ -66,6 +65,6 @@ const InputMaskDemo = () => {
             <InputMaskDoc />
         </div>
     );
-}
+};
 
 export default InputMaskDemo;

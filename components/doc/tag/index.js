@@ -6,9 +6,8 @@ import { CodeHighlight } from '../common/codehighlight';
 import { DevelopmentSection } from '../common/developmentsection';
 
 const TagDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -47,7 +46,7 @@ export class TagDemo extends Component {
 
 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React from 'react';
@@ -83,7 +82,7 @@ export const TagDemo = () => {
 }
 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React from 'react';
@@ -119,7 +118,7 @@ export const TagDemo = () => {
 }
 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="https://unpkg.com/primereact/core/core.min.js"></script>
@@ -158,41 +157,45 @@ const TagDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
             <TabView>
                 <TabPanel header="Documentation">
                     <h5>Import via Module</h5>
-<CodeHighlight lang="js">
-{`
+                    <CodeHighlight lang="js">
+                        {`
 import { Tag } from 'primereact/tag';
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Import via CDN</h5>
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <script src="https://unpkg.com/primereact/core/core.min.js"></script>
 <script src="https://unpkg.com/primereact/tag/tag.min.js"></script>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Getting Started</h5>
-                    <p>Content of the tag is specified using the <i>value</i> property.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        Content of the tag is specified using the <i>value</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Tag value="New"></Tag>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Icon</h5>
-                    <p>An icon can also be configured to be displayed next to the value with the <i>icon</i> property.</p>
-<CodeHighlight>
-{`
+                    <p>
+                        An icon can also be configured to be displayed next to the value with the <i>icon</i> property.
+                    </p>
+                    <CodeHighlight>
+                        {`
 <Tag value="New" icon="pi pi-plus"></Tag>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
                     <h5>Severities</h5>
                     <p>Different color options are available as severity levels.</p>
 
@@ -206,13 +209,13 @@ import { Tag } from 'primereact/tag';
                     <h5>Templating</h5>
                     <p>Content can easily be added like a child element.</p>
 
-<CodeHighlight>
-{`
+                    <CodeHighlight>
+                        {`
 <Tag>
    Content
 </Tag>
 `}
-</CodeHighlight>
+                    </CodeHighlight>
 
                     <h5>Properties</h5>
                     <p>Any valid attribute is passed to the root element implicitly, extended properties are as follows;</p>
@@ -256,7 +259,9 @@ import { Tag } from 'primereact/tag';
                     </div>
 
                     <h5>Styling</h5>
-                    <p>Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.</p>
+                    <p>
+                        Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
+                    </p>
                     <div className="doc-tablewrapper">
                         <table className="doc-table">
                             <thead>
@@ -289,8 +294,10 @@ import { Tag } from 'primereact/tag';
                     <h5>Accessibility</h5>
                     <DevelopmentSection>
                         <h6>Screen Reader</h6>
-                        <p>Tag does not include any roles and attributes by default, any attribute is passed to the root element so aria roles and attributes can be added if required. If the tags are dynamic,
-                        <i>aria-live</i> may be utilized as well. In case badges need to be tabbable, <i>tabIndex</i> can be added to implement custom key handlers.</p>
+                        <p>
+                            Tag does not include any roles and attributes by default, any attribute is passed to the root element so aria roles and attributes can be added if required. If the tags are dynamic,
+                            <i>aria-live</i> may be utilized as well. In case badges need to be tabbable, <i>tabIndex</i> can be added to implement custom key handlers.
+                        </p>
 
                         <h5>Keyboard Support</h5>
                         <p>Component does not include any interactive elements.</p>
@@ -300,12 +307,10 @@ import { Tag } from 'primereact/tag';
                     <p>None.</p>
                 </TabPanel>
 
-                {
-                    useLiveEditorTabs({ name: 'TagDemo', sources: sources })
-                }
+                {useLiveEditorTabs({ name: 'TagDemo', sources: sources })}
             </TabView>
         </div>
     );
-})
+});
 
 export default TagDoc;

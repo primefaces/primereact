@@ -5,7 +5,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-    
+
 permissions:
   contents: read
 
@@ -15,8 +15,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
-    
+        node-version: [16.x, 18.x]
+
     steps:
     - uses: actions/checkout@v2
 
@@ -29,7 +29,5 @@ jobs:
     - name: Build
       run: |
         npm install
-        npm run lint
-        npm run security-check
-        npm run build-lib
+        npm run build-check
 

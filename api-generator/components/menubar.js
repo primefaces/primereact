@@ -37,9 +37,7 @@ const MenubarProps = [
     }
 ];
 
-const MenubarEvents = [
-
-];
+const MenubarEvents = [];
 
 const MenubarStyles = [
     { name: 'p-menubar', description: 'Container element.' },

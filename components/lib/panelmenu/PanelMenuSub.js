@@ -9,16 +9,13 @@ export const PanelMenuSub = React.memo((props) => {
     const findActiveItem = () => {
         if (props.model) {
             if (props.multiple) {
-                return props.model.filter(item => item.expanded);
-            }
-            else {
+                return props.model.filter((item) => item.expanded);
+            } else {
                 let activeItem = null;
-                props.model.forEach(item => {
+                props.model.forEach((item) => {
                     if (item.expanded) {
-                        if (!activeItem)
-                            activeItem = item;
-                        else
-                            item.expanded = false;
+                        if (!activeItem) activeItem = item;
+                        else item.expanded = false;
                     }
                 });
 
@@ -27,7 +24,7 @@ export const PanelMenuSub = React.memo((props) => {
         }
 
         return null;
-    }
+    };
 
     const onItemClick = (event, item) => {
         if (item.disabled) {
@@ -51,21 +48,20 @@ export const PanelMenuSub = React.memo((props) => {
 
         if (active) {
             item.expanded = false;
-            setActiveItemState(props.multiple ? activeItem.filter(a_item => a_item !== item) : null)
-        }
-        else {
+            setActiveItemState(props.multiple ? activeItem.filter((a_item) => a_item !== item) : null);
+        } else {
             if (!props.multiple && activeItem) {
                 activeItem.expanded = false;
             }
 
             item.expanded = true;
-            setActiveItemState(props.multiple ? [...(activeItem || []), item] : item)
+            setActiveItemState(props.multiple ? [...(activeItem || []), item] : item);
         }
-    }
+    };
 
     const isItemActive = (item) => {
         return activeItemState && (props.multiple ? activeItemState.indexOf(item) > -1 : activeItemState === item);
-    }
+    };
 
     useMountEffect(() => {
         setActiveItemState(findActiveItem());
@@ -74,8 +70,8 @@ export const PanelMenuSub = React.memo((props) => {
     const createSeparator = (index) => {
         const key = 'separator_' + index;
 
-        return <li key={key} className="p-menu-separator"></li>
-    }
+        return <li key={key} className="p-menu-separator"></li>;
+    };
 
     const createSubmenu = (item, active) => {
         const className = classNames('p-toggleable-content', {
@@ -94,9 +90,12 @@ export const PanelMenuSub = React.memo((props) => {
         }
 
         return null;
-    }
+    };
 
     const createMenuItem = (item, index) => {
+        if (item.visible === false) {
+            return null;
+        }
         const key = item.label + '_' + index;
         const active = isItemActive(item);
         const className = classNames('p-menuitem', item.className);
@@ -136,16 +135,16 @@ export const PanelMenuSub = React.memo((props) => {
                 {content}
                 {submenu}
             </li>
-        )
-    }
+        );
+    };
 
     const createItem = (item, index) => {
         return item.separator ? createSeparator(index) : createMenuItem(item, index);
-    }
+    };
 
     const createMenu = () => {
         return props.model ? props.model.map(createItem) : null;
-    }
+    };
 
     const className = classNames('p-submenu-list', props.className);
     const menu = createMenu();
@@ -154,7 +153,7 @@ export const PanelMenuSub = React.memo((props) => {
         <ul className={className} role="tree">
             {menu}
         </ul>
-    )
+    );
 });
 
 PanelMenuSub.displayName = 'PanelMenuSub';

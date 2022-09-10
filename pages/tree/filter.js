@@ -7,12 +7,11 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const TreeFilterDemo = () => {
-
     const [nodes, setNodes] = useState(null);
     const nodeService = new NodeService();
 
     useEffect(() => {
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        nodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -23,7 +22,9 @@ const TreeFilterDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>Tree <span>Filter</span></h1>
+                    <h1>
+                        Tree <span>Filter</span>
+                    </h1>
                     <p>Filtering updates the node based on the constraints.</p>
                 </div>
 
@@ -42,15 +43,14 @@ const TreeFilterDemo = () => {
 
             <TreeFilterDemoDoc />
         </div>
-    )
-}
+    );
+};
 
 export default TreeFilterDemo;
 
 export const TreeFilterDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -88,7 +88,7 @@ export class TreeFilterDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -117,7 +117,7 @@ const TreeFilterDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect } from 'react';
@@ -148,7 +148,7 @@ const TreeFilterDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <script src="./NodeService.js"></script>
@@ -182,15 +182,11 @@ const TreeFilterDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'TreeFilterDemo', sources: sources, service: 'NodeService', data: 'treenodes' })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'TreeFilterDemo', sources: sources, service: 'NodeService', data: 'treenodes' })}</TabView>
         </div>
     );
-})
+});

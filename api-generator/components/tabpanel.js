@@ -55,13 +55,9 @@ const TabPanelProps = [
     }
 ];
 
-const TabPanelEvents = [
+const TabPanelEvents = [];
 
-];
-
-const TabPanelStyles = [
-
-];
+const TabPanelStyles = [];
 
 module.exports = {
     tabpanel: {

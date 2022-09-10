@@ -12,7 +12,6 @@ import Head from 'next/head';
 import getConfig from 'next/config';
 
 const DataTableRowExpansionDemo = () => {
-
     const [products, setProducts] = useState([]);
     const [expandedRows, setExpandedRows] = useState(null);
     const toast = useRef(null);
@@ -29,59 +28,59 @@ const DataTableRowExpansionDemo = () => {
 
     useEffect(() => {
         isMounted.current = true;
-        productService.getProductsWithOrdersSmall().then(data => setProducts(data));
+        productService.getProductsWithOrdersSmall().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onRowExpand = (event) => {
         toast.current.show({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
-    }
+    };
 
     const onRowCollapse = (event) => {
         toast.current.show({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
-    }
+    };
 
     const expandAll = () => {
         let _expandedRows = {};
-        products.forEach(p => _expandedRows[`${p.id}`] = true);
+        products.forEach((p) => (_expandedRows[`${p.id}`] = true));
 
         setExpandedRows(_expandedRows);
-    }
+    };
 
     const collapseAll = () => {
         setExpandedRows(null);
-    }
+    };
 
     const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    }
+    };
 
     const amountBodyTemplate = (rowData) => {
         return formatCurrency(rowData.amount);
-    }
+    };
 
     const statusOrderBodyTemplate = (rowData) => {
         return <span className={`order-badge order-${rowData.status.toLowerCase()}`}>{rowData.status}</span>;
-    }
+    };
 
     const searchBodyTemplate = () => {
         return <Button icon="pi pi-search" />;
-    }
+    };
 
     const imageBodyTemplate = (rowData) => {
-        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />;
-    }
+        return <img src={`${contextPath}/images/product/${rowData.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={rowData.image} className="product-image" />;
+    };
 
     const priceBodyTemplate = (rowData) => {
         return formatCurrency(rowData.price);
-    }
+    };
 
     const ratingBodyTemplate = (rowData) => {
         return <Rating value={rowData.rating} readOnly cancel={false} />;
-    }
+    };
 
     const statusBodyTemplate = (rowData) => {
         return <span className={`product-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>;
-    }
+    };
 
     const rowExpansionTemplate = (data) => {
         return (
@@ -97,7 +96,7 @@ const DataTableRowExpansionDemo = () => {
                 </DataTable>
             </div>
         );
-    }
+    };
 
     const header = (
         <div className="table-header-container">
@@ -105,7 +104,6 @@ const DataTableRowExpansionDemo = () => {
             <Button icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
         </div>
     );
-
 
     return (
         <div>
@@ -115,7 +113,9 @@ const DataTableRowExpansionDemo = () => {
             </Head>
             <div className="content-section introduction">
                 <div className="feature-intro">
-                    <h1>DataTable <span>Row Expansion</span></h1>
+                    <h1>
+                        DataTable <span>Row Expansion</span>
+                    </h1>
                     <p>A row can be expanded to display extra content.</p>
                 </div>
 
@@ -126,9 +126,17 @@ const DataTableRowExpansionDemo = () => {
                 <Toast ref={toast} />
 
                 <div className="card">
-                    <DataTable value={products} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
-                        onRowExpand={onRowExpand} onRowCollapse={onRowCollapse} responsiveLayout="scroll"
-                        rowExpansionTemplate={rowExpansionTemplate} dataKey="id" header={header}>
+                    <DataTable
+                        value={products}
+                        expandedRows={expandedRows}
+                        onRowToggle={(e) => setExpandedRows(e.data)}
+                        onRowExpand={onRowExpand}
+                        onRowCollapse={onRowCollapse}
+                        responsiveLayout="scroll"
+                        rowExpansionTemplate={rowExpansionTemplate}
+                        dataKey="id"
+                        header={header}
+                    >
                         <Column expander style={{ width: '3em' }} />
                         <Column field="name" header="Name" sortable />
                         <Column header="Image" body={imageBodyTemplate} />
@@ -143,14 +151,13 @@ const DataTableRowExpansionDemo = () => {
             <DataTableRowExpansionDemoDoc></DataTableRowExpansionDemoDoc>
         </div>
     );
-}
+};
 
 export default DataTableRowExpansionDemo;
 
 export const DataTableRowExpansionDemoDoc = memo(() => {
-
     const sources = {
-        'class': {
+        class: {
             tabName: 'Class Source',
             content: `
 import React, { Component } from 'react';
@@ -297,7 +304,7 @@ export class DataTableRowExpansionDemo extends Component {
 }
                 `
         },
-        'hooks': {
+        hooks: {
             tabName: 'Hooks Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -424,7 +431,7 @@ const DataTableRowExpansionDemo = () => {
 }
                 `
         },
-        'ts': {
+        ts: {
             tabName: 'TS Source',
             content: `
 import React, { useState, useEffect, useRef } from 'react';
@@ -551,7 +558,7 @@ const DataTableRowExpansionDemo = () => {
 }
                 `
         },
-        'browser': {
+        browser: {
             tabName: 'Browser Source',
             imports: `
         <link rel="stylesheet" href="./DataTableDemo.css" />
@@ -705,15 +712,11 @@ const DataTableRowExpansionDemo = () => {
 }
                 `
         }
-    }
+    };
 
     return (
         <div className="content-section documentation" id="app-doc">
-            <TabView>
-                {
-                    useLiveEditorTabs({ name: 'DataTableRowExpansionDemo', sources: sources, service: 'ProductService', data: 'products-orders-small', extFiles: extFiles })
-                }
-            </TabView>
+            <TabView>{useLiveEditorTabs({ name: 'DataTableRowExpansionDemo', sources: sources, service: 'ProductService', data: 'products-orders-small', extFiles: extFiles })}</TabView>
         </div>
-    )
-})
+    );
+});

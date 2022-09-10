@@ -5,7 +5,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const EditorDemo = () => {
-
     const [text1, setText1] = useState('<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>');
     const [text2, setText2] = useState('');
 
@@ -17,7 +16,7 @@ const EditorDemo = () => {
                 <button className="ql-underline" aria-label="Underline"></button>
             </span>
         );
-    }
+    };
 
     const header = renderHeader();
 
@@ -46,6 +45,6 @@ const EditorDemo = () => {
             <EditorDoc />
         </div>
     );
-}
+};
 
 export default EditorDemo;

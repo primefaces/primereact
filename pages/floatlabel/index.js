@@ -18,7 +18,6 @@ import { DocActions } from '../../components/doc/common/docactions';
 import Head from 'next/head';
 
 const FloatLabelDemo = () => {
-
     const [countries, setCountries] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
     const [nodes, setNodes] = useState(null);
@@ -57,8 +56,7 @@ const FloatLabelDemo = () => {
                         { cname: 'Brisbane', code: 'A-BR' },
                         { cname: 'Townsville', code: 'A-TO' }
                     ]
-                },
-
+                }
             ]
         },
         {
@@ -78,8 +76,7 @@ const FloatLabelDemo = () => {
                         { cname: 'Ottawa', code: 'C-OT' },
                         { cname: 'Toronto', code: 'C-TO' }
                     ]
-                },
-
+                }
             ]
         },
         {
@@ -126,8 +123,8 @@ const FloatLabelDemo = () => {
     ];
 
     useEffect(() => {
-        countryservice.getCountries().then(data => setCountries(data));
-        nodeService.getTreeNodes().then(data => setNodes(data));
+        countryservice.getCountries().then((data) => setCountries(data));
+        nodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const searchCountry = (event) => {
@@ -137,7 +134,7 @@ const FloatLabelDemo = () => {
             });
             setFilteredCountries(results);
         }, 250);
-    }
+    };
 
     return (
         <div>
@@ -219,7 +216,15 @@ const FloatLabelDemo = () => {
                         </div>
                         <div className="field col-12 md:col-4">
                             <span className="p-float-label">
-                                <CascadeSelect inputId="cascadeselect" value={value10} options={cascadeSelectCountries} optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']} onChange={event => setValue10(event.value)} />
+                                <CascadeSelect
+                                    inputId="cascadeselect"
+                                    value={value10}
+                                    options={cascadeSelectCountries}
+                                    optionLabel="cname"
+                                    optionGroupLabel="name"
+                                    optionGroupChildren={['states', 'cities']}
+                                    onChange={(event) => setValue10(event.value)}
+                                />
                                 <label htmlFor="cascadeselect">CascadeSelect</label>
                             </span>
                         </div>
@@ -260,6 +265,6 @@ const FloatLabelDemo = () => {
             <FloatLabelDoc />
         </div>
     );
-}
+};
 
 export default FloatLabelDemo;

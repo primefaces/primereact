@@ -1,9 +1,9 @@
-import { babel } from '@rollup/plugin-babel';
-import replace from '@rollup/plugin-replace';
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import postcss from 'rollup-plugin-postcss';
 import alias from '@rollup/plugin-alias';
+import { babel } from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
+import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 
 import fs from 'fs-extra';
@@ -40,19 +40,20 @@ const ALIAS_COMPONENT_ENTRIES = [
 
 // dependencies
 const GLOBAL_DEPENDENCIES = {
-    'react': 'React',
+    react: 'React',
     'react-dom': 'ReactDOM',
     'react-transition-group': 'ReactTransitionGroup'
 };
 
 const GLOBAL_COMPONENT_DEPENDENCIES = {
-    ...GLOBAL_DEPENDENCIES, ...(ALIAS_COMPONENT_ENTRIES.reduce((acc, cur) => ({ ...acc, [cur.replacement]: cur.replacement.replace('\/', '.') }), {}))
+    ...GLOBAL_DEPENDENCIES,
+    ...ALIAS_COMPONENT_ENTRIES.reduce((acc, cur) => ({ ...acc, [cur.replacement]: cur.replacement.replace('/', '.') }), {})
 };
 
 // externals
 const EXTERNAL = ['react', 'react-dom', 'react-transition-group', '@babel/runtime', '@fullcalendar/core', 'chart.js/auto', 'quill'];
 
-const EXTERNAL_COMPONENT = [...EXTERNAL, ...(ALIAS_COMPONENT_ENTRIES.map(entries => entries.replacement))];
+const EXTERNAL_COMPONENT = [...EXTERNAL, ...ALIAS_COMPONENT_ENTRIES.map((entries) => entries.replacement)];
 
 // plugins
 const BABEL_PLUGIN_OPTIONS = {
@@ -92,24 +93,15 @@ const TERSER_PLUGIN_OPTIONS = {
         pure_getters: true,
         reduce_funcs: false
     }
-}
+};
 
-const PLUGINS = [
-    replace(REPLACE_PLUGIN_OPTIONS),
-    resolve(RESOLVE_PLUGIN_OPTIONS),
-    commonjs(COMMONJS_PLUGIN_OPTIONS),
-    babel(BABEL_PLUGIN_OPTIONS),
-    postcss(POSTCSS_PLUGIN_OPTIONS)
-];
+const PLUGINS = [replace(REPLACE_PLUGIN_OPTIONS), resolve(RESOLVE_PLUGIN_OPTIONS), commonjs(COMMONJS_PLUGIN_OPTIONS), babel(BABEL_PLUGIN_OPTIONS), postcss(POSTCSS_PLUGIN_OPTIONS)];
 
-const PLUGINS_COMPONENT = [
-    alias(ALIAS_PLUGIN_OPTIONS_FOR_COMPONENT),
-    ...PLUGINS
-];
+const PLUGINS_COMPONENT = [alias(ALIAS_PLUGIN_OPTIONS_FOR_COMPONENT), ...PLUGINS];
 
 function addEntry(name, input, output, isComponent = true) {
     const exports = name === 'primereact.api' || name === 'primereact' ? 'named' : 'auto';
-    const useCorePlugin = ALIAS_COMPONENT_ENTRIES.some(entry => entry.replacement.replace('primereact/', '') === name.replace('primereact.', ''));
+    const useCorePlugin = ALIAS_COMPONENT_ENTRIES.some((entry) => entry.replacement.replace('primereact/', '') === name.replace('primereact.', ''));
     const plugins = isComponent ? PLUGINS_COMPONENT : PLUGINS;
     const external = isComponent ? EXTERNAL_COMPONENT : EXTERNAL;
     const inlineDynamicImports = true;
@@ -120,7 +112,7 @@ function addEntry(name, input, output, isComponent = true) {
             plugins: [...plugins, isMinify && terser(TERSER_PLUGIN_OPTIONS), useCorePlugin && corePlugin()],
             external,
             inlineDynamicImports
-        }
+        };
     };
 
     const get_CJS_ESM = (isMinify) => {
@@ -138,7 +130,7 @@ function addEntry(name, input, output, isComponent = true) {
                     exports
                 }
             ]
-        }
+        };
     };
 
     const get_IIFE = (isMinify) => {
@@ -153,7 +145,7 @@ function addEntry(name, input, output, isComponent = true) {
                     exports
                 }
             ]
-        }
+        };
     };
 
     entries.push(get_CJS_ESM());
@@ -169,10 +161,10 @@ function corePlugin() {
         name: 'corePlugin',
         generateBundle(outputOptions, bundle) {
             if (outputOptions.format === 'iife') {
-                Object.keys(bundle).forEach(id => {
+                Object.keys(bundle).forEach((id) => {
                     const chunk = bundle[id];
                     const name = id.replace('.min.js', '').replace('.js', '');
-                    const filePath = `./dist/core/core${id.indexOf('.min.js') > 0 ? '.min.js': '.js'}`;
+                    const filePath = `./dist/core/core${id.indexOf('.min.js') > 0 ? '.min.js' : '.js'}`;
 
                     core[filePath] ? (core[filePath][name] = chunk.code) : (core[filePath] = { [`${name}`]: chunk.code });
                 });
@@ -197,22 +189,23 @@ function addCore() {
                         return val;
                     }, '');
 
-                    fs.outputFile(path.resolve(__dirname, filePath), code, {}, function(err) {
+                    fs.outputFile(path.resolve(__dirname, filePath), code, {}, function (err) {
                         if (err) {
+                            // eslint-disable-next-line no-console
                             return console.error(err);
                         }
                     });
                 });
             }
         }
-    ]
+    ];
 }
 
 function addComponent() {
     fs.readdirSync(path.resolve(__dirname, process.env.INPUT_DIR), { withFileTypes: true })
-        .filter(dir => dir.isDirectory())
+        .filter((dir) => dir.isDirectory())
         .forEach(({ name: folderName }) => {
-            fs.readdirSync(path.resolve(__dirname, process.env.INPUT_DIR + folderName)).forEach(file => {
+            fs.readdirSync(path.resolve(__dirname, process.env.INPUT_DIR + folderName)).forEach((file) => {
                 let name = file.split(/(.js)$/)[0].toLowerCase();
                 if (name === folderName) {
                     const input = process.env.INPUT_DIR + folderName + '/' + file;
